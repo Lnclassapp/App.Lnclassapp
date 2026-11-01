@@ -1,0 +1,1662 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'évolution des sols tropicaux",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "profil-sol",
+          "kind": "plate",
+          "description": "Schéma d'un profil de sol, coupe verticale de la surface vers la profondeur. On y repère la litière de feuilles mortes, l'horizon humifère sombre où plongent les racines, l'horizon d'accumulation épais, la roche mère altérée puis la roche mère. L'horizon humifère est surligné : c'est lui qui concentre la matière organique.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              }
+            ],
+            "highlight": [
+              "humus_horizon"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-a-legender",
+          "kind": "plate",
+          "description": "Schéma d'un profil de sol dont cinq parties sont désignées par un numéro, sans leur nom, de la surface vers la profondeur : 1 la litière, 2 l'horizon humifère, 3 l'horizon d'accumulation, 4 la roche mère altérée, 5 la roche mère. La correction donne les noms dans cet ordre.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-matiere-foret",
+          "kind": "diagram",
+          "description": "Schéma en cycle de la matière organique en forêt. Les arbres perdent des feuilles qui forment la litière. Les décomposeurs la transforment en humus. L'humus libère des ions minéraux dans la solution du sol. Les racines absorbent ces ions et nourrissent les arbres : le cycle se referme.",
+          "params": {
+            "layout": "cycle",
+            "legend": [
+              "Végétation",
+              "Sol"
+            ],
+            "nodes": [
+              {
+                "id": "arbres",
+                "label": "Arbres de la forêt",
+                "category": 1
+              },
+              {
+                "id": "litiere",
+                "label": "Litière : feuilles mortes",
+                "category": 2
+              },
+              {
+                "id": "humus",
+                "label": "Humus (décomposeurs)",
+                "category": 2
+              },
+              {
+                "id": "ions",
+                "label": "Ions minéraux de la solution du sol",
+                "category": 2
+              },
+              {
+                "id": "racines",
+                "label": "Racines : absorption",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "arbres",
+                "to": "litiere",
+                "label": "perdent"
+              },
+              {
+                "from": "litiere",
+                "to": "humus",
+                "label": "se décompose"
+              },
+              {
+                "from": "humus",
+                "to": "ions",
+                "label": "libère"
+              },
+              {
+                "from": "ions",
+                "to": "racines",
+                "label": "absorbés"
+              },
+              {
+                "from": "racines",
+                "to": "arbres",
+                "label": "nourrissent"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "chaine-degradation",
+          "kind": "diagram",
+          "description": "Schéma fléché de la dégradation d'un sol. Le déboisement et le brûlis laissent le sol nu sous la pluie. La pluie provoque le ruissellement et l'érosion, et le lessivage des ions. L'érosion emporte l'humus, le lessivage appauvrit le sol, et les deux font baisser les rendements.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Cause",
+              "Mécanisme",
+              "Conséquence"
+            ],
+            "nodes": [
+              {
+                "id": "deb",
+                "label": "Déboisement et brûlis",
+                "category": 1
+              },
+              {
+                "id": "nu",
+                "label": "Sol nu sous la pluie",
+                "category": 2
+              },
+              {
+                "id": "eros",
+                "label": "Ruissellement : érosion",
+                "category": 2
+              },
+              {
+                "id": "less",
+                "label": "Lessivage des ions",
+                "category": 2
+              },
+              {
+                "id": "hum",
+                "label": "Perte d'humus",
+                "category": 3
+              },
+              {
+                "id": "rend",
+                "label": "Baisse des rendements",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "deb",
+                "to": "nu",
+                "label": "laisse"
+              },
+              {
+                "from": "nu",
+                "to": "eros"
+              },
+              {
+                "from": "nu",
+                "to": "less"
+              },
+              {
+                "from": "eros",
+                "to": "hum",
+                "label": "emporte"
+              },
+              {
+                "from": "less",
+                "to": "rend",
+                "label": "appauvrit"
+              },
+              {
+                "from": "hum",
+                "to": "rend",
+                "label": "réduit"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "perte-de-sol",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la perte de terre par érosion en une année, en tonnes par hectare, sur quatre parcelles voisines de même pente (expérience fictive, résultats simplifiés) : forêt 1, jachère 2, culture sur brûlis 20, sol nu 40.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              1,
+              2,
+              20,
+              40
+            ],
+            "labels": [
+              "Forêt",
+              "Jachère",
+              "Culture sur brûlis",
+              "Sol nu"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "L'altération de la roche et la formation d'un sol tropical",
+          "remember": "Un **sol** se forme par l'**altération** de la **roche mère** (la roche du sous-sol), à laquelle s'ajoute de la matière organique venue des êtres vivants. Trois facteurs commandent sa formation : la **roche mère** (ses minéraux), le **climat** (chaleur et pluie) et la **végétation** (qui fournit la matière organique). En climat tropical humide, il fait chaud et il pleut beaucoup : l'altération chimique est rapide et profonde. L'eau qui s'infiltre dissout et emporte les **bases** ($\\mathrm{Ca^{2+}}$, $\\mathrm{Mg^{2+}}$, $\\mathrm{K^{+}}$, $\\mathrm{Na^{+}}$) et une partie de la silice : c'est le **lessivage** (vu dans la leçon précédente). Le **fer** et l'**aluminium** restent sur place sous forme d'oxydes : le sol devient **rouge**, profond et pauvre en bases. C'est un **sol ferrallitique**.",
+          "method": [
+            "Identifier les trois facteurs de formation : la roche mère, le climat et la végétation.",
+            "Évaluer l'intensité de l'altération d'après la température et la quantité de pluie.",
+            "Suivre le sort des éléments libérés : les bases et la silice sont emportées par l'eau, le fer et l'aluminium restent.",
+            "Conclure sur le sol obtenu : sa couleur, sa profondeur et sa richesse en bases."
+          ],
+          "example": {
+            "statement": "Dans le sud de la Côte d'Ivoire, il fait chaud toute l'année et il pleut abondamment ; la forêt est dense et la roche mère est un granite, riche en minéraux contenant du fer, de l'aluminium, du calcium et du potassium. Prévoir le sol qui se forme.",
+            "steps": [
+              "Identifier : la roche mère est un granite ; le climat est chaud et très pluvieux ; la végétation est une forêt dense.",
+              "Évaluer : la chaleur et les pluies abondantes rendent l'altération chimique rapide et profonde.",
+              "Suivre : le calcium et le potassium (des bases) et une partie de la silice sont emportés par l'eau ; le fer et l'aluminium restent sur place sous forme d'oxydes.",
+              "Conclure : il se forme un sol ferrallitique, rouge à cause des oxydes de fer, profond et pauvre en bases."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un sol rouge est un sol riche. La couleur rouge vient des oxydes de fer qui restent, alors que les bases utiles aux plantes ont été emportées. Contre-exemple (résultats simplifiés) : un sol rouge ferrallitique retient 3 meq de bases pour 100 g, un sol brun jeune, peu lessivé, en retient 15 meq. Le sol rouge est cinq fois plus pauvre en bases malgré sa couleur vive. Pour juger la richesse d'un sol, regarde ses bases et sa matière organique, pas sa couleur.",
+          "figure": null,
+          "exercise": {
+            "title": "Prévoir le sol formé en climat tropical humide",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour prévoir le sol qui se forme à partir d'une roche, sous un climat et une végétation donnés.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Choisis les trois facteurs qui commandent la formation d'un sol.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier : un sol se forme par l'altération de la roche mère, sous l'action du climat, et avec la matière organique fournie par la végétation. Ces trois facteurs sont la roche mère, le climat et la végétation. L'engrais et la hauteur des maisons ne sont pas des facteurs de formation du sol.",
+                "answers": [
+                  {
+                    "content": "La roche mère",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le climat",
+                    "correct": true
+                  },
+                  {
+                    "content": "La végétation",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'engrais apporté par le planteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La hauteur des maisons du village",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux conditions qui rendent l'altération d'une roche rapide.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Évaluer : l'altération chimique est d'autant plus rapide qu'il fait chaud et que l'eau est abondante. Une température élevée toute l'année et des pluies abondantes accélèrent donc l'altération. Un climat froid et sec ou un sol gelé la ralentissent.",
+                "answers": [
+                  {
+                    "content": "Une température élevée toute l'année",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des pluies abondantes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un climat froid toute l'année",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une longue saison sans aucune pluie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En climat tropical humide, le lessivage emporte surtout le fer et l'aluminium du sol.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Suivre : l'eau qui s'infiltre emporte les bases (calcium, magnésium, potassium, sodium) et une partie de la silice. Le fer et l'aluminium, eux, restent sur place sous forme d'oxydes. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à ce qui lui arrive ou à son rôle en climat tropical humide.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : chaque élément a son rôle. Étape 3 — Suivre : le climat chaud et humide rend l'altération rapide et profonde ; l'eau qui s'infiltre entraîne les bases (lessivage) ; les oxydes de fer restent et colorent le sol en rouge ; la végétation fournit la matière organique.",
+                "answers": [
+                  {
+                    "content": "Un climat chaud et humide",
+                    "match": "Altération rapide et profonde"
+                  },
+                  {
+                    "content": "L'eau qui s'infiltre",
+                    "match": "Emporte les bases : lessivage"
+                  },
+                  {
+                    "content": "Les oxydes de fer",
+                    "match": "Restent et colorent le sol en rouge"
+                  },
+                  {
+                    "content": "La végétation",
+                    "match": "Fournit la matière organique au sol"
+                  }
+                ]
+              },
+              {
+                "content": "Un sol ferrallitique est rouge à cause des oxydes de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Suivre : le fer reste sur place sous forme d'oxydes. Étape 4 — Conclure : ces oxydes de fer colorent le sol ferrallitique en rouge.",
+                "answers": [
+                  {
+                    "content": "fer",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sol est d'un rouge très vif. Peut-on en conclure qu'il est riche en bases ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Suivre : le rouge vient des oxydes de fer, qui restent après l'altération, alors que les bases ont pu être lessivées. Étape 4 — Conclure : la couleur ne renseigne pas sur la richesse en bases, il faut les mesurer. Croire qu'un sol coloré est riche est justement l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Non : la couleur vient des oxydes de fer, pas des bases, qui peuvent avoir été lessivées",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : plus un sol est coloré, plus il est riche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : le rouge est la couleur des bases",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : le fer est une base utile à toutes les plantes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sol rouge de forêt retient 2 meq de bases pour 100 g, un sol brun jeune de même roche en retient 18 meq (résultats simplifiés). Combien de fois le sol rouge est-il plus pauvre en bases ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Suivre : le lessivage a emporté les bases du sol rouge. Étape 4 — Conclure : on compare $18 \\div 2 = 9$. Le sol rouge est 9 fois plus pauvre en bases, malgré sa couleur.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "fois"
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre le sort des éléments dans un sol tropical.",
+            "questions": [
+              {
+                "content": "L'eau du sol emporte les ___ ; le ___ reste sur place et colore le sol en rouge.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Suivre : le lessivage emporte les bases ($\\mathrm{Ca^{2+}}$, $\\mathrm{K^{+}}$…). Le fer reste sous forme d'oxydes et donne la couleur rouge.",
+                "answers": [
+                  {
+                    "content": "bases",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "base",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "cations",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "fer",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense aux ions qui quittent le sol et à l'élément qui donne la couleur rouge."
+              },
+              {
+                "content": "Quel climat provoque l'altération la plus rapide d'une roche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Évaluer : l'altération chimique demande de la chaleur et de l'eau. Le climat chaud et très pluvieux est donc celui où elle est la plus rapide.",
+                "answers": [
+                  {
+                    "content": "Chaud et très pluvieux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Froid et sec",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chaud et sans pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Froid et gelé toute l'année",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il faut de la chaleur et de l'eau."
+              },
+              {
+                "content": "Le lessivage enrichit le sol en bases.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Suivre : le lessivage entraîne les bases avec l'eau qui s'infiltre. Il appauvrit donc le sol en bases : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le profil d'un sol ferrallitique",
+          "remember": "Un **profil de sol** est une coupe verticale qui montre les **horizons**, c'est-à-dire des couches superposées. De haut en bas, on distingue : la **litière** (feuilles et débris végétaux à la surface) ; l'**horizon humifère**, sombre, riche en matière organique et en racines ; l'**horizon d'accumulation**, épais, où s'accumulent le fer et l'aluminium qui lui donnent sa couleur rouge ou ocre ; la **roche mère altérée** ; la **roche mère** non altérée. Un sol ferrallitique est profond, rouge, appauvri en bases et souvent acide. Sa fertilité repose surtout sur la matière organique de sa partie supérieure.",
+          "method": [
+            "Observer le profil de haut en bas et nommer chaque horizon.",
+            "Décrire la couleur et l'épaisseur de chaque horizon.",
+            "Expliquer la couleur et la composition par l'altération et le lessivage.",
+            "Conclure sur la fertilité : repérer l'horizon qui concentre la matière organique et les bases."
+          ],
+          "example": {
+            "statement": "Dans une plantation de cacaoyers, une fosse montre, de haut en bas : une couche de feuilles mortes de 2 cm ; une couche brun foncé de 10 cm pleine de racines ; une couche rouge de 150 cm ; une roche en cours d'altération ; la roche dure (résultats simplifiés). Les mesures donnent 8 meq de bases pour 100 g dans la couche brun foncé et 2 meq dans la couche rouge. Analyser ce profil.",
+            "steps": [
+              "Observer : de haut en bas, la litière, l'horizon humifère, l'horizon d'accumulation, la roche mère altérée, puis la roche mère.",
+              "Décrire : la litière mesure 2 cm ; l'horizon humifère mesure 10 cm et il est brun foncé ; l'horizon d'accumulation mesure 150 cm et il est rouge.",
+              "Expliquer : l'horizon d'accumulation est rouge car le fer et l'aluminium s'y accumulent sous forme d'oxydes, alors que le lessivage a emporté les bases ; l'horizon humifère est foncé car il contient de la matière organique.",
+              "Conclure : l'horizon humifère, avec 8 meq de bases contre 2 meq, concentre la fertilité ; l'horizon rouge, très épais mais pauvre, ne la porte pas."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'horizon le plus épais et le plus coloré est le plus fertile. Contre-exemple (résultats simplifiés) : l'horizon rouge de 150 cm retient 2 meq de bases pour 100 g, l'horizon humifère de 10 cm en retient 8. L'horizon humifère, quinze fois moins épais, est quatre fois plus riche en bases. Si l'érosion l'emporte, le sol perd sa fertilité même si le reste du profil est intact.",
+          "figure": "profil-sol",
+          "exercise": {
+            "title": "Lire le profil d'un sol ferrallitique",
+            "statement": "Dans cet exercice, tu analyses un profil de sol ferrallitique avec la méthode de la fiche. Sur le schéma, les parties sont numérotées de 1 (surface) à 5 (profondeur).",
+            "exercise_type": "fixation",
+            "figure": "profil-a-legender",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre, de la surface vers la profondeur, les couches d'un profil de sol ferrallitique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Observer : on lit le profil de haut en bas. À la surface, la litière ; dessous, l'horizon humifère ; puis l'horizon d'accumulation ; ensuite la roche mère altérée ; tout en bas, la roche mère non altérée.",
+                "answers": [
+                  {
+                    "content": "La litière"
+                  },
+                  {
+                    "content": "L'horizon humifère"
+                  },
+                  {
+                    "content": "L'horizon d'accumulation"
+                  },
+                  {
+                    "content": "La roche mère altérée"
+                  },
+                  {
+                    "content": "La roche mère"
+                  }
+                ]
+              },
+              {
+                "content": "Sur le schéma d'un profil numéroté de 1 (surface) à 5 (profondeur), quelle est la partie numéro 3 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : de haut en bas, le numéro 1 est la litière, le 2 l'horizon humifère, le 3 l'horizon d'accumulation, le 4 la roche mère altérée et le 5 la roche mère. La partie numéro 3 est donc l'horizon d'accumulation. La litière et l'horizon humifère sont plus haut, la roche mère est plus bas.",
+                "answers": [
+                  {
+                    "content": "L'horizon d'accumulation",
+                    "correct": true
+                  },
+                  {
+                    "content": "La litière",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'horizon humifère",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque partie du profil à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Observer : on nomme chaque horizon. Étape 2 — Décrire : la litière est faite de feuilles mortes ; l'horizon humifère est sombre et riche en matière organique ; l'horizon d'accumulation est rouge et riche en fer et en aluminium ; la roche mère n'est pas altérée.",
+                "answers": [
+                  {
+                    "content": "La litière",
+                    "match": "Feuilles mortes en surface"
+                  },
+                  {
+                    "content": "L'horizon humifère",
+                    "match": "Sombre, riche en matière organique et en racines"
+                  },
+                  {
+                    "content": "L'horizon d'accumulation",
+                    "match": "Rouge, riche en fer et en aluminium"
+                  },
+                  {
+                    "content": "La roche mère",
+                    "match": "Roche non altérée en profondeur"
+                  }
+                ]
+              },
+              {
+                "content": "L'horizon d'accumulation d'un sol ferrallitique est rouge à cause des oxydes de ___ qui s'y accumulent.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Expliquer : l'altération et le lessivage laissent sur place le fer et l'aluminium. Le fer, sous forme d'oxydes, donne la couleur rouge à l'horizon d'accumulation.",
+                "answers": [
+                  {
+                    "content": "fer",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un profil ferrallitique, l'horizon rouge est le plus riche en bases.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : le lessivage a emporté les bases de l'horizon rouge. Étape 4 — Conclure : ce sont la litière et l'horizon humifère, riches en matière organique, qui concentrent les éléments utiles. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux caractères d'un sol ferrallitique.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer : l'altération intense et le lessivage donnent un sol rouge à cause des oxydes de fer, et appauvri en bases. Un sol riche en bases ou jeune et mince décrit un autre sol.",
+                "answers": [
+                  {
+                    "content": "Il est rouge à cause des oxydes de fer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est appauvri en bases",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est très riche en bases échangeables",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est mince et jeune, peu altéré",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un profil montre un horizon humifère de 12 cm (9 meq de bases pour 100 g) et un horizon rouge de 200 cm (3 meq). Quel horizon concentre la fertilité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : l'horizon humifère mesure 12 cm, l'horizon rouge 200 cm. Étape 4 — Conclure : il est bien plus mince mais trois fois plus riche en bases ($9 \\div 3 = 3$). L'épaisseur et la couleur ne font pas la fertilité, c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "L'horizon humifère, bien que mince",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'horizon rouge, parce qu'il est le plus épais",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'horizon rouge, parce qu'il est le plus coloré",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux de la même façon, car ils ont les mêmes bases",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à nommer et à décrire les couches d'un profil de sol.",
+            "questions": [
+              {
+                "content": "À la surface du profil se trouve la ___ ; juste dessous, l'horizon ___ est sombre et riche en matière organique.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : de haut en bas, on rencontre d'abord la litière, puis l'horizon humifère. Étape 2 — Décrire : l'horizon humifère est foncé car il contient de la matière organique.",
+                "answers": [
+                  {
+                    "content": "litière",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "humifère",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Lis le profil de haut en bas : feuilles mortes, puis couche sombre."
+              },
+              {
+                "content": "Les couches d'un profil se lisent de la roche mère vers la surface : la roche mère est donc le premier horizon rencontré en haut.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : un profil se lit de haut en bas. La roche mère est tout en bas, sous la roche mère altérée ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi l'horizon d'accumulation est-il rouge ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer : le fer reste sur place et s'accumule sous forme d'oxydes, ce qui colore l'horizon en rouge. Ce n'est ni la matière organique, qui rend plutôt foncé, ni les bases, qui sont lessivées.",
+                "answers": [
+                  {
+                    "content": "Il contient des oxydes de fer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est riche en bases",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est plein d'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est fait de feuilles mortes",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la rouille."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La matière organique et l'humus : le cycle forêt et sol",
+          "remember": "Dans une forêt, les arbres perdent sans cesse des feuilles et des branches : elles forment la **litière**. Des **décomposeurs** (bactéries, champignons, petits animaux du sol) la transforment en **humus**, puis libèrent des ions minéraux dans la solution du sol. Dans le milieu tropical chaud et humide, cette décomposition est rapide. Les racines absorbent ces ions : c'est un **cycle** presque fermé. L'humus s'unit à l'argile pour former le **CAH**, qui retient les cations et l'eau. En forêt, la réserve minérale est donc surtout dans la végétation vivante et la litière, pas dans le sol. Quand la végétation disparaît, l'apport de matière organique cesse, l'humus diminue et le sol s'appauvrit. En savane, le couvert végétal est plus clairsemé et la litière moins abondante qu'en forêt.",
+          "method": [
+            "Identifier la source de matière organique : la litière produite par la végétation.",
+            "Suivre la décomposition de la litière par les décomposeurs : litière, humus, ions minéraux.",
+            "Relier les ions libérés à la nutrition des plantes et à leur rétention par le CAH.",
+            "Conclure sur l'effet d'une disparition de la végétation sur l'humus et sur la réserve minérale."
+          ],
+          "example": {
+            "statement": "Dans une forêt dense ivoirienne, le sol est couvert de feuilles mortes qui se décomposent vite, et pourtant les arbres poussent sans engrais. Expliquer comment ils se nourrissent, puis prévoir ce qui arrive si la forêt est abattue.",
+            "steps": [
+              "Identifier : les arbres perdent des feuilles et des branches, qui forment la litière.",
+              "Suivre : des décomposeurs transforment la litière en humus, puis libèrent des ions minéraux dans la solution du sol.",
+              "Relier : les racines absorbent ces ions, et l'humus forme avec l'argile le CAH, qui en retient une partie.",
+              "Conclure : après l'abattage, il n'y a plus de litière, l'humus n'est plus renouvelé et diminue ; la réserve minérale qui était dans les arbres disparaît avec eux."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une forêt luxuriante prouve un sol riche. La richesse est dans la végétation, pas dans le sol. Contre-exemple (expérience fictive, résultats simplifiés) : sur 100 unités d'éléments minéraux d'une forêt, 90 sont dans les arbres et la litière et 10 seulement dans le sol. Si les arbres sont abattus, ces 90 unités ne nourrissent plus rien : le sol ne peut en fournir que 10. Une belle forêt peut donc se trouver sur un sol pauvre.",
+          "figure": "cycle-matiere-foret",
+          "exercise": {
+            "title": "Suivre le cycle de la matière organique en forêt",
+            "statement": "Dans cet exercice, tu suis le trajet de la matière organique et des ions entre la forêt et le sol, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "cycle-matiere-foret",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre le trajet de la matière organique d'une forêt.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : tout part de la litière produite par les arbres. Étape 2 — Suivre : les décomposeurs la transforment en humus, qui libère des ions minéraux dans la solution du sol. Étape 3 — Relier : les racines absorbent ces ions et nourrissent les arbres.",
+                "answers": [
+                  {
+                    "content": "Les arbres perdent des feuilles : c'est la litière"
+                  },
+                  {
+                    "content": "Les décomposeurs transforment la litière en humus"
+                  },
+                  {
+                    "content": "L'humus libère des ions minéraux dans la solution du sol"
+                  },
+                  {
+                    "content": "Les racines absorbent ces ions"
+                  },
+                  {
+                    "content": "Les ions nourrissent les arbres"
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le rôle des décomposeurs dans le sol d'une forêt ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Suivre : les décomposeurs (bactéries, champignons, petits animaux) transforment la litière en humus et libèrent des ions minéraux. Ils ne fabriquent pas la roche mère et n'absorbent pas l'eau pour la plante.",
+                "answers": [
+                  {
+                    "content": "Transformer la litière en humus et libérer des ions minéraux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Fabriquer la roche mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Absorber l'eau pour la donner aux arbres",
+                    "correct": false
+                  },
+                  {
+                    "content": "Colorer le sol en rouge avec du fer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les ___ (bactéries, champignons, petits animaux du sol) transforment la litière en humus.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Suivre : ce sont les décomposeurs qui transforment la litière en humus puis libèrent les ions minéraux.",
+                "answers": [
+                  {
+                    "content": "décomposeurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "décomposeur",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux rôles de l'humus dans le sol.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Relier : l'humus s'unit à l'argile pour former le CAH, qui retient les cations, et il aide à retenir l'eau. Il ne colore pas le sol en rouge, c'est le rôle des oxydes de fer, et il n'empêche pas la décomposition, dont il est le produit.",
+                "answers": [
+                  {
+                    "content": "Il forme le CAH avec l'argile et retient des cations",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il aide le sol à retenir l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il colore le sol en rouge",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il empêche toute décomposition de la litière",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une forêt dense, la plus grande partie des éléments minéraux se trouve dans la végétation et la litière (résultats simplifiés : 90 unités sur 100).",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la végétation et la litière contiennent 90 unités sur 100. Étape 4 — Conclure : c'est donc bien la végétation qui porte l'essentiel de la réserve minérale, le sol n'en retient que 10. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cultivateur dit : « La forêt est très belle, donc son sol est riche ». Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relier : les ions sont recyclés en permanence entre la végétation et le sol. Étape 4 — Conclure : la richesse est surtout dans la végétation ; si on abat les arbres, le sol seul fournit peu. Penser que la beauté de la forêt prouve la richesse du sol est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "La richesse est surtout dans la végétation ; après l'abattage, le sol seul fournit peu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : un sol qui porte une grande forêt est toujours riche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : le sol contient presque tous les éléments minéraux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : la forêt n'a besoin d'aucun élément minéral",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une forêt contient 120 unités d'éléments minéraux, dont 108 dans la végétation et la litière (expérience fictive). Quel pourcentage de ces éléments se trouve dans le sol ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : la végétation et la litière contiennent 108 unités sur 120. Étape 4 — Conclure : le sol en contient $120 - 108 = 12$, soit $12 \\div 120 = 0{,}1$ ou 10 %.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre la décomposition de la litière.",
+            "questions": [
+              {
+                "content": "La ___ est transformée en ___ par les décomposeurs.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : la litière est faite des feuilles mortes. Étape 2 — Suivre : les décomposeurs la transforment en humus.",
+                "answers": [
+                  {
+                    "content": "litière",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "humus",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les feuilles mortes forment d'abord la litière."
+              },
+              {
+                "content": "Après l'abattage d'une forêt, l'humus du sol continue d'être renouvelé comme avant.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : sans arbres, il n'y a plus de litière, donc plus d'apport de matière organique. L'humus n'est plus renouvelé et diminue : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Qui absorbe les ions libérés par la décomposition de la litière ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relier : les ions libérés passent dans la solution du sol, d'où les racines, par leurs poils absorbants, les absorbent.",
+                "answers": [
+                  {
+                    "content": "Les racines des arbres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les feuilles mortes",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les décomposeurs seuls",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la partie de la plante qui est dans le sol."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La dégradation du sol et sa conservation",
+          "remember": "La **dégradation** d'un sol est la perte de sa fertilité. Ses causes sont le **déboisement** (abattage de la forêt), la **culture sur brûlis** (on abat, on brûle, on cultive quelques années, puis on abandonne), les cultures répétées sans repos et les pluies fortes sur un sol nu. Sans couvert végétal, la pluie ruisselle et arrache les particules : c'est l'**érosion**. L'horizon humifère, en surface, part le premier. L'eau qui s'infiltre lessive les ions, l'humus diminue et le sol s'**épuise**. Les cendres du brûlis apportent des ions, mais pour peu de temps. La **conservation** protège et restaure le sol : la **jachère** (on laisse la végétation repousser, ce qui reconstitue l'humus), la **couverture végétale** (plantes de couverture, paillage) qui protège de la pluie, et la **fumure** (apport de matière organique ou d'engrais) qui rend au sol les éléments exportés.",
+          "method": [
+            "Constater la dégradation : relever la baisse des rendements, de l'humus ou de l'épaisseur de l'horizon humifère.",
+            "Identifier les causes : déboisement, brûlis, cultures répétées, sol nu sous la pluie.",
+            "Expliquer les mécanismes : ruissellement et érosion, lessivage des ions, baisse de l'humus.",
+            "Proposer une mesure de conservation adaptée et prévoir son effet."
+          ],
+          "example": {
+            "statement": "Un paysan défriche une parcelle de forêt, brûle les arbres et cultive du manioc. Le rendement relatif est de 100 la première année, 70 la deuxième et 40 la troisième (résultats simplifiés). La terre est emportée par la pluie sur la pente. Analyser la situation et proposer une solution.",
+            "steps": [
+              "Constater : le rendement relatif passe de 100 à 40 en trois ans, soit une baisse de 60 points ; la terre est emportée.",
+              "Identifier : les causes sont le déboisement, le brûlis et la culture répétée sur un sol laissé nu sous la pluie.",
+              "Expliquer : sans arbres, la pluie ruisselle sur la pente et arrache la terre (érosion) ; l'eau qui s'infiltre lessive les ions ; sans litière, l'humus diminue.",
+              "Proposer : laisser la parcelle en jachère pour que la végétation reconstitue l'humus et couvrir le sol entre les cultures ; l'effet attendu est un sol protégé et de nouveau plus fertile."
+            ]
+          },
+          "pitfall": "Ne pas croire que le brûlis enrichit le sol durablement. Les cendres apportent des ions, mais pour une courte durée : sans arbres, ils sont absorbés ou lessivés et la fertilité retombe. Contre-exemple (résultats simplifiés) : le rendement passe de 100 à 70 puis à 40 en trois ans. De même, une jachère n'est pas un abandon : c'est un repos pendant lequel la végétation reconstitue le sol.",
+          "figure": "chaine-degradation",
+          "exercise": {
+            "title": "Analyser la dégradation d'un sol et le protéger",
+            "statement": "Dans cet exercice, tu constates une dégradation, tu en cherches les causes et les mécanismes, puis tu proposes une mesure de conservation, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "chaine-degradation",
+            "questions": [
+              {
+                "content": "Relie chaque pratique ou mesure à son effet sur le sol.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier : le déboisement expose le sol nu à la pluie et à l'érosion. Étape 4 — Proposer : la jachère laisse la végétation reconstituer l'humus ; le paillage et les plantes de couverture protègent de la pluie ; la fumure organique apporte matière organique et éléments minéraux.",
+                "answers": [
+                  {
+                    "content": "Le déboisement",
+                    "match": "Expose le sol à la pluie et à l'érosion"
+                  },
+                  {
+                    "content": "La jachère",
+                    "match": "La végétation reconstitue l'humus"
+                  },
+                  {
+                    "content": "Le paillage",
+                    "match": "Protège le sol de la pluie battante"
+                  },
+                  {
+                    "content": "La fumure organique",
+                    "match": "Apporte matière organique et éléments minéraux"
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les trois pratiques qui dégradent un sol.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Identifier : le déboisement, le brûlis suivi de cultures répétées sans repos et un sol laissé nu sous les pluies fortes dégradent le sol. Une jachère et un paillage le protègent au contraire.",
+                "answers": [
+                  {
+                    "content": "Le déboisement d'une pente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le brûlis suivi de cultures répétées sans repos",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sol laissé nu sous les pluies fortes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une jachère de plusieurs années",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un paillage de feuilles sur le sol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'érosion emporte d'abord l'horizon humifère, qui est en surface.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : l'érosion arrache les particules de la surface en premier. L'horizon humifère, le plus riche en matière organique, est donc emporté le premier. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une parcelle, le rendement relatif est de 100 la première année, 80 la deuxième, 50 la troisième et 30 la quatrième (résultats simplifiés). De combien de points le rendement a-t-il baissé entre la première et la quatrième année ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Constater : on compare le rendement de la première et de la quatrième année. On calcule $100 - 30 = 70$. Le rendement a baissé de 70 points.",
+                "answers": [
+                  {
+                    "content": "70",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "points"
+              },
+              {
+                "content": "Remets dans l'ordre la chaîne qui mène à la baisse des rendements après un déboisement.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Identifier : tout commence par le déboisement et le brûlis. Étape 3 — Expliquer : le sol nu reçoit la pluie, qui provoque le ruissellement et l'érosion ; l'horizon humifère est emporté ; la fertilité baisse et les rendements aussi.",
+                "answers": [
+                  {
+                    "content": "Déboisement et brûlis"
+                  },
+                  {
+                    "content": "Sol nu sous la pluie"
+                  },
+                  {
+                    "content": "Ruissellement et érosion"
+                  },
+                  {
+                    "content": "Perte de l'horizon humifère"
+                  },
+                  {
+                    "content": "Baisse des rendements"
+                  }
+                ]
+              },
+              {
+                "content": "Laisser une parcelle se reposer pour que la végétation repousse s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Proposer : la jachère est un repos de la parcelle. La végétation repousse et reconstitue l'humus et la réserve d'ions.",
+                "answers": [
+                  {
+                    "content": "jachère",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un paysan affirme : « Les cendres du brûlis enrichissent mon champ pour toujours ». Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer : les ions des cendres sont vite absorbés par les cultures ou lessivés par la pluie. Étape 4 — Proposer : pour entretenir la fertilité, il faut une jachère et une fumure. Croire que le brûlis enrichit durablement est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Les ions des cendres sont vite absorbés ou lessivés : la fertilité retombe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : les cendres restent dans le sol sans jamais être lessivées",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : le brûlis reconstitue l'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : les cendres appauvrissent tout de suite le sol en ions",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer les causes de dégradation et les mesures de conservation.",
+            "questions": [
+              {
+                "content": "Pour restaurer un sol épuisé, on laisse une ___ ; pour protéger le sol de la pluie, on installe une ___ végétale.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Proposer : la jachère laisse la végétation reconstituer l'humus ; la couverture végétale protège le sol de la pluie.",
+                "answers": [
+                  {
+                    "content": "jachère",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "couverture",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un repos de la parcelle ; un tapis de plantes."
+              },
+              {
+                "content": "La jachère est l'abandon définitif d'un champ.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Proposer : la jachère est un repos temporaire. La végétation repousse et reconstitue l'humus, puis le champ est de nouveau cultivé : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel phénomène arrache les particules d'un sol nu sous la pluie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer : sur un sol nu, la pluie ruisselle et arrache les particules : c'est l'érosion. Le lessivage, lui, entraîne les ions dissous vers la profondeur.",
+                "answers": [
+                  {
+                    "content": "L'érosion",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le lessivage",
+                    "correct": false
+                  },
+                  {
+                    "content": "La jachère",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fumure",
+                    "correct": false
+                  }
+                ],
+                "hint": "Il s'agit d'un arrachement de particules, pas d'ions dissous."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Analyser une fosse sous une forêt du sud-ouest",
+          "statement": "Dans une région forestière chaude et pluvieuse toute l'année, on creuse une fosse sous la forêt (expérience fictive, résultats simplifiés). L'horizon humifère mesure 10 cm, il est brun foncé et retient 9 meq de bases pour 100 g. L'horizon d'accumulation mesure 180 cm, il est rouge et retient 3 meq de bases pour 100 g. La roche mère altérée retient 1 meq.",
+          "exercise_type": "fixation",
+          "figure": "profil-sol",
+          "questions": [
+            {
+              "content": "Quel est le type de sol décrit : chaud et pluvieux toute l'année, horizon d'accumulation rouge de 180 cm, bases rares ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : un horizon d'accumulation épais et rouge. Étape 3 — Expliquer : sous un climat chaud et pluvieux, l'altération est intense, le lessivage emporte les bases et le fer et l'aluminium restent. Étape 4 — Conclure : c'est un sol ferrallitique. Un sol jeune et mince ne serait ni rouge ni aussi profond.",
+              "answers": [
+                {
+                  "content": "Un sol ferrallitique",
+                  "correct": true
+                },
+                {
+                  "content": "Un sol jeune, peu altéré",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol riche en bases, peu lessivé",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol sans horizons",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'horizon d'accumulation est rouge parce qu'il contient des oxydes de ___.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Expliquer : le lessivage a emporté les bases comme le calcium, le potassium et le sodium. Le fer reste et forme des oxydes : ils donnent la couleur rouge.",
+              "answers": [
+                {
+                  "content": "fer",
+                  "correct": true
+                },
+                {
+                  "content": "calcium",
+                  "correct": false
+                },
+                {
+                  "content": "potassium",
+                  "correct": false
+                },
+                {
+                  "content": "sodium",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de fois l'horizon humifère est-il plus riche en bases (pour 100 g) que l'horizon d'accumulation ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Décrire : l'horizon humifère retient 9 meq, l'horizon d'accumulation 3 meq. Étape 4 — Conclure : $9 \\div 3 = 3$. L'horizon humifère est 3 fois plus riche en bases.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "fois"
+            },
+            {
+              "content": "Combien de fois l'horizon d'accumulation est-il plus épais que l'horizon humifère ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Décrire : l'horizon d'accumulation mesure 180 cm, l'horizon humifère 10 cm. On calcule $180 \\div 10 = 18$. L'horizon d'accumulation est 18 fois plus épais, mais il est moins riche : l'épaisseur ne fait pas la fertilité.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "fois"
+            },
+            {
+              "content": "Quelles sont les deux raisons de la faible teneur en bases de l'horizon rouge ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Expliquer : la chaleur et les pluies abondantes rendent l'altération rapide et profonde, et l'eau qui s'infiltre emporte les bases par lessivage. L'absence de roche mère ou l'apport de litière ne les expliquent pas : la litière enrichit plutôt la surface.",
+              "answers": [
+                {
+                  "content": "Une altération intense en climat chaud et pluvieux",
+                  "correct": true
+                },
+                {
+                  "content": "Le lessivage par l'eau qui s'infiltre",
+                  "correct": true
+                },
+                {
+                  "content": "L'absence de roche mère sous le sol",
+                  "correct": false
+                },
+                {
+                  "content": "Un apport massif de litière dans l'horizon rouge",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fertilité de ce sol repose surtout sur l'horizon humifère.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Conclure : l'horizon humifère concentre la matière organique et les bases (9 meq contre 3 meq et 1 meq). Si l'érosion l'emporte, le sol perd l'essentiel de sa fertilité. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Mesurer l'érosion selon la couverture du sol",
+          "statement": "Sur quatre parcelles voisines, de même pente et de même sol, on mesure la perte de terre par érosion en une année, en tonnes par hectare (expérience fictive, résultats simplifiés) : forêt 1 ; jachère 2 ; culture sur brûlis 20 ; sol nu 40.",
+          "exercise_type": "fixation",
+          "figure": "perte-de-sol",
+          "questions": [
+            {
+              "content": "Combien de fois la perte de terre du sol nu est-elle plus grande que celle de la forêt ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Constater : le sol nu perd 40 t/ha, la forêt 1 t/ha. On calcule $40 \\div 1 = 40$. La perte du sol nu est 40 fois plus grande.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "fois"
+            },
+            {
+              "content": "Quelle parcelle est la moins protégée de l'érosion ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Constater : la perte de terre est la plus grande (40 t/ha) sur le sol nu. Étape 2 — Identifier : sans couvert végétal, la pluie arrache directement les particules. Les parcelles en forêt et en jachère perdent beaucoup moins.",
+              "answers": [
+                {
+                  "content": "Le sol nu",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt",
+                  "correct": false
+                },
+                {
+                  "content": "La jachère",
+                  "correct": false
+                },
+                {
+                  "content": "Les quatre parcelles de la même façon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle différence de perte de terre y a-t-il entre la culture sur brûlis et la jachère ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Constater : le brûlis perd 20 t/ha, la jachère 2 t/ha. On calcule $20 - 2 = 18$. Le brûlis perd 18 t/ha de plus.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "t/ha"
+            },
+            {
+              "content": "Dans ces résultats, la jachère protège le sol presque aussi bien que la forêt.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Constater : la jachère perd 2 t/ha, la forêt 1 t/ha, alors que le brûlis perd 20 t/ha et le sol nu 40 t/ha. Étape 4 — Conclure : la jachère est proche de la forêt. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel mécanisme explique la grande différence entre la forêt et le sol nu ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer : en forêt, les feuilles et la litière amortissent la pluie et les racines retiennent la terre. Sur un sol nu, la pluie ruisselle et arrache les particules. L'humus ne rend pas le sol plus lourd à lui seul, et le lessivage concerne les ions, pas la terre.",
+              "answers": [
+                {
+                  "content": "Le couvert végétal amortit la pluie et les racines retiennent la terre",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol nu contient plus d'humus",
+                  "correct": false
+                },
+                {
+                  "content": "Le lessivage emporte les particules de terre",
+                  "correct": false
+                },
+                {
+                  "content": "La forêt reçoit moins de pluie que le sol nu voisin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Choisis les trois conclusions que ces résultats permettent de tirer.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Constater : les pertes sont 1, 2, 20 et 40 t/ha. Étape 3 — Expliquer : plus le sol est protégé, moins il perd de terre ; la jachère limite l'érosion par rapport au brûlis ; le sol nu est le plus exposé. L'érosion dépend bien du couvert, et le brûlis protège beaucoup moins que la forêt.",
+              "answers": [
+                {
+                  "content": "Moins le sol est couvert, plus la perte de terre est grande",
+                  "correct": true
+                },
+                {
+                  "content": "La jachère limite l'érosion par rapport au brûlis",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol nu est le plus exposé à l'érosion",
+                  "correct": true
+                },
+                {
+                  "content": "L'érosion ne dépend pas de la végétation",
+                  "correct": false
+                },
+                {
+                  "content": "Le brûlis protège aussi bien le sol que la forêt",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le phénomène qui arrache les particules du sol sous l'effet de la pluie et du ruissellement s'appelle l'___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Expliquer : sur sol nu, la pluie ruisselle et arrache les particules : c'est l'érosion.",
+              "answers": [
+                {
+                  "content": "érosion",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du brûlis à la jachère : suivre les rendements d'une parcelle",
+          "statement": "Un paysan cultive de l'igname sur une parcelle défrichée par brûlis (expérience fictive, résultats simplifiés). Le rendement relatif est de 100 la première année, 75 la deuxième, 50 la troisième et 30 la quatrième. Il laisse alors la parcelle en jachère. La teneur du sol en matière organique passe de 1 % avant la jachère à 3 % après.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "De combien de points le rendement relatif a-t-il baissé entre la deuxième et la quatrième année ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Constater : le rendement passe de 75 à 30. On calcule $75 - 30 = 45$. La baisse est de 45 points.",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "points"
+            },
+            {
+              "content": "Quelle est la cause principale de cette baisse des rendements ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Identifier : le déboisement, le brûlis et la culture répétée. Étape 3 — Expliquer : la pluie lessive les ions, l'humus n'est plus renouvelé sans litière, le sol s'épuise. Les cendres n'apportent des ions que pour une courte durée.",
+              "answers": [
+                {
+                  "content": "L'épuisement du sol : perte d'humus et d'ions",
+                  "correct": true
+                },
+                {
+                  "content": "Un excès d'humus dans le sol",
+                  "correct": false
+                },
+                {
+                  "content": "Un apport durable d'ions par les cendres",
+                  "correct": false
+                },
+                {
+                  "content": "La formation d'une nouvelle roche mère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux raisons pour lesquelles les cendres du brûlis ne suffisent pas à garder le sol fertile ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Expliquer : les ions des cendres sont vite absorbés par les cultures ou lessivés par la pluie, et sans litière l'humus n'est plus renouvelé. Les cendres ne font pas apparaître de roche mère et n'augmentent pas durablement le fer.",
+              "answers": [
+                {
+                  "content": "Les ions des cendres sont vite absorbés ou lessivés",
+                  "correct": true
+                },
+                {
+                  "content": "Sans litière, l'humus n'est plus renouvelé",
+                  "correct": true
+                },
+                {
+                  "content": "La roche mère disparaît du sol",
+                  "correct": false
+                },
+                {
+                  "content": "Le fer devient plus abondant dans le sol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Par combien la teneur en matière organique a-t-elle été multipliée pendant la jachère ?",
+              "question_type": "numeric",
+              "explanation": "Étape 4 — Proposer : la jachère laisse la végétation reconstituer l'humus. La teneur passe de 1 % à 3 % : on calcule $3 \\div 1 = 3$. Elle a été multipliée par 3.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "fois"
+            },
+            {
+              "content": "Une jachère est un abandon définitif de la parcelle.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Proposer : la jachère est un repos temporaire pendant lequel la végétation repousse et reconstitue l'humus. Ici la matière organique triple. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi la jachère permet de restaurer la fertilité de cette parcelle, puis cite une autre mesure de conservation.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "La végétation produit de la litière",
+                "Les décomposeurs forment de l'humus, la matière organique augmente",
+                "Une autre mesure de conservation est citée (fumure, couverture)"
+              ],
+              "explanation": "Corrigé modèle : Pendant la jachère, la végétation repousse. Elle produit de la litière, que les décomposeurs transforment en humus ; la teneur en matière organique passe ici de 1 % à 3 %. L'humus forme avec l'argile le CAH, qui retient les cations, et la végétation protège le sol de l'érosion. La fertilité se reconstitue ainsi peu à peu. Une autre mesure est la fumure organique ou la couverture du sol par un paillage. Barème : le rôle de la végétation et de la litière (1 point) ; la formation d'humus et la hausse de la matière organique (1 point) ; une autre mesure de conservation correcte (1 point).",
+              "answers": [],
+              "starter": "Pendant la jachère, la végétation…"
+            }
+          ]
+        },
+        {
+          "title": "Une plantation de cacaoyers remplace une forêt",
+          "statement": "Une forêt du sud ivoirien est remplacée par une plantation de cacaoyers sur sol ferrallitique rouge (expérience fictive, résultats simplifiés). Pour 100 g de sol de surface, sous la forêt : matière organique 4 %, bases 8 meq, pH 5,5. Après dix ans de plantation sans fumure : matière organique 2 %, bases 3 meq, pH 4,5.",
+          "exercise_type": "evaluation",
+          "figure": "chaine-degradation",
+          "questions": [
+            {
+              "content": "Que montre le passage du pH de 5,5 à 4,5 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Constater : le pH baisse de 5,5 à 4,5. Un pH plus faible signifie plus d'ions $\\mathrm{H^{+}}$ : le sol est devenu plus acide. Il ne devient ni plus basique ni neutre.",
+              "answers": [
+                {
+                  "content": "Le sol est devenu plus acide",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol est devenu plus basique",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol est devenu neutre",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol n'a pas changé d'acidité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de meq a baissé la teneur en bases du sol de surface après dix ans ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Constater : les bases passent de 8 meq à 3 meq. On calcule $8 - 3 = 5$. La baisse est de 5 meq pour 100 g.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "meq"
+            },
+            {
+              "content": "De quel pourcentage la teneur en matière organique a-t-elle baissé (de 4 % à 2 %) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Constater : la teneur passe de 4 % à 2 %. La baisse est de $4 - 2 = 2$, soit $2 \\div 4 = 0{,}5$, c'est-à-dire 50 %. La matière organique a diminué de moitié.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Choisis les trois causes qui expliquent cette dégradation.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Identifier : l'abattage supprime la litière, donc l'apport de matière organique. Étape 3 — Expliquer : la pluie lessive les ions, et les récoltes emportent des éléments minéraux sans que la fumure les rende. Une fumure ou une jachère auraient au contraire protégé le sol.",
+              "answers": [
+                {
+                  "content": "L'abattage de la forêt supprime la litière",
+                  "correct": true
+                },
+                {
+                  "content": "La pluie lessive les ions du sol",
+                  "correct": true
+                },
+                {
+                  "content": "Les récoltes exportent des éléments sans fumure",
+                  "correct": true
+                },
+                {
+                  "content": "Un apport régulier de fumure organique",
+                  "correct": false
+                },
+                {
+                  "content": "Une jachère de plusieurs années",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque observation à son interprétation.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Expliquer : sans litière, l'humus n'est plus renouvelé ; la pluie sur sol découvert provoque ruissellement et lessivage ; un pH plus faible indique plus d'ions $\\mathrm{H^{+}}$ sur le CAH ; les récoltes exportent des éléments minéraux hors de la parcelle.",
+              "answers": [
+                {
+                  "content": "Moins de litière",
+                  "match": "L'humus n'est plus renouvelé"
+                },
+                {
+                  "content": "Pluie sur un sol découvert",
+                  "match": "Ruissellement et lessivage"
+                },
+                {
+                  "content": "Un pH plus faible",
+                  "match": "Plus d'ions H+ sur le CAH"
+                },
+                {
+                  "content": "Des récoltes répétées",
+                  "match": "Éléments minéraux exportés de la parcelle"
+                }
+              ]
+            },
+            {
+              "content": "Quelle mesure permet à la fois de corriger l'acidité et de rendre des éléments au sol ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Proposer : la chaux apporte des ions $\\mathrm{Ca^{2+}}$ qui prennent la place des $\\mathrm{H^{+}}$ et font monter le pH ; la fumure organique rend de la matière organique et des éléments. Un brûlis ou le déboisement d'une autre parcelle aggraverait la dégradation.",
+              "answers": [
+                {
+                  "content": "Un apport de chaux et de fumure organique",
+                  "correct": true
+                },
+                {
+                  "content": "Un nouveau brûlis de la plantation",
+                  "correct": false
+                },
+                {
+                  "content": "Le déboisement d'une parcelle voisine",
+                  "correct": false
+                },
+                {
+                  "content": "Le retrait de toute la litière du sol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Propose deux mesures de conservation pour cette plantation et justifie chacune par un effet sur le sol.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Une première mesure de conservation correcte",
+                "Son effet sur le sol est justifié",
+                "Une deuxième mesure de conservation correcte",
+                "Son effet sur le sol est justifié"
+              ],
+              "explanation": "Corrigé modèle : Première mesure : la fumure organique (compost, feuilles) ou un paillage, car elle apporte de la matière organique qui forme de l'humus et rend des éléments minéraux au sol. Deuxième mesure : une couverture végétale entre les arbres, ou une jachère sur d'autres parcelles, car elle protège le sol de la pluie et limite l'érosion et le lessivage. On peut aussi apporter de la chaux pour remonter le pH. Barème : première mesure correcte (1 point) et son effet (1 point) ; deuxième mesure correcte (1 point) et son effet (1 point).",
+              "answers": [],
+              "starter": "Première mesure : …"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
