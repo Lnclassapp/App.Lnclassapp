@@ -6,6 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
+| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
 | 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | `feature/contenus-tle-francais` |
 | 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 | 2026-10-31 | T5 | Tle A1, A2 | SVT | 7 (communes à A1 et A2, 14 fichiers) | `feature/contenus-tle-svt-a` |
@@ -21,6 +22,7 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| T8 | Toutes (10) | Dates, acteurs et rattachements au programme de chaque leçon, et chiffres économiques (L2 population INS ; L4 parts du PIB et de l'emploi données comme ordres de grandeur ; L6 couvert forestier, pauvreté, PPTE ; L9 population INSEE, nucléaire, R&D) : table détaillée dans `docs/chantiers/contenus-tle-histoire-geographie/journal.md` |
 | T7 | Toutes | Barèmes des questions rédigées (3 à 6 points, 8 pour les sujets de type BAC) proposés par le rédacteur ; forme des sujets « de type baccalauréat » (aucune règle d'épreuve officielle citée) ; dates et faits des œuvres réelles citées, vérifiés par le relecteur seulement. |
 | T7 | Œuvre narrative | Vocabulaire du récit retenu (schéma narratif en 5 temps, adjuvant / opposant, focalisation, analepse, scène / sommaire / ellipse / pause) ; « avait glissé » analepse ou simple antériorité ; « poussière rouge » métaphore ou hypallage ; problème 4 qui mêle un paragraphe de commentaire et un de dissertation ; faits de « L'Enfant noir » (Kouroussa, Tindican), « Une si longue lettre », « Une vie de boy », « Allah n'est pas obligé ». |
 | T7 | Préparation à l'oral du Baccalauréat | Forme de l'oral du BAC ivoirien (explication au fil du texte par mouvements, ou lecture méthodique par axes) dont dépend la notion 2 ; durées, nombre de textes et déroulement non affirmés (chiffres des exemples inventés) ; « liste des textes étudiés » à la place de « descriptif » ; registre « soutenu ou courant surveillé » ; barème de 8 points pour un mouvement rédigé. |
@@ -134,6 +136,7 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
+| 2026-10-31 | T8 : l'HG de Tle, sans série, est rangée dans `lecons-traitees/tle/histoire-geographie/` (comme `1ere/`, `2nde/`) ; les copies v1 par série sont retirées | Un cours sans série copié dans 4 dossiers ferait 4 doublons à l'import | Non |
 
 ## Ce qui a dérapé
 
