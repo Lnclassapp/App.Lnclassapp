@@ -67,7 +67,7 @@ Acquis communs : une leçon commune n'emploie que les leçons précédentes **de
 - [x] `prd.md` : critères en Gherkin
 - [x] ADR : sans objet · UDR : sans objet
 - [x] `plan.md` : 4 champs par lot, collision remplie
-- [ ] 20 fichiers qui passent `valider.rb` sans avertissement
-- [ ] Relecture indépendante faite, corrections reportées
+- [x] 20 fichiers qui passent `valider.rb` sans avertissement
+- [x] Relecture indépendante faite, corrections reportées
 - [ ] PR prête vers `Develop` avec la ligne de preuve `bin/ci-quiet`
 - [ ] `journal.md` clos

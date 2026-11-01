@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR #432) |
 | **Ouvert le** | 2026-11-01 |
 | **Branche** | `feature/contenus-1ere-physique-chimie-cd` |
 | **Programme** | contenus-v3-tous-niveaux (vague P3) |
