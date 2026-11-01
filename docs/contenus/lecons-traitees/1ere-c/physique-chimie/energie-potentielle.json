@@ -1,0 +1,1472 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Énergie potentielle",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "epp-droite",
+          "kind": "coordinate_plane",
+          "description": "Graphique de l'énergie potentielle de pesanteur d'un solide de 2 kg en fonction de son altitude z, avec g = 10 N/kg et l'état de référence en z = 0. L'abscisse est l'altitude z en mètres (de −2 à 4), l'ordonnée est Epp en joules (de −40 à 50). La courbe est la droite Epp = 20 z qui passe par l'origine, par le point (−1 ; −20) sous la référence et par le point (2 ; 40) au-dessus.",
+          "params": {
+            "xmin": -2,
+            "xmax": 4,
+            "ymin": -40,
+            "ymax": 50,
+            "points": [
+              {
+                "id": "P1",
+                "x": -1,
+                "y": -20
+              },
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "P2",
+                "x": 2,
+                "y": 40
+              }
+            ],
+            "lines": [
+              {
+                "a": 20,
+                "b": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "epe-parabole",
+          "kind": "coordinate_plane",
+          "description": "Graphique de l'énergie potentielle élastique d'un ressort de raideur k = 200 N/m en fonction de son allongement x. L'abscisse est x en mètres (de −0,4 à 0,4), l'ordonnée est Epe en joules (de 0 à 16). La courbe est symétrique : elle passe par (0 ; 0), (±0,1 ; 1), (±0,2 ; 4) et (±0,3 ; 9). Epe est nulle ressort à vide et positive qu'il soit étiré ou comprimé.",
+          "params": {
+            "xmin": -0.4,
+            "xmax": 0.4,
+            "ymin": 0,
+            "ymax": 16,
+            "points": [
+              {
+                "id": "M3",
+                "x": -0.3,
+                "y": 9
+              },
+              {
+                "id": "M2",
+                "x": -0.2,
+                "y": 4
+              },
+              {
+                "id": "M1",
+                "x": -0.1,
+                "y": 1
+              },
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "N1",
+                "x": 0.1,
+                "y": 1
+              },
+              {
+                "id": "N2",
+                "x": 0.2,
+                "y": 4
+              },
+              {
+                "id": "N3",
+                "x": 0.3,
+                "y": 9
+              }
+            ],
+            "segments": [
+              {
+                "x1": -0.3,
+                "y1": 9,
+                "x2": -0.2,
+                "y2": 4
+              },
+              {
+                "x1": -0.2,
+                "y1": 4,
+                "x2": -0.1,
+                "y2": 1
+              },
+              {
+                "x1": -0.1,
+                "y1": 1,
+                "x2": 0,
+                "y2": 0
+              },
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 0.1,
+                "y2": 1
+              },
+              {
+                "x1": 0.1,
+                "y1": 1,
+                "x2": 0.2,
+                "y2": 4
+              },
+              {
+                "x1": 0.2,
+                "y1": 4,
+                "x2": 0.3,
+                "y2": 9
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Énergie potentielle de pesanteur",
+          "remember": "L'**énergie potentielle de pesanteur** d'un solide de masse $m$ (système solide-Terre) à l'altitude $z$ est $E_{pp} = m\\,g\\,z$, avec l'axe $Oz$ **vers le haut** et un **état de référence** où $E_{pp} = 0$ (à $z = 0$, qu'on choisit). Elle s'exprime en joules, avec $m$ en kg, $g = 10$ N/kg et $z$ en m. Elle est positive au-dessus de la référence, négative en dessous. Entre $A$ et $B$ : $\\Delta E_{pp} = E_{pp}(B) - E_{pp}(A) = m\\,g\\,(z_B - z_A) = -W_{AB}(\\vec{P})$, car $W_{AB}(\\vec{P}) = m\\,g\\,(z_A - z_B)$. Quand le solide monte, $\\Delta E_{pp} > 0$ et le poids est résistant. Changer l'origine change $E_{pp}$, mais pas $\\Delta E_{pp}$.",
+          "method": [
+            "Choisir l'axe $Oz$ vers le haut et l'état de référence ($E_{pp} = 0$ en $z = 0$), puis relever $m$ en kg et les altitudes $z$ avec leur signe.",
+            "Écrire la formule $E_{pp} = m\\,g\\,z$ avec $g = 10$ N/kg.",
+            "Remplacer $m$, $g$ et $z$ (avec son signe) par leurs valeurs, puis calculer $E_{pp}$ en joules.",
+            "Pour une variation, calculer $\\Delta E_{pp} = E_{pp}(B) - E_{pp}(A) = -W(\\vec{P})$ et vérifier le signe (positif en montée, négatif en descente)."
+          ],
+          "example": {
+            "statement": "Un sac de ciment de 50 kg est monté du sol d'un magasin d'Abidjan jusqu'à un étage situé 3 m plus haut. Calculer l'énergie potentielle de pesanteur du sac à l'étage (origine au sol), puis la variation $\\Delta E_{pp}$ et le travail du poids.",
+            "steps": [
+              "Choisir : $Oz$ vers le haut, origine au sol ($E_{pp} = 0$ en $z = 0$) ; $m = 50$ kg, $z_A = 0$ et $z_B = 3$ m.",
+              "Écrire : $E_{pp} = m\\,g\\,z$ avec $g = 10$ N/kg.",
+              "Remplacer et calculer : $E_{pp}(A) = 0$ et $E_{pp}(B) = 50 \\times 10 \\times 3 = 1\\,500$ J.",
+              "Calculer la variation : $\\Delta E_{pp} = 1\\,500 - 0 = 1\\,500$ J, positive car le sac monte ; donc $W(\\vec{P}) = -\\Delta E_{pp} = -1\\,500$ J."
+            ]
+          },
+          "pitfall": "Ne pas oublier que $z$ est une altitude **algébrique** : elle se mesure depuis l'état de référence, positive vers le haut et **négative** en dessous. Contre-exemple : un bloc de 2 kg situé 5 m sous l'origine a $z = -5$ m, donc $E_{pp} = 2 \\times 10 \\times (-5) = -100$ J, et non $+100$ J. Autre piège : changer d'origine change $E_{pp}$ mais pas $\\Delta E_{pp}$ : si ce bloc monte de $z = -5$ m à $z = 0$, $\\Delta E_{pp} = +100$ J quelle que soit l'origine choisie.",
+          "figure": "epp-droite",
+          "exercise": {
+            "title": "Calculer une énergie potentielle de pesanteur",
+            "statement": "Dans cet exercice, tu calcules des énergies potentielles de pesanteur et leurs variations avec la méthode de la fiche. Tu prends $g = 10$ N/kg et l'axe $Oz$ vers le haut.",
+            "exercise_type": "fixation",
+            "figure": "epp-droite",
+            "questions": [
+              {
+                "content": "Une brique de 4 kg est posée sur une étagère à 2,5 m au-dessus du sol. On prend l'origine des altitudes au sol, l'axe $Oz$ vers le haut et $g = 10$ N/kg. Quelle est l'énergie potentielle de pesanteur de la brique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : origine au sol, $Oz$ vers le haut, $m = 4$ kg et $z = 2{,}5$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer et calculer : $E_{pp} = 4 \\times 10 \\times 2{,}5 = 100$ J. Les 10 J oublient $g$ ($4 \\times 2{,}5$), les 25 J oublient la masse ($10 \\times 2{,}5$) et les 40 J oublient l'altitude ($4 \\times 10$).",
+                "answers": [
+                  {
+                    "content": "100 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "10 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "25 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "40 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un seau d'eau de 8 kg est hissé à 1,5 m au-dessus du sol d'une cour d'Abidjan. L'origine des altitudes est au sol, $Oz$ est vers le haut, $g = 10$ N/kg. Calcule l'énergie potentielle de pesanteur du seau.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Choisir : origine au sol, $m = 8$ kg, $z = 1{,}5$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer et calculer : $E_{pp} = 8 \\times 10 \\times 1{,}5 = 120$ J.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un solide situé sous le niveau de référence des altitudes (altitude $z$ négative) a une énergie potentielle de pesanteur négative.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$ avec $m > 0$ et $g > 0$. Étape 3 — Remplacer : si $z < 0$, le produit est négatif. L'énergie potentielle de pesanteur est donc négative sous la référence, positive au-dessus, nulle sur la référence.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une pierre de 3 kg monte de l'altitude $z_A = 2$ m à l'altitude $z_B = 7$ m ($Oz$ vers le haut, $g = 10$ N/kg). Calcule la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Choisir : $m = 3$ kg, $z_A = 2$ m, $z_B = 7$ m. Étape 3 — Calculer : $E_{pp}(A) = 3 \\times 10 \\times 2 = 60$ J et $E_{pp}(B) = 3 \\times 10 \\times 7 = 210$ J. Étape 4 — Variation : $\\Delta E_{pp} = 210 - 60 = 150$ J, positive car la pierre monte.",
+                "answers": [
+                  {
+                    "content": "150",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un sac de 20 kg descend de l'altitude $z_A = 6$ m à l'altitude $z_B = 1$ m ($Oz$ vers le haut, $g = 10$ N/kg). Calcule la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Choisir : $m = 20$ kg, $z_A = 6$ m, $z_B = 1$ m. Étape 3 — Calculer : $E_{pp}(A) = 20 \\times 10 \\times 6 = 1\\,200$ J et $E_{pp}(B) = 20 \\times 10 \\times 1 = 200$ J. Étape 4 — Variation : $\\Delta E_{pp} = 200 - 1\\,200 = -1\\,000$ J. Le poids est moteur dans la descente : $W(\\vec{P}) = +1\\,000$ J et $\\Delta E_{pp} = -W(\\vec{P})$.",
+                "answers": [
+                  {
+                    "content": "-1000",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un bloc de 2 kg est 5 m sous l'origine des altitudes ($z = -5$ m, $Oz$ vers le haut, $g = 10$ N/kg). Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : $m = 2$ kg et $z = -5$ m (altitude algébrique, négative sous l'origine). Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer : $E_{pp} = 2 \\times 10 \\times (-5) = -100$ J. La valeur +100 J oublie le signe de $z$ : c'est le piège. La valeur −10 J oublie $g$.",
+                "answers": [
+                  {
+                    "content": "−100 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "+100 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "−10 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation au signe de la variation $\\Delta E_{pp}$ de l'énergie potentielle de pesanteur du solide.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Variation : $\\Delta E_{pp} = m\\,g\\,(z_B - z_A)$ a le signe de $z_B - z_A$. Une balle qui monte a $z_B > z_A$ : $\\Delta E_{pp}$ est positive. Une mangue qui tombe a $z_B < z_A$ : $\\Delta E_{pp}$ est négative. Une lampe qui reste à la même altitude a $z_B = z_A$ : $\\Delta E_{pp}$ est nulle.",
+                "answers": [
+                  {
+                    "content": "Une balle lancée vers le haut qui monte",
+                    "match": "$\\Delta E_{pp}$ positive"
+                  },
+                  {
+                    "content": "Une mangue qui tombe de l'arbre",
+                    "match": "$\\Delta E_{pp}$ négative"
+                  },
+                  {
+                    "content": "Une lampe qui reste accrochée au plafond",
+                    "match": "$\\Delta E_{pp}$ nulle"
+                  }
+                ]
+              },
+              {
+                "content": "Pour un solide de 2 kg ($g = 10$ N/kg), l'énergie potentielle de pesanteur $E_{pp}$ est une fonction de l'altitude $z$ dont la courbe est une droite passant par l'origine. Quelle est la pente de cette droite ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer : $E_{pp} = 2 \\times 10 \\times z = 20\\,z$. La pente est donc $m\\,g = 20$ J par mètre (20 J/m). Les 2 J/m oublient $g$, les 10 J/m oublient la masse et les 0,2 J/m divisent au lieu de multiplier.",
+                "answers": [
+                  {
+                    "content": "20 J/m",
+                    "correct": true
+                  },
+                  {
+                    "content": "2 J/m",
+                    "correct": false
+                  },
+                  {
+                    "content": "10 J/m",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,2 J/m",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu viens de voir que l'énergie potentielle de pesanteur dépend de l'altitude mesurée depuis une référence. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Dans $E_{pp} = m\\,g\\,z$, l'altitude $z$ se mesure à partir de ___ avec l'axe $Oz$ orienté vers le ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Choisir : on choisit l'état de référence (où $E_{pp} = 0$) et l'axe $Oz$ vers le haut. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$ avec $z$ mesurée depuis cette référence, positive vers le haut.",
+                "answers": [
+                  {
+                    "content": "l'état de référence",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le centre de la Terre",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le plafond",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "haut",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "bas",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "côté",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "C'est toi qui choisis l'origine, et $z > 0$ au-dessus d'elle."
+              },
+              {
+                "content": "Un ballon de 0,5 kg est tenu à 4 m au-dessus du sol (origine au sol, $Oz$ vers le haut, $g = 10$ N/kg). Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Choisir : origine au sol, $m = 0{,}5$ kg, $z = 4$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Calculer : $E_{pp} = 0{,}5 \\times 10 \\times 4 = 20$ J.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Multiplie $m$, $g$ et $z$."
+              },
+              {
+                "content": "Quand un solide monte, son énergie potentielle de pesanteur diminue.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Variation : $\\Delta E_{pp} = m\\,g\\,(z_B - z_A)$. Quand le solide monte, $z_B > z_A$ donc $\\Delta E_{pp} > 0$ : l'énergie potentielle de pesanteur augmente, elle ne diminue pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le signe de $z_B - z_A$ en montée."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Travail de la force de rappel d'un ressort",
+          "remember": "Un ressort de raideur $k$ (en N/m), de masse négligeable, allongé de $x = \\ell - \\ell_0$ (en m, $\\ell_0$ longueur à vide, $x < 0$ s'il est comprimé), exerce une **force de rappel** (tension) d'intensité $T = k\\,|x|$, qui tend à le ramener à sa longueur à vide. Cette force **varie** avec $x$ : on ne peut pas écrire $T \\times d$. Son travail entre $A$ et $B$ est $W_{AB}(\\vec{T}) = \\dfrac{1}{2}\\,k\\,x_A^2 - \\dfrac{1}{2}\\,k\\,x_B^2$, en joules. Il ne dépend que de $x_A$ et de $x_B$. Il est positif si le ressort se rapproche de sa longueur à vide ($|x_B| < |x_A|$) et négatif s'il s'en éloigne.",
+          "method": [
+            "Relever la raideur $k$ en N/m et les allongements $x_A$ et $x_B$ en mètres (convertir les cm ; $x < 0$ si le ressort est comprimé).",
+            "Écrire la formule $W_{AB}(\\vec{T}) = \\dfrac{1}{2}\\,k\\,x_A^2 - \\dfrac{1}{2}\\,k\\,x_B^2$.",
+            "Calculer $x_A^2$ et $x_B^2$, puis les remplacer dans la formule avec $k$.",
+            "Calculer $W$ en joules et interpréter le signe (positif si le ressort se rapproche de sa longueur à vide, négatif s'il s'en éloigne)."
+          ],
+          "example": {
+            "statement": "Un ressort de raideur $k = 200$ N/m est étiré de $x_A = 5$ cm à $x_B = 15$ cm. Calculer le travail de sa tension.",
+            "steps": [
+              "Relever en unités SI : $k = 200$ N/m, $x_A = 5$ cm $= 0{,}05$ m et $x_B = 15$ cm $= 0{,}15$ m.",
+              "Écrire : $W_{AB}(\\vec{T}) = \\dfrac{1}{2}\\,k\\,x_A^2 - \\dfrac{1}{2}\\,k\\,x_B^2$.",
+              "Calculer les carrés : $x_A^2 = 0{,}0025$ et $x_B^2 = 0{,}0225$, donc $W = \\dfrac{1}{2} \\times 200 \\times 0{,}0025 - \\dfrac{1}{2} \\times 200 \\times 0{,}0225$.",
+              "Calculer : $W = 0{,}25 - 2{,}25 = -2$ J, négatif car le ressort s'éloigne de sa longueur à vide."
+            ]
+          },
+          "pitfall": "Ne pas écrire $W = \\frac{1}{2}\\,k\\,(x_B - x_A)^2$ et ne pas multiplier une tension par un déplacement : la tension change pendant l'étirement. Contre-exemple : pour $k = 100$ N/m, de $x_A = 0{,}1$ m à $x_B = 0{,}3$ m, la bonne formule donne $50 \\times 0{,}01 - 50 \\times 0{,}09 = -4$ J, alors que $\\frac{1}{2}\\,k\\,(x_B - x_A)^2 = 50 \\times 0{,}04 = +2$ J est faux. Autre piège : un allongement en cm doit être converti en m avant de calculer le carré.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer le travail de la tension d'un ressort",
+            "statement": "Dans cet exercice, tu calcules le travail de la force de rappel d'un ressort avec la méthode de la fiche. Les ressorts sont de masse négligeable.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un ressort de raideur $k = 100$ N/m est allongé de $x = 0{,}04$ m. Quelle est l'intensité de la tension du ressort ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $k = 100$ N/m et $x = 0{,}04$ m (déjà en mètres). La tension est proportionnelle à l'allongement : $T = k\\,x = 100 \\times 0{,}04 = 4$ N. Les 400 N viennent d'un allongement pris en centimètres (4 au lieu de 0,04), les 2 N d'un facteur $\\frac{1}{2}$ qui appartient à l'énergie et non à la force, et les 2 500 N d'une division $k \\div x$.",
+                "answers": [
+                  {
+                    "content": "4 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "400 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 500 N",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ressort de raideur $k = 400$ N/m, allongé de 0,10 m, revient à sa longueur à vide ($x = 0$). Quel est le travail de la tension du ressort pendant ce retour ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 400$ N/m, $x_A = 0{,}10$ m et $x_B = 0$. Étape 2 — Écrire : $W_{AB}(\\vec{T}) = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $x_A^2 = 0{,}01$ et $x_B^2 = 0$, donc $W = 200 \\times 0{,}01 - 0$. Étape 4 — Conclure : $W = 2$ J, positif car le ressort se rapproche de sa longueur à vide.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un ressort de raideur $k = 50$ N/m, à sa longueur à vide ($x = 0$), est allongé jusqu'à $x = 20$ cm. Quel est le travail de la tension du ressort ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever en unités SI : $k = 50$ N/m, $x_A = 0$ et $x_B = 20$ cm $= 0{,}20$ m. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $x_B^2 = 0{,}04$, donc $W = 0 - 25 \\times 0{,}04$. Étape 4 — Conclure : $W = -1$ J, négatif car le ressort s'éloigne de sa longueur à vide.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Quand un ressort revient vers sa longueur à vide, le travail de sa tension est positif.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,(x_A^2 - x_B^2)$. Étape 4 — Interpréter : si le ressort se rapproche de sa longueur à vide, $|x_B| < |x_A|$ donc $x_A^2 > x_B^2$ et $W > 0$ : la tension est motrice.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer le travail de la tension d'un ressort entre deux positions $A$ et $B$, quelles sont les deux démarches correctes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : les allongements $x_A$ et $x_B$ se convertissent en mètres. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Multiplier la tension finale par le déplacement est faux, car la tension change tout le long du déplacement. L'expression $\\frac{1}{2}\\,k\\,(x_B - x_A)^2$ est fausse : on soustrait les carrés des allongements, pas le carré de leur différence.",
+                "answers": [
+                  {
+                    "content": "Convertir les allongements en mètres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Utiliser $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Multiplier la tension finale par le déplacement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Utiliser $W = \\frac{1}{2}\\,k\\,(x_B - x_A)^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ressort de raideur $k = 100$ N/m passe de l'allongement $x_A = 0{,}1$ m à l'allongement $x_B = 0{,}3$ m. Quel est le travail de la tension du ressort ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 100$ N/m, $x_A = 0{,}1$ m et $x_B = 0{,}3$ m. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $x_A^2 = 0{,}01$ et $x_B^2 = 0{,}09$, donc $W = 50 \\times 0{,}01 - 50 \\times 0{,}09 = 0{,}5 - 4{,}5$. Étape 4 — Conclure : $W = -4$ J. Le piège $\\frac{1}{2}\\,k\\,(x_B - x_A)^2 = 50 \\times 0{,}04 = 2$ J donne un résultat faux, même de signe faux.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un ressort de raideur $k = 200$ N/m, comprimé de 0,10 m ($x_A = -0{,}10$ m), revient à sa longueur à vide ($x_B = 0$). Quel est le travail de la tension ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $k = 200$ N/m, $x_A = -0{,}10$ m et $x_B = 0$. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $x_A^2 = (-0{,}10)^2 = +0{,}01$, donc $W = 100 \\times 0{,}01 - 0$. Étape 4 — Conclure : $W = +1$ J, positif car le ressort revient vers sa longueur à vide. Le signe moins de $x_A$ disparaît dans le carré : la valeur −1 J est fausse, 2 J oublie le facteur $\\frac{1}{2}$ et 0 J oublie que $x_A$ est non nul.",
+                "answers": [
+                  {
+                    "content": "+1 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "−1 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La raideur $k$ d'un ressort s'exprime en ___ (écris le symbole de l'unité).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : la tension est $T = k\\,x$ avec $T$ en newtons et $x$ en mètres. Donc $k = T \\div x$ s'exprime en newtons par mètre, de symbole N/m. L'unité J est celle de l'énergie, pas celle de la raideur.",
+                "answers": [
+                  {
+                    "content": "N/m",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu viens de voir que la tension d'un ressort varie et que son travail dépend des allongements de départ et d'arrivée. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "La tension d'un ressort a pour intensité $T = k\\,|x|$ : $k$ est la ___ du ressort et s'exprime en ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Relever : dans $T = k\\,|x|$, $k$ est la raideur du ressort. Comme $T$ est en newtons et $x$ en mètres, $k$ s'exprime en N/m. Un ressort plus raide a un $k$ plus grand.",
+                "answers": [
+                  {
+                    "content": "raideur",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "masse",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "longueur à vide",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "N/m",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "N/kg",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "J",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Newton divisé par mètre."
+              },
+              {
+                "content": "Un ressort de raideur $k = 200$ N/m passe de $x = 0$ à $x = 0{,}1$ m. Quel est le travail de la tension ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 200$ N/m, $x_A = 0$ et $x_B = 0{,}1$ m. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $W = 0 - 100 \\times 0{,}01$. Étape 4 — Conclure : $W = -1$ J, négatif car le ressort s'éloigne de sa longueur à vide.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Le ressort s'étire : le travail est négatif."
+              },
+              {
+                "content": "Le travail de la tension d'un ressort dépend du chemin suivi entre $A$ et $B$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $W_{AB}(\\vec{T}) = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Cette expression ne contient que l'allongement de départ et l'allongement d'arrivée, pas le chemin suivi : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde quelles grandeurs apparaissent dans la formule."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Énergie potentielle élastique d'un ressort",
+          "remember": "L'**énergie potentielle élastique** d'un ressort de raideur $k$, sans masse, d'allongement $x$ est $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$, avec l'état de référence $E_{pe} = 0$ pour $x = 0$ (ressort à sa longueur à vide). Elle s'exprime en joules, avec $k$ en N/m et $x$ en m. Elle est toujours positive ou nulle, que le ressort soit étiré ou comprimé, et elle est multipliée par 4 quand $x$ double. Entre $A$ et $B$ : $\\Delta E_{pe} = E_{pe}(B) - E_{pe}(A) = \\dfrac{1}{2}\\,k\\,x_B^2 - \\dfrac{1}{2}\\,k\\,x_A^2 = -W_{AB}(\\vec{T})$. Elle appartient au système {solide, ressort}.",
+          "method": [
+            "Relever la raideur $k$ en N/m et les allongements en mètres ($x = \\ell - \\ell_0$, négatif si le ressort est comprimé).",
+            "Écrire la formule $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$.",
+            "Remplacer $k$ et $x$, calculer d'abord $x^2$ (toujours positif), puis $E_{pe}$ en joules.",
+            "Pour une variation, calculer $\\Delta E_{pe} = E_{pe}(B) - E_{pe}(A) = -W(\\vec{T})$ et vérifier le signe (positif si $|x|$ augmente)."
+          ],
+          "example": {
+            "statement": "Un ressort de raideur $k = 500$ N/m, déjà comprimé de 4 cm, est comprimé jusqu'à 10 cm. Calculer son énergie potentielle élastique dans chaque état, puis $\\Delta E_{pe}$ et le travail de la tension.",
+            "steps": [
+              "Relever en unités SI : $k = 500$ N/m, $x_A = -0{,}04$ m et $x_B = -0{,}10$ m (ressort comprimé).",
+              "Écrire : $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$.",
+              "Remplacer et calculer les carrés : $x_A^2 = 0{,}0016$ et $x_B^2 = 0{,}01$, donc $E_{pe}(A) = 250 \\times 0{,}0016 = 0{,}4$ J et $E_{pe}(B) = 250 \\times 0{,}01 = 2{,}5$ J.",
+              "Calculer la variation : $\\Delta E_{pe} = 2{,}5 - 0{,}4 = 2{,}1$ J, positive car $|x|$ augmente ; donc $W(\\vec{T}) = -2{,}1$ J."
+            ]
+          },
+          "pitfall": "Ne pas oublier le carré de $x$ ni le facteur $\\frac{1}{2}$, et ne pas croire qu'un ressort comprimé a une énergie négative. Contre-exemple : pour $k = 100$ N/m et $x = -0{,}2$ m, $E_{pe} = \\frac{1}{2} \\times 100 \\times (-0{,}2)^2 = +2$ J ; l'erreur $\\frac{1}{2}\\,k\\,x = -10$ J est fausse deux fois (pas de carré, signe négatif). L'énergie n'est pas proportionnelle à $x$ : si $x$ double, $E_{pe}$ est multipliée par 4.",
+          "figure": "epe-parabole",
+          "exercise": {
+            "title": "Calculer une énergie potentielle élastique",
+            "statement": "Dans cet exercice, tu calcules des énergies potentielles élastiques et leurs variations avec la méthode de la fiche. Les ressorts sont de masse négligeable.",
+            "exercise_type": "fixation",
+            "figure": "epe-parabole",
+            "questions": [
+              {
+                "content": "Un ressort de raideur $k = 400$ N/m est allongé de $x = 0{,}1$ m. Calcule son énergie potentielle élastique.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 400$ N/m et $x = 0{,}1$ m. Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer et calculer : $x^2 = 0{,}01$, donc $E_{pe} = 200 \\times 0{,}01 = 2$ J.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un ressort de raideur $k = 800$ N/m est comprimé de 5 cm. Quelle est son énergie potentielle élastique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever en unités SI : $k = 800$ N/m et $x = -5$ cm $= -0{,}05$ m. Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Calculer : $x^2 = 0{,}0025$, donc $E_{pe} = 400 \\times 0{,}0025 = 1$ J. Le résultat −1 J oublie que le carré est positif, 20 J oublie d'élever $x$ au carré ($400 \\times 0{,}05$) et 2 J oublie le facteur $\\frac{1}{2}$.",
+                "answers": [
+                  {
+                    "content": "1 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "−1 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "20 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'énergie potentielle élastique d'un ressort peut être négative quand le ressort est comprimé.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Calculer : $k > 0$ et $x^2 \\geq 0$, même si $x < 0$ (ressort comprimé). Donc $E_{pe} \\geq 0$ : elle n'est jamais négative.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On double l'allongement d'un ressort (de $x$ à $2x$). Par combien est multipliée son énergie potentielle élastique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : avec $2x$, $E_{pe}' = \\frac{1}{2}\\,k\\,(2x)^2 = 4 \\times \\frac{1}{2}\\,k\\,x^2$. L'énergie est multipliée par 4. Le facteur 2 serait celui d'une grandeur proportionnelle à $x$, comme la tension.",
+                "answers": [
+                  {
+                    "content": "Par 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "Par 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "Par 8",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle reste identique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ressort de raideur $k = 200$ N/m passe de l'allongement $x_A = 0{,}1$ m à l'allongement $x_B = 0{,}3$ m. Calcule la variation $\\Delta E_{pe}$ de son énergie potentielle élastique.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 200$ N/m, $x_A = 0{,}1$ m et $x_B = 0{,}3$ m. Étape 3 — Calculer : $E_{pe}(A) = 100 \\times 0{,}01 = 1$ J et $E_{pe}(B) = 100 \\times 0{,}09 = 9$ J. Étape 4 — Variation : $\\Delta E_{pe} = 9 - 1 = 8$ J, positive car $|x|$ augmente.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un ressort de raideur $k = 100$ N/m passe de l'allongement $x_A = 0{,}4$ m à l'allongement $x_B = 0{,}2$ m. Quel est le travail de sa tension ? Utilise $\\Delta E_{pe} = -W(\\vec{T})$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 100$ N/m, $x_A = 0{,}4$ m et $x_B = 0{,}2$ m. Étape 3 — Calculer : $E_{pe}(A) = 50 \\times 0{,}16 = 8$ J et $E_{pe}(B) = 50 \\times 0{,}04 = 2$ J. Étape 4 — Variation : $\\Delta E_{pe} = 2 - 8 = -6$ J, donc $W(\\vec{T}) = -\\Delta E_{pe} = +6$ J, positif car le ressort revient vers sa longueur à vide.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Un ressort a une raideur $k = 200$ N/m. Relie chaque allongement à l'énergie potentielle élastique correspondante.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2 = 100\\,x^2$. Étape 3 — Remplacer : $x = 0$ donne 0 J ; $x = 0{,}1$ m donne $100 \\times 0{,}01 = 1$ J ; $x = 0{,}2$ m donne $100 \\times 0{,}04 = 4$ J ; $x = 0{,}3$ m donne $100 \\times 0{,}09 = 9$ J. L'énergie croît comme le carré de $x$ et non proportionnellement.",
+                "answers": [
+                  {
+                    "content": "$x = 0$ (ressort à vide)",
+                    "match": "0 J"
+                  },
+                  {
+                    "content": "$x = 0{,}1$ m",
+                    "match": "1 J"
+                  },
+                  {
+                    "content": "$x = 0{,}2$ m",
+                    "match": "4 J"
+                  },
+                  {
+                    "content": "$x = 0{,}3$ m",
+                    "match": "9 J"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu viens de voir que l'énergie potentielle élastique varie comme le carré de l'allongement. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Un ressort de raideur $k = 200$ N/m est allongé de $x = 0{,}1$ m. Quelle est son énergie potentielle élastique ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : $k = 200$ N/m et $x = 0{,}1$ m. Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Calculer : $E_{pe} = 100 \\times 0{,}01 = 1$ J.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Calcule d'abord $x^2$."
+              },
+              {
+                "content": "L'énergie potentielle élastique $\\frac{1}{2}\\,k\\,x^2$ est toujours ___ ; elle est nulle quand le ressort est à ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Conclure : $x^2 \\geq 0$ donc $E_{pe} \\geq 0$, et $E_{pe} = 0$ pour $x = 0$, c'est-à-dire ressort à sa longueur à vide.",
+                "answers": [
+                  {
+                    "content": "positive ou nulle",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "négative",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "positive ou négative",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sa longueur à vide",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "sa compression maximale",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "l'équilibre sous une charge",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un carré n'est jamais négatif."
+              },
+              {
+                "content": "Si l'allongement d'un ressort est multiplié par 3, son énergie potentielle élastique est multipliée par 9.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : avec $3x$, $E_{pe}' = \\frac{1}{2}\\,k\\,(3x)^2 = 9 \\times E_{pe}$. L'affirmation est vraie : l'énergie varie comme le carré de l'allongement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Élève $3x$ au carré."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Énergie potentielle d'un système et état de référence",
+          "remember": "Le système **solide-Terre** possède l'énergie potentielle de pesanteur $E_{pp} = m\\,g\\,z$ ($Oz$ vers le haut, $E_{pp} = 0$ en $z = 0$). Le système **solide-ressort** possède l'énergie potentielle élastique $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$ ($E_{pe} = 0$ pour $x = 0$). Pour un solide accroché à un ressort, l'énergie potentielle du système est la somme $E_p = m\\,g\\,z + \\dfrac{1}{2}\\,k\\,x^2$. Les états de référence sont un **choix** : en changer modifie $E_p$ d'une constante, mais pas la variation $\\Delta E_p = E_p(B) - E_p(A) = -\\big[W(\\vec{P}) + W(\\vec{T})\\big]$. Ne pas confondre $z$ (altitude, positive vers le haut) et $x$ (allongement, positif si le ressort est plus long qu'à vide).",
+          "method": [
+            "Identifier le système (pesanteur, ressort ou les deux), choisir l'axe $Oz$ vers le haut et les états de référence, puis relever $z$ et $x$ avec leur signe dans chaque position.",
+            "Écrire l'énergie de chaque partie : $E_{pp} = m\\,g\\,z$ et $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$.",
+            "Remplacer par les valeurs de la position étudiée, puis additionner : $E_p = E_{pp} + E_{pe}$.",
+            "Calculer la variation $\\Delta E_p = E_p(B) - E_p(A)$ et la vérifier par $-[W(\\vec{P}) + W(\\vec{T})]$."
+          ],
+          "example": {
+            "statement": "Un solide de 2 kg est accroché à un ressort vertical de raideur $k = 100$ N/m, à sa longueur à vide en $A$ (origine des altitudes). Il descend de 0,2 m jusqu'en $B$. Calculer $E_p(A)$, $E_p(B)$ et $\\Delta E_p$ ($g = 10$ N/kg).",
+            "steps": [
+              "Identifier : système solide-ressort-Terre, $Oz$ vers le haut. En $A$ : $z_A = 0$ et $x_A = 0$ ; en $B$ : $z_B = -0{,}2$ m et $x_B = +0{,}2$ m.",
+              "Écrire : $E_{pp} = m\\,g\\,z$ et $E_{pe} = \\dfrac{1}{2}\\,k\\,x^2$.",
+              "Remplacer et additionner : $E_p(A) = 0$ ; $E_p(B) = 2 \\times 10 \\times (-0{,}2) + 50 \\times 0{,}04 = -4 + 2 = -2$ J.",
+              "Calculer la variation : $\\Delta E_p = -2 - 0 = -2$ J. Vérification : $W(\\vec{P}) = +4$ J, $W(\\vec{T}) = -2$ J et $-[4 + (-2)] = -2$ J."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'altitude $z$ et l'allongement $x$, ni oublier leur signe. Quand le solide descend de 0,2 m, $z = -0{,}2$ m mais $x = +0{,}2$ m. Contre-exemple : avec $z = +0{,}2$ m par erreur, on trouve $E_p(B) = +4 + 2 = +6$ J au lieu de $-2$ J, et $\\Delta E_p = +6$ J au lieu de $-2$ J : même le signe de la variation est faux.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer l'énergie potentielle d'un système",
+            "statement": "Dans cet exercice, tu calcules l'énergie potentielle d'un système solide-ressort-Terre avec la méthode de la fiche. Tu prends $g = 10$ N/kg et l'axe $Oz$ vers le haut.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un solide de 1 kg est à l'altitude $z = 0{,}3$ m ($Oz$ vers le haut, $g = 10$ N/kg) et il est accroché à un ressort de raideur $k = 200$ N/m allongé de $x = 0{,}1$ m. Quelle est l'énergie potentielle du système solide-ressort-Terre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le système a une énergie de pesanteur et une énergie élastique. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$ et $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer et additionner : $E_{pp} = 1 \\times 10 \\times 0{,}3 = 3$ J, $E_{pe} = 100 \\times 0{,}01 = 1$ J, donc $E_p = 3 + 1 = 4$ J. La valeur 3 J oublie le ressort, 1 J oublie la pesanteur et 2 J soustrait les deux énergies au lieu de les additionner.",
+                "answers": [
+                  {
+                    "content": "4 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "3 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de 2 kg est à l'altitude $z = -0{,}5$ m ($Oz$ vers le haut, $g = 10$ N/kg), accroché à un ressort de raideur $k = 100$ N/m allongé de $x = 0{,}2$ m. Calcule l'énergie potentielle $E_p = E_{pp} + E_{pe}$ du système.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : pesanteur (solide-Terre) et élasticité (ressort). Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$ et $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer et additionner : $E_{pp} = 2 \\times 10 \\times (-0{,}5) = -10$ J et $E_{pe} = 50 \\times 0{,}04 = 2$ J, donc $E_p = -10 + 2 = -8$ J.",
+                "answers": [
+                  {
+                    "content": "-8",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "L'énergie potentielle élastique d'un ressort dépend du choix de l'origine des altitudes et de l'orientation de l'axe $Oz$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Cette expression ne contient que la raideur $k$ et l'allongement $x$ : aucune altitude, aucun axe. Seule l'énergie potentielle de pesanteur $m\\,g\\,z$ dépend de l'origine des altitudes et du sens de $Oz$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces affirmations sur les énergies potentielles et leurs états de référence, lesquelles sont vraies ? Choisis-en deux.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : l'état de référence est un choix. Étape 4 — Comparer : changer l'origine des altitudes modifie $E_{pp}$ d'une constante mais pas $\\Delta E_p$, car $\\Delta E_p = -[W(\\vec{P}) + W(\\vec{T})]$ ne dépend que des positions de départ et d'arrivée. L'énergie potentielle élastique ne dépend pas de l'axe $Oz$ et elle n'est jamais négative, car $x^2 \\geq 0$.",
+                "answers": [
+                  {
+                    "content": "La variation $\\Delta E_p$ ne dépend pas de l'état de référence choisi",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'énergie potentielle de pesanteur dépend du choix de l'origine des altitudes",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'énergie potentielle élastique dépend de l'orientation de l'axe $Oz$",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'énergie potentielle élastique peut être négative",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de 1 kg est accroché à un ressort vertical de raideur $k = 400$ N/m. Il part de la position où le ressort est à sa longueur à vide ($x = 0$, origine des altitudes) et descend de 0,1 m. Calcule la variation $\\Delta E_p$ de l'énergie potentielle du système ($g = 10$ N/kg, $Oz$ vers le haut).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : en B, le solide est descendu de 0,1 m donc $z_B = -0{,}1$ m, et le ressort s'est allongé de $x_B = +0{,}1$ m. Étape 2 — Écrire : $E_p = m\\,g\\,z + \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : $E_p(A) = 0$ et $E_p(B) = 1 \\times 10 \\times (-0{,}1) + 200 \\times 0{,}01 = -1 + 2 = 1$ J. Étape 4 — Variation : $\\Delta E_p = 1 - 0 = 1$ J. Vérification : $W(\\vec{P}) = +1$ J, $W(\\vec{T}) = -2$ J et $-[1 + (-2)] = +1$ J.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0
+              },
+              {
+                "content": "Entre deux positions $A$ et $B$, le poids d'un solide a un travail $W(\\vec{P}) = +6$ J et la tension du ressort auquel il est accroché a un travail $W(\\vec{T}) = -2$ J. Que vaut la variation $\\Delta E_p$ de l'énergie potentielle du système solide-ressort-Terre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Calculer la variation : $\\Delta E_p = -[W(\\vec{P}) + W(\\vec{T})] = -[6 + (-2)] = -4$ J. La valeur +4 J oublie le signe moins de la relation, −8 J soustrait les travaux au lieu de les additionner, et +8 J cumule les deux erreurs.",
+                "answers": [
+                  {
+                    "content": "−4 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "+4 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "−8 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "+8 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de 2 kg est accroché à un ressort vertical. Il descend de 0,1 m depuis la position où le ressort est à sa longueur à vide, prise comme origine des altitudes ($Oz$ vers le haut). Quelles sont les valeurs de $z$ et de $x$ dans la position d'arrivée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $z$ est une altitude, comptée positive vers le haut : le solide descend, donc $z = -0{,}1$ m. $x$ est un allongement : le ressort devient plus long qu'à vide, donc $x = +0{,}1$ m. Prendre $z = +0{,}1$ m confond la distance parcourue et l'altitude, et prendre $x = -0{,}1$ m confond l'allongement avec l'altitude.",
+                "answers": [
+                  {
+                    "content": "$z = -0{,}1$ m et $x = +0{,}1$ m",
+                    "correct": true
+                  },
+                  {
+                    "content": "$z = +0{,}1$ m et $x = +0{,}1$ m",
+                    "correct": false
+                  },
+                  {
+                    "content": "$z = -0{,}1$ m et $x = -0{,}1$ m",
+                    "correct": false
+                  },
+                  {
+                    "content": "$z = +0{,}1$ m et $x = -0{,}1$ m",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu viens de voir qu'un solide accroché à un ressort a deux énergies potentielles à additionner. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Un solide de 1 kg est à l'altitude $z = 0{,}2$ m ($g = 10$ N/kg), accroché à un ressort à sa longueur à vide ($x = 0$). Quelle est l'énergie potentielle du système ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : pesanteur et élasticité. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$ et $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : $E_{pp} = 1 \\times 10 \\times 0{,}2 = 2$ J et $E_{pe} = 0$ (ressort à vide), donc $E_p = 2$ J.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Ressort à vide : son énergie élastique est nulle."
+              },
+              {
+                "content": "Un solide accroché à un ressort vertical descend de 0,1 m depuis la position où le ressort est à vide (origine des altitudes). Son altitude vaut alors $z = $ ___ m et l'allongement du ressort vaut $x = $ ___ m.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : l'altitude $z$ est comptée vers le haut, donc elle vaut −0,1 m quand le solide descend. Le ressort devient plus long qu'à vide, donc son allongement est +0,1 m.",
+                "answers": [
+                  {
+                    "content": "−0,1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "+0,1",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "+0,1",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "−0,1",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "0",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une altitude se compte vers le haut ; un allongement est positif si le ressort s'étire."
+              },
+              {
+                "content": "La variation $\\Delta E_p$ ne dépend pas de l'état de référence choisi.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Calculer la variation : $\\Delta E_p = -[W(\\vec{P}) + W(\\vec{T})]$ ne dépend que des positions $A$ et $B$. Changer la référence ajoute la même constante à $E_p(A)$ et à $E_p(B)$, qui disparaît dans la différence.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La constante s'élimine dans la différence."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "L'eau du barrage de Kossou",
+          "statement": "Dans cet exercice, tu étudies l'énergie potentielle de pesanteur de l'eau retenue par le barrage de Kossou. On suppose que l'eau tombe de 50 m de hauteur verticale jusqu'à la turbine et on prend $g = 10$ N/kg. 1 m³ d'eau a une masse de 1 000 kg.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans cet exercice, 1 m³ d'eau a une masse de 1 000 kg. Au barrage de Kossou, on suppose que 1 m³ d'eau est retenu à 50 m au-dessus de la turbine (origine des altitudes à la turbine, $Oz$ vers le haut, $g = 10$ N/kg). Calcule l'énergie potentielle de pesanteur de ce 1 m³ d'eau en haut.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : origine à la turbine, $Oz$ vers le haut ; $m = 1\\,000$ kg et $z = 50$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer et calculer : $E_{pp} = 1\\,000 \\times 10 \\times 50 = 500\\,000$ J, soit 500 kJ.",
+              "answers": [
+                {
+                  "content": "500000",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "1 m³ d'eau (masse 1 000 kg) descend de 50 m au-dessus de la turbine jusqu'à la turbine (origine des altitudes à la turbine, $Oz$ vers le haut, $g = 10$ N/kg). Calcule la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : $z_A = 50$ m et $z_B = 0$. Étape 3 — Calculer : $E_{pp}(A) = 500\\,000$ J et $E_{pp}(B) = 0$. Étape 4 — Variation : $\\Delta E_{pp} = 0 - 500\\,000 = -500\\,000$ J, négative car l'eau descend. On en déduit $W(\\vec{P}) = +500\\,000$ J : le poids est moteur.",
+              "answers": [
+                {
+                  "content": "-500000",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "4 m³ d'eau (masse 4 000 kg) tombent de 50 m de hauteur verticale jusqu'à la turbine ($g = 10$ N/kg). Quel est le travail du poids de cette eau ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : $m = 4\\,000$ kg, $z_A = 50$ m et $z_B = 0$. Étape 2 — Écrire : $W_{AB}(\\vec{P}) = m\\,g\\,(z_A - z_B)$. Étape 3 — Remplacer : $W = 4\\,000 \\times 10 \\times 50$. Étape 4 — Calculer : $W = 2\\,000\\,000$ J, positif car l'eau descend. On retrouve $W(\\vec{P}) = -\\Delta E_{pp}$.",
+              "answers": [
+                {
+                  "content": "2000000",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "On change d'origine : l'altitude zéro est maintenant prise au niveau du lac, en haut ($Oz$ vers le haut, $g = 10$ N/kg). Que vaut l'énergie potentielle de pesanteur de 1 m³ d'eau (1 000 kg) quand elle arrive à la turbine, 50 m plus bas ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : origine au lac, donc la turbine est à $z = -50$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer : $E_{pp} = 1\\,000 \\times 10 \\times (-50) = -500\\,000$ J. La valeur +500 000 J oublie le signe de $z$ : c'est le piège. La valeur 0 J est celle du lac, pas de la turbine.",
+              "answers": [
+                {
+                  "content": "−500 000 J",
+                  "correct": true
+                },
+                {
+                  "content": "+500 000 J",
+                  "correct": false
+                },
+                {
+                  "content": "0 J",
+                  "correct": false
+                },
+                {
+                  "content": "−50 000 J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La variation $\\Delta E_{pp}$ de l'eau qui descend du lac à la turbine dépend de l'origine des altitudes choisie.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Variation : $\\Delta E_{pp} = m\\,g\\,(z_B - z_A)$ ne contient que la différence des altitudes, donc la hauteur de chute, 50 m. Changer l'origine ajoute la même constante aux deux énergies, qui disparaît dans la différence. $\\Delta E_{pp}$ vaut −500 000 J pour 1 m³ avec toute origine.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le débit de l'eau dans les conduites est de 20 m³ par seconde (soit 20 000 kg chaque seconde), avec une chute de 50 m ($g = 10$ N/kg). Quelle est la puissance du travail du poids de l'eau ? Utilise $P = W \\div \\Delta t$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : en $\\Delta t = 1$ s, $m = 20\\,000$ kg tombent de $z_A = 50$ m à $z_B = 0$. Étape 2 — Écrire : $W = m\\,g\\,(z_A - z_B)$. Étape 3 — Calculer : $W = 20\\,000 \\times 10 \\times 50 = 10\\,000\\,000$ J. Puissance : $P = \\dfrac{W}{\\Delta t} = \\dfrac{10\\,000\\,000}{1} = 10\\,000\\,000$ W, soit 10 MW.",
+              "answers": [
+                {
+                  "content": "10000000",
+                  "correct": true
+                }
+              ],
+              "unit": "W",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "title": "Le ressort d'un trampoline",
+          "statement": "Dans cet exercice, tu étudies un ressort de trampoline, de masse négligeable, de raideur $k = 2\\,000$ N/m. Tu utilises les fiches sur le travail de la tension et sur l'énergie potentielle élastique.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un ressort d'un trampoline d'enfant, de masse négligeable, a une raideur $k = 2\\,000$ N/m. Il est allongé de $x = 0{,}1$ m. Quelle est l'intensité de sa tension ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 2\\,000$ N/m et $x = 0{,}1$ m (en mètres). La tension d'un ressort est $T = k\\,x = 2\\,000 \\times 0{,}1 = 200$ N.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Le ressort du trampoline ($k = 2\\,000$ N/m) est allongé de $x = 0{,}1$ m. Calcule son énergie potentielle élastique.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 2\\,000$ N/m et $x = 0{,}1$ m. Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : $x^2 = 0{,}01$, donc $E_{pe} = 1\\,000 \\times 0{,}01 = 10$ J.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le ressort du trampoline ($k = 2\\,000$ N/m) est maintenant allongé de $x = 0{,}2$ m. Calcule son énergie potentielle élastique.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 2\\,000$ N/m et $x = 0{,}2$ m. Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : $x^2 = 0{,}04$, donc $E_{pe} = 1\\,000 \\times 0{,}04 = 40$ J. L'allongement a doublé et l'énergie est multipliée par 4 : on ne trouve pas 20 J.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le ressort du trampoline ($k = 2\\,000$ N/m) passe de l'allongement $x_A = 0{,}1$ m à l'allongement $x_B = 0{,}2$ m. Quel est le travail de sa tension ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 2\\,000$ N/m, $x_A = 0{,}1$ m et $x_B = 0{,}2$ m. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $W = 1\\,000 \\times 0{,}01 - 1\\,000 \\times 0{,}04 = 10 - 40$. Étape 4 — Conclure : $W = -30$ J, négatif car le ressort s'éloigne de sa longueur à vide. On vérifie : $\\Delta E_{pe} = 40 - 10 = +30$ J $= -W$.",
+              "answers": [
+                {
+                  "content": "-30",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Quand le ressort du trampoline passe de l'allongement 0,2 m à sa longueur à vide, le travail de sa tension est positif.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$ avec $x_A = 0{,}2$ m et $x_B = 0$. Étape 3 — Calculer : $W = 1\\,000 \\times 0{,}04 - 0 = +40$ J. Étape 4 — Conclure : positif, car le ressort se rapproche de sa longueur à vide ; c'est $\\Delta E_{pe} = -40$ J.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour calculer la variation de l'énergie potentielle élastique d'un ressort entre deux allongements.",
+              "question_type": "ordering",
+              "explanation": "L'ordre est celui de la méthode : d'abord relever les données en unités SI (Étape 1), puis écrire la formule $E_{pe} = \\frac{1}{2}\\,k\\,x^2$ (Étape 2), calculer l'énergie dans chaque état (Étape 3), enfin soustraire l'énergie finale et l'énergie initiale pour obtenir $\\Delta E_{pe}$, qu'on compare à $-W(\\vec{T})$ (Étape 4). Soustraire avant de calculer chaque énergie est impossible.",
+              "answers": [
+                {
+                  "content": "Relever $k$ et les allongements en mètres."
+                },
+                {
+                  "content": "Écrire la formule $E_{pe} = \\frac{1}{2}\\,k\\,x^2$."
+                },
+                {
+                  "content": "Calculer $E_{pe}(A)$ et $E_{pe}(B)$."
+                },
+                {
+                  "content": "Soustraire : $\\Delta E_{pe} = E_{pe}(B) - E_{pe}(A)$."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le marteau-pilon d'une forge",
+          "statement": "Dans cet exercice, tu étudies un marteau-pilon de masse 400 kg, qu'on soulève à vitesse constante à 1,8 m au-dessus de l'enclume, puis qu'on lâche. On prend $g = 10$ N/kg et on néglige les frottements de l'air.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans l'atelier de forge d'un garage de Yopougon, un marteau-pilon de masse 400 kg est soulevé jusqu'à 1,8 m au-dessus de l'enclume (origine des altitudes sur l'enclume, $Oz$ vers le haut, $g = 10$ N/kg). Calcule son énergie potentielle de pesanteur en haut.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : origine sur l'enclume, $Oz$ vers le haut ; $m = 400$ kg et $z = 1{,}8$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Remplacer et calculer : $E_{pp} = 400 \\times 10 \\times 1{,}8 = 7\\,200$ J.",
+              "answers": [
+                {
+                  "content": "7200",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le marteau-pilon de 400 kg est soulevé de l'enclume ($z_A = 0$) à 1,8 m au-dessus ($z_B = 1{,}8$ m), avec $g = 10$ N/kg. Quel est le travail de son poids pendant la montée ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : $m = 400$ kg, $z_A = 0$ et $z_B = 1{,}8$ m. Étape 2 — Écrire : $W_{AB}(\\vec{P}) = m\\,g\\,(z_A - z_B)$. Étape 3 — Remplacer : $W = 400 \\times 10 \\times (0 - 1{,}8)$. Étape 4 — Calculer : $W = -7\\,200$ J, négatif car le poids est résistant à la montée ; on retrouve $-\\Delta E_{pp}$.",
+              "answers": [
+                {
+                  "content": "-7200",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le marteau-pilon de 400 kg est soulevé à vitesse constante de l'enclume à 1,8 m au-dessus, par une force $\\vec{F}$ exercée par le câble ($g = 10$ N/kg). Utilise le théorème de l'énergie cinétique pour trouver le travail de $\\vec{F}$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Définir : système = le marteau, entre $A$ (enclume) et $B$ (1,8 m). Étape 2 — Faire le bilan : le poids et la force $\\vec{F}$ du câble. Étape 3 — Écrire le théorème : la vitesse est constante, donc $\\Delta E_c = 0 = W(\\vec{P}) + W(\\vec{F})$. Étape 4 — Résoudre : $W(\\vec{F}) = -W(\\vec{P}) = +7\\,200$ J. C'est aussi $\\Delta E_{pp}$ du marteau.",
+              "answers": [
+                {
+                  "content": "7200",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le marteau-pilon de 400 kg, immobile à 1,8 m au-dessus de l'enclume, est lâché sans vitesse initiale. On néglige les frottements de l'air ($g = 10$ N/kg). Avec quelle vitesse, en m/s, frappe-t-il l'enclume ? Utilise le théorème de l'énergie cinétique.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Définir : système = le marteau, de $A$ (1,8 m) à $B$ (enclume), $v_A = 0$. Étape 2 — Faire le bilan : seul le poids agit. Étape 3 — Travail : $W(\\vec{P}) = 400 \\times 10 \\times 1{,}8 = 7\\,200$ J. Étape 4 — Écrire : $\\frac{1}{2} \\times 400 \\times v_B^2 - 0 = 7\\,200$, donc $v_B^2 = \\dfrac{7\\,200}{200} = 36$. Étape 5 — Résoudre : $v_B = 6$ m/s.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "unit": "m/s",
+              "tolerance": 0
+            },
+            {
+              "content": "La montée du marteau-pilon (travail de la force du câble : 7 200 J) dure 4 s. Quelle est la puissance moyenne de cette force ? Utilise $P = W \\div \\Delta t$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $W = 7\\,200$ J et $\\Delta t = 4$ s. Étape 2 — Écrire : $P = \\dfrac{W}{\\Delta t}$. Étape 3 — Remplacer : $P = \\dfrac{7\\,200}{4}$. Étape 4 — Calculer : $P = 1\\,800$ W.",
+              "answers": [
+                {
+                  "content": "1800",
+                  "correct": true
+                }
+              ],
+              "unit": "W",
+              "tolerance": 0
+            },
+            {
+              "content": "Le marteau-pilon de 400 kg est à 1,8 m au-dessus de l'enclume. Explique pourquoi on peut choisir une autre origine des altitudes : montre que l'énergie potentielle de pesanteur change mais pas sa variation entre l'enclume et ce point. Prends comme exemple une origine 1 m sous l'enclume ($g = 10$ N/kg).",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : $E_{pp} = m\\,g\\,z$ dépend de l'altitude $z$, donc de l'origine choisie. Avec l'origine sur l'enclume, l'enclume est à $z = 0$ et le marteau à $z = 1{,}8$ m, donc $E_{pp} = 7\\,200$ J en haut et $0$ J sur l'enclume. Avec l'origine 1 m sous l'enclume, l'enclume est à $z = 1$ m et le marteau à $z = 2{,}8$ m : $E_{pp} = 400 \\times 10 \\times 1 = 4\\,000$ J sur l'enclume et $400 \\times 10 \\times 2{,}8 = 11\\,200$ J en haut. Les valeurs changent, mais $\\Delta E_{pp} = 11\\,200 - 4\\,000 = 7\\,200$ J, comme avec la première origine : $\\Delta E_{pp} = m\\,g\\,(z_B - z_A)$ ne dépend que de la différence d'altitudes, donc de la hauteur $1{,}8$ m. Barème : calcul avec la première origine (0,5 point), calcul avec la seconde (0,5 point), comparaison des variations (0,5 point), conclusion en une phrase (0,5 point).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Les énergies calculées avec les deux origines (0 et 7 200 J ; 4 000 et 11 200 J)",
+                "La variation vaut 7 200 J dans les deux cas",
+                "La raison : seule la différence d'altitudes compte",
+                "Unités et signes corrects"
+              ],
+              "starter": "Avec l'origine sur l'enclume…"
+            }
+          ]
+        },
+        {
+          "title": "Un chariot lancé par un ressort",
+          "statement": "Dans cet exercice, un ressort lance un chariot de masse 2 kg sur un rail horizontal sans frottement, puis sur une rampe sans frottement. Le ressort, de masse négligeable, a une raideur $k = 800$ N/m. On prend $g = 10$ N/kg.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans un atelier d'Abidjan, un chariot de masse 2 kg est posé sur un rail horizontal sans frottement, contre un ressort de raideur $k = 800$ N/m comprimé de 0,1 m. Quelle est l'énergie potentielle élastique initiale du ressort ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 800$ N/m et $x = -0{,}1$ m (comprimé). Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : $x^2 = 0{,}01$, donc $E_{pe} = 400 \\times 0{,}01 = 4$ J.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Le ressort ($k = 800$ N/m), comprimé de 0,1 m ($x_A = -0{,}1$ m), se détend jusqu'à sa longueur à vide ($x_B = 0$) en poussant le chariot. Quel est le travail de sa tension pendant la détente ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever : $k = 800$ N/m, $x_A = -0{,}1$ m et $x_B = 0$. Étape 2 — Écrire : $W = \\frac{1}{2}\\,k\\,x_A^2 - \\frac{1}{2}\\,k\\,x_B^2$. Étape 3 — Calculer : $W = 400 \\times 0{,}01 - 0$. Étape 4 — Conclure : $W = 4$ J, positif car le ressort revient vers sa longueur à vide. Ce travail vaut $-\\Delta E_{pe} = 4$ J.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "Pendant la détente, le poids du chariot et la réaction du rail horizontal ont un travail nul.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Définir : système = le chariot sur un rail horizontal. Étape 2 — Faire le bilan : le poids est vertical et la réaction du rail, sans frottement, est perpendiculaire au rail. Étape 3 — Calculer chaque travail : ces forces sont perpendiculaires au déplacement horizontal, donc $W = F\\,d\\,\\cos 90° = 0$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de 2 kg, parti du repos, quitte le ressort quand celui-ci est à sa longueur à vide. Le travail de la tension a été de 4 J. Quelle est sa vitesse en m/s ? Utilise le théorème de l'énergie cinétique.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Définir : système = le chariot, de $A$ (repos, $v_A = 0$) à $B$ (ressort à vide). Étape 2 — Faire le bilan : poids et réaction (travail nul) et tension du ressort (4 J). Étape 3 — Écrire le théorème : $\\frac{1}{2} \\times 2 \\times v_B^2 - 0 = 4$. Étape 4 — Résoudre : $v_B^2 = 4$, donc $v_B = 2$ m/s.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "unit": "m/s",
+              "tolerance": 0
+            },
+            {
+              "content": "Le chariot de 2 kg, de vitesse 2 m/s, aborde ensuite une rampe sans frottement et s'arrête après avoir monté d'une hauteur $h$ ($g = 10$ N/kg). Calcule $h$ en mètres avec le théorème de l'énergie cinétique : seul le poids travaille, avec $W(\\vec{P}) = -m\\,g\\,h$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Définir : $A$ au bas de la rampe ($v_A = 2$ m/s) et $B$ à l'arrêt ($v_B = 0$). Étape 2 — Faire le bilan : le poids travaille, la réaction de la rampe est perpendiculaire au déplacement. Étape 3 — Écrire le théorème : $0 - \\frac{1}{2} \\times 2 \\times 2^2 = -2 \\times 10 \\times h$, soit $-4 = -20\\,h$. Étape 4 — Résoudre : $h = \\dfrac{4}{20} = 0{,}2$ m.",
+              "answers": [
+                {
+                  "content": "0,2",
+                  "correct": true
+                }
+              ],
+              "unit": "m",
+              "tolerance": 0
+            },
+            {
+              "content": "Le chariot s'arrête 0,2 m plus haut que le bas de la rampe. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur entre le bas de la rampe et l'arrêt ($m = 2$ kg, $g = 10$ N/kg) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Choisir : $m = 2$ kg, $z_A = 0$ au bas de la rampe et $z_B = 0{,}2$ m. Étape 2 — Écrire : $E_{pp} = m\\,g\\,z$. Étape 3 — Calculer : $E_{pp}(B) = 2 \\times 10 \\times 0{,}2 = 4$ J et $E_{pp}(A) = 0$. Étape 4 — Variation : $\\Delta E_{pp} = 4$ J, soit $-W(\\vec{P}) = -(-4) = 4$ J.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "J",
+              "tolerance": 0
+            },
+            {
+              "content": "On comprime le ressort de 0,2 m au lieu de 0,1 m (le chariot est identique, $k = 800$ N/m). Par combien est multipliée l'énergie potentielle élastique initiale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Écrire : $E_{pe} = \\frac{1}{2}\\,k\\,x^2$. Étape 3 — Remplacer : avec $x = 0{,}2$ m, $E_{pe} = 400 \\times 0{,}04 = 16$ J au lieu de 4 J. Elle est multipliée par 4 : l'énergie varie comme le carré de la compression, pas proportionnellement (le facteur 2 serait faux).",
+              "answers": [
+                {
+                  "content": "Par 4",
+                  "correct": true
+                },
+                {
+                  "content": "Par 2",
+                  "correct": false
+                },
+                {
+                  "content": "Par 8",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne change pas",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
