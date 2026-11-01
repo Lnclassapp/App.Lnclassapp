@@ -15,7 +15,7 @@
 | 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 | 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
-| 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #PR |
+| 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
 
 ## À faire valider par un enseignant
 
