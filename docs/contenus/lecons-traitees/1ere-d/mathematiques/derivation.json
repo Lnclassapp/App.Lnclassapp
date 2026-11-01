@@ -1,0 +1,1449 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Dérivation",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "blue",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Calculer un nombre dérivé avec la définition",
+          "remember": "Soit $f$ définie sur un intervalle $I$ et $a\\in I$. Pour $h\\neq0$ tel que $a+h\\in I$, le **taux d'accroissement** de $f$ entre $a$ et $a+h$ est $T(h)=\\dfrac{f(a+h)-f(a)}{h}$. La fonction $f$ est **dérivable en $a$** si $T(h)$ a une limite réelle quand $h\\to0$ ; cette limite est le **nombre dérivé** de $f$ en $a$ : $f'(a)=\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}=\\lim_{x\\to a}\\dfrac{f(x)-f(a)}{x-a}$. Les limites quand $h\\to0^-$ et $h\\to0^+$ sont les nombres dérivés à gauche et à droite : $f$ est dérivable en $a$ si et seulement si elles existent et sont égales. Si $f$ est dérivable en $a$, alors $f$ est continue en $a$ ; la réciproque est fausse.",
+          "method": [
+            "Écrire le taux d'accroissement $\\dfrac{f(a+h)-f(a)}{h}$ en calculant $f(a+h)$ et $f(a)$.",
+            "Simplifier : développer le numérateur, puis simplifier par $h$ (avec $h\\neq0$).",
+            "Calculer la limite de l'expression simplifiée quand $h\\to0$ (à gauche et à droite si l'expression change ou contient une valeur absolue).",
+            "Conclure : si la limite est un réel $\\ell$, dire que $f$ est dérivable en $a$ et écrire $f'(a)=\\ell$ ; sinon, dire que $f$ n'est pas dérivable en $a$."
+          ],
+          "example": {
+            "statement": "Un sprinter parcourt $d(t)=2t^2$ mètres en $t$ secondes ($t\\geq0$). Calculer sa vitesse instantanée à $t=3$, c'est-à-dire le nombre dérivé $d'(3)$.",
+            "steps": [
+              "Écrire : $d(3)=2\\times9=18$ et $d(3+h)=2(3+h)^2=18+12h+2h^2$, donc $T(h)=\\dfrac{18+12h+2h^2-18}{h}$.",
+              "Simplifier : le numérateur vaut $12h+2h^2=h(12+2h)$, donc $T(h)=12+2h$ pour $h\\neq0$.",
+              "Calculer : $\\lim_{h\\to0}(12+2h)=12$.",
+              "Conclure : $d$ est dérivable en $3$ et $d'(3)=12$. La vitesse instantanée à $t=3$ est $12$ m/s."
+            ]
+          },
+          "pitfall": "Ne pas remplacer $h$ par $0$ dans le taux d'accroissement avant de simplifier. Contre-exemple : pour $f(x)=x^2$ et $a=1$, $T(h)=\\dfrac{(1+h)^2-1}{h}$ donne $\\dfrac00$ si l'on pose $h=0$ : ce n'est pas un nombre. Après simplification, $T(h)=2+h$, et la limite est $2$. Simplifie d'abord par $h$, calcule la limite ensuite.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer des nombres dérivés avec la méthode",
+            "statement": "Dans cet exercice, tu calcules des nombres dérivés avec la méthode de la fiche : écrire, simplifier, calculer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Soit $f(x)=x^2$. Quel est le nombre dérivé $f'(3)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $f(3)=9$ et $f(3+h)=(3+h)^2=9+6h+h^2$, donc $T(h)=\\dfrac{9+6h+h^2-9}{h}$. Étape 2 — Simplifier : le numérateur vaut $6h+h^2=h(6+h)$, donc $T(h)=6+h$. Étape 3 — Calculer : $\\lim_{h\\to0}(6+h)=6$. Étape 4 — Conclure : $f$ est dérivable en $3$ et $f'(3)=6$. La proposition $9$ est la valeur $f(3)$, pas le nombre dérivé ; $0$ vient du numérateur seul quand on pose $h=0$ ; $3$ est la valeur de $a$.",
+                "answers": [
+                  {
+                    "content": "$6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=3x^2+x$. Calcule le nombre dérivé $f'(2)$ avec la définition.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $f(2)=12+2=14$ et $f(2+h)=3(2+h)^2+(2+h)=3(4+4h+h^2)+2+h=14+13h+3h^2$, donc $T(h)=\\dfrac{14+13h+3h^2-14}{h}$. Étape 2 — Simplifier : $T(h)=\\dfrac{13h+3h^2}{h}=13+3h$. Étape 3 — Calculer : $\\lim_{h\\to0}(13+3h)=13$. Étape 4 — Conclure : $f'(2)=13$. Si l'on oublie le terme $x$ de $f$, on trouve $12$ ; si l'on oublie de développer $(2+h)^2$, on se trompe de signe ou de coefficient.",
+                "answers": [
+                  {
+                    "content": "13",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^2-2x$. Calcule le nombre dérivé $f'(1)$ avec la définition.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $f(1)=1-2=-1$ et $f(1+h)=(1+h)^2-2(1+h)=1+2h+h^2-2-2h=-1+h^2$, donc $T(h)=\\dfrac{-1+h^2-(-1)}{h}$. Étape 2 — Simplifier : $T(h)=\\dfrac{h^2}{h}=h$. Étape 3 — Calculer : $\\lim_{h\\to0}h=0$. Étape 4 — Conclure : $f$ est dérivable en $1$ et $f'(1)=0$ : le nombre dérivé peut être nul, ce qui ne veut pas dire que $f(1)$ est nul (ici $f(1)=-1$).",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour calculer un nombre dérivé avec la définition.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire : on commence par le taux d'accroissement, avec $f(a+h)$ et $f(a)$. Étape 2 — Simplifier : on développe et on simplifie par $h$, sinon la limite donne $\\frac00$. Étape 3 — Calculer : on prend la limite de l'expression simplifiée quand $h\\to0$. Étape 4 — Conclure : on nomme cette limite $f'(a)$. Calculer la limite avant de simplifier est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Écrire le taux d'accroissement $\\dfrac{f(a+h)-f(a)}{h}$."
+                  },
+                  {
+                    "content": "Simplifier le numérateur, puis simplifier par $h$."
+                  },
+                  {
+                    "content": "Calculer la limite quand $h\\to0$."
+                  },
+                  {
+                    "content": "Conclure : $f'(a)$ est cette limite si elle est réelle."
+                  }
+                ]
+              },
+              {
+                "content": "On veut calculer $f'(2)$ pour $f(x)=x^2$. Que donne le remplacement direct de $h$ par $0$ dans $\\dfrac{(2+h)^2-4}{h}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $T(h)=\\dfrac{(2+h)^2-4}{h}$. En posant $h=0$ : numérateur $4-4=0$ et dénominateur $0$, soit $\\frac00$. Étape 2 — Simplifier : $(2+h)^2-4=4h+h^2=h(4+h)$, donc $T(h)=4+h$. Étape 3 — Calculer : $\\lim_{h\\to0}(4+h)=4$. Étape 4 — Conclure : $f'(2)=4$. Mais le remplacement direct ne donne pas $4$ : il donne $\\frac00$, qui n'a pas de valeur. La proposition $0$ ne regarde que le numérateur ; $8$ est le double du résultat $4$, une erreur de développement.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac00$ : ce n'est pas un nombre, il faut simplifier avant",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$ : le nombre dérivé est nul",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4$ : le nombre dérivé vaut $4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8$ : le nombre dérivé vaut $8$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $f(x)=|x|$ est dérivable en $0$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $f(0)=0$ et $T(h)=\\dfrac{|h|}{h}$. Étape 2 — Simplifier : pour $h>0$, $|h|=h$ et $T(h)=1$ ; pour $h<0$, $|h|=-h$ et $T(h)=-1$. Étape 3 — Calculer : la limite à droite vaut $1$ et la limite à gauche vaut $-1$. Étape 4 — Conclure : ces deux limites sont différentes, donc $f$ n'est pas dérivable en $0$, bien qu'elle soit continue en $0$ ($|h|\\to0$). Continue ne veut pas dire dérivable.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire et simplifier un taux d'accroissement.",
+            "questions": [
+              {
+                "content": "Un coureur parcourt $d(t)=4t^2$ mètres en $t$ secondes. Pour $h\\neq0$, le taux d'accroissement entre $t=2$ et $t=2+h$ vaut ___ $+$ ___ $\\times h$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $d(2)=16$ et $d(2+h)=4(4+4h+h^2)=16+16h+4h^2$. Étape 2 — Simplifier : $T(h)=\\dfrac{16h+4h^2}{h}=16+4h$. Les deux nombres cherchés sont $16$ et $4$.",
+                "hint": "Développe $(2+h)^2$, puis retire $d(2)$ avant de diviser par $h$.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=2x^2+3x$. Calcule $f'(1)$ avec la définition.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $f(1)=5$ et $f(1+h)=2(1+2h+h^2)+3+3h=5+7h+2h^2$. Étape 2 — Simplifier : $T(h)=\\dfrac{7h+2h^2}{h}=7+2h$. Étape 3 — Calculer : $\\lim_{h\\to0}(7+2h)=7$. Étape 4 — Conclure : $f'(1)=7$.",
+                "hint": "Calcule d'abord $f(1)$ puis $f(1+h)$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour $f(x)=|x|$ et $h<0$, le taux d'accroissement en $0$ vaut $\\dfrac{|h|}{h}=$ ___",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : $T(h)=\\dfrac{|h|}{h}$. Étape 2 — Simplifier : pour $h<0$, $|h|=-h$, donc $T(h)=\\dfrac{-h}{h}=-1$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true
+                  }
+                ],
+                "hint": "Quand $h$ est négatif, $|h|$ est l'opposé de $h$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une fonction dérivée : dérivées usuelles et somme",
+          "remember": "Une fonction est dérivable sur un intervalle si elle l'est en chaque point de cet intervalle ; sa **fonction dérivée** $f'$ associe à $x$ le nombre dérivé $f'(x)$. Dérivées usuelles : $f(x)=k$ (constante) donne $f'(x)=0$ ; $f(x)=x$ donne $f'(x)=1$ ; $f(x)=x^n$ ($n\\geq2$ entier) donne $f'(x)=nx^{n-1}$ sur $\\mathbb R$ ; $f(x)=\\dfrac1x$ donne $f'(x)=-\\dfrac1{x^2}$ sur $]-\\infty\\,;0[$ et sur $]0\\,;+\\infty[$ ; $f(x)=\\sqrt x$ donne $f'(x)=\\dfrac1{2\\sqrt x}$ sur $]0\\,;+\\infty[$. Opérations : si $u$ et $v$ sont dérivables, $(u+v)'=u'+v'$ et, pour un réel $k$, $(ku)'=ku'$. Un polynôme est dérivable sur $\\mathbb R$.",
+          "method": [
+            "Repérer les termes de la somme et la fonction usuelle de chacun ($x^n$, $\\frac1x$, $\\sqrt x$, constante), avec son coefficient.",
+            "Dériver chaque terme avec le tableau des dérivées usuelles, en gardant le coefficient : $(ku)'=ku'$.",
+            "Additionner les dérivées des termes : $(u+v)'=u'+v'$.",
+            "Simplifier l'expression de $f'(x)$ et donner l'ensemble sur lequel elle est valable."
+          ],
+          "example": {
+            "statement": "Le coût de fabrication de $x$ centaines de ballons est $C(x)=x^3-6x^2+20x+50$ (en milliers de FCFA), pour $x\\geq0$. Calculer $C'(x)$.",
+            "steps": [
+              "Repérer : quatre termes, $x^3$, $-6x^2$ (coefficient $-6$), $20x$ (coefficient $20$) et la constante $50$.",
+              "Dériver : $(x^3)'=3x^2$ ; $(-6x^2)'=-6\\times2x=-12x$ ; $(20x)'=20$ ; $(50)'=0$.",
+              "Additionner : $C'(x)=3x^2-12x+20+0$.",
+              "Simplifier : $C'(x)=3x^2-12x+20$, valable sur $[0\\,;+\\infty[$ (et même sur $\\mathbb R$, car $C$ est un polynôme)."
+            ]
+          },
+          "pitfall": "Ne pas oublier de baisser l'exposant ni de garder la constante : sa dérivée est $0$. Contre-exemple : $f(x)=x^2$ a pour nombre dérivé $f'(3)=6$ (calculé avec la définition) ; la bonne formule $2x$ donne bien $6$, alors que « $x$ » donne $3$ et « $2x^2$ » donne $18$. De même $(x^2+7)'=2x$, et non $2x+7$ : une constante a pour dérivée $0$.",
+          "figure": null,
+          "exercise": {
+            "title": "Dériver avec les fonctions usuelles",
+            "statement": "Dans cet exercice, tu dérives des fonctions avec la méthode de la fiche : repérer, dériver, additionner, simplifier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la dérivée de $f(x)=4x^3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un seul terme, $x^3$ avec le coefficient $4$. Étape 2 — Dériver : $(x^3)'=3x^2$ et $(4x^3)'=4\\times3x^2=12x^2$. Étape 3 — Additionner : il n'y a qu'un terme. Étape 4 — Simplifier : $f'(x)=12x^2$, sur $\\mathbb R$. La proposition $12x^3$ oublie de baisser l'exposant ; $4x^2$ oublie le facteur $3$ ; $3x^2$ oublie le coefficient $4$.",
+                "answers": [
+                  {
+                    "content": "$12x^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$12x^3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4x^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3x^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x)=x^2-5x+9$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : trois termes, $x^2$, $-5x$ et la constante $9$. Étape 2 — Dériver : $(x^2)'=2x$ ; $(-5x)'=-5$ ; $(9)'=0$. Étape 3 — Additionner : $2x-5+0$. Étape 4 — Simplifier : $f'(x)=2x-5$, sur $\\mathbb R$. La proposition $2x+4$ garde $9$ comme si sa dérivée était $9$ ; $x-5$ oublie le facteur $2$ ; $2x-5x+9$ ne dérive pas $-5x$.",
+                "answers": [
+                  {
+                    "content": "$2x-5$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2x+4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x-5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2x-5x+9$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^3-3x^2+5x-7$. Calcule $f'(2)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : quatre termes, $x^3$, $-3x^2$, $5x$ et $-7$. Étape 2 — Dériver : $(x^3)'=3x^2$ ; $(-3x^2)'=-6x$ ; $(5x)'=5$ ; $(-7)'=0$. Étape 3 — Additionner : $f'(x)=3x^2-6x+5$. Étape 4 — Simplifier puis remplacer $x$ par $2$ : $f'(2)=3\\times4-6\\times2+5=12-12+5=5$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur $]0\\,;+\\infty[$, quelle est la dérivée de $f(x)=3\\sqrt x-\\dfrac2x$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : deux termes, $3\\sqrt x$ (coefficient $3$) et $-\\frac2x=-2\\times\\frac1x$ (coefficient $-2$). Étape 2 — Dériver : $(3\\sqrt x)'=\\dfrac{3}{2\\sqrt x}$ et $\\left(-2\\times\\frac1x\\right)'=-2\\times\\left(-\\frac1{x^2}\\right)=\\dfrac2{x^2}$. Étape 3 — Additionner : $\\dfrac3{2\\sqrt x}+\\dfrac2{x^2}$. Étape 4 — Simplifier : c'est le résultat, valable sur $]0\\,;+\\infty[$. La proposition $\\dfrac3{2\\sqrt x}-\\dfrac2{x^2}$ oublie que $(\\frac1x)'$ est négatif et que le coefficient est $-2$ ; $\\dfrac3{\\sqrt x}+\\dfrac2{x^2}$ oublie le $2$ de $2\\sqrt x$ ; $\\dfrac3{2\\sqrt x}-\\dfrac2x$ garde $\\frac2x$ au lieu de $\\frac2{x^2}$.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac3{2\\sqrt x}+\\dfrac2{x^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac3{2\\sqrt x}-\\dfrac2{x^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac3{\\sqrt x}+\\dfrac2{x^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac3{2\\sqrt x}-\\dfrac2x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque fonction à sa dérivée.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : quatre fonctions usuelles. Étape 2 — Dériver avec le tableau : $(x^2)'=2x$ ; $\\left(\\frac1x\\right)'=-\\frac1{x^2}$ ; $(\\sqrt x)'=\\frac1{2\\sqrt x}$ ; $(5x)'=5\\times1=5$. Étape 3 — Additionner : aucune somme ici. Étape 4 — Simplifier : on relie chaque fonction à son résultat. L'erreur fréquente est d'écrire $\\left(\\frac1x\\right)'=\\frac1{x^2}$ en oubliant le signe moins.",
+                "answers": [
+                  {
+                    "content": "$x^2$",
+                    "match": "$2x$"
+                  },
+                  {
+                    "content": "$\\dfrac1x$",
+                    "match": "$-\\dfrac1{x^2}$"
+                  },
+                  {
+                    "content": "$\\sqrt x$",
+                    "match": "$\\dfrac1{2\\sqrt x}$"
+                  },
+                  {
+                    "content": "$5x$",
+                    "match": "$5$"
+                  }
+                ]
+              },
+              {
+                "content": "La dérivée de $f(x)=x^2+7$ est $f'(x)=2x+7$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : deux termes, $x^2$ et la constante $7$. Étape 2 — Dériver : $(x^2)'=2x$ et $(7)'=0$. Étape 3 — Additionner : $2x+0$. Étape 4 — Simplifier : $f'(x)=2x$. L'affirmation est fausse : une constante a pour dérivée $0$, elle ne reste pas dans $f'$. Contrôle : $f'(3)=6$, comme pour $x^2$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à dériver terme par terme.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=6x^2-4x+3$, on a $f'(x)=$ ___ $x-$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $6x^2$, $-4x$ et la constante $3$. Étape 2 — Dériver : $(6x^2)'=12x$ ; $(-4x)'=-4$ ; $(3)'=0$. Étape 3 — Additionner : $12x-4$. Les deux nombres cherchés sont $12$ et $4$.",
+                "hint": "La dérivée de $6x^2$ est $6\\times 2x$ ; celle de la constante est $0$.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le coût de $x$ centaines de maillots est $C(x)=0{,}1x^2+4x+20$ (en milliers de FCFA). Calcule $C'(10)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $0{,}1x^2$, $4x$ et $20$. Étape 2 — Dériver : $(0{,}1x^2)'=0{,}2x$ ; $(4x)'=4$ ; $(20)'=0$. Étape 3 — Additionner : $C'(x)=0{,}2x+4$. Étape 4 — Simplifier puis remplacer : $C'(10)=2+4=6$.",
+                "hint": "Dérive d'abord $C(x)$, puis remplace $x$ par $10$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur $]0\\,;+\\infty[$, la dérivée de $f(x)=\\sqrt x$ est ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la fonction usuelle $\\sqrt x$. Étape 2 — Dériver : la formule du tableau donne $\\dfrac1{2\\sqrt x}$. La proposition $\\frac1{\\sqrt x}$ oublie le $2$ ; $-\\frac1{x^2}$ est la dérivée de $\\frac1x$ ; $2\\sqrt x$ met le $2$ au numérateur alors qu'il est au dénominateur dans la formule.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac1{2\\sqrt x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac1{\\sqrt x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2\\sqrt x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac1{x^2}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "C'est une formule du tableau des dérivées usuelles."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dériver un produit ou un quotient",
+          "remember": "Si $u$ et $v$ sont dérivables sur un intervalle $I$ : $(uv)'=u'v+uv'$. Si de plus $v$ ne s'annule pas sur $I$ : $\\left(\\dfrac1v\\right)'=-\\dfrac{v'}{v^2}$ et $\\left(\\dfrac uv\\right)'=\\dfrac{u'v-uv'}{v^2}$. Une fonction rationnelle est dérivable sur chaque intervalle où son dénominateur ne s'annule pas.",
+          "method": [
+            "Identifier $u$ et $v$ (les deux facteurs, ou le numérateur et le dénominateur) et choisir la formule.",
+            "Dériver $u$ et $v$ séparément pour obtenir $u'$ et $v'$.",
+            "Appliquer la formule : $u'v+uv'$ pour un produit, $\\dfrac{u'v-uv'}{v^2}$ pour un quotient.",
+            "Simplifier : développer et réduire le numérateur, puis factoriser si possible."
+          ],
+          "example": {
+            "statement": "Le coût moyen d'un maillot, en milliers de FCFA, pour $x$ centaines de maillots commandés est $C(x)=\\dfrac{2x+3}{x+1}$ sur $[0\\,;+\\infty[$. Calculer $C'(x)$.",
+            "steps": [
+              "Identifier : $C=\\dfrac uv$ avec $u(x)=2x+3$ et $v(x)=x+1$ ; $v(x)>0$ sur $[0\\,;+\\infty[$, donc la formule du quotient s'applique.",
+              "Dériver : $u'(x)=2$ et $v'(x)=1$.",
+              "Appliquer : $C'(x)=\\dfrac{2(x+1)-(2x+3)\\times1}{(x+1)^2}$.",
+              "Simplifier : le numérateur vaut $2x+2-2x-3=-1$, donc $C'(x)=-\\dfrac1{(x+1)^2}$, qui est négatif."
+            ]
+          },
+          "pitfall": "Ne pas dériver un produit ou un quotient « facteur par facteur ». Contre-exemple : avec $u(x)=x$ et $v(x)=x$, le produit $x^2$ a pour dérivée $2x$, qui vaut $6$ en $x=3$, alors que $u'v'=1\\times1=1$. Pour un quotient, $\\frac{x^2}{x}=x$ a pour dérivée $1$, alors que $\\frac{u'}{v'}=\\frac{2x}{1}$ vaut $6$ en $x=3$.",
+          "figure": null,
+          "exercise": {
+            "title": "Dériver des produits et des quotients",
+            "statement": "Dans cet exercice, tu dérives des produits et des quotients avec la méthode de la fiche : identifier, dériver, appliquer, simplifier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la dérivée de $f(x)=x(x+3)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : un produit $uv$ avec $u(x)=x$ et $v(x)=x+3$. Étape 2 — Dériver : $u'(x)=1$ et $v'(x)=1$. Étape 3 — Appliquer : $f'(x)=u'v+uv'=1\\times(x+3)+x\\times1$. Étape 4 — Simplifier : $f'(x)=2x+3$. Contrôle : $f(x)=x^2+3x$ donne bien $2x+3$. La proposition $1$ est $u'v'$ ; $x+3$ est $u'v$ seul ; $2x$ oublie le $3$.",
+                "answers": [
+                  {
+                    "content": "$2x+3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x+3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=(2x+1)(x^2-3)$. Calcule $f'(2)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : un produit avec $u(x)=2x+1$ et $v(x)=x^2-3$. Étape 2 — Dériver : $u'(x)=2$ et $v'(x)=2x$. Étape 3 — Appliquer : $f'(x)=2(x^2-3)+(2x+1)\\times2x$. Étape 4 — Simplifier : $f'(x)=2x^2-6+4x^2+2x=6x^2+2x-6$, puis $f'(2)=24+4-6=22$. Contrôle : $f(x)=2x^3+x^2-6x-3$ donne $f'(x)=6x^2+2x-6$.",
+                "answers": [
+                  {
+                    "content": "22",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur $]-2\\,;+\\infty[$, quelle est la dérivée de $g(x)=\\dfrac1{x+2}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $g=\\dfrac1v$ avec $v(x)=x+2$, qui ne s'annule pas sur $]-2\\,;+\\infty[$. Étape 2 — Dériver : $v'(x)=1$. Étape 3 — Appliquer : $g'(x)=-\\dfrac{v'}{v^2}=-\\dfrac1{(x+2)^2}$. Étape 4 — Simplifier : rien à réduire. La proposition $\\frac1{(x+2)^2}$ oublie le signe moins ; $-\\frac1{x+2}$ oublie le carré ; $-\\frac1{x^2}$ oublie le $+2$.",
+                "answers": [
+                  {
+                    "content": "$-\\dfrac1{(x+2)^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac1{(x+2)^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac1{x+2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac1{x^2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur $\\mathbb R$, quelle est la dérivée de $h(x)=\\dfrac{x}{x^2+1}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x$ et $v(x)=x^2+1$, qui ne s'annule jamais. Étape 2 — Dériver : $u'(x)=1$ et $v'(x)=2x$. Étape 3 — Appliquer : $h'(x)=\\dfrac{1\\times(x^2+1)-x\\times2x}{(x^2+1)^2}$. Étape 4 — Simplifier : le numérateur vaut $x^2+1-2x^2=1-x^2$. La proposition $\\frac1{2x}$ fait $\\frac{u'}{v'}$ ; $\\frac{x^2-1}{(x^2+1)^2}$ inverse $u'v-uv'$ ; $\\frac{x^2+1-2x}{(x^2+1)^2}$ oublie de multiplier $u$ par $v'$ en entier.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1-x^2}{(x^2+1)^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac1{2x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{x^2-1}{(x^2+1)^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{x^2+1-2x}{(x^2+1)^2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $k(x)=\\dfrac{3x-1}{x+2}$ sur $]-2\\,;+\\infty[$. Calcule $k'(-1)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=3x-1$ et $v(x)=x+2$. Étape 2 — Dériver : $u'(x)=3$ et $v'(x)=1$. Étape 3 — Appliquer : $k'(x)=\\dfrac{3(x+2)-(3x-1)\\times1}{(x+2)^2}$. Étape 4 — Simplifier : le numérateur vaut $3x+6-3x+1=7$, donc $k'(x)=\\dfrac7{(x+2)^2}$, et $k'(-1)=\\dfrac7{1}=7$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La dérivée de $f(x)=(x+2)(x+5)$ est $f'(x)=1$, car $(x+2)'=1$ et $(x+5)'=1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : un produit avec $u(x)=x+2$ et $v(x)=x+5$. Étape 2 — Dériver : $u'(x)=1$ et $v'(x)=1$. Étape 3 — Appliquer : $f'(x)=1\\times(x+5)+(x+2)\\times1$. Étape 4 — Simplifier : $f'(x)=2x+7$. L'affirmation est fausse : on ne multiplie pas $u'$ et $v'$. Contrôle : $f(x)=x^2+7x+10$ donne $2x+7$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à identifier $u$ et $v$ et à appliquer la formule.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=(4x-1)(x+3)$, on pose $u(x)=4x-1$ et $v(x)=x+3$. Alors $u'(x)=$ ___ et $v'(x)=$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x)=4x-1$ et $v(x)=x+3$. Étape 2 — Dériver : $u'(x)=4$ et $v'(x)=1$.",
+                "hint": "La dérivée de $ax+b$ est $a$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=\\dfrac{x+1}{x-1}$ sur $]1\\,;+\\infty[$. Calcule $f'(3)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x)=x+1$ et $v(x)=x-1$. Étape 2 — Dériver : $u'=1$ et $v'=1$. Étape 3 — Appliquer : $f'(x)=\\dfrac{(x-1)-(x+1)}{(x-1)^2}$. Étape 4 — Simplifier : $f'(x)=\\dfrac{-2}{(x-1)^2}$, donc $f'(3)=\\dfrac{-2}{4}=-0{,}5$.",
+                "hint": "Le numérateur est $u'v-uv'$, dans cet ordre.",
+                "answers": [
+                  {
+                    "content": "-0,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour un quotient $f=\\dfrac uv$ avec $v$ non nulle, $f'=$ ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : un quotient $\\frac uv$. Étape 3 — Appliquer : la formule est $\\dfrac{u'v-uv'}{v^2}$, avec $u'v$ en premier. La proposition avec $+$ est la formule du produit au numérateur ; $\\frac{u'}{v'}$ est le piège de la fiche ; $\\frac{uv'-u'v}{v^2}$ inverse les deux termes.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{u'v-uv'}{v^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{u'v+uv'}{v^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{u'}{v'}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{uv'-u'v}{v^2}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la formule de la fiche : le dénominateur est un carré."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer l'équation de la tangente en un point",
+          "remember": "Si $f$ est dérivable en $a$, la courbe $\\mathcal C_f$ admet au point $A(a\\,;f(a))$ une **tangente** de coefficient directeur $f'(a)$. Son équation est $y=f'(a)(x-a)+f(a)$. Si $f'(a)=0$, la tangente est horizontale : $y=f(a)$. Le nombre dérivé se lit aussi comme une vitesse instantanée ou comme la variation locale d'une grandeur : si $d(t)$ est la distance parcourue, $d'(a)$ est la vitesse à l'instant $a$. Une tangente passe toujours par le point de la courbe où elle touche.",
+          "method": [
+            "Calculer $f(a)$ : l'ordonnée du point de tangence.",
+            "Dériver : calculer $f'(x)$, puis le nombre dérivé $f'(a)$.",
+            "Appliquer la formule $y=f'(a)(x-a)+f(a)$ avec les deux nombres trouvés.",
+            "Simplifier pour écrire l'équation réduite $y=mx+p$."
+          ],
+          "example": {
+            "statement": "Le coût de fabrication de $x$ centaines de ballons est $C(x)=x^2-4x+9$ (en milliers de FCFA). Déterminer l'équation de la tangente à la courbe de $C$ au point d'abscisse $4$.",
+            "steps": [
+              "Calculer : $C(4)=16-16+9=9$, donc le point de tangence est $(4\\,;9)$.",
+              "Dériver : $C'(x)=2x-4$, donc $C'(4)=8-4=4$.",
+              "Appliquer : $y=4(x-4)+9$.",
+              "Simplifier : $y=4x-16+9$, soit $y=4x-7$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le « $-a$ » ni le « $+f(a)$ », et ne pas confondre $f'(a)$ avec $f(a)$. Contre-exemple : pour $f(x)=x^2$ et $a=1$, la tangente est $y=2(x-1)+1=2x-1$. La droite $y=2x+1$ (faute fréquente) vaut $3$ en $x=1$, alors que la courbe passe par $(1\\,;1)$ : ce n'est pas la tangente. Vérifie toujours que la droite passe par le point de la courbe.",
+          "figure": null,
+          "exercise": {
+            "title": "Déterminer des tangentes avec la méthode",
+            "statement": "Dans cet exercice, tu détermines des équations de tangentes avec la méthode de la fiche : calculer, dériver, appliquer, simplifier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Soit $f(x)=x^2$. Quelle est l'équation de la tangente à la courbe de $f$ au point d'abscisse $2$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $f(2)=4$. Étape 2 — Dériver : $f'(x)=2x$, donc $f'(2)=4$. Étape 3 — Appliquer : $y=4(x-2)+4$. Étape 4 — Simplifier : $y=4x-8+4=4x-4$. La proposition $y=4x-8$ oublie le $+f(2)$ ; $y=4x+4$ se trompe de signe en développant ; $y=2x$ prend $f'(x)$ pour la pente au lieu de $f'(2)$.",
+                "answers": [
+                  {
+                    "content": "$y=4x-4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y=4x+4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=4x-8$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=2x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^3-2x$. Quel est le coefficient directeur de la tangente à la courbe de $f$ au point d'abscisse $-2$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f(-2)=-8+4=-4$, le point de tangence est $(-2\\,;-4)$. Étape 2 — Dériver : $f'(x)=3x^2-2$, donc $f'(-2)=3\\times4-2=10$. Étape 3 — Appliquer : la tangente est $y=10(x+2)-4$. Étape 4 — Simplifier : $y=10x+16$. Le coefficient directeur est $f'(-2)=10$, et non $f(-2)=-4$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=3x^2$. La tangente au point d'abscisse $1$ a pour équation $y=6x-$ ___",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Calculer : $f(1)=3$. Étape 2 — Dériver : $f'(x)=6x$, donc $f'(1)=6$. Étape 3 — Appliquer : $y=6(x-1)+3$. Étape 4 — Simplifier : $y=6x-6+3=6x-3$. Le nombre cherché est $3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=\\dfrac1x$ sur $]0\\,;+\\infty[$. La tangente au point d'abscisse $2$ coupe l'axe des ordonnées en un point d'ordonnée ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f(2)=\\dfrac12$. Étape 2 — Dériver : $f'(x)=-\\dfrac1{x^2}$, donc $f'(2)=-\\dfrac14$. Étape 3 — Appliquer : $y=-\\dfrac14(x-2)+\\dfrac12$. Étape 4 — Simplifier : $y=-\\dfrac x4+\\dfrac12+\\dfrac12=-\\dfrac x4+1$. L'ordonnée à l'origine est $1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^2-6x+10$. Quelles affirmations sur la tangente au point d'abscisse $3$ sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Calculer : $f(3)=9-18+10=1$. Étape 2 — Dériver : $f'(x)=2x-6$, donc $f'(3)=0$. Étape 3 — Appliquer : $y=0\\times(x-3)+1$. Étape 4 — Simplifier : $y=1$, une droite horizontale. Les deux bonnes propositions sont le coefficient directeur nul et $y=1$. L'équation $y=3$ confond $a$ et $f(a)$ ; le coefficient $f(3)=1$ confond $f(a)$ et $f'(a)$ ; $y=1$ ne passe pas par l'origine.",
+                "answers": [
+                  {
+                    "content": "Son coefficient directeur est $0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son équation est $y=1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son équation est $y=3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son coefficient directeur est $f(3)=1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle passe par l'origine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La droite $y=2x+1$ est la tangente à la courbe de $f(x)=x^2$ au point d'abscisse $1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : $f(1)=1$. Étape 2 — Dériver : $f'(1)=2$. Étape 3 — Appliquer : $y=2(x-1)+1$. Étape 4 — Simplifier : $y=2x-1$. La droite proposée $y=2x+1$ a la bonne pente mais elle vaut $3$ en $x=1$ : elle ne passe pas par le point $(1\\,;1)$ de la courbe. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à calculer $f(a)$ et $f'(a)$ avant d'écrire la tangente.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=x^2+3$ et $a=2$, on a $f(2)=$ ___ et $f'(2)=$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f(2)=4+3=7$. Étape 2 — Dériver : $f'(x)=2x$, donc $f'(2)=4$. Les deux nombres sont $7$ et $4$.",
+                "hint": "Calcule $f(2)$ avec $f$, puis $f'(2)$ avec la dérivée $f'(x)=2x$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=2x^2$. La tangente au point d'abscisse $3$ a pour ordonnée à l'origine ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $f(3)=18$. Étape 2 — Dériver : $f'(x)=4x$, donc $f'(3)=12$. Étape 3 — Appliquer : $y=12(x-3)+18$. Étape 4 — Simplifier : $y=12x-36+18=12x-18$. L'ordonnée à l'origine est $-18$.",
+                "hint": "Développe $12(x-3)$ puis ajoute $f(3)$.",
+                "answers": [
+                  {
+                    "content": "-18",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La tangente à la courbe de $f$ au point d'abscisse $a$ est horizontale lorsque ___",
+                "question_type": "select",
+                "explanation": "Étape 3 — Appliquer : la tangente est $y=f'(a)(x-a)+f(a)$ ; elle est horizontale quand son coefficient directeur $f'(a)$ est nul. La proposition $f(a)=0$ dit seulement que la courbe coupe l'axe des abscisses ; $a=0$ place le point d'abscisse $0$ sans rien dire de la pente ; $f'(a)=1$ donne une tangente de pente $1$, pas horizontale.",
+                "answers": [
+                  {
+                    "content": "$f'(a)=0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f(a)=0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a=0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(a)=1$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une droite horizontale a un coefficient directeur nul."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Étudier le sens de variation avec le signe de la dérivée",
+          "remember": "Soit $f$ dérivable sur un intervalle $I$. Si $f'(x)>0$ sur $I$ (sauf peut-être en quelques points isolés où $f'$ s'annule), $f$ est strictement croissante sur $I$ ; si $f'(x)<0$, $f$ est strictement décroissante ; si $f'(x)=0$ pour tout $x$ de $I$, $f$ est constante. Si $f'$ s'annule en $a$ en changeant de signe, $f$ admet en $a$ un **extremum local** : un maximum si $f'$ passe de $+$ à $-$, un minimum si elle passe de $-$ à $+$. Si $f'(a)=0$ sans changement de signe, il n'y a pas d'extremum. Le signe de $f'$ se lit avec le signe de $ax+b$, d'un trinôme ou d'un produit de facteurs.",
+          "method": [
+            "Dériver : calculer $f'(x)$ et la factoriser si possible.",
+            "Étudier le signe de $f'(x)$ sur l'intervalle (valeurs qui l'annulent, signe de chaque facteur).",
+            "Déduire les variations de $f$ : croissante là où $f'>0$, décroissante là où $f'<0$.",
+            "Calculer l'image de chaque valeur où le sens de variation change, puis conclure sur les extremums."
+          ],
+          "example": {
+            "statement": "Pour $x$ centaines de billets vendus ($x\\geq0$), le bénéfice d'un match est $B(x)=-x^2+12x-20$, en milliers de FCFA. Étudier les variations de $B$ et trouver le bénéfice maximal.",
+            "steps": [
+              "Dériver : $B'(x)=-2x+12=-2(x-6)$.",
+              "Étudier : $B'(x)>0$ si $x<6$, $B'(6)=0$ et $B'(x)<0$ si $x>6$.",
+              "Déduire : $B$ est croissante sur $[0\\,;6]$ et décroissante sur $[6\\,;+\\infty[$.",
+              "Calculer : $B(6)=-36+72-20=16$. Le bénéfice maximal est $16$ milliers de FCFA, pour $600$ billets."
+            ]
+          },
+          "pitfall": "Ne pas confondre le signe de $f'$ avec le signe de $f$. Contre-exemple : pour $B(x)=-x^2+12x-20$, on a $B'(8)=-4<0$ (le bénéfice baisse autour de $x=8$) mais $B(8)=-64+96-20=12>0$ (le bénéfice reste positif). $f'<0$ dit que $f$ décroît, pas que $f$ est négative.",
+          "figure": null,
+          "exercise": {
+            "title": "Étudier des variations avec la dérivée",
+            "statement": "Dans cet exercice, tu étudies des sens de variation avec la méthode de la fiche : dériver, étudier le signe, déduire, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le sens de variation de $f(x)=x^2-6x+5$ sur $\\mathbb R$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Dériver : $f'(x)=2x-6=2(x-3)$. Étape 2 — Étudier : $f'(x)<0$ si $x<3$ et $f'(x)>0$ si $x>3$. Étape 3 — Déduire : $f$ est décroissante sur $]-\\infty\\,;3]$ et croissante sur $[3\\,;+\\infty[$. Étape 4 — Calculer : $f(3)=9-18+5=-4$, c'est le minimum. La proposition « Croissante sur $]-\\infty\\,;3]$, puis décroissante sur $[3\\,;+\\infty[$ » inverse les signes de $f'$ ; « Croissante sur $\\mathbb R$ » et « Décroissante sur $\\mathbb R$ » ignorent le changement de signe en $3$.",
+                "answers": [
+                  {
+                    "content": "Décroissante sur $]-\\infty\\,;3]$, puis croissante sur $[3\\,;+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Croissante sur $]-\\infty\\,;3]$, puis décroissante sur $[3\\,;+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Croissante sur $\\mathbb R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décroissante sur $\\mathbb R$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^3-12x$ sur $\\mathbb R$. Quel est le plus grand intervalle sur lequel $f$ est décroissante ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Dériver : $f'(x)=3x^2-12=3(x-2)(x+2)$. Étape 2 — Étudier : $3>0$ ; le produit $(x-2)(x+2)$ est négatif entre $-2$ et $2$, positif à l'extérieur. Étape 3 — Déduire : $f'<0$ sur $]-2\\,;2[$, donc $f$ est décroissante sur $[-2\\,;2]$ (et croissante sur $]-\\infty\\,;-2]$ et sur $[2\\,;+\\infty[$). Étape 4 — Calculer : $f(-2)=16$ et $f(2)=-16$. Les propositions $]-\\infty\\,;-2]$ et $[2\\,;+\\infty[$ sont les intervalles de croissance ; $[-12\\,;12]$ confond $12$ avec les racines de $f'$.",
+                "answers": [
+                  {
+                    "content": "$[-2\\,;2]$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty\\,;-2]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[2\\,;+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[-12\\,;12]$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^3-12x$ sur $\\mathbb R$. Sa dérivée est $f'(x)=3(x-2)(x+2)$. Quelle est la valeur du maximum local de $f$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dériver : $f'(x)=3(x-2)(x+2)$. Étape 2 — Étudier : $f'>0$ sur $]-\\infty\\,;-2[$, $f'<0$ sur $]-2\\,;2[$, $f'>0$ sur $]2\\,;+\\infty[$. Étape 3 — Déduire : $f'$ passe de $+$ à $-$ en $-2$, donc $f$ a un maximum local en $-2$. Étape 4 — Calculer : $f(-2)=(-2)^3-12\\times(-2)=-8+24=16$. Le minimum local, lui, est $f(2)=-16$.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Si $f'(x)<0$ sur un intervalle $I$, alors $f$ est ___ sur $I$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Déduire : $f'<0$ sur $I$ signifie que $f$ est strictement décroissante sur $I$.",
+                "answers": [
+                  {
+                    "content": "décroissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "strictement décroissante",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=x^2-4x+3$ sur $\\mathbb R$. Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Dériver : $f'(x)=2x-4=2(x-2)$. Étape 2 — Étudier : $f'<0$ si $x<2$ et $f'>0$ si $x>2$. Étape 3 — Déduire : $f$ est décroissante sur $]-\\infty\\,;2]$ et croissante sur $[2\\,;+\\infty[$, avec un minimum en $2$. Étape 4 — Calculer : $f(2)=4-8+3=-1$. Les propositions « décroissante sur $[2\\,;+\\infty[$ » et « maximum » inversent le signe ; le minimum « $0$ » confond $f'(2)=0$ avec $f(2)$.",
+                "answers": [
+                  {
+                    "content": "$f$ est croissante sur $[2\\,;+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f$ admet un minimum égal à $-1$, atteint en $x=2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f$ est décroissante sur $[2\\,;+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f$ admet un maximum en $x=2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f$ admet un minimum égal à $0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $B(x)=-x^2+12x-20$, on a $B'(8)=-4$. Donc $B(8)$ est négatif.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Dériver : $B'(x)=-2x+12$, donc $B'(8)=-4$. Étape 2 — Étudier : $B'(8)<0$, donc $B$ décroît autour de $8$. Étape 3 — Déduire : cela ne dit rien du signe de $B(8)$. Étape 4 — Calculer : $B(8)=-64+96-20=12>0$. L'affirmation est fausse : le signe de $B'$ renseigne sur les variations, pas sur le signe de $B$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à chercher un extremum avec la dérivée.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=x^2-8x+3$, la dérivée $f'(x)=2x-8$ s'annule en $x=$ ___ et la valeur de $f$ en ce point est ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dériver : $f'(x)=2x-8=2(x-4)$, qui s'annule en $x=4$. Étape 2 — Étudier : $f'$ passe de $-$ à $+$ en $4$. Étape 4 — Calculer : $f(4)=16-32+3=-13$. Les deux nombres sont $4$ et $-13$.",
+                "hint": "Résous $2x-8=0$, puis calcule $f$ en cette valeur.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-13",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Si $f'(x)>0$ sur un intervalle $I$, alors $f$ est ___ sur $I$.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Déduire : $f'>0$ sur $I$ signifie que $f$ est strictement croissante sur $I$. La proposition « décroissante » inverse le sens ; « constante » demanderait $f'=0$ ; « négative » confond le signe de $f'$ avec celui de $f$.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  },
+                  {
+                    "content": "négative",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une dérivée positive indique que la courbe monte."
+              },
+              {
+                "content": "Un tireur de coups francs a une efficacité modélisée par $f(x)=-x^2+6x$. Quelle est la valeur maximale de $f$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dériver : $f'(x)=-2x+6=-2(x-3)$. Étape 2 — Étudier : $f'>0$ si $x<3$ et $f'<0$ si $x>3$. Étape 3 — Déduire : $f$ croît puis décroît, avec un maximum en $3$. Étape 4 — Calculer : $f(3)=-9+18=9$.",
+                "hint": "Cherche la valeur où $f'$ s'annule et change de signe.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La course d'un sprinter à Bouaké",
+          "statement": "Un sprinter de Bouaké s'élance pour un sprint de 60 m d'entraînement. Sa distance parcourue, en mètres, après $t$ secondes ($0\\leq t\\leq6$) est modélisée par $d(t)=t^2+4t$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle distance a-t-il parcourue à $t=5$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Calcul direct : $d(5)=5^2+4\\times5=25+20=45$. Il a parcouru $45$ mètres après $5$ secondes.",
+              "unit": "m",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Calcule le nombre dérivé $d'(2)$ avec la définition.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $d(2)=4+8=12$ et $d(2+h)=(2+h)^2+4(2+h)=12+8h+h^2$, donc $T(h)=\\dfrac{12+8h+h^2-12}{h}$. Étape 2 — Simplifier : $T(h)=\\dfrac{8h+h^2}{h}=8+h$. Étape 3 — Calculer : $\\lim_{h\\to0}(8+h)=8$. Étape 4 — Conclure : $d$ est dérivable en $2$ et $d'(2)=8$, soit $8$ m/s. Remplacer directement $h$ par $0$ donnerait $\\frac00$ : il faut simplifier d'abord.",
+              "unit": "m/s",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle est la fonction dérivée $d'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : deux termes, $t^2$ et $4t$ (coefficient $4$). Étape 2 — Dériver : $(t^2)'=2t$ et $(4t)'=4$. Étape 3 — Additionner : $2t+4$. Étape 4 — Simplifier : $d'(t)=2t+4$, sur $[0\\,;6]$. La proposition $t+4$ oublie le facteur $2$ ; $2t$ oublie la dérivée de $4t$ ; $t^2+4$ ne dérive que $4t$. Contrôle : $d'(2)=8$, comme avec la définition.",
+              "answers": [
+                {
+                  "content": "$d'(t)=2t+4$",
+                  "correct": true
+                },
+                {
+                  "content": "$d'(t)=t+4$",
+                  "correct": false
+                },
+                {
+                  "content": "$d'(t)=2t$",
+                  "correct": false
+                },
+                {
+                  "content": "$d'(t)=t^2+4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes, avec $d'(t)=2t+4$. Quelle est sa vitesse instantanée à $t=4$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "(1) La vitesse instantanée à l'instant $a$ est le nombre dérivé $d'(a)$. (2) On a $d'(t)=2t+4$. (3) On remplace $t$ par $4$ : $d'(4)=2\\times4+4=12$. La vitesse vaut $12$ m/s. Attention : $d(4)=32$ est la distance parcourue, pas la vitesse.",
+              "unit": "m/s",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle est l'équation de la tangente à la courbe de $d$ au point d'abscisse $1$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : $d(1)=1+4=5$. Étape 2 — Dériver : $d'(t)=2t+4$, donc $d'(1)=6$. Étape 3 — Appliquer : $y=6(t-1)+5$. Étape 4 — Simplifier : $y=6t-6+5=6t-1$. La proposition $y=6t+5$ prend $d(1)$ pour l'ordonnée à l'origine ; $y=6t-6$ oublie le $+d(1)$ ; $y=5t+1$ échange pente et ordonnée.",
+              "answers": [
+                {
+                  "content": "$y=6t-1$",
+                  "correct": true
+                },
+                {
+                  "content": "$y=6t+5$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=6t-6$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=5t+1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes, avec $d'(t)=2t+4$. La distance $d$ est strictement croissante sur $[0\\,;6]$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Dériver : $d'(t)=2t+4$. Étape 2 — Étudier : pour $t\\in[0\\,;6]$, $2t+4\\geq4>0$. Étape 3 — Déduire : $d'>0$ sur $[0\\,;6]$, donc $d$ est strictement croissante. Étape 4 — Calculer : $d(0)=0$ et $d(6)=60$, ce qui confirme que le sprinter avance sans jamais reculer.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le coût moyen des maillots du club",
+          "statement": "Le club de Yopougon commande $x$ centaines de maillots ($x>0$). Le coût moyen d'un maillot, en milliers de FCFA, est $M(x)=\\dfrac{x^2+16}{x}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le coût moyen d'un maillot est $M(x)=\\dfrac{x^2+16}{x}$ sur $]0\\,;+\\infty[$. Quelle est la dérivée $M'(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x^2+16$ et $v(x)=x$, qui ne s'annule pas sur $]0\\,;+\\infty[$. Étape 2 — Dériver : $u'(x)=2x$ et $v'(x)=1$. Étape 3 — Appliquer : $M'(x)=\\dfrac{2x\\times x-(x^2+16)\\times1}{x^2}$. Étape 4 — Simplifier : le numérateur vaut $2x^2-x^2-16=x^2-16$. La proposition $2x$ fait $\\frac{u'}{v'}$ ; $\\frac{3x^2+16}{x^2}$ met un $+$ au lieu du $-$ ; $\\dfrac{x^2-16}{x}$ divise par $v$ au lieu de $v^2$. Contrôle : $M(x)=x+\\frac{16}x$ donne $1-\\frac{16}{x^2}$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{x^2-16}{x^2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$2x$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{3x^2+16}{x^2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{x^2-16}{x}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$, avec $M'(x)=\\dfrac{x^2-16}{x^2}$ sur $]0\\,;+\\infty[$. Calcule $M'(2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "(1) On remplace $x$ par $2$ dans $M'(x)=\\dfrac{x^2-16}{x^2}$. (2) Numérateur : $2^2-16=4-16=-12$. (3) Dénominateur : $2^2=4$. (4) Quotient : $M'(2)=\\dfrac{-12}{4}=-3$. Le coût moyen baisse quand on passe de $200$ maillots à un peu plus.",
+              "answers": [
+                {
+                  "content": "-3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$, avec $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$ sur $]0\\,;+\\infty[$. Quel est le sens de variation de $M$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Dériver : $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$. Étape 2 — Étudier : sur $]0\\,;+\\infty[$, $x+4>0$ et $x^2>0$, donc $M'(x)$ a le signe de $x-4$ : négatif sur $]0\\,;4[$, positif sur $]4\\,;+\\infty[$. Étape 3 — Déduire : $M$ est décroissante sur $]0\\,;4]$ et croissante sur $[4\\,;+\\infty[$. Étape 4 — Calculer : $M(4)=8$. La proposition « Croissante sur $]0\\,;4]$, puis décroissante sur $[4\\,;+\\infty[$ » inverse les signes ; « Croissante sur $]0\\,;+\\infty[$ » et « Décroissante sur $]0\\,;+\\infty[$ » ignorent le changement de signe en $4$.",
+              "answers": [
+                {
+                  "content": "Décroissante sur $]0\\,;4]$, puis croissante sur $[4\\,;+\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "Croissante sur $]0\\,;4]$, puis décroissante sur $[4\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante sur $]0\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "Décroissante sur $]0\\,;+\\infty[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen $M(x)=\\dfrac{x^2+16}{x}$ est minimal quand le club commande $x=$ ___ centaines de maillots.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Dériver : $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$. Étape 2 — Étudier : $M'$ s'annule en $x=4$ en passant de $-$ à $+$. Étape 3 — Déduire : $M$ passe de décroissante à croissante, donc $M$ a un minimum en $x=4$. Étape 4 — Calculer : la valeur cherchée est $x=4$, soit $400$ maillots.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$ (en milliers de FCFA), minimal en $x=4$. Quelle est la valeur de ce coût moyen minimal ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Dériver : $M'$ s'annule en $4$ en passant de $-$ à $+$. Étape 2 — Étudier : c'est un minimum. Étape 3 — Déduire : le coût minimal est $M(4)$. Étape 4 — Calculer : $M(4)=\\dfrac{16+16}{4}=8$ milliers de FCFA par maillot. Ne pas confondre avec $x=4$, qui est le nombre de centaines de maillots.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$ avec $M'(x)=\\dfrac{x^2-16}{x^2}$. La tangente à la courbe de $M$ au point d'abscisse $1$ a pour équation $y=mx+p$. Donne $p$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : $M(1)=\\dfrac{1+16}{1}=17$. Étape 2 — Dériver : $M'(1)=\\dfrac{1-16}{1}=-15$. Étape 3 — Appliquer : $y=-15(x-1)+17$. Étape 4 — Simplifier : $y=-15x+15+17=-15x+32$. L'ordonnée à l'origine est $p=32$. Si l'on oublie le $+M(1)$, on trouve $15$.",
+              "answers": [
+                {
+                  "content": "32",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût moyen $M(x)=\\dfrac{x^2+16}{x}$ est supérieur ou égal à $8$ milliers de FCFA pour tout $x>0$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Dériver : $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$. Étape 2 — Étudier : $M$ décroît jusqu'en $4$ puis croît. Étape 3 — Déduire : $M(4)$ est le minimum de $M$ sur $]0\\,;+\\infty[$. Étape 4 — Calculer : $M(4)=8$. Donc $M(x)\\geq8$ pour tout $x>0$ : l'affirmation est vraie. Contrôle : $M(1)=17$ et $M(8)=10$ sont bien supérieurs à $8$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le coût de fabrication des ballons",
+          "statement": "Une fabrique de Bouaké produit des ballons de football. Pour $x$ centaines de ballons ($0\\leq x\\leq6$), le coût total de fabrication, en milliers de FCFA, est $CT(x)=x^3-6x^2+12x+30$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le coût total est $CT(x)=x^3-6x^2+12x+30$. Quelle est la fonction dérivée $CT'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : quatre termes, $x^3$, $-6x^2$, $12x$ et la constante $30$. Étape 2 — Dériver : $(x^3)'=3x^2$ ; $(-6x^2)'=-12x$ ; $(12x)'=12$ ; $(30)'=0$. Étape 3 — Additionner : $3x^2-12x+12$. Étape 4 — Simplifier : $CT'(x)=3x^2-12x+12$. La proposition $3x^2-6x+12$ oublie de multiplier par $2$ ; $3x^2-12x+12+30$ garde $30$ ; $x^2-12x+12$ oublie le facteur $3$ de $x^3$.",
+              "answers": [
+                {
+                  "content": "$CT'(x)=3x^2-12x+12$",
+                  "correct": true
+                },
+                {
+                  "content": "$CT'(x)=3x^2-6x+12$",
+                  "correct": false
+                },
+                {
+                  "content": "$CT'(x)=3x^2-12x+12+30$",
+                  "correct": false
+                },
+                {
+                  "content": "$CT'(x)=x^2-12x+12$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $CT'(x)=3x^2-12x+12=3(x^2-4x+4)=3(x-\\ldots)^2$. Le nombre qui manque est ___",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Dériver : $CT'(x)=3x^2-12x+12$. Étape 2 — Étudier : on met $3$ en facteur, $3(x^2-4x+4)$, puis on reconnaît l'identité remarquable $x^2-4x+4=(x-2)^2$. Étape 3 — Déduire : $CT'(x)=3(x-2)^2$, qui est positif ou nul. Étape 4 — Calculer : le nombre cherché est $2$, car $(x-2)^2=x^2-4x+4$.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût total est $CT(x)=x^3-6x^2+12x+30$, avec $CT'(x)=3(x-2)^2$. La tangente au point d'abscisse $2$ est horizontale, d'équation $y=CT(2)$. Calcule $CT(2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : $CT(2)=2^3-6\\times2^2+12\\times2+30$. Étape 2 — Dériver : $CT'(2)=3\\times0=0$, donc la tangente est horizontale. Étape 3 — Appliquer : $y=0\\times(x-2)+CT(2)=CT(2)$. Étape 4 — Simplifier : $CT(2)=8-24+24+30=38$, donc la tangente est $y=38$.",
+              "answers": [
+                {
+                  "content": "38",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût total est $CT(x)=x^3-6x^2+12x+30$ sur $[0\\,;6]$, avec $CT'(x)=3(x-2)^2$. Quel est le sens de variation de $CT$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Dériver : $CT'(x)=3(x-2)^2$. Étape 2 — Étudier le signe : un carré est positif ou nul, donc $CT'(x)\\geq0$ sur $[0\\,;6]$, et $CT'$ ne s'annule qu'en $x=2$. Étape 3 — Déduire : $CT$ est strictement croissante sur $[0\\,;6]$. Étape 4 — Calculer : $CT(0)=30$, $CT(2)=38$ et $CT(6)=102$, toujours en hausse. Les propositions avec un changement de sens oublient que $CT'$ garde le même signe de chaque côté de $2$ ; « Strictement décroissante sur $[0\\,;6]$ » inverse le signe de $CT'$, qui est positif ou nul.",
+              "answers": [
+                {
+                  "content": "Strictement croissante sur $[0\\,;6]$",
+                  "correct": true
+                },
+                {
+                  "content": "Décroissante sur $[0\\,;2]$, puis croissante sur $[2\\,;6]$",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante sur $[0\\,;2]$, puis décroissante sur $[2\\,;6]$",
+                  "correct": false
+                },
+                {
+                  "content": "Strictement décroissante sur $[0\\,;6]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le coût total est $CT(x)=x^3-6x^2+12x+30$, avec $CT'(x)=3(x-2)^2$. Comme $CT'(2)=0$, la fonction $CT$ admet un extremum local en $x=2$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Dériver : $CT'(x)=3(x-2)^2$. Étape 2 — Étudier : $CT'$ s'annule en $2$ mais reste positive avant et après $2$ : elle ne change pas de signe. Étape 3 — Déduire : il n'y a pas d'extremum en $2$, seulement une tangente horizontale. Étape 4 — Calculer : $CT(1)=37$, $CT(2)=38$, $CT(3)=39$ : la fonction continue de monter. L'affirmation est fausse : $CT'(2)=0$ ne suffit pas, il faut un changement de signe.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le coût total est $CT(x)=x^3-6x^2+12x+30$. Quel est le coefficient directeur de la tangente à la courbe de $CT$ au point d'abscisse $4$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : $CT(4)=64-96+48+30=46$. Étape 2 — Dériver : $CT'(x)=3x^2-12x+12$, donc $CT'(4)=48-48+12=12$. Étape 3 — Appliquer : la tangente est $y=12(x-4)+46$. Étape 4 — Simplifier : $y=12x-2$. Le coefficient directeur est $CT'(4)=12$ ; ne pas le confondre avec $CT(4)=46$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le tarif du car pour un voyage au stade",
+          "statement": "Un club loue un car pour un voyage au stade. Le prix, en dizaines de milliers de FCFA, pour un trajet de $x$ centaines de kilomètres, est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$. Pour étudier la continuité de $C$ en $2$, calcule $C(2)$ avec la première expression. Quelle est cette valeur ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Première expression : en $x=2$, on utilise la ligne $x\\leq2$, donc $C(2)=2^2=4$. Étape 2 — Seconde expression : $4\\times2-4=4$. Étape 3 — Comparaison : les deux expressions donnent $4$, donc $C$ est continue en $2$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$, avec $C(2)=4$. Pour $h<0$ petit, $C(2+h)=(2+h)^2$. Calcule le nombre dérivé à gauche, $\\lim_{h\\to0^-}\\dfrac{C(2+h)-C(2)}{h}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $T(h)=\\dfrac{(2+h)^2-4}{h}=\\dfrac{4+4h+h^2-4}{h}$. Étape 2 — Simplifier : $T(h)=\\dfrac{4h+h^2}{h}=4+h$. Étape 3 — Calculer : $\\lim_{h\\to0^-}(4+h)=4$. Étape 4 — Conclure : le nombre dérivé à gauche vaut $4$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$, avec $C(2)=4$. Pour $h>0$, $C(2+h)=4(2+h)-4$. Calcule le nombre dérivé à droite, $\\lim_{h\\to0^+}\\dfrac{C(2+h)-C(2)}{h}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $T(h)=\\dfrac{4(2+h)-4-4}{h}=\\dfrac{8+4h-8}{h}$. Étape 2 — Simplifier : $T(h)=\\dfrac{4h}{h}=4$. Étape 3 — Calculer : la limite d'une constante est cette constante, soit $4$. Étape 4 — Conclure : le nombre dérivé à droite vaut $4$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$. Les nombres dérivés à gauche et à droite en $2$ valent tous les deux $4$. Que peut-on conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : les deux taux d'accroissement sont $4+h$ (à gauche) et $4$ (à droite). Étape 2 — Simplifier : c'est déjà fait. Étape 3 — Calculer : les deux limites existent et valent $4$. Étape 4 — Conclure : $C$ est dérivable en $2$ et $C'(2)=4$. « $C$ est continue en $2$ mais n'est pas dérivable en $2$ » serait vraie si les deux nombres dérivés étaient différents, ce qui n'est pas le cas ; « $C$ n'est pas continue en $2$ » est fausse, car une fonction dérivable en un point y est continue (et les deux expressions donnent $4$) ; $C'(2)=2$ confond le nombre dérivé avec le point $a=2$.",
+              "answers": [
+                {
+                  "content": "$C$ est dérivable en $2$ et $C'(2)=4$",
+                  "correct": true
+                },
+                {
+                  "content": "$C$ est continue en $2$ mais n'est pas dérivable en $2$",
+                  "correct": false
+                },
+                {
+                  "content": "$C$ n'est pas continue en $2$",
+                  "correct": false
+                },
+                {
+                  "content": "$C$ est dérivable en $2$ et $C'(2)=2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$, et $C'(2)=4$. Quelle est l'équation de la tangente à la courbe de $C$ au point d'abscisse $2$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : $C(2)=4$. Étape 2 — Dériver : $C'(2)=4$. Étape 3 — Appliquer : $y=4(x-2)+4$. Étape 4 — Simplifier : $y=4x-8+4=4x-4$. La proposition $y=4x-8$ oublie le $+C(2)$ ; $y=4x+4$ se trompe de signe ; $y=2x$ prend $a$ pour la pente.",
+              "answers": [
+                {
+                  "content": "$y=4x-4$",
+                  "correct": true
+                },
+                {
+                  "content": "$y=4x+4$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=4x-8$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=2x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq2$ et $C(x)=4x-4$ si $x>2$. Le prix $C$ est strictement croissant sur $[0\\,;+\\infty[$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Dériver : sur $[0\\,;2[$, $C'(x)=2x$ ; sur $]2\\,;+\\infty[$, $C'(x)=4$ ; et $C'(2)=4$. Étape 2 — Étudier : $C'(x)\\geq0$ sur $[0\\,;+\\infty[$ et ne s'annule qu'en $0$. Étape 3 — Déduire : $C$ est strictement croissante sur $[0\\,;+\\infty[$. Étape 4 — Calculer : $C(0)=0$, $C(2)=4$ et $C(3)=8$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une autre grille propose $D(x)=x^2$ si $0\\leq x\\leq2$ et $D(x)=3x-2$ si $x>2$. Montre que $D$ n'est pas dérivable en $2$.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Nombre dérivé à gauche : $4$",
+                "Nombre dérivé à droite : $3$",
+                "Conclusion : $4\\neq3$, donc $D$ n'est pas dérivable en $2$"
+              ],
+              "starter": "À gauche, le taux vaut ",
+              "explanation": "Corrigé modèle. Étape 1 — Écrire : $D(2)=4$. Pour $h<0$, $T(h)=\\dfrac{(2+h)^2-4}{h}$ ; pour $h>0$, $T(h)=\\dfrac{3(2+h)-2-4}{h}$. Étape 2 — Simplifier : à gauche $T(h)=4+h$ ; à droite $T(h)=\\dfrac{3h}{h}=3$. Étape 3 — Calculer : la limite à gauche vaut $4$, la limite à droite vaut $3$. Étape 4 — Conclure : $4\\neq3$, donc $D$ n'est pas dérivable en $2$. Barème : 1 point pour les deux limites, 1 point pour la conclusion.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

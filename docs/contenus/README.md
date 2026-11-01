@@ -658,6 +658,37 @@ Au total : 28 notions, 56 exercices, 351 questions notées et 114 questions d'en
 
 À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T7).
 
+### 1ère C et D, Physique-Chimie au format 3 (chantier `contenus-1ere-physique-chimie-cd`)
+
+Les 10 premières leçons de Physique-Chimie de 1ère C et de 1ère D (progression DPFC 2026-2027), rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague P3 du programme `contenus-v3-tous-niveaux`. **12 leçons distinctes (13 intitulés), 20 fichiers** : une leçon commune aux deux séries est écrite une fois puis copiée avec la série et le rang de chaque progression (C1 « Travail et puissance dans le cas d'un mouvement de translation » et D1 « …d'une force constante… » : même contenu, deux intitulés ; « Énergie potentielle » en C et « Énergie potentielle de pesanteur » en D sont deux leçons). Elles remplacent les fichiers v1 du même intitulé de `1ere-c/` et `1ere-d/`. Les leçons communes n'emploient que des acquis communs aux deux ordres de progression (Énergie cinétique : pas de rotation ; Énergie mécanique : pesanteur seulement).
+
+| Série | Rang | Fichier | Cours | Notions | Exercices | Questions | Je m'entraîne | Auto | Figures | Sortes |
+|---|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| C | 1 | `1ere-c/physique-chimie/travail-et-puissance-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance dans le cas d'un mouvement de translation | 5 | 9 | 66 | 15 | 97 % | 3 | `coordinate_plane` |
+| C | 2 | `1ere-c/physique-chimie/generalites-sur-les-composes-organiques.json` | Généralités sur les composés organiques | 7 | 11 | 74 | 21 | 97 % | 4 | `diagram`, `molecule` |
+| C | 3 | `1ere-c/physique-chimie/travail-et-puissance-dans-le-cas-d-un-mouvement-de-rotation-autour-d-un-axe-fixe.json` | Travail et puissance dans le cas d'un mouvement de rotation autour d'un axe fixe | 4 | 8 | 61 | 12 | 97 % | 3 | `coordinate_plane` |
+| C | 4 | `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 11 | 70 | 21 | 97 % | 4 | `molecule` |
+| C | 5 | `1ere-c/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 8 | 59 | 12 | 97 % | 2 | `coordinate_plane` |
+| C | 6 | `1ere-c/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 9 | 61 | 15 | 97 % | 6 | `diagram`, `molecule` |
+| C | 7 | `1ere-c/physique-chimie/le-benzene.json` | Le benzène | 5 | 9 | 65 | 15 | 97 % | 2 | `molecule` |
+| C | 8 | `1ere-c/physique-chimie/energie-potentielle.json` | Énergie potentielle | 4 | 8 | 55 | 12 | 98 % | 2 | `coordinate_plane` |
+| C | 9 | `1ere-c/physique-chimie/petrole-et-gaz-naturels.json` | Pétrole et gaz naturels | 6 | 10 | 76 | 18 | 97 % | 3 | `diagram`, `molecule`, `stat_chart` |
+| C | 10 | `1ere-c/physique-chimie/energie-mecanique.json` | Énergie mécanique | 4 | 8 | 55 | 12 | 96 % | 4 | `coordinate_plane` |
+| D | 1 | `1ere-d/physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance d'une force constante dans le cas d'un mouvement de translation | 5 | 9 | 66 | 15 | 97 % | 3 | `coordinate_plane` |
+| D | 2 | `1ere-d/physique-chimie/generalites-sur-les-composes-organiques.json` | Généralités sur les composés organiques | 7 | 11 | 74 | 21 | 97 % | 4 | `diagram`, `molecule` |
+| D | 3 | `1ere-d/physique-chimie/hydrocarbures-satures-les-alcanes.json` | Hydrocarbures saturés : les alcanes | 7 | 11 | 70 | 21 | 97 % | 4 | `molecule` |
+| D | 4 | `1ere-d/physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 8 | 59 | 12 | 97 % | 2 | `coordinate_plane` |
+| D | 5 | `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | Hydrocarbures insaturés : les alcènes et les alcynes | 5 | 9 | 61 | 15 | 97 % | 6 | `diagram`, `molecule` |
+| D | 6 | `1ere-d/physique-chimie/energie-potentielle-de-pesanteur.json` | Énergie potentielle de pesanteur | 4 | 8 | 54 | 12 | 98 % | 2 | `coordinate_plane` |
+| D | 7 | `1ere-d/physique-chimie/le-benzene.json` | Le benzène | 5 | 9 | 65 | 15 | 97 % | 2 | `molecule` |
+| D | 8 | `1ere-d/physique-chimie/petrole-et-gaz-naturels.json` | Pétrole et gaz naturels | 6 | 10 | 76 | 18 | 97 % | 3 | `diagram`, `molecule`, `stat_chart` |
+| D | 9 | `1ere-d/physique-chimie/energie-mecanique.json` | Énergie mécanique | 4 | 8 | 55 | 12 | 96 % | 4 | `coordinate_plane` |
+| D | 10 | `1ere-d/physique-chimie/quelques-composes-oxygenes.json` | Quelques composés oxygénés | 5 | 9 | 56 | 15 | 96 % | 6 | `diagram`, `molecule` |
+
+Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'entraîne », 41 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et le contrôle de « Je m'entraîne » de session (4 blocs, 1 à 6 questions par notion, case multiple et indice, `tolerance` numérique). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (Sonnet), qui a refait chaque calcul. Aucune sorte de figure nouvelle, aucun code.
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
@@ -788,6 +819,47 @@ Au total : 80 notions, 160 exercices, 1008 questions notées, 257 questions d'en
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : testicule et tube séminifère, méiose, fécondation, ribosome et traduction, coupe du globe et coupe de subduction, complexe argilo-humique, chloroplaste, moelle épinière et œil. Les courbes sont à une seule série et à valeurs positives.
 
 À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P5).
+### 1ère C et D, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-cd`)
+
+Les 10 premières leçons de Mathématiques de la progression DPFC 2026-2027 de 1ère C et de 1ère D, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P1 du programme `contenus-v3-tous-niveaux`). 13 leçons distinctes, 20 fichiers : les 7 leçons communes aux deux séries sont écrites une fois puis déclinées par série (acquis, interdits et exemples de la série). Elles **remplacent** les fichiers v1 du même intitulé rédigés le 2026-10-10 (rangs 1 à 3). « Généralités sur les fonctions » et « Dénombrement » restent déclinables en 1ère A (vague P2).
+
+#### 1ère C
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 8 | 49 | 96 % | 0 | — |
+| 2 | `mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 8 | 48 | 96 % | 3 | `geometry` |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 9 | 56 | 96 % | 0 | — |
+| 4 | `mathematiques/barycentre.json` | Barycentre | 5 | 9 | 57 | 95 % | 2 | `coordinate_plane` |
+| 5 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 8 | 53 | 96 % | 0 | — |
+| 6 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 53 | 96 % | 0 | — |
+| 7 | `mathematiques/extension-de-la-notion-de-limite.json` | Extension de la notion de limite | 4 | 8 | 57 | 95 % | 0 | — |
+| 8 | `mathematiques/composees-de-transformations-du-plan.json` | Composées de transformations du plan | 4 | 8 | 58 | 97 % | 2 | `coordinate_plane`, `geometry` |
+| 9 | `mathematiques/derivation.json` | Dérivation | 5 | 9 | 56 | 96 % | 0 | — |
+| 10 | `mathematiques/orthogonalite-de-l-espace.json` | Orthogonalité de l'espace | 5 | 9 | 54 | 96 % | 0 | — |
+
+#### 1ère D
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/equations-et-inequations-du-second-degre-dans.json` | Équations et inéquations du second degré dans ℝ | 4 | 8 | 54 | 96 % | 0 | — |
+| 2 | `mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 8 | 48 | 100 % | 3 | `geometry` |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 9 | 55 | 100 % | 0 | — |
+| 4 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 8 | 49 | 100 % | 0 | — |
+| 5 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 51 | 98 % | 0 | — |
+| 6 | `mathematiques/derivation.json` | Dérivation | 5 | 9 | 56 | 98 % | 0 | — |
+| 7 | `mathematiques/extension-de-la-notion-de-limite.json` | Extension de la notion de limite | 4 | 8 | 55 | 100 % | 0 | — |
+| 8 | `mathematiques/barycentre.json` | Barycentre | 5 | 9 | 56 | 98 % | 2 | `coordinate_plane` |
+| 9 | `mathematiques/etude-et-representation-graphique-d-une-fonction.json` | Étude et représentation graphique d'une fonction | 4 | 8 | 61 | 97 % | 0 | — |
+| 10 | `mathematiques/probabilite.json` | Probabilité | 4 | 8 | 56 | 96 % | 0 | — |
+
+Au total : 87 notions, 167 exercices, 1082 questions notées et 12 figures.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-cd/controle-entrainement.rb`). Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
+
+Figures manquantes (courbes, tableaux de variations, arbres, solides en perspective) : sortes absentes du moteur, notées en dette dans le journal du chantier.
+
+À faire valider par un enseignant de mathématiques avant publication : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
 
 ### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`
 
