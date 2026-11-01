@@ -1,0 +1,1667 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La synthèse des protéines",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "du-gene-a-la-proteine",
+          "kind": "diagram",
+          "description": "Schéma fléché de la synthèse d'une protéine. Le gène, porté par l'ADN dans le noyau, est copié en ARN messager par la transcription. L'ARN messager sort du noyau et se fixe sur un ribosome du cytoplasme. La traduction relie les acides aminés en chaîne, qui se replie en protéine.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "adn",
+                "label": "ADN : le gène (noyau)",
+                "category": 1
+              },
+              {
+                "id": "arnm",
+                "label": "ARN messager",
+                "category": 1
+              },
+              {
+                "id": "rib",
+                "label": "Ribosome (cytoplasme)",
+                "category": 2
+              },
+              {
+                "id": "chaine",
+                "label": "Chaîne d'acides aminés",
+                "category": 2
+              },
+              {
+                "id": "prot",
+                "label": "Protéine",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "adn",
+                "to": "arnm",
+                "label": "transcription"
+              },
+              {
+                "from": "arnm",
+                "to": "rib",
+                "label": "sortie du noyau"
+              },
+              {
+                "from": "rib",
+                "to": "chaine",
+                "label": "traduction"
+              },
+              {
+                "from": "chaine",
+                "to": "prot",
+                "label": "repliement"
+              }
+            ],
+            "legend": [
+              "Dans le noyau",
+              "Dans le cytoplasme"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "uridine-noyau",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres d'une expérience fictive (résultats simplifiés) : part, en pourcentage, de la radioactivité située dans le noyau de cellules de foie de rat, après 5, 30 et 60 minutes : 90, 40 et 20. Le reste de la radioactivité se trouve dans le cytoplasme : 10, 60 et 80.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              90,
+              40,
+              20
+            ],
+            "labels": [
+              "5 min",
+              "30 min",
+              "60 min"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les protéines et les acides aminés",
+          "remember": "Une **protéine** est une grande molécule formée d'une **chaîne d'acides aminés** reliés les uns aux autres. Les êtres vivants utilisent **20 sortes** d'acides aminés. Ce sont **l'ordre** (la séquence), la nature et le nombre des acides aminés qui donnent à la protéine sa forme, donc son rôle. Deux séquences différentes font deux protéines différentes. Exemples : les **enzymes** (comme l'amylase de la salive, qui digère l'amidon du riz ou de l'igname), l'**hémoglobine** (elle transporte le dioxygène dans les hématies) et l'**insuline** (une hormone qui fait baisser la glycémie).",
+          "method": [
+            "Reconnaître une protéine : repérer une chaîne d'acides aminés reliés les uns aux autres.",
+            "Lire la séquence : noter les acides aminés dans l'ordre, du début à la fin de la chaîne.",
+            "Comparer les séquences : chercher les différences d'ordre, de nature ou de nombre des acides aminés.",
+            "Conclure : des séquences différentes donnent des protéines différentes, donc des rôles différents."
+          ],
+          "example": {
+            "statement": "Au marché, une vendeuse présente deux chaînes d'acides aminés fictives. Chaîne A : Met–Lys–Gly–Ala–Ser. Chaîne B : Met–Lys–Ala–Gly–Ser. Sont-ce la même protéine ?",
+            "steps": [
+              "Reconnaître : A et B sont chacune une chaîne de 5 acides aminés reliés, donc deux protéines possibles.",
+              "Lire la séquence : A = Met, Lys, Gly, Ala, Ser ; B = Met, Lys, Ala, Gly, Ser.",
+              "Comparer les séquences : ce sont les mêmes 5 acides aminés, mais Gly et Ala sont échangés en 3e et 4e positions.",
+              "Conclure : l'ordre est différent, donc A et B sont deux protéines différentes, même avec les mêmes acides aminés."
+            ]
+          },
+          "pitfall": "Ne pas croire que deux protéines faites des mêmes acides aminés sont identiques. Contre-exemple : Met–Lys–Gly et Gly–Lys–Met contiennent les trois mêmes acides aminés, mais dans un ordre différent : ce sont deux protéines différentes. Comme les lettres d'un mot : « rôle » et « lore » n'ont pas le même sens. Pour éviter l'erreur, compare toujours l'ordre, pas seulement la liste.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître et comparer des protéines",
+            "statement": "Dans cet exercice, tu reconnais des protéines et tu compares leurs séquences avec les étapes de la fiche : reconnaître, lire la séquence, comparer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une protéine est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : une protéine se reconnaît à sa chaîne d'acides aminés reliés. La chaîne de nucléotides décrit l'ADN ou l'ARN, pas une protéine ; le glucose est un sucre et l'eau salée n'a pas de chaîne d'acides aminés.",
+                "answers": [
+                  {
+                    "content": "une chaîne d'acides aminés reliés les uns aux autres",
+                    "correct": true
+                  },
+                  {
+                    "content": "une chaîne de nucléotides, comme l'ADN",
+                    "correct": false
+                  },
+                  {
+                    "content": "un sucre simple comme le glucose",
+                    "correct": false
+                  },
+                  {
+                    "content": "une molécule d'eau liée à du sel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque protéine à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Reconnaître : ces trois molécules sont des protéines. Étape 4 — Conclure : chaque protéine a son rôle propre, lié à sa séquence : l'amylase est une enzyme qui digère l'amidon, l'hémoglobine transporte le dioxygène, l'insuline est une hormone.",
+                "answers": [
+                  {
+                    "content": "Amylase de la salive",
+                    "match": "Digère l'amidon (enzyme)"
+                  },
+                  {
+                    "content": "Hémoglobine",
+                    "match": "Transporte le dioxygène dans les hématies"
+                  },
+                  {
+                    "content": "Insuline",
+                    "match": "Hormone qui fait baisser la glycémie"
+                  }
+                ]
+              },
+              {
+                "content": "Une protéine est une chaîne de ___ reliés les uns aux autres.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Reconnaître : on reconnaît une protéine à sa chaîne d'acides aminés. Les maillons de cette chaîne sont les acides aminés, pas les nucléotides (maillons de l'ADN).",
+                "answers": [
+                  {
+                    "content": "acides aminés",
+                    "correct": true
+                  },
+                  {
+                    "content": "acide aminé",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une chaîne fictive est notée Met–Lys–Gly–Ala–Ser–Leu–Val–Asp–Glu–Pro. Combien d'acides aminés contient-elle ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Lire la séquence : on compte les acides aminés un par un : Met, Lys, Gly, Ala, Ser, Leu, Val, Asp, Glu, Pro, soit 10. Chaque mot séparé par un tiret est un acide aminé.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Deux chaînes formées des mêmes acides aminés, mais dans un ordre différent, sont la même protéine.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer les séquences : l'ordre est différent. Étape 4 — Conclure : des séquences différentes donnent des protéines différentes. L'erreur tentante est de ne comparer que la liste des acides aminés, alors que l'ordre compte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces substances, lesquelles sont des protéines ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Reconnaître : l'hémoglobine et l'insuline sont des chaînes d'acides aminés. L'amidon est un glucide fait de sucres, le sel de cuisine est un minéral et l'huile de palme est un lipide : aucune n'est une chaîne d'acides aminés.",
+                "answers": [
+                  {
+                    "content": "L'hémoglobine des hématies",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'insuline",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'amidon du riz",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sel de cuisine",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'huile de palme",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour comparer deux protéines.",
+                "question_type": "ordering",
+                "explanation": "On suit les quatre étapes de la fiche : Étape 1 — Reconnaître, Étape 2 — Lire la séquence, Étape 3 — Comparer les séquences, Étape 4 — Conclure. On ne peut pas conclure avant d'avoir comparé.",
+                "answers": [
+                  {
+                    "content": "Reconnaître une chaîne d'acides aminés"
+                  },
+                  {
+                    "content": "Lire la séquence de chaque chaîne"
+                  },
+                  {
+                    "content": "Comparer l'ordre des acides aminés"
+                  },
+                  {
+                    "content": "Conclure sur l'identité des protéines"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les protéines et leurs rôles.",
+            "questions": [
+              {
+                "content": "L'___ de la salive est une ___ qui digère l'amidon.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Reconnaître : l'amylase est une protéine. Étape 4 — Conclure : c'est une enzyme, car elle digère l'amidon des aliments comme le riz ou l'igname.",
+                "answers": [
+                  {
+                    "content": "amylase",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "enzyme",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La première case est le nom de la protéine de la salive ; la seconde est la famille de protéines qui accélère les réactions."
+              },
+              {
+                "content": "Dans les hématies, la protéine qui transporte le dioxygène s'appelle :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : l'hémoglobine est la protéine des hématies qui transporte le dioxygène. L'insuline est une hormone, l'amylase est une enzyme digestive et l'amidon n'est pas une protéine.",
+                "answers": [
+                  {
+                    "content": "l'hémoglobine",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'insuline",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'amylase",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'amidon",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le nom qui rappelle le sang."
+              },
+              {
+                "content": "L'insuline est une protéine.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Reconnaître : l'insuline est une chaîne d'acides aminés. Étape 4 — Conclure : c'est une protéine qui joue le rôle d'hormone.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les chaînes Gly–Ala–Ser et Ser–Ala–Gly sont ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Lire la séquence : Gly, Ala, Ser pour la première chaîne ; Ser, Ala, Gly pour la seconde. Étape 3 — Comparer les séquences : l'ordre est inversé. Étape 4 — Conclure : ce sont deux protéines différentes.",
+                "answers": [
+                  {
+                    "content": "deux protéines différentes",
+                    "correct": true
+                  },
+                  {
+                    "content": "la même protéine",
+                    "correct": false
+                  },
+                  {
+                    "content": "deux molécules d'ADN",
+                    "correct": false
+                  },
+                  {
+                    "content": "deux enzymes de la salive",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare l'ordre des acides aminés, pas seulement leur liste."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La transcription : de l'ADN à l'ARN messager",
+          "remember": "L'**ADN** reste dans le **noyau**. Un **gène** est une portion d'ADN qui porte l'information pour fabriquer une protéine. La **transcription** copie un gène en **ARN messager (ARNm)**, grâce à une enzyme. L'ARNm est une molécule à **un seul brin** ; elle contient les bases A, U, G, C : l'**uracile (U)** remplace la thymine (T). La copie suit la **complémentarité** : A de l'ADN donne U, T donne A, G donne C, C donne G. L'ARNm sort ensuite du noyau vers le cytoplasme.",
+          "method": [
+            "Repérer le brin d'ADN à transcrire et son sens de lecture.",
+            "Apparier chaque base avec sa base complémentaire : A avec U, T avec A, G avec C, C avec G.",
+            "Écrire l'ARNm obtenu, sans la lettre T : l'uracile U la remplace.",
+            "Conclure : dire que la transcription a lieu dans le noyau et que l'ARNm sort ensuite vers le cytoplasme."
+          ],
+          "example": {
+            "statement": "Comme la cuisinière copie une recette du grand livre pour l'emporter en cuisine, la cellule copie un gène. Le brin d'ADN transcrit d'un gène fictif est : TAC AAA GGC. Écrire l'ARNm.",
+            "steps": [
+              "Repérer : le brin transcrit est TAC AAA GGC, lu de gauche à droite.",
+              "Apparier : T donne A, A donne U, C donne G pour TAC ; chaque A donne U pour AAA ; G donne C, G donne C, C donne G pour GGC.",
+              "Écrire l'ARNm : AUG UUU CCG, sans aucun T.",
+              "Conclure : cette copie est faite dans le noyau ; l'ARNm AUG UUU CCG sort ensuite vers le cytoplasme, alors que l'ADN reste dans le noyau."
+            ]
+          },
+          "pitfall": "Ne pas écrire la lettre T dans un ARNm, et ne pas apparier A avec T lors d'une transcription. Contre-exemple : le brin d'ADN TAC donne l'ARNm AUG (T donne A, A donne U, C donne G), et non ATG. L'ARN n'a jamais de thymine. Pour éviter l'erreur, relis ton ARNm : s'il contient un T, il est faux.",
+          "figure": "du-gene-a-la-proteine",
+          "exercise": {
+            "title": "Transcrire un gène en ARN messager",
+            "statement": "Dans cet exercice, tu transcris des gènes en ARN messager avec les étapes de la fiche : repérer, apparier, écrire l'ARNm, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans quelle partie de la cellule a lieu la transcription ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : le gène est une portion d'ADN, et l'ADN reste dans le noyau. La transcription a donc lieu dans le noyau. Les ribosomes, dans le cytoplasme, sont le lieu de la traduction, pas de la transcription.",
+                "answers": [
+                  {
+                    "content": "Dans le noyau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans les ribosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la membrane de la cellule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le cytoplasme seulement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le brin d'ADN transcrit d'un gène fictif est TACTTTGGG. Écris l'ARNm obtenu, en lettres majuscules et sans espace : ___",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le brin transcrit est TAC TTT GGG. Étape 2 — Apparier : T donne A, A donne U, C donne G ; chaque T donne A ; chaque G donne C. Étape 3 — Écrire l'ARNm : AUG AAA CCC, soit AUGAAACCC, sans T.",
+                "answers": [
+                  {
+                    "content": "AUGAAACCC",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un ARN messager contient la base thymine (T).",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire l'ARNm : dans l'ARNm, l'uracile (U) remplace la thymine. La thymine existe dans l'ADN, pas dans l'ARN. L'erreur tentante est de recopier le T de l'ADN.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Lors de la transcription, l'adénine (A) du brin d'ADN transcrit s'apparie avec la base ___ de l'ARNm.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Apparier : A de l'ADN s'apparie avec U dans l'ARNm. T serait l'appariement de l'ADN avec lui-même, qui n'a pas lieu ici car l'ARN ne contient pas de thymine.",
+                "answers": [
+                  {
+                    "content": "U",
+                    "correct": true
+                  },
+                  {
+                    "content": "T",
+                    "correct": false
+                  },
+                  {
+                    "content": "A",
+                    "correct": false
+                  },
+                  {
+                    "content": "G",
+                    "correct": false
+                  },
+                  {
+                    "content": "C",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux différences entre l'ADN et l'ARN messager ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Écrire l'ARNm : il ne contient pas de T mais des U, et il est formé d'un seul brin. Étape 4 — Conclure : l'ARNm sort du noyau (il n'y reste pas), alors que l'ADN y reste ; il n'a ni thymine ni deux brins.",
+                "answers": [
+                  {
+                    "content": "L'ARNm n'a qu'un seul brin",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ARNm contient de l'uracile à la place de la thymine",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ARNm reste toujours dans le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ARNm contient de la thymine",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ARNm a deux brins comme l'ADN",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes qui mènent de l'ADN à l'ARNm.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : le gène est porté par l'ADN, dans le noyau. Étape 2 — Apparier, Étape 3 — Écrire l'ARNm : la copie est faite dans le noyau. Étape 4 — Conclure : l'ARNm sort ensuite vers le cytoplasme. L'ordre ne peut pas être inversé.",
+                "answers": [
+                  {
+                    "content": "Le gène est porté par l'ADN, dans le noyau"
+                  },
+                  {
+                    "content": "Le gène est copié en ARN messager"
+                  },
+                  {
+                    "content": "L'ARNm sort du noyau"
+                  },
+                  {
+                    "content": "L'ARNm arrive dans le cytoplasme"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque base de l'ADN transcrit à la base de l'ARNm qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Apparier : A donne U, T donne A, G donne C, C donne G. Le piège est d'apparier A avec T : cela n'existe pas dans l'ARNm.",
+                "answers": [
+                  {
+                    "content": "A",
+                    "match": "U"
+                  },
+                  {
+                    "content": "T",
+                    "match": "A"
+                  },
+                  {
+                    "content": "G",
+                    "match": "C"
+                  },
+                  {
+                    "content": "C",
+                    "match": "G"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à transcrire un gène.",
+            "questions": [
+              {
+                "content": "Un ___ est une portion d'ADN qui porte l'information pour fabriquer une ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on repère le gène sur l'ADN. Il porte l'information qui sera copiée en ARNm puis lue pour fabriquer une protéine.",
+                "answers": [
+                  {
+                    "content": "gène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "protéine",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La première case est l'unité d'information de l'ADN ; la seconde est ce que la cellule fabrique à partir d'elle."
+              },
+              {
+                "content": "Le brin d'ADN transcrit CTT donne l'ARNm ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Apparier : C donne G, T donne A, T donne A. Étape 3 — Écrire l'ARNm : GAA, sans T.",
+                "answers": [
+                  {
+                    "content": "GAA",
+                    "correct": true
+                  }
+                ],
+                "hint": "Transforme chaque lettre une à une : C vers G, T vers A."
+              },
+              {
+                "content": "Pour être transcrit, l'ADN quitte le noyau et va jusqu'aux ribosomes.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : l'ADN reste dans le noyau. C'est la copie, l'ARNm, qui sort du noyau pour aller dans le cytoplasme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Lors de la transcription, la base G de l'ADN s'apparie avec :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Apparier : G s'apparie avec C. U est le partenaire de A, et T n'existe pas dans l'ARN.",
+                "answers": [
+                  {
+                    "content": "C",
+                    "correct": true
+                  },
+                  {
+                    "content": "U",
+                    "correct": false
+                  },
+                  {
+                    "content": "T",
+                    "correct": false
+                  },
+                  {
+                    "content": "G",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le code génétique",
+          "remember": "L'ARNm se lit par groupes de **trois nucléotides**, les **codons**. Chaque codon correspond à **un acide aminé** ou à un signal d'arrêt : cette correspondance est le **code génétique**. Plusieurs codons peuvent coder le même acide aminé (par exemple AAA et AAG codent tous deux Lys). Le codon **AUG** code la méthionine (Met) et marque le **début** de la lecture. Les codons **UAA, UAG et UGA** sont des codons **stop** : ils ne codent aucun acide aminé et arrêtent la lecture. Le code génétique est universel : il est le même chez les êtres vivants.",
+          "method": [
+            "Repérer le codon AUG, qui marque le début de la lecture de l'ARNm.",
+            "Découper l'ARNm en codons de trois nucléotides à partir de AUG, jusqu'à un codon stop.",
+            "Chercher chaque codon dans le tableau du code génétique.",
+            "Écrire la suite des acides aminés obtenue, dans l'ordre des codons, sans compter le codon stop."
+          ],
+          "example": {
+            "statement": "Un ARNm fictif est CAUGGGCAAAGAAUAAGC. Avec l'extrait du code génétique (AUG = Met ; GGC = Gly ; AAA = Lys ; GAA = Glu ; UAA = arrêt), donner la suite d'acides aminés.",
+            "steps": [
+              "Repérer : le premier AUG se trouve en 2e position (C, puis AUG). La lecture commence là.",
+              "Découper : à partir de AUG, on lit AUG GGC AAA GAA UAA, puis GC qui reste après l'arrêt.",
+              "Chercher : AUG = Met, GGC = Gly, AAA = Lys, GAA = Glu, UAA = arrêt.",
+              "Écrire la suite : Met–Gly–Lys–Glu ; le codon stop UAA ne compte pas, et GC n'est pas lu."
+            ]
+          },
+          "pitfall": "Ne pas découper l'ARNm à partir de la première lettre, mais à partir de AUG. Contre-exemple : CAUGGGCAAAGAAUAAGC lu dès la première lettre donne CAU, GGG, CAA, AGA, AUA, AGC, des codons tous différents de AUG, GGC, AAA, GAA, UAA : la protéine obtenue serait fausse. Autre erreur : croire qu'un codon stop code un acide aminé ; il arrête seulement la lecture.",
+          "figure": null,
+          "exercise": {
+            "title": "Lire le code génétique",
+            "statement": "Dans cet exercice, tu lis le code génétique avec les étapes de la fiche : repérer AUG, découper en codons, chercher, écrire la suite d'acides aminés. Extrait du code génétique (codons de l'ARNm) : AUG = Met (méthionine) ; UUU et UUC = Phe ; AAA et AAG = Lys ; GAA et GAG = Glu ; GGC et GGG = Gly ; GCU = Ala ; UCU = Ser ; CCU et CCG = Pro ; UGG = Trp ; CUU = Leu ; UAA, UAG et UGA = arrêt (aucun acide aminé).",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Combien de nucléotides forment un codon de l'ARNm ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Découper : on découpe l'ARNm en codons de trois nucléotides. Un codon compte donc 3 nucléotides, pas 2 ni 4.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Le codon AUG de l'ARNm :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : AUG marque le début de la lecture. Étape 3 — Chercher : AUG = Met (méthionine). Les codons stop sont UAA, UAG et UGA, pas AUG.",
+                "answers": [
+                  {
+                    "content": "code la méthionine et marque le début de la lecture",
+                    "correct": true
+                  },
+                  {
+                    "content": "est un codon stop qui arrête la lecture",
+                    "correct": false
+                  },
+                  {
+                    "content": "code la lysine et arrête la lecture",
+                    "correct": false
+                  },
+                  {
+                    "content": "ne code aucun acide aminé",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec l'extrait du code génétique (GAA = Glu ; AAA = Lys ; UGG = Trp), le codon AAA code l'acide aminé noté ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Chercher : on cherche AAA dans l'extrait du code génétique : AAA = Lys (lysine). GAA = Glu et UGG = Trp codent d'autres acides aminés.",
+                "answers": [
+                  {
+                    "content": "Lys",
+                    "correct": true
+                  },
+                  {
+                    "content": "lysine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le codon UAA code l'acide aminé alanine (Ala).",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Chercher : UAA est un codon stop (arrêt). Étape 4 — Écrire la suite : un codon stop ne code aucun acide aminé ; il arrête la lecture. Ala est codé par GCU.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Avec AUG = Met ; GCU = Ala ; UCU = Ser ; CCU = Pro ; UAA = arrêt, remets dans l'ordre les acides aminés codés par l'ARNm AUG GCU UCU CCU UAA.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Découper : AUG, GCU, UCU, CCU, puis UAA. Étape 3 — Chercher : Met, Ala, Ser, Pro, arrêt. Étape 4 — Écrire la suite : Met–Ala–Ser–Pro, dans l'ordre des codons ; l'arrêt n'est pas un acide aminé.",
+                "answers": [
+                  {
+                    "content": "Met"
+                  },
+                  {
+                    "content": "Ala"
+                  },
+                  {
+                    "content": "Ser"
+                  },
+                  {
+                    "content": "Pro"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque codon de l'ARNm à l'acide aminé qu'il code.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Chercher : dans l'extrait du code génétique, UGG = Trp, GAA = Glu, AAA = Lys et UUU = Phe. Chaque codon est cherché un à un.",
+                "answers": [
+                  {
+                    "content": "UGG",
+                    "match": "Trp"
+                  },
+                  {
+                    "content": "GAA",
+                    "match": "Glu"
+                  },
+                  {
+                    "content": "AAA",
+                    "match": "Lys"
+                  },
+                  {
+                    "content": "UUU",
+                    "match": "Phe"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux affirmations exactes sur le code génétique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Découper : un codon compte trois nucléotides. Étape 3 — Chercher : AAA et AAG codent tous deux Lys, donc plusieurs codons peuvent coder le même acide aminé. UAA est un codon stop et non la méthionine.",
+                "answers": [
+                  {
+                    "content": "Plusieurs codons peuvent coder le même acide aminé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les codons sont formés de trois nucléotides",
+                    "correct": true
+                  },
+                  {
+                    "content": "Chaque acide aminé n'a qu'un seul codon",
+                    "correct": false
+                  },
+                  {
+                    "content": "UAA code la méthionine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un codon est formé de deux nucléotides",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec AUG = Met ; UUU = Phe ; GGC = Gly ; UGA = arrêt, l'ARNm AUGUUUGGCUGA donne la chaîne :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : AUG au début. Étape 2 — Découper : AUG UUU GGC UGA. Étape 3 — Chercher : Met, Phe, Gly, arrêt. Étape 4 — Écrire la suite : Met–Phe–Gly. Le codon stop UGA ne compte pas, et l'ordre est celui des codons.",
+                "answers": [
+                  {
+                    "content": "Met–Phe–Gly",
+                    "correct": true
+                  },
+                  {
+                    "content": "Met–Phe–Gly–arrêt compté comme acide aminé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Phe–Gly",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gly–Phe–Met",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire le code génétique.",
+            "questions": [
+              {
+                "content": "Un codon est formé de ___ nucléotides ; le codon ___ code la méthionine et marque le début de la lecture.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Découper : un codon compte trois nucléotides. Étape 1 — Repérer : le codon AUG code la méthionine (Met) et marque le début de la lecture.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "trois",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "AUG",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense au nombre de lettres d'un codon, puis au codon de départ."
+              },
+              {
+                "content": "Avec GGC = Gly, GGG = Gly et GCU = Ala, le codon GGG code :",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Chercher : GGG = Gly. Le piège est de confondre avec GCU, qui code Ala : deux nucléotides changent (le 2e et le 3e), et l'acide aminé change aussi.",
+                "answers": [
+                  {
+                    "content": "Gly",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ala",
+                    "correct": false
+                  },
+                  {
+                    "content": "un arrêt",
+                    "correct": false
+                  },
+                  {
+                    "content": "Met",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "UGA est un codon stop.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Découper : on lit jusqu'à un codon stop. Étape 3 — Chercher : UAA, UAG et UGA sont les trois codons stop ; ils ne codent aucun acide aminé.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec AUG = Met ; UUU = Phe ; AAA = Lys ; UAA = arrêt, remets dans l'ordre les acides aminés de l'ARNm AUG UUU AAA UAA.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Découper : AUG, UUU, AAA, UAA. Étape 3 — Chercher : Met, Phe, Lys, arrêt. Étape 4 — Écrire la suite : Met–Phe–Lys, l'arrêt étant exclu.",
+                "answers": [
+                  {
+                    "content": "Met"
+                  },
+                  {
+                    "content": "Phe"
+                  },
+                  {
+                    "content": "Lys"
+                  }
+                ],
+                "hint": "Lis les codons de gauche à droite et n'écris pas le codon stop."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La traduction : de l'ARNm à la protéine",
+          "remember": "La **traduction** a lieu dans le **cytoplasme**, sur les **ribosomes**. Le ribosome se fixe sur l'ARNm et le lit **codon par codon**. Chaque acide aminé est apporté par un **ARN de transfert (ARNt)**, qui porte un **anticodon** de trois nucléotides, **complémentaire** du codon (le codon AUG s'apparie avec l'anticodon UAC). Les acides aminés apportés sont reliés en chaîne, **dans l'ordre des codons**, jusqu'à un codon stop. La chaîne se détache, se replie et devient une protéine. Bilan : **ADN, puis transcription, ARNm, puis traduction, protéine**.",
+          "method": [
+            "Découper l'ARNm en codons de trois nucléotides à partir de AUG, jusqu'à un codon stop.",
+            "Déterminer l'anticodon de l'ARNt de chaque codon, par complémentarité : A avec U, G avec C.",
+            "Relier les acides aminés apportés par les ARNt, dans l'ordre des codons, en s'arrêtant au codon stop.",
+            "Conclure : écrire la chaîne d'acides aminés obtenue, qui devient la protéine."
+          ],
+          "example": {
+            "statement": "Dans un ribosome, on lit l'ARNm fictif AUGGAAGGCUAA. Avec l'extrait du code (AUG = Met ; GAA = Glu ; GGC = Gly ; UAA = arrêt), donner les anticodons et la chaîne d'acides aminés.",
+            "steps": [
+              "Découper : AUG GAA GGC UAA, le dernier étant un codon stop.",
+              "Déterminer l'anticodon : AUG donne UAC ; GAA donne CUU ; GGC donne CCG.",
+              "Relier les acides aminés : les ARNt apportent Met, puis Glu, puis Gly ; à UAA, la lecture s'arrête.",
+              "Conclure : la chaîne obtenue est Met–Glu–Gly, qui devient la protéine."
+            ]
+          },
+          "pitfall": "Ne pas confondre le codon (sur l'ARNm) et l'anticodon (sur l'ARNt). Contre-exemple : pour le codon GAA, l'anticodon est CUU, et non GAA. L'anticodon est complémentaire du codon, il ne lui est pas identique. Autre erreur : croire que les ribosomes lisent l'ADN : ils lisent l'ARNm.",
+          "figure": "du-gene-a-la-proteine",
+          "exercise": {
+            "title": "Traduire un ARN messager en protéine",
+            "statement": "Dans cet exercice, tu traduis un ARNm en protéine avec les étapes de la fiche : découper, déterminer l'anticodon, relier les acides aminés, conclure. Extrait du code génétique (codons de l'ARNm) : AUG = Met (méthionine) ; UUU et UUC = Phe ; AAA et AAG = Lys ; GAA et GAG = Glu ; GGC et GGG = Gly ; GCU = Ala ; UCU = Ser ; CCU et CCG = Pro ; UGG = Trp ; CUU = Leu ; UAA, UAG et UGA = arrêt (aucun acide aminé).",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Où a lieu la traduction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Découper : le ribosome lit l'ARNm codon par codon. Cette lecture se fait sur les ribosomes du cytoplasme, car l'ARNm est sorti du noyau. L'ADN reste dans le noyau et n'est pas lu par les ribosomes.",
+                "answers": [
+                  {
+                    "content": "Sur les ribosomes, dans le cytoplasme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans le noyau, sur l'ADN",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le noyau, sur l'ARNm",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sur la membrane de la cellule seulement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'anticodon de l'ARNt qui s'apparie avec le codon AUG est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Déterminer l'anticodon : A donne U, U donne A, G donne C, donc AUG donne UAC. L'anticodon est complémentaire du codon, il n'est pas identique.",
+                "answers": [
+                  {
+                    "content": "UAC",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le codon CCU de l'ARNm s'apparie avec l'anticodon ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Déterminer l'anticodon : C donne G, C donne G, U donne A, soit GGA. CCU serait le codon lui-même, et GGU contient U à la place de A en 3e lettre.",
+                "answers": [
+                  {
+                    "content": "GGA",
+                    "correct": true
+                  },
+                  {
+                    "content": "CCU",
+                    "correct": false
+                  },
+                  {
+                    "content": "GGU",
+                    "correct": false
+                  },
+                  {
+                    "content": "CCA",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec AUG = Met ; UUU = Phe ; AAA = Lys ; UGA = arrêt, l'ARNm AUGUUUAAAUGA donne la chaîne :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Découper : AUG UUU AAA UGA. Étape 3 — Relier les acides aminés : Met, Phe, Lys, puis la lecture s'arrête à UGA. Étape 4 — Conclure : Met–Phe–Lys. Ajouter un acide aminé après UGA est faux, car le codon stop arrête la lecture ; l'ordre est celui des codons.",
+                "answers": [
+                  {
+                    "content": "Met–Phe–Lys",
+                    "correct": true
+                  },
+                  {
+                    "content": "Met–Phe–Lys–Gly",
+                    "correct": false
+                  },
+                  {
+                    "content": "Phe–Lys",
+                    "correct": false
+                  },
+                  {
+                    "content": "Met–Lys–Phe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont trois affirmations exactes sur la traduction ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Découper : le ribosome lit l'ARNm codon par codon. Étape 2 — Déterminer l'anticodon : il est complémentaire du codon. Étape 3 — Relier : l'ARNt apporte l'acide aminé. Les ribosomes lisent l'ARNm (pas l'ADN) dans le cytoplasme (pas dans le noyau), et un ARN contient de l'uracile, jamais de thymine.",
+                "answers": [
+                  {
+                    "content": "Le ribosome lit l'ARNm codon par codon",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ARNt apporte un acide aminé au ribosome",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'anticodon est complémentaire du codon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le ribosome lit directement l'ADN",
+                    "correct": false
+                  },
+                  {
+                    "content": "La traduction a lieu dans le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ARNt contient de la thymine à la place de l'uracile",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la synthèse d'une protéine.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Découper : avant la lecture, l'ARNm doit avoir été fabriqué dans le noyau puis être sorti. Étapes 2 et 3 — Déterminer l'anticodon, Relier les acides aminés : les ARNt apportent les acides aminés sur le ribosome. Étape 4 — Conclure : la chaîne se replie en protéine.",
+                "answers": [
+                  {
+                    "content": "Le gène de l'ADN est copié en ARNm dans le noyau"
+                  },
+                  {
+                    "content": "L'ARNm sort du noyau et se fixe sur un ribosome"
+                  },
+                  {
+                    "content": "Les ARNt apportent les acides aminés codon par codon"
+                  },
+                  {
+                    "content": "La chaîne d'acides aminés se replie en protéine"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément de la cellule à son rôle dans la synthèse des protéines.",
+                "question_type": "matching",
+                "explanation": "Étape 1 à 4 : l'ADN garde le gène dans le noyau ; l'ARNm en est la copie ; le ribosome lit l'ARNm codon par codon (Étape 1 — Découper) ; l'ARNt apporte l'acide aminé grâce à son anticodon (Étape 2 — Déterminer l'anticodon).",
+                "answers": [
+                  {
+                    "content": "ADN",
+                    "match": "Porte le gène, dans le noyau"
+                  },
+                  {
+                    "content": "ARNm",
+                    "match": "Copie du gène portée au ribosome"
+                  },
+                  {
+                    "content": "ARNt",
+                    "match": "Apporte un acide aminé grâce à son anticodon"
+                  },
+                  {
+                    "content": "Ribosome",
+                    "match": "Lit l'ARNm et relie les acides aminés"
+                  }
+                ]
+              },
+              {
+                "content": "Le codon et l'anticodon correspondant sont toujours identiques.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Déterminer l'anticodon : l'anticodon est complémentaire du codon, pas identique. Par exemple AUG a pour anticodon UAC. L'erreur tentante est de recopier le codon.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre la traduction.",
+            "questions": [
+              {
+                "content": "Le ___ se fixe sur l'ARNm ; l'ARNt lui apporte un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Découper : le ribosome lit l'ARNm. Étape 3 — Relier les acides aminés : chaque ARNt apporte un acide aminé, qui est relié aux précédents.",
+                "answers": [
+                  {
+                    "content": "ribosome",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "acide aminé",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La première case est la structure qui lit l'ARNm ; la seconde est le maillon de la protéine."
+              },
+              {
+                "content": "L'anticodon qui s'apparie avec le codon UUU est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Déterminer l'anticodon : U donne A, trois fois, donc UUU donne AAA.",
+                "answers": [
+                  {
+                    "content": "AAA",
+                    "correct": true
+                  }
+                ],
+                "hint": "Chaque lettre devient sa complémentaire : U avec A."
+              },
+              {
+                "content": "La traduction se termine quand le ribosome rencontre un codon stop.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Relier les acides aminés : on s'arrête au codon stop (UAA, UAG ou UGA). Aucun ARNt n'apporte d'acide aminé pour ce codon.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fois détachée du ribosome, la chaîne d'acides aminés se replie et devient :",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : la chaîne d'acides aminés qui se replie est une protéine. Un gène est une portion d'ADN et l'ARNm une copie de ce gène, deux choses qui sont lues, pas fabriquées par la traduction.",
+                "answers": [
+                  {
+                    "content": "une protéine",
+                    "correct": true
+                  },
+                  {
+                    "content": "un gène",
+                    "correct": false
+                  },
+                  {
+                    "content": "un ARN messager",
+                    "correct": false
+                  },
+                  {
+                    "content": "un nucléotide",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Au marché : de quoi sont faites les protéines ?",
+          "statement": "Mariam vend du poisson fumé, des œufs, des haricots, du riz et de l'huile de palme sur un marché d'Abidjan. Son fils, élève de 1ère, lui explique ce qu'il a appris en SVT sur les protéines. Réponds aux questions avec les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Les protéines du poisson mangé sont digérées en acides aminés, que les cellules du corps utilisent ensuite pour fabriquer leurs propres protéines.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Reconnaître : une protéine est une chaîne d'acides aminés. Étape 2 — Lire la séquence : en digérant le poisson, l'organisme sépare ses chaînes en acides aminés. Étape 4 — Conclure : ces acides aminés sont réutilisés par les cellules pour fabriquer des chaînes dans l'ordre de leurs propres gènes. L'affirmation est donc vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces produits du marché, lesquels sont surtout riches en protéines ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Reconnaître une protéine, c'est repérer une chaîne d'acides aminés. Le poisson et les œufs sont riches en protéines. L'huile de palme est un lipide ; le riz est riche en amidon et le sucre de canne est un glucide : ni l'un ni l'autre n'est surtout fait de protéines.",
+              "answers": [
+                {
+                  "content": "Le poisson fumé",
+                  "correct": true
+                },
+                {
+                  "content": "Les œufs",
+                  "correct": true
+                },
+                {
+                  "content": "L'huile de palme",
+                  "correct": false
+                },
+                {
+                  "content": "Le riz",
+                  "correct": false
+                },
+                {
+                  "content": "Le sucre de canne",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque substance à sa nature.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Reconnaître. L'amylase est une enzyme donc une protéine, chaîne d'acides aminés. L'amidon est un glucide et l'huile un lipide : aucun n'est une chaîne d'acides aminés.",
+              "answers": [
+                {
+                  "content": "Amylase de la salive",
+                  "match": "Protéine (enzyme)"
+                },
+                {
+                  "content": "Amidon du riz",
+                  "match": "Glucide"
+                },
+                {
+                  "content": "Huile de palme",
+                  "match": "Lipide"
+                }
+              ]
+            },
+            {
+              "content": "Une portion d'ARNm fictive, lue du codon AUG jusqu'au codon stop compris, compte 300 nucléotides. Combien d'acides aminés comporte la chaîne obtenue ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du code génétique : Étape 2 — Découper : 300 nucléotides font 300 ÷ 3 = 100 codons. Étape 4 — Écrire la suite : le dernier codon est un codon stop, qui ne code aucun acide aminé. La chaîne compte donc 100 − 1 = 99 acides aminés. Oublier le codon stop donnerait 100 : c'est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "99",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Deux protéines fictives P1 et P2 contiennent chacune 5 acides aminés : 2 Gly, 2 Ala et 1 Met, mais dans un ordre différent. Que peut-on dire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la fiche sur les protéines : Étape 2 — Lire la séquence de P1 et de P2. Étape 3 — Comparer les séquences : mêmes acides aminés, mais ordre différent. Étape 4 — Conclure : des séquences différentes donnent des protéines différentes. Dire « la même protéine » est l'erreur du piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Ce sont deux protéines différentes",
+                  "correct": true
+                },
+                {
+                  "content": "Ce sont la même protéine",
+                  "correct": false
+                },
+                {
+                  "content": "P1 est une enzyme et P2 une hormone",
+                  "correct": false
+                },
+                {
+                  "content": "Elles ont la même forme et le même rôle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'information pour fabriquer une protéine est portée par une portion d'ADN appelée ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 1 — Repérer : l'ADN porte des gènes. Un gène est une portion d'ADN qui contient l'information pour une protéine ; elle est copiée en ARNm (transcription), puis lue par les ribosomes (traduction).",
+              "answers": [
+                {
+                  "content": "gène",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "À la cuisine de la cellule : copier une recette",
+          "statement": "Dans une cellule, le gène joue le rôle d'une recette du grand livre de la cuisine, que la cuisinière copie avant de l'emporter. Un gène fictif a pour brin d'ADN transcrit : TAC TTT GGC ATT. Extrait du code génétique (codons de l'ARNm) : AUG = Met (méthionine) ; UUU et UUC = Phe ; AAA et AAG = Lys ; GAA et GAG = Glu ; GGC et GGG = Gly ; GCU = Ala ; UCU = Ser ; CCU et CCG = Pro ; UGG = Trp ; CUU = Leu ; UAA, UAG et UGA = arrêt (aucun acide aminé).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le brin d'ADN transcrit TACTTTGGCATT donne l'ARNm ___ (lettres majuscules, sans espace).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la transcription : Étape 1 — Repérer : TAC TTT GGC ATT. Étape 2 — Apparier : TAC donne AUG, TTT donne AAA, GGC donne CCG, ATT donne UAA. Étape 3 — Écrire l'ARNm : AUG AAA CCG UAA, sans T. Étape 4 — Conclure : cette copie est faite dans le noyau.",
+              "answers": [
+                {
+                  "content": "AUGAAACCGUAA",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de codons contient l'ARNm AUGAAACCGUAA ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du code génétique : Étape 2 — Découper l'ARNm en codons de trois nucléotides : AUG, AAA, CCG, UAA. Il y a 12 nucléotides, soit 12 ÷ 3 = 4 codons.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec AUG = Met ; AAA = Lys ; CCG = Pro ; UAA = arrêt, remets dans l'ordre les acides aminés de la protéine fabriquée à partir de l'ARNm AUG AAA CCG UAA.",
+              "question_type": "ordering",
+              "explanation": "Méthode du code génétique : Étape 1 — Repérer AUG. Étape 2 — Découper : AUG AAA CCG UAA. Étape 3 — Chercher : Met, Lys, Pro, arrêt. Étape 4 — Écrire la suite : Met–Lys–Pro. Le codon stop UAA ne compte pas.",
+              "answers": [
+                {
+                  "content": "Met"
+                },
+                {
+                  "content": "Lys"
+                },
+                {
+                  "content": "Pro"
+                }
+              ]
+            },
+            {
+              "content": "Dans la traduction de l'ARNm AUG AAA CCG UAA, l'anticodon de l'ARNt qui s'apparie avec le codon AAA est :",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la traduction : Étape 2 — Déterminer l'anticodon : A donne U, trois fois, donc UUU. AAA serait le codon lui-même (l'anticodon n'est pas identique au codon), TTT contient de la thymine alors qu'un ARNt est un ARN, et GGG ne correspond pas à A.",
+              "answers": [
+                {
+                  "content": "UUU",
+                  "correct": true
+                },
+                {
+                  "content": "AAA",
+                  "correct": false
+                },
+                {
+                  "content": "TTT",
+                  "correct": false
+                },
+                {
+                  "content": "GGG",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'ARNm obtenu à partir du brin transcrit TACTTTGGCATT contient de la thymine.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la transcription : Étape 3 — Écrire l'ARNm : l'uracile remplace la thymine, donc un ARNm ne contient jamais de T. Le résultat est AUGAAACCGUAA.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux affirmations exactes sur cette synthèse ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 4 de la transcription — Conclure : la copie est faite dans le noyau puis l'ARNm sort. Étape 1 de la traduction — Découper : les ribosomes, dans le cytoplasme, lisent l'ARNm. L'ADN reste dans le noyau et n'est pas lu par les ribosomes.",
+              "answers": [
+                {
+                  "content": "La copie du gène en ARNm a lieu dans le noyau",
+                  "correct": true
+                },
+                {
+                  "content": "La lecture de l'ARNm par les ribosomes a lieu dans le cytoplasme",
+                  "correct": true
+                },
+                {
+                  "content": "Les ribosomes lisent l'ADN dans le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "Le brin d'ADN quitte le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "L'ARNm reste dans le noyau",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du noyau au cytoplasme : suivre l'ARN",
+          "statement": "Expérience fictive, résultats simplifiés : des cellules de foie de rat en culture reçoivent pendant 5 minutes de l'uridine radioactive, une substance qui sert uniquement à fabriquer de l'ARN et qui rend l'ARN radioactif. On la remplace ensuite par de l'uridine normale, puis on mesure la part de la radioactivité située dans le noyau. Le reste se trouve dans le cytoplasme. Résultats : à 5 min, 90 % dans le noyau ; à 30 min, 40 % ; à 60 min, 20 %. Comme la cuisine d'un restaurant, la cellule garde ses recettes (l'ADN) dans un grand livre et envoie des copies en cuisine. Extrait du code génétique (codons de l'ARNm) : AUG = Met (méthionine) ; UUU et UUC = Phe ; AAA et AAG = Lys ; GAA et GAG = Glu ; GGC et GGG = Gly ; GCU = Ala ; UCU = Ser ; CCU et CCG = Pro ; UGG = Trp ; CUU = Leu ; UAA, UAG et UGA = arrêt (aucun acide aminé).",
+          "exercise_type": "evaluation",
+          "figure": "uridine-noyau",
+          "questions": [
+            {
+              "content": "À 5 minutes, 90 % de la radioactivité se trouve dans le noyau. Que peut-on en déduire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'analyse de résultats : Étape 1 — Observer : l'ARN radioactif est d'abord dans le noyau (90 %). Étape 2 — Interpréter : l'uridine sert à fabriquer de l'ARN, donc l'ARN y est fabriqué. Étape 3 — Conclure : la transcription a lieu dans le noyau. Le cytoplasme, où se trouvent les ribosomes, n'a alors reçu que 10 % de la radioactivité : l'ARN n'y est pas encore passé en grande quantité.",
+              "answers": [
+                {
+                  "content": "L'ARN est fabriqué dans le noyau",
+                  "correct": true
+                },
+                {
+                  "content": "L'ARN est fabriqué dans les ribosomes",
+                  "correct": false
+                },
+                {
+                  "content": "L'ARN est fabriqué dans le cytoplasme",
+                  "correct": false
+                },
+                {
+                  "content": "L'ADN est fabriqué dans le cytoplasme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après les résultats, quelle part de la radioactivité se trouve dans le cytoplasme à 30 minutes ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Observer : à 30 minutes, 40 % de la radioactivité est dans le noyau. Étape 2 — Calculer : le reste est dans le cytoplasme, soit 100 − 40 = 60 %. L'erreur tentante est de lire 40 comme la part du cytoplasme.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Entre 5 et 60 minutes, la radioactivité du noyau passe de 90 % à 20 %. Que montre cette évolution ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Observer : la part du noyau baisse (90, 40, 20) et celle du cytoplasme monte (10, 60, 80). Étape 2 — Interpréter : l'ARN passe du noyau au cytoplasme. Étape 3 — Conclure : l'ARNm sort du noyau. L'ADN, lui, reste dans le noyau.",
+              "answers": [
+                {
+                  "content": "Les ARN fabriqués dans le noyau passent dans le cytoplasme",
+                  "correct": true
+                },
+                {
+                  "content": "Les ARN restent bloqués dans le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "Les ARN sont détruits dans le cytoplasme",
+                  "correct": false
+                },
+                {
+                  "content": "L'ADN quitte le noyau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de la cuisine d'un restaurant à son équivalent dans la cellule.",
+              "question_type": "matching",
+              "explanation": "Méthode de la fiche : l'ADN garde les gènes dans le noyau (le livre), l'ARNm est la copie du gène (Étape 4 de la transcription — Conclure), le ribosome lit l'ARNm codon par codon (Étape 1 de la traduction — Découper) et la protéine est le produit final.",
+              "answers": [
+                {
+                  "content": "Grand livre de recettes",
+                  "match": "ADN"
+                },
+                {
+                  "content": "Photocopie d'une recette",
+                  "match": "ARN messager"
+                },
+                {
+                  "content": "Cuisinier qui lit la copie",
+                  "match": "Ribosome"
+                },
+                {
+                  "content": "Plat préparé",
+                  "match": "Protéine"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la cellule a-t-elle besoin de l'ARN messager ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Observer les lieux : l'ADN est dans le noyau et les ribosomes sont dans le cytoplasme. Étape 2 — Interpréter : il faut donc un messager, copie du gène, qui passe du noyau au cytoplasme. Étape 3 — Conclure : c'est le rôle de l'ARNm. L'ADN porte bien des gènes, et l'ARN contient de l'uracile, pas de thymine.",
+              "answers": [
+                {
+                  "content": "Parce que l'ADN ne quitte pas le noyau",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que les ribosomes qui fabriquent les protéines sont dans le cytoplasme",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que l'ARN contient de la thymine",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que les ribosomes sont dans le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que l'ADN ne porte aucun gène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un gène fictif a pour brin d'ADN transcrit TACCTTACT. L'ARNm obtenu est ___ (lettres majuscules, sans espace).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la transcription : Étape 1 — Repérer : TAC CTT ACT. Étape 2 — Apparier : TAC donne AUG, CTT donne GAA, ACT donne UGA. Étape 3 — Écrire l'ARNm : AUG GAA UGA, sans T.",
+              "answers": [
+                {
+                  "content": "AUGGAAUGA",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec AUG = Met ; GAA = Glu ; UGA = arrêt, la chaîne d'acides aminés obtenue à partir de l'ARNm AUGGAAUGA est :",
+              "question_type": "single_choice",
+              "explanation": "Méthode du code génétique : Étape 2 — Découper : AUG GAA UGA. Étape 3 — Chercher : Met, Glu, arrêt. Étape 4 — Écrire la suite : Met–Glu. UGA est un codon stop, il ne code aucun acide aminé ; l'ordre est celui des codons.",
+              "answers": [
+                {
+                  "content": "Met–Glu",
+                  "correct": true
+                },
+                {
+                  "content": "Met–Glu–UGA",
+                  "correct": false
+                },
+                {
+                  "content": "Glu–Met",
+                  "correct": false
+                },
+                {
+                  "content": "Met seul",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en 3 à 4 phrases pourquoi une cellule ne fabrique pas ses protéines directement à partir de l'ADN, mais passe par l'ARN messager.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que l'ADN reste dans le noyau",
+                "Dit que les ribosomes sont dans le cytoplasme",
+                "Dit que l'ARNm est une copie du gène qui passe du noyau au cytoplasme",
+                "Cite la transcription et la traduction"
+              ],
+              "explanation": "Corrigé modèle : L'ADN, qui porte les gènes, reste dans le noyau. Les protéines sont fabriquées dans le cytoplasme, sur les ribosomes. La cellule copie donc le gène en ARN messager par la transcription, dans le noyau. L'ARNm sort du noyau et les ribosomes le lisent codon par codon pour fabriquer la protéine : c'est la traduction. Barème : 1 point pour l'ADN dans le noyau et les ribosomes dans le cytoplasme, 1 point pour l'ARNm copie du gène qui passe de l'un à l'autre, 1 point pour la transcription et la traduction.",
+              "answers": [],
+              "starter": "L'ADN reste dans le noyau, alors que…"
+            }
+          ]
+        },
+        {
+          "title": "L'insuline, du gène à la protéine",
+          "statement": "Lors d'une journée de prévention au marché, un infirmier explique que l'insuline est une hormone de nature protéique qui fait baisser la glycémie après un repas, par exemple après un jus de canne. Tu retraces comment une cellule fabrique une protéine, à partir de données fictives. Extrait du code génétique (codons de l'ARNm) : AUG = Met (méthionine) ; UUU et UUC = Phe ; AAA et AAG = Lys ; GAA et GAG = Glu ; GGC et GGG = Gly ; GCU = Ala ; UCU = Ser ; CCU et CCG = Pro ; UGG = Trp ; CUU = Leu ; UAA, UAG et UGA = arrêt (aucun acide aminé).",
+          "exercise_type": "evaluation",
+          "figure": "du-gene-a-la-proteine",
+          "questions": [
+            {
+              "content": "L'insuline est une protéine. Cela signifie qu'elle est formée :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Reconnaître : une protéine est une chaîne d'acides aminés. Une chaîne de nucléotides est de l'ADN ou de l'ARN ; les sucres reliés forment l'amidon ; les acides gras forment les lipides.",
+              "answers": [
+                {
+                  "content": "d'une chaîne d'acides aminés",
+                  "correct": true
+                },
+                {
+                  "content": "d'une chaîne de nucléotides",
+                  "correct": false
+                },
+                {
+                  "content": "de sucres reliés entre eux",
+                  "correct": false
+                },
+                {
+                  "content": "d'acides gras",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec AUG = Met ; GGC = Gly ; AAA = Lys ; GAA = Glu ; UGA = arrêt, remets dans l'ordre les acides aminés d'une petite protéine fictive codée par l'ARNm AUGGGCAAAGAAUGA.",
+              "question_type": "ordering",
+              "explanation": "Méthode du code génétique : Étape 1 — Repérer AUG au début. Étape 2 — Découper : AUG GGC AAA GAA UGA. Étape 3 — Chercher : Met, Gly, Lys, Glu, arrêt. Étape 4 — Écrire la suite : Met–Gly–Lys–Glu. Le codon stop UGA ne compte pas.",
+              "answers": [
+                {
+                  "content": "Met"
+                },
+                {
+                  "content": "Gly"
+                },
+                {
+                  "content": "Lys"
+                },
+                {
+                  "content": "Glu"
+                }
+              ]
+            },
+            {
+              "content": "Deux ARNm fictifs ne diffèrent que par un codon : AUG GAA GGC AAA UAA et AUG GAA GGC AAG UAA. Que peut-on dire des protéines obtenues ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du code génétique : Étape 2 — Découper : les deux ARNm ont 5 codons. Étape 3 — Chercher : AUG, GAA, GGC sont identiques ; AAA = Lys et AAG = Lys. Étape 4 — Écrire la suite : Met–Glu–Gly–Lys dans les deux cas. Plusieurs codons peuvent coder le même acide aminé ; AAG n'est pas un codon stop.",
+              "answers": [
+                {
+                  "content": "Elles sont identiques, car AAA et AAG codent tous deux Lys",
+                  "correct": true
+                },
+                {
+                  "content": "Elles sont différentes, car les ARNm sont différents",
+                  "correct": false
+                },
+                {
+                  "content": "Elles sont identiques, car UAA code un acide aminé",
+                  "correct": false
+                },
+                {
+                  "content": "Elles sont différentes, car AAG est un codon stop",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un ARNm fictif a une partie codante de 51 nucléotides, codon stop compris. Combien d'acides aminés la chaîne contient-elle ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Découper : 51 ÷ 3 = 17 codons. Étape 4 — Écrire la suite : le dernier codon est un codon stop et ne code aucun acide aminé, donc 17 − 1 = 16 acides aminés. Répondre 17 est l'erreur de celui qui compte le codon stop.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quelles sont trois affirmations exactes sur la synthèse d'une protéine comme l'insuline ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 4 de la transcription — Conclure : la copie du gène en ARNm a lieu dans le noyau. Étape 1 de la traduction — Découper : les ribosomes lisent l'ARNm codon par codon. Étape 2 — Déterminer l'anticodon : l'ARNt apporte l'acide aminé. Les ribosomes ne lisent pas l'ADN, l'ARNm contient de l'uracile et la traduction se fait dans le cytoplasme.",
+              "answers": [
+                {
+                  "content": "Le gène est copié en ARNm dans le noyau",
+                  "correct": true
+                },
+                {
+                  "content": "Les ribosomes lisent l'ARNm codon par codon",
+                  "correct": true
+                },
+                {
+                  "content": "Les ARNt apportent les acides aminés grâce à leur anticodon",
+                  "correct": true
+                },
+                {
+                  "content": "Les ribosomes lisent directement l'ADN",
+                  "correct": false
+                },
+                {
+                  "content": "L'ARNm contient de la thymine",
+                  "correct": false
+                },
+                {
+                  "content": "La traduction a lieu dans le noyau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour le codon GGC, l'anticodon de l'ARNt est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la traduction : Étape 2 — Déterminer l'anticodon : G donne C, G donne C, C donne G, soit CCG. L'anticodon est complémentaire du codon, il n'est pas identique à GGC.",
+              "answers": [
+                {
+                  "content": "CCG",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe d'environ 5 lignes qui explique comment une cellule fabrique une protéine à partir d'un gène. Utilise les mots : transcription, ARN messager, ribosome, codon, acide aminé.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Dit que le gène est porté par l'ADN dans le noyau",
+                "Décrit la transcription en ARN messager",
+                "Dit que l'ARNm passe dans le cytoplasme et se fixe à un ribosome",
+                "Explique la lecture codon par codon et les acides aminés apportés par les ARNt",
+                "Conclut que la chaîne d'acides aminés se replie en protéine"
+              ],
+              "explanation": "Corrigé modèle : Le gène est une portion d'ADN, dans le noyau. Il est copié en ARN messager par la transcription. L'ARN messager sort du noyau et se fixe sur un ribosome, dans le cytoplasme. Le ribosome le lit codon par codon (trois nucléotides par codon) ; à chaque codon, un ARN de transfert apporte l'acide aminé correspondant grâce à son anticodon. Les acides aminés sont reliés dans l'ordre des codons jusqu'au codon stop. La chaîne obtenue se replie : c'est la protéine. Barème : 1 point par critère, soit 5 points.",
+              "answers": [],
+              "starter": "Le gène est une portion d'ADN située…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
