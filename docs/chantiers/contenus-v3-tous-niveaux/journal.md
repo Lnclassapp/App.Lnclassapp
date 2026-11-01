@@ -15,6 +15,7 @@
 | 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 | 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
+| 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
 | 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
 
 ## À faire valider par un enseignant
@@ -23,6 +24,7 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P1 | Toutes (13) | Périmètre de chaque notion (ce qui est traité ou non, voir le détail par leçon dans le [journal du chantier](../contenus-1ere-mathematiques-cd/journal.md)), modèles de situation fictifs, barèmes des problèmes ; figures de courbes, tableaux de variations, arbres et solides absentes (dette). |
 | P3 | Travail et puissance (translation) | Somme des travaux sans théorème de l'énergie cinétique ; puissance maximale donnée dans l'énoncé (pas de rendement) ; cos α = 0,8 donné |
 | P3 | Généralités sur les composés organiques | Formule topologique, isomérie de position et de fonction, densité d·29 écartées ; dénombrement des isomères (C4H10, C5H12) et chaînes C=C au programme ? « le bois » cité comme composé organique ; analyse quantitative m(C) = m(CO2)×12/44 |
 | P3 | Travail et puissance (rotation, C) | W = M·θ justifié par l'arc rθ ; moment d'une force oblique d = OA·sin α (sin 30° donné) ; moment d'un couple et travail W = M·θ ; valeurs de moteur (3000 tr/min, 20 N·m) plausibles, pas constructeur ; rendement, période, moment d'inertie écartés |

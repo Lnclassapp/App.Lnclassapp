@@ -787,6 +787,48 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 - **Français et Philosophie** : la règle du e muet, les formes fixes (sonnet, ballade), le nombre de parties d'une dissertation, les connecteurs et la réfutation.
 - **Histoire-Géographie** : l'IDH et le taux de scolarisation (à citer avec une source), la date de la seconde révolution industrielle (« vers 1850 », « vers 1870 »), les lois sur le travail des enfants.
 
+### 1ère C et D, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-cd`)
+
+Les 10 premières leçons de Mathématiques de la progression DPFC 2026-2027 de 1ère C et de 1ère D, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P1 du programme `contenus-v3-tous-niveaux`). 13 leçons distinctes, 20 fichiers : les 7 leçons communes aux deux séries sont écrites une fois puis déclinées par série (acquis, interdits et exemples de la série). Elles **remplacent** les fichiers v1 du même intitulé rédigés le 2026-10-10 (rangs 1 à 3). « Généralités sur les fonctions » et « Dénombrement » restent déclinables en 1ère A (vague P2).
+
+#### 1ère C
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 4 | 8 | 49 | 96 % | 0 | — |
+| 2 | `mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 8 | 48 | 96 % | 3 | `geometry` |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 9 | 56 | 96 % | 0 | — |
+| 4 | `mathematiques/barycentre.json` | Barycentre | 5 | 9 | 57 | 95 % | 2 | `coordinate_plane` |
+| 5 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 8 | 53 | 96 % | 0 | — |
+| 6 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 53 | 96 % | 0 | — |
+| 7 | `mathematiques/extension-de-la-notion-de-limite.json` | Extension de la notion de limite | 4 | 8 | 57 | 95 % | 0 | — |
+| 8 | `mathematiques/composees-de-transformations-du-plan.json` | Composées de transformations du plan | 4 | 8 | 58 | 97 % | 2 | `coordinate_plane`, `geometry` |
+| 9 | `mathematiques/derivation.json` | Dérivation | 5 | 9 | 56 | 96 % | 0 | — |
+| 10 | `mathematiques/orthogonalite-de-l-espace.json` | Orthogonalité de l'espace | 5 | 9 | 54 | 96 % | 0 | — |
+
+#### 1ère D
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/equations-et-inequations-du-second-degre-dans.json` | Équations et inéquations du second degré dans ℝ | 4 | 8 | 54 | 96 % | 0 | — |
+| 2 | `mathematiques/angles-orientes-et-trigonometrie.json` | Angles orientés et trigonométrie | 4 | 8 | 48 | 100 % | 3 | `geometry` |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 5 | 9 | 55 | 100 % | 0 | — |
+| 4 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 4 | 8 | 49 | 100 % | 0 | — |
+| 5 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 51 | 98 % | 0 | — |
+| 6 | `mathematiques/derivation.json` | Dérivation | 5 | 9 | 56 | 98 % | 0 | — |
+| 7 | `mathematiques/extension-de-la-notion-de-limite.json` | Extension de la notion de limite | 4 | 8 | 55 | 100 % | 0 | — |
+| 8 | `mathematiques/barycentre.json` | Barycentre | 5 | 9 | 56 | 98 % | 2 | `coordinate_plane` |
+| 9 | `mathematiques/etude-et-representation-graphique-d-une-fonction.json` | Étude et représentation graphique d'une fonction | 4 | 8 | 61 | 97 % | 0 | — |
+| 10 | `mathematiques/probabilite.json` | Probabilité | 4 | 8 | 56 | 96 % | 0 | — |
+
+Au total : 87 notions, 167 exercices, 1082 questions notées et 12 figures.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-cd/controle-entrainement.rb`). Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
+
+Figures manquantes (courbes, tableaux de variations, arbres, solides en perspective) : sortes absentes du moteur, notées en dette dans le journal du chantier.
+
+À faire valider par un enseignant de mathématiques avant publication : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
+
 ### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`
 
 Les 3 premières leçons de chaque matière de Seconde (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-11 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A et C ont des progressions différentes en Mathématiques, SVT et Français ; Physique-Chimie et Histoire-Géographie ont des premières leçons communes.
