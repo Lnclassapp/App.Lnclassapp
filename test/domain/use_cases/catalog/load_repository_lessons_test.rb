@@ -395,7 +395,7 @@ module UseCases
 
         assert_equal 1, referential.calls
         assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2" ],
-                       [ :warn, "[contenus] référentiel : non créé, nom déjà pris : matière Mathématiques" ] ], @logs.first(2)
+                       [ :warn, "[contenus] référentiel : non créé (déjà pris) : matière Mathématiques" ] ], @logs.first(2)
       end
 
       test "a complete referential logs nothing" do

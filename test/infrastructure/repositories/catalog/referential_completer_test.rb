@@ -47,6 +47,7 @@ module Repositories
         created = complete
 
         assert_equal [ 6, 7, 8 ], [ "terminale", "1ere", "tle" ].map { Orm::Level.find_by!(slug: it).position }
+        assert_equal [ "1ère (position 7)", "Tle (position 8)" ], created.fetch(:levels).last(2)
         assert_includes created.fetch(:conflicts), "matière Mathématiques"
         assert_not Orm::Material.exists?(slug: "mathematiques")
         assert_equal 5, created.fetch(:materials).size
@@ -60,6 +61,12 @@ module Repositories
         assert_equal [ "niveau Tle", "série C" ], created.fetch(:conflicts)
         assert_not(created.fetch(:pairs).any? { it.start_with?("Tle") || it.end_with?(" C") })
         assert_includes created.fetch(:pairs), "1ère A1"
+      end
+      test "an interruption keeps what was already created and names itself among the conflicts" do
+        created = stub_any_instance(Orm::Material.singleton_class, :exists?, ->(*) { raise ActiveRecord::ConnectionNotEstablished }) { complete }
+
+        assert_equal 7, created.fetch(:levels).size
+        assert_equal [ "interrompu (ActiveRecord::ConnectionNotEstablished)" ], created.fetch(:conflicts)
       end
     end
   end

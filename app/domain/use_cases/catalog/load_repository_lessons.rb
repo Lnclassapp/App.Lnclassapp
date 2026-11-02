@@ -80,7 +80,7 @@ module UseCases
                 .filter_map { |key, label| "#{label} #{created.fetch(key).join(', ')}" if created.fetch(key).any? }
         @logger.info("[contenus] référentiel complété : #{parts.join(' ; ')}") if parts.any?
         conflicts = created.fetch(:conflicts)
-        @logger.warn("[contenus] référentiel : non créé, nom déjà pris : #{conflicts.join(', ')}") if conflicts.any?
+        @logger.warn("[contenus] référentiel : non créé (déjà pris) : #{conflicts.join(', ')}") if conflicts.any?
       rescue StandardError => error
         @logger.error("[contenus] référentiel non complété (#{error.class} : #{error.message})")
       end

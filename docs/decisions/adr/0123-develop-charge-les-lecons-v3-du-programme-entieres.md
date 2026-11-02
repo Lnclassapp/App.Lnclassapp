@@ -82,5 +82,5 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 - Le barème des classes n'est pas touché.
 - Le journal du pré-déploiement liste ce qui a été créé ; un échec est journalisé et le chargement continue.
 
-**Conséquence.** Develop porte désormais les niveaux, séries et matières du référentiel de base, même si l'équipe ne les avait pas créés ; les renommer à l'écran reste possible (le slug est figé), un niveau supprimé reviendrait au déploiement suivant.
+**Conséquence.** Develop porte désormais les niveaux, séries et matières du référentiel de base, même si l'équipe ne les avait pas créés ; les renommer à l'écran reste possible (le slug est figé), un niveau, une série, un couple ou une matière supprimé revient au déploiement suivant (pas de mémoire des suppressions). Un niveau du même sens sous un autre nom (« Terminale ») n'empêche pas la création de « Tle » : les deux coexistent, le journal dit la position décalée.
 

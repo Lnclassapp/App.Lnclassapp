@@ -8,6 +8,7 @@ module Repositories
 
       Base = Entities::Catalog::BaseReferential
 
+      # Une interruption (base coupée…) rend ce qui a déjà été créé, avec l'interruption dans les conflits : rien ne se perd au journal.
       def complete
         @created = { levels: [], series: [], pairs: [], materials: [], conflicts: [] }
         levels = Base::LEVELS.to_h { [ it.name, level(it) ] }
@@ -17,13 +18,18 @@ module Repositories
         end
         Base::MATERIALS.each { material(it) }
         @created
+      rescue StandardError => error
+        @created.fetch(:conflicts) << "interrompu (#{error.class})"
+        @created
       end
 
       private
 
       def level(base)
-        Orm::Level.find_by(slug: base.name.parameterize) || create(:levels, "niveau", base.name) do
-          Orm::Level.create!(name: base.name, cycle: base.cycle, position: free_position(base.position))
+        position = free_position(base.position)
+        label = position == base.position ? base.name : "#{base.name} (position #{position})"
+        Orm::Level.find_by(slug: base.name.parameterize) || create(:levels, "niveau", label) do
+          Orm::Level.create!(name: base.name, cycle: base.cycle, position:)
         end
       end
 
@@ -51,7 +57,8 @@ module Repositories
         Orm::Level.exists?(position:) ? Orm::Level.maximum(:position).to_i + 1 : position
       end
 
-      # Une création à part (point de sauvegarde) : un nom déjà pris par un autre enregistrement est noté, jamais levé. → l'enregistrement | nil
+      # Une création à part (point de sauvegarde) : une valeur unique (nom, nom court, position) déjà prise par un autre enregistrement est
+      # notée, jamais levée. → l'enregistrement | nil
       def create(kind, label, name)
         record = ActiveRecord::Base.transaction(requires_new: true) { yield }
         @created.fetch(kind) << name
