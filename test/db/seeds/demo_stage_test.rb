@@ -5,12 +5,12 @@ require Rails.root.join("config/demo_environment").to_s
 # Les comptes équipe n'existent que si DEMO_TEAM_PIN est posée : un PIN public sur un compte équipe d'un site ouvert
 # donnerait l'administration à tout visiteur.
 class DemoStageTest < ActiveSupport::TestCase
-  KEYS = %w[RAILWAY_ENVIRONMENT_NAME PR_BASE_ENVIRONMENT DEMO_TEAM_PIN STANDARD_TEAM_PIN STANDARD_LESSONS_LIMIT TEAM_BOOTSTRAP_CONTACT].freeze
+  KEYS = %w[RAILWAY_ENVIRONMENT_NAME PR_BASE_ENVIRONMENT DEMO_TEAM_PIN STANDARD_TEAM_PIN STANDARD_LESSONS_LIMIT STANDARD_ACTIVITY_SIZE TEAM_BOOTSTRAP_CONTACT].freeze
 
   def seed(team_pin: nil)
     previous = ENV.values_at(*KEYS)
     ENV.update("RAILWAY_ENVIRONMENT_NAME" => "Demo", "PR_BASE_ENVIRONMENT" => "Develop", "DEMO_TEAM_PIN" => team_pin,
-               "STANDARD_LESSONS_LIMIT" => "2", "STANDARD_TEAM_PIN" => "1111", "TEAM_BOOTSTRAP_CONTACT" => nil)
+               "STANDARD_LESSONS_LIMIT" => "2", "STANDARD_ACTIVITY_SIZE" => "reduite", "STANDARD_TEAM_PIN" => "1111", "TEAM_BOOTSTRAP_CONTACT" => nil)
     as_production { capture_io { load Rails.root.join("db/seeds.rb").to_s, true } }
   ensure
     KEYS.zip(previous) { |key, value| ENV[key] = value }

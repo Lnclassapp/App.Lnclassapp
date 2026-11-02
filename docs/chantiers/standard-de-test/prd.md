@@ -97,9 +97,10 @@ Fonctionnalité: Activité d'un trimestre
     Et la classe vide et l'élève sans activité affichent leur état vide
 
   Scénario: déterministe
-    Étant donné deux chargements à des dates différentes
+    Étant donné deux chargements à des dates différentes, la fenêtre étant pleine (12 semaines après la rentrée du 1er septembre)
     Alors l'empreinte des totaux est identique
     Et le trimestre se termine la veille du chargement
+    Et il ne commence jamais avant la rentrée : avant la fenêtre pleine, l'empreinte dépend du nombre de semaines, que la commande affiche
 
 Fonctionnalité: Grand établissement
 
