@@ -136,13 +136,18 @@ Orm::School.transaction do
 
   # 7. L'équipe : seulement si un PIN est connu (développement, test, PR, ou STANDARD_TEAM_PIN). Le rôle « terrain » est filtré par DRENA
   # par l'écran, pas par une table : le compte du jeu n'a rien d'autre que son rôle.
-  if team_pin_digest
+  if DemoEnvironment.active?
+    # Demo : les comptes équipe suivent le PIN courant de DEMO_TEAM_PIN à chaque semis (passage inerte -> PIN, rotation, retrait).
+    # Sans la variable, l'import et la publication des leçons ont quand même besoin d'un acteur équipe : l'administrateur,
+    # au PIN aléatoire que personne ne connaît (les autres comptes équipe déjà là sont rendus inertes de même). Jamais de
+    # second facteur confirmé dont personne n'a le secret : chacun l'enrôle à sa première connexion.
+    digest = team_pin_digest || Orm::User.new(pin: SecureRandom.hex(16)).pin_digest
+    accounts = team_pin_digest ? set.accounts.team : set.accounts.team.select { it.role == "admin" }
+    ensure_users.(accounts.map { person.(it.role.to_sym, 0, "team", digest, team_role: it.role) })
+    Orm::User.where(role: "team", contact: set.accounts.team.map { contact_of.(it.role.to_sym, 0) }).update_all(pin_digest: digest)
+  elsif team_pin_digest
     team_ids = ensure_users.(set.accounts.team.map { person.(it.role.to_sym, 0, "team", team_pin_digest, team_role: it.role) })
     team_ids.each_value { |user_id| Orm::TotpCredential.find_or_create_by!(user_id:) { it.secret = ROTP::Base32.random; it.confirmed_at = now } }
-  elsif DemoEnvironment.active?
-    # Sans DEMO_TEAM_PIN, l'import et la publication des leçons ont quand même besoin d'un acteur équipe : un administrateur
-    # inerte, au PIN aléatoire que personne ne connaît, sans second facteur. Personne ne peut s'y connecter.
-    ensure_users.([ person.(:admin, 0, "team", Orm::User.new(pin: SecureRandom.hex(16)).pin_digest, team_role: "admin") ])
   end
 
   log.call("#{schools.size} établissements, #{classroom_ids.size} classes, #{student_rows.size} élèves, #{teachers.size} enseignants")
