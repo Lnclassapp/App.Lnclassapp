@@ -6,7 +6,7 @@ require "test_helper"
 # jeu ne double rien ; l'élève sans activité et la classe vide restent à zéro ; le trimestre se termine la veille.
 # La valeur attendue change à chaque évolution légitime d'un calcul (notes, lacunes, badges, devoirs) : on la met à jour sciemment.
 class StandardActivityTest < ActiveSupport::TestCase
-  EXPECTED_FINGERPRINT = "ea4ae5327a".freeze
+  EXPECTED_FINGERPRINT = "f58319b0a2".freeze
   # 27 leçons : toute la 1ère et la 3ème du manifeste, de quoi activer des classes du lycée et du collège.
   LESSONS = 27
   SEEDS = Rails.root.join("db/seeds")
@@ -64,7 +64,8 @@ class StandardActivityTest < ActiveSupport::TestCase
 
       last = [ sessions.maximum(:completed_at), Orm::ClassroomAssignment.maximum(:assigned_at) ].max
       assert_equal Date.new(2026, 11, 2), last.to_date, "le trimestre se termine la veille du chargement"
-      assert_operator sessions.minimum(:started_at), :>=, Time.zone.local(2026, 11, 3).beginning_of_day - 3.weeks - 1.day
+      assert_operator sessions.minimum(:started_at), :>=, Time.zone.local(2026, 9, 1), "jamais avant la rentrée"
+      assert_operator Orm::ClassroomAssignment.maximum(:due_on), :>, Date.new(2026, 11, 3), "des devoirs à venir"
 
       idle = Orm::User.find_by!(contact: contact_of_first_student(@set.cases.student_without_activity))
       assert_equal 0, Orm::ExerciseSession.where(student: idle).count

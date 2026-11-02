@@ -8,8 +8,11 @@
 # l'élève sans activité, et toute classe sans leçon publiée pour son niveau (le collège n'a du v3 qu'en 3ème).
 # Déterministe : graine fixe, plan tiré avant toute écriture, un tirage propre à chaque événement ; le calendrier est relatif
 # (jour 0 = il y a 12 semaines, dernier jour = hier) : l'empreinte des totaux affichée à la fin ne dépend pas de la date.
-# Idempotent : une assignation ou une séance déjà là n'est pas rejouée. L'échéance d'une assignation est posée à
-# « assignation + 3 jours », non au prochain jour de séance du calendrier réel, qui rendrait l'empreinte tributaire du jour.
+# Idempotent : une assignation ou une séance déjà là n'est pas rejouée. L'échéance est calculée par AssignResource : le jour de
+# séance de l'enseignant est posé à chaque devoir sur le jour d'échéance voulu (assignation + 3 jours), si bien que rendus à
+# temps (0 à 2 jours) et en retard (5 jours et plus) ne dépendent pas du jour de la semaine du chargement.
+# Le trimestre ne commence jamais avant la rentrée (1er septembre) : il est plus court que 12 semaines jusqu'au 24 novembre,
+# et l'empreinte complète ne vaut d'une date à l'autre qu'à partir de là (l'empreinte réduite, de 3 semaines, dès le 22 septembre).
 # ENV["STANDARD_ACTIVITY_SIZE"] = "reduite" : 3 semaines, 2 classes par établissement, 3 élèves par classe (tests).
 unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active?
   raise "db/seeds/standard/activite.rb est réservé au développement, au test, aux environnements de PR et à Demo"
@@ -30,9 +33,8 @@ raise "STANDARD_ACTIVITY_SIZE vaut complete ou reduite, reçu : #{size.inspect}"
 shape = if size == "reduite"
   { weeks: 3, classes: 2, students: 3, grand_students: 2, practice: 1..2 }
 else
-  { weeks: 12, classes: 5, students: 10, grand_students: 8, practice: 2..4 }
+  { weeks: 12, classes: 5, students: 40, grand_students: 12, practice: 2..4 }
 end
-weeks = shape.fetch(:weeks)
 
 standard_dir = Rails.root.join("db/seeds/standard")
 set = Entities::Catalog::StandardTestSet.new(YAML.load_file(ENV.fetch("STANDARD_MANIFEST", standard_dir.join("jeu.yml").to_s)))
@@ -42,8 +44,16 @@ series = Orm::Series.all.index_by(&:slug)
 schools = set.schools.to_h { [ it.key, Orm::School.find_by(name: identity.school_name(it.key)) ] }
 raise "le jeu standard de base n'est pas chargé (bin/rails runner db/seeds/standard.rb d'abord)" if schools.values.any?(&:nil?)
 
-# Le calendrier : le jour 0 est celui d'il y a `weeks` semaines, le dernier est hier ; rien n'est écrit après hier 21 h 30.
+# Le calendrier : le dernier jour est hier, le premier est celui d'il y a `weeks` semaines, jamais avant la rentrée de l'année
+# scolaire en cours (1er septembre) : tant que la rentrée est récente, le trimestre est plus court (moins de 12 semaines avant
+# le 24 novembre) ; rien n'est écrit après hier 21 h 30.
 last_day = Date.current - 1
+rentree = Date.new(Entities::Classroom::SchoolYear.current(last_day).to_i, Entities::Classroom::SchoolYear::START_MONTH, 1)
+weeks = [ shape.fetch(:weeks), (last_day - rentree + 1).to_i / 7 ].min
+if weeks < 2
+  log.call("la rentrée du #{rentree} est trop récente : moins de deux semaines de classe, rien à jouer")
+  return
+end
 first_day = last_day - ((7 * weeks) - 1)
 at = ->(day, minutes) { first_day.in_time_zone + day.days + minutes.minutes }
 finish = at.(7 * weeks - 1, 21 * 60 + 30)
@@ -107,12 +117,22 @@ plan = []
 sequence = 0
 add = ->(time, type, **data) { plan << { at: time, type:, seq: (sequence += 1), **data } }
 ability = {}
+profile = {}
 active.each_with_index do |entry, class_index|
   engagement = rng.rand(0.75..1.0)
-  entry[:roster].each { ability[it.id] ||= rng.rand(0.25..0.95) }
+  # Une classe réaliste : ~60 % de réguliers, ~25 % d'irréguliers, ~15 % de décrochés (qui s'arrêtent après 1 à 3 semaines).
+  entry[:roster].each do |student|
+    ability[student.id] ||= rng.rand(0.25..0.95)
+    draw = rng.rand
+    profile[student.id] ||= if draw < 0.60 then { kind: :regular, on_time: rng.rand(0.80..0.95), late: 0.08, practice: 1.0 }
+    elsif draw < 0.85 then { kind: :irregular, on_time: rng.rand(0.35..0.55), late: 0.20, practice: 0.5 }
+    else { kind: :dropped, on_time: 0.6, late: 0.1, practice: 0.0, stops_after: rng.rand(1..3) }
+    end
+  end
   pools = entry.fetch(:pool).transform_values(&:dup)
   materials = pools.keys.sort_by(&:slug)
-  assigned_days = Array.new(weeks - 1) { |week| (7 * week) + (class_index % 3) } + [ (7 * weeks) - 1 ]
+  # Un devoir par semaine, puis deux tout récents (avant-hier et hier) : leur échéance est à venir.
+  assigned_days = Array.new(weeks - 1) { |week| (7 * week) + (class_index % 3) } + [ (7 * weeks) - 3, (7 * weeks) - 1 ]
   assigned_days.each_with_index do |day, rank|
     material = materials.rotate(class_index + rank).find { pools.fetch(it).any? } or break
     exercise = pools.fetch(material).shift
@@ -120,20 +140,26 @@ active.each_with_index do |entry, class_index|
     add.(assigned_at, :assign, entry:, exercise:, teacher_id: teacher_of.(entry.fetch(:school), material), day:)
     entry[:roster].each do |student|
       u = rng.rand
-      on_time = [ 0.30 + (ability.fetch(student.id) * 0.65), 0.95 ].min * engagement
-      delay = if u < on_time then rng.rand(0..3) elsif u < on_time + 0.12 then rng.rand(4..9) end
-      next unless delay
+      habit = profile.fetch(student.id)
+      on_time = habit.fetch(:on_time) * engagement
+      # Rendu à temps : 0 à 2 jours après l'assignation ; en retard : 5 jours ou plus. L'échéance est à 3 jours (4 si le
+      # troisième jour est un dimanche) : ni l'un ni l'autre ne dépend du jour de la semaine du chargement.
+      delay = if u < on_time then rng.rand(0..2) elsif u < on_time + habit.fetch(:late) then rng.rand(5..9) end
+      next if delay.nil? || (habit[:stops_after] && day >= 7 * habit[:stops_after])
 
       minutes = delay.zero? ? (8 * 60) + 90 + rng.rand(30..600) : (14 * 60) + rng.rand(0..420)
       time = at.(day + delay, minutes)
       add.(time, :session, student:, exercise:) if time <= finish
     end
   end
-  # L'élève s'exerce aussi de lui-même, sur n'importe quel exercice publié de son niveau.
-  everything = entry.fetch(:pool).values.flatten
+  # L'élève s'exerce aussi de lui-même, sur un exercice que la classe n'a pas reçu en devoir (« Fait seul ») ; la moitié de ces
+  # séances tombent dans les 7 derniers jours, pour que les tableaux « 7 jours » soient remplis.
+  free = pools.values.flatten
+  free = entry.fetch(:pool).values.flatten if free.empty?
   entry[:roster].each do |student|
-    rng.rand(shape.fetch(:practice)).times do
-      add.(at.(rng.rand(0...(7 * weeks)), (8 * 60) + rng.rand(0..780)), :session, student:, exercise: everything.fetch(rng.rand(everything.size)))
+    (rng.rand(shape.fetch(:practice)) * profile.fetch(student.id).fetch(:practice)).round.times do |count|
+      day = count.even? ? (7 * weeks) - 7 + rng.rand(0..6) : rng.rand(0...(7 * weeks))
+      add.(at.(day, (8 * 60) + rng.rand(0..780)), :session, student:, exercise: free.fetch(rng.rand(free.size)))
     end
   end
 end
@@ -226,17 +252,16 @@ plan.each do |event|
     entry = event.fetch(:entry)
     exercise = event.fetch(:exercise)
     classroom = entry.fetch(:classroom)
-    record = Orm::ClassroomAssignment.find_by(classroom_id: classroom.id, assignable_type: "Exercise", assignable_id: exercise.id)
-    unless record
+    unless Orm::ClassroomAssignment.exists?(classroom_id: classroom.id, assignable_type: "Exercise", assignable_id: exercise.id)
       dto = Dtos::Classroom::AssignmentInput.new(classroom_public_id: classroom.public_id, assignable_type: "Exercise", assignable_key: exercise.public_id)
-      dto.weekdays = %w[1 4]
+      # Un seul jour de séance, celui de l'échéance voulue : trois jours après l'assignation (le lundi si c'est un dimanche).
+      due = event.fetch(:at).to_date + 3
+      dto.weekdays = [ (due.sunday? ? due + 1 : due).cwday.to_s ]
       result = assign.call(actor: users.actor_for(user_id: event.fetch(:teacher_id), current_school_id: classroom.school_id), dto:)
       raise "assignation refusée (#{entry.fetch(:label)}, #{exercise.title}) : #{result.code} #{result.errors}" if result.failure?
 
-      record = Orm::ClassroomAssignment.find_by!(classroom_id: classroom.id, assignable_type: "Exercise", assignable_id: exercise.id)
       assigned += 1
     end
-    record.update_columns(due_on: record.assigned_at.in_time_zone.to_date + 3)
     next
   end
 
