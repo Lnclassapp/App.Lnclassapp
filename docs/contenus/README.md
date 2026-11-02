@@ -29,6 +29,16 @@ Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/`
 
 Les leçons déjà rangées dans `lecons-traitees/` au format v1 (Tle D, 3ème, etc.) ne sont plus importables : elles seront réécrites en v3, mathématiques d'abord (chantier `refonte-contenus-maths`).
 
+## Boucle courte : corriger une leçon
+
+**modifier → aperçu → valider → PR → rechargement de cette seule leçon sur Develop**
+
+1. **Modifier** le fichier, par exemple `docs/contenus/lecons-traitees/tle-d/mathematiques/<leçon>.json`.
+2. **Aperçu** : `bin/apercu-lecon <fichier>` (ou `bin/apercu-lecon <fichier> --suivre`, qui recharge à chaque enregistrement ; Ctrl-C pour finir). En quelques secondes : `valider.rb` (s'il y a un ✗, tout s'arrête et les erreurs s'affichent), import de ce seul fichier par la vraie chaîne, la leçon de même titre étant remplacée entière, publication en cascade, puis l'adresse `http://localhost:3000/courses/<leçon>` et, si le jeu standard est chargé, un compte élève fictif du niveau et de la série. Un fichier refusé laisse la base intacte. L'aperçu refuse tout environnement autre que `development` et tout fichier hors de `docs/contenus/lecons-traitees/`.
+3. **Valider** : `ruby script/contenus/valider.rb <fichier>` (l'aperçu l'a déjà joué).
+4. **PR** : la CI rend le fichier modifié à 390 px et sur ordinateur.
+5. **Fusion** : Develop recharge cette seule leçon, reconnue par l'empreinte SHA-256 changée du fichier (ADR-0122) ; les fichiers inchangés ne sont pas rechargés.
+
 ## Ordre des imports (historique, formats v1)
 
 > Cette section décrit les imports v1 des leçons rangées avant la refonte. Le format v3 remplace ce mode d'emploi pour les mathématiques : voir « Le pipeline d'une leçon ».
