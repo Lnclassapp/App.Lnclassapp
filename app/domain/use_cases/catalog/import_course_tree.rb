@@ -35,8 +35,9 @@ module UseCases
       # Ce que devient une leçon déjà présente (même titre, niveau, matière, série). :draft (l'écran Imports, le seul mode qu'il passe) :
       # remplacée entière si elle et tout son contenu sont en brouillon, refusée sinon (lesson_already_published, ADR-0116 §4.4).
       # Les deux autres sont réservés au chargement automatique hors production : :exercises (ADR-0122) remplace, publiée ou non, ses
-      # seuls exercices, problèmes et sujets ; :lesson (ADR-0123, Develop seul) la remplace entière, publiée ou non.
-      REPLACE_MODES = %i[draft exercises lesson].freeze
+      # seuls exercices, problèmes et sujets ; :lesson (ADR-0123, Develop seul) la remplace entière, publiée ou non ; :create_only (Staging,
+      # standard-de-test) ne crée que les leçons absentes : une leçon présente est laissée intacte, sans erreur.
+      REPLACE_MODES = %i[draft exercises lesson create_only].freeze
 
       attr_reader :replace_mode
 
@@ -111,6 +112,8 @@ module UseCases
       # comme un doublon.
       def replacement_item(course, path, lookup, key, existing_id)
         return exercises_item(course, path, lookup, key, existing_id) if @replace_mode == :exercises
+        # Même clé que la base : le moteur compte la leçon parmi les ignorées (doublon) et n'écrit rien.
+        return Entities::Catalog::ImportItem.new(path:, key:) if @replace_mode == :create_only
 
         if @replace_mode == :draft && !replaceable?(@courses.status_for_update(id: existing_id))
           return Entities::Catalog::ImportItem.new(path:, errors: [ rule_error(path, "lesson_already_published", course: course["name"].squish) ])

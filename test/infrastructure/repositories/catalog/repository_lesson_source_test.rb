@@ -30,6 +30,15 @@ module Repositories
         assert_equal [ [ "3eme", true ] ], found.map { [ it.level_directory, it.subjects ] }
       end
 
+      # LoadRepositoryLessons retrouve les fichiers du manifeste (« niveau/matière/fichier.json ») par ce nom : il doit s'en déduire.
+      test "the import name derives from the relative path, as the manifest of the standard set names it" do
+        write("tle-c/mathematiques/barycentre.json", lesson(subjects: []))
+
+        name = RepositoryLessonSource.new(root: @root, logger: @logger).lessons.sole.import_name
+
+        assert_equal "#{UseCases::Catalog::LoadRepositoryLessons::IMPORT_PREFIX}#{'tle-c/mathematiques/barycentre.json'.tr('/', '-')}", name
+      end
+
       test "keeps a version 3 lesson without subjects too, marked so, with its level folder" do
         write("tle-c/mathematiques/sans-sujet.json", lesson(subjects: []))
         write("tle-c/mathematiques/sans-cle.json", { "version" => 3, "courses" => [ { "name" => "L" } ] })
