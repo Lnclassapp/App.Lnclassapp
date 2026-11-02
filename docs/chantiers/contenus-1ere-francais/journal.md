@@ -6,8 +6,8 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-01 | Série « A » en 1ère : dossier `1ere-a/`, les v1 de `1ere-a1/` et `1ere-a2/` sont retirées | Le référentiel n'a que A, C, D en 1ère ; A1 et A2 avaient le même contenu | Non |
-| 2026-11-01 | Leçons écrites dans `1ere-a/`, « Les valeurs des temps verbaux » (C et D seulement) dans `1ere-c/` ; déclinaison par script (`series_name`, rang du `subtitle`) | Rangs différents selon la série | Non |
+| 2026-11-02 | Séries A1 et A2 conservées en 1ère (une leçon A = deux fichiers, `1ere-a1/` et `1ere-a2/`, même rang) ; pas de dossier `1ere-a/` | `db/seeds/catalog.rb` déclare A1, A2, C, D ; un cours « A » ne s'importerait pas (décision de l'orchestrateur) | Non |
+| 2026-11-01 | Leçons écrites une fois puis déclinées en A1, A2, C et D, « Les valeurs des temps verbaux » (C et D seulement) dans `1ere-c/` ; déclinaison par script (`series_name`, rang du `subtitle`) | Rangs différents selon la série | Non |
 | 2026-11-01 | Aucune leçon ne cite un numéro de leçon ni ne s'appuie sur une autre leçon de 1ère | L'ordre diffère entre A et C/D | Non |
 | 2026-11-01 | Rédaction par Sonnet (un agent par leçon, 3 au plus), relecture indépendante par Opus (un tour), corrections par l'auteur | Décision du porteur du 2026-11-01 | Non (applique ADR-0104) |
 | 2026-11-01 | Aucune mention du BEPC (examen de 3ème) ; sujets « de devoir » | Trois rédacteurs sur onze l'avaient écrit | Non |
@@ -22,7 +22,7 @@
 ## Ce qu'on a appris sur la codebase
 
 - Un `fill_blank` accepte 5 réponses au plus ; `hint` et cases multiples n'existent que dans `practice`.
-- `valider.rb` ne contrôle pas `practice` : `practice_check.rb` (règles du test 3e, par `bin/rails runner`) a été joué sur les 30 fichiers.
+- `valider.rb` ne contrôle pas `practice` : `practice_check.rb` (règles du test 3e, par `bin/rails runner`) a été joué sur les 40 fichiers.
 
 ## Dette laissée derrière
 

@@ -35,8 +35,8 @@ Vague P8 du programme : la feuille de route est validée (D1 à D5) ; modèles :
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| Combien de leçons distinctes ? | 11. A en a 10, C et D 10 (pas de « Groupement de textes romanesques » ; « Les valeurs des temps verbaux » en plus). | Écrites une fois dans `1ere-a/` (la dernière dans `1ere-c/`), déclinées en C et D. |
-| Série A ou A1/A2 ? | Le référentiel de 1ère n'a que A, C, D : les anciens dossiers `1ere-a1` et `1ere-a2` (même contenu) sont fusionnés en `1ere-a`. | Les v1 de `1ere-a1/` et `1ere-a2/` sont remplacées (D4). |
+| Combien de leçons distinctes ? | 11. A en a 10, C et D 10 (pas de « Groupement de textes romanesques » ; « Les valeurs des temps verbaux » en plus). | Écrites une fois (la dernière en C), déclinées en A1, A2, C et D (40 fichiers). |
+| Série A ou A1/A2 ? | Le référentiel de 1ère (`db/seeds/catalog.rb`) a A1, A2, C, D : chaque leçon de A donne un fichier A1 et un fichier A2 (même texte). | Les v1 de `1ere-a1/` et `1ere-a2/` sont remplacées (D4). |
 | Les rangs sont-ils les mêmes ? | Non (consignes 2/3, commentaire 3/2, focalisation 5/7, tonalités 7/5, résumé 8/6, argumentation 9/8, implicite 10/9). | Seuls `series_name` et le rang du `subtitle` changent ; aucune leçon ne cite un numéro ni ne s'appuie sur une autre leçon de 1ère. |
 | Quels textes supports ? | Comme en 3ème et Tle : écrits pour Lnclass ; œuvres réelles en courtes références paraphrasées. | Aucun extrait long d'œuvre protégée ; faits incertains non écrits et signalés à l'enseignant. |
 

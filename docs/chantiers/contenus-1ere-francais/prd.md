@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-La vague rédige les 11 leçons distinctes de Français de 1ère de la progression 2026-2027 au format v3, avec « Je m'entraîne » dans chaque notion, et les décline en 30 fichiers (10 en A, 10 en C, 10 en D). Aucun code.
+La vague rédige les 11 leçons distinctes de Français de 1ère de la progression 2026-2027 au format v3, avec « Je m'entraîne » dans chaque notion, et les décline en 40 fichiers (10 en A1, 10 en A2, 10 en C, 10 en D). Aucun code.
 
 ## 2. Acteurs et permissions
 

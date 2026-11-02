@@ -8,7 +8,7 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
   TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
              Orm::Material, Orm::User, Orm::Course, Orm::ClassroomStudent, Orm::TeacherClassroom ].freeze
   TEST_FILES = %w[catalog school development demo/trois_etablissements demo/lecons_completes].freeze
-  LESSONS = %w[6eme/svt 6eme/edhc 1ere-c/francais 1ere-d/francais].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
+  LESSONS = %w[6eme/svt 6eme/edhc 1ere-a1/francais 1ere-a2/francais].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 

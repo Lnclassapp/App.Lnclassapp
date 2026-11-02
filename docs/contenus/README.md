@@ -691,7 +691,7 @@ Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'en
 
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
-Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
+Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop (`db/seeds/catalog.rb`), la 1ère a les séries A1, A2, C et D : les leçons communes aux deux séries A sont écrites une fois, puis déclinées en A1 et A2.
 
 #### 1ère A1 et A2 (12 chacune, hors Français)
 
@@ -758,10 +758,10 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 
 #### 1ère — Français, 11 leçons (A, C, D)
 
-Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P8 du programme `contenus-v3-tous-niveaux`, chantier [`contenus-1ere-francais`](../chantiers/contenus-1ere-francais/memo.md)). Écrites une fois dans `1ere-a/francais/` (la dernière, propre à C et D, dans `1ere-c/`), puis déclinées en C et D : seuls `series_name` et le rang du `subtitle` changent. « Groupement de textes romanesques » n’existe qu’en A ; « Les valeurs des temps verbaux » qu’en C et D. Elles remplacent les 12 fichiers v1 de `1ere-a1/`, `1ere-a2/`, `1ere-c/` et `1ere-d/` (la série A de 1ère remplace A1 et A2). Chaque notion porte son « Je m’entraîne ». Aucune figure ; textes écrits pour Lnclass ; relecture indépendante par Opus, un tour.
+Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P8 du programme `contenus-v3-tous-niveaux`, chantier [`contenus-1ere-francais`](../chantiers/contenus-1ere-francais/memo.md)). Écrites une fois (la dernière, propre à C et D, en C), puis déclinées en A1, A2, C et D : seuls `series_name` et le rang du `subtitle` changent (A1 et A2 ont le même texte). « Groupement de textes romanesques » n’existe qu’en A1 et A2 ; « Les valeurs des temps verbaux » qu’en C et D. Elles remplacent les 12 fichiers v1 de `1ere-a1/`, `1ere-a2/`, `1ere-c/` et `1ere-d/` (40 fichiers en tout : 10 en A1, 10 en A2, 10 en C, 10 en D). Chaque notion porte son « Je m’entraîne ». Aucune figure ; textes écrits pour Lnclass ; relecture indépendante par Opus, un tour.
 
 
-##### 1ère A
+##### 1ère A1 et A2 (mêmes fichiers dans `1ere-a1/` et `1ere-a2/`, `series_name` « A1 » ou « A2 »)
 
 | Fichier | Cours | Rang | Fiches | Exercices | Questions | Entraînement |
 |---|---|---:|---:|---:|---:|---:|
@@ -806,7 +806,7 @@ Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027
 | `francais/l-implicite.json` | L'implicite | 9 | 4 | 8 | 49 | 12 |
 | `francais/les-valeurs-des-temps-verbaux.json` | Les valeurs des temps verbaux | 10 | 4 | 8 | 50 | 15 |
 
-**123 notions, 243 exercices, 1586 questions notées et 409 d’entraînement** pour les 30 fichiers. Tous passent `script/contenus/valider.rb` sans erreur ni avertissement et le contrôle de l’entraînement.
+**164 notions, 324 exercices, 2118 questions notées et 546 d’entraînement** pour les 40 fichiers. Tous passent `script/contenus/valider.rb` sans erreur ni avertissement et le contrôle de l’entraînement.
 
 À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P8).
 
