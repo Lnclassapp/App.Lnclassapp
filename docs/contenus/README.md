@@ -861,6 +861,24 @@ Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027
 - **Français et Philosophie** : la règle du e muet, les formes fixes (sonnet, ballade), le nombre de parties d'une dissertation, les connecteurs et la réfutation.
 - **Histoire-Géographie** : l'IDH et le taux de scolarisation (à citer avec une source), la date de la seconde révolution industrielle (« vers 1850 », « vers 1870 »), les lois sur le travail des enfants.
 
+### 1ère, Histoire-Géographie au format 3 (chantier `contenus-1ere-histoire-geographie`)
+
+Les 10 premières leçons d'Histoire-Géographie de 1ère de la progression DPFC 2026-2027 (commune à toutes les séries : pas de `series_name`), rédigées le 2026-11-02 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Chaque fichier a été relu par un sous-agent distinct de l'auteur (faits, dates, chiffres, cartes, calculs).
+
+| # | Fichier | Cours | Notions | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---|
+| 1 | `1ere/histoire-geographie/histoire-l-essor-du-capitalisme-et-ses-consequences.json` | Histoire — L'essor du capitalisme et ses conséquences | 4 | 51 | 88 % | 5 | `diagram`, `stat_chart`, `timeline` |
+| 2 | `1ere/histoire-geographie/geographie-dynamisme-demographique-et-qualite-de-la-vie-en-cote-d-ivoire.json` | Géographie — Dynamisme démographique et qualité de la vie en Côte d'Ivoire | 3 | 46 | 87 % | 5 | `diagram`, `stat_chart`, `timeline` |
+| 3 | `1ere/histoire-geographie/histoire-les-revolutions-industrielles.json` | Histoire — Les révolutions industrielles | 5 | 59 | 90 % | 4 | `diagram`, `map world`, `timeline` |
+| 4 | `1ere/histoire-geographie/geographie-la-croissance-demographique-mondiale-et-ses-consequences.json` | Géographie — La croissance démographique mondiale et ses conséquences | 5 | 59 | 92 % | 4 | `diagram`, `map world`, `stat_chart` |
+| 5 | `1ere/histoire-geographie/histoire-le-mouvement-imperialiste-et-le-congres-de-berlin.json` | Histoire — Le mouvement impérialiste et le congrès de Berlin | 4 | 49 | 88 % | 4 | `diagram`, `map africa`, `timeline` |
+| 6 | `1ere/histoire-geographie/histoire-les-resistances-aux-conquetes-territoriales-exemple-de-la-cote-d-ivoire-de-1878-a-1920.json` | Histoire — Les résistances aux conquêtes territoriales : exemple de la Côte d'Ivoire de 1878 à 1920 | 4 | 49 | 88 % | 3 | `diagram`, `map cote_d_ivoire`, `timeline` |
+| 7 | `1ere/histoire-geographie/geographie-l-urbanisation-dans-les-pays-en-developpement-l-exemple-de-la-cote-d-ivoire.json` | Géographie — L'urbanisation dans les pays en développement : l'exemple de la Côte d'Ivoire | 5 | 57 | 84 % | 3 | `diagram`, `map cote_d_ivoire` |
+| 8 | `1ere/histoire-geographie/geographie-l-urbanisation-dans-les-pays-developpes-l-exemple-de-la-france.json` | Géographie — L'urbanisation dans les pays développés : l'exemple de la France | 4 | 51 | 88 % | 6 | `diagram`, `map world`, `stat_chart`, `timeline` |
+| 9 | `1ere/histoire-geographie/histoire-la-colonisation-et-les-resistances-en-cote-d-ivoire-de-1893-a-1946.json` | Histoire — La colonisation et les résistances en Côte d'Ivoire de 1893 à 1946 | 5 | 54 | 91 % | 4 | `diagram`, `map cote_d_ivoire`, `timeline` |
+| 10 | `1ere/histoire-geographie/geographie-l-organisation-administrative-de-la-cote-d-ivoire.json` | Géographie — L'organisation administrative de la Côte d'Ivoire | 4 | 48 | 85 % | 4 | `diagram`, `map cote_d_ivoire` |
+
+Au total : 43 notions, 83 exercices, 523 questions et 42 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. À faire relire par un enseignant d'Histoire-Géographie avant publication : voir `docs/chantiers/contenus-1ere-histoire-geographie/journal.md`.
 ### 1ère C et D, SVT au format 3 (chantier `contenus-1ere-svt-cd`)
 
 Les 10 premières leçons de SVT de 1ère C et de 1ère D (progression DPFC 2026-2027), rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague P5 du programme `contenus-v3-tous-niveaux` (rédaction Sonnet, relecture indépendante Opus). **16 leçons distinctes, 20 fichiers** : 4 leçons sont communes aux deux séries (méiose, synthèse des protéines, mouvements des plaques, échanges d'ions) et écrites une fois, copiées avec la série et le rang de D (seuls `series_name` et `subtitle` changent) ; 3 paires proches (C1/D1, C3/D3, C6/D4) partagent le socle mais ont chacune leur intitulé, leurs notions et leurs exercices. Elles remplacent les 6 fichiers v1 de `1ere-c/svt/` et `1ere-d/svt/`. Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes.
