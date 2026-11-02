@@ -402,6 +402,24 @@ module UseCases
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
+      # Une écriture que la base refuse dit, dans la ligne d'Imports, la classe de l'exception et la contrainte en cause (aucune donnée).
+      test "a write the database refuses is reported write_failed with the exception class and the constraint name" do
+        refusing = Class.new(SimpleDelegator) do
+          define_method(:write) do |**|
+            row = { name: "DRENA Bouaké", public_id: SecureRandom.base58(14), slug: "drena-bouake", created_at: Time.current, updated_at: Time.current }
+            Orm::Drena.insert_all!([ row ])
+            Orm::Drena.insert_all!([ row.merge(public_id: SecureRandom.base58(14)) ])
+          end
+        end.new(Repositories::Catalog::ContentTreeWriter.new)
+
+        report = run_import(envelope(lesson), adapter: adapter(writer: refusing))
+
+        assert_equal [ [ "courses[0]", "write_failed" ] ], report_pairs(report)
+        params = report.import_errors.first["params"]
+        assert_equal "ActiveRecord::RecordNotUnique", params["exception"]
+        assert_match(/drenas/, params["constraint"])
+      end
+
       # --- Chargement automatique hors production : seuls les exercices, problèmes et sujets d'une leçon présente sont remplacés ---
 
       def publish_lesson

@@ -56,8 +56,10 @@ module Repositories
         end
         other = @transaction.attempt_with_cause { Orm::Drena.create!(name: nil) }
 
-        assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :collision ], exception: [ "ActiveRecord::RecordNotUnique" ] } ],
-                     [ collision.code, collision.errors ]
+        assert_equal [ :conflict, [ :write_failed ], [ :collision ], [ "ActiveRecord::RecordNotUnique" ] ],
+                     [ collision.code, *collision.errors.values_at(:base, :cause, :exception) ]
+        assert_match(/drenas/, collision.errors.fetch(:constraint).sole)
+        assert_not other.errors.key?(:constraint)
         assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :other ], exception: [ "ActiveRecord::RecordInvalid" ] } ],
                      [ other.code, other.errors ]
         assert_equal :written, @transaction.attempt_with_cause { :written }.value
@@ -66,6 +68,15 @@ module Repositories
 
       test "attempt lets any other exception through" do
         assert_raises(ArgumentError) { @transaction.attempt { raise ArgumentError } }
+      end
+      test "a PostgreSQL cause whose result cannot be read gives no constraint, and the write failure is still returned" do
+        cause = PG::Error.new("coupé").tap { it.define_singleton_method(:result) { raise PG::Error, "plus de connexion" } }
+        failing = -> { raise cause rescue raise ActiveRecord::InvalidForeignKey, "refus" }
+
+        result = @transaction.attempt_with_cause { failing.call }
+
+        assert_equal [ :conflict, [ "ActiveRecord::InvalidForeignKey" ], false ],
+                     [ result.code, result.errors.fetch(:exception), result.errors.key?(:constraint) ]
       end
     end
   end

@@ -76,11 +76,11 @@ module UseCases
         ->(actor:, dto:) { @calls << [ :start, actor, dto.files.map(&:filename), dto.files.map { it.io.read }, dto.kind ]; result || Shared::Result.success(Struct.new(:id).new(42)) }
       end
 
-      def run_import(status: "completed", error_count: 0, result: nil, step: :run, &written)
+      def run_import(status: "completed", error_count: 0, result: nil, step: :run, errors: [], &written)
         lambda do |report_id:|
           @calls << [ step, report_id ]
           written&.call
-          result || Shared::Result.success(Struct.new(:status, :error_count).new(status, error_count))
+          result || Shared::Result.success(Struct.new(:status, :error_count, :import_errors).new(status, error_count, errors))
         end
       end
 
@@ -336,6 +336,22 @@ module UseCases
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 2 erreur(s)), voir Imports" ] ], @logs
       end
 
+      test "a refused import logs the code, the path and the safe parameters of its first three errors, nothing else" do
+        error = ->(path, code, **params) { Entities::Catalog::ImportError.new(path:, code:, params:) }
+        errors = [ error.("courses[0].level_name", "unknown_level", value: "Tle"),
+                   error.("courses[0]", "write_failed", exception: "ActiveRecord::InvalidForeignKey", constraint: "fk_rails_1"),
+                   error.("courses[0]", "lesson_already_published", course: "Pythagore"),
+                   error.("courses[0].notions[1]", "schema", keyword: "required") ]
+        errors[2] = error.("courses[0].notions[0].name", "invalid_value", value: "Nom de notion")
+        lesson = programme_lesson("Pythagore")
+
+        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 4, errors:)))
+
+        assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 4 erreur(s)), voir Imports : unknown_level courses[0].level_name " \
+                                "(value: Tle) ; write_failed courses[0] (exception: ActiveRecord::InvalidForeignKey, constraint: fk_rails_1) ; " \
+                                "invalid_value courses[0].notions[0].name" ] ], @logs
+      end
+
       test "a whole-lesson load says replaced or created in the log before the publication" do
         lesson = programme_lesson("Pythagore")
 
@@ -352,6 +368,15 @@ module UseCases
         call(use_case(lessons: [ third, misplaced, @lesson ]))
 
         assert_equal [ :info, "[contenus] fichier(s) v3 non chargé(s) ici : 3eme 1, tle-e 1" ], @logs.first
+      end
+      test "an error that cannot be read leaves the refusal logged as a refusal, without reasons" do
+        broken = Object.new.tap { it.define_singleton_method(:params) { raise "illisible" } }
+        lesson = programme_lesson("Pythagore")
+
+        summary = call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1, errors: [ broken ])))
+
+        assert_equal({ lesson.import_name => :refused }, summary.lessons)
+        assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 1 erreur(s)), voir Imports" ] ], @logs
       end
     end
   end

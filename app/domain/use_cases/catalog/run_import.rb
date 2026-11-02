@@ -265,7 +265,12 @@ module UseCases
           return error(source, entry.item.path, "lesson_already_published", course: entry.item.plan.name.squish)
         end
 
-        error(source, entry.item.path, "write_failed")
+        error(source, entry.item.path, "write_failed", **write_cause(written))
+      end
+
+      # La classe de l'exception et le nom de la contrainte refusée, s'ils sont connus : de quoi trouver la cause sans donnée.
+      def write_cause(written)
+        { exception: Array(written.errors[:exception]).first, constraint: Array(written.errors[:constraint]).first }.compact
       end
 
       def progress(report, status, processed_count)
