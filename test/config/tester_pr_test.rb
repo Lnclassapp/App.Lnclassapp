@@ -13,7 +13,7 @@ class TesterPrTest < ActiveSupport::TestCase
       output, status = tester_pr(clone)
 
       assert_not status.success?
-      assert_includes output, "Usage : bin/tester-pr <numéro-de-PR | branche> [--telephone] [--reset] [--demo] [--activite]"
+      assert_includes output, "Usage : bin/tester-pr <numéro-de-PR | branche> [--telephone] [--reset] [--demo] [--tout-contenu] [--activite]"
       assert_empty calls(clone)
     end
   end
@@ -55,17 +55,28 @@ class TesterPrTest < ActiveSupport::TestCase
     end
   end
 
-  test "--demo adds the three test schools, --activite the school whose students already worked, after the accounts" do
+  test "--demo loads the standard test set, --activite the school whose students already worked, after the accounts" do
     in_clone do |clone|
       output, status = tester_pr(clone, "7", "--demo", "--activite")
 
       assert status.success?, output
       assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed",
-                     "bin/rails runner db/seeds/demo/trois_etablissements.rb",
-                     "bin/rails runner db/seeds/demo/lecons_completes.rb",
+                     "bin/rails runner db/seeds/standard.rb",
                      "bin/rails runner db/seeds/demo/saint_michel.rb", "bin/dev BINDING=" ], calls(clone)
-      assert_includes output, "ex. 0131000101"
+      assert_includes output, "Jeu standard, PIN 2468"
       assert_includes output, "élèves de la Tle D 1 0110000001 à 0110000020"
+    end
+  end
+
+  test "--tout-contenu adds the former demo set: the three test schools and every lesson" do
+    in_clone do |clone|
+      output, status = tester_pr(clone, "7", "--tout-contenu")
+
+      assert status.success?, output
+      assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed",
+                     "bin/rails runner db/seeds/demo/trois_etablissements.rb",
+                     "bin/rails runner db/seeds/demo/lecons_completes.rb", "bin/dev BINDING=" ], calls(clone)
+      assert_includes output, "ex. 0131000101"
     end
   end
 

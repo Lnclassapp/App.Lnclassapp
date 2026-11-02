@@ -179,10 +179,13 @@ module Entities
         assert_equal [ [ :couple_unknown, "2nde-a/svt" ] ], set.errors(files).map { [ it.code, it.reference ] }
       end
 
-      test "every error code has a message" do
-        %i[file_missing not_v3 couple_missing without_v3_has_v3 couple_unknown].each do |code|
-          assert_includes StandardTestSet::Error.new(code, "a/b").message, "a/b"
-        end
+      test "every error code has its own message" do
+        expected = { file_missing: "fichier absent du dépôt", not_v3: "fichier qui n'est pas au format 3",
+                     couple_missing: "couple ayant du v3 mais absent du manifeste",
+                     without_v3_has_v3: "couple listé sans v3 qui a du v3 dans le dépôt",
+                     couple_unknown: "couple listé sans v3 qui n'existe pas dans le dépôt" }
+        expected.each { |code, text| assert_equal "#{text} : a/b", StandardTestSet::Error.new(code, "a/b").message }
+        assert_raises(ArgumentError) { StandardTestSet::Error.new(:autre, "a/b").message }
       end
     end
   end
