@@ -3,10 +3,12 @@
 # établissements, classes, comptes, leçons publiées. Le grand établissement est toujours chargé (décision du porteur).
 #
 #   bin/jeu-standard                       # charge le jeu sur la base courante ; rejoué, ne double rien
-#   bin/jeu-standard --reset               # vide d'abord la base locale (db:reset), puis recharge
-#   bin/jeu-standard --reset --confirmer=<environnement>
-#                                          # seul moyen de vider une base quand RAILWAY_ENVIRONMENT_NAME est posée ;
-#                                          # la valeur doit être le nom exact de l'environnement
+#   bin/jeu-standard --reset               # vide d'abord la base de développement (db:reset, base de test intacte), puis recharge
+#
+# Pensé pour la machine locale. Sur un environnement Railway : en production, Rails refuse db:reset et le seed refuse
+# de jouer hors développement, test et PR ; --reset est refusé dès que RAILWAY_ENVIRONMENT_NAME est posée, sauf
+# --confirmer=<nom exact de l'environnement>, prévu pour le futur stage Demo (Lot H) et sans autre promesse.
+# --reset est toujours refusé si DATABASE_URL est posée ou si l'hôte de la base configurée n'est pas local.
 # Variables : STANDARD_TEAM_PIN (PIN des comptes équipe), STANDARD_LESSONS_LIMIT=N (seulement N leçons, pour itérer vite).
 set -euo pipefail
 
@@ -21,19 +23,30 @@ for arg in "$@"; do
   esac
 done
 
-remote="${RAILWAY_ENVIRONMENT_NAME:-}"
-if [ "$reset" = 1 ] && [ -n "$remote" ] && [ "$confirm" != "$remote" ]; then
-  echo "Refus : --reset viderait la base de l'environnement distant « $remote »." >&2
-  echo "Si c'est voulu, relance avec --confirmer=$remote. Rien n'a été supprimé." >&2
-  exit 1
+if [ "$reset" = 1 ]; then
+  remote="${RAILWAY_ENVIRONMENT_NAME:-}"
+  if [ -n "$remote" ] && [ "$confirm" != "$remote" ]; then
+    echo "Refus : --reset viderait la base de l'environnement distant « $remote »." >&2
+    echo "Si c'est voulu, relance avec --confirmer=$remote. Rien n'a été supprimé." >&2
+    exit 1
+  fi
+  if [ -n "${DATABASE_URL:-}" ]; then
+    echo "Refus : DATABASE_URL est posée, la base n'est pas celle de config/database.yml. Rien n'a été supprimé." >&2
+    exit 1
+  fi
+  if ! bin/rails runner 'host = ActiveRecord::Base.connection_db_config.host.to_s; exit(host.empty? || host.start_with?("/") || %w[localhost 127.0.0.1 ::1].include?(host))' >/dev/null 2>&1; then
+    echo "Refus : l'hôte de la base configurée n'est pas local. Rien n'a été supprimé." >&2
+    exit 1
+  fi
 fi
 
 start=$SECONDS
 if [ "$reset" = 1 ]; then
-  bin/rails db:reset
+  # db:reset recrée la base et joue déjà db:seed ; SKIP_TEST_DATABASE laisse la base de test en paix.
+  SKIP_TEST_DATABASE=true bin/rails db:reset
 else
   bin/rails db:prepare
+  bin/rails db:seed
 fi
-bin/rails db:seed
 bin/rails runner db/seeds/standard.rb
 echo "bin/jeu-standard : $((SECONDS - start)) s au total."

@@ -80,7 +80,9 @@ class StandardSeedTest < ActiveSupport::TestCase
     file.write(broken.to_yaml)
     file.close
     ENV["STANDARD_MANIFEST"] = file.path
-    assert_raises(RuntimeError) { run_seed }
+    error = assert_raises(RuntimeError) { run_seed }
+    assert_match "manifeste du jeu standard invalide", error.message
+    assert_match "fichier absent du dépôt : 6eme/svt/absent.json", error.message
     assert_equal 0, Orm::School.where(name: @set.schools.map { @identity.school_name(it.key) }).count
   ensure
     ENV.delete("STANDARD_MANIFEST")
@@ -94,6 +96,25 @@ class StandardSeedTest < ActiveSupport::TestCase
     assert_not status.success?
     assert_match "--confirmer=develop", out
     assert_equal before, Orm::User.count
+  end
+
+  test "a reset is refused when DATABASE_URL is set, whatever the confirmation, and nothing is deleted" do
+    before = Orm::User.count
+    env = { "DATABASE_URL" => "postgres://autre-hote.example/base", "RAILWAY_ENVIRONMENT_NAME" => "develop" }
+    out, status = Open3.capture2e(env, "bin/jeu-standard", "--reset", "--confirmer=develop", chdir: Rails.root.to_s)
+
+    assert_not status.success?
+    assert_match "DATABASE_URL", out
+    assert_equal before, Orm::User.count
+  end
+
+  test "a non integer STANDARD_LESSONS_LIMIT is an explicit error" do
+    ENV["STANDARD_LESSONS_LIMIT"] = "beaucoup"
+    error = assert_raises(RuntimeError) { capture_io { load Rails.root.join("db/seeds/standard.rb").to_s, true } }
+    assert_match "STANDARD_LESSONS_LIMIT", error.message
+    assert_equal 0, Orm::School.where(name: @set.schools.map { @identity.school_name(it.key) }).count
+  ensure
+    ENV.delete("STANDARD_LESSONS_LIMIT")
   end
 
   private
