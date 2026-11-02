@@ -2,98 +2,101 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> **Une PR prête par lot**, preuve `bin/ci-quiet` dans la PR. Le Lot D attend les décisions ouvertes n° 1 et 2 du [memo](memo.md).
+> **Une PR prête par lot**, preuve `bin/ci-quiet` dans la PR, jamais fusionnée par l'agent. Les lots marqués ⏸ attendent une décision du [memo](memo.md).
 
 ## Graphe
 
 ```
-Lot 0 — Manifeste du jeu standard (contrat gelé)
+Lot 0 — Manifeste, identités fictives (contrats gelés)
   ↓
-  ├─► Lot A  Jeu standard en local et en PR      ┐
-  ├─► Lot B  Test d'affichage des leçons + CI    ├─ en parallèle
-  └─► Lot C  Aperçu local d'un fichier           ┘
-        ↓ (A et B)
-  Lot D  Rôle des environnements (Develop, Staging)   ⏸ décisions n° 1 et 2
-  Lot E  Preuve d'une vague (après B et C)
+  ├─► Lot A  Jeu de base + commande unique + PR/local     ┐
+  ├─► Lot D  Rendu des leçons en CI          ⏸ n° 2     ├─ en parallèle
+  └─► Lot E  Aperçu local d'un fichier                    ┘
+        ↓ A
+  ├─► Lot B  Trimestre d'activité déterministe ⏸ n° 3
+  │     ↓ B
+  │   Lot C  Grand établissement + pages lentes ⏸ n° 5
+  └─► Lot F  Rôle des environnements (Develop, Staging) ⏸ n° 1, 2 bis
+        ↓ A, B, D, E
+  Lot G  Recette par rôle + preuve de vague + règle de fusion
 ```
 
 ---
 
-## Lot 0 — Manifeste du jeu standard
+## Lot 0 — Manifeste et identités fictives
 
 - **Couche**       : domaine + données
-- **Fichiers**     : `db/seeds/standard/jeu.yml`
+- **Fichiers**     : `db/seeds/standard/jeu.yml` · `db/seeds/standard/noms.yml`
                      `app/domain/entities/catalog/standard_test_set.rb`
+                     `app/domain/entities/school/fictitious_identity.rb`
                      `docs/decisions/adr/XXXX-standard-de-test.md`
-- **Dépend de**    : — (choix des leçons : décision ouverte n° 5, défaut = première leçon du programme)
-- **Test associé** : `test/domain/entities/catalog/standard_test_set_test.rb` · `test/db/seeds/standard_manifest_test.rb`
-- **Done quand**   : le manifeste nomme 2 établissements, 14 classes, les comptes par rôle et un v3 par couple niveau-série-matière qui en a ; le test refuse un fichier absent, non v3 ou un couple oublié
+- **Dépend de**    : décisions n° 4, 8, 9 (défauts : couples vides, plage à confirmer, première leçon du programme)
+- **Test associé** : `test/domain/entities/catalog/standard_test_set_test.rb` · `test/domain/entities/school/fictitious_identity_test.rb` · `test/db/seeds/standard_manifest_test.rb`
+- **Done quand**   : le manifeste nomme les 3 établissements, les classes, les cas difficiles, les comptes et un v3 par couple ; les tests refusent fichier absent, couple oublié, contact hors plage
 
----
+## Lot A — Jeu de base, une commande, local et PR
 
-## Lot A — Jeu standard en local et en environnement de PR
-
-- **Couche**       : infrastructure + delivery (scripts)
-- **Fichiers**     : `db/seeds/standard.rb`
-                     `db/seeds.rb` *(table des stages : `pr` → standard)*
-                     `bin/tester-pr` *(`--demo` → standard ; `--tout-contenu` → ancien jeu)*
-                     `docs/guide/onboarding.md` *(comptes du jeu standard)*
+- **Couche**       : infrastructure + scripts
+- **Fichiers**     : `db/seeds/standard.rb` · `bin/jeu-standard`
+                     `db/seeds.rb` *(stage `pr` → standard)* · `bin/tester-pr` *(`--demo` → standard ; `--tout-contenu`)*
+                     `docs/guide/onboarding.md` *(comptes du jeu)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/db/seeds/standard_seed_test.rb` (deux chargements, aucun doublon, enseignant dans les deux établissements, leçons publiées = manifeste)
-- **Done quand**   : `bin/tester-pr Develop --demo` charge le jeu standard en < 30 s et le porteur se connecte avec les comptes listés
+- **Test associé** : `test/db/seeds/standard_seed_test.rb` (deux chargements sans doublon ; `--reset` refusé sur environnement distant sans confirmation ; leçons publiées = manifeste)
+- **Done quand**   : `bin/jeu-standard --reset` charge établissements, comptes et leçons en local ; `bin/tester-pr Develop --demo` donne le même jeu
 
----
+## Lot B — Trimestre d'activité déterministe ⏸ n° 3
 
-## Lot B — Leçons vérifiées par la machine
+- **Couche**       : infrastructure (seed par les use cases)
+- **Fichiers**     : `db/seeds/standard/activite.rb` · `db/seeds/demo/saint_michel.rb` *(retiré, absorbé)*
+- **Dépend de**    : Lot A
+- **Test associé** : `test/db/seeds/standard_activity_test.rb` (empreinte des totaux attendue, sur une activité réduite ; identique à deux dates de chargement)
+- **Done quand**   : tableaux de bord enseignant, direction et équipe filtrée par DRENA montrent séances, notes, lacunes, devoirs rendus et en retard ; classe vide et élève sans activité en état vide ; captures 390 px et ordinateur envoyées au porteur
+
+## Lot C — Grand établissement et pages lentes ⏸ n° 5
+
+- **Couche**       : infrastructure + script
+- **Fichiers**     : `db/seeds/standard/grand.rb` · `bin/pages-lentes`
+- **Dépend de**    : Lot B
+- **Test associé** : `test/db/seeds/standard_grand_test.rb` (effectif ~1 500, activité échantillonnée, sous 5 min mesuré)
+- **Done quand**   : `bin/pages-lentes` liste les pages de chaque rôle avec leur temps ; les pages lentes sont notées au journal, chacune avec un chantier `optimize` proposé
+
+## Lot D — Leçons vérifiées par la machine ⏸ n° 2
 
 - **Couche**       : tests + CI
-- **Fichiers**     : `test/system/catalog/lesson_rendering_test.rb`
-                     `test/fixtures/files/lecons_piegees/*.json`
-                     `script/ci/system_budget.rb` *(dérogation nommée)*
-                     `script/ci/test_timings.yml`
-                     `script/ci/scope.rb` *(fichier de leçon touché → ce test)*
-                     `.github/workflows/ci.yml` *(tâche `lecons` en parts de ≤ 5 min au train)*
-- **Dépend de**    : Lot 0 (pour la liste des fichiers v3 et le niveau-série → compte élève)
-- **Test associé** : le test lui-même, rouge sur chacun des 4 fichiers piégés, vert sur un fichier conforme
-- **Done quand**   : une PR qui touche 3 leçons rend ces 3 leçons dans `bin/ci-quiet` ; `LECONS=tout LECONS_PART=i/n` rend tout en parts de ≤ 5 min ; premier passage complet chiffré dans le journal (défauts trouvés listés, pas corrigés ici)
+- **Fichiers**     : `test/system/catalog/lesson_rendering_test.rb` · `test/fixtures/files/lecons_piegees/*.json`
+                     `script/ci/system_budget.rb` · `script/ci/test_timings.yml` · `script/ci/scope.rb`
+                     `.github/workflows/ci.yml` *(tâche `lecons`, parts de ≤ 5 min)*
+- **Dépend de**    : Lot 0
+- **Test associé** : le test lui-même, rouge sur chacun des 4 fichiers piégés, vert sur un conforme
+- **Done quand**   : une PR qui touche 3 leçons les rend dans `bin/ci-quiet` ; le train rend tout en parts ≤ 5 min ; premier passage complet chiffré au journal
 
----
+## Lot E — Aperçu local d'un fichier
 
-## Lot C — Aperçu local d'un fichier
-
-- **Couche**       : delivery (script) + infrastructure (réutilise `ImportCourseTree`, `replace: :lesson`)
-- **Fichiers**     : `bin/apercu-lecon`
-                     `lib/tasks/apercu.rake`
-                     `docs/contenus/README.md` *(boucle courte : modifier → aperçu → valider → PR → Develop)*
-- **Dépend de**    : Lot 0 (compte élève de la bonne série)
+- **Couche**       : script + infrastructure (réutilise `ImportCourseTree`)
+- **Fichiers**     : `bin/apercu-lecon` · `lib/tasks/apercu.rake` · `docs/contenus/README.md` *(boucle courte)*
+- **Dépend de**    : Lot 0
 - **Test associé** : `test/tasks/apercu_task_test.rb` (refus hors développement ; un seul fichier importé ; JSON refusé → base intacte)
-- **Done quand**   : modifier un JSON puis `bin/apercu-lecon <fichier>` montre la nouvelle version en < 15 s ; `--suivre` recharge à chaque enregistrement
+- **Done quand**   : modifier un JSON puis lancer l'aperçu montre la nouvelle version en < 15 s ; `--suivre` recharge à chaque enregistrement
 
----
-
-## Lot D — Un rôle par environnement ⏸
+## Lot F — Un rôle par environnement ⏸ n° 1, 2 bis
 
 - **Couche**       : domaine + infrastructure
-- **Fichiers**     : `app/domain/entities/catalog/automatic_load_stage.rb`
-                     `app/domain/use_cases/catalog/load_repository_lessons.rb`
-                     `app/infrastructure/repositories/catalog/repository_lesson_source.rb`
-                     `app/infrastructure/repositories/catalog/content_tree_writer.rb` *(mode `:create_only`)*
+- **Fichiers**     : `app/domain/entities/catalog/automatic_load_stage.rb` · `app/domain/use_cases/catalog/load_repository_lessons.rb`
+                     `app/infrastructure/repositories/catalog/repository_lesson_source.rb` · `app/infrastructure/repositories/catalog/content_tree_writer.rb`
                      `lib/tasks/contenus.rake`
-- **Dépend de**    : Lot 0, Lot A ; **décisions n° 1 et 2 du porteur**
-- **Test associé** : `test/domain/entities/catalog/automatic_load_stage_test.rb` · `test/domain/use_cases/catalog/load_repository_lessons_test.rb` (Develop : manifeste seul, aucune suppression ; Staging : absentes ajoutées, présente intacte ; production : rien)
-- **Done quand**   : un déploiement de Develop ne charge que le jeu standard sans rien supprimer ; Staging ajoute les leçons absentes ; vérifié dans le rapport de chargement des deux environnements
+- **Dépend de**    : Lot A ; décisions n° 1 et 2 bis
+- **Test associé** : `test/domain/entities/catalog/automatic_load_stage_test.rb` · `test/domain/use_cases/catalog/load_repository_lessons_test.rb`
+- **Done quand**   : Develop charge le jeu sans rien supprimer ; Staging ajoute les absentes sans toucher les présentes ; production rien ; vérifié dans le rapport de chargement des deux environnements
 
----
+## Lot G — Recette, preuve de vague, règle de fusion
 
-## Lot E — Preuve d'une vague
-
-- **Couche**       : delivery (script) + doc
-- **Fichiers**     : `bin/preuve-vague`
-                     `docs/chantiers/contenus-v3-tous-niveaux/plan-de-test.md` *(renvoi vers la preuve)*
-                     `docs/workflows/feature.md` *(section contenus : preuve d'une vague)*
-- **Dépend de**    : Lot B, Lot C
-- **Test associé** : `test/bin/preuve_vague_test.rb` (échoue si valider.rb ou le rendu échoue ; captures hors du dépôt)
-- **Done quand**   : `bin/preuve-vague docs/contenus/lecons-traitees/tle-d` sort le verdict et une capture 390 px + ordinateur par matière dans `tmp/preuves/`
+- **Couche**       : docs + scripts + garde CI
+- **Fichiers**     : `docs/recette/*.md` *(élève, enseignant, direction, DRENA, équipe, table écran → parcours)*
+                     `bin/preuve-vague` · `.github/pull_request_template.md` · `bin/ci-quiet` *(garde de la section de preuve)*
+                     `docs/guide/conventions.md` *(règle de fusion)* · `docs/chantiers/contenus-v3-tous-niveaux/plan-de-test.md` *(renvoi)*
+- **Dépend de**    : Lots A, B, D, E
+- **Test associé** : `test/bin/preuve_vague_test.rb` · `test/guards/proof_section_test.rb`
+- **Done quand**   : une PR sans section de preuve est refusée par `bin/ci-quiet` ; `bin/preuve-vague docs/contenus/lecons-traitees/tle-d` sort le verdict et les captures dans `tmp/preuves/`
 
 ---
 
@@ -101,13 +104,14 @@ Lot 0 — Manifeste du jeu standard (contrat gelé)
 
 | Fichier | Lot propriétaire |
 |---|---|
-| `db/seeds/standard/jeu.yml` | Lot 0 |
-| `app/domain/entities/catalog/standard_test_set.rb` | Lot 0 |
-| `db/seeds.rb` · `bin/tester-pr` · `db/seeds/standard.rb` | Lot A |
-| `script/ci/*` · `.github/workflows/ci.yml` · `test/system/catalog/lesson_rendering_test.rb` | Lot B |
-| `bin/apercu-lecon` · `lib/tasks/apercu.rake` · `docs/contenus/README.md` | Lot C |
-| `automatic_load_stage.rb` · `load_repository_lessons.rb` · `repository_lesson_source.rb` · `content_tree_writer.rb` · `lib/tasks/contenus.rake` | Lot D |
-| `bin/preuve-vague` · `plan-de-test.md` · `docs/workflows/feature.md` | Lot E |
+| `db/seeds/standard/jeu.yml` · `noms.yml` · entités `standard_test_set`, `fictitious_identity` | Lot 0 |
+| `db/seeds.rb` · `db/seeds/standard.rb` · `bin/jeu-standard` · `bin/tester-pr` · `docs/guide/onboarding.md` | Lot A |
+| `db/seeds/standard/activite.rb` · `db/seeds/demo/saint_michel.rb` | Lot B |
+| `db/seeds/standard/grand.rb` · `bin/pages-lentes` | Lot C |
+| `script/ci/*` · `.github/workflows/ci.yml` · `lesson_rendering_test.rb` | Lot D |
+| `bin/apercu-lecon` · `lib/tasks/apercu.rake` · `docs/contenus/README.md` | Lot E |
+| `automatic_load_stage.rb` · `load_repository_lessons.rb` · `repository_lesson_source.rb` · `content_tree_writer.rb` · `lib/tasks/contenus.rake` | Lot F |
+| `docs/recette/` · `bin/preuve-vague` · `.github/pull_request_template.md` · `bin/ci-quiet` · `conventions.md` · `plan-de-test.md` | Lot G |
 
 ## Portes de sortie
 
@@ -122,5 +126,5 @@ Lot 0 — Manifeste du jeu standard (contrat gelé)
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR par lot vers `Develop`, référençant chantier + ADR
+- [ ] Une PR par lot vers `Develop`, référençant chantier + ADR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)

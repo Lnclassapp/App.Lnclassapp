@@ -12,66 +12,87 @@
 
 ## Le problème
 
-Lnclass n'a pas de standard de test. Chaque endroit a son propre jeu de données :
+Lnclass n'a pas de standard de test. Chaque endroit a ses propres données :
 
-- en local et dans une PR, le jeu démo crée 3 établissements, 63 classes, des milliers d'élèves et importe **toutes** les leçons v3 ;
-- Develop charge à chaque déploiement toutes les leçons v3 du programme (~350 publiées), en les remplaçant entières ;
-- Staging ne reçoit automatiquement que les leçons à sujets ; le reste passe par l'écran Imports, à la main ;
-- la production ne reçoit que des imports manuels.
+- en local et en PR, le jeu démo crée 3 établissements, 63 classes, des milliers d'élèves **sans activité**, et importe toutes les leçons v3 ;
+- un second jeu (Saint-Michel, local seulement) simule l'activité d'une seule classe de Tle D ;
+- Develop recharge à chaque déploiement toutes les leçons v3 du programme (~350 publiées) ;
+- Staging ne reçoit automatiquement que les leçons à sujets ; la production, que des imports manuels.
 
-Personne ne sait donc « sur quoi » une PR a été testée. Les leçons, elles, ne sont vérifiées à l'écran que par un humain : le plan de test des contenus v3 en a choisi 30 sur 347 et laisse les autres sans contrôle d'affichage (défilement horizontal à 390 px, `**` affichés en clair, figure manquante). Enfin, corriger une leçon prend une boucle longue : modifier le JSON, réimporter, publier, aller voir — sans aperçu d'un seul fichier.
+Conséquences : on ne sait pas sur quoi une PR a été testée ; les tableaux de bord enseignant, direction et équipe (filtre DRENA) affichent des zéros partout sauf sur une classe ; les cas difficiles (classe vide, collège seul, établissement mixte, séries A, leçon très longue) ne sont présents nulle part de façon sûre ; aucune page n'est jamais vue avec un établissement de grande taille ; l'affichage des leçons n'est vérifié qu'à l'œil (30 sur 347) ; corriger une leçon demande un réimport manuel ; aucune règle ne dit ce qu'une PR a prouvé.
 
 ## Pour qui
 
-- **Le porteur et les testeurs** (équipe) : savoir sur quelles données une PR, Develop ou une vague a été testée, et retrouver les mêmes comptes partout.
-- **Les rédacteurs de contenus** (équipe) : voir tout de suite une leçon qu'ils viennent de modifier, puis l'améliorer en boucle courte.
-- **Les enseignants relecteurs** : relire tout le contenu sur Staging, et seulement là.
-- Indirectement les **élèves** : aucune leçon cassée à l'écran n'arrive en production.
+- **Le porteur et l'équipe** : un jeu unique, recréé en une commande, pour tester, faire la recette et faire des démonstrations.
+- **Les rédacteurs de contenus** : voir tout de suite une leçon modifiée, l'améliorer en boucle courte.
+- **Les enseignants, directions et DRENA** à qui l'on fait une démonstration : des tableaux de bord avec de vrais chiffres.
+- **Les enseignants relecteurs** : tout le contenu sur Staging, et seulement là.
 
 ## Pourquoi maintenant
 
-Les vagues de contenus v3 (347+ leçons, 9 PR de chargement #439 à #447) arrivent plus vite que la relecture humaine. Le porteur a validé le 2026-11-02 quatre principes : un jeu de test standard identique partout, des leçons vérifiées par la machine, un rôle par environnement, une preuve de vague ; plus une boucle courte de mise à jour locale.
+Les vagues de contenus v3 (347+ leçons, PR #439 à #447) arrivent plus vite que la relecture humaine, et les statistiques enseignant et direction ne se testent pas sans activité. Le porteur a validé le 2026-11-02 quatre principes et huit objectifs (voir l'ADR).
+
+## Objectifs validés (2026-11-02)
+
+1. Activité fictive sur un trimestre (séances, notes, lacunes, devoirs rendus et en retard), **déterministe**, pour les tableaux de bord enseignant, direction et DRENA.
+2. Un parcours de recette par rôle (élève, enseignant, direction, DRENA, équipe), **rejoué seulement dans le chantier qui touche ce rôle ou cet écran**.
+3. Les cas difficiles présents : classe vide, élève sans activité, public / privé / mixte, collège seul, séries A et C, leçon très longue, téléphone 390 px.
+4. Corriger un contenu en local puis l'améliorer : modifier, voir rendu tout de suite, valider, PR, rechargement de cette seule leçon sur Develop.
+5. Le même jeu en local, en PR et sur Develop, recréé en une commande en quelques minutes, remis à zéro à volonté, sans aucune vraie donnée personnelle.
+6. Un grand établissement (~1 500 élèves) pour repérer les pages lentes.
+7. Le même jeu sert de démonstration à un établissement ou une DRENA.
+8. Une règle simple de fusion : chaque PR et chaque vague dit ce qu'elle a prouvé sur ce jeu.
+
+Plus les 4 principes : une leçon par matière et par niveau dans le jeu ; contrôle automatique de l'affichage de toutes les leçons dans la CI (5 min par tâche) ; un rôle par environnement ; preuve d'une vague.
 
 ## Hors périmètre
 
-- **Aucune donnée supprimée** sur Develop, Staging ou production sans accord écrit du porteur. Le passage de Develop au jeu standard est soumis au porteur (question ouverte n° 1).
-- La production ne change pas : import manuel du seul contenu validé, comme aujourd'hui.
-- Pas de nouvel écran ni de nouvelle vue : l'aperçu local réutilise les pages de leçon existantes (donc pas d'UDR).
-- Pas de compte **Parent** ni de compte **personnel d'établissement** (SchoolStaff) dans le jeu standard : les 4 rôles demandés sont direction, enseignant, élève, équipe. À ajouter plus tard si un parcours parent est testé.
-- Pas de correction des leçons elles-mêmes : le test signale, les chantiers de contenus corrigent.
-- Pas de réécriture de `valider.rb` : il reste la première porte, le test d'affichage vient après.
-- Le jeu « activité » (Saint-Michel, élèves ayant déjà travaillé) reste tel quel, optionnel.
-- Pas de relecture enseignante outillée sur Staging (circuit de validation) : ce chantier pose seulement le contenu complet sur Staging.
+- **Aucune suppression** sur Develop, Staging ou production sans accord explicite du porteur. La remise à zéro de Develop est la décision ouverte n° 1.
+- Production inchangée : import manuel du seul validé.
+- **Pas de compte DRENA** : le rôle n'existe pas (rôles : élève, enseignant, direction, équipe). Le parcours « DRENA » se fait avec un compte équipe sur le tableau de bord filtré par DRENA. Un vrai compte DRENA serait un chantier à part (décision ouverte n° 6).
+- Pas de compte Parent : pas de parcours parent aujourd'hui.
+- Pas de nouvel écran ni de vue modifiée : pas d'UDR. Un écran lent trouvé par le grand établissement ouvre un chantier `optimize` séparé.
+- Pas de correction des leçons : le test signale, les chantiers de contenus corrigent.
+- La recette n'est **pas** rejouée après chaque déploiement.
+- Pas d'environnement de démonstration nouveau dans ce chantier (décision ouverte n° 7).
 
 ## Ce que le grill a révélé
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| « Une leçon par matière et par niveau » : le niveau compte-t-il la série (Tle C ≠ Tle D en maths) ? | Oui : les fichiers sont rangés par niveau-série ; deux séries n'ont pas la même leçon de maths. | Le jeu standard prend **une leçon par dossier niveau-série et par matière** : 46 couples ont du v3 aujourd'hui. |
-| La 2nde, la 4ème, la 5ème et la 6ème n'ont que des fichiers v1 : qu'y met-on ? | Le chargement automatique ignore les v1 ; le jeu démo aussi. | Le jeu standard ne prend que des v3 ; un couple sans v3 reste vide et le manifeste le dit. Couvert dès qu'une vague v3 arrive. Décision ouverte n° 4. |
-| Qui choisit la leçon d'une matière, et que se passe-t-il si elle est renommée ou supprimée ? | Un choix implicite (« la première par ordre alphabétique ») change dès qu'un fichier arrive. | Le jeu est un **manifeste écrit** qui nomme chaque fichier ; un test refuse un fichier du manifeste absent ou non v3. |
-| « Identique partout » : Develop doit-il être recréé à l'identique, donc vidé ? | Develop porte ~350 leçons publiées, des tentatives et des devoirs ; le recréer, c'est supprimer. | Interdit sans le porteur. Le chantier livre d'abord local + PR ; Develop est un lot à part, bloqué sur la décision ouverte n° 1. |
-| Le test d'affichage sur 347+ fichiers tient-il dans 5 min par tâche ? | Un rendu de leçon à deux largeurs coûte ~2 à 3 s (le test des formules longues : 6,5 s avec connexion) : 417 fichiers ≈ 15 à 20 min. | Une PR ne rend **que les fichiers qu'elle touche** ; le passage complet se fait au train, découpé en parts de ≤ 5 min. Il ne compte pas dans le budget de 15 s des tests système : dérogation à demander (décision ouverte n° 3). |
-| « Sans les publier » : où la leçon est-elle rendue ? | Le test tourne sur la base de test, effacée à chaque test ; rien ne part vers un environnement. | Le test importe par la vraie chaîne (même refus que l'écran Imports) et publie **dans la base de test** seulement, pour voir la page élève. |
-| Que veut dire « figure absente » à vérifier par la machine ? | Une figure déclarée dans le JSON qui ne s'affiche pas (image vide, SVG non rendu). | Le test compte les figures du fichier et les figures visibles de la page ; il compare. |
-| Staging = « tout le contenu, relu par les enseignants » : le chargement doit-il remplacer une leçon déjà relue ? | Non : remplacer une leçon relue efface la relecture. | Sur Staging, le chargement **ajoute les leçons absentes** sans toucher les présentes (sauf exercices des leçons à sujets, comme aujourd'hui). Décision ouverte n° 2. |
-| L'aperçu local d'un fichier risque-t-il d'atteindre un environnement partagé ? | Il réutilise le remplacement de leçon entière, qui efface tentatives et devoirs. | L'aperçu refuse de tourner hors développement local. |
-| Un enseignant dans deux établissements, un élève dans deux classes : le jeu standard les couvre-t-il ? | Le jeu démo actuel couvre l'enseignant multi-établissements ; c'est un cas qui a déjà cassé. | Le jeu standard garde **un enseignant affecté aux deux établissements**. L'élève multi-classes n'existe pas dans le métier (une classe par élève) : rien à ajouter. |
-| Que perd-on en remplaçant le jeu démo de 63 classes ? | Le volume (35 à 45 élèves par classe) servait à voir les listes longues. | Le jeu standard garde **une classe pleine** (40 élèves) pour les listes longues ; le reste en a 3. Le jeu volumineux reste disponible derrière une option. |
+| « Une leçon par matière et par niveau » : le niveau compte-t-il la série ? | Oui : Tle C et Tle D n'ont pas la même leçon de maths. | Une leçon par dossier niveau-série et par matière : 46 couples ont du v3 aujourd'hui. |
+| 2nde, 4ème, 5ème, 6ème n'ont que du v1 : qu'y met-on ? | Le chargement ignore les v1. | Couples vides jusqu'à leur vague v3, écrits comme tels (décision n° 4). |
+| Qui choisit les leçons, et si un fichier est renommé ? | Un choix implicite change à chaque arrivée de fichier. | Un **manifeste écrit** nomme chaque fichier ; un test refuse un fichier absent, non v3, ou un couple oublié. |
+| « Déterministe » : avec des dates fixes, les tableaux « 7 derniers jours » se vident avec le temps. | Saint-Michel date tout entre le 14/09 et le 05/10/2026 : déjà vide aujourd'hui sur les périodes courtes. | Le trimestre se termine **la veille du chargement**, les tirages sont à graine fixe : mêmes chiffres, recalés sur la date. Une empreinte des totaux, testée, montre qu'un calcul a changé (décision n° 3). |
+| Simuler un trimestre pour ~1 500 élèves par les use cases tient-il en « quelques minutes » ? | Saint-Michel : 20 élèves × 3 leçons × 6 passages via use cases ; ×75 élèves ne tient pas. | Le grand établissement a ses élèves et classes, mais une activité **échantillonnée** (une classe par niveau active) ; ou chargé seulement sur option (décision n° 5). Durée mesurée et plafonnée à 5 min. |
+| « Remis à zéro à volonté » sur Develop = supprimer. | Develop porte ~350 leçons, des tentatives, des devoirs. | En local : une commande, sans question. Sur Develop : la même commande refuse sans une confirmation explicite, et la première remise à zéro attend l'accord du porteur. |
+| « Aucune vraie donnée personnelle » : comment le prouver ? | Les numéros fictifs actuels (01…, 05…, 07…) ressemblent à de vrais numéros ivoiriens. | Noms tirés d'une liste fictive écrite dans le dépôt, numéros dans une plage réservée **non attribuable** ; un test refuse tout contact hors plage. Plage à confirmer (décision n° 8). |
+| La démonstration à une DRENA peut-elle se faire sur Develop ? | Develop change à chaque fusion ; une démo peut tomber sur une PR cassée. | Le jeu est **présentable** (noms d'établissement neutres, chiffres crédibles) ; l'endroit de la démo reste à choisir (décision n° 7). |
+| La recette par rôle : quand la rejouer ? | Précision du porteur : seulement dans le chantier qui touche ce rôle ou cet écran. | Une **table écran → parcours** dans le dépôt ; la PR coche le parcours rejoué ; aucune recette automatique après déploiement. |
+| « Règle de fusion simple » : qui la vérifie ? | Une règle non vérifiée s'oublie. | Une section « Prouvé sur le jeu standard » dans le modèle de PR, vérifiée par une garde de la CI (section présente et non vide quand le code change). |
+| Le test d'affichage des 417 fichiers tient-il dans 5 min ? | ~2 à 3 s par fichier à deux largeurs : 15 à 20 min. | PR : fichiers touchés seulement ; train : tout, en parts de ≤ 5 min ; dérogation au budget système (décision n° 2). |
+| Staging = tout le contenu relu : le chargement doit-il remplacer une leçon relue ? | Non, cela effacerait la relecture. | Staging ajoute les leçons absentes sans toucher aux présentes (décision n° 2 bis). |
+| Un enseignant dans deux établissements, un élève dans deux classes ? | Le premier a déjà cassé ; le second n'existe pas dans le métier. | Un enseignant affecté à deux établissements est dans le jeu. |
+| L'aperçu local d'un fichier peut-il toucher un environnement partagé ? | Il remplace la leçon entière, tentatives comprises. | Refusé hors développement local. |
 
 ## Cas limites identifiés
 
-- Un fichier du manifeste disparaît ou repasse en v1 : le test du manifeste échoue, le chargement ne part pas à moitié.
-- Une PR touche 60 fichiers de contenus : le rendu des fichiers touchés dépasse 5 min → il se découpe comme au train.
-- Une PR supprime un fichier de contenu : rien à rendre, pas d'échec.
-- Un JSON refusé à l'import : le test échoue avec le code de refus de l'import, sans aller jusqu'à l'écran.
-- Le jeu standard est rejoué : il ne crée rien de plus (idempotent par contact, par nom d'établissement et par titre de leçon).
-- L'aperçu local d'un fichier modifié pendant que le serveur tourne : le fichier est rechargé, la page rafraîchie montre la nouvelle version.
+- Fichier du manifeste renommé ou repassé en v1 : test rouge, chargement non commencé.
+- Jeu rejoué : rien en double ; jeu remis à zéro : mêmes totaux (empreinte identique).
+- Chargement le 1er janvier ou un dimanche : le trimestre recule, l'empreinte reste identique (elle porte sur les totaux, pas sur les dates).
+- Une migration ajoute une colonne obligatoire : le jeu échoue en local avant d'échouer sur Develop (test de chargement en CI).
+- Classe vide et élève sans activité : les tableaux de bord affichent leur état vide, pas une erreur.
+- PR qui touche 60 leçons : le rendu se découpe comme au train.
+- JSON refusé à l'import : l'aperçu ne touche pas la base ; le test d'affichage échoue avec le code de refus.
 
 ## Questions encore ouvertes
 
-1. **Develop au jeu standard** : (a) on garde les ~350 leçons et on arrête seulement d'en charger d'autres que le jeu standard — rien n'est supprimé ; (b) on vide Develop et on le recrée au jeu standard — suppression de ~350 leçons publiées, de leurs tentatives, séances, devoirs et lectures, et des 3 établissements de test. **Recommandation : (a) maintenant, (b) plus tard si le porteur le demande.**
-2. **Staging = tout le contenu** : le chargement automatique y ajoute toutes les leçons v3 absentes (sans remplacer les présentes) — d'accord ?
-3. **Budget CI** : une dérogation au budget de 15 s pour le test d'affichage des leçons, qui tourne au train en tâches séparées de ≤ 5 min (et sur les seuls fichiers touchés dans une PR) — d'accord ?
-4. **Niveaux sans v3** (2nde, 4ème, 5ème, 6ème) : on les laisse vides dans le jeu standard jusqu'à leur vague v3, ou on y met une leçon v1 ?
-5. **Le choix des leçons** : on prend la première leçon du programme de chaque matière (proposition), ou le porteur en désigne d'autres ?
+1. **Develop** : (a) y charger le jeu standard **à côté** des ~350 leçons, sans rien supprimer [recommandé d'abord] ; (b) le remettre à zéro au jeu standard — supprime ~350 leçons publiées, leurs tentatives, séances, devoirs, lectures et les 3 établissements de test.
+2. **CI** : dérogation au budget système de 15 s pour le test d'affichage (fichiers touchés en PR, tout au train en parts ≤ 5 min). **2 bis. Staging** : ajout automatique des leçons v3 absentes, sans remplacer les présentes ?
+3. **Dates de l'activité** : trimestre glissant terminé la veille du chargement [recommandé] ou dates fixes (chiffres identiques mais périodes courtes vides) ?
+4. **Niveaux sans v3** (2nde, 4e, 5e, 6e) : vides ou une leçon v1 ?
+5. **Grand établissement** : toujours chargé, activité échantillonnée [recommandé], ou seulement sur option (`--grand`) pour garder la commande sous 5 min ?
+6. **DRENA** : parcours via un compte équipe filtré par DRENA [recommandé], ou ouvrir un chantier « compte DRENA » ?
+7. **Démonstration** : sur Develop, ou sur un environnement Railway dédié (coût) ?
+8. **Plage de numéros fictifs** : laquelle est garantie non attribuable en Côte d'Ivoire ?
+9. **Choix des leçons** : la première du programme de chaque matière, ou un choix du porteur ?
