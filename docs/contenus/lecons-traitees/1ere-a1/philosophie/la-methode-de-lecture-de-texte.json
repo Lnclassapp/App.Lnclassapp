@@ -40,7 +40,7 @@
               {
                 "content": "Dans un texte, qu'appelle-t-on le thème ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 3 — Dégager le thème : c'est le sujet général du texte, en un groupe de mots, sans prise de position. La phrase où l'auteur dit ce qu'il pense est la thèse. Un exemple n'apparaît que dans une partie du texte (Étape 4 — Vérifier). La longueur d'un mot n'a aucun rapport avec le thème.",
+                "explanation": "Étape 3 — Dégager le thème : c'est le sujet général du texte, en un groupe de mots, sans prise de position. La phrase où l'auteur dit ce qu'il pense est la thèse. Un exemple n'apparaît que dans une partie du texte (Étape 4 — Vérifier). Le premier mot d'une phrase n'est pas forcément le sujet de tout le texte.",
                 "answers": [
                   {
                     "content": "Le sujet général du texte, dit en un groupe de mots sans prise de position",
@@ -55,7 +55,7 @@
                     "correct": false
                   },
                   {
-                    "content": "Le mot le plus long du texte",
+                    "content": "Le premier mot de la première phrase",
                     "correct": false
                   }
                 ]
@@ -95,12 +95,12 @@
                 ]
               },
               {
-                "content": "Les mots qui reviennent dans un texte, ou dont le sens est proche, aident à trouver le ___ du texte.",
+                "content": "Les mots qui reviennent dans un texte aident à dégager le thème, c'est-à-dire le sujet ___ du texte.",
                 "question_type": "fill_blank",
-                "explanation": "Étape 2 — Relire et souligner les mots qui reviennent : ces mots-clés mènent au thème (Étape 3). Ce ne sont pas eux qui donnent directement la thèse, qui est une phrase complète.",
+                "explanation": "Étape 2 — Relire et souligner les mots qui reviennent : ces mots-clés mènent au thème (Étape 3), qui est le sujet général du texte. Ce ne sont pas eux qui donnent directement la thèse, qui est une phrase complète.",
                 "answers": [
                   {
-                    "content": "thème",
+                    "content": "général",
                     "correct": true
                   }
                 ]
@@ -108,7 +108,7 @@
               {
                 "content": "Texte écrit pour Lnclass : « Au village, on dit que le marché sert à vendre des produits. Pourtant on y vient aussi pour se rencontrer, prendre des nouvelles, discuter. Le marché est un lieu de commerce et de rencontre. » Quel est le thème de ce texte ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 2 — Relire : « marché » revient dans la première et la dernière phrase. Étape 3 — Dégager le thème : « le marché », sans prise de position. Étape 4 — Vérifier : « le commerce des produits » ne couvre qu'une partie du texte, car on y parle aussi de rencontre ; « les nouvelles » est un exemple ; la dernière proposition est une phrase complète, donc la thèse.",
+                "explanation": "Étape 2 — Relire : « marché » revient dans la première et la dernière phrase. Étape 3 — Dégager le thème : « le marché », sans prise de position. Étape 4 — Vérifier : « le commerce des produits » ne couvre qu'une partie du texte, car on y parle aussi de rencontre ; « les nouvelles » est un exemple ; la proposition « Le marché est un lieu de commerce et de rencontre » est une phrase complète, donc la thèse.",
                 "answers": [
                   {
                     "content": "Le marché",
@@ -217,7 +217,7 @@
               {
                 "content": "Texte écrit pour Lnclass : « La liberté n'est pas de faire n'importe quoi ; c'est de pouvoir choisir ce que l'on fait en connaissant les conséquences. » Quelle définition de « liberté » correspond à ce texte ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 2 — Chercher des indices : le texte oppose la liberté à « faire n'importe quoi » ; les deux dernières définitions (tout faire, ne jamais obéir) reprennent donc ce que le texte rejette. Étape 3 — Proposer une définition : pouvoir choisir en connaissant les conséquences. Étape 4 — Vérifier : en remplaçant le mot par cette définition, la phrase garde son sens. « Ne pas aller à l'école » n'a aucun rapport avec le texte.",
+                "explanation": "Étape 2 — Chercher des indices : le texte oppose la liberté à « faire n'importe quoi » ; les définitions « faire tout ce qui passe par la tête » et « ne jamais obéir à aucune règle » reprennent donc ce que le texte rejette. Étape 3 — Proposer une définition : pouvoir choisir en connaissant les conséquences. Étape 4 — Vérifier : en remplaçant le mot par cette définition, la phrase garde son sens. « Ne dépendre de personne » confond la liberté avec l'indépendance totale, ce que le texte ne dit pas : il parle de choisir en connaissant les conséquences.",
                 "answers": [
                   {
                     "content": "Pouvoir choisir ce que l'on fait en connaissant les conséquences",
@@ -228,7 +228,7 @@
                     "correct": false
                   },
                   {
-                    "content": "Ne pas aller à l'école",
+                    "content": "Ne dépendre de personne",
                     "correct": false
                   },
                   {
@@ -545,12 +545,24 @@
               },
               {
                 "content": "Le connecteur « donc » introduit une ___.",
-                "question_type": "fill_blank",
+                "question_type": "select",
                 "explanation": "Étape 2 — Entourer les connecteurs et nommer le rapport : « donc » exprime la conséquence de ce qui précède. « Car » exprime au contraire la cause.",
                 "answers": [
                   {
                     "content": "conséquence",
                     "correct": true
+                  },
+                  {
+                    "content": "cause",
+                    "correct": false
+                  },
+                  {
+                    "content": "opposition",
+                    "correct": false
+                  },
+                  {
+                    "content": "addition",
+                    "correct": false
                   }
                 ]
               },
@@ -622,13 +634,25 @@
             "figure": null,
             "questions": [
               {
-                "content": "Redire une phrase avec d'autres mots, sans rien ajouter, c'est faire une ___.",
-                "question_type": "fill_blank",
+                "content": "Redire une phrase avec d'autres mots, sans rien ajouter ni rien expliquer, c'est faire une ___.",
+                "question_type": "select",
                 "explanation": "Étape 2 — Reformuler ne suffit pas : redire avec d'autres mots, sans rien ajouter, s'appelle la paraphrase. Une explication demande en plus de justifier (Étape 3) et d'illustrer (Étape 4).",
                 "answers": [
                   {
                     "content": "paraphrase",
                     "correct": true
+                  },
+                  {
+                    "content": "justification",
+                    "correct": false
+                  },
+                  {
+                    "content": "illustration",
+                    "correct": false
+                  },
+                  {
+                    "content": "situation",
+                    "correct": false
                   }
                 ]
               },
@@ -776,7 +800,7 @@
             {
               "content": "Dans le texte « Le silence », quelle est la thèse de l'auteur ?",
               "question_type": "single_choice",
-              "explanation": "Méthode. Repérer l'opinion adverse : « On pense que le silence est un vide » (annoncée par « on pense que »). Chercher la réponse de l'auteur : « Pourtant » et « donc » annoncent sa réponse, dans la dernière phrase. Formuler la thèse en une phrase complète : le silence est souvent la condition de la pensée. La première proposition possible, « un vide », reprend l'opinion adverse, que l'auteur rejette.",
+              "explanation": "Méthode. Repérer l'opinion adverse : « On pense que le silence est un vide » (annoncée par « on pense que »). Chercher la réponse de l'auteur : « Pourtant » et « donc » annoncent sa réponse, dans la dernière phrase. Formuler la thèse en une phrase complète : le silence est souvent la condition de la pensée. La proposition « Le silence est un vide où il ne se passe rien » reprend l'opinion adverse, que l'auteur rejette.",
               "answers": [
                 {
                   "content": "Le silence n'est pas un vide : il est souvent la condition de la pensée.",
@@ -897,7 +921,7 @@
             {
               "content": "Dans le texte « Apprendre par cœur », quelle idée l'auteur accorde-t-il à ses adversaires, avant de la limiter ?",
               "question_type": "single_choice",
-              "explanation": "Méthode — Entourer les connecteurs : « Certes… Mais » exprime une concession. L'auteur accorde d'abord que le livre conserve beaucoup de choses, puis il le limite par « Mais on ne peut penser qu'avec ce que l'on a en tête ». Les deux dernières propositions sont donc l'idée qu'il défend, pas ce qu'il concède.",
+              "explanation": "Méthode — Entourer les connecteurs : « Certes… Mais » exprime une concession. L'auteur accorde d'abord que le livre conserve beaucoup de choses, puis il le limite par « Mais on ne peut penser qu'avec ce que l'on a en tête ». Les propositions « On ne peut penser qu'avec ce que l'on a en tête » et « Celui qui ne sait rien n'a rien à comparer » sont donc l'idée qu'il défend, pas ce qu'il concède.",
               "answers": [
                 {
                   "content": "Un livre conserve beaucoup de choses",
@@ -920,7 +944,7 @@
             {
               "content": "Quelles propositions expriment correctement la thèse du texte « Apprendre par cœur » ?",
               "question_type": "multiple_correct_2",
-              "explanation": "Méthode — Repérer l'opinion adverse (« Certains disent… inutile »), puis chercher la réponse de l'auteur après « Mais » et « donc ». Les deux bonnes propositions reformulent la dernière phrase et le moment du « Mais ». La proposition « tout se trouve dans un livre, donc… inutile » est l'opinion adverse ; « un livre ne conserve rien d'important » contredit la concession du texte ; la dernière contredit l'idée de « réflexion ».",
+              "explanation": "Méthode — Repérer l'opinion adverse (« Certains disent… inutile »), puis chercher la réponse de l'auteur après « Mais » et « donc ». Les deux bonnes propositions reformulent la dernière phrase et le moment du « Mais ». La proposition « tout se trouve dans un livre, donc… inutile » est l'opinion adverse ; « un livre ne conserve rien d'important » contredit la concession du texte ; « Il faut apprendre par cœur sans réfléchir » contredit l'idée de « réflexion ».",
               "answers": [
                 {
                   "content": "Apprendre par cœur fournit la matière de la réflexion",
@@ -1071,12 +1095,24 @@
             },
             {
               "content": "Dans le texte « L'ennui », l'expression « C'est pourquoi » introduit une ___.",
-              "question_type": "fill_blank",
+              "question_type": "select",
               "explanation": "Méthode — Entourer les connecteurs et nommer le rapport. « C'est pourquoi » tire la conséquence des phrases précédentes : puisque l'ennui pousse à imaginer et à inventer, il peut devenir le point de départ de la création.",
               "answers": [
                 {
                   "content": "conséquence",
                   "correct": true
+                },
+                {
+                  "content": "cause",
+                  "correct": false
+                },
+                {
+                  "content": "opposition",
+                  "correct": false
+                },
+                {
+                  "content": "addition",
+                  "correct": false
                 }
               ]
             },
@@ -1268,7 +1304,7 @@
               "starter": "Cet exemple illustre l'idée que…"
             },
             {
-              "content": "Rédige un court paragraphe de commentaire du texte « Le regard des autres » : indique son thème, sa thèse et ses grands moments, en nommant au moins deux connecteurs.",
+              "content": "Rédige un court paragraphe d'étude du texte « Le regard des autres » : indique son thème, sa thèse et ses grands moments, en nommant au moins deux connecteurs.",
               "question_type": "written",
               "points": 6,
               "criteria": [
@@ -1278,7 +1314,7 @@
                 "Au moins deux connecteurs sont cités avec leur rapport (concession, opposition, conséquence)",
                 "Le paragraphe reste dans le texte et ne donne pas d'opinion personnelle"
               ],
-              "explanation": "Corrigé modèle : « Ce texte a pour thème le regard des autres. Il soutient que le regard d'autrui n'est pas inutile : il nous apprend ce que nous ne pouvons pas voir seuls de nous-mêmes. L'auteur part de l'opinion adverse selon laquelle ce regard ne devrait pas compter. Avec « Il est vrai que… Mais », qui exprime une concession, il accorde que dépendre de l'approbation des autres fait perdre la liberté de juger, puis il montre que le regard d'autrui sert à se connaître. Il l'illustre par l'exemple de l'élève qui comprend, en voyant le visage de sa camarade, qu'il l'a blessée. « Donc » introduit la conclusion : il faut écouter ce regard sans s'y soumettre ni l'ignorer. » Barème : 1 point pour le thème, 2 pour la thèse distinguée de l'opinion adverse, 1 pour les moments, 1 pour les deux connecteurs, 1 pour l'absence d'opinion personnelle.",
+              "explanation": "Corrigé modèle : « Ce texte a pour thème le regard des autres. Il soutient que le regard d'autrui n'est pas inutile : il nous apprend ce que nous ne pouvons pas voir seuls de nous-mêmes. L'auteur part de l'opinion adverse selon laquelle ce regard ne devrait pas compter. Avec « Il est vrai que… Mais », qui exprime une concession, il accorde que dépendre de l'approbation des autres fait perdre la liberté de juger, puis il montre que le regard d'autrui sert à se connaître. Il l'illustre par l'exemple de l'élève qui comprend, en voyant le visage de sa camarade, qu'il l'a blessée. La phrase introduite par « donc » conclut que le regard d'autrui nous apprend ce que nous ne pouvons pas voir seuls de nous-mêmes, et le texte termine en conseillant de l'écouter sans s'y soumettre ni l'ignorer. » Barème : 1 point pour le thème, 2 pour la thèse distinguée de l'opinion adverse, 1 pour les moments, 1 pour les deux connecteurs, 1 pour l'absence d'opinion personnelle.",
               "answers": [],
               "starter": "Ce texte a pour thème…"
             }
