@@ -1,0 +1,1324 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'urbanisation dans les pays développés : l'exemple de la France",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "carte-france",
+          "kind": "map",
+          "description": "Une carte du monde sur laquelle la France est colorée dans une teinte et la Côte d'Ivoire dans une autre. Deux villes sont repérées : Paris, la capitale de la France, et Abidjan. La carte sert à situer la France, pays développé, par rapport à l'Afrique de l'Ouest.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "fra",
+                "category": 1
+              },
+              {
+                "id": "civ",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "paris",
+                "label": "Paris"
+              },
+              {
+                "id": "abidjan",
+                "label": "Abidjan"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "France",
+              "Côte d'Ivoire"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "urbains-ruraux-france",
+          "kind": "stat_chart",
+          "description": "Un diagramme circulaire qui montre, en ordre de grandeur, la part de la population française qui vit en ville et celle qui vit à la campagne : environ 80 % d'urbains contre environ 20 % de ruraux. Le secteur des urbains est quatre fois plus grand que celui des ruraux.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              80,
+              20
+            ],
+            "labels": [
+              "Population urbaine (environ 8 sur 10)",
+              "Population rurale (environ 2 sur 10)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-urbanisation",
+          "kind": "timeline",
+          "description": "Une frise chronologique de 1940 à 2020. Elle place la fin de la Seconde Guerre mondiale en 1945, puis deux périodes : les Trente Glorieuses de 1945 à 1973 (exode rural, grands ensembles), puis la période qui suit, marquée par la périurbanisation et l'étalement des villes.",
+          "params": {
+            "start": 1940,
+            "end": 2020,
+            "step": 10,
+            "periods": [
+              {
+                "from": 1945,
+                "to": 1973,
+                "label": "Trente Glorieuses : exode rural"
+              },
+              {
+                "from": 1973,
+                "to": 2020,
+                "label": "Périurbanisation, étalement"
+              }
+            ],
+            "events": [
+              {
+                "at": 1945,
+                "label": "Fin de la Seconde Guerre mondiale"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "aire-urbaine",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : l'aire urbaine, au sommet, se divise en trois espaces : la ville-centre, qui concentre commerces et emplois, la banlieue, qui touche la ville-centre, et la couronne périurbaine, plus éloignée, dont de nombreux habitants travaillent dans la ville.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "aire",
+                "label": "Aire urbaine"
+              },
+              {
+                "id": "centre",
+                "label": "Ville-centre"
+              },
+              {
+                "id": "banlieue",
+                "label": "Banlieue"
+              },
+              {
+                "id": "couronne",
+                "label": "Couronne périurbaine"
+              }
+            ],
+            "edges": [
+              {
+                "from": "aire",
+                "to": "centre",
+                "label": "noyau"
+              },
+              {
+                "from": "aire",
+                "to": "banlieue",
+                "label": "bâti continu"
+              },
+              {
+                "from": "aire",
+                "to": "couronne",
+                "label": "plus éloignée"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-quotidien",
+          "kind": "diagram",
+          "description": "Un schéma fléché de gauche à droite qui suit le trajet quotidien d'un navetteur : il part de son domicile situé dans la couronne périurbaine, rejoint la gare, prend un transport en commun, puis arrive à son lieu de travail dans la ville-centre. Chaque flèche indique le moyen de passer à l'étape suivante.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "dom",
+                "label": "Domicile (couronne périurbaine)"
+              },
+              {
+                "id": "gare",
+                "label": "Gare ou arrêt"
+              },
+              {
+                "id": "tc",
+                "label": "Train, tramway ou métro"
+              },
+              {
+                "id": "trav",
+                "label": "Travail (ville-centre)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "dom",
+                "to": "gare",
+                "label": "à pied ou en voiture"
+              },
+              {
+                "from": "gare",
+                "to": "tc",
+                "label": "billet sur téléphone"
+              },
+              {
+                "from": "tc",
+                "to": "trav",
+                "label": "à pied"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "etalement-congestion",
+          "kind": "diagram",
+          "description": "Un schéma fléché de haut en bas qui enchaîne les causes : la ville s'étale, les habitants vivent loin de leur travail, beaucoup utilisent la voiture, les routes sont saturées et l'air est pollué. La dernière case donne la réponse : développer les transports en commun.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "e",
+                "label": "La ville s'étale"
+              },
+              {
+                "id": "l",
+                "label": "Les habitants vivent loin de leur travail"
+              },
+              {
+                "id": "v",
+                "label": "Beaucoup prennent la voiture"
+              },
+              {
+                "id": "c",
+                "label": "Routes saturées, air pollué"
+              },
+              {
+                "id": "r",
+                "label": "Réponse : développer les transports en commun"
+              }
+            ],
+            "edges": [
+              {
+                "from": "e",
+                "to": "l"
+              },
+              {
+                "from": "l",
+                "to": "v"
+              },
+              {
+                "from": "v",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "r",
+                "label": "pour réduire"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mesurer le degré d'urbanisation d'un pays",
+          "remember": "La **population urbaine** est celle qui vit en ville. En France, l'INSEE (l'institut de la statistique) appelle **unité urbaine** une commune, ou un ensemble de communes, dont les constructions se suivent sans coupure de plus de 200 mètres et qui compte au moins 2 000 habitants.\n\nLe **taux d'urbanisation** est la part de la population totale qui vit en ville : population urbaine ÷ population totale × 100, en %. La France est un **pays développé** (haut niveau de vie, économie de services et d'industrie) et très urbanisé : environ 8 Français sur 10 vivent en ville. Paris est la plus grande ville du pays. Attention : chaque pays définit la « ville » à sa façon, donc on compare les taux avec prudence.",
+          "method": [
+            "Relever la population urbaine et la population totale, dans la même unité.",
+            "Calculer le rapport : population urbaine divisée par population totale.",
+            "Exprimer le résultat en pourcentage en le multipliant par 100.",
+            "Interpréter : dire combien d'habitants sur 10 vivent en ville et conclure."
+          ],
+          "example": {
+            "statement": "Un pays fictif compte 50 millions d'habitants, dont 40 millions vivent en ville. Calculer son taux d'urbanisation.",
+            "steps": [
+              "Relever : la population urbaine est de 40 millions et la population totale de 50 millions, dans la même unité.",
+              "Calculer le rapport : 40 ÷ 50 = 0,8.",
+              "Exprimer en pourcentage : 0,8 × 100 = 80 %.",
+              "Interpréter : 80 habitants sur 100, soit 8 sur 10, vivent en ville. Ce pays est très urbanisé, comme la France."
+            ]
+          },
+          "pitfall": "Ne pas confondre le **nombre** de citadins et leur **part** dans la population. Contre-exemple : le pays A compte 100 millions d'habitants dont 40 millions de citadins (40 %) ; le pays B compte 10 millions d'habitants dont 8 millions de citadins (80 %). A a plus de citadins, mais B est bien plus urbanisé. Ne divise jamais par la population rurale : 40 ÷ 10 = 4 donnerait 400 %, un résultat impossible au-delà de 100 %.",
+          "figure": "urbains-ruraux-france",
+          "exercise": {
+            "title": "Calculer et interpréter un taux d'urbanisation",
+            "exercise_type": "fixation",
+            "figure": "urbains-ruraux-france",
+            "statement": "Dans cet exercice, tu calcules des taux d'urbanisation avec la méthode de la fiche. Les pays des calculs sont fictifs, sauf quand la France est citée.",
+            "questions": [
+              {
+                "content": "Que mesure le taux d'urbanisation d'un pays ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : il faut deux données, la population urbaine et la population totale. Étape 2 — Calculer le rapport entre les deux. Le taux d'urbanisation est donc une part (un pourcentage), pas un nombre de villes ni une surface. Le nombre de citadins seul est la confusion que signale le piège.",
+                "answers": [
+                  {
+                    "content": "Le nombre total de villes du pays",
+                    "correct": false
+                  },
+                  {
+                    "content": "La part de la population totale qui vit en ville",
+                    "correct": true
+                  },
+                  {
+                    "content": "La superficie occupée par les villes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nombre d'habitants de la plus grande ville",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un pays compte 20 millions d'habitants, dont 15 millions vivent en ville. Quel est son taux d'urbanisation, en % ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : population urbaine 15 millions, population totale 20 millions (même unité). Étape 2 — Calculer le rapport : 15 ÷ 20 = 0,75. Étape 3 — Exprimer en pourcentage : 0,75 × 100 = 75 %. Étape 4 — Interpréter : 75 habitants sur 100 vivent en ville.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Un pays compte 50 millions d'habitants et son taux d'urbanisation est de 80 %. Combien de millions d'habitants vivent en ville ?",
+                "question_type": "numeric",
+                "explanation": "On refait la méthode à l'envers. Étape 1 — Relever : population totale 50 millions, taux 80 %. Étape 3 — Le pourcentage correspond à 80 ÷ 100 = 0,8. Étape 2 — La population urbaine est le rapport multiplié par la population totale : 0,8 × 50 = 40 millions. Étape 4 — Interpréter : 8 habitants sur 10 sont des citadins.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "millions"
+              },
+              {
+                "content": "Un pays de 100 millions d'habitants dont 40 millions de citadins est plus urbanisé qu'un pays de 10 millions d'habitants dont 8 millions de citadins.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer le rapport : 40 ÷ 100 = 0,4 pour le premier pays, 8 ÷ 10 = 0,8 pour le second. Étape 3 — Exprimer : 40 % contre 80 %. Étape 4 — Interpréter : le second pays est deux fois plus urbanisé, même s'il a moins de citadins. Comparer les nombres de citadins est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pays a un taux d'urbanisation de 80 %. Quelle phrase est exacte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Interpréter : 80 % veut dire 80 habitants sur 100, soit 8 sur 10, qui vivent en ville. Le taux ne dit rien du nombre de villes ni de la surface qu'elles occupent. Pour la France, on retient l'ordre de grandeur : environ 8 Français sur 10.",
+                "answers": [
+                  {
+                    "content": "8 habitants sur 10 vivent en ville",
+                    "correct": true
+                  },
+                  {
+                    "content": "80 habitants sur 1 000 vivent en ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pays compte 80 villes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les villes occupent 80 % du territoire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « 30 millions de citadins ÷ 10 millions de ruraux = 3, donc le taux d'urbanisation est de 300 %. » Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la population totale est 30 + 10 = 40 millions. Étape 2 — Calculer le rapport avec la population totale : 30 ÷ 40 = 0,75. Étape 3 — Exprimer : 75 %. Le taux ne peut jamais dépasser 100 %, puisque les citadins sont une partie de la population totale : 300 % est un résultat impossible.",
+                "answers": [
+                  {
+                    "content": "Il a divisé par la population rurale au lieu de la population totale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il aurait dû additionner les deux populations",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a oublié de multiplier par 1 000",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a aucune erreur",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Retracer les étapes de la croissance urbaine en France",
+          "remember": "L'**exode rural** est le départ massif des habitants des campagnes vers les villes. En France, il s'accélère après la Seconde Guerre mondiale, pendant les **Trente Glorieuses** (période de forte croissance économique, de 1945 à 1973 environ) : l'industrie recrute en ville et la mécanisation de l'agriculture réduit le besoin de bras dans les champs.\n\nPour loger vite ces nouveaux citadins, on construit en périphérie des **grands ensembles** : des groupes d'immeubles collectifs (années 1950 à 1970).\n\nÀ partir des années 1970, la ville s'étend : c'est la **périurbanisation**. Des familles s'installent, souvent en maison individuelle, dans des communes autour de la ville et utilisent la voiture. La ville occupe de plus en plus de surface : c'est l'**étalement urbain**.",
+          "method": [
+            "Situer la période étudiée sur la frise, avant ou après les années 1970.",
+            "Décrire le mouvement des habitants : d'où partent-ils et où vont-ils ?",
+            "Expliquer la cause principale de ce mouvement.",
+            "Nommer la forme de croissance urbaine qui en résulte."
+          ],
+          "example": {
+            "statement": "Entre 1950 et 1970, des familles quittent la campagne pour une grande ville française où l'on construit de nouveaux immeubles collectifs en périphérie. Retracer cette étape.",
+            "steps": [
+              "Situer : 1950-1970 appartient aux Trente Glorieuses, avant les années 1970.",
+              "Décrire : les habitants partent des campagnes et vont vers la ville.",
+              "Expliquer : l'industrie offre des emplois en ville et les machines réduisent le travail agricole.",
+              "Nommer : c'est l'exode rural, qui fait croître la ville par ses grands ensembles de périphérie."
+            ]
+          },
+          "pitfall": "Ne pas confondre **exode rural** et **périurbanisation**. L'exode rural va de la campagne vers la ville. La périurbanisation va souvent de la ville vers les communes qui l'entourent. Contre-exemple : une famille quitte un appartement du centre de Lyon pour une maison à 25 km. Elle part d'une ville, pas d'une campagne, et elle continue de travailler en ville : c'est de la périurbanisation, pas de l'exode rural. Pour éviter l'erreur, demande-toi toujours d'où partent les habitants.",
+          "figure": "frise-urbanisation",
+          "exercise": {
+            "title": "Retracer l'exode rural et la périurbanisation",
+            "exercise_type": "fixation",
+            "figure": "frise-urbanisation",
+            "statement": "Dans cet exercice, tu retraces les étapes de la croissance des villes françaises avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Que désigne l'exode rural ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire le mouvement : d'où partent les habitants et où vont-ils ? Dans l'exode rural, ils partent des campagnes et vont vers les villes. Le départ des citadins vers la périphérie est la périurbanisation, c'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Le départ massif des habitants des campagnes vers les villes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le départ des citadins vers des maisons proches de la ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "La construction d'immeubles en périphérie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'extension de la ville sur les champs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre chronologique ces trois étapes de la croissance urbaine en France.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer sur la frise : l'exode rural démarre après 1945, les grands ensembles se construisent des années 1950 aux années 1970, la périurbanisation vient après 1970. Étape 4 — Nommer chaque forme de croissance : exode rural, puis grands ensembles, puis périurbanisation. Les grands ensembles logent ceux que l'exode rural amène en ville.",
+                "answers": [
+                  {
+                    "content": "Exode rural vers les villes (après 1945)"
+                  },
+                  {
+                    "content": "Construction des grands ensembles en périphérie (années 1950 à 1970)"
+                  },
+                  {
+                    "content": "Périurbanisation et étalement des villes (depuis les années 1970)"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque phénomène à sa cause principale.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Expliquer la cause principale. Exode rural : l'industrie recrute en ville et la mécanisation réduit le travail agricole. Grands ensembles : il faut loger vite des familles arrivées en ville. Périurbanisation : on s'installe dans une maison hors de la ville et la voiture permet de rester relié à elle.",
+                "answers": [
+                  {
+                    "content": "Exode rural",
+                    "match": "Des emplois en ville et des machines dans les champs"
+                  },
+                  {
+                    "content": "Grands ensembles",
+                    "match": "Le besoin de loger vite les nouveaux citadins"
+                  },
+                  {
+                    "content": "Périurbanisation",
+                    "match": "La maison individuelle et la voiture"
+                  }
+                ]
+              },
+              {
+                "content": "Quand la ville occupe de plus en plus de surface, on parle d'___ urbain (un seul mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Nommer la forme de croissance : quand la ville s'étend sur des communes de plus en plus éloignées, c'est l'étalement urbain. Il résulte de la périurbanisation (étape 3 : la maison individuelle et la voiture).",
+                "answers": [
+                  {
+                    "content": "étalement",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une famille qui quitte le centre d'une ville pour une maison en périphérie participe à l'exode rural.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : cette famille part d'une ville, pas d'une campagne. Étape 4 — Nommer : c'est de la périurbanisation. L'exode rural suppose un départ des campagnes vers les villes. C'est exactement l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux causes de l'exode rural en France après 1945 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer la cause. Deux causes : les emplois offerts par l'industrie en ville (attraction) et la mécanisation de l'agriculture, qui réduit le travail à la campagne (répulsion). La voiture et la maison individuelle expliquent la périurbanisation, une étape plus tardive (étape 1 : après les années 1970). Dire que les campagnes recrutent est faux.",
+                "answers": [
+                  {
+                    "content": "L'industrie recrute en ville",
+                    "correct": true
+                  },
+                  {
+                    "content": "La mécanisation réduit le besoin de bras dans les champs",
+                    "correct": true
+                  },
+                  {
+                    "content": "La voiture permet d'habiter loin de son travail",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les citadins veulent tous une maison avec jardin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les campagnes se sont mises à recruter massivement",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Lire l'organisation d'une aire urbaine et ses déplacements",
+          "remember": "Une **aire urbaine** (au sens courant) est une ville et sa périphérie. Elle comprend la **ville-centre** (le noyau ancien, avec commerces, administrations et emplois), la **banlieue** (les communes voisines dont les constructions touchent celles de la ville-centre) et la **couronne périurbaine** (les communes plus éloignées, d'aspect plus rural, dont de nombreux habitants travaillent dans la ville).\n\nChaque jour, beaucoup d'habitants font un aller-retour entre leur domicile et leur lieu de travail ou d'étude : c'est une **migration alternante**. Ceux qui la font sont des **navetteurs**. Les **transports en commun** (métro, tramway, bus, train régional, RER en Île-de-France) transportent de nombreux voyageurs à la fois ; on y consulte souvent les horaires sur son téléphone.",
+          "method": [
+            "Localiser le lieu de résidence dans l'aire urbaine : ville-centre, banlieue ou couronne périurbaine.",
+            "Localiser le lieu de travail ou d'étude.",
+            "Nommer le déplacement entre les deux : une migration alternante, avec sa direction.",
+            "Identifier le moyen de transport et en déduire un effet sur la circulation."
+          ],
+          "example": {
+            "statement": "Karim habite une commune de la couronne périurbaine d'une grande ville et travaille dans le centre de cette ville. Chaque jour, il prend le train régional puis le tramway, et consulte les horaires sur son téléphone. Analyser son déplacement.",
+            "steps": [
+              "Localiser la résidence : Karim habite la couronne périurbaine.",
+              "Localiser le travail : il travaille dans la ville-centre.",
+              "Nommer le déplacement : c'est une migration alternante, de la couronne vers la ville-centre, répétée chaque jour. Karim est un navetteur.",
+              "Identifier le transport : train régional et tramway sont des transports en commun ; ils évitent à Karim de rouler seul en voiture, ce qui réduit les embouteillages."
+            ]
+          },
+          "pitfall": "Ne pas croire que la couronne périurbaine est « la campagne » indépendante de la ville. Elle a l'aspect de la campagne, mais ses habitants sont liés à la ville par leur travail. Contre-exemple : un habitant d'une commune périurbaine travaille à 30 km, dans la ville-centre. Il fait 60 km d'aller-retour par jour : il vit à la campagne, mais son quotidien dépend de la ville. Ne confonds pas non plus banlieue (bâti continu avec la ville-centre) et couronne périurbaine (plus éloignée).",
+          "figure": "aire-urbaine",
+          "exercise": {
+            "title": "Lire une aire urbaine et un trajet quotidien",
+            "exercise_type": "fixation",
+            "figure": "trajet-quotidien",
+            "statement": "Dans cet exercice, tu analyses des trajets du quotidien avec la méthode de la fiche. Les personnes et les communes citées sont fictives.",
+            "questions": [
+              {
+                "content": "Relie chaque espace de l'aire urbaine à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Localiser : pour situer un lieu de résidence, il faut savoir distinguer les trois espaces. La ville-centre est le noyau ; la banlieue touche la ville-centre ; la couronne périurbaine est plus éloignée mais reste liée à la ville par les déplacements de ses habitants.",
+                "answers": [
+                  {
+                    "content": "Ville-centre",
+                    "match": "Noyau ancien avec commerces, administrations et emplois"
+                  },
+                  {
+                    "content": "Banlieue",
+                    "match": "Communes voisines dont le bâti touche celui de la ville-centre"
+                  },
+                  {
+                    "content": "Couronne périurbaine",
+                    "match": "Communes plus éloignées dont beaucoup d'habitants travaillent en ville"
+                  }
+                ]
+              },
+              {
+                "content": "Le déplacement quotidien entre le domicile et le lieu de travail s'appelle une migration ___ (un seul mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer le déplacement : le trajet aller-retour entre le domicile et le travail est une migration alternante. Elle est dite alternante parce que la personne va, puis revient, chaque jour. Celui qui la fait est un navetteur.",
+                "answers": [
+                  {
+                    "content": "alternante",
+                    "correct": true
+                  },
+                  {
+                    "content": "alternantes",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sofia habite en banlieue et étudie dans le centre de l'agglomération. Elle valide son billet de métro avec son téléphone. Quel déplacement fait-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser la résidence : la banlieue. Étape 2 — Localiser l'étude : la ville-centre. Étape 3 — Nommer : migration alternante, de la banlieue vers la ville-centre. Étape 4 — Identifier : le métro est un transport en commun. L'exode rural serait un départ définitif de la campagne, ce qui n'est pas le cas.",
+                "answers": [
+                  {
+                    "content": "Une migration alternante de la banlieue vers la ville-centre, en transport en commun",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un exode rural vers la ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une migration alternante de la couronne périurbaine vers la campagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un déplacement de loisir sans lien avec la ville-centre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels moyens de transport sont des transports en commun ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Identifier le moyen de transport. Un transport en commun transporte de nombreux voyageurs à la fois, sur un réseau : le métro et le tramway en sont. La voiture, le scooter et le vélo personnels transportent une ou deux personnes : ce sont des transports individuels.",
+                "answers": [
+                  {
+                    "content": "Le métro",
+                    "correct": true
+                  },
+                  {
+                    "content": "La voiture individuelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tramway",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le scooter personnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le vélo personnel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La couronne périurbaine est un espace rural dont les habitants ne dépendent pas de la ville.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer le déplacement : de nombreux habitants de la couronne font une migration alternante vers la ville-centre. Ils dépendent donc de la ville pour leur travail. C'est l'erreur du piège : l'aspect de campagne ne veut pas dire indépendance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une commune éloignée de la ville-centre a l'aspect d'une campagne, mais une grande partie de ses actifs travaille chaque jour dans la ville. Comment la classer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser la commune : elle est éloignée et son bâti ne touche pas la ville-centre, ce n'est donc ni la ville-centre ni la banlieue. Étape 3 — Nommer : ses actifs font une migration alternante vers la ville. C'est la couronne périurbaine. Dire « campagne sans lien » est le piège.",
+                "answers": [
+                  {
+                    "content": "Dans la couronne périurbaine de l'aire urbaine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la ville-centre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la banlieue au bâti continu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans une campagne sans lien avec la ville",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un navetteur habite à 25 km de son travail. Il fait un aller et un retour par jour. Combien de kilomètres parcourt-il en une journée de travail ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Nommer le déplacement : la migration alternante comprend un aller et un retour. Distance parcourue : 25 km à l'aller + 25 km au retour = 50 km par jour. Oublier le retour (répondre 25 km) est l'erreur la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser un problème urbain et sa réponse",
+          "remember": "La croissance des villes pose des problèmes. L'**étalement urbain** recouvre des terres agricoles et des espaces naturels de bâtiments et de routes (on parle d'**artificialisation des sols**). La **congestion** est l'embouteillage des routes aux heures de pointe, quand trop de voitures circulent. La **pollution de l'air** vient en partie du trafic. Le logement coûte cher dans les grandes villes, ce qui creuse les inégalités entre quartiers.\n\nLes acteurs (l'État, les collectivités locales comme la mairie ou l'agglomération, les habitants) répondent : développement des transports en commun et des pistes cyclables, limitation des véhicules les plus polluants dans certaines agglomérations (zones à faibles émissions), rénovation de quartiers, espaces verts, logements. L'objectif est une **ville durable** : elle répond aux besoins de ses habitants sans épuiser les ressources ni dégrader l'environnement.",
+          "method": [
+            "Identifier le problème décrit dans la situation ou le document.",
+            "Expliquer sa cause en la reliant à la croissance ou à l'étalement de la ville.",
+            "Décrire la réponse apportée par les acteurs (État, mairie, agglomération, habitants).",
+            "Évaluer l'effet attendu de cette réponse sur le problème."
+          ],
+          "example": {
+            "statement": "Dans une agglomération française fictive, les habitants de la couronne périurbaine passent chaque matin de longues minutes dans les embouteillages. L'agglomération ouvre une ligne de tramway et affiche les horaires sur une application pour téléphone. Analyser cette situation.",
+            "steps": [
+              "Identifier le problème : les embouteillages, c'est-à-dire la congestion.",
+              "Expliquer sa cause : la ville s'étale, les actifs habitent loin de leur travail et prennent tous la voiture aux mêmes heures.",
+              "Décrire la réponse : l'agglomération ouvre une ligne de tramway et informe les voyageurs sur leur téléphone.",
+              "Évaluer l'effet attendu : si de nombreux habitants prennent le tramway, il y a moins de voitures, donc moins de congestion et de pollution ; l'effet dépend du nombre d'usagers."
+            ]
+          },
+          "pitfall": "Ne pas confondre **étalement urbain** et **croissance de la population**. Une ville peut s'étaler sans gagner d'habitants. Contre-exemple : une ville de 100 000 habitants passe de 20 km² à 40 km². Sa population n'a pas changé, mais sa densité est tombée de 5 000 à 2 500 habitants par km² : les habitants sont plus dispersés, parcourent de plus longues distances et prennent davantage la voiture. L'étalement se mesure en surface, pas en nombre d'habitants.",
+          "figure": "etalement-congestion",
+          "exercise": {
+            "title": "Relier un problème urbain, sa cause et sa réponse",
+            "exercise_type": "fixation",
+            "figure": "etalement-congestion",
+            "statement": "Dans cet exercice, tu analyses des problèmes des villes françaises et les réponses des acteurs, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Relie chaque problème urbain à sa cause principale.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le problème, puis étape 2 — Expliquer sa cause en la reliant à la ville. La congestion vient d'un trop grand nombre de voitures aux heures de pointe. L'artificialisation vient de l'étalement de la ville sur les champs. La pollution de l'air vient en grande partie du trafic automobile.",
+                "answers": [
+                  {
+                    "content": "Congestion des routes",
+                    "match": "Trop de voitures aux mêmes heures"
+                  },
+                  {
+                    "content": "Artificialisation des sols",
+                    "match": "La ville s'étale sur des champs"
+                  },
+                  {
+                    "content": "Pollution de l'air en ville",
+                    "match": "Le trafic automobile"
+                  }
+                ]
+              },
+              {
+                "content": "Une agglomération veut réduire la congestion aux heures de pointe. Quelle réponse est adaptée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire la réponse : le tramway et les bus transportent beaucoup de voyageurs à la fois. Étape 4 — Évaluer l'effet : moins de voitures, donc moins de congestion. Construire plus loin allongerait les trajets (étape 2 : c'est la cause du problème), et supprimer des arrêts pousserait vers la voiture.",
+                "answers": [
+                  {
+                    "content": "Ouvrir une ligne de tramway et améliorer les bus",
+                    "correct": true
+                  },
+                  {
+                    "content": "Construire des lotissements encore plus loin de la ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "Supprimer des arrêts de bus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Interdire aux habitants de la banlieue de travailler en ville",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une ville qui répond aux besoins de ses habitants sans épuiser les ressources ni dégrader l'environnement est une ville ___ (un seul mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire la réponse : l'objectif des acteurs est la ville durable. Transports en commun, pistes cyclables, espaces verts et rénovation de quartiers en sont des moyens (étape 4 : on évalue leur effet sur les problèmes).",
+                "answers": [
+                  {
+                    "content": "durable",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une ville dont la population ne change pas ne peut pas s'étaler.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Expliquer la cause : l'étalement se mesure en surface. Si 100 000 habitants occupent 40 km² au lieu de 20 km², la ville s'est étalée sans gagner un habitant : sa densité passe de 5 000 à 2 500 habitants par km². C'est le contre-exemple du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois conséquences de l'étalement urbain ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Expliquer la cause et les effets en les reliant à l'étalement. Quand la ville s'étale, elle recouvre des terres (artificialisation), les habitants vivent plus loin de leur travail, donc leurs trajets s'allongent et ils prennent davantage la voiture. Le nombre de voitures n'augmente pas par hasard : il diminue seulement avec des réponses comme le tramway (étape 3).",
+                "answers": [
+                  {
+                    "content": "Des terres agricoles sont recouvertes de constructions",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les déplacements des habitants s'allongent",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'usage de la voiture augmente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le nombre de voitures diminue",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les habitants quittent les villes pour la campagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les banlieues disparaissent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre cette chaîne de causes qui mène aux embouteillages.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier le problème : l'embouteillage est le dernier maillon. Étape 2 — Expliquer sa cause en remontant la chaîne : la ville s'étale, donc les habitants vivent loin de leur travail, donc beaucoup prennent la voiture, donc les routes sont saturées. Étape 3 — La réponse se place à l'un de ces maillons : offrir un tramway à la place de la voiture.",
+                "answers": [
+                  {
+                    "content": "La ville s'étale"
+                  },
+                  {
+                    "content": "Les habitants vivent loin de leur travail"
+                  },
+                  {
+                    "content": "Beaucoup d'entre eux prennent la voiture"
+                  },
+                  {
+                    "content": "Les routes sont saturées aux heures de pointe"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un pays très urbanisé et son histoire",
+          "exercise_type": "fixation",
+          "figure": "frise-urbanisation",
+          "statement": "Sur son téléphone, Marc lit une fiche écrite pour Lnclass sur un pays développé fictif, le pays X. Document : « Le pays X compte 60 millions d'habitants, dont 48 millions vivent en ville. Après la Seconde Guerre mondiale, beaucoup de familles ont quitté les campagnes, parce que l'industrie recrutait en ville et que les machines remplaçaient les bras dans les champs. » Réponds en suivant les méthodes des fiches.",
+          "questions": [
+            {
+              "content": "Un pays compte 60 millions d'habitants, dont 48 millions vivent en ville. Quel est son taux d'urbanisation, en % ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du taux d'urbanisation. 1) Relever : population urbaine 48 millions, population totale 60 millions, même unité. 2) Calculer le rapport : 48 ÷ 60 = 0,8. 3) Exprimer en pourcentage : 0,8 × 100 = 80 %. 4) Interpréter : 8 habitants sur 10 vivent en ville. Diviser par la population rurale (12 millions) donnerait 4, soit un faux 400 %.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Le document décrit le départ de familles des campagnes vers les villes après la Seconde Guerre mondiale. Comment nomme-t-on ce mouvement ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la croissance urbaine. 1) Situer : après 1945, pendant les Trente Glorieuses. 2) Décrire : les habitants partent des campagnes vers les villes. 3) Expliquer : emplois en ville, machines dans les champs. 4) Nommer : exode rural. La périurbanisation va de la ville vers les communes voisines et date surtout d'après les années 1970.",
+              "answers": [
+                {
+                  "content": "L'exode rural",
+                  "correct": true
+                },
+                {
+                  "content": "La périurbanisation",
+                  "correct": false
+                },
+                {
+                  "content": "La migration alternante",
+                  "correct": false
+                },
+                {
+                  "content": "L'étalement urbain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le document, quelles sont les deux causes de ce mouvement ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode, étape 3 — Expliquer la cause. Le document donne deux causes : l'industrie qui recrute en ville (ce qui attire) et les machines qui remplacent les bras (ce qui chasse). La voiture et la maison individuelle expliquent la périurbanisation, qui vient plus tard. Interdire les campagnes n'a aucun sens historique.",
+              "answers": [
+                {
+                  "content": "L'industrie recrutait en ville",
+                  "correct": true
+                },
+                {
+                  "content": "Les machines remplaçaient les bras dans les champs",
+                  "correct": true
+                },
+                {
+                  "content": "La voiture permettait d'habiter loin du travail",
+                  "correct": false
+                },
+                {
+                  "content": "Les habitants voulaient tous une maison individuelle",
+                  "correct": false
+                },
+                {
+                  "content": "Les villes avaient interdit les campagnes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le pays X, plus de la moitié de la population vit en ville.",
+              "question_type": "true_false",
+              "explanation": "Méthode du taux d'urbanisation. 1) Relever 48 millions de citadins sur 60 millions. 2) Rapport : 0,8. 3) 80 %. 4) Interpréter : 80 % est supérieur à 50 %, donc plus de la moitié des habitants vivent en ville. Même sans calcul exact, 48 est bien plus que la moitié de 60 (30).",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque période à ce qui la caractérise en France.",
+              "question_type": "matching",
+              "explanation": "Méthode de la croissance urbaine, étape 1 — Situer la période. Années 1950-1960 : l'exode rural amène des habitants en ville, on construit des grands ensembles. Depuis les années 1970 : les villes s'étalent par la périurbanisation. Aujourd'hui : les problèmes de circulation et de pollution conduisent à développer les transports en commun.",
+              "answers": [
+                {
+                  "content": "Années 1950-1960",
+                  "match": "Exode rural et grands ensembles"
+                },
+                {
+                  "content": "Depuis les années 1970",
+                  "match": "Périurbanisation et étalement"
+                },
+                {
+                  "content": "Aujourd'hui",
+                  "match": "Congestion, pollution et transports en commun"
+                }
+              ]
+            },
+            {
+              "content": "En trois ou quatre lignes, explique pourquoi des familles du pays X ont quitté la campagne pour la ville après la Seconde Guerre mondiale.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Après la Seconde Guerre mondiale, des familles ont quitté la campagne pour la ville : c'est l'exode rural. Elles étaient attirées par les emplois que l'industrie offrait en ville. Dans les champs, les machines remplaçaient les bras et il y avait moins de travail agricole. Barème sur 3 : 1 point pour le nom du mouvement, 1 point pour la cause d'attraction, 1 point pour la cause de répulsion (la qualité de la rédaction départage les copies proches).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Nomme le mouvement : exode rural",
+                "Cause d'attraction : l'industrie recrute en ville",
+                "Cause de répulsion : les machines remplacent les bras",
+                "Phrases courtes, vocabulaire du cours employé"
+              ],
+              "starter": "Après la Seconde Guerre mondiale, des familles ont quitté la campagne parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Un trajet domicile-travail vu sur une application",
+          "exercise_type": "fixation",
+          "figure": "trajet-quotidien",
+          "statement": "Inès habite Verdun-sur-Rive, une commune fictive de la couronne périurbaine d'une grande agglomération française. Elle travaille dans le centre de l'agglomération. Sur l'application de transports de son téléphone, elle lit : départ de la gare de sa commune à 7 h 12 en train régional, arrivée à la gare centrale à 7 h 50, puis trajet en tramway de 10 minutes jusqu'à son bureau. Réponds en suivant les méthodes des fiches.",
+          "questions": [
+            {
+              "content": "Inès habite une commune éloignée du centre de l'agglomération, d'où une grande partie des actifs part travailler en ville. Dans quel espace de l'aire urbaine habite-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de l'aire urbaine. 1) Localiser la résidence : commune éloignée, bâti non continu avec la ville-centre, dont les actifs travaillent en ville : c'est la couronne périurbaine. 2) Localiser le travail : la ville-centre. Dire « campagne sans lien » est l'erreur du piège : l'aspect rural cache une dépendance envers la ville.",
+              "answers": [
+                {
+                  "content": "Dans la couronne périurbaine",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la ville-centre",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la banlieue au bâti continu",
+                  "correct": false
+                },
+                {
+                  "content": "Dans une campagne sans lien avec la ville",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Inès quitte la gare de sa commune à 7 h 12 et arrive à la gare centrale à 7 h 50. Combien de minutes dure son trajet en train ?",
+              "question_type": "numeric",
+              "explanation": "Étape de calcul. De 7 h 12 à 7 h 50 : de 7 h 12 à 7 h 20, il y a 8 minutes ; de 7 h 20 à 7 h 50, il y a 30 minutes ; au total 8 + 30 = 38 minutes. Ce trajet est la partie en train régional de sa migration alternante (étape 3 de la méthode de l'aire urbaine).",
+              "answers": [
+                {
+                  "content": "38",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "min"
+            },
+            {
+              "content": "Le train dure 38 minutes et le tramway 10 minutes. En comptant seulement ces deux trajets, combien de minutes Inès met-elle entre la gare de sa commune et son bureau ?",
+              "question_type": "numeric",
+              "explanation": "Calcul simple pour caractériser le déplacement. 38 min de train + 10 min de tramway = 48 minutes à l'aller. Le retour étant équivalent, ses deux trajets quotidiens (la migration alternante) durent environ 96 minutes. Étape 4 de la méthode : on mesure ainsi le poids du déplacement dans sa journée.",
+              "answers": [
+                {
+                  "content": "48",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "min"
+            },
+            {
+              "content": "Le trajet quotidien d'Inès entre son domicile et son travail est une migration ___ (un seul mot).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de l'aire urbaine, étape 3 — Nommer le déplacement : aller de la couronne vers la ville-centre puis revenir, chaque jour, est une migration alternante. Inès est une navetteuse. Le mot « alternante » vient de l'alternance aller-retour.",
+              "answers": [
+                {
+                  "content": "alternante",
+                  "correct": true
+                },
+                {
+                  "content": "alternantes",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En prenant le train puis le tramway plutôt que sa voiture, Inès contribue à augmenter la congestion.",
+              "question_type": "true_false",
+              "explanation": "Méthode de l'aire urbaine, étape 4 — Identifier le transport et son effet : le train et le tramway sont des transports en commun. Une personne qui laisse sa voiture retire un véhicule de la route aux heures de pointe, donc elle contribue à réduire la congestion et la pollution, pas à les augmenter.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du trajet d'Inès.",
+              "question_type": "ordering",
+              "explanation": "Méthode de l'aire urbaine. 1) La résidence est la couronne : le trajet part de la gare de sa commune. 3) La migration alternante suit l'ordre train régional, puis tramway. 2) Elle finit dans la ville-centre, au bureau. L'ordre est imposé par le sens du déplacement, de la couronne vers la ville-centre.",
+              "answers": [
+                {
+                  "content": "Départ de la gare de Verdun-sur-Rive"
+                },
+                {
+                  "content": "Trajet en train régional"
+                },
+                {
+                  "content": "Arrivée à la gare centrale de l'agglomération"
+                },
+                {
+                  "content": "Trajet en tramway"
+                },
+                {
+                  "content": "Arrivée au bureau en ville-centre"
+                }
+              ]
+            },
+            {
+              "content": "Justifie qu'Inès est une navetteuse, en citant deux informations de l'énoncé.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Inès est une navetteuse, car elle fait chaque jour un aller-retour entre son domicile et son travail. Elle habite à Verdun-sur-Rive, dans la couronne périurbaine, et travaille dans le centre de l'agglomération, ce qui l'oblige à prendre le train puis le tramway. Barème sur 2 : 0,5 point pour la définition, 0,5 point pour le domicile, 0,5 point pour le lieu de travail, 0,5 point pour le caractère quotidien.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Donne la définition d'une migration alternante ou d'un navetteur",
+                "Cite le lieu de résidence : couronne périurbaine",
+                "Cite le lieu de travail : ville-centre",
+                "Mentionne le caractère quotidien ou l'aller-retour"
+              ],
+              "starter": "Inès est une navetteuse parce que…"
+            }
+          ]
+        },
+        {
+          "title": "De l'exode rural aux embouteillages dans une ville moyenne",
+          "exercise_type": "evaluation",
+          "figure": "etalement-congestion",
+          "statement": "Texte écrit pour Lnclass sur Saint-Aubin, une ville fictive. « Saint-Aubin comptait 40 000 habitants en 1950 et s'étendait sur 15 km². Dans les années 1950 et 1960, des familles venues des campagnes voisines s'y installent, et l'on construit des grands ensembles en périphérie. Dès 1975, la ville compte 90 000 habitants. À partir des années 1970, beaucoup d'habitants partent vivre dans des maisons des communes alentour et viennent travailler en voiture. En 2020, Saint-Aubin compte 100 000 habitants et son agglomération s'étend sur 60 km². Aux heures de pointe, les routes sont saturées. L'agglomération ouvre alors des lignes de tramway et renseigne les horaires sur une application pour téléphone. » Réponds en suivant les méthodes des fiches.",
+          "questions": [
+            {
+              "content": "Selon le texte, Saint-Aubin comptait 40 000 habitants en 1950 et 90 000 en 1975. Combien d'habitants a-t-elle gagné entre ces deux dates ?",
+              "question_type": "numeric",
+              "explanation": "Étape de calcul. 90 000 − 40 000 = 50 000 habitants gagnés en 25 ans. Méthode de la croissance urbaine : 1) Situer la période 1950-1975, avant et pendant les premières années de la périurbanisation. 3) Expliquer : l'exode rural amène des familles des campagnes voisines. 4) Nommer : exode rural et grands ensembles.",
+              "answers": [
+                {
+                  "content": "50000",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "hab"
+            },
+            {
+              "content": "Le texte dit qu'à partir des années 1970 beaucoup d'habitants partent vivre dans des maisons des communes alentour. De quel phénomène s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la croissance urbaine. 1) Situer : après les années 1970. 2) Décrire : les habitants partent de la ville vers les communes qui l'entourent. 3) Expliquer : maison individuelle et voiture. 4) Nommer : périurbanisation. Ce n'est pas l'exode rural, qui part des campagnes, ni les grands ensembles, qui sont des immeubles.",
+              "answers": [
+                {
+                  "content": "La périurbanisation",
+                  "correct": true
+                },
+                {
+                  "content": "L'exode rural",
+                  "correct": false
+                },
+                {
+                  "content": "La construction de grands ensembles",
+                  "correct": false
+                },
+                {
+                  "content": "La création d'une ville durable",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En 1950, l'agglomération s'étendait sur 15 km². En 2020, elle s'étend sur 60 km². Par combien la surface a-t-elle été multipliée ?",
+              "question_type": "numeric",
+              "explanation": "Étape de calcul. 60 ÷ 15 = 4 : la surface a été multipliée par 4. On l'utilisera pour caractériser l'étalement urbain : la ville occupe quatre fois plus de place. Méthode des problèmes urbains, étape 2 : relier le phénomène à l'étalement.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "La population a été multipliée par 2,5 (de 40 000 à 100 000 habitants) et la surface par 4. Que peut-on en conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des problèmes urbains, étape 2 — Expliquer en reliant à l'étalement. 100 000 ÷ 40 000 = 2,5 pour la population ; 60 ÷ 15 = 4 pour la surface. 4 est supérieur à 2,5 : la ville s'étale plus vite qu'elle ne gagne d'habitants, donc la densité diminue. Dire que la ville se densifie serait l'inverse de ce que montrent les chiffres.",
+              "answers": [
+                {
+                  "content": "La surface a augmenté plus vite que la population : la ville s'étale",
+                  "correct": true
+                },
+                {
+                  "content": "La population a augmenté plus vite que la surface : la ville se densifie",
+                  "correct": false
+                },
+                {
+                  "content": "Rien n'a changé",
+                  "correct": false
+                },
+                {
+                  "content": "La ville a perdu des habitants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque problème ou besoin du texte à la réponse qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Méthode des problèmes urbains, étapes 1 et 3 — Identifier le problème, puis décrire la réponse. Loger vite des nouveaux citadins : grands ensembles. Routes saturées : tramway, transport en commun. Savoir quand passe le tramway : information sur téléphone. Chaque réponse est adaptée à un problème précis.",
+              "answers": [
+                {
+                  "content": "Besoin de loger vite les familles venues des campagnes",
+                  "match": "Construction de grands ensembles"
+                },
+                {
+                  "content": "Routes saturées aux heures de pointe",
+                  "match": "Ouverture de lignes de tramway"
+                },
+                {
+                  "content": "Difficulté de connaître les horaires des transports",
+                  "match": "Application d'information sur téléphone"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi les routes de Saint-Aubin sont saturées aux heures de pointe, en reliant ta réponse à l'étalement urbain.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Les routes de Saint-Aubin sont saturées parce que la ville s'est étalée : sa surface a été multipliée par 4 depuis 1950. Beaucoup d'habitants vivent dans des communes éloignées de leur travail et viennent en voiture, tous aux mêmes heures. Il y a donc trop de voitures pour les routes : c'est la congestion. Barème sur 3 : 1 point pour le problème, 1 point pour le lien avec l'étalement, 1 point pour la chaîne habitat éloigné, voiture, heures de pointe.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Identifie le problème : la congestion",
+                "Relie à l'étalement : la ville occupe 4 fois plus de surface",
+                "Explique que les habitants vivent loin de leur travail",
+                "Indique l'usage de la voiture aux mêmes heures"
+              ],
+              "starter": "Les routes de Saint-Aubin sont saturées parce que…"
+            },
+            {
+              "content": "Évalue l'effet attendu des lignes de tramway sur la congestion et sur la pollution, puis donne une limite de cette réponse.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Le tramway transporte beaucoup de voyageurs à la fois. Si des habitants le prennent à la place de la voiture, il y a moins de voitures aux heures de pointe, donc moins de congestion et moins de pollution. Mais l'effet n'est réel que si assez d'habitants l'utilisent, ce qui suppose des lignes proches de leur domicile et des horaires fiables. Barème sur 3 : 1 point pour le remplacement de la voiture, 1 point pour la conclusion sur congestion et pollution, 1 point pour la limite.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Dit que le tramway peut remplacer des trajets en voiture",
+                "Conclut à moins de congestion et de pollution",
+                "Donne une limite : l'effet dépend du nombre d'usagers",
+                "Raisonnement clair et vocabulaire du cours"
+              ],
+              "starter": "Le tramway peut réduire la congestion parce que…"
+            }
+          ]
+        },
+        {
+          "title": "La France : un pays développé très urbanisé",
+          "exercise_type": "evaluation",
+          "figure": "carte-france",
+          "statement": "Document 1, texte écrit pour Lnclass : « En France, environ 8 habitants sur 10 vivent en ville. Paris, la capitale, est la plus grande ville du pays. Après 1945, l'exode rural a fait grandir les villes ; depuis les années 1970, des communes périurbaines accueillent de plus en plus d'habitants, qui vont travailler en ville. Les voitures encombrent les routes aux heures de pointe : de nombreuses agglomérations développent donc métro, tramway et pistes cyclables, et informent leurs usagers sur une application pour téléphone. » Document 2 : une carte du monde sur laquelle la France, la Côte d'Ivoire, Paris et Abidjan sont repérées. Réponds en suivant les méthodes des fiches.",
+          "questions": [
+            {
+              "content": "D'après le document 1, combien de Français sur 10 vivent en ville ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du taux d'urbanisation. 1) Relever la donnée du document : environ 8 habitants sur 10. 2) et 3) Le rapport 8 ÷ 10 = 0,8 correspond à 80 %. 4) Interpréter : la France est un pays développé très urbanisé. Le chiffre est un ordre de grandeur (« environ »), pas une valeur exacte.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Sur la carte du monde, quelle ville est la capitale de la France ?",
+              "question_type": "single_choice",
+              "explanation": "Étape de situation : sur la carte, la France est colorée dans une teinte et sa capitale Paris est repérée. Abidjan est en Côte d'Ivoire, l'autre pays coloré. Lyon et Marseille sont de grandes villes françaises, mais pas la capitale. Paris est aussi la plus grande ville du pays.",
+              "answers": [
+                {
+                  "content": "Paris",
+                  "correct": true
+                },
+                {
+                  "content": "Lyon",
+                  "correct": false
+                },
+                {
+                  "content": "Marseille",
+                  "correct": false
+                },
+                {
+                  "content": "Abidjan",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels espaces font partie d'une aire urbaine ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode de l'aire urbaine, étape 1 — Localiser. Une aire urbaine comprend la ville-centre, la banlieue (bâti continu) et la couronne périurbaine (plus éloignée, dont les habitants travaillent en ville). Une campagne sans lien avec la ville n'en fait pas partie : c'est l'erreur du piège de la notion.",
+              "answers": [
+                {
+                  "content": "La ville-centre",
+                  "correct": true
+                },
+                {
+                  "content": "La banlieue",
+                  "correct": true
+                },
+                {
+                  "content": "La couronne périurbaine",
+                  "correct": true
+                },
+                {
+                  "content": "Une campagne sans aucun lien avec la ville",
+                  "correct": false
+                },
+                {
+                  "content": "Une région où il n'y a aucune ville",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque terme à sa définition.",
+              "question_type": "matching",
+              "explanation": "Méthode de la croissance urbaine et des problèmes urbains. Étalement urbain : la ville occupe plus de surface (étape 4 de la croissance urbaine). Migration alternante : aller-retour domicile-travail (étape 3 de l'aire urbaine). Exode rural : de la campagne vers la ville. Ville durable : objectif des acteurs (étape 3 des problèmes urbains).",
+              "answers": [
+                {
+                  "content": "Étalement urbain",
+                  "match": "Extension de la ville sur de plus en plus de surface"
+                },
+                {
+                  "content": "Migration alternante",
+                  "match": "Déplacement quotidien entre domicile et travail"
+                },
+                {
+                  "content": "Exode rural",
+                  "match": "Départ des campagnes vers les villes"
+                },
+                {
+                  "content": "Ville durable",
+                  "match": "Ville qui répond aux besoins sans dégrader l'environnement"
+                }
+              ]
+            },
+            {
+              "content": "En t'appuyant sur le document 1, explique pourquoi développer les transports en commun est une réponse aux problèmes d'une ville étalée.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Quand la ville s'étale, les habitants vivent loin de leur travail et beaucoup prennent la voiture : les routes sont encombrées aux heures de pointe et l'air est pollué. Les agglomérations développent donc le métro, le tramway et les pistes cyclables, qui transportent beaucoup de monde. Si les habitants les utilisent, il y a moins de voitures, donc moins de congestion et de pollution. Barème sur 3 : méthode des problèmes urbains, 1 point pour le problème et sa cause, 1 point pour la réponse, 1 point pour l'effet attendu.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Identifie le problème : routes encombrées ou pollution",
+                "Relie à l'étalement : habitants loin de leur travail, voiture",
+                "Décrit la réponse : métro, tramway, bus",
+                "Évalue l'effet : moins de voitures, moins de congestion"
+              ],
+              "starter": "Quand la ville s'étale, les habitants…"
+            },
+            {
+              "content": "Question de synthèse. En une dizaine de lignes, montre comment la France est devenue un pays très urbanisé et quels défis pose aujourd'hui son urbanisation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Après 1945, l'exode rural a fait grandir les villes françaises : l'industrie recrutait en ville et les machines réduisaient le travail agricole. On a construit des grands ensembles pour loger les nouveaux citadins. Depuis les années 1970, la périurbanisation étend la ville : des familles s'installent dans des maisons des communes alentour et font chaque jour une migration alternante, souvent en voiture. Cet étalement urbain recouvre des terres agricoles, allonge les déplacements et provoque congestion et pollution. Les acteurs répondent en développant métro, tramway et pistes cyclables, pour une ville plus durable. Barème sur 8 : 2 points pour l'exode rural et les grands ensembles ; 2 points pour la périurbanisation, l'étalement et les migrations alternantes ; 2 points pour les défis ; 1 point pour une réponse ; 1 point pour la clarté du plan et de la langue.",
+              "answers": [],
+              "points": 8,
+              "criteria": [
+                "Exode rural après 1945 et ses causes (emplois en ville, machines)",
+                "Grands ensembles puis périurbanisation depuis les années 1970",
+                "Étalement urbain et migrations alternantes",
+                "Au moins deux défis : congestion, pollution, artificialisation, logement",
+                "Au moins une réponse : transports en commun, ville durable",
+                "Plan clair, phrases correctes, vocabulaire du cours"
+              ],
+              "starter": "Après 1945, l'exode rural a fait grandir les villes françaises, puis…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
