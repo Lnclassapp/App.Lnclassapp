@@ -506,6 +506,20 @@ module UseCases
         assert_equal 1, Orm::Course.count
       end
 
+      test "in create-only mode a present lesson, published or not, is left untouched and counted skipped; an absent one is created" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        before = [ course.reload.updated_at, course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id, :status) ]
+        other = lesson("name" => "Cubes", "subtitle" => "Autre")
+
+        report = run_import(envelope(lesson("subtitle" => "Changé"), other), adapter: adapter(replace: :create_only))
+
+        assert_equal [ "completed", 1, 0, 1 ], report.values_at(:status, :imported_count, :error_count, :skipped_count)
+        assert_equal before, [ course.reload.updated_at, course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id, :status) ]
+        assert_not_equal "Changé", course.subtitle
+        assert_equal [ "Cubes", "Racines carrées" ], Orm::Course.pluck(:name).sort
+      end
+
       test "in whole-lesson mode an absent lesson is created whole, and the default mode is still the draft-only one" do
         report = run_import(envelope(lesson), adapter: adapter(replace: :lesson))
 
