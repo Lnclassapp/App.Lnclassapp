@@ -38,3 +38,12 @@
 - **Portée** : un seul fichier à la fois, remplacement de la seule leçon de même titre (`replace: :lesson`), aucun mot de passe ni donnée d'élève lus ou écrits ; le compte élève affiché est un compte fictif de la plage `0[157]0000xxxx`.
 
 - **Durée mesurée (Lot E)** : `bin/apercu-lecon` sur la leçon Thalès (3ème, 26 exercices, 4 sujets) en development : 2,9 s la première fois (création), 4,1 s en remplacement d'une leçon déjà publiée, démarrage de Rails compris. Cible < 15 s tenue. `--suivre` rejoue l'aperçu au changement de `mtime` (boucle de 1 s).
+
+## Lot F — un rôle par environnement
+
+- **Develop** : charge les seuls fichiers du manifeste (`jeu.yml`, `expected_paths`, leçon longue comprise) en `:lesson` ; les autres leçons v3 du programme ne sont plus lues ni remplacées ; aucune suppression (les ~350 leçons présentes restent). Les leçons à sujets gardent `:exercises` partout (ADR-0122), manifeste ou non : décision de lecture à confirmer.
+- **Staging** : nouveau mode `:create_only` (ImportCourseTree) pour les leçons v3 sans sujets des dossiers du programme : créée et publiée si aucune leçon de même titre, niveau, matière, série ; sinon rien (statut `ignored`, ni envoi, ni import, ni republication).
+- **Production, PR, Demo, inconnu** : inchangés (rien).
+- Rapport de chargement (`contenus:charger`) : « N leçon(s) examinée(s) : x créée(s), y ignorée(s), z remplacée(s), w à sujets rechargée(s) ».
+- Limite : une leçon créée par Staging dont la publication échoue reste en brouillon aux déploiements suivants (la leçon présente n'est plus touchée) ; l'erreur est journalisée, publication à la main.
+- Conséquence sur ADR-0122 et 0123 : amendées par l'ADR du chantier, non modifiées ici. Le jeu standard (comptes, établissements) n'est pas semé sur Develop par ce lot : ajout de données à confirmer.
