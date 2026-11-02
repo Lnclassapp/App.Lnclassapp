@@ -62,6 +62,7 @@ Estimation pour Develop : 84 des 263 fichiers v3 du programme ont eu une version
 ## Suite : Develop complète son référentiel (2026-11-02)
 
 - Journal de #443 (déploiement `ac75e721`) : `unknown_level (value: 1ère)`, `unknown_series (value: A1/A2)`. Décision du porteur : Develop reçoit les leçons.
+- Fusionnée par [#444](https://github.com/Lnclassapp/App.Lnclassapp/pull/444) le 2026-11-02.
 - ADR-0123 §8 : sur Develop seul, création de ce qui manque du référentiel de base (`BaseReferential`, partagé avec `db/seeds/catalog.rb`), sans rien modifier d'existant ; journalisé.
 - Couverture : une branche de `key_of` (#439, matière inconnue) n'était couverte par aucun test ; ajoutée.
 
