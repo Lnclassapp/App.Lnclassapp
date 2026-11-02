@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | livré |
 | **Ouvert le** | 2026-11-02 |
 | **Branche** | `feature/standard-de-test` |
 | **Programme** | — |

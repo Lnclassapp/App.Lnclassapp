@@ -129,3 +129,31 @@ Fichiers en défaut :
 - Limite : mesure à froid de base de données non faite (pages chauffées) ; un seul enseignant et un seul élève (les plus actifs de la classe la plus active).
 - **Verdict tle-d rejoué le 2026-11-02 19:07 sur le Develop à jour** : 45 fichiers, valider.rb ok, affichage ok, 10 captures, 272 s, Verdict OK (les 4 défauts du premier passage, 19:00, sont corrigés entre-temps).
 - **Revue** : `bin/preuve-vague` refuse un dossier hors `docs/contenus/lecons-traitees` (liens suivis) et n'efface que `tmp/preuves/<vague>`.
+
+## Clôture (2026-11-02)
+
+**Livré** (toutes vers `Develop`) : #448 (Lot 0, cadrage et manifeste), #449 (Lot E, aperçu local), #450 (Lot A, jeu standard en une commande), #451 (Lot H, environnement Demo), #452 (Lot F, rôle des environnements), #453 (Lot I, jeu standard semé sur Develop, session séparée), #458 (Lot B, activité d'un trimestre), #459 (Lot C, pages lentes), #460 (Lot D, rendu des leçons), #461 (Lot G, recette, preuve de vague, règle de fusion). Hors chantier, ouverts en chemin : #457 (avis de sécurité loofah, nokogiri, rails-html-sanitizer), #454, #455, #456 (correction des 41 leçons en défaut, session `lecons-defauts-affichage`). ADR : **ADR-0124** (`0124-standard-de-test.md`).
+
+**Ce qui a été appris**
+- Le test d'affichage a payé dès son premier passage : 41 leçons sur 417 en défaut, ramenées à 3 causes (2 dans l'application, 1 dans un JSON) au lieu de 41 corrections de fichiers. Diagnostiquer la famille avant de toucher un fichier.
+- La revue avant PR a trouvé un bloquant ou un vrai risque sur presque chaque lot : aperçu qui forçait development (Lot E), seed qui plantait sur Demo (Lot H), reset vers une base distante (Lot A), mesure avant KaTeX (Lot D). Les lots sans revue n'auraient pas tenu.
+- « Déterministe » ne suffit pas : une activité doit aussi être crédible (dates dans l'année scolaire, répartition des élèves) — vu seulement sur les captures.
+- Mesurer les durées sur une machine au calme : la charge des agents parallèles a triplé certaines mesures et fait échouer des tests système sensibles au temps.
+
+**Ce qui a dérapé**
+- Premier cadrage commité avant la liste d'objectifs validée ; réécrit, sans PR.
+- Coupure des agents par la limite d'usage (~2 h) ; reprise sans perte.
+- Force-push refusé : la branche du Lot E a été republiée sous un autre nom (`-apercu`), l'ancienne (`feature/standard-de-test-lot-e`) reste à supprimer.
+- #458 fusionnée avant #453 alors que les deux touchaient `db/seeds.rb` : conflit résolu dans #453.
+- Environnement local : ChromeDriver du PATH (147) incompatible avec le Chromium (153) ; poser `CHROME_BIN` et `CHROMEDRIVER_PATH`.
+
+**Ce qui reste ouvert (pour le porteur)**
+- Poser `STANDARD_TEAM_PIN` (scellée) sur Develop : sans elle, aucun compte équipe du jeu (constaté au déploiement de #453).
+- Demo sur `main` : le code qui reconnaît Demo (#451) n'y arrive qu'avec le train ; vérifier ses variables (`DATABASE_URL` et `BUCKET_*` propres, pas de `PR_BASE_ENVIRONMENT`).
+- Remise à neuf de Demo : proposition d'une commande dédiée (petit lot), en attente.
+- Staging : une leçon créée dont la publication échoue reste en brouillon (proposé : garder ainsi).
+- Develop : la leçon à sujets hors manifeste reste rechargée en `:exercises`.
+- Remise à zéro de Develop au seul jeu standard : laissée de côté par le porteur le 2026-11-02.
+- Garde automatique de la section « Prouvé sur le jeu standard » : une GitHub Action si le porteur la veut.
+- Chantiers `optimize` proposés : `eleve-ma-classe`, `enseignant-accueil`, `equipe-fiche-etablissement`, `eleve-lecon`.
+- Tests système sensibles au temps sous charge : `cold_start_test` (toast « Bienvenue »), `sheet_check_test`.

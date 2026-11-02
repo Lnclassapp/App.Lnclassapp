@@ -182,7 +182,7 @@ Fonctionnalité: Recette, preuve de vague et règle de fusion
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-standard-de-test — jeu standard, activité déterministe, rôle des environnements, rendu des leçons, règle de fusion. Amende ADR-0122 (Staging) et ADR-0123 (Develop) sous réserve des décisions ouvertes.
+- ADR-0124 — jeu standard, activité déterministe, rôle des environnements, rendu des leçons, règle de fusion. Amende ADR-0122 (Staging) et ADR-0123 (Develop) sous réserve des décisions ouvertes.
 - UDR : aucune, aucune vue créée ni modifiée.
 
 ## 7. Mesures
