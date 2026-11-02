@@ -65,6 +65,7 @@ Les leçons sont rédigées dans le dépôt (`docs/contenus/lecons-traitees`, fo
 ## 6. Liens
 
 - ADR-0108 (environnements de PR), ADR-0113, ADR-0116 §4.4 (remplacement d'un brouillon), ADR-0121 (sujets).
+- **Amendé par ADR-0123** (2026-11-02) : sur Develop seul, les leçons v3 du programme `contenus-v3-tous-niveaux` sont aussi chargées, remplacées entières ; l'option C est reprise pour Develop seul.
 
 ## 7. Comment vérifier
 

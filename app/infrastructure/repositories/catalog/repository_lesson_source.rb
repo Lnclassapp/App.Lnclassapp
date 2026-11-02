@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::RepositoryLessonSource
-# Rôle : lit les leçons à sujets de devoir de docs/contenus/lecons-traitees/<niveau>/<matière>/*.json (format 3)
-# ADR  : chargement-automatique-des-lecons-hors-production
+# Rôle : lit les leçons au format 3 de docs/contenus/lecons-traitees/<niveau>/<matière>/*.json, avec leur dossier de niveau et leurs sujets
+# ADR  : chargement-automatique-des-lecons-hors-production, 0123
 module Repositories
   module Catalog
     class RepositoryLessonSource
@@ -16,24 +16,27 @@ module Repositories
       def lessons
         @root.glob("*/*/*.json").sort.filter_map do |path|
           content = path.read
-          next unless with_subjects?(content, path)
+          course = v3_course(content, path)
+          next unless course
 
-          LessonFile.new(import_name: import_name(path), checksum_sha256: Digest::SHA256.hexdigest(content), content:)
+          LessonFile.new(import_name: import_name(path), checksum_sha256: Digest::SHA256.hexdigest(content), content:,
+                         level_directory: path.parent.parent.basename.to_s, subjects: course["subjects"].present?)
         end
       end
 
       private
 
-      # Un fichier illisible ou d'un autre format n'est pas une leçon à charger : les autres restent chargées.
-      def with_subjects?(content, path)
+      # Le premier cours d'un fichier au format 3, nil sinon. Un fichier illisible ou d'un autre format n'est pas une leçon à charger : les
+      # autres restent chargées.
+      def v3_course(content, path)
         document = JSON.parse(content)
-        return false unless document.is_a?(Hash) && document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
+        return unless document.is_a?(Hash) && document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
 
         course = Array(document["courses"]).first
-        course.is_a?(Hash) && course["subjects"].present?
+        course if course.is_a?(Hash)
       rescue JSON::ParserError
         @logger.warn("[contenus] fichier de leçon illisible, ignoré : #{path}")
-        false
+        nil
       end
 
       def import_name(path) = "#{PREFIX}-#{path.parent.parent.basename}-#{path.parent.basename}-#{path.basename}"
