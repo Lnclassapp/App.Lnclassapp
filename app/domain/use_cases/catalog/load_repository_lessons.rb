@@ -7,7 +7,9 @@ module UseCases
       KIND = "course_tree"
       # Journal d'un import refusé : ses premières erreurs, et seulement ces paramètres (aucune donnée personnelle).
       LOGGED_ERRORS = 3
-      LOGGED_PARAMS = %i[value keyword rule exception constraint].freeze
+      LOGGED_PARAMS = %i[keyword rule exception constraint].freeze
+      # value n'est écrit que pour ces codes : il y nomme un niveau, une matière ou une série du fichier (jamais un texte de leçon).
+      LOGGED_VALUE_CODES = %w[unknown_level unknown_material unknown_series series_not_allowed].freeze
 
       # outcome : :skipped (production, PR, nom absent), :no_author (aucun membre d'équipe actif), :unknown_environment (une ligne refusée
       # est laissée), :done. lessons : { nom d'import => :loaded | :created | :replaced | :unchanged | :not_started | :refused | :unpublished |
@@ -113,15 +115,19 @@ module UseCases
         guarded(lesson) { publish(lesson, actor, slug_of(lesson), loaded) }
       end
 
-      # Les LOGGED_ERRORS premières erreurs du rapport : code, chemin et paramètres sûrs (référentiel, mot-clé de schéma, exception et
-      # contrainte d'une écriture refusée). Ni nom de leçon ou de notion, ni texte du fichier, ni donnée d'élève.
+      # Les LOGGED_ERRORS premières erreurs du rapport : code, chemin et paramètres sûrs (nom du référentiel, mot-clé de schéma, exception
+      # et contrainte d'une écriture refusée). Ni nom de leçon ou de notion, ni texte du fichier, ni donnée d'élève. Ne lève jamais : le refus
+      # reste journalisé comme refus.
       def refusal_reasons(report)
         reasons = Array(report.import_errors).first(LOGGED_ERRORS).map do |error|
-          safe = error.params.to_h.transform_keys(&:to_sym).slice(*LOGGED_PARAMS)
-          details = safe.map { |key, value| "#{key}: #{value}" }.join(", ")
+          keys = LOGGED_VALUE_CODES.include?(error.code) ? [ :value, *LOGGED_PARAMS ] : LOGGED_PARAMS
+          safe = error.params.to_h.transform_keys(&:to_sym).slice(*keys)
+          details = safe.map { |key, value| "#{key}: #{value.to_s.truncate(60)}" }.join(", ")
           [ error.code, error.path, ("(#{details})" if safe.any?) ].compact.join(" ")
         end
         reasons.empty? ? "" : " : #{reasons.join(' ; ')}"
+      rescue StandardError
+        ""
       end
 
       # Fichier inchangé : pas de réimport, mais une publication qui a échoué après un import réussi est reprise (même critère que

@@ -342,13 +342,14 @@ module UseCases
                    error.("courses[0]", "write_failed", exception: "ActiveRecord::InvalidForeignKey", constraint: "fk_rails_1"),
                    error.("courses[0]", "lesson_already_published", course: "Pythagore"),
                    error.("courses[0].notions[1]", "schema", keyword: "required") ]
+        errors[2] = error.("courses[0].notions[0].name", "invalid_value", value: "Nom de notion")
         lesson = programme_lesson("Pythagore")
 
         call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 4, errors:)))
 
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 4 erreur(s)), voir Imports : unknown_level courses[0].level_name " \
                                 "(value: Tle) ; write_failed courses[0] (exception: ActiveRecord::InvalidForeignKey, constraint: fk_rails_1) ; " \
-                                "lesson_already_published courses[0]" ] ], @logs
+                                "invalid_value courses[0].notions[0].name" ] ], @logs
       end
 
       test "a whole-lesson load says replaced or created in the log before the publication" do
@@ -367,6 +368,15 @@ module UseCases
         call(use_case(lessons: [ third, misplaced, @lesson ]))
 
         assert_equal [ :info, "[contenus] fichier(s) v3 non chargé(s) ici : 3eme 1, tle-e 1" ], @logs.first
+      end
+      test "an error that cannot be read leaves the refusal logged as a refusal, without reasons" do
+        broken = Object.new.tap { it.define_singleton_method(:params) { raise "illisible" } }
+        lesson = programme_lesson("Pythagore")
+
+        summary = call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1, errors: [ broken ])))
+
+        assert_equal({ lesson.import_name => :refused }, summary.lessons)
+        assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 1 erreur(s)), voir Imports" ] ], @logs
       end
     end
   end

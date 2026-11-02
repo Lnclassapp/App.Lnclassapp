@@ -33,9 +33,13 @@ module Repositories
 
       private
 
+      # Jamais une exception de plus : faute de cause PostgreSQL lisible, pas de contrainte, et l'échec d'écriture reste celui rendu.
       def constraint_of(error)
-        result = error.cause.respond_to?(:result) ? error.cause.result : nil
-        result&.error_field(PG::Result::PG_DIAG_CONSTRAINT_NAME)
+        return unless defined?(PG::Error) && error.cause.is_a?(PG::Error)
+
+        error.cause.result.error_field(PG::Result::PG_DIAG_CONSTRAINT_NAME)
+      rescue StandardError
+        nil
       end
     end
   end
