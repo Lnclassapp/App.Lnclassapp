@@ -44,10 +44,21 @@
 - Correctif : formules mises de côté (`$$…$$` puis `$…$`) avant le gras et l'italique, remises échappées après. Cas symétrique : `$` isolé, formule avec `*` intacte, piège `asterisques` (gras non fermé) toujours rouge.
 - Test d'affichage (copie locale du Lot D) sur les 27 leçons : 0 `**` ; seuls restent 2 débordements (Lot B).
 
+## Lots B et C — vérification
+
+- Lot B (#455) : `long_formulas_test.rb`, 4 cas rouges d'abord (591, 566, 582 px ; plateau d'association sans formule rendue), puis verts. Au passage : le plateau d'association de la fiche montrait le LaTeX brut, faute de contrôleur `math`.
+- Lot C (#456) : un libellé raccourci (« Tribunaux de 1re instance et de commerce »), l'arbre tient sous la hauteur ; `valider.rb` vert.
+
+## Passage complet
+
+- 2026-11-02, Develop + Lots A, B, C, test d'affichage du Lot D : `LECONS=tout` en 10 parts → **417 leçons, 0 défaut** (contre 41 avant).
+- Les 41 rejouées avec le test révisé (c7b2d3f, attente de KaTeX, MathML exclu) : 41 vertes.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+| Libellés d'un schéma petits à 390 px (viewBox 640 réduit) | Rendu commun à toutes les figures, hors de ce bug | à ouvrir |
 | `valider.rb` ne détecte pas un schéma trop haut ou trop large | Il faudrait reproduire en Ruby le calcul de `diagram.js` ; le test d'affichage l'attrape déjà | à ouvrir |
 
 ## Clôture
