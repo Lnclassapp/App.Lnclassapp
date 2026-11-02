@@ -1,0 +1,1230 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Suites numériques",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "points-d-une-suite",
+          "kind": "coordinate_plane",
+          "description": "Repère où l'on place quatre points de coordonnées (n ; u(n)) : (0 ; 2), (1 ; 4), (2 ; 8) et (3 ; 16). L'axe horizontal donne le rang n, l'axe vertical la valeur du terme. On peut lire chaque point et observer comment la valeur change d'un rang au suivant.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": 0,
+            "ymax": 20,
+            "points": [
+              {
+                "id": "u0",
+                "x": 0,
+                "y": 2
+              },
+              {
+                "id": "u1",
+                "x": 1,
+                "y": 4
+              },
+              {
+                "id": "u2",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "u3",
+                "x": 3,
+                "y": 16
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître une suite arithmétique ou géométrique",
+          "remember": "Une **suite** $(u_n)$ est une liste de nombres rangés : $u_0$ (premier terme), $u_1$, $u_2$… Le petit nombre $n$ est le **rang** du terme. **Suite arithmétique** : on passe d'un terme au suivant en **ajoutant** toujours le même nombre $r$, appelé la **raison** : $u_{n+1} = u_n + r$. **Suite géométrique** : on passe d'un terme au suivant en **multipliant** toujours par le même nombre $q$ (différent de 0), appelé la **raison** : $u_{n+1} = q \\times u_n$. Pour reconnaître la nature d'une suite : si l'écart $u_{n+1} - u_n$ est toujours le même, elle est arithmétique ; si le rapport $\\dfrac{u_{n+1}}{u_n}$ est toujours le même, elle est géométrique. Une suite peut n'être ni l'une ni l'autre.",
+          "method": [
+            "Écrire les premiers termes $u_0$, $u_1$, $u_2$, $u_3$ de la suite.",
+            "Calculer les écarts $u_{n+1} - u_n$ et les rapports $\\dfrac{u_{n+1}}{u_n}$ de deux termes consécutifs.",
+            "Comparer les écarts entre eux, puis les rapports entre eux.",
+            "Conclure : donner la nature de la suite et sa raison."
+          ],
+          "example": {
+            "statement": "Le loyer mensuel d'une chambre, en FCFA, est $30\\,000$ ; $33\\,000$ ; $36\\,000$ ; $39\\,000$ sur quatre années de suite. Quelle est la nature de cette suite ?",
+            "steps": [
+              "Écrire : $u_0 = 30\\,000$, $u_1 = 33\\,000$, $u_2 = 36\\,000$, $u_3 = 39\\,000$.",
+              "Calculer : les écarts sont $3\\,000$, $3\\,000$, $3\\,000$ ; les rapports sont $1{,}1$, environ $1{,}09$ et environ $1{,}08$.",
+              "Comparer : les trois écarts sont égaux ; les trois rapports ne sont pas égaux.",
+              "Conclure : la suite est arithmétique, de raison $r = 3\\,000$."
+            ]
+          },
+          "pitfall": "Ne conclus qu'après avoir comparé **tous** les écarts (ou tous les rapports), pas seulement les deux premiers. Contre-exemple : $3$ ; $6$ ; $9$ ; $13$. Les deux premiers écarts valent $3$, mais le troisième vaut $13 - 9 = 4$ : la suite n'est pas arithmétique. Autre confusion : « on ajoute » donne une suite arithmétique, « on multiplie » une suite géométrique. La suite $2$ ; $4$ ; $6$ ; $8$ s'obtient en ajoutant $2$, elle est arithmétique, et non géométrique.",
+          "figure": null,
+          "practice": {
+            "statement": "Un loyer ou une épargne change d'un rang au suivant : on cherche si l'on ajoute ou si l'on multiplie.",
+            "questions": [
+              {
+                "content": "Pour la suite $4$ ; $12$ ; $36$ ; $108$, complète : $u_1 - u_0 =$ ___ et $\\dfrac{u_1}{u_0} =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $u_0 = 4$ et $u_1 = 12$. Étape 2 — Calculer : l'écart vaut $12 - 4 = 8$ et le rapport vaut $\\frac{12}{4} = 3$. Étapes 3 et 4 : pour savoir si la suite est géométrique, on compare les rapports suivants ($\\frac{36}{12} = 3$, $\\frac{108}{36} = 3$) : ils sont égaux, la suite est géométrique de raison $3$.",
+                "hint": "L'écart est une soustraction, le rapport est une division : écris les deux calculs séparément.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On passe d'un terme au suivant en multipliant toujours par $3$. Quelle est la nature de cette suite ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : par exemple $2$ ; $6$ ; $18$ ; $54$. Étape 2 — Calculer : les rapports valent $3$, $3$, $3$ ; les écarts valent $4$, $12$, $36$. Étape 3 — Comparer : les rapports sont égaux, les écarts non. Étape 4 — Conclure : géométrique de raison $3$. « Arithmétique de raison 3 » confond multiplier et ajouter. « Ni l'une ni l'autre » est faux, puisque le rapport est constant.",
+                "answers": [
+                  {
+                    "content": "Géométrique de raison 3",
+                    "correct": true
+                  },
+                  {
+                    "content": "Arithmétique de raison 3",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La suite $100$ ; $90$ ; $80$ ; $70$ est arithmétique de raison $-10$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $u_0 = 100$, $u_1 = 90$, $u_2 = 80$, $u_3 = 70$. Étape 2 — Calculer : les écarts valent $-10$, $-10$, $-10$. Étape 3 — Comparer : ils sont tous égaux. Étape 4 — Conclure : la suite est arithmétique de raison $-10$. L'affirmation est vraie : une raison peut être négative, la suite diminue alors.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Reconnaître la nature d'une suite",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : écrire, calculer, comparer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "points-d-une-suite",
+            "questions": [
+              {
+                "content": "Une épargne vérifie $u_0 = 10\\,000$ et $u_{n+1} = u_n + 2\\,000$ (montants en FCFA). Quelle est la nature de la suite $(u_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_0 = 10\\,000$, $u_1 = 12\\,000$, $u_2 = 14\\,000$, $u_3 = 16\\,000$. Étape 2 — Calculer : les écarts valent $2\\,000$, $2\\,000$, $2\\,000$ ; les rapports valent $1{,}2$, environ $1{,}17$ et environ $1{,}14$. Étape 3 — Comparer : les écarts sont tous égaux, les rapports ne le sont pas. Étape 4 — Conclure : la suite est arithmétique de raison $2\\,000$. « Géométrique de raison 2 000 » confond ajouter et multiplier : on ajoute $2\\,000$, on ne multiplie pas. « Arithmétique de raison 10 000 » prend le premier terme pour la raison. « Ni l'une ni l'autre » est faux puisque l'écart est constant.",
+                "answers": [
+                  {
+                    "content": "Arithmétique de raison $2\\,000$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Géométrique de raison $2\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison $10\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite géométrique a pour premiers termes $u_0 = 4$ et $u_1 = 20$. Quelle est sa raison $q$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $u_0 = 4$ et $u_1 = 20$. Étape 2 — Calculer : l'écart vaut $20 - 4 = 16$ et le rapport vaut $\\frac{20}{4} = 5$. Étape 3 — Comparer : la suite est dite géométrique, on retient donc le rapport. Étape 4 — Conclure : $q = 5$. Le nombre $16$ est l'écart : il serait la raison d'une suite arithmétique, pas d'une suite géométrique.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque suite à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Écrire : les trois suites sont données. Étape 2 — Calculer : pour $3$ ; $6$ ; $9$ ; $12$, les écarts valent $3$, $3$, $3$ ; pour $3$ ; $6$ ; $12$ ; $24$, les rapports valent $2$, $2$, $2$ ; pour $3$ ; $6$ ; $9$ ; $13$, les écarts valent $3$, $3$, $4$ et les rapports $2$, $1{,}5$, environ $1{,}44$. Étape 3 — Comparer : écart constant, rapport constant, aucun des deux. Étape 4 — Conclure : arithmétique de raison $3$, géométrique de raison $2$, ni l'une ni l'autre.",
+                "answers": [
+                  {
+                    "content": "$3$ ; $6$ ; $9$ ; $12$",
+                    "match": "Arithmétique de raison 3"
+                  },
+                  {
+                    "content": "$3$ ; $6$ ; $12$ ; $24$",
+                    "match": "Géométrique de raison 2"
+                  },
+                  {
+                    "content": "$3$ ; $6$ ; $9$ ; $13$",
+                    "match": "Ni l'une ni l'autre"
+                  }
+                ]
+              },
+              {
+                "content": "Le crédit restant d'un abonnement est $15\\,000$ ; $13\\,500$ ; $12\\,000$ ; $10\\,500$ FCFA. Cette suite est arithmétique : quelle est sa raison $r$ ? Écris le nombre sans espace.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $u_0 = 15\\,000$, $u_1 = 13\\,500$, $u_2 = 12\\,000$, $u_3 = 10\\,500$. Étape 2 — Calculer : $13\\,500 - 15\\,000 = -1\\,500$, $12\\,000 - 13\\,500 = -1\\,500$, $10\\,500 - 12\\,000 = -1\\,500$. Étape 3 — Comparer : les trois écarts sont égaux. Étape 4 — Conclure : la raison est $r = -1\\,500$. Le signe moins est important : la suite diminue. Écrire $1\\,500$ oublierait ce signe.",
+                "answers": [
+                  {
+                    "content": "-1500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La suite $3$ ; $6$ ; $12$ ; $20$ est géométrique, car les deux premiers rapports valent $2$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $u_0 = 3$, $u_1 = 6$, $u_2 = 12$, $u_3 = 20$. Étape 2 — Calculer : les rapports valent $\\frac{6}{3} = 2$, $\\frac{12}{6} = 2$ et $\\frac{20}{12} \\approx 1{,}67$. Étape 3 — Comparer : le troisième rapport est différent des deux premiers. Étape 4 — Conclure : la suite n'est pas géométrique. L'affirmation est fausse : il faut comparer tous les rapports, pas seulement les deux premiers.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les points $(n ; u_n)$ d'une suite ont pour coordonnées $(0 ; 2)$, $(1 ; 4)$, $(2 ; 8)$ et $(3 ; 16)$. Quelle est la nature de cette suite ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_0 = 2$, $u_1 = 4$, $u_2 = 8$, $u_3 = 16$. Étape 2 — Calculer : les écarts valent $2$, $4$, $8$ ; les rapports valent $\\frac{4}{2} = 2$, $\\frac{8}{4} = 2$, $\\frac{16}{8} = 2$. Étape 3 — Comparer : les écarts sont différents, les trois rapports sont égaux. Étape 4 — Conclure : la suite est géométrique de raison $2$. « Arithmétique de raison 2 » ne retient que le premier écart. « Arithmétique de raison 14 » prend l'écart $16 - 2$ entre le premier et le dernier terme. « Ni l'une ni l'autre » est faux puisque le rapport est constant.",
+                "answers": [
+                  {
+                    "content": "Géométrique de raison 2",
+                    "correct": true
+                  },
+                  {
+                    "content": "Arithmétique de raison 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison 14",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suite arithmétique : terme général et sens de variation",
+          "remember": "Si $(u_n)$ est arithmétique, de premier terme $u_0$ et de raison $r$, son **terme général** (le terme de rang $n$) est $u_n = u_0 + n \\times r$. On ajoute $n$ fois la raison au premier terme. **Sens de variation** : si $r > 0$, chaque terme est plus grand que le précédent, la suite est **croissante** ; si $r < 0$, chaque terme est plus petit, la suite est **décroissante** ; si $r = 0$, tous les termes sont égaux, la suite est **constante**.",
+          "method": [
+            "Identifier le premier terme $u_0$ et la raison $r$.",
+            "Écrire le terme général $u_n = u_0 + n \\times r$ avec les nombres de l'énoncé.",
+            "Remplacer $n$ par le rang demandé, puis calculer.",
+            "Déduire le sens de variation d'après le signe de $r$."
+          ],
+          "example": {
+            "statement": "Le loyer mensuel d'une chambre à Bouaké est de $40\\,000$ FCFA l'année 0, puis il augmente de $2\\,500$ FCFA chaque année. Calculer le loyer de l'année 6 et donner le sens de variation de la suite.",
+            "steps": [
+              "Identifier : $u_0 = 40\\,000$ et $r = 2\\,500$.",
+              "Écrire : $u_n = 40\\,000 + n \\times 2\\,500$.",
+              "Remplacer : $u_6 = 40\\,000 + 6 \\times 2\\,500 = 40\\,000 + 15\\,000 = 55\\,000$ FCFA.",
+              "Déduire : $r = 2\\,500 > 0$, donc la suite est croissante."
+            ]
+          },
+          "pitfall": "Le terme de rang $n$ s'obtient en ajoutant la raison $n$ fois, pas $n + 1$ fois, car on part de $u_0$. Contre-exemple : pour $u_0 = 10$ et $r = 3$, on a $u_2 = 10 + 2 \\times 3 = 16$ ($10$, $13$, $16$), et non $10 + 3 \\times 3 = 19$. Autre erreur : le sens de variation dépend du signe de $r$, pas de celui de $u_0$ : la suite $-6$ ; $-4$ ; $-2$ commence par un nombre négatif mais elle est croissante, car $r = 2 > 0$.",
+          "figure": null,
+          "practice": {
+            "statement": "Fatou loue une boutique. Le loyer mensuel est $u_0 = 20\\,000$ FCFA l'année 0 et il augmente de $1\\,000$ FCFA chaque année.",
+            "questions": [
+              {
+                "content": "Complète le terme général du loyer : $u_n =$ ___ $+ n \\times$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 20\\,000$ et $r = 1\\,000$. Étape 2 — Écrire : $u_n = u_0 + n \\times r = 20\\,000 + n \\times 1\\,000$. Le premier blanc est le premier terme, le second est la raison.",
+                "hint": "La formule est u_n = u_0 + n × r : le premier terme d'abord, puis la raison.",
+                "answers": [
+                  {
+                    "content": "20000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le loyer $u_3$ de l'année 3, en FCFA ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 20\\,000$ et $r = 1\\,000$. Étape 2 — Écrire : $u_n = 20\\,000 + n \\times 1\\,000$. Étape 3 — Remplacer : $u_3 = 20\\,000 + 3 \\times 1\\,000 = 23\\,000$.",
+                "answers": [
+                  {
+                    "content": "23000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Comme la raison est $r = 1\\,000 > 0$, la suite des loyers est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Déduire : la raison $r = 1\\,000$ est positive, donc chaque loyer est plus grand que le précédent : la suite est croissante.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Terme général d'une suite arithmétique",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier, écrire, remplacer, déduire.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Anta a $5\\,000$ FCFA d'épargne au mois 0 ($u_0 = 5\\,000$) et elle ajoute $1\\,500$ FCFA chaque mois. Quelle est son épargne $u_8$ au mois 8, en FCFA ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 5\\,000$ et $r = 1\\,500$. Étape 2 — Écrire : $u_n = 5\\,000 + n \\times 1\\,500$. Étape 3 — Remplacer : $u_8 = 5\\,000 + 8 \\times 1\\,500 = 5\\,000 + 12\\,000 = 17\\,000$. Étape 4 — Déduire : $r > 0$, l'épargne augmente. Attention : écrire $8 \\times 1\\,500 = 12\\,000$ oublie le premier terme $u_0$.",
+                "answers": [
+                  {
+                    "content": "17000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Quel est le terme général de la suite arithmétique de premier terme $u_0 = 12$ et de raison $r = -3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_0 = 12$ et $r = -3$. Étape 2 — Écrire : $u_n = u_0 + n \\times r = 12 + n \\times (-3) = 12 - 3n$. Étapes 3 et 4 : on remplacerait $n$ si l'on demandait un terme précis, et $r < 0$ montre que la suite est décroissante. « $12 + 3n$ » oublie le signe moins de la raison. « $-3 + 12n$ » échange le premier terme et la raison. « $12 \\times (-3)^n$ » est la formule d'une suite géométrique, pas arithmétique.",
+                "answers": [
+                  {
+                    "content": "$u_n = 12 - 3n$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_n = 12 + 3n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_n = -3 + 12n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_n = 12 \\times (-3)^n$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un stock de $900$ cartes de recharge diminue de $50$ cartes par semaine : $u_0 = 900$ et $r = -50$. La suite $(u_n)$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : $u_0 = 900$ et $r = -50$. Étape 2 — Écrire : $u_n = 900 - 50n$. Étape 3 — Remplacer : $u_1 = 850$, $u_2 = 800$. Étape 4 — Déduire : $r = -50 < 0$, donc la suite est décroissante. Elle n'est pas croissante, car chaque terme est plus petit que le précédent, ni constante, car la raison n'est pas nulle.",
+                "answers": [
+                  {
+                    "content": "décroissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "croissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite arithmétique a pour premier terme $u_0 = 7$ et pour terme $u_5 = 32$. Quelle est sa raison $r$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 7$ et la raison $r$ est inconnue. Étape 2 — Écrire : $u_n = 7 + n \\times r$. Étape 3 — Remplacer : $u_5 = 7 + 5 \\times r = 32$, donc $5r = 25$ et $r = 5$. Étape 4 — Déduire : $r = 5 > 0$, la suite est croissante. Le nombre $25$ est l'écart total $32 - 7$ : il faut encore le diviser par $5$, le nombre de fois où l'on ajoute $r$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour la suite arithmétique de premier terme $u_0 = 10$ et de raison $r = 3$, le terme $u_2$ vaut $19$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $u_0 = 10$ et $r = 3$. Étape 2 — Écrire : $u_n = 10 + n \\times 3$. Étape 3 — Remplacer : $u_2 = 10 + 2 \\times 3 = 16$. Étape 4 — Déduire : $r > 0$, la suite est croissante. L'affirmation est fausse : $19 = 10 + 3 \\times 3$ correspond à $u_3$. On ajoute la raison $n$ fois pour atteindre le rang $n$, car on part de $u_0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux suites arithmétiques croissantes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : on lit $u_0$ et $r$ pour chaque suite. Étapes 2 et 3 : $u_n = u_0 + n \\times r$ donne $4$, $7$, $10$… et $-6$, $-4$, $-2$… Étape 4 — Déduire : seules les raisons $3$ et $2$ sont positives, ces deux suites sont croissantes, même si l'une commence par un nombre négatif. La suite de raison $-5$ ($100$, $95$, $90$…) est décroissante. La suite de raison $0$ ($50$, $50$, $50$…) est constante.",
+                "answers": [
+                  {
+                    "content": "$u_0 = 4$ et $r = 3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_0 = -6$ et $r = 2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_0 = 100$ et $r = -5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_0 = 50$ et $r = 0$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suite géométrique : terme général et sens de variation",
+          "remember": "Si $(u_n)$ est géométrique, de premier terme $u_0$ et de raison $q$, son **terme général** est $u_n = u_0 \\times q^n$. Le nombre $q^n$ est $q$ multiplié $n$ fois par lui-même ($q^3 = q \\times q \\times q$) et $q^0 = 1$. **Sens de variation** pour $u_0 > 0$ : si $q > 1$, la suite est **croissante** ; si $0 < q < 1$, elle est **décroissante** ; si $q = 1$, elle est **constante** ; si $q < 0$, les termes changent de signe à chaque rang, elle n'est ni croissante ni décroissante. Augmenter de $10\\ \\%$ revient à multiplier par $1{,}1$ ; diminuer de $10\\ \\%$ revient à multiplier par $0{,}9$.",
+          "method": [
+            "Identifier le premier terme $u_0$ et la raison $q$.",
+            "Écrire le terme général $u_n = u_0 \\times q^n$ avec les nombres de l'énoncé.",
+            "Remplacer $n$ par le rang demandé, calculer la puissance $q^n$, puis multiplier par $u_0$.",
+            "Déduire le sens de variation d'après la valeur de $q$ (avec $u_0 > 0$)."
+          ],
+          "example": {
+            "statement": "La population d'un village est de $2\\,000$ habitants au rang 0. On suppose qu'elle augmente de $10\\ \\%$ chaque année. Calculer la population au rang 3 et donner le sens de variation de la suite.",
+            "steps": [
+              "Identifier : $u_0 = 2\\,000$ ; augmenter de $10\\ \\%$ revient à multiplier par $1{,}1$, donc $q = 1{,}1$.",
+              "Écrire : $u_n = 2\\,000 \\times 1{,}1^n$.",
+              "Remplacer : $u_3 = 2\\,000 \\times 1{,}1^3 = 2\\,000 \\times 1{,}331 = 2\\,662$ habitants.",
+              "Déduire : $q = 1{,}1 > 1$ et $u_0 > 0$, donc la suite est croissante."
+            ]
+          },
+          "pitfall": "La puissance ne porte que sur la raison : $u_n = u_0 \\times q^n$, et non $u_0 \\times n \\times q$ ni $(u_0 \\times q)^n$. Contre-exemple : pour $u_0 = 3$ et $q = 2$, on a $u_3 = 3 \\times 2^3 = 3 \\times 8 = 24$. Avec $3 \\times 3 \\times 2 = 18$, on confond $q^3 = 2 \\times 2 \\times 2$ avec $3 \\times 2$ ; avec $(3 \\times 2)^3 = 216$, on met le premier terme sous la puissance. Calcule d'abord $q^n$, puis multiplie par $u_0$.",
+          "figure": null,
+          "practice": {
+            "statement": "Un éleveur a $u_0 = 100$ poules. On suppose que leur nombre est multiplié par $q = 2$ chaque année.",
+            "questions": [
+              {
+                "content": "Complète le terme général : $u_n =$ ___ $\\times$ ___$^n$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 100$ et $q = 2$. Étape 2 — Écrire : $u_n = u_0 \\times q^n = 100 \\times 2^n$. Le premier blanc est le premier terme, le second est la raison, placée sous la puissance.",
+                "hint": "La formule est u_n = u_0 × q^n : la puissance ne porte que sur la raison.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Combien de poules l'éleveur a-t-il au rang 3 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 100$ et $q = 2$. Étape 2 — Écrire : $u_n = 100 \\times 2^n$. Étape 3 — Remplacer : $u_3 = 100 \\times 2^3 = 100 \\times 8 = 800$.",
+                "answers": [
+                  {
+                    "content": "800",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord 2^3 = 2 × 2 × 2, puis multiplie par 100."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour calculer un terme d'une suite géométrique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier $u_0$ et $q$. Étape 2 — Écrire $u_n = u_0 \\times q^n$. Étape 3 — Remplacer $n$ par le rang demandé et calculer. Étape 4 — Déduire le sens de variation d'après la valeur de $q$. L'ordre est celui de la méthode : on ne peut pas remplacer $n$ avant d'avoir écrit la formule.",
+                "answers": [
+                  {
+                    "content": "Identifier $u_0$ et $q$"
+                  },
+                  {
+                    "content": "Écrire $u_n = u_0 \\times q^n$"
+                  },
+                  {
+                    "content": "Remplacer $n$ et calculer"
+                  },
+                  {
+                    "content": "Déduire le sens de variation"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Terme général d'une suite géométrique",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier, écrire, remplacer, déduire.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une suite géométrique a pour premier terme $u_0 = 3$ et pour raison $q = 2$. Quelle est la valeur de $u_4$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 3$ et $q = 2$. Étape 2 — Écrire : $u_n = 3 \\times 2^n$. Étape 3 — Remplacer : $u_4 = 3 \\times 2^4 = 3 \\times 16 = 48$. Étape 4 — Déduire : $q > 1$ et $u_0 > 0$, la suite est croissante. Le nombre $24$ viendrait de $3 \\times 2^3$ : le rang demandé est $4$, pas $3$.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le terme général de la suite géométrique de premier terme $u_0 = 5$ et de raison $q = 3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_0 = 5$ et $q = 3$. Étape 2 — Écrire : $u_n = u_0 \\times q^n = 5 \\times 3^n$. Étapes 3 et 4 : on remplacerait $n$ pour un terme précis ; avec $q = 3 > 1$ et $u_0 > 0$, la suite est croissante. « $5 + 3n$ » est la formule d'une suite arithmétique. « $(5 \\times 3)^n$ » met le premier terme sous la puissance. « $3 \\times 5^n$ » échange le premier terme et la raison.",
+                "answers": [
+                  {
+                    "content": "$u_n = 5 \\times 3^n$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_n = 5 + 3n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_n = (5 \\times 3)^n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_n = 3 \\times 5^n$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une ville compte $4\\,000$ habitants au rang 0 ($u_0 = 4\\,000$). On suppose que sa population est multipliée par $1{,}5$ à chaque période de dix ans ($q = 1{,}5$). Quelle est la population $u_2$ après deux périodes ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 4\\,000$ et $q = 1{,}5$. Étape 2 — Écrire : $u_n = 4\\,000 \\times 1{,}5^n$. Étape 3 — Remplacer : $u_2 = 4\\,000 \\times 1{,}5^2 = 4\\,000 \\times 2{,}25 = 9\\,000$ habitants. Étape 4 — Déduire : $q > 1$, la population augmente. Le nombre $6\\,000 = 4\\,000 \\times 1{,}5$ ne tient compte que d'une seule période : il en faut deux, donc on multiplie deux fois par $1{,}5$.",
+                "answers": [
+                  {
+                    "content": "9000",
+                    "correct": true
+                  }
+                ],
+                "unit": "habitants"
+              },
+              {
+                "content": "Une suite géométrique a pour premier terme $u_0 = 80$ et pour raison $q = 0{,}5$. Elle est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : $u_0 = 80$ et $q = 0{,}5$. Étape 2 — Écrire : $u_n = 80 \\times 0{,}5^n$. Étape 3 — Remplacer : $u_1 = 40$, $u_2 = 20$. Étape 4 — Déduire : $0 < q < 1$ et $u_0 > 0$, donc la suite est décroissante. Elle n'est pas croissante, car multiplier par $0{,}5$ divise le terme par $2$, ni constante, car la raison n'est pas $1$.",
+                "answers": [
+                  {
+                    "content": "décroissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "croissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour la suite géométrique de premier terme $u_0 = 3$ et de raison $q = 2$, le terme $u_3$ vaut $18$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $u_0 = 3$ et $q = 2$. Étape 2 — Écrire : $u_n = 3 \\times 2^n$. Étape 3 — Remplacer : $u_3 = 3 \\times 2^3 = 3 \\times 8 = 24$. Étape 4 — Déduire : la suite est croissante. L'affirmation est fausse : $18 = 3 \\times 3 \\times 2$ confond $2^3 = 2 \\times 2 \\times 2$ avec $3 \\times 2$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces suites géométriques de premier terme positif, lesquelles sont croissantes ? Choisis les deux bonnes réponses.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : on lit $u_0$ et $q$ pour chaque suite. Étapes 2 et 3 : on écrit les premiers termes avec $u_n = u_0 \\times q^n$. Étape 4 — Déduire : $q = 3$ et $q = 1{,}2$ sont supérieurs à $1$, les deux suites sont croissantes ($2$, $6$, $18$… et $10$, $12$, $14{,}4$…). La suite de raison $0{,}5$ ($64$, $32$, $16$…) est décroissante. La suite de raison $1$ ($7$, $7$, $7$…) est constante. La suite de raison $-2$ ($5$, $-10$, $20$…) change de signe : elle n'est ni croissante ni décroissante.",
+                "answers": [
+                  {
+                    "content": "$u_0 = 2$ et $q = 3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_0 = 10$ et $q = 1{,}2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$u_0 = 64$ et $q = 0{,}5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_0 = 7$ et $q = 1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$u_0 = 5$ et $q = -2$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une somme de termes consécutifs",
+          "remember": "Soit $N$ le **nombre de termes** à additionner (de $u_0$ à $u_n$, il y en a $N = n + 1$). Pour une suite **arithmétique** : $S = N \\times \\dfrac{\\text{premier terme} + \\text{dernier terme}}{2}$. Pour une suite **géométrique** de raison $q \\neq 1$ : $S = \\text{premier terme} \\times \\dfrac{1 - q^N}{1 - q}$. Exemple : $1 + 2 + 3 + 4$ est la somme de $N = 4$ termes d'une suite arithmétique, $S = 4 \\times \\frac{1 + 4}{2} = 10$.",
+          "method": [
+            "Reconnaître la nature de la suite (arithmétique ou géométrique), puis relever son premier terme et sa raison.",
+            "Compter le nombre $N$ de termes ; si la suite est arithmétique, calculer aussi le dernier terme : premier terme $+ (N - 1) \\times r$.",
+            "Écrire la formule qui convient avec les nombres de l'énoncé.",
+            "Calculer la somme, puis conclure par une phrase avec l'unité."
+          ],
+          "example": {
+            "statement": "Awa épargne $2\\,000$ FCFA le mois 1, puis $1\\,000$ FCFA de plus chaque mois, pendant 8 mois. Quelle somme a-t-elle épargnée en tout ?",
+            "steps": [
+              "Reconnaître : on ajoute $1\\,000$ chaque mois, la suite est arithmétique ; le premier terme est $2\\,000$ et la raison est $r = 1\\,000$.",
+              "Compter : il y a $N = 8$ termes ; le dernier terme est $2\\,000 + (8 - 1) \\times 1\\,000 = 9\\,000$.",
+              "Écrire : $S = N \\times \\dfrac{\\text{premier} + \\text{dernier}}{2} = 8 \\times \\dfrac{2\\,000 + 9\\,000}{2}$.",
+              "Calculer : $S = 8 \\times 5\\,500 = 44\\,000$. Awa a épargné $44\\,000$ FCFA en tout."
+            ]
+          },
+          "pitfall": "Compte bien le nombre de termes : de $u_0$ à $u_9$, il y a $10$ termes, et non $9$. Contre-exemple : pour $1 + 2 + 3 + 4$ (quatre termes), la formule donne $4 \\times \\frac{1 + 4}{2} = 10$, ce qui est exact. Avec $N = 3$ on trouverait $3 \\times \\frac{1 + 4}{2} = 7{,}5$, un résultat faux (et qui n'est même pas entier). Dans la formule géométrique, l'exposant est $N$ (le nombre de termes), pas le rang du dernier terme.",
+          "figure": null,
+          "practice": {
+            "statement": "Une association verse des aides, en milliers de FCFA : $2$ ; $4$ ; $6$ ; $8$ ; $10$. Ces nombres forment une suite arithmétique.",
+            "questions": [
+              {
+                "content": "Complète : le nombre de termes est $N =$ ___ et la somme est $S = N \\times \\dfrac{2 + 10}{2} =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : on ajoute $2$ à chaque fois, la suite est arithmétique, le premier terme est $2$ et le dernier est $10$. Étape 2 — Compter : il y a $N = 5$ termes. Étape 3 — Écrire : $S = 5 \\times \\frac{2 + 10}{2}$. Étape 4 — Calculer : $S = 5 \\times 6 = 30$ milliers de FCFA.",
+                "hint": "Compte les nombres de la liste un par un, puis calcule N × (premier + dernier) ÷ 2.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la somme $1 + 3 + 9 + 27$ (suite géométrique de premier terme $1$ et de raison $3$).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : on multiplie par $3$, la suite est géométrique, le premier terme est $1$ et $q = 3$. Étape 2 — Compter : il y a $N = 4$ termes. Étape 3 — Écrire : $S = 1 \\times \\frac{1 - 3^4}{1 - 3}$. Étape 4 — Calculer : $S = \\frac{1 - 81}{-2} = \\frac{-80}{-2} = 40$.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord 3^4 = 81, puis divise (1 − 81) par (1 − 3)."
+              },
+              {
+                "content": "De $u_0$ à $u_6$, il y a ___ termes.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Compter : de $u_0$ à $u_6$, les rangs sont $0$, $1$, $2$, $3$, $4$, $5$, $6$, soit $6 + 1 = 7$ termes. Écrire $6$ oublierait le terme $u_0$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Somme de termes d'une suite",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : reconnaître, compter, écrire, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On additionne les nombres $3$ ; $5$ ; $7$ ; … ; $21$ (on ajoute $2$ à chaque fois). Quelle est leur somme ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : on ajoute $2$, la suite est arithmétique ; le premier terme est $3$, la raison est $r = 2$ et le dernier terme est $21$. Étape 2 — Compter : $3 + (N - 1) \\times 2 = 21$ donne $N - 1 = 9$, donc $N = 10$ termes. Étape 3 — Écrire : $S = 10 \\times \\frac{3 + 21}{2}$. Étape 4 — Calculer : $S = 10 \\times 12 = 120$. Avec $N = 9$ on trouverait $108$, ce qui oublie un terme.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien de termes contient la somme $u_0 + u_1 + u_2 + \\dots + u_{12}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : la nature de la suite n'a pas d'importance pour compter. Étape 2 — Compter : les rangs vont de $0$ à $12$, soit $12 + 1 = 13$ termes. Étape 3 — Écrire : on utiliserait $N = 13$ dans la formule. Étape 4 — Calculer : cela ne change pas le compte. « 12 » oublie le terme $u_0$. « 11 » retire en plus le dernier terme. « 14 » ajoute un terme qui n'existe pas.",
+                "answers": [
+                  {
+                    "content": "13",
+                    "correct": true
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "11",
+                    "correct": false
+                  },
+                  {
+                    "content": "14",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite géométrique a pour premier terme $1$ et pour raison $2$. On additionne ses $5$ premiers termes : $1 + 2 + 4 + 8 + 16$. Quelle est la somme ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : on multiplie par $2$, la suite est géométrique, le premier terme est $1$ et $q = 2$. Étape 2 — Compter : il y a $N = 5$ termes. Étape 3 — Écrire : $S = 1 \\times \\frac{1 - 2^5}{1 - 2}$. Étape 4 — Calculer : $S = \\frac{1 - 32}{-1} = 31$. On peut vérifier : $1 + 2 + 4 + 8 + 16 = 31$.",
+                "answers": [
+                  {
+                    "content": "31",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Koffi épargne $1\\,000$ FCFA le mois 1, puis $500$ FCFA de plus chaque mois, pendant 6 mois. Quelle somme a-t-il épargnée en tout, en FCFA ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : on ajoute $500$ chaque mois, la suite est arithmétique ; le premier terme est $1\\,000$ et la raison est $r = 500$. Étape 2 — Compter : $N = 6$ termes ; le dernier terme est $1\\,000 + (6 - 1) \\times 500 = 3\\,500$. Étape 3 — Écrire : $S = 6 \\times \\frac{1\\,000 + 3\\,500}{2}$. Étape 4 — Calculer : $S = 6 \\times 2\\,250 = 13\\,500$. Koffi a épargné $13\\,500$ FCFA.",
+                "answers": [
+                  {
+                    "content": "13500",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Pour additionner $u_0 + u_1 + \\dots + u_9$ avec la formule d'une suite arithmétique, on prend $N = 9$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Reconnaître : la suite est arithmétique. Étape 2 — Compter : les rangs vont de $0$ à $9$, soit $9 + 1 = 10$ termes, donc $N = 10$. Étape 3 — Écrire : $S = 10 \\times \\frac{u_0 + u_9}{2}$. Étape 4 — Calculer : on termine avec les valeurs de l'énoncé. L'affirmation est fausse : prendre $N = 9$ oublie le terme $u_0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la somme $3 + 9 + 27 + 81$ (suite géométrique de premier terme $3$ et de raison $3$) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : on multiplie par $3$, la suite est géométrique, le premier terme est $3$ et $q = 3$. Étape 2 — Compter : $N = 4$ termes. Étape 3 — Écrire : $S = 3 \\times \\frac{1 - 3^4}{1 - 3}$. Étape 4 — Calculer : $S = 3 \\times \\frac{-80}{-2} = 3 \\times 40 = 120$. « 40 » oublie de multiplier par le premier terme $3$. « 363 » utilise $N = 5$ au lieu de $4$. « 39 » utilise $N = 3$ au lieu de $4$.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  },
+                  {
+                    "content": "40",
+                    "correct": false
+                  },
+                  {
+                    "content": "363",
+                    "correct": false
+                  },
+                  {
+                    "content": "39",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La tontine d'Aminata",
+          "statement": "Aminata participe à une tontine. Elle verse 12 000 FCFA au mois 0, puis 3 000 FCFA de plus chaque mois. On note u(n) son versement, en FCFA, au mois n : u(0) = 12 000 et u(n+1) = u(n) + 3 000.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois : $u_0 = 12\\,000$ et $u_{n+1} = u_n + 3\\,000$. Quelle est la nature de la suite $(u_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (Reconnaître une suite). Étape 1 — Écrire : $u_0 = 12\\,000$, $u_1 = 15\\,000$, $u_2 = 18\\,000$, $u_3 = 21\\,000$. Étape 2 — Calculer : les écarts valent $3\\,000$, $3\\,000$, $3\\,000$ ; les rapports valent $1{,}25$, $1{,}2$, environ $1{,}17$. Étape 3 — Comparer : les écarts sont égaux, les rapports non. Étape 4 — Conclure : la suite est arithmétique de raison $3\\,000$. « Géométrique » confond ajouter et multiplier. « Raison 12 000 » prend le premier terme pour la raison. « Ni l'une ni l'autre » est faux, car l'écart est constant.",
+              "answers": [
+                {
+                  "content": "Arithmétique de raison $3\\,000$",
+                  "correct": true
+                },
+                {
+                  "content": "Géométrique de raison $3\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $12\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "Ni arithmétique ni géométrique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois. Quel est son versement $u_6$ au mois 6, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite arithmétique). Étape 1 — Identifier : $u_0 = 12\\,000$ et $r = 3\\,000$. Étape 2 — Écrire : $u_n = 12\\,000 + n \\times 3\\,000$. Étape 3 — Remplacer : $u_6 = 12\\,000 + 6 \\times 3\\,000 = 12\\,000 + 18\\,000 = 30\\,000$. Étape 4 — Déduire : $r > 0$, les versements augmentent. Oublier $u_0$ donnerait $18\\,000$.",
+              "answers": [
+                {
+                  "content": "30000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois. La suite $(u_n)$ de ses versements est ___.",
+              "question_type": "select",
+              "explanation": "Méthode (sens de variation). Étape 1 — Identifier : $u_0 = 12\\,000$ et $r = 3\\,000$. Étape 2 — Écrire : $u_n = 12\\,000 + 3\\,000n$. Étape 3 — Remplacer : $u_1 = 15\\,000 > u_0$. Étape 4 — Déduire : $r = 3\\,000 > 0$, donc la suite est croissante. Elle n'est pas décroissante, car chaque versement est plus grand que le précédent, ni constante, car la raison n'est pas nulle.",
+              "answers": [
+                {
+                  "content": "croissante",
+                  "correct": true
+                },
+                {
+                  "content": "décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "constante",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois : $u_n = 12\\,000 + 3\\,000n$. À quel mois son versement atteint-il $42\\,000$ FCFA ? Donne la valeur de $n$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (terme général, puis équation). Étape 1 — Identifier : $u_0 = 12\\,000$ et $r = 3\\,000$. Étape 2 — Écrire : $u_n = 12\\,000 + 3\\,000n$. Étape 3 — Remplacer : on cherche $n$ tel que $12\\,000 + 3\\,000n = 42\\,000$, donc $3\\,000n = 30\\,000$ et $n = 10$. Étape 4 — Vérifier : $u_{10} = 12\\,000 + 10 \\times 3\\,000 = 42\\,000$. Le versement atteint $42\\,000$ FCFA au mois 10. Le nombre $30\\,000$ est l'écart à rattraper : il reste à le diviser par la raison.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois. Quel est le total de ses versements des mois 0 à 5 (six versements), en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Calculer une somme de termes). Étape 1 — Reconnaître : suite arithmétique, premier terme $12\\,000$, raison $3\\,000$. Étape 2 — Compter : $N = 6$ termes (rangs $0$ à $5$) ; le dernier terme est $u_5 = 12\\,000 + 5 \\times 3\\,000 = 27\\,000$. Étape 3 — Écrire : $S = 6 \\times \\frac{12\\,000 + 27\\,000}{2}$. Étape 4 — Calculer : $S = 6 \\times 19\\,500 = 117\\,000$. Aminata a versé $117\\,000$ FCFA en tout. Avec $N = 5$ on oublierait $u_0$.",
+              "answers": [
+                {
+                  "content": "117000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Aminata verse $12\\,000$ FCFA au mois 0, puis $3\\,000$ FCFA de plus chaque mois. Son versement au mois 4 est de $27\\,000$ FCFA.",
+              "question_type": "true_false",
+              "explanation": "Méthode (Terme général d'une suite arithmétique). Étape 1 — Identifier : $u_0 = 12\\,000$ et $r = 3\\,000$. Étape 2 — Écrire : $u_n = 12\\,000 + n \\times 3\\,000$. Étape 3 — Remplacer : $u_4 = 12\\,000 + 4 \\times 3\\,000 = 24\\,000$. Étape 4 — Déduire : la suite est croissante. L'affirmation est fausse : $27\\,000 = 12\\,000 + 5 \\times 3\\,000$ correspond au mois 5. On ajoute la raison $n$ fois pour atteindre le rang $n$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La population d'un village",
+          "statement": "La population d'un village est de 1 000 habitants au rang 0 (année 2025). On suppose qu'elle augmente de 10 % chaque année. On note u(n) la population au rang n.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La population d'un village est de $1\\,000$ habitants au rang 0 et elle augmente de $10\\ \\%$ chaque année. Quelle est la nature de la suite $(u_n)$ de la population ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (Reconnaître une suite). Étape 1 — Écrire : $u_0 = 1\\,000$, $u_1 = 1\\,000 \\times 1{,}1 = 1\\,100$, $u_2 = 1\\,100 \\times 1{,}1 = 1\\,210$. Étape 2 — Calculer : les écarts valent $100$ et $110$ ; les rapports valent $1{,}1$ et $1{,}1$. Étape 3 — Comparer : les écarts sont différents, les rapports sont égaux. Étape 4 — Conclure : la suite est géométrique de raison $1{,}1$. « Arithmétique de raison 100 » ne retient que le premier écart, qui change ensuite. « Raison 10 » confond $10\\ \\%$ avec le nombre $10$ : augmenter de $10\\ \\%$ revient à multiplier par $1 + 0{,}1 = 1{,}1$. « Ni l'une ni l'autre » est faux puisque le rapport est constant.",
+              "answers": [
+                {
+                  "content": "Géométrique de raison $1{,}1$",
+                  "correct": true
+                },
+                {
+                  "content": "Arithmétique de raison $100$",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $10$",
+                  "correct": false
+                },
+                {
+                  "content": "Ni arithmétique ni géométrique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La population d'un village est de $1\\,000$ habitants au rang 0 et elle augmente de $10\\ \\%$ chaque année ($u_0 = 1\\,000$, $q = 1{,}1$). Quelle est la population $u_2$ au rang 2 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite géométrique). Étape 1 — Identifier : $u_0 = 1\\,000$ et $q = 1{,}1$. Étape 2 — Écrire : $u_n = 1\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $u_2 = 1\\,000 \\times 1{,}1^2 = 1\\,000 \\times 1{,}21 = 1\\,210$ habitants. Étape 4 — Déduire : $q > 1$, la population augmente. Calculer $1\\,000 + 2 \\times 100 = 1\\,200$ serait faux : l'augmentation de la deuxième année porte sur $1\\,100$ habitants, pas sur $1\\,000$.",
+              "answers": [
+                {
+                  "content": "1210",
+                  "correct": true
+                }
+              ],
+              "unit": "habitants"
+            },
+            {
+              "content": "La population d'un village est de $1\\,000$ habitants au rang 0 et elle augmente de $10\\ \\%$ chaque année ($u_0 = 1\\,000$, $q = 1{,}1$). De combien d'habitants la population augmente-t-elle entre le rang 2 et le rang 3 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite géométrique). Étape 1 — Identifier : $u_0 = 1\\,000$ et $q = 1{,}1$. Étape 2 — Écrire : $u_n = 1\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $u_2 = 1\\,000 \\times 1{,}21 = 1\\,210$ et $u_3 = 1\\,000 \\times 1{,}331 = 1\\,331$. Étape 4 — Calculer l'augmentation : $1\\,331 - 1\\,210 = 121$ habitants. On peut vérifier : $10\\ \\%$ de $1\\,210$ vaut $121$. Le nombre $100$ serait l'augmentation de la première année seulement.",
+              "answers": [
+                {
+                  "content": "121",
+                  "correct": true
+                }
+              ],
+              "unit": "habitants"
+            },
+            {
+              "content": "La population d'un village est de $1\\,000$ habitants au rang 0 ($u_0 = 1\\,000$) et elle est multipliée par $q = 1{,}1$ chaque année. La suite $(u_n)$ est ___.",
+              "question_type": "select",
+              "explanation": "Méthode (sens de variation). Étape 1 — Identifier : $u_0 = 1\\,000 > 0$ et $q = 1{,}1$. Étape 2 — Écrire : $u_n = 1\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $u_1 = 1\\,100 > u_0$. Étape 4 — Déduire : $q > 1$ et $u_0 > 0$, donc la suite est croissante. Elle n'est pas décroissante : il faudrait $0 < q < 1$. Elle n'est pas constante : il faudrait $q = 1$.",
+              "answers": [
+                {
+                  "content": "croissante",
+                  "correct": true
+                },
+                {
+                  "content": "décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "constante",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La population d'un village vaut $1\\,000$ ; $1\\,100$ ; $1\\,210$ habitants aux rangs 0, 1 et 2. L'affirmation « cette suite est aussi arithmétique, car elle augmente à chaque rang » est vraie.",
+              "question_type": "true_false",
+              "explanation": "Méthode (Reconnaître une suite). Étape 1 — Écrire : $u_0 = 1\\,000$, $u_1 = 1\\,100$, $u_2 = 1\\,210$. Étape 2 — Calculer : les écarts valent $1\\,100 - 1\\,000 = 100$ et $1\\,210 - 1\\,100 = 110$. Étape 3 — Comparer : les deux écarts sont différents. Étape 4 — Conclure : la suite n'est pas arithmétique. L'affirmation est fausse : une suite croissante n'est pas forcément arithmétique ; il faut que l'écart soit le même à chaque rang.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Choisir un logement : deux loyers",
+          "statement": "Maïmouna compare deux logements. Logement A : loyer mensuel de 45 000 FCFA l'année 0, puis 4 000 FCFA de plus chaque année ; on note u(n) le loyer de l'année n. Logement B : loyer mensuel de 40 000 FCFA l'année 0, puis une augmentation de 10 % chaque année ; on note v(n) le loyer de l'année n.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Logement A : $45\\,000$ FCFA l'année 0, puis $4\\,000$ FCFA de plus chaque année. Logement B : $40\\,000$ FCFA l'année 0, puis une augmentation de $10\\ \\%$ chaque année. Quelle est la nature des suites $(u_n)$ (logement A) et $(v_n)$ (logement B) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (Reconnaître une suite). Étape 1 — Écrire : $u_0 = 45\\,000$, $u_1 = 49\\,000$, $u_2 = 53\\,000$ ; $v_0 = 40\\,000$, $v_1 = 44\\,000$, $v_2 = 48\\,400$. Étape 2 — Calculer : pour $(u_n)$ les écarts valent $4\\,000$ et $4\\,000$ ; pour $(v_n)$ les rapports valent $1{,}1$ et $1{,}1$ (les écarts $4\\,000$ et $4\\,400$ diffèrent). Étape 3 — Comparer : $(u_n)$ a un écart constant, $(v_n)$ a un rapport constant. Étape 4 — Conclure : $(u_n)$ est arithmétique de raison $4\\,000$, $(v_n)$ est géométrique de raison $1{,}1$. Augmenter de $10\\ \\%$ revient à multiplier par $1{,}1$, pas à ajouter $10$. « Toutes deux arithmétiques, de raisons 4 000 et 10 » prend l'augmentation de 10 % pour un ajout de 10. « $(u_n)$ géométrique et $(v_n)$ arithmétique » inverse les deux natures. « Toutes deux géométriques » oublie que l'on ajoute 4 000 au loyer A.",
+              "answers": [
+                {
+                  "content": "$(u_n)$ est arithmétique de raison $4\\,000$ et $(v_n)$ est géométrique de raison $1{,}1$",
+                  "correct": true
+                },
+                {
+                  "content": "$(u_n)$ et $(v_n)$ sont toutes deux arithmétiques, de raisons $4\\,000$ et $10$",
+                  "correct": false
+                },
+                {
+                  "content": "$(u_n)$ est géométrique de raison $1{,}1$ et $(v_n)$ est arithmétique de raison $4\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$(u_n)$ et $(v_n)$ sont toutes deux géométriques",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Logement A : $u_0 = 45\\,000$ FCFA et le loyer augmente de $4\\,000$ FCFA chaque année. Quel est le loyer $u_3$ de l'année 3, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite arithmétique). Étape 1 — Identifier : $u_0 = 45\\,000$ et $r = 4\\,000$. Étape 2 — Écrire : $u_n = 45\\,000 + n \\times 4\\,000$. Étape 3 — Remplacer : $u_3 = 45\\,000 + 3 \\times 4\\,000 = 45\\,000 + 12\\,000 = 57\\,000$. Étape 4 — Déduire : $r > 0$, le loyer augmente. Avec $4 \\times 4\\,000$ on trouverait $61\\,000$ : c'est $u_4$.",
+              "answers": [
+                {
+                  "content": "57000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Logement B : $v_0 = 40\\,000$ FCFA et le loyer augmente de $10\\ \\%$ chaque année ($q = 1{,}1$). Quel est le loyer $v_2$ de l'année 2, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite géométrique). Étape 1 — Identifier : $v_0 = 40\\,000$ et $q = 1{,}1$. Étape 2 — Écrire : $v_n = 40\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $v_2 = 40\\,000 \\times 1{,}1^2 = 40\\,000 \\times 1{,}21 = 48\\,400$. Étape 4 — Déduire : $q > 1$ et $v_0 > 0$, la suite est croissante. Calculer $40\\,000 + 2 \\times 4\\,000 = 48\\,000$ serait faux : chaque augmentation de $10\\ \\%$ porte sur le loyer de l'année précédente.",
+              "answers": [
+                {
+                  "content": "48400",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "À l'année 2, le logement A coûte $u_2 = 45\\,000 + 2 \\times 4\\,000 = 53\\,000$ FCFA et le logement B coûte $v_2 = 40\\,000 \\times 1{,}1^2 = 48\\,400$ FCFA. Quel logement a le loyer le plus bas à l'année 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (comparer deux termes calculés). Étape 1 — Identifier : $u_2 = 53\\,000$ et $v_2 = 48\\,400$. Étape 2 — Écrire : on compare $48\\,400$ et $53\\,000$. Étape 3 — Remplacer : $48\\,400 < 53\\,000$. Étape 4 — Déduire : le logement B a le loyer le plus bas à l'année 2. Le logement A coûte $4\\,600$ FCFA de plus. La réponse « même loyer » est fausse car les deux nombres sont différents. On n'a pas besoin de l'année 3 : l'énoncé donne déjà les deux loyers de l'année 2.",
+              "answers": [
+                {
+                  "content": "Le logement B, avec 48 400 FCFA",
+                  "correct": true
+                },
+                {
+                  "content": "Le logement A, avec 53 000 FCFA",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux logements ont le même loyer",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer sans connaître l'année 3",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Logement A : $u_n = 45\\,000 + 4\\,000n$ (loyer mensuel en FCFA). Calcule la somme $u_0 + u_1 + u_2 + u_3 + u_4$ de ses loyers mensuels des années 0 à 4, en FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Calculer une somme de termes). Étape 1 — Reconnaître : suite arithmétique, premier terme $45\\,000$, raison $4\\,000$. Étape 2 — Compter : $N = 5$ termes (rangs $0$ à $4$) ; le dernier terme est $u_4 = 45\\,000 + 4 \\times 4\\,000 = 61\\,000$. Étape 3 — Écrire : $S = 5 \\times \\frac{45\\,000 + 61\\,000}{2}$. Étape 4 — Calculer : $S = 5 \\times 53\\,000 = 265\\,000$ FCFA. Avec $N = 4$ on oublierait un terme : le résultat serait trop petit.",
+              "answers": [
+                {
+                  "content": "265000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Logement B : $v_n = 40\\,000 \\times 1{,}1^n$ (loyer mensuel en FCFA). Calcule la somme $v_0 + v_1 + v_2$ de ses loyers mensuels des années 0 à 2, en FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Calculer une somme de termes). Étape 1 — Reconnaître : suite géométrique, premier terme $40\\,000$, raison $q = 1{,}1$. Étape 2 — Compter : $N = 3$ termes (rangs $0$ à $2$). Étape 3 — Écrire : $S = 40\\,000 \\times \\frac{1 - 1{,}1^3}{1 - 1{,}1}$. Étape 4 — Calculer : $1{,}1^3 = 1{,}331$, donc $S = 40\\,000 \\times \\frac{-0{,}331}{-0{,}1} = 40\\,000 \\times 3{,}31 = 132\\,400$ FCFA. Vérification directe : $40\\,000 + 44\\,000 + 48\\,400 = 132\\,400$.",
+              "answers": [
+                {
+                  "content": "132400",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Logement A : loyer de $45\\,000$ FCFA l'année 0, plus $4\\,000$ FCFA chaque année. Logement B : loyer de $40\\,000$ FCFA l'année 0, multiplié par $1{,}1$ chaque année. Quelles sont les deux affirmations vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode (sens de variation). Étape 1 — Identifier : $(u_n)$ a pour raison $r = 4\\,000$ ; $(v_n)$ a pour raison $q = 1{,}1$ et un premier terme positif. Étape 2 — Écrire : $u_n = 45\\,000 + 4\\,000n$ et $v_n = 40\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $u_1 = 49\\,000 > u_0$ et $v_1 = 44\\,000 > v_0$. Étape 4 — Déduire : $r > 0$ donc $(u_n)$ est croissante ; $q > 1$ et $v_0 > 0$ donc $(v_n)$ est croissante. « $(v_n)$ décroissante » est faux : il faudrait $0 < q < 1$. « $(u_n)$ géométrique de raison $4\\,000$ » confond ajouter $4\\,000$ et multiplier par $4\\,000$.",
+              "answers": [
+                {
+                  "content": "La suite $(u_n)$ des loyers du logement A est croissante",
+                  "correct": true
+                },
+                {
+                  "content": "La suite $(v_n)$ des loyers du logement B est croissante",
+                  "correct": true
+                },
+                {
+                  "content": "La suite $(v_n)$ des loyers du logement B est décroissante",
+                  "correct": false
+                },
+                {
+                  "content": "La suite $(u_n)$ des loyers du logement A est géométrique de raison $4\\,000$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux plans d'épargne sur six ans",
+          "statement": "Koffi veut épargner pendant 6 années, numérotées de 0 à 5. Plan 1 : il verse 10 000 FCFA l'année 0, puis 10 000 FCFA de plus chaque année ; on note u(n) son versement de l'année n. Plan 2 : il verse 10 000 FCFA l'année 0, puis il double son versement chaque année ; on note v(n) son versement de l'année n.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Plan 1 : $10\\,000$ FCFA l'année 0, puis $10\\,000$ FCFA de plus chaque année. Plan 2 : $10\\,000$ FCFA l'année 0, puis le versement double chaque année. Quelle est la nature des suites $(u_n)$ (plan 1) et $(v_n)$ (plan 2) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (Reconnaître une suite). Étape 1 — Écrire : $u_0 = 10\\,000$, $u_1 = 20\\,000$, $u_2 = 30\\,000$ ; $v_0 = 10\\,000$, $v_1 = 20\\,000$, $v_2 = 40\\,000$. Étape 2 — Calculer : pour $(u_n)$ les écarts valent $10\\,000$ et $10\\,000$ ; pour $(v_n)$ les rapports valent $2$ et $2$ (les écarts $10\\,000$ et $20\\,000$ diffèrent). Étape 3 — Comparer : $(u_n)$ a un écart constant, $(v_n)$ a un rapport constant. Étape 4 — Conclure : $(u_n)$ est arithmétique de raison $10\\,000$, $(v_n)$ est géométrique de raison $2$. « Doubler » veut dire multiplier par $2$, pas ajouter $2$. « $(u_n)$ géométrique de raison 10 000 et $(v_n)$ arithmétique de raison 2 » inverse les deux natures. « Toutes deux arithmétiques » oublie que doubler, c'est multiplier. « Toutes deux géométriques » oublie que le plan 1 ajoute 10 000 FCFA.",
+              "answers": [
+                {
+                  "content": "$(u_n)$ est arithmétique de raison $10\\,000$ et $(v_n)$ est géométrique de raison $2$",
+                  "correct": true
+                },
+                {
+                  "content": "$(u_n)$ est géométrique de raison $10\\,000$ et $(v_n)$ est arithmétique de raison $2$",
+                  "correct": false
+                },
+                {
+                  "content": "$(u_n)$ et $(v_n)$ sont toutes deux arithmétiques",
+                  "correct": false
+                },
+                {
+                  "content": "$(u_n)$ et $(v_n)$ sont toutes deux géométriques",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Plan 1 : $u_0 = 10\\,000$ FCFA et le versement augmente de $10\\,000$ FCFA chaque année. Quel est le versement $u_5$ de l'année 5, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite arithmétique). Étape 1 — Identifier : $u_0 = 10\\,000$ et $r = 10\\,000$. Étape 2 — Écrire : $u_n = 10\\,000 + n \\times 10\\,000$. Étape 3 — Remplacer : $u_5 = 10\\,000 + 5 \\times 10\\,000 = 60\\,000$. Étape 4 — Déduire : $r > 0$, la suite est croissante. Le nombre $50\\,000$ oublierait le premier terme $u_0$.",
+              "answers": [
+                {
+                  "content": "60000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Plan 2 : $v_0 = 10\\,000$ FCFA et le versement double chaque année ($q = 2$). Quel est le versement $v_5$ de l'année 5, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Terme général d'une suite géométrique). Étape 1 — Identifier : $v_0 = 10\\,000$ et $q = 2$. Étape 2 — Écrire : $v_n = 10\\,000 \\times 2^n$. Étape 3 — Remplacer : $v_5 = 10\\,000 \\times 2^5 = 10\\,000 \\times 32 = 320\\,000$. Étape 4 — Déduire : $q > 1$ et $v_0 > 0$, la suite est croissante. Calculer $10\\,000 \\times 5 \\times 2 = 100\\,000$ serait faux : l'exposant $5$ porte sur $2$, on calcule $2 \\times 2 \\times 2 \\times 2 \\times 2 = 32$.",
+              "answers": [
+                {
+                  "content": "320000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Plan 1 : $u_n = 10\\,000 + 10\\,000n$. Koffi verse sur les 6 années de rang 0 à 5, avec $u_0 = 10\\,000$ et $u_5 = 60\\,000$. Quel est le total de ses versements, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Calculer une somme de termes). Étape 1 — Reconnaître : suite arithmétique, premier terme $10\\,000$, raison $10\\,000$. Étape 2 — Compter : $N = 6$ termes (rangs $0$ à $5$) ; le dernier terme est $u_5 = 60\\,000$. Étape 3 — Écrire : $S = 6 \\times \\frac{10\\,000 + 60\\,000}{2}$. Étape 4 — Calculer : $S = 6 \\times 35\\,000 = 210\\,000$ FCFA. Avec $N = 5$ on oublierait $u_0$ et on trouverait $175\\,000$.",
+              "answers": [
+                {
+                  "content": "210000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Plan 2 : $v_n = 10\\,000 \\times 2^n$. Koffi verse sur les 6 années de rang 0 à 5, avec $v_0 = 10\\,000$ et $q = 2$. Quel est le total de ses versements, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (Calculer une somme de termes). Étape 1 — Reconnaître : suite géométrique, premier terme $10\\,000$, raison $q = 2$. Étape 2 — Compter : $N = 6$ termes (rangs $0$ à $5$). Étape 3 — Écrire : $S = 10\\,000 \\times \\frac{1 - 2^6}{1 - 2}$. Étape 4 — Calculer : $2^6 = 64$, donc $S = 10\\,000 \\times \\frac{-63}{-1} = 630\\,000$ FCFA. Vérification : $10\\,000 + 20\\,000 + 40\\,000 + 80\\,000 + 160\\,000 + 320\\,000 = 630\\,000$. Avec l'exposant $5$ au lieu de $6$ on trouverait $310\\,000$ : l'exposant est le nombre de termes $N$.",
+              "answers": [
+                {
+                  "content": "630000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Koffi verse en tout $210\\,000$ FCFA avec le plan 1 et $630\\,000$ FCFA avec le plan 2 sur les 6 années. De combien de FCFA le total du plan 2 dépasse-t-il celui du plan 1 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (comparer deux sommes). Étape 1 — Reconnaître : les deux totaux sont donnés, $S_1 = 210\\,000$ et $S_2 = 630\\,000$. Étape 2 — Compter : il n'y a rien à compter, les totaux couvrent déjà les 6 années. Étape 3 — Écrire : l'écart est $S_2 - S_1$. Étape 4 — Calculer : $630\\,000 - 210\\,000 = 420\\,000$ FCFA. Le plan 2 permet d'épargner $420\\,000$ FCFA de plus. Le nombre $840\\,000$ serait la somme des deux totaux, pas leur écart.",
+              "answers": [
+                {
+                  "content": "420000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Plan 1 : $u_n = 10\\,000 + 10\\,000n$ ; plan 2 : $v_n = 10\\,000 \\times 2^n$ ; années 0 à 5. L'affirmation « chaque année, le versement du plan 2 est strictement plus grand que celui du plan 1 » est vraie.",
+              "question_type": "true_false",
+              "explanation": "Méthode (comparer deux suites). Étape 1 — Identifier : $u_n = 10\\,000 + 10\\,000n$ et $v_n = 10\\,000 \\times 2^n$. Étape 2 — Écrire : on compare les deux versements rang par rang. Étape 3 — Remplacer : rang 0 : $u_0 = v_0 = 10\\,000$ ; rang 1 : $u_1 = 20\\,000$ et $v_1 = 20\\,000$ ; rang 2 : $u_2 = 30\\,000$ et $v_2 = 40\\,000$. Étape 4 — Déduire : aux rangs 0 et 1, les deux versements sont égaux, donc le plan 2 n'est pas strictement plus grand chaque année. L'affirmation est fausse. Il l'est seulement à partir du rang 2.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

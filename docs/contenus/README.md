@@ -689,6 +689,27 @@ Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'en
 
 **Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
 
+### 1ère A1 et A2, Physique-Chimie au format 3 (chantier `contenus-1ere-a-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de 1ère A (progression DPFC 2026-2027), rédigées le 2026-11-02 au format `lnclass.course-tree` v3, vague P4 du programme `contenus-v3-tous-niveaux`. Le référentiel n'a pas de série « A » en 1ère : chaque leçon est écrite une fois puis déclinée en **20 fichiers** (`1ere-a1/physique-chimie/` et `1ere-a2/physique-chimie/`, identiques à `series_name` près). Les leçons 9 et 10 partent des versions 1ère C/D, allégées. Elles remplacent les 3 fichiers v1 (rangs 1 à 3) du tableau « 1ère A1 et A2 » plus bas.
+
+| Rang | Fichier (A1 et A2) | Cours | Notions | Exercices | Questions | Je m'entraîne | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 4 | 8 | 60 | 12 | 3 | `coordinate_plane` |
+| 2 | `physique-chimie/les-alcanes.json` | Les alcanes | 5 | 9 | 56 | 15 | 4 | `molecule` |
+| 3 | `physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 5 | 9 | 60 | 15 | 6 | `diagram`, `molecule` |
+| 4 | `physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 8 | 58 | 12 | 4 | `coordinate_plane`, `diagram` |
+| 5 | `physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 8 | 54 | 12 | 3 | `diagram`, `molecule` |
+| 6 | `physique-chimie/puissance-et-energie-electriques.json` | Puissance et énergie électriques | 4 | 8 | 61 | 12 | 2 | `diagram`, `stat_chart` |
+| 7 | `physique-chimie/principe-de-la-production-d-une-tension-alternative.json` | Principe de la production d'une tension alternative | 5 | 9 | 56 | 15 | 3 | `coordinate_plane`, `diagram` |
+| 8 | `physique-chimie/reactions-d-oxydo-reduction-en-solution-aqueuse.json` | Réactions d'oxydo-réduction en solution aqueuse | 4 | 8 | 48 | 12 | 2 | `diagram` |
+| 9 | `physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance d'une force constante dans le cas d'un mouvement de translation | 4 | 8 | 58 | 12 | 3 | `coordinate_plane` |
+| 10 | `physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 8 | 57 | 12 | 2 | `coordinate_plane` |
+
+Au total (par série) : 43 notions, 568 questions notées, 129 questions « Je m'entraîne », 32 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement (Ruby 3.4). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (calculs refaits, chiffres et données vérifiés).
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop (`db/seeds/catalog.rb`), la 1ère a les séries A1, A2, C et D : les leçons communes aux deux séries A sont écrites une fois, puis déclinées en A1 et A2.
@@ -903,6 +924,24 @@ Au total : 87 notions, 167 exercices, 1082 questions notées et 12 figures.
 Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-cd/controle-entrainement.rb`). Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
 
 Figures manquantes (courbes, tableaux de variations, arbres, solides en perspective) : sortes absentes du moteur, notées en dette dans le journal du chantier.
+
+### 1ère A1 et A2, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-a`)
+
+Les 7 leçons de Mathématiques de la progression DPFC 2026-2027 de la série A de 1ère, rédigées le 2026-11-02 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P2 du programme `contenus-v3-tous-niveaux` ; rédaction Sonnet, relecture indépendante Opus). Le référentiel ouvre « 1ère A1 » et « 1ère A2 » : chaque leçon est écrite une fois puis déclinée en deux fichiers identiques à la série près, dans `1ere-a1/mathematiques/` et `1ere-a2/mathematiques/` (**7 leçons, 14 fichiers**). « Dénombrement » et « Généralités sur les fonctions » déclinent au niveau A les leçons de 1ère C/D (calculs plus simples, sans Angles ni Limites). Elles **remplacent** les fichiers v1 du même intitulé (rangs 1 à 3, rédigés le 2026-10-10).
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures |
+|---:|---|---|---:|---:|---:|---:|---:|
+| 1 | `mathematiques/equations-et-inequations.json` | Équations et inéquations | 4 | 8 | 48 | 100 % | 2 |
+| 2 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 50 | 98 % | 0 |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 8 | 51 | 96 % | 0 |
+| 4 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 8 | 50 | 98 % | 0 |
+| 5 | `mathematiques/suites-numeriques.json` | Suites numériques | 4 | 8 | 49 | 100 % | 1 |
+| 6 | `mathematiques/statistique.json` | Statistique | 4 | 8 | 56 | 96 % | 3 |
+| 7 | `mathematiques/systemes-d-equations-dans.json` | Systèmes d'équations dans ℝ × ℝ | 4 | 8 | 50 | 96 % | 1 |
+
+Au total : 28 notions, 56 exercices, 354 questions notées.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-a/controle-entrainement.rb`). **Brouillon** : points à faire valider par un enseignant dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P2). Courbes de fonction et tableaux de variations : décrits dans les énoncés (dette notée au journal du chantier).
 
 À faire valider par un enseignant de mathématiques avant publication : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
 
