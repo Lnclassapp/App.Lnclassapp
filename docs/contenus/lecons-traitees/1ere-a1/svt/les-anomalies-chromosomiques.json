@@ -170,7 +170,7 @@
               {
                 "content": "Un caryotype normal est classé en 23 paires de chromosomes. Combien de chromosomes cela fait-il au total ?",
                 "question_type": "numeric",
-                "explanation": "Étape 1 — Compter : chaque paire contient deux chromosomes. Étape 2 — Compter les paires : 23 paires. Calcul : $23 \\times 2 = 46$. Étape 4 — Conclure : le caryotype compte 46 chromosomes. L'erreur à éviter est de répondre 23, qui est le nombre de paires et non de chromosomes.",
+                "explanation": "Étape 1 — Compter : chaque paire contient deux chromosomes, donc $23 \\times 2 = 46$. Étape 2 — Compter les paires d'autosomes : 22 paires, soit 44 autosomes. Étape 3 — Repérer la dernière paire : la 23e paire, celle des gonosomes, compte 2 chromosomes, et $44 + 2 = 46$. Étape 4 — Conclure : le caryotype compte 46 chromosomes. L'erreur à éviter est de répondre 23, qui est le nombre de paires et non de chromosomes.",
                 "tolerance": 0,
                 "answers": [
                   {
@@ -357,7 +357,7 @@
         },
         {
           "name": "Reconnaître une anomalie de nombre sur un caryotype",
-          "remember": "Une **anomalie chromosomique de nombre** est un caryotype qui ne compte pas 46 chromosomes : il y a un chromosome en trop ou en moins. Une **trisomie** est la présence de **trois** chromosomes, au lieu de deux, dans une paire. Trois anomalies sont à connaître. La **trisomie 21** : trois chromosomes 21, donc **47 chromosomes** (45 autosomes + XX ou XY). Le **syndrome de Turner** : un seul gonosome X, sans second gonosome, donc **45 chromosomes** (44 autosomes + X). Le **syndrome de Klinefelter** : deux X et un Y, donc **47 chromosomes** (44 autosomes + XXY). La trisomie 21 touche un autosome ; les syndromes de Turner et de Klinefelter touchent les gonosomes.",
+          "remember": "Une **anomalie chromosomique de nombre** se repère à un caryotype qui ne compte pas 46 chromosomes : il y a un chromosome en trop ou en moins. Une **trisomie** est la présence de **trois** chromosomes, au lieu de deux, dans une paire. Trois anomalies sont à connaître. La **trisomie 21** : trois chromosomes 21, donc **47 chromosomes** (45 autosomes + XX ou XY). Le **syndrome de Turner** : un seul gonosome X, sans second gonosome, donc **45 chromosomes** (44 autosomes + X). Le **syndrome de Klinefelter** : deux X et un Y, donc **47 chromosomes** (44 autosomes + XXY). La trisomie 21 touche un autosome ; les syndromes de Turner et de Klinefelter touchent les gonosomes.",
           "method": [
             "Compter les chromosomes du caryotype et comparer le total à 46.",
             "Chercher la paire anormale : une paire à trois chromosomes, ou des gonosomes en nombre inhabituel.",
@@ -789,7 +789,7 @@
       "exercises": [
         {
           "title": "Au centre de santé : le caryotype d'Aïcha",
-          "statement": "Aïcha, 2 mois, est amenée au centre de santé de son quartier par sa mère. La sage-femme remarque un visage aux traits caractéristiques et des muscles très mous. Le médecin demande un caryotype. Résultat du laboratoire : 47 chromosomes ; les paires 1 à 20 et la paire 22 contiennent deux chromosomes, la paire 21 en contient trois ; les gonosomes sont XX. Pour expliquer à la famille, le médecin montre un graphique en barres du nombre de chromosomes : caryotype normal 46 ; trisomie 21 : 47 ; syndrome de Turner : 45 ; syndrome de Klinefelter : 47. Situation fictive.",
+          "statement": "Aïcha, 2 mois, est amenée au centre de santé de son quartier par sa mère. La sage-femme remarque un visage aux traits caractéristiques et des muscles très mous. Le médecin demande un caryotype. Résultat du laboratoire : les paires 1 à 20 et la paire 22 contiennent deux chromosomes, la paire 21 en contient trois ; les gonosomes sont XX. Pour expliquer à la famille, le médecin montre un graphique en barres du nombre de chromosomes : caryotype normal 46 ; trisomie 21 : 47 ; syndrome de Turner : 45 ; syndrome de Klinefelter : 47. Situation fictive.",
           "exercise_type": "fixation",
           "figure": "nombre-chromosomes-caryotypes",
           "questions": [
@@ -829,12 +829,16 @@
               ]
             },
             {
-              "content": "La formule chromosomique d'Aïcha est : 45 autosomes + ___ .",
+              "content": "La formule chromosomique d'Aïcha est : ___ autosomes + XX.",
               "question_type": "fill_blank",
-              "explanation": "Les 44 autosomes de la formule normale deviennent 45 à cause du troisième chromosome 21 : $44 + 1 = 45$. Les gonosomes d'Aïcha sont XX, ce qui est normal pour une fille. La formule est donc 45 autosomes + XX, soit $45 + 2 = 47$ chromosomes.",
+              "explanation": "Les 44 autosomes de la formule normale deviennent 45 à cause du troisième chromosome 21 : $44 + 1 = 45$. Les gonosomes d'Aïcha sont XX, ce qui est normal pour une fille. La formule est donc 45 autosomes + XX, soit $45 + 2 = 47$ chromosomes. Répondre 47 serait compter aussi les deux gonosomes.",
               "answers": [
                 {
-                  "content": "XX",
+                  "content": "45",
+                  "correct": true
+                },
+                {
+                  "content": "quarante-cinq",
                   "correct": true
                 }
               ]
@@ -1148,7 +1152,7 @@
         },
         {
           "title": "Trois consultations en une matinée",
-          "statement": "Au centre de santé, le médecin reçoit trois patients. Patient A : une fille de 14 ans, de petite taille, sans règles ; caryotype à 45 chromosomes, avec 22 paires d'autosomes complètes et un seul X. Patient B : un garçon de 3 ans, au retard de langage, au visage aux traits caractéristiques et aux muscles mous ; caryotype à 47 chromosomes, avec trois chromosomes 21 et les gonosomes XY. Patient C : un homme de 25 ans, grand, qui consulte avec sa femme parce que le couple n'arrive pas à avoir d'enfant ; caryotype à 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes XXY. Situations fictives, résultats simplifiés.",
+          "statement": "Au centre de santé, le médecin reçoit trois patients. Patient A : une fille de 11 ans, la plus petite de sa classe, que sa mère amène parce qu'elle ne grandit presque plus ; caryotype à 45 chromosomes : les autosomes sont normaux, il n'y a qu'un gonosome, un X. Patient B : un garçon de 3 ans, au retard de langage, au visage aux traits caractéristiques et aux muscles mous ; caryotype à 47 chromosomes, avec trois chromosomes 21 et les gonosomes XY. Patient C : un homme de 25 ans, grand, qui consulte avec sa femme parce que le couple n'arrive pas à avoir d'enfant ; caryotype à 47 chromosomes, avec 22 paires d'autosomes complètes et les gonosomes XXY. Situations fictives, résultats simplifiés.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
