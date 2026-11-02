@@ -31,9 +31,13 @@ module UseCases
       class Courses
         include Ports::Catalog::CourseRepositoryPort
         Course = Struct.new(:id, :status)
-        def initialize(status: "published") = @status = status
+        attr_reader :keys
+        def initialize(status: "published")
+          @status = status
+          @keys = { [ "thales", 1, 2, nil ] => "thales", [ "thales", 1, 2, 9 ] => "thales-serie", [ "pythagore", 1, 2, nil ] => "pythagore" }
+        end
         def find_by_slug(slug:) = Course.new(5, @status)
-        def slugs_by_key = { [ "thales", 1, 2, nil ] => "thales", [ "thales", 1, 2, 9 ] => "thales-serie", [ "pythagore", 1, 2, nil ] => "pythagore" }
+        def slugs_by_key = @keys.dup
       end
 
       class Drafts
@@ -55,7 +59,8 @@ module UseCases
       setup do
         @actor = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
         @content = JSON.generate("courses" => [ { "name" => " Thalès ", "level_name" => "3ème", "material_name" => "Maths" } ])
-        @lesson = Lesson.new(import_name: "chargement-automatique-3eme-maths-thales.json", checksum_sha256: Digest::SHA256.hexdigest(@content), content: @content)
+        @lesson = Lesson.new(import_name: "chargement-automatique-3eme-maths-thales.json", checksum_sha256: Digest::SHA256.hexdigest(@content), content: @content,
+                             level_directory: "3eme", subjects: true)
         @calls = []
         @logs = []
         @logger = Object.new.tap do |logger|
@@ -71,8 +76,12 @@ module UseCases
         ->(actor:, dto:) { @calls << [ :start, actor, dto.files.map(&:filename), dto.files.map { it.io.read }, dto.kind ]; result || Shared::Result.success(Struct.new(:id).new(42)) }
       end
 
-      def run_import(status: "completed", error_count: 0, result: nil)
-        ->(report_id:) { @calls << [ :run, report_id ]; result || Shared::Result.success(Struct.new(:status, :error_count).new(status, error_count)) }
+      def run_import(status: "completed", error_count: 0, result: nil, step: :run, &written)
+        lambda do |report_id:|
+          @calls << [ step, report_id ]
+          written&.call
+          result || Shared::Result.success(Struct.new(:status, :error_count).new(status, error_count))
+        end
       end
 
       def cascade(result = Shared::Result.success(UseCases::Catalog::PublishCascade::Summary.new(root: nil, essentials: 0, exercises: 3, skipped: 0)))
@@ -80,9 +89,10 @@ module UseCases
       end
 
       def use_case(lessons: [ @lesson ], reports: Reports.new, users: Users.new(@actor), start: start_import, run: run_import, publish: cascade, policy: Policies::Catalog::ManageContentPolicy.new,
-                   course_status: "published", drafts: Drafts.new)
-        LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses: Courses.new(status: course_status), essentials: drafts, exercises: drafts,
+                   course_status: "published", drafts: Drafts.new, run_lesson: run_import(step: :run_lesson), courses: Courses.new(status: course_status))
+        LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses:, essentials: drafts, exercises: drafts,
                                   taxonomy: Taxonomy.new(Lookup.new(Level.new(1), Level.new(2))), start_import: start, run_import: run,
+                                  run_lesson_import: run_lesson,
                                   publish_cascade: publish, policy:, logger: @logger, clock: Struct.new(:now).new(@now))
       end
 
@@ -97,7 +107,7 @@ module UseCases
 
       test "a lesson of a series is found by its key including the series" do
         content = JSON.generate("courses" => [ { "name" => "Thalès", "level_name" => "3ème", "material_name" => "Maths", "series_name" => "D" } ])
-        lesson = Lesson.new(import_name: "chargement-automatique-tle-maths-thales.json", checksum_sha256: "x", content:)
+        lesson = Lesson.new(import_name: "chargement-automatique-tle-maths-thales.json", checksum_sha256: "x", content:, level_directory: "tle", subjects: true)
 
         assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ])).lessons)
         assert_equal "thales-serie", @calls.last.last
@@ -237,7 +247,8 @@ module UseCases
 
       test "an exception on one lesson (checksum lookup, start, run) is logged with its name and class, and the next lessons are still tried" do
         second_content = JSON.generate("courses" => [ { "name" => "Pythagore", "level_name" => "3ème", "material_name" => "Maths" } ])
-        second = Lesson.new(import_name: "chargement-automatique-3eme-maths-pythagore.json", checksum_sha256: "y", content: second_content)
+        second = Lesson.new(import_name: "chargement-automatique-3eme-maths-pythagore.json", checksum_sha256: "y", content: second_content, level_directory: "3eme",
+                            subjects: true)
         failing = Class.new(Reports) do
           def last_loaded_checksum(kind:, file_name:) = file_name.include?("thales") ? raise("base coupée") : super
         end
@@ -259,6 +270,88 @@ module UseCases
 
         assert_equal({ @lesson.import_name => :unpublished }, call(use_case(publish:)).lessons)
         assert_equal [ [ :error, "[contenus] Thalès : publication refusée (conflict)" ] ], @logs
+      end
+      # --- ADR-0123 : Develop remplace entières les leçons v3 du programme ---
+
+      def programme_lesson(name, folder: "tle-c", subjects: false)
+        content = JSON.generate("courses" => [ { "name" => name, "level_name" => "Tle", "material_name" => "Maths" } ])
+        Lesson.new(import_name: "chargement-automatique-#{folder}-maths-#{name.parameterize}.json", checksum_sha256: Digest::SHA256.hexdigest(content),
+                   content:, level_directory: folder, subjects:)
+      end
+
+      test "Develop replaces whole a present programme lesson without subjects, through the whole-lesson import, then publishes it" do
+        lesson = programme_lesson("Pythagore")
+
+        assert_equal({ lesson.import_name => :replaced }, call(use_case(lessons: [ lesson ])).lessons)
+        assert_equal [ [ :start, @actor, [ lesson.import_name ], [ lesson.content ], "course_tree" ], [ :run_lesson, 42 ], [ :cascade, @actor, :course, "pythagore" ] ], @calls
+      end
+
+      test "Develop creates whole an absent programme lesson and says created" do
+        courses = Courses.new
+        lesson = programme_lesson("Suites numériques", folder: "1ere-d")
+        run_lesson = run_import(step: :run_lesson) { courses.keys[[ "suitesnumeriques", 1, 2, nil ]] = "suites-numeriques" }
+
+        assert_equal({ lesson.import_name => :created }, call(use_case(lessons: [ lesson ], courses:, run_lesson:)).lessons)
+        assert_equal [ :start, :run_lesson, :cascade ], @calls.map(&:first)
+        assert_equal "suites-numeriques", @calls.last.last
+      end
+
+      test "a programme lesson with subjects keeps the exercises-only import on Develop" do
+        lesson = programme_lesson("Thalès", subjects: true)
+
+        assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ])).lessons)
+        assert_equal %i[start run cascade], @calls.map(&:first)
+      end
+
+      test "Staging never loads a lesson without subjects, and Develop ignores one outside the programme folders" do
+        programme = programme_lesson("Pythagore")
+        third = programme_lesson("Pythagore", folder: "3eme")
+
+        assert_equal({ @lesson.import_name => :loaded }, call(use_case(lessons: [ @lesson, programme ]), name: "Staging").lessons)
+        @calls.clear
+        assert_equal({}, call(use_case(lessons: [ third ])).lessons)
+        assert_empty @calls
+      end
+
+      test "an unchanged programme lesson does nothing; one whose publication was interrupted is published again without reimport" do
+        lesson = programme_lesson("Pythagore")
+        reports = Reports.new(loaded: { [ "course_tree", lesson.import_name ] => lesson.checksum_sha256 })
+
+        assert_equal({ lesson.import_name => :unchanged }, call(use_case(lessons: [ lesson ], reports:)).lessons)
+        assert_equal({ lesson.import_name => :republished }, call(use_case(lessons: [ lesson ], reports:, course_status: "draft")).lessons)
+        assert_equal [ [ :cascade, @actor, :course, "pythagore" ] ], @calls
+      end
+
+      test "a whole-lesson import that is refused is not published" do
+        lesson = programme_lesson("Pythagore")
+
+        assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1))).lessons)
+        assert_equal %i[start run_lesson], @calls.map(&:first)
+      end
+      test "a refused import says why in the log: its status and its number of errors" do
+        lesson = programme_lesson("Pythagore")
+
+        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, status: "completed", error_count: 2)))
+
+        assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 2 erreur(s)), voir Imports" ] ], @logs
+      end
+
+      test "a whole-lesson load says replaced or created in the log before the publication" do
+        lesson = programme_lesson("Pythagore")
+
+        call(use_case(lessons: [ lesson ], publish: cascade(Shared::Result.failure(:conflict))))
+
+        assert_equal [ [ :info, "[contenus] Pythagore : leçon remplacée entière (#{lesson.import_name})" ],
+                       [ :error, "[contenus] Pythagore : publication refusée (conflict)" ] ], @logs
+      end
+
+      test "the files not loaded here are counted in one log line per level folder, so a misplaced wave shows" do
+        third = programme_lesson("Pythagore", folder: "3eme")
+        misplaced = programme_lesson("Suites", folder: "tle-e")
+
+        call(use_case(lessons: [ third, misplaced, @lesson ]))
+
+        assert_equal [ :info, "[contenus] fichier(s) v3 non chargé(s) ici : 3eme 1, tle-e 1" ], @logs.first
       end
     end
   end

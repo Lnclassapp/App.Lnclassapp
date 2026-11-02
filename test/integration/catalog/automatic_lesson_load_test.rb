@@ -7,6 +7,9 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
   FILE = Rails.root.join("docs/contenus/lecons-traitees/3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json")
   IMPORT_NAME = "chargement-automatique-3eme-mathematiques-proprietes-de-thales-dans-un-triangle.json"
   LOCK = "SELECT %s(hashtext('contenus:charger'))"
+  # ADR-0123 : une leçon v3 du programme, sans sujet (Tle C).
+  PROGRAMME_FILE = Rails.root.join("docs/contenus/lecons-traitees/tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json")
+  PROGRAMME_IMPORT_NAME = "chargement-automatique-tle-c-mathematiques-barycentre-et-lignes-de-niveaux.json"
 
   setup do
     Rails.application.load_tasks unless Rake::Task.task_defined?("contenus:charger")
@@ -16,7 +19,15 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     @oldest.update_columns(created_at: 10.days.ago)
     create_team_member(team_role: "admin", second_factor: false)
     create_team_member(team_role: "field", second_factor: false).update_columns(created_at: 20.days.ago, anonymized_at: 15.days.ago)
+    # Le dépôt réduit à deux leçons : Thalès (sujets de devoir) et une leçon du programme v3, pour garder les tests courts.
+    @root = Pathname(Dir.mktmpdir)
+    { FILE => "3eme/mathematiques", PROGRAMME_FILE => "tle-c/mathematiques" }.each do |file, folder|
+      @root.join(folder).mkpath
+      FileUtils.cp(file, @root.join(folder))
+    end
   end
+
+  teardown { FileUtils.remove_entry(@root) }
 
   def with_env(**variables)
     saved = variables.keys.to_h { [ it, ENV[it.to_s] ] }
@@ -30,7 +41,11 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     task = Rake::Task["contenus:charger"]
     task.reenable
     output = nil
-    with_env(RAILWAY_ENVIRONMENT_NAME: environment, PR_BASE_ENVIRONMENT: nil, **env) { output, = capture_io { task.invoke } }
+    source = Repositories::Catalog::RepositoryLessonSource.new(root: @root)
+    lessons = Repositories::Catalog::RepositoryLessonSource.instance_method(:lessons)
+    stub_any_instance(Repositories::Catalog::RepositoryLessonSource, :lessons, -> { lessons.bind_call(source) }) do
+      with_env(RAILWAY_ENVIRONMENT_NAME: environment, PR_BASE_ENVIRONMENT: nil, **env) { output, = capture_io { task.invoke } }
+    end
     output
   end
 
@@ -306,5 +321,71 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
   ensure
     # Le verrou de session resterait pris sur la connexion partagée des tests.
     ActiveRecord::Base.connection.select_value(format(LOCK, "pg_advisory_unlock"))
+  end
+
+  # --- ADR-0123 : Develop remplace entières les leçons v3 du programme ---
+
+  def programme_lesson = JSON.parse(PROGRAMME_FILE.read)["courses"].first
+
+  # La leçon v1 du même titre, publiée, avec une fiche, un exercice et la séance d'un élève.
+  def import_v1_programme_lesson
+    level = Orm::Level.find_by!(name: "Tle")
+    course = create_course(level:, material: Orm::Material.find_by!(name: "Mathématiques"), series: Orm::Series.find_by!(name: "C"),
+                           name: programme_lesson["name"], status: "published", author: @oldest, content: "<p>Cours v1</p>")
+    sheet = create_essential(course:, name: "Fiche v1")
+    exercise = create_exercise(essential: sheet)
+    create_exercise_session(student: create_student, exercise:, status: "completed")
+    course
+  end
+
+  test "Develop replaces whole the published v1 lesson of the same title, publishes the v3 one, and says replaced; next time nothing" do
+    seed_referential
+    course = import_v1_programme_lesson
+
+    output = charger("Develop")
+
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : replaced"
+    course.reload
+    assert_equal programme_lesson["notions"].map { it["name"].squish }, course.essentials.order(:position).pluck(:name)
+    assert_equal [ "published" ], course.essentials.distinct.pluck(:status)
+    assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+    assert_equal "published", course.status
+    assert_equal 0, Orm::ExerciseSession.count
+    assert_equal 1, Orm::Course.where(name: programme_lesson["name"]).count
+    assert_includes charger("Develop"), "#{PROGRAMME_IMPORT_NAME} : unchanged"
+  end
+
+  test "Develop creates whole an absent programme lesson and says created" do
+    seed_referential
+
+    assert_includes charger("develop"), "#{PROGRAMME_IMPORT_NAME} : created"
+    assert_equal "published", Orm::Course.find_by!(name: programme_lesson["name"]).status
+  end
+
+  test "Staging and production never touch the v1 lesson of a programme title" do
+    seed_referential
+    course = import_v1_programme_lesson
+    before = [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count ]
+
+    [ "Staging", "production" ].each { assert_not_includes charger(it), PROGRAMME_IMPORT_NAME }
+
+    assert_equal before, [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count ]
+  end
+
+  test "by hand, the published v1 lesson of a programme title is still refused" do
+    seed_referential
+    course = import_v1_programme_lesson
+    report = create_import_report(kind: "course_tree", imported_by: @oldest)
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(PROGRAMME_FILE.read), filename: "b.json") ])
+
+    UseCases::Catalog::RunImport.new(
+      adapter: Catalog::ImportCourseTreeJob.new.send(:adapter), reports: Repositories::Catalog::ImportReportRepository.new,
+      files: Repositories::Catalog::ImportFileStore.new, schema: Repositories::Catalog::ImportSchemaValidator.new,
+      users: Repositories::Identity::UserRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+      transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+    ).call(report_id: report.id)
+
+    assert_equal [ "lesson_already_published" ], report.reload.import_errors.map { it["code"] }
+    assert_equal [ "Fiche v1" ], course.essentials.pluck(:name)
   end
 end

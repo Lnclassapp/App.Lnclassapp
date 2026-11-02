@@ -6,6 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
+| 2026-11-02 | P4 | 1ère (A1, A2) | Physique-Chimie | 10 (20 fichiers) | #438 |
 | 2026-10-31 | T1 | Tle (C, D) | Mathématiques | 14 leçons (20 fichiers) | #420 |
 | 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
 | 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
@@ -28,6 +29,16 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P4 1ère A | 1 | 1/R = 1/R1 + 1/R2 (dérivation), loi des nœuds, additivité des tensions en série : au programme A ? Code des couleurs et résistivité absents. |
+| P4 1ère A | 2 | Substitution du méthane par le dichlore, 5 isomères de C6H14, pas de mole : au programme A ? |
+| P4 1ère A | 3 | Mole, n = m/M, Vm = 24 L/mol, M(Br) = 80, M(CO2) = 44, polymérisation, angles de 120° : acquis et programme A ? Hydrogénation en présence de nickel (chauffage non mentionné). |
+| P4 1ère A | 4 | Court-circuit I = E/r, pente −r et écriture U = b + aI (formalisme) ; valeurs usuelles (piles 1,5 V et 4,5 V) ; association de piles absente. |
+| P4 1ère A | 5 | Températures d'ébullition (butane −0,5 °C ; éthane −89, propane −42, pentane 36, hexane 69, octane 126, nonane 151, décane 174, hexadécane 287 °C) ; plages de carbones des fractions (ordres de grandeur) ; craquage avec équation ; pollutions ; décor Vridi. |
+| P4 1ère A | 6 | Effet Joule (P = RI², fusible) au programme A ? Tarifs fictifs en F CFA ; 220 V ; lampe de poche sous 12 V peu réaliste. |
+| P4 1ère A | 7 | Oscilloscope, valeur efficace (Um = Ueff × 1,41), 220 V / 50 Hz, groupe électrogène à 3 000 tr/min, une seule paire de pôles ; sinusoïdes approchées par segments. |
+| P4 1ère A | 8 | Demi-équation 2 H3O+ + 2 e− = H2 + 2 H2O au programme A ? Classement Al > Zn > Fe > H2 > Cu > Ag, couleurs des ions, Pb2+/Pb absent du classement. |
+| P4 1ère A | 9 | W = F × d × cos α avec cosinus donnés (0°, 60°, 90°, 180°), g = 10 N/kg, P = F × v limitée à une force dans le sens du mouvement. |
+| P4 1ère A | 10 | Théorème de l'énergie cinétique, distance de freinage, chute et plan incliné repris de C/D : au programme A ? Aucun exercice à force oblique. |
 | P2 | 1ère A1/A2 — Équations et inéquations | Second degré (discriminant, signe du trinôme) au programme de 1ère A ? Somme/produit des racines, bicarrées, quotients, valeur absolue non traités. |
 | P2 | 1ère A1/A2 — Dénombrement | Arrangements, combinaisons, $C_n^p$ et $0!=1$ au programme de 1ère A ? Niveau de $C_{12}^3$ et du complémentaire. |
 | P2 | 1ère A1/A2 — Généralités sur les fonctions | Périodicité absente ; composée et domaine d'un quotient ; sens de variation par $f(b)-f(a)$ plutôt que par tableau. |
