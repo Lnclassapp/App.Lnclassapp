@@ -710,6 +710,23 @@ Au total (par série) : 43 notions, 568 questions notées, 129 questions « Je m
 
 **Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
 
+### 1ère A1, A2, C et D, Philosophie au format 3 (chantier `contenus-1ere-philosophie`)
+
+Les 8 leçons de Philosophie de la progression DPFC 2026-2027 de 1ère (identique en A1, A2, C et D), rédigées le 2026-11-02 au format `lnclass.course-tree` v3, vague P7 du programme `contenus-v3-tous-niveaux`. Chaque leçon est écrite une fois puis déclinée en un fichier par série : seul `series_name` change. **32 fichiers** dans `1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, qui remplacent les 12 fichiers v1 du même intitulé (leçons 1 à 3 : voir les tableaux « 1ère » plus bas, sans leurs lignes de Philosophie). Aucune figure. Relecture indépendante par un sous-agent Opus (attributions, dates, citations), puis corrections. Les leçons restent en brouillon.
+
+| Rang | Fichier (A1, A2, C, D) | Cours | Notions | Exercices | Questions | Corrigées auto. |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 5 | 9 | 56 | 89 % |
+| 2 | `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 5 | 9 | 53 | 87 % |
+| 3 | `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 4 | 8 | 50 | 78 % |
+| 4 | `philosophie/l-essai-de-problematisation.json` | L'essai de problématisation | 5 | 9 | 55 | 80 % |
+| 5 | `philosophie/la-periode-antique.json` | La période antique | 5 | 9 | 55 | 78 % |
+| 6 | `philosophie/le-moyen-age-et-la-renaissance.json` | Le Moyen-Age et la renaissance | 5 | 9 | 56 | 89 % |
+| 7 | `philosophie/la-periode-moderne.json` | La période moderne | 5 | 9 | 54 | 89 % |
+| 8 | `philosophie/la-periode-contemporaine.json` | La période contemporaine | 5 | 9 | 57 | 88 % |
+
+À faire valider par un enseignant de philosophie : voir le journal du chantier (`docs/chantiers/contenus-1ere-philosophie/journal.md`).
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop (`db/seeds/catalog.rb`), la 1ère a les séries A1, A2, C et D : les leçons communes aux deux séries A sont écrites une fois, puis déclinées en A1 et A2.
@@ -729,9 +746,6 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 1 | 5 | 9 | 45 |
 | `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 2 | 4 | 8 | 48 |
 | `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 3 | 7 | 45 |
-| `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
-| `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
-| `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
 
 #### 1ère C (12, hors Français)
 
@@ -746,9 +760,6 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/le-role-et-la-structure-des-gonades-des-mammiferes.json` | Le rôle et la structure des gonades des mammifères | 1 | 4 | 12 | 68 |
 | `svt/la-division-meiotique.json` | La division méiotique | 2 | 4 | 12 | 70 |
 | `svt/la-gametogenese-chez-les-mammiferes.json` | La gamétogénèse chez les mammifères | 3 | 4 | 12 | 64 |
-| `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
-| `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
-| `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
 
 #### 1ère D (12, hors Français)
 
@@ -763,9 +774,6 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/les-fonctions-des-gonades.json` | Les fonctions des gonades | 1 | 3 | 9 | 51 |
 | `svt/la-division-meiotique.json` | La division méiotique | 2 | 4 | 12 | 70 |
 | `svt/la-gametogenese.json` | La gamétogenèse | 3 | 4 | 12 | 64 |
-| `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
-| `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
-| `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
 
 #### 1ère (commune à toutes les séries) (3)
 
