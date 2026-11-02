@@ -16,8 +16,12 @@
 # Le trimestre ne commence jamais avant la rentrée (1er septembre) : il est plus court que 12 semaines jusqu'au 24 novembre,
 # et l'empreinte complète ne vaut d'une date à l'autre qu'à partir de là (l'empreinte réduite, de 3 semaines, dès le 22 septembre).
 # ENV["STANDARD_ACTIVITY_SIZE"] = "reduite" : 3 semaines, 2 classes par établissement, 3 élèves par classe (tests).
-unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active?
-  raise "db/seeds/standard/activite.rb est réservé au développement, au test, aux environnements de PR et à Demo"
+# Develop (Lot I) aussi : l'activité n'y touche que les comptes du jeu (élèves inscrits par le jeu, enseignants arrivés par lui),
+# jamais un vrai testeur qui aurait rejoint une classe ou un établissement du jeu.
+develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).whole_lessons? &&
+          !DemoEnvironment.active?
+unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active? || develop
+  raise "db/seeds/standard/activite.rb est réservé au développement, au test, aux environnements de PR, à Demo et à Develop"
 end
 
 require "digest"
@@ -75,8 +79,11 @@ pool_for = lambda do |classroom|
                .includes(course: :material)
                .order("materials.slug", "courses.name", Arel.sql("essentials.position NULLS LAST"), "exercises.position", "exercises.id").to_a
 end
+# Les comptes du jeu seuls : élèves inscrits par lui (joined_via « standard »), enseignants arrivés par lui.
+jeu_teachers = Orm::TeacherProfile.where(joined_via: "standard").select(:user_id)
+jeu_links = Orm::ClassroomStudent.where(joined_via: "standard")
 teacher_of = lambda do |school, material|
-  Orm::TeacherSchoolMaterial.where(school_id: school.id, material_id: material.id).joins("JOIN users ON users.id = teacher_school_materials.teacher_id")
+  Orm::TeacherSchoolMaterial.where(school_id: school.id, material_id: material.id, teacher_id: jeu_teachers).joins("JOIN users ON users.id = teacher_school_materials.teacher_id")
                             .order("users.contact").pick(:teacher_id)
 end
 
@@ -97,7 +104,7 @@ set.schools.each do |school_spec|
     next if sampled && levels_done.include?(spec.level) # échantillon : une seule classe par niveau
 
     classroom = classroom_for.(spec) or next # classe absente de la base (manifeste ou base d'un autre jeu)
-    roster = Orm::ClassroomStudent.where(classroom_id: classroom.id).joins(:student).order("users.contact").includes(:student)
+    roster = jeu_links.where(classroom_id: classroom.id).joins(:student).order("users.contact").includes(:student)
                                   .first(shape.fetch(sampled ? :grand_students : :students)).map(&:student)
     pool = pool_for.(classroom).group_by { it.course.material }.select { |material, _| teacher_of.(school, material) }
     # Sans élève (la classe vide), ou sans exercice publié d'une matière que l'établissement enseigne (le v3 manque à ce
@@ -204,12 +211,13 @@ rentree_at = rentree.in_time_zone + 8.hours
 school_ids = schools.values.map(&:id)
 school_classrooms = Orm::Classroom.where(school_id: school_ids).select(:id)
 recent = school_ids.flat_map do |school_id|
-  Orm::ClassroomStudent.joins(:classroom).where(classrooms: { school_id: }).where.not(student_id: roster_ids).order(id: :desc)
+  jeu_links.joins(:classroom).where(classrooms: { school_id: }).where.not(student_id: roster_ids).order(id: :desc)
                        .limit(2 + (school_id % 2)).pluck(:id).each_with_index.map { |id, rank| [ id, at.((7 * weeks) - 1 - (2 * rank), 10 * 60) ] }
 end
-arrivals = [ [ Orm::TeacherSchool.where(school_id: school_ids), "created_at" ], [ Orm::TeacherSchoolMaterial.where(school_id: school_ids), "created_at" ],
-             [ Orm::TeacherClassroom.where(classroom_id: school_classrooms), "created_at" ],
-             [ Orm::ClassroomStudent.where(classroom_id: school_classrooms).where.not(id: recent.map(&:first)), "joined_at" ] ]
+arrivals = [ [ Orm::TeacherSchool.where(school_id: school_ids, teacher_id: jeu_teachers), "created_at" ],
+             [ Orm::TeacherSchoolMaterial.where(school_id: school_ids, teacher_id: jeu_teachers), "created_at" ],
+             [ Orm::TeacherClassroom.where(classroom_id: school_classrooms, teacher_id: jeu_teachers), "created_at" ],
+             [ jeu_links.where(classroom_id: school_classrooms).where.not(id: recent.map(&:first)), "joined_at" ] ]
 arrivals.each do |rows, column|
   rows.update_all([ "#{column} = ?::timestamp - ((2 + (id % 4)) * interval '1 day')", rentree_at ])
 end

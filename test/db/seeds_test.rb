@@ -109,7 +109,7 @@ class SeedsTest < ActiveSupport::TestCase
 
   test "development and test do not load lessons, and a PR environment is left out of the contenus seed" do
     assert_no_match "[contenus]", run_seeds
-    assert_match(/"contenus" => %w\[production\]/, Rails.root.join("db/seeds.rb").read)
+    assert_match(/"contenus" => %w\[production develop\]/, Rails.root.join("db/seeds.rb").read)
   end
 
   test "the development and test files refuse to run in production" do

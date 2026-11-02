@@ -29,9 +29,10 @@ class StandardSeedTest < ActiveSupport::TestCase
   test "two loads create no duplicate" do
     run_seed
     first = counts
-    run_seed
+    output = run_seed.first
 
     assert_equal first, counts
+    assert_no_match "déjà pris", output
     assert_equal 3, Orm::School.where(name: @set.schools.map { @identity.school_name(it.key) }).count
     assert_equal @set.classrooms.size, Orm::Classroom.where(school_id: Orm::School.where(name: @set.schools.map { @identity.school_name(it.key) })).count
   end
@@ -72,6 +73,31 @@ class StandardSeedTest < ActiveSupport::TestCase
     admin = Orm::User.find_by!(contact: @identity.contact(role: :admin, index: 0))
     assert admin.authenticate_pin("9753")
     assert_not admin.authenticate_pin("2468")
+  end
+
+  # Un compte déjà là sur un contact du jeu, mais qui n'est pas celui du jeu (autre rôle ou autre nom), n'est jamais modifié :
+  # ni PIN, ni rôle, ni rattachement à une classe ou un établissement du jeu ; il est signalé dans le journal du semis.
+  test "an existing account on a contact of the set is left untouched and reported" do
+    stranger = Orm::User.create!(contact: @identity.contact(role: :student, index: 10), role: "teacher", first_name: "Réel",
+                                 last_name: "Testeur", gender: "female", pin: "1357")
+    output = run_seed.first
+
+    stranger.reload
+    assert_equal "teacher", stranger.role
+    assert stranger.authenticate_pin("1357")
+    assert_not Orm::ClassroomStudent.exists?(student_id: stranger.id)
+    assert_not Orm::TeacherSchool.exists?(teacher_id: stranger.id)
+    assert_match "#{stranger.contact[0, 2]}******#{stranger.contact[-2..]} déjà pris par un autre compte", output
+    assert_no_match stranger.contact, output
+  end
+
+  test "another account on the contact of the admin of the set never publishes in its place" do
+    Orm::User.create!(contact: @identity.contact(role: :admin, index: 0), role: "team", team_role: "admin", first_name: "Autre",
+                      last_name: "Admin", gender: "female", pin: "1357")
+    error = assert_raises(RuntimeError) { run_seed }
+
+    assert_match "administrateur du jeu est pris par un autre compte", error.message
+    assert_equal 0, Orm::Course.where(status: "published").count
   end
 
   test "a broken manifest stops the load before anything is created" do
