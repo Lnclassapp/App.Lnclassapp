@@ -730,7 +730,7 @@
                     "correct": false
                   },
                   {
-                    "content": "$\\frac{2}{4}$ pour les filles seulement",
+                    "content": "$\\frac{3}{4}$",
                     "correct": false
                   },
                   {
@@ -1001,9 +1001,9 @@
                 ]
               },
               {
-                "content": "Pour une maladie récessive liée à X, I-1 (homme) est atteint, I-2 (femme, $X^{H}//X^{H}$) n'est pas atteinte. Leur fille II-1 n'est pas atteinte ; elle a avec un homme non atteint un fils III-1 atteint. De qui III-1 a-t-il reçu son X porteur de l'allèle de la maladie ?",
+                "content": "Pour une maladie récessive liée à X ($X^{H}$ : allèle normal, $X^{h}$ : allèle de la maladie), I-1 (homme) est atteint, I-2 (femme, $X^{H}//X^{H}$) n'est pas atteinte. Leur fille II-1 n'est pas atteinte ; elle a avec un homme non atteint un fils III-1 atteint. De qui III-1 a-t-il reçu son X porteur de l'allèle de la maladie ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Lire l'arbre : I-1 est $X^{h}//Y$ ; I-2 est $X^{H}//X^{H}$. Étape 3 — Tester l'hypothèse « liée à X » : II-1 reçoit $X^{h}$ de son père et $X^{H}$ de sa mère, elle est $X^{H}//X^{h}$, porteuse. Son fils III-1 reçoit le Y de son père et son X de sa mère : s'il est atteint, c'est qu'il a reçu $X^{h}$ de II-1. Étape 4 — Conclure : l'hypothèse est compatible. Le père de III-1 n'est pas atteint et donne son Y.",
+                "explanation": "Étape 1 — Lire l'arbre : I-1 est un homme atteint, II-1 une fille non atteinte, III-1 un garçon atteint. Étape 3 — Tester l'hypothèse « liée à X » : I-1 est $X^{h}//Y$ et I-2 est $X^{H}//X^{H}$ ; II-1 reçoit $X^{h}$ de son père et $X^{H}$ de sa mère, elle est $X^{H}//X^{h}$, porteuse. Son fils III-1 reçoit le Y de son père et son X de sa mère : s'il est atteint, c'est qu'il a reçu $X^{h}$ de II-1. Étape 4 — Conclure : l'hypothèse est compatible. Le père de III-1 n'est pas atteint et donne son Y.",
                 "answers": [
                   {
                     "content": "De sa mère II-1, qui l'avait reçu de son père I-1",
@@ -1300,7 +1300,7 @@
             {
               "content": "Quel est le génotype de Mariam, la mère, qui a une vision normale ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 : Mariam est une femme de phénotype [vision normale]. Elle peut être $X^{D}//X^{D}$ ou $X^{D}//X^{d}$. Étape 2 : Yao est $X^{d}//Y$ et a reçu son X de sa mère : Mariam a donc un $X^{d}$. Étape 4 : comme elle a une vision normale, elle est $X^{D}//X^{d}$, porteuse. Elle ne peut pas être $X^{d}//X^{d}$, sinon elle serait daltonienne.",
+              "explanation": "Étape 1 : Mariam est une femme de phénotype [vision normale]. Étape 2 : elle est $X//X$. Étape 3 : elle a au moins un $X^{D}$ ; or Yao est $X^{d}//Y$ et a reçu son X de sa mère : Mariam a donc aussi un $X^{d}$. Étape 4 : elle est $X^{D}//X^{d}$, porteuse. Elle ne peut pas être $X^{d}//X^{d}$, sinon elle serait daltonienne.",
               "answers": [
                 {
                   "content": "$X^{D}//X^{d}$",
@@ -1321,7 +1321,7 @@
               ]
             },
             {
-              "content": "Mariam ($X^{D}//X^{d}$) et Salif ($X^{D}//Y$) attendent un quatrième enfant. Quelle est la probabilité que ce soit une fille daltonienne ?",
+              "content": "Mariam ($X^{D}//X^{d}$) et Salif ($X^{D}//Y$) attendent un troisième enfant. Quelle est la probabilité que ce soit une fille daltonienne ?",
               "question_type": "single_choice",
               "explanation": "Méthode complète. Étape 1 : mère $X^{D}//X^{d}$, père $X^{D}//Y$. Étape 2 : la mère donne $X^{D}$ ou $X^{d}$ ; le père donne $X^{D}$ ou $Y$. Étape 3 : échiquier $X^{D}//X^{D}$, $X^{D}//Y$, $X^{D}//X^{d}$, $X^{d}//Y$. Étape 4 : les deux cases de filles sont $X^{D}//X^{D}$ et $X^{D}//X^{d}$ : aucune n'est daltonienne, la probabilité est 0. Chaque fille a reçu le $X^{D}$ de son père.",
               "answers": [
@@ -1344,7 +1344,7 @@
               ]
             },
             {
-              "content": "Dans le même couple, quelle est la probabilité que le quatrième enfant soit un garçon daltonien ?",
+              "content": "Mariam ($X^{D}//X^{d}$) et Salif ($X^{D}//Y$) attendent un troisième enfant. Quelle est la probabilité que ce soit un garçon daltonien ?",
               "question_type": "single_choice",
               "explanation": "L'échiquier du couple donne 4 cases équiprobables : $X^{D}//X^{D}$, $X^{D}//Y$, $X^{D}//X^{d}$, $X^{d}//Y$. Une seule case est un garçon daltonien $X^{d}//Y$ : la probabilité est $\\frac{1}{4}$ pour un enfant quelconque. Parmi les seuls garçons, ce serait $\\frac{1}{2}$ : il faut bien lire la question.",
               "answers": [
@@ -1385,14 +1385,14 @@
         },
         {
           "title": "Une maladie du sang dans une famille : l'hémophilie",
-          "statement": "L'hémophilie est une maladie héréditaire dans laquelle le sang coagule mal. Elle est due à un allèle récessif $X^{h}$ porté par le chromosome X ($X^{H}$ : allèle normal). Famille fictive d'éleveurs de volailles d'un village. Génération I : I-1 (homme) et I-2 (femme) ne sont pas atteints. Génération II : leur fils II-1 est hémophile ; leur fille II-2 n'est pas atteinte ; elle épouse II-3, un homme non atteint. Génération III : leur fils III-1 est hémophile ; leur fille III-2 n'est pas atteinte.",
+          "statement": "L'hémophilie est une maladie héréditaire dans laquelle le sang coagule mal. Elle est due à un allèle récessif $X^{h}$ porté par le chromosome X ($X^{H}$ : allèle normal). Famille fictive d'éleveurs de volailles d'un village. Génération I : I-1 (homme) et I-2 (femme) ne sont pas atteints. Génération II : ils ont trois enfants : II-1, un fils hémophile ; II-2, un fils non atteint ; II-3, une fille non atteinte. II-3 épouse II-4, un homme non atteint. Génération III : II-3 et II-4 ont une fille III-1 non atteinte, un fils III-2 hémophile et un fils III-3 non atteint.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
             {
               "content": "Quel est le génotype de II-1, le fils hémophile ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 : II-1 est un garçon, donc $X//Y$. Étape 2 : il est hémophile, et son seul X porte l'allèle récessif, qui s'exprime sans second allèle pour le cacher. Étape 3 : son génotype est $X^{h}//Y$. Les autres propositions ne conviennent pas : $X^{H}//Y$ est celui d'un garçon non atteint, et les génotypes à deux X sont ceux de filles.",
+              "explanation": "Étape 1 : II-1 est un garçon hémophile. Étape 2 : il est $X//Y$. Étape 3 : son seul X porte l'allèle récessif $h$, qui s'exprime sans second allèle pour le cacher. Étape 4 : son génotype est $X^{h}//Y$. $X^{H}//Y$ est celui d'un garçon non atteint, et les génotypes à deux X sont ceux de filles.",
               "answers": [
                 {
                   "content": "$X^{h}//Y$",
@@ -1440,9 +1440,9 @@
               ]
             },
             {
-              "content": "Quel est le génotype de II-2, fille non atteinte, sachant que son fils III-1 est hémophile et que son mari II-3 n'est pas atteint ?",
+              "content": "Quel est le génotype de II-3, fille non atteinte, sachant que son fils III-2 est hémophile et que son mari II-4 n'est pas atteint ?",
               "question_type": "single_choice",
-              "explanation": "III-1 est $X^{h}//Y$ : il a reçu son Y de son père II-3 et son X de sa mère II-2. II-2 a donc un $X^{h}$. Comme elle n'est pas atteinte, elle a aussi un $X^{H}$ : elle est $X^{H}//X^{h}$, porteuse. Elle ne peut pas être $X^{h}//X^{h}$, sinon elle serait hémophile.",
+              "explanation": "III-2 est $X^{h}//Y$ : il a reçu son Y de son père II-4 et son X de sa mère II-3. II-3 a donc un $X^{h}$. Comme elle n'est pas atteinte, elle a aussi un $X^{H}$ : elle est $X^{H}//X^{h}$, porteuse. Elle ne peut pas être $X^{h}//X^{h}$, sinon elle serait hémophile.",
               "answers": [
                 {
                   "content": "$X^{H}//X^{h}$",
@@ -1463,7 +1463,7 @@
               ]
             },
             {
-              "content": "II-2 ($X^{H}//X^{h}$) et II-3 ($X^{H}//Y$) attendent un enfant. Quelle est la probabilité que ce soit un garçon hémophile ?",
+              "content": "II-3 ($X^{H}//X^{h}$) et II-4 ($X^{H}//Y$) attendent un autre enfant. Quelle est la probabilité que ce soit un garçon hémophile ?",
               "question_type": "single_choice",
               "explanation": "Méthode complète. Étape 1 : mère $X^{H}//X^{h}$, père $X^{H}//Y$. Étape 2 : la mère donne $X^{H}$ ou $X^{h}$, le père $X^{H}$ ou $Y$. Étape 3 : échiquier $X^{H}//X^{H}$, $X^{H}//Y$, $X^{H}//X^{h}$, $X^{h}//Y$, chacune avec la probabilité $\\frac{1}{4}$. Étape 4 : une seule case est $X^{h}//Y$ : la probabilité est $\\frac{1}{4}$.",
               "answers": [
@@ -1486,9 +1486,9 @@
               ]
             },
             {
-              "content": "Toutes les filles de II-2 et II-3 sont porteuses de l'allèle $h$.",
+              "content": "Toutes les filles de II-3 ($X^{H}//X^{h}$) et II-4 ($X^{H}//Y$) sont porteuses de l'allèle $h$.",
               "question_type": "true_false",
-              "explanation": "Les filles reçoivent $X^{H}$ de leur père II-3. De leur mère, elles reçoivent $X^{H}$ ou $X^{h}$ avec la probabilité $\\frac{1}{2}$ chacun. Elles sont donc $X^{H}//X^{H}$ ou $X^{H}//X^{h}$ : seule la moitié d'entre elles environ est porteuse. L'affirmation est fausse.",
+              "explanation": "Les filles reçoivent $X^{H}$ de leur père II-4. De leur mère, elles reçoivent $X^{H}$ ou $X^{h}$ avec la probabilité $\\frac{1}{2}$ chacun. Elles sont donc $X^{H}//X^{H}$ ou $X^{H}//X^{h}$ : seule la moitié d'entre elles environ est porteuse. L'affirmation est fausse.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1501,7 +1501,7 @@
               ]
             },
             {
-              "content": "Construis l'échiquier de croisement du couple II-2 ($X^{H}//X^{h}$) et II-3 ($X^{H}//Y$) et donne la probabilité de chaque type d'enfant.",
+              "content": "Construis l'échiquier de croisement du couple II-3 ($X^{H}//X^{h}$) et II-4 ($X^{H}//Y$) et donne la probabilité de chaque type d'enfant.",
               "question_type": "written",
               "points": 4,
               "criteria": [
