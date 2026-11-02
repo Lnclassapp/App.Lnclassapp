@@ -4,12 +4,11 @@
 # runs in production, receives it too (ADR-0108).
 raise "db/seeds/catalog.rb est réservé au développement, au test et aux environnements de PR" unless Rails.env.local? || PrEnvironment.active?
 
-levels = [ [ "6ème", "first" ], [ "5ème", "first" ], [ "4ème", "first" ], [ "3ème", "first" ],
-           [ "2nde", "second" ], [ "1ère", "second" ], [ "Tle", "second" ] ]
-series_by_level = { "2nde" => %w[A C], "1ère" => %w[A1 A2 C D], "Tle" => %w[A1 A2 C D] }
-materials = [ [ "Mathématiques", "Maths", "science" ], [ "Physique-Chimie", "PC", "science" ], [ "SVT", "SVT", "science" ],
-              [ "Français", "Français", "literature" ],
-              [ "Histoire-Géographie", "HG", "literature" ], [ "Philosophie", "Philo", "literature" ] ]
+# The lists are Entities::Catalog::BaseReferential, which Develop also completes itself from (ADR-0123 §8).
+base = Entities::Catalog::BaseReferential
+levels = base::LEVELS.map { [ it.name, it.cycle ] }
+series_by_level = base::SERIES_BY_LEVEL
+materials = base::MATERIALS.map { [ it.name, it.shortname, it.category ] }
 
 # The slug is the frozen parameterized name (ADR-0029): « 1ère » → « 1ere ».
 by_slug = ->(model, name, **attributes) { model.find_by(slug: name.parameterize) || model.create!(name:, **attributes) }

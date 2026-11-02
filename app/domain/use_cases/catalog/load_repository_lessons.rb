@@ -23,9 +23,9 @@ module UseCases
       # du même nom (fiches et exercices en brouillon d'une leçon) ; logger : le journal du déploiement ;
       # taxonomy : TaxonomyRepository (lookup) ; start_import, run_import, publish_cascade : les use cases du même nom, cablés par l'appelant
       # (run_import avec l'adaptateur ImportCourseTree en mode replace: :exercises, run_lesson_import en mode replace: :lesson) ;
-      # policy : Policies::Catalog::ManageContentPolicy.
+      # policy : Policies::Catalog::ManageContentPolicy ; referential : ReferentialCompleterPort (Develop seul, ADR-0123 §8).
       def initialize(source:, reports:, users:, courses:, essentials:, exercises:, taxonomy:, start_import:, run_import:, run_lesson_import:,
-                     publish_cascade:, policy:, logger:, clock:)
+                     publish_cascade:, policy:, logger:, clock:, referential:)
         @source = source
         @reports = reports
         @users = users
@@ -36,6 +36,7 @@ module UseCases
         @start_import = start_import
         @run_import = run_import
         @run_lesson_import = run_lesson_import
+        @referential = referential
         @publish_cascade = publish_cascade
         @policy = policy
         @logger = logger
@@ -55,6 +56,7 @@ module UseCases
         return allowed if allowed.failure?
         return reject_unknown(stage, actor) if stage.unknown?
 
+        complete_referential if stage.whole_lessons?
         chosen, ignored = @source.lessons.map { [ it, stage.mode_for(level_directory: it.level_directory, subjects: it.subjects) ] }.partition(&:last)
         log_ignored(ignored.map(&:first))
         done(:done, chosen.to_h { |lesson, mode| [ lesson.import_name, load_safely(lesson, mode, actor) ] })
@@ -69,6 +71,18 @@ module UseCases
         @reports.record_rejection(kind: KIND, checksum_sha256: Digest::SHA256.hexdigest("unknown_environment:#{stage.name}"),
                                   imported_by_id: actor.user_id, at: @clock.now, errors: [ error ])
         done(:unknown_environment)
+      end
+
+      # ADR-0123 §8 : Develop seul crée, avant le chargement, ce qui manque du référentiel de base ; journalisé. Un échec ne bloque rien.
+      def complete_referential
+        created = @referential.complete
+        parts = { levels: "niveaux", series: "séries", pairs: "couples", materials: "matières" }
+                .filter_map { |key, label| "#{label} #{created.fetch(key).join(', ')}" if created.fetch(key).any? }
+        @logger.info("[contenus] référentiel complété : #{parts.join(' ; ')}") if parts.any?
+        conflicts = created.fetch(:conflicts)
+        @logger.warn("[contenus] référentiel : non créé (déjà pris) : #{conflicts.join(', ')}") if conflicts.any?
+      rescue StandardError => error
+        @logger.error("[contenus] référentiel non complété (#{error.class} : #{error.message})")
       end
 
       # Une ligne par démarrage : les fichiers v3 lus mais pas chargés ici, comptés par dossier de niveau (une vague mal rangée se voit).

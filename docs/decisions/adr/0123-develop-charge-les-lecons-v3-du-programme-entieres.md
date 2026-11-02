@@ -70,3 +70,17 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 - `test/domain/entities/catalog/automatic_load_stage_test.rb` : Develop seul remplace entier ; Staging, production, PR, nom inconnu jamais.
 - `test/domain/use_cases/catalog/load_repository_lessons_test.rb`, `test/integration/catalog/automatic_lesson_load_test.rb` : leçon v1 publiée remplacée, publiée, `replaced` puis `unchanged` ; absente `created` ; Staging et production n'y touchent pas ; à la main, `lesson_already_published`.
 - Après déploiement de Develop : le journal du pré-déploiement liste `created` / `replaced` par fichier ; l'écran Imports montre une ligne par fichier.
+
+## 8. Amendement du 2026-11-02 : Develop complète son référentiel avant le chargement
+
+**Contexte.** Le premier déploiement a refusé chaque leçon du programme : le référentiel de Develop, créé à l'écran, n'avait ni 1ère ni les séries A1/A2 (journal de #443 : `unknown_level … (value: 1ère)`, `unknown_series … (value: A1)`). Décision du porteur (2026-11-02) : Develop doit recevoir les leçons.
+
+**Décision.** Sur Develop seul (`AutomaticLoadStage#whole_lessons?`, la garde du §4.1 : jamais Staging, production ni PR), `contenus:charger` crée, avant le chargement, ce qui manque du référentiel de base `Entities::Catalog::BaseReferential` (celui des semis de développement, ADR-0034, que `db/seeds/catalog.rb` lit désormais) : niveaux 6ème à Tle, séries 2nde A C, 1ère et Tle A1 A2 C D, leurs couples, les 6 matières.
+- Idempotent par slug ; aucun enregistrement existant n'est modifié ni supprimé (position et cycle d'un niveau existant intacts).
+- Un niveau créé prend la position du référentiel, ou la première libre après la plus haute si un autre niveau la tient ; une matière, son rang du programme (ADR-0090).
+- Un nom ou un nom court déjà pris par un autre enregistrement n'est pas créé : le journal le dit (« non créé, nom déjà pris »), les couples qui en dépendent sont sautés.
+- Le barème des classes n'est pas touché.
+- Le journal du pré-déploiement liste ce qui a été créé ; un échec est journalisé et le chargement continue.
+
+**Conséquence.** Develop porte désormais les niveaux, séries et matières du référentiel de base, même si l'équipe ne les avait pas créés ; les renommer à l'écran reste possible (le slug est figé), un niveau, une série, un couple ou une matière supprimé revient au déploiement suivant (pas de mémoire des suppressions). Un niveau du même sens sous un autre nom (« Terminale ») n'empêche pas la création de « Tle » : les deux coexistent, le journal dit la position décalée.
+

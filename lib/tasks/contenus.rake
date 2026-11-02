@@ -41,7 +41,7 @@ namespace :contenus do
             publish_essential: UseCases::Catalog::PublishEssential.new(essentials:, **dependencies),
             publish_exercise: UseCases::Assessment::PublishExercise.new(exercises:, **dependencies)
           ),
-          policy: dependencies[:policy], logger: Rails.logger, clock: Time.zone
+          policy: dependencies[:policy], logger: Rails.logger, clock: Time.zone, referential: Repositories::Catalog::ReferentialCompleter.new
         ).call(environment_name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?)
         if result.failure?
           say.call("chargement refusé (#{result.code}) : rien n'est chargé.")
