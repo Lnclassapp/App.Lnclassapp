@@ -396,7 +396,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     logged = []
 
     # Le complément du référentiel (ADR-0123 §8) est neutralisé : on regarde le journal d'un refus.
-    nothing = -> { { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [] } }
+    nothing = -> { { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [], interruptions: [] } }
     output = stub_any_instance(Repositories::Catalog::ReferentialCompleter, :complete, nothing) do
       stub_method(Rails.logger, :warn, ->(message) { logged << message }) { charger("Develop") }
     end

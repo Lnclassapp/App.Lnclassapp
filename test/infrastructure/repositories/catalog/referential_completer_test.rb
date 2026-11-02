@@ -67,11 +67,32 @@ module Repositories
         assert_not(created.fetch(:pairs).any? { it.start_with?("Tle") || it.end_with?(" C") })
         assert_includes created.fetch(:pairs), "1ère A1"
       end
-      test "an interruption keeps what was already created and names itself among the conflicts" do
-        created = stub_any_instance(Orm::Material.singleton_class, :exists?, ->(*) { raise ActiveRecord::ConnectionNotEstablished }) { complete }
+      test "an interrupted step keeps what was already created, says why, and the next steps are still tried" do
+        created = stub_any_instance(Orm::Material.singleton_class, :exists?, ->(*) { raise ActiveRecord::ConnectionNotEstablished, "coupée" }) { complete }
 
         assert_equal 7, created.fetch(:levels).size
-        assert_equal [ "interrompu (ActiveRecord::ConnectionNotEstablished)" ], created.fetch(:conflicts)
+        assert_equal [ "matières (ActiveRecord::ConnectionNotEstablished : coupée)" ], created.fetch(:interruptions)
+        assert_empty created.fetch(:conflicts)
+        assert_equal 41, created.fetch(:drenas).size
+      end
+
+      test "a barème that fails or cannot be loaded writes no entry, says so, and the DRENA are still created" do
+        require Rails.root.join("db/migrate/20260928140100_fill_classroom_plan_entries").to_s
+        [ [ PG::ConnectionBad, "coupée" ], [ LoadError, "migration absente" ] ].each do |error, message|
+          Orm::Drena.delete_all
+          created = stub_any_instance(FillClassroomPlanEntries.singleton_class, :fill, ->(*) { raise error, message }) { complete }
+
+          assert_equal [ [], 41, [ "barème (#{error} : #{message})" ] ],
+                       [ created.fetch(:plan_entries), created.fetch(:drenas).size, created.fetch(:interruptions) ]
+          assert_equal 0, Orm::ClassroomPlanEntry.count
+        end
+      end
+
+      test "an unreadable DRENA list is an interruption, not an error" do
+        created = ReferentialCompleter.new(drenas: Rails.root.join("tmp/absent-drenas.yml")).complete
+
+        assert_equal [ "DRENA (Errno::ENOENT)" ], created.fetch(:interruptions).map { it.sub(/ : .*\)\z/, ")") }
+        assert_operator created.fetch(:plan_entries).size, :>, 0
       end
       test "a barème entry and a DRENA already there are kept as they are; only the missing ones are added" do
         complete

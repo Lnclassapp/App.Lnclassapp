@@ -89,5 +89,5 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 - les entrées **absentes** du barème des classes (ADR-0058, `FillClassroomPlanEntries.fill`, `ON CONFLICT DO NOTHING`) : un nombre posé par l'équipe n'est jamais réécrit ;
 - les **41 DRENA** de `db/seeds/data/drenas.yml`, par slug.
 
-Aucun établissement ni aucune classe n'est créé. Le journal du pré-déploiement dit ce qui a été créé, par type (« matières EDHC ; barème 24 entrée(s) ; DRENA 41 »). Comme pour les niveaux, une DRENA ou une entrée du barème supprimée revient au déploiement suivant.
+Aucun établissement ni aucune classe n'est créé. Le journal du pré-déploiement dit ce qui a été créé, par type (« matières EDHC ; barème 24 entrée(s) ; DRENA 41 »). Comme pour les niveaux, une DRENA ou une entrée du barème supprimée revient au déploiement suivant. Chaque étape (référentiel, matières, barème, DRENA) est à l'abri : une interruption est journalisée avec son message et n'empêche ni les étapes suivantes ni le chargement. Le barème s'écrit en une transaction ; une entrée saisie à l'écran pendant le pré-déploiement serait comptée comme créée (sur-compte possible, jamais d'écriture de plus).
 

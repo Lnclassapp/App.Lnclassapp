@@ -7,8 +7,8 @@ module Ports
       # Crée, s'ils manquent (par slug), les niveaux, séries, couples niveau/série et matières (PROGRAMME_MATERIALS, EDHC comprise)
       # d'Entities::Catalog::BaseReferential, les entrées absentes du barème des classes (ADR-0058) et les 41 DRENA ; ne modifie ni ne
       # supprime aucun enregistrement. Une valeur unique déjà prise par un autre enregistrement n'est pas créée.
-      # → { levels:, series:, pairs:, materials:, plan_entries:, drenas:, conflicts: } : ce qui a été créé (noms ; ids pour le barème), et
-      # ce qui ne l'a pas été (« niveau 1ère », « matière SVT »…)
+      # → { levels:, series:, pairs:, materials:, plan_entries:, drenas:, conflicts:, interruptions: } : ce qui a été créé (noms ; ids pour le
+      # barème), ce qui ne l'a pas été (« niveau 1ère », « matière SVT »…) et les étapes interrompues, avec leur message
       def complete
         raise NotImplementedError, "#{self.class} doit implémenter #complete"
       end

@@ -83,6 +83,8 @@ module UseCases
         @logger.info("[contenus] référentiel complété : #{parts.join(' ; ')}") if parts.any?
         conflicts = created.fetch(:conflicts)
         @logger.warn("[contenus] référentiel : non créé (déjà pris) : #{conflicts.join(', ')}") if conflicts.any?
+        interruptions = created.fetch(:interruptions)
+        @logger.error("[contenus] référentiel interrompu : #{interruptions.join(' ; ')}") if interruptions.any?
       rescue StandardError => error
         @logger.error("[contenus] référentiel non complété (#{error.class} : #{error.message})")
       end

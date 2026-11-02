@@ -60,7 +60,7 @@ module UseCases
         include Ports::Catalog::ReferentialCompleterPort
         attr_reader :calls
         def initialize(created = {}) = (@created = created) && (@calls = 0)
-        def complete = (@calls += 1) && { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [] }.merge(@created)
+        def complete = (@calls += 1) && { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [], interruptions: [] }.merge(@created)
       end
 
       setup do
@@ -390,14 +390,16 @@ module UseCases
 
       test "Develop completes the referential before loading and logs what it created" do
         referential = Referential.new(levels: [ "1ère" ], series: %w[A1 A2], pairs: [ "1ère A1", "1ère A2" ], materials: [ "EDHC" ],
-                                      plan_entries: %w[a b c], drenas: [ "Abidjan 1", "Aboisso" ], conflicts: [ "matière Mathématiques" ])
+                                      plan_entries: %w[a b c], drenas: [ "Abidjan 1", "Aboisso" ], conflicts: [ "matière Mathématiques" ],
+                                      interruptions: [ "barème (PG::ConnectionBad : coupé)" ])
 
         call(use_case(referential:))
 
         assert_equal 1, referential.calls
         assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2 ; matières EDHC ; " \
                                 "barème 3 entrée(s) ; DRENA 2" ],
-                       [ :warn, "[contenus] référentiel : non créé (déjà pris) : matière Mathématiques" ] ], @logs.first(2)
+                       [ :warn, "[contenus] référentiel : non créé (déjà pris) : matière Mathématiques" ],
+                       [ :error, "[contenus] référentiel interrompu : barème (PG::ConnectionBad : coupé)" ] ], @logs.first(3)
       end
 
       test "a complete referential logs nothing" do
