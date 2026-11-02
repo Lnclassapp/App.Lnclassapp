@@ -55,16 +55,27 @@ class TesterPrTest < ActiveSupport::TestCase
     end
   end
 
-  test "--demo loads the standard test set, --activite the school whose students already worked, after the accounts" do
+  test "--demo loads the standard test set, --activite its quarter of activity, after the accounts" do
     in_clone do |clone|
       output, status = tester_pr(clone, "7", "--demo", "--activite")
 
       assert status.success?, output
       assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed",
                      "bin/rails runner db/seeds/standard.rb",
-                     "bin/rails runner db/seeds/demo/saint_michel.rb", "bin/dev BINDING=" ], calls(clone)
+                     "bin/rails runner db/seeds/standard/activite.rb", "bin/dev BINDING=" ], calls(clone)
       assert_includes output, "Jeu standard, PIN 2468"
-      assert_includes output, "élèves de la Tle D 1 0110000001 à 0110000020"
+      assert_includes output, "Activité du trimestre"
+    end
+  end
+
+  test "--activite alone loads the standard set first, which the activity needs" do
+    in_clone do |clone|
+      output, status = tester_pr(clone, "7", "--activite")
+
+      assert status.success?, output
+      assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed",
+                     "bin/rails runner db/seeds/standard.rb",
+                     "bin/rails runner db/seeds/standard/activite.rb", "bin/dev BINDING=" ], calls(clone)
     end
   end
 
