@@ -243,7 +243,7 @@ jobs:
           bin/setup --skip-server
           bin/check-chrome
           bin/rails test:prepare
-          PARALLEL_WORKERS=$(nproc) bin/rails test test/system/catalog/lesson_rendering_test.rb -v
+          PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb -v
 
       - name: Keep screenshots from failed lessons
         uses: actions/upload-artifact@v7
