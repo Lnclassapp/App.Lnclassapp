@@ -221,3 +221,5 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+
+- 2026-11-02 — **Pause des vagues** (porteur) : aucune nouvelle vague avant le test des leçons créées. S1 (Maths 2nde C) arrêtée au démarrage, rien de livré ; P9 (HG 1ère, en cours) se termine.
