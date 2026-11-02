@@ -1,8 +1,8 @@
 # ADR-0034: the development and test referential — 7 levels, 5 series, 10 level/series pairs, 6 materials — and its
 # barème of the classrooms, taken over exactly as the deployment did (ADR-0058).
 # Idempotent by slug. Never in production: the team creates its referential on screen. Only a PR environment, which
-# runs in production, receives it too (ADR-0108).
-raise "db/seeds/catalog.rb est réservé au développement, au test et aux environnements de PR" unless Rails.env.local? || PrEnvironment.active?
+# runs in production, receives it too (ADR-0108), and so does Demo (DemoEnvironment).
+raise "db/seeds/catalog.rb est réservé au développement, au test, aux environnements de PR et à Demo" unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active?
 
 # The lists are Entities::Catalog::BaseReferential, which Develop also completes itself from (ADR-0123 §8).
 base = Entities::Catalog::BaseReferential

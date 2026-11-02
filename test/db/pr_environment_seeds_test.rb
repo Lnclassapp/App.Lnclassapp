@@ -15,11 +15,12 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
 
   # Wrapped load: the top-level constants of the seed files stay in an anonymous module.
   def run_seeds
-    previous = ENV["STANDARD_LESSONS_LIMIT"]
+    previous = ENV.values_at("STANDARD_LESSONS_LIMIT", "STANDARD_ACTIVITY_SIZE")
     ENV["STANDARD_LESSONS_LIMIT"] = LESSONS.size.to_s
+    ENV["STANDARD_ACTIVITY_SIZE"] = "reduite"
     capture_io { load Rails.root.join("db/seeds.rb").to_s, true }.first
   ensure
-    ENV["STANDARD_LESSONS_LIMIT"] = previous
+    ENV["STANDARD_LESSONS_LIMIT"], ENV["STANDARD_ACTIVITY_SIZE"] = previous
   end
 
   # Routes are drawn before the switch (config/routes.rb reads Rails.env), as in SeedsTest.

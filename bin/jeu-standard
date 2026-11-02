@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Charge le jeu de test standard en une commande (chantier standard-de-test, ADR standard-de-test §4) : référentiel,
-# établissements, classes, comptes, leçons publiées. Le grand établissement est toujours chargé (décision du porteur).
+# établissements, classes, comptes, leçons publiées, puis un trimestre d'activité déterministe (db/seeds/standard/activite.rb :
+# séances, notes, lacunes, devoirs rendus et en retard, par les use cases ; l'empreinte des totaux s'affiche à la fin).
+# Le grand établissement est toujours chargé (décision du porteur).
 #
 #   bin/jeu-standard                       # charge le jeu sur la base courante ; rejoué, ne double rien
 #   bin/jeu-standard --reset               # vide d'abord la base de développement (db:reset, base de test intacte), puis recharge
@@ -9,7 +11,8 @@
 # de jouer hors développement, test et PR ; --reset est refusé dès que RAILWAY_ENVIRONMENT_NAME est posée, sauf
 # --confirmer=<nom exact de l'environnement>, prévu pour le futur stage Demo (Lot H) et sans autre promesse.
 # --reset est toujours refusé si DATABASE_URL est posée ou si l'hôte de la base configurée n'est pas local.
-# Variables : STANDARD_TEAM_PIN (PIN des comptes équipe), STANDARD_LESSONS_LIMIT=N (seulement N leçons, pour itérer vite).
+# Variables : STANDARD_TEAM_PIN (PIN des comptes équipe), STANDARD_LESSONS_LIMIT=N (seulement N leçons, pour itérer vite),
+# STANDARD_ACTIVITY_SIZE=reduite (3 semaines, 2 classes par établissement : pour itérer vite).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -49,4 +52,5 @@ else
   bin/rails db:seed
 fi
 bin/rails runner db/seeds/standard.rb
+bin/rails runner db/seeds/standard/activite.rb
 echo "bin/jeu-standard : $((SECONDS - start)) s au total."
