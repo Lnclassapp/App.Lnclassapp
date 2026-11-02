@@ -78,6 +78,8 @@ module UseCases
         created = @referential.complete
         parts = { levels: "niveaux", series: "séries", pairs: "couples", materials: "matières" }
                 .filter_map { |key, label| "#{label} #{created.fetch(key).join(', ')}" if created.fetch(key).any? }
+        parts << "barème #{created.fetch(:plan_entries).size} entrée(s)" if created.fetch(:plan_entries).any?
+        parts << "DRENA #{created.fetch(:drenas).size}" if created.fetch(:drenas).any?
         @logger.info("[contenus] référentiel complété : #{parts.join(' ; ')}") if parts.any?
         conflicts = created.fetch(:conflicts)
         @logger.warn("[contenus] référentiel : non créé (déjà pris) : #{conflicts.join(', ')}") if conflicts.any?

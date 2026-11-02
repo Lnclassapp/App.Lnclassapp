@@ -84,3 +84,10 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 
 **Conséquence.** Develop porte désormais les niveaux, séries et matières du référentiel de base, même si l'équipe ne les avait pas créés ; les renommer à l'écran reste possible (le slug est figé), un niveau, une série, un couple ou une matière supprimé revient au déploiement suivant (pas de mémoire des suppressions). Un niveau du même sens sous un autre nom (« Terminale ») n'empêche pas la création de « Tle » : les deux coexistent, le journal dit la position décalée.
 
+**Complément du 2026-11-02 (décision du porteur : configuration complète du référentiel sur Develop).** Le même mécanisme, sous la même garde et avec la même règle (création seule, rien d'existant modifié ni supprimé), crée aussi avant le chargement :
+- la matière **EDHC** (`BaseReferential::PROGRAMME_MATERIALS`, septième matière du programme, D1) : catégorie `other`, rang du programme d'ADR-0090 (6 ; le semis de démo `trois_etablissements.rb` écrit 7, il n'est pas repris) ; les semis de développement gardent leurs 6 matières ;
+- les entrées **absentes** du barème des classes (ADR-0058, `FillClassroomPlanEntries.fill`, `ON CONFLICT DO NOTHING`) : un nombre posé par l'équipe n'est jamais réécrit ;
+- les **41 DRENA** de `db/seeds/data/drenas.yml`, par slug.
+
+Aucun établissement ni aucune classe n'est créé. Le journal du pré-déploiement dit ce qui a été créé, par type (« matières EDHC ; barème 24 entrée(s) ; DRENA 41 »). Comme pour les niveaux, une DRENA ou une entrée du barème supprimée revient au déploiement suivant.
+

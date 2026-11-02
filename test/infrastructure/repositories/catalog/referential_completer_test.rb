@@ -13,7 +13,11 @@ module Repositories
         assert_equal %w[A C A1 A2 D], created.fetch(:series)
         assert_equal 10, created.fetch(:pairs).size
         assert_includes created.fetch(:pairs), "Tle C"
-        assert_equal 6, created.fetch(:materials).size
+        assert_equal 7, created.fetch(:materials).size
+        assert_equal [ "other", Repositories::Catalog::ProgramOrder.rank("edhc") ], Orm::Material.find_by!(slug: "edhc").then { [ it.category, it.position ] }
+        assert_equal 41, created.fetch(:drenas).size
+        assert_equal Orm::ClassroomPlanEntry.count, created.fetch(:plan_entries).size
+        assert_operator Orm::ClassroomPlanEntry.count, :>, 0
         assert_equal [ 7, "second" ], Orm::Level.find_by!(slug: "tle").then { [ it.position, it.cycle ] }
         assert_equal Repositories::Catalog::ProgramOrder.rank("philosophie"), Orm::Material.find_by!(slug: "philosophie").position
         assert_empty created.fetch(:conflicts)
@@ -22,8 +26,9 @@ module Repositories
       test "run again it creates nothing" do
         complete
 
-        assert_no_difference [ "Orm::Level.count", "Orm::Series.count", "Orm::LevelSeries.count", "Orm::Material.count" ] do
-          assert(complete.values_at(:levels, :series, :pairs, :materials, :conflicts).all?(&:empty?))
+        assert_no_difference [ "Orm::Level.count", "Orm::Series.count", "Orm::LevelSeries.count", "Orm::Material.count", "Orm::Drena.count",
+                               "Orm::ClassroomPlanEntry.count" ] do
+          assert(complete.values.all?(&:empty?))
         end
       end
 
@@ -50,7 +55,7 @@ module Repositories
         assert_equal [ "1ère (position 7)", "Tle (position 8)" ], created.fetch(:levels).last(2)
         assert_includes created.fetch(:conflicts), "matière Mathématiques"
         assert_not Orm::Material.exists?(slug: "mathematiques")
-        assert_equal 5, created.fetch(:materials).size
+        assert_equal 6, created.fetch(:materials).size
       end
       test "a level or a series whose name is held under another slug is a conflict, and its pairs are skipped" do
         create_level(name: "Terminale", cycle: "second").update_columns(name: "Tle")
@@ -67,6 +72,21 @@ module Repositories
 
         assert_equal 7, created.fetch(:levels).size
         assert_equal [ "interrompu (ActiveRecord::ConnectionNotEstablished)" ], created.fetch(:conflicts)
+      end
+      test "a barème entry and a DRENA already there are kept as they are; only the missing ones are added" do
+        complete
+        entry = Orm::ClassroomPlanEntry.where(series_id: nil).first
+        entry.update_columns(count: 0)
+        Orm::ClassroomPlanEntry.where.not(id: entry.id).first.delete
+        drena = Orm::Drena.find_by!(slug: "drena-abidjan-1")
+        drena.update_columns(name: "Abidjan Un")
+        Orm::Drena.find_by!(slug: "drena-aboisso").delete
+
+        created = complete
+
+        assert_equal [ 0, "Abidjan Un" ], [ entry.reload.count, drena.reload.name ]
+        assert_equal 1, created.fetch(:plan_entries).size
+        assert_equal [ "Aboisso" ], created.fetch(:drenas)
       end
     end
   end
