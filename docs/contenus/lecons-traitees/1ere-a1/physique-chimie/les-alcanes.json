@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Les alcanes",
@@ -8,1784 +8,1941 @@
       "level_name": "1ère",
       "material_name": "Physique-Chimie",
       "series_name": "A1",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "Reconnaître un alcane et écrire sa formule",
-          "subtitle": "Hydrocarbure saturé, formule générale et noms du méthane au décane",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce qu'est un alcane : un hydrocarbure saturé.</li><li>Utiliser la formule générale pour trouver la formule brute d'un alcane.</li><li>Nommer les alcanes du méthane au décane et écrire leur formule semi-développée.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le rang de cacaoyers.</strong> Dans la plantation de ton oncle, les cacaoyers sont plantés en rang. Chaque cacaoyer a quatre « mains » : certaines serrent les mains des voisins du rang, les autres tiennent de petits planteurs qui, eux, n'ont qu'une seule main. Dans un rang complet, aucune main ne reste libre, et deux voisins se tiennent toujours par une seule poignée de main. Au bout du rang, un cacaoyer n'a qu'un voisin : il tient donc trois petits planteurs. Au milieu du rang, il a deux voisins : il en tient deux.</p><p><strong>Le pont.</strong> Le cacaoyer à quatre mains, c'est l'<strong>atome de carbone</strong> (C), qui fait toujours 4 liaisons. Le petit planteur à une main, c'est l'<strong>atome d'hydrogène</strong> (H), qui fait 1 liaison. Une main tenue, c'est une <strong>liaison</strong>. Le rang, c'est la <strong>chaîne carbonée</strong>. « Aucune main libre et que des poignées de main simples », c'est ce qu'on appelle <strong>saturé</strong> : il n'y a que des liaisons simples.</p><p><strong>La limite de l'image.</strong> Les mains ne se lâchent pas à volonté : un carbone a toujours 4 liaisons et un hydrogène une seule. Et la vraie molécule n'est pas tirée au cordeau comme un rang : on la dessine à plat, en ligne, pour simplifier.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Hydrocarbure</strong> : composé qui ne contient que des atomes de carbone et d'hydrogène.</p><p><strong>Alcane</strong> : hydrocarbure saturé à chaîne ouverte. Il ne possède que des liaisons simples C–C et C–H. Sa formule brute est $\\mathrm{C_nH_{2n+2}}$, où $n \\geq 1$ est le nombre d'atomes de carbone.</p><p><strong>Formule semi-développée</strong> : on écrit chaque carbone avec les hydrogènes qu'il porte, et on garde les liaisons entre carbones. Exemple pour le butane : CH₃–CH₂–CH₂–CH₃.</p><p><strong>Nom</strong> : une racine qui dit le nombre de carbones, suivie de « -ane ».</p><ul><li>CH₄ : méthane (1 carbone)</li><li>C₂H₆ : éthane (2 carbones)</li><li>C₃H₈ : propane (3 carbones)</li><li>C₄H₁₀ : butane (4 carbones)</li><li>C₅H₁₂ : pentane (5 carbones)</li><li>C₆H₁₄ : hexane (6 carbones)</li><li>C₇H₁₆ : heptane (7 carbones)</li><li>C₈H₁₈ : octane (8 carbones)</li><li>C₉H₂₀ : nonane (9 carbones)</li><li>C₁₀H₂₂ : décane (10 carbones)</li></ul><p><strong>États physiques</strong> : à température ordinaire, du méthane au butane ce sont des gaz ; à partir du pentane, ce sont des liquides. Les alcanes ne se mélangent pas à l'eau.</p></blockquote><p><em>Astuce pour les quatre premiers noms :</em> « Mon Éléphant Prend un Bain » (méthane, éthane, propane, butane).</p><h2>Exemple résolu</h2><p>Un alcane possède 7 atomes de carbone. Donne sa formule brute, son nom et sa formule semi-développée.</p><ol><li><strong>La formule brute.</strong> Ici $n = 7$, donc le nombre d'hydrogènes est $2n + 2 = 2 \\times 7 + 2 = 16$. La formule brute est C₇H₁₆.</li><li><strong>Le nom.</strong> 7 carbones : la racine est « hept- ». Le nom est heptane.</li><li><strong>La formule semi-développée.</strong> Les deux bouts du rang portent 3 hydrogènes (CH₃), les cinq carbones du milieu en portent 2 (CH₂) : CH₃–CH₂–CH₂–CH₂–CH₂–CH₂–CH₃.</li><li><strong>Vérification.</strong> On compte les hydrogènes : $3 + 5 \\times 2 + 3 = 16$. C'est bien C₇H₁₆.</li></ol><p>Deuxième cas : un alcane a 12 hydrogènes. On résout $2n + 2 = 12$, donc $n = 5$ : c'est le pentane, C₅H₁₂.</p><h2>Le piège à éviter</h2><p>Croire qu'une molécule qui ne contient que du carbone et de l'hydrogène est forcément un alcane. Il faut toujours <strong>vérifier</strong> que le nombre d'hydrogènes vaut $2n + 2$. Par exemple, C₄H₈ a $n = 4$, donc il devrait avoir 10 hydrogènes : il en manque deux, ce n'est pas un alcane. Autre erreur fréquente : prendre pour $n$ le nombre total d'atomes. Le $n$ de la formule, c'est seulement le nombre de <strong>carbones</strong>.</p><h2>En une phrase</h2><p>Un alcane est un hydrocarbure saturé de formule $\\mathrm{C_nH_{2n+2}}$ : $n$ carbones, $2n + 2$ hydrogènes, et un nom qui finit par « -ane ».</p>",
-          "exercises": [
+          "key": "alcane-lineaire",
+          "kind": "molecule",
+          "description": "Formule développée d'un alcane à chaîne linéaire. Le curseur règle le nombre d'atomes de carbone de 1 à 10. Sous le dessin, la figure écrit le nom de l'alcane (méthane, éthane, propane, butane…) et sa formule brute. Au départ, la figure montre le butane, de formule brute C4H10, avec tous ses atomes et toutes ses liaisons.",
+          "params": {
+            "mode": "alkane",
+            "carbons": 4,
+            "display": "developed"
+          },
+          "controls": [
             {
-              "title": "Comprendre — Reconnaître un hydrocarbure saturé",
-              "exercise_type": "fixation",
-              "questions": [
+              "param": "carbons",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "label": "Nombre d'atomes de carbone"
+            }
+          ]
+        },
+        {
+          "key": "methylbutane",
+          "kind": "molecule",
+          "description": "Formule développée du 2-méthylbutane, de formule brute C5H12. Quatre carbones forment une chaîne horizontale. Un cinquième carbone, le groupe méthyle CH3, est fixé au-dessus du deuxième carbone de la chaîne. Chaque carbone porte assez d'hydrogènes pour faire quatre liaisons.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 4,
+                "y": 8
+              },
+              {
+                "id": "c3",
+                "element": "C",
+                "x": 6,
+                "y": 8
+              },
+              {
+                "id": "c4",
+                "element": "C",
+                "x": 8,
+                "y": 8
+              },
+              {
+                "id": "c5",
+                "element": "C",
+                "x": 4,
+                "y": 5
+              },
+              {
+                "id": "h1a",
+                "element": "H",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "h1b",
+                "element": "H",
+                "x": 2,
+                "y": 10
+              },
+              {
+                "id": "h1c",
+                "element": "H",
+                "x": 0,
+                "y": 8
+              },
+              {
+                "id": "h2a",
+                "element": "H",
+                "x": 4,
+                "y": 10
+              },
+              {
+                "id": "h3a",
+                "element": "H",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "h3b",
+                "element": "H",
+                "x": 6,
+                "y": 10
+              },
+              {
+                "id": "h4a",
+                "element": "H",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "h4b",
+                "element": "H",
+                "x": 8,
+                "y": 10
+              },
+              {
+                "id": "h4c",
+                "element": "H",
+                "x": 10,
+                "y": 8
+              },
+              {
+                "id": "h5a",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "h5b",
+                "element": "H",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "h5c",
+                "element": "H",
+                "x": 4,
+                "y": 3
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "h1a",
+                1
+              ],
+              [
+                "c1",
+                "h1b",
+                1
+              ],
+              [
+                "c1",
+                "h1c",
+                1
+              ],
+              [
+                "c2",
+                "h2a",
+                1
+              ],
+              [
+                "c3",
+                "h3a",
+                1
+              ],
+              [
+                "c3",
+                "h3b",
+                1
+              ],
+              [
+                "c4",
+                "h4a",
+                1
+              ],
+              [
+                "c4",
+                "h4b",
+                1
+              ],
+              [
+                "c4",
+                "h4c",
+                1
+              ],
+              [
+                "c5",
+                "h5a",
+                1
+              ],
+              [
+                "c5",
+                "h5b",
+                1
+              ],
+              [
+                "c5",
+                "h5c",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c3",
+                1
+              ],
+              [
+                "c3",
+                "c4",
+                1
+              ],
+              [
+                "c2",
+                "c5",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "methylpropane",
+          "kind": "molecule",
+          "description": "Formule développée du 2-méthylpropane, de formule brute C4H10. Un carbone central, lié à un atome d'hydrogène placé au-dessus, porte trois groupes CH3 : un à gauche, un à droite et un en bas. La chaîne est ramifiée : c'est un isomère du butane, qui a la même formule brute.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "m1",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "m2",
+                "element": "C",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "m3",
+                "element": "C",
+                "x": 6,
+                "y": 9
+              },
+              {
+                "id": "ch",
+                "element": "H",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "h1a",
+                "element": "H",
+                "x": 4,
+                "y": 4
+              },
+              {
+                "id": "h1b",
+                "element": "H",
+                "x": 4,
+                "y": 8
+              },
+              {
+                "id": "h1c",
+                "element": "H",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "h2a",
+                "element": "H",
+                "x": 8,
+                "y": 4
+              },
+              {
+                "id": "h2b",
+                "element": "H",
+                "x": 8,
+                "y": 8
+              },
+              {
+                "id": "h2c",
+                "element": "H",
+                "x": 10,
+                "y": 6
+              },
+              {
+                "id": "h3a",
+                "element": "H",
+                "x": 4,
+                "y": 10
+              },
+              {
+                "id": "h3b",
+                "element": "H",
+                "x": 8,
+                "y": 10
+              },
+              {
+                "id": "h3c",
+                "element": "H",
+                "x": 6,
+                "y": 11
+              }
+            ],
+            "bonds": [
+              [
+                "c",
+                "ch",
+                1
+              ],
+              [
+                "m1",
+                "h1a",
+                1
+              ],
+              [
+                "m1",
+                "h1b",
+                1
+              ],
+              [
+                "m1",
+                "h1c",
+                1
+              ],
+              [
+                "m2",
+                "h2a",
+                1
+              ],
+              [
+                "m2",
+                "h2b",
+                1
+              ],
+              [
+                "m2",
+                "h2c",
+                1
+              ],
+              [
+                "m3",
+                "h3a",
+                1
+              ],
+              [
+                "m3",
+                "h3b",
+                1
+              ],
+              [
+                "m3",
+                "h3c",
+                1
+              ],
+              [
+                "c",
+                "m1",
+                1
+              ],
+              [
+                "c",
+                "m2",
+                1
+              ],
+              [
+                "c",
+                "m3",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "chloromethane",
+          "kind": "molecule",
+          "description": "Formule développée du chlorométhane, de formule CH3Cl. Un atome de carbone central est lié à trois atomes d'hydrogène, placés au-dessus, en dessous et à gauche, et à un atome de chlore placé à droite. Un des quatre hydrogènes du méthane a été remplacé par un atome de chlore.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 6,
+                "y": 3
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 6,
+                "y": 9
+              },
+              {
+                "id": "h3",
+                "element": "H",
+                "x": 3,
+                "y": 6
+              },
+              {
+                "id": "cl",
+                "element": "Cl",
+                "x": 9,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "c",
+                "h1",
+                1
+              ],
+              [
+                "c",
+                "h2",
+                1
+              ],
+              [
+                "c",
+                "h3",
+                1
+              ],
+              [
+                "c",
+                "cl",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Écrire la formule et le nom d'un alcane linéaire",
+          "remember": "Un **hydrocarbure** est un composé qui ne contient que du carbone (C) et de l'hydrogène (H). Un **alcane** est un hydrocarbure **saturé** : tous ses atomes sont liés par des liaisons simples. Dans une molécule, chaque carbone fait 4 liaisons et chaque hydrogène en fait 1. La formule brute d'un alcane à chaîne linéaire est $\\mathrm{C_{n}H_{2n+2}}$, où $n$ est le nombre d'atomes de carbone ($n \\geq 1$). Le nom se forme avec un **préfixe** qui donne $n$, suivi de **-ane** : 1 méth, 2 éth, 3 prop, 4 but, 5 pent, 6 hex, 7 hept, 8 oct, 9 non, 10 déc. Exemples : $\\mathrm{CH_{4}}$ méthane, $\\mathrm{C_{2}H_{6}}$ éthane, $\\mathrm{C_{3}H_{8}}$ propane, $\\mathrm{C_{4}H_{10}}$ butane. La formule **semi-développée** regroupe les hydrogènes autour de chaque carbone : $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{3}}$ pour le propane.",
+          "method": [
+            "Repérer le nombre $n$ d'atomes de carbone (donné, ou déduit du nom ou de la formule).",
+            "Calculer le nombre d'atomes d'hydrogène $2n+2$ et écrire la formule brute $\\mathrm{C_{n}H_{2n+2}}$.",
+            "Écrire la formule semi-développée : un groupe $\\mathrm{CH_{3}}$ à chaque extrémité et $n-2$ groupes $\\mathrm{CH_{2}}$ au milieu.",
+            "Nommer l'alcane : le préfixe du nombre de carbones, suivi de -ane."
+          ],
+          "example": {
+            "statement": "Un alcane à chaîne linéaire a 6 atomes de carbone. Donner sa formule brute, sa formule semi-développée et son nom.",
+            "steps": [
+              "Repérer : le nombre d'atomes de carbone est $n = 6$.",
+              "Calculer : $2n+2 = 2 \\times 6 + 2 = 14$ ; la formule brute est $\\mathrm{C_{6}H_{14}}$.",
+              "Écrire : deux groupes $\\mathrm{CH_{3}}$ aux extrémités et $6-2 = 4$ groupes $\\mathrm{CH_{2}}$ au milieu : $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$.",
+              "Nommer : le préfixe de 6 carbones est hex, donc l'alcane s'appelle l'hexane."
+            ]
+          },
+          "pitfall": "Ne pas oublier le $\\mathrm{ +2 }$ : le nombre d'hydrogènes est $2n+2$, pas $2n$. Contre-exemple : pour le propane, $n = 3$ et $2n+2 = 8$, donc la formule est $\\mathrm{C_{3}H_{8}}$. La formule $\\mathrm{C_{3}H_{6}}$, obtenue avec $2n$, a 2 hydrogènes de moins : ce n'est pas celle d'un alcane. Vérification rapide : chaque carbone fait 4 liaisons, et les hydrogènes doivent compléter exactement ces liaisons.",
+          "figure": "alcane-lineaire",
+          "exercise": {
+            "title": "Formules et noms des alcanes linéaires",
+            "statement": "Dans cet exercice, tu écris des formules et des noms d'alcanes à chaîne linéaire avec la méthode de la fiche. La figure montre un alcane dont tu peux régler le nombre d'atomes de carbone.",
+            "exercise_type": "fixation",
+            "figure": "alcane-lineaire",
+            "questions": [
+              {
+                "content": "Quelle est la formule brute de l'alcane à chaîne linéaire qui a 5 atomes de carbone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $n = 5$. Étape 2 — Calculer : $2n+2 = 2 \\times 5 + 2 = 12$, donc la formule brute est $\\mathrm{C_{5}H_{12}}$. La proposition $\\mathrm{C_{5}H_{10}}$ vient de l'oubli du $\\mathrm{ +2 }$ : on a calculé $2n$. Les propositions $\\mathrm{C_{5}H_{14}}$ et $\\mathrm{C_{5}H_{11}}$ ne respectent pas $2n+2$.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_{5}H_{12}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_{5}H_{10}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{5}H_{14}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{5}H_{11}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'alcane de formule brute $\\mathrm{C_{8}H_{18}}$ s'appelle l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la formule compte $n = 8$ atomes de carbone, et $2 \\times 8 + 2 = 18$ confirme que c'est un alcane. Étape 4 — Nommer : le préfixe de 8 carbones est oct, suivi de -ane : octane.",
+                "answers": [
+                  {
+                    "content": "octane",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes d'hydrogène contient une molécule d'hexane, l'alcane à 6 atomes de carbone ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : hex signifie $n = 6$. Étape 2 — Calculer : $2n+2 = 2 \\times 6 + 2 = 14$ atomes d'hydrogène, soit la formule $\\mathrm{C_{6}H_{14}}$. Le nombre 12 vient de l'oubli du $\\mathrm{ +2 }$.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la formule semi-développée du pentane ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : pentane signifie $n = 5$. Étape 3 — Écrire : deux groupes $\\mathrm{CH_{3}}$ aux extrémités et $5-2 = 3$ groupes $\\mathrm{CH_{2}}$ au milieu. La formule à 4 carbones est celle du butane, celle à 6 carbones est celle de l'hexane, et des groupes $\\mathrm{CH_{2}}$ aux deux extrémités laisseraient des liaisons libres.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{2}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque alcane à sa formule brute.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on lit le préfixe de chaque nom (méth 1, éth 2, but 4, hept 7). Étape 2 — Calculer : $2n+2$ donne 4, 6, 10 et 16 atomes d'hydrogène. Étape 4 — Nommer : on associe chaque nom à sa formule brute.",
+                "answers": [
+                  {
+                    "content": "méthane",
+                    "match": "$\\mathrm{CH_{4}}$"
+                  },
+                  {
+                    "content": "éthane",
+                    "match": "$\\mathrm{C_{2}H_{6}}$"
+                  },
+                  {
+                    "content": "butane",
+                    "match": "$\\mathrm{C_{4}H_{10}}$"
+                  },
+                  {
+                    "content": "heptane",
+                    "match": "$\\mathrm{C_{7}H_{16}}$"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces formules brutes, lesquelles sont celles d'alcanes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on compte les carbones de chaque formule. Étape 2 — Calculer : pour être un alcane, le nombre d'hydrogènes doit valoir $2n+2$. $\\mathrm{C_{2}H_{6}}$ ($n=2$, 6 hydrogènes) et $\\mathrm{C_{5}H_{12}}$ ($n=5$, 12 hydrogènes) conviennent. $\\mathrm{C_{3}H_{6}}$, $\\mathrm{C_{4}H_{8}}$ et $\\mathrm{C_{6}H_{12}}$ ont $2n$ hydrogènes : il leur en manque 2, ce ne sont pas des alcanes.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_{2}H_{6}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_{5}H_{12}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_{3}H_{6}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{4}H_{8}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{6}H_{12}}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire des formules d'alcanes à chaîne linéaire.",
+            "questions": [
+              {
+                "content": "Un alcane à 4 atomes de carbone contient ___ atomes d'hydrogène.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : $n = 4$. Étape 2 — Calculer : $2n+2 = 2 \\times 4 + 2 = 10$ atomes d'hydrogène, donc la formule brute est $\\mathrm{C_{4}H_{10}}$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "8",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "12",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "Calcule $2n+2$ avec $n = 4$."
+              },
+              {
+                "content": "Le préfixe $\\mathrm{ prop }$ indique ___ atomes de carbone.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Nommer : le préfixe donne le nombre de carbones (méth 1, éth 2, prop 3, but 4, pent 5). Le propane, de formule $\\mathrm{C_{3}H_{8}}$, a donc 3 carbones.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  },
+                  {
+                    "content": "trois",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au propane, de formule $\\mathrm{C_{3}H_{8}}$."
+              },
+              {
+                "content": "Dans un alcane, tous les atomes sont liés entre eux par des liaisons simples.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : un alcane est saturé, donc il n'a que des liaisons simples. C'est ce qui donne le nombre d'hydrogènes $2n+2$ de la formule brute.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nommer un alcane ramifié",
+          "remember": "Une **ramification** est un groupe d'atomes fixé sur la chaîne de carbones. En 1ère A, la seule ramification est le **groupe méthyle** $\\mathrm{{-}CH_{3}}$, qui se déduit du méthane en lui retirant un hydrogène. La **chaîne principale** est la plus longue suite de carbones ; elle donne le nom de l'alcane. On la **numérote** à partir de l'extrémité qui donne les plus petits **indices** aux ramifications. Le nom s'écrit : indice, tiret, $\\mathrm{ méthyl }$, puis le nom de la chaîne principale. Exemple : $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$ est le 2-méthylbutane. Deux méthyles : **di** et indices séparés par une virgule (2,3-diméthylbutane). Deux méthyles sur le même carbone : on répète l'indice (2,2-diméthylpropane).",
+          "method": [
+            "Repérer la chaîne principale, c'est-à-dire la plus longue suite de carbones, et la nommer comme un alcane à chaîne linéaire.",
+            "Identifier les groupes méthyle fixés sur cette chaîne.",
+            "Numéroter la chaîne principale à partir de l'extrémité qui donne les plus petits indices aux méthyles.",
+            "Écrire le nom : les indices, un tiret, $\\mathrm{ méthyl }$ (avec di si besoin), puis le nom de la chaîne principale."
+          ],
+          "example": {
+            "statement": "Nommer l'alcane $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{2}{-}CH_{3}}$.",
+            "steps": [
+              "Repérer : la plus longue chaîne compte 5 carbones, c'est une chaîne de pentane.",
+              "Identifier : un seul groupe $\\mathrm{{-}CH_{3}}$ est fixé sur la chaîne : c'est un groupe méthyle.",
+              "Numéroter : en partant de la gauche, le méthyle est sur le carbone 2 ; en partant de la droite, il serait sur le carbone 4. On garde la gauche : indice 2.",
+              "Écrire : un méthyle sur le carbone 2 d'une chaîne de pentane, donc le 2-méthylpentane."
+            ]
+          },
+          "pitfall": "Ne numérote pas la chaîne par l'extrémité qui donne le plus grand indice. Contre-exemple : pour $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH(CH_{3}){-}CH_{3}}$, le méthyle est sur le carbone 4 en partant de la gauche, mais sur le carbone 2 en partant de la droite. Le nom correct est le 2-méthylpentane, et non le $\\mathrm{ 4{-}méthylpentane }$. Un nom du type $\\mathrm{ 1{-}méthyl… }$ est toujours faux : un méthyle en bout de chaîne la rallonge.",
+          "figure": "methylbutane",
+          "exercise": {
+            "title": "Nommer des alcanes ramifiés",
+            "statement": "Dans cet exercice, tu nommes des alcanes ramifiés avec la méthode de la fiche. La figure montre la formule développée d'un alcane ramifié à 5 atomes de carbone.",
+            "exercise_type": "fixation",
+            "figure": "methylbutane",
+            "questions": [
+              {
+                "content": "Quel est le nom du groupe $\\mathrm{{-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : un groupe méthyle se déduit du méthane $\\mathrm{CH_{4}}$ en retirant un atome d'hydrogène. Le groupe $\\mathrm{{-}CH_{3}}$ s'appelle donc méthyle. Le méthane est une molécule complète, pas un groupe ; l'éthyle compte 2 carbones.",
+                "answers": [
+                  {
+                    "content": "méthyle",
+                    "correct": true
+                  },
+                  {
+                    "content": "méthane",
+                    "correct": false
+                  },
+                  {
+                    "content": "éthyle",
+                    "correct": false
+                  },
+                  {
+                    "content": "propyle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la plus longue chaîne compte 3 carbones, c'est du propane. Étape 2 — Identifier : un groupe méthyle est fixé sur le carbone central. Étape 3 — Numéroter : le carbone central porte l'indice 2, quel que soit le côté. Étape 4 — Écrire : 2-méthylpropane. Le nom $\\mathrm{ 1{-}méthylpropane }$ est faux : un méthyle en bout de chaîne donnerait une chaîne de 4 carbones.",
+                "answers": [
+                  {
+                    "content": "2-méthylpropane",
+                    "correct": true
+                  },
+                  {
+                    "content": "1-méthylpropane",
+                    "correct": false
+                  },
+                  {
+                    "content": "2-méthylbutane",
+                    "correct": false
+                  },
+                  {
+                    "content": "butane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La figure montre la formule développée de $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$. Quel est son nom ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la plus longue chaîne compte 4 carbones, c'est du butane. Étape 2 — Identifier : un groupe méthyle est fixé sur un carbone voisin d'une extrémité. Étape 3 — Numéroter : on part de l'extrémité qui donne le plus petit indice, 2 et non 3. Étape 4 — Écrire : 2-méthylbutane. Le nom $\\mathrm{ 3{-}méthylbutane }$ vient d'une numérotation par le mauvais côté.",
+                "answers": [
+                  {
+                    "content": "2-méthylbutane",
+                    "correct": true
+                  },
+                  {
+                    "content": "3-méthylbutane",
+                    "correct": false
+                  },
+                  {
+                    "content": "2-méthylpropane",
+                    "correct": false
+                  },
+                  {
+                    "content": "pentane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le nom de $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH(CH_{3}){-}CH_{3}}$ est le 2,3-___butane.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la plus longue chaîne compte 4 carbones, c'est du butane. Étape 2 — Identifier : deux groupes méthyle. Étape 3 — Numéroter : ils sont sur les carbones 2 et 3. Étape 4 — Écrire : deux méthyles se disent $\\mathrm{ diméthyl }$, donc 2,3-diméthylbutane.",
+                "answers": [
+                  {
+                    "content": "diméthyl",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes de carbone contient en tout la molécule de 2-méthylpentane ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la chaîne principale est celle du pentane, soit 5 carbones. Étape 2 — Identifier : il y a un groupe méthyle, qui compte 1 carbone. Étape 4 — Écrire le total : $5 + 1 = 6$ atomes de carbone, soit la formule brute $\\mathrm{C_{6}H_{14}}$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH(CH_{3}){-}CH_{3}}$ se nomme 4-méthylpentane.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la chaîne principale compte 5 carbones, c'est du pentane. Étape 3 — Numéroter : le méthyle est sur le carbone 4 en partant de la gauche, mais sur le carbone 2 en partant de la droite. On garde le plus petit indice. Étape 4 — Écrire : le nom correct est 2-méthylpentane.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à nommer des alcanes ramifiés.",
+            "questions": [
+              {
+                "content": "Dans le 2-méthylbutane, la chaîne principale est celle du ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Écrire : le nom se lit à partir de la fin. Le dernier mot, butane, donne la chaîne principale (étape 1). Le groupe méthyle est cité avant, avec son indice 2.",
+                "answers": [
+                  {
+                    "content": "butane",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "propane",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "pentane",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "hexane",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "Le nom de la chaîne principale est à la fin du nom."
+              },
+              {
+                "content": "Combien de groupes méthyle porte le 2,3-diméthylpentane ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Identifier : le préfixe $\\mathrm{ di }$ signifie deux, et les indices 2 et 3 placent ces deux groupes méthyle sur les carbones 2 et 3 de la chaîne de pentane.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le préfixe $\\mathrm{ di }$ veut dire deux."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour nommer un alcane ramifié.",
+                "question_type": "ordering",
+                "explanation": "On suit les étapes de la méthode : Étape 1 — Repérer la chaîne principale, Étape 2 — Identifier les groupes méthyle, Étape 3 — Numéroter pour avoir les plus petits indices, Étape 4 — Écrire le nom.",
+                "answers": [
+                  {
+                    "content": "Repérer la chaîne principale (la plus longue)."
+                  },
+                  {
+                    "content": "Identifier les groupes méthyle."
+                  },
+                  {
+                    "content": "Numéroter la chaîne pour avoir les plus petits indices."
+                  },
+                  {
+                    "content": "Écrire le nom avec les indices, $\\mathrm{ méthyl }$ et la chaîne principale."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître les isomères d'un alcane",
+          "remember": "Deux molécules sont **isomères** quand elles ont la **même formule brute** mais des **enchaînements d'atomes différents**. Ce sont des espèces chimiques différentes, qui ont des noms différents. Le méthane, l'éthane et le propane n'ont pas d'isomère. À partir de 4 carbones, il y a des isomères : l'alcane à chaîne linéaire et des alcanes ramifiés. Le butane $\\mathrm{C_{4}H_{10}}$ a **2** isomères : le butane et le 2-méthylpropane. Le pentane $\\mathrm{C_{5}H_{12}}$ en a **3** : le pentane, le 2-méthylbutane et le 2,2-diméthylpropane. L'hexane $\\mathrm{C_{6}H_{14}}$ en a **5**.",
+          "method": [
+            "Calculer la formule brute avec $2n+2$ et écrire la chaîne linéaire de $n$ carbones.",
+            "Raccourcir la chaîne d'un carbone et fixer ce carbone (un méthyle) sur un carbone intérieur, sans compter deux fois la même molécule.",
+            "Raccourcir encore la chaîne (deux méthyles) tant que c'est possible, en évitant les doublons.",
+            "Nommer chaque isomère et vérifier : même formule brute, noms tous différents."
+          ],
+          "example": {
+            "statement": "Écrire et nommer tous les isomères de formule brute $\\mathrm{C_{5}H_{12}}$.",
+            "steps": [
+              "Calculer : $n = 5$ donne $\\mathrm{C_{5}H_{12}}$. La chaîne linéaire est $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$.",
+              "Raccourcir d'un carbone : chaîne de 4 carbones et un méthyle. Sur le carbone 2 : $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$. Sur le carbone 3, on retrouve la même molécule lue à l'envers.",
+              "Raccourcir encore : chaîne de 3 carbones et deux méthyles, tous deux sur le carbone 2, le seul carbone intérieur : $\\mathrm{CH_{3}{-}C(CH_{3})_{2}{-}CH_{3}}$.",
+              "Nommer : pentane, 2-méthylbutane et 2,2-diméthylpropane. Les trois ont la formule brute $\\mathrm{C_{5}H_{12}}$ et des noms différents : il y a 3 isomères."
+            ]
+          },
+          "pitfall": "Ne compte pas deux fois la même molécule. Contre-exemple : pour $\\mathrm{C_{5}H_{12}}$, un méthyle sur le carbone 2, $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$, et un méthyle sur le carbone 3, $\\mathrm{CH_{3}{-}CH_{2}{-}CH(CH_{3}){-}CH_{3}}$, sont la même molécule lue de droite à gauche. Le $\\mathrm{ 3{-}méthylbutane }$ n'existe donc pas. Pour vérifier, lis chaque formule dans les deux sens : si tu obtiens le même nom, c'est la même molécule.",
+          "figure": "methylpropane",
+          "exercise": {
+            "title": "Isomères des alcanes",
+            "statement": "Dans cet exercice, tu reconnais et tu comptes des isomères d'alcanes avec la méthode de la fiche. La figure montre la formule développée du 2-méthylpropane, un isomère du butane.",
+            "exercise_type": "fixation",
+            "figure": "methylpropane",
+            "questions": [
+              {
+                "content": "Le butane et le 2-méthylpropane sont des isomères.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : le butane et le 2-méthylpropane ont la même formule brute $\\mathrm{C_{4}H_{10}}$. Étape 4 — Nommer et vérifier : leurs noms sont différents, car l'enchaînement des carbones est différent (chaîne linéaire pour l'un, ramifiée pour l'autre). Ce sont donc des isomères.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'isomères (pentane compris) possède l'alcane de formule brute $\\mathrm{C_{5}H_{12}}$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : la chaîne linéaire est le pentane. Étape 2 — Raccourcir : une chaîne de 4 carbones et un méthyle donne le 2-méthylbutane. Étape 3 — Raccourcir encore : deux méthyles sur une chaîne de 3 carbones donnent le 2,2-diméthylpropane. Étape 4 — Nommer : 3 isomères.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de l'isomère de formule $\\mathrm{CH_{3}{-}C(CH_{3})_{2}{-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : cette molécule compte 5 carbones, c'est un isomère de $\\mathrm{C_{5}H_{12}}$. Étape 3 — Raccourcir encore : la plus longue chaîne compte 3 carbones et porte deux méthyles sur le carbone central. Étape 4 — Nommer : 2,2-diméthylpropane. Le nom $\\mathrm{ 3,3{-}diméthylpropane }$ n'existe pas : une chaîne de 3 carbones n'a pas de carbone 3 à l'intérieur.",
+                "answers": [
+                  {
+                    "content": "2,2-diméthylpropane",
+                    "correct": true
+                  },
+                  {
+                    "content": "2-méthylbutane",
+                    "correct": false
+                  },
+                  {
+                    "content": "pentane",
+                    "correct": false
+                  },
+                  {
+                    "content": "3,3-diméthylpropane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces alcanes, lesquels sont des isomères du pentane $\\mathrm{C_{5}H_{12}}$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Calculer : on cherche les molécules de formule brute $\\mathrm{C_{5}H_{12}}$, donc à 5 carbones. Étape 4 — Nommer et vérifier : le 2-méthylbutane a $4 + 1 = 5$ carbones et le 2,2-diméthylpropane a $3 + 2 = 5$ carbones. Le butane et le 2-méthylpropane ont 4 carbones ($\\mathrm{C_{4}H_{10}}$), l'hexane en a 6 ($\\mathrm{C_{6}H_{14}}$).",
+                "answers": [
+                  {
+                    "content": "2-méthylbutane",
+                    "correct": true
+                  },
+                  {
+                    "content": "2,2-diméthylpropane",
+                    "correct": true
+                  },
+                  {
+                    "content": "butane",
+                    "correct": false
+                  },
+                  {
+                    "content": "2-méthylpropane",
+                    "correct": false
+                  },
+                  {
+                    "content": "hexane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle formule représente la même molécule que $\\mathrm{CH_{3}{-}CH_{2}{-}CH(CH_{3}){-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Raccourcir : la formule donnée a une chaîne de 4 carbones et un méthyle sur le carbone 3 en partant de la gauche, donc sur le carbone 2 en partant de la droite : c'est le 2-méthylbutane. Étape 4 — Nommer : $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$ porte le même nom, c'est la même molécule lue à l'envers. Les autres sont le pentane, le 2,2-diméthylpropane et le 2-méthylpropane.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}C(CH_{3})_{2}{-}CH_{3}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{3}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le 2-méthylpropane a pour formule brute ___ (sans espace).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Calculer : le 2-méthylpropane compte $3 + 1 = 4$ carbones, donc $2n+2 = 2 \\times 4 + 2 = 10$ hydrogènes. Sa formule brute est $\\mathrm{C_{4}H_{10}}$, la même que celle de son isomère, le butane. Étape 4 — Vérifier : deux isomères ont toujours la même formule brute.",
+                "answers": [
+                  {
+                    "content": "C4H10",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à reconnaître des isomères.",
+            "questions": [
+              {
+                "content": "Des isomères ont la même formule ___ mais des enchaînements d'atomes différents.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Calculer : on compare d'abord les formules brutes, qui doivent être identiques. Étape 4 — Nommer et vérifier : les noms, donc les enchaînements d'atomes, doivent être différents.",
+                "answers": [
+                  {
+                    "content": "brute",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "semi-développée",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "développée",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ramifiée",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "Une formule semi-développée change quand l'enchaînement change."
+              },
+              {
+                "content": "Combien d'isomères possède le butane $\\mathrm{C_{4}H_{10}}$, butane compris ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $n = 4$. Étape 2 — Raccourcir : une chaîne de 3 carbones avec un méthyle sur le carbone 2 donne le 2-méthylpropane. Étape 4 — Nommer : butane et 2-méthylpropane, soit 2 isomères.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il y a la chaîne linéaire et une seule ramifiée."
+              },
+              {
+                "content": "Le propane possède un isomère ramifié.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Raccourcir : le propane a 3 carbones. Une chaîne de 2 carbones ne peut porter un méthyle qu'en bout de chaîne, ce qui redonne la chaîne de 3 carbones. Le propane n'a donc pas d'isomère.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire la combustion complète et incomplète d'un alcane",
+          "remember": "La **combustion** d'un alcane est une réaction avec le **dioxygène** $\\mathrm{O_{2}}$ de l'air ; elle dégage de la chaleur. Elle est **complète** quand le dioxygène est en quantité suffisante (pièce bien aérée) : elle forme du **dioxyde de carbone** $\\mathrm{CO_{2}}$ et de l'**eau** $\\mathrm{H_{2}O}$. Le dioxyde de carbone trouble l'eau de chaux. Elle est **incomplète** quand le dioxygène manque (pièce mal aérée) : elle forme de l'eau et du **monoxyde de carbone** $\\mathrm{CO}$, gaz incolore, inodore et très toxique, ou du carbone $\\mathrm{C}$ (suie noire), ou les deux. Pendant la réaction, les atomes se conservent : il y a autant d'atomes de chaque élément à gauche et à droite de la flèche. On les compte en plaçant des **coefficients** devant les formules, jamais en changeant les petits chiffres d'une formule. Exemple : $\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$.",
+          "method": [
+            "Écrire l'équation non équilibrée : l'alcane et $\\mathrm{O_{2}}$ à gauche ; à droite, $\\mathrm{CO_{2}}$ et $\\mathrm{H_{2}O}$ si la combustion est complète.",
+            "Équilibrer le carbone avec le coefficient de $\\mathrm{CO_{2}}$.",
+            "Équilibrer l'hydrogène avec le coefficient de $\\mathrm{H_{2}O}$.",
+            "Équilibrer l'oxygène en dernier avec le coefficient de $\\mathrm{O_{2}}$, puis vérifier chaque élément."
+          ],
+          "example": {
+            "statement": "Écrire l'équation de la combustion complète du propane $\\mathrm{C_{3}H_{8}}$.",
+            "steps": [
+              "Écrire : $\\mathrm{C_{3}H_{8} + O_{2}  \\to  CO_{2} + H_{2}O}$ (non équilibrée).",
+              "Équilibrer le carbone : 3 carbones à gauche, donc $\\mathrm{3\\,CO_{2}}$ à droite.",
+              "Équilibrer l'hydrogène : 8 hydrogènes à gauche, donc $\\mathrm{4\\,H_{2}O}$ à droite (4 fois 2).",
+              "Équilibrer l'oxygène : à droite, $3 \\times 2 + 4 = 10$ oxygènes, donc $\\mathrm{5\\,O_{2}}$ à gauche. Vérifier : $\\mathrm{C_{3}H_{8} + 5\\,O_{2}  \\to  3\\,CO_{2} + 4\\,H_{2}O}$ a 3 C, 8 H et 10 O de chaque côté."
+            ]
+          },
+          "pitfall": "Ne change jamais les petits chiffres d'une formule pour équilibrer. Contre-exemple : dans $\\mathrm{CH_{4} + O_{2}  \\to  CO_{2} + H_{2}O}$, écrire $\\mathrm{H_{2}O_{2}}$ à droite pour avoir plus d'oxygène donne $\\mathrm{CH_{4} + O_{2}  \\to  CO_{2} + H_{2}O_{2}}$ : c'est une autre espèce chimique (l'eau oxygénée), et la réaction n'est plus celle de la combustion. On équilibre seulement avec les coefficients : ici $\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$.",
+          "figure": null,
+          "exercise": {
+            "title": "Écrire des équations de combustion",
+            "statement": "Dans cet exercice, tu écris et tu équilibres des équations de combustion d'alcanes avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels sont les produits de la combustion complète d'un alcane ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : dans une combustion complète, l'alcane réagit avec $\\mathrm{O_{2}}$ et forme toujours du dioxyde de carbone $\\mathrm{CO_{2}}$ et de l'eau $\\mathrm{H_{2}O}$. Le monoxyde de carbone $\\mathrm{CO}$ et le carbone $\\mathrm{C}$ n'apparaissent que si le dioxygène manque.",
+                "answers": [
+                  {
+                    "content": "le dioxyde de carbone et l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "le monoxyde de carbone et l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "le carbone et l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "le dioxyde de carbone et le dihydrogène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'équation équilibrée de la combustion complète du méthane $\\mathrm{CH_{4}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{CH_{4} + O_{2}  \\to  CO_{2} + H_{2}O}$. Étape 2 — Équilibrer le carbone : 1 carbone de chaque côté. Étape 3 — Équilibrer l'hydrogène : 4 hydrogènes à gauche, donc $\\mathrm{2\\,H_{2}O}$. Étape 4 — Équilibrer l'oxygène : $2 + 2 = 4$ à droite, donc $\\mathrm{2\\,O_{2}}$. La proposition sans coefficients ou avec $\\mathrm{CO}$ ne conserve pas les atomes.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + H_{2}O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO + 2\\,H_{2}O}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète l'équation de la combustion de l'éthane : 2 $\\mathrm{C_{2}H_{6}}$ + ___ $\\mathrm{O_{2}}$ → 4 $\\mathrm{CO_{2}}$ + 6 $\\mathrm{H_{2}O}$. Écris le coefficient devant $\\mathrm{O_{2}}$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : l'équation est donnée. Étape 2 — Équilibrer le carbone : $2 \\times 2 = 4$ carbones de chaque côté. Étape 3 — Équilibrer l'hydrogène : $2 \\times 6 = 12$ hydrogènes à gauche et $6 \\times 2 = 12$ à droite. Étape 4 — Équilibrer l'oxygène : à droite, $4 \\times 2 + 6 = 14$ oxygènes, donc le coefficient de $\\mathrm{O_{2}}$ est $14 \\div 2 = 7$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans $\\mathrm{C_{3}H_{8} + 5\\,O_{2}  \\to  3\\,CO_{2} + 4\\,H_{2}O}$, combien de molécules de dioxyde de carbone se forment quand 4 molécules de propane brûlent complètement ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : l'équation est donnée. Étapes 2 à 4 — Lire les coefficients : 1 molécule de propane forme 3 molécules de $\\mathrm{CO_{2}}$. Avec 4 molécules de propane, on obtient $4 \\times 3 = 12$ molécules de $\\mathrm{CO_{2}}$.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels corps peuvent se former, en plus de l'eau, quand la combustion d'un alcane est incomplète ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : quand le dioxygène manque, les produits de la combustion changent. Étapes 2 à 4 — Équilibrer montre que le carbone peut se retrouver sous forme de monoxyde de carbone $\\mathrm{CO}$ ou de carbone $\\mathrm{C}$ (suie). Le dioxygène $\\mathrm{O_{2}}$ est un réactif, pas un produit, et le chlorure d'hydrogène $\\mathrm{HCl}$ contient du chlore, qui n'est ni dans l'alcane ni dans l'air.",
+                "answers": [
+                  {
+                    "content": "le monoxyde de carbone $\\mathrm{CO}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "le carbone $\\mathrm{C}$ (suie)",
+                    "correct": true
+                  },
+                  {
+                    "content": "le dioxygène $\\mathrm{O_{2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "le chlorure d'hydrogène $\\mathrm{HCl}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour équilibrer $\\mathrm{CH_{4} + O_{2}  \\to  CO_{2} + H_{2}O}$, on peut écrire $\\mathrm{H_{2}O_{2}}$ à la place de $\\mathrm{H_{2}O}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Équilibrer l'oxygène : on équilibre seulement avec des coefficients. Écrire $\\mathrm{H_{2}O_{2}}$ change la substance (c'est l'eau oxygénée, pas l'eau). L'équation correcte est $\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire des équations de combustion.",
+            "questions": [
+              {
+                "content": "Le gaz toxique, incolore et inodore, formé par une combustion incomplète s'appelle le monoxyde de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : quand le dioxygène manque, il se forme du monoxyde de carbone, de formule $\\mathrm{CO}$. Il est dangereux car on ne le voit pas et on ne le sent pas.",
+                "answers": [
+                  {
+                    "content": "carbone",
+                    "correct": true
+                  }
+                ],
+                "hint": "Sa formule est $\\mathrm{CO}$."
+              },
+              {
+                "content": "Dans $\\mathrm{CH_{4} + 2\\,O_{2}  \\to  CO_{2} + 2\\,H_{2}O}$, combien de molécules d'eau se forment à partir d'une molécule de méthane ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Équilibrer l'hydrogène : le méthane a 4 hydrogènes, donc il faut 2 molécules $\\mathrm{H_{2}O}$ (2 fois 2 hydrogènes) à droite. Le coefficient de $\\mathrm{H_{2}O}$ est 2.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Lis le coefficient devant $\\mathrm{H_{2}O}$."
+              },
+              {
+                "content": "Dans une pièce mal aérée, la combustion du gaz de cuisine est plus souvent incomplète.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : sans assez d'air, le dioxygène manque et la combustion est incomplète : il peut se former du monoxyde de carbone et de la suie. D'où l'importance d'aérer.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire la substitution du méthane par le dichlore",
+          "remember": "Une **substitution** est une réaction où un atome d'hydrogène d'un alcane est **remplacé** par un autre atome, ici un atome de chlore. La chaîne de carbones ne change pas. Le méthane $\\mathrm{CH_{4}}$ réagit avec le **dichlore** $\\mathrm{Cl_{2}}$ **à la lumière**. On obtient le **chlorométhane** $\\mathrm{CH_{3}Cl}$ et le **chlorure d'hydrogène** $\\mathrm{HCl}$ : $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$. La réaction peut continuer et remplacer d'autres hydrogènes : $\\mathrm{CH_{2}Cl_{2}}$ dichlorométhane, $\\mathrm{CHCl_{3}}$ trichlorométhane, $\\mathrm{CCl_{4}}$ tétrachlorométhane. À chaque hydrogène remplacé, il faut une molécule $\\mathrm{Cl_{2}}$ et il se forme une molécule $\\mathrm{HCl}$. Le nom d'un dérivé chloré s'écrit avec chloro-, dichloro-… devant le nom de l'alcane.",
+          "method": [
+            "Repérer l'alcane de départ et le nombre d'atomes d'hydrogène à remplacer par des atomes de chlore.",
+            "Remplacer ces hydrogènes par des atomes de chlore, sans changer la chaîne de carbones : écrire le dérivé chloré.",
+            "Écrire le chlorure d'hydrogène $\\mathrm{HCl}$ et placer les coefficients : une molécule $\\mathrm{Cl_{2}}$ et une molécule $\\mathrm{HCl}$ pour chaque hydrogène remplacé.",
+            "Vérifier le nombre d'atomes de chaque élément de part et d'autre, puis nommer le dérivé chloré."
+          ],
+          "example": {
+            "statement": "Écrire l'équation de la réaction du méthane avec le dichlore quand deux atomes d'hydrogène sont remplacés.",
+            "steps": [
+              "Repérer : l'alcane de départ est le méthane $\\mathrm{CH_{4}}$, et 2 atomes d'hydrogène sont à remplacer.",
+              "Remplacer : deux hydrogènes deviennent deux chlores, on obtient $\\mathrm{CH_{2}Cl_{2}}$.",
+              "Écrire : il faut 2 molécules $\\mathrm{Cl_{2}}$ et il se forme 2 molécules $\\mathrm{HCl}$ : $\\mathrm{CH_{4} + 2\\,Cl_{2}  \\to  CH_{2}Cl_{2} + 2\\,HCl}$.",
+              "Vérifier : à gauche et à droite, 1 C, 4 H et 4 Cl. Nommer : deux chlores sur le méthane, c'est le dichlorométhane."
+            ]
+          },
+          "pitfall": "Ne pas oublier le chlorure d'hydrogène $\\mathrm{HCl}$. Contre-exemple : écrire $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl}$ est faux. À gauche, il y a 4 hydrogènes et 2 chlores ; à droite, seulement 3 hydrogènes et 1 chlore. L'hydrogène retiré et le deuxième chlore forment $\\mathrm{HCl}$ : $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$ a 1 C, 4 H et 2 Cl de chaque côté.",
+          "figure": "chloromethane",
+          "exercise": {
+            "title": "Écrire des substitutions du méthane",
+            "statement": "Dans cet exercice, tu écris des réactions de substitution du méthane par le dichlore avec la méthode de la fiche. La figure montre la molécule de chlorométhane.",
+            "exercise_type": "fixation",
+            "figure": "chloromethane",
+            "questions": [
+              {
+                "content": "La figure montre la molécule $\\mathrm{CH_{3}Cl}$. Quel est son nom ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'alcane de départ est le méthane, à 1 carbone. Étape 2 — Remplacer : un seul hydrogène est remplacé par un chlore. Étape 4 — Nommer : un chlore devant le nom du méthane, c'est le chlorométhane. Le dichlorométhane $\\mathrm{CH_{2}Cl_{2}}$ a deux chlores, et le chlorure d'hydrogène $\\mathrm{HCl}$ n'a pas de carbone.",
+                "answers": [
+                  {
+                    "content": "chlorométhane",
+                    "correct": true
+                  },
+                  {
+                    "content": "dichlorométhane",
+                    "correct": false
+                  },
+                  {
+                    "content": "chlorure d'hydrogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "tétrachlorométhane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'équation équilibrée de la substitution d'un hydrogène du méthane par le dichlore ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : alcane $\\mathrm{CH_{4}}$, un hydrogène à remplacer. Étape 2 — Remplacer : on obtient $\\mathrm{CH_{3}Cl}$. Étape 3 — Écrire : un $\\mathrm{Cl_{2}}$ et un $\\mathrm{HCl}$. Étape 4 — Vérifier : 1 C, 4 H et 2 Cl de chaque côté. $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl}$ oublie $\\mathrm{HCl}$. $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{2}Cl_{2} + HCl}$ ne conserve pas les atomes (3 Cl à droite, 2 à gauche).",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{2}Cl_{2} + HCl}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{4} + 2\\,Cl_{2}  \\to  CH_{3}Cl + HCl}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes d'hydrogène du méthane sont remplacés dans la molécule $\\mathrm{CHCl_{3}}$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le méthane $\\mathrm{CH_{4}}$ a 4 hydrogènes. Étape 2 — Remplacer : la molécule $\\mathrm{CHCl_{3}}$ garde 1 hydrogène, donc $4 - 1 = 3$ hydrogènes ont été remplacés par des chlores.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\mathrm{CH_{4}}$ + 3 $\\mathrm{Cl_{2}}$ → $\\mathrm{CHCl_{3}}$ + ___ $\\mathrm{HCl}$. Écris le coefficient devant $\\mathrm{HCl}$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : trois hydrogènes sont remplacés. Étape 3 — Écrire : une molécule $\\mathrm{HCl}$ pour chaque hydrogène remplacé, donc 3. Étape 4 — Vérifier : à droite, $1 + 3 = 4$ hydrogènes et $3 + 3 = 6$ chlores, comme à gauche.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque formule à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Remplacer : le nombre de chlores est 1, 2, 3 ou 4 sur le carbone du méthane. Étape 4 — Nommer : on ajoute chloro-, dichloro-, trichloro- ou tétrachloro- devant $\\mathrm{ méthane }$.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}Cl}$",
+                    "match": "chlorométhane"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{2}Cl_{2}}$",
+                    "match": "dichlorométhane"
+                  },
+                  {
+                    "content": "$\\mathrm{CHCl_{3}}$",
+                    "match": "trichlorométhane"
+                  },
+                  {
+                    "content": "$\\mathrm{CCl_{4}}$",
+                    "match": "tétrachlorométhane"
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl}$ est équilibrée.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Vérifier : à gauche, 1 C, 4 H et 2 Cl ; à droite, 1 C, 3 H et 1 Cl. Il manque 1 H et 1 Cl : c'est le chlorure d'hydrogène $\\mathrm{HCl}$ de l'étape 3, oublié ici.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire des substitutions.",
+            "questions": [
+              {
+                "content": "Dans une substitution du méthane, un atome d'hydrogène est remplacé par un atome de ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Remplacer : avec le dichlore, l'atome d'hydrogène du méthane est remplacé par un atome de chlore. La chaîne de carbones ne change pas.",
+                "answers": [
+                  {
+                    "content": "chlore",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "carbone",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "oxygène",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "azote",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "Le réactif est le dichlore."
+              },
+              {
+                "content": "Dans $\\mathrm{CH_{4} + 2\\,Cl_{2}  \\to  CH_{2}Cl_{2} + 2\\,HCl}$, combien d'atomes d'hydrogène du méthane sont remplacés ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le méthane $\\mathrm{CH_{4}}$ a 4 hydrogènes ; $\\mathrm{CH_{2}Cl_{2}}$ en garde 2. Étape 2 — Remplacer : $4 - 2 = 2$ hydrogènes sont remplacés par 2 chlores.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compare les hydrogènes de $\\mathrm{CH_{4}}$ et de $\\mathrm{CH_{2}Cl_{2}}$."
+              },
+              {
+                "content": "Dans une substitution, la chaîne de carbones de l'alcane change.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Remplacer : seul un hydrogène (ou plusieurs) est remplacé par un chlore. Les carbones restent enchaînés de la même façon, c'est ce qui distingue la substitution.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le gaz de cuisine de Mama Affoué",
+          "statement": "À Bouaké, Mama Affoué cuisine sur un réchaud alimenté par une bouteille de gaz butane, de formule $\\mathrm{C_{4}H_{10}}$. Elle veut mieux connaître ce gaz. Dans toutes les questions, la combustion a lieu dans une pièce bien aérée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "À quelle famille de composés appartient le butane $\\mathrm{C_{4}H_{10}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le butane contient seulement du carbone et de l'hydrogène, c'est un hydrocarbure, avec $n = 4$. Étape 2 — Calculer : $2n+2 = 2 \\times 4 + 2 = 10$ hydrogènes, ce qui correspond à $\\mathrm{C_{4}H_{10}}$. C'est donc un alcane. Un alcène aurait 2 hydrogènes de moins ($2n$), et un alcool contiendrait de l'oxygène.",
+              "answers": [
                 {
-                  "content": "Qu'est-ce qu'un hydrocarbure ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un hydrocarbure ne contient que du carbone et de l'hydrogène. Si l'on ajoute de l'oxygène, ce n'est plus un hydrocarbure (ce peut être un alcool, par exemple).",
-                  "answers": [
-                    {
-                      "content": "Un composé formé uniquement d'atomes de carbone et d'hydrogène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un composé formé de carbone, d'hydrogène et d'oxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un composé qui contient de l'eau et du carbone",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un composé qui brûle toujours en laissant du charbon",
-                      "correct": false
-                    }
-                  ]
+                  "content": "les alcanes",
+                  "correct": true
                 },
                 {
-                  "content": "Dans un alcane, tous les atomes sont liés entre eux uniquement par des liaisons simples (C–C et C–H).",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. C'est ce que veut dire « saturé » : que des liaisons simples. Dans l'image du rang, deux voisins se tiennent toujours par une seule poignée de main.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "les alcènes",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image du rang de cacaoyers, chaque cacaoyer a quatre « mains » pour serrer ses voisins ou de petits planteurs qui n'ont qu'une seule main. Le cacaoyer à quatre mains représente :",
-                  "question_type": "single_choice",
-                  "explanation": "Le carbone fait toujours 4 liaisons : c'est le cacaoyer à quatre mains. Le petit planteur à une seule main, lui, représente l'hydrogène, qui ne fait qu'une liaison.",
-                  "answers": [
-                    {
-                      "content": "Un atome de carbone",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un atome d'hydrogène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une molécule d'alcane entière",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une liaison entre deux atomes",
-                      "correct": false
-                    }
-                  ]
+                  "content": "les alcools",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles affirmations sont exactes pour les atomes d'un alcane ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Un carbone fait 4 liaisons et un hydrogène en fait 1. Un carbone qui n'en ferait que 2, ou un hydrogène qui en ferait 2, ne respecte pas l'image des mains : aucune main ne reste libre ni en trop.",
-                  "answers": [
-                    {
-                      "content": "Chaque atome de carbone fait 4 liaisons",
-                      "correct": true
-                    },
-                    {
-                      "content": "Chaque atome d'hydrogène fait 1 liaison",
-                      "correct": true
-                    },
-                    {
-                      "content": "Chaque atome de carbone fait 2 liaisons",
-                      "correct": false
-                    },
-                    {
-                      "content": "Chaque atome d'hydrogène fait 2 liaisons",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un atome de carbone peut garder une liaison libre",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que signifie le mot « saturé » pour un alcane ?",
-                  "question_type": "single_choice",
-                  "explanation": "Saturé veut dire que le carbone porte le maximum d'hydrogènes possible : il n'y a que des liaisons simples. Cela ne veut pas dire « plein d'eau » ni « impossible à brûler ».",
-                  "answers": [
-                    {
-                      "content": "Il n'y a que des liaisons simples : le carbone porte le maximum d'hydrogènes",
-                      "correct": true
-                    },
-                    {
-                      "content": "La molécule est pleine d'eau",
-                      "correct": false
-                    },
-                    {
-                      "content": "La molécule ne brûle pas",
-                      "correct": false
-                    },
-                    {
-                      "content": "La molécule contient un atome d'oxygène",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le pentane a pour formule brute C₅H₁₂. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "C₅H₁₂ est un hydrocarbure saturé de 5 carbones et 12 hydrogènes, et il suit $\\mathrm{C_nH_{2n+2}}$ avec $n = 5$. Il ne contient pas d'oxygène, et $2 \\times 5 = 10$ ne donne pas 12 : la formule $\\mathrm{C_nH_{2n}}$ est fausse ici.",
-                  "answers": [
-                    {
-                      "content": "C'est un hydrocarbure",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est saturé",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il possède 5 carbones et 12 hydrogènes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il contient un atome d'oxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il possède 10 atomes d'hydrogène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa formule suit $\\mathrm{C_nH_{2n}}$ avec $n = 5$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "les acides",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Écrire formules et noms des alcanes",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est la formule semi-développée du butane ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : butane signifie $n = 4$. Étape 3 — Écrire : deux groupes $\\mathrm{CH_{3}}$ aux extrémités et $4-2 = 2$ groupes $\\mathrm{CH_{2}}$ au milieu. $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{3}}$ est le propane, et $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{3}}$ est le 2-méthylpropane, un isomère ramifié.",
+              "answers": [
                 {
-                  "content": "Quelle est la formule brute de l'alcane qui possède 8 atomes de carbone ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec $n = 8$ : $2n + 2 = 18$ hydrogènes. C'est l'octane, C₈H₁₈. Oublier le « +2 » donne C₈H₁₆, qui n'est pas un alcane.",
-                  "answers": [
-                    {
-                      "content": "C₈H₁₈",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₈H₁₆",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₈H₂₀",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₈H₈",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                  "correct": true
                 },
                 {
-                  "content": "Un alcane possède 14 atomes d'hydrogène. Quel est son nom ?",
-                  "question_type": "single_choice",
-                  "explanation": "On résout $2n + 2 = 14$, donc $n = 6$. Six carbones : l'hexane, C₆H₁₄. L'heptane en a 7 (C₇H₁₆), le pentane en a 5 (C₅H₁₂).",
-                  "answers": [
-                    {
-                      "content": "L'hexane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le pentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'heptane",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'octane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{3}}$",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces formules brutes, lesquelles sont celles d'alcanes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "On teste $2n + 2$ : CH₄ ($n=1$, 4 H), C₃H₈ ($n=3$, 8 H) et C₆H₁₄ ($n=6$, 14 H) conviennent. C₃H₆ et C₅H₁₀ n'ont pas assez d'hydrogènes, et C₂H₆O contient de l'oxygène.",
-                  "answers": [
-                    {
-                      "content": "CH₄",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₃H₈",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₆H₁₄",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₃H₆",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₅H₁₀",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₂H₆O",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{3}}$",
+                  "correct": false
                 },
                 {
-                  "content": "Quelle est la formule semi-développée du propane ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le propane a 3 carbones en rang : deux bouts CH₃ et un milieu CH₂, soit CH₃–CH₂–CH₃. CH₃–CH₃ est l'éthane, et il manque des hydrogènes dans CH₂–CH₂–CH₂.",
-                  "answers": [
-                    {
-                      "content": "CH₃–CH₂–CH₃",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₃–CH₃",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃–CH₂–CH₂–CH₃",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₂–CH₂–CH₂",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le nom de l'alcane de formule semi-développée CH₃–CH₂–CH₂–CH₂–CH₃ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On compte les carbones : il y en a 5. La racine « pent- » correspond à 5 carbones, donc c'est le pentane. Le butane n'en a que 4.",
-                  "answers": [
-                    {
-                      "content": "Le pentane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le butane",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hexane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le propane",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "C₁₀H₂₀ est la formule brute d'un alcane à 10 atomes de carbone.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Avec $n = 10$, un alcane a $2 \\times 10 + 2 = 22$ hydrogènes. L'alcane à 10 carbones est le décane, C₁₀H₂₂.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Formule brute, masse et décompte des atomes",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quel est le nom de l'isomère ramifié du butane ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : un isomère du butane a aussi la formule $\\mathrm{C_{4}H_{10}}$. Étape 2 — Raccourcir la chaîne : 3 carbones et un méthyle sur le carbone central. Étape 4 — Nommer : 2-méthylpropane. Le 2-méthylbutane a 5 carbones, c'est un isomère du pentane.",
+              "answers": [
                 {
-                  "content": "Un alcane a une masse molaire de 58 g/mol. On donne M(C) = 12 g/mol et M(H) = 1 g/mol. Quel est cet alcane ?",
-                  "question_type": "single_choice",
-                  "explanation": "La masse molaire vaut $12n + (2n + 2) = 14n + 2$. Ici $14n + 2 = 58$, donc $n = 4$ : c'est le butane, C₄H₁₀ (48 + 10 = 58). Le propane fait 44 g/mol.",
-                  "answers": [
-                    {
-                      "content": "Le butane, C₄H₁₀",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le propane, C₃H₈",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le pentane, C₅H₁₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'éthane, C₂H₆",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2-méthylpropane",
+                  "correct": true
                 },
                 {
-                  "content": "Une molécule d'alcane contient 17 atomes au total (carbone et hydrogène réunis). Quelle est sa formule brute ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le total vaut $n + (2n + 2) = 3n + 2$. On résout $3n + 2 = 17$, donc $n = 5$ : C₅H₁₂ (5 + 12 = 17). C₅H₁₀ a 15 atomes, pas 17.",
-                  "answers": [
-                    {
-                      "content": "C₅H₁₂",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₆H₁₄",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₄H₁₀",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₅H₁₀",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2-méthylbutane",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles affirmations sont exactes pour la molécule de formule brute C₇H₁₆ ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Avec $n = 7$, $2n + 2 = 16$ : c'est bien un alcane, et la racine « hept- » donne l'heptane. L'octane a 8 carbones. Un alcane ne contient que du carbone et de l'hydrogène.",
-                  "answers": [
-                    {
-                      "content": "C'est un alcane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle s'appelle l'heptane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle s'appelle l'octane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle contient un atome d'oxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle contient 14 atomes d'hydrogène",
-                      "correct": false
-                    }
-                  ]
+                  "content": "1-méthylpropane",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces formules brutes, laquelle n'est pas celle d'un alcane ?",
-                  "question_type": "single_choice",
-                  "explanation": "On teste $2n + 2$ : C₉H₂₀ (20), C₁₂H₂₆ (26) et C₅H₁₂ (12) conviennent. Pour C₁₀H₂₀, il faudrait 22 hydrogènes : il en manque deux.",
-                  "answers": [
-                    {
-                      "content": "C₁₀H₂₀",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₉H₂₀",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₁₂H₂₆",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₅H₁₂",
-                      "correct": false
-                    }
-                  ]
+                  "content": "pentane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation équilibrée de la combustion complète du butane ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $\\mathrm{C_{4}H_{10} + O_{2}  \\to  CO_{2} + H_{2}O}$. Étape 2 — Équilibrer le carbone : 4 carbones, donc $\\mathrm{4\\,CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : 10 hydrogènes, donc $\\mathrm{5\\,H_{2}O}$. Étape 4 — Équilibrer l'oxygène : $4 \\times 2 + 5 = 13$ oxygènes à droite, soit 6,5 $\\mathrm{O_{2}}$ ; on double toute l'équation : $\\mathrm{2\\,C_{4}H_{10} + 13\\,O_{2}  \\to  8\\,CO_{2} + 10\\,H_{2}O}$. Les autres propositions ne conservent pas l'oxygène, ou donnent $\\mathrm{CO}$, qui est un produit d'une combustion incomplète.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{2\\,C_{4}H_{10} + 13\\,O_{2}  \\to  8\\,CO_{2} + 10\\,H_{2}O}$",
+                  "correct": true
                 },
                 {
-                  "content": "Combien de liaisons simples (C–C et C–H réunies) possède la molécule de propane, C₃H₈ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans CH₃–CH₂–CH₃, il y a 2 liaisons C–C et 8 liaisons C–H (une par hydrogène), soit 10 au total. Compter seulement les hydrogènes (8) oublie les liaisons entre carbones.",
-                  "answers": [
-                    {
-                      "content": "10",
-                      "correct": true
-                    },
-                    {
-                      "content": "8",
-                      "correct": false
-                    },
-                    {
-                      "content": "9",
-                      "correct": false
-                    },
-                    {
-                      "content": "11",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\mathrm{C_{4}H_{10} + O_{2}  \\to  4\\,CO_{2} + 5\\,H_{2}O}$",
+                  "correct": false
                 },
                 {
-                  "content": "Dans un rang de 6 cacaoyers (6 carbones), les deux cacaoyers des bouts tiennent chacun 3 petits planteurs, et chacun des autres en tient 2. Combien de petits planteurs (hydrogènes) y a-t-il en tout ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les bouts en tiennent $3 + 3 = 6$ ; les 4 autres en tiennent $4 \\times 2 = 8$. Total : 14. On retrouve $2n + 2 = 14$ pour $n = 6$, l'hexane C₆H₁₄.",
-                  "answers": [
-                    {
-                      "content": "14",
-                      "correct": true
-                    },
-                    {
-                      "content": "12",
-                      "correct": false
-                    },
-                    {
-                      "content": "16",
-                      "correct": false
-                    },
-                    {
-                      "content": "18",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\mathrm{2\\,C_{4}H_{10} + 9\\,O_{2}  \\to  8\\,CO + 10\\,H_{2}O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{C_{4}H_{10} + 13\\,O_{2}  \\to  4\\,CO_{2} + 5\\,H_{2}O}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après $\\mathrm{2\\,C_{4}H_{10} + 13\\,O_{2}  \\to  8\\,CO_{2} + 10\\,H_{2}O}$, combien de molécules de dioxyde de carbone se forment quand 6 molécules de butane brûlent complètement ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire l'équation : 2 molécules de butane forment 8 molécules de $\\mathrm{CO_{2}}$. Étape 2 — Trouver le facteur : 6 molécules de butane, c'est $6 \\div 2 = 3$ fois plus. Étape 3 — Calculer : $3 \\times 8 = 24$ molécules de $\\mathrm{CO_{2}}$.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mama Affoué veut vérifier qu'il se forme du dioxyde de carbone. Quel test utilise-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on cherche un test qui identifie $\\mathrm{CO_{2}}$. Étape 2 — Appliquer : le dioxyde de carbone trouble l'eau de chaux. Le sulfate de cuivre anhydre qui bleuit est le test de l'eau, l'allumette incandescente qui se rallume est le test du dioxygène, et la détonation est le test du dihydrogène.",
+              "answers": [
+                {
+                  "content": "l'eau de chaux se trouble",
+                  "correct": true
+                },
+                {
+                  "content": "le sulfate de cuivre anhydre devient bleu",
+                  "correct": false
+                },
+                {
+                  "content": "une allumette incandescente se rallume",
+                  "correct": false
+                },
+                {
+                  "content": "une petite détonation se produit",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Nommer un alcane et reconnaître ses isomères",
-          "subtitle": "Chaîne principale, groupes méthyle et éthyle, numérotation, isomères de chaîne",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Repérer la chaîne principale et les ramifications d'un alcane.</li><li>Nommer un alcane ramifié (groupes méthyle et éthyle) et écrire sa formule à partir de son nom.</li><li>Reconnaître des isomères de chaîne.</li></ul><h2>L'image pour comprendre</h2><p><strong>La route principale et les pistes.</strong> Dans un village de planteurs, la route principale est la plus longue route du village. Des pistes en terre partent de cette route vers les plantations. Pour donner l'adresse d'une piste, tu dis à quel point de la route elle démarre, en comptant depuis le bout de la route qui donne le plus petit numéro. Tu dis aussi sa longueur : une piste d'un seul carreau, ou de deux.</p><p><strong>Le pont.</strong> La route principale, c'est la <strong>chaîne principale</strong> : la plus longue chaîne de carbones. Elle donne le nom de base (butane, pentane…). Une piste, c'est une <strong>ramification</strong>, appelée <strong>groupe alkyle</strong> : une piste d'un carbone s'appelle <strong>méthyle</strong> (CH₃–), une piste de deux carbones s'appelle <strong>éthyle</strong> (CH₃–CH₂–). Le numéro de départ de la piste, c'est sa <strong>position</strong>. Deux villages qui ont le même nombre de maisons (même formule brute) mais des pistes disposées autrement, ce sont des <strong>isomères</strong>.</p><p><strong>La limite de l'image.</strong> Une route peut être dessinée avec des virages : le dessin ne change pas la molécule. Ce qui compte, c'est l'enchaînement des carbones, pas la forme du dessin. Une chaîne dessinée coudée reste une chaîne simple.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Étape 1.</strong> Repérer la <strong>chaîne principale</strong> : la plus longue chaîne continue d'atomes de carbone. Elle donne le nom de l'alcane de base.</p><p><strong>Étape 2.</strong> Nommer les <strong>groupes</strong> restants : CH₃– est le groupe méthyle ; CH₃–CH₂– est le groupe éthyle.</p><p><strong>Étape 3.</strong> <strong>Numéroter</strong> la chaîne principale en partant du bout qui donne les plus petits numéros aux ramifications.</p><p><strong>Étape 4.</strong> Écrire le nom : les positions, un tiret, le nom des groupes, puis le nom de l'alcane de base. Si un groupe est présent deux fois, on écrit « di » (trois fois : « tri ») et les positions sont séparées par une virgule. Si les groupes sont différents, on les classe par ordre alphabétique.</p><p><strong>Isomères de chaîne</strong> : molécules de même formule brute mais d'enchaînement différent. Ils ont des propriétés physiques différentes. Le butane et le 2-méthylpropane sont tous deux C₄H₁₀.</p><ul><li>C₄H₁₀ : 2 isomères</li><li>C₅H₁₂ : 3 isomères</li><li>C₆H₁₄ : 5 isomères</li></ul></blockquote><h2>Exemple résolu</h2><p>Nomme la molécule CH₃–CH(CH₃)–CH₂–CH₂–CH₃.</p><ol><li><strong>Chaîne principale.</strong> On cherche la plus longue chaîne : en partant du CH₃ de gauche et en passant par CH, CH₂, CH₂, on arrive au CH₃ de droite. Elle compte 5 carbones : la base est le pentane.</li><li><strong>Ramification.</strong> Il reste un seul CH₃ accroché sur le deuxième carbone de la chaîne : c'est un groupe méthyle.</li><li><strong>Numérotation.</strong> En partant de la gauche, le groupe est en position 2. En partant de la droite, il serait en position 4. On choisit le plus petit : 2.</li><li><strong>Nom.</strong> 2-méthylpentane.</li><li><strong>Vérification.</strong> On compte les carbones : $5 + 1 = 6$, donc $n = 6$ et il faut $2 \\times 6 + 2 = 14$ hydrogènes. On compte : $3 + 1 + 3 + 2 + 2 + 3 = 14$. C'est un isomère de l'hexane, C₆H₁₄.</li></ol><h2>Le piège à éviter</h2><p>Choisir une chaîne trop courte. Le nom « 1-méthylpropane » n'existe pas : si l'on peut prolonger la chaîne en passant par le groupe, c'est que la chaîne principale est plus longue. CH₃–CH₂–CH₂–CH₃ n'est pas du « méthylpropane » : c'est le butane. Autre erreur : croire qu'un même alcane dessiné coudé est un autre isomère. Pour comparer deux dessins, compte les carbones de la plus longue chaîne et regarde où sont les ramifications.</p><h2>En une phrase</h2><p>Je prends la plus longue chaîne pour le nom de base, je numérote pour avoir les plus petits numéros, puis j'ajoute les groupes méthyle ou éthyle devant, dans l'ordre alphabétique.</p>",
-          "exercises": [
+          "title": "La cuisine sans fenêtre de Kouamé",
+          "statement": "À Korhogo, Kouamé prépare le repas sur un réchaud à gaz butane $\\mathrm{C_{4}H_{10}}$, dans une petite cuisine sans fenêtre. Il remarque que la flamme est jaune, que sa casserole noircit et qu'il a mal à la tête.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Chaîne principale, groupes et isomères",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelles affirmations sont vraies pour la cuisine de Kouamé ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : la flamme jaune et la casserole noircie sont les signes d'un manque de dioxygène. Étape 2 — Conclure : la combustion est incomplète ; le noir est du carbone $\\mathrm{C}$ (suie). Le dioxyde de carbone et l'eau sont les produits d'une combustion complète. Le mal de tête vient d'un gaz toxique formé en cas de combustion incomplète, le monoxyde de carbone.",
+              "answers": [
                 {
-                  "content": "Dans la nomenclature d'un alcane, comment choisit-on la chaîne principale ?",
-                  "question_type": "single_choice",
-                  "explanation": "La chaîne principale est la plus longue chaîne continue de carbones, même si le dessin la fait tourner. Ce n'est pas la chaîne dessinée à l'horizontale, et on ne prend pas la plus courte.",
-                  "answers": [
-                    {
-                      "content": "C'est la plus longue chaîne continue d'atomes de carbone",
-                      "correct": true
-                    },
-                    {
-                      "content": "C'est la chaîne dessinée à l'horizontale",
-                      "correct": false
-                    },
-                    {
-                      "content": "C'est la chaîne qui porte le plus d'hydrogènes",
-                      "correct": false
-                    },
-                    {
-                      "content": "C'est la chaîne la plus courte",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La combustion du butane est incomplète.",
+                  "correct": true
                 },
                 {
-                  "content": "Dans l'image d'un village où la route principale, la plus longue, voit partir des pistes en terre, une piste qui part de la route principale représente :",
-                  "question_type": "single_choice",
-                  "explanation": "La piste est un petit morceau qui part de la route : c'est une ramification, ou groupe alkyle. La route principale est la chaîne principale, et le numéro de départ est la position.",
-                  "answers": [
-                    {
-                      "content": "Une ramification (un groupe alkyle)",
-                      "correct": true
-                    },
-                    {
-                      "content": "La chaîne principale",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un atome d'hydrogène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un atome d'oxygène",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le noir sur la casserole est du carbone (suie).",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles associations entre groupe et nom sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "CH₃– (un carbone) s'appelle méthyle, et CH₃–CH₂– (deux carbones) s'appelle éthyle. La racine du groupe donne son nombre de carbones : « méth- » pour 1, « éth- » pour 2, « prop- » pour 3.",
-                  "answers": [
-                    {
-                      "content": "CH₃– s'appelle méthyle",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₃–CH₂– s'appelle éthyle",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₃– s'appelle éthyle",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃–CH₂– s'appelle méthyle",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃–CH₂– s'appelle propyle",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le dioxygène est en excès.",
+                  "correct": false
                 },
                 {
-                  "content": "Deux molécules de même formule brute mais d'enchaînement de carbones différent sont des isomères de chaîne.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Même nombre d'atomes de chaque sorte, mais pas le même enchaînement : c'est la définition des isomères de chaîne, comme deux villages de même taille aux pistes différentes.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans le nom 2,3-diméthylbutane, que signifie « di » ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Di » signifie deux : il y a deux groupes méthyle, placés aux positions 2 et 3 de la chaîne de 4 carbones (butane). Il ne s'agit pas de deux chaînes principales.",
-                  "answers": [
-                    {
-                      "content": "Il y a deux groupes méthyle identiques",
-                      "correct": true
-                    },
-                    {
-                      "content": "La chaîne principale compte deux carbones",
-                      "correct": false
-                    },
-                    {
-                      "content": "La molécule contient deux atomes d'oxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il y a un groupe méthyle et un groupe éthyle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Combien d'isomères possède la formule brute C₄H₁₀ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y en a deux : le butane (chaîne de 4 carbones) et le 2-méthylpropane (chaîne de 3 carbones avec un groupe méthyle). Le propane et le pentane n'ont pas la formule C₄H₁₀.",
-                  "answers": [
-                    {
-                      "content": "2",
-                      "correct": true
-                    },
-                    {
-                      "content": "1",
-                      "correct": false
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "4",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La combustion forme seulement du dioxyde de carbone et de l'eau.",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Nommer un alcane ramifié et trouver ses isomères",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quel gaz toxique, incolore et inodore, peut se former dans la cuisine de Kouamé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la combustion est incomplète. Étape 2 — Conclure : elle peut former du monoxyde de carbone $\\mathrm{CO}$, gaz incolore, inodore et très toxique. Le dioxyde de carbone $\\mathrm{CO_{2}}$ se forme surtout en combustion complète, et l'eau n'est pas un gaz toxique.",
+              "answers": [
                 {
-                  "content": "Quel est le nom de l'alcane de formule semi-développée CH₃–CH(CH₃)–CH₂–CH₃ ?",
-                  "question_type": "single_choice",
-                  "explanation": "La plus longue chaîne compte 4 carbones (butane) et le groupe méthyle est sur le carbone 2 en partant de la gauche : 2-méthylbutane. « 3-méthylbutane » vient d'une mauvaise numérotation.",
-                  "answers": [
-                    {
-                      "content": "2-méthylbutane",
-                      "correct": true
-                    },
-                    {
-                      "content": "3-méthylbutane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2-méthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Pentane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le monoxyde de carbone",
+                  "correct": true
                 },
                 {
-                  "content": "Quelle est la formule semi-développée du 2,2-diméthylpropane ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le propane a 3 carbones. Deux groupes méthyle sont accrochés sur le carbone 2 : CH₃–C(CH₃)₂–CH₃. Ce carbone central n'a plus d'hydrogène. CH₃–CH(CH₃)–CH₂–CH₃ est le 2-méthylbutane.",
-                  "answers": [
-                    {
-                      "content": "CH₃–C(CH₃)₂–CH₃",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₃–CH(CH₃)–CH₂–CH₃",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃–CH₂–CH₂–CH₂–CH₃",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃–CH(CH₃)–CH₃",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le dioxyde de carbone",
+                  "correct": false
                 },
                 {
-                  "content": "Quel est le nom de l'alcane de formule semi-développée CH₃–CH₂–CH(CH₃)–CH₂–CH₃ ?",
-                  "question_type": "single_choice",
-                  "explanation": "La plus longue chaîne passe par les deux CH₂ de chaque côté : 5 carbones, donc pentane. Le groupe méthyle est au milieu, en position 3 : 3-méthylpentane. « 2-éthylbutane » choisit une chaîne trop courte.",
-                  "answers": [
-                    {
-                      "content": "3-méthylpentane",
-                      "correct": true
-                    },
-                    {
-                      "content": "2-éthylbutane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2-méthylpentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Hexane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "l'eau",
+                  "correct": false
                 },
                 {
-                  "content": "Le pentane a pour formule semi-développée CH₃–CH₂–CH₂–CH₂–CH₃ (C₅H₁₂). Quelles molécules sont ses isomères ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les isomères du pentane ont aussi 5 carbones au total : le 2-méthylbutane (4 + 1) et le 2,2-diméthylpropane (3 + 2). Le 2-méthylpropane en a 4 et le 3-méthylpentane en a 6.",
-                  "answers": [
-                    {
-                      "content": "Le 2-méthylbutane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le 2,2-diméthylpropane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le 2-méthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le 3-méthylpentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hexane",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le nom de l'alcane de formule semi-développée CH₃–CH(CH₃)–CH(CH₃)–CH₃ ?",
-                  "question_type": "single_choice",
-                  "explanation": "La chaîne principale compte 4 carbones (butane) et porte deux groupes méthyle, sur les carbones 2 et 3 : 2,3-diméthylbutane. Les positions 2,2 voudraient dire que les deux groupes sont sur le même carbone.",
-                  "answers": [
-                    {
-                      "content": "2,3-diméthylbutane",
-                      "correct": true
-                    },
-                    {
-                      "content": "2,2-diméthylbutane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2-méthylpentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "1,2-diméthylbutane",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la formule brute du 3-éthyl-2-méthylpentane ?",
-                  "question_type": "single_choice",
-                  "explanation": "On compte les carbones : 5 pour la chaîne (pentane), 2 pour le groupe éthyle, 1 pour le groupe méthyle, soit 8. Un alcane à 8 carbones a $2 \\times 8 + 2 = 18$ hydrogènes : C₈H₁₈.",
-                  "answers": [
-                    {
-                      "content": "C₈H₁₈",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₇H₁₆",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₉H₂₀",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₈H₁₆",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le dioxygène",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Nomenclature complète et comptage d'isomères",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Une équation de la combustion incomplète du butane est : 2 $\\mathrm{C_{4}H_{10}}$ + 9 $\\mathrm{O_{2}}$ → 8 $\\mathrm{CO}$ + 10 $\\mathrm{H_{2}O}$. Combien de molécules de monoxyde de carbone se forment à partir de 2 molécules de butane ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire l'équation : le coefficient de $\\mathrm{CO}$ est 8. Étape 2 — Conclure : 2 molécules de butane forment 8 molécules de $\\mathrm{CO}$. On vérifie l'oxygène : $9 \\times 2 = 18$ à gauche, $8 + 10 = 18$ à droite.",
+              "answers": [
                 {
-                  "content": "Quel est le nom de l'alcane de formule semi-développée CH₃–CH(CH₃)–CH(C₂H₅)–CH₂–CH₃ ? (C₂H₅– est le groupe éthyle.)",
-                  "question_type": "single_choice",
-                  "explanation": "La chaîne la plus longue compte 5 carbones. En numérotant depuis la gauche, les groupes sont en 2 et 3 (depuis la droite : 3 et 4) : on garde 2 et 3. Ordre alphabétique : éthyle avant méthyle.",
-                  "answers": [
-                    {
-                      "content": "3-éthyl-2-méthylpentane",
-                      "correct": true
-                    },
-                    {
-                      "content": "2-méthyl-3-éthylpentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "3-éthyl-4-méthylpentane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2,3-diméthylhexane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Complète l'équation de la combustion incomplète du méthane : 2 $\\mathrm{CH_{4}}$ + ___ $\\mathrm{O_{2}}$ → 2 $\\mathrm{CO}$ + 4 $\\mathrm{H_{2}O}$. Écris le coefficient devant $\\mathrm{O_{2}}$.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Écrire : l'équation est donnée. Étape 2 — Équilibrer le carbone : 2 carbones de chaque côté. Étape 3 — Équilibrer l'hydrogène : $2 \\times 4 = 8$ à gauche et $4 \\times 2 = 8$ à droite. Étape 4 — Équilibrer l'oxygène : à droite, $2 + 4 = 6$ oxygènes, donc le coefficient de $\\mathrm{O_{2}}$ est $6 \\div 2 = 3$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour équilibrer l'équation d'une combustion.",
+              "question_type": "ordering",
+              "explanation": "On suit la méthode : Étape 1 — Écrire l'équation non équilibrée, Étape 2 — Équilibrer le carbone, Étape 3 — Équilibrer l'hydrogène, Étape 4 — Équilibrer l'oxygène en dernier, puis vérifier. L'oxygène vient en dernier car il apparaît dans deux produits.",
+              "answers": [
+                {
+                  "content": "Écrire l'équation non équilibrée."
                 },
                 {
-                  "content": "Parmi ces noms, lesquels respectent les règles de la nomenclature ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "2-méthylbutane, 2,2-diméthylpropane et 3-méthylpentane sont bien écrits. « 1-méthylpropane » et « 3-méthylbutane » viennent d'une chaîne ou d'une numérotation mal choisie, et « 2-éthylpropane » d'une chaîne trop courte.",
-                  "answers": [
-                    {
-                      "content": "2-méthylbutane",
-                      "correct": true
-                    },
-                    {
-                      "content": "2,2-diméthylpropane",
-                      "correct": true
-                    },
-                    {
-                      "content": "3-méthylpentane",
-                      "correct": true
-                    },
-                    {
-                      "content": "1-méthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "3-méthylbutane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2-éthylpropane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Équilibrer le carbone avec le coefficient de $\\mathrm{CO_{2}}$."
                 },
                 {
-                  "content": "Combien d'isomères de chaîne possède la formule brute C₆H₁₄ (hexane compris) ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y en a cinq : l'hexane, le 2-méthylpentane, le 3-méthylpentane, le 2,2-diméthylbutane et le 2,3-diméthylbutane. Ne pas oublier les deux isomères à deux groupes méthyle.",
-                  "answers": [
-                    {
-                      "content": "5",
-                      "correct": true
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "4",
-                      "correct": false
-                    },
-                    {
-                      "content": "6",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Équilibrer l'hydrogène avec le coefficient de $\\mathrm{H_{2}O}$."
                 },
                 {
-                  "content": "Quelles paires de molécules sont des paires d'isomères ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le butane et le 2-méthylpropane sont tous deux C₄H₁₀ ; le pentane et le 2,2-diméthylpropane sont tous deux C₅H₁₂. Le propane et le butane n'ont pas le même nombre de carbones, donc pas la même formule brute.",
-                  "answers": [
-                    {
-                      "content": "Le butane et le 2-méthylpropane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le pentane et le 2,2-diméthylpropane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le propane et le butane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le 2-méthylbutane et le 2-méthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'éthane et le 2-méthylpropane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Équilibrer l'oxygène avec le coefficient de $\\mathrm{O_{2}}$, puis vérifier."
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi Kouamé doit aérer sa cuisine quand il utilise le gaz, et ce qu'il risque sinon.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Dans une cuisine sans fenêtre, il manque…",
+              "criteria": [
+                "Le manque de dioxygène provoque une combustion incomplète",
+                "Le monoxyde de carbone est nommé, toxique, incolore et inodore",
+                "Aérer permet une combustion complète (CO2 et eau)"
+              ],
+              "explanation": "Corrigé modèle : Dans une cuisine sans fenêtre, le dioxygène manque et la combustion du butane est incomplète. Elle forme du monoxyde de carbone $\\mathrm{CO}$, un gaz toxique qu'on ne voit pas et qu'on ne sent pas, et de la suie. Kouamé doit donc aérer pour que la combustion soit complète et ne forme que du dioxyde de carbone et de l'eau. Points : 1 pour le manque de dioxygène et la combustion incomplète ; 1 pour le monoxyde de carbone toxique, incolore et inodore ; 1 pour la conclusion (aérer donne une combustion complète).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "L'alcane de la paillasse du lycée de Daloa",
+          "statement": "Au laboratoire du lycée de Daloa, un professeur présente un alcane liquide dont l'étiquette est à moitié effacée. On peut seulement lire qu'il a 6 atomes de carbone. Les élèves cherchent sa formule, son nom, ses isomères et l'équation de sa combustion.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Combien d'atomes d'hydrogène contient une molécule de cet alcane ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : $n = 6$. Étape 2 — Calculer : $2n+2 = 2 \\times 6 + 2 = 14$ atomes d'hydrogène. La formule brute est $\\mathrm{C_{6}H_{14}}$. Avec $2n = 12$, on oublierait le $\\mathrm{ +2 }$.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Il s'agit de l'isomère ramifié $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{2}{-}CH_{3}}$. Quel est son nom ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la plus longue chaîne compte 5 carbones, c'est du pentane. Étape 2 — Identifier : un groupe méthyle est fixé sur la chaîne. Étape 3 — Numéroter : en partant de la gauche, il est sur le carbone 2 ; en partant de la droite, sur le carbone 4. On garde le plus petit indice, 2. Étape 4 — Écrire : 2-méthylpentane. Le nom $\\mathrm{ 4{-}méthylpentane }$ vient d'une numérotation par le mauvais côté.",
+              "answers": [
+                {
+                  "content": "2-méthylpentane",
+                  "correct": true
                 },
                 {
-                  "content": "Deux isomères de chaîne ont exactement les mêmes propriétés physiques, car ils ont la même formule brute.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Même formule brute ne veut pas dire même molécule : l'enchaînement des carbones est différent, donc les propriétés physiques (par exemple la température d'ébullition) sont différentes.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "4-méthylpentane",
+                  "correct": false
                 },
                 {
-                  "content": "Un alcane de formule brute C₅H₁₂ a une chaîne principale de 3 carbones et deux groupes méthyle accrochés sur le carbone central. Quel est son nom ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le carbone central de la chaîne de 3 carbones est le carbone numéro 2. Les deux méthyles y sont accrochés : 2,2-diméthylpropane. « 2,3 » est impossible, car le carbone 3 est un bout de la chaîne.",
-                  "answers": [
-                    {
-                      "content": "2,2-diméthylpropane",
-                      "correct": true
-                    },
-                    {
-                      "content": "2,3-diméthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "1,1-diméthylpropane",
-                      "correct": false
-                    },
-                    {
-                      "content": "2-méthylbutane",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2-méthylhexane",
+                  "correct": false
+                },
+                {
+                  "content": "hexane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces alcanes, lesquels sont des isomères de l'hexane $\\mathrm{C_{6}H_{14}}$ ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Calculer : on cherche les alcanes à 6 carbones. Le 2-méthylpentane a $5 + 1 = 6$ carbones, le 3-méthylpentane aussi, et le 2,3-diméthylbutane a $4 + 2 = 6$ carbones. Le 2-méthylbutane a $4 + 1 = 5$ carbones ($\\mathrm{C_{5}H_{12}}$) et le 2,2-diméthylpropane a $3 + 2 = 5$ carbones : ils n'ont pas la même formule brute.",
+              "answers": [
+                {
+                  "content": "2-méthylpentane",
+                  "correct": true
+                },
+                {
+                  "content": "3-méthylpentane",
+                  "correct": true
+                },
+                {
+                  "content": "2,3-diméthylbutane",
+                  "correct": true
+                },
+                {
+                  "content": "2-méthylbutane",
+                  "correct": false
+                },
+                {
+                  "content": "2,2-diméthylpropane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'alcanes différents (hexane compris) ont pour formule brute $\\mathrm{C_{6}H_{14}}$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : on part de $\\mathrm{C_{6}H_{14}}$. Étape 2 — Raccourcir d'un carbone : 2-méthylpentane et 3-méthylpentane. Étape 3 — Raccourcir encore : 2,2-diméthylbutane et 2,3-diméthylbutane. Étape 4 — Nommer : avec l'hexane, cela fait 5 alcanes différents.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation équilibrée de la combustion complète de l'hexane $\\mathrm{C_{6}H_{14}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $\\mathrm{C_{6}H_{14} + O_{2}  \\to  CO_{2} + H_{2}O}$. Étape 2 — Équilibrer le carbone : $\\mathrm{6\\,CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : $\\mathrm{7\\,H_{2}O}$. Étape 4 — Équilibrer l'oxygène : $6 \\times 2 + 7 = 19$ à droite, soit 9,5 $\\mathrm{O_{2}}$ ; on double toute l'équation : $\\mathrm{2\\,C_{6}H_{14} + 19\\,O_{2}  \\to  12\\,CO_{2} + 14\\,H_{2}O}$. La proposition avec $\\mathrm{CO}$ décrit une combustion incomplète.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{2\\,C_{6}H_{14} + 19\\,O_{2}  \\to  12\\,CO_{2} + 14\\,H_{2}O}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{C_{6}H_{14} + 19\\,O_{2}  \\to  6\\,CO_{2} + 7\\,H_{2}O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2\\,C_{6}H_{14} + 13\\,O_{2}  \\to  12\\,CO + 14\\,H_{2}O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2\\,C_{6}H_{14} + 19\\,O_{2}  \\to  12\\,CO_{2} + 7\\,H_{2}O}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après l'équation $\\mathrm{2\\,C_{6}H_{14} + 19\\,O_{2}  \\to  12\\,CO_{2} + 14\\,H_{2}O}$, combien de molécules d'eau se forment à partir de 2 molécules d'hexane ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire l'équation : le coefficient de $\\mathrm{H_{2}O}$ est 14 pour 2 molécules d'hexane. Étape 2 — Conclure : il se forme 14 molécules d'eau. On vérifie l'hydrogène : $2 \\times 14 = 28$ à gauche et $14 \\times 2 = 28$ à droite.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le professeur recueille un gaz qui trouble l'eau de chaux lors de la combustion complète de l'hexane : c'est le dioxyde de carbone.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : une combustion complète d'un alcane forme du dioxyde de carbone et de l'eau. Étape 2 — Appliquer : le dioxyde de carbone trouble l'eau de chaux. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Écrire la combustion d'un alcane",
-          "subtitle": "Combustion complète, combustion incomplète et danger du monoxyde de carbone",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Écrire et équilibrer l'équation de la combustion complète d'un alcane.</li><li>Distinguer combustion complète et combustion incomplète, et en citer les produits.</li><li>Calculer les quantités de dioxygène consommé et de dioxyde de carbone formé.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le réchaud à gaz de la cuisine.</strong> Quand tu allumes le réchaud de ta mère, le gaz de la bouteille brûle avec une flamme bleue et la marmite chauffe vite. Si le réchaud est mal réglé et que l'air arrive mal, la flamme devient jaune et le fond de la marmite se couvre de suie noire. Pour brûler, il faut trois choses : le gaz, l'air, et une étincelle pour démarrer.</p><p><strong>Le pont.</strong> Le gaz de la bouteille (butane ou propane), c'est l'<strong>alcane</strong>, le combustible. L'air apporte le <strong>dioxygène</strong> (O₂), qui fait environ un cinquième de l'air. L'étincelle, c'est l'énergie de départ. La flamme bleue, c'est la <strong>combustion complète</strong> : assez de dioxygène. La flamme jaune et la suie, c'est la <strong>combustion incomplète</strong> : le dioxygène manque.</p><p><strong>La limite de l'image.</strong> La suie se voit, mais le <strong>monoxyde de carbone</strong>, lui, ne se voit pas et n'a pas d'odeur. Il peut se former sans suie visible. Une cuisine sans suie n'est donc pas forcément une cuisine sans danger.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Combustion</strong> : réaction d'un combustible avec le dioxygène, qui dégage de la chaleur. Il faut un combustible, du dioxygène et une énergie de départ.</p><p><strong>Combustion complète</strong> (assez de dioxygène). Elle donne du dioxyde de carbone CO₂ et de l'eau H₂O. Pour un alcane :</p><p>$$\\mathrm{C_nH_{2n+2}} + \\dfrac{3n+1}{2}\\,\\mathrm{O_2} \\longrightarrow n\\,\\mathrm{CO_2} + (n+1)\\,\\mathrm{H_2O}$$</p><ul><li>CH₄ + 2O₂ → CO₂ + 2H₂O</li><li>C₃H₈ + 5O₂ → 3CO₂ + 4H₂O</li><li>2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O</li></ul><p><strong>Combustion incomplète</strong> (dioxygène insuffisant). Il se forme de l'eau et du monoxyde de carbone CO (gaz très toxique, incolore et sans odeur), ou du carbone C (la suie noire), ou un mélange. La flamme est jaune.</p><ul><li>2CH₄ + 3O₂ → 2CO + 4H₂O</li><li>C₃H₈ + 2O₂ → 3C + 4H₂O</li></ul><p><strong>Identifier les produits</strong> : le dioxyde de carbone trouble l'eau de chaux ; l'eau fait passer le sulfate de cuivre anhydre du blanc au bleu.</p><p><strong>Équilibrer</strong> : on garde le même nombre de chaque sorte d'atomes avant et après la flèche. On équilibre dans l'ordre C, puis H, puis O, en ne changeant que les <strong>coefficients</strong>, jamais les indices.</p><p><strong>Lire les coefficients</strong> : ils donnent les proportions en moles (une mole est un « paquet » de molécules). Pour un gaz, 1 mol occupe 24 L dans les conditions de l'exercice : $V = n \\times 24$ (en litres, avec $n$ en mol).</p></blockquote><h2>Exemple résolu</h2><p>Équilibre la combustion complète du propane : C₃H₈ + O₂ → CO₂ + H₂O. Puis calcule le volume de CO₂ formé par 2 mol de propane (volume molaire : 24 L/mol).</p><ol><li><strong>Le carbone.</strong> Il y a 3 C à gauche, donc on met 3 devant CO₂ : C₃H₈ + O₂ → 3CO₂ + H₂O.</li><li><strong>L'hydrogène.</strong> Il y a 8 H à gauche. H₂O en contient 2, donc on met 4 devant H₂O : ... → 3CO₂ + 4H₂O.</li><li><strong>L'oxygène.</strong> À droite : $3 \\times 2 + 4 \\times 1 = 10$ atomes O. Un O₂ en contient 2, donc on met 5 devant O₂.</li><li><strong>Équation.</strong> C₃H₈ + 5O₂ → 3CO₂ + 4H₂O.</li><li><strong>Vérification.</strong> À gauche : 3 C, 8 H, 10 O. À droite : 3 C, 8 H, $6 + 4 = 10$ O. C'est équilibré.</li><li><strong>Quantité de CO₂.</strong> 1 mol de propane donne 3 mol de CO₂, donc 2 mol de propane en donnent 6.</li><li><strong>Volume.</strong> $V = 6 \\times 24 = 144\\ \\text{L}$.</li></ol><h2>Le piège à éviter</h2><p>Équilibrer en changeant les indices : écrire CO₃ pour « gagner » un oxygène, par exemple. Une formule ne se modifie jamais : CO₃ n'est pas du dioxyde de carbone, c'est une autre substance. On ne change que les nombres placés devant les formules. Autre erreur grave : croire qu'une flamme bleue sans suie rend la cuisine sans danger. Le monoxyde de carbone est invisible, et une pièce fermée finit par manquer de dioxygène : aère toujours quand tu cuisines au gaz.</p><h2>En une phrase</h2><p>Un alcane qui brûle avec assez de dioxygène donne du dioxyde de carbone et de l'eau ; sans assez de dioxygène, il donne aussi du monoxyde de carbone ou de la suie, et il faut équilibrer C, puis H, puis O.</p>",
-          "exercises": [
+          "title": "Du méthane aux dérivés chlorés au lycée de Man",
+          "statement": "Au lycée de Man, un professeur réalise devant ses élèves la réaction du méthane $\\mathrm{CH_{4}}$ avec le dichlore $\\mathrm{Cl_{2}}$ dans un flacon éclairé. Il se forme du chlorométhane $\\mathrm{CH_{3}Cl}$ et un autre composé. Ensuite, il chauffe un tube avec un bec alimenté en propane $\\mathrm{C_{3}H_{8}}$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Combustion complète et incomplète",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quel est le type de la réaction entre le méthane et le dichlore ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'alcane de départ est le méthane. Étape 2 — Remplacer : un atome d'hydrogène du méthane est remplacé par un atome de chlore, et la chaîne de carbones ne change pas. C'est une substitution. Ce n'est pas une combustion, qui demande du dioxygène, ni une dissolution.",
+              "answers": [
                 {
-                  "content": "Quels sont les deux produits de la combustion complète d'un alcane ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec assez de dioxygène, tout le carbone devient CO₂ et tout l'hydrogène devient H₂O. Le monoxyde de carbone CO ou le carbone C n'apparaissent que si le dioxygène manque.",
-                  "answers": [
-                    {
-                      "content": "Le dioxyde de carbone et l'eau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le monoxyde de carbone et le dihydrogène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le carbone et l'eau",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le dioxyde de carbone et le dihydrogène",
-                      "correct": false
-                    }
-                  ]
+                  "content": "une substitution",
+                  "correct": true
                 },
                 {
-                  "content": "Sur le réchaud, la flamme est jaune et le fond de la marmite se couvre de suie noire. Que peut-on dire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Flamme jaune et suie sont les signes d'une combustion incomplète : le dioxygène arrive en quantité insuffisante. La flamme bleue, elle, signale une combustion complète.",
-                  "answers": [
-                    {
-                      "content": "La combustion est incomplète : il manque du dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "La combustion est complète",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'y a aucune combustion",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il y a trop de dioxygène",
-                      "correct": false
-                    }
-                  ]
+                  "content": "une combustion",
+                  "correct": false
                 },
                 {
-                  "content": "Le monoxyde de carbone formé par une combustion incomplète est un gaz toxique, incolore et sans odeur.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. C'est ce qui le rend dangereux : on ne le voit pas et on ne le sent pas. La suie, elle, est visible, mais elle n'est qu'un signe parmi d'autres.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "une dissolution",
+                  "correct": false
                 },
                 {
-                  "content": "De quoi a-t-on besoin pour qu'un alcane brûle ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Il faut du dioxygène (apporté par l'air) et une énergie de départ, comme une étincelle ou une flamme. Ni l'eau, ni le dioxyde de carbone, ni la lumière ultraviolette ne font démarrer une combustion.",
-                  "answers": [
-                    {
-                      "content": "Du dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une énergie de départ, comme une étincelle",
-                      "correct": true
-                    },
-                    {
-                      "content": "De l'eau liquide",
-                      "correct": false
-                    },
-                    {
-                      "content": "Du dioxyde de carbone",
-                      "correct": false
-                    },
-                    {
-                      "content": "De la lumière ultraviolette",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Comment met-on en évidence le dioxyde de carbone formé par une combustion ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dioxyde de carbone trouble l'eau de chaux. Le sulfate de cuivre anhydre, lui, devient bleu au contact de l'eau, et une allumette incandescente se rallume dans le dioxygène, pas dans le dioxyde de carbone.",
-                  "answers": [
-                    {
-                      "content": "Avec l'eau de chaux, qui se trouble",
-                      "correct": true
-                    },
-                    {
-                      "content": "Avec le sulfate de cuivre anhydre, qui devient bleu",
-                      "correct": false
-                    },
-                    {
-                      "content": "Avec une allumette incandescente qui se rallume",
-                      "correct": false
-                    },
-                    {
-                      "content": "En regardant la couleur de la flamme",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Lesquels de ces produits peuvent se former lors d'une combustion incomplète d'un alcane ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le monoxyde de carbone, le carbone (suie) et l'eau peuvent se former. Le dioxygène est consommé, pas produit. Le dichlore et l'ozone ne sont pas des produits de la combustion d'un alcane.",
-                  "answers": [
-                    {
-                      "content": "Le monoxyde de carbone CO",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le carbone C (la suie)",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'eau H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le dioxygène O₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le dichlore Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ozone O₃",
-                      "correct": false
-                    }
-                  ]
+                  "content": "une décomposition",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Équilibrer et calculer des quantités",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Que faut-il faire pour que la réaction se produise ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le méthane et le dichlore sont mélangés dans un flacon. Étape 2 — Appliquer le cours : la substitution du méthane par le dichlore se fait à la lumière ; il faut donc éclairer le flacon. Ajouter de l'eau ou refroidir ne la déclenche pas.",
+              "answers": [
                 {
-                  "content": "Quelle est l'équation correcte de la combustion complète du méthane ?",
-                  "question_type": "single_choice",
-                  "explanation": "À droite : 1 C, 4 H et $2 + 2 = 4$ O ; à gauche : 1 C, 4 H, 4 O pour 2O₂. L'équation CH₄ + O₂ → CO₂ + 2H₂O n'a que 2 O à gauche : elle n'est pas équilibrée.",
-                  "answers": [
-                    {
-                      "content": "CH₄ + 2O₂ → CO₂ + 2H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₄ + O₂ → CO₂ + 2H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + 2O₂ → CO₂ + H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + 3O₂ → CO₂ + 2H₂O",
-                      "correct": false
-                    }
-                  ]
+                  "content": "éclairer le flacon",
+                  "correct": true
                 },
                 {
-                  "content": "Quel coefficient faut-il devant O₂ pour équilibrer : C₃H₈ + ?O₂ → 3CO₂ + 4H₂O ?",
-                  "question_type": "single_choice",
-                  "explanation": "À droite : $3 \\times 2 + 4 = 10$ atomes d'oxygène. Un O₂ en contient 2, donc il faut 5 O₂. Le coefficient 10 compte les atomes, pas les molécules.",
-                  "answers": [
-                    {
-                      "content": "5",
-                      "correct": true
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "7",
-                      "correct": false
-                    },
-                    {
-                      "content": "10",
-                      "correct": false
-                    }
-                  ]
+                  "content": "ajouter de l'eau dans le flacon",
+                  "correct": false
                 },
                 {
-                  "content": "Quel coefficient faut-il devant O₂ pour équilibrer : 2C₂H₆ + ?O₂ → 4CO₂ + 6H₂O ?",
-                  "question_type": "single_choice",
-                  "explanation": "À droite : $4 \\times 2 + 6 = 14$ atomes d'oxygène. Un O₂ en contient 2, donc il faut 7 O₂. Le nombre 14 est le nombre d'atomes, qu'il faut diviser par 2.",
-                  "answers": [
-                    {
-                      "content": "7",
-                      "correct": true
-                    },
-                    {
-                      "content": "14",
-                      "correct": false
-                    },
-                    {
-                      "content": "10",
-                      "correct": false
-                    },
-                    {
-                      "content": "5",
-                      "correct": false
-                    }
-                  ]
+                  "content": "refroidir le flacon dans la glace",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles équations de combustion complète sont correctement équilibrées ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Pour 2C₄H₁₀ + 13O₂ : 26 O de chaque côté ($16 + 10$). Pour C₅H₁₂ + 8O₂ : 16 O ($10 + 6$). Dans C₂H₆ + 3O₂, il manque un O. Dans C₃H₈ + 4O₂, deux O. Dans CH₄ + 2O₂ → CO₂ + 4H₂O, H est faux.",
-                  "answers": [
-                    {
-                      "content": "2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₅H₁₂ + 8O₂ → 5CO₂ + 6H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₂H₆ + 3O₂ → 2CO₂ + 3H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₃H₈ + 4O₂ → 3CO₂ + 4H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + 2O₂ → CO₂ + 4H₂O",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Avec l'équation C₃H₈ + 5O₂ → 3CO₂ + 4H₂O, quelle quantité de dioxyde de carbone se forme quand 2 mol de propane brûlent complètement ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque mole de propane donne 3 mol de CO₂, donc 2 mol en donnent $2 \\times 3 = 6$ mol. Le nombre 3 ne vaut que pour 1 mol de propane.",
-                  "answers": [
-                    {
-                      "content": "6 mol",
-                      "correct": true
-                    },
-                    {
-                      "content": "3 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "2 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "8 mol",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "1 mol de propane brûle complètement : C₃H₈ + 5O₂ → 3CO₂ + 4H₂O. Quel volume de dioxygène est consommé ? (1 mol de gaz occupe 24 L.)",
-                  "question_type": "single_choice",
-                  "explanation": "Il faut 5 mol de O₂, donc $V = 5 \\times 24 = 120\\ \\text{L}$. Le volume 72 L correspond à 3 mol (le CO₂), et 96 L à 4 mol (l'eau).",
-                  "answers": [
-                    {
-                      "content": "120 L",
-                      "correct": true
-                    },
-                    {
-                      "content": "24 L",
-                      "correct": false
-                    },
-                    {
-                      "content": "72 L",
-                      "correct": false
-                    },
-                    {
-                      "content": "96 L",
-                      "correct": false
-                    }
-                  ]
+                  "content": "enlever le dichlore",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Combustions incomplètes et petits calculs",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quel est le nom du composé formé avec le chlorométhane ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Écrire : le deuxième produit est formé de l'hydrogène retiré et du chlore qui n'est pas fixé sur le carbone : $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$. Étape 4 — Nommer : $\\mathrm{HCl}$ est le chlorure d'hydrogène.",
+              "answers": [
                 {
-                  "content": "Le méthane brûle de façon incomplète en donnant du monoxyde de carbone CO et de l'eau. Quelle est l'équation équilibrée ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pour 2CH₄ + 3O₂ → 2CO + 4H₂O : 2 C, 8 H et 6 O de chaque côté ($2 + 4$). Les autres équations ont un nombre d'oxygène différent entre la gauche et la droite.",
-                  "answers": [
-                    {
-                      "content": "2CH₄ + 3O₂ → 2CO + 4H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₄ + O₂ → CO + 2H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + 2O₂ → CO + 2H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "2CH₄ + 2O₂ → 2CO + 4H₂O",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le chlorure d'hydrogène",
+                  "correct": true
                 },
                 {
-                  "content": "Le propane brûle de façon incomplète en donnant du carbone C (suie) et de l'eau. Quelle est l'équation équilibrée ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a 3 C et 8 H, donc 3C + 4H₂O à droite : 4 atomes d'oxygène, soit 2 O₂ à gauche. L'équation C₃H₈ + 5O₂ → 3C + 4H₂O met 10 O à gauche contre 4 à droite.",
-                  "answers": [
-                    {
-                      "content": "C₃H₈ + 2O₂ → 3C + 4H₂O",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₃H₈ + 5O₂ → 3C + 4H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₃H₈ + 4O₂ → 3C + 4H₂O",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₃H₈ + O₂ → 3C + 4H₂O",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le dioxyde de carbone",
+                  "correct": false
                 },
                 {
-                  "content": "Après la combustion d'un alcane, un élève observe : du sulfate de cuivre anhydre qui devient bleu, un trouble dans l'eau de chaux et une flamme bleue sans suie. Quelles conclusions sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le sulfate de cuivre devenu bleu montre l'eau, l'eau de chaux troublée montre le CO₂, et la flamme bleue sans suie est un signe de combustion complète. Mais elle ne prouve pas l'absence de CO : ce gaz est invisible.",
-                  "answers": [
-                    {
-                      "content": "Il s'est formé de l'eau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il s'est formé du dioxyde de carbone",
-                      "correct": true
-                    },
-                    {
-                      "content": "La flamme bleue sans suie est un signe de combustion complète",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sulfate de cuivre anhydre qui devient bleu prouve qu'il s'est formé du dioxyde de carbone",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le trouble de l'eau de chaux prouve qu'il s'est formé de l'eau",
-                      "correct": false
-                    },
-                    {
-                      "content": "On est certain qu'il ne s'est pas formé de monoxyde de carbone",
-                      "correct": false
-                    }
-                  ]
+                  "content": "le dichlorométhane",
+                  "correct": false
                 },
                 {
-                  "content": "On brûle complètement 58 g de butane C₄H₁₀ (masse molaire 58 g/mol), soit 1 mol. Équation : 2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O. Quel volume de CO₂ se forme ? (1 mol de gaz occupe 24 L.)",
-                  "question_type": "single_choice",
-                  "explanation": "2 mol de butane donnent 8 mol de CO₂, donc 1 mol en donne 4. Le volume est $4 \\times 24 = 96\\ \\text{L}$. Le volume 192 L oublie de diviser par 2 les coefficients de l'équation.",
-                  "answers": [
-                    {
-                      "content": "96 L",
-                      "correct": true
-                    },
-                    {
-                      "content": "192 L",
-                      "correct": false
-                    },
-                    {
-                      "content": "24 L",
-                      "correct": false
-                    },
-                    {
-                      "content": "48 L",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Selon 2C₄H₁₀ + 13O₂ → 8CO₂ + 10H₂O, quelle quantité de dioxygène faut-il pour brûler complètement 4 mol de butane ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pour 2 mol de butane, il faut 13 mol de O₂ ; pour 4 mol, le double : 26 mol. Le nombre 13 correspond à 2 mol de butane, pas à 4.",
-                  "answers": [
-                    {
-                      "content": "26 mol",
-                      "correct": true
-                    },
-                    {
-                      "content": "13 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "52 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "6,5 mol",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quand la flamme du réchaud est bleue, on peut fermer toutes les fenêtres de la cuisine : il n'y a plus aucun danger.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Le monoxyde de carbone est invisible, et une pièce fermée finit par manquer de dioxygène, ce qui rend la combustion incomplète. Il faut toujours aérer quand on cuisine au gaz.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Écrire la substitution d'un alcane par le chlore",
-          "subtitle": "Chloration du méthane. À compléter : températures d'ébullition, autres halogènes",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître une réaction de substitution et la distinguer d'une combustion.</li><li>Écrire et vérifier l'équation de la chloration du méthane et de l'éthane.</li><li>Nommer les dérivés chlorés du méthane.</li></ul><h2>L'image pour comprendre</h2><p><strong>Remplacer les plants dans le rang.</strong> Dans un rang de cacaoyers, un planteur retire un petit plant malade et en replante un nouveau à la même place. Le rang ne bouge pas : un seul plant a changé. Le planteur n'arrive pas seul : il vient avec son frère jumeau. L'un prend la place du plant retiré, l'autre repart avec lui. Il n'agit que quand le soleil éclaire le champ.</p><p><strong>Le pont.</strong> Le rang, c'est l'alcane (par exemple CH₄) : la chaîne de carbones ne change pas. Le plant malade, c'est un <strong>atome d'hydrogène</strong>. Le nouveau plant, c'est un <strong>atome de chlore</strong> (Cl). Les deux frères jumeaux liés, c'est la molécule de <strong>dichlore</strong> (Cl₂). Celui qui repart avec le plant retiré forme avec lui le <strong>chlorure d'hydrogène</strong> (HCl). Le soleil, c'est la <strong>lumière</strong> : sans elle, rien ne se passe. Remplacer un atome par un autre sans changer la chaîne, c'est une <strong>substitution</strong>.</p><p><strong>La limite de l'image.</strong> Le planteur choisit le plant qu'il remplace ; dans la molécule, le choix se fait au hasard. Et les remplacements continuent : un deuxième, un troisième, un quatrième plant peuvent aussi être remplacés. Une fois la réaction lancée, on obtient donc un mélange de produits.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Substitution</strong> : réaction dans laquelle un atome (ici H) est remplacé par un autre atome (ici Cl) sans que la chaîne de carbones soit modifiée. Contrairement à la combustion, la chaîne carbonée est conservée.</p><p><strong>Chloration d'un alcane</strong> : un alcane réagit avec le dichlore Cl₂ en présence de lumière vive (ultraviolets ou soleil). À l'obscurité, il ne se passe rien. Il se forme un dérivé chloré et du chlorure d'hydrogène HCl, gaz très soluble dans l'eau qui donne une solution acide.</p><ul><li>CH₄ + Cl₂ → CH₃Cl + HCl (chlorométhane)</li><li>CH₃Cl + Cl₂ → CH₂Cl₂ + HCl (dichlorométhane)</li><li>CH₂Cl₂ + Cl₂ → CHCl₃ + HCl (trichlorométhane)</li><li>CHCl₃ + Cl₂ → CCl₄ + HCl (tétrachlorométhane)</li></ul><p>Avec l'éthane : C₂H₆ + Cl₂ → C₂H₅Cl + HCl (chloroéthane).</p><p><strong>Nom d'un dérivé chloré</strong> : le groupe « chloro » se place devant le nom de l'alcane, avec sa position si besoin, et « di », « tri », « tétra » pour 2, 3, 4 atomes de chlore.</p><p><strong>Observations</strong> : la couleur jaune-vert du dichlore s'atténue ; les fumées de HCl rendent acide un papier indicateur ou un bleu de bromothymol humide, qui devient jaune. On obtient plusieurs produits à la fois.</p></blockquote><h2>Exemple résolu</h2><p>Écris l'équation de la substitution d'un seul atome d'hydrogène de l'éthane C₂H₆ par un atome de chlore, avec le dichlore.</p><ol><li><strong>Les réactifs.</strong> L'éthane C₂H₆ et le dichlore Cl₂.</li><li><strong>Le dérivé chloré.</strong> On retire un H de C₂H₆ et on met un Cl à la place : C₂H₅Cl. Son nom est chloroéthane.</li><li><strong>L'autre produit.</strong> L'hydrogène retiré part avec l'autre atome de chlore : HCl.</li><li><strong>L'équation.</strong> C₂H₆ + Cl₂ → C₂H₅Cl + HCl.</li><li><strong>Vérification.</strong> À gauche : 2 C, 6 H, 2 Cl. À droite : 2 C, $5 + 1 = 6$ H, $1 + 1 = 2$ Cl. L'équation est équilibrée.</li></ol><h2>Le piège à éviter</h2><p>Oublier le chlorure d'hydrogène. Écrire CH₄ + Cl₂ → CH₃Cl est faux : il y a 2 Cl à gauche et 1 seul à droite, et 4 H à gauche contre 3 à droite. Les atomes de chlore et d'hydrogène qui manquent se retrouvent dans HCl. Autre erreur fréquente : croire que la réaction s'arrête après un seul remplacement et ne donne que du chlorométhane. En réalité, on obtient un mélange.</p><h2>En une phrase</h2><p>Dans une substitution, un atome d'hydrogène de l'alcane est remplacé par un atome de chlore, la chaîne reste intacte, et il se forme toujours du chlorure d'hydrogène en plus du dérivé chloré.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Ce qu'est une substitution",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Qu'arrive-t-il au méthane lors de sa réaction avec le dichlore, à la lumière ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est une substitution : un atome d'hydrogène est remplacé par un atome de chlore, et la chaîne de carbones est conservée. Dans une combustion, au contraire, la chaîne est détruite.",
-                  "answers": [
-                    {
-                      "content": "Un atome d'hydrogène est remplacé par un atome de chlore, la chaîne de carbones est conservée",
-                      "correct": true
-                    },
-                    {
-                      "content": "La chaîne de carbones est détruite et donne du dioxyde de carbone",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un atome de chlore s'ajoute sans qu'aucun hydrogène ne parte",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les liaisons C–C se cassent pour former de l'eau",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image d'un planteur qui remplace un plant malade par un nouveau plant, il vient avec son frère jumeau : l'un prend la place du plant retiré, l'autre repart avec lui. Ce frère jumeau qui repart avec le plant retiré représente :",
-                  "question_type": "single_choice",
-                  "explanation": "Le jumeau est un atome de chlore : il quitte la molécule avec l'hydrogène retiré, et ensemble ils forment le chlorure d'hydrogène HCl. Le rang représente l'alcane.",
-                  "answers": [
-                    {
-                      "content": "L'atome de chlore qui forme HCl avec l'hydrogène retiré",
-                      "correct": true
-                    },
-                    {
-                      "content": "La chaîne de carbones",
-                      "correct": false
-                    },
-                    {
-                      "content": "La lumière",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un atome de carbone",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "À l'obscurité et à température ordinaire, le méthane et le dichlore réagissent rapidement.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Il faut de la lumière vive (ultraviolets ou soleil) pour déclencher la réaction.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Que faut-il pour réaliser la chloration du méthane ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Il faut du dichlore (qui fournit les atomes de chlore) et de la lumière vive. Un excès de dioxygène ou l'eau de chaux ne servent à rien ici : ils concernent la combustion et l'identification du CO₂.",
-                  "answers": [
-                    {
-                      "content": "Du dichlore Cl₂",
-                      "correct": true
-                    },
-                    {
-                      "content": "De la lumière vive",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un excès de dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "De l'eau de chaux",
-                      "correct": false
-                    },
-                    {
-                      "content": "De l'eau liquide",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le nom du composé de formule CH₃Cl ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un seul atome de chlore a remplacé un hydrogène du méthane : c'est le chlorométhane. Avec deux atomes de chlore, ce serait le dichlorométhane.",
-                  "answers": [
-                    {
-                      "content": "Le chlorométhane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le dichlorométhane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le trichlorométhane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le tétrachlorométhane",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour la réaction CH₄ + Cl₂ → CH₃Cl + HCl, quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "C'est une substitution : un H est remplacé par un Cl, et le chlorure d'hydrogène HCl se forme. Ce n'est pas une combustion, le nombre de carbones ne change pas (1 avant, 1 après), et il ne se forme pas de dihydrogène.",
-                  "answers": [
-                    {
-                      "content": "C'est une réaction de substitution",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un atome d'hydrogène est remplacé par un atome de chlore",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il se forme du chlorure d'hydrogène",
-                      "correct": true
-                    },
-                    {
-                      "content": "C'est une combustion",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le nombre d'atomes de carbone diminue",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il se forme du dihydrogène H₂",
-                      "correct": false
-                    }
-                  ]
+                  "content": "l'eau",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Écrire les équations de substitution",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Complète l'équation : $\\mathrm{CH_{4}}$ + 2 $\\mathrm{Cl_{2}}$ → $\\mathrm{CH_{2}Cl_{2}}$ + ___ $\\mathrm{HCl}$. Écris le coefficient devant $\\mathrm{HCl}$.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : deux hydrogènes sont remplacés. Étape 3 — Écrire : une molécule $\\mathrm{HCl}$ pour chaque hydrogène remplacé, donc 2. Étape 4 — Vérifier : à droite, $2 + 2 = 4$ hydrogènes et $2 + 2 = 4$ chlores, comme à gauche.",
+              "answers": [
                 {
-                  "content": "Complète l'équation de la chloration du méthane : CH₄ + Cl₂ → ? + HCl",
-                  "question_type": "single_choice",
-                  "explanation": "On retire un H du méthane et on met un Cl : CH₃Cl. Les formules CH₃Cl₂ et CH₂Cl₂ ne respectent pas le décompte : il y aurait trop de chlore pour une seule substitution.",
-                  "answers": [
-                    {
-                      "content": "CH₃Cl",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₂Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "CCl₄",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est l'équation correcte du remplacement d'un deuxième atome d'hydrogène dans CH₃Cl ?",
-                  "question_type": "single_choice",
-                  "explanation": "CH₃Cl + Cl₂ → CH₂Cl₂ + HCl : 1 C, 3 H, 3 Cl de chaque côté. Sans HCl, un Cl et un H disparaissent. Avec CHCl₃ + HCl à droite, il n'y a que 2 H pour 3 à gauche.",
-                  "answers": [
-                    {
-                      "content": "CH₃Cl + Cl₂ → CH₂Cl₂ + HCl",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₃Cl + Cl₂ → CH₂Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃Cl + Cl₂ → CHCl₃ + HCl",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃Cl + 2Cl₂ → CH₂Cl₂ + 2HCl",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le nom du composé de formule CHCl₃ ?",
-                  "question_type": "single_choice",
-                  "explanation": "CHCl₃ possède trois atomes de chlore sur un seul carbone : c'est le trichlorométhane. Le dichlorométhane en a deux, et le tétrachlorométhane quatre.",
-                  "answers": [
-                    {
-                      "content": "Le trichlorométhane",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le dichlorométhane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le chlorométhane",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le tétrachlorométhane",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la formule du tétrachlorométhane ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Tétra » veut dire quatre : les quatre hydrogènes du méthane sont remplacés par quatre chlores, d'où CCl₄. CHCl₃ n'a que trois chlores.",
-                  "answers": [
-                    {
-                      "content": "CCl₄",
-                      "correct": true
-                    },
-                    {
-                      "content": "CHCl₃",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₃Cl",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₄Cl",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la formule du chloroéthane, obtenu à partir de l'éthane C₂H₆ ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'éthane perd un hydrogène (6 − 1 = 5) et gagne un chlore : C₂H₅Cl. La formule C₂H₆Cl garde les 6 hydrogènes, ce qui donne trop d'atomes autour des carbones.",
-                  "answers": [
-                    {
-                      "content": "C₂H₅Cl",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₂H₆Cl",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₂H₄Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₂H₅Cl₂",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On transforme complètement CH₄ en CCl₄ par la suite des substitutions : CH₄ + 4Cl₂ → CCl₄ + 4HCl. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Pour remplacer les 4 hydrogènes, il faut 4 Cl₂, et il se forme 4 HCl (un par hydrogène retiré). Il ne se forme ni 2 HCl, ni de dihydrogène, et 2 Cl₂ ne suffiraient pas.",
-                  "answers": [
-                    {
-                      "content": "Il faut 4 molécules de Cl₂ pour une molécule de CH₄",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il se forme 4 molécules de HCl",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il se forme 2 molécules de HCl",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il suffit de 2 molécules de Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il se forme du dihydrogène H₂",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Équations complètes et mélanges de produits",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Combien de molécules de dichlore faut-il pour remplacer les 4 hydrogènes d'une molécule de méthane et obtenir $\\mathrm{CCl_{4}}$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : 4 hydrogènes sont à remplacer. Étape 3 — Écrire : une molécule $\\mathrm{Cl_{2}}$ pour chaque hydrogène remplacé, soit $\\mathrm{CH_{4} + 4\\,Cl_{2}  \\to  CCl_{4} + 4\\,HCl}$. Étape 4 — Vérifier : 8 chlores à gauche, $4 + 4 = 8$ à droite. Il faut donc 4 molécules de dichlore.",
+              "answers": [
                 {
-                  "content": "On veut transformer CH₄ en trichlorométhane CHCl₃ en une seule équation. Laquelle est correcte ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pour CH₄ + 3Cl₂ → CHCl₃ + 3HCl : 1 C, 4 H, 6 Cl de chaque côté ($3 + 3$). Avec un seul HCl, il manque 2 H et 2 Cl à droite. Avec 3Cl, il manque 3 Cl à gauche.",
-                  "answers": [
-                    {
-                      "content": "CH₄ + 3Cl₂ → CHCl₃ + 3HCl",
-                      "correct": true
-                    },
-                    {
-                      "content": "CH₄ + 3Cl₂ → CHCl₃ + HCl",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + 3Cl → CHCl₃ + 3HCl",
-                      "correct": false
-                    },
-                    {
-                      "content": "CH₄ + Cl₂ → CHCl₃ + HCl",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quand on éclaire un mélange de méthane et de dichlore, on obtient uniquement du chlorométhane.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Les substitutions se succèdent : on obtient un mélange de chlorométhane, dichlorométhane, trichlorométhane et tétrachlorométhane, avec du chlorure d'hydrogène. Les plants se remplacent au hasard.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un tube contenant du méthane et du dichlore exposé à la lumière, quelles observations montrent qu'une substitution a lieu ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La couleur jaune-vert du dichlore s'atténue (il est consommé) et le HCl formé rend acide un indicateur humide, qui vire au jaune pour le bleu de bromothymol. L'eau de chaux et le sulfate de cuivre concernent la combustion.",
-                  "answers": [
-                    {
-                      "content": "La couleur jaune-vert du dichlore s'atténue",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un bleu de bromothymol humide placé à l'ouverture du tube devient jaune",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'eau de chaux placée à l'ouverture se trouble",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sulfate de cuivre anhydre devient bleu",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une flamme bleue apparaît sans étincelle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le propane C₃H₈ réagit avec le dichlore à la lumière. Quels sont les dérivés monochlorés possibles ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le chlore peut remplacer un hydrogène d'un bout (1-chloropropane) ou du milieu (2-chloropropane) : ce sont deux isomères de formule C₃H₇Cl. « 3-chloropropane » est un autre nom du 1-chloropropane, qu'on numérote depuis l'autre bout.",
-                  "answers": [
-                    {
-                      "content": "Le 1-chloropropane et le 2-chloropropane, deux isomères de formule C₃H₇Cl",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un seul dérivé, car les trois carbones sont identiques",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le 1-chloropropane et le 3-chloropropane, deux isomères différents",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un dérivé de formule C₃H₈Cl",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la formule brute du dérivé monochloré du butane (C₄H₁₀) ?",
-                  "question_type": "single_choice",
-                  "explanation": "On remplace un H par un Cl : $10 - 1 = 9$ hydrogènes et un chlore, soit C₄H₉Cl. La formule C₄H₁₀Cl garde les 10 hydrogènes, et C₄H₈Cl₂ contient deux chlores.",
-                  "answers": [
-                    {
-                      "content": "C₄H₉Cl",
-                      "correct": true
-                    },
-                    {
-                      "content": "C₄H₁₀Cl",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₄H₈Cl₂",
-                      "correct": false
-                    },
-                    {
-                      "content": "C₄H₉Cl₂",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On veut transformer 3 mol de méthane en chlorométhane CH₃Cl (une seule substitution par molécule). Quelle quantité de dichlore faut-il au minimum ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque molécule de CH₄ consomme une molécule de Cl₂ (CH₄ + Cl₂ → CH₃Cl + HCl). Pour 3 mol de méthane, il faut donc 3 mol de dichlore. Le nombre 6 compterait deux Cl₂ par méthane.",
-                  "answers": [
-                    {
-                      "content": "3 mol",
-                      "correct": true
-                    },
-                    {
-                      "content": "1 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "6 mol",
-                      "correct": false
-                    },
-                    {
-                      "content": "9 mol",
-                      "correct": false
-                    }
-                  ]
+                  "content": "4",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Le propane brûle complètement selon $\\mathrm{C_{3}H_{8} + 5\\,O_{2}  \\to  3\\,CO_{2} + 4\\,H_{2}O}$. Combien de molécules de dioxygène faut-il pour brûler 3 molécules de propane ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire l'équation : 1 molécule de propane consomme 5 molécules de $\\mathrm{O_{2}}$. Étape 2 — Trouver le facteur : 3 molécules de propane, c'est 3 fois plus. Étape 3 — Calculer : $3 \\times 5 = 15$ molécules de $\\mathrm{O_{2}}$. On peut vérifier l'oxygène : $5 \\times 2 = 10$ pour une molécule de propane, soit $3 \\times 10 = 30$ pour trois.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève écrit : $\\mathrm{ CH_{4} + Cl_{2}  \\to  CH_{3}Cl }$. Explique pourquoi cette équation est fausse et écris l'équation correcte.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "À gauche, il y a 4 atomes d'hydrogène, à droite…",
+              "criteria": [
+                "Les atomes sont comptés de chaque côté de la flèche",
+                "L'oubli du chlorure d'hydrogène HCl est repéré",
+                "L'équation correcte $\\mathrm{CH_{4}}$ + $\\mathrm{Cl_{2}}$ → $\\mathrm{CH_{3}Cl}$ + $\\mathrm{HCl}$ est écrite"
+              ],
+              "explanation": "Corrigé modèle : L'équation n'est pas équilibrée. À gauche, il y a 1 C, 4 H et 2 Cl ; à droite, 1 C, 3 H et 1 Cl. Il manque un atome d'hydrogène et un atome de chlore : ils forment le chlorure d'hydrogène $\\mathrm{HCl}$. L'équation correcte est $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$. Points : 1 pour compter les atomes de chaque côté ; 1 pour repérer l'oubli de $\\mathrm{HCl}$ ; 1 pour l'équation correcte.",
+              "answers": []
             }
           ]
         }
