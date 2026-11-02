@@ -1,0 +1,2179 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le système de défense de l'organisme",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "reaction-inflammatoire",
+          "kind": "diagram",
+          "description": "Schéma fléché de la réaction inflammatoire, de haut en bas. Des microbes entrent par une plaie, les cellules lésées libèrent des substances chimiques, les capillaires se dilatent (rougeur, chaleur), le plasma et les leucocytes passent dans les tissus (gonflement, douleur), puis les phagocytes détruisent les microbes et du pus se forme.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Microbes entrés par la plaie",
+                "category": 1
+              },
+              {
+                "id": "n2",
+                "label": "Cellules lésées : substances chimiques libérées",
+                "category": 1
+              },
+              {
+                "id": "n3",
+                "label": "Capillaires dilatés : rougeur et chaleur",
+                "category": 2
+              },
+              {
+                "id": "n4",
+                "label": "Plasma et leucocytes passent dans les tissus",
+                "category": 2
+              },
+              {
+                "id": "n5",
+                "label": "Gonflement et douleur",
+                "category": 2
+              },
+              {
+                "id": "n6",
+                "label": "Phagocytose des microbes",
+                "category": 3
+              },
+              {
+                "id": "n7",
+                "label": "Pus : leucocytes morts et débris",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3",
+                "label": "provoquent"
+              },
+              {
+                "from": "n3",
+                "to": "n4"
+              },
+              {
+                "from": "n4",
+                "to": "n5"
+              },
+              {
+                "from": "n4",
+                "to": "n6",
+                "label": "leucocytes"
+              },
+              {
+                "from": "n6",
+                "to": "n7"
+              }
+            ],
+            "legend": [
+              "Agression",
+              "Signes locaux",
+              "Défense cellulaire"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reponse-humorale",
+          "kind": "diagram",
+          "description": "Schéma fléché de la réponse à médiation humorale. Un antigène libre est reconnu par un lymphocyte B spécifique, qui se multiplie en un clone. Les cellules du clone se différencient en plasmocytes et en lymphocytes B mémoire. Les plasmocytes sécrètent des anticorps, qui forment avec l'antigène un complexe immun éliminé par phagocytose.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Antigène libre (bactérie, toxine)",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Lymphocyte B spécifique sélectionné",
+                "category": 2
+              },
+              {
+                "id": "c",
+                "label": "Multiplication : clone de lymphocytes B",
+                "category": 2
+              },
+              {
+                "id": "d",
+                "label": "Plasmocytes",
+                "category": 2
+              },
+              {
+                "id": "e",
+                "label": "Lymphocytes B mémoire",
+                "category": 2
+              },
+              {
+                "id": "f",
+                "label": "Anticorps sécrétés",
+                "category": 3
+              },
+              {
+                "id": "g",
+                "label": "Complexe immun (antigène + anticorps)",
+                "category": 3
+              },
+              {
+                "id": "h",
+                "label": "Phagocytose du complexe",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b",
+                "label": "est reconnu par"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d",
+                "label": "se différencie"
+              },
+              {
+                "from": "c",
+                "to": "e",
+                "label": "se différencie"
+              },
+              {
+                "from": "d",
+                "to": "f",
+                "label": "sécrètent"
+              },
+              {
+                "from": "f",
+                "to": "g",
+                "label": "se fixent"
+              },
+              {
+                "from": "g",
+                "to": "h"
+              }
+            ],
+            "legend": [
+              "Antigène",
+              "Lymphocytes B",
+              "Effecteurs"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cooperation-cellulaire",
+          "kind": "diagram",
+          "description": "Schéma fléché de la coopération cellulaire. Un macrophage phagocyte l'antigène et en expose un fragment avec ses molécules du CMH. Un lymphocyte T4 spécifique le reconnaît, s'active et sécrète des interleukines. Elles activent les lymphocytes B (plasmocytes, anticorps) et les lymphocytes T8 (lymphocytes T cytotoxiques qui détruisent la cellule infectée).",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "m",
+                "label": "Macrophage : phagocyte l'antigène",
+                "category": 1
+              },
+              {
+                "id": "p",
+                "label": "Fragment d'antigène + CMH exposés",
+                "category": 1
+              },
+              {
+                "id": "t4",
+                "label": "Lymphocyte T4 spécifique activé",
+                "category": 2
+              },
+              {
+                "id": "il",
+                "label": "Interleukines sécrétées",
+                "category": 2
+              },
+              {
+                "id": "lb",
+                "label": "Lymphocytes B activés",
+                "category": 3
+              },
+              {
+                "id": "pl",
+                "label": "Plasmocytes : anticorps",
+                "category": 3
+              },
+              {
+                "id": "t8",
+                "label": "Lymphocytes T8 activés",
+                "category": 4
+              },
+              {
+                "id": "tc",
+                "label": "Lymphocytes T cytotoxiques",
+                "category": 4
+              },
+              {
+                "id": "ci",
+                "label": "Cellule infectée détruite",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "m",
+                "to": "p"
+              },
+              {
+                "from": "p",
+                "to": "t4",
+                "label": "reconnu par"
+              },
+              {
+                "from": "t4",
+                "to": "il"
+              },
+              {
+                "from": "il",
+                "to": "lb",
+                "label": "activent"
+              },
+              {
+                "from": "il",
+                "to": "t8",
+                "label": "activent"
+              },
+              {
+                "from": "lb",
+                "to": "pl"
+              },
+              {
+                "from": "t8",
+                "to": "tc"
+              },
+              {
+                "from": "tc",
+                "to": "ci",
+                "label": "détruisent"
+              }
+            ],
+            "legend": [
+              "Présentation",
+              "Coopération",
+              "Réponse humorale",
+              "Réponse cellulaire"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reponse-primaire-secondaire",
+          "kind": "stat_chart",
+          "description": "Courbe du taux d'anticorps dans le sang d'un enfant, en unités arbitraires, mesuré tous les 4 jours de J0 à J44. Une première injection a lieu à J0 et une seconde à J24. Taux : 0, 0, 5, 40, 25, 12, 8, 300, 600, 500, 400, 300. Le maximum est de 40 après la première injection et de 600 après la seconde.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              0,
+              5,
+              40,
+              25,
+              12,
+              8,
+              300,
+              600,
+              500,
+              400,
+              300
+            ],
+            "labels": [
+              "J0",
+              "J4",
+              "J8",
+              "J12",
+              "J16",
+              "J20",
+              "J24",
+              "J28",
+              "J32",
+              "J36",
+              "J40",
+              "J44"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rappel-vaccinal",
+          "kind": "stat_chart",
+          "description": "Courbe du taux d'anticorps d'un nourrisson, en unités arbitraires, mesuré tous les 10 jours de J0 à J70. Le vaccin est injecté à J0, puis un rappel à J30. Taux : 0, 30, 14, 6, 360, 240, 180, 130. Le maximum est de 30 après la première injection et de 360 après le rappel.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              30,
+              14,
+              6,
+              360,
+              240,
+              180,
+              130
+            ],
+            "labels": [
+              "J0",
+              "J10",
+              "J20",
+              "J30",
+              "J40",
+              "J50",
+              "J60",
+              "J70"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lame-de-sang-numeros",
+          "kind": "plate",
+          "description": "Planche d'un frottis sanguin observé au microscope, dont les éléments sont repérés par des numéros sans légende : 1 hématie, 2 polynucléaire neutrophile, 3 lymphocyte, 4 monocyte, 5 plaquette sanguine, 6 plasma. Les hématies sans noyau sont très nombreuses ; les leucocytes se reconnaissent à leur noyau.",
+          "params": {
+            "plate": "blood_smear",
+            "labels": [
+              {
+                "part": "red_blood_cell"
+              },
+              {
+                "part": "neutrophil"
+              },
+              {
+                "part": "lymphocyte"
+              },
+              {
+                "part": "monocyte"
+              },
+              {
+                "part": "platelet"
+              },
+              {
+                "part": "plasma"
+              }
+            ],
+            "highlight": [],
+            "numbering": "numbers"
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le soi et le non-soi",
+          "remember": "Chaque personne possède des **marqueurs de surface** qui lui sont propres : ils forment le **CMH** (complexe majeur d'histocompatibilité), appelé **HLA** chez l'homme. Ces molécules sont portées par les cellules nucléées de l'organisme ; les hématies, sans noyau, portent d'autres marqueurs, ceux des groupes sanguins (ABO, Rhésus), qui sont aussi du soi. L'ensemble des molécules reconnues comme siennes par l'organisme est le **soi**.\n\nTout élément portant des marqueurs différents (microbe, virus, cellule d'une autre personne) est du **non-soi**. Ses molécules capables de déclencher une réponse immunitaire sont des **antigènes**.\n\nLe système HLA est propre à chaque individu, sauf chez de vrais jumeaux. L'organisme tolère le soi et réagit contre le non-soi.",
+          "method": [
+            "Repérer l'élément étudié (cellule de l'organisme, microbe, molécule) et la molécule de surface dont parle l'énoncé.",
+            "Comparer ses marqueurs de surface à ceux des cellules de l'organisme (molécules du CMH ou HLA).",
+            "Conclure : marqueurs identiques, c'est du soi, toléré ; marqueurs différents, c'est du non-soi, dont les molécules sont des antigènes qui déclenchent une réponse immunitaire."
+          ],
+          "example": {
+            "statement": "Koffi se blesse au champ. Une bactérie du sol entre dans la plaie. Ses marqueurs de surface sont absents des cellules de Koffi. Cette bactérie est-elle du soi ou du non-soi ?",
+            "steps": [
+              "Repérer : l'élément étudié est une bactérie du sol, entrée dans la plaie de Koffi ; on s'intéresse aux molécules de sa surface.",
+              "Comparer : les cellules de la peau de Koffi portent ses marqueurs HLA ; la bactérie porte d'autres molécules, qu'on ne trouve pas chez Koffi.",
+              "Conclure : la bactérie est du non-soi ; ses molécules de surface sont des antigènes, qui déclenchent une réponse immunitaire."
+            ]
+          },
+          "pitfall": "Ne crois pas que le non-soi se limite aux microbes. Toute cellule ou molécule portant des marqueurs différents des tiens est du non-soi. Contre-exemple : une cellule de la peau d'une personne non apparentée n'est pas un microbe, mais ses marqueurs HLA sont différents des tiens : c'est du non-soi. Compare toujours les marqueurs avant de conclure.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître le soi et le non-soi",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu distingues le soi du non-soi avec la méthode de la fiche : repérer l'élément, comparer ses marqueurs, conclure.",
+            "questions": [
+              {
+                "content": "Que désigne le « soi » dans le système immunitaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la question porte sur la définition du soi. Étape 2 — Comparer : le soi regroupe les molécules portant les marqueurs du CMH de la personne, pas seulement un type de cellule. Étape 3 — Conclure : c'est l'ensemble des molécules reconnues comme siennes. Les microbes sont du non-soi, et les anticorps sont une réponse au non-soi, pas la définition du soi.",
+                "answers": [
+                  {
+                    "content": "L'ensemble des microbes présents dans l'organisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ensemble des molécules de l'organisme, reconnues comme siennes grâce aux marqueurs du CMH",
+                    "correct": true
+                  },
+                  {
+                    "content": "Uniquement les globules blancs",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ensemble des anticorps fabriqués par l'organisme",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez l'homme, le système HLA est propre à chaque individu, sauf chez de vrais jumeaux.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'élément étudié est le système HLA, version humaine du CMH. Étape 2 — Comparer : deux personnes non apparentées ont presque toujours des marqueurs différents ; seuls de vrais jumeaux ont les mêmes. Étape 3 — Conclure : l'affirmation est vraie. C'est ce qui rend les cellules d'une autre personne reconnaissables comme du non-soi.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les molécules du non-soi capables de déclencher une réponse immunitaire sont appelées des ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on cherche le nom des molécules du non-soi. Étape 2 — Comparer : ces molécules ne portent pas les marqueurs de l'organisme et déclenchent une réponse. Étape 3 — Conclure : ce sont des antigènes. Ne les confonds pas avec les anticorps, que l'organisme fabrique ensuite.",
+                "answers": [
+                  {
+                    "content": "antigènes",
+                    "correct": true
+                  },
+                  {
+                    "content": "antigène",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : quatre termes du vocabulaire de la notion. Étape 2 — Comparer : chaque définition reprend les marqueurs de l'organisme. Étape 3 — Conclure : le soi est propre à l'organisme, le non-soi en diffère, l'antigène est une molécule du non-soi, et HLA est le nom du CMH chez l'homme.",
+                "answers": [
+                  {
+                    "content": "Soi",
+                    "match": "Molécules reconnues comme propres à l'organisme"
+                  },
+                  {
+                    "content": "Non-soi",
+                    "match": "Éléments portant des marqueurs différents de ceux de l'organisme"
+                  },
+                  {
+                    "content": "Antigène",
+                    "match": "Molécule du non-soi qui déclenche une réponse immunitaire"
+                  },
+                  {
+                    "content": "HLA",
+                    "match": "Nom du CMH chez l'homme"
+                  }
+                ]
+              },
+              {
+                "content": "Pour Awa, lesquels de ces éléments sont du non-soi ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : cinq éléments, dont certains viennent d'Awa. Étape 2 — Comparer : les cellules d'Awa portent ses marqueurs ; la bactérie et le virus portent d'autres molécules. Étape 3 — Conclure : la bactérie et le virus sont du non-soi. Les globules blancs, les cellules du foie et les hématies d'Awa sont du soi.",
+                "answers": [
+                  {
+                    "content": "Une bactérie du sol entrée dans sa plaie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un virus de la rougeole entré dans son nez",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ses propres globules blancs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une cellule de son foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ses propres hématies",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève affirme : « Le non-soi, ce sont seulement les microbes. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'élève limite le non-soi aux microbes. Étape 2 — Comparer : une cellule d'une personne non apparentée porte des marqueurs HLA différents, sans être un microbe. Étape 3 — Conclure : elle est du non-soi aussi. L'erreur tentante est de confondre non-soi et microbe.",
+                "answers": [
+                  {
+                    "content": "Il a raison : seuls les microbes sont du non-soi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : toute cellule ou molécule aux marqueurs différents est du non-soi, même une cellule d'une autre personne",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a tort : le non-soi, ce sont seulement les cellules de l'organisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison, car les cellules d'une autre personne portent les mêmes marqueurs que les nôtres",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer le soi du non-soi avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Chez l'homme, les marqueurs du soi forment le système ___ ; une molécule du non-soi qui déclenche la réponse immunitaire est un ___.",
+                "question_type": "fill_blank",
+                "hint": "Le CMH a un nom particulier chez l'homme, qui commence par H. Une molécule du non-soi qui provoque une réponse porte le nom d'antigène.",
+                "explanation": "Étape 1 — Repérer : deux termes à compléter. Étape 2 — Comparer : les marqueurs du soi forment le CMH, appelé HLA chez l'homme ; la molécule du non-soi est un antigène. Étape 3 — Conclure : HLA (ou CMH), puis antigène.",
+                "answers": [
+                  {
+                    "content": "HLA",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CMH",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "antigène",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "antigènes",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une cellule de la peau de Koffi et une cellule de son foie portent les mêmes marqueurs HLA.",
+                "question_type": "true_false",
+                "hint": "Pense à une même personne : ses cellules ont-elles des marqueurs différents d'un organe à l'autre ?",
+                "explanation": "Étape 1 — Repérer : deux cellules d'un même individu. Étape 2 — Comparer : les cellules nucléées d'une personne portent toutes ses marqueurs HLA. Étape 3 — Conclure : c'est vrai, les deux cellules sont du soi.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une bactérie porte à sa surface des molécules absentes de l'organisme. Pour l'organisme, ces molécules sont :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : une bactérie, avec des molécules de surface. Étape 2 — Comparer : ces molécules ne se trouvent pas chez la personne. Étape 3 — Conclure : ce sont des molécules du non-soi, donc des antigènes. Les anticorps sont fabriqués par l'organisme, ils ne sont pas sur la bactérie.",
+                "answers": [
+                  {
+                    "content": "Des antigènes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des anticorps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des molécules du soi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des marqueurs HLA de la personne",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cellule dont les marqueurs HLA sont ceux de l'organisme est considérée comme du ___.",
+                "question_type": "select",
+                "hint": "Compare les marqueurs de la cellule à ceux de l'organisme : sont-ils identiques ou différents ?",
+                "explanation": "Étape 1 — Repérer : une cellule avec les marqueurs HLA de l'organisme. Étape 2 — Comparer : ils sont identiques à ceux de ses autres cellules. Étape 3 — Conclure : c'est du soi, toléré par l'organisme.",
+                "answers": [
+                  {
+                    "content": "soi",
+                    "correct": true
+                  },
+                  {
+                    "content": "non-soi",
+                    "correct": false
+                  },
+                  {
+                    "content": "antigène",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La réponse immunitaire non spécifique",
+          "remember": "La défense non spécifique agit **tout de suite** et de la même façon contre tout agresseur. Elle n'a **pas de mémoire**. Les premières barrières sont la peau et les muqueuses.\n\nSi un microbe passe la barrière, la **réaction inflammatoire** se déclenche : des substances chimiques libérées par les cellules lésées **dilatent les capillaires** (rougeur, chaleur) et laissent passer du plasma (gonflement). Les leucocytes traversent la paroi des capillaires (**diapédèse**). La douleur vient de la stimulation des terminaisons nerveuses.\n\nLes **phagocytes** (polynucléaires neutrophiles, macrophages issus des monocytes) détruisent les microbes par **phagocytose** : adhésion, ingestion, digestion par les enzymes des lysosomes, rejet. Le **pus** contient des leucocytes morts et des débris.",
+          "method": [
+            "Repérer la porte d'entrée de l'agresseur et les signes locaux observés (rougeur, chaleur, gonflement, douleur).",
+            "Associer chaque signe à son mécanisme : dilatation des capillaires, passage de plasma et de leucocytes vers les tissus.",
+            "Décrire la phagocytose du microbe dans l'ordre : adhésion, ingestion, digestion, rejet.",
+            "Conclure : réponse immédiate, identique contre tout agresseur, sans mémoire."
+          ],
+          "example": {
+            "statement": "Moussa s'écorche le genou en jouant au football. Le genou devient rouge, chaud et gonflé. Explique ces signes et le sort des microbes entrés dans la plaie.",
+            "steps": [
+              "Repérer : la porte d'entrée est l'écorchure du genou ; les signes sont la rougeur, la chaleur et le gonflement.",
+              "Associer : les capillaires dilatés amènent plus de sang (rougeur, chaleur) ; du plasma passe dans les tissus (gonflement) et des leucocytes traversent la paroi des capillaires.",
+              "Décrire : un phagocyte se colle au microbe (adhésion), l'englobe (ingestion), le digère avec les enzymes de ses lysosomes (digestion), puis rejette les déchets (rejet).",
+              "Conclure : cette réponse est immédiate, serait la même contre un autre microbe et ne garde pas de mémoire : elle est non spécifique."
+            ]
+          },
+          "pitfall": "Ne crois pas que la réaction inflammatoire vise un microbe précis. Contre-exemple : une écharde stérile, sans aucun microbe, enfoncée dans le pied provoque aussi rougeur, chaleur et gonflement. Cette réaction est déclenchée par la lésion, quel que soit l'agresseur : c'est ce qui la rend non spécifique.",
+          "figure": "reaction-inflammatoire",
+          "exercise": {
+            "title": "Analyser une réaction inflammatoire",
+            "exercise_type": "fixation",
+            "figure": "lame-de-sang-numeros",
+            "statement": "Dans cet exercice, tu analyses une réaction inflammatoire avec la méthode de la fiche : repérer, associer, décrire, conclure. La planche montre un frottis sanguin dont les éléments sont repérés par des numéros.",
+            "questions": [
+              {
+                "content": "Relie chaque signe de l'inflammation à son mécanisme.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : quatre signes de la réaction inflammatoire. Étape 2 — Associer : les capillaires dilatés amènent du sang (rougeur, chaleur), le plasma sort vers les tissus (gonflement), les terminaisons nerveuses sont stimulées (douleur). Étape 3 — Décrire : après la phagocytose, les phagocytes morts forment le pus. Étape 4 — Conclure : chaque signe a son mécanisme.",
+                "answers": [
+                  {
+                    "content": "Rougeur et chaleur",
+                    "match": "Afflux de sang dans les capillaires dilatés"
+                  },
+                  {
+                    "content": "Gonflement",
+                    "match": "Passage de plasma des capillaires vers les tissus"
+                  },
+                  {
+                    "content": "Douleur",
+                    "match": "Stimulation des terminaisons nerveuses"
+                  },
+                  {
+                    "content": "Pus",
+                    "match": "Leucocytes morts et débris de microbes"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les phases de la phagocytose d'un microbe.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Décrire la phagocytose dans l'ordre : adhésion (le phagocyte se fixe au microbe), ingestion (il l'englobe), digestion (les enzymes des lysosomes le dégradent), rejet (les déchets sont évacués). Digérer avant d'avoir englobé est impossible : l'ingestion précède toujours la digestion.",
+                "answers": [
+                  {
+                    "content": "Adhésion du phagocyte au microbe"
+                  },
+                  {
+                    "content": "Ingestion du microbe dans une vacuole"
+                  },
+                  {
+                    "content": "Digestion par les enzymes des lysosomes"
+                  },
+                  {
+                    "content": "Rejet des déchets"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles cellules sont des phagocytes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on cherche les cellules qui ingèrent des microbes. Étape 2 — Associer : les polynucléaires neutrophiles et les macrophages (issus des monocytes) englobent les microbes. Étape 3 — Décrire : ils réalisent la phagocytose. Étape 4 — Conclure : ce sont les deux phagocytes. Les hématies transportent le dioxygène, les plaquettes forment le bouchon, les plasmocytes sécrètent des anticorps.",
+                "answers": [
+                  {
+                    "content": "Les polynucléaires neutrophiles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les macrophages",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plaquettes sanguines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plasmocytes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La réaction inflammatoire se déclenche de la même façon, quel que soit l'agresseur : microbe, écharde ou brûlure.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on compare plusieurs agresseurs. Étape 2 — Associer : la lésion libère des substances chimiques qui dilatent les capillaires, quel que soit l'agresseur. Étape 3 — Décrire : les mêmes phagocytes arrivent. Étape 4 — Conclure : c'est vrai, la réponse est non spécifique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les leucocytes quittent les capillaires en traversant leur paroi : ce passage s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on cherche le nom du passage des leucocytes hors des capillaires. Étape 2 — Associer : les capillaires dilatés laissent sortir plasma et leucocytes. Étape 3 — Décrire : le passage des leucocytes à travers la paroi est la diapédèse. Étape 4 — Conclure : elle les amène sur le lieu de l'infection.",
+                "answers": [
+                  {
+                    "content": "diapédèse",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une écharde stérile, sans microbe, provoque une rougeur et un gonflement. Que peux-tu en déduire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la porte d'entrée est la lésion, sans microbe. Étape 2 — Associer : la rougeur et le gonflement viennent de la dilatation des capillaires et du passage du plasma. Étape 3 — Décrire : ces mécanismes sont déclenchés par la lésion. Étape 4 — Conclure : la réaction est non spécifique. Penser qu'un microbe caché existe est l'erreur tentante : elle n'est pas nécessaire.",
+                "answers": [
+                  {
+                    "content": "La réaction inflammatoire se déclenche même sans microbe : elle est non spécifique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il y avait forcément un microbe caché",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction inflammatoire est spécifique de l'écharde",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction produit des anticorps contre l'écharde",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur le frottis sanguin de la planche, la cellule numérotée 2 a un noyau à plusieurs lobes et est entourée de nombreuses hématies sans noyau. De quelle cellule s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche, sur le frottis, la cellule à noyau lobé. Étape 2 — Associer : les hématies n'ont pas de noyau, les plaquettes sont de petits fragments, le lymphocyte a un gros noyau rond non lobé. Étape 3 — Décrire : le polynucléaire neutrophile est un leucocyte qui phagocyte les microbes. Étape 4 — Conclure : c'est le polynucléaire neutrophile.",
+                "answers": [
+                  {
+                    "content": "Le polynucléaire neutrophile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le lymphocyte",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hématie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La plaquette sanguine",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer une réaction inflammatoire et la phagocytose avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans la phagocytose, le microbe est d'abord fixé (adhésion), puis englobé : c'est l'___, puis digéré par les enzymes des ___.",
+                "question_type": "fill_blank",
+                "hint": "La phagocytose se déroule en quatre phases : adhésion, ingestion, digestion, rejet. Les enzymes digestives sont contenues dans des organites appelés lysosomes.",
+                "explanation": "Étape 3 — Décrire la phagocytose dans l'ordre : adhésion, ingestion, digestion, rejet. Le phagocyte englobe le microbe (ingestion), puis le digère avec les enzymes de ses lysosomes (digestion). Étape 4 — Conclure : ingestion, puis lysosomes.",
+                "answers": [
+                  {
+                    "content": "ingestion",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "lysosomes",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "lysosome",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi une plaie est-elle rouge et chaude ?",
+                "question_type": "single_choice",
+                "hint": "Pense à ce que deviennent les capillaires et à ce qui arrive en plus grande quantité dans la région blessée.",
+                "explanation": "Étape 1 — Repérer : les signes sont la rougeur et la chaleur. Étape 2 — Associer : les substances chimiques libérées dilatent les capillaires, donc plus de sang arrive. Étape 3 — Conclure : c'est l'afflux de sang qui rougit et réchauffe la plaie. Les anticorps n'interviennent pas dans cette réponse immédiate.",
+                "answers": [
+                  {
+                    "content": "Les capillaires se dilatent et amènent plus de sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les anticorps chauffent la plaie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les hématies sont détruites sur place",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plaquettes dégagent de la chaleur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La phagocytose est une réaction spécifique d'un microbe donné.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on juge la spécificité de la phagocytose. Étape 3 — Décrire : les phagocytes englobent tout microbe, sans distinguer. Étape 4 — Conclure : la phagocytose est non spécifique, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le liquide jaunâtre qui apparaît dans une plaie infectée, formé de leucocytes morts et de débris, est le ___.",
+                "question_type": "fill_blank",
+                "hint": "C'est un liquide épais, jaunâtre, qui s'écoule parfois d'un abcès.",
+                "explanation": "Étape 3 — Décrire : après la phagocytose, les phagocytes morts et les débris de microbes s'accumulent. Étape 4 — Conclure : ce mélange est le pus.",
+                "answers": [
+                  {
+                    "content": "pus",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La réponse spécifique à médiation humorale",
+          "remember": "Une réponse **spécifique** est dirigée contre un antigène précis, met plusieurs jours à se mettre en place et laisse une mémoire. La réponse à **médiation humorale** agit par des **anticorps** présents dans le sang et la lymphe, contre les antigènes libres (bactéries, toxines, virus hors des cellules).\n\nLes **lymphocytes B** (LB) naissent et mûrissent dans la moelle osseuse. Chaque LB porte des récepteurs pour **un seul antigène**. L'antigène **sélectionne** les LB qui le reconnaissent : ils se multiplient (clone) puis se différencient en **plasmocytes**, qui sécrètent des anticorps, et en **LB mémoire**.\n\nUn **anticorps** est une protéine (immunoglobuline) spécifique d'un antigène. En s'y fixant, il forme un **complexe immun**, que les phagocytes éliminent. L'activation complète demande la coopération cellulaire (notion suivante).",
+          "method": [
+            "Identifier l'antigène en cause et vérifier qu'il est libre dans les liquides de l'organisme.",
+            "Repérer le lymphocyte B qui possède le récepteur spécifique de cet antigène : il est sélectionné.",
+            "Suivre sa multiplication et sa différenciation en plasmocytes, qui sécrètent des anticorps, et en cellules mémoire.",
+            "Décrire l'action des anticorps : formation du complexe immun, puis élimination par phagocytose."
+          ],
+          "example": {
+            "statement": "Une bactérie libre se multiplie dans le sang d'Awa. Explique comment la réponse à médiation humorale s'organise contre elle.",
+            "steps": [
+              "Identifier : la bactérie et ses molécules de surface sont des antigènes libres dans le sang, donc accessibles aux anticorps.",
+              "Repérer : parmi les millions de lymphocytes B, seul celui dont le récepteur reconnaît cet antigène est sélectionné.",
+              "Suivre : ce LB se multiplie en un clone, qui se différencie en plasmocytes sécréteurs d'anticorps et en LB mémoire.",
+              "Décrire : les anticorps se fixent sur la bactérie et forment des complexes immuns, que les phagocytes éliminent."
+            ]
+          },
+          "pitfall": "Ne confonds pas antigène et anticorps. L'antigène vient du non-soi (microbe, toxine) ; l'anticorps est fabriqué par l'organisme, par les plasmocytes. Un anticorps est aussi spécifique : l'anticorps contre la toxine du tétanos ne se fixe pas sur le virus de la rougeole. Un anticorps ne reconnaît qu'un antigène.",
+          "figure": "reponse-humorale",
+          "exercise": {
+            "title": "Retracer une réponse à médiation humorale",
+            "exercise_type": "fixation",
+            "figure": "reponse-humorale",
+            "statement": "Dans cet exercice, tu retraces une réponse à médiation humorale avec la méthode de la fiche : identifier, repérer, suivre, décrire. Le schéma montre les étapes.",
+            "questions": [
+              {
+                "content": "Quelles cellules sécrètent les anticorps ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Suivre : le LB sélectionné se multiplie, puis se différencie en plasmocytes. Ce sont eux qui sécrètent les anticorps. Les macrophages et les polynucléaires phagocytent, ils ne fabriquent pas d'anticorps. Les hématies transportent le dioxygène.",
+                "answers": [
+                  {
+                    "content": "Les plasmocytes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les macrophages",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les polynucléaires neutrophiles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes d'une réponse à médiation humorale.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier l'antigène libre. Étape 2 — Repérer le LB spécifique, qui le reconnaît. Étape 3 — Suivre : le LB se multiplie en un clone, ses cellules se différencient en plasmocytes, qui sécrètent les anticorps. Étape 4 — Décrire l'action des anticorps : ils se fixent ensuite sur l'antigène et forment le complexe immun. Les anticorps n'existent qu'après la différenciation en plasmocytes : ils ne précèdent pas le clone.",
+                "answers": [
+                  {
+                    "content": "Un antigène libre entre dans l'organisme"
+                  },
+                  {
+                    "content": "Un lymphocyte B spécifique reconnaît l'antigène"
+                  },
+                  {
+                    "content": "Le lymphocyte B se multiplie en un clone"
+                  },
+                  {
+                    "content": "Les cellules du clone se différencient en plasmocytes"
+                  },
+                  {
+                    "content": "Les plasmocytes sécrètent des anticorps"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : quatre éléments de la réponse humorale. Étape 2 — Repérer : le LB reconnaît l'antigène par son récepteur. Étape 3 — Suivre : il donne des plasmocytes, qui sécrètent les anticorps. Étape 4 — Décrire : l'anticorps se fixe sur l'antigène et forme un complexe immun, éliminé par les phagocytes.",
+                "answers": [
+                  {
+                    "content": "Lymphocyte B",
+                    "match": "Reconnaît un antigène précis grâce à son récepteur"
+                  },
+                  {
+                    "content": "Plasmocyte",
+                    "match": "Sécrète des anticorps"
+                  },
+                  {
+                    "content": "Anticorps",
+                    "match": "Se fixe sur son antigène"
+                  },
+                  {
+                    "content": "Complexe immun",
+                    "match": "Antigène lié à un anticorps, éliminé par phagocytose"
+                  }
+                ]
+              },
+              {
+                "content": "Un anticorps peut se fixer sur n'importe quel antigène.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : chaque LB, donc chaque anticorps, correspond à un seul antigène. Étape 4 — Décrire : l'anticorps se fixe uniquement sur l'antigène qui a provoqué sa fabrication. L'affirmation est fausse : l'anticorps est spécifique. Penser qu'il agit sur tout microbe confond spécifique et non spécifique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les plasmocytes sécrètent des ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Suivre : le LB sélectionné se différencie en plasmocytes. Ces cellules sécrètent en grande quantité des anticorps. Ne les confonds pas avec les antigènes, qui sont les molécules du non-soi.",
+                "answers": [
+                  {
+                    "content": "anticorps",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sont exactes ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Repérer : un LB ne reconnaît qu'un antigène. Étape 3 — Suivre : le LB activé donne des plasmocytes. Étape 4 — Décrire : l'anticorps forme avec l'antigène un complexe immun éliminé par phagocytose. Les plasmocytes sécrètent des anticorps, ils ne phagocytent pas, et les anticorps sont des protéines, pas des cellules.",
+                "answers": [
+                  {
+                    "content": "Un lymphocyte B porte des récepteurs pour un seul antigène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les plasmocytes proviennent de lymphocytes B activés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un anticorps lié à son antigène forme un complexe immun éliminé par phagocytose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les plasmocytes sont des phagocytes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les anticorps sont des cellules sanguines",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un lymphocyte B sélectionné se divise 3 fois de suite : à chaque division, chaque cellule donne 2 cellules filles. Combien de cellules compte le clone après 3 divisions ?",
+                "question_type": "numeric",
+                "unit": "cellules",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Suivre la multiplication du LB sélectionné : le nombre de cellules double à chaque division. 1 cellule, puis 2, puis 4, puis 8 après trois divisions, soit $2^3 = 8$. Se tromper en comptant 3 × 2 = 6 est l'erreur tentante : le nombre double à chaque fois.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à décrire une réponse à médiation humorale avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le lymphocyte B activé se différencie en ___ qui sécrètent des ___.",
+                "question_type": "fill_blank",
+                "hint": "Une cellule spécialisée dans la sécrétion d'anticorps porte un nom qui commence par « plasmo ». Ce qu'elle sécrète est une protéine spécifique d'un antigène.",
+                "explanation": "Étape 3 — Suivre : le LB sélectionné se multiplie, puis se différencie en plasmocytes. Étape 4 — Décrire : les plasmocytes sécrètent des anticorps, qui forment ensuite des complexes immuns avec l'antigène.",
+                "answers": [
+                  {
+                    "content": "plasmocytes",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "plasmocyte",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "anticorps",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans quel organe les lymphocytes B naissent-ils et mûrissent-ils ?",
+                "question_type": "single_choice",
+                "hint": "Pense à l'organe situé au centre des os où naissent toutes les cellules du sang.",
+                "explanation": "Étape 2 — Repérer : le LB sélectionné est né et a mûri dans la moelle osseuse. Le thymus est l'organe où mûrissent les lymphocytes T, pas les LB.",
+                "answers": [
+                  {
+                    "content": "La moelle osseuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le thymus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'estomac",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un complexe immun est formé d'un antigène lié à un anticorps.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Décrire : l'anticorps se fixe sur son antigène et forme un complexe immun, que les phagocytes éliminent. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une toxine libre dans le sang est neutralisée quand un anticorps s'y fixe : il se forme un ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Décrire : l'anticorps qui se fixe sur son antigène forme un complexe immun. Le clone est l'ensemble des cellules filles d'un LB, et le plasmocyte est la cellule qui sécrète les anticorps.",
+                "answers": [
+                  {
+                    "content": "complexe immun",
+                    "correct": true
+                  },
+                  {
+                    "content": "clone de lymphocytes",
+                    "correct": false
+                  },
+                  {
+                    "content": "plasmocyte",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La coopération cellulaire et la réponse à médiation cellulaire",
+          "remember": "Les **lymphocytes T** (LT) naissent dans la moelle osseuse et mûrissent dans le **thymus**. On distingue les **LT4** (auxiliaires, porteurs de la molécule CD4) et les **LT8** (porteurs de CD8), qui donnent les **LT cytotoxiques** (LTc).\n\nUn **macrophage** phagocyte l'antigène et en expose un fragment avec les molécules du CMH : c'est une **cellule présentatrice d'antigène**. Un LT4 spécifique reconnaît ce complexe, s'active, se multiplie et sécrète des **interleukines**. Elles activent les LB et les LT8 spécifiques de l'antigène, ceux dont le récepteur le reconnaît (sélection clonale) : c'est la **coopération cellulaire**.\n\nLa réponse à **médiation cellulaire** vise les cellules de l'organisme infectées (par un virus) ou anormales : les LTc reconnaissent l'antigène présenté sur ces cellules avec le CMH et les **détruisent**. Les LT4 ne détruisent rien, ils dirigent.",
+          "method": [
+            "Repérer la cellule présentatrice d'antigène (macrophage) et le fragment d'antigène exposé avec ses molécules du CMH.",
+            "Identifier le lymphocyte T4 qui reconnaît ce complexe, s'active et sécrète des interleukines.",
+            "Associer la cible des interleukines : les LB (réponse humorale) ou les LT8 (réponse cellulaire).",
+            "Conclure sur l'effecteur final et sa cible : plasmocytes et anticorps contre un antigène libre ; LT cytotoxiques contre une cellule infectée."
+          ],
+          "example": {
+            "statement": "Un virus infecte des cellules du foie de Koffi. Retrace la coopération cellulaire qui conduit à la destruction de ces cellules.",
+            "steps": [
+              "Repérer : un macrophage phagocyte le virus et expose un fragment d'antigène avec ses molécules du CMH.",
+              "Identifier : le LT4 spécifique reconnaît ce complexe, s'active, se multiplie et sécrète des interleukines.",
+              "Associer : les interleukines activent seulement les LT8 spécifiques, qui reconnaissent l'antigène présenté avec le CMH ; ils se multiplient et se différencient.",
+              "Conclure : les LT cytotoxiques détruisent les cellules du foie infectées ; contre un virus libre, ce sont les anticorps des plasmocytes qui agissent."
+            ]
+          },
+          "pitfall": "Ne donne pas le même rôle aux LT4 et aux LT8. Les LT4 sécrètent des interleukines et dirigent la réponse, ils ne détruisent aucune cellule. Les LT8 donnent des LT cytotoxiques, qui détruisent les cellules infectées. Les anticorps viennent toujours des plasmocytes, jamais des LT. Contre-exemple : sans LT4, les LB et les LT8 ne sont presque pas activés.",
+          "figure": "cooperation-cellulaire",
+          "exercise": {
+            "title": "Retracer la coopération cellulaire",
+            "exercise_type": "fixation",
+            "figure": "cooperation-cellulaire",
+            "statement": "Dans cet exercice, tu retraces la coopération cellulaire avec la méthode de la fiche : repérer, identifier, associer, conclure. Le schéma montre les cellules et leurs liens.",
+            "questions": [
+              {
+                "content": "Relie chaque cellule à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : le macrophage présente l'antigène avec le CMH. Étape 2 — Identifier : le LT4 sécrète les interleukines. Étape 3 — Associer : elles activent les LB (plasmocytes) et les LT8 (LT cytotoxiques). Étape 4 — Conclure : le LT cytotoxique détruit les cellules infectées et le plasmocyte sécrète les anticorps.",
+                "answers": [
+                  {
+                    "content": "Macrophage",
+                    "match": "Phagocyte l'antigène et en expose un fragment avec le CMH"
+                  },
+                  {
+                    "content": "Lymphocyte T4",
+                    "match": "Sécrète des interleukines qui activent LB et LT8"
+                  },
+                  {
+                    "content": "Lymphocyte T cytotoxique",
+                    "match": "Détruit les cellules infectées"
+                  },
+                  {
+                    "content": "Plasmocyte",
+                    "match": "Sécrète des anticorps"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle cellule sécrète les interleukines qui activent LB et LT8 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : le LT4 qui reconnaît l'antigène présenté s'active et sécrète des interleukines. Le plasmocyte sécrète des anticorps, le LT cytotoxique détruit des cellules : ni l'un ni l'autre ne sécrète d'interleukines.",
+                "answers": [
+                  {
+                    "content": "Le lymphocyte T4",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plasmocyte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le lymphocyte T cytotoxique",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hématie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la coopération cellulaire.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : tout commence par la présentation de l'antigène par le macrophage. Étape 2 — Identifier : le LT4 spécifique reconnaît ce complexe et sécrète des interleukines. Étape 3 — Associer : elles activent les LT8 spécifiques de l'antigène. Étape 4 — Conclure : les LT cytotoxiques détruisent la cellule infectée. Les LTc n'agissent qu'en fin de chaîne.",
+                "answers": [
+                  {
+                    "content": "Le macrophage phagocyte l'antigène et en expose un fragment avec le CMH"
+                  },
+                  {
+                    "content": "Le lymphocyte T4 spécifique reconnaît ce complexe"
+                  },
+                  {
+                    "content": "Le lymphocyte T4 sécrète des interleukines"
+                  },
+                  {
+                    "content": "Les lymphocytes T8 spécifiques de l'antigène sont activés"
+                  },
+                  {
+                    "content": "Les lymphocytes T cytotoxiques détruisent la cellule infectée"
+                  }
+                ]
+              },
+              {
+                "content": "Les lymphocytes T cytotoxiques détruisent des cellules de l'organisme infectées par un virus.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Associer : les interleukines activent les LT8, qui deviennent des LT cytotoxiques. Étape 4 — Conclure : ils reconnaissent l'antigène viral présenté sur la cellule infectée avec le CMH et la détruisent. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La réponse dirigée contre les cellules infectées par un virus est dite à médiation ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : contre les cellules infectées, l'effecteur est un lymphocyte T cytotoxique et non un anticorps. On parle donc de réponse à médiation cellulaire. La médiation humorale concerne les anticorps.",
+                "answers": [
+                  {
+                    "content": "cellulaire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles cellules les interleukines des LT4 activent-elles ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Associer : les interleukines ont deux cibles. Les LB donnent des plasmocytes et des anticorps (réponse humorale) ; les LT8 donnent des LT cytotoxiques (réponse cellulaire). Les hématies, les plaquettes et les cellules du foie ne sont pas des cellules immunitaires.",
+                "answers": [
+                  {
+                    "content": "Les lymphocytes B",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les lymphocytes T8",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plaquettes sanguines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les cellules du foie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève affirme : « Les LT8 sécrètent les anticorps contre le virus. » Quelle est la bonne correction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer : les LB, activés par les interleukines, donnent les plasmocytes qui sécrètent les anticorps. Les LT8 donnent des LT cytotoxiques. Étape 4 — Conclure : les LT ne sécrètent jamais d'anticorps. L'erreur tentante est de confondre les deux lymphocytes.",
+                "answers": [
+                  {
+                    "content": "Les anticorps sont sécrétés par les plasmocytes ; les LT8 donnent des LT cytotoxiques qui détruisent les cellules infectées",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les LT8 sécrètent bien les anticorps, mais seulement contre les virus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les LT8 sécrètent les interleukines qui produisent les anticorps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les LT8 sont des plasmocytes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à retracer une coopération cellulaire avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le macrophage est une cellule ___ d'antigène : il expose un fragment avec les molécules du ___.",
+                "question_type": "fill_blank",
+                "hint": "Une cellule qui expose un antigène à d'autres cellules est dite présentatrice. Les marqueurs de surface propres à l'individu forment le CMH.",
+                "explanation": "Étape 1 — Repérer : le macrophage phagocyte l'antigène et en expose un fragment avec ses molécules du CMH. Il est donc une cellule présentatrice d'antigène. Étape 2 — Identifier : le LT4 reconnaît ce complexe.",
+                "answers": [
+                  {
+                    "content": "présentatrice",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CMH",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "HLA",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans quel organe les lymphocytes T mûrissent-ils ?",
+                "question_type": "single_choice",
+                "hint": "Cet organe se trouve derrière le sternum. Le mot commence par « thy ».",
+                "explanation": "Étape 2 — Identifier : les LT naissent dans la moelle osseuse, puis mûrissent dans le thymus avant de devenir des LT4 ou des LT8. C'est la moelle osseuse, pas le thymus, qui assure la maturation des LB.",
+                "answers": [
+                  {
+                    "content": "Le thymus",
+                    "correct": true
+                  },
+                  {
+                    "content": "La moelle osseuse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'intestin grêle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les lymphocytes T4 détruisent directement les cellules infectées.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : le LT4 sécrète des interleukines et dirige la réponse. Étape 4 — Conclure : ce sont les LT cytotoxiques, issus des LT8, qui détruisent les cellules infectées. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les interleukines activent les LB, qui donneront des ___ sécréteurs d'anticorps.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Associer : les interleukines activent les LB, qui se différencient en plasmocytes. Étape 4 — Conclure : les plasmocytes sécrètent les anticorps. Les LT cytotoxiques viennent des LT8.",
+                "answers": [
+                  {
+                    "content": "plasmocytes",
+                    "correct": true
+                  },
+                  {
+                    "content": "macrophages",
+                    "correct": false
+                  },
+                  {
+                    "content": "LT cytotoxiques",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La mémoire immunitaire et les aides à l'immunité",
+          "remember": "Au **premier contact** avec un antigène, la **réponse primaire** est lente (quelques jours avant les premiers anticorps), faible et brève. Elle forme des **cellules mémoire** (LB et LT) qui vivent longtemps.\n\nAu **second contact** avec le même antigène, la **réponse secondaire** est plus rapide, plus intense et plus durable : c'est la **mémoire immunitaire**, spécifique de l'antigène. Elle évite souvent la maladie.\n\nLa **vaccination** injecte un antigène rendu inoffensif : elle provoque une réponse primaire sans maladie et crée la mémoire. Elle est **préventive** et durable ; des rappels la renforcent. La **sérothérapie** injecte un sérum contenant des anticorps déjà fabriqués : elle agit **tout de suite**, mais seulement quelques semaines, sans créer de mémoire. Elle sert en **urgence** (tétanos, morsure de serpent).",
+          "method": [
+            "Lire la courbe : repérer le moment de chaque injection ou contact avec l'antigène.",
+            "Comparer les deux réponses : délai d'apparition des anticorps, taux maximal et durée.",
+            "Expliquer la différence par la mémoire immunitaire : les cellules mémoire sont déjà présentes au second contact.",
+            "Conclure sur l'aide adaptée : le vaccin est préventif et durable ; le sérum est curatif, immédiat et temporaire."
+          ],
+          "example": {
+            "statement": "Un enfant reçoit une injection de vaccin à J0, puis une seconde à J24. Son taux d'anticorps, en unités arbitraires, atteint 40 à J12, puis 600 à J32. Il n'y a aucun anticorps avant J8 après la première injection, et déjà 300 à J28 après la seconde. Interprète ces résultats.",
+            "steps": [
+              "Lire : la première injection a lieu à J0, la seconde à J24 ; on suit le taux d'anticorps après chacune.",
+              "Comparer : après la première, les anticorps apparaissent après J4 et atteignent 40 ; après la seconde, il y en a déjà 300 à J28 et le maximum est 600, soit $600 \\div 40 = 15$ fois plus.",
+              "Expliquer : la première injection a formé des cellules mémoire ; lors de la seconde, elles se multiplient et se différencient vite : c'est la mémoire immunitaire.",
+              "Conclure : un vaccin avec rappel donne une protection préventive et durable ; un sérum, lui, donnerait seulement des anticorps tout faits, de courte durée."
+            ]
+          },
+          "pitfall": "Ne confonds pas vaccin et sérum. Contre-exemple : un agriculteur non vacciné se blesse profondément. Le sérum antitétanique lui apporte des anticorps immédiatement, mais ils disparaissent en quelques semaines et aucune mémoire n'est créée. Le vaccin ne protège qu'après plusieurs jours, mais pendant des années grâce aux cellules mémoire. Vaccin : prévenir et durer. Sérum : soigner vite.",
+          "figure": "reponse-primaire-secondaire",
+          "exercise": {
+            "title": "Interpréter une réponse primaire et secondaire",
+            "exercise_type": "fixation",
+            "figure": "reponse-primaire-secondaire",
+            "statement": "Dans cet exercice, tu interprètes la courbe du taux d'anticorps d'un enfant avec la méthode de la fiche : lire, comparer, expliquer, conclure. Une première injection a lieu à J0, une seconde à J24.",
+            "questions": [
+              {
+                "content": "Le taux d'anticorps d'un enfant (en unités arbitraires) est de 0, 0, 5, 40, 25, 12, 8 à J0, J4, J8, J12, J16, J20 et J24 après une première injection. Quel est le taux maximal atteint ?",
+                "question_type": "numeric",
+                "unit": "unités",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : la première injection est à J0 ; on lit les valeurs jusqu'à J24. Étape 2 — Comparer les mesures : le taux monte jusqu'à 40 à J12, puis redescend. Le maximum est donc 40. Prendre 5 ou 25 revient à lire une valeur intermédiaire.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après une seconde injection du même vaccin à J24, le taux d'anticorps est de 300, 600, 500, 400 et 300 à J28, J32, J36, J40 et J44. Quel est le taux maximal atteint ?",
+                "question_type": "numeric",
+                "unit": "unités",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : la seconde injection est à J24 ; on lit les mesures de J28 à J44. Étape 2 — Comparer : le taux monte à 600 à J32, puis redescend lentement. Le maximum est 600. Le choix de 300 serait la valeur de départ ou de fin de lecture, pas le maximum.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Comparée à la réponse primaire, la réponse secondaire est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer : après la seconde injection, 300 unités sont déjà atteintes à J28 (4 jours après), le maximum est de 600 contre 40, et le taux reste élevé plus longtemps. Étape 3 — Expliquer : les cellules mémoire expliquent cette différence. Étape 4 — Conclure : la réponse secondaire est plus rapide, plus intense et plus durable.",
+                "answers": [
+                  {
+                    "content": "Plus rapide, plus intense et plus durable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Plus lente et plus faible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aussi rapide, mais plus brève",
+                    "correct": false
+                  },
+                  {
+                    "content": "Identique, car l'antigène est le même",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La réponse secondaire est due aux cellules ___ formées lors du premier contact avec l'antigène.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Expliquer : lors du premier contact, des LB et des LT mémoire sont formés. Au second contact, elles se multiplient et se différencient vite. C'est la mémoire immunitaire.",
+                "answers": [
+                  {
+                    "content": "mémoire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque notion à sa caractéristique.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Comparer : la réponse primaire est lente, faible et brève ; la secondaire est rapide, intense et durable. Étape 4 — Conclure : le vaccin provoque une réponse primaire sans maladie et crée la mémoire ; le sérum apporte des anticorps tout faits, immédiats mais temporaires.",
+                "answers": [
+                  {
+                    "content": "Réponse primaire",
+                    "match": "Lente, faible et brève"
+                  },
+                  {
+                    "content": "Réponse secondaire",
+                    "match": "Rapide, intense et durable"
+                  },
+                  {
+                    "content": "Vaccination",
+                    "match": "Préventive et durable, avec création de mémoire"
+                  },
+                  {
+                    "content": "Sérothérapie",
+                    "match": "Immédiate et temporaire, sans mémoire"
+                  }
+                ]
+              },
+              {
+                "content": "Le sérum antitétanique provoque la formation de cellules mémoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : les cellules mémoire naissent d'une réponse immunitaire de l'organisme. Étape 4 — Conclure : le sérum apporte des anticorps déjà fabriqués, sans stimuler les lymphocytes, donc sans mémoire. L'affirmation est fausse. Confondre sérum et vaccin est l'erreur tentante.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un agriculteur non vacciné se blesse profondément avec une machette souillée. Le médecin veut le protéger tout de suite contre le tétanos. Que lui injecte-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure sur l'aide adaptée : une protection immédiate exige des anticorps tout faits, donc du sérum. Le vaccin ne protège qu'après plusieurs jours, le temps de la réponse primaire. En pratique, le vaccin est aussi proposé pour créer la mémoire, mais seul le sérum agit tout de suite.",
+                "answers": [
+                  {
+                    "content": "Du sérum contenant des anticorps antitétaniques",
+                    "correct": true
+                  },
+                  {
+                    "content": "Uniquement un vaccin, efficace dès les premières heures",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un phagocyte purifié",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des plasmocytes du médecin",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à interpréter la mémoire immunitaire et à distinguer vaccin et sérum, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un vaccin contient un antigène rendu ___ ; il provoque la formation de cellules ___.",
+                "question_type": "fill_blank",
+                "hint": "L'antigène du vaccin ne doit pas rendre malade. Les cellules qui gardent le souvenir de l'antigène s'appellent des cellules mémoire.",
+                "explanation": "Étape 3 — Expliquer : le vaccin donne une réponse primaire sans maladie, car l'antigène est inoffensif. Cette réponse forme des cellules mémoire. Étape 4 — Conclure : inoffensif, puis mémoire.",
+                "answers": [
+                  {
+                    "content": "inoffensif",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "inoffensive",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "mémoire",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi fait-on des rappels de vaccin ?",
+                "question_type": "single_choice",
+                "hint": "Un rappel est un second contact avec le même antigène : quelle réponse produit-il ?",
+                "explanation": "Étape 3 — Expliquer : un rappel est un second contact avec l'antigène. Les cellules mémoire répondent vite et fort, ce qui renforce et prolonge la protection. Étape 4 — Conclure : le rappel renforce la mémoire.",
+                "answers": [
+                  {
+                    "content": "Pour provoquer une réponse secondaire qui renforce la mémoire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que le vaccin contient des anticorps qui s'usent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour apporter des antigènes à détruire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que la mémoire n'existe pas sans sérum",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un taux d'anticorps passe de 20 à 300 unités après un rappel. Par combien est-il multiplié ?",
+                "question_type": "numeric",
+                "hint": "Divise 300 par 20.",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Comparer : on divise le taux obtenu par le taux de départ. $300 \\div 20 = 15$. Étape 3 — Expliquer : ce taux est multiplié par 15 grâce aux cellules mémoire.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le sérum protège plus longtemps que le vaccin.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : le sérum apporte des anticorps qui disparaissent en quelques semaines ; le vaccin crée des cellules mémoire qui protègent longtemps. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une plaie au champ : de la blessure à la défense",
+          "exercise_type": "fixation",
+          "figure": "reaction-inflammatoire",
+          "statement": "Koffi cultive du manioc près de Daloa. En désherbant, il se coupe la jambe avec sa machette ; de la terre entre dans la plaie. Le soir, la plaie est rouge, chaude, gonflée et douloureuse. Le lendemain, un liquide jaunâtre apparaît. Koffi n'a jamais rencontré cette bactérie auparavant. Le schéma résume la réaction de son organisme. Dans cet exercice, tu expliques ce que fait son organisme.",
+          "questions": [
+            {
+              "content": "Dans la plaie de Koffi, relie chaque signe observé à son mécanisme.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Repérer la porte d'entrée (la coupure) et les signes locaux. Étape 2 — Associer chaque signe à son mécanisme : les substances chimiques libérées par les cellules lésées dilatent les capillaires (rougeur, chaleur) et laissent passer du plasma (gonflement) ; les terminaisons nerveuses sont stimulées (douleur). Étape 3 — Décrire la phagocytose : les phagocytes qui ont détruit les microbes meurent et forment le pus. Étape 4 — Conclure : tous les signes s'expliquent par la réaction inflammatoire. Confondre le pus et le plasma est l'erreur à éviter : le pus contient des cellules mortes.",
+              "answers": [
+                {
+                  "content": "Rougeur et chaleur",
+                  "match": "Afflux de sang dans les capillaires dilatés"
+                },
+                {
+                  "content": "Gonflement",
+                  "match": "Passage de plasma des capillaires vers les tissus"
+                },
+                {
+                  "content": "Douleur",
+                  "match": "Stimulation des terminaisons nerveuses"
+                },
+                {
+                  "content": "Liquide jaunâtre",
+                  "match": "Pus formé de leucocytes morts et de débris"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements qui suivent l'entrée des microbes dans la plaie de Koffi.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Repérer la porte d'entrée : les microbes entrent. Étape 2 — Associer les mécanismes dans leur ordre logique : les cellules lésées libèrent des substances chimiques, les capillaires se dilatent, puis plasma et leucocytes passent dans les tissus. Étape 3 — Décrire la phagocytose : les phagocytes ingèrent puis digèrent les microbes. Étape 4 — Conclure : le pus se forme en dernier, avec les phagocytes morts. Placer le pus avant la phagocytose est impossible, car il en est la conséquence.",
+              "answers": [
+                {
+                  "content": "Les microbes entrent par la coupure"
+                },
+                {
+                  "content": "Des substances chimiques dilatent les capillaires"
+                },
+                {
+                  "content": "Plasma et leucocytes passent dans les tissus"
+                },
+                {
+                  "content": "Les phagocytes ingèrent et digèrent les microbes"
+                },
+                {
+                  "content": "Du pus se forme"
+                }
+              ]
+            },
+            {
+              "content": "Si la plaie de Koffi avait été infectée par une autre bactérie, la réaction inflammatoire serait :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer l'agresseur : une autre bactérie. Étape 2 — Associer le mécanisme : la lésion libère des substances chimiques qui dilatent les capillaires, quelle que soit la bactérie. Étape 3 — Décrire : les mêmes phagocytes arrivent. Étape 4 — Conclure : la réaction est immédiate, identique contre tout agresseur et sans mémoire, donc non spécifique. L'absence de mémoire n'empêche pas la réaction de se déclencher.",
+              "answers": [
+                {
+                  "content": "Du même type : elle est non spécifique",
+                  "correct": true
+                },
+                {
+                  "content": "Différente, car chaque bactérie provoque une réaction particulière",
+                  "correct": false
+                },
+                {
+                  "content": "Absente, car Koffi n'a pas de mémoire de cette bactérie",
+                  "correct": false
+                },
+                {
+                  "content": "Remplacée par la production d'anticorps dès les premières minutes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Comme Koffi n'a jamais rencontré cette bactérie, sa réaction inflammatoire ne peut pas se déclencher.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Repérer : la bactérie est nouvelle pour Koffi. Étape 2 — Associer : la réaction inflammatoire est déclenchée par la lésion, pas par une reconnaissance préalable de la bactérie. Étape 4 — Conclure : la défense non spécifique n'a pas besoin de mémoire, elle agit au premier contact. L'affirmation est fausse : seule la réponse spécifique a besoin de plusieurs jours.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les cellules qui ingèrent et digèrent les microbes dans la plaie, comme les polynucléaires neutrophiles et les macrophages, sont des ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 3 — Décrire la phagocytose : adhésion, ingestion, digestion, rejet. Les cellules qui la réalisent sont les phagocytes (polynucléaires neutrophiles, macrophages issus des monocytes). Ne les confonds pas avec les plasmocytes, qui sécrètent des anticorps.",
+              "answers": [
+                {
+                  "content": "phagocytes",
+                  "correct": true
+                },
+                {
+                  "content": "phagocyte",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si la bactérie franchit cette première ligne de défense et se multiplie, quelle défense prend le relais, en quelques jours ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 4 — Conclure : la défense non spécifique est immédiate mais limitée. Si le microbe persiste, les antigènes de la bactérie sont reconnus par des lymphocytes spécifiques. La réponse spécifique prend plusieurs jours à se mettre en place. Elle comprend la réponse humorale (anticorps) et la réponse cellulaire. La coagulation arrête le saignement, elle ne défend pas contre les microbes.",
+              "answers": [
+                {
+                  "content": "La réponse immunitaire spécifique, avec les lymphocytes",
+                  "correct": true
+                },
+                {
+                  "content": "Une nouvelle réaction inflammatoire, plus forte",
+                  "correct": false
+                },
+                {
+                  "content": "La digestion des microbes dans l'estomac",
+                  "correct": false
+                },
+                {
+                  "content": "La coagulation du sang",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Au centre de vaccination : comprendre les rappels",
+          "exercise_type": "fixation",
+          "figure": "rappel-vaccinal",
+          "statement": "Dans un centre de vaccination du Programme élargi de vaccination (PEV) à Abidjan, une infirmière explique à une mère pourquoi son nourrisson reçoit un rappel du même vaccin. Pour comprendre, un laboratoire a mesuré le taux d'anticorps dans le sang d'un nourrisson, tous les 10 jours : le vaccin est injecté à J0 et un rappel à J30. Les résultats (unités arbitraires) sont : J0 : 0 ; J10 : 30 ; J20 : 14 ; J30 : 6 ; J40 : 360 ; J50 : 240 ; J60 : 180 ; J70 : 130.",
+          "questions": [
+            {
+              "content": "Quel est le taux d'anticorps maximal atteint après la première injection (J0 à J30) ? Valeurs : J0 : 0 ; J10 : 30 ; J20 : 14 ; J30 : 6.",
+              "question_type": "numeric",
+              "unit": "unités",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire la courbe : le vaccin est injecté à J0 et le rappel à J30, donc on observe J0 à J30. Étape 2 — Comparer les mesures : 0, 30, 14, 6. Le maximum est 30, à J10. Les autres valeurs (14, 6) sont plus basses : la réponse primaire est faible et brève.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Après le rappel à J30, le taux maximal est de 360 unités. Le taux maximal après la première injection est de 30 unités. Combien de fois le maximum de la réponse secondaire est-il plus grand que celui de la réponse primaire ?",
+              "question_type": "numeric",
+              "unit": "fois",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 2 — Comparer les deux réponses en divisant les taux maximaux : $360 \\div 30 = 12$. Le taux maximal est 12 fois plus grand après le rappel. Étape 3 — Expliquer : les cellules mémoire formées lors de la première injection répondent plus fort au second contact. Se tromper en faisant 360 − 30 = 330 donnerait un écart, pas un rapport.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la réponse après le rappel est-elle plus rapide et plus forte qu'après la première injection ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire la courbe : le taux monte de 6 à 360 en 10 jours après le rappel, contre 30 en 10 jours après la première injection. Étape 2 — Comparer : la réponse secondaire est plus rapide et plus intense. Étape 3 — Expliquer par la mémoire immunitaire : lors du second contact, les cellules mémoire se multiplient et se différencient vite. Le taux de 6 à J30 montre que les anticorps de la première réponse avaient presque disparu : ils ne peuvent pas expliquer la réponse.",
+              "answers": [
+                {
+                  "content": "Des cellules mémoire, formées lors de la première injection, répondent vite",
+                  "correct": true
+                },
+                {
+                  "content": "Le rappel contient des anticorps déjà fabriqués",
+                  "correct": false
+                },
+                {
+                  "content": "Le nourrisson fabrique plus de globules rouges",
+                  "correct": false
+                },
+                {
+                  "content": "Les anticorps de la première injection n'ont jamais disparu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au moment du rappel (J30), le taux d'anticorps est presque nul, ce qui prouve que l'organisme a tout oublié.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Lire : le taux est de 6 unités à J30, très bas. Étape 2 — Comparer : pourtant la réponse au rappel est 12 fois plus forte que la première. Étape 3 — Expliquer : la mémoire n'est pas dans les anticorps du sang mais dans les cellules mémoire, qui restent après la disparition des anticorps. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sur le vaccin sont exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 4 — Conclure sur l'aide adaptée : le vaccin est préventif et durable. Il contient un antigène inoffensif (microbe tué ou atténué, toxine modifiée). Il provoque une réponse primaire sans maladie et crée la mémoire. Les anticorps déjà fabriqués sont dans le sérum, pas dans le vaccin. Le vaccin n'agit pas immédiatement : la réponse primaire prend plusieurs jours.",
+              "answers": [
+                {
+                  "content": "Il contient un antigène rendu inoffensif",
+                  "correct": true
+                },
+                {
+                  "content": "Il provoque une réponse primaire sans causer la maladie",
+                  "correct": true
+                },
+                {
+                  "content": "Il contient des anticorps déjà fabriqués",
+                  "correct": false
+                },
+                {
+                  "content": "Il agit immédiatement, comme un sérum",
+                  "correct": false
+                },
+                {
+                  "content": "Il détruit directement les microbes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'injection ultérieure qui renforce la mémoire immunitaire s'appelle un ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 3 — Expliquer : une injection ultérieure du même antigène provoque une réponse secondaire. Elle renforce et prolonge la protection. Cette injection s'appelle un rappel.",
+              "answers": [
+                {
+                  "content": "rappel",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une mère demande : « Pourquoi ne pas donner directement du sérum à tous les enfants plutôt qu'un vaccin ? » Quelle est la meilleure réponse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 4 — Conclure : le sérum apporte des anticorps déjà fabriqués, qui agissent tout de suite mais disparaissent en quelques semaines, sans créer de mémoire. Le vaccin, préventif, crée des cellules mémoire qui protègent pendant des années, surtout avec des rappels. Le sérum est réservé aux urgences. Dire qu'il agit après plusieurs jours confond sérum et vaccin.",
+              "answers": [
+                {
+                  "content": "Le sérum protège seulement quelques semaines et ne crée pas de mémoire, alors que le vaccin protège longtemps",
+                  "correct": true
+                },
+                {
+                  "content": "Le sérum est un vaccin plus faible",
+                  "correct": false
+                },
+                {
+                  "content": "Le sérum contient des antigènes qui rendent malade",
+                  "correct": false
+                },
+                {
+                  "content": "Le sérum n'agit qu'au bout de plusieurs jours",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Au CHU : la protection contre la toxine tétanique chez la souris",
+          "exercise_type": "evaluation",
+          "figure": "reponse-humorale",
+          "statement": "Dans le service des maladies infectieuses d'un CHU d'Abidjan, une équipe étudie la protection contre la toxine tétanique, un poison fabriqué par la bactérie du tétanos. Elle utilise l'anatoxine tétanique : la toxine rendue inoffensive, qui reste un antigène. Chaque lot compte 10 souris.\n\nExpérience 1. Le lot A reçoit l'anatoxine à J0 ; le lot B ne reçoit rien. À J21, tous reçoivent une dose mortelle de toxine. Résultat : A : 10 survivantes sur 10 ; B : 0 sur 10.\n\nExpérience 2. À J21, du sérum est prélevé sur des souris du lot A, avant l'injection de la toxine, puis injecté à des souris neuves du lot C ; du sérum de souris du lot B est injecté au lot D. Une dose mortelle de toxine est injectée un jour plus tard. Résultat : C : 10 sur 10 ; D : 0 sur 10.\n\nExpérience 3. Le lot E reçoit du sérum de souris du lot A, puis la dose mortelle 60 jours plus tard : 1 survivante sur 10. Le lot F est vacciné à J0 par l'anatoxine, puis reçoit la dose mortelle à J60 : 10 survivantes sur 10.",
+          "questions": [
+            {
+              "content": "Que montre l'expérience 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer les lots et les résultats : A (vacciné) 10 survivantes sur 10 ; B (témoin) 0 sur 10. Étape 2 — Comparer : seule la différence d'injection d'anatoxine change entre A et B, donc l'anatoxine explique la survie. Étape 3 — Conclure : l'anatoxine est un antigène inoffensif qui provoque une réponse immunitaire protectrice. La mort de tout le lot B prouve que la toxine est mortelle et que les souris ne sont pas naturellement protégées.",
+              "answers": [
+                {
+                  "content": "L'injection d'anatoxine protège les souris contre la toxine, car elle déclenche une réponse immunitaire",
+                  "correct": true
+                },
+                {
+                  "content": "La toxine tétanique est inoffensive pour les souris",
+                  "correct": false
+                },
+                {
+                  "content": "Toutes les souris sont naturellement protégées",
+                  "correct": false
+                },
+                {
+                  "content": "L'anatoxine tue la toxine tétanique dans le sang",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que montre l'expérience 2 sur la nature de la protection ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : le lot C reçoit du sérum de A (10 sur 10 survivantes) ; le lot D, du sérum de B (0 sur 10). Étape 2 — Comparer : seul le sérum d'une souris vaccinée protège. Étape 3 — Conclure : le sérum contient donc des molécules protectrices, des anticorps, sécrétés par les plasmocytes : la réponse est à médiation humorale. Le lot D est le témoin : son échec montre que le sérum d'une souris non vaccinée ne protège pas.",
+              "answers": [
+                {
+                  "content": "La protection se transmet par le sérum : elle repose sur des anticorps, donc sur une réponse à médiation humorale",
+                  "correct": true
+                },
+                {
+                  "content": "La protection repose uniquement sur des lymphocytes T cytotoxiques",
+                  "correct": false
+                },
+                {
+                  "content": "Le sérum d'une souris non vaccinée protège aussi",
+                  "correct": false
+                },
+                {
+                  "content": "La protection se transmet par les hématies",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le pourcentage de souris survivantes du lot E (sérum de A injecté, dose mortelle 60 jours plus tard) ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : le lot E compte 10 souris, dont 1 survit. Étape 2 — Calculer : $\\frac{1}{10} \\times 100 = 10$ %. Ce faible pourcentage montre que la protection par le sérum a presque disparu en 60 jours.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le lot F (vacciné à J0) est-il protégé à J60 alors que le lot E (sérum) ne l'est presque plus ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Lire : E (sérum) 1 sur 10 ; F (vaccin) 10 sur 10, à J60. Étape 2 — Comparer : même délai, résultats opposés. Étape 3 — Expliquer par la mémoire immunitaire : le vaccin forme des cellules mémoire, qui produisent des anticorps rapidement au contact de la toxine (réponse secondaire) ; le sérum n'apporte que des anticorps tout faits, qui disparaissent. Étape 4 — Conclure : vaccin durable, sérum temporaire. Le sérum ne contient pas de cellules mémoire : il ne contient que des anticorps.",
+              "answers": [
+                {
+                  "content": "Les anticorps du sérum injecté sont éliminés au bout de quelques semaines et ne sont pas renouvelés",
+                  "correct": true
+                },
+                {
+                  "content": "La vaccination a formé des cellules mémoire qui répondent vite à la toxine",
+                  "correct": true
+                },
+                {
+                  "content": "Le sérum contient des cellules mémoire qui s'épuisent",
+                  "correct": false
+                },
+                {
+                  "content": "La toxine devient moins mortelle avec le temps",
+                  "correct": false
+                },
+                {
+                  "content": "L'anatoxine reste active dans le sang et détruit la toxine pendant 60 jours",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque résultat expérimental à sa conclusion.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 2 — Comparer les lots deux à deux. A et B : l'anatoxine protège. C et D : seul le sérum de souris vaccinées protège, donc des anticorps sont dans le sérum. Étape 3 — Expliquer : E montre que les anticorps du sérum disparaissent ; F montre que la mémoire immunitaire persiste. Étape 4 — Conclure : sérum temporaire, vaccin durable.",
+              "answers": [
+                {
+                  "content": "Lot A (vacciné) contre lot B (témoin)",
+                  "match": "L'anatoxine confère une protection"
+                },
+                {
+                  "content": "Lot C (sérum de A) contre lot D (sérum de B)",
+                  "match": "La protection est transférable par le sérum : anticorps"
+                },
+                {
+                  "content": "Lot E (sérum, toxine à J60)",
+                  "match": "La protection apportée par le sérum est temporaire"
+                },
+                {
+                  "content": "Lot F (vaccin, toxine à J60)",
+                  "match": "La vaccination protège durablement grâce à la mémoire"
+                }
+              ]
+            },
+            {
+              "content": "Explique, en un paragraphe, comment l'injection d'anatoxine protège les souris du lot A au moment où elles reçoivent la toxine à J21.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Antigène reconnu par des LB spécifiques, multiplication en clone",
+                "Différenciation en plasmocytes (anticorps) et en cellules mémoire",
+                "Anticorps déjà présents dans le sang à J21, qui neutralisent aussitôt la toxine",
+                "Complexes immuns éliminés par phagocytose"
+              ],
+              "starter": "À J0, l'anatoxine est un antigène qui…",
+              "explanation": "Corrigé modèle : L'anatoxine est un antigène inoffensif. À J0, elle est reconnue par les lymphocytes B spécifiques, qui se multiplient en un clone avec l'aide des LT4 et se différencient en plasmocytes et en cellules mémoire (réponse primaire, sans maladie). Les plasmocytes sécrètent des anticorps. À J21, ces anticorps sont déjà présents dans le sang, comme le montre l'expérience 2 : leur sérum protège des souris neuves. Dès l'injection de la toxine, ils se fixent sur elle, forment des complexes immuns que les phagocytes éliminent : la toxine est neutralisée aussitôt, donc les souris survivent. Les cellules mémoire, en complément, assureraient une réponse secondaire rapide lors d'un nouveau contact. Barème : antigène reconnu et clone de LB (1 point) ; plasmocytes et anticorps sécrétés (1 point) ; anticorps déjà présents à J21, qui neutralisent aussitôt la toxine (1 point) ; complexe immun éliminé par phagocytose (1 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Au CHU : la destruction des cellules infectées par un virus",
+          "exercise_type": "evaluation",
+          "figure": "cooperation-cellulaire",
+          "statement": "Dans le même service, une équipe étudie la défense de la souris contre un virus V. Les souris de la lignée S1 et celles de la lignée S2 ont des marqueurs du CMH différents. Des souris S1 sont infectées par V ; huit jours plus tard, on prélève leurs lymphocytes T8. On mélange pendant quatre heures des LT8 avec des cellules cibles et on mesure le pourcentage de cellules cibles détruites.\n\nMélange 1 : LT8 de souris S1 infectées par V, cellules cibles S1 infectées par V : 80 % détruites.\nMélange 2 : LT8 de souris S1 non infectées, cellules cibles S1 infectées par V : 5 %.\nMélange 3 : LT8 de souris S1 infectées par V, cellules cibles S1 non infectées : 4 %.\nMélange 4 : LT8 de souris S1 infectées par V, cellules cibles S2 infectées par V : 6 %.\n\nExpérience 2. Des souris S1 dépourvues de LT4 sont infectées par V. Huit jours plus tard, la destruction des cellules infectées par leurs LT8 est de 7 %, contre 80 % chez des souris S1 normales.",
+          "questions": [
+            {
+              "content": "Que montre la comparaison des mélanges 1 et 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : les deux mélanges ont les mêmes cibles (S1 infectées par V) ; seuls les LT8 diffèrent. Étape 2 — Comparer : 80 % avec les LT8 de souris infectées, 5 % avec ceux de souris non infectées. Étape 3 — Conclure : la destruction exige des LT8 activés par l'infection : la réponse est spécifique. Les LT8 ne sécrètent pas d'anticorps, ce sont les plasmocytes qui le font.",
+              "answers": [
+                {
+                  "content": "Les LT8 ne détruisent les cellules infectées que s'ils ont été activés par l'infection par V",
+                  "correct": true
+                },
+                {
+                  "content": "Les LT8 de toutes les souris détruisent les cellules infectées",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules infectées se détruisent seules",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT8 sécrètent des anticorps contre V",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que montre la comparaison des mélanges 1 et 3 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : mêmes LT8 activés, cibles différentes. Étape 2 — Comparer : 80 % pour les cibles infectées, 4 % pour les cibles non infectées. Étape 3 — Conclure : les LT8 reconnaissent les cellules qui présentent l'antigène viral ; ils épargnent les cellules saines du soi.",
+              "answers": [
+                {
+                  "content": "Les LT8 activés détruisent les cellules qui présentent l'antigène du virus, pas les cellules non infectées",
+                  "correct": true
+                },
+                {
+                  "content": "Les LT8 détruisent toutes les cellules de la souris",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules non infectées détruisent les LT8",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT8 détruisent les cellules sans reconnaissance préalable",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le mélange 4 utilise des cibles S2 infectées par V : seules 6 % sont détruites. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : les cibles S2 sont infectées par V, comme dans le mélange 1, mais leur CMH est différent. Étape 2 — Comparer : 80 % contre 6 %. Étape 3 — Conclure : la reconnaissance porte sur l'antigène viral et sur les molécules du CMH propres à l'organisme. Les LT cytotoxiques de S1 ne reconnaissent l'antigène viral que présenté par le CMH de S1 (double reconnaissance) ; avec le CMH de S2, ils ne le reconnaissent pas et ne détruisent pas la cellule. Dire que S2 ne peut pas être infectée contredit l'énoncé, qui dit que les cibles sont infectées.",
+              "answers": [
+                {
+                  "content": "Le LT cytotoxique reconnaît l'antigène viral présenté avec les molécules du CMH de son propre organisme",
+                  "correct": true
+                },
+                {
+                  "content": "Les cellules S2 ne peuvent pas être infectées par V",
+                  "correct": false
+                },
+                {
+                  "content": "Le virus V est détruit dans les cellules S2",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT8 de S1 ne reconnaissent aucun antigène viral",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de points de pourcentage la destruction du mélange 1 dépasse-t-elle celle du mélange 3 ?",
+              "question_type": "numeric",
+              "unit": "points",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : le mélange 1 donne 80 % et le mélange 3 donne 4 %. Étape 2 — Calculer l'écart : $80 - 4 = 76$ points. Cet écart montre que la destruction est spécifique des cellules infectées.",
+              "answers": [
+                {
+                  "content": "76",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que conclure de l'expérience 2 (souris sans LT4) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : les souris sans LT4 ont 7 % de destruction, les souris normales 80 %. Étape 2 — Comparer : l'absence de LT4 supprime la destruction. Étape 3 — Conclure : les LT4 sécrètent les interleukines qui activent les LT8 (coopération cellulaire). Ils ne détruisent pas eux-mêmes les cellules infectées : ils dirigent la réponse.",
+              "answers": [
+                {
+                  "content": "Les LT4 sont indispensables à l'activation des LT8 : sans eux, la réponse cellulaire est presque nulle",
+                  "correct": true
+                },
+                {
+                  "content": "Les LT4 détruisent directement les cellules infectées",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT8 n'ont pas besoin de coopération cellulaire",
+                  "correct": false
+                },
+                {
+                  "content": "Les souris sans LT4 fabriquent beaucoup d'anticorps",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du protocole de l'expérience 1 (mélanges de LT8 et de cellules cibles).",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Repérer les éléments du protocole donnés par l'énoncé : infection, prélèvement, mélange, mesure. Étape 2 — Les placer dans l'ordre logique : les LT8 ne sont activés qu'après l'infection (huit jours plus tard), on les prélève, on les mélange aux cibles, puis on mesure la destruction. Étape 3 — Comparer les résultats seulement à la fin (80 %, 5 %, 4 %, 6 %). Étape 4 — Conclure : on ne peut comparer des mélanges qu'après les avoir tous mesurés.",
+              "answers": [
+                {
+                  "content": "Des souris S1 sont infectées par le virus V"
+                },
+                {
+                  "content": "Huit jours plus tard, leurs LT8 sont prélevés"
+                },
+                {
+                  "content": "Les LT8 sont mélangés quatre heures à des cellules cibles"
+                },
+                {
+                  "content": "Le pourcentage de cellules cibles détruites est mesuré"
+                },
+                {
+                  "content": "Les pourcentages des quatre mélanges sont comparés"
+                }
+              ]
+            },
+            {
+              "content": "Les anticorps suffisent à détruire les cellules déjà infectées par le virus V.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 4 — Conclure : les anticorps se fixent sur les antigènes libres dans le sang et la lymphe, par exemple sur les virus qui circulent. Ils ne pénètrent pas dans les cellules. Contre les cellules déjà infectées, les LT cytotoxiques interviennent : c'est la réponse à médiation cellulaire. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Présente, en un paragraphe, la réponse de l'organisme contre un virus qui infecte des cellules, depuis la présentation de l'antigène jusqu'à la destruction de la cellule infectée.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Macrophage présentant l'antigène avec le CMH",
+                "LT4 spécifique et interleukines",
+                "LT8 activés devenant des LT cytotoxiques",
+                "Destruction de la cellule infectée par les LTc"
+              ],
+              "starter": "Un macrophage phagocyte le virus et…",
+              "explanation": "Corrigé modèle : Un macrophage phagocyte le virus et expose un fragment d'antigène avec ses molécules du CMH. Un lymphocyte T4 spécifique reconnaît ce complexe, s'active et sécrète des interleukines. Elles activent les lymphocytes T8, qui se multiplient et se différencient en lymphocytes T cytotoxiques. Ceux-ci reconnaissent l'antigène viral présenté avec le CMH par les cellules infectées et les détruisent. Les interleukines activent aussi les lymphocytes B, qui donnent des plasmocytes sécréteurs d'anticorps contre les virus libres. Barème : présentation de l'antigène avec le CMH (1 point) ; rôle du LT4 et des interleukines (1 point) ; activation des LT8 et des LTc (1 point) ; destruction de la cellule infectée (1 point).",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

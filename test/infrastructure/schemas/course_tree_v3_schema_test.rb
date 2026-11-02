@@ -44,7 +44,14 @@ module Schemas
       refute valid?(with_course(exercises: "P"))
     end
 
-    test "exercise d'une notion : absent, null ou liste passent au schéma (essential_exercise_count) ; un objet est vérifié" do
+    test "exercise d'une notion : une liste d'exercices valides passe (le nombre, 1 à 2, est compté par l'adaptateur) ; un élément invalide est refusé" do
+      exercise = revision_notion("N").fetch("exercise")
+      assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ exercise, exercise ]) ]))
+      refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ exercise, { "title" => "T" } ]) ]))
+      refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ 1 ]) ]))
+    end
+
+    test "exercise d'une notion : absent, null ou liste vide passent au schéma (essential_exercise_count) ; un objet est vérifié" do
       assert valid?(with_course(notions: [ revision_notion("N").except("exercise") ]))
       assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => nil) ]))
       assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => []) ]))

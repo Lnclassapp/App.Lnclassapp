@@ -175,7 +175,7 @@ module Contenus
 
       test "#{slug} : aucune question d'entraînement n'est celle de l'exercice noté de la notion" do
         notions(slug).each do |notion|
-          graded = notion["exercise"]["questions"].map { squish(it["content"]) }
+          graded = Array.wrap(notion["exercise"]).flat_map { it["questions"] }.map { squish(it["content"]) }
           practiced = notion["practice"]["questions"].map { squish(it["content"]) }
           assert_empty graded & practiced, notion["name"]
         end

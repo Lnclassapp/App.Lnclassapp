@@ -13,10 +13,12 @@
   <section id="student_classroom_assigned" aria-labelledby="student_classroom_assigned_title" class="space-y-4" data-turbo-prefetch="false">
     <h2 id="student_classroom_assigned_title" class="font-display text-lg leading-tight font-medium"><%= t("classroom.student_classrooms.show.assigned_title") %></h2>
     <div class="ps-page">
+      <% ranks = Hash.new(0) %>
       <% sheets.each_with_index do |sheet, index| %>
+        <% ranks[sheet.kind] += 1 %>
         <% devoirs = sheet.kind == :devoirs %>
         <% dated = t("classroom.student_classrooms.assigned_sheet.title", date: l(sheet.assigned_on, format: :long)) %>
-        <%= render "catalog/courses/sheets/sheet", kind: sheet.kind, mode: :student, material: sheet.materials.join(" · "),
+        <%= render "catalog/courses/sheets/sheet", kind: sheet.kind, number: ranks[sheet.kind], mode: :student, material: sheet.materials.join(" · "),
                    header_left: t("catalog.courses.sheets.brand_line", course: sheet.courses.join(" · ")),
                    header_right: t("classroom.student_classrooms.assigned_sheet.position", n: index + 1, total: sheets.size),
                    title: (devoirs ? dated : sheet.notion || dated),

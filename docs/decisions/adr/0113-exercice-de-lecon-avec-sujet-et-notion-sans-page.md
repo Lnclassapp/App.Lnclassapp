@@ -55,7 +55,7 @@ Précisions :
 2. **Lacune** : `CloseExerciseSession` n'ouvre, n'incrémente ni ne résout une lacune que si l'exercice a une notion. Un exercice de toute la leçon n'en produit jamais.
 3. **Lecture (amende ADR-0090 §4.1)** : ouvrir la page de la leçon, pour un élève, enregistre la lecture de chacune de ses notions publiées, par le use case existant `RecordEssentialRead` (aucun port nouveau). Le rang des matières et l'accueil restent inchangés. Pas de préchargement au survol, comme aujourd'hui.
 4. **Import v2** :
-   - `essentials[].exercises[]` : exactement un exercice par notion ;
+   - `essentials[].exercises[]` : exactement un exercice par notion *(amendé le 2026-10-31 : un ou deux, voir ADR-0116)* ;
    - `exercises[]` à la racine de la leçon : exactement quatre ;
    - chaque exercice : `title`, `statement` (obligatoire), `exercise_type` (`fixation` ou `evaluation`), `questions[]` (format des questions v1 inchangé) ;
    - une leçon qui ne tient pas la règle est refusée entière, avec la notion en cause ;

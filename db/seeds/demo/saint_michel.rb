@@ -21,8 +21,9 @@ PUBLISHED_LESSONS = %w[probabilite-conditionnelle-et-variable-aleatoire derivabi
                        mouvement-du-centre-d-inertie-d-un-solide le-fonctionnement-des-organes-sexuels-chez-l-homme
                        la-reproduction-chez-les-spermaphytes].freeze
 LESSONS = (PLAYED_LESSONS + ASSIGNED_LESSONS + PUBLISHED_LESSONS).freeze
-# Les leçons sont rangées par matière (lecons-traitees/tle-d/<matière>/<leçon>.json) : on les trouve par leur nom.
-LESSON_FILES = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/*/*.json").to_h { [ it.basename(".json").to_s, it ] }.freeze
+# Les leçons sont rangées par matière (lecons-traitees/tle-d/<matière>/<leçon>.json ; l'Histoire-Géographie, commune à
+# toutes les séries et sans série, dans lecons-traitees/tle/) : on les trouve par leur nom.
+LESSON_FILES = Rails.root.glob("docs/contenus/lecons-traitees/{tle-d,tle}/*/*.json").to_h { [ it.basename(".json").to_s, it ] }.freeze
 RUNS = 6
 START = Time.zone.local(2026, 9, 14, 8)
 FINISH = Time.zone.local(2026, 10, 5, 21)
@@ -93,8 +94,11 @@ log.call("classes : #{Orm::Classroom.where(school:).count}")
 # 3. Les leçons complètes, importées par la chaîne réelle (Imports → Cours complets), puis publiées en cascade.
 team = Orm::User.find_by!(contact: "0700000000")
 team_actor = Repositories::Identity::UserRepository.new.actor_for(user_id: team.id)
-names = LESSONS.map { |slug| JSON.parse(LESSON_FILES.fetch(slug).read)["courses"].first["name"] }
-missing = LESSONS.zip(names).reject { |_slug, name| Orm::Course.exists?(name:, level: tle, series: series_d) }
+# Un cours sans série (Histoire-Géographie) vaut pour toutes les séries : on le cherche sans série.
+headers = LESSONS.map { |slug| JSON.parse(LESSON_FILES.fetch(slug).read)["courses"].first }
+names = headers.map { it["name"] }
+series_of = headers.to_h { [ it["name"], it["series_name"] ? series_d : nil ] }
+missing = LESSONS.zip(names).reject { |_slug, name| Orm::Course.exists?(name:, level: tle, series: series_of.fetch(name)) }
 if missing.any?
   noop_queue = Object.new.tap { |queue| queue.define_singleton_method(:enqueue) { |**| nil } }
   uploads = missing.map do |slug, _name|
@@ -119,7 +123,7 @@ if missing.any?
   # Ces fichiers sont au format 1, retiré (ADR-0116) : le Lot P2 les remplace par des leçons v3.
   raise "import refusé (#{imported.import_errors.first&.fetch('code', nil)}) : les leçons de Tle D attendent leur réécriture au format 3" unless imported.status == "completed" && imported.error_count.zero?
 end
-courses = names.map { |name| Orm::Course.find_by!(name:, level: tle, series: series_d) }
+courses = names.map { |name| Orm::Course.find_by!(name:, level: tle, series: series_of.fetch(name)) }
 cascade_dependencies = { audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
                          policy: Policies::Catalog::ManageContentPolicy.new, clock: }
 cascade = UseCases::Catalog::PublishCascade.new(

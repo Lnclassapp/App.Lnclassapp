@@ -1,0 +1,2026 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le fonctionnement du tissu nerveux",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "organisation-neurone",
+          "kind": "diagram",
+          "description": "Schéma fléché de l'organisation d'un neurone et du sens de circulation du message : les dendrites reçoivent, le corps cellulaire contient le noyau, l'axone conduit le message, entouré de sa gaine de myéline qui accélère la conduction, puis les terminaisons transmettent le message à la cellule suivante, neurone ou muscle.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Réception",
+              "Conduction",
+              "Transmission"
+            ],
+            "nodes": [
+              {
+                "id": "d",
+                "label": "Dendrites : reçoivent",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "Corps cellulaire : noyau",
+                "category": 1
+              },
+              {
+                "id": "a",
+                "label": "Axone : conduit le message",
+                "category": 2
+              },
+              {
+                "id": "m",
+                "label": "Gaine de myéline et nœuds de Ranvier",
+                "category": 2
+              },
+              {
+                "id": "t",
+                "label": "Terminaisons de l'axone",
+                "category": 3
+              },
+              {
+                "id": "s",
+                "label": "Cellule suivante (neurone, muscle)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "d",
+                "to": "c",
+                "label": "message"
+              },
+              {
+                "from": "c",
+                "to": "a"
+              },
+              {
+                "from": "m",
+                "to": "a",
+                "label": "accélère"
+              },
+              {
+                "from": "a",
+                "to": "t"
+              },
+              {
+                "from": "t",
+                "to": "s",
+                "label": "synapse"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "potentiel-action-fibre-d",
+          "kind": "stat_chart",
+          "description": "Courbe d'un potentiel d'action enregistré toutes les 0,4 ms de 0 à 4 ms, stimulation à 0,4 ms. Attention : l'axe est décalé, la valeur lue est la ddp en mV plus 100. Lecture : 30 au repos, 45 à 0,8 ms (seuil), 130 au pic à 1,2 ms, puis 60, 20 (hyperpolarisation), 27, et retour à 30 à 2,8 ms.",
+          "params": {
+            "chart": "line",
+            "series": [
+              30,
+              30,
+              45,
+              130,
+              60,
+              20,
+              27,
+              30,
+              30,
+              30,
+              30
+            ],
+            "labels": [
+              "0",
+              "0,4",
+              "0,8",
+              "1,2",
+              "1,6",
+              "2,0",
+              "2,4",
+              "2,8",
+              "3,2",
+              "3,6",
+              "4 ms"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "recrutement-nerf-d",
+          "kind": "stat_chart",
+          "description": "Courbe de l'amplitude du potentiel global d'un nerf de crapaud, en mV, selon l'intensité de la stimulation : 0 à 0,5 V, 2 à 1 V, 5 à 1,5 V, 9 à 2 V, 12 à 2,5 V, puis un plateau à 14 mV de 3 V à 4 V. L'amplitude croît avec l'intensité jusqu'à un plateau.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              2,
+              5,
+              9,
+              12,
+              14,
+              14,
+              14
+            ],
+            "labels": [
+              "0,5 V",
+              "1 V",
+              "1,5 V",
+              "2 V",
+              "2,5 V",
+              "3 V",
+              "3,5 V",
+              "4 V"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-synapse-d",
+          "kind": "diagram",
+          "description": "Schéma fléché de la transmission synaptique : arrivée d'un PA à la terminaison présynaptique, libération du neurotransmetteur, diffusion dans la fente, fixation sur les récepteurs, puis PPSE ou PPSI, sommation et comparaison au seuil. Le neurotransmetteur est ensuite détruit ou recapturé.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Élément présynaptique",
+              "Fente synaptique",
+              "Cellule postsynaptique"
+            ],
+            "nodes": [
+              {
+                "id": "pa",
+                "label": "PA à la terminaison présynaptique",
+                "category": 1
+              },
+              {
+                "id": "lib",
+                "label": "Libération du neurotransmetteur",
+                "category": 1
+              },
+              {
+                "id": "dif",
+                "label": "Diffusion dans la fente synaptique",
+                "category": 2
+              },
+              {
+                "id": "fin",
+                "label": "Neurotransmetteur détruit ou recapturé",
+                "category": 2
+              },
+              {
+                "id": "fix",
+                "label": "Fixation sur les récepteurs",
+                "category": 3
+              },
+              {
+                "id": "pe",
+                "label": "Synapse excitatrice : PPSE (dépolarisation)",
+                "category": 3
+              },
+              {
+                "id": "pi",
+                "label": "Synapse inhibitrice : PPSI (hyperpolarisation)",
+                "category": 3
+              },
+              {
+                "id": "som",
+                "label": "Sommation des PPSE et des PPSI",
+                "category": 3
+              },
+              {
+                "id": "dec",
+                "label": "Seuil atteint : PA postsynaptique",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pa",
+                "to": "lib",
+                "label": "exocytose"
+              },
+              {
+                "from": "lib",
+                "to": "dif"
+              },
+              {
+                "from": "dif",
+                "to": "fix"
+              },
+              {
+                "from": "dif",
+                "to": "fin",
+                "label": "fin du message"
+              },
+              {
+                "from": "fix",
+                "to": "pe"
+              },
+              {
+                "from": "fix",
+                "to": "pi"
+              },
+              {
+                "from": "pe",
+                "to": "som"
+              },
+              {
+                "from": "pi",
+                "to": "som"
+              },
+              {
+                "from": "som",
+                "to": "dec"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "enregistrement-ttx",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) de la ddp d'une fibre enregistrée toutes les 0,4 ms de 0 à 4 ms, après ajout de tétrodotoxine, stimulation à 0,4 ms. Attention : l'axe est décalé, la valeur lue est la ddp en mV plus 100. Lecture : 30 au repos, 46 au maximum à 0,8 ms, puis 41, 35, 32 et retour à 30 à 2,4 ms.",
+          "params": {
+            "chart": "line",
+            "series": [
+              30,
+              30,
+              46,
+              41,
+              35,
+              32,
+              30,
+              30,
+              30,
+              30,
+              30
+            ],
+            "labels": [
+              "0",
+              "0,4",
+              "0,8",
+              "1,2",
+              "1,6",
+              "2,0",
+              "2,4",
+              "2,8",
+              "3,2",
+              "3,6",
+              "4 ms"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le neurone, le nerf et les substances grise et blanche",
+          "remember": "Le **tissu nerveux** est formé de **neurones** et de cellules qui les entourent et les soutiennent. Un neurone comprend : un **corps cellulaire**, qui renferme le noyau ; des **dendrites**, courtes et très ramifiées, qui **reçoivent** les messages ; un **axone**, long prolongement unique, qui **conduit** le message (on l'appelle aussi **fibre nerveuse**) ; des **terminaisons**, à son extrémité, qui **transmettent** le message à la cellule suivante. Chez les vertébrés, beaucoup de fibres sont entourées d'une **gaine de myéline** (formée par des cellules de Schwann dans les nerfs), interrompue régulièrement par les **nœuds de Ranvier**. Un **nerf** est un cordon qui réunit les fibres de nombreux neurones ; il est **sensitif**, **moteur** ou **mixte** selon le sens des messages de ses fibres. Dans le système nerveux central, la **substance grise** contient surtout des corps cellulaires ; la **substance blanche** contient surtout des fibres myélinisées, que la myéline rend blanches. Dans l'organisme, le message circule dans un seul sens : des dendrites et du corps cellulaire vers les terminaisons de l'axone.",
+          "method": [
+            "Décrire ce qu'on observe : forme, taille et position des éléments (cellule avec noyau, prolongement court ou long, enveloppe, couleur de la zone).",
+            "Nommer chaque élément d'après sa forme et sa place : corps cellulaire, dendrites, axone, gaine de myéline, nerf, substance grise ou blanche.",
+            "Relier chaque élément à son rôle : réception, conduction ou transmission du message.",
+            "Déduire le sens de circulation du message, puis la nature du nerf (sensitif, moteur ou mixte) ou de la substance."
+          ],
+          "example": {
+            "statement": "Dans un service de neurologie, un médecin étudie une coupe de moelle épinière. Au centre, une zone de teinte grise, en forme de papillon, contient de nombreuses cellules à noyau, aux prolongements courts. Autour d'elle, une zone blanche est faite de longues fibres entourées d'un manchon blanchâtre. Une cellule de la zone grise émet une longue fibre qui sort de la moelle par la racine ventrale, rejoint un muscle de la jambe et s'y termine par de petites ramifications. Nommer ces éléments, donner leur rôle et préciser la nature de cette fibre.",
+            "steps": [
+              "Décrire : au centre, une zone grise riche en cellules à noyau et à prolongements courts ; autour, une zone blanche de longues fibres à manchon blanchâtre ; une cellule grise émet une longue fibre qui se termine par des ramifications sur un muscle.",
+              "Nommer : la zone grise est la substance grise (corps cellulaires) ; la zone blanche est la substance blanche (fibres à gaine de myéline) ; la longue fibre est un axone, qui finit par des terminaisons.",
+              "Relier : les corps cellulaires de la substance grise reçoivent les messages ; l'axone les conduit ; ses terminaisons les transmettent au muscle ; la myéline accélère la conduction.",
+              "Déduire : le message va du corps cellulaire vers le muscle ; la fibre sort par la racine ventrale et commande un muscle : c'est une fibre motrice, qui appartient à un nerf moteur."
+            ]
+          },
+          "pitfall": "Ne confonds pas la fibre et le nerf, ni les dendrites et l'axone. Un nerf n'est pas un très long neurone : c'est un cordon qui rassemble de nombreuses fibres. Contre-exemple : un nerf qui contient 10 000 fibres est fait de 10 000 axones, qui appartiennent à 10 000 neurones différents. De même, les dendrites reçoivent et l'axone conduit : le message ne remonte pas l'axone vers le corps cellulaire. Pour ne pas te tromper, cherche d'abord le noyau, puis dis dans quel sens va le message.",
+          "figure": "organisation-neurone",
+          "exercise": {
+            "title": "Reconnaître les parties du tissu nerveux",
+            "statement": "Dans cet exercice, tu décris, nommes et relies à leur rôle les parties d'un neurone, d'un nerf et de la moelle épinière, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "organisation-neurone",
+            "questions": [
+              {
+                "content": "Dans un neurone, quelle partie contient le noyau de la cellule ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : le neurone a une partie renflée d'où partent des prolongements, et le noyau est dans cette partie. Étape 2 — Nommer : c'est le corps cellulaire. Étape 3 — Relier : il reçoit les messages des dendrites et les envoie vers l'axone. L'axone est la réponse tentante parce qu'il est le plus long, mais c'est un prolongement qui conduit le message : il ne contient pas le noyau du neurone.",
+                "answers": [
+                  {
+                    "content": "Le corps cellulaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'axone, parce que c'est le plus long prolongement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les dendrites",
+                    "correct": false
+                  },
+                  {
+                    "content": "La gaine de myéline",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la partie du neurone concernée.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Nommer : les prolongements courts sont les dendrites, la longue fibre est l'axone, le manchon blanchâtre est la gaine de myéline, la partie qui renferme le noyau est le corps cellulaire. Étape 3 — Relier à leur rôle : les dendrites reçoivent les messages, l'axone les conduit jusqu'au muscle, la myéline accélère la conduction, le corps cellulaire contient le noyau dont la cellule a besoin pour vivre. Ne confonds pas dendrites et axone : seul l'axone conduit le message jusqu'aux terminaisons.",
+                "answers": [
+                  {
+                    "content": "Un neurone ne peut plus recevoir les messages des autres cellules",
+                    "match": "Dendrites"
+                  },
+                  {
+                    "content": "Le message n'atteint plus le muscle, car la longue fibre est sectionnée",
+                    "match": "Axone"
+                  },
+                  {
+                    "content": "Une maladie détruit le manchon blanchâtre qui entoure les fibres",
+                    "match": "Gaine de myéline"
+                  },
+                  {
+                    "content": "Le noyau est détruit et la cellule meurt",
+                    "match": "Corps cellulaire"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du message à l'intérieur d'un neurone.",
+                "question_type": "ordering",
+                "explanation": "Étape 4 — Déduire le sens de circulation : le message entre par les dendrites, passe par le corps cellulaire, est conduit par l'axone et sort par les terminaisons. Dans l'organisme, il ne remonte pas dans l'autre sens. Placer l'axone avant le corps cellulaire est l'erreur tentante : l'axone est le prolongement de sortie du neurone.",
+                "answers": [
+                  {
+                    "content": "Dendrites"
+                  },
+                  {
+                    "content": "Corps cellulaire"
+                  },
+                  {
+                    "content": "Axone"
+                  },
+                  {
+                    "content": "Terminaisons de l'axone"
+                  }
+                ]
+              },
+              {
+                "content": "Un nerf est un neurone très long.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décrire : un nerf est un cordon visible à l'œil nu qui contient de très nombreuses fibres. Étape 2 — Nommer : chaque fibre est l'axone d'un neurone, et le nerf les réunit. Étape 4 — Déduire : un nerf n'est donc pas un neurone mais un faisceau de fibres de neurones différents. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un nerf de la jambe contient des fibres qui conduisent des messages de la peau vers la moelle épinière et d'autres qui conduisent des ordres de la moelle vers les muscles. Quelles sont les deux propositions exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Relier : les fibres qui vont de la peau vers la moelle sont sensitives, celles qui vont de la moelle vers les muscles sont motrices. Étape 4 — Déduire : un nerf qui contient les deux sortes de fibres est un nerf mixte, et il réunit les fibres de nombreux neurones. Le qualifier de sensitif oublie les fibres motrices, et l'idée d'un seul neurone est le piège de la fiche : un nerf est un cordon de fibres.",
+                "answers": [
+                  {
+                    "content": "C'est un nerf mixte",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est un nerf sensitif, puisqu'il conduit des messages vers la moelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il rassemble des fibres de nombreux neurones différents",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est formé d'un seul neurone très long",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une coupe de moelle épinière, la substance blanche est blanche parce qu'elle contient surtout :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : sur la coupe, une zone blanche entoure la zone grise. Étape 2 — Nommer : c'est la substance blanche. Étape 3 — Relier : sa couleur vient de la myéline qui entoure ses fibres. Étape 4 — Déduire : la substance blanche est faite surtout de fibres myélinisées, alors que les corps cellulaires sont dans la substance grise.",
+                "answers": [
+                  {
+                    "content": "des nœuds de Ranvier",
+                    "correct": false
+                  },
+                  {
+                    "content": "des fibres entourées de myéline",
+                    "correct": true
+                  },
+                  {
+                    "content": "des corps cellulaires de neurones",
+                    "correct": false
+                  },
+                  {
+                    "content": "des dendrites sans aucune gaine",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à décrire, nommer et relier à leur rôle les parties du tissu nerveux, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Les ___ reçoivent les messages venus des autres cellules ; l'___ conduit ensuite le message vers les terminaisons.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Nommer : les prolongements courts et ramifiés sont les dendrites ; le prolongement long et unique est l'axone. Étape 3 — Relier : les dendrites reçoivent, l'axone conduit.",
+                "answers": [
+                  {
+                    "content": "dendrites",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "dendrite",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "axone",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'un des prolongements est court et ramifié, l'autre est long et unique."
+              },
+              {
+                "content": "La substance grise de la moelle épinière contient surtout des corps cellulaires de neurones.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer : la zone grise de la coupe est la substance grise. Étape 3 — Relier : elle est riche en corps cellulaires, alors que la substance blanche est riche en fibres myélinisées. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fibre conduit un message des récepteurs de la peau vers la moelle épinière. De quelle sorte de fibre s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relier : la fibre part des récepteurs de la peau et va vers un centre nerveux. Étape 4 — Déduire : le sens du message, vers le centre nerveux, définit une fibre sensitive. Une fibre motrice irait au contraire de la moelle vers un muscle ; une fibre est toujours à sens unique, c'est le nerf qui peut être mixte.",
+                "answers": [
+                  {
+                    "content": "Une fibre motrice",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une fibre mixte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une dendrite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une fibre sensitive",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le sens du message : vers un centre nerveux ou depuis un centre nerveux ?"
+              },
+              {
+                "content": "Les nœuds de Ranvier sont des ___ de la gaine de myéline.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Nommer : la gaine de myéline entoure l'axone mais elle est coupée à intervalles réguliers. Ces étranglements sont les nœuds de Ranvier. Ce ne sont ni des noyaux, ni des épaississements.",
+                "answers": [
+                  {
+                    "content": "prolongements",
+                    "correct": false
+                  },
+                  {
+                    "content": "noyaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "interruptions",
+                    "correct": true
+                  },
+                  {
+                    "content": "épaississements",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense au mot « étranglement » : la gaine y est coupée."
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'excitabilité et le potentiel de repos",
+          "remember": "Une fibre nerveuse est **excitable** : stimulée de façon efficace, elle répond par un signal électrique. Même au repos, elle est **polarisée** : entre l'intérieur et l'extérieur de sa membrane existe une différence de potentiel (ddp), le **potentiel de repos**, d'environ −70 mV (l'intérieur est négatif). On la mesure avec un oscilloscope relié à deux électrodes : une **microélectrode** enfoncée dans la fibre et une électrode à l'extérieur. Avec deux électrodes posées à l'extérieur, on lit 0 mV. La polarisation vient de la répartition inégale des ions de part et d'autre de la membrane : le K+ est plus concentré dans la fibre, le Na+ plus concentré à l'extérieur. Au repos, la membrane laisse sortir un peu de K+ et laisse entrer très peu de Na+. La **pompe Na+/K+**, protéine de la membrane qui consomme de l'ATP, expulse le Na+ et ramène le K+ : elle maintient ces différences de concentration.",
+          "method": [
+            "Examiner le montage : une électrode est-elle dans la fibre, ou les deux sont-elles à l'extérieur ?",
+            "Lire la ddp sur l'oscilloscope, avec son signe et son unité.",
+            "Interpréter la valeur : une ddp non nulle entre l'intérieur et l'extérieur prouve que la membrane est polarisée ; le signe dit quel côté est négatif.",
+            "Expliquer par les ions : répartition inégale du Na+ et du K+, fuite de K+, pompe Na+/K+ qui consomme de l'ATP."
+          ],
+          "example": {
+            "statement": "Dans un laboratoire de neurophysiologie, on étudie une fibre nerveuse isolée d'un nerf de grenouille. Expérience 1 : deux électrodes, distantes de 2 cm, sont posées à l'extérieur de la fibre ; l'oscilloscope affiche 0 mV. Expérience 2 : une microélectrode est enfoncée dans la fibre, l'autre électrode restant à l'extérieur ; l'oscilloscope affiche −70 mV. Un dosage des ions donne, en mmol/L : K+ 120 à l'intérieur et 4 à l'extérieur ; Na+ 10 à l'intérieur et 110 à l'extérieur. Montrer que la fibre est polarisée et l'expliquer.",
+            "steps": [
+              "Examiner : dans l'expérience 1, les deux électrodes sont à l'extérieur ; dans l'expérience 2, une microélectrode est dans la fibre et l'autre à l'extérieur.",
+              "Lire : l'expérience 1 donne 0 mV ; l'expérience 2 donne −70 mV.",
+              "Interpréter : 0 mV entre deux points extérieurs est normal ; −70 mV entre l'intérieur et l'extérieur prouve que la membrane est polarisée, l'intérieur étant négatif.",
+              "Expliquer : le K+ est bien plus concentré à l'intérieur (120 contre 4) et le Na+ à l'extérieur (110 contre 10) ; la membrane laisse sortir un peu de K+ ; la pompe Na+/K+ maintient ces différences en consommant de l'ATP."
+            ]
+          },
+          "pitfall": "Ne conclus pas qu'une ddp de 0 mV prouve que la fibre n'est pas polarisée, ni qu'il ne se passe rien au repos. Contre-exemple : sur la même fibre, deux électrodes posées à l'extérieur donnent 0 mV, alors qu'une microélectrode enfoncée dans la fibre donne −70 mV. La polarisation se mesure de part et d'autre de la membrane. Et au repos, la pompe Na+/K+ travaille sans arrêt : elle consomme de l'ATP pour maintenir les différences de concentration.",
+          "figure": null,
+          "exercise": {
+            "title": "Lire et expliquer un potentiel de repos",
+            "statement": "Dans cet exercice, tu lis une ddp, tu l'interprètes, puis tu l'expliques par la répartition des ions, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Deux électrodes sont posées à l'extérieur d'une fibre nerveuse au repos. L'oscilloscope affiche ___ mV.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Examiner le montage : les deux électrodes sont à l'extérieur de la fibre. Étape 2 — Lire : entre deux points du même milieu extérieur, la ddp est nulle. Étape 3 — Interpréter : 0 mV ne dit rien de la polarisation, car celle-ci se mesure entre l'intérieur et l'extérieur. Répondre −70 mV oublie que ce montage ne traverse pas la membrane.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  },
+                  {
+                    "content": "+30",
+                    "correct": false
+                  },
+                  {
+                    "content": "−55",
+                    "correct": false
+                  },
+                  {
+                    "content": "−70",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une microélectrode enfoncée dans une fibre nerveuse au repos donne −70 mV par rapport à l'extérieur. Que prouve ce résultat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Examiner : une électrode est dans la fibre, l'autre à l'extérieur. Étape 2 — Lire : −70 mV. Étape 3 — Interpréter : une ddp non nulle prouve que la membrane est polarisée, et le signe négatif dit que l'intérieur est négatif. Ce n'est pas un signal : c'est l'état de repos, stable tant qu'aucune stimulation n'arrive.",
+                "answers": [
+                  {
+                    "content": "L'intérieur est positif par rapport à l'extérieur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fibre est abîmée, car une ddp ne peut pas être négative",
+                    "correct": false
+                  },
+                  {
+                    "content": "La membrane est polarisée : l'intérieur est négatif par rapport à l'extérieur",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fibre est en train de produire un signal électrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propositions qui décrivent la répartition des ions d'une fibre nerveuse au repos ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Expliquer par les ions : la polarisation vient d'une répartition inégale. Le K+ est plus concentré à l'intérieur, le Na+ plus concentré à l'extérieur, et la pompe Na+/K+ maintient ces différences en expulsant le Na+ et en ramenant le K+. Si les ions étaient également répartis, il n'y aurait aucune ddp : la membrane ne serait pas polarisée.",
+                "answers": [
+                  {
+                    "content": "Le Na+ est plus concentré à l'extérieur de la fibre qu'à l'intérieur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le K+ et le Na+ sont également répartis de part et d'autre de la membrane",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le K+ est plus concentré à l'intérieur de la fibre qu'à l'extérieur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Na+ est plus concentré à l'intérieur de la fibre qu'à l'extérieur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fibre A, vivante, donne −70 mV quand une microélectrode est enfoncée dedans. Une fibre B, abîmée, donne 0 mV avec le même montage. Que conclure pour la fibre B ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Examiner : le montage est le même pour les deux fibres, avec une microélectrode dans la fibre. Étape 2 — Lire : −70 mV pour A, 0 mV pour B. Étape 3 — Interpréter : une ddp nulle entre l'intérieur et l'extérieur signifie que B n'est plus polarisée. Étape 4 — Expliquer par les ions : une fibre abîmée ne maintient plus la répartition inégale du Na+ et du K+ (la pompe ne travaille plus). Le montage est correct : l'écart vient de la fibre, pas des électrodes.",
+                "answers": [
+                  {
+                    "content": "Elle est polarisée comme la fibre A, la mesure est simplement plus faible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa membrane n'est plus polarisée : les différences de concentration des ions ne sont plus maintenues",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son intérieur est devenu positif par rapport à l'extérieur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le montage est faux, car il faut deux électrodes à l'extérieur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une ddp de 0 mV entre deux électrodes posées à l'extérieur d'une fibre prouve que sa membrane n'est pas polarisée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Examiner : les deux électrodes sont du même côté de la membrane. Étape 3 — Interpréter : la polarisation se mesure de part et d'autre de la membrane, pas entre deux points extérieurs. Ainsi, sur la même fibre, 0 mV à l'extérieur n'empêche pas −70 mV avec une microélectrode dans la fibre. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au repos, la fibre nerveuse est ___ : l'intérieur de sa membrane est négatif par rapport à l'extérieur.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Interpréter : une ddp de −70 mV entre l'intérieur et l'extérieur prouve que la membrane est polarisée. Le terme décrit l'état de repos de la fibre, avant toute stimulation.",
+                "answers": [
+                  {
+                    "content": "polarisée",
+                    "correct": true
+                  },
+                  {
+                    "content": "polarisé",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un potentiel de repos et à l'expliquer par les ions, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Au repos, l'ion le plus concentré à l'intérieur de la fibre est le ___ et l'ion le plus concentré à l'extérieur est le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Expliquer par les ions : la fibre contient beaucoup plus de K+ que le milieu extérieur, qui contient beaucoup plus de Na+. Cette répartition inégale est maintenue par la pompe Na+/K+.",
+                "answers": [
+                  {
+                    "content": "K+",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "K",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "potassium",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Na+",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Na",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "sodium",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un seul des deux ions peut s'échapper un peu de la fibre au repos : c'est celui qui est le plus concentré à l'intérieur."
+              },
+              {
+                "content": "Quel est le rôle de la pompe Na+/K+ d'une fibre au repos ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Expliquer par les ions : la pompe est une protéine de la membrane qui consomme de l'ATP. Elle expulse le Na+ et ramène le K+, contre leurs différences de concentration. Elle ne fabrique pas l'ATP, elle le consomme.",
+                "answers": [
+                  {
+                    "content": "Elle fait entrer le Na+ sans consommer d'énergie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle fabrique l'ATP dont la fibre a besoin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle expulse du Na+ et ramène du K+ en consommant de l'ATP, ce qui maintient les différences de concentration",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle ferme complètement la membrane à tous les ions",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour mesurer le potentiel de repos, il faut enfoncer une microélectrode dans la fibre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Examiner le montage : le potentiel de repos est la ddp entre l'intérieur et l'extérieur de la fibre. Il faut donc une électrode dans la fibre (la microélectrode) et une à l'extérieur. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La valeur du potentiel de repos d'une fibre nerveuse est d'environ ___ mV.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Lire : avec une microélectrode dans la fibre, l'oscilloscope affiche environ −70 mV. 0 mV correspond à deux électrodes extérieures, +30 mV au sommet d'un potentiel d'action, −55 mV au seuil.",
+                "answers": [
+                  {
+                    "content": "−55",
+                    "correct": false
+                  },
+                  {
+                    "content": "−70",
+                    "correct": true
+                  },
+                  {
+                    "content": "+30",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cette valeur est négative et ne vaut ni 0 ni le seuil."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le potentiel d'action et la loi du tout ou rien",
+          "remember": "Quand une fibre reçoit une stimulation efficace, l'oscilloscope enregistre une réponse brève : le **potentiel d'action** (PA). Il naît quand la membrane est dépolarisée jusqu'au **seuil**, de l'ordre de −55 mV. Le PA se déroule en phases. **Dépolarisation** : la ddp monte et s'inverse, jusqu'à environ +30 mV, car des **canaux Na+ voltage-dépendants** s'ouvrent et le Na+ entre. **Repolarisation** : ces canaux se ferment, des **canaux K+ voltage-dépendants** s'ouvrent, le K+ sort et la ddp redescend. Elle passe brièvement sous −70 mV (**hyperpolarisation**), puis revient au repos. Le PA dure de l'ordre de 1 à 2 ms. **Loi du tout ou rien** : sous le seuil, il n'y a aucun PA ; au seuil ou au-dessus, le PA a toujours la même amplitude, quelle que soit l'intensité de la stimulation. Pendant une stimulation prolongée, une intensité plus grande donne seulement des PA plus **fréquents**. Juste après un PA, la fibre est un instant inexcitable : c'est la **période réfractaire**.",
+          "method": [
+            "Lire l'enregistrement : relever le potentiel de repos, l'instant de la stimulation, la valeur du pic et la durée du PA, en tenant compte d'un éventuel décalage de l'axe.",
+            "Repérer les phases sur la courbe : seuil, dépolarisation, repolarisation, hyperpolarisation, retour au repos, avec leurs valeurs.",
+            "Associer chaque phase au mouvement d'ions qui l'explique : entrée de Na+, puis sortie de K+, par des canaux voltage-dépendants.",
+            "Comparer la stimulation au seuil et conclure avec la loi du tout ou rien : y a-t-il un PA, et de quelle amplitude ?"
+          ],
+          "example": {
+            "statement": "Dans un laboratoire de neurophysiologie, on stimule une fibre nerveuse isolée à 0,4 ms et on enregistre sa ddp toutes les 0,4 ms. L'axe vertical est décalé : la valeur lue est égale à la ddp en mV plus 100. On lit : 30 au repos, 45 à 0,8 ms, 130 à 1,2 ms, 60 à 1,6 ms, 20 à 2,0 ms, 27 à 2,4 ms, puis 30. Le seuil de la fibre est −55 mV. Analyser cet enregistrement.",
+            "steps": [
+              "Lire : repos 30 − 100 = −70 mV ; pic 130 − 100 = +30 mV ; stimulation à 0,4 ms ; retour à 30 vers 2,8 ms, donc un PA d'environ 2 ms à partir de 0,8 ms.",
+              "Repérer : à 0,8 ms la valeur 45 correspond à −55 mV, le seuil ; la dépolarisation va de −55 à +30 mV (0,8 à 1,2 ms) ; la repolarisation ramène la ddp vers −70 mV ; à 2,0 ms, 20 correspond à −80 mV : c'est l'hyperpolarisation ; retour à −70 mV.",
+              "Associer : la dépolarisation vient de l'entrée de Na+ par les canaux Na+ voltage-dépendants ; la repolarisation et l'hyperpolarisation viennent de la sortie de K+ par les canaux K+ voltage-dépendants.",
+              "Comparer : la stimulation a amené la fibre au seuil (−55 mV), donc un PA de pic +30 mV est apparu ; avec une stimulation plus intense, le pic serait resté à +30 mV (tout ou rien)."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'une stimulation plus forte donne un PA plus grand. Contre-exemple : pour une fibre dont le seuil est −55 mV, une stimulation qui amène la ddp à −60 mV ne donne aucun PA ; une autre qui l'amène à −50 mV donne un PA de pic +30 mV ; une troisième qui l'amène à −20 mV donne aussi un PA de pic +30 mV. L'intensité ne change pas l'amplitude : pendant une stimulation prolongée, elle change seulement la fréquence des PA. N'oublie pas non plus le décalage de l'axe : une valeur lue de 130 correspond à +30 mV, pas à +130 mV.",
+          "figure": "potentiel-action-fibre-d",
+          "exercise": {
+            "title": "Analyser un potentiel d'action",
+            "statement": "Dans cet exercice, tu analyses l'enregistrement d'un potentiel d'action avec la méthode de la fiche. Sur la courbe, l'axe vertical est décalé : la valeur lue est égale à la ddp en mV plus 100.",
+            "exercise_type": "fixation",
+            "figure": "potentiel-action-fibre-d",
+            "questions": [
+              {
+                "content": "Sur un enregistrement dont l'axe est décalé (valeur lue = ddp en mV + 100), le pic d'un potentiel d'action est lu à 130. Quelle est la ddp réelle au pic, en mV ?",
+                "question_type": "numeric",
+                "unit": "mV",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire l'enregistrement en tenant compte du décalage : la valeur lue est la ddp plus 100, donc ddp = valeur lue − 100 = 130 − 100 = 30 mV. Le pic est donc à +30 mV, valeur habituelle du sommet d'un PA. Répondre 130 oublie le décalage de l'axe ; répondre −30 se trompe de signe.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel mouvement d'ions explique la montée de la ddp de −55 mV à +30 mV pendant un potentiel d'action ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer la phase : la montée de −55 à +30 mV est la dépolarisation. Étape 3 — Associer au mouvement d'ions : des canaux Na+ voltage-dépendants s'ouvrent et le Na+ entre, ce qui rend l'intérieur moins négatif puis positif. La sortie de K+ est tentante, mais elle correspond à la repolarisation, qui fait redescendre la ddp.",
+                "answers": [
+                  {
+                    "content": "Une entrée de K+ par la pompe Na+/K+",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une sortie de Na+ par la pompe Na+/K+",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une sortie de K+ par des canaux K+ voltage-dépendants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une entrée de Na+ par des canaux Na+ voltage-dépendants",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les phases d'un potentiel d'action, à partir du repos.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Repérer les phases : la fibre part du repos, se dépolarise quand le Na+ entre, se repolarise quand le K+ sort, passe brièvement sous −70 mV (hyperpolarisation), puis revient au repos. L'erreur fréquente est de placer l'hyperpolarisation avant la repolarisation : la ddp doit d'abord redescendre avant de passer sous le repos.",
+                "answers": [
+                  {
+                    "content": "Fibre au repos (−70 mV)"
+                  },
+                  {
+                    "content": "Dépolarisation (entrée de Na+)"
+                  },
+                  {
+                    "content": "Repolarisation (sortie de K+)"
+                  },
+                  {
+                    "content": "Hyperpolarisation (sous −70 mV)"
+                  },
+                  {
+                    "content": "Retour au repos"
+                  }
+                ]
+              },
+              {
+                "content": "Une stimulation amène la ddp d'une fibre de −70 mV à −62 mV. Le seuil de la fibre est −55 mV. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : la ddp passe de −70 à −62 mV. Étape 4 — Comparer au seuil : −62 mV est plus bas que −55 mV, donc le seuil n'est pas atteint. Conclure avec le tout ou rien : sous le seuil il n'y a aucun PA. Un PA plus petit est impossible : un PA est toujours d'amplitude complète. La fibre est seulement un peu dépolarisée, pas hyperpolarisée.",
+                "answers": [
+                  {
+                    "content": "Un PA plus petit que d'habitude apparaît, car la stimulation est faible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un PA normal apparaît, car la fibre a réagi à la stimulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fibre s'hyperpolarise",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun PA n'apparaît, car le seuil n'est pas atteint",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une stimulation trois fois plus intense que celle qui atteint tout juste le seuil donne un PA trois fois plus grand.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Comparer et conclure avec la loi du tout ou rien : au seuil ou au-dessus, le PA a toujours la même amplitude, par exemple +30 mV. Une stimulation plus intense ne change pas l'amplitude ; si elle est prolongée, elle augmente seulement le nombre de PA par seconde. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois affirmations exactes sur le potentiel d'action d'une fibre ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Lire : un PA dure de l'ordre de 1 à 2 ms. Étape 3 — Associer : la dépolarisation vient de l'entrée de Na+, pas d'une sortie de K+ (celle-ci produit la repolarisation). Étape 4 — Conclure : le PA naît au seuil et obéit au tout ou rien, donc son amplitude ne dépend pas de l'intensité de la stimulation.",
+                "answers": [
+                  {
+                    "content": "Sa dépolarisation est due à une sortie de K+",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il naît seulement si la dépolarisation atteint le seuil",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son amplitude ne dépend pas de l'intensité de la stimulation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa durée est de l'ordre de 1 à 2 ms",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est plus grand quand la stimulation est plus intense",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire et à expliquer un potentiel d'action, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Pendant la dépolarisation, ce sont les canaux ___ voltage-dépendants qui s'ouvrent ; pendant la repolarisation, ce sont les canaux ___ voltage-dépendants.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Associer chaque phase à un mouvement d'ions : la dépolarisation vient de l'ouverture des canaux Na+ voltage-dépendants (entrée de Na+) ; la repolarisation vient de l'ouverture des canaux K+ voltage-dépendants (sortie de K+).",
+                "answers": [
+                  {
+                    "content": "Na+",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Na",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sodium",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "K+",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "K",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "potassium",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le Na+ entre pendant la phase où la ddp monte ; le K+ sort pendant celle où elle redescend."
+              },
+              {
+                "content": "Juste après un potentiel d'action, la fibre est un court moment incapable d'en produire un autre.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer les phases : après le PA, la fibre est en période réfractaire, brièvement inexcitable. C'est ce qui empêche le PA de revenir en arrière quand il se propage. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'axe d'un enregistrement est décalé (valeur lue = ddp en mV + 100). Le point le plus bas est lu à 20 : la ddp réelle est ___ mV.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire en tenant compte du décalage : ddp = valeur lue − 100 = 20 − 100 = −80 mV. Étape 2 — Repérer la phase : −80 mV est plus négatif que le repos (−70 mV), c'est l'hyperpolarisation. Répondre 20 ou −20 oublie le décalage ou le signe.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": false
+                  },
+                  {
+                    "content": "−80",
+                    "correct": true
+                  },
+                  {
+                    "content": "−120",
+                    "correct": false
+                  },
+                  {
+                    "content": "−20",
+                    "correct": false
+                  }
+                ],
+                "hint": "Soustrais 100 à la valeur lue."
+              },
+              {
+                "content": "On stimule une fibre de façon prolongée avec des intensités de plus en plus fortes, toutes supérieures au seuil. Qu'observe-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Comparer et conclure avec la loi du tout ou rien : au-dessus du seuil, l'amplitude du PA est constante, quelle que soit l'intensité. Pendant une stimulation prolongée, l'intensité se traduit seulement par la fréquence des PA, qui augmente. Des PA de plus en plus grands seraient contraires au tout ou rien.",
+                "answers": [
+                  {
+                    "content": "Des PA de moins en moins nombreux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des PA de plus en plus grands, à fréquence constante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des PA de même amplitude, de plus en plus fréquents",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des PA de plus en plus grands et de plus en plus fréquents",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La propagation du message nerveux et le potentiel global d'un nerf",
+          "remember": "Un PA se **propage** le long de la fibre **de proche en proche**, sans s'affaiblir : la zone en PA dépolarise la zone voisine, qui atteint le seuil et produit un PA à son tour. La zone qui vient de produire un PA est en période réfractaire : le PA ne revient donc pas en arrière. Dans une fibre sans myéline, la propagation est continue et lente (de l'ordre de 1 m/s). Dans une fibre myélinisée, les PA ne naissent qu'aux nœuds de Ranvier : la propagation est **saltatoire** et bien plus rapide (jusqu'à plus de 100 m/s). La **vitesse** est $v = \\frac{d}{\\Delta t}$, avec $d$ la distance entre deux électrodes réceptrices (en m) et $\\Delta t$ le décalage entre les deux PA (en s). Elle augmente avec le diamètre de la fibre et avec la myéline. Un **nerf** contient beaucoup de fibres de seuils différents. Son **potentiel global** (potentiel d'action composé) augmente avec l'intensité de la stimulation, car de plus en plus de fibres sont activées : c'est le **recrutement**. Il atteint un plateau quand toutes les fibres le sont. Chaque fibre obéit au tout ou rien, mais pas le nerf entier.",
+          "method": [
+            "Relever les données de l'expérience avec leurs unités : distances entre électrodes, durées, intensités de stimulation, amplitudes.",
+            "Convertir les unités puis calculer : $v = d / \\Delta t$ avec $d$ en m et $\\Delta t$ en s, ou l'écart d'amplitude demandé.",
+            "Comparer les résultats entre fibres ou entre intensités : diamètre, myéline, seuil, amplitude, plateau.",
+            "Interpréter par le mode de propagation (de proche en proche ou saltatoire) et par le recrutement des fibres, puis conclure."
+          ],
+          "example": {
+            "statement": "Au TP, un nerf de crapaud est stimulé à une extrémité. Deux électrodes réceptrices R1 et R2, distantes de 9 cm, sont reliées à un oscilloscope : le PA apparaît en R2 1,5 ms après R1. On enregistre aussi le potentiel global du nerf : 0 mV à 0,5 V, 4 mV à 1 V, 10 mV à 2 V et 10 mV à 3 V. Calculer la vitesse de propagation, puis expliquer l'évolution de l'amplitude.",
+            "steps": [
+              "Relever : $d = 9$ cm et $\\Delta t = 1{,}5$ ms ; amplitudes 0, 4, 10 et 10 mV pour 0,5, 1, 2 et 3 V.",
+              "Convertir et calculer : $d = 0{,}09$ m, $\\Delta t = 0{,}0015$ s, donc $v = 0{,}09 / 0{,}0015 = 60$ m/s.",
+              "Comparer : l'amplitude est nulle à 0,5 V, passe de 4 à 10 mV entre 1 V et 2 V, puis reste à 10 mV à 3 V : c'est un plateau.",
+              "Interpréter : 60 m/s est une vitesse élevée, compatible avec des fibres myélinisées (propagation saltatoire) ; l'amplitude croît car de plus en plus de fibres de seuils différents sont recrutées, et le plateau marque l'activation de toutes les fibres."
+            ]
+          },
+          "pitfall": "Ne divise pas des centimètres par des millisecondes en annonçant un résultat en m/s. Contre-exemple : $9 / 1{,}5 = 6$ ; écrire « 6 m/s » est faux d'un facteur 10, alors que $0{,}09 / 0{,}0015 = 60$ m/s. Convertis toujours $d$ en mètres et $\\Delta t$ en secondes avant de diviser. Ne conclus pas non plus qu'un nerf dont l'amplitude croît contredit le tout ou rien : chaque fibre y obéit, mais le nombre de fibres activées augmente avec l'intensité.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une vitesse et lire un potentiel de nerf",
+            "statement": "Dans cet exercice, tu calcules des vitesses de propagation et tu interprètes le potentiel global d'un nerf, avec la méthode de la fiche. Le nerf étudié est un nerf de crapaud ; la courbe donne l'amplitude de son potentiel global selon l'intensité de la stimulation.",
+            "exercise_type": "fixation",
+            "figure": "recrutement-nerf-d",
+            "questions": [
+              {
+                "content": "Deux électrodes réceptrices sont distantes de 15 cm sur un nerf. Le PA met 3 ms pour aller de la première à la seconde. Quelle est la vitesse de propagation, en m/s ?",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $d = 15$ cm et $\\Delta t = 3$ ms. Étape 2 — Convertir et calculer : $d = 0{,}15$ m, $\\Delta t = 0{,}003$ s, donc $v = 0{,}15 / 0{,}003 = 50$ m/s. Sans conversion, $15 / 3 = 5$ serait faux d'un facteur 10.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un message nerveux se propage à 50 m/s dans une fibre de 1,2 m, de la moelle épinière jusqu'au pied. Combien de temps met-il, en ms ?",
+                "question_type": "numeric",
+                "unit": "ms",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $v = 50$ m/s et $d = 1{,}2$ m. Étape 2 — Convertir et calculer : $\\Delta t = d / v = 1{,}2 / 50 = 0{,}024$ s, soit 24 ms. Oublier de convertir les secondes en millisecondes donnerait 0,024, valeur correcte en s mais pas dans l'unité demandée.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un nerf de crapaud donne un potentiel global de 0 mV à 0,5 V, 2 mV à 1 V, 5 mV à 1,5 V, 9 mV à 2 V, 12 mV à 2,5 V, puis 14 mV à 3 V, à 3,5 V et à 4 V. À partir de quelle intensité toutes les fibres sont-elles activées ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever les amplitudes selon l'intensité. Étape 3 — Comparer : l'amplitude croît de 0 à 14 mV, puis reste à 14 mV à partir de 3 V, c'est le plateau. Étape 4 — Interpréter : le plateau signifie que toutes les fibres sont activées, donc à partir de 3 V. À 2,5 V l'amplitude (12 mV) augmente encore à l'intensité suivante, donc des fibres restent à recruter.",
+                "answers": [
+                  {
+                    "content": "4 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "3 V",
+                    "correct": true
+                  },
+                  {
+                    "content": "2,5 V",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,5 V",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le potentiel global d'un nerf obéit à la loi du tout ou rien.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : l'amplitude du potentiel global d'un nerf augmente avec l'intensité de la stimulation, puis atteint un plateau. Étape 4 — Interpréter : chaque fibre obéit au tout ou rien, mais les fibres ont des seuils différents et sont recrutées peu à peu ; le nerf entier ne suit donc pas le tout ou rien. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propositions exactes sur la propagation dans une fibre myélinisée ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Interpréter par le mode de propagation : dans une fibre myélinisée, la gaine isole l'axone sauf aux nœuds de Ranvier, où naissent les PA. Le PA saute d'un nœud au suivant : la propagation est saltatoire et plus rapide. L'isolement par la myéline accélère la conduction au lieu de la ralentir.",
+                "answers": [
+                  {
+                    "content": "Les PA se produisent sur toute la longueur de la fibre, comme dans une fibre sans myéline",
+                    "correct": false
+                  },
+                  {
+                    "content": "La propagation est plus rapide que dans une fibre sans myéline de même diamètre",
+                    "correct": true
+                  },
+                  {
+                    "content": "La myéline ralentit la propagation, car elle isole la fibre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les PA ne se produisent qu'aux nœuds de Ranvier",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi un PA qui se propage dans une fibre ne revient-il pas en arrière ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Interpréter par la propagation de proche en proche : le PA d'une zone dépolarise la zone voisine, qui produit un PA à son tour. La zone qu'il vient de quitter est en période réfractaire, brièvement inexcitable, donc il ne repart pas en arrière. Il ne s'affaiblit pas : un PA se propage sans perte d'amplitude.",
+                "answers": [
+                  {
+                    "content": "Parce que le PA s'affaiblit en reculant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que la zone précédente est hyperpolarisée à jamais",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que la myéline bloque la propagation vers l'arrière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que la zone qui vient de produire un PA est en période réfractaire et ne peut pas en produire un autre aussitôt",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une vitesse de propagation et à interpréter le potentiel d'un nerf, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Dans une fibre myélinisée, la propagation est dite ___ ; l'amplitude du potentiel d'un nerf augmente avec l'intensité par ___ de fibres.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Interpréter : dans une fibre myélinisée, le PA saute de nœud de Ranvier en nœud de Ranvier, c'est la conduction saltatoire. Dans un nerf, de plus en plus de fibres de seuils différents sont activées quand l'intensité croît : c'est le recrutement.",
+                "answers": [
+                  {
+                    "content": "saltatoire",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "recrutement",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot vient du verbe « sauter » ; le second veut dire « faire entrer de nouvelles fibres en activité »."
+              },
+              {
+                "content": "Deux électrodes réceptrices sont distantes de 4 cm. Le PA met 0,5 ms pour aller de l'une à l'autre. Quelle est la vitesse de propagation, en m/s ?",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $d = 4$ cm et $\\Delta t = 0{,}5$ ms. Étape 2 — Convertir et calculer : $d = 0{,}04$ m, $\\Delta t = 0{,}0005$ s, donc $v = 0{,}04 / 0{,}0005 = 80$ m/s.",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ],
+                "hint": "4 cm = 0,04 m et 0,5 ms = 0,0005 s."
+              },
+              {
+                "content": "Une fibre conduit à 70 m/s et une autre, de même diamètre, à 1 m/s. Laquelle est probablement myélinisée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Comparer : à diamètre égal, une seule différence peut expliquer l'écart de vitesse. Étape 4 — Interpréter : la myéline permet la conduction saltatoire, beaucoup plus rapide ; la fibre à 70 m/s est donc probablement myélinisée, celle à 1 m/s ne l'est pas.",
+                "answers": [
+                  {
+                    "content": "Celle qui conduit à 1 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "Celle qui conduit à 70 m/s",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aucune des deux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux, puisqu'elles ont le même diamètre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un nerf, les fibres qui ont le seuil le plus bas sont les premières recrutées quand l'intensité augmente.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Interpréter : une fibre est activée quand l'intensité atteint son seuil. En augmentant l'intensité, on atteint d'abord le seuil des fibres les plus excitables, puis celui des autres. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La transmission synaptique et l'intégration des messages",
+          "remember": "Une **synapse** est la zone de contact entre un neurone et une autre cellule (un neurone, ou une fibre musculaire à la plaque motrice). Elle comprend l'**élément présynaptique** (terminaison d'un axone, riche en vésicules de **neurotransmetteur**), la **fente synaptique** et la **membrane postsynaptique**, munie de **récepteurs**. Quand un PA arrive, les vésicules libèrent le neurotransmetteur (exocytose) ; il diffuse dans la fente et se fixe sur les récepteurs. Selon la synapse, la membrane postsynaptique se dépolarise localement, c'est le **PPSE** (potentiel postsynaptique excitateur, avec entrée de Na+), ou s'hyperpolarise, c'est le **PPSI** (inhibiteur). Ces potentiels sont **locaux et gradués** : ils n'obéissent pas au tout ou rien. Le neurone postsynaptique les additionne : c'est la **sommation**, spatiale (plusieurs synapses en même temps) ou temporelle (stimulations rapprochées). Un PA naît si la ddp atteint le seuil : c'est l'**intégration**. Le neurotransmetteur est ensuite détruit ou recapturé, ce qui arrête son action. La transmission se fait dans un seul sens, de l'élément présynaptique vers la membrane postsynaptique.",
+          "method": [
+            "Identifier les éléments de la synapse : élément présynaptique, fente synaptique, membrane postsynaptique.",
+            "Suivre le trajet du message : arrivée du PA, libération du neurotransmetteur, fixation sur les récepteurs.",
+            "Déterminer l'effet de chaque synapse sur la ddp postsynaptique : PPSE (valeur positive) ou PPSI (valeur négative).",
+            "Additionner les PPSE et les PPSI reçus (sommation), puis comparer la ddp obtenue au seuil.",
+            "Conclure : un PA naît dans le neurone postsynaptique seulement si le seuil est atteint ; la transmission se fait dans un seul sens."
+          ],
+          "example": {
+            "statement": "Au repos, un neurone relais de la moelle épinière a une ddp de −70 mV et son seuil est −55 mV. Au même instant, deux synapses excitatrices produisent chacune un PPSE de +9 mV et une synapse inhibitrice produit un PPSI de −2 mV. Le neurone émet-il un PA ?",
+            "steps": [
+              "Identifier : chacune des trois synapses a une terminaison présynaptique, une fente synaptique et la membrane postsynaptique du neurone relais.",
+              "Suivre : dans chaque synapse, un PA arrive à la terminaison, libère le neurotransmetteur, qui se fixe sur les récepteurs du neurone relais.",
+              "Déterminer : les deux synapses excitatrices donnent deux PPSE de +9 mV ; la synapse inhibitrice donne un PPSI de −2 mV.",
+              "Additionner : −70 + 2 × 9 − 2 = −54 mV ; comparer : −54 mV atteint le seuil de −55 mV.",
+              "Conclure : le seuil est atteint, donc un PA naît dans le neurone relais ; avec un PPSI de −5 mV, la ddp serait de −57 mV et il n'y aurait aucun PA. Le message n'a circulé que dans le sens présynaptique vers postsynaptique."
+            ]
+          },
+          "pitfall": "Ne confonds pas un PPSE et un PA. Un PPSE est local et gradué ; un PA est tout ou rien. Contre-exemple : un seul PPSE de +9 mV amène la ddp à −61 mV, sous le seuil de −55 mV : aucun PA. Deux PPSE simultanés de +9 mV la portent à −52 mV : un PA naît. Et un PPSI n'est pas une absence de message : c'est un message qui éloigne la ddp du seuil.",
+          "figure": "etapes-synapse-d",
+          "exercise": {
+            "title": "Suivre et intégrer un message synaptique",
+            "statement": "Dans cet exercice, tu suis un message à travers une synapse et tu additionnes les potentiels postsynaptiques reçus par un neurone, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "etapes-synapse-d",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre ce qui se passe à la plaque motrice quand un motoneurone commande un muscle.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : la plaque motrice est une synapse entre la terminaison du motoneurone (élément présynaptique) et la fibre musculaire (membrane postsynaptique). Étape 2 — Suivre le trajet du message : le PA arrive, l'acétylcholine est libérée dans la fente, elle se fixe sur les récepteurs. Étape 3 — Déterminer l'effet : la membrane de la fibre musculaire se dépolarise. Enfin l'acétylcholine est détruite, ce qui arrête son action. L'erreur fréquente est de faire dépolariser la fibre musculaire avant la fixation du neurotransmetteur.",
+                "answers": [
+                  {
+                    "content": "Un PA parvient à la terminaison de l'axone du motoneurone"
+                  },
+                  {
+                    "content": "L'acétylcholine est libérée dans la fente de la plaque motrice"
+                  },
+                  {
+                    "content": "L'acétylcholine se fixe sur les récepteurs de la fibre musculaire"
+                  },
+                  {
+                    "content": "La membrane de la fibre musculaire se dépolarise"
+                  },
+                  {
+                    "content": "Une enzyme détruit l'acétylcholine et le message s'arrête"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier les éléments de la synapse : les vésicules sont dans l'élément présynaptique, les récepteurs dans la membrane postsynaptique. Étape 3 — Déterminer l'effet : un PPSE dépolarise localement la membrane, un PPSI l'hyperpolarise. Ne confonds pas ces potentiels locaux avec un PA, qui est tout ou rien.",
+                "answers": [
+                  {
+                    "content": "PPSE",
+                    "match": "Dépolarisation locale de la membrane postsynaptique"
+                  },
+                  {
+                    "content": "PPSI",
+                    "match": "Hyperpolarisation locale de la membrane postsynaptique"
+                  },
+                  {
+                    "content": "Vésicules",
+                    "match": "Contiennent le neurotransmetteur dans l'élément présynaptique"
+                  },
+                  {
+                    "content": "Récepteurs",
+                    "match": "Fixent le neurotransmetteur sur la membrane postsynaptique"
+                  }
+                ]
+              },
+              {
+                "content": "La transmission synaptique se fait aussi bien de la cellule postsynaptique vers l'élément présynaptique que dans l'autre sens.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : seul l'élément présynaptique contient des vésicules de neurotransmetteur, et seule la membrane postsynaptique porte les récepteurs. Étape 5 — Conclure : le message ne peut donc passer que de l'élément présynaptique vers la cellule postsynaptique, dans un seul sens. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au repos (−70 mV), un neurone reçoit simultanément quatre PPSE de +4 mV. Quelle est sa ddp après sommation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Déterminer : quatre PPSE de +4 mV. Étape 4 — Additionner : −70 + 4 × 4 = −70 + 16 = −54 mV. −66 mV ne compte qu'un seul PPSE ; −86 mV soustrait les PPSE au lieu de les additionner ; +16 mV oublie le potentiel de repos de départ.",
+                "answers": [
+                  {
+                    "content": "+16 mV",
+                    "correct": false
+                  },
+                  {
+                    "content": "−54 mV",
+                    "correct": true
+                  },
+                  {
+                    "content": "−86 mV",
+                    "correct": false
+                  },
+                  {
+                    "content": "−66 mV",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au repos (−70 mV), un neurone de seuil −55 mV reçoit en même temps quatre PPSE de +4 mV et un PPSI de −5 mV. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Déterminer : quatre PPSE de +4 mV et un PPSI de −5 mV. Étape 4 — Additionner : −70 + 16 − 5 = −59 mV, puis comparer : −59 mV est plus bas que −55 mV. Étape 5 — Conclure : le seuil n'est pas atteint, donc aucun PA. Le PPSI éloigne la ddp du seuil ; ce n'est pas le nombre de synapses qui compte, mais la somme des potentiels.",
+                "answers": [
+                  {
+                    "content": "La ddp est de −49 mV : un PA naît",
+                    "correct": false
+                  },
+                  {
+                    "content": "La ddp est de −54 mV : un PA naît, le PPSI n'a aucun effet",
+                    "correct": false
+                  },
+                  {
+                    "content": "La ddp est de −59 mV, sous le seuil : aucun PA ne naît",
+                    "correct": true
+                  },
+                  {
+                    "content": "La ddp est de −59 mV : un PA naît, car quatre PPSE sont plus nombreux qu'un PPSI",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propositions exactes sur les PPSE et les PPSI ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Déterminer l'effet de chaque synapse : un PPSE ou un PPSI a une amplitude variable et reste local. Étape 4 — Additionner : le neurone postsynaptique en fait la somme (sommation). Ils ne suivent pas le tout ou rien et ne se propagent pas comme un PA : confondre PPS et PA est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Ils sont locaux et gradués",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils obéissent à la loi du tout ou rien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils se propagent sans s'affaiblir sur tout l'axone",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils s'additionnent dans le neurone postsynaptique (sommation)",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre un message synaptique et à additionner des potentiels postsynaptiques, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Une synapse excitatrice produit un ___ ; une synapse inhibitrice produit un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Déterminer l'effet de chaque synapse : une synapse excitatrice dépolarise localement la membrane postsynaptique (PPSE) ; une synapse inhibitrice l'hyperpolarise (PPSI).",
+                "answers": [
+                  {
+                    "content": "PPSE",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "potentiel postsynaptique excitateur",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "PPSI",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "potentiel postsynaptique inhibiteur",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Ce sont deux sigles de quatre lettres qui commencent par PPS : la dernière lettre distingue « excitateur » et « inhibiteur »."
+              },
+              {
+                "content": "Plusieurs synapses d'un même neurone sont stimulées en même temps : les potentiels s'additionnent par une sommation ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Additionner : quand des synapses différentes agissent au même instant, c'est une sommation spatiale. La sommation temporelle concerne des stimulations rapprochées dans le temps sur une même synapse. Réfractaire et saltatoire n'ont pas de rapport avec l'addition des potentiels.",
+                "answers": [
+                  {
+                    "content": "spatiale",
+                    "correct": true
+                  },
+                  {
+                    "content": "réfractaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "saltatoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "temporelle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à des synapses placées à des endroits différents de la membrane."
+              },
+              {
+                "content": "Un PPSE est un potentiel d'action de petite taille.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Déterminer l'effet : un PPSE est une dépolarisation locale et graduée de la membrane postsynaptique. Un PA est tout ou rien, d'amplitude constante et se propage. Un PPSE ne devient PA que si la somme des potentiels atteint le seuil. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi est-il utile que le neurotransmetteur soit détruit ou recapturé après son action ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Suivre le trajet du message : le neurotransmetteur est libéré, se fixe, agit, puis il est détruit ou recapturé. Sans cela, il resterait fixé sur les récepteurs et le message se prolongerait. Cette étape ne le fait pas repartir en arrière et n'augmente pas le PPSE.",
+                "answers": [
+                  {
+                    "content": "Pour qu'il puisse repartir vers l'élément présynaptique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour augmenter l'amplitude du PPSE",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour permettre la propagation saltatoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour arrêter son action et empêcher que le message se prolonge sans fin",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un relais au stade : les nerfs du coureur",
+          "statement": "Lors d'une course de relais au stade, Koffi, lycéen, court le deuxième relais. Quand il reçoit le témoin, les récepteurs de sa main envoient un message aux centres nerveux ; son cortex moteur décide alors d'accélérer et envoie un ordre vers la moelle épinière, qui le relaie aux muscles de la jambe. C'est une action volontaire, et non un réflexe. Son professeur de SVT décrit une des fibres en jeu : c'est l'axone d'un motoneurone dont le corps cellulaire est dans la moelle épinière ; longue d'environ 1 m, elle sort de la moelle, est entourée d'une gaine de myéline et fait partie d'un nerf qui rejoint un muscle de la cuisse. Au laboratoire, on étudie un motoneurone semblable, prélevé sur un animal : une microélectrode enfoncée dans le corps cellulaire, l'autre électrode étant dans le liquide extérieur, donne −70 mV. Sur une fibre de ce type, deux électrodes réceptrices distantes de 30 cm enregistrent un PA qui apparaît 5 ms plus tard à la seconde.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le corps cellulaire du motoneurone de Koffi est dans la moelle épinière. Dans quelle partie de la moelle se trouve-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (Décrire, Nommer, Relier, Déduire). Étape 1 — Décrire : le corps cellulaire est la partie du neurone qui contient le noyau ; ici il est dans la moelle. Étape 2 — Nommer : sur une coupe de moelle, la zone centrale grise est la substance grise, riche en corps cellulaires ; la zone blanche qui l'entoure est la substance blanche, faite de fibres myélinisées. Étape 4 — Déduire : le corps cellulaire est donc dans la substance grise. La fibre sort ensuite de la moelle, mais le nerf ne contient que des fibres, sans corps cellulaires de motoneurones.",
+              "answers": [
+                {
+                  "content": "Dans la substance blanche, autour de la zone grise",
+                  "correct": false
+                },
+                {
+                  "content": "Dans le nerf, le long de la cuisse",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la substance grise, au centre de la moelle",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la gaine de myéline de la fibre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la fibre du motoneurone de Koffi, le message circule de la terminaison de l'axone vers le corps cellulaire.",
+              "question_type": "true_false",
+              "explanation": "Méthode du neurone. Étape 2 — Nommer : la fibre décrite est l'axone du motoneurone. Étape 3 — Relier : l'axone conduit le message du corps cellulaire vers les terminaisons, qui le transmettent au muscle. Étape 4 — Déduire : le sens de circulation va du corps cellulaire vers le muscle, et non l'inverse. L'affirmation est fausse : le sens est unique dans l'organisme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois propositions exactes sur la fibre du motoneurone de Koffi ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode du neurone. Étape 2 — Nommer : la fibre longue et unique qui sort du corps cellulaire est un axone ; sa gaine de myéline est coupée à intervalles réguliers par les nœuds de Ranvier ; un nerf est un cordon qui réunit de nombreuses fibres. Étape 3 — Relier : le noyau est dans le corps cellulaire, pas dans l'axone, et les dendrites, courtes et près du corps cellulaire, reçoivent les messages, alors que l'axone les conduit.",
+              "answers": [
+                {
+                  "content": "Elle porte le noyau du neurone",
+                  "correct": false
+                },
+                {
+                  "content": "Elle appartient à un nerf qui contient aussi d'autres fibres",
+                  "correct": true
+                },
+                {
+                  "content": "C'est l'axone d'un neurone",
+                  "correct": true
+                },
+                {
+                  "content": "Sa gaine de myéline est interrompue par les nœuds de Ranvier",
+                  "correct": true
+                },
+                {
+                  "content": "Elle reçoit les messages par de nombreuses dendrites tout le long de sa longueur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur une fibre de ce type, deux électrodes réceptrices distantes de 30 cm enregistrent un PA qui apparaît 5 ms plus tard à la seconde électrode. Quelle est la vitesse de propagation, en m/s ?",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Méthode de la propagation (Relever, Convertir et calculer, Comparer, Interpréter). Étape 1 — Relever : $d = 30$ cm et $\\Delta t = 5$ ms. Étape 2 — Convertir et calculer : $d = 0{,}30$ m et $\\Delta t = 0{,}005$ s, donc $v = d / \\Delta t = 0{,}30 / 0{,}005 = 60$ m/s. Sans conversion, $30 / 5 = 6$ serait faux d'un facteur 10. Cette vitesse élevée est compatible avec une fibre myélinisée.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour mesurer le potentiel de repos de ce motoneurone, quel montage convient ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du potentiel de repos (Examiner, Lire, Interpréter, Expliquer). Étape 1 — Examiner le montage : le potentiel de repos est la ddp entre l'intérieur et l'extérieur de la membrane, il faut donc une électrode de chaque côté. Étape 3 — Interpréter : deux électrodes du même côté de la membrane, à l'extérieur ou toutes deux dans la cellule, donneraient environ 0 mV et ne prouveraient rien sur la polarisation. Seul le montage avec la microélectrode dans le motoneurone et l'autre à l'extérieur donne −70 mV.",
+              "answers": [
+                {
+                  "content": "Une microélectrode dans le motoneurone et une électrode dans le liquide extérieur",
+                  "correct": true
+                },
+                {
+                  "content": "Deux microélectrodes enfoncées toutes les deux dans le motoneurone",
+                  "correct": false
+                },
+                {
+                  "content": "Deux électrodes posées à l'extérieur, à 30 cm l'une de l'autre",
+                  "correct": false
+                },
+                {
+                  "content": "Une électrode dans le nerf et l'autre dans le muscle de la cuisse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet du message quand Koffi reçoit le témoin et accélère.",
+              "question_type": "ordering",
+              "explanation": "Méthode du neurone et de la synapse. Étape 1 — Identifier : les récepteurs de la main sont à l'origine du message. Une fibre sensitive le conduit vers les centres nerveux (sens du récepteur vers le centre). Comme l'action est volontaire, le cortex moteur envoie ensuite l'ordre d'accélérer vers la moelle épinière. Étape 2 — Suivre le trajet du message : à la synapse de la moelle, le neurotransmetteur transmet l'ordre au motoneurone, dont la fibre motrice le conduit jusqu'au muscle (sens du centre vers l'effecteur). Placer la fibre du motoneurone avant la synapse est l'erreur tentante : le motoneurone ne reçoit l'ordre qu'après la synapse. Ce trajet passe par le cortex ; ce n'est donc pas un arc réflexe.",
+              "answers": [
+                {
+                  "content": "Les récepteurs de la main sont stimulés"
+                },
+                {
+                  "content": "Une fibre sensitive conduit le message vers les centres nerveux"
+                },
+                {
+                  "content": "Le cortex moteur envoie l'ordre d'accélérer vers la moelle épinière"
+                },
+                {
+                  "content": "Une synapse de la moelle transmet l'ordre à un motoneurone"
+                },
+                {
+                  "content": "La fibre du motoneurone conduit l'ordre jusqu'au muscle de la cuisse"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un potentiel d'action au laboratoire",
+          "statement": "Expériences fictives aux résultats simplifiés. Dans un laboratoire de neurophysiologie, des chercheurs étudient les potentiels d'action d'une fibre nerveuse isolée d'un animal (repos −70 mV, seuil −55 mV). Sur les enregistrements, l'axe vertical est décalé : la valeur lue est égale à la ddp en mV plus 100. Expérience 1 : trois stimulations amènent la ddp à −62 mV, puis à −50 mV, puis à −20 mV ; on obtient respectivement aucun PA, un PA de pic +30 mV et un PA de pic +30 mV. Expérience 2 : la fibre est placée dans un liquide pauvre en Na+ ; une stimulation efficace donne un PA dont le pic n'atteint que +10 mV. Expérience 3 : on ajoute au liquide une substance, la tétrodotoxine ; une stimulation appliquée à 0,4 ms, qui donne normalement un PA, n'entraîne qu'une dépolarisation locale (courbe : valeur lue maximale 46 à 0,8 ms, proche du seuil, retour à 30 vers 2,4 ms).",
+          "exercise_type": "fixation",
+          "figure": "enregistrement-ttx",
+          "questions": [
+            {
+              "content": "Dans l'expérience 3, la valeur lue maximale est 46 (axe décalé : valeur lue = ddp en mV + 100). À quelle ddp réelle correspond-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du potentiel d'action. Étape 1 — Lire en tenant compte du décalage : ddp = valeur lue − 100 = 46 − 100 = −54 mV. La dépolarisation monte jusqu'au voisinage du seuil (−55 mV) mais ne devient pas un PA. Répondre +46 mV oublie le décalage ; répondre −46 mV se trompe dans la soustraction.",
+              "answers": [
+                {
+                  "content": "+46 mV",
+                  "correct": false
+                },
+                {
+                  "content": "−54 mV",
+                  "correct": true
+                },
+                {
+                  "content": "−46 mV",
+                  "correct": false
+                },
+                {
+                  "content": "146 mV",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 1, la stimulation qui amène la ddp à −62 mV ne produit aucun PA parce que cette valeur est plus basse que le seuil de −55 mV.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Comparer la stimulation au seuil et conclure avec la loi du tout ou rien : −62 mV est plus bas que −55 mV, le seuil n'est pas atteint, il n'y a aucun PA. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 1, les stimulations qui amènent la ddp à −50 mV et à −20 mV donnent des PA de même pic, +30 mV. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Comparer et conclure : −50 mV et −20 mV dépassent tous deux le seuil de −55 mV, et les deux PA ont le même pic, +30 mV. C'est la loi du tout ou rien : au seuil ou au-dessus, l'amplitude est constante. Un potentiel gradué, comme un PPSE, varie avec la stimulation, ce qui n'est pas le cas du PA.",
+              "answers": [
+                {
+                  "content": "Plus la stimulation est forte, plus le PA est grand",
+                  "correct": false
+                },
+                {
+                  "content": "Le PA est un potentiel gradué comme un PPSE",
+                  "correct": false
+                },
+                {
+                  "content": "Le seuil de la fibre dépend de l'intensité de la stimulation",
+                  "correct": false
+                },
+                {
+                  "content": "L'amplitude d'un PA ne dépend pas de l'intensité de la stimulation, dès que le seuil est atteint (loi du tout ou rien)",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 2, le pic du PA n'atteint que +10 mV dans un liquide pauvre en Na+. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Associer chaque phase au mouvement d'ions : le pic dépend de la quantité de Na+ qui entre pendant la dépolarisation. Quand le liquide extérieur contient moins de Na+, moins de Na+ entre et le pic est plus bas (+10 mV au lieu de +30 mV). Ce résultat concerne la dépolarisation, pas la repolarisation, qui est due à la sortie de K+.",
+              "answers": [
+                {
+                  "content": "Le Na+ n'a aucun rôle dans le PA",
+                  "correct": false
+                },
+                {
+                  "content": "La repolarisation du PA dépend du Na+ du milieu extérieur",
+                  "correct": false
+                },
+                {
+                  "content": "La dépolarisation du PA dépend du Na+ du milieu extérieur, qui entre dans la fibre",
+                  "correct": true
+                },
+                {
+                  "content": "Le Na+ sort de la fibre pendant la dépolarisation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 3, la tétrodotoxine empêche la fibre de produire un PA. Quelle est sa cible la plus probable ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Repérer les phases : en présence de la substance, la montée jusqu'à +30 mV n'a pas lieu, alors que la stimulation donne normalement un PA ; seule une dépolarisation locale d'environ −54 mV subsiste. Étape 3 — Associer : la montée est due à l'entrée de Na+ par les canaux Na+ voltage-dépendants ; la substance bloque donc ces canaux. Bloquer les canaux K+ perturberait la repolarisation mais pas la dépolarisation. Un blocage de la pompe n'arrêterait pas un PA en quelques instants, et la myéline n'intervient pas sur une fibre isolée en quelques ms.",
+              "answers": [
+                {
+                  "content": "La pompe Na+/K+, qu'elle bloque",
+                  "correct": false
+                },
+                {
+                  "content": "La gaine de myéline, qu'elle détruit",
+                  "correct": false
+                },
+                {
+                  "content": "Les canaux K+ voltage-dépendants, qu'elle bloque",
+                  "correct": false
+                },
+                {
+                  "content": "Les canaux Na+ voltage-dépendants, qu'elle bloque",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À l'aide des expériences 1 à 3, explique l'origine ionique de la dépolarisation d'un potentiel d'action et le rôle du seuil.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dépolarisation : entrée de Na+ par des canaux Na+ voltage-dépendants, dont le blocage supprime le PA (expérience 3) (1 point)",
+                "Dépolarisation : la quantité de Na+ extérieur fixe la hauteur du pic (expérience 2) (1 point)",
+                "Rôle du seuil : sous le seuil, aucun PA ; au-dessus, pic constant, d'après l'expérience 1 (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Quand la dépolarisation atteint le seuil (−55 mV), des canaux Na+ voltage-dépendants s'ouvrent et le Na+ entre : la ddp monte jusqu'à +30 mV. Les expériences le montrent : dans un liquide pauvre en Na+, le pic est plus bas (+10 mV) ; avec la tétrodotoxine, qui bloque ces canaux, il n'y a plus de PA. Le seuil joue un rôle de déclencheur : si la stimulation amène la ddp à −62 mV, sous le seuil, les canaux ne s'ouvrent pas et il n'y a aucun PA ; à −50 mV comme à −20 mV, le seuil est dépassé et le pic est le même, +30 mV (expérience 1). Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Quand le seuil est atteint, des canaux..."
+            }
+          ]
+        },
+        {
+          "title": "L'examen de conduction nerveuse en neurologie",
+          "statement": "Dans un service de neurologie, un médecin examine une patiente qui se plaint de fourmillements et de faiblesse dans la main. Il pratique un examen de conduction nerveuse : il stimule un nerf mixte du bras, dont on étudie ici les fibres motrices, en deux points, au poignet puis au coude, distants de 24 cm, et enregistre avec une électrode collée sur la peau la réponse du muscle de la main. L'amplitude de cette réponse reflète le nombre de fibres du nerf activées. La durée entre la stimulation et la réponse du muscle s'appelle la latence. Résultats simplifiés : sujet sain de référence, latence de 3 ms pour le poignet et de 7 ms pour le coude ; patiente, latence de 3,5 ms pour le poignet et de 15,5 ms pour le coude. Chez des sujets sains, la vitesse de conduction de ce nerf est de l'ordre de 50 à 65 m/s. Le médecin note aussi l'amplitude de la réponse du muscle selon l'intensité de la stimulation. Sujet sain : 0 mV à 1 V, 3 mV à 2 V, 8 mV à 3 V, 12 mV à 4 V, 12 mV à 5 V. Patiente : 0 mV à 1 V, 1 mV à 2 V, 3 mV à 3 V, 4 mV à 4 V, 4 mV à 5 V.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pourquoi le médecin calcule-t-il la vitesse à partir de la différence des latences des deux points de stimulation, plutôt qu'avec la seule latence du poignet ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la propagation (Relever, Convertir et calculer, Comparer, Interpréter). Étape 1 — Relever : chaque latence mesure le temps entre la stimulation et la réponse du muscle. Elle inclut donc la propagation dans le nerf, mais aussi la transmission synaptique à la plaque motrice et la réponse du muscle. Étape 3 — Comparer : ce temps supplémentaire est le même pour les deux points ; en faisant la différence des latences, il disparaît, et il reste le temps de parcours entre les deux points. Un PA ne s'affaiblit pas en se propageant.",
+              "answers": [
+                {
+                  "content": "Parce que la latence comprend aussi le temps de la transmission à la plaque motrice et de la réponse du muscle ; la différence ne garde que le trajet entre les deux points",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que le PA s'affaiblit en se propageant",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la propagation est plus rapide au poignet qu'au coude",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'un nerf ne peut être stimulé qu'en deux points",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le sujet sain, les points de stimulation sont distants de 24 cm et les latences valent 3 ms et 7 ms. Quelle est la vitesse de conduction, en m/s ?",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $d = 24$ cm ; $\\Delta t = 7 - 3 = 4$ ms. Étape 2 — Convertir et calculer : $d = 0{,}24$ m et $\\Delta t = 0{,}004$ s, donc $v = 0{,}24 / 0{,}004 = 60$ m/s, valeur dans l'intervalle de 50 à 65 m/s. Utiliser 7 ms au lieu de la différence donnerait une valeur fausse, car la latence comprend le temps de la plaque motrice.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez la patiente, les points de stimulation sont distants de 24 cm et les latences valent 3,5 ms et 15,5 ms. Quelle est la vitesse de conduction, en m/s ?",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $d = 24$ cm ; $\\Delta t = 15{,}5 - 3{,}5 = 12$ ms. Étape 2 — Convertir et calculer : $d = 0{,}24$ m et $\\Delta t = 0{,}012$ s, donc $v = 0{,}24 / 0{,}012 = 20$ m/s. Étape 3 — Comparer : cette valeur est bien inférieure à l'intervalle de 50 à 65 m/s des sujets sains.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La vitesse de conduction de la patiente est nettement plus basse que celle des sujets sains. Quelle est l'explication la plus plausible d'après le cours ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Comparer : 20 m/s contre 60 m/s chez le sujet sain. Étape 4 — Interpréter par le mode de propagation : la vitesse dépend du diamètre et de la myéline, qui permet la conduction saltatoire rapide. Une vitesse très diminuée est compatible avec une atteinte de la myéline. Un diamètre plus grand augmenterait la vitesse. Le tout ou rien et le seuil n'agissent pas sur la vitesse de propagation.",
+              "answers": [
+                {
+                  "content": "Une atteinte de la gaine de myéline, qui ralentit la conduction saltatoire",
+                  "correct": true
+                },
+                {
+                  "content": "Une perte de la loi du tout ou rien dans chaque fibre",
+                  "correct": false
+                },
+                {
+                  "content": "Une baisse du seuil de toutes les fibres",
+                  "correct": false
+                },
+                {
+                  "content": "Une augmentation du diamètre des fibres",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'amplitude de la réponse du muscle de la patiente atteint un plateau de 4 mV, contre 12 mV chez le sujet sain. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Comparer : les plateaux sont de 4 mV et de 12 mV. Étape 4 — Interpréter par le recrutement : l'amplitude reflète le nombre de fibres activées, et le plateau correspond à l'activation de toutes les fibres fonctionnelles. Un plateau trois fois plus bas indique moins de fibres fonctionnelles. Un seuil plus élevé décalerait le début de la courbe vers des intensités plus fortes mais ne changerait pas la hauteur du plateau.",
+              "answers": [
+                {
+                  "content": "Toutes les fibres de la patiente ont un seuil plus élevé",
+                  "correct": false
+                },
+                {
+                  "content": "Moins de fibres du nerf de la patiente sont fonctionnelles",
+                  "correct": true
+                },
+                {
+                  "content": "Les fibres de la patiente n'obéissent plus au tout ou rien",
+                  "correct": false
+                },
+                {
+                  "content": "Les fibres de la patiente conduisent plus vite",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la conclusion de l'examen en exploitant les vitesses de conduction et les amplitudes de réponse de la patiente et du sujet sain.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Vitesse de la patiente (20 m/s) bien plus basse que celle du sujet sain (60 m/s) (1 point)",
+                "Lien avec la myéline et la conduction saltatoire (1 point)",
+                "Plateau plus bas : moins de fibres fonctionnelles, par le recrutement (1 point)",
+                "Conclusion cohérente et vocabulaire exact (1 point)"
+              ],
+              "explanation": "Corrigé modèle : La vitesse de conduction de la patiente est de 20 m/s, contre 60 m/s chez le sujet sain : la conduction est fortement ralentie. Dans une fibre myélinisée, la conduction est saltatoire et rapide ; un ralentissement important est compatible avec une atteinte de la gaine de myéline. Par ailleurs, l'amplitude de la réponse de la patiente atteint un plateau de 4 mV contre 12 mV : comme l'amplitude croît par recrutement de fibres jusqu'au plateau, qui marque l'activation de toutes les fibres fonctionnelles, il y a moins de fibres fonctionnelles dans son nerf. Le nerf de la patiente est donc atteint à la fois dans la conduction de ses fibres et dans leur nombre. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "La vitesse de la patiente est de 20 m/s, contre..."
+            }
+          ]
+        },
+        {
+          "title": "Un motoneurone qui additionne les messages",
+          "statement": "Expériences fictives aux résultats simplifiés. Un motoneurone M commande un muscle de la cuisse d'un sprinteur. Pour étudier comment il intègre les messages, des chercheurs enregistrent sa ddp avec une microélectrode sur un animal de laboratoire (repos −70 mV ; seuil −55 mV). Expérience A : un PA dans le neurone excitateur N1 fait passer la ddp de M à −65 mV. Expérience B : trois PA de N1 très rapprochés dans le temps amènent la ddp à −55 mV et un PA naît dans M. Un PA de N1' seul fait aussi passer M à −65 mV. Expérience C : N1 et N1', autre neurone excitateur, envoient chacun un PA au même instant ; la ddp de M passe à −60 mV. Expérience D : un PA dans le neurone N2 fait passer la ddp de M à −75 mV. Expérience E : trois PA rapprochés de N1 et, au même moment, un PA de N2 amènent la ddp de M à −60 mV : aucun PA ne naît. Expérience F : on ajoute une substance Y ; les PA de N1 sont enregistrés normalement dans sa terminaison, mais la ddp de M ne change pas. Si l'on dépose directement sur M, en présence de Y, le neurotransmetteur de N1, la ddp de M passe à −65 mV.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Que sont les variations de ddp de M observées dans les expériences A et D ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la synapse (Identifier, Suivre, Déterminer, Additionner, Conclure). Étape 3 — Déterminer l'effet de chaque synapse : dans A, la ddp passe de −70 à −65 mV, soit +5 mV : c'est une dépolarisation locale, un PPSE. Dans D, elle passe de −70 à −75 mV, soit −5 mV : c'est une hyperpolarisation locale, un PPSI. Ce ne sont pas des PA, car le seuil de −55 mV n'est pas atteint et les variations sont petites et locales.",
+              "answers": [
+                {
+                  "content": "Des PA dans les deux cas",
+                  "correct": false
+                },
+                {
+                  "content": "Des PPSE dans les deux cas, d'amplitudes différentes",
+                  "correct": false
+                },
+                {
+                  "content": "Un PPSI dans A et un PPSE dans D",
+                  "correct": false
+                },
+                {
+                  "content": "Un PPSE dans A (dépolarisation locale) et un PPSI dans D (hyperpolarisation locale)",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque expérience au phénomène qu'elle met en évidence.",
+              "question_type": "matching",
+              "explanation": "Étape 4 — Additionner : dans B, les PPSE de la même synapse se suivent de si près qu'ils s'additionnent dans le temps (sommation temporelle) : −70 + 15 = −55 mV. Dans C, deux synapses différentes agissent en même temps, ce qui donne une sommation spatiale : −70 + 5 + 5 = −60 mV. Dans D, N2 provoque un PPSI. Dans E, le neurone additionne les PPSE de N1 et le PPSI de N2 : −70 + 15 − 5 = −60 mV.",
+              "answers": [
+                {
+                  "content": "B : trois PA rapprochés de N1",
+                  "match": "Sommation temporelle"
+                },
+                {
+                  "content": "C : N1 et N1' activés en même temps",
+                  "match": "Sommation spatiale"
+                },
+                {
+                  "content": "D : N2 activé seul",
+                  "match": "Hyperpolarisation par un PPSI"
+                },
+                {
+                  "content": "E : N1 et N2 activés ensemble",
+                  "match": "Addition d'un PPSE et d'un PPSI"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi aucun PA ne naît-il dans M lors de l'expérience E ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Additionner puis comparer au seuil : trois PPSE de N1 amènent la ddp à −55 mV (expérience B), et le PPSI de N2 apporte −5 mV, soit −60 mV, plus bas que le seuil. Étape 5 — Conclure : le seuil n'est pas atteint, donc aucun PA. N1 a produit ses PA normalement : l'inhibition se fait dans M, par addition des potentiels, non sur N1.",
+              "answers": [
+                {
+                  "content": "La somme des PPSE et du PPSI amène la ddp à −60 mV, sous le seuil de −55 mV",
+                  "correct": true
+                },
+                {
+                  "content": "Le PPSI empêche N1 de produire ses PA",
+                  "correct": false
+                },
+                {
+                  "content": "La loi du tout ou rien impose qu'un PA ne naisse jamais avec deux neurones actifs",
+                  "correct": false
+                },
+                {
+                  "content": "Les PPSE de N1 sont détruits par N2 dans la fente synaptique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience E, le neurone N2 empêche N1 de libérer son neurotransmetteur.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Déterminer l'effet de chaque synapse : si N1 ne libérait rien, la ddp de M serait de −75 mV, effet de N2 seul. Or elle atteint −60 mV, soit −70 + 15 − 5, ce qui prouve que les PPSE de N1 sont bien produits. N2 agit donc sur M, par un PPSI qui s'additionne aux PPSE. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que montre l'expérience F ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Suivre le trajet du message : arrivée du PA, libération du neurotransmetteur, fixation sur les récepteurs. Les PA de N1 sont normaux dans sa terminaison : la propagation n'est pas en cause. Le neurotransmetteur déposé directement sur M donne un PPSE normal (−65 mV) : il n'est pas détruit et les récepteurs de M fonctionnent. L'étape touchée est donc la libération du neurotransmetteur par la terminaison de N1.",
+              "answers": [
+                {
+                  "content": "La substance Y empêche la libération du neurotransmetteur par la terminaison de N1, mais les récepteurs de M fonctionnent",
+                  "correct": true
+                },
+                {
+                  "content": "La substance Y bloque les récepteurs de M",
+                  "correct": false
+                },
+                {
+                  "content": "La substance Y bloque la propagation des PA dans l'axone de N1",
+                  "correct": false
+                },
+                {
+                  "content": "La substance Y détruit le neurotransmetteur de N1",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir des expériences A à E, explique comment M intègre les messages reçus pour décider d'émettre ou non un PA.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "PPSE et PPSI locaux et gradués, de signes opposés (1 point)",
+                "Sommation spatiale et temporelle, avec une valeur tirée des expériences (1 point)",
+                "Addition algébrique des potentiels et comparaison au seuil de −55 mV (1 point)",
+                "Conclusion : un PA naît dans B, pas dans E (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Chaque neurone excitateur provoque dans M un PPSE (+5 mV) et N2 un PPSI (−5 mV) : ces potentiels sont locaux et gradués. M les additionne : des PPSE rapprochés dans le temps (expérience B) ou venus de synapses différentes en même temps (expérience C) s'ajoutent, ce sont les sommations temporelle et spatiale. M compare la somme au seuil de −55 mV. Dans B, −70 + 15 = −55 mV : le seuil est atteint et un PA naît. Dans E, −70 + 15 − 5 = −60 mV : le seuil n'est pas atteint, il n'y a pas de PA. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Chaque neurone excitateur provoque dans M un PPSE..."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

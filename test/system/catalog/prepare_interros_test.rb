@@ -22,7 +22,8 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     page.execute_script("window.lnclassNotReloaded = true")
 
     within "#prepare-interros" do
-      assert_selector ".ps-title", text: "LE THÉORÈME"
+      assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
+      assert_selector ".ps-subject", text: "Le théorème"
       within frame(@exercise) do
         assert_no_selector "input, textarea, [role=radio], [role=radiogroup]"
         assert_no_button "Vérifier ma réponse"
@@ -57,7 +58,8 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     visit course_path(@course.slug)
 
     within "#prepare-interros" do
-      assert_selector ".ps-title", text: "LE THÉORÈME"
+      assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
+      assert_selector ".ps-subject", text: "Le théorème"
       assert_selector frame(@exercise)
       assert_no_button "Assigner", exact: false
       assert_no_button "Vérifier ma réponse"

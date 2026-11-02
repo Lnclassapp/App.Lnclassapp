@@ -1,0 +1,1834 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Composés carbonylés : aldéhydes et cétones",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "molecule-ethanal",
+          "kind": "molecule",
+          "description": "La molécule d'éthanal CH3-CHO est dessinée en formule développée. Un atome de carbone portant trois hydrogènes est relié par une liaison simple à un second carbone. Ce second carbone porte un hydrogène et il est lié à un atome d'oxygène par une double liaison C=O : c'est le groupe carbonyle d'un aldéhyde, situé en bout de chaîne.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 3,
+                "y": 6
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 3,
+                "y": 4
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 1,
+                "y": 6
+              },
+              {
+                "id": "h3",
+                "element": "H",
+                "x": 3,
+                "y": 8
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "h4",
+                "element": "H",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 9,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "h1",
+                1
+              ],
+              [
+                "c1",
+                "h2",
+                1
+              ],
+              [
+                "c1",
+                "h3",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "h4",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "molecule-propanone",
+          "kind": "molecule",
+          "description": "La molécule de propanone CH3-CO-CH3 est dessinée en formule développée. Un carbone central est lié par une double liaison à un atome d'oxygène placé au-dessus (groupe carbonyle C=O) et par des liaisons simples à deux carbones voisins. Chacun de ces deux carbones porte trois hydrogènes : le carbone du groupe carbonyle n'a aucun hydrogène, c'est une cétone.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "h3",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 5,
+                "y": 6
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 5,
+                "y": 3
+              },
+              {
+                "id": "c3",
+                "element": "C",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "h4",
+                "element": "H",
+                "x": 8,
+                "y": 4
+              },
+              {
+                "id": "h5",
+                "element": "H",
+                "x": 8,
+                "y": 8
+              },
+              {
+                "id": "h6",
+                "element": "H",
+                "x": 10,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "h1",
+                1
+              ],
+              [
+                "c1",
+                "h2",
+                1
+              ],
+              [
+                "c1",
+                "h3",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                2
+              ],
+              [
+                "c2",
+                "c3",
+                1
+              ],
+              [
+                "c3",
+                "h4",
+                1
+              ],
+              [
+                "c3",
+                "h5",
+                1
+              ],
+              [
+                "c3",
+                "h6",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "oxydation-des-alcools",
+          "kind": "diagram",
+          "description": "Schéma fléché de l'oxydation d'un alcool, de gauche à droite. L'alcool primaire donne un aldéhyde par oxydation ménagée, puis un acide carboxylique par oxydation poussée avec un oxydant en excès. L'alcool secondaire donne une cétone par oxydation ménagée. Les formules générales R-CH2-OH, R-CHO, R-COOH, R-CH(OH)-R' et R-CO-R' sont écrites dans les cases.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "prim",
+                "label": "Alcool primaire R-CH2-OH"
+              },
+              {
+                "id": "ald",
+                "label": "Aldéhyde R-CHO"
+              },
+              {
+                "id": "acid",
+                "label": "Acide carboxylique R-COOH"
+              },
+              {
+                "id": "sec",
+                "label": "Alcool secondaire R-CH(OH)-R'"
+              },
+              {
+                "id": "cet",
+                "label": "Cétone R-CO-R'"
+              }
+            ],
+            "edges": [
+              {
+                "from": "prim",
+                "to": "ald",
+                "label": "oxydation ménagée"
+              },
+              {
+                "from": "ald",
+                "to": "acid",
+                "label": "oxydant en excès"
+              },
+              {
+                "from": "sec",
+                "to": "cet",
+                "label": "oxydation ménagée"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demarche-identification",
+          "kind": "diagram",
+          "description": "Arbre de décision pour identifier un composé inconnu. On commence par le test à la DNPH. S'il est négatif, le composé n'a pas de groupe carbonyle. S'il est positif (précipité jaune-orangé), c'est un composé carbonylé : on fait alors le test de Fehling, de Tollens ou de Schiff. Un test positif conclut à un aldéhyde, un test négatif conclut à une cétone.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "x",
+                "label": "Composé inconnu"
+              },
+              {
+                "id": "dnph",
+                "label": "Test à la DNPH"
+              },
+              {
+                "id": "non",
+                "label": "Test négatif : pas de groupe C=O"
+              },
+              {
+                "id": "oui",
+                "label": "Précipité jaune-orangé : composé carbonylé"
+              },
+              {
+                "id": "spec",
+                "label": "Test de Fehling, de Tollens ou de Schiff"
+              },
+              {
+                "id": "cet",
+                "label": "Test négatif : cétone"
+              },
+              {
+                "id": "ald",
+                "label": "Test positif : aldéhyde"
+              }
+            ],
+            "edges": [
+              {
+                "from": "x",
+                "to": "dnph"
+              },
+              {
+                "from": "dnph",
+                "to": "non",
+                "label": "négatif"
+              },
+              {
+                "from": "dnph",
+                "to": "oui",
+                "label": "positif"
+              },
+              {
+                "from": "oui",
+                "to": "spec"
+              },
+              {
+                "from": "spec",
+                "to": "cet",
+                "label": "négatif"
+              },
+              {
+                "from": "spec",
+                "to": "ald",
+                "label": "positif"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un aldéhyde ou une cétone",
+          "remember": "Le **groupe carbonyle** est la double liaison $\\mathrm{C=O}$ : un atome de carbone lié à un atome d'oxygène par une double liaison. Les **composés carbonylés** en possèdent un. Dans un **aldéhyde**, le carbone du groupe carbonyle est lié à **au moins un atome d'hydrogène** : il est en bout de chaîne et le groupe s'écrit $\\mathrm{-CHO}$ (formule générale $\\mathrm{R-CHO}$). Dans une **cétone**, ce carbone est lié à **deux atomes de carbone** : le groupe s'écrit $\\mathrm{-CO-}$ (formule générale $\\mathrm{R-CO-R'}$). Un aldéhyde ou une cétone saturé à chaîne ouverte a pour formule brute $\\mathrm{C_nH_{2n}O}$. Un aldéhyde et une cétone de même formule brute, comme le propanal et la propanone $\\mathrm{C_3H_6O}$, sont des **isomères de fonction**. Attention : dans $\\mathrm{CH_3-COOH}$, le carbone du groupe $\\mathrm{C=O}$ porte aussi un groupe $\\mathrm{-OH}$ : ce n'est ni un aldéhyde ni une cétone.",
+          "method": [
+            "Repérer la double liaison $\\mathrm{C=O}$ (le groupe carbonyle) dans la formule développée ou semi-développée.",
+            "Regarder les atomes liés au carbone de ce groupe $\\mathrm{C=O}$ : un atome d'hydrogène, ou deux atomes de carbone.",
+            "Conclure : un hydrogène lié à ce carbone (groupe $\\mathrm{-CHO}$), c'est un aldéhyde ; deux carbones liés (groupe $\\mathrm{-CO-}$), c'est une cétone.",
+            "Vérifier avec la formule brute $\\mathrm{C_nH_{2n}O}$ si elle est donnée : un aldéhyde et une cétone saturés ont tous deux cette forme."
+          ],
+          "example": {
+            "statement": "Reconnaître la famille de $\\mathrm{CH_3-CH_2-CHO}$ et celle de $\\mathrm{CH_3-CO-CH_2-CH_3}$.",
+            "steps": [
+              "Repérer : dans les deux formules, on trouve le groupe carbonyle $\\mathrm{C=O}$.",
+              "Regarder : dans la première, le carbone du $\\mathrm{C=O}$ est lié à un carbone ($\\mathrm{CH_2}$) et à un hydrogène ; dans la seconde, il est lié à deux carbones ($\\mathrm{CH_3}$ et $\\mathrm{CH_2}$).",
+              "Conclure : la première est un aldéhyde (groupe $\\mathrm{-CHO}$), la seconde est une cétone (groupe $\\mathrm{-CO-}$).",
+              "Vérifier : $\\mathrm{C_3H_6O}$ et $\\mathrm{C_4H_8O}$ s'écrivent $\\mathrm{C_nH_{2n}O}$ avec $n = 3$ puis $n = 4$."
+            ]
+          },
+          "pitfall": "Ne pas conclure « aldéhyde » dès qu'on voit $\\mathrm{C=O}$. Les deux familles ont ce groupe : seul ce qui est lié au carbone décide. Contre-exemple : l'éthanal $\\mathrm{CH_3-CHO}$ et la propanone $\\mathrm{CH_3-CO-CH_3}$ ont chacun un $\\mathrm{C=O}$. Dans l'éthanal, ce carbone porte un hydrogène : aldéhyde. Dans la propanone, il est lié à deux carbones et n'a aucun hydrogène : cétone. Et si le carbone du $\\mathrm{C=O}$ porte aussi un $\\mathrm{-OH}$ ($\\mathrm{CH_3-COOH}$), ce n'est ni l'un ni l'autre. Pose donc toujours la question : qu'y a-t-il d'autre sur ce carbone ?",
+          "figure": "molecule-ethanal",
+          "exercise": {
+            "title": "Distinguer un aldéhyde d'une cétone",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu repères le groupe carbonyle et tu classes des composés en aldéhydes et en cétones avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel groupe caractérise les composés carbonylés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un composé carbonylé contient le groupe carbonyle, c'est-à-dire un carbone lié à un oxygène par une double liaison C=O. Le groupe -OH est celui des alcools, la double liaison C=C celle des alcènes, et -COOH celui des acides carboxyliques : aucun ne définit les aldéhydes et les cétones.",
+                "answers": [
+                  {
+                    "content": "La double liaison C=O (groupe carbonyle)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le groupe -OH (groupe hydroxyle)",
+                    "correct": false
+                  },
+                  {
+                    "content": "La double liaison C=C",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe -COOH",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une cétone, le carbone du groupe carbonyle est lié à un atome d'hydrogène.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Regarder : on examine les atomes liés au carbone du C=O. Étape 3 — Conclure : dans une cétone ce carbone est lié à deux atomes de carbone et à aucun hydrogène (groupe -CO-). C'est dans un aldéhyde que ce carbone porte un hydrogène (groupe -CHO). L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La formule $\\mathrm{CH_3-CH_2-CHO}$ est celle d'un ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le groupe C=O est en bout de chaîne. Étape 2 — Regarder : le carbone du C=O est lié à un carbone et à un hydrogène. Étape 3 — Conclure : groupe -CHO, c'est un aldéhyde (le propanal). Une cétone aurait deux carbones liés au C=O.",
+                "answers": [
+                  {
+                    "content": "aldéhyde",
+                    "correct": true
+                  },
+                  {
+                    "content": "cétone",
+                    "correct": false
+                  },
+                  {
+                    "content": "alcool",
+                    "correct": false
+                  },
+                  {
+                    "content": "acide carboxylique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque formule à sa famille.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on cherche le groupe C=O. Étape 2 — Regarder : dans la première formule il est en bout de chaîne avec un hydrogène ; dans la deuxième il est entre deux carbones ; la troisième n'a pas de C=O, seulement un groupe -OH. Étape 3 — Conclure : aldéhyde, cétone, alcool.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-CHO}$",
+                    "match": "Aldéhyde"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CO-CH_2-CH_3}$",
+                    "match": "Cétone"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-OH}$",
+                    "match": "Alcool"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles formules sont celles de cétones ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on cherche le C=O dans chaque formule. Étape 2 — Regarder : dans $\\mathrm{CH_3-CO-CH_3}$ et $\\mathrm{CH_3-CH_2-CO-CH_3}$ le carbone du C=O est lié à deux carbones. Étape 3 — Conclure : ce sont deux cétones. $\\mathrm{CH_3-CH_2-CHO}$ est un aldéhyde ; $\\mathrm{CH_3-CH_2-COOH}$ est un acide carboxylique (le carbone du C=O porte un -OH) ; $\\mathrm{CH_3-CH(OH)-CH_3}$ est un alcool sans C=O.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CO-CH_3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CO-CH_3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CHO}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-COOH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH(OH)-CH_3}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à reconnaître les deux familles à partir de leur groupe caractéristique.",
+            "questions": [
+              {
+                "content": "Dans le groupe carbonyle $\\mathrm{C=O}$, le carbone est lié à un atome d'___ dans un aldéhyde, et à ___ atomes de carbone dans une cétone.",
+                "question_type": "select",
+                "hint": "Pense aux groupes -CHO et -CO-.",
+                "explanation": "Étape 2 — Regarder : on examine ce qui est lié au carbone du C=O. Dans un aldéhyde (-CHO), ce carbone porte un atome d'hydrogène. Dans une cétone (-CO-), il est lié à deux atomes de carbone. Étape 3 — Conclure : hydrogène, puis deux.",
+                "answers": [
+                  {
+                    "content": "hydrogène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "oxygène",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "azote",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "trois",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le composé de formule $\\mathrm{CH_3-CO-CH_3}$ est une ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le groupe C=O est au milieu de la chaîne. Étape 2 — Regarder : son carbone est lié à deux carbones (les deux groupes CH3). Étape 3 — Conclure : c'est une cétone, la propanone.",
+                "answers": [
+                  {
+                    "content": "cétone",
+                    "correct": true
+                  },
+                  {
+                    "content": "cétones",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le carbone du C=O a-t-il un hydrogène ?"
+              },
+              {
+                "content": "Parmi ces formules, laquelle est celle d'un aldéhyde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche le groupe C=O. Étape 2 — Regarder : seule la première formule a un C=O en bout de chaîne avec un hydrogène sur ce carbone. Étape 3 — Conclure : $\\mathrm{CH_3-CH_2-CH_2-CHO}$ est un aldéhyde. La deuxième est une cétone, la troisième un alcool, la quatrième un acide carboxylique.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-CHO}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CO-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-OH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-COOH}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le groupe -CHO en bout de chaîne."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nommer un aldéhyde ou une cétone",
+          "remember": "Le nom vient de celui de l'alcane de même chaîne carbonée (méthane, éthane, propane, butane, pentane, hexane…) dont on remplace le « e » final. **Aldéhyde** : terminaison **-al**. Le carbone du groupe $\\mathrm{-CHO}$ est toujours le carbone numéro 1, donc on n'écrit pas son numéro : $\\mathrm{CH_3-CHO}$ éthanal, $\\mathrm{CH_3-CH_2-CHO}$ propanal. **Cétone** : terminaison **-one**, précédée du **numéro du carbone du groupe carbonyle** : $\\mathrm{CH_3-CO-CH_3}$ propanone (une seule position possible), $\\mathrm{CH_3-CH_2-CO-CH_3}$ butan-2-one. Pour la chaîne principale, on prend la chaîne **la plus longue qui contient le carbone du groupe C=O**, numérotée de façon que ce carbone ait le **plus petit numéro**. Les ramifications s'écrivent devant, avec leur numéro : $\\mathrm{CH_3-CH(CH_3)-CH_2-CHO}$ se nomme 3-méthylbutanal.",
+          "method": [
+            "Repérer la chaîne carbonée la plus longue qui contient le carbone du groupe carbonyle, et nommer l'alcane correspondant.",
+            "Numéroter cette chaîne pour que le carbone du groupe carbonyle ait le plus petit numéro (le numéro 1 pour un aldéhyde).",
+            "Remplacer le « e » final de l'alcane par « al » (aldéhyde) ou par « one » précédé du numéro du carbone du groupe carbonyle (cétone).",
+            "Placer devant le nom chaque ramification avec son numéro (méthyl, éthyl…), puis relire le nom complet."
+          ],
+          "example": {
+            "statement": "Nommer $\\mathrm{CH_3-CH_2-CH(CH_3)-CHO}$.",
+            "steps": [
+              "Repérer : la chaîne la plus longue qui contient le groupe $\\mathrm{-CHO}$ compte 4 carbones ; l'alcane correspondant est le butane.",
+              "Numéroter : le carbone du $\\mathrm{-CHO}$ reçoit le numéro 1 ; la ramification $\\mathrm{CH_3}$ est portée par le carbone 2.",
+              "Remplacer : c'est un aldéhyde, donc butane devient butanal (pas de numéro à écrire pour le groupe $\\mathrm{-CHO}$).",
+              "Placer : une ramification méthyle en 2, donc le nom complet est 2-méthylbutanal."
+            ]
+          },
+          "pitfall": "Ne pas numéroter la chaîne du mauvais côté pour une cétone. Contre-exemple : $\\mathrm{CH_3-CH_2-CO-CH_2-CH_2-CH_3}$ a 6 carbones. En numérotant depuis la gauche, le $\\mathrm{C=O}$ est en 4 ; depuis la droite, il est en 3. On garde le plus petit numéro : c'est l'hexan-3-one, et non l'hexan-4-one. Pour un aldéhyde, ne cherche pas de numéro : le $\\mathrm{-CHO}$ est toujours en 1 (on écrit butanal, jamais butan-1-al). Compte toujours depuis le bout qui donne le plus petit numéro au groupe carbonyle.",
+          "figure": "molecule-propanone",
+          "exercise": {
+            "title": "Nommer des aldéhydes et des cétones",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu nommes des aldéhydes et des cétones, et tu retrouves leur formule à partir du nom, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_3-CH_2-CH_2-CHO}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la chaîne la plus longue qui contient le groupe -CHO a 4 carbones (butane). Étape 2 — Numéroter : le carbone du -CHO est le numéro 1. Étape 3 — Remplacer : c'est un aldéhyde, butane devient butanal. Étape 4 : pas de ramification. Butan-2-one serait une cétone, butan-1-ol un alcool.",
+                "answers": [
+                  {
+                    "content": "butanal",
+                    "correct": true
+                  },
+                  {
+                    "content": "butan-2-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "propanal",
+                    "correct": false
+                  },
+                  {
+                    "content": "butan-1-ol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le composé $\\mathrm{CH_3-CH_2-CHO}$ s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la chaîne a 3 carbones, c'est le propane. Étape 2 — Numéroter : le carbone du -CHO porte le numéro 1. Étape 3 — Remplacer : le « e » final de propane devient « al » : propanal. Étape 4 : pas de ramification. Le nom est donc propanal, sans numéro.",
+                "answers": [
+                  {
+                    "content": "propanal",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le composé $\\mathrm{CH_3-CO-CH_2-CH_2-CH_3}$ s'appelle ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la chaîne la plus longue a 5 carbones (pentane). Étape 2 — Numéroter : depuis la gauche, le C=O est en 2 ; depuis la droite, il serait en 4 ; on garde 2. Étape 3 — Remplacer : « e » devient « one » précédé du numéro : pentan-2-one. Pentan-4-one oublie de prendre le plus petit numéro.",
+                "answers": [
+                  {
+                    "content": "pentan-2-one",
+                    "correct": true
+                  },
+                  {
+                    "content": "pentan-3-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "pentan-4-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "pentanal",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque formule à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer la chaîne : 2 carbones (éthane), 3 carbones (propane), 5 carbones (pentane), 3 carbones (propane). Étape 2 — Numéroter : le C=O est en 3 au centre de la chaîne de 5 ; dans le dernier composé la ramification méthyle est en 2. Étape 3 — Remplacer : éthanal, propanone, pentan-3-one, propanal. Étape 4 — Placer : 2-méthylpropanal.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CHO}$",
+                    "match": "éthanal"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CO-CH_3}$",
+                    "match": "propanone"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CO-CH_2-CH_3}$",
+                    "match": "pentan-3-one"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH(CH_3)-CHO}$",
+                    "match": "2-méthylpropanal"
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_3-CH_2-CH_2-CO-CH_2-CH_3}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la chaîne a 6 carbones (hexane). Étape 2 — Numéroter : depuis la gauche, le C=O est en 4 ; depuis la droite, il est en 3. On garde le plus petit numéro, 3. Étape 3 — Remplacer : hexan-3-one. Hexan-4-one est l'erreur du piège : numéroter du mauvais côté. Hexanal serait un aldéhyde, ce qu'il n'est pas.",
+                "answers": [
+                  {
+                    "content": "hexan-3-one",
+                    "correct": true
+                  },
+                  {
+                    "content": "hexan-4-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "hexan-2-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "hexanal",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à nommer et à compter les carbones d'une chaîne principale.",
+            "questions": [
+              {
+                "content": "Le composé $\\mathrm{CH_3-CH_2-CH_2-CH_2-CHO}$ est un ___ et son nom est ___.",
+                "question_type": "select",
+                "hint": "Compte les carbones, y compris celui du groupe -CHO.",
+                "explanation": "Étape 1 — Repérer : la chaîne a 5 carbones, c'est le pentane. Étape 2 — Numéroter : le carbone du -CHO est le numéro 1. Étape 3 — Remplacer : le groupe -CHO est celui d'un aldéhyde, donc pentane devient pentanal.",
+                "answers": [
+                  {
+                    "content": "aldéhyde",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "cétone",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "pentanal",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "pentan-2-one",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "butanal",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le nom d'un aldéhyde se termine par « ___ » : on remplace le « e » final de l'alcane.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Remplacer : pour un aldéhyde, le « e » final de l'alcane devient « al » (éthane donne éthanal). Pour une cétone, il devient « one » précédé d'un numéro.",
+                "answers": [
+                  {
+                    "content": "al",
+                    "correct": true
+                  },
+                  {
+                    "content": "-al",
+                    "correct": true
+                  }
+                ],
+                "hint": "Éthane donne éthanal."
+              },
+              {
+                "content": "Combien d'atomes de carbone comporte la chaîne principale du 3-méthylbutanal ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le nom se termine par butanal, donc la chaîne principale est celle du butane, soit 4 carbones. Le méthyle en 3 est une ramification : son carbone n'est pas compté dans la chaîne principale. Étape 4 : le composé a donc 5 carbones au total, mais 4 dans la chaîne principale.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "But- veut dire 4."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Obtenir un composé carbonylé par oxydation ménagée d'un alcool",
+          "remember": "Tu as vu à la leçon 2 que l'**oxydation ménagée** d'un alcool conserve la chaîne carbonée : un oxydant (ion dichromate $\\mathrm{Cr_2O_7^{2-}}$ ou ion permanganate $\\mathrm{MnO_4^-}$, en milieu acide) retire deux atomes d'hydrogène à l'alcool, celui du groupe $\\mathrm{-OH}$ et un de ceux du **carbone fonctionnel** (le carbone qui porte le $\\mathrm{-OH}$). **Alcool primaire** (2 H sur le carbone fonctionnel) : avec un oxydant en défaut, il donne un **aldéhyde** : $\\mathrm{R-CH_2-OH \\rightarrow R-CHO + 2H^+ + 2e^-}$. **Alcool secondaire** (1 H) : il donne une **cétone** : $\\mathrm{R-CH(OH)-R' \\rightarrow R-CO-R' + 2H^+ + 2e^-}$. **Alcool tertiaire** (0 H) : pas d'oxydation ménagée. Avec un oxydant en excès, l'aldéhyde est oxydé à son tour en acide carboxylique : c'est l'oxydation poussée.",
+          "method": [
+            "Écrire la formule semi-développée de l'alcool et repérer le carbone fonctionnel, celui qui porte le groupe $\\mathrm{-OH}$.",
+            "Compter les hydrogènes portés par ce carbone : 2 pour un alcool primaire, 1 pour un secondaire, 0 pour un tertiaire.",
+            "Choisir le produit : primaire (oxydant en défaut), un aldéhyde ; secondaire, une cétone ; tertiaire, aucune oxydation ménagée.",
+            "Écrire la formule du produit en gardant la chaîne carbonée ($\\mathrm{-CH_2-OH}$ devient $\\mathrm{-CHO}$, $\\mathrm{-CH(OH)-}$ devient $\\mathrm{-CO-}$), puis le nommer.",
+            "Écrire les demi-équations, égaliser les électrons, additionner et simplifier pour obtenir l'équation bilan."
+          ],
+          "example": {
+            "statement": "On oxyde de façon ménagée le propan-2-ol par une solution acidifiée de dichromate de potassium. Donner le produit et l'équation bilan.",
+            "steps": [
+              "Écrire : $\\mathrm{CH_3-CH(OH)-CH_3}$ ; le carbone fonctionnel est le carbone central, qui porte le groupe $\\mathrm{-OH}$.",
+              "Compter : ce carbone porte 1 hydrogène, donc c'est un alcool secondaire.",
+              "Choisir : un alcool secondaire donne une cétone.",
+              "Écrire la formule : $\\mathrm{-CH(OH)-}$ devient $\\mathrm{-CO-}$, donc $\\mathrm{CH_3-CO-CH_3}$ ; c'est la propanone.",
+              "Écrire les demi-équations : $\\mathrm{C_3H_8O \\rightarrow C_3H_6O + 2H^+ + 2e^-}$ (fois 3) et $\\mathrm{Cr_2O_7^{2-} + 14H^+ + 6e^- \\rightarrow 2Cr^{3+} + 7H_2O}$. On additionne : $\\mathrm{3C_3H_8O + Cr_2O_7^{2-} + 8H^+ \\rightarrow 3C_3H_6O + 2Cr^{3+} + 7H_2O}$."
+            ]
+          },
+          "pitfall": "Ne pas croire que tout alcool donne un composé carbonylé, ni que la classe n'a pas d'importance. Contre-exemple 1 : le 2-méthylpropan-2-ol $\\mathrm{(CH_3)_3C-OH}$ a un carbone fonctionnel sans hydrogène : aucune oxydation ménagée, donc ni aldéhyde ni cétone. Contre-exemple 2 : le propan-1-ol et le propan-2-ol ont la même formule brute $\\mathrm{C_3H_8O}$, mais le premier est primaire et donne le propanal (un aldéhyde), le second est secondaire et donne la propanone (une cétone). Compte toujours les hydrogènes du carbone fonctionnel avant de choisir le produit.",
+          "figure": "oxydation-des-alcools",
+          "exercise": {
+            "title": "Prévoir le produit d'une oxydation ménagée",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu prévois le produit de l'oxydation ménagée d'un alcool selon sa classe, puis tu utilises l'équation bilan, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel produit obtient-on par oxydation ménagée du butan-2-ol ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : CH3-CH(OH)-CH2-CH3, le carbone fonctionnel est le carbone 2. Étape 2 — Compter : il porte 1 hydrogène, c'est un alcool secondaire. Étape 3 — Choisir : un alcool secondaire donne une cétone. Étape 4 — Écrire la formule : -CH(OH)- devient -CO-, soit CH3-CO-CH2-CH3, la butan-2-one. Le butanal viendrait du butan-1-ol, alcool primaire.",
+                "answers": [
+                  {
+                    "content": "La butan-2-one, une cétone",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le butanal, un aldéhyde",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'acide butanoïque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun produit : il n'y a pas d'oxydation ménagée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le 2-méthylpropan-2-ol subit une oxydation ménagée qui donne une cétone.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : (CH3)3C-OH, le carbone fonctionnel est lié à trois groupes CH3. Étape 2 — Compter : il porte 0 hydrogène, c'est un alcool tertiaire. Étape 3 — Choisir : un alcool tertiaire n'a pas d'oxydation ménagée. L'affirmation est fausse : sans hydrogène à retirer sur le carbone fonctionnel, le groupe C=O ne peut pas se former.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'oxydation ménagée de l'éthanol $\\mathrm{CH_3-CH_2-OH}$ par un oxydant en défaut donne l'aldéhyde appelé ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : CH3-CH2-OH, le carbone fonctionnel est le CH2. Étape 2 — Compter : il porte 2 hydrogènes, c'est un alcool primaire. Étape 3 — Choisir : l'oxydant est en défaut, on obtient un aldéhyde. Étape 4 — Écrire la formule : -CH2-OH devient -CHO, soit CH3-CHO, l'éthanal.",
+                "answers": [
+                  {
+                    "content": "éthanal",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque alcool au produit de son oxydation ménagée.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Compter les hydrogènes du carbone fonctionnel : propan-1-ol 2 H (primaire), propan-2-ol 1 H (secondaire), butan-1-ol 2 H (primaire), 2-méthylpropan-2-ol 0 H (tertiaire). Étape 3 — Choisir : primaire donne un aldéhyde, secondaire une cétone, tertiaire rien. Étape 4 — Écrire la formule : propanal, propanone, butanal, et aucun produit pour l'alcool tertiaire.",
+                "answers": [
+                  {
+                    "content": "Propan-1-ol",
+                    "match": "Propanal"
+                  },
+                  {
+                    "content": "Propan-2-ol",
+                    "match": "Propanone"
+                  },
+                  {
+                    "content": "Butan-1-ol",
+                    "match": "Butanal"
+                  },
+                  {
+                    "content": "2-méthylpropan-2-ol",
+                    "match": "Aucune oxydation ménagée"
+                  }
+                ]
+              },
+              {
+                "content": "L'oxydation ménagée du propan-2-ol suit l'équation 3 $\\mathrm{C_3H_8O}$ + $\\mathrm{Cr_2O_7^{2-}}$ + 8 $\\mathrm{H^+}$ donne 3 $\\mathrm{C_3H_6O}$ + 2 $\\mathrm{Cr^{3+}}$ + 7 $\\mathrm{H_2O}$. L'alcool est en excès et 0,020 mol d'ions dichromate sont consommés. Quelle quantité maximale de propanone obtient-on ?",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "explanation": "Étape 5 — Écrire l'équation bilan : 3 mol de propan-2-ol réagissent avec 1 mol de dichromate et donnent 3 mol de propanone. Le dichromate est le réactif limitant. Donc n(propanone) = 3 × n(dichromate) = 3 × 0,020 = 0,060 mol. Piège : prendre un rapport 1 pour 1 donnerait 0,020 mol, en oubliant le coefficient 3.",
+                "answers": [
+                  {
+                    "content": "0.060",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à classer un alcool et à prévoir son produit.",
+            "questions": [
+              {
+                "content": "L'alcool $\\mathrm{CH_3-CH_2-CH_2-OH}$ est un alcool ___ ; avec un oxydant en défaut, son oxydation ménagée donne un ___.",
+                "question_type": "select",
+                "hint": "Compte les hydrogènes du carbone qui porte le groupe -OH.",
+                "explanation": "Étape 1 — Écrire : le carbone fonctionnel est le CH2 en bout de chaîne. Étape 2 — Compter : il porte 2 hydrogènes, c'est un alcool primaire. Étape 3 — Choisir : l'oxydant est en défaut, on obtient un aldéhyde, le propanal. L'acide carboxylique demande un oxydant en excès.",
+                "answers": [
+                  {
+                    "content": "primaire",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "secondaire",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "tertiaire",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "aldéhyde",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "cétone",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "acide carboxylique",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel alcool donne la pentan-2-one par oxydation ménagée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Écrire la formule en sens inverse : la pentan-2-one est CH3-CO-CH2-CH2-CH3, son groupe -CO- est en position 2. Il vient de -CH(OH)- en position 2 : le pentan-2-ol, alcool secondaire (Étape 2). Le pentan-1-ol donne un aldéhyde, le pentan-3-ol donne la pentan-3-one, et le 2-méthylbutan-2-ol est tertiaire.",
+                "answers": [
+                  {
+                    "content": "Le pentan-2-ol",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pentan-1-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pentan-3-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 2-méthylbutan-2-ol",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le groupe C=O est en position 2 : où était le groupe -OH ?"
+              },
+              {
+                "content": "Dans la demi-équation d'oxydation d'un alcool secondaire en cétone, combien d'électrons sont libérés par molécule d'alcool ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 5 — Écrire les demi-équations : R-CH(OH)-R' donne R-CO-R' + 2 H+ + 2 e-. L'alcool perd deux atomes d'hydrogène, soit 2 H+ et 2 électrons. Il y a donc 2 électrons libérés par molécule d'alcool.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde le nombre d'électrons dans la demi-équation de la fiche."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Identifier un composé carbonylé par des tests",
+          "remember": "Quatre tests caractérisent les composés carbonylés. **DNPH** (2,4-dinitrophénylhydrazine) : un **précipité jaune-orangé** apparaît avec les aldéhydes **et** les cétones ; il révèle le groupe $\\mathrm{C=O}$, sans distinguer les deux familles. **Liqueur de Fehling** (solution bleue contenant des ions cuivre(II)), chauffée : précipité **rouge brique** d'oxyde de cuivre(I) avec un aldéhyde ; elle reste bleue avec une cétone. **Réactif de Tollens** (nitrate d'argent ammoniacal, qui contient des ions $\\mathrm{Ag^+}$), chauffé doucement : dépôt d'argent sur la paroi du tube, le **miroir d'argent**, avec un aldéhyde ; rien avec une cétone. **Réactif de Schiff** (solution décolorée) : il se colore en **rose** avec un aldéhyde ; il reste incolore avec une cétone. Seuls les aldéhydes donnent un résultat positif avec Fehling, Tollens et Schiff.",
+          "method": [
+            "Faire le test à la DNPH sur le composé inconnu.",
+            "Interpréter : pas de précipité jaune-orangé, le composé n'a pas de groupe carbonyle ; précipité jaune-orangé, c'est un composé carbonylé (aldéhyde ou cétone).",
+            "Faire, sur un composé carbonylé, un test propre aux aldéhydes : liqueur de Fehling, réactif de Tollens ou réactif de Schiff.",
+            "Conclure : test positif (précipité rouge brique, miroir d'argent ou coloration rose), c'est un aldéhyde ; test négatif, c'est une cétone."
+          ],
+          "example": {
+            "statement": "Trois flacons A, B, C contiennent de l'éthanol, de l'éthanal et de la propanone, dans un ordre inconnu. La DNPH ne donne rien avec A et un précipité jaune-orangé avec B et C. Chauffée, la liqueur de Fehling donne un précipité rouge brique avec B et reste bleue avec C. Identifier A, B et C.",
+            "steps": [
+              "Faire : le test à la DNPH a été fait sur les trois flacons.",
+              "Interpréter : A ne donne pas de précipité, il n'a pas de groupe C=O : c'est l'éthanol. B et C donnent un précipité jaune-orangé : ce sont des composés carbonylés.",
+              "Faire : le test de Fehling a été fait sur B et C, les deux composés carbonylés.",
+              "Conclure : B donne un précipité rouge brique, test positif, donc un aldéhyde : l'éthanal. C reste bleue, test négatif, donc une cétone : la propanone."
+            ]
+          },
+          "pitfall": "Ne pas conclure « aldéhyde » avec la seule DNPH. Elle réagit avec les deux familles. Contre-exemple : la propanone donne un précipité jaune-orangé avec la DNPH, et pourtant c'est une cétone ; seul un test propre aux aldéhydes (Fehling, Tollens, Schiff) permet de trancher. De même, un test de Fehling négatif ne prouve pas l'absence de groupe $\\mathrm{C=O}$ : la propanone le laisse bleu. Commence toujours par la DNPH, puis fais le second test.",
+          "figure": "demarche-identification",
+          "exercise": {
+            "title": "Identifier un composé carbonylé",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu choisis les bons tests, tu interprètes leurs résultats et tu identifies un composé, avec la démarche de la fiche.",
+            "questions": [
+              {
+                "content": "Quel réactif donne un précipité jaune-orangé avec les aldéhydes et avec les cétones ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Faire le test à la DNPH : c'est le test commun aux deux familles. Étape 2 — Interpréter : le précipité jaune-orangé montre la présence d'un groupe C=O. Les trois autres réactifs (Fehling, Tollens, Schiff) ne réagissent qu'avec les aldéhydes : ils servent à l'Étape 3, pas à repérer toutes les familles.",
+                "answers": [
+                  {
+                    "content": "La DNPH",
+                    "correct": true
+                  },
+                  {
+                    "content": "La liqueur de Fehling",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le réactif de Tollens",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le réactif de Schiff",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On teste de l'éthanal. Quelles observations sont correctes ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 et 2 — La DNPH donne un précipité jaune-orangé : l'éthanal est un composé carbonylé. Étape 3 — Faire un test propre aux aldéhydes : l'éthanal est un aldéhyde, donc Fehling donne un précipité rouge brique, et Tollens un miroir d'argent. Étape 4 — Conclure : un test positif. Les deux dernières propositions décrivent un test négatif, celui d'une cétone, et sont fausses.",
+                "answers": [
+                  {
+                    "content": "Précipité jaune-orangé avec la DNPH",
+                    "correct": true
+                  },
+                  {
+                    "content": "Précipité rouge brique avec la liqueur de Fehling chauffée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Miroir d'argent avec le réactif de Tollens",
+                    "correct": true
+                  },
+                  {
+                    "content": "La liqueur de Fehling reste bleue",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le réactif de Schiff reste incolore",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un précipité jaune-orangé avec la DNPH prouve que le composé est un aldéhyde.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Interpréter : le précipité jaune-orangé montre seulement la présence d'un groupe C=O, donc d'un composé carbonylé. Il apparaît aussi avec une cétone comme la propanone. Étape 3 et 4 : il faut un test propre aux aldéhydes (Fehling, Tollens ou Schiff) pour conclure. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre la démarche pour identifier un composé inconnu.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Faire le test à la DNPH pour savoir s'il y a un groupe C=O. Étape 2 — Interpréter le résultat : seul un précipité jaune-orangé autorise la suite. Étape 3 — Faire un test propre aux aldéhydes sur ce composé carbonylé. Étape 4 — Conclure : positif, aldéhyde ; négatif, cétone. Inverser les étapes mène à des conclusions fausses.",
+                "answers": [
+                  {
+                    "content": "Faire le test à la DNPH."
+                  },
+                  {
+                    "content": "Interpréter : un précipité jaune-orangé révèle un composé carbonylé."
+                  },
+                  {
+                    "content": "Faire un test propre aux aldéhydes (Fehling, Tollens ou Schiff)."
+                  },
+                  {
+                    "content": "Conclure : test positif, aldéhyde ; test négatif, cétone."
+                  }
+                ]
+              },
+              {
+                "content": "Un composé donne un précipité jaune-orangé avec la DNPH, mais la liqueur de Fehling chauffée reste bleue. De quel composé s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Interpréter : le précipité avec la DNPH indique un composé carbonylé, donc un groupe C=O. Étape 3 — Faire le test de Fehling : il reste bleu, le test est négatif. Étape 4 — Conclure : test négatif, c'est une cétone. Ce n'est pas un aldéhyde (Fehling serait positif) ni un alcool (la DNPH serait négative).",
+                "answers": [
+                  {
+                    "content": "Une cétone",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un aldéhyde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un alcool",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un composé sans groupe C=O",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à lire les résultats des tests caractéristiques.",
+            "questions": [
+              {
+                "content": "Avec un aldéhyde, le réactif de Tollens donne un ___ d'argent sur la paroi du tube ; avec une cétone, il donne un résultat ___.",
+                "question_type": "select",
+                "hint": "Pense au dépôt brillant sur le verre.",
+                "explanation": "Étape 3 — Faire un test propre aux aldéhydes : le réactif de Tollens contient des ions argent. Étape 4 — Conclure : avec un aldéhyde, il se forme un dépôt brillant d'argent appelé miroir d'argent (test positif) ; avec une cétone, il ne se passe rien (test négatif).",
+                "answers": [
+                  {
+                    "content": "miroir",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "précipité jaune-orangé",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "liquide bleu",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "négatif",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "positif",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque réactif à son observation avec un aldéhyde.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — La DNPH donne un précipité jaune-orangé (avec aldéhydes et cétones). Étape 3 — Les tests propres aux aldéhydes : la liqueur de Fehling chauffée donne un précipité rouge brique, le réactif de Schiff se colore en rose. Étape 4 — Conclure : ces observations sont celles d'un test positif.",
+                "answers": [
+                  {
+                    "content": "DNPH",
+                    "match": "Précipité jaune-orangé"
+                  },
+                  {
+                    "content": "Liqueur de Fehling chauffée",
+                    "match": "Précipité rouge brique"
+                  },
+                  {
+                    "content": "Réactif de Schiff",
+                    "match": "Coloration rose"
+                  }
+                ]
+              },
+              {
+                "content": "Pour distinguer l'éthanal de la propanone, on peut utiliser la liqueur de ___ chauffée.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Faire un test propre aux aldéhydes : la liqueur de Fehling chauffée donne un précipité rouge brique avec l'éthanal (un aldéhyde) et reste bleue avec la propanone (une cétone). La DNPH, elle, ne les distingue pas : elle donne un précipité avec les deux.",
+                "answers": [
+                  {
+                    "content": "Fehling",
+                    "correct": true
+                  }
+                ],
+                "hint": "Son nom est celui d'un chimiste allemand, et sa couleur de départ est bleue."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Oxyder un aldéhyde en acide carboxylique",
+          "remember": "Un aldéhyde s'oxyde facilement en **acide carboxylique** de même chaîne carbonée : le groupe $\\mathrm{-CHO}$ devient $\\mathrm{-COOH}$. Demi-équation : $\\mathrm{R-CHO + H_2O \\rightarrow R-COOH + 2H^+ + 2e^-}$. Une cétone n'est pas oxydée dans ces conditions : c'est pourquoi elle ne donne pas les tests de Fehling, de Tollens et de Schiff. Le nom de l'acide se forme avec « acide » et la terminaison « -oïque » : éthanal donne l'acide éthanoïque, propanal donne l'acide propanoïque. L'étude de ces acides vient plus loin dans l'année. Demi-équations des oxydants usuels : $\\mathrm{MnO_4^- + 8H^+ + 5e^- \\rightarrow Mn^{2+} + 4H_2O}$ ; $\\mathrm{Cr_2O_7^{2-} + 14H^+ + 6e^- \\rightarrow 2Cr^{3+} + 7H_2O}$ ; $\\mathrm{Ag^+ + e^- \\rightarrow Ag}$. Le miroir d'argent du réactif de Tollens est l'argent formé par cette dernière.",
+          "method": [
+            "Écrire la formule de l'aldéhyde et celle de l'acide carboxylique de même chaîne : $\\mathrm{-CHO}$ devient $\\mathrm{-COOH}$.",
+            "Écrire la demi-équation de l'aldéhyde : $\\mathrm{R-CHO + H_2O \\rightarrow R-COOH + 2H^+ + 2e^-}$, en remplaçant R par la chaîne.",
+            "Écrire la demi-équation de l'oxydant, donnée par l'énoncé ou par le couple utilisé.",
+            "Multiplier chaque demi-équation pour que les électrons échangés soient en même nombre.",
+            "Additionner, simplifier les $\\mathrm{H^+}$ et les $\\mathrm{H_2O}$ communs, puis vérifier les atomes et la charge."
+          ],
+          "example": {
+            "statement": "Écrire l'équation bilan de l'oxydation de l'éthanal par les ions permanganate en milieu acide.",
+            "steps": [
+              "Écrire : l'aldéhyde est $\\mathrm{CH_3-CHO}$ ; l'acide de même chaîne est $\\mathrm{CH_3-COOH}$, l'acide éthanoïque.",
+              "Écrire la demi-équation de l'aldéhyde : $\\mathrm{CH_3-CHO + H_2O \\rightarrow CH_3-COOH + 2H^+ + 2e^-}$.",
+              "Écrire la demi-équation de l'oxydant : $\\mathrm{MnO_4^- + 8H^+ + 5e^- \\rightarrow Mn^{2+} + 4H_2O}$.",
+              "Multiplier : la première par 5 et la seconde par 2, pour avoir 10 électrons de chaque côté.",
+              "Additionner et simplifier : $\\mathrm{5CH_3-CHO + 2MnO_4^- + 6H^+ \\rightarrow 5CH_3-COOH + 2Mn^{2+} + 3H_2O}$. Vérifier : 10 C, 26 H, 13 O et la charge +4 de chaque côté."
+            ]
+          },
+          "pitfall": "Ne pas oublier l'eau dans la demi-équation de l'aldéhyde. Contre-exemple : écrire $\\mathrm{CH_3-CHO \\rightarrow CH_3-COOH + 2H^+ + 2e^-}$ est faux : il y a 1 atome d'oxygène à gauche et 2 à droite, et 4 hydrogènes à gauche contre 6 à droite. Il faut $\\mathrm{H_2O}$ à gauche. Dans l'oxydation d'un alcool primaire en aldéhyde il n'y a pas d'eau ; dans celle de l'aldéhyde en acide, il y en a. Vérifie toujours les atomes et la charge avant d'additionner.",
+          "figure": null,
+          "exercise": {
+            "title": "Oxyder un aldéhyde en acide carboxylique",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu prévois l'acide obtenu à partir d'un aldéhyde, tu écris des demi-équations et tu utilises une équation bilan, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quel produit obtient-on en oxydant l'éthanal par un oxydant en excès ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : l'aldéhyde est CH3-CHO ; le groupe -CHO devient -COOH, donc l'acide de même chaîne est CH3-COOH. Étape 2 — Demi-équation : CH3-CHO + H2O donne CH3-COOH + 2 H+ + 2 e-. L'éthanol serait obtenu par une réduction, pas par une oxydation, et la propanone a trois carbones.",
+                "answers": [
+                  {
+                    "content": "L'acide éthanoïque",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'éthanol",
+                    "correct": false
+                  },
+                  {
+                    "content": "La propanone",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'éthane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cétone est oxydée en acide carboxylique de même chaîne, comme un aldéhyde.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : seul un aldéhyde a le groupe -CHO qui devient -COOH. Une cétone n'a pas de groupe -CHO et n'est pas oxydée dans ces conditions : elle reste inchangée, ce qui explique que Fehling, Tollens et Schiff donnent un résultat négatif avec elle. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'aldéhyde $\\mathrm{CH_3-CH_2-CHO}$ donne l'acide de formule $\\mathrm{CH_3-CH_2-}$___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire la formule de l'acide : le groupe -CHO devient -COOH, la chaîne carbonée CH3-CH2- est conservée. L'acide est donc CH3-CH2-COOH, l'acide propanoïque. On écrit COOH.",
+                "answers": [
+                  {
+                    "content": "COOH",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire l'équation bilan de l'oxydation d'un aldéhyde.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire les formules : -CHO devient -COOH. Étape 2 — Demi-équation de l'aldéhyde, avec H2O. Étape 3 — Demi-équation de l'oxydant. Étape 4 — Multiplier pour égaliser les électrons. Étape 5 — Additionner, simplifier et vérifier. L'ordre compte : on ne peut pas égaliser les électrons avant d'avoir écrit les deux demi-équations.",
+                "answers": [
+                  {
+                    "content": "Écrire les formules de l'aldéhyde et de l'acide de même chaîne."
+                  },
+                  {
+                    "content": "Écrire la demi-équation de l'aldéhyde, avec l'eau."
+                  },
+                  {
+                    "content": "Écrire la demi-équation de l'oxydant."
+                  },
+                  {
+                    "content": "Multiplier pour égaliser les électrons échangés."
+                  },
+                  {
+                    "content": "Additionner, simplifier, puis vérifier atomes et charge."
+                  }
+                ]
+              },
+              {
+                "content": "L'équation bilan est 5 R-CHO + 2 $\\mathrm{MnO_4^-}$ + 6 $\\mathrm{H^+}$ donne 5 R-COOH + 2 $\\mathrm{Mn^{2+}}$ + 3 $\\mathrm{H_2O}$. On oxyde 0,10 mol d'aldéhyde. Quelle quantité minimale d'ions permanganate faut-il ?",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "explanation": "Étape 5 — Additionner et lire l'équation bilan : 5 mol d'aldéhyde réagissent avec 2 mol d'ions permanganate. Donc n(permanganate) = 0,10 × 2 / 5 = 0,040 mol. Piège : prendre un rapport 1 pour 1 donnerait 0,10 mol, en oubliant les coefficients 5 et 2 obtenus à l'Étape 4 en égalisant les électrons.",
+                "answers": [
+                  {
+                    "content": "0.040",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire les demi-équations et à lire l'équation bilan.",
+            "questions": [
+              {
+                "content": "Dans l'oxydation d'un aldéhyde, le groupe ___ se transforme en groupe ___.",
+                "question_type": "select",
+                "hint": "Pense à la formule générale R-CHO.",
+                "explanation": "Étape 1 — Écrire : l'aldéhyde R-CHO s'oxyde en acide carboxylique de même chaîne R-COOH. Le groupe -CHO devient donc le groupe -COOH. La chaîne carbonée R est conservée.",
+                "answers": [
+                  {
+                    "content": "CHO",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "COOH",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "OH",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "COOH",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "CHO",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "CO",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la demi-équation d'oxydation du propanal ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire la demi-équation de l'aldéhyde, avec H2O à gauche : CH3-CH2-CHO + H2O donne CH3-CH2-COOH + 2 H+ + 2 e-. Vérification : 3 C, 8 H et 2 O de chaque côté (en comptant l'eau à gauche et les 2 H+ à droite), charge nulle. La deuxième oublie l'eau, la troisième est une réduction, la quatrième oublie les ions H+.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CHO + H_2O \\rightarrow CH_3-CH_2-COOH + 2H^+ + 2e^-}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CHO \\rightarrow CH_3-CH_2-COOH + 2H^+ + 2e^-}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CHO + 2H^+ + 2e^- \\rightarrow CH_3-CH_2-CH_2-OH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CHO + H_2O \\rightarrow CH_3-CH_2-COOH + 2e^-}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compte les atomes d'oxygène de chaque côté de la flèche."
+              },
+              {
+                "content": "Équation bilan : 3 R-CHO + $\\mathrm{Cr_2O_7^{2-}}$ + 8 $\\mathrm{H^+}$ donne 3 R-COOH + 2 $\\mathrm{Cr^{3+}}$ + 4 $\\mathrm{H_2O}$. Quelle quantité d'aldéhyde réagit avec 0,020 mol d'ions dichromate ?",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "explanation": "Étape 5 — Lire l'équation bilan : 3 mol d'aldéhyde réagissent avec 1 mol d'ions dichromate. Donc n(aldéhyde) = 3 × 0,020 = 0,060 mol. Ce rapport 3 pour 1 vient de l'Étape 4 : 6 électrons échangés, 2 par aldéhyde et 6 par ion dichromate.",
+                "answers": [
+                  {
+                    "content": "0.060",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche le rapport entre les coefficients de l'aldéhyde et du dichromate."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Étiqueter trois flacons du laboratoire",
+          "exercise_type": "fixation",
+          "figure": "demarche-identification",
+          "statement": "Au laboratoire du lycée, trois flacons A, B et C ont perdu leur étiquette. Chacun contient un liquide parmi le propan-1-ol, le propanal et la propanone (l'acétone, dissolvant du vernis à ongles). Le professeur fait deux tests. Avec la DNPH, A et C donnent un précipité jaune-orangé et B ne donne rien. Avec la liqueur de Fehling chauffée, A donne un précipité rouge brique et C reste bleue.",
+          "questions": [
+            {
+              "content": "Trois flacons contiennent du propan-1-ol, du propanal et de la propanone. La DNPH donne un précipité jaune-orangé avec A et C, et rien avec B. Quel flacon contient le propan-1-ol ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on interprète d'abord le test à la DNPH. Le précipité jaune-orangé apparaît avec tout composé qui possède un groupe C=O, aldéhyde ou cétone. Le propanal et la propanone ont un C=O ; le propan-1-ol est un alcool, sans C=O, donc la DNPH ne donne rien. Le flacon B, sans précipité, contient donc le propan-1-ol. Les flacons A et C contiennent les deux composés carbonylés.",
+              "answers": [
+                {
+                  "content": "Le flacon B",
+                  "correct": true
+                },
+                {
+                  "content": "Le flacon A",
+                  "correct": false
+                },
+                {
+                  "content": "Le flacon C",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la liqueur de Fehling chauffée, A donne un précipité rouge brique, C reste bleue. Le flacon A contient du ___.",
+              "question_type": "select",
+              "explanation": "Méthode : parmi A et C, tous deux carbonylés, on utilise un test propre aux aldéhydes. Le précipité rouge brique avec la liqueur de Fehling est un test positif : A est un aldéhyde, donc le propanal. C, dont la liqueur reste bleue (test négatif), est une cétone. Le propan-1-ol est dans le flacon B, il ne donnerait rien avec la DNPH.",
+              "answers": [
+                {
+                  "content": "propanal",
+                  "correct": true
+                },
+                {
+                  "content": "propanone",
+                  "correct": false
+                },
+                {
+                  "content": "propan-1-ol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le flacon C contient la propanone, de formule $\\mathrm{CH_3-CO-CH_3}$. Cette famille de composés s'appelle les ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : on repère le groupe C=O de la propanone et on regarde ses voisins. Le carbone du C=O est lié à deux carbones (les deux groupes CH3), sans hydrogène : groupe -CO-. C'est donc une cétone. Cela est cohérent avec le test de Fehling négatif de C : une cétone ne donne pas de précipité rouge brique.",
+              "answers": [
+                {
+                  "content": "cétones",
+                  "correct": true
+                },
+                {
+                  "content": "cétone",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Comme A et C donnent un précipité jaune-orangé avec la DNPH, ce sont deux aldéhydes.",
+              "question_type": "true_false",
+              "explanation": "Méthode : la DNPH réagit avec les aldéhydes et avec les cétones, car elle réagit avec le groupe C=O. Le précipité prouve seulement que A et C sont des composés carbonylés. Pour distinguer l'aldéhyde de la cétone, il faut le test de Fehling : positif pour A (aldéhyde), négatif pour C (cétone). L'affirmation est donc fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la masse molaire de la propanone $\\mathrm{C_3H_6O}$ ? On donne M(C) = 12 g/mol, M(H) = 1 g/mol et M(O) = 16 g/mol.",
+              "question_type": "numeric",
+              "unit": "g/mol",
+              "tolerance": 0,
+              "explanation": "Méthode : données — formule C3H6O, M(C) = 12, M(H) = 1, M(O) = 16 g/mol. Formule : M = 3 × M(C) + 6 × M(H) + 1 × M(O). Application numérique : M = 3 × 12 + 6 × 1 + 16 = 36 + 6 + 16 = 58 g/mol.",
+              "answers": [
+                {
+                  "content": "58",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le professeur verse 29 g de propanone, de masse molaire 58 g/mol, dans une éprouvette. Quelle quantité de matière de propanone cela représente-t-il ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.01,
+              "explanation": "Méthode : données — m = 29 g, M = 58 g/mol. Formule : n = m / M. Application numérique : n = 29 / 58 = 0,50 mol. L'unité est la mole. Piège : multiplier 29 par 58 au lieu de diviser donnerait un nombre énorme et absurde.",
+              "answers": [
+                {
+                  "content": "0.50",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "De l'alcool au composé carbonylé",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Un élève du laboratoire dispose de deux alcools isomères de formule brute C4H10O : le butan-1-ol et le butan-2-ol. Il les oxyde chacun de façon ménagée par une solution acidifiée de dichromate de potassium, l'oxydant étant en défaut, puis il teste les produits obtenus.",
+          "questions": [
+            {
+              "content": "Le butan-1-ol $\\mathrm{CH_3-CH_2-CH_2-CH_2-OH}$ est ...",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1, on repère le carbone fonctionnel, celui qui porte le groupe -OH : c'est le CH2 en bout de chaîne. Étape 2, on compte ses hydrogènes : il en porte 2, donc le butan-1-ol est un alcool primaire. Le butan-2-ol, lui, a un carbone fonctionnel avec 1 seul hydrogène : il est secondaire.",
+              "answers": [
+                {
+                  "content": "un alcool primaire",
+                  "correct": true
+                },
+                {
+                  "content": "un alcool secondaire",
+                  "correct": false
+                },
+                {
+                  "content": "un alcool tertiaire",
+                  "correct": false
+                },
+                {
+                  "content": "un aldéhyde",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'oxydation ménagée du butan-1-ol par l'oxydant en défaut donne le ___.",
+              "question_type": "select",
+              "explanation": "Méthode : le butan-1-ol est primaire et l'oxydant est en défaut, donc on obtient un aldéhyde. Le groupe -CH2-OH devient -CHO en gardant les 4 carbones : CH3-CH2-CH2-CHO, le butanal. L'acide butanoïque demanderait un oxydant en excès (oxydation poussée).",
+              "answers": [
+                {
+                  "content": "butanal",
+                  "correct": true
+                },
+                {
+                  "content": "butan-2-one",
+                  "correct": false
+                },
+                {
+                  "content": "acide butanoïque",
+                  "correct": false
+                },
+                {
+                  "content": "butane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'oxydation ménagée du butan-2-ol donne une cétone appelée ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : le butan-2-ol est secondaire (1 hydrogène sur le carbone fonctionnel), donc il donne une cétone. Le groupe -CH(OH)- devient -CO- sans changer la chaîne : CH3-CO-CH2-CH3. Le C=O est en position 2 (on numérote pour qu'il ait le plus petit numéro) : c'est la butan-2-one.",
+              "answers": [
+                {
+                  "content": "butan-2-one",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les deux produits donnent un précipité jaune-orangé avec la DNPH. Quel test permet de les distinguer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : la DNPH donne le même résultat avec le butanal (aldéhyde) et la butan-2-one (cétone). Il faut un test propre aux aldéhydes : la liqueur de Fehling chauffée donne un précipité rouge brique avec le butanal et reste bleue avec la butan-2-one. Le test de Tollens ou de Schiff convient aussi.",
+              "answers": [
+                {
+                  "content": "La liqueur de Fehling chauffée",
+                  "correct": true
+                },
+                {
+                  "content": "Un second test à la DNPH",
+                  "correct": false
+                },
+                {
+                  "content": "Le dichromate acidifié",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun test ne le permet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'oxydation du butan-2-ol suit l'équation 3 $\\mathrm{C_4H_{10}O}$ + $\\mathrm{Cr_2O_7^{2-}}$ + 8 $\\mathrm{H^+}$ donne 3 $\\mathrm{C_4H_8O}$ + 2 $\\mathrm{Cr^{3+}}$ + 7 $\\mathrm{H_2O}$. On oxyde 0,60 mol de butan-2-ol, entièrement consommé. Quelle quantité d'ions dichromate faut-il ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.01,
+              "explanation": "Méthode : on lit l'équation bilan. 3 mol de butan-2-ol réagissent avec 1 mol d'ions dichromate. Donc n(dichromate) = 0,60 × 1 / 3 = 0,20 mol. Piège : prendre un rapport 1 pour 1 donnerait 0,60 mol, en oubliant le coefficient 3 de l'alcool.",
+              "answers": [
+                {
+                  "content": "0.20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles propositions sont vraies pour le butanal et la butan-2-one, produits des deux oxydations ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : on compare les deux composés. Le butanal CH3-CH2-CH2-CHO et la butan-2-one CH3-CO-CH2-CH3 ont tous les deux 4 C, 8 H et 1 O : C4H8O, ce sont des isomères. Tous deux ont un groupe C=O, donc la DNPH donne un précipité. Seul le butanal, un aldéhyde, donne le miroir d'argent. L'un est un aldéhyde, l'autre une cétone. Les alcools de départ sont primaire et secondaire, jamais tertiaire.",
+              "answers": [
+                {
+                  "content": "Les deux ont pour formule brute C4H8O",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux donnent un précipité jaune-orangé avec la DNPH",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux donnent un miroir d'argent avec le réactif de Tollens",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux sont des cétones",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux viennent d'un alcool tertiaire",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du parfum de vanille à l'acide carboxylique",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Pour une exposition sur les parfums et les arômes, des élèves étudient des composés carbonylés. L'arôme de vanille vient de la vanilline, dont la molécule possède un groupe aldéhyde ; les élèves travaillent sur un modèle plus simple. Un alcool A a pour formule brute C3H8O. Son oxydation ménagée par un oxydant en défaut donne un composé B. B donne un précipité jaune-orangé avec la DNPH et un miroir d'argent avec le réactif de Tollens. Avec un oxydant en excès, B donne un composé C, acide carboxylique de même chaîne carbonée que A.",
+          "questions": [
+            {
+              "content": "Que montre le précipité jaune-orangé obtenu avec la DNPH pour le composé B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'identification : Étape 1, on fait le test à la DNPH. Étape 2, on interprète : le précipité jaune-orangé montre seulement la présence du groupe C=O, donc un composé carbonylé (aldéhyde ou cétone). Il ne permet pas de dire s'il s'agit d'un aldéhyde, car la DNPH réagit aussi avec les cétones.",
+              "answers": [
+                {
+                  "content": "B possède un groupe carbonyle C=O",
+                  "correct": true
+                },
+                {
+                  "content": "B est un aldéhyde",
+                  "correct": false
+                },
+                {
+                  "content": "B est un alcool",
+                  "correct": false
+                },
+                {
+                  "content": "B est un acide carboxylique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le miroir d'argent obtenu avec le réactif de Tollens montre que B est ___.",
+              "question_type": "select",
+              "explanation": "Méthode : Étape 3, on fait un test propre aux aldéhydes. Le réactif de Tollens donne un miroir d'argent avec un aldéhyde et rien avec une cétone. Étape 4, on conclut : le test est positif, B est un aldéhyde.",
+              "answers": [
+                {
+                  "content": "un aldéhyde",
+                  "correct": true
+                },
+                {
+                  "content": "une cétone",
+                  "correct": false
+                },
+                {
+                  "content": "un alcool",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "B a 3 atomes de carbone et possède le groupe aldéhyde. Son nom est le ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de nomenclature : Étape 1, la chaîne a 3 carbones (propane). Étape 2, le carbone du groupe -CHO porte le numéro 1. Étape 3, le « e » final devient « al » : propanal. B est CH3-CH2-CHO, de même chaîne que l'alcool A.",
+              "answers": [
+                {
+                  "content": "propanal",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'alcool A, dont l'oxydation ménagée donne l'aldéhyde B, s'appelle le ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : l'oxydation ménagée d'un alcool primaire donne un aldéhyde (-CH2-OH devient -CHO). Pour obtenir le propanal CH3-CH2-CHO en gardant la chaîne, l'alcool de départ est CH3-CH2-CH2-OH, le propan-1-ol. Le propan-2-ol, alcool secondaire, donnerait la propanone, qui ne donne pas de miroir d'argent.",
+              "answers": [
+                {
+                  "content": "propan-1-ol",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'oxydation de B en C par les ions permanganate suit l'équation 5 R-CHO + 2 $\\mathrm{MnO_4^-}$ + 6 $\\mathrm{H^+}$ donne 5 R-COOH + 2 $\\mathrm{Mn^{2+}}$ + 3 $\\mathrm{H_2O}$. On oxyde 0,25 mol de propanal. Quelle quantité minimale d'ions permanganate faut-il ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.005,
+              "explanation": "Méthode (Étape 5 de l'oxydation de l'aldéhyde) : on lit l'équation bilan. 5 mol d'aldéhyde réagissent avec 2 mol d'ions permanganate. Donc n(permanganate) = 0,25 × 2 / 5 = 0,10 mol. Ces coefficients viennent de l'égalisation des électrons : 2 e- par aldéhyde, 5 e- par ion permanganate, soit un multiple commun de 10.",
+              "answers": [
+                {
+                  "content": "0.10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On obtient 0,25 mol d'acide propanoïque $\\mathrm{C_3H_6O_2}$, le composé C. Quelle est sa masse ? On donne M(C) = 12 g/mol, M(H) = 1 g/mol et M(O) = 16 g/mol.",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.1,
+              "explanation": "Méthode : données — n = 0,25 mol, M(C) = 12, M(H) = 1, M(O) = 16 g/mol. Formule : M = 3 × 12 + 6 × 1 + 2 × 16 = 36 + 6 + 32 = 74 g/mol, puis m = n × M. Application numérique : m = 0,25 × 74 = 18,5 g. L'unité est le gramme.",
+              "answers": [
+                {
+                  "content": "18.5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les élèves hésitent entre le propan-1-ol et le propan-2-ol pour l'alcool A. Rédige la démarche qui montre que A est le propan-1-ol.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Le propan-2-ol est un alcool ...",
+              "criteria": [
+                "Classe de chaque alcool justifiée par le nombre d'hydrogènes du carbone fonctionnel",
+                "Produit de chaque alcool : le propanal (aldéhyde) ou la propanone (cétone)",
+                "Lien avec les tests : le miroir d'argent est propre aux aldéhydes",
+                "Conclusion : A est le propan-1-ol"
+              ],
+              "explanation": "Corrigé modèle : le propan-1-ol CH3-CH2-CH2-OH est primaire (2 H sur le carbone fonctionnel) : son oxydation ménagée donne le propanal, un aldéhyde. Le propan-2-ol CH3-CH(OH)-CH3 est secondaire (1 H) : son oxydation ménagée donne la propanone, une cétone. Or B donne un miroir d'argent avec le réactif de Tollens, test propre aux aldéhydes, et la propanone ne le donne pas. B est donc le propanal, et A est le propan-1-ol. Barème : classe des deux alcools justifiée (1 point) ; produits des deux oxydations (1 point) ; lien avec le test de Tollens et conclusion (1 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Identifier le solvant d'une usine de vernis",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Au laboratoire d'une usine de vernis d'Abidjan, un technicien doit identifier un solvant carbonylé X de formule brute C4H8O. Le test à la DNPH donne un précipité jaune-orangé. La liqueur de Fehling chauffée reste bleue. Le technicien sait que X s'obtient par oxydation ménagée d'un alcool Y. Il veut préparer X à partir de Y avec une solution acidifiée de permanganate de potassium. On donne M(C) = 12 g/mol, M(H) = 1 g/mol et M(O) = 16 g/mol.",
+          "questions": [
+            {
+              "content": "Quels composés carbonylés ont pour formule brute C4H8O ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : un aldéhyde ou une cétone saturé a pour formule brute CnH2nO ; avec n = 4, on a C4H8O. Les composés carbonylés à 4 carbones sont le butanal et le 2-méthylpropanal (aldéhydes) et la butan-2-one (cétone). La propanone a 3 carbones (C3H6O). Le butan-2-ol est un alcool de formule C4H10O, sans groupe C=O.",
+              "answers": [
+                {
+                  "content": "Le butanal",
+                  "correct": true
+                },
+                {
+                  "content": "Le 2-méthylpropanal",
+                  "correct": true
+                },
+                {
+                  "content": "La butan-2-one",
+                  "correct": true
+                },
+                {
+                  "content": "La propanone",
+                  "correct": false
+                },
+                {
+                  "content": "Le butan-2-ol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que déduit-on des tests, sachant que la DNPH est positive et que la liqueur de Fehling reste bleue ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'identification : Étape 1 et 2, la DNPH donne un précipité, donc X est un composé carbonylé. Étape 3, on fait le test de Fehling, qui est propre aux aldéhydes. Étape 4, le test est négatif (la liqueur reste bleue) : X est une cétone. Parmi les composés de formule C4H8O, seule la butan-2-one est une cétone.",
+              "answers": [
+                {
+                  "content": "X est une cétone",
+                  "correct": true
+                },
+                {
+                  "content": "X est un aldéhyde",
+                  "correct": false
+                },
+                {
+                  "content": "X est un alcool",
+                  "correct": false
+                },
+                {
+                  "content": "X n'a pas de groupe C=O",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi les composés de formule C4H8O, la cétone X s'appelle ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de nomenclature : une cétone à 4 carbones se nomme butane, avec le « e » final remplacé par « one » précédé du numéro du C=O. Le groupe C=O ne peut être qu'au carbone 2 (en position 1 ce serait un aldéhyde, car le carbone serait en bout de chaîne). X est CH3-CO-CH2-CH3, la butan-2-one.",
+              "answers": [
+                {
+                  "content": "butan-2-one",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel alcool Y donne la butan-2-one par oxydation ménagée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on remonte de la cétone à l'alcool. La butan-2-one CH3-CO-CH2-CH3 vient de CH3-CH(OH)-CH2-CH3 : le groupe -CO- remplace -CH(OH)-, la chaîne est conservée. Y est le butan-2-ol, alcool secondaire. Le butan-1-ol donnerait le butanal, le 2-méthylpropan-2-ol est tertiaire (pas d'oxydation ménagée) et le propan-2-ol n'a que 3 carbones.",
+              "answers": [
+                {
+                  "content": "Le butan-2-ol",
+                  "correct": true
+                },
+                {
+                  "content": "Le butan-1-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Le 2-méthylpropan-2-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Le propan-2-ol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le technicien veut obtenir 7,2 g de butan-2-one $\\mathrm{C_4H_8O}$. Quelle quantité de matière cela représente-t-il ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.005,
+              "explanation": "Méthode : données — m = 7,2 g, M(C) = 12, M(H) = 1, M(O) = 16 g/mol. Formule : M = 4 × 12 + 8 × 1 + 16 = 48 + 8 + 16 = 72 g/mol, puis n = m / M. Application numérique : n = 7,2 / 72 = 0,10 mol.",
+              "answers": [
+                {
+                  "content": "0.10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'oxydation du butan-2-ol par les ions permanganate suit l'équation 5 $\\mathrm{C_4H_{10}O}$ + 2 $\\mathrm{MnO_4^-}$ + 6 $\\mathrm{H^+}$ donne 5 $\\mathrm{C_4H_8O}$ + 2 $\\mathrm{Mn^{2+}}$ + 8 $\\mathrm{H_2O}$. Pour obtenir 0,10 mol de butan-2-one, quelle quantité minimale d'ions permanganate faut-il ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.002,
+              "explanation": "Méthode : demi-équations (alcool : C4H10O donne C4H8O + 2 H+ + 2 e- ; oxydant : MnO4- + 8 H+ + 5 e- donne Mn2+ + 4 H2O), égalisation à 10 électrons (fois 5 et fois 2), puis addition. L'équation bilan montre que 2 mol de permanganate donnent 5 mol de cétone. Donc n(permanganate) = 0,10 × 2 / 5 = 0,040 mol.",
+              "answers": [
+                {
+                  "content": "0.040",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La solution de permanganate de potassium du laboratoire a pour concentration 0,20 mol/L. Quel volume minimal faut-il pour apporter 0,040 mol d'ions permanganate ?",
+              "question_type": "numeric",
+              "unit": "mL",
+              "tolerance": 5,
+              "explanation": "Méthode : données — n = 0,040 mol, C = 0,20 mol/L. Formule : V = n / C. Application numérique : V = 0,040 / 0,20 = 0,20 L. Conversion : 0,20 L = 200 mL, car 1 L = 1 000 mL. Piège : oublier de convertir donnerait 0,20 au lieu de 200 mL.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

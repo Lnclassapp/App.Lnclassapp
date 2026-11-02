@@ -144,5 +144,15 @@
     <% if @owner %>
       <div class="mt-2"><%= ui_reveal_more result.review.size %></div>
     <% end %>
+    <%# UDR-0149 §3 (ajout du 2026-10-31) : toutes les explications en un bloc sous l'exercice, « a. … b. … » (lettre = rang de la question) ; sans explication, la question est sautée ; les réponses rédigées et le cahier gardent leur corrigé type. %>
+    <% explained = result.review.select { it.auto_graded? && it.explanation.present? } %>
+    <% if explained.any? %>
+      <div id="session_correction" class="mt-4 rounded-ln bg-mist p-4" data-controller="math">
+        <h3 class="font-display text-lg font-medium"><%= t(".correction") %></h3>
+        <% explained.each do |question| %>
+          <p class="mt-2 text-sm whitespace-pre-line text-ink"><%= t(".correction_line", letter: ("a".ord + question.number - 1).chr, text: question.explanation) %></p>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>

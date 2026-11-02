@@ -1,0 +1,1974 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le réflexe conditionnel",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "arc-inne-conditionnel",
+          "kind": "diagram",
+          "description": "Schéma fléché de deux arcs réflexes. Arc inné : aliment dans la bouche, récepteurs de la muqueuse buccale, nerf sensitif, centre salivaire du bulbe rachidien, nerf moteur, glandes salivaires. Arc conditionnel : sonnerie, récepteurs de l'oreille, nerf auditif, centre auditif du cortex cérébral, puis liaison temporaire vers le centre salivaire.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "a1",
+                "label": "Aliment dans la bouche (stimulus absolu)",
+                "category": 1
+              },
+              {
+                "id": "a2",
+                "label": "Récepteurs de la muqueuse buccale"
+              },
+              {
+                "id": "a3",
+                "label": "Nerf sensitif"
+              },
+              {
+                "id": "cs",
+                "label": "Centre salivaire (bulbe rachidien)",
+                "category": 2
+              },
+              {
+                "id": "a5",
+                "label": "Nerf moteur"
+              },
+              {
+                "id": "a6",
+                "label": "Glandes salivaires : salive",
+                "category": 3
+              },
+              {
+                "id": "c1",
+                "label": "Sonnerie (stimulus conditionnel)",
+                "category": 1
+              },
+              {
+                "id": "c2",
+                "label": "Récepteurs de l'oreille"
+              },
+              {
+                "id": "c3",
+                "label": "Nerf auditif"
+              },
+              {
+                "id": "ca",
+                "label": "Centre auditif (cortex cérébral)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "a1",
+                "to": "a2"
+              },
+              {
+                "from": "a2",
+                "to": "a3"
+              },
+              {
+                "from": "a3",
+                "to": "cs"
+              },
+              {
+                "from": "cs",
+                "to": "a5"
+              },
+              {
+                "from": "a5",
+                "to": "a6"
+              },
+              {
+                "from": "c1",
+                "to": "c2"
+              },
+              {
+                "from": "c2",
+                "to": "c3"
+              },
+              {
+                "from": "c3",
+                "to": "ca"
+              },
+              {
+                "from": "ca",
+                "to": "cs",
+                "label": "liaison temporaire"
+              }
+            ],
+            "legend": [
+              "Stimulus",
+              "Centre nerveux",
+              "Effecteur"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-conditionnement",
+          "kind": "diagram",
+          "description": "Schéma fléché des étapes d'un conditionnement chez le chien : avant, la sonnerie seule ne provoque pas de salive ; ensuite la sonnerie, suivie quelques secondes plus tard de l'aliment, est répétée ; après, la sonnerie seule provoque la salive ; enfin, répétée sans aliment, elle perd son effet, et l'association la rétablit.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "e1",
+                "label": "Avant : sonnerie seule, pas de salive (stimulus neutre)",
+                "category": 1
+              },
+              {
+                "id": "e2",
+                "label": "Association répétée : sonnerie, puis aliment",
+                "category": 2
+              },
+              {
+                "id": "e3",
+                "label": "Après : sonnerie seule, salive (stimulus conditionnel)",
+                "category": 3
+              },
+              {
+                "id": "e4",
+                "label": "Sonnerie seule répétée : la salive diminue (extinction)",
+                "category": 4
+              },
+              {
+                "id": "e5",
+                "label": "Nouvelle association (renforcement) : la salive revient",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "e1",
+                "to": "e2"
+              },
+              {
+                "from": "e2",
+                "to": "e3",
+                "label": "nombreuses répétitions"
+              },
+              {
+                "from": "e3",
+                "to": "e4"
+              },
+              {
+                "from": "e4",
+                "to": "e5"
+              }
+            ],
+            "legend": [
+              "Stimulus neutre",
+              "Association",
+              "Réponse conditionnelle",
+              "Extinction"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-associations",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) du nombre de gouttes de salive recueillies pendant 30 secondes à la présentation de la sonnerie seule, en fonction du nombre d'associations sonnerie-aliment déjà réalisées : 0, 1, 5, 11, 14, 15 puis 15 gouttes pour 0, 2, 5, 10, 15, 20 et 30 associations.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              1,
+              5,
+              11,
+              14,
+              15,
+              15
+            ],
+            "labels": [
+              "0",
+              "2",
+              "5",
+              "10",
+              "15",
+              "20",
+              "30"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-extinction",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) du nombre de gouttes de salive en 30 secondes à la sonnerie seule, pour huit essais successifs sans aliment : 15, 12, 9, 5, 2, 1, 0 et 0 gouttes. Le dernier point, 11 gouttes, est mesuré après trois nouvelles associations de la sonnerie avec l'aliment.",
+          "params": {
+            "chart": "line",
+            "series": [
+              15,
+              12,
+              9,
+              5,
+              2,
+              1,
+              0,
+              0,
+              11
+            ],
+            "labels": [
+              "Essai 1",
+              "Essai 2",
+              "Essai 3",
+              "Essai 4",
+              "Essai 5",
+              "Essai 6",
+              "Essai 7",
+              "Essai 8",
+              "Après 3 associations"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "delai-association",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres fictif (résultats simplifiés) du nombre de gouttes de salive à la sonnerie seule, après 20 associations, selon l'ordre et le délai entre sonnerie et aliment : aliment 5 s avant la sonnerie, 0 goutte ; stimulus simultanés, 4 ; sonnerie 2 s avant, 15 ; sonnerie 10 s avant, 9 ; sonnerie 60 s avant, 2.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              0,
+              4,
+              15,
+              9,
+              2
+            ],
+            "labels": [
+              "Aliment 5 s avant",
+              "Simultanés",
+              "Sonnerie 2 s avant",
+              "Sonnerie 10 s avant",
+              "Sonnerie 60 s avant"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-extinction-clochette",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) du nombre de gouttes de salive en 30 secondes à la clochette seule, pour huit soirs sans pâtée : 16, 13, 8, 4, 2, 0, 0 et 0 gouttes. Le dernier point, 11 gouttes, est mesuré après trois nouvelles associations de la clochette avec la pâtée.",
+          "params": {
+            "chart": "line",
+            "series": [
+              16,
+              13,
+              8,
+              4,
+              2,
+              0,
+              0,
+              0,
+              11
+            ],
+            "labels": [
+              "Soir 1",
+              "Soir 2",
+              "Soir 3",
+              "Soir 4",
+              "Soir 5",
+              "Soir 6",
+              "Soir 7",
+              "Soir 8",
+              "Après 3 associations"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Réflexe inné et réflexe conditionnel : les comparer",
+          "remember": "Un **réflexe** est une réponse automatique et involontaire à un stimulus. Le **réflexe inné** (ou inconditionnel) existe dès la naissance, il est le même chez tous les individus de l'espèce et il dure toute la vie. Le stimulus qui le déclenche est le **stimulus absolu** (ou inconditionnel) : la nourriture dans la bouche fait saliver. Le **réflexe conditionnel** (ou acquis) est une réponse à un stimulus qui, au départ, ne la déclenchait pas : c'est le **stimulus neutre**. Il s'acquiert par apprentissage, quand ce stimulus est associé de nombreuses fois au stimulus absolu ; il devient alors le **stimulus conditionnel**. Ce réflexe est propre à l'individu, il peut disparaître et il fait intervenir le cortex cérébral. Les deux réflexes sont automatiques : c'est l'origine qui les distingue.",
+          "method": [
+            "Identifier le stimulus et la réponse de la situation.",
+            "Chercher l'origine de la réponse : existe-t-elle dès la naissance, ou est-elle apparue après des associations répétées ?",
+            "Tester le stimulus seul : déclenche-t-il la réponse sans aucun apprentissage, ou seulement après association ?",
+            "Conclure en nommant le réflexe (inné ou conditionnel) et en justifiant par l'origine de la réponse."
+          ],
+          "example": {
+            "statement": "Dans un lycée de Korhogo, la sonnerie de la cantine retentit chaque jour à midi, juste avant le service du repas. Yao, en seconde depuis trois mois, salive dès qu'il l'entend, même sans voir de nourriture. Aya, arrivée hier, ne salive pas à la sonnerie, mais salive comme tout le monde quand elle mange. Nommer les deux réflexes de Yao et justifier.",
+            "steps": [
+              "Identifier : les stimuli sont la nourriture et la sonnerie ; la réponse est la salivation, automatique dans les deux cas.",
+              "Chercher l'origine : la salivation à la nourriture existe dès la naissance ; la salivation à la sonnerie est apparue après trois mois de repas servis juste après la sonnerie.",
+              "Tester le stimulus seul : la nourriture seule fait saliver tout le monde ; la sonnerie seule ne fait pas saliver Aya, qui n'a pas encore appris.",
+              "Conclure : la salivation à la nourriture est un réflexe inné (stimulus absolu : la nourriture) ; la salivation à la sonnerie est un réflexe conditionnel (stimulus conditionnel : la sonnerie), acquis par association."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une réponse automatique est forcément innée. Contre-exemple : Yao ne décide pas de saliver à la sonnerie, c'est automatique, mais Aya, arrivée hier, ne salive pas : la réponse de Yao a donc été acquise. Pour trancher, demande-toi : ce stimulus déclenchait-il déjà la réponse chez un individu qui n'a rien appris ? Si non, le réflexe est conditionnel.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer réflexe inné et réflexe conditionnel",
+            "statement": "Dans cet exercice, tu compares un réflexe inné et un réflexe conditionnel avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces caractères, lequel est propre au réflexe conditionnel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : on compare des caractères d'un réflexe. Étape 2 — Chercher l'origine : le réflexe conditionnel n'existe pas à la naissance, il s'acquiert par apprentissage et diffère d'un individu à l'autre. Étape 4 — Conclure : la proposition qui parle d'apprentissage et de propre à l'individu est la bonne. Le caractère « présent dès la naissance chez tous » est celui du réflexe inné ; un réflexe n'est jamais décidé volontairement.",
+                "answers": [
+                  {
+                    "content": "Il est acquis par apprentissage et propre à l'individu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est présent dès la naissance chez tous les individus de l'espèce",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est décidé volontairement après réflexion",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est identique et définitif chez tous les individus",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur le réflexe inné ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Chercher l'origine : le réflexe inné ne s'apprend pas, il existe dès la naissance. Étape 3 — Tester le stimulus seul : le stimulus absolu déclenche seul la réponse, chez tous les individus de l'espèce. Étape 4 — Conclure : présent dès la naissance et commun à toute l'espèce. L'association répétée, le caractère propre à l'individu et la disparition possible appartiennent au réflexe conditionnel.",
+                "answers": [
+                  {
+                    "content": "Il est présent dès la naissance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est le même chez tous les individus de l'espèce",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il suppose une association répétée entre deux stimuli",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est propre à chaque individu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il disparaît si le stimulus n'est plus accompagné d'un autre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément de la situation à son nom : à la cantine, la sonnerie retentit juste avant le repas, jour après jour ; au bout de trois mois, la sonnerie seule fait saliver.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : on repère les stimuli et la réponse. Étape 3 — Tester le stimulus seul : la nourriture fait saliver sans apprentissage, c'est le stimulus absolu ; la sonnerie seule ne faisait rien au départ, c'est un stimulus neutre. Étape 4 — Conclure : devenue capable de faire saliver après l'association, la sonnerie est un stimulus conditionnel et la salivation qu'elle provoque est la réponse conditionnelle.",
+                "answers": [
+                  {
+                    "content": "La nourriture dans la bouche",
+                    "match": "Stimulus absolu"
+                  },
+                  {
+                    "content": "La sonnerie avant tout apprentissage",
+                    "match": "Stimulus neutre"
+                  },
+                  {
+                    "content": "La sonnerie après trois mois de repas",
+                    "match": "Stimulus conditionnel"
+                  },
+                  {
+                    "content": "La salivation à la sonnerie seule",
+                    "match": "Réponse conditionnelle"
+                  }
+                ]
+              },
+              {
+                "content": "Un réflexe qui apparaît grâce à l'association répétée de deux stimuli est un réflexe ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher l'origine : la réponse n'existait pas au départ, elle a été acquise après des associations répétées. Étape 4 — Conclure : un tel réflexe est dit conditionnel (ou acquis). Le mot inné est faux, car un réflexe inné existe dès la naissance sans apprentissage.",
+                "answers": [
+                  {
+                    "content": "conditionnel",
+                    "correct": true
+                  },
+                  {
+                    "content": "conditionné",
+                    "correct": true
+                  },
+                  {
+                    "content": "acquis",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après trois mois de repas servis juste après la sonnerie de la cantine, Yao salive dès qu'il l'entend. Comme il ne décide pas de saliver, sa salivation à la sonnerie est un réflexe inné.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la réponse est bien automatique. Étape 2 — Chercher l'origine : elle est apparue après trois mois de repas servis juste après la sonnerie, elle n'existait donc pas avant. Étape 3 — Tester le stimulus seul : un élève qui n'a jamais vécu cette association ne salive pas à la sonnerie seule. Étape 4 — Conclure : automatique ne veut pas dire inné ; cette salivation est un réflexe conditionnel.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un bébé qui vient de naître tète dès qu'on touche ses lèvres : c'est un réflexe ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Chercher l'origine : le bébé n'a rien appris, la réponse existe dès la naissance. Étape 3 — Tester le stimulus seul : le contact sur les lèvres déclenche à lui seul la succion. Étape 4 — Conclure : c'est un réflexe inné. Il n'est ni conditionnel (aucune association) ni volontaire (le nourrisson ne le décide pas).",
+                "answers": [
+                  {
+                    "content": "inné",
+                    "correct": true
+                  },
+                  {
+                    "content": "conditionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "volontaire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à nommer un réflexe en suivant la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le stimulus qui déclenche un réflexe dès la naissance, sans aucun apprentissage, s'appelle le stimulus ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Tester le stimulus seul : un stimulus qui déclenche la réponse sans apprentissage est le stimulus absolu (ou inconditionnel). Étape 4 — Conclure : on le distingue du stimulus neutre, qui ne la déclenche pas au départ.",
+                "answers": [
+                  {
+                    "content": "absolu",
+                    "correct": true
+                  },
+                  {
+                    "content": "inconditionnel",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense au stimulus qui fait saliver un bébé : il n'a rien eu à apprendre."
+              },
+              {
+                "content": "Un réflexe conditionnel peut disparaître au cours de la vie d'un individu.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher l'origine : le réflexe conditionnel est acquis, il dépend d'une association. Étape 4 — Conclure : s'il n'est plus entretenu, il peut s'affaiblir et disparaître, contrairement au réflexe inné, qui est permanent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare la durée d'un réflexe acquis et d'un réflexe présent dès la naissance."
+              },
+              {
+                "content": "Un petit garçon salive en entendant la louche cogner la marmite, bruit qui précède toujours le repas chez lui. Quelles sont les deux affirmations exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : stimulus = bruit de la louche, réponse = salivation. Étape 2 — Chercher l'origine : la réponse est apparue après des repas précédés du bruit. Étape 3 — Tester le stimulus seul : le bruit seul ne faisait rien au départ. Étape 4 — Conclure : stimulus conditionnel et réponse acquise. Le cousin n'a pas fait l'apprentissage, il ne salive donc pas à ce bruit.",
+                "answers": [
+                  {
+                    "content": "Le bruit de la louche est devenu un stimulus conditionnel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa salivation au bruit est acquise",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bruit de la louche est un stimulus absolu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa salivation au bruit existait dès sa naissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son cousin, qui vit loin, salive forcément au même bruit",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le bruit seul faisait-il saliver l'enfant avant d'être associé au repas ?"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour nommer un réflexe.",
+                "question_type": "ordering",
+                "explanation": "On commence par Identifier le stimulus et la réponse (étape 1), on cherche ensuite l'origine de la réponse (étape 2), on teste le stimulus seul (étape 3), puis on conclut en nommant le réflexe et en justifiant (étape 4).",
+                "answers": [
+                  {
+                    "content": "Identifier le stimulus et la réponse"
+                  },
+                  {
+                    "content": "Chercher l'origine de la réponse"
+                  },
+                  {
+                    "content": "Tester le stimulus seul"
+                  },
+                  {
+                    "content": "Conclure en nommant le réflexe et en justifiant"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Établir un réflexe conditionnel : les expériences de Pavlov",
+          "remember": "Le physiologiste russe **Pavlov** a étudié la salivation du chien : la salive est recueillie, puis ses gouttes sont comptées. L'**aliment** dans la gueule fait saliver : c'est le **stimulus absolu**. La **sonnerie** seule ne fait pas saliver : c'est un **stimulus neutre**. On présente la sonnerie quelques secondes avant l'aliment, et on répète. Après de nombreuses associations, la sonnerie seule fait saliver : elle est devenue **stimulus conditionnel**, et la salivation est la **réponse conditionnelle**. Conditions d'établissement : associations **répétées** ; stimulus neutre qui **précède de peu** le stimulus absolu (si l'ordre est inversé ou le délai trop long, le réflexe s'établit mal ou pas) ; animal **sain, motivé, attentif**, non distrait par d'autres stimuli.",
+          "method": [
+            "Vérifier avant le conditionnement ce que chaque stimulus provoque : le stimulus absolu déclenche la réponse, le stimulus neutre non.",
+            "Repérer l'association : l'ordre des stimuli, le délai qui les sépare et le nombre de répétitions.",
+            "Tester le stimulus neutre seul après l'association et comparer la réponse avec celle d'avant.",
+            "Conclure en nommant le stimulus conditionnel et la réponse conditionnelle, puis en indiquant si les conditions d'établissement sont réunies."
+          ],
+          "example": {
+            "statement": "Dans une expérience fictive de type Pavlov, un chien en bonne santé et affamé reçoit de l'aliment : il produit 20 gouttes de salive en 30 secondes. La sonnerie seule produit 0 goutte. Ensuite, la sonnerie retentit 3 secondes avant l'aliment, 15 fois de suite. Au test, la sonnerie seule produit 14 gouttes. Analyser cette expérience.",
+            "steps": [
+              "Vérifier : avant l'expérience, l'aliment provoque 20 gouttes (stimulus absolu) et la sonnerie seule 0 goutte (stimulus neutre).",
+              "Repérer l'association : la sonnerie précède l'aliment de 3 secondes, la séquence est répétée 15 fois, sur un chien sain et affamé.",
+              "Tester la sonnerie seule : elle provoque maintenant 14 gouttes contre 0 avant l'association.",
+              "Conclure : la sonnerie est devenue un stimulus conditionnel et les 14 gouttes sont la réponse conditionnelle ; les conditions d'établissement sont réunies (répétition, ordre, délai court, animal motivé)."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'il suffit de présenter les deux stimuli ensemble, dans n'importe quel ordre. Contre-exemple : si l'aliment est donné avant la sonnerie, même 30 fois, la sonnerie seule ne fait pas saliver le chien. De même, une seule association ne suffit pas : la réponse grandit avec le nombre de répétitions. Vérifie toujours l'ordre, le délai et le nombre d'associations.",
+          "figure": "etapes-conditionnement",
+          "exercise": {
+            "title": "Analyser l'établissement d'un réflexe conditionnel",
+            "statement": "Dans cet exercice, tu analyses une expérience fictive de type Pavlov (résultats simplifiés) avec la méthode de la fiche. Les gouttes de salive à la sonnerie seule sont comptées sur 30 secondes, après un nombre croissant d'associations sonnerie puis aliment.",
+            "exercise_type": "fixation",
+            "figure": "courbe-associations",
+            "questions": [
+              {
+                "content": "Chez un chien, la sonnerie seule ne provoque aucune salivation avant l'expérience. Quel est son statut avant le conditionnement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier avant conditionnement : on regarde ce que chaque stimulus déclenche. Un stimulus qui ne provoque pas la réponse étudiée est neutre. Étape 4 — Conclure : la sonnerie est un stimulus neutre. Elle ne deviendra conditionnelle qu'après association répétée avec le stimulus absolu ; le stimulus absolu, lui, est l'aliment, qui fait saliver sans apprentissage.",
+                "answers": [
+                  {
+                    "content": "Un stimulus neutre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un stimulus absolu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un stimulus conditionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un stimulus inhibiteur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une expérience, on compte les gouttes de salive pendant 30 secondes à la sonnerie seule. Après 0, 2, 5, 10, 15, 20 et 30 associations sonnerie-aliment, on recueille respectivement 0, 1, 5, 11, 14, 15 et 15 gouttes. Combien de gouttes recueille-t-on après 10 associations ?",
+                "question_type": "numeric",
+                "unit": "gouttes",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Repérer l'association : le nombre d'associations donné est 10. Étape 3 — Tester le stimulus seul : on lit la réponse à la sonnerie seule pour 10 associations : 11 gouttes. Étape 4 — Conclure : après 10 associations, la sonnerie seule provoque 11 gouttes ; c'est une réponse conditionnelle déjà bien installée, mais pas encore à son maximum.",
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'expérience où l'on compte les gouttes pour 0, 2, 5, 10, 15, 20 et 30 associations (0, 1, 5, 11, 14, 15 et 15 gouttes), que montre le palier entre 20 et 30 associations ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Tester le stimulus seul : on compare la réponse à 20 associations (15 gouttes) et à 30 associations (15 gouttes). Elle ne change plus. Étape 4 — Conclure : le réflexe conditionnel est établi et stable à son maximum. Une disparition se traduirait par une baisse, et rien ne dit que le chien est malade ou que l'aliment est sans effet.",
+                "answers": [
+                  {
+                    "content": "Le réflexe est établi : de nouvelles associations n'augmentent plus la réponse",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le réflexe disparaît",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'aliment ne fait plus saliver le chien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chien est malade",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois conditions qui favorisent l'établissement d'un réflexe conditionnel ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Repérer l'association : l'ordre, le délai et le nombre de répétitions comptent. Étape 4 — Conclure : il faut des associations répétées, un stimulus neutre qui précède de peu le stimulus absolu, et un animal sain, motivé, non distrait. Un aliment donné avant la sonnerie, une association unique ou des bruits parasites empêchent ou gênent l'établissement.",
+                "answers": [
+                  {
+                    "content": "L'association répétée plusieurs fois",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sonnerie qui précède l'aliment de quelques secondes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un chien en bonne santé, motivé et attentif",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'aliment donné bien avant la sonnerie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une seule association suffit toujours",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des bruits parasites autour du chien",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si l'aliment est donné 10 secondes avant la sonnerie, et que cette séquence est répétée 30 fois, le chien salivera ensuite à la sonnerie seule.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer l'association : ici l'aliment précède la sonnerie, l'ordre est inversé. Étape 3 — Tester le stimulus seul : quand la sonnerie arrive alors que l'aliment est déjà donné depuis longtemps, elle ne l'annonce plus et ne devient pas un stimulus conditionnel. Étape 4 — Conclure : la répétition seule ne suffit pas, la sonnerie doit précéder l'aliment de quelques secondes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À la fin de l'expérience, la salivation provoquée par la sonnerie seule est la réponse ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Tester le stimulus seul : la sonnerie seule déclenche maintenant la salivation. Étape 4 — Conclure : cette salivation est la réponse conditionnelle, puisque la sonnerie est devenue stimulus conditionnel. La salivation à l'aliment, elle, reste la réponse du réflexe inné.",
+                "answers": [
+                  {
+                    "content": "conditionnelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "conditionnée",
+                    "correct": true
+                  },
+                  {
+                    "content": "acquise",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à décrire un conditionnement et ses conditions avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans l'expérience de Pavlov, l'aliment est le stimulus ___ et, après conditionnement, la sonnerie est le stimulus ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Vérifier avant conditionnement : l'aliment fait saliver sans apprentissage, c'est le stimulus absolu (inconditionnel). Étape 4 — Conclure : la sonnerie, d'abord neutre, est devenue le stimulus conditionnel après les associations répétées.",
+                "answers": [
+                  {
+                    "content": "absolu",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "inconditionnel",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "conditionnel",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "conditionné",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour chaque case, demande-toi si le stimulus agit sans apprentissage ou grâce à l'apprentissage."
+              },
+              {
+                "content": "Pour établir le réflexe, quelle séquence répétée faut-il appliquer au chien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer l'association : la sonnerie doit précéder l'aliment de quelques secondes et la séquence doit être répétée. Étape 4 — Conclure : sonnerie puis aliment. L'aliment avant la sonnerie inverse l'ordre ; la sonnerie seule ou l'aliment seul ne créent aucune association.",
+                "answers": [
+                  {
+                    "content": "La sonnerie, puis l'aliment quelques secondes après",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'aliment, puis la sonnerie dix secondes après",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sonnerie seule, sans aliment",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'aliment seul, sans sonnerie",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le stimulus neutre doit prévenir le chien de l'arrivée de l'aliment."
+              },
+              {
+                "content": "Une seule association entre la sonnerie et l'aliment suffit pour établir solidement le réflexe conditionnel.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer l'association : dans une expérience type (résultats simplifiés), la réponse passe de 1 goutte après 2 associations à 11 gouttes après 10. Étape 4 — Conclure : il faut de nombreuses associations répétées ; une seule ne suffit pas à établir solidement le réflexe.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les phases d'une expérience de conditionnement.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Vérifier avant conditionnement : la sonnerie seule ne fait pas saliver. Étape 2 — Repérer l'association : sonnerie puis aliment, répétés. Étape 3 — Tester le stimulus seul : la sonnerie seule fait saliver. C'est l'ordre avant, pendant, après.",
+                "answers": [
+                  {
+                    "content": "La sonnerie seule ne provoque pas de salive"
+                  },
+                  {
+                    "content": "La sonnerie est suivie de l'aliment, de nombreuses fois"
+                  },
+                  {
+                    "content": "La sonnerie seule provoque maintenant de la salive"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer le mécanisme : l'arc réflexe conditionnel et le cortex",
+          "remember": "Dans l'**arc réflexe inné** de la salivation, l'aliment stimule les récepteurs de la bouche ; un nerf sensitif conduit l'influx au **centre salivaire** (bulbe rachidien) ; un nerf moteur le conduit aux **glandes salivaires**, l'effecteur. La sonnerie, elle, stimule les récepteurs de l'oreille ; le nerf auditif conduit l'influx à un **centre auditif du cortex cérébral**. Pendant l'association répétée, ce centre et le centre salivaire sont activés ensemble : une **liaison temporaire** s'établit entre eux. Ensuite, l'influx de la sonnerie passe du centre auditif au centre salivaire, puis suit la voie motrice habituelle. Le **cortex cérébral** est indispensable à l'établissement du réflexe conditionnel ; le réflexe inné, lui, n'en dépend pas.",
+          "method": [
+            "Tracer l'arc réflexe inné : récepteur, nerf sensitif, centre, nerf moteur, effecteur.",
+            "Repérer les voies du stimulus conditionnel : son récepteur, son nerf sensitif et son centre dans le cortex.",
+            "Établir la liaison temporaire entre le centre du stimulus conditionnel et le centre de la réponse, née de l'association répétée.",
+            "Tracer l'arc conditionnel complet, de l'influx de départ à l'effecteur, puis conclure sur le rôle du cortex."
+          ],
+          "example": {
+            "statement": "Le chien de M. Soro, dans une cour de Korhogo, salive dès qu'il entend la gamelle en fer racler le sol, bruit qui a toujours précédé sa pâtée. Expliquer le mécanisme de cette salivation.",
+            "steps": [
+              "Tracer l'arc inné : la pâtée stimule les récepteurs de la bouche, le nerf sensitif conduit l'influx au centre salivaire du bulbe, le nerf moteur le conduit aux glandes salivaires.",
+              "Repérer les voies du bruit : les récepteurs de l'oreille captent le bruit, le nerf auditif conduit l'influx au centre auditif du cortex.",
+              "Établir la liaison : à force de bruits suivis de pâtée, une liaison temporaire s'est formée entre le centre auditif du cortex et le centre salivaire.",
+              "Tracer l'arc complet : oreille, nerf auditif, centre auditif du cortex, liaison temporaire, centre salivaire, nerf moteur, glandes salivaires ; le cortex est donc indispensable à ce réflexe acquis."
+            ]
+          },
+          "pitfall": "Ne pas croire que la liaison relie directement l'oreille aux glandes salivaires, ni qu'elle est définitive. Contre-exemple : chez le chien de M. Soro, c'est entre deux centres nerveux, le centre auditif et le centre salivaire, que la liaison se forme, et si le bruit n'est plus jamais suivi de pâtée, elle peut disparaître. Une liaison temporaire relie des centres, pas des organes.",
+          "figure": "arc-inne-conditionnel",
+          "exercise": {
+            "title": "Expliquer l'arc réflexe conditionnel",
+            "statement": "Dans cet exercice, tu expliques le mécanisme d'un réflexe conditionnel avec la méthode de la fiche. Le schéma des deux arcs réflexes de la salivation, inné et conditionnel, accompagne l'exercice.",
+            "exercise_type": "fixation",
+            "figure": "arc-inne-conditionnel",
+            "questions": [
+              {
+                "content": "Dans l'arc réflexe conditionnel de la salivation à la sonnerie, la liaison temporaire passe du centre auditif du cortex au centre salivaire. Remets dans l'ordre le trajet de l'influx nerveux, de la sonnerie à la salive.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Repérer les voies du stimulus conditionnel : récepteurs de l'oreille, nerf auditif, centre auditif du cortex. Étape 3 — Établir la liaison : la liaison temporaire conduit l'influx au centre salivaire. Étape 4 — Tracer l'arc complet : du centre salivaire, le nerf moteur conduit l'ordre aux glandes salivaires, effecteur du réflexe.",
+                "answers": [
+                  {
+                    "content": "Récepteurs de l'oreille"
+                  },
+                  {
+                    "content": "Nerf auditif"
+                  },
+                  {
+                    "content": "Centre auditif du cortex cérébral"
+                  },
+                  {
+                    "content": "Centre salivaire du bulbe rachidien"
+                  },
+                  {
+                    "content": "Nerf moteur"
+                  },
+                  {
+                    "content": "Glandes salivaires"
+                  }
+                ]
+              },
+              {
+                "content": "Qu'est-ce que la liaison temporaire de l'arc réflexe conditionnel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Établir la liaison : l'association répétée des deux stimuli relie, dans le système nerveux central, le centre auditif du cortex et le centre salivaire. Étape 4 — Conclure : c'est une liaison entre deux centres, pas entre deux organes, et elle est temporaire : elle peut disparaître si elle n'est plus entretenue. Le nerf direct oreille-glandes n'existe pas.",
+                "answers": [
+                  {
+                    "content": "Une connexion entre le centre du stimulus conditionnel et le centre de la réponse, établie par l'association répétée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un nouveau nerf qui relie directement l'oreille aux glandes salivaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une liaison définitive entre l'oreille et la bouche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une liaison entre deux aliments différents",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le cortex cérébral est indispensable à l'établissement d'un réflexe conditionnel.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Établir la liaison : la liaison temporaire se forme entre un centre du cortex (ici auditif) et le centre de la réponse. Étape 4 — Conclure : sans cortex, le réflexe conditionnel ne s'établit pas ; chez un chien dont le cortex a été détruit, le réflexe inné reste présent mais l'animal ne forme plus de réflexe conditionnel.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le centre nerveux du réflexe salivaire inné est situé dans ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Tracer l'arc réflexe inné : récepteurs de la bouche, nerf sensitif, centre nerveux, nerf moteur, glandes salivaires. Le centre de ce réflexe inné est le centre salivaire, situé dans le bulbe rachidien, qui est un centre inné ne dépendant pas du cortex. Le cortex porte les centres des stimuli conditionnels, et le cervelet ne commande pas la salivation.",
+                "answers": [
+                  {
+                    "content": "le bulbe rachidien",
+                    "correct": true
+                  },
+                  {
+                    "content": "le cortex cérébral",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cervelet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur l'arc réflexe conditionnel de la salivation à la sonnerie ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Établir la liaison : le centre auditif est relié temporairement au centre salivaire. Étape 4 — Tracer l'arc complet : à partir du centre salivaire, la voie de sortie est celle du réflexe inné : même nerf moteur, mêmes glandes. Aucun organe n'est relié directement à un autre et la liaison n'est pas définitive.",
+                "answers": [
+                  {
+                    "content": "Il comporte une liaison temporaire entre le centre auditif et le centre salivaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il utilise le même nerf moteur et les mêmes glandes que le réflexe inné",
+                    "correct": true
+                  },
+                  {
+                    "content": "La liaison relie directement l'oreille aux glandes salivaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il utilise un nerf moteur nouveau, propre au réflexe conditionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "La liaison, une fois établie, est définitive",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un chien dont le cortex cérébral a été détruit reçoit de l'aliment dans la gueule : il salive normalement. Pourquoi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Tracer l'arc réflexe inné : l'aliment stimule les récepteurs de la bouche, le message arrive au centre salivaire du bulbe, puis aux glandes. Aucune étape ne passe par le cortex. Étape 4 — Conclure : le réflexe inné persiste sans cortex ; seul le réflexe conditionnel en a besoin. La liaison temporaire ne se forme pas à la première présentation d'un aliment.",
+                "answers": [
+                  {
+                    "content": "Le réflexe inné passe par le centre salivaire du bulbe rachidien, sans avoir besoin du cortex",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le cortex est le centre de tous les réflexes, il fonctionne encore",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les glandes salivaires commandent seules la salivation",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'aliment crée aussitôt une liaison temporaire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire l'arc réflexe conditionnel avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans l'arc réflexe conditionnel, la liaison temporaire relie le centre ___ du cortex au centre salivaire.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer les voies du stimulus conditionnel : la sonnerie est captée par l'oreille, puis le nerf auditif conduit l'influx vers le centre auditif du cortex. Étape 3 — Établir la liaison : c'est ce centre qui est relié temporairement au centre salivaire.",
+                "answers": [
+                  {
+                    "content": "auditif",
+                    "correct": true
+                  },
+                  {
+                    "content": "de l'audition",
+                    "correct": true
+                  }
+                ],
+                "hint": "Où arrive l'influx venu du nerf auditif ?"
+              },
+              {
+                "content": "Dans l'arc réflexe salivaire inné, quel élément est l'effecteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Tracer l'arc réflexe inné : récepteur, nerf sensitif, centre, nerf moteur, effecteur. Étape 4 — Conclure : l'effecteur est l'organe qui produit la réponse, ici les glandes salivaires qui fabriquent la salive.",
+                "answers": [
+                  {
+                    "content": "Les glandes salivaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le nerf moteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le centre salivaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les récepteurs de la muqueuse buccale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La liaison temporaire se forme dès le premier essai d'association et reste définitive.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Établir la liaison : la liaison s'établit par association répétée, progressivement. Étape 4 — Conclure : elle est temporaire, elle peut s'affaiblir et disparaître si elle n'est pas entretenue. Les deux affirmations de cette proposition sont fausses.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot « temporaire » donne déjà la réponse sur la durée."
+              },
+              {
+                "content": "Relie chaque élément de l'arc réflexe à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Tracer l'arc réflexe inné : le nerf sensitif amène le message au centre, le centre élabore la commande, le nerf moteur la transmet, l'effecteur (glandes salivaires) répond. Chaque rôle correspond à un élément de l'arc.",
+                "answers": [
+                  {
+                    "content": "Nerf sensitif",
+                    "match": "Conduit l'influx vers le centre nerveux"
+                  },
+                  {
+                    "content": "Centre nerveux",
+                    "match": "Analyse l'influx et élabore la commande"
+                  },
+                  {
+                    "content": "Nerf moteur",
+                    "match": "Conduit l'ordre vers l'effecteur"
+                  },
+                  {
+                    "content": "Glandes salivaires",
+                    "match": "Produisent la salive"
+                  }
+                ],
+                "hint": "Suis le trajet de l'influx dans l'ordre."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Extinction, inhibition et renforcement d'un réflexe conditionnel",
+          "remember": "Un réflexe conditionnel n'est pas définitif. **Extinction** : si le stimulus conditionnel est présenté seul, plusieurs fois, sans être suivi du stimulus absolu, la réponse diminue puis disparaît. **Inhibition externe** : un stimulus étranger, intense ou inattendu, supprime provisoirement la réponse ; elle revient quand il cesse. **Renforcement** : l'association de temps en temps du stimulus conditionnel au stimulus absolu entretient le réflexe. Après une extinction, le réflexe peut être rétabli par de nouvelles associations. L'extinction n'est pas un oubli définitif, et elle ne touche pas le réflexe inné.",
+          "method": [
+            "Lire la série d'essais : à chaque essai, noter quel stimulus est présenté et si le stimulus absolu le suit.",
+            "Comparer la réponse d'un essai à l'autre : elle augmente, diminue, disparaît ou revient.",
+            "Rechercher la cause du changement : absence du stimulus absolu (extinction), stimulus étranger (inhibition externe) ou réassociation (renforcement).",
+            "Conclure en nommant le phénomène et en précisant si le réflexe est entretenu, éteint ou rétabli."
+          ],
+          "example": {
+            "statement": "Dans une expérience fictive, le chien de garde de M. Ouattara salive à un coup de sifflet, qui précédait toujours sa pâtée. M. Ouattara siffle huit soirs de suite sans donner de pâtée : les gouttes de salive en 30 secondes sont 14, 11, 7, 3, 1, 0, 0, 0. Il siffle ensuite trois fois en donnant la pâtée : au test, 10 gouttes. Analyser ces résultats.",
+            "steps": [
+              "Lire : pendant huit soirs, le sifflet est présenté seul, jamais suivi de la pâtée ; puis trois fois il est suivi de la pâtée.",
+              "Comparer : la réponse passe de 14 à 0 pendant la série, puis remonte à 10 gouttes après les trois associations.",
+              "Rechercher la cause : la baisse vient de l'absence de stimulus absolu (la pâtée) ; la remontée vient de la réassociation du sifflet à la pâtée.",
+              "Conclure : la baisse est une extinction, la remontée est un renforcement ; le réflexe est temporaire et réversible, il n'était pas détruit."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'extinction efface définitivement le réflexe. Contre-exemple chiffré : après huit soirs sans pâtée, le chien produit 0 goutte au sifflet ; mais trois associations suffisent pour retrouver 10 gouttes. L'extinction est donc réversible. Ne confonds pas non plus extinction (absence du stimulus absolu) et inhibition externe (stimulus étranger).",
+          "figure": "courbe-extinction",
+          "exercise": {
+            "title": "Analyser une extinction et son rétablissement",
+            "statement": "Dans cet exercice, tu analyses l'évolution d'un réflexe conditionnel avec la méthode de la fiche (expérience fictive, résultats simplifiés). La courbe donne le nombre de gouttes de salive à la sonnerie seule pendant huit essais sans aliment, puis après trois nouvelles associations avec l'aliment.",
+            "exercise_type": "fixation",
+            "figure": "courbe-extinction",
+            "questions": [
+              {
+                "content": "Un chien salive à la sonnerie seule. On présente ensuite la sonnerie seule à huit reprises, sans jamais donner d'aliment : il produit 15, 12, 9, 5, 2, 1, 0 puis 0 goutte de salive. Comment nomme-t-on ce phénomène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire la série d'essais : la sonnerie est présentée seule, jamais suivie de l'aliment. Étape 2 — Comparer la réponse : 15, 12, 9, 5, 2, 1, 0, 0 : elle diminue jusqu'à disparaître. Étape 3 — Rechercher la cause : l'absence du stimulus absolu. Étape 4 — Conclure : c'est l'extinction. Le renforcement, au contraire, consiste à réassocier les stimuli.",
+                "answers": [
+                  {
+                    "content": "L'extinction du réflexe conditionnel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le renforcement du réflexe conditionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'établissement du réflexe inné",
+                    "correct": false
+                  },
+                  {
+                    "content": "La disparition du réflexe inné",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une série d'essais à la sonnerie seule, un chien produit 15, 12, 9, 5, 2, 1, 0 puis 0 goutte de salive. Combien de gouttes produit-il au quatrième essai ?",
+                "question_type": "numeric",
+                "unit": "gouttes",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire la série d'essais : les valeurs sont données dans l'ordre des essais. Étape 2 — Comparer la réponse : 15 (essai 1), 12 (essai 2), 9 (essai 3), 5 (essai 4). Étape 4 — Conclure : au quatrième essai, le chien produit 5 gouttes, soit trois fois moins qu'au premier essai : la réponse décroît.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans la courbe, la salivation à la sonnerie seule (15, 12, 9, 5, 2, 1, 0, 0 gouttes) disparaît au fil des huit essais sans aliment. Pourquoi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Rechercher la cause : dans la série, la sonnerie n'est plus jamais suivie de l'aliment. Sans stimulus absolu, la liaison temporaire n'est plus entretenue, la réponse s'affaiblit : c'est l'extinction. Étape 4 — Conclure : l'absence de renforcement explique la baisse. Le chien entend toujours la sonnerie et son réflexe inné à l'aliment reste intact.",
+                "answers": [
+                  {
+                    "content": "Parce que le stimulus conditionnel n'est plus jamais suivi du stimulus absolu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que le chien n'entend plus la sonnerie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le réflexe inné de salivation à l'aliment est détruit",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le cortex du chien cesse définitivement de fonctionner",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après l'extinction, le chien ne pourra plus jamais retrouver sa salivation à la sonnerie.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Rechercher la cause : l'extinction vient de l'absence de renforcement, pas d'une destruction. Étape 4 — Conclure : si l'on réassocie la sonnerie à l'aliment quelques fois, la salivation à la sonnerie réapparaît : dans la courbe, 11 gouttes après trois associations. L'extinction n'est donc pas un oubli définitif.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation au phénomène qu'elle illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Rechercher la cause : sans stimulus absolu, la réponse diminue (extinction) ; un stimulus étranger inattendu la supprime provisoirement (inhibition externe) ; la réassociation avec l'aliment la rétablit (renforcement). Étape 4 — Conclure : trois causes, trois phénomènes.",
+                "answers": [
+                  {
+                    "content": "Sonnerie seule répétée sans aliment : la réponse diminue",
+                    "match": "Extinction"
+                  },
+                  {
+                    "content": "Un coup de tonnerre pendant le test supprime la réponse un instant",
+                    "match": "Inhibition externe"
+                  },
+                  {
+                    "content": "Sonnerie de nouveau suivie de l'aliment : la réponse revient",
+                    "match": "Renforcement"
+                  }
+                ]
+              },
+              {
+                "content": "Pour entretenir un réflexe conditionnel, on associe de temps en temps le stimulus conditionnel au stimulus absolu : c'est le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Rechercher la cause : ce qui entretient le réflexe, c'est le retour du stimulus absolu après le stimulus conditionnel. Étape 4 — Conclure : cette réassociation s'appelle le renforcement. Sans lui, le réflexe s'éteint.",
+                "answers": [
+                  {
+                    "content": "renforcement",
+                    "correct": true
+                  },
+                  {
+                    "content": "renforcement du réflexe",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître l'extinction, l'inhibition externe et le renforcement.",
+            "questions": [
+              {
+                "content": "Un bruit étranger, fort et inattendu, peut supprimer provisoirement un réflexe conditionnel pendant le test.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Rechercher la cause : un stimulus étranger perturbe l'animal pendant le test. Étape 4 — Conclure : c'est l'inhibition externe. La réponse revient dès que ce stimulus cesse, car la liaison temporaire n'est pas détruite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La réponse revient-elle ensuite quand le bruit s'arrête ?"
+              },
+              {
+                "content": "Quand le stimulus conditionnel n'est plus suivi du stimulus absolu, la réponse ___ puis disparaît.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Comparer la réponse : au fil des essais sans aliment, la réponse recule. Étape 4 — Conclure : elle diminue puis disparaît : c'est l'extinction.",
+                "answers": [
+                  {
+                    "content": "diminue",
+                    "correct": true
+                  },
+                  {
+                    "content": "baisse",
+                    "correct": true
+                  },
+                  {
+                    "content": "s'affaiblit",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroît",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le contraire de augmenter."
+              },
+              {
+                "content": "Après une extinction totale, que faut-il faire pour rétablir le réflexe conditionnel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer la réponse : après l'extinction, elle est nulle. Étape 3 — Rechercher la cause du retour : c'est le retour du stimulus absolu après le stimulus conditionnel. Étape 4 — Conclure : la réassociation (renforcement) rétablit le réflexe ; présenter le stimulus conditionnel seul prolonge l'extinction.",
+                "answers": [
+                  {
+                    "content": "Associer de nouveau le stimulus conditionnel au stimulus absolu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Présenter encore plus souvent le stimulus conditionnel seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Attendre sans rien faire pendant des mois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Supprimer le stimulus absolu",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel mécanisme entretient un réflexe conditionnel ?"
+              },
+              {
+                "content": "Remets dans l'ordre les événements de la vie d'un réflexe conditionnel.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire la série d'essais : le réflexe est établi, puis on présente la sonnerie seule (étape 2 — Comparer : la réponse décroît), puis on réassocie à l'aliment (étape 4 — Conclure : renforcement, la réponse revient).",
+                "answers": [
+                  {
+                    "content": "La sonnerie, associée à l'aliment, fait saliver"
+                  },
+                  {
+                    "content": "La sonnerie seule est répétée sans aliment"
+                  },
+                  {
+                    "content": "La réponse diminue puis disparaît"
+                  },
+                  {
+                    "content": "La sonnerie est de nouveau suivie de l'aliment et la réponse revient"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Réflexes conditionnels, dressage et apprentissage",
+          "remember": "Les réflexes conditionnels interviennent dans la vie de tous les jours. Le **dressage** d'un animal consiste à établir des réflexes conditionnels : un signal d'abord neutre (sifflet, ordre) est associé de façon répétée à une récompense, et le **renforcement** l'entretient. Chez l'**Homme**, beaucoup d'**habitudes** et d'apprentissages reposent en partie sur des réflexes conditionnels : saliver à la sonnerie de la cantine, freiner à un signal sonore, acquérir des gestes ou des réactions par l'**éducation**. Ces réflexes permettent d'**anticiper** et de s'adapter à l'environnement. Ils ne résument pas le comportement humain : l'Homme possède aussi la pensée, la mémoire et le langage.",
+          "method": [
+            "Identifier le comportement acquis qu'il faut expliquer.",
+            "Rechercher le stimulus absolu (ou la récompense) et le stimulus d'abord neutre devenu signal.",
+            "Vérifier la répétition de l'association et l'entretien par le renforcement.",
+            "Conclure en nommant le réflexe conditionnel, en donnant son utilité et ce qui peut l'éteindre."
+          ],
+          "example": {
+            "statement": "À Korhogo, Mme Coulibaly dresse son chien de garde : chaque matin, elle souffle dans un sifflet, puis lui donne sa pâtée. Au bout de deux semaines, le chien accourt dès le coup de sifflet, même sans pâtée en vue. Expliquer ce comportement.",
+            "steps": [
+              "Identifier : le comportement acquis est le fait d'accourir au coup de sifflet.",
+              "Rechercher : la pâtée est le stimulus absolu (la récompense) ; le sifflet, sans effet au départ, était le stimulus neutre.",
+              "Vérifier : le sifflet a été suivi de la pâtée chaque matin pendant deux semaines ; pour l'entretenir, il faudra redonner de temps en temps la pâtée (renforcement).",
+              "Conclure : c'est un réflexe conditionnel établi par dressage ; il aide le chien à anticiper le repas, mais il s'éteindrait si le sifflet n'était plus jamais suivi de pâtée."
+            ]
+          },
+          "pitfall": "Ne pas dire que le chien « comprend » le sifflet, ni que tout comportement humain est un réflexe conditionnel. Contre-exemple : le chien qui accourt au sifflet réagit automatiquement parce que l'association a été répétée chaque jour ; mais un élève qui décide d'aller à la bibliothèque réfléchit et choisit. Un réflexe est automatique, un choix ne l'est pas.",
+          "figure": null,
+          "exercise": {
+            "title": "Dressage et apprentissage",
+            "statement": "Dans cet exercice, tu expliques des comportements acquis chez l'animal et chez l'Homme avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Qu'est-ce que le dressage d'un animal domestique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le comportement : l'animal acquiert une réaction à un signal. Étape 2 — Rechercher le stimulus absolu et le stimulus neutre : la récompense (stimulus absolu) est associée à un signal neutre. Étape 3 — Vérifier la répétition de l'association. Étape 4 — Conclure : dresser, c'est établir des réflexes conditionnels. Un réflexe inné ne se donne pas.",
+                "answers": [
+                  {
+                    "content": "Établir des réflexes conditionnels en associant de façon répétée un stimulus d'abord neutre à une récompense",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lui donner des réflexes innés qu'il n'avait pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le punir jusqu'à ce qu'il cesse de réagir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Lui apprendre à réfléchir comme un humain",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un chien de garde de Korhogo est dressé : on souffle dans un sifflet, puis on lui donne de la pâtée, chaque jour. Relie chaque élément à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Rechercher le stimulus absolu et le stimulus neutre : la pâtée (récompense) est le stimulus absolu, le sifflet d'abord sans effet est neutre. Étape 3 — Vérifier la répétition : la répétition quotidienne établit le réflexe. Étape 4 — Conclure : accourir au sifflet est la réponse conditionnelle ; redonner la pâtée de temps en temps est le renforcement.",
+                "answers": [
+                  {
+                    "content": "Le coup de sifflet, sans effet au départ",
+                    "match": "Stimulus neutre"
+                  },
+                  {
+                    "content": "La pâtée donnée juste après le sifflet",
+                    "match": "Stimulus absolu"
+                  },
+                  {
+                    "content": "Le chien qui accourt au sifflet seul",
+                    "match": "Réponse conditionnelle"
+                  },
+                  {
+                    "content": "La pâtée redonnée de temps en temps après le sifflet",
+                    "match": "Renforcement"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux situations qui illustrent un réflexe conditionnel chez l'Homme ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Rechercher le stimulus absolu et le stimulus neutre : la sonnerie et le bourdonnement, d'abord sans effet, ont été associés à un stimulus absolu (le repas, la piqûre douloureuse). Étape 3 — Vérifier la répétition de l'association. Étape 4 — Conclure : ce sont des réflexes acquis. Le retrait de la main devant la brûlure et la fermeture de l'œil sont des réflexes innés, et réviser volontairement n'est pas un réflexe.",
+                "answers": [
+                  {
+                    "content": "Saliver en entendant la sonnerie de la cantine après plusieurs mois de repas servis juste après",
+                    "correct": true
+                  },
+                  {
+                    "content": "Retirer sa main dès qu'on entend le bourdonnement d'une guêpe, après l'avoir entendu plusieurs fois au moment d'une piqûre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Retirer sa main d'une casserole brûlante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Fermer l'œil quand une poussière touche la cornée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Choisir volontairement de réviser le soir",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le dressage, la récompense donnée au chien joue le rôle du stimulus ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Rechercher le stimulus absolu et le stimulus neutre : la récompense (la pâtée) déclenche la réponse sans apprentissage, c'est le stimulus absolu. Le signal (sifflet, ordre), d'abord neutre, devient le stimulus conditionnel. Étape 4 — Conclure : la récompense est le stimulus absolu.",
+                "answers": [
+                  {
+                    "content": "absolu",
+                    "correct": true
+                  },
+                  {
+                    "content": "neutre",
+                    "correct": false
+                  },
+                  {
+                    "content": "conditionnel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Tout comportement humain s'explique uniquement par des réflexes conditionnels.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : beaucoup de comportements humains sont des réponses réfléchies ou voulues. Étape 4 — Conclure : les réflexes conditionnels expliquent seulement une partie des habitudes et des apprentissages ; l'Homme possède aussi la pensée et le langage. Penser que tout s'explique par eux est une erreur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du dressage d'un chien à venir au sifflet.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : au départ le sifflet est neutre. Étape 2 — Rechercher le stimulus absolu et le stimulus neutre : le sifflet est associé à la pâtée. Étape 3 — Vérifier la répétition : l'association est répétée. Étape 4 — Conclure : le sifflet devient stimulus conditionnel et le chien accourt.",
+                "answers": [
+                  {
+                    "content": "Le chien ne réagit pas au sifflet seul"
+                  },
+                  {
+                    "content": "Le sifflet est suivi de la pâtée, de nombreuses fois"
+                  },
+                  {
+                    "content": "Le chien accourt au sifflet seul"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer un comportement acquis avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quelle est l'utilité de saliver dès que l'on entend la sonnerie de la cantine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : un réflexe conditionnel permet d'anticiper un événement annoncé par un signal. La salive prépare la bouche au repas avant que l'aliment arrive.",
+                "answers": [
+                  {
+                    "content": "Préparer la bouche à recevoir l'aliment avant même son arrivée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Empêcher le repas d'arriver",
+                    "correct": false
+                  },
+                  {
+                    "content": "Éviter d'avoir faim",
+                    "correct": false
+                  },
+                  {
+                    "content": "Détruire le stimulus absolu",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le réflexe se déclenche avant l'aliment."
+              },
+              {
+                "content": "Un enfant qui ne salive pas à la sonnerie de la cantine le jour de son arrivée n'a pas encore acquis ce réflexe.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la salivation à la sonnerie est une réponse acquise. Étape 3 — Vérifier la répétition : il faut des associations répétées entre sonnerie et repas. Étape 4 — Conclure : le nouvel élève n'a pas encore fait l'apprentissage, il ne salive pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le réflexe conditionnel demande des associations répétées."
+              },
+              {
+                "content": "L'ensemble des méthodes qui établissent des réflexes conditionnels chez un animal domestique s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : établir chez un animal des réponses automatiques à des signaux, par association répétée avec une récompense, c'est le dressage.",
+                "answers": [
+                  {
+                    "content": "dressage",
+                    "correct": true
+                  }
+                ],
+                "hint": "Ce mot s'emploie pour un chien de garde, un cheval ou un chien de berger."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le dressage du chien de garde de Korhogo",
+          "statement": "Situation fictive, résultats simplifiés. Dans une cour de Korhogo, M. Konaté possède un chien de garde, Sultan. Depuis sa naissance, Sultan salive quand de la pâtée est dans sa gueule. Avant tout dressage, la clochette de M. Konaté ne provoque aucune salivation. Chaque soir, pendant 20 soirs, M. Konaté agite la clochette 2 secondes avant de verser la pâtée. Au test final, la clochette seule provoque la salivation. Le schéma des étapes d'un conditionnement accompagne l'exercice.",
+          "exercise_type": "fixation",
+          "figure": "etapes-conditionnement",
+          "questions": [
+            {
+              "content": "Avant le dressage, quelle est la nature de la salivation de Sultan quand la pâtée est dans sa gueule ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : identifier le stimulus (la pâtée) et la réponse (la salivation). Étape 2 : chercher l'origine : Sultan salive à la pâtée depuis sa naissance, sans apprentissage. Étape 3 : le stimulus déclenche seul la réponse. Étape 4 : conclusion : c'est un réflexe inné et la pâtée est le stimulus absolu. Ce n'est pas un réflexe conditionnel, qui demande une association préalable.",
+              "answers": [
+                {
+                  "content": "Un réflexe inné",
+                  "correct": true
+                },
+                {
+                  "content": "Un réflexe conditionnel",
+                  "correct": false
+                },
+                {
+                  "content": "Un acte volontaire",
+                  "correct": false
+                },
+                {
+                  "content": "Une inhibition",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après 20 soirs de dressage, la clochette seule fait saliver Sultan. Qu'est-elle devenue pour lui ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : avant le dressage, la clochette seule ne provoquait aucune salivation : elle était neutre. Étape 2 : elle a été associée à la pâtée pendant 20 soirs. Étape 3 : elle déclenche maintenant la salivation à elle seule. Étape 4 : conclusion : stimulus conditionnel. Elle n'est pas absolue, car elle ne faisait rien sans apprentissage, et la réponse conditionnelle est la salivation, pas la clochette.",
+              "answers": [
+                {
+                  "content": "Un stimulus conditionnel",
+                  "correct": true
+                },
+                {
+                  "content": "Un stimulus absolu",
+                  "correct": false
+                },
+                {
+                  "content": "Un stimulus neutre",
+                  "correct": false
+                },
+                {
+                  "content": "Une réponse conditionnelle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant la semaine du dressage, Sultan est malade : il refuse la pâtée et reste couché, indifférent à tout. Que doit faire M. Konaté ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : relever la situation : l'animal est malade, sans appétit. Étape 2 : rappeler les conditions d'établissement : associations répétées, signal avant l'aliment, animal sain, motivé et attentif. Étape 3 : ici la dernière condition manque. Étape 4 : conclusion : il faut reporter les associations. Inverser l'ordre ou supprimer la pâtée aggraverait l'échec.",
+              "answers": [
+                {
+                  "content": "Reporter les associations : un animal sain, motivé et attentif est une condition d'établissement",
+                  "correct": true
+                },
+                {
+                  "content": "Continuer comme si de rien n'était : l'état de l'animal n'a aucune importance",
+                  "correct": false
+                },
+                {
+                  "content": "Donner la pâtée avant la clochette pour qu'il la mange",
+                  "correct": false
+                },
+                {
+                  "content": "Agiter la clochette sans pâtée pour l'habituer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez Sultan, le réflexe inné et le réflexe conditionnel de salivation ont un arc commun en partie. Quelles sont les deux parties communes aux deux arcs ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 : tracer l'arc inné : récepteurs de la bouche, nerf sensitif, centre salivaire, nerf moteur, glandes salivaires. Étape 2 : tracer les voies de la clochette : récepteurs de l'oreille, nerf auditif, centre auditif du cortex. Étape 3 : la liaison temporaire joint ce centre au centre salivaire. Étape 4 : sont communs le centre salivaire, le nerf moteur et les glandes salivaires ; les voies auditives sont propres au réflexe conditionnel.",
+              "answers": [
+                {
+                  "content": "Le centre salivaire du bulbe rachidien",
+                  "correct": true
+                },
+                {
+                  "content": "Les glandes salivaires",
+                  "correct": true
+                },
+                {
+                  "content": "Les récepteurs de l'oreille",
+                  "correct": false
+                },
+                {
+                  "content": "Le centre auditif du cortex cérébral",
+                  "correct": false
+                },
+                {
+                  "content": "Le nerf auditif",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si M. Konaté n'avait agité la clochette qu'une seule fois avant la pâtée, Sultan saliverait ensuite à la clochette seule aussi fortement qu'après 20 soirs.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 : le nombre d'associations est un facteur d'établissement. Étape 2 : dans une expérience du même type (résultats simplifiés), la réponse à la sonnerie seule est de 1 goutte après 2 associations et de 15 gouttes après 20. Étape 3 : une association unique ne suffit donc pas à installer solidement le réflexe. Étape 4 : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La chienne de la voisine de M. Konaté ne salive pas quand on agite la clochette de Sultan. Pourquoi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : la clochette est un stimulus neutre pour elle. Étape 2 : elle n'a pas fait l'apprentissage. Étape 3 : un réflexe conditionnel se forme chez l'individu qui a subi les associations. Étape 4 : conclusion : ce réflexe est propre à l'individu, contrairement au réflexe inné commun à l'espèce.",
+              "answers": [
+                {
+                  "content": "Le réflexe conditionnel est propre à l'individu : elle n'a pas subi l'association clochette puis pâtée",
+                  "correct": true
+                },
+                {
+                  "content": "Le réflexe conditionnel est inné et commun à tous les chiens",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'a pas de glandes salivaires",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est trop vieille pour avoir un cortex",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La sonnerie du réfectoire de l'internat",
+          "statement": "Dans un internat de Man, la sonnerie du réfectoire retentit chaque soir à 18 heures, juste avant le service du dîner. Au bout d'un trimestre, Kouassi, interne, salive dès qu'il entend la sonnerie, même sans voir de nourriture. Fanta, arrivée ce matin, ne salive pas à la sonnerie, mais salive comme tous les internes quand elle mange. Le schéma des deux arcs réflexes de la salivation, inné et conditionnel, accompagne l'exercice.",
+          "exercise_type": "fixation",
+          "figure": "arc-inne-conditionnel",
+          "questions": [
+            {
+              "content": "Dans l'internat de Man, Kouassi salive à la sonnerie du réfectoire. Quel centre du cortex cérébral reçoit l'information venue de son oreille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : la sonnerie est captée par les récepteurs de l'oreille. Étape 2 : le nerf auditif conduit l'influx jusqu'au centre auditif du cortex cérébral. Étape 3 : ensuite seulement, la liaison temporaire transmet l'influx au centre salivaire, qui est dans le bulbe rachidien et non dans le cortex. Les glandes salivaires sont l'effecteur, à la fin de l'arc.",
+              "answers": [
+                {
+                  "content": "Le centre auditif",
+                  "correct": true
+                },
+                {
+                  "content": "Le centre visuel",
+                  "correct": false
+                },
+                {
+                  "content": "Le centre salivaire du bulbe rachidien",
+                  "correct": false
+                },
+                {
+                  "content": "Les glandes salivaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les trois caractères de la salivation de Kouassi à la sonnerie ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. Étape 1 : la salivation à la sonnerie est un réflexe conditionnel. Étape 2 : il est acquis par association répétée, propre à Kouassi qui a fait l'apprentissage (Fanta, arrivée ce matin, ne l'a pas), et temporaire : il s'éteint sans renforcement. Étape 3 : il fait intervenir le cortex, où se trouve le centre du stimulus conditionnel. Les trois autres propositions décrivent un réflexe inné.",
+              "answers": [
+                {
+                  "content": "Elle est acquise après des dîners servis juste après la sonnerie",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est propre à Kouassi",
+                  "correct": true
+                },
+                {
+                  "content": "Elle peut disparaître si la sonnerie n'est plus suivie de repas",
+                  "correct": true
+                },
+                {
+                  "content": "Elle existait dès sa naissance",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne fait pas intervenir le cortex",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est la même chez tous les internes, dès leur arrivée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si, pendant des semaines, la sonnerie du réfectoire retentit sans qu'aucun repas ne suive, la salivation des internes à la sonnerie diminue puis disparaît.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 : la sonnerie, stimulus conditionnel, n'est plus suivie du stimulus absolu. Étape 2 : la liaison temporaire n'est plus entretenue. Étape 3 : c'est l'extinction du réflexe conditionnel : la réponse diminue puis disparaît. Étape 4 : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fanta, arrivée ce matin à l'internat, ne salive pas à la sonnerie du réfectoire. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : Fanta salive normalement à la nourriture, donc son réflexe inné est intact. Étape 2 : la sonnerie est pour elle un stimulus neutre. Étape 3 : la liaison temporaire se crée après des associations répétées, et Fanta n'en a pas encore vécu. Étape 4 : elle ne salive donc pas à la sonnerie seule.",
+              "answers": [
+                {
+                  "content": "La liaison temporaire entre le centre auditif et le centre salivaire n'est pas encore établie chez elle",
+                  "correct": true
+                },
+                {
+                  "content": "Son centre salivaire est détruit",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'a pas de réflexe inné de salivation",
+                  "correct": false
+                },
+                {
+                  "content": "La sonnerie est pour elle un stimulus absolu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément de l'arc réflexe conditionnel de la salivation à sa localisation ou à sa nature.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Étape 1 : tracer l'arc inné : le centre salivaire est dans le bulbe rachidien et l'effecteur est l'ensemble des glandes salivaires. Étape 2 : repérer les voies du stimulus conditionnel : récepteur dans l'oreille, nerf auditif, centre auditif dans le cortex cérébral. Étape 3 : la liaison temporaire relie les deux centres.",
+              "answers": [
+                {
+                  "content": "Centre salivaire",
+                  "match": "Bulbe rachidien"
+                },
+                {
+                  "content": "Centre auditif",
+                  "match": "Cortex cérébral"
+                },
+                {
+                  "content": "Effecteur",
+                  "match": "Glandes salivaires"
+                },
+                {
+                  "content": "Récepteur du stimulus conditionnel",
+                  "match": "Oreille"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les conditions d'établissement du réflexe conditionnel",
+          "statement": "Expérience fictive, résultats simplifiés. Une équipe de dresseurs de chiens de garde, à Korhogo, associe une sonnerie à de la pâtée. Pour chaque lot de chiens sains et affamés, 20 associations sont réalisées avec un ordre et un délai différents, puis on compte les gouttes de salive à la sonnerie seule sur 30 secondes. Résultats donnés par l'énoncé : aliment 5 secondes avant la sonnerie, 0 goutte ; stimulus simultanés, 4 gouttes ; sonnerie 2 secondes avant l'aliment, 15 gouttes ; sonnerie 10 secondes avant, 9 gouttes ; sonnerie 60 secondes avant, 2 gouttes. Dans une autre expérience, un chien dont le cortex cérébral a été détruit et un chien normal subissent 40 associations sonnerie-aliment ; tous deux salivent à l'aliment (18 gouttes pour le chien sans cortex). À la sonnerie seule, le chien sans cortex produit 0 goutte, contre 15 gouttes pour le chien normal.",
+          "exercise_type": "evaluation",
+          "figure": "delai-association",
+          "questions": [
+            {
+              "content": "D'après les résultats, avec quel ordre et quel délai le réflexe conditionnel est-il le mieux établi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : lire le diagramme : on compare les gouttes à la sonnerie seule selon l'ordre et le délai. Étape 2 : le maximum est de 15 gouttes, pour la sonnerie 2 secondes avant l'aliment. Étape 3 : les autres cas donnent moins (9, 4, 2, 0). Étape 4 : le meilleur établissement correspond à la sonnerie qui précède l'aliment de peu.",
+              "answers": [
+                {
+                  "content": "La sonnerie 2 secondes avant l'aliment",
+                  "correct": true
+                },
+                {
+                  "content": "L'aliment 5 secondes avant la sonnerie",
+                  "correct": false
+                },
+                {
+                  "content": "La sonnerie et l'aliment simultanés",
+                  "correct": false
+                },
+                {
+                  "content": "La sonnerie 60 secondes avant l'aliment",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans les résultats, donner l'aliment avant la sonnerie, même 20 fois, permet d'établir le réflexe conditionnel.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 : lire le lot « aliment 5 secondes avant la sonnerie ». Étape 2 : il donne 0 goutte à la sonnerie seule. Étape 3 : l'association dans cet ordre n'établit pas de réflexe. Étape 4 : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux déductions justifiées par les résultats des lots avec sonnerie avant l'aliment (2 s : 15 gouttes ; 10 s : 9 gouttes ; 60 s : 2 gouttes) ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 : lire les résultats : 15, 9 puis 2 gouttes pour 2, 10 et 60 secondes. Étape 2 : la réponse diminue quand le délai augmente. Étape 3 : un délai de 60 secondes donne seulement 2 gouttes, soit presque aucun réflexe. Étape 4 : conclusion : un délai court est nécessaire.",
+              "answers": [
+                {
+                  "content": "Plus le délai entre la sonnerie et l'aliment augmente, plus la réponse conditionnelle diminue",
+                  "correct": true
+                },
+                {
+                  "content": "Un délai très long gêne fortement l'établissement",
+                  "correct": true
+                },
+                {
+                  "content": "Le délai n'a aucune influence sur l'établissement",
+                  "correct": false
+                },
+                {
+                  "content": "Un délai long donne la réponse la plus forte",
+                  "correct": false
+                },
+                {
+                  "content": "Le délai de 60 secondes donne 15 gouttes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après 40 associations sonnerie-aliment, un chien dont le cortex a été détruit salive normalement à l'aliment (18 gouttes) mais produit 0 goutte à la sonnerie seule, alors qu'un chien normal en produit 15. Que conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : comparer les deux chiens. Étape 2 : le chien sans cortex salive à l'aliment (réflexe inné intact) mais pas à la sonnerie (pas de réflexe conditionnel). Étape 3 : le chien normal salive aux deux. Étape 4 : conclusion : le cortex est nécessaire à la liaison temporaire du réflexe conditionnel, pas au réflexe inné.",
+              "answers": [
+                {
+                  "content": "Le cortex est indispensable à l'établissement du réflexe conditionnel, pas au réflexe inné",
+                  "correct": true
+                },
+                {
+                  "content": "Le cortex est indispensable au réflexe inné de salivation",
+                  "correct": false
+                },
+                {
+                  "content": "Le réflexe conditionnel s'établit dans les glandes salivaires",
+                  "correct": false
+                },
+                {
+                  "content": "Le cortex ne joue aucun rôle dans les réflexes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le lot où la sonnerie précède l'aliment de 60 secondes, la réponse conditionnelle est ___.",
+              "question_type": "select",
+              "explanation": "Méthode détaillée. Étape 1 : lire le lot de 60 secondes. Étape 2 : il donne 2 gouttes seulement. Étape 3 : on compare avec les 15 gouttes du lot de 2 secondes. Étape 4 : la réponse est très faible : un délai trop long gêne l'association.",
+              "answers": [
+                {
+                  "content": "très faible",
+                  "correct": true
+                },
+                {
+                  "content": "forte",
+                  "correct": false
+                },
+                {
+                  "content": "égale à celle du lot de 2 secondes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe qui donne les conditions d'établissement d'un réflexe conditionnel (ordre, délai, répétition, état de l'animal) et le rôle du cortex cérébral, en citant au moins deux résultats de l'énoncé.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Ordre : la sonnerie doit précéder l'aliment",
+                "Délai : il doit être court (la réponse diminue quand il augmente)",
+                "Répétition des associations, animal sain et attentif",
+                "Rôle du cortex : indispensable à l'établissement"
+              ],
+              "explanation": "Corrigé modèle : D'après les résultats, le réflexe conditionnel s'établit lorsque le stimulus neutre (la sonnerie) précède le stimulus absolu (l'aliment) : si l'aliment précède la sonnerie, on obtient 0 goutte. Le délai doit être court : 15 gouttes à 2 secondes, 9 à 10 secondes, 2 à 60 secondes. Il faut aussi répéter les associations, sur un animal sain et attentif. Enfin, le chien dont le cortex est détruit ne forme pas de réflexe conditionnel (0 goutte) mais salive à l'aliment (18 gouttes) : le cortex est indispensable au réflexe conditionnel et non au réflexe inné. Barème : 1 point pour l'ordre, 1 point pour le délai, 1 point pour la répétition et l'état de l'animal, 1 point pour le rôle du cortex.",
+              "answers": [],
+              "starter": "D'après les résultats, le réflexe conditionnel s'établit lorsque…"
+            }
+          ]
+        },
+        {
+          "title": "Extinction et rétablissement du réflexe du chien de garde",
+          "statement": "Expérience fictive, résultats simplifiés. Le chien de garde de M. Konaté, à Korhogo, produit 16 gouttes de salive en 30 secondes à la clochette seule, après un dressage de plusieurs semaines. En voyage, M. Konaté confie la clochette à sa fille Adjoua, qui l'agite huit soirs de suite sans jamais verser de pâtée. Elle associe ensuite de nouveau la clochette à la pâtée trois soirs de suite : au test, la clochette seule provoque 11 gouttes. Le lendemain, pendant un test, un camion passe bruyamment : 3 gouttes ; le surlendemain, le test sans bruit donne 11 gouttes. La courbe donne les gouttes à chaque soir sans pâtée, puis après les trois associations.",
+          "exercise_type": "evaluation",
+          "figure": "courbe-extinction-clochette",
+          "questions": [
+            {
+              "content": "Adjoua agite la clochette seule huit soirs de suite, sans jamais verser de pâtée : le chien produit 16, 13, 8, 4, 2, 0, 0 puis 0 goutte de salive en 30 secondes. À partir de quel soir la clochette seule ne provoque-t-elle plus aucune goutte ?",
+              "question_type": "numeric",
+              "unit": "soir",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. Étape 1 : lire la série d'essais : la clochette est présentée seule, jamais suivie de pâtée. Étape 2 : comparer : 16 (soir 1), 13, 8, 4, 2, puis 0 au soir 6. Étape 3 : rechercher la cause : l'absence du stimulus absolu, la pâtée. Étape 4 : conclusion : c'est l'extinction du réflexe conditionnel, qui atteint 0 goutte à partir du sixième soir.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au départ, il avait fallu 10 associations clochette-pâtée pour que la clochette seule provoque 11 gouttes. Après l'extinction, trois associations suffisent pour retrouver 11 gouttes. Combien d'associations de moins a-t-il fallu pour rétablir le réflexe ?",
+              "question_type": "numeric",
+              "unit": "fois",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. Étape 1 : lire les données : 10 associations au départ, 3 après l'extinction. Étape 2 : comparer : 10 − 3 = 7 associations de moins. Étape 3 : rechercher la cause : la réassociation de la clochette à la pâtée, c'est-à-dire le renforcement. Étape 4 : conclusion : le rétablissement est plus rapide que l'établissement initial, donc la liaison n'avait pas été détruite par l'extinction.",
+              "answers": [
+                {
+                  "content": "7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une fois le réflexe rétabli (11 gouttes à la clochette seule), un test est fait le lendemain pendant le passage bruyant d'un camion près de la cour : le chien produit 3 gouttes. Le surlendemain, le test refait sans bruit donne de nouveau 11 gouttes. Comment nomme-t-on le phénomène observé le jour du camion ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : lire les essais : un stimulus étranger (le camion) accompagne la clochette. Étape 2 : comparer : 11, puis 3 gouttes sous le bruit, puis 11 gouttes sans bruit. Étape 3 : rechercher la cause : un stimulus étranger intense et inattendu. Étape 4 : conclusion : inhibition externe, provisoire, car la liaison n'est pas détruite.",
+              "answers": [
+                {
+                  "content": "L'inhibition externe",
+                  "correct": true
+                },
+                {
+                  "content": "L'extinction définitive",
+                  "correct": false
+                },
+                {
+                  "content": "Le renforcement",
+                  "correct": false
+                },
+                {
+                  "content": "La destruction du centre salivaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conclusions justifiées par ces résultats (16 gouttes, extinction à 0 en huit soirs sans pâtée, 11 gouttes après trois associations, 3 gouttes sous le bruit du camion puis 11 sans bruit) ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. Étape 1 : lire les résultats : extinction après huit soirs sans pâtée ; baisse provisoire sous le bruit du camion ; rétablissement après trois associations. Étape 2 : comparer les réponses : 16 puis 0, 11 puis 3 puis 11. Étape 3 : rechercher la cause de chaque changement : absence de pâtée, stimulus étranger, réassociation. Étape 4 : conclure : extinction par absence de renforcement, inhibition externe provisoire, réversibilité. Rien ne montre une destruction définitive, ni que le camion est un stimulus absolu.",
+              "answers": [
+                {
+                  "content": "L'extinction vient de l'absence répétée de la pâtée après la clochette",
+                  "correct": true
+                },
+                {
+                  "content": "Un stimulus étranger peut supprimer provisoirement la réponse conditionnelle",
+                  "correct": true
+                },
+                {
+                  "content": "La réassociation à la pâtée rétablit le réflexe plus vite qu'au départ",
+                  "correct": true
+                },
+                {
+                  "content": "L'extinction détruit définitivement le réflexe conditionnel",
+                  "correct": false
+                },
+                {
+                  "content": "Le camion est devenu un nouveau stimulus absolu",
+                  "correct": false
+                },
+                {
+                  "content": "La pâtée ne fait plus saliver le chien après l'extinction",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour que le réflexe de Sultan ne s'éteigne plus quand M. Konaté s'absente, que doit faire son entourage ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 : lire ce qui a causé l'extinction : huit soirs de clochette seule. Étape 2 : comparer : la réponse revient après trois associations avec la pâtée. Étape 3 : rechercher la cause de l'entretien : le retour du stimulus absolu après le stimulus conditionnel. Étape 4 : conclusion : il faut renforcer le réflexe de temps en temps. Les trois autres propositions éteignent le réflexe ou n'ont aucun lien avec lui.",
+              "answers": [
+                {
+                  "content": "Agiter de temps en temps la clochette en la faisant suivre de la pâtée",
+                  "correct": true
+                },
+                {
+                  "content": "Agiter la clochette tous les soirs sans jamais donner de pâtée",
+                  "correct": false
+                },
+                {
+                  "content": "Ne plus jamais donner de pâtée à Sultan",
+                  "correct": false
+                },
+                {
+                  "content": "Agiter la clochette seulement pendant les bruits de camion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir de ces résultats, montre que le réflexe conditionnel est temporaire et réversible, puis explique l'intérêt du renforcement dans le dressage d'un chien de garde.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Extinction : la réponse diminue puis disparaît sans pâtée",
+                "Réversibilité : trois associations rétablissent la réponse",
+                "Cause : le stimulus absolu manque ou revient",
+                "Intérêt du renforcement : entretenir le réflexe en dressage",
+                "Phrases claires, avec des valeurs relevées dans les résultats"
+              ],
+              "explanation": "Corrigé modèle : Quand la clochette est présentée seule huit soirs de suite, la réponse passe de 16 gouttes à 0 : le réflexe conditionnel disparaît en l'absence du stimulus absolu, c'est l'extinction. Il est donc temporaire. Il est aussi réversible : après trois nouvelles associations avec la pâtée, la clochette provoque de nouveau 11 gouttes, alors qu'il avait fallu 10 associations au départ. Le renforcement, c'est-à-dire redonner de temps en temps la récompense après le signal, entretient donc le réflexe : en dressage, il maintient l'obéissance du chien de garde. Barème : 1 point pour l'extinction, 1 point pour la réversibilité, 1 point pour la cause, 1 point pour l'intérêt du renforcement, 1 point pour la clarté et les valeurs relevées.",
+              "answers": [],
+              "starter": "Quand la clochette est présentée seule…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

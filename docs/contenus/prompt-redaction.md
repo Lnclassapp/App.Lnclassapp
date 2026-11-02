@@ -1,6 +1,6 @@
 # Prompt — Rédaction d'une leçon Lnclass (format v3 : fiche de révision par notion), pour toutes les matières
 
-> Utilisation : copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = une leçon = un fichier JSON. Ce prompt est autoportant : il contient toutes les règles (ADR fiche-de-revision-par-notion-et-figures-parametrees, §4.1 et §4.2 ; ADR-0115 pour les types de questions). Il vaut pour les Mathématiques, le Français, l'Histoire-Géographie, les SVT, la Physique-Chimie et l'EDHC : la section « Selon la matière » dit ce qui change. Le script `script/contenus/valider.rb` en contrôle la forme ; il ne contrôle ni la justesse des calculs ni celle des faits (voir « Relecture indépendante »).
+> Utilisation : copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = une leçon = un fichier JSON. Ce prompt est autoportant : il contient toutes les règles (ADR fiche-de-revision-par-notion-et-figures-parametrees, §4.1 et §4.2 ; ADR-0115 pour les types de questions). Il vaut pour les Mathématiques, le Français, l'Histoire-Géographie, les SVT, la Physique-Chimie, l'EDHC et la Philosophie : la section « Selon la matière » dit ce qui change. Le script `script/contenus/valider.rb` en contrôle la forme ; il ne contrôle ni la justesse des calculs ni celle des faits (voir « Relecture indépendante »).
 
 ---
 
@@ -11,7 +11,7 @@ Tu rédiges **une leçon** de Lnclass, dans la matière donnée par l'ENTRÉE, u
 Une leçon est faite de :
 
 - **des notions** (1 à 12, en général 2 à 5), chacune avec sa **fiche de révision au gabarit fixe en 4 blocs** : À retenir · La méthode · Un exemple corrigé · Le piège à éviter ;
-- **un exercice d'application par notion** ;
+- **un ou deux exercices d'application par notion** (un seul par défaut ; un second, aux types de questions mélangés, quand la notion le mérite) ;
 - **4 problèmes** de synthèse, type interrogation, devoir et BEPC ;
 - **des figures paramétrées** (0 à 12) que les notions et les exercices citent par leur clé ;
 - des questions **corrigées automatiquement** (au moins la moitié de la leçon) et, quand la matière le demande, des questions **rédigées** avec leur corrigé modèle et leur barème.
@@ -61,7 +61,7 @@ Ici, chaque étape de l'exemple commence par le verbe de l'étape de la méthode
 
 ## Selon la matière
 
-Le gabarit est le même partout : 4 blocs par notion, un exercice par notion, 4 problèmes. Ce qui change, c'est ce qu'on met dedans.
+Le gabarit est le même partout : 4 blocs par notion, un ou deux exercices par notion, 4 problèmes. Ce qui change, c'est ce qu'on met dedans.
 
 | Matière | À retenir | La méthode | Un exemple corrigé | Le piège | Les 4 problèmes (interrogation, interrogation, devoir, BEPC) |
 |---|---|---|---|---|---|
@@ -71,6 +71,7 @@ Le gabarit est le même partout : 4 blocs par notion, un exercice par notion, 4 
 | **SVT** | La notion, le mécanisme, le vocabulaire scientifique | La démarche : observer, formuler une hypothèse, analyser des résultats, conclure ; ou lire un schéma, un tableau, une courbe | Une expérience ou une observation traitée étape par étape | Une confusion de vocabulaire ou un raisonnement causal faux | Une situation expérimentale (protocole, résultats) et des questions qui s'enchaînent |
 | **Physique-Chimie** | La loi, la formule avec ses unités, la définition | Les étapes d'un calcul (données, formule, application numérique avec unités) ou d'une expérience | Un calcul ou une expérience, étape par étape | Une erreur d'unité, de conversion ou de signe, chiffrée | Une situation (montage, réaction, mesure) et des questions chiffrées et rédigées |
 | **EDHC** | La règle, le droit, le devoir, l'institution, avec son texte de référence quand il est sûr | Les étapes pour **analyser une situation** : identifier le problème, la règle qui s'applique, les acteurs, puis proposer un comportement | Une situation de vie traitée étape par étape | Une idée reçue, avec ce que dit vraiment la règle | Une situation de vie (école, quartier, famille) et des questions qui s'enchaînent, dont une prise de position argumentée |
+| **Philosophie** | Une définition de concept, une distinction (conscience et inconscient, nature et culture…), la thèse d'un auteur avec sa référence ; ou les règles d'un exercice (dissertation, commentaire de texte) | Les étapes pour **analyser** un sujet ou un texte (repérer les termes, les définir, dégager le problème et l'enjeu) puis **argumenter** (thèse, argument, exemple, objection, dépassement) | Un sujet ou un court texte traité étape par étape | Une confusion de concepts ou de méthode (réciter le cours au lieu de poser un problème, confondre la thèse de l'auteur et l'avis de l'élève, citer sans analyser), avec l'exemple qui la corrige | Un sujet ou un **texte support** (domaine public ou écrit pour Lnclass) : questions de compréhension et d'analyse, puis une production rédigée (problématique, paragraphe argumenté, plan détaillé). Le quatrième est au niveau du bac |
 
 Dans toutes les matières, la méthode commence par un **verbe d'action à l'infinitif**, et l'exemple applique ses étapes dans le même ordre, avec les mêmes mots.
 
@@ -102,6 +103,15 @@ Dans toutes les matières, la méthode commence par un **verbe d'action à l'inf
 - **Œuvres protégées** (auteurs ivoiriens et africains étudiés au collège, par exemple) : **courtes citations seulement**, quelques lignes au plus, toujours référencées (auteur, titre, date de première publication), au service d'une analyse. **Jamais d'extrait long, jamais de résumé de chapitre recopié.**
 - N'attribue jamais une citation dont tu n'es pas certain, mot pour mot. Dans le doute, écris un texte original et dis-le.
 - Une leçon sur une œuvre intégrale enseigne la **démarche** du programme (introduire l'œuvre, construire le sens, conclure) en s'appuyant sur **plusieurs** œuvres étudiées au collège, jamais sur une seule.
+
+### Auteurs, doctrines et textes (Philosophie)
+
+- **Une thèse n'est attribuée à un auteur que si elle est classique et sûre** (celle des manuels de Terminale), en paraphrase (« Pour Descartes, … »), avec la référence (auteur, œuvre, date de première publication). Dans le doute, la thèse est présentée sans nom d'auteur, comme une position (« Une première position soutient que… »).
+- **Citations mot pour mot** : seulement les formules célèbres dont l'exactitude est certaine (« Je pense, donc je suis », Descartes, « Discours de la méthode », 1637). Sinon, paraphrase.
+- **Textes longs** (support de commentaire) : un auteur de langue française du domaine public (Montaigne, Descartes, Pascal, Rousseau, Comte, Durkheim, Bergson, Alain…), cité d'après l'édition originale, ou un **texte écrit pour Lnclass**. Une traduction récente d'un auteur étranger peut être protégée : pour Platon, Kant, Hegel, Marx ou Nietzsche, paraphrase ou citation de quelques mots seulement. Auteurs africains vivants ou morts depuis moins de 70 ans (Senghor, Towa, Hountondji…) : courtes citations référencées ou paraphrase.
+- **Neutralité** : la religion, la politique et la morale sont traitées comme des **problèmes**, par les positions des auteurs ; aucune croyance n'est jugée vraie ou fausse. Une question rédigée note l'argumentation de l'élève (problème, arguments, exemples, cohérence), jamais son opinion.
+- **Questions corrigées automatiquement** : elles testent ce qui a une seule réponse sûre (relier un concept à sa définition ou un auteur à sa thèse, reconnaître un problème, une thèse, un argument, une objection, remettre dans l'ordre les étapes d'une introduction, choisir un connecteur). Le `fill_blank` n'attend qu'un terme technique sans variante (« cogito », « problématique »).
+- **Figures** : en général aucune ; un `diagram` seulement quand un schéma aide vraiment (le mouvement d'un plan dialectique, l'arbre d'une distinction de concepts).
 
 ### Faits, neutralité et sources (Histoire-Géographie, EDHC, SVT)
 
@@ -178,10 +188,11 @@ Formes JSON :
 
 #### La part corrigée automatiquement : au moins 50 %
 
-Sur l'ensemble de la leçon (exercices des notions et problèmes), **au moins la moitié des questions** sont corrigées automatiquement (tous les types sauf `written`). Le script avertit en dessous, et une leçon avec un avertissement n'est pas livrée. En Mathématiques, SVT et Physique-Chimie, les questions rédigées restent rares ; en Français, Histoire-Géographie et EDHC, elles portent ce qui ne se coche pas (justifier, transformer, rédiger), en général une ou deux par exercice, surtout dans les problèmes.
+Sur l'ensemble de la leçon (exercices des notions et problèmes), **au moins la moitié des questions** sont corrigées automatiquement (tous les types sauf `written`). Le script avertit en dessous, et une leçon avec un avertissement n'est pas livrée. En Mathématiques, SVT et Physique-Chimie, les questions rédigées restent rares ; en Français, Histoire-Géographie, EDHC et Philosophie, elles portent ce qui ne se coche pas (justifier, transformer, rédiger), en général une ou deux par exercice, surtout dans les problèmes.
 
 #### Règles communes
 
+- L'application **mélange l'ordre des propositions** à l'affichage (sauf `ordering`) : une correction ne désigne jamais une proposition par son rang (« la première », « la dernière »), mais par son contenu.
 - Chaque proposition fait 500 caractères au plus. Les propositions fausses sont **plausibles** : chacune correspond à une erreur réelle d'élève (oubli d'étape, signe, confusion avec le piège), jamais à une réponse absurde.
 - Les nombres sont choisis pour que les calculs se fassent à la main, sans calculatrice.
 - Varie les types : une leçon qui n'a que des `single_choice` lasse l'élève. Prends le type qui teste le mieux le savoir-faire (un accord s'écrit en `fill_blank`, une chronologie se remet en ordre en `ordering`, une justification se rédige en `written`).
@@ -293,14 +304,16 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
   }] }
 ```
 
-- `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ». `level_name` : `6ème` … `Tle`. `material_name` : exactement « Mathématiques », « Français », « Histoire-Géographie », « SVT », « Physique-Chimie » ou « EDHC » (EDHC au 1er cycle seulement). `series_name` : seulement à partir de la 2nde.
+- `exercise` d'une notion : un objet (un exercice), ou, depuis le 2026-10-31 (ADR-0116), une **liste de 1 à 2 objets** de même forme (`"exercise": [ { … }, { … } ]`). Une liste vide, ou 3 exercices et plus, est refusé (`essential_exercise_count`). Chaque exercice a 5 questions au moins ; mélange les types (QCM, vrai ou faux, complète, calcul…) et reste dans le niveau du premier exercice. Les chemins d'erreur sont `notions[i].exercise[j]…`.
+
+- `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ». `level_name` : `6ème` … `Tle`. `material_name` : exactement « Mathématiques », « Français », « Histoire-Géographie », « SVT », « Physique-Chimie », « EDHC » (1er cycle seulement) ou « Philosophie » (1ère et Tle). `series_name` : seulement à partir de la 2nde.
 - `theme` (facultatif) : `blue`, `teal` ou `burgundy` ; absent = `blue`. Varie les thèmes d'une leçon à l'autre.
 - `notions` : 1 à 12, noms **uniques**. Un seul cours par fichier.
 
 ## Contrôle final (avant de rendre)
 
 - [ ] Chaque notion a ses 4 blocs ; `method` a 2 à 8 étapes ; `example.steps` a **autant d'étapes** que `method`, et l'étape *n* applique l'étape *n*.
-- [ ] Exactement 1 exercice par notion et exactement 4 problèmes, de 5 questions au moins chacun.
+- [ ] 1 ou 2 exercices par notion (3 sont refusés) et exactement 4 problèmes, de 5 questions au moins chacun.
 - [ ] Chaque question a une correction de 20 à 2 000 caractères ; dans l'exercice d'une notion, elle reprend les étapes et les mots de La méthode ; dans un problème, elle donne la méthode détaillée, réutilisable en interrogation.
 - [ ] Chaque question respecte la règle de son type (propositions, bonnes propositions, `___`, paires, étapes) ; chaque proposition fausse est plausible.
 - [ ] Au moins la moitié des questions de la leçon sont corrigées automatiquement ; chaque question `written` a `answers: []`, un corrigé modèle, un barème `points` et 2 à 8 `criteria`.
@@ -322,7 +335,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 - **Leçon** : <intitulé exact de la progression, ex. « Racines carrées »>
 - **Niveau / série** : <ex. 3ème>
 - **Rang dans la progression** : <ex. 3, pour « Leçon 3 — progression DPFC 2026-2027 »>
-- **Matière** : <Mathématiques, Français, Histoire-Géographie, SVT, Physique-Chimie ou EDHC>
+- **Matière** : <Mathématiques, Français, Histoire-Géographie, SVT, Physique-Chimie, EDHC ou Philosophie>
 - **Notions à couvrir** (facultatif) : <liste du programme, si tu l'as>
 - **Acquis des leçons précédentes / leçons suivantes interdites** (facultatif) : <intitulés de la progression>
 - **Contraintes particulières** (facultatif) : <ex. insister sur la rédaction au BEPC>

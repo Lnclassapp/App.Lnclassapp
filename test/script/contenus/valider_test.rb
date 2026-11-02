@@ -41,10 +41,20 @@ class ContenusValiderTest < ActiveSupport::TestCase
     end
   end
 
-  test "CA-3 : une notion sans exercice ou avec deux exercices, et le rapport la nomme" do
+  test "CA-3 : une notion sans exercice ou avec trois exercices, et le rapport la nomme" do
     assert_refused mutated { it["notions"][1].delete("exercise") }, "essential_exercise_count", "notions[1].exercise"
-    two = mutated { it["notions"][0]["exercise"] = [ it["notions"][0]["exercise"], it["notions"][0]["exercise"] ] }
-    assert_refused two, "essential_exercise_count", "notions[0].exercise"
+    assert_refused mutated { it["notions"][1]["exercise"] = [] }, "essential_exercise_count", "notions[1].exercise"
+    three = mutated { |course| course["notions"][0]["exercise"] = Array.new(3) { |i| course["notions"][0]["exercise"].merge("title" => "Exercice #{i}") } }
+    assert_refused three, "essential_exercise_count", "notions[0].exercise"
+  end
+
+  test "CA-3 : une notion porte un ou deux exercices (objet ou liste), chacun contrôlé à son indice" do
+    exercise = revision_sheet_document.dig("courses", 0, "notions", 0, "exercise")
+    one = mutated { |course| course["notions"][0]["exercise"] = [ exercise ] }
+    two = mutated { |course| course["notions"][0]["exercise"] = [ exercise, exercise.merge("title" => "Second") ] }
+    [ one, two ].each { |document| assert_empty check(document).reasons }
+    short = mutated { |course| course["notions"][0]["exercise"] = [ exercise, exercise.merge("questions" => exercise["questions"].first(2)) ] }
+    assert_refused short, "too_few_questions", "notions[0].exercise[1].questions"
   end
 
   test "CA-4 : trois ou cinq problèmes" do
@@ -182,6 +192,27 @@ class ContenusValiderTest < ActiveSupport::TestCase
   end
 
   def schema_paths(document) = check(document).reasons.select { |_, code| code == "schema" }.map(&:first)
+
+  test "refuse une réponse acceptée en double une fois normalisée, dans une question de « Je m'entraîne » comme dans un exercice" do
+    fill = ->(answers) { { "content" => "Un hydrocarbure à liaison double est ___.", "question_type" => "fill_blank", "explanation" => PracticeHelper::EXPLANATION, "answers" => answers } }
+    duplicated = [ { "content" => "insaturée" }, { "content" => "insaturee" } ]
+
+    practice = mutated { |course| course["notions"][0]["practice"] = { "statement" => "Complète.", "questions" => [ fill.([ { "content" => "alcène" } ]), fill.(duplicated) ] } }
+    exercise = mutated { |course| course["exercises"][0]["questions"][0] = fill.(duplicated) }
+
+    assert_refused practice, "question_structure", "notions[0].practice.questions[1].answers"
+    assert_refused exercise, "question_structure", "exercises[0].questions[0].answers"
+  end
+
+  test "deux cases ne se gênent pas : la même réponse dans deux cases n'est pas un doublon" do
+    document = mutated do |course|
+      course["exercises"][0]["questions"][0] = { "content" => "Un ___ est un ___.", "question_type" => "fill_blank",
+                                                 "explanation" => course["exercises"][0]["questions"][0]["explanation"],
+                                                 "answers" => [ { "content" => "alcène", "blank" => 0 }, { "content" => "alcene", "blank" => 1 } ] }
+    end
+
+    assert check(document).reasons.none? { |_path, reason| reason == "question_structure" }
+  end
 
   test "refuse en schema chaque forme que le schéma refuse, au chemin de la faute" do
     {

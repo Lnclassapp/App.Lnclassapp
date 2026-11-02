@@ -1,0 +1,2212 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Quelques composés oxygénés",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "familles-et-groupes",
+          "kind": "diagram",
+          "description": "Schéma fléché qui relie chaque groupe caractéristique à sa famille de composés oxygénés. Le groupe hydroxyle donne les alcools. Le groupe carbonyle donne les aldéhydes quand il est en bout de chaîne, et les cétones quand il est à l'intérieur de la chaîne. Le groupe carboxyle donne les acides carboxyliques.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "oh",
+                "label": "Groupe hydroxyle -OH",
+                "category": 1
+              },
+              {
+                "id": "co",
+                "label": "Groupe carbonyle C=O",
+                "category": 1
+              },
+              {
+                "id": "cooh",
+                "label": "Groupe carboxyle -COOH",
+                "category": 1
+              },
+              {
+                "id": "alc",
+                "label": "Alcool R-OH",
+                "category": 2
+              },
+              {
+                "id": "ald",
+                "label": "Aldéhyde R-CHO",
+                "category": 2
+              },
+              {
+                "id": "cet",
+                "label": "Cétone R-CO-R'",
+                "category": 2
+              },
+              {
+                "id": "aci",
+                "label": "Acide carboxylique R-COOH",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "oh",
+                "to": "alc"
+              },
+              {
+                "from": "co",
+                "to": "ald",
+                "label": "en bout de chaîne"
+              },
+              {
+                "from": "co",
+                "to": "cet",
+                "label": "dans la chaîne"
+              },
+              {
+                "from": "cooh",
+                "to": "aci"
+              }
+            ],
+            "legend": [
+              "Groupes caractéristiques",
+              "Familles de composés"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ethanol",
+          "kind": "molecule",
+          "description": "Formule développée de l'éthanol, CH3–CH2–OH. Deux atomes de carbone sont alignés à l'horizontale. Le premier porte trois hydrogènes (CH3), le second porte deux hydrogènes (CH2) et il est lié à l'atome d'oxygène du groupe hydroxyle O–H, placé à droite. Ce carbone n'est lié qu'à un seul autre carbone : c'est un alcool primaire.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "c1h0",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "c1h1",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c1h2",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "c2h0",
+                "element": "H",
+                "x": 4,
+                "y": 4
+              },
+              {
+                "id": "c2h1",
+                "element": "H",
+                "x": 4,
+                "y": 8
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "ho",
+                "element": "H",
+                "x": 6,
+                "y": 8
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c1h0",
+                1
+              ],
+              [
+                "c1",
+                "c1h1",
+                1
+              ],
+              [
+                "c1",
+                "c1h2",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c2h0",
+                1
+              ],
+              [
+                "c2",
+                "c2h1",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                1
+              ],
+              [
+                "o",
+                "ho",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "propan-2-ol",
+          "kind": "molecule",
+          "description": "Formule développée du propan-2-ol, CH3–CH(OH)–CH3. Trois atomes de carbone sont alignés à l'horizontale. Le carbone du milieu porte un hydrogène et le groupe hydroxyle O–H, placé au-dessus. Ce carbone est lié à deux autres carbones (les deux groupes CH3) : c'est un alcool secondaire.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "c1h0",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "c1h1",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c1h2",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "c3",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "c3h0",
+                "element": "H",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "c3h1",
+                "element": "H",
+                "x": 6,
+                "y": 8
+              },
+              {
+                "id": "c3h2",
+                "element": "H",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "c2h",
+                "element": "H",
+                "x": 4,
+                "y": 8
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 4,
+                "y": 4
+              },
+              {
+                "id": "ho",
+                "element": "H",
+                "x": 4,
+                "y": 2
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c1h0",
+                1
+              ],
+              [
+                "c1",
+                "c1h1",
+                1
+              ],
+              [
+                "c1",
+                "c1h2",
+                1
+              ],
+              [
+                "c3",
+                "c3h0",
+                1
+              ],
+              [
+                "c3",
+                "c3h1",
+                1
+              ],
+              [
+                "c3",
+                "c3h2",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c3",
+                1
+              ],
+              [
+                "c2",
+                "c2h",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                1
+              ],
+              [
+                "o",
+                "ho",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ethanal",
+          "kind": "molecule",
+          "description": "Formule développée de l'éthanal, CH3–CHO. Deux atomes de carbone sont alignés à l'horizontale. Le premier porte trois hydrogènes (CH3). Le second porte un hydrogène et il est relié à l'atome d'oxygène à droite par une double liaison C=O : c'est le groupe carbonyle, en bout de chaîne. La molécule est un aldéhyde.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 3,
+                "y": 6
+              },
+              {
+                "id": "c1h0",
+                "element": "H",
+                "x": 3,
+                "y": 4
+              },
+              {
+                "id": "c1h1",
+                "element": "H",
+                "x": 3,
+                "y": 8
+              },
+              {
+                "id": "c1h2",
+                "element": "H",
+                "x": 1,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 5,
+                "y": 6
+              },
+              {
+                "id": "c2h",
+                "element": "H",
+                "x": 5,
+                "y": 8
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 7,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c1h0",
+                1
+              ],
+              [
+                "c1",
+                "c1h1",
+                1
+              ],
+              [
+                "c1",
+                "c1h2",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c2h",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "propanone",
+          "kind": "molecule",
+          "description": "Formule développée de la propanone, CH3–CO–CH3. Trois atomes de carbone sont alignés à l'horizontale. Le carbone du milieu est relié à l'atome d'oxygène placé au-dessus par une double liaison C=O. Il est lié à deux autres carbones (les deux groupes CH3) : le groupe carbonyle est à l'intérieur de la chaîne. La molécule est une cétone.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "c1h0",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "c1h1",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c1h2",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "c3",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "c3h0",
+                "element": "H",
+                "x": 6,
+                "y": 4
+              },
+              {
+                "id": "c3h1",
+                "element": "H",
+                "x": 6,
+                "y": 8
+              },
+              {
+                "id": "c3h2",
+                "element": "H",
+                "x": 8,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "o",
+                "element": "O",
+                "x": 4,
+                "y": 4
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c1h0",
+                1
+              ],
+              [
+                "c1",
+                "c1h1",
+                1
+              ],
+              [
+                "c1",
+                "c1h2",
+                1
+              ],
+              [
+                "c3",
+                "c3h0",
+                1
+              ],
+              [
+                "c3",
+                "c3h1",
+                1
+              ],
+              [
+                "c3",
+                "c3h2",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c3",
+                1
+              ],
+              [
+                "c2",
+                "o",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "acide-ethanoique",
+          "kind": "molecule",
+          "description": "Formule développée de l'acide éthanoïque, CH3–COOH. Deux atomes de carbone sont alignés à l'horizontale. Le premier porte trois hydrogènes (CH3). Le second porte, sur le même carbone, un oxygène relié par une double liaison C=O (au-dessus) et un groupe hydroxyle O–H (à droite). Cet ensemble forme le groupe carboxyle : c'est un acide carboxylique.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "c1h0",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "c1h1",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c1h2",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 4,
+                "y": 4
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "ho",
+                "element": "H",
+                "x": 6,
+                "y": 8
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c1h0",
+                1
+              ],
+              [
+                "c1",
+                "c1h1",
+                1
+              ],
+              [
+                "c1",
+                "c1h2",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "o1",
+                2
+              ],
+              [
+                "c2",
+                "o2",
+                1
+              ],
+              [
+                "o2",
+                "ho",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un groupe caractéristique",
+          "remember": "Un **groupe caractéristique** est un atome ou un groupe d'atomes qui donne à la molécule ses propriétés chimiques : il détermine sa **famille**. Les composés de cette leçon contiennent de l'oxygène. Le **groupe hydroxyle** $\\mathrm{{-}OH}$, lié à un carbone qui ne porte que des liaisons simples, caractérise les **alcools** R$\\mathrm{{-}OH}$. Le **groupe carbonyle** $\\mathrm{C{=}O}$ (double liaison entre un carbone et un oxygène) caractérise deux familles : l'**aldéhyde** R$\\mathrm{{-}CHO}$, où le carbone du $\\mathrm{C{=}O}$ est lié à un hydrogène (bout de chaîne), et la **cétone** R$\\mathrm{{-}CO{-}}$R', où ce carbone est lié à deux autres carbones. Le **groupe carboxyle** $\\mathrm{{-}COOH}$ ($\\mathrm{C{=}O}$ et $\\mathrm{{-}OH}$ sur le même carbone) caractérise les **acides carboxyliques** R$\\mathrm{{-}COOH}$.",
+          "method": [
+            "Repérer les atomes d'oxygène de la molécule et noter leurs liaisons : liaison simple ($\\mathrm{{-}OH}$) ou double liaison ($\\mathrm{C{=}O}$).",
+            "Identifier le groupe : $\\mathrm{{-}OH}$ seul, $\\mathrm{C{=}O}$ seul, ou $\\mathrm{C{=}O}$ et $\\mathrm{{-}OH}$ sur le même carbone.",
+            "Examiner le carbone fonctionnel (celui qui porte l'oxygène) : à quels atomes est-il lié ?",
+            "Conclure : donner la famille (alcool, aldéhyde, cétone ou acide carboxylique)."
+          ],
+          "example": {
+            "statement": "Au laboratoire du lycée, un flacon porte la formule $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CHO}$. Donner son groupe caractéristique et sa famille.",
+            "steps": [
+              "Repérer : la molécule contient un seul atome d'oxygène, relié au carbone du bout de la chaîne par une double liaison.",
+              "Identifier : la double liaison $\\mathrm{C{=}O}$ est un groupe carbonyle ; il n'y a pas de $\\mathrm{{-}OH}$ sur ce carbone, donc ce n'est pas un groupe carboxyle.",
+              "Examiner : le carbone du $\\mathrm{C{=}O}$ est lié à un atome d'hydrogène et à un seul atome de carbone.",
+              "Conclure : le carbone carbonylé porte un hydrogène et est en bout de chaîne, c'est un aldéhyde."
+            ]
+          },
+          "pitfall": "Ne confonds pas le $\\mathrm{{-}OH}$ d'un alcool avec celui d'un acide carboxylique. $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$ et $\\mathrm{CH_{3}{-}COOH}$ possèdent tous deux un $\\mathrm{{-}OH}$, mais dans $\\mathrm{CH_{3}{-}COOH}$ ce $\\mathrm{{-}OH}$ est lié à un carbone qui porte aussi un $\\mathrm{C{=}O}$ : c'est un acide carboxylique, pas un alcool. Ne confonds pas non plus aldéhyde et cétone : $\\mathrm{CH_{3}{-}CHO}$ (carbone lié à un hydrogène) est un aldéhyde, $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ (carbone lié à deux carbones) est une cétone. Examine toujours les voisins du carbone fonctionnel.",
+          "figure": "familles-et-groupes",
+          "exercise": {
+            "title": "Reconnaître les groupes et les familles",
+            "statement": "Dans cet exercice, tu reconnais les groupes hydroxyle, carbonyle et carboxyle et tu donnes la famille de composés oxygénés avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel groupe caractérise un acide carboxylique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un acide carboxylique contient deux oxygènes sur le même carbone. Étape 2 — Identifier : un $\\mathrm{C{=}O}$ et un $\\mathrm{{-}OH}$ sur le même carbone forment le groupe carboxyle $\\mathrm{{-}COOH}$. Le groupe hydroxyle seul caractérise un alcool et le carbonyle seul un aldéhyde ou une cétone.",
+                "answers": [
+                  {
+                    "content": "Le groupe carboxyle $\\mathrm{{-}COOH}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le groupe hydroxyle $\\mathrm{{-}OH}$ seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe carbonyle $\\mathrm{C{=}O}$ seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe $\\mathrm{{-}CH_{3}}$ en bout de chaîne",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque composé à sa famille.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'oxygène. Étape 2 — Identifier le groupe. Étape 3 — Examiner le carbone fonctionnel. Étape 4 — Conclure. $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$ : un $\\mathrm{{-}OH}$ sur un carbone à liaisons simples, c'est un alcool. $\\mathrm{CH_{3}{-}CHO}$ : un $\\mathrm{C{=}O}$ dont le carbone est lié à un hydrogène, c'est un aldéhyde. $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ : un $\\mathrm{C{=}O}$ lié à deux carbones, c'est une cétone. $\\mathrm{CH_{3}{-}COOH}$ : $\\mathrm{C{=}O}$ et $\\mathrm{{-}OH}$ sur le même carbone, c'est un acide carboxylique.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}OH}$",
+                    "match": "Alcool"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CHO}$",
+                    "match": "Aldéhyde"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CO{-}CH_{3}}$",
+                    "match": "Cétone"
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}COOH}$",
+                    "match": "Acide carboxylique"
+                  }
+                ]
+              },
+              {
+                "content": "La molécule $\\mathrm{CH_{3}{-}COOH}$ est un alcool parce qu'elle possède un groupe $\\mathrm{{-}OH}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la molécule contient deux oxygènes. Étape 2 — Identifier : le $\\mathrm{{-}OH}$ est lié à un carbone qui porte aussi un $\\mathrm{C{=}O}$ ; ensemble ils forment le groupe carboxyle. Étape 4 — Conclure : c'est un acide carboxylique. Un alcool a son $\\mathrm{{-}OH}$ sur un carbone qui ne porte que des liaisons simples.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles formules représentent des cétones ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on cherche un $\\mathrm{C{=}O}$. Étape 3 — Examiner : dans $\\mathrm{CH_{3}{-}CO{-}CH_{2}{-}CH_{3}}$ et $\\mathrm{CH_{3}{-}CH_{2}{-}CO{-}CH_{2}{-}CH_{3}}$, le carbone du $\\mathrm{C{=}O}$ est lié à deux carbones : ce sont des cétones. Étape 4 — Conclure. $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CHO}$ est un aldéhyde (carbone lié à un hydrogène), $\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$ un acide carboxylique et $\\mathrm{CH_{3}{-}CH(OH){-}CH_{3}}$ un alcool.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CO{-}CH_{2}{-}CH_{3}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CO{-}CH_{2}{-}CH_{3}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CHO}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH(OH){-}CH_{3}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le groupe $\\mathrm{{-}COOH}$ s'appelle le groupe ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier : le groupe $\\mathrm{{-}COOH}$, un $\\mathrm{C{=}O}$ et un $\\mathrm{{-}OH}$ sur le même carbone, s'appelle le groupe carboxyle.",
+                "answers": [
+                  {
+                    "content": "carboxyle",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes d'oxygène contient le groupe carboxyle $\\mathrm{{-}COOH}$ ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : dans $\\mathrm{{-}COOH}$, un oxygène est lié au carbone par une double liaison ($\\mathrm{C{=}O}$) et un second oxygène porte l'hydrogène ($\\mathrm{{-}OH}$). Étape 4 — Conclure : le groupe contient 2 atomes d'oxygène, pas 1.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu reconnais des groupes caractéristiques dans des composés oxygénés courants : l'éthanol des parfums, l'acétone du vernis, le vinaigre.",
+            "questions": [
+              {
+                "content": "Le groupe $\\mathrm{{-}COOH}$ s'appelle le groupe ___ ; il caractérise les ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Identifier : $\\mathrm{C{=}O}$ et $\\mathrm{{-}OH}$ sur le même carbone forment le groupe carboxyle. Étape 4 — Conclure : il caractérise la famille des acides carboxyliques, comme dans le vinaigre.",
+                "answers": [
+                  {
+                    "content": "hydroxyle",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "carbonyle",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "carboxyle",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "alcools",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "cétones",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "acides carboxyliques",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le groupe contient un C=O et un -OH sur le même carbone."
+              },
+              {
+                "content": "Dans quelle famille range-t-on $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un seul oxygène, en double liaison. Étape 3 — Examiner : le carbone du $\\mathrm{C{=}O}$ est lié à un hydrogène et à un carbone. Étape 4 — Conclure : c'est un aldéhyde ; une cétone aurait son $\\mathrm{C{=}O}$ lié à deux carbones.",
+                "answers": [
+                  {
+                    "content": "Aldéhyde",
+                    "correct": true
+                  },
+                  {
+                    "content": "Cétone",
+                    "correct": false
+                  },
+                  {
+                    "content": "Alcool",
+                    "correct": false
+                  },
+                  {
+                    "content": "Acide carboxylique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une cétone, le carbone du groupe carbonyle est lié à deux atomes de carbone.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Examiner : dans R$\\mathrm{{-}CO{-}}$R', le carbone du $\\mathrm{C{=}O}$ est lié à deux groupes carbonés R et R'. Étape 4 — Conclure : c'est ce qui distingue la cétone de l'aldéhyde, où ce carbone porte un hydrogène.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nommer et classer un alcool",
+          "remember": "Un **alcool** est un composé dont la molécule possède un **groupe hydroxyle** $\\mathrm{{-}OH}$ lié à un carbone qui ne porte que des liaisons simples, appelé **carbone fonctionnel**. Formule générale d'un alcool saturé non cyclique : $\\mathrm{C_{n}H_{2n+1}{-}OH}$, soit $\\mathrm{C_{n}H_{2n+2}O}$. **Nom** : on prend l'alcane de même chaîne, on remplace le « e » final par « ol » et on ajoute l'indice du carbone fonctionnel (propan-2-ol), inutile pour le méthanol et l'éthanol. **Classe** : on compte les carbones liés au carbone fonctionnel. Un seul : alcool **primaire**. Deux : **secondaire**. Trois : **tertiaire**. **L'éthanol** $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$ est l'alcool le plus courant : liquide incolore, il se mélange à l'eau et il est présent dans le vin de palme et dans les parfums.",
+          "method": [
+            "Repérer le carbone qui porte le groupe $\\mathrm{{-}OH}$ et vérifier qu'il ne porte que des liaisons simples.",
+            "Choisir la chaîne principale : la plus longue qui contient le carbone fonctionnel, numérotée pour que ce carbone ait le plus petit indice.",
+            "Nommer : placer les ramifications avec leur indice, puis l'alcane dont le « e » final devient « ol », avec l'indice du carbone fonctionnel.",
+            "Classer : compter les carbones liés au carbone fonctionnel (1 : primaire, 2 : secondaire, 3 : tertiaire)."
+          ],
+          "example": {
+            "statement": "Un flacon de laboratoire contient l'alcool de formule $\\mathrm{CH_{3}{-}CH(OH){-}CH_{2}{-}CH_{2}{-}CH_{3}}$. Donner son nom et sa classe.",
+            "steps": [
+              "Repérer : le $\\mathrm{{-}OH}$ est porté par le deuxième carbone de la chaîne en partant de la gauche, qui ne porte que des liaisons simples.",
+              "Choisir : la chaîne la plus longue compte 5 carbones. En partant de la gauche, le carbone fonctionnel a l'indice 2 ; en partant de la droite, il aurait l'indice 4. On garde la gauche.",
+              "Nommer : pas de ramification, alcane à 5 carbones (pentane), « e » remplacé par « ol » avec l'indice 2 : pentan-2-ol.",
+              "Classer : le carbone fonctionnel est lié à deux carbones (le $\\mathrm{CH_{3}}$ et le $\\mathrm{CH_{2}}$) : c'est un alcool secondaire."
+            ]
+          },
+          "pitfall": "Ne numérote pas la chaîne par n'importe quel bout : l'indice du carbone fonctionnel doit être le plus petit. Contre-exemple : $\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$ numéroté depuis la gauche donnerait « butan-3-ol », ce qui est faux ; depuis la droite, on obtient butan-2-ol. N'oublie pas non plus que la classe dépend des carbones voisins du carbone fonctionnel : le propan-1-ol $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}OH}$ est primaire et le propan-2-ol $\\mathrm{CH_{3}{-}CH(OH){-}CH_{3}}$ secondaire, bien qu'ils aient la même formule brute $\\mathrm{C_{3}H_{8}O}$.",
+          "figure": "ethanol",
+          "exercise": {
+            "title": "Nommer et classer des alcools",
+            "statement": "Dans cet exercice, tu nommes des alcools, tu les classes et tu comptes leurs atomes avec la méthode de la fiche. La figure montre la formule développée du propan-2-ol.",
+            "exercise_type": "fixation",
+            "figure": "propan-2-ol",
+            "questions": [
+              {
+                "content": "Quel est le nom de l'alcool de formule $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}OH}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le $\\mathrm{{-}OH}$ est sur le carbone du bout de la chaîne. Étape 2 — Choisir : la chaîne compte 4 carbones, numérotée depuis le carbone fonctionnel (indice 1). Étape 3 — Nommer : butane devient butan-1-ol. « Butan-4-ol » vient d'une numérotation par le mauvais bout, et le propan-1-ol n'a que 3 carbones.",
+                "answers": [
+                  {
+                    "content": "Butan-1-ol",
+                    "correct": true
+                  },
+                  {
+                    "content": "Butan-4-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Butan-2-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Propan-1-ol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un alcool saturé non cyclique a 6 atomes de carbone. Combien d'atomes d'hydrogène compte sa molécule, groupe hydroxyle compris ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Nommer : l'alcool de 6 carbones est un hexanol, de formule générale $\\mathrm{C_{n}H_{2n+2}O}$ avec n = 6. Le nombre d'hydrogènes est 2 × 6 + 2 = 14. Piège : 2n + 1 = 13 oublie l'hydrogène du groupe hydroxyle.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le carbone fonctionnel du propan-2-ol est lié à ___ atomes de carbone.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le carbone fonctionnel est le carbone du milieu, qui porte le $\\mathrm{{-}OH}$. Étape 4 — Classer : il est lié aux deux groupes $\\mathrm{CH_{3}}$, donc à 2 carbones, et le propan-2-ol est un alcool secondaire.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque alcool à sa classe.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Classer : on compte les carbones liés au carbone fonctionnel. Propan-1-ol : un seul carbone voisin, primaire. Propan-2-ol : deux carbones voisins, secondaire. 2-méthylpropan-2-ol : trois carbones voisins (les trois groupes méthyle), tertiaire.",
+                "answers": [
+                  {
+                    "content": "Propan-1-ol $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}OH}$",
+                    "match": "Primaire"
+                  },
+                  {
+                    "content": "Propan-2-ol $\\mathrm{CH_{3}{-}CH(OH){-}CH_{3}}$",
+                    "match": "Secondaire"
+                  },
+                  {
+                    "content": "2-méthylpropan-2-ol $\\mathrm{(CH_{3})_{3}C{-}OH}$",
+                    "match": "Tertiaire"
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de l'alcool de formule $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}OH}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le $\\mathrm{{-}OH}$ est sur le carbone du bout. Étape 2 — Choisir : la chaîne la plus longue qui contient ce carbone compte 3 carbones (propane), numérotée depuis le carbone fonctionnel : C1 porte le $\\mathrm{{-}OH}$, le groupe méthyle est en C2. Étape 3 — Nommer : 2-méthylpropan-1-ol. Le butan-1-ol est un isomère à chaîne non ramifiée ; « 3-méthylpropan-1-ol » compte mal la chaîne.",
+                "answers": [
+                  {
+                    "content": "2-méthylpropan-1-ol",
+                    "correct": true
+                  },
+                  {
+                    "content": "2-méthylpropan-3-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Butan-1-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "3-méthylpropan-1-ol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de l'alcool de formule $\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le $\\mathrm{{-}OH}$ est lié au troisième carbone en partant de la gauche. Étape 2 — Choisir : on numérote par la droite pour que le carbone fonctionnel ait le plus petit indice, 2 au lieu de 3. Étape 3 — Nommer : butan-2-ol. « Butan-3-ol » vient de la numérotation par le mauvais bout.",
+                "answers": [
+                  {
+                    "content": "Butan-2-ol",
+                    "correct": true
+                  },
+                  {
+                    "content": "Butan-3-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Butan-1-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "2-méthylpropan-1-ol",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu nommes et tu classes des alcools courants : le propan-1-ol, le butan-2-ol et le méthanol.",
+            "questions": [
+              {
+                "content": "Dans le propan-1-ol $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}OH}$, le carbone fonctionnel est lié à ___ carbone(s) : c'est un alcool ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le carbone fonctionnel est celui du bout, qui porte le $\\mathrm{{-}OH}$. Étape 4 — Classer : il n'est lié qu'à un seul carbone, donc l'alcool est primaire.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "primaire",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "secondaire",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "tertiaire",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Compte les carbones voisins du carbone qui porte le -OH."
+              },
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_{3}{-}CH(OH){-}CH_{2}{-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Choisir : la chaîne compte 4 carbones, numérotée pour que le carbone fonctionnel ait l'indice 2 et non 3. Étape 3 — Nommer : butan-2-ol. Étape 4 — Classer : deux carbones voisins, alcool secondaire.",
+                "answers": [
+                  {
+                    "content": "Butan-2-ol",
+                    "correct": true
+                  },
+                  {
+                    "content": "Butan-3-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Butan-1-ol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Propan-2-ol",
+                    "correct": false
+                  }
+                ],
+                "hint": "Numérote pour que le carbone du -OH ait le plus petit indice."
+              },
+              {
+                "content": "L'alcool $\\mathrm{CH_{3}{-}OH}$, à un seul carbone, s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer : l'alcane à un carbone est le méthane ; le « e » final devient « ol », on obtient le méthanol. Il n'y a pas d'indice à écrire, il n'y a qu'un carbone. Le méthanol est toxique.",
+                "answers": [
+                  {
+                    "content": "méthanol",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nommer un aldéhyde et une cétone",
+          "remember": "L'**aldéhyde** R$\\mathrm{{-}CHO}$ a son groupe carbonyle $\\mathrm{C{=}O}$ en bout de chaîne : le carbone carbonylé est toujours le carbone 1. Son nom : alcane de même chaîne, « e » final remplacé par « al », **sans indice** (éthanal $\\mathrm{CH_{3}{-}CHO}$, propanal $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$). La **cétone** R$\\mathrm{{-}CO{-}}$R' a son $\\mathrm{C{=}O}$ à l'intérieur de la chaîne. Son nom : alcane, « e » final remplacé par « one », avec l'**indice** du carbone carbonylé, le plus petit possible (pentan-2-one). La cétone la plus simple, la **propanone** $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ (l'acétone), sert de dissolvant. Aldéhydes et cétones saturés ont la formule brute $\\mathrm{C_{n}H_{2n}O}$.",
+          "method": [
+            "Repérer le groupe $\\mathrm{C{=}O}$ et la place de son carbone : en bout de chaîne (aldéhyde) ou à l'intérieur (cétone).",
+            "Choisir la chaîne principale : la plus longue qui contient le carbone du $\\mathrm{C{=}O}$, numérotée pour que ce carbone ait le plus petit indice (indice 1 pour un aldéhyde).",
+            "Nommer : placer les ramifications, puis l'alcane dont le « e » final devient « al » (aldéhyde, sans indice) ou « one » précédé de l'indice (cétone).",
+            "Vérifier que la formule brute est $\\mathrm{C_{n}H_{2n}O}$ en comptant les carbones et les hydrogènes."
+          ],
+          "example": {
+            "statement": "Un parfumeur étudie le composé $\\mathrm{CH_{3}{-}CH_{2}{-}CO{-}CH_{2}{-}CH_{2}{-}CH_{3}}$. Donner son nom.",
+            "steps": [
+              "Repérer : le $\\mathrm{C{=}O}$ est à l'intérieur de la chaîne, son carbone est lié à deux carbones : c'est une cétone.",
+              "Choisir : la chaîne compte 6 carbones. Depuis la gauche, le carbone du $\\mathrm{C{=}O}$ est C3 ; depuis la droite, il serait C4. On garde l'indice 3.",
+              "Nommer : hexane, « e » remplacé par « one », avec l'indice 3 : hexan-3-one.",
+              "Vérifier : 6 carbones et 3 + 2 + 2 + 2 + 3 = 12 hydrogènes, soit $\\mathrm{C_{6}H_{12}O}$, bien de la forme $\\mathrm{C_{n}H_{2n}O}$ avec n = 6."
+            ]
+          },
+          "pitfall": "Ne mets pas d'indice dans le nom d'un aldéhyde, et ne confonds pas « al » et « one ». Contre-exemple : $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$ est le propanal (aldéhyde) et $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ est la propanone (cétone). Les deux ont la formule brute $\\mathrm{C_{3}H_{6}O}$, mais ce ne sont pas les mêmes composés : ils appartiennent à des familles différentes. L'indice, lui, ne se place que pour une cétone, quand il y a plusieurs positions possibles pour le $\\mathrm{C{=}O}$.",
+          "figure": "ethanal",
+          "exercise": {
+            "title": "Nommer des aldéhydes et des cétones",
+            "statement": "Dans cet exercice, tu nommes des aldéhydes et des cétones et tu comptes leurs atomes avec la méthode de la fiche. La figure montre la formule développée de la propanone, la cétone du dissolvant de vernis.",
+            "exercise_type": "fixation",
+            "figure": "propanone",
+            "questions": [
+              {
+                "content": "Quel est le nom de l'aldéhyde $\\mathrm{CH_{3}{-}CHO}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le groupe $\\mathrm{C{=}O}$ est en bout de chaîne, son carbone est lié à un hydrogène. Étape 2 — Choisir : la chaîne compte 2 carbones, le carbone du $\\mathrm{C{=}O}$ est C1. Étape 3 — Nommer : éthane devient éthanal, sans indice. « Éthanol » est l'alcool et « méthanal » n'a qu'un carbone.",
+                "answers": [
+                  {
+                    "content": "Éthanal",
+                    "correct": true
+                  },
+                  {
+                    "content": "Éthanone",
+                    "correct": false
+                  },
+                  {
+                    "content": "Éthanol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Méthanal",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de la cétone $\\mathrm{CH_{3}{-}CO{-}CH_{2}{-}CH_{2}{-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le $\\mathrm{C{=}O}$ est à l'intérieur de la chaîne, son carbone est lié à deux carbones. Étape 2 — Choisir : la chaîne compte 5 carbones ; depuis la gauche le carbone du $\\mathrm{C{=}O}$ a l'indice 2, depuis la droite l'indice 4 ; on garde 2. Étape 3 — Nommer : pentan-2-one. « Pentanal » est un aldéhyde.",
+                "answers": [
+                  {
+                    "content": "Pentan-2-one",
+                    "correct": true
+                  },
+                  {
+                    "content": "Pentan-4-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pentan-3-one",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pentanal",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le plus simple des aldéhydes, $\\mathrm{H{-}CHO}$, s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : la chaîne ne compte qu'un carbone, celui du $\\mathrm{C{=}O}$. Étape 3 — Nommer : méthane devient méthanal, sans indice.",
+                "answers": [
+                  {
+                    "content": "méthanal",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles formules représentent des aldéhydes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on cherche un $\\mathrm{C{=}O}$. Étape 3 — Nommer : dans $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$ (propanal) et $\\mathrm{CH_{3}{-}CHO}$ (éthanal), le carbone du $\\mathrm{C{=}O}$ est en bout de chaîne et lié à un hydrogène : ce sont des aldéhydes. $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ est une cétone, $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$ un alcool et $\\mathrm{CH_{3}{-}COOH}$ un acide.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CHO}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CO{-}CH_{3}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}OH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_{3}{-}COOH}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cétone saturée a 5 atomes de carbone. Combien d'atomes d'hydrogène compte sa molécule ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Vérifier : la formule brute d'une cétone ou d'un aldéhyde saturé est $\\mathrm{C_{n}H_{2n}O}$. Avec n = 5, le nombre d'hydrogènes est 2 × 5 = 10 : la molécule est $\\mathrm{C_{5}H_{10}O}$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le nom « propan-1-al » est correct pour $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Choisir : dans un aldéhyde, le carbone du $\\mathrm{C{=}O}$ est toujours C1, on n'écrit donc pas d'indice. Étape 3 — Nommer : propane devient propanal. L'indice ne s'écrit que pour une cétone, comme dans pentan-2-one.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu nommes un aldéhyde et une cétone. Rappel : le propanal et la propanone ont la même formule brute, $\\mathrm{C_{3}H_{6}O}$.",
+            "questions": [
+              {
+                "content": "Dans le propanal $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$, le carbone du groupe $\\mathrm{C{=}O}$ est lié à ___ atome(s) d'hydrogène : c'est un ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le $\\mathrm{C{=}O}$ est en bout de chaîne. Étape 3 — Nommer : son carbone porte un hydrogène, la famille est celle des aldéhydes (suffixe « al »). Dans une cétone, ce carbone serait lié à deux carbones et à aucun hydrogène.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "aldéhyde",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "cétone",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "alcool",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Regarde le CHO du bout de la chaîne."
+              },
+              {
+                "content": "Quelle est la formule brute de la propanone $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Vérifier : on compte 3 carbones et 3 + 0 + 3 = 6 hydrogènes, un oxygène : $\\mathrm{C_{3}H_{6}O}$, de la forme $\\mathrm{C_{n}H_{2n}O}$. $\\mathrm{C_{3}H_{8}O}$ est celle d'un alcool et $\\mathrm{C_{3}H_{6}O_{2}}$ celle d'un acide carboxylique.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_{3}H_{6}O}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_{3}H_{8}O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{3}H_{6}O_{2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{2}H_{4}O}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'aldéhyde $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CHO}$ s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : la chaîne compte 4 carbones, le carbone du $\\mathrm{C{=}O}$ est C1. Étape 3 — Nommer : butane devient butanal, sans indice.",
+                "answers": [
+                  {
+                    "content": "butanal",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nommer un acide carboxylique",
+          "remember": "L'**acide carboxylique** R$\\mathrm{{-}COOH}$ possède le **groupe carboxyle** $\\mathrm{{-}COOH}$. Son carbone est le carbone 1 de la chaîne, et il compte dans la chaîne. Son nom : « acide », puis l'alcane de même chaîne dont le « e » final devient « oïque » (acide éthanoïque $\\mathrm{CH_{3}{-}COOH}$). Formule brute d'un acide saturé : $\\mathrm{C_{n}H_{2n}O_{2}}$. L'**acide méthanoïque** $\\mathrm{H{-}COOH}$ est le plus simple. L'**acide éthanoïque** est l'acide du **vinaigre**. En solution aqueuse, un acide carboxylique donne une solution **acide** : son pH est inférieur à 7 et le bleu de bromothymol y devient jaune.",
+          "method": [
+            "Repérer le groupe carboxyle $\\mathrm{{-}COOH}$ : son carbone est le carbone 1 de la chaîne.",
+            "Choisir la chaîne principale : la plus longue qui contient le carbone du carboxyle, numérotée à partir de lui.",
+            "Nommer : écrire « acide », les ramifications avec leur indice, puis l'alcane dont le « e » final devient « oïque ».",
+            "Vérifier que la formule brute est $\\mathrm{C_{n}H_{2n}O_{2}}$ ; en solution aqueuse, le caractère acide se vérifie avec le pH ou le bleu de bromothymol."
+          ],
+          "example": {
+            "statement": "Un élève veut nommer l'acide de formule $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}COOH}$. Donner son nom.",
+            "steps": [
+              "Repérer : le groupe $\\mathrm{{-}COOH}$ est au bout de la chaîne ; son carbone est C1.",
+              "Choisir : la chaîne la plus longue compte 4 carbones depuis le carboxyle : C1 ($\\mathrm{COOH}$), C2 ($\\mathrm{CH_{2}}$), C3 ($\\mathrm{CH}$ qui porte un $\\mathrm{CH_{3}}$), C4. Le groupe méthyle est en 3.",
+              "Nommer : « acide », méthyle en 3, butane dont le « e » devient « oïque » : acide 3-méthylbutanoïque.",
+              "Vérifier : 5 carbones et 3 + 1 + 3 + 2 + 1 = 10 hydrogènes, soit $\\mathrm{C_{5}H_{10}O_{2}}$, bien de la forme $\\mathrm{C_{n}H_{2n}O_{2}}$ avec n = 5."
+            ]
+          },
+          "pitfall": "N'oublie pas de compter le carbone du carboxyle dans la chaîne. Contre-exemple : $\\mathrm{CH_{3}{-}COOH}$ a 2 carbones dont celui du carboxyle ; c'est l'acide éthanoïque, et non l'acide méthanoïque. De même, $\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$ est l'acide propanoïque. Le suffixe « oïque » remplace le « e » final de l'alcane et se place après « acide » ; ne le confonds pas avec « ol » (alcool) ou « al » (aldéhyde).",
+          "figure": "acide-ethanoique",
+          "exercise": {
+            "title": "Nommer des acides carboxyliques",
+            "statement": "Dans cet exercice, tu nommes des acides carboxyliques, tu comptes leurs atomes et tu reconnais le caractère acide d'une solution avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le groupe $\\mathrm{{-}COOH}$ contient le carbone 1. Étape 2 — Choisir : la chaîne compte 3 carbones, celui du carboxyle compris. Étape 3 — Nommer : « acide », puis propane devient propanoïque. L'acide éthanoïque n'a que 2 carbones. Le propanal et le propan-1-ol sont d'autres familles.",
+                "answers": [
+                  {
+                    "content": "Acide propanoïque",
+                    "correct": true
+                  },
+                  {
+                    "content": "Acide éthanoïque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Propanal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Propan-1-ol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel acide contient le vinaigre, et quelle est sa formule ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le vinaigre est acide, son groupe est le carboxyle $\\mathrm{{-}COOH}$. Étape 2 — Choisir : la chaîne de 2 carbones, carboxyle compris. Étape 3 — Nommer : acide éthanoïque, de formule $\\mathrm{CH_{3}{-}COOH}$. $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$ est l'éthanol, un alcool.",
+                "answers": [
+                  {
+                    "content": "L'acide éthanoïque $\\mathrm{CH_{3}{-}COOH}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'acide méthanoïque $\\mathrm{H{-}COOH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'acide éthanoïque $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'éthanal $\\mathrm{CH_{3}{-}CHO}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes d'hydrogène compte une molécule d'acide butanoïque ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Choisir : l'acide butanoïque a 4 carbones, carboxyle compris. Étape 4 — Vérifier : un acide saturé a la formule brute $\\mathrm{C_{n}H_{2n}O_{2}}$, donc 2 × 4 = 8 hydrogènes ; la molécule est $\\mathrm{C_{4}H_{8}O_{2}}$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'acide de formule $\\mathrm{H{-}COOH}$ s'appelle l'acide ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : la chaîne ne compte qu'un carbone, celui du carboxyle. Étape 3 — Nommer : méthane devient méthanoïque, d'où l'acide méthanoïque.",
+                "answers": [
+                  {
+                    "content": "méthanoïque",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles observations montrent qu'une solution est acide ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Vérifier : une solution acide a un pH inférieur à 7 et fait virer le bleu de bromothymol au jaune. Un pH de 11 et un bleu de bromothymol resté bleu indiquent une solution basique ; un pH de 7 correspond à une solution neutre.",
+                "answers": [
+                  {
+                    "content": "Son pH vaut 3",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bleu de bromothymol y devient jaune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son pH vaut 11",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le bleu de bromothymol y reste bleu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son pH vaut 7",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de $\\mathrm{CH_{3}{-}CH(CH_{3}){-}COOH}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le carbone du carboxyle est C1. Étape 2 — Choisir : la chaîne la plus longue compte 3 carbones, numérotée depuis le carboxyle : C2 porte le groupe méthyle. Étape 3 — Nommer : acide 2-méthylpropanoïque. « 3-méthyl » est impossible : un méthyle sur le carbone 3 allongerait la chaîne à 4 carbones. L'acide butanoïque est un isomère à chaîne non ramifiée.",
+                "answers": [
+                  {
+                    "content": "Acide 2-méthylpropanoïque",
+                    "correct": true
+                  },
+                  {
+                    "content": "Acide 3-méthylpropanoïque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Acide butanoïque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Acide méthylpropanoïque-1",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu nommes des acides carboxyliques, comme celui du vinaigre du marché.",
+            "questions": [
+              {
+                "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}COOH}$ est l'acide ___, de formule brute ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Choisir : la chaîne compte 4 carbones, celui du carboxyle compris. Étape 3 — Nommer : acide butanoïque. Étape 4 — Vérifier : $\\mathrm{C_{n}H_{2n}O_{2}}$ avec n = 4 donne $\\mathrm{C_{4}H_{8}O_{2}}$.",
+                "answers": [
+                  {
+                    "content": "propanoïque",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "butanoïque",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "pentanoïque",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$\\mathrm{C_{4}H_{8}O_{2}}$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$\\mathrm{C_{4}H_{10}O_{2}}$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$\\mathrm{C_{3}H_{6}O_{2}}$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Compte les carbones, y compris celui du groupe COOH."
+              },
+              {
+                "content": "Une solution d'acide éthanoïque fait virer le bleu de bromothymol au bleu.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Vérifier : une solution acide fait virer le bleu de bromothymol au jaune, pas au bleu. Le bleu apparaît dans une solution basique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "$\\mathrm{CH_{3}{-}COOH}$ est l'acide ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : la chaîne compte 2 carbones, celui du carboxyle compris. Étape 3 — Nommer : éthane devient éthanoïque, d'où l'acide éthanoïque.",
+                "answers": [
+                  {
+                    "content": "éthanoïque",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les deux carbones : celui du CH3 et celui du COOH."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire la combustion complète d'un alcool",
+          "remember": "La **combustion complète** d'un alcool dans le dioxygène produit du **dioxyde de carbone** $\\mathrm{CO_{2}}$ et de l'**eau** $\\mathrm{H_{2}O}$. Pour un alcool saturé non cyclique de formule $\\mathrm{C_{n}H_{2n+2}O}$ : $\\mathrm{C_{n}H_{2n+2}O\\ +\\ 3n/2\\ O_{2}\\ \\to\\ n\\ CO_{2}\\ +\\ (n+1)\\ H_{2}O}$. Si le coefficient du dioxygène est fractionnaire, on multiplie toute l'équation par 2. Exemple : $\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$. Les coefficients donnent les rapports de quantités de matière : n = m / M et V = n × Vm. L'éthanol est un liquide incolore, miscible à l'eau et inflammable ; le méthanol est toxique.",
+          "method": [
+            "Écrire l'équation non équilibrée : l'alcool et le dioxygène à gauche, le dioxyde de carbone et l'eau à droite.",
+            "Équilibrer le carbone : autant de $\\mathrm{CO_{2}}$ que de carbones dans l'alcool.",
+            "Équilibrer l'hydrogène : l'eau contient 2 hydrogènes, donc le nombre de $\\mathrm{H_{2}O}$ est la moitié du nombre d'hydrogènes de l'alcool.",
+            "Équilibrer l'oxygène avec le dioxygène, en comptant l'oxygène de l'alcool ; multiplier par 2 si besoin pour avoir des coefficients entiers.",
+            "Calculer avec les coefficients les quantités de matière, puis les masses ou les volumes."
+          ],
+          "example": {
+            "statement": "Une lampe à alcool d'un laboratoire d'Abidjan brûle complètement 23 g d'éthanol $\\mathrm{C_{2}H_{6}O}$ (M = 46 g/mol). Écrire l'équation et calculer la quantité de dioxygène consommée.",
+            "steps": [
+              "Écrire : $\\mathrm{C_{2}H_{6}O\\ +\\ O_{2}\\ \\to\\ CO_{2}\\ +\\ H_{2}O}$.",
+              "Équilibrer le carbone : l'éthanol a 2 carbones, on met 2 $\\mathrm{CO_{2}}$.",
+              "Équilibrer l'hydrogène : l'éthanol a 6 hydrogènes, on met 3 $\\mathrm{H_{2}O}$.",
+              "Équilibrer l'oxygène : à droite 2 × 2 + 3 = 7 oxygènes ; à gauche 1 oxygène dans l'alcool, donc 6 dans le dioxygène, soit 3 $\\mathrm{O_{2}}$. Équation : $\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$.",
+              "Calculer : n(éthanol) = 23 / 46 = 0,5 mol. Le coefficient 3 donne n(dioxygène) = 3 × 0,5 = 1,5 mol."
+            ]
+          },
+          "pitfall": "Quand tu équilibres l'oxygène, n'oublie pas l'oxygène déjà présent dans la molécule d'alcool. Contre-exemple : pour l'éthanol, l'oxygène à droite est 2 × 2 + 3 = 7. Si on oublie l'oxygène de l'alcool, on trouve 7 / 2 = 3,5 $\\mathrm{O_{2}}$ au lieu de 3. Avec le bon bilan, 7 = 1 + 2 × 3. Vérifie toujours que le nombre de chaque atome est le même des deux côtés.",
+          "figure": null,
+          "exercise": {
+            "title": "Combustion complète des alcools",
+            "statement": "Dans cet exercice, tu écris des équations de combustion complète d'alcools et tu fais des calculs de quantités avec la méthode de la fiche. Données : masses molaires de l'éthanol 46 g/mol et de l'eau 18 g/mol ; volume molaire d'un gaz 24 L/mol.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'équation de la combustion complète de l'éthanol ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{C_{2}H_{6}O}$ et $\\mathrm{O_{2}}$ donnent $\\mathrm{CO_{2}}$ et $\\mathrm{H_{2}O}$. Étape 2 — Équilibrer le carbone : 2 $\\mathrm{CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : 6 hydrogènes donnent 3 $\\mathrm{H_{2}O}$. Étape 4 — Équilibrer l'oxygène : à droite 2 × 2 + 3 = 7 oxygènes ; à gauche 1 + 2x, donc x = 3 $\\mathrm{O_{2}}$. Avec 2 $\\mathrm{O_{2}}$, l'oxygène de l'alcool serait oublié.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_{2}H_{6}O\\ +\\ 2\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 6\\ H_{2}O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 3\\ CO_{2}\\ +\\ 2\\ H_{2}O}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le coefficient du dioxygène dans l'équation de combustion complète du butan-1-ol $\\mathrm{C_{4}H_{10}O}$ ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $\\mathrm{C_{4}H_{10}O\\ +\\ O_{2}\\ \\to\\ CO_{2}\\ +\\ H_{2}O}$. Étape 2 — Équilibrer le carbone : 4 $\\mathrm{CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : 5 $\\mathrm{H_{2}O}$. Étape 4 — Équilibrer l'oxygène : à droite 4 × 2 + 5 = 13 ; à gauche 1 + 2x = 13, donc x = 6. Le coefficient du dioxygène est 6. Piège : oublier l'oxygène de l'alcool donne 13 / 2 = 6,5.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien de litres de dioxyde de carbone obtient-on en brûlant complètement 46 g d'éthanol ?",
+                "question_type": "numeric",
+                "unit": "L",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$ (étapes 2 à 4 faites). Étape 5 — Calculer : n(éthanol) = 46 / 46 = 1 mol. L'équation donne 2 mol de $\\mathrm{CO_{2}}$ pour 1 mol d'éthanol, soit 2 mol. V = 2 × 24 = 48 L. Piège : 24 L correspond à 1 mol seulement, en oubliant le coefficient 2.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle masse d'eau, en grammes, se forme quand on brûle complètement 0,5 mol d'éthanol ?",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $\\mathrm{C_{2}H_{6}O\\ +\\ 3\\ O_{2}\\ \\to\\ 2\\ CO_{2}\\ +\\ 3\\ H_{2}O}$. Étape 5 — Calculer : 1 mol d'éthanol donne 3 mol d'eau, donc 0,5 mol en donne 1,5 mol. m = 1,5 × 18 = 27 g. Piège : 9 g viendrait de 0,5 mol d'eau, en oubliant le coefficient 3.",
+                "answers": [
+                  {
+                    "content": "27",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour équilibrer la combustion complète d'un alcool.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire d'abord l'alcool, le dioxygène, le dioxyde de carbone et l'eau. Étape 2 — Équilibrer le carbone : un $\\mathrm{CO_{2}}$ par carbone. Étape 3 — Équilibrer l'hydrogène avec l'eau. Étape 4 — Équilibrer l'oxygène en dernier, car il apparaît dans l'alcool, dans $\\mathrm{CO_{2}}$, dans $\\mathrm{H_{2}O}$ et dans $\\mathrm{O_{2}}$ : les autres coefficients doivent être connus.",
+                "answers": [
+                  {
+                    "content": "Écrire les réactifs et les produits"
+                  },
+                  {
+                    "content": "Équilibrer le carbone avec le dioxyde de carbone"
+                  },
+                  {
+                    "content": "Équilibrer l'hydrogène avec l'eau"
+                  },
+                  {
+                    "content": "Équilibrer l'oxygène avec le dioxygène"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sur l'éthanol sont exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : la combustion de l'éthanol dans le dioxygène produit du $\\mathrm{CO_{2}}$ et de l'eau ; il est donc inflammable. C'est un liquide incolore miscible à l'eau, présent dans le vin de palme et les parfums. $\\mathrm{CH_{3}{-}COOH}$ est la formule de l'acide éthanoïque, pas de l'éthanol.",
+                "answers": [
+                  {
+                    "content": "C'est un liquide incolore qui se mélange à l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est inflammable : il brûle dans le dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est un gaz à température ambiante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est insoluble dans l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa formule est $\\mathrm{CH_{3}{-}COOH}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu écris la combustion de l'éthanol et du méthanol et tu en déduis des quantités de matière.",
+            "questions": [
+              {
+                "content": "La combustion complète d'un alcool consomme du ___ et produit du dioxyde de carbone et de ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Écrire : l'alcool brûle dans le dioxygène et donne du dioxyde de carbone et de l'eau. Le dihydrogène et le diazote n'apparaissent pas dans ce bilan.",
+                "answers": [
+                  {
+                    "content": "dioxygène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "dihydrogène",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "diazote",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'eau",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "carbone",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "dihydrogène",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense au gaz de l'air qui entretient une combustion."
+              },
+              {
+                "content": "Combien de moles de dioxyde de carbone obtient-on en brûlant complètement 1 mol d'éthanol $\\mathrm{C_{2}H_{6}O}$ ?",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Équilibrer le carbone : l'éthanol a 2 carbones, donc 2 $\\mathrm{CO_{2}}$ par molécule. Étape 5 — Calculer : 1 mol d'éthanol donne 2 mol de dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le coefficient devant CO2 est le nombre de carbones de l'alcool."
+              },
+              {
+                "content": "Quel est le coefficient de l'eau dans la combustion complète de l'éthanol $\\mathrm{C_{2}H_{6}O}$ ?",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Équilibrer l'hydrogène : l'éthanol a 6 hydrogènes et chaque molécule d'eau en contient 2, donc 6 / 2 = 3 $\\mathrm{H_{2}O}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le vinaigre du marché",
+          "statement": "Au marché de Cocody, une vendeuse propose du vinaigre blanc. Le vinaigre est une solution aqueuse d'acide éthanoïque $\\mathrm{CH_{3}{-}COOH}$. Un élève mesure le pH d'un échantillon : pH = 2,5. Données : masses molaires atomiques C = 12 g/mol, H = 1 g/mol, O = 16 g/mol.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel groupe caractéristique possède l'acide éthanoïque $\\mathrm{CH_{3}{-}COOH}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la molécule contient deux oxygènes. Étape 2 — Identifier : le carbone terminal porte un $\\mathrm{C{=}O}$ et un $\\mathrm{{-}OH}$ : c'est le groupe carboxyle $\\mathrm{{-}COOH}$. Étape 3 — Examiner : il n'y a pas de carbone portant seulement un $\\mathrm{{-}OH}$ ou seulement un $\\mathrm{C{=}O}$. Étape 4 — Conclure : famille des acides carboxyliques. Le $\\mathrm{{-}OH}$ ne fait pas de l'acide un alcool.",
+              "answers": [
+                {
+                  "content": "Le groupe carboxyle $\\mathrm{{-}COOH}$",
+                  "correct": true
+                },
+                {
+                  "content": "Le groupe hydroxyle d'un alcool",
+                  "correct": false
+                },
+                {
+                  "content": "Le groupe carbonyle d'une cétone",
+                  "correct": false
+                },
+                {
+                  "content": "Le groupe carbonyle d'un aldéhyde",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le vinaigre est acide. Que peut-on dire de l'échantillon dont le pH vaut 2,5 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on lit pH = 2,5. Étape 2 — Comparer à 7 : 2,5 est inférieur à 7. Étape 3 — Conclure : toute solution de pH inférieur à 7 est acide. C'est cohérent avec l'acide éthanoïque dissous dans le vinaigre.",
+              "answers": [
+                {
+                  "content": "Son pH est inférieur à 7 : la solution est acide",
+                  "correct": true
+                },
+                {
+                  "content": "Son pH est supérieur à 7 : la solution est basique",
+                  "correct": false
+                },
+                {
+                  "content": "Son pH vaut 7 : la solution est neutre",
+                  "correct": false
+                },
+                {
+                  "content": "Le pH ne permet pas de savoir si la solution est acide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelques gouttes de bleu de bromothymol versées dans l'échantillon de vinaigre prennent la couleur jaune.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : la solution est acide (pH = 2,5). Étape 2 — Appliquer : le bleu de bromothymol est jaune en milieu acide, bleu en milieu basique et vert en milieu neutre. Étape 3 — Conclure : il devient jaune dans le vinaigre.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la masse molaire de l'acide éthanoïque $\\mathrm{C_{2}H_{4}O_{2}}$, en g/mol ?",
+              "question_type": "numeric",
+              "unit": "g/mol",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire la formule brute : $\\mathrm{C_{2}H_{4}O_{2}}$, de la forme $\\mathrm{C_{n}H_{2n}O_{2}}$ avec n = 2. Étape 2 — Calculer : M = 2 × 12 + 4 × 1 + 2 × 16 = 24 + 4 + 32 = 60 g/mol. Piège : oublier les 2 oxygènes donne 28 g/mol.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle quantité de matière, en moles, représentent 30 g d'acide éthanoïque pur ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Données : m = 30 g et M = 60 g/mol. Étape 2 — Formule : n = m / M. Étape 3 — Application : n = 30 / 60 = 0,5 mol. Piège : 60 / 30 = 2 inverse la formule.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque acide à sa formule.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer : le nom donne le nombre de carbones, celui du carboxyle compris. Étape 2 — Appliquer : « méthan » un carbone, « éthan » deux, « propan » trois. Étape 3 — Écrire : $\\mathrm{H{-}COOH}$ (1 carbone), $\\mathrm{CH_{3}{-}COOH}$ (2 carbones), $\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$ (3 carbones). On n'oublie pas le carbone du carboxyle : $\\mathrm{CH_{3}{-}COOH}$ est éthanoïque et non méthanoïque.",
+              "answers": [
+                {
+                  "content": "Acide méthanoïque",
+                  "match": "$\\mathrm{H{-}COOH}$"
+                },
+                {
+                  "content": "Acide éthanoïque",
+                  "match": "$\\mathrm{CH_{3}{-}COOH}$"
+                },
+                {
+                  "content": "Acide propanoïque",
+                  "match": "$\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les flacons de la vendeuse de parfums",
+          "statement": "Une vendeuse de parfums du marché de Treichville range quatre flacons. Le flacon A contient $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$, le flacon B $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$, le flacon C $\\mathrm{CH_{3}{-}CHO}$ et le flacon D $\\mathrm{CH_{3}{-}COOH}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque flacon à sa famille.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer les oxygènes. Étape 2 — Identifier le groupe. Étape 3 — Examiner le carbone fonctionnel. Étape 4 — Conclure. A : $\\mathrm{{-}OH}$ sur un carbone à liaisons simples, alcool. B : $\\mathrm{C{=}O}$ lié à deux carbones, cétone. C : $\\mathrm{C{=}O}$ lié à un hydrogène, aldéhyde. D : $\\mathrm{C{=}O}$ et $\\mathrm{{-}OH}$ sur le même carbone, acide carboxylique.",
+              "answers": [
+                {
+                  "content": "Flacon A $\\mathrm{CH_{3}{-}CH_{2}{-}OH}$",
+                  "match": "Alcool"
+                },
+                {
+                  "content": "Flacon B $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$",
+                  "match": "Cétone"
+                },
+                {
+                  "content": "Flacon C $\\mathrm{CH_{3}{-}CHO}$",
+                  "match": "Aldéhyde"
+                },
+                {
+                  "content": "Flacon D $\\mathrm{CH_{3}{-}COOH}$",
+                  "match": "Acide carboxylique"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le nom du contenu du flacon B, utilisé comme dissolvant de vernis ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ a un $\\mathrm{C{=}O}$ à l'intérieur de la chaîne, c'est une cétone. Étape 2 — Choisir : la chaîne compte 3 carbones. Étape 3 — Nommer : propane devient propanone ; l'indice 2 n'est pas écrit car le $\\mathrm{C{=}O}$ ne peut être qu'au milieu. Le propanal est l'aldéhyde $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$.",
+              "answers": [
+                {
+                  "content": "Propanone",
+                  "correct": true
+                },
+                {
+                  "content": "Propanal",
+                  "correct": false
+                },
+                {
+                  "content": "Propan-2-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Acide propanoïque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le nom du contenu du flacon C ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $\\mathrm{CH_{3}{-}CHO}$ a un $\\mathrm{C{=}O}$ en bout de chaîne, c'est un aldéhyde. Étape 2 — Choisir : 2 carbones. Étape 3 — Nommer : éthane devient éthanal, sans indice. L'éthanol est le flacon A et l'acide éthanoïque le flacon D.",
+              "answers": [
+                {
+                  "content": "Éthanal",
+                  "correct": true
+                },
+                {
+                  "content": "Éthanol",
+                  "correct": false
+                },
+                {
+                  "content": "Méthanal",
+                  "correct": false
+                },
+                {
+                  "content": "Acide éthanoïque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un aldéhyde saturé a 4 atomes de carbone. Combien d'atomes d'hydrogène compte sa molécule ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : un aldéhyde saturé a la formule brute $\\mathrm{C_{n}H_{2n}O}$. Étape 4 — Vérifier : avec n = 4, le nombre d'hydrogènes est 2 × 4 = 8 ; la molécule est $\\mathrm{C_{4}H_{8}O}$, le butanal.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles formules ont la même formule brute $\\mathrm{C_{3}H_{6}O}$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Vérifier : on compte les atomes. $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$ : 3 C, 3 + 2 + 1 = 6 H, 1 O. $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$ : 3 C, 6 H, 1 O. $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}OH}$ est $\\mathrm{C_{3}H_{8}O}$ (8 H) et $\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$ est $\\mathrm{C_{3}H_{6}O_{2}}$ (2 O).",
+              "answers": [
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CO{-}CH_{3}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}OH}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}COOH}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le propanal et la propanone appartiennent à la même famille de composés.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : dans $\\mathrm{CH_{3}{-}CH_{2}{-}CHO}$, le carbone du $\\mathrm{C{=}O}$ est lié à un hydrogène (aldéhyde). Dans $\\mathrm{CH_{3}{-}CO{-}CH_{3}}$, il est lié à deux carbones (cétone). Étape 4 — Conclure : même formule brute $\\mathrm{C_{3}H_{6}O}$, mais deux familles différentes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les alcools de formule brute C4H10O",
+          "statement": "Au laboratoire d'un lycée de Yopougon, un technicien étudie les alcools saturés non cycliques de formule brute $\\mathrm{C_{4}H_{10}O}$. Il en existe quatre, rangés dans quatre flacons : $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}OH}$, $\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$, $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}OH}$ et $\\mathrm{(CH_{3})_{3}C{-}OH}$. Données : le dioxygène est le seul réactif de la combustion, et l'équation fait apparaître le dioxyde de carbone et l'eau.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque formule à son nom.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer le carbone qui porte le $\\mathrm{{-}OH}$. Étape 2 — Choisir la chaîne la plus longue qui le contient et la numéroter pour que son indice soit le plus petit. Étape 3 — Nommer. $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}OH}$ : 4 carbones, $\\mathrm{{-}OH}$ en 1, butan-1-ol. $\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$ : $\\mathrm{{-}OH}$ en 2, butan-2-ol. $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}OH}$ : chaîne de 3 carbones, méthyle en 2, $\\mathrm{{-}OH}$ en 1. $\\mathrm{(CH_{3})_{3}C{-}OH}$ : chaîne de 3 carbones, méthyle et $\\mathrm{{-}OH}$ sur le carbone 2.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}OH}$",
+                  "match": "Butan-1-ol"
+                },
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$",
+                  "match": "Butan-2-ol"
+                },
+                {
+                  "content": "$\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}OH}$",
+                  "match": "2-méthylpropan-1-ol"
+                },
+                {
+                  "content": "$\\mathrm{(CH_{3})_{3}C{-}OH}$",
+                  "match": "2-méthylpropan-2-ol"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le seul de ces quatre alcools qui est tertiaire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le carbone fonctionnel. Étape 4 — Classer : dans le 2-méthylpropan-2-ol $\\mathrm{(CH_{3})_{3}C{-}OH}$, il est lié à 3 carbones : tertiaire. Dans le butan-2-ol il est lié à 2 carbones (secondaire), dans le butan-1-ol et le 2-méthylpropan-1-ol à 1 seul carbone (primaires).",
+              "answers": [
+                {
+                  "content": "Le 2-méthylpropan-2-ol",
+                  "correct": true
+                },
+                {
+                  "content": "Le butan-2-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Le butan-1-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Le 2-méthylpropan-1-ol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de ces quatre alcools sont des alcools primaires ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Classer : on compte les carbones liés au carbone fonctionnel. Le butan-1-ol et le 2-méthylpropan-1-ol ont un seul carbone voisin : primaires. Le butan-2-ol (2 voisins) est secondaire et le 2-méthylpropan-2-ol (3 voisins) est tertiaire. Il y en a donc 2.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien d'atomes d'hydrogène a la molécule d'un alcool saturé de 4 atomes de carbone ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : un alcool saturé non cyclique a pour formule brute $\\mathrm{C_{n}H_{2n+2}O}$. Étape 2 — Appliquer : avec n = 4, le nombre d'hydrogènes est 2 × 4 + 2 = 10, soit $\\mathrm{C_{4}H_{10}O}$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un cinquième flacon contient un composé de formule brute $\\mathrm{C_{4}H_{8}O}$ dont le groupe $\\mathrm{C{=}O}$ est en bout de chaîne, sur une chaîne non ramifiée. Quel est son nom ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $\\mathrm{C{=}O}$ en bout de chaîne, c'est un aldéhyde. Étape 2 — Choisir : chaîne non ramifiée de 4 carbones. Étape 3 — Nommer : butane devient butanal. Étape 4 — Vérifier : $\\mathrm{C_{4}H_{8}O}$ est de la forme $\\mathrm{C_{n}H_{2n}O}$. La butanone est une cétone, de même formule brute mais avec le $\\mathrm{C{=}O}$ dans la chaîne.",
+              "answers": [
+                {
+                  "content": "Butanal",
+                  "correct": true
+                },
+                {
+                  "content": "Butanone",
+                  "correct": false
+                },
+                {
+                  "content": "Butan-1-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Acide butanoïque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de moles de dioxygène faut-il pour brûler complètement 1 mol de butan-1-ol $\\mathrm{C_{4}H_{10}O}$ ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $\\mathrm{C_{4}H_{10}O\\ +\\ O_{2}\\ \\to\\ CO_{2}\\ +\\ H_{2}O}$. Étape 2 — Équilibrer le carbone : 4 $\\mathrm{CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : 5 $\\mathrm{H_{2}O}$. Étape 4 — Équilibrer l'oxygène : à droite 4 × 2 + 5 = 13 ; à gauche 1 + 2x = 13, donc x = 6 $\\mathrm{O_{2}}$. Étape 5 — Calculer : 1 mol d'alcool consomme 6 mol de dioxygène.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le butan-1-ol et le butan-2-ol ont la même formule brute. Explique pourquoi ce sont deux composés différents et dis à quelle classe appartient chacun.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Même formule brute $\\mathrm{C_{4}H_{10}O}$",
+                "Position différente du groupe hydroxyle sur la chaîne",
+                "Classe du butan-1-ol : primaire",
+                "Classe du butan-2-ol : secondaire"
+              ],
+              "explanation": "Corrigé modèle : Le butan-1-ol $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}OH}$ et le butan-2-ol $\\mathrm{CH_{3}{-}CH_{2}{-}CH(OH){-}CH_{3}}$ ont la même formule brute $\\mathrm{C_{4}H_{10}O}$, mais le groupe hydroxyle n'est pas porté par le même carbone de la chaîne : leurs formules développées sont différentes, ce sont des composés distincts. Dans le butan-1-ol, le carbone fonctionnel est lié à un seul carbone : alcool primaire. Dans le butan-2-ol, il est lié à deux carbones : alcool secondaire. Barème : 1 point pour la formule brute commune, 1 point pour la position différente du groupe $\\mathrm{{-}OH}$, 0,5 point pour chaque classe.",
+              "answers": [],
+              "starter": "Les deux alcools ont la même formule brute, mais…"
+            }
+          ]
+        },
+        {
+          "title": "Le réchaud à alcool d'une vendeuse",
+          "statement": "Pour chauffer ses plats, une vendeuse du marché d'Adjamé utilise un réchaud qui brûle un alcool A, saturé non cyclique, de masse molaire 74 g/mol. Sa molécule a un carbone fonctionnel lié à trois autres carbones. Données : C = 12 g/mol, H = 1 g/mol, O = 16 g/mol ; dioxyde de carbone 44 g/mol ; volume molaire d'un gaz 24 L/mol.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La formule brute de A est $\\mathrm{C_{n}H_{2n+2}O}$. Quelle est la valeur de n ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire la masse molaire : M = 12n + (2n + 2) × 1 + 16 = 14n + 18. Étape 2 — Résoudre : 14n + 18 = 74, donc 14n = 56 et n = 4. Étape 3 — Vérifier : $\\mathrm{C_{4}H_{10}O}$ donne 4 × 12 + 10 + 16 = 74 g/mol.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le nom de l'alcool A ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : n = 4, donc A est l'un des quatre alcools $\\mathrm{C_{4}H_{10}O}$. Étape 4 — Classer : un carbone fonctionnel lié à trois carbones est tertiaire. Parmi les isomères, seul le 2-méthylpropan-2-ol $\\mathrm{(CH_{3})_{3}C{-}OH}$ est tertiaire : les autres ont un carbone fonctionnel lié à 1 ou 2 carbones.",
+              "answers": [
+                {
+                  "content": "2-méthylpropan-2-ol",
+                  "correct": true
+                },
+                {
+                  "content": "Butan-1-ol",
+                  "correct": false
+                },
+                {
+                  "content": "Butan-2-ol",
+                  "correct": false
+                },
+                {
+                  "content": "2-méthylpropan-1-ol",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'alcool A est un alcool primaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Classer : un alcool est primaire si son carbone fonctionnel est lié à un seul carbone. Ici le carbone fonctionnel est lié à trois carbones : A est tertiaire, pas primaire.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le coefficient du dioxygène dans l'équation de la combustion complète de A ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $\\mathrm{C_{4}H_{10}O\\ +\\ O_{2}\\ \\to\\ CO_{2}\\ +\\ H_{2}O}$. Étape 2 — Équilibrer le carbone : 4 $\\mathrm{CO_{2}}$. Étape 3 — Équilibrer l'hydrogène : 5 $\\mathrm{H_{2}O}$. Étape 4 — Équilibrer l'oxygène : à droite 4 × 2 + 5 = 13 ; à gauche 1 + 2x = 13, donc x = 6. Équation : $\\mathrm{C_{4}H_{10}O\\ +\\ 6\\ O_{2}\\ \\to\\ 4\\ CO_{2}\\ +\\ 5\\ H_{2}O}$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On brûle complètement 3,7 g de A. Quel volume de dioxygène, en litres, est consommé ?",
+              "question_type": "numeric",
+              "unit": "L",
+              "tolerance": 0,
+              "explanation": "Étape 5 — Calculer : n(A) = 3,7 / 74 = 0,05 mol. L'équation donne 6 mol de dioxygène pour 1 mol de A, soit 6 × 0,05 = 0,3 mol. V = 0,3 × 24 = 7,2 L. Piège : oublier le coefficient 6 donne 0,05 × 24 = 1,2 L.",
+              "answers": [
+                {
+                  "content": "7,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle masse de dioxyde de carbone, en grammes, se forme avec ces 3,7 g de A ?",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0,
+              "explanation": "Étape 5 — Calculer : n(A) = 0,05 mol. L'équation donne 4 mol de $\\mathrm{CO_{2}}$ pour 1 mol de A, soit 4 × 0,05 = 0,2 mol. m = 0,2 × 44 = 8,8 g. Piège : oublier le coefficient 4 donne 2,2 g.",
+              "answers": [
+                {
+                  "content": "8,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La vendeuse utilise ce réchaud dans une petite pièce fermée. Explique pourquoi c'est dangereux.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "La combustion consomme du dioxygène de la pièce",
+                "Elle produit du dioxyde de carbone et de l'eau",
+                "Le manque de dioxygène peut rendre la combustion incomplète",
+                "L'alcool est inflammable : risque d'incendie"
+              ],
+              "explanation": "Corrigé modèle : La combustion de l'alcool consomme du dioxygène de l'air. Dans une pièce fermée, ce dioxygène n'est pas renouvelé : sa quantité diminue et il se forme du dioxyde de carbone et de l'eau. Quand le dioxygène manque, la combustion peut devenir incomplète et produire du monoxyde de carbone, un gaz toxique : l'air devient dangereux à respirer. De plus, l'alcool est inflammable : il faut le garder loin des flammes. Il faut donc toujours aérer. Barème : 1 point pour la consommation de dioxygène et les produits formés, 1 point pour le risque de combustion incomplète, 1 point pour le risque d'incendie et la conclusion (aérer).",
+              "answers": [],
+              "starter": "Dans une pièce fermée, la combustion…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

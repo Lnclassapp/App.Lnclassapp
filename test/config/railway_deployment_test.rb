@@ -15,11 +15,12 @@ class RailwayDeploymentTest < ActiveSupport::TestCase
   def database_config = ActiveRecord::Base.connection_db_config.configuration_hash
 
   # Runs the pre-deploy command in production against `database`, as Railway does before each deploy.
-  def deploy(database)
+  def deploy(database, environment_name: nil)
     config = database_config
     url = "postgres://#{config[:username]}:#{config[:password]}@#{config[:host]}:#{config[:port]}/#{database}"
     output, status = Open3.capture2e(
-      EnvironmentProbe::BASE_ENV.merge("RAILS_ENV" => "production", "DATABASE_URL" => url, "TEAM_BOOTSTRAP_CONTACT" => "0700000042"),
+      EnvironmentProbe::BASE_ENV.merge("RAILS_ENV" => "production", "DATABASE_URL" => url, "TEAM_BOOTSTRAP_CONTACT" => "0700000042",
+                                       "RAILWAY_ENVIRONMENT_NAME" => environment_name),
       *pre_deploy_command, chdir: Rails.root.to_s
     )
     assert status.success?, output
@@ -59,6 +60,19 @@ class RailwayDeploymentTest < ActiveSupport::TestCase
     assert_no_match "already initialized constant", first
     assert_equal 1, second.scan(BOOTSTRAP_LINK).size, second
     assert_not_equal first[BOOTSTRAP_LINK, 1], second[BOOTSTRAP_LINK, 1]
+  ensure
+    drop(database)
+  end
+
+  # Chantier contenus-develop-staging: the lesson loading rides on the same pre-deploy (`db:seed`), never fails it.
+  test "the pre-deploy on a new database stays green and runs the lesson loading task: nothing to load without a name, no team member on Develop" do
+    database = "lnclass_predeploy_#{SecureRandom.hex(4)}"
+
+    silent = deploy(database)
+    develop = deploy(database, environment_name: "Develop")
+
+    assert_includes silent, "[contenus] environnement sans chargement automatique"
+    assert_includes develop, "[contenus] aucun membre d'équipe actif"
   ensure
     drop(database)
   end

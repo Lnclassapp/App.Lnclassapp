@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices avec indice, sujets de devoir, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0121 · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0121, 0122, 0123 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -12,6 +12,7 @@ module UseCases
       PUBLIC_ID_LENGTH = 14
       # ADR-0116 §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
       LESSON_EXERCISES = 4
+      ESSENTIAL_EXERCISES = (1..2) # exercices d'une notion
       DEFAULT_THEME = "blue"
       # ADR-0121 §4 : l'indice, le titre et les notions d'un sujet sont du texte seul, borné ; un cours a dix sujets au plus,
       # un sujet dix exercices au plus (bornes de l'adaptateur d'import seulement : la base ne les contraint pas).
@@ -31,11 +32,22 @@ module UseCases
       SUBJECTS_DETAIL = "subjects_created"
       Node = Ports::Catalog::ContentTreeWriterPort
 
-      def initialize(courses:, essentials:, taxonomy:, writer:)
+      # Ce que devient une leçon déjà présente (même titre, niveau, matière, série). :draft (l'écran Imports, le seul mode qu'il passe) :
+      # remplacée entière si elle et tout son contenu sont en brouillon, refusée sinon (lesson_already_published, ADR-0116 §4.4).
+      # Les deux autres sont réservés au chargement automatique hors production : :exercises (ADR-0122) remplace, publiée ou non, ses
+      # seuls exercices, problèmes et sujets ; :lesson (ADR-0123, Develop seul) la remplace entière, publiée ou non.
+      REPLACE_MODES = %i[draft exercises lesson].freeze
+
+      attr_reader :replace_mode
+
+      def initialize(courses:, essentials:, taxonomy:, writer:, replace: :draft)
+        raise ArgumentError, "mode de remplacement inconnu : #{replace.inspect}" unless REPLACE_MODES.include?(replace)
+
         @courses = courses
         @essentials = essentials
         @taxonomy = taxonomy
         @writer = writer
+        @replace_mode = replace
       end
 
       # Une leçon n'a pas de parent : l'enveloppe ne cite aucune cible.
@@ -70,7 +82,7 @@ module UseCases
         details = DETAILS.to_h { |rows, detail| [ detail, created.fetch(rows) ] }
         subjects = fresh.sum { it.subjects.size }
         replaced.each do |node|
-          counts = @writer.replace_draft(course_id: node.existing_id, tree: node)
+          counts = replace(node)
           DETAILS.each { |rows, detail| details[detail] += counts.fetch(rows) }
           subjects += counts.fetch(:subjects)
         end
@@ -80,20 +92,44 @@ module UseCases
 
       private
 
+      def replace(node)
+        case @replace_mode
+        when :exercises then @writer.replace_exercises(course_id: node.existing_id, tree: node)
+        when :lesson then @writer.replace_lesson(course_id: node.existing_id, tree: node)
+        else @writer.replace_draft(course_id: node.existing_id, tree: node)
+        end
+      end
+
       # Clé de doublon de la leçon (celle de CourseRepository#existing_keys).
       def course_key(course, lookup)
         [ Entities::Shared::NaturalKey.compact(course["name"].squish), lookup.resolve_level(course["level_name"]).id,
           lookup.resolve_material(course["material_name"]).id, series_id(course["series_name"], lookup) ]
       end
 
-      # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon.
-      # La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas comme un doublon.
+      # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon ; en mode
+      # :lesson (ADR-0123), remplacée entière quel que soit son statut. La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas
+      # comme un doublon.
       def replacement_item(course, path, lookup, key, existing_id)
-        unless replaceable?(@courses.status_for_update(id: existing_id))
+        return exercises_item(course, path, lookup, key, existing_id) if @replace_mode == :exercises
+
+        if @replace_mode == :draft && !replaceable?(@courses.status_for_update(id: existing_id))
           return Entities::Catalog::ImportItem.new(path:, errors: [ rule_error(path, "lesson_already_published", course: course["name"].squish) ])
         end
 
         # Ni le slug de la leçon ni ceux des notions ne sont tirés ici : l'écrivain garde le premier et choisit les seconds.
+        node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:)
+        Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
+      end
+
+      # Chargement automatique : la leçon présente garde son cours, ses notions et leurs fiches ; les exercices du fichier se rattachent
+      # aux notions en place par leur nom (squish). Une notion introuvable refuse la leçon, rien n'est remplacé.
+      def exercises_item(course, path, lookup, key, existing_id)
+        present = @essentials.names(course_id: existing_id).to_set(&:squish)
+        errors = Array(course["notions"]).each_with_index.filter_map do |notion, index|
+          rule_error("#{path}.notions[#{index}].name", "notion_not_found", name: notion["name"].squish) unless present.include?(notion["name"].squish)
+        end
+        return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
+
         node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:)
         Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
       end
@@ -162,13 +198,19 @@ module UseCases
         return errors unless notion.is_a?(Hash)
 
         errors += Entities::Catalog::ContentNode.validate_figure_citation(notion["figure"], figure_keys, "#{path}.figure")
-        exercise = notion["exercise"]
-        unless exercise.is_a?(Hash)
-          count = exercise.is_a?(Array) ? exercise.size : 0
-          return errors << rule_error("#{path}.exercise", "essential_exercise_count", course: course_name.to_s.squish, name: notion["name"].to_s.squish, count:)
+        exercises = notion_exercises(notion)
+        unless ESSENTIAL_EXERCISES.cover?(exercises.size)
+          return errors << rule_error("#{path}.exercise", "essential_exercise_count", course: course_name.to_s.squish, name: notion["name"].to_s.squish, count: exercises.size)
         end
 
-        errors + exercise_errors(exercise, "#{path}.exercise", figure_keys)
+        # Un objet garde son chemin `.exercise` ; une liste donne `.exercise[0]`, `.exercise[1]`.
+        errors + (notion["exercise"].is_a?(Array) ? exercises.each_with_index.flat_map { |e, i| exercise_errors(e, "#{path}.exercise[#{i}]", figure_keys) } : exercise_errors(exercises.first, "#{path}.exercise", figure_keys))
+      end
+
+      # Les exercices d'une notion : `exercise` est un objet (un exercice) ou une liste (de un à deux, ADR-0116 amendé le 2026-10-31).
+      def notion_exercises(notion)
+        exercise = notion["exercise"]
+        exercise.is_a?(Hash) ? [ exercise ] : (exercise.is_a?(Array) ? exercise : [])
       end
 
       # Quatre problèmes pour toute la leçon, chacun avec son sujet. La leçon est refusée entière.
@@ -233,7 +275,7 @@ module UseCases
         Node::NotionNode.new(
           slug: slug_for("#{course_name} #{notion['name'].squish}", "essential", data.fetch(:essential_slugs)), course_id: nil,
           name: notion["name"].squish, position: index + 1, sheet: sheet_hash(sheet, notion),
-          exercises: [ exercise_node(notion["exercise"]) ]
+          exercises: notion_exercises(notion).map { exercise_node(it) }
         )
       end
 
