@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Aperçu local d'un fichier de leçon (chantier standard-de-test, Lot E) : valider.rb, import de ce seul fichier (la leçon de même
+# titre est remplacée), publication, adresse. Développement seulement.
+#
+#   bin/apercu-lecon docs/contenus/lecons-traitees/3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json
+#   bin/apercu-lecon <fichier> --suivre     # surveille le fichier et recharge à chaque enregistrement (Ctrl-C pour finir)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+usage() { echo "Usage : bin/apercu-lecon <fichier.json> [--suivre]" >&2; exit 2; }
+
+file="" follow=0
+for arg in "$@"; do
+  case "$arg" in
+    --suivre) follow=1 ;;
+    -*) usage ;;
+    *) [ -z "$file" ] || usage; file="$arg" ;;
+  esac
+done
+[ -n "$file" ] || usage
+
+# Jamais d'environnement imposé par-dessus celui de l'appelant : tout autre que development, un environnement Railway ou une
+# DATABASE_URL (qui ferait tourner la tâche sur une base distante) est refusé ici, avant le démarrage de Rails.
+if [ -n "${RAILS_ENV:-}" ] && [ "$RAILS_ENV" != "development" ]; then
+  echo "[apercu] refusé : RAILS_ENV=$RAILS_ENV ; l'aperçu ne tourne qu'en development. Rien n'est importé." >&2; exit 1
+fi
+if [ -n "${RAILWAY_ENVIRONMENT_NAME:-}" ] || [ -n "${DATABASE_URL:-}" ]; then
+  echo "[apercu] refusé : RAILWAY_ENVIRONMENT_NAME ou DATABASE_URL est posée (base distante possible). Rien n'est importé." >&2; exit 1
+fi
+export RAILS_ENV=development
+
+preview() { bin/rails "contenus:apercu[$file]"; }
+
+if [ "$follow" -eq 0 ]; then
+  preview
+  exit
+fi
+
+# mtime relu chaque seconde, sans gemme ; un aperçu refusé n'arrête pas la surveillance.
+mtime() { stat -c %Y "$file" 2>/dev/null || stat -f %m "$file"; }
+last=""
+echo "[apercu] surveillance de $file (Ctrl-C pour finir)"
+while true; do
+  current="$(mtime || echo absent)"
+  if [ "$current" != "$last" ]; then
+    last="$current"
+    preview || echo "[apercu] aperçu refusé, en attente du prochain enregistrement"
+  fi
+  sleep 1
+done
