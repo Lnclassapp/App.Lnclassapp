@@ -689,6 +689,27 @@ Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'en
 
 **Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
 
+### 1ère A1 et A2, Physique-Chimie au format 3 (chantier `contenus-1ere-a-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de 1ère A (progression DPFC 2026-2027), rédigées le 2026-11-02 au format `lnclass.course-tree` v3, vague P4 du programme `contenus-v3-tous-niveaux`. Le référentiel n'a pas de série « A » en 1ère : chaque leçon est écrite une fois puis déclinée en **20 fichiers** (`1ere-a1/physique-chimie/` et `1ere-a2/physique-chimie/`, identiques à `series_name` près). Les leçons 9 et 10 partent des versions 1ère C/D, allégées. Elles remplacent les 3 fichiers v1 (rangs 1 à 3) du tableau « 1ère A1 et A2 » plus bas.
+
+| Rang | Fichier (A1 et A2) | Cours | Notions | Exercices | Questions | Je m'entraîne | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 4 | 8 | 60 | 12 | 3 | `coordinate_plane` |
+| 2 | `physique-chimie/les-alcanes.json` | Les alcanes | 5 | 9 | 56 | 15 | 4 | `molecule` |
+| 3 | `physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 5 | 9 | 60 | 15 | 6 | `diagram`, `molecule` |
+| 4 | `physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 8 | 58 | 12 | 4 | `coordinate_plane`, `diagram` |
+| 5 | `physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 8 | 54 | 12 | 3 | `diagram`, `molecule` |
+| 6 | `physique-chimie/puissance-et-energie-electriques.json` | Puissance et énergie électriques | 4 | 8 | 61 | 12 | 2 | `diagram`, `stat_chart` |
+| 7 | `physique-chimie/principe-de-la-production-d-une-tension-alternative.json` | Principe de la production d'une tension alternative | 5 | 9 | 56 | 15 | 3 | `coordinate_plane`, `diagram` |
+| 8 | `physique-chimie/reactions-d-oxydo-reduction-en-solution-aqueuse.json` | Réactions d'oxydo-réduction en solution aqueuse | 4 | 8 | 48 | 12 | 2 | `diagram` |
+| 9 | `physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance d'une force constante dans le cas d'un mouvement de translation | 4 | 8 | 58 | 12 | 3 | `coordinate_plane` |
+| 10 | `physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 8 | 57 | 12 | 2 | `coordinate_plane` |
+
+Au total (par série) : 43 notions, 568 questions notées, 129 questions « Je m'entraîne », 32 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement (Ruby 3.4). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (calculs refaits, chiffres et données vérifiés).
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop (`db/seeds/catalog.rb`), la 1ère a les séries A1, A2, C et D : les leçons communes aux deux séries A sont écrites une fois, puis déclinées en A1 et A2.
@@ -705,9 +726,9 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 1 | 4 | 12 | 71 |
 | `physique-chimie/les-alcanes.json` | Les alcanes | 2 | 4 | 12 | 72 |
 | `physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 3 | 4 | 12 | 72 |
-| `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 1 | 4 | 12 | 64 |
-| `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 2 | 4 | 12 | 65 |
-| `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 3 | 9 | 54 |
+| `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 1 | 5 | 9 | 45 |
+| `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 2 | 4 | 8 | 48 |
+| `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 3 | 7 | 45 |
 | `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
 | `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
 | `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
@@ -864,6 +885,28 @@ Au total : 80 notions, 160 exercices, 1008 questions notées, 257 questions d'en
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : testicule et tube séminifère, méiose, fécondation, ribosome et traduction, coupe du globe et coupe de subduction, complexe argilo-humique, chloroplaste, moelle épinière et œil. Les courbes sont à une seule série et à valeurs positives.
 
 À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P5).
+### 1ère A1 et A2, SVT au format 3 (chantier `contenus-1ere-a-svt`)
+
+Les 9 leçons de SVT de 1ère A1 et A2 (progression DPFC 2026-2027, identique dans les deux séries ; le référentiel n'a pas de série « A » en 1ère), rédigées le 2026-11-02 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague P6 du programme `contenus-v3-tous-niveaux`, pour des élèves de série littéraire : documents à analyser plutôt que calculs. Chaque leçon est écrite dans `1ere-a1/svt/` et copiée dans `1ere-a2/svt/`, où seule `series_name` change (18 fichiers). Elles remplacent les 3 fichiers v1 de chacun de ces dossiers (lignes SVT du tableau « 1ère A1 et A2 » ci-dessus). Aucune des 9 leçons n'existe en 1ère D (#435) : toutes sont des rédactions complètes. Rédaction par des agents Sonnet, relecture indépendante de chaque leçon par un agent Opus (qui vérifie aussi les faits médicaux des leçons 2, 4, 5 et 9). Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 5 | 9 | 45 | 15 | 95 % | 4 | `diagram`, `stat_chart line` |
+| 2 | `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 4 | 8 | 48 | 12 | 95 % | 2 | `diagram` |
+| 3 | `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 7 | 45 | 9 | 95 % | 2 | `diagram`, `stat_chart bars` |
+| 4 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 8 | 49 | 10 | 93 % | 5 | `diagram`, `plate`, `stat_chart line` |
+| 5 | `svt/la-regulation-des-naissances.json` | La régulation des naissances | 3 | 7 | 40 | 9 | 95 % | 3 | `diagram`, `plate` |
+| 6 | `svt/la-transmission-d-un-caractere-hereditaire-lie-aux-autosomes.json` | La transmission d'un caractère héréditaire lié aux autosomes | 4 | 8 | 48 | 16 | 95 % | 3 | `diagram`, `stat_chart` |
+| 7 | `svt/la-transmission-d-un-caractere-hereditaire-lie-aux-chromosomes-sexuels.json` | La transmission d'un caractère héréditaire lié aux chromosomes sexuels | 4 | 8 | 48 | 15 | 93 % | 2 | `diagram` |
+| 8 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 3 | 7 | 42 | 12 | 95 % | 2 | `diagram` |
+| 9 | `svt/la-mise-en-reserve-des-nutriments.json` | La mise en réserve des nutriments | 4 | 8 | 48 | 12 | 95 % | 3 | `diagram`, `plate`, `stat_chart line` |
+
+Au total, par série : 34 notions, 70 exercices, 413 questions notées, 110 questions d'entraînement et 26 figures. Les 18 fichiers passent `script/contenus/valider.rb` sans erreur ni avertissement ainsi que le contrôle de l'entraînement (règles du test de 3e, jouées par script : pas de test pour la 1ère).
+
+Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : caryotype, cerveau et aires corticales, cellule et mitochondrie, coupe de l'ovaire (follicule, corps jaune) et utérus avec nidation, échiquier de croisement en tableau, arbre généalogique, courbe de température (le `stat_chart` part de zéro).
+
+À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P6).
+
 ### 1ère C et D, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-cd`)
 
 Les 10 premières leçons de Mathématiques de la progression DPFC 2026-2027 de 1ère C et de 1ère D, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P1 du programme `contenus-v3-tous-niveaux`). 13 leçons distinctes, 20 fichiers : les 7 leçons communes aux deux séries sont écrites une fois puis déclinées par série (acquis, interdits et exemples de la série). Elles **remplacent** les fichiers v1 du même intitulé rédigés le 2026-10-10 (rangs 1 à 3). « Généralités sur les fonctions » et « Dénombrement » restent déclinables en 1ère A (vague P2).

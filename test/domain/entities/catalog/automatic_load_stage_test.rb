@@ -42,6 +42,26 @@ module Entities
         assert_equal "Recette", result.name
         assert_nil stage("Develop").name
       end
+      # ADR-0123 : Develop seul remplace entières les leçons v3 du programme ; les leçons à sujets gardent leur mode partout.
+      test "only Develop, whatever the case, replaces whole lessons; Staging, production, a PR and an unknown name never do" do
+        [ "Develop", " develop ", "DEVELOP" ].each { assert stage(it).whole_lessons?, it }
+        [ "Staging", "production", "Recette", nil ].each { assert_not stage(it).whole_lessons?, it.inspect }
+        assert_not stage("Develop", pr_environment: true).whole_lessons?
+      end
+
+      test "a lesson with subjects keeps its exercises-only mode everywhere it loads" do
+        [ "Develop", "Staging" ].each do |name|
+          assert_equal :exercises, stage(name).mode_for(level_directory: "tle-c", subjects: true), name
+          assert_equal :exercises, stage(name).mode_for(level_directory: "3eme", subjects: true), name
+        end
+      end
+
+      test "on Develop a programme lesson without subjects is replaced whole; outside the programme or elsewhere it is not loaded" do
+        assert_equal :lesson, stage("Develop").mode_for(level_directory: "tle-c", subjects: false)
+        assert_equal :lesson, stage("Develop").mode_for(level_directory: "1ere-a1", subjects: false)
+        assert_nil stage("Develop").mode_for(level_directory: "3eme", subjects: false)
+        assert_nil stage("Staging").mode_for(level_directory: "tle-c", subjects: false)
+      end
     end
   end
 end

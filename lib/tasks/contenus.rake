@@ -1,8 +1,9 @@
-# Chargement automatique des leçons à sujets de devoir (ADR chargement-automatique-des-lecons-hors-production) : lancé par
+# Chargement automatique des leçons à sujets de devoir (ADR chargement-automatique-des-lecons-hors-production) et, sur Develop seul, des
+# leçons v3 du programme remplacées entières (ADR-0123) : lancé par
 # db/seeds/contenus.rb au pré-déploiement Railway (`bin/rails db:prepare db:seed`). Develop et Staging seulement
 # (RAILWAY_ENVIRONMENT_NAME), sous un verrou consultatif PostgreSQL ; ne sort jamais en erreur : le pré-déploiement n'échoue pas à cause d'elle.
 namespace :contenus do
-  desc "Charge les leçons à sujets de devoir du dépôt (Develop et Staging) : exercices et sujets seulement, puis publication"
+  desc "Charge les leçons du dépôt : à sujets de devoir (Develop et Staging, exercices et sujets seulement), v3 du programme (Develop, entières), puis publication"
   task charger: :environment do
     say = ->(message) { puts "[contenus] #{message}" }
     connection = nil
@@ -22,16 +23,18 @@ namespace :contenus do
         users = Repositories::Identity::UserRepository.new
         # L'import tourne ici même : rien à mettre en file.
         no_queue = Object.new.tap { |queue| queue.define_singleton_method(:enqueue) { |**| nil } }
-        adapter = UseCases::Catalog::ImportCourseTree.new(courses:, essentials:, taxonomy:, writer: Repositories::Catalog::ContentTreeWriter.new,
-                                                          replace_exercises: true)
+        adapter = ->(replace) { UseCases::Catalog::ImportCourseTree.new(courses:, essentials:, taxonomy:, writer: Repositories::Catalog::ContentTreeWriter.new, replace:) }
         dependencies = { audit_log: Repositories::Identity::AuditLogRepository.new, transaction:, policy: Policies::Catalog::ManageContentPolicy.new,
                          clock: Time.zone }
         exercises = Repositories::Assessment::ExerciseRepository.new
+        run = lambda do |import_adapter|
+          UseCases::Catalog::RunImport.new(adapter: import_adapter, schema: Repositories::Catalog::ImportSchemaValidator.new, reports:, files:,
+                                           users:, audit_log: dependencies[:audit_log], transaction:, clock: Time.zone)
+        end
         result = UseCases::Catalog::LoadRepositoryLessons.new(
           source: Repositories::Catalog::RepositoryLessonSource.new, reports:, users:, courses:, essentials:, exercises:, taxonomy:,
           start_import: UseCases::Catalog::StartImport.new(reports:, files:, queue: no_queue, transaction:, clock: Time.zone),
-          run_import: UseCases::Catalog::RunImport.new(adapter:, schema: Repositories::Catalog::ImportSchemaValidator.new, reports:, files:,
-                                                       users:, audit_log: dependencies[:audit_log], transaction:, clock: Time.zone),
+          run_import: run.call(adapter.call(:exercises)), run_lesson_import: run.call(adapter.call(:lesson)),
           publish_cascade: UseCases::Catalog::PublishCascade.new(
             courses:, essentials:, exercises:, transaction:, policy: dependencies[:policy],
             publish_course: UseCases::Catalog::PublishCourse.new(courses:, **dependencies),

@@ -1,0 +1,1514 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La mise en réserve des nutriments",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "courbe-glycemie",
+          "kind": "stat_chart",
+          "description": "Courbe schématique de la glycémie d'une personne en bonne santé, en g/L, avant puis après un repas riche en glucides. Elle part de 1,0 g/L avant le repas, monte à 1,4 g/L une heure après, redescend à 1,2 g/L à deux heures, puis revient à 1,0 g/L à trois heures. Les valeurs sont simplifiées pour l'étude.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1.0,
+              1.4,
+              1.2,
+              1.0
+            ],
+            "labels": [
+              "Avant le repas",
+              "1 h après",
+              "2 h après",
+              "3 h après"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "devenir-glucose",
+          "kind": "diagram",
+          "description": "Schéma fléché du devenir du glucose. Après le repas, le glucose passe de l'intestin grêle dans le sang. Le glucose en excès est mis en réserve : en glycogène dans le foie et les muscles, en graisses dans le tissu adipeux. Entre les repas, le foie restitue du glucose au sang à partir de son glycogène.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Circulation du glucose",
+              "Réserves"
+            ],
+            "nodes": [
+              {
+                "id": "intestin",
+                "label": "Intestin grêle : le glucose du repas est absorbé",
+                "category": 1
+              },
+              {
+                "id": "sang",
+                "label": "Sang : la glycémie, voisine de 1 g/L",
+                "category": 1
+              },
+              {
+                "id": "foie",
+                "label": "Foie : glycogène",
+                "category": 2
+              },
+              {
+                "id": "muscles",
+                "label": "Muscles : glycogène",
+                "category": 2
+              },
+              {
+                "id": "adipeux",
+                "label": "Tissu adipeux : graisses",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "intestin",
+                "to": "sang",
+                "label": "après le repas"
+              },
+              {
+                "from": "sang",
+                "to": "foie",
+                "label": "mise en réserve"
+              },
+              {
+                "from": "sang",
+                "to": "muscles",
+                "label": "mise en réserve"
+              },
+              {
+                "from": "sang",
+                "to": "adipeux",
+                "label": "mise en réserve"
+              },
+              {
+                "from": "foie",
+                "to": "sang",
+                "label": "jeûne : restitution"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "foie-appareil-digestif",
+          "kind": "plate",
+          "description": "Planche de l'appareil digestif sur laquelle le foie est surligné. On repère aussi l'estomac, le pancréas et l'intestin grêle. Le foie est l'organe qui met en réserve le glucose sous forme de glycogène après le repas et qui le restitue au sang entre les repas.",
+          "params": {
+            "plate": "digestive_system",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "liver",
+                "text": "Foie"
+              },
+              {
+                "part": "stomach"
+              },
+              {
+                "part": "pancreas"
+              },
+              {
+                "part": "small_intestine"
+              }
+            ],
+            "highlight": [
+              "liver"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Suivre la glycémie après un repas",
+          "remember": "Les aliments digérés libèrent des **nutriments**. Le **glucose**, un sucre simple issu des glucides (sucres, amidon), passe de l'intestin grêle dans le sang. La **glycémie** est la quantité de glucose dans le sang, en grammes par litre (g/L) ; chez une personne en bonne santé, elle est voisine de 1 g/L. Après un repas riche en glucides, la glycémie monte, puis revient vers sa valeur normale : une partie du glucose est utilisée par les cellules (respiration cellulaire) et le glucose en excès est **mis en réserve**. Il est stocké sous forme de **glycogène** dans le **foie** et les **muscles**, et transformé en **graisses** stockées dans le **tissu adipeux** (la graisse sous la peau et autour des organes).",
+          "method": [
+            "Lire le document : repérer la grandeur mesurée, son unité, le moment du repas et les valeurs relevées.",
+            "Repérer les variations : dire quand la glycémie monte, quand elle baisse, et de combien.",
+            "Expliquer chaque variation par le glucose : arrivée dans le sang après le repas, ou sortie du sang vers les réserves.",
+            "Conclure : nommer la réserve (glycogène, graisses), les organes concernés et l'effet sur la glycémie."
+          ],
+          "example": {
+            "statement": "Un dimanche, Kouadio déjeune d'un grand plat d'attiéké avec du poisson, en famille. Sa glycémie est mesurée avant le repas : 1,0 g/L ; une heure après : 1,4 g/L ; deux heures après : 1,2 g/L ; trois heures après : 1,0 g/L (valeurs simplifiées). Explique l'évolution de sa glycémie.",
+            "steps": [
+              "Lire le document : la grandeur est la glycémie, en g/L ; le repas est pris à l'instant 0 ; les valeurs sont 1,0 ; 1,4 ; 1,2 et 1,0 g/L.",
+              "Repérer les variations : la glycémie monte de 1,0 à 1,4 g/L pendant la première heure (+ 0,4 g/L), puis baisse à 1,2 g/L, puis revient à 1,0 g/L.",
+              "Expliquer : la hausse vient du glucose qui passe de l'intestin grêle dans le sang ; la baisse vient du glucose qui quitte le sang, utilisé par les cellules ou mis en réserve.",
+              "Conclure : l'excès de glucose est stocké en glycogène (foie, muscles) et en graisses (tissu adipeux) ; la glycémie revient à 1,0 g/L, valeur normale."
+            ]
+          },
+          "pitfall": "Ne pas croire que le glucose « disparaît » quand la glycémie baisse. Contre-exemple : entre 1 h et 3 h après le repas, la glycémie passe de 1,4 à 1,0 g/L. Le sang a perdu du glucose, mais ce glucose n'est pas détruit : une partie sert aux cellules, le reste se retrouve dans le glycogène et les graisses. S'il disparaissait vraiment, il n'y aurait rien à restituer entre les repas. Pour éviter l'erreur, demande-toi toujours : où est passé le glucose qui a quitté le sang ?",
+          "figure": "courbe-glycemie",
+          "exercise": {
+            "title": "La glycémie de Mariam après le repas de fête",
+            "statement": "Mariam participe à un repas de fête chez sa tante. Dans cet exercice, tu suis sa glycémie après un repas riche en glucides avec la méthode de la fiche. Les valeurs sont fictives et simplifiées.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "La glycémie, c'est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le document : avant de lire une courbe, il faut savoir ce que mesure la grandeur. La glycémie est la quantité de glucose dans le sang, en g/L. Le glycogène est une réserve (foie, muscles) et les graisses sont dans le tissu adipeux : ce n'est pas ce que mesure la glycémie.",
+                "answers": [
+                  {
+                    "content": "la quantité de glucose présente dans le sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "la quantité de glucose présente dans l'urine",
+                    "correct": false
+                  },
+                  {
+                    "content": "la quantité de graisses stockées dans le tissu adipeux",
+                    "correct": false
+                  },
+                  {
+                    "content": "la quantité de glycogène contenue dans les muscles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Mariam a une glycémie de 1,0 g/L avant le repas et de 1,5 g/L une heure après. De combien la glycémie a-t-elle augmenté pendant cette heure ?",
+                "question_type": "numeric",
+                "unit": "g/L",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire le document : valeurs 1,0 g/L puis 1,5 g/L, en g/L. Étape 2 — Repérer les variations : la glycémie monte de 1,5 − 1,0 = 0,5 g/L. Étape 3 — Expliquer : cette hausse vient du glucose qui passe de l'intestin grêle dans le sang. Étape 4 — Conclure : la glycémie a augmenté de 0,5 g/L.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre ce qui se passe après un repas riche en glucides.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Expliquer par le glucose : d'abord le glucose entre dans le sang (la glycémie monte), puis le glucose en excès en sort pour être mis en réserve, et la glycémie redescend. Étape 4 — Conclure : la glycémie revient vers sa valeur normale, environ 1 g/L. Le retour de la glycémie est la dernière étape, car il est la conséquence de la mise en réserve.",
+                "answers": [
+                  {
+                    "content": "Les aliments sont digérés et le glucose passe dans le sang"
+                  },
+                  {
+                    "content": "La glycémie monte"
+                  },
+                  {
+                    "content": "Le glucose en excès quitte le sang"
+                  },
+                  {
+                    "content": "Il est mis en réserve en glycogène et en graisses"
+                  },
+                  {
+                    "content": "La glycémie revient vers 1 g/L"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque réserve à l'endroit où elle est stockée.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Conclure : il faut nommer la réserve et l'organe concerné. Le glucose en excès est mis en réserve sous forme de glycogène dans le foie et les muscles, et sous forme de graisses dans le tissu adipeux. Le glucose circulant, lui, n'est pas une réserve : il est dans le sang, c'est lui que mesure la glycémie.",
+                "answers": [
+                  {
+                    "content": "Le glycogène",
+                    "match": "Dans le foie et les muscles"
+                  },
+                  {
+                    "content": "Les graisses",
+                    "match": "Dans le tissu adipeux"
+                  },
+                  {
+                    "content": "Le glucose circulant",
+                    "match": "Dans le sang"
+                  }
+                ]
+              },
+              {
+                "content": "Après le repas, la glycémie de Mariam passe de 1,5 g/L à 1,0 g/L : cela prouve que le glucose du sang a été détruit.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : la baisse de la glycémie veut dire que le glucose a quitté le sang. Étape 4 — Conclure : il n'est pas détruit. Une partie est utilisée par les cellules, le reste est mis en réserve (glycogène, graisses). L'affirmation est donc fausse : c'est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Mariam a une glycémie de 1,0 g/L à jeun, de 1,5 g/L une heure après le repas et de 1,0 g/L trois heures après. Comment expliquer la baisse entre 1 h et 3 h ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le document : 1,0 puis 1,5 puis 1,0 g/L. Étape 2 — Repérer les variations : hausse de 0,5 g/L, puis baisse de 0,5 g/L. Étape 3 — Expliquer : la baisse vient du glucose qui quitte le sang. Étape 4 — Conclure : il est utilisé par les cellules ou mis en réserve en glycogène et en graisses. Le foie qui fabrique du glucose supplémentaire ferait monter la glycémie, pas baisser.",
+                "answers": [
+                  {
+                    "content": "Le glucose du sang est utilisé par les cellules ou mis en réserve",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le glucose du sang a été détruit",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'intestin grêle a fait sortir le glucose du corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le foie a fabriqué du glucose supplémentaire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre la glycémie après un repas, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le glucose en excès est mis en réserve sous forme de ___ dans le foie et les muscles, et sous forme de ___ dans le tissu adipeux.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot commence par « glyco- » ; le second est le nom des réserves du tissu adipeux.",
+                "explanation": "Étape 4 — Conclure : nomme la réserve et l'organe. Dans le foie et les muscles, le glucose est stocké sous forme de glycogène ; dans le tissu adipeux, il est transformé en graisses.",
+                "answers": [
+                  {
+                    "content": "glycogène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le glycogène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "graisses",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "graisse",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "lipides",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Fanta a une glycémie de 1,0 g/L avant le repas, de 1,2 g/L une heure après et de 1,0 g/L trois heures après. Que peux-tu dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le document : 1,0 ; 1,2 ; 1,0 g/L. Étape 2 — Repérer les variations : une petite hausse de 0,2 g/L puis un retour à 1,0 g/L. Étape 3 — Expliquer : la hausse vient du glucose qui entre dans le sang, le retour de celui qui est mis en réserve. Étape 4 — Conclure : mise en réserve et retour à la valeur normale.",
+                "answers": [
+                  {
+                    "content": "Son glucose en excès a été mis en réserve et sa glycémie est revenue à la normale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son glucose a disparu du corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa glycémie est restée à 1,2 g/L",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle n'a pas absorbé le glucose du repas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La glycémie se mesure en grammes par litre (g/L) et sa valeur normale est voisine de 1 g/L.",
+                "question_type": "true_false",
+                "hint": "Pense à l'unité écrite sur la courbe de la fiche.",
+                "explanation": "Étape 1 — Lire le document : la grandeur est la glycémie, son unité est le g/L. Chez une personne en bonne santé, elle est voisine de 1 g/L. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La restitution du glucose entre les repas et pendant l'effort",
+          "remember": "Entre deux repas, aucun glucose n'arrive de l'intestin, mais les cellules continuent d'en consommer pour produire de l'énergie (respiration cellulaire). Pourtant la glycémie reste voisine de 1 g/L : l'organisme **restitue** du glucose au sang. Pendant le **jeûne** (période sans manger), le **foie** transforme son **glycogène** en glucose et le libère dans le sang. Pendant un **effort** musculaire, les muscles consomment beaucoup de glucose et utilisent d'abord leur propre glycogène. Quand les réserves de glycogène baissent beaucoup, l'organisme utilise aussi ses graisses. Les réserves forment un stock qui se remplit après le repas et se vide entre les repas : le glucose circule dans les deux sens, selon la situation.",
+          "method": [
+            "Identifier la situation : repas récent, jeûne ou effort.",
+            "Comparer les entrées et les sorties de glucose dans le sang : apport par la digestion, consommation par les cellules.",
+            "Désigner la réserve utilisée et l'organe qui la libère : glycogène du foie, glycogène des muscles, graisses.",
+            "Conclure sur le sens du flux de glucose, des réserves vers le sang ou l'inverse, et sur la glycémie."
+          ],
+          "example": {
+            "statement": "Awa tient son étal au marché depuis l'aube. À 14 h, elle n'a rien mangé depuis son petit déjeuner de 6 h. Sa glycémie mesurée est de 0,9 g/L, une valeur voisine de la normale. Explique pourquoi sa glycémie n'a pas beaucoup baissé.",
+            "steps": [
+              "Identifier la situation : Awa est en jeûne, huit heures après son dernier repas.",
+              "Comparer : plus aucun glucose n'arrive de l'intestin, mais ses cellules en consomment toujours ; le sang tend à perdre du glucose.",
+              "Désigner : le foie transforme son glycogène en glucose et le libère dans le sang ; si le jeûne se prolonge, les graisses prennent aussi le relais.",
+              "Conclure : le glucose passe des réserves vers le sang ; sa glycémie reste voisine de 1 g/L (0,9 g/L)."
+            ]
+          },
+          "pitfall": "Ne pas confondre les deux sens du flux de glucose. Après le repas, le glucose entre dans les réserves ; pendant le jeûne, il en sort. Contre-exemple : écrire que « pendant le jeûne, le foie stocke du glycogène » est faux. Sans apport de l'intestin, rien n'arrive à stocker : si le foie stockait encore, la glycémie de 0,9 g/L baisserait davantage. Pose-toi la question : le sang reçoit-il du glucose de l'intestin, ou en reçoit-il des réserves ?",
+          "figure": "devenir-glucose",
+          "exercise": {
+            "title": "Koffi aux champs : un matin sans repas",
+            "statement": "Koffi travaille aux champs toute la matinée, sans rien manger. Dans cet exercice, tu expliques d'où vient le glucose de son sang avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Entre deux repas, quel organe libère du glucose dans le sang à partir de son glycogène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Désigner la réserve utilisée et l'organe qui la libère : pendant le jeûne, c'est le foie qui transforme son glycogène en glucose et le libère dans le sang. L'estomac, le pancréas et l'intestin grêle font partie de l'appareil digestif et ne stockent pas de glycogène pour le restituer au sang.",
+                "answers": [
+                  {
+                    "content": "Le foie",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'estomac",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pancréas",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'intestin grêle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant le jeûne, le glucose passe du sang vers les réserves.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Comparer les entrées et les sorties : pendant le jeûne, rien ne vient de l'intestin et les cellules consomment du glucose. Étape 4 — Conclure sur le sens du flux : le glucose passe des réserves vers le sang, pas l'inverse. L'affirmation est fausse (c'est l'erreur du piège).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pendant un effort, les muscles consomment beaucoup de glucose et utilisent d'abord leur propre ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier la situation : un effort musculaire. Étape 3 — Désigner la réserve utilisée : les muscles puisent d'abord dans leur propre réserve, le glycogène des muscles.",
+                "answers": [
+                  {
+                    "content": "glycogène",
+                    "correct": true
+                  },
+                  {
+                    "content": "le glycogène",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre ce qui se passe chez Koffi pendant sa matinée sans manger.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier la situation : jeûne, plus d'apport. Étape 2 — Comparer : les cellules consomment, le sang tend à perdre du glucose. Étape 3 — Désigner : le foie transforme son glycogène en glucose. Étape 4 — Conclure : le glucose est libéré dans le sang et la glycémie reste voisine de 1 g/L.",
+                "answers": [
+                  {
+                    "content": "Plus aucun glucose n'arrive de l'intestin"
+                  },
+                  {
+                    "content": "Les cellules consomment du glucose et la glycémie tend à baisser"
+                  },
+                  {
+                    "content": "Le foie transforme son glycogène en glucose"
+                  },
+                  {
+                    "content": "Le glucose est libéré dans le sang"
+                  },
+                  {
+                    "content": "La glycémie reste voisine de 1 g/L"
+                  }
+                ]
+              },
+              {
+                "content": "Koffi marche et travaille longtemps sans manger. Quelles sont les deux réserves que son corps peut utiliser ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Désigner la réserve utilisée : le glycogène du foie, transformé en glucose, puis les graisses du tissu adipeux quand les réserves de glycogène baissent beaucoup. L'amidon est une réserve des végétaux, pas du foie ; et le sang ne contient qu'une petite quantité de glucose, qui ne suffirait pas.",
+                "answers": [
+                  {
+                    "content": "Le glycogène du foie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les graisses du tissu adipeux",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'amidon stocké dans le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le glucose stocké en grande quantité dans le sang",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À 14 h, après huit heures sans manger, la glycémie de Koffi est de 0,9 g/L. Comment l'expliquer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la situation : jeûne de huit heures. Étape 2 — Comparer : rien n'arrive de l'intestin, mais les cellules consomment du glucose. Étape 3 — Désigner : le foie libère du glucose à partir de son glycogène. Étape 4 — Conclure : la glycémie reste voisine de 1 g/L. Dire que le foie stocke encore serait le sens inverse du flux.",
+                "answers": [
+                  {
+                    "content": "Le foie libère dans le sang du glucose venant de son glycogène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules n'ont pas besoin de glucose quand on ne mange pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le glucose du repas arrive encore de l'intestin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le foie stocke du glycogène supplémentaire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la restitution du glucose, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pendant le jeûne, le ___ transforme son glycogène en glucose et le libère dans le ___.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot est l'organe qui stocke du glycogène, près de l'estomac ; le second est le liquide qui transporte le glucose.",
+                "explanation": "Étape 3 — Désigner l'organe qui libère la réserve : c'est le foie qui transforme son glycogène en glucose. Étape 4 — Conclure sur le sens du flux : le glucose est libéré dans le sang, ce qui maintient la glycémie.",
+                "answers": [
+                  {
+                    "content": "foie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le foie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sang",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le sang",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Au repos comme à l'effort, les muscles consomment la même quantité de glucose.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Comparer les entrées et les sorties : pendant un effort, les muscles consomment beaucoup plus de glucose qu'au repos pour produire de l'énergie. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un lycéen n'a pas mangé de la matinée et fait une longue marche. D'où vient surtout le glucose qui arrive à ses muscles ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la situation : jeûne et effort. Étape 2 — Comparer : aucun apport du repas, et les muscles consomment beaucoup. Étape 3 — Désigner : le glucose apporté par le sang vient du glycogène du foie ; le glycogène des muscles, lui, est utilisé sur place par les muscles. Étape 4 — Conclure : le glucose va des réserves du foie vers le sang, puis vers les muscles. L'amidon est une réserve végétale.",
+                "answers": [
+                  {
+                    "content": "Du glycogène du foie, transformé en glucose et libéré dans le sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Du repas qu'il vient de digérer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du glucose créé par l'estomac",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une réserve d'amidon du foie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La mise en réserve chez les végétaux : l'amidon",
+          "remember": "Les plantes vertes fabriquent des glucides à la lumière. Une partie est mise en réserve sous forme d'**amidon**, un glucide formé de nombreuses molécules de glucose. L'amidon est stocké dans des **organes de réserve** : les tubercules et les racines renflées (**igname**, **patate douce**, **manioc**) et les graines (riz, maïs). L'amidon se reconnaît avec l'**eau iodée**, brun-orangé au départ, qui devient **bleu-violet à bleu-noir** en présence d'amidon. L'amidon est la réserve des **végétaux**, le glycogène est la réserve des **animaux**. Quand on mange un aliment riche en amidon, il est digéré en glucose.",
+          "method": [
+            "Formuler l'hypothèse : l'aliment testé contient de l'amidon.",
+            "Réaliser le test : déposer quelques gouttes d'eau iodée, brun-orangé, sur l'aliment.",
+            "Observer la couleur obtenue et la comparer à la couleur de départ de l'eau iodée.",
+            "Conclure : bleu-violet à bleu-noir, il y a de l'amidon ; pas de changement, il n'y en a pas ; nommer la réserve."
+          ],
+          "example": {
+            "statement": "À la cuisine, Yao coupe une tranche d'igname crue et dépose dessus quelques gouttes d'eau iodée. Une tache bleu-noir apparaît. L'igname contient-elle de l'amidon ?",
+            "steps": [
+              "Formuler l'hypothèse : l'igname contient de l'amidon.",
+              "Réaliser le test : Yao dépose quelques gouttes d'eau iodée, brun-orangé, sur la tranche d'igname.",
+              "Observer : la couleur passe du brun-orangé au bleu-noir.",
+              "Conclure : le bleu-noir montre la présence d'amidon ; l'hypothèse est validée. L'igname est un tubercule qui stocke sa réserve sous forme d'amidon."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'amidon et le glucose, ni conclure d'un test négatif qu'il n'y a « pas de sucre ». L'eau iodée repère seulement l'amidon. Contre-exemple : sur un sirop de bissap sucré, l'eau iodée reste brun-orangé ; le sirop contient pourtant du sucre. On conclut seulement : pas d'amidon. Autre erreur : écrire que le foie stocke de l'amidon. Chez l'animal, la réserve est le glycogène.",
+          "figure": null,
+          "exercise": {
+            "title": "Au marché, Aya teste des aliments à l'eau iodée",
+            "statement": "Aya ramène du marché des aliments pour la fête de famille. Dans cet exercice, tu utilises la méthode de la fiche pour reconnaître l'amidon.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la forme de réserve des glucides dans les cellules d'un tubercule ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : nommer la réserve. Les tubercules et les racines renflées des végétaux stockent leur réserve de glucides sous forme d'amidon. Le glycogène est la réserve des animaux, pas celle des végétaux.",
+                "answers": [
+                  {
+                    "content": "L'amidon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le glycogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les graisses",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le glucose circulant",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels trois aliments sont riches en amidon ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Formuler l'hypothèse : on cherche les aliments qui contiennent de l'amidon. Étape 4 — Conclure : l'igname, la patate douce et le manioc sont des organes de réserve qui stockent l'amidon. L'huile de palme est une graisse et le sel est un minéral, ils ne contiennent pas d'amidon.",
+                "answers": [
+                  {
+                    "content": "L'igname",
+                    "correct": true
+                  },
+                  {
+                    "content": "La patate douce",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le manioc",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'huile de palme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sel de cuisine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Aya dépose de l'eau iodée sur une tranche de patate douce crue : la tache devient bleu-noir. Que peut-elle conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Réaliser le test : eau iodée brun-orangé sur la patate douce. Étape 3 — Observer : la couleur devient bleu-noir. Étape 4 — Conclure : le bleu-noir prouve la présence d'amidon. Le glycogène est une réserve animale ; l'eau iodée ne repère ni les graisses ni le glucose libre.",
+                "answers": [
+                  {
+                    "content": "La patate douce contient de l'amidon",
+                    "correct": true
+                  },
+                  {
+                    "content": "La patate douce contient seulement du glucose libre",
+                    "correct": false
+                  },
+                  {
+                    "content": "La patate douce contient des graisses",
+                    "correct": false
+                  },
+                  {
+                    "content": "La patate douce contient du glycogène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Aya verse de l'eau iodée sur du sucre en poudre. La couleur ne change pas : on peut en conclure que le sucre ne contient aucun glucide.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Observer : pas de changement de couleur. Étape 4 — Conclure : on peut seulement dire qu'il n'y a pas d'amidon. L'eau iodée ne repère que l'amidon ; le sucre est un glucide, mais pas de l'amidon. L'affirmation est fausse : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque organe ou être vivant à sa réserve.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Conclure : nommer la réserve. Le tubercule d'igname, un organe de réserve végétal, stocke de l'amidon. Le foie d'un animal ou d'une personne stocke du glycogène, et le tissu adipeux stocke des graisses.",
+                "answers": [
+                  {
+                    "content": "Un tubercule d'igname",
+                    "match": "Amidon"
+                  },
+                  {
+                    "content": "Le foie d'une personne",
+                    "match": "Glycogène"
+                  },
+                  {
+                    "content": "Le tissu adipeux",
+                    "match": "Graisses"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour savoir si un aliment contient de l'amidon.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Formuler l'hypothèse, d'abord. Étape 2 — Réaliser le test avec l'eau iodée. Étape 3 — Observer la couleur obtenue. Étape 4 — Conclure : on ne peut pas conclure avant d'avoir observé la couleur.",
+                "answers": [
+                  {
+                    "content": "Formuler l'hypothèse : l'aliment contient de l'amidon"
+                  },
+                  {
+                    "content": "Déposer quelques gouttes d'eau iodée sur l'aliment"
+                  },
+                  {
+                    "content": "Observer la couleur obtenue"
+                  },
+                  {
+                    "content": "Conclure selon la couleur observée"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître l'amidon et les réserves, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "L'amidon est la réserve de glucides des ___ ; chez l'Homme, la réserve du foie s'appelle le ___.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot désigne les plantes ; le second commence par « glyco- ».",
+                "explanation": "Étape 4 — Conclure : nommer la réserve. Les végétaux stockent de l'amidon ; les animaux, dont l'Homme, stockent du glycogène dans le foie et les muscles.",
+                "answers": [
+                  {
+                    "content": "végétaux",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "plantes",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "glycogène",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le glycogène",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On dépose de l'eau iodée sur un morceau de banane plantain verte et la tache devient bleu-violet. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Réaliser le test : eau iodée sur le plantain vert. Étape 3 — Observer : la couleur devient bleu-violet. Étape 4 — Conclure : il y a de l'amidon. Le glycogène est une réserve animale.",
+                "answers": [
+                  {
+                    "content": "Le plantain vert contient de l'amidon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plantain vert contient du glycogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plantain vert ne contient aucun glucide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plantain vert contient seulement des graisses",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'eau iodée devient bleu-noir au contact du glucose.",
+                "question_type": "true_false",
+                "hint": "Rappelle-toi quelle substance colore l'eau iodée.",
+                "explanation": "Étape 4 — Conclure : l'eau iodée repère l'amidon, pas le glucose. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les conséquences d'un déséquilibre : obésité et diabète",
+          "remember": "Quand la mise en réserve et la restitution du glucose sont en équilibre, la glycémie reste voisine de 1 g/L. Deux déséquilibres sont étudiés. L'**obésité** est un excès de graisses stockées dans le tissu adipeux : elle s'installe quand les apports en énergie dépassent durablement les dépenses, le surplus étant stocké en graisses ; elle augmente le risque de certaines maladies, dont le diabète. Le **diabète** est une maladie chronique où la glycémie reste anormalement élevée (**hyperglycémie**), même à jeun, parce que la régulation de la glycémie fonctionne mal. Une glycémie élevée une seule fois, juste après un repas, n'est pas un diabète. Le diagnostic est posé par un médecin, à partir d'examens adaptés. Ce sont des états de santé, pas des fautes.",
+          "method": [
+            "Lire les mesures : relever la grandeur, l'unité, les conditions (à jeun ou après un repas) et le nombre de mesures.",
+            "Comparer aux repères : la glycémie normale est voisine de 1 g/L ; après un repas elle monte puis redescend.",
+            "Repérer le déséquilibre : une glycémie durablement élevée, même à jeun, ou des apports en énergie durablement supérieurs aux dépenses.",
+            "Conclure avec prudence : nommer l'état possible (hyperglycémie, diabète, excès de graisses) et rappeler que seul un médecin pose le diagnostic."
+          ],
+          "example": {
+            "statement": "Lors d'une campagne de dépistage dans un village, trois mesures de glycémie à jeun sont faites sur une femme adulte (fictive) pendant trois matins différents : 1,6 g/L, 1,7 g/L et 1,8 g/L. Que peut-on dire de ces mesures ?",
+            "steps": [
+              "Lire les mesures : la grandeur est la glycémie, en g/L ; les trois mesures sont faites à jeun, sur trois matins : 1,6 ; 1,7 ; 1,8 g/L.",
+              "Comparer aux repères : la valeur normale est voisine de 1 g/L ; ces trois valeurs sont nettement plus élevées.",
+              "Repérer le déséquilibre : la glycémie reste élevée, même à jeun, sur plusieurs jours : c'est une hyperglycémie durable.",
+              "Conclure avec prudence : ces résultats évoquent un diabète, mais c'est un médecin qui confirme le diagnostic par des examens."
+            ]
+          },
+          "pitfall": "Ne pas conclure à un diabète à partir d'une seule glycémie élevée après un repas. Contre-exemple : une glycémie de 1,3 g/L une heure après un repas de fête est une réponse normale du corps, car elle redescend vers 1,0 g/L quelques heures plus tard. Ce qui compte, c'est une glycémie élevée à jeun, de façon répétée. Pour éviter l'erreur, regarde toujours les conditions de la mesure et leur nombre.",
+          "figure": null,
+          "exercise": {
+            "title": "Une campagne de dépistage au village",
+            "statement": "Lors d'une journée de santé organisée dans un quartier, on mesure la glycémie de volontaires (personnes fictives). Dans cet exercice, tu lis les mesures et tu en tires des conclusions prudentes, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Le diabète est une maladie dans laquelle :",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Repérer le déséquilibre : le diabète correspond à une hyperglycémie durable, qui persiste même à jeun, car la régulation de la glycémie fonctionne mal. Il ne s'agit pas d'une glycémie trop basse, ni d'un problème de fabrication de graisses.",
+                "answers": [
+                  {
+                    "content": "la glycémie reste anormalement élevée, même à jeun",
+                    "correct": true
+                  },
+                  {
+                    "content": "la glycémie reste toujours inférieure à 1 g/L",
+                    "correct": false
+                  },
+                  {
+                    "content": "le corps ne fabrique plus aucune graisse",
+                    "correct": false
+                  },
+                  {
+                    "content": "le glycogène ne peut plus être digéré",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Trois mesures de glycémie à jeun sont faites chez un adulte sur trois matins : 1,0 ; 0,9 et 1,1 g/L. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire les mesures : trois mesures à jeun. Étape 2 — Comparer aux repères : elles sont voisines de 1 g/L, la valeur normale. Étape 3 — Repérer le déséquilibre : il n'y en a pas. Étape 4 — Conclure : pas de signe d'hyperglycémie.",
+                "answers": [
+                  {
+                    "content": "Les valeurs sont voisines de 1 g/L : pas de signe d'hyperglycémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a une hyperglycémie durable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a un excès de graisses dans le tissu adipeux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a certainement un diabète",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une glycémie de 1,5 g/L trente minutes après un grand repas suffit pour affirmer qu'une personne est diabétique.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire les mesures : une seule mesure, juste après un repas. Étape 2 — Comparer aux repères : après un repas, la glycémie monte puis redescend. Étape 4 — Conclure avec prudence : une seule mesure après un repas ne permet pas de conclure. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une glycémie anormalement élevée s'appelle une ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Repérer le déséquilibre : le nom d'une glycémie anormalement élevée est l'hyperglycémie.",
+                "answers": [
+                  {
+                    "content": "hyperglycémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "une hyperglycémie",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux phrases exactes sur l'obésité ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Repérer le déséquilibre : des apports en énergie durablement supérieurs aux dépenses ; le surplus est stocké en graisses dans le tissu adipeux. Étape 4 — Conclure avec prudence : c'est un état de santé, qui n'est pas contagieux et qui n'est pas dû à un manque de glycogène.",
+                "answers": [
+                  {
+                    "content": "Elle correspond à un excès de graisses stockées dans le tissu adipeux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle s'installe quand les apports en énergie dépassent durablement les dépenses",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle se transmet par contact, comme un rhume",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est due à un manque de glycogène dans les muscles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un adulte a une glycémie à jeun de 1,8 g/L. De combien dépasse-t-elle la valeur normale, voisine de 1 g/L ?",
+                "question_type": "numeric",
+                "unit": "g/L",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire les mesures : 1,8 g/L, à jeun. Étape 2 — Comparer aux repères : valeur normale voisine de 1 g/L, donc 1,8 − 1,0 = 0,8 g/L d'écart. Étape 4 — Conclure avec prudence : cette valeur évoque une hyperglycémie, que seul un médecin interprète.",
+                "answers": [
+                  {
+                    "content": "0,8",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire des mesures de glycémie, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans le diabète, la glycémie reste élevée même quand la personne n'a pas mangé depuis plusieurs heures, c'est-à-dire même à ___.",
+                "question_type": "fill_blank",
+                "hint": "Ce mot désigne l'état de quelqu'un qui n'a pas mangé, comme le matin avant le petit déjeuner.",
+                "explanation": "Étape 1 — Lire les mesures : on regarde les conditions de la mesure. Étape 3 — Repérer le déséquilibre : dans le diabète, l'hyperglycémie persiste même à jeun, et pas seulement juste après un repas.",
+                "answers": [
+                  {
+                    "content": "jeun",
+                    "correct": true
+                  },
+                  {
+                    "content": "à jeun",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez Fatou, la glycémie est de 1,4 g/L une heure après un repas de fête, puis de 1,0 g/L trois heures après. Que peux-tu dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire les mesures : deux mesures liées à un repas. Étape 2 — Comparer aux repères : montée puis retour à 1,0 g/L. Étape 3 — Repérer le déséquilibre : il n'y en a pas. Étape 4 — Conclure avec prudence : réponse normale.",
+                "answers": [
+                  {
+                    "content": "C'est la réponse normale du corps à un repas",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle a un diabète",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a une obésité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa glycémie ne varie jamais",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi une personne peut-elle devenir obèse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Repérer le déséquilibre : apports durablement supérieurs aux dépenses. Le surplus est stocké sous forme de graisses dans le tissu adipeux. Étape 4 — Conclure avec prudence : c'est un état de santé, sans jugement.",
+                "answers": [
+                  {
+                    "content": "Ses apports en énergie dépassent durablement ses dépenses et le surplus est stocké en graisses",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son foie ne stocke plus de glycogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle consomme trop d'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son sang contient trop d'amidon",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le repas de fête chez les Koffi",
+          "statement": "Un dimanche de fête, la famille Koffi se réunit autour d'un grand plat d'igname pilée avec de la sauce. Adjoua, 17 ans, en bonne santé, accepte que sa glycémie soit mesurée (valeurs fictives et simplifiées) : 1,0 g/L avant le repas, 1,3 g/L une heure après, 1,2 g/L deux heures après et 1,0 g/L quatre heures après.",
+          "exercise_type": "fixation",
+          "figure": "devenir-glucose",
+          "questions": [
+            {
+              "content": "Adjoua a une glycémie de 1,0 g/L avant le repas, de 1,3 g/L une heure après, de 1,2 g/L deux heures après et de 1,0 g/L quatre heures après. À quel moment sa glycémie est-elle la plus élevée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Suivre la glycémie après un repas ». Étape 1 — Lire le document : on lit les valeurs pour chaque moment. Étape 2 — Repérer les variations : 1,0 ; 1,3 ; 1,2 ; 1,0 g/L. La plus grande valeur, 1,3 g/L, est relevée une heure après le repas.",
+              "answers": [
+                {
+                  "content": "Une heure après le repas",
+                  "correct": true
+                },
+                {
+                  "content": "Avant le repas",
+                  "correct": false
+                },
+                {
+                  "content": "Deux heures après le repas",
+                  "correct": false
+                },
+                {
+                  "content": "Quatre heures après le repas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La glycémie d'Adjoua est de 1,3 g/L une heure après le repas et de 1,0 g/L quatre heures après. De combien baisse-t-elle entre ces deux moments ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire le document : 1,3 g/L puis 1,0 g/L. Étape 2 — Repérer les variations : la baisse est 1,3 − 1,0 = 0,3 g/L. Étape 3 — Expliquer : ce glucose a quitté le sang pour être utilisé par les cellules ou mis en réserve.",
+              "answers": [
+                {
+                  "content": "0,3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Après le repas, le glucose en excès d'Adjoua est mis en réserve. Quels sont les trois lieux ou formes de réserve ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 4 — Conclure : le glucose en excès est stocké en glycogène dans le foie et les muscles, et en graisses dans le tissu adipeux. L'amidon est la réserve des végétaux, pas du foie ; les reins ne stockent pas de glucose pur.",
+              "answers": [
+                {
+                  "content": "Le glycogène du foie",
+                  "correct": true
+                },
+                {
+                  "content": "Le glycogène des muscles",
+                  "correct": true
+                },
+                {
+                  "content": "Les graisses du tissu adipeux",
+                  "correct": true
+                },
+                {
+                  "content": "L'amidon du foie",
+                  "correct": false
+                },
+                {
+                  "content": "Le glucose pur stocké dans les reins",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'igname pilée est riche en ___, un glucide qui est digéré en glucose.",
+              "question_type": "select",
+              "explanation": "Notion « La mise en réserve chez les végétaux ». Étape 4 — Conclure : l'igname est un tubercule, organe de réserve végétal qui stocke l'amidon. Digéré, l'amidon donne du glucose, ce qui explique la hausse de la glycémie après le repas.",
+              "answers": [
+                {
+                  "content": "amidon",
+                  "correct": true
+                },
+                {
+                  "content": "glycogène",
+                  "correct": false
+                },
+                {
+                  "content": "cellulose",
+                  "correct": false
+                },
+                {
+                  "content": "graisses",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si Adjoua ne mange plus rien jusqu'au lendemain matin, sa glycémie restera voisine de 1 g/L grâce au glycogène de son foie.",
+              "question_type": "true_false",
+              "explanation": "Notion « La restitution du glucose ». Étape 1 — Identifier la situation : jeûne. Étape 2 — Comparer : les cellules consomment du glucose sans apport. Étape 3 — Désigner : le foie transforme son glycogène en glucose et le libère dans le sang. Étape 4 — Conclure : la glycémie reste voisine de 1 g/L. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un cousin dit : « Le glucose qui était en trop dans le sang d'Adjoua a disparu. » Quelle réponse est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer par le glucose : une baisse de glycémie signifie que du glucose a quitté le sang. Étape 4 — Conclure : il est utilisé par les cellules (respiration cellulaire) ou mis en réserve en glycogène et en graisses. L'amidon est une réserve végétale, pas animale.",
+              "answers": [
+                {
+                  "content": "Il a quitté le sang : il a été utilisé par les cellules ou mis en réserve",
+                  "correct": true
+                },
+                {
+                  "content": "Il est sorti du corps par l'intestin",
+                  "correct": false
+                },
+                {
+                  "content": "Il s'est transformé en amidon dans le foie",
+                  "correct": false
+                },
+                {
+                  "content": "Il est resté dans le sang mais la glycémie ne le mesure plus",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Au marché avec Awa : les aliments riches en amidon",
+          "statement": "Au marché, Awa achète des aliments pour la semaine. Pour savoir lesquels contiennent de l'amidon, son frère fait un test à l'eau iodée, brun-orangé au départ, sur cinq produits. Résultats : le riz cru devient bleu-noir ; le maïs en grains devient bleu-violet ; le plantain vert devient bleu-noir ; l'huile d'arachide reste brun-orangé ; l'eau potable reste brun-orangé.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "D'après les résultats, quels sont les trois produits qui contiennent de l'amidon ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Notion « La mise en réserve chez les végétaux ». Étape 3 — Observer : seuls le riz, le maïs et le plantain vert changent de couleur, et passent du brun-orangé au bleu-noir ou au bleu-violet. Étape 4 — Conclure : ils contiennent de l'amidon. L'huile d'arachide et l'eau restent brun-orangé : pas d'amidon.",
+              "answers": [
+                {
+                  "content": "Le riz cru",
+                  "correct": true
+                },
+                {
+                  "content": "Le maïs en grains",
+                  "correct": true
+                },
+                {
+                  "content": "Le plantain vert",
+                  "correct": true
+                },
+                {
+                  "content": "L'huile d'arachide",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau potable",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur les cinq produits testés, trois contiennent de l'amidon. Combien n'en contiennent pas ?",
+              "question_type": "numeric",
+              "unit": "produits",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Observer : trois produits changent de couleur. Étape 4 — Conclure : les autres n'ont pas changé de couleur, soit 5 − 3 = 2 produits sans amidon (l'huile d'arachide et l'eau potable).",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le riz et le maïs sont des graines : elles stockent leur réserve de glucides sous forme d'___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 4 — Conclure : nommer la réserve. Les graines de riz et de maïs sont des organes de réserve des végétaux ; elles stockent de l'amidon.",
+              "answers": [
+                {
+                  "content": "amidon",
+                  "correct": true
+                },
+                {
+                  "content": "l'amidon",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une fois mangé, l'amidon du riz est digéré. Que devient-il principalement ?",
+              "question_type": "single_choice",
+              "explanation": "L'amidon est un glucide formé de nombreuses molécules de glucose. La digestion libère du glucose, qui passe de l'intestin grêle dans le sang : la glycémie monte (notion « Suivre la glycémie après un repas »). Le glycogène se forme ensuite dans le foie et les muscles, pas dans l'intestin.",
+              "answers": [
+                {
+                  "content": "Du glucose, qui passe dans le sang",
+                  "correct": true
+                },
+                {
+                  "content": "Du glycogène directement stocké dans l'intestin",
+                  "correct": false
+                },
+                {
+                  "content": "De l'eau iodée",
+                  "correct": false
+                },
+                {
+                  "content": "Des graisses directement dans la bouche",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'huile d'arachide reste brun-orangé : on peut donc affirmer qu'elle ne contient aucun nutriment.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Observer : pas de changement de couleur. Étape 4 — Conclure : on peut seulement dire qu'il n'y a pas d'amidon. L'huile contient des graisses, qui sont aussi des nutriments, mais que l'eau iodée ne repère pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le foie d'un animal stocke du glucose sous forme de :",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Conclure : nommer la réserve selon le règne. Les animaux stockent le glucose en glycogène (foie, muscles) ; les végétaux le stockent en amidon. La cellulose n'est pas une réserve du foie.",
+              "answers": [
+                {
+                  "content": "glycogène",
+                  "correct": true
+                },
+                {
+                  "content": "amidon",
+                  "correct": false
+                },
+                {
+                  "content": "cellulose",
+                  "correct": false
+                },
+                {
+                  "content": "eau iodée",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux volontaires, un même repas",
+          "statement": "Lors d'une journée de dépistage dans un village, deux adultes volontaires (fictifs), A et B, mangent le même repas. Leur glycémie est mesurée en g/L. Document : A, 1,0 à jeun, 1,4 une heure après, 1,2 deux heures après, 1,0 trois heures après. B, 1,7 à jeun, 2,3 une heure après, 2,2 deux heures après, 2,0 trois heures après. Ces valeurs sont simplifiées. La courbe schématique montre la glycémie de A.",
+          "exercise_type": "evaluation",
+          "figure": "courbe-glycemie",
+          "questions": [
+            {
+              "content": "Quelle est l'augmentation de la glycémie de B, de l'état à jeun (1,7 g/L) à une heure après le repas (2,3 g/L) ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire le document : B vaut 1,7 g/L à jeun puis 2,3 g/L une heure après. Étape 2 — Repérer les variations : 2,3 − 1,7 = 0,6 g/L d'augmentation.",
+              "answers": [
+                {
+                  "content": "0,6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Laquelle de ces deux personnes retrouve une glycémie voisine de 1 g/L trois heures après le repas ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire les mesures : trois heures après, A est à 1,0 g/L, B à 2,0 g/L. Étape 2 — Comparer aux repères : A est revenue à la valeur normale, B reste deux fois plus haut. Étape 4 — Conclure : seule A.",
+              "answers": [
+                {
+                  "content": "A",
+                  "correct": true
+                },
+                {
+                  "content": "B",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des deux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "B a une glycémie à jeun voisine de 1 g/L.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire les mesures : B vaut 1,7 g/L à jeun. Étape 2 — Comparer aux repères : la valeur normale est voisine de 1 g/L ; 1,7 g/L est nettement plus élevé. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux phrases exactes sur les résultats de B ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de la notion « Les conséquences d'un déséquilibre ». Étape 3 — Repérer le déséquilibre : une glycémie élevée à jeun et qui ne revient pas à la normale. Étape 4 — Conclure avec prudence : ces résultats évoquent un trouble de la régulation, mais seul un médecin pose le diagnostic. Affirmer que B a trop mangé serait un jugement sans preuve.",
+              "answers": [
+                {
+                  "content": "Sa glycémie reste élevée même à jeun",
+                  "correct": true
+                },
+                {
+                  "content": "Ces résultats évoquent un trouble de la régulation de la glycémie, à confirmer par un médecin",
+                  "correct": true
+                },
+                {
+                  "content": "Sa glycémie revient à 1 g/L en trois heures",
+                  "correct": false
+                },
+                {
+                  "content": "On peut affirmer, sans examen, que B a trop mangé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez A, la baisse de la glycémie entre 1 h et 3 h après le repas s'explique par la mise en ___ du glucose.",
+              "question_type": "select",
+              "explanation": "Notion « Suivre la glycémie après un repas ». Étape 3 — Expliquer : la baisse vient du glucose qui quitte le sang. Étape 4 — Conclure : il est mis en réserve en glycogène (foie, muscles) et en graisses (tissu adipeux), ou utilisé par les cellules.",
+              "answers": [
+                {
+                  "content": "réserve",
+                  "correct": true
+                },
+                {
+                  "content": "destruction",
+                  "correct": false
+                },
+                {
+                  "content": "fabrication",
+                  "correct": false
+                },
+                {
+                  "content": "digestion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Compare la glycémie de A et celle de B après le repas. Rédige quelques lignes avec les mots : à jeun, réserve, médecin.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Compare les valeurs à jeun de A et de B avec la valeur normale voisine de 1 g/L",
+                "Dit que A revient à 1,0 g/L grâce à la mise en réserve du glucose",
+                "Dit que B reste élevée, même à jeun",
+                "Conclut avec prudence en parlant du médecin et sans jugement",
+                "Utilise les mots demandés et des phrases claires"
+              ],
+              "explanation": "Corrigé modèle : À jeun, A a une glycémie de 1,0 g/L, valeur normale, alors que B est à 1,7 g/L, nettement plus élevée. Après le repas, la glycémie de A monte puis redescend à 1,0 g/L trois heures après : son glucose en excès a quitté le sang et a été mis en réserve en glycogène et en graisses. Celle de B reste élevée (2,0 g/L à trois heures), même à jeun avant le repas. Ces résultats évoquent un trouble de la régulation de la glycémie, mais seul un médecin peut poser le diagnostic. Répartition des points : comparaison avec la valeur normale (1), retour de A et mise en réserve (1), glycémie de B élevée (1), prudence et vocabulaire (1).",
+              "answers": [],
+              "starter": "À jeun, A a une glycémie de…"
+            }
+          ]
+        },
+        {
+          "title": "Une matinée aux champs, un repas le soir",
+          "statement": "Kouassi cultive de l'igname. Un jour, il travaille de 6 h à 14 h sans manger. Sa glycémie (fictive) est de 1,0 g/L à 7 h, de 0,9 g/L à 11 h et de 0,9 g/L à 14 h. Pour savoir ce que contient l'igname qu'il récolte, son fils dépose de l'eau iodée sur une tranche : elle devient bleu-noir.",
+          "exercise_type": "evaluation",
+          "figure": "foie-appareil-digestif",
+          "questions": [
+            {
+              "content": "Qu'indique la couleur bleu-noir de l'eau iodée sur la tranche d'igname ?",
+              "question_type": "single_choice",
+              "explanation": "Notion « La mise en réserve chez les végétaux ». Étape 3 — Observer : le brun-orangé devient bleu-noir. Étape 4 — Conclure : il y a de l'amidon. Le glycogène est la réserve des animaux.",
+              "answers": [
+                {
+                  "content": "L'igname contient de l'amidon",
+                  "correct": true
+                },
+                {
+                  "content": "L'igname contient du glycogène",
+                  "correct": false
+                },
+                {
+                  "content": "L'igname ne contient aucun glucide",
+                  "correct": false
+                },
+                {
+                  "content": "L'igname contient surtout des graisses",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le glycogène est la réserve de glucides des ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 4 — Conclure : nommer la réserve. Le glycogène est la réserve des animaux, dont l'Homme ; les végétaux, eux, stockent de l'amidon.",
+              "answers": [
+                {
+                  "content": "animaux",
+                  "correct": true
+                },
+                {
+                  "content": "animal",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La glycémie de Kouassi est de 1,0 g/L à 7 h et de 0,9 g/L à 14 h. De combien a-t-elle baissé entre 7 h et 14 h ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire le document : 1,0 g/L à 7 h, 0,9 g/L à 14 h. Étape 2 — Repérer les variations : 1,0 − 0,9 = 0,1 g/L, une baisse très faible malgré une matinée entière sans manger. Étape 4 — Conclure : la glycémie est restée voisine de la normale.",
+              "answers": [
+                {
+                  "content": "0,1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant sa matinée de travail sans manger, quelles sont les trois phrases exactes sur ce qui se passe chez Kouassi ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode de la notion « La restitution du glucose ». Étape 1 — Identifier la situation : jeûne et effort. Étape 3 — Désigner : glycogène du foie, puis graisses. Étape 4 — Conclure : le glucose passe des réserves vers le sang, les muscles en consomment, et la glycémie reste voisine de 1 g/L. Le foie ne stocke pas pendant le jeûne.",
+              "answers": [
+                {
+                  "content": "Le foie libère du glucose dans le sang à partir de son glycogène",
+                  "correct": true
+                },
+                {
+                  "content": "Les muscles utilisent du glucose pour produire de l'énergie",
+                  "correct": true
+                },
+                {
+                  "content": "Si les réserves de glycogène baissent beaucoup, les graisses sont aussi utilisées",
+                  "correct": true
+                },
+                {
+                  "content": "Le foie stocke du glycogène supplémentaire",
+                  "correct": false
+                },
+                {
+                  "content": "La glycémie tombe à zéro",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un voisin dit : « Kouassi n'a rien mangé, donc il n'y a plus de glucose dans son sang. » Que lui répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Comparer : plus d'apport de l'intestin, mais le foie restitue du glucose. Étape 4 — Conclure : la glycémie mesurée, 0,9 g/L à 14 h, le prouve. Les cellules ont besoin de glucose en permanence.",
+              "answers": [
+                {
+                  "content": "Faux : le foie libère du glucose et la glycémie reste voisine de 1 g/L",
+                  "correct": true
+                },
+                {
+                  "content": "Vrai : le glucose du sang vient seulement du repas",
+                  "correct": false
+                },
+                {
+                  "content": "Faux : le sang n'a pas besoin de glucose",
+                  "correct": false
+                },
+                {
+                  "content": "Vrai : le glucose ne peut pas être mis en réserve",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le soir, Kouassi prend un grand repas. Explique comment sa glycémie évolue, en citant les réserves concernées.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Dit que le glucose passe de l'intestin dans le sang et que la glycémie monte",
+                "Dit que le glucose en excès quitte le sang et est mis en réserve",
+                "Cite le glycogène (foie, muscles) et les graisses (tissu adipeux)",
+                "Dit que la glycémie revient vers 1 g/L",
+                "Rédige des phrases claires avec le vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Après le repas, le glucose des aliments passe de l'intestin grêle dans le sang et la glycémie monte au-dessus de 1 g/L. Le glucose en excès quitte ensuite le sang : il est mis en réserve sous forme de glycogène dans le foie et les muscles, et sous forme de graisses dans le tissu adipeux. La glycémie redescend alors vers 1 g/L. Répartition des points : montée de la glycémie (1), mise en réserve (1), réserves citées (1), retour vers 1 g/L et rédaction (1).",
+              "answers": [],
+              "starter": "Après le repas, le glucose passe…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

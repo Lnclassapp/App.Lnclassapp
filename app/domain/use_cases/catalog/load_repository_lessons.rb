@@ -1,14 +1,15 @@
 # 🧠 DOMAINE · UseCases::Catalog::LoadRepositoryLessons
-# Rôle : Develop et Staging chargent seuls les leçons à sujets de devoir du dépôt (chaîne d'import, puis publication) ; production jamais
-# ADR  : chargement-automatique-des-lecons-hors-production, 0108, 0113, 0116, 0121
+# Rôle : Develop et Staging chargent seuls les leçons à sujets de devoir du dépôt, Develop aussi les leçons v3 du programme, remplacées entières ; production jamais
+# ADR  : chargement-automatique-des-lecons-hors-production, 0123, 0108, 0113, 0116, 0121
 module UseCases
   module Catalog
     class LoadRepositoryLessons
       KIND = "course_tree"
 
       # outcome : :skipped (production, PR, nom absent), :no_author (aucun membre d'équipe actif), :unknown_environment (une ligne refusée
-      # est laissée), :done. lessons : { nom d'import => :loaded | :unchanged | :not_started | :refused | :unpublished | :partially_published |
-      # :republished | :failed }.
+      # est laissée), :done. lessons : { nom d'import => :loaded | :created | :replaced | :unchanged | :not_started | :refused | :unpublished |
+      # :partially_published | :republished | :failed } ; :created et :replaced disent qu'une leçon du programme v3 (ADR-0123) a été écrite
+      # absente ou à la place de celle du même titre, :loaded qu'une leçon à sujets de devoir l'a été (ADR-0122).
       Summary = Data.define(:outcome, :lessons) do
         def initialize(lessons: {}, **) = super
       end
@@ -16,8 +17,10 @@ module UseCases
       # source : LessonSourcePort ; reports : ImportReportRepositoryPort ; users : UserRepositoryPort ; courses, essentials, exercises : les repositories
       # du même nom (fiches et exercices en brouillon d'une leçon) ; logger : le journal du déploiement ;
       # taxonomy : TaxonomyRepository (lookup) ; start_import, run_import, publish_cascade : les use cases du même nom, cablés par l'appelant
-      # (run_import avec l'adaptateur ImportCourseTree en mode replace_exercises) ; policy : Policies::Catalog::ManageContentPolicy.
-      def initialize(source:, reports:, users:, courses:, essentials:, exercises:, taxonomy:, start_import:, run_import:, publish_cascade:, policy:, logger:, clock:)
+      # (run_import avec l'adaptateur ImportCourseTree en mode replace: :exercises, run_lesson_import en mode replace: :lesson) ;
+      # policy : Policies::Catalog::ManageContentPolicy.
+      def initialize(source:, reports:, users:, courses:, essentials:, exercises:, taxonomy:, start_import:, run_import:, run_lesson_import:,
+                     publish_cascade:, policy:, logger:, clock:)
         @source = source
         @reports = reports
         @users = users
@@ -27,6 +30,7 @@ module UseCases
         @taxonomy = taxonomy
         @start_import = start_import
         @run_import = run_import
+        @run_lesson_import = run_lesson_import
         @publish_cascade = publish_cascade
         @policy = policy
         @logger = logger
@@ -46,7 +50,9 @@ module UseCases
         return allowed if allowed.failure?
         return reject_unknown(stage, actor) if stage.unknown?
 
-        done(:done, @source.lessons.to_h { [ it.import_name, load_safely(it, actor) ] })
+        chosen, ignored = @source.lessons.map { [ it, stage.mode_for(level_directory: it.level_directory, subjects: it.subjects) ] }.partition(&:last)
+        log_ignored(ignored.map(&:first))
+        done(:done, chosen.to_h { |lesson, mode| [ lesson.import_name, load_safely(lesson, mode, actor) ] })
       end
 
       private
@@ -60,15 +66,25 @@ module UseCases
         done(:unknown_environment)
       end
 
-      def load_safely(lesson, actor)
-        load(lesson, actor)
+      # Une ligne par démarrage : les fichiers v3 lus mais pas chargés ici, comptés par dossier de niveau (une vague mal rangée se voit).
+      def log_ignored(lessons)
+        return if lessons.empty?
+
+        counts = lessons.map(&:level_directory).tally.sort.map { |folder, count| "#{folder} #{count}" }
+        @logger.info("[contenus] fichier(s) v3 non chargé(s) ici : #{counts.join(', ')}")
+      end
+
+      def load_safely(lesson, mode, actor)
+        load(lesson, mode, actor)
       rescue StandardError => error
         @logger.error("[contenus] #{lesson_name(lesson)} : échec (#{error.class} : #{error.message})")
         :failed
       end
 
-      def load(lesson, actor)
+      def load(lesson, mode, actor)
         return republish(lesson, actor) if @reports.last_loaded_checksum(kind: KIND, file_name: lesson.import_name) == lesson.checksum_sha256
+
+        loaded = mode == :lesson ? (present?(lesson) ? :replaced : :created) : :loaded
 
         upload = Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(lesson.content), filename: lesson.import_name)
         started = @start_import.call(actor:, dto: Dtos::Catalog::ImportUploadInput.new(kind: KIND, files: [ upload ]))
@@ -77,14 +93,20 @@ module UseCases
           return :not_started
         end
 
-        ran = @run_import.call(report_id: started.value.id)
+        ran = (mode == :lesson ? @run_lesson_import : @run_import).call(report_id: started.value.id)
         if ran.failure?
           @logger.error("[contenus] #{lesson_name(lesson)} : import en échec (#{ran.code})")
           return :refused
         end
-        return :refused unless ran.value.status == "completed" && ran.value.error_count.zero?
+        unless ran.value.status == "completed" && ran.value.error_count.zero?
+          @logger.warn("[contenus] #{lesson_name(lesson)} : import refusé (#{ran.value.status}, #{ran.value.error_count} erreur(s)), voir Imports")
+          return :refused
+        end
 
-        guarded(lesson) { publish(lesson, actor, slug_of(lesson), :loaded) }
+        if mode == :lesson
+          @logger.info("[contenus] #{lesson_name(lesson)} : leçon #{loaded == :replaced ? 'remplacée entière' : 'créée'} (#{lesson.import_name})")
+        end
+        guarded(lesson) { publish(lesson, actor, slug_of(lesson), loaded) }
       end
 
       # Fichier inchangé : pas de réimport, mais une publication qui a échoué après un import réussi est reprise (même critère que
@@ -131,12 +153,17 @@ module UseCases
       def lesson_name(lesson) = JSON.parse(lesson.content).fetch("courses").first["name"].to_s.squish
 
       # La leçon que l'import vient d'écrire (ou de remplacer), retrouvée par la clé de doublon de l'import.
-      def slug_of(lesson)
+      def slug_of(lesson) = @courses.slugs_by_key.fetch(key_of(lesson))
+
+      # Avant l'import : une leçon du même titre (niveau, matière, série) est-elle déjà là ? Un niveau ou une matière inconnus : non (l'import
+      # refusera la leçon dans sa ligne).
+      def present?(lesson) = @courses.slugs_by_key.key?(key_of(lesson))
+
+      def key_of(lesson)
         course = JSON.parse(lesson.content).fetch("courses").first
         lookup = @taxonomy.lookup
-        key = [ Entities::Shared::NaturalKey.compact(course["name"].squish), lookup.resolve_level(course["level_name"]).id,
-                lookup.resolve_material(course["material_name"]).id, lookup.resolve_series(course["series_name"])&.id ]
-        @courses.slugs_by_key.fetch(key)
+        [ Entities::Shared::NaturalKey.compact(course["name"].to_s.squish), lookup.resolve_level(course["level_name"])&.id,
+          lookup.resolve_material(course["material_name"])&.id, lookup.resolve_series(course["series_name"])&.id ]
       end
     end
   end

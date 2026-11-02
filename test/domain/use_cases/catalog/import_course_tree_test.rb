@@ -11,9 +11,9 @@ module UseCases
         @author = create_team_member(team_role: "content", second_factor: false)
       end
 
-      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new, replace_exercises: false)
+      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new, replace: :draft)
         ImportCourseTree.new(courses: Repositories::Catalog::CourseRepository.new, essentials: Repositories::Catalog::EssentialRepository.new,
-                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:, replace_exercises:)
+                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:, replace:)
       end
 
       def run_import(*documents, adapter: self.adapter, author: @author)
@@ -429,7 +429,7 @@ module UseCases
         notion_ids = course.essentials.order(:position).pluck(:id)
         file = lesson("subtitle" => "Changé", "name" => "Racines carrées", "theme" => "teal").tap { it["exercises"].each { |e| e["title"] = "Nouveau #{e['title']}" } }
 
-        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(file), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal [ "published", "Calculer et simplifier", "blue" ], course.reload.values_at(:status, :subtitle, :sheet_theme)
@@ -447,7 +447,7 @@ module UseCases
         notion_ids = course.essentials.order(:position).pluck(:id)
         other = lesson("name" => "Autre leçon")
 
-        report = run_import(envelope(lesson, other), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(lesson, other), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 2, 0 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal notion_ids, course.reload.essentials.order(:position).pluck(:id)
@@ -461,12 +461,39 @@ module UseCases
         before = Orm::Exercise.where(course_id: course.id).pluck(:id).sort
         file = lesson(notions: [ revision_notion("Simplifier une racine carrée", figure: "triangle-thales"), revision_notion("  Une   notion nouvelle ") ])
 
-        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(file), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal [ [ "courses[0].notions[1].name", "notion_not_found" ] ], report_pairs(report)
         assert_equal({ "name" => "Une notion nouvelle" }, report.import_errors.first["params"])
         assert_equal before, Orm::Exercise.where(course_id: course.id).pluck(:id).sort
+      end
+
+      # --- ADR-0123 : sur Develop, une leçon v3 du programme remplace entière la leçon présente, publiée ou non ---
+
+      test "in whole-lesson mode a published lesson is rewritten whole from the file: course, notions and exercises, in draft" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        old_notions = course.essentials.pluck(:id)
+        file = lesson("subtitle" => "Changé", "theme" => "teal", notions: [ revision_notion("Une notion nouvelle") ])
+
+        report = run_import(envelope(file), adapter: adapter(replace: :lesson))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ "Changé", "teal", "racines-carrees" ], course.reload.values_at(:subtitle, :sheet_theme, :slug)
+        assert_equal [ "Une notion nouvelle" ], course.essentials.pluck(:name)
+        assert_empty old_notions & course.essentials.pluck(:id)
+        assert_equal [ "draft" ], course.essentials.distinct.pluck(:status)
+        assert_equal [ "draft" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+        assert_equal 1, Orm::Course.count
+      end
+
+      test "in whole-lesson mode an absent lesson is created whole, and the default mode is still the draft-only one" do
+        report = run_import(envelope(lesson), adapter: adapter(replace: :lesson))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal :draft, ImportCourseTree.new(courses: nil, essentials: nil, taxonomy: nil, writer: nil).replace_mode
+        assert_raises(ArgumentError) { adapter(replace: :tout) }
       end
 
       # --- ADR-0121 §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---
