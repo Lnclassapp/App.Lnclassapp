@@ -36,6 +36,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-11-02 |
-| **PR** | `feature/contenus-1ere-a-svt` vers `Develop` |
+| **PR** | #440 (`feature/contenus-1ere-a-svt` vers `Develop`) |
 | **ADR produits** | aucun |
 | **UDR produits** | aucune |
