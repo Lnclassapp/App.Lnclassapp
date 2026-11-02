@@ -1,13 +1,15 @@
 # Un trimestre d'activité déterministe sur le jeu standard (chantier standard-de-test, Lot B ; ADR standard-de-test §4 point 2 et
-# « Tranché » 6). Joue, après db/seeds/standard.rb, 12 semaines de classe finissant la veille du chargement : les enseignants
+# « Tranché » 6). Joue, après db/seeds/standard.rb, jusqu'à 12 semaines de classe finissant la veille du chargement : les enseignants
 # assignent des exercices (un par semaine et par classe, échéance trois jours plus tard), les élèves les rendent à temps, en
 # retard ou pas du tout, et s'exercent d'eux-mêmes. Tout passe par les use cases (AssignResource, StartExerciseSession,
-# SubmitExerciseCopy) à une horloge simulée : notes, lacunes, remédiations, badges et échéances sont ceux que l'application
-# aurait calculés. Lycée et collège : plusieurs classes actives (5 au plus, un niveau après l'autre), 10 élèves par classe ;
-# grand établissement (activite: echantillon) : une classe par niveau, 8 élèves. Restent à zéro : la classe vide, la classe de
+# SubmitExerciseCopy) à une horloge simulée : notes, lacunes, badges et échéances sont ceux que l'application aurait calculés
+# (des remédiations s'y ajoutent quand un élève reprend une notion en lacune). Lycée et collège : plusieurs classes actives
+# (5 au plus, un niveau après l'autre), toute la classe ; grand établissement (activite: echantillon) : une classe par
+# niveau, un échantillon d'élèves. Les arrivées (enseignants, élèves) sont datées de la rentrée, sauf 2 ou 3 élèves récents. Restent à zéro : la classe vide, la classe de
 # l'élève sans activité, et toute classe sans leçon publiée pour son niveau (le collège n'a du v3 qu'en 3ème).
 # Déterministe : graine fixe, plan tiré avant toute écriture, un tirage propre à chaque événement ; le calendrier est relatif
-# (jour 0 = il y a 12 semaines, dernier jour = hier) : l'empreinte des totaux affichée à la fin ne dépend pas de la date.
+# (jour 0 = il y a `weeks` semaines, dernier jour = hier) : l'empreinte des totaux affichée à la fin ne dépend pas de la date
+# une fois la fenêtre pleine (12 semaines après la rentrée) ; avant, elle dépend du nombre de semaines, que la commande affiche.
 # Idempotent : une assignation ou une séance déjà là n'est pas rejouée. L'échéance est calculée par AssignResource : le jour de
 # séance de l'enseignant est posé à chaque devoir sur le jour d'échéance voulu (assignation + 3 jours), si bien que rendus à
 # temps (0 à 2 jours) et en retard (5 jours et plus) ne dépendent pas du jour de la semaine du chargement.
@@ -24,7 +26,6 @@ $stdout.sync = true
 started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 log = ->(message) { puts "[standard/activite] #{message}" }
 seed = 2026
-srand(seed)
 rng = Random.new(seed)
 
 size = ENV.fetch("STANDARD_ACTIVITY_SIZE", "complete")
@@ -33,7 +34,7 @@ raise "STANDARD_ACTIVITY_SIZE vaut complete ou reduite, reçu : #{size.inspect}"
 shape = if size == "reduite"
   { weeks: 3, classes: 2, students: 3, grand_students: 2, practice: 1..2 }
 else
-  { weeks: 12, classes: 5, students: 40, grand_students: 12, practice: 2..4 }
+  { weeks: 12, classes: 4, students: 25, grand_students: 8, practice: 1..3 }
 end
 
 standard_dir = Rails.root.join("db/seeds/standard")
@@ -92,13 +93,15 @@ set.schools.each do |school_spec|
   chosen = 0
   levels_done = []
   picks.each do |spec|
-    break if !sampled && chosen >= shape.fetch(:classes)
-    next if sampled && levels_done.include?(spec.level)
+    break if !sampled && chosen >= shape.fetch(:classes) # assez de classes actives pour cet établissement
+    next if sampled && levels_done.include?(spec.level) # échantillon : une seule classe par niveau
 
-    classroom = classroom_for.(spec) or next
+    classroom = classroom_for.(spec) or next # classe absente de la base (manifeste ou base d'un autre jeu)
     roster = Orm::ClassroomStudent.where(classroom_id: classroom.id).joins(:student).order("users.contact").includes(:student)
                                   .first(shape.fetch(sampled ? :grand_students : :students)).map(&:student)
     pool = pool_for.(classroom).group_by { it.course.material }.select { |material, _| teacher_of.(school, material) }
+    # Sans élève (la classe vide), ou sans exercice publié d'une matière que l'établissement enseigne (le v3 manque à ce
+    # niveau, par exemple 4ème à 6ème) : la classe reste à zéro.
     next if roster.empty? || pool.empty?
 
     levels_done << spec.level
@@ -192,10 +195,25 @@ submit = UseCases::Assessment::SubmitExerciseCopy.new(
   transaction:, clock:
 )
 
-# Les élèves rejoignent leur classe avant le premier jour du trimestre (le jeu de base les inscrit au chargement).
 roster_ids = active.flat_map { |entry| entry.fetch(:roster).map(&:id) }
-joined = first_day.in_time_zone - 7.days
-Orm::ClassroomStudent.where(student_id: roster_ids).where("joined_at > ?", joined).update_all(joined_at: joined)
+
+# Les arrivées : le jeu de base inscrit tout le monde au chargement ; ici enseignants et élèves des trois établissements
+# arrivent à la rentrée moins 2 à 5 jours (écart tiré de l'id), sauf 2 ou 3 élèves par établissement, arrivés ces derniers
+# jours (jamais un élève qui a déjà travaillé). Rejoué, le résultat est le même.
+rentree_at = rentree.in_time_zone + 8.hours
+school_ids = schools.values.map(&:id)
+school_classrooms = Orm::Classroom.where(school_id: school_ids).select(:id)
+recent = school_ids.flat_map do |school_id|
+  Orm::ClassroomStudent.joins(:classroom).where(classrooms: { school_id: }).where.not(student_id: roster_ids).order(id: :desc)
+                       .limit(2 + (school_id % 2)).pluck(:id).each_with_index.map { |id, rank| [ id, at.((7 * weeks) - 1 - (2 * rank), 10 * 60) ] }
+end
+arrivals = [ [ Orm::TeacherSchool.where(school_id: school_ids), "created_at" ], [ Orm::TeacherSchoolMaterial.where(school_id: school_ids), "created_at" ],
+             [ Orm::TeacherClassroom.where(classroom_id: school_classrooms), "created_at" ],
+             [ Orm::ClassroomStudent.where(classroom_id: school_classrooms).where.not(id: recent.map(&:first)), "joined_at" ] ]
+arrivals.each do |rows, column|
+  rows.update_all([ "#{column} = ?::timestamp - ((2 + (id % 4)) * interval '1 day')", rentree_at ])
+end
+recent.each { |id, time| Orm::ClassroomStudent.where(id:).update_all(joined_at: time) }
 
 # La copie d'un élève : ce qu'il aurait coché, tapé ou rangé pour que la question soit juste (ou fausse), dans l'ordre mélangé
 # que l'application lui a montré (AnswerShuffle, tiré de la session et de la question).
@@ -244,6 +262,9 @@ end
 
 entities = {}
 seen = Hash.new(0)
+# Les séances déjà terminées (un rejeu ne les refait pas), lues une fois ; les acteurs des élèves, construits une fois.
+done_before = Orm::ExerciseSession.where(student_id: roster_ids, status: "completed").group(:student_id, :exercise_id).count
+actors = {}
 played = 0
 assigned = 0
 plan.each do |event|
@@ -270,10 +291,10 @@ plan.each do |event|
   key = [ student.id, exercise.id ]
   rank = seen[key]
   seen[key] += 1
-  next if Orm::ExerciseSession.where(student_id: student.id, exercise_id: exercise.id, status: "completed").count > rank
+  next if done_before.fetch(key, 0) > rank
 
   draw = Random.new((seed * 100_003) + event.fetch(:index))
-  actor = users.actor_for(user_id: student.id)
+  actor = (actors[student.id] ||= users.actor_for(user_id: student.id))
   started_session = start_session.call(actor:, exercise_public_id: exercise.public_id)
   raise "séance refusée (#{student.contact}, #{exercise.title}) : #{started_session.code} #{started_session.errors}" if started_session.failure?
 
@@ -311,7 +332,7 @@ due_dates.each do |assignment_id, classroom_id, due_on|
   end
 end
 totals = {
-  classes: active.size, eleves: roster_ids.size, devoirs: due_dates.size,
+  semaines: weeks, classes: active.size, eleves: roster_ids.size, devoirs: due_dates.size,
   seances: all_sessions.count, terminees: completed.count, remediations: all_sessions.where(kind: "remediation").count,
   notes: completed.sum(:score_percent).to_i,
   reponses: Orm::QuestionAttempt.where(exercise_session_id: all_sessions.select(:id)).count,
@@ -320,5 +341,5 @@ totals = {
 }
 fingerprint = Digest::SHA256.hexdigest(totals.map { |name, value| "#{name}=#{value}" }.join("|"))[0, 10]
 log.call("totaux : #{totals.map { |name, value| "#{name} #{value}" }.join(', ')}")
-log.call("empreinte des totaux : #{fingerprint}")
+log.call("empreinte des totaux : #{fingerprint} (#{weeks} semaines ; stable d'une date à l'autre une fois la fenêtre pleine, à #{shape.fetch(:weeks)} semaines)")
 log.call("terminé en #{(Process.clock_gettime(Process::CLOCK_MONOTONIC) - started).round(1)} s (#{played} séances et #{assigned} devoirs ajoutés)")

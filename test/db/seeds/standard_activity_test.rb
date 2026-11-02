@@ -6,7 +6,7 @@ require "test_helper"
 # jeu ne double rien ; l'élève sans activité et la classe vide restent à zéro ; le trimestre se termine la veille.
 # La valeur attendue change à chaque évolution légitime d'un calcul (notes, lacunes, badges, devoirs) : on la met à jour sciemment.
 class StandardActivityTest < ActiveSupport::TestCase
-  EXPECTED_FINGERPRINT = "f58319b0a2".freeze
+  EXPECTED_FINGERPRINT = "4da42e1b74".freeze
   # 27 leçons : toute la 1ère et la 3ème du manifeste, de quoi activer des classes du lycée et du collège.
   LESSONS = 27
   SEEDS = Rails.root.join("db/seeds")
@@ -44,18 +44,24 @@ class StandardActivityTest < ActiveSupport::TestCase
   def totals = [ sessions.count, sessions.where(status: "completed").sum(:score_percent), Orm::ClassroomAssignment.count, Orm::KnowledgeGap.count,
                  Orm::ExerciseBadge.count, Orm::Message.count ]
 
-  test "the fingerprint is the expected one, the same on two loading dates" do
-    # Un mardi puis un samedi : le trimestre glisse, ses chiffres ne bougent pas.
+  test "the fingerprint is the expected one, the same on every date once the window is full, and it depends on the weeks before" do
+    # Mardi, samedi et jeudi de septembre (3 semaines depuis la rentrée) : la fenêtre pleine glisse, ses chiffres ne bougent pas.
     tuesday = fingerprint_at(Time.zone.local(2026, 11, 3, 10))
     saturday = fingerprint_at(Time.zone.local(2026, 12, 12, 15))
+    thursday = fingerprint_at(Time.zone.local(2026, 9, 24, 9))
 
-    assert_equal tuesday, saturday
+    assert_equal [ tuesday, tuesday ], [ saturday, thursday ]
     assert_equal EXPECTED_FINGERPRINT, tuesday
+    # Fenêtre raccourcie par la rentrée (2 semaines) : l'empreinte dépend alors du nombre de semaines, que la commande affiche.
+    assert_not_equal tuesday, fingerprint_at(Time.zone.local(2026, 9, 15, 9))
   end
 
-  test "a second pass duplicates nothing, the quarter ends the day before, the idle student and the empty class stay at zero" do
-    travel_to(Time.zone.local(2026, 11, 3, 10)) do
-      first = play_activity
+  test "a second pass duplicates nothing, nothing starts before the rentree, arrivals are dated, the idle student and the empty class stay at zero" do
+    rentree = Time.zone.local(2026, 9, 1)
+    travel_to(Time.zone.local(2026, 9, 15, 10)) do
+      out, = capture_io { load SEEDS.join("standard/activite.rb").to_s, true }
+      first = out[/empreinte des totaux : (\h+)/, 1]
+      assert_match "(2 semaines", out, "la fenêtre raccourcie par la rentrée est annoncée"
       before = totals
       assert_operator before.first, :>, 0, "l'activité réduite doit produire des séances"
 
@@ -63,9 +69,19 @@ class StandardActivityTest < ActiveSupport::TestCase
       assert_equal before, totals
 
       last = [ sessions.maximum(:completed_at), Orm::ClassroomAssignment.maximum(:assigned_at) ].max
-      assert_equal Date.new(2026, 11, 2), last.to_date, "le trimestre se termine la veille du chargement"
-      assert_operator sessions.minimum(:started_at), :>=, Time.zone.local(2026, 9, 1), "jamais avant la rentrée"
-      assert_operator Orm::ClassroomAssignment.maximum(:due_on), :>, Date.new(2026, 11, 3), "des devoirs à venir"
+      assert_equal Date.new(2026, 9, 14), last.to_date, "le trimestre se termine la veille du chargement"
+      assert_operator Orm::ClassroomAssignment.minimum(:assigned_at), :>=, rentree, "jamais avant la rentrée"
+      assert_operator sessions.minimum(:started_at), :>=, rentree, "jamais avant la rentrée"
+      assert_operator Orm::ClassroomAssignment.maximum(:due_on), :>, Date.new(2026, 9, 15), "des devoirs à venir"
+
+      classrooms = Orm::Classroom.where(school: schools)
+      memberships = Orm::ClassroomStudent.where(classroom: classrooms)
+      recent = memberships.where("joined_at > ?", rentree)
+      assert_includes 6..9, recent.count, "2 ou 3 élèves récents par établissement, pas toute la population"
+      assert memberships.pluck(:joined_at).all? { it >= rentree - 5.days }, "les autres sont arrivés à la rentrée moins 2 à 5 jours"
+      assert_equal 0, Orm::ExerciseSession.where(student_id: recent.select(:student_id)).count, "un élève récent n'a pas encore travaillé"
+      assert Orm::TeacherSchool.where(school: schools).all? { it.created_at < rentree }, "les enseignants arrivent avant la rentrée"
+      assert Orm::TeacherClassroom.where(classroom: classrooms).all? { it.created_at < rentree }
 
       idle = Orm::User.find_by!(contact: contact_of_first_student(@set.cases.student_without_activity))
       assert_equal 0, Orm::ExerciseSession.where(student: idle).count
