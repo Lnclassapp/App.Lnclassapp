@@ -31,3 +31,57 @@
 - **Portée** : un seul fichier à la fois, remplacement de la seule leçon de même titre (`replace: :lesson`), aucun mot de passe ni donnée d'élève lus ou écrits ; le compte élève affiché est un compte fictif de la plage `0[157]0000xxxx`.
 
 - **Durée mesurée (Lot E)** : `bin/apercu-lecon` sur la leçon Thalès (3ème, 26 exercices, 4 sujets) en development : 2,9 s la première fois (création), 4,1 s en remplacement d'une leçon déjà publiée, démarrage de Rails compris. Cible < 15 s tenue. `--suivre` rejoue l'aperçu au changement de `mtime` (boucle de 1 s).
+
+## Lot D — rendu automatique des leçons (premier passage complet, 2026-11-02)
+
+- **Mesure** : une leçon se rend en 4,2 s en moyenne (import, publication, connexion, deux visites : 390 px puis ordinateur), un fichier v3 sur 417. Un passage complet en un seul processus : 417 x 4,2 s, environ 29 min. Une première tentative à 3 processus parallèles a fini en 30 min avec 263 interblocages PostgreSQL (`deadlock detected`, base de test partagée en parallèle) : ces 263 leçons ont été rejouées en série (18 min). Le découpage de la CI reste donc à un processus par part (35 fichiers, sous le seuil de parallélisme de 50).
+- **Découpage** : 12 parts (tâche `lecons`, 35 fichiers, environ 2 min 30 de tests plus l'installation, sous les 5 minutes), partage glouton par taille de fichier (`LECONS_PART=i/12`).
+- **Résultat** : 41 leçons sur 417 en défaut (non corrigées, hors du lot) : 27 avec `**` dans le texte rendu, 15 qui débordent, 1 figure absente (2 leçons cumulent `**` et débordement), 0 import refusé. Un premier passage avait compté 10 imports refusés (EDHC) : faux positif de la base de test, qui n'avait pas cette matière du référentiel réel ; le test la crée.
+- **Poste de travail** : Chrome 153 est installé avec un chromedriver 147 dans le PATH (`/opt/node22/bin`) : lancer les tests système avec un PATH sans lui pour que selenium-manager télécharge le bon pilote.
+- **Écarts** : exercices et problèmes sont lus dans la page de la leçon (fiche de révision, « Prépare interros », « Prépare devoirs ») ; les pages `/exercises/<id>` ne sont pas visitées. La tâche `lecons` est ajoutée à `ci.yml` : `test/guards/ci_plan_test.rb` (hors de la fiche) attend encore `plan unit system ci` et doit être mis à jour.
+
+Fichiers en défaut :
+
+| Fichier (sous docs/contenus/lecons-traitees) | Défaut |
+|---|---|
+| `1ere-a1/mathematiques/denombrement.json` | `**` |
+| `1ere-a1/mathematiques/equations-et-inequations.json` | `**` |
+| `1ere-a1/physique-chimie/les-alcanes.json` | débordement |
+| `1ere-a1/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | débordement |
+| `1ere-a2/mathematiques/denombrement.json` | `**` |
+| `1ere-a2/mathematiques/equations-et-inequations.json` | `**` |
+| `1ere-a2/physique-chimie/les-alcanes.json` | débordement |
+| `1ere-a2/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | débordement |
+| `1ere-c/mathematiques/composees-de-transformations-du-plan.json` | `**`,débordement |
+| `1ere-c/mathematiques/denombrement.json` | `**` |
+| `1ere-c/mathematiques/derivation.json` | `**` |
+| `1ere-c/mathematiques/generalites-sur-les-fonctions.json` | `**` |
+| `1ere-c/physique-chimie/energie-mecanique.json` | `**` |
+| `1ere-c/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | débordement |
+| `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | débordement |
+| `1ere-c/svt/la-photosynthese.json` | `**` |
+| `1ere-d/mathematiques/denombrement.json` | `**` |
+| `1ere-d/mathematiques/derivation.json` | `**` |
+| `1ere-d/mathematiques/generalites-sur-les-fonctions.json` | `**` |
+| `1ere-d/physique-chimie/energie-mecanique.json` | `**` |
+| `1ere-d/physique-chimie/energie-potentielle-de-pesanteur.json` | `**` |
+| `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | débordement |
+| `1ere-d/physique-chimie/hydrocarbures-satures-les-alcanes.json` | débordement |
+| `3eme/edhc/les-institutions-juridictionnelles.json` | figure |
+| `3eme/mathematiques/angles-inscrits.json` | `**` |
+| `3eme/mathematiques/equations-et-inequations-dans-r.json` | `**` |
+| `3eme/mathematiques/racines-carrees.json` | `**` |
+| `tle-a1/mathematiques/probabilite-et-variable-aleatoire.json` | `**` |
+| `tle-a1/mathematiques/suites-numeriques.json` | `**` |
+| `tle-a1/svt/l-heredite-du-sexe-et-du-groupe-sanguin-chez-l-homme.json` | `**` |
+| `tle-a2/mathematiques/probabilite.json` | `**`,débordement |
+| `tle-a2/mathematiques/suites-numeriques.json` | `**` |
+| `tle-a2/svt/l-heredite-du-sexe-et-du-groupe-sanguin-chez-l-homme.json` | `**` |
+| `tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json` | `**` |
+| `tle-c/mathematiques/divisibilite-dans.json` | `**` |
+| `tle-c/physique-chimie/acides-carboxyliques-et-derives.json` | débordement |
+| `tle-c/physique-chimie/les-alcools.json` | débordement |
+| `tle-d/physique-chimie/acides-carboxyliques-et-derives.json` | débordement |
+| `tle-d/physique-chimie/les-alcools.json` | débordement |
+| `tle-d/physique-chimie/les-amines.json` | débordement |
+| `tle-d/svt/la-transmission-de-deux-caracteres-hereditaires-chez-les-etres-vivants.json` | `**` |

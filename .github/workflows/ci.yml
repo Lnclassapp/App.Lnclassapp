@@ -52,6 +52,7 @@ jobs:
       unit: ${{ steps.draw.outputs.unit }}
       tested: ${{ steps.proof.outputs.tested }}
       code: ${{ steps.changes.outputs.code }}
+      lessons: ${{ steps.changes.outputs.lessons }}
       tree: ${{ steps.tree.outputs.sha }}
 
     steps:
@@ -100,11 +101,15 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
         run: |
           code=true
+          lessons=true
           if files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)') && [ -n "$files" ]; then
             echo "$files"
             echo "$files" | grep -qvE '^docs/|\.md$' || code=false
+            # standard-de-test, Lot D : des leçons v3 qui bougent se rendent même si elles sont des documents (docs/contenus).
+            echo "$files" | grep -qE '^docs/contenus/lecons-traitees/.*\.json$' || lessons=false
           fi
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
+          echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
 
       # The tree the jobs below test, read here: the proof is the tree, not the commit (ADR-0069 §4.3).
       - id: tree
@@ -201,12 +206,59 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
+  # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : chaque leçon v3 est importée dans la base de test, publiée et lue
+  # par un élève à 390 px puis sur ordinateur (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 4,2 s environ, soit 35 fichiers et 2 min 30 par part
+  # (journal du chantier) : le découpage tient chaque part sous les cinq minutes avec son installation. Rien n'est publié
+  # hors de la base de test. Une part rouge n'annule pas les autres.
+  lecons:
+    name: lecons ${{ matrix.part }}/12
+    needs: plan
+    if: needs.plan.outputs.code == 'true' || needs.plan.outputs.lessons == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: PostgreSQL of the image
+        run: |
+          sudo systemctl start postgresql
+          sudo -u postgres psql -v ON_ERROR_STOP=1 -c "CREATE ROLE \"dev-rails\" LOGIN SUPERUSER PASSWORD 'dev-rails'"
+          pg_isready -h 127.0.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Render the lessons of this part
+        env:
+          LECONS: tout
+          LECONS_PART: ${{ matrix.part }}/12
+          COVERAGE: "0"
+        run: |
+          bin/setup --skip-server
+          bin/check-chrome
+          bin/rails test:prepare
+          PARALLEL_WORKERS=$(nproc) bin/rails test test/system/catalog/lesson_rendering_test.rb -v
+
+      - name: Keep screenshots from failed lessons
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: screenshots-lecons-${{ matrix.part }}
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
   # The verdict the branches wait for. Green when nothing had to be replayed (a proven tree, documentation alone),
   # or when every test job is green (« unit » and « system » stand for all their parts): only then does the run prove its tree, ci-tree-<tree>, kept 30 days, so that a
   # later promotion of the same files is green in about two minutes. A draft (« plan » skipped) gets no verdict.
   ci:
     name: ci
-    needs: [ plan, unit, system ]
+    needs: [ plan, unit, system, lecons ]
     if: ${{ !cancelled() && needs.plan.result != 'skipped' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -220,18 +272,25 @@ jobs:
           CODE: ${{ needs.plan.outputs.code }}
           UNIT: ${{ needs.unit.result }}
           SYSTEM: ${{ needs.system.result }}
+          LESSONS: ${{ needs.plan.outputs.lessons }}
+          LECONS: ${{ needs.lecons.result }}
         run: |
-          echo "plan=$PLAN code=$CODE unit=$UNIT system=$SYSTEM"
+          echo "plan=$PLAN code=$CODE unit=$UNIT system=$SYSTEM lessons=$LESSONS lecons=$LECONS"
           [ "$PLAN" = success ] || { echo "::error::« plan » n'a pas abouti"; exit 1; }
           if [ "$CODE" != true ]; then
+            # Des documents seulement : sauf des leçons v3, qui se rendent (standard-de-test, Lot D).
+            if [ "$LESSONS" = true ] && [ "$LECONS" != success ]; then
+              echo "::error::lecons : $LECONS"
+              exit 1
+            fi
             echo "Rien à rejouer : arbre déjà prouvé, ou documents seulement."
             exit 0
           fi
-          if [ "$UNIT" = success ] && [ "$SYSTEM" = success ]; then
+          if [ "$UNIT" = success ] && [ "$SYSTEM" = success ] && [ "$LECONS" = success ]; then
             : > "$RUNNER_TEMP/ci-tree"
             echo "proof=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::error::unit : $UNIT, system : $SYSTEM"
+            echo "::error::unit : $UNIT, system : $SYSTEM, lecons : $LECONS"
             exit 1
           fi
 
