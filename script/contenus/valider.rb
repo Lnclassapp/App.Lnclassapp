@@ -222,6 +222,7 @@ module Contenus
       text(path, "name", notion["name"], schema_max: 200, max: 150, required: true)
       sheet(notion, path)
       figure_ref(notion["figure"], "#{path}.figure", figures)
+      practice(notion["practice"], "#{path}.practice")
       exercise = notion["exercise"]
       exercises = notion_exercises(exercise)
       unless ESSENTIAL_EXERCISES.cover?(exercises.size)
@@ -236,6 +237,18 @@ module Contenus
 
     # `exercise` : un objet (un exercice) ou une liste de un à deux exercices.
     def notion_exercises(exercise) = exercise.is_a?(Hash) ? [ exercise ] : (exercise.is_a?(Array) ? exercise : [])
+
+    # « Je m'entraîne » : l'import lui applique les règles de structure des exercices (NotionPractice) ; sans elles ici, une réponse acceptée
+    # en double (« insaturée » / « insaturee », une fois normalisée) passait le script et l'import la refusait (duplicate_accepted).
+    def practice(practice, path)
+      questions = practice.is_a?(Hash) ? practice["questions"] : nil
+      return unless questions.is_a?(Array)
+
+      questions.each_with_index do |question, i|
+        answers = question.is_a?(Hash) ? question["answers"] : nil
+        structure(question, answers, "#{path}.questions[#{i}]") if answers.is_a?(Array) && answers.all?(Hash) && question["question_type"].is_a?(String)
+      end
+    end
 
     # Gabarit des 4 blocs : le schéma refuse les bornes de taille (« schema »), l'entité NotionSheet le reste (blank, too_long,
     # example_steps_mismatch).
@@ -418,7 +431,8 @@ module Contenus
       end
       answers = raw_answers.each_with_index.map do |answer, i|
         Entities::Assessment::Answer.new(id: i, position: i, content: answer["content"], correct: answer.fetch("correct") { answer["is_correct"] } == true,
-                                         match_content: answer["match"].to_s.strip.then { it.empty? ? nil : it })
+                                         match_content: answer["match"].to_s.strip.then { it.empty? ? nil : it },
+                                         blank: answer["blank"].is_a?(Integer) ? answer["blank"] : 0)
       end
       rules = Entities::Assessment::Question.structure_errors_for(
         question_type: type, answers:, content: question["content"], numeric_tolerance: tolerance.nil? ? nil : BigDecimal(tolerance.to_s),
