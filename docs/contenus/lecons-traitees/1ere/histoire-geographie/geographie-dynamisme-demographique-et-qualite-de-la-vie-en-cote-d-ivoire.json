@@ -269,7 +269,7 @@
               "Calculer le solde migratoire : $50 - 30 = +20$ personnes. Croissance totale : $100 + 20 = 120$ personnes, soit $\\frac{120}{4\\,000} = 3$ % de la population."
             ]
           },
-          "pitfall": "L'erreur la plus fréquente est de **s'arrêter à la croissance naturelle** et d'oublier le solde migratoire. Contre-exemple : un village de 1 000 habitants a 40 naissances et 10 décès, donc +30 personnes. Mais 50 familles partent vers la ville et 10 arrivent : le solde migratoire est $10 - 50 = -40$. La population passe de $+30$ à $-10$ : elle **diminue**. Autre piège : un taux de 30 pour 1 000 n'est pas 30 %, mais 3 %.",
+          "pitfall": "L'erreur la plus fréquente est de **s'arrêter à la croissance naturelle** et d'oublier le solde migratoire. Contre-exemple : un village de 1 000 habitants a 40 naissances et 10 décès, donc +30 personnes. Mais 50 personnes partent vers la ville et 10 arrivent : le solde migratoire est $10 - 50 = -40$. La population passe de $+30$ à $-10$ : elle **diminue**. Autre piège : un taux de 30 pour 1 000 n'est pas 30 %, mais 3 %.",
           "figure": "bilan-population",
           "exercise": {
             "title": "Calculer la croissance d'un village",
@@ -725,12 +725,12 @@
           "title": "Interrogation — Le bilan démographique d'un village",
           "exercise_type": "fixation",
           "figure": "bilan-population",
-          "statement": "Document : relevé de l'état civil du village imaginé de Boniankro, établi par le chef de village pour une année (chiffres inventés pour l'exercice). Population : 5 000 habitants. Naissances : 175. Décès : 50. Familles arrivées : 60 personnes. Personnes parties vers la ville : 85.",
+          "statement": "Document : relevé de l'état civil du village imaginé de Boniankro, établi par le chef de village pour une année (chiffres inventés pour l'exercice). Population : 5 000 habitants. Naissances : 175. Décès : 50. Personnes arrivées : 60. Personnes parties vers la ville : 85.",
           "questions": [
             {
               "content": "Document : le village de Boniankro compte 5 000 habitants et 175 naissances en une année. Quel est son taux de natalité, en nombre de naissances pour 1 000 habitants ?",
               "question_type": "numeric",
-              "explanation": "Méthode : 1) Relever les données : population 5 000 ; naissances 175. 2) Calculer le taux : nombre divisé par la population, multiplié par 1 000. 3) Application : $\\frac{175}{5\\,000} = 0{,}035$, puis $0{,}035 \\times 1\\,000 = 35$. Le taux de natalité est de 35 pour 1 000, soit 3,5 %. Erreur tentante : répondre 3,5 en oubliant de multiplier par 1 000.",
+              "explanation": "Méthode : 1) Relever les données : population 5 000 ; naissances 175. 2) Calculer le taux : nombre divisé par la population, multiplié par 1 000. 3) Application : $\\frac{175}{5\\,000} = 0{,}035$, puis $0{,}035 \\times 1\\,000 = 35$. Le taux de natalité est de 35 pour 1 000, soit 3,5 %. Erreur tentante : répondre 3,5, qui est le pourcentage (multiplication par 100 au lieu de 1 000).",
               "answers": [
                 {
                   "content": "35",
@@ -1060,7 +1060,7 @@
           ]
         },
         {
-          "title": "BEPC — Un village face à sa croissance",
+          "title": "Bac — Un village face à sa croissance",
           "exercise_type": "evaluation",
           "figure": "lien-population-services",
           "statement": "Texte écrit pour Lnclass (village imaginé, chiffres inventés). Le village de Tiassalékro compte 6 000 habitants. En un an, la sage-femme du centre de santé a enregistré 210 naissances et 60 décès. Dans le même temps, 90 personnes sont arrivées au village et 120 en sont parties vers la ville. L'école du village compte 8 salles pour 480 élèves. Le chef du village aimerait n'avoir pas plus de 40 élèves par salle.",
