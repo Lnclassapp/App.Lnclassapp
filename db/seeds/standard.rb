@@ -43,8 +43,6 @@ pin_digest = Orm::User.new(pin:).pin_digest
 team_pin_digest = team_pin == pin ? pin_digest : (Orm::User.new(pin: team_pin).pin_digest if team_pin)
 levels = Orm::Level.all.index_by(&:slug)
 series = Orm::Series.all.index_by(&:slug)
-Orm::Material.find_or_create_by!(slug: "edhc") { it.assign_attributes(name: "EDHC", shortname: "EDHC", category: "other", position: 7) }
-materials = Orm::Material.all.index_by(&:slug)
 insert = ->(model, rows) { model.insert_all!(rows, returning: %w[id]).map { it["id"] } }
 # Les dix premiers numéros des élèves, enseignants et directions sont ceux des comptes de db/seeds/development.rb
 # (0100000001, 0500000001, 0700000000) : le jeu commence au onzième, pour ne jamais en reprendre un.
@@ -76,6 +74,10 @@ end
 
 first_students = []
 Orm::School.transaction do
+  # La matière EDHC, dans la transaction : un échec du jeu (Develop sans référentiel) ne laisse rien derrière lui.
+  Orm::Material.find_or_create_by!(slug: "edhc") { it.assign_attributes(name: "EDHC", shortname: "EDHC", category: "other", position: 7) }
+  materials = Orm::Material.all.index_by(&:slug)
+
   # 2. Les établissements.
   school_repository = Repositories::School::SchoolRepository.new
   wanted = set.schools.to_h { [ it.key, identity.school_name(it.key) ] }
