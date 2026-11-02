@@ -106,7 +106,7 @@
               {
                 "content": "Une fonction $f$ vérifie $f(1) = 4$ et $f'(1) = -2$. Quelle est l'équation de la tangente à sa courbe au point d'abscisse $1$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $f(1) = 4$. Étape 3 — Lire : $f'(1) = -2$ est la pente. Étape 4 — Écrire : $y = -2\\,(x - 1) + 4 = -2x + 2 + 4 = -2x + 6$. La proposition $y = -2x + 4$ prend $f(1)$ pour l'ordonnée à l'origine. La proposition $y = -2x + 2$ écrit $(x + 1)$ au lieu de $(x - 1)$. La proposition $y = 4x - 2$ échange la pente et la hauteur.",
+                "explanation": "Étape 1 — Calculer : $f(1) = 4$. Étape 3 — Lire : $f'(1) = -2$ est la pente. Étape 4 — Écrire : $y = -2\\,(x - 1) + 4 = -2x + 2 + 4 = -2x + 6$. La proposition $y = -2x + 4$ prend $f(1)$ pour l'ordonnée à l'origine. La proposition $y = -2x + 2$ écrit $(x + 1)$ au lieu de $(x - 1)$. La proposition $y = 4x - 2$ prend la hauteur $4$ pour pente et la pente $-2$ pour ordonnée à l'origine.",
                 "answers": [
                   {
                     "content": "$y = -2x + 6$",
@@ -641,7 +641,7 @@
               {
                 "content": "Pour $f(x) = x^3 - 12x$, on a $f'(x) = 3x^2 - 12 = 3\\,(x - 2)(x + 2)$. Sur quel intervalle $f$ est-elle décroissante ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : les racines sont $-2$ et $2$. Étape 3 — Dresser : le coefficient de $x^2$ est $3 > 0$, donc $f'$ est positive à l'extérieur des racines et négative entre elles (test : $f'(0) = -12$). Étape 4 — Conclure : $f$ est décroissante sur $[-2\\,;\\,2]$. La réunion $]-\\infty\\,;\\,-2] \\cup [2\\,;\\,+\\infty[$ est l'ensemble où $f$ croît : elle inverse le signe. Les autres intervalles ne tiennent pas compte des deux racines.",
+                "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : les racines sont $-2$ et $2$. Étape 3 — Dresser : le coefficient de $x^2$ est $3 > 0$, donc $f'$ est positive à l'extérieur des racines et négative entre elles (test : $f'(0) = -12$). Étape 4 — Conclure : $f$ est décroissante sur $[-2\\,;\\,2]$. La réunion $]-\\infty\\,;\\,-2] \\cup [2\\,;\\,+\\infty[$ est l'ensemble où $f$ croît : elle inverse le signe. L'intervalle $[0\\,;\\,+\\infty[$ contient $3$, où $f'(3) = 15 > 0$ ; l'intervalle $]-\\infty\\,;\\,2]$ contient $-3$, où $f'(-3) = 15 > 0$ : $f$ n'y décroît pas partout.",
                 "answers": [
                   {
                     "content": "$[-2\\,;\\,2]$",
@@ -676,7 +676,7 @@
               {
                 "content": "Pour $f(x) = x^3 - 12x$, la fonction $f$ admet en $x = 2$ un ___.",
                 "question_type": "select",
-                "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : $f'(2) = 0$. Étape 3 — Dresser : $f'$ est négative juste avant $2$ (test : $f'(0) = -12$) et positive juste après (test : $f'(3) = 15$). Étape 4 — Calculer : $f(2) = 8 - 24 = -16$ ; $f$ descend puis monte, c'est un minimum local. Un maximum local serait atteint si $f'$ passait de $+$ à $-$, ce qui se passe en $-2$.",
+                "explanation": "Étape 1 — Dériver : $f'(x) = 3x^2 - 12$. Étape 2 — Résoudre : $f'(2) = 0$. Étape 3 — Dresser : $f'$ est négative juste avant $2$ (test : $f'(0) = -12$) et positive juste après (test : $f'(3) = 15$). Étape 4 — Calculer : $f(2) = 8 - 24 = -16$ ; $f$ descend puis monte, c'est un minimum local. Un maximum local serait atteint si $f'$ passait de $+$ à $-$, ce qui se passe en $-2$. « Aucun extremum » est faux : $f'$ change de signe en $2$.",
                 "answers": [
                   {
                     "content": "minimum local",
@@ -696,7 +696,7 @@
                 "content": "Le bénéfice d'un club de football, en milliers de FCFA, pour $x$ centaines de maillots vendus, est $B(x) = -2x^2 + 12x - 10$. Quel est le bénéfice maximal ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Dériver : $B$ est définie sur $\\mathbb{R}$ et $B'(x) = -4x + 12$. Étape 2 — Résoudre : $-4x + 12 = 0$ donne $x = 3$. Étape 3 — Dresser : le coefficient de $x$ est $-4 < 0$, donc $B'$ est positive pour $x < 3$ et négative pour $x > 3$ : $B$ monte puis descend. Étape 4 — Calculer : $B(3) = -18 + 36 - 10 = 8$. Le bénéfice maximal est $8$ milliers de FCFA, atteint pour $x = 3$ (et non $3$ lui-même).",
+                "explanation": "Étape 1 — Dériver : $B$ est définie sur $\\mathbb{R}$ et $B'(x) = -4x + 12$. Étape 2 — Résoudre : $-4x + 12 = 0$ donne $x = 3$. Étape 3 — Dresser : le coefficient de $x$ est $-4 < 0$, donc $B'$ est positive pour $x < 3$ et négative pour $x > 3$ : $B$ monte puis descend. Étape 4 — Calculer : $B(3) = -18 + 36 - 10 = 8$. Le bénéfice maximal est $8$ milliers de FCFA, atteint pour $x = 3$ : la réponse est la valeur $B(3) = 8$, pas l'abscisse $3$.",
                 "answers": [
                   {
                     "content": "8",
@@ -800,7 +800,7 @@
             {
               "content": "Pour $P(x) = x^2 + 2x$, que vaut le taux d'accroissement $\\dfrac{P(3+h) - P(3)}{h}$ après simplification (avec $h \\neq 0$) ?",
               "question_type": "single_choice",
-              "explanation": "Méthode du nombre dérivé. Étape 1 — Calculer : $P(3) = 15$ et $P(3+h) = (3+h)^2 + 2(3+h) = 9 + 6h + h^2 + 6 + 2h = 15 + 8h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{15 + 8h + h^2 - 15}{h} = \\dfrac{8h + h^2}{h} = 8 + h$. La proposition $15 + 8h$ oublie de retrancher $P(3)$ et de diviser par $h$. La proposition $6 + h$ oublie le terme $2x$ de la fonction. La proposition $8$ est la valeur vers laquelle le taux se rapproche, pas le taux lui-même.",
+              "explanation": "Méthode du nombre dérivé. Étape 1 — Calculer : $P(3) = 15$ et $P(3+h) = (3+h)^2 + 2(3+h) = 9 + 6h + h^2 + 6 + 2h = 15 + 8h + h^2$. Étape 2 — Former et simplifier : $\\dfrac{15 + 8h + h^2 - 15}{h} = \\dfrac{8h + h^2}{h} = 8 + h$. La proposition $15 + 8h$ n'est pas un taux : c'est $P(3+h)$ sans son terme $h^2$, sans retrancher $P(3)$ ni diviser par $h$. La proposition $6 + h$ oublie le terme $2x$ de la fonction. La proposition $8$ est la valeur vers laquelle le taux se rapproche, pas le taux lui-même.",
               "answers": [
                 {
                   "content": "$8 + h$",
@@ -963,7 +963,7 @@
             {
               "content": "Pour $x > 0$, la dérivée de $M(x) = 5 + \\dfrac{20}{x}$ est $M'(x) = -\\dfrac{20}{x^2}$. Cette dérivée est négative pour tout $x > 0$, donc le coût moyen diminue quand le nombre de maillots augmente.",
               "question_type": "true_false",
-              "explanation": "Méthode des variations, Étape 3 — Étudier le signe : $x^2 > 0$ pour $x > 0$, donc $-\\dfrac{20}{x^2} < 0$. Étape 4 — Conclure : $f'(x) < 0$ sur $]0\\,;\\,+\\infty[$ entraîne que $M$ est décroissante sur cet intervalle. L'affirmation est vraie.",
+              "explanation": "Méthode des variations, Étape 3 — Étudier le signe : $x^2 > 0$ pour $x > 0$, donc $-\\dfrac{20}{x^2} < 0$. Étape 4 — Conclure : $M'(x) < 0$ sur $]0\\,;\\,+\\infty[$ entraîne que $M$ est décroissante sur cet intervalle. L'affirmation est vraie.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1048,7 +1048,7 @@
             {
               "content": "Pour $B(x) = -x^3 + 9x^2 - 15x$ sur $[0\\,;\\,8]$, la dérivée est $B'(x) = -3\\,(x - 1)(x - 5)$. Quel est le sens de variation de $B$ ?",
               "question_type": "single_choice",
-              "explanation": "Méthode de l'étude d'un polynôme. Étape 1 — Dériver : $B'(x) = -3x^2 + 18x - 15$. Étape 2 — Résoudre : les racines sont $1$ et $5$. Étape 3 — Dresser : le coefficient de $x^2$ est $-3 < 0$, donc $B'$ est négative à l'extérieur des racines et positive entre elles. Tests : $B'(0) = -15 < 0$, $B'(2) = -12 + 36 - 15 = 9 > 0$, $B'(6) = -108 + 108 - 15 = -15 < 0$. Étape 4 — Conclure : $B$ décroît sur $[0\\,;\\,1]$, croît sur $[1\\,;\\,5]$, décroît sur $[5\\,;\\,8]$. Les autres propositions inversent les signes, ce qui arrive quand on oublie que le coefficient $-3$ est négatif.",
+              "explanation": "Méthode de l'étude d'un polynôme. Étape 1 — Dériver : $B'(x) = -3x^2 + 18x - 15$. Étape 2 — Résoudre : les racines sont $1$ et $5$. Étape 3 — Dresser : le coefficient de $x^2$ est $-3 < 0$, donc $B'$ est négative à l'extérieur des racines et positive entre elles. Tests : $B'(0) = -15 < 0$, $B'(2) = -12 + 36 - 15 = 9 > 0$, $B'(6) = -108 + 108 - 15 = -15 < 0$. Étape 4 — Conclure : $B$ décroît sur $[0\\,;\\,1]$, croît sur $[1\\,;\\,5]$, décroît sur $[5\\,;\\,8]$. La proposition « croît, décroît, puis croît » inverse les signes, ce qui arrive quand on oublie que le coefficient $-3$ est négatif. Les deux propositions avec un seul changement en $5$ oublient la racine $1$ : $B'(0) = -15 < 0$ alors que $B'(2) = 9 > 0$.",
               "answers": [
                 {
                   "content": "Elle décroît sur $[0\\,;\\,1]$, croît sur $[1\\,;\\,5]$, puis décroît sur $[5\\,;\\,8]$",
