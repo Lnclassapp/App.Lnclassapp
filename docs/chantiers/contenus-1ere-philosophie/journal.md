@@ -1,4 +1,4 @@
-# Journal — Les 10 premières leçons de Philosophie de Tle
+# Journal — Les 8 leçons de Philosophie de 1ère
 
 > Rempli **pendant** le chantier.
 
@@ -6,42 +6,40 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-31 | Prompt de matière : ligne Philosophie dans « Selon la matière » et section « Auteurs, doctrines et textes » de `prompt-redaction.md` | La consigne ne couvrait pas la Philosophie ; reprise du modèle Français 3ème (questions rédigées avec corrigé modèle, barème, critères ; ≥ 50 % corrigées automatiquement) | Non |
-| 2026-10-31 | Textes longs : auteurs de langue française du domaine public ou textes écrits pour Lnclass ; auteurs étrangers en paraphrase | Une traduction récente peut être protégée | Non |
+| 2026-11-02 | Séries A1, A2, C, D ; pas de série « A » | Le référentiel de 1ère n'a pas de série A ; la progression est identique en A, C et D | Non |
+| 2026-11-02 | Intitulés de la progression gardés à l'identique, y compris « Le Moyen-Age et la renaissance » | L'import détecte les doublons à ce nom | Non |
+| 2026-11-02 | Règles Philosophie de `prompt-redaction.md` reprises sans changement | Déjà fusionnées par la vague T6 | Non |
+| 2026-11-02 | Tle non touchée : « accroche » (1ère) et « amorce » (Tle) cohabitent, la 1ère écrit « accroche (on dit aussi amorce) » | Hors périmètre de la vague | Non |
 
 ## Ce qui a dérapé
 
-- **Aucune leçon n'était livrable au premier jet** : les 10 relectures indépendantes ont trouvé 0 défaut bloquant mais 2 à 7 défauts à corriger par leçon : thèses déformées (Rousseau et l'état de nature, Descartes au service d'une thèse qu'il ne soutient pas, arbitraire du signe de Saussure), dates de préface (Kant 1787), barèmes incohérents avec leurs critères, réponses justes refusées par un `fill_blank`, textes supports absents des questions qui les citent. Le script ne voit rien de cela.
-- **Vocabulaire de méthode divergent entre leçons** (problème ou problématique, ordre de l'introduction) : L1 a servi de référence, L2 et L10 ont été réalignées.
-- **Corrections qui désignent une proposition par son rang** (« la première proposition ») : la relecture de la leçon 6 a montré que l'application mélange les propositions, ce qui rend ces renvois faux (et 4 étaient faux même dans l'ordre du fichier). 8 cas trouvés dans L4 et L6, corrigés ; règle ajoutée à `prompt-redaction.md` et au brief des rédacteurs. Le contrôle ne le détecte pas.
+- **Aucune leçon n'était livrable au premier jet** : la relecture Opus a trouvé 1 défaut majeur (Épictète donné comme auteur du « Manuel », écrit par son disciple Arrien) et 4 à 16 défauts par leçon : classement des désirs d'Épicure incomplet, dates de lettre incertaines, thèse de Thomas d'Aquin trop simplifiée (accord et hiérarchie), numérotation de « Des cannibales », corrections désignant une proposition par son rang (13 cas dans les leçons 1 à 4), `fill_blank` refusant une variante légitime, barèmes incohérents avec leurs critères, questions non autonomes.
+- **`script/contenus/valider.rb` exige Ruby 3.4** (`it`) : les rédacteurs l'ont lancé sur une copie patchée ; le contrôle final des 32 fichiers est fait sous Ruby 3.4.9 installé par `rbenv`.
+- Le scratchpad étant partagé entre rédacteurs, des générateurs se sont écrasés ; les corrections ont été appliquées sur les JSON.
 
 ## À faire valider par un enseignant de philosophie
 
 | Leçon | Point à valider |
 |---|---|
-| L1 Dissertation | Terminologie des plans (dialectique thèse/antithèse/dépassement ou synthèse ; analytique/progressif) et lien forme du sujet → plan présenté comme tendance ; structure de l'introduction (amorce, sujet, problème/problématique, annonce du plan) ; paragraphe idée-argument-exemple-bilan avec référence d'auteur facultative |
-| L2 Commentaire | Explication en 5 gestes (situer, définir, reformuler/justifier, illustrer, relier) ; place de l'évaluation de l'intérêt (dernier moment du développement) ; 4 temps de l'introduction ; connecteurs (certes… mais, sans doute… mais, ainsi) ; textes supports tous écrits pour Lnclass ; Usage de « problème » (la difficulté) et « problématique » (la question) dans le commentaire, aligné sur L1 |
-| L3 Connaissance de l'homme | Périmètre de la notion « sciences humaines » (Durkheim, 1895, « considérer les faits sociaux comme des choses ») face aux leçons 4 et 10 ; dates de 1re publication Freud (« L'Interprétation des rêves » datée 1900, « Psychopathologie de la vie quotidienne » 1901, « Une difficulté de la psychanalyse » 1917) ; inconscient présenté comme hypothèse |
-| L4 Vie en société | Aristote, « Politique » (IVe s. av. J.-C.), animal politique et langage ; Hobbes, « Léviathan », 1651 (guerre de chacun contre chacun, paraphrase) ; Rousseau, « Du contrat social », 1762, citation « L'homme est né libre, et partout il est dans les fers » ; Kant, « insociable sociabilité » (1784) ; Montesquieu, « De l'esprit des lois », 1748 ; travail et échanges non traités ; Kant, « insociable sociabilité » tiré d'un texte sur l'histoire (proximité avec L6) ; état de nature de Hobbes présenté comme hypothèse ; justice traitée sans auteur |
-| L5 Dieu et la religion | Durkheim, « Les formes élémentaires de la vie religieuse », 1912 ; étymologie de « religion » (relier / recueillir) présentée comme discutée ; Descartes, 3e Méditation (idée d'infini) ; pari de Pascal (« Pensées », 1670) comme raison d'agir ; Kant, 1781 (ni prouver ni réfuter) ; Feuerbach 1841 ; Freud, « L'Avenir d'une illusion », 1927 (sens d'illusion) ; Marx 1844, « l'opium du peuple » ; Locke 1689 et Voltaire 1763 sur la tolérance ; laïcité de l'État ivoirien (Constitution, aucun article cité) ; neutralité d'ensemble ; Kant, « faire place à la croyance » : préface de la 2e édition (1787) ; titre de Marx 1844 ; article de la Constitution ivoirienne sur la laïcité non cité |
-| L6 Histoire et humanité | Rousseau, perfectibilité (1755) ; Hegel, « Leçons sur la philosophie de l'histoire » (publication posthume, 1837), raison dans l'histoire et « ruse de la raison » ; Marx et Engels 1848 ; Marx, « Le 18 Brumaire de Louis Bonaparte », 1852 ; Pascal, petite cause imprévue ; objection de la contingence sans auteur ; indépendance de la Côte d'Ivoire le 7 août 1960 ; Pascal rangé dans la réponse « hasard » ; conclusion « le sens de l'histoire se construit » |
-| L7 Valeur de la philosophie | Platon, « Théétète », et Aristote, « Métaphysique » : l'étonnement (paraphrase) ; Descartes, lettre-préface des « Principes de la philosophie », 1647 (arbre, yeux fermés) ; Russell, « Problèmes de philosophie », 1912, chap. XV ; Tempels, « La philosophie bantoue », 1945 (Présence africaine 1949), force vitale ; Hountondji, 1976, ethnophilosophie ; Towa, 1971 ; Kagame, « La philosophie bantu-rwandaise de l'être », 1956 (paraphrase) ; équilibre des positions dans le débat sur la philosophie africaine ; la notion « philosophie, sciences et religion » face à la leçon 10 |
-| L8 Progrès et bonheur | Condorcet, 1795, perfectibilité indéfinie (fill_blank « perfectibilité ») ; Descartes, « maîtres et possesseurs de la nature », 1637, VIe partie ; Rousseau, 1750 ; Épicure, « Lettre à Ménécée », classement des désirs ; Épictète, « Manuel », ce qui dépend de nous ; Kant, 1785, bonheur concept indéterminé ; Formule « ni naturels ni nécessaires » attribuée à la « Lettre à Ménécée » (plutôt Maxime capitale XXIX) ; « Discours sur les sciences et les arts » daté 1750 (diffusé 1751) |
-| L9 Langage et vérité | Descartes, lettre au marquis de Newcastle, 1646 (paraphrase) ; Benveniste, abeilles (article de 1952, recueil « Problèmes de linguistique générale », 1966) ; Saussure, 1916 ; Bergson, « Le Rire », 1900, mots-étiquettes ; Platon, « Gorgias » ; Aristote, vérité-adéquation ; cohérence sans auteur ; définitions de sophisme, mensonge, erreur |
-| L10 Connaissance scientifique | Bachelard, 1938, obstacle épistémologique et rupture ; Claude Bernard, 1865 ; Popper, 1934, réfutabilité (cygne noir) ; Copernic, 1543 ; Rabelais, « Pantagruel », 1532, « Science sans conscience n'est que ruine de l'âme » ; faits : anophèle femelle, Aedes de jour, Jenner 1796, éradication de la variole 1980 (OMS) |
-| Toutes | Méthode de l'introduction et du paragraphe argumenté (alignée sur L1) ; barèmes des questions rédigées |
+| L1 à L4 (méthode) | Aucune attribution ; textes supports écrits pour Lnclass. Vocabulaire : problème = la difficulté, problématique = la question, accroche (dite aussi amorce), idée directrice, « oui, à condition que… » (jamais « cela dépend ») ; introduction en 4 temps ; Descartes, « Discours de la méthode », 1637 et Rousseau, « Du contrat social », 1762 (citations mot pour mot, leçon 2) |
+| L5 Période antique | Thalès (VIe s. av. J.-C.), eau comme principe d'après Aristote, « Métaphysique » ; Socrate (vers 470-399), « Apologie de Socrate » de Platon (défense, non procès) ; « Connais-toi toi-même » (Delphes) ; Platon (vers 428-348), caverne, « La République » VII, soleil = Idée du Bien ; Aristote (384-322), « La Politique », « Éthique à Nicomaque » ; Épicure (341-270), « Lettre à Ménécée » datée « vers 300 av. J.-C. », trois sortes de désirs ; Zénon de Cition (stoïcisme, vers 300) ; Épictète (Ier-IIe s. apr. J.-C.), « Manuel » rédigé par son disciple Arrien |
+| L6 Moyen Âge et Renaissance | Anselme, « Proslogion » (XIe s.) ; Thomas d'Aquin (1225-1274), « Somme théologique » : accord et hiérarchie foi/raison ; Avicenne (980-1037, d'origine persane), Averroès (1126-1198) ; Ibn Khaldoun (1332-1406), « Muqaddima » (1377) ; Pic de la Mirandole (1463-1494), discours rédigé en 1486 ; Érasme, « Éloge de la folie » (1511) ; Montaigne (1533-1592), « Essais » (1580), « Que sais-je ? » (II, 12), « Des cannibales » (I, 31, numérotation moderne) ; repères 476 et imprimerie vers 1450 (bascule Moyen Âge/Renaissance vers 1450) |
+| L7 Période moderne | Descartes, « Discours de la méthode » 1637 (cogito, 4e partie), « Méditations métaphysiques » 1641 ; Hobbes, « Léviathan », 1651 ; « Encyclopédie », 1er volume 1751 ; Voltaire, « Traité sur la tolérance », 1763 ; Rousseau, « Du contrat social », 1762, chap. 1 du livre I, volonté générale ; Kant, « Critique de la raison pure », 1781, « Qu'est-ce que les Lumières ? », 1784 (minorité, courage) ; empirisme présenté sans nom d'auteur |
+| L8 Période contemporaine | Repère 1789 (conventionnel ; cas limites Kant, Hegel) ; Comte (1798-1857), « Cours de philosophie positive » 1830-1842, loi des trois états ; Marx (1818-1883), « Manifeste du parti communiste » 1848 avec Engels, « Le Capital » livre I 1867 ; Nietzsche, « Le Gai Savoir », 1882, « Dieu est mort » ; Sartre (1905-1980), « L'existentialisme est un humanisme », 1946, « l'existence précède l'essence » ; négritude (années 1930, Senghor, Césaire, Damas) ; Tempels, « La philosophie bantoue », 1945 (missionnaire belge) ; Hountondji, 1976 ; équilibre des positions sur la philosophie africaine |
+| Toutes | Barèmes des questions rédigées ; niveau de détail de 1ère |
 
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Relecture par un enseignant de philosophie (table ci-dessus) | Aucun enseignant dans le chantier ; les leçons restent en brouillon | Programme `contenus-v3-tous-niveaux` |
-| `valider.rb` ne détecte pas une correction qui désigne une proposition par son rang | Hors périmètre (aucun code dans cette vague) | À ouvrir avec la dette « astérisques » de `contenus-3e-francais` |
+| « accroche » (1ère) et « amorce » (Tle, La dissertation philosophique) | Hors périmètre ; Tle déjà fusionnée | À harmoniser par l'enseignant |
+| `valider.rb` ne détecte pas une correction qui désigne une proposition par son rang | Aucun code dans cette vague | Dette déjà ouverte par `contenus-tle-philosophie` |
 | Challenger empirique (import en brouillon, captures 390 px et ordinateur) | Pas de base ni de navigateur sur la session de rédaction ; aucune vue modifiée | Avant publication, par l'équipe |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-31 |
-| **PR** | #426 (correctif des tests repris de #415, commit 7737e7fa) |
+| **Livré le** | 2026-11-02 |
+| **PR** | à renseigner |

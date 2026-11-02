@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR) |
 | **Ouvert le** | 2026-11-02 |
 | **Branche** | `feature/contenus-1ere-philosophie` |
 | **Programme** | `contenus-v3-tous-niveaux` (vague P7) |
