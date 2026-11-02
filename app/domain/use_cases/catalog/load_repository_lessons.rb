@@ -18,12 +18,14 @@ module UseCases
       # :partially_published | :republished | :failed | :ignored } ; :created et :replaced disent qu'une leçon du programme v3 (ADR-0123) a été
       # écrite absente ou à la place de celle du même titre, :loaded qu'une leçon à sujets de devoir l'a été (ADR-0122), :ignored qu'une leçon
       # déjà présente a été laissée intacte (Staging, mode create_only).
+      STATUSES = %i[created ignored replaced loaded unchanged republished failed refused not_started unpublished partially_published].freeze
+      # Les statuts qui disent un échec ou une publication incomplète.
+      TROUBLES = %i[failed refused not_started unpublished partially_published].freeze
       Summary = Data.define(:outcome, :lessons) do
         def initialize(lessons: {}, **) = super
 
-        COUNTED = %i[created ignored replaced loaded].freeze
-        # Le rapport de chargement : combien de leçons créées, ignorées, remplacées, chargées (sujets de devoir).
-        def counts = COUNTED.to_h { |status| [ status, lessons.values.count(status) ] }
+        # Le rapport de chargement : le nombre de leçons par statut (tous, à zéro quand il n'y en a pas) ; la somme égale le nombre de fichiers.
+        def counts = LoadRepositoryLessons::STATUSES.to_h { |status| [ status, lessons.values.count(status) ] }
       end
 
       # source : LessonSourcePort ; reports : ImportReportRepositoryPort ; users : UserRepositoryPort ; courses, essentials, exercises : les repositories
@@ -153,6 +155,8 @@ module UseCases
                        "#{refusal_reasons(ran.value)}")
           return :refused
         end
+
+        return :ignored if mode == :create_only && ran.value.imported_count.zero?
 
         if loaded != :loaded
           @logger.info("[contenus] #{lesson_name(lesson)} : leçon #{loaded == :replaced ? 'remplacée entière' : 'créée'} (#{lesson.import_name})")

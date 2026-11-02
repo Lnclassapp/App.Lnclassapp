@@ -89,11 +89,11 @@ module UseCases
         ->(actor:, dto:) { @calls << [ :start, actor, dto.files.map(&:filename), dto.files.map { it.io.read }, dto.kind ]; result || Shared::Result.success(Struct.new(:id).new(42)) }
       end
 
-      def run_import(status: "completed", error_count: 0, result: nil, step: :run, errors: [], &written)
+      def run_import(status: "completed", error_count: 0, result: nil, step: :run, errors: [], imported: 1, &written)
         lambda do |report_id:|
           @calls << [ step, report_id ]
           written&.call
-          result || Shared::Result.success(Struct.new(:status, :error_count, :import_errors).new(status, error_count, errors))
+          result || Shared::Result.success(Struct.new(:status, :error_count, :import_errors, :imported_count).new(status, error_count, errors, imported))
         end
       end
 
@@ -395,11 +395,24 @@ module UseCases
         assert_empty @calls
       end
 
-      test "the summary counts the lessons created, ignored, replaced and loaded" do
-        summary = LoadRepositoryLessons::Summary.new(outcome: :done, lessons: { "a" => :created, "b" => :ignored, "c" => :ignored, "d" => :replaced, "e" => :loaded })
+      test "Staging says ignored, not created, when the create-only import skipped the lesson as a duplicate (it appeared meanwhile)" do
+        lesson = programme_lesson("Suites numériques", folder: "1ere-d")
+        courses = Courses.new
 
-        assert_equal({ created: 1, ignored: 2, replaced: 1, loaded: 1 }, summary.counts)
-        assert_equal({ created: 0, ignored: 0, replaced: 0, loaded: 0 }, LoadRepositoryLessons::Summary.new(outcome: :skipped).counts)
+        summary = call(use_case(lessons: [ lesson ], courses:, run_create: run_import(step: :run_create, imported: 0), manifest: []), name: "Staging")
+
+        assert_equal({ lesson.import_name => :ignored }, summary.lessons)
+        assert_equal %i[start run_create], @calls.map(&:first)
+      end
+
+      test "the summary counts every status, so that the sum equals the number of files" do
+        statuses = %i[created ignored replaced loaded unchanged republished failed refused not_started unpublished partially_published]
+        lessons = statuses.each_with_index.to_h { |status, index| [ "f#{index}", status ] }.merge("g" => :ignored)
+        summary = LoadRepositoryLessons::Summary.new(outcome: :done, lessons:)
+
+        assert_equal statuses.index_with { it == :ignored ? 2 : 1 }, summary.counts
+        assert_equal lessons.size, summary.counts.values.sum
+        assert_equal statuses.index_with { 0 }, LoadRepositoryLessons::Summary.new(outcome: :skipped).counts
       end
 
       test "an unchanged programme lesson does nothing; one whose publication was interrupted is published again without reimport" do

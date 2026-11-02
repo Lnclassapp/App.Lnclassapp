@@ -9,8 +9,13 @@ namespace :contenus do
     connection = nil
     # Hors du cache de requêtes : un verrou se redemande, il ne se relit pas.
     advisory = ->(function) { connection.uncached { connection.select_value("SELECT #{function}(hashtext('contenus:charger'))") } }
-    labels = { created: "créée(s)", ignored: "ignorée(s) (déjà présente)", replaced: "remplacée(s)", loaded: "à sujets rechargée(s)" }
-    counts = ->(summary) { labels.map { |key, label| "#{summary.counts.fetch(key)} #{label}" }.join(", ") }
+    labels = { created: "créée(s)", ignored: "ignorée(s) (déjà présente)", replaced: "remplacée(s)", loaded: "à sujets rechargée(s)", unchanged: "inchangée(s)",
+               republished: "republiée(s)" }
+    counts = lambda do |summary|
+      tally = summary.counts
+      troubles = UseCases::Catalog::LoadRepositoryLessons::TROUBLES.sum { tally.fetch(it) }
+      [ *labels.map { |key, label| "#{tally.fetch(key)} #{label}" }, "#{troubles} en échec ou incomplète(s)" ].join(", ")
+    end
     locked = false
     begin
       connection = ActiveRecord::Base.connection
@@ -33,12 +38,14 @@ namespace :contenus do
           UseCases::Catalog::RunImport.new(adapter: import_adapter, schema: Repositories::Catalog::ImportSchemaValidator.new, reports:, files:,
                                            users:, audit_log: dependencies[:audit_log], transaction:, clock: Time.zone)
         end
-        manifest = Entities::Catalog::StandardTestSet.new(YAML.load_file(Rails.root.join("db/seeds/standard/jeu.yml")))
+        # Le manifeste du jeu standard ne regarde que Develop : Staging et production ne dépendent pas de jeu.yml.
+        develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).manifest_only?
+        manifest_paths = develop ? Entities::Catalog::StandardTestSet.new(YAML.load_file(Rails.root.join("db/seeds/standard/jeu.yml"))).expected_paths : []
         result = UseCases::Catalog::LoadRepositoryLessons.new(
           source: Repositories::Catalog::RepositoryLessonSource.new, reports:, users:, courses:, essentials:, exercises:, taxonomy:,
           start_import: UseCases::Catalog::StartImport.new(reports:, files:, queue: no_queue, transaction:, clock: Time.zone),
           run_import: run.call(adapter.call(:exercises)), run_lesson_import: run.call(adapter.call(:lesson)),
-          run_create_import: run.call(adapter.call(:create_only)), manifest_paths: manifest.expected_paths,
+          run_create_import: run.call(adapter.call(:create_only)), manifest_paths:,
           publish_cascade: UseCases::Catalog::PublishCascade.new(
             courses:, essentials:, exercises:, transaction:, policy: dependencies[:policy],
             publish_course: UseCases::Catalog::PublishCourse.new(courses:, **dependencies),

@@ -380,8 +380,20 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     output = charger("Staging")
 
     assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
-    assert_includes output, "1 créée(s), 0 ignorée(s) (déjà présente), 0 remplacée(s), 1 à sujets rechargée(s)"
+    assert_includes output, "2 leçon(s) examinée(s) : 1 créée(s), 0 ignorée(s) (déjà présente), 0 remplacée(s), 1 à sujets rechargée(s), 0 inchangée(s), 0 republiée(s), 0 en échec ou incomplète(s)"
     assert_equal "published", Orm::Course.find_by!(name: programme_lesson["name"]).status
+  end
+
+  test "only Develop reads the manifest: Staging and production load as usual or say nothing even when jeu.yml cannot be read" do
+    seed_referential
+    unreadable = ->(*) { raise Errno::ENOENT, "jeu.yml" }
+    manifest = Entities::Catalog::StandardTestSet
+
+    stub_method(manifest, :new, unreadable) do
+      assert_includes charger("production"), "rien n'est chargé"
+      assert_includes charger("Staging"), "#{PROGRAMME_IMPORT_NAME} : created"
+      assert_includes charger("Develop"), "chargement automatique interrompu"
+    end
   end
 
   test "Develop loads only the manifest: a programme file outside it is not created, a present lesson outside it is untouched" do
