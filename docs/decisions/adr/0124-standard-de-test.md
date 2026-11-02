@@ -1,4 +1,4 @@
-# ADR-XXXX : Un jeu de test standard, une activité déterministe, un rôle par environnement
+# ADR-0124 : Un jeu de test standard, une activité déterministe, un rôle par environnement
 <!-- index
 titre: Standard de test : jeu standard, activité déterministe, rôle des environnements, rendu des leçons
 statut: Accepté

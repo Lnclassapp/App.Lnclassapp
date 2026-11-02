@@ -32,7 +32,7 @@ Lot 0 — Manifeste, identités fictives (contrats gelés)
 - **Fichiers**     : `db/seeds/standard/jeu.yml` · `db/seeds/standard/noms.yml`
                      `app/domain/entities/catalog/standard_test_set.rb`
                      `app/domain/entities/school/fictitious_identity.rb`
-                     `docs/decisions/adr/XXXX-standard-de-test.md`
+                     `docs/decisions/adr/0124-standard-de-test.md`
 - **Dépend de**    : décisions n° 4, 8, 9 (défauts : couples vides, plage à confirmer, première leçon du programme)
 - **Test associé** : `test/domain/entities/catalog/standard_test_set_test.rb` · `test/domain/entities/school/fictitious_identity_test.rb` · `test/db/seeds/standard_manifest_test.rb`
 - **Done quand**   : le manifeste nomme les 3 établissements, les classes, les cas difficiles, les comptes et un v3 par couple ; les tests refusent fichier absent, couple oublié, contact hors plage
@@ -148,10 +148,10 @@ Lot 0 — Manifeste, identités fictives (contrats gelés)
 - [x] ADR écrit si un port / une table / un contrat apparaît, nommé `XXXX-<slug>.md` (numéro et index posés à la clôture)
 - [x] UDR écrite pour **chaque** vue créée ou modifiée — sans objet : aucune vue
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] Une PR par lot vers `Develop`, référençant chantier + ADR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] Une PR par lot vers `Develop`, référençant chantier + ADR
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
