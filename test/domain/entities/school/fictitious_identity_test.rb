@@ -47,6 +47,10 @@ module Entities
         assert_raises(ArgumentError) { identity.contact(role: :student, index: -1) }
         assert_raises(ArgumentError) { identity.contact(role: :student, index: 10_000) }
         assert_raises(ArgumentError) { identity.contact(role: :teacher, index: FictitiousIdentity::ROLES.fetch(:teacher).last) }
+        %i[direction admin content field].each do |role|
+          assert_raises(ArgumentError, role.to_s) { identity.contact(role:, index: 1000) }
+          assert_nothing_raised { identity.contact(role:, index: 999) }
+        end
       end
 
       test "fictitious_contact? refuses a real-looking number, a short one, a wrong prefix and nil" do

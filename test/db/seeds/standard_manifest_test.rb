@@ -23,9 +23,10 @@ class StandardManifestTest < ActiveSupport::TestCase
     assert_empty @set.errors(repository_files).map(&:message)
   end
 
-  test "one v3 file per couple (46) and the longest lesson" do
+  test "one v3 file per couple (46) and the longest lesson, the biggest v3 file of the repository" do
     assert_equal PRD_COUPLES, @set.lessons.size
-    assert_equal "3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json", @set.longest
+    v3 = LESSONS.glob("*/*/*.json").select { JSON.parse(it.read)["version"] == 3 }
+    assert_equal v3.max_by(&:size).relative_path_from(LESSONS).to_s, @set.longest
   end
 
   test "the couples without v3 are written empty and have no v3 file" do
