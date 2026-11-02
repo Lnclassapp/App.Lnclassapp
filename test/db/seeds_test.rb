@@ -1,4 +1,5 @@
 require "test_helper"
+require "rake"
 
 # ADR-0034: the seeds fill development and test with the referential, the DRENA and a few schools; production
 # only gets the bootstrap invitation of the first team member.
