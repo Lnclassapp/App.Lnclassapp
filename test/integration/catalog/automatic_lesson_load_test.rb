@@ -120,13 +120,13 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal 4, course.subjects.count
   end
 
-  # CA : seules les leçons à sujets de devoir sont chargées
-  test "Staging loads only the lessons with subjects: no other lesson of the repository is created" do
+  # standard-de-test §4.5 : Staging ajoute aussi les leçons v3 absentes du programme (create_only)
+  test "Staging creates the lessons with subjects and the absent programme lessons, nothing else" do
     seed_referential
 
     charger("staging")
 
-    assert_equal [ @lesson["name"] ], Orm::Course.pluck(:name)
+    assert_equal [ @lesson["name"], programme_lesson["name"] ].sort, Orm::Course.pluck(:name).sort
   end
 
   # CA : un fichier inchangé n'est pas rechargé
@@ -362,14 +362,42 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal "published", Orm::Course.find_by!(name: programme_lesson["name"]).status
   end
 
-  test "Staging and production never touch the v1 lesson of a programme title" do
+  test "Staging leaves the present v1 lesson of a programme title intact, says ignored; production loads nothing" do
     seed_referential
     course = import_v1_programme_lesson
-    before = [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count ]
+    before = [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count, course.reload.updated_at ]
 
-    [ "Staging", "production" ].each { assert_not_includes charger(it), PROGRAMME_IMPORT_NAME }
+    assert_includes charger("Staging"), "#{PROGRAMME_IMPORT_NAME} : ignored"
+    assert_not_includes charger("production"), PROGRAMME_IMPORT_NAME
 
-    assert_equal before, [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count ]
+    assert_equal before, [ course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id), Orm::ExerciseSession.count, course.reload.updated_at ]
+    assert_equal "Cours v1", course.content.to_plain_text.squish
+  end
+
+  test "Staging creates an absent programme lesson and publishes it; the report counts created and ignored" do
+    seed_referential
+
+    output = charger("Staging")
+
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
+    assert_includes output, "1 créée(s), 0 ignorée(s) (déjà présente), 0 remplacée(s), 1 à sujets rechargée(s)"
+    assert_equal "published", Orm::Course.find_by!(name: programme_lesson["name"]).status
+  end
+
+  test "Develop loads only the manifest: a programme file outside it is not created, a present lesson outside it is untouched" do
+    seed_referential
+    @root.join("tle-d/mathematiques").mkpath
+    stranger = programme_lesson.merge("name" => "Leçon hors manifeste", "series_name" => "D")
+    @root.join("tle-d/mathematiques/hors-manifeste.json").write(JSON.generate(@document.merge("courses" => [ stranger ])))
+    present = create_course(level: Orm::Level.find_by!(name: "Tle"), material: Orm::Material.find_by!(name: "Mathématiques"), name: "Leçon ancienne",
+                            status: "published", author: @oldest)
+
+    output = charger("Develop")
+
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
+    assert_not_includes output, "hors-manifeste"
+    assert_nil Orm::Course.find_by(name: "Leçon hors manifeste")
+    assert_equal [ "published", present.updated_at ], present.reload.values_at(:status, :updated_at)
   end
 
   test "by hand, the published v1 lesson of a programme title is still refused" do
