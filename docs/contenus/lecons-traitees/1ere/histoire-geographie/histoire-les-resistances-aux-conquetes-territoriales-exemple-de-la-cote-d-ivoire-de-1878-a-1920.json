@@ -1,0 +1,1259 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — Les résistances aux conquêtes territoriales : exemple de la Côte d'Ivoire de 1878 à 1920",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "frise-resistances",
+          "kind": "timeline",
+          "description": "Une frise de 1870 à 1930 qui place les repères de la conquête et des résistances : Arthur Verdier résident à Grand-Bassam (1878), fin de la conférence de Berlin (1885), mission Binger (1887-1889), colonie de Côte d'Ivoire (1893), capture de Samory Touré (1898), sa mort (1900) et la révolte des Abbey (1910). La période 1878-1920 est colorée. Les curseurs règlent le début et la fin.",
+          "params": {
+            "start": 1870,
+            "end": 1930,
+            "step": 10,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1878,
+                "to": 1920,
+                "label": "Période étudiée (1878-1920)"
+              },
+              {
+                "from": 1887,
+                "to": 1889,
+                "label": "Mission Binger"
+              }
+            ],
+            "events": [
+              {
+                "at": 1878,
+                "label": "Verdier, résident à Grand-Bassam"
+              },
+              {
+                "at": 1885,
+                "label": "Fin de la conférence de Berlin"
+              },
+              {
+                "at": 1893,
+                "label": "Colonie de Côte d'Ivoire"
+              },
+              {
+                "at": 1898,
+                "label": "Capture de Samory Touré"
+              },
+              {
+                "at": 1900,
+                "label": "Mort de Samory Touré"
+              },
+              {
+                "at": 1910,
+                "label": "Révolte des Abbey"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "param": "start",
+              "min": 1860,
+              "max": 1870,
+              "step": 10,
+              "label": "Début de la frise"
+            },
+            {
+              "param": "end",
+              "min": 1920,
+              "max": 1940,
+              "step": 10,
+              "label": "Fin de la frise"
+            }
+          ]
+        },
+        {
+          "key": "schema-formes",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la racine, les résistances à la conquête, est reliée à trois formes. La résistance armée (guerres, comme celle de Samory Touré), la résistance par la négociation (discuter ou refuser un traité) et la résistance passive (fuir, refuser l'impôt et le travail imposé). Toutes ont pour but de défendre la liberté et l'autorité des peuples.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "res",
+                "label": "Résistances à la conquête"
+              },
+              {
+                "id": "arm",
+                "label": "Résistance armée",
+                "category": 1
+              },
+              {
+                "id": "neg",
+                "label": "Résistance par la négociation",
+                "category": 1
+              },
+              {
+                "id": "pas",
+                "label": "Résistance passive",
+                "category": 1
+              },
+              {
+                "id": "ex1",
+                "label": "Exemple : Samory Touré",
+                "category": 2
+              },
+              {
+                "id": "ex2",
+                "label": "Exemple : refuser un traité",
+                "category": 2
+              },
+              {
+                "id": "ex3",
+                "label": "Exemple : fuir l'impôt et le travail",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "res",
+                "to": "arm"
+              },
+              {
+                "from": "res",
+                "to": "neg"
+              },
+              {
+                "from": "res",
+                "to": "pas"
+              },
+              {
+                "from": "arm",
+                "to": "ex1"
+              },
+              {
+                "from": "neg",
+                "to": "ex2"
+              },
+              {
+                "from": "pas",
+                "to": "ex3"
+              }
+            ],
+            "legend": [
+              "Forme de résistance",
+              "Exemple"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-resistances",
+          "kind": "map",
+          "description": "Une carte de la Côte d'Ivoire avec six repères : Grand-Bassam sur la côte, Agboville (pays abbey), Bouaké (pays baoulé), Abengourou, Kong au nord et Man à l'ouest. Une flèche relie Kong à Man pour montrer le repli de Samory Touré vers l'ouest ; sa capture a lieu à Guélémou, dans l'ouest du pays, et Man sert de repère régional.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [],
+            "places": [
+              {
+                "id": "grand_bassam",
+                "label": "Grand-Bassam (côte)"
+              },
+              {
+                "id": "agboville",
+                "label": "Agboville (pays abbey)"
+              },
+              {
+                "id": "bouake",
+                "label": "Bouaké (pays baoulé)"
+              },
+              {
+                "id": "abengourou",
+                "label": "Abengourou"
+              },
+              {
+                "id": "kong",
+                "label": "Kong (nord)"
+              },
+              {
+                "id": "man",
+                "label": "Man (repère de l'ouest)"
+              }
+            ],
+            "routes": [
+              {
+                "from": "kong",
+                "to": "man",
+                "label": "Repli de Samory vers l'ouest"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les débuts de la conquête et la colonie de 1893",
+          "remember": "Avant la conquête, les peuples de la Côte d'Ivoire vivent dans des villages, des chefferies et des royaumes qui ont leurs chefs, leurs guerriers et leurs routes de commerce. Sur la côte, des commerçants européens, dont des Français, échangent des produits avec les populations. En **1878**, le commerçant français **Arthur Verdier** est nommé résident de France à Grand-Bassam.\n\nLa **conférence de Berlin (1884-1885)**, étudiée dans la leçon précédente, impose l'**occupation effective** : une puissance doit être présente sur le terrain pour revendiquer un territoire. La France envoie donc des explorateurs et signe des traités avec des chefs. Le capitaine **Louis-Gustave Binger** traverse la région de **1887 à 1889**.\n\nLe **10 mars 1893**, la Côte d'Ivoire devient une **colonie française**, dont Binger est le premier gouverneur. Beaucoup de peuples refusent d'être soumis : les **résistances** commencent.",
+          "method": [
+            "Situer l'événement dans le temps et dans l'espace.",
+            "Identifier les acteurs en présence.",
+            "Expliquer les causes de l'événement.",
+            "Dégager les conséquences de l'événement."
+          ],
+          "example": {
+            "statement": "Présente la création de la colonie de Côte d'Ivoire en 1893.",
+            "steps": [
+              "Situer : le 10 mars 1893, sur la côte du golfe de Guinée, en Afrique de l'Ouest, huit ans après la fin de la conférence de Berlin (1885).",
+              "Identifier : la France, représentée par Louis-Gustave Binger, premier gouverneur ; les commerçants français de la côte ; les chefs et les peuples ivoiriens.",
+              "Expliquer : la concurrence entre les puissances européennes, la règle de l'occupation effective posée à Berlin et la recherche de commerce et de ressources poussent la France à occuper le territoire.",
+              "Dégager : une administration française s'installe, et beaucoup de peuples refusent la soumission : les résistances commencent."
+            ]
+          },
+          "pitfall": "Ne confonds pas la conférence de **Berlin (1884-1885)** et la création de la **colonie (1893)**. Berlin fixe seulement les règles du partage de l'Afrique ; elle ne crée aucune colonie. Entre les deux, il y a **8 ans** (1893 − 1885) pendant lesquels la France explore (mission Binger, 1887-1889) et signe des traités.",
+          "figure": "frise-resistances",
+          "exercise": {
+            "title": "Les débuts de la conquête",
+            "statement": "Dans cet exercice, tu situes la conquête française et la création de la colonie avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "En quelle année la Côte d'Ivoire devient-elle une colonie française ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer dans le temps : la colonie est créée le 10 mars 1893. 1885 est la fin de la conférence de Berlin, qui fixe des règles de partage mais ne crée pas la colonie. 1898 est la capture de Samory Touré. 1920 est la fin de la période étudiée, pas une création.",
+                "answers": [
+                  {
+                    "content": "1885",
+                    "correct": false
+                  },
+                  {
+                    "content": "1893",
+                    "correct": true
+                  },
+                  {
+                    "content": "1898",
+                    "correct": false
+                  },
+                  {
+                    "content": "1920",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le premier gouverneur de la colonie de Côte d'Ivoire, en 1893, s'appelle Louis-Gustave ___ (écris son nom de famille).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier les acteurs : le capitaine Louis-Gustave Binger a traversé la région de 1887 à 1889, puis il devient le premier gouverneur de la colonie en 1893. Ne le confonds pas avec Arthur Verdier, commerçant français nommé résident de France à Grand-Bassam en 1878.",
+                "answers": [
+                  {
+                    "content": "Binger",
+                    "correct": true
+                  },
+                  {
+                    "content": "Louis-Gustave Binger",
+                    "correct": true
+                  },
+                  {
+                    "content": "Louis Gustave Binger",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La conférence de Berlin (1884-1885) crée la colonie de Côte d'Ivoire en 1893.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : Berlin se termine en 1885, la colonie date de 1893, soit huit ans plus tard. Étape 3 — Expliquer les causes : Berlin pose la règle de l'occupation effective, qui pousse la France à agir ; elle ne crée aucune colonie elle-même. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer dans le temps : 1878, puis 1885, puis 1887-1889, puis 1893. Les causes viennent avant les conséquences : la règle de l'occupation effective (1885) précède la mission Binger et la création de la colonie.",
+                "answers": [
+                  {
+                    "content": "Arthur Verdier, résident de France à Grand-Bassam (1878)"
+                  },
+                  {
+                    "content": "Fin de la conférence de Berlin (1885)"
+                  },
+                  {
+                    "content": "Mission de Binger (1887-1889)"
+                  },
+                  {
+                    "content": "Création de la colonie de Côte d'Ivoire (1893)"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux causes de la conquête de la Côte d'Ivoire par la France ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer les causes : les puissances européennes se font concurrence en Afrique, et la France cherche du commerce et des ressources ; la règle de l'occupation effective l'oblige à s'installer sur le terrain. Les peuples ivoiriens n'ont pas demandé la conquête, et leur indépendance date de 1960, bien après.",
+                "answers": [
+                  {
+                    "content": "La concurrence entre les puissances européennes",
+                    "correct": true
+                  },
+                  {
+                    "content": "La recherche de marchés et de ressources",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une demande des peuples ivoiriens",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'indépendance des peuples ivoiriens",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque repère à l'événement qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer : 1885 clôt la conférence de Berlin ; 1887-1889 est la durée de la mission de Binger ; 1893 est la création de la colonie. Retiens l'ordre : la règle (1885), l'exploration (1887-1889), la colonie (1893).",
+                "answers": [
+                  {
+                    "content": "1885",
+                    "match": "Fin de la conférence de Berlin"
+                  },
+                  {
+                    "content": "1887-1889",
+                    "match": "Mission de Binger"
+                  },
+                  {
+                    "content": "1893",
+                    "match": "Création de la colonie"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les formes de résistance et leurs causes",
+          "remember": "**Résister**, c'est s'opposer à la conquête et à la domination coloniale. On distingue trois formes :\n\n- la **résistance armée** : les peuples combattent les troupes françaises ; c'est le cas de Samory Touré ;\n- la **résistance par la négociation** : un chef discute, refuse de signer ou cherche à garder son autorité ;\n- la **résistance passive** : on fuit, on abandonne son village ou on refuse d'obéir, sans combattre.\n\nLes **motifs** sont de défendre la liberté, le territoire et l'autorité des chefs, et de refuser les contraintes de l'administration, comme l'**impôt** et le **travail imposé**. Les peuples ne résistent ni de la même façon ni au même moment. Les Baoulé résistent longtemps, et en 1910 les Abbey de la région d'Agboville se révoltent contre l'administration coloniale.",
+          "method": [
+            "Identifier le peuple ou le chef qui résiste et son adversaire.",
+            "Repérer la forme de la résistance : armée, par la négociation ou passive.",
+            "Expliquer les motifs de la résistance.",
+            "Dégager le résultat de la résistance."
+          ],
+          "example": {
+            "statement": "Texte écrit pour Lnclass : « En 1910, les Abbey de la région d'Agboville se révoltent contre l'administration coloniale, qui leur impose l'impôt et le travail. La révolte est réprimée. » Analyse cette résistance.",
+            "steps": [
+              "Identifier : le peuple qui résiste est le peuple abbey (région d'Agboville) ; son adversaire est l'administration coloniale française.",
+              "Repérer : les Abbey se révoltent, c'est une résistance armée.",
+              "Expliquer : ils refusent les contraintes de l'administration, c'est-à-dire l'impôt et le travail imposé.",
+              "Dégager : la révolte est réprimée, la résistance échoue et l'administration coloniale reste en place."
+            ]
+          },
+          "pitfall": "Ne crois pas que **seule la guerre** est une résistance. Il y a **3 formes**, pas une : un village qui quitte ses cases pour échapper à l'impôt et au travail imposé résiste aussi. Pour éviter l'erreur, pose-toi toujours la question : ce peuple s'oppose-t-il à la conquête, par les armes, par la discussion ou par le refus ?",
+          "figure": "schema-formes",
+          "exercise": {
+            "title": "Reconnaître les formes de résistance",
+            "statement": "Dans cet exercice, tu reconnais les formes de résistance et leurs motifs avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque situation à la forme de résistance qu'elle illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Repérer la forme : on distingue qui combat (armée), qui discute pour garder son autorité (négociation) et qui évite ou refuse sans combattre (passive). Étape 3 — Expliquer les motifs : dans les trois cas, il s'agit de défendre la liberté ou de refuser des contraintes.",
+                "answers": [
+                  {
+                    "content": "Une armée organisée affronte les troupes françaises",
+                    "match": "Résistance armée"
+                  },
+                  {
+                    "content": "Un chef discute des mois les termes d'un traité pour garder son autorité",
+                    "match": "Résistance par la négociation"
+                  },
+                  {
+                    "content": "Les habitants quittent leur village pour échapper à l'impôt",
+                    "match": "Résistance passive"
+                  }
+                ]
+              },
+              {
+                "content": "Laquelle de ces attitudes n'est pas une forme de résistance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer la forme : résister, c'est s'opposer à la conquête, par les armes, par la discussion ou par le refus. Adhérer volontairement au pouvoir colonial est le contraire d'une opposition. Les trois autres sont les formes étudiées.",
+                "answers": [
+                  {
+                    "content": "La résistance armée",
+                    "correct": false
+                  },
+                  {
+                    "content": "La résistance passive",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'adhésion volontaire au pouvoir colonial",
+                    "correct": true
+                  },
+                  {
+                    "content": "La résistance par la négociation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont trois motifs de résistance à la conquête ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer les motifs : les peuples défendent leur liberté et leur territoire, et refusent les contraintes de l'administration, comme l'impôt et le travail imposé. Accueillir des colons ou souhaiter l'école française ne sont pas des motifs de résistance.",
+                "answers": [
+                  {
+                    "content": "Défendre la liberté et le territoire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Refuser l'impôt",
+                    "correct": true
+                  },
+                  {
+                    "content": "Refuser le travail imposé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Accueillir des colons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Apprendre le français à l'école",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Seule la guerre est une forme de résistance.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer la forme : il y a trois formes (armée, par la négociation, passive), pas une seule. Quitter son village pour fuir l'impôt est une résistance, même sans combat. L'affirmation est fausse : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La résistance qui consiste à fuir ou à refuser d'obéir, sans combattre, est dite ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer la forme : fuir ou refuser sans combattre est la résistance passive. Elle se distingue de la résistance armée (on combat) et de la résistance par la négociation (on discute).",
+                "answers": [
+                  {
+                    "content": "passive",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un chef discute longuement avec l'officier pour garder son autorité : c'est une résistance ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Repérer la forme : le chef ne combat pas et ne fuit pas, il discute pour garder son autorité : c'est une résistance par la négociation. Étape 3 — Expliquer le motif : défendre son pouvoir. Ce n'est ni de la résistance armée ni de la résistance passive.",
+                "answers": [
+                  {
+                    "content": "armée",
+                    "correct": false
+                  },
+                  {
+                    "content": "par la négociation",
+                    "correct": true
+                  },
+                  {
+                    "content": "passive",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La résistance de Samory Touré",
+          "remember": "**Samory Touré** est un chef malinké qui bâtit un grand empire en Afrique de l'Ouest, l'**empire wassoulou**. Il dispose d'une **armée organisée**. Face aux troupes françaises, il se déplace et se replie vers la région de l'actuelle **Côte d'Ivoire**, où il continue le combat.\n\nIl est **capturé le 29 septembre 1898** à **Guélémou**, dans l'ouest du pays, par les troupes du capitaine **Gouraud**. Les Français le **déportent au Gabon**, où il **meurt en 1900**.\n\nSamory Touré est le grand exemple de **résistance armée** : sa capture met fin à son combat, mais son souvenir reste vivant.",
+          "method": [
+            "Situer la résistance dans le temps et dans l'espace.",
+            "Présenter le chef et ses moyens.",
+            "Expliquer la stratégie de résistance.",
+            "Dégager l'issue de la résistance."
+          ],
+          "example": {
+            "statement": "Présente la résistance de Samory Touré en Côte d'Ivoire.",
+            "steps": [
+              "Situer : dans les années 1890, Samory Touré se replie vers la région de l'actuelle Côte d'Ivoire ; il est capturé le 29 septembre 1898 à Guélémou, dans l'ouest.",
+              "Présenter : chef malinké, fondateur de l'empire wassoulou, il dirige une armée organisée.",
+              "Expliquer : face à des troupes françaises mieux armées, il combat et se déplace pour garder sa liberté d'action.",
+              "Dégager : il est capturé en 1898, déporté au Gabon et meurt en 1900 ; sa résistance armée est vaincue."
+            ]
+          },
+          "pitfall": "Ne confonds pas la **capture** de Samory Touré (**29 septembre 1898**) et sa **mort** (**1900**). Entre les deux, il y a **2 ans** (1900 − 1898) d'exil au Gabon. De même, il est capturé dans l'**ouest** du pays, à Guélémou, et non sur la côte.",
+          "figure": "carte-resistances",
+          "exercise": {
+            "title": "La résistance de Samory Touré",
+            "statement": "Dans cet exercice, tu présentes la résistance de Samory Touré avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "En quelle année Samory Touré est-il capturé par les troupes françaises ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer dans le temps : Samory Touré est capturé le 29 septembre 1898 à Guélémou. 1900 est l'année de sa mort en exil, 1893 celle de la colonie et 1910 celle de la révolte des Abbey. Ne confonds pas la capture et la mort.",
+                "answers": [
+                  {
+                    "content": "1893",
+                    "correct": false
+                  },
+                  {
+                    "content": "1898",
+                    "correct": true
+                  },
+                  {
+                    "content": "1900",
+                    "correct": false
+                  },
+                  {
+                    "content": "1910",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après sa capture, Samory Touré est déporté au ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Dégager l'issue : après sa capture en 1898, Samory Touré est déporté au Gabon, où il meurt en 1900. Il ne retourne jamais dans son empire.",
+                "answers": [
+                  {
+                    "content": "Gabon",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la résistance de Samory Touré.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : l'empire d'abord, puis le repli vers la Côte d'Ivoire, la capture en 1898, la mort en 1900. Étape 4 — Dégager l'issue : la capture met fin à la résistance armée de Samory Touré.",
+                "answers": [
+                  {
+                    "content": "Samory Touré dirige un empire en Afrique de l'Ouest, le wassoulou"
+                  },
+                  {
+                    "content": "Il se replie vers la région de l'actuelle Côte d'Ivoire"
+                  },
+                  {
+                    "content": "Il est capturé à Guélémou le 29 septembre 1898"
+                  },
+                  {
+                    "content": "Il meurt en exil au Gabon en 1900"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont deux moyens de la résistance de Samory Touré ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Présenter le chef et ses moyens : Samory Touré dispose d'une armée organisée. Étape 3 — Expliquer la stratégie : il se déplace pour garder sa liberté d'action. L'ONU n'existe pas encore, et le chemin de fer est un outil de la colonisation, pas de la résistance.",
+                "answers": [
+                  {
+                    "content": "Une armée organisée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des déplacements pour échapper aux troupes françaises",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le soutien de l'ONU",
+                    "correct": false
+                  },
+                  {
+                    "content": "La construction d'un chemin de fer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Samory Touré a été capturé à Grand-Bassam, sur la côte.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer dans l'espace : Samory Touré est capturé à Guélémou, dans l'ouest de la Côte d'Ivoire actuelle, et non sur la côte. Grand-Bassam est un repère de la présence française sur la côte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'années séparent la capture de Samory Touré (1898) de sa mort (1900) ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Dégager l'issue : capture en 1898, mort en 1900. Calcul : 1900 − 1898 = 2. Il passe donc deux années en exil avant de mourir, au Gabon.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "unit": "ans",
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'échec des résistances et ses conséquences",
+          "remember": "Les résistances ivoiriennes sont **vaincues**, pour plusieurs raisons :\n\n- l'**inégalité des armes** : l'armée coloniale dispose d'armes modernes, dont des fusils à tir rapide et des canons, et ses troupes comprennent aussi des tirailleurs recrutés en Afrique ;\n- les **divisions** : les peuples résistent chacun de leur côté, à des moments différents, sans commandement commun.\n\n**Conséquences** : les peuples sont soumis, et une **administration coloniale** s'installe. Elle impose l'impôt et le travail. Vers 1920, les grandes résistances armées sont terminées.\n\n**Héritage** : ces résistances restent dans la mémoire du pays, et Samory Touré en est un symbole.",
+          "method": [
+            "Comparer les forces en présence.",
+            "Repérer les divisions et les faiblesses des résistants.",
+            "Dégager les conséquences de la défaite pour les populations.",
+            "Montrer ce qui reste de ces résistances aujourd'hui."
+          ],
+          "example": {
+            "statement": "Explique pourquoi les résistances ivoiriennes ont été vaincues et ce qu'elles ont laissé.",
+            "steps": [
+              "Comparer : l'armée coloniale a des armes modernes (fusils à tir rapide, canons) ; les résistants ont des armes moins puissantes.",
+              "Repérer : les peuples résistent séparément, à des moments différents, sans front commun ni commandement unique.",
+              "Dégager : les peuples sont soumis et une administration coloniale s'installe, avec l'impôt et le travail imposé.",
+              "Montrer : le souvenir des résistances reste vivant ; Samory Touré est un symbole du refus de la domination."
+            ]
+          },
+          "pitfall": "Ne confonds pas les **causes** de l'échec et ses **conséquences**. L'inégalité des armes est une **cause** de la défaite ; l'impôt imposé ensuite est une **conséquence**. Ne conclus pas non plus qu'une résistance vaincue est **inutile** : Samory Touré a combattu jusqu'en 1898, et son souvenir reste vivant.",
+          "figure": null,
+          "exercise": {
+            "title": "Pourquoi les résistances ont échoué",
+            "statement": "Dans cet exercice, tu expliques l'échec des résistances et ses conséquences avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle cause matérielle explique surtout la défaite des résistances ivoiriennes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer les forces : l'armée coloniale dispose d'armes modernes, dont des fusils à tir rapide et des canons, tandis que les résistants ont des armes moins puissantes. Dire que les guerriers manquent de courage est faux : Samory Touré a combattu jusqu'en 1898.",
+                "answers": [
+                  {
+                    "content": "L'inégalité des armes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le manque de courage des guerriers",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'absence de chefs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le climat de la forêt",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont trois causes de l'échec des résistances ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Comparer les forces : les armes sont inégales. Étape 2 — Repérer les divisions : chaque peuple résiste chez lui et à son moment, sans unité de commandement. Les peuples ont bien combattu et la France était leur adversaire : les deux autres propositions sont fausses.",
+                "answers": [
+                  {
+                    "content": "Des armes moins puissantes que celles de l'armée coloniale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des peuples qui résistent séparément, sans front commun",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des résistances qui n'ont pas lieu au même moment",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un refus de combattre de tous les peuples",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un soutien de la France aux résistants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Comparer : les armes sont une cause matérielle. Étape 2 — Repérer les divisions : le manque d'union est une cause politique. Étape 3 — Dégager les conséquences : l'administration coloniale suit la défaite. Étape 4 — Montrer ce qui reste : le souvenir est un héritage.",
+                "answers": [
+                  {
+                    "content": "Armes modernes de l'armée coloniale",
+                    "match": "Cause matérielle de l'échec"
+                  },
+                  {
+                    "content": "Peuples qui résistent chacun de leur côté",
+                    "match": "Cause politique de l'échec"
+                  },
+                  {
+                    "content": "Installation d'une administration coloniale",
+                    "match": "Conséquence de la défaite"
+                  },
+                  {
+                    "content": "Souvenir de Samory Touré",
+                    "match": "Héritage des résistances"
+                  }
+                ]
+              },
+              {
+                "content": "Les résistances ont échoué parce que les peuples ivoiriens ne voulaient pas se battre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Comparer les forces : les peuples ont combattu, parfois plusieurs années. Étape 2 — Repérer les faiblesses : ce sont l'inégalité des armes et le manque d'union qui expliquent la défaite, pas un refus de se battre. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après la défaite des résistances, les peuples passent sous l'autorité d'une administration ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Dégager les conséquences : la défaite entraîne la soumission des peuples et l'installation d'une administration coloniale, qui impose l'impôt et le travail.",
+                "answers": [
+                  {
+                    "content": "coloniale",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Explique en trois ou quatre phrases pourquoi une résistance vaincue n'est pas une résistance inutile.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "Reconnaît que la résistance a échoué sur le plan militaire",
+                  "Montre qu'elle témoigne du refus de la domination",
+                  "Montre qu'elle reste dans la mémoire (héritage)"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Comparer les forces : les résistances ont été vaincues, car les armes étaient inégales. Étape 4 — Montrer ce qui reste : elles montrent pourtant que les peuples ont refusé la domination et défendu leur liberté. Le souvenir de Samory Touré, par exemple, reste vivant dans la mémoire du pays. Barème : échec reconnu (0,5) ; refus de la domination (1) ; mémoire (0,5).",
+                "answers": [],
+                "starter": "Une résistance vaincue n'est pas inutile, car…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Visite d'une plantation : les repères de la conquête",
+          "statement": "Sujet de type interrogation. Texte écrit pour Lnclass : une classe de 1ère visite une plantation de café. Sur la frise affichée par le guide, la Côte d'Ivoire devient une colonie française en 1893, Samory Touré est capturé en 1898 et meurt en 1900. Les élèves doivent situer ces repères et expliquer la conquête. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "frise-resistances",
+          "questions": [
+            {
+              "content": "Sur la frise de la plantation, en quelle année la Côte d'Ivoire devient-elle une colonie française ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Situer l'événement dans le temps. Étape 1 — Situer : la colonie est créée le 10 mars 1893. 1885 est la fin de la conférence de Berlin, 1898 la capture de Samory Touré, 1910 la révolte des Abbey. La date de création se lit sur la frise, à l'événement « Colonie de Côte d'Ivoire ».",
+              "answers": [
+                {
+                  "content": "1885",
+                  "correct": false
+                },
+                {
+                  "content": "1893",
+                  "correct": true
+                },
+                {
+                  "content": "1898",
+                  "correct": false
+                },
+                {
+                  "content": "1910",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets ces événements de la frise dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Situer chaque événement, puis les classer du plus ancien au plus récent. Étape 1 — Situer : 1885, puis 1887-1889, puis 1893, puis 1898. L'ordre suit la logique : la règle de Berlin, l'exploration, la colonie, puis la résistance armée finale de Samory Touré.",
+              "answers": [
+                {
+                  "content": "Fin de la conférence de Berlin (1885)"
+                },
+                {
+                  "content": "Mission de Binger (1887-1889)"
+                },
+                {
+                  "content": "Création de la colonie de Côte d'Ivoire (1893)"
+                },
+                {
+                  "content": "Capture de Samory Touré (1898)"
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent la création de la colonie (1893) de la capture de Samory Touré (1898) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : situer les deux dates, puis soustraire la plus ancienne de la plus récente. Calcul : 1898 − 1893 = 5. Il se passe donc cinq ans entre la création de la colonie et la capture de Samory Touré.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "ans",
+              "tolerance": 0
+            },
+            {
+              "content": "La mission de Binger (1887-1889) a lieu après la création de la colonie, en 1893.",
+              "question_type": "true_false",
+              "explanation": "Méthode : situer les deux événements. Étape 1 — Situer : 1887-1889 est avant 1893. La mission de Binger prépare la création de la colonie, dont il devient le premier gouverneur. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Louis-Gustave Binger est le premier ___ de la colonie de Côte d'Ivoire.",
+              "question_type": "select",
+              "explanation": "Méthode : Identifier l'acteur et sa fonction. Étape 2 — Identifier : Binger est le premier gouverneur de la colonie en 1893. Un chef de village dirige un village, et un président dirige un État indépendant : ces fonctions ne correspondent pas à la colonie.",
+              "answers": [
+                {
+                  "content": "gouverneur",
+                  "correct": true
+                },
+                {
+                  "content": "chef de village",
+                  "correct": false
+                },
+                {
+                  "content": "président",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi la France cherche à occuper la Côte d'Ivoire à la fin du XIXe siècle.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Cite la concurrence entre les puissances européennes",
+                "Cite l'occupation effective imposée à Berlin",
+                "Cite la recherche de commerce et de ressources"
+              ],
+              "explanation": "Corrigé modèle : Étape 3 — Expliquer les causes : à la fin du XIXe siècle, les puissances européennes se font concurrence en Afrique. La conférence de Berlin (1884-1885) impose l'occupation effective : la France doit être présente sur le terrain. Elle cherche aussi du commerce et des ressources. Barème : concurrence (0,5) ; occupation effective (1) ; commerce et ressources (0,5).",
+              "answers": [],
+              "starter": "La France veut occuper la Côte d'Ivoire parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Impôt, travail et refus : les formes de résistance",
+          "statement": "Sujet de type interrogation. Texte écrit pour Lnclass, situation imaginée à partir des formes de résistance étudiées : autour d'une plantation de cacao, au début de la colonisation, l'administration demande aux villageois de payer un impôt et de fournir du travail. Dans le village A, les guerriers prennent les armes. Dans le village B, le chef discute longuement avec l'officier pour garder son autorité. Dans le village C, les habitants quittent leurs cases et s'installent dans la forêt. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "schema-formes",
+          "questions": [
+            {
+              "content": "Relie chaque village à la forme de résistance qu'il pratique.",
+              "question_type": "matching",
+              "explanation": "Méthode : Repérer la forme de la résistance. Étape 2 — Repérer : on combat (armée), on discute (négociation), on fuit sans combattre (passive). Chaque village correspond à une forme du schéma.",
+              "answers": [
+                {
+                  "content": "Village A : les guerriers prennent les armes",
+                  "match": "Résistance armée"
+                },
+                {
+                  "content": "Village B : le chef discute pour garder son autorité",
+                  "match": "Résistance par la négociation"
+                },
+                {
+                  "content": "Village C : les habitants quittent leurs cases",
+                  "match": "Résistance passive"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le motif commun aux trois villages ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Expliquer les motifs de la résistance. Étape 3 — Expliquer : l'administration demande un impôt et du travail ; les trois villages refusent ces contraintes. L'indépendance de 1960 est une autre période, et accueillir des colons ou apprendre le français n'est pas résister.",
+              "answers": [
+                {
+                  "content": "Refuser les contraintes de l'administration, comme l'impôt et le travail imposé",
+                  "correct": true
+                },
+                {
+                  "content": "Obtenir l'indépendance en 1960",
+                  "correct": false
+                },
+                {
+                  "content": "Accueillir de nouveaux colons",
+                  "correct": false
+                },
+                {
+                  "content": "Apprendre la langue française",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux formes de résistance qui n'utilisent pas les armes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Repérer la forme. Étape 2 — Repérer : la négociation (village B) et la fuite (village C) se font sans combat. La résistance armée utilise les armes, et la soumission volontaire n'est pas une résistance.",
+              "answers": [
+                {
+                  "content": "La résistance armée",
+                  "correct": false
+                },
+                {
+                  "content": "La résistance par la négociation",
+                  "correct": true
+                },
+                {
+                  "content": "La résistance passive",
+                  "correct": true
+                },
+                {
+                  "content": "La soumission volontaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les habitants du village C pratiquent la résistance ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Repérer la forme. Étape 2 — Repérer : les habitants fuient sans combattre ; c'est la résistance passive. Ils refusent de se soumettre à l'impôt et au travail imposé.",
+              "answers": [
+                {
+                  "content": "passive",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le village C ne résiste pas, car ses habitants ne se battent pas.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Repérer la forme, puis expliquer le motif. Étapes 2 et 3 : en quittant leurs cases pour échapper à l'impôt et au travail, les habitants s'opposent à la domination. C'est une résistance passive : seule la guerre n'est pas une résistance, il y a trois formes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quatre ou cinq lignes pourquoi les trois villages résistent, malgré des formes différentes.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Identifie les motifs communs : impôt et travail imposé",
+                "Nomme la forme de chaque village",
+                "Conclut que les formes diffèrent mais que le but est le même"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : les trois villages s'opposent à l'administration coloniale. Étape 2 — Repérer : le village A pratique la résistance armée, le B la négociation, le C la résistance passive. Étape 3 — Expliquer : tous refusent l'impôt et le travail imposé et défendent leur liberté. Barème : motifs (1) ; formes (1) ; conclusion (1).",
+              "answers": [],
+              "starter": "Les trois villages résistent parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Samory Touré : analyser un document",
+          "statement": "Sujet de type devoir. Document : texte écrit pour Lnclass à partir des repères du cours, affiché dans une plantation de café. « Samory Touré, chef malinké, dirige l'empire wassoulou avec une armée organisée. Face aux troupes françaises, il se replie vers la région de l'actuelle Côte d'Ivoire. Il est capturé le 29 septembre 1898 à Guélémou, déporté au Gabon et meurt en 1900. » Réponds aux questions, puis rédige la présentation demandée.",
+          "exercise_type": "evaluation",
+          "figure": "carte-resistances",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document étudié ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour analyser un document : Étape 1 — le présenter. La nature se lit dans l'énoncé : il s'agit d'un texte écrit pour Lnclass, pas d'un traité, d'une photographie ou d'une carte. Un document se présente toujours par sa nature, son auteur et sa date.",
+              "answers": [
+                {
+                  "content": "Un texte écrit pour Lnclass, qui résume la résistance de Samory Touré",
+                  "correct": true
+                },
+                {
+                  "content": "Un traité de protectorat signé avec la France",
+                  "correct": false
+                },
+                {
+                  "content": "Une photographie de Samory Touré",
+                  "correct": false
+                },
+                {
+                  "content": "Une carte de la colonie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le document, Samory Touré est capturé le 29 septembre ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : situer l'événement dans le temps. Le texte donne la date : 29 septembre 1898. 1900 est l'année de sa mort en exil. Ne confonds pas ces deux repères.",
+              "answers": [
+                {
+                  "content": "1898",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont exactes, d'après le document ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : relever les idées du document. Il dirige l'empire wassoulou, il est capturé à Guélémou en 1898 et déporté au Gabon, où il meurt en 1900. Il ne meurt pas à Grand-Bassam en 1898, et l'indépendance de 1960 est postérieure de soixante ans à sa mort.",
+              "answers": [
+                {
+                  "content": "Samory Touré dirige l'empire wassoulou",
+                  "correct": true
+                },
+                {
+                  "content": "Il est déporté au Gabon",
+                  "correct": true
+                },
+                {
+                  "content": "Il est capturé à Guélémou en 1898",
+                  "correct": true
+                },
+                {
+                  "content": "Il meurt à Grand-Bassam en 1898",
+                  "correct": false
+                },
+                {
+                  "content": "Il signe l'indépendance en 1960",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la résistance de Samory Touré.",
+              "question_type": "ordering",
+              "explanation": "Méthode : situer les faits dans le temps, puis les classer. L'empire d'abord, le repli ensuite, la capture en 1898, la mort en 1900. La capture met fin à sa résistance armée.",
+              "answers": [
+                {
+                  "content": "Il dirige l'empire wassoulou avec une armée organisée"
+                },
+                {
+                  "content": "Il se replie vers la région de l'actuelle Côte d'Ivoire"
+                },
+                {
+                  "content": "Il est capturé à Guélémou (29 septembre 1898)"
+                },
+                {
+                  "content": "Il meurt en exil au Gabon (1900)"
+                }
+              ]
+            },
+            {
+              "content": "Que marque la capture de Samory Touré en 1898 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Dégager l'issue. Étape 4 — Dégager : la capture met fin au combat de Samory Touré. La colonie existe depuis 1893, Berlin s'est terminée en 1885, et l'indépendance date de 1960.",
+              "answers": [
+                {
+                  "content": "La fin de sa résistance armée",
+                  "correct": true
+                },
+                {
+                  "content": "Le début de la colonie de Côte d'Ivoire",
+                  "correct": false
+                },
+                {
+                  "content": "La fin de la conférence de Berlin",
+                  "correct": false
+                },
+                {
+                  "content": "L'indépendance du pays",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Présente la résistance de Samory Touré en suivant les étapes : situer, présenter, expliquer, dégager.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Situe la résistance : années 1890, région de l'actuelle Côte d'Ivoire, Guélémou",
+                "Présente le chef : malinké, empire wassoulou, armée organisée",
+                "Explique la stratégie : combat et déplacements face à des troupes mieux armées",
+                "Dégage l'issue : capture en 1898, Gabon, mort en 1900"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Situer : dans les années 1890, Samory Touré se replie vers la région de l'actuelle Côte d'Ivoire ; il est capturé le 29 septembre 1898 à Guélémou. Étape 2 — Présenter : chef malinké, il dirige l'empire wassoulou avec une armée organisée. Étape 3 — Expliquer : face à des troupes françaises mieux armées, il combat et se déplace. Étape 4 — Dégager : il est déporté au Gabon et meurt en 1900. Barème : un point par étape.",
+              "answers": [],
+              "starter": "Dans les années 1890, Samory Touré…"
+            }
+          ]
+        },
+        {
+          "title": "Les résistances en Côte d'Ivoire, de 1878 à 1920",
+          "statement": "Sujet de type bac. Document : une frise chronologique de 1870 à 1930, affichée dans le musée d'une plantation de café. Elle place Arthur Verdier à Grand-Bassam (1878), la fin de la conférence de Berlin (1885), la mission Binger (1887-1889), la colonie de Côte d'Ivoire (1893), la capture de Samory Touré (1898), sa mort (1900) et la révolte des Abbey (1910). Réponds aux questions, puis rédige la synthèse.",
+          "exercise_type": "evaluation",
+          "figure": "frise-resistances",
+          "questions": [
+            {
+              "content": "Relie chaque date de la frise à l'événement correspondant.",
+              "question_type": "matching",
+              "explanation": "Méthode : Situer chaque événement dans le temps. Étape 1 — Situer : la colonie date de 1893, la capture de Samory Touré de 1898, sa mort de 1900, la révolte des Abbey de 1910. Le piège est de confondre la capture (1898) et la mort (1900).",
+              "answers": [
+                {
+                  "content": "1893",
+                  "match": "Création de la colonie de Côte d'Ivoire"
+                },
+                {
+                  "content": "1898",
+                  "match": "Capture de Samory Touré"
+                },
+                {
+                  "content": "1900",
+                  "match": "Mort de Samory Touré"
+                },
+                {
+                  "content": "1910",
+                  "match": "Révolte des Abbey"
+                }
+              ]
+            },
+            {
+              "content": "La conférence de Berlin (1884-1885) crée la colonie de Côte d'Ivoire en 1893.",
+              "question_type": "true_false",
+              "explanation": "Méthode : situer, puis expliquer les causes. Berlin se termine en 1885 et fixe seulement la règle de l'occupation effective ; la colonie est créée huit ans plus tard, en 1893, par la France. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le premier gouverneur de la colonie, en 1893, est Louis-Gustave ___ (nom de famille).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Identifier les acteurs. Louis-Gustave Binger traverse la région de 1887 à 1889, puis devient le premier gouverneur de la colonie en 1893.",
+              "answers": [
+                {
+                  "content": "Binger",
+                  "correct": true
+                },
+                {
+                  "content": "Louis-Gustave Binger",
+                  "correct": true
+                },
+                {
+                  "content": "Louis Gustave Binger",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont trois causes de l'échec des résistances ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Comparer les forces, puis repérer les divisions. Les armes coloniales sont plus puissantes, et les peuples résistent séparément, sans front commun. La France est l'adversaire, pas un soutien, et des résistances ont bien eu lieu.",
+              "answers": [
+                {
+                  "content": "L'inégalité des armes",
+                  "correct": true
+                },
+                {
+                  "content": "Le manque d'union entre les peuples",
+                  "correct": true
+                },
+                {
+                  "content": "Des résistances menées séparément, à des moments différents",
+                  "correct": true
+                },
+                {
+                  "content": "Le soutien de la France aux résistants",
+                  "correct": false
+                },
+                {
+                  "content": "L'absence de toute résistance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la conséquence de la défaite des résistances ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Dégager les conséquences. Étape 3 — Dégager : après la défaite, les peuples sont soumis et l'administration coloniale s'installe. L'indépendance n'arrive qu'en 1960, longtemps après.",
+              "answers": [
+                {
+                  "content": "L'installation d'une administration coloniale qui impose l'impôt et le travail",
+                  "correct": true
+                },
+                {
+                  "content": "L'indépendance immédiate du pays",
+                  "correct": false
+                },
+                {
+                  "content": "La fin de la colonie",
+                  "correct": false
+                },
+                {
+                  "content": "Le départ de l'armée française",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique deux causes de l'échec des résistances ivoiriennes.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite l'inégalité des armes avec un détail (fusils à tir rapide, canons)",
+                "Cite les divisions : résistances séparées, sans front commun",
+                "Relie chaque cause à la défaite"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Comparer les forces : l'armée coloniale dispose d'armes modernes, comme des fusils à tir rapide et des canons, alors que les résistants ont des armes moins puissantes. Étape 2 — Repérer les divisions : les peuples résistent séparément, à des moments différents, sans front commun. Ces deux causes expliquent la défaite. Barème : première cause (1,5) ; deuxième cause (1,5).",
+              "answers": [],
+              "starter": "La première cause est…"
+            },
+            {
+              "content": "Rédige un paragraphe de synthèse d'une dizaine de lignes. Montre comment les peuples de Côte d'Ivoire ont résisté à la conquête française entre 1878 et 1920, puis pourquoi ils ont été vaincus.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Situe la conquête : Berlin, mission Binger, colonie de 1893",
+                "Cite les trois formes de résistance",
+                "Donne l'exemple de Samory Touré avec dates (1898, 1900)",
+                "Explique deux causes de l'échec",
+                "Dégage une conséquence : administration coloniale, impôt, travail",
+                "Texte organisé et clair"
+              ],
+              "explanation": "Corrigé modèle : Situer. À la fin du XIXe siècle, la France occupe la Côte d'Ivoire ; elle devient une colonie en 1893. Formes. Les peuples résistent par les armes, par la négociation ou par des refus passifs, pour défendre leur liberté et refuser l'impôt et le travail imposé. Exemple. Samory Touré, à la tête d'une armée organisée, est capturé en 1898 et meurt en 1900. Causes de l'échec. Les armes sont inégales et les peuples résistent séparément. Conséquence. Une administration coloniale s'installe. Barème : situation (1) ; formes (1) ; Samory (1) ; deux causes (1) ; conséquence (1) ; organisation (1).",
+              "answers": [],
+              "starter": "À la fin du XIXe siècle, la France…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
