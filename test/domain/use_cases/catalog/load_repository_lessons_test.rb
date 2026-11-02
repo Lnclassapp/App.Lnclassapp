@@ -56,6 +56,13 @@ module UseCases
 
       Taxonomy = Struct.new(:lookup)
 
+      class Referential
+        include Ports::Catalog::ReferentialCompleterPort
+        attr_reader :calls
+        def initialize(created = {}) = (@created = created) && (@calls = 0)
+        def complete = (@calls += 1) && { levels: [], series: [], pairs: [], materials: [], conflicts: [] }.merge(@created)
+      end
+
       setup do
         @actor = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
         @content = JSON.generate("courses" => [ { "name" => " Thalès ", "level_name" => "3ème", "material_name" => "Maths" } ])
@@ -89,10 +96,11 @@ module UseCases
       end
 
       def use_case(lessons: [ @lesson ], reports: Reports.new, users: Users.new(@actor), start: start_import, run: run_import, publish: cascade, policy: Policies::Catalog::ManageContentPolicy.new,
-                   course_status: "published", drafts: Drafts.new, run_lesson: run_import(step: :run_lesson), courses: Courses.new(status: course_status))
+                   course_status: "published", drafts: Drafts.new, run_lesson: run_import(step: :run_lesson), courses: Courses.new(status: course_status),
+                   referential: Referential.new, taxonomy: Taxonomy.new(Lookup.new(Level.new(1), Level.new(2))))
         LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses:, essentials: drafts, exercises: drafts,
-                                  taxonomy: Taxonomy.new(Lookup.new(Level.new(1), Level.new(2))), start_import: start, run_import: run,
-                                  run_lesson_import: run_lesson,
+                                  taxonomy:, start_import: start, run_import: run,
+                                  run_lesson_import: run_lesson, referential:,
                                   publish_cascade: publish, policy:, logger: @logger, clock: Struct.new(:now).new(@now))
       end
 
@@ -377,6 +385,51 @@ module UseCases
 
         assert_equal({ lesson.import_name => :refused }, summary.lessons)
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 1 erreur(s)), voir Imports" ] ], @logs
+      end
+      # --- ADR-0123 §8 : sur Develop seul, le référentiel manquant est créé avant le chargement ---
+
+      test "Develop completes the referential before loading and logs what it created" do
+        referential = Referential.new(levels: [ "1ère" ], series: %w[A1 A2], pairs: [ "1ère A1", "1ère A2" ], conflicts: [ "matière Mathématiques" ])
+
+        call(use_case(referential:))
+
+        assert_equal 1, referential.calls
+        assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2" ],
+                       [ :warn, "[contenus] référentiel : non créé, nom déjà pris : matière Mathématiques" ] ], @logs.first(2)
+      end
+
+      test "a complete referential logs nothing" do
+        call(use_case)
+
+        assert_empty(@logs.select { it.last.include?("référentiel") })
+      end
+
+      test "Staging, production, a PR environment and an unknown name never touch the referential" do
+        referential = Referential.new
+        [ [ "Staging", false ], [ "production", false ], [ "Develop", true ], [ "Recette", false ] ].each do |name, pr|
+          call(use_case(referential:), name:, pr:)
+        end
+
+        assert_equal 0, referential.calls
+      end
+
+      test "a referential that fails is logged and the lessons are still loaded" do
+        failing = Referential.new.tap { it.define_singleton_method(:complete) { raise "base coupée" } }
+
+        summary = call(use_case(referential: failing))
+
+        assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
+        assert_equal [ :error, "[contenus] référentiel non complété (RuntimeError : base coupée)" ], @logs.first
+      end
+      test "a programme lesson whose level or material is unknown here is not taken for present, and the import says why" do
+        lesson = programme_lesson("Pythagore")
+        [ Lookup.new(nil, Level.new(2)), Lookup.new(Level.new(1), nil) ].each do |lookup|
+          @calls.clear
+          refused = run_import(step: :run_lesson, error_count: 1)
+
+          assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], taxonomy: Taxonomy.new(lookup), run_lesson: refused)).lessons)
+          assert_equal %i[start run_lesson], @calls.map(&:first)
+        end
       end
     end
   end

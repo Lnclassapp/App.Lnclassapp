@@ -59,3 +59,9 @@ Estimation pour Develop : 84 des 263 fichiers v3 du programme ont eu une version
 - Fusionnée par [#443](https://github.com/Lnclassapp/App.Lnclassapp/pull/443) le 2026-11-02.
 - La cause elle-même n'est pas corrigée par le code : créer sur Develop les niveaux Tle (A1, A2, C, D), 1ère (A1, A2, C, D), 2nde (A, C) et les matières manquantes est une décision du porteur (écran Référentiel, ou semis du référentiel réservé à Develop). Le déploiement suivant rechargera seul les leçons refusées.
 
+## Suite : Develop complète son référentiel (2026-11-02)
+
+- Journal de #443 (déploiement `ac75e721`) : `unknown_level (value: 1ère)`, `unknown_series (value: A1/A2)`. Décision du porteur : Develop reçoit les leçons.
+- ADR-0123 §8 : sur Develop seul, création de ce qui manque du référentiel de base (`BaseReferential`, partagé avec `db/seeds/catalog.rb`), sans rien modifier d'existant ; journalisé.
+- Couverture : une branche de `key_of` (#439, matière inconnue) n'était couverte par aucun test ; ajoutée.
+

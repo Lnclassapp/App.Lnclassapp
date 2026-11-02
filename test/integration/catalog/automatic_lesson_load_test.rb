@@ -395,10 +395,39 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     Orm::Level.where(name: "Tle").update_all(name: "Terminale", slug: "terminale")
     logged = []
 
-    output = stub_method(Rails.logger, :warn, ->(message) { logged << message }) { charger("Develop") }
+    # Le complément du référentiel (ADR-0123 §8) est neutralisé : on regarde le journal d'un refus.
+    nothing = -> { { levels: [], series: [], pairs: [], materials: [], conflicts: [] } }
+    output = stub_any_instance(Repositories::Catalog::ReferentialCompleter, :complete, nothing) do
+      stub_method(Rails.logger, :warn, ->(message) { logged << message }) { charger("Develop") }
+    end
 
     assert_includes output, "#{PROGRAMME_IMPORT_NAME} : refused"
     assert_includes logged, "[contenus] Barycentre et lignes de niveaux : import refusé (completed, 1 erreur(s)), voir Imports : " \
                             "unknown_level courses[0].level_name (value: Tle)"
+  end
+
+  # ADR-0123 §8 : le cas de Develop après #443 — référentiel sans le lycée ; Develop le complète, puis charge la leçon de Tle C.
+  def college_referential
+    create_level(name: "3ème", position: 4, cycle: "first")
+    create_material(name: "Mathématiques", shortname: "Maths", category: "science")
+  end
+
+  test "Develop creates the missing levels, series, pairs and materials, then loads the Tle C lesson" do
+    college_referential
+
+    output = charger("Develop")
+
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
+    assert Orm::LevelSeries.exists?(level: Orm::Level.find_by!(slug: "tle"), series: Orm::Series.find_by!(slug: "c"))
+    assert_equal [ 4, "first" ], Orm::Level.find_by!(slug: "3eme").then { [ it.position, it.cycle ] }
+    assert Orm::Material.exists?(slug: "philosophie")
+  end
+
+  test "Staging and production never create a level, a series or a material" do
+    college_referential
+
+    [ "Staging", "production" ].each { charger(it) }
+
+    assert_equal [ 1, 0, 1 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count ]
   end
 end
