@@ -54,9 +54,12 @@
       <% end %>
     <% end %>
   <% elsif kind == :other && fields %>
-    <%= fields_for field do |f| %>
-      <%= render "assessment/exercise_sessions/kinds/#{question.play.kind_name}", f:, question: question.play, number: "s#{question.id}", values: {} %>
-    <% end %>
+    <%# Comme sur la copie, le LaTeX des éléments est rendu par KaTeX : sans lui, il restait brut (lecons-defauts-affichage). %>
+    <div class="ps-play" data-controller="math">
+      <%= fields_for field do |f| %>
+        <%= render "assessment/exercise_sessions/kinds/#{question.play.kind_name}", f:, question: question.play, number: "s#{question.id}", values: {} %>
+      <% end %>
+    </div>
   <% end %>
   <% if question.verdict %>
     <span class="ps-verdict <%= "ps-verdict--wrong" unless question.verdict == :correct %>" data-ps="done"><%= t("catalog.courses.sheets.verdict.#{question.verdict}") %></span>
