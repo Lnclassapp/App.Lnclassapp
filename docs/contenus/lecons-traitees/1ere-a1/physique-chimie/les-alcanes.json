@@ -866,9 +866,9 @@
         },
         {
           "name": "Reconnaître les isomères d'un alcane",
-          "remember": "Deux molécules sont **isomères** quand elles ont la **même formule brute** mais des **enchaînements d'atomes différents**. Ce sont des espèces chimiques différentes, qui ont des noms différents. Le méthane, l'éthane et le propane n'ont pas d'isomère. À partir de 4 carbones, il y a des isomères : l'alcane à chaîne linéaire et des alcanes ramifiés. Le butane $\\mathrm{C_{4}H_{10}}$ a **2** isomères : le butane et le 2-méthylbutane n'ont pas la même formule, mais le butane et le 2-méthylpropane, oui. Le pentane $\\mathrm{C_{5}H_{12}}$ en a **3** : le pentane, le 2-méthylbutane et le 2,2-diméthylpropane. L'hexane $\\mathrm{C_{6}H_{14}}$ en a **5**.",
+          "remember": "Deux molécules sont **isomères** quand elles ont la **même formule brute** mais des **enchaînements d'atomes différents**. Ce sont des espèces chimiques différentes, qui ont des noms différents. Le méthane, l'éthane et le propane n'ont pas d'isomère. À partir de 4 carbones, il y a des isomères : l'alcane à chaîne linéaire et des alcanes ramifiés. Le butane $\\mathrm{C_{4}H_{10}}$ a **2** isomères : le butane et le 2-méthylpropane. Le pentane $\\mathrm{C_{5}H_{12}}$ en a **3** : le pentane, le 2-méthylbutane et le 2,2-diméthylpropane. L'hexane $\\mathrm{C_{6}H_{14}}$ en a **5**.",
           "method": [
-            "Calculer la formule brute avec $2n+2$ et écrire la chaîne à chaîne linéaire de $n$ carbones.",
+            "Calculer la formule brute avec $2n+2$ et écrire la chaîne linéaire de $n$ carbones.",
             "Raccourcir la chaîne d'un carbone et fixer ce carbone (un méthyle) sur un carbone intérieur, sans compter deux fois la même molécule.",
             "Raccourcir encore la chaîne (deux méthyles) tant que c'est possible, en évitant les doublons.",
             "Nommer chaque isomère et vérifier : même formule brute, noms tous différents."
@@ -876,7 +876,7 @@
           "example": {
             "statement": "Écrire et nommer tous les isomères de formule brute $\\mathrm{C_{5}H_{12}}$.",
             "steps": [
-              "Calculer : $n = 5$ donne $\\mathrm{C_{5}H_{12}}$. La chaîne à chaîne linéaire est $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$.",
+              "Calculer : $n = 5$ donne $\\mathrm{C_{5}H_{12}}$. La chaîne linéaire est $\\mathrm{CH_{3}{-}CH_{2}{-}CH_{2}{-}CH_{2}{-}CH_{3}}$.",
               "Raccourcir d'un carbone : chaîne de 4 carbones et un méthyle. Sur le carbone 2 : $\\mathrm{CH_{3}{-}CH(CH_{3}){-}CH_{2}{-}CH_{3}}$. Sur le carbone 3, on retrouve la même molécule lue à l'envers.",
               "Raccourcir encore : chaîne de 3 carbones et deux méthyles, tous deux sur le carbone 2, le seul carbone intérieur : $\\mathrm{CH_{3}{-}C(CH_{3})_{2}{-}CH_{3}}$.",
               "Nommer : pentane, 2-méthylbutane et 2,2-diméthylpropane. Les trois ont la formule brute $\\mathrm{C_{5}H_{12}}$ et des noms différents : il y a 3 isomères."
@@ -893,7 +893,7 @@
               {
                 "content": "Le butane et le 2-méthylpropane sont des isomères.",
                 "question_type": "true_false",
-                "explanation": "Étape 1 — Calculer : le butane et le 2-méthylpropane ont la même formule brute $\\mathrm{C_{4}H_{10}}$. Étape 4 — Nommer et vérifier : leurs noms sont différents, car l'enchaînement des carbones est différent (chaîne à chaîne linéaire pour l'un, ramifiée pour l'autre). Ce sont donc des isomères.",
+                "explanation": "Étape 1 — Calculer : le butane et le 2-méthylpropane ont la même formule brute $\\mathrm{C_{4}H_{10}}$. Étape 4 — Nommer et vérifier : leurs noms sont différents, car l'enchaînement des carbones est différent (chaîne linéaire pour l'un, ramifiée pour l'autre). Ce sont donc des isomères.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -909,7 +909,7 @@
                 "content": "Combien d'isomères (pentane compris) possède l'alcane de formule brute $\\mathrm{C_{5}H_{12}}$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : la chaîne à chaîne linéaire est le pentane. Étape 2 — Raccourcir : une chaîne de 4 carbones et un méthyle donne le 2-méthylbutane. Étape 3 — Raccourcir encore : deux méthyles sur une chaîne de 3 carbones donnent le 2,2-diméthylpropane. Étape 4 — Nommer : 3 isomères.",
+                "explanation": "Étape 1 — Calculer : la chaîne linéaire est le pentane. Étape 2 — Raccourcir : une chaîne de 4 carbones et un méthyle donne le 2-méthylbutane. Étape 3 — Raccourcir encore : deux méthyles sur une chaîne de 3 carbones donnent le 2,2-diméthylpropane. Étape 4 — Nommer : 3 isomères.",
                 "answers": [
                   {
                     "content": "3",
@@ -1045,7 +1045,7 @@
                     "correct": true
                   }
                 ],
-                "hint": "Il y a la chaîne à chaîne linéaire et une seule ramifiée."
+                "hint": "Il y a la chaîne linéaire et une seule ramifiée."
               },
               {
                 "content": "Le propane possède un isomère ramifié.",
@@ -1138,7 +1138,7 @@
                 ]
               },
               {
-                "content": "Complète l'équation de la combustion de l'éthane : 2 C2H6 + ___ O2 -> 4 CO2 + 6 H2O. Écris le coefficient devant $\\mathrm{O_{2}}$.",
+                "content": "Complète l'équation de la combustion de l'éthane : 2 $\\mathrm{C_{2}H_{6}}$ + ___ $\\mathrm{O_{2}}$ → 4 $\\mathrm{CO_{2}}$ + 6 $\\mathrm{H_{2}O}$. Écris le coefficient devant $\\mathrm{O_{2}}$.",
                 "question_type": "fill_blank",
                 "explanation": "Étape 1 — Écrire : l'équation est donnée. Étape 2 — Équilibrer le carbone : $2 \\times 2 = 4$ carbones de chaque côté. Étape 3 — Équilibrer l'hydrogène : $2 \\times 6 = 12$ hydrogènes à gauche et $6 \\times 2 = 12$ à droite. Étape 4 — Équilibrer l'oxygène : à droite, $4 \\times 2 + 6 = 14$ oxygènes, donc le coefficient de $\\mathrm{O_{2}}$ est $14 \\div 2 = 7$.",
                 "answers": [
@@ -1331,7 +1331,7 @@
                 ]
               },
               {
-                "content": "Complète : CH4 + 3 Cl2 -> CHCl3 + ___ HCl. Écris le coefficient devant $\\mathrm{HCl}$.",
+                "content": "Complète : $\\mathrm{CH_{4}}$ + 3 $\\mathrm{Cl_{2}}$ → $\\mathrm{CHCl_{3}}$ + ___ $\\mathrm{HCl}$. Écris le coefficient devant $\\mathrm{HCl}$.",
                 "question_type": "fill_blank",
                 "explanation": "Étape 1 — Repérer : trois hydrogènes sont remplacés. Étape 3 — Écrire : une molécule $\\mathrm{HCl}$ pour chaque hydrogène remplacé, donc 3. Étape 4 — Vérifier : à droite, $1 + 3 = 4$ hydrogènes et $3 + 3 = 6$ chlores, comme à gauche.",
                 "answers": [
@@ -1633,7 +1633,7 @@
               ]
             },
             {
-              "content": "Une équation de la combustion incomplète du butane est : 2 C4H10 + 9 O2 -> 8 CO + 10 H2O. Combien de molécules de monoxyde de carbone se forment à partir de 2 molécules de butane ?",
+              "content": "Une équation de la combustion incomplète du butane est : 2 $\\mathrm{C_{4}H_{10}}$ + 9 $\\mathrm{O_{2}}$ → 8 $\\mathrm{CO}$ + 10 $\\mathrm{H_{2}O}$. Combien de molécules de monoxyde de carbone se forment à partir de 2 molécules de butane ?",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Étape 1 — Lire l'équation : le coefficient de $\\mathrm{CO}$ est 8. Étape 2 — Conclure : 2 molécules de butane forment 8 molécules de $\\mathrm{CO}$. On vérifie l'oxygène : $9 \\times 2 = 18$ à gauche, $8 + 10 = 18$ à droite.",
@@ -1645,7 +1645,7 @@
               ]
             },
             {
-              "content": "Complète l'équation de la combustion incomplète du méthane : 2 CH4 + ___ O2 -> 2 CO + 4 H2O. Écris le coefficient devant $\\mathrm{O_{2}}$.",
+              "content": "Complète l'équation de la combustion incomplète du méthane : 2 $\\mathrm{CH_{4}}$ + ___ $\\mathrm{O_{2}}$ → 2 $\\mathrm{CO}$ + 4 $\\mathrm{H_{2}O}$. Écris le coefficient devant $\\mathrm{O_{2}}$.",
               "question_type": "fill_blank",
               "explanation": "Étape 1 — Écrire : l'équation est donnée. Étape 2 — Équilibrer le carbone : 2 carbones de chaque côté. Étape 3 — Équilibrer l'hydrogène : $2 \\times 4 = 8$ à gauche et $4 \\times 2 = 8$ à droite. Étape 4 — Équilibrer l'oxygène : à droite, $2 + 4 = 6$ oxygènes, donc le coefficient de $\\mathrm{O_{2}}$ est $6 \\div 2 = 3$.",
               "answers": [
@@ -1897,7 +1897,7 @@
               ]
             },
             {
-              "content": "Complète l'équation : CH4 + 2 Cl2 -> CH2Cl2 + ___ HCl. Écris le coefficient devant $\\mathrm{HCl}$.",
+              "content": "Complète l'équation : $\\mathrm{CH_{4}}$ + 2 $\\mathrm{Cl_{2}}$ → $\\mathrm{CH_{2}Cl_{2}}$ + ___ $\\mathrm{HCl}$. Écris le coefficient devant $\\mathrm{HCl}$.",
               "question_type": "fill_blank",
               "explanation": "Étape 1 — Repérer : deux hydrogènes sont remplacés. Étape 3 — Écrire : une molécule $\\mathrm{HCl}$ pour chaque hydrogène remplacé, donc 2. Étape 4 — Vérifier : à droite, $2 + 2 = 4$ hydrogènes et $2 + 2 = 4$ chlores, comme à gauche.",
               "answers": [
@@ -1939,7 +1939,7 @@
               "criteria": [
                 "Les atomes sont comptés de chaque côté de la flèche",
                 "L'oubli du chlorure d'hydrogène HCl est repéré",
-                "L'équation correcte CH4 + Cl2 -> CH3Cl + HCl est écrite"
+                "L'équation correcte $\\mathrm{CH_{4}}$ + $\\mathrm{Cl_{2}}$ → $\\mathrm{CH_{3}Cl}$ + $\\mathrm{HCl}$ est écrite"
               ],
               "explanation": "Corrigé modèle : L'équation n'est pas équilibrée. À gauche, il y a 1 C, 4 H et 2 Cl ; à droite, 1 C, 3 H et 1 Cl. Il manque un atome d'hydrogène et un atome de chlore : ils forment le chlorure d'hydrogène $\\mathrm{HCl}$. L'équation correcte est $\\mathrm{CH_{4} + Cl_{2}  \\to  CH_{3}Cl + HCl}$. Points : 1 pour compter les atomes de chaque côté ; 1 pour repérer l'oubli de $\\mathrm{HCl}$ ; 1 pour l'équation correcte.",
               "answers": []

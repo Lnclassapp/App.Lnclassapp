@@ -1,0 +1,1396 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Réactions d'oxydo-réduction en solution aqueuse",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "classement-metaux",
+          "kind": "diagram",
+          "description": "Classement qualitatif de six réducteurs, du plus réducteur (en haut) au moins réducteur (en bas) : aluminium, zinc, fer, dihydrogène (repère du couple H3O+/H2), cuivre, argent. Les trois premiers métaux sont attaqués par l'acide chlorhydrique dilué, le cuivre et l'argent ne le sont pas. Un métal réagit avec les ions des métaux situés plus bas que lui.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "al",
+                "label": "Aluminium Al",
+                "category": 1
+              },
+              {
+                "id": "zn",
+                "label": "Zinc Zn",
+                "category": 1
+              },
+              {
+                "id": "fe",
+                "label": "Fer Fe",
+                "category": 1
+              },
+              {
+                "id": "h2",
+                "label": "Dihydrogène H2 (repère)",
+                "category": 2
+              },
+              {
+                "id": "cu",
+                "label": "Cuivre Cu",
+                "category": 3
+              },
+              {
+                "id": "ag",
+                "label": "Argent Ag",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "al",
+                "to": "zn",
+                "label": "moins réducteur"
+              },
+              {
+                "from": "zn",
+                "to": "fe"
+              },
+              {
+                "from": "fe",
+                "to": "h2"
+              },
+              {
+                "from": "h2",
+                "to": "cu"
+              },
+              {
+                "from": "cu",
+                "to": "ag"
+              }
+            ],
+            "legend": [
+              "Attaqué par l'acide chlorhydrique dilué",
+              "Repère : le dihydrogène",
+              "Non attaqué par l'acide dilué"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "transfert-electrons-zinc-cuivre",
+          "kind": "diagram",
+          "description": "Transfert d'électrons entre une lame de zinc et une solution bleue d'ions cuivre(II). L'atome de zinc, réducteur, cède deux électrons et devient l'ion Zn2+ qui reste en solution. Ces deux électrons sont captés par un ion Cu2+, oxydant, qui devient un atome de cuivre : c'est le dépôt rouge sur la lame.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "zn",
+                "label": "Atome de zinc Zn (réducteur)",
+                "category": 1
+              },
+              {
+                "id": "zn2",
+                "label": "Ion Zn2+ (reste en solution)",
+                "category": 1
+              },
+              {
+                "id": "e",
+                "label": "2 électrons transférés",
+                "category": 3
+              },
+              {
+                "id": "cu2",
+                "label": "Ion cuivre(II) Cu2+ (oxydant)",
+                "category": 2
+              },
+              {
+                "id": "cu",
+                "label": "Atome de cuivre Cu (dépôt rouge)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "zn",
+                "to": "zn2",
+                "label": "s'oxyde"
+              },
+              {
+                "from": "zn",
+                "to": "e",
+                "label": "cède"
+              },
+              {
+                "from": "e",
+                "to": "cu2",
+                "label": "captés par"
+              },
+              {
+                "from": "cu2",
+                "to": "cu",
+                "label": "se réduit"
+              }
+            ],
+            "legend": [
+              "Le réducteur et son oxydation",
+              "L'oxydant et sa réduction",
+              "Les électrons"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Oxydant, réducteur et couple oxydant/réducteur",
+          "remember": "Une **oxydation** est une **perte** d'électrons. Une **réduction** est un **gain** d'électrons. Un **réducteur** est une espèce capable de **céder** un ou plusieurs électrons : en les cédant, il s'oxyde. Un **oxydant** est une espèce capable de **capter** un ou plusieurs électrons : en les captant, il se réduit. Un oxydant et son réducteur forment un **couple oxydant/réducteur**, noté $\\mathrm{Ox/Red}$, lié par $\\mathrm{Ox + n e^{-} = Red}$. Un métal est un réducteur ; son ion positif est l'oxydant du même couple : $\\mathrm{Cu^{2+}/Cu}$, $\\mathrm{Zn^{2+}/Zn}$, $\\mathrm{Ag^{+}/Ag}$, $\\mathrm{Al^{3+}/Al}$, $\\mathrm{Fe^{2+}/Fe}$. L'électron porte une charge négative : perdre un électron fait **augmenter** la charge de 1.",
+          "method": [
+            "Écrire l'espèce avant et après la transformation, avec sa charge.",
+            "Comparer les charges : si la charge augmente, l'espèce a perdu des électrons ; si elle diminue, elle en a gagné.",
+            "Nommer : l'espèce qui perd des électrons s'oxyde, c'est le réducteur ; celle qui en gagne se réduit, c'est l'oxydant.",
+            "Écrire le couple sous la forme oxydant/réducteur."
+          ],
+          "example": {
+            "statement": "Dans une solution, des ions argent $\\mathrm{Ag^{+}}$ deviennent des atomes d'argent Ag (dépôt gris brillant). Dire si c'est une oxydation ou une réduction, nommer l'oxydant et le réducteur, puis écrire le couple.",
+            "steps": [
+              "Écrire : avant, $\\mathrm{Ag^{+}}$ (charge +1) ; après, Ag (charge 0).",
+              "Comparer : la charge passe de +1 à 0, elle diminue : l'ion a gagné un électron.",
+              "Nommer : $\\mathrm{Ag^{+}}$ gagne un électron, il se réduit, c'est l'oxydant ; Ag est le réducteur. C'est une réduction.",
+              "Écrire le couple : $\\mathrm{Ag^{+}/Ag}$."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'oxydant est l'espèce qui s'oxyde. Contre-exemple : Zn devient $\\mathrm{Zn^{2+}}$ en perdant 2 électrons ; le zinc s'oxyde, mais c'est un **réducteur**. Retiens : le réducteur s'oxyde, l'oxydant se réduit. L'oxydant est celui qui prend des électrons à l'autre.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un oxydant et un réducteur",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : écrire l'espèce avant et après, comparer les charges, nommer, écrire le couple.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces définitions, laquelle est celle d'un réducteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Nommer : un réducteur est une espèce capable de céder des électrons ; en cédant des électrons, il s'oxyde. Définir le réducteur comme l'espèce qui capte des électrons est l'erreur classique : c'est la définition de l'oxydant. Un réducteur n'est pas non plus forcément chargé positivement : le zinc Zn est neutre.",
+                "answers": [
+                  {
+                    "content": "Une espèce capable de céder un ou plusieurs électrons",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une espèce capable de capter un ou plusieurs électrons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une espèce qui se réduit pendant la réaction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une espèce toujours chargée positivement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le fer Fe devient l'ion $\\mathrm{Fe^{2+}}$. Le fer se réduit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : avant, Fe (charge 0) ; après, $\\mathrm{Fe^{2+}}$ (charge +2). Étape 2 — Comparer : la charge augmente de 2, donc le fer a perdu 2 électrons. Étape 3 — Nommer : l'espèce qui perd des électrons s'oxyde et c'est le réducteur. Le fer s'oxyde : il ne se réduit pas. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une solution de sulfate de cuivre(II), des ions $\\mathrm{Cu^{2+}}$ deviennent des atomes de cuivre Cu (dépôt rouge). Quel est le couple oxydant/réducteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : avant, $\\mathrm{Cu^{2+}}$ (charge +2) ; après, Cu (charge 0). Étape 2 — Comparer : la charge diminue, donc l'ion gagne 2 électrons. Étape 3 — Nommer : $\\mathrm{Cu^{2+}}$ se réduit, c'est l'oxydant ; Cu est le réducteur. Étape 4 — Écrire le couple : oxydant d'abord, donc $\\mathrm{Cu^{2+}/Cu}$. Écrire $\\mathrm{Cu/Cu^{2+}}$ inverse l'ordre ; l'ion sulfate $\\mathrm{SO_{4}^{2-}}$ est spectateur et ne fait pas partie du couple.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Cu^{2+}/Cu}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Cu/Cu^{2+}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Cu^{2+}/SO_{4}^{2-}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un atome d'aluminium Al devient l'ion $\\mathrm{Al^{3+}}$. Combien d'électrons perd-il ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : avant, Al (charge 0) ; après, $\\mathrm{Al^{3+}}$ (charge +3). Étape 2 — Comparer : la charge augmente de 3, donc l'atome perd 3 électrons. Étape 3 — Nommer : Al perd des électrons, il s'oxyde, c'est le réducteur du couple $\\mathrm{Al^{3+}/Al}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque espèce, prise dans son couple, à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer : un ion métallique positif capte des électrons, c'est l'oxydant. Un métal neutre cède des électrons, c'est le réducteur. Le nombre d'électrons est la différence de charge (étape 2) : 2 pour Cu et Zn, 1 pour Ag, 3 pour Al.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Cu^{2+}}$ (couple $\\mathrm{Cu^{2+}/Cu}$)",
+                    "match": "oxydant : capte 2 électrons"
+                  },
+                  {
+                    "content": "Zn (couple $\\mathrm{Zn^{2+}/Zn}$)",
+                    "match": "réducteur : cède 2 électrons"
+                  },
+                  {
+                    "content": "$\\mathrm{Ag^{+}}$ (couple $\\mathrm{Ag^{+}/Ag}$)",
+                    "match": "oxydant : capte 1 électron"
+                  },
+                  {
+                    "content": "Al (couple $\\mathrm{Al^{3+}/Al}$)",
+                    "match": "réducteur : cède 3 électrons"
+                  }
+                ]
+              },
+              {
+                "content": "Le zinc Zn devient l'ion $\\mathrm{Zn^{2+}}$. Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : Zn (charge 0) devient $\\mathrm{Zn^{2+}}$ (charge +2). Étape 2 — Comparer : la charge augmente, le zinc perd 2 électrons. Étape 3 — Nommer : il s'oxyde et c'est un réducteur. L'erreur tentante est de croire que celui qui s'oxyde est l'oxydant : l'oxydant est celui qui capte les électrons, ici ce sera une autre espèce.",
+                "answers": [
+                  {
+                    "content": "Le zinc perd deux électrons",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le zinc s'oxyde : c'est le réducteur du couple $\\mathrm{Zn^{2+}/Zn}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le zinc gagne deux électrons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le zinc se réduit",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le zinc est un oxydant parce qu'il s'oxyde",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans l'atelier d'un forgeron de Korhogo, on observe des métaux et des ions métalliques. Tu repères qui perd et qui gagne des électrons.",
+            "questions": [
+              {
+                "content": "Le zinc Zn devient l'ion $\\mathrm{Zn^{2+}}$. Le zinc ___ des électrons (écris perd ou gagne).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : Zn (charge 0) devient $\\mathrm{Zn^{2+}}$ (charge +2). Étape 2 — Comparer : la charge augmente, donc le zinc perd des électrons. Étape 3 — Nommer : il s'oxyde, c'est un réducteur.",
+                "answers": [
+                  {
+                    "content": "perd",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une charge qui augmente veut dire que l'espèce a perdu des électrons."
+              },
+              {
+                "content": "Le fer Fe devient l'ion $\\mathrm{Fe^{3+}}$. Combien d'électrons un atome de fer perd-il ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : Fe (charge 0) devient $\\mathrm{Fe^{3+}}$ (charge +3). Étape 2 — Comparer : la charge augmente de 3, donc 3 électrons sont perdus. Étape 3 — Nommer : Fe s'oxyde, c'est le réducteur du couple $\\mathrm{Fe^{3+}/Fe}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte la différence entre les deux charges."
+              },
+              {
+                "content": "L'ion argent $\\mathrm{Ag^{+}}$ est un oxydant.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Ag^{+}}$ (charge +1) peut devenir Ag (charge 0). Étape 2 — Comparer : la charge diminue, l'ion capte un électron. Étape 3 — Nommer : il se réduit, c'est un oxydant. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire une demi-équation électronique",
+          "remember": "Une **demi-équation électronique** traduit le passage d'un membre d'un couple à l'autre : $\\mathrm{Ox + n e^{-} = Red}$. Lue de gauche à droite, c'est une **réduction** (l'oxydant capte n électrons). Lue de droite à gauche, c'est une **oxydation**. Elle respecte deux conservations : celle des **atomes** (autant de chaque élément des deux côtés) et celle de la **charge électrique** (même charge totale des deux côtés). Un électron $\\mathrm{e^{-}}$ porte la charge −1. Exemples : $\\mathrm{Cu^{2+} + 2e^{-} = Cu}$ ; $\\mathrm{Al^{3+} + 3e^{-} = Al}$ ; $\\mathrm{Fe^{3+} + e^{-} = Fe^{2+}}$ ; $\\mathrm{Cl_{2} + 2e^{-} = 2Cl^{-}}$.",
+          "method": [
+            "Écrire l'oxydant à gauche et le réducteur à droite du signe =, avec leurs formules.",
+            "Équilibrer les atomes de l'élément qui change, pour en avoir autant de chaque côté.",
+            "Calculer la charge totale de chaque membre, sans compter les électrons.",
+            "Ajouter à gauche le nombre d'électrons qui rend les deux charges totales égales, puis vérifier."
+          ],
+          "example": {
+            "statement": "Écrire la demi-équation du couple $\\mathrm{Al^{3+}/Al}$.",
+            "steps": [
+              "Écrire : l'oxydant à gauche, le réducteur à droite : $\\mathrm{Al^{3+} = Al}$.",
+              "Équilibrer : il y a 1 atome d'aluminium de chaque côté, rien à ajouter.",
+              "Calculer la charge totale de chaque membre : +3 à gauche, 0 à droite.",
+              "Ajouter 3 électrons à gauche : $\\mathrm{Al^{3+} + 3e^{-} = Al}$. Vérifier : +3 − 3 = 0, les charges sont égales."
+            ]
+          },
+          "pitfall": "Ne pas oublier d'équilibrer les atomes avant les charges. Contre-exemple : $\\mathrm{Cl_{2} + 2e^{-} = Cl^{-}}$ est faux : à gauche la charge est −2, à droite −1. Il faut 2 ions : $\\mathrm{Cl_{2} + 2e^{-} = 2Cl^{-}}$, et −2 = −2. Vérifie toujours les atomes **et** les charges.",
+          "figure": null,
+          "exercise": {
+            "title": "Écrire des demi-équations",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : écrire le couple, équilibrer les atomes, calculer les charges, ajouter les électrons.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la demi-équation du couple $\\mathrm{Zn^{2+}/Zn}$, écrite dans le sens de la réduction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : l'oxydant $\\mathrm{Zn^{2+}}$ à gauche, le réducteur Zn à droite. Étape 2 — Équilibrer : 1 atome de zinc de chaque côté. Étape 3 — Calculer les charges : +2 à gauche, 0 à droite. Étape 4 — Ajouter 2 électrons à gauche : $\\mathrm{Zn^{2+} + 2e^{-} = Zn}$, charge +2 − 2 = 0. Oublier les électrons ($\\mathrm{Zn^{2+} = Zn}$) ou n'en mettre qu'un laisse les charges inégales, et les écrire du mauvais côté ne les compense pas.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Zn^{2+} + 2e^{-} = Zn}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Zn^{2+} + e^{-} = Zn}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Zn + 2e^{-} = Zn^{2+}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Zn^{2+} = Zn}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans la demi-équation du couple $\\mathrm{Fe^{3+}/Fe}$, $\\mathrm{Fe^{3+} + n e^{-} = Fe}$, quelle est la valeur de n ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Fe^{3+} = Fe}$. Étape 2 — Équilibrer : 1 fer de chaque côté. Étape 3 — Calculer les charges : +3 à gauche, 0 à droite. Étape 4 — Ajouter les électrons : il en faut 3 à gauche pour que +3 − 3 = 0. Donc n = 3.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète le coefficient manquant dans la demi-équation du couple dichlore/ion chlorure : $\\mathrm{Cl_{2} + 2e^{-} =}$ ___ $\\mathrm{Cl^{-}}$",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Cl_{2} = Cl^{-}}$. Étape 2 — Équilibrer : 2 atomes de chlore à gauche, donc 2 ions $\\mathrm{Cl^{-}}$ à droite. Étape 3 — Calculer les charges : 0 à gauche, −2 à droite. Étape 4 — Ajouter 2 électrons à gauche : −2 = −2. Le coefficient est 2. Écrire un seul $\\mathrm{Cl^{-}}$ donnerait −1 à droite, charge inégale.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La demi-équation $\\mathrm{Fe^{3+} + e^{-} = Fe^{2+}}$ respecte la conservation de la charge.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Fe^{3+}}$ à gauche, $\\mathrm{Fe^{2+}}$ à droite. Étape 2 — Équilibrer : 1 fer de chaque côté. Étape 3 — Calculer les charges : à gauche +3 et un électron (−1), à droite +2. Étape 4 — Vérifier : +3 − 1 = +2, les charges sont égales. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire une demi-équation électronique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire d'abord les deux formes du couple. Étape 2 — Équilibrer ensuite les atomes. Étape 3 — Calculer les charges des deux membres. Étape 4 — Ajouter enfin les électrons et vérifier. On ne peut pas compter les électrons à ajouter avant d'avoir calculé les charges.",
+                "answers": [
+                  {
+                    "content": "Écrire l'oxydant à gauche et le réducteur à droite"
+                  },
+                  {
+                    "content": "Équilibrer les atomes de l'élément qui change"
+                  },
+                  {
+                    "content": "Calculer la charge totale de chaque membre"
+                  },
+                  {
+                    "content": "Ajouter les électrons à gauche et vérifier"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles demi-équations sont correctes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Calculer les charges : $\\mathrm{Cu^{2+} + 2e^{-} = Cu}$ (+2 − 2 = 0) et $\\mathrm{Ag^{+} + e^{-} = Ag}$ (+1 − 1 = 0) sont justes. $\\mathrm{Fe^{2+} + e^{-} = Fe}$ donne +1 à gauche et 0 à droite. $\\mathrm{Al^{3+} + 2e^{-} = Al}$ donne +1 et 0. $\\mathrm{Cl_{2} + e^{-} = 2Cl^{-}}$ donne −1 et −2. Étape 4 — Ajouter le bon nombre d'électrons : 2 pour Fe, 3 pour Al, 2 pour Cl2.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Cu^{2+} + 2e^{-} = Cu}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Ag^{+} + e^{-} = Ag}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Fe^{2+} + e^{-} = Fe}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Al^{3+} + 2e^{-} = Al}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Cl_{2} + e^{-} = 2Cl^{-}}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Au laboratoire du lycée, tu écris les demi-équations de quelques couples en suivant la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Complète la demi-équation du couple $\\mathrm{Pb^{2+}/Pb}$ : $\\mathrm{Pb^{2+}}$ + ___ $\\mathrm{e^{-} = Pb}$ (écris le nombre d'électrons).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Pb^{2+} = Pb}$. Étape 2 — Équilibrer : 1 plomb de chaque côté. Étape 3 — Calculer les charges : +2 à gauche, 0 à droite. Étape 4 — Ajouter 2 électrons à gauche : +2 − 2 = 0.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte la charge de l'ion : c'est le nombre d'électrons à ajouter."
+              },
+              {
+                "content": "Quelle est la demi-équation du couple $\\mathrm{Fe^{2+}/Fe}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{Fe^{2+} = Fe}$. Étape 3 — Calculer les charges : +2 à gauche, 0 à droite. Étape 4 — Ajouter 2 électrons à gauche : $\\mathrm{Fe^{2+} + 2e^{-} = Fe}$. Avec un seul électron, la charge à gauche serait +1 : elle ne serait pas égale à 0.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Fe^{2+} + 2e^{-} = Fe}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Fe^{2+} + e^{-} = Fe}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Fe^{2+} = Fe}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une demi-équation écrite dans le sens de la réduction, les électrons sont du même côté que l'oxydant.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : l'oxydant est à gauche. Étape 4 — Ajouter les électrons à gauche, du côté de l'oxydant : $\\mathrm{Ox + n e^{-} = Red}$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire l'équation bilan d'une réaction d'oxydoréduction",
+          "remember": "Une **réaction d'oxydoréduction** est un **transfert d'électrons** : le réducteur d'un couple cède des électrons à l'oxydant d'un autre couple. Les électrons ne restent pas libres dans la solution : tous ceux que cède l'un sont captés par l'autre, donc ils **n'apparaissent pas** dans l'équation bilan. Exemple : une lame de zinc plongée dans une solution bleue de sulfate de cuivre(II) se couvre d'un dépôt rouge de cuivre et la solution se décolore : $\\mathrm{Zn + Cu^{2+} \\rightarrow  Zn^{2+} + Cu}$. Les ions sulfate $\\mathrm{SO_{4}^{2-}}$ ne réagissent pas : ce sont des **ions spectateurs**. L'équation bilan conserve les atomes et la charge.",
+          "method": [
+            "Repérer les deux couples en présence, le réducteur qui réagit et l'oxydant qui réagit.",
+            "Écrire la demi-équation du réducteur (il perd des électrons) et celle de l'oxydant (il en gagne).",
+            "Multiplier chaque demi-équation pour que le nombre d'électrons cédés soit égal au nombre d'électrons captés.",
+            "Additionner les deux demi-équations et simplifier les électrons.",
+            "Vérifier la conservation des atomes et des charges."
+          ],
+          "example": {
+            "statement": "De la poudre d'aluminium est versée dans une solution de sulfate de cuivre(II). Il se forme un dépôt de cuivre. Écrire l'équation bilan.",
+            "steps": [
+              "Repérer : les couples sont $\\mathrm{Al^{3+}/Al}$ et $\\mathrm{Cu^{2+}/Cu}$ ; Al est le réducteur, $\\mathrm{Cu^{2+}}$ est l'oxydant (les ions sulfate sont spectateurs).",
+              "Écrire : $\\mathrm{Al = Al^{3+} + 3e^{-}}$ pour le réducteur et $\\mathrm{Cu^{2+} + 2e^{-} = Cu}$ pour l'oxydant.",
+              "Multiplier : la première par 2 et la seconde par 3, soit 6 électrons de chaque côté : $\\mathrm{2Al = 2Al^{3+} + 6e^{-}}$ et $\\mathrm{3Cu^{2+} + 6e^{-} = 3Cu}$.",
+              "Additionner : $\\mathrm{2Al + 3Cu^{2+} + 6e^{-} \\rightarrow  2Al^{3+} + 3Cu + 6e^{-}}$. Simplifier les électrons : $\\mathrm{2Al + 3Cu^{2+} \\rightarrow  2Al^{3+} + 3Cu}$.",
+              "Vérifier : 2 Al et 3 Cu de chaque côté ; charge totale +6 à gauche (3 × 2) et +6 à droite (2 × 3)."
+            ]
+          },
+          "pitfall": "Ne pas oublier de multiplier les demi-équations, ni laisser des électrons dans le bilan. Contre-exemple : $\\mathrm{Al + Cu^{2+} \\rightarrow  Al^{3+} + Cu}$ a les atomes équilibrés mais la charge est +2 à gauche et +3 à droite : elle est fausse. Il faut 6 électrons échangés : $\\mathrm{2Al + 3Cu^{2+} \\rightarrow  2Al^{3+} + 3Cu}$.",
+          "figure": "transfert-electrons-zinc-cuivre",
+          "exercise": {
+            "title": "Écrire des équations bilans",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer les couples, écrire les demi-équations, égaliser les électrons, additionner, vérifier.",
+            "exercise_type": "fixation",
+            "figure": "transfert-electrons-zinc-cuivre",
+            "questions": [
+              {
+                "content": "Le zinc réagit avec les ions cuivre(II) : $\\mathrm{Zn + Cu^{2+} \\rightarrow  Zn^{2+} + Cu}$. Combien d'électrons un atome de zinc cède-t-il ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le réducteur est Zn (couple $\\mathrm{Zn^{2+}/Zn}$), l'oxydant est $\\mathrm{Cu^{2+}}$ (couple $\\mathrm{Cu^{2+}/Cu}$). Étape 2 — Écrire la demi-équation du réducteur : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$. Il cède donc 2 électrons.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "De la poudre d'aluminium est versée dans une solution contenant des ions plomb $\\mathrm{Pb^{2+}}$, et l'aluminium réagit. Quelle est l'équation bilan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : réducteur Al ($\\mathrm{Al^{3+}/Al}$), oxydant $\\mathrm{Pb^{2+}}$ ($\\mathrm{Pb^{2+}/Pb}$). Étape 2 — Écrire : $\\mathrm{Al = Al^{3+} + 3e^{-}}$ et $\\mathrm{Pb^{2+} + 2e^{-} = Pb}$. Étape 3 — Multiplier : la première par 2, la seconde par 3, soit 6 électrons de chaque côté. Étape 4 — Additionner et simplifier : $\\mathrm{2Al + 3Pb^{2+} \\rightarrow  2Al^{3+} + 3Pb}$. Étape 5 — Vérifier : 2 Al et 3 Pb de chaque côté ; charges +6 et +6. $\\mathrm{Al + Pb^{2+} \\rightarrow  Al^{3+} + Pb}$ oublie la multiplication : charges +2 et +3. $\\mathrm{3Al + 2Pb^{2+} \\rightarrow  3Al^{3+} + 2Pb}$ inverse les coefficients : charges +4 et +9.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{2Al + 3Pb^{2+} \\rightarrow  2Al^{3+} + 3Pb}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Al + Pb^{2+} \\rightarrow  Al^{3+} + Pb}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{3Al + 2Pb^{2+} \\rightarrow  3Al^{3+} + 2Pb}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{2Al + 3Pb^{2+} \\rightarrow  2Al^{3+} + 3Pb + 6e^{-}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le zinc réagit avec les ions argent $\\mathrm{Ag^{+}}$. Quelle est l'équation bilan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : réducteur Zn, oxydant $\\mathrm{Ag^{+}}$. Étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{Ag^{+} + e^{-} = Ag}$. Étape 3 — Multiplier : la seconde par 2 pour avoir 2 électrons. Étape 4 — Additionner : $\\mathrm{Zn + 2Ag^{+} \\rightarrow  Zn^{2+} + 2Ag}$. Étape 5 — Vérifier : charges +2 et +2. Sans multiplier, $\\mathrm{Zn + Ag^{+} \\rightarrow  Zn^{2+} + Ag}$ a +1 à gauche et +2 à droite.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Zn + 2Ag^{+} \\rightarrow  Zn^{2+} + 2Ag}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Zn + Ag^{+} \\rightarrow  Zn^{2+} + Ag}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Zn^{2+} + 2Ag \\rightarrow  Zn + 2Ag^{+}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{2Zn + Ag^{+} \\rightarrow  2Zn^{2+} + Ag}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète l'équation bilan du fer avec les ions argent : $\\mathrm{Fe + 2Ag^{+} \\rightarrow  Fe^{2+} +}$ ___ $\\mathrm{Ag}$",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : réducteur Fe, oxydant $\\mathrm{Ag^{+}}$. Étape 2 — Écrire : $\\mathrm{Fe = Fe^{2+} + 2e^{-}}$ et $\\mathrm{Ag^{+} + e^{-} = Ag}$. Étape 3 — Multiplier la seconde par 2. Étape 4 — Additionner : $\\mathrm{Fe + 2Ag^{+} \\rightarrow  Fe^{2+} + 2Ag}$. Étape 5 — Vérifier : 2 Ag de chaque côté, charges +2 et +2. Le coefficient est 2.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Aluminium et ions cuivre(II) : $\\mathrm{2Al + 3Cu^{2+} \\rightarrow  2Al^{3+} + 3Cu}$. Combien d'électrons sont échangés en tout, quand 2 atomes d'aluminium réagissent ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Écrire : chaque atome d'aluminium cède 3 électrons ($\\mathrm{Al = Al^{3+} + 3e^{-}}$). Étape 3 — Multiplier : pour 2 atomes d'aluminium, 2 × 3 = 6 électrons cédés. Ce sont les mêmes 6 électrons que captent les 3 ions $\\mathrm{Cu^{2+}}$ (3 × 2 = 6).",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{3+} + Cu}$ est correctement équilibrée.",
+                "question_type": "true_false",
+                "explanation": "Étape 5 — Vérifier : les atomes sont équilibrés (1 Fe, 1 Cu de chaque côté), mais la charge est +2 à gauche et +3 à droite : l'équation est fausse. Étape 2 — Écrire : l'oxydant $\\mathrm{Cu^{2+}}$ ne capte que 2 électrons ; le fer cède donc 2 électrons et donne $\\mathrm{Fe^{2+}}$ : $\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{2+} + Cu}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire une équation bilan d'oxydoréduction.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer les couples. Étape 2 — Écrire les deux demi-équations. Étape 3 — Multiplier pour égaliser les électrons. Étape 4 — Additionner et simplifier. Étape 5 — Vérifier atomes et charges. On ne peut pas multiplier avant d'avoir écrit les demi-équations.",
+                "answers": [
+                  {
+                    "content": "Repérer les deux couples, le réducteur et l'oxydant"
+                  },
+                  {
+                    "content": "Écrire la demi-équation de chacun"
+                  },
+                  {
+                    "content": "Multiplier pour égaliser les électrons"
+                  },
+                  {
+                    "content": "Additionner et simplifier les électrons"
+                  },
+                  {
+                    "content": "Vérifier atomes et charges"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un atelier de ferblanterie d'Abidjan, un élève observe des réactions entre métaux et ions métalliques. Tu écris les équations bilans avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le zinc réagit avec les ions plomb $\\mathrm{Pb^{2+}}$. Quelle est l'équation bilan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : réducteur Zn, oxydant $\\mathrm{Pb^{2+}}$. Étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{Pb^{2+} + 2e^{-} = Pb}$. Étape 3 — Multiplier : inutile, 2 électrons de chaque côté. Étape 4 — Additionner : $\\mathrm{Zn + Pb^{2+} \\rightarrow  Zn^{2+} + Pb}$. Étape 5 — Vérifier : charges +2 et +2. Garder des électrons dans le bilan serait une erreur.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{Zn + Pb^{2+} \\rightarrow  Zn^{2+} + Pb}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{Zn + Pb^{2+} \\rightarrow  Zn^{2+} + Pb + 2e^{-}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{Zn^{2+} + Pb \\rightarrow  Zn + Pb^{2+}}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Chaque demi-équation échange 2 électrons."
+              },
+              {
+                "content": "Le fer réagit avec les ions plomb : $\\mathrm{Fe + Pb^{2+} \\rightarrow  Fe^{2+} + Pb}$. Combien d'électrons un atome de fer cède-t-il ?",
+                "question_type": "numeric",
+                "unit": "électrons",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le réducteur est Fe, l'oxydant $\\mathrm{Pb^{2+}}$. Étape 2 — Écrire la demi-équation du réducteur : $\\mathrm{Fe = Fe^{2+} + 2e^{-}}$. Il cède 2 électrons.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'équation bilan d'une réaction d'oxydoréduction, on écrit toujours les électrons échangés.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Additionner et simplifier les électrons : les électrons cédés par le réducteur sont captés par l'oxydant, ils se simplifient et n'apparaissent plus dans le bilan. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Classification qualitative des métaux",
+          "remember": "Un métal est un **réducteur** : il cède des électrons. On classe les métaux d'après l'expérience, du plus réducteur au moins réducteur : **Al, Zn, Fe, (H2), Cu, Ag**. Le dihydrogène H2 (couple $\\mathrm{H_{3}O^{+}/H_{2}}$, demi-équation $\\mathrm{2H_{3}O^{+} + 2e^{-} = H_{2} + 2H_{2}O}$) sert de repère. **Règle** : un métal réagit avec les ions d'un métal situé **plus bas** que lui, jamais avec les ions d'un métal situé plus haut. Al, Zn et Fe sont situés plus haut que H2 : l'acide chlorhydrique dilué les attaque et libère du dihydrogène ($\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$). Cu et Ag ne sont pas attaqués. Couleurs en solution : $\\mathrm{Cu^{2+}}$ bleu, $\\mathrm{Fe^{2+}}$ vert pâle, $\\mathrm{Zn^{2+}}$ et $\\mathrm{Al^{3+}}$ incolores.",
+          "method": [
+            "Écrire les deux couples en présence et les placer dans le classement : Al, Zn, Fe, H2, Cu, Ag, du plus réducteur au moins réducteur.",
+            "Repérer le métal (ou le dihydrogène) qui joue le rôle de réducteur et l'ion qui joue le rôle d'oxydant, puis leur place dans le classement.",
+            "Appliquer la règle : la réaction a lieu si le réducteur est situé plus haut que le métal de l'ion ; sinon il n'y a pas de réaction.",
+            "Conclure : s'il y a réaction, écrire l'équation bilan et dire ce qu'on observe ; sinon écrire $\\mathrm{ pas de réaction }$."
+          ],
+          "example": {
+            "statement": "On plonge un fil de cuivre dans une solution de nitrate d'argent (ions $\\mathrm{Ag^{+}}$). Que se passe-t-il ?",
+            "steps": [
+              "Écrire : les couples sont $\\mathrm{Cu^{2+}/Cu}$ et $\\mathrm{Ag^{+}/Ag}$ ; dans le classement, Cu est situé plus haut que Ag.",
+              "Repérer : le réducteur est le métal Cu, l'oxydant est l'ion $\\mathrm{Ag^{+}}$. Cu est plus haut que Ag, donc plus réducteur.",
+              "Appliquer la règle : le réducteur Cu est situé plus haut que le métal Ag de l'ion, donc la réaction a lieu.",
+              "Conclure : $\\mathrm{Cu = Cu^{2+} + 2e^{-}}$ et $\\mathrm{Ag^{+} + e^{-} = Ag}$ (× 2), soit $\\mathrm{Cu + 2Ag^{+} \\rightarrow  Cu^{2+} + 2Ag}$. On observe un dépôt gris brillant d'argent sur le fil et la solution devient bleue."
+            ]
+          },
+          "pitfall": "Ne pas croire que la réaction a lieu dans les deux sens. Contre-exemple : un fil d'argent plongé dans une solution de sulfate de cuivre(II) ne réagit pas, car Ag est situé plus bas que Cu : la solution reste bleue et le fil reste gris. L'équation $\\mathrm{Ag + Cu^{2+} \\rightarrow  ...}$ est fausse. Regarde toujours la place du réducteur d'abord.",
+          "figure": "classement-metaux",
+          "exercise": {
+            "title": "Prévoir une réaction avec le classement",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : placer les couples dans le classement, repérer réducteur et oxydant, appliquer la règle, conclure.",
+            "exercise_type": "fixation",
+            "figure": "classement-metaux",
+            "questions": [
+              {
+                "content": "Classe ces métaux du plus réducteur au moins réducteur.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire et placer dans le classement : l'ordre à connaître est Al, Zn, Fe, Cu, Ag. L'aluminium cède le plus facilement ses électrons, l'argent le moins facilement. Mélanger Cu et Fe est l'erreur classique : le fer est plus réducteur que le cuivre, car le fer réagit avec l'acide et avec les ions cuivre(II), pas l'inverse.",
+                "answers": [
+                  {
+                    "content": "Aluminium Al"
+                  },
+                  {
+                    "content": "Zinc Zn"
+                  },
+                  {
+                    "content": "Fer Fe"
+                  },
+                  {
+                    "content": "Cuivre Cu"
+                  },
+                  {
+                    "content": "Argent Ag"
+                  }
+                ]
+              },
+              {
+                "content": "Une lame de zinc est plongée dans une solution de sulfate de fer(II) (ions $\\mathrm{Fe^{2+}}$). Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les couples : $\\mathrm{Zn^{2+}/Zn}$ et $\\mathrm{Fe^{2+}/Fe}$. Étape 2 — Repérer : réducteur Zn, oxydant $\\mathrm{Fe^{2+}}$. Étape 3 — Appliquer la règle : Zn est situé plus haut que Fe, donc la réaction a lieu. Étape 4 — Conclure : $\\mathrm{Zn + Fe^{2+} \\rightarrow  Zn^{2+} + Fe}$, avec un dépôt de fer sur la lame. Dire qu'il n'y a pas de réaction reviendrait à placer le zinc sous le fer.",
+                "answers": [
+                  {
+                    "content": "Il y a réaction : $\\mathrm{Zn + Fe^{2+} \\rightarrow  Zn^{2+} + Fe}$, un dépôt de fer se forme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il n'y a pas de réaction, car le zinc est situé plus bas que le fer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il y a réaction : $\\mathrm{Fe + Zn^{2+} \\rightarrow  Fe^{2+} + Zn}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un fil de cuivre plongé dans une solution de sulfate de zinc se recouvre de zinc.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire les couples : $\\mathrm{Cu^{2+}/Cu}$ et $\\mathrm{Zn^{2+}/Zn}$. Étape 2 — Repérer : réducteur Cu, oxydant $\\mathrm{Zn^{2+}}$. Étape 3 — Appliquer la règle : Cu est situé plus bas que Zn, donc il ne peut pas réduire les ions $\\mathrm{Zn^{2+}}$. Étape 4 — Conclure : pas de réaction. L'affirmation est fausse. Seul le zinc réduirait les ions cuivre(II).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels métaux sont attaqués par l'acide chlorhydrique dilué, avec dégagement de dihydrogène ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Placer dans le classement : le dihydrogène H2 (couple $\\mathrm{H_{3}O^{+}/H_{2}}$) est un repère. Étape 3 — Appliquer la règle : un métal situé plus haut que H2 réagit avec les ions $\\mathrm{H_{3}O^{+}}$ de l'acide : ce sont Al, Zn et Fe. Cu et Ag sont situés plus bas : ils ne sont pas attaqués. Étape 4 — Conclure : par exemple $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$.",
+                "answers": [
+                  {
+                    "content": "L'aluminium Al",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le zinc Zn",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le fer Fe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le cuivre Cu",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'argent Ag",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un fil de cuivre réagit avec les ions argent : $\\mathrm{Cu + 2Ag^{+} \\rightarrow  Cu^{2+} + 2Ag}$. Combien d'ions $\\mathrm{Ag^{+}}$ sont consommés par atome de cuivre ?",
+                "question_type": "numeric",
+                "unit": "ions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire les couples : $\\mathrm{Cu^{2+}/Cu}$ et $\\mathrm{Ag^{+}/Ag}$. Étape 3 — Appliquer la règle : Cu est situé plus haut que Ag, la réaction a lieu. Étape 4 — Conclure avec l'équation bilan : Cu cède 2 électrons et chaque $\\mathrm{Ag^{+}}$ n'en capte qu'un, il faut donc 2 ions $\\mathrm{Ag^{+}}$ par atome de cuivre.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque expérience à ce qu'on observe.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Appliquer la règle : Cu est plus haut que Ag (réaction, dépôt d'argent, solution bleue de $\\mathrm{Cu^{2+}}$). Zn est plus haut que Cu (réaction, dépôt rouge de cuivre, bleu qui disparaît). Ag est plus bas que Cu (pas de réaction). Fe est plus haut que H2 (dégagement de dihydrogène, ions $\\mathrm{Fe^{2+}}$ vert pâle).",
+                "answers": [
+                  {
+                    "content": "Un fil de cuivre dans une solution de nitrate d'argent",
+                    "match": "Dépôt gris brillant et solution qui devient bleue"
+                  },
+                  {
+                    "content": "Une lame de zinc dans une solution de sulfate de cuivre(II)",
+                    "match": "Dépôt rouge et solution bleue qui se décolore"
+                  },
+                  {
+                    "content": "Un fil d'argent dans une solution de sulfate de cuivre(II)",
+                    "match": "Aucun changement"
+                  },
+                  {
+                    "content": "De la poudre de fer dans l'acide chlorhydrique dilué",
+                    "match": "Dégagement gazeux et solution vert pâle"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Au marché de Treichville, une vendeuse de casseroles en aluminium et un forgeron de Yopougon se demandent quels métaux réagissent avec les acides et les solutions d'ions. Tu utilises le classement de la fiche.",
+            "questions": [
+              {
+                "content": "Le cuivre Cu est attaqué par l'acide chlorhydrique dilué, avec dégagement de dihydrogène.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Placer dans le classement : Cu est situé plus bas que H2. Étape 3 — Appliquer la règle : un métal situé plus bas que H2 ne réagit pas avec les ions $\\mathrm{H_{3}O^{+}}$. Étape 4 — Conclure : pas de réaction. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Regarde si Cu est au-dessus ou en dessous de H2."
+              },
+              {
+                "content": "Un morceau de fer est plongé dans une solution de nitrate d'argent. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les couples : $\\mathrm{Fe^{2+}/Fe}$ et $\\mathrm{Ag^{+}/Ag}$. Étape 3 — Appliquer la règle : Fe est situé plus haut que Ag, la réaction a lieu. Étape 4 — Conclure : $\\mathrm{Fe + 2Ag^{+} \\rightarrow  Fe^{2+} + 2Ag}$, avec un dépôt d'argent. Prétendre qu'il n'y a pas de réaction reviendrait à placer le fer sous l'argent.",
+                "answers": [
+                  {
+                    "content": "Il y a réaction : $\\mathrm{Fe + 2Ag^{+} \\rightarrow  Fe^{2+} + 2Ag}$, avec un dépôt d'argent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il n'y a pas de réaction, car le fer est situé plus bas que l'argent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il y a réaction : $\\mathrm{Ag + Fe^{2+} \\rightarrow  Ag^{+} + Fe}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le classement, le métal le plus réducteur parmi Al, Fe et Ag est ___ (écris son symbole).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Placer dans le classement : l'ordre est Al, Zn, Fe, H2, Cu, Ag. Parmi Al, Fe et Ag, c'est Al qui est situé le plus haut, donc le plus réducteur.",
+                "answers": [
+                  {
+                    "content": "Al",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le clou de l'atelier de menuiserie de Daloa",
+          "statement": "Dans l'atelier d'un menuisier de Daloa, un apprenti plonge un clou en fer dans une solution bleue de sulfate de cuivre(II). Après quelques minutes, le clou est couvert d'un dépôt rouge et la solution devient vert pâle. Classement à utiliser, du plus réducteur au moins réducteur : Al, Zn, Fe, H2, Cu, Ag.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels sont les deux couples oxydant/réducteur en présence ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 1, étape 1 — Écrire l'espèce avant et après : Fe devient $\\mathrm{Fe^{2+}}$ (solution vert pâle) et $\\mathrm{Cu^{2+}}$ devient Cu (dépôt rouge). Étape 4 — Écrire le couple sous la forme oxydant/réducteur : $\\mathrm{Fe^{2+}/Fe}$ et $\\mathrm{Cu^{2+}/Cu}$. Les écrire dans l'ordre $\\mathrm{Fe/Fe^{2+}}$ inverse l'oxydant et le réducteur ; croiser les espèces ($\\mathrm{Cu^{2+}/Fe}$) n'a pas de sens, car un couple relie un ion à son propre métal.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Fe^{2+}/Fe}$ et $\\mathrm{Cu^{2+}/Cu}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Fe/Fe^{2+}}$ et $\\mathrm{Cu/Cu^{2+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Cu^{2+}/Fe}$ et $\\mathrm{Fe^{2+}/Cu}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle espèce joue le rôle d'oxydant qui réagit ? Choisis : ___",
+              "question_type": "select",
+              "explanation": "Notion 1, étape 3 — Nommer : l'oxydant est l'espèce qui capte des électrons et se réduit. Ici $\\mathrm{Cu^{2+}}$ devient Cu en gagnant 2 électrons (la charge passe de +2 à 0). Le fer Fe perd des électrons : c'est le réducteur.",
+              "answers": [
+                {
+                  "content": "l'ion $\\mathrm{Cu^{2+}}$",
+                  "correct": true
+                },
+                {
+                  "content": "le fer Fe",
+                  "correct": false
+                },
+                {
+                  "content": "l'ion $\\mathrm{Fe^{2+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "le cuivre Cu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le dépôt rouge sur le clou est du métal ___ (écris son nom).",
+              "question_type": "fill_blank",
+              "explanation": "Notion 4, étape 4 — Conclure : les ions $\\mathrm{Cu^{2+}}$ captent des électrons et deviennent des atomes de cuivre, qui se déposent sur le clou. Le dépôt rouge est donc du cuivre.",
+              "answers": [
+                {
+                  "content": "cuivre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation bilan de la réaction ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 3, étape 1 — Repérer : réducteur Fe, oxydant $\\mathrm{Cu^{2+}}$. Étape 2 — Écrire : $\\mathrm{Fe = Fe^{2+} + 2e^{-}}$ et $\\mathrm{Cu^{2+} + 2e^{-} = Cu}$. Étape 3 — Multiplier : inutile, 2 électrons de chaque côté. Étape 4 — Additionner : $\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{2+} + Cu}$. Étape 5 — Vérifier : charges +2 et +2. $\\mathrm{Fe^{3+}}$ serait faux, car l'oxydant ne capte que 2 électrons.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{2+} + Cu}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{3+} + Cu}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Fe^{2+} + Cu \\rightarrow  Fe + Cu^{2+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Fe + 2Cu^{2+} \\rightarrow  Fe^{2+} + 2Cu}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si tous les ions cuivre(II) ont réagi, la solution n'est plus bleue.",
+              "question_type": "true_false",
+              "explanation": "Notion 4, étape 4 — Conclure : la couleur bleue est celle des ions $\\mathrm{Cu^{2+}}$. Quand ils ont tous été transformés en cuivre, la solution contient seulement des ions $\\mathrm{Fe^{2+}}$ (vert pâle) et des ions sulfate : elle n'est plus bleue. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Notion 1, étape 2 — Comparer les charges : Fe passe de 0 à +2, il perd 2 électrons et s'oxyde ; $\\mathrm{Cu^{2+}}$ passe de +2 à 0, il gagne 2 électrons et se réduit. Le cuivre ne s'oxyde pas ici, le fer n'est pas l'oxydant, et les ions sulfate sont spectateurs : ils ne captent aucun électron.",
+              "answers": [
+                {
+                  "content": "Un atome de fer perd 2 électrons",
+                  "correct": true
+                },
+                {
+                  "content": "Les ions $\\mathrm{Cu^{2+}}$ se réduisent",
+                  "correct": true
+                },
+                {
+                  "content": "Le fer est l'oxydant de la réaction",
+                  "correct": false
+                },
+                {
+                  "content": "Le cuivre s'oxyde",
+                  "correct": false
+                },
+                {
+                  "content": "Les ions sulfate captent les électrons du fer",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le fil de cuivre du bijoutier de Grand-Bassam",
+          "statement": "Un bijoutier de Grand-Bassam plonge un fil de cuivre dans une solution incolore de nitrate d'argent. Classement à utiliser, du plus réducteur au moins réducteur : Al, Zn, Fe, H2, Cu, Ag.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle observation fait-on au bout de quelque temps ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 4, étape 1 — Écrire les couples : $\\mathrm{Cu^{2+}/Cu}$ et $\\mathrm{Ag^{+}/Ag}$. Étape 3 — Appliquer la règle : Cu est situé plus haut que Ag, la réaction a lieu. Étape 4 — Conclure : il se forme de l'argent (dépôt gris brillant) et des ions $\\mathrm{Cu^{2+}}$ qui colorent la solution en bleu. Un dépôt rouge serait du cuivre : le cuivre est ici le réducteur, il disparaît du fil au lieu de s'y déposer.",
+              "answers": [
+                {
+                  "content": "Un dépôt gris brillant d'argent se forme et la solution devient bleue",
+                  "correct": true
+                },
+                {
+                  "content": "Un dépôt rouge de cuivre se forme sur le fil",
+                  "correct": false
+                },
+                {
+                  "content": "Rien ne se passe, car le cuivre est moins réducteur que l'argent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation bilan de la réaction ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 3, étape 1 — Repérer : réducteur Cu, oxydant $\\mathrm{Ag^{+}}$. Étape 2 — Écrire : $\\mathrm{Cu = Cu^{2+} + 2e^{-}}$ et $\\mathrm{Ag^{+} + e^{-} = Ag}$. Étape 3 — Multiplier la seconde par 2. Étape 4 — Additionner : $\\mathrm{Cu + 2Ag^{+} \\rightarrow  Cu^{2+} + 2Ag}$. Étape 5 — Vérifier : charges +2 et +2. $\\mathrm{Cu + Ag^{+} \\rightarrow  Cu^{2+} + Ag}$ oublie de multiplier : charges +1 et +2.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Cu + 2Ag^{+} \\rightarrow  Cu^{2+} + 2Ag}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Cu + Ag^{+} \\rightarrow  Cu^{2+} + Ag}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2Cu + Ag^{+} \\rightarrow  2Cu^{2+} + Ag}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Cu^{2+} + 2Ag \\rightarrow  Cu + 2Ag^{+}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand 3 atomes de cuivre réagissent, combien d'ions argent sont consommés ?",
+              "question_type": "numeric",
+              "unit": "ions",
+              "tolerance": 0,
+              "explanation": "Notion 3, étape 3 — Multiplier : un atome de cuivre cède 2 électrons et chaque ion argent n'en capte qu'un, donc 2 ions argent par atome de cuivre (équation $\\mathrm{Cu + 2Ag^{+} \\rightarrow  Cu^{2+} + 2Ag}$). Pour 3 atomes de cuivre : 3 × 2 = 6 ions argent.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un fil d'argent plongé dans une solution de sulfate de cuivre(II) se recouvre de cuivre.",
+              "question_type": "true_false",
+              "explanation": "Notion 4, étape 3 — Appliquer la règle : le réducteur Ag est situé plus bas que Cu, il ne peut pas réduire les ions $\\mathrm{Cu^{2+}}$. Étape 4 — Conclure : pas de réaction. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles demi-équations se produisent dans l'expérience du bijoutier ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Notion 2, étape 3 — Calculer les charges. $\\mathrm{Cu = Cu^{2+} + 2e^{-}}$ est l'oxydation du cuivre (charges 0 et +2 − 2 = 0). $\\mathrm{Ag^{+} + e^{-} = Ag}$ est la réduction des ions argent (+1 − 1 = 0). $\\mathrm{Ag = Ag^{+} + e^{-}}$ serait l'oxydation de l'argent, qui n'a pas lieu. $\\mathrm{Cu^{2+} + e^{-} = Cu}$ et $\\mathrm{Ag^{+} + 2e^{-} = Ag}$ ont des charges inégales (+1 et 0, −1 et 0).",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Cu = Cu^{2+} + 2e^{-}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Ag^{+} + e^{-} = Ag}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Ag = Ag^{+} + e^{-}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Cu^{2+} + e^{-} = Cu}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Ag^{+} + 2e^{-} = Ag}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Classer trois métaux au lycée de Man",
+          "statement": "Au laboratoire du lycée de Man, des élèves étudient le zinc, le fer et le cuivre. Expérience (a) : une lame de zinc est plongée dans une solution de sulfate de fer(II) (vert pâle) ; un dépôt métallique apparaît et la solution se décolore. Expérience (b) : une lame de cuivre plongée dans la même solution ne change pas. Expérience (c) : l'acide chlorhydrique dilué attaque le zinc et le fer avec dégagement de dihydrogène, mais pas le cuivre. Le couple de l'acide a pour demi-équation 2 H3O+ + 2 e- = H2 + 2 H2O.",
+          "exercise_type": "evaluation",
+          "figure": "classement-metaux",
+          "questions": [
+            {
+              "content": "D'après les expériences, classe les trois métaux du plus réducteur au moins réducteur.",
+              "question_type": "ordering",
+              "explanation": "Notion 4, étape 3 — Appliquer la règle. Expérience (a) : le zinc réagit avec les ions $\\mathrm{Fe^{2+}}$, donc Zn est situé plus haut que Fe. Expérience (b) : le cuivre ne réagit pas avec $\\mathrm{Fe^{2+}}$, donc Cu est situé plus bas que Fe. Expérience (c) confirme : Zn et Fe sont au-dessus de H2, Cu en dessous. Classement : Zn, Fe, Cu.",
+              "answers": [
+                {
+                  "content": "Zinc Zn"
+                },
+                {
+                  "content": "Fer Fe"
+                },
+                {
+                  "content": "Cuivre Cu"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi n'observe-t-on aucun changement dans l'expérience (b) ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 4, étape 3 — Appliquer la règle : le réducteur Cu est situé plus bas que Fe dans le classement, il ne peut donc pas céder d'électrons aux ions $\\mathrm{Fe^{2+}}$. Étape 4 — Conclure : pas de réaction. Dire que Cu est plus réducteur que Fe serait l'erreur inverse : le cuivre ne réagirait alors pas avec l'acide, mais il réduirait $\\mathrm{Fe^{2+}}$. Et un ion $\\mathrm{Fe^{2+}}$ n'est pas un réducteur du cuivre.",
+              "answers": [
+                {
+                  "content": "Le cuivre est moins réducteur que le fer : il ne peut pas céder d'électrons aux ions $\\mathrm{Fe^{2+}}$",
+                  "correct": true
+                },
+                {
+                  "content": "Le cuivre est plus réducteur que le fer, mais la solution est trop diluée",
+                  "correct": false
+                },
+                {
+                  "content": "Les ions $\\mathrm{Fe^{2+}}$ sont un réducteur trop faible pour réagir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation bilan de l'expérience (a) ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 3, étape 1 — Repérer : réducteur Zn ($\\mathrm{Zn^{2+}/Zn}$), oxydant $\\mathrm{Fe^{2+}}$ ($\\mathrm{Fe^{2+}/Fe}$). Étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{Fe^{2+} + 2e^{-} = Fe}$. Étape 3 — Multiplier : inutile, 2 électrons de chaque côté. Étape 4 — Additionner : $\\mathrm{Zn + Fe^{2+} \\rightarrow  Zn^{2+} + Fe}$. Étape 5 — Vérifier : charges +2 et +2. L'équation inverse décrirait une réaction qui n'a pas lieu.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Zn + Fe^{2+} \\rightarrow  Zn^{2+} + Fe}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Fe + Zn^{2+} \\rightarrow  Fe^{2+} + Zn}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Zn + 2Fe^{2+} \\rightarrow  Zn^{2+} + 2Fe}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Zn + Fe^{2+} \\rightarrow  Zn^{2+} + Fe + 2e^{-}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le zinc réagit avec l'acide : $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$. Combien d'ions $\\mathrm{H_{3}O^{+}}$ un atome de zinc consomme-t-il ?",
+              "question_type": "numeric",
+              "unit": "ions",
+              "tolerance": 0,
+              "explanation": "Notion 3, étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{2H_{3}O^{+} + 2e^{-} = H_{2} + 2H_{2}O}$. Étape 3 — Multiplier : inutile, 2 électrons de chaque côté. Étape 4 — Additionner : $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$. Un atome de zinc cède 2 électrons, il faut donc 2 ions $\\mathrm{H_{3}O^{+}}$ (chacun captant 1 électron).",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une solution de sulfate de cuivre(II) peut être conservée sans réagir dans un récipient en fer.",
+              "question_type": "true_false",
+              "explanation": "Notion 4, étape 3 — Appliquer la règle : le fer est situé plus haut que le cuivre, il réagit avec les ions $\\mathrm{Cu^{2+}}$. Étape 4 — Conclure : $\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{2+} + Cu}$ : le récipient serait attaqué et se couvrirait de cuivre. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un planteur veut préparer une solution de sulfate de cuivre(II) dans un seau en fer. Explique pourquoi ce n'est pas une bonne idée et écris l'équation de la réaction.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Le fer est situé plus haut que le cuivre, donc…",
+              "criteria": [
+                "Le classement est utilisé : le fer est plus haut que le cuivre",
+                "Il est dit que le fer cède des électrons aux ions cuivre(II)",
+                "L'équation bilan Fe + Cu2+ -> Fe2+ + Cu est correcte",
+                "Les conséquences sont citées : dépôt de cuivre, seau attaqué"
+              ],
+              "explanation": "Corrigé modèle : Le fer est situé plus haut que le cuivre dans le classement : c'est un réducteur plus fort que le cuivre. Il peut donc céder des électrons aux ions cuivre(II) de la solution. La réaction a lieu : $\\mathrm{Fe + Cu^{2+} \\rightarrow  Fe^{2+} + Cu}$. Le seau se couvre d'un dépôt de cuivre, il est attaqué et la solution perd ses ions cuivre(II). Ce qui rapporte les points : classement utilisé (1 point), réaction annoncée avec la raison (1 point), équation juste avec les bons coefficients (1 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Séparer le cuivre et le zinc à Yamoussoukro",
+          "statement": "Au lycée de Yamoussoukro, une élève verse un excès de poudre de zinc dans une solution bleue de sulfate de cuivre(II). Elle attend que la solution se décolore, puis elle filtre et recueille le solide, mélange de cuivre rouge et de zinc restant. Elle verse ensuite sur ce solide de l'acide chlorhydrique dilué. Le couple de l'acide a pour demi-équation 2 H3O+ + 2 e- = H2 + 2 H2O. Classement à utiliser, du plus réducteur au moins réducteur : Al, Zn, Fe, H2, Cu, Ag.",
+          "exercise_type": "evaluation",
+          "figure": "classement-metaux",
+          "questions": [
+            {
+              "content": "Pourquoi le zinc réagit-il avec les ions cuivre(II) ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 4, étape 1 — Écrire les couples : $\\mathrm{Zn^{2+}/Zn}$ et $\\mathrm{Cu^{2+}/Cu}$. Étape 2 — Repérer : réducteur Zn, oxydant $\\mathrm{Cu^{2+}}$. Étape 3 — Appliquer la règle : Zn est situé plus haut que Cu, donc plus réducteur : il cède des électrons aux ions $\\mathrm{Cu^{2+}}$. Prétendre le contraire reviendrait à placer le cuivre au-dessus du zinc.",
+              "answers": [
+                {
+                  "content": "Le zinc est situé plus haut que le cuivre : il est plus réducteur et cède des électrons aux ions $\\mathrm{Cu^{2+}}$",
+                  "correct": true
+                },
+                {
+                  "content": "Le zinc est situé plus bas que le cuivre : il capte les électrons des ions $\\mathrm{Cu^{2+}}$",
+                  "correct": false
+                },
+                {
+                  "content": "Le zinc est un oxydant, car il s'oxyde",
+                  "correct": false
+                },
+                {
+                  "content": "Les ions sulfate attirent le zinc",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation bilan de la première réaction ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 3, étape 1 — Repérer : réducteur Zn, oxydant $\\mathrm{Cu^{2+}}$. Étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{Cu^{2+} + 2e^{-} = Cu}$. Étape 3 — Multiplier : inutile, 2 électrons de chaque côté. Étape 4 — Additionner : $\\mathrm{Zn + Cu^{2+} \\rightarrow  Zn^{2+} + Cu}$. Étape 5 — Vérifier : charges +2 et +2. Les ions sulfate sont spectateurs, ils n'apparaissent pas.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{Zn + Cu^{2+} \\rightarrow  Zn^{2+} + Cu}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Cu + Zn^{2+} \\rightarrow  Cu^{2+} + Zn}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{Zn + Cu^{2+} \\rightarrow  Zn^{2+} + Cu + 2e^{-}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2Zn + Cu^{2+} \\rightarrow  2Zn^{2+} + Cu}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand tous les ions cuivre(II) ont réagi, la solution est incolore.",
+              "question_type": "true_false",
+              "explanation": "Notion 4, étape 4 — Conclure : la couleur bleue disparaît avec les ions $\\mathrm{Cu^{2+}}$. Les ions $\\mathrm{Zn^{2+}}$ formés sont incolores, et les ions sulfate aussi. La solution est donc incolore. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que se passe-t-il quand l'acide chlorhydrique dilué est versé sur le solide filtré ?",
+              "question_type": "single_choice",
+              "explanation": "Notion 4, étape 3 — Appliquer la règle : Zn est situé plus haut que H2, il est attaqué par l'acide ; Cu est situé plus bas, il ne l'est pas. Le zinc a été mis en excès, il en reste dans le solide : on observe donc un dégagement de dihydrogène, et il reste un solide rouge, le cuivre. Dire qu'il n'y a rien oublie l'excès de zinc ; dire que le cuivre est attaqué le place au-dessus de H2.",
+              "answers": [
+                {
+                  "content": "Du dihydrogène se dégage (le zinc restant est attaqué) et il reste du cuivre rouge",
+                  "correct": true
+                },
+                {
+                  "content": "Rien ne se passe, car tout le zinc a été consommé",
+                  "correct": false
+                },
+                {
+                  "content": "Le cuivre est attaqué et se dissout",
+                  "correct": false
+                },
+                {
+                  "content": "Le solide reste intact, car aucun métal n'est attaqué",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète l'équation de l'attaque du zinc par l'acide : $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} +}$ ___ $\\mathrm{H_{2}O}$",
+              "question_type": "fill_blank",
+              "explanation": "Notion 3, étape 2 — Écrire : $\\mathrm{Zn = Zn^{2+} + 2e^{-}}$ et $\\mathrm{2H_{3}O^{+} + 2e^{-} = H_{2} + 2H_{2}O}$. Étape 4 — Additionner : $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$. Étape 5 — Vérifier : 6 H et 2 O à gauche ; 2 H (dans H2) + 4 H = 6 H et 2 O à droite ; charges +2 et +2. Le coefficient est 2.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'élève affirme que cette méthode permet de récupérer du cuivre pur à partir du mélange de cuivre et de zinc. Rédige un paragraphe qui explique pourquoi, en utilisant le classement, puis écris l'équation de la réaction qui élimine le zinc.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Le zinc est situé plus haut que H2, donc…",
+              "criteria": [
+                "Le classement est utilisé pour Zn et Cu par rapport à H2",
+                "Le zinc est attaqué, le cuivre ne l'est pas",
+                "L'équation Zn + 2H3O+ -> Zn2+ + H2 + 2H2O est correcte",
+                "Il est conclu que le cuivre reste et peut être récupéré"
+              ],
+              "explanation": "Corrigé modèle : Dans le classement, le zinc est situé plus haut que H2 et le cuivre plus bas. Le zinc est donc attaqué par l'acide chlorhydrique dilué : $\\mathrm{Zn + 2H_{3}O^{+} \\rightarrow  Zn^{2+} + H_{2} + 2H_{2}O}$, le zinc se dissout sous forme d'ions $\\mathrm{Zn^{2+}}$ et libère du dihydrogène. Le cuivre ne réagit pas, il reste solide. Après filtration et lavage, on récupère du cuivre pur. Répartition : classement utilisé pour les deux métaux (1 point), conclusion juste sur chaque métal (1 point), équation correcte (1 point), conclusion sur la récupération du cuivre (1 point).",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
