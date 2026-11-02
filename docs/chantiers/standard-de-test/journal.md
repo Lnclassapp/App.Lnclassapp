@@ -47,3 +47,15 @@
 - Rapport de chargement (`contenus:charger`) : « N leçon(s) examinée(s) : x créée(s), y ignorée(s), z remplacée(s), w à sujets rechargée(s) ».
 - Limite : une leçon créée par Staging dont la publication échoue reste en brouillon aux déploiements suivants (la leçon présente n'est plus touchée) ; l'erreur est journalisée, publication à la main.
 - Conséquence sur ADR-0122 et 0123 : amendées par l'ADR du chantier, non modifiées ici. Le jeu standard (comptes, établissements) n'est pas semé sur Develop par ce lot : ajout de données à confirmer.
+
+## Lot C — grand établissement et pages lentes
+
+- **Jeu** : `db/seeds/standard.rb` charge déjà le grand établissement (« Groupe Scolaire Modèle Savane », 42 classes, ~36 élèves par classe) et `activite.rb` y échantillonne l'activité (une classe par niveau, 8 élèves, 12 semaines) : de quoi remplir les pages d'une classe avec historique. **Seeds non touchés**, pas de `grand.rb` (non nécessaire). `bin/jeu-standard --reset` mesuré : **265 s** au total (plafond 300 s).
+- **Outil** : `bin/pages-lentes [--seuil=ms] [--role=eleve|enseignant|direction|equipe]` (tâche `pages:lentes`, `script/pages_lentes.rb`) : development seulement (RAILS_ENV, Railway, DATABASE_URL refusés avant Rails ; la tâche refuse aussi). Vraies requêtes par `ActionDispatch::Integration::Session` (login PIN, TOTP pour l'équipe), une page chauffée avant mesure, temps serveur, requêtes SQL (`sql.active_record`, SCHEMA et cache exclus), Bullet et traces de requêtes coupés. Signal au-dessus du seuil (500 ms) ou de 100 requêtes. Durée : 16 s pour 45 pages.
+- **Résultat sur le jeu complet** (seuil 500 ms, 100 requêtes) : **aucune page au-dessus des seuils**. Les plus lentes : élève « ma classe » 423 ms / 83 requêtes ; enseignant accueil 317 ms / 24 ; équipe fiche d'établissement 314 ms / 19 ; élève leçon 305 ms / 39 ; enseignant leçon de la classe 245 ms / 24 ; direction classe 203 ms / 11. Pages non mesurées : « mes annonces » (fermé à l'enseignant par le drapeau du pilote).
+- **Chantiers `optimize` proposés** (non signalés par le seuil, mais les plus chargées) :
+  1. `optimize eleve-ma-classe` : `/students/classroom`, 423 ms, 83 requêtes, cause probable : requêtes répétées par camarade ou par matière (N+1).
+  2. `optimize enseignant-accueil` : `/teachers`, 317 ms, 24 requêtes, cause probable : agrégats de toutes les classes de l'établissement (42) calculés à l'affichage.
+  3. `optimize equipe-fiche-etablissement` : `/teams/schools/:id`, 314 ms, 19 requêtes, cause probable : effectifs et activité des 42 classes comptés classe par classe.
+  4. `optimize eleve-lecon` : `/courses/:slug` côté élève, 305 ms, 39 requêtes, cause probable : état de chaque notion et exercice lu un par un.
+- Limite : mesure à froid de base de données non faite (pages chauffées) ; un seul enseignant et un seul élève (les plus actifs de la classe la plus active).
