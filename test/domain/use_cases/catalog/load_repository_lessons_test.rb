@@ -19,6 +19,12 @@ module UseCases
         attr_reader :rejections
         def initialize(loaded: {}) = (@loaded = loaded) && (@rejections = [])
         def last_loaded_checksum(kind:, file_name:) = @loaded[[ kind, file_name ]]
+        def fail_running_named(kind:, prefix:, at:)
+          (@failed_running ||= []) << [ kind, prefix, at ]
+          @orphans || 0
+        end
+        attr_reader :failed_running
+        attr_writer :orphans
         def record_rejection(**args) = @rejections << args
       end
 
@@ -434,6 +440,26 @@ module UseCases
           assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], taxonomy: Taxonomy.new(lookup), run_lesson: refused)).lessons)
           assert_equal %i[start run_lesson], @calls.map(&:first)
         end
+      end
+      # --- ADR-0123 §9 : un chargement tué laisse des rapports « en cours » qui bloqueraient le suivant ---
+
+      test "before loading, the running reports of an interrupted load are failed, and the log says how many" do
+        reports = Reports.new.tap { it.orphans = 2 }
+
+        summary = call(use_case(reports:))
+
+        assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
+        assert_equal [ [ "course_tree", "chargement-automatique-", @now ] ], reports.failed_running
+        assert_includes @logs, [ :warn, "[contenus] 2 import(s) d'un chargement interrompu passé(s) en échec" ]
+      end
+
+      test "with no orphan report the log says nothing about it, and Staging clears its orphans too" do
+        reports = Reports.new
+
+        call(use_case(reports:), name: "Staging")
+
+        assert_equal 1, reports.failed_running.size
+        assert_empty(@logs.select { it.last.include?("interrompu") })
       end
     end
   end

@@ -91,3 +91,13 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 
 Aucun établissement ni aucune classe n'est créé. Le journal du pré-déploiement dit ce qui a été créé, par type (« matières EDHC ; barème 24 entrée(s) ; DRENA 41 »). Comme pour les niveaux, une DRENA ou une entrée du barème supprimée revient au déploiement suivant. Chaque étape (référentiel, matières, barème, DRENA) est à l'abri : une interruption est journalisée avec son message et n'empêche ni les étapes suivantes ni le chargement. Le barème s'écrit en une transaction ; une entrée saisie à l'écran pendant le pré-déploiement serait comptée comme créée (sur-compte possible, jamais d'écriture de plus).
 
+## 9. Amendement du 2026-11-02 : un chargement tué en pleine leçon
+
+**Constat (Develop, déploiements `1f7bbe5e` puis `1b8fa823`).** Le second déploiement a remplacé le premier pendant son pré-déploiement et a tué le chargement après ~45 leçons ; lui-même avait trouvé le verrou pris et sauté le chargement.
+
+**Ce qui tient sans changement.**
+- L'écriture d'une leçon (import, dans la transaction du lot) et sa publication (cascade, dans sa transaction) sont chacune tout ou rien : une leçon coupée n'est jamais à moitié écrite ni à moitié publiée.
+- Coupée entre l'import et la publication : son rapport est terminé, l'empreinte ne change pas, la publication est reprise seule au déploiement suivant (`republished`). Coupée pendant l'import : pas de rapport terminé, elle est réimportée entière.
+
+**Ce qui change.** Le rapport de la leçon coupée reste « en cours », et un rapport en cours fait refuser tout import du même type pendant 10 minutes (`StartImport`, `fail_stale`) : un déploiement relancé aussitôt aurait laissé chaque leçon `not_started`. Avant de charger, sous le verrou consultatif (aucun autre chargement ne tourne), le use case passe en échec les rapports `course_tree` encore en cours dont le fichier s'appelle `chargement-automatique-…` (`ImportReportRepository#fail_running_named`), et le journalise. Un import à la main en cours n'est pas touché : il fait seulement attendre les leçons au déploiement suivant (`not_started`, journalisé). Le démarrage qui trouve le verrou pris le dit à la sortie et au journal (« verrou pris par un autre démarrage : chargement sauté »), le déploiement suivant reprend.
+

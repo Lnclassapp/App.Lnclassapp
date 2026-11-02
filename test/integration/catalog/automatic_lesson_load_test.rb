@@ -434,4 +434,17 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     assert_equal [ 1, 0, 1, 0, 0 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ]
   end
+
+  # ADR-0123 §9 : le cas de Develop du 2026-11-02 — un déploiement a tué le chargement en pleine leçon ; le suivant, dans les 10 minutes,
+  # trouve son rapport « en cours » : il le passe en échec et charge, au lieu de refuser chaque leçon (import déjà en cours).
+  test "a report left running by a killed load does not block the next one, and the lesson is loaded" do
+    seed_referential
+    create_import_report(kind: "course_tree", imported_by: @oldest, status: "importing", files: [ { "name" => IMPORT_NAME, "byte_size" => 1 } ])
+
+    output = charger("Develop")
+
+    assert_includes output, "#{IMPORT_NAME} : loaded"
+    assert_equal [ "failed" ], Orm::ImportReport.where(status: %w[failed]).pluck(:status)
+    assert_equal 0, Orm::ImportReport.where(status: %w[queued validating importing]).count
+  end
 end

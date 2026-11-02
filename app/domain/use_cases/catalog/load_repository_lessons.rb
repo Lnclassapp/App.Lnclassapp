@@ -5,6 +5,8 @@ module UseCases
   module Catalog
     class LoadRepositoryLessons
       KIND = "course_tree"
+      # Le début du nom de fichier de chaque ligne d'import du chargement automatique (RepositoryLessonSource).
+      IMPORT_PREFIX = "chargement-automatique-"
       # Journal d'un import refusé : ses premières erreurs, et seulement ces paramètres (aucune donnée personnelle).
       LOGGED_ERRORS = 3
       LOGGED_PARAMS = %i[keyword rule exception constraint].freeze
@@ -56,6 +58,7 @@ module UseCases
         return allowed if allowed.failure?
         return reject_unknown(stage, actor) if stage.unknown?
 
+        fail_orphans
         complete_referential if stage.whole_lessons?
         chosen, ignored = @source.lessons.map { [ it, stage.mode_for(level_directory: it.level_directory, subjects: it.subjects) ] }.partition(&:last)
         log_ignored(ignored.map(&:first))
@@ -71,6 +74,13 @@ module UseCases
         @reports.record_rejection(kind: KIND, checksum_sha256: Digest::SHA256.hexdigest("unknown_environment:#{stage.name}"),
                                   imported_by_id: actor.user_id, at: @clock.now, errors: [ error ])
         done(:unknown_environment)
+      end
+
+      # ADR-0123 §9 : un chargement tué en pleine leçon (déploiement remplacé) laisse son rapport « en cours », qui ferait refuser tout import
+      # du type pendant 10 minutes (StartImport) ; sous le verrou consultatif, aucun autre chargement ne tourne : ces rapports sont orphelins.
+      def fail_orphans
+        count = @reports.fail_running_named(kind: KIND, prefix: IMPORT_PREFIX, at: @clock.now)
+        @logger.warn("[contenus] #{count} import(s) d'un chargement interrompu passé(s) en échec") if count.positive?
       end
 
       # ADR-0123 §8 : Develop seul crée, avant le chargement, ce qui manque du référentiel de base ; journalisé. Un échec ne bloque rien.
