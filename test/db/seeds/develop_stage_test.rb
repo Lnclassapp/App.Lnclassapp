@@ -5,7 +5,8 @@ require "rake"
 # classes et comptes du jeu standard, sans rien supprimer ni modifier. Les leçons du manifeste restent à contenus:charger (ADR-0122/0123),
 # stubé ici. Les comptes équipe n'existent qu'avec STANDARD_TEAM_PIN (scellée) : jamais de PIN public sur un site ouvert.
 class DevelopStageTest < ActiveSupport::TestCase
-  KEYS = %w[RAILWAY_ENVIRONMENT_NAME PR_BASE_ENVIRONMENT DEMO_TEAM_PIN STANDARD_TEAM_PIN STANDARD_LESSONS_LIMIT TEAM_BOOTSTRAP_CONTACT].freeze
+  KEYS = %w[RAILWAY_ENVIRONMENT_NAME PR_BASE_ENVIRONMENT DEMO_TEAM_PIN STANDARD_TEAM_PIN STANDARD_LESSONS_LIMIT TEAM_BOOTSTRAP_CONTACT
+            STANDARD_ACTIVITY_SIZE].freeze
   SEEDS = Rails.root.join("db/seeds/standard")
 
   setup do
@@ -19,7 +20,8 @@ class DevelopStageTest < ActiveSupport::TestCase
   def seed(name: "Develop", team_pin: nil)
     previous = ENV.values_at(*KEYS)
     ENV.update("RAILWAY_ENVIRONMENT_NAME" => name, "PR_BASE_ENVIRONMENT" => nil, "DEMO_TEAM_PIN" => "8642",
-               "STANDARD_LESSONS_LIMIT" => nil, "STANDARD_TEAM_PIN" => team_pin, "TEAM_BOOTSTRAP_CONTACT" => nil)
+               "STANDARD_LESSONS_LIMIT" => nil, "STANDARD_TEAM_PIN" => team_pin, "TEAM_BOOTSTRAP_CONTACT" => nil,
+               "STANDARD_ACTIVITY_SIZE" => "reduite")
     stub_method(Rake::Task["contenus:charger"], :invoke, ->(*) { puts "[contenus] stub" }) do
       as_production { capture_io { load Rails.root.join("db/seeds.rb").to_s, true }.first }
     end
@@ -52,6 +54,33 @@ class DevelopStageTest < ActiveSupport::TestCase
     assert_operator Orm::ClassroomStudent.where(classroom_id: Orm::Classroom.where(school_id: jeu_schools.select(:id)).select(:id)).count, :>, 1500
     assert_equal 0, Orm::Course.count
     assert_includes output, "[contenus] stub"
+  end
+
+  # L'activité (Lot B) s'ajoute aux seuls comptes du jeu : un vrai élève qui a rejoint une classe du jeu, un vrai enseignant
+  # rattaché à un établissement du jeu (contacts triés avant ceux du jeu) ne sont ni rejoués ni redatés.
+  test "on Develop the activity plays only the accounts of the set and touches nothing that was there" do
+    previous = ENV.values_at("STANDARD_LESSONS_LIMIT", "STANDARD_QUIET")
+    ENV.update("STANDARD_LESSONS_LIMIT" => "27", "STANDARD_QUIET" => "1")
+    capture_io { load SEEDS.join("../standard.rb").to_s, true } # les leçons que contenus:charger aurait publiées
+    ENV.update("STANDARD_LESSONS_LIMIT" => previous[0], "STANDARD_QUIET" => previous[1])
+    lycee = Orm::School.find_by!(name: @identity.school_name("lycee"))
+    classroom = Orm::Classroom.where(school: lycee).find_by!(name: "1ère D")
+    student = Orm::User.create!(contact: "0100000002", role: "student", first_name: "Vrai", last_name: "Élève", gender: "male", pin: "1357")
+    link = Orm::ClassroomStudent.create!(classroom:, student:, primary: false, joined_at: 1.hour.ago.round, joined_via: "code")
+    teacher = Orm::User.create!(contact: "0500000002", role: "teacher", first_name: "Vrai", last_name: "Prof", gender: "male", pin: "1357")
+    staff = Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: lycee.id, primary: false, created_at: 1.hour.ago.round)
+    Orm::Material.find_each { Orm::TeacherSchoolMaterial.create!(teacher_id: teacher.id, school_id: lycee.id, material_id: it.id, created_at: 1.hour.ago) }
+
+    output = travel_to(Time.zone.local(2026, 11, 3, 10)) { seed }
+
+    assert_no_match "semis impossible", output
+    assert_operator Orm::ExerciseSession.where(student_id: Orm::ClassroomStudent.where(joined_via: "standard").select(:student_id)).count, :>, 0
+    assert_equal 0, Orm::ExerciseSession.where(student_id: student.id).count
+    assert_equal 0, Orm::ClassroomAssignment.where(assigned_by_id: teacher.id).count
+    assert_equal link.joined_at, link.reload.joined_at
+    assert_equal staff.created_at, staff.reload.created_at
+  ensure
+    ENV.update("STANDARD_LESSONS_LIMIT" => previous&.first, "STANDARD_QUIET" => previous&.last)
   end
 
   test "a second seed creates nothing twice" do

@@ -108,7 +108,7 @@ Lot 0 — Manifeste, identités fictives (contrats gelés)
 - **Fichiers**     : `db/seeds.rb` *(stade `develop` : `contenus` puis `standard`, échec du jeu imprimé et journalisé, jamais levé)*
                      `db/seeds/standard.rb` *(Develop : établissements, classes, comptes, pas de leçons ; contact pris par un autre compte laissé tel quel et signalé, partout ; équipe seulement avec `STANDARD_TEAM_PIN` scellée)*
                      `docs/guide/configuration.md` *(variable `STANDARD_TEAM_PIN` de Develop)*
-- **Dépend de**    : Lot H ; se fusionne avec F (leçons de Develop) sans conflit de fichier, avec B sur `db/seeds.rb` : quand B est fusionné, le stade `develop` reçoit aussi `activite`
+- **Dépend de**    : Lot H ; se fusionne avec F (leçons de Develop) sans conflit de fichier, avec B sur `db/seeds.rb` : B fusionné avant, le stade `develop` reçoit aussi `standard/activite`, qui ne joue que les comptes du jeu
 - **Test associé** : `test/db/seeds/develop_stage_test.rb` · `test/db/seeds/standard_seed_test.rb` (compte existant non modifié)
 - **Done quand**   : avec `RAILWAY_ENVIRONMENT_NAME=Develop` en production Rails, `db:seed` ajoute les 3 établissements, leurs classes et comptes, rien en double, aucun compte existant modifié, aucun compte équipe sans `STANDARD_TEAM_PIN` ; Staging et production : rien du jeu
 
