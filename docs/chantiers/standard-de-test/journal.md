@@ -106,6 +106,14 @@ Fichiers en défaut :
 - Limite : une leçon créée par Staging dont la publication échoue reste en brouillon aux déploiements suivants (la leçon présente n'est plus touchée) ; l'erreur est journalisée, publication à la main.
 - Conséquence sur ADR-0122 et 0123 : amendées par l'ADR du chantier, non modifiées ici. Le jeu standard (comptes, établissements) n'est pas semé sur Develop par ce lot : ajout de données à confirmer.
 
+## Lot G — recette, preuve de vague, règle de fusion
+
+- **Recette** : `docs/recette/` (README avec la table écran → parcours et la règle « on ne rejoue que ce qu'on touche », un parcours par rôle sur les comptes du jeu ; le parcours DRENA passe par le compte équipe terrain `0700003000`).
+- **Garde de la section de preuve : retirée après la revue.** Une garde locale dans `bin/ci-quiet` (corps lu dans `tmp/pr-body.md` ou par `gh api`) est contournable et, faute de `gh` dans nos sessions, restait toujours abstenue : une fausse assurance. La règle tient par le modèle de PR (`.github/pull_request_template.md`) et `conventions.md`. Si le porteur veut une vraie garde : une GitHub Action lisant le corps de la PR (`github.event.pull_request.body`, déclenchée aussi sur `edited`).
+- **Captures** : `test/system/catalog/lesson_capture_test.rb` (vide sans `CAPTURES_DIR`, 0,1 s déclarés dans `test_timings.yml`, ajouté à la dérogation du budget système) ; pleine page jusqu'à 12 000 px, 390 px et 1280 px, une leçon par matière.
+- **Preuve réelle** : `bin/preuve-vague docs/contenus/lecons-traitees/tle-d` (45 fichiers, 5 matières, 293 s, 1 processus) : valider.rb **ok** ; affichage **échec**, 4 leçons en défaut, les mêmes que celles du passage complet du Lot D (3 débordements en physique-chimie : `les-alcools`, `acides-carboxyliques-et-derives`, `les-amines` ; 1 `**` en SVT : `la-transmission-de-deux-caracteres-hereditaires-chez-les-etres-vivants`) ; captures **ok** (10 images). Verdict global ECHEC, code 1 : la vague tle-d n'est pas prouvée tant que ces 4 leçons ne sont pas corrigées (chantiers de contenus). Les captures ne sont pas arrêtées par un affichage en défaut : on voit le défaut.
+- **Découverte** : le test d'affichage d'un dossier de 45 fichiers compte plus de 50 tests avec ses pièges et passerait en parallèle (interblocages PostgreSQL, Lot D) : `bin/preuve-vague` impose `PARALLEL_WORKERS=1`.
+
 - **Lot D, après les corrections des leçons (#454, #455, #456, fusionnées le 2026-11-02)** : les 41 leçons en défaut du premier passage sont corrigées (2 causes applicatives — gras coupé par une formule, CSS des blocs d'exercice — et 1 figure EDHC trop haute) ; rejeu complet `LECONS=tout` : 417 leçons, 0 défaut. La tâche `lecons` du train peut donc être bloquante sans bloquer le train.
 
 ## Lot C — grand établissement et pages lentes
@@ -119,3 +127,5 @@ Fichiers en défaut :
   3. `optimize equipe-fiche-etablissement` : `/teams/schools/:id`, 278 ms, 19 requêtes, cause probable : effectifs et activité des 42 classes comptés classe par classe.
   4. `optimize eleve-lecon` : `/courses/:slug` côté élève, 226 ms, 39 requêtes, cause probable : état de chaque notion et exercice lu un par un.
 - Limite : mesure à froid de base de données non faite (pages chauffées) ; un seul enseignant et un seul élève (les plus actifs de la classe la plus active).
+- **Verdict tle-d rejoué le 2026-11-02 19:07 sur le Develop à jour** : 45 fichiers, valider.rb ok, affichage ok, 10 captures, 272 s, Verdict OK (les 4 défauts du premier passage, 19:00, sont corrigés entre-temps).
+- **Revue** : `bin/preuve-vague` refuse un dossier hors `docs/contenus/lecons-traitees` (liens suivis) et n'efface que `tmp/preuves/<vague>`.
