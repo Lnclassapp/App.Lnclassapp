@@ -190,4 +190,24 @@ class CiScopeTest < ActiveSupport::TestCase
       refute verdicts.step?("k2")
     end
   end
+
+  # standard-de-test, Lot D : le test de rendu des leçons se rejoue quand une leçon, lui-même, ses fichiers piégés, ou ce qui dessine la page bouge.
+  test "the lesson rendering test plays when a lesson, the test, or the sheet's styles and scripts change" do
+    rendering = CiScope::LESSON_RENDERING_TEST
+    files = [ rendering, "test/models/other_test.rb" ]
+    [ "docs/contenus/lecons-traitees/3eme/svt/a.json", rendering, "test/fixtures/files/lecons_piegees/conforme.json",
+      "app/assets/stylesheets/course_sheet.css", "app/assets/stylesheets/course_sheet/figures.css",
+      "app/javascript/controllers/math_controller.js", "app/javascript/controllers/figure_controller.js", "app/javascript/lib/figures/plate.js" ].each do |path|
+      assert_equal [ rendering ], CiScope.tests_for([ path ], test_files: files, read: ->(_) { "" }), path
+    end
+    [ "docs/contenus/progressions-2026-2027/x.json", "app/javascript/controllers/dialog_controller.js", "docs/x.md" ].each do |path|
+      assert_empty CiScope.tests_for([ path ], test_files: files, read: ->(_) { "" }), path
+    end
+  end
+
+  test "the lesson rendering test is re-read when the browser's files move, and its own file is a system input" do
+    assert_equal [ CiScope::LESSON_RENDERING_TEST ], CiScope.front_readers([ CiScope::LESSON_RENDERING_TEST ])
+    assert CiScope::INPUTS.fetch(:system).include?(CiScope::LESSON_RENDERING_TEST)
+    refute CiScope::INPUTS.fetch(:unit).include?(CiScope::LESSON_RENDERING_TEST)
+  end
 end

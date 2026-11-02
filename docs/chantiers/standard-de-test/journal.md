@@ -41,6 +41,62 @@
 
 - **Durée mesurée (Lot E)** : `bin/apercu-lecon` sur la leçon Thalès (3ème, 26 exercices, 4 sujets) en development : 2,9 s la première fois (création), 4,1 s en remplacement d'une leçon déjà publiée, démarrage de Rails compris. Cible < 15 s tenue. `--suivre` rejoue l'aperçu au changement de `mtime` (boucle de 1 s).
 
+## Lot D — rendu automatique des leçons (premier passage complet, 2026-11-02)
+
+- **Mesure** : une leçon se rend en 4,2 s en moyenne (import, publication, connexion, deux visites : 390 px puis ordinateur), un fichier v3 sur 417. Un passage complet en un seul processus : 417 x 4,2 s, environ 29 min. Une première tentative à 3 processus parallèles a fini en 30 min avec 263 interblocages PostgreSQL (`deadlock detected`, base de test partagée en parallèle) : ces 263 leçons ont été rejouées en série (18 min). Le découpage de la CI reste donc à un processus par part (35 fichiers, sous le seuil de parallélisme de 50).
+- **Découpage** : 12 parts (tâche `lecons`, 35 fichiers, environ 2 min 30 de tests plus l'installation, sous les 5 minutes), partage glouton par taille de fichier (`LECONS_PART=i/12`).
+- **Résultat** (revue du Lot D : la mesure attend la fin du rendu KaTeX, ignore le texte des formules pour `**`, compte un JSON illisible comme un import refusé) : passage complet rejoué en 18 parts sur 3 bases, **le même résultat qu'avant** : 41 leçons sur 417 en défaut (non corrigées, hors du lot) : 27 avec `**` dans le texte rendu, 15 qui débordent, 1 figure absente (2 leçons cumulent `**` et débordement), 0 import refusé. Les `**` sont de vrais défauts, pas des faux positifs des formules : ce sont des gras Markdown non interprétés à côté d'une formule, par exemple `**-liste**` dans `1ere-c/mathematiques/denombrement`, `**le nombre positif dont le carré…**` dans `3eme/mathematiques/racines-carrees`. Un premier passage avait compté 10 imports refusés (EDHC) : faux positif de la base de test, qui n'avait pas cette matière du référentiel réel ; le test la crée.
+- **Mesure sans charge** : 35 fichiers en 147 s et 151 s (parts 5/12 et 2/12, machine libre), soit 4,2 s par leçon ; tâche `lecons` en 12 parts, sous 3 min 30 de tests. Sous charge (machine à 16-26 de charge à cause d'une autre suite), les mêmes leçons prennent 13 s : ne pas mesurer sur une machine occupée. Les leçons à milliers de formules (`tle-c/mathematiques/derivabilite-et-etude-de-fonctions`, 4 581 formules) prennent 15 s même seules.
+- **Découverte** : KaTeX ne rend pas les `$…$` dans une `<option>` (liste déroulante de réponse) : la mesure ne les attend pas, sinon elle patiente 10 s par page pour rien.
+- **Poste de travail** : Chrome 153 est installé avec un chromedriver 147 dans le PATH (`/opt/node22/bin`) : lancer les tests système avec un PATH sans lui pour que selenium-manager télécharge le bon pilote.
+- **Écarts** : exercices et problèmes sont lus dans la page de la leçon (fiche de révision, « Prépare interros », « Prépare devoirs ») ; les pages `/exercises/<id>` ne sont pas visitées. La tâche `lecons` est ajoutée à `ci.yml` : `test/guards/ci_plan_test.rb` (hors de la fiche) attend encore `plan unit system ci` et doit être mis à jour.
+
+Fichiers en défaut :
+
+| Fichier (sous docs/contenus/lecons-traitees) | Défaut |
+|---|---|
+| `1ere-a1/mathematiques/denombrement.json` | `**` |
+| `1ere-a1/mathematiques/equations-et-inequations.json` | `**` |
+| `1ere-a1/physique-chimie/les-alcanes.json` | débordement |
+| `1ere-a1/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | débordement |
+| `1ere-a2/mathematiques/denombrement.json` | `**` |
+| `1ere-a2/mathematiques/equations-et-inequations.json` | `**` |
+| `1ere-a2/physique-chimie/les-alcanes.json` | débordement |
+| `1ere-a2/physique-chimie/les-alcenes-cas-de-l-ethylene.json` | débordement |
+| `1ere-c/mathematiques/composees-de-transformations-du-plan.json` | `**`,débordement |
+| `1ere-c/mathematiques/denombrement.json` | `**` |
+| `1ere-c/mathematiques/derivation.json` | `**` |
+| `1ere-c/mathematiques/generalites-sur-les-fonctions.json` | `**` |
+| `1ere-c/physique-chimie/energie-mecanique.json` | `**` |
+| `1ere-c/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | débordement |
+| `1ere-c/physique-chimie/hydrocarbures-satures-les-alcanes.json` | débordement |
+| `1ere-c/svt/la-photosynthese.json` | `**` |
+| `1ere-d/mathematiques/denombrement.json` | `**` |
+| `1ere-d/mathematiques/derivation.json` | `**` |
+| `1ere-d/mathematiques/generalites-sur-les-fonctions.json` | `**` |
+| `1ere-d/physique-chimie/energie-mecanique.json` | `**` |
+| `1ere-d/physique-chimie/energie-potentielle-de-pesanteur.json` | `**` |
+| `1ere-d/physique-chimie/hydrocarbures-insatures-les-alcenes-et-les-alcynes.json` | débordement |
+| `1ere-d/physique-chimie/hydrocarbures-satures-les-alcanes.json` | débordement |
+| `3eme/edhc/les-institutions-juridictionnelles.json` | figure |
+| `3eme/mathematiques/angles-inscrits.json` | `**` |
+| `3eme/mathematiques/equations-et-inequations-dans-r.json` | `**` |
+| `3eme/mathematiques/racines-carrees.json` | `**` |
+| `tle-a1/mathematiques/probabilite-et-variable-aleatoire.json` | `**` |
+| `tle-a1/mathematiques/suites-numeriques.json` | `**` |
+| `tle-a1/svt/l-heredite-du-sexe-et-du-groupe-sanguin-chez-l-homme.json` | `**` |
+| `tle-a2/mathematiques/probabilite.json` | `**`,débordement |
+| `tle-a2/mathematiques/suites-numeriques.json` | `**` |
+| `tle-a2/svt/l-heredite-du-sexe-et-du-groupe-sanguin-chez-l-homme.json` | `**` |
+| `tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json` | `**` |
+| `tle-c/mathematiques/divisibilite-dans.json` | `**` |
+| `tle-c/physique-chimie/acides-carboxyliques-et-derives.json` | débordement |
+| `tle-c/physique-chimie/les-alcools.json` | débordement |
+| `tle-d/physique-chimie/acides-carboxyliques-et-derives.json` | débordement |
+| `tle-d/physique-chimie/les-alcools.json` | débordement |
+| `tle-d/physique-chimie/les-amines.json` | débordement |
+| `tle-d/svt/la-transmission-de-deux-caracteres-hereditaires-chez-les-etres-vivants.json` | `**` |
+
 ## Lot F — un rôle par environnement
 
 - **Develop** : charge les seuls fichiers du manifeste (`jeu.yml`, `expected_paths`, leçon longue comprise) en `:lesson` ; les autres leçons v3 du programme ne sont plus lues ni remplacées ; aucune suppression (les ~350 leçons présentes restent). Les leçons à sujets gardent `:exercises` partout (ADR-0122), manifeste ou non : décision de lecture à confirmer.
@@ -49,6 +105,8 @@
 - Rapport de chargement (`contenus:charger`) : « N leçon(s) examinée(s) : x créée(s), y ignorée(s), z remplacée(s), w à sujets rechargée(s) ».
 - Limite : une leçon créée par Staging dont la publication échoue reste en brouillon aux déploiements suivants (la leçon présente n'est plus touchée) ; l'erreur est journalisée, publication à la main.
 - Conséquence sur ADR-0122 et 0123 : amendées par l'ADR du chantier, non modifiées ici. Le jeu standard (comptes, établissements) n'est pas semé sur Develop par ce lot : ajout de données à confirmer.
+
+- **Lot D, après les corrections des leçons (#454, #455, #456, fusionnées le 2026-11-02)** : les 41 leçons en défaut du premier passage sont corrigées (2 causes applicatives — gras coupé par une formule, CSS des blocs d'exercice — et 1 figure EDHC trop haute) ; rejeu complet `LECONS=tout` : 417 leçons, 0 défaut. La tâche `lecons` du train peut donc être bloquante sans bloquer le train.
 
 ## Lot C — grand établissement et pages lentes
 
