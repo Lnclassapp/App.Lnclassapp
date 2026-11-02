@@ -4,7 +4,7 @@
 # élèves par classe, un chef d'établissement, et les 6 enseignants de chaque classe, un par matière : l'EDHC au collège,
 # la philosophie au lycée (décision du porteur du 2026-10-21) ; l'EDHC est ajoutée aux matières de la base si elle manque.
 # Deux enseignants par établissement sont bivalents ; trois enseignants servent dans plusieurs établissements, l'un dans
-# les trois. Aucune activité : les classes sont prêtes, rien n'y est encore joué (pour cela, db/seeds/demo/saint_michel.rb).
+# les trois. Aucune activité : les classes sont prêtes, rien n'y est encore joué (pour cela, db/seeds/standard/activite.rb).
 # Insertions groupées, en une transaction : quelques secondes. Rejoué, il ne crée rien de plus. PIN 2468 partout (ADR-0034).
 # Contacts : direction 073S000001, enseignants 053S0000TT, élèves 013S00CCEE (S établissement, T enseignant, C classe,
 # E élève dans la classe).

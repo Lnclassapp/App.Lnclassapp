@@ -11,8 +11,8 @@
 #                                      # accounts, the 47 lessons of the manifest published; same set as bin/jeu-standard)
 #   bin/tester-pr 275 --tout-contenu   # plus the former demo set: db/seeds/demo/trois_etablissements.rb (63 classrooms per
 #                                      # school) and the ~213 complete lessons, published: db/seeds/demo/lecons_completes.rb
-#   bin/tester-pr 275 --activite       # plus a school whose students already worked: db/seeds/demo/saint_michel.rb
-#                                      # (about 20 minutes the first time, then idempotent)
+#   bin/tester-pr 275 --activite       # the standard set (as --demo) plus its quarter of simulated activity: db/seeds/standard/activite.rb
+#                                      # (sessions, grades, gaps and homework through the use cases; a few minutes, then idempotent)
 set -euo pipefail
 
 # The whole script is read before it runs: checking out another commit may change this very file.
@@ -72,9 +72,9 @@ main() {
   fi
   # Idempotent: the fictitious accounts exist whatever the database held, and the TOTP code of the team prints.
   bin/rails db:seed
-  [ "$demo" = 0 ] || bin/rails runner db/seeds/standard.rb
+  [ "$demo" = 0 ] && [ "$activity" = 0 ] || bin/rails runner db/seeds/standard.rb
   [ "$all_content" = 0 ] || { bin/rails runner db/seeds/demo/trois_etablissements.rb && bin/rails runner db/seeds/demo/lecons_completes.rb; }
-  [ "$activity" = 0 ] || bin/rails runner db/seeds/demo/saint_michel.rb
+  [ "$activity" = 0 ] || bin/rails runner db/seeds/standard/activite.rb
 
   local port="${PORT:-3000}"
   echo
@@ -88,7 +88,7 @@ main() {
     export BINDING=0.0.0.0
   fi
   echo "Comptes fictifs, PIN 2468 : enseignant 0500000001, élève 0100000001, équipe 0700000000 (code TOTP ci-dessus)."
-  if [ "$demo" = 1 ]; then
+  if [ "$demo" = 1 ] || [ "$activity" = 1 ]; then
     echo "Jeu standard, PIN 2468 : directions 0700000010 à 0700000012, enseignants 0500000010 à 0500000027 (0500000011 : lycée et collège),"
     echo "  élèves à partir de 0100000010 ; équipe 0700001000 (admin), 0700002000 (contenu), 0700003000 (terrain). Liste complète : bin/jeu-standard."
   fi
@@ -98,8 +98,7 @@ main() {
     echo "  Leçons complètes publiées (cours, fiches, exercices) de la 6ème à la Tle : docs/contenus/lecons-traitees."
   fi
   if [ "$activity" = 1 ]; then
-    echo "Collège Saint Michel, PIN 2468 : direction 0710000001 et 0710000002, enseignants de la Tle D 1 0510000001 à 0510000006,"
-    echo "  élèves de la Tle D 1 0110000001 à 0110000020."
+    echo "Activité du trimestre (12 semaines finissant hier) : lycée et collège, plusieurs classes ; l'empreinte des totaux est affichée plus haut."
   fi
   echo "Pour revenir à ta branche ensuite : $back"
   echo
