@@ -17,7 +17,7 @@
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
 | 2026-11-01 | P5 | 1ère (C, D) | SVT | 16 distinctes (20 fichiers : 4 communes déclinées en D) | #435 |
 | 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
-| 2026-11-02 | P2 | 1ère (A1, A2) | Mathématiques | 7 leçons (14 fichiers) ; la feuille de route en comptait 5 | PR_P2 |
+| 2026-11-02 | P2 | 1ère (A1, A2) | Mathématiques | 7 leçons (14 fichiers) ; la feuille de route en comptait 5 | #437 |
 | 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
 
 ## À faire valider par un enseignant
