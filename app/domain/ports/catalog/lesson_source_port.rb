@@ -7,9 +7,7 @@ module Ports
       # import_name : le nom du fichier d'import, « chargement-automatique-<niveau>-<matière>-<fichier>.json » (il identifie la leçon
       # d'un chargement à l'autre) ; checksum_sha256 : l'empreinte du contenu tel que lu ; content : le fichier JSON, tel quel ;
       # level_directory : le dossier de niveau (« tle-c », « 3eme ») ; subjects : le cours porte au moins un sujet de devoir.
-      LessonFile = Data.define(:import_name, :checksum_sha256, :content, :level_directory, :subjects) do
-        def initialize(level_directory: nil, subjects: true, **) = super
-      end
+      LessonFile = Data.define(:import_name, :checksum_sha256, :content, :level_directory, :subjects)
 
       # Les leçons au format 3, dans un ordre stable ; le use case choisit celles qu'il charge (AutomaticLoadStage#mode_for). → [LessonFile]
       def lessons

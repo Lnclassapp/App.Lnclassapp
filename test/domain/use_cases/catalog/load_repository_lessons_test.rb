@@ -59,7 +59,8 @@ module UseCases
       setup do
         @actor = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
         @content = JSON.generate("courses" => [ { "name" => " Thalès ", "level_name" => "3ème", "material_name" => "Maths" } ])
-        @lesson = Lesson.new(import_name: "chargement-automatique-3eme-maths-thales.json", checksum_sha256: Digest::SHA256.hexdigest(@content), content: @content)
+        @lesson = Lesson.new(import_name: "chargement-automatique-3eme-maths-thales.json", checksum_sha256: Digest::SHA256.hexdigest(@content), content: @content,
+                             level_directory: "3eme", subjects: true)
         @calls = []
         @logs = []
         @logger = Object.new.tap do |logger|
@@ -106,7 +107,7 @@ module UseCases
 
       test "a lesson of a series is found by its key including the series" do
         content = JSON.generate("courses" => [ { "name" => "Thalès", "level_name" => "3ème", "material_name" => "Maths", "series_name" => "D" } ])
-        lesson = Lesson.new(import_name: "chargement-automatique-tle-maths-thales.json", checksum_sha256: "x", content:)
+        lesson = Lesson.new(import_name: "chargement-automatique-tle-maths-thales.json", checksum_sha256: "x", content:, level_directory: "tle", subjects: true)
 
         assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ])).lessons)
         assert_equal "thales-serie", @calls.last.last
@@ -246,7 +247,8 @@ module UseCases
 
       test "an exception on one lesson (checksum lookup, start, run) is logged with its name and class, and the next lessons are still tried" do
         second_content = JSON.generate("courses" => [ { "name" => "Pythagore", "level_name" => "3ème", "material_name" => "Maths" } ])
-        second = Lesson.new(import_name: "chargement-automatique-3eme-maths-pythagore.json", checksum_sha256: "y", content: second_content)
+        second = Lesson.new(import_name: "chargement-automatique-3eme-maths-pythagore.json", checksum_sha256: "y", content: second_content, level_directory: "3eme",
+                            subjects: true)
         failing = Class.new(Reports) do
           def last_loaded_checksum(kind:, file_name:) = file_name.include?("thales") ? raise("base coupée") : super
         end
@@ -325,6 +327,31 @@ module UseCases
 
         assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1))).lessons)
         assert_equal %i[start run_lesson], @calls.map(&:first)
+      end
+      test "a refused import says why in the log: its status and its number of errors" do
+        lesson = programme_lesson("Pythagore")
+
+        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, status: "completed", error_count: 2)))
+
+        assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 2 erreur(s)), voir Imports" ] ], @logs
+      end
+
+      test "a whole-lesson load says replaced or created in the log before the publication" do
+        lesson = programme_lesson("Pythagore")
+
+        call(use_case(lessons: [ lesson ], publish: cascade(Shared::Result.failure(:conflict))))
+
+        assert_equal [ [ :info, "[contenus] Pythagore : leçon remplacée entière (#{lesson.import_name})" ],
+                       [ :error, "[contenus] Pythagore : publication refusée (conflict)" ] ], @logs
+      end
+
+      test "the files not loaded here are counted in one log line per level folder, so a misplaced wave shows" do
+        third = programme_lesson("Pythagore", folder: "3eme")
+        misplaced = programme_lesson("Suites", folder: "tle-e")
+
+        call(use_case(lessons: [ third, misplaced, @lesson ]))
+
+        assert_equal [ :info, "[contenus] fichier(s) v3 non chargé(s) ici : 3eme 1, tle-e 1" ], @logs.first
       end
     end
   end

@@ -50,7 +50,7 @@ module Repositories
         write("3eme/direct.json", lesson(subjects: [ { "title" => "S" } ]))
 
         assert_empty RepositoryLessonSource.new(root: @root, logger: @logger).lessons
-        assert_equal [ "[contenus] fichier de leçon illisible, ignoré : #{@root.join('3eme/mathematiques/cassee.json')}" ], @warnings
+        assert_equal [ "[contenus] fichier de leçon illisible, ignoré : #{@root.join('3eme/mathematiques/cassee.json')} (JSON::ParserError)" ], @warnings
       end
 
       test "lists the lessons in a stable order" do
@@ -64,6 +64,18 @@ module Repositories
       test "the repository's own lessons include Thalès" do
         assert_includes RepositoryLessonSource.new.lessons.map(&:import_name),
                         "chargement-automatique-3eme-mathematiques-proprietes-de-thales-dans-un-triangle.json"
+      end
+      test "skips with a warning a file of several lessons and a file it cannot read, and keeps the others" do
+        two = lesson(subjects: []).tap { it["courses"] << { "name" => "M" } }
+        write("tle-c/mathematiques/deux.json", two)
+        write("tle-c/mathematiques/bonne.json", lesson(subjects: []))
+        @root.join("tle-c/mathematiques/dossier.json").mkpath
+
+        found = RepositoryLessonSource.new(root: @root, logger: @logger).lessons
+
+        assert_equal [ "chargement-automatique-tle-c-mathematiques-bonne.json" ], found.map(&:import_name)
+        assert_includes @warnings, "[contenus] fichier de plusieurs leçons, ignoré : #{@root.join('tle-c/mathematiques/deux.json')}"
+        assert(@warnings.any? { it.start_with?("[contenus] fichier de leçon illisible, ignoré : #{@root.join('tle-c/mathematiques/dossier.json')} (Errno::EISDIR)") })
       end
     end
   end

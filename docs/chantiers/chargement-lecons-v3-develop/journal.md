@@ -9,6 +9,23 @@
 | 2026-11-02 | Le remplacement entier efface aussi le texte de cours v1 (`action_text_rich_texts`, `content`). | Le v3 n'a pas de texte de cours : l'ancien serait resté affiché. | Oui (§4.4) |
 | 2026-11-02 | Les tests d'intégration réduisent le dépôt à deux fichiers (Thalès + une leçon Tle C). | Sinon chaque test Develop importerait 264 fichiers. | Non |
 
+## Revues (security-reviewer, silent-failure-hunter)
+
+| Constat | Suite |
+|---|---|
+| Activation par le seul nom `Develop` (sécurité 1) | Écarté : une variable à poser a été refusée par le porteur (ADR-0122 option A) ; risque écrit dans l'ADR. |
+| Job d'Imports en `:draft` non testé (sécurité 2) | Corrigé : test du `replace_mode` du job. |
+| Texte de cours v1 effacé sans ses pièces jointes (sécurité 3) | Corrigé : détruit par Action Text. |
+| Fichier de plusieurs leçons (sécurité 4) | Corrigé : écarté avec avertissement. |
+| Leçon voisine intacte non prouvée (sécurité 5) | Corrigé : test. |
+| Fichiers non chargés invisibles (silencieux 1) | Corrigé : une ligne par démarrage, décompte par dossier. |
+| Refus sans cause au journal (silencieux 2) | Corrigé : statut et nombre d'erreurs journalisés. |
+| Leçon du programme à sujets en mode exercices (silencieux 3) | Écarté : exigence du porteur ; aucune aujourd'hui ; écrit dans l'ADR §4.2. |
+| `LessonFile` à valeurs par défaut (silencieux 4) | Corrigé : mots-clés obligatoires. |
+| `replaced` / `created` perdu si publication ratée (silencieux 5) | Corrigé : journalisé avant la publication. |
+| Titre sans nom de fichier, décompte rake (silencieux 6, 7) | Écartés : faibles. |
+| Exception de lecture d'un fichier arrête tout (silencieux 8) | Corrigé : rattrapée fichier par fichier. |
+
 ## Mesures
 
 Base de développement locale, `RAILWAY_ENVIRONMENT_NAME=Develop bin/rails contenus:charger`, 264 fichiers examinés :

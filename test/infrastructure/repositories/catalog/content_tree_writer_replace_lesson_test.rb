@@ -69,6 +69,22 @@ module Repositories
         assert_raises(ContentTreeWriter::NotDraft) { @writer.replace_draft(course_id: @course.id, tree:) }
         assert Orm::Essential.exists?(@notion.id)
       end
+      test "a neighbouring lesson keeps everything: sheets, exercises, session, read, assignment and course text" do
+        neighbour = create_course(level: @level, material: @material, name: "Voisine", author: @author, content: "<p>Voisine</p>")
+        sheet = create_essential(course: neighbour, name: "Fiche voisine")
+        exercise = create_exercise(essential: sheet)
+        student = create_student
+        create_exercise_session(student:, exercise:, status: "completed")
+        create_essential_read(student:, essential: sheet)
+        create_assignment(assignable: exercise)
+        before = [ neighbour.essentials.pluck(:id), Orm::Exercise.where(course_id: neighbour.id).pluck(:id), Orm::ExerciseSession.count,
+                   Orm::EssentialRead.count, Orm::ClassroomAssignment.count, neighbour.reload.content.to_plain_text ]
+
+        @writer.replace_lesson(course_id: @course.id, tree:)
+
+        assert_equal before, [ neighbour.essentials.pluck(:id), Orm::Exercise.where(course_id: neighbour.id).pluck(:id), Orm::ExerciseSession.count,
+                               Orm::EssentialRead.count, Orm::ClassroomAssignment.count, neighbour.reload.content.to_plain_text ]
+      end
     end
   end
 end

@@ -14,29 +14,36 @@ module Repositories
       end
 
       def lessons
-        @root.glob("*/*/*.json").sort.filter_map do |path|
-          content = path.read
-          course = v3_course(content, path)
-          next unless course
-
-          LessonFile.new(import_name: import_name(path), checksum_sha256: Digest::SHA256.hexdigest(content), content:,
-                         level_directory: path.parent.parent.basename.to_s, subjects: course["subjects"].present?)
-        end
+        @root.glob("*/*/*.json").sort.filter_map { lesson_file(it) }
       end
 
       private
 
-      # Le premier cours d'un fichier au format 3, nil sinon. Un fichier illisible ou d'un autre format n'est pas une leçon à charger : les
-      # autres restent chargées.
+      # Un fichier illisible (JSON, encodage, lecture) ou d'un autre format n'est pas une leçon à charger : les autres restent chargées.
+      def lesson_file(path)
+        content = path.read
+        course = v3_course(content, path)
+        return unless course
+
+        LessonFile.new(import_name: import_name(path), checksum_sha256: Digest::SHA256.hexdigest(content), content:,
+                       level_directory: path.parent.parent.basename.to_s, subjects: course["subjects"].present?)
+      rescue StandardError => error
+        @logger.warn("[contenus] fichier de leçon illisible, ignoré : #{path} (#{error.class})")
+        nil
+      end
+
+      # L'unique cours d'un fichier au format 3, nil sinon. Un fichier de plusieurs leçons est écarté (avertissement) : son mode et sa clé
+      # ne se lisent que sur une leçon (ADR-0123).
       def v3_course(content, path)
         document = JSON.parse(content)
         return unless document.is_a?(Hash) && document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
 
-        course = Array(document["courses"]).first
-        course if course.is_a?(Hash)
-      rescue JSON::ParserError
-        @logger.warn("[contenus] fichier de leçon illisible, ignoré : #{path}")
-        nil
+        courses = Array(document["courses"])
+        if courses.size > 1
+          @logger.warn("[contenus] fichier de plusieurs leçons, ignoré : #{path}")
+          return
+        end
+        courses.first if courses.first.is_a?(Hash)
       end
 
       def import_name(path) = "#{PREFIX}-#{path.parent.parent.basename}-#{path.parent.basename}-#{path.basename}"

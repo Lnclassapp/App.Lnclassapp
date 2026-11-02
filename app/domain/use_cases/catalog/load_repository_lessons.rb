@@ -50,10 +50,8 @@ module UseCases
         return allowed if allowed.failure?
         return reject_unknown(stage, actor) if stage.unknown?
 
-        chosen = @source.lessons.filter_map do |lesson|
-          mode = stage.mode_for(level_directory: lesson.level_directory, subjects: lesson.subjects)
-          [ lesson, mode ] if mode
-        end
+        chosen, ignored = @source.lessons.map { [ it, stage.mode_for(level_directory: it.level_directory, subjects: it.subjects) ] }.partition(&:last)
+        log_ignored(ignored.map(&:first))
         done(:done, chosen.to_h { |lesson, mode| [ lesson.import_name, load_safely(lesson, mode, actor) ] })
       end
 
@@ -66,6 +64,14 @@ module UseCases
         @reports.record_rejection(kind: KIND, checksum_sha256: Digest::SHA256.hexdigest("unknown_environment:#{stage.name}"),
                                   imported_by_id: actor.user_id, at: @clock.now, errors: [ error ])
         done(:unknown_environment)
+      end
+
+      # Une ligne par démarrage : les fichiers v3 lus mais pas chargés ici, comptés par dossier de niveau (une vague mal rangée se voit).
+      def log_ignored(lessons)
+        return if lessons.empty?
+
+        counts = lessons.map(&:level_directory).tally.sort.map { |folder, count| "#{folder} #{count}" }
+        @logger.info("[contenus] fichier(s) v3 non chargé(s) ici : #{counts.join(', ')}")
       end
 
       def load_safely(lesson, mode, actor)
@@ -92,8 +98,14 @@ module UseCases
           @logger.error("[contenus] #{lesson_name(lesson)} : import en échec (#{ran.code})")
           return :refused
         end
-        return :refused unless ran.value.status == "completed" && ran.value.error_count.zero?
+        unless ran.value.status == "completed" && ran.value.error_count.zero?
+          @logger.warn("[contenus] #{lesson_name(lesson)} : import refusé (#{ran.value.status}, #{ran.value.error_count} erreur(s)), voir Imports")
+          return :refused
+        end
 
+        if mode == :lesson
+          @logger.info("[contenus] #{lesson_name(lesson)} : leçon #{loaded == :replaced ? 'remplacée entière' : 'créée'} (#{lesson.import_name})")
+        end
         guarded(lesson) { publish(lesson, actor, slug_of(lesson), loaded) }
       end
 

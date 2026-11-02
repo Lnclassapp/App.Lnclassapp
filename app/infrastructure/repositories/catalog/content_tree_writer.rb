@@ -109,7 +109,9 @@ module Repositories
         course_id = course.id
         stamp(course.author_id, Time.current)
         deleted = delete_content(course_id)
-        deleted[:course_text] = Orm::RichTextRow.where(record_type: "Orm::Course", record_id: course_id, name: "content").delete_all
+        # Détruit par Action Text, pour que ses pièces jointes (embeds) partent avec lui.
+        texts = ActionText::RichText.where(record_type: "Orm::Course", record_id: course_id, name: "content")
+        deleted[:course_text] = texts.each(&:destroy!).size
         Rails.logger.info("[import] leçon remplacée : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
         course.update_columns(name: tree.name, subtitle: tree.subtitle, figures: tree.figures, sheet_theme: tree.sheet_theme, updated_at: @at)
 
