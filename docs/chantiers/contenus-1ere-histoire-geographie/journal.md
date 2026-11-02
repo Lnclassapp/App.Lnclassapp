@@ -22,3 +22,4 @@
 | 10 | 14 districts, capitales, rattachements ville→district/région ; maire « élu par le conseil municipal » (Code électoral) ; schéma district→région général (districts autonomes) ; problème 4 à renforcer |
 
 Aucune figure n'a manqué de sorte. Les leçons restent en brouillon.
+- 2026-11-02 — PR [#445](https://github.com/Lnclassapp/App.Lnclassapp/pull/445) vers `Develop`.

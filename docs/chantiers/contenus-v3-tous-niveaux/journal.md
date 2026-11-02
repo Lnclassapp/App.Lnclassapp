@@ -6,7 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-11-02 | P9 | 1ère | Histoire-Géographie | 10 | PR `feature/contenus-1ere-histoire-geographie` (numéro ci-dessous) |
+| 2026-11-02 | P9 | 1ère | Histoire-Géographie | 10 | [#445](https://github.com/Lnclassapp/App.Lnclassapp/pull/445) |
 
 ## À faire valider par un enseignant
 
