@@ -12,6 +12,8 @@
 
 Chaque leçon se teste **au téléphone (390 px) et sur ordinateur**.
 
+> **Outils du chantier [`standard-de-test`](../standard-de-test/memo.md)** : le test d'affichage (`test/system/catalog/lesson_rendering_test.rb`, `LECONS=<fichiers>`) rend déjà chaque leçon à 390 px et sur ordinateur et refuse un débordement, des `**` ou une figure absente ; `bin/preuve-vague <dossier>` joue `valider.rb`, ce test et des captures d'une leçon par matière (`tmp/preuves/<dossier>/`, jamais commitées) pour une vague entière. Les vérifications 1 à 3 ci-dessous sont donc d'abord automatiques ; l'œil humain garde les exercices, les problèmes et le fond.
+
 ## Ce qu'on vérifie sur chaque leçon
 
 1. **Fiche** de chaque notion : 4 blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), gras rendu (jamais de `**`).

@@ -126,6 +126,10 @@ Un chantier sans PR se réserve de la même façon : on ouvre la PR tôt, sans c
 
 Ne jamais committer directement sur `Develop`, `Staging` ni `main` : tout passe par une branche de chantier et une PR.
 
+### Règle de fusion : dire ce qu'on a prouvé
+
+Toute PR vers `Develop` qui change du code remplit la section « Prouvé sur le jeu standard » de son corps ([modèle](../../.github/pull_request_template.md)) : parcours de recette rejoués, leçons rendues, ligne de preuve de `bin/ci-quiet`. Un parcours ([`docs/recette/`](../recette/README.md)) ne se rejoue que si le chantier touche ce rôle ou cet écran (table écran → parcours) ; sinon on écrit « aucun : ne touche ni rôle ni écran ». Une vague de leçons colle le verdict de `bin/preuve-vague`. `bin/ci-quiet` refuse une PR sans cette section quand il lit son corps (`tmp/pr-body.md`, ou GitHub), et le dit quand il ne peut pas le lire.
+
 **Exception mesurée** ([`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md)) : un commit direct sur `Develop` est toléré pour de la documentation seule (memo, journal, ADR, UDR). Tout ce qui peut casser un autre poste passe par une PR : code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json`. Jamais de commit direct sur `Staging` ni `main`.
 
 ---
