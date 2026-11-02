@@ -65,6 +65,10 @@ Si ton chantier touche la route ou le contrôleur de la colonne de gauche, rejou
 | Croissance | `/teams/growth`, `Teams::GrowthController` | DRENA, équipe |
 | Établissements, DRENA, plan des classes (équipe) | `Teams::SchoolsController`, `DrenasController`, `ClassroomPlansController`, `School*Controller` | équipe |
 | Contenu : cours, essentiels, exercices, imports | `Teams::CoursesController`, `ImportsController`, `ExercisesController` | équipe, élève (la leçon publiée se lit) |
+| Blog et annonces de l'équipe | `Teams::ArticlesController`, `Communication::ArticlesController` | équipe, élève |
+| Demandes de rattachement à un établissement | `Teams::JoinRequestsController`, `School::TeacherSchoolJoinsController` | équipe, enseignant |
+| Demandes de suppression de compte | `Teams::DeletionRequestsController`, `AccountDeletionsController` | équipe |
+| Référentiel : niveaux, séries, matières | `Teams::LevelsController`, `SeriesController`, `MaterialsController`, `LevelSeriesController` | équipe |
 | Comptes : recherche, invitations, suppression | `Teams::AccountLookupsController`, `InvitationsController`, `AccountDeletionsController` | équipe |
 
 Un écran absent de la table : ajoute sa ligne dans la même PR que le chantier qui le crée.

@@ -15,13 +15,12 @@ class PreuveVagueTest < ActiveSupport::TestCase
 
   # Un dossier de vague jetable : tle-x/<matière>/<fichier>.json
   def wave
-    root = Dir.mktmpdir("vague-")
-    folder = Pathname(root).join("tle-x")
+    folder = Rails.root.join("docs/contenus/lecons-traitees", "zz-preuve-test-#{Process.pid}")
     folder.join("mathematiques").mkpath
     folder.join("svt").mkpath
     yield folder
   ensure
-    FileUtils.rm_rf(root) if root
+    FileUtils.rm_rf(folder) if folder
   end
 
   test "sans dossier, il affiche son usage et ne fait rien" do
@@ -70,6 +69,19 @@ class PreuveVagueTest < ActiveSupport::TestCase
     assert_match(/introuvable/, output)
   end
 
+  test "un dossier hors docs/contenus/lecons-traitees, ou la racine elle-même, est refusé et rien n'est effacé" do
+    Dir.mktmpdir("vague-") do |root|
+      Pathname(root).join("x.json").write("{}")
+      [ root, "docs/contenus/lecons-traitees", "docs", "." ].each do |path|
+        output, status = preuve(path)
+
+        assert_not status.success?, path
+        assert_match(/refusé/, output, path)
+      end
+      assert Pathname(root).join("x.json").exist?
+    end
+  end
+
   test "--plan dit les fichiers, une leçon par matière et un dossier de captures ignoré par git sous tmp/preuves" do
     wave do |folder|
       %w[mathematiques/b.json mathematiques/a.json svt/c.json].each { folder.join(it).write("{}") }
@@ -80,7 +92,7 @@ class PreuveVagueTest < ActiveSupport::TestCase
       assert_match(%r{capture : mathematiques/a\.json}, output)
       assert_no_match(%r{capture : mathematiques/b\.json}, output)
       assert_match(%r{capture : svt/c\.json}, output)
-      target = output[%r{tmp/preuves/tle-x}]
+      target = output[%r{tmp/preuves/zz-preuve-test-\d+}]
 
       assert target, output
       _, ignored = Open3.capture2("git", "check-ignore", "-q", "#{target}/mathematiques-390.png", chdir: Rails.root.to_s)

@@ -1,6 +1,6 @@
 # Parcours élève
 
-Compte : `0100000166`, PIN `2468` (Tle D du Lycée Modèle Horizon, la classe qui a de l'activité). Variante élève sans activité : un élève du grand établissement (`bin/jeu-standard` en donne la liste).
+Compte : `0100000166`, PIN `2468` (Tle D du Lycée Modèle Horizon, la classe qui a de l'activité). Variante élève sans activité : un élève de la Tle A1 du lycée (`eleve_sans_activite` de `jeu.yml` ; `bin/jeu-standard` en donne la liste).
 
 | # | Étape | Résultat attendu |
 |---|---|---|

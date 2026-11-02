@@ -39,6 +39,13 @@ plan_only = ARGV.delete("--plan")
 
 folder = File.expand_path(ARGV.first, START)
 (warn "[preuve-vague] dossier introuvable : #{ARGV.first}"; exit 1) unless File.directory?(folder)
+# Liens suivis : la vague est un dossier SOUS docs/contenus/lecons-traitees (jamais ailleurs, jamais la racine elle-même).
+LESSONS = File.realpath("docs/contenus/lecons-traitees")
+folder = File.realpath(folder)
+unless folder.start_with?("#{LESSONS}/")
+  warn "[preuve-vague] refusé : #{ARGV.first} n'est pas un dossier sous docs/contenus/lecons-traitees. Rien n'est joué."
+  exit 1
+end
 
 files = Dir.glob("**/*.json", base: folder).sort.map { File.join(folder, it) }
 (warn "[preuve-vague] aucun fichier .json dans #{ARGV.first}"; exit 1) if files.empty?
@@ -64,7 +71,8 @@ puts "3. captures 390 px et 1280 px, #{chosen.size} leçon(s), dans #{out}"
 chosen.each { |matter, path| puts "   capture : #{relative.(path)} (#{matter})" }
 exit 0 if plan_only
 
-FileUtils.rm_rf(out)
+# Le seul dossier effacé est tmp/preuves/<nom de la vague> : un nom simple, sous la racine des preuves.
+FileUtils.rm_rf(out) if File.dirname(out) == "tmp/preuves" && !name.empty? && !name.start_with?(".")
 FileUtils.mkdir_p(out)
 started = Time.now
 results = { "valider.rb" => "non joué", "affichage" => "non joué", "captures" => "non jouées" }
