@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-7 fichiers `lnclass.course-tree` v3 dans `docs/contenus/lecons-traitees/1ere-a/mathematiques/`.
+7 fichiers `lnclass.course-tree` v3 dans `docs/contenus/lecons-traitees/1ere-a1/ et 1ere-a2/mathematiques/`.
 
 | Rang | Leçon |
 |---:|---|

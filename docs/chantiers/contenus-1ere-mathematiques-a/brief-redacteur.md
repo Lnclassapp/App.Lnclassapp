@@ -10,7 +10,7 @@
 
 ## Format
 - `lnclass.course-tree` version 3, un cours par fichier, `level_name` "1ère", `material_name` "Mathématiques", `series_name` "A", `name` = intitulé de la progression **à l'identique**, `subtitle` = `Leçon N — progression DPFC 2026-2027` (N = rang), `theme` imposé ci-dessous.
-- Fichier : `docs/contenus/lecons-traitees/1ere-a/mathematiques/<nom>.json` (nom indiqué dans le tableau).
+- Fichier : `docs/contenus/lecons-traitees/1ere-a1/ et 1ere-a2/mathematiques/<nom>.json` (nom indiqué dans le tableau).
 - 3 à 5 fiches selon le programme, 1 exercice par notion (≥ 5 questions), exactement 4 problèmes (≥ 5 questions), un `practice` par notion, ≥ 50 % de questions corrigées automatiquement, corrections qui reprennent les « Étape N » de La méthode (mêmes mots, même numérotation).
 - Niveau série A (littéraire) : calculs simples, nombres petits, contextes concrets, pas de démonstration théorique. Noms et lieux ivoiriens, montants en FCFA.
 

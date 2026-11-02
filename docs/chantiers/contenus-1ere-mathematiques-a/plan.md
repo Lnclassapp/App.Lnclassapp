@@ -16,7 +16,7 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 ## Lot R1 / R2 — Rédaction
 
 - **Couche** : contenus
-- **Fichiers** : `1ere-a/mathematiques/` (R1 : `equations-et-inequations`, `denombrement`, `generalites-sur-les-fonctions`, `derivabilite-et-etude-de-fonctions` ; R2 : `suites-numeriques`, `statistique`, `systemes-d-equations-dans`) ; suppression des 6 v1 de `1ere-a1/` et `1ere-a2/`
+- **Fichiers** : `1ere-a1/` et `1ere-a2/mathematiques/` (R1 : `equations-et-inequations`, `denombrement`, `generalites-sur-les-fonctions`, `derivabilite-et-etude-de-fonctions` ; R2 : `suites-numeriques`, `statistique`, `systemes-d-equations-dans`) ; suppression des 6 v1 de `1ere-a1/` et `1ere-a2/`
 - **Dépend de** : —
 - **Test associé** : `valider.rb` et `controle-entrainement.rb` sans erreur ni avertissement.
 - **Done quand** : 7 fichiers v3 aux intitulés exacts.
@@ -33,7 +33,7 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 
 | Fichier | Lot propriétaire |
 |---|---|
-| `lecons-traitees/1ere-a/mathematiques/*` | R1, R2 (un rédacteur par leçon), puis V |
+| `lecons-traitees/1ere-a1/ et 1ere-a2/mathematiques/*` | R1, R2 (un rédacteur par leçon), puis V |
 | `docs/contenus/README.md`, journaux | V |
 
 ## Portes de sortie

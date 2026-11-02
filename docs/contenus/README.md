@@ -859,6 +859,24 @@ Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, 
 
 Figures manquantes (courbes, tableaux de variations, arbres, solides en perspective) : sortes absentes du moteur, notées en dette dans le journal du chantier.
 
+### 1ère A1 et A2, mathématiques au format 3 (chantier `contenus-1ere-mathematiques-a`)
+
+Les 7 leçons de Mathématiques de la progression DPFC 2026-2027 de la série A de 1ère, rédigées le 2026-11-02 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P2 du programme `contenus-v3-tous-niveaux` ; rédaction Sonnet, relecture indépendante Opus). Le référentiel ouvre « 1ère A1 » et « 1ère A2 » : chaque leçon est écrite une fois puis déclinée en deux fichiers identiques à la série près, dans `1ere-a1/mathematiques/` et `1ere-a2/mathematiques/` (**7 leçons, 14 fichiers**). « Dénombrement » et « Généralités sur les fonctions » déclinent au niveau A les leçons de 1ère C/D (calculs plus simples, sans Angles ni Limites). Elles **remplacent** les fichiers v1 du même intitulé (rangs 1 à 3, rédigés le 2026-10-10).
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures |
+|---:|---|---|---:|---:|---:|---:|---:|
+| 1 | `mathematiques/equations-et-inequations.json` | Équations et inéquations | 4 | 8 | 48 | 100 % | 2 |
+| 2 | `mathematiques/denombrement.json` | Dénombrement | 4 | 8 | 50 | 98 % | 0 |
+| 3 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 4 | 8 | 51 | 96 % | 0 |
+| 4 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 4 | 8 | 50 | 98 % | 0 |
+| 5 | `mathematiques/suites-numeriques.json` | Suites numériques | 4 | 8 | 49 | 100 % | 1 |
+| 6 | `mathematiques/statistique.json` | Statistique | 4 | 8 | 56 | 96 % | 3 |
+| 7 | `mathematiques/systemes-d-equations-dans.json` | Systèmes d'équations dans ℝ × ℝ | 4 | 8 | 50 | 96 % | 1 |
+
+Au total : 28 notions, 56 exercices, 354 questions notées.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte `Entities::Catalog::NotionPractice` (contrôle `docs/chantiers/contenus-1ere-mathematiques-a/controle-entrainement.rb`). **Brouillon** : points à faire valider par un enseignant dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P2). Courbes de fonction et tableaux de variations : décrits dans les énoncés (dette notée au journal du chantier).
+
 À faire valider par un enseignant de mathématiques avant publication : le périmètre de chaque notion (ce qui est traité ou non), les modèles de situation et les barèmes des problèmes. La liste par leçon est dans le journal du chantier [`contenus-1ere-mathematiques-cd`](../chantiers/contenus-1ere-mathematiques-cd/journal.md).
 
 ### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`

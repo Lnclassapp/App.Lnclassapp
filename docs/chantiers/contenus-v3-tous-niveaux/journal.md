@@ -17,6 +17,7 @@
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
 | 2026-11-01 | P5 | 1ère (C, D) | SVT | 16 distinctes (20 fichiers : 4 communes déclinées en D) | #435 |
 | 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
+| 2026-11-02 | P2 | 1ère (A1, A2) | Mathématiques | 7 leçons (14 fichiers) ; la feuille de route en comptait 5 | PR_P2 |
 | 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
 
 ## À faire valider par un enseignant
@@ -25,6 +26,13 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P2 | 1ère A1/A2 — Équations et inéquations | Second degré (discriminant, signe du trinôme) au programme de 1ère A ? Somme/produit des racines, bicarrées, quotients, valeur absolue non traités. |
+| P2 | 1ère A1/A2 — Dénombrement | Arrangements, combinaisons, $C_n^p$ et $0!=1$ au programme de 1ère A ? Niveau de $C_{12}^3$ et du complémentaire. |
+| P2 | 1ère A1/A2 — Généralités sur les fonctions | Périodicité absente ; composée et domaine d'un quotient ; sens de variation par $f(b)-f(a)$ plutôt que par tableau. |
+| P2 | 1ère A1/A2 — Dérivabilité et étude de fonctions | Nombre dérivé défini sans notation de limite ; dérivées usuelles limitées (constante, x, x², x³, 1/x) ; degré 3 et Δ ; modèles fictifs. |
+| P2 | 1ère A1/A2 — Suites numériques | Sommes arithmétique/géométrique au programme ? Convention $u_0$ ; données fictives. |
+| P2 | 1ère A1/A2 — Statistique | Variance et écart type au programme ? Médiane des valeurs isolées seulement ; pas d'effectifs cumulés ni de polygone. |
+| P2 | 1ère A1/A2 — Systèmes d'équations dans ℝ × ℝ | Inéquations à deux inconnues non traitées ; déterminant pour le nombre de solutions seulement (pas de Cramer). |
 | P5 | 1ère C1 Rôle et structure des gonades | Niveau de détail (cellules de Sertoli, stades du follicule, corps jaune, œstrogènes/progestérone) ; « glandes annexes » volontairement vague ; spermatogenèse et ovogenèse hors leçon ; règle simplifiée « corps jaune = ovulation déjà eue ». |
 | P5 | 1ère D1 Fonctions des gonades | Caractères sexuels secondaires cités et hiérarchie primaire/secondaire (plumage du coq retiré : non dépendant de la testostérone) ; programme jusqu'aux cellules de Leydig et au corps jaune ; follicule mûr sécrète aussi des œstrogènes ; ligature des canaux déférents non abordée. |
 | P5 | 1ère C2/D2 Division méiotique | Crossing-over, brassage en 2^n, allèle, chromatide au programme de 1ère ; haploïdes dès la fin de la division I ; nombres de chromosomes ail, maïs, drosophile, pois, oignon ; 4e problème un peu facile. |

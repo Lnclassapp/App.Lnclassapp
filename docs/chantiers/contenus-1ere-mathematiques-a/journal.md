@@ -6,8 +6,9 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-11-02 | 7 leçons, 7 fichiers dans `1ere-a/mathematiques/` | La liste des rangs fait foi (la feuille de route disait 5) | Non |
-| 2026-11-02 | 6 v1 de `1ere-a1/` et `1ere-a2/` supprimées | D4 : remplacées par la v3 du même intitulé | Non |
+| 2026-11-02 | 7 leçons, 14 fichiers (A1 et A2) | La liste des rangs fait foi (la feuille de route disait 5) ; le référentiel n'a pas de série « A » en 1ère (consigne de l'orchestrateur) | Non |
+| 2026-11-02 | Écriture en « A » puis déclinaison A1/A2 par script (seul `series_name` change) | Un cours = une série ; contenus identiques | Non |
+| 2026-11-02 | 6 v1 remplacées au même nom | D4 | Non |
 
 ## Ce qui a dérapé
 
@@ -17,6 +18,11 @@
 
 | Leçon | Point à valider |
 |---|---|
+| Toutes | Voir le journal du programme (vague P2) : second degré, arrangements/combinaisons, nombre dérivé sans limite, sommes de suites, variance, déterminant. |
+
+## Ce qu'on a appris
+
+- Relecture Opus : aucune erreur de calcul, mais leurres non expliqués, renvois par rang, `$2,000$` lu « 2 virgule 000 », figure à intervalle fermé à tort.
 
 ## Dette laissée derrière
 

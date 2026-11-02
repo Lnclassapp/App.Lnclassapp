@@ -35,8 +35,8 @@ Deuxième vague de la 1ère, indépendante de P1 (fusionnée, PR #433) dont elle
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| Combien de leçons ? | 7 (la feuille de route disait 5), toutes propres à la série A : 7 fichiers. | Écart noté au journal du programme. |
-| Où ranger ? | Le référentiel n'ouvre que « 1ère A » : `1ere-a/mathematiques/`. Les v1 du même intitulé de `1ere-a1/` et `1ere-a2/` (Équations, Dénombrement, Généralités : 6 fichiers) sont supprimées (D4). | L'historique git les garde. |
+| Combien de leçons ? | 7 (la feuille de route disait 5), toutes propres à la série A : 14 fichiers. | Écart noté au journal du programme. |
+| Où ranger ? | Le référentiel (`db/seeds/catalog.rb`) ouvre « 1ère A1 » et « 1ère A2 », pas « A » : chaque leçon est écrite une fois puis déclinée en deux fichiers (`series_name` A1 et A2), soit 14 fichiers. Les 6 v1 du même intitulé sont remplacées au même nom (D4). | L'historique git les garde. |
 | Dénombrement et Généralités existent en C/D. | Déclinées au niveau A : même plan de notions, calculs plus simples, exercices allégés, contextes concrets. | Le rédacteur lit la leçon C comme modèle de structure, pas pour la copier. |
 | Niveau d'une série littéraire ? | Calculs simples, contextes concrets, pas de démonstration théorique. | Brief des rédacteurs. |
 | `valider.rb` ne contrôle pas `practice`. | Contrôle à part (`controle-entrainement.rb`, repris de P1). | Chaque fichier passe les deux contrôles. |
