@@ -21,7 +21,7 @@ module UseCases
         def last_loaded_checksum(kind:, file_name:) = @loaded[[ kind, file_name ]]
         def fail_running_named(kind:, prefix:, at:)
           (@failed_running ||= []) << [ kind, prefix, at ]
-          @orphans || 0
+          @orphans || []
         end
         attr_reader :failed_running
         attr_writer :orphans
@@ -444,13 +444,20 @@ module UseCases
       # --- ADR-0123 §9 : un chargement tué laisse des rapports « en cours » qui bloqueraient le suivant ---
 
       test "before loading, the running reports of an interrupted load are failed, and the log says how many" do
-        reports = Reports.new.tap { it.orphans = 2 }
+        reports = Reports.new.tap { it.orphans = %w[abc def] }
 
         summary = call(use_case(reports:))
 
         assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
         assert_equal [ [ "course_tree", "chargement-automatique-", @now ] ], reports.failed_running
-        assert_includes @logs, [ :warn, "[contenus] 2 import(s) d'un chargement interrompu passé(s) en échec" ]
+        assert_includes @logs, [ :warn, "[contenus] 2 import(s) d'un chargement interrompu passé(s) en échec : abc, def" ]
+      end
+
+      test "a cleanup that fails is logged and the lessons are still loaded" do
+        reports = Reports.new.tap { it.define_singleton_method(:fail_running_named) { |**| raise "base coupée" } }
+
+        assert_equal({ @lesson.import_name => :loaded }, call(use_case(reports:)).lessons)
+        assert_includes @logs, [ :error, "[contenus] imports interrompus non nettoyés (RuntimeError : base coupée)" ]
       end
 
       test "with no orphan report the log says nothing about it, and Staging clears its orphans too" do
