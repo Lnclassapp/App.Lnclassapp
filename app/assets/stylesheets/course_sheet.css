@@ -538,6 +538,16 @@
   border: 0;
 }
 
+/* Une formule en ligne plus large que la ligne défile dans son propre cadre, jamais la page (rendu-lecons-v3-390). */
+div.sheet-text,
+p.sheet-text,
+.sheet-practice-line > .sheet-text {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .sheet-practice-line {
   display: flex;
   flex-wrap: wrap;
