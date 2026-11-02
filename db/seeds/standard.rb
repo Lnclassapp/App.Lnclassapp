@@ -16,6 +16,11 @@ pin = "2468"
 log = ->(message) { puts "[standard] #{message}" }
 started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
+lessons_limit = if ENV["STANDARD_LESSONS_LIMIT"].present?
+  Integer(ENV["STANDARD_LESSONS_LIMIT"], exception: false)&.then { it if it.positive? } ||
+    raise("STANDARD_LESSONS_LIMIT doit être un entier positif, reçu : #{ENV['STANDARD_LESSONS_LIMIT'].inspect}")
+end
+
 # 1. Le manifeste est contrôlé contre le dépôt avant la moindre écriture.
 set = Entities::Catalog::StandardTestSet.new(YAML.load_file(ENV.fetch("STANDARD_MANIFEST", standard_dir.join("jeu.yml").to_s)))
 identity = Entities::School::FictitiousIdentity.new(YAML.load_file(standard_dir.join("noms.yml")))
@@ -145,7 +150,7 @@ end
 
 # 8. Les leçons du manifeste, importées par la vraie chaîne puis publiées en cascade par l'administrateur de l'équipe fictive.
 paths = set.expected_paths
-paths = paths.first(ENV["STANDARD_LESSONS_LIMIT"].to_i) if ENV["STANDARD_LESSONS_LIMIT"].present?
+paths = paths.first(lessons_limit) if lessons_limit
 admin = Orm::User.find_by(contact: contact_of.(:admin, 0)) || Orm::User.find_by!(contact: "0700000000")
 actor = Repositories::Identity::UserRepository.new.actor_for(user_id: admin.id)
 documents = paths.map { |path| [ path, JSON.parse(lessons_dir.join(path).read) ] }
