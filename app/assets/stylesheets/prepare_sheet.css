@@ -126,6 +126,8 @@
   padding: 8px 12px;
   font-size: 15px;
   text-wrap: pretty;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 /* ---- Exercice ------------------------------------------------------------------------------------------------------- */
@@ -205,10 +207,21 @@
 
 .ps-question-label {
   flex: 1 1 220px;
+  min-width: 0;
   display: flex;
   gap: 8px;
   align-items: baseline;
   text-wrap: pretty;
+}
+
+/* Une formule centrée trop large défile dans son propre cadre (.katex-display, application.tailwind.css) ; l'énoncé, élément flex, rétrécit sous la
+   largeur de la formule et la fait défiler dans son cadre, sans quoi il élargit la page (rendu-lecons-v3-390). */
+.ps-question-label > span:not(.ps-tag) {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
 }
 
 .ps-tag {
