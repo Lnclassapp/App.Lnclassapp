@@ -396,7 +396,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     logged = []
 
     # Le complément du référentiel (ADR-0123 §8) est neutralisé : on regarde le journal d'un refus.
-    nothing = -> { { levels: [], series: [], pairs: [], materials: [], conflicts: [] } }
+    nothing = -> { { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [], interruptions: [] } }
     output = stub_any_instance(Repositories::Catalog::ReferentialCompleter, :complete, nothing) do
       stub_method(Rails.logger, :warn, ->(message) { logged << message }) { charger("Develop") }
     end
@@ -421,6 +421,10 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert Orm::LevelSeries.exists?(level: Orm::Level.find_by!(slug: "tle"), series: Orm::Series.find_by!(slug: "c"))
     assert_equal [ 4, "first" ], Orm::Level.find_by!(slug: "3eme").then { [ it.position, it.cycle ] }
     assert Orm::Material.exists?(slug: "philosophie")
+    assert Orm::Material.exists?(slug: "edhc")
+    assert_equal 41, Orm::Drena.count
+    assert Orm::ClassroomPlanEntry.exists?(level: Orm::Level.find_by!(slug: "tle"))
+    assert_equal [ 0, 0 ], [ Orm::School.count, Orm::Classroom.count ]
   end
 
   test "Staging and production never create a level, a series or a material" do
@@ -428,6 +432,19 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     [ "Staging", "production" ].each { charger(it) }
 
-    assert_equal [ 1, 0, 1 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count ]
+    assert_equal [ 1, 0, 1, 0, 0 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ]
+  end
+
+  # ADR-0123 §9 : le cas de Develop du 2026-11-02 — un déploiement a tué le chargement en pleine leçon ; le suivant, dans les 10 minutes,
+  # trouve son rapport « en cours » : il le passe en échec et charge, au lieu de refuser chaque leçon (import déjà en cours).
+  test "a report left running by a killed load does not block the next one, and the lesson is loaded" do
+    seed_referential
+    create_import_report(kind: "course_tree", imported_by: @oldest, status: "importing", files: [ { "name" => IMPORT_NAME, "byte_size" => 1 } ])
+
+    output = charger("Develop")
+
+    assert_includes output, "#{IMPORT_NAME} : loaded"
+    assert_equal [ "failed" ], Orm::ImportReport.where(status: %w[failed]).pluck(:status)
+    assert_equal 0, Orm::ImportReport.where(status: %w[queued validating importing]).count
   end
 end

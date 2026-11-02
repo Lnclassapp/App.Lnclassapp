@@ -66,3 +66,9 @@ Estimation pour Develop : 84 des 263 fichiers v3 du programme ont eu une version
 - ADR-0123 §8 : sur Develop seul, création de ce qui manque du référentiel de base (`BaseReferential`, partagé avec `db/seeds/catalog.rb`), sans rien modifier d'existant ; journalisé.
 - Couverture : une branche de `key_of` (#439, matière inconnue) n'était couverte par aucun test ; ajoutée.
 
+## Suite : configuration complète du référentiel de Develop (2026-11-02)
+
+- Décision du porteur : EDHC, barème des classes (entrées absentes) et 41 DRENA, sur Develop seul, création seule. ADR-0123 §8 (complément).
+- EDHC au rang 6 du programme (ADR-0090), pas au 7 du semis de démo.
+- Deux déploiements rapprochés ont tué un chargement en pleine 1ère A1 : rien d'écrit à moitié (transactions), mais le rapport resté « en cours » aurait bloqué tout import pendant 10 minutes. ADR-0123 §9 : ces rapports orphelins passent en échec au démarrage suivant.
+

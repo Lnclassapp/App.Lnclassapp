@@ -84,3 +84,20 @@ ADR-0122 charge seul, sur Develop et Staging, les leçons du dépôt qui portent
 
 **Conséquence.** Develop porte désormais les niveaux, séries et matières du référentiel de base, même si l'équipe ne les avait pas créés ; les renommer à l'écran reste possible (le slug est figé), un niveau, une série, un couple ou une matière supprimé revient au déploiement suivant (pas de mémoire des suppressions). Un niveau du même sens sous un autre nom (« Terminale ») n'empêche pas la création de « Tle » : les deux coexistent, le journal dit la position décalée.
 
+**Complément du 2026-11-02 (décision du porteur : configuration complète du référentiel sur Develop).** Le même mécanisme, sous la même garde et avec la même règle (création seule, rien d'existant modifié ni supprimé), crée aussi avant le chargement :
+- la matière **EDHC** (`BaseReferential::PROGRAMME_MATERIALS`, septième matière du programme, D1) : catégorie `other`, rang du programme d'ADR-0090 (6 ; le semis de démo `trois_etablissements.rb` écrit 7, il n'est pas repris) ; les semis de développement gardent leurs 6 matières ;
+- les entrées **absentes** du barème des classes (ADR-0058, `FillClassroomPlanEntries.fill`, `ON CONFLICT DO NOTHING`) : un nombre posé par l'équipe n'est jamais réécrit ;
+- les **41 DRENA** de `db/seeds/data/drenas.yml`, par slug.
+
+Aucun établissement ni aucune classe n'est créé. Le journal du pré-déploiement dit ce qui a été créé, par type (« matières EDHC ; barème 24 entrée(s) ; DRENA 41 »). Comme pour les niveaux, une DRENA ou une entrée du barème supprimée revient au déploiement suivant. Chaque étape (référentiel, matières, barème, DRENA) est à l'abri : une interruption est journalisée avec son message et n'empêche ni les étapes suivantes ni le chargement. Le barème s'écrit en une transaction ; une entrée saisie à l'écran pendant le pré-déploiement serait comptée comme créée (sur-compte possible, jamais d'écriture de plus).
+
+## 9. Amendement du 2026-11-02 : un chargement tué en pleine leçon
+
+**Constat (Develop, déploiements `1f7bbe5e` puis `1b8fa823`).** Le second déploiement a remplacé le premier pendant son pré-déploiement et a tué le chargement après ~45 leçons ; lui-même avait trouvé le verrou pris et sauté le chargement.
+
+**Ce qui tient sans changement.**
+- L'écriture d'une leçon (import, dans la transaction du lot) et sa publication (cascade, dans sa transaction) sont chacune tout ou rien : une leçon coupée n'est jamais à moitié écrite ni à moitié publiée.
+- Coupée entre l'import et la publication : son rapport est terminé, l'empreinte ne change pas, la publication est reprise seule au déploiement suivant (`republished`). Coupée pendant l'import : pas de rapport terminé, elle est réimportée entière.
+
+**Ce qui change.** Le rapport de la leçon coupée reste « en cours », et un rapport en cours fait refuser tout import du même type pendant 10 minutes (`StartImport`, `fail_stale`) : un déploiement relancé aussitôt aurait laissé chaque leçon `not_started`. Avant de charger, sous le verrou consultatif (aucun autre chargement ne tourne), le use case passe en échec les rapports `course_tree` encore en cours dont le fichier s'appelle `chargement-automatique-…` (`ImportReportRepository#fail_running_named`), et le journalise. Un import à la main en cours n'est pas touché : il fait seulement attendre les leçons au déploiement suivant (`not_started`, journalisé). Le démarrage qui trouve le verrou pris le dit à la sortie et au journal (« verrou pris par un autre démarrage : chargement sauté »), le déploiement suivant reprend.
+

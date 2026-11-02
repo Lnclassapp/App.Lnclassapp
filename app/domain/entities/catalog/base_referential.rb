@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Entities::Catalog::BaseReferential
-# Rôle : le référentiel de base (niveaux, séries par niveau, matières) des semis de développement et du complément de Develop
+# Rôle : le référentiel de base (niveaux, séries par niveau, matières) des semis de développement et du complément de Develop (avec l'EDHC)
 # ADR  : 0034, 0123
 module Entities
   module Catalog
@@ -16,6 +16,8 @@ module Entities
                     [ "Français", "Français", "literature" ], [ "Histoire-Géographie", "HG", "literature" ],
                     [ "Philosophie", "Philo", "literature" ] ]
                   .map { |name, shortname, category| Material.new(name:, shortname:, category:) }.freeze
+      # Les matières du programme : celles de la base et l'EDHC, septième (D1, ADR-0123 §8) ; les semis de développement gardent MATERIALS.
+      PROGRAMME_MATERIALS = (MATERIALS + [ Material.new(name: "EDHC", shortname: "EDHC", category: "other") ]).freeze
     end
   end
 end

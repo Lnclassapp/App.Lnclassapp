@@ -19,6 +19,12 @@ module UseCases
         attr_reader :rejections
         def initialize(loaded: {}) = (@loaded = loaded) && (@rejections = [])
         def last_loaded_checksum(kind:, file_name:) = @loaded[[ kind, file_name ]]
+        def fail_running_named(kind:, prefix:, at:)
+          (@failed_running ||= []) << [ kind, prefix, at ]
+          @orphans || 0
+        end
+        attr_reader :failed_running
+        attr_writer :orphans
         def record_rejection(**args) = @rejections << args
       end
 
@@ -60,7 +66,7 @@ module UseCases
         include Ports::Catalog::ReferentialCompleterPort
         attr_reader :calls
         def initialize(created = {}) = (@created = created) && (@calls = 0)
-        def complete = (@calls += 1) && { levels: [], series: [], pairs: [], materials: [], conflicts: [] }.merge(@created)
+        def complete = (@calls += 1) && { levels: [], series: [], pairs: [], materials: [], plan_entries: [], drenas: [], conflicts: [], interruptions: [] }.merge(@created)
       end
 
       setup do
@@ -389,13 +395,17 @@ module UseCases
       # --- ADR-0123 §8 : sur Develop seul, le référentiel manquant est créé avant le chargement ---
 
       test "Develop completes the referential before loading and logs what it created" do
-        referential = Referential.new(levels: [ "1ère" ], series: %w[A1 A2], pairs: [ "1ère A1", "1ère A2" ], conflicts: [ "matière Mathématiques" ])
+        referential = Referential.new(levels: [ "1ère" ], series: %w[A1 A2], pairs: [ "1ère A1", "1ère A2" ], materials: [ "EDHC" ],
+                                      plan_entries: %w[a b c], drenas: [ "Abidjan 1", "Aboisso" ], conflicts: [ "matière Mathématiques" ],
+                                      interruptions: [ "barème (PG::ConnectionBad : coupé)" ])
 
         call(use_case(referential:))
 
         assert_equal 1, referential.calls
-        assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2" ],
-                       [ :warn, "[contenus] référentiel : non créé (déjà pris) : matière Mathématiques" ] ], @logs.first(2)
+        assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2 ; matières EDHC ; " \
+                                "barème 3 entrée(s) ; DRENA 2" ],
+                       [ :warn, "[contenus] référentiel : non créé (déjà pris) : matière Mathématiques" ],
+                       [ :error, "[contenus] référentiel interrompu : barème (PG::ConnectionBad : coupé)" ] ], @logs.first(3)
       end
 
       test "a complete referential logs nothing" do
@@ -430,6 +440,26 @@ module UseCases
           assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], taxonomy: Taxonomy.new(lookup), run_lesson: refused)).lessons)
           assert_equal %i[start run_lesson], @calls.map(&:first)
         end
+      end
+      # --- ADR-0123 §9 : un chargement tué laisse des rapports « en cours » qui bloqueraient le suivant ---
+
+      test "before loading, the running reports of an interrupted load are failed, and the log says how many" do
+        reports = Reports.new.tap { it.orphans = 2 }
+
+        summary = call(use_case(reports:))
+
+        assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
+        assert_equal [ [ "course_tree", "chargement-automatique-", @now ] ], reports.failed_running
+        assert_includes @logs, [ :warn, "[contenus] 2 import(s) d'un chargement interrompu passé(s) en échec" ]
+      end
+
+      test "with no orphan report the log says nothing about it, and Staging clears its orphans too" do
+        reports = Reports.new
+
+        call(use_case(reports:), name: "Staging")
+
+        assert_equal 1, reports.failed_running.size
+        assert_empty(@logs.select { it.last.include?("interrompu") })
       end
     end
   end

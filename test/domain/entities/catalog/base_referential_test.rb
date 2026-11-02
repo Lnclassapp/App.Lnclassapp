@@ -12,6 +12,10 @@ module Entities
         assert_equal %w[Mathématiques Physique-Chimie SVT Français Histoire-Géographie Philosophie], BaseReferential::MATERIALS.map(&:name)
         assert_equal [ "Maths", "science" ], BaseReferential::MATERIALS.first.then { [ it.shortname, it.category ] }
       end
+      test "the programme materials are the six of the base and EDHC, the seventh of the programme (D1)" do
+        assert_equal BaseReferential::MATERIALS + [ BaseReferential::Material.new(name: "EDHC", shortname: "EDHC", category: "other") ],
+                     BaseReferential::PROGRAMME_MATERIALS
+      end
     end
   end
 end

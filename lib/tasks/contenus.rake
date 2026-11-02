@@ -56,7 +56,8 @@ namespace :contenus do
           summary.lessons.each { |name, status| say.call("#{name} : #{status}") }
         end
       else
-        say.call("un autre démarrage charge déjà les leçons : rien n'est chargé cette fois.")
+        say.call("un autre démarrage charge déjà les leçons : rien n'est chargé cette fois, le déploiement suivant reprendra.")
+        Rails.logger.warn("[contenus] verrou pris par un autre démarrage : chargement sauté")
       end
     rescue StandardError => error
       Rails.logger.error("[contenus] chargement automatique interrompu : #{error.class} : #{error.message}")

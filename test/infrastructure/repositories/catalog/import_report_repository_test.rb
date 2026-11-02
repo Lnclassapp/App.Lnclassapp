@@ -229,6 +229,25 @@ module Repositories
         @repository.finish(id: report.id, status: "failed", counts: {}, details: {}, errors: [], at: @at)
         assert_not @repository.resume(id: report.id, at: @at)
       end
+      # ADR-0123 §9 : un chargement automatique tué laisse son rapport « en cours » ; le suivant, qui tient le verrou, le passe failed.
+      test "fail_running_named fails only a running report of that kind whose file name has the prefix" do
+        author = create_team_member(team_role: "content", second_factor: false)
+        report = ->(status, name, kind: "course_tree") { create_import_report(kind:, imported_by: author, status:, files: [ { "name" => name, "byte_size" => 1 } ]) }
+        at = Time.zone.parse("2026-11-02 12:40")
+        done = report.("completed", "chargement-automatique-tle-c-x.json")
+        other_kind = report.("importing", "chargement-automatique-a.json", kind: "drenas")
+
+        %w[queued validating importing].each do |status|
+          orphan = report.(status, "chargement-automatique-tle-c-x.json")
+
+          assert_equal 1, @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+          assert_equal [ "failed", at ], [ orphan.reload.status, orphan.finished_at ]
+        end
+        by_hand = report.("importing", "lecon.json")
+
+        assert_equal 0, @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+        assert_equal [ "importing", "completed", "importing" ], [ by_hand, done, other_kind ].map { it.reload.status }
+      end
     end
   end
 end
