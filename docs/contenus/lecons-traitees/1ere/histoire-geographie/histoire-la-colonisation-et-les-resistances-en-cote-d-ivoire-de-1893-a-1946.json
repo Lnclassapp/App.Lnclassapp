@@ -3,25 +3,90 @@
  "version": 3,
  "courses": [
   {
-   "name": "L'urbanisation dans les pays en développement : l'exemple de la Côte d'Ivoire",
-   "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+   "name": "Histoire — La colonisation et les résistances en Côte d'Ivoire de 1893 à 1946",
+   "subtitle": "Leçon 9 — progression DPFC 2026-2027",
    "level_name": "1ère",
    "material_name": "Histoire-Géographie",
-   "theme": "blue",
+   "theme": "burgundy",
    "figures": [
     {
-     "key": "carte-villes-ci",
+     "key": "frise-colonisation",
+     "kind": "timeline",
+     "description": "Une frise de 1890 à 1950 qui place les repères de la leçon : colonie française (1893), AOF (1895), capitale à Bingerville (1900), début du chemin de fer (1904), Bouaké atteinte (1912), capitale à Abidjan (1934), Syndicat agricole africain (1944), Houphouët-Boigny député (1945), fin du travail forcé (1946). Le curseur règle le début de la frise.",
+     "params": {
+      "start": 1890,
+      "end": 1950,
+      "step": 10,
+      "unit": "year",
+      "periods": [
+       {
+        "from": 1893,
+        "to": 1946,
+        "label": "Colonie française (leçon)"
+       }
+      ],
+      "events": [
+       {
+        "at": 1893,
+        "label": "Colonie de Côte d'Ivoire"
+       },
+       {
+        "at": 1895,
+        "label": "Création de l'AOF"
+       },
+       {
+        "at": 1900,
+        "label": "Capitale : Bingerville"
+       },
+       {
+        "at": 1904,
+        "label": "Début du chemin de fer"
+       },
+       {
+        "at": 1912,
+        "label": "Le rail atteint Bouaké"
+       },
+       {
+        "at": 1934,
+        "label": "Capitale : Abidjan"
+       },
+       {
+        "at": 1944,
+        "label": "Syndicat agricole africain"
+       },
+       {
+        "at": 1945,
+        "label": "Houphouët-Boigny député"
+       },
+       {
+        "at": 1946,
+        "label": "Fin du travail forcé"
+       }
+      ]
+     },
+     "controls": [
+      {
+       "param": "start",
+       "min": 1850,
+       "max": 1920,
+       "step": 10,
+       "label": "Début de la frise"
+      }
+     ]
+    },
+    {
+     "key": "carte-voie-ferree",
      "kind": "map",
-     "description": "Une carte de la Côte d'Ivoire. Le district d'Abidjan, au sud, et celui de Yamoussoukro, au centre, sont colorés à part. Six villes sont repérées : Abidjan, Yamoussoukro, Bouaké, Daloa, San-Pédro et Korhogo. Trois axes relient Abidjan à Yamoussoukro, Yamoussoukro à Bouaké, puis Bouaké à Korhogo.",
+     "description": "Une carte de la Côte d'Ivoire. La voie ferrée part d'Abidjan et monte vers le nord par Agboville, Dimbokro, Bouaké et Katiola jusqu'à Ferkessédougou. La zone de forêt dense, où l'on cultive le café et le cacao et où l'on coupe le bois, est colorée à part de la savane. Grand-Bassam et Bingerville, anciennes capitales, sont repérées.",
      "params": {
       "base": "cote_d_ivoire",
       "areas": [
        {
-        "id": "abidjan",
+        "id": "dense_forest",
         "category": 1
        },
        {
-        "id": "yamoussoukro",
+        "id": "savanna",
         "category": 2
        }
       ],
@@ -31,552 +96,279 @@
         "label": "Abidjan"
        },
        {
-        "id": "yamoussoukro",
-        "label": "Yamoussoukro"
+        "id": "agboville"
+       },
+       {
+        "id": "dimbokro"
        },
        {
         "id": "bouake",
         "label": "Bouaké"
        },
        {
-        "id": "daloa",
-        "label": "Daloa"
+        "id": "katiola"
        },
        {
-        "id": "san_pedro",
-        "label": "San-Pédro"
+        "id": "ferkessedougou",
+        "label": "Ferkessédougou"
        },
        {
-        "id": "korhogo",
-        "label": "Korhogo"
+        "id": "grand_bassam",
+        "label": "Grand-Bassam (capitale en 1893)"
+       },
+       {
+        "id": "bingerville",
+        "label": "Bingerville (capitale en 1900)"
        }
       ],
       "routes": [
        {
         "from": "abidjan",
-        "to": "yamoussoukro",
-        "label": "Axe routier"
+        "to": "agboville",
+        "label": "Voie ferrée"
        },
        {
-        "from": "yamoussoukro",
+        "from": "agboville",
+        "to": "dimbokro",
+        "label": "Voie ferrée"
+       },
+       {
+        "from": "dimbokro",
         "to": "bouake",
-        "label": "Axe routier"
+        "label": "Voie ferrée"
        },
        {
         "from": "bouake",
-        "to": "korhogo",
-        "label": "Axe routier"
+        "to": "katiola",
+        "label": "Voie ferrée"
+       },
+       {
+        "from": "katiola",
+        "to": "ferkessedougou",
+        "label": "Voie ferrée"
        }
       ],
       "legend": [
-       "Capitale économique (Abidjan)",
-       "Capitale politique (Yamoussoukro)"
+       "Forêt dense : café, cacao, bois",
+       "Savane"
       ]
      },
      "controls": []
     },
     {
-     "key": "causes-urbanisation",
+     "key": "hierarchie-coloniale",
      "kind": "diagram",
-     "description": "Un schéma de gauche à droite. Les facteurs de départ du village (pauvreté, manque d'emplois) et les facteurs d'attraction de la ville (emplois, écoles, hôpitaux) mènent à l'exode rural. L'exode rural et la croissance naturelle des citadins mènent ensemble à l'augmentation de la population urbaine.",
-     "params": {
-      "layout": "flow",
-      "direction": "right",
-      "nodes": [
-       {
-        "id": "dep",
-        "label": "Facteurs de départ : pauvreté, peu d'emplois au village",
-        "category": 1
-       },
-       {
-        "id": "att",
-        "label": "Facteurs d'attraction : emplois, écoles, hôpitaux en ville",
-        "category": 2
-       },
-       {
-        "id": "exo",
-        "label": "Exode rural",
-        "category": 3
-       },
-       {
-        "id": "nat",
-        "label": "Croissance naturelle des citadins",
-        "category": 3
-       },
-       {
-        "id": "urb",
-        "label": "Hausse de la population urbaine"
-       }
-      ],
-      "edges": [
-       {
-        "from": "dep",
-        "to": "exo",
-        "label": "poussent"
-       },
-       {
-        "from": "att",
-        "to": "exo",
-        "label": "attirent"
-       },
-       {
-        "from": "exo",
-        "to": "urb"
-       },
-       {
-        "from": "nat",
-        "to": "urb"
-       }
-      ],
-      "legend": [
-       "Village",
-       "Ville",
-       "Mouvements de population"
-      ]
-     },
-     "controls": []
-    },
-    {
-     "key": "consequences-urbaine",
-     "kind": "diagram",
-     "description": "Un schéma en arbre. La croissance rapide de la ville est la racine. Elle mène à trois manques : le manque de logements (quartiers précaires), le manque d'emplois stables (secteur informel) et le manque de routes et de transports (embouteillages). Chaque domaine a sa couleur.",
+     "description": "Un schéma en arbre de l'administration coloniale. Le gouverneur général de l'AOF commande le gouverneur de la Côte d'Ivoire, qui commande les commandants de cercle, administrateurs français. Ceux-ci donnent leurs ordres aux chefs de canton, puis aux chefs de village, des Africains qui relaient les ordres jusqu'à la population.",
      "params": {
       "layout": "tree",
       "direction": "down",
       "nodes": [
        {
-        "id": "cr",
-        "label": "Croissance rapide de la ville"
-       },
-       {
-        "id": "log",
-        "label": "Manque de logements",
+        "id": "gg",
+        "label": "Gouverneur général de l'AOF",
         "category": 1
        },
        {
-        "id": "emp",
-        "label": "Peu d'emplois stables",
-        "category": 2
-       },
-       {
-        "id": "tra",
-        "label": "Routes et transports insuffisants",
-        "category": 3
-       },
-       {
-        "id": "qp",
-        "label": "Quartiers précaires",
+        "id": "gci",
+        "label": "Gouverneur de la Côte d'Ivoire",
         "category": 1
        },
        {
-        "id": "inf",
-        "label": "Secteur informel",
+        "id": "cc",
+        "label": "Commandants de cercle",
+        "category": 1
+       },
+       {
+        "id": "ct",
+        "label": "Chefs de canton",
         "category": 2
        },
        {
-        "id": "emb",
-        "label": "Embouteillages",
-        "category": 3
+        "id": "cv",
+        "label": "Chefs de village",
+        "category": 2
        }
       ],
       "edges": [
        {
-        "from": "cr",
-        "to": "log"
+        "from": "gg",
+        "to": "gci",
+        "label": "ordonne"
        },
        {
-        "from": "cr",
-        "to": "emp"
+        "from": "gci",
+        "to": "cc",
+        "label": "ordonne"
        },
        {
-        "from": "cr",
-        "to": "tra"
+        "from": "cc",
+        "to": "ct",
+        "label": "ordonne"
        },
        {
-        "from": "log",
-        "to": "qp"
-       },
-       {
-        "from": "emp",
-        "to": "inf"
-       },
-       {
-        "from": "tra",
-        "to": "emb"
+        "from": "ct",
+        "to": "cv",
+        "label": "ordonne"
        }
       ],
       "legend": [
-       "Logement",
-       "Emploi",
-       "Transport"
+       "Administrateurs français",
+       "Intermédiaires africains"
       ]
+     },
+     "controls": []
+    },
+    {
+     "key": "circuit-traite",
+     "kind": "diagram",
+     "description": "Un cycle qui montre l'économie de traite : les cultures et les forêts de la colonie fournissent café, cacao et bois ; le chemin de fer les amène au port ; les navires les portent en France ; la France renvoie des produits fabriqués vers la colonie, où ils sont vendus. Le circuit profite d'abord à la métropole.",
+     "params": {
+      "layout": "cycle",
+      "direction": "right",
+      "nodes": [
+       {
+        "id": "cu",
+        "label": "Cultures et forêts : café, cacao, bois"
+       },
+       {
+        "id": "cf",
+        "label": "Chemin de fer"
+       },
+       {
+        "id": "po",
+        "label": "Port d'embarquement"
+       },
+       {
+        "id": "fr",
+        "label": "France : usines et commerçants"
+       },
+       {
+        "id": "pf",
+        "label": "Produits fabriqués vendus dans la colonie"
+       }
+      ],
+      "edges": [
+       {
+        "from": "cu",
+        "to": "cf"
+       },
+       {
+        "from": "cf",
+        "to": "po"
+       },
+       {
+        "from": "po",
+        "to": "fr",
+        "label": "exporte"
+       },
+       {
+        "from": "fr",
+        "to": "pf",
+        "label": "renvoie"
+       },
+       {
+        "from": "pf",
+        "to": "cu"
+       }
+      ],
+      "legend": []
      },
      "controls": []
     }
    ],
    "notions": [
     {
-     "name": "Mesurer l'urbanisation",
-     "figure": null,
-     "remember": "L'**urbanisation** est l'augmentation de la population qui vit en **ville** (les citadins), plus vite que celle qui vit à la campagne. On la mesure par le **taux d'urbanisation** : $$\\text{taux} = \\frac{\\text{population urbaine}}{\\text{population totale}} \\times 100$$\nIl se donne en pourcentage. Le seuil à partir duquel une localité est une ville dépend des pays. Ne confonds pas deux idées : la **croissance urbaine** (le nombre de citadins augmente) et l'**urbanisation** (la **part** des citadins augmente). Dans les pays en développement, l'urbanisation est souvent rapide. En Côte d'Ivoire, environ la moitié des habitants vivent aujourd'hui en ville.",
+     "name": "L'administration coloniale : organisation et pouvoirs",
+     "remember": "En **1893**, la Côte d'Ivoire devient une **colonie française** ; **Louis-Gustave Binger** en est le premier gouverneur. En **1895**, elle entre dans l'**AOF** (Afrique occidentale française), dirigée par un **gouverneur général**. Dans la colonie, le **gouverneur** commande ; le territoire est découpé en **cercles**, dirigés par des **commandants de cercle**, des administrateurs français. Plus bas, les **chefs de canton** et les **chefs de village**, des Africains contrôlés par l'administration, relaient les ordres : lever l'impôt, fournir des travailleurs. La capitale est **Grand-Bassam** (1893), puis **Bingerville** (1900), puis **Abidjan** (1934). Les Africains sont des **sujets** : ils sont soumis au régime de l'**indigénat**, qui permet à l'administration de les punir sans procès régulier.",
      "method": [
-      "Relever la population urbaine et la population totale, à la même date.",
-      "Calculer le taux d'urbanisation : population urbaine ÷ population totale × 100.",
-      "Interpréter le résultat : moins ou plus de la moitié des habitants vivent en ville, et si ce taux augmente d'une date à l'autre."
+      "Situer l'administration : la date, la colonie et le cadre (AOF) dans lesquels le pouvoir s'exerce.",
+      "Identifier les niveaux de l'autorité, du plus haut au plus bas, et qui les occupe (Français ou Africains).",
+      "Expliquer le rôle de chaque niveau et le but de la France : contrôler le territoire, lever l'impôt, fournir des travailleurs."
      ],
      "example": {
-      "statement": "Dans un pays fictif, on compte en 2020 six millions de citadins pour douze millions d'habitants. Calcule et interprète son taux d'urbanisation.",
+      "statement": "Montre comment un ordre de l'administration arrive jusqu'à un village de la colonie vers 1935.",
       "steps": [
-       "Relever : la population urbaine est de 6 000 000 d'habitants et la population totale de 12 000 000 d'habitants, en 2020.",
-       "Calculer : $6\\,000\\,000 \\div 12\\,000\\,000 \\times 100 = 50$, soit un taux de 50 %.",
-       "Interpréter : le taux est de 50 %, donc la moitié des habitants vivent en ville."
+       "Situer : vers 1935, la Côte d'Ivoire est une colonie française de l'AOF, dont la capitale est Abidjan depuis 1934.",
+       "Identifier : l'ordre descend du gouverneur général de l'AOF au gouverneur de la Côte d'Ivoire, puis au commandant de cercle (Français), au chef de canton et au chef de village (Africains).",
+       "Expliquer : le commandant de cercle donne l'ordre, les chefs africains le font exécuter dans les villages ; le but est de lever l'impôt et de réunir des travailleurs pour la France."
       ]
      },
-     "pitfall": "Ne confonds pas **croissance urbaine** et **urbanisation**. Contre-exemple : un pays passe de 10 millions d'habitants dont 4 millions de citadins à 20 millions dont 8 millions de citadins. Les citadins ont doublé, mais le taux est resté à $4 \\div 10 = 40\\ \\%$, puis $8 \\div 20 = 40\\ \\%$. Il n'y a pas eu d'urbanisation : la ville a grandi au même rythme que le pays. Divise toujours par la population **totale**, jamais par la population rurale.",
+     "pitfall": "Ne confonds pas le chef de canton avec un chef choisi par la tradition. Le chef de canton est placé par l'administration, qui peut le remplacer s'il n'obéit pas. Ne confonds pas non plus les capitales : en 1900 la capitale est Bingerville, et Abidjan ne le devient qu'en 1934, soit 34 ans plus tard.",
+     "figure": "hierarchie-coloniale",
      "exercise": {
-      "title": "Calculer et interpréter un taux d'urbanisation",
-      "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche : relever, calculer, interpréter. Les pays cités sont fictifs.",
+      "title": "L'administration coloniale",
+      "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, expliquer.",
       "exercise_type": "fixation",
-      "figure": null,
+      "figure": "hierarchie-coloniale",
       "questions": [
        {
-        "content": "Qu'appelle-t-on le taux d'urbanisation d'un pays ?",
+        "content": "Dans l'administration de la colonie de Côte d'Ivoire, qui est placé directement sous le gouverneur de la colonie ?",
         "question_type": "single_choice",
-        "explanation": "Étape 2 — Calculer : le taux se calcule en divisant la population urbaine par la population totale, puis en multipliant par 100. C'est donc une part de la population totale. Diviser par le nombre de ruraux est l'erreur du piège : on obtiendrait un rapport entre deux groupes, pas un pourcentage de la population totale.",
+        "explanation": "Étape 1 — Situer : nous sommes dans la colonie de Côte d'Ivoire, membre de l'AOF. Étape 2 — Identifier les niveaux : le gouverneur commande les commandants de cercle, des administrateurs français. Le chef de canton et le chef de village sont plus bas, et le gouverneur général de l'AOF est au-dessus du gouverneur de la colonie, non en dessous.",
         "answers": [
          {
-          "content": "La part de la population totale qui vit en ville, en pourcentage",
+          "content": "Le chef de village",
+          "correct": false
+         },
+         {
+          "content": "Le commandant de cercle",
           "correct": true
          },
          {
-          "content": "Le nombre d'habitants de la plus grande ville",
+          "content": "Le chef de canton",
           "correct": false
          },
          {
-          "content": "Le nombre de villes du pays",
-          "correct": false
-         },
-         {
-          "content": "Le rapport entre le nombre de citadins et le nombre de ruraux",
+          "content": "Le gouverneur général de l'AOF",
           "correct": false
          }
         ]
        },
        {
-        "content": "Étape 1 : un pays fictif compte 3 000 000 de citadins pour 10 000 000 d'habitants. Quel est son taux d'urbanisation, en pourcentage ?",
-        "question_type": "numeric",
-        "explanation": "Étape 1 — Relever : population urbaine 3 000 000 ; population totale 10 000 000. Étape 2 — Calculer : $3\\,000\\,000 \\div 10\\,000\\,000 \\times 100 = 30$. Étape 3 — Interpréter : 30 % des habitants vivent en ville, donc moins de la moitié. Le taux est 30 %.",
-        "answers": [
-         {
-          "content": "30",
-          "correct": true
-         }
-        ],
-        "tolerance": 0,
-        "unit": "%"
-       },
-       {
-        "content": "Un pays fictif compte 7 500 000 citadins pour 10 000 000 d'habitants. Quel est son taux d'urbanisation, en pourcentage ?",
-        "question_type": "numeric",
-        "explanation": "Étape 1 — Relever : population urbaine 7 500 000 ; population totale 10 000 000. Étape 2 — Calculer : $7\\,500\\,000 \\div 10\\,000\\,000 \\times 100 = 75$. Étape 3 — Interpréter : 75 % des habitants vivent en ville, donc la grande majorité. Le taux est 75 %.",
-        "answers": [
-         {
-          "content": "75",
-          "correct": true
-         }
-        ],
-        "tolerance": 0,
-        "unit": "%"
-       },
-       {
-        "content": "Un pays fictif compte 20 000 000 d'habitants et son taux d'urbanisation est de 40 %. Combien d'habitants vivent en ville ?",
-        "question_type": "numeric",
-        "explanation": "Étape 1 — Relever : population totale 20 000 000 ; taux 40 %. Étape 2 — Calculer (la méthode à l'envers) : $20\\,000\\,000 \\times 40 \\div 100 = 8\\,000\\,000$. Étape 3 — Interpréter : 8 000 000 de citadins, soit moins de la moitié de la population.",
-        "answers": [
-         {
-          "content": "8000000",
-          "correct": true
-         }
-        ],
-        "tolerance": 0,
-        "unit": "habitants"
-       },
-       {
-        "content": "Dans un pays fictif, le taux d'urbanisation passe de 30 % à 45 % entre deux dates. Ce pays s'urbanise.",
-        "question_type": "true_false",
-        "explanation": "Étape 3 — Interpréter : on compare les taux des deux dates. Il passe de 30 % à 45 %, donc la part des citadins augmente : le pays s'urbanise. Ce n'est pas seulement le nombre de citadins qui augmente.",
-        "answers": [
-         {
-          "content": "Vrai",
-          "correct": true
-         },
-         {
-          "content": "Faux",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Un pays fictif passe de 10 000 000 d'habitants dont 4 000 000 de citadins à 20 000 000 d'habitants dont 8 000 000 de citadins. Que devient son taux d'urbanisation ?",
-        "question_type": "single_choice",
-        "explanation": "Étape 1 — Relever : 4 000 000 sur 10 000 000, puis 8 000 000 sur 20 000 000. Étape 2 — Calculer : $4 \\div 10 \\times 100 = 40$ puis $8 \\div 20 \\times 100 = 40$. Étape 3 — Interpréter : le taux reste à 40 %. Les citadins ont doublé, mais la population totale aussi : c'est de la croissance urbaine, pas de l'urbanisation. L'erreur du piège est de croire que le taux double avec les citadins.",
-        "answers": [
-         {
-          "content": "Il reste à 40 %",
-          "correct": true
-         },
-         {
-          "content": "Il double, car le nombre de citadins double",
-          "correct": false
-         },
-         {
-          "content": "Il baisse, car la population rurale augmente aussi",
-          "correct": false
-         },
-         {
-          "content": "Il passe de 40 % à 80 %",
-          "correct": false
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "name": "Expliquer les causes de l'urbanisation",
-     "figure": "causes-urbanisation",
-     "remember": "L'urbanisation a **deux causes** principales.\n- L'**exode rural** : des habitants quittent la campagne pour s'installer en ville. Ils partent à cause de **facteurs de départ** (pauvreté, peu d'emplois et de revenus au village, peu d'écoles et d'hôpitaux). Ils sont attirés par des **facteurs d'attraction** (emplois, écoles, hôpitaux, électricité, possibilité de gagner de l'argent en ville).\n- La **croissance naturelle** des citadins : c'est la différence entre les naissances et les décès. Les migrants sont souvent jeunes ; ils ont des enfants en ville, ce qui fait grandir encore la population urbaine.\nEn Côte d'Ivoire, Abidjan attire par son port, ses industries, ses administrations et ses services.",
-     "method": [
-      "Repérer d'où partent les migrants et vers où ils vont.",
-      "Classer les raisons : facteurs de départ (village) et facteurs d'attraction (ville).",
-      "Identifier la part de la croissance naturelle : les naissances en ville moins les décès.",
-      "Conclure en reliant l'exode rural et la croissance naturelle à la hausse de la population urbaine."
-     ],
-     "example": {
-      "statement": "Moussa, 20 ans, quitte son village du Nord pour Abidjan. Il y trouve du travail, se marie et a deux enfants. Explique comment son histoire contribue à l'urbanisation.",
-      "steps": [
-       "Repérer : Moussa part d'un village (la campagne) vers Abidjan (la ville) : c'est un exode rural.",
-       "Classer : facteur de départ, peu d'emplois et de revenus au village ; facteur d'attraction, emplois, écoles et hôpitaux à Abidjan.",
-       "Identifier : ses deux enfants naissent à Abidjan. Ce sont des naissances en ville, donc de la croissance naturelle.",
-       "Conclure : Moussa augmente la population urbaine par son arrivée (exode rural), et ses enfants par leur naissance (croissance naturelle)."
-      ]
-     },
-     "pitfall": "Ne crois pas que l'urbanisation vient **seulement** de l'exode rural. Exemple fictif : une ville gagne 100 000 habitants en un an, dont 40 000 migrants venus des villages et 60 000 grâce aux naissances en excès. Ici, la croissance naturelle pèse **plus** que l'exode rural (60 % contre 40 %). Ne range pas non plus « manque d'emplois au village » parmi les facteurs d'attraction : c'est un facteur de **départ**.",
-     "exercise": {
-      "title": "Distinguer les causes de l'urbanisation",
-      "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche pour classer et expliquer les causes de l'urbanisation.",
-      "exercise_type": "fixation",
-      "figure": "causes-urbanisation",
-      "questions": [
-       {
-        "content": "Relie chaque situation à la cause ou au facteur qu'elle illustre.",
-        "question_type": "matching",
-        "explanation": "Étape 2 — Classer : ce qui pousse à quitter le village est un facteur de départ ; ce qui attire en ville est un facteur d'attraction. Étape 3 — Identifier : plus de naissances que de décès donne la croissance naturelle. Le départ des ruraux vers la ville est l'exode rural lui-même, pas un facteur.",
-        "answers": [
-         {
-          "content": "Pauvreté et manque d'emplois au village",
-          "match": "Facteur de départ"
-         },
-         {
-          "content": "Écoles, hôpitaux et emplois nombreux en ville",
-          "match": "Facteur d'attraction"
-         },
-         {
-          "content": "Plus de naissances que de décès chez les citadins",
-          "match": "Croissance naturelle"
-         },
-         {
-          "content": "Des jeunes ruraux s'installent en ville",
-          "match": "Exode rural"
-         }
-        ]
-       },
-       {
-        "content": "Que désigne l'exode rural ?",
-        "question_type": "single_choice",
-        "explanation": "Étape 1 — Repérer : l'exode rural est un mouvement de population qui part de la campagne (le village) et va vers la ville. Le mouvement inverse existe mais ne produit pas d'urbanisation.",
-        "answers": [
-         {
-          "content": "Le départ d'habitants de la campagne pour s'installer en ville",
-          "correct": true
-         },
-         {
-          "content": "L'arrivée d'habitants de la ville à la campagne",
-          "correct": false
-         },
-         {
-          "content": "La hausse des naissances dans les villages",
-          "correct": false
-         },
-         {
-          "content": "La construction de nouvelles routes entre les villes",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Parmi ces propositions, lesquelles sont des facteurs d'attraction de la ville ?",
-        "question_type": "multiple_correct_2",
-        "explanation": "Étape 2 — Classer : un facteur d'attraction décrit ce que la ville offre : des emplois, des écoles, des hôpitaux. Les trois autres propositions décrivent un manque au village : ce sont des facteurs de départ, l'erreur signalée dans le piège.",
-        "answers": [
-         {
-          "content": "Les emplois sont plus nombreux en ville",
-          "correct": true
-         },
-         {
-          "content": "Les écoles et les hôpitaux sont plus nombreux en ville",
-          "correct": true
-         },
-         {
-          "content": "Les revenus agricoles sont faibles au village",
-          "correct": false
-         },
-         {
-          "content": "Il y a peu d'emplois au village",
-          "correct": false
-         },
-         {
-          "content": "Les villages manquent d'équipements",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Quand les naissances dépassent les décès chez les citadins, on parle de croissance ___.",
-        "question_type": "fill_blank",
-        "explanation": "Étape 3 — Identifier : la croissance naturelle est la différence entre les naissances et les décès. En ville, elle s'ajoute à l'exode rural pour faire grandir la population urbaine.",
-        "answers": [
-         {
-          "content": "naturelle",
-          "correct": true
-         }
-        ]
-       },
-       {
-        "content": "Remets dans l'ordre les étapes pour expliquer les causes de l'urbanisation.",
+        "content": "Remets dans l'ordre l'autorité coloniale, du niveau le plus haut au plus bas.",
         "question_type": "ordering",
-        "explanation": "Étape 1 — Repérer, Étape 2 — Classer, Étape 3 — Identifier, Étape 4 — Conclure. On repère d'abord le mouvement, on classe ses raisons, on ajoute la croissance naturelle, puis on conclut. Conclure avant d'avoir classé les facteurs donnerait une explication incomplète.",
+        "explanation": "Étape 1 — Situer : la colonie fait partie de l'AOF, donc le gouverneur général est tout en haut. Étape 2 — Identifier les niveaux : gouverneur de la colonie, commandant de cercle (Français), puis chef de canton et chef de village (Africains). Étape 3 — Expliquer : l'ordre descend de niveau en niveau jusqu'à la population.",
         "answers": [
          {
-          "content": "Repérer d'où partent les migrants et vers où ils vont."
+          "content": "Gouverneur général de l'AOF"
          },
          {
-          "content": "Classer les facteurs de départ et d'attraction."
+          "content": "Gouverneur de la Côte d'Ivoire"
          },
          {
-          "content": "Identifier la part de la croissance naturelle."
+          "content": "Commandant de cercle"
          },
          {
-          "content": "Conclure en reliant les deux causes à la hausse de la population urbaine."
+          "content": "Chef de canton"
+         },
+         {
+          "content": "Chef de village"
          }
         ]
        },
        {
-        "content": "Une ville fictive gagne 100 000 habitants en un an : 40 000 migrants venus des villages et 60 000 grâce aux naissances en excès. Que peut-on dire de la croissance naturelle ?",
-        "question_type": "single_choice",
-        "explanation": "Étape 3 — Identifier : la part de la croissance naturelle est $60\\,000 \\div 100\\,000 = 60\\ \\%$. Étape 4 — Conclure : l'exode rural n'explique que 40 % de la hausse. Croire que tout vient de l'exode rural est l'erreur du piège.",
-        "answers": [
-         {
-          "content": "Elle explique 60 % de la hausse, plus que l'exode rural",
-          "correct": true
-         },
-         {
-          "content": "Elle explique 40 % de la hausse, moins que l'exode rural",
-          "correct": false
-         },
-         {
-          "content": "Elle n'explique rien : tout vient de l'exode rural",
-          "correct": false
-         },
-         {
-          "content": "Elle explique 100 % de la hausse",
-          "correct": false
-         }
-        ]
-       }
-      ]
-     }
-    },
-    {
-     "name": "Décrire l'urbanisation de la Côte d'Ivoire : Abidjan et les villes",
-     "figure": "carte-villes-ci",
-     "remember": "En Côte d'Ivoire, environ la moitié de la population vit en ville. **Abidjan**, au sud, sur la lagune Ébrié et le golfe de Guinée, est la **plus grande ville** du pays, sa **capitale économique** et son **grand port**. Elle concentre industries, banques, commerces et nombreux emplois. **Yamoussoukro**, au centre, est la **capitale politique**.\nD'autres villes jouent un rôle de relais : **Bouaké** (au centre), **Daloa** (à l'ouest), **Korhogo** (au nord) et **San-Pédro** (port du Sud-Ouest). Mais Abidjan est **beaucoup plus peuplée** que chacune d'elles : le réseau urbain est **déséquilibré**, car tout se concentre autour d'une seule ville.",
-     "method": [
-      "Situer la ville sur la carte du pays.",
-      "Décrire sa taille et ses fonctions : port, capitale, commerce, industries.",
-      "Expliquer pourquoi elle attire : position, équipements, activités.",
-      "Comparer avec les autres villes du réseau urbain."
-     ],
-     "example": {
-      "statement": "Présente la ville d'Abidjan.",
-      "steps": [
-       "Situer : Abidjan est au sud de la Côte d'Ivoire, sur la lagune Ébrié et le golfe de Guinée.",
-       "Décrire : c'est la plus grande ville du pays, sa capitale économique, avec un grand port, des industries, des banques et de nombreux marchés.",
-       "Expliquer : son port ouvert sur la mer et ses nombreuses activités offrent des emplois et attirent des migrants de tout le pays.",
-       "Comparer : elle est bien plus peuplée que Bouaké, Daloa, Korhogo ou San-Pédro : le réseau urbain est déséquilibré autour d'Abidjan."
-      ]
-     },
-     "pitfall": "Ne confonds pas **capitale économique** et **capitale politique**. Deux villes, deux fonctions : **Abidjan** est la capitale économique ; **Yamoussoukro** est la capitale politique. La phrase « Yamoussoukro, capitale économique de la Côte d'Ivoire » est fausse. Ne confonds pas non plus les deux ports : Abidjan est le grand port du pays, San-Pédro est le port du Sud-Ouest. Situe toujours la ville avant de lui donner une fonction.",
-     "exercise": {
-      "title": "Situer et décrire les villes ivoiriennes",
-      "statement": "Dans cet exercice, tu utilises la carte des villes de la Côte d'Ivoire : Abidjan et Yamoussoukro y sont colorées, et Bouaké, Daloa, San-Pédro et Korhogo y sont repérées. Applique les quatre étapes de la fiche.",
-      "exercise_type": "fixation",
-      "figure": "carte-villes-ci",
-      "questions": [
-       {
-        "content": "Relie chaque ville à son rôle.",
+        "content": "Relie chaque période à la capitale de la colonie à ce moment.",
         "question_type": "matching",
-        "explanation": "Étape 1 — Situer puis Étape 2 — Décrire : Abidjan est la capitale économique et le grand port ; Yamoussoukro est la capitale politique ; San-Pédro est un port du Sud-Ouest ; Korhogo est au nord ; Bouaké est au centre. Confondre Abidjan et Yamoussoukro est l'erreur du piège.",
+        "explanation": "Étape 1 — Situer dans le temps : on place chaque date avant de nommer la ville. Étape 2 — Identifier : Grand-Bassam est la première capitale (1893), Bingerville la remplace en 1900, Abidjan devient capitale en 1934. Étape 3 — Expliquer : la capitale se déplace avec les besoins de la France ; ne mélange pas Bingerville et Abidjan.",
         "answers": [
          {
-          "content": "Abidjan",
-          "match": "Capitale économique et grand port"
+          "content": "En 1893",
+          "match": "Grand-Bassam"
          },
          {
-          "content": "Yamoussoukro",
-          "match": "Capitale politique"
+          "content": "En 1900",
+          "match": "Bingerville"
          },
          {
-          "content": "San-Pédro",
-          "match": "Port du Sud-Ouest"
-         },
-         {
-          "content": "Korhogo",
-          "match": "Grande ville du Nord"
-         },
-         {
-          "content": "Bouaké",
-          "match": "Grande ville du centre du pays"
+          "content": "À partir de 1934",
+          "match": "Abidjan"
          }
         ]
        },
        {
-        "content": "Quelle est la plus grande ville de la Côte d'Ivoire ?",
-        "question_type": "single_choice",
-        "explanation": "Étape 2 — Décrire sa taille : Abidjan est la plus grande ville du pays. Étape 4 — Comparer : elle est bien plus peuplée que Bouaké ou San-Pédro. Yamoussoukro est la capitale politique, pas la plus grande ville.",
-        "answers": [
-         {
-          "content": "Abidjan",
-          "correct": true
-         },
-         {
-          "content": "Yamoussoukro",
-          "correct": false
-         },
-         {
-          "content": "Bouaké",
-          "correct": false
-         },
-         {
-          "content": "San-Pédro",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Yamoussoukro est la capitale économique de la Côte d'Ivoire.",
+        "content": "Le chef de canton est choisi par la population selon la tradition, sans que l'administration coloniale intervienne.",
         "question_type": "true_false",
-        "explanation": "Étape 2 — Décrire les fonctions : la capitale économique est Abidjan ; Yamoussoukro est la capitale politique. La phrase est donc fausse. C'est la confusion signalée dans le piège.",
+        "explanation": "Étape 2 — Identifier : le chef de canton est un Africain placé sous l'autorité du commandant de cercle. Étape 3 — Expliquer : l'administration le choisit et peut le remplacer, car il doit relayer ses ordres (impôt, travailleurs). L'affirmation confond le chef de canton et le chef traditionnel.",
         "answers": [
          {
           "content": "Vrai",
@@ -589,162 +381,133 @@
         ]
        },
        {
-        "content": "Étape 1 : Abidjan est située au ___ de la Côte d'Ivoire.",
-        "question_type": "select",
-        "explanation": "Étape 1 — Situer : Abidjan est au sud du pays, au bord de la lagune Ébrié et du golfe de Guinée. Le nord correspond plutôt à Korhogo et le centre à Bouaké et Yamoussoukro.",
-        "answers": [
-         {
-          "content": "sud",
-          "correct": true
-         },
-         {
-          "content": "nord",
-          "correct": false
-         },
-         {
-          "content": "centre",
-          "correct": false
-         },
-         {
-          "content": "ouest",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Quelles raisons expliquent l'attraction d'Abidjan ?",
-        "question_type": "multiple_correct_2",
-        "explanation": "Étape 3 — Expliquer : Abidjan attire par son port, ses industries, ses commerces et ses services, qui offrent des emplois. Elle est au sud et non au centre, et le pays compte d'autres villes (étape 4 — Comparer).",
-        "answers": [
-         {
-          "content": "Son grand port ouvert sur la mer",
-          "correct": true
-         },
-         {
-          "content": "Ses nombreux emplois dans l'industrie, le commerce et les services",
-          "correct": true
-         },
-         {
-          "content": "Elle est située au centre du pays",
-          "correct": false
-         },
-         {
-          "content": "Elle est la seule ville du pays",
-          "correct": false
-         },
-         {
-          "content": "Elle n'a presque pas d'habitants",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Présente Abidjan en suivant les étapes de la fiche : situer, décrire, expliquer pourquoi elle attire.",
-        "question_type": "written",
-        "explanation": "Corrigé modèle, avec l'Étape 1 — Situer, l'Étape 2 — Décrire et l'Étape 3 — Expliquer : Abidjan est située au sud de la Côte d'Ivoire, sur la lagune Ébrié et le golfe de Guinée. C'est la plus grande ville du pays et sa capitale économique : elle compte un grand port, des industries, des banques et de nombreux marchés. Elle attire beaucoup de migrants, car ses activités offrent des emplois. Barème : situation 1 point, description 1 point, explication de l'attraction 1 point.",
-        "answers": [],
-        "points": 3,
-        "criteria": [
-         "La ville est située au sud, sur la lagune et le golfe de Guinée",
-         "Elle est décrite comme la plus grande ville et la capitale économique",
-         "Le port ou les emplois expliquent son attraction"
-        ],
-        "starter": "Abidjan est située au sud…"
-       }
-      ]
-     }
-    },
-    {
-     "name": "Analyser les conséquences de la croissance urbaine",
-     "figure": "consequences-urbaine",
-     "remember": "Quand une ville grandit **plus vite** que ses équipements, les besoins dépassent ce qu'elle offre. Les conséquences touchent plusieurs domaines :\n- le **logement** : manque de logements, **quartiers précaires** sans eau ni électricité sûres, parfois en zone inondable ;\n- l'**emploi** : peu d'emplois stables, d'où le **secteur informel** (activités non déclarées, comme le petit commerce de rue) ;\n- les **services** et l'**environnement** : eau, assainissement, ramassage des déchets, pollution ;\n- le **transport** : routes saturées, embouteillages.\nLa ville s'étend aussi sur ses périphéries : c'est l'**étalement urbain**. Les réponses sont de construire des logements accessibles, d'équiper les quartiers, de créer des emplois et de **planifier** la ville. La ville a aussi des atouts : marchés, emplois, écoles, hôpitaux.",
-     "method": [
-      "Identifier le domaine touché : logement, emploi, services, transport ou environnement.",
-      "Expliquer le lien avec l'arrivée rapide de nouveaux habitants : les besoins dépassent les équipements.",
-      "Décrire les conséquences concrètes pour les habitants.",
-      "Proposer une réponse adaptée : construire, équiper, planifier."
-     ],
-     "example": {
-      "statement": "Explique pourquoi la croissance rapide d'une grande ville comme Abidjan provoque des quartiers précaires.",
-      "steps": [
-       "Identifier : le domaine touché est le logement.",
-       "Expliquer : chaque année, de nombreux nouveaux habitants arrivent, mais on construit moins de logements qu'il n'en faut : les besoins dépassent les équipements.",
-       "Décrire : des familles s'installent dans des quartiers précaires, parfois sans eau courante ni électricité fiables, et parfois dans des zones inondables.",
-       "Proposer : construire des logements accessibles, équiper les terrains (eau, électricité, routes, assainissement) et planifier l'extension de la ville."
-      ]
-     },
-     "pitfall": "Ne confonds pas **secteur informel** et **délinquance**. Le secteur informel regroupe des activités de travail non déclarées : une vendeuse de légumes au marché, sans contrat, travaille et gagne un revenu. Elle exerce un vrai métier. Ne dis pas non plus que la ville est « mauvaise » : ses problèmes viennent d'une croissance **plus rapide** que celle de ses équipements, et on peut y répondre.",
-     "exercise": {
-      "title": "Analyser les problèmes d'une ville qui grandit vite",
-      "statement": "Dans cet exercice, tu utilises le schéma des conséquences de la croissance urbaine : logement, emploi et transport. Applique les quatre étapes de la fiche.",
-      "exercise_type": "fixation",
-      "figure": "consequences-urbaine",
-      "questions": [
-       {
-        "content": "Quelles sont des conséquences d'une croissance urbaine très rapide ?",
-        "question_type": "multiple_correct_2",
-        "explanation": "Étape 2 — Expliquer : si les habitants arrivent plus vite que les équipements, on manque de logements et de routes. Étape 3 — Décrire : cela donne des quartiers précaires et des embouteillages. Les autres propositions disent l'inverse de ce qui se passe.",
-        "answers": [
-         {
-          "content": "L'apparition de quartiers précaires",
-          "correct": true
-         },
-         {
-          "content": "Des embouteillages plus fréquents",
-          "correct": true
-         },
-         {
-          "content": "La baisse du nombre de citadins",
-          "correct": false
-         },
-         {
-          "content": "La disparition des marchés",
-          "correct": false
-         },
-         {
-          "content": "Un nombre de logements supérieur aux besoins",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Relie chaque problème à sa conséquence.",
-        "question_type": "matching",
-        "explanation": "Étape 1 — Identifier le domaine (logement, emploi, transport, environnement) puis Étape 3 — Décrire sa conséquence concrète : le manque de logements crée des quartiers précaires, le manque d'emplois stables le secteur informel, la saturation des routes les embouteillages, les déchets non ramassés l'insalubrité.",
-        "answers": [
-         {
-          "content": "Manque de logements",
-          "match": "Quartiers précaires"
-         },
-         {
-          "content": "Peu d'emplois stables",
-          "match": "Développement du secteur informel"
-         },
-         {
-          "content": "Trop de véhicules pour trop peu de routes",
-          "match": "Embouteillages"
-         },
-         {
-          "content": "Trop de déchets, trop peu de ramassage",
-          "match": "Insalubrité et pollution"
-         }
-        ]
-       },
-       {
-        "content": "Les activités de travail non déclarées, comme le petit commerce de rue, forment le secteur ___.",
+        "content": "Les sujets africains pouvaient être punis par l'administration sans procès régulier : c'était le régime de l'___.",
         "question_type": "fill_blank",
-        "explanation": "Étape 1 — Identifier le domaine : l'emploi. Le secteur informel regroupe les activités non déclarées. Ce n'est pas de la délinquance : c'est la confusion du piège.",
+        "explanation": "Étape 3 — Expliquer le rôle des pouvoirs : le régime de l'indigénat donne à l'administration le droit de punir les sujets africains sans procès régulier, pour les maintenir obéissants. Étape 1 — Situer : ce régime s'applique pendant toute la période coloniale étudiée.",
         "answers": [
          {
-          "content": "informel",
+          "content": "indigénat",
           "correct": true
          }
         ]
        },
        {
-        "content": "Travailler dans le secteur informel signifie commettre un délit.",
+        "content": "Quelle était la capitale de la colonie de Côte d'Ivoire en 1920 ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 1 — Situer : la date est 1920. Étape 2 — Identifier : Bingerville est capitale de 1900 à 1934. Abidjan ne le devient qu'en 1934 : c'est l'erreur la plus tentante. Grand-Bassam était la capitale de 1893 à 1900 seulement, et Yamoussoukro n'a jamais été capitale pendant la colonisation.",
+        "answers": [
+         {
+          "content": "Abidjan",
+          "correct": false
+         },
+         {
+          "content": "Grand-Bassam",
+          "correct": false
+         },
+         {
+          "content": "Bingerville",
+          "correct": true
+         },
+         {
+          "content": "Yamoussoukro",
+          "correct": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "name": "L'économie coloniale : cultures d'exportation et chemin de fer",
+     "remember": "L'économie coloniale est une **économie de traite** : la colonie **vend des matières premières** à la France (**café**, **cacao**, **bois**) et **achète des produits fabriqués**. Les cultures d'exportation sont pratiquées dans des plantations africaines et européennes, surtout en zone de forêt ; l'exploitation du bois se fait aussi en forêt. Pour évacuer ces produits, la France construit le **chemin de fer Abidjan-Niger** : les travaux commencent en **1904** à partir d'Abidjan et la voie atteint **Bouaké en 1912**, puis continue vers le nord. Cette économie sert d'abord la métropole. Elle dépend des prix mondiaux : la **crise de 1929** fait baisser les prix des produits vendus. La colonie compte très peu d'industries.",
+     "method": [
+      "Présenter le document : sa nature, son auteur s'il est connu, sa date et son sujet.",
+      "Dégager les idées principales : relever les produits, les lieux et les voies de transport cités.",
+      "Expliquer ces idées en les reliant à l'intérêt de la métropole et aux conséquences pour les Ivoiriens."
+     ],
+     "example": {
+      "statement": "Document écrit pour Lnclass : « La voie ferrée avance depuis Abidjan vers l'intérieur. Elle doit permettre d'envoyer au port le café, le cacao et le bois, et de faire venir les produits fabriqués en France. » Analyse ce texte.",
+      "steps": [
+       "Présenter : c'est un texte écrit pour Lnclass, sans auteur ni date précise ; il parle du chemin de fer, dont les travaux commencent en 1904.",
+       "Dégager : les produits cités sont le café, le cacao et le bois ; le lieu de départ est Abidjan et le but est le port ; le moyen est la voie ferrée.",
+       "Expliquer : le rail sert à exporter des matières premières et à importer des produits fabriqués, donc il sert d'abord la France ; la colonie reste une économie de traite."
+      ]
+     },
+     "pitfall": "Ne crois pas que le chemin de fer a été construit d'abord pour les déplacements des habitants. Il suit les zones de production et mène au port. Ne confonds pas non plus le début des travaux (1904) et l'arrivée à Bouaké (1912) : huit ans les séparent.",
+     "figure": "carte-voie-ferree",
+     "exercise": {
+      "title": "L'économie coloniale et le chemin de fer",
+      "statement": "Dans cet exercice, tu appliques la méthode de la fiche : présenter, dégager, expliquer.",
+      "exercise_type": "fixation",
+      "figure": "carte-voie-ferree",
+      "questions": [
+       {
+        "content": "Quelle ville le chemin de fer Abidjan-Niger atteint-il en 1912 ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 1 — Présenter : le sujet est le chemin de fer parti d'Abidjan en 1904. Étape 2 — Dégager les idées : la voie atteint Bouaké en 1912. Agboville est une étape proche d'Abidjan, atteinte plus tôt ; Katiola et Ferkessédougou se trouvent plus au nord, plus loin que Bouaké.",
+        "answers": [
+         {
+          "content": "Katiola",
+          "correct": false
+         },
+         {
+          "content": "Agboville",
+          "correct": false
+         },
+         {
+          "content": "Ferkessédougou",
+          "correct": false
+         },
+         {
+          "content": "Bouaké",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Quels produits la colonie vend-elle surtout à la France ?",
+        "question_type": "multiple_correct_3",
+        "explanation": "Étape 2 — Dégager les idées : les produits d'exportation sont des matières premières, le café, le cacao et le bois. Étape 3 — Expliquer : dans l'économie de traite, les produits fabriqués, comme les automobiles ou les téléphones, viennent de France ; la colonie ne les vend pas.",
+        "answers": [
+         {
+          "content": "Le café",
+          "correct": true
+         },
+         {
+          "content": "Les automobiles",
+          "correct": false
+         },
+         {
+          "content": "Le cacao",
+          "correct": true
+         },
+         {
+          "content": "Le bois",
+          "correct": true
+         },
+         {
+          "content": "Les téléphones",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Les travaux du chemin de fer commencent en 1904 et la voie atteint Bouaké en 1912. Combien d'années séparent ces deux dates ?",
+        "question_type": "numeric",
+        "unit": "ans",
+        "tolerance": 0,
+        "explanation": "Étape 1 — Présenter : on prend les deux dates du texte, 1904 et 1912. Étape 2 — Dégager : on cherche la durée entre le début des travaux et l'arrivée à Bouaké. Calcul : 1912 − 1904 = 8. La réponse est 8 ans.",
+        "answers": [
+         {
+          "content": "8",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "L'économie coloniale a été organisée d'abord pour développer l'industrie de la Côte d'Ivoire.",
         "question_type": "true_false",
-        "explanation": "Étape 3 — Décrire : une vendeuse de légumes sans contrat travaille et gagne un revenu, ce n'est pas un délit. Le secteur informel désigne un travail non déclaré, pas de la délinquance. L'affirmation est donc fausse, comme le dit le piège.",
+        "explanation": "Étape 3 — Expliquer : l'économie coloniale sert l'intérêt de la métropole. Étape 2 — Dégager : la colonie exporte des matières premières et achète des produits fabriqués, et elle compte très peu d'industries. L'affirmation est donc fausse.",
         "answers": [
          {
           "content": "Vrai",
@@ -757,179 +520,461 @@
         ]
        },
        {
-        "content": "Étape 4 : quelle réponse est la mieux adaptée aux quartiers précaires ?",
-        "question_type": "single_choice",
-        "explanation": "Étape 4 — Proposer : la réponse à un manque de logements est de construire, d'équiper et de planifier. Interdire l'arrivée ne résout rien et détruire sans reloger aggrave la situation des familles.",
+        "content": "Dans l'économie de ___, la colonie vend des matières premières et achète des produits fabriqués.",
+        "question_type": "fill_blank",
+        "explanation": "Étape 2 — Dégager les idées : le circuit est colonie → matières premières → France, puis France → produits fabriqués → colonie. Étape 3 — Expliquer : ce système s'appelle l'économie de traite, car il repose sur l'échange organisé au profit des commerçants et de la métropole.",
         "answers": [
          {
-          "content": "Construire des logements accessibles et équiper les quartiers en eau et en électricité",
+          "content": "traite",
           "correct": true
-         },
-         {
-          "content": "Interdire aux habitants des villages d'arriver en ville",
-          "correct": false
-         },
-         {
-          "content": "Détruire les quartiers sans proposer de relogement",
-          "correct": false
-         },
-         {
-          "content": "Ne rien faire, car la ville finira par s'arrêter de grandir",
-          "correct": false
          }
         ]
        },
        {
-        "content": "Choisis un problème urbain (logement, emploi ou transport) et explique-le en suivant les étapes de la fiche : identifier, expliquer, décrire, proposer.",
-        "question_type": "written",
-        "explanation": "Corrigé modèle (logement), qui suit l'Étape 1 — Identifier, l'Étape 2 — Expliquer, l'Étape 3 — Décrire et l'Étape 4 — Proposer : le domaine touché est le logement. Beaucoup de nouveaux habitants arrivent, mais on construit moins de logements qu'il n'en faut. Des familles s'installent dans des quartiers précaires sans eau ni électricité fiables. Il faut construire des logements accessibles et équiper les quartiers. Barème : 0,5 point pour l'identification, 1 pour l'explication, 1 pour la description, 0,5 pour la réponse proposée.",
-        "answers": [],
-        "points": 3,
-        "criteria": [
-         "Le domaine touché est clairement identifié",
-         "Le lien avec l'arrivée rapide d'habitants est expliqué",
-         "Une conséquence concrète est décrite",
-         "Une réponse adaptée est proposée"
+        "content": "Un texte écrit pour Lnclass dit que la voie ferrée avance « pour envoyer au port le café et le cacao ». Quelle idée en dégager ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 1 — Présenter : le texte parle du chemin de fer. Étape 2 — Dégager : les mots importants sont « port », « café » et « cacao ». Étape 3 — Expliquer : le rail évacue les matières premières vers la France. Les autres propositions inventent un usage que le texte ne cite pas.",
+        "answers": [
+         {
+          "content": "Le rail sert d'abord à exporter les produits de la colonie vers la France",
+          "correct": true
+         },
+         {
+          "content": "Le rail sert d'abord à transporter les élèves vers les écoles",
+          "correct": false
+         },
+         {
+          "content": "Le rail remplace les plantations africaines",
+          "correct": false
+         },
+         {
+          "content": "Le rail ne transporte que des voyageurs européens",
+          "correct": false
+         }
         ]
        }
       ]
      }
     },
     {
-     "name": "Étudier les transports urbains : l'exemple du gbaka à Abidjan",
-     "figure": null,
-     "remember": "Dans une grande ville comme Abidjan, les habitants se déplacent de plusieurs façons : le **gbaka** (minibus collectif qui suit un itinéraire entre plusieurs quartiers), le **woro-woro** (taxi collectif qui circule surtout à l'intérieur d'une commune), le **taxi compteur** (taxi individuel), les **bus de la SOTRA** (société publique de transport abidjanaise) et les **bateaux-bus** sur la lagune.\nLes **difficultés** sont les embouteillages aux heures de pointe, les trajets longs et les véhicules bondés. Leurs **causes** : beaucoup d'habitants vivent en périphérie et travaillent loin, la lagune Ébrié oblige à passer par un petit nombre de ponts, et les routes n'ont pas suivi la hausse du nombre de véhicules. Les **solutions** : développer les transports en commun de grande capacité, notamment sur la lagune, et mieux organiser les déplacements.",
+     "name": "L'impôt et le travail forcé",
+     "remember": "L'administration coloniale impose aux Africains plusieurs contraintes. L'**impôt de capitation** est une somme d'argent que chaque personne doit payer : pour la trouver, il faut vendre des produits ou travailler pour des Européens. Les **prestations** sont des jours de travail gratuits pour des travaux publics (routes, ponts, chantier du chemin de fer). Le **travail forcé** consiste à **réquisitionner** des hommes pour des chantiers, des plantations ou l'exploitation du bois, sans les laisser choisir. Le refus est puni, souvent par l'indigénat. Les **conséquences** sont des travaux pénibles, des maladies, des villages privés d'hommes, la baisse des cultures vivrières, et des fuites vers les colonies voisines, comme la Gold Coast. Le travail forcé est **aboli par la loi du 11 avril 1946**, portée par **Félix Houphouët-Boigny**.",
      "method": [
-      "Identifier les modes de transport utilisés par les habitants.",
-      "Repérer les difficultés : embouteillages, trajets longs, véhicules bondés.",
-      "Expliquer leurs causes : distance entre domicile et travail, ponts peu nombreux, routes saturées.",
-      "Proposer des solutions : transports en commun de grande capacité, mieux organisés."
+      "Nommer la contrainte imposée aux populations : impôt, prestations ou travail forcé.",
+      "Décrire comment elle s'applique : qui l'impose, qui la subit et quelles sanctions menacent ceux qui refusent.",
+      "Expliquer son but pour la France et ses conséquences pour les Ivoiriens."
      ],
      "example": {
-      "statement": "Pourquoi les gbaka sont-ils très nombreux à Abidjan, et pourquoi les routes y sont-elles saturées ? Propose une solution.",
+      "statement": "Étudie le recrutement de travailleurs pour le chantier du chemin de fer, quand l'administration les réquisitionne.",
       "steps": [
-       "Identifier : les habitants se déplacent en gbaka (minibus), en woro-woro, en bus de la SOTRA, en taxi, et parfois en bateau-bus sur la lagune.",
-       "Repérer : les difficultés sont les embouteillages aux heures de pointe, les trajets longs et les véhicules souvent bondés.",
-       "Expliquer : la ville s'étend, beaucoup d'habitants vivent en périphérie (Abobo, Yopougon) et travaillent au centre (Plateau), la lagune oblige à emprunter peu de ponts et les routes ne suivent pas la hausse des véhicules.",
-       "Proposer : développer les bus et les bateaux-bus, qui transportent beaucoup de personnes, et mieux organiser les itinéraires."
+       "Nommer : c'est du travail forcé, car les hommes sont réquisitionnés sans choisir.",
+       "Décrire : le commandant de cercle demande un nombre d'hommes aux chefs de canton, qui doivent les désigner ; celui qui refuse est puni par le régime de l'indigénat.",
+       "Expliquer : le but est de construire la voie à peu de frais pour la France ; les conséquences sont un travail pénible, des maladies, des villages privés de bras et des fuites vers la Gold Coast."
       ]
      },
-     "pitfall": "Ne pense pas que la seule solution aux embouteillages est de construire **plus de routes** ou d'acheter **plus de voitures**. Contre-exemple : pour transporter 40 personnes, il faut 10 voitures de 4 personnes ($40 \\div 4 = 10$), mais **un seul** bus de 40 places. Un bus occupe bien moins de place sur la route. Ne confonds pas non plus les modes : le gbaka est un minibus collectif, le woro-woro un taxi collectif, le taxi compteur un taxi individuel.",
+     "pitfall": "Ne crois pas que l'abolition du travail forcé en 1946 met fin à la colonisation. Après la loi du 11 avril 1946, la Côte d'Ivoire reste une colonie française jusqu'à son indépendance en 1960, soit 14 ans plus tard. Ne confonds pas non plus l'impôt (argent) et les prestations (jours de travail gratuits).",
+     "figure": null,
      "exercise": {
-      "title": "Comprendre les transports à Abidjan",
-      "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche aux transports urbains d'Abidjan : identifier, repérer, expliquer, proposer.",
+      "title": "L'impôt et le travail forcé",
+      "statement": "Dans cet exercice, tu appliques la méthode de la fiche : nommer, décrire, expliquer.",
       "exercise_type": "fixation",
       "figure": null,
       "questions": [
        {
-        "content": "Relie chaque mode de transport à sa description.",
-        "question_type": "matching",
-        "explanation": "Étape 1 — Identifier les modes : le gbaka est un minibus collectif, le woro-woro un taxi collectif communal, le taxi compteur un taxi individuel, la SOTRA une société publique qui exploite des bus et des bateaux-bus. Les confondre est l'erreur du piège.",
-        "answers": [
-         {
-          "content": "Gbaka",
-          "match": "Minibus collectif qui suit un itinéraire entre plusieurs quartiers"
-         },
-         {
-          "content": "Woro-woro",
-          "match": "Taxi collectif qui circule surtout à l'intérieur d'une commune"
-         },
-         {
-          "content": "Taxi compteur",
-          "match": "Taxi individuel équipé d'un compteur"
-         },
-         {
-          "content": "SOTRA",
-          "match": "Société publique de transport abidjanaise : bus et bateaux-bus"
-         }
-        ]
-       },
-       {
-        "content": "Étape 3 : un gbaka plein transporte 18 personnes. Combien de gbaka pleins faut-il pour transporter 90 personnes ?",
-        "question_type": "numeric",
-        "explanation": "Étape 1 — Identifier : on utilise des gbaka de 18 places. Étape 3 — Expliquer par le calcul : $90 \\div 18 = 5$. Il faut 5 gbaka pleins. Étape 4 : cela montre qu'un grand nombre de personnes demande beaucoup de véhicules et donc de la place sur la route.",
-        "answers": [
-         {
-          "content": "5",
-          "correct": true
-         }
-        ],
-        "tolerance": 0
-       },
-       {
-        "content": "Une voiture transporte 4 personnes et un bus 40 personnes. Combien de voitures faut-il pour transporter autant de personnes qu'un bus plein ?",
-        "question_type": "numeric",
-        "explanation": "Étape 3 — Expliquer : $40 \\div 4 = 10$ voitures pour 40 personnes. Étape 4 — Proposer : un seul bus occupe moins de place que 10 voitures, donc les transports en commun de grande capacité réduisent les embouteillages. C'est le contre-exemple du piège.",
-        "answers": [
-         {
-          "content": "10",
-          "correct": true
-         }
-        ],
-        "tolerance": 0,
-        "unit": "voitures"
-       },
-       {
-        "content": "Quelles sont des causes des embouteillages à Abidjan ?",
-        "question_type": "multiple_correct_2",
-        "explanation": "Étape 3 — Expliquer les causes : les trajets entre périphérie et centre sont longs et la lagune Ébrié oblige à emprunter peu de ponts. Les trois autres propositions sont fausses : il y a au contraire beaucoup de véhicules et la population a augmenté.",
-        "answers": [
-         {
-          "content": "Beaucoup d'habitants vivent loin de leur lieu de travail",
-          "correct": true
-         },
-         {
-          "content": "Il y a peu de ponts pour traverser la lagune",
-          "correct": true
-         },
-         {
-          "content": "Il y a trop peu de véhicules",
-          "correct": false
-         },
-         {
-          "content": "La population de la ville a fortement diminué",
-          "correct": false
-         },
-         {
-          "content": "Toutes les routes sont à sens unique",
-          "correct": false
-         }
-        ]
-       },
-       {
-        "content": "Étape 4 : quelle solution transporte le plus de personnes en occupant le moins de place sur la route ?",
+        "content": "Qu'est-ce que l'impôt de capitation sous la colonisation ?",
         "question_type": "single_choice",
-        "explanation": "Étape 4 — Proposer : des bus et des bateaux-bus transportent beaucoup de personnes avec peu de véhicules. Une voiture par habitant ferait empirer les embouteillages ; des routes plus larges seules ne suffisent pas, comme le dit le piège.",
+        "explanation": "Étape 1 — Nommer : la capitation est un impôt, pas un travail. Étape 2 — Décrire : il est payé en argent par chaque personne. Les jours de travail gratuits s'appellent les prestations, c'est l'erreur la plus tentante. Étape 3 — Expliquer : pour payer, il fallait vendre des produits ou travailler pour des Européens.",
         "answers": [
          {
-          "content": "Développer les bus et les bateaux-bus en grand nombre",
+          "content": "Une somme d'argent que chaque personne doit payer",
           "correct": true
          },
          {
-          "content": "Acheter une voiture pour chaque habitant",
+          "content": "Des jours de travail gratuits sur les routes",
           "correct": false
          },
          {
-          "content": "Interdire aux habitants de sortir de leur quartier",
+          "content": "Une taxe payée seulement par les commerçants européens",
           "correct": false
          },
          {
-          "content": "Construire seulement des routes plus larges",
+          "content": "Un salaire versé aux chefs de village",
           "correct": false
          }
         ]
        },
        {
-        "content": "Propose deux solutions pour réduire les embouteillages à Abidjan et justifie chacune en une phrase.",
-        "question_type": "written",
-        "explanation": "Corrigé modèle (Étape 4 — Proposer) : on peut développer les bus et les bateaux-bus de la SOTRA, car un bus transporte autant de personnes que plusieurs voitures et occupe moins de place. On peut aussi mieux organiser les itinéraires de gbaka et de woro-woro, pour limiter les véhicules à moitié vides et fluidifier la circulation. Barème : 1 point par solution justifiée.",
-        "answers": [],
-        "points": 2,
-        "criteria": [
-         "Deux solutions réalistes sont proposées",
-         "Chaque solution est justifiée par un effet sur les embouteillages"
-        ],
-        "starter": "On peut développer…"
+        "content": "Relie chaque contrainte à sa description.",
+        "question_type": "matching",
+        "explanation": "Étape 1 — Nommer chaque contrainte. Étape 2 — Décrire : l'impôt est une somme d'argent, les prestations sont des jours de travail gratuits, le travail forcé est une réquisition d'hommes, l'indigénat permet de punir sans procès. Étape 3 — Expliquer : ces contraintes servent à faire payer et travailler les Africains pour la France.",
+        "answers": [
+         {
+          "content": "Impôt de capitation",
+          "match": "Somme d'argent payée par chaque personne"
+         },
+         {
+          "content": "Prestations",
+          "match": "Jours de travail gratuits pour des travaux publics"
+         },
+         {
+          "content": "Travail forcé",
+          "match": "Hommes réquisitionnés pour des chantiers ou des plantations"
+         },
+         {
+          "content": "Indigénat",
+          "match": "Sanctions sans procès régulier contre les sujets"
+         }
+        ]
+       },
+       {
+        "content": "Le travail forcé est aboli par la loi du 11 avril 1946, portée par Félix Houphouët-Boigny.",
+        "question_type": "true_false",
+        "explanation": "Étape 1 — Nommer : il s'agit de la loi qui supprime le travail forcé. Étape 2 — Décrire : elle est votée le 11 avril 1946 et portée par Houphouët-Boigny, député de la Côte d'Ivoire. Étape 3 — Expliquer : elle répond aux plaintes contre cette contrainte. L'affirmation est vraie.",
+        "answers": [
+         {
+          "content": "Vrai",
+          "correct": true
+         },
+         {
+          "content": "Faux",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Quelles sont des conséquences du travail forcé ?",
+        "question_type": "multiple_correct_2",
+        "explanation": "Étape 3 — Expliquer les conséquences : le travail forcé prive les villages de bras et pousse des habitants à fuir vers les colonies voisines, comme la Gold Coast. Les deux autres propositions sont fausses : le travail forcé n'était pas payé comme un salaire libre, et l'impôt continuait à être exigé.",
+        "answers": [
+         {
+          "content": "Les villages manquent d'hommes",
+          "correct": true
+         },
+         {
+          "content": "Des habitants fuient vers la Gold Coast",
+          "correct": true
+         },
+         {
+          "content": "Les salaires des villageois augmentent beaucoup",
+          "correct": false
+         },
+         {
+          "content": "Les villageois ne paient plus d'impôt",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Le travail forcé est aboli en 1946 et la Côte d'Ivoire devient indépendante en 1960. Combien d'années séparent ces deux dates ?",
+        "question_type": "numeric",
+        "unit": "ans",
+        "tolerance": 0,
+        "explanation": "Étape 1 — Nommer : on compare l'abolition du travail forcé (1946) et l'indépendance (1960). Étape 3 — Expliquer : l'abolition ne met pas fin à la colonisation. Calcul : 1960 − 1946 = 14. La réponse est 14 ans.",
+        "answers": [
+         {
+          "content": "14",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Après la loi du 11 avril 1946, quelle est la situation de la Côte d'Ivoire ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 1 — Nommer : la loi de 1946 abolit le travail forcé, pas la colonisation. Étape 3 — Expliquer : la Côte d'Ivoire reste une colonie française jusqu'à l'indépendance de 1960. Croire que l'abolition marque l'indépendance est l'erreur du piège.",
+        "answers": [
+         {
+          "content": "Elle est indépendante",
+          "correct": false
+         },
+         {
+          "content": "Elle reste une colonie française jusqu'en 1960",
+          "correct": true
+         },
+         {
+          "content": "Elle devient une colonie britannique",
+          "correct": false
+         },
+         {
+          "content": "Elle quitte l'AOF et devient un royaume",
+          "correct": false
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "name": "Les résistances à la domination coloniale",
+     "remember": "Après la défaite des grandes résistances armées, les populations continuent à **résister** à la domination coloniale par d'autres moyens. La **résistance passive** consiste à ne pas obéir sans combattre : **fuir** les villages, partir vers la **Gold Coast**, **retarder ou refuser** l'impôt, cacher des hommes aux recruteurs. La **résistance religieuse** s'appuie sur un mouvement spirituel : le prophète **William Wadé Harris**, venu du Libéria, prêche vers **1913-1914** sur la côte ivoirienne et suscite l'inquiétude de l'administration. La **résistance organisée** se fait par des syndicats et des partis, comme le **Syndicat agricole africain** de 1944. L'administration répond par l'**indigénat**, les amendes et la surveillance.",
+     "method": [
+      "Identifier l'acteur de la résistance et le moyen qu'il emploie : fuite, refus, prédication, organisation.",
+      "Classer la forme de résistance : passive, religieuse ou organisée (syndicat, parti).",
+      "Expliquer la cause visée (impôt, travail forcé, discriminations) et la réponse de l'administration."
+     ],
+     "example": {
+      "statement": "Des habitants d'un village quittent la nuit leurs maisons pour la Gold Coast quand le commandant de cercle réclame des travailleurs pour un chantier. Analyse cette situation.",
+      "steps": [
+       "Identifier : les acteurs sont des villageois ; le moyen est la fuite vers la Gold Coast.",
+       "Classer : c'est une résistance passive, car il n'y a ni combat ni organisation.",
+       "Expliquer : la cause est le refus du travail forcé ; l'administration peut répondre par des sanctions de l'indigénat et par la surveillance des villages."
+      ]
+     },
+     "pitfall": "Ne crois pas que la résistance se limite à la guerre ni que les Ivoiriens ont tout accepté après la défaite. Samory Touré est capturé en 1898, mais la résistance continue sous d'autres formes : le Syndicat agricole africain est créé en 1944, soit 46 ans plus tard.",
+     "figure": null,
+     "exercise": {
+      "title": "Les résistances à la domination coloniale",
+      "statement": "Dans cet exercice, tu appliques la méthode de la fiche : identifier, classer, expliquer.",
+      "exercise_type": "fixation",
+      "figure": null,
+      "questions": [
+       {
+        "content": "Des villageois quittent leur village pour la Gold Coast afin d'échapper au travail forcé. De quelle forme de résistance s'agit-il ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 1 — Identifier : les acteurs sont des villageois et le moyen est la fuite. Étape 2 — Classer : il n'y a ni combat ni organisation, c'est donc une résistance passive. Étape 3 — Expliquer : la cause est le refus du travail forcé. Les formes armée, politique ou syndicale exigent un combat ou une organisation, absents ici.",
+        "answers": [
+         {
+          "content": "Une résistance armée",
+          "correct": false
+         },
+         {
+          "content": "Une résistance passive",
+          "correct": true
+         },
+         {
+          "content": "Une résistance par un parti politique",
+          "correct": false
+         },
+         {
+          "content": "Une résistance par un syndicat",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Après la fin des grandes résistances armées, il n'y a plus aucune forme de résistance à la colonisation.",
+        "question_type": "true_false",
+        "explanation": "Étape 2 — Classer : après la défaite, les formes passive (fuite, refus de l'impôt), religieuse (mouvement de Harris) et organisée (syndicat, parti) continuent. Étape 3 — Expliquer : l'affirmation confond fin de la guerre et fin de la résistance, c'est l'erreur du piège.",
+        "answers": [
+         {
+          "content": "Vrai",
+          "correct": false
+         },
+         {
+          "content": "Faux",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Relie chaque action à sa forme de résistance.",
+        "question_type": "matching",
+        "explanation": "Étape 1 — Identifier le moyen de chaque acteur : fuite, prédication, syndicat. Étape 2 — Classer : la fuite est passive, la prédication de Harris est religieuse, un syndicat est une organisation. Étape 3 — Expliquer : chaque forme vise une cause, comme l'impôt, le travail forcé ou les discriminations.",
+        "answers": [
+         {
+          "content": "Fuir un village pour éviter la corvée",
+          "match": "Résistance passive"
+         },
+         {
+          "content": "Prêcher une religion nouvelle sur la côte (Harris)",
+          "match": "Résistance religieuse"
+         },
+         {
+          "content": "Créer le Syndicat agricole africain",
+          "match": "Résistance organisée"
+         }
+        ]
+       },
+       {
+        "content": "Quelles actions sont des résistances passives à l'administration coloniale ?",
+        "question_type": "multiple_correct_2",
+        "explanation": "Étape 1 — Identifier : on regarde le moyen de chaque action. Étape 2 — Classer : cacher des hommes et retarder l'impôt sont des refus sans combat, donc passifs. Créer un parti est une résistance organisée ; rejoindre l'armée coloniale n'est pas une résistance.",
+        "answers": [
+         {
+          "content": "Cacher des hommes aux recruteurs",
+          "correct": true
+         },
+         {
+          "content": "Créer un parti politique",
+          "correct": false
+         },
+         {
+          "content": "Retarder le paiement de l'impôt",
+          "correct": true
+         },
+         {
+          "content": "Rejoindre l'armée coloniale",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Samory Touré est capturé en 1898 et le Syndicat agricole africain est créé en 1944. Combien d'années séparent ces deux dates ?",
+        "question_type": "numeric",
+        "unit": "ans",
+        "tolerance": 0,
+        "explanation": "Étape 2 — Classer : la capture de Samory marque la fin d'une résistance armée, le syndicat est une résistance organisée. Étape 3 — Expliquer : la résistance continue donc après 1898. Calcul : 1944 − 1898 = 46. La réponse est 46 ans.",
+        "answers": [
+         {
+          "content": "46",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Fuir son village pour échapper au travail forcé est une forme de résistance ___.",
+        "question_type": "fill_blank",
+        "explanation": "Étape 1 — Identifier : l'acteur fuit sans combattre. Étape 2 — Classer : une action sans combat ni organisation est une résistance passive. Étape 3 — Expliquer : elle vise à éviter le travail forcé, et la réponse de l'administration peut être l'indigénat.",
+        "answers": [
+         {
+          "content": "passive",
+          "correct": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "name": "Les mouvements politiques et syndicaux jusqu'en 1946",
+     "remember": "Pendant la Seconde Guerre mondiale, la **conférence de Brazzaville** (1944), réunie sous l'autorité du général de Gaulle, annonce des réformes dans les colonies. En **1944**, **Félix Houphouët-Boigny**, médecin et planteur, crée le **Syndicat agricole africain (SAA)** : il défend les planteurs africains, désavantagés par rapport aux planteurs européens, en particulier pour la main-d'œuvre. En **octobre 1945**, il est élu **député** de la Côte d'Ivoire à l'Assemblée nationale constituante, à Paris. Le **9 avril 1946**, le **PDCI** (Parti démocratique de Côte d'Ivoire) est créé ; le **11 avril 1946**, la loi qui **abolit le travail forcé** est votée. Le chemin va donc du syndicat au parti, puis à la loi.",
+     "method": [
+      "Situer l'événement ou le mouvement dans le temps : la date et le contexte (guerre ou après-guerre).",
+      "Identifier les acteurs et leur revendication : qui agit, au nom de qui, pour obtenir quoi.",
+      "Expliquer les résultats et les liens de cause à effet entre les événements."
+     ],
+     "example": {
+      "statement": "Explique le lien entre le Syndicat agricole africain (1944) et la loi du 11 avril 1946.",
+      "steps": [
+       "Situer : le syndicat naît en 1944, pendant la guerre ; la loi est votée en avril 1946, deux ans plus tard.",
+       "Identifier : les acteurs sont Houphouët-Boigny et les planteurs africains ; ils défendent les planteurs désavantagés et réclament la fin du travail forcé.",
+       "Expliquer : le syndicat donne à Houphouët-Boigny une base ; élu député en 1945, il porte à Paris la loi qui abolit le travail forcé en 1946."
+      ]
+     },
+     "pitfall": "Ne confonds pas le Syndicat agricole africain (1944), qui défend des intérêts professionnels de planteurs, et le PDCI (9 avril 1946), qui est un parti politique. Deux ans séparent leur création. Ne confonds pas non plus la conférence de Brazzaville, réunion de 1944 sur l'avenir des colonies, avec une loi.",
+     "figure": "frise-colonisation",
+     "exercise": {
+      "title": "Les mouvements politiques et syndicaux",
+      "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, expliquer.",
+      "exercise_type": "fixation",
+      "figure": "frise-colonisation",
+      "questions": [
+       {
+        "content": "Remets ces événements dans l'ordre chronologique.",
+        "question_type": "ordering",
+        "explanation": "Étape 1 — Situer : on place chaque date. 1944 : le syndicat ; octobre 1945 : l'élection comme député ; le 9 avril 1946 : le PDCI ; le 11 avril 1946 : la loi. Étape 3 — Expliquer : le syndicat prépare l'action politique, qui aboutit à la loi.",
+        "answers": [
+         {
+          "content": "Création du Syndicat agricole africain (1944)"
+         },
+         {
+          "content": "Houphouët-Boigny élu député (octobre 1945)"
+         },
+         {
+          "content": "Création du PDCI (9 avril 1946)"
+         },
+         {
+          "content": "Loi abolissant le travail forcé (11 avril 1946)"
+         }
+        ]
+       },
+       {
+        "content": "Qui crée le Syndicat agricole africain en 1944 ?",
+        "question_type": "single_choice",
+        "explanation": "Étape 2 — Identifier l'acteur : le SAA est créé par Félix Houphouët-Boigny, médecin et planteur, pour défendre les planteurs africains. Samory Touré est un chef de résistance armée capturé en 1898, Binger est le premier gouverneur en 1893 et de Gaulle réunit la conférence de Brazzaville.",
+        "answers": [
+         {
+          "content": "Samory Touré",
+          "correct": false
+         },
+         {
+          "content": "Louis-Gustave Binger",
+          "correct": false
+         },
+         {
+          "content": "Félix Houphouët-Boigny",
+          "correct": true
+         },
+         {
+          "content": "Le général de Gaulle",
+          "correct": false
+         }
+        ]
+       },
+       {
+        "content": "Relie chaque événement à sa description.",
+        "question_type": "matching",
+        "explanation": "Étape 1 — Situer : on retient 1944 pour le syndicat et la conférence, 1946 pour le parti et la loi. Étape 2 — Identifier : le SAA est un syndicat, le PDCI un parti. Étape 3 — Expliquer : ces événements forment une suite qui mène à la fin du travail forcé.",
+        "answers": [
+         {
+          "content": "Syndicat agricole africain",
+          "match": "Syndicat de planteurs africains créé en 1944"
+         },
+         {
+          "content": "PDCI",
+          "match": "Parti politique créé le 9 avril 1946"
+         },
+         {
+          "content": "Conférence de Brazzaville",
+          "match": "Réunion de 1944 sur l'avenir des colonies"
+         },
+         {
+          "content": "Loi du 11 avril 1946",
+          "match": "Abolition du travail forcé"
+         }
+        ]
+       },
+       {
+        "content": "Le Parti démocratique de Côte d'Ivoire (PDCI) est créé en ___.",
+        "question_type": "fill_blank",
+        "explanation": "Étape 1 — Situer : le PDCI est créé le 9 avril 1946, après la guerre. Étape 3 — Expliquer : il vient deux ans après le syndicat de 1944 et prolonge son action. 1944 est la date du syndicat, pas du parti.",
+        "answers": [
+         {
+          "content": "1946",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Le Syndicat agricole africain est un parti politique créé en 1946.",
+        "question_type": "true_false",
+        "explanation": "Étape 2 — Identifier : le SAA est un syndicat de planteurs et il date de 1944. Étape 3 — Expliquer : le parti politique est le PDCI, créé le 9 avril 1946. L'affirmation mélange les deux, c'est l'erreur du piège.",
+        "answers": [
+         {
+          "content": "Vrai",
+          "correct": false
+         },
+         {
+          "content": "Faux",
+          "correct": true
+         }
+        ]
+       },
+       {
+        "content": "Quels événements ont lieu en 1944 ?",
+        "question_type": "multiple_correct_2",
+        "explanation": "Étape 1 — Situer : en 1944 ont lieu la conférence de Brazzaville et la création du SAA. Le PDCI (9 avril) et la loi (11 avril) datent de 1946, et l'élection comme député d'octobre 1945.",
+        "answers": [
+         {
+          "content": "La conférence de Brazzaville",
+          "correct": true
+         },
+         {
+          "content": "La création du Syndicat agricole africain",
+          "correct": true
+         },
+         {
+          "content": "La création du PDCI",
+          "correct": false
+         },
+         {
+          "content": "La loi abolissant le travail forcé",
+          "correct": false
+         },
+         {
+          "content": "L'élection d'Houphouët-Boigny comme député",
+          "correct": false
+         }
+        ]
        }
       ]
      }
@@ -937,494 +982,489 @@
    ],
    "exercises": [
     {
-     "title": "Awa, le gbaka et la ville",
-     "statement": "Document (texte écrit pour Lnclass) : Awa a 16 ans. Ses parents ont quitté un village du Nord, il y a vingt ans, pour chercher du travail à Abidjan. Awa est née à Abidjan. Elle vit à Abobo, un quartier populaire, et prend chaque matin un gbaka pour aller à son lycée. Le trajet dure plus d'une heure à cause des embouteillages. Son père vend des légumes au marché, sans contrat de travail. Dans cet exercice, tu utilises ce que tu as appris sur les causes de l'urbanisation et sur les transports.",
+     "title": "L'administration et l'économie coloniales vers 1935",
+     "statement": "Document écrit pour Lnclass. Vers 1935, la Côte d'Ivoire est une colonie française de l'AOF dont la capitale est Abidjan. Le gouverneur transmet ses ordres aux commandants de cercle, des Français. Ceux-ci s'appuient sur des chefs de canton africains pour lever l'impôt et réunir des travailleurs. La colonie vend du café, du cacao et du bois à la France, par le chemin de fer et le port.",
      "exercise_type": "fixation",
-     "figure": null,
+     "figure": "frise-colonisation",
      "questions": [
       {
-       "content": "Les parents d'Awa ont quitté leur village du Nord pour s'installer à Abidjan, ville plus grande. Comment appelle-t-on ce déplacement ?",
+       "content": "Dans le texte, la capitale de la colonie vers 1935 est Abidjan. Depuis quelle date Abidjan est-elle capitale ?",
        "question_type": "single_choice",
-       "explanation": "Étape 1 — Repérer : les parents partent d'un village (la campagne) vers Abidjan (la ville). C'est un exode rural. La croissance naturelle concerne les naissances et les décès, l'étalement urbain est l'extension de la ville, le secteur informel est un type de travail.",
+       "explanation": "Méthode — Étape 1, situer : on place la date dans la frise. Grand-Bassam est capitale en 1893, Bingerville en 1900, Abidjan depuis 1934. La date 1904 est celle du début du chemin de fer, pas d'un changement de capitale. Réponse : 1934.",
        "answers": [
         {
-         "content": "L'exode rural",
+         "content": "1893",
+         "correct": false
+        },
+        {
+         "content": "1900",
+         "correct": false
+        },
+        {
+         "content": "1904",
+         "correct": false
+        },
+        {
+         "content": "1934",
          "correct": true
-        },
-        {
-         "content": "La croissance naturelle",
-         "correct": false
-        },
-        {
-         "content": "L'étalement urbain",
-         "correct": false
-        },
-        {
-         "content": "Le secteur informel",
-         "correct": false
         }
        ]
       },
       {
-       "content": "Awa est née à Abidjan, de parents venus d'un village. À quelle cause de l'urbanisation sa naissance contribue-t-elle ?",
-       "question_type": "single_choice",
-       "explanation": "Étape 3 — Identifier la part de la croissance naturelle : une naissance en ville ajoute un citadin sans migration. Awa n'a pas migré : elle contribue donc à la croissance naturelle. Seuls ses parents relèvent de l'exode rural, ce que le piège de la notion 2 rappelle.",
-       "answers": [
-        {
-         "content": "À la croissance naturelle des citadins",
-         "correct": true
-        },
-        {
-         "content": "À l'exode rural",
-         "correct": false
-        },
-        {
-         "content": "Aux embouteillages",
-         "correct": false
-        },
-        {
-         "content": "À l'étalement urbain",
-         "correct": false
-        }
-       ]
-      },
-      {
-       "content": "Le père d'Awa, qui vend des légumes au marché sans contrat de travail, travaille dans le secteur informel.",
-       "question_type": "true_false",
-       "explanation": "Étape 1 — Identifier le domaine : l'emploi. Une activité sans contrat et non déclarée relève du secteur informel. Ce n'est pas un délit : le piège de la notion 4 le rappelle.",
-       "answers": [
-        {
-         "content": "Vrai",
-         "correct": true
-        },
-        {
-         "content": "Faux",
-         "correct": false
-        }
-       ]
-      },
-      {
-       "content": "Dans le lycée d'Awa, 54 élèves du même quartier veulent prendre des gbaka de 18 places. Combien de gbaka pleins faut-il ?",
-       "question_type": "numeric",
-       "explanation": "Étape 3 — Expliquer par le calcul : $54 \\div 18 = 3$. Il faut 3 gbaka pleins. Étape 1 — Identifier : le gbaka est un minibus collectif de 18 places dans cet énoncé.",
-       "answers": [
-        {
-         "content": "3",
-         "correct": true
-        }
-       ],
-       "tolerance": 0,
-       "unit": "gbaka"
-      },
-      {
-       "content": "Remets dans l'ordre cet enchaînement de causes et de conséquences.",
+       "content": "Remets dans l'ordre le chemin d'un ordre de l'administration, du plus haut au plus bas.",
        "question_type": "ordering",
-       "explanation": "Étape 1 — Repérer le mouvement de départ (exode rural), puis la hausse de la population, puis (méthode de la notion 4, étape 2) les besoins qui dépassent les équipements, enfin la description des conséquences : quartiers précaires et embouteillages. Les conséquences ne peuvent pas précéder leur cause.",
+       "explanation": "Méthode — Étape 2, identifier les niveaux de l'autorité : l'ordre descend du gouverneur général au gouverneur de la colonie, au commandant de cercle (Français) puis au chef de canton (Africain). Étape 3 : le chef de canton le fait exécuter dans les villages, pour lever l'impôt et réunir des travailleurs.",
        "answers": [
         {
-         "content": "Des familles quittent les villages pour la ville."
+         "content": "Gouverneur général de l'AOF"
         },
         {
-         "content": "La population d'Abidjan augmente rapidement."
+         "content": "Gouverneur de la Côte d'Ivoire"
         },
         {
-         "content": "Les besoins en logements et en transports dépassent les équipements."
+         "content": "Commandant de cercle"
         },
         {
-         "content": "Les quartiers précaires et les embouteillages se développent."
+         "content": "Chef de canton"
         }
        ]
       },
       {
-       "content": "En citant le texte, explique pourquoi le trajet d'Awa est long. Donne deux causes.",
+       "content": "Dans l'économie décrite par le texte, la colonie vend surtout des produits fabriqués à la France.",
+       "question_type": "true_false",
+       "explanation": "Méthode — Étape 2, dégager les idées : le texte cite le café, le cacao et le bois, qui sont des matières premières. Étape 3, expliquer : dans l'économie de traite, la colonie vend des matières premières et achète des produits fabriqués. L'affirmation inverse le circuit.",
+       "answers": [
+        {
+         "content": "Vrai",
+         "correct": false
+        },
+        {
+         "content": "Faux",
+         "correct": true
+        }
+       ]
+      },
+      {
+       "content": "Dans le texte, la colonie fait partie d'un ensemble dirigé par un gouverneur général : c'est l'___ (sigle).",
+       "question_type": "fill_blank",
+       "explanation": "Méthode — Étape 1, situer : le cadre de la colonie est l'AOF, l'Afrique occidentale française, créée en 1895. Le gouverneur général de l'AOF est au-dessus du gouverneur de la Côte d'Ivoire. Réponse : AOF.",
+       "answers": [
+        {
+         "content": "AOF",
+         "correct": true
+        }
+       ]
+      },
+      {
+       "content": "Quelles missions les chefs de canton exécutent-ils pour l'administration ?",
+       "question_type": "multiple_correct_3",
+       "explanation": "Méthode — Étape 3, expliquer le rôle de chaque niveau : le chef de canton est un intermédiaire africain. Il relaie les ordres du commandant de cercle, lève l'impôt et réunit des travailleurs. Il ne nomme pas le gouverneur et ne décide pas du budget de l'AOF, qui dépendent de la France.",
+       "answers": [
+        {
+         "content": "Lever l'impôt",
+         "correct": true
+        },
+        {
+         "content": "Réunir des travailleurs",
+         "correct": true
+        },
+        {
+         "content": "Relayer les ordres du commandant de cercle",
+         "correct": true
+        },
+        {
+         "content": "Nommer le gouverneur de la colonie",
+         "correct": false
+        },
+        {
+         "content": "Décider seuls du budget de l'AOF",
+         "correct": false
+        }
+       ]
+      },
+      {
+       "content": "En un paragraphe, explique comment l'administration coloniale et l'économie de traite servent les intérêts de la France.",
        "question_type": "written",
-       "explanation": "Corrigé modèle : le trajet d'Awa dure plus d'une heure à cause des embouteillages. Première cause : Abobo est une commune populaire de la périphérie, loin du centre. Deuxième cause : la ville a grandi plus vite que ses routes, et la lagune Ébrié oblige à passer par peu de ponts. Barème : 1 point pour le lien avec le texte, 1 point par cause expliquée.",
-       "answers": [],
        "points": 3,
        "criteria": [
-        "Le trajet est relié aux embouteillages cités dans le texte",
-        "Une cause est la distance entre la périphérie et le centre ou le nombre de véhicules",
-        "Une deuxième cause est donnée : peu de ponts, routes saturées ou croissance rapide de la ville",
-        "La réponse est rédigée en phrases"
+        "Cite deux niveaux de l'autorité (commandant de cercle, chef de canton)",
+        "Cite des produits exportés (café, cacao, bois)",
+        "Explique que l'impôt et les travailleurs servent la France"
        ],
-       "starter": "Le trajet est long parce que…"
+       "explanation": "Corrigé modèle : l'administration coloniale est organisée en niveaux : le gouverneur, les commandants de cercle français, puis des chefs de canton africains qui relaient les ordres. Ces chefs lèvent l'impôt et réunissent des travailleurs. La colonie vend du café, du cacao et du bois à la France et achète ses produits fabriqués : c'est l'économie de traite, qui sert d'abord la métropole. Barème : niveaux de l'autorité (1) ; produits exportés (1) ; lien avec l'intérêt de la France (1).",
+       "answers": [],
+       "starter": "L'administration coloniale est organisée…"
       }
      ]
     },
     {
-     "title": "Lire les chiffres d'un pays qui s'urbanise",
-     "statement": "Document (données fictives écrites pour Lnclass) : en 2000, un pays compte 10 000 000 d'habitants dont 3 000 000 de citadins. En 2020, il compte 12 000 000 d'habitants dont 6 000 000 de citadins. Dans cet exercice, tu appliques la méthode de mesure de l'urbanisation à ces données.",
+     "title": "Le chantier du chemin de fer",
+     "statement": "Document écrit pour Lnclass. Les travaux du chemin de fer Abidjan-Niger commencent en 1904 à partir d'Abidjan. Pour poser la voie, l'administration réquisitionne des hommes dans les villages par l'intermédiaire des chefs de canton. Le travail est pénible. La voie atteint Bouaké en 1912, puis continue vers le nord. Elle sert à porter vers le port le café, le cacao et le bois.",
      "exercise_type": "fixation",
-     "figure": null,
+     "figure": "carte-voie-ferree",
      "questions": [
       {
-       "content": "Pays fictif : en 2000, 3 000 000 de citadins pour 10 000 000 d'habitants. Quel est son taux d'urbanisation en 2000, en pourcentage ?",
+       "content": "Le chantier commence en 1904 et la voie atteint Bouaké en 1912. Combien d'années faut-il pour aller d'Abidjan à Bouaké ?",
        "question_type": "numeric",
-       "explanation": "Étape 1 — Relever : 3 000 000 de citadins et 10 000 000 d'habitants, en 2000. Étape 2 — Calculer : $3\\,000\\,000 \\div 10\\,000\\,000 \\times 100 = 30$. Étape 3 — Interpréter : 30 % des habitants vivent en ville.",
+       "unit": "ans",
+       "tolerance": 0,
+       "explanation": "Méthode — Étape 1, présenter : on relève les deux dates du texte. Étape 2, dégager : on calcule la durée du chantier. 1912 − 1904 = 8. Réponse : 8 ans.",
        "answers": [
         {
-         "content": "30",
+         "content": "8",
          "correct": true
         }
-       ],
-       "tolerance": 0,
-       "unit": "%"
+       ]
       },
       {
-       "content": "Pays fictif : en 2020, 6 000 000 de citadins pour 12 000 000 d'habitants. Quel est son taux d'urbanisation en 2020, en pourcentage ?",
-       "question_type": "numeric",
-       "explanation": "Étape 1 — Relever : 6 000 000 de citadins et 12 000 000 d'habitants, en 2020. Étape 2 — Calculer : $6\\,000\\,000 \\div 12\\,000\\,000 \\times 100 = 50$. Étape 3 — Interpréter : la moitié des habitants vivent en ville.",
-       "answers": [
-        {
-         "content": "50",
-         "correct": true
-        }
-       ],
-       "tolerance": 0,
-       "unit": "%"
-      },
-      {
-       "content": "Dans un pays fictif, le taux d'urbanisation passe de 30 % en 2000 à 50 % en 2020. De combien de points de pourcentage a-t-il augmenté ?",
-       "question_type": "numeric",
-       "explanation": "Étape 3 — Interpréter en comparant deux dates : $50 - 30 = 20$ points de pourcentage. Le taux a gagné 20 points, ce qui montre que le pays s'est urbanisé.",
-       "answers": [
-        {
-         "content": "20",
-         "correct": true
-        }
-       ],
-       "tolerance": 0,
-       "unit": "points"
-      },
-      {
-       "content": "Pays fictif : 3 000 000 de citadins en 2000 sur 10 000 000 d'habitants, 6 000 000 en 2020 sur 12 000 000. Que peut-on affirmer ?",
+       "content": "Comment appelle-t-on le fait de réquisitionner des hommes pour le chantier du chemin de fer ?",
        "question_type": "single_choice",
-       "explanation": "Étape 1 — Relever les deux dates. 3 000 000 devient 6 000 000 : les citadins ont doublé. Mais le taux passe de 30 % à 50 % (il n'a pas doublé) et la population totale passe de 10 à 12 millions (elle n'a pas doublé). Confondre ces trois évolutions est l'erreur du piège de la notion 1.",
+       "explanation": "Méthode — Étape 1, nommer la contrainte : des hommes sont réquisitionnés sans choisir, c'est du travail forcé. Étape 2, décrire : le commandant de cercle passe par les chefs de canton. Il ne s'agit ni d'un travail libre ni d'une résistance, qui serait un refus.",
        "answers": [
         {
-         "content": "Le nombre de citadins a doublé, de 3 000 000 à 6 000 000",
+         "content": "Une prestation volontaire",
+         "correct": false
+        },
+        {
+         "content": "Le travail forcé",
          "correct": true
         },
         {
-         "content": "Le taux d'urbanisation a doublé",
+         "content": "Un salaire libre",
          "correct": false
         },
         {
-         "content": "La population totale a doublé",
-         "correct": false
-        },
-        {
-         "content": "Le nombre de citadins n'a pas changé",
+         "content": "Une résistance passive",
          "correct": false
         }
        ]
       },
       {
-       "content": "Dans ce pays fictif, il y a en 2020 autant de ruraux que de citadins.",
-       "question_type": "true_false",
-       "explanation": "Étape 1 — Relever : population totale 12 000 000, citadins 6 000 000. La population rurale est $12\\,000\\,000 - 6\\,000\\,000 = 6\\,000\\,000$. Étape 3 — Interpréter : autant de ruraux que de citadins, soit 50 % chacun.",
+       "content": "Relie chaque ville à sa place sur la voie ferrée Abidjan-Niger.",
+       "question_type": "matching",
+       "explanation": "Méthode — Étape 2, dégager les lieux : Abidjan est le point de départ en 1904, Bouaké est atteinte en 1912, et la voie continue vers le nord jusqu'à Ferkessédougou. Étape 3 : cet itinéraire suit les régions de production pour mener au port.",
        "answers": [
         {
-         "content": "Vrai",
+         "content": "Abidjan",
+         "match": "Point de départ des travaux en 1904"
+        },
+        {
+         "content": "Bouaké",
+         "match": "Ville atteinte en 1912"
+        },
+        {
+         "content": "Ferkessédougou",
+         "match": "Ville du nord desservie par la voie"
+        }
+       ]
+      },
+      {
+       "content": "Quelles conséquences le travail forcé sur les chantiers a-t-il pour les villages ?",
+       "question_type": "multiple_correct_3",
+       "explanation": "Méthode — Étape 3, expliquer les conséquences : le travail forcé est pénible, il prive les villages de bras et pousse certains habitants à fuir vers la Gold Coast. Les cultures vivrières diminuent au lieu d'augmenter, et l'impôt n'est pas supprimé.",
+       "answers": [
+        {
+         "content": "Un travail pénible pour les hommes réquisitionnés",
          "correct": true
         },
         {
-         "content": "Faux",
+         "content": "Des villages privés d'hommes",
+         "correct": true
+        },
+        {
+         "content": "Des fuites vers la Gold Coast",
+         "correct": true
+        },
+        {
+         "content": "Une hausse des cultures vivrières",
+         "correct": false
+        },
+        {
+         "content": "La fin de l'impôt",
          "correct": false
         }
        ]
       },
       {
-       "content": "Dans ce pays fictif, quelle conséquence est probable si la ville ne construit pas de nouveaux logements pendant que le nombre de citadins double ?",
+       "content": "Pourquoi la voie ferrée a-t-elle été construite d'abord, selon le texte ?",
        "question_type": "single_choice",
-       "explanation": "Étape 2 — Expliquer le lien (notion 4) : si les citadins doublent sans nouveaux logements, les besoins dépassent les équipements. Étape 3 — Décrire : des familles s'installent dans des quartiers précaires. Les trois autres propositions disent l'inverse.",
+       "explanation": "Méthode — Étape 1, présenter : le texte décrit le chemin de fer. Étape 2, dégager : le rail porte vers le port le café, le cacao et le bois. Étape 3, expliquer : il sert d'abord la métropole. Le texte ne dit pas qu'il relie tous les villages.",
        "answers": [
         {
-         "content": "Le développement de quartiers précaires",
+         "content": "Pour porter vers le port le café, le cacao et le bois",
          "correct": true
         },
         {
-         "content": "La disparition des embouteillages",
+         "content": "Pour conduire les élèves à l'école",
          "correct": false
         },
         {
-         "content": "La baisse du secteur informel",
+         "content": "Pour relier tous les villages ivoiriens",
          "correct": false
         },
         {
-         "content": "Un taux d'urbanisation de 0 %",
+         "content": "Pour remplacer le port",
          "correct": false
         }
        ]
       },
       {
-       "content": "Explique en quelques phrases deux causes possibles de la hausse du taux d'urbanisation de ce pays entre 2000 et 2020.",
+       "content": "Explique en quelques lignes pourquoi le chantier du chemin de fer illustre à la fois l'économie coloniale et le travail forcé.",
        "question_type": "written",
-       "explanation": "Corrigé modèle : le taux d'urbanisation a augmenté d'abord à cause de l'exode rural : des habitants quittent les villages (peu d'emplois et de revenus) pour la ville, qui offre des emplois, des écoles et des hôpitaux. Il a augmenté aussi à cause de la croissance naturelle : les citadins, souvent jeunes, ont des enfants en ville. Ces deux causes font croître la population urbaine plus vite que la population rurale. Barème : 1 point par cause, 1 point pour la conclusion.",
-       "answers": [],
        "points": 3,
        "criteria": [
-        "L'exode rural est expliqué avec facteurs de départ ou d'attraction",
-        "La croissance naturelle des citadins est expliquée",
-        "La conclusion relie les deux à la hausse du taux"
-       ]
+        "Relie le chemin de fer à l'exportation des produits",
+        "Explique que les travailleurs sont réquisitionnés",
+        "Cite une conséquence pour les villages"
+       ],
+       "explanation": "Corrigé modèle : le chemin de fer est construit pour porter au port le café, le cacao et le bois : il sert l'économie de traite, c'est-à-dire l'intérêt de la France. Pour le construire à peu de frais, l'administration réquisitionne des hommes dans les villages : c'est du travail forcé. Les conséquences sont un travail pénible, des villages privés d'hommes et des fuites. Barème : lien avec l'exportation (1) ; réquisition des travailleurs (1) ; une conséquence (1).",
+       "answers": [],
+       "starter": "Le chemin de fer sert l'économie de traite…"
       }
      ]
     },
     {
-     "title": "Gbaka, embouteillages et quartiers en extension",
-     "statement": "Document (texte écrit pour Lnclass) : chaque matin, des milliers d'habitants des communes populaires d'Abidjan, comme Abobo et Yopougon, se rendent au Plateau, le quartier des affaires et des administrations. Beaucoup prennent le gbaka, le woro-woro ou le bus de la SOTRA. La lagune Ébrié oblige à passer par un petit nombre de ponts, d'où des embouteillages aux heures de pointe. Dans les quartiers de la périphérie en extension, des familles construisent leur logement sur des terrains sans eau ni électricité. Dans cet exercice, tu analyses ce document avec les fiches sur les villes, les conséquences et les transports.",
+     "title": "Impôt, travail forcé et résistances",
+     "statement": "Document écrit pour Lnclass. Dans un village de la colonie, vers 1935, le commandant de cercle demande au chef de canton un impôt par personne et vingt hommes pour un chantier. Plusieurs familles partent vers la Gold Coast. D'autres retardent le paiement de l'impôt. L'administration menace de punir ceux qui refusent, par le régime de l'indigénat.",
      "exercise_type": "evaluation",
-     "figure": "consequences-urbaine",
+     "figure": "circuit-traite",
      "questions": [
       {
-       "content": "Quand la ville s'étend de plus en plus loin sur ses périphéries, on parle d'___ urbain.",
-       "question_type": "fill_blank",
-       "explanation": "Étape 3 — Décrire (notion 4) : l'étalement urbain est l'extension de la ville sur ses périphéries, ici les quartiers où des familles construisent sans eau ni électricité. Il allonge les trajets entre le domicile et le travail.",
-       "answers": [
-        {
-         "content": "étalement",
-         "correct": true
-        }
-       ]
-      },
-      {
-       "content": "Parmi ces propositions, lesquelles sont des difficultés citées ou impliquées par le document ?",
-       "question_type": "multiple_correct_3",
-       "explanation": "Étape 2 — Repérer les difficultés : le texte cite les embouteillages, les logements sans eau ni électricité, et des habitants qui vont chaque matin des communes populaires jusqu'au Plateau. Il cite au contraire le gbaka, le woro-woro et la SOTRA : il existe donc des transports en commun.",
-       "answers": [
-        {
-         "content": "Des embouteillages aux heures de pointe",
-         "correct": true
-        },
-        {
-         "content": "Des logements construits sans eau ni électricité",
-         "correct": true
-        },
-        {
-         "content": "Des trajets longs entre la périphérie et le Plateau",
-         "correct": true
-        },
-        {
-         "content": "Un manque d'élèves dans les écoles",
-         "correct": false
-        },
-        {
-         "content": "L'absence totale de transport en commun",
-         "correct": false
-        },
-        {
-         "content": "Une baisse de la population d'Abidjan",
-         "correct": false
-        }
-       ]
-      },
-      {
-       "content": "Pourquoi des milliers d'habitants se rendent-ils chaque matin au Plateau ?",
+       "content": "Comment s'appelle l'impôt payé par chaque personne dans la colonie ?",
        "question_type": "single_choice",
-       "explanation": "Étape 2 — Décrire les fonctions (notion 3) : le texte dit que le Plateau est le quartier des affaires et des administrations. On y travaille, donc les habitants des périphéries s'y rendent chaque matin.",
+       "explanation": "Méthode — Étape 1, nommer la contrainte : l'impôt par personne est la capitation. La prestation est un jour de travail gratuit, l'indigénat est un régime de sanctions, et la traite est un type d'économie. Réponse : la capitation.",
        "answers": [
         {
-         "content": "Parce que le Plateau concentre emplois, affaires et administrations",
+         "content": "La prestation",
+         "correct": false
+        },
+        {
+         "content": "La capitation",
          "correct": true
         },
         {
-         "content": "Parce que le Plateau est un village agricole",
+         "content": "L'indigénat",
          "correct": false
         },
         {
-         "content": "Parce que le Plateau est la seule commune d'Abidjan",
-         "correct": false
-        },
-        {
-         "content": "Parce que le Plateau n'a pas de routes",
+         "content": "La traite",
          "correct": false
         }
        ]
       },
       {
-       "content": "Les habitants des quartiers de la périphérie doivent faire de longs trajets parce qu'ils vivent loin de leur lieu de travail.",
+       "content": "Quelles actions du texte sont des résistances passives ?",
+       "question_type": "multiple_correct_2",
+       "explanation": "Méthode — Étape 2, classer : fuir et retarder l'impôt sont des refus sans combat, donc passifs. Le chef de canton obéit à l'administration et l'administration agit en menaçant : ce ne sont pas des résistances.",
+       "answers": [
+        {
+         "content": "Les familles partent vers la Gold Coast",
+         "correct": true
+        },
+        {
+         "content": "Des habitants retardent le paiement de l'impôt",
+         "correct": true
+        },
+        {
+         "content": "Le chef de canton transmet l'ordre du commandant",
+         "correct": false
+        },
+        {
+         "content": "L'administration menace de punir",
+         "correct": false
+        }
+       ]
+      },
+      {
+       "content": "Les familles qui partent vers la Gold Coast pratiquent une résistance armée.",
        "question_type": "true_false",
-       "explanation": "Étape 3 — Expliquer les causes (notion 5) : la distance entre la périphérie (Abobo, Yopougon) et le Plateau allonge les trajets. À cela s'ajoutent les embouteillages.",
+       "explanation": "Méthode — Étape 2, classer : fuir sans combattre est une résistance passive. Étape 3, expliquer : la cause est le refus du travail forcé et de l'impôt. Il n'y a pas de combat, donc pas de résistance armée.",
        "answers": [
         {
          "content": "Vrai",
-         "correct": true
+         "correct": false
         },
         {
          "content": "Faux",
-         "correct": false
-        }
-       ]
-      },
-      {
-       "content": "Un bus de la SOTRA transporte 40 personnes, une voiture 4 personnes. Combien de voitures faut-il pour transporter autant de personnes qu'un bus plein ?",
-       "question_type": "numeric",
-       "explanation": "Étape 3 — Expliquer : $40 \\div 4 = 10$ voitures. Étape 4 — Proposer : un bus occupe bien moins de place sur la route que 10 voitures. C'est l'argument pour les transports en commun de grande capacité.",
-       "answers": [
-        {
-         "content": "10",
          "correct": true
         }
-       ],
-       "tolerance": 0,
-       "unit": "voitures"
-      },
-      {
-       "content": "En t'appuyant sur le document, explique les causes des embouteillages à Abidjan en suivant les étapes : identifier les modes de transport, repérer les difficultés, expliquer les causes.",
-       "question_type": "written",
-       "explanation": "Corrigé modèle : étape 1, les habitants utilisent le gbaka, le woro-woro et le bus de la SOTRA. Étape 2, ils subissent des embouteillages aux heures de pointe. Étape 3, les causes sont la distance entre les communes de la périphérie, comme Abobo et Yopougon, et le Plateau où ils travaillent, et le petit nombre de ponts pour traverser la lagune Ébrié. Barème : 1 point par critère.",
-       "answers": [],
-       "points": 4,
-       "criteria": [
-        "Les modes de transport du texte sont identifiés",
-        "Les embouteillages aux heures de pointe sont repérés",
-        "La distance entre périphérie et Plateau est donnée comme cause",
-        "Le petit nombre de ponts sur la lagune est donné comme cause"
-       ],
-       "starter": "Les habitants utilisent…"
-      },
-      {
-       "content": "Propose deux solutions pour améliorer la vie dans les quartiers de la périphérie (logement et transport) et justifie-les.",
-       "question_type": "written",
-       "explanation": "Corrigé modèle : pour le logement, il faut équiper les terrains en eau, en électricité et en routes avant de construire, et construire des logements accessibles : les familles auront un logement sûr. Pour le transport, il faut développer les bus et les bateaux-bus, qui transportent beaucoup de personnes en occupant peu de place : les trajets seront moins longs. Barème : 1 point par solution, 1 point par justification.",
-       "answers": [],
-       "points": 4,
-       "criteria": [
-        "Une solution de logement est proposée (équiper, construire, planifier)",
-        "Une solution de transport est proposée (bus, bateaux-bus, organisation)",
-        "Chaque solution est justifiée par un effet précis",
-        "La rédaction est claire et organisée"
        ]
+      },
+      {
+       "content": "Remets dans l'ordre cet enchaînement.",
+       "question_type": "ordering",
+       "explanation": "Méthode — Étape 2, décrire : l'ordre part de l'administration, passe par les chefs de canton, provoque des refus passifs, puis des menaces de sanctions. Étape 3 : cette chaîne montre la contrainte et la résistance.",
+       "answers": [
+        {
+         "content": "L'administration exige l'impôt et des travailleurs"
+        },
+        {
+         "content": "Les chefs de canton relaient l'ordre dans les villages"
+        },
+        {
+         "content": "Des habitants fuient ou retardent l'impôt"
+        },
+        {
+         "content": "L'administration menace de sanctions par l'indigénat"
+        }
+       ]
+      },
+      {
+       "content": "Le régime qui permet de punir les sujets africains sans procès régulier est le régime de l'___.",
+       "question_type": "fill_blank",
+       "explanation": "Méthode — Étape 3, expliquer : le régime de l'indigénat donne à l'administration le pouvoir de punir sans procès. Dans le texte, c'est la menace utilisée contre ceux qui refusent l'impôt ou le chantier.",
+       "answers": [
+        {
+         "content": "indigénat",
+         "correct": true
+        }
+       ]
+      },
+      {
+       "content": "Rédige un paragraphe : explique les contraintes imposées dans ce village, la forme de résistance choisie par les habitants et la réponse de l'administration.",
+       "question_type": "written",
+       "points": 4,
+       "criteria": [
+        "Nomme l'impôt et le travail forcé",
+        "Classe la fuite et le retard comme résistance passive",
+        "Explique la cause de la résistance",
+        "Cite la réponse de l'administration (indigénat)"
+       ],
+       "explanation": "Corrigé modèle : 1) Nommer et décrire : l'administration impose l'impôt de capitation et réclame des hommes pour un chantier, c'est du travail forcé. 2) Classer : les familles qui fuient vers la Gold Coast ou retardent l'impôt pratiquent une résistance passive. 3) Expliquer : elles refusent des contraintes pénibles ; l'administration répond par la menace de sanctions de l'indigénat. Barème : contraintes (1) ; classement de la résistance (1) ; cause (1) ; réponse de l'administration (1).",
+       "answers": [],
+       "starter": "L'administration impose…"
       }
      ]
     },
     {
-     "title": "L'urbanisation en Côte d'Ivoire : sujet type BEPC",
-     "statement": "Document 1 (texte écrit pour Lnclass) : Fatou grandit dans un village du Nord où il n'y a ni lycée ni travail pour les jeunes. À 18 ans, elle rejoint sa tante à Abidjan, attirée par le lycée et par les possibilités de travail. À Abidjan, elle vend des beignets au bord de la route, sans contrat. Chaque jour, elle prend le gbaka dans des rues embouteillées. Document 2 (données fictives écrites pour Lnclass) : une ville moyenne comptait 200 000 habitants en 2000 et 500 000 habitants en 2020. Utilise les fiches de la leçon.",
+     "title": "De la colonie aux revendications politiques (1893-1946)",
+     "statement": "Document écrit pour Lnclass. En 1893, la Côte d'Ivoire devient une colonie française et entre dans l'AOF en 1895. Une administration s'installe, l'économie de traite se met en place avec le chemin de fer (1904, Bouaké en 1912) et les populations subissent l'impôt et le travail forcé. En 1944, Houphouët-Boigny crée le Syndicat agricole africain ; en 1946, le PDCI est créé et le travail forcé est aboli.",
      "exercise_type": "evaluation",
-     "figure": "carte-villes-ci",
+     "figure": "frise-colonisation",
      "questions": [
       {
-       "content": "Document 2 : une ville moyenne comptait 200 000 habitants en 2000 et 500 000 habitants en 2020. Par combien sa population a-t-elle été multipliée ?",
-       "question_type": "numeric",
-       "explanation": "Étape 1 — Relever : 200 000 habitants en 2000, 500 000 en 2020. Étape 2 — Calculer : $500\\,000 \\div 200\\,000 = 2{,}5$. Étape 3 — Interpréter : la population de la ville a été multipliée par 2,5 en vingt ans, une croissance urbaine rapide.",
+       "content": "Remets ces événements dans l'ordre chronologique.",
+       "question_type": "ordering",
+       "explanation": "Méthode — Étape 1, situer : on lit les dates. 1893 colonie, 1904 début du chemin de fer, 1934 Abidjan capitale, 1944 syndicat, 1946 fin du travail forcé. Une frise aide à voir que les revendications politiques viennent après des décennies de contraintes.",
        "answers": [
         {
-         "content": "2,5",
-         "correct": true
-        }
-       ],
-       "tolerance": 0
-      },
-      {
-       "content": "Document 1 : quels éléments sont des facteurs d'attraction de la ville pour Fatou ?",
-       "question_type": "multiple_correct_3",
-       "explanation": "Étape 2 — Classer (notion 2) : ce qui attire à Abidjan (lycée, travail, présence de la tante) est un facteur d'attraction. L'absence de lycée et de travail au village est un facteur de départ. Les embouteillages sont une difficulté de la ville, pas un facteur d'attraction.",
-       "answers": [
-        {
-         "content": "La présence d'un lycée à Abidjan",
-         "correct": true
+         "content": "Colonie de Côte d'Ivoire (1893)"
         },
         {
-         "content": "Les possibilités de travail à Abidjan",
-         "correct": true
+         "content": "Début du chemin de fer (1904)"
         },
         {
-         "content": "La présence de sa tante à Abidjan",
-         "correct": true
+         "content": "Capitale à Abidjan (1934)"
         },
         {
-         "content": "L'absence de lycée dans son village",
-         "correct": false
+         "content": "Syndicat agricole africain (1944)"
         },
         {
-         "content": "Le manque de travail dans son village",
-         "correct": false
-        },
-        {
-         "content": "Les embouteillages d'Abidjan",
-         "correct": false
+         "content": "Fin du travail forcé (1946)"
         }
        ]
       },
       {
-       "content": "Quand les habitants d'une ville ont des enfants, ces naissances en ville augmentent la population urbaine par la croissance ___.",
-       "question_type": "fill_blank",
-       "explanation": "Étape 3 — Identifier (notion 2) : les naissances en ville moins les décès forment la croissance naturelle. Elle s'ajoute à l'exode rural.",
+       "content": "Relie chaque événement à sa date.",
+       "question_type": "matching",
+       "explanation": "Méthode — Étape 1, situer : 1904 pour le début des travaux, 1912 pour Bouaké, 1944 pour le syndicat et 1946 pour le PDCI. Ne confonds pas 1944 et 1946, qui séparent le syndicat du parti.",
        "answers": [
         {
-         "content": "naturelle",
-         "correct": true
-        }
-       ]
-      },
-      {
-       "content": "Abidjan est la capitale politique de la Côte d'Ivoire.",
-       "question_type": "true_false",
-       "explanation": "Étape 2 — Décrire les fonctions (notion 3) : Abidjan est la capitale économique et le grand port. La capitale politique est Yamoussoukro. C'est la confusion signalée dans le piège de la notion 3.",
-       "answers": [
-        {
-         "content": "Vrai",
-         "correct": false
+         "content": "Début du chemin de fer",
+         "match": "1904"
         },
         {
-         "content": "Faux",
-         "correct": true
+         "content": "Le rail atteint Bouaké",
+         "match": "1912"
+        },
+        {
+         "content": "Création du PDCI",
+         "match": "1946"
+        },
+        {
+         "content": "Création du Syndicat agricole africain",
+         "match": "1944"
         }
        ]
       },
       {
-       "content": "Document 1 : Fatou vend des beignets au bord de la route, sans contrat. De quel type d'emploi s'agit-il ?",
+       "content": "Quel est le lien le plus juste entre le travail forcé et la création du Syndicat agricole africain ?",
        "question_type": "single_choice",
-       "explanation": "Étape 1 — Identifier le domaine (notion 4) : l'emploi. Une activité de travail sans contrat et non déclarée relève du secteur informel. Ce n'est pas de la délinquance : c'est le piège de la notion 4.",
+       "explanation": "Méthode — Étape 2, identifier la revendication : le SAA défend les planteurs africains, désavantagés par rapport aux planteurs européens pour la main-d'œuvre. Étape 3 : il prépare l'action politique contre le travail forcé. Il n'organise pas le travail forcé, ne remplace pas l'administration et date de 1944.",
        "answers": [
         {
-         "content": "D'un emploi du secteur informel",
+         "content": "Le syndicat défend des planteurs africains désavantagés, notamment pour la main-d'œuvre",
          "correct": true
         },
         {
-         "content": "D'un emploi du secteur formel avec contrat",
+         "content": "Le syndicat est créé pour organiser le travail forcé",
          "correct": false
         },
         {
-         "content": "D'une activité de délinquance",
+         "content": "Le syndicat remplace l'administration coloniale",
          "correct": false
         },
         {
-         "content": "D'un emploi de l'administration",
+         "content": "Le syndicat est un parti créé en 1946",
          "correct": false
         }
        ]
       },
       {
-       "content": "Compare Abidjan aux autres villes du réseau urbain ivoirien (Bouaké, Daloa, Korhogo, San-Pédro) et explique ce que l'on appelle un réseau urbain déséquilibré.",
+       "content": "Quels éléments caractérisent la domination coloniale entre 1893 et 1946 ?",
+       "question_type": "multiple_correct_3",
+       "explanation": "Méthode — Étape 3, expliquer : la domination repose sur une administration hiérarchisée avec l'indigénat, sur l'économie de traite, sur l'impôt et le travail forcé. L'indépendance date de 1960 et l'abolition du travail forcé de 1946 : ces deux propositions sont fausses.",
+       "answers": [
+        {
+         "content": "Une administration hiérarchisée avec indigénat",
+         "correct": true
+        },
+        {
+         "content": "Une économie de traite",
+         "correct": true
+        },
+        {
+         "content": "L'impôt et le travail forcé",
+         "correct": true
+        },
+        {
+         "content": "L'indépendance de la Côte d'Ivoire en 1930",
+         "correct": false
+        },
+        {
+         "content": "L'abolition du travail forcé en 1893",
+         "correct": false
+        }
+       ]
+      },
+      {
+       "content": "Analyse le document de l'énoncé : présente-le, dégage deux idées principales et explique-les.",
        "question_type": "written",
-       "explanation": "Corrigé modèle : Abidjan est la plus grande ville de Côte d'Ivoire et sa capitale économique, avec un grand port et de nombreux emplois. Bouaké au centre, Daloa à l'ouest, Korhogo au nord et San-Pédro, port du Sud-Ouest, sont beaucoup moins peuplées. Le réseau urbain est déséquilibré car la population et les activités se concentrent autour d'Abidjan. Barème : 1 point par critère.",
-       "answers": [],
        "points": 3,
        "criteria": [
-        "Abidjan est présentée comme la plus grande ville et la capitale économique",
-        "Les autres villes citées sont situées et ont un rôle plus limité",
-        "Le déséquilibre est expliqué : tout se concentre autour d'une seule ville"
+        "Présente le document (texte écrit pour Lnclass, période 1893-1946)",
+        "Dégage deux idées (domination coloniale, revendications de 1944-1946)",
+        "Explique le lien entre contraintes et revendications"
        ],
-       "starter": "Abidjan est la plus grande ville…"
+       "explanation": "Corrigé modèle : 1) Présenter : le document est un texte écrit pour Lnclass sur la Côte d'Ivoire de 1893 à 1946. 2) Dégager : la colonie subit une administration, l'économie de traite, l'impôt et le travail forcé ; à partir de 1944, un syndicat puis un parti défendent les Ivoiriens. 3) Expliquer : les contraintes provoquent des revendications, qui aboutissent à la loi de 1946. Barème : présentation (1) ; deux idées (1) ; explication (1).",
+       "answers": [],
+       "starter": "Ce document présente…"
       },
       {
-       "content": "Rédige un paragraphe de 8 à 10 lignes : explique les causes de l'urbanisation en Côte d'Ivoire, décris ses conséquences à Abidjan, puis propose deux solutions.",
+       "content": "Rédige une synthèse d'une dizaine de lignes : montre comment la France organise la colonie de 1893 à 1946, quelles contraintes subissent les Ivoiriens et comment ils obtiennent la fin du travail forcé.",
        "question_type": "written",
-       "explanation": "Corrigé modèle : l'urbanisation de la Côte d'Ivoire a deux causes. D'abord l'exode rural : des jeunes quittent les villages, où il y a peu d'emplois et d'équipements, pour Abidjan, qui offre un port, des industries, des écoles et des hôpitaux. Ensuite la croissance naturelle : les citadins ont des enfants en ville. À Abidjan, cette croissance rapide dépasse les équipements : il manque des logements, d'où des quartiers précaires ; il manque des emplois stables, d'où le secteur informel ; les routes saturées provoquent des embouteillages, malgré le gbaka, le woro-woro et la SOTRA. Pour répondre, il faut construire et équiper des logements accessibles, et développer les bus et les bateaux-bus. Barème : causes 2 points, conséquences 2 points, solutions 2 points, organisation et langue 2 points.",
-       "answers": [],
-       "points": 8,
+       "points": 6,
        "criteria": [
-        "Deux causes sont expliquées : exode rural et croissance naturelle",
-        "Des facteurs de départ et d'attraction sont cités",
-        "Au moins deux conséquences à Abidjan sont décrites (logement, emploi, transport)",
-        "Deux solutions adaptées sont proposées et justifiées",
-        "Le texte est organisé en paragraphe, avec un vocabulaire précis",
-        "Les phrases sont correctes et le texte respecte la longueur demandée"
+        "Situe la création de la colonie (1893) et de l'AOF (1895)",
+        "Décrit l'administration (gouverneur, cercles, chefs de canton, indigénat)",
+        "Explique l'économie de traite et le chemin de fer",
+        "Cite l'impôt et le travail forcé et leurs conséquences",
+        "Cite le SAA (1944), le PDCI et la loi du 11 avril 1946",
+        "Texte organisé en trois parties"
        ],
-       "starter": "L'urbanisation de la Côte d'Ivoire a pour causes…"
+       "explanation": "Corrigé modèle : 1) Situer et identifier. La Côte d'Ivoire devient une colonie en 1893 et entre dans l'AOF en 1895. Elle est administrée par un gouverneur, des commandants de cercle français et des chefs de canton africains, sous le régime de l'indigénat. 2) Décrire l'économie : l'économie de traite exporte café, cacao et bois par le chemin de fer commencé en 1904, qui atteint Bouaké en 1912. 3) Contraintes et réponse. Les Ivoiriens subissent l'impôt et le travail forcé, pénibles, qui provoquent des fuites. En 1944, Houphouët-Boigny crée le Syndicat agricole africain ; élu député en 1945, il porte la loi du 11 avril 1946 qui abolit le travail forcé, deux jours après la création du PDCI. Barème : création et AOF (1) ; administration (1) ; économie (1) ; contraintes (1) ; mouvements et loi (1) ; organisation (1).",
+       "answers": [],
+       "starter": "La Côte d'Ivoire devient une colonie en 1893…"
       }
      ]
     }
