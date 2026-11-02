@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR prête) |
 | **Ouvert le** | 2026-11-02 |
 | **Branche** | `feature/contenus-1ere-a-svt` |
 | **Programme** | `contenus-v3-tous-niveaux` (vague P6) |
