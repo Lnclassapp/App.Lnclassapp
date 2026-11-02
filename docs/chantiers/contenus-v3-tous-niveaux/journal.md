@@ -21,6 +21,7 @@
 | 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
 | 2026-11-02 | P2 | 1ère (A1, A2) | Mathématiques | 7 leçons (14 fichiers) ; la feuille de route en comptait 5 | #437 |
 | 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
+| 2026-11-02 | P6 | 1ère (A1, A2) | SVT | 9 leçons (18 fichiers) | #440 |
 
 ## À faire valider par un enseignant
 
@@ -194,6 +195,15 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 | T3 | Champ magnétique | Rayons des solénoïdes ajoutés à la relecture (1, 2, 5 cm) pour justifier « long ». |
 | T3 | Les amines | « ammonium » accepté à côté d'« alkylammonium » dans un entraînement. |
 | T3 | Oscillations mécaniques libres | Seuil des petites oscillations θm ≤ 10° environ ; g = 10 N/kg. |
+| P6 | 1ère A1/A2 — Le réflexe conditionnel | Rôle du cortex (liaison temporaire aire corticale / centre du réflexe inné, ou aire gustative selon le manuel) ; « animal au cortex lésé n'acquiert plus de réflexe conditionnel » ; clochette (Pavlov : surtout métronome) ; « stimulus neutre » ; animaux qui s'approchent de la nourriture rangés parmi les réflexes conditionnels |
+| P6 | 1ère A1/A2 — Les effets des drogues sur le comportement | Classement des substances (cannabis « perturbateur », nicotine stimulante, alcool et héroïne dépressives) ; dépendance, tolérance, sevrage au programme ? ; synapse et neurotransmetteurs non traités ; statut légal retiré/limité à « interdit par la loi » (cannabis, cocaïne, héroïne) ; décor « maquis » ; durées fictives de temps de réaction |
+| P6 | 1ère A1/A2 — Les anomalies chromosomiques | Origine par non-disjonction non traitée ; formules « 44 autosomes + XX/XY » ; conséquences cliniques simplifiées des trisomie 21, Turner, Klinefelter ; « 46 chromosomes = normal » simplifié (translocation) |
+| P6 | 1ère A1/A2 — Les cycles sexuels chez la femme | Termes phase folliculaire / lutéale ; ovulation ≈ durée du cycle − 14 jours ; période féconde « 4 jours avant à 1 jour après » ; ménopause et nidation ; expérience de la guenon ; absence du corps jaune ; élévation thermique de quelques dixièmes de degré |
+| P6 | 1ère A1/A2 — La régulation des naissances | DIU classé « mécanique » (DIU hormonaux existent) ; « la pilule empêche l'ovulation » simplifié ; implant cité comme hormonal, préservatif féminin non traité ; périodes fécondes « admises » (10e–15e, 11e–17e jour) ; méthodes naturelles (calendrier, température) au programme ? |
+| P6 | 1ère A1/A2 — La transmission d'un caractère héréditaire lié aux autosomes | Test-cross non traité ; croisements réciproques et comparaison filles/garçons au programme ? ; modèles simplifiés (hibiscus, cacaoyer, gombo, pois…) ; drépanocytose sommaire ; notation $A//a$ et phénotypes $[R]$ |
+| P6 | 1ère A1/A2 — La transmission d'un caractère héréditaire lié aux chromosomes sexuels | Daltonisme et hémophilie récessifs liés à X, cas fille hémophile (père hémophile × mère porteuse) ; mot « gonosomes » ; symboles de l'arbre en texte ; formule « le caractère saute une génération » ; phénotypes en mots entre crochets (≠ leçon 6) |
+| P6 | 1ère A1/A2 — La production d'énergie par la cellule | Calcul « 3 fois » respiration/fermentation (données fictives) ; mitochondries ; fermentation lactique, ATP, glycolyse non traitées (au programme ?) ; levures et éthanol en milieu aéré ; eau de chaux |
+| P6 | 1ère A1/A2 — La mise en réserve des nutriments | Insuline et glucagon non traités ; glycémie « voisine de 1 g/L », pic 1,4–1,5 g/L ; « les graisses prennent le relais » au jeûne ; organes de stockage prévus en 1ère A ; diabète et obésité sans seuil ni type ; aliments riches en amidon et couleurs de l'eau iodée |
 
 ## Décisions prises en cours de route
 
