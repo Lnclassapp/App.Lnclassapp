@@ -1,0 +1,1403 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Puissance et énergie électriques",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "chaine-facture",
+          "kind": "diagram",
+          "description": "Schéma fléché de la puissance au montant de la facture, lu de gauche à droite : la puissance P en kW et la durée t en heures se multiplient pour donner l'énergie W en kWh ; l'énergie en kWh et le prix du kWh, donné dans l'énoncé, se multiplient pour donner le montant en F CFA.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "puissance",
+                "label": "Puissance P (kW)"
+              },
+              {
+                "id": "duree",
+                "label": "Durée t (h)"
+              },
+              {
+                "id": "energie",
+                "label": "Énergie W = P × t (kWh)"
+              },
+              {
+                "id": "prix",
+                "label": "Prix du kWh (F CFA)"
+              },
+              {
+                "id": "montant",
+                "label": "Montant = W × prix (F CFA)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "puissance",
+                "to": "energie",
+                "label": "×"
+              },
+              {
+                "from": "duree",
+                "to": "energie",
+                "label": "×"
+              },
+              {
+                "from": "energie",
+                "to": "montant",
+                "label": "×"
+              },
+              {
+                "from": "prix",
+                "to": "montant",
+                "label": "×"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "consommation-mensuelle",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la consommation d'électricité d'une famille de Bouaké, en kWh, pendant cinq mois : mai 60 kWh, juin 75 kWh, juillet 90 kWh, août 85 kWh et septembre 70 kWh. On lit la hauteur de chaque barre pour comparer les mois.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              60,
+              75,
+              90,
+              85,
+              70
+            ],
+            "labels": [
+              "Mai",
+              "Juin",
+              "Juillet",
+              "Août",
+              "Sept."
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La puissance électrique reçue par un dipôle",
+          "remember": "Un dipôle soumis à la tension $U$ (en **volts**, V) et traversé par un courant d'intensité $I$ (en **ampères**, A) reçoit la **puissance électrique** $P = U \\times I$, en **watts** (W). La puissance dit combien d'énergie est transférée **chaque seconde** : $1$ W $= 1$ J/s. Multiples : $1$ kW $= 1\\,000$ W, $1$ mW $= 0{,}001$ W ; et $1$ mA $= 0{,}001$ A. On en déduit $I = \\dfrac{P}{U}$ et $U = \\dfrac{P}{I}$. Sur la plaque d'un appareil, « 220 V ; 1 100 W » donne la tension et la puissance de fonctionnement normal.",
+          "method": [
+            "Relever les grandeurs données en unités du système international : $U$ en V, $I$ en A, $P$ en W (convertir les mA et les kW).",
+            "Écrire la formule $P = U \\times I$, ou sa forme isolée $I = \\dfrac{P}{U}$ ou $U = \\dfrac{P}{I}$ selon l'inconnue.",
+            "Remplacer les lettres par les valeurs relevées.",
+            "Calculer et donner le résultat avec son unité (W, A ou V)."
+          ],
+          "example": {
+            "statement": "Un ventilateur de chambre, à Bouaké, porte l'indication « 220 V ; 55 W ». Calculer l'intensité du courant qui le traverse quand il fonctionne normalement.",
+            "steps": [
+              "Relever : $U = 220$ V et $P = 55$ W ; l'inconnue est $I$.",
+              "Écrire : $P = U \\times I$, donc $I = \\dfrac{P}{U}$.",
+              "Remplacer : $I = \\dfrac{55}{220}$.",
+              "Calculer : $I = 0{,}25$ A."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir les milliampères et les kilowatts avant de calculer. Contre-exemple : une lampe sous $12$ V est traversée par $500$ mA. Écrire $P = 12 \\times 500 = 6\\,000$ W est faux : $500$ mA $= 0{,}5$ A, donc $P = 12 \\times 0{,}5 = 6$ W. Une petite lampe de poche ne peut pas recevoir 6 000 W : vérifie toujours que l'ordre de grandeur est raisonnable.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une puissance électrique",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données en unités SI, écrire la formule, remplacer, calculer avec l'unité.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans le système international, quelle est l'unité de la puissance électrique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Calculer : avec $U$ en volts et $I$ en ampères, le produit $P = U \\times I$ s'exprime en watts (W). Le joule est l'unité de l'énergie, le volt celle de la tension, et le kilowattheure est une unité d'énergie, pas de puissance.",
+                "answers": [
+                  {
+                    "content": "le watt (W)",
+                    "correct": true
+                  },
+                  {
+                    "content": "le joule (J)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le volt (V)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le kilowattheure (kWh)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe à LED d'un maquis de Cocody, branchée sous $U = 220$ V, est traversée par un courant d'intensité $I = 0{,}05$ A. Calcule la puissance qu'elle reçoit.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $U = 220$ V et $I = 0{,}05$ A, déjà en unités SI. Étape 2 — Écrire : $P = U \\times I$. Étape 3 — Remplacer : $P = 220 \\times 0{,}05$. Étape 4 — Calculer : $P = 11$ W.",
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une radio portative est alimentée sous $U = 6$ V et elle est traversée par un courant de 250 mA. Calcule la puissance qu'elle reçoit.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever en unités SI : $U = 6$ V et $I = 250$ mA $= 0{,}25$ A. Étape 2 — Écrire : $P = U \\times I$. Étape 3 — Remplacer : $P = 6 \\times 0{,}25$. Étape 4 — Calculer : $P = 1{,}5$ W.",
+                "answers": [
+                  {
+                    "content": "1,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un fer à repasser porte l'indication « 220 V ; 1 100 W ». Calcule l'intensité du courant qui le traverse quand il fonctionne normalement.",
+                "question_type": "numeric",
+                "unit": "A",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 1\\,100$ W et $U = 220$ V ; l'inconnue est $I$. Étape 2 — Écrire : $P = U \\times I$, donc $I = \\dfrac{P}{U}$. Étape 3 — Remplacer : $I = \\dfrac{1\\,100}{220}$. Étape 4 — Calculer : $I = 5$ A.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le chargeur d'un téléphone reçoit une puissance de 18 W et il est traversé par un courant de 1,5 A. Calcule la tension à ses bornes.",
+                "question_type": "numeric",
+                "unit": "V",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 18$ W et $I = 1{,}5$ A ; l'inconnue est $U$. Étape 2 — Écrire : $P = U \\times I$, donc $U = \\dfrac{P}{I}$. Étape 3 — Remplacer : $U = \\dfrac{18}{1{,}5}$. Étape 4 — Calculer : $U = 12$ V.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un appareil de 2 000 W reçoit une puissance plus grande qu'un appareil de 1,5 kW.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : il faut comparer dans la même unité. Étape 2 — Écrire la conversion : $1{,}5$ kW $= 1\\,500$ W. Étape 3 — Comparer : $2\\,000$ W $> 1\\,500$ W. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque grandeur à sa valeur écrite dans l'unité du système international.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever : repère le préfixe (k pour 1 000, m pour 0,001). Étape 3 — Remplacer : $2{,}5$ kW $= 2{,}5 \\times 1\\,000 = 2\\,500$ W ; $400$ mA $= 400 \\times 0{,}001 = 0{,}4$ A ; $0{,}2$ kW $= 200$ W ; $50$ mW $= 0{,}05$ W. Étape 4 — Calculer : chaque conversion respecte le préfixe.",
+                "answers": [
+                  {
+                    "content": "2,5 kW",
+                    "match": "2 500 W"
+                  },
+                  {
+                    "content": "400 mA",
+                    "match": "0,4 A"
+                  },
+                  {
+                    "content": "0,2 kW",
+                    "match": "200 W"
+                  },
+                  {
+                    "content": "50 mW",
+                    "match": "0,05 W"
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de poche est alimentée sous 12 V et elle est traversée par un courant de 500 mA. Quelle est la puissance qu'elle reçoit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever en unités SI : $U = 12$ V et $I = 500$ mA $= 0{,}5$ A. Étape 2 — Écrire : $P = U \\times I$. Étape 3 — Remplacer : $P = 12 \\times 0{,}5$. Étape 4 — Calculer : $P = 6$ W. Le résultat 6 000 W vient de l'oubli de la conversion (12 × 500) ; 24 W vient d'une division à la place du produit.",
+                "answers": [
+                  {
+                    "content": "6 W",
+                    "correct": true
+                  },
+                  {
+                    "content": "6 000 W",
+                    "correct": false
+                  },
+                  {
+                    "content": "24 W",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,006 W",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une ampoule éclaire un salon à Man. Tu calcules des puissances et des intensités en suivant la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une ampoule branchée sous $U = 220$ V est traversée par un courant de $I = 0{,}2$ A. Sa puissance est $P$ = ___ W.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $U = 220$ V et $I = 0{,}2$ A. Étape 2 — Écrire : $P = U \\times I$. Étape 3 — Remplacer : $P = 220 \\times 0{,}2$. Étape 4 — Calculer : $P = 44$ W.",
+                "answers": [
+                  {
+                    "content": "44",
+                    "correct": true
+                  }
+                ],
+                "hint": "Multiplie la tension par l'intensité."
+              },
+              {
+                "content": "Une intensité de 300 mA est égale à 0,3 A.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $300$ mA. Étape 3 — Remplacer : $1$ mA $= 0{,}001$ A, donc $300 \\times 0{,}001 = 0{,}3$ A. Étape 4 — Calculer : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un petit poste reçoit une puissance de $P = 1{,}8$ W sous $U = 9$ V. L'intensité est $I$ = ___ A.",
+                "question_type": "numeric",
+                "unit": "A",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 1{,}8$ W et $U = 9$ V. Étape 2 — Écrire : $I = \\dfrac{P}{U}$. Étape 3 — Remplacer : $I = \\dfrac{1{,}8}{9}$. Étape 4 — Calculer : $I = 0{,}2$ A.",
+                "answers": [
+                  {
+                    "content": "0,2",
+                    "correct": true
+                  }
+                ],
+                "hint": "Isole $I$ : divise la puissance par la tension."
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'énergie électrique : joule et kilowattheure",
+          "remember": "Un dipôle de puissance $P$ qui fonctionne pendant la durée $t$ reçoit l'**énergie électrique** $W = P \\times t = U \\times I \\times t$. Deux choix d'unités : dans le système international, $P$ en W et $t$ en **secondes** donnent $W$ en **joules** (J) ; dans la vie courante, $P$ en **kW** et $t$ en **heures** donnent $W$ en **kilowattheures** (kWh). Passage de l'un à l'autre : $1$ kWh $= 1\\,000$ W $\\times\\,3\\,600$ s $= 3\\,600\\,000$ J. Le compteur de la maison mesure l'énergie en kWh. Attention : le kW mesure une puissance, le kWh une énergie.",
+          "method": [
+            "Relever la puissance $P$ et la durée $t$, puis choisir l'unité de l'énergie : le joule ($P$ en W, $t$ en s) ou le kWh ($P$ en kW, $t$ en h).",
+            "Écrire la formule $W = P \\times t$, ou $W = U \\times I \\times t$ si l'on connaît $U$ et $I$.",
+            "Remplacer $P$ et $t$ par leurs valeurs converties dans les unités choisies.",
+            "Calculer $W$ et donner l'énergie avec son unité ; au besoin, convertir avec $1$ kWh $= 3\\,600\\,000$ J."
+          ],
+          "example": {
+            "statement": "Un téléviseur de puissance 150 W reste allumé pendant 4 h. Calculer l'énergie qu'il reçoit, en kWh puis en joules.",
+            "steps": [
+              "Relever : $P = 150$ W $= 0{,}15$ kW et $t = 4$ h ; on choisit le kWh.",
+              "Écrire : $W = P \\times t$.",
+              "Remplacer : $W = 0{,}15 \\times 4$.",
+              "Calculer : $W = 0{,}6$ kWh, soit $0{,}6 \\times 3\\,600\\,000 = 2\\,160\\,000$ J."
+            ]
+          },
+          "pitfall": "Ne pas multiplier des watts par des heures en écrivant « kWh ». Contre-exemple : une lampe de $100$ W reste allumée $5$ h. Écrire $W = 100 \\times 5 = 500$ kWh est faux. Il faut d'abord écrire $100$ W $= 0{,}1$ kW, donc $W = 0{,}1 \\times 5 = 0{,}5$ kWh (ou $500$ Wh). Un kilowattheure est une **énergie**, jamais une puissance.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une énergie électrique en J et en kWh",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : choisir l'unité, écrire W = P × t, remplacer, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'unité de l'énergie électrique lue sur le compteur de la maison ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : le compteur mesure une énergie consommée. Étape 4 — Calculer : l'énergie $W = P \\times t$ s'exprime en joules ou, dans la vie courante, en kilowattheures. Le kilowatt est une unité de puissance, le volt une unité de tension, l'ampère une unité d'intensité.",
+                "answers": [
+                  {
+                    "content": "le kilowattheure (kWh)",
+                    "correct": true
+                  },
+                  {
+                    "content": "le kilowatt (kW)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le volt (V)",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'ampère (A)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de 60 W reste allumée 2 h. Calcule l'énergie qu'elle reçoit, en kWh.",
+                "question_type": "numeric",
+                "unit": "kWh",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 60$ W $= 0{,}06$ kW et $t = 2$ h ; on choisit le kWh. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 0{,}06 \\times 2$. Étape 4 — Calculer : $W = 0{,}12$ kWh.",
+                "answers": [
+                  {
+                    "content": "0,12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un réfrigérateur de 200 W fonctionne en tout 10 h dans la journée. Calcule l'énergie qu'il reçoit, en kWh.",
+                "question_type": "numeric",
+                "unit": "kWh",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 200$ W $= 0{,}2$ kW et $t = 10$ h. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 0{,}2 \\times 10$. Étape 4 — Calculer : $W = 2$ kWh.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de 40 W brille pendant 30 s. Calcule l'énergie qu'elle reçoit, en joules.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 40$ W et $t = 30$ s ; on choisit le joule, donc des unités SI. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 40 \\times 30$. Étape 4 — Calculer : $W = 1\\,200$ J.",
+                "answers": [
+                  {
+                    "content": "1200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une radio est alimentée sous $U = 6$ V et elle est traversée par un courant $I = 0{,}5$ A pendant $t = 10$ s. Calcule l'énergie qu'elle reçoit, en joules.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $U = 6$ V, $I = 0{,}5$ A et $t = 10$ s. Étape 2 — Écrire : $W = U \\times I \\times t$. Étape 3 — Remplacer : $W = 6 \\times 0{,}5 \\times 10$. Étape 4 — Calculer : $W = 3 \\times 10 = 30$ J.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Convertis 2 kWh en joules.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $W = 2$ kWh. Étape 2 — Écrire : $1$ kWh $= 3\\,600\\,000$ J. Étape 3 — Remplacer : $W = 2 \\times 3\\,600\\,000$. Étape 4 — Calculer : $W = 7\\,200\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "7200000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un appareil de 1 kW qui fonctionne pendant 1 h reçoit une énergie de 3 600 000 J.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $P = 1$ kW $= 1\\,000$ W et $t = 1$ h $= 3\\,600$ s. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 1\\,000 \\times 3\\,600$. Étape 4 — Calculer : $W = 3\\,600\\,000$ J, ce qui est bien 1 kWh. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de 100 W reste allumée 5 h. Quelle énergie reçoit-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $P = 100$ W $= 0{,}1$ kW et $t = 5$ h. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 0{,}1 \\times 5$. Étape 4 — Calculer : $W = 0{,}5$ kWh. Le résultat 500 kWh vient de l'oubli de convertir les watts en kilowatts ; 20 kWh vient d'une division $100 \\div 5$ au lieu du produit.",
+                "answers": [
+                  {
+                    "content": "0,5 kWh",
+                    "correct": true
+                  },
+                  {
+                    "content": "500 kWh",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,05 kWh",
+                    "correct": false
+                  },
+                  {
+                    "content": "20 kWh",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans une boutique de Korhogo, tu calcules des énergies avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un ventilateur de 50 W fonctionne pendant 6 h. Son énergie est $W$ = ___ kWh.",
+                "question_type": "numeric",
+                "unit": "kWh",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 50$ W $= 0{,}05$ kW et $t = 6$ h. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 0{,}05 \\times 6$. Étape 4 — Calculer : $W = 0{,}3$ kWh.",
+                "answers": [
+                  {
+                    "content": "0,3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Convertis d'abord 50 W en kW."
+              },
+              {
+                "content": "Le kilowattheure est une unité de puissance.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le kilowattheure vient du produit $P \\times t$ (kW × h). Étape 4 — Calculer : $W = P \\times t$ est une énergie. Le kWh est donc une unité d'énergie ; l'unité de puissance est le watt ou le kilowatt. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une bouilloire de 2 000 W fonctionne pendant 3 min. Son énergie est $W$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 2\\,000$ W et $t = 3$ min $= 180$ s ; on choisit le joule. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 2\\,000 \\times 180$. Étape 4 — Calculer : $W = 360\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "360000",
+                    "correct": true
+                  }
+                ],
+                "hint": "En joules, la durée doit être en secondes."
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'effet Joule",
+          "remember": "Quand un courant traverse un conducteur, celui-ci s'échauffe : c'est l'**effet Joule**. Pour un résistor de résistance $R$ (en **ohms**, $\\Omega$) traversé par un courant d'intensité $I$ (en A), la **puissance dissipée** sous forme de chaleur est $P_J = R \\times I^2$ (en W), et l'**énergie dissipée** pendant la durée $t$ (en s) est $W_J = R \\times I^2 \\times t$ (en J). Avec la loi d'Ohm $U = R \\times I$ : $P = U \\times I = R \\times I^2 = \\dfrac{U^2}{R}$. Un résistor transforme en chaleur toute l'énergie électrique qu'il reçoit. Applications : fer à repasser, grille-pain, bouilloire, réchaud. Un **fusible** est un fil qui fond quand l'intensité est trop forte et qui coupe alors le circuit.",
+          "method": [
+            "Relever la résistance $R$ en ohms, l'intensité $I$ en ampères (ou la tension $U$) et, si besoin, la durée $t$ en secondes.",
+            "Écrire la formule adaptée : $P_J = R \\times I^2$ (ou $P_J = \\dfrac{U^2}{R}$ si l'on connaît $U$), puis $W_J = P_J \\times t$ pour l'énergie.",
+            "Remplacer les lettres par les valeurs, en calculant d'abord le carré.",
+            "Calculer et donner le résultat avec son unité (W ou J)."
+          ],
+          "example": {
+            "statement": "Le résistor d'un petit réchaud électrique a une résistance $R = 20\\ \\Omega$. Il est traversé par un courant de 3 A pendant 2 min. Calculer la puissance dissipée par effet Joule, puis l'énergie dissipée.",
+            "steps": [
+              "Relever : $R = 20\\ \\Omega$, $I = 3$ A et $t = 2$ min $= 120$ s.",
+              "Écrire : $P_J = R \\times I^2$, puis $W_J = P_J \\times t$.",
+              "Remplacer : $P_J = 20 \\times 3^2 = 20 \\times 9$, puis $W_J = P_J \\times 120$.",
+              "Calculer : $P_J = 180$ W et $W_J = 180 \\times 120 = 21\\,600$ J."
+            ]
+          },
+          "pitfall": "Ne pas oublier le carré de l'intensité. Contre-exemple : $R = 10\\ \\Omega$ et $I = 3$ A. Écrire $P_J = 10 \\times 3 = 30$ W est faux : $P_J = 10 \\times 3^2 = 90$ W. Si l'intensité double (de 3 A à 6 A), la puissance est multipliée par $2^2 = 4$ : $10 \\times 6^2 = 360$ W $= 4 \\times 90$ W. C'est pourquoi un fil trop parcouru par le courant chauffe très vite.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer la puissance et l'énergie dissipées par effet Joule",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever R et I, écrire la formule de l'effet Joule, remplacer, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quand un courant traverse un conducteur, celui-ci s'échauffe : c'est l'effet ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : le conducteur traversé par le courant s'échauffe. Étape 2 — Écrire : la chaleur dégagée est donnée par $W_J = R \\times I^2 \\times t$, formule due à Joule. Ce phénomène s'appelle donc l'effet Joule.",
+                "answers": [
+                  {
+                    "content": "Joule",
+                    "correct": true
+                  },
+                  {
+                    "content": "joule",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor transforme en chaleur toute l'énergie électrique qu'il reçoit.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : un résistor reçoit $P = U \\times I$ et, avec $U = R \\times I$, cette puissance vaut $R \\times I^2$, c'est-à-dire $P_J$. Étape 4 — Calculer : puissance reçue et puissance dissipée par effet Joule sont égales. Toute l'énergie reçue devient de la chaleur : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux appareils dont le fonctionnement repose sur l'effet Joule ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : cherche les appareils dont le but est de chauffer. Étape 4 — Conclure : le fer à repasser et le grille-pain chauffent grâce à un résistor traversé par un courant. Le ventilateur met de l'air en mouvement et le haut-parleur produit du son : ce ne sont pas des appareils de chauffage.",
+                "answers": [
+                  {
+                    "content": "le fer à repasser",
+                    "correct": true
+                  },
+                  {
+                    "content": "le grille-pain",
+                    "correct": true
+                  },
+                  {
+                    "content": "le ventilateur",
+                    "correct": false
+                  },
+                  {
+                    "content": "le haut-parleur d'une radio",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor de résistance $R = 50\\ \\Omega$ est traversé par un courant d'intensité $I = 2$ A. Calcule la puissance dissipée par effet Joule.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 50\\ \\Omega$ et $I = 2$ A. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $P_J = 50 \\times 2^2 = 50 \\times 4$. Étape 4 — Calculer : $P_J = 200$ W.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor de résistance $R = 30\\ \\Omega$ est soumis à la tension $U = 60$ V. Calcule la puissance dissipée par effet Joule.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 30\\ \\Omega$ et $U = 60$ V. Étape 2 — Écrire : comme on connaît $U$, $P_J = \\dfrac{U^2}{R}$. Étape 3 — Remplacer : $P_J = \\dfrac{60^2}{30} = \\dfrac{3\\,600}{30}$. Étape 4 — Calculer : $P_J = 120$ W.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le résistor d'un fer à repasser a une résistance $R = 44\\ \\Omega$ et il est traversé par un courant $I = 5$ A pendant 10 s. Calcule l'énergie dissipée par effet Joule, en joules.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 44\\ \\Omega$, $I = 5$ A et $t = 10$ s. Étape 2 — Écrire : $W_J = R \\times I^2 \\times t$. Étape 3 — Remplacer : $W_J = 44 \\times 5^2 \\times 10 = 44 \\times 25 \\times 10$. Étape 4 — Calculer : $W_J = 1\\,100 \\times 10 = 11\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "11000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor dissipe 50 W par effet Joule. On double l'intensité du courant qui le traverse, sans changer sa résistance. Quelle puissance dissipe-t-il maintenant ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P_J = 50$ W avec l'intensité $I$ ; la nouvelle intensité est $2I$. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $R \\times (2I)^2 = 4 \\times R \\times I^2$. Étape 4 — Calculer : $P_J = 4 \\times 50 = 200$ W. Doubler l'intensité multiplie la puissance par 4, pas par 2.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor de $10\\ \\Omega$ est traversé par un courant de 3 A. Quelle puissance dissipe-t-il par effet Joule ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $R = 10\\ \\Omega$ et $I = 3$ A. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $P_J = 10 \\times 3^2 = 10 \\times 9$. Étape 4 — Calculer : $P_J = 90$ W. Le résultat 30 W vient de l'oubli du carré ($10 \\times 3$) ; 900 W vient de $(R \\times I)^2$, où le carré porte aussi sur $R$.",
+                "answers": [
+                  {
+                    "content": "90 W",
+                    "correct": true
+                  },
+                  {
+                    "content": "30 W",
+                    "correct": false
+                  },
+                  {
+                    "content": "60 W",
+                    "correct": false
+                  },
+                  {
+                    "content": "900 W",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un réchaud électrique chauffe la marmite d'une cantine à Daloa. Tu calcules avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un résistor de $R = 25\\ \\Omega$ est traversé par $I = 2$ A. La puissance dissipée est $P_J$ = ___ W.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 25\\ \\Omega$ et $I = 2$ A. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $P_J = 25 \\times 2^2 = 25 \\times 4$. Étape 4 — Calculer : $P_J = 100$ W.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord $I^2$."
+              },
+              {
+                "content": "Si l'intensité du courant est multipliée par 3, la puissance dissipée par effet Joule est multipliée par 3.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : avec $3I$, $P_J = R \\times (3I)^2 = 9 \\times R \\times I^2$. Étape 4 — Calculer : la puissance est multipliée par 9, pas par 3. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un résistor de $10\\ \\Omega$ est traversé par $4$ A pendant $5$ s. L'énergie dissipée est $W_J$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 10\\ \\Omega$, $I = 4$ A et $t = 5$ s. Étape 2 — Écrire : $W_J = R \\times I^2 \\times t$. Étape 3 — Remplacer : $W_J = 10 \\times 4^2 \\times 5 = 10 \\times 16 \\times 5$. Étape 4 — Calculer : $W_J = 160 \\times 5 = 800$ J.",
+                "answers": [
+                  {
+                    "content": "800",
+                    "correct": true
+                  }
+                ],
+                "hint": "Écris $W_J = R \\times I^2 \\times t$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La facture d'électricité en F CFA",
+          "remember": "L'énergie électrique est facturée en **kWh**. Le **tarif** est le prix d'un kWh, en F CFA : **il est toujours donné dans l'énoncé**, car il change selon le contrat et la date. Montant $=$ énergie en kWh $\\times$ prix du kWh, plus les éventuelles sommes fixes données (abonnement, taxes). L'énergie d'un appareil sur une période est $W = P \\times t$, avec $P$ en kW et $t$ en h sur **toute** la période (heures par jour $\\times$ nombre de jours). On peut aussi lire la consommation sur le compteur : nouvel index $-$ ancien index, en kWh.",
+          "method": [
+            "Relever la puissance de chaque appareil, sa durée de fonctionnement, le nombre de jours et le prix du kWh donné dans l'énoncé.",
+            "Convertir les puissances en kW et calculer la durée totale en heures sur toute la période.",
+            "Calculer l'énergie de chaque appareil avec $W = P \\times t$ (en kWh), puis additionner les énergies.",
+            "Multiplier l'énergie totale en kWh par le prix du kWh.",
+            "Ajouter les sommes fixes éventuelles de l'énoncé et écrire le montant en F CFA."
+          ],
+          "example": {
+            "statement": "Dans une famille d'Abidjan, un réfrigérateur de 150 W fonctionne en tout 8 h par jour et un téléviseur de 100 W est allumé 5 h par jour, pendant 30 jours. Le kWh est facturé 100 F CFA (prix donné pour l'exemple). Calculer le montant à payer.",
+            "steps": [
+              "Relever : réfrigérateur 150 W et 8 h par jour ; téléviseur 100 W et 5 h par jour ; 30 jours ; 100 F CFA par kWh.",
+              "Convertir : $150$ W $= 0{,}15$ kW et $100$ W $= 0{,}1$ kW ; durées sur 30 jours : $8 \\times 30 = 240$ h et $5 \\times 30 = 150$ h.",
+              "Calculer : $W_1 = 0{,}15 \\times 240 = 36$ kWh et $W_2 = 0{,}1 \\times 150 = 15$ kWh, soit au total $51$ kWh.",
+              "Multiplier : $51 \\times 100 = 5\\,100$.",
+              "Ajouter : l'énoncé ne donne aucune somme fixe ; le montant est de 5 100 F CFA."
+            ]
+          },
+          "pitfall": "Ne pas multiplier des watts par des heures, ni oublier le nombre de jours. Contre-exemple : une lampe de $100$ W allumée $10$ h, le kWh à $100$ F CFA. Écrire $100 \\times 10 = 1\\,000$ « kWh », donc $100\\,000$ F CFA, est absurde. Il faut écrire $100$ W $= 0{,}1$ kW, donc $W = 0{,}1 \\times 10 = 1$ kWh, soit $100$ F CFA. Vérifie l'ordre de grandeur : une seule lampe ne coûte pas 100 000 F CFA pour une journée.",
+          "figure": "chaine-facture",
+          "exercise": {
+            "title": "Calculer le montant d'une facture d'électricité",
+            "statement": "Dans cet exercice, le prix du kWh est toujours donné dans l'énoncé (valeurs choisies pour s'entraîner). Tu appliques la méthode de la fiche : relever, convertir, calculer les énergies, multiplier par le tarif, écrire le montant en F CFA.",
+            "exercise_type": "fixation",
+            "figure": "chaine-facture",
+            "questions": [
+              {
+                "content": "Sur une facture d'électricité, quelle grandeur est multipliée par le prix du kWh pour obtenir le montant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Multiplier : le tarif est un prix pour 1 kWh, donc il se multiplie par une énergie exprimée en kWh. Une puissance, une tension ou une intensité ne mesurent pas une quantité d'énergie consommée.",
+                "answers": [
+                  {
+                    "content": "l'énergie consommée, en kWh",
+                    "correct": true
+                  },
+                  {
+                    "content": "la puissance de l'appareil, en kW",
+                    "correct": false
+                  },
+                  {
+                    "content": "la tension du secteur, en V",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'intensité du courant, en A",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec le même tarif, un appareil de forte puissance coûte toujours plus cher à faire fonctionner qu'un appareil de faible puissance.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : l'énergie est $W = P \\times t$ ; elle dépend aussi de la durée. Exemple : un fer de 1 kW utilisé 1 h consomme 1 kWh, une lampe de 0,1 kW allumée 24 h consomme 2,4 kWh. Étape 4 — Multiplier : la lampe coûte plus cher. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le compteur d'une maison de Yopougon indiquait 1 250 kWh au début du mois et 1 330 kWh à la fin. Le kWh est facturé 90 F CFA. Calcule le montant de l'énergie consommée.",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : ancien index $1\\,250$ kWh, nouvel index $1\\,330$ kWh, tarif $90$ F CFA par kWh. Étape 3 — Calculer l'énergie : $1\\,330 - 1\\,250 = 80$ kWh. Étape 4 — Multiplier : $80 \\times 90 = 7\\,200$. Étape 5 — Écrire le montant : $7\\,200$ F CFA (aucune somme fixe n'est donnée).",
+                "answers": [
+                  {
+                    "content": "7200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de 40 W est allumée 5 h par jour pendant 30 jours. Le kWh est facturé 100 F CFA. Calcule le montant à payer pour cette lampe.",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 40$ W, $5$ h par jour, $30$ jours, $100$ F CFA par kWh. Étape 2 — Convertir : $P = 0{,}04$ kW et $t = 5 \\times 30 = 150$ h. Étape 3 — Calculer : $W = 0{,}04 \\times 150 = 6$ kWh. Étape 4 — Multiplier : $6 \\times 100 = 600$. Étape 5 — Écrire : $600$ F CFA.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un fer à repasser de 1 000 W est utilisé 2 h par semaine pendant 4 semaines. Le kWh est facturé 100 F CFA. Calcule le montant à payer pour ce fer.",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 1\\,000$ W, $2$ h par semaine, $4$ semaines, $100$ F CFA par kWh. Étape 2 — Convertir : $P = 1$ kW et $t = 2 \\times 4 = 8$ h. Étape 3 — Calculer : $W = 1 \\times 8 = 8$ kWh. Étape 4 — Multiplier : $8 \\times 100 = 800$. Étape 5 — Écrire : $800$ F CFA.",
+                "answers": [
+                  {
+                    "content": "800",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un chauffe-eau de 2 000 W fonctionne 1,5 h par jour pendant 10 jours. Le kWh est facturé 80 F CFA. Calcule le montant à payer pour ce chauffe-eau.",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 2\\,000$ W, $1{,}5$ h par jour, $10$ jours, $80$ F CFA par kWh. Étape 2 — Convertir : $P = 2$ kW et $t = 1{,}5 \\times 10 = 15$ h. Étape 3 — Calculer : $W = 2 \\times 15 = 30$ kWh. Étape 4 — Multiplier : $30 \\times 80 = 2\\,400$. Étape 5 — Écrire : $2\\,400$ F CFA.",
+                "answers": [
+                  {
+                    "content": "2400",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une famille de Man a consommé 50 kWh. Le kWh est facturé 60 F CFA et l'énoncé ajoute une somme fixe de 1 500 F CFA (abonnement). Calcule le montant total.",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $50$ kWh, $60$ F CFA par kWh, somme fixe $1\\,500$ F CFA. Étape 3 — Calculer : l'énergie est déjà donnée, $50$ kWh. Étape 4 — Multiplier : $50 \\times 60 = 3\\,000$ F CFA. Étape 5 — Ajouter la somme fixe : $3\\,000 + 1\\,500 = 4\\,500$ F CFA.",
+                "answers": [
+                  {
+                    "content": "4500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour calculer un montant de facture.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever les données. Étape 2 — Convertir en kW et en h. Étape 3 — Calculer l'énergie de chaque appareil avec $W = P \\times t$ et additionner. Étape 4 — Multiplier par le prix du kWh. Étape 5 — Ajouter la somme fixe et écrire le montant en F CFA. On ne peut pas multiplier par le tarif avant d'avoir une énergie en kWh.",
+                "answers": [
+                  {
+                    "content": "Relever les puissances, les durées, le nombre de jours et le prix du kWh."
+                  },
+                  {
+                    "content": "Convertir les puissances en kW et les durées en heures."
+                  },
+                  {
+                    "content": "Calculer l'énergie de chaque appareil en kWh, puis les additionner."
+                  },
+                  {
+                    "content": "Multiplier l'énergie totale par le prix du kWh."
+                  },
+                  {
+                    "content": "Ajouter les sommes fixes éventuelles et écrire le montant en F CFA."
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de 100 W est allumée 10 h. Le kWh est facturé 100 F CFA. Quel est le coût de cette énergie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $P = 100$ W, $t = 10$ h, $100$ F CFA par kWh. Étape 2 — Convertir : $P = 0{,}1$ kW. Étape 3 — Calculer : $W = 0{,}1 \\times 10 = 1$ kWh. Étape 4 — Multiplier : $1 \\times 100 = 100$ F CFA. Le résultat 100 000 F CFA vient de l'oubli de la conversion (100 × 10 = 1 000 « kWh ») ; 1 000 F CFA vient de $100$ W pris pour $1$ kW.",
+                "answers": [
+                  {
+                    "content": "100 F CFA",
+                    "correct": true
+                  },
+                  {
+                    "content": "1 000 F CFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "100 000 F CFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "10 F CFA",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans une famille de San-Pédro, tu calcules un petit montant avec la méthode de la fiche. Le kWh est facturé 100 F CFA.",
+            "questions": [
+              {
+                "content": "Une ampoule de 20 W est allumée 5 h par jour pendant 30 jours. Son énergie est $W$ = ___ kWh et le montant est ___ F CFA.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $P = 20$ W, $5$ h par jour, $30$ jours, $100$ F CFA par kWh. Étape 2 — Convertir : $P = 0{,}02$ kW et $t = 5 \\times 30 = 150$ h. Étape 3 — Calculer : $W = 0{,}02 \\times 150 = 3$ kWh. Étape 4 — Multiplier : $3 \\times 100 = 300$ F CFA.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "300",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Convertis les watts en kW et compte les heures sur 30 jours."
+              },
+              {
+                "content": "Avec le même tarif, 1 kWh coûte le même prix quel que soit l'appareil qui l'a consommé.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : la facture compte seulement l'énergie totale en kWh. Étape 4 — Multiplier : chaque kWh est multiplié par le même prix du kWh. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour obtenir le montant, on multiplie l'énergie exprimée en ___ par le prix du kWh.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Calculer : l'énergie est obtenue en kWh avec $W = P \\times t$, $P$ en kW et $t$ en h. Étape 4 — Multiplier : le prix est donné pour 1 kWh, on multiplie donc par une énergie en kWh. Le kW et le W sont des unités de puissance, l'ampère une unité d'intensité.",
+                "answers": [
+                  {
+                    "content": "kWh",
+                    "correct": true
+                  },
+                  {
+                    "content": "kW",
+                    "correct": false
+                  },
+                  {
+                    "content": "W",
+                    "correct": false
+                  },
+                  {
+                    "content": "A",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les appareils d'un salon de coiffure à Treichville",
+          "statement": "Un salon de coiffure de Treichville est alimenté sous 220 V. Il utilise un sèche-cheveux de 1 100 W et un ventilateur de 55 W. Tu calcules des intensités, des énergies et un coût. Le kWh est facturé 100 F CFA (prix donné pour l'exercice).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le sèche-cheveux porte l'indication « 220 V ; 1 100 W ». Calcule l'intensité du courant qui le traverse.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance reçue. Étape 1 — Relever : $U = 220$ V et $P = 1\\,100$ W. Étape 2 — Écrire : $P = U \\times I$, donc $I = \\dfrac{P}{U}$. Étape 3 — Remplacer : $I = \\dfrac{1\\,100}{220}$. Étape 4 — Calculer : $I = 5$ A.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le ventilateur porte l'indication « 220 V ; 55 W ». Calcule l'intensité du courant qui le traverse.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance reçue. Étape 1 — Relever : $U = 220$ V et $P = 55$ W. Étape 2 — Écrire : $I = \\dfrac{P}{U}$. Étape 3 — Remplacer : $I = \\dfrac{55}{220}$. Étape 4 — Calculer : $I = 0{,}25$ A.",
+              "answers": [
+                {
+                  "content": "0,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand les deux appareils fonctionnent en même temps, ils reçoivent au total une puissance de 1 155 W.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : $P_1 = 1\\,100$ W et $P_2 = 55$ W. Étape 2 — Écrire : les puissances reçues par les appareils s'additionnent. Étape 3 — Remplacer : $P = 1\\,100 + 55$. Étape 4 — Calculer : $P = 1\\,155$ W. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le sèche-cheveux fonctionne 2 h dans la journée. Calcule l'énergie qu'il reçoit, en kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : $P = 1\\,100$ W $= 1{,}1$ kW et $t = 2$ h ; on choisit le kWh. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 1{,}1 \\times 2$. Étape 4 — Calculer : $W = 2{,}2$ kWh.",
+              "answers": [
+                {
+                  "content": "2,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le ventilateur fonctionne 8 h dans la journée. Calcule l'énergie qu'il reçoit, en kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : $P = 55$ W $= 0{,}055$ kW et $t = 8$ h. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 0{,}055 \\times 8$. Étape 4 — Calculer : $W = 0{,}44$ kWh.",
+              "answers": [
+                {
+                  "content": "0,44",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule le montant, en F CFA, de l'énergie consommée dans la journée par les deux appareils (2 h pour le sèche-cheveux, 8 h pour le ventilateur, 100 F CFA le kWh).",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode de la facture. Étape 1 — Relever : $2{,}2$ kWh pour le sèche-cheveux, $0{,}44$ kWh pour le ventilateur, $100$ F CFA par kWh. Étape 2 — Convertir : les énergies sont déjà en kWh. Étape 3 — Calculer l'énergie totale : $2{,}2 + 0{,}44 = 2{,}64$ kWh. Étape 4 — Multiplier : $2{,}64 \\times 100 = 264$. Étape 5 — Écrire : $264$ F CFA.",
+              "answers": [
+                {
+                  "content": "264",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le réchaud électrique d'une cantine de Daloa",
+          "statement": "Le résistor chauffant d'un réchaud électrique de la cantine d'un collège de Daloa a une résistance $R = 22\\ \\Omega$. Il est branché sur le secteur, sous une tension $U = 220$ V. Tu étudies le courant, la puissance et l'effet Joule.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule l'intensité du courant qui traverse le résistor (loi d'Ohm).",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $U = 220$ V et $R = 22\\ \\Omega$. Étape 2 — Écrire la loi d'Ohm : $U = R \\times I$, donc $I = \\dfrac{U}{R}$. Étape 3 — Remplacer : $I = \\dfrac{220}{22}$. Étape 4 — Calculer : $I = 10$ A.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la puissance électrique reçue par le réchaud, avec $U = 220$ V et $I = 10$ A.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance reçue. Étape 1 — Relever : $U = 220$ V et $I = 10$ A. Étape 2 — Écrire : $P = U \\times I$. Étape 3 — Remplacer : $P = 220 \\times 10$. Étape 4 — Calculer : $P = 2\\,200$ W.",
+              "answers": [
+                {
+                  "content": "2200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la puissance dissipée par effet Joule dans le résistor de $22\\ \\Omega$ traversé par $I = 10$ A.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de l'effet Joule. Étape 1 — Relever : $R = 22\\ \\Omega$ et $I = 10$ A. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $P_J = 22 \\times 10^2 = 22 \\times 100$. Étape 4 — Calculer : $P_J = 2\\,200$ W. On retrouve la puissance reçue, puisque le résistor transforme toute l'énergie reçue en chaleur.",
+              "answers": [
+                {
+                  "content": "2200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour ce résistor, la puissance dissipée par effet Joule est plus petite que la puissance électrique reçue.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : $P = 2\\,200$ W (reçue) et $P_J = 2\\,200$ W (dissipée). Étape 2 — Écrire : un résistor transforme en chaleur toute l'énergie électrique reçue, donc $P_J = P$. Étape 3 — Remplacer : $2\\,200 = 2\\,200$. Étape 4 — Conclure : les deux puissances sont égales, l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le réchaud fonctionne pendant 30 min. Calcule l'énergie qu'il reçoit, en kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : $P = 2\\,200$ W $= 2{,}2$ kW et $t = 30$ min $= 0{,}5$ h. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 2{,}2 \\times 0{,}5$. Étape 4 — Calculer : $W = 1{,}1$ kWh.",
+              "answers": [
+                {
+                  "content": "1,1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le réchaud est branché sur un circuit protégé par un fusible de 5 A. Que se passe-t-il quand on l'allume ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : le réchaud demande $I = 10$ A et le fusible supporte au plus $5$ A. Étape 2 — Écrire : un fusible fond quand l'intensité qui le traverse dépasse sa valeur. Étape 3 — Remplacer : $10$ A $> 5$ A. Étape 4 — Conclure : le fusible fond et coupe le circuit. La tension n'est pas la cause, c'est l'intensité qui échauffe le fusible par effet Joule.",
+              "answers": [
+                {
+                  "content": "Le fusible fond, car l'intensité de 10 A dépasse 5 A.",
+                  "correct": true
+                },
+                {
+                  "content": "Rien, car la tension de 220 V est faible.",
+                  "correct": false
+                },
+                {
+                  "content": "Le fusible fond, car la résistance est trop petite pour 220 V.",
+                  "correct": false
+                },
+                {
+                  "content": "Le réchaud fonctionne mieux, car le fusible protège le résistor.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La facture d'une famille de Bouaké",
+          "statement": "Une famille de Bouaké suit sa consommation d'électricité de mai à septembre : le diagramme en barres donne l'énergie consommée chaque mois, en kWh. Le tarif utilisé dans l'exercice est de 90 F CFA par kWh, plus une somme fixe de 1 500 F CFA par mois (abonnement). Ces prix sont donnés pour l'exercice.",
+          "exercise_type": "evaluation",
+          "figure": "consommation-mensuelle",
+          "questions": [
+            {
+              "content": "Le mois où la famille a consommé le plus d'énergie, de mai (60 kWh), juin (75 kWh), juillet (90 kWh), août (85 kWh) et septembre (70 kWh), est ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Relever : les consommations sont 60, 75, 90, 85 et 70 kWh. Étape 2 — Comparer : la plus grande valeur est 90 kWh. Étape 3 — Conclure : c'est le mois de juillet. Mai est le mois le plus faible, août est le deuxième.",
+              "answers": [
+                {
+                  "content": "juillet",
+                  "correct": true
+                },
+                {
+                  "content": "mai",
+                  "correct": false
+                },
+                {
+                  "content": "juin",
+                  "correct": false
+                },
+                {
+                  "content": "août",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'énergie totale consommée de mai à septembre, sachant que les consommations mensuelles sont 60, 75, 90, 85 et 70 kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $60$, $75$, $90$, $85$ et $70$ kWh. Étape 2 — Écrire : l'énergie totale est la somme des énergies mensuelles. Étape 3 — Remplacer : $60 + 75 + 90 + 85 + 70$. Étape 4 — Calculer : $60 + 75 = 135$ ; $135 + 90 = 225$ ; $225 + 85 = 310$ ; $310 + 70 = 380$ kWh.",
+              "answers": [
+                {
+                  "content": "380",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En juillet, la famille a consommé 90 kWh. Le kWh est facturé 90 F CFA et la somme fixe est de 1 500 F CFA. Calcule le montant de la facture de juillet.",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode de la facture. Étape 1 — Relever : $90$ kWh, $90$ F CFA par kWh, somme fixe $1\\,500$ F CFA. Étape 3 — Calculer l'énergie : elle est déjà donnée, $90$ kWh. Étape 4 — Multiplier : $90 \\times 90 = 8\\,100$ F CFA. Étape 5 — Ajouter la somme fixe : $8\\,100 + 1\\,500 = 9\\,600$ F CFA.",
+              "answers": [
+                {
+                  "content": "9600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La famille remplace 4 lampes à incandescence de 60 W par 4 lampes à LED de 10 W, chacune allumée 5 h par jour pendant 30 jours. Calcule l'énergie économisée, en kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : 4 lampes de $60$ W puis 4 lampes de $10$ W ; durée $5 \\times 30 = 150$ h. Étape 2 — Convertir : $4 \\times 60 = 240$ W $= 0{,}24$ kW et $4 \\times 10 = 40$ W $= 0{,}04$ kW. Étape 3 — Calculer : $W_{avant} = 0{,}24 \\times 150 = 36$ kWh et $W_{après} = 0{,}04 \\times 150 = 6$ kWh. Étape 4 — Calculer l'économie : $36 - 6 = 30$ kWh.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec un tarif de 90 F CFA par kWh, calcule l'économie, en F CFA, réalisée grâce à l'énergie de 30 kWh économisée.",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode de la facture. Étape 1 — Relever : $30$ kWh économisés et $90$ F CFA par kWh. Étape 3 — Calculer l'énergie : elle est donnée, $30$ kWh. Étape 4 — Multiplier : $30 \\times 90 = 2\\,700$. Étape 5 — Écrire : l'économie est de $2\\,700$ F CFA (la somme fixe ne change pas).",
+              "answers": [
+                {
+                  "content": "2700",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un fer à repasser de 1 100 W est utilisé 2 h par semaine pendant 4 semaines ; un réfrigérateur de 150 W fonctionne en tout 8 h par jour pendant 30 jours. Calcule l'énergie consommée par chaque appareil, puis explique pourquoi l'appareil de plus faible puissance consomme le plus d'énergie.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Fer : conversion en kW et durée totale de 8 h",
+                "Fer : énergie de 8,8 kWh",
+                "Réfrigérateur : durée totale de 240 h et énergie de 36 kWh",
+                "Explication : l'énergie dépend de la puissance et de la durée"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Relever : fer $1\\,100$ W, $2 \\times 4 = 8$ h ; réfrigérateur $150$ W, $8 \\times 30 = 240$ h. Étape 2 — Convertir : $1\\,100$ W $= 1{,}1$ kW et $150$ W $= 0{,}15$ kW. Étape 3 — Calculer : fer $W = 1{,}1 \\times 8 = 8{,}8$ kWh ; réfrigérateur $W = 0{,}15 \\times 240 = 36$ kWh. Conclusion : le réfrigérateur a une puissance plus faible mais il fonctionne beaucoup plus longtemps, donc il consomme plus d'énergie ($W = P \\times t$). Barème : 1 point pour les conversions, 1 pour 8,8 kWh, 1 pour 36 kWh, 1 pour l'explication.",
+              "answers": [],
+              "starter": "Le fer consomme ... kWh, le réfrigérateur ... kWh, car ..."
+            },
+            {
+              "content": "Quelles sont les deux actions qui réduisent la facture d'électricité d'une famille ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Relever : le montant dépend de l'énergie $W = P \\times t$. Étape 3 — Calculer : réduire la durée $t$ (éteindre) ou la puissance $P$ (lampe plus économe) diminue $W$ et donc le montant. Changer de prise ou changer l'ampoule sans changer $P$ ni $t$ laisse $W$ identique.",
+              "answers": [
+                {
+                  "content": "éteindre une lampe en quittant la pièce",
+                  "correct": true
+                },
+                {
+                  "content": "remplacer une lampe par une lampe de puissance plus faible qui éclaire autant",
+                  "correct": true
+                },
+                {
+                  "content": "brancher les appareils sur une prise plus proche du compteur",
+                  "correct": false
+                },
+                {
+                  "content": "changer l'ampoule sans changer sa puissance ni sa durée",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le fer à repasser d'une couturière de Man",
+          "statement": "La couturière Mariam, à Man, utilise un fer à repasser qui porte l'indication « 220 V ; 1 100 W ». Son résistor chauffant est traversé par le courant quand le fer fonctionne normalement. Elle repasse 2 h par jour pendant 20 jours. Le kWh est facturé 90 F CFA (prix donné pour l'exercice).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule l'intensité du courant qui traverse le fer quand il fonctionne normalement.",
+              "question_type": "numeric",
+              "unit": "A",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance reçue. Étape 1 — Relever : $U = 220$ V et $P = 1\\,100$ W. Étape 2 — Écrire : $P = U \\times I$, donc $I = \\dfrac{P}{U}$. Étape 3 — Remplacer : $I = \\dfrac{1\\,100}{220}$. Étape 4 — Calculer : $I = 5$ A.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la résistance $R$ du résistor chauffant du fer, sous $U = 220$ V avec $I = 5$ A (loi d'Ohm).",
+              "question_type": "numeric",
+              "unit": "Ω",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $U = 220$ V et $I = 5$ A. Étape 2 — Écrire la loi d'Ohm : $U = R \\times I$, donc $R = \\dfrac{U}{I}$. Étape 3 — Remplacer : $R = \\dfrac{220}{5}$. Étape 4 — Calculer : $R = 44\\ \\Omega$.",
+              "answers": [
+                {
+                  "content": "44",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la puissance dissipée par effet Joule dans le résistor de $44\\ \\Omega$ traversé par $5$ A.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de l'effet Joule. Étape 1 — Relever : $R = 44\\ \\Omega$ et $I = 5$ A. Étape 2 — Écrire : $P_J = R \\times I^2$. Étape 3 — Remplacer : $P_J = 44 \\times 5^2 = 44 \\times 25$. Étape 4 — Calculer : $P_J = 1\\,100$ W, égale à la puissance indiquée sur le fer.",
+              "answers": [
+                {
+                  "content": "1100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'énergie reçue par le fer pendant 1 min, en joules.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : $P = 1\\,100$ W et $t = 1$ min $= 60$ s ; on choisit le joule. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W = 1\\,100 \\times 60$. Étape 4 — Calculer : $W = 66\\,000$ J.",
+              "answers": [
+                {
+                  "content": "66000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule l'énergie consommée par le fer en 20 jours de 2 h d'utilisation par jour, en kWh.",
+              "question_type": "numeric",
+              "unit": "kWh",
+              "tolerance": 0,
+              "explanation": "Méthode de l'énergie électrique. Étape 1 — Relever : $P = 1\\,100$ W et $t = 2 \\times 20 = 40$ h. Étape 2 — Convertir : $P = 1{,}1$ kW. Étape 3 — Remplacer : $W = 1{,}1 \\times 40$. Étape 4 — Calculer : $W = 44$ kWh.",
+              "answers": [
+                {
+                  "content": "44",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec 44 kWh consommés et un tarif de 90 F CFA par kWh, calcule le montant à payer pour ce fer.",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode de la facture. Étape 1 — Relever : $44$ kWh et $90$ F CFA par kWh. Étape 3 — Calculer l'énergie : elle est donnée, $44$ kWh. Étape 4 — Multiplier : $44 \\times 90 = 3\\,960$. Étape 5 — Écrire : $3\\,960$ F CFA (aucune somme fixe n'est donnée).",
+              "answers": [
+                {
+                  "content": "3960",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le circuit de la couturière est protégé par un fusible de 10 A. Le fusible fond quand le fer fonctionne seul.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : le fer demande $I = 5$ A et le fusible supporte $10$ A. Étape 2 — Écrire : un fusible fond quand l'intensité dépasse sa valeur. Étape 3 — Remplacer : $5$ A $< 10$ A. Étape 4 — Conclure : le fusible ne fond pas. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour une même durée de fonctionnement, un fer de 2 200 W consomme, par rapport à un fer de 1 100 W :",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $P_1 = 1\\,100$ W et $P_2 = 2\\,200$ W, avec la même durée $t$. Étape 2 — Écrire : $W = P \\times t$. Étape 3 — Remplacer : $W_2 = 2\\,200 \\times t = 2 \\times (1\\,100 \\times t)$. Étape 4 — Conclure : $W_2 = 2 \\times W_1$. Le facteur 4 apparaît seulement pour la puissance dissipée quand l'intensité double, pas pour l'énergie à tension fixée.",
+              "answers": [
+                {
+                  "content": "deux fois plus d'énergie",
+                  "correct": true
+                },
+                {
+                  "content": "la même énergie",
+                  "correct": false
+                },
+                {
+                  "content": "deux fois moins d'énergie",
+                  "correct": false
+                },
+                {
+                  "content": "quatre fois plus d'énergie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le cordon électrique du fer est traversé par le même courant de 5 A que le résistor du fer, mais il ne chauffe presque pas. En utilisant la formule de l'effet Joule, explique pourquoi.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Citer la formule P_J = R × I²",
+                "Constater que l'intensité est la même dans le cordon et dans le résistor",
+                "Conclure : la résistance du cordon est très petite, donc la puissance dissipée aussi"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Relever : le cordon et le résistor sont traversés par la même intensité $I = 5$ A. Étape 2 — Écrire : la puissance dissipée par effet Joule est $P_J = R \\times I^2$. Étape 3 — Remplacer : avec la même valeur de $I$, $P_J$ ne dépend plus que de $R$ ; le cordon a une résistance très petite devant celle du résistor ($44\\ \\Omega$). Étape 4 — Conclure : la puissance dissipée dans le cordon est très faible, il reste presque froid, alors que le résistor, de grande résistance, chauffe fortement. Barème : 1 point pour la formule, 1 pour l'intensité commune, 1 pour la conclusion.",
+              "answers": [],
+              "starter": "La puissance dissipée est P_J = R × I². Comme I est la même, ..."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
