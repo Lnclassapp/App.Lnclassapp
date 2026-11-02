@@ -23,7 +23,7 @@ class SystemBudget
       test/system/classroom/assigned_sheets_test.rb test/system/classroom/assignment_batch_test.rb
     ] },
     # Décision du porteur du 2026-11-02 (ADR standard-de-test, « Tranché » point 3) : le test de rendu des leçons v3 est exclu du plafond
-    # de 15 s. Sa durée enregistrée est celle de ses cinq fichiers piégés (≈ 20 s) ; son coût réel est borné par la liste des fichiers
+    # de 15 s. Sa durée enregistrée est celle de ses fichiers piégés (≈ 41 s, mesurée à vide) ; son coût réel est borné par la liste des fichiers
     # touchés en PR et par la tâche `lecons` du train, en parts de 5 minutes au plus. Plafond de la dérogation : 60 s.
     "standard-de-test" => { budget: 60.0, files: %w[test/system/catalog/lesson_rendering_test.rb] },
     "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },

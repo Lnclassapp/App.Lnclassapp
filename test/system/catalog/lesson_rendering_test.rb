@@ -1,5 +1,6 @@
 require "application_system_test_case"
 require "open3"
+require "tmpdir"
 
 # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : une leçon v3 se rend ou le test dit pourquoi.
 # Chaque fichier choisi est importé par la vraie chaîne (StartImport → RunImport, comme db/seeds/demo/lecons_completes.rb) dans la
@@ -23,10 +24,13 @@ module LessonRendering
   module Selection
     module_function
 
+    # Un fichier illisible compte : il est choisi, et la vérification le signale comme un import refusé (jamais écarté en silence).
     def v3?(path)
       document = JSON.parse(File.read(path))
-      document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
-    rescue JSON::ParserError, Errno::ENOENT
+      !document.is_a?(Hash) || document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
+    rescue JSON::ParserError
+      true
+    rescue Errno::ENOENT
       false
     end
 
@@ -60,7 +64,10 @@ module LessonRendering
     # Les fichiers de leçon que la branche touche depuis la base : validés, modifiés, ajoutés, ou pas encore ajoutés.
     def changed(base: ENV.fetch("BASE", "origin/Develop"), root: Rails.root)
       merge_base, found = Open3.capture2("git", "merge-base", base, "HEAD", chdir: root.to_s, err: File::NULL)
-      return [] unless found.success?
+      unless found.success?
+        warn "LECONS : #{base} introuvable (le dépôt n'a pas cette branche de comparaison) : aucune leçon changée ne peut être choisie, aucune ne sera rendue."
+        return []
+      end
 
       diff, = Open3.capture2("git", "diff", "--name-only", merge_base.strip, chdir: root.to_s, err: File::NULL)
       untracked, = Open3.capture2("git", "ls-files", "--others", "--exclude-standard", chdir: root.to_s, err: File::NULL)
@@ -83,8 +90,13 @@ module LessonRendering
 
     # path : relatif à la racine du dépôt.
     def defects_for(path)
-      document = JSON.parse(Rails.root.join(path).read)
-      lesson = document.fetch("courses").first
+      begin
+        document = JSON.parse(Rails.root.join(path).read)
+        lesson = document.fetch("courses").first
+        raise KeyError, "pas de leçon" unless lesson.is_a?(Hash)
+      rescue JSON::ParserError, KeyError, NoMethodError, TypeError => error
+        return [ LessonRendering::Defect.new(path, "import", "import refusé : JSON illisible (#{error.class}: #{error.message.lines.first.to_s.strip[0, 80]})") ]
+      end
       seed_referential
       # L'EDHC est dans le référentiel réel (db/seeds/demo/trois_etablissements.rb) mais pas dans la fabrique de tests.
       create_material(name: "EDHC", shortname: "EDHC", category: "other", position: 7)
@@ -148,7 +160,7 @@ module LessonRendering
       visit course_path(course.slug)
       assert_selector "h1", text: course.name, wait: 20
       reveal_revision_sheet
-      seen = measure_page(expected_figures: lesson.fetch("figures", []).size)
+      seen = measure_page(lesson)
       defects = []
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
@@ -171,21 +183,37 @@ module LessonRendering
           const canvas = figure.querySelector("[data-figure-target=canvas]")
           return { params: figure.dataset.figureParamsValue, shown: shown(figure) && !!canvas && shown(canvas) && canvas.children.length > 0 }
         })
-        const text = document.body.innerText
+        const body = document.body.cloneNode(true)
+        body.querySelectorAll(".katex, script, style, noscript, template").forEach((node) => node.remove())
+        const text = body.textContent
         const at = text.indexOf("**")
-        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures,
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
+        let formulas = 0, bare = 0
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+          const parent = node.parentElement
+          if (!parent || parent.closest("script, style, noscript, template")) continue
+          if (parent.closest(".katex-html")) formulas += 1
+          else if (!parent.closest(".katex, option, textarea, pre, code") && parent.closest("[data-controller~=math]") && /\\$[^$\\n]+\\$/.test(node.textContent)) bare += 1
+        }
+        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare,
                  stars: at < 0 ? null : text.slice(Math.max(0, at - 30), at + 30).replace(/\\s+/g, " ") }
       })()
     JS
 
-    # Attend que les figures montrées soient dessinées (Stimulus les monte après la page), puis mesure.
-    def measure_page(expected_figures:)
+    # Les formules sont rendues par KaTeX, chargé à la demande (app/javascript/controllers/math_controller.js, asynchrone) : tant
+    # qu'un « $…$ » reste en texte brut hors d'un .katex, la page n'est pas finie. Le texte des formules (.katex, avec son
+    # .katex-mathml caché) ne compte pas pour « ** » : c'est du code TeX. Les styles de la page : course_sheet.css, prepare_sheet.css.
+    # Attend que la page soit finie : formules rendues et stables (leur nombre ne bouge plus d'une mesure à l'autre) et chaque figure
+    # du fichier dessinée au moins une fois (une figure montrée deux fois n'arrête pas l'attente). Puis rend la dernière mesure.
+    def measure_page(lesson)
       deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + LessonRendering::Verifier::FIGURE_WAIT
+      previous = nil
       loop do
         seen = page.evaluate_script(MEASURE)
-        drawn = seen["figures"].count { it["shown"] }
-        return seen if expected_figures.zero? || drawn >= expected_figures || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+        done = seen["bare"].zero? && seen["formulas"] == previous && missing_figures(lesson, seen["figures"]).empty?
+        return seen if done || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
 
+        previous = seen["formulas"]
         sleep 0.25
       end
     end
@@ -220,7 +248,8 @@ class Catalog::LessonRenderingTrapsTest < ApplicationSystemTestCase
     "debordement" => /page plus large que l'écran/,
     "asterisques" => /\*\* dans le texte rendu/,
     "figure_vide" => /figure .* absente de la page/,
-    "import_refuse" => /import refusé : unknown_material/
+    "import_refuse" => /import refusé : unknown_material/,
+    "json_casse" => /import refusé : JSON illisible/
   }.freeze
 
   unless ENV["LECONS"].to_s.strip == "tout"
@@ -232,8 +261,41 @@ class Catalog::LessonRenderingTrapsTest < ApplicationSystemTestCase
       end
     end
 
+    test "des « ** » dans une formule ne sont pas un défaut" do
+      assert_empty defects_for("#{LessonRendering::TRAPS}/formule_etoiles.json").map(&:to_s)
+    end
+
     test "le fichier conforme passe la vérification" do
       assert_empty defects_for("#{LessonRendering::TRAPS}/conforme.json").map(&:to_s)
     end
+  end
+end
+
+# Le choix des fichiers, sans navigateur.
+class Catalog::LessonSelectionTest < ActiveSupport::TestCase
+  def lessons_root
+    Pathname(Dir.mktmpdir).tap do |root|
+      folder = root.join(LessonRendering::DIRECTORY, "tle-c", "svt")
+      folder.mkpath
+      folder.join("v3.json").write({ "format" => "lnclass.course-tree", "version" => 3, "courses" => [] }.to_json)
+      folder.join("v1.json").write({ "format" => "lnclass.course-tree", "version" => 1, "courses" => [] }.to_json)
+      folder.join("casse.json").write("{ pas du json")
+    end
+  end
+
+  test "un fichier v3 et un fichier illisible sont choisis, un fichier d'un autre format non" do
+    root = lessons_root
+
+    assert_equal %w[tle-c/svt/casse.json tle-c/svt/v3.json], LessonRendering::Selection.all(root).map { it.delete_prefix("#{LessonRendering::DIRECTORY}/") }
+  ensure
+    FileUtils.rm_rf(root) if root
+  end
+
+  test "sans point de comparaison avec la base, un avertissement le dit et rien n'est choisi" do
+    result = nil
+    _, error = capture_io { result = LessonRendering::Selection.changed(base: "origin/branche-inconnue") }
+
+    assert_empty result
+    assert_match(%r{origin/branche-inconnue introuvable}, error)
   end
 end
