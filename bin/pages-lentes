@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Mesure des pages par rôle sur le grand établissement du jeu standard (chantier standard-de-test, Lot C) : temps serveur et requêtes
+# SQL de chaque page de l'élève, de l'enseignant le plus actif, de la direction et de l'équipe. Développement seulement.
+#
+#   bin/pages-lentes                                # seuil 500 ms, 100 requêtes SQL
+#   bin/pages-lentes --seuil=300 --role=direction   # rôles : eleve, enseignant, direction, equipe
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+usage() { echo "Usage : bin/pages-lentes [--seuil=ms] [--role=eleve|enseignant|direction|equipe]" >&2; exit 2; }
+
+for arg in "$@"; do
+  case "$arg" in
+    --seuil=*)
+      value="${arg#--seuil=}"
+      [[ "$value" =~ ^[1-9][0-9]*$ ]] || usage
+      export PAGES_LENTES_SEUIL="$value" ;;
+    --role=*)
+      value="${arg#--role=}"
+      case "$value" in eleve|enseignant|direction|equipe) export PAGES_LENTES_ROLE="$value" ;; *) usage ;; esac ;;
+    *) usage ;;
+  esac
+done
+
+if [ -n "${RAILS_ENV:-}" ] && [ "$RAILS_ENV" != "development" ]; then
+  echo "[pages-lentes] refusé : RAILS_ENV=$RAILS_ENV ; la mesure ne tourne qu'en development. Rien n'est visité." >&2; exit 1
+fi
+if [ -n "${RAILWAY_ENVIRONMENT_NAME:-}" ] || [ -n "${DATABASE_URL:-}" ]; then
+  echo "[pages-lentes] refusé : RAILWAY_ENVIRONMENT_NAME ou DATABASE_URL est posée (base distante possible). Rien n'est visité." >&2; exit 1
+fi
+export RAILS_ENV=development
+
+exec bin/rails pages:lentes

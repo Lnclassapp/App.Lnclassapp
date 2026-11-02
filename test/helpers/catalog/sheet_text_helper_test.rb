@@ -29,6 +29,23 @@ class Catalog::SheetTextHelperTest < ActionView::TestCase
     assert_includes html, "<b>oui</b>"
   end
 
+  # lecons-defauts-affichage : 27 leçons montraient des « ** » à l'élève.
+  test "bold around a formula stays bold, formula untouched" do
+    html = sheet_text("est **le nombre positif dont le carré est $a*b$**. Donc")
+
+    assert_equal "est <b>le nombre positif dont le carré est $a*b$</b>. Donc", html
+  end
+
+  test "a centred $$ formula does not shift the dollars that follow" do
+    html = sheet_text("Elle vaut $$E = m*c^2.$$ Elle se mesure en **joules** (J), avec $m$ en kg.")
+
+    assert_equal "Elle vaut $$E = m*c^2.$$ Elle se mesure en <b>joules</b> (J), avec $m$ en kg.", html
+  end
+
+  test "a lone dollar is plain text and does not swallow bold" do
+    assert_equal "Prix : 5 $ et <b>gras</b>.", sheet_text("Prix : 5 $ et **gras**.")
+  end
+
   test "the result is html safe and nil gives an empty string" do
     assert_predicate sheet_text("x"), :html_safe?
     assert_equal "", sheet_text(nil)
