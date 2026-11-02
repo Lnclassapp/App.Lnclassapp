@@ -630,7 +630,7 @@
               {
                 "content": "Quelles sont les deux situations où l'ordre ne compte pas ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Vérifier : on se demande « si j'échange deux éléments, ai-je un autre résultat ? ». Pour le comité de 3 élèves sans fonction et pour les 2 billes tirées ensemble, échanger deux éléments donne le même groupe : c'est une combinaison. Étape 2 — Identifier : les autres situations ont des places distinctes (président, secrétaire, trésorier ; 1er, 2e, 3e ; positions dans un code). Étape 3 — Écrire : dans ces cas, on utilise $A_n^p$ ou $n^p$, pas $C_n^p$. Étape 4 — Calculer : le nombre de groupes se calcule ensuite avec $C_n^p$ seulement dans les deux premiers cas. Le bureau et le podium sont des arrangements ; le code est une liste ordonnée.",
+                "explanation": "Étape 1 — Vérifier : on se demande « si j'échange deux éléments, ai-je un autre résultat ? ». Pour le comité de 3 élèves sans fonction et pour les 2 billes tirées ensemble, échanger deux éléments donne le même groupe : c'est une combinaison. Étape 2 — Identifier : les autres situations ont des places distinctes (président, secrétaire, trésorier ; 1er, 2e, 3e ; positions dans un code). Étape 3 — Écrire : dans ces cas, on utilise $A_n^p$ ou $n^p$, pas $C_n^p$. Étape 4 — Calculer : le nombre de groupes se calcule ensuite avec $C_n^p$ seulement pour le comité sans fonction et pour les billes tirées ensemble. Le bureau et le podium sont des arrangements ; le code est une liste ordonnée.",
                 "answers": [
                   {
                     "content": "Former un comité de 3 élèves, sans fonction particulière",
@@ -1073,7 +1073,7 @@
               ]
             },
             {
-              "content": "Pour les 3 premiers matchs du tournoi, chaque match peut finir par une victoire de la première équipe, une victoire de la seconde ou un match nul (3 issues possibles par match). Combien de combinaisons de résultats différentes existe-t-il pour ces 3 matchs ?",
+              "content": "Pour les 3 premiers matchs du tournoi, chaque match peut finir par une victoire de la première équipe, une victoire de la seconde ou un match nul (3 issues possibles par match). Combien de suites de résultats différentes existe-t-il pour ces 3 matchs ?",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Étape 1 — Décomposer : on regarde le résultat du match 1, puis du match 2, puis du match 3, soit 3 choix successifs ; l'ordre compte (le résultat du match 1 n'est pas celui du match 3) et les répétitions sont permises (trois nuls est possible). Étape 2 — Compter : 3 possibilités à chaque choix. Étape 3 — Multiplier : $3 \\times 3 \\times 3 = 3^3 = 27$. Étape 4 — Contrôler : 27 est un entier et chaque suite de résultats est comptée une seule fois. Écrire $3 \\times 3 = 9$ oublierait un match, et $3 + 3 + 3 = 9$ additionnerait au lieu de multiplier.",
