@@ -42,6 +42,11 @@ Estimation pour Develop : 84 des 263 fichiers v3 du programme ont eu une version
 
 - Ruby 3.4.9 absent du conteneur : installé par `rbenv install` (≈ 5 min).
 
+## Clôture
+
+- Fusionnée dans `Develop` par [#439](https://github.com/Lnclassapp/App.Lnclassapp/pull/439) le 2026-11-02, après intégration de `Develop` (preuve `bin/ci-quiet` pr verte sur `dbbd6a28`).
+- Les 2 fichiers refusés de 1ère C/D (« Généralités sur les composés organiques », `duplicate_accepted`) ont été corrigés sur `Develop` (cbf4eaed8) avant la fusion.
+
 ## Ce qui reste ouvert
 
-- 2 fichiers refusés par l'import (`1ere-c` et `1ere-d`, physique-chimie, « Généralités sur les composés organiques » : `question_structure` / `duplicate_accepted`, notion 6, question 3) : à corriger par la vague P3.
+- Lire le journal du premier pré-déploiement de Develop : compte exact des leçons `replaced` et `created`, et durée réelle sur Railway (174 s en local).

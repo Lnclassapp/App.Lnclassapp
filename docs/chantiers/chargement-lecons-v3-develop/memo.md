@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | livré |
+| **Statut** | livré (#439) |
 | **Ouvert le** | 2026-11-02 |
 | **Branche** | `feature/chargement-lecons-v3-develop` |
 | **Programme** | `contenus-v3-tous-niveaux` |
