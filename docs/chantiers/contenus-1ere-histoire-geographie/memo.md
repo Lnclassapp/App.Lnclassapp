@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature (contenu, aucun code) |
-| **Statut** | en cours |
+| **Statut** | terminé |
 | **Ouvert le** | 2026-11-02 |
 | **Branche** | `feature/contenus-1ere-histoire-geographie` |
 | **Programme** | `contenus-v3-tous-niveaux` (vague P9) |
