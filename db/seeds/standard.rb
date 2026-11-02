@@ -5,9 +5,14 @@
 # Idempotent : tout est retrouvé par son nom ou son contact, rien n'est créé deux fois. Contacts et noms : FictitiousIdentity.
 # PIN 2468 ; les comptes équipe prennent ENV["STANDARD_TEAM_PIN"], ou 2468 en développement, test et PR, sinon n'existent pas.
 # Sur Demo (DemoEnvironment) : ENV["DEMO_TEAM_PIN"] seule, sinon aucun compte équipe utilisable (un administrateur inerte publie les leçons).
+# Sur Develop (Lot I) : établissements, classes et comptes seulement, rien supprimé ni modifié ; les leçons restent à contenus:charger ;
+# comptes équipe seulement avec ENV["STANDARD_TEAM_PIN"] (scellée), créés sans second facteur.
+# Partout, un contact du jeu déjà pris par un autre compte (autre rôle ou autre nom) n'est jamais modifié ni rattaché : il est signalé.
 # ENV["STANDARD_LESSONS_LIMIT"] ne charge que les N premières leçons (boucles courtes, tests) ; ENV["STANDARD_MANIFEST"] change de manifeste.
-unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active?
-  raise "db/seeds/standard.rb est réservé au développement, au test, aux environnements de PR et à Demo"
+develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).whole_lessons? &&
+          !DemoEnvironment.active?
+unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active? || develop
+  raise "db/seeds/standard.rb est réservé au développement, au test, aux environnements de PR, à Demo et à Develop"
 end
 
 standard_dir = Rails.root.join("db/seeds/standard")
@@ -50,11 +55,23 @@ person = lambda do |role_key, index, role, digest = pin_digest, **extra|
   { public_id: SecureRandom.base58(14), contact: contact_of.(role_key, index), role:, gender: name.gender, pin_digest: digest,
     first_name: name.first_name, last_name: name.last_name, **extra }
 end
-# Les comptes déjà là (par contact) ne sont pas recréés : on rend { contact => id } après avoir inséré les manquants.
+# Les comptes déjà là (par contact) ne sont pas recréés : on rend { contact => id } après avoir inséré les manquants. Un compte déjà là
+# n'est celui du jeu que s'il en a le rôle et le nom ; sinon (un vrai testeur sur Develop…) il est laissé tel quel, hors du résultat, et signalé.
+taken = Set.new
+signature = %i[role team_role first_name last_name]
+existing_of = lambda do |rows|
+  wanted = rows.index_by { it[:contact] }
+  Orm::User.where(contact: wanted.keys).pluck(:contact, :id, *signature)
+           .partition { |contact, _id, *found| found == wanted.fetch(contact).values_at(*signature) }
+end
+# { contact => id } des comptes du jeu déjà là, parmi rows.
+jeu_ids = ->(rows) { existing_of.(rows).first.to_h { it.first(2) } }
 ensure_users = lambda do |rows|
-  existing = Orm::User.where(contact: rows.map { it[:contact] }).pluck(:contact, :id).to_h
-  missing = rows.reject { existing.key?(it[:contact]) }
-  existing.merge(missing.map { it[:contact] }.zip(insert.(Orm::User, missing)).to_h)
+  ours, others = existing_of.(rows)
+  taken.merge(others.map(&:first))
+  present = (ours + others).map(&:first).to_set
+  missing = rows.reject { present.include?(it[:contact]) }
+  ours.to_h { it.first(2) }.merge(missing.map { it[:contact] }.zip(insert.(Orm::User, missing)).to_h)
 end
 
 first_students = []
@@ -63,6 +80,12 @@ Orm::School.transaction do
   school_repository = Repositories::School::SchoolRepository.new
   wanted = set.schools.to_h { [ it.key, identity.school_name(it.key) ] }
   present = Orm::School.where(name: wanted.values).index_by(&:name)
+  # Un établissement déjà là n'est celui du jeu que s'il a des élèves venus du jeu (joined_via "standard") : un établissement réel du
+  # même nom (sur Develop) n'est jamais repris, ses classes et son personnel encore moins ; le jeu s'arrête avant toute écriture.
+  foreign = present.values.reject do |school|
+    Orm::ClassroomStudent.exists?(joined_via: "standard", classroom_id: Orm::Classroom.where(school_id: school.id).select(:id))
+  end
+  raise "établissement déjà présent hors du jeu, jeu non semé : #{foreign.map(&:name).join(', ')}" if foreign.any?
   to_create = set.schools.reject { present.key?(wanted.fetch(it.key)) }
   codes = Entities::School::SchoolCode.generate_unique(count: to_create.size, taken: school_repository.taken_school_codes)
   school_repository.insert_many(at: now, rows: to_create.zip(codes).map do |school, code|
@@ -105,15 +128,20 @@ Orm::School.transaction do
   first_students = student_rows.uniq { it[:classroom] }
   student_ids = ensure_users.(student_rows.map { it.except(:classroom) })
   linked = Orm::ClassroomStudent.where(student_id: student_ids.values).pluck(:student_id).to_set
-  Orm::ClassroomStudent.insert_all!(student_rows.filter_map do |row|
+  links = student_rows.filter_map do |row|
+    next if taken.include?(row[:contact])
+
     id = student_ids.fetch(row[:contact])
     { classroom_id: classroom_ids.fetch(row[:classroom]), student_id: id, primary: true, joined_at: now, joined_via: "standard" } unless linked.include?(id)
-  end)
+  end
+  Orm::ClassroomStudent.insert_all!(links) if links.any?
 
   # 5. Les enseignants : leurs établissements, leurs matières, et toutes les classes de ces établissements.
   teachers = set.accounts.teachers
   teacher_ids = ensure_users.(teachers.each_index.map { person.(:teacher, it, "teacher") })
   teachers.each_with_index do |account, index|
+    next if taken.include?(contact_of.(:teacher, index))
+
     teacher_id = teacher_ids.fetch(contact_of.(:teacher, index))
     Orm::TeacherProfile.find_or_create_by!(user_id: teacher_id) { it.assign_attributes(joined_via: "standard", onboarding_completed_at: now) }
     account.schools.each_with_index do |school_key, rank|
@@ -130,6 +158,8 @@ Orm::School.transaction do
   directions = set.accounts.directions
   head_ids = ensure_users.(directions.each_index.map { person.(:direction, it, "school_admin") })
   directions.each_with_index do |account, index|
+    next if taken.include?(contact_of.(:direction, index))
+
     user_id = head_ids.fetch(contact_of.(:direction, index))
     Orm::SchoolStaff.find_or_create_by!(school_id: schools.fetch(account.school).id, user_id:) { it.position = "head"; it.joined_via = "invitation" }
   end
@@ -144,20 +174,32 @@ Orm::School.transaction do
     digest = team_pin_digest || Orm::User.new(pin: SecureRandom.hex(16)).pin_digest
     accounts = team_pin_digest ? set.accounts.team : set.accounts.team.select { it.role == "admin" }
     ensure_users.(accounts.map { person.(it.role.to_sym, 0, "team", digest, team_role: it.role) })
-    Orm::User.where(role: "team", contact: set.accounts.team.map { contact_of.(it.role.to_sym, 0) }).update_all(pin_digest: digest)
+    Orm::User.where(id: jeu_ids.(set.accounts.team.map { person.(it.role.to_sym, 0, "team", digest, team_role: it.role) }).values).update_all(pin_digest: digest)
+  elsif develop
+    # Develop : créés une seule fois au PIN scellé, sans second facteur (chacun enrôle le sien) ; un compte déjà là n'est jamais modifié.
+    ensure_users.(set.accounts.team.map { person.(it.role.to_sym, 0, "team", team_pin_digest, team_role: it.role) }) if team_pin_digest
   elsif team_pin_digest
     team_ids = ensure_users.(set.accounts.team.map { person.(it.role.to_sym, 0, "team", team_pin_digest, team_role: it.role) })
     team_ids.each_value { |user_id| Orm::TotpCredential.find_or_create_by!(user_id:) { it.secret = ROTP::Base32.random; it.confirmed_at = now } }
   end
 
   log.call("#{schools.size} établissements, #{classroom_ids.size} classes, #{student_rows.size} élèves, #{teachers.size} enseignants")
+  # Le contact d'un vrai compte n'est jamais écrit en clair dans le journal.
+  taken.each { log.call("#{it[0, 2]}******#{it[-2..]} déjà pris par un autre compte : laissé tel quel, hors du jeu") }
 end
 
 # 8. Les leçons du manifeste, importées par la vraie chaîne puis publiées en cascade par l'administrateur de l'équipe fictive.
-paths = set.expected_paths
+# Develop : aucune, elles sont chargées par contenus:charger (ADR-0122/0123, Lot F), jamais une seconde fois ici.
+paths = develop ? [] : set.expected_paths
 paths = paths.first(lessons_limit) if lessons_limit
-admin = Orm::User.find_by(contact: contact_of.(:admin, 0)) || Orm::User.find_by!(contact: "0700000000")
-actor = Repositories::Identity::UserRepository.new.actor_for(user_id: admin.id)
+actor = if paths.any?
+  # L'administrateur du jeu, reconnu par son contact et son nom ; un autre compte sur son contact ne publie jamais à sa place.
+  raise "le contact de l'administrateur du jeu est pris par un autre compte : leçons non publiées" if taken.include?(contact_of.(:admin, 0))
+
+  admin_row = person.(:admin, 0, "team", nil, team_role: "admin")
+  admin_id = jeu_ids.([ admin_row ])[admin_row[:contact]] || Orm::User.find_by!(contact: "0700000000").id
+  Repositories::Identity::UserRepository.new.actor_for(user_id: admin_id)
+end
 documents = paths.map { |path| [ path, JSON.parse(lessons_dir.join(path).read) ] }
 course_for = lambda do |course|
   Orm::Course.joins(:level, :material).left_joins(:series)
@@ -208,13 +250,13 @@ published = courses.count do |course|
 
   true
 end
-log.call("#{courses.size} leçons du manifeste, #{published} publiées maintenant")
+log.call(develop ? "leçons du manifeste : laissées à contenus:charger" : "#{courses.size} leçons du manifeste, #{published} publiées maintenant")
 
 # 9. Les comptes par rôle (contact, rôle, établissement) ; le premier élève de chaque classe est son compte de test.
 if ENV["STANDARD_QUIET"].blank?
   team_pin_name = DemoEnvironment.active? ? "DEMO_TEAM_PIN" : "STANDARD_TEAM_PIN"
   log.call("comptes (PIN #{pin}#{team_pin_digest ? '' : " ; pas de comptes équipe : #{team_pin_name} absente"}) :")
-  show = ->(contact, role, school) { log.call(format("  %-10s %-12s %s", contact, role, school)) }
+  show = ->(contact, role, school) { log.call(format("  %-10s %-12s %s", contact, role, school)) unless taken.include?(contact) }
   set.accounts.directions.each_with_index { |account, index| show.(contact_of.(:direction, index), "direction", identity.school_name(account.school)) }
   set.accounts.teachers.each_with_index do |account, index|
     show.(contact_of.(:teacher, index), "enseignant", "#{account.schools.map { identity.school_name(it) }.join(' + ')} (#{account.subject})")

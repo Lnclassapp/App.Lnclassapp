@@ -18,7 +18,8 @@ Lot 0 — Manifeste, identités fictives (contrats gelés)
   ├─► Lot B  Trimestre d'activité déterministe ⏸ n° 3
   │     ↓ B
   │   Lot C  Grand établissement + pages lentes ⏸ n° 5
-  └─► Lot F  Rôle des environnements (Develop, Staging)
+  ├─► Lot F  Rôle des environnements (Develop, Staging)
+  └─► Lot I  Jeu standard semé sur Develop (établissements, classes, comptes)
         ↓ A, B, D, E
   Lot G  Recette par rôle + preuve de vague + règle de fusion
 ```
@@ -100,6 +101,16 @@ Lot 0 — Manifeste, identités fictives (contrats gelés)
 - **Dépend de**    : Lot A
 - **Test associé** : `test/config/demo_environment_test.rb` · `test/config/pr_environment_test.rb` (Demo avec `PR_BASE_ENVIRONMENT=Develop` copié → pas PR) · `test/db/seeds/demo_stage_test.rb` · `automatic_load_stage_test.rb`
 - **Done quand**   : avec `RAILWAY_ENVIRONMENT_NAME=Demo`, `db:seed` charge référentiel + jeu standard, sans mot de passe PR, sans `lecons_completes`, sans chargement des leçons du dépôt ; comptes équipe seulement si `DEMO_TEAM_PIN` est posée ; production inchangée
+
+## Lot I — Jeu standard semé sur Develop
+
+- **Couche**       : infrastructure (seeds)
+- **Fichiers**     : `db/seeds.rb` *(stade `develop` : `contenus` puis `standard`, échec du jeu imprimé et journalisé, jamais levé)*
+                     `db/seeds/standard.rb` *(Develop : établissements, classes, comptes, pas de leçons ; contact pris par un autre compte laissé tel quel et signalé, partout ; équipe seulement avec `STANDARD_TEAM_PIN` scellée)*
+                     `docs/guide/configuration.md` *(variable `STANDARD_TEAM_PIN` de Develop)*
+- **Dépend de**    : Lot H ; se fusionne avec F (leçons de Develop) sans conflit de fichier, avec B sur `db/seeds.rb` : quand B est fusionné, le stade `develop` reçoit aussi `activite`
+- **Test associé** : `test/db/seeds/develop_stage_test.rb` · `test/db/seeds/standard_seed_test.rb` (compte existant non modifié)
+- **Done quand**   : avec `RAILWAY_ENVIRONMENT_NAME=Develop` en production Rails, `db:seed` ajoute les 3 établissements, leurs classes et comptes, rien en double, aucun compte existant modifié, aucun compte équipe sans `STANDARD_TEAM_PIN` ; Staging et production : rien du jeu
 
 ## Lot G — Recette, preuve de vague, règle de fusion
 

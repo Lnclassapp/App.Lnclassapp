@@ -7,12 +7,20 @@
 # contenus (Develop, Staging and production share it): the task loads the lessons with subjects on Develop and Staging only.
 # The environment named Demo (DemoEnvironment, Lot H of standard-de-test) is a stage of its own: referential and standard set,
 # never the repository lessons, the development accounts or the former demo files.
-stage = if DemoEnvironment.active? then "demo" elsif PrEnvironment.active? then "pr" else Rails.env end
-SEEDS = { "identity" => :all, "contenus" => %w[production], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
-          "development" => %w[development pr], "standard" => %w[pr demo] }.freeze
+# Develop (Lot I of standard-de-test, ADR §4 point 5) also receives the schools, classrooms and accounts of the standard set, nothing
+# deleted or changed; its lessons stay with contenus:charger. A failure of the set there is printed and logged, never raised.
+develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).whole_lessons?
+stage = if DemoEnvironment.active? then "demo" elsif PrEnvironment.active? then "pr" elsif develop && Rails.env.production? then "develop" else Rails.env end
+SEEDS = { "identity" => :all, "contenus" => %w[production develop], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
+          "development" => %w[development pr], "standard" => %w[pr demo develop] }.freeze
 
 SEEDS.each do |name, stages|
   next unless stages == :all || stages.include?(stage)
 
   load Rails.root.join("db/seeds/#{name}.rb")
+rescue StandardError => error
+  raise unless stage == "develop" && name == "standard"
+
+  Rails.logger.error("[standard] semis impossible sur Develop : #{error.class} : #{error.message}\n#{error.backtrace&.first(5)&.join("\n")}")
+  puts "[standard] semis impossible sur Develop : #{error.class} : #{error.message}"
 end

@@ -127,6 +127,16 @@ Chantier standard-de-test, Lot H. L'environnement Railway nommé `Demo` (casse e
 | `ANDROID_PACKAGE_NAME`, `ANDROID_TEACHER_PACKAGE_NAME`, `ANDROID_STUDENT_STORE_URL`, `ANDROID_TEACHER_STORE_URL`, `ANDROID_CERT_FINGERPRINTS` | Les apps de test ne s'ouvrent pas sur demo.lnclass.com |
 | `STANDARD_TEAM_PIN`, `STANDARD_LESSONS_LIMIT`, `STANDARD_MANIFEST`, `STANDARD_QUIET` | Réglages du semis local, ignorés ou contre-productifs sur Demo |
 
+### Jeu standard sur Develop
+
+Chantier standard-de-test, Lot I (ADR standard-de-test §4 point 5). À chaque déploiement de Develop (reconnu par `RAILWAY_ENVIRONMENT_NAME=Develop`, jamais Staging, production, Demo ni une PR), le semis **ajoute** ce qui manque du jeu standard : les trois établissements, leurs classes, les élèves, enseignants et directions (PIN de test public `2468`, comme en PR). **Rien n'est supprimé ni modifié** : un contact du jeu déjà pris par un autre compte (autre rôle ou autre nom, un vrai testeur par exemple) est laissé tel quel, sans rattachement, et une ligne `[standard] 05******10 déjà pris par un autre compte` le signale dans le journal du déploiement (contact masqué). Un établissement réel qui porterait le nom d'un établissement du jeu n'est jamais repris : le jeu n'est alors pas semé, et le journal le dit. Les leçons du manifeste restent chargées par `contenus:charger`, jamais une seconde fois par le jeu. Un échec du jeu ne fait pas échouer le déploiement : il est imprimé et journalisé (`[standard] semis impossible sur Develop : …`).
+
+**Comptes équipe du jeu : seulement si `STANDARD_TEAM_PIN` est posée sur Develop**, en variable **scellée** : app-develop.lnclass.com est un site ouvert, un PIN public sur un compte équipe y donnerait l'administration à tout visiteur. Sans elle, aucun compte équipe du jeu. Avec elle, les trois comptes équipe sont créés une fois à ce PIN, sans second facteur (chacun enrôle le sien à sa première connexion) ; un compte déjà là n'est jamais modifié, une rotation de la variable ne change donc pas leur PIN. Sur Demo, c'est `DEMO_TEAM_PIN` qui compte (`STANDARD_TEAM_PIN` y est ignorée).
+
+| Variable | Valeur |
+|---|---|
+| `STANDARD_TEAM_PIN` | PIN des comptes équipe du jeu sur Develop, **scellée** ; absente : pas de compte équipe du jeu |
+
 ### Facultatives — réglage de charge
 
 Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure à l'appui.
