@@ -8,6 +8,9 @@ namespace :pages do
     stop.call("refusé : la mesure ne tourne qu'en development (environnement actuel : #{Rails.env}). Rien n'est visité.") unless Rails.env.development?
 
     require Rails.root.join("script/pages_lentes")
+    stop.call("refusé : RAILWAY_ENVIRONMENT_NAME ou DATABASE_URL est posée (base distante possible). Rien n'est visité.") if ENV["RAILWAY_ENVIRONMENT_NAME"].present? || ENV["DATABASE_URL"].present?
+    stop.call("refusé : l'hôte de la base configurée n'est pas local. Rien n'est visité.") unless PagesLentes.local_database?
+
     names = YAML.load_file(Rails.root.join("db/seeds/standard/noms.yml"))
     name = ENV["PAGES_LENTES_ECOLE"].presence || Entities::School::FictitiousIdentity.new(names).school_name("grand")
     school = Orm::School.find_by(name:)
@@ -23,5 +26,6 @@ namespace :pages do
     runner = PagesLentes::Runner.new(school:, roles: Array(role || PagesLentes::ROLES), warmup: Integer(ENV.fetch("PAGES_LENTES_CHAUFFE", "1")))
     puts "Pages de #{school.name} (#{Orm::Classroom.where(school_id: school.id).count} classes), temps serveur sans navigateur, page chauffée avant mesure."
     puts PagesLentes.report(runner.call, threshold:, max_queries:)
+    exit 1 if PagesLentes.failed?(runner)
   end
 end

@@ -79,6 +79,25 @@ class PagesLentesTaskTest < ActiveSupport::TestCase
     end
   end
 
+  test "the task refuses a Railway environment, a DATABASE_URL and a database that is not local, and visits nothing" do
+    [ { "RAILWAY_ENVIRONMENT_NAME" => "Develop" }, { "DATABASE_URL" => "postgres://example.invalid/db" } ].each do |variables|
+      out, err, exit_error = lentes(**variables)
+
+      assert exit_error, "#{variables} doit être refusé"
+      assert_match(/refus/, err)
+      assert_empty out
+    end
+    original = PagesLentes.method(:database_host)
+    PagesLentes.define_singleton_method(:database_host) { "db.example.com" }
+    out, err, exit_error = lentes
+
+    assert exit_error
+    assert_match(/refus.*local/, err)
+    assert_empty out
+  ensure
+    PagesLentes.define_singleton_method(:database_host, original)
+  end
+
   test "the script refuses an unknown option, role or threshold" do
     [ "--vite", "--role=parent", "--seuil=lent", "--seuil=0" ].each do |argument|
       out, status = Open3.capture2e({ "RAILS_ENV" => "development" }, Rails.root.join("bin/pages-lentes").to_s, argument)
@@ -105,6 +124,45 @@ class PagesLentesTaskTest < ActiveSupport::TestCase
     assert_match(/accueil/, out)
     assert_match(/Seuil : 500 ms/, out)
     assert_includes out, "assigner (modale)"
+  end
+
+  test "a page that does not answer 200 is flagged as a defect and the exit is not zero" do
+    Orm::Exercise.update_all(status: "draft")
+
+    out, _, exit_error = lentes("PAGES_LENTES_ROLE" => "eleve")
+
+    assert_match(/STATUT/, out)
+    assert_match(/page\(s\) en défaut/, out)
+    assert exit_error
+    assert_equal 1, exit_error.status
+  end
+
+  test "a sign-in that fails makes the exit not zero" do
+    @direction.update!(pin: "1357")
+
+    _, _, exit_error = lentes("PAGES_LENTES_ROLE" => "direction")
+
+    assert_equal 1, exit_error.status
+  end
+
+  test "a team account whose second factor is refused is not measured" do
+    Orm::TotpCredential.where(user_id: @team.id).update_all(secret: ROTP::Base32.random)
+    Orm::User.where(id: @team.id).update_all(updated_at: Time.current)
+    Orm::TotpCredential.where(user_id: @team.id).update_all(confirmed_at: nil)
+
+    out, _, exit_error = lentes("PAGES_LENTES_ROLE" => "equipe")
+
+    assert_match(/equipe.*connexion/i, out)
+    assert_empty out.lines.grep(/\Aequipe .* ms/)
+    assert_equal 1, exit_error.status
+  end
+
+  test "visits the heavy pages: filtered and long-period dashboards, a DRENA's schools" do
+    out, = lentes
+
+    assert_includes out, "tableau de bord (DRENA)"
+    assert_includes out, "tableau de bord (année)"
+    assert_includes out, "établissements d'une DRENA"
   end
 
   test "is sorted by time, slowest first" do

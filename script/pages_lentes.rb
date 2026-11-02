@@ -9,7 +9,7 @@ module PagesLentes
 
   # Une session par rôle ; chaque rôle a sa propre adresse pour ne pas partager la limite de connexions.
   class Runner
-    attr_reader :visits, :notes
+    attr_reader :visits, :notes, :failures
 
     def initialize(school:, roles: ROLES, warmup: 1)
       @school = school
@@ -17,6 +17,7 @@ module PagesLentes
       @warmup = warmup
       @visits = []
       @notes = []
+      @failures = []
     end
 
     def call
@@ -25,7 +26,10 @@ module PagesLentes
         next @notes << "#{role} : aucun compte dans cet établissement, rôle ignoré" if user.nil?
 
         session = sign_in(user, index)
-        next @notes << "#{role} : connexion refusée, rôle ignoré" if session.nil?
+        if session.nil?
+          @failures << role
+          next @notes << "#{role} : connexion refusée, rôle ignoré"
+        end
 
         pages(role, user).each { |page, path, headers| visit(role, session, page, path, headers || {}) }
       end
@@ -78,12 +82,15 @@ module PagesLentes
       session.post "/session", params: { authenticity_token: csrf(session), session: { contact: user.contact, pin: "2468" } }
       return unless session.response.redirect?
 
-      if user.role == "team"
-        session.get session.response.location
-        code = ROTP::TOTP.new(Orm::TotpCredential.find_by!(user_id: user.id).secret).now
-        session.post "/identity/second-factor", params: { authenticity_token: csrf(session), second_factor: { code: } }
-      end
-      session
+      user.role == "team" ? second_factor(session, user) : session
+    end
+
+    # Le second facteur est réussi quand il mène à l'accueil de l'équipe ; sinon le rôle n'est pas mesuré.
+    def second_factor(session, user)
+      session.get session.response.location
+      code = ROTP::TOTP.new(Orm::TotpCredential.find_by!(user_id: user.id).secret).now
+      session.post "/identity/second-factor", params: { authenticity_token: csrf(session), second_factor: { code: } }
+      session.response.location.to_s.end_with?("/teams") ? session : nil
     end
 
     def visit(role, session, page, path, headers)
@@ -97,6 +104,8 @@ module PagesLentes
     end
 
     def pages(role, user) = send(:"#{role}_pages", user)
+
+    def drena_public_id = Orm::Drena.find_by(id: @school.drena_id)&.public_id
 
     def first_course(level_id) = Orm::Course.where(status: "published", level_id:).order(:id).first
 
@@ -142,7 +151,11 @@ module PagesLentes
     end
 
     def equipe_pages(_user)
-      [ [ "accueil", "/teams" ], [ "tableau de bord", "/teams/dashboard" ], [ "référentiel", "/teams/referential" ],
+      [ [ "accueil", "/teams" ], [ "tableau de bord", "/teams/dashboard" ],
+        [ "tableau de bord (année)", "/teams/dashboard?period=year" ],
+        [ "tableau de bord (DRENA)", "/teams/dashboard?drena=#{drena_public_id}" ],
+        [ "tableau de bord (DRENA, année)", "/teams/dashboard?drena=#{drena_public_id}&period=year" ],
+        [ "établissements d'une DRENA", "/drenas/#{drena_public_id}/schools" ], [ "référentiel", "/teams/referential" ],
         [ "croissance", "/teams/growth" ], [ "plan des classes", "/teams/classroom-plan" ], [ "établissements", "/teams/schools" ],
         [ "établissement", "/teams/schools/#{@school.public_id}" ], [ "imports", "/teams/imports" ], [ "DRENA", "/teams/drenas" ],
         [ "recherche de compte", "/teams/accounts?q=#{CGI.escape(@school.name.first(5))}" ],
@@ -150,17 +163,27 @@ module PagesLentes
     end
   end
 
+  def self.database_host = ActiveRecord::Base.connection_db_config.host.to_s
+
+  # Une base locale : socket Unix ou boucle locale (comme bin/jeu-standard --reset).
+  def self.local_database? = (host = database_host).empty? || host.start_with?("/") || %w[localhost 127.0.0.1 ::1].include?(host)
+
   # Le tableau, trié du plus lent au plus rapide, et les pages signalées (au-dessus du seuil ou de la limite de requêtes).
+  def self.failed?(runner) = runner.failures.any? || runner.visits.any? { it.status != 200 }
+
   def self.report(runner, threshold:, max_queries:)
     flags = lambda do |visit|
-      [ ("LENTE" if visit.milliseconds > threshold), ("REQUÊTES" if visit.queries > max_queries) ].compact.join(" + ")
+      [ ("STATUT" if visit.status != 200), ("LENTE" if visit.milliseconds > threshold),
+        ("REQUÊTES" if visit.queries > max_queries) ].compact.join(" + ")
     end
     lines = runner.visits.map do |visit|
       format("%-11s  %-30s  %9s  %6d  %s  %s", visit.role, visit.page, "#{visit.milliseconds} ms", visit.queries, visit.status, flags.(visit)).rstrip
     end
-    flagged = runner.visits.count { flags.(it).present? }
-    summary = flagged.zero? ? "Aucune page lente." : "#{flagged} page(s) lente(s) (au-dessus de #{threshold} ms ou de #{max_queries} requêtes SQL)."
-    [ format("%-11s  %-30s  %9s  %6s  %s  %s", "rôle", "page", "durée", "SQL", "http", "signal"), *lines, *runner.notes, summary,
+    broken = runner.visits.count { it.status != 200 }
+    slow = runner.visits.count { it.milliseconds > threshold || it.queries > max_queries }
+    summary = [ ("#{broken} page(s) en défaut (statut HTTP autre que 200)." if broken.positive?),
+                (slow.zero? ? "Aucune page lente." : "#{slow} page(s) lente(s) (au-dessus de #{threshold} ms ou de #{max_queries} requêtes SQL).") ].compact
+    [ format("%-11s  %-30s  %9s  %6s  %s  %s", "rôle", "page", "durée", "SQL", "http", "signal"), *lines, *runner.notes, *summary,
       "Seuil : #{threshold.to_s.delete_suffix(".0")} ms, #{max_queries} requêtes SQL." ].join("\n")
   end
 end
