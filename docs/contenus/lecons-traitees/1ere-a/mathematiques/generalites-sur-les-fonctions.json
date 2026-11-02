@@ -321,7 +321,7 @@
               {
                 "content": "Un opérateur modélise un coût par $f(x)=x^2+5$. Que peut-on dire de la parité de $f$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^2+5=x^2+5$. Étape 3 — Comparer : $f(-x)=f(x)$. Étape 4 — Conclure : $f$ est paire, sa courbe est symétrique par rapport à l'axe des ordonnées. « Impaire » demanderait $f(-x)=-f(x)=-x^2-5$, ce qui est faux. « À la fois paire et impaire » est faux : $f(1)=6$ n'est pas égal à $-6$.",
+                "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^2+5=x^2+5$. Étape 3 — Comparer : $f(-x)=f(x)$. Étape 4 — Conclure : $f$ est paire, sa courbe est symétrique par rapport à l'axe des ordonnées. « Impaire » demanderait $f(-x)=-f(x)=-x^2-5$, ce qui est faux. « Ni paire ni impaire » est faux puisque $f(-x)=f(x)$. « À la fois paire et impaire » est faux : $f(1)=6$ n'est pas égal à $-6$.",
                 "answers": [
                   {
                     "content": "$f$ est paire",
@@ -344,7 +344,7 @@
               {
                 "content": "On donne $f(x)=x^3+x$. Que peut-on dire de la parité de $f$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^3+(-x)=-x^3-x$. Étape 3 — Comparer : $-x^3-x=-(x^3+x)=-f(x)$. Étape 4 — Conclure : $f$ est impaire, sa courbe est symétrique par rapport à l'origine. Elle n'est pas paire : $f(1)=2$ et $f(-1)=-2$ sont différents.",
+                "explanation": "Étape 1 — Vérifier : $D_f=\\mathbb{R}$, symétrique par rapport à $0$. Étape 2 — Calculer : $f(-x)=(-x)^3+(-x)=-x^3-x$. Étape 3 — Comparer : $-x^3-x=-(x^3+x)=-f(x)$. Étape 4 — Conclure : $f$ est impaire, sa courbe est symétrique par rapport à l'origine. Elle n'est pas paire : $f(1)=2$ et $f(-1)=-2$ sont différents ; la présence de puissances de $x$ ne rend pas une fonction paire. Elle n'est donc pas « ni paire ni impaire » : elle est impaire.",
                 "answers": [
                   {
                     "content": "$f$ est impaire",
@@ -552,7 +552,7 @@
               {
                 "content": "Un opérateur facture un forfait selon $f(x)=3x+2$ (en centaines de FCFA). Quel est le sens de variation de $f$ sur $\\mathbb{R}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(3b+2)-(3a+2)=3(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $3>0$, donc la différence est positive. Étape 4 — Conclure : $f(b)>f(a)$, $f$ est strictement croissante sur $\\mathbb{R}$. « Décroissante » correspondrait à un coefficient négatif. « Constante » demanderait une différence nulle.",
+                "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(3b+2)-(3a+2)=3(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $3>0$, donc la différence est positive. Étape 4 — Conclure : $f(b)>f(a)$, $f$ est strictement croissante sur $\\mathbb{R}$. « Décroissante » correspondrait à un coefficient négatif. « Constante » demanderait une différence nulle. « Croissante puis décroissante » est exclu : la différence $3(b-a)$ est positive pour tous les $a< b$.",
                 "answers": [
                   {
                     "content": "$f$ est strictement croissante",
@@ -575,7 +575,7 @@
               {
                 "content": "Un solde diminue selon $f(x)=-2x+5$. Quel est le sens de variation de $f$ sur $\\mathbb{R}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(-2b+5)-(-2a+5)=-2(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $-2<0$, donc la différence est négative. Étape 4 — Conclure : $f(b)< f(a)$, $f$ est strictement décroissante. « Croissante » oublie le signe de $-2$. On peut conclure par le calcul de la différence.",
+                "explanation": "Étape 1 — Choisir : soient $a< b$ dans $\\mathbb{R}$. Étape 2 — Calculer la différence : $f(b)-f(a)=(-2b+5)-(-2a+5)=-2(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $-2<0$, donc la différence est négative. Étape 4 — Conclure : $f(b)< f(a)$, $f$ est strictement décroissante. « Croissante » oublie le signe de $-2$. « Constante » demanderait une différence nulle, or $-2(b-a)\\neq0$. On peut conclure par le calcul de la différence.",
                 "answers": [
                   {
                     "content": "$f$ est strictement décroissante",
@@ -598,7 +598,7 @@
               {
                 "content": "On donne $f(x)=x^2$ sur l'intervalle $[0\\,;+\\infty[$. Quel est son sens de variation ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=b^2-a^2=(b-a)(b+a)$. Étape 3 — Étudier le signe : $b-a>0$ et $b+a>0$ car $b>0$ et $a\\geq0$, donc le produit est positif. Étape 4 — Conclure : $f$ est strictement croissante sur $[0\\,;+\\infty[$. Les autres propositions sont contredites par $f(1)=1< f(2)=4$.",
+                "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=b^2-a^2=(b-a)(b+a)$. Étape 3 — Étudier le signe : $b-a>0$ et $b+a>0$ car $b>0$ et $a\\geq0$, donc le produit est positif. Étape 4 — Conclure : $f$ est strictement croissante sur $[0\\,;+\\infty[$. « Décroissante » et « constante » sont contredites par $f(1)=1< f(2)=4$. « D'abord croissante puis décroissante » est exclu : la différence est positive pour tous les $a< b$ de l'intervalle.",
                 "answers": [
                   {
                     "content": "$f$ est strictement croissante sur $[0\\,;+\\infty[$",
@@ -762,7 +762,7 @@
               {
                 "content": "On donne $f(x)=2x+1$ et $g(x)=x^2$. Quelle est l'expression de $(f+g)(x)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est la somme. Étape 2 — Calculer l'expression : $(f+g)(x)=f(x)+g(x)=2x+1+x^2=x^2+2x+1$. Étape 3 — Déterminer l'ensemble de définition : $D_f\\cap D_g=\\mathbb{R}$. Étape 4 — Conclure : $(f+g)(x)=x^2+2x+1$ sur $\\mathbb{R}$. $2x^3+x^2$ est le produit, pas la somme. Les deux autres propositions sont des erreurs de calcul.",
+                "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est la somme. Étape 2 — Calculer l'expression : $(f+g)(x)=f(x)+g(x)=2x+1+x^2=x^2+2x+1$. Étape 3 — Déterminer l'ensemble de définition : $D_f\\cap D_g=\\mathbb{R}$. Étape 4 — Conclure : $(f+g)(x)=x^2+2x+1$ sur $\\mathbb{R}$. $2x^3+x^2$ est le produit, pas la somme. $2x^3+1$ multiplie $2x$ par $x^2$ au lieu d'ajouter $x^2$. $2x^2+2x+1$ compte $x^2$ deux fois.",
                 "answers": [
                   {
                     "content": "$x^2+2x+1$",
@@ -785,7 +785,7 @@
               {
                 "content": "On donne $f(x)=2x+1$ et $g(x)=x^2$. Quelle est l'expression de $(f\\times g)(x)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est le produit. Étape 2 — Calculer l'expression : $(f\\times g)(x)=(2x+1)\\times x^2=2x^3+x^2$. Étape 3 — Déterminer l'ensemble de définition : $\\mathbb{R}$. Étape 4 — Conclure : $(f\\times g)(x)=2x^3+x^2$. $x^2+2x+1$ est la somme. $2x^3+1$ oublie de multiplier le $1$ par $x^2$.",
+                "explanation": "Étape 1 — Identifier : $f(x)=2x+1$, $g(x)=x^2$, l'opération est le produit. Étape 2 — Calculer l'expression : $(f\\times g)(x)=(2x+1)\\times x^2=2x^3+x^2$. Étape 3 — Déterminer l'ensemble de définition : $\\mathbb{R}$. Étape 4 — Conclure : $(f\\times g)(x)=2x^3+x^2$. $x^2+2x+1$ est la somme. $2x^3+1$ oublie de multiplier le $1$ par $x^2$. $2x^2+1$ multiplie $2x$ par $x$ au lieu de $x^2$ et oublie aussi $1\\times x^2$.",
                 "answers": [
                   {
                     "content": "$2x^3+x^2$",
@@ -843,7 +843,7 @@
               {
                 "content": "On donne $f(x)=x+1$ et $g(x)=x-2$. Quel est l'ensemble de définition du quotient $\\dfrac fg$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : l'opération est le quotient $\\frac fg$ ; $D_f=D_g=\\mathbb{R}$. Étape 2 — Calculer l'expression : $\\frac{f(x)}{g(x)}=\\frac{x+1}{x-2}$. Étape 3 — Déterminer l'ensemble de définition : $x\\in D_f\\cap D_g$ avec $g(x)\\neq0$, donc $x-2\\neq0$ et $x\\neq2$. Étape 4 — Conclure : $\\mathbb{R}\\setminus\\{2\\}$. $\\mathbb{R}$ oublie la condition $g(x)\\neq0$. $\\mathbb{R}\\setminus\\{-1\\}$ annule le numérateur, non le dénominateur.",
+                "explanation": "Étape 1 — Identifier : l'opération est le quotient $\\frac fg$ ; $D_f=D_g=\\mathbb{R}$. Étape 2 — Calculer l'expression : $\\frac{f(x)}{g(x)}=\\frac{x+1}{x-2}$. Étape 3 — Déterminer l'ensemble de définition : $x\\in D_f\\cap D_g$ avec $g(x)\\neq0$, donc $x-2\\neq0$ et $x\\neq2$. Étape 4 — Conclure : $\\mathbb{R}\\setminus\\{2\\}$. $\\mathbb{R}$ oublie la condition $g(x)\\neq0$. $\\mathbb{R}\\setminus\\{-1\\}$ annule le numérateur, non le dénominateur. $[2\\,;+\\infty[$ traite le dénominateur comme une racine carrée : $x=0$ convient pourtant, car $\\frac{0+1}{0-2}=-\\frac12$ existe.",
                 "answers": [
                   {
                     "content": "$\\mathbb{R}\\setminus\\{2\\}$",
@@ -918,7 +918,7 @@
             {
               "content": "Un opérateur facture un appel de $x$ minutes par $f(x)=30x+200$ (en FCFA), pour $x\\geq0$. Quel est le sens de variation de $f$ sur $[0\\,;+\\infty[$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=30b+200-30a-200=30(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $30>0$, donc la différence est positive. Étape 4 — Conclure : $f$ est strictement croissante : plus l'appel est long, plus il coûte. « Décroissante » est contredit par $f(5)=350>f(2)=260$. « Constante » demanderait un prix indépendant de la durée.",
+              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b$. Étape 2 — Calculer la différence : $f(b)-f(a)=30b+200-30a-200=30(b-a)$. Étape 3 — Étudier le signe : $b-a>0$ et $30>0$, donc la différence est positive. Étape 4 — Conclure : $f$ est strictement croissante : plus l'appel est long, plus il coûte. « Décroissante » est contredit par $f(5)=350>f(2)=260$. « Constante » demanderait un prix indépendant de la durée. « D'abord croissante puis décroissante » est exclu : $30(b-a)>0$ pour tous les $a< b$.",
               "answers": [
                 {
                   "content": "$f$ est strictement croissante",
@@ -1062,7 +1062,7 @@
             {
               "content": "Pour $x>0$, on a $m(x)=\\dfrac{500x+1\\,000}{x}=500+\\dfrac{1\\,000}{x}$. Pour $0< a< b$, on admet $m(b)-m(a)=1\\,000\\left(\\dfrac1b-\\dfrac1a\\right)=\\dfrac{1\\,000(a-b)}{ab}$. Quel est le sens de variation de $m$ sur $]0\\,;+\\infty[$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Choisir : soient $0< a< b$. Étape 2 — Calculer la différence : $m(b)-m(a)=\\frac{1\\,000(a-b)}{ab}$. Étape 3 — Étudier le signe : $1\\,000>0$, $ab>0$ et $a-b<0$, donc la différence est négative. Étape 4 — Conclure : $m(b)< m(a)$, $m$ est strictement décroissante sur $]0\\,;+\\infty[$ : le prix moyen baisse quand on achète plus. Cela est confirmé par $m(2)=1\\,000>m(4)=750$. « Croissante » ignore le signe de $a-b$.",
+              "explanation": "Étape 1 — Choisir : soient $0< a< b$. Étape 2 — Calculer la différence : $m(b)-m(a)=\\frac{1\\,000(a-b)}{ab}$. Étape 3 — Étudier le signe : $1\\,000>0$, $ab>0$ et $a-b<0$, donc la différence est négative. Étape 4 — Conclure : $m(b)< m(a)$, $m$ est strictement décroissante sur $]0\\,;+\\infty[$ : le prix moyen baisse quand on achète plus. Cela est confirmé par $m(2)=1\\,000>m(4)=750$. « Croissante » ignore le signe de $a-b$. « Constante » demanderait une différence nulle et « croissante puis décroissante » un changement de signe : or la différence est négative pour tous les $0< a< b$.",
               "answers": [
                 {
                   "content": "$m$ est strictement décroissante",
@@ -1155,7 +1155,7 @@
             {
               "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x\\in[0\\,;8]$. Pour $0\\leq a< b\\leq4$, on a $G(b)-G(a)=(b-a)(8-a-b)$. Quel est le sens de variation de $G$ sur $[0\\,;4]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b\\leq4$. Étape 2 — Calculer la différence : $G(b)-G(a)=(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a< b\\leq4$ donne $a+b<8$, donc $8-a-b>0$ ; le produit est positif. Étape 4 — Conclure : $G$ est strictement croissante sur $[0\\,;4]$. Vérification : $G(2)=12< G(4)=16$. On peut conclure grâce au signe des deux facteurs.",
+              "explanation": "Étape 1 — Choisir : soient $0\\leq a< b\\leq4$. Étape 2 — Calculer la différence : $G(b)-G(a)=(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a< b\\leq4$ donne $a+b<8$, donc $8-a-b>0$ ; le produit est positif. Étape 4 — Conclure : $G$ est strictement croissante sur $[0\\,;4]$. Vérification : $G(2)=12< G(4)=16$, ce qui exclut « décroissante » et « constante ». On peut conclure grâce au signe des deux facteurs.",
               "answers": [
                 {
                   "content": "$G$ est strictement croissante",
@@ -1178,7 +1178,7 @@
             {
               "content": "Un agent de dépôt gagne $G(x)=-x^2+8x$ (en milliers de FCFA) pour $x\\in[0\\,;8]$. Pour $4\\leq a< b\\leq8$, on a $G(b)-G(a)=(b-a)(8-a-b)$. Quel est le sens de variation de $G$ sur $[4\\,;8]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Choisir : soient $4\\leq a< b\\leq8$. Étape 2 — Calculer la différence : $(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a\\geq4$, $b>4$ donnent $a+b>8$, donc $8-a-b<0$ ; le produit est négatif. Étape 4 — Conclure : $G$ est strictement décroissante sur $[4\\,;8]$. Vérification : $G(4)=16>G(6)=12$. Elle n'est pas croissante : le gain baisse après $4$ heures.",
+              "explanation": "Étape 1 — Choisir : soient $4\\leq a< b\\leq8$. Étape 2 — Calculer la différence : $(b-a)(8-a-b)$. Étape 3 — Étudier le signe : $b-a>0$, et $a\\geq4$, $b>4$ donnent $a+b>8$, donc $8-a-b<0$ ; le produit est négatif. Étape 4 — Conclure : $G$ est strictement décroissante sur $[4\\,;8]$. Vérification : $G(4)=16>G(6)=12$. « Croissante » et « constante » sont faux : le gain baisse après $4$ heures ($G(6)=12< G(4)$). « Croissante puis décroissante » décrit $[0\\,;8]$ tout entier, pas $[4\\,;8]$.",
               "answers": [
                 {
                   "content": "$G$ est strictement décroissante",
