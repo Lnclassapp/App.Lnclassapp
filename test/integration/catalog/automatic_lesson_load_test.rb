@@ -388,4 +388,17 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal [ "lesson_already_published" ], report.reload.import_errors.map { it["code"] }
     assert_equal [ "Fiche v1" ], course.essentials.pluck(:name)
   end
+
+  # Le cas de Develop du 2026-11-02 : un référentiel sans le niveau Tle refuse chaque leçon du programme ; le journal dit pourquoi.
+  test "Develop without the Tle level refuses the programme lesson and logs the code, the path and the level name" do
+    seed_referential
+    Orm::Level.where(name: "Tle").update_all(name: "Terminale", slug: "terminale")
+    logged = []
+
+    output = stub_method(Rails.logger, :warn, ->(message) { logged << message }) { charger("Develop") }
+
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : refused"
+    assert_includes logged, "[contenus] Barycentre et lignes de niveaux : import refusé (completed, 1 erreur(s)), voir Imports : " \
+                            "unknown_level courses[0].level_name (value: Tle)"
+  end
 end

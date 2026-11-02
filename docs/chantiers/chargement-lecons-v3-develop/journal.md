@@ -50,3 +50,11 @@ Estimation pour Develop : 84 des 263 fichiers v3 du programme ont eu une version
 ## Ce qui reste ouvert
 
 - Lire le journal du premier pré-déploiement de Develop : compte exact des leçons `replaced` et `created`, et durée réelle sur Railway (174 s en local).
+
+## Suite : toutes les leçons refusées sur Develop (2026-11-02)
+
+- Constat (orchestrateur, déploiement `28a2172c`) : 297 leçons « import refusé (completed, 1 erreur(s)) », Thalès inchangée ; en local, base de démo, tout passe.
+- Cause probable, vue de l'extérieur en lecture seule : sur Develop, `/niveaux/3eme` répond 200, `/niveaux/tle`, `/niveaux/1ere`, `/niveaux/2nde` (et `terminale`, `premiere`, `seconde`) répondent 404 ; cette page ne répond 404 que si le niveau n'existe pas. Le référentiel de Develop est créé à l'écran (les seeds `catalog` ne tournent qu'en développement, test et PR) : sans niveau Tle ni 1ère, chaque leçon a une seule erreur, `unknown_level`. Les matières (Philosophie, SVT…) et les couples niveau-série peuvent manquer aussi.
+- Correction du code : le journal d'une leçon refusée écrit le code, le chemin et les paramètres sûrs de ses 3 premières erreurs (`value`, `keyword`, `rule`, `exception`, `constraint`) ; un `write_failed` porte la classe de l'exception et le nom de la contrainte PostgreSQL. Test d'intégration : Develop dont le niveau s'appelle « Terminale » journalise `unknown_level courses[0].level_name (value: Tle)`.
+- La cause elle-même n'est pas corrigée par le code : créer sur Develop les niveaux Tle (A1, A2, C, D), 1ère (A1, A2, C, D), 2nde (A, C) et les matières manquantes est une décision du porteur (écran Référentiel, ou semis du référentiel réservé à Develop). Le déploiement suivant rechargera seul les leçons refusées.
+

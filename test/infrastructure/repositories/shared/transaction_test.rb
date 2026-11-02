@@ -56,8 +56,9 @@ module Repositories
         end
         other = @transaction.attempt_with_cause { Orm::Drena.create!(name: nil) }
 
-        assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :collision ], exception: [ "ActiveRecord::RecordNotUnique" ] } ],
-                     [ collision.code, collision.errors ]
+        assert_equal [ :conflict, [ :write_failed ], [ :collision ], [ "ActiveRecord::RecordNotUnique" ] ],
+                     [ collision.code, *collision.errors.values_at(:base, :cause, :exception) ]
+        assert_match(/drenas/, collision.errors.fetch(:constraint).sole)
         assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :other ], exception: [ "ActiveRecord::RecordInvalid" ] } ],
                      [ other.code, other.errors ]
         assert_equal :written, @transaction.attempt_with_cause { :written }.value
