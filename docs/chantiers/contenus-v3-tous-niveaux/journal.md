@@ -6,7 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-11-02 | P4 | 1ère (A1, A2) | Physique-Chimie | 10 (20 fichiers) | PR_A_REMPLIR |
+| 2026-11-02 | P4 | 1ère (A1, A2) | Physique-Chimie | 10 (20 fichiers) | #438 |
 | 2026-10-31 | T1 | Tle (C, D) | Mathématiques | 14 leçons (20 fichiers) | #420 |
 | 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
 | 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
