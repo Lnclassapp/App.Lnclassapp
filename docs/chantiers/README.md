@@ -177,6 +177,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`couverture-train`](couverture-train/memo.md) | livré ([#418](https://github.com/Lnclassapp/App.Lnclassapp/pull/418) vers `Develop`, 2026-10-31), clos | Bugfix : le train #417 était rouge, couverture sous 100 % ; 25 tests ajoutés, 4 branches mortes retirées, et « Je m'entraîne » jugeait faux toute bonne réponse d'une liste à plusieurs cases |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré ([#423](https://github.com/Lnclassapp/App.Lnclassapp/pull/423) vers `Develop`, 2026-10-31), clos | Thalès : 4 sujets de devoir (maquette + un 4e), feuilles « Prépare interros n°N » / « Prépare devoirs n°N », correction en un bloc sous l'exercice, maths rendues partout ; une notion porte un ou deux exercices (ADR-0116 amendé) ; contenu à importer sur `Develop` et `Staging` |
 | [`contenus-develop-staging`](contenus-develop-staging/memo.md) | livré ([#429](https://github.com/Lnclassapp/App.Lnclassapp/pull/429) vers `Develop`, 2026-10-31), clos | Develop et Staging chargent seuls, au pré-déploiement, les exercices et sujets des leçons à sujets de devoir (Thalès) ; cours et fiches intacts ; production jamais (ADR-0122, à valider par Kamkara) |
+| [`chargement-lecons-v3-develop`](chargement-lecons-v3-develop/memo.md) | livré (PR vers `Develop`, 2026-11-02) | Develop seul charge au pré-déploiement les leçons v3 du programme `contenus-v3-tous-niveaux` et remplace entières les leçons du même titre, publiées ou non (ADR-0123, amende ADR-0122) |
 
 ## Backlog
 
