@@ -78,9 +78,12 @@ module UseCases
 
       # ADR-0123 §9 : un chargement tué en pleine leçon (déploiement remplacé) laisse son rapport « en cours », qui ferait refuser tout import
       # du type pendant 10 minutes (StartImport) ; sous le verrou consultatif, aucun autre chargement ne tourne : ces rapports sont orphelins.
+      # Un échec ici est journalisé et le chargement continue (les leçons qui buteraient sur l'orphelin sont alors not_started).
       def fail_orphans
-        count = @reports.fail_running_named(kind: KIND, prefix: IMPORT_PREFIX, at: @clock.now)
-        @logger.warn("[contenus] #{count} import(s) d'un chargement interrompu passé(s) en échec") if count.positive?
+        failed = @reports.fail_running_named(kind: KIND, prefix: IMPORT_PREFIX, at: @clock.now)
+        @logger.warn("[contenus] #{failed.size} import(s) d'un chargement interrompu passé(s) en échec : #{failed.join(', ')}") if failed.any?
+      rescue StandardError => error
+        @logger.error("[contenus] imports interrompus non nettoyés (#{error.class} : #{error.message})")
       end
 
       # ADR-0123 §8 : Develop seul crée, avant le chargement, ce qui manque du référentiel de base ; journalisé. Un échec ne bloque rien.

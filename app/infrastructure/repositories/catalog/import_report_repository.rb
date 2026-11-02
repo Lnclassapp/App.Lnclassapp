@@ -33,9 +33,11 @@ module Repositories
 
       def fail_running_named(kind:, prefix:, at:)
         pattern = "#{ActiveRecord::Base.sanitize_sql_like(prefix)}%"
-        Orm::ImportReport.where(kind:, status: %w[queued validating importing])
-                         .where("EXISTS (SELECT 1 FROM jsonb_array_elements(files) AS file WHERE file->>'name' LIKE ?)", pattern)
-                         .update_all(status: "failed", finished_at: at, updated_at: at)
+        running = Orm::ImportReport.where(kind:, status: %w[queued validating importing])
+                                   .where("jsonb_array_length(files) = 1 AND files->0->>'name' LIKE ?", pattern)
+        public_ids = running.pluck(:public_id)
+        running.where(public_id: public_ids).update_all(status: "failed", finished_at: at, updated_at: at)
+        public_ids
       end
 
       def find(id:)

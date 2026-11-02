@@ -240,13 +240,19 @@ module Repositories
         %w[queued validating importing].each do |status|
           orphan = report.(status, "chargement-automatique-tle-c-x.json")
 
-          assert_equal 1, @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+          assert_equal [ orphan.public_id ], @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
           assert_equal [ "failed", at ], [ orphan.reload.status, orphan.finished_at ]
         end
         by_hand = report.("importing", "lecon.json")
 
-        assert_equal 0, @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+        assert_empty @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
         assert_equal [ "importing", "completed", "importing" ], [ by_hand, done, other_kind ].map { it.reload.status }
+        by_hand.update_columns(status: "completed")
+        mixed = create_import_report(kind: "course_tree", imported_by: author, status: "importing",
+                                     files: [ { "name" => "lecon.json", "byte_size" => 1 }, { "name" => "chargement-automatique-x.json", "byte_size" => 1 } ])
+
+        assert_empty @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+        assert_equal "importing", mixed.reload.status
       end
     end
   end
