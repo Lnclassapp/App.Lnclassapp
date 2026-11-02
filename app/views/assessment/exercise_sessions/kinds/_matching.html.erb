@@ -13,7 +13,7 @@
         <li>
           <button type="button" aria-pressed="false" data-assessment--matching-target="left" data-action="assessment--matching#pickLeft" class="<%= button %>">
             <span data-pair hidden class="<%= badge %>" aria-hidden="true"></span>
-            <span class="min-w-0 flex-1"><%= prompt %></span>
+            <span class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden"><%= prompt %></span>
             <span data-linked class="sr-only"></span>
           </button>
         </li>
@@ -25,7 +25,7 @@
           <button type="button" aria-pressed="false" data-assessment--matching-target="right" data-label="<%= item.content %>"
                   data-action="assessment--matching#pickRight" class="<%= button %>">
             <span data-pair hidden class="<%= badge %>" aria-hidden="true"></span>
-            <span class="min-w-0 flex-1"><%= item.content %></span>
+            <span class="min-w-0 flex-1 overflow-x-auto overflow-y-hidden"><%= item.content %></span>
           </button>
         </li>
       <% end %>
