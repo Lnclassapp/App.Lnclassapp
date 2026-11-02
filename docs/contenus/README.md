@@ -689,6 +689,27 @@ Leçons distinctes : 60 notions, 752 questions notées, 180 questions « Je m'en
 
 **Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Les lignes de Physique-Chimie du tableau « 1ère C » et « 1ère D » ci-dessous (v1, rangs 1 à 3) sont remplacées par ce tableau. Si les cours v1 sont déjà dans une base, les renommer et les archiver avant d'importer.
 
+### 1ère A1 et A2, Physique-Chimie au format 3 (chantier `contenus-1ere-a-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de 1ère A (progression DPFC 2026-2027), rédigées le 2026-11-02 au format `lnclass.course-tree` v3, vague P4 du programme `contenus-v3-tous-niveaux`. Le référentiel n'a pas de série « A » en 1ère : chaque leçon est écrite une fois puis déclinée en **20 fichiers** (`1ere-a1/physique-chimie/` et `1ere-a2/physique-chimie/`, identiques à `series_name` près). Les leçons 9 et 10 partent des versions 1ère C/D, allégées. Elles remplacent les 3 fichiers v1 (rangs 1 à 3) du tableau « 1ère A1 et A2 » plus bas.
+
+| Rang | Fichier (A1 et A2) | Cours | Notions | Exercices | Questions | Je m'entraîne | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 4 | 8 | 60 | 12 | 3 | `coordinate_plane` |
+| 2 | `physique-chimie/les-alcanes.json` | Les alcanes | 5 | 9 | 56 | 15 | 4 | `molecule` |
+| 3 | `physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 5 | 9 | 60 | 15 | 6 | `diagram`, `molecule` |
+| 4 | `physique-chimie/etude-d-un-dipole-actif-cas-d-une-pile-loi-de-pouillet.json` | Étude d'un dipôle actif : cas d'une pile. Loi de Pouillet | 4 | 8 | 58 | 12 | 4 | `coordinate_plane`, `diagram` |
+| 5 | `physique-chimie/petroles-et-gaz-naturels.json` | Pétroles et gaz naturels | 4 | 8 | 54 | 12 | 3 | `diagram`, `molecule` |
+| 6 | `physique-chimie/puissance-et-energie-electriques.json` | Puissance et énergie électriques | 4 | 8 | 61 | 12 | 2 | `diagram`, `stat_chart` |
+| 7 | `physique-chimie/principe-de-la-production-d-une-tension-alternative.json` | Principe de la production d'une tension alternative | 5 | 9 | 56 | 15 | 3 | `coordinate_plane`, `diagram` |
+| 8 | `physique-chimie/reactions-d-oxydo-reduction-en-solution-aqueuse.json` | Réactions d'oxydo-réduction en solution aqueuse | 4 | 8 | 48 | 12 | 2 | `diagram` |
+| 9 | `physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json` | Travail et puissance d'une force constante dans le cas d'un mouvement de translation | 4 | 8 | 58 | 12 | 3 | `coordinate_plane` |
+| 10 | `physique-chimie/energie-cinetique.json` | Énergie cinétique | 4 | 8 | 57 | 12 | 2 | `coordinate_plane` |
+
+Au total (par série) : 43 notions, 568 questions notées, 129 questions « Je m'entraîne », 32 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement (Ruby 3.4). Chaque leçon a été relue par un sous-agent Opus distinct de son auteur (calculs refaits, chiffres et données vérifiés).
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Aucune sorte ne dessine un circuit électrique ni une sinusoïde : circuits décrits dans les énoncés, sinusoïdes approchées par segments.
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop (`db/seeds/catalog.rb`), la 1ère a les séries A1, A2, C et D : les leçons communes aux deux séries A sont écrites une fois, puis déclinées en A1 et A2.

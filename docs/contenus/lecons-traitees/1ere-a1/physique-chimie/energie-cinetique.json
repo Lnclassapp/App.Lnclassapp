@@ -356,11 +356,11 @@
         },
         {
           "name": "Théorème de l'énergie cinétique",
-          "remember": "**Théorème de l'énergie cinétique** : pour un solide en translation qui va d'une position $A$ à une position $B$, la variation de son énergie cinétique est égale à la somme des travaux des forces qui s'exercent sur lui entre $A$ et $B$ : $\\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W$. Pour une force constante (leçon 9) : le travail vaut $+F \\times d$ si la force a le sens du déplacement, $-F \\times d$ si elle a le sens opposé (frottement), et $0$ si elle est perpendiculaire au déplacement (le poids et la réaction normale sur une route horizontale). Si $\\sum W > 0$, le solide accélère ; si $\\sum W < 0$, il ralentit.",
+          "remember": "**Théorème de l'énergie cinétique** : pour un solide en translation qui va d'une position $A$ à une position $B$, la variation de son énergie cinétique est égale à la somme des travaux des forces qui s'exercent sur lui entre $A$ et $B$ : $\\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W$. Pour une force constante (leçon 9) : $W = F \\times d \\times \\cos\\alpha$, où $\\alpha$ est l'angle entre la force et le déplacement. Donc $W = +F \\times d$ si la force a le sens du déplacement ($\\alpha = 0°$, $\\cos\\alpha = 1$), $W = -F \\times d$ si elle a le sens opposé, comme un frottement ($\\alpha = 180°$, $\\cos\\alpha = -1$), et $W = 0$ si elle est perpendiculaire au déplacement ($\\alpha = 90°$, $\\cos\\alpha = 0$ : le poids et la réaction normale sur une route horizontale). Si $\\sum W > 0$, le solide accélère ; si $\\sum W < 0$, il ralentit.",
           "method": [
             "Définir le solide et les positions $A$ et $B$, puis relever $m$, $v_A$, $v_B$ et la distance $d = AB$ en unités SI.",
             "Faire le bilan des forces qui s'exercent sur le solide entre $A$ et $B$.",
-            "Calculer le travail de chaque force : $+F \\times d$ dans le sens du déplacement, $-F \\times d$ en sens opposé, $0$ si elle est perpendiculaire.",
+            "Calculer le travail de chaque force avec $W = F \\times d \\times \\cos\\alpha$ : $+F \\times d$ dans le sens du déplacement ($\\cos 0° = 1$), $-F \\times d$ en sens opposé ($\\cos 180° = -1$), $0$ si elle est perpendiculaire ($\\cos 90° = 0$).",
             "Écrire le théorème : $\\dfrac{1}{2}\\,m\\,v_B^2 - \\dfrac{1}{2}\\,m\\,v_A^2 = \\sum W$.",
             "Résoudre l'équation pour trouver l'inconnue, puis vérifier l'unité et le signe."
           ],
@@ -369,7 +369,7 @@
             "steps": [
               "Définir : le solide est le camion, $m = 1\\,000$ kg, $v_A = 10$ m/s, $d = AB = 50$ m, et on cherche $v_B$.",
               "Faire le bilan : le poids $P$, la réaction normale $R$, la force motrice $F$ et le frottement $f$.",
-              "Calculer les travaux : $W(P) = 0$ et $W(R) = 0$ (perpendiculaires au déplacement), $W(F) = 4\\,000 \\times 50 = 200\\,000$ J, $W(f) = -1\\,000 \\times 50 = -50\\,000$ J, donc $\\sum W = 150\\,000$ J.",
+              "Calculer les travaux : $W(P) = 0$ et $W(R) = 0$ (perpendiculaires au déplacement, $\\cos 90° = 0$), $W(F) = 4\\,000 \\times 50 \\times \\cos 0° = 4\\,000 \\times 50 \\times 1 = 200\\,000$ J, $W(f) = 1\\,000 \\times 50 \\times \\cos 180° = 1\\,000 \\times 50 \\times (-1) = -50\\,000$ J, donc $\\sum W = 150\\,000$ J.",
               "Écrire : $\\dfrac{1}{2} \\times 1\\,000 \\times v_B^2 - \\dfrac{1}{2} \\times 1\\,000 \\times 10^2 = 150\\,000$.",
               "Résoudre : $500\\,v_B^2 - 50\\,000 = 150\\,000$, donc $v_B^2 = 400$ et $v_B = 20$ m/s (soit 72 km/h)."
             ]
@@ -385,7 +385,7 @@
               {
                 "content": "Sur une route horizontale, la réaction normale de la route a un travail nul.",
                 "question_type": "true_false",
-                "explanation": "Étape 3 — Calculer le travail : la réaction normale est perpendiculaire à la route, donc au déplacement. Son travail est nul. L'affirmation est vraie.",
+                "explanation": "Étape 3 — Calculer le travail : la réaction normale est perpendiculaire à la route, donc au déplacement : $\\alpha = 90°$ et $\\cos 90° = 0$. Son travail est nul. L'affirmation est vraie.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -556,7 +556,7 @@
               {
                 "content": "Le frottement qui s'oppose au déplacement a un travail négatif.",
                 "question_type": "true_false",
-                "explanation": "Étape 3 — Calculer le travail : une force de sens opposé au déplacement a un travail $-F \\times d$, donc négatif. L'affirmation est vraie.",
+                "explanation": "Étape 3 — Calculer le travail : une force de sens opposé au déplacement fait un angle $\\alpha = 180°$ avec lui ; comme $\\cos 180° = -1$, son travail $W = F \\times d \\times \\cos 180° = -F \\times d$ est négatif. L'affirmation est vraie.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -574,11 +574,11 @@
         },
         {
           "name": "Distance de freinage",
-          "remember": "Un véhicule de masse $m$ roule sur une route horizontale à la vitesse $v_A$ et freine jusqu'à l'arrêt, avec une force de freinage $f$ constante, de sens opposé au déplacement. Entre le début du freinage et l'arrêt ($v_B = 0$), le poids et la réaction normale ont un travail nul et $W(f) = -f \\times d$. Le théorème de l'énergie cinétique donne $0 - \\dfrac{1}{2}\\,m\\,v_A^2 = -f \\times d$, donc la **distance de freinage** est $d = \\dfrac{m\\,v_A^2}{2f}$. Elle est proportionnelle à la masse et au **carré** de la vitesse : si la vitesse double, la distance est multipliée par 4.",
+          "remember": "Un véhicule de masse $m$ roule sur une route horizontale à la vitesse $v_A$ et freine jusqu'à l'arrêt, avec une force de freinage $f$ constante, de sens opposé au déplacement. Entre le début du freinage et l'arrêt ($v_B = 0$), le poids et la réaction normale ont un travail nul ($\\cos 90° = 0$) et $W(f) = f \\times d \\times \\cos 180° = -f \\times d$. Le théorème de l'énergie cinétique donne $0 - \\dfrac{1}{2}\\,m\\,v_A^2 = -f \\times d$, donc la **distance de freinage** est $d = \\dfrac{m\\,v_A^2}{2f}$. Elle est proportionnelle à la masse et au **carré** de la vitesse : si la vitesse double, la distance est multipliée par 4.",
           "method": [
             "Relever $m$, la vitesse initiale $v_A$ en m/s, la vitesse finale ($0$ à l'arrêt) et la force de freinage $f$ en N.",
             "Écrire le théorème : $0 - \\dfrac{1}{2}\\,m\\,v_A^2 = W(f)$, car le poids et la réaction normale ont un travail nul.",
-            "Exprimer $W(f) = -f \\times d$ et isoler la distance : $d = \\dfrac{m\\,v_A^2}{2f}$.",
+            "Exprimer $W(f) = f \\times d \\times \\cos 180° = -f \\times d$ et isoler la distance : $d = \\dfrac{m\\,v_A^2}{2f}$.",
             "Calculer $d$ en mètres (ou l'inconnue demandée : $f$ ou $v_A$)."
           ],
           "example": {
@@ -774,7 +774,7 @@
         },
         {
           "name": "Chute et mouvement sur un plan incliné",
-          "remember": "Le poids d'un solide de masse $m$ vaut $P = m\\,g$, avec $g = 10$ N/kg. Quand le solide descend d'une hauteur $h$ (dénivelé **vertical**), son poids a le sens du déplacement vertical : $W(P) = m\\,g\\,h$, positif en descente (et $-m\\,g\\,h$ en montée). Sur un plan incliné de longueur $L$ et de hauteur $h$, seule la hauteur $h$ compte pour le poids. La réaction normale du plan a un travail nul. Un frottement constant $f$ parallèle au plan, opposé au mouvement, a pour travail $-f \\times L$. En **chute libre** (seul le poids agit, départ sans vitesse), $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$, donc $v^2 = 2\\,g\\,h$ : la vitesse ne dépend pas de la masse.",
+          "remember": "Le poids d'un solide de masse $m$ vaut $P = m\\,g$, avec $g = 10$ N/kg. Quand le solide descend d'une hauteur $h$ (dénivelé **vertical**), son poids a le sens du déplacement vertical : $W(P) = m\\,g\\,h$, positif en descente (et $-m\\,g\\,h$ en montée). Sur un plan incliné de longueur $L$ et de hauteur $h$, seule la hauteur $h$ compte pour le poids. La réaction normale du plan a un travail nul. Un frottement constant $f$ parallèle au plan, opposé au mouvement ($\\alpha = 180°$, $\\cos\\alpha = -1$), a pour travail $-f \\times L$. En **chute libre** (seul le poids agit, départ sans vitesse), $\\dfrac{1}{2}\\,m\\,v^2 = m\\,g\\,h$, donc $v^2 = 2\\,g\\,h$ : la vitesse ne dépend pas de la masse.",
           "method": [
             "Faire le schéma et relever la masse $m$, la hauteur verticale $h$, la longueur $L$ parcourue et les vitesses initiale et finale.",
             "Calculer le travail du poids : $W(P) = m\\,g\\,h$ en descente, avec $g = 10$ N/kg.",
@@ -1058,7 +1058,7 @@
               "question_type": "numeric",
               "unit": "J",
               "tolerance": 0,
-              "explanation": "Étape 3 — Calculer le travail de chaque force : la force exercée a le sens du déplacement, donc son travail est positif : $W(F) = F \\times d = 120 \\times 30 = 3\\,600$ J.",
+              "explanation": "Étape 3 — Calculer le travail de chaque force : la force exercée a le sens du déplacement ($\\alpha = 0°$, $\\cos\\alpha = 1$), donc son travail est positif : $W(F) = F \\times d \\times \\cos 0° = 120 \\times 30 \\times 1 = 3\\,600$ J.",
               "answers": [
                 {
                   "content": "3600",
@@ -1071,7 +1071,7 @@
               "question_type": "numeric",
               "unit": "J",
               "tolerance": 0,
-              "explanation": "Étape 3 — Calculer le travail de chaque force : le frottement est de sens opposé au déplacement, donc son travail est négatif : $W(f) = -f \\times d = -30 \\times 30 = -900$ J.",
+              "explanation": "Étape 3 — Calculer le travail de chaque force : le frottement est de sens opposé au déplacement ($\\alpha = 180°$, $\\cos\\alpha = -1$), donc son travail est négatif : $W(f) = f \\times d \\times \\cos 180° = 30 \\times 30 \\times (-1) = -900$ J.",
               "answers": [
                 {
                   "content": "-900",
