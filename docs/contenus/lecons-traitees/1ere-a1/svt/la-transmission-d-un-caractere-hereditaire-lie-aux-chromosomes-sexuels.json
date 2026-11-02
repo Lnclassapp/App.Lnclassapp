@@ -1,0 +1,1650 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transmission d'un caractère héréditaire lié aux chromosomes sexuels",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "A1",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "determination-du-sexe",
+          "kind": "diagram",
+          "description": "Schéma fléché de la détermination du sexe chez l'Homme. La mère X//X produit des ovules qui portent tous un chromosome X. Le père X//Y produit des spermatozoïdes qui portent soit X, soit Y. Une fécondation par un spermatozoïde X donne une fille X//X (probabilité 1/2) ; une fécondation par un spermatozoïde Y donne un garçon X//Y (probabilité 1/2).",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Parents",
+              "Gamètes",
+              "Enfant"
+            ],
+            "nodes": [
+              {
+                "id": "mere",
+                "label": "Mère X//X",
+                "category": 1
+              },
+              {
+                "id": "pere",
+                "label": "Père X//Y",
+                "category": 1
+              },
+              {
+                "id": "ov",
+                "label": "Ovules : tous X",
+                "category": 2
+              },
+              {
+                "id": "sp",
+                "label": "Spermatozoïdes : X ou Y",
+                "category": 2
+              },
+              {
+                "id": "fille",
+                "label": "Fille X//X : 1/2",
+                "category": 3
+              },
+              {
+                "id": "garcon",
+                "label": "Garçon X//Y : 1/2",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "mere",
+                "to": "ov",
+                "label": "produit"
+              },
+              {
+                "from": "pere",
+                "to": "sp",
+                "label": "produit"
+              },
+              {
+                "from": "ov",
+                "to": "fille"
+              },
+              {
+                "from": "sp",
+                "to": "fille"
+              },
+              {
+                "from": "ov",
+                "to": "garcon"
+              },
+              {
+                "from": "sp",
+                "to": "garcon"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "croisement-liee-a-x",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un croisement pour un caractère récessif lié à X (daltonisme). La mère porteuse XD//Xd donne des ovules XD ou Xd ; le père de vision normale XD//Y donne des spermatozoïdes XD ou Y. Les enfants possibles, chacun avec la probabilité 1/4, sont : fille XD//XD, fille porteuse XD//Xd, garçon XD//Y, garçon daltonien Xd//Y. XD désigne le X portant l'allèle normal, Xd celui du daltonisme.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Parents",
+              "Gamètes",
+              "Enfant"
+            ],
+            "nodes": [
+              {
+                "id": "mere",
+                "label": "Mère XD//Xd (porteuse)",
+                "category": 1
+              },
+              {
+                "id": "pere",
+                "label": "Père XD//Y (vision normale)",
+                "category": 1
+              },
+              {
+                "id": "gm",
+                "label": "Ovules : XD ou Xd",
+                "category": 2
+              },
+              {
+                "id": "gp",
+                "label": "Spermatozoïdes : XD ou Y",
+                "category": 2
+              },
+              {
+                "id": "e1",
+                "label": "Fille XD//XD : 1/4",
+                "category": 3
+              },
+              {
+                "id": "e2",
+                "label": "Fille porteuse XD//Xd : 1/4",
+                "category": 3
+              },
+              {
+                "id": "e3",
+                "label": "Garçon XD//Y : 1/4",
+                "category": 3
+              },
+              {
+                "id": "e4",
+                "label": "Garçon daltonien Xd//Y : 1/4",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "mere",
+                "to": "gm",
+                "label": "produit"
+              },
+              {
+                "from": "pere",
+                "to": "gp",
+                "label": "produit"
+              },
+              {
+                "from": "gm",
+                "to": "e1"
+              },
+              {
+                "from": "gp",
+                "to": "e1"
+              },
+              {
+                "from": "gm",
+                "to": "e2"
+              },
+              {
+                "from": "gp",
+                "to": "e2"
+              },
+              {
+                "from": "gm",
+                "to": "e3"
+              },
+              {
+                "from": "gp",
+                "to": "e3"
+              },
+              {
+                "from": "gm",
+                "to": "e4"
+              },
+              {
+                "from": "gp",
+                "to": "e4"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Déterminer le sexe d'un enfant avec l'échiquier de croisement",
+          "remember": "Rappel : chaque cellule du corps possède des **autosomes** et une paire de **gonosomes** (chromosomes sexuels) : $X//X$ chez la femme, $X//Y$ chez l'homme. Un **gamète** (ovule ou spermatozoïde) ne reçoit qu'un chromosome de chaque paire, donc un seul gonosome. Tous les ovules portent un $X$ ; un spermatozoïde porte soit $X$, soit $Y$. À la fécondation, un spermatozoïde $X$ donne une fille ($X//X$) et un spermatozoïde $Y$ un garçon ($X//Y$) : c'est le **père** qui détermine le sexe. L'**échiquier de croisement** associe chaque gamète de la mère à chaque gamète du père : à chaque naissance, la probabilité d'une fille est $\\frac{1}{2}$ et celle d'un garçon $\\frac{1}{2}$.",
+          "method": [
+            "Écrire le génotype sexuel de chaque parent : $X//X$ pour la mère, $X//Y$ pour le père.",
+            "Former les gamètes de chaque parent : un seul gonosome par gamète.",
+            "Construire l'échiquier de croisement : associer chaque gamète de la mère à chaque gamète du père, case par case.",
+            "Conclure : lire le sexe de chaque case et donner la probabilité de chaque sexe en fraction."
+          ],
+          "example": {
+            "statement": "Dans un village, Awa et Kouadio attendent un enfant. Awa est $X//X$ et Kouadio est $X//Y$. Quelle est la probabilité que l'enfant soit un garçon ? Qui détermine son sexe ?",
+            "steps": [
+              "Écrire : la mère est $X//X$ et le père est $X//Y$.",
+              "Former les gamètes : Awa ne donne que des ovules $X$ ; Kouadio donne des spermatozoïdes $X$ ou $Y$, chacun avec la probabilité $\\frac{1}{2}$.",
+              "Construire l'échiquier : 4 cases, $X//X$, $X//Y$, $X//X$ et $X//Y$ (chacun des deux ovules $X$ avec un spermatozoïde $X$ ou $Y$).",
+              "Conclure : 2 cases sur 4 sont $X//Y$, donc la probabilité d'un garçon est $\\frac{2}{4} = \\frac{1}{2}$. Le sexe est déterminé par le spermatozoïde du père."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'une famille qui a déjà eu des enfants du même sexe a plus de chances d'avoir l'autre. Contre-exemple : une famille a déjà trois filles. Le père produit toujours des spermatozoïdes $X$ et $Y$ en proportions égales : la probabilité d'un garçon pour le quatrième enfant reste $\\frac{1}{2}$, et non $\\frac{3}{4}$. Chaque naissance est un nouveau croisement. Ne dis pas non plus que la mère décide du sexe : tous ses ovules portent $X$.",
+          "figure": "determination-du-sexe",
+          "exercise": {
+            "title": "Prévoir le sexe d'un enfant",
+            "statement": "Dans cet exercice, tu prévois le sexe d'un enfant avec les chromosomes sexuels et l'échiquier de croisement, comme dans la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Tous les ovules d'une femme portent un chromosome X.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire le génotype : la femme est $X//X$. Étape 2 — Former les gamètes : chaque ovule reçoit un seul des deux X, donc tous les ovules portent X. L'affirmation est vraie. Ce n'est pas l'ovule qui varie, c'est le spermatozoïde, qui porte X ou Y.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ovule est fécondé par un spermatozoïde qui porte un chromosome Y. Quel est le génotype sexuel de l'enfant et son sexe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : l'ovule porte X (toute la mère donne X) et le spermatozoïde porte Y. Étape 3 — Construire l'échiquier : cette case est $X//Y$. Étape 4 — Conclure : $X//Y$ est le génotype d'un garçon. Le génotype $X//X$ est celui d'une fille, et $Y//Y$ n'existe pas car la mère ne donne jamais de Y.",
+                "answers": [
+                  {
+                    "content": "$X//Y$ : un garçon",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X//X$ : une fille",
+                    "correct": false
+                  },
+                  {
+                    "content": "$Y//Y$ : un garçon",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X//Y$ : une fille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'échiquier du couple $X//X$ (mère) et $X//Y$ (père), ___ cases sur 4 donnent une fille.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Construire l'échiquier : on associe les deux ovules X à un spermatozoïde X ou Y, ce qui donne $X//X$, $X//Y$, $X//X$, $X//Y$. Étape 4 — Conclure : 2 cases sur 4 sont $X//X$, donc 2 cases donnent une fille. La probabilité est $\\frac{2}{4} = \\frac{1}{2}$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur la détermination du sexe chez l'Homme ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Former les gamètes : l'ovule porte toujours X, le spermatozoïde porte X ou Y ; le père décide donc du sexe. Étape 4 — Conclure : l'échiquier donne $\\frac{1}{2}$ pour une fille et $\\frac{1}{2}$ pour un garçon à chaque naissance. Les naissances précédentes ne changent pas cette probabilité, c'est pourquoi l'affirmation sur les trois garçons est fausse.",
+                "answers": [
+                  {
+                    "content": "Le sexe de l'enfant dépend du gamète du père",
+                    "correct": true
+                  },
+                  {
+                    "content": "À chaque naissance, la probabilité d'avoir une fille est $\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sexe de l'enfant dépend de l'ovule de la mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un spermatozoïde porte toujours un chromosome X",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un couple qui a déjà trois garçons a plus de chances d'avoir une fille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour prévoir le sexe d'un enfant.",
+                "question_type": "ordering",
+                "explanation": "On suit la méthode de la fiche. Étape 1 — Écrire les génotypes sexuels des parents. Étape 2 — Former les gamètes. Étape 3 — Construire l'échiquier. Étape 4 — Conclure avec les probabilités. On ne peut pas lire l'échiquier avant de l'avoir construit, ni le construire avant d'avoir les gamètes.",
+                "answers": [
+                  {
+                    "content": "Écrire le génotype sexuel de chaque parent."
+                  },
+                  {
+                    "content": "Former les gamètes de chaque parent."
+                  },
+                  {
+                    "content": "Construire l'échiquier de croisement."
+                  },
+                  {
+                    "content": "Conclure en donnant la probabilité de chaque sexe."
+                  }
+                ]
+              },
+              {
+                "content": "Dans un village, une famille a quatre filles. Un voisin affirme : « La mère ne fait que des filles. » Que peut-on lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : la mère $X//X$ donne seulement des ovules X, elle ne choisit donc rien ; le père $X//Y$ donne X ou Y. Étape 4 — Conclure : à chaque naissance, la probabilité d'une fille est $\\frac{1}{2}$. Quatre filles de suite sont possibles, mais cela ne rend pas le prochain garçon plus probable.",
+                "answers": [
+                  {
+                    "content": "Tous les ovules portent X ; c'est le spermatozoïde du père, X ou Y, qui décide, et chaque enfant a une chance sur deux d'être une fille",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : la mère décide du sexe de ses enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le prochain enfant sera forcément un garçon pour équilibrer la famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le père ne peut donner que des spermatozoïdes X",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser les chromosomes sexuels et l'échiquier pour déterminer le sexe d'un enfant.",
+            "questions": [
+              {
+                "content": "Le génotype sexuel d'une fille s'écrit ___ et celui d'un garçon s'écrit ___.",
+                "question_type": "fill_blank",
+                "hint": "La fille a deux chromosomes identiques.",
+                "explanation": "Étape 1 — Écrire le génotype : une fille a deux chromosomes X ($X//X$), un garçon a un X et un Y ($X//Y$). Ce sont ces deux génotypes que l'on place dans l'échiquier.",
+                "answers": [
+                  {
+                    "content": "X//X",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "XX",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "X//Y",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "XY",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "C'est l'ovule de la mère qui détermine le sexe de l'enfant.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Former les gamètes : tous les ovules portent X. C'est le spermatozoïde, X ou Y, qui fait la différence. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque cellule à ce qu'elle contient comme chromosomes sexuels.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Former les gamètes : la mère est $X//X$, donc chaque ovule porte un X ; le père est $X//Y$, donc un spermatozoïde porte X ou Y. Une cellule du corps (non sexuelle) garde les deux chromosomes sexuels : deux X chez la femme.",
+                "answers": [
+                  {
+                    "content": "Un ovule",
+                    "match": "porte toujours un X"
+                  },
+                  {
+                    "content": "Un spermatozoïde",
+                    "match": "porte un X ou un Y"
+                  },
+                  {
+                    "content": "Une cellule du corps d'une femme",
+                    "match": "possède deux chromosomes X"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces quatre cases d'un échiquier pour $X//X$ et $X//Y$, combien donnent un garçon ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Construire l'échiquier : $X//X$, $X//Y$, $X//X$, $X//Y$. Étape 4 — Conclure : 2 cases sont $X//Y$, donc 2 cases sur 4 donnent un garçon, soit $\\frac{1}{2}$.",
+                "answers": [
+                  {
+                    "content": "2 cases sur 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "1 case sur 4",
+                    "correct": false
+                  },
+                  {
+                    "content": "3 cases sur 4",
+                    "correct": false
+                  },
+                  {
+                    "content": "4 cases sur 4",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire les génotypes d'un caractère récessif lié à X",
+          "remember": "Certains gènes sont portés par le chromosome $X$ et n'ont pas d'équivalent sur le $Y$ : on dit que le caractère est **lié à X**. C'est le cas du **daltonisme** (anomalie de la vision des couleurs : la personne distingue mal certaines couleurs) et de l'**hémophilie** (maladie dans laquelle le sang coagule mal). Ces deux caractères sont **récessifs**. On note $X^{D}$ l'allèle normal et $X^{d}$ l'allèle du daltonisme (pour l'hémophilie : $X^{H}$ et $X^{h}$). **Femme** : $X^{D}//X^{D}$ et $X^{D}//X^{d}$ sont de phénotype [vision normale] (dans le second cas elle est **porteuse**) ; $X^{d}//X^{d}$ est [daltonienne]. **Homme** : $X^{D}//Y$ est [vision normale], $X^{d}//Y$ est [daltonien]. Un homme n'a qu'un seul X : l'allèle récessif s'exprime toujours chez lui, et il n'est jamais porteur sain.",
+          "method": [
+            "Lire le sexe de la personne et son phénotype, écrit entre crochets.",
+            "Choisir les gonosomes : $X//X$ pour une femme, $X//Y$ pour un homme.",
+            "Placer les allèles sur les chromosomes X : un seul chez l'homme, deux chez la femme ; l'allèle récessif ne s'exprime chez la femme qu'en double exemplaire.",
+            "Conclure : écrire le ou les génotypes possibles et dire si la personne est porteuse."
+          ],
+          "example": {
+            "statement": "Pour le daltonisme, $X^{D}$ est l'allèle normal et $X^{d}$ l'allèle récessif. Écrire les génotypes possibles d'une femme de phénotype [vision normale] et d'un homme de phénotype [daltonien].",
+            "steps": [
+              "Lire : la femme est de phénotype [vision normale] ; l'homme est de phénotype [daltonien].",
+              "Choisir : la femme est $X//X$ et l'homme est $X//Y$.",
+              "Placer : l'homme n'a qu'un X, qui porte $d$ puisque le daltonisme s'exprime chez lui. La femme a au moins un allèle $D$, car $d$ est récessif : elle porte $D$ sur ses deux X ou sur un seul.",
+              "Conclure : l'homme est $X^{d}//Y$ (génotype certain) ; la femme est $X^{D}//X^{D}$ ou $X^{D}//X^{d}$, et dans le second cas elle est porteuse."
+            ]
+          },
+          "pitfall": "Ne dis pas qu'un garçon peut être « porteur sain » et ne confonds pas son génotype avec celui d'une fille. Contre-exemple : un garçon daltonien n'a qu'un X, donc il s'écrit $X^{d}//Y$ ; l'écriture $X^{D}//X^{d}$ n'existe que chez une fille. Ne dis pas non plus qu'une fille ne peut jamais être atteinte : une fille $X^{d}//X^{d}$ est daltonienne. Pour une femme de phénotype [vision normale], écris toujours les deux génotypes possibles tant que rien ne permet de choisir.",
+          "figure": null,
+          "exercise": {
+            "title": "Écrire des génotypes pour un caractère lié à X",
+            "statement": "Dans cet exercice, tu écris des génotypes et des phénotypes pour le daltonisme et l'hémophilie, avec la méthode de la fiche. Chaque question rappelle sa notation.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Le daltonisme est récessif et lié au chromosome X ($X^{D}$ : allèle normal, $X^{d}$ : allèle du daltonisme). Quel est le génotype d'un garçon dont la vision des couleurs est normale ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Choisir les gonosomes : un garçon est $X//Y$. Étape 3 — Placer les allèles : il n'a qu'un seul X ; sa vision est normale, donc ce X porte l'allèle normal $D$. Étape 4 — Conclure : il est $X^{D}//Y$. Les génotypes $X^{D}//X^{D}$ et $X^{D}//X^{d}$ sont ceux de filles, et $X^{d}//Y$ celui d'un garçon daltonien.",
+                "answers": [
+                  {
+                    "content": "$X^{D}//Y$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{D}//X^{D}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{D}//X^{d}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{d}//Y$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un homme possède, dans chacune de ses cellules du corps, un seul chromosome X. Combien d'allèles du gène du daltonisme (porté par le X) possède-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Choisir les gonosomes : un homme est $X//Y$. Étape 3 — Placer les allèles : le gène du daltonisme est sur le X, et le Y n'en porte pas d'équivalent. L'homme n'a donc qu'un seul allèle pour ce gène, alors qu'une femme en a deux.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'hémophilie est récessive et liée au chromosome X ($X^{H}$ : allèle normal, $X^{h}$ : allèle de l'hémophilie). Une femme n'est pas hémophile. Quels sont ses deux génotypes possibles ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire le phénotype : la femme est [non hémophile]. Étape 2 — Choisir les gonosomes : elle est $X//X$, ce qui exclut les génotypes avec Y. Étape 3 — Placer les allèles : l'allèle normal $H$ cache l'allèle récessif $h$, donc $X^{H}//X^{H}$ ou $X^{H}//X^{h}$. Le génotype $X^{h}//X^{h}$ est celui d'une femme hémophile.",
+                "answers": [
+                  {
+                    "content": "$X^{H}//X^{H}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{H}//X^{h}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{h}//X^{h}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{H}//Y$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{h}//Y$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une femme de génotype $X^{H}//X^{h}$ (hémophilie) n'est pas hémophile mais elle porte un allèle $h$ : on dit qu'elle est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Placer les allèles : $X^{H}//X^{h}$ a un allèle normal et un allèle récessif $h$ qui ne s'exprime pas. Étape 4 — Conclure : c'est une femme porteuse. Elle peut transmettre l'allèle $h$ à ses enfants.",
+                "answers": [
+                  {
+                    "content": "porteuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "porteuse saine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour qu'une femme soit hémophile, il faut que l'allèle $h$ soit présent sur ses deux chromosomes X.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Placer les allèles : l'allèle $h$ est récessif, il ne s'exprime chez la femme que s'il est en double exemplaire, donc $X^{h}//X^{h}$. Avec un seul $h$, l'allèle normal $H$ le cache. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Kofi est daltonien ($X^{d}$ : allèle du daltonisme, $X^{D}$ : allèle normal). Un élève écrit que son génotype est $X^{D}//X^{d}$ « parce qu'il est porteur ». Quelle correction faut-il apporter ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Choisir les gonosomes : Kofi est un garçon, donc $X//Y$ ; le génotype de l'élève, à deux X, est celui d'une fille. Étape 3 — Placer les allèles : Kofi n'a qu'un X, sans second allèle pour cacher $d$ ; l'allèle $d$ s'exprime, Kofi est daltonien. Étape 4 — Conclure : $X^{d}//Y$. Un garçon n'est jamais « porteur sain » d'un allèle lié à X.",
+                "answers": [
+                  {
+                    "content": "Kofi est $X^{d}//Y$ : il n'a qu'un X, donc l'allèle $d$ s'exprime ; il est atteint, pas porteur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Kofi est $X^{d}//X^{d}$, comme toute personne daltonienne",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève a raison : un garçon peut être porteur comme une fille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Kofi est $X^{D}//Y$ : un garçon ne peut pas être daltonien",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à écrire les génotypes d'un caractère récessif lié à X.",
+            "questions": [
+              {
+                "content": "Une femme est daltonienne si l'allèle $d$ est présent sur ses ___ chromosomes X ; un homme l'est dès qu'il est présent sur son ___ chromosome X.",
+                "question_type": "fill_blank",
+                "hint": "Une femme a deux X, un homme n'en a qu'un.",
+                "explanation": "Étape 3 — Placer les allèles : l'allèle $d$ est récessif. Chez la femme, il faut deux exemplaires ($X^{d}//X^{d}$). Chez l'homme, le seul X suffit ($X^{d}//Y$), car aucun autre allèle ne le cache.",
+                "answers": [
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "seul",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "unique",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour l'hémophilie ($X^{H}$ : allèle normal, $X^{h}$ : allèle de l'hémophilie), quel est le génotype d'un homme hémophile ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Choisir les gonosomes : un homme est $X//Y$. Étape 3 — Placer les allèles : son seul X porte l'allèle $h$ puisqu'il est hémophile. Étape 4 — Conclure : $X^{h}//Y$.",
+                "answers": [
+                  {
+                    "content": "$X^{h}//Y$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{h}//X^{h}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{H}//X^{h}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{H}//Y$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un homme peut être porteur sain du daltonisme, comme une femme $X^{D}//X^{d}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Placer les allèles : un homme n'a qu'un seul allèle du gène, porté par son X. Si c'est $d$, il est daltonien ; si c'est $D$, il a une vision normale. Il n'existe pas d'homme porteur sain pour un caractère récessif lié à X.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une femme a pour génotype $X^{d}//X^{d}$ pour le daltonisme ($X^{d}$ : allèle du daltonisme). Que peut-on dire d'elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le phénotype à partir du génotype. Étape 3 — Placer les allèles : l'allèle récessif est en double exemplaire, rien ne le cache. Étape 4 — Conclure : elle est daltonienne. Être une femme ne protège pas quand les deux X portent $d$.",
+                "answers": [
+                  {
+                    "content": "Elle est daltonienne : l'allèle $d$ est présent sur ses deux X",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est porteuse saine de vision normale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a une vision normale car elle est une femme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est $X^{d}//Y$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Prévoir la descendance d'un couple pour un caractère lié à X",
+          "remember": "Un **garçon** ($X//Y$) reçoit son $X$ de sa **mère** et son $Y$ de son **père**. Une **fille** ($X//X$) reçoit un $X$ de chaque parent. Pour un caractère récessif lié à X, on construit l'**échiquier de croisement** avec les allèles portés par les X. Trois cas à connaître. **Mère porteuse** ($X^{D}//X^{d}$) et père de vision normale : la moitié des ovules portent $X^{d}$ ; les filles sont toutes de vision normale, la moitié sont porteuses ; un garçon sur deux est daltonien. **Père atteint** et mère $X^{D}//X^{D}$ : les filles sont toutes porteuses, les fils sont tous de vision normale. **Mère atteinte** et père de vision normale : tous les fils sont atteints. Chaque case de l'échiquier a la même probabilité.",
+          "method": [
+            "Écrire les génotypes des deux parents d'après leur sexe et leur phénotype.",
+            "Former les gamètes de chaque parent, avec leur probabilité.",
+            "Construire l'échiquier de croisement : associer chaque gamète de la mère à chaque gamète du père, case par case.",
+            "Conclure : lire le sexe et le phénotype de chaque case, puis donner chaque probabilité en fraction."
+          ],
+          "example": {
+            "statement": "Pour le daltonisme, $X^{D}$ est l'allèle normal et $X^{d}$ l'allèle récessif lié à X. Une femme porteuse ($X^{D}//X^{d}$) et un homme de vision normale attendent un enfant. Quels enfants sont possibles, avec quelles probabilités ?",
+            "steps": [
+              "Écrire : la mère est $X^{D}//X^{d}$ ; le père, un homme de vision normale, est $X^{D}//Y$.",
+              "Former les gamètes : la mère donne $X^{D}$ ou $X^{d}$, chacun avec la probabilité $\\frac{1}{2}$ ; le père donne $X^{D}$ ou $Y$, chacun avec la probabilité $\\frac{1}{2}$.",
+              "Construire l'échiquier : 4 cases, $X^{D}//X^{D}$, $X^{D}//Y$, $X^{D}//X^{d}$ et $X^{d}//Y$, chacune avec la probabilité $\\frac{1}{4}$.",
+              "Conclure : fille [vision normale] $\\frac{1}{4}$, fille [vision normale] et porteuse $\\frac{1}{4}$, garçon [vision normale] $\\frac{1}{4}$, garçon [daltonien] $\\frac{1}{4}$. Aucune fille n'est daltonienne."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'un père atteint transmet son allèle à ses fils : il leur donne son $Y$, jamais son $X$. Contre-exemple : un père daltonien ($X^{d}//Y$) et une mère $X^{D}//X^{D}$ ont quatre enfants, deux garçons et deux filles. Les deux garçons sont $X^{D}//Y$ et ont une vision normale ; les deux filles sont $X^{D}//X^{d}$ et sont porteuses. Le caractère « saute » une génération. Ne confonds pas non plus « un garçon sur deux » (parmi les garçons) et « un enfant sur quatre » (parmi tous les enfants).",
+          "figure": "croisement-liee-a-x",
+          "exercise": {
+            "title": "Prévoir les enfants d'un couple : daltonisme et hémophilie",
+            "statement": "Dans cet exercice, tu prévois les enfants de couples dont l'un des parents porte un allèle récessif lié à X, avec l'échiquier de croisement. Chaque question rappelle ses génotypes.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour le daltonisme ($X^{D}$ : allèle normal, $X^{d}$ : allèle récessif lié à X), une mère daltonienne ($X^{d}//X^{d}$) et un père de vision normale ($X^{D}//Y$) ont des enfants. Quels sont leurs phénotypes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : la mère ne donne que $X^{d}$ ; le père donne $X^{D}$ ou $Y$. Étape 3 — Construire l'échiquier : les cases sont $X^{D}//X^{d}$ (fille) et $X^{d}//Y$ (garçon), chacune avec la probabilité $\\frac{1}{2}$. Étape 4 — Conclure : toutes les filles sont [vision normale] et porteuses, tous les garçons sont [daltoniens]. Un garçon reçoit son X de sa mère : ici c'est toujours $X^{d}$.",
+                "answers": [
+                  {
+                    "content": "Tous les garçons sont daltoniens ; toutes les filles sont de vision normale et porteuses",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tous les enfants sont daltoniens",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les filles sont daltoniennes et les garçons de vision normale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un garçon sur deux est daltonien et les filles sont toutes de vision normale, sans allèle $d$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour l'hémophilie ($X^{H}$ : allèle normal, $X^{h}$ : allèle récessif lié à X), un père hémophile ($X^{h}//Y$) et une mère porteuse ($X^{H}//X^{h}$) attendent un enfant. Quelle est la probabilité que ce soit une fille hémophile ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les génotypes : $X^{H}//X^{h}$ et $X^{h}//Y$. Étape 2 — Former les gamètes : la mère donne $X^{H}$ ou $X^{h}$, le père $X^{h}$ ou $Y$. Étape 3 — Construire l'échiquier : $X^{H}//X^{h}$, $X^{H}//Y$, $X^{h}//X^{h}$, $X^{h}//Y$, chacun avec la probabilité $\\frac{1}{4}$. Étape 4 — Conclure : une seule case est une fille $X^{h}//X^{h}$, donc la probabilité est $\\frac{1}{4}$. Une fille hémophile est possible quand le père est hémophile et la mère porteuse.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{2}{4}$ pour les filles seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "0, car l'hémophilie ne touche pas les filles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une mère $X^{H}//X^{h}$ porteuse de l'hémophilie et un père $X^{H}//Y$ non hémophile : aucune de leurs filles n'est hémophile.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Former les gamètes : le père donne $X^{H}$ ou $Y$. Une fille reçoit le $X$ de son père, donc $X^{H}$. Étape 3 — Construire l'échiquier : les filles sont $X^{H}//X^{H}$ ou $X^{H}//X^{h}$. Étape 4 — Conclure : aucune fille n'est $X^{h}//X^{h}$, donc aucune n'est hémophile ; la moitié d'entre elles sont porteuses.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour le daltonisme, une mère $X^{D}//X^{d}$ et un père daltonien $X^{d}//Y$ ont un garçon. Quelle est la probabilité que ce garçon soit daltonien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : la mère donne $X^{D}$ ou $X^{d}$ ; un garçon reçoit le Y de son père. Étape 3 — Construire l'échiquier : les deux cases de garçons sont $X^{D}//Y$ et $X^{d}//Y$. Étape 4 — Conclure : un garçon sur deux est daltonien, soit $\\frac{1}{2}$. Le chiffre $\\frac{1}{4}$ serait la probabilité qu'un enfant, fille ou garçon, soit un garçon daltonien.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "1, car son père est daltonien",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un garçon reçoit son chromosome X de sa ___ et son chromosome Y de son père.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Former les gamètes : le père donne X ou Y ; un garçon est $X//Y$, donc il a reçu le Y de son père. Son X vient nécessairement de l'ovule de sa mère.",
+                "answers": [
+                  {
+                    "content": "mère",
+                    "correct": true
+                  },
+                  {
+                    "content": "maman",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour l'hémophilie, un père hémophile ($X^{h}//Y$) et une mère $X^{H}//X^{H}$ ont une fille. Quel est le génotype de cette fille ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : le père donne $X^{h}$ ou $Y$ ; une fille reçoit son X, donc $X^{h}$. La mère ne donne que $X^{H}$. Étape 3 — Construire l'échiquier : toutes les filles sont $X^{H}//X^{h}$. Étape 4 — Conclure : la fille est porteuse. Elle n'est pas hémophile, car l'allèle normal de sa mère cache $h$.",
+                "answers": [
+                  {
+                    "content": "$X^{H}//X^{h}$ : elle est porteuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{h}//X^{h}$ : elle est hémophile",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{H}//X^{H}$ : elle est comme sa mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{h}//Y$ : elle est hémophile",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à former les gamètes et à construire l'échiquier pour un caractère lié à X.",
+            "questions": [
+              {
+                "content": "Un père transmet son chromosome ___ à toutes ses filles et son chromosome ___ à tous ses fils.",
+                "question_type": "fill_blank",
+                "hint": "Pense au spermatozoïde qui donne une fille, puis à celui qui donne un garçon.",
+                "explanation": "Étape 2 — Former les gamètes : le père $X//Y$ donne soit X, soit Y. Un spermatozoïde X donne une fille, un spermatozoïde Y donne un garçon. Un père transmet donc son X à ses filles et son Y à ses fils.",
+                "answers": [
+                  {
+                    "content": "X",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Y",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une mère porteuse $X^{D}//X^{d}$ forme des ovules. Quelle est la probabilité qu'un ovule porte l'allèle $d$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Former les gamètes : la mère a deux X, un avec $D$ et un avec $d$. Chaque ovule en reçoit un seul, avec une chance sur deux pour chacun : la probabilité est $\\frac{1}{2}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "1",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une mère daltonienne ($X^{d}//X^{d}$) et un père daltonien ($X^{d}//Y$) : tous leurs enfants sont daltoniens.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Former les gamètes : la mère ne donne que $X^{d}$ ; le père donne $X^{d}$ ou $Y$. Étape 3 — Construire l'échiquier : les cases sont $X^{d}//X^{d}$ et $X^{d}//Y$. Étape 4 — Conclure : tous les enfants sont daltoniens, filles comme garçons.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Explique en quelques lignes pourquoi une mère porteuse de l'hémophilie, qui n'est pas hémophile, peut avoir un fils hémophile.",
+                "question_type": "written",
+                "starter": "La mère est $X^{H}//X^{h}$…",
+                "explanation": "Corrigé modèle : La mère est $X^{H}//X^{h}$ : elle n'est pas hémophile car l'allèle normal cache $h$. Elle forme des ovules $X^{H}$ ou $X^{h}$, chacun avec la probabilité $\\frac{1}{2}$. Un fils reçoit son X de sa mère et son Y de son père. S'il reçoit l'ovule $X^{h}$, il est $X^{h}//Y$ : aucun second allèle ne cache $h$, il est hémophile. Il faut donc : écrire le génotype de la mère, dire qu'un ovule sur deux porte $X^{h}$, rappeler l'origine du X et du Y du fils, et conclure $X^{h}//Y$.",
+                "answers": []
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître une hérédité liée au sexe avec un arbre généalogique",
+          "remember": "Un **arbre généalogique** range les personnes par générations (I, II, III) : un carré représente un homme, un rond une femme, et une personne atteinte est colorée. On le décrit ici en texte (I-1, I-2, II-1…). Quand l'allèle d'une maladie est récessif, on cherche si le gène est sur un autosome ou sur le chromosome X. **Indices en faveur de X** : les atteints sont surtout des garçons ; un garçon atteint naît d'une mère non atteinte (porteuse) ; une fille atteinte a un père atteint. **Indices d'exclusion** (la maladie n'est pas liée à X) : une **fille atteinte dont le père est sain** ; une **mère atteinte dont un fils est sain**. Sans exclusion, on conclut seulement « liée à X est **possible** ».",
+          "method": [
+            "Lire l'arbre : noter, pour chaque personne, son sexe et son phénotype.",
+            "Repérer les indices : sexe des atteints, phénotype des parents, présence d'une fille ou d'une mère atteinte.",
+            "Tester l'hypothèse « liée à X » : écrire les génotypes qu'elle impose et chercher une contradiction.",
+            "Conclure : « liée à X » impossible donc autosomale ; sinon « liée à X » possible, sans l'affirmer."
+          ],
+          "example": {
+            "statement": "Famille fictive d'un village. Le daltonisme est ici récessif. Génération I : I-1 (homme) et I-2 (femme) ont une vision normale. Génération II : leur fils II-1 est daltonien ; leur fille II-2 a une vision normale ; elle épouse II-3, un homme de vision normale. Génération III : leur fils III-1 est daltonien ; leur fille III-2 a une vision normale. L'hérédité peut-elle être liée à X ?",
+            "steps": [
+              "Lire : les deux personnes atteintes, II-1 et III-1, sont des garçons ; les parents de II-1 et la mère de III-1 ont une vision normale ; les deux filles, II-2 et III-2, ont une vision normale.",
+              "Repérer : seuls des garçons sont atteints, et chacun est né d'une mère non atteinte ; il n'y a ni fille atteinte ni mère atteinte, donc aucun indice d'exclusion.",
+              "Tester : I-2 est $X^{D}//X^{d}$ (II-1 est $X^{d}//Y$ et a reçu son X d'elle) ; II-2 est $X^{D}//X^{d}$ (III-1 est $X^{d}//Y$ et a reçu son X de sa mère) ; I-1 et II-3 sont $X^{D}//Y$. Aucune contradiction.",
+              "Conclure : l'hypothèse « liée à X » est possible et cohérente avec toute la famille ; on ne peut pas exclure une transmission autosomale avec cet arbre seul."
+            ]
+          },
+          "pitfall": "Ne confonds pas « possible » et « prouvé ». Contre-exemple : deux parents $N//a$ ont trois enfants, un garçon $a//a$ et deux filles saines. Un seul garçon atteint, deux parents sains : on pourrait croire à une maladie liée à X, alors que la maladie est autosomale, car chaque enfant de parents $N//a$ a une probabilité $\\frac{1}{4}$ d'être $a//a$, fille comme garçon. Sans fille atteinte ni mère atteinte, écris « liée à X possible ». Et si un indice d'exclusion apparaît, conclus sans hésiter à une transmission autosomale.",
+          "figure": null,
+          "exercise": {
+            "title": "Lire un arbre généalogique : autosomique ou liée à X ?",
+            "statement": "Dans cet exercice, tu lis des familles fictives décrites en texte et tu juges si l'hérédité d'une maladie peut être liée à X, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une famille fictive, une maladie héréditaire a un allèle récessif. La mère I-2 est atteinte ; le père I-1 n'est pas atteint ; leur fils II-1 n'est pas atteint. La maladie peut-elle être liée à X ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : I-2 est une femme atteinte, II-1 est un garçon non atteint. Étape 2 — Repérer les indices : une mère atteinte dont un fils est sain. Étape 3 — Tester l'hypothèse « liée à X » : I-2 serait $X^{h}//X^{h}$ et donnerait toujours $X^{h}$ à son fils, qui serait $X^{h}//Y$, donc atteint : contradiction. Étape 4 — Conclure : la maladie n'est pas liée à X. Elle ne touche pas que les hommes : une femme peut être atteinte si elle est $X^{h}//X^{h}$.",
+                "answers": [
+                  {
+                    "content": "Non : une mère atteinte aurait tous ses fils atteints si la maladie était liée à X",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : le père n'est pas atteint, donc elle est liée à X",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : un seul enfant ne permet jamais d'exclure",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : une maladie liée à X ne touche jamais les femmes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour un caractère récessif lié à X, une fille atteinte a forcément un père atteint.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Tester l'hypothèse « liée à X » : une fille atteinte est $X^{h}//X^{h}$ ; elle a reçu l'un de ses deux $X^{h}$ de son père, qui est donc $X^{h}//Y$ et atteint. Si le père est sain, la maladie n'est pas liée à X (étape 4).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour une maladie récessive liée à X, quelles sont les deux observations compatibles avec cette hypothèse ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Repérer les indices. Étape 3 — Tester l'hypothèse « liée à X » : un garçon atteint $X^{h}//Y$ reçoit son X de sa mère, qui peut être porteuse $X^{H}//X^{h}$ ; une fille atteinte $X^{h}//X^{h}$ a un père $X^{h}//Y$ atteint. En revanche, un père sain ne peut pas avoir de fille atteinte, une mère atteinte a tous ses fils atteints, et le Y ne porte pas l'allèle.",
+                "answers": [
+                  {
+                    "content": "Un garçon atteint dont la mère n'est pas atteinte (mère porteuse)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une fille atteinte dont le père est atteint",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une fille atteinte dont le père n'est pas atteint",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une mère atteinte dont un fils n'est pas atteint",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un père atteint dont le fils a reçu l'allèle par le chromosome Y",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un caractère récessif lié à X touche beaucoup plus souvent les ___ que les filles.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer les indices : le garçon n'a qu'un X, donc un seul allèle récessif suffit pour qu'il soit atteint. La fille doit avoir l'allèle sur ses deux X. Les atteints sont donc surtout des garçons.",
+                "answers": [
+                  {
+                    "content": "garçons",
+                    "correct": true
+                  },
+                  {
+                    "content": "garçon",
+                    "correct": true
+                  },
+                  {
+                    "content": "hommes",
+                    "correct": true
+                  },
+                  {
+                    "content": "homme",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour une maladie récessive liée à X, I-1 (homme) est atteint, I-2 (femme, $X^{H}//X^{H}$) n'est pas atteinte. Leur fille II-1 n'est pas atteinte ; elle a avec un homme non atteint un fils III-1 atteint. De qui III-1 a-t-il reçu son X porteur de l'allèle de la maladie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : I-1 est $X^{h}//Y$ ; I-2 est $X^{H}//X^{H}$. Étape 3 — Tester l'hypothèse « liée à X » : II-1 reçoit $X^{h}$ de son père et $X^{H}$ de sa mère, elle est $X^{H}//X^{h}$, porteuse. Son fils III-1 reçoit le Y de son père et son X de sa mère : s'il est atteint, c'est qu'il a reçu $X^{h}$ de II-1. Étape 4 — Conclure : l'hypothèse est compatible. Le père de III-1 n'est pas atteint et donne son Y.",
+                "answers": [
+                  {
+                    "content": "De sa mère II-1, qui l'avait reçu de son père I-1",
+                    "correct": true
+                  },
+                  {
+                    "content": "De son père, qui n'est pas atteint",
+                    "correct": false
+                  },
+                  {
+                    "content": "Directement de sa grand-mère I-2",
+                    "correct": false
+                  },
+                  {
+                    "content": "De son père et de sa mère à la fois",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, un seul garçon est atteint d'une maladie récessive. Ses parents et sa sœur ne sont pas atteints. Un élève écrit : « Elle est liée à X, c'est certain. » Que faut-il répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : un seul garçon atteint, parents et sœur sains. Étape 2 — Repérer les indices : aucun indice d'exclusion (pas de fille atteinte, pas de mère atteinte). Étape 3 — Tester l'hypothèse : la mère serait porteuse $X^{H}//X^{h}$, c'est possible ; mais des parents $N//a$ peuvent aussi avoir un enfant $a//a$ de n'importe quel sexe. Étape 4 — Conclure : on écrit « liée à X possible », sans l'affirmer.",
+                "answers": [
+                  {
+                    "content": "« Liée à X » est possible, mais pas prouvé : une transmission autosomale récessive est aussi possible",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'élève a raison : seul un garçon est atteint",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève a tort : une maladie récessive n'est jamais liée à X",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève a raison : les parents ne sont pas atteints",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une hérédité liée à X dans un arbre généalogique.",
+            "questions": [
+              {
+                "content": "Pour un caractère récessif lié à X, une mère atteinte a tous ses ___ atteints, et un père atteint transmet son X à toutes ses ___.",
+                "question_type": "fill_blank",
+                "hint": "Un garçon reçoit son X de sa mère.",
+                "explanation": "Étape 3 — Tester l'hypothèse « liée à X » : une mère atteinte $X^{h}//X^{h}$ ne donne que $X^{h}$, donc tous ses fils sont $X^{h}//Y$. Un père atteint $X^{h}//Y$ donne son X à ses filles et son Y à ses fils.",
+                "answers": [
+                  {
+                    "content": "fils",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "garçons",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "filles",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Si seuls des garçons sont atteints dans une famille, la maladie est forcément liée à X.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : sans indice d'exclusion, on dit seulement « liée à X possible ». Une maladie autosomale récessive peut aussi n'atteindre que des garçons, par hasard dans une petite famille.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, une maladie est due à un allèle récessif. Une fille est atteinte et son père n'est pas atteint. Que conclut-on pour la transmission ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer les indices : une fille atteinte dont le père est sain. Étape 3 — Tester l'hypothèse « liée à X » : la fille serait $X^{h}//X^{h}$ et aurait reçu un $X^{h}$ de son père, qui serait atteint : contradiction. Étape 4 — Conclure : la transmission est autosomale.",
+                "answers": [
+                  {
+                    "content": "Elle n'est pas liée à X : elle est autosomale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est liée à X, car une fille est atteinte",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien dire sur la transmission",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est liée à X, car le père est sain",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une famille de village attend un enfant",
+          "statement": "Dans un village, Mme Akissi et M. Brou, éleveur de poulets, attendent leur troisième enfant. Ils ont déjà deux fils. Akissi a pour génotype sexuel $X//X$ et Brou a pour génotype sexuel $X//Y$. Dans cet exercice, tu appliques la détermination chromosomique du sexe chez l'Homme aux enfants de cette famille humaine.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le caryotype d'un fœtus de ce couple montre ___ paires d'autosomes et une paire de chromosomes sexuels.",
+              "question_type": "fill_blank",
+              "explanation": "On rappelle l'acquis du caryotype : une cellule du corps humain compte 23 paires de chromosomes, soit 46. Une de ces paires est celle des chromosomes sexuels ; les 22 autres paires sont des autosomes, identiques chez la fille et le garçon.",
+              "answers": [
+                {
+                  "content": "22",
+                  "correct": true
+                },
+                {
+                  "content": "vingt-deux",
+                  "correct": true
+                },
+                {
+                  "content": "vingt deux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels gamètes Akissi, de génotype sexuel $X//X$, peut-elle produire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : étape 1, écrire le génotype de la mère ($X//X$) ; étape 2, former ses gamètes. Chaque ovule reçoit un seul des deux X : tous les ovules portent X. Un ovule Y est impossible, car la mère n'a pas de Y.",
+              "answers": [
+                {
+                  "content": "Seulement des ovules qui portent un chromosome X",
+                  "correct": true
+                },
+                {
+                  "content": "Des ovules X et des ovules Y, en nombre égal",
+                  "correct": false
+                },
+                {
+                  "content": "Des ovules qui portent un X ou aucun chromosome sexuel",
+                  "correct": false
+                },
+                {
+                  "content": "Seulement des ovules qui portent un Y",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la probabilité que le troisième enfant d'Akissi et de Brou soit une fille ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode complète. Étape 1 : mère $X//X$, père $X//Y$. Étape 2 : la mère donne $X$ ; le père donne $X$ ou $Y$. Étape 3 : échiquier à 4 cases, $X//X$, $X//Y$, $X//X$, $X//Y$. Étape 4 : 2 cases sur 4 sont $X//X$, donc la probabilité d'une fille est $\\frac{2}{4} = \\frac{1}{2}$. Le fait d'avoir déjà deux fils ne change rien.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{3}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "1, car le couple a déjà deux fils",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Comme le couple a déjà deux fils, le troisième enfant a plus de chances d'être une fille.",
+              "question_type": "true_false",
+              "explanation": "Chaque naissance est un nouveau croisement. Le père produit des spermatozoïdes X et Y en proportions égales, et la mère ne donne que des ovules X. La probabilité d'une fille reste $\\frac{1}{2}$ à chaque naissance, quels que soient les enfants déjà nés. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les deux fils du couple sont $X//Y$. Quelles sont les deux affirmations exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Un garçon est $X//Y$. Le Y ne peut venir que du père, car la mère n'a pas de Y ; le X vient donc de la mère. Le père donne soit X (fille), soit Y (garçon). Dire que le fils a reçu son X de son père est faux : le père lui a donné son Y.",
+              "answers": [
+                {
+                  "content": "Chaque fils a reçu son chromosome Y de son père",
+                  "correct": true
+                },
+                {
+                  "content": "Chaque fils a reçu son chromosome X de sa mère",
+                  "correct": true
+                },
+                {
+                  "content": "Chaque fils a reçu son chromosome X de son père",
+                  "correct": false
+                },
+                {
+                  "content": "Akissi aurait pu produire un ovule Y",
+                  "correct": false
+                },
+                {
+                  "content": "Le sexe des fils a été décidé par l'ovule",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi c'est le père, et non la mère, qui détermine le sexe de l'enfant.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que tous les ovules portent un X",
+                "Dit que le spermatozoïde porte X ou Y",
+                "Relie le spermatozoïde X à une fille et le spermatozoïde Y à un garçon"
+              ],
+              "starter": "Tous les ovules de la mère portent…",
+              "explanation": "Corrigé modèle : La mère est $X//X$ : tous ses ovules portent un X. Le père est $X//Y$ : la moitié de ses spermatozoïdes portent X et l'autre moitié Y. Si un spermatozoïde X féconde l'ovule, l'enfant est $X//X$, une fille ; si c'est un spermatozoïde Y, l'enfant est $X//Y$, un garçon. Le sexe dépend donc du spermatozoïde, c'est-à-dire du père. Points : ovules (0,5), spermatozoïdes (0,5), lien avec le sexe (1).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le dépistage du daltonisme à l'école du village",
+          "statement": "Lors d'un dépistage à l'école d'un village, l'infirmier explique que le daltonisme est une anomalie de la vision des couleurs : la personne distingue mal certaines couleurs, le rouge et le vert le plus souvent. Il est récessif et lié au chromosome X : on note $X^{D}$ l'allèle normal et $X^{d}$ l'allèle du daltonisme. Le petit Yao est daltonien. Sa mère Mariam et son père Salif ont une vision normale. Sa sœur Fanta a une vision normale. Famille fictive.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le génotype de Yao, qui est daltonien ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : Yao est un garçon daltonien. Étape 2 : il est $X//Y$. Étape 3 : son seul X porte l'allèle $d$, qui s'exprime sans second allèle pour le cacher. Il est donc $X^{d}//Y$. Un garçon ne peut pas être $X^{d}//X^{d}$, génotype à deux X.",
+              "answers": [
+                {
+                  "content": "$X^{d}//Y$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{d}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le génotype de Salif, le père, qui a une vision normale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : Salif est un homme de phénotype [vision normale]. Étape 2 : il est $X//Y$. Étape 3 : son seul X porte l'allèle normal $D$ puisque sa vision est normale. Il est $X^{D}//Y$ : un homme n'est jamais porteur.",
+              "answers": [
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{d}//Y$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{D}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le génotype de Mariam, la mère, qui a une vision normale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : Mariam est une femme de phénotype [vision normale]. Elle peut être $X^{D}//X^{D}$ ou $X^{D}//X^{d}$. Étape 2 : Yao est $X^{d}//Y$ et a reçu son X de sa mère : Mariam a donc un $X^{d}$. Étape 4 : comme elle a une vision normale, elle est $X^{D}//X^{d}$, porteuse. Elle ne peut pas être $X^{d}//X^{d}$, sinon elle serait daltonienne.",
+              "answers": [
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{D}//X^{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{d}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{d}//Y$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam ($X^{D}//X^{d}$) et Salif ($X^{D}//Y$) attendent un quatrième enfant. Quelle est la probabilité que ce soit une fille daltonienne ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode complète. Étape 1 : mère $X^{D}//X^{d}$, père $X^{D}//Y$. Étape 2 : la mère donne $X^{D}$ ou $X^{d}$ ; le père donne $X^{D}$ ou $Y$. Étape 3 : échiquier $X^{D}//X^{D}$, $X^{D}//Y$, $X^{D}//X^{d}$, $X^{d}//Y$. Étape 4 : les deux cases de filles sont $X^{D}//X^{D}$ et $X^{D}//X^{d}$ : aucune n'est daltonienne, la probabilité est 0. Chaque fille a reçu le $X^{D}$ de son père.",
+              "answers": [
+                {
+                  "content": "0 : toutes les filles reçoivent le $X^{D}$ de leur père",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{1}{8}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le même couple, quelle est la probabilité que le quatrième enfant soit un garçon daltonien ?",
+              "question_type": "single_choice",
+              "explanation": "L'échiquier du couple donne 4 cases équiprobables : $X^{D}//X^{D}$, $X^{D}//Y$, $X^{D}//X^{d}$, $X^{d}//Y$. Une seule case est un garçon daltonien $X^{d}//Y$ : la probabilité est $\\frac{1}{4}$ pour un enfant quelconque. Parmi les seuls garçons, ce serait $\\frac{1}{2}$ : il faut bien lire la question.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{3}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fanta, la sœur de Yao, qui a une vision normale, peut être porteuse de l'allèle $d$.",
+              "question_type": "true_false",
+              "explanation": "Fanta est une fille de Mariam ($X^{D}//X^{d}$) et de Salif ($X^{D}//Y$). Elle reçoit $X^{D}$ de son père, et $X^{D}$ ou $X^{d}$ de sa mère, avec une chance sur deux chacun. Elle est donc $X^{D}//X^{D}$ ou $X^{D}//X^{d}$ : elle peut être porteuse, sans être daltonienne.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une maladie du sang dans une famille : l'hémophilie",
+          "statement": "L'hémophilie est une maladie héréditaire dans laquelle le sang coagule mal. Elle est due à un allèle récessif $X^{h}$ porté par le chromosome X ($X^{H}$ : allèle normal). Famille fictive d'éleveurs de volailles d'un village. Génération I : I-1 (homme) et I-2 (femme) ne sont pas atteints. Génération II : leur fils II-1 est hémophile ; leur fille II-2 n'est pas atteinte ; elle épouse II-3, un homme non atteint. Génération III : leur fils III-1 est hémophile ; leur fille III-2 n'est pas atteinte.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le génotype de II-1, le fils hémophile ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : II-1 est un garçon, donc $X//Y$. Étape 2 : il est hémophile, et son seul X porte l'allèle récessif, qui s'exprime sans second allèle pour le cacher. Étape 3 : son génotype est $X^{h}//Y$. Les autres propositions ne conviennent pas : $X^{H}//Y$ est celui d'un garçon non atteint, et les génotypes à deux X sont ceux de filles.",
+              "answers": [
+                {
+                  "content": "$X^{h}//Y$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{H}//Y$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{h}//X^{h}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{H}//X^{h}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que peut-on affirmer sur I-2, la mère de II-1 ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Un garçon reçoit son X de sa mère et son Y de son père. II-1 est $X^{h}//Y$, donc il a reçu $X^{h}$ de I-2. I-2 n'est pas atteinte : elle a un allèle normal qui cache $h$, donc elle est $X^{H}//X^{h}$, porteuse. I-1 a donné son Y à son fils et ne peut pas lui avoir transmis $X^{h}$.",
+              "answers": [
+                {
+                  "content": "Elle est porteuse : son génotype est $X^{H}//X^{h}$",
+                  "correct": true
+                },
+                {
+                  "content": "Elle a transmis $X^{h}$ à son fils II-1",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est hémophile",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a le génotype $X^{H}//X^{H}$",
+                  "correct": false
+                },
+                {
+                  "content": "C'est I-1 qui a transmis $X^{h}$ à II-1",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le génotype de II-2, fille non atteinte, sachant que son fils III-1 est hémophile et que son mari II-3 n'est pas atteint ?",
+              "question_type": "single_choice",
+              "explanation": "III-1 est $X^{h}//Y$ : il a reçu son Y de son père II-3 et son X de sa mère II-2. II-2 a donc un $X^{h}$. Comme elle n'est pas atteinte, elle a aussi un $X^{H}$ : elle est $X^{H}//X^{h}$, porteuse. Elle ne peut pas être $X^{h}//X^{h}$, sinon elle serait hémophile.",
+              "answers": [
+                {
+                  "content": "$X^{H}//X^{h}$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{H}//X^{H}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{h}//X^{h}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{H}//Y$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "II-2 ($X^{H}//X^{h}$) et II-3 ($X^{H}//Y$) attendent un enfant. Quelle est la probabilité que ce soit un garçon hémophile ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode complète. Étape 1 : mère $X^{H}//X^{h}$, père $X^{H}//Y$. Étape 2 : la mère donne $X^{H}$ ou $X^{h}$, le père $X^{H}$ ou $Y$. Étape 3 : échiquier $X^{H}//X^{H}$, $X^{H}//Y$, $X^{H}//X^{h}$, $X^{h}//Y$, chacune avec la probabilité $\\frac{1}{4}$. Étape 4 : une seule case est $X^{h}//Y$ : la probabilité est $\\frac{1}{4}$.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{3}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Toutes les filles de II-2 et II-3 sont porteuses de l'allèle $h$.",
+              "question_type": "true_false",
+              "explanation": "Les filles reçoivent $X^{H}$ de leur père II-3. De leur mère, elles reçoivent $X^{H}$ ou $X^{h}$ avec la probabilité $\\frac{1}{2}$ chacun. Elles sont donc $X^{H}//X^{H}$ ou $X^{H}//X^{h}$ : seule la moitié d'entre elles environ est porteuse. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Construis l'échiquier de croisement du couple II-2 ($X^{H}//X^{h}$) et II-3 ($X^{H}//Y$) et donne la probabilité de chaque type d'enfant.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Écrit les gamètes de chaque parent avec leur probabilité",
+                "Construit un échiquier de 4 cases correct",
+                "Nomme le sexe et le phénotype de chaque case",
+                "Donne chaque probabilité en fraction ($\\frac{1}{4}$)"
+              ],
+              "starter": "Gamètes de la mère : $X^{H}$ ou…",
+              "explanation": "Corrigé modèle : Gamètes de la mère : $X^{H}$ ou $X^{h}$, chacun avec $\\frac{1}{2}$ ; gamètes du père : $X^{H}$ ou $Y$, chacun avec $\\frac{1}{2}$. Échiquier : $X^{H}//X^{H}$ (fille non atteinte), $X^{H}//Y$ (garçon non atteint), $X^{H}//X^{h}$ (fille porteuse), $X^{h}//Y$ (garçon hémophile), chacun avec la probabilité $\\frac{1}{4}$. Aucune fille n'est hémophile ; un enfant sur quatre est un garçon hémophile. Points : gamètes (1), échiquier (1), phénotypes (1), probabilités (1).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Deux familles, deux transmissions : autosomique ou liée à X",
+          "statement": "Deux familles fictives d'un même village sont suivies par le centre de santé. Famille Diallo : une maladie héréditaire est due à un allèle récessif $a$ (allèle normal $N$). I-1 (homme) et I-2 (femme) ne sont pas atteints ; leur fille II-1 est atteinte ; leur fils II-2 n'est pas atteint. Famille Tano : le daltonisme est récessif et lié à X ($X^{D}$ : allèle normal, $X^{d}$ : allèle du daltonisme). Mme Tano a une vision normale et son mari est daltonien. Les génotypes de Mme Tano ($X^{D}//X^{d}$) et de M. Tano ($X^{d}//Y$) sont connus.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans la famille Diallo, la maladie est-elle liée à X ou autosomale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire l'arbre : II-1 est une fille atteinte, son père I-1 est sain. Étape 2 — Repérer les indices : fille atteinte dont le père est sain. Étape 3 — Tester l'hypothèse « liée à X » : II-1 serait $X^{a}//X^{a}$ et aurait reçu un $X^{a}$ de son père, qui serait atteint : contradiction. Étape 4 — Conclure : la maladie est autosomale.",
+              "answers": [
+                {
+                  "content": "Autosomale : une fille est atteinte alors que son père n'est pas atteint",
+                  "correct": true
+                },
+                {
+                  "content": "Liée à X, car il y a une fille atteinte",
+                  "correct": false
+                },
+                {
+                  "content": "Liée à X, car le fils II-2 n'est pas atteint",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir, il faudrait une génération de plus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la famille Diallo, quels sont les génotypes de I-1 et de I-2, qui ne sont pas atteints et ont une fille atteinte ?",
+              "question_type": "single_choice",
+              "explanation": "La maladie est récessive : II-1 est $a//a$ et a reçu un $a$ de chacun de ses parents. Chaque parent a un $a$, mais n'est pas atteint : il a aussi un $N$ qui cache $a$. I-1 et I-2 sont donc $N//a$. Ils ne peuvent pas être $N//N$, car ils n'auraient aucun $a$ à transmettre.",
+              "answers": [
+                {
+                  "content": "Tous deux $N//a$ : ils sont porteurs sains",
+                  "correct": true
+                },
+                {
+                  "content": "Tous deux $N//N$",
+                  "correct": false
+                },
+                {
+                  "content": "I-1 est $a//a$ et I-2 est $N//N$",
+                  "correct": false
+                },
+                {
+                  "content": "Tous deux $a//a$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la famille Tano, une fille a une vision normale. Quel est son génotype ?",
+              "question_type": "single_choice",
+              "explanation": "Une fille reçoit $X^{d}$ de son père (M. Tano est $X^{d}//Y$). Pour avoir une vision normale, elle doit avoir $X^{D}$ sur son autre X, reçu de sa mère. Elle est donc $X^{D}//X^{d}$, porteuse. Elle ne peut pas être $X^{D}//X^{D}$ car son père ne lui a pas donné $X^{D}$.",
+              "answers": [
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{D}//X^{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{d}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la probabilité que le prochain enfant des Tano soit une fille daltonienne ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode complète. Étape 1 : mère $X^{D}//X^{d}$, père $X^{d}//Y$. Étape 2 : la mère donne $X^{D}$ ou $X^{d}$, le père $X^{d}$ ou $Y$. Étape 3 : échiquier $X^{D}//X^{d}$ (fille porteuse), $X^{D}//Y$ (garçon normal), $X^{d}//X^{d}$ (fille daltonienne), $X^{d}//Y$ (garçon daltonien), chacune avec la probabilité $\\frac{1}{4}$. Étape 4 : une case est une fille daltonienne : $\\frac{1}{4}$.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{1}{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la famille Tano, un enfant sur quatre est un garçon de vision normale.",
+              "question_type": "true_false",
+              "explanation": "L'échiquier donne 4 cases équiprobables : $X^{D}//X^{d}$, $X^{D}//Y$, $X^{d}//X^{d}$, $X^{d}//Y$. Une seule case est $X^{D}//Y$, un garçon de vision normale : la probabilité est $\\frac{1}{4}$. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi la maladie de la famille Diallo ne peut pas être liée au chromosome X.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Relève la fille atteinte II-1 et son père sain I-1",
+                "Dit qu'une fille atteinte par un allèle récessif lié à X a un père atteint",
+                "Conclut à une contradiction, donc à une transmission autosomale"
+              ],
+              "starter": "II-1 est une fille atteinte, et…",
+              "explanation": "Corrigé modèle : La fille II-1 est atteinte et son père I-1 ne l'est pas. Si la maladie était récessive et liée à X, II-1 serait $X^{a}//X^{a}$ et aurait reçu un $X^{a}$ de son père, qui serait alors $X^{a}//Y$, donc atteint. Or I-1 n'est pas atteint : c'est une contradiction. La maladie est donc autosomale. Points : indices relevés (1), raisonnement sur le père (1), conclusion (1).",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
