@@ -1,13 +1,13 @@
 # ADR-XXXX : Un jeu de test standard, une activité déterministe, un rôle par environnement
 <!-- index
 titre: Standard de test : jeu standard, activité déterministe, rôle des environnements, rendu des leçons
-statut: Proposé
+statut: Accepté
 problematique: Chaque environnement teste sur des données différentes, sans activité, et l'affichage des leçons n'est vérifié qu'à la main.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-11-02 |
 | **Chantier** | `docs/chantiers/standard-de-test` |
 | **Remplace** | — (amende ADR-0122 pour Staging et ADR-0123 pour Develop, sous réserve des décisions ouvertes du memo) |
@@ -64,6 +64,17 @@ Le porteur a validé le 2026-11-02 quatre principes (jeu standard identique part
 8. **Preuve de vague** `bin/preuve-vague <dossier>` : `valider.rb` + rendu des fichiers + captures d'une leçon par matière dans `tmp/preuves/`, jamais commitées.
 9. **Règle de fusion** : `.github/pull_request_template.md` porte la section « Prouvé sur le jeu standard » (parcours rejoués, leçons rendues, ligne `bin/ci-quiet`) ; une garde de `bin/ci-quiet` vérifie qu'elle est remplie quand la PR change du code.
 10. **Pages lentes** `bin/pages-lentes` : visite les pages de chaque rôle sur le grand établissement, chronomètre, signale celles au-dessus du seuil ; chaque page signalée ouvre un chantier `optimize`.
+
+### Tranché par le porteur, 2026-11-02
+
+1. **Develop** : le jeu standard y est **ajouté** ; **aucune suppression**. La remise à zéro de Develop n'est pas décidée.
+2. **Staging** : ajout automatique des leçons v3 absentes, sans remplacer les présentes.
+3. **Rendu des leçons** : fichiers touchés en PR, tout au train en parts de ≤ 5 min. **Dérogation au budget système** : le test `test/system/catalog/lesson_rendering_test.rb` est exclu du plafond de 15 s de croissance par PR (`script/ci/system_budget.rb`) ; son coût est borné par la liste des fichiers touchés en PR et par le découpage en parts de ≤ 5 min au train.
+4. **Niveaux sans v3** (2nde, 4ème, 5ème, 6ème) : une leçon v1 si elle s'importe par la chaîne actuelle ; sinon le couple reste vide, écrit comme tel dans le manifeste.
+5. **Leçons** : la leçon 1 de la progression de chaque couple niveau-série et matière (liste dans le PRD §8), plus la leçon v3 la plus longue.
+6. **Activité** : étendue aux deux établissements de base, plusieurs classes, plusieurs semaines ; déterministe (graine fixe, trimestre glissant terminé la veille du chargement, empreinte des totaux testée). Le grand établissement a une activité échantillonnée. Le parcours DRENA passe par un compte équipe filtré par DRENA.
+7. **Démonstration** (décision du porteur, 2026-11-02, remplace « sur Develop ») : un environnement Railway dédié **`Demo`**, servi sur **demo.lnclass.com**. L'application reconnaît le nom `Demo` (casse ignorée) comme un stade à part : il reçoit le référentiel, le jeu standard et l'activité simulée ; il n'est **jamais** un environnement de PR (même si `PR_BASE_ENVIRONMENT` y a été copiée : pas de mot de passe PR, pas de `lecons_completes`) ; aucun chargement des leçons du dépôt, aucune action de production. Base Postgres et bucket propres. Comptes équipe seulement si `DEMO_TEAM_PIN` (scellée) est posée : un PIN public sur un compte équipe d'un site ouvert donnerait l'administration à tout visiteur.
+8. **Numéros fictifs — point à confirmer par le porteur** : le format de contact (`0[157]\d{8}`) n'accepte que des numéros mobiles ivoiriens ; le jeu utilise la plage `0[157]0000xxxx` (élèves 01, enseignants 05, direction et équipe 07, tranches disjointes), déjà utilisée par les seeds de développement. Aucune source publique trouvée ne garantit qu'elle n'est pas attribuée : à confirmer auprès de l'ARTCI ou à remplacer par une plage que le porteur désigne.
 
 ## 5. Conséquences
 

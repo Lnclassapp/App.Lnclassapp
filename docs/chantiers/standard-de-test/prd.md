@@ -193,3 +193,58 @@ Fonctionnalité: Recette, preuve de vague et règle de fusion
 | Classes avec activité | 1 (Saint-Michel, local) | toutes sauf la classe vide | |
 | Modifier un JSON → le voir en local | import manuel | < 15 s, une commande | |
 | Tâche CI la plus longue | ≤ 5 min | ≤ 5 min | |
+
+## 8. Leçons du jeu standard (tranché par le porteur, 2026-11-02)
+
+Leçon 1 de la progression de chaque couple niveau-série et matière ayant du v3 (46 couples) :
+
+- `1ere-a1/francais/oeuvre-poetique.json`
+- `1ere-a1/mathematiques/equations-et-inequations.json`
+- `1ere-a1/philosophie/la-methode-de-lecture-de-texte.json`
+- `1ere-a1/physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json`
+- `1ere-a1/svt/le-reflexe-conditionnel.json`
+- `1ere-a2/francais/oeuvre-poetique.json`
+- `1ere-a2/mathematiques/equations-et-inequations.json`
+- `1ere-a2/philosophie/la-methode-de-lecture-de-texte.json`
+- `1ere-a2/physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json`
+- `1ere-a2/svt/le-reflexe-conditionnel.json`
+- `1ere-c/francais/oeuvre-poetique.json`
+- `1ere-c/mathematiques/equations-et-inequations-dans.json`
+- `1ere-c/philosophie/la-methode-de-lecture-de-texte.json`
+- `1ere-c/physique-chimie/travail-et-puissance-dans-le-cas-d-un-mouvement-de-translation.json`
+- `1ere-c/svt/le-role-et-la-structure-des-gonades-des-mammiferes.json`
+- `1ere-d/francais/oeuvre-poetique.json`
+- `1ere-d/mathematiques/equations-et-inequations-du-second-degre-dans.json`
+- `1ere-d/philosophie/la-methode-de-lecture-de-texte.json`
+- `1ere-d/physique-chimie/travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json`
+- `1ere-d/svt/les-fonctions-des-gonades.json`
+- `1ere/histoire-geographie/histoire-l-essor-du-capitalisme-et-ses-consequences.json`
+- `3eme/edhc/les-devoirs-des-parents.json`
+- `3eme/francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json`
+- `3eme/histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json`
+- `3eme/mathematiques/calcul-litteral.json`
+- `3eme/physique-chimie/masse-et-poids-d-un-corps.json`
+- `3eme/svt/les-aliments-et-l-homme.json`
+- `tle-a1/francais/oeuvre-narrative.json`
+- `tle-a1/mathematiques/etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json`
+- `tle-a1/philosophie/la-dissertation-philosophique.json`
+- `tle-a1/svt/les-reactions-emotionnelles-chez-l-homme.json`
+- `tle-a2/francais/oeuvre-narrative.json`
+- `tle-a2/mathematiques/etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json`
+- `tle-a2/philosophie/la-dissertation-philosophique.json`
+- `tle-a2/svt/les-reactions-emotionnelles-chez-l-homme.json`
+- `tle-c/francais/oeuvre-narrative.json`
+- `tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json`
+- `tle-c/philosophie/la-dissertation-philosophique.json`
+- `tle-c/physique-chimie/cinematique-du-point.json`
+- `tle-c/svt/les-cycles-sexuels-chez-la-femme.json`
+- `tle-d/francais/oeuvre-narrative.json`
+- `tle-d/mathematiques/limites-et-continuite.json`
+- `tle-d/philosophie/la-dissertation-philosophique.json`
+- `tle-d/physique-chimie/cinematique-du-point.json`
+- `tle-d/svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json`
+- `tle/histoire-geographie/histoire-l-onu.json`
+
+Plus la leçon v3 la plus longue : `3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json` (elle porte aussi des sujets).
+
+Couples sans v3 (2nde-a, 2nde-c, 2nde, 4eme, 5eme, 6eme) : leçon v1 de la progression si elle s'importe, sinon vides.
