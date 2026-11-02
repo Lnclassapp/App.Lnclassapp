@@ -21,6 +21,13 @@ module Entities
         end
       end
 
+      test "Demo never loads the lessons of the repository, whatever the case, and is not a warning" do
+        %w[Demo demo DEMO].each do |name|
+          assert stage(name).skip?, name
+          assert_not stage(name).unknown?, name
+        end
+      end
+
       test "a PR environment never loads, even under a name that is Develop or unknown" do
         assert stage("Develop", pr_environment: true).skip?
         assert stage("pr-1234", pr_environment: true).skip?

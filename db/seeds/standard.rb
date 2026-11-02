@@ -4,9 +4,10 @@
 # Développement, test et environnements de PR seulement (les autres stades l'ouvriront par leur propre garde).
 # Idempotent : tout est retrouvé par son nom ou son contact, rien n'est créé deux fois. Contacts et noms : FictitiousIdentity.
 # PIN 2468 ; les comptes équipe prennent ENV["STANDARD_TEAM_PIN"], ou 2468 en développement, test et PR, sinon n'existent pas.
+# Sur Demo (DemoEnvironment) : ENV["DEMO_TEAM_PIN"] seule, sinon aucun compte équipe utilisable (un administrateur inerte publie les leçons).
 # ENV["STANDARD_LESSONS_LIMIT"] ne charge que les N premières leçons (boucles courtes, tests) ; ENV["STANDARD_MANIFEST"] change de manifeste.
-unless Rails.env.local? || PrEnvironment.active?
-  raise "db/seeds/standard.rb est réservé au développement, au test et aux environnements de PR"
+unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active?
+  raise "db/seeds/standard.rb est réservé au développement, au test, aux environnements de PR et à Demo"
 end
 
 standard_dir = Rails.root.join("db/seeds/standard")
@@ -22,7 +23,10 @@ files = lessons_dir.glob("*/*/*.json").to_h { [ it.relative_path_from(lessons_di
 problems = set.errors(files)
 raise "manifeste du jeu standard invalide :\n#{problems.map(&:message).join("\n")}" if problems.any?
 
-team_pin = ENV["STANDARD_TEAM_PIN"].presence || (pin if Rails.env.local? || PrEnvironment.active?)
+# Demo est un site ouvert : ses comptes équipe n'existent que si DEMO_TEAM_PIN (scellée) est posée, jamais au PIN public.
+team_pin = if DemoEnvironment.active? then ENV["DEMO_TEAM_PIN"].presence
+else ENV["STANDARD_TEAM_PIN"].presence || (pin if Rails.env.local? || PrEnvironment.active?)
+end
 now = Time.current
 school_year = Entities::Classroom::SchoolYear.current(now.to_date)
 pin_digest = Orm::User.new(pin:).pin_digest
@@ -130,6 +134,10 @@ Orm::School.transaction do
   if team_pin_digest
     team_ids = ensure_users.(set.accounts.team.map { person.(it.role.to_sym, 0, "team", team_pin_digest, team_role: it.role) })
     team_ids.each_value { |user_id| Orm::TotpCredential.find_or_create_by!(user_id:) { it.secret = ROTP::Base32.random; it.confirmed_at = now } }
+  elsif DemoEnvironment.active?
+    # Sans DEMO_TEAM_PIN, l'import et la publication des leçons ont quand même besoin d'un acteur équipe : un administrateur
+    # inerte, au PIN aléatoire que personne ne connaît, sans second facteur. Personne ne peut s'y connecter.
+    ensure_users.([ person.(:admin, 0, "team", Orm::User.new(pin: SecureRandom.hex(16)).pin_digest, team_role: "admin") ])
   end
 
   log.call("#{schools.size} établissements, #{classroom_ids.size} classes, #{student_rows.size} élèves, #{teachers.size} enseignants")
@@ -194,7 +202,8 @@ log.call("#{courses.size} leçons du manifeste, #{published} publiées maintenan
 
 # 9. Les comptes par rôle (contact, rôle, établissement) ; le premier élève de chaque classe est son compte de test.
 if ENV["STANDARD_QUIET"].blank?
-  log.call("comptes (PIN #{pin}#{team_pin_digest ? '' : ' ; pas de comptes équipe : STANDARD_TEAM_PIN absente'}) :")
+  team_pin_name = DemoEnvironment.active? ? "DEMO_TEAM_PIN" : "STANDARD_TEAM_PIN"
+  log.call("comptes (PIN #{pin}#{team_pin_digest ? '' : " ; pas de comptes équipe : #{team_pin_name} absente"}) :")
   show = ->(contact, role, school) { log.call(format("  %-10s %-12s %s", contact, role, school)) }
   set.accounts.directions.each_with_index { |account, index| show.(contact_of.(:direction, index), "direction", identity.school_name(account.school)) }
   set.accounts.teachers.each_with_index do |account, index|

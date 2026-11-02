@@ -94,6 +94,39 @@ Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR env
 3. *Service web de Develop › Settings › Deploy › Serverless* : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
 4. Après la fusion du chantier : ouvrir une PR d'essai, constater les données, le mot de passe et la veille, et vérifier dans le journal que le stockage de fichiers de la PR n'est pas celui de Develop.
 
+### Environnement Demo (demo.lnclass.com)
+
+Chantier standard-de-test, Lot H. L'environnement Railway nommé `Demo` (casse et espaces ignorés, `DemoEnvironment.active?`, `config/demo_environment.rb`) est un stade à part : ni production, ni environnement de PR, même si `PR_BASE_ENVIRONMENT` y a été copiée depuis Develop (`PrEnvironment.active?` y est faux : pas de mot de passe PR, pas d'adaptateur `async`, worker Solid Queue normal). `bin/rails db:prepare db:seed` y sème, à chaque déploiement et sans rien supprimer, l'identité, le référentiel, les établissements du référentiel et le jeu standard (`db/seeds/standard.rb`, élèves, enseignants et directions au PIN de test public `2468` : c'est une démo). Il ne charge ni `contenus`, ni les leçons du dépôt (`contenus:charger` se tait), ni `lecons_completes`, ni les comptes de développement.
+
+**Comptes équipe : seulement si `DEMO_TEAM_PIN` est posée** (variable **scellée**) : les trois comptes équipe du jeu prennent ce PIN. Sans elle, aucun compte équipe utilisable (un administrateur inerte, au PIN aléatoire et sans second facteur, publie les leçons du jeu) : un PIN public sur un compte équipe d'un site ouvert donnerait l'administration à tout visiteur. `STANDARD_TEAM_PIN` est ignorée sur Demo.
+
+**Pas de remise à zéro automatique** : le semis est idempotent, il ne vide rien, car une remise à zéro supprimerait les données des visiteurs. Le moyen manuel reste `bin/jeu-standard --reset --confirmer=Demo`.
+
+**À poser sur Demo :**
+
+| Variable | Valeur |
+|---|---|
+| `RAILS_MASTER_KEY` | Contenu de `config/master.key` |
+| `RAILS_ENV` | `production` |
+| `DATABASE_URL` | Celle de **sa propre** base PostgreSQL |
+| `BUCKET_NAME`, `BUCKET_ENDPOINT`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY` (et au besoin `BUCKET_REGION`, `BUCKET_FORCE_PATH_STYLE`) | Ceux de **son propre** bucket |
+| `APP_HOSTS` | `demo.lnclass.com` |
+| `CANONICAL_HOST` | `demo.lnclass.com` |
+| `DEMO_TEAM_PIN` | PIN des comptes équipe, **scellée** ; absente : pas de compte équipe |
+| `SCHOOL_SPACE_ENABLED`, `TEACHER_ANNOUNCEMENTS_ENABLED` | Drapeaux du pilote, au choix |
+| `WEB_CONCURRENCY`, `RAILS_MAX_THREADS`, `JOB_CONCURRENCY`, `RAILS_LOG_LEVEL` | Facultatives, valeurs par défaut sinon |
+| `RAILWAY_ENVIRONMENT_NAME`, `RAILWAY_PUBLIC_DOMAIN`, `PORT` | Fournies par Railway |
+
+**À ne pas copier depuis Develop :**
+
+| Variable | Pourquoi |
+|---|---|
+| `PR_BASE_ENVIRONMENT`, `PR_ACCESS_PASSWORD` | Sans effet sur Demo (jamais un environnement de PR) : ne pas les y laisser, elles feraient croire le contraire |
+| `TEAM_BOOTSTRAP_CONTACT` | Imprimerait un lien d'invitation équipe dans les logs d'un site ouvert |
+| `DATABASE_URL`, `BUCKET_*` de Develop | Demo écrirait dans la base et les fichiers de Develop |
+| `ANDROID_PACKAGE_NAME`, `ANDROID_TEACHER_PACKAGE_NAME`, `ANDROID_STUDENT_STORE_URL`, `ANDROID_TEACHER_STORE_URL`, `ANDROID_CERT_FINGERPRINTS` | Les apps de test ne s'ouvrent pas sur demo.lnclass.com |
+| `STANDARD_TEAM_PIN`, `STANDARD_LESSONS_LIMIT`, `STANDARD_MANIFEST`, `STANDARD_QUIET` | Réglages du semis local, ignorés ou contre-productifs sur Demo |
+
 ### Facultatives — réglage de charge
 
 Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure à l'appui.

@@ -7,7 +7,8 @@ module PrEnvironment
   def self.active?(env = ENV)
     base = env["PR_BASE_ENVIRONMENT"].to_s.strip
     name = env["RAILWAY_ENVIRONMENT_NAME"].to_s.strip
-    !base.empty? && !name.empty? && name != base
+    # Demo (DemoEnvironment, chantier standard-de-test) is a stage of its own, whatever PR_BASE_ENVIRONMENT it was copied.
+    !base.empty? && !name.empty? && name != base && name.downcase != "demo"
   end
 
   # What production logs at boot: a PR environment says so, and says why it refuses every password when

@@ -8,7 +8,7 @@ module Entities
     AutomaticLoadStage = Data.define(:kind, :name, :whole_lessons) do
       def initialize(whole_lessons: false, **) = super
 
-      # Le nom, casse et espaces ignorés. Un environnement de PR ne charge rien : il a déjà ses leçons (ADR-0108).
+      # Le nom, casse et espaces ignorés. Demo ne charge pas les leçons du dépôt (il a le jeu standard). Un environnement de PR ne charge rien : il a déjà ses leçons (ADR-0108).
       def self.for(name:, pr_environment:)
         clean = name.to_s.strip
         return new(kind: :skip, name: nil) if pr_environment || clean.empty? || AutomaticLoadStage::SILENT.include?(clean.downcase)
@@ -32,7 +32,7 @@ module Entities
       end
     end
     AutomaticLoadStage::LOADING = %w[develop staging].freeze
-    AutomaticLoadStage::SILENT = %w[production].freeze
+    AutomaticLoadStage::SILENT = %w[production demo].freeze
     AutomaticLoadStage::WHOLE_LESSONS = "develop"
   end
 end
