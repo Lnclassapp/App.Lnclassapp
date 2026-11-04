@@ -124,6 +124,22 @@ module Queries
         assert_equal [ "Proposition 1", "Proposition 2", "Proposition 3", "Proposition 4" ], question.choices.map(&:content)
       end
 
+      test "une question porte le nombre de propositions à cocher : 1 pour un QCM simple ou un vrai ou faux, 2 ou 3 pour un QCM multiple" do
+        exercise = create_exercise(essential: @n1, title: "Ex multiples", questions: 1, position: 42)
+        { "multiple_correct_2" => 2, "multiple_correct_3" => 3 }.each do |type, count|
+          question = exercise.questions.create!(position: exercise.questions.count + 1, content: "Coche", question_type: type)
+          5.times { |rank| question.answers.create!(position: rank + 1, content: "P#{rank + 1}", correct: rank < count) }
+        end
+        true_false = exercise.questions.create!(position: 4, content: "Vrai ?", question_type: "true_false")
+        true_false.answers.create!(position: 1, content: "Vrai", correct: true)
+        true_false.answers.create!(position: 2, content: "Faux", correct: false)
+
+        questions = call(nil).interros.first.exercises.find { it.public_id == exercise.public_id }.questions
+
+        assert_equal [ 1, 2, 3, 1 ], questions.map(&:expected)
+        assert_equal [ false, true, true, false ], questions.map(&:multiple)
+      end
+
       test "les autres types gardent leur partiel d'aujourd'hui : la question est rendue par la session de lecture" do
         exercise = create_exercise(essential: @n1, title: "Ex autres", questions: 0, position: 41)
         create_kind_question(exercise:, question_type: "select", content: "Choisis ___", answers: [ "a", "b" ])

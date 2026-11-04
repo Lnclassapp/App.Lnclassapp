@@ -48,7 +48,11 @@
     <% end %>
   </div>
   <% if kind == :mcq %>
-    <%= tag.div class: "ps-choices", role: (fields ? (question.multiple ? "group" : "radiogroup") : nil), aria: { label: question.content } do %>
+    <% if question.multiple %>
+      <%= tag.p t("catalog.courses.sheets.choose_count", count: question.expected), id: "question-#{question.id}-instruction", class: "ps-instruction" %>
+    <% end %>
+    <%= tag.div class: "ps-choices", role: (fields ? (question.multiple ? "group" : "radiogroup") : nil),
+                aria: { label: question.content, describedby: (("question-#{question.id}-instruction") if question.multiple) } do %>
       <% question.choices.each do |choice| %>
         <%= render "catalog/courses/sheets/choice", choice:, question:, fields:, field:, css: "ps-choice", role: (question.multiple ? "checkbox" : "radio") %>
       <% end %>

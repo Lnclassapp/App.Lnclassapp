@@ -29,10 +29,10 @@ module Queries
       # passed : toutes les questions justes ; la note de la copie est celle de sa page de résultat (sur 20).
       Copy = Data.define(:session_public_id, :passed)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
-      # multiple : un QCM à 2 ou 3 réponses justes ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
+      # multiple : un QCM à 2 ou 3 réponses justes (expected : le nombre de propositions à cocher, 1 sinon) ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
       # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant ; hint : l'indice de la question (ADR-0120), nil
       # s'il est vide, lu dans la boîte de l'indice de l'exercice.
-      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict, :hint)
+      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :expected, :choices, :play, :image, :response, :verdict, :hint)
       # index : le rang dans l'ordre de la feuille (celui que la feuille poste) ; picked : l'élève l'a coché dans sa copie corrigée.
       Choice = Data.define(:index, :letter, :content, :picked)
 
@@ -176,8 +176,9 @@ module Queries
         correct, selected, text, unanswered = attempt
         verdict = (unanswered || (selected.blank? && text.nil?) ? :empty : (correct ? :correct : :wrong)) if corrected && auto_graded?(row)
         picked = Array(selected)
+        expected = Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1)
         Question.new(id: row.id, number:, kind:, content: row.content, unit: row.unit.presence, image: row.image,
-                     multiple: Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1) > 1,
+                     multiple: expected > 1, expected:,
                      choices: (choices(row, picked) if %i[mcq true_false].include?(kind)),
                      play: (play(row, number) if kind == :other),
                      response: (text if corrected), verdict:, hint: row.hint.presence)

@@ -28,6 +28,21 @@ En une phrase, sans les mots du symptôme : la feuille de cahier ne transmet à 
 
 **Pourquoi aucun test ne l'a vu.** `sheet_checks_controller_test` teste `:invalid_copy` avec une réponse en nombre illisible et vérifie le texte général ; aucun test de la feuille n'a de QCM à plusieurs bonnes réponses coché à moitié, et aucun ne vérifie que la feuille annonce le nombre de propositions. Le test de reproduction va au niveau contrôleur (le refus et son texte), plus un test de requête (le nombre attendu) et un test système (l'annonce).
 
+### Test rouge, trou comblé, effets de bord
+
+**Rouge d'abord (bonne raison).** `sheet_checks_controller_test` : « un QCM à deux bonnes réponses coché à moitié » (cinquième question, `multiple_correct_2`, une seule proposition postée) échoue ainsi, avant tout correctif :
+
+```
+expected: "Question e : coche 2 réponses."
+actual:   "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+```
+
+Rouges aussi : requête (`NoMethodError: undefined method 'expected'`), système (`p.ps-instruction` introuvable), deux questions fautives, copie illisible dans sa forme (message encore « un nombre est attendu »), nombre illisible (« Question a : écris un nombre, par exemple -3,5. »).
+
+**Trou comblé.** Tests ajoutés : refus nommé (contrôleur, Turbo Stream), deux lignes pour deux questions fautives, QCM multiple bien coché passe, copie illisible dans sa forme, `expected` de la requête (1, 2, 3, vrai ou faux), annonce « Coche 2 réponses. » et refus nommé sur la feuille (système). Deux tests existants adaptés au nouveau texte du refus d'un nombre illisible.
+
+**Effets de bord écartés.** Domaine inchangé (règle du nombre exact). QCM à une réponse : pas d'annonce, `radiogroup` conservé ; copie juste : 303 vers la page de résultat (tests existants verts). `bin/rails test test/controllers/assessment test/infrastructure/queries/catalog test/domain/entities/assessment` : 529 runs, 0 échec ; `test/controllers/catalog` et `classroom` : 563 runs, 0 échec ; `bin/system-changed` : 42 runs, 0 échec. Les réponses de l'élève restent cochées au refus (système).
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
