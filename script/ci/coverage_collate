@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# Merges the coverage of the parts of the unit suite and checks the threshold of ADR-0024 on the whole suite
+# (ADR-0064 §1, amended by chantier ci-unit-en-parts). The « coverage » job of .github/workflows/ci.yml runs it on the
+# results the parts upload:
+#
+#   script/ci/coverage_collate <parts> <dir>
+#
+# <dir> holds one .resultset.json per part, at any depth. Exactly <parts> are expected: a part that wrote nothing
+# (cancelled, timed out, upload lost) fails here, loudly, instead of being measured as uncovered code or forgotten.
+# SimpleCov exits with a non-zero status below 100 % lines or branches, and writes the merged report in coverage/.
+require_relative "../../test/coverage_profile"
+
+parts, dir = ARGV
+abort "Usage : script/ci/coverage_collate <parts> <dir>" unless parts.to_s.match?(/\A[1-9]\d*\z/) && dir && File.directory?(dir)
+
+results = Dir.glob(File.join(dir, "**", ".resultset.json"), File::FNM_DOTMATCH).sort
+unless results.size == parts.to_i
+  abort "❌ Couverture : #{results.size} résultat(s) de parts trouvé(s) dans #{dir}, #{parts} attendu(s) :\n#{results.join("\n")}"
+end
+puts "Couverture fusionnée de #{results.size} parts :", results
+
+SimpleCov.collate results, "lnclass" do
+  minimum_coverage LnclassCoverage::MINIMUM
+end
