@@ -85,12 +85,12 @@ Vague 2 : Lot B → 1 agent (executant-lot), après le commit du Lot A sur la br
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application)
-- [ ] Pureté du domaine, rubocop, tests, parcours système : au vert
-- [ ] ADR et UDR à jour et indexés
-- [ ] `journal.md` complété
-- [ ] Captures envoyées au pilote : chaque écran modifié à 390 px et sur ordinateur
+- [x] Tous les lots sont `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application)
+- [x] Pureté du domaine, rubocop, tests, parcours système : au vert
+- [x] ADR et UDR à jour et indexés
+- [x] `journal.md` complété
+- [x] Captures envoyées au pilote : chaque écran modifié à 390 px et sur ordinateur
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >

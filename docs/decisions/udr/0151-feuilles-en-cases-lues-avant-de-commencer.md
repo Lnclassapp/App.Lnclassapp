@@ -1,4 +1,4 @@
-# UDR-XXXX : Les feuilles « Prépare interros » et « Prépare devoirs » en cases, lues avant de commencer
+# UDR-0151 : Les feuilles « Prépare interros » et « Prépare devoirs » en cases, lues avant de commencer
 <!-- index
 titre: Feuilles en cases, lues avant de commencer
 statut: Accepté

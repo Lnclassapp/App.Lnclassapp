@@ -48,7 +48,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-04 |
+| **PR** | [#464](https://github.com/Lnclassapp/App.Lnclassapp/pull/464) vers `Develop` |
+| **ADR produits** | aucun |
+| **UDR produits** | [UDR-0151](../../decisions/udr/0151-feuilles-en-cases-lues-avant-de-commencer.md) |

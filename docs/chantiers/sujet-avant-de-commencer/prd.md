@@ -107,7 +107,7 @@ Scénario: le devoir d'une autre classe reste fermé
 ## 6. Décisions rattachées
 
 - Pas d'ADR : ni port, ni table, ni use case, ni dépendance ; trois pages de lecture sur les requêtes et les policies existantes.
-- UDR-XXXX-feuilles-en-cases-lues-avant-de-commencer — la case, la page de lecture, la page à remplir, les adresses ; amende l'UDR-0149 §3.
+- UDR-0151 — la case, la page de lecture, la page à remplir, les adresses ; amende l'UDR-0149 §3.
 
 ## 7. Mesures
 
