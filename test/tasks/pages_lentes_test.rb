@@ -168,7 +168,9 @@ class PagesLentesTaskTest < ActiveSupport::TestCase
   test "is sorted by time, slowest first" do
     out, = lentes
 
-    times = out.lines.filter_map { |line| line[/\s(\d+(?:\.\d+)?) ms\s/, 1]&.to_f }
+    # Seules les lignes de pages (durée puis nombre de requêtes) : le résumé « au-dessus de 500.0 ms » n'est pas une mesure.
+    times = out.lines.filter_map { |line| line[/\s(\d+(?:\.\d+)?) ms\s+\d+\s/, 1]&.to_f }
+    assert_operator times.size, :>, 10
     assert_equal times.sort.reverse, times
   end
 
