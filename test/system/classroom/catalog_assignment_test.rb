@@ -24,16 +24,18 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     assert_current_path teacher_home_path
   end
 
+  # sujet-avant-de-commencer : les bascules sont sur la page de lecture de la feuille de la notion, plus sur la leçon.
+  def sheet_page = course_sheet_path(@course.slug, "notion-#{@meiose.slug}")
   def toggle(classroom, exercise) = "#assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}"
 
   # PRD, chemin nominal enseignant, étape 4 ; plan, Lot F « Done quand ».
   test "from a catalogue sheet: the days modal the first time, then « Assigné · Pour jeu. 8 oct. » in place, Tle D 1 only" do
-    visit course_path(@course.slug)
-    assert_selector "h1", text: "Génétique"
-    assert_selector "#prepare-interros [id^='assignment_']", count: 4
+    visit sheet_page
+    assert_selector "h1.ps-title", text: "PRÉPARE INTERROS N°1"
+    assert_selector ".ps-sheet [id^='assignment_']", count: 4
     assert_no_selector "[id^='assignment_#{@tle_c1.public_id}_']"
     assert_no_text "Tle C 1"
-    assert_selector "#prepare-interros .ps-btn--primary", count: 1
+    assert_selector ".ps-sheet .ps-btn--primary", count: 1
     assert_selector "#{toggle(@tle_d1, @phases)} .ps-btn--primary"
     assert_selector :link_or_button, "Assigner à Tle D 1", count: 2
     assert_selector :link_or_button, "Assigner à Tle D 2", count: 2
@@ -100,7 +102,7 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
   test "on a phone, each classroom is two buttons in the sheet under the exercise title, and the page does not scroll sideways" do
     create_assignment(classroom: @tle_d1, assignable: @phases, by: @teacher, due_on: Date.new(2026, 10, 8))
     with_mobile_viewport do
-      visit course_path(@course.slug)
+      visit sheet_page
 
       frame = find("#sheet-exercise-#{@phases.public_id}")
       title = frame.find(".ps-exercise-head")

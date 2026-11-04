@@ -7,8 +7,10 @@ module Queries
       # Un envoi : kind :interros (1 ou 2 exercices) ou :devoirs (3 ou plus) ; dom_id : le repère de la feuille ; notion / remember : la notion
       # commune à tous les exercices et son « À retenir » (nil sinon) ; notions : leurs noms, sans doublon (la leçon pour un exercice sans
       # notion) ; courses, materials : leurs noms ; assigned_on : le jour de l'envoi ; due_on : l'échéance la plus proche, nil sans échéance ;
-      # exercises : [PrepareSheetsQuery::SheetExercise] ; hand_ins : { exercise_public_id => public_id de l'assignation à rendre }.
-      Sheet = Data.define(:kind, :dom_id, :assigned_on, :due_on, :notion, :remember, :notions, :courses, :materials, :exercises, :hand_ins)
+      # exercises : [PrepareSheetsQuery::SheetExercise] ; hand_ins : { exercise_public_id => public_id de l'assignation à rendre } ;
+      # number : son rang parmi les feuilles de même kind (la plus récente est la n°1) ; position / total : son rang parmi tous les envois.
+      Sheet = Data.define(:kind, :dom_id, :assigned_on, :due_on, :notion, :remember, :notions, :courses, :materials, :exercises, :hand_ins,
+                          :number, :position, :total)
       Row = Data.define(:id, :public_id, :batch, :assigned_at, :due_on, :exercise_public_id, :course_slug, :course_name, :material_name,
                         :essential_id, :essential_name, :remember)
 
@@ -31,6 +33,9 @@ module Queries
         handed_in = handed_in(rows, actor.user_id)
         sheets(rows, exercises, handed_in)
       end
+
+      # → Sheet ou nil : le devoir reçu de cette ancre, parmi ceux de l'élève connecté seulement (jamais celui d'une autre classe).
+      def sheet(actor:, dom_id:) = call(actor:).find { it.dom_id == dom_id }
 
       private
 
@@ -70,12 +75,14 @@ module Queries
 
       def sheets(rows, exercises, handed_in)
         visible = rows.select { exercises.key?(it.exercise_public_id) }
-        visible.group_by { it.batch || it.public_id }
-               .values.sort_by { |batch| [ batch.map(&:assigned_at).max, batch.map(&:id).max ] }.reverse
-               .map { |batch| sheet(batch, exercises, handed_in) }
+        built = visible.group_by { it.batch || it.public_id }
+                       .values.sort_by { |batch| [ batch.map(&:assigned_at).max, batch.map(&:id).max ] }.reverse
+                       .map { |batch| build(batch, exercises, handed_in) }
+        ranks = Hash.new(0)
+        built.each_with_index.map { |sheet, index| sheet.with(number: (ranks[sheet.kind] += 1), position: index + 1, total: built.size) }
       end
 
-      def sheet(batch, exercises, handed_in)
+      def build(batch, exercises, handed_in)
         essentials = batch.map(&:essential_id).uniq
         common = batch.first if essentials.one? && essentials.first
         shown = batch.each_with_index.map do |row, index|
@@ -87,7 +94,7 @@ module Queries
                   notion: common&.essential_name, remember: common&.remember.presence,
                   notions: batch.map { it.essential_name || it.course_name }.uniq, courses: batch.map(&:course_name).uniq,
                   materials: batch.map(&:material_name).uniq, exercises: shown,
-                  hand_ins: batch.to_h { [ it.exercise_public_id, it.public_id ] })
+                  hand_ins: batch.to_h { [ it.exercise_public_id, it.public_id ] }, number: nil, position: nil, total: nil)
       end
 
       # CA-16 : avant de rendre, ni note ni correction ni réponse d'une copie d'entraînement antérieure (la feuille rend ce qu'on lui donne).

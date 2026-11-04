@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classrooms/_assigned_sheets — « Exercices assignés » de « Ma classe » : un envoi de l'enseignant, une feuille de cahier %>
-<%# Rôle : la plus récente en haut ; 3 exercices ou plus : « Prépare devoirs » (notions mobilisées), 1 ou 2 : « Prépare interros » (notion commune et « À retenir ») ; « Rendre à l'enseignant » avant ; après, statut, « Voir ma correction » (la page de résultat, qui ramène ici) et « Refaire l'exercice » ; ni « Recommencer » ni progression des leçons %>
-<%# ADR  : 0121, 0072 · UDR : 0149 §3 (devoirs reçus par l'élève), 0076 §3.2 · memo Q12, Q13, Q17 %>
+<%# Rôle : une case par envoi, la plus récente en haut ; 3 exercices ou plus : « Prépare devoirs », 1 ou 2 : « Prépare interros » ; « À rendre le … » ou « Rendu » ; la case mène au sujet en lecture, puis à la feuille à remplir (« Rendre à l'enseignant ») %>
+<%# ADR  : 0121, 0072 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 (devoirs reçus par l'élève), 0076 §3.2 · memo Q12, Q13, Q17 %>
 <%# locals: (sheets:) -%>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% if sheets.empty? %>
@@ -9,24 +9,19 @@
                        description: t("classroom.student_classrooms.show.assigned_empty_description"), icon: "clipboard-document-check" %>
   <% end %>
 <% else %>
-  <%# La feuille est pleine largeur : pas de carte autour, le titre de la section suffit. %>
+  <%# Des cases pleine largeur : pas de carte autour, le titre de la section suffit. %>
   <section id="student_classroom_assigned" aria-labelledby="student_classroom_assigned_title" class="space-y-4" data-turbo-prefetch="false">
     <h2 id="student_classroom_assigned_title" class="font-display text-lg leading-tight font-medium"><%= t("classroom.student_classrooms.show.assigned_title") %></h2>
-    <div class="ps-page">
-      <% ranks = Hash.new(0) %>
-      <% sheets.each_with_index do |sheet, index| %>
-        <% ranks[sheet.kind] += 1 %>
+    <div class="ps-cards">
+      <% sheets.each do |sheet| %>
         <% devoirs = sheet.kind == :devoirs %>
         <% dated = t("classroom.student_classrooms.assigned_sheet.title", date: l(sheet.assigned_on, format: :long)) %>
-        <%= render "catalog/courses/sheets/sheet", kind: sheet.kind, number: ranks[sheet.kind], mode: :student, material: sheet.materials.join(" · "),
-                   header_left: t("catalog.courses.sheets.brand_line", course: sheet.courses.join(" · ")),
-                   header_right: t("classroom.student_classrooms.assigned_sheet.position", n: index + 1, total: sheets.size),
-                   title: (devoirs ? dated : sheet.notion || dated),
-                   subtitle: (t("classroom.student_classrooms.assigned_sheet.due_on", date: l(sheet.due_on, format: :due_long)) if sheet.due_on),
-                   box_label: (devoirs ? t("catalog.courses.sheets.notions") : (t("catalog.courses.sheets.remember") if sheet.remember)),
-                   box_text: (devoirs ? sheet.notions.to_sentence : sheet.remember),
-                   exercises: sheet.exercises, hand_ins: sheet.hand_ins, return_to: "class", sheet_id: sheet.dom_id,
-                   footer: t("catalog.courses.sheets.brand_line", course: t("catalog.courses.sheets.#{sheet.kind}_section")) %>
+        <% rendered = sheet.exercises.all?(&:copy) %>
+        <% note = if rendered then t("classroom.student_classrooms.assigned_sheet.rendered")
+                  elsif sheet.due_on then t("classroom.student_classrooms.assigned_sheet.due_on", date: l(sheet.due_on, format: :due_long)) end %>
+        <%= render "catalog/courses/sheets/card", id: sheet.dom_id, kind: sheet.kind, number: sheet.number, total: sheet.exercises.size,
+                   title: (devoirs ? dated : sheet.notion || dated), href: student_assigned_sheet_path(sheet.dom_id),
+                   passed: sheet.exercises.count { it.copy&.passed }, note: %>
       <% end %>
     </div>
   </section>

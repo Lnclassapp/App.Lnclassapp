@@ -19,6 +19,8 @@ class Catalog::LongFormulasTest < ApplicationSystemTestCase
     sign_in_as create_student_for(@course)
   end
 
+  def sheet_page = fill_course_sheet_path(@course.slug, "notion-#{@notion.slug}")
+
   def no_sideways_scroll? = page.evaluate_script("document.documentElement.scrollWidth <= window.innerWidth")
 
   def displays_fit?
@@ -30,9 +32,16 @@ class Catalog::LongFormulasTest < ApplicationSystemTestCase
   test "on a phone a long display formula scrolls in its own frame, never the page" do
     with_mobile_viewport do
       visit course_path(@course.slug)
+      assert_selector ".sheet-text .katex-display", wait: 10
+      assert no_sideways_scroll?, "la page défile sur le côté"
+      assert displays_fit?, "une formule dépasse l'écran"
+
+      # La feuille se remplit sur sa propre page (sujet-avant-de-commencer).
+      visit sheet_page
       assert_selector ".ps-remember .katex-display", wait: 10
       assert_selector ".ps-question-label .katex-display"
-      assert_selector ".sheet-text .katex-display"
+      assert no_sideways_scroll?, "la feuille défile sur le côté"
+      assert displays_fit?, "une formule de la feuille dépasse l'écran"
       assert no_sideways_scroll?, "la page défile sur le côté"
       assert displays_fit?, "une formule dépasse l'écran"
     end
@@ -72,7 +81,7 @@ class Catalog::LongFormulasTest < ApplicationSystemTestCase
 
   def assert_phone_fits(selector, **options)
     with_mobile_viewport do
-      visit course_path(@course.slug)
+      visit sheet_page
       assert_selector selector, wait: 10, visible: :all, **options
       assert no_sideways_scroll?, "la page défile sur le côté : #{page.evaluate_script('document.documentElement.scrollWidth')} px"
     end

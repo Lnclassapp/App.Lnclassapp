@@ -7,6 +7,8 @@ module Assessment
 
     allow_roles :student
 
+    SHEET_ANCHOR = Assessment::SessionResultsController::SHEET_ANCHOR
+
     def create
       return if refuse_out_of_level(exercise_public_id:)
 
@@ -41,11 +43,14 @@ module Assessment
 
     # La note de la copie est celle de la page de résultat (sur 20) ; le formulaire vise toute la page (data-turbo-frame="_top").
     def show_result(submitted)
-      redirect_to exercise_session_result_path(submitted.session_public_id, return_to:), status: :see_other
+      redirect_to exercise_session_result_path(submitted.session_public_id, return_to:, sheet:), status: :see_other
     end
 
     # Deux retours seulement, jamais une adresse : l'exercice de la feuille, ou « Ma classe » (un devoir rendu, ou une feuille de « Ma classe »).
     def return_to = (assignment_public_id || params[:return_to] == "class") ? "class" : "sheet"
+
+    # L'ancre de la feuille d'où l'élève vérifie (notion-<slug>, toute-la-lecon, sujet-<n>) : une chaîne de cette forme, sinon rien.
+    def sheet = (params[:sheet] if params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR))
 
     def refused(code, resume_at = nil, lines = [])
       @error_code = code
@@ -59,7 +64,12 @@ module Assessment
     end
 
     def back_to_lesson(alert: nil)
-      redirect_to course_path(course_slug, anchor: "sheet-exercise-#{exercise_public_id}"), alert:, status: :see_other
+      anchor = "sheet-exercise-#{exercise_public_id}"
+      target = if sheet.nil? then course_path(course_slug, anchor:)
+      elsif return_to == "class" then fill_student_assigned_sheet_path(sheet, anchor:)
+      else fill_course_sheet_path(course_slug, sheet, anchor:)
+      end
+      redirect_to target, alert:, status: :see_other
     end
 
     def course_slug = detail.course.slug

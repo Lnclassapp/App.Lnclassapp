@@ -1,0 +1,15 @@
+<%# 🌐 UI · catalog/courses/sheets/_card — la case d'une feuille : un lien vers la page de lecture du sujet %>
+<%# Rôle : « PRÉPARE INTERROS N°1 », titre, nombre d'exercices, progression de l'élève ; l'id est l'ancre de la feuille ; rendue par la leçon (et par la classe et « Ma classe ») %>
+<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3 (Case) %>
+<%# locals: (id:, kind:, number:, title:, total:, href:, passed: nil, note: nil) -%>
+<%# passed : le nombre d'exercices réussis (élève seulement, nil sinon) ; note : une ligne de plus (« À rendre le … ») %>
+<%= link_to href, id:, class: "ps-card" do %>
+  <span class="ps-card-body">
+    <b class="ps-card-kind"><%= t("catalog.courses.sheets.numbered_title.#{kind}", number:) %></b>
+    <span class="ps-card-title"><%= title %></span>
+    <span class="ps-card-meta"><%= t("catalog.courses.sheets.card_exercises", count: total) %></span>
+    <% unless passed.nil? %><i class="ps-card-meta"><%= t("catalog.courses.sheets.progress", count: passed, total:) %></i><% end %>
+    <% if note.present? %><span class="ps-card-meta"><%= note %></span><% end %>
+  </span>
+  <%= ui_icon "chevron-right", variant: :mini, class: "ps-card-arrow" %>
+<% end %>

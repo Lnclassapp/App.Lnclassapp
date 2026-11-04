@@ -10,10 +10,10 @@
 <% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
 <% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
-<%# Venu de la feuille de la leçon : retour à l'exercice sur la feuille ; venu d'un devoir rendu depuis « Ma classe » : retour à Ma classe. %>
+<%# Venu de la feuille de la leçon : retour à l'exercice sur la feuille ; venu d'un devoir : « Reprendre le devoir » (sa feuille), sinon retour à Ma classe. %>
 <% back_href, back_label = case @return_to
-                           when "sheet" then [ course_path(result.course_slug, anchor: "sheet-exercise-#{result.exercise.public_id}"), t(".back_to_lesson") ]
-                           when "class" then [ student_classroom_path, t(".back_to_class") ]
+                           when "sheet" then [ (@sheet ? fill_course_sheet_path(result.course_slug, @sheet, anchor: "sheet-exercise-#{result.exercise.public_id}") : course_path(result.course_slug, anchor: "sheet-exercise-#{result.exercise.public_id}")), t(".back_to_lesson") ]
+                           when "class" then (@sheet ? [ fill_student_assigned_sheet_path(@sheet, anchor: "sheet-exercise-#{result.exercise.public_id}"), t(".back_to_assignment") ] : [ student_classroom_path, t(".back_to_class") ])
                            else [ lesson_href, t(".back_to_lesson") ]
                            end %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px. UDR écrans élève §3.6 bis (CA-E13) : dès 1 024 px, la note et « Recommencer »

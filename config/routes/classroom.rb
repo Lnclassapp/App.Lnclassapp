@@ -21,6 +21,8 @@ post "students/classroom/change", to: "classroom/student_classroom_changes#creat
 
 get "students", to: "classroom/student_homes#show", as: :student_home                       # gelé
 get "students/classroom", to: "classroom/student_classrooms#show", as: :student_classroom   # gelé
+get "students/classroom/devoirs/:sheet", to: "classroom/student_assigned_sheets#show", as: :student_assigned_sheet
+get "students/classroom/devoirs/:sheet/remplir", to: "classroom/student_assigned_sheets#fill", as: :fill_student_assigned_sheet
 # Lot R (ADR-0036, memo Q19) : l'archive de l'élève, consultable même sans classe active.
 get "students/archive", to: "classroom/student_archives#show", as: :student_archive
 # UDR-0080 §3.2 : le panneau du compte de l'élève comme page ; la coque Android l'ouvre en modale (ADR-0084 §4.3).
@@ -40,6 +42,7 @@ patch "classrooms/:public_id/link", to: "classroom/classroom_links#update", as: 
 get "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#show", as: :classroom_student
 delete "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#destroy"
 get "classrooms/:classroom_public_id/courses/:course_slug", to: "classroom/classroom_courses#show", as: :classroom_course
+get "classrooms/:classroom_public_id/courses/:course_slug/feuilles/:sheet", to: "classroom/classroom_prepare_sheets#show", as: :classroom_course_sheet
 get "classrooms/:classroom_public_id/courses/:course_slug/essentials/:essential_slug",
     to: "classroom/classroom_essentials#show", as: :classroom_essential
 # ADR-0072, UDR-0062 §3.4, §3.5 : `new` avant le suivi, que son :public_id capturerait.

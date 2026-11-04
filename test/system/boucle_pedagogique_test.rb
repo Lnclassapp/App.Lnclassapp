@@ -290,8 +290,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_no_selector "#course_header", text: "Assigner"
     assert_selector "#prepare-interros"
 
-    # La notion n'a plus de page (ADR-0113) : « Prépare interros » de la leçon porte l'exercice, et chaque classe y a son « Assigner ».
+    # La notion n'a plus de page (ADR-0113) : « Prépare interros » de la leçon porte sa case, dont la page de lecture porte l'exercice,
+    # et chaque classe y a son « Assigner ».
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
+    find("a.ps-card#notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug}").click
     assert_selector ".ps-sheet#notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug} #sheet-exercise-#{exercise.public_id}"
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }

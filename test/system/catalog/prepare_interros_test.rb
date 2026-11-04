@@ -15,13 +15,15 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
   end
 
   def frame(exercise) = "#sheet-exercise-#{exercise.public_id}"
+  def notion_sheet = course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
   test "the teacher reads the sheet without field nor check, and assigns an exercise to their classroom without reloading the page" do
     sign_in_as @teacher
     visit course_path(@course.slug)
+    click_link "Prépare interros n°1"
     page.execute_script("window.lnclassNotReloaded = true")
 
-    within "#prepare-interros" do
+    within ".ps-sheet" do
       assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
       assert_selector ".ps-subject", text: "Le théorème"
       within frame(@exercise) do
@@ -33,8 +35,8 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
         assert_selector "[role=status]", text: "✓ Assigné à 3e 1"
         assert_no_button "Assigner à 3e 1"
       end
-      within("#toute-la-lecon") { assert_button "Assigner à 3e 1" }
     end
+    assert_no_link "Commencer Prépare interros"
 
     assert page.evaluate_script("window.lnclassNotReloaded")
     assert_equal 1, Orm::ClassroomAssignment.where(assignable_id: @exercise.id, classroom_id: @classroom.id, status: "active").count
@@ -42,7 +44,7 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
 
   test "the teacher withdraws an assigned exercise from the sheet, and the label comes back" do
     sign_in_as @teacher
-    visit course_path(@course.slug)
+    visit notion_sheet
 
     within frame(@exercise) do
       click_button "Assigner à 3e 1"
@@ -55,9 +57,9 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
 
   test "the team reads the sheet without any « Assigner »" do
     sign_in_as create_team_member
-    visit course_path(@course.slug)
+    visit notion_sheet
 
-    within "#prepare-interros" do
+    within ".ps-sheet" do
       assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
       assert_selector ".ps-subject", text: "Le théorème"
       assert_selector frame(@exercise)
@@ -71,7 +73,7 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
   test "a student reads the whole-lesson exercise in the « Toute la leçon » sheet, with « Vérifier ma réponse »" do
     sign_in_as create_student_for(@course)
 
-    visit course_path(@course.slug)
+    visit fill_course_sheet_path(@course.slug, "toute-la-lecon")
     within("#toute-la-lecon") do
       assert_selector frame(@wide)
       within(frame(@wide)) { assert_button "Vérifier ma réponse" }

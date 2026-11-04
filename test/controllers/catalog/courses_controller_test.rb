@@ -768,14 +768,18 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
-    assert_select "section#prepare-interros .ps-sheet#notion-#{meiose.slug} .ps-title", text: "Prépare interros n°1"
-    assert_select "section#prepare-interros .ps-sheet#notion-#{meiose.slug} .ps-subject", text: "La méiose"
+    assert_select "section#prepare-interros a.ps-card#notion-#{meiose.slug} .ps-card-kind", text: "Prépare interros n°1"
+    assert_select "section#prepare-interros a.ps-card#notion-#{meiose.slug} .ps-card-title", text: "La méiose"
+    assert_select "section#prepare-interros .ps-sheet", 0
     assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
+
+  # sujet-avant-de-commencer : la feuille d'une notion s'ouvre sur sa page (la leçon ne porte que des cases).
+  def sheet_page(exercise, action = :fill) = public_send(:"#{action == :fill ? 'fill_course_sheet' : 'course_sheet'}_path", @course.slug, "notion-#{exercise.essential.slug}")
 
   # Lot H : un seul bouton « Indice » et une seule boîte par exercice ; l'indice de l'exercice d'abord, puis celui de chaque question, lettré.
   def hint_sheet_exercise(hint: nil, question_hints: {})
@@ -788,7 +792,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     exercise = hint_sheet_exercise(question_hints: { 1 => "Relis la propriété." })
     sign_in_as create_student_for(@course)
 
-    get course_path(@course.slug)
+    get sheet_page(exercise)
 
     frame = "turbo-frame#sheet-exercise-#{exercise.public_id}"
     assert_select "#{frame} button.ps-btn--hint[aria-controls=?]", "hint-#{exercise.public_id}", text: "Indice"
@@ -800,7 +804,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle.", 1 => "<b>Calcule</b>" })
     sign_in_as create_student_for(@course)
 
-    get course_path(@course.slug)
+    get sheet_page(exercise)
 
     box = css_select("#hint-#{exercise.public_id}").first
     assert_equal "Indice : Pense à Thalès. a. Vois le triangle. b. <b>Calcule</b>", box.text.squish
@@ -811,7 +815,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     exercise = hint_sheet_exercise
     sign_in_as create_student_for(@course)
 
-    get course_path(@course.slug)
+    get sheet_page(exercise)
 
     assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
     assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
@@ -822,7 +826,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle." })
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
 
-    get course_path(@course.slug)
+    get sheet_page(exercise, :read)
 
     assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
     assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0

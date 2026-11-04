@@ -213,6 +213,24 @@ module Queries
         assert_equal %w[Thalès Fonctions], sheet.courses
         assert_equal 3, sheet.exercises.size
       end
+
+      test "sheet(dom_id) choisit le devoir de l'élève par son ancre, avec son rang ; jamais celui d'une autre classe" do
+        other = create_classroom(level: @course.level, series: @course.series, name: "3e 2")
+        first = send_batch(thales(3), at: 2.hours.ago)
+        second = send_batch(thales(1), at: 1.hour.ago)
+        third = send_batch(thales(3), at: 30.minutes.ago)
+        foreign = send_batch(thales(1), classroom: other)
+        actor = Actor.new(user_id: @student.id, role: :student)
+
+        old, recent = [ first, third ].map { |batch| StudentAssignedSheetsQuery.new.sheet(actor:, dom_id: "devoir-#{batch.first.batch_public_id.downcase}") }
+        single = StudentAssignedSheetsQuery.new.sheet(actor:, dom_id: "devoir-#{second.first.batch_public_id.downcase}")
+
+        assert_equal [ 2, 3, 3 ], [ old.number, old.position, old.total ]
+        assert_equal [ 1, 1 ], [ recent.number, recent.position ]
+        assert_equal [ :interros, 1, 2 ], [ single.kind, single.number, single.position ]
+        assert_nil StudentAssignedSheetsQuery.new.sheet(actor:, dom_id: "devoir-#{foreign.first.batch_public_id.downcase}")
+        assert_nil StudentAssignedSheetsQuery.new.sheet(actor:, dom_id: "devoir-inconnu")
+      end
     end
   end
 end
