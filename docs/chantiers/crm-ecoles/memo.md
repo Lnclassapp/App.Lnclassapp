@@ -52,10 +52,22 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 | Entre deux `field`, que voit et que fait chacun sur les écoles de l'autre ? | **Chacun voit tout et peut noter un échange partout.** Seul un `admin` change le responsable ou l'étape d'une école qui n'est pas la sienne. | Trois droits distincts à porter par la règle d'accès : voir et noter (tout `admin` et `field`), changer l'étape (le responsable ou un `admin`), changer le responsable (`admin` seul). Un échange noté par un autre que le responsable **prévient le responsable**, sinon il découvre l'appel d'un collègue au moment de rappeler. Chaque échange affiche son auteur. |
 | Quels usages d'IA entrent dans la livraison du 15 novembre ? | **Les quatre** : compte rendu dicté, fiche de briefing avant appel, rapport pédagogique pour la direction, brouillon de relance WhatsApp. | Plus aucune marge sur 8 jours ouvrés : le suivi et la règle « à relancer » passent d'abord, les quatre usages d'IA se branchent ensuite sur un **seul accès aux modèles**, partagé. Le compte rendu dicté reçoit un fichier son envoyé par l'utilisateur : sa **menace est écrite avant tout code**. Chaque sortie d'IA est un **brouillon que l'humain relit** : rien n'entre dans le journal ni ne part vers une école sans validation. Quand le modèle ne répond pas, l'écran le dit et le suivi marche sans lui. |
 | Quelles données de l'école peut-on envoyer aux modèles externes ? | **Tout, y compris les élèves** : le rapport pour la direction peut citer des élèves et des classes nommées. | Des données de **mineurs** partent chez un tiers : c'est le risque principal du chantier. N'utiliser chez OpenRouter que des fournisseurs qui **ne gardent pas et n'entraînent pas** sur les données, et faire de ce réglage une condition d'appel, pas une option. N'envoyer que ce dont l'usage a besoin : le briefing commercial n'a pas besoin de noms d'élèves, seul le rapport pour la direction en cite. Chaque appel est tracé : qui, quelle école, quel usage, quel fournisseur. La revue sécurité est obligatoire sur ce lot. |
+| Comment le rapport pour la direction lui parvient-il ? | **L'équipe le télécharge.** Un membre de l'équipe génère le rapport depuis la fiche école, le relit, le corrige, puis le télécharge en PDF et le transmet lui-même. | La direction n'accède à rien de nouveau : aucun écran ni droit côté école. Le rapport est un brouillon modifiable avant téléchargement, et la version téléchargée est gardée dans le journal de l'école (date, auteur, période couverte). Le PDF contient des noms d'élèves : seul un `admin` ou un `field` le produit, et il n'est jamais servi par un lien public. |
 
 ## Cas limites identifiés
 
-- …
+- **Zéro** : école importée sans aucun compte ni échange → étape Prospect, sans responsable ; elle n'apparaît pas dans « à relancer » tant que personne ne l'a prise.
+- **Mille** : la liste nationale compte des milliers d'écoles. La liste du suivi se filtre (étape, responsable, région) et se pagine ; « à relancer » ne montre que les écoles suivies.
+- École Perdue qui sert de nouveau → redevient Active et prévient son responsable (réponse 4) ; sans responsable, elle rejoint la liste « sans responsable ».
+- École Abonnée inactive depuis 14 jours → reste Abonnée et entre dans « à relancer » (réponse 4).
+- Enseignant présent dans deux écoles → chaque geste compte pour l'école de sa classe (réponse 5).
+- Responsable retiré → écoles « sans responsable », relances ouvertes (réponse 6).
+- Échange noté par un collègue sur l'école d'un autre → le responsable est prévenu (réponse 7).
+- Établissement retiré ou fusionné par un nouvel import → son journal ne disparaît pas en silence.
+- Modèle IA indisponible, lent ou hors budget → l'écran le dit ; le suivi fonctionne sans IA (réponse 8).
+- Compte rendu dicté : fichier son vide, trop long, d'un autre format, ou piégé → refusé avec un message clair ; menace écrite avant le code (réponse 8).
+- Sortie d'IA fausse ou inventée → toujours un brouillon relu par l'humain, jamais enregistrée seule (réponse 8).
+- Membre `content` qui tape l'adresse du suivi → refusé comme tout acteur hors `admin` et `field`.
 
 ## Questions encore ouvertes
 
