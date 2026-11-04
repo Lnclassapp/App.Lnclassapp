@@ -360,6 +360,28 @@ module Queries
 
         assert_empty due.call(student_actor(student))
       end
+
+      # refaire-ou-continuer (UDR §3) : « Fait » = une copie terminée, réussie ou non ; le suivant, sinon le premier, sinon rien.
+      test "next_open donne le suivant non fait, sinon le premier non fait, sinon rien" do
+        n4 = create_essential(course: @course, name: "Notion 4", position: 4)
+        a, b, c = Array.new(3) { create_exercise(essential: n4, questions: 1) }
+        student = create_student
+        sheet = -> { call(student_actor(student)).interros.find { it.dom_id == "notion-#{n4.slug}" } }
+        done = ->(exercise) { create_exercise_session(student:, exercise:, status: "completed", score_percent: 0) }
+
+        done.(b)
+        assert_equal c.public_id, sheet.().next_open(after: b.public_id).public_id, "le suivant (c), pas le premier non fait (a)"
+        done.(c)
+        assert_equal a.public_id, sheet.().next_open(after: c.public_id).public_id, "après le dernier : le premier non fait"
+        done.(a)
+        assert_nil sheet.().next_open(after: c.public_id), "tout fait, même raté : rien"
+      end
+
+      test "next_open sans copie lue (visiteur) ou après un exercice inconnu : le premier de la feuille" do
+        sheet = call(nil).interros.first
+
+        assert_equal sheet.exercises.first.public_id, sheet.next_open(after: "inconnu").public_id
+      end
     end
   end
 end

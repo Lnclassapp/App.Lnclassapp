@@ -38,7 +38,7 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     end
 
     assert_selector "#session_grade"
-    click_link "Retour à la leçon"
+    click_link "Continuer les exercices"
     assert_current_path fill_course_sheet_path(@course.slug, "sujet-#{@subject.position}")
     within(frame(@exercises.first)) { assert_selector ".ps-status", text: "Réussi" }
 

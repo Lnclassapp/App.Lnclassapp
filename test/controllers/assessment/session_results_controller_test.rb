@@ -87,6 +87,193 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Revoir l'exercice/, response.body)
   end
 
+  # refaire-ou-continuer (UDR §3) : venue d'une feuille, la correction ramène à la feuille : « Refaire l'exercice » (exercice vide) et
+  # « Continuer les exercices » (le suivant non fait) ; « Retour à la leçon » quand tout est fait.
+  # Une feuille de 3 exercices : @exercise (rang 3 ou 1), puis deux autres ; `done` : ceux dont l'élève a une copie terminée.
+  def sheet_of_three(first_rank: 1, done: [])
+    @exercise.update!(position: first_rank == 1 ? 10 : 13)
+    others = [ 11, 12 ].map { |position| create_exercise(essential: @essential, position:, questions: 1) }
+    others.each_with_index do |exercise, index|
+      create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 50) if done.include?(index)
+    end
+    others
+  end
+
+  def sheet_anchor = "notion-#{@essential.slug}"
+  def exercise_anchor(exercise) = "sheet-exercise-#{exercise.public_id}"
+  def from_sheet(session = @session) = get(exercise_session_result_path(session.public_id, return_to: "sheet", sheet: sheet_anchor))
+  def fill(**) = fill_course_sheet_path(@essential.course.slug, sheet_anchor, **)
+
+  test "refaire-ou-continuer : « Continuer les exercices » va à l'exercice suivant non fait, « Refaire » rouvre la feuille avec redo" do
+    second, = sheet_of_three
+    sign_in_as @student
+
+    from_sheet
+
+    assert_select "a#restart-exercise-link[href=?]", fill(redo: @exercise.public_id, anchor: exercise_anchor(@exercise)), text: I18n.t("assessment.exercises.show.redo")
+    assert_select "form#restart-exercise-form", 0
+    assert_select "a[href=?]", fill(anchor: exercise_anchor(second)), text: I18n.t("#{scope}.show.continue_exercises")
+    assert_select ".ui-button-lg", 2
+  end
+
+  test "refaire-ou-continuer : « Continuer » revient au premier exercice non fait quand le suivant est déjà fait" do
+    first, = sheet_of_three(first_rank: 3, done: [ 1 ])
+    sign_in_as @student
+
+    from_sheet
+
+    assert_select "a[href=?]", fill(anchor: exercise_anchor(first)), text: I18n.t("#{scope}.show.continue_exercises")
+  end
+
+  test "refaire-ou-continuer : tout est fait, « Retour à la leçon » vers la case de la feuille, sans « Continuer »" do
+    sheet_of_three(done: [ 0, 1 ])
+    sign_in_as @student
+
+    from_sheet
+
+    assert_select "a[href=?]", course_path(@essential.course.slug, anchor: sheet_anchor), text: I18n.t("#{scope}.show.back_to_lesson")
+    assert_select "a", text: I18n.t("#{scope}.show.continue_exercises"), count: 0
+  end
+
+  test "refaire-ou-continuer : un devoir de Ma classe, « Reprendre le devoir » vers l'exercice suivant, puis « Retour à Ma classe »" do
+    other = create_exercise(essential: @essential, questions: 1)
+    teacher = create_teacher(classrooms: [ @classroom ])
+    batch = "BATCHREDOXXXX"
+    mine, theirs = [ @exercise, other ].map do |exercise|
+      create_assignment(classroom: @classroom, assignable: exercise, by: teacher, batch_public_id: batch, assigned_at: 1.hour.ago)
+    end
+    @session.update!(classroom_assignment_id: mine.id)
+    dom_id = "devoir-#{batch.downcase}"
+    sign_in_as @student
+
+    get exercise_session_result_path(@session.public_id, return_to: "class", sheet: dom_id)
+
+    assert_select "a[href=?]", fill_student_assigned_sheet_path(dom_id, anchor: exercise_anchor(other)), text: I18n.t("#{scope}.show.back_to_assignment")
+    assert_select "a#restart-exercise-link[href=?]", fill_student_assigned_sheet_path(dom_id, redo: @exercise.public_id, anchor: exercise_anchor(@exercise))
+
+    create_exercise_session(student: @student, exercise: other, status: "completed", score_percent: 50, classroom_assignment_id: theirs.id)
+    get exercise_session_result_path(@session.public_id, return_to: "class", sheet: dom_id)
+
+    assert_select "a[href=?]", student_classroom_path(anchor: dom_id), text: I18n.t("#{scope}.show.back_to_class")
+    assert_select "a", text: I18n.t("#{scope}.show.back_to_assignment"), count: 0
+  end
+
+  test "refaire-ou-continuer : feuille introuvable, « Retour à la leçon » et l'ancien « Refaire » en formulaire ; sans feuille, rien ne change" do
+    sign_in_as @student
+
+    get exercise_session_result_path(@session.public_id, return_to: "sheet", sheet: "notion-disparue")
+
+    assert_select "form#restart-exercise-form button", text: I18n.t("assessment.exercises.show.redo")
+    assert_select "a#restart-exercise-link", 0
+    assert_select "a", text: I18n.t("#{scope}.show.back_to_lesson"), count: 1
+    assert_select "a", text: I18n.t("#{scope}.show.continue_exercises"), count: 0
+
+    show
+
+    assert_select "form#restart-exercise-form button", text: I18n.t("assessment.exercises.show.redo")
+    assert_select "a[href=?]", course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}"), text: I18n.t("#{scope}.show.back_to_lesson")
+  end
+
+  test "refaire-ou-continuer : la fiche « à revoir » venue d'une feuille renvoie « Refaire l'exercice » à la feuille avec redo ; sans feuille, à la notion" do
+    failed_then_remediated(70)
+    sign_in_as @student
+
+    from_sheet
+
+    assert_select "#session_gap_outcome a[href=?]", fill(redo: @exercise.public_id, anchor: exercise_anchor(@exercise)), text: I18n.t("assessment.exercises.show.redo")
+
+    get exercise_session_result_path(@session.public_id, return_to: "sheet", sheet: "notion-disparue")
+
+    assert_select "#session_gap_outcome a[href=?]", course_path(@essential.course.slug, anchor: sheet_anchor), text: I18n.t("assessment.exercises.show.redo")
+
+    show
+
+    assert_select "#session_gap_outcome a[href=?]", course_path(@essential.course.slug, anchor: sheet_anchor), text: I18n.t("assessment.exercises.show.redo")
+  end
+
+  test "refaire-ou-continuer : une ancre de devoir d'une AUTRE classe : retour à Ma classe sans ancre, formulaire d'avant, aucun lien vers un devoir" do
+    teacher = create_teacher(classrooms: [ @classroom ])
+    other_classroom = create_classroom(level: @essential.course.level, name: "Autre classe")
+    create_assignment(classroom: other_classroom, assignable: @exercise, by: teacher, batch_public_id: "BATCHAUTRE", assigned_at: 1.hour.ago)
+    sign_in_as @student
+
+    get exercise_session_result_path(@session.public_id, return_to: "class", sheet: "devoir-batchautre")
+
+    assert_select "a[href=?]", student_classroom_path, text: I18n.t("#{scope}.show.back_to_class")
+    assert_select "a#restart-exercise-link", 0
+    assert_select "form#restart-exercise-form", 1
+    assert_select "a[href*=?]", "devoir-batchautre", 0
+    assert_select "a[href*='/fill']", 0
+  end
+
+  test "refaire-ou-continuer : une feuille trouvée mais sans l'exercice de la copie : les boutons d'avant, côté leçon et côté devoir" do
+    other_essential = create_essential(course: @essential.course, name: "Autre notion", position: 5)
+    create_exercise(essential: other_essential, questions: 1)
+    teacher = create_teacher(classrooms: [ @classroom ])
+    other = create_exercise(essential: @essential, questions: 1)
+    create_assignment(classroom: @classroom, assignable: other, by: teacher, batch_public_id: "BATCHAUTRED", assigned_at: 1.hour.ago)
+    sign_in_as @student
+
+    get exercise_session_result_path(@session.public_id, return_to: "sheet", sheet: "notion-#{other_essential.slug}")
+
+    assert_select "form#restart-exercise-form", 1
+    assert_select "a#restart-exercise-link", 0
+    assert_select "a[href=?]", course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}"), text: I18n.t("#{scope}.show.back_to_lesson")
+    assert_select "a", text: I18n.t("#{scope}.show.continue_exercises"), count: 0
+
+    get exercise_session_result_path(@session.public_id, return_to: "class", sheet: "devoir-batchautred")
+
+    assert_select "form#restart-exercise-form", 1
+    assert_select "a#restart-exercise-link", 0
+    assert_select "a[href=?]", student_classroom_path, text: I18n.t("#{scope}.show.back_to_class")
+    assert_select "a", text: I18n.t("#{scope}.show.back_to_assignment"), count: 0
+  end
+
+  test "refaire-ou-continuer : feuille trouvée et sans-faute : pas de « Refaire », « Continuer les exercices » reste" do
+    sheet_of_three
+    perfect = complete(score_percent: 100)
+    sign_in_as @student
+
+    from_sheet perfect
+
+    assert_select "a#restart-exercise-link", 0
+    assert_select "form#restart-exercise-form", 0
+    assert_select "a", text: I18n.t("#{scope}.show.continue_exercises"), count: 1
+  end
+
+  test "refaire-ou-continuer : feuille trouvée et pause : l'heure de reprise, ni « Refaire » ni lien redo dans la fiche" do
+    sheet_of_three
+    @session.update_columns(score_percent: 30, completed_at: Time.zone.local(2026, 1, 1))
+    gap = create_gap(student: @student, essential: @essential, source_session: @session)
+    travel_to Time.zone.local(2026, 10, 28, 10, 0)
+    complete(score_percent: 50, gap:)
+    travel_to Time.zone.local(2026, 10, 28, 10, 10)
+    complete(score_percent: 50, gap:)
+    travel_to Time.zone.local(2026, 10, 28, 10, 20)
+    third = complete(score_percent: 50, gap:)
+    travel_to Time.zone.local(2026, 10, 28, 10, 25)
+    sign_in_as @student
+
+    from_sheet third
+
+    assert_select "#restart_pause", 1
+    assert_select "a#restart-exercise-link", 0
+    assert_select "#session_gap_outcome", 1
+    assert_select "#session_gap_outcome a[href*=redo]", 0
+    assert_select "#session_gap_outcome a[href=?]", course_path(@essential.course.slug, anchor: sheet_anchor)
+  end
+
+  test "refaire-ou-continuer : l'enseignant qui ouvre la copie avec une feuille ne voit ni « Refaire » ni « Continuer »" do
+    sheet_of_three
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    from_sheet
+
+    assert_response :success
+    assert_select "a#restart-exercise-link", 0
+    assert_select "a", text: I18n.t("#{scope}.show.continue_exercises"), count: 0
+  end
+
   # CA-E13 (UDR écrans élève §3.6 bis) : dès 1 024 px, une colonne de gauche de 340 px collante (badge, note, « Recommencer »),
   # la correction à droite.
   test "CA-E13: the result in a sticky 340 px left column, the review on the right" do

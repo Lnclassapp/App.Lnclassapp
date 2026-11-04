@@ -112,6 +112,24 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a.ps-start", 0
   end
 
+  # refaire-ou-continuer (UDR §3) : `redo` ne compte que s'il désigne un exercice de la feuille.
+  test "the sheet to fill carries the exercise to redo when it belongs to the sheet, and ignores any other value" do
+    sign_in_as @student
+
+    get fill_course_sheet_path(@course.slug, @devoir_sheet, redo: @devoirs.first.public_id)
+
+    assert_select "[data-controller=prepare-sheet][data-prepare-sheet-redo-value=?]", @devoirs.first.public_id
+
+    [ @ex.public_id, "inconnu", "" ].each do |value|
+      get fill_course_sheet_path(@course.slug, @devoir_sheet, redo: value)
+
+      assert_response :success
+      assert_select "[data-prepare-sheet-redo-value]", 0
+    end
+    get fill_course_sheet_path(@course.slug, @devoir_sheet, redo: [ @devoirs.first.public_id ])
+    assert_select "[data-prepare-sheet-redo-value]", 0
+  end
+
   test "an unknown or withdrawn sheet sends back to the lesson with a message, never a 500" do
     sign_in_as @student
 
