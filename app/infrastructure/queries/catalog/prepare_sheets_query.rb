@@ -33,8 +33,8 @@ module Queries
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
       # multiple : un QCM à 2 ou 3 réponses justes (expected : le nombre de propositions à cocher, 1 sinon) ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
       # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant ; hint : l'indice de la question (ADR-0120), nil
-      # s'il est vide, lu dans la boîte de l'indice de l'exercice.
-      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :expected, :choices, :play, :image, :response, :verdict, :hint)
+      # s'il est vide, lu dans la boîte de l'indice de l'exercice ; points : le décimal de la question (1 par défaut), additionné par la vue de l'épreuve.
+      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :expected, :choices, :play, :image, :response, :verdict, :hint, :points)
       # index : le rang dans l'ordre de la feuille (celui que la feuille poste) ; picked : l'élève l'a coché dans sa copie corrigée.
       Choice = Data.define(:index, :letter, :content, :picked)
 
@@ -134,20 +134,20 @@ module Queries
       end
 
       # { exercise_id => [Row] } : questions, propositions et images en trois lectures pour toute la leçon (ni N+1, ni une par exercice).
-      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :hint, :answers, :image)
+      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :hint, :points, :answers, :image)
       AnswerRow = Data.define(:id, :content, :match_content, :correct)
 
       def questions(exercise_ids)
         rows = Orm::Question.where(exercise_id: exercise_ids).order(:exercise_id, :position, :id)
-                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter, :hint)
+                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter, :hint, :points)
         ids = rows.map { it[1] }
         answers = Orm::Answer.where(question_id: ids).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content, :correct).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: ids).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Queries::Assessment::SessionPlayQuery::Image.new(*image) ] }
         rows.group_by(&:first).transform_values do |list|
-          list.map do |_, id, type, content, unit, starter, hint|
-            QuestionRow.new(id:, type:, content:, unit:, starter:, hint:, image: images[id],
+          list.map do |_, id, type, content, unit, starter, hint, points|
+            QuestionRow.new(id:, type:, content:, unit:, starter:, hint:, points:, image: images[id],
                             answers: answers.fetch(id, []).map { AnswerRow.new(*it.drop(1)) })
           end
         end
@@ -183,7 +183,7 @@ module Queries
                      multiple: expected > 1, expected:,
                      choices: (choices(row, picked) if %i[mcq true_false].include?(kind)),
                      play: (play(row, number) if kind == :other),
-                     response: (text if corrected), verdict:, hint: row.hint.presence)
+                     response: (text if corrected), verdict:, hint: row.hint.presence, points: row.points)
       end
 
       def auto_graded?(row) = Entities::Assessment::Question.kind_for(row.type)::AUTO_GRADED
