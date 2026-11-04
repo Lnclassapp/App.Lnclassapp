@@ -42,8 +42,8 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   test "the course page of the classroom lists the exercises, each with the toggle of this classroom only" do
     sign_in_teacher
     visit lesson_path
-    assert_selector "h1.ps-title", text: "PRÉPARE INTERROS N°1"
-    assert_selector ".ps-sheet turbo-frame[id^=sheet-exercise-]", count: 2
+    assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_selector ".ps-sheet section.ps-paper-exercise[id^=sheet-exercise-]", count: 2
     assert_selector "#assignment_#{@classroom.public_id}_Exercise_#{@phases.public_id}"
     assert_no_selector "#assignment_#{@classroom.public_id}_Essential_#{@meiose.slug}"
   end
@@ -52,7 +52,7 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   test "without days, « Assigner » asks the days; Monday and Thursday give « Pour jeu. 8 oct. », then one click is enough" do
     sign_in_teacher
     visit lesson_path
-    assert_selector ".ps-sheet turbo-frame[id^=sheet-exercise-]", count: 2
+    assert_selector ".ps-sheet section.ps-paper-exercise[id^=sheet-exercise-]", count: 2
 
     assert_no_page_reload do
       within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }

@@ -160,6 +160,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0149](./0149-feuilles-prepare-interros-et-devoirs.md) | Feuilles Prépare interros et Prépare devoirs | Accepté | 2026-10-30 | 0121 | L'élève ne voit jamais une notion ni un sujet de devoir en entier et quitte la leçon pour chaque exercice |
 | [0150](./0150-qcm-plusieurs-reponses-sur-la-feuille.md) | QCM à plusieurs réponses sur la feuille | Accepté | 2026-11-04 | — | Sur la feuille de cahier, un QCM à plusieurs bonnes réponses ne dit pas combien en cocher, et un refus de vérification ne dit pas quelle question est en cause. |
 | [0151](./0151-feuilles-en-cases-lues-avant-de-commencer.md) | Feuilles en cases, lues avant de commencer | Accepté | 2026-10-31 | — | Sur la page d'une leçon et dans « Ma classe », les feuilles sont empilées et déjà prêtes à remplir ; l'élève ne voit ni combien il y en a ni le sujet en entier avant de commencer. |
+| [0152](./0152-sujet-comme-une-epreuve.md) | Sujet lu comme une épreuve | Accepté | 2026-11-04 | — | La page de lecture d'une feuille « Prépare interros » ou « Prépare devoirs » montre le sujet dans la mise en page du cahier à remplir, pas dans celle d'une épreuve d'examen. |
 <!-- index:end -->
 
 ---

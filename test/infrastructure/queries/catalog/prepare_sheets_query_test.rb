@@ -76,6 +76,15 @@ module Queries
         assert_equal [ "Pense au rapport.", nil ], questions.map(&:hint)
       end
 
+      test "chaque question porte ses points (colonne de la question, 1 par défaut), lus pour l'épreuve" do
+        questions = @e1.questions.order(:position)
+        questions.second.update!(points: 2.5)
+
+        points = call(nil).interros.first.exercises.first.questions.map(&:points)
+
+        assert_equal [ BigDecimal("1"), BigDecimal("2.5") ], points
+      end
+
       test "les sujets de devoir forment une section à part, un sujet sans exercice visible n'y figure pas" do
         subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès, réciproque")
         create_subject(course: @course, title: "Sujet vide", notions: "Rien")

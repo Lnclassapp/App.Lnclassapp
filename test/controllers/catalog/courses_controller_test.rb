@@ -828,9 +828,10 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get sheet_page(exercise, :read)
 
-    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
-    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
-    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
+    assert_select "section.ps-paper-exercise#sheet-exercise-#{exercise.public_id}"
+    assert_select "#sheet-exercise-#{exercise.public_id} .ps-hint", 0
+    assert_select "#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
+    assert_no_match "Vois le triangle.", response.body
   end
 
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
