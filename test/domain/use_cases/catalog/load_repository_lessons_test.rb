@@ -104,18 +104,21 @@ module UseCases
       def use_case(lessons: [ @lesson ], reports: Reports.new, users: Users.new(@actor), start: start_import, run: run_import, publish: cascade, policy: Policies::Catalog::ManageContentPolicy.new,
                    course_status: "published", drafts: Drafts.new, run_lesson: run_import(step: :run_lesson), courses: Courses.new(status: course_status),
                    referential: Referential.new, taxonomy: Taxonomy.new(Lookup.new(Level.new(1), Level.new(2))),
-                   run_create: run_import(step: :run_create), manifest: :all)
-        # manifest : :all (chaque fichier donné est au manifeste) ou la liste des chemins du manifeste (« niveau/matière/fichier.json »).
-        manifest = lessons.map { it.import_name.delete_prefix(LoadRepositoryLessons::IMPORT_PREFIX) } if manifest == :all
+                   run_create: run_import(step: :run_create))
         LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses:, essentials: drafts, exercises: drafts,
-                                  taxonomy:, start_import: start, run_import: run, manifest_paths: manifest,
+                                  taxonomy:, start_import: start, run_import: run,
                                   run_lesson_import: run_lesson, run_create_import: run_create, referential:,
                                   publish_cascade: publish, policy:, logger: @logger, clock: Struct.new(:now).new(@now))
       end
 
-      def call(subject = use_case, name: "Develop", pr: false) = subject.call(environment_name: name, pr_environment: pr).value
+      # Par défaut Staging : la mécanique commune (empreinte, refus, publication, journal) s'y voit sur une leçon à sujets en mode :exercises.
+      # Develop, qui remplace entier chaque fichier (amendement du 2026-11-04), est nommé dans ses propres tests.
+      # Le nom d'import d'un chargement entier (Develop) : distinct de celui d'un chargement « exercices et sujets ».
+      def whole(lesson) = lesson.import_name.sub("chargement-automatique-", "chargement-automatique-entiere-")
 
-      test "Develop loads a changed lesson: one upload under the import name, the run, then the cascade on the lesson found by its key" do
+      def call(subject = use_case, name: "Staging", pr: false) = subject.call(environment_name: name, pr_environment: pr).value
+
+      test "Staging loads a changed lesson with subjects: one upload under the import name, the exercises-only run, then the cascade on the lesson found by its key" do
         summary = call
 
         assert_equal [ :done, { @lesson.import_name => :loaded } ], [ summary.outcome, summary.lessons ]
@@ -299,8 +302,8 @@ module UseCases
       test "Develop replaces whole a present programme lesson without subjects, through the whole-lesson import, then publishes it" do
         lesson = programme_lesson("Pythagore")
 
-        assert_equal({ lesson.import_name => :replaced }, call(use_case(lessons: [ lesson ])).lessons)
-        assert_equal [ [ :start, @actor, [ lesson.import_name ], [ lesson.content ], "course_tree" ], [ :run_lesson, 42 ], [ :cascade, @actor, :course, "pythagore" ] ], @calls
+        assert_equal({ lesson.import_name => :replaced }, call(use_case(lessons: [ lesson ]), name: "Develop").lessons)
+        assert_equal [ [ :start, @actor, [ whole(lesson) ], [ lesson.content ], "course_tree" ], [ :run_lesson, 42 ], [ :cascade, @actor, :course, "pythagore" ] ], @calls
       end
 
       test "Develop creates whole an absent programme lesson and says created" do
@@ -308,50 +311,72 @@ module UseCases
         lesson = programme_lesson("Suites numériques", folder: "1ere-d")
         run_lesson = run_import(step: :run_lesson) { courses.keys[[ "suitesnumeriques", 1, 2, nil ]] = "suites-numeriques" }
 
-        assert_equal({ lesson.import_name => :created }, call(use_case(lessons: [ lesson ], courses:, run_lesson:)).lessons)
+        assert_equal({ lesson.import_name => :created }, call(use_case(lessons: [ lesson ], courses:, run_lesson:), name: "Develop").lessons)
         assert_equal [ :start, :run_lesson, :cascade ], @calls.map(&:first)
         assert_equal "suites-numeriques", @calls.last.last
       end
 
-      test "a programme lesson with subjects keeps the exercises-only import on Develop" do
-        lesson = programme_lesson("Thalès", subjects: true)
+      # --- Amendement du 2026-11-04 (standard-de-test, ADR-0123 §4.2) : Develop remplace entier chaque fichier v3, sans manifeste ---
 
-        assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ])).lessons)
-        assert_equal %i[start run cascade], @calls.map(&:first)
+      test "Develop replaces whole a present lesson with subjects (Thalès), subjects included, through the whole-lesson import, then publishes it" do
+        summary = call(name: "Develop")
+
+        assert_equal({ @lesson.import_name => :replaced }, summary.lessons)
+        assert_equal [ [ :start, @actor, [ whole(@lesson) ], [ @content ], "course_tree" ], [ :run_lesson, 42 ], [ :cascade, @actor, :course, "thales" ] ], @calls
+        assert_includes @logs, [ :info, "[contenus] Thalès : leçon remplacée entière (#{whole(@lesson)})" ]
       end
 
-      test "Develop ignores a lesson outside the programme folders" do
+      test "Develop replaces whole a 3ème lesson without subjects, and creates an absent one of any folder" do
+        courses = Courses.new
         third = programme_lesson("Pythagore", folder: "3eme")
+        stray = programme_lesson("Calcul littéral", folder: "dossier-hors-programme")
+        run_lesson = run_import(step: :run_lesson) { courses.keys[[ "calcullitteral", 1, 2, nil ]] = "calcul-litteral" }
 
-        assert_equal({}, call(use_case(lessons: [ third ])).lessons)
+        summary = call(use_case(lessons: [ stray, third ], courses:, run_lesson:), name: "Develop")
+
+        assert_equal({ stray.import_name => :created, third.import_name => :replaced }, summary.lessons)
+        assert_equal [ [ :start, :run_lesson, :cascade ] * 2 ].flatten, @calls.map(&:first)
+      end
+
+      test "Develop loads every v3 file it is given, with no manifest: each folder, with or without subjects, through the whole-lesson import only" do
+        lessons = [ programme_lesson("Pythagore"), programme_lesson("Thalès", folder: "tle-d", subjects: true), programme_lesson("Pythagore", folder: "3eme"),
+                    programme_lesson("Thalès", folder: "6eme"), @lesson ]
+
+        summary = call(use_case(lessons:), name: "Develop")
+
+        assert_equal lessons.to_h { [ it.import_name, :replaced ] }, summary.lessons
+        assert_equal lessons.size, @calls.count { it.first == :run_lesson }
+        assert_empty(@calls.select { %i[run run_create].include?(it.first) })
+        assert_empty(@logs.select { it.last.include?("non chargé(s) ici") })
+      end
+
+      test "Develop never deletes: an empty source writes nothing, and with one file only that file's lesson is imported and published" do
+        assert_equal [ :done, {} ], call(use_case(lessons: []), name: "Develop").then { [ it.outcome, it.lessons ] }
+        assert_empty @calls
+
+        # Thalès (et Thalès de série) sont présentes ; seul le fichier Pythagore est donné.
+        lesson = programme_lesson("Pythagore")
+        assert_equal({ lesson.import_name => :replaced }, call(use_case(lessons: [ lesson ]), name: "Develop").lessons)
+        assert_equal %i[start run_lesson cascade], @calls.map(&:first)
+        assert_equal [ [ whole(lesson) ], "pythagore" ], [ @calls.first[2], @calls.last.last ]
+      end
+
+      test "Develop does not reload a file already loaded whole and unchanged, even one with subjects, and says unchanged" do
+        reports = Reports.new(loaded: { [ "course_tree", whole(@lesson) ] => @lesson.checksum_sha256 })
+
+        assert_equal({ @lesson.import_name => :unchanged }, call(use_case(reports:), name: "Develop").lessons)
         assert_empty @calls
       end
 
-      # --- standard-de-test §4.5 : Develop restreint au manifeste, Staging ajoute les absentes ---
+      # Avant l'amendement du 2026-11-04, Develop chargeait Thalès en « exercices et sujets » : cette empreinte ne dit pas la leçon entière.
+      test "Develop replaces whole a lesson whose unchanged file was only loaded exercises-only before, then says unchanged next time" do
+        reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => @lesson.checksum_sha256 })
 
-      test "Develop loads only the files of the manifest: a programme file outside it is not loaded, and a present lesson outside it is neither read nor touched" do
-        inside = programme_lesson("Pythagore")
-        outside = programme_lesson("Thalès", folder: "tle-d")
-
-        summary = call(use_case(lessons: [ inside, outside ], manifest: [ inside.import_name.delete_prefix("chargement-automatique-") ]))
-
-        assert_equal({ inside.import_name => :replaced }, summary.lessons)
-        assert_equal [ [ :start, @actor, [ inside.import_name ], [ inside.content ], "course_tree" ], [ :run_lesson, 42 ], [ :cascade, @actor, :course, "pythagore" ] ], @calls
-        assert_includes @logs, [ :info, "[contenus] fichier(s) v3 non chargé(s) ici : tle-d 1" ]
-      end
-
-      test "Develop with an empty manifest loads no whole lesson, but a lesson with subjects keeps its exercises-only import" do
-        plain = programme_lesson("Pythagore")
-        subjects = programme_lesson("Thalès", subjects: true)
-
-        assert_equal({ subjects.import_name => :loaded }, call(use_case(lessons: [ plain, subjects ], manifest: [])).lessons)
-        assert_equal %i[start run cascade], @calls.map(&:first)
-      end
-
-      test "Develop never deletes: the whole-lesson import is the only writer it calls, and only for manifest files" do
-        outside = programme_lesson("Thalès", folder: "tle-d")
-
-        assert_equal({}, call(use_case(lessons: [ outside ], manifest: [])).lessons)
+        assert_equal({ @lesson.import_name => :replaced }, call(use_case(reports:), name: "Develop").lessons)
+        assert_equal %i[start run_lesson cascade], @calls.map(&:first)
+        @calls.clear
+        # Staging garde son nom d'import et son empreinte : rien n'y change.
+        assert_equal({ @lesson.import_name => :unchanged }, call(use_case(reports:), name: "Staging").lessons)
         assert_empty @calls
       end
 
@@ -360,7 +385,7 @@ module UseCases
         lesson = programme_lesson("Suites numériques", folder: "1ere-d")
         run_create = run_import(step: :run_create) { courses.keys[[ "suitesnumeriques", 1, 2, nil ]] = "suites-numeriques" }
 
-        summary = call(use_case(lessons: [ lesson ], courses:, run_create:, manifest: []), name: "Staging")
+        summary = call(use_case(lessons: [ lesson ], courses:, run_create:), name: "Staging")
 
         assert_equal({ lesson.import_name => :created }, summary.lessons)
         assert_equal [ [ :start, @actor, [ lesson.import_name ], [ lesson.content ], "course_tree" ], [ :run_create, 42 ], [ :cascade, @actor, :course, "suites-numeriques" ] ], @calls
@@ -369,7 +394,7 @@ module UseCases
       test "Staging leaves a present programme lesson intact: no upload, no import, no publication, and says ignored" do
         lesson = programme_lesson("Pythagore")
 
-        summary = call(use_case(lessons: [ lesson ], manifest: []), name: "Staging")
+        summary = call(use_case(lessons: [ lesson ]), name: "Staging")
 
         assert_equal({ lesson.import_name => :ignored }, summary.lessons)
         assert_empty @calls
@@ -386,7 +411,7 @@ module UseCases
       test "Staging still refreshes only the exercises of a lesson with subjects" do
         lesson = programme_lesson("Thalès", subjects: true)
 
-        assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ], manifest: []), name: "Staging").lessons)
+        assert_equal({ lesson.import_name => :loaded }, call(use_case(lessons: [ lesson ]), name: "Staging").lessons)
         assert_equal %i[start run cascade], @calls.map(&:first)
       end
 
@@ -399,7 +424,7 @@ module UseCases
         lesson = programme_lesson("Suites numériques", folder: "1ere-d")
         courses = Courses.new
 
-        summary = call(use_case(lessons: [ lesson ], courses:, run_create: run_import(step: :run_create, imported: 0), manifest: []), name: "Staging")
+        summary = call(use_case(lessons: [ lesson ], courses:, run_create: run_import(step: :run_create, imported: 0)), name: "Staging")
 
         assert_equal({ lesson.import_name => :ignored }, summary.lessons)
         assert_equal %i[start run_create], @calls.map(&:first)
@@ -417,23 +442,23 @@ module UseCases
 
       test "an unchanged programme lesson does nothing; one whose publication was interrupted is published again without reimport" do
         lesson = programme_lesson("Pythagore")
-        reports = Reports.new(loaded: { [ "course_tree", lesson.import_name ] => lesson.checksum_sha256 })
+        reports = Reports.new(loaded: { [ "course_tree", whole(lesson) ] => lesson.checksum_sha256 })
 
-        assert_equal({ lesson.import_name => :unchanged }, call(use_case(lessons: [ lesson ], reports:)).lessons)
-        assert_equal({ lesson.import_name => :republished }, call(use_case(lessons: [ lesson ], reports:, course_status: "draft")).lessons)
+        assert_equal({ lesson.import_name => :unchanged }, call(use_case(lessons: [ lesson ], reports:), name: "Develop").lessons)
+        assert_equal({ lesson.import_name => :republished }, call(use_case(lessons: [ lesson ], reports:, course_status: "draft"), name: "Develop").lessons)
         assert_equal [ [ :cascade, @actor, :course, "pythagore" ] ], @calls
       end
 
       test "a whole-lesson import that is refused is not published" do
         lesson = programme_lesson("Pythagore")
 
-        assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1))).lessons)
+        assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1)), name: "Develop").lessons)
         assert_equal %i[start run_lesson], @calls.map(&:first)
       end
       test "a refused import says why in the log: its status and its number of errors" do
         lesson = programme_lesson("Pythagore")
 
-        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, status: "completed", error_count: 2)))
+        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, status: "completed", error_count: 2)), name: "Develop")
 
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 2 erreur(s)), voir Imports" ] ], @logs
       end
@@ -447,7 +472,7 @@ module UseCases
         errors[2] = error.("courses[0].notions[0].name", "invalid_value", value: "Nom de notion")
         lesson = programme_lesson("Pythagore")
 
-        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 4, errors:)))
+        call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 4, errors:)), name: "Develop")
 
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 4 erreur(s)), voir Imports : unknown_level courses[0].level_name " \
                                 "(value: Tle) ; write_failed courses[0] (exception: ActiveRecord::InvalidForeignKey, constraint: fk_rails_1) ; " \
@@ -457,9 +482,9 @@ module UseCases
       test "a whole-lesson load says replaced or created in the log before the publication" do
         lesson = programme_lesson("Pythagore")
 
-        call(use_case(lessons: [ lesson ], publish: cascade(Shared::Result.failure(:conflict))))
+        call(use_case(lessons: [ lesson ], publish: cascade(Shared::Result.failure(:conflict))), name: "Develop")
 
-        assert_equal [ [ :info, "[contenus] Pythagore : leçon remplacée entière (#{lesson.import_name})" ],
+        assert_equal [ [ :info, "[contenus] Pythagore : leçon remplacée entière (#{whole(lesson)})" ],
                        [ :error, "[contenus] Pythagore : publication refusée (conflict)" ] ], @logs
       end
 
@@ -475,7 +500,7 @@ module UseCases
         broken = Object.new.tap { it.define_singleton_method(:params) { raise "illisible" } }
         lesson = programme_lesson("Pythagore")
 
-        summary = call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1, errors: [ broken ])))
+        summary = call(use_case(lessons: [ lesson ], run_lesson: run_import(step: :run_lesson, error_count: 1, errors: [ broken ])), name: "Develop")
 
         assert_equal({ lesson.import_name => :refused }, summary.lessons)
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 1 erreur(s)), voir Imports" ] ], @logs
@@ -487,7 +512,7 @@ module UseCases
                                       plan_entries: %w[a b c], drenas: [ "Abidjan 1", "Aboisso" ], conflicts: [ "matière Mathématiques" ],
                                       interruptions: [ "barème (PG::ConnectionBad : coupé)" ])
 
-        call(use_case(referential:))
+        call(use_case(referential:), name: "Develop")
 
         assert_equal 1, referential.calls
         assert_equal [ [ :info, "[contenus] référentiel complété : niveaux 1ère ; séries A1, A2 ; couples 1ère A1, 1ère A2 ; matières EDHC ; " \
@@ -497,7 +522,7 @@ module UseCases
       end
 
       test "a complete referential logs nothing" do
-        call(use_case)
+        call(use_case, name: "Develop")
 
         assert_empty(@logs.select { it.last.include?("référentiel") })
       end
@@ -514,9 +539,9 @@ module UseCases
       test "a referential that fails is logged and the lessons are still loaded" do
         failing = Referential.new.tap { it.define_singleton_method(:complete) { raise "base coupée" } }
 
-        summary = call(use_case(referential: failing))
+        summary = call(use_case(referential: failing), name: "Develop")
 
-        assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
+        assert_equal({ @lesson.import_name => :replaced }, summary.lessons)
         assert_equal [ :error, "[contenus] référentiel non complété (RuntimeError : base coupée)" ], @logs.first
       end
       test "a programme lesson whose level or material is unknown here is not taken for present, and the import says why" do
@@ -525,7 +550,7 @@ module UseCases
           @calls.clear
           refused = run_import(step: :run_lesson, error_count: 1)
 
-          assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], taxonomy: Taxonomy.new(lookup), run_lesson: refused)).lessons)
+          assert_equal({ lesson.import_name => :refused }, call(use_case(lessons: [ lesson ], taxonomy: Taxonomy.new(lookup), run_lesson: refused), name: "Develop").lessons)
           assert_equal %i[start run_lesson], @calls.map(&:first)
         end
       end
@@ -534,9 +559,9 @@ module UseCases
       test "before loading, the running reports of an interrupted load are failed, and the log says how many" do
         reports = Reports.new.tap { it.orphans = %w[abc def] }
 
-        summary = call(use_case(reports:))
+        summary = call(use_case(reports:), name: "Develop")
 
-        assert_equal({ @lesson.import_name => :loaded }, summary.lessons)
+        assert_equal({ @lesson.import_name => :replaced }, summary.lessons)
         assert_equal [ [ "course_tree", "chargement-automatique-", @now ] ], reports.failed_running
         assert_includes @logs, [ :warn, "[contenus] 2 import(s) d'un chargement interrompu passé(s) en échec : abc, def" ]
       end

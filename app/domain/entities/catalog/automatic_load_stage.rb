@@ -4,8 +4,9 @@
 module Entities
   module Catalog
     # kind : :load (Develop, Staging), :skip (production, environnement de PR, nom absent) ou :unknown (tout autre nom, gardé dans name).
-    # whole_lessons : Develop seul remplace entières les leçons v3 du programme (ADR-0123), restreintes au manifeste du jeu standard
-    # (standard-de-test §4.5, rien n'est supprimé ailleurs). create_missing : Staging seul crée les leçons v3 absentes et ne touche pas aux présentes.
+    # whole_lessons : Develop seul remplace entière chaque leçon v3 du dépôt, de tout dossier de niveau, 3ème et leçons à sujets comprises
+    # (ADR-0123 §4.2 et standard-de-test, amendements du 2026-11-04 ; rien n'est supprimé ailleurs). create_missing : Staging seul crée les
+    # leçons v3 absentes du programme et ne touche pas aux présentes.
     AutomaticLoadStage = Data.define(:kind, :name, :whole_lessons, :create_missing) do
       def initialize(whole_lessons: false, create_missing: false, **) = super
 
@@ -25,17 +26,16 @@ module Entities
       def skip? = kind == :skip
       def unknown? = kind == :unknown
       def whole_lessons? = load? && whole_lessons
-      def manifest_only? = whole_lessons?
       def create_missing? = load? && create_missing
 
-      # Le remplacement d'une leçon du dépôt : :exercises (elle porte des sujets de devoir, ADR-0122, partout où l'on charge), :lesson
-      # (Develop, dossier du programme v3 et fichier du manifeste : remplacée entière), :create_only (Staging, dossier du programme v3 :
-      # créée si absente, intacte sinon) ou nil (pas chargée ici, ou environnement sans chargement).
-      def mode_for(level_directory:, subjects:, in_manifest: false)
+      # Le remplacement d'une leçon du dépôt : :lesson (Develop, tout fichier v3 : remplacée entière, cours, notions, fiches, exercices et
+      # sujets, quels que soient son dossier et ses sujets), :exercises (ailleurs, elle porte des sujets de devoir, ADR-0122), :create_only
+      # (Staging, dossier du programme v3 : créée si absente, intacte sinon) ou nil (pas chargée ici, ou environnement sans chargement).
+      def mode_for(level_directory:, subjects:)
         return unless load?
+        return :lesson if whole_lessons?
         return :exercises if subjects
         return unless V3ProgrammeLevels.include?(level_directory)
-        return :lesson if whole_lessons? && in_manifest
 
         :create_only if create_missing?
       end
