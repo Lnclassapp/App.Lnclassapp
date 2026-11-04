@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré ([#467](https://github.com/Lnclassapp/App.Lnclassapp/pull/467) vers `Develop`, 2026-11-04), clos |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/refaire-ou-continuer` |
 | **Programme** | — |

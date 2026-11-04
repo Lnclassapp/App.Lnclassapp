@@ -85,7 +85,7 @@ Fonctionnalité: Refaire ou continuer depuis la correction
 ## 6. Décisions rattachées
 
 - Pas d'ADR : aucune table, aucun port, aucun contrat de domaine.
-- UDR-XXXX-refaire-ou-continuer (amende l'UDR-0138 §3.4 et l'UDR-0151 §3 pour les boutons de la correction).
+- UDR-0153 (amende l'UDR-0138 §3.4 et l'UDR-0151 §3 pour les boutons de la correction).
 
 ## 7. Mesures
 

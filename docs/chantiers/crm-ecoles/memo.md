@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/crm-ecoles` |
 | **Programme** | — |
