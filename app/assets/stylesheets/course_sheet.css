@@ -515,6 +515,35 @@
   pointer-events: none;
 }
 
+/* Sur téléphone, la fiche de la leçon va bord à bord (UDR fiche-de-cours-pleine-largeur-sur-telephone §3) : on rend la marge
+   de la colonne (gutter) à la feuille et on resserre ses remplissages. Au-delà de 640 px, rien ne change. */
+@media (max-width: 639px) {
+  .sheet-screen[data-embedded] {
+    margin-inline: calc(-1 * var(--spacing-gutter));
+    padding: 12px 0;
+    gap: 12px;
+    border-radius: 0;
+  }
+
+  .sheet-screen[data-embedded] .sheet-page-body {
+    padding: 16px 12px 16px 16px;
+  }
+
+  .sheet-screen[data-embedded] .sheet-box,
+  .sheet-screen[data-embedded] .sheet-box[data-tone] {
+    padding: 18px 12px 12px;
+  }
+
+  .sheet-screen[data-embedded] .sheet-steps,
+  .sheet-screen[data-embedded] .sheet-practice-questions {
+    padding-left: 20px;
+  }
+
+  .sheet-screen[data-embedded] .sheet-card {
+    padding: 10px;
+  }
+}
+
 /* ---- « Je m'entraîne » (UDR 0147-je-m-entraine-dans-la-fiche §3.2 à §3.5, §3.10) --------------------------------------------
    Jetons du cahier seulement. Cibles de 48 px, cases qui passent à la ligne avec leur texte (jamais de défilement horizontal),
    verdict en mots et en symbole, jamais par la couleur seule. */
@@ -536,6 +565,16 @@
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+/* Une formule en ligne plus large que la ligne défile dans son propre cadre, jamais la page (rendu-lecons-v3-390). */
+div.sheet-text,
+p.sheet-text,
+.sheet-practice-line > .sheet-text {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .sheet-practice-line {

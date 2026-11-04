@@ -32,7 +32,9 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     end
     # CA-25 : « Revoir la notion » mène à la leçon, sur la notion, où l'exercice est proposé (la notion n'a plus de page).
     assert_current_path course_path(course.slug)
-    # La feuille de la notion porte l'exercice proposé (« Exercice 3 ») ; la copie de remédiation se joue sur sa page.
+    # La case de la notion est là ; sa feuille porte l'exercice proposé (« Exercice 3 ») ; la copie de remédiation se joue sur sa page.
+    assert_selector "a.ps-card#notion-#{thales.slug}"
+    visit fill_course_sheet_path(course.slug, "notion-#{thales.slug}")
     assert_selector ".ps-sheet#notion-#{thales.slug} turbo-frame#sheet-exercise-#{offered.public_id}"
     visit exercise_path(offered.public_id)
     click_on I18n.t("assessment.exercises.show.start")

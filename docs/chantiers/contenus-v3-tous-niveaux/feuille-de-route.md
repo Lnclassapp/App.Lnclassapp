@@ -10,7 +10,7 @@ Source : `docs/contenus/progressions-2026-2027/` (10 premières leçons par mati
 | Niveau | Maths | Français | HG | SVT | PC | Philo | EDHC | Total |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Tle (A1, A2, C, D) | 23 | 7 | 10 | 24 | 13 | 10 | — | **87** |
-| 1ère (A, C, D) | 18 | 11 | 10 | 25 | 21 | 8 | — | **93** |
+| 1ère (A1, A2, C, D) | 18 | 11 | 10 | 25 | 21 | 8 | — | **93** |
 | 2nde (A, C) | 17 | 10 | 10 | 18 | 13 | — | — | **68** |
 | 3ème | fait | fait | fait | fait | fait | — | fait | **0** |
 | 4ème | 10 | 10 | 10 | 9 | 10 | — | 10 | **59** |
@@ -73,11 +73,12 @@ Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de
 | Sources | Écart | Tranché par |
 |---|---|---|
 | CLAUDE.md « une PR par chantier » ↔ « une session nommée qui rassemble les leçons » | une session ne livre pas 42 PR sous 40 commits | la session d'orchestration rassemble ; chaque vague a sa session enfant, son chantier et sa PR (même règle qu'en 3ème) |
+| `progressions-2026-2027/README.md` (« en 1ère, la série reste A ») ↔ référentiel `db/seeds/catalog.rb` (1ère : A1, A2, C, D) | un cours `A` de 1ère ne s'importe pas | orchestrateur, 2026-11-02 : comme en Tle, une leçon de 1ère A est déclinée en A1 et A2 (`1ere-a1/`, `1ere-a2/`) ; relevé par la vague P8 |
 
 ## Portes du programme
 
 - [x] Feuille de route validée par le porteur (D1 à D5, 2026-10-31)
-- [ ] Tle : 8 vagues fusionnées, 87 leçons rangées
+- [x] Tle : 9 PR fusionnées (#415, #420 à #422, #424 à #428), 82 leçons distinctes (5 de moins que prévu : leçons communes sous deux intitulés)
 - [ ] 1ère : 9 vagues fusionnées, 93 leçons
 - [ ] 2nde : 7 vagues fusionnées, 68 leçons
 - [x] 3ème : rien à compléter (D2)

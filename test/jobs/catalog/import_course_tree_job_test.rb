@@ -38,6 +38,8 @@ class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
 
   test "it runs the course tree adapter" do
     assert_instance_of UseCases::Catalog::ImportCourseTree, Catalog::ImportCourseTreeJob.new.send(:adapter)
+    # ADR-0123 : l'écran Imports ne remplace jamais une leçon publiée.
+    assert_equal :draft, Catalog::ImportCourseTreeJob.new.send(:adapter).replace_mode
     assert_equal "Catalog::ImportCourseTreeJob", Rails.configuration.x.import_jobs.fetch(UseCases::Catalog::ImportCourseTree::KIND)
   end
 end

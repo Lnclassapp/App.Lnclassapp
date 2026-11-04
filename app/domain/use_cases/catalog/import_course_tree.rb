@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices avec indice, sujets de devoir, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0121 · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0121, 0122, 0123 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -32,14 +32,23 @@ module UseCases
       SUBJECTS_DETAIL = "subjects_created"
       Node = Ports::Catalog::ContentTreeWriterPort
 
-      # replace_exercises : réservé au chargement automatique hors production (l'écran Imports ne le passe jamais). Une leçon déjà
-      # présente, publiée ou non, n'est alors ni refusée ni remplacée entière : seuls ses exercices, problèmes et sujets le sont.
-      def initialize(courses:, essentials:, taxonomy:, writer:, replace_exercises: false)
+      # Ce que devient une leçon déjà présente (même titre, niveau, matière, série). :draft (l'écran Imports, le seul mode qu'il passe) :
+      # remplacée entière si elle et tout son contenu sont en brouillon, refusée sinon (lesson_already_published, ADR-0116 §4.4).
+      # Les deux autres sont réservés au chargement automatique hors production : :exercises (ADR-0122) remplace, publiée ou non, ses
+      # seuls exercices, problèmes et sujets ; :lesson (ADR-0123, Develop seul) la remplace entière, publiée ou non ; :create_only (Staging,
+      # standard-de-test) ne crée que les leçons absentes : une leçon présente est laissée intacte, sans erreur.
+      REPLACE_MODES = %i[draft exercises lesson create_only].freeze
+
+      attr_reader :replace_mode
+
+      def initialize(courses:, essentials:, taxonomy:, writer:, replace: :draft)
+        raise ArgumentError, "mode de remplacement inconnu : #{replace.inspect}" unless REPLACE_MODES.include?(replace)
+
         @courses = courses
         @essentials = essentials
         @taxonomy = taxonomy
         @writer = writer
-        @replace_exercises = replace_exercises
+        @replace_mode = replace
       end
 
       # Une leçon n'a pas de parent : l'enveloppe ne cite aucune cible.
@@ -85,9 +94,11 @@ module UseCases
       private
 
       def replace(node)
-        return @writer.replace_draft(course_id: node.existing_id, tree: node) unless @replace_exercises
-
-        @writer.replace_exercises(course_id: node.existing_id, tree: node)
+        case @replace_mode
+        when :exercises then @writer.replace_exercises(course_id: node.existing_id, tree: node)
+        when :lesson then @writer.replace_lesson(course_id: node.existing_id, tree: node)
+        else @writer.replace_draft(course_id: node.existing_id, tree: node)
+        end
       end
 
       # Clé de doublon de la leçon (celle de CourseRepository#existing_keys).
@@ -96,12 +107,15 @@ module UseCases
           lookup.resolve_material(course["material_name"]).id, series_id(course["series_name"], lookup) ]
       end
 
-      # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon.
-      # La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas comme un doublon.
+      # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon ; en mode
+      # :lesson (ADR-0123), remplacée entière quel que soit son statut. La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas
+      # comme un doublon.
       def replacement_item(course, path, lookup, key, existing_id)
-        return exercises_item(course, path, lookup, key, existing_id) if @replace_exercises
+        return exercises_item(course, path, lookup, key, existing_id) if @replace_mode == :exercises
+        # Même clé que la base : le moteur compte la leçon parmi les ignorées (doublon) et n'écrit rien.
+        return Entities::Catalog::ImportItem.new(path:, key:) if @replace_mode == :create_only
 
-        unless replaceable?(@courses.status_for_update(id: existing_id))
+        if @replace_mode == :draft && !replaceable?(@courses.status_for_update(id: existing_id))
           return Entities::Catalog::ImportItem.new(path:, errors: [ rule_error(path, "lesson_already_published", course: course["name"].squish) ])
         end
 

@@ -19,12 +19,18 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
     assert_current_path teacher_home_path
   end
 
+  # sujet-avant-de-commencer, Lot B : les bascules sont sur la page de la feuille dans la classe, la leçon n'a que des cases.
+  def sheet_path = classroom_course_sheet_path(@classroom.public_id, @course.slug, "notion-#{@essential.slug}")
   def toggle = "#assignment_#{@classroom.public_id}_Exercise_#{@phases.public_id}"
 
   test "assign an exercise, then withdraw it, without a page reload" do
     visit classroom_course_path(@classroom.public_id, @course.slug)
     assert_selector "h1", text: "Génétique"
-    assert_selector "#prepare-interros [id^='assignment_']", count: 2
+    assert_selector "#prepare-interros a.ps-card", count: 1
+    assert_no_selector "[id^='assignment_']"
+    click_link "Prépare interros n°1"
+    assert_current_path sheet_path
+    assert_selector "[id^='assignment_']", count: 2
     assert_no_text "Brouillon"
 
     due = I18n.l(Time.zone.today.next_occurring(:tuesday), format: :due_short)
@@ -49,7 +55,7 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
 
   # Le bouton « Modifier » est sur la page de la classe (Lot E) : la modale s'ouvre ici dans le frame, comme lui.
   test "unchecking every session day brings the days modal back on « Assigner »" do
-    visit classroom_course_path(@classroom.public_id, @course.slug)
+    visit sheet_path
 
     assert_no_page_reload do
       open_in_modal edit_classroom_session_days_path(@classroom.public_id)

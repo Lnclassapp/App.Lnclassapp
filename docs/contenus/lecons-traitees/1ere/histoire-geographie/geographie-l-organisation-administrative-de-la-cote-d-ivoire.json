@@ -1,0 +1,1423 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — L'organisation administrative de la Côte d'Ivoire",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "carte-districts",
+          "kind": "map",
+          "description": "Une carte de la Côte d'Ivoire montre les 14 districts. Les deux districts autonomes, Abidjan et Yamoussoukro, sont colorés à part des douze autres districts. Dix villes sont repérées : Abidjan, Yamoussoukro, Bouaké, Korhogo, Man, Daloa, San-Pédro, Abengourou, Bondoukou et Odienné.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "abidjan",
+                "category": 1
+              },
+              {
+                "id": "yamoussoukro",
+                "category": 1
+              },
+              {
+                "id": "bas_sassandra",
+                "category": 2
+              },
+              {
+                "id": "comoe",
+                "category": 2
+              },
+              {
+                "id": "denguele",
+                "category": 2
+              },
+              {
+                "id": "goh_djiboua",
+                "category": 2
+              },
+              {
+                "id": "lacs",
+                "category": 2
+              },
+              {
+                "id": "lagunes",
+                "category": 2
+              },
+              {
+                "id": "montagnes",
+                "category": 2
+              },
+              {
+                "id": "sassandra_marahoue",
+                "category": 2
+              },
+              {
+                "id": "savanes",
+                "category": 2
+              },
+              {
+                "id": "vallee_du_bandama",
+                "category": 2
+              },
+              {
+                "id": "woroba",
+                "category": 2
+              },
+              {
+                "id": "zanzan",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan"
+              },
+              {
+                "id": "yamoussoukro"
+              },
+              {
+                "id": "bouake"
+              },
+              {
+                "id": "korhogo"
+              },
+              {
+                "id": "man"
+              },
+              {
+                "id": "daloa"
+              },
+              {
+                "id": "san_pedro"
+              },
+              {
+                "id": "abengourou"
+              },
+              {
+                "id": "bondoukou"
+              },
+              {
+                "id": "odienne"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "District autonome (Abidjan et Yamoussoukro)",
+              "Autre district"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "niveaux-decoupage",
+          "kind": "diagram",
+          "description": "Un schéma fléché descend du plus grand au plus petit niveau du découpage administratif : la Côte d'Ivoire se divise en districts, un district en régions, une région en départements, un département en sous-préfectures, et une sous-préfecture en villages.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "pays",
+                "label": "Côte d'Ivoire (État unitaire)"
+              },
+              {
+                "id": "district",
+                "label": "District",
+                "category": 1
+              },
+              {
+                "id": "region",
+                "label": "Région",
+                "category": 1
+              },
+              {
+                "id": "dep",
+                "label": "Département",
+                "category": 1
+              },
+              {
+                "id": "sp",
+                "label": "Sous-préfecture",
+                "category": 1
+              },
+              {
+                "id": "vil",
+                "label": "Village",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "pays",
+                "to": "district",
+                "label": "se divise en"
+              },
+              {
+                "from": "district",
+                "to": "region",
+                "label": "se divise en"
+              },
+              {
+                "from": "region",
+                "to": "dep",
+                "label": "se divise en"
+              },
+              {
+                "from": "dep",
+                "to": "sp",
+                "label": "se divise en"
+              },
+              {
+                "from": "sp",
+                "to": "vil",
+                "label": "se divise en"
+              }
+            ],
+            "legend": [
+              "Niveau du découpage"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "deux-pouvoirs",
+          "kind": "diagram",
+          "description": "Un schéma en arbre oppose deux manières d'administrer. À gauche, la déconcentration : des représentants de l'État nommés, le préfet dans le département et le sous-préfet dans la sous-préfecture. À droite, la décentralisation : des collectivités territoriales à élus, le conseil municipal et le maire dans la commune, le conseil régional dans la région.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "adm",
+                "label": "Administration du territoire"
+              },
+              {
+                "id": "dec",
+                "label": "Déconcentration : représentants de l'État nommés",
+                "category": 1
+              },
+              {
+                "id": "cent",
+                "label": "Décentralisation : collectivités à élus",
+                "category": 2
+              },
+              {
+                "id": "pref",
+                "label": "Préfet (département)",
+                "category": 1
+              },
+              {
+                "id": "sous",
+                "label": "Sous-préfet (sous-préfecture)",
+                "category": 1
+              },
+              {
+                "id": "com",
+                "label": "Conseil municipal et maire (commune)",
+                "category": 2
+              },
+              {
+                "id": "reg",
+                "label": "Conseil régional (région)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "adm",
+                "to": "dec"
+              },
+              {
+                "from": "adm",
+                "to": "cent"
+              },
+              {
+                "from": "dec",
+                "to": "pref",
+                "label": "nommé"
+              },
+              {
+                "from": "dec",
+                "to": "sous",
+                "label": "nommé"
+              },
+              {
+                "from": "cent",
+                "to": "com",
+                "label": "élus"
+              },
+              {
+                "from": "cent",
+                "to": "reg",
+                "label": "élus"
+              }
+            ],
+            "legend": [
+              "Représentants de l'État (nommés)",
+              "Collectivités territoriales (élus)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "commune-mairie",
+          "kind": "diagram",
+          "description": "Un schéma en arbre présente la commune. Le conseil municipal, élu par les habitants, vote le budget de la commune et élit le maire. Le maire dirige les services de la mairie, dont le service d'état civil, qui enregistre les naissances, les mariages et les décès.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "commune",
+                "label": "Commune"
+              },
+              {
+                "id": "conseil",
+                "label": "Conseil municipal (élu par les habitants)",
+                "category": 1
+              },
+              {
+                "id": "budget",
+                "label": "Budget de la commune",
+                "category": 1
+              },
+              {
+                "id": "maire",
+                "label": "Maire",
+                "category": 2
+              },
+              {
+                "id": "services",
+                "label": "Services de la mairie",
+                "category": 2
+              },
+              {
+                "id": "civil",
+                "label": "État civil : naissances, mariages, décès",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "commune",
+                "to": "conseil"
+              },
+              {
+                "from": "conseil",
+                "to": "budget",
+                "label": "vote"
+              },
+              {
+                "from": "conseil",
+                "to": "maire",
+                "label": "élit"
+              },
+              {
+                "from": "maire",
+                "to": "services",
+                "label": "dirige"
+              },
+              {
+                "from": "services",
+                "to": "civil"
+              }
+            ],
+            "legend": [
+              "Décide (conseil municipal)",
+              "Exécute (maire et services)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les niveaux du découpage administratif",
+          "remember": "La Côte d'Ivoire est un **État unitaire** : il n'y a qu'un seul État, mais son territoire est découpé en **circonscriptions administratives** emboîtées, du plus grand au plus petit : le **district**, la **région**, le **département**, la **sous-préfecture** et le **village**. La **commune** (ville ou bourg doté d'une mairie) est une autre forme d'organisation locale, que tu étudieras plus loin dans la leçon.\n\nLe pays compte **14 districts** : 12 districts et 2 **districts autonomes**, **Abidjan** et **Yamoussoukro**. Yamoussoukro est la capitale politique et administrative ; Abidjan est la capitale économique et la plus grande ville.\n\nExemples : Korhogo est une ville du district des Savanes, chef-lieu de la région du Poro ; Bouaké est dans le district de la Vallée du Bandama, chef-lieu de la région du Gbêké. Le **chef-lieu** est la ville où siège l'administration d'une circonscription.",
+          "method": [
+            "Identifier la ville ou le lieu à situer et le repérer sur la carte.",
+            "Nommer le district auquel il appartient, c'est le niveau le plus grand.",
+            "Préciser les niveaux plus petits : la région dont il dépend, puis le département si on le connaît.",
+            "Rédiger la phrase de localisation, du niveau le plus grand au plus petit."
+          ],
+          "example": {
+            "statement": "Situer la ville de Korhogo dans le découpage administratif de la Côte d'Ivoire.",
+            "steps": [
+              "Identifier : Korhogo est une grande ville du nord du pays, que l'on repère sur la carte.",
+              "Nommer : Korhogo appartient au district des Savanes.",
+              "Préciser : Korhogo est le chef-lieu de la région du Poro.",
+              "Rédiger : « Korhogo est une ville du district des Savanes, chef-lieu de la région du Poro. »"
+            ]
+          },
+          "pitfall": "Ne confonds pas l'ordre des niveaux : le district est plus grand que la région, qui est plus grande que le département. Du plus grand au plus petit, il y a 5 niveaux : district (1), région (2), département (3), sous-préfecture (4), village (5). Ne confonds pas non plus les deux grandes villes : Yamoussoukro est la capitale politique et administrative, Abidjan la capitale économique. Avant d'écrire, compte les niveaux : si ta phrase met un département avant une région, elle est à l'envers.",
+          "figure": "niveaux-decoupage",
+          "exercise": {
+            "title": "Situer un lieu dans le découpage administratif",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche pour situer des villes de Côte d'Ivoire dans les districts, les régions et les autres niveaux du découpage.",
+            "exercise_type": "fixation",
+            "figure": "carte-districts",
+            "questions": [
+              {
+                "content": "Parmi ces niveaux du découpage administratif de la Côte d'Ivoire, lequel est le plus grand ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer le district : c'est le niveau le plus grand. Il contient des régions, qui contiennent des départements, puis des sous-préfectures et des villages. L'erreur tentante est de croire que la région est le plus grand niveau parce qu'on en entend parler souvent.",
+                "answers": [
+                  {
+                    "content": "Le district",
+                    "correct": true
+                  },
+                  {
+                    "content": "La région",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le département",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sous-préfecture",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets les niveaux du découpage administratif dans l'ordre, du plus grand au plus petit.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Préciser les niveaux plus petits : on descend du district vers le village. Chaque niveau est contenu dans le précédent : un district contient des régions, une région des départements, un département des sous-préfectures, une sous-préfecture des villages.",
+                "answers": [
+                  {
+                    "content": "District"
+                  },
+                  {
+                    "content": "Région"
+                  },
+                  {
+                    "content": "Département"
+                  },
+                  {
+                    "content": "Sous-préfecture"
+                  },
+                  {
+                    "content": "Village"
+                  }
+                ]
+              },
+              {
+                "content": "Man est une ville du district des ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : la ville est Man, dans l'ouest du pays. Étape 2 — Nommer le district : Man appartient au district des Montagnes. Étape 4 — Rédiger : « Man est une ville du district des Montagnes ».",
+                "answers": [
+                  {
+                    "content": "Montagnes",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque ville au district auquel elle appartient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier chaque ville, puis Étape 2 — Nommer son district : Korhogo est dans le district des Savanes, Bouaké dans celui de la Vallée du Bandama, San-Pédro dans celui du Bas-Sassandra et Abengourou dans celui du Comoé. Ne confonds pas le nom d'une ville et celui du district : Bouaké est une ville, la Vallée du Bandama est un district.",
+                "answers": [
+                  {
+                    "content": "Korhogo",
+                    "match": "Savanes"
+                  },
+                  {
+                    "content": "Bouaké",
+                    "match": "Vallée du Bandama"
+                  },
+                  {
+                    "content": "San-Pédro",
+                    "match": "Bas-Sassandra"
+                  },
+                  {
+                    "content": "Abengourou",
+                    "match": "Comoé"
+                  }
+                ]
+              },
+              {
+                "content": "Abidjan est la capitale politique et administrative de la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : Abidjan est la plus grande ville et la capitale économique. Étape 2 — Nommer : c'est un district autonome. La capitale politique et administrative est Yamoussoukro, qui est aussi un district autonome. Le piège est de confondre la capitale économique et la capitale politique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux districts autonomes de la Côte d'Ivoire ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Nommer les districts : le pays compte 14 districts, dont 2 districts autonomes, Abidjan et Yamoussoukro. Le district des Lagunes est un district ordinaire, voisin d'Abidjan : ne le confonds pas avec le district autonome d'Abidjan.",
+                "answers": [
+                  {
+                    "content": "Abidjan",
+                    "correct": true
+                  },
+                  {
+                    "content": "Yamoussoukro",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lagunes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Bas-Sassandra",
+                    "correct": false
+                  },
+                  {
+                    "content": "Zanzan",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déconcentration et décentralisation",
+          "remember": "Le territoire est administré de deux manières qui se complètent.\n\nLa **déconcentration** : l'État garde le pouvoir mais place sur le terrain des **représentants nommés** qui agissent en son nom : le **préfet** pour le département, le **sous-préfet** pour la sous-préfecture.\n\nLa **décentralisation** : l'État transfère certaines compétences à des **collectivités territoriales**, par exemple la **commune** et la **région**. Elles ont leurs propres organes **élus** (le conseil municipal et le maire, le conseil régional), leur budget et gèrent les affaires locales.\n\nEn bref : le représentant de l'État est **nommé**, l'élu local est **choisi par les habitants**.",
+          "method": [
+            "Repérer l'autorité et la fonction qu'elle exerce.",
+            "Chercher comment elle arrive à son poste : nommée par l'État ou élue par les habitants.",
+            "Identifier au nom de qui elle agit : l'État ou la collectivité.",
+            "Conclure : déconcentration ou décentralisation."
+          ],
+          "example": {
+            "statement": "Comparer le préfet d'un département et le maire d'une commune.",
+            "steps": [
+              "Repérer : le préfet dirige un département ; le maire dirige une commune.",
+              "Chercher : le préfet est nommé par l'État ; le maire est élu par le conseil municipal, issu du vote des habitants.",
+              "Identifier : le préfet agit au nom de l'État ; le maire agit au nom de la commune.",
+              "Conclure : le préfet relève de la déconcentration ; le maire relève de la décentralisation."
+            ]
+          },
+          "pitfall": "Ne dis pas que tous les responsables locaux sont nommés par l'État. Contre-exemple : une commune a 1 conseil municipal élu et 1 maire élu par ce conseil, alors qu'un département a 1 préfet nommé. Ne dis pas non plus que la décentralisation fait disparaître l'État : il reste présent par ses représentants. Pour ne pas te tromper, pose toujours la question : « Qui l'a mis à ce poste, l'État ou les habitants ? »",
+          "figure": "deux-pouvoirs",
+          "exercise": {
+            "title": "Distinguer représentants de l'État et élus locaux",
+            "statement": "Dans cet exercice, tu utilises les quatre étapes de la fiche pour classer des autorités locales entre déconcentration et décentralisation.",
+            "exercise_type": "fixation",
+            "figure": "deux-pouvoirs",
+            "questions": [
+              {
+                "content": "Qui dirige un département en Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer l'autorité : la fonction est la direction du département. Étape 2 — Chercher comment elle arrive à son poste : le préfet est nommé par l'État. Étape 3 — Identifier : il agit au nom de l'État. Étape 4 — Conclure : c'est de la déconcentration. Le maire dirige une commune, pas un département.",
+                "answers": [
+                  {
+                    "content": "Le préfet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le maire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le conseiller municipal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chef de village",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le maire est un représentant de l'État, nommé par le gouvernement.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher comment le maire arrive à son poste : il est élu par le conseil municipal, lui-même élu par les habitants. Étape 3 — Identifier : il agit au nom de la commune. Étape 4 — Conclure : c'est de la décentralisation. Le piège est de croire que toute autorité locale est nommée par l'État.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque autorité à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'autorité et sa fonction : le maire dirige la commune, le préfet le département, le sous-préfet la sous-préfecture. Étape 2 — Chercher le mode d'accès au poste : le conseiller municipal est élu par les habitants. Ne confonds pas le préfet, nommé, et le maire, élu.",
+                "answers": [
+                  {
+                    "content": "Maire",
+                    "match": "Dirige une commune"
+                  },
+                  {
+                    "content": "Préfet",
+                    "match": "Dirige un département"
+                  },
+                  {
+                    "content": "Sous-préfet",
+                    "match": "Dirige une sous-préfecture"
+                  },
+                  {
+                    "content": "Conseiller municipal",
+                    "match": "Est élu par les habitants de la commune"
+                  }
+                ]
+              },
+              {
+                "content": "Quand l'État transfère des compétences à des collectivités dirigées par des élus, on parle de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : les collectivités territoriales (communes, régions) dirigées par des élus relèvent de la décentralisation. Étape 3 — Identifier : elles agissent en leur nom et non au nom de l'État. La déconcentration, elle, désigne des représentants nommés par l'État.",
+                "answers": [
+                  {
+                    "content": "décentralisation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux autorités qui représentent l'État sur le territoire ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Chercher comment elles arrivent à leur poste : le préfet et le sous-préfet sont nommés par l'État. Étape 3 — Identifier : ils agissent au nom de l'État. Le maire, le conseiller municipal et le conseiller régional sont des élus des collectivités territoriales.",
+                "answers": [
+                  {
+                    "content": "Le préfet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sous-préfet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le maire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le conseiller municipal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le conseiller régional",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sous-préfet exerce son autorité au nom de ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Identifier au nom de qui il agit : le sous-préfet est nommé, il n'est pas élu. Il représente l'État dans la sous-préfecture. Étape 4 — Conclure : c'est de la déconcentration. L'erreur tentante est de croire qu'il a des électeurs, comme le maire.",
+                "answers": [
+                  {
+                    "content": "l'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "la commune",
+                    "correct": false
+                  },
+                  {
+                    "content": "ses électeurs",
+                    "correct": false
+                  },
+                  {
+                    "content": "le conseil municipal",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La commune et la mairie",
+          "remember": "La **commune** est la collectivité la plus proche des habitants. Elle est administrée par deux organes :\n\n- le **conseil municipal**, composé de **conseillers élus par les habitants**, qui délibère et **vote le budget** de la commune ;\n- le **maire**, **élu par le conseil municipal**, qui exécute les décisions du conseil et dirige les services de la mairie.\n\nLa **mairie** est le lieu où siègent le maire et ses services. L'**état civil** y enregistre les **naissances**, les **mariages** et les **décès** et délivre les actes correspondants (par exemple l'**extrait d'acte de naissance**). Le maire, ou un de ses adjoints, célèbre le **mariage civil**.\n\nLa commune rend aussi des services de proximité (par exemple la propreté, les marchés) et dispose de ressources propres, comme les taxes locales, ainsi que d'aides de l'État.",
+          "method": [
+            "Formuler la demande de l'habitant ou le problème à régler.",
+            "Repérer le domaine concerné : état civil, budget, propreté, marché…",
+            "Identifier l'autorité communale compétente : conseil municipal, maire ou service d'état civil.",
+            "Indiquer la démarche : où l'habitant doit se rendre ou qui doit décider."
+          ],
+          "example": {
+            "statement": "Le père d'Awa doit inscrire sa fille à l'école et a besoin d'un extrait d'acte de naissance. À qui doit-il s'adresser ?",
+            "steps": [
+              "Formuler : le père d'Awa veut obtenir un extrait d'acte de naissance pour l'inscription scolaire.",
+              "Repérer : une naissance enregistrée relève du domaine de l'état civil.",
+              "Identifier : l'état civil est un service de la mairie, dirigé par le maire ; le conseil municipal n'intervient pas.",
+              "Indiquer : il doit se rendre au service d'état civil de la commune où la naissance a été enregistrée."
+            ]
+          },
+          "pitfall": "Ne confonds pas celui qui décide et celui qui exécute : le conseil municipal vote, le maire exécute. Ne confonds pas non plus la mairie et la sous-préfecture. Contre-exemple : un habitant demande au sous-préfet de voter le budget de la commune ; c'est impossible, car le budget d'une commune est voté par le conseil municipal, qui compte des conseillers élus, alors que le sous-préfet est nommé par l'État.",
+          "figure": "commune-mairie",
+          "exercise": {
+            "title": "Trouver le bon service de la mairie",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche pour trouver quelle autorité de la commune s'occupe de chaque demande des habitants.",
+            "exercise_type": "fixation",
+            "figure": "commune-mairie",
+            "questions": [
+              {
+                "content": "Dans une commune, quelle autorité vote le budget de la commune ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Formuler : on veut savoir qui vote le budget. Étape 2 — Repérer le domaine : le budget de la commune. Étape 3 — Identifier l'autorité compétente : le conseil municipal délibère et vote le budget. Le maire, lui, l'exécute. Le sous-préfet représente l'État et ne vote pas le budget communal.",
+                "answers": [
+                  {
+                    "content": "Le conseil municipal",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sous-préfet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le préfet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chef de village",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le service de la mairie qui enregistre les naissances, les mariages et les décès est le service d'___ civil.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer le domaine : naissances, mariages et décès relèvent de l'état civil. Étape 3 — Identifier : ce service est un service de la mairie, dirigé par le maire. Étape 4 — Indiquer la démarche : on s'y rend pour faire enregistrer ou demander un acte.",
+                "answers": [
+                  {
+                    "content": "état",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le sous-préfet vote le budget de la commune.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Identifier l'autorité compétente : c'est le conseil municipal, élu, qui vote le budget. Le sous-préfet est nommé et représente l'État. Le piège est de confondre la mairie, qui relève de la commune, et la sous-préfecture, qui relève de l'État.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque besoin à l'autorité ou au service communal compétent.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Formuler chaque besoin, Étape 2 — Repérer le domaine, puis Étape 3 — Identifier l'autorité : l'état civil enregistre les naissances ; le conseil municipal vote le budget ; le maire dirige les services de la mairie. Chaque autorité a un rôle précis : celui qui décide n'est pas celui qui exécute.",
+                "answers": [
+                  {
+                    "content": "Faire enregistrer une naissance",
+                    "match": "Service d'état civil de la mairie"
+                  },
+                  {
+                    "content": "Voter le budget de la commune",
+                    "match": "Conseil municipal"
+                  },
+                  {
+                    "content": "Diriger les services de la mairie",
+                    "match": "Maire"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes à suivre quand un habitant a besoin d'un extrait d'acte de naissance.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Formuler la demande. Étape 2 — Repérer le domaine : l'état civil. Étape 3 — Identifier l'autorité compétente. Étape 4 — Indiquer la démarche. On ne peut pas indiquer où aller avant d'avoir trouvé qui est compétent.",
+                "answers": [
+                  {
+                    "content": "Formuler la demande de l'habitant"
+                  },
+                  {
+                    "content": "Repérer le domaine concerné : l'état civil"
+                  },
+                  {
+                    "content": "Identifier l'autorité compétente : le service d'état civil de la mairie"
+                  },
+                  {
+                    "content": "Indiquer la démarche : se rendre à ce service"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois missions qui relèvent de la commune ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Repérer le domaine, puis Étape 3 — Identifier l'autorité : l'état civil, le mariage civil et le budget communal relèvent de la commune. Nommer le préfet est une décision de l'État, juger est la mission des tribunaux, et commander l'armée est une mission de l'État.",
+                "answers": [
+                  {
+                    "content": "Enregistrer les naissances, les mariages et les décès",
+                    "correct": true
+                  },
+                  {
+                    "content": "Célébrer les mariages civils",
+                    "correct": true
+                  },
+                  {
+                    "content": "Voter le budget de la commune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Nommer le préfet du département",
+                    "correct": false
+                  },
+                  {
+                    "content": "Juger les crimes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Commander l'armée nationale",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser un document sur l'administration locale",
+          "remember": "Pour analyser un document sur l'organisation administrative (texte, affiche, tableau, organigramme), on le lit en repérant des **mots indices** et on les rattache au cours.\n\n- **« nommé »**, **préfet**, **sous-préfet** : représentants de l'État, donc **déconcentration**.\n- **« élu »**, **conseil municipal**, **maire**, **conseil régional** : collectivités territoriales, donc **décentralisation**.\n- **district**, **région**, **département**, **sous-préfecture**, **village** : **niveaux du découpage** administratif.\n\nUn document est **présenté** (nature, auteur, date, sujet) avant d'être expliqué. Dans les documents de cette leçon, les extraits de textes sont écrits pour Lnclass. On ne tire du document que ce qu'il dit ; le reste vient du cours.",
+          "method": [
+            "Présenter le document : nature, auteur, date, sujet.",
+            "Relever les mots indices : nommé, élu, niveau du découpage, nom de l'autorité.",
+            "Expliquer en rattachant ces indices au cours : niveau, déconcentration ou décentralisation.",
+            "Conclure par une phrase qui répond à la question posée."
+          ],
+          "example": {
+            "statement": "Document écrit pour Lnclass, sans date : « Le conseil municipal, composé de conseillers élus, a voté le budget de la commune. Le maire est chargé de l'exécuter. » Quel type d'administration ce document illustre-t-il ?",
+            "steps": [
+              "Présenter : c'est un court compte rendu de séance, écrit pour Lnclass et sans date. Il parle du budget d'une commune.",
+              "Relever : les mots indices sont « conseil municipal », « conseillers élus », « a voté le budget » et « maire ».",
+              "Expliquer : d'après le cours, un conseil municipal élu et un maire dirigent une commune, qui est une collectivité territoriale.",
+              "Conclure : ce document illustre la décentralisation, car ce sont des élus qui décident pour la commune."
+            ]
+          },
+          "pitfall": "Ne mets pas dans ta réponse ce que le document ne dit pas. Contre-exemple : un document écrit pour Lnclass dit « Les conseillers municipaux sont élus par les habitants ». Tu ne peux pas en déduire que « le maire est nommé par le préfet » : le texte ne le dit pas, et c'est faux d'après le cours. Ne te contente pas non plus de recopier : une analyse présente, relève, explique, puis conclut.",
+          "figure": null,
+          "exercise": {
+            "title": "Analyser de courts documents sur l'administration",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à de courts documents sur l'administration locale, écrits pour Lnclass.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour présenter un document, quelle est la première étape de la méthode ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter le document : on dit de quel type de document il s'agit (texte, tableau, affiche), qui l'a écrit, quand et de quoi il parle. Recopier le texte n'explique rien, et la conclusion vient en dernier, à l'étape 4.",
+                "answers": [
+                  {
+                    "content": "Donner sa nature, son auteur, sa date et son sujet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Recopier le texte en entier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Donner son avis personnel sur le sujet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Écrire directement la conclusion",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes de l'analyse d'un document.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Présenter. Étape 2 — Relever les mots indices. Étape 3 — Expliquer en rattachant les indices au cours. Étape 4 — Conclure. On ne peut pas expliquer avant d'avoir relevé les indices, ni conclure avant d'avoir expliqué.",
+                "answers": [
+                  {
+                    "content": "Présenter le document"
+                  },
+                  {
+                    "content": "Relever les mots indices"
+                  },
+                  {
+                    "content": "Expliquer en s'appuyant sur le cours"
+                  },
+                  {
+                    "content": "Conclure par une phrase-réponse"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un document, quels sont les deux mots indices qui montrent une décentralisation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Relever les mots indices : un conseil municipal élu et un maire dirigent une commune, donc une collectivité décentralisée. Étape 3 — Expliquer : « nommé par décret », « préfet » et « sous-préfet » renvoient à la déconcentration, c'est-à-dire aux représentants de l'État.",
+                "answers": [
+                  {
+                    "content": "Conseil municipal élu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Maire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Nommé par décret",
+                    "correct": false
+                  },
+                  {
+                    "content": "Préfet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sous-préfet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Voici un compte rendu écrit pour Lnclass : « Le conseil municipal, composé de conseillers élus par les habitants, a voté le budget de la commune. Le maire est chargé de l'exécuter. » Quelle conclusion est correcte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : un compte rendu de séance de conseil municipal. Étape 2 — Relever : « élus par les habitants », « a voté le budget ». Étape 3 — Expliquer : ce sont des élus qui décident, au nom de la commune. Étape 4 — Conclure : c'est de la décentralisation. Le document ne parle ni du préfet ni du sous-préfet.",
+                "answers": [
+                  {
+                    "content": "La commune est administrée par des élus : c'est de la décentralisation",
+                    "correct": true
+                  },
+                  {
+                    "content": "La commune est dirigée par un représentant nommé de l'État : c'est de la déconcentration",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le préfet a voté le budget de la commune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le maire est nommé par le sous-préfet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un document écrit pour Lnclass dit : « Les conseillers municipaux sont élus par les habitants. » On peut en conclure que le maire est nommé par le préfet.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever les mots indices : le document parle seulement des conseillers municipaux, élus. Étape 3 — Expliquer : on ne peut pas ajouter une information que le document ne donne pas. Le maire est d'ailleurs élu par le conseil municipal, pas nommé par le préfet. Une conclusion doit rester appuyée sur le document et sur le cours.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Voici un document écrit pour Lnclass : « Le préfet, nommé par décret, représente l'État dans le département. » Applique la méthode : présente le document, relève l'indice, puis conclus sur le type d'administration.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "Présente la nature du document (court texte) et son sujet",
+                  "Relève les mots indices « nommé par décret » et « représente l'État »",
+                  "Rattache le préfet à la déconcentration",
+                  "Termine par une phrase qui répond à la question"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Présenter : ce court texte, écrit pour Lnclass, parle du rôle du préfet. Étape 2 — Relever : « nommé par décret » et « représente l'État ». Étape 3 — Expliquer : un représentant nommé qui agit au nom de l'État relève de la déconcentration. Étape 4 — Conclure : le préfet est un exemple de déconcentration. Barème sur 2 points : présentation (0,5), indices (0,5), explication (0,5), conclusion (0,5).",
+                "answers": [],
+                "starter": "Ce texte présente le rôle du préfet…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une inscription à l'école, de la mairie au district",
+          "statement": "Document (texte écrit pour Lnclass) : « À la rentrée, le père d'Awa, qui habite Korhogo, doit faire inscrire sa fille dans un nouvel établissement scolaire. L'école lui demande un extrait d'acte de naissance. » Dans cet exercice, tu utilises ce qu'il faut savoir sur le découpage du territoire et sur la mairie.",
+          "exercise_type": "fixation",
+          "figure": "carte-districts",
+          "questions": [
+            {
+              "content": "Awa habite Korhogo. Dans quel district se trouve cette ville ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour situer un lieu. Étape 1 — Identifier : la ville est Korhogo, dans le nord. Étape 2 — Nommer le district : Korhogo appartient au district des Savanes. Étape 3 — Préciser : c'est le chef-lieu de la région du Poro. Le Denguélé, le Zanzan et le Woroba sont d'autres districts.",
+              "answers": [
+                {
+                  "content": "Les Savanes",
+                  "correct": true
+                },
+                {
+                  "content": "Le Denguélé",
+                  "correct": false
+                },
+                {
+                  "content": "Le Zanzan",
+                  "correct": false
+                },
+                {
+                  "content": "Le Woroba",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le père d'Awa a besoin d'un extrait d'acte de naissance. À quel service doit-il s'adresser ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la commune. Étape 1 — Formuler : obtenir un extrait d'acte de naissance. Étape 2 — Repérer : c'est l'état civil. Étape 3 — Identifier : le service d'état civil, qui dépend du maire. Étape 4 — Indiquer : se rendre à ce service. Le conseil municipal vote le budget mais ne délivre pas les actes.",
+              "answers": [
+                {
+                  "content": "Au service d'état civil de la mairie",
+                  "correct": true
+                },
+                {
+                  "content": "Au conseil municipal, qui vote le budget",
+                  "correct": false
+                },
+                {
+                  "content": "Au sous-préfet, qui représente l'État",
+                  "correct": false
+                },
+                {
+                  "content": "Au conseil régional",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le maire de la commune est nommé par décret, comme le préfet.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la distinction. Étape 2 — Chercher comment l'autorité arrive à son poste : le préfet est nommé par l'État, mais le maire est élu par le conseil municipal, issu du vote des habitants. Étape 4 — Conclure : le préfet relève de la déconcentration, le maire de la décentralisation.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque autorité à son rôle.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer l'autorité et sa fonction. Étape 3 — Identifier au nom de qui elle agit : le maire et le conseil municipal agissent au nom de la commune ; le préfet et le sous-préfet agissent au nom de l'État. Le maire exécute, le conseil vote.",
+              "answers": [
+                {
+                  "content": "Maire",
+                  "match": "Dirige les services de la mairie"
+                },
+                {
+                  "content": "Conseil municipal",
+                  "match": "Vote le budget de la commune"
+                },
+                {
+                  "content": "Préfet",
+                  "match": "Représente l'État dans le département"
+                },
+                {
+                  "content": "Sous-préfet",
+                  "match": "Représente l'État dans la sous-préfecture"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux affirmations exactes sur Korhogo ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Nommer le district : Savanes. Étape 3 — Préciser la région : Poro. La capitale politique et administrative est Yamoussoukro. Les deux districts autonomes sont Abidjan et Yamoussoukro. Korhogo est une grande ville, pas un village.",
+              "answers": [
+                {
+                  "content": "Korhogo est située dans le district des Savanes",
+                  "correct": true
+                },
+                {
+                  "content": "Korhogo est le chef-lieu de la région du Poro",
+                  "correct": true
+                },
+                {
+                  "content": "Korhogo est la capitale politique du pays",
+                  "correct": false
+                },
+                {
+                  "content": "Korhogo est un district autonome",
+                  "correct": false
+                },
+                {
+                  "content": "Korhogo est un village",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi la mairie illustre la décentralisation et non la déconcentration.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que le conseil municipal est élu par les habitants",
+                "Dit que la commune a son budget et gère ses affaires",
+                "Oppose au représentant nommé de l'État, comme le préfet",
+                "Conclut clairement sur la décentralisation"
+              ],
+              "explanation": "Corrigé modèle : La commune est une collectivité territoriale. Son conseil municipal est élu par les habitants et le maire est élu par ce conseil. La commune gère ses affaires locales avec son budget. Le préfet, lui, est nommé et agit au nom de l'État : c'est de la déconcentration. Barème sur 2 points : élus (0,5), budget et gestion (0,5), contraste avec le préfet (0,5), conclusion claire (0,5).",
+              "answers": [],
+              "starter": "La mairie relève de la décentralisation parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Villes, districts et capitales",
+          "statement": "Un tableau écrit pour Lnclass associe quatre villes à leur district : Man (Montagnes), Daloa (Sassandra-Marahoué), Bouaké (Vallée du Bandama), Abengourou (Comoé). Dans cet exercice, tu situes des lieux dans le découpage administratif, comme on le fait dans un devoir de géographie.",
+          "exercise_type": "fixation",
+          "figure": "niveaux-decoupage",
+          "questions": [
+            {
+              "content": "Combien de districts compte la Côte d'Ivoire, districts autonomes compris ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Nommer les districts : le pays compte 12 districts et 2 districts autonomes (Abidjan et Yamoussoukro), soit 14 districts au total. L'erreur tentante est d'oublier les deux districts autonomes et de répondre 12.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Relie chaque ville à son district.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier chaque ville, Étape 2 — Nommer son district : Man est dans les Montagnes, Daloa dans le Sassandra-Marahoué, Bouaké dans la Vallée du Bandama, Abengourou dans le Comoé. Ne confonds pas une ville et son district.",
+              "answers": [
+                {
+                  "content": "Man",
+                  "match": "Montagnes"
+                },
+                {
+                  "content": "Daloa",
+                  "match": "Sassandra-Marahoué"
+                },
+                {
+                  "content": "Bouaké",
+                  "match": "Vallée du Bandama"
+                },
+                {
+                  "content": "Abengourou",
+                  "match": "Comoé"
+                }
+              ]
+            },
+            {
+              "content": "Une école est située dans un village. Quel est le niveau du découpage qui contient directement ce village ?",
+              "question_type": "single_choice",
+              "explanation": "Du plus grand au plus petit : district, région, département, sous-préfecture, village. Étape 3 — Préciser les niveaux plus petits : le village est le dernier niveau, et le niveau juste au-dessus est la sous-préfecture. Le département contient des sous-préfectures, il ne contient pas directement les villages.",
+              "answers": [
+                {
+                  "content": "La sous-préfecture",
+                  "correct": true
+                },
+                {
+                  "content": "Le département",
+                  "correct": false
+                },
+                {
+                  "content": "La région",
+                  "correct": false
+                },
+                {
+                  "content": "Le district",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yamoussoukro est la capitale ___ et administrative de la Côte d'Ivoire.",
+              "question_type": "fill_blank",
+              "explanation": "Yamoussoukro est la capitale politique et administrative, et c'est un district autonome. Abidjan est la capitale économique. Ne confonds pas les deux : une capitale politique abrite l'administration centrale, une capitale économique concentre les activités d'affaires.",
+              "answers": [
+                {
+                  "content": "politique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un département est plus grand qu'une région.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Préciser les niveaux : la région contient des départements, donc elle est plus grande. L'ordre du plus grand au plus petit est : district, région, département, sous-préfecture, village. Le piège est d'inverser deux niveaux voisins.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige la phrase qui situe la ville de Daloa dans le découpage administratif, sachant que Daloa est dans le district du Sassandra-Marahoué et qu'elle est le chef-lieu de la région du Haut-Sassandra.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Cite le district du Sassandra-Marahoué et la région du Haut-Sassandra",
+                "Cite le district avant la région",
+                "Utilise le mot chef-lieu à propos de la région",
+                "La phrase est complète et correcte"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : Daloa est une ville de l'ouest. Étape 2 — Nommer : elle appartient au district du Sassandra-Marahoué. Étape 3 — Préciser : elle est le chef-lieu de la région du Haut-Sassandra. Étape 4 — Rédiger : « Daloa est une ville du district du Sassandra-Marahoué, chef-lieu de la région du Haut-Sassandra. » Barème sur 2 points : district et région justes (0,5), district cité avant la région (0,5), mot chef-lieu employé pour la région (0,5), phrase complète et correcte (0,5).",
+              "answers": [],
+              "starter": "Daloa est une ville du district…"
+            }
+          ]
+        },
+        {
+          "title": "Une affiche de la mairie, une question de devoir",
+          "statement": "Document 1 (affiche écrite pour Lnclass, sans date) : « Le conseil municipal se réunira à la mairie pour voter le budget de la commune. Le maire présentera ses projets, dont la réfection des salles de classe de l'école. » Document 2 (tableau écrit pour Lnclass) : le préfet et le sous-préfet sont nommés par l'État ; le conseil municipal est élu par les habitants.",
+          "exercise_type": "evaluation",
+          "figure": "deux-pouvoirs",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter le document : c'est une affiche, c'est-à-dire une annonce publique, publiée par la mairie. Elle annonce une réunion du conseil municipal. Ce n'est ni un décret, ni une loi, ni un acte d'état civil.",
+              "answers": [
+                {
+                  "content": "Une affiche de la mairie",
+                  "correct": true
+                },
+                {
+                  "content": "Un décret du préfet",
+                  "correct": false
+                },
+                {
+                  "content": "Une loi votée par l'État",
+                  "correct": false
+                },
+                {
+                  "content": "Un acte de naissance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'affiche, le conseil municipal se réunit pour ___ le budget de la commune.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Relever les mots indices : « se réunira pour voter le budget de la commune ». C'est le conseil municipal qui décide du budget, le maire présente ses projets et exécute ensuite. Ne confonds pas celui qui vote avec celui qui exécute.",
+              "answers": [
+                {
+                  "content": "voter",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Cette affiche illustre la ___.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Expliquer : un conseil municipal élu et un maire gèrent le budget d'une commune, collectivité territoriale. Étape 4 — Conclure : c'est de la décentralisation. La déconcentration concerne des représentants nommés de l'État, comme le préfet.",
+              "answers": [
+                {
+                  "content": "décentralisation",
+                  "correct": true
+                },
+                {
+                  "content": "déconcentration",
+                  "correct": false
+                },
+                {
+                  "content": "dictature",
+                  "correct": false
+                },
+                {
+                  "content": "tutelle de l'école",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois autorités ou organes dont le poste vient d'une élection ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Relever : le conseil municipal est élu par les habitants, le maire par ce conseil, et le conseil régional est lui aussi élu. Le préfet et le sous-préfet sont nommés par l'État (document 2). Étape 4 — Conclure : les trois premiers relèvent de la décentralisation.",
+              "answers": [
+                {
+                  "content": "Le conseil municipal",
+                  "correct": true
+                },
+                {
+                  "content": "Le maire",
+                  "correct": true
+                },
+                {
+                  "content": "Le conseil régional",
+                  "correct": true
+                },
+                {
+                  "content": "Le préfet",
+                  "correct": false
+                },
+                {
+                  "content": "Le sous-préfet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique la différence entre déconcentration et décentralisation, en prenant l'exemple du préfet et celui du maire.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Définit la déconcentration (représentants nommés de l'État)",
+                "Définit la décentralisation (collectivités à élus)",
+                "Cite le préfet et le maire comme exemples",
+                "Précise le mode d'accès au poste de chacun"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Repérer : le préfet dirige le département, le maire dirige la commune. Étape 2 — Chercher : le préfet est nommé par l'État, le maire est élu par le conseil municipal. Étape 3 — Identifier : le préfet agit au nom de l'État, le maire au nom de la commune. Étape 4 — Conclure : le préfet illustre la déconcentration, le maire la décentralisation. Barème sur 3 points : définition de la déconcentration (0,75), de la décentralisation (0,75), exemples (0,75), mode d'accès au poste (0,75).",
+              "answers": [],
+              "starter": "La déconcentration est…"
+            },
+            {
+              "content": "À partir du document 1, présente le document, puis explique qui décide et qui exécute dans la commune.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Présente la nature, le sujet et le caractère fictif du document",
+                "Dit que le conseil municipal vote le budget",
+                "Dit que le maire exécute et dirige les services",
+                "Conclut sur la décentralisation"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Présenter : l'affiche, écrite pour Lnclass, annonce une réunion du conseil municipal. Étape 2 — Relever : « voter le budget », « le maire présentera ses projets ». Étape 3 — Expliquer : le conseil municipal, élu, décide en votant le budget ; le maire exécute et dirige les services. Étape 4 — Conclure : la commune se gère par des élus, c'est la décentralisation. Barème sur 3 points : présentation (0,75), le conseil décide (0,75), le maire exécute (0,75), conclusion (0,75).",
+              "answers": [],
+              "starter": "Cette affiche annonce…"
+            }
+          ]
+        },
+        {
+          "title": "Organiser l'administration d'une commune et d'un district",
+          "statement": "Document 1 (liste écrite pour Lnclass) : les niveaux du découpage sont le district, la région, le département, la sous-préfecture et le village. Document 2 (texte écrit pour Lnclass) : « Un habitant se plaint que la rue devant l'école de son quartier n'est pas nettoyée. Il demande à qui s'adresser. » Dans ce sujet de type bac, tu combines les notions de la leçon.",
+          "exercise_type": "evaluation",
+          "figure": "commune-mairie",
+          "questions": [
+            {
+              "content": "Relie chaque mot indice à ce qu'il indique.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Relever les mots indices, puis Étape 3 — Expliquer en les rattachant au cours : « nommé par décret » renvoie à la déconcentration, un conseil municipal élu à la décentralisation, le sous-préfet est un représentant de l'État et le maire dirige la commune. Un mot indice mal rattaché conduit à une conclusion fausse.",
+              "answers": [
+                {
+                  "content": "Nommé par décret",
+                  "match": "Déconcentration"
+                },
+                {
+                  "content": "Conseil municipal élu",
+                  "match": "Décentralisation"
+                },
+                {
+                  "content": "Sous-préfet",
+                  "match": "Représentant de l'État"
+                },
+                {
+                  "content": "Maire",
+                  "match": "Responsable d'une commune"
+                }
+              ]
+            },
+            {
+              "content": "Laquelle de ces affirmations est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Nommer le district : Abidjan est un district autonome. Elle est la capitale économique. La capitale politique et administrative est Yamoussoukro, qui est un autre district autonome. Abidjan n'est ni une région du district des Lagunes ni un département de Yamoussoukro.",
+              "answers": [
+                {
+                  "content": "Abidjan est un district autonome et la capitale économique",
+                  "correct": true
+                },
+                {
+                  "content": "Abidjan est la capitale politique et administrative",
+                  "correct": false
+                },
+                {
+                  "content": "Abidjan est une région du district des Lagunes",
+                  "correct": false
+                },
+                {
+                  "content": "Abidjan est un département de Yamoussoukro",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec la décentralisation, l'État disparaît du territoire.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Expliquer : la décentralisation donne des compétences aux collectivités, mais l'État reste présent par ses représentants nommés, comme le préfet et le sous-préfet (déconcentration). Les deux manières d'administrer se complètent.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux phrases exactes sur l'ordre des niveaux du découpage ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Du plus grand au plus petit : district, région, département, sous-préfecture, village. Étape 3 — Préciser les niveaux : le district contient des régions, et le village est le dernier niveau. Les deux phrases fausses inversent l'ordre des niveaux.",
+              "answers": [
+                {
+                  "content": "Le district est plus grand que la région",
+                  "correct": true
+                },
+                {
+                  "content": "Le village est le plus petit niveau",
+                  "correct": true
+                },
+                {
+                  "content": "Le département est plus grand que le district",
+                  "correct": false
+                },
+                {
+                  "content": "La sous-préfecture contient la région",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document 2 : à qui l'habitant doit-il s'adresser pour la propreté de la rue ? Réponds avec les quatre étapes de la méthode de la commune.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Formule le problème de l'habitant",
+                "Repère le domaine : propreté, service de proximité de la commune",
+                "Identifie la mairie, le maire et ses services comme compétents",
+                "Indique la démarche : s'adresser à la mairie"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Formuler : la rue devant l'école n'est pas nettoyée. Étape 2 — Repérer : la propreté fait partie des services de proximité. Étape 3 — Identifier : la commune est compétente, par le maire et les services de la mairie ; le conseil municipal vote les moyens. Étape 4 — Indiquer : l'habitant doit s'adresser à la mairie de sa commune. Barème sur 3 points : une étape correcte vaut 0,75.",
+              "answers": [],
+              "starter": "L'habitant doit…"
+            },
+            {
+              "content": "Rédige un paragraphe qui présente l'organisation administrative de la Côte d'Ivoire : les niveaux du découpage, les représentants de l'État et les collectivités élues.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Cite les cinq niveaux dans l'ordre du plus grand au plus petit",
+                "Mentionne les 14 districts dont deux districts autonomes",
+                "Cite préfet et sous-préfet comme représentants nommés de l'État",
+                "Cite le conseil municipal et le maire comme élus de la commune",
+                "Emploie correctement déconcentration et décentralisation",
+                "Le paragraphe est organisé et rédigé"
+              ],
+              "explanation": "Corrigé modèle : La Côte d'Ivoire est un État unitaire. Son territoire est découpé, du plus grand au plus petit, en districts, régions, départements, sous-préfectures et villages. Le pays compte 14 districts, dont deux districts autonomes, Abidjan et Yamoussoukro. L'État est représenté sur le terrain par des autorités nommées, le préfet et le sous-préfet : c'est la déconcentration. Les communes et les régions sont des collectivités territoriales gérées par des élus, comme le conseil municipal et le maire : c'est la décentralisation. Barème sur 6 points : niveaux (1), districts (1), représentants de l'État (1), élus (1), vocabulaire (1), rédaction (1).",
+              "answers": [],
+              "starter": "La Côte d'Ivoire est un État unitaire…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

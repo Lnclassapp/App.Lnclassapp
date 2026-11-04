@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121, chargement-automatique-des-lecons-hors-production
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121, chargement-automatique-des-lecons-hors-production, 0123
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -61,20 +61,16 @@ module Repositories
         course = Orm::Course.lock.find(course_id)
         raise NotDraft, "la leçon #{course.slug} ou l'un de ses contenus n'est plus en brouillon" unless draft?(course)
 
-        stamp(course.author_id, Time.current)
-        deleted = delete_content(course_id)
-        Rails.logger.info("[import] leçon remplacée : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
-        course.update_columns(name: tree.name, subtitle: tree.subtitle, figures: tree.figures, sheet_theme: tree.sheet_theme, updated_at: @at)
+        rewrite(course, tree)
+      end
 
-        taken = Orm::Essential.pluck(:slug).to_set
-        notions = tree.notions.map { |node| node.with(course_id:, slug: Entities::Catalog::Slug.unique(node.slug, taken:)) }
-        notion_ids = ids_by(insert(Orm::Essential, notions.map { |node| notion_row(node) }), "slug")
-        exercises = notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.slug)) } }
-        lesson_wide = tree.exercises.map { [ it, course_id, nil ] }
-        subjects = tree.subjects.map { it.with(course_id:) }
-        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
-
-        { courses: 1, essentials: notions.size, **counts, subjects: subjects.size }
+      # ADR-0123 (chargement automatique, Develop seul) : remplace entière une leçon, publiée ou non, comme replace_draft mais sans sa garde,
+      # avec ce qui s'y rattache (séances, tentatives, badges, lacunes, lectures, devoirs envoyés, texte du cours), dans la transaction de
+      # l'appelant, la leçon verrouillée. Son statut ne change pas ; tout ce qui est réécrit est en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées)
+      def replace_lesson(course_id:, tree:)
+        connection.execute("SET LOCAL enable_seqscan = off")
+        rewrite(Orm::Course.lock.find(course_id), tree)
       end
 
       # Chargement automatique hors production (ADR chargement-automatique-des-lecons-hors-production §4.4) : remplace, dans la transaction
@@ -106,6 +102,29 @@ module Repositories
       private
 
       def connection = ActiveRecord::Base.connection
+
+      # La leçon verrouillée (course) réécrite entière depuis tree : elle garde son id, son slug, son auteur et son statut ; son texte de
+      # cours (format 1) part, le format 3 n'en a pas.
+      def rewrite(course, tree)
+        course_id = course.id
+        stamp(course.author_id, Time.current)
+        deleted = delete_content(course_id)
+        # Détruit par Action Text, pour que ses pièces jointes (embeds) partent avec lui.
+        texts = ActionText::RichText.where(record_type: "Orm::Course", record_id: course_id, name: "content")
+        deleted[:course_text] = texts.each(&:destroy!).size
+        Rails.logger.info("[import] leçon remplacée : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
+        course.update_columns(name: tree.name, subtitle: tree.subtitle, figures: tree.figures, sheet_theme: tree.sheet_theme, updated_at: @at)
+
+        taken = Orm::Essential.pluck(:slug).to_set
+        notions = tree.notions.map { |node| node.with(course_id:, slug: Entities::Catalog::Slug.unique(node.slug, taken:)) }
+        notion_ids = ids_by(insert(Orm::Essential, notions.map { |node| notion_row(node) }), "slug")
+        exercises = notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.slug)) } }
+        lesson_wide = tree.exercises.map { [ it, course_id, nil ] }
+        subjects = tree.subjects.map { it.with(course_id:) }
+        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
+
+        { courses: 1, essentials: notions.size, **counts, subjects: subjects.size }
+      end
 
       # Les figures de la leçon, celles du fichier citées (cited) y remplaçant leur homonyme ou s'y ajoutant ; les autres restent.
       def merged_figures(current, incoming, cited)

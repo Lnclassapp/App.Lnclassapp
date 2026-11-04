@@ -7,6 +7,8 @@ module Assessment
 
     # Où ramène « Retour » quand l'élève vient de la feuille de la leçon ou de « Ma classe » : deux cibles, jamais une adresse libre.
     RETURN_TARGETS = %w[sheet class].freeze
+    # L'ancre de la feuille d'où vient l'élève (sujet-avant-de-commencer) : jamais autre chose que ces caractères.
+    SHEET_ANCHOR = /\A[a-z0-9_-]{1,255}\z/
 
     def show
       session = Repositories::Assessment::ExerciseSessionRepository.new.find_by_public_id(public_id: params[:public_id])
@@ -33,8 +35,23 @@ module Assessment
       @result = query.call(public_id: session.public_id, reveal: @reveal)
       @owner = session.student_id == current_actor.user_id
       @return_to = params[:return_to] if @owner && RETURN_TARGETS.include?(params[:return_to])
+      @sheet = params[:sheet] if RETURN_TARGETS.include?(@return_to) && params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR)
+      load_sheet(session) if @sheet
       @resume_at = restart_resume_at(session) if @owner
       @can_restart = @resume_at.nil? && Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
+    end
+
+    # refaire-ou-continuer (UDR §3) : la feuille de l'élève d'où il vient, pour y ramener « Refaire » et « Continuer » ; `@sheet_found` faux
+    # (feuille retirée, devoir d'une autre classe) : les boutons d'avant. Une erreur de lecture n'est pas avalée.
+    def load_sheet(session)
+      sheet = if @return_to == "sheet"
+        Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: @result.course_slug, actor: current_actor).sheet(@sheet)
+      else
+        Queries::Classroom::StudentAssignedSheetsQuery.new.sheet(actor: current_actor, dom_id: @sheet)
+      end
+      # Une feuille ne compte que si elle contient l'exercice de la copie (l'ancre d'une autre feuille : repli d'avant).
+      @sheet_found = !sheet.nil? && sheet.exercises.any? { |entry| entry.public_id == @result.exercise.public_id }
+      @next_exercise = (sheet.next_open(after: @result.exercise.public_id)&.public_id if @sheet_found)
     end
 
     # L'heure de reprise si l'élève est en pause sur cet exercice (RestartPause), nil sinon. Le refus d'une nouvelle copie

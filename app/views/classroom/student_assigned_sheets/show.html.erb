@@ -1,0 +1,11 @@
+<%# 🌐 UI · classroom/student_assigned_sheets/show — le sujet d'un devoir reçu, à lire avant de commencer %>
+<%# Rôle : retour à la case de « Ma classe », le devoir en lecture (champs désactivés), puis « Commencer l'exercice » (toujours ce libellé) vers la feuille à remplir %>
+<%# ADR  : 0121, 0072 · UDR : feuilles-en-cases-lues-avant-de-commencer §3 · Stimulus : math %>
+<% number = t("catalog.courses.sheets.numbered_title.#{@sheet.kind}", number: @sheet.number) %>
+<% page_title t("catalog.courses.sheets.page_title", title: number, course: @sheet.courses.join(" · ")) %>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<div data-turbo-prefetch="false"><%= ui_back_link t("classroom.student_assigned_sheets.back"), href: student_classroom_path(anchor: @sheet.dom_id) %></div>
+<div class="ps-page">
+  <%= render "classroom/student_assigned_sheets/sheet", sheet: @sheet, mode: :reading, heading: :h1 %>
+  <%= link_to t("catalog.courses.sheets.start"), fill_student_assigned_sheet_path(@sheet.dom_id), class: "ps-start" %>
+</div>

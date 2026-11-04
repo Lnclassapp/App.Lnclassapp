@@ -76,6 +76,15 @@ module Queries
         assert_equal [ "Pense au rapport.", nil ], questions.map(&:hint)
       end
 
+      test "chaque question porte ses points (colonne de la question, 1 par défaut), lus pour l'épreuve" do
+        questions = @e1.questions.order(:position)
+        questions.second.update!(points: 2.5)
+
+        points = call(nil).interros.first.exercises.first.questions.map(&:points)
+
+        assert_equal [ BigDecimal("1"), BigDecimal("2.5") ], points
+      end
+
       test "les sujets de devoir forment une section à part, un sujet sans exercice visible n'y figure pas" do
         subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès, réciproque")
         create_subject(course: @course, title: "Sujet vide", notions: "Rien")
@@ -122,6 +131,22 @@ module Queries
         assert_equal :mcq, question.kind
         assert_equal %w[A B C D], question.choices.map(&:letter)
         assert_equal [ "Proposition 1", "Proposition 2", "Proposition 3", "Proposition 4" ], question.choices.map(&:content)
+      end
+
+      test "une question porte le nombre de propositions à cocher : 1 pour un QCM simple ou un vrai ou faux, 2 ou 3 pour un QCM multiple" do
+        exercise = create_exercise(essential: @n1, title: "Ex multiples", questions: 1, position: 42)
+        { "multiple_correct_2" => 2, "multiple_correct_3" => 3 }.each do |type, count|
+          question = exercise.questions.create!(position: exercise.questions.count + 1, content: "Coche", question_type: type)
+          5.times { |rank| question.answers.create!(position: rank + 1, content: "P#{rank + 1}", correct: rank < count) }
+        end
+        true_false = exercise.questions.create!(position: 4, content: "Vrai ?", question_type: "true_false")
+        true_false.answers.create!(position: 1, content: "Vrai", correct: true)
+        true_false.answers.create!(position: 2, content: "Faux", correct: false)
+
+        questions = call(nil).interros.first.exercises.find { it.public_id == exercise.public_id }.questions
+
+        assert_equal [ 1, 2, 3, 1 ], questions.map(&:expected)
+        assert_equal [ false, true, true, false ], questions.map(&:multiple)
       end
 
       test "les autres types gardent leur partiel d'aujourd'hui : la question est rendue par la session de lecture" do
@@ -292,6 +317,21 @@ module Queries
         assert_nil prepare.sheet_of("inconnu")
       end
 
+      # sujet-avant-de-commencer : la page d'une feuille choisit sa feuille par son ancre (le dom_id), parmi celles que le rôle lit.
+      test "on retrouve une feuille par son ancre : notion, toute la leçon, sujet ; une ancre inconnue ou retirée rend nil" do
+        subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès")
+        create_exercise(subject:, course: @course, title: "S1 ex 1", position: 30)
+        prepare = call(nil)
+
+        assert_equal "Notion 2", prepare.sheet("notion-#{@n2.slug}").title
+        assert_equal [ "Large 1", "Large 2" ], prepare.sheet("toute-la-lecon").exercises.map(&:title)
+        assert_equal "Sujet A", prepare.sheet("sujet-#{subject.position}").title
+        assert_nil prepare.sheet("sujet-9")
+        assert_nil prepare.sheet("inconnu")
+        assert_nil prepare.sheet(nil)
+        assert_nil PrepareSheetsQuery::EMPTY.sheet("toute-la-lecon")
+      end
+
       test "l'enseignant reçoit ses classes du niveau, avec l'assignation active de chaque exercice" do
         classroom = create_classroom(name: "3ème 1", level: @course.level)
         other = create_classroom(name: "3ème 2", level: @course.level)
@@ -319,6 +359,28 @@ module Queries
         create_exercise_session(student:, exercise: @e2, status: "completed", classroom_assignment_id: assignment.id)
 
         assert_empty due.call(student_actor(student))
+      end
+
+      # refaire-ou-continuer (UDR §3) : « Fait » = une copie terminée, réussie ou non ; le suivant, sinon le premier, sinon rien.
+      test "next_open donne le suivant non fait, sinon le premier non fait, sinon rien" do
+        n4 = create_essential(course: @course, name: "Notion 4", position: 4)
+        a, b, c = Array.new(3) { create_exercise(essential: n4, questions: 1) }
+        student = create_student
+        sheet = -> { call(student_actor(student)).interros.find { it.dom_id == "notion-#{n4.slug}" } }
+        done = ->(exercise) { create_exercise_session(student:, exercise:, status: "completed", score_percent: 0) }
+
+        done.(b)
+        assert_equal c.public_id, sheet.().next_open(after: b.public_id).public_id, "le suivant (c), pas le premier non fait (a)"
+        done.(c)
+        assert_equal a.public_id, sheet.().next_open(after: c.public_id).public_id, "après le dernier : le premier non fait"
+        done.(a)
+        assert_nil sheet.().next_open(after: c.public_id), "tout fait, même raté : rien"
+      end
+
+      test "next_open sans copie lue (visiteur) ou après un exercice inconnu : le premier de la feuille" do
+        sheet = call(nil).interros.first
+
+        assert_equal sheet.exercises.first.public_id, sheet.next_open(after: "inconnu").public_id
       end
     end
   end

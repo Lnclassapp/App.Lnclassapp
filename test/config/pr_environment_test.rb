@@ -14,6 +14,11 @@ class PrEnvironmentTest < ActiveSupport::TestCase
     assert_not active?("Develop", "Develop")
   end
 
+  test "the environment named Demo is never a PR environment, even with PR_BASE_ENVIRONMENT copied from Develop" do
+    [ "Demo", "demo", " DEMO " ].each { assert_not active?("Develop", it), it }
+    assert active?("Develop", "demo-2")
+  end
+
   test "without the base variable, or with it blank, never a PR environment" do
     assert_not active?(nil, "lnclass-pr-276")
     assert_not active?("", "lnclass-pr-276")

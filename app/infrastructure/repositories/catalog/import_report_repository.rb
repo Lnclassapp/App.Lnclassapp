@@ -31,6 +31,15 @@ module Repositories
                          .where("files @> ?::jsonb", [ { name: file_name } ].to_json).order(finished_at: :desc, id: :desc).pick(:checksum_sha256)
       end
 
+      def fail_running_named(kind:, prefix:, at:)
+        pattern = "#{ActiveRecord::Base.sanitize_sql_like(prefix)}%"
+        running = Orm::ImportReport.where(kind:, status: %w[queued validating importing])
+                                   .where("jsonb_array_length(files) = 1 AND files->0->>'name' LIKE ?", pattern)
+        public_ids = running.pluck(:public_id)
+        running.where(public_id: public_ids).update_all(status: "failed", finished_at: at, updated_at: at)
+        public_ids
+      end
+
       def find(id:)
         record = Orm::ImportReport.find_by(id:)
         record && map_to_entity(record)

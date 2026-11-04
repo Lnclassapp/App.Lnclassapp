@@ -45,6 +45,127 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
   end
 
+  # sujet-avant-de-commencer : la feuille poste son ancre ; le résultat ramène à la feuille à remplir, pas à la leçon.
+  test "la vérification transmet l'ancre de la feuille à la page de résultat" do
+    sign_in_as @student
+
+    check(right: 4, sheet: "notion-#{@notion.slug}")
+
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet", sheet: "notion-#{@notion.slug}")
+  end
+
+  test "rendre un devoir depuis une feuille garde le retour Ma classe et transmet l'ancre" do
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise)
+    sign_in_as @student
+
+    check(assignment_public_id: assignment.public_id, sheet: "devoir-abc123")
+
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise, status: "completed")
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
+  end
+
+  test "une ancre qui n'a pas la forme d'une feuille n'est pas transmise" do
+    sign_in_as @student
+
+    # Au plus deux copies : trois d'affilée mettent l'exercice en pause.
+    [ "../admin", [ "sujet-1" ] ].each do |bad|
+      check(sheet: bad)
+
+      session = Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").order(:id).last
+      assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
+    end
+  end
+
+  test "la page de résultat venue d'une feuille ramène à la feuille à remplir, sur l'exercice" do
+    sign_in_as @student
+    check(right: 4)
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    sheet = "notion-#{@notion.slug}"
+
+    get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
+
+    # refaire-ou-continuer : la correction ramène à la feuille à remplir, sur l'exercice, par « Refaire l'exercice » (le seul exercice de la feuille).
+    back = "#{fill_course_sheet_path(@course.slug, sheet, redo: @exercise.public_id)}#sheet-exercise-#{@exercise.public_id}"
+    assert_select "a#restart-exercise-link[href=?]", back, text: "Refaire l'exercice"
+    # Rien d'autre à faire sur la feuille : le second bouton ramène à la case de la feuille sur la leçon.
+    assert_select "a[href=?]", course_path(@course.slug, anchor: sheet), text: "Retour à la leçon"
+  end
+
+  # Le slug d'une notion vient de parameterize : il garde « _ » (u_n) et n'a pas de longueur maximale.
+  test "l'ancre d'une notion au nom en u_n, ou longue, ramène bien à la feuille à remplir" do
+    sign_in_as @student
+
+    [ "Suites u_n et v_n", "a" * 140 ].each_with_index do |name, rank|
+      notion = create_essential(course: @course, name:, position: rank + 2)
+      exercise = create_exercise(essential: notion, questions: 5)
+      session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
+      exercise.questions.each { |question| create_attempt(session:, question:) }
+      sheet = "notion-#{notion.slug}"
+
+      get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
+
+      assert_select "a#restart-exercise-link[href=?]", fill_course_sheet_path(@course.slug, sheet, redo: exercise.public_id, anchor: "sheet-exercise-#{exercise.public_id}")
+      assert_select "a[href=?]", course_path(@course.slug, anchor: sheet), text: "Retour à la leçon"
+    end
+  end
+
+  test "l'ancre de la feuille ne vaut que si elle a la forme attendue ; sinon l'ancien retour s'applique" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    old = "#{course_path(@course.slug)}#sheet-exercise-#{@exercise.public_id}"
+
+    [ "../admin", "Sujet 2", "a" * 256, "javascript:alert(1)" ].each do |bad|
+      get exercise_session_result_path(session.public_id, return_to: "sheet", sheet: bad)
+
+      assert_select "a[href=?]", old, text: "Retour à la leçon"
+    end
+    get exercise_session_result_path(session.public_id, return_to: "sheet", sheet: [ "sujet-1" ])
+    assert_select "a[href=?]", old, text: "Retour à la leçon"
+  end
+
+  # sujet-avant-de-commencer, Lot B : un devoir reçu ramène à sa page à remplir, à l'exercice ; sans ancre valide, « Ma classe ».
+  test "venu de Ma classe, le retour va à la feuille du devoir à l'exercice ; sans ancre valide, il reste Ma classe" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    # Le devoir existe (refaire-ou-continuer lit la feuille) : sa copie n'est pas rendue, l'exercice reste à faire.
+    create_assignment(classroom: @classroom, assignable: @exercise, by: create_teacher(classrooms: [ @classroom ]), batch_public_id: "ABC123")
+
+    get exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
+    assert_select "a[href=?]", fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}"),
+                  text: "Reprendre le devoir"
+
+    [ "Devoir/../x", "", "a" * 256 ].each do |bad|
+      get exercise_session_result_path(session.public_id, return_to: "class", sheet: bad)
+      assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
+    end
+    get exercise_session_result_path(session.public_id, return_to: "class")
+    assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
+  end
+
+  test "sans JavaScript, un refus revient à la feuille à remplir quand la feuille est connue" do
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+    sheet = "notion-#{@notion.slug}"
+
+    check(headers: {}, sheet:)
+
+    assert_redirected_to fill_course_sheet_path(@course.slug, sheet, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Cet exercice n'existe plus.", flash[:alert]
+  end
+
+  test "sans JavaScript, un refus sur la feuille d'un devoir revient à ce devoir à remplir, pas au catalogue" do
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+
+    check(headers: {}, return_to: "class", sheet: "devoir-abc123")
+
+    assert_redirected_to fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Cet exercice n'existe plus.", flash[:alert]
+  end
+
   test "la page de résultat garde son contenu (note sur 20) et offre le retour à l'exercice de la feuille, ancre comprise" do
     sign_in_as @student
     check(right: 4)
@@ -80,12 +201,13 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     create_exercise(essential: @notion, questions: 1)
     check
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    sheet = "notion-#{@notion.slug}"
 
-    get course_path(@course.slug)
+    get fill_course_sheet_path(@course.slug, sheet)
 
     assert_select "#sheet-exercise-#{@exercise.public_id}" do
       assert_select ".ps-status", text: "Réussi"
-      assert_select "a[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet"), text: "Voir ma correction"
+      assert_select "a[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet", sheet:), text: "Voir ma correction"
       assert_select "button.ps-btn--redo", text: "Refaire l'exercice"
       assert_select ".ps-result", 0
       assert_select "button.ps-btn--primary[hidden]", text: "Vérifier ma réponse"
@@ -167,8 +289,78 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select "template p.ps-error[role=alert]", text: "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+    assert_select "template p.ps-error[role=alert]", text: "Question a : écris un nombre, par exemple -3,5."
     assert_no_match(/La copie n'est pas partie/, response.body)
+  end
+
+  # Un QCM à deux bonnes réponses en cinquième position (lettre « e »), propositions 1 et 2 justes.
+  def exercise_with_multiple_choice
+    exercise = create_exercise(essential: @notion, questions: 4)
+    question = exercise.questions.create!(position: 5, content: "<p>Question 5</p>", question_type: "multiple_correct_2")
+    4.times { |rank| question.answers.create!(position: rank + 1, content: "Proposition #{rank + 1}", correct: rank < 2) }
+    [ exercise, exercise.questions.order(:position).to_a ]
+  end
+
+  def post_picks(exercise, questions, last:, headers: STREAM)
+    picks = questions.each_with_index.to_h { |question, index| [ question.id.to_s, { display_order: index < 4 ? [ "0" ] : last } ] }
+    post exercise_sheet_check_path(exercise.public_id), params: { copy: { answers: picks } }, headers:
+  end
+
+  test "un QCM à deux bonnes réponses coché à moitié : le refus nomme la question et le nombre à cocher, sans « nombre attendu »" do
+    exercise, questions = exercise_with_multiple_choice
+    sign_in_as @student
+
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      post_picks(exercise, questions, last: [ "0" ])
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: "Question e : coche 2 réponses."
+    assert_no_match(/un nombre est attendu/, response.body)
+  end
+
+  test "un QCM à deux bonnes réponses bien coché passe à la page de résultat" do
+    exercise, questions = exercise_with_multiple_choice
+    sign_in_as @student
+
+    post_picks(exercise, questions, last: [ "0", "1" ])
+
+    assert_response :see_other
+  end
+
+  test "deux questions fautives : une ligne par question, dans l'ordre" do
+    exercise, questions = exercise_with_multiple_choice
+    numeric = create_kind_question(exercise:, question_type: "numeric", answers: [ "4" ])
+    sign_in_as @student
+    picks = questions.to_h { |question| [ question.id.to_s, { display_order: [ "0" ] } ] }
+    picks[numeric.id.to_s] = { response_text: "abc" }
+
+    post exercise_sheet_check_path(exercise.public_id), params: { copy: { answers: picks } }, headers: STREAM
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]" do |nodes|
+      assert_equal [ "Question e : coche 2 réponses.", "Question f : écris un nombre, par exemple -3,5." ],
+                   nodes.first.inner_html.split("<br>").map { Nokogiri::HTML5.fragment(it).text.strip }
+    end
+  end
+
+  test "une copie illisible dans sa forme : le message général, sans « un nombre est attendu »" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { "999999" => { display_order: [ "0" ] } } } }, headers: STREAM
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: /Une réponse n'est pas lisible/
+    assert_no_match(/un nombre est attendu/, response.body)
+  end
+
+  test "sans JavaScript, une copie illisible dans sa forme revient à la leçon avec le message général" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { "999999" => { display_order: [ "0" ] } } } }
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal I18n.t("assessment.sheet_checks.errors.invalid_copy"), flash[:alert]
   end
 
   test "sans JavaScript, une réponse illisible revient à la leçon avec son message (R1)" do
@@ -179,7 +371,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     post exercise_sheet_check_path(numeric.public_id), params: { copy: { answers: { numeric.questions.first.id.to_s => { response_text: "abc" } } } }
 
     assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{numeric.public_id}")
-    assert_match(/Une réponse n'est pas lisible/, flash[:alert])
+    assert_equal "Question a : écris un nombre, par exemple -3,5.", flash[:alert]
   end
 
   test "un exercice assigné et pas encore rendu est refusé sans ouvrir de session, avec le lien « Ma classe » (CA-17)" do
@@ -212,7 +404,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     other = create_exercise(essential: @notion, questions: 1)
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill_course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
     assert_select "#sheet-exercise-#{@exercise.public_id}" do
       assert_select "button.ps-btn--primary", count: 0

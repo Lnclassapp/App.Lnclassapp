@@ -10,7 +10,7 @@ Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → «
 - Exclus : régulations, évaluations, remédiations, révisions, mises à niveau, devoirs de niveau, prises de contact, congés.
 - Intitulé fidèle au document, sans « Leçon n : » ni volume horaire ; une leçon répétée n'est gardée qu'une fois.
 - `subtitle` : « Leçon N — progression DPFC 2026-2027 », N étant le rang dans l'année.
-- Série : celle du document. Un « A » en Tle devient deux cours, en **A1** et en **A2** (le référentiel découpe la série A en Terminale) ; en 1ère, la série reste **A**. Progression commune à toutes les séries : pas de `series_name`.
+- Série : celle du document. Un « A » en Tle devient deux cours, en **A1** et en **A2** (le référentiel découpe la série A en Terminale) ; de même en 1ère (le référentiel n’a pas de série A en 1ère : A1, A2, C, D). Progression commune à toutes les séries : pas de `series_name`.
 - Apostrophes uniformisées en `'`.
 
 ## Fichiers

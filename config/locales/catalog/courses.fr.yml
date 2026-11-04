@@ -146,6 +146,8 @@ fr:
           true_false: "Vrai ou faux"
           fill_in: "Complète"
           calculation: "Calcul"
+        # UDR qcm-plusieurs-reponses : la consigne d'un QCM à 2 ou 3 bonnes réponses.
+        choose_count: "Coche %{count} réponses."
         choice_true: "Vrai"
         choice_false: "Faux"
         hint_label: "Indice :"
@@ -166,6 +168,31 @@ fr:
           empty: "✗ Sans réponse"
         assign: "Assigner à %{classroom}"
         assigned: "✓ Assigné à %{classroom}"
+        # sujet-avant-de-commencer (UDR feuilles-en-cases-lues-avant-de-commencer) : la case, la page de lecture, le bouton, le message.
+        card_exercises:
+          one: "%{count} exercice"
+          other: "%{count} exercices"
+        start: "Commencer l'exercice"
+        read_subject: "Lire le sujet"
+        page_title: "%{title} · %{course}"
+        # sujet-comme-une-epreuve (UDR sujet-comme-une-epreuve §3) : la page de lecture d'une feuille, en forme d'épreuve.
+        paper:
+          heading: "ÉPREUVE DE %{material}"
+          rubric:
+            one: "Cette épreuve comporte un exercice."
+            other: "Cette épreuve comporte %{count} exercices."
+          points:
+            one: "(%{points} point)"
+            other: "(%{points} points)"
+          number: "N°"
+          statement: "Affirmation"
+          caption: "Exercice %{number}, affirmations %{first} à %{last}"
+          instruction:
+            true_false: "Pour chacune des affirmations ci-dessous, indique V si elle est vraie ou F si elle est fausse."
+            mcq: "Pour chacune des affirmations ci-dessous, une seule réponse est exacte : trouve-la."
+            mcq_multiple: "Pour chacune des affirmations ci-dessous, trouve la ou les réponses exactes."
+          footer: "Sujet d'entraînement rédigé par Lnclass. Ce n'est pas un sujet officiel."
+        gone: "Cette feuille n'existe plus."
       role_actions:
         menu: "Actions sur la fiche de cours « %{name} »"
         edit: "Modifier"
