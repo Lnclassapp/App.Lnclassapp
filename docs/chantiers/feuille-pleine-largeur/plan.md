@@ -25,7 +25,7 @@ Pas de Lot 0 : aucune migration, entité, port ni route. Vague 1 : Lot A → 1 a
 - **Test associé** : `test/system/catalog/sheet_cards_test.rb` (à 390 px : `.ps-sheet` de l'épreuve et de la feuille à remplir de 0 à 390, pas de défilement en largeur)
 - **Done quand**   : le bouton sous l'épreuve dit « Commencer l'exercice », que la feuille soit commencée ou non ; à 390 px, l'épreuve et la feuille à remplir du sujet 3 de Thalès touchent les deux bords ; à 1280 px, rien n'a changé
 
-Règles d'interface : [UDR-XXXX-feuille-pleine-largeur-sur-telephone](../../decisions/udr/XXXX-feuille-pleine-largeur-sur-telephone.md) §3. PRD : [`prd.md`](prd.md).
+Règles d'interface : [UDR-0154](../../decisions/udr/0154-feuille-pleine-largeur-sur-telephone.md) §3. PRD : [`prd.md`](prd.md).
 
 ---
 

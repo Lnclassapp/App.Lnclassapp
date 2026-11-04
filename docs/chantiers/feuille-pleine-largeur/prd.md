@@ -61,7 +61,7 @@ Alors la feuille garde ses marges et son ombre d'avant
 ## 6. Décisions rattachées
 
 - Pas d'ADR : aucune architecture ne bouge.
-- UDR-XXXX-feuille-pleine-largeur-sur-telephone — amende UDR-0149 §3 et UDR-0152 §3 sous 640 px.
+- UDR-0154 — amende UDR-0149 §3 et UDR-0152 §3 sous 640 px.
 
 ## 7. Mesures
 

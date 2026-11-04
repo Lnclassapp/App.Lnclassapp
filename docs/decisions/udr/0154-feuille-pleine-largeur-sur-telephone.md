@@ -1,4 +1,4 @@
-# UDR-XXXX : Sur téléphone, la feuille occupe toute la largeur de l'écran
+# UDR-0154 : Sur téléphone, la feuille occupe toute la largeur de l'écran
 <!-- index
 titre: Feuille pleine largeur sur téléphone
 statut: Accepté

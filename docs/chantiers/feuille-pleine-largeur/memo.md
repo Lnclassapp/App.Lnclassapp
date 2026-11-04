@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré ([#469](https://github.com/Lnclassapp/App.Lnclassapp/pull/469) vers `Develop`, 2026-11-04), clos |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/feuille-pleine-largeur` |
 | **Programme** | — |
