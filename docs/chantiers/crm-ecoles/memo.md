@@ -73,8 +73,8 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 
 ## Questions encore ouvertes
 
-- **Konan est enseignant sur Lnclass.** Un compte n'a qu'un rôle et un numéro ne sert qu'à un compte : pour utiliser le suivi, il lui faut un compte équipe distinct, avec un autre numéro. Le porteur doit trancher (second numéro, ou Konan reste hors de l'outil).
-- Touré doit recevoir une invitation équipe `field` avant le premier lot démontrable.
+- Konan et Touré ont déjà leurs comptes équipe (réponse du porteur, 4 novembre).
+- Touré code tous les lots, en 3 jours (jeudi 5 au samedi 7 novembre), avec 3 lots en parallèle au plus et 2 sessions Claude ouvertes au plus. Le test final est fait par Konan, puis par le porteur.
 - **Intelligence retenue** : compte rendu dicté, fiche de briefing avant appel, rapport pédagogique pour la direction, brouillon de relance WhatsApp. Accès aux modèles par OpenRouter. Les quatre entrent dans ce chantier (voir le grill).
 - Le support de l'audio par OpenRouter pour le modèle choisi est à vérifier au premier lot IA ; s'il manque, le compte rendu dicté passe par un appel de transcription séparé.
 - Le nouveau contexte borné `crm` tient dans un seul graphe de lots : on n'ouvre pas de programme (voir l'ADR du contexte).

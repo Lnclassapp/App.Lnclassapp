@@ -1,6 +1,6 @@
 # Plan d'exécution — CRM des écoles (« Lnclass Intelligent »)
 
-> Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
+> Graphe des dépendances ci-dessous ; l’ordre réel (3 lots en parallèle au plus, 2 sessions) est dans « Dispatch ».
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > Specs : [`prd.md`](prd.md) · Décisions : ADR-XXXX-contexte-crm-suivi-des-ecoles, ADR-XXXX-modeles-de-langage-par-openrouter, UDR-XXXX-bloc-suivi-de-la-fiche-etablissement, UDR-XXXX-pipeline-et-relances, UDR-XXXX-assistants-du-suivi.
 
@@ -11,14 +11,14 @@ Lot 0 — SOCLE : tables, entités, ports, policy, routes, hôtes des frames, us
   ↓
   ├─► Lot A  Étape, responsable, usage            ┐
   ├─► Lot B  Contacts                             │
-  ├─► Lot C  Journal des échanges                 ├─ vague 2 : 6 agents en parallèle
+  ├─► Lot C  Journal des échanges                 ├─ dépendent du seul Lot 0
   ├─► Lot D  Relances (créer, terminer, réattribuer, page)
   ├─► Lot F  Pipeline sur « Établissements »      │
   └─► Lot G  Socle IA (OpenRouter, générations, carte Assistants)
         ↓
   Lot D ──► Lot E  À relancer (règle calculée, onglet, carte Accueil)   ┐
   Lot G ──► Lot H  Fiche de briefing                                     │
-  Lot G ──► Lot I  Brouillon de relance WhatsApp                         ├─ vague 3 : 5 agents
+  Lot G ──► Lot I  Brouillon de relance WhatsApp                         ├─ dépendent d’un lot ci-dessus
   Lot G ──► Lot J  Rapport pédagogique                                   │
   Lot C + Lot G ──► Lot K  Compte rendu dicté                            ┘
 ```
@@ -29,33 +29,49 @@ Lot 0 — SOCLE : tables, entités, ports, policy, routes, hôtes des frames, us
 
 ## Dispatch
 
+Touré exécute **tous les lots**, en **3 jours** (jeudi 5 au samedi 7 novembre), avec deux limites fixées par le porteur : **3 lots en parallèle au plus**, **2 sessions Claude ouvertes au plus**.
+
+| Session | Rôle | Lots |
+|---|---|---|
+| **Session 1 — Suivi** | Socle, métier du suivi, **seule à fusionner** dans `feature/crm-ecoles` | 0, C, D, A, E, B, F, K |
+| **Session 2 — IA** | Assistants | G, H, I, J |
+
+Dans chaque session, un agent `executant-lot` (Sonnet) par lot, chacun dans son worktree. La session 2 pousse ses branches de lot ; la session 1 les fusionne. Une seule session fusionne : pas de course sur la branche de chantier.
+
 ```
-Vague 1 : Lot 0                                       → 1 agent, séquentiel, sur feature/crm-ecoles
-Vague 2 : Lot A ‖ B ‖ C ‖ D ‖ F ‖ G                   → 6 agents, worktrees isolés
-Vague 3 : Lot E (D) ‖ H (G) ‖ I (G) ‖ J (G) ‖ K (C+G) → 5 agents, worktrees isolés
-Puis    : revues (security-reviewer, silent-failure-hunter, pr-test-analyzer), bin/ci-quiet, captures, challenger
+            Session 1 (Suivi)          Session 2 (IA)         Lots en parallèle
+Jeu 5 matin   Lot 0                      —                     1
+Jeu 5 après-m C ‖ D                      G                     3
+Ven 6 matin   A ‖ E (après D)            H (après G)           3
+Ven 6 après-m B ‖ F                      I (après G)           3
+Sam 7 matin   K (après C et G)           J (après G)           2
+Sam 7 après-m Revues, bin/ci-quiet, captures, PR prête → Konan teste → le porteur teste et fusionne
 ```
 
-Agent d'exécution : `executant-lot` (Sonnet). Touré pilote : il lance les agents, relit, fusionne chaque lot dans `feature/crm-ecoles`, fait les captures.
+**Pourquoi cet ordre** : les lots qui débloquent le plus partent d'abord (G débloque H, I, J, K ; C débloque K ; D débloque E). Les lots qu'on coupe en premier (K, puis J) passent en dernier : si le samedi matin déborde, on les retire sans rien casser. H, le seul lot IA qui ne se coupe jamais, passe dès le vendredi matin.
 
-Worktree d'un lot, créé **après** la fusion du Lot 0 :
+**Une vague ne démarre que si la précédente est fusionnée** dans `feature/crm-ecoles` (session 1), sauf dépendance explicite déjà satisfaite. Entre deux lots : tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une seule fois, samedi après-midi, sur le head final.
+
+Worktree d'un lot, créé **après** la fusion du Lot 0 et depuis la branche de chantier à jour :
 
 ```bash
-git worktree add ../lnclass-crm-ecoles-lot-a -b feature/crm-ecoles-lot-a feature/crm-ecoles
+git -C /chemin/App.Lnclassapp pull origin feature/crm-ecoles
+```
+
+```bash
+git worktree add ../lnclass-crm-ecoles-lot-c -b feature/crm-ecoles-lot-c feature/crm-ecoles
 ```
 
 Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interdiction de toucher un fichier hors de son champ `Fichiers`** — s'il en a besoin, il s'arrête et remonte (le fichier appartient au Lot 0 ou le plan est faux) ; ordre intra-lot : test rouge → domaine → infrastructure → delivery → vue ; en-tête HITL sur chaque fichier de `app/`.
 
-### Calendrier visé
+### Calendrier
 
 | Jour | Travail |
 |---|---|
-| Mer 4 nov. | Lot 0 |
-| Jeu 5 – Ven 6 | Vague 2 (A, B, C, D, F, G), fusions au fil de l'eau |
-| Lun 9 – Mar 10 | Vague 3 (E, H, I, J, K) |
-| Mer 11 | Revues, `bin/ci-quiet`, captures 390 px et ordinateur, PR prête |
-| Jeu 12 | Challenger, corrections, fusion dans `Develop` |
-| Ven 13 | Rapport de stage |
+| Jeu 5 nov. | Lot 0 le matin ; C, D, G l'après-midi |
+| Ven 6 nov. | A, E, H le matin ; B, F, I l'après-midi |
+| Sam 7 nov. | K, J le matin ; l'après-midi : revues (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`), `bin/ci-quiet`, captures 390 px et ordinateur, PR prête ; test de Konan, puis du porteur ; fusion dans `Develop` |
+| Lun 9 – Ven 13 | Rapport de stage, corrections éventuelles |
 | Sam 14 | Marge |
 
 ---
@@ -330,4 +346,4 @@ Sortie attendue : `app/controllers/teams/crm/follow_ups_controller.rb`, `app/con
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >
-> Pour ce chantier : il refait le parcours nominal du PRD §3 (filtre du pipeline → fiche → briefing → dictée → relance → brouillon WhatsApp → rapport) avec un compte `field`, à 390 px et sur ordinateur, puis deux chemins d'erreur : un compte `content` qui tente une adresse du suivi (403), et l'assistant sans clé OpenRouter (« Assistant non configuré »).
+> Pour ce chantier, **Konan puis le porteur** : Konan refait le parcours nominal du PRD §3 (filtre du pipeline → fiche → briefing → dictée → relance → brouillon WhatsApp → rapport) avec un compte `field`, à 390 px et sur ordinateur, puis deux chemins d'erreur : un compte `content` qui tente une adresse du suivi (403), et l'assistant sans clé OpenRouter (« Assistant non configuré »). Le porteur rejoue les deux chemins d'erreur, puis décide de la fusion.
