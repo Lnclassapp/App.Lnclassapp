@@ -1,9 +1,9 @@
-# Chargement automatique des leçons à sujets de devoir (ADR chargement-automatique-des-lecons-hors-production), sur Develop seul des
-# leçons v3 du manifeste du jeu standard remplacées entières (ADR-0123, standard-de-test), sur Staging seul des leçons v3 absentes créées : lancé par
+# Chargement automatique des leçons du dépôt : sur Develop, chaque leçon v3 remplacée entière, 3ème et sujets compris (ADR-0123, standard-de-test,
+# amendements du 2026-11-04) ; sur Staging, exercices et sujets des leçons à sujets de devoir (ADR-0122) et leçons v3 absentes créées : lancé par
 # db/seeds/contenus.rb au pré-déploiement Railway (`bin/rails db:prepare db:seed`). Develop et Staging seulement
 # (RAILWAY_ENVIRONMENT_NAME), sous un verrou consultatif PostgreSQL ; ne sort jamais en erreur : le pré-déploiement n'échoue pas à cause d'elle.
 namespace :contenus do
-  desc "Charge les leçons du dépôt : à sujets de devoir (Develop et Staging, exercices et sujets seulement), v3 du jeu standard (Develop, entières), v3 absentes (Staging, créées), puis publication"
+  desc "Charge les leçons du dépôt : toutes les v3 entières (Develop), à sujets de devoir (Staging, exercices et sujets seulement) et v3 absentes (Staging, créées), puis publication"
   task charger: :environment do
     say = ->(message) { puts "[contenus] #{message}" }
     connection = nil
@@ -38,14 +38,11 @@ namespace :contenus do
           UseCases::Catalog::RunImport.new(adapter: import_adapter, schema: Repositories::Catalog::ImportSchemaValidator.new, reports:, files:,
                                            users:, audit_log: dependencies[:audit_log], transaction:, clock: Time.zone)
         end
-        # Le manifeste du jeu standard ne regarde que Develop : Staging et production ne dépendent pas de jeu.yml.
-        develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).manifest_only?
-        manifest_paths = develop ? Entities::Catalog::StandardTestSet.new(YAML.load_file(Rails.root.join("db/seeds/standard/jeu.yml"))).expected_paths : []
         result = UseCases::Catalog::LoadRepositoryLessons.new(
           source: Repositories::Catalog::RepositoryLessonSource.new, reports:, users:, courses:, essentials:, exercises:, taxonomy:,
           start_import: UseCases::Catalog::StartImport.new(reports:, files:, queue: no_queue, transaction:, clock: Time.zone),
           run_import: run.call(adapter.call(:exercises)), run_lesson_import: run.call(adapter.call(:lesson)),
-          run_create_import: run.call(adapter.call(:create_only)), manifest_paths:,
+          run_create_import: run.call(adapter.call(:create_only)),
           publish_cascade: UseCases::Catalog::PublishCascade.new(
             courses:, essentials:, exercises:, transaction:, policy: dependencies[:policy],
             publish_course: UseCases::Catalog::PublishCourse.new(courses:, **dependencies),

@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Catalog::LoadRepositoryLessons
-# Rôle : Develop et Staging chargent les leçons à sujets de devoir du dépôt ; Develop remplace entières les seules leçons du manifeste du jeu standard, Staging crée les leçons v3 absentes sans toucher aux présentes ; production jamais
+# Rôle : Develop remplace entière chaque leçon v3 du dépôt (3ème et sujets compris) ; Staging recharge les exercices et sujets des leçons à sujets de devoir et crée les leçons v3 absentes du programme sans toucher aux présentes ; production jamais
 # ADR  : chargement-automatique-des-lecons-hors-production, standard-de-test, 0123, 0108, 0113, 0116, 0121
 module UseCases
   module Catalog
@@ -7,6 +7,10 @@ module UseCases
       KIND = "course_tree"
       # Le début du nom de fichier de chaque ligne d'import du chargement automatique (RepositoryLessonSource).
       IMPORT_PREFIX = "chargement-automatique-"
+      # Le nom d'import d'une leçon chargée entière (mode :lesson, Develop) : distinct de celui des chargements « exercices et sujets »
+      # (:exercises) qu'un même fichier a pu recevoir avant l'amendement du 2026-11-04 ; leur empreinte ne dit pas que la leçon est entière.
+      # Commence par IMPORT_PREFIX : un rapport orphelin du chargement entier est nettoyé comme les autres (fail_running_named).
+      WHOLE_PREFIX = "#{IMPORT_PREFIX}entiere-".freeze
       # Journal d'un import refusé : ses premières erreurs, et seulement ces paramètres (aucune donnée personnelle).
       LOGGED_ERRORS = 3
       LOGGED_PARAMS = %i[keyword rule exception constraint].freeze
@@ -15,8 +19,9 @@ module UseCases
 
       # outcome : :skipped (production, PR, nom absent), :no_author (aucun membre d'équipe actif), :unknown_environment (une ligne refusée
       # est laissée), :done. lessons : { nom d'import => :loaded | :created | :replaced | :unchanged | :not_started | :refused | :unpublished |
-      # :partially_published | :republished | :failed | :ignored } ; :created et :replaced disent qu'une leçon du programme v3 (ADR-0123) a été
-      # écrite absente ou à la place de celle du même titre, :loaded qu'une leçon à sujets de devoir l'a été (ADR-0122), :ignored qu'une leçon
+      # :partially_published | :republished | :failed | :ignored } ; :created et :replaced disent qu'une leçon v3 a été écrite entière absente
+      # ou à la place de celle du même titre (Develop, ADR-0123 ; Staging crée seulement), :loaded que les exercices et sujets d'une leçon à
+      # sujets de devoir l'ont été (Staging, ADR-0122), :ignored qu'une leçon
       # déjà présente a été laissée intacte (Staging, mode create_only).
       STATUSES = %i[created ignored replaced loaded unchanged republished failed refused not_started unpublished partially_published].freeze
       # Les statuts qui disent un échec ou une publication incomplète.
@@ -32,11 +37,10 @@ module UseCases
       # du même nom (fiches et exercices en brouillon d'une leçon) ; logger : le journal du déploiement ;
       # taxonomy : TaxonomyRepository (lookup) ; start_import, run_import, publish_cascade : les use cases du même nom, cablés par l'appelant
       # (run_import avec l'adaptateur ImportCourseTree en mode replace: :exercises, run_lesson_import en mode replace: :lesson, run_create_import en
-      # mode replace: :create_only) ; manifest_paths : les chemins « niveau/matière/fichier.json » du jeu standard (StandardTestSet#expected_paths),
-      # les seuls fichiers que Develop remplace entiers ;
+      # mode replace: :create_only) ;
       # policy : Policies::Catalog::ManageContentPolicy ; referential : ReferentialCompleterPort (Develop seul, ADR-0123 §8).
       def initialize(source:, reports:, users:, courses:, essentials:, exercises:, taxonomy:, start_import:, run_import:, run_lesson_import:,
-                     run_create_import:, manifest_paths:, publish_cascade:, policy:, logger:, clock:, referential:)
+                     run_create_import:, publish_cascade:, policy:, logger:, clock:, referential:)
         @source = source
         @reports = reports
         @users = users
@@ -48,7 +52,6 @@ module UseCases
         @run_import = run_import
         @run_lesson_import = run_lesson_import
         @run_create_import = run_create_import
-        @manifest = manifest_paths.to_set { "#{IMPORT_PREFIX}#{it.tr('/', '-')}" }
         @referential = referential
         @publish_cascade = publish_cascade
         @policy = policy
@@ -79,7 +82,7 @@ module UseCases
       private
 
       def mode_of(stage, lesson)
-        stage.mode_for(level_directory: lesson.level_directory, subjects: lesson.subjects, in_manifest: @manifest.include?(lesson.import_name))
+        stage.mode_for(level_directory: lesson.level_directory, subjects: lesson.subjects)
       end
 
       def done(outcome, lessons = {}) = Shared::Result.success(Summary.new(outcome:, lessons:))
@@ -134,11 +137,12 @@ module UseCases
 
       def load(lesson, mode, actor)
         return :ignored if mode == :create_only && present?(lesson)
-        return republish(lesson, actor) if @reports.last_loaded_checksum(kind: KIND, file_name: lesson.import_name) == lesson.checksum_sha256
+        file_name = upload_name(lesson, mode)
+        return republish(lesson, actor) if @reports.last_loaded_checksum(kind: KIND, file_name:) == lesson.checksum_sha256
 
         loaded = { lesson: -> { present?(lesson) ? :replaced : :created }, create_only: -> { :created } }.fetch(mode) { -> { :loaded } }.call
 
-        upload = Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(lesson.content), filename: lesson.import_name)
+        upload = Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(lesson.content), filename: file_name)
         started = @start_import.call(actor:, dto: Dtos::Catalog::ImportUploadInput.new(kind: KIND, files: [ upload ]))
         if started.failure?
           @logger.error("[contenus] #{lesson_name(lesson)} : import non démarré (#{started.code} #{started.errors})")
@@ -159,7 +163,7 @@ module UseCases
         return :ignored if mode == :create_only && ran.value.imported_count.zero?
 
         if loaded != :loaded
-          @logger.info("[contenus] #{lesson_name(lesson)} : leçon #{loaded == :replaced ? 'remplacée entière' : 'créée'} (#{lesson.import_name})")
+          @logger.info("[contenus] #{lesson_name(lesson)} : leçon #{loaded == :replaced ? 'remplacée entière' : 'créée'} (#{file_name})")
         end
         guarded(lesson) { publish(lesson, actor, slug_of(lesson), loaded) }
       end
@@ -219,6 +223,8 @@ module UseCases
         @logger.error("[contenus] #{lesson_name(lesson)} : publication interrompue (#{error.class} : #{error.message})")
         :unpublished
       end
+
+      def upload_name(lesson, mode) = mode == :lesson ? lesson.import_name.sub(IMPORT_PREFIX, WHOLE_PREFIX) : lesson.import_name
 
       def lesson_name(lesson) = JSON.parse(lesson.content).fetch("courses").first["name"].to_s.squish
 
