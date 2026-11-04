@@ -218,10 +218,34 @@ module LessonRendering
       end
     end
 
-    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres.
+    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres. Une figure citée par les seuls
+    # exercices n'est pas attendue : depuis sujet-avant-de-commencer (#464), les exercices sont sur la page de la feuille, pas
+    # sur celle de la leçon.
     def missing_figures(lesson, rendered)
       drawn = rendered.select { it["shown"] }.map { JSON.parse(it["params"].to_s) }
-      lesson.fetch("figures", []).reject { |figure| drawn.include?(figure["params"]) }.map { it["key"] }
+      only_in_exercises = exercise_only_figure_keys(lesson)
+      lesson.fetch("figures", []).reject { |figure| only_in_exercises.include?(figure["key"]) || drawn.include?(figure["params"]) }
+            .map { it["key"] }
+    end
+
+    # Les clés de figure citées par un exercice (de la leçon ou d'une notion) et par rien d'autre dans la leçon. Une citation est
+    # un champ dont la valeur est exactement la clé (« figure », ou un bloc de contenu), jamais un mot du texte.
+    EXERCISE_KEYS = %w[exercise exercises].freeze
+
+    def exercise_only_figure_keys(lesson)
+      keys = lesson.fetch("figures", []).map { it["key"] }
+      in_exercises = []
+      elsewhere = []
+      collect_citations(lesson.except("figures"), keys, in_exercises, elsewhere, inside: false)
+      in_exercises.uniq - elsewhere
+    end
+
+    def collect_citations(node, keys, in_exercises, elsewhere, inside:)
+      case node
+      when Hash then node.each { |key, value| collect_citations(value, keys, in_exercises, elsewhere, inside: inside || EXERCISE_KEYS.include?(key)) }
+      when Array then node.each { collect_citations(it, keys, in_exercises, elsewhere, inside:) }
+      when String then (inside ? in_exercises : elsewhere) << node if keys.include?(node)
+      end
     end
   end
 end
