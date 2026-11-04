@@ -37,7 +37,8 @@
     <% end %>
   </div>
   <%# Lecture : les champs se voient, désactivés et vides ; un fieldset les désactive d'un coup et reste lisible au lecteur d'écran. %>
-  <%= tag.fieldset disabled: reading, class: ("m-0 min-w-0 border-0 p-0" if reading) do %>
+  <%# min-w-0 : un fieldset ne rétrécit pas sous son contenu ; sans lui, une formule longue élargit la page à 390 px. %>
+  <%= tag.fieldset disabled: reading, class: "m-0 min-w-0 border-0 p-0" do %>
     <% exercise.questions.each do |question| %>
       <%= render "catalog/courses/sheets/question", question:, fields: fields || reading, checked: reading ? false : checked, reading: %>
     <% end %>

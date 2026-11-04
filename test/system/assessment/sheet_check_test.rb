@@ -96,7 +96,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     multiple = create_exercise(essential: @notion, title: "Multiple", questions: 1)
     question = multiple.questions.create!(position: 2, content: "<p>Deux réponses</p>", question_type: "multiple_correct_2")
     4.times { |rank| question.answers.create!(position: rank + 1, content: "Choix #{rank + 1}", correct: rank < 2) }
-    visit course_path(@course.slug)
+    visit sheet_page
 
     within(frame(multiple)) do
       assert_selector "p.ps-instruction", text: "Coche 2 réponses.", count: 1
