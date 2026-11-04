@@ -38,7 +38,7 @@ Lot A — règle de Develop + câblage + tests (séquentiel, seul)
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle — sans objet (un lot)
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [x] En-tête HITL sur chaque fichier créé dans `app/` — aucun fichier créé
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur — chargement réel des 417 fichiers en mode Develop (nominal) ; chemins d'erreur par les tests d'intégration (référentiel absent, import refusé, verrou pris) ; pas d'agent challenger séparé
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert (`bin/ci-quiet` niveau pr, `e491fe5a`)
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR — #477
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

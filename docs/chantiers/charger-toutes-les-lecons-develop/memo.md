@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré ([#477](https://github.com/Lnclassapp/App.Lnclassapp/pull/477) vers `Develop`, 2026-11-04), clos |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/charger-toutes-les-lecons-develop` |
 | **Programme** | — |

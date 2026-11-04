@@ -25,4 +25,11 @@
 
 ## Dette et chantiers de suivi
 
-- Aucun.
+- Aucun chantier de suivi ouvert.
+- À vérifier après le premier déploiement de Develop : journal du pré-déploiement (`created` ou `replaced` pour chaque fichier, 0 en échec), temps réel ; si Railway coupe le pré-déploiement, appliquer l'option D d'ADR-0123 (décision n° 7 du ticket #473).
+- À trancher par le pilote : « Calcul littéral » (3ème) a 1 exercice par notion dans le fichier, contre 5 annoncés par le ticket.
+- Fusion de `Develop` (#475, Staging complète son référentiel) dans la branche : conflits dans ADR-0123 et `automatic_load_stage_test`, les deux changements gardés.
+
+## Clôture
+
+Clos le 2026-11-04 : PR #477 vers `Develop`, `bin/ci-quiet` vert sur `e491fe5a`. Pas d'ADR ni d'UDR nouveau : amendements d'ADR-0123 (§10) et d'ADR-0124 (§8).
