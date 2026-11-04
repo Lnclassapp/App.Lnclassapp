@@ -12,7 +12,7 @@
 <% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
 <%# Venu de la feuille de la leçon : retour à l'exercice sur la feuille ; venu d'un devoir rendu depuis « Ma classe » : retour à Ma classe. %>
 <% back_href, back_label = case @return_to
-                           when "sheet" then [ course_path(result.course_slug, anchor: "sheet-exercise-#{result.exercise.public_id}"), t(".back_to_lesson") ]
+                           when "sheet" then [ (@sheet ? fill_course_sheet_path(result.course_slug, @sheet, anchor: "sheet-exercise-#{result.exercise.public_id}") : course_path(result.course_slug, anchor: "sheet-exercise-#{result.exercise.public_id}")), t(".back_to_lesson") ]
                            when "class" then [ student_classroom_path, t(".back_to_class") ]
                            else [ lesson_href, t(".back_to_lesson") ]
                            end %>

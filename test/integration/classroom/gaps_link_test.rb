@@ -44,13 +44,14 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_gaps a[href*='/essentials/']", 0
   end
 
-  test "the anchor exists on the lesson page, on the card of the notion's exercise" do
+  test "the anchor exists on the lesson page, on the card of the notion, which leads to its sheet" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
-    assert_select ".ps-sheet##{anchor}", 1
+    assert_select "a.ps-card##{anchor}[href=?]", course_sheet_path(@course.slug, anchor)
     exercise = Orm::Exercise.find_by!(essential: @notion)
+    get fill_course_sheet_path(@course.slug, anchor)
     assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"
   end
 end

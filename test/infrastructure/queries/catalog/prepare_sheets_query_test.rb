@@ -292,6 +292,21 @@ module Queries
         assert_nil prepare.sheet_of("inconnu")
       end
 
+      # sujet-avant-de-commencer : la page d'une feuille choisit sa feuille par son ancre (le dom_id), parmi celles que le rôle lit.
+      test "on retrouve une feuille par son ancre : notion, toute la leçon, sujet ; une ancre inconnue ou retirée rend nil" do
+        subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès")
+        create_exercise(subject:, course: @course, title: "S1 ex 1", position: 30)
+        prepare = call(nil)
+
+        assert_equal "Notion 2", prepare.sheet("notion-#{@n2.slug}").title
+        assert_equal [ "Large 1", "Large 2" ], prepare.sheet("toute-la-lecon").exercises.map(&:title)
+        assert_equal "Sujet A", prepare.sheet("sujet-#{subject.position}").title
+        assert_nil prepare.sheet("sujet-9")
+        assert_nil prepare.sheet("inconnu")
+        assert_nil prepare.sheet(nil)
+        assert_nil PrepareSheetsQuery::EMPTY.sheet("toute-la-lecon")
+      end
+
       test "l'enseignant reçoit ses classes du niveau, avec l'assignation active de chaque exercice" do
         classroom = create_classroom(name: "3ème 1", level: @course.level)
         other = create_classroom(name: "3ème 2", level: @course.level)

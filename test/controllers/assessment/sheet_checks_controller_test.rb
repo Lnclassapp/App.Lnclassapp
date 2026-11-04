@@ -45,6 +45,86 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
   end
 
+  # sujet-avant-de-commencer : la feuille poste son ancre ; le résultat ramène à la feuille à remplir, pas à la leçon.
+  test "la vérification transmet l'ancre de la feuille à la page de résultat" do
+    sign_in_as @student
+
+    check(right: 4, sheet: "notion-#{@notion.slug}")
+
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet", sheet: "notion-#{@notion.slug}")
+  end
+
+  test "rendre un devoir depuis une feuille garde le retour Ma classe et transmet l'ancre" do
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise)
+    sign_in_as @student
+
+    check(assignment_public_id: assignment.public_id, sheet: "sujet-2")
+
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise, status: "completed")
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "class", sheet: "sujet-2")
+  end
+
+  test "une ancre qui n'a pas la forme d'une feuille n'est pas transmise" do
+    sign_in_as @student
+
+    # Au plus deux copies : trois d'affilée mettent l'exercice en pause.
+    [ "../admin", [ "sujet-1" ] ].each do |bad|
+      check(sheet: bad)
+
+      session = Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").order(:id).last
+      assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
+    end
+  end
+
+  test "la page de résultat venue d'une feuille ramène à la feuille à remplir, sur l'exercice" do
+    sign_in_as @student
+    check(right: 4)
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    sheet = "notion-#{@notion.slug}"
+
+    get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
+
+    back = "#{fill_course_sheet_path(@course.slug, sheet)}#sheet-exercise-#{@exercise.public_id}"
+    assert_select "a[href=?]", back, text: "Retour à la leçon"
+  end
+
+  test "l'ancre de la feuille ne vaut que si elle a la forme attendue ; sinon l'ancien retour s'applique" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    old = "#{course_path(@course.slug)}#sheet-exercise-#{@exercise.public_id}"
+
+    [ "../admin", "Sujet 2", "a" * 121, "javascript:alert(1)" ].each do |bad|
+      get exercise_session_result_path(session.public_id, return_to: "sheet", sheet: bad)
+
+      assert_select "a[href=?]", old, text: "Retour à la leçon"
+    end
+    get exercise_session_result_path(session.public_id, return_to: "sheet", sheet: [ "sujet-1" ])
+    assert_select "a[href=?]", old, text: "Retour à la leçon"
+  end
+
+  test "venu de Ma classe, l'ancre de la feuille n'est pas encore lue : le retour reste Ma classe" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+
+    get exercise_session_result_path(session.public_id, return_to: "class", sheet: "sujet-2")
+
+    assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
+  end
+
+  test "sans JavaScript, un refus revient à la feuille à remplir quand la feuille est connue" do
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+    sheet = "notion-#{@notion.slug}"
+
+    check(headers: {}, sheet:)
+
+    assert_redirected_to fill_course_sheet_path(@course.slug, sheet, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Cet exercice n'existe plus.", flash[:alert]
+  end
+
   test "la page de résultat garde son contenu (note sur 20) et offre le retour à l'exercice de la feuille, ancre comprise" do
     sign_in_as @student
     check(right: 4)
@@ -80,12 +160,13 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     create_exercise(essential: @notion, questions: 1)
     check
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    sheet = "notion-#{@notion.slug}"
 
-    get course_path(@course.slug)
+    get fill_course_sheet_path(@course.slug, sheet)
 
     assert_select "#sheet-exercise-#{@exercise.public_id}" do
       assert_select ".ps-status", text: "Réussi"
-      assert_select "a[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet"), text: "Voir ma correction"
+      assert_select "a[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet", sheet:), text: "Voir ma correction"
       assert_select "button.ps-btn--redo", text: "Refaire l'exercice"
       assert_select ".ps-result", 0
       assert_select "button.ps-btn--primary[hidden]", text: "Vérifier ma réponse"
@@ -212,7 +293,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     other = create_exercise(essential: @notion, questions: 1)
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill_course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
     assert_select "#sheet-exercise-#{@exercise.public_id}" do
       assert_select "button.ps-btn--primary", count: 0

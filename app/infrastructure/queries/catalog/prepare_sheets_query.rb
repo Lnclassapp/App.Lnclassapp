@@ -11,6 +11,8 @@ module Queries
         def sheets = interros + devoirs
         def exercise(public_id) = sheets.flat_map(&:exercises).find { it.public_id == public_id }
         def sheet_of(public_id) = sheets.find { |sheet| sheet.exercises.any? { it.public_id == public_id } }
+        # La feuille que son ancre désigne (dom_id : « notion-<slug> », « toute-la-lecon », « sujet-<n> ») ; nil si elle n'existe pas ou plus.
+        def sheet(dom_id) = sheets.find { it.dom_id == dom_id }
       end
       Bare = Data.define(:essential_slug, :title)
       # kind : :notion · :lesson_wide · :subject ; dom_id : l'ancre de la feuille (« notion-<slug> », « toute-la-lecon », « sujet-<n> ») ;

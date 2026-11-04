@@ -1,0 +1,12 @@
+<%# 🌐 UI · catalog/prepare_sheets/_sheet — une feuille de la leçon avec son cartouche, en lecture ou à remplir %>
+<%# Rôle : calcule les locals de sheets/_sheet depuis une PrepareSheetsQuery::Sheet (notion, toute la leçon, sujet) ; rendu par la page de lecture et la page à remplir (et par la page de la classe) %>
+<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 %>
+<%# locals: (prepare:, sheet:, mode:, targets: nil, classrooms: [], heading: :b) -%>
+<% devoirs = sheet.kind == :subject %>
+<%= render "catalog/courses/sheets/sheet", kind: (devoirs ? :devoirs : :interros), number: sheet.number, mode:, material: prepare.material_name,
+           header_left: t("catalog.courses.sheets.brand_line", course: prepare.course_name),
+           header_right: t("catalog.courses.sheets.#{devoirs ? :subject_position : :notion_position}", level: prepare.level_name, number: sheet.number, total: sheet.total),
+           title: (sheet.kind == :lesson_wide ? t("catalog.courses.show.lesson_wide_title") : sheet.title),
+           box_label: (devoirs ? t("catalog.courses.sheets.notions") : (t("catalog.courses.sheets.remember") if sheet.note)), box_text: sheet.note,
+           exercises: sheet.exercises, footer: t("catalog.courses.sheets.#{devoirs ? :footer_subject : :footer_notion}", number: sheet.number),
+           reset_label: t("catalog.courses.sheets.#{devoirs ? :reset_subject : :reset_notion}"), sheet_id: sheet.dom_id, targets:, classrooms:, heading: %>

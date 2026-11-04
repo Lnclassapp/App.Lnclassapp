@@ -37,8 +37,8 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     teacher = create_teacher(school:, classrooms: [ classroom ])
     sign_in_as teacher
 
-    visit course_path(course.slug)
-    assert_selector "#prepare-interros"
+    visit course_sheet_path(course.slug, "notion-#{essential.slug}")
+    assert_selector ".ps-sheet"
     trigger = find("#assignment_#{classroom.public_id}_Exercise_#{exercise.public_id} a", text: "Assigner")
     trigger.click
     assert_selector "turbo-frame#modal dialog[open]"

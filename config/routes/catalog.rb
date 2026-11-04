@@ -1,8 +1,11 @@
 # 🌐 DELIVERY · routes du contexte catalog (lecture)
 # Rôle : catalogue, cours et fiches essentielles, adressés par slug ; pages publiques Niveau, Série et Matière, sans compte
-# ADR  : 0029, 0035, 0099 (§4.3), 0110 (fiche de cours), 0116, 0119-entrainement-de-notion-corrige-sans-trace
+# ADR  : 0029, 0035, 0099 (§4.3), 0110 (fiche de cours), 0116, 0119-entrainement-de-notion-corrige-sans-trace · UDR : feuilles-en-cases-lues-avant-de-commencer
 get "courses", to: "catalog/courses#index", as: :courses # gelé
 get "courses/:slug", to: "catalog/courses#show", as: :course
+# Une feuille de la leçon (sujet-avant-de-commencer) : son sujet en lecture, puis la feuille à remplir ; :sheet = l'ancre de la feuille (notion-<slug>, toute-la-lecon, sujet-<n>).
+get "courses/:course_slug/feuilles/:sheet", to: "catalog/prepare_sheets#show", as: :course_sheet
+get "courses/:course_slug/feuilles/:sheet/remplir", to: "catalog/prepare_sheets#fill", as: :fill_course_sheet
 get "courses/:course_slug/essentials/:slug", to: "catalog/essentials#show", as: :course_essential
 # Ancienne adresse de la fiche de cours : 301 vers la fiche de révision de la page de la leçon (CA-12, ADR-0116 §4.5).
 get "courses/:course_slug/fiche", to: "catalog/courses#fiche", as: :course_fiche

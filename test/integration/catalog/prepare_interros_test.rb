@@ -15,26 +15,42 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @teacher = create_teacher(classrooms: [ @classroom ])
   end
 
-  def sheet(index) = "#prepare-interros .ps-sheet:nth-of-type(#{index})"
+  # sujet-avant-de-commencer : la leçon ne porte que des cases ; la feuille à remplir (ou à lire) a sa page.
+  def fill(sheet_id = "notion-#{@notions.first.slug}") = fill_course_sheet_path(@course.slug, sheet_id)
+  def read(sheet_id) = course_sheet_path(@course.slug, sheet_id)
   def frame(exercise) = "turbo-frame#sheet-exercise-#{exercise.public_id}"
   def including(text) = /#{Regexp.escape(text)}/
 
   # CA-1
-  test "a student reads one sheet per notion, then « Toute la leçon », with the header, the title, « À retenir » and the exercise" do
+  test "the lesson shows one card per sheet, none to fill; each sheet page reads with the header, the title, « À retenir » and the exercise" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros .ps-sheet", 5
-    assert_select "#prepare-interros .ps-sheet[data-controller=prepare-sheet][data-prepare-sheet-owner-value=?]", @student.id.to_s, 5
-    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: /Brouillon|Publié/, count: 0
+    assert_select "#prepare-interros a.ps-card", 5
+    assert_select ".ps-sheet", 0
+    assert_select "#prepare-interros [data-controller=prepare-sheet]", 0
+    assert_select "#notion-#{@notions.first.slug}.ps-card[href=?]", read("notion-#{@notions.first.slug}") do
+      assert_select ".ps-card-kind", text: "Prépare interros n°1"
+      assert_select ".ps-card-title", text: "Notion 1"
+      assert_select ".ps-card-meta", text: "1 exercice"
+      assert_select ".ps-card-meta", text: "0 / 1 exercice réussi"
+    end
+    assert_select "#toute-la-lecon.ps-card" do
+      assert_select ".ps-card-kind", text: "Prépare interros n°5"
+      assert_select ".ps-card-title", text: "Toute la leçon"
+      assert_select ".ps-card-meta", text: "2 exercices"
+    end
+
+    get fill
+    assert_select ".ps-sheet[data-controller=prepare-sheet][data-prepare-sheet-owner-value=?]", @student.id.to_s
+    assert_select ".ps-exercise-head .ps-status", text: /Brouillon|Publié/, count: 0
     assert_select "#notion-#{@notions.first.slug}.ps-sheet" do
       assert_select ".ps-header", text: including("PRÉPARE INTERROS")
       assert_select ".ps-header", text: including(@course.material.name.upcase)
       assert_select ".ps-header", text: including("Lnclass · Thalès")
       assert_select ".ps-header", text: including("Classe de #{@course.level.name} · Notion 1 / 5")
-      # UDR-0149 §3 (ajout du 2026-10-31) : le titre est numéroté, le nom de la notion passe en sous-titre.
       assert_select ".ps-title", text: "Prépare interros n°1"
       assert_select ".ps-title-block .ps-subject", text: "Notion 1"
       assert_select "#sheet-progress-notion-#{@notions.first.slug}.ps-progress", text: "0 / 1 exercice réussi"
@@ -43,6 +59,8 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
       assert_select ".ps-footer", text: including("Lnclass · Prépare interros · Notion 1")
       assert_select ".ps-footer button", text: "Recommencer cette notion"
     end
+
+    get fill("toute-la-lecon")
     assert_select "#toute-la-lecon.ps-sheet" do
       assert_select ".ps-title", text: "Prépare interros n°5"
       assert_select ".ps-title-block .ps-subject", text: "Toute la leçon"
@@ -50,7 +68,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
       assert_select ".ps-progress", text: "0 / 2 exercice réussi"
       assert_select ".ps-exercise", 2
     end
-    assert_select "#prepare-interros a[href='#{exercise_path(@by_notion.first.public_id)}']", 0
+    assert_select "a[href='#{exercise_path(@by_notion.first.public_id)}']", 0
   end
 
   # prepare-interros-cahier, vu aux captures : le LaTeX de « À retenir », des propositions et des indices restait brut.
@@ -59,7 +77,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     essential.update!(sheet: { "remember" => "Si $(MN) \\parallel (BC)$ alors $$\\frac{AM}{AB}$$." })
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select "#notion-#{essential.slug} .ps-remember[data-controller=math]", text: including("$(MN)")
     assert_select "#notion-#{essential.slug} .ps-choice .ps-choice-label[data-controller=math]", minimum: 1
@@ -72,7 +90,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     [ [ 1, "Vrai", true ], [ 2, "Faux", false ] ].each { |position, content, correct| vf.answers.create!(position:, content:, correct:) }
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select frame(exercise) + " .ps-choices-vf .ps-choice-vf [data-controller=math]", 2
   end
@@ -83,7 +101,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     exercise.update!(figure_key: "triangle-thales")
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select frame(exercise) + " .ps-exercise-figure figure", 1
     assert_select frame(exercise) + " .ps-exercise-figure.w-48", 0
@@ -97,7 +115,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     [ [ 1, "Vrai", true ], [ 2, "Faux", false ] ].each { |position, content, correct| vf.answers.create!(position:, content:, correct:) }
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select frame(exercise) do
       assert_select "form[action='#{exercise_sheet_check_path(exercise.public_id)}'][method=post]"
@@ -124,17 +142,24 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     sign_in_as @student
 
     get course_path(@course.slug)
-
     assert_select "#prepare-devoirs h2", text: "Prépare devoirs"
-    assert_select "#prepare-devoirs .ps-sheet", 1
-    assert_select "#prepare-devoirs .ps-header", text: including("PRÉPARE DEVOIRS")
-    assert_select "#prepare-devoirs .ps-header", text: including("Sujet 1 / 1")
-    assert_select "#prepare-devoirs .ps-title", text: "Prépare devoirs n°1"
-    assert_select "#prepare-devoirs .ps-title-block .ps-subject", text: "Sujet 1 · Calculer, démontrer, conclure"
-    assert_select "#prepare-devoirs .ps-remember", text: "Notions mobilisées : Thalès et sa réciproque"
-    assert_select "#prepare-devoirs .ps-exercise", 2
-    assert_select "#prepare-devoirs .ps-footer", text: including("Lnclass · Prépare devoirs · Sujet 1")
-    assert_select "#prepare-devoirs .ps-footer button", text: "Recommencer ce sujet"
+    assert_select "#prepare-devoirs a.ps-card#sujet-#{subject.position}[href=?]", read("sujet-#{subject.position}") do
+      assert_select ".ps-card-kind", text: "Prépare devoirs n°1"
+      assert_select ".ps-card-title", text: "Sujet 1 · Calculer, démontrer, conclure"
+      assert_select ".ps-card-meta", text: "2 exercices"
+    end
+
+    get fill("sujet-#{subject.position}")
+
+    assert_select ".ps-sheet", 1
+    assert_select ".ps-sheet .ps-header", text: including("PRÉPARE DEVOIRS")
+    assert_select ".ps-sheet .ps-header", text: including("Sujet 1 / 1")
+    assert_select ".ps-sheet .ps-title", text: "Prépare devoirs n°1"
+    assert_select ".ps-sheet .ps-title-block .ps-subject", text: "Sujet 1 · Calculer, démontrer, conclure"
+    assert_select ".ps-sheet .ps-remember", text: "Notions mobilisées : Thalès et sa réciproque"
+    assert_select ".ps-sheet .ps-exercise", 2
+    assert_select ".ps-sheet .ps-footer", text: including("Lnclass · Prépare devoirs · Sujet 1")
+    assert_select ".ps-sheet .ps-footer button", text: "Recommencer ce sujet"
   end
 
   test "a lesson without subject has no « Prépare devoirs » section" do
@@ -151,10 +176,13 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @by_notion.second.update!(hint: nil)
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select "#{frame(exercise)} .ps-hint[hidden]", text: "Indice : Indice de Notion 1"
     assert_select "#{frame(exercise)} button.ps-btn--hint[aria-expanded=false]", text: "Indice"
+
+    get fill("notion-#{@notions.second.slug}")
+
     assert_select "#{frame(@by_notion.second)} .ps-hint", 0
     assert_select "#{frame(@by_notion.second)} button.ps-btn--hint", 0
   end
@@ -163,10 +191,10 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @by_notion.first.update!(hint: "<script>alert(1)</script>", statement: "<img src=x onerror=alert(2)>")
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
-    assert_select "#prepare-interros script", 0
-    assert_select "#prepare-interros img[onerror]", 0
+    assert_select ".ps-sheet script", 0
+    assert_select ".ps-sheet img[onerror]", 0
     assert_includes response.body, "&lt;script&gt;alert(1)&lt;/script&gt;"
   end
 
@@ -174,11 +202,11 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @by_notion.first.questions.first.update!(explanation: "Parce que A.")
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select ".ps-result", 0
     assert_select "a", text: "Voir ma correction", count: 0
-    assert_select "button.ps-btn--redo[hidden]", 4 + 2
+    assert_select "button.ps-btn--redo[hidden]", 1
     assert_not_includes response.body, "Parce que A."
     assert_not_includes response.body, "Bonne réponse"
   end
@@ -195,7 +223,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     end
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select frame(exercise) do
       assert_select "[data-checked=true][data-copy='#{session.public_id}']"
@@ -203,7 +231,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
       # Lot C bis : ni note ni correction sur la feuille ; la copie a sa page de résultat.
       assert_select ".ps-result", 0
       assert_select ".ps-result-grade", 0
-      assert_select "a.ps-btn--redo[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet"), text: "Voir ma correction"
+      assert_select "a.ps-btn--redo[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet", sheet: "notion-#{@notions.first.slug}"), text: "Voir ma correction"
       assert_select "button.ps-btn--redo:not([hidden])", text: "Refaire l'exercice"
       assert_select "button.ps-btn--primary[hidden]"
       assert_select "button.ps-choice[aria-checked=true]", 5
@@ -219,43 +247,51 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     end
     sign_in_as @student
 
-    get course_path(@course.slug)
+    get fill
 
     assert_select "#{frame(@by_notion.first)} .ps-status", text: "Réussi"
     assert_select "#sheet-progress-notion-#{@notions.first.slug}", text: "1 / 1 exercice réussi"
   end
 
   # CA-8 (périmètre du Lot B : l'enseignant garde ses bascules d'aujourd'hui)
-  test "a teacher reads the sheets without field, check button or hint button, and keeps one assignment toggle per class" do
+  test "a teacher reads the sheet without field, check button or hint button, and keeps one assignment toggle per class" do
     sign_in_as @teacher
+    sheet = "notion-#{@notions.first.slug}"
 
     get course_path(@course.slug)
+    assert_select "#prepare-interros a.ps-card", 5
+    assert_select ".ps-sheet", 0
+
+    get read(sheet)
 
     assert_response :success
-    assert_select "#prepare-interros .ps-sheet", 5
-    assert_select "#prepare-interros input:not([type=hidden])", 0
-    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
-    assert_select "#prepare-interros textarea, #prepare-interros select", 0
-    assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
-    assert_select "#prepare-interros button.ps-btn--hint", 0
-    assert_select "#prepare-interros .ps-footer button", 0
+    assert_select ".ps-sheet", 1
+    assert_select ".ps-sheet input:not([type=hidden])", 0
+    assert_select ".ps-sheet .ps-input, .ps-sheet [data-ps-choice]", 0
+    assert_select ".ps-sheet textarea, .ps-sheet select", 0
+    assert_select ".ps-sheet button", text: "Vérifier ma réponse", count: 0
+    assert_select ".ps-sheet button.ps-btn--hint", 0
+    assert_select ".ps-sheet .ps-footer button", 0
     assert_select "#{frame(@by_notion.first)} #assignment_#{@classroom.public_id}_Exercise_#{@by_notion.first.public_id}"
   end
 
-  test "the team reads the same sheets, drafts included, with neither field nor assignment toggle" do
+  test "the team reads the same sheet, drafts included, with neither field nor assignment toggle" do
     create_exercise(essential: @notions.first, title: "Brouillon", status: "draft", position: 90)
     sign_in_as create_team_member
 
     get course_path(@course.slug)
-
-    assert_select "#prepare-interros .ps-exercise", 7
-    assert_select "#prepare-interros input:not([type=hidden])", 0
-    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
-    assert_select "#prepare-interros [id^=assignment_]", 0
+    assert_select "#prepare-interros a.ps-card", 5
     assert_select "#toute-la-lecon", 1
-    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: including("Brouillon"), count: 1
-    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: "Publié", count: 6
-    assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
+
+    get read("notion-#{@notions.first.slug}")
+
+    assert_select ".ps-exercise", 2
+    assert_select ".ps-sheet input:not([type=hidden])", 0
+    assert_select ".ps-sheet .ps-input, .ps-sheet [data-ps-choice]", 0
+    assert_select "[id^=assignment_]", 0
+    assert_select ".ps-exercise-head .ps-status", text: including("Brouillon"), count: 1
+    assert_select ".ps-exercise-head .ps-status", text: "Publié", count: 1
+    assert_select ".ps-sheet button", text: "Vérifier ma réponse", count: 0
   end
 
   test "a lesson without exercise says so, for a teacher too, and offers no sheet nor assignment" do

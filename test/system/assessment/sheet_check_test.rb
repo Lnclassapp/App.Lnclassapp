@@ -17,6 +17,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
   end
 
   def frame(exercise) = "#sheet-exercise-#{exercise.public_id}"
+  def sheet_page = fill_course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
   # La proposition 1 de chaque question est la bonne (factory) : « A. » ; « B. » est fausse.
   def answer(exercise, rights)
@@ -27,17 +28,17 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
 
   # CA-3, CA-4
   test "4 justes sur 5 : la page de résultat de la copie s'ouvre (note sur 20), le retour ramène à l'exercice, À revoir et Voir ma correction ; un exercice réussi compte" do
-    visit course_path(@course.slug)
+    visit sheet_page
     answer(@exercise, [ true, true, true, true, false ])
 
     within(frame(@exercise)) { click_button "Vérifier ma réponse" }
 
     assert_selector "#session_grade", text: "16/20"
-    assert_current_path(%r{\A/sessions/[^/]+/result\?return_to=sheet\z})
+    assert_current_path(%r{\A/sessions/[^/]+/result\?return_to=sheet&sheet=notion-[a-z0-9-]+\z})
     assert_equal 1, Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").count
     click_link "Retour à la leçon"
 
-    assert_current_path course_path(@course.slug)
+    assert_current_path sheet_page
     within(frame(@exercise)) do
       assert_selector ".ps-status", text: "À revoir"
       assert_link "Voir ma correction"
@@ -61,7 +62,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     3.times { create_exercise_session(student: @student, exercise: @short, status: "completed", completed_at: 5.minutes.ago) }
     @assigned.update!(hint: "Pense à Thalès.")
     create_assignment(classroom: @classroom, assignable: @assigned)
-    visit course_path(@course.slug)
+    visit sheet_page
 
     # Les trois copies sont déjà là : l'exercice s'ouvre corrigé, l'élève le refait.
     within(frame(@short)) { click_button "Refaire l'exercice" }
