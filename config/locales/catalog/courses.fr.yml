@@ -180,6 +180,23 @@ fr:
           devoirs: "Continuer Prépare devoirs"
         read_subject: "Lire le sujet"
         page_title: "%{title} · %{course}"
+        # sujet-comme-une-epreuve (UDR sujet-comme-une-epreuve §3) : la page de lecture d'une feuille, en forme d'épreuve.
+        paper:
+          heading: "ÉPREUVE DE %{material}"
+          rubric:
+            one: "Cette épreuve comporte un exercice."
+            other: "Cette épreuve comporte %{count} exercices."
+          points:
+            one: "(%{points} point)"
+            other: "(%{points} points)"
+          number: "N°"
+          statement: "Affirmation"
+          caption: "Exercice %{number}, affirmations %{first} à %{last}"
+          instruction:
+            true_false: "Pour chacune des affirmations ci-dessous, indique V si elle est vraie ou F si elle est fausse."
+            mcq: "Pour chacune des affirmations ci-dessous, une seule réponse est exacte : trouve-la."
+            mcq_multiple: "Pour chacune des affirmations ci-dessous, trouve la ou les réponses exactes."
+          footer: "Sujet d'entraînement rédigé par Lnclass. Ce n'est pas un sujet officiel."
         gone: "Cette feuille n'existe plus."
       role_actions:
         menu: "Actions sur la fiche de cours « %{name} »"

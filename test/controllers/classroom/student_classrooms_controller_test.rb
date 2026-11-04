@@ -227,12 +227,21 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select ".ps-card-meta", text: /\A0 \/ 3 /
     end
 
+    # La lecture est une épreuve (sans « À retenir » ni « Notions mobilisées »), la feuille à remplir garde les siens.
     get student_assigned_sheet_path("devoir-batchtwoxxxxxx")
+    assert_select ".ps-paper-name", text: "Prépare interros n°1 · La méiose"
+    assert_select ".ps-remember", 0
+    assert_select ".ps-paper-exercise", two.size
+    get fill_student_assigned_sheet_path("devoir-batchtwoxxxxxx")
     assert_select ".ps-title", text: "Prépare interros n°1"
     assert_select ".ps-subject", text: "La méiose"
     assert_select ".ps-remember", text: including("Deux divisions.")
     assert_select ".ps-exercise", two.size
     get student_assigned_sheet_path("devoir-batchthreexxxx")
+    assert_select ".ps-paper-name", text: /\APrépare devoirs n°1 · DEVOIR DU /
+    assert_select ".ps-remember", 0
+    assert_select ".ps-paper-exercise", three.size
+    get fill_student_assigned_sheet_path("devoir-batchthreexxxx")
     assert_select ".ps-title", text: "Prépare devoirs n°1"
     assert_select ".ps-subject", text: /\ADEVOIR DU /
     assert_select ".ps-remember", text: including("Notions mobilisées :")
@@ -329,7 +338,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     due = I18n.t("classroom.student_classrooms.assigned_sheet.due_on", date: I18n.l(Date.current + 2, format: :due_long))
     assert_select "#student_classroom_assigned a.ps-card .ps-card-meta", text: due
-    get student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
+    # sujet-comme-une-epreuve : la lecture n'a pas de sous-titre ; l'échéance reste sous le titre de la feuille à remplir.
+    get fill_student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
     assert_select ".ps-title-block", text: including(due)
   end
 

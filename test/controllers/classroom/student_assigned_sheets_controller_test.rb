@@ -19,6 +19,8 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
   end
 
   def frame(exercise) = "turbo-frame#sheet-exercise-#{exercise.public_id}"
+  # sujet-comme-une-epreuve : en lecture, l'exercice est une section de l'épreuve.
+  def paper(exercise) = "section.ps-paper-exercise#sheet-exercise-#{exercise.public_id}"
 
   test "the student reads the received assignment: every exercise, disabled fields, no hand-in button, « Commencer »" do
     sign_in_as @student
@@ -26,9 +28,10 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
     get student_assigned_sheet_path(@sheet)
 
     assert_response :success
-    assert_select "h1.ps-title", text: "Prépare devoirs n°1"
-    assert_select ".ps-sheet .ps-exercise", 3
-    @exercises.each { |exercise| assert_select "#{frame(exercise)} fieldset[disabled]", 1 }
+    assert_select "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_select ".ps-paper-name", text: /Prépare devoirs n°1/
+    assert_select ".ps-paper .ps-paper-exercise", 3
+    @exercises.each { |exercise| assert_select %w[input select textarea fieldset button].map { "#{paper(exercise)} #{it}" }.join(", "), 0 }
     assert_select ".ps-sheet button.ps-btn--primary", 0
     assert_select ".ps-sheet form", 0
     assert_select "a.ps-start[href=?]", fill_student_assigned_sheet_path(@sheet), text: "Commencer Prépare devoirs"

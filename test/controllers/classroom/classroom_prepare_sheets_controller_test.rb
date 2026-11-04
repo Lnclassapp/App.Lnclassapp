@@ -24,8 +24,9 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
 
     assert_response :success
-    assert_select "h1.ps-title", text: "Prépare interros n°1"
-    assert_select "turbo-frame#sheet-exercise-#{@ex.public_id}"
+    assert_select "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_select ".ps-paper-name", text: /Prépare interros n°1/
+    assert_select "section.ps-paper-exercise#sheet-exercise-#{@ex.public_id}"
     assert_select "##{toggle_id(@classroom, @ex)}"
     assert_select "[id^='assignment_#{other.public_id}']", 0
     assert_select "#sheet-batch-bar"
@@ -39,7 +40,8 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     get classroom_course_sheet_path(@classroom.public_id, @course.slug, "sujet-#{@subject.position}")
 
     assert_response :success
-    assert_select "h1.ps-title", text: "Prépare devoirs n°1"
+    assert_select "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_select ".ps-paper-name", text: /Prépare devoirs n°1/
     assert_select "##{toggle_id(@classroom, @devoir)}"
   end
 
@@ -50,7 +52,9 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
 
     assert_response :success
     assert_select "[id^=assignment_]", 0
-    assert_select ".ps-exercise-head .ps-status", text: "Publié"
+    # sujet-comme-une-epreuve : l'équipe ne voit plus « Publié » ; seul un brouillon porte sa mention (sheet_paper_test).
+    assert_select ".ps-paper-exercise", 1
+    assert_select ".ps-paper-exercise-title .ps-status", 0
     assert_select "a.ps-start", 0
   end
 

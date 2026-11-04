@@ -139,8 +139,8 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @notions.first.update!(sheet: { "remember" => "L'**intégrale** de $f$ vaut *F(b)*. <img src=x onerror=alert(1)>" })
     sign_in_as @student
 
-    # La feuille se lit sur sa propre page ; la case de la leçon n'en montre que le titre.
-    get course_sheet_path(@course.slug, "notion-#{@notions.first.slug}")
+    # La feuille à remplir porte le « À retenir » (la lecture, une épreuve, n'en a pas) ; la case de la leçon n'en montre que le titre.
+    get fill("notion-#{@notions.first.slug}")
 
     assert_select ".ps-remember" do
       assert_select "b", text: "intégrale"
@@ -285,13 +285,14 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select ".ps-sheet", 1
+    assert_select ".ps-sheet.ps-paper", 1
     assert_select ".ps-sheet input:not([type=hidden])", 0
     assert_select ".ps-sheet .ps-input, .ps-sheet [data-ps-choice]", 0
     assert_select ".ps-sheet textarea, .ps-sheet select", 0
     assert_select ".ps-sheet button", text: "Vérifier ma réponse", count: 0
     assert_select ".ps-sheet button.ps-btn--hint", 0
     assert_select ".ps-sheet .ps-footer button", 0
-    assert_select "#{frame(@by_notion.first)} #assignment_#{@classroom.public_id}_Exercise_#{@by_notion.first.public_id}"
+    assert_select "section#sheet-exercise-#{@by_notion.first.public_id} #assignment_#{@classroom.public_id}_Exercise_#{@by_notion.first.public_id}"
   end
 
   test "the team reads the same sheet, drafts included, with neither field nor assignment toggle" do
@@ -304,12 +305,13 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     get read("notion-#{@notions.first.slug}")
 
-    assert_select ".ps-exercise", 2
+    assert_select ".ps-paper-exercise", 2
     assert_select ".ps-sheet input:not([type=hidden])", 0
     assert_select ".ps-sheet .ps-input, .ps-sheet [data-ps-choice]", 0
     assert_select "[id^=assignment_]", 0
-    assert_select ".ps-exercise-head .ps-status", text: including("Brouillon"), count: 1
-    assert_select ".ps-exercise-head .ps-status", text: "Publié", count: 1
+    # sujet-comme-une-epreuve : seul un brouillon porte sa mention, un exercice publié n'en porte plus.
+    assert_select ".ps-paper-exercise-title .ps-status", text: including("Brouillon"), count: 1
+    assert_select ".ps-paper-exercise-title .ps-status", 1
     assert_select ".ps-sheet button", text: "Vérifier ma réponse", count: 0
   end
 
