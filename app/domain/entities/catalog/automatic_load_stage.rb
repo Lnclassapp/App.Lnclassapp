@@ -27,6 +27,9 @@ module Entities
       def whole_lessons? = load? && whole_lessons
       def manifest_only? = whole_lessons?
       def create_missing? = load? && create_missing
+      # ADR-0123 §8, amendé le 2026-11-04 : partout où l'on charge (Develop, Staging), le référentiel de base manquant est créé d'abord ;
+      # une base Staging remise à neuf refuserait sinon toutes ses leçons (niveau, matière, série inconnus).
+      def completes_referential? = load?
 
       # Le remplacement d'une leçon du dépôt : :exercises (elle porte des sujets de devoir, ADR-0122, partout où l'on charge), :lesson
       # (Develop, dossier du programme v3 et fichier du manifeste : remplacée entière), :create_only (Staging, dossier du programme v3 :
