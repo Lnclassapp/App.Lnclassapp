@@ -162,6 +162,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0151](./0151-feuilles-en-cases-lues-avant-de-commencer.md) | Feuilles en cases, lues avant de commencer | Accepté | 2026-10-31 | — | Sur la page d'une leçon et dans « Ma classe », les feuilles sont empilées et déjà prêtes à remplir ; l'élève ne voit ni combien il y en a ni le sujet en entier avant de commencer. |
 | [0152](./0152-sujet-comme-une-epreuve.md) | Sujet lu comme une épreuve | Accepté | 2026-11-04 | — | La page de lecture d'une feuille « Prépare interros » ou « Prépare devoirs » montre le sujet dans la mise en page du cahier à remplir, pas dans celle d'une épreuve d'examen. |
 | [0153](./0153-refaire-ou-continuer.md) | Refaire ou continuer depuis la correction | Accepté | 2026-11-04 | — | Sur la correction d'une copie vérifiée depuis une feuille, « Refaire » ouvre l'ancien lecteur et « Retour à la leçon » ramène à l'exercice déjà fait. |
+| [0154](./0154-feuille-pleine-largeur-sur-telephone.md) | Feuille pleine largeur sur téléphone | Accepté | 2026-11-04 | — | Sur téléphone, la feuille (épreuve à lire ou feuille à remplir) perd 36 à 51 px de chaque côté en marges empilées : le texte et les champs sont serrés. |
 <!-- index:end -->
 
 ---
