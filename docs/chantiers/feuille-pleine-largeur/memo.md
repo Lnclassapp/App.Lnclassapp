@@ -33,6 +33,7 @@ Le pilote a vu les captures des chantiers `sujet-comme-une-epreuve` et `refaire-
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Quel réglage, vu sur un essai à 390 px (feuille à remplir et épreuve, avant / après) ? | « La capture 4 me plaît beaucoup, c'est ça que je veux » (l'épreuve après : texte à 12 px du bord) | Valeurs de l'essai reprises telles quelles dans l'UDR. |
+| Le bouton sous l'épreuve ? | Il faut changer « Continuer Prépare interros / devoirs » (page où on voit le sujet sans pouvoir le traiter) ; texte choisi : « Commencer l'exercice » | Le bouton dit toujours « Commencer l'exercice » (UDR §3, amende UDR-0151 §3). Un premier essai avec « Continuer … » toujours était un malentendu, corrigé avant la PR. |
 | Quelles pages ? | Toutes les feuilles (leçon, devoir de « Ma classe », enseignant) : proposé, accepté (« Oui lance ») | Une règle CSS commune à `.ps-page`, aucune vue touchée. |
 
 ## Cas limites identifiés

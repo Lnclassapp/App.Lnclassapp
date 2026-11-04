@@ -35,6 +35,15 @@ Quand il ouvre l'épreuve d'une feuille, puis la feuille à remplir
 Alors la feuille blanche va du bord gauche (0) au bord droit (390) de l'écran
 Et la page ne défile pas en largeur
 
+Étant donné un élève qui n'a jamais ouvert la feuille « Prépare devoirs n°1 »
+Quand il lit son sujet
+Alors le bouton sous l'épreuve dit « Commencer l'exercice »
+
+Étant donné un élève qui a déjà vérifié un exercice de la feuille
+Quand il relit son sujet
+Alors le bouton sous l'épreuve dit encore « Commencer l'exercice »
+Et « Continuer Prépare devoirs » n'apparaît nulle part
+
 Étant donné un élève sur un écran de 1280 px
 Quand il ouvre la même feuille
 Alors la feuille garde ses marges et son ombre d'avant

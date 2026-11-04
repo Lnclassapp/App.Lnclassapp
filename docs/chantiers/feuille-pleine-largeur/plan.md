@@ -17,10 +17,13 @@ Pas de Lot 0 : aucune migration, entité, port ni route. Vague 1 : Lot A → 1 a
 
 - **Couche**       : ui
 - **Fichiers**     : `app/assets/stylesheets/prepare_sheet.css`
+                     `app/views/catalog/prepare_sheets/show.html.erb` · `app/views/classroom/student_assigned_sheets/show.html.erb` (libellé « Commencer l'exercice » toujours)
+                     `config/locales/catalog/courses.fr.yml` (clé `start` : « Commencer l'exercice » ; clés `resume.<kind>` retirées si plus lues)
+                     tests qui lisent « Commencer / Continuer Prépare … » : mis à jour, jamais affaiblis
                      `test/system/catalog/sheet_cards_test.rb` (assertions ajoutées au test 390 px existant, aucun nouveau fichier système)
 - **Dépend de**    : —
 - **Test associé** : `test/system/catalog/sheet_cards_test.rb` (à 390 px : `.ps-sheet` de l'épreuve et de la feuille à remplir de 0 à 390, pas de défilement en largeur)
-- **Done quand**   : à 390 px, l'épreuve et la feuille à remplir du sujet 3 de Thalès touchent les deux bords ; à 1280 px, rien n'a changé
+- **Done quand**   : le bouton sous l'épreuve dit « Commencer l'exercice », que la feuille soit commencée ou non ; à 390 px, l'épreuve et la feuille à remplir du sujet 3 de Thalès touchent les deux bords ; à 1280 px, rien n'a changé
 
 Règles d'interface : [UDR-XXXX-feuille-pleine-largeur-sur-telephone](../../decisions/udr/XXXX-feuille-pleine-largeur-sur-telephone.md) §3. PRD : [`prd.md`](prd.md).
 
@@ -31,6 +34,7 @@ Règles d'interface : [UDR-XXXX-feuille-pleine-largeur-sur-telephone](../../deci
 | Fichier | Lot propriétaire |
 |---|---|
 | `app/assets/stylesheets/prepare_sheet.css` | Lot A |
+| `config/locales/catalog/courses.fr.yml` | Lot A |
 
 ## Portes de sortie
 
