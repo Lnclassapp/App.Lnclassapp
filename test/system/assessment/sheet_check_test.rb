@@ -91,4 +91,22 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     assert_equal 3, Orm::ExerciseSession.where(student: @student, exercise: @short).count
     assert_equal 0, Orm::ExerciseSession.where(student: @student, exercise: @archived).count
   end
+
+  test "un QCM à deux bonnes réponses annonce « Coche 2 réponses. » ; une seule case cochée : le refus nomme la question, la case reste cochée" do
+    multiple = create_exercise(essential: @notion, title: "Multiple", questions: 1)
+    question = multiple.questions.create!(position: 2, content: "<p>Deux réponses</p>", question_type: "multiple_correct_2")
+    4.times { |rank| question.answers.create!(position: rank + 1, content: "Choix #{rank + 1}", correct: rank < 2) }
+    visit course_path(@course.slug)
+
+    within(frame(multiple)) do
+      assert_selector "p.ps-instruction", text: "Coche 2 réponses.", count: 1
+      all(".ps-question").first.click_button("A.")
+      all(".ps-question").last.click_button("A.")
+      click_button "Vérifier ma réponse"
+      assert_selector "p[role=alert]", text: "Question b : coche 2 réponses."
+      assert_no_text "un nombre est attendu"
+      assert_selector "button[role=checkbox][aria-checked=true]", count: 1
+    end
+    assert_equal 0, Orm::ExerciseSession.where(student: @student, exercise: multiple).count
+  end
 end

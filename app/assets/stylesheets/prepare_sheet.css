@@ -126,6 +126,8 @@
   padding: 8px 12px;
   font-size: 15px;
   text-wrap: pretty;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 /* ---- Exercice ------------------------------------------------------------------------------------------------------- */
@@ -147,6 +149,7 @@
 
 .ps-exercise-main {
   flex: 1 1 320px;
+  min-width: 0; /* sinon un tableau large de l'énoncé élargit la colonne, puis la page (lecons-defauts-affichage) */
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -164,8 +167,11 @@
   font-weight: 700;
 }
 
+/* Une formule en ligne plus large que l'énoncé défile dans l'énoncé, jamais la page (lecons-defauts-affichage). */
 .ps-statement {
   margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
   text-wrap: pretty;
 }
 
@@ -205,10 +211,21 @@
 
 .ps-question-label {
   flex: 1 1 220px;
+  min-width: 0;
   display: flex;
   gap: 8px;
   align-items: baseline;
   text-wrap: pretty;
+}
+
+/* Une formule centrée trop large défile dans son propre cadre (.katex-display, application.tailwind.css) ; l'énoncé, élément flex, rétrécit sous la
+   largeur de la formule et la fait défiler dans son cadre, sans quoi il élargit la page (rendu-lecons-v3-390). */
+.ps-question-label > span:not(.ps-tag) {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
 }
 
 .ps-tag {
@@ -270,7 +287,13 @@
   font-weight: 700;
 }
 
+/* Une formule en ligne plus large que la proposition défile dans la proposition, jamais la page (lecons-defauts-affichage). */
 .ps-choice-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.2em;
   text-wrap: pretty;
 }
 
@@ -371,6 +394,13 @@
 .ps-btn[disabled],
 .ps-btn[aria-busy="true"] {
   cursor: progress;
+}
+
+.ps-instruction {
+  margin: 0 0 8px;
+  color: #000;
+  font-size: inherit;
+  font-style: italic;
 }
 
 .ps-error {

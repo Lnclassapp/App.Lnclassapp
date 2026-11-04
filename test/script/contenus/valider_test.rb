@@ -193,6 +193,27 @@ class ContenusValiderTest < ActiveSupport::TestCase
 
   def schema_paths(document) = check(document).reasons.select { |_, code| code == "schema" }.map(&:first)
 
+  test "refuse une réponse acceptée en double une fois normalisée, dans une question de « Je m'entraîne » comme dans un exercice" do
+    fill = ->(answers) { { "content" => "Un hydrocarbure à liaison double est ___.", "question_type" => "fill_blank", "explanation" => PracticeHelper::EXPLANATION, "answers" => answers } }
+    duplicated = [ { "content" => "insaturée" }, { "content" => "insaturee" } ]
+
+    practice = mutated { |course| course["notions"][0]["practice"] = { "statement" => "Complète.", "questions" => [ fill.([ { "content" => "alcène" } ]), fill.(duplicated) ] } }
+    exercise = mutated { |course| course["exercises"][0]["questions"][0] = fill.(duplicated) }
+
+    assert_refused practice, "question_structure", "notions[0].practice.questions[1].answers"
+    assert_refused exercise, "question_structure", "exercises[0].questions[0].answers"
+  end
+
+  test "deux cases ne se gênent pas : la même réponse dans deux cases n'est pas un doublon" do
+    document = mutated do |course|
+      course["exercises"][0]["questions"][0] = { "content" => "Un ___ est un ___.", "question_type" => "fill_blank",
+                                                 "explanation" => course["exercises"][0]["questions"][0]["explanation"],
+                                                 "answers" => [ { "content" => "alcène", "blank" => 0 }, { "content" => "alcene", "blank" => 1 } ] }
+    end
+
+    assert check(document).reasons.none? { |_path, reason| reason == "question_structure" }
+  end
+
   test "refuse en schema chaque forme que le schéma refuse, au chemin de la faute" do
     {
       "courses" => [ ->(d) { d["courses"] = {} }, "courses" ],

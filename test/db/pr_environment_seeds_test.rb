@@ -1,26 +1,26 @@
 require "test_helper"
 
 # ADR-0108, ADR-0034: a PR environment (Railway, run in production) is seeded like development plus the three test
-# schools and the complete lessons; production without the PR variables keeps the identity seed alone. Played in the
-# transaction of the test, with two lessons instead of the 213 of docs/contenus/lecons-traitees (about a minute).
+# schools of the standard test set (two lessons of its manifest); production without the PR variables keeps the identity seed alone. Played in the
+# transaction of the test, with two lessons instead of the 47 of the manifest (STANDARD_LESSONS_LIMIT).
 class PrEnvironmentSeedsTest < ActiveSupport::TestCase
   PR_VARIABLES = { "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276" }.freeze
   TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
              Orm::Material, Orm::User, Orm::Course, Orm::ClassroomStudent, Orm::TeacherClassroom ].freeze
-  TEST_FILES = %w[catalog school development demo/trois_etablissements demo/lecons_completes].freeze
-  LESSONS = %w[6eme/svt 6eme/edhc 1ere-a1/francais 1ere-a2/francais].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
+  TEST_FILES = %w[catalog school development standard].freeze
+  MANIFEST = Entities::Catalog::StandardTestSet.new(YAML.load_file(Rails.root.join("db/seeds/standard/jeu.yml")))
+  LESSONS = MANIFEST.expected_paths.first(2).map { Rails.root.join("docs/contenus/lecons-traitees", it) }.freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 
   # Wrapped load: the top-level constants of the seed files stay in an anonymous module.
-  # Rails.root answers the lessons' glob with LESSONS, any other glob as usual.
   def run_seeds
-    root = Rails.root
-    glob = root.method(:glob)
-    root.define_singleton_method(:glob) { |pattern, *rest| pattern.include?("lecons-traitees") ? LESSONS : glob.call(pattern, *rest) }
-    capture_io { load root.join("db/seeds.rb").to_s, true }.first
+    previous = ENV.values_at("STANDARD_LESSONS_LIMIT", "STANDARD_ACTIVITY_SIZE")
+    ENV["STANDARD_LESSONS_LIMIT"] = LESSONS.size.to_s
+    ENV["STANDARD_ACTIVITY_SIZE"] = "reduite"
+    capture_io { load Rails.root.join("db/seeds.rb").to_s, true }.first
   ensure
-    root.singleton_class.remove_method(:glob)
+    ENV["STANDARD_LESSONS_LIMIT"], ENV["STANDARD_ACTIVITY_SIZE"] = previous
   end
 
   # Routes are drawn before the switch (config/routes.rb reads Rails.env), as in SeedsTest.
@@ -36,7 +36,7 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
     previous.each { |key, value| ENV[key] = value }
   end
 
-  test "a PR environment gets the referential, the DRENA, the development accounts and the three test schools" do
+  test "a PR environment gets the referential, the DRENA, the development accounts and the three standard schools" do
     started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     as_production(PR_VARIABLES) { run_seeds }
     elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
@@ -47,12 +47,11 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
     assert_equal 6, Orm::Material.where.not(slug: "edhc").count
     assert Orm::User.exists?(contact: "0700000000", role: "team")
     assert Orm::Course.exists?(name: "La cellule")
-    assert_equal 3, Orm::School.where("name LIKE ?", "Test — %").count
+    assert_equal 3, Orm::School.where("name LIKE ?", "%Modèle%").count
     assert Orm::School.exists?(name: "Lycée Moderne de Treichville")
-    assert Orm::User.find_by!(contact: "0531000001").authenticate_pin("2468")
-    assert Orm::User.find_by!(contact: "0731000001").authenticate_pin("2468")
-    # Seules les leçons au format 3 s'importent ; les autres attendent leur conversion (refonte-contenus-maths, lot P2).
-    LESSONS.select { JSON.parse(it.read)["version"] == 3 }.each do |path|
+    assert Orm::User.find_by!(contact: "0500000011").authenticate_pin("2468")
+    assert Orm::User.find_by!(contact: "0700000010").authenticate_pin("2468")
+    LESSONS.each do |path|
       course = Orm::Course.find_by!(name: JSON.parse(path.read)["courses"].first["name"])
       assert_equal "published", course.status, path.to_s
       assert_operator course.essentials.where(status: "published").count, :>=, 1, path.to_s

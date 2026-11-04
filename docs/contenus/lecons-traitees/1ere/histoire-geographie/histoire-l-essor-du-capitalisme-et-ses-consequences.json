@@ -1,1107 +1,1277 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Histoire — L'essor du capitalisme et ses conséquences",
       "subtitle": "Leçon 1 — progression DPFC 2026-2027",
       "level_name": "1ère",
       "material_name": "Histoire-Géographie",
-      "essentials": [
+      "theme": "blue",
+      "figures": [
         {
-          "name": "Le capitalisme : propriété, salariat et profit",
-          "subtitle": "Comprendre qui possède, qui travaille et qui gagne dans une économie capitaliste",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir le capitalisme et ses trois éléments : la propriété privée, le salariat et la recherche du profit.</li><li>Identifier le capitaliste et le salarié dans une situation concrète.</li><li>Expliquer pourquoi l'entreprise capitaliste cherche le profit.</li></ul><h2>L'image pour comprendre</h2><h3>Image : le club de football d'un riche propriétaire</h3><p>Un riche homme d'affaires achète le stade, les vestiaires et le matériel d'un club de football. Il engage des joueurs et leur verse un salaire chaque mois. En échange, les joueurs mettent leur talent et leur travail au service du club. Le club vend des billets, des maillots et des espaces publicitaires. Une fois les salaires et les autres dépenses payés, il reste de l'argent : c'est le bénéfice, que le propriétaire garde.</p><p><strong>Le pont.</strong> Le propriétaire est le <em>capitaliste</em> : il possède les moyens de production, c'est-à-dire le stade et le matériel. Les joueurs sont les <em>salariés</em> : ils vendent leur travail contre un salaire. Le bénéfice qui reste est le <em>profit</em>, qui motive toute l'entreprise.</p><p><strong>La limite de l'image.</strong> Les joueurs professionnels sont souvent très bien payés et ont un fort pouvoir de négociation. Au XIXe siècle, beaucoup d'ouvriers n'avaient ni ce salaire ni ce choix. L'image montre la logique du rapport salarial, pas les conditions de vie.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Le <strong>capitalisme</strong> est un système économique fondé sur trois éléments :</p><ul><li><strong>la propriété privée des moyens de production</strong> : les usines, les machines, les terres et les capitaux appartiennent à des particuliers ou à des sociétés, et non à l'État ;</li><li><strong>le salariat</strong> : les travailleurs ne possèdent pas les moyens de production ; ils vendent leur force de travail contre un salaire ;</li><li><strong>la recherche du profit</strong> : le propriétaire investit pour gagner plus qu'il n'a dépensé. Le profit est la différence entre les recettes et les dépenses.</li></ul><p>Le <strong>capital</strong> désigne les moyens de production achetés pour produire (usines, machines, terres, matériel) et l'argent investi pour les acquérir.</p><p>Le <strong>capitaliste</strong> possède le capital et les moyens de production. Le <strong>salarié</strong> travaille pour un employeur contre un salaire.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Un club reçoit 150 000 F CFA de billets et de publicité en un mois. Il paie 100 000 F CFA de salaires et 20 000 F CFA d'autres charges (électricité, eau, déplacements). Quel est son profit ?</p><ol><li>Recettes : 150 000 F CFA.</li><li>Dépenses totales : 100 000 + 20 000 = 120 000 F CFA.</li><li>Profit = recettes − dépenses = 150 000 − 120 000 = 30 000 F CFA.</li></ol><p>Le propriétaire garde 30 000 F CFA : c'est le profit, la raison pour laquelle il investit.</p><h2>Le piège à éviter</h2><p>Confondre les <strong>recettes</strong> et le <strong>profit</strong>. Les 150 000 F CFA de l'exemple sont les recettes, c'est l'argent qui rentre. Le profit n'apparaît qu'après avoir retranché toutes les dépenses. Repère : demande-toi toujours « qu'est-ce qui reste après les dépenses ? ».</p><h2>En une phrase</h2><p>Dans le capitalisme, certains possèdent les moyens de production, d'autres vendent leur travail contre un salaire, et l'ensemble tourne pour produire du profit.</p>",
-          "exercises": [
+          "key": "circuit-capitaliste",
+          "kind": "diagram",
+          "description": "Un schéma en cycle de trois éléments : le capitaliste (propriétaire de la boutique) verse un salaire aux salariés ; les salariés produisent et vendent les marchandises aux clients du marché ; les clients paient, et cet argent revient au capitaliste sous forme de recettes. Le profit est ce qui reste des recettes après les dépenses.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "cap",
+                "label": "Capitaliste (propriétaire)",
+                "category": 1
+              },
+              {
+                "id": "sal",
+                "label": "Salariés (vendeurs)",
+                "category": 2
+              },
+              {
+                "id": "cli",
+                "label": "Clients du marché",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "cap",
+                "to": "sal",
+                "label": "verse un salaire"
+              },
+              {
+                "from": "sal",
+                "to": "cli",
+                "label": "vendent les marchandises"
+              },
+              {
+                "from": "cli",
+                "to": "cap",
+                "label": "paient (recettes)"
+              }
+            ],
+            "legend": [
+              "Possède les moyens de production",
+              "Vend son travail",
+              "Achète les produits"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "regle-prix",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la racine « Prix sur un marché » se divise en deux cas. Quand la demande est plus forte que l'offre, le prix tend à monter. Quand l'offre est plus forte que la demande, le prix tend à baisser. Les deux cas sont distingués par une teinte et un motif.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "prix",
+                "label": "Prix sur un marché"
+              },
+              {
+                "id": "d",
+                "label": "Demande plus forte que l'offre",
+                "category": 1
+              },
+              {
+                "id": "o",
+                "label": "Offre plus forte que la demande",
+                "category": 2
+              },
+              {
+                "id": "h",
+                "label": "Le prix tend à monter",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Le prix tend à baisser",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "prix",
+                "to": "d"
+              },
+              {
+                "from": "prix",
+                "to": "o"
+              },
+              {
+                "from": "d",
+                "to": "h"
+              },
+              {
+                "from": "o",
+                "to": "b"
+              }
+            ],
+            "legend": [
+              "Cas où le prix monte",
+              "Cas où le prix baisse"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-capitalisme",
+          "kind": "timeline",
+          "description": "Une frise de 1750 à 1900 qui place le XIXe siècle comme période et deux repères : la publication de La Richesse des nations par Adam Smith (1776) et celle du Manifeste du parti communiste par Karl Marx et Friedrich Engels (1848). Le curseur règle le début de la frise pour zoomer.",
+          "params": {
+            "start": 1750,
+            "end": 1900,
+            "step": 25,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1801,
+                "to": 1900,
+                "label": "XIXe siècle"
+              }
+            ],
+            "events": [
+              {
+                "at": 1776,
+                "label": "Adam Smith : La Richesse des nations"
+              },
+              {
+                "at": 1848,
+                "label": "Manifeste du parti communiste"
+              }
+            ]
+          },
+          "controls": [
             {
-              "title": "Comprendre — Le vocabulaire du capitalisme",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Dans le capitalisme, qui possède les moyens de production, c'est-à-dire les usines, les machines et les terres ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le capitalisme repose sur la propriété privée : les moyens de production appartiennent à des particuliers ou à des sociétés. Souviens-toi du club : c'est le propriétaire qui possède le stade. L'erreur tentante est de croire que l'État possède tout : ce n'est pas le cas dans le capitalisme.",
-                  "answers": [
-                    {
-                      "content": "Les travailleurs, qui les utilisent chaque jour",
-                      "correct": false
-                    },
-                    {
-                      "content": "Des particuliers ou des sociétés privées",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'État, dans tous les pays, sans exception",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : dans le capitalisme, le salarié possède les machines qu'il utilise pour travailler.",
-                  "question_type": "true_false",
-                  "explanation": "Le salarié ne possède pas les moyens de production : il vend son travail contre un salaire. Dans l'image, les joueurs jouent avec le matériel du club, qui appartient au propriétaire.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans le capitalisme, le salarié est celui qui :",
-                  "question_type": "single_choice",
-                  "explanation": "Le salarié vend son travail à un employeur et reçoit un salaire. Le capitaliste, lui, possède l'entreprise et garde le profit. Un salarié n'est pas son propre patron.",
-                  "answers": [
-                    {
-                      "content": "vend son travail à un employeur contre un salaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "possède l'entreprise et en garde les bénéfices",
-                      "correct": false
-                    },
-                    {
-                      "content": "travaille seul, sans employeur ni salaire",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : le profit d'une entreprise est égal à ses recettes.",
-                  "question_type": "true_false",
-                  "explanation": "Le profit est ce qui reste après avoir payé les dépenses : salaires, charges, matériel. Les recettes ne sont que l'argent qui rentre. Dans l'exemple du club, 150 000 F CFA de recettes ne donnent pas 150 000 F CFA de profit.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un club de football, lequel de ces éléments est du capital ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le capital désigne les moyens de production achetés pour produire : ici le stade et le matériel. Les joueurs sont des salariés, et les supporters sont des clients : ils ne sont pas du capital.",
-                  "answers": [
-                    {
-                      "content": "Le stade et le matériel achetés par le propriétaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les joueurs, qui donnent leur talent sur le terrain",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les supporters, qui achètent des billets",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces caractéristiques, lesquelles décrivent le capitalisme ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le capitalisme repose sur la propriété privée des moyens de production et sur la recherche du profit, avec le salariat. L'erreur tentante est de croire que l'État distribue tous les biens : c'est le fonctionnement d'une économie planifiée, pas du capitalisme.",
-                  "answers": [
-                    {
-                      "content": "La propriété privée des moyens de production",
-                      "correct": true
-                    },
-                    {
-                      "content": "La recherche du profit",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'absence totale de salariés",
-                      "correct": false
-                    },
-                    {
-                      "content": "La distribution de tous les biens par l'État",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Repérer capitalistes, salariés et profit",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un boulanger possède son four et emploie deux employés qu'il paie chaque mois. Qui est le capitaliste dans cette situation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le boulanger possède le moyen de production (le four) et emploie des salariés. Les employés vendent leur travail contre un salaire : ce sont des salariés, pas des capitalistes. Le client, lui, achète simplement du pain.",
-                  "answers": [
-                    {
-                      "content": "Les deux employés, qui vendent leur travail",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le boulanger, qui possède le four et emploie les deux salariés",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le client qui achète le pain",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une entreprise réalise 300 000 F CFA de recettes en un mois et dépense 210 000 F CFA au total. Quel est son profit ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le profit se calcule : recettes moins dépenses, soit 300 000 − 210 000 = 90 000 F CFA. Les réponses fausses viennent d'une addition (510 000) ou de la seule prise des dépenses (210 000).",
-                  "answers": [
-                    {
-                      "content": "90 000 F CFA",
-                      "correct": true
-                    },
-                    {
-                      "content": "510 000 F CFA",
-                      "correct": false
-                    },
-                    {
-                      "content": "210 000 F CFA",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : une entreprise dont les dépenses dépassent les recettes réalise une perte.",
-                  "question_type": "true_false",
-                  "explanation": "Quand les dépenses dépassent les recettes, le résultat est négatif : on parle de perte. Il faut toujours comparer les deux montants, et non regarder les recettes seules.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un club de football appartenant à un propriétaire, on trouve : un joueur payé chaque mois, le propriétaire, un supporter qui achète un billet, un entraîneur payé chaque mois et un agent d'entretien payé chaque mois. Lesquels sont salariés ? Trois réponses sont exactes.",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Un salarié est payé pour travailler sous la direction d'un employeur : le joueur, l'entraîneur et l'agent d'entretien le sont. Le propriétaire possède le club, et le supporter est un client. L'erreur à éviter : confondre toutes les personnes liées au club avec des salariés.",
-                  "answers": [
-                    {
-                      "content": "Le joueur payé chaque mois",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le propriétaire du club",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le supporter qui achète un billet",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'entraîneur payé chaque mois",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'agent d'entretien payé chaque mois",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un patron veut augmenter son profit sans changer ses recettes. Laquelle de ces actions y parvient ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le profit est la différence entre recettes et dépenses. Si les recettes ne bougent pas, seule une baisse des dépenses fait monter le profit. Augmenter les dépenses le fait baisser, et ne rien changer le laisse identique.",
-                  "answers": [
-                    {
-                      "content": "Réduire ses dépenses, par exemple ses coûts de fonctionnement",
-                      "correct": true
-                    },
-                    {
-                      "content": "Augmenter ses dépenses sans rien changer d'autre",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ne rien changer, puisque les recettes restent les mêmes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : si un club vend davantage de billets, sans changer ses dépenses, son profit augmente.",
-                  "question_type": "true_false",
-                  "explanation": "Les recettes augmentent et les dépenses restent identiques : la différence grandit, donc le profit aussi. Souviens-toi de la formule : profit = recettes − dépenses.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Profit, salariat et propriété",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un club de football reçoit 400 000 F CFA de billets et de publicité en un mois. Il paie 250 000 F CFA de salaires et 90 000 F CFA d'autres charges. Quel est son profit ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dépenses totales : 250 000 + 90 000 = 340 000 F CFA. Profit : 400 000 − 340 000 = 60 000 F CFA. L'erreur la plus fréquente est de ne retrancher que les salaires (400 000 − 250 000 = 150 000) et d'oublier les autres charges.",
-                  "answers": [
-                    {
-                      "content": "60 000 F CFA",
-                      "correct": true
-                    },
-                    {
-                      "content": "150 000 F CFA",
-                      "correct": false
-                    },
-                    {
-                      "content": "340 000 F CFA",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : dans cette situation (400 000 F CFA de recettes, 340 000 F CFA de dépenses), les 400 000 F CFA sont le profit du club.",
-                  "question_type": "true_false",
-                  "explanation": "Les 400 000 F CFA sont les recettes, pas le profit. Le profit est de 60 000 F CFA, une fois toutes les dépenses payées.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un club appartient à un propriétaire et emploie des joueurs payés chaque mois. Quelles sont les deux affirmations exactes sur ce rapport ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le propriétaire possède les moyens de production et garde le profit, tandis que le joueur vend son travail contre un salaire. Le salaire est une dépense pour le club : il est payé avant le calcul du profit, il n'en est pas une part.",
-                  "answers": [
-                    {
-                      "content": "Le propriétaire possède les moyens de production, les joueurs n'en possèdent pas",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les joueurs décident seuls de l'usage du stade",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le propriétaire garde le profit une fois toutes les dépenses payées",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le salaire du joueur est une part du profit du club",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une entreprise de 50 salariés a des dépenses supérieures à ses recettes pendant trois mois. Que signifie ce résultat ?",
-                  "question_type": "single_choice",
-                  "explanation": "Quand les dépenses dépassent les recettes, le profit est négatif : c'est une perte. Le nombre de salariés et l'identité du propriétaire ne changent pas ce calcul.",
-                  "answers": [
-                    {
-                      "content": "L'entreprise réalise des pertes, car ses dépenses dépassent ses recettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'entreprise n'a plus besoin de salariés",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'entreprise ne peut plus avoir de propriétaire",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève affirme : « Le capitaliste et le salarié gagnent tous deux de l'argent, donc ils ont la même place dans l'entreprise. » Que faut-il répondre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le salaire et le profit ne sont pas la même chose : le salaire est une dépense de l'entreprise, le profit est ce qui reste après les dépenses. La place dans l'entreprise dépend de la possession des moyens de production, pas du fait de gagner de l'argent.",
-                  "answers": [
-                    {
-                      "content": "Non : le capitaliste possède les moyens de production et garde le profit, tandis que le salarié vend son travail contre un salaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "Oui : tous deux possèdent une part de l'entreprise",
-                      "correct": false
-                    },
-                    {
-                      "content": "Oui : le salaire et le profit sont la même chose",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : le salaire est une dépense pour l'entreprise, déduite avant le calcul du profit.",
-                  "question_type": "true_false",
-                  "explanation": "Dans le calcul du profit (recettes − dépenses), les salaires sont des dépenses. Dans l'exemple du club, les 250 000 F CFA de salaires ont été retranchés avant de calculer le profit.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "param": "start",
+              "min": 1700,
+              "max": 1770,
+              "step": 10,
+              "label": "Début de la frise"
             }
           ]
+        },
+        {
+          "key": "bilan-magasin",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres qui compare, en milliers de F CFA, les recettes (800), les dépenses totales (660) et le profit (140) du magasin de pagnes de Mme Koné pour un mois. Le profit est la différence entre les deux premières barres.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              800,
+              660,
+              140
+            ],
+            "labels": [
+              "Recettes",
+              "Dépenses",
+              "Profit"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "prix-tomates",
+          "kind": "stat_chart",
+          "description": "Une courbe du prix du kilo de tomates, en F CFA, dans un marché de quartier du lundi au vendredi : 500, 500, 400, 600 puis 800. Le prix baisse le mercredi après un gros arrivage et monte nettement le vendredi, veille de fête. Données imaginées pour Lnclass.",
+          "params": {
+            "chart": "line",
+            "series": [
+              500,
+              500,
+              400,
+              600,
+              800
+            ],
+            "labels": [
+              "Lundi",
+              "Mardi",
+              "Mercredi",
+              "Jeudi",
+              "Vendredi"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le capitalisme : propriété, salariat et profit",
+          "remember": "Le **capitalisme** est un système économique fondé sur trois éléments : la **propriété privée des moyens de production** (boutiques, ateliers, usines, machines et terres appartiennent à des particuliers ou à des sociétés), le **salariat** (le salarié ne possède pas ces moyens : il vend son travail contre un **salaire**) et la **recherche du profit**.\n\nLe **capital** est l'ensemble des biens et de l'argent investis pour produire (locaux, machines, stocks). Le **capitaliste** possède ce capital et investit. Les **recettes** sont l'argent qui rentre par les ventes ; les **dépenses** sont l'argent qui sort (achats, salaires, charges). Le **profit** est la différence : recettes − dépenses. Au XIXe siècle, le capitalisme se renforce avec le développement de l'industrie.",
+          "method": [
+            "Identifier le capitaliste : celui qui possède les moyens de production et investit son argent.",
+            "Repérer les salariés : ceux qui vendent leur travail contre un salaire.",
+            "Calculer les recettes et les dépenses totales (achats, salaires, charges).",
+            "Conclure : calculer le profit (recettes − dépenses) et dire pourquoi le capitaliste investit."
+          ],
+          "example": {
+            "statement": "Yao possède une boutique de riz au marché. Il emploie deux vendeurs payés 60 000 F CFA chacun par mois. Ce mois-ci, il a vendu pour 620 000 F CFA de riz. Il a payé 400 000 F CFA de riz à son fournisseur et 30 000 F CFA d'électricité et de transport. Quel est son profit ?",
+            "steps": [
+              "Identifier : Yao possède la boutique et le stock de riz, et il investit son argent : c'est le capitaliste.",
+              "Repérer : les deux vendeurs ne possèdent ni la boutique ni le riz ; ils vendent leur travail contre 60 000 F CFA chacun : ce sont des salariés.",
+              "Calculer : recettes = 620 000 F CFA ; dépenses = 400 000 + 2 × 60 000 + 30 000 = 550 000 F CFA.",
+              "Conclure : profit = 620 000 − 550 000 = 70 000 F CFA. Yao investit pour gagner plus qu'il ne dépense."
+            ]
+          },
+          "pitfall": "Ne confonds pas les **recettes** et le **profit**. Contre-exemple : Yao encaisse 620 000 F CFA, mais il en dépense 550 000 : il lui reste 70 000 F CFA, pas 620 000. Ne confonds pas non plus le **salaire** (ce que reçoit le salarié) et le **profit** (ce que garde le capitaliste). Avant de conclure, retranche toujours **toutes** les dépenses, salaires compris.",
+          "figure": "circuit-capitaliste",
+          "exercise": {
+            "title": "Reconnaître le capitalisme et calculer un profit",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des situations de marché : identifier le capitaliste, repérer les salariés, calculer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "circuit-capitaliste",
+            "questions": [
+              {
+                "content": "Dans le capitalisme, qui possède les moyens de production (boutiques, ateliers, machines) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le capitaliste : c'est celui qui possède les moyens de production et investit son argent. Dans le capitalisme, la propriété est privée : elle appartient à des particuliers ou à des sociétés. Le salarié, lui, n'en est pas propriétaire (étape 2). L'erreur tentante est de croire que l'État possède tout : ce n'est pas le principe du capitalisme.",
+                "answers": [
+                  {
+                    "content": "Les salariés qui les utilisent chaque jour",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des particuliers ou des sociétés privées",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'État, dans tous les cas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une vendeuse reçoit chaque mois un salaire du propriétaire de la boutique où elle travaille. Elle est donc elle-même la capitaliste de cette boutique.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer les salariés : celui qui vend son travail contre un salaire est un salarié. Étape 1 — Identifier le capitaliste : c'est le propriétaire de la boutique, qui possède les moyens de production et investit. La vendeuse n'est donc pas la capitaliste : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le capitaliste : il possède et investit. Étape 2 — Repérer les salariés : ils vendent leur travail. Étape 3 — Calculer : les recettes sont l'argent qui rentre, les dépenses l'argent qui sort. Étape 4 — Conclure : le profit est la différence entre recettes et dépenses, pas l'argent encaissé.",
+                "answers": [
+                  {
+                    "content": "Capitaliste",
+                    "match": "Possède la boutique et investit son argent"
+                  },
+                  {
+                    "content": "Salarié",
+                    "match": "Vend son travail contre un salaire"
+                  },
+                  {
+                    "content": "Recettes",
+                    "match": "Argent qui rentre grâce aux ventes"
+                  },
+                  {
+                    "content": "Profit",
+                    "match": "Recettes moins dépenses"
+                  }
+                ]
+              },
+              {
+                "content": "Un commerçant vend pour 250 000 F CFA de pagnes. Il paie 150 000 F CFA de marchandises, 50 000 F CFA de salaires et 20 000 F CFA de charges. Quel est son profit ?",
+                "question_type": "numeric",
+                "unit": "F CFA",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Calculer : recettes = 250 000 F CFA ; dépenses = 150 000 + 50 000 + 20 000 = 220 000 F CFA. Étape 4 — Conclure : profit = 250 000 − 220 000 = 30 000 F CFA. Celui qui répond 250 000 confond recettes et profit ; celui qui répond 100 000 oublie les charges.",
+                "answers": [
+                  {
+                    "content": "30000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un propriétaire de boutique emploie des vendeurs payés chaque mois. Quelles sont les deux caractéristiques du capitalisme que tu reconnais ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le capitaliste : le propriétaire possède la boutique, c'est la propriété privée des moyens de production. Étape 2 — Repérer les salariés : les vendeurs payés vendent leur travail, c'est le salariat. Les deux autres propositions sont fausses : les vendeurs ne possèdent pas la boutique, et le capitaliste investit pour réaliser un profit.",
+                "answers": [
+                  {
+                    "content": "La propriété privée des moyens de production",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le salariat",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les vendeurs possèdent la boutique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Personne ne cherche à gagner de l'argent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une boutique encaisse 300 000 F CFA ce mois-ci et dépense 260 000 F CFA. Un élève écrit : « Le profit est de 300 000 F CFA. » Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : recettes = 300 000 F CFA ; dépenses = 260 000 F CFA. Étape 4 — Conclure : profit = 300 000 − 260 000 = 40 000 F CFA. L'élève a donné les recettes : c'est le piège de la fiche. Il ne faut pas ajouter les dépenses aux recettes, il faut les retrancher.",
+                "answers": [
+                  {
+                    "content": "Il a confondu les recettes et le profit : le profit est de 40 000 F CFA",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a oublié d'ajouter les dépenses aux recettes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a pas d'erreur : le profit est l'argent encaissé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a confondu le profit et le salaire des vendeurs",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "Le libéralisme économique et la concurrence",
-          "subtitle": "Laisser le marché et la concurrence fixer les prix, avec un État qui intervient peu",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir le libéralisme économique et la formule « laissez faire, laissez passer ».</li><li>Expliquer le rôle de la concurrence et de l'offre et de la demande dans la formation des prix.</li><li>Repérer la principale limite du libéralisme : son effet sur les plus faibles.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 : un match sans arbitre</h3><p>Imagine un match de football où l'arbitre siffle presque rien. Chaque joueur fait ce qu'il veut, tout le monde se bouscule, et l'équipe la plus forte domine. Les plus faibles sont vite écartés du jeu. Les spectateurs ne voient plus de règles : ils voient seulement qui gagne.</p><p><strong>Le pont.</strong> L'arbitre représente l'État. Dans le libéralisme économique, l'État intervient le moins possible : il « laisse faire » les entreprises. Les joueurs sont les entreprises, qui se font concurrence. La domination des plus forts sur les plus faibles est la limite visible de ce système.</p><p><strong>La limite de l'image.</strong> Un vrai match a besoin de règles pour être juste. Le libéralisme ne supprime pas toutes les règles : il limite seulement l'intervention de l'État dans l'économie. Ses défenseurs disent aussi que la concurrence profite aux consommateurs.</p><h3>Image 2 : deux clubs rivaux et le prix des billets</h3><p>Dans une même ville, deux clubs se disputent les mêmes supporters et les mêmes sponsors. Pour le match phare, les places partent en quelques heures : le club peut afficher des prix élevés. Pour un match sans intérêt, il baisse ses prix pour remplir le stade.</p><p><strong>Le pont.</strong> Les deux clubs sont en <em>concurrence</em>. Le prix du billet se forme à partir de l'<em>offre</em> (le nombre de places à vendre) et de la <em>demande</em> (le nombre de supporters qui veulent venir). Aucun dirigeant ne fixe seul ce prix.</p><p><strong>La limite de l'image.</strong> Un club n'est pas un marché libre au sens strict : les ligues fixent des règles, et les grands clubs peuvent peser davantage que les petits.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Le <strong>libéralisme économique</strong> est une doctrine qui défend la liberté d'entreprendre et la limitation de l'intervention de l'État dans l'économie. Sa formule est « laissez faire, laissez passer ».</p><p>La <strong>concurrence</strong> oppose plusieurs entreprises qui vendent des produits semblables sur un même marché. Chacune cherche à attirer les clients.</p><p>Selon Adam Smith, chacun en cherchant son propre intérêt contribue, sans le vouloir, à l'intérêt général : c'est la « main invisible » du marché.</p><p>Le <strong>prix</strong> se forme par la rencontre de l'<strong>offre</strong> et de la <strong>demande</strong> : quand la demande dépasse l'offre, le prix tend à monter ; quand l'offre dépasse la demande, il tend à baisser.</p><p>La principale limite : sans règles ni protection, les plus petites entreprises risquent de disparaître et les salariés sont plus exposés.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Pour le match de samedi, le club a 2 000 places à vendre. 5 000 personnes veulent un billet. Que se passe-t-il avec le prix ?</p><ol><li>La demande (5 000 personnes) dépasse l'offre (2 000 places).</li><li>Les supporters se disputent les places : certains acceptent de payer plus cher.</li><li>Le prix du billet tend donc à monter.</li></ol><p>Pour un autre match, si seulement 300 personnes voulaient une place, des places resteraient vides : le club baisserait ses prix pour attirer du monde.</p><h2>Le piège à éviter</h2><p>Croire que le libéralisme signifie « pas de règles du tout ». Le libéralisme limite l'intervention de l'État, mais il garde des règles, comme le respect des contrats et la propriété privée. Repère : demande-toi si l'on parle d'un État qui intervient peu, et non d'une absence totale de lois.</p><h2>En une phrase</h2><p>Le libéralisme laisse le marché et la concurrence régler les prix, avec un État qui intervient le moins possible, et cela peut écarter les plus faibles.</p>",
-          "exercises": [
+          "remember": "Le **libéralisme économique** défend la liberté d'entreprendre, la liberté d'échanger et une intervention limitée de l'État dans l'économie. Sa formule est « **laissez faire, laissez passer** ». L'économiste britannique **Adam Smith** en est un grand théoricien : dans *La Richesse des nations* (**1776**), il explique que chacun, en poursuivant son propre intérêt, contribue sans le vouloir à l'intérêt général : c'est la « **main invisible** » du marché.\n\nLa **concurrence** oppose plusieurs vendeurs de produits semblables : chacun cherche à attirer les clients (prix plus bas, meilleure qualité). Sur un marché, l'**offre** est la quantité proposée par les vendeurs ; la **demande** est la quantité que les acheteurs veulent acheter. Si la demande dépasse l'offre, le prix tend à **monter** ; si l'offre dépasse la demande, il tend à **baisser**.\n\n**Limite** : sans règles, les plus petits vendeurs risquent d'être éliminés et les salariés sont plus exposés.",
+          "method": [
+            "Identifier l'offre (ce que les vendeurs proposent) et la demande (ce que les acheteurs veulent).",
+            "Comparer l'offre et la demande : laquelle est la plus forte ?",
+            "Prévoir le prix : il monte si la demande l'emporte, il baisse si l'offre l'emporte.",
+            "Évaluer l'effet de la concurrence sur les acheteurs, les vendeurs et les plus petits vendeurs."
+          ],
+          "example": {
+            "statement": "Un matin, 200 sacs d'oignons sont proposés sur un marché de quartier. Au prix habituel, les acheteurs ne veulent que 120 sacs. Plusieurs vendeurs se font concurrence. Que va-t-il se passer pour le prix et pour les vendeurs ?",
+            "steps": [
+              "Identifier : l'offre est de 200 sacs ; la demande est de 120 sacs.",
+              "Comparer : 200 > 120, donc l'offre l'emporte de 80 sacs.",
+              "Prévoir le prix : quand l'offre l'emporte, le prix tend à baisser.",
+              "Évaluer : en concurrence, les vendeurs baissent leurs prix pour attirer les clients, ce qui profite aux acheteurs ; un petit vendeur qui ne peut pas baisser le sien risque de perdre ses clients."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'**offre** et la **demande**, et n'inverse pas le sens du prix. Contre-exemple : 100 kg de tomates sont proposés mais 300 kg sont demandés. La demande l'emporte, donc le prix **monte**. Ne crois pas non plus que « laissez faire » veut dire « aucune règle » : cela veut dire que l'État intervient le moins possible dans l'économie.",
+          "figure": "regle-prix",
+          "exercise": {
+            "title": "Lire un marché : offre, demande, prix et concurrence",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des situations de marché : identifier l'offre et la demande, les comparer, prévoir le prix, évaluer la concurrence.",
+            "exercise_type": "fixation",
+            "figure": "regle-prix",
+            "questions": [
+              {
+                "content": "Sur un marché, que désigne l'offre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier l'offre et la demande : l'offre est ce que les vendeurs proposent ; la demande est ce que les acheteurs veulent. Celui qui répond « ce que les acheteurs veulent » décrit la demande : c'est la confusion que la fiche signale.",
+                "answers": [
+                  {
+                    "content": "La quantité que les acheteurs veulent acheter",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le prix fixé par l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "La quantité proposée par les vendeurs",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur un marché, 400 kg de poisson sont proposés et 700 kg sont demandés. Le prix tend à ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : offre = 400 kg, demande = 700 kg. Étape 2 — Comparer : 700 > 400, la demande l'emporte. Étape 3 — Prévoir le prix : quand la demande l'emporte, le prix tend à monter. Répondre « baisser » inverse la règle.",
+                "answers": [
+                  {
+                    "content": "monter",
+                    "correct": true
+                  },
+                  {
+                    "content": "baisser",
+                    "correct": false
+                  },
+                  {
+                    "content": "disparaître",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "100 paniers de mangues sont proposés et 160 paniers sont demandés. De combien de paniers la demande dépasse-t-elle l'offre ?",
+                "question_type": "numeric",
+                "unit": "paniers",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : offre = 100 paniers, demande = 160 paniers. Étape 2 — Comparer : 160 − 100 = 60 paniers. La demande l'emporte de 60 paniers, donc (étape 3) le prix tend à monter.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Selon le libéralisme économique, l'État doit fixer lui-même tous les prix du marché.",
+                "question_type": "true_false",
+                "explanation": "Le libéralisme défend la liberté d'entreprendre et une intervention limitée de l'État (« laissez faire, laissez passer »). Étape 3 — Prévoir le prix : c'est la rencontre de l'offre et de la demande qui fait varier le prix, pas une décision de l'État. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux vendeuses de riz se font concurrence sur le même marché. Quels sont deux effets possibles de cette concurrence ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Évaluer l'effet de la concurrence : chaque vendeur cherche à attirer les clients, par exemple en baissant son prix ; l'acheteur peut comparer et choisir. Il n'existe aucune obligation de prix identiques, et la concurrence ne supprime ni l'offre ni la demande.",
+                "answers": [
+                  {
+                    "content": "Elles peuvent baisser leurs prix pour attirer les clients",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les acheteurs ont plus de choix",
+                    "correct": true
+                  },
+                  {
+                    "content": "Leurs prix sont obligatoirement identiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'offre et la demande disparaissent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « 300 kg de tomates sont demandés et 100 kg sont proposés, donc le prix baisse. » Que dois-tu corriger ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : demande = 300 kg, offre = 100 kg. Étape 2 — Comparer : 300 > 100, la demande l'emporte. Étape 3 — Prévoir le prix : il tend à monter. L'élève a inversé le sens du prix, l'erreur de la fiche : plus d'acheteurs que de produits fait monter le prix.",
+                "answers": [
+                  {
+                    "content": "La demande l'emporte : le prix tend à monter",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'offre l'emporte, mais le prix reste fixe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il faut inverser les quantités, puis le prix baisse bien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien : un prix baisse toujours quand la demande est forte",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Bourgeoisie, prolétariat et question sociale",
+          "remember": "Au XIXe siècle, le capitalisme industriel fait apparaître deux grands groupes sociaux. La **bourgeoisie** possède le capital, les usines et les entreprises. Le **prolétariat** est formé des ouvriers, qui ne possèdent que leur force de travail et la vendent contre un salaire.\n\nLa vie ouvrière est souvent très dure : journées de travail longues, salaires bas, travail des femmes et des enfants, dangers dans les ateliers, les usines et les mines, logements étroits et insalubres. Beaucoup d'ouvriers sont des paysans venus des campagnes vers les villes : c'est l'**exode rural**.\n\nLa misère ouvrière et les inégalités entre les groupes forment la **question sociale**.",
+          "method": [
+            "Présenter le document : nature, auteur, date, sujet.",
+            "Relever les informations sur le travail, le salaire et le logement.",
+            "Identifier la classe sociale concernée : bourgeoisie ou prolétariat.",
+            "Expliquer le problème posé : la question sociale."
+          ],
+          "example": {
+            "statement": "Document : récit écrit pour Lnclass, qui décrit un ouvrier d'une fabrique de tissus dans une ville industrielle du XIXe siècle. Il vient d'un village, travaille de l'aube à la nuit tombée dans un atelier bruyant et dangereux, partage une seule pièce avec sa famille, et son salaire suffit à peine à acheter de quoi manger. Sa fille travaille aussi à la fabrique. Analyse ce document.",
+            "steps": [
+              "Présenter : c'est un récit écrit pour Lnclass (sans auteur ni date précise) sur la vie d'un ouvrier d'une ville industrielle au XIXe siècle.",
+              "Relever : journées de l'aube à la nuit, atelier dangereux, une seule pièce pour la famille, salaire à peine suffisant, travail de sa fille, arrivée de la campagne (exode rural).",
+              "Identifier : l'ouvrier ne possède que sa force de travail : il appartient au prolétariat, et non à la bourgeoisie qui possède la fabrique.",
+              "Expliquer : la misère de cette famille et l'écart avec la bourgeoisie posent la question sociale."
+            ]
+          },
+          "pitfall": "Ne confonds pas **bourgeoisie** et **prolétariat**. Contre-exemple : le propriétaire d'une fabrique de 200 ouvriers appartient à la bourgeoisie, même s'il travaille beaucoup ; un ouvrier qui s'est acheté une chemise neuve reste prolétaire. La classe ne dépend ni de la fatigue ni de l'habit, mais de la **propriété du capital**. Et l'exode rural va de la campagne vers la ville, jamais l'inverse.",
+          "figure": null,
+          "exercise": {
+            "title": "Analyser la vie ouvrière au XIXe siècle",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des documents sur la société industrielle du XIXe siècle : présenter, relever, identifier, expliquer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans la société industrielle du XIXe siècle, quel groupe social possède le capital, les usines et les entreprises ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier la classe sociale : la bourgeoisie possède le capital, les usines et les entreprises. Le prolétariat est formé des ouvriers, qui ne possèdent que leur force de travail. Répondre « prolétariat » confond les deux groupes.",
+                "answers": [
+                  {
+                    "content": "Le prolétariat",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les paysans venus à la ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "La bourgeoisie",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Identifier la classe sociale : bourgeoisie et prolétariat se distinguent par la propriété du capital. Étape 2 — Relever les informations : l'exode rural est l'arrivée de paysans en ville pour y travailler. Étape 4 — Expliquer le problème posé : la misère ouvrière et les inégalités forment la question sociale.",
+                "answers": [
+                  {
+                    "content": "Bourgeoisie",
+                    "match": "Groupe qui possède le capital et les usines"
+                  },
+                  {
+                    "content": "Prolétariat",
+                    "match": "Ouvriers qui ne possèdent que leur force de travail"
+                  },
+                  {
+                    "content": "Exode rural",
+                    "match": "Départ de paysans vers les villes"
+                  },
+                  {
+                    "content": "Question sociale",
+                    "match": "Problème de la misère ouvrière et des inégalités"
+                  }
+                ]
+              },
+              {
+                "content": "Un récit écrit pour Lnclass décrit une famille d'ouvriers au XIXe siècle. Quelles sont les trois informations qui décrivent leurs conditions de travail ou de vie ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Relever les informations sur le travail, le salaire et le logement : les journées longues, le travail des enfants et le logement insalubre sont les caractéristiques de la vie ouvrière décrites dans la fiche. Les salaires étaient bas, pas élevés, et les journées longues, pas courtes.",
+                "answers": [
+                  {
+                    "content": "Des journées de travail très longues",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le travail des enfants à la fabrique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un logement étroit et insalubre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des salaires élevés qui permettent d'épargner",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des semaines de travail courtes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour analyser un document.",
+                "question_type": "ordering",
+                "explanation": "La méthode se fait dans cet ordre. Étape 1 — Présenter le document (nature, auteur, date, sujet). Étape 2 — Relever les informations sur le travail, le salaire et le logement. Étape 3 — Identifier la classe sociale concernée. Étape 4 — Expliquer le problème posé : la question sociale.",
+                "answers": [
+                  {
+                    "content": "Présenter le document"
+                  },
+                  {
+                    "content": "Relever les informations"
+                  },
+                  {
+                    "content": "Identifier la classe sociale"
+                  },
+                  {
+                    "content": "Expliquer le problème posé"
+                  }
+                ]
+              },
+              {
+                "content": "Le départ des paysans vers les villes pour y travailler s'appelle l'exode ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Relever les informations : beaucoup d'ouvriers sont des paysans venus des campagnes. Ce mouvement de la campagne vers la ville s'appelle l'exode rural. L'exode va de la campagne vers la ville, pas l'inverse.",
+                "answers": [
+                  {
+                    "content": "rural",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « Le propriétaire d'une fabrique appartient au prolétariat parce qu'il travaille beaucoup. » Que dois-tu corriger ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier la classe sociale : le critère est la propriété du capital, pas la quantité de travail. Le propriétaire de la fabrique possède les moyens de production : il appartient à la bourgeoisie. Le prolétariat est formé des ouvriers qui ne possèdent que leur force de travail.",
+                "answers": [
+                  {
+                    "content": "Il appartient à la bourgeoisie, car la classe dépend de la propriété du capital",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il appartient au prolétariat seulement s'il est âgé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il appartient au prolétariat, car tout le monde travaille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'appartient à aucune classe sociale",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le mouvement ouvrier et les critiques du capitalisme",
+          "remember": "Face à la misère ouvrière, les ouvriers s'organisent : c'est le **mouvement ouvrier**. Les **syndicats** sont des organisations de salariés qui défendent leurs intérêts face aux employeurs (salaires, durée du travail, sécurité). La **grève** est l'arrêt collectif du travail pour faire pression sur l'employeur. Dans plusieurs pays, au XIXe siècle, syndicats et grèves sont d'abord interdits ou réprimés.\n\nDes penseurs critiquent aussi le capitalisme. **Karl Marx** et **Friedrich Engels**, deux Allemands, publient le *Manifeste du parti communiste* (**1848**) : ils proposent de supprimer la propriété privée des moyens de production.",
+          "method": [
+            "Identifier le problème qui provoque la protestation.",
+            "Repérer l'acteur qui s'organise : ouvriers, syndicat ou penseur.",
+            "Décrire le moyen d'action : association, négociation, grève ou critique écrite.",
+            "Dégager la revendication ou la solution proposée."
+          ],
+          "example": {
+            "statement": "Document : récit écrit pour Lnclass. Dans une fabrique de tissus du XIXe siècle, les ouvriers trouvent leurs journées trop longues et leurs salaires trop bas. Ils créent un syndicat. Ses représentants demandent au patron une journée plus courte et un salaire plus élevé. Le patron refuse. Les ouvriers cessent alors tous le travail pendant plusieurs jours. Analyse leur action.",
+            "steps": [
+              "Identifier : les journées sont trop longues et les salaires trop bas.",
+              "Repérer : les acteurs sont les ouvriers, regroupés dans un syndicat.",
+              "Décrire : le syndicat négocie avec le patron, puis, après son refus, les ouvriers font grève, c'est-à-dire un arrêt collectif du travail.",
+              "Dégager : leur revendication est une journée de travail plus courte et un salaire plus élevé."
+            ]
+          },
+          "pitfall": "Ne confonds pas le **syndicat** (l'organisation) et la **grève** (le moyen d'action). Contre-exemple : un syndicat de 200 ouvriers existe tous les jours, même quand personne ne fait grève ; la grève ne dure que le temps du conflit. Ne confonds pas non plus la critique de Marx et Engels, qui visent la propriété privée des moyens de production, avec la défense du libéralisme d'Adam Smith.",
+          "figure": "frise-capitalisme",
+          "exercise": {
+            "title": "Syndicats, grèves et critiques du capitalisme",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à la réaction des ouvriers et des penseurs face au capitalisme : identifier, repérer, décrire, dégager.",
+            "exercise_type": "fixation",
+            "figure": "frise-capitalisme",
+            "questions": [
+              {
+                "content": "Qu'est-ce qu'un syndicat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer l'acteur qui s'organise : le syndicat est l'organisation des salariés. Étape 3 — Décrire le moyen d'action : l'arrêt collectif du travail est la grève, pas le syndicat. L'erreur la plus fréquente est de confondre l'organisation et son moyen d'action.",
+                "answers": [
+                  {
+                    "content": "Un arrêt collectif du travail",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une organisation de salariés qui défend leurs intérêts face aux employeurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une usine qui appartient aux ouvriers",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un impôt payé par les patrons",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La grève est l'arrêt collectif du travail pour faire pression sur l'employeur.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Décrire le moyen d'action : la grève est un arrêt collectif du travail. En s'arrêtant tous ensemble, les ouvriers font pression sur le patron, car l'entreprise ne produit plus. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En quelle année Karl Marx et Friedrich Engels publient-ils le Manifeste du parti communiste ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire le moyen d'action : ici, une critique écrite, le Manifeste du parti communiste, publié en 1848. La date de 1776 est celle de La Richesse des nations d'Adam Smith, texte libéral : c'est la confusion à éviter.",
+                "answers": [
+                  {
+                    "content": "1776",
+                    "correct": false
+                  },
+                  {
+                    "content": "1789",
+                    "correct": false
+                  },
+                  {
+                    "content": "1900",
+                    "correct": false
+                  },
+                  {
+                    "content": "1848",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les moments de l'action des ouvriers d'une fabrique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier le problème : les salaires trop bas. Étape 2 — Repérer l'acteur qui s'organise : les ouvriers forment un syndicat. Étape 3 — Décrire le moyen d'action : d'abord la négociation, puis, si le patron refuse, la grève. Étape 4 — Dégager la revendication : un meilleur salaire.",
+                "answers": [
+                  {
+                    "content": "Les ouvriers constatent que leurs salaires sont trop bas"
+                  },
+                  {
+                    "content": "Ils forment un syndicat"
+                  },
+                  {
+                    "content": "Les représentants négocient avec le patron"
+                  },
+                  {
+                    "content": "Après un refus, ils font grève"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot ou nom à ce qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Repérer l'acteur : le syndicat est une organisation, le mouvement ouvrier l'ensemble des actions des ouvriers. Étape 3 — Décrire le moyen d'action : la grève arrête le travail. Étape 4 — Dégager la solution proposée : Marx et Engels proposent de supprimer la propriété privée des moyens de production.",
+                "answers": [
+                  {
+                    "content": "Syndicat",
+                    "match": "Organisation de salariés"
+                  },
+                  {
+                    "content": "Grève",
+                    "match": "Arrêt collectif du travail"
+                  },
+                  {
+                    "content": "Marx et Engels",
+                    "match": "Proposent de supprimer la propriété privée des moyens de production"
+                  },
+                  {
+                    "content": "Mouvement ouvrier",
+                    "match": "Ensemble des actions des ouvriers pour défendre leurs droits"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « La grève est une organisation de salariés qui existe en permanence. » Que dois-tu corriger ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer l'acteur qui s'organise : c'est le syndicat, une organisation qui existe dans la durée. Étape 3 — Décrire le moyen d'action : la grève est un arrêt collectif du travail, qui dure le temps du conflit. L'élève a confondu l'organisation et le moyen d'action.",
+                "answers": [
+                  {
+                    "content": "Rien : la grève et le syndicat sont la même chose",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est le syndicat qui est une organisation ; la grève est l'arrêt collectif du travail",
+                    "correct": true
+                  },
+                  {
+                    "content": "La grève est une loi qui interdit le travail",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Sujet d'interrogation : le magasin de pagnes de Mme Koné",
+          "statement": "Document : texte écrit pour Lnclass. Mme Koné possède un magasin de pagnes au grand marché de sa ville. Elle emploie trois vendeuses, payées 50 000 F CFA chacune par mois. Ce mois-ci, ses ventes lui ont rapporté 800 000 F CFA. Elle a payé 450 000 F CFA à ses fournisseurs de tissu, les salaires de ses vendeuses et 60 000 F CFA de charges (électricité, transport). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "bilan-magasin",
+          "questions": [
             {
-              "title": "Comprendre — Le vocabulaire du libéralisme",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Mme Koné possède un magasin de pagnes, y investit son argent et emploie trois vendeuses payées chaque mois. Quel est son rôle dans le système capitaliste ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : analyser une situation capitaliste. Étape 1 — Identifier le capitaliste : celui qui possède les moyens de production (ici le magasin et le stock) et investit son argent. C'est Mme Koné. Étape 2 — Repérer les salariés : ce sont ses vendeuses, qui vendent leur travail contre un salaire. Mme Koné n'est donc ni salariée ni membre du prolétariat.",
+              "answers": [
                 {
-                  "content": "Que signifie la formule « laissez faire, laissez passer » ?",
-                  "question_type": "single_choice",
-                  "explanation": "La formule défend la liberté d'entreprendre et la libre circulation des marchandises : l'État laisse faire. Elle s'oppose à un État qui fixe les prix ou dirige la production. Dans l'image du match, l'arbitre siffle le moins possible.",
-                  "answers": [
-                    {
-                      "content": "L'État doit intervenir le moins possible dans l'économie et laisser circuler librement les échanges",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'État doit contrôler le prix de chaque produit",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les entreprises doivent produire seulement ce que l'État leur ordonne",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Salariée",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : la concurrence désigne la rivalité entre plusieurs entreprises qui vendent des produits semblables sur un même marché.",
-                  "question_type": "true_false",
-                  "explanation": "La concurrence oppose des entreprises qui cherchent les mêmes clients. Dans l'image des deux clubs, ils se disputent les mêmes supporters et les mêmes sponsors. Piège : la concurrence oppose les entreprises entre elles, pas les entreprises à leurs salariés.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Capitaliste",
+                  "correct": true
                 },
                 {
-                  "content": "Dans un match de football où l'arbitre siffle presque rien, qui représente l'État ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'arbitre fait respecter les règles, comme l'État fait respecter les lois. Dans le libéralisme, il intervient peu : c'est le sens de « laissez faire ». Les joueurs représentent les entreprises, et les spectateurs représentent les consommateurs.",
-                  "answers": [
-                    {
-                      "content": "L'arbitre, qui siffle presque rien",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les joueurs les plus forts",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spectateurs des tribunes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : selon le libéralisme économique, le prix d'un produit est fixé par l'État.",
-                  "question_type": "true_false",
-                  "explanation": "Dans le libéralisme, le prix se forme sur le marché, par la rencontre de l'offre et de la demande. L'État intervient peu : il ne fixe pas le prix de chaque produit.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations sur l'offre et la demande, lesquelles sont exactes ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Si les acheteurs sont plus nombreux que les produits disponibles, ils acceptent de payer plus cher : le prix monte. Si les produits sont plus nombreux que les acheteurs, les vendeurs baissent leurs prix : le prix baisse. L'erreur tentante est de croire qu'une offre abondante fait monter le prix.",
-                  "answers": [
-                    {
-                      "content": "Quand la demande dépasse l'offre, le prix tend à monter",
-                      "correct": true
-                    },
-                    {
-                      "content": "Quand l'offre dépasse la demande, le prix tend à monter",
-                      "correct": false
-                    },
-                    {
-                      "content": "Quand l'offre dépasse la demande, le prix tend à baisser",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le prix dépend uniquement de la quantité produite par l'État",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Selon Adam Smith, que désigne la « main invisible » ?",
-                  "question_type": "single_choice",
-                  "explanation": "Adam Smith, économiste écossais du XVIIIe siècle, soutient que l'intérêt personnel de chacun, dans un marché libre, peut servir l'intérêt général. Les deux autres réponses décrivent un contrôle caché, contraire à l'idée de liberté du marché.",
-                  "answers": [
-                    {
-                      "content": "Chacun, en cherchant son propre intérêt, contribue sans le vouloir à l'intérêt général",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'État qui règle les prix en secret",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les grandes entreprises qui contrôlent le marché en cachette",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Membre du prolétariat",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Offre, demande et concurrence",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Les trois vendeuses de Mme Koné, payées 50 000 F CFA chacune par mois, sont des salariées.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Repérer les salariés : une personne qui ne possède ni le magasin ni le stock et qui vend son travail contre un salaire est une salariée. Les trois vendeuses sont donc salariées. Elles ne sont pas capitalistes : elles n'investissent pas et ne gardent pas le profit.",
+              "answers": [
                 {
-                  "content": "Une marchande propose 20 sacs de riz au marché. Cinquante acheteurs veulent en acheter. Que tend à faire le prix du riz ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a plus d'acheteurs que de sacs : la demande dépasse l'offre. Les acheteurs se disputent les sacs et acceptent de payer plus cher. L'erreur tentante est de croire que le prix reste fixe : il se forme sur le marché.",
-                  "answers": [
-                    {
-                      "content": "Monter",
-                      "correct": true
-                    },
-                    {
-                      "content": "Baisser",
-                      "correct": false
-                    },
-                    {
-                      "content": "Rester exactement le même",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "Dans un quartier, cinq vendeurs de pain se font concurrence. L'un d'eux baisse fortement son prix pour attirer les clients. Quel effet est le plus probable sur les autres vendeurs ?",
-                  "question_type": "single_choice",
-                  "explanation": "La concurrence pousse chaque vendeur à répondre à la baisse de prix d'un concurrent, sous peine de perdre ses clients. La fermeture n'est pas une conséquence automatique. Dans l'image des clubs, un club qui ne réagit pas peut perdre des supporters.",
-                  "answers": [
-                    {
-                      "content": "Ils sont poussés à réagir, par exemple en baissant leurs prix ou en améliorant leur produit",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ils n'ont aucune raison de réagir, car la concurrence n'existe pas entre eux",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ils doivent obligatoirement fermer leur boutique",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : une entreprise qui baisse ses prix, sans changer la qualité de ses produits, peut attirer davantage de clients.",
-                  "question_type": "true_false",
-                  "explanation": "Pour un même produit, un prix plus bas attire davantage d'acheteurs, si la qualité ne baisse pas. C'est un mécanisme typique de la concurrence.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Lesquelles de ces conséquences viennent de la concurrence entre entreprises qui vendent des produits semblables ? Trois réponses sont exactes.",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La concurrence donne du choix aux clients, pousse à améliorer la qualité et peut faire baisser les prix. Elle ne supprime pas le besoin de clients, et elle ne demande pas à l'État de fixer les prix : dans le libéralisme, c'est le marché qui les forme.",
-                  "answers": [
-                    {
-                      "content": "Les clients peuvent comparer les offres et choisir",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les entreprises cherchent à améliorer la qualité de leurs produits",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les prix peuvent baisser",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les entreprises n'ont plus besoin de clients",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'État doit obligatoirement fixer le prix de chaque produit",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un produit voit sa demande augmenter fortement, alors que la quantité produite reste la même. Que tend à faire son prix ?",
-                  "question_type": "single_choice",
-                  "explanation": "Quand la demande augmente et que l'offre ne suit pas, les acheteurs se disputent le même stock, et le prix monte. L'idée que le vendeur fixe seul son prix est une erreur tentante : le prix dépend aussi des acheteurs.",
-                  "answers": [
-                    {
-                      "content": "Monter",
-                      "correct": true
-                    },
-                    {
-                      "content": "Baisser",
-                      "correct": false
-                    },
-                    {
-                      "content": "Rester strictement identique, car seul le vendeur fixe le prix",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : dans un match de football où l'arbitre siffle presque rien, les joueurs les plus faibles risquent d'être écartés du jeu.",
-                  "question_type": "true_false",
-                  "explanation": "Sans règles ni arbitre, la loi du plus fort domine : les plus faibles risquent d'être écartés. C'est la limite principale du libéralisme, que l'image met en évidence. Il s'agit d'un risque, pas d'une règle automatique.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Libéralisme, prix et profit",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Mme Koné paie 450 000 F CFA de tissu, 3 salaires de 50 000 F CFA chacun et 60 000 F CFA de charges. Quel est le total de ses dépenses ?",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer les dépenses totales : achats de tissu 450 000 + salaires 3 × 50 000 = 150 000 + charges 60 000 = 660 000 F CFA. Celui qui oublie les salaires trouve 510 000 F CFA ; or les salaires sont bien une dépense de Mme Koné.",
+              "answers": [
                 {
-                  "content": "Pendant la rentrée scolaire, la demande de cahiers augmente fortement, alors que la quantité de cahiers disponibles reste stable. Dans le modèle de l'offre et de la demande, le prix des cahiers tend à :",
-                  "question_type": "single_choice",
-                  "explanation": "Plus de demandeurs pour une même quantité de produits : les acheteurs acceptent de payer plus cher, et le prix monte. L'idée que l'État fixe seul le prix est justement ce que le libéralisme refuse.",
-                  "answers": [
-                    {
-                      "content": "monter",
-                      "correct": true
-                    },
-                    {
-                      "content": "baisser",
-                      "correct": false
-                    },
-                    {
-                      "content": "être fixé uniquement par l'État",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces limites du libéralisme sans intervention de l'État, lesquelles sont reconnues ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Laissé sans règles, le libéralisme peut éliminer les petits acteurs et fragiliser les salariés. Mais le prix ne baisse pas toujours : il dépend de l'offre et de la demande. L'erreur tentante est de croire que la concurrence garantit toujours des prix bas.",
-                  "answers": [
-                    {
-                      "content": "Les plus petites entreprises peuvent disparaître face aux plus grandes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les salariés ont moins de protection si aucune loi ne les encadre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les prix baissent toujours, sans aucune exception",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le profit devient impossible pour toutes les entreprises",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : une entreprise dont les dépenses augmentent, alors que ses recettes restent identiques, voit son profit diminuer.",
-                  "question_type": "true_false",
-                  "explanation": "Profit = recettes − dépenses. Si les recettes ne bougent pas et que les dépenses augmentent, la différence se réduit : le profit baisse.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une entreprise vend 40 sacs à 15 000 F CFA chacun et dépense 450 000 F CFA au total. Quel est son profit ?",
-                  "question_type": "single_choice",
-                  "explanation": "Recettes : 40 × 15 000 = 600 000 F CFA. Profit : 600 000 − 450 000 = 150 000 F CFA. La réponse 600 000 F CFA oublie de retrancher les dépenses ; la réponse 1 050 000 F CFA additionne recettes et dépenses.",
-                  "answers": [
-                    {
-                      "content": "150 000 F CFA",
-                      "correct": true
-                    },
-                    {
-                      "content": "600 000 F CFA",
-                      "correct": false
-                    },
-                    {
-                      "content": "1 050 000 F CFA",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève affirme : « Le marché se régule tout seul, donc l'État ne doit jamais intervenir. » Quelle réponse est la plus juste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le libéralisme limite l'intervention de l'État sans la supprimer. Le match sans arbitre montre que, sans règles, les plus faibles sont écartés. L'erreur tentante est de confondre « moins d'État » et « aucune règle ».",
-                  "answers": [
-                    {
-                      "content": "L'affirmation est excessive : les libéraux limitent l'intervention de l'État, mais des règles restent nécessaires",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'affirmation est juste : l'État ne doit jamais intervenir dans l'économie",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'affirmation est fausse : le marché ne fonctionne jamais",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles affirmations sur le libéralisme économique sont exactes ? Trois réponses sont exactes.",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le libéralisme défend la liberté d'entreprendre et limite l'intervention de l'État. Il repose sur la propriété privée et sur la concurrence : il ne les interdit pas. L'erreur tentante est de croire que la liberté économique supprime la rivalité entre entreprises.",
-                  "answers": [
-                    {
-                      "content": "Il défend la liberté d'entreprendre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il limite l'intervention de l'État dans l'économie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il résume sa doctrine par la formule « laissez faire, laissez passer »",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il interdit toute propriété privée",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il supprime toute concurrence entre entreprises",
-                      "correct": false
-                    }
-                  ]
+                  "content": "660000",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Les ventes de Mme Koné rapportent 800 000 F CFA et ses dépenses totales sont de 660 000 F CFA. Quel est son profit ?",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : recettes = 800 000 F CFA ; dépenses = 660 000 F CFA. Étape 4 — Conclure : profit = recettes − dépenses = 800 000 − 660 000 = 140 000 F CFA. Répondre 800 000 F CFA, c'est confondre recettes et profit, l'erreur fréquente de la fiche.",
+              "answers": [
+                {
+                  "content": "140000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À l'approche d'une fête, 500 pagnes sont demandés alors que Mme Koné et ses concurrents n'en proposent que 300. Le prix tend à ___.",
+              "question_type": "select",
+              "explanation": "Méthode du marché. Étape 1 — Identifier : offre = 300 pagnes, demande = 500 pagnes. Étape 2 — Comparer : la demande l'emporte. Étape 3 — Prévoir le prix : quand la demande l'emporte, le prix tend à monter. « Baisser » inverse la règle.",
+              "answers": [
+                {
+                  "content": "baisser",
+                  "correct": false
+                },
+                {
+                  "content": "monter",
+                  "correct": true
+                },
+                {
+                  "content": "disparaître",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Koné investit son argent dans ce magasin. Explique en deux ou trois phrases pourquoi, en utilisant les chiffres du document.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que le capitaliste investit pour réaliser un profit",
+                "Utilise le calcul : recettes 800 000 − dépenses 660 000",
+                "Donne le profit de 140 000 F CFA"
+              ],
+              "explanation": "Corrigé modèle : Mme Koné est la capitaliste : elle possède le magasin et investit son argent pour gagner plus qu'elle ne dépense. Ce mois-ci, ses recettes sont de 800 000 F CFA et ses dépenses de 660 000 F CFA ; son profit est donc de 140 000 F CFA. C'est cette recherche du profit qui la pousse à investir. Barème : 0,5 pour l'idée de profit, 1 pour le calcul, 0,5 pour le résultat.",
+              "answers": [],
+              "starter": "Mme Koné investit parce que…"
             }
           ]
         },
         {
-          "name": "Les conséquences sociales : classes, conditions de travail et mouvement ouvrier",
-          "subtitle": "Classes sociales, conditions de travail et mouvement ouvrier au XIXe siècle",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Distinguer la bourgeoisie et le prolétariat.</li><li>Décrire les conditions de travail des ouvriers et l'exode rural qui peuple les villes.</li><li>Expliquer comment le mouvement ouvrier s'est organisé face à la question sociale.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 : les loges et les gradins du stade</h3><p>Dans un grand stade, les places ne se valent pas. Les loges et les sièges numérotés sont réservés à ceux qui ont payé cher, et ils sont confortables. Les supporters qui n'ont pas les moyens se tiennent debout, au soleil ou sous la pluie, parfois loin du terrain. Les deux groupes ne vivent pas la même partie.</p><p><strong>Le pont.</strong> Les loges sont la <em>bourgeoisie</em> : elle possède le capital, les usines et les entreprises. Les gradins sont le <em>prolétariat</em> : ce sont les ouvriers qui vendent leur travail pour vivre. La <em>question sociale</em>, c'est le problème posé par la misère de ces gradins et par les inégalités.</p><p><strong>La limite de l'image.</strong> Le stade ne montre pas ce que vivaient les ouvriers au travail : l'image ne décrit que la distance entre les deux groupes.</p><h3>Image 2 : les agents du stade qui cessent ensemble le travail</h3><p>Les agents du stade vendent les billets et entretiennent les tribunes. Ils trouvent leurs salaires trop bas et leurs journées trop longues. Ils ne protestent pas tout seuls : ils forment un groupe, qui envoie des représentants négocier avec les dirigeants du club. Si rien ne change, ils cessent tous ensemble de travailler.</p><p><strong>Le pont.</strong> Le groupe qui négocie pour eux est le <em>syndicat</em> : une organisation de salariés qui défend leurs intérêts face à l'employeur. L'arrêt collectif du travail est la <em>grève</em>, qui fait pression sur le patron.</p><p><strong>La limite de l'image.</strong> Au XIXe siècle, les syndicats étaient souvent interdits et les grèves souvent réprimées. Aujourd'hui, la négociation est encadrée par la loi.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Le capitalisme industriel du XIXe siècle fait apparaître deux grandes classes sociales :</p><ul><li>la <strong>bourgeoisie</strong>, qui possède les entreprises et le capital ;</li><li>le <strong>prolétariat</strong>, les ouvriers, qui ne possèdent que leur force de travail.</li></ul><p>Les conséquences sociales sont nombreuses :</p><ul><li><strong>des conditions de travail très dures</strong> : journées longues, salaires bas, travail des femmes et des enfants, dangers dans les usines et les mines ;</li><li><strong>l'exode rural</strong> : des paysans quittent les campagnes pour travailler en ville, où ils vivent souvent dans des logements insalubres ;</li><li><strong>la question sociale</strong> : le problème posé par la misère ouvrière et les inégalités.</li></ul><p>Face à cela, les ouvriers s'organisent : les <strong>syndicats</strong> défendent leurs droits, et la <strong>grève</strong> arrête le travail pour faire pression. Karl Marx et Friedrich Engels critiquent ce système et proposent de supprimer la propriété privée des moyens de production (Manifeste du parti communiste, 1848).</p></blockquote><h2>Exemple résolu</h2><p><strong>Question.</strong> Dans une usine, les ouvriers travaillent de longues journées pour un salaire très bas. Un jour, ils refusent tous ensemble de venir travailler tant que leurs demandes ne sont pas prises en compte, et leurs demandes sont défendues par un groupe organisé. Quelles sont ces deux notions ?</p><ol><li>Ils arrêtent ensemble le travail pour faire pression sur l'employeur : c'est une <strong>grève</strong>.</li><li>Le groupe organisé qui défend les salariés face à l'employeur est un <strong>syndicat</strong>.</li><li>Les deux notions relèvent du mouvement ouvrier : l'action est collective, et le syndicat la porte.</li></ol><h2>Le piège à éviter</h2><p>Définir la bourgeoisie et le prolétariat par la seule richesse. Le critère décisif est la place dans la production : possède-t-on l'entreprise, ou vend-on son travail ? Repère : demande-toi qui possède les moyens de production.</p><h2>En une phrase</h2><p>Au XIXe siècle, le capitalisme oppose la bourgeoisie, qui possède les entreprises, et les ouvriers, qui vendent leur travail ; ces derniers se regroupent alors dans des syndicats pour se défendre.</p>",
-          "exercises": [
+          "title": "Sujet d'interrogation : le prix des tomates au marché",
+          "statement": "Document : courbe écrite pour Lnclass, avec des données imaginées. Elle donne le prix du kilo de tomates dans un marché de quartier, en F CFA : lundi 500, mardi 500, mercredi 400, jeudi 600, vendredi 800. Le mercredi, un gros arrivage de tomates a eu lieu. Le vendredi est la veille d'une grande fête. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "prix-tomates",
+          "questions": [
             {
-              "title": "Comprendre — Bourgeoisie, prolétariat et syndicats",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Dans un marché de quartier, le kilo de tomates coûte 500 F CFA le lundi, 500 le mardi, 400 le mercredi, 600 le jeudi et 800 le vendredi. Quel est son prix le vendredi ?",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode : lire un document chiffré. Étape 1 — Présenter : c'est une courbe de prix sur cinq jours. Étape 2 — Lire la valeur du vendredi : 800 F CFA le kilo, la valeur la plus haute de la semaine.",
+              "answers": [
                 {
-                  "content": "Dans le capitalisme du XIXe siècle, qui fait partie du prolétariat ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le prolétariat regroupe les ouvriers, qui ne possèdent que leur force de travail. Les propriétaires d'usines et les banquiers appartiennent à la bourgeoisie : ils possèdent le capital. Dans l'image du stade, les loges sont la bourgeoisie et les gradins le prolétariat.",
-                  "answers": [
-                    {
-                      "content": "Les ouvriers qui vendent leur force de travail à un employeur",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les propriétaires des usines",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les banquiers qui prêtent de l'argent aux entreprises",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : la bourgeoisie et le prolétariat se distinguent par la possession ou non des moyens de production.",
-                  "question_type": "true_false",
-                  "explanation": "C'est le critère de distinction des deux classes : la bourgeoisie possède le capital et les entreprises, le prolétariat vend son travail. Ce n'est pas la seule différence de niveau de vie, mais la place dans la production.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Comment appelle-t-on le départ massif des paysans vers les villes pour travailler dans les usines ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'exode rural est le départ des habitants des campagnes vers les villes. Il fournit de la main-d'œuvre aux usines, et entasse souvent les ouvriers dans des logements insalubres. La décolonisation et la grève désignent des phénomènes différents.",
-                  "answers": [
-                    {
-                      "content": "L'exode rural",
-                      "correct": true
-                    },
-                    {
-                      "content": "La décolonisation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La grève générale",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : un syndicat est une organisation qui regroupe des salariés pour défendre leurs intérêts face à l'employeur.",
-                  "question_type": "true_false",
-                  "explanation": "Le syndicat négocie les salaires et les conditions de travail au nom des salariés. C'est une organisation de travailleurs, et non de propriétaires d'entreprises.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces conditions de travail, lesquelles caractérisent souvent les ouvriers du XIXe siècle ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les ouvriers du XIXe siècle travaillaient de longues journées, pour des salaires souvent très bas, sans véritable protection. Les congés payés obligatoires et la semaine de quatre jours sont arrivés bien plus tard : ce sont des erreurs tentantes.",
-                  "answers": [
-                    {
-                      "content": "Des journées de travail très longues",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des salaires bas",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une semaine de travail de quatre jours",
-                      "correct": false
-                    },
-                    {
-                      "content": "Des congés payés obligatoires",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est l'objet principal de la « question sociale » ?",
-                  "question_type": "single_choice",
-                  "explanation": "La question sociale désigne l'ensemble des problèmes posés par la misère ouvrière, les conditions de travail et les inégalités. Elle a poussé à des réformes et à l'organisation des travailleurs. Les deux autres réponses décrivent d'autres sujets.",
-                  "answers": [
-                    {
-                      "content": "Poser le problème de la misère ouvrière et des inégalités créées par l'industrie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Décrire la conquête des colonies d'Afrique",
-                      "correct": false
-                    },
-                    {
-                      "content": "Organiser le commerce entre les pays européens",
-                      "correct": false
-                    }
-                  ]
+                  "content": "800",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Repérer les classes et les actions",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le kilo de tomates passe de 400 F CFA le mercredi à 800 F CFA le vendredi. De combien de F CFA le prix a-t-il augmenté ?",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Méthode : comparer deux valeurs du document. Étape 1 — Lire : mercredi 400, vendredi 800. Étape 2 — Calculer l'écart : 800 − 400 = 400 F CFA. Le prix a doublé entre ces deux jours.",
+              "answers": [
                 {
-                  "content": "Koffi possède la machine d'une petite usine et emploie cinq ouvriers. À quelle classe appartient Koffi ?",
-                  "question_type": "single_choice",
-                  "explanation": "Koffi possède le moyen de production : il appartient à la bourgeoisie. Travailler ne suffit pas à faire partie du prolétariat, car beaucoup de patrons travaillent aussi. Le prolétariat est composé des ouvriers qui vendent leur travail.",
-                  "answers": [
-                    {
-                      "content": "À la bourgeoisie, car il possède les moyens de production",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au prolétariat, car il travaille lui aussi",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au mouvement ouvrier, car il organise la production",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : un ouvrier qui touche un salaire confortable reste un salarié, donc il fait partie du prolétariat.",
-                  "question_type": "true_false",
-                  "explanation": "Le critère n'est pas le niveau de salaire : un salaire, même élevé, reste la rémunération d'un travail pour un employeur. C'est pourquoi la possession des moyens de production est le critère décisif.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Des ouvriers d'une usine arrêtent ensemble le travail pour obtenir une hausse de salaire. Quelle action est-ce ?",
-                  "question_type": "single_choice",
-                  "explanation": "La grève est un arrêt collectif du travail, décidé pour faire pression sur l'employeur. L'exode rural est un départ vers la ville, et une négociation de frontières n'a rien à voir avec les salaires.",
-                  "answers": [
-                    {
-                      "content": "Une grève",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un exode rural",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une négociation de frontières",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une ville industrielle du XIXe siècle, lesquelles de ces situations sont des conséquences du capitalisme industriel ? Trois réponses sont exactes.",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "L'exode rural, l'entassement dans des logements insalubres et le mouvement syndical sont directement liés à l'essor de l'industrie. Les deux autres propositions vont à l'inverse de ce qui se passe : les entreprises privées se multiplient et les villes grandissent.",
-                  "answers": [
-                    {
-                      "content": "Des paysans qui quittent leur village pour travailler en usine",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des familles entassées dans des logements insalubres",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des ouvriers qui se regroupent dans un syndicat",
-                      "correct": true
-                    },
-                    {
-                      "content": "La suppression de toutes les entreprises privées par l'État",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une baisse générale de la population urbaine",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Karl Marx et Friedrich Engels publient en 1848 le Manifeste du parti communiste. Que proposent-ils principalement ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le Manifeste critique le capitalisme et propose de supprimer la propriété privée des moyens de production et de les placer sous contrôle collectif. Les deux autres propositions vont à l'encontre de la pensée des auteurs.",
-                  "answers": [
-                    {
-                      "content": "Supprimer la propriété privée des moyens de production",
-                      "correct": true
-                    },
-                    {
-                      "content": "Renforcer la propriété privée de chaque ouvrier sur son outil",
-                      "correct": false
-                    },
-                    {
-                      "content": "Supprimer les syndicats pour éviter les grèves",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : la grève est une action collective, menée ensemble par les salariés, et non une décision individuelle.",
-                  "question_type": "true_false",
-                  "explanation": "La force de la grève vient de son caractère collectif : l'employeur ne peut plus produire sans les salariés qui cessent de travailler ensemble.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "400",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Question sociale et mouvement ouvrier",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le mercredi, un gros arrivage de tomates a lieu et le prix du kilo tombe à 400 F CFA. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : un gros arrivage augmente l'offre. Étape 2 — Comparer : l'offre l'emporte sur la demande. Étape 3 — Prévoir le prix : il tend à baisser. L'hypothèse d'une demande plus forte ferait monter le prix, et rien n'indique une décision de l'État.",
+              "answers": [
                 {
-                  "content": "Texte imaginé pour cet exercice : « Dans une ville industrielle, des paysans arrivés des campagnes travaillent de longues journées dans une usine. Leur salaire est à peine suffisant pour se loger dans une pièce surpeuplée. » Quelle expression désigne le mieux cette situation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce texte décrit l'exode rural, des journées de travail très longues, des salaires bas et des logements insalubres : c'est la question sociale. Les deux autres expressions désignent des phénomènes sans lien avec cette scène.",
-                  "answers": [
-                    {
-                      "content": "La question sociale : misère ouvrière, exode rural et conditions de travail difficiles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une décolonisation réussie qui renforce l'économie des campagnes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une économie entièrement planifiée par l'État",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La demande est devenue beaucoup plus forte que l'offre",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles sont les deux affirmations exactes sur le syndicat et la grève ? Deux réponses sont exactes.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le syndicat représente les salariés et négocie avec l'employeur. La grève est une arme collective : elle suspend le travail pour peser sur l'employeur. Les deux affirmations fausses inversent les rôles : le patron ne décide pas la grève, et les propriétaires n'entrent pas dans un syndicat ouvrier.",
-                  "answers": [
-                    {
-                      "content": "Le syndicat défend les intérêts des salariés face à l'employeur",
-                      "correct": true
-                    },
-                    {
-                      "content": "La grève est un arrêt collectif du travail, décidé pour faire pression",
-                      "correct": true
-                    },
-                    {
-                      "content": "La grève est une décision que l'employeur prend seul",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le syndicat regroupe les propriétaires d'entreprises",
-                      "correct": false
-                    }
-                  ]
+                  "content": "L'État a fixé le prix à 400 F CFA",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : la bourgeoisie et le prolétariat se distinguent surtout par leur niveau de richesse, et non par leur place dans la production.",
-                  "question_type": "true_false",
-                  "explanation": "Le critère décisif est la place dans la production : posséder les moyens de production, ou vendre son travail. Un ouvrier peut avoir un bon salaire sans cesser d'être un salarié. Ne juge pas une classe sur la seule richesse.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Pourquoi le capitalisme du XIXe siècle est-il critiqué par les penseurs socialistes ?",
-                  "question_type": "single_choice",
-                  "explanation": "La critique porte sur les inégalités : les richesses et les moyens de production sont concentrés chez quelques propriétaires, tandis que la majorité des travailleurs dépend de son salaire. Les deux autres propositions contredisent la réalité du capitalisme industriel, où le salariat se développe.",
-                  "answers": [
-                    {
-                      "content": "Il concentre les richesses entre les mains d'une minorité de propriétaires, tandis que la majorité vit de son salaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il supprime le salariat dans toutes les entreprises",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il interdit toute production industrielle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles situations sont liées à la question sociale au XIXe siècle ? Trois réponses sont exactes.",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La question sociale regroupe la misère ouvrière, ses effets (exode rural, logements insalubres) et les réponses ouvrières (syndicats, grèves). La protection sociale complète n'existe pas dès le début de l'industrie : elle se construit progressivement. Un retour à une économie purement agricole dans les villes est un contresens.",
-                  "answers": [
-                    {
-                      "content": "Des ouvriers qui s'organisent en syndicats pour défendre leurs droits",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des grèves pour obtenir de meilleures conditions de travail",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un exode rural qui vide une partie des campagnes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une protection sociale complète, garantie à tous les ouvriers dès le début de l'industrie",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le retour à une économie uniquement agricole dans les villes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : le mouvement ouvrier s'est limité à demander des augmentations de salaire, sans jamais porter de projet politique.",
-                  "question_type": "true_false",
-                  "explanation": "Le mouvement ouvrier réclame des salaires et des conditions de travail meilleurs, mais il porte aussi des projets politiques, comme le socialisme défendu par Marx et Engels. Ne réduis pas le mouvement ouvrier à ses seules revendications salariales.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "L'offre l'emporte sur la demande, donc le prix tend à baisser",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Le vendredi, veille d'une grande fête, le prix du kilo de tomates monte à 800 F CFA. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : la fête fait augmenter le nombre d'acheteurs, donc la demande. Étape 2 — Comparer : la demande l'emporte sur l'offre. Étape 3 — Prévoir le prix : il tend à monter. Si l'offre l'emportait, le prix baisserait, comme le mercredi.",
+              "answers": [
+                {
+                  "content": "L'offre l'emporte sur la demande",
+                  "correct": false
+                },
+                {
+                  "content": "La demande l'emporte sur l'offre, donc le prix tend à monter",
+                  "correct": true
+                },
+                {
+                  "content": "La concurrence a disparu du marché",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la méthode pour analyser un marché.",
+              "question_type": "ordering",
+              "explanation": "La méthode se fait dans cet ordre. Étape 1 — Identifier l'offre et la demande. Étape 2 — Comparer : laquelle est la plus forte ? Étape 3 — Prévoir le prix : il monte si la demande l'emporte, baisse si l'offre l'emporte. Étape 4 — Évaluer l'effet de la concurrence sur les acheteurs et les vendeurs.",
+              "answers": [
+                {
+                  "content": "Identifier l'offre et la demande"
+                },
+                {
+                  "content": "Comparer l'offre et la demande"
+                },
+                {
+                  "content": "Prévoir le sens du prix"
+                },
+                {
+                  "content": "Évaluer l'effet de la concurrence"
+                }
+              ]
+            },
+            {
+              "content": "Plusieurs vendeuses de tomates se font concurrence sur ce marché. Quels sont les deux effets possibles de cette concurrence ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Évaluer l'effet de la concurrence : elle pousse les vendeurs à baisser leurs prix, ce qui profite aux acheteurs, mais elle menace les petits vendeurs qui ne peuvent pas suivre. Les autres propositions sont fausses : les prix varient, l'acheteur a plus de choix et rien n'oblige l'État à intervenir.",
+              "answers": [
+                {
+                  "content": "Elles peuvent baisser leurs prix pour attirer les acheteurs",
+                  "correct": true
+                },
+                {
+                  "content": "Une petite vendeuse qui ne peut pas baisser son prix risque de perdre des clients",
+                  "correct": true
+                },
+                {
+                  "content": "Les prix doivent rester identiques toute la semaine",
+                  "correct": false
+                },
+                {
+                  "content": "Les acheteurs n'ont plus aucun choix",
+                  "correct": false
+                },
+                {
+                  "content": "L'État achète toutes les tomates invendues",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en cinq lignes environ comment la concurrence agit sur le prix des tomates et quelle est sa limite pour les plus petits vendeurs.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que les vendeurs baissent leurs prix pour attirer les clients",
+                "Dit que les acheteurs profitent de prix plus bas et de plus de choix",
+                "Dit que la demande et l'offre font varier le prix",
+                "Cite la limite : les petits vendeurs risquent de disparaître"
+              ],
+              "explanation": "Corrigé modèle : Quand plusieurs vendeuses vendent des tomates, chacune veut attirer les clients et peut baisser son prix, surtout quand l'offre l'emporte sur la demande, comme le mercredi. Les acheteurs profitent alors de prix plus bas et de plus de choix. Mais cette concurrence a une limite : une petite vendeuse qui ne peut pas baisser son prix risque de perdre ses clients et de disparaître du marché. Barème : 1 pour les vendeurs qui baissent leurs prix, 0,5 pour l'offre et la demande, 0,5 pour l'avantage des acheteurs, 1 pour la limite.",
+              "answers": [],
+              "starter": "La concurrence pousse les vendeuses à…"
+            }
+          ]
+        },
+        {
+          "title": "Devoir : la vie d'une famille ouvrière et la réponse des ouvriers",
+          "statement": "Document : récit écrit pour Lnclass. Jean est ouvrier dans une fabrique de tissus d'une ville industrielle du XIXe siècle. Il est arrivé de son village avec sa famille. Il travaille de l'aube à la nuit tombée et gagne un salaire qui suffit à peine à acheter du pain au marché ; quand le prix du pain augmente, son salaire reste le même. Sa fille travaille aussi à la fabrique. La famille vit dans une seule pièce humide. Les ouvriers de la fabrique forment un syndicat. Ses représentants négocient avec le patron, qui refuse toute augmentation. Les ouvriers font alors grève. Réponds aux questions, puis rédige.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Jean ne possède que sa force de travail, qu'il vend contre un salaire à une fabrique. À quelle classe sociale appartient-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : analyser un document. Étape 1 — Présenter : récit écrit pour Lnclass sur un ouvrier du XIXe siècle. Étape 3 — Identifier la classe sociale : Jean ne possède pas la fabrique, il vend sa force de travail : il appartient au prolétariat. La bourgeoisie, elle, possède le capital et les usines.",
+              "answers": [
+                {
+                  "content": "À la bourgeoisie",
+                  "correct": false
+                },
+                {
+                  "content": "Au prolétariat",
+                  "correct": true
+                },
+                {
+                  "content": "Aux propriétaires de la fabrique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le récit, Jean travaille de l'aube à la nuit, sa fille travaille à la fabrique et la famille vit dans une seule pièce humide. Quelles sont les trois informations qui décrivent leurs conditions de vie ou de travail ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Relever les informations sur le travail, le salaire et le logement : journée de l'aube à la nuit (journées longues), une seule pièce humide (logement insalubre), la fille qui travaille (travail des enfants). Le salaire suffit à peine à acheter du pain, il n'est pas élevé, et le récit ne parle d'aucune vacance.",
+              "answers": [
+                {
+                  "content": "Des journées de travail très longues",
+                  "correct": true
+                },
+                {
+                  "content": "Un logement étroit et insalubre",
+                  "correct": true
+                },
+                {
+                  "content": "Le travail d'un enfant à la fabrique",
+                  "correct": true
+                },
+                {
+                  "content": "Un salaire élevé qui permet d'épargner",
+                  "correct": false
+                },
+                {
+                  "content": "Des vacances payées chaque année",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les moments de l'action des ouvriers de la fabrique.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Identifier le problème : le salaire ne suffit plus. Étape 2 — Repérer l'acteur qui s'organise : les ouvriers créent un syndicat. Étape 3 — Décrire le moyen d'action : la négociation d'abord, puis la grève après le refus du patron. Étape 4 — Dégager la revendication : une augmentation de salaire.",
+              "answers": [
+                {
+                  "content": "Les ouvriers constatent que leur salaire ne suffit plus"
+                },
+                {
+                  "content": "Ils forment un syndicat"
+                },
+                {
+                  "content": "Les représentants négocient avec le patron"
+                },
+                {
+                  "content": "Le patron refuse et les ouvriers font grève"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque mot à sa définition.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Identifier la classe sociale : la bourgeoisie possède le capital. Étape 2 — Relever : Jean est venu de son village, c'est l'exode rural. Étape 3 — Décrire le moyen d'action : le syndicat est l'organisation des salariés ; la grève est l'arrêt collectif du travail. Ces deux mots sont souvent confondus : l'un est une organisation, l'autre une action.",
+              "answers": [
+                {
+                  "content": "Bourgeoisie",
+                  "match": "Groupe qui possède le capital et les usines"
+                },
+                {
+                  "content": "Exode rural",
+                  "match": "Départ de paysans vers les villes"
+                },
+                {
+                  "content": "Syndicat",
+                  "match": "Organisation de salariés qui défend leurs intérêts"
+                },
+                {
+                  "content": "Grève",
+                  "match": "Arrêt collectif du travail"
+                }
+              ]
+            },
+            {
+              "content": "Karl Marx et Friedrich Engels, dans le Manifeste du parti communiste (1848), défendent la propriété privée des moyens de production.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Dégager la solution proposée : dans le Manifeste du parti communiste (1848), Marx et Engels proposent au contraire de supprimer la propriété privée des moyens de production. Ils critiquent le capitalisme, ils ne le défendent pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi la grève est un moyen de pression sur le patron, et pourquoi les ouvriers se regroupent dans un syndicat plutôt que de protester chacun seul.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Explique que la grève arrête la production de la fabrique",
+                "Dit que le patron perd de l'argent quand l'entreprise ne produit plus",
+                "Explique que le syndicat réunit les ouvriers pour négocier ensemble",
+                "Dit qu'un ouvrier seul a peu de pouvoir face au patron"
+              ],
+              "explanation": "Corrigé modèle : La grève est un arrêt collectif du travail : la fabrique ne produit plus et le patron ne vend plus, donc il perd de l'argent, ce qui le pousse à négocier. Les ouvriers se regroupent dans un syndicat parce qu'un ouvrier seul a peu de pouvoir face au patron ; ensemble, ils négocient par leurs représentants et peuvent faire grève tous ensemble. Barème : 1 pour la grève qui arrête la production, 0,5 pour la perte du patron, 1 pour le syndicat qui réunit, 0,5 pour le faible pouvoir d'un ouvrier seul.",
+              "answers": [],
+              "starter": "La grève est un moyen de pression parce que…"
+            },
+            {
+              "content": "Rédige un paragraphe d'une dizaine de lignes : présente la bourgeoisie et le prolétariat au XIXe siècle, décris la vie des ouvriers et explique ce qu'est la question sociale.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Définit la bourgeoisie (capital, usines) et le prolétariat (force de travail)",
+                "Décrit au moins deux conditions de vie ou de travail des ouvriers",
+                "Mentionne l'exode rural",
+                "Explique la question sociale : misère ouvrière et inégalités"
+              ],
+              "explanation": "Corrigé modèle : Au XIXe siècle, le capitalisme industriel fait apparaître deux groupes. La bourgeoisie possède le capital, les usines et les entreprises. Le prolétariat est formé des ouvriers, qui ne possèdent que leur force de travail et la vendent contre un salaire. Beaucoup d'ouvriers sont des paysans venus en ville à cause de l'exode rural. Ils connaissent des journées très longues, de bas salaires, le travail des enfants et des logements insalubres. La misère ouvrière et les inégalités entre les deux groupes forment la question sociale. Barème : 1 pour les deux classes, 1 pour les conditions et l'exode rural, 1 pour la question sociale.",
+              "answers": [],
+              "starter": "Au XIXe siècle, la société industrielle comprend…"
+            }
+          ]
+        },
+        {
+          "title": "Sujet de type bac : le capitalisme, ses défenseurs et ses critiques",
+          "statement": "Sujet de type bac. Document : une frise chronologique de 1750 à 1900. Elle place le XIXe siècle comme période et deux repères : en 1776, Adam Smith publie La Richesse des nations ; en 1848, Karl Marx et Friedrich Engels publient le Manifeste du parti communiste. Réponds aux questions, puis rédige la synthèse.",
+          "exercise_type": "evaluation",
+          "figure": "frise-capitalisme",
+          "questions": [
+            {
+              "content": "Adam Smith publie La Richesse des nations en 1776 ; Marx et Engels publient le Manifeste du parti communiste en 1848. Combien d'années séparent ces deux publications ?",
+              "question_type": "numeric",
+              "unit": "ans",
+              "tolerance": 0,
+              "explanation": "Méthode : lire une frise. Étape 1 — Lire les deux dates : 1776 et 1848. Étape 2 — Calculer l'écart : 1848 − 1776 = 72 ans. Attention à ne pas confondre les deux textes : le premier défend le libéralisme, le second critique le capitalisme.",
+              "answers": [
+                {
+                  "content": "72",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Adam Smith publie en 1776 un ouvrage intitulé « La Richesse des ___ ».",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : situer un auteur et son œuvre. Adam Smith, économiste britannique, publie La Richesse des nations en 1776. Il y explique que chacun, en poursuivant son propre intérêt, contribue sans le vouloir à l'intérêt général : c'est la main invisible du marché.",
+              "answers": [
+                {
+                  "content": "nations",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque nom ou mot à ce qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Méthode : identifier l'acteur et son idée. Adam Smith défend la liberté du marché (main invisible). Marx et Engels critiquent le capitalisme et proposent de supprimer la propriété privée des moyens de production. Le syndicat défend les salariés. Le capitaliste possède les moyens de production et investit.",
+              "answers": [
+                {
+                  "content": "Adam Smith",
+                  "match": "Théoricien de la main invisible du marché"
+                },
+                {
+                  "content": "Marx et Engels",
+                  "match": "Proposent de supprimer la propriété privée des moyens de production"
+                },
+                {
+                  "content": "Syndicat",
+                  "match": "Organisation qui défend les salariés face à l'employeur"
+                },
+                {
+                  "content": "Capitaliste",
+                  "match": "Possède les moyens de production et investit"
+                }
+              ]
+            },
+            {
+              "content": "Dans un marché libre, quelles sont les deux limites du libéralisme économique ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Évaluer l'effet de la concurrence : sans règles, les plus petits vendeurs risquent de disparaître, et les salariés, moins protégés, sont plus exposés. Les deux autres propositions sont fausses : dans le libéralisme, l'État intervient le moins possible et ne fixe pas tous les prix, et les vendeurs cherchent précisément à faire un profit.",
+              "answers": [
+                {
+                  "content": "Les plus petits vendeurs risquent d'être éliminés par la concurrence",
+                  "correct": true
+                },
+                {
+                  "content": "Les salariés sont plus exposés quand l'État intervient peu",
+                  "correct": true
+                },
+                {
+                  "content": "L'État fixe tous les prix",
+                  "correct": false
+                },
+                {
+                  "content": "La concurrence supprime tout profit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un commerçant encaisse 900 000 F CFA de ventes. Il paie 500 000 F CFA de marchandises, 150 000 F CFA de salaires et 50 000 F CFA de charges. Quel est son profit ?",
+              "question_type": "numeric",
+              "unit": "F CFA",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : recettes = 900 000 F CFA ; dépenses = 500 000 + 150 000 + 50 000 = 700 000 F CFA. Étape 4 — Conclure : profit = 900 000 − 700 000 = 200 000 F CFA. Répondre 900 000 F CFA, c'est confondre recettes et profit.",
+              "answers": [
+                {
+                  "content": "200000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En deux ou trois phrases, oppose l'idée d'Adam Smith sur le marché à celle de Marx et Engels sur la propriété privée des moyens de production.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Présente la main invisible : l'intérêt de chacun sert l'intérêt général",
+                "Présente la proposition de supprimer la propriété privée des moyens de production",
+                "Montre l'opposition : l'un défend le marché libre, les autres critiquent le capitalisme"
+              ],
+              "explanation": "Corrigé modèle : Pour Adam Smith, le marché libre fonctionne comme une main invisible : en poursuivant son propre intérêt, chacun contribue à l'intérêt général, et l'État doit intervenir le moins possible. Marx et Engels, eux, critiquent le capitalisme et, en 1848, proposent de supprimer la propriété privée des moyens de production. Barème : 0,5 pour Smith, 0,5 pour Marx et Engels, 1 pour l'opposition entre les deux.",
+              "answers": [],
+              "starter": "Pour Adam Smith, le marché…"
+            },
+            {
+              "content": "Rédige un paragraphe de synthèse d'une dizaine de lignes : montre comment le capitalisme fonctionne, comment le libéralisme le défend, quelles conséquences sociales il a eues et comment les ouvriers et les penseurs ont réagi.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Définit le capitalisme : propriété privée, salariat, profit",
+                "Présente le libéralisme : concurrence, offre et demande, Adam Smith",
+                "Décrit les classes sociales et les conditions de vie ouvrières",
+                "Cite le mouvement ouvrier (syndicat, grève) et la critique de Marx et Engels (1848)"
+              ],
+              "explanation": "Corrigé modèle : Le capitalisme repose sur la propriété privée des moyens de production, le salariat et la recherche du profit. Le libéralisme le défend : Adam Smith, en 1776, explique que la concurrence et la liberté d'entreprendre servent l'intérêt général, et que l'État doit intervenir le moins possible. Mais le capitalisme industriel du XIXe siècle crée deux classes, la bourgeoisie qui possède le capital et le prolétariat ouvrier, dont les conditions de vie sont très dures : c'est la question sociale. Les ouvriers s'organisent en syndicats et font grève, tandis que Marx et Engels, en 1848, proposent de supprimer la propriété privée des moyens de production. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Le capitalisme repose sur…"
             }
           ]
         }

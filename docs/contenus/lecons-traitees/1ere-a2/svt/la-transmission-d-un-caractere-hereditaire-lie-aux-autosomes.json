@@ -1,0 +1,1649 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transmission d'un caractère héréditaire lié aux autosomes",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "A2",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "croisement-lignees-pures",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un croisement de deux lignées pures de niébé. La lignée pure à fleurs violettes V//V et la lignée pure à fleurs blanches v//v donnent une F1 de génotype V//v, dont toutes les fleurs sont violettes. Le croisement de deux plants de la F1 donne une F2 : environ 3/4 de plants à fleurs violettes et 1/4 à fleurs blanches.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Parents (P)",
+              "Descendants"
+            ],
+            "nodes": [
+              {
+                "id": "p1",
+                "label": "Lignée pure 1 : fleurs violettes V//V",
+                "category": 1
+              },
+              {
+                "id": "p2",
+                "label": "Lignée pure 2 : fleurs blanches v//v",
+                "category": 1
+              },
+              {
+                "id": "f1",
+                "label": "F1 : toutes violettes, V//v",
+                "category": 2
+              },
+              {
+                "id": "f2",
+                "label": "F2 : 3/4 violettes, 1/4 blanches",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "p1",
+                "to": "f1",
+                "label": "croisement"
+              },
+              {
+                "from": "p2",
+                "to": "f1",
+                "label": "croisement"
+              },
+              {
+                "from": "f1",
+                "to": "f2",
+                "label": "F1 x F1"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "echiquier-heterozygotes",
+          "kind": "diagram",
+          "description": "Schéma fléché du croisement de deux piments hétérozygotes R//r, à fruits rouges. Chaque parent forme des gamètes R ou r, chacun avec la probabilité 1/2. Les descendants possibles sont R//R (1/4), R//r (2/4) et r//r (1/4), soit 3/4 de fruits rouges et 1/4 de fruits jaunes.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Parents",
+              "Gamètes",
+              "Descendants"
+            ],
+            "nodes": [
+              {
+                "id": "pa",
+                "label": "Parent 1 : R//r",
+                "category": 1
+              },
+              {
+                "id": "pb",
+                "label": "Parent 2 : R//r",
+                "category": 1
+              },
+              {
+                "id": "ga",
+                "label": "Gamètes : R (1/2) ou r (1/2)",
+                "category": 2
+              },
+              {
+                "id": "gb",
+                "label": "Gamètes : R (1/2) ou r (1/2)",
+                "category": 2
+              },
+              {
+                "id": "rr",
+                "label": "R//R : 1/4, fruits rouges",
+                "category": 3
+              },
+              {
+                "id": "rh",
+                "label": "R//r : 2/4, fruits rouges",
+                "category": 3
+              },
+              {
+                "id": "jj",
+                "label": "r//r : 1/4, fruits jaunes",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pa",
+                "to": "ga",
+                "label": "forme"
+              },
+              {
+                "from": "pb",
+                "to": "gb",
+                "label": "forme"
+              },
+              {
+                "from": "ga",
+                "to": "rr"
+              },
+              {
+                "from": "gb",
+                "to": "rr"
+              },
+              {
+                "from": "ga",
+                "to": "rh"
+              },
+              {
+                "from": "gb",
+                "to": "rh"
+              },
+              {
+                "from": "ga",
+                "to": "jj"
+              },
+              {
+                "from": "gb",
+                "to": "jj"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "f2-haricot-marron",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des résultats de la F2 d'une expérience fictive sur le haricot : 450 plants à graines marron et 150 plants à graines blanches, soit 600 plants au total. La barre des graines marron est trois fois plus haute que celle des graines blanches.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              450,
+              150
+            ],
+            "labels": [
+              "Graines marron",
+              "Graines blanches"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Passer du génotype au phénotype",
+          "remember": "Un **caractère héréditaire** (couleur des fleurs du niébé, aspect des graines du pois…) se transmet des parents aux descendants. Il dépend d'un **gène**, porté par un chromosome. Quand les chromosomes sont par paires (acquis de la leçon sur le caryotype), le gène est présent en **deux exemplaires**, un sur chaque chromosome de la paire. S'il est situé sur un **autosome**, c'est vrai chez la femme comme chez l'homme. Les versions d'un gène sont les **allèles**. Le **génotype** est l'ensemble des deux allèles d'un individu, noté par exemple $R//r$. Le **phénotype** est l'aspect observable, noté entre crochets : $[R]$. Un individu est **homozygote** si ses deux allèles sont identiques ($R//R$ ou $r//r$) et **hétérozygote** s'ils sont différents ($R//r$). Un allèle **dominant** s'exprime même en un seul exemplaire ; un allèle **récessif** ne s'exprime qu'en double exemplaire. On écrit le dominant en majuscule et le récessif en minuscule.",
+          "method": [
+            "Lire le génotype et repérer les deux allèles de l'individu.",
+            "Nommer l'état : homozygote si les deux allèles sont identiques, hétérozygote s'ils sont différents.",
+            "Identifier l'allèle dominant et l'allèle récessif d'après l'énoncé.",
+            "Appliquer la règle : l'allèle dominant s'exprime dès qu'il est présent ; le récessif ne s'exprime qu'en double exemplaire.",
+            "Conclure en écrivant le phénotype entre crochets."
+          ],
+          "example": {
+            "statement": "Chez le pois cultivé au champ (modèle simplifié), l'aspect des graines dépend d'un gène à deux allèles : $L$ (graines lisses), dominant, et $l$ (graines ridées), récessif. Une plante a le génotype $L//l$. Donner son état et son phénotype.",
+            "steps": [
+              "Lire le génotype : $L//l$ ; les deux allèles sont $L$ et $l$.",
+              "Nommer l'état : les deux allèles sont différents, donc la plante est hétérozygote.",
+              "Identifier : $L$ (graines lisses) est l'allèle dominant, $l$ (graines ridées) l'allèle récessif.",
+              "Appliquer la règle : l'allèle dominant $L$ est présent, il s'exprime ; $l$ n'est qu'en un exemplaire, il reste caché.",
+              "Conclure : le phénotype est $[L]$, graines lisses, bien que la plante porte aussi l'allèle $l$."
+            ]
+          },
+          "pitfall": "Ne confonds pas génotype et phénotype, et ne crois pas qu'un hétérozygote est « mi-lisse, mi-ridé ». Contre-exemple : une plante $L//l$ a toutes ses graines lisses, mais elle garde l'allèle $l$ : croisée avec une autre plante $L//l$, elle peut avoir des descendants à graines ridées. Deux plantes $[L]$ n'ont donc pas forcément le même génotype : l'une peut être $L//L$, l'autre $L//l$.",
+          "figure": null,
+          "exercise": {
+            "title": "Du génotype au phénotype chez la tomate",
+            "statement": "Dans cet exercice, tu passes du génotype au phénotype avec la méthode de la fiche. Les situations sont des modèles simplifiés, décrits en texte.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une plantation, le gène qui commande la couleur du fruit de la tomate existe sous deux versions, rouge et jaune. Comment appelle-t-on ces versions d'un même gène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le génotype et repérer les deux allèles : les allèles sont les versions d'un même gène, ici rouge et jaune. Le génotype est l'ensemble des deux allèles d'un individu et le phénotype son aspect observable ; un autosome est un chromosome, pas une version de gène.",
+                "answers": [
+                  {
+                    "content": "Des allèles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des phénotypes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des génotypes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des autosomes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la tomate (modèle simplifié), l'allèle $T$ (fruit rouge) est dominant sur l'allèle $t$ (fruit jaune). Une plante a le génotype $t//t$. Quel est son état et son phénotype ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le génotype : les deux allèles sont $t$ et $t$. Étape 2 — Nommer l'état : ils sont identiques, donc la plante est homozygote. Étape 3 — Identifier : $T$ est dominant, $t$ récessif. Étape 4 — Appliquer la règle : sans allèle $T$, le récessif $t$ est en double exemplaire, il s'exprime. Étape 5 — Conclure : $[t]$, fruits jaunes. Hétérozygote serait faux : les deux allèles sont identiques.",
+                "answers": [
+                  {
+                    "content": "Homozygote, phénotype $[t]$ : fruits jaunes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Hétérozygote, phénotype $[t]$ : fruits jaunes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homozygote, phénotype $[T]$ : fruits rouges",
+                    "correct": false
+                  },
+                  {
+                    "content": "Hétérozygote, phénotype $[T]$ : fruits rouges",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la tomate (modèle simplifié), l'allèle $T$ (fruit rouge) est dominant sur l'allèle $t$ (fruit jaune). Quels génotypes donnent des fruits rouges ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Identifier : $T$ est dominant. Étape 4 — Appliquer la règle : il s'exprime dès qu'il est présent, en un ou deux exemplaires. Les génotypes $T//T$ (homozygote) et $T//t$ (hétérozygote) donnent donc le phénotype $[T]$. Étape 5 — Conclure : $t//t$ donne des fruits jaunes, et l'hétérozygote a bien des fruits rouges, car le dominant cache le récessif.",
+                "answers": [
+                  {
+                    "content": "$T//T$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$T//t$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$t//t$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un fruit rouge ne peut pas venir d'une plante hétérozygote",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque définition au mot qui convient.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Nommer l'état : homozygote veut dire deux allèles identiques, hétérozygote deux allèles différents. Étape 4 — Appliquer la règle : le dominant s'exprime dès qu'il est présent, le récessif seulement en double exemplaire.",
+                "answers": [
+                  {
+                    "content": "Allèle qui s'exprime même en un seul exemplaire",
+                    "match": "dominant"
+                  },
+                  {
+                    "content": "Allèle qui ne s'exprime qu'en double exemplaire",
+                    "match": "récessif"
+                  },
+                  {
+                    "content": "Individu dont les deux allèles du gène sont identiques",
+                    "match": "homozygote"
+                  },
+                  {
+                    "content": "Individu dont les deux allèles du gène sont différents",
+                    "match": "hétérozygote"
+                  }
+                ]
+              },
+              {
+                "content": "Chez la tomate (modèle simplifié), l'allèle $T$ (fruit rouge) est dominant sur l'allèle $t$ (fruit jaune). Une plante de génotype $T//t$ porte des fruits moitié rouges, moitié jaunes.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Appliquer la règle : $T$ est dominant, il s'exprime même en un seul exemplaire, et $t$ reste caché. Étape 5 — Conclure : le phénotype est $[T]$, tous les fruits sont rouges. L'hétérozygote n'est pas un mélange des deux phénotypes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez la tomate (modèle simplifié), l'allèle $T$ (fruit rouge) est dominant sur l'allèle $t$ (fruit jaune). Deux plants ont tous les deux des fruits rouges. Que peut-on affirmer sur leurs génotypes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Appliquer la règle : le phénotype $[T]$ s'obtient avec $T//T$ comme avec $T//t$. Étape 5 — Conclure : le phénotype ne donne pas le génotype. Un plant rouge peut être homozygote ou hétérozygote ; croire qu'ils ont le même génotype est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Chacun est $T//T$ ou $T//t$ : on ne peut pas savoir lequel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils sont forcément tous les deux $T//T$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils sont forcément tous les deux $T//t$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils ont forcément le même génotype",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier génotype et phénotype, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Chez la pastèque (modèle simplifié), l'allèle $B$ donne une écorce rayée et domine l'allèle $b$ qui donne une écorce unie. Une pastèque $b//b$ est ___ et une pastèque $B//b$ est ___.",
+                "question_type": "fill_blank",
+                "hint": "Homo- veut dire « identique », hétéro- veut dire « différent ».",
+                "explanation": "Étape 1 — Lire le génotype : $b//b$ a deux allèles identiques, $B//b$ deux allèles différents. Étape 2 — Nommer l'état : $b//b$ est homozygote, $B//b$ est hétérozygote.",
+                "answers": [
+                  {
+                    "content": "homozygote",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "hétérozygote",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Chez la pastèque (modèle simplifié), l'allèle $B$ (écorce rayée) est dominant sur l'allèle $b$ (écorce unie). Une pastèque $B//b$ a l'écorce rayée.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Identifier : $B$ est dominant. Étape 4 — Appliquer la règle : il s'exprime même en un seul exemplaire. Étape 5 — Conclure : le phénotype est $[B]$, écorce rayée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la pastèque (modèle simplifié), l'allèle $B$ (écorce rayée) est dominant sur l'allèle $b$ (écorce unie). Quel génotype faut-il pour avoir une écorce unie ?",
+                "question_type": "single_choice",
+                "hint": "Un allèle récessif ne s'exprime que si rien ne le cache.",
+                "explanation": "Étape 3 — Identifier : $b$ est récessif. Étape 4 — Appliquer la règle : il ne s'exprime qu'en double exemplaire, donc il faut $b//b$. Avec $B//b$, l'allèle $B$ cache $b$ et l'écorce est rayée.",
+                "answers": [
+                  {
+                    "content": "$b//b$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$B//b$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$B//B$",
+                    "correct": false
+                  },
+                  {
+                    "content": "N'importe quel génotype qui contient l'allèle $b$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une pastèque de génotype $B//B$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire le génotype : les deux allèles sont $B$ et $B$. Étape 2 — Nommer l'état : ils sont identiques, donc la pastèque est homozygote.",
+                "answers": [
+                  {
+                    "content": "homozygote",
+                    "correct": true
+                  },
+                  {
+                    "content": "hétérozygote",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer l'allèle dominant avec des lignées pures",
+          "remember": "Une **lignée pure** est une lignée dont les descendants ressemblent toujours aux parents pour le caractère étudié : ses individus sont **homozygotes**. Le **monohybridisme** est l'étude de la transmission d'**un seul** caractère. On croise deux lignées pures qui diffèrent par ce caractère : c'est la génération **P**. Leurs descendants forment la **F1**. Le croisement de deux individus de la F1 donne la **F2**. Résultats : la F1 est **homogène** (tous ses individus sont identiques) et ressemble à un seul des deux parents. Le phénotype qui apparaît en F1 est **dominant** ; l'autre, masqué en F1, réapparaît en F2 chez environ **1/4** des descendants, contre 3/4 pour le dominant. Les individus de la F1 sont **hétérozygotes**. Ces proportions se voient sur un grand nombre de descendants.",
+          "method": [
+            "Relever les phénotypes des deux parents de lignées pures et celui de la F1.",
+            "Repérer si la F1 est homogène et à quel parent elle ressemble.",
+            "Déduire l'allèle dominant, celui du phénotype de la F1, puis choisir les lettres : majuscule pour le dominant, minuscule pour le récessif.",
+            "Écrire les génotypes des parents (homozygotes) et celui de la F1 (hétérozygote).",
+            "Vérifier avec la F2 : environ 3/4 du phénotype dominant et 1/4 du récessif."
+          ],
+          "example": {
+            "statement": "Au champ, on croise une lignée pure de niébé à fleurs violettes et une lignée pure de niébé à fleurs blanches (expérience fictive, résultats simplifiés). Toutes les plantes de la F1 ont des fleurs violettes. Le croisement de deux plants de la F1 donne 400 plants en F2 : 300 à fleurs violettes et 100 à fleurs blanches. Déterminer l'allèle dominant et les génotypes.",
+            "steps": [
+              "Relever les phénotypes : parents violet et blanc, tous de lignée pure ; F1 : fleurs violettes.",
+              "Repérer : la F1 est homogène (100 % violettes) et ressemble au parent à fleurs violettes.",
+              "Déduire : l'allèle des fleurs violettes est dominant, noté $V$ ; celui des fleurs blanches est récessif, noté $v$.",
+              "Écrire les génotypes : parents $V//V$ et $v//v$ ; la F1 reçoit $V$ d'un parent et $v$ de l'autre, donc $V//v$.",
+              "Vérifier avec la F2 : 300 sur 400 font 3/4 de violettes et 100 sur 400 font 1/4 de blanches, comme prévu."
+            ]
+          },
+          "pitfall": "Ne crois pas que l'allèle récessif a disparu parce qu'il ne se voit pas en F1. Contre-exemple : en F1, toutes les fleurs sont violettes ; pourtant 100 plants sur 400 ont des fleurs blanches en F2. L'allèle $v$ était bien dans la F1 ($V//v$), seulement caché par $V$. Et ne choisis pas le dominant d'après le phénotype d'un parent ou d'un champ pris au hasard : le dominant est celui qui apparaît en F1.",
+          "figure": "croisement-lignees-pures",
+          "exercise": {
+            "title": "Lignées pures, F1 et F2 chez le pois",
+            "statement": "Dans cet exercice, tu détermines l'allèle dominant à partir d'un croisement de lignées pures, avec la méthode de la fiche. Les expériences sont fictives, aux résultats simplifiés.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On croise une lignée pure de pois à graines jaunes et une lignée pure de pois à graines vertes. Toutes les graines de la F1 sont jaunes. Quel est l'allèle dominant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever les phénotypes : parents jaune et vert, F1 jaune. Étape 2 — Repérer : la F1 est homogène et ressemble au parent à graines jaunes. Étape 3 — Déduire : le phénotype de la F1 est celui de l'allèle dominant, donc l'allèle des graines jaunes est dominant. Les graines vertes sont masquées en F1 : leur allèle est récessif.",
+                "answers": [
+                  {
+                    "content": "L'allèle des graines jaunes",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'allèle des graines vertes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux allèles sont dominants",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas le savoir avec la F1 seule",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez le pois, on note $J$ l'allèle dominant (graines jaunes) et $j$ l'allèle récessif (graines vertes). On croise une lignée pure à graines jaunes et une lignée pure à graines vertes. Quel est le génotype des plantes de la F1 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Écrire les génotypes : les parents de lignée pure sont $J//J$ et $j//j$. Chaque plante de la F1 reçoit $J$ d'un parent et $j$ de l'autre, donc $J//j$, hétérozygote. Elle a des graines jaunes parce que $J$ est dominant (Étape 3). La F1 est homogène : toutes les plantes ont le même génotype.",
+                "answers": [
+                  {
+                    "content": "$J//j$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$J//J$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$j//j$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$J//J$ pour la moitié des plantes et $j//j$ pour l'autre moitié",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez le pois, la F2 d'un croisement de lignées pures compte 800 graines : 600 jaunes et 200 vertes. Quel est le pourcentage de graines jaunes en F2 ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 5 — Vérifier avec la F2 : 600 graines jaunes sur 800 font 600 / 800 = 3/4, soit 75 %. Les 200 graines vertes font 1/4, soit 25 %. Ces proportions confirment que la F1 est hétérozygote, et que le jaune est dominant.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand on croise deux lignées pures qui diffèrent par un caractère, tous les individus de la F1 sont identiques entre eux.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer si la F1 est homogène : chaque parent de lignée pure est homozygote et ne donne qu'un type de gamète, donc tous les descendants reçoivent les mêmes allèles et ont le même génotype. La F1 est homogène.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour déterminer l'allèle dominant avec des lignées pures.",
+                "question_type": "ordering",
+                "explanation": "On suit l'ordre des étapes de la méthode : relever les phénotypes (Étape 1), repérer la F1 (Étape 2), déduire le dominant (Étape 3), écrire les génotypes (Étape 4), puis vérifier avec la F2 (Étape 5). On ne peut pas écrire les génotypes avant d'avoir déduit quel allèle est dominant.",
+                "answers": [
+                  {
+                    "content": "Relever les phénotypes des parents de lignées pures et celui de la F1"
+                  },
+                  {
+                    "content": "Repérer si la F1 est homogène et à quel parent elle ressemble"
+                  },
+                  {
+                    "content": "Déduire l'allèle dominant et choisir les lettres"
+                  },
+                  {
+                    "content": "Écrire les génotypes des parents et de la F1"
+                  },
+                  {
+                    "content": "Vérifier avec les proportions de la F2"
+                  }
+                ]
+              },
+              {
+                "content": "Dans une expérience fictive sur le haricot, la F1 d'un croisement de lignées pures a toutes des fleurs rouges, alors que l'un des parents avait des fleurs blanches. Un élève écrit : « l'allèle des fleurs blanches a disparu ». Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Écrire les génotypes : la F1 est hétérozygote, elle porte l'allèle des fleurs blanches. Étape 5 — Vérifier avec la F2 : l'allèle réapparaît chez environ 1/4 des plants de la F2. Le récessif n'a pas disparu, il est masqué par le dominant.",
+                "answers": [
+                  {
+                    "content": "Il est seulement caché par l'allèle dominant et peut réapparaître en F2",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : un allèle récessif est perdu quand il ne s'exprime pas en F1",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison, car les plants à fleurs blanches sont de lignée pure",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort, car les fleurs blanches sont dominantes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un croisement de lignées pures, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "On croise une lignée pure d'aubergine à fruits violets et une lignée pure d'aubergine à fruits blancs (expérience fictive). Tous les fruits de la F1 sont blancs. L'allèle dominant donne des fruits ___ et l'allèle récessif des fruits ___.",
+                "question_type": "fill_blank",
+                "hint": "Le phénotype qui apparaît en F1 est celui de l'allèle dominant.",
+                "explanation": "Étape 2 — Repérer : la F1 est homogène et ressemble au parent à fruits blancs. Étape 3 — Déduire : le phénotype de la F1 est celui de l'allèle dominant, donc le dominant donne des fruits blancs et le récessif des fruits violets.",
+                "answers": [
+                  {
+                    "content": "blancs",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "blanc",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "violets",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "violet",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Chez l'aubergine, un allèle récessif donne des fruits violets. On croise deux plants de la F1, tous hétérozygotes. Si les proportions attendues sont respectées exactement, combien de plants à fruits violets compte-t-on sur 400 plants de la F2 ?",
+                "question_type": "numeric",
+                "unit": "plants",
+                "tolerance": 0,
+                "explanation": "Étape 5 — Vérifier avec la F2 : le phénotype récessif représente 1/4 des plants de la F2. Donc 400 x 1/4 = 100 plants à fruits violets. Les 300 autres plants ont l'allèle dominant.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les plantes de la F1 issues du croisement de deux lignées pures sont homozygotes.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Écrire les génotypes : la F1 reçoit un allèle de chaque parent, un dominant et un récessif. Elle est donc hétérozygote, et non homozygote. Ce sont les parents de lignée pure qui sont homozygotes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez l'aubergine (modèle simplifié), les lignées pures sont $B//B$ (fruits blancs, dominant) et $b//b$ (fruits violets, récessif). Quel est le génotype de la F1 ?",
+                "question_type": "single_choice",
+                "hint": "Chaque plante de la F1 reçoit un allèle de chaque parent.",
+                "explanation": "Étape 4 — Écrire les génotypes : la F1 reçoit $B$ d'un parent et $b$ de l'autre, donc $B//b$. Elle a des fruits blancs parce que $B$ est dominant (Étape 3).",
+                "answers": [
+                  {
+                    "content": "$B//b$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$B//B$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$b//b$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$B//B$ ou $b//b$ selon la plante",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Prévoir un croisement avec l'échiquier",
+          "remember": "Les deux chromosomes d'une paire se séparent quand l'individu forme ses **gamètes** (cellules reproductrices) : chaque gamète ne porte donc qu'**un seul allèle** du gène. Un individu homozygote ($R//R$) forme un seul type de gamètes ; un hétérozygote ($R//r$) en forme deux types, en proportions égales : 1/2 de $R$ et 1/2 de $r$. La **fécondation** réunit au hasard un gamète d'un parent et un gamète de l'autre. L'**échiquier de croisement** est un tableau : les gamètes d'un parent en lignes, ceux de l'autre en colonnes, chaque case étant un descendant possible. La fraction d'un génotype est le nombre de ses cases sur le nombre total de cases. Exemples : $R//r \\times R//r$ donne 1/4 de $R//R$, 2/4 de $R//r$ et 1/4 de $r//r$, soit 3/4 de $[R]$ et 1/4 de $[r]$ ; $R//r \\times r//r$ donne 1/2 de $R//r$ et 1/2 de $r//r$. Ces fractions sont des probabilités, valables pour chaque fécondation.",
+          "method": [
+            "Écrire les génotypes des deux parents.",
+            "Écrire les gamètes de chaque parent, un seul allèle par gamète, avec leurs proportions.",
+            "Construire l'échiquier : les gamètes d'un parent en lignes, ceux de l'autre en colonnes, un descendant par case.",
+            "Lire les génotypes de la descendance et leurs fractions (cases du génotype sur nombre total de cases).",
+            "Déduire les phénotypes et leurs fractions avec la dominance, puis conclure."
+          ],
+          "example": {
+            "statement": "Chez le piment (modèle simplifié), l'allèle $R$ (fruits rouges) est dominant sur l'allèle $r$ (fruits jaunes). On croise deux piments à fruits rouges de génotype $R//r$. Prévoir la descendance.",
+            "steps": [
+              "Écrire les génotypes : les deux parents sont $R//r$.",
+              "Écrire les gamètes : chaque parent forme des gamètes $R$ (1/2) ou $r$ (1/2), un seul allèle par gamète.",
+              "Construire l'échiquier : 4 cases, $R//R$, $R//r$, $r//R$ (qu'on écrit aussi $R//r$) et $r//r$.",
+              "Lire les génotypes : $R//R$ 1/4, $R//r$ 2/4 et $r//r$ 1/4.",
+              "Déduire les phénotypes : $[R]$ = 1/4 + 2/4 = 3/4 de fruits rouges ; $[r]$ = 1/4 de fruits jaunes. Conclusion : 3/4 rouges, 1/4 jaunes."
+            ]
+          },
+          "pitfall": "Ne lis pas 1/4 comme « exactement 1 descendant sur 4 ». Contre-exemple : sur 4 graines de piment issues de $R//r \\times R//r$, on peut obtenir 0, 1, 2 fruits jaunes ou davantage ; le rapport 3/4 – 1/4 se vérifie sur un grand nombre de descendants (sur 400 plants, environ 100 fruits jaunes). N'écris jamais un gamète à deux allèles : « $R//r$ » n'est pas un gamète, c'est $R$ ou $r$. Et $r//R$ et $R//r$ sont le même génotype.",
+          "figure": "echiquier-heterozygotes",
+          "exercise": {
+            "title": "Échiquier de croisement chez la courge",
+            "statement": "Dans cet exercice, tu prévois la descendance d'un croisement avec l'échiquier, en suivant la méthode de la fiche. Les situations sont des modèles simplifiés.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Chez la courge (modèle simplifié), un plant a le génotype $S//s$. Quels gamètes forme-t-il, et avec quelles proportions ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire les gamètes : les deux allèles d'une paire se séparent, chaque gamète n'en porte qu'un. Un plant $S//s$ forme donc des gamètes $S$ et des gamètes $s$, 1/2 chacun. Le dominant ne s'impose pas dans les gamètes : il ne s'exprime que dans le phénotype.",
+                "answers": [
+                  {
+                    "content": "Des gamètes $S$ et des gamètes $s$, chacun avec la probabilité 1/2",
+                    "correct": true
+                  },
+                  {
+                    "content": "Uniquement des gamètes $S$, car $S$ est dominant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des gamètes $S//s$, qui portent les deux allèles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des gamètes $S//S$ et des gamètes $s//s$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la courge, on croise deux plants de génotype $S//s$. L'échiquier de croisement compte 4 cases. Combien de cases sont $S//S$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Écrire les gamètes : chaque parent forme $S$ ou $s$. Étape 3 — Construire l'échiquier : les 4 cases sont $S//S$, $S//s$, $s//S$ et $s//s$. Étape 4 — Lire les génotypes : une seule case est $S//S$, soit 1/4. Les cases $S//s$ et $s//S$ sont le même génotype, elles comptent ensemble pour 2/4.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez la courge (modèle simplifié), l'allèle $S$ (fruits lisses) est dominant sur l'allèle $s$ (fruits verruqueux). On croise deux plants $S//s$. Quelles proportions attend-on dans la descendance ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Lire les génotypes : $S//S$ 1/4, $S//s$ 2/4, $s//s$ 1/4. Étape 5 — Déduire les phénotypes : les fruits lisses sont $[S]$, soit 1/4 + 2/4 = 3/4 ; les fruits verruqueux sont $s//s$ seulement, soit 1/4. Les proportions 1/2 – 1/2 viendraient d'un autre croisement, avec un parent $s//s$.",
+                "answers": [
+                  {
+                    "content": "3/4 de plants à fruits lisses",
+                    "correct": true
+                  },
+                  {
+                    "content": "1/4 de plants à fruits verruqueux",
+                    "correct": true
+                  },
+                  {
+                    "content": "1/2 de plants à fruits lisses et 1/2 à fruits verruqueux",
+                    "correct": false
+                  },
+                  {
+                    "content": "3/4 de plants à fruits verruqueux",
+                    "correct": false
+                  },
+                  {
+                    "content": "1/4 de plants à fruits lisses",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la courge (modèle simplifié), l'allèle $S$ (fruits lisses) est dominant sur l'allèle $s$ (fruits verruqueux). On croise un plant $S//s$ avec un plant $s//s$. Quelle fraction de la descendance a des fruits verruqueux ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les génotypes : $S//s$ et $s//s$. Étape 2 — Écrire les gamètes : le premier forme $S$ ou $s$, le second ne forme que $s$. Étape 3 — Construire l'échiquier : 2 cases, $S//s$ et $s//s$. Étape 4 — Lire : 1 case sur 2 est $s//s$. Étape 5 — Déduire : 1/2 de fruits verruqueux et 1/2 de fruits lisses.",
+                "answers": [
+                  {
+                    "content": "1/2",
+                    "correct": true
+                  },
+                  {
+                    "content": "1/4",
+                    "correct": false
+                  },
+                  {
+                    "content": "3/4",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune, car $S$ est dominant",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la courge (modèle simplifié), l'allèle $S$ (fruits lisses) est dominant sur l'allèle $s$ (fruits verruqueux). On croise un plant $S//S$ avec un plant $s//s$. Que donne la descendance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les génotypes : $S//S$ et $s//s$. Étape 2 — Écrire les gamètes : le premier ne forme que $S$, le second que $s$. Étape 3 — Construire l'échiquier : une seule case possible, $S//s$. Étape 5 — Déduire : tous les descendants sont hétérozygotes, à fruits lisses.",
+                "answers": [
+                  {
+                    "content": "Tous les plants sont $S//s$ et ont des fruits lisses",
+                    "correct": true
+                  },
+                  {
+                    "content": "La moitié des plants est $S//S$, l'autre moitié $s//s$",
+                    "correct": false
+                  },
+                  {
+                    "content": "3/4 de fruits lisses et 1/4 de fruits verruqueux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tous les plants sont $S//S$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la courge, on croise deux plants de génotype $S//s$. Sur 4 plants obtenus, il y a forcément exactement 1 plant à fruits verruqueux.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Lire les génotypes : la fraction 1/4 pour $s//s$ est une probabilité, valable à chaque fécondation. Sur seulement 4 plants, on peut en avoir 0, 2 ou davantage. Le rapport 3/4 – 1/4 ne se vérifie que sur un grand nombre de descendants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à construire et à lire un échiquier de croisement, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Chez l'arachide (modèle simplifié), on croise deux plants de génotype $A//a$, l'allèle $A$ étant dominant. La descendance compte 1/4 de $A//A$, ___/4 de $A//a$ et 1/4 de $a//a$ ; donc ___/4 des plants ont le phénotype dominant.",
+                "question_type": "fill_blank",
+                "hint": "Les cases $A//a$ et $a//A$ désignent le même génotype.",
+                "explanation": "Étape 3 — Construire l'échiquier : 4 cases, $A//A$, $A//a$, $a//A$ et $a//a$. Étape 4 — Lire les génotypes : $A//a$ occupe 2 cases sur 4. Étape 5 — Déduire les phénotypes : le phénotype dominant correspond à 1/4 + 2/4 = 3/4 des plants.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "trois",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque parent au type de gamètes qu'il forme.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Écrire les gamètes : un gamète ne porte qu'un allèle. Un homozygote n'a qu'une sorte d'allèle à donner, dominant ou récessif ; un hétérozygote donne l'un ou l'autre de ses deux allèles, avec la probabilité 1/2 chacun.",
+                "answers": [
+                  {
+                    "content": "Parent homozygote pour l'allèle dominant",
+                    "match": "un seul type de gamètes, tous porteurs de l'allèle dominant"
+                  },
+                  {
+                    "content": "Parent homozygote pour l'allèle récessif",
+                    "match": "un seul type de gamètes, tous porteurs de l'allèle récessif"
+                  },
+                  {
+                    "content": "Parent hétérozygote",
+                    "match": "deux types de gamètes en proportions égales, 1/2 et 1/2"
+                  }
+                ]
+              },
+              {
+                "content": "Un gamète d'un plant $A//a$ porte les deux allèles $A$ et $a$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire les gamètes : les deux allèles d'une paire se séparent à la formation des gamètes. Un gamète ne porte donc qu'un seul allèle, $A$ ou $a$. Un gamète $A//a$ n'existe pas : c'est le zygote qui a deux allèles.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez l'arachide (modèle simplifié), on croise deux plants $A//a$. Si les proportions attendues sont respectées exactement, combien de plants $a//a$ attend-on sur 800 plants ?",
+                "question_type": "numeric",
+                "unit": "plants",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Lire les génotypes : $a//a$ occupe 1 case sur 4, soit 1/4 de la descendance. Étape 5 — Conclure : 800 x 1/4 = 200 plants $a//a$ attendus. Ce nombre n'est une prévision que pour un grand nombre de plants.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche la fraction de $a//a$ dans l'échiquier."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un caractère lié à un autosome",
+          "remember": "Les **autosomes** sont les chromosomes identiques chez la femme et chez l'homme (22 paires dans l'espèce humaine). Un gène situé sur un autosome est présent en **deux exemplaires chez tous les individus**, quel que soit leur sexe, et se transmet de la même façon par le père et par la mère. Deux conséquences : un **croisement réciproque** (on inverse le rôle des parents : chez une plante, le pollen de A sur les fleurs de B, puis le pollen de B sur les fleurs de A) donne les **mêmes résultats** ; et les proportions de phénotypes sont les mêmes chez les mâles et chez les femelles. Exemple : la **drépanocytose** est une maladie héréditaire du sang, due à une forme anormale de l'hémoglobine. Son allèle $S$ est récessif sur l'allèle normal $A$ et le gène est sur un autosome : $A//A$ est sain, $A//S$ est un **porteur sain**, $S//S$ est malade. Filles et garçons sont touchés avec la même probabilité.",
+          "method": [
+            "Relever les résultats du premier croisement : phénotypes des parents et de la descendance.",
+            "Relever ceux du croisement réciproque, où l'on a inversé le rôle des parents.",
+            "Comparer les deux résultats, puis les proportions chez les mâles et chez les femelles quand le caractère concerne les deux sexes.",
+            "Conclure : des résultats identiques dans les deux sens et chez les deux sexes montrent que le gène est porté par un autosome."
+          ],
+          "example": {
+            "statement": "Dans une pépinière, on étudie la couleur des pétales de l'hibiscus (expérience fictive, résultats simplifiés). Croisement 1 : le pollen d'une lignée pure à pétales pourpres est déposé sur les fleurs d'une lignée pure à pétales blancs ; la F1 est à 100 % pourpre. Croisement 2, réciproque : le pollen de la lignée blanche est déposé sur les fleurs de la lignée pourpre ; la F1 est à 100 % pourpre. Le gène est-il porté par un autosome ?",
+            "steps": [
+              "Relever le premier croisement : parents pourpre et blanc de lignée pure, F1 à 100 % pourpre.",
+              "Relever le croisement réciproque : le rôle des parents est inversé (pollen blanc sur fleurs pourpres), F1 à 100 % pourpre.",
+              "Comparer : les deux croisements donnent le même résultat ; les plantes n'ayant pas de sexe séparé, il n'y a pas de comparaison mâles et femelles à faire.",
+              "Conclure : les résultats sont identiques dans les deux sens, donc le gène de la couleur des pétales est porté par un autosome."
+            ]
+          },
+          "pitfall": "Ne conclus pas sur un trop petit nombre de descendants. Contre-exemple : dans une famille de 3 enfants, 3 garçons sont atteints d'une maladie héréditaire ; ce n'est pas une preuve que la maladie épargne les filles, car avoir 3 garçons sur 3 enfants arrive avec la probabilité 1/2 x 1/2 x 1/2 = 1/8. Il faut comparer des croisements nombreux. Et ne dis pas que « autosomique » veut dire « rare » ou « sans danger » : cela veut seulement dire que le gène est sur un autosome.",
+          "figure": null,
+          "exercise": {
+            "title": "Autosome, croisement réciproque, drépanocytose",
+            "statement": "Dans cet exercice, tu reconnais un caractère lié à un autosome, avec la méthode de la fiche. Les expériences sont fictives, aux résultats simplifiés.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Qu'est-ce qu'un autosome ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : le gène sur un autosome est en deux exemplaires chez tous les individus, parce que les autosomes sont les chromosomes identiques dans les deux sexes (22 paires dans l'espèce humaine, acquis du caryotype). Un autosome est un chromosome, pas un gène, et il n'est pas propre à un sexe.",
+                "answers": [
+                  {
+                    "content": "Un chromosome non sexuel, présent en deux exemplaires chez la femme comme chez l'homme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un chromosome présent seulement chez la femme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un chromosome présent seulement chez l'homme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un gène qui commande la couleur des fleurs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un gène situé sur un autosome est présent en deux exemplaires chez les garçons comme chez les filles.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : les autosomes sont les mêmes dans les deux sexes. Étape 4 — Conclure : un gène autosomique est en double exemplaire chez tous, garçons et filles, et les deux sexes l'expriment de la même manière.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un champ, on réalise deux croisements : le pollen d'un plant A est déposé sur les fleurs d'un plant B, puis, dans l'autre sens, le pollen de B sur les fleurs de A. Comment appelle-t-on ces deux croisements ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever le croisement réciproque : on inverse le rôle des parents, ici pollen de A sur B, puis pollen de B sur A. C'est la définition du croisement réciproque.",
+                "answers": [
+                  {
+                    "content": "Des croisements réciproques",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des croisements entre lignées pures",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des échiquiers de croisement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des croisements entre hétérozygotes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un champ, on croise une lignée pure de gombo à fruits verts et une lignée pure à fruits blancs (expérience fictive). Croisement 1 (pollen de la lignée verte sur la lignée blanche) : F1 à 100 % verte. Croisement 2, réciproque : F1 à 100 % verte. Que conclure sur le gène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever le premier croisement : F1 à 100 % verte. Étape 2 — Relever le réciproque : F1 à 100 % verte. Étape 3 — Comparer : les deux résultats sont identiques. Étape 4 — Conclure : le gène est porté par un autosome. Les plantes n'ont pas à être séparées en mâles et en femelles pour cette comparaison.",
+                "answers": [
+                  {
+                    "content": "Il est porté par un autosome, car les deux sens donnent le même résultat",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il n'est pas porté par un autosome, car les deux F1 sont identiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien conclure, car il faudrait des mâles et des femelles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est porté par un autosome seulement si la F1 est blanche",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La drépanocytose est une maladie héréditaire dont le gène est porté par un autosome ; l'allèle normal $A$ est dominant sur l'allèle $S$ de la maladie, récessif. Un couple $A//S$ et $A//S$ attend un enfant. Quelles affirmations sont justes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : un gène autosomique a les mêmes règles dans les deux sexes, donc même probabilité et même double exemplaire. Étape 4 — Conclure : la maladie n'est pas réservée aux garçons. Un enfant $A//S$ est un porteur sain, car $A$ est dominant, et un enfant $S//S$ est malade.",
+                "answers": [
+                  {
+                    "content": "Une fille et un garçon ont la même probabilité d'être malades",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le gène de la maladie est présent en deux exemplaires chez la fille comme chez le garçon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Seuls les garçons peuvent être malades",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un enfant $S//S$ est un porteur sain",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un enfant $A//S$ est forcément malade",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille de 5 enfants, les 3 garçons sont atteints d'une maladie héréditaire récessive et les 2 filles sont saines. Un élève conclut aussitôt que la maladie n'est pas autosomique. Que penser de cette conclusion ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : il faut des effectifs nombreux. Avec 5 enfants dans une seule famille, le hasard suffit à expliquer l'écart. Étape 4 — Conclure : on ne peut pas conclure sur une seule famille. Croire qu'un hasard est une règle est la faute du piège.",
+                "answers": [
+                  {
+                    "content": "Elle est trop rapide : un si petit nombre d'enfants ne permet pas de conclure",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est juste, car aucune fille n'est atteinte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est juste, car les garçons sont plus nombreux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est fausse, car une maladie autosomique touche toujours un enfant sur deux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un gène porté par un autosome, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un autosome est présent en ___ exemplaires chez la femme et en ___ exemplaires chez l'homme.",
+                "question_type": "fill_blank",
+                "hint": "Les chromosomes sont par paires, et les autosomes sont les mêmes dans les deux sexes.",
+                "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : chaque paire d'autosomes compte deux chromosomes, chez la femme comme chez l'homme. Étape 4 — Conclure : un gène autosomique est donc en deux exemplaires dans les deux sexes.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un croisement réciproque inverse le rôle des deux parents.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever le croisement réciproque : par exemple, le pollen de A sur les fleurs de B devient le pollen de B sur les fleurs de A. Le rôle des parents est inversé.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un élevage, une maladie héréditaire autosomique touche 12 filles et 11 garçons sur 400 individus étudiés. Que peut-on dire de la répartition entre les sexes ?",
+                "question_type": "single_choice",
+                "hint": "Compare les deux nombres : l'écart est-il important ?",
+                "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : 12 et 11 sont presque égaux. Étape 4 — Conclure : une répartition à peu près égale va avec un gène porté par un autosome. Un écart d'un individu sur 400 ne montre aucune préférence pour un sexe.",
+                "answers": [
+                  {
+                    "content": "Elle est à peu près égale entre filles et garçons, comme prévu pour un autosome",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle montre que la maladie touche surtout les filles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle montre que la maladie touche surtout les garçons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle prouve que la maladie n'est pas héréditaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Awa est porteuse saine de la drépanocytose, maladie héréditaire dont le gène est porté par un autosome ($A$ allèle normal, dominant ; $S$ allèle de la maladie, récessif). Quel est son génotype ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : un porteur sain a un allèle normal $A$ qui cache l'allèle $S$ récessif, donc $A//S$. $S//S$ est le génotype d'une personne malade, $A//A$ celui d'une personne sans l'allèle $S$.",
+                "answers": [
+                  {
+                    "content": "$A//S$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S//S$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//S$ pour un garçon et $S//S$ pour une fille",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le champ de haricots de maman Affoué",
+          "statement": "Maman Affoué cultive des haricots. Elle étudie un caractère de la graine (expérience fictive, résultats simplifiés) : elle croise une lignée pure à graines marron et une lignée pure à graines blanches. Toutes les graines de la F1 sont marron. Le croisement de deux plants de la F1 donne une F2 de 600 plants : 450 à graines marron et 150 à graines blanches.",
+          "exercise_type": "fixation",
+          "figure": "f2-haricot-marron",
+          "questions": [
+            {
+              "content": "Dans une expérience fictive sur le haricot, une lignée pure à graines marron et une lignée pure à graines blanches donnent une F1 à 100 % de graines marron. Quel est l'allèle dominant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des lignées pures : Étape 1 — Relever les phénotypes : parents marron et blanc, F1 marron. Étape 2 — Repérer : la F1 est homogène et ressemble au parent à graines marron. Étape 3 — Déduire : le phénotype de la F1 est celui de l'allèle dominant, donc le marron est dominant. La F2 n'est pas nécessaire pour trouver le dominant : elle sert à vérifier.",
+              "answers": [
+                {
+                  "content": "L'allèle des graines marron",
+                  "correct": true
+                },
+                {
+                  "content": "L'allèle des graines blanches",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun des deux : ils s'expriment à égalité",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas le savoir sans la F2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le haricot (expérience fictive), on note $M$ l'allèle dominant (graines marron) et $m$ l'allèle récessif (graines blanches). On croise une lignée pure à graines marron et une lignée pure à graines blanches. Quels sont les génotypes des parents, puis de la F1 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Écrire les génotypes : une lignée pure est homozygote, donc les parents sont $M//M$ et $m//m$. Chaque plant de la F1 reçoit $M$ d'un parent et $m$ de l'autre, donc $M//m$. Il a des graines marron parce que $M$ est dominant (Étape 3). Un parent $M//m$ ne serait pas de lignée pure.",
+              "answers": [
+                {
+                  "content": "Parents $M//M$ et $m//m$ ; F1 $M//m$",
+                  "correct": true
+                },
+                {
+                  "content": "Parents $M//m$ et $m//m$ ; F1 $M//m$",
+                  "correct": false
+                },
+                {
+                  "content": "Parents $M//M$ et $m//m$ ; F1 $M//M$",
+                  "correct": false
+                },
+                {
+                  "content": "Parents $M//M$ et $M//m$ ; F1 $m//m$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le haricot (expérience fictive), une F2 compte 600 plants : 450 à graines marron et 150 à graines blanches. Quel est le pourcentage de plants à graines blanches ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 5 — Vérifier avec la F2 : 150 plants blancs sur 600 font 150 / 600 = 1/4, soit 25 %. Les 450 plants marron font 3/4, soit 75 %. C'est la proportion attendue pour la F2 d'un croisement de lignées pures, ce qui confirme que la F1 est hétérozygote.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez le haricot, on croise deux plants de la F1, de génotype $M//m$ ($M$ marron dominant, $m$ blanc récessif). Quelle est la probabilité qu'un plant obtenu ait des graines blanches ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de l'échiquier : Étape 1 — Écrire les génotypes : $M//m$ et $M//m$. Étape 2 — Écrire les gamètes : $M$ (1/2) ou $m$ (1/2) pour chaque parent. Étape 3 — Construire l'échiquier : $M//M$, $M//m$, $m//M$, $m//m$. Étape 4 — Lire : une case sur 4 est $m//m$. Étape 5 — Déduire : les graines blanches ont une probabilité de 1/4, ce que la F2 observée confirme (150 sur 600).",
+              "answers": [
+                {
+                  "content": "1/4",
+                  "correct": true
+                },
+                {
+                  "content": "1/2",
+                  "correct": false
+                },
+                {
+                  "content": "3/4",
+                  "correct": false
+                },
+                {
+                  "content": "1",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le haricot (expérience fictive), $M$ (graines marron) est dominant sur $m$ (graines blanches). On croise deux plants de la F1, de génotype $M//m$. Quels génotypes une plante de la F2 à graines marron peut-elle avoir ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de l'échiquier : Étape 4 — Lire les génotypes : dans l'échiquier $M//m \\times M//m$, on trouve $M//M$ (1/4), $M//m$ (2/4) et $m//m$ (1/4). Étape 5 — Déduire les phénotypes avec la dominance : $M$ s'exprime en un ou deux exemplaires, donc les graines marron regroupent $M//M$ et $M//m$, soit 3/4 ; $m//m$ donne des graines blanches. « Uniquement $M//M$ » oublie les hétérozygotes, qui sont les plus nombreux.",
+              "answers": [
+                {
+                  "content": "$M//M$",
+                  "correct": true
+                },
+                {
+                  "content": "$M//m$",
+                  "correct": true
+                },
+                {
+                  "content": "$m//m$",
+                  "correct": false
+                },
+                {
+                  "content": "Uniquement $M//M$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le haricot (expérience fictive), une lignée pure à graines marron et une lignée pure à graines blanches donnent une F1 à 100 % de graines marron. Les plants de la F2 à graines blanches sont tous homozygotes.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Déduire : l'allèle des graines blanches est récessif, il ne s'exprime qu'en double exemplaire. Les plants à graines blanches sont donc $m//m$, homozygotes. C'est la case $m//m$ de l'échiquier, 1/4 des plants de la F2.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un couple et le risque de drépanocytose",
+          "statement": "La drépanocytose est une maladie héréditaire du sang, due à une forme anormale de l'hémoglobine, la protéine des globules rouges. Son gène est porté par un autosome. L'allèle normal est noté $A$ ; l'allèle de la maladie, noté $S$, est récessif. Awa et Koffi, tous deux sains, ont un premier enfant malade ($S//S$) et se demandent ce qui les attend pour un deuxième enfant. Un conseil génétique les informe : la décision leur appartient ensuite.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le gène de la drépanocytose est porté par un autosome ; l'allèle normal $A$ est dominant sur l'allèle $S$ de la maladie, récessif. Awa et Koffi sont sains et ont un enfant malade $S//S$. Quels sont leurs génotypes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de l'échiquier, Étape 1 — Écrire les génotypes des deux parents : l'enfant $S//S$ a reçu un $S$ de chaque parent, donc chacun porte au moins un $S$. Comme ils sont sains et que $S$ est récessif, aucun n'est $S//S$ : ils sont $A//S$. Si l'un était $A//A$, l'enfant n'aurait pas pu recevoir de $S$ de sa part.",
+              "answers": [
+                {
+                  "content": "Awa et Koffi sont tous les deux $A//S$",
+                  "correct": true
+                },
+                {
+                  "content": "Awa et Koffi sont tous les deux $A//A$",
+                  "correct": false
+                },
+                {
+                  "content": "Awa et Koffi sont tous les deux $S//S$",
+                  "correct": false
+                },
+                {
+                  "content": "L'un est $A//A$ et l'autre $S//S$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa et Koffi sont tous deux $A//S$. Quelle est la probabilité, en pourcentage, que leur prochain enfant soit malade ($S//S$) ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Écrire les gamètes : chaque parent forme $A$ (1/2) ou $S$ (1/2). Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Lire : 1 case sur 4 est $S//S$, soit 1/4 = 25 %. Étape 5 — Conclure : le risque est de 25 % pour chaque grossesse.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa et Koffi sont tous deux $A//S$. Quelle est la probabilité que leur prochain enfant soit porteur sain ($A//S$) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Construire l'échiquier : les cases sont $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Lire : $A//S$ et $S//A$ sont le même génotype, soit 2 cases sur 4. Le résultat 3/4 serait la probabilité d'avoir un enfant sain, porteur ou non ($A//A$ ou $A//S$), et non celle d'un porteur seulement.",
+              "answers": [
+                {
+                  "content": "2/4, soit 1/2",
+                  "correct": true
+                },
+                {
+                  "content": "1/4",
+                  "correct": false
+                },
+                {
+                  "content": "3/4",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gène de la drépanocytose est porté par un autosome. Pour un couple dont les deux membres sont $A//S$, le risque d'avoir un enfant malade ($S//S$) est le même pour une fille et pour un garçon.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Comparer chez les mâles et chez les femelles : le gène est sur un autosome, présent en deux exemplaires dans les deux sexes. Pour chaque enfant, fille ou garçon, l'échiquier est le même et le risque est 1/4.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam est $A//S$ et son mari Yves est $A//A$. Quelle est la probabilité que leur enfant soit malade ($S//S$) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Écrire les gamètes : Mariam forme $A$ ou $S$ ; Yves ne forme que $A$. Étape 3 — Construire l'échiquier : 2 cases, $A//A$ et $A//S$. Étape 4 — Lire : aucune case n'est $S//S$. Les enfants sont sains ; la moitié d'entre eux, $A//S$, sont porteurs sains.",
+              "answers": [
+                {
+                  "content": "0 : aucun enfant ne peut être $S//S$",
+                  "correct": true
+                },
+                {
+                  "content": "1/4",
+                  "correct": false
+                },
+                {
+                  "content": "1/2",
+                  "correct": false
+                },
+                {
+                  "content": "Elle dépend du sexe de l'enfant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa et Koffi, tous deux $A//S$, ont eu un premier enfant atteint de drépanocytose ($S//S$). Awa dit à Koffi : « Le prochain ne risque rien, nous avons déjà eu notre part de malchance. » Que répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Lire les génotypes : l'échiquier de $A//S \\times A//S$ ne dépend pas des naissances passées. Pour chaque fécondation, $S//S$ a une probabilité de 1/4. Le premier enfant malade n'« épuise » pas le risque, et ne l'augmente pas non plus.",
+              "answers": [
+                {
+                  "content": "Le risque reste de 1/4 à chaque grossesse, car le hasard ne garde pas de mémoire",
+                  "correct": true
+                },
+                {
+                  "content": "Le risque tombe à 0, comme elle le dit",
+                  "correct": false
+                },
+                {
+                  "content": "Le risque augmente, car le premier enfant a déjà été malade",
+                  "correct": false
+                },
+                {
+                  "content": "Le risque vaut 3/4",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Croisements réciproques dans une plantation de cacaoyers",
+          "statement": "Dans une plantation (expérience fictive, résultats simplifiés), on étudie la couleur des cabosses du cacaoyer. L'allèle $R$ donne des cabosses rouges et domine l'allèle $r$, qui donne des cabosses jaunes. On croise une lignée pure à cabosses rouges et une lignée pure à cabosses jaunes, dans les deux sens : pollen de la lignée rouge sur la lignée jaune, puis pollen de la lignée jaune sur la lignée rouge. Les deux F1 sont à 100 % rouges. On croise ensuite un plant de la F1 avec un cacaoyer à cabosses jaunes.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Chez le cacaoyer (expérience fictive), le pollen d'une lignée pure à cabosses rouges déposé sur une lignée pure à cabosses jaunes donne une F1 à 100 % rouge ; dans l'autre sens, le pollen de la lignée jaune sur la lignée rouge donne aussi une F1 à 100 % rouge. Que conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du caractère lié à un autosome : Étape 1 — Relever le premier croisement : F1 100 % rouge. Étape 2 — Relever le croisement réciproque, rôles inversés : F1 100 % rouge. Étape 3 — Comparer : résultats identiques. Étape 4 — Conclure : le gène est porté par un autosome. Le rouge est dominant, non récessif : il apparaît en F1.",
+              "answers": [
+                {
+                  "content": "Le gène est porté par un autosome, car le croisement réciproque donne le même résultat",
+                  "correct": true
+                },
+                {
+                  "content": "Le gène n'est pas porté par un autosome, car l'une des lignées est jaune",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut rien conclure, car il manque la F2",
+                  "correct": false
+                },
+                {
+                  "content": "Le gène est récessif, car la F1 est rouge",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le cacaoyer, $R$ (cabosses rouges) est dominant sur $r$ (cabosses jaunes). On croise une lignée pure rouge et une lignée pure jaune. Quel est le génotype de la F1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des lignées pures : Étape 4 — Écrire les génotypes : les parents sont $R//R$ et $r//r$ (lignées pures, homozygotes). La F1 reçoit $R$ d'un parent et $r$ de l'autre, donc $R//r$, à cabosses rouges parce que $R$ est dominant (Étape 3).",
+              "answers": [
+                {
+                  "content": "$R//r$",
+                  "correct": true
+                },
+                {
+                  "content": "$R//R$",
+                  "correct": false
+                },
+                {
+                  "content": "$r//r$",
+                  "correct": false
+                },
+                {
+                  "content": "$R//R$ ou $r//r$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un cacaoyer de génotype $R//r$ forme des gamètes $R$ et $r$ en proportions égales : 1/2 de gamètes $R$ et ___ de gamètes $r$.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de l'échiquier, Étape 2 — Écrire les gamètes : un hétérozygote forme deux types de gamètes, un seul allèle par gamète, en proportions égales. Il y a donc 1/2 de gamètes $R$ et 1/2 de gamètes $r$.",
+              "answers": [
+                {
+                  "content": "1/2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez le cacaoyer, $R$ (cabosses rouges) est dominant sur $r$ (cabosses jaunes). On croise un plant $R//r$ avec un plant $r//r$. Quelles proportions de descendants attend-on ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire les génotypes : $R//r$ et $r//r$. Étape 2 — Écrire les gamètes : $R$ ou $r$ pour le premier, seulement $r$ pour le second. Étape 3 — Construire l'échiquier : 2 cases, $R//r$ et $r//r$. Étape 4 — Lire : 1/2 et 1/2. Étape 5 — Déduire : $R//r$ donne des cabosses rouges, $r//r$ des cabosses jaunes. Les proportions 3/4 – 1/4 viennent du croisement de deux hétérozygotes.",
+              "answers": [
+                {
+                  "content": "1/2 à cabosses rouges et 1/2 à cabosses jaunes",
+                  "correct": true
+                },
+                {
+                  "content": "3/4 à cabosses rouges et 1/4 à cabosses jaunes",
+                  "correct": false
+                },
+                {
+                  "content": "Tous à cabosses rouges",
+                  "correct": false
+                },
+                {
+                  "content": "Tous à cabosses jaunes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le cacaoyer, on croise un plant de la F1 $R//r$ avec un plant $r//r$ à cabosses jaunes. On obtient 98 plants à cabosses rouges et 102 à cabosses jaunes. Ce résultat est-il compatible avec la prévision de l'échiquier ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Lire les fractions : l'échiquier de $R//r \\times r//r$ donne 1/2 et 1/2. Sur 200 plants, on attend environ 100 rouges et 100 jaunes. Étape 5 — Conclure : 98 et 102 sont proches de 100 et 100, donc le résultat confirme que le plant de la F1 est hétérozygote.",
+              "answers": [
+                {
+                  "content": "Oui : on attendait environ 100 plants de chaque sorte",
+                  "correct": true
+                },
+                {
+                  "content": "Non : on attendait 150 plants rouges et 50 jaunes",
+                  "correct": false
+                },
+                {
+                  "content": "Non : on attendait uniquement des plants rouges",
+                  "correct": false
+                },
+                {
+                  "content": "Non : on attendait uniquement des plants jaunes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le cacaoyer (expérience fictive), une lignée pure à cabosses rouges et une lignée pure à cabosses jaunes sont croisées dans les deux sens (pollen de la rouge sur la jaune, puis pollen de la jaune sur la rouge) : les deux F1 sont à 100 % rouges. Explique en quelques lignes pourquoi ces croisements réciproques donnent le même résultat, et ce que cela indique sur la position du gène.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Les deux croisements donnent…",
+              "criteria": [
+                "Compare les deux croisements : même résultat, F1 à 100 % rouge",
+                "Relie ce résultat à un gène porté par un autosome, présent en deux exemplaires chez tous les individus",
+                "Phrases claires, vocabulaire exact (autosome, réciproque, allèle)"
+              ],
+              "explanation": "Corrigé modèle : Dans les deux sens du croisement, la F1 est à 100 % rouge. Le gène est porté par un autosome : chaque plante en possède deux exemplaires et le transmet de la même façon par le pollen et par l'ovule. Le résultat ne dépend donc pas du parent qui apporte le pollen. On conclut que le gène de la couleur des cabosses est autosomique. Barème : 1 point pour la comparaison des deux croisements, 1,5 point pour le lien avec l'autosome et le double exemplaire, 0,5 point pour la clarté et le vocabulaire.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Dossier d'expérience sur le pois",
+          "statement": "Un technicien d'une station agricole étudie l'aspect des graines du pois (dossier fictif, résultats simplifiés). Document 1 : on croise une lignée pure à graines lisses et une lignée pure à graines ridées ; toutes les graines de la F1 sont lisses. Document 2 : le croisement de deux plants de la F1 donne une F2 de 528 plants, dont 396 à graines lisses et 132 à graines ridées. Document 3 : on croise un plant de la F1 avec un plant à graines ridées. On note $L$ l'allèle des graines lisses et $l$ celui des graines ridées.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans une expérience fictive sur le pois, une lignée pure à graines lisses et une lignée pure à graines ridées donnent une F1 dont toutes les graines sont lisses. Que peut-on dire des allèles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des lignées pures : Étape 1 — Relever les phénotypes : parents lisse et ridé, F1 lisse. Étape 2 — Repérer : F1 homogène, semblable au parent lisse. Étape 3 — Déduire : le phénotype de la F1 est celui de l'allèle dominant, donc les graines lisses sont dominantes ($L$) et les ridées récessives ($l$).",
+              "answers": [
+                {
+                  "content": "L'allèle des graines lisses est dominant, celui des graines ridées récessif",
+                  "correct": true
+                },
+                {
+                  "content": "L'allèle des graines ridées est dominant, celui des graines lisses récessif",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux allèles sont dominants",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux allèles sont récessifs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le pois, une F2 compte 528 plants dont 132 à graines ridées. Quel est le pourcentage de plants à graines ridées ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 5 — Vérifier avec la F2 : 132 / 528 = 1/4, soit 25 %. Le reste, 396 plants, fait 3/4, soit 75 % de graines lisses. Ces proportions sont celles qu'on attend d'une F1 hétérozygote.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez le pois (expérience fictive), $L$ (lisse) est dominant sur $l$ (ridé). Parmi les plants de la F2 à graines ridées, quelles affirmations sont justes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Déduire : l'allèle récessif $l$ ne s'exprime qu'en double exemplaire. Étape 4 — Écrire les génotypes : un plant à graines ridées est donc $l//l$, homozygote, et a reçu un $l$ de chaque parent de la F1 ($L//l$). Il ne porte aucun $L$ : sinon ses graines seraient lisses.",
+              "answers": [
+                {
+                  "content": "Ils sont de génotype $l//l$",
+                  "correct": true
+                },
+                {
+                  "content": "Ils sont homozygotes",
+                  "correct": true
+                },
+                {
+                  "content": "Chacun a reçu un allèle $l$ de chacun de ses deux parents",
+                  "correct": true
+                },
+                {
+                  "content": "Ils sont hétérozygotes",
+                  "correct": false
+                },
+                {
+                  "content": "Ils portent l'allèle $L$",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont de génotype $L//l$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le pois, on croise deux plants de la F1 de génotype $L//l$ ($L$ lisse dominant, $l$ ridé récessif). Quelle prévision donne l'échiquier, et est-elle compatible avec une F2 de 396 plants lisses et 132 ridés ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de l'échiquier : Étape 1 — Génotypes $L//l$ et $L//l$. Étape 2 — Gamètes $L$ ou $l$, 1/2 chacun. Étape 3 — Échiquier : $L//L$, $L//l$, $l//L$, $l//l$. Étape 4 — Lire : 1/4, 2/4, 1/4. Étape 5 — Déduire : 3/4 lisses, 1/4 ridés. Les 396 lisses sur 528 font 3/4 : la prévision est confirmée.",
+              "answers": [
+                {
+                  "content": "3/4 lisses et 1/4 ridés ; oui, car 396 sur 528 font 3/4",
+                  "correct": true
+                },
+                {
+                  "content": "1/2 lisses et 1/2 ridés ; non",
+                  "correct": false
+                },
+                {
+                  "content": "3/4 ridés et 1/4 lisses ; non",
+                  "correct": false
+                },
+                {
+                  "content": "Tous lisses ; non",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez le pois, on croise un plant de la F1 $L//l$ avec un plant à graines ridées $l//l$. Si les proportions attendues sont respectées exactement, combien de plants à graines lisses attend-on sur 400 plants ?",
+              "question_type": "numeric",
+              "unit": "plants",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire les génotypes : $L//l$ et $l//l$. Étape 2 — Écrire les gamètes : $L$ ou $l$ pour le premier, seulement $l$ pour le second. Étape 3 — Construire l'échiquier : $L//l$ et $l//l$. Étape 4 — Lire : 1/2 de $L//l$, donc de graines lisses. Étape 5 — Conclure : 400 x 1/2 = 200 plants à graines lisses.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez le pois (expérience fictive), une lignée pure à graines lisses ($L$) croisée avec une lignée pure à graines ridées ($l$) donne une F1 toute lisse ; la F2 compte 396 plants lisses et 132 ridés. Rédige un court compte rendu : quel est l'allèle dominant, quels sont les génotypes des parents et de la F1, et que prévoit l'échiquier pour la F2 ?",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Les parents de lignée pure sont…",
+              "criteria": [
+                "L'allèle dominant est justifié par la F1 homogène lisse",
+                "Les génotypes des parents ($L//L$, $l//l$) et de la F1 ($L//l$) sont justes",
+                "L'échiquier F1 x F1 donne 3/4 lisses et 1/4 ridés, comparés aux 396 et 132 observés",
+                "Vocabulaire exact et rédaction claire"
+              ],
+              "explanation": "Corrigé modèle : La F1 est homogène et ressemble au parent à graines lisses, donc l'allèle des graines lisses, noté $L$, est dominant ; celui des graines ridées, $l$, est récessif. Les parents de lignée pure sont $L//L$ et $l//l$ ; chaque plant de la F1 reçoit un allèle de chacun et est $L//l$. Les plants de la F1 forment des gamètes $L$ ou $l$ (1/2 chacun) ; l'échiquier donne 1/4 de $L//L$, 2/4 de $L//l$ et 1/4 de $l//l$, soit 3/4 de graines lisses et 1/4 de graines ridées. Les 396 lisses et 132 ridées sur 528 font 3/4 et 1/4 : la prévision est confirmée. Barème : 1 point pour le dominant, 1 point pour les génotypes, 1,5 point pour l'échiquier et la comparaison, 0,5 point pour le vocabulaire.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

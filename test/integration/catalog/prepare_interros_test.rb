@@ -134,6 +134,25 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # rendu-lecons-v3-390 : le « À retenir » de la feuille s'écrit comme celui de la fiche de révision (sheet_text)
+  test "the « À retenir » box renders **bold** and formulas like the revision sheet, and escapes any HTML" do
+    @notions.first.update!(sheet: { "remember" => "L'**intégrale** de $f$ vaut *F(b)*. <img src=x onerror=alert(1)>" })
+    sign_in_as @student
+
+    # La feuille se lit sur sa propre page ; la case de la leçon n'en montre que le titre.
+    get course_sheet_path(@course.slug, "notion-#{@notions.first.slug}")
+
+    assert_select ".ps-remember" do
+      assert_select "b", text: "intégrale"
+      assert_select "i", text: "F(b)"
+      assert_select "img", 0
+      assert_select "[data-controller=math]", 1
+      assert_select "*", text: /\*\*/, count: 0
+    end
+    assert_includes response.body, "$f$"
+    assert_includes response.body, "&lt;img src=x onerror=alert(1)&gt;"
+  end
+
   # CA-2
   test "a student reads the sheets of the homework subjects under « Prépare devoirs », with « Notions mobilisées »" do
     subject = create_subject(course: @course, title: "Sujet 1 · Calculer, démontrer, conclure", notions: "Thalès et sa réciproque")

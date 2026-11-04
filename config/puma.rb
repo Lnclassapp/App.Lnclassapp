@@ -43,6 +43,7 @@ plugin :tmp_restart
 # ADR-0052, amended by ADR-0108: the Solid Queue worker always runs inside Puma, in development as in production,
 # except in a PR environment (jobs run in the web process there, so the service can sleep). Keep this exact line:
 # test/guards/repository_rules_test.rb refuses any other condition.
+require_relative "demo_environment"
 require_relative "pr_environment"
 plugin :solid_queue unless PrEnvironment.active?
 

@@ -1,0 +1,157 @@
+# Manifeste du jeu de test standard (chantier standard-de-test, ADR-XXXX §4 et §6).
+# Décrit, sans rien charger : les établissements, leurs classes, les cas difficiles, les comptes par rôle et les leçons.
+# Lu par Entities::Catalog::StandardTestSet (le YAML est parsé par l'appelant). Les noms de personnes et d'établissements
+# viennent de noms.yml ; les contacts sont calculés dans la plage fictive 0[157]0000xxxx (Entities::School::FictitiousIdentity).
+# Clé de classe : <dossier de niveau-série>, suivi de -<rang> quand l'établissement a plusieurs classes par niveau-série.
+
+etablissements:
+  # Une classe par niveau-série, de la 6ème à la Tle.
+  - cle: lycee
+    type: public
+    cycle: both
+    drena: Abidjan 1
+    classes: tout_le_programme
+  - cle: college
+    type: private
+    cycle: first
+    drena: Bouaké 1
+    classes: [6eme, 5eme, 4eme, 3eme]
+  # Environ 1 500 élèves répartis sur trois classes par niveau-série ; l'activité y est échantillonnée (Lot C).
+  - cle: grand
+    type: mixed
+    cycle: both
+    drena: Abidjan 1
+    classes: tout_le_programme
+    classes_par_serie: 3
+    eleves: 1500
+    activite: echantillon
+
+# tout_le_programme : 6ème à 3ème sans série ; 2nde A et C ; 1ère et Tle A1, A2, C, D.
+programme:
+  sans_serie: [6eme, 5eme, 4eme, 3eme]
+  avec_series:
+    - { niveau: 2nde, series: [a, c] }
+    - { niveau: 1ere, series: [a1, a2, c, d] }
+    - { niveau: tle, series: [a1, a2, c, d] }
+
+cas:
+  classe_vide: college/5eme
+  eleve_sans_activite: lycee/tle-a1
+  classe_pleine: lycee/tle-d
+  classe_pleine_effectif: 40
+
+comptes:
+  # Un élève par classe de chaque établissement.
+  eleves: un_par_classe
+  # Un enseignant par matière et par établissement ; « multi » enseigne dans le lycée ET le collège.
+  enseignants:
+    - { cle: lycee-francais, matiere: francais, etablissements: [lycee] }
+    - { cle: multi-mathematiques, matiere: mathematiques, etablissements: [lycee, college] }
+    - { cle: lycee-histoire-geographie, matiere: histoire-geographie, etablissements: [lycee] }
+    - { cle: lycee-physique-chimie, matiere: physique-chimie, etablissements: [lycee] }
+    - { cle: lycee-svt, matiere: svt, etablissements: [lycee] }
+    - { cle: lycee-philosophie, matiere: philosophie, etablissements: [lycee] }
+    - { cle: college-francais, matiere: francais, etablissements: [college] }
+    - { cle: college-histoire-geographie, matiere: histoire-geographie, etablissements: [college] }
+    - { cle: college-physique-chimie, matiere: physique-chimie, etablissements: [college] }
+    - { cle: college-svt, matiere: svt, etablissements: [college] }
+    - { cle: college-edhc, matiere: edhc, etablissements: [college] }
+    - { cle: grand-francais, matiere: francais, etablissements: [grand] }
+    - { cle: grand-mathematiques, matiere: mathematiques, etablissements: [grand] }
+    - { cle: grand-histoire-geographie, matiere: histoire-geographie, etablissements: [grand] }
+    - { cle: grand-physique-chimie, matiere: physique-chimie, etablissements: [grand] }
+    - { cle: grand-svt, matiere: svt, etablissements: [grand] }
+    - { cle: grand-philosophie, matiere: philosophie, etablissements: [grand] }
+    - { cle: grand-edhc, matiere: edhc, etablissements: [grand] }
+  directions:
+    - { cle: direction-lycee, etablissement: lycee }
+    - { cle: direction-college, etablissement: college }
+    - { cle: direction-grand, etablissement: grand }
+  equipe:
+    - { cle: equipe-admin, role: admin }
+    - { cle: equipe-contenu, role: content }
+    - { cle: equipe-terrain, role: field, drena: Abidjan 1 }
+
+# Leçon 1 de la progression de chaque couple niveau-série et matière ayant du v3 (prd §8) :
+# <dossier>/<matière>: fichier, relatif à docs/contenus/lecons-traitees/<dossier>/<matière>/.
+lecons:
+  1ere-a1/francais: oeuvre-poetique.json
+  1ere-a1/mathematiques: equations-et-inequations.json
+  1ere-a1/philosophie: la-methode-de-lecture-de-texte.json
+  1ere-a1/physique-chimie: etude-d-un-dipole-passif-cas-d-un-resistor.json
+  1ere-a1/svt: le-reflexe-conditionnel.json
+  1ere-a2/francais: oeuvre-poetique.json
+  1ere-a2/mathematiques: equations-et-inequations.json
+  1ere-a2/philosophie: la-methode-de-lecture-de-texte.json
+  1ere-a2/physique-chimie: etude-d-un-dipole-passif-cas-d-un-resistor.json
+  1ere-a2/svt: le-reflexe-conditionnel.json
+  1ere-c/francais: oeuvre-poetique.json
+  1ere-c/mathematiques: equations-et-inequations-dans.json
+  1ere-c/philosophie: la-methode-de-lecture-de-texte.json
+  1ere-c/physique-chimie: travail-et-puissance-dans-le-cas-d-un-mouvement-de-translation.json
+  1ere-c/svt: le-role-et-la-structure-des-gonades-des-mammiferes.json
+  1ere-d/francais: oeuvre-poetique.json
+  1ere-d/mathematiques: equations-et-inequations-du-second-degre-dans.json
+  1ere-d/philosophie: la-methode-de-lecture-de-texte.json
+  1ere-d/physique-chimie: travail-et-puissance-d-une-force-constante-dans-le-cas-d-un-mouvement-de-translation.json
+  1ere-d/svt: les-fonctions-des-gonades.json
+  1ere/histoire-geographie: histoire-l-essor-du-capitalisme-et-ses-consequences.json
+  3eme/edhc: les-devoirs-des-parents.json
+  3eme/francais: l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json
+  3eme/histoire-geographie: histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json
+  3eme/mathematiques: calcul-litteral.json
+  3eme/physique-chimie: masse-et-poids-d-un-corps.json
+  3eme/svt: les-aliments-et-l-homme.json
+  tle-a1/francais: oeuvre-narrative.json
+  tle-a1/mathematiques: etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json
+  tle-a1/philosophie: la-dissertation-philosophique.json
+  tle-a1/svt: les-reactions-emotionnelles-chez-l-homme.json
+  tle-a2/francais: oeuvre-narrative.json
+  tle-a2/mathematiques: etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json
+  tle-a2/philosophie: la-dissertation-philosophique.json
+  tle-a2/svt: les-reactions-emotionnelles-chez-l-homme.json
+  tle-c/francais: oeuvre-narrative.json
+  tle-c/mathematiques: barycentre-et-lignes-de-niveaux.json
+  tle-c/philosophie: la-dissertation-philosophique.json
+  tle-c/physique-chimie: cinematique-du-point.json
+  tle-c/svt: les-cycles-sexuels-chez-la-femme.json
+  tle-d/francais: oeuvre-narrative.json
+  tle-d/mathematiques: limites-et-continuite.json
+  tle-d/philosophie: la-dissertation-philosophique.json
+  tle-d/physique-chimie: cinematique-du-point.json
+  tle-d/svt: le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json
+  tle/histoire-geographie: histoire-l-onu.json
+
+# La leçon v3 la plus longue du dépôt (elle porte aussi des sujets de devoir).
+longue: 3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json
+
+# Couples sans v3 (constat du 2026-11-02 : tous leurs fichiers sont au format 1, que l'import retire — raison format_retired).
+# Ils restent vides tant qu'une vague v3 n'y a pas déposé de fichier ; alors StandardTestSet exige de les déplacer sous lecons.
+sans_v3:
+  - 2nde/histoire-geographie
+  - 2nde-a/francais
+  - 2nde-a/mathematiques
+  - 2nde-a/physique-chimie
+  - 2nde-a/svt
+  - 2nde-c/francais
+  - 2nde-c/mathematiques
+  - 2nde-c/physique-chimie
+  - 2nde-c/svt
+  - 4eme/edhc
+  - 4eme/francais
+  - 4eme/histoire-geographie
+  - 4eme/mathematiques
+  - 4eme/physique-chimie
+  - 4eme/svt
+  - 5eme/edhc
+  - 5eme/francais
+  - 5eme/histoire-geographie
+  - 5eme/mathematiques
+  - 5eme/physique-chimie
+  - 5eme/svt
+  - 6eme/edhc
+  - 6eme/francais
+  - 6eme/histoire-geographie
+  - 6eme/mathematiques
+  - 6eme/physique-chimie
+  - 6eme/svt

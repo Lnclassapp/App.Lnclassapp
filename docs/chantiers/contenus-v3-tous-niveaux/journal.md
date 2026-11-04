@@ -6,13 +6,23 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
-| 2026-10-31 | T5 | Tle A1, A2 | SVT | 7 (communes à A1 et A2, 14 fichiers) | `feature/contenus-tle-svt-a` |
-| 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
+| 2026-11-02 | P9 | 1ère | Histoire-Géographie | 10 | [#445](https://github.com/Lnclassapp/App.Lnclassapp/pull/445) |
+| 2026-11-02 | P4 | 1ère (A1, A2) | Physique-Chimie | 10 (20 fichiers) | #438 |
 | 2026-10-31 | T1 | Tle (C, D) | Mathématiques | 14 leçons (20 fichiers) | #420 |
+| 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
+| 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
 | 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | #421 |
 | 2026-10-31 | T4 (2/2) | Tle D | SVT | 10 (7 propres + 3 déclinées de Tle C) | #422 |
-| 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
+| 2026-10-31 | T5 | Tle A1, A2 | SVT | 7 (communes à A1 et A2, 14 fichiers) | #425 |
+| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
+| 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
+| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
+| 2026-11-01 | P8 | 1ère (A, C, D) | Français | 11 distinctes (40 fichiers : 10 en A1, 10 en A2, 10 en C, 10 en D) | #436 |
+| 2026-11-01 | P5 | 1ère (C, D) | SVT | 16 distinctes (20 fichiers : 4 communes déclinées en D) | #435 |
+| 2026-11-01 | P1 | 1ère (C, D) | Mathématiques | 13 leçons distinctes (20 fichiers) | #433 |
+| 2026-11-02 | P2 | 1ère (A1, A2) | Mathématiques | 7 leçons (14 fichiers) ; la feuille de route en comptait 5 | #437 |
+| 2026-11-01 | P3 | 1ère C, D | Physique-Chimie | 12 distinctes pour 13 intitulés (20 fichiers) ; C1 et D1 sont la même notion | #432 |
+| 2026-11-02 | P6 | 1ère (A1, A2) | SVT | 9 leçons (18 fichiers) | #440 |
 
 ## À faire valider par un enseignant
 
@@ -20,6 +30,82 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P9 HG 1ère | 1 | Smith 1776, Manifeste 1848 ; « laissez faire, laissez passer » vient des physiocrates (Gournay), pas de Smith ; choix des 4 notions (programme officiel non disponible) |
+| P9 HG 1ère | 2 | 29 389 150 habitants (RGPH 2021) et années des recensements (1975, 1988, 1998, 2014, 2021) ; IDH simplifié (durée de scolarisation) |
+| P9 HG 1ère | 3 | Bornes « vers 1780-1850 » et « vers 1870-1914 » (certains : 1760/1770-1840, 1880-1914) ; Newcomen 1712, Watt 1769, Bessemer 1856, Drake 1859, câble 1866, Suez 1869, Bell 1876, Edison 1879, Benz 1886, Ford 1913 ; carte limitée à 4 pays |
+| P9 HG 1ère | 4 | Seuils de population mondiale (ONU) et durées calculées ; 4 phases de la transition démographique, densité, solde migratoire au programme ? ; « Europe en phase 2 au XIXe siècle » simplifié ; pays et taux du problème 4 fictifs |
+| P9 HG 1ère | 5 | 14 États, 15/11/1884–26/02/1885 ; occupation effective (surtout côtes) généralisée ; reconnaissance du Congo de Léopold II par traités séparés ; carte 1914 (Togo/Cameroun, Haut-Sénégal-Niger) simplifiée |
+| P9 HG 1ère | 6 | Verdier résident à Grand-Bassam en 1878 ; Abbey 1910 ; Samory capturé le 29/09/1898 à Guélémou, flèche Kong→Man schématique ; « vers 1920 » (pacification plutôt 1915-1917) ; grade de Binger en 1887 |
+| P9 HG 1ère | 7 | Taux d'urbanisation ivoirien (~50 %, sans année) ; rôle des villes ; gbaka, woro-woro, SOTRA ; 18 places du gbaka posées par l'énoncé ; « Daloa à l'ouest » (centre-ouest) ; notions au programme DPFC ? |
+| P9 HG 1ère | 8 | ≈ 80 % d'urbains en France selon la définition (INSEE 2020 : un tiers en commune rurale) ; « aire urbaine » ou « aire d'attraction des villes » ; Trente Glorieuses 1945-1973 ; ordre exode rural / grands ensembles |
+| P9 HG 1ère | 9 | Élection d'Houphouët-Boigny (second tour du 4 novembre 1945, de mémoire) ; PDCI 9 avril 1946, loi du 11 avril 1946 ; chemin de fer 1904-1912 (nom « Abidjan-Niger » plus tardif) ; Harris 1913-1914 ; chevauchement léger avec la leçon 6 |
+| P9 HG 1ère | 10 | 14 districts, capitales, rattachements ville→district/région ; maire « élu par le conseil municipal » (Code électoral) ; schéma district→région général (districts autonomes) ; problème 4 à renforcer |
+| P4 1ère A | 1 | 1/R = 1/R1 + 1/R2 (dérivation), loi des nœuds, additivité des tensions en série : au programme A ? Code des couleurs et résistivité absents. |
+| P4 1ère A | 2 | Substitution du méthane par le dichlore, 5 isomères de C6H14, pas de mole : au programme A ? |
+| P4 1ère A | 3 | Mole, n = m/M, Vm = 24 L/mol, M(Br) = 80, M(CO2) = 44, polymérisation, angles de 120° : acquis et programme A ? Hydrogénation en présence de nickel (chauffage non mentionné). |
+| P4 1ère A | 4 | Court-circuit I = E/r, pente −r et écriture U = b + aI (formalisme) ; valeurs usuelles (piles 1,5 V et 4,5 V) ; association de piles absente. |
+| P4 1ère A | 5 | Températures d'ébullition (butane −0,5 °C ; éthane −89, propane −42, pentane 36, hexane 69, octane 126, nonane 151, décane 174, hexadécane 287 °C) ; plages de carbones des fractions (ordres de grandeur) ; craquage avec équation ; pollutions ; décor Vridi. |
+| P4 1ère A | 6 | Effet Joule (P = RI², fusible) au programme A ? Tarifs fictifs en F CFA ; 220 V ; lampe de poche sous 12 V peu réaliste. |
+| P4 1ère A | 7 | Oscilloscope, valeur efficace (Um = Ueff × 1,41), 220 V / 50 Hz, groupe électrogène à 3 000 tr/min, une seule paire de pôles ; sinusoïdes approchées par segments. |
+| P4 1ère A | 8 | Demi-équation 2 H3O+ + 2 e− = H2 + 2 H2O au programme A ? Classement Al > Zn > Fe > H2 > Cu > Ag, couleurs des ions, Pb2+/Pb absent du classement. |
+| P4 1ère A | 9 | W = F × d × cos α avec cosinus donnés (0°, 60°, 90°, 180°), g = 10 N/kg, P = F × v limitée à une force dans le sens du mouvement. |
+| P4 1ère A | 10 | Théorème de l'énergie cinétique, distance de freinage, chute et plan incliné repris de C/D : au programme A ? Aucun exercice à force oblique. |
+| P2 | 1ère A1/A2 — Équations et inéquations | Second degré (discriminant, signe du trinôme) au programme de 1ère A ? Somme/produit des racines, bicarrées, quotients, valeur absolue non traités. |
+| P2 | 1ère A1/A2 — Dénombrement | Arrangements, combinaisons, $C_n^p$ et $0!=1$ au programme de 1ère A ? Niveau de $C_{12}^3$ et du complémentaire. |
+| P2 | 1ère A1/A2 — Généralités sur les fonctions | Périodicité absente ; composée et domaine d'un quotient ; sens de variation par $f(b)-f(a)$ plutôt que par tableau. |
+| P2 | 1ère A1/A2 — Dérivabilité et étude de fonctions | Nombre dérivé défini sans notation de limite ; dérivées usuelles limitées (constante, x, x², x³, 1/x) ; degré 3 et Δ ; modèles fictifs. |
+| P2 | 1ère A1/A2 — Suites numériques | Sommes arithmétique/géométrique au programme ? Convention $u_0$ ; données fictives. |
+| P2 | 1ère A1/A2 — Statistique | Variance et écart type au programme ? Médiane des valeurs isolées seulement ; pas d'effectifs cumulés ni de polygone. |
+| P2 | 1ère A1/A2 — Systèmes d'équations dans ℝ × ℝ | Inéquations à deux inconnues non traitées ; déterminant pour le nombre de solutions seulement (pas de Cramer). |
+| P8 | Œuvre poétique | Rattachements Hugo/romantisme, Mallarmé/symbolisme, Leconte de Lisle/Parnasse, Senghor/négritude ; dates (Contemplations 1856, Fleurs du mal 1857, Alcools 1913, Chants d'ombre 1945) ; rimes plates/croisées/embrassées, sonnet 4+4+3+3 ; « Avant l'aube » / « Marché d'aurore » inventés pour la leçon |
+| P8 | Lecture des consignes et élaboration de plan | Types de sujet du programme de 1ère ; noms et nombre des plans (thématique, dialectique, analytique) ; introduction en 4 temps, conclusion en 2 ; sens des verbes d'action (discuter, justifier…) ; « Vous direz ce que vous en pensez » appelle-t-il toujours le plan dialectique |
+| P8 | Le commentaire composé | Conclusion bilan + ouverture, présent d'analyse, 2 ou 3 axes, introduction en 4 moments ; interdiction « fond / forme » comme plan ; titres d'axe en phrases ; « apostrophe » rangée sous l'énonciation |
+| P8 | Le rythme dans le texte | Définitions du rejet et du contre-rejet (manuels variables) ; décasyllabe 4/6 ; diérèse et synérèse non traitées ; valeurs expressives des sons (tendances) ; la notion « sonorités » relève-t-elle de cette leçon |
+| P8 | La focalisation | Terminologie de Genette (zéro, interne, externe ; Figures III, 1972) sans « omniscient » ni « vision par derrière » ; « point de vue » non distingué de « focalisation » ; exception de l'autobiographie ; effets rattachés à chaque focalisation |
+| P8 | Groupement de textes romanesques | Dates et titres (L'Enfant noir 1953, Climbié 1956, Les Soleils des indépendances 1968) ; définitions de genre (nouvelle, conte) ; courants (réalisme, naturalisme) non traités ; forme attendue du commentaire comparé et de la synthèse |
+| P8 | Les tonalités littéraires | « Tonalité » et « registre » traités comme synonymes ; élégiaque = lyrisme triste ; fantastique = hésitation naturel / surnaturel ; ironie citée seulement comme moyen de la satire ; textes discutables (Mme Awa, vendeur de beignets) |
+| P8 | Résumé du texte argumentatif | Règle de comptage des mots (élision = 1, trait d'union = 1), tolérance de 10 %, réduction au quart ; règle « même énonciation, pas de citation, pas de commentaire » ; « mots de reprise » ; aucune discussion après le résumé affirmée |
+| P8 | L'argumentation | Typologie des raisonnements (déduction, induction, analogie, concession-réfutation) ; convaincre / persuader / délibérer ; trois sophismes au programme de 1ère ? |
+| P8 | L'implicite | Distinction présupposé / sous-entendu et « test de la question » ; place de l'ironie (procédé de l'implicite) ; « même » comme indice de présupposé ; litote vs euphémisme ; faits de Corneille (1637), La Fontaine, Molière (1668) |
+| P8 | Les valeurs des temps verbaux (C, D) | Valeurs retenues (présent actuel / vérité générale / habitude / narration / historique, passé simple / imparfait / passé composé, plus-que-parfait, passé antérieur, futur, conditionnel) ; narration et historique distingués ; conditionnel « longtemps classé comme un mode » (usage DPFC) ; passé antérieur limité aux subordonnées temporelles ; conditionnel passé et irréel du passé non enseignés |
+| P5 | 1ère C1 Rôle et structure des gonades | Niveau de détail (cellules de Sertoli, stades du follicule, corps jaune, œstrogènes/progestérone) ; « glandes annexes » volontairement vague ; spermatogenèse et ovogenèse hors leçon ; règle simplifiée « corps jaune = ovulation déjà eue ». |
+| P5 | 1ère D1 Fonctions des gonades | Caractères sexuels secondaires cités et hiérarchie primaire/secondaire (plumage du coq retiré : non dépendant de la testostérone) ; programme jusqu'aux cellules de Leydig et au corps jaune ; follicule mûr sécrète aussi des œstrogènes ; ligature des canaux déférents non abordée. |
+| P5 | 1ère C2/D2 Division méiotique | Crossing-over, brassage en 2^n, allèle, chromatide au programme de 1ère ; haploïdes dès la fin de la division I ; nombres de chromosomes ail, maïs, drosophile, pois, oignon ; 4e problème un peu facile. |
+| P5 | 1ère C3 Gamétogénèse chez les mammifères | Caryotypes mouton 2n = 54 et lapin 2n = 44 ; blocages de l'ovogenèse (prophase I, métaphase II) ; acrosome ; lapine/brebis ou femme comme support ; second globule polaire ; « un ovocyte I reprend la méiose à chaque cycle ». |
+| P5 | 1ère D3 Gamétogénèse | Acrosome (rôle non décrit) ; globule polaire et blocages au programme de 1ère D ; nombres de chromosomes souris 40, rat 42, chat 38, porc 38, cobaye 64, bovins et caprins 60 ; « follicule mûr » ; simplification « un ovocyte I reprend la méiose à chaque cycle » (truie). |
+| P5 | 1ère C4 Fécondation chez les mammifères | Détermination du sexe XX/XY non traitée ; pronucléi, caryogamie, réaction acrosomique, granules corticaux, polyspermie au programme ; noyau unique à 46 chromosomes après la caryogamie (les enveloppes disparaissent chez les mammifères) ; « trois pronucléi = polyspermie » ; question des 16 œufs (2n = 4 fictif). |
+| P5 | 1ère C5/D5 Synthèse des protéines | Place de la leçon ; ARNt, anticodon, universalité du code au programme de 1ère ; extrait du code génétique ; sens de lecture du brin transcrit ; expérience à l'uridine fictive. |
+| P5 | 1ère C6 Transmission d'un caractère héréditaire | Croisement-test au programme de 1ère C ; dihybridisme, hérédité liée au sexe, codominance exclus (Tle ?) ; notations R//r et [R] ; modèles cacao, igname, bovins simplifiés. |
+| P5 | 1ère D4 Monohybridisme | Croisement-test et 2/3 d'hétérozygotes parmi les dominants au programme de 1ère D ; codominance et gène létal ; exemples cobaye, tomate, haricot, drosophile simplifiés. |
+| P5 | 1ère C7 Structure interne du globe | Lithosphère/asthénosphère et gradient géothermique au programme de 1ère C ; valeurs (Moho, 100 km, 30 °C/km, noyau de fer) ; données fictives (mine à 115 °C à 3 km, vitesse P constante dans le noyau externe). |
+| P5 | 1ère D6 Activités internes du globe | Calcul de distance épicentrale, nuée ardente, types hawaïen et péléen ; rift est-africain et arc des Petites Antilles ; niveau plutôt descriptif ; vitesses simplifiées 8 et 4 km/s ; RDC en surbrillance sur la carte du rift. |
+| P5 | 1ère C8/D7 Mouvements des plaques | Anomalies magnétiques, inversions et date d'environ 800 000 ans, subduction/collision, San Andreas au programme ; moteur (convection) omis ; vitesses simplifiées (2 cm/an) ; carte limitée à l'Afrique et l'Amérique du Sud. |
+| P5 | 1ère C9/D8 Échanges d'ions du sol | CEC et meq au programme ; CEC = somme des cations sans Al3+, pH lié aux seuls H+ ; effet réel du chaulage ; nitrates et anion non retenu ; notion de poils absorbants ; fractionnement de l'engrais, compost. |
+| P5 | 1ère D9 Évolution des sols tropicaux | Noms et détail des horizons du profil ferrallitique ; forêt/savane (litière) ; culture sur brûlis et silice lessivée ; mot « lessivage » pour les ions dissous ; « cations » accepté pour « bases » ; place de la chaux. |
+| P5 | 1ère C10 Photosynthèse | Place dans le programme ; spectre d'absorption, pigments par nom, respiration en rappel ; phases claire/sombre non traitées ; bilan simplifié 6 CO2 + 6 H2O ; « oxygène » accepté pour « dioxygène ». |
+| P5 | 1ère D10 Réflexe inné | Centre du réflexe pupillaire « encéphale » (mésencéphale non nommé) ; salivation « bulbe » ; réflexe rotulien ; termes réflexe cérébral/bulbaire et Bell-Magendie ; grenouille sans tête et destruction de la moelle ; modèle temps de réaction = conduction + traversée du centre ; une racine dorsale pour toute une jambe. |
+| P1 | Toutes (13) | Périmètre de chaque notion (ce qui est traité ou non, voir le détail par leçon dans le [journal du chantier](../contenus-1ere-mathematiques-cd/journal.md)), modèles de situation fictifs, barèmes des problèmes ; figures de courbes, tableaux de variations, arbres et solides absentes (dette). |
+| P3 | Travail et puissance (translation) | Somme des travaux sans théorème de l'énergie cinétique ; puissance maximale donnée dans l'énoncé (pas de rendement) ; cos α = 0,8 donné |
+| P3 | Généralités sur les composés organiques | Formule topologique, isomérie de position et de fonction, densité d·29 écartées ; dénombrement des isomères (C4H10, C5H12) et chaînes C=C au programme ? « le bois » cité comme composé organique ; analyse quantitative m(C) = m(CO2)×12/44 |
+| P3 | Travail et puissance (rotation, C) | W = M·θ justifié par l'arc rθ ; moment d'une force oblique d = OA·sin α (sin 30° donné) ; moment d'un couple et travail W = M·θ ; valeurs de moteur (3000 tr/min, 20 N·m) plausibles, pas constructeur ; rendement, période, moment d'inertie écartés |
+| P3 | Alcanes | Températures d'ébullition usuelles (méthane −162 °C… hexane 69 °C) ; énergie 2880 kJ/mol de butane donnée ; noms des groupes méthyle et éthyle, CO empêchant le transport du dioxygène, substitutions jusqu'à CCl4 ; Vm = 24 L/mol ; ordre alphabétique des groupes non testé |
+| P3 | Énergie cinétique | Théorème de l'énergie cinétique sans « référentiel galiléen » ; h = L·sin α avec sin 30° = 0,5 ; frottement séparé de la réaction normale (travail nul) ; puissance moyenne au problème 2 supposée acquise |
+| P3 | Alcènes et alcynes | « Eau de dibrome » (réactif du test) ; polyéthylène cité en une phrase ; cyclopropane en contre-exemple ; hydratation, Markovnikov, Z/E écartés ; formules générales de combustion ; « grand dégagement de chaleur » qualitatif |
+| P3 | Le benzène | Conditions (nitration vers 50 °C avec H2SO4, fer, nickel) ; eau de dibrome : le benzène la colore par extraction sans réagir ; addition du dichlore sous UV absente ; alkylation écartée ; constantes (80 °C, 5,5 °C, densité 0,88) ; « délocalisation » en une phrase |
+| P3 | Énergie potentielle (C) | Énergie potentielle élastique ½kx² et ΔEp = −W ; notion 4 Ep = mgz + ½kx² pour un ressort vertical ; énergie de torsion ½Cθ² retirée ; convention de signe de x (allongement algébrique) ; courbe de la parabole tracée en segments ; valeurs fictives (Kossou 50 m, 20 m³/s) ; enchaînement Epe → Ec du chariot proche de l'énergie mécanique |
+| P3 | Énergie potentielle de pesanteur (D) | Problème 3 : théorème de l'énergie cinétique avec ΔEpp = −W sans relier Ec et Epp ; convention ΔEpp = arrivée moins départ ; « système solide-Terre » seulement énoncé |
+| P3 | Pétrole et gaz naturels | Craquage, reformage, indice d'octane (heptane 0, isooctane 100), pollutions au programme ? plages de carbones des fractions (gaz 1-4, essence 5-10, kérosène 10-14, gazole 14-20), qui se chevauchent à 10 et 14 ; énergies molaires arrondies (méthane 900, propane 2200, butane 2900 kJ/mol) ; températures d'ébullition citées ; champ Baleine cité sans chiffre ; deux questions identiques (notion 5 et problème 2) |
+| P3 | Énergie mécanique | h = L(1 − cos α) donnée dans les énoncés (pendule) ; balançoire = pendule simple ; cascade : action de l'eau en une force constante ; notion 4 : Em = 16 J en questions contre 25 J sur la figure ; acquis supposés : théorème de l'énergie cinétique et W(P) = −ΔEpp |
+| P3 | Quelques composés oxygénés (D) | Reste au niveau d'initiation (oxydation, estérification écartées) ; nom « 2-méthylpropan-2-ol » avec ou sans indice (usage DPFC) ; monoxyde de carbone au programme de 1ère D ? méthanol non classé ; pH et BBT acquis |
+| T8 | Toutes (10) | Dates, acteurs et rattachements au programme de chaque leçon, et chiffres économiques (L2 population INS ; L4 parts du PIB et de l'emploi données comme ordres de grandeur ; L6 couvert forestier, pauvreté, PPTE ; L9 population INSEE, nucléaire, R&D) : table détaillée dans `docs/chantiers/contenus-tle-histoire-geographie/journal.md` |
+| T7 | Toutes | Barèmes des questions rédigées (3 à 6 points, 8 pour les sujets de type BAC) proposés par le rédacteur ; forme des sujets « de type baccalauréat » (aucune règle d'épreuve officielle citée) ; dates et faits des œuvres réelles citées, vérifiés par le relecteur seulement. |
+| T7 | Œuvre narrative | Vocabulaire du récit retenu (schéma narratif en 5 temps, adjuvant / opposant, focalisation, analepse, scène / sommaire / ellipse / pause) ; « avait glissé » analepse ou simple antériorité ; « poussière rouge » métaphore ou hypallage ; problème 4 qui mêle un paragraphe de commentaire et un de dissertation ; faits de « L'Enfant noir » (Kouroussa, Tindican), « Une si longue lettre », « Une vie de boy », « Allah n'est pas obligé ». |
+| T7 | Préparation à l'oral du Baccalauréat | Forme de l'oral du BAC ivoirien (explication au fil du texte par mouvements, ou lecture méthodique par axes) dont dépend la notion 2 ; durées, nombre de textes et déroulement non affirmés (chiffres des exemples inventés) ; « liste des textes étudiés » à la place de « descriptif » ; registre « soutenu ou courant surveillé » ; barème de 8 points pour un mouvement rédigé. |
+| T7 | La dissertation littéraire | Typologie des plans (dialectique, analytique, thématique) et correspondance consigne / plan ; introduction en 4 temps, conclusion en 2 ; « Sembène Ousmane » ou « Ousmane Sembène » ; dates retenues (« Les Soleils des indépendances » 1968, « Le Mariage de Figaro » 1784, « Le Tartuffe » 1664/1669) ; « L'Avare » comme exemple de critique sociale. |
+| T7 | Le commentaire composé | Liste et définitions des registres ; registre lyrique d'un récit à la 3e personne et d'un poème sans « je » ; introduction en 4 temps, paragraphe en 4 éléments ; classement de quelques images (métaphore, métonymie, synesthésie) ; ouverture sur Lamartine, « Le Lac » (1820). |
+| T7 | Groupement de textes théâtraux | Fonctions des personnages ou schéma actanciel ; définitions de la stichomythie (en prose), du registre dramatique et du pathétique (ajouté) ; catégories « théâtre africain historique / social » et place de Césaire (« La Tragédie du roi Christophe », 1963) ; la synthèse d'un groupement est-elle une épreuve du BAC ou un devoir ; réplique sur la dot dans le problème 2 (usage ivoirien inversé). |
+| T7 | Œuvre poétique | Conventions sur la richesse des rimes ; relative « Qui chasse… » présentée comme enjambement ; personnification de « tendre leur ombre » ; rattachement de Bernard Dadié (« Afrique debout ! », 1950) à la Négritude ou à son prolongement. |
+| T7 | Résumé du texte argumentatif | Règle de comptage des mots (mot élidé = 1, mot à trait d'union = 1 ; « c'est-à-dire » ?) et tolérance de 10 %, présentées comme usage soumis à la consigne du sujet ; réduction au quart ; « nous » d'auteur ; l'épreuve du BAC ivoirien comporte-t-elle une discussion après le résumé (non mentionnée) ? |
 | T6 | L1 Dissertation | Terminologie des plans (dialectique thèse/antithèse/dépassement ou synthèse ; analytique/progressif) et lien forme du sujet → plan présenté comme tendance ; structure de l'introduction (amorce, sujet, problème/problématique, annonce du plan) ; paragraphe idée-argument-exemple-bilan avec référence d'auteur facultative |
 | T6 | L2 Commentaire | Explication en 5 gestes (situer, définir, reformuler/justifier, illustrer, relier) ; place de l'évaluation de l'intérêt (dernier moment du développement) ; 4 temps de l'introduction ; connecteurs (certes… mais, sans doute… mais, ainsi) ; textes supports tous écrits pour Lnclass ; Usage de « problème » (la difficulté) et « problématique » (la question) dans le commentaire, aligné sur L1 |
 | T6 | L3 Connaissance de l'homme | Périmètre de la notion « sciences humaines » (Durkheim, 1895, « considérer les faits sociaux comme des choses ») face aux leçons 4 et 10 ; dates de 1re publication Freud (« L'Interprétation des rêves » datée 1900, « Psychopathologie de la vie quotidienne » 1901, « Une difficulté de la psychanalyse » 1917) ; inconscient présenté comme hypothèse |
@@ -120,11 +206,23 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 | T3 | Champ magnétique | Rayons des solénoïdes ajoutés à la relecture (1, 2, 5 cm) pour justifier « long ». |
 | T3 | Les amines | « ammonium » accepté à côté d'« alkylammonium » dans un entraînement. |
 | T3 | Oscillations mécaniques libres | Seuil des petites oscillations θm ≤ 10° environ ; g = 10 N/kg. |
+| P6 | 1ère A1/A2 — Le réflexe conditionnel | Rôle du cortex (liaison temporaire aire corticale / centre du réflexe inné, ou aire gustative selon le manuel) ; « animal au cortex lésé n'acquiert plus de réflexe conditionnel » ; clochette (Pavlov : surtout métronome) ; « stimulus neutre » ; animaux qui s'approchent de la nourriture rangés parmi les réflexes conditionnels |
+| P6 | 1ère A1/A2 — Les effets des drogues sur le comportement | Classement des substances (cannabis « perturbateur », nicotine stimulante, alcool et héroïne dépressives) ; dépendance, tolérance, sevrage au programme ? ; synapse et neurotransmetteurs non traités ; statut légal retiré/limité à « interdit par la loi » (cannabis, cocaïne, héroïne) ; décor « maquis » ; durées fictives de temps de réaction |
+| P6 | 1ère A1/A2 — Les anomalies chromosomiques | Origine par non-disjonction non traitée ; formules « 44 autosomes + XX/XY » ; conséquences cliniques simplifiées des trisomie 21, Turner, Klinefelter ; « 46 chromosomes = normal » simplifié (translocation) |
+| P6 | 1ère A1/A2 — Les cycles sexuels chez la femme | Termes phase folliculaire / lutéale ; ovulation ≈ durée du cycle − 14 jours ; période féconde « 4 jours avant à 1 jour après » ; ménopause et nidation ; expérience de la guenon ; absence du corps jaune ; élévation thermique de quelques dixièmes de degré |
+| P6 | 1ère A1/A2 — La régulation des naissances | DIU classé « mécanique » (DIU hormonaux existent) ; « la pilule empêche l'ovulation » simplifié ; implant cité comme hormonal, préservatif féminin non traité ; périodes fécondes « admises » (10e–15e, 11e–17e jour) ; méthodes naturelles (calendrier, température) au programme ? |
+| P6 | 1ère A1/A2 — La transmission d'un caractère héréditaire lié aux autosomes | Test-cross non traité ; croisements réciproques et comparaison filles/garçons au programme ? ; modèles simplifiés (hibiscus, cacaoyer, gombo, pois…) ; drépanocytose sommaire ; notation $A//a$ et phénotypes $[R]$ |
+| P6 | 1ère A1/A2 — La transmission d'un caractère héréditaire lié aux chromosomes sexuels | Daltonisme et hémophilie récessifs liés à X, cas fille hémophile (père hémophile × mère porteuse) ; mot « gonosomes » ; symboles de l'arbre en texte ; formule « le caractère saute une génération » ; phénotypes en mots entre crochets (≠ leçon 6) |
+| P6 | 1ère A1/A2 — La production d'énergie par la cellule | Calcul « 3 fois » respiration/fermentation (données fictives) ; mitochondries ; fermentation lactique, ATP, glycolyse non traitées (au programme ?) ; levures et éthanol en milieu aéré ; eau de chaux |
+| P6 | 1ère A1/A2 — La mise en réserve des nutriments | Insuline et glucagon non traités ; glycémie « voisine de 1 g/L », pic 1,4–1,5 g/L ; « les graisses prennent le relais » au jeûne ; organes de stockage prévus en 1ère A ; diabète et obésité sans seuil ni type ; aliments riches en amidon et couleurs de l'eau iodée |
 
 ## Décisions prises en cours de route
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
+| 2026-11-01 | Tle fusionnée par l'orchestrateur : Develop intégré dans chaque branche, journaux et index résolus par union des lignes, `bin/ci-quiet` rejoué, preuve en commentaire de PR | Les 9 PR touchaient les mêmes journaux | Non |
+| 2026-11-01 | À partir de la 1ère, sessions de vague sur Sonnet ; Opus pour la relecture indépendante et les points délicats (philosophie, chiffres à valider) ; Haiku pour les vérifications de CI (porteur) | Coût : ~110 $ et la limite d'usage atteinte pour 3 vagues Opus en Tle | Non (applique ADR-0104) |
+| 2026-10-31 | T8 : l'HG de Tle, sans série, est rangée dans `lecons-traitees/tle/histoire-geographie/` (comme `1ere/`, `2nde/`) ; les copies v1 par série sont retirées | Un cours sans série copié dans 4 dossiers ferait 4 doublons à l'import | Non |
 
 ## Ce qui a dérapé
 
@@ -134,3 +232,5 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+
+- 2026-11-02 — **Pause des vagues** (porteur) : aucune nouvelle vague avant le test des leçons créées. S1 (Maths 2nde C) arrêtée au démarrage, rien de livré ; P9 (HG 1ère, en cours) se termine.

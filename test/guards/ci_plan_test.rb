@@ -41,17 +41,30 @@ class CiPlanTest < Minitest::Test
   # ADR-0069 §9 : « plan » decides, the parts of « unit » and « system » play bin/ci side by side, « ci » is the one
   # status the branches wait for. The only matrices are the parts of « unit » and « system ».
   def test_plan_decides_the_test_jobs_play_bin_ci_and_ci_gives_the_verdict
-    assert_equal %w[plan unit system ci], jobs.keys
+    assert_equal %w[plan unit system lecons ci], jobs.keys
     jobs.each do |name, job|
       assert_equal name, job["name"].to_s.split.first, "le job « #{name} » porte son nom"
-      assert_nil job["strategy"], "pas de matrice : #{name}" unless TEST_JOBS.include?(name)
+      assert_nil job["strategy"], "pas de matrice : #{name}" unless (TEST_JOBS + %w[lecons]).include?(name)
     end
     TEST_JOBS.each do |name|
       assert_equal "plan", jobs.dig(name, "needs")
       assert_equal 1, steps(name).count { it["run"] == "bin/ci" }, "« #{name} » lance bin/ci une fois"
     end
-    assert_equal %w[plan unit system], jobs.dig("ci", "needs")
-    %w[plan ci].each { |name| assert_nil bin_ci(name), "« #{name} » ne joue pas bin/ci" }
+    assert_equal %w[plan unit system lecons], jobs.dig("ci", "needs")
+    %w[plan ci lecons].each { |name| assert_nil bin_ci(name), "« #{name} » ne joue pas bin/ci" }
+  end
+
+  # standard-de-test (Lot D) : the lessons are rendered in parts of 5 minutes at most, one process per part (several
+  # processes deadlock PostgreSQL on the shared referential), and the verdict waits for them.
+  def test_the_lessons_are_rendered_in_parts_of_five_minutes_one_process_each
+    lecons = jobs["lecons"]
+    assert_equal "plan", lecons["needs"]
+    assert_equal 5, lecons["timeout-minutes"]
+    parts = lecons.dig("strategy", "matrix", "part")
+    assert_equal (1..parts.size).to_a, parts
+    run = steps("lecons").map { it["run"].to_s }.join("\n")
+    assert_includes run, "PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb"
+    assert_equal "#{'${{ matrix.part }}'}/#{parts.size}", steps("lecons").find { it.dig("env", "LECONS_PART") }.dig("env", "LECONS_PART")
   end
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,

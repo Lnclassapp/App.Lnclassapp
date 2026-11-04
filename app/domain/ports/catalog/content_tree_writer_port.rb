@@ -87,6 +87,13 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #replace_draft"
       end
 
+      # ADR-0123 (chargement automatique, Develop seul) : remplace entière une leçon, publiée ou non, comme replace_draft sans sa garde : tout
+      # ce qui s'y rattache part (séances, tentatives, badges, lacunes, lectures, devoirs envoyés, texte du cours). Son id, son slug, son auteur
+      # et son statut restent ; ce qui est réécrit est en brouillon. → { courses:, essentials:, exercises:, questions:, answers:, subjects: }
+      def replace_lesson(course_id:, tree:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_lesson"
+      end
+
       # Chargement automatique hors production : remplace, publiée ou non, les exercices des notions, les problèmes et les sujets de devoir
       # d'une leçon (et ce qui s'y rattache : séances, tentatives, badges, lacunes nées de ces séances, devoirs envoyés), dans la transaction de
       # l'appelant, la leçon verrouillée. Le cours, ses notions, leurs fiches et leurs lectures ne bougent pas. Les exercices du nœud

@@ -11,9 +11,9 @@ module UseCases
         @author = create_team_member(team_role: "content", second_factor: false)
       end
 
-      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new, replace_exercises: false)
+      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new, replace: :draft)
         ImportCourseTree.new(courses: Repositories::Catalog::CourseRepository.new, essentials: Repositories::Catalog::EssentialRepository.new,
-                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:, replace_exercises:)
+                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:, replace:)
       end
 
       def run_import(*documents, adapter: self.adapter, author: @author)
@@ -402,6 +402,24 @@ module UseCases
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
+      # Une écriture que la base refuse dit, dans la ligne d'Imports, la classe de l'exception et la contrainte en cause (aucune donnée).
+      test "a write the database refuses is reported write_failed with the exception class and the constraint name" do
+        refusing = Class.new(SimpleDelegator) do
+          define_method(:write) do |**|
+            row = { name: "DRENA Bouaké", public_id: SecureRandom.base58(14), slug: "drena-bouake", created_at: Time.current, updated_at: Time.current }
+            Orm::Drena.insert_all!([ row ])
+            Orm::Drena.insert_all!([ row.merge(public_id: SecureRandom.base58(14)) ])
+          end
+        end.new(Repositories::Catalog::ContentTreeWriter.new)
+
+        report = run_import(envelope(lesson), adapter: adapter(writer: refusing))
+
+        assert_equal [ [ "courses[0]", "write_failed" ] ], report_pairs(report)
+        params = report.import_errors.first["params"]
+        assert_equal "ActiveRecord::RecordNotUnique", params["exception"]
+        assert_match(/drenas/, params["constraint"])
+      end
+
       # --- Chargement automatique hors production : seuls les exercices, problèmes et sujets d'une leçon présente sont remplacés ---
 
       def publish_lesson
@@ -429,7 +447,7 @@ module UseCases
         notion_ids = course.essentials.order(:position).pluck(:id)
         file = lesson("subtitle" => "Changé", "name" => "Racines carrées", "theme" => "teal").tap { it["exercises"].each { |e| e["title"] = "Nouveau #{e['title']}" } }
 
-        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(file), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal [ "published", "Calculer et simplifier", "blue" ], course.reload.values_at(:status, :subtitle, :sheet_theme)
@@ -447,7 +465,7 @@ module UseCases
         notion_ids = course.essentials.order(:position).pluck(:id)
         other = lesson("name" => "Autre leçon")
 
-        report = run_import(envelope(lesson, other), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(lesson, other), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 2, 0 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal notion_ids, course.reload.essentials.order(:position).pluck(:id)
@@ -461,12 +479,53 @@ module UseCases
         before = Orm::Exercise.where(course_id: course.id).pluck(:id).sort
         file = lesson(notions: [ revision_notion("Simplifier une racine carrée", figure: "triangle-thales"), revision_notion("  Une   notion nouvelle ") ])
 
-        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+        report = run_import(envelope(file), adapter: adapter(replace: :exercises))
 
         assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
         assert_equal [ [ "courses[0].notions[1].name", "notion_not_found" ] ], report_pairs(report)
         assert_equal({ "name" => "Une notion nouvelle" }, report.import_errors.first["params"])
         assert_equal before, Orm::Exercise.where(course_id: course.id).pluck(:id).sort
+      end
+
+      # --- ADR-0123 : sur Develop, une leçon v3 du programme remplace entière la leçon présente, publiée ou non ---
+
+      test "in whole-lesson mode a published lesson is rewritten whole from the file: course, notions and exercises, in draft" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        old_notions = course.essentials.pluck(:id)
+        file = lesson("subtitle" => "Changé", "theme" => "teal", notions: [ revision_notion("Une notion nouvelle") ])
+
+        report = run_import(envelope(file), adapter: adapter(replace: :lesson))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ "Changé", "teal", "racines-carrees" ], course.reload.values_at(:subtitle, :sheet_theme, :slug)
+        assert_equal [ "Une notion nouvelle" ], course.essentials.pluck(:name)
+        assert_empty old_notions & course.essentials.pluck(:id)
+        assert_equal [ "draft" ], course.essentials.distinct.pluck(:status)
+        assert_equal [ "draft" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+        assert_equal 1, Orm::Course.count
+      end
+
+      test "in create-only mode a present lesson, published or not, is left untouched and counted skipped; an absent one is created" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        before = [ course.reload.updated_at, course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id, :status) ]
+        other = lesson("name" => "Cubes", "subtitle" => "Autre")
+
+        report = run_import(envelope(lesson("subtitle" => "Changé"), other), adapter: adapter(replace: :create_only))
+
+        assert_equal [ "completed", 1, 0, 1 ], report.values_at(:status, :imported_count, :error_count, :skipped_count)
+        assert_equal before, [ course.reload.updated_at, course.essentials.pluck(:id), Orm::Exercise.where(course_id: course.id).pluck(:id, :status) ]
+        assert_not_equal "Changé", course.subtitle
+        assert_equal [ "Cubes", "Racines carrées" ], Orm::Course.pluck(:name).sort
+      end
+
+      test "in whole-lesson mode an absent lesson is created whole, and the default mode is still the draft-only one" do
+        report = run_import(envelope(lesson), adapter: adapter(replace: :lesson))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal :draft, ImportCourseTree.new(courses: nil, essentials: nil, taxonomy: nil, writer: nil).replace_mode
+        assert_raises(ArgumentError) { adapter(replace: :tout) }
       end
 
       # --- ADR-0121 §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---

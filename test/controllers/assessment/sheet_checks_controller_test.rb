@@ -266,8 +266,69 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
-    assert_select "template p.ps-error[role=alert]", text: "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+    assert_select "template p.ps-error[role=alert]", text: "Question a : écris un nombre, par exemple -3,5."
     assert_no_match(/La copie n'est pas partie/, response.body)
+  end
+
+  # Un QCM à deux bonnes réponses en cinquième position (lettre « e »), propositions 1 et 2 justes.
+  def exercise_with_multiple_choice
+    exercise = create_exercise(essential: @notion, questions: 4)
+    question = exercise.questions.create!(position: 5, content: "<p>Question 5</p>", question_type: "multiple_correct_2")
+    4.times { |rank| question.answers.create!(position: rank + 1, content: "Proposition #{rank + 1}", correct: rank < 2) }
+    [ exercise, exercise.questions.order(:position).to_a ]
+  end
+
+  def post_picks(exercise, questions, last:, headers: STREAM)
+    picks = questions.each_with_index.to_h { |question, index| [ question.id.to_s, { display_order: index < 4 ? [ "0" ] : last } ] }
+    post exercise_sheet_check_path(exercise.public_id), params: { copy: { answers: picks } }, headers:
+  end
+
+  test "un QCM à deux bonnes réponses coché à moitié : le refus nomme la question et le nombre à cocher, sans « nombre attendu »" do
+    exercise, questions = exercise_with_multiple_choice
+    sign_in_as @student
+
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      post_picks(exercise, questions, last: [ "0" ])
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: "Question e : coche 2 réponses."
+    assert_no_match(/un nombre est attendu/, response.body)
+  end
+
+  test "un QCM à deux bonnes réponses bien coché passe à la page de résultat" do
+    exercise, questions = exercise_with_multiple_choice
+    sign_in_as @student
+
+    post_picks(exercise, questions, last: [ "0", "1" ])
+
+    assert_response :see_other
+  end
+
+  test "deux questions fautives : une ligne par question, dans l'ordre" do
+    exercise, questions = exercise_with_multiple_choice
+    numeric = create_kind_question(exercise:, question_type: "numeric", answers: [ "4" ])
+    sign_in_as @student
+    picks = questions.to_h { |question| [ question.id.to_s, { display_order: [ "0" ] } ] }
+    picks[numeric.id.to_s] = { response_text: "abc" }
+
+    post exercise_sheet_check_path(exercise.public_id), params: { copy: { answers: picks } }, headers: STREAM
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]" do |nodes|
+      assert_equal [ "Question e : coche 2 réponses.", "Question f : écris un nombre, par exemple -3,5." ],
+                   nodes.first.inner_html.split("<br>").map { Nokogiri::HTML5.fragment(it).text.strip }
+    end
+  end
+
+  test "une copie illisible dans sa forme : le message général, sans « un nombre est attendu »" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { "999999" => { display_order: [ "0" ] } } } }, headers: STREAM
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: /Une réponse n'est pas lisible/
+    assert_no_match(/un nombre est attendu/, response.body)
   end
 
   test "sans JavaScript, une réponse illisible revient à la leçon avec son message (R1)" do
@@ -278,7 +339,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     post exercise_sheet_check_path(numeric.public_id), params: { copy: { answers: { numeric.questions.first.id.to_s => { response_text: "abc" } } } }
 
     assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{numeric.public_id}")
-    assert_match(/Une réponse n'est pas lisible/, flash[:alert])
+    assert_equal "Question a : écris un nombre, par exemple -3,5.", flash[:alert]
   end
 
   test "un exercice assigné et pas encore rendu est refusé sans ouvrir de session, avec le lien « Ma classe » (CA-17)" do

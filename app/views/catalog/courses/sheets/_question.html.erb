@@ -50,15 +50,22 @@
     <% end %>
   </div>
   <% if kind == :mcq %>
-    <%= tag.div class: "ps-choices", role: (fields ? (question.multiple ? "group" : "radiogroup") : nil), aria: { label: question.content } do %>
+    <% if question.multiple %>
+      <%= tag.p t("catalog.courses.sheets.choose_count", count: question.expected), id: "question-#{question.id}-instruction", class: "ps-instruction" %>
+    <% end %>
+    <%= tag.div class: "ps-choices", role: (fields ? (question.multiple ? "group" : "radiogroup") : nil),
+                aria: { label: question.content, describedby: (("question-#{question.id}-instruction") if question.multiple) } do %>
       <% question.choices.each do |choice| %>
         <%= render "catalog/courses/sheets/choice", choice:, question:, fields:, field:, css: "ps-choice", role: (question.multiple ? "checkbox" : "radio"), reading: %>
       <% end %>
     <% end %>
   <% elsif kind == :other && fields %>
-    <%= fields_for field do |f| %>
-      <%= render "assessment/exercise_sessions/kinds/#{question.play.kind_name}", f:, question: question.play, number: "s#{question.id}", values: {} %>
-    <% end %>
+    <%# Comme sur la copie, le LaTeX des éléments est rendu par KaTeX : sans lui, il restait brut (lecons-defauts-affichage). %>
+    <div class="ps-play" data-controller="math">
+      <%= fields_for field do |f| %>
+        <%= render "assessment/exercise_sessions/kinds/#{question.play.kind_name}", f:, question: question.play, number: "s#{question.id}", values: {} %>
+      <% end %>
+    </div>
   <% end %>
   <% if question.verdict && !reading %>
     <span class="ps-verdict <%= "ps-verdict--wrong" unless question.verdict == :correct %>" data-ps="done"><%= t("catalog.courses.sheets.verdict.#{question.verdict}") %></span>

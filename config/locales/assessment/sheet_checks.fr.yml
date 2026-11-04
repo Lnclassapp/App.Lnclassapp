@@ -9,7 +9,13 @@ fr:
         paused: "Tu as rendu 3 copies d'affilée. Tu pourras recommencer à %{time}."
         archived: "Cet exercice n'existe plus."
         # La copie a refusé une saisie (pas un nombre, trop longue, mauvaise sélection) : l'élève la corrige, ce n'est pas une panne.
-        invalid_copy: "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+        invalid_copy: "Une réponse n'est pas lisible : vérifie tes réponses, puis réessaie."
+        # UDR qcm-plusieurs-reponses : une ligne par question refusée, « Question e : coche 2 réponses. » ; letter : a, b, c… (rang de la question).
+        invalid_question: "Question %{letter} : %{hint}"
+        invalid_hints:
+          wrong_selection: "coche %{count} réponses."
+          not_a_number: "écris un nombre, par exemple -3,5."
+          other: "vérifie ta réponse."
         failed: "La copie n'est pas partie. Réessaie."
         # « Rendre à l'enseignant » sur un devoir déjà rendu, ou retiré par l'enseignant.
         assignment_closed: "Ce devoir n'est plus à rendre."

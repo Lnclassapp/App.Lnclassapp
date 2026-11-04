@@ -99,12 +99,22 @@ Autre port : `PORT=3001 bin/dev`.
 
 **Le réflexe quand « le CSS ne se met pas à jour » :** ce n'est presque jamais Propshaft, c'est le process `css` ou `js` qui est mort dans la sortie de foreman. Regarde les logs, relance `bin/dev`. Détails dans [`stack.md` §3](stack.md#3-frontend).
 
+### Le jeu de test standard en local
+
+```bash
+bin/jeu-standard            # charge le jeu sur la base courante (rejoué, il ne double rien)
+bin/jeu-standard --reset    # vide d'abord la base locale, puis recharge (≈ 45 s)
+```
+
+Il affiche à la fin les comptes par rôle (contact, rôle, établissement), PIN 2468. Les comptes équipe prennent le PIN de `STANDARD_TEAM_PIN` si elle est posée. `STANDARD_LESSONS_LIMIT=5 bin/jeu-standard` ne charge que 5 leçons. Sur un environnement distant (`RAILWAY_ENVIRONMENT_NAME` posée), `--reset` est refusé sans `--confirmer=<nom de l'environnement>`. Chantier [`standard-de-test`](../chantiers/standard-de-test/memo.md).
+
 ### Tester une PR avant de la fusionner
 
 ```bash
 bin/tester-pr 275                # la PR n° 275 (ou un nom de branche)
 bin/tester-pr 275 --telephone    # aussi depuis un téléphone sur le même Wi-Fi
-bin/tester-pr 275 --demo         # avec 3 établissements de test complets (quelques secondes)
+bin/tester-pr 275 --demo         # avec le jeu de test standard (3 établissements, comptes, 47 leçons publiées ; ≈ 40 s)
+bin/tester-pr 275 --tout-contenu # plus l'ancien jeu : 3 établissements de 21 classes et les ~213 leçons (≈ 1 min)
 bin/tester-pr 275 --activite     # avec un collège dont les élèves ont déjà travaillé (≈ 20 min la 1re fois)
 bin/tester-pr 275 --reset        # base de développement recréée
 git switch -                     # après le test : retour à ta branche
@@ -115,7 +125,8 @@ Le script récupère le code de la PR tel qu'il est sur GitHub, joue ses migrati
 | Option | Comptes (PIN 2468 partout) |
 |---|---|
 | toujours | enseignant `0500000001`, élève `0100000001`, équipe `0700000000` (code TOTP affiché par les seeds) |
-| `--demo` | 3 établissements « Test — … » : 3 classes par niveau de la 6ème à la Tle, 35 à 45 élèves par classe, les 6 enseignants de chaque classe (un par matière : EDHC au collège, philosophie au lycée), 2 bivalents par établissement, un enseignant dans les 3 établissements et un dans 2. Direction `0731000001`, `0732000001`, `0733000001` ; enseignants `0531000001`…, `0532000001`…, `0533000001`… ; élèves `013S00CCEE` (S établissement, CC classe, EE élève : `0131000101` est le 1er élève de la 1re classe de l'établissement 1) |
+| `--demo` | jeu standard (`db/seeds/standard.rb`, comme `bin/jeu-standard`) : lycée public « Lycée Modèle Horizon » (6ème à Tle, séries A et C), collège privé « Collège Modèle Les Palmiers » (6ème à 3ème, la 5ème est vide), « Groupe Scolaire Modèle Savane » (mixte, 1 500 élèves en 3 classes par niveau-série, sans activité). Directions `0700000010` (lycée), `0700000011` (collège), `0700000012` (grand) ; enseignants `0500000010` à `0500000027` (`0500000011`, mathématiques, enseigne au lycée et au collège) ; élèves `0100000010` et suivants (le premier élève de chaque classe est son compte de test ; la Tle D du lycée en compte 40) ; équipe `0700001000` (admin), `0700002000` (contenu), `0700003000` (terrain, DRENA Abidjan 1), avec le code TOTP de chacun enregistré dans la base. `bin/jeu-standard` affiche la liste complète par rôle. Contacts dans la plage fictive de `Entities::School::FictitiousIdentity` |
+| `--tout-contenu` | l'ancien jeu `db/seeds/demo/` : 3 établissements « Test — … » de 21 classes, 35 à 45 élèves par classe, direction `0731000001`…`0733000001`, enseignants `053S0000TT`, élèves `013S00CCEE`, et les leçons complètes |
 | `--activite` | Collège Saint Michel de Tiassalé, avec exercices joués, notes, badges et lacunes : direction `0710000001` et `0710000002`, enseignants de la Tle D 1 `0510000001` à `0510000006`, autres enseignants `05111…` à `05116…`, élèves de la Tle D 1 `0110000001` à `0110000020` |
 
 **Depuis un téléphone, sans le serveur de ton ordinateur : plus possible pour l'instant.** Les environnements de PR de Railway sont désactivés depuis le 2026-10-28 : une PR n'a plus d'adresse de prévisualisation. Pour tester une PR depuis un téléphone, lance `bin/tester-pr <PR> --telephone` sur ton ordinateur (même Wi-Fi) ; sinon, la PR se teste dans `Develop` après sa fusion. Le fonctionnement d'avant (déploiement de chaque PR avec les données de `--demo`, mot de passe `PR_ACCESS_PASSWORD`) est décrit dans le chantier [`environnements-de-pr`](../chantiers/environnements-de-pr/memo.md), à reprendre si on les réactive.

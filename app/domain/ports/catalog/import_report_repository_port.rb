@@ -40,6 +40,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #fail_stale"
       end
 
+      # ADR-0123 §9 : passe failed les rapports encore en cours (queued, validating, importing) du type `kind` d'un seul fichier, dont le nom
+      # commence par `prefix` (chargement automatique tué en pleine leçon), quel que soit leur âge. → [public_id] des rapports passés failed
+      def fail_running_named(kind:, prefix:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #fail_running_named"
+      end
+
       # UPDATE … SET status = 'validating' WHERE status = 'queued'. → Boolean (false : déjà pris)
       def claim(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #claim"

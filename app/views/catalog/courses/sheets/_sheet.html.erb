@@ -27,7 +27,8 @@
     <% if subtitle.present? %><span class="ps-progress"><%= subtitle %></span><% end %>
   </div>
   <% if box_text.present? %>
-    <div class="ps-remember" data-controller="math"><b><%= box_label %></b> <%= box_text %></div>
+    <%# sheet_text : le même rendu que la fiche de révision (gras, italique, formules KaTeX), tout est échappé %>
+    <div class="ps-remember" data-controller="math"><b><%= box_label %></b> <%= sheet_text(box_text) %></div>
   <% end %>
   <% exercises.each do |exercise| %>
     <%= render "catalog/courses/sheets/exercise", exercise:, mode:, targets:, classrooms:, assignment_public_id: hand_ins[exercise.public_id], return_to:, sheet: sheet_id %>

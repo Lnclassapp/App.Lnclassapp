@@ -1,0 +1,108 @@
+#!/usr/bin/env ruby
+# Preuve d'une vague de leçons (chantier standard-de-test, Lot G, ADR standard-de-test §4 point 8). Développement seulement.
+# Pour le dossier d'une vague, dans l'ordre :
+#   1. script/contenus/valider.rb sur tous ses fichiers .json (rouge : tout s'arrête) ;
+#   2. le test d'affichage (test/system/catalog/lesson_rendering_test.rb, LECONS=ces fichiers) : import, publication, page élève
+#      à 390 px puis sur ordinateur ;
+#   3. (même si l'affichage est en défaut : on voit le défaut) des captures 390 px et 1280 px d'une leçon par matière (la première, par ordre alphabétique) dans tmp/preuves/<dossier>/,
+#      ignoré par git : jamais commité (test/system/catalog/lesson_capture_test.rb).
+# Verdict final affiché ; code de sortie non nul si une étape échoue. La ligne du verdict se colle dans la section
+# « Prouvé sur le jeu standard » de la PR.
+#
+#   bin/preuve-vague docs/contenus/lecons-traitees/tle-d
+#   bin/preuve-vague --plan <dossier>    # dit ce qui serait joué, sans rien lancer
+#
+# Il faut la base de test préparée (RAILS_ENV=test bin/rails db:prepare) et Chrome (CHROME_BIN, CHROMEDRIVER_PATH comme pour
+# les tests système). Les fichiers sont lus dans le dépôt, jamais envoyés par un utilisateur.
+require "fileutils"
+require "open3"
+
+START = Dir.pwd
+ROOT = File.expand_path("..", __dir__)
+Dir.chdir(ROOT)
+USAGE = "Usage : bin/preuve-vague <dossier> [--plan]"
+
+def refuse(reason)
+  warn "[preuve-vague] refusé : #{reason} La preuve ne tourne qu'en development ; rien n'est joué."
+  exit 1
+end
+
+# Jamais d'environnement imposé par-dessus celui de l'appelant (comme bin/apercu-lecon) : tout autre que development, un
+# environnement Railway ou une DATABASE_URL (base distante possible) est refusé avant tout.
+rails_env = ENV["RAILS_ENV"].to_s
+refuse("RAILS_ENV=#{rails_env}.") unless rails_env.empty? || rails_env == "development"
+refuse("RAILWAY_ENVIRONMENT_NAME est posée.") unless ENV["RAILWAY_ENVIRONMENT_NAME"].to_s.empty?
+refuse("DATABASE_URL est posée (base distante possible).") unless ENV["DATABASE_URL"].to_s.empty?
+
+plan_only = ARGV.delete("--plan")
+(warn USAGE; exit 2) unless ARGV.size == 1 && !ARGV.first.start_with?("-")
+
+folder = File.expand_path(ARGV.first, START)
+(warn "[preuve-vague] dossier introuvable : #{ARGV.first}"; exit 1) unless File.directory?(folder)
+# Liens suivis : la vague est un dossier SOUS docs/contenus/lecons-traitees (jamais ailleurs, jamais la racine elle-même).
+LESSONS = File.realpath("docs/contenus/lecons-traitees")
+folder = File.realpath(folder)
+unless folder.start_with?("#{LESSONS}/")
+  warn "[preuve-vague] refusé : #{ARGV.first} n'est pas un dossier sous docs/contenus/lecons-traitees. Rien n'est joué."
+  exit 1
+end
+
+files = Dir.glob("**/*.json", base: folder).sort.map { File.join(folder, it) }
+(warn "[preuve-vague] aucun fichier .json dans #{ARGV.first}"; exit 1) if files.empty?
+
+relative = ->(path) { path.delete_prefix("#{folder}/") }
+# La matière d'un fichier : son dossier sous celui de la vague (tle-d/svt/x.json → svt).
+subject = ->(path) { relative.(path).include?("/") ? relative.(path).split("/").first : "lecon" }
+chosen = files.group_by(&subject).transform_values(&:first)
+name = File.basename(folder)
+out = File.join("tmp/preuves", name)
+# Un seul processus : plusieurs interbloquent PostgreSQL sur le référentiel partagé (journal du Lot D).
+display_env = { "RAILS_ENV" => "test", "COVERAGE" => "0", "PARALLEL_WORKERS" => "1", "LECONS" => files.join(",") }
+display = %w[bin/rails test test/system/catalog/lesson_rendering_test.rb]
+capture_env = { "RAILS_ENV" => "test", "COVERAGE" => "0", "PARALLEL_WORKERS" => "1", "LECONS" => chosen.values.join(","),
+                "CAPTURES_DIR" => File.join(ROOT, out), "CAPTURE_FILES" => chosen.values.join(","),
+                "CAPTURE_SUBJECTS" => chosen.keys.join(",") }
+capture = [ "bin/rails", "test", "test/system/catalog/lesson_capture_test.rb", "-i", "/captures/" ]
+
+puts "Vague : #{name} (#{files.size} fichier(s))"
+puts "1. valider.rb sur #{files.size} fichier(s)"
+puts "2. affichage : bin/rails test test/system/catalog/lesson_rendering_test.rb (LECONS = les #{files.size} fichier(s))"
+puts "3. captures 390 px et 1280 px, #{chosen.size} leçon(s), dans #{out}"
+chosen.each { |matter, path| puts "   capture : #{relative.(path)} (#{matter})" }
+exit 0 if plan_only
+
+# Le seul dossier effacé est tmp/preuves/<nom de la vague> : un nom simple, sous la racine des preuves.
+FileUtils.rm_rf(out) if File.dirname(out) == "tmp/preuves" && !name.empty? && !name.start_with?(".")
+FileUtils.mkdir_p(out)
+started = Time.now
+results = { "valider.rb" => "non joué", "affichage" => "non joué", "captures" => "non jouées" }
+
+run = lambda do |label, *command, env: {}|
+  puts "\n== #{label}"
+  green = system(env, *command)
+  results[label.split.first] = green ? "ok" : "échec"
+  green
+end
+
+valid = run.("valider.rb", "ruby", "script/contenus/valider.rb", *files)
+# Un rendu en défaut n'empêche pas les captures : on voit le défaut. Un valider.rb rouge arrête tout (le fichier n'est pas une leçon).
+shown = valid && run.("affichage", *display, env: display_env)
+photographed = false
+if valid
+  photographed = run.("captures", *capture, env: capture_env)
+  count = Dir[File.join(out, "*.png")].size
+  if photographed && count != chosen.size * 2
+    puts "captures : #{count} image(s) au lieu de #{chosen.size * 2}"
+    results["captures"] = "échec"
+    photographed = false
+  end
+end
+green = valid && shown && photographed
+
+seconds = (Time.now - started).round
+puts "\n== Verdict : #{green ? 'OK' : 'ECHEC'}"
+results.each { |step, state| puts "  #{step} : #{state}" }
+puts "  captures dans #{out} (#{Dir[File.join(out, '*.png')].size} image(s), jamais commitées)"
+puts "Preuve de vague : #{name}, #{files.size} fichier(s), valider.rb #{results['valider.rb']}, affichage #{results['affichage']}, " \
+     "captures #{results['captures']} (#{chosen.size} matière(s)), #{seconds} s, le #{Time.now.strftime('%F %H:%M')}."
+exit(green ? 0 : 1)

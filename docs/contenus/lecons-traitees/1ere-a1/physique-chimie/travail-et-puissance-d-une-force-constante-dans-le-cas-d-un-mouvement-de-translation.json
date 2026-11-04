@@ -1,0 +1,1434 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Travail et puissance d'une force constante dans le cas d'un mouvement de translation",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "traction-obliquee-charrette",
+          "kind": "coordinate_plane",
+          "description": "Au marché de Treichville, une vendeuse tire une charrette de A vers B sur un sol horizontal. Le déplacement AB est horizontal et mesure 6 m (une unité = 1 m). La force F de la corde, appliquée en A, est dessinée avec les coordonnées (4 ; 3) : sa valeur est 250 N et son angle α avec AB vérifie cos α = 4/5 = 0,8. Le vecteur est dessiné sans échelle de force.",
+          "params": {
+            "xmin": -1,
+            "xmax": 9,
+            "ymin": -1,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 6,
+                "y": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 6,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": 4,
+                "dy": 3,
+                "ox": 0,
+                "oy": 0
+              }
+            ]
+          },
+          "controls": [
+
+          ]
+        },
+        {
+          "key": "forces-chariot-quai",
+          "kind": "coordinate_plane",
+          "description": "Un chariot, représenté par le point G, glisse vers la droite sur un quai horizontal (la droite en bas). Quatre forces sont dessinées à partir de G : le poids P vers le bas, la réaction normale R vers le haut, la traction F vers la droite (dans le sens du déplacement) et le frottement f vers la gauche (opposé au déplacement). Les longueurs sont dessinées sans échelle.",
+          "params": {
+            "xmin": -1,
+            "xmax": 9,
+            "ymin": -3,
+            "ymax": 4,
+            "points": [
+              {
+                "id": "G",
+                "x": 4,
+                "y": 1
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 8,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -2,
+                "ox": 4,
+                "oy": 1
+              },
+              {
+                "label": "R",
+                "dx": 0,
+                "dy": 2,
+                "ox": 4,
+                "oy": 1
+              },
+              {
+                "label": "F",
+                "dx": 3,
+                "dy": 0,
+                "ox": 4,
+                "oy": 1
+              },
+              {
+                "label": "f",
+                "dx": -2,
+                "dy": 0,
+                "ox": 4,
+                "oy": 1
+              }
+            ]
+          },
+          "controls": [
+
+          ]
+        },
+        {
+          "key": "levage-conteneur",
+          "kind": "coordinate_plane",
+          "description": "Une grue du port d'Abidjan soulève un conteneur verticalement du point A (au sol) au point B. Une unité du dessin vaut 1,5 m, donc AB = 9 m (6 unités). La tension T du câble est dessinée vers le haut, à droite du trajet ; le poids P du conteneur est dessiné vers le bas, à gauche. Les deux vecteurs sont dessinés sans échelle de force.",
+          "params": {
+            "xmin": -3,
+            "xmax": 3,
+            "ymin": -1,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 0,
+                "y": 6
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 0,
+                "y2": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "T",
+                "dx": 0,
+                "dy": 3,
+                "ox": 1,
+                "oy": 3
+              },
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -3,
+                "ox": -1,
+                "oy": 3
+              }
+            ]
+          },
+          "controls": [
+
+          ]
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le travail d'une force constante",
+          "remember": "Une force est **constante** quand sa direction, son sens et sa valeur ne changent pas. Un solide est en **translation** quand tous ses points ont le même déplacement : on peut alors le remplacer par un seul point. Quand le point d'application d'une force constante de valeur $F$ se déplace en ligne droite de $A$ à $B$, sur une distance $d = AB$, le **travail** de cette force est $W = F \\times d \\times \\cos\\alpha$, où $\\alpha$ est l'angle entre la direction de la force et celle du déplacement. Le travail s'exprime en **joules** (J), avec $F$ en newtons (N) et $d$ en mètres (m). Valeurs à connaître : $\\cos 0° = 1$, $\\cos 60° = 0{,}5$, $\\cos 90° = 0$, $\\cos 180° = -1$.",
+          "method": [
+            "Relever la valeur $F$ de la force en N et la distance $d$ en m, en convertissant si besoin.",
+            "Repérer l'angle $\\alpha$ entre la force et le déplacement, puis la valeur de $\\cos\\alpha$.",
+            "Écrire la formule $W = F \\times d \\times \\cos\\alpha$.",
+            "Calculer le travail et donner le résultat en joules."
+          ],
+          "example": {
+            "statement": "Une vendeuse du marché de Treichville tire une charrette en ligne droite sur 8 m. La corde exerce une force constante de 200 N, qui fait avec le déplacement un angle $\\alpha = 60°$. Calculer le travail de cette force.",
+            "steps": [
+              "Relever : $F = 200$ N et $d = 8$ m, déjà en unités SI.",
+              "Repérer : l'angle entre la force et le déplacement est $\\alpha = 60°$, donc $\\cos\\alpha = 0{,}5$.",
+              "Écrire : $W = F \\times d \\times \\cos\\alpha$.",
+              "Calculer : $W = 200 \\times 8 \\times 0{,}5 = 800$ J."
+            ]
+          },
+          "pitfall": "Ne pas oublier le $\\cos\\alpha$, ni garder une distance en cm ou en km. Contre-exemple : une force de 100 N, un déplacement de 10 m, un angle de 60°. Écrire $W = 100 \\times 10 = 1\\,000$ J est faux : $W = 100 \\times 10 \\times 0{,}5 = 500$ J. Autre contre-exemple : $F = 10$ N et $d = 50$ cm. Écrire $10 \\times 50 = 500$ J est faux : $50$ cm $= 0{,}5$ m, donc $W = 10 \\times 0{,}5 = 5$ J. Convertis toujours la distance en mètres avant de calculer.",
+          "figure": "traction-obliquee-charrette",
+          "exercise": {
+            "title": "Calculer le travail d'une force constante",
+            "statement": "Dans cet exercice, tu calcules des travaux de forces constantes avec la méthode de la fiche. Quand rien n'est précisé, la force est constante et le déplacement est en ligne droite.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'unité du travail d'une force dans le système international ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Calculer : avec $F$ en N et $d$ en m, le résultat de $W = F \\times d \\times \\cos\\alpha$ s'exprime en N·m, c'est-à-dire en joules (J). Le watt est l'unité de la puissance, le newton celle d'une force, le mètre celle d'une longueur.",
+                "answers": [
+                  {
+                    "content": "le joule (J)",
+                    "correct": true
+                  },
+                  {
+                    "content": "le watt (W)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le newton (N)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le mètre (m)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un livreur pousse un sac de ciment avec une force de 100 N, dans le sens du déplacement, sur 7 m. Calcule le travail de cette force.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 100$ N et $d = 7$ m, déjà en unités SI. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\alpha = 0°$ et $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 100 \\times 7 \\times 1 = 700$ J.",
+                "answers": [
+                  {
+                    "content": "700",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un tracteur tire une remorque avec une force de 300 N qui fait avec le déplacement un angle $\\alpha$ tel que $\\cos\\alpha = 0{,}6$. La remorque avance de 5 m. Calcule le travail de cette force.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 300$ N et $d = 5$ m. Étape 2 — Repérer : l'angle est $\\alpha$ avec $\\cos\\alpha = 0{,}6$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 300 \\times 5 \\times 0{,}6 = 1\\,500 \\times 0{,}6 = 900$ J.",
+                "answers": [
+                  {
+                    "content": "900",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un enfant tire un jouet avec une force de 40 N, dans le sens du déplacement, sur 50 cm. Calcule le travail de cette force en joules.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 40$ N et $d = 50$ cm, qu'il faut convertir : $d = 0{,}5$ m. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 40 \\times 0{,}5 \\times 1 = 20$ J. Écrire $40 \\times 50 = 2\\,000$ J oublierait la conversion en mètres.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une force de 20 N fait un angle de 60° avec un déplacement de 6 m. Son travail vaut ___ J (écris seulement le nombre).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : $F = 20$ N et $d = 6$ m. Étape 2 — Repérer : $\\alpha = 60°$, donc $\\cos\\alpha = 0{,}5$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 20 \\times 6 \\times 0{,}5 = 60$ J. Sans le cosinus, on trouverait 120 J, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour calculer le travail d'une force constante.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever les données en unités SI. Étape 2 — Repérer l'angle $\\alpha$ et la valeur de $\\cos\\alpha$. Étape 3 — Écrire la formule $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer et donner le résultat en joules. On ne peut pas écrire la formule complète avant d'avoir repéré l'angle, ni calculer avant d'avoir écrit la formule.",
+                "answers": [
+                  {
+                    "content": "Relever la force en N et la distance en m."
+                  },
+                  {
+                    "content": "Repérer l'angle entre la force et le déplacement."
+                  },
+                  {
+                    "content": "Écrire la formule $W = F \\times d \\times \\cos\\alpha$."
+                  },
+                  {
+                    "content": "Calculer le travail et donner le résultat en joules."
+                  }
+                ]
+              },
+              {
+                "content": "Un pêcheur de Grand-Lahou tire sa pirogue avec une force de 150 N sur 10 m. La force fait un angle de 60° avec le déplacement. Il écrit $W = 150 \\times 10 = 1\\,500$ J. Quelle est son erreur, et quel est le bon résultat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $F = 150$ N et $d = 10$ m. Étape 2 — Repérer : $\\alpha = 60°$, donc $\\cos\\alpha = 0{,}5$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 150 \\times 10 \\times 0{,}5 = 750$ J. Le résultat 1 500 J correspond à $\\cos\\alpha = 1$, c'est-à-dire à une force dans le sens du déplacement, ce qui n'est pas le cas ici.",
+                "answers": [
+                  {
+                    "content": "Il a oublié le $\\cos\\alpha$ : $W = 150 \\times 10 \\times 0{,}5 = 750$ J",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a oublié de convertir la distance : $W = 150$ J",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'a pas fait d'erreur : $W = 1\\,500$ J",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a oublié la force : $W = 10 \\times 0{,}5 = 5$ J",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un livreur déplace des caisses à Abidjan avec des forces constantes.",
+            "questions": [
+              {
+                "content": "Un livreur à vélo pousse une caisse avec une force de 50 N, dans le sens du déplacement, sur 12 m. Calcule son travail.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 50$ N et $d = 12$ m. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 50 \\times 12 \\times 1 = 600$ J.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans le sens du déplacement, $\\cos\\alpha = 1$."
+              },
+              {
+                "content": "Une force de 80 N fait un angle de 60° avec un déplacement de 10 m. Quel est son travail ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $F = 80$ N et $d = 10$ m. Étape 2 — Repérer : $\\alpha = 60°$, donc $\\cos\\alpha = 0{,}5$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 80 \\times 10 \\times 0{,}5 = 400$ J. La réponse 800 J oublie le cosinus.",
+                "answers": [
+                  {
+                    "content": "400 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "800 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "80 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "40 J",
+                    "correct": false
+                  }
+                ],
+                "hint": "$\\cos 60° = 0{,}5$."
+              },
+              {
+                "content": "Une force de 20 N agit dans le sens du déplacement, sur 300 cm. Complète : $d$ = ___ m et $W$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever en unités SI : $d = 300$ cm $= 3$ m et $F = 20$ N. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 20 \\times 3 \\times 1 = 60$ J.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "60",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour passer des cm aux m, on divise par 100."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Travail moteur, résistant ou nul",
+          "remember": "Le signe du travail d'une force constante est celui de $\\cos\\alpha$, où $\\alpha$ est l'angle entre la force et le déplacement. Si $\\alpha < 90°$, alors $\\cos\\alpha > 0$ et $W > 0$ : le travail est **moteur** (la force aide le mouvement). Si $\\alpha = 90°$, alors $\\cos\\alpha = 0$ et $W = 0$ : le travail est **nul** (force perpendiculaire au déplacement). Si $90° < \\alpha \\leq 180°$, alors $\\cos\\alpha < 0$ et $W < 0$ : le travail est **résistant** (la force freine le mouvement). Cas particuliers : $W = F \\times d$ si $\\alpha = 0°$ et $W = -F \\times d$ si $\\alpha = 180°$. Un frottement s'oppose au mouvement, donc son travail est $W = -f \\times d$. Sur un sol horizontal, le poids et la réaction normale du sol sont perpendiculaires au déplacement : leur travail est nul.",
+          "method": [
+            "Repérer la direction et le sens de la force, puis ceux du déplacement.",
+            "Lire l'angle $\\alpha$ entre la force et le déplacement.",
+            "Comparer $\\alpha$ à 90° pour trouver le signe de $\\cos\\alpha$.",
+            "Conclure : travail moteur, nul ou résistant, puis calculer $W$ si les données le permettent."
+          ],
+          "example": {
+            "statement": "Sur un quai horizontal, une charrette du marché d'Adjamé glisse de 4 m vers la droite. Elle subit son poids, la réaction normale du sol (verticale), la traction de 300 N (vers la droite) et un frottement de 100 N (vers la gauche). Donner la nature du travail de chaque force et calculer ceux de la traction et du frottement.",
+            "steps": [
+              "Repérer : le déplacement est de 4 m, horizontal, vers la droite ; le poids et la réaction normale sont verticaux, la traction va vers la droite, le frottement vers la gauche.",
+              "Lire les angles : $\\alpha = 90°$ pour le poids et la réaction normale, $\\alpha = 0°$ pour la traction, $\\alpha = 180°$ pour le frottement.",
+              "Comparer à 90° : $\\cos 90° = 0$, $\\cos 0° = 1 > 0$ et $\\cos 180° = -1 < 0$.",
+              "Conclure : le poids et la réaction normale ont un travail nul ; la traction est motrice, $W = 300 \\times 4 \\times 1 = 1\\,200$ J ; le frottement est résistant, $W = 100 \\times 4 \\times (-1) = -400$ J."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une grande force a toujours un travail non nul, ni qu'un travail résistant vaut « zéro » ou est positif. Contre-exemple : le poids de 500 N d'un chariot sur un sol horizontal est perpendiculaire au déplacement de 10 m : $W = 500 \\times 10 \\times 0 = 0$ J. Et un frottement de 50 N sur 10 m donne $W = -500$ J, pas $+500$ J : le signe moins dit que la force freine le mouvement.",
+          "figure": "forces-chariot-quai",
+          "exercise": {
+            "title": "Reconnaître un travail moteur, résistant ou nul",
+            "statement": "Dans cet exercice, tu donnes la nature du travail de forces et tu en calcules la valeur avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un porteur marche sur 20 m, sur un sol horizontal, en tenant un seau sur la tête. Le seau est retenu par une force verticale vers le haut. Quel est le travail de cette force pendant la marche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la force est verticale, le déplacement est horizontal. Étape 2 — Lire l'angle : $\\alpha = 90°$. Étape 3 — Comparer à 90° : $\\cos 90° = 0$. Étape 4 — Conclure : le travail est nul. Soutenir une charge n'est pas la déplacer dans le sens de la force : l'idée « la force est grande donc le travail aussi » est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "nul, car la force est perpendiculaire au déplacement",
+                    "correct": true
+                  },
+                  {
+                    "content": "moteur, car la force soutient le seau",
+                    "correct": false
+                  },
+                  {
+                    "content": "résistant, car le seau est lourd",
+                    "correct": false
+                  },
+                  {
+                    "content": "positif, égal à la force multipliée par 20 m",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la nature du travail de la force.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Lire l'angle, puis Étape 3 — Comparer à 90° : pour $\\alpha = 0°$, $\\cos\\alpha = 1 > 0$, donc $W > 0$ : moteur. Pour $\\alpha = 180°$, $\\cos\\alpha = -1 < 0$, donc $W < 0$ : résistant. Pour $\\alpha = 90°$, $\\cos\\alpha = 0$, donc $W = 0$ : nul. Étape 4 — Conclure.",
+                "answers": [
+                  {
+                    "content": "La force a le sens du déplacement ($\\alpha = 0°$)",
+                    "match": "Travail moteur"
+                  },
+                  {
+                    "content": "La force est opposée au déplacement ($\\alpha = 180°$)",
+                    "match": "Travail résistant"
+                  },
+                  {
+                    "content": "La force est perpendiculaire au déplacement ($\\alpha = 90°$)",
+                    "match": "Travail nul"
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de riz glisse de 10 m sur le sol. Le frottement de 80 N s'oppose au déplacement. Calcule le travail du frottement.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le frottement est opposé au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$, le travail est négatif. Étape 4 — Conclure : travail résistant, $W = 80 \\times 10 \\times (-1) = -800$ J. Écrire $+800$ J oublierait que le frottement freine.",
+                "answers": [
+                  {
+                    "content": "-800",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un docker tire un chariot avec une force de 250 N dans le sens du déplacement, sur 6 m. Calcule le travail de cette force.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la force a le sens du déplacement. Étape 2 — Lire l'angle : $\\alpha = 0°$. Étape 3 — Comparer à 90° : $\\cos 0° = 1 > 0$. Étape 4 — Conclure : travail moteur, $W = 250 \\times 6 \\times 1 = 1\\,500$ J.",
+                "answers": [
+                  {
+                    "content": "1500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un chariot glisse sur un quai horizontal, tiré par une corde horizontale. Quelles sont les deux forces dont le travail est nul ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : le déplacement est horizontal. Le poids et la réaction normale sont verticaux. Étape 2 — Lire l'angle : $\\alpha = 90°$ pour ces deux forces. Étape 3 — Comparer à 90° : $\\cos 90° = 0$. Étape 4 — Conclure : leur travail est nul. La traction (moteur) et le frottement (résistant) sont dans la direction du déplacement : leur travail n'est pas nul.",
+                "answers": [
+                  {
+                    "content": "le poids du chariot",
+                    "correct": true
+                  },
+                  {
+                    "content": "la réaction normale du quai",
+                    "correct": true
+                  },
+                  {
+                    "content": "la traction de la corde",
+                    "correct": false
+                  },
+                  {
+                    "content": "le frottement du quai",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le travail d'une force de freinage est positif.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : une force de freinage est opposée au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$. Étape 4 — Conclure : le travail est négatif, donc résistant. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un frottement constant de 50 N s'oppose à un déplacement de 10 m. Quel est son travail ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le frottement est opposé au déplacement de 10 m. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1$, le signe est négatif. Étape 4 — Conclure : $W = 50 \\times 10 \\times (-1) = -500$ J. La réponse $+500$ J oublie le signe moins : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "$-500$ J",
+                    "correct": true
+                  },
+                  {
+                    "content": "$+500$ J",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-50$ J",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un sac de manioc est traîné sur le sol d'une cour à Bouaké.",
+            "questions": [
+              {
+                "content": "Le sac glisse sur le sol. Le frottement s'oppose à son déplacement. Quelle est la nature du travail du frottement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le frottement est opposé au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$. Étape 4 — Conclure : le travail est résistant.",
+                "answers": [
+                  {
+                    "content": "résistant",
+                    "correct": true
+                  },
+                  {
+                    "content": "moteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "nul",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une force opposée au déplacement forme un angle de 180° avec lui."
+              },
+              {
+                "content": "Le frottement vaut 40 N et le sac glisse de 5 m. Calcule le travail du frottement.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le frottement est opposé au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1$, le travail est négatif. Étape 4 — Conclure : $W = 40 \\times 5 \\times (-1) = -200$ J.",
+                "answers": [
+                  {
+                    "content": "-200",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un travail résistant est négatif."
+              },
+              {
+                "content": "La réaction normale d'un sol horizontal a un travail nul sur un objet qui glisse dessus.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la réaction normale est perpendiculaire au sol, le déplacement est horizontal. Étape 2 — Lire l'angle : $\\alpha = 90°$. Étape 3 — Comparer à 90° : $\\cos 90° = 0$. Étape 4 — Conclure : $W = 0$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le travail du poids",
+          "remember": "Près de la Terre, le poids d'un solide de masse $m$ est une force constante : verticale, dirigée vers le bas, de valeur $P = m \\times g$, avec $m$ en kg et $g = 10$ N/kg. Quand le solide monte ou descend d'une hauteur $h$ (la différence d'altitude entre le départ et l'arrivée), le travail du poids est : $W = +P \\times h$ à la **descente** (travail moteur), $W = -P \\times h$ à la **montée** (travail résistant), $W = 0$ si le trajet est horizontal. Ce travail **ne dépend pas du chemin suivi** : seule compte la hauteur $h$, pas la longueur du trajet.",
+          "method": [
+            "Calculer le poids $P = m \\times g$, avec $m$ en kg et $g = 10$ N/kg.",
+            "Relever la hauteur $h$ dont le solide monte ou descend, en mètres, sans tenir compte de la longueur du trajet.",
+            "Déterminer le signe : positif à la descente, négatif à la montée, nul si $h = 0$.",
+            "Appliquer $W = \\pm P \\times h$ et donner le résultat en joules."
+          ],
+          "example": {
+            "statement": "Un maçon de Cocody fait monter un seau de 20 kg du sol jusqu'au premier étage, situé à 3 m de hauteur. Calculer le travail du poids du seau ($g = 10$ N/kg).",
+            "steps": [
+              "Calculer le poids : $P = m \\times g = 20 \\times 10 = 200$ N.",
+              "Relever la hauteur : le seau monte de $h = 3$ m.",
+              "Déterminer le signe : le seau monte, donc le travail du poids est négatif (résistant).",
+              "Appliquer : $W = -P \\times h = -200 \\times 3 = -600$ J."
+            ]
+          },
+          "pitfall": "Ne pas prendre la longueur du trajet à la place de la hauteur, ni oublier le signe. Contre-exemple : une caisse de 50 kg monte sur une rampe longue de 20 m pour s'élever de 4 m. Le poids vaut $P = 500$ N. Écrire $W = -500 \\times 20 = -10\\,000$ J est faux : seule compte la hauteur, donc $W = -500 \\times 4 = -2\\,000$ J. Et à la descente, le signe est positif : une caisse qui descend de 4 m a un poids dont le travail vaut $+2\\,000$ J.",
+          "figure": "levage-conteneur",
+          "exercise": {
+            "title": "Calculer le travail du poids",
+            "statement": "Dans cet exercice, tu calcules le travail du poids avec la méthode de la fiche. On prend $g = 10$ N/kg.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un élève a une masse de 60 kg. Calcule son poids ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = m \\times g = 60 \\times 10 = 600$ N. Les autres étapes ne servent pas ici, car on ne demande pas de travail.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de cacao de 25 kg descend de 4 m, du haut d'un camion jusqu'au sol, à San Pedro. Calcule le travail de son poids ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = 25 \\times 10 = 250$ N. Étape 2 — Relever la hauteur : $h = 4$ m. Étape 3 — Déterminer le signe : le sac descend, donc le travail est positif. Étape 4 — Appliquer : $W = +P \\times h = 250 \\times 4 = 1\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le même sac de cacao de 25 kg est remonté de 4 m sur le camion. Quel est le travail de son poids ($g = 10$ N/kg) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le poids : $P = 250$ N. Étape 2 — Relever la hauteur : $h = 4$ m. Étape 3 — Déterminer le signe : le sac monte, donc le travail est négatif. Étape 4 — Appliquer : $W = -250 \\times 4 = -1\\,000$ J. La réponse $+1\\,000$ J oublie le signe moins.",
+                "answers": [
+                  {
+                    "content": "$-1\\,000$ J",
+                    "correct": true
+                  },
+                  {
+                    "content": "$+1\\,000$ J",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-100$ J",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une bille qui roule sur une table horizontale a un poids dont le travail est nul.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever la hauteur : la table est horizontale, donc la bille ne monte ni ne descend, $h = 0$. Étape 3 — Déterminer le signe : $h = 0$, le travail est nul. Étape 4 — Appliquer : $W = P \\times 0 = 0$ J. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 40 kg monte une rampe longue de 10 m et s'élève de 2 m. Calcule le travail de son poids ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = 40 \\times 10 = 400$ N. Étape 2 — Relever la hauteur : la caisse s'élève de $h = 2$ m (et non de 10 m, longueur de la rampe). Étape 3 — Déterminer le signe : la caisse monte, donc négatif. Étape 4 — Appliquer : $W = -400 \\times 2 = -800$ J. Utiliser 10 m donnerait $-4\\,000$ J, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "-800",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer le travail du poids d'une caisse qui monte une rampe, quelle distance faut-il utiliser ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever la hauteur : le travail du poids ne dépend pas du chemin suivi, seulement de la hauteur $h$ dont le solide monte ou descend. Prendre la longueur de la rampe est le piège de la fiche : il donne un travail trop grand.",
+                "answers": [
+                  {
+                    "content": "la hauteur dont la caisse s'élève",
+                    "correct": true
+                  },
+                  {
+                    "content": "la longueur de la rampe",
+                    "correct": false
+                  },
+                  {
+                    "content": "la distance parcourue sur le sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "la somme de la hauteur et de la longueur de la rampe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une noix de coco de 2 kg tombe d'un cocotier, de 15 m de haut, jusqu'au sol. Calcule le travail de son poids ($g = 10$ N/kg).",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = 2 \\times 10 = 20$ N. Étape 2 — Relever la hauteur : $h = 15$ m. Étape 3 — Déterminer le signe : la noix de coco descend, donc positif. Étape 4 — Appliquer : $W = +20 \\times 15 = 300$ J.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Des fruits et des paquets changent d'altitude, et tu calcules le travail de leur poids ($g = 10$ N/kg).",
+            "questions": [
+              {
+                "content": "Un paquet de 8 kg descend de 3 m. Complète : $P$ = ___ N et $W$ = ___ J.",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = 8 \\times 10 = 80$ N. Étape 2 — Relever la hauteur : $h = 3$ m. Étape 3 — Déterminer le signe : le paquet descend, donc positif. Étape 4 — Appliquer : $W = +80 \\times 3 = 240$ J.",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "240",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le poids vaut la masse multipliée par 10."
+              },
+              {
+                "content": "Une mangue de 0,5 kg tombe d'une branche située à 6 m du sol. Calcule le travail de son poids.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = 0{,}5 \\times 10 = 5$ N. Étape 2 — Relever la hauteur : $h = 6$ m. Étape 3 — Déterminer le signe : la mangue descend, donc positif. Étape 4 — Appliquer : $W = +5 \\times 6 = 30$ J.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "hint": "À la descente, le travail du poids est positif."
+              },
+              {
+                "content": "Le travail du poids d'une caisse qui monte une rampe dépend de la longueur de la rampe.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever la hauteur : le travail du poids ne dépend que de la hauteur $h$ dont la caisse s'élève, pas du chemin suivi. Étape 4 — Appliquer : $W = -P \\times h$, sans la longueur de la rampe. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Puissance moyenne et puissance d'une force",
+          "remember": "La **puissance moyenne** d'une force qui effectue un travail $W$ pendant une durée $\\Delta t$ est $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Elle s'exprime en **watts** (W) quand $W$ est en joules et $\\Delta t$ en secondes : $1$ W $= 1$ J/s et $1$ kW $= 1\\,000$ W. Pour une force constante de valeur $F$, dans le sens du mouvement d'un solide qui avance à la vitesse $v$, la puissance est $\\mathcal{P} = F \\times v$, avec $v$ en m/s. Pour passer de km/h à m/s, on divise par 3,6. Attention : le poids est noté $P$, la puissance $\\mathcal{P}$, et ne confonds pas le watt (unité) et le travail $W$ (grandeur).",
+          "method": [
+            "Convertir les données en unités SI : durée en s, vitesse en m/s, force en N, travail en J.",
+            "Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$ si on connaît le travail et la durée, $\\mathcal{P} = F \\times v$ si on connaît la force (dans le sens du mouvement) et la vitesse.",
+            "Calculer au préalable le travail $W$, avec la méthode de la fiche sur le travail, si la relation choisie l'exige.",
+            "Effectuer l'application numérique de la relation choisie.",
+            "Donner le résultat en watts (ou en kW)."
+          ],
+          "example": {
+            "statement": "Une grue du port d'Abidjan soulève un conteneur sur 15 m, en 30 s, à la vitesse constante de 0,5 m/s. Le câble exerce une force verticale vers le haut de $20\\,000$ N. Calculer la puissance moyenne du câble, puis sa puissance avec la force et la vitesse.",
+            "steps": [
+              "Convertir : $F = 20\\,000$ N, $d = 15$ m, $\\Delta t = 30$ s et $v = 0{,}5$ m/s, déjà en unités SI.",
+              "Choisir les relations : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$, puis $\\mathcal{P} = F \\times v$.",
+              "Calculer au préalable le travail : la force a le sens du déplacement, donc $W = 20\\,000 \\times 15 \\times 1 = 300\\,000$ J.",
+              "Effectuer : $\\mathcal{P} = \\dfrac{300\\,000}{30} = 10\\,000$ W, et $\\mathcal{P} = 20\\,000 \\times 0{,}5 = 10\\,000$ W.",
+              "Donner le résultat : $10\\,000$ W $= 10$ kW, avec les deux méthodes."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir avant de calculer. Contre-exemple : une force de $1\\,000$ N dans le sens d'une vitesse de 36 km/h. Écrire $\\mathcal{P} = 1\\,000 \\times 36 = 36\\,000$ W est faux : $36$ km/h $= 10$ m/s, donc $\\mathcal{P} = 1\\,000 \\times 10 = 10\\,000$ W. De même, une durée de 2 min vaut 120 s, pas 2 s.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une puissance",
+            "statement": "Dans cet exercice, tu calcules des puissances avec la méthode de la fiche. Convertis d'abord les données en unités du système international.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'unité de la puissance dans le système international ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 5 — Donner le résultat en watts : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$ avec $W$ en J et $\\Delta t$ en s donne des J/s, c'est-à-dire des watts (W). Le joule est l'unité du travail, le newton celle d'une force.",
+                "answers": [
+                  {
+                    "content": "le watt (W)",
+                    "correct": true
+                  },
+                  {
+                    "content": "le joule (J)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le newton (N)",
+                    "correct": false
+                  },
+                  {
+                    "content": "le kilogramme (kg)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de pompe fournit un travail de 6 000 J en 30 s. Calcule sa puissance moyenne.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $W = 6\\,000$ J et $\\Delta t = 30$ s, déjà en unités SI. Étape 2 — Choisir la relation : le travail et la durée sont connus, donc $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 3 — Le travail est donné. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{6\\,000}{30} = 200$. Étape 5 — Donner le résultat : 200 W.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un tracteur tire une remorque avec une force de $2\\,000$ N, dans le sens du mouvement, à la vitesse constante de 5 m/s. Calcule la puissance de cette force.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $F = 2\\,000$ N et $v = 5$ m/s, déjà en unités SI. Étape 2 — Choisir la relation : force dans le sens du mouvement et vitesse connues, donc $\\mathcal{P} = F \\times v$. Étape 3 — Aucun travail à calculer. Étape 4 — Effectuer : $\\mathcal{P} = 2\\,000 \\times 5 = 10\\,000$. Étape 5 — Donner le résultat : $10\\,000$ W, soit 10 kW.",
+                "answers": [
+                  {
+                    "content": "10000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka roule à 72 km/h. La force motrice, dans le sens du mouvement, vaut $1\\,500$ N. Calcule la puissance de cette force en watts.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $v = \\dfrac{72}{3{,}6} = 20$ m/s et $F = 1\\,500$ N. Étape 2 — Choisir la relation : $\\mathcal{P} = F \\times v$. Étape 3 — Aucun travail à calculer. Étape 4 — Effectuer : $\\mathcal{P} = 1\\,500 \\times 20 = 30\\,000$. Étape 5 — Donner le résultat : $30\\,000$ W, soit 30 kW. Écrire $1\\,500 \\times 72 = 108\\,000$ W oublierait la conversion en m/s.",
+                "answers": [
+                  {
+                    "content": "30000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un treuil effectue un travail de $90\\,000$ J en 2 minutes. Calcule sa puissance moyenne en watts.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $W = 90\\,000$ J et $\\Delta t = 2$ min $= 120$ s. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 3 — Le travail est donné. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{90\\,000}{120} = 750$. Étape 5 — Donner le résultat : 750 W. Diviser par 2 donnerait 45 000 W, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "750",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "1 kW = ___ W (écris seulement le nombre).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 5 — Donner le résultat en watts (ou en kW) : le préfixe kilo signifie « mille ». Donc 1 kW $= 1\\,000$ W, et 3 kW $= 3\\,000$ W.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une machine effectue un travail de 3 000 J en 1 minute. Quelle est sa puissance moyenne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Convertir : $\\Delta t = 1$ min $= 60$ s et $W = 3\\,000$ J. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{3\\,000}{60} = 50$ W. Étape 5 — Donner le résultat : 50 W. La réponse $3\\,000$ W garde la minute à la place de 60 s : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "50 W",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3\\,000$ W",
+                    "correct": false
+                  },
+                  {
+                    "content": "$180\\,000$ W",
+                    "correct": false
+                  },
+                  {
+                    "content": "30 W",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Des machines travaillent sur un chantier d'Abidjan, et tu calcules leur puissance.",
+            "questions": [
+              {
+                "content": "Un moteur effectue un travail de $4\\,800$ J en 60 s. Calcule sa puissance moyenne.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $W = 4\\,800$ J et $\\Delta t = 60$ s. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{4\\,800}{60} = 80$. Étape 5 — Donner le résultat : 80 W.",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise le travail par la durée en secondes."
+              },
+              {
+                "content": "Un camion roule à 54 km/h avec une force motrice de $2\\,000$ N dans le sens du mouvement. Calcule la puissance de cette force en watts.",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Convertir : $v = \\dfrac{54}{3{,}6} = 15$ m/s et $F = 2\\,000$ N. Étape 2 — Choisir la relation : $\\mathcal{P} = F \\times v$. Étape 4 — Effectuer : $\\mathcal{P} = 2\\,000 \\times 15 = 30\\,000$. Étape 5 — Donner le résultat : $30\\,000$ W.",
+                "answers": [
+                  {
+                    "content": "30000",
+                    "correct": true
+                  }
+                ],
+                "hint": "Convertis d'abord 54 km/h en m/s."
+              },
+              {
+                "content": "Pour passer d'une vitesse en km/h à une vitesse en m/s, on divise par ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Convertir en unités SI : 1 km $= 1\\,000$ m et 1 h $= 3\\,600$ s, donc 1 km/h $= \\dfrac{1\\,000}{3\\,600}$ m/s $= \\dfrac{1}{3{,}6}$ m/s. Pour passer de km/h à m/s, on divise par 3,6. Par exemple, 36 km/h $= 10$ m/s.",
+                "answers": [
+                  {
+                    "content": "3,6",
+                    "correct": true
+                  },
+                  {
+                    "content": "3.6",
+                    "correct": true
+                  }
+                ],
+                "hint": "36 km/h font 10 m/s."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une charrette au marché de Treichville",
+          "statement": "Au marché de Treichville, Awa tire une charrette chargée sur un sol horizontal, en ligne droite, sur 6 m. La corde exerce sur la charrette une force constante de 250 N, qui fait avec le déplacement un angle $\\alpha$ tel que $\\cos\\alpha = 0{,}8$. Le sol exerce un frottement constant de 100 N, opposé au déplacement. Le trajet dure 20 s. On prend $g = 10$ N/kg.",
+          "exercise_type": "fixation",
+          "figure": "traction-obliquee-charrette",
+          "questions": [
+            {
+              "content": "La corde exerce une force de 250 N qui fait avec le déplacement de 6 m un angle $\\alpha$ tel que $\\cos\\alpha = 0{,}8$. Calcule le travail de la force de la corde.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail d'une force constante. Étape 1 — Relever : $F = 250$ N et $d = 6$ m, déjà en unités SI. Étape 2 — Repérer : l'angle est $\\alpha$ avec $\\cos\\alpha = 0{,}8$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 250 \\times 6 \\times 0{,}8 = 1\\,500 \\times 0{,}8 = 1\\,200$ J. Sans le cosinus, on trouverait 1 500 J, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "1200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le frottement constant de 100 N est opposé au déplacement de 6 m. Calcule le travail du frottement.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail résistant. Étape 1 — Repérer : le frottement est opposé au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$, le travail est négatif. Étape 4 — Conclure : $W = 100 \\times 6 \\times (-1) = -600$ J, travail résistant.",
+              "answers": [
+                {
+                  "content": "-600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La charrette roule sur un sol horizontal. Quel est le travail de son poids et celui de la réaction normale du sol ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du travail nul. Étape 1 — Repérer : le déplacement est horizontal, le poids et la réaction normale sont verticaux. Étape 2 — Lire l'angle : $\\alpha = 90°$. Étape 3 — Comparer à 90° : $\\cos 90° = 0$. Étape 4 — Conclure : leur travail est nul. Le poids ne travaille pas car la charrette ne monte ni ne descend.",
+              "answers": [
+                {
+                  "content": "nuls tous les deux, car ces forces sont perpendiculaires au déplacement",
+                  "correct": true
+                },
+                {
+                  "content": "moteurs tous les deux, car ces forces sont grandes",
+                  "correct": false
+                },
+                {
+                  "content": "le poids est résistant et la réaction normale est motrice",
+                  "correct": false
+                },
+                {
+                  "content": "égaux au travail du frottement, soit $-600$ J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la somme des travaux de toutes les forces appliquées à la charrette. On rappelle : travail de la corde $1\\,200$ J, travail du frottement $-600$ J, travail du poids 0 J, travail de la réaction normale 0 J.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Pour obtenir la somme des travaux, on additionne les travaux de chaque force avec leurs signes. Étape 1 — Relever les travaux : $1\\,200$ J, $-600$ J, 0 J et 0 J. Étape 2 — Additionner : $1\\,200 + (-600) + 0 + 0 = 600$ J. Écrire $1\\,200 + 600 = 1\\,800$ J est faux : le frottement est résistant, son travail se retranche.",
+              "answers": [
+                {
+                  "content": "600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le travail de la force de la corde, $1\\,200$ J, est effectué en 20 s. Calcule la puissance moyenne de cette force.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance moyenne. Étape 1 — Convertir : $W = 1\\,200$ J et $\\Delta t = 20$ s, déjà en unités SI. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{1\\,200}{20} = 60$. Étape 5 — Donner le résultat : 60 W.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le travail du frottement est moteur, car la charrette avance.",
+              "question_type": "true_false",
+              "explanation": "Méthode du signe d'un travail. Étape 1 — Repérer : le frottement est opposé au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° < 0$. Étape 4 — Conclure : le travail du frottement est résistant (négatif). Le fait que la charrette avance est dû à la corde, pas au frottement.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un seau remonté d'un puits près de Korhogo",
+          "statement": "Dans un village près de Korhogo, une fillette remonte un seau de 12 kg d'un puits, à vitesse constante : le seau monte de 5 m en 20 s. La corde exerce sur le seau une force verticale, vers le haut, de 120 N. On prend $g = 10$ N/kg.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Calcule le poids du seau de 12 kg ($g = 10$ N/kg).",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = m \\times g = 12 \\times 10 = 120$ N.",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le seau de poids 120 N monte de 5 m. Calcule le travail de son poids.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = 120$ N. Étape 2 — Relever la hauteur : $h = 5$ m. Étape 3 — Déterminer le signe : le seau monte, donc négatif. Étape 4 — Appliquer : $W = -120 \\times 5 = -600$ J.",
+              "answers": [
+                {
+                  "content": "-600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La corde exerce une force de 120 N, verticale vers le haut, dans le sens du déplacement de 5 m. Calcule le travail de cette force.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail d'une force constante. Étape 1 — Relever : $F = 120$ N et $d = 5$ m. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\alpha = 0°$ et $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 120 \\times 5 \\times 1 = 600$ J. Ce travail est moteur.",
+              "answers": [
+                {
+                  "content": "600",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la somme des travaux du poids et de la force de la corde. On rappelle : travail du poids $-600$ J, travail de la corde $600$ J.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Pour obtenir la somme des travaux, on additionne les travaux avec leurs signes. Étape 1 — Relever : $-600$ J et $600$ J. Étape 2 — Additionner : $-600 + 600 = 0$ J. Le travail moteur de la corde compense le travail résistant du poids.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le travail de la corde, 600 J, est effectué en 20 s. Calcule sa puissance moyenne.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance moyenne. Étape 1 — Convertir : $W = 600$ J et $\\Delta t = 20$ s. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{600}{20} = 30$. Étape 5 — Donner le résultat : 30 W.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le seau monte de 5 m en 20 s à vitesse constante. Calcule sa vitesse en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "La vitesse est le quotient de la distance par la durée. Étape 1 — Relever : $d = 5$ m et $\\Delta t = 20$ s. Étape 2 — Calculer : $v = \\dfrac{d}{\\Delta t} = \\dfrac{5}{20} = 0{,}25$ m/s.",
+              "answers": [
+                {
+                  "content": "0,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La force de la corde vaut 120 N, dans le sens du mouvement, et la vitesse du seau est de 0,25 m/s. Calcule la puissance de cette force avec $\\mathcal{P} = F \\times v$.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance d'une force. Étape 1 — Convertir : $F = 120$ N et $v = 0{,}25$ m/s, déjà en unités SI. Étape 2 — Choisir la relation : $\\mathcal{P} = F \\times v$. Étape 4 — Effectuer : $\\mathcal{P} = 120 \\times 0{,}25 = 30$. Étape 5 — Donner le résultat : 30 W, comme avec le travail et la durée.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une grue soulève un conteneur au port d'Abidjan",
+          "statement": "Une grue du port d'Abidjan soulève un conteneur de 2 000 kg verticalement de 9 m, à vitesse constante, en 30 s. Le câble exerce sur le conteneur une force verticale, vers le haut, de $20\\,000$ N. On prend $g = 10$ N/kg.",
+          "exercise_type": "evaluation",
+          "figure": "levage-conteneur",
+          "questions": [
+            {
+              "content": "Calcule le poids du conteneur de 2 000 kg ($g = 10$ N/kg).",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = m \\times g = 2\\,000 \\times 10 = 20\\,000$ N.",
+              "answers": [
+                {
+                  "content": "20000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le conteneur, de poids $20\\,000$ N, monte de 9 m. Calcule le travail de son poids.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = 20\\,000$ N. Étape 2 — Relever la hauteur : $h = 9$ m. Étape 3 — Déterminer le signe : le conteneur monte, donc négatif. Étape 4 — Appliquer : $W = -20\\,000 \\times 9 = -180\\,000$ J.",
+              "answers": [
+                {
+                  "content": "-180000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant la montée, quelle est la nature du travail du poids du conteneur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du signe d'un travail. Étape 1 — Repérer : le poids est vers le bas, le déplacement vers le haut. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$. Étape 4 — Conclure : le travail est résistant. La vitesse constante n'annule pas le travail d'une force.",
+              "answers": [
+                {
+                  "content": "résistant, car le poids est opposé au déplacement",
+                  "correct": true
+                },
+                {
+                  "content": "moteur, car le poids est une grande force",
+                  "correct": false
+                },
+                {
+                  "content": "nul, car le conteneur est à vitesse constante",
+                  "correct": false
+                },
+                {
+                  "content": "moteur, car le conteneur est tiré vers le haut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La force du câble, $20\\,000$ N, a le sens du déplacement de 9 m. Calcule son travail.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail d'une force constante. Étape 1 — Relever : $F = 20\\,000$ N et $d = 9$ m. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 20\\,000 \\times 9 \\times 1 = 180\\,000$ J.",
+              "answers": [
+                {
+                  "content": "180000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le travail du câble, $180\\,000$ J, est effectué en 30 s. Calcule la puissance moyenne du câble en kilowatts.",
+              "question_type": "numeric",
+              "unit": "kW",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance moyenne. Étape 1 — Convertir : $W = 180\\,000$ J et $\\Delta t = 30$ s. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{180\\,000}{30} = 6\\,000$ W. Étape 5 — Donner le résultat en kW : $6\\,000$ W $= 6$ kW.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le conteneur monte de 9 m en 30 s à vitesse constante. Calcule sa vitesse en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "La vitesse est le quotient de la distance par la durée. Étape 1 — Relever : $d = 9$ m et $\\Delta t = 30$ s. Étape 2 — Calculer : $v = \\dfrac{9}{30} = 0{,}3$ m/s.",
+              "answers": [
+                {
+                  "content": "0,3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La force du câble vaut $20\\,000$ N dans le sens du mouvement, et la vitesse du conteneur est de 0,3 m/s. Calcule la puissance de cette force en watts.",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance d'une force. Étape 1 — Convertir : $F = 20\\,000$ N et $v = 0{,}3$ m/s. Étape 2 — Choisir la relation : $\\mathcal{P} = F \\times v$. Étape 4 — Effectuer : $\\mathcal{P} = 20\\,000 \\times 0{,}3 = 6\\,000$. Étape 5 — Donner le résultat : $6\\,000$ W, comme avec le travail et la durée.",
+              "answers": [
+                {
+                  "content": "6000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si le conteneur redescend de 9 m, le travail de son poids vaut $+180\\,000$ J.",
+              "question_type": "true_false",
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = 20\\,000$ N. Étape 2 — Relever la hauteur : $h = 9$ m. Étape 3 — Déterminer le signe : le conteneur descend, donc positif. Étape 4 — Appliquer : $W = +20\\,000 \\times 9 = 180\\,000$ J. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un gbaka dans la côte d'Abobo",
+          "statement": "Sur une route d'Abidjan, un gbaka et sa charge, de masse totale 2 000 kg, montent une côte rectiligne longue de 200 m, dont le dénivelé est de 10 m. Le gbaka roule à la vitesse constante de 36 km/h. Le moteur exerce une force constante de $1\\,500$ N, parallèle à la route et dans le sens du mouvement. Les frottements constituent une force constante de 500 N, parallèle à la route et opposée au mouvement. La réaction normale de la route est perpendiculaire à la route. On prend $g = 10$ N/kg.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Convertis la vitesse du gbaka, 36 km/h, en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Convertir : pour passer de km/h à m/s, on divise par 3,6. $v = \\dfrac{36}{3{,}6} = 10$ m/s. Écrire 36 m/s oublierait la conversion.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka parcourt 200 m à la vitesse constante de 10 m/s. Calcule la durée de la montée.",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "La durée est le quotient de la distance par la vitesse. Étape 1 — Relever : $d = 200$ m et $v = 10$ m/s. Étape 2 — Calculer : $\\Delta t = \\dfrac{d}{v} = \\dfrac{200}{10} = 20$ s.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le moteur exerce une force de $1\\,500$ N dans le sens du déplacement de 200 m. Calcule le travail de la force motrice.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail d'une force constante. Étape 1 — Relever : $F = 1\\,500$ N et $d = 200$ m. Étape 2 — Repérer : la force a le sens du déplacement, donc $\\cos\\alpha = 1$. Étape 3 — Écrire : $W = F \\times d \\times \\cos\\alpha$. Étape 4 — Calculer : $W = 1\\,500 \\times 200 \\times 1 = 300\\,000$ J.",
+              "answers": [
+                {
+                  "content": "300000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les frottements de 500 N sont opposés au déplacement de 200 m. Calcule leur travail.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail résistant. Étape 1 — Repérer : les frottements sont opposés au déplacement. Étape 2 — Lire l'angle : $\\alpha = 180°$. Étape 3 — Comparer à 90° : $\\cos 180° = -1 < 0$. Étape 4 — Conclure : $W = 500 \\times 200 \\times (-1) = -100\\,000$ J, travail résistant.",
+              "answers": [
+                {
+                  "content": "-100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka et sa charge ont une masse de 2 000 kg et montent de 10 m (dénivelé). Calcule le travail du poids.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode du travail du poids. Étape 1 — Calculer le poids : $P = 2\\,000 \\times 10 = 20\\,000$ N. Étape 2 — Relever la hauteur : $h = 10$ m, le dénivelé, et non 200 m, la longueur de la route. Étape 3 — Déterminer le signe : le gbaka monte, donc négatif. Étape 4 — Appliquer : $W = -20\\,000 \\times 10 = -200\\,000$ J. Utiliser 200 m donnerait $-4\\,000\\,000$ J, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "-200000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le travail de la réaction normale de la route, perpendiculaire à la route, pendant la montée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du travail nul. Étape 1 — Repérer : la réaction normale est perpendiculaire à la route, donc au déplacement. Étape 2 — Lire l'angle : $\\alpha = 90°$. Étape 3 — Comparer à 90° : $\\cos 90° = 0$. Étape 4 — Conclure : $W = 0$ J.",
+              "answers": [
+                {
+                  "content": "0 J, car elle est perpendiculaire au déplacement",
+                  "correct": true
+                },
+                {
+                  "content": "positif, car elle soutient le gbaka",
+                  "correct": false
+                },
+                {
+                  "content": "négatif, car elle s'oppose au poids",
+                  "correct": false
+                },
+                {
+                  "content": "égal à celui du poids, soit $-200\\,000$ J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la somme des travaux de toutes les forces. On rappelle : moteur $300\\,000$ J, frottements $-100\\,000$ J, poids $-200\\,000$ J, réaction normale 0 J.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Pour obtenir la somme des travaux, on additionne les travaux avec leurs signes. Étape 1 — Relever : $300\\,000$ J, $-100\\,000$ J, $-200\\,000$ J et 0 J. Étape 2 — Additionner : $300\\,000 - 100\\,000 - 200\\,000 + 0 = 0$ J. Le travail moteur compense les travaux résistants.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le moteur effectue un travail de $300\\,000$ J en 20 s. Calcule la puissance moyenne de la force motrice en kilowatts.",
+              "question_type": "numeric",
+              "unit": "kW",
+              "tolerance": 0,
+              "explanation": "Méthode de la puissance moyenne. Étape 1 — Convertir : $W = 300\\,000$ J et $\\Delta t = 20$ s. Étape 2 — Choisir la relation : $\\mathcal{P} = \\dfrac{W}{\\Delta t}$. Étape 4 — Effectuer : $\\mathcal{P} = \\dfrac{300\\,000}{20} = 15\\,000$ W. Étape 5 — Donner le résultat : $15\\,000$ W $= 15$ kW. Avec $\\mathcal{P} = F \\times v = 1\\,500 \\times 10$, on retrouve $15\\,000$ W.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour calculer le travail du poids du gbaka, on utilise le dénivelé de 10 m et non la longueur de 200 m de la route. Explique pourquoi.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le travail du poids ne dépend pas du chemin suivi",
+                "Seule compte la hauteur dont le gbaka monte",
+                "Le calcul $W = -P \\times h$ avec $h = 10$ m est écrit"
+              ],
+              "explanation": "Corrigé modèle : le poids est une force verticale constante. Son travail ne dépend pas du chemin suivi, mais seulement de la hauteur dont le gbaka s'élève, soit $h = 10$ m. On calcule donc $W = -P \\times h = -20\\,000 \\times 10 = -200\\,000$ J (négatif car le gbaka monte). Utiliser la longueur de la route, 200 m, est l'erreur à éviter. Barème : 0,5 point pour l'idée que le travail ne dépend pas du chemin, 0,5 point pour la hauteur $h = 10$ m, 1 point pour le calcul avec le signe négatif.",
+              "answers": [
+
+              ],
+              "starter": "Le travail du poids ne dépend pas…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
