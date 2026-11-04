@@ -1,4 +1,6 @@
-<%# 🌐 UI · teams/crm/assistants/show — squelette du Lot 0, complété par le Lot G %>
-<%# Rôle : le frame school_crm_assistants, vide, que la coquille charge ; la garde de policy est celle du contrôleur %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
-<%= turbo_frame_tag "school_crm_assistants" %>
+<%# 🌐 UI · teams/crm/assistants/show — le frame school_crm_assistants : la carte « Assistants » %>
+<%# Rôle : trois assistants, ou « Assistant non configuré » sans clé ; la fiche de briefing arrive dans son propre frame %>
+<%# UDR  : XXXX (assistants du suivi, bloc « Suivi » de la fiche établissement) %>
+<%= turbo_frame_tag "school_crm_assistants" do %>
+  <%= render "teams/crm/assistants/card", school: @school, configured: @configured %>
+<% end %>

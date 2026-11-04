@@ -1,0 +1,146 @@
+require "test_helper"
+
+# ADR-XXXX (modèles de langage) §4 et §6: the adapter speaks the OpenAI-compatible chat API through an injected HTTP client
+# (never the network), and maps every failure to a reason of the port: not_configured, timeout, provider_error, invalid_response.
+module Crm
+  class OpenRouterLanguageModelTest < ActiveSupport::TestCase
+    Response = Struct.new(:code, :body)
+
+    # Replaces Net::HTTP: records the request, answers a programmed response or raises a programmed error.
+    class FakeHttp
+      attr_reader :started_with, :request
+
+      def initialize(response: nil, error: nil)
+        @response, @error = response, error
+      end
+
+      def start(host, port, **options)
+        @started_with = { host:, port:, **options }
+        raise @error if @error
+
+        connection = Object.new
+        connection.define_singleton_method(:request) { |request| (@captured = request) && @response_for.call }
+        outer = self
+        connection.instance_variable_set(:@response_for, -> { outer.send(:answer, connection) })
+        yield connection
+      end
+
+      private
+
+      def answer(connection)
+        @request = connection.instance_variable_get(:@captured)
+        @response
+      end
+    end
+
+    MESSAGES = [ { role: "system", content: "Tu aides." }, { role: "user", content: "Bonjour" } ].freeze
+    BODY = { choices: [ { message: { content: "Salut" } } ], usage: { prompt_tokens: 12, completion_tokens: 3 } }.to_json
+
+    def call(http, api_key: "sk-test", **args)
+      OpenRouterLanguageModel.new(api_key:, http:).complete(messages: MESSAGES, model: "deepseek/deepseek-chat", max_tokens: 300, **args)
+    end
+
+    def assert_reason(reason, result)
+      assert result.failure?
+      assert_equal :unavailable, result.code
+      assert_equal reason, result.errors[:reason]
+    end
+
+    test "success returns the text, the model, the tokens and a duration" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      result = call(http)
+
+      assert result.success?
+      assert_equal "Salut", result.value[:text]
+      assert_equal "deepseek/deepseek-chat", result.value[:model]
+      assert_equal [ 12, 3 ], result.value.values_at(:input_tokens, :output_tokens)
+      assert_kind_of Integer, result.value[:duration_ms]
+    end
+
+    test "the request is a bearer-authenticated JSON POST with the 5 s and 30 s timeouts" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      call(http)
+
+      assert_equal({ host: "openrouter.ai", port: 443, use_ssl: true, open_timeout: 5, read_timeout: 30 }, http.started_with)
+      assert_equal "/api/v1/chat/completions", http.request.path
+      assert_equal "Bearer sk-test", http.request["Authorization"]
+      assert_equal "application/json", http.request["Content-Type"]
+      sent = JSON.parse(http.request.body)
+      assert_equal "deepseek/deepseek-chat", sent["model"]
+      assert_equal 300, sent["max_tokens"]
+      assert_equal MESSAGES.map(&:stringify_keys), sent["messages"]
+      assert_equal OpenRouterLanguageModel::PROVIDER_PREFERENCES.deep_stringify_keys, sent["provider"]
+      assert_nil sent["response_format"]
+    end
+
+    test "json asks for a JSON object" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      call(http, json: true)
+
+      assert_equal OpenRouterLanguageModel::JSON_RESPONSE_FORMAT.deep_stringify_keys, JSON.parse(http.request.body)["response_format"]
+    end
+
+    test "audio is attached to the last user message as base64 input_audio" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      call(http, audio: { data: "OCTETS".b, format: "webm" })
+
+      last = JSON.parse(http.request.body)["messages"].last
+      parts = last["content"]
+      assert_equal "text", parts.first["type"]
+      assert_equal "Bonjour", parts.first["text"]
+      assert_equal({ "data" => Base64.strict_encode64("OCTETS"), "format" => "webm" }, parts.last["input_audio"])
+    end
+
+    test "without a key it is not configured and never calls out" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      assert_reason :not_configured, call(http, api_key: nil)
+      assert_nil http.started_with
+    end
+
+    test "429, 402, 500 and 503 are provider errors" do
+      %w[429 402 500 503].each do |code|
+        assert_reason :provider_error, call(FakeHttp.new(response: Response.new(code, "{}")))
+      end
+    end
+
+    test "a connection or read timeout is a timeout" do
+      assert_reason :timeout, call(FakeHttp.new(error: Net::ReadTimeout.new))
+      assert_reason :timeout, call(FakeHttp.new(error: Net::OpenTimeout.new))
+    end
+
+    test "a network error is a provider error" do
+      assert_reason :provider_error, call(FakeHttp.new(error: SocketError.new("dns")))
+      assert_reason :provider_error, call(FakeHttp.new(error: Errno::ECONNRESET.new))
+    end
+
+    test "an unreadable body is an invalid response" do
+      assert_reason :invalid_response, call(FakeHttp.new(response: Response.new("200", "<html>oops")))
+    end
+
+    test "a body without choices[0].message.content is an invalid response" do
+      [ "{}", { choices: [] }.to_json, { choices: [ { message: {} } ] }.to_json, { choices: [ { message: { content: "  " } } ] }.to_json,
+        "[]", "null" ].each do |body|
+        assert_reason :invalid_response, call(FakeHttp.new(response: Response.new("200", body)))
+      end
+    end
+
+    test "a response without usage counts zero tokens, and the provider's model name wins" do
+      body = { model: "deepseek/deepseek-chat-v3", choices: [ { message: { content: "Salut" } } ] }.to_json
+
+      result = call(FakeHttp.new(response: Response.new("200", body)))
+
+      assert_equal [ "deepseek/deepseek-chat-v3", 0, 0 ], result.value.values_at(:model, :input_tokens, :output_tokens)
+    end
+
+    test "a failure never carries the key" do
+      result = call(FakeHttp.new(response: Response.new("500", "boom sk-test")))
+
+      assert_not_includes result.inspect, "sk-test"
+    end
+  end
+end
