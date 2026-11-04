@@ -8,6 +8,8 @@
 # <dir> holds one .resultset.json per part, at any depth. Exactly <parts> are expected: a part that wrote nothing
 # (cancelled, timed out, upload lost) fails here, loudly, instead of being measured as uncovered code or forgotten.
 # SimpleCov exits with a non-zero status below 100 % lines or branches, and writes the merged report in coverage/.
+# The gems of the bundle (SimpleCov is not a default gem of the runner image).
+require "bundler/setup"
 require_relative "../../test/coverage_profile"
 
 parts, dir = ARGV
