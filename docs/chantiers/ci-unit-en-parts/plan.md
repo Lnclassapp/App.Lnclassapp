@@ -29,13 +29,13 @@ Un seul levier, donc un seul lot.
 - [x] Protocole de mesure écrit et reproductible par quelqu'un d'autre
 - [x] Explorer coût rendu : où part réellement le temps (pas une hypothèse)
 - [x] ADR écrit si un contrat change (ADR-0064 §8, ADR-0107 §8)
-- [ ] Bench versionné, produisant la valeur avant
-- [ ] Tests de non-régression fonctionnelle verts **avant** le premier levier
+- [x] Bench versionné, produisant la valeur avant
+- [x] Tests de non-régression fonctionnelle verts **avant** le premier levier
 - [x] Un lot = un levier = un chiffre
-- [ ] Chaque levier sans gain mesuré a été **annulé**, pas conservé
-- [ ] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane
-- [ ] Tableau `Mesures` complété (Avant / Cible / Après)
+- [x] Chaque levier sans gain mesuré a été **annulé**, pas conservé
+- [ ] Bench après : même machine, même volume, même méthode, ≥ 3 exécutions, médiane *(2 exécutions ; la 3e au prochain train)*
+- [x] Tableau `Mesures` complété (Avant / Cible / Après)
 - [ ] **Challenger a relancé le bench lui-même** et obtenu le gain annoncé
-- [ ] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés)
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] `journal.md` : leviers abandonnés et pourquoi
+- [x] Résultat fonctionnel strictement identique (aucun écran, aucune sortie modifiés)
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] `journal.md` : leviers abandonnés et pourquoi
