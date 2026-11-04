@@ -27,9 +27,6 @@ module Entities
       def unknown? = kind == :unknown
       def whole_lessons? = load? && whole_lessons
       def create_missing? = load? && create_missing
-      # ADR-0123 §8, amendé le 2026-11-04 : partout où l'on charge (Develop, Staging), le référentiel de base manquant est créé d'abord ;
-      # une base Staging remise à neuf refuserait sinon toutes ses leçons (niveau, matière, série inconnus).
-      def completes_referential? = load?
 
       # Le remplacement d'une leçon du dépôt : :lesson (Develop, tout fichier v3 : remplacée entière, cours, notions, fiches, exercices et
       # sujets, quels que soient son dossier et ses sujets), :exercises (ailleurs, elle porte des sujets de devoir, ADR-0122), :create_only
@@ -40,7 +37,8 @@ module Entities
         return :exercises if subjects
         return unless V3ProgrammeLevels.include?(level_directory)
 
-        :create_only if create_missing?
+        # Seul Staging arrive ici : Develop est sorti plus haut (:lesson), et seuls Develop et Staging chargent.
+        :create_only
       end
     end
     AutomaticLoadStage::LOADING = %w[develop staging].freeze

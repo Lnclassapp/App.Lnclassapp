@@ -73,7 +73,7 @@ module UseCases
         return reject_unknown(stage, actor) if stage.unknown?
 
         fail_orphans
-        complete_referential if stage.completes_referential?
+        complete_referential # ADR-0123 §8 amendé : partout où l'on charge (Develop, Staging), skip et unknown sont sortis plus haut
         chosen, ignored = @source.lessons.map { [ it, mode_of(stage, it) ] }.partition(&:last)
         log_ignored(ignored.map(&:first))
         done(:done, chosen.to_h { |lesson, mode| [ lesson.import_name, load_safely(lesson, mode, actor) ] })
