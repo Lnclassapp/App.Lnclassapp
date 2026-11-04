@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/crm-ecoles` |
 | **Programme** | — |
@@ -53,6 +53,7 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 | Quels usages d'IA entrent dans la livraison du 15 novembre ? | **Les quatre** : compte rendu dicté, fiche de briefing avant appel, rapport pédagogique pour la direction, brouillon de relance WhatsApp. | Plus aucune marge sur 8 jours ouvrés : le suivi et la règle « à relancer » passent d'abord, les quatre usages d'IA se branchent ensuite sur un **seul accès aux modèles**, partagé. Le compte rendu dicté reçoit un fichier son envoyé par l'utilisateur : sa **menace est écrite avant tout code**. Chaque sortie d'IA est un **brouillon que l'humain relit** : rien n'entre dans le journal ni ne part vers une école sans validation. Quand le modèle ne répond pas, l'écran le dit et le suivi marche sans lui. |
 | Quelles données de l'école peut-on envoyer aux modèles externes ? | **Tout, y compris les élèves** : le rapport pour la direction peut citer des élèves et des classes nommées. | Des données de **mineurs** partent chez un tiers : c'est le risque principal du chantier. N'utiliser chez OpenRouter que des fournisseurs qui **ne gardent pas et n'entraînent pas** sur les données, et faire de ce réglage une condition d'appel, pas une option. N'envoyer que ce dont l'usage a besoin : le briefing commercial n'a pas besoin de noms d'élèves, seul le rapport pour la direction en cite. Chaque appel est tracé : qui, quelle école, quel usage, quel fournisseur. La revue sécurité est obligatoire sur ce lot. |
 | Comment le rapport pour la direction lui parvient-il ? | **L'équipe le télécharge.** Un membre de l'équipe génère le rapport depuis la fiche école, le relit, le corrige, puis le télécharge en PDF et le transmet lui-même. | La direction n'accède à rien de nouveau : aucun écran ni droit côté école. Le rapport est un brouillon modifiable avant téléchargement, et la version téléchargée est gardée dans le journal de l'école (date, auteur, période couverte). Le PDF contient des noms d'élèves : seul un `admin` ou un `field` le produit, et il n'est jamais servi par un lien public. |
+| Comment Konan, enseignant sur Lnclass, utilise-t-il le suivi ? | **Second numéro, compte équipe `field`.** Il garde son compte enseignant. | Le modèle des comptes ne change pas : un compte, un rôle, un numéro. Ses gestes d'enseignant comptent pour l'activité de son école comme ceux de tout enseignant ; le suivi ne relie pas ses deux comptes. |
 
 ## Cas limites identifiés
 
@@ -71,7 +72,6 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 
 ## Questions encore ouvertes
 
-- **Konan est enseignant sur Lnclass.** Un compte n'a qu'un rôle et un numéro ne sert qu'à un compte : pour utiliser le suivi, il lui faut un compte équipe distinct, avec un autre numéro. Le porteur doit trancher (second numéro, ou Konan reste hors de l'outil).
-- Touré doit recevoir une invitation équipe `field` avant le premier lot démontrable.
+- Touré et Konan (sur son second numéro) doivent recevoir une invitation équipe `field` avant le premier lot démontrable.
 - **Intelligence retenue** : les quatre usages sont dans la livraison du 15 novembre (réponse 8), avec l'accès aux modèles par OpenRouter. La clé d'accès et son budget mensuel restent à fournir.
 - **Données d'élèves envoyées aux modèles (réponse 9)** : le porteur doit confirmer le cadre légal (protection des données personnelles applicable, information des écoles et des familles) avant la mise en production du rapport pour la direction. Ce n'est pas un blocage pour la démonstration de stage sur des comptes fictifs.
