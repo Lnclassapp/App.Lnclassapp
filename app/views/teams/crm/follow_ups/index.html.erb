@@ -1,5 +1,41 @@
-<%# 🌐 UI · teams/crm/follow_ups/index — squelette du Lot 0, complété par les Lots D et E %>
-<%# Rôle : page « Relances » (menu « Plus »), vide ; la garde de policy est celle du contrôleur %>
+<%# 🌐 UI · teams/crm/follow_ups/index — page « Relances » (menu « Plus »), onglets « Mes relances » et « Sans destinataire » (admin) %>
+<%# Rôle : tableau au bureau, cartes empilées à 390 px, 25 lignes par page, un vide par onglet ; le Lot E y ajoute « À relancer » %>
 <%# UDR  : XXXX (pipeline et relances) %>
 <% page_title t(".title") %>
-<%= ui_page_header title: t(".title"), back: team_home_path %>
+<% panels = { "mine" => @mine, "orphans" => @orphans }.compact %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: team_home_path } %>
+<%= ui_tabs id: "follow-ups", label: t(".tabs_label"), selected: @tab do |tabs| %>
+  <% panels.each do |key, page| %>
+    <% tabs.tab key, t(".tabs.#{key}") do %>
+      <%# Le vide et la liste sont tous deux rendus : le CSS montre le vide quand « Faite » ou « Réattribuer » retire la dernière ligne. %>
+      <div class="group/follow-ups">
+        <div class="group-has-[[data-follow-up]]/follow-ups:hidden"><%= ui_empty_state title: t(".empty_#{key}"), icon: "check-circle" %></div>
+        <div class="hidden group-has-[[data-follow-up]]/follow-ups:block">
+          <div class="hidden md:block">
+            <table class="w-full text-left text-sm">
+              <caption class="sr-only"><%= t(".tabs.#{key}") %></caption>
+              <thead class="text-mute">
+                <tr>
+                  <% %i[school due assignee reason actions].each do |column| %>
+                    <th scope="col" class="pb-2 pr-4 font-medium"><%= t(".columns.#{column}") %></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <% page.rows.each do |row| %>
+                  <%= render "teams/crm/follow_ups/follow_up", row:, layout: :row %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="space-y-3 md:hidden">
+            <% page.rows.each do |row| %>
+              <%= render "teams/crm/follow_ups/follow_up", row:, layout: :card %>
+            <% end %>
+          </div>
+          <%= ui_pagination page: page.page, pages: page.pages, param: "#{key}_page" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
