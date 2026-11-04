@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # prepare-interros-cahier, Lot F puis F bis (CA-13, 14, 16 ; UDR feuilles-prepare-interros-et-devoirs §3, devoirs reçus) : « Ma classe » lit un
 # envoi comme une feuille ; l'élève rend chaque exercice à son enseignant (sans correction avant) et lit sa note et sa correction sur la page de
-# résultat, dont le retour mène à « Ma classe » ; refait, l'exercice se vérifie en copie d'entraînement, non rattachée au devoir.
+# résultat, dont le retour mène à la feuille du devoir (page à remplir) ; refait, l'exercice se vérifie en copie d'entraînement, non rattachée au devoir.
 class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
   setup do
     @course = create_course(name: "Thalès")
@@ -28,39 +28,38 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
 
   def sessions(exercise) = Orm::ExerciseSession.where(student: @student, exercise:, status: "completed")
 
-  # CA-13, CA-14, CA-11 (à 390 px : rien ne dépasse de l'écran, chaque bouton fait 44 px au moins)
-  test "« Ma classe » : une feuille par envoi, « Prépare devoirs » dès 3 exercices et « Prépare interros » pour 1 ou 2, sans rien à corriger avant de rendre" do
+  # CA-13, CA-14, CA-11 (à 390 px : rien ne dépasse de l'écran, chaque bouton fait 44 px au moins) ; sujet-avant-de-commencer, Lot B :
+  # « Ma classe » ne porte que des cases, la feuille de chaque envoi est sur sa page à remplir.
+  test "« Ma classe » : une case par envoi, « Prépare devoirs » dès 3 exercices et « Prépare interros » pour 1 ou 2 ; la feuille, sans rien à corriger avant de rendre" do
     with_mobile_viewport do
       visit student_classroom_path
 
       within "#student_classroom_assigned" do
-        assert_selector ".ps-sheet", count: 2
-        within(".ps-sheet:first-child") do
-          assert_selector ".ps-header-title", text: "PRÉPARE INTERROS", match: :first
-          assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
-          assert_selector ".ps-subject", text: "La propriété de Thalès"
-          assert_selector ".ps-remember", text: "À retenir : Les rapports sont égaux."
-          assert_selector ".ps-exercise", count: 1
+        assert_selector "a.ps-card", count: 2
+        within("a.ps-card:first-child") do
+          assert_selector ".ps-card-kind", text: "PRÉPARE INTERROS N°1"
+          assert_selector ".ps-card-title", text: "La propriété de Thalès"
         end
-        within(".ps-sheet:last-child") do
-          assert_selector ".ps-header-title", text: "PRÉPARE DEVOIRS", match: :first
-          assert_selector ".ps-remember", text: "Notions mobilisées : La propriété de Thalès"
-          assert_selector ".ps-exercise", count: 3
-          assert_button "Rendre à l'enseignant", count: 3
-          assert_no_button "Vérifier ma réponse"
-          assert_no_link "Voir ma correction"
-        end
+        within("a.ps-card:last-child") { assert_selector ".ps-card-kind", text: "PRÉPARE DEVOIRS N°1" }
       end
+
+      visit fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
+      assert_selector ".ps-header-title", text: "PRÉPARE DEVOIRS", match: :first
+      assert_selector ".ps-remember", text: "Notions mobilisées : La propriété de Thalès"
+      assert_selector ".ps-exercise", count: 3
+      assert_button "Rendre à l'enseignant", count: 3
+      assert_no_button "Vérifier ma réponse"
+      assert_no_link "Voir ma correction"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
-      heights = page.evaluate_script("Array.from(document.querySelectorAll('#student_classroom_assigned .ps-btn')).filter((b) => b.offsetParent).map((b) => b.getBoundingClientRect().height)")
+      heights = page.evaluate_script("Array.from(document.querySelectorAll('.ps-btn')).filter((b) => b.offsetParent).map((b) => b.getBoundingClientRect().height)")
       assert_operator heights.min, :>=, 44
     end
   end
 
-  # CA-16 (memo Q17, Q18) : rendre ou vérifier ouvre la page de résultat, dont le retour mène à « Ma classe ».
+  # CA-16 (memo Q17, Q18) : rendre ou vérifier ouvre la page de résultat, dont le retour mène à la feuille du devoir (page à remplir).
   test "rendre à l'enseignant ouvre la page de résultat et rattache la copie ; refaire puis vérifier ouvre aussi le résultat, copie non rattachée" do
     first = @devoir.first
-    visit student_classroom_path
+    visit fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
     answer(first)
 
     within(frame(first)) { click_button "Rendre à l'enseignant" }
@@ -70,6 +69,7 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
     assert_equal [ @assignments.fetch(first).id ], sessions(first).pluck(:classroom_assignment_id)
     click_link "Retour à Ma classe"
 
+    assert_current_path fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
     within(frame(first)) do
       assert_selector ".ps-status", text: "Réussi"
       assert_link "Voir ma correction"
@@ -86,6 +86,6 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
     assert_selector "#session_grade", text: "0/20"
     assert_equal [ @assignments.fetch(first).id, nil ], sessions(first).order(:id).pluck(:classroom_assignment_id)
     click_link "Retour à Ma classe"
-    assert_selector "#student_classroom_assigned"
+    assert_current_path fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
   end
 end

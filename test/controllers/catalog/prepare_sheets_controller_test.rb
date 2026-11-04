@@ -145,6 +145,17 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "button.ps-btn--primary", text: "Vérifier ma réponse", count: 0
   end
 
+  test "a teacher without any classroom of this level is told so on the reading page" do
+    sign_in_as create_teacher(classrooms: [ create_classroom(name: "6ème 1") ])
+
+    get course_sheet_path(@course.slug, @devoir_sheet)
+
+    assert_select "#assign_targets_none", text: /Aucune de vos classes n'est en/
+    sign_in_as @teacher
+    get course_sheet_path(@course.slug, @devoir_sheet)
+    assert_select "#assign_targets_none", 0
+  end
+
   test "a teacher on the sheet to fill is redirected to the reading page" do
     sign_in_as @teacher
 

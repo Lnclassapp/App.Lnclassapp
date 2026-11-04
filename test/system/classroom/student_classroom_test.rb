@@ -61,10 +61,12 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       end
       assert_single_primary_action
       assert_list_capped "#student_classroom_treated ul"
-      # prepare-interros-cahier, Lot F : chaque exercice assigné seul est un envoi d'un exercice, une feuille « Prépare interros ».
+      # prepare-interros-cahier, Lot F puis sujet-avant-de-commencer, Lot B : chaque exercice assigné seul est un envoi d'un exercice, une case
+      # « Prépare interros » ; la feuille à rendre est sur sa page.
       within "#student_classroom_assigned" do
-        assert_selector ".ps-sheet", count: 7
-        assert_button I18n.t("catalog.courses.sheets.hand_in"), count: 7
+        assert_selector "a.ps-card", count: 7
+        assert_no_selector ".ps-sheet"
+        assert_no_button I18n.t("catalog.courses.sheets.hand_in")
         assert_no_button I18n.t("components.reveal.more")
       end
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")

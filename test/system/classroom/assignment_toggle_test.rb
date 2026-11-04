@@ -28,9 +28,9 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   end
 
   def toggle(type, key) = "#assignment_#{@classroom.public_id}_#{type}_#{key}"
-  # sujet-avant-de-commencer, Lot A : la page de la leçon dans la classe ne porte plus que des cases (le Lot B y remet la feuille) ;
-  # en attendant, les bascules de la classe se manient sur la page de lecture de la feuille, dans le catalogue.
-  def lesson_path = course_sheet_path(@course.slug, "notion-#{@meiose.slug}")
+  # sujet-avant-de-commencer, Lot B : la page de la leçon dans la classe ne porte que des cases ; les bascules de la classe se manient sur
+  # la page de la feuille dans cette classe.
+  def lesson_path = classroom_course_sheet_path(@classroom.public_id, @course.slug, "notion-#{@meiose.slug}")
   def withdraw_button = "button[aria-label^='Retirer']"
 
   def sign_in_teacher

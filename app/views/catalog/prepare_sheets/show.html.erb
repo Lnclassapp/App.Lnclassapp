@@ -12,6 +12,9 @@
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% @primary_assign_taken = false %>
 <div data-turbo-prefetch="false"><%= ui_back_link course.name, href: course_path(course.slug, anchor: @sheet.dom_id) %></div>
+<% if targets && classrooms.empty? %>
+  <p id="assign_targets_none" class="mb-4 text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
+<% end %>
 <div class="ps-page">
   <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: (fillable ? :reading : sheet_mode), targets:, classrooms:, heading: :h1 %>
   <% if fillable %>

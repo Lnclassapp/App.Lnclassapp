@@ -104,13 +104,21 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", old, text: "Retour à la leçon"
   end
 
-  test "venu de Ma classe, l'ancre de la feuille n'est pas encore lue : le retour reste Ma classe" do
+  # sujet-avant-de-commencer, Lot B : un devoir reçu ramène à sa page à remplir, à l'exercice ; sans ancre valide, « Ma classe ».
+  test "venu de Ma classe, le retour va à la feuille du devoir à l'exercice ; sans ancre valide, il reste Ma classe" do
     sign_in_as @student
     check
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
 
-    get exercise_session_result_path(session.public_id, return_to: "class", sheet: "sujet-2")
+    get exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
+    assert_select "a[href=?]", fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}"),
+                  text: "Retour à Ma classe"
 
+    [ "Devoir/../x", "", "a" * 121 ].each do |bad|
+      get exercise_session_result_path(session.public_id, return_to: "class", sheet: bad)
+      assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
+    end
+    get exercise_session_result_path(session.public_id, return_to: "class")
     assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
   end
 
@@ -122,6 +130,16 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     check(headers: {}, sheet:)
 
     assert_redirected_to fill_course_sheet_path(@course.slug, sheet, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Cet exercice n'existe plus.", flash[:alert]
+  end
+
+  test "sans JavaScript, un refus sur la feuille d'un devoir revient à ce devoir à remplir, pas au catalogue" do
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+
+    check(headers: {}, return_to: "class", sheet: "devoir-abc123")
+
+    assert_redirected_to fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}")
     assert_equal "Cet exercice n'existe plus.", flash[:alert]
   end
 

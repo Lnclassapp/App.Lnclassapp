@@ -28,11 +28,15 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
   test "CA-1, CA-3 : « Ma classe » : l'exercice à faire est une feuille à rendre, la carte traitée dit 16/20 et Voir ma copie" do
     visit student_classroom_path
 
+    # sujet-avant-de-commencer, Lot B : l'exercice à faire est une case ; sa feuille se lit puis se commence.
+    within("#student_classroom_assigned") { click_link "Prépare interros n°1" }
+    click_link "Commencer Prépare interros"
     within "#sheet-exercise-#{@todo.public_id}" do
       assert_text "Exercice 1"
       assert_button "Rendre à l'enseignant"
     end
 
+    visit student_classroom_path
     within "#student_classroom_treated" do
       assert_text "16/20"
       click_at_center(find("span", text: "Voir ma copie"))

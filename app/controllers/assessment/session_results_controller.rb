@@ -35,7 +35,7 @@ module Assessment
       @result = query.call(public_id: session.public_id, reveal: @reveal)
       @owner = session.student_id == current_actor.user_id
       @return_to = params[:return_to] if @owner && RETURN_TARGETS.include?(params[:return_to])
-      @sheet = params[:sheet] if @return_to == "sheet" && params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR)
+      @sheet = params[:sheet] if RETURN_TARGETS.include?(@return_to) && params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR)
       @resume_at = restart_resume_at(session) if @owner
       @can_restart = @resume_at.nil? && Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
     end

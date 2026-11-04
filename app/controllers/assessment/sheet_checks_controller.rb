@@ -64,7 +64,10 @@ module Assessment
 
     def back_to_lesson(alert: nil)
       anchor = "sheet-exercise-#{exercise_public_id}"
-      target = sheet ? fill_course_sheet_path(course_slug, sheet, anchor:) : course_path(course_slug, anchor:)
+      target = if sheet.nil? then course_path(course_slug, anchor:)
+      elsif return_to == "class" then fill_student_assigned_sheet_path(sheet, anchor:)
+      else fill_course_sheet_path(course_slug, sheet, anchor:)
+      end
       redirect_to target, alert:, status: :see_other
     end
 
