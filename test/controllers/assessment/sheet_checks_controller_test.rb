@@ -354,6 +354,15 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/un nombre est attendu/, response.body)
   end
 
+  test "sans JavaScript, une copie illisible dans sa forme revient à la leçon avec le message général" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { "999999" => { display_order: [ "0" ] } } } }
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal I18n.t("assessment.sheet_checks.errors.invalid_copy"), flash[:alert]
+  end
+
   test "sans JavaScript, une réponse illisible revient à la leçon avec son message (R1)" do
     numeric = create_exercise(essential: @notion, questions: 0)
     create_kind_question(exercise: numeric, question_type: "numeric", answers: [ "4" ])
