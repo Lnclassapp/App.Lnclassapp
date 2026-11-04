@@ -3,5 +3,5 @@
 <%# ADR  : 0121 (§4) · UDR : 0149 §3 (Comportement, États) %>
 <%= turbo_stream.remove "sheet-error-#{@exercise_public_id}" %>
 <%= turbo_stream.append "sheet-exercise-#{@exercise_public_id}" do %>
-  <%= render "assessment/sheet_checks/error", exercise_public_id: @exercise_public_id, code: @error_code, resume_at: @resume_at %>
+  <%= render "assessment/sheet_checks/error", exercise_public_id: @exercise_public_id, code: @error_code, resume_at: @resume_at, lines: @lines %>
 <% end %>
