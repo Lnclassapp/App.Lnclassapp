@@ -218,10 +218,34 @@ module LessonRendering
       end
     end
 
-    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres.
+    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres. Une figure citée par les seuls
+    # exercices n'est pas attendue : depuis sujet-avant-de-commencer (#464), les exercices sont sur la page de la feuille, pas
+    # sur celle de la leçon.
     def missing_figures(lesson, rendered)
       drawn = rendered.select { it["shown"] }.map { JSON.parse(it["params"].to_s) }
-      lesson.fetch("figures", []).reject { |figure| drawn.include?(figure["params"]) }.map { it["key"] }
+      only_in_exercises = exercise_only_figure_keys(lesson)
+      lesson.fetch("figures", []).reject { |figure| only_in_exercises.include?(figure["key"]) || drawn.include?(figure["params"]) }
+            .map { it["key"] }
+    end
+
+    # Les clés de figure citées dans un exercice (de la leçon ou d'une notion) et nulle part ailleurs dans la leçon, la liste des
+    # figures exceptée.
+    EXERCISE_KEYS = %w[exercise exercises].freeze
+
+    def exercise_only_figure_keys(lesson)
+      in_exercises = []
+      elsewhere = []
+      collect_strings(lesson.except("figures"), in_exercises, elsewhere, inside: false)
+      lesson.fetch("figures", []).map { it["key"] }
+            .select { |key| in_exercises.any? { it.include?(key) } && elsewhere.none? { it.include?(key) } }
+    end
+
+    def collect_strings(node, in_exercises, elsewhere, inside:)
+      case node
+      when Hash then node.each { |key, value| collect_strings(value, in_exercises, elsewhere, inside: inside || EXERCISE_KEYS.include?(key)) }
+      when Array then node.each { collect_strings(it, in_exercises, elsewhere, inside:) }
+      when String then (inside ? in_exercises : elsewhere) << node
+      end
     end
   end
 end
