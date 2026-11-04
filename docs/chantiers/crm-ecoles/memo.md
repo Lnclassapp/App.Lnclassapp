@@ -25,7 +25,7 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 ## Pourquoi maintenant
 
 - La prospection des écoles est la priorité de croissance, et elle repose aujourd'hui sur la mémoire d'une seule personne à plein temps.
-- Le chantier est le projet de stage de Touré : application et rapport livrés avant le 15 novembre 2026, soit 8 jours ouvrés.
+- Le chantier est le projet de stage de Touré, nommé **« Lnclass Intelligent »** : application et rapport livrés avant le 15 novembre 2026, soit 8 jours ouvrés.
 
 ## Hors périmètre
 
@@ -43,7 +43,7 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Qui démarche les écoles et utilisera le suivi ? | Le porteur, Touré, Konan, puis les futures recrues de l'équipe. | Le suivi est multi-utilisateur : chaque école a un **responsable**, chaque relance a un destinataire, « Mes relances » a un sens. Le changement de responsable (départ, réorganisation) est un parcours à part entière. Un responsable dont le compte est retiré ne doit pas laisser ses écoles orphelines en silence. |
 
 ## Cas limites identifiés
 
@@ -51,4 +51,5 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 
 ## Questions encore ouvertes
 
-- …
+- **Konan est enseignant sur Lnclass.** Un compte n'a qu'un rôle et un numéro ne sert qu'à un compte : pour utiliser le suivi, il lui faut un compte équipe distinct, avec un autre numéro. Le porteur doit trancher (second numéro, ou Konan reste hors de l'outil).
+- Touré doit recevoir une invitation équipe `field` avant le premier lot démontrable.
