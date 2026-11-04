@@ -178,6 +178,7 @@ module Queries
       end
 
       # ADR-0091 §4.4 : « Ton choix » par type ; la solution seulement avec reveal.
+      # Le nombre de cases (MAX(blank)) est la seule lecture de answers hors reveal pour les trous et le nombre : ni texte, ni correction.
       def kind_review(reveal:)
         exercise = create_exercise(questions: 0)
         blank = create_kind_question(exercise:, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Abidjan])
@@ -194,7 +195,7 @@ module Queries
         attempt.(steps, ids: steps.answers.order(:position).map(&:id).reverse)
         attempt.(pairs, ids: pairs.answers.order(:position).map(&:id).rotate)
         binds = []
-        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') }
+        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') && !payload[:sql].include?("MAX(") }
         review = ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(reveal:, session:).review }
         [ review, binds ]
       end
@@ -446,6 +447,83 @@ module Queries
         assert_nil row.essential
         assert_equal [ @essential.course.slug, "Awa Koné" ], [ row.course_slug, row.student_name ]
         assert_nil row.gap_outcome
+      end
+
+      def multi_blank_session
+        exercise = create_exercise(title: "Thalès", questions: 0)
+        numeric = exercise.questions.create!(position: 1, content: "AN = ___  MN = ___", question_type: "numeric", points: 2, unit: "cm")
+        [ "3", "4" ].each_with_index { |value, blank| numeric.answers.create!(position: blank + 1, content: value, correct: true, blank:) }
+        select = exercise.questions.create!(position: 2, content: "Il ___ puis il ___.", question_type: "select", points: 1)
+        [ [ "mange", true, 0 ], [ "dort", false, 0 ], [ "sort", true, 1 ], [ "boit", false, 1 ] ].each_with_index do |(text, correct, blank), rank|
+          select.answers.create!(position: rank + 1, content: text, correct:, blank:)
+        end
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 50)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: numeric, correct: false, selected_answer_ids: [], response_text: "3 ; 5",
+                                     blank_responses: %w[3 5], blank_results: [ true, false ], answered_at: Time.current)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: select, correct: false, selected_answer_ids: select.answers.where(content: %w[mange boit]).ids,
+                                     blank_responses: %w[mange boit], blank_results: [ true, false ], answered_at: Time.current)
+        [ session, numeric, select ]
+      end
+
+      test "plusieurs cases : la réponse et le verdict de chaque case, les points en fractions, l'indice ouvert" do
+        session, numeric, = multi_blank_session
+        session.update!(hinted_question_ids: [ numeric.id ])
+
+        row = result(session:)
+
+        first, second = row.review
+        assert_equal [ %w[3 5], [ true, false ], true ], [ first.blank_responses, first.blank_results, first.multi_blank? ]
+        assert_equal [ true, false ], [ first.hinted?, second.hinted? ]
+        assert_equal [ Rational(1), Rational(1, 2) ], [ first.earned_points, second.earned_points ]
+        # 1 point sur 2 + 0,5 point sur 1 : 1,5 point sur 3
+        assert_equal [ BigDecimal("1.5"), BigDecimal("3"), true ], [ row.points.earned, row.points.graded, row.points.weighted ]
+        assert_equal [], first.blank_solutions
+      end
+
+      test "plusieurs cases : avec reveal, les réponses acceptées de chaque case ; la proposition correcte pour une liste" do
+        session, = multi_blank_session
+
+        first, second = result(session:, reveal: true).review
+
+        assert_equal [ [ "3" ], [ "4" ] ], first.blank_solutions
+        assert_equal [ [ "mange" ], [ "sort" ] ], second.blank_solutions
+      end
+
+      test "une question à une case n'a ni cases, ni indice ouvert, et ses points restent tout ou rien" do
+        row = result
+
+        assert_equal [ false, false ], row.review.map(&:multi_blank?)
+        assert_equal [ [], [] ], row.review.map(&:blank_results)
+        assert_equal [ Rational(0), Rational(1) ], row.review.map(&:share)
+        assert_equal [ BigDecimal("1"), BigDecimal("2"), false ], [ row.points.earned, row.points.graded, row.points.weighted ]
+      end
+
+      test "plusieurs cases laissées vides : la question reste à plusieurs cases, sans réponse, et rapporte 0 comme Grading.share" do
+        session, numeric, select = multi_blank_session
+        Orm::QuestionAttempt.where(exercise_session: session).delete_all
+        Orm::QuestionAttempt.create!(exercise_session: session, question: numeric, correct: false, selected_answer_ids: [], response_text: nil,
+                                     unanswered: true, answered_at: Time.current)
+
+        [ true, false ].each do |reveal|
+          first, second = result(session:, reveal:).review
+
+          assert_equal [ true, true ], [ first.multi_blank?, second.multi_blank? ], "reveal #{reveal}"
+          assert_equal [ 2, 2 ], [ first.blanks, second.blanks ]
+          assert_equal [ Rational(0), Rational(0) ], [ first.share, second.share ]
+          assert_equal Entities::Assessment::Grading.share_of(blanks: 2, correct: false, blank_results: []), first.share
+        end
+        assert_equal [ [ "3" ], [ "4" ] ], result(session:, reveal: true).review.first.blank_solutions
+        assert select
+      end
+
+      test "la part d'une question lit la règle de Grading.share, une case ou plusieurs" do
+        session, numeric, select = multi_blank_session
+        questions = Repositories::Assessment::ExerciseRepository.new.find(id: numeric.exercise_id).questions
+        attempts = Repositories::Assessment::ExerciseSessionRepository.new.attempts(session_id: session.id).to_h { [ it.question_id, it ] }
+
+        shares = result(session:).review.map(&:share)
+
+        assert_equal [ numeric, select ].map { |orm| questions.find { it.id == orm.id } }.map { Entities::Assessment::Grading.share(it, attempts[it.id]) }, shares
       end
     end
   end

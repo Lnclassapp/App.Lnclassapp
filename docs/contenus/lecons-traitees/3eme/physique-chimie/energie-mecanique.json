@@ -252,6 +252,60 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu calcules l'énergie cinétique de deux scooters et d'un taxi.",
+            "questions": [
+              {
+                "content": "Deux scooters ont la même masse, 100 kg. Le scooter A roule à 10 m/s : $E_c$ = ___   Le scooter B roule à 20 m/s : $E_c$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Calcule d'abord $v^2$, puis multiplie par la masse et par $\\frac{1}{2}$.",
+                "explanation": "Étape 1 — Relever : $m = 100\\ \\text{kg}$ pour les deux. Étape 2 — A : $E_c = \\frac{1}{2} \\times 100 \\times 10^2 = 5\\,000\\ \\text{J}$. Étape 3 — B : $E_c = \\frac{1}{2} \\times 100 \\times 20^2 = 20\\,000\\ \\text{J}$. La vitesse a doublé, l'énergie cinétique est multipliée par 4.",
+                "answers": [
+                  {
+                    "content": "5000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "20000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi de masse 1 200 kg roule à 54 km/h. Quelle est son énergie cinétique, arrondie à l'unité ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Convertis d'abord la vitesse en m/s : on divise par 3,6.",
+                "explanation": "Étape 1 — Relever : $m = 1\\,200\\ \\text{kg}$ et $v = 54\\ \\text{km/h}$. Étape 2 — Convertir : $v = 54 \\div 3{,}6 = 15\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 1\\,200 \\times 15^2 = 0{,}5 \\times 1\\,200 \\times 225$. Étape 4 — Calculer : $E_c = 135\\,000\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "135000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un corps à l'arrêt a une énergie cinétique nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : un corps à l'arrêt a une vitesse $v = 0$. Étape 2 — Remplacer : $E_c = \\frac{1}{2} \\times m \\times 0^2 = 0\\ \\text{J}$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -377,6 +431,69 @@
                   {
                     "content": "L'intensité de la pesanteur $g$",
                     "match": "Le newton par kilogramme (N/kg)"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu calcules l'énergie potentielle de pesanteur, avec $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
+            "questions": [
+              {
+                "content": "Un pot de masse 2 kg est posé sur une étagère à 3 m du sol : $E_p$ = ___   Le même pot est posé sur une étagère à 1,5 m du sol : $E_p$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Mesure la hauteur $h$ à partir de la référence, ici le sol.",
+                "explanation": "Étape 1 — Choisir : la référence est le sol. Étape 2 — Remplacer : $E_p = 2 \\times 10 \\times 3 = 60\\ \\text{J}$ puis $E_p = 2 \\times 10 \\times 1{,}5 = 30\\ \\text{J}$. Plus le corps est haut, plus $E_p$ est grande.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de masse 800 g est suspendu à 2,5 m au-dessus du sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "La masse doit être en kilogrammes avant de remplacer dans la formule.",
+                "explanation": "Étape 1 — Relever : $m = 800\\ \\text{g} = 0{,}8\\ \\text{kg}$ et $h = 2{,}5\\ \\text{m}$. Étape 2 — Remplacer : $E_p = 0{,}8 \\times 10 \\times 2{,}5$. Étape 3 — Calculer : $E_p = 20\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une pierre de 1 kg est à 6 m du sol. On prend pour référence un point situé à 4 m du sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "single_choice",
+                "hint": "La hauteur $h$ se mesure à partir de la référence choisie, pas à partir du sol.",
+                "explanation": "Étape 1 — Choisir : la référence est à 4 m du sol. Étape 2 — Mesurer : $h = 6 - 4 = 2\\ \\text{m}$ au-dessus de la référence. Étape 3 — Calculer : $E_p = 1 \\times 10 \\times 2 = 20\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "60 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "40 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "20 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "10 J",
+                    "correct": false
                   }
                 ]
               }
@@ -543,6 +660,50 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu calcules l'énergie mécanique avec $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
+            "questions": [
+              {
+                "content": "Un ballon de masse 0,5 kg passe à 4 m du sol avec une vitesse de 6 m/s. Énergie cinétique : $E_c$ = ___   Énergie potentielle : $E_p$ = ___   Énergie mécanique : $E_m$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Calcule $E_c$ et $E_p$ séparément, puis additionne.",
+                "explanation": "Étape 1 — Relever : $m = 0{,}5\\ \\text{kg}$, $v = 6\\ \\text{m/s}$ et $h = 4\\ \\text{m}$. Étape 2 — $E_c = \\frac{1}{2} \\times 0{,}5 \\times 6^2 = 9\\ \\text{J}$. Étape 3 — $E_p = 0{,}5 \\times 10 \\times 4 = 20\\ \\text{J}$. Étape 4 — $E_m = E_c + E_p = 9 + 20 = 29\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "20",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "29",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Un chariot de masse 20 kg roule sur le sol (la référence) à 3 m/s. Quelle est son énergie mécanique ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Quelle est l'énergie potentielle d'un corps placé au niveau de la référence ?",
+                "explanation": "Étape 1 — Relever : $h = 0$ donc $E_p = 0$. Étape 2 — Calculer : $E_c = \\frac{1}{2} \\times 20 \\times 3^2 = 90\\ \\text{J}$. Étape 3 — Additionner : $E_m = 90 + 0 = 90\\ \\text{J}$, égale à $E_c$.",
+                "answers": [
+                  {
+                    "content": "90",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -693,6 +854,45 @@
                   {
                     "content": "Une mangue qui touche le sol",
                     "match": "$E_m = E_c$"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Les frottements sont négligeables. Tu utilises la conservation de l'énergie mécanique ($g = 10\\ \\text{N/kg}$, sol = référence).",
+            "questions": [
+              {
+                "content": "Une balle de 0,4 kg est lâchée sans vitesse d'une hauteur de 45 m. Énergie mécanique au départ : $E_m$ = ___   Énergie cinétique en arrivant au sol : $E_c$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Au départ la balle est immobile : que vaut son énergie cinétique ?",
+                "explanation": "Étape 1 — Calculer au départ : $E_c = 0$ et $E_p = 0{,}4 \\times 10 \\times 45 = 180\\ \\text{J}$, donc $E_m = 180\\ \\text{J}$. Étape 2 — Écrire au sol : $E_p = 0$ et l'énergie mécanique se conserve, donc $E_c = E_m = 180\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "180",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "180",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La même balle arrive au sol avec une énergie cinétique de 180 J. Quelle est sa vitesse en arrivant au sol ?",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "hint": "Écris $\\frac{1}{2} \\times 0{,}4 \\times v^2 = 180$ puis isole $v^2$.",
+                "explanation": "Étape 1 — Écrire : $\\frac{1}{2} \\times 0{,}4 \\times v^2 = 180$. Étape 2 — Résoudre : $0{,}2 \\times v^2 = 180$, donc $v^2 = 900$. Étape 3 — Conclure : $v = \\sqrt{900} = 30\\ \\text{m/s}$.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
                   }
                 ]
               }

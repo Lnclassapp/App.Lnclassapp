@@ -1,0 +1,100 @@
+<%# 🌐 UI · catalog/practice_checks/_question — une question d'entraînement : son énoncé avec les cases dans la phrase, son indice, le verdict de chaque case %>
+<%# Rôle : `question` (sans correction, propositions dans l'ordre d'affichage), `index` (de 0, le nom du champ), `slug` (de la notion), `result` (CheckPractice::QuestionResult | nil), `values` (la saisie gardée) ; les valeurs postées sont des indices d'affichage, jamais des identifiants %>
+<%# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0120-questions-a-plusieurs-cases-et-indice · UDR : 0147-je-m-entraine-dans-la-fiche §3.3, §3.4, §3.10 %>
+<% scope = "catalog.revision_sheets.practice" %>
+<% number = index + 1 %>
+<% kind = question.kind_name %>
+<% verdicts = result ? result.verdicts : [] %>
+<% given = values.is_a?(Hash) ? values : {} %>
+<% field = "answers[#{index}]" %>
+<% base_id = "practice-#{slug}-q#{number}" %>
+<%# Le verdict d'une case : en mots, jamais par la couleur seule ; le champ y renvoie par aria-describedby. %>
+<% symbols = { correct: "✓", wrong: "✗", blank: "…" } %>
+<% verdict_tag = lambda { |blank|
+     verdict = verdicts[blank]
+     verdict && tag.span(safe_join([ tag.span(symbols.fetch(verdict), aria: { hidden: true }), " ", t("#{scope}.#{verdict}") ]),
+                         id: "#{base_id}-verdict-#{blank}", class: "sheet-verdict", data: { verdict: })
+   } %>
+<%# L'état d'un champ jugé : aria-invalid et aria-describedby vers son verdict. %>
+<% state_for = lambda { |blank|
+     verdict = verdicts[blank]
+     verdict ? { "aria-describedby": "#{base_id}-verdict-#{blank}", "aria-invalid": ([ :wrong, :blank ].include?(verdict) ? "true" : nil) }.compact : {}
+   } %>
+<% label_for = ->(blank) { question.unit.present? ? t("#{scope}.blank_label_unit", index: blank + 1, number:, unit: question.unit) : t("#{scope}.blank_label", index: blank + 1, number:) } %>
+<%= tag.li id: base_id do %>
+  <fieldset class="sheet-practice-question">
+    <legend class="sr-only"><%= t("#{scope}.question", number:) %></legend>
+    <% case kind %>
+    <% when "numeric", "fill_blank", "select" %>
+      <% segments = blank_segments(question.content) %>
+      <% segments += [ [ :blank, 0 ] ] unless segments.any? { |type, _| type == :blank } %>
+      <p class="sheet-practice-line">
+        <% segments.each do |type, value| %>
+          <% if type == :text %>
+            <span class="sheet-text"><%= sheet_text(value) %></span>
+          <% else %>
+            <% name = "#{field}[blanks][#{value}]" %>
+            <% saved = given.dig("blanks", value.to_s).to_s %>
+            <% attrs = { id: "#{base_id}-blank-#{value}", "aria-label": label_for.(value), **state_for.(value) } %>
+            <span class="sheet-practice-blank">
+              <% if kind == "select" %>
+                <% options = question.answers.each_with_index.select { |answer, _| answer.blank == value }.map { |answer, at| [ answer.content, at ] } %>
+                <%= select_tag name, options_for_select(options, saved), include_blank: t("#{scope}.choose"), class: "sheet-input", **attrs %>
+              <% elsif kind == "numeric" %>
+                <%= text_field_tag name, saved, class: "sheet-input", inputmode: "decimal", autocomplete: "off", maxlength: 200, **attrs %>
+                <% if question.unit.present? %><span class="sheet-practice-unit"><%= question.unit %></span><% end %>
+              <% else %>
+                <%= text_field_tag name, saved, class: "sheet-input", autocomplete: "off", spellcheck: false, maxlength: 200, **attrs %>
+              <% end %>
+              <%= verdict_tag.(value) %>
+            </span>
+          <% end %>
+        <% end %>
+      </p>
+    <% when "choice" %>
+      <p class="sheet-text"><%= sheet_text(question.content) %></p>
+      <% multiple = question.question_type.start_with?("multiple") %>
+      <% picked = Array(given["ids"]).map(&:to_s) %>
+      <ul class="sheet-practice-choices">
+        <% question.answers.each_with_index do |answer, at| %>
+          <li>
+            <label class="sheet-practice-choice">
+              <%= tag.input type: (multiple ? "checkbox" : "radio"), name: "#{field}[ids][]", value: at, checked: picked.include?(at.to_s),
+                            id: "#{base_id}-choice-#{at}", **state_for.(0) %>
+              <span><%= sheet_text(answer.content) %></span>
+            </label>
+          </li>
+        <% end %>
+      </ul>
+      <%= verdict_tag.(0) %>
+    <% when "ordering", "matching" %>
+      <p class="sheet-text"><%= sheet_text(question.content) %></p>
+      <% order = Array(given["order"]).map(&:to_s) %>
+      <% rows = question.answers.sort_by(&:position) %>
+      <% items = kind == "ordering" ? question.answers.map(&:content) : question.answers.map(&:match_content) %>
+      <div class="sheet-practice-rows">
+        <% rows.each_with_index do |row, rank| %>
+          <div class="sheet-practice-row">
+            <%= label_tag "#{base_id}-order-#{rank}", (kind == "ordering" ? t("assessment.exercise_sessions.kinds.ordering.rank", n: rank + 1) : row.content), class: "sheet-text" %>
+            <%= select_tag "#{field}[order][]", options_for_select(items.each_with_index.to_a, order[rank]), include_blank: t("#{scope}.choose"),
+                           id: "#{base_id}-order-#{rank}", class: "sheet-input", **state_for.(0) %>
+          </div>
+        <% end %>
+      </div>
+      <%= verdict_tag.(0) %>
+    <% when "written" %>
+      <p class="sheet-text"><%= sheet_text(question.content) %></p>
+      <%= text_area_tag "#{field}[text]", given["text"].to_s, rows: 6, maxlength: Dtos::Assessment::AttemptInput::WRITTEN_TEXT_MAX, placeholder: question.starter,
+                        id: "#{base_id}-text", class: "sheet-input sheet-practice-text", "aria-label": t("assessment.exercise_sessions.kinds.written.label") %>
+    <% else %>
+      <p class="sheet-text"><%= sheet_text(question.content) %></p>
+      <p class="sheet-muted"><%= t("#{scope}.notebook") %></p>
+    <% end %>
+    <% if question.hint.present? %>
+      <details class="sheet-practice-hint">
+        <summary><%= t("#{scope}.hint") %></summary>
+        <p class="sheet-text"><%= sheet_text(question.hint) %></p>
+      </details>
+    <% end %>
+  </fieldset>
+<% end %>

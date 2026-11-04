@@ -10,6 +10,7 @@ require "json"
 require "bigdecimal"
 # Les bornes des figures et la structure des onze types de question sont lues dans le domaine (Ruby pur, sans Rails) :
 # une seule source, les mêmes raisons qu'à l'import.
+require_relative "../../app/domain/entities/assessment/question_kinds/blanks"
 %w[choice fill_blank matching numeric ordering select written notebook].each { require_relative "../../app/domain/entities/assessment/question_kinds/#{it}" }
 require_relative "../../app/domain/entities/assessment/answer"
 require_relative "../../app/domain/entities/assessment/question"
@@ -29,6 +30,7 @@ module Contenus
     QUESTIONS = (5..30)
     EXPLANATION = (20..2_000)
     PROBLEMS = 4
+    ESSENTIAL_EXERCISES = (1..2)
     NOTION_TEXT_MAX = 1_200
     STEP_MAX = 300
     AUTO_GRADED_MIN = 50 # % des questions de la leçon corrigées par la machine
@@ -220,11 +222,32 @@ module Contenus
       text(path, "name", notion["name"], schema_max: 200, max: 150, required: true)
       sheet(notion, path)
       figure_ref(notion["figure"], "#{path}.figure", figures)
+      practice(notion["practice"], "#{path}.practice")
       exercise = notion["exercise"]
-      return exercise(exercise, "#{path}.exercise", figures, steps: Array(notion["method"]).grep(String)) if exercise.is_a?(Hash)
+      exercises = notion_exercises(exercise)
+      unless ESSENTIAL_EXERCISES.cover?(exercises.size)
+        return fail_at("#{path}.exercise", "essential_exercise_count", "un ou deux exercices par notion, trouvé #{exercises.size}")
+      end
 
-      count = exercise.is_a?(Array) ? exercise.size : 0
-      fail_at("#{path}.exercise", "essential_exercise_count", "un exercice exactement par notion, trouvé #{count}")
+      steps = Array(notion["method"]).grep(String)
+      return exercise(exercise, "#{path}.exercise", figures, steps:) if exercise.is_a?(Hash)
+
+      exercises.each_with_index { |item, i| exercise(item, "#{path}.exercise[#{i}]", figures, steps:) }
+    end
+
+    # `exercise` : un objet (un exercice) ou une liste de un à deux exercices.
+    def notion_exercises(exercise) = exercise.is_a?(Hash) ? [ exercise ] : (exercise.is_a?(Array) ? exercise : [])
+
+    # « Je m'entraîne » : l'import lui applique les règles de structure des exercices (NotionPractice) ; sans elles ici, une réponse acceptée
+    # en double (« insaturée » / « insaturee », une fois normalisée) passait le script et l'import la refusait (duplicate_accepted).
+    def practice(practice, path)
+      questions = practice.is_a?(Hash) ? practice["questions"] : nil
+      return unless questions.is_a?(Array)
+
+      questions.each_with_index do |question, i|
+        answers = question.is_a?(Hash) ? question["answers"] : nil
+        structure(question, answers, "#{path}.questions[#{i}]") if answers.is_a?(Array) && answers.all?(Hash) && question["question_type"].is_a?(String)
+      end
     end
 
     # Gabarit des 4 blocs : le schéma refuse les bornes de taille (« schema »), l'entité NotionSheet le reste (blank, too_long,
@@ -408,7 +431,8 @@ module Contenus
       end
       answers = raw_answers.each_with_index.map do |answer, i|
         Entities::Assessment::Answer.new(id: i, position: i, content: answer["content"], correct: answer.fetch("correct") { answer["is_correct"] } == true,
-                                         match_content: answer["match"].to_s.strip.then { it.empty? ? nil : it })
+                                         match_content: answer["match"].to_s.strip.then { it.empty? ? nil : it },
+                                         blank: answer["blank"].is_a?(Integer) ? answer["blank"] : 0)
       end
       rules = Entities::Assessment::Question.structure_errors_for(
         question_type: type, answers:, content: question["content"], numeric_tolerance: tolerance.nil? ? nil : BigDecimal(tolerance.to_s),
@@ -422,7 +446,7 @@ module Contenus
 
     # ADR-0115 : au moins la moitié des questions de la leçon sont corrigées par la machine (les rédigées et le cahier ne le sont pas).
     def auto_graded_share(course, path)
-      exercises = Array(course["notions"]).grep(Hash).map { it["exercise"] } + Array(course["exercises"])
+      exercises = Array(course["notions"]).grep(Hash).flat_map { notion_exercises(it["exercise"]) } + Array(course["exercises"])
       questions = exercises.grep(Hash).flat_map { Array(it["questions"]).grep(Hash) }
       return if questions.empty?
 

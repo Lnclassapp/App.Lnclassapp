@@ -44,11 +44,51 @@ module Schemas
       refute valid?(with_course(exercises: "P"))
     end
 
-    test "exercise d'une notion : absent, null ou liste passent au schéma (essential_exercise_count) ; un objet est vérifié" do
+    test "exercise d'une notion : une liste d'exercices valides passe (le nombre, 1 à 2, est compté par l'adaptateur) ; un élément invalide est refusé" do
+      exercise = revision_notion("N").fetch("exercise")
+      assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ exercise, exercise ]) ]))
+      refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ exercise, { "title" => "T" } ]) ]))
+      refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => [ 1 ]) ]))
+    end
+
+    test "exercise d'une notion : absent, null ou liste vide passent au schéma (essential_exercise_count) ; un objet est vérifié" do
       assert valid?(with_course(notions: [ revision_notion("N").except("exercise") ]))
       assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => nil) ]))
       assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => []) ]))
       refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => { "title" => "T" }) ]))
+    end
+
+    test "hint : un texte ou null, facultatif ; sa longueur est jugée par l'adaptateur" do
+      hinted = ->(value) { with_course(exercises: Array.new(4) { revision_exercise("P").merge("hint" => value) }) }
+      assert valid?(hinted.("Un indice"))
+      assert valid?(hinted.(nil))
+      assert valid?(hinted.("x" * 500))
+      [ 5, [ "x" ], { "a" => 1 }, true ].each { |value| refute valid?(hinted.(value)), value.inspect }
+    end
+
+    test "subjects : facultatifs, forme seulement ; titre, notions et exercices requis, la clé notion admise (CA-9 est jugée par l'adaptateur)" do
+      assert valid?(with_course(subjects: [ revision_subject("S") ]))
+      assert valid?(with_course(subjects: []))
+      assert valid?(with_course(subjects: Array.new(11) { revision_subject("S#{it}") }))
+      with_notion = revision_subject("S").tap { it["exercises"][0]["notion"] = "Thalès" }
+      assert valid?(with_course(subjects: [ with_notion ]))
+      refute valid?(with_course(subjects: "S"))
+      refute valid?(with_course(subjects: [ "S" ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").except("title") ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").except("notions") ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").except("exercises") ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").merge("extra" => 1) ]))
+      [ 12, [ "S" ], { "a" => 1 } ].each do |value|
+        refute valid?(with_course(subjects: [ revision_subject("S").merge("title" => value) ])), value.inspect
+        refute valid?(with_course(subjects: [ revision_subject("S").merge("notions" => value) ])), value.inspect
+      end
+      refute valid?(with_course(subjects: [ revision_subject("S").merge("exercises" => "x") ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").tap { it["exercises"][0]["notion"] = 3 } ]))
+      refute valid?(with_course(subjects: [ revision_subject("S").tap { it["exercises"][0]["extra"] = 1 } ]))
+    end
+
+    test "notion : refusée hors d'un exercice de sujet" do
+      refute valid?(with_course(exercises: Array.new(4) { revision_exercise("P").merge("notion" => "Thalès") }))
     end
 
     test "method : 2 à 8 étapes de 300 caractères au plus" do

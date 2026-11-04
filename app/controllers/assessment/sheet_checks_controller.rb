@@ -1,0 +1,143 @@
+# 🌐 DELIVERY · Assessment::SheetChecksController
+# Rôle : « Vérifier ma réponse » sur la feuille de la leçon : une copie rendue, puis la page de résultat de la copie (return_to : le retour vers la feuille ou « Ma classe ») ; refus dans l'exercice en Turbo Stream, réponses gardées ; sans JS, retour à la leçon
+# ADR  : 0121 (§4), 0054, 0091 (§4.4), 0115 · UDR : 0149 §3 · sécurité : copy[answers][<id>] lu champ par champ ; refus : une ligne par question (UDR qcm-plusieurs-reponses)
+module Assessment
+  class SheetChecksController < AuthenticatedController
+    include ReadsOwnLevel
+
+    allow_roles :student
+
+    SHEET_ANCHOR = Assessment::SessionResultsController::SHEET_ANCHOR
+
+    def create
+      return if refuse_out_of_level(exercise_public_id:)
+
+      result = check_exercise.call(actor: current_actor, exercise_public_id:, answers: posted_answers, assignment_public_id:)
+      return render_forbidden if result.code == :forbidden
+
+      result.success? ? show_result(result.value) : refused(error_code(result), result.errors[:resume_at], question_lines(result))
+    rescue ActiveRecord::ActiveRecordError => error
+      # Une panne n'est jamais avalée : elle est signalée, et l'élève relit « Réessaie » avec ses réponses.
+      Rails.error.report(error, handled: true, severity: :error, source: "sheet_check",
+                                context: { user_id: current_actor.user_id, exercise_public_id:, assignment_public_id: })
+      refused(:failed)
+    end
+
+    private
+
+    def exercise_public_id = params[:exercise_public_id]
+
+    # « Rendre à l'enseignant » (Ma classe) poste le devoir ; seule une chaîne est lue, le use case vérifie qu'il est à l'élève.
+    def assignment_public_id = (params[:assignment_public_id] if params[:assignment_public_id].is_a?(String) && params[:assignment_public_id].present?)
+
+    # Ce que l'élève a posté, champ par champ : ni plus de trois champs par question, ni autre clé que celles que le DTO lit.
+    def posted_answers
+      copy = params[:copy]
+      answers = copy[:answers] if copy.is_a?(ActionController::Parameters)
+      return {} unless answers.is_a?(ActionController::Parameters)
+
+      answers.to_unsafe_h.transform_values do |fields|
+        fields.is_a?(Hash) ? fields.slice(*Dtos::Assessment::CopyInput::FIELDS.map(&:to_s)) : {}
+      end
+    end
+
+    # La note de la copie est celle de la page de résultat (sur 20) ; le formulaire vise toute la page (data-turbo-frame="_top").
+    def show_result(submitted)
+      redirect_to exercise_session_result_path(submitted.session_public_id, return_to:, sheet:), status: :see_other
+    end
+
+    # Deux retours seulement, jamais une adresse : l'exercice de la feuille, ou « Ma classe » (un devoir rendu, ou une feuille de « Ma classe »).
+    def return_to = (assignment_public_id || params[:return_to] == "class") ? "class" : "sheet"
+
+    # L'ancre de la feuille d'où l'élève vérifie (notion-<slug>, toute-la-lecon, sujet-<n>) : une chaîne de cette forme, sinon rien.
+    def sheet = (params[:sheet] if params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR))
+
+    def refused(code, resume_at = nil, lines = [])
+      @error_code = code
+      @resume_at = resume_at
+      @lines = lines
+      @exercise_public_id = exercise_public_id
+      respond_to do |format|
+        format.turbo_stream { render :create, status: :unprocessable_entity }
+        format.html { back_to_lesson(alert: error_text(code, resume_at, lines)) }
+      end
+    end
+
+    def back_to_lesson(alert: nil)
+      anchor = "sheet-exercise-#{exercise_public_id}"
+      target = if sheet.nil? then course_path(course_slug, anchor:)
+      elsif return_to == "class" then fill_student_assigned_sheet_path(sheet, anchor:)
+      else fill_course_sheet_path(course_slug, sheet, anchor:)
+      end
+      redirect_to target, alert:, status: :see_other
+    end
+
+    def course_slug = detail.course.slug
+
+    def detail = @detail ||= Queries::Assessment::ExerciseDetailQuery.new.call(public_id: exercise_public_id, reveal: false)
+
+    # UDR qcm-plusieurs-reponses : une ligne par question refusée, « Question e : coche 2 réponses. » (lettre = rang de la question dans
+    # l'exercice) ; result.errors : { rang => { champ => [code] } }. Vide pour une copie illisible dans sa forme ({ base: [...] }).
+    QUESTION_HINTS = %i[wrong_selection not_a_number].freeze
+
+    def question_lines(result)
+      return [] unless result.code == :invalid
+
+      result.errors.filter_map do |rank, problems|
+        next unless rank.is_a?(Integer)
+
+        question = detail.questions.fetch(rank - 1)
+        code = problems.values.flatten.find { QUESTION_HINTS.include?(it) } || :other
+        expected = Entities::Assessment::Question::EXPECTED.fetch(question.question_type.to_sym, 1)
+        t("assessment.sheet_checks.errors.invalid_question", letter: (96 + rank).chr,
+                                                              hint: t("assessment.sheet_checks.errors.invalid_hints.#{code}", count: expected))
+      end
+    end
+
+    # :paused (resume_at), :assigned_pending (CA-17), :assignment_closed (devoir déjà rendu), :archived (exercice absent ou archivé),
+    # :invalid_copy (une réponse refusée par la copie : pas un nombre, trop longue, mauvaise sélection), sinon :failed.
+    def error_code(result)
+      base = result.errors.fetch(:base, [])
+      return :paused if base.include?(:paused)
+      return :assigned_pending if base.include?(:assigned_pending)
+      return :assignment_closed if base.include?(:assignment_closed)
+      return :invalid_copy if result.code == :invalid
+
+      result.code == :not_found || base.include?(:exercise_archived) ? :archived : :failed
+    end
+
+    def error_text(code, resume_at, lines)
+      case code
+      when :paused then t("assessment.sheet_checks.errors.paused", time: l(resume_at, format: :hour_minute))
+      when :assigned_pending then t("assessment.sheet_checks.errors.assigned_pending_html", link: t("assessment.sheet_checks.class_link"))
+      when :assignment_closed then t("assessment.sheet_checks.errors.assignment_closed")
+      when :archived then t("assessment.sheet_checks.errors.archived")
+      when :invalid_copy then lines.presence&.join(" ") || t("assessment.sheet_checks.errors.invalid_copy")
+      else t("assessment.sheet_checks.errors.failed")
+      end
+    end
+
+    def check_exercise
+      sessions = Repositories::Assessment::ExerciseSessionRepository.new
+      exercises = Repositories::Assessment::ExerciseRepository.new
+      transaction = Repositories::Shared::Transaction.new
+      policy = Policies::Assessment::SubmitAttemptPolicy.new
+      UseCases::Assessment::CheckExerciseOnSheet.new(
+        start: UseCases::Assessment::StartExerciseSession.new(
+          exercises:, sessions:, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
+          memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction:, clock: Time.zone
+        ),
+        submit: UseCases::Assessment::SubmitExerciseCopy.new(
+          sessions:, exercises:, policy:, transaction:, clock: Time.zone,
+          close: UseCases::Assessment::CloseExerciseSession.new(
+            sessions:, exercises:, badges: Repositories::Assessment::BadgeRepository.new,
+            gaps: Repositories::Assessment::KnowledgeGapRepository.new, policy:, transaction:, clock: Time.zone
+          )
+        ),
+        exercises:, policy: Policies::Assessment::StartSessionPolicy.new, pending: Repositories::Assessment::PendingAssignmentRepository.new, transaction:,
+        assignments: Repositories::Classroom::AssignmentRepository.new, memberships: Repositories::Classroom::MembershipRepository.new
+      )
+    end
+  end
+end

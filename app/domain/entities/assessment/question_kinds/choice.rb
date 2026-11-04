@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Choice
 # Rôle : Vrai / Faux, choix unique, 2 ou 3 propositions correctes : cocher le bon ensemble de propositions
-# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question), 0115
+# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
@@ -18,8 +18,11 @@ module Entities
           errors << :true_false_needs_two_answers if question_type == "true_false" && answers.size != 2
           errors << :too_few_answers if question_type != "true_false" && answers.size <= expected
           errors << :wrong_correct_count if answers.count(&:correct) != expected
-          errors
+          errors.concat(Blanks.single_case_errors(answers))
         end
+
+        # Une seule case : le verdict est celui de la question.
+        def self.blank_results(question, response) = [ correct?(question, response) ]
 
         # Nombre attendu de propositions distinctes, toutes de cette question.
         def self.well_formed?(question, ids)

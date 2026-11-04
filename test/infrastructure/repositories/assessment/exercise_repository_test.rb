@@ -87,6 +87,17 @@ module Repositories
         assert found.publishable?
       end
 
+      # ADR-0121 : l'indice et le sujet de devoir sont relus ; un exercice de notion n'a ni l'un ni l'autre.
+      test "relit l'indice et le sujet de devoir d'un exercice de sujet" do
+        subject = create_subject(course: @essential.course)
+        record = create_exercise(subject:, hint: "Écris les côtés.")
+
+        found = @repository.find(id: record.id)
+
+        assert_equal [ "Écris les côtés.", subject.id ], [ found.hint, found.subject_id ]
+        assert_equal [ nil, nil ], [ @repository.find(id: create_exercise(essential: @essential).id) ].flat_map { [ it.hint, it.subject_id ] }
+      end
+
       test "un exercice existant relu garde 1 point par question et aucun sujet en blocs" do
         found = @repository.find(id: create_exercise(essential: @essential).id)
 
@@ -362,6 +373,19 @@ module Repositories
         @repository.update(exercise: exercise(id: created.id, questions: [ question("Q") ]), replace_questions: true)
 
         assert_not Orm::QuestionImage.exists?(image.id)
+      end
+
+      test "écrit et relit l'indice d'une question et la case de chaque réponse" do
+        blank_question = Question.new(id: nil, position: nil, content: "AN = ___  MN = ___", explanation: "Thalès.", question_type: "numeric",
+                                      hint: "Pense au coefficient.",
+                                      answers: [ Answer.new(id: nil, position: nil, content: "3", correct: true, blank: 0),
+                                                 Answer.new(id: nil, position: nil, content: "4", correct: true, blank: 1) ])
+
+        saved = @repository.create(exercise: exercise(questions: [ blank_question, question("Sans indice.") ]))
+
+        first, second = saved.questions
+        assert_equal [ "Pense au coefficient.", 2, [ 0, 1 ] ], [ first.hint, first.blanks, first.answers.map(&:blank) ]
+        assert_equal [ nil, 1 ], [ second.hint, second.blanks ]
       end
     end
   end

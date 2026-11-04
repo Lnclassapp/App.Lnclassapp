@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice
 module Entities
   module Catalog
     module ContentNode
@@ -27,12 +27,19 @@ module Entities
           taxonomy(hash, path, lookup)
       end
 
-      # Une notion v3 : son nom et sa fiche au gabarit (NotionSheet). La figure citée et l'exercice sont vérifiés à part.
+      # Une notion v3 : son nom, sa fiche au gabarit (NotionSheet) et son entraînement facultatif (NotionPractice : `practice` absent ou
+      # null n'en est pas un). La figure citée et l'exercice sont vérifiés à part.
       def self.validate_notion(hash, path:)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
         text(hash, "name", Essential::NAME_MAX, path) +
-          NotionSheet.errors_for(hash).map { |sub_path, code| error("#{path}.#{sub_path}", code) }
+          NotionSheet.errors_for(hash).map { |sub_path, code| error("#{path}.#{sub_path}", code) } + practice_errors(hash["practice"], "#{path}.practice")
+      end
+
+      def self.practice_errors(practice, path)
+        return [] if practice.nil?
+
+        NotionPractice.errors_for(practice).map { |sub_path, code, params| error(sub_path == "$" ? path : "#{path}.#{sub_path}", code, **params) }
       end
 
       # Les figures de la leçon : chacune valide (Figure), clés uniques. → Array<ImportError>
@@ -110,7 +117,7 @@ module Entities
         answers = raw_answers.each_with_index.map do |answer, index|
           Assessment::Answer.new(id: index, position: index, content: answer["content"],
                                  correct: answer.fetch("correct") { answer["is_correct"] } == true,
-                                 match_content: answer["match"].to_s.strip.presence)
+                                 match_content: answer["match"].to_s.strip.presence, blank: answer["blank"].is_a?(Integer) ? answer["blank"] : 0)
         end
         errors = text(hash, "content", nil, path)
         errors += raw_answers.each_with_index.flat_map { |answer, index| text(answer, "content", nil, "#{path}.answers[#{index}]") }
@@ -129,6 +136,20 @@ module Entities
         %w[unit starter].each { |key| errors << error("#{path}.#{key}", "schema") unless hash[key].nil? || hash[key].is_a?(String) }
         criteria = hash["criteria"]
         errors << error("#{path}.criteria", "schema") unless criteria.nil? || (criteria.is_a?(Array) && criteria.all?(String))
+        errors + hint_and_blank_errors(hash, path)
+      end
+
+      # L'indice (500 caractères au plus) et la case de chaque réponse (un entier de 0 à 5) : le schéma les a vérifiés, l'adaptateur les revérifie.
+      def self.hint_and_blank_errors(hash, path)
+        hint = hash["hint"]
+        errors = []
+        errors << error("#{path}.hint", hint.is_a?(String) ? "too_long" : "schema") unless hint.nil? || (hint.is_a?(String) && hint.length <= HINT_MAX)
+        Array(hash["answers"]).each_with_index do |answer, index|
+          blank = answer["blank"]
+          next if blank.nil? || (blank.is_a?(Integer) && BLANK_RANGE.cover?(blank))
+
+          errors << error("#{path}.answers[#{index}].blank", blank.is_a?(Integer) ? "invalid_value" : "schema")
+        end
         errors
       end
 
@@ -161,6 +182,8 @@ module Entities
                     starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
+      HINT_MAX = 500
+      BLANK_RANGE = (0..5)
       QUESTIONS_MIN = 5
       QUESTIONS_MAX = 30
       EXPLANATION_RANGE = (20..2_000)
@@ -214,7 +237,7 @@ module Entities
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
       private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :taxonomy,
-                           :series_errors, :text, :error, :explanation_errors
+                           :series_errors, :text, :error, :explanation_errors, :hint_and_blank_errors
     end
   end
 end

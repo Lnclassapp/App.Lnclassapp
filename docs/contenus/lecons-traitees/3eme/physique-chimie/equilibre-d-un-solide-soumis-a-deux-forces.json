@@ -321,6 +321,72 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Un sac est tiré par deux cordes portées par la même droite horizontale. Tu décides s'il est en équilibre.",
+            "questions": [
+              {
+                "content": "Cas A : $F_1$ = 20 N vers la droite et $F_2$ = 20 N vers la droite, le sac est ___. Cas B : $F_1$ = 20 N vers la droite et $F_2$ = 20 N vers la gauche, le sac est ___. Cas C : $F_1$ = 20 N vers la droite et $F_2$ = 15 N vers la gauche, le sac est ___.",
+                "question_type": "select",
+                "hint": "Teste les trois conditions l'une après l'autre : droite d'action, sens, intensité.",
+                "explanation": "Les deux forces ont la même droite d'action dans les trois cas. Cas A : même sens, pas d'équilibre. Cas B : sens contraires et même intensité (20 N), équilibre. Cas C : sens contraires mais intensités différentes (20 N et 15 N), pas d'équilibre.",
+                "answers": [
+                  {
+                    "content": "pas en équilibre",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "en équilibre",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "pas en équilibre",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "en équilibre",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "en équilibre",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "pas en équilibre",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Deux forces de 5 N, de sens contraires, sont portées par deux droites parallèles différentes. Que fait le solide ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer les droites d'action : elles sont différentes, la première condition n'est pas vérifiée. Étape 2 — Conclure : les deux forces se compensent mal et font tourner le solide. Il faut les trois conditions ensemble.",
+                "answers": [
+                  {
+                    "content": "Il est en équilibre, car les intensités sont égales.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est en équilibre, car les sens sont contraires.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il tourne : il n'est pas en équilibre.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il avance en ligne droite.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -429,6 +495,68 @@
                   {
                     "content": "Faux",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu étudies des corps immobiles suspendus à un fil ou à un ressort, avec $g = 10$ N/kg.",
+            "questions": [
+              {
+                "content": "Un seau de masse 2,4 kg est suspendu à un ressort et reste immobile. Poids du seau : $P$ = ___   Tension du ressort : $T$ = ___",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "hint": "À l'équilibre, que peut-on dire de l'intensité de $\\vec{T}$ par rapport à celle de $\\vec{P}$ ?",
+                "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la tension $\\vec{T}$ du ressort. Étape 2 — Calculer : $P = m \\times g = 2{,}4 \\times 10 = 24$ N. Étape 3 — Écrire la condition d'équilibre : $T = P = 24$ N.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un colis de masse 250 g est suspendu à un fil et reste immobile. Quelle est la tension du fil ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "hint": "Convertis d'abord 250 g en kilogrammes.",
+                "explanation": "Étape 1 — Convertir : 250 g = 0,25 kg. Étape 2 — Calculer le poids : $P = 0{,}25 \\times 10 = 2{,}5$ N. Étape 3 — Conclure : $T = P = 2{,}5$ N.",
+                "answers": [
+                  {
+                    "content": "2.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe est suspendue à un fil et reste immobile. Comment est la tension $\\vec{T}$ exercée par le fil sur la lampe ?",
+                "question_type": "single_choice",
+                "explanation": "À l'équilibre, la tension et le poids ont la même droite d'action (la verticale), des sens contraires et la même intensité. Le poids est vers le bas : la tension est donc verticale vers le haut, avec $T = P$.",
+                "answers": [
+                  {
+                    "content": "Verticale, vers le bas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Horizontale, vers la droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Verticale, vers le haut",
+                    "correct": true
+                  },
+                  {
+                    "content": "Verticale, vers le haut, avec une intensité double de celle du poids",
+                    "correct": false
                   }
                 ]
               }
@@ -553,6 +681,76 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu étudies des objets immobiles posés sur un support horizontal. Les frottements sont négligés et $g = 10$ N/kg.",
+            "questions": [
+              {
+                "content": "Un cartable est immobile sur une table. La réaction $\\vec{R}$ de la table a pour direction ___ et pour sens ___.",
+                "question_type": "select",
+                "hint": "Sans frottements, la réaction est perpendiculaire au support. Compare-la au poids.",
+                "explanation": "Étape 1 — Faire le bilan : le cartable subit son poids (vertical, vers le bas) et la réaction de la table. Étape 2 — Écrire la condition d'équilibre : sens contraires, même droite d'action. La réaction est donc verticale, vers le haut.",
+                "answers": [
+                  {
+                    "content": "horizontale",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "oblique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "verticale",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "vers le bas",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vers le haut",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vers la droite",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de masse 45 kg est posée et immobile sur le sol horizontal. Quelle est l'intensité de la réaction du sol ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer le poids : $P = m \\times g = 45 \\times 10 = 450$ N. Étape 2 — Écrire la condition d'équilibre : $R = P$. Étape 3 — Conclure : $R = 450$ N, verticale vers le haut.",
+                "answers": [
+                  {
+                    "content": "450",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La réaction d'une table sur une boîte immobile vaut 24 N. Quelle est la masse de la boîte ?",
+                "question_type": "numeric",
+                "unit": "kg",
+                "tolerance": 0,
+                "hint": "À l'équilibre, $R = P = m \\times g$.",
+                "explanation": "Étape 1 — Écrire la condition d'équilibre : $P = R = 24$ N. Étape 2 — Utiliser $P = m \\times g$ : $m = P \\div g = 24 \\div 10 = 2{,}4$ kg.",
+                "answers": [
+                  {
+                    "content": "2.4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -648,6 +846,48 @@
                   },
                   {
                     "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec $g = 10$ N/kg.",
+            "questions": [
+              {
+                "content": "Un peson indique 45 N quand on y suspend un sac immobile. Le poids du sac est de ___ N et sa masse de ___ kg.",
+                "question_type": "fill_blank",
+                "hint": "Le poids est égal à la tension indiquée par le peson. Utilise ensuite $m = P \\div g$.",
+                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 45$ N du peson. Étape 2 — Écrire l'égalité des intensités : $P = T = 45$ N. Étape 3 — Calculer la masse : $m = P \\div g = 45 \\div 10 = 4{,}5$ kg.",
+                "answers": [
+                  {
+                    "content": "45",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4,5",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "4.5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un élève lit 3,5 N sur un dynamomètre auquel pend un objet immobile. Quelle est la masse de l'objet, en grammes ?",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0,
+                "hint": "Calcule la masse en kilogrammes, puis convertis-la en grammes.",
+                "explanation": "Étape 1 — Écrire : $P = T = 3{,}5$ N. Étape 2 — Calculer : $m = 3{,}5 \\div 10 = 0{,}35$ kg. Étape 3 — Convertir et donner l'unité demandée : 0,35 kg = 350 g.",
+                "answers": [
+                  {
+                    "content": "350",
                     "correct": true
                   }
                 ]

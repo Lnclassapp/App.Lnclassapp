@@ -1,9 +1,12 @@
 # 🧠 DOMAINE · Entities::Catalog::NotionSheet
 # Rôle : la fiche au gabarit fixe d'une notion (À retenir · La méthode · Un exemple corrigé · Le piège à éviter) et ses règles de forme
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6) · UDR : 0141-fiche-de-revision-en-quatre-blocs
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6), 0119-entrainement-de-notion-corrige-sans-trace (§4 : practice) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 module Entities
   module Catalog
-    NotionSheet = Data.define(:remember, :method_steps, :example_statement, :example_steps, :pitfall, :figure_key) do
+    # practice : l'entraînement facultatif de la notion (NotionPractice) | nil. Sa validation est celle de NotionPractice.errors_for.
+    NotionSheet = Data.define(:remember, :method_steps, :example_statement, :example_steps, :pitfall, :figure_key, :practice) do
+      def initialize(practice: nil, **) = super
+
       METHOD_STEPS = (2..8)
       TEXT_MAX = 1_200
       STEP_MAX = 300
@@ -11,7 +14,8 @@ module Entities
       def self.from_raw(raw)
         new(remember: raw["remember"].to_s.strip, method_steps: Array(raw["method"]).map { it.to_s.strip },
             example_statement: raw.dig("example", "statement").to_s.strip, example_steps: Array(raw.dig("example", "steps")).map { it.to_s.strip },
-            pitfall: raw["pitfall"].to_s.strip, figure_key: raw["figure"].presence)
+            pitfall: raw["pitfall"].to_s.strip, figure_key: raw["figure"].presence,
+            practice: NotionPractice.from_raw(raw["practice"]))
       end
 
       # → Array<[chemin, raison]> ; vide si la fiche est conforme. Ne lève jamais, quelle que soit la forme reçue.

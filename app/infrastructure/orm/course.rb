@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Course
 # Rôle : table courses, cours du catalogue (brouillon, publié, archivé), adressés par slug
-# ADR  : 0029, 0035
+# ADR  : 0029, 0035, 0121
 module Orm
   class Course < ApplicationRecord
     include HasFrozenSlug
@@ -17,5 +17,6 @@ module Orm
     has_rich_text :content
 
     has_many :essentials, class_name: "Orm::Essential", inverse_of: :course, dependent: :restrict_with_error
+    has_many :subjects, -> { order(:position) }, class_name: "Orm::Subject", inverse_of: :course, dependent: :restrict_with_error
   end
 end

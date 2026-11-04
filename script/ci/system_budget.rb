@@ -16,6 +16,16 @@ class SystemBudget
   # Dérogations du porteur (ADR-0069 §9, amendement du 2026-10-03) : un chantier, ses fichiers système, son budget.
   # Une PR dont tous les fichiers qui grandissent sont ceux d'une dérogation a ce budget-là ; toute autre, BUDGET.
   GRANTS = {
+    # Demande du 2026-10-31 (prepare-interros-cahier, pilote Touré), soumise au porteur dans la PR du chantier : 30 s pour les quatre
+    # fichiers système des feuilles (lecture, vérification, devoir composé, devoirs reçus).
+    "prepare-interros-cahier" => { budget: 30.0, files: %w[
+      test/system/assessment/sheet_check_test.rb test/system/catalog/prepare_sheets_test.rb
+      test/system/classroom/assigned_sheets_test.rb test/system/classroom/assignment_batch_test.rb
+    ] },
+    # Décision du porteur du 2026-11-02 (ADR standard-de-test, « Tranché » point 3) : le test de rendu des leçons v3 est exclu du plafond
+    # de 15 s. Sa durée enregistrée est celle de ses fichiers piégés (≈ 41 s, mesurée à vide) ; son coût réel est borné par la liste des fichiers
+    # touchés en PR et par la tâche `lecons` du train, en parts de 5 minutes au plus. Plafond de la dérogation : 60 s.
+    "standard-de-test" => { budget: 60.0, files: %w[test/system/catalog/lesson_rendering_test.rb test/system/catalog/lesson_capture_test.rb] },
     "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },
     # Amendement du 2026-10-24 : 50 s pour mvp-teacher-student (pilote du 27 octobre). Élargi le 2026-10-26 (porteur) à tous
     # les fichiers système que le chantier touche (53), le budget restant de 50 s.

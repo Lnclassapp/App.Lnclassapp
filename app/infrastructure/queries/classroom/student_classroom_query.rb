@@ -1,15 +1,14 @@
 # 🔌 INFRA · Queries::Classroom::StudentClassroomQuery
-# Rôle : « Ma classe » (CL-22) : la classe principale active, les cours de ses exercices assignés, les exercices à faire, les fiches à revoir et les exercices traités
+# Rôle : « Ma classe » (CL-22) : la classe principale active, les cours de ses exercices assignés, les fiches à revoir et les exercices traités
 # ADR  : 0026, 0035, 0048, 0067, 0072 · UDR : 0011, 0076 §3.2, 0086 §3.3 (has_teacher) · le code de la classe vient de ClassroomHeaderQuery, sous ReadClassroomPolicy
 module Queries
   module Classroom
     class StudentClassroomQuery
-      # Jamais de liste nominative ni le travail d'un autre élève (UDR-0011). assigned_exercises : les ExerciseRow de
-      # StudentHomeQuery que l'élève n'a pas encore terminés ; treated_exercises : ce qu'il a terminé, de son niveau.
+      # Jamais de liste nominative ni le travail d'un autre élève (UDR-0011). treated_exercises : ce qu'il a terminé, de son niveau.
       # pending_gaps : les GapRow de StudentHomeQuery, les fiches à revoir de l'élève (CA-E3), de son niveau.
       # has_teacher : la classe a au moins un enseignant sur Lnclass ; sinon « Inviter mon enseignant » (UDR-0086 §3.3).
       Row = Data.define(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year, :has_teacher,
-                        :courses, :assigned_exercises, :pending_gaps, :treated_exercises)
+                        :courses, :pending_gaps, :treated_exercises)
       # assigned_count : les exercices du cours assignés à la classe (ADR-0072 : un cours ne s'assigne plus).
       CourseRow = Data.define(:slug, :name, :material_name, :material_slug, :material_category, :assigned_count)
       # best_score_percent : le meilleur score de l'élève ; last_session_public_id : sa dernière session terminée ;
@@ -40,7 +39,7 @@ module Queries
         return if id.nil?
 
         Row.new(public_id:, classroom_name:, level_name:, series_name:, school_name:, school_year:, has_teacher:,
-                courses: courses(id, student_id), assigned_exercises: assigned_exercises(id, student_id),
+                courses: courses(id, student_id),
                 pending_gaps: home.pending_gaps(student_id:), treated_exercises: treated_exercises(student_id))
       end
 
@@ -70,11 +69,6 @@ module Queries
                    .order(Arel.sql("MAX(classroom_assignments.assigned_at) DESC"), "courses.id")
                    .pluck(*COURSE_COLUMNS)
                    .map { |slug, name, material_name, material_slug, material_category, assigned_count| CourseRow.new(slug:, name:, material_name:, material_slug:, material_category:, assigned_count:) }
-      end
-
-      # Chaque exercice n'est dit qu'une fois sur la page (UDR-0057 R6) : un exercice terminé passe dans « traités ».
-      def assigned_exercises(classroom_id, student_id)
-        home.assigned_exercises(classroom_id:, student_id:).select { it.completed_count.zero? }
       end
 
       def treated_exercises(student_id)

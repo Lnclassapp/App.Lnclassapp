@@ -1,0 +1,15 @@
+<%# 🌐 UI · classroom/student_assigned_sheets/_sheet — un devoir reçu avec son cartouche, en lecture ou à remplir %>
+<%# Rôle : calcule les locals de catalog/courses/sheets/_sheet depuis un StudentAssignedSheetsQuery::Sheet ; rendu par la page de lecture et la page à remplir %>
+<%# ADR  : 0121, 0072 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 (devoirs reçus par l'élève) %>
+<%# locals: (sheet:, mode:, heading: :b, redo_exercise: nil) -%>
+<% devoirs = sheet.kind == :devoirs %>
+<% dated = t("classroom.student_classrooms.assigned_sheet.title", date: l(sheet.assigned_on, format: :long)) %>
+<%= render "catalog/courses/sheets/sheet", kind: sheet.kind, number: sheet.number, mode:, material: sheet.materials.join(" · "),
+           header_left: t("catalog.courses.sheets.brand_line", course: sheet.courses.join(" · ")),
+           header_right: t("classroom.student_classrooms.assigned_sheet.position", n: sheet.position, total: sheet.total),
+           title: (devoirs ? dated : sheet.notion || dated),
+           subtitle: (t("classroom.student_classrooms.assigned_sheet.due_on", date: l(sheet.due_on, format: :due_long)) if sheet.due_on),
+           box_label: (devoirs ? t("catalog.courses.sheets.notions") : (t("catalog.courses.sheets.remember") if sheet.remember)),
+           box_text: (devoirs ? sheet.notions.to_sentence : sheet.remember),
+           exercises: sheet.exercises, hand_ins: sheet.hand_ins, return_to: "class", sheet_id: sheet.dom_id, heading:, redo_exercise:,
+           footer: t("catalog.courses.sheets.brand_line", course: t("catalog.courses.sheets.#{sheet.kind}_section")) %>

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Notebook
 # Rôle : travail sur le cahier : une consigne sans champ, jamais noté ; le corrigé type en texte est obligatoire
-# ADR  : 0115 (§4)
+# ADR  : 0115 (§4), 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
@@ -14,12 +14,15 @@ module Entities
           errors = []
           errors << :explanation_required if explanation.to_s.strip.empty?
           errors << :answers_not_allowed if answers.any?
-          errors
+          errors.concat(Blanks.single_case_errors(answers))
         end
 
         def self.well_formed?(_question, _response) = true
 
         def self.correct?(_question, _response) = false
+
+        # Une seule case, jamais notée : le verdict est faux.
+        def self.blank_results(question, response) = [ correct?(question, response) ]
       end
     end
   end

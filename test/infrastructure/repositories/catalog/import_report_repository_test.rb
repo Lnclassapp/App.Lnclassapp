@@ -16,6 +16,31 @@ module Repositories
         @repository.create(kind:, checksum_sha256: "a" * 64, imported_by_id: @member.id, at: @at).value
       end
 
+      def loaded_report(name: "chargement-automatique-x.json", checksum: "a" * 64, finished_at: @at, status: "completed", imported: 1, errors: 0)
+        create_import_report(kind: "course_tree", status:, imported_by: @member, checksum_sha256: checksum, files: [ { name:, byte_size: 1, status: "read" } ],
+                             imported_count: imported, error_count: errors, total_count: imported + errors, finished_at:)
+      end
+
+      test "last_loaded_checksum rend l'empreinte du dernier chargement réussi de ce fichier" do
+        loaded_report(checksum: "1" * 64, finished_at: @at)
+        loaded_report(checksum: "2" * 64, finished_at: @at + 1.hour)
+        loaded_report(name: "autre.json", checksum: "3" * 64, finished_at: @at + 2.hours)
+
+        assert_equal "2" * 64, @repository.last_loaded_checksum(kind: "course_tree", file_name: "chargement-automatique-x.json")
+        assert_nil @repository.last_loaded_checksum(kind: "course_tree", file_name: "inconnu.json")
+        assert_nil @repository.last_loaded_checksum(kind: "schools", file_name: "chargement-automatique-x.json")
+      end
+
+      test "last_loaded_checksum ignore un rapport terminé sans élément écrit, avec une erreur, refusé ou échoué" do
+        loaded_report(checksum: "1" * 64, finished_at: @at)
+        loaded_report(checksum: "2" * 64, finished_at: @at + 1.hour, imported: 0)
+        loaded_report(checksum: "3" * 64, finished_at: @at + 2.hours, errors: 1, imported: 0)
+        loaded_report(checksum: "4" * 64, finished_at: @at + 3.hours, status: "rejected", imported: 0)
+        loaded_report(checksum: "5" * 64, finished_at: @at + 4.hours, status: "failed", imported: 0)
+
+        assert_equal "1" * 64, @repository.last_loaded_checksum(kind: "course_tree", file_name: "chargement-automatique-x.json")
+      end
+
       test "crée un rapport en file, le retrouve par id et par public_id" do
         report = create_report
 
@@ -203,6 +228,31 @@ module Repositories
 
         @repository.finish(id: report.id, status: "failed", counts: {}, details: {}, errors: [], at: @at)
         assert_not @repository.resume(id: report.id, at: @at)
+      end
+      # ADR-0123 §9 : un chargement automatique tué laisse son rapport « en cours » ; le suivant, qui tient le verrou, le passe failed.
+      test "fail_running_named fails only a running report of that kind whose file name has the prefix" do
+        author = create_team_member(team_role: "content", second_factor: false)
+        report = ->(status, name, kind: "course_tree") { create_import_report(kind:, imported_by: author, status:, files: [ { "name" => name, "byte_size" => 1 } ]) }
+        at = Time.zone.parse("2026-11-02 12:40")
+        done = report.("completed", "chargement-automatique-tle-c-x.json")
+        other_kind = report.("importing", "chargement-automatique-a.json", kind: "drenas")
+
+        %w[queued validating importing].each do |status|
+          orphan = report.(status, "chargement-automatique-tle-c-x.json")
+
+          assert_equal [ orphan.public_id ], @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+          assert_equal [ "failed", at ], [ orphan.reload.status, orphan.finished_at ]
+        end
+        by_hand = report.("importing", "lecon.json")
+
+        assert_empty @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+        assert_equal [ "importing", "completed", "importing" ], [ by_hand, done, other_kind ].map { it.reload.status }
+        by_hand.update_columns(status: "completed")
+        mixed = create_import_report(kind: "course_tree", imported_by: author, status: "importing",
+                                     files: [ { "name" => "lecon.json", "byte_size" => 1 }, { "name" => "chargement-automatique-x.json", "byte_size" => 1 } ])
+
+        assert_empty @repository.fail_running_named(kind: "course_tree", prefix: "chargement-automatique-", at:)
+        assert_equal "importing", mixed.reload.status
       end
     end
   end

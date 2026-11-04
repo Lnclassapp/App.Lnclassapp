@@ -249,7 +249,8 @@ module UseCases
 
         assert_equal [ "completed", 3, 2, 0, 1 ],
                      report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
-        assert_equal [ { "path" => "schools[1]", "code" => "write_failed", "params" => {} } ], report.import_errors
+        assert_equal [ { "path" => "schools[1]", "code" => "write_failed", "params" => { "exception" => "ActiveRecord::RecordNotUnique" } } ],
+                     report.import_errors
         assert_not Orm::School.exists?(name: "Lycée Fragile")
         assert_equal 77 + 38, Orm::Classroom.count
         assert_equal({ "classrooms_created" => 115 }, report.details)

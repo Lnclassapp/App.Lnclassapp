@@ -60,10 +60,6 @@ module Queries
                 next_step: next_step(exercises.map(&:last), classroom_id, student_id, today))
       end
 
-      # Les exercices assignés à la classe, dans l'ordre de « À faire » ; lue aussi par « Ma classe » (UDR-0076 §3.2).
-      # → [ExerciseRow]
-      def assigned_exercises(classroom_id:, student_id:) = assigned_with_slugs(classroom_id, student_id).map(&:last)
-
       # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.
       def pending_gaps(student_id:)
         Orm::KnowledgeGap.joins(essential: :course)

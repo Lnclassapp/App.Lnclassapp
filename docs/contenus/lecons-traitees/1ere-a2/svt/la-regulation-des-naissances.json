@@ -1,0 +1,1279 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La régulation des naissances",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "A2",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "benefices-espacement",
+          "kind": "diagram",
+          "description": "Schéma fléché des bénéfices de l'espacement des naissances. Des naissances espacées permettent à la mère de récupérer ses forces, ce qui améliore sa santé. Elles permettent aussi de mieux suivre chaque enfant (soins, allaitement) et de mieux répartir les ressources de la famille (nourriture, soins, scolarité).",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Choix du couple",
+              "Bénéfice"
+            ],
+            "nodes": [
+              {
+                "id": "esp",
+                "label": "Naissances espacées",
+                "category": 1
+              },
+              {
+                "id": "mere",
+                "label": "La mère récupère ses forces",
+                "category": 2
+              },
+              {
+                "id": "enf",
+                "label": "Chaque enfant est mieux suivi : soins, allaitement",
+                "category": 2
+              },
+              {
+                "id": "fam",
+                "label": "Les ressources de la famille sont mieux réparties",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "esp",
+                "to": "mere"
+              },
+              {
+                "from": "esp",
+                "to": "enf"
+              },
+              {
+                "from": "esp",
+                "to": "fam"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "classement-contraceptifs",
+          "kind": "diagram",
+          "description": "Arbre de classement des méthodes contraceptives selon leur mode d'action. La racine est « Méthodes contraceptives ». Trois branches : barrière (exemple : le préservatif masculin), hormonale (exemple : la pilule) et mécanique (exemple : le DIU, posé dans l'utérus).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "legend": [
+              "Ensemble",
+              "Mode d'action",
+              "Exemple"
+            ],
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "Méthodes contraceptives",
+                "category": 1
+              },
+              {
+                "id": "barriere",
+                "label": "Barrière",
+                "category": 2
+              },
+              {
+                "id": "hormonale",
+                "label": "Hormonale",
+                "category": 2
+              },
+              {
+                "id": "mecanique",
+                "label": "Mécanique",
+                "category": 2
+              },
+              {
+                "id": "preservatif",
+                "label": "Préservatif masculin",
+                "category": 3
+              },
+              {
+                "id": "pilule",
+                "label": "Pilule",
+                "category": 3
+              },
+              {
+                "id": "diu",
+                "label": "DIU (dispositif posé dans l'utérus)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "barriere"
+              },
+              {
+                "from": "racine",
+                "to": "hormonale"
+              },
+              {
+                "from": "racine",
+                "to": "mecanique"
+              },
+              {
+                "from": "barriere",
+                "to": "preservatif"
+              },
+              {
+                "from": "hormonale",
+                "to": "pilule"
+              },
+              {
+                "from": "mecanique",
+                "to": "diu"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-feminin-ovaire",
+          "kind": "plate",
+          "description": "Planche de l'appareil reproducteur féminin. Les parties étiquetées sont l'ovaire, qui libère l'ovule à l'ovulation, la trompe (oviducte), où a lieu la rencontre de l'ovule et des spermatozoïdes, et l'utérus. L'ovaire est surligné : c'est l'organe qui ne libère plus d'ovule quand la pilule empêche l'ovulation.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary",
+                "text": "Ovaire"
+              },
+              {
+                "part": "oviduct",
+                "text": "Trompe (oviducte)"
+              },
+              {
+                "part": "uterus",
+                "text": "Utérus"
+              }
+            ],
+            "highlight": [
+              "ovary"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Expliquer l'intérêt de la planification familiale",
+          "remember": "La **régulation des naissances** (ou **planification familiale**, ou **planning familial**) regroupe les moyens qui permettent à un couple de **décider du nombre de ses enfants et du moment de leur naissance**. Elle repose sur l'information et sur le conseil d'un professionnel de santé, souvent dans un centre de santé ; la décision reste celle du couple. Ses intérêts : la **santé de la mère** (son corps récupère entre deux grossesses et deux accouchements), la **santé de l'enfant** (il est mieux soigné, mieux suivi et mieux allaité) et le **bien-être de la famille** (nourriture, soins et scolarité mieux répartis). L'**espacement des naissances** est le temps laissé entre deux naissances. Des grossesses très rapprochées, ou très précoces, augmentent les risques pour la mère et pour l'enfant.",
+          "method": [
+            "Lire le document : relever les faits sur la mère, sur les enfants et sur la famille.",
+            "Repérer le facteur en cause : l'écart entre les naissances, l'âge de la mère ou le nombre d'enfants.",
+            "Établir le lien de cause à effet : expliquer comment ce facteur agit sur la santé de la mère, sur celle de l'enfant ou sur les ressources de la famille.",
+            "Conclure : dire ce que change le fait de choisir le moment et le nombre des naissances."
+          ],
+          "example": {
+            "statement": "Au centre de santé d'un village fictif, une infirmière compare deux familles. Dans la famille A, quatre enfants sont nés avec plusieurs années d'écart : la mère est en bonne santé, les enfants sont vaccinés et vont à l'école. Dans la famille B, quatre enfants sont nés en cinq ans : la mère est épuisée, le plus jeune est souvent malade et le père peine à payer les soins et les fournitures scolaires. En quoi l'espacement des naissances est-il un avantage ?",
+            "steps": [
+              "Lire le document : famille A, mère en bonne santé et enfants suivis ; famille B, mère épuisée, enfant souvent malade, dépenses difficiles à payer.",
+              "Repérer le facteur en cause : la différence entre les deux familles est l'écart entre les naissances, large en A, très court en B.",
+              "Établir le lien de cause à effet : en A, la mère a eu le temps de récupérer et chaque enfant a été suivi ; en B, la mère n'a pas pu récupérer, elle soigne moins bien ses enfants, et les dépenses arrivent toutes en même temps.",
+              "Conclure : espacer les naissances protège la santé de la mère, aide chaque enfant à être mieux suivi et allège les charges de la famille."
+            ]
+          },
+          "pitfall": "Ne pas croire que la planification familiale sert seulement à ne pas avoir d'enfants. Contre-exemple : un couple qui désire un enfant va au centre de santé pour choisir le bon moment de la grossesse et se préparer. C'est aussi de la planification, car elle consiste à **choisir** le nombre et le moment des naissances. Le choix reste celui du couple.",
+          "figure": "benefices-espacement",
+          "exercise": {
+            "title": "Pourquoi planifier les naissances ?",
+            "statement": "Dans cet exercice, tu expliques l'intérêt de la planification familiale avec la méthode de la fiche : lire le document, repérer le facteur en cause, établir le lien de cause à effet, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Que désigne la planification familiale (ou planning familial) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : la planification familiale regroupe les moyens qui permettent à un couple de décider du nombre de ses enfants et du moment de leur naissance. Ce n'est ni une obligation d'avoir un nombre fixé d'enfants, ni un traitement de la stérilité, ni le seul suivi de l'enfant après la naissance : ces propositions confondent la notion avec autre chose.",
+                "answers": [
+                  {
+                    "content": "Les moyens qui permettent à un couple de décider du nombre de ses enfants et du moment de leur naissance",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'obligation, pour chaque couple, d'avoir un nombre fixé d'enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un traitement qui permet d'avoir des enfants quand on n'y arrive pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le suivi médical de l'enfant après sa naissance",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Laisser du temps entre deux grossesses permet au corps de la mère de récupérer.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Établir le lien de cause à effet : une grossesse, un accouchement puis l'allaitement fatiguent le corps de la mère. Si la grossesse suivante arrive très vite, elle n'a pas eu le temps de retrouver ses forces. Espacer les naissances donne ce temps de récupération. L'affirmation est donc vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un quartier fictif, une mère a eu trois enfants en quatre ans. Elle est très fatiguée et le plus jeune enfant est souvent malade. Quels sont deux avantages que l'espacement des naissances aurait apportés ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire le document : mère fatiguée, enfant souvent malade. Étape 2 — Repérer le facteur en cause : des naissances très rapprochées. Étape 3 — Établir le lien de cause à effet : avec plus de temps entre les naissances, la mère récupère ses forces et chaque enfant peut être mieux suivi (soins, allaitement). Les autres propositions sont fausses : l'espacement ne supprime ni les vaccins, ni toutes les dépenses, et il ne rend pas les grossesses impossibles.",
+                "answers": [
+                  {
+                    "content": "La mère a le temps de récupérer ses forces",
+                    "correct": true
+                  },
+                  {
+                    "content": "Chaque enfant est mieux suivi (soins, allaitement)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'enfant n'a plus besoin d'être vacciné",
+                    "correct": false
+                  },
+                  {
+                    "content": "La famille n'a plus aucune dépense",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une grossesse devient impossible",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque bénéficiaire à l'avantage que lui apporte l'espacement des naissances.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Établir le lien de cause à effet : du temps entre deux naissances permet à la mère de récupérer, à chaque enfant de recevoir des soins et de l'attention, et à la famille de répartir ses ressources (nourriture, soins, scolarité) entre moins de besoins simultanés. Chaque bénéficiaire a donc son avantage propre.",
+                "answers": [
+                  {
+                    "content": "La mère",
+                    "match": "Elle récupère ses forces entre deux grossesses"
+                  },
+                  {
+                    "content": "L'enfant",
+                    "match": "Il est mieux soigné et mieux suivi"
+                  },
+                  {
+                    "content": "La famille",
+                    "match": "Elle répartit mieux sa nourriture, ses soins et sa scolarité"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le raisonnement qui relie des naissances rapprochées à la santé de l'enfant.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Repérer le facteur en cause : les naissances très rapprochées. Étape 3 — Établir le lien de cause à effet : naissances rapprochées, donc pas de temps de récupération, donc fatigue de la mère, donc moins de disponibilité pour soigner et allaiter. L'ordre suit la chaîne de causes jusqu'à la conséquence sur l'enfant.",
+                "answers": [
+                  {
+                    "content": "Les naissances sont très rapprochées"
+                  },
+                  {
+                    "content": "La mère n'a pas le temps de récupérer"
+                  },
+                  {
+                    "content": "La mère est fatiguée"
+                  },
+                  {
+                    "content": "Elle a moins de force pour soigner et allaiter ses enfants"
+                  }
+                ]
+              },
+              {
+                "content": "Un couple se rend au centre de santé pour choisir le meilleur moment d'une future grossesse qu'il désire. Est-ce de la planification familiale ? Choisis la réponse : ___",
+                "question_type": "select",
+                "explanation": "Étape 4 — Conclure : la planification familiale permet de décider du nombre d'enfants ET du moment des naissances. Choisir le moment d'une grossesse désirée en fait partie. Penser qu'elle sert seulement à éviter d'avoir des enfants est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Oui, planifier, c'est aussi choisir le moment d'avoir un enfant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non, elle sert seulement à ne pas avoir d'enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, elle ne concerne que les couples qui ont déjà plusieurs enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, mais seulement si la mère est très jeune",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer l'intérêt de la planification familiale, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le temps laissé entre deux naissances s'appelle l'___ des naissances ; il permet à la mère de ___ ses forces.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot est le nom de la notion de la fiche ; le second est un verbe lié à la fatigue.",
+                "explanation": "Étape 3 — Établir le lien de cause à effet : laisser du temps entre deux naissances s'appelle l'espacement des naissances. Pendant ce temps, le corps de la mère récupère (retrouve, reprend) ses forces après la grossesse, l'accouchement et l'allaitement.",
+                "answers": [
+                  {
+                    "content": "espacement",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'espacement",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "récupérer",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "retrouver",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "reprendre",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La planification familiale consiste uniquement à éviter d'avoir des enfants.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : la planification familiale permet de choisir le nombre d'enfants et le moment des naissances, y compris pour une grossesse désirée. Elle ne se réduit pas à éviter d'avoir des enfants. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, les enfants sont nés avec plusieurs années d'écart et la mère est en bonne santé. Quel facteur explique le mieux cette bonne santé ?",
+                "question_type": "single_choice",
+                "hint": "Cherche ce que la mère a pu faire entre deux naissances.",
+                "explanation": "Étape 2 — Repérer le facteur en cause : l'écart entre les naissances. Étape 3 — Établir le lien de cause à effet : avec plusieurs années entre les enfants, la mère a eu le temps de récupérer. Les autres réponses ne sont pas liées aux faits donnés.",
+                "answers": [
+                  {
+                    "content": "Les naissances sont espacées, donc la mère a le temps de récupérer",
+                    "correct": true
+                  },
+                  {
+                    "content": "La famille compte peu d'enfants quel que soit l'écart",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les enfants sont tous des garçons",
+                    "correct": false
+                  },
+                  {
+                    "content": "La famille habite près d'un marché",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser une méthode naturelle de régulation des naissances",
+          "remember": "Une **méthode naturelle** n'utilise ni médicament ni objet : elle repose sur la connaissance du cycle de la femme. La fécondation n'est possible que si les rapports ont lieu **autour de l'ovulation**, appelée **période féconde**, car l'ovule reste fécondable très peu de temps et les spermatozoïdes survivent quelques jours dans les voies génitales féminines. Trois méthodes : l'**observation du cycle** (méthode du calendrier, qui note les dates des règles pour estimer l'ovulation) ; la **courbe de température** (la température au réveil s'élève légèrement après l'ovulation : elle la signale **après coup**) ; l'**abstinence périodique** (pas de rapports pendant la période féconde). **Limites** : si le cycle est irrégulier, l'ovulation se décale et l'estimation est fausse ; ces méthodes sont donc **plus ou moins fiables** et ne protègent pas des IST pendant les rapports.",
+          "method": [
+            "Identifier la méthode : ce qu'elle observe (dates des règles, température au réveil) et ce qu'elle demande.",
+            "Situer la période féconde sur le cycle, à partir du jour de l'ovulation.",
+            "Déterminer les jours où la méthode demande d'éviter les rapports (abstinence périodique).",
+            "Évaluer les limites : régularité du cycle, ovulation qui se décale, absence de protection contre les IST."
+          ],
+          "example": {
+            "statement": "Une femme fictive a toujours des cycles de 28 jours. Elle note sur un calendrier le premier jour de ses règles (jour 1). L'ovulation a lieu vers le 14e jour et on admet que la période féconde s'étend du 10e au 15e jour compris. Que demande la méthode du calendrier avec abstinence périodique, et quelle est sa limite ?",
+            "steps": [
+              "Identifier la méthode : le calendrier observe les dates des règles ; l'abstinence périodique demande de ne pas avoir de rapports pendant la période féconde.",
+              "Situer la période féconde : cycle de 28 jours, ovulation vers le 14e jour, période féconde du 10e au 15e jour.",
+              "Déterminer les jours d'abstinence : du 10e au 15e jour compris, soit $15 - 10 + 1 = 6$ jours par cycle.",
+              "Évaluer les limites : ces dates ne valent que si le cycle reste régulier ; si l'ovulation se décale, la période féconde n'est plus la bonne. La méthode est plus ou moins fiable, et elle ne protège pas des IST."
+            ]
+          },
+          "pitfall": "Ne pas croire que la période féconde tombe aux mêmes jours à chaque cycle. Contre-exemple : une femme a d'habitude des cycles de 28 jours (ovulation vers le 14e jour). Un mois, son cycle dure 35 jours ; l'ovulation, environ 14 jours avant les règles suivantes, a lieu vers le 21e jour. Les dates du 10e au 15e jour sont alors fausses. La date change avec la durée du cycle.",
+          "figure": null,
+          "exercise": {
+            "title": "Les méthodes naturelles et leurs limites",
+            "statement": "Dans cet exercice, tu analyses des méthodes naturelles avec la méthode de la fiche : identifier la méthode, situer la période féconde, déterminer les jours d'abstinence, évaluer les limites.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une personne prend sa température chaque matin au réveil et la note sur une courbe. Quel changement indique que l'ovulation vient d'avoir lieu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la méthode : la courbe de température suit la température au réveil. Étape 2 — Situer la période féconde : après l'ovulation, la température s'élève légèrement et reste un peu plus haute jusqu'aux règles suivantes. Une baisse, une fièvre ou l'absence de changement ne signalent pas l'ovulation.",
+                "answers": [
+                  {
+                    "content": "Une légère élévation de la température qui se maintient",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une forte fièvre brutale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une baisse durable de la température",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun changement jusqu'aux règles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cycle régulier dure 28 jours. On admet que la période féconde s'étend du 11e au 17e jour compris. Combien de jours l'abstinence périodique concerne-t-elle ?",
+                "question_type": "numeric",
+                "unit": "jours",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier la méthode : abstinence périodique, c'est-à-dire pas de rapports pendant la période féconde. Étape 2 — Situer la période féconde : du 11e au 17e jour. Étape 3 — Déterminer les jours d'abstinence : de 11 à 17 compris, il y a $17 - 11 + 1 = 7$ jours. Attention à compter les deux jours extrêmes : $17 - 11 = 6$ oublierait un jour.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La courbe de température permet de prévoir, plusieurs jours à l'avance, le jour de l'ovulation.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Évaluer les limites : la température s'élève après l'ovulation. Elle signale donc qu'elle a déjà eu lieu, mais ne la prévoit pas. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux limites des méthodes naturelles ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Évaluer les limites : l'ovulation peut se décaler quand le cycle est irrégulier, et les méthodes naturelles ne protègent pas des IST pendant les rapports. Elles ne bloquent pas l'ovulation (c'est le rôle de la pilule), n'utilisent pas d'hormones et ne demandent pas d'intervention chirurgicale.",
+                "answers": [
+                  {
+                    "content": "Elles sont plus ou moins fiables quand le cycle est irrégulier",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles ne protègent pas des infections sexuellement transmissibles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles empêchent l'ovulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles nécessitent une intervention chirurgicale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles utilisent des hormones de synthèse",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque méthode naturelle à ce sur quoi elle repose.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier la méthode : chaque méthode repose sur une observation précise. Le calendrier note les dates des règles pour estimer l'ovulation. La courbe suit la température du matin. L'abstinence périodique évite les rapports pendant la période féconde.",
+                "answers": [
+                  {
+                    "content": "Méthode du calendrier",
+                    "match": "Les dates des règles notées d'un cycle à l'autre"
+                  },
+                  {
+                    "content": "Courbe de température",
+                    "match": "La température prise chaque matin au réveil"
+                  },
+                  {
+                    "content": "Abstinence périodique",
+                    "match": "L'absence de rapports pendant la période féconde"
+                  }
+                ]
+              },
+              {
+                "content": "Une femme a d'habitude des cycles de 28 jours. Un mois, son cycle dure 32 jours. L'ovulation a lieu environ 14 jours avant les règles suivantes. Vers quel jour a-t-elle lieu ce mois-là ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Situer la période féconde : l'ovulation a lieu environ 14 jours avant les règles suivantes, donc ici vers le $32 - 14 = 18^{e}$ jour, et non vers le 14e. Étape 4 — Évaluer les limites : une date fixée à l'avance pour tous les cycles devient fausse quand le cycle change. Répondre le 14e jour est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vers le 18e jour, plus tard que d'habitude",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vers le 14e jour, comme d'habitude",
+                    "correct": false
+                  },
+                  {
+                    "content": "Vers le 10e jour, plus tôt que d'habitude",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a plus d'ovulation ce mois-là",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à analyser une méthode naturelle, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Après l'ovulation, la température prise au réveil ___ légèrement ; elle montre donc que l'ovulation a ___ eu lieu.",
+                "question_type": "fill_blank",
+                "hint": "Pense au sens de variation de la courbe, puis au moment où l'on fait le constat.",
+                "explanation": "Étape 1 — Identifier la méthode : la courbe de température suit la température du matin. Étape 4 — Évaluer les limites : la température augmente légèrement après l'ovulation ; elle montre donc que l'ovulation a déjà eu lieu, mais ne permet pas de la prévoir.",
+                "answers": [
+                  {
+                    "content": "augmente",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "monte",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "s'élève",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "déjà",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode du calendrier.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier la méthode : on part des dates des règles. Étape 2 — Situer la période féconde : on estime l'ovulation, puis la période féconde autour d'elle. Étape 3 — Déterminer les jours d'abstinence : on évite les rapports pendant cette période.",
+                "answers": [
+                  {
+                    "content": "Noter la date des règles"
+                  },
+                  {
+                    "content": "Estimer le jour de l'ovulation"
+                  },
+                  {
+                    "content": "En déduire la période féconde"
+                  },
+                  {
+                    "content": "Éviter les rapports pendant cette période"
+                  }
+                ]
+              },
+              {
+                "content": "Une méthode naturelle protège contre le VIH.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Évaluer les limites : les méthodes naturelles ne forment aucun obstacle entre les partenaires pendant les rapports. Elles ne protègent donc pas du VIH ni des autres IST. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Classer une méthode contraceptive selon son mode d'action",
+          "remember": "La **contraception** regroupe les moyens qui évitent une grossesse. On les classe selon leur **mode d'action**. **Méthode de barrière** : elle empêche les spermatozoïdes d'atteindre l'ovule ; exemple, le **préservatif masculin**, gaine mince placée sur le pénis, qui retient le sperme. **Méthode hormonale** : des hormones de synthèse **empêchent l'ovulation**, donc il n'y a pas d'ovule à féconder ; exemples, la **pilule** et l'implant placé sous la peau. **Méthode mécanique** : un dispositif posé dans l'utérus par un professionnel de santé ; exemple, le **DIU** (ou stérilet). Le préservatif est la **seule** méthode de ces trois familles qui protège aussi des **IST** (infections sexuellement transmissibles), dont le **VIH**. Les méthodes sont plus ou moins fiables selon la façon de les utiliser, et le choix se fait avec un professionnel de santé.",
+          "method": [
+            "Identifier la méthode : ce qu'elle utilise (objet, hormones, dispositif) et comment elle se présente.",
+            "Chercher où et comment elle agit : obstacle aux spermatozoïdes, blocage de l'ovulation, dispositif dans l'utérus.",
+            "Classer la méthode : barrière, hormonale ou mécanique.",
+            "Conclure : dire ce qu'elle évite (grossesse, IST) et ce qu'elle ne protège pas."
+          ],
+          "example": {
+            "statement": "Une affiche du centre de santé d'un quartier fictif présente la pilule : ce sont des comprimés contenant des hormones de synthèse, proches de celles que sécrète l'ovaire. Elle empêche l'ovulation. Classe cette méthode et dis ce qu'elle évite.",
+            "steps": [
+              "Identifier la méthode : la pilule est un comprimé d'hormones de synthèse, proches de celles que sécrète l'ovaire.",
+              "Chercher où elle agit : elle empêche l'ovulation, donc l'ovaire ne libère pas d'ovule ; sans ovule libéré, la fécondation est impossible.",
+              "Classer la méthode : comme elle repose sur des hormones, c'est une méthode hormonale.",
+              "Conclure : elle évite une grossesse, mais ne forme aucun obstacle entre les partenaires, donc elle ne protège pas des IST."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une méthode efficace contre la grossesse protège aussi des IST. Contre-exemple : un couple utilise la pilule. Elle empêche l'ovulation, mais rien n'empêche le passage d'un agent infectieux comme le VIH d'un partenaire à l'autre. Seul le préservatif, qui forme une barrière, protège à la fois de la grossesse et des IST.",
+          "figure": "classement-contraceptifs",
+          "exercise": {
+            "title": "Classer les méthodes contraceptives",
+            "statement": "Dans cet exercice, tu classes des méthodes contraceptives avec la méthode de la fiche : identifier la méthode, chercher où elle agit, classer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un petit dispositif en plastique, le DIU (ou stérilet), est posé dans l'utérus par un professionnel de santé. Dans quelle catégorie le classes-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la méthode : le DIU est un dispositif placé dans l'utérus. Étape 2 — Chercher où elle agit : dans l'utérus, par un dispositif posé par un soignant. Étape 3 — Classer : méthode mécanique. Ce n'est ni un comprimé d'hormones (comme la pilule), ni une barrière portée pendant les rapports (comme le préservatif), ni l'observation du cycle.",
+                "answers": [
+                  {
+                    "content": "Méthode mécanique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Méthode hormonale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Méthode de barrière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Méthode naturelle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque méthode à son mode d'action.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Chercher où elle agit : le préservatif fait obstacle aux spermatozoïdes, la pilule agit sur l'ovulation, le DIU est placé dans l'utérus. Étape 3 — Classer : barrière, hormonale, mécanique.",
+                "answers": [
+                  {
+                    "content": "Préservatif masculin",
+                    "match": "Il empêche les spermatozoïdes d'entrer dans les voies génitales"
+                  },
+                  {
+                    "content": "Pilule",
+                    "match": "Elle empêche l'ovulation grâce à des hormones de synthèse"
+                  },
+                  {
+                    "content": "DIU",
+                    "match": "C'est un dispositif posé dans l'utérus par un professionnel de santé"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi le préservatif masculin, la pilule et le DIU, seul le préservatif protège aussi des IST, dont le VIH.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : le préservatif forme un obstacle entre les partenaires, ce qui limite le passage des agents des IST. La pilule agit sur l'ovulation et le DIU est posé dans l'utérus : aucun des deux ne forme cet obstacle. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le préservatif masculin empêche les spermatozoïdes de pénétrer dans les voies génitales : c'est une méthode de type ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher où elle agit : le préservatif retient le sperme et empêche les spermatozoïdes d'entrer dans les voies génitales. Étape 3 — Classer : c'est une méthode de barrière.",
+                "answers": [
+                  {
+                    "content": "barrière",
+                    "correct": true
+                  },
+                  {
+                    "content": "de barrière",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux méthodes hormonales ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Chercher où elle agit : la pilule et l'implant sous la peau libèrent des hormones de synthèse qui empêchent l'ovulation. Étape 3 — Classer : méthodes hormonales. Le préservatif est une barrière, le DIU une méthode mécanique, et l'abstinence périodique une méthode naturelle.",
+                "answers": [
+                  {
+                    "content": "La pilule",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'implant placé sous la peau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le préservatif masculin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le DIU",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'abstinence périodique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi la pilule ne protège-t-elle pas du VIH ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher où elle agit : la pilule agit sur l'ovulation, donc sur la grossesse. Étape 4 — Conclure : elle ne forme aucun obstacle au contact entre les partenaires, donc elle ne protège pas des IST. Penser qu'une méthode efficace contre la grossesse protège aussi du VIH est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Elle agit sur l'ovulation et ne forme aucun obstacle entre les partenaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle protège du VIH mais pas des autres IST",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle protège du VIH si elle est prise sans oubli",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ses hormones n'agissent que sur les spermatozoïdes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à classer une méthode contraceptive selon son mode d'action, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La pilule empêche l'___ ; le ___ masculin forme une barrière contre les spermatozoïdes et contre les IST.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot est un phénomène du cycle étudié à la leçon précédente ; le second est un objet de barrière.",
+                "explanation": "Étape 2 — Chercher où elle agit : la pilule empêche l'ovulation. Étape 4 — Conclure : le préservatif masculin forme un obstacle aux spermatozoïdes, donc il évite une grossesse, et il protège aussi des IST.",
+                "answers": [
+                  {
+                    "content": "ovulation",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'ovulation",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "préservatif",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un implant placé sous la peau libère des hormones de synthèse qui empêchent l'ovulation. Quelle est sa catégorie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la méthode : un implant sous la peau qui libère des hormones. Étape 2 — Chercher où elle agit : il bloque l'ovulation, comme la pilule. Étape 3 — Classer : méthode hormonale.",
+                "answers": [
+                  {
+                    "content": "Hormonale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Barrière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mécanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Naturelle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une méthode mécanique comme le DIU agit en empêchant l'ovulation grâce à des hormones.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher où elle agit : le DIU agit par sa présence dans l'utérus. Étape 3 — Classer : c'est une méthode mécanique. Empêcher l'ovulation grâce à des hormones de synthèse caractérise les méthodes hormonales, comme la pilule. L'affirmation mélange les deux catégories : elle est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une séance d'information au centre de santé",
+          "statement": "Dans un centre de santé de quartier (situation fictive), une sage-femme présente à un groupe de couples les moyens de choisir le moment des naissances. Elle évoque l'intérêt de la planification familiale, puis trois méthodes : le préservatif masculin, la pilule et le DIU. Réponds avec les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels sont trois intérêts de la planification familiale présentés lors de la séance ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode (notion 1) — Étape 3 : établir le lien de cause à effet. Des naissances espacées laissent à la mère le temps de récupérer, permettent de mieux suivre chaque enfant et de mieux répartir les ressources de la famille. Les deux autres propositions sont fausses : la planification ne supprime pas tout risque lié à une grossesse et ne rend pas l'école inutile.",
+              "answers": [
+                {
+                  "content": "La mère a le temps de récupérer ses forces",
+                  "correct": true
+                },
+                {
+                  "content": "Chaque enfant est mieux suivi",
+                  "correct": true
+                },
+                {
+                  "content": "Les ressources de la famille sont mieux réparties",
+                  "correct": true
+                },
+                {
+                  "content": "Tout risque lié à une grossesse disparaît",
+                  "correct": false
+                },
+                {
+                  "content": "Les enfants n'ont plus besoin d'aller à l'école",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant la séance, la sage-femme montre une gaine mince qui se place sur le pénis et retient le sperme. Elle range cette méthode dans la famille ___.",
+              "question_type": "select",
+              "explanation": "Méthode (notion 3) — Étape 1 : la gaine décrite est le préservatif masculin. Étape 2 : il empêche les spermatozoïdes d'entrer dans les voies génitales. Étape 3 : c'est donc une méthode de barrière. Elle n'utilise pas d'hormones (hormonale), n'est pas un dispositif posé dans l'utérus (mécanique) et n'est pas liée à l'observation du cycle (naturelle).",
+              "answers": [
+                {
+                  "content": "barrière",
+                  "correct": true
+                },
+                {
+                  "content": "hormonale",
+                  "correct": false
+                },
+                {
+                  "content": "mécanique",
+                  "correct": false
+                },
+                {
+                  "content": "naturelle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le DIU est un dispositif posé par un professionnel de santé dans l'___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode (notion 3) — Étape 1 : identifier la méthode. Le DIU est un petit dispositif posé dans l'utérus par un professionnel de santé ; c'est ce qui en fait une méthode mécanique.",
+              "answers": [
+                {
+                  "content": "utérus",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un couple souhaite éviter une grossesse et se protéger aussi des IST. Parmi le préservatif masculin, la pilule et le DIU, laquelle des trois méthodes répond aux deux besoins ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion 3) — Étape 4 : conclure. La pilule et le DIU agissent sur l'ovulation ou dans l'utérus et ne forment aucun obstacle entre les partenaires. Seul le préservatif forme une barrière : il évite une grossesse et protège des IST, dont le VIH.",
+              "answers": [
+                {
+                  "content": "Le préservatif masculin",
+                  "correct": true
+                },
+                {
+                  "content": "La pilule",
+                  "correct": false
+                },
+                {
+                  "content": "Le DIU",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des trois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La méthode du calendrier est une méthode naturelle : elle n'utilise ni médicament ni objet.",
+              "question_type": "true_false",
+              "explanation": "Méthode (notion 2) — Étape 1 : identifier la méthode. Le calendrier note les dates des règles et ne demande ni médicament ni objet : c'est une méthode naturelle. Elle reste plus ou moins fiable si le cycle est irrégulier (Étape 4).",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le carnet de température",
+          "statement": "Une jeune femme fictive suit son cycle, qui est régulier et dure 28 jours (le jour 1 est le premier jour des règles). Dans son carnet, la température prise chaque matin au réveil est d'environ 36,4 °C du jour 1 au jour 14, puis d'environ 36,8 °C du jour 15 jusqu'aux règles suivantes.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est l'élévation de température observée entre la première et la seconde partie du cycle ? Écris la valeur en degrés Celsius.",
+              "question_type": "numeric",
+              "unit": "°C",
+              "tolerance": 0,
+              "explanation": "Méthode (notion 2) — Étape 1 : identifier la méthode, la courbe de température prise au réveil. On lit 36,4 °C du jour 1 au jour 14 et 36,8 °C à partir du jour 15. Calcul : $36{,}8 - 36{,}4 = 0{,}4$. La température s'est élevée d'environ 0,4 °C, ce qui est une légère élévation, caractéristique de l'après-ovulation.",
+              "answers": [
+                {
+                  "content": "0,4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce carnet, que signale l'élévation de la température observée à partir du jour 15 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion 2) — Étape 1 : identifier la méthode, la courbe de température. Étape 2 : après l'ovulation, la température s'élève légèrement. L'élévation indique donc que l'ovulation vient d'avoir lieu, pas qu'elle va avoir lieu ni que les règles ont commencé.",
+              "answers": [
+                {
+                  "content": "L'ovulation a eu lieu",
+                  "correct": true
+                },
+                {
+                  "content": "Les règles vont commencer le jour même",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovulation va avoir lieu plusieurs jours plus tard",
+                  "correct": false
+                },
+                {
+                  "content": "La femme est malade",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Grâce à ce carnet, la femme peut savoir au jour 8 que l'ovulation aura lieu au jour 14.",
+              "question_type": "true_false",
+              "explanation": "Méthode (notion 2) — Étape 4 : évaluer les limites. La température s'élève après l'ovulation ; au jour 8 la courbe ne montre encore rien. La courbe constate l'ovulation après coup, elle ne la prévoit pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un mois, les règles suivantes arrivent au jour 33 au lieu du jour 28. L'ovulation a alors eu lieu ___ que d'habitude.",
+              "question_type": "select",
+              "explanation": "Méthode (notion 2) — Étape 2 : l'ovulation a lieu environ 14 jours avant les règles suivantes, donc vers le jour $33 - 14 = 19$, plus tard que le jour 14 habituel. Étape 4 : une date fixe devient fausse quand le cycle change.",
+              "answers": [
+                {
+                  "content": "plus tard",
+                  "correct": true
+                },
+                {
+                  "content": "plus tôt",
+                  "correct": false
+                },
+                {
+                  "content": "à la même date",
+                  "correct": false
+                },
+                {
+                  "content": "en même temps que les règles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une méthode naturelle est dite plus ou moins ___ parce que le cycle peut devenir irrégulier.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode (notion 2) — Étape 4 : évaluer les limites. Quand le cycle est irrégulier, l'ovulation se décale et l'estimation de la période féconde devient fausse : la méthode est plus ou moins fiable.",
+              "answers": [
+                {
+                  "content": "fiable",
+                  "correct": true
+                },
+                {
+                  "content": "sûre",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Comparer trois moyens de régulation des naissances",
+          "statement": "Le dépliant d'un centre de santé (situation fictive) compare trois moyens : la méthode du calendrier, le préservatif masculin et la pilule. Utilise les méthodes de la leçon pour répondre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque moyen à sa famille de méthodes.",
+              "question_type": "matching",
+              "explanation": "Méthode (notion 3) — Étape 3 : classer. Le calendrier repose sur l'observation du cycle (méthode naturelle), le préservatif retient les spermatozoïdes (barrière), la pilule utilise des hormones de synthèse (hormonale).",
+              "answers": [
+                {
+                  "content": "Méthode du calendrier",
+                  "match": "Méthode naturelle"
+                },
+                {
+                  "content": "Préservatif masculin",
+                  "match": "Méthode de barrière"
+                },
+                {
+                  "content": "Pilule",
+                  "match": "Méthode hormonale"
+                }
+              ]
+            },
+            {
+              "content": "Laquelle de ces trois méthodes n'est fiable que si le cycle de la femme reste régulier ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion 2) — Étape 4 : évaluer les limites. La méthode du calendrier estime l'ovulation à partir de cycles passés : si le cycle devient irrégulier, l'estimation est fausse. Le préservatif et la pilule ne dépendent pas de la durée du cycle.",
+              "answers": [
+                {
+                  "content": "La méthode du calendrier",
+                  "correct": true
+                },
+                {
+                  "content": "Le préservatif masculin",
+                  "correct": false
+                },
+                {
+                  "content": "La pilule",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois sont dans ce cas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand la pilule est utilisée comme prévu, l'ovulation n'a pas lieu.",
+              "question_type": "true_false",
+              "explanation": "Méthode (notion 3) — Étape 2 : chercher où elle agit. Les hormones de synthèse de la pilule empêchent l'ovulation : aucun ovule n'est libéré, donc la fécondation est impossible.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre l'explication de l'action de la pilule.",
+              "question_type": "ordering",
+              "explanation": "Méthode (notion 3) — Étape 2 : chercher où elle agit. Les hormones de synthèse empêchent l'ovulation, aucun ovule n'est libéré, donc il ne peut pas y avoir de fécondation. L'ordre suit la chaîne de causes.",
+              "answers": [
+                {
+                  "content": "La femme prend des hormones de synthèse"
+                },
+                {
+                  "content": "L'ovulation est empêchée"
+                },
+                {
+                  "content": "Aucun ovule n'est libéré par l'ovaire"
+                },
+                {
+                  "content": "La fécondation est impossible"
+                }
+              ]
+            },
+            {
+              "content": "Dans un cycle de 28 jours, on admet que la période féconde s'étend du 10e au 15e jour compris. Combien de jours du cycle ne sont pas dans la période féconde ?",
+              "question_type": "numeric",
+              "unit": "jours",
+              "tolerance": 0,
+              "explanation": "Méthode (notion 2) — Étape 2 : situer la période féconde, du 10e au 15e jour, soit $15 - 10 + 1 = 6$ jours. Le reste du cycle compte $28 - 6 = 22$ jours. Attention : cela ne rend pas la méthode sûre, car l'ovulation peut se décaler (Étape 4).",
+              "answers": [
+                {
+                  "content": "22",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi un couple qui veut éviter à la fois une grossesse et une IST peut choisir le préservatif plutôt que la pilule.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que la pilule empêche l'ovulation mais ne forme aucun obstacle entre les partenaires",
+                "Dit que le préservatif est une barrière qui retient le sperme",
+                "Conclut que seul le préservatif évite aussi les IST, dont le VIH"
+              ],
+              "explanation": "Corrigé modèle : La pilule est une méthode hormonale : elle empêche l'ovulation, donc la fécondation, mais elle ne forme aucun obstacle entre les partenaires et ne protège pas des IST. Le préservatif est une méthode de barrière : il retient le sperme et empêche les spermatozoïdes d'entrer dans les voies génitales, ce qui évite une grossesse, et il limite aussi le passage des agents des IST, dont le VIH. Ce couple peut donc choisir le préservatif, qui répond aux deux besoins. Répartition des points : pilule (1), préservatif (1), conclusion sur les IST (1).",
+              "answers": [],
+              "starter": "La pilule empêche l'ovulation, mais…"
+            }
+          ]
+        },
+        {
+          "title": "Choisir en connaissance de cause",
+          "statement": "Texte écrit pour Lnclass. Lors d'une causerie éducative dans un centre de santé, une sage-femme explique : « Une grossesse se prépare. Quand les naissances sont espacées, la mère retrouve ses forces et chaque enfant est mieux suivi. Plusieurs méthodes existent. Les méthodes naturelles reposent sur l'observation du cycle. Parmi les méthodes contraceptives, le préservatif fait barrière aux spermatozoïdes, la pilule empêche l'ovulation et le DIU est posé dans l'utérus. Une seule de ces trois méthodes protège aussi des IST. Le choix se fait librement, après un entretien avec un professionnel de santé. » La figure montre l'appareil reproducteur féminin, avec l'ovaire surligné.",
+          "exercise_type": "evaluation",
+          "figure": "appareil-feminin-ovaire",
+          "questions": [
+            {
+              "content": "Selon le texte, que permet l'espacement des naissances ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion 1) — Étape 1 : lire le document, la phrase sur l'espacement. Étape 3 : établir le lien de cause à effet. Le texte dit que la mère retrouve ses forces et que chaque enfant est mieux suivi. Les autres propositions ne figurent pas dans le texte.",
+              "answers": [
+                {
+                  "content": "La mère retrouve ses forces et chaque enfant est mieux suivi",
+                  "correct": true
+                },
+                {
+                  "content": "La mère n'a plus besoin de consulter",
+                  "correct": false
+                },
+                {
+                  "content": "Les enfants naissent tous en bonne santé",
+                  "correct": false
+                },
+                {
+                  "content": "Les IST disparaissent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand la pilule empêche l'ovulation, l'___ (l'organe surligné sur la figure) ne libère plus d'ovule.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode (notion 3) — Étape 2 : chercher où elle agit. La pilule empêche l'ovulation : l'ovaire, organe qui libère d'habitude l'ovule, n'en libère plus. C'est l'organe surligné sur la figure.",
+              "answers": [
+                {
+                  "content": "ovaire",
+                  "correct": true
+                },
+                {
+                  "content": "ovaires",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les trois moyens contraceptifs cités dans le texte ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode (notion 3) — Étape 1 : identifier la méthode. Le texte cite le préservatif (barrière), la pilule (hormonale) et le DIU (mécanique). La consultation prénatale et le dépistage du VIH ne sont pas des moyens contraceptifs et ne sont pas cités.",
+              "answers": [
+                {
+                  "content": "Le préservatif",
+                  "correct": true
+                },
+                {
+                  "content": "La pilule",
+                  "correct": true
+                },
+                {
+                  "content": "Le DIU",
+                  "correct": true
+                },
+                {
+                  "content": "La consultation prénatale",
+                  "correct": false
+                },
+                {
+                  "content": "Le dépistage du VIH",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Selon le texte, le choix d'une méthode se fait librement, après un entretien avec un professionnel de santé.",
+              "question_type": "true_false",
+              "explanation": "Méthode (notion 1) — Étape 1 : lire le document. La dernière phrase de la sage-femme dit que le choix se fait librement, après un entretien avec un professionnel de santé. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le DIU est classé parmi les méthodes ___.",
+              "question_type": "select",
+              "explanation": "Méthode (notion 3) — Étape 3 : classer. Le DIU est un dispositif posé dans l'utérus par un professionnel de santé : c'est une méthode mécanique. Ce n'est ni un comprimé d'hormones comme la pilule, ni une barrière portée pendant les rapports, et il ne repose pas sur l'observation du cycle.",
+              "answers": [
+                {
+                  "content": "mécaniques",
+                  "correct": true
+                },
+                {
+                  "content": "hormonales",
+                  "correct": false
+                },
+                {
+                  "content": "de barrière",
+                  "correct": false
+                },
+                {
+                  "content": "naturelles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir du texte et de tes connaissances, explique pourquoi une méthode naturelle est plus ou moins fiable, puis donne l'avantage supplémentaire du préservatif.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Explique que le cycle peut être irrégulier et que l'ovulation peut se décaler",
+                "En déduit que la période féconde estimée peut être fausse",
+                "Dit que le préservatif protège aussi des IST, dont le VIH",
+                "Rédige des phrases claires avec le vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Une méthode naturelle repose sur l'observation du cycle pour estimer l'ovulation et la période féconde. Mais si le cycle est irrégulier, l'ovulation se décale et la période féconde estimée peut être fausse ; la méthode est donc plus ou moins fiable. Le préservatif, lui, est une barrière : en plus d'éviter une grossesse, il protège des IST, dont le VIH, ce que les méthodes naturelles ne font pas. Répartition des points : cycle irrégulier (1), période féconde fausse (1), préservatif et IST (1), rédaction et vocabulaire (1).",
+              "answers": [],
+              "starter": "Une méthode naturelle repose sur l'observation du cycle, mais…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
 <%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière, et sur ordinateur pastilles des matières et leçons en cartes avec leurs fiches ; enseignant : « Cours de Tle D », une de ses matières à la fois (puces), sans menus, une carte par fiche de cours avec ses fiches de révision, sur ordinateur en colonne de 40 rem ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (amendé par XXXX écrans enseignant sans répétition §3.7), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) et §3.6 bis (Cours par leçons, dès lg), 0144 parcours matière → exercice §3 (carte Prochain exercice) · par pages de 24 %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : UDR-0146 (pastilles), 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (amendé par XXXX écrans enseignant sans répétition §3.7), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) et §3.6 bis (Cours par leçons, dès lg), 0144 parcours matière → exercice §3 (carte Prochain exercice) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
@@ -187,15 +187,17 @@
           <% materials.each do |one| %>
             <% active = one.slug == current.slug %>
             <% illustration = subject_illustration(one.slug) %>
+            <% short = subject_short_label(one.slug) %>
             <li>
-              <%= link_to courses_path(material: one.slug), id: "lesson_material_#{one.slug}", "aria-current": ("page" if active),
+              <%= link_to courses_path(material: one.slug), id: "lesson_material_#{one.slug}", "aria-current": ("page" if active), title: (one.name if short),
                           class: class_names("inline-flex min-h-tap items-center gap-2 rounded-full border py-1 pr-4 pl-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                              "border-brand-strong bg-brand-strong text-white" => active,
                                              "border-line-strong bg-white text-ink transition hover:bg-mist" => !active) do %>
                 <span class="<%= class_names("grid size-8 shrink-0 place-items-center rounded-full", active ? "bg-white" : illustration.tint) %>">
                   <%= image_tag illustration.path, alt: "", class: "size-5", "aria-hidden": true %>
                 </span>
-                <%= one.name %>
+                <%# UDR-0146 §3 : le court seul visible, muet ; le nom entier lu (sr-only) et en title. %>
+                <% if short %><span aria-hidden="true"><%= short %></span><span class="sr-only"><%= one.name %></span><% else %><%= one.name %><% end %>
               <% end %>
             </li>
           <% end %>

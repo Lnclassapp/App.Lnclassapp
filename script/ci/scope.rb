@@ -27,6 +27,20 @@ class CiScope
   # Changing these restyles every file: Rubocop then inspects the whole tree.
   RUBOCOP_WIDE = %w[.rubocop.yml Gemfile.lock].freeze
 
+  # standard-de-test, Lot D : une leçon touchée est rendue par ce test système (il lit lui-même les fichiers changés depuis
+  # origin/Develop). C'est un test système, mais bin/system-changed ne lit pas les fichiers de leçon : le niveau pr le joue
+  # avec les tests de la PR. Au train, la tâche `lecons` de la CI rend tout.
+  LESSON_FILE = %r{\Adocs/contenus/lecons-traitees/[^/]+/[^/]+/[^/]+\.json\z}
+  # Ce qui change l'affichage d'une leçon sans changer son fichier : le test lui-même, ses fichiers piégés, et les feuilles de
+  # style et scripts qui dessinent la page (formules, figures, fiche coupée). Le niveau pr rejoue le test pour chacun ; le test
+  # nomme ces fichiers (« course_sheet.css », « math_controller.js »), ce qui le fait relire par ci-quiet quand le navigateur bouge.
+  LESSON_RENDER = Regexp.union(
+    LESSON_FILE, %r{\Atest/(system/catalog/lesson_rendering_test\.rb|fixtures/files/lecons_piegees/)},
+    %r{\Aapp/assets/stylesheets/(course_sheet|prepare_sheet|application\.tailwind)},
+    %r{\Aapp/javascript/(controllers/(math|figure|prepare_sheet|catalog/revision_more)_controller\.js|lib/)}
+  )
+  LESSON_RENDERING_TEST = "test/system/catalog/lesson_rendering_test.rb".freeze
+
   def self.doc?(path) = path.end_with?(".md") && !path.match?(CODE_DIRS)
 
   def self.level(branch:, changed:, full: false)
@@ -51,6 +65,7 @@ class CiScope
     end
     names = changed.reject { doc?(it) || unit.include?(it) }.flat_map { names_of(it, read) }.uniq
     selected += unit.select { |test| read.call(test).to_s.then { |text| names.any? { text.include?(it) } } } if names.any?
+    selected << LESSON_RENDERING_TEST if changed.any? { it.match?(LESSON_RENDER) } && test_files.include?(LESSON_RENDERING_TEST)
     selected.uniq.sort
   end
 

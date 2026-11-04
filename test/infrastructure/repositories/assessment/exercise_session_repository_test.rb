@@ -230,6 +230,32 @@ module Repositories
         assert @repository.abandon(id: started.id, at: @at)
         assert_equal "abandoned", @repository.find_by_public_id(public_id: started.public_id).status
       end
+
+      test "record_copy écrit la réponse et le verdict de chaque case, et les rend dans attempts" do
+        started = @repository.start(session: session)
+        first, second = @exercise.questions.order(:position).to_a
+        attempts = [ { question_id: first.id, selected_answer_ids: [], response_text: "3 ; 5", correct: false, unanswered: false,
+                       blank_responses: %w[3 5], blank_results: [ true, false ] } ]
+        attempts += @exercise.questions.order(:position).drop(1).map { { question_id: it.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true } }
+
+        assert_equal :ok, @repository.record_copy(session_id: started.id, attempts:, at: @at)
+
+        written = @repository.attempts(session_id: started.id).to_h { [ it.question_id, it ] }
+        assert_equal [ %w[3 5], [ true, false ] ], [ written.fetch(first.id).blank_responses, written.fetch(first.id).blank_results ]
+        assert_equal [ [], [] ], [ written.fetch(second.id).blank_responses, written.fetch(second.id).blank_results ]
+      end
+
+      test "record_hint ajoute la question une seule fois, même ouverte plusieurs fois" do
+        started = @repository.start(session: session)
+        question_id, other_id = @exercise.questions.order(:position).first(2).map(&:id)
+
+        assert_equal :recorded, @repository.record_hint(session_id: started.id, question_id:)
+        assert_equal :already_opened, @repository.record_hint(session_id: started.id, question_id:)
+        assert_equal :already_opened, @repository.record_hint(session_id: started.id, question_id:)
+        assert_equal :recorded, @repository.record_hint(session_id: started.id, question_id: other_id)
+
+        assert_equal [ question_id, other_id ], @repository.find_by_public_id(public_id: started.public_id).hinted_question_ids
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank, hint), 0121
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -110,11 +110,11 @@ module Repositories
           record = Orm::Question.create!(exercise_id:, position: question.position || index + 1, content: question.content,
                                          explanation: question.explanation, question_type: question.question_type,
                                          numeric_tolerance: question.numeric_tolerance, image_description: question.image_description,
-                                         **correction_attributes(question))
+                                         hint: question.hint.to_s.strip.presence, **correction_attributes(question))
           attach_image(record.id, question.image)
           question.answers.each_with_index do |answer, rank|
             Orm::Answer.create!(question_id: record.id, position: answer.position || rank + 1, content: answer.content,
-                                correct: answer.correct, match_content: answer.match_content)
+                                correct: answer.correct, match_content: answer.match_content, blank: answer.blank)
           end
         end
       end
@@ -150,7 +150,7 @@ module Repositories
           title: record.title, statement: record.statement, exercise_type: record.exercise_type, position: record.position,
           author_id: record.author_id, status: record.status, published_at: record.published_at,
           archived_at: record.archived_at, questions: record.questions.map { |question| map_question(question) },
-          statement_blocks: record.statement_blocks,
+          statement_blocks: record.statement_blocks, hint: record.hint, subject_id: record.subject_id,
           parents_published: [ record.essential, record.course ].compact.all? { |parent| parent.status == "published" }
         )
       end
@@ -160,10 +160,10 @@ module Repositories
           id: record.id, position: record.position, content: record.content, explanation: record.explanation,
           question_type: record.question_type, numeric_tolerance: record.numeric_tolerance,
           image_description: record.image_description, image: map_image(record.image),
-          points: record.points, unit: record.unit, starter: record.starter, criteria: record.criteria,
+          points: record.points, unit: record.unit, starter: record.starter, criteria: record.criteria, hint: record.hint,
           answers: record.answers.map do |answer|
             Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct,
-                                             match_content: answer.match_content)
+                                             match_content: answer.match_content, blank: answer.blank)
           end
         )
       end

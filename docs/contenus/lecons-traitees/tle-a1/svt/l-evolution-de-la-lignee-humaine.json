@@ -1,0 +1,1599 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'évolution de la lignée humaine",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "A1",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "classement-primates",
+          "kind": "diagram",
+          "description": "Schéma de classement des primates. Le groupe des primates se divise en lémuriens, en autres singes et en grands singes avec l'Homme. Ce dernier groupe réunit le chimpanzé, le gorille, l'orang-outan et l'Homme. C'est un classement par caractères communs, pas un arbre de descendance : l'Homme ne descend pas du chimpanzé.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "legend": [
+              "Grand groupe",
+              "Groupe intermédiaire",
+              "Espèce"
+            ],
+            "nodes": [
+              {
+                "id": "pri",
+                "label": "Primates",
+                "category": 1
+              },
+              {
+                "id": "lem",
+                "label": "Lémuriens",
+                "category": 2
+              },
+              {
+                "id": "sin",
+                "label": "Autres singes",
+                "category": 2
+              },
+              {
+                "id": "gs",
+                "label": "Grands singes et Homme",
+                "category": 2
+              },
+              {
+                "id": "chi",
+                "label": "Chimpanzé",
+                "category": 3
+              },
+              {
+                "id": "gor",
+                "label": "Gorille",
+                "category": 3
+              },
+              {
+                "id": "ora",
+                "label": "Orang-outan",
+                "category": 3
+              },
+              {
+                "id": "hom",
+                "label": "Homme",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pri",
+                "to": "lem"
+              },
+              {
+                "from": "pri",
+                "to": "sin"
+              },
+              {
+                "from": "pri",
+                "to": "gs"
+              },
+              {
+                "from": "gs",
+                "to": "chi"
+              },
+              {
+                "from": "gs",
+                "to": "gor"
+              },
+              {
+                "from": "gs",
+                "to": "ora"
+              },
+              {
+                "from": "gs",
+                "to": "hom"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "volume-cranien",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres du volume crânien moyen arrondi, en centimètres cubes : chimpanzé actuel environ 400 (simple repère, il ne fait pas partie de la lignée humaine), australopithèques environ 450 en moyenne (Lucy environ 400), Homo habilis environ 650, Homo erectus environ 950, Homo sapiens environ 1350. Les barres montent de gauche à droite : le volume crânien augmente le long de la lignée humaine. Ce sont des ordres de grandeur.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              400,
+              450,
+              650,
+              950,
+              1350
+            ],
+            "labels": [
+              "Chimpanzé",
+              "Australopithèque",
+              "Homo habilis",
+              "Homo erectus",
+              "Homo sapiens"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "berceau-africain",
+          "kind": "map",
+          "description": "Carte de l'Afrique. Cinq pays sont colorés : l'Éthiopie, le Kenya et la Tanzanie en Afrique de l'Est, le Tchad en Afrique centrale et l'Afrique du Sud en Afrique australe. Ce sont des pays où l'on a trouvé de très anciens fossiles de la lignée humaine. La Côte d'Ivoire est colorée autrement, comme repère.",
+          "params": {
+            "base": "africa",
+            "legend": [
+              "Pays de très anciens fossiles de la lignée humaine",
+              "Côte d'Ivoire (repère)"
+            ],
+            "areas": [
+              {
+                "id": "eth",
+                "category": 1
+              },
+              {
+                "id": "ken",
+                "category": 1
+              },
+              {
+                "id": "tza",
+                "category": 1
+              },
+              {
+                "id": "tcd",
+                "category": 1
+              },
+              {
+                "id": "zaf",
+                "category": 1
+              },
+              {
+                "id": "civ",
+                "category": 2
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Situer l'Homme parmi les primates",
+          "remember": "Les **primates** sont un groupe de mammifères : lémuriens, singes, grands singes (chimpanzé, gorille, orang-outan) et Homme. Ils ont en commun une main à cinq doigts munis d'**ongles plats**, un **pouce opposable** aux autres doigts (il permet de saisir), des **yeux placés vers l'avant** (vision en relief) et un cerveau développé. L'Homme partage ces **caractères communs** avec les autres primates : c'est pourquoi il est classé parmi eux. Il a aussi des **caractères propres**, absents chez les autres primates actuels : la **marche debout permanente** (bipédie), un **volume crânien** d'environ 1 350 cm³ (contre environ 400 cm³ chez le chimpanzé), une face plate, un menton et des canines petites. L'Homme ne descend pas du chimpanzé actuel : ils ont un ancêtre commun.",
+          "method": [
+            "Lister les caractères observés chez l'Homme et chez l'autre primate comparé.",
+            "Repérer les caractères communs : ceux que les deux êtres vivants possèdent.",
+            "Repérer les caractères propres à l'Homme : ceux que l'autre primate n'a pas.",
+            "Conclure : l'Homme est un primate par ses caractères communs, et il se distingue par ses caractères propres."
+          ],
+          "example": {
+            "statement": "Au musée, un panneau compare l'Homme et le chimpanzé. Chez l'Homme : cinq doigts à ongles plats, pouce opposable, yeux vers l'avant, marche debout, environ 1 350 cm³ de volume crânien. Chez le chimpanzé : cinq doigts à ongles plats, pouce opposable, yeux vers l'avant, marche surtout à quatre pattes, environ 400 cm³ de volume crânien. Montrer que l'Homme est un primate et dire ce qui le distingue.",
+            "steps": [
+              "Lister : chez les deux, cinq doigts à ongles plats, pouce opposable et yeux vers l'avant ; la marche et le volume crânien sont donnés pour chacun.",
+              "Repérer les communs : ongles plats, pouce opposable et yeux vers l'avant se retrouvent chez l'Homme et chez le chimpanzé.",
+              "Repérer les propres : la marche debout et le volume crânien de 1 350 cm³ (contre 400 cm³) n'existent pas chez le chimpanzé.",
+              "Conclure : l'Homme est un primate grâce aux caractères communs, et il se distingue par la marche debout et un grand volume crânien."
+            ]
+          },
+          "pitfall": "Ne prends pas un caractère commun pour un caractère propre à l'Homme. Contre-exemple : le pouce opposable est présent chez l'Homme **et** chez le chimpanzé, il ne distingue donc pas l'Homme. Pour distinguer l'Homme, il faut un caractère absent chez l'autre primate, comme la marche debout permanente ou un volume crânien de 1 350 cm³ contre 400 cm³. N'écris pas non plus que l'Homme descend du chimpanzé : ils ont un ancêtre commun.",
+          "figure": "classement-primates",
+          "exercise": {
+            "title": "Au musée : l'Homme parmi les primates",
+            "statement": "Pendant une sortie de classe au musée, tu lis des panneaux sur les primates. Dans cet exercice, tu appliques la méthode de la fiche : lister, repérer les caractères communs, repérer les caractères propres, puis conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un panneau du musée indique que l'Homme est un primate. Parmi ces caractères, lequel justifie ce classement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : les propositions décrivent des caractères de l'Homme. Étape 2 — Repérer les caractères communs : la main à ongles plats et le pouce opposable se retrouvent chez les autres primates. Étape 3 — Repérer les caractères propres : la marche debout permanente, le grand volume crânien et le menton sont propres à l'Homme, ils ne justifient donc pas son classement parmi les primates. Étape 4 — Conclure : c'est le caractère commun qui classe l'Homme parmi les primates.",
+                "answers": [
+                  {
+                    "content": "Il a une main à ongles plats avec un pouce opposable aux autres doigts",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il marche debout de façon permanente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a un volume crânien d'environ 1 350 cm³",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il possède un menton",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'Homme et le chimpanzé sont deux primates. Quels trois caractères ont-ils en commun ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Lister : on compare l'Homme et le chimpanzé. Étape 2 — Repérer les caractères communs : les ongles plats, le pouce opposable et les yeux vers l'avant existent chez les deux. Étape 3 — Repérer les caractères propres : la marche debout permanente, le volume crânien de 1 350 cm³ et le menton existent seulement chez l'Homme, ce sont les propositions pièges. Étape 4 — Conclure : trois caractères communs, qui font de l'Homme un primate.",
+                "answers": [
+                  {
+                    "content": "Cinq doigts munis d'ongles plats",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un pouce opposable aux autres doigts",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des yeux placés vers l'avant",
+                    "correct": true
+                  },
+                  {
+                    "content": "La marche debout permanente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un volume crânien d'environ 1 350 cm³",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un menton",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La marche debout permanente (bipédie) est un caractère propre à l'Homme parmi les grands singes actuels.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lister : le chimpanzé, le gorille et l'orang-outan se déplacent surtout à quatre pattes ou dans les arbres. Étape 2 — Repérer les caractères communs : la marche debout permanente n'est pas commune à ces animaux. Étape 3 — Repérer les caractères propres : seul l'Homme marche debout en permanence. Étape 4 — Conclure : l'affirmation est vraie, la bipédie est un caractère propre à l'Homme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le pouce opposable est un caractère ___ à l'Homme et au chimpanzé.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lister : le pouce opposable est présent chez l'Homme et chez le chimpanzé. Étape 2 — Repérer les caractères communs : un caractère que les deux possèdent est un caractère commun. Étape 3 — Repérer les caractères propres : un caractère propre à l'Homme serait absent chez le chimpanzé, ce qui n'est pas le cas ici. Étape 4 — Conclure : le pouce opposable est un caractère commun.",
+                "answers": [
+                  {
+                    "content": "commun",
+                    "correct": true
+                  },
+                  {
+                    "content": "propre",
+                    "correct": false
+                  },
+                  {
+                    "content": "absent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « Le pouce opposable distingue l'Homme de tous les autres primates. » Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : l'élève cite le pouce opposable, présent chez l'Homme et chez le chimpanzé. Étape 2 — Repérer les caractères communs : un caractère présent chez les deux ne distingue personne. Étape 3 — Repérer les caractères propres : il faudrait un caractère absent chez l'autre primate, comme la marche debout. Étape 4 — Conclure : l'élève confond caractère commun et caractère propre, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "C'est faux : le pouce opposable est un caractère commun aux primates, il ne distingue pas l'Homme",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est vrai : aucun autre primate n'a de pouce opposable",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est vrai : le chimpanzé n'a pas de pouce du tout",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est faux : l'Homme n'est pas un primate",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer les caractères communs des caractères propres, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "L'Homme est un ___ ; comme le chimpanzé, il a un pouce ___ aux autres doigts.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lister : l'Homme et le chimpanzé ont une main à ongles plats. Étape 2 — Repérer les caractères communs : le pouce opposable est commun aux primates. Étape 3 — Repérer les caractères propres : il ne distingue donc pas l'Homme. Étape 4 — Conclure : l'Homme est un primate, avec un pouce opposable.",
+                "answers": [
+                  {
+                    "content": "primate",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "primates",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "opposable",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le groupe qui rassemble les singes, les grands singes et l'Homme. Le pouce peut se placer face aux autres doigts pour saisir."
+              },
+              {
+                "content": "Quel caractère du visage est propre à l'Homme parmi les primates actuels ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : trois caractères du visage sont proposés. Étape 2 — Repérer les caractères communs : les yeux vers l'avant existent aussi chez le chimpanzé ; la face allongée est celle du chimpanzé, pas de l'Homme. Étape 3 — Repérer les caractères propres : le menton n'existe que chez l'Homme, dont la face est plate. Étape 4 — Conclure : le menton est un caractère propre à l'Homme.",
+                "answers": [
+                  {
+                    "content": "Un menton",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des yeux placés vers l'avant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une face allongée en museau",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la partie basse du visage, sous la bouche."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comparer l'Homme et le chimpanzé à partir de données",
+          "remember": "Le squelette montre comment un être vivant se déplace. Chez l'Homme, adapté à la **marche debout** : le **trou occipital** (par où passe la moelle épinière) est placé sous le crâne, la colonne vertébrale a des courbures en S, le bassin est court et large, les jambes sont plus longues que les bras, le gros orteil est aligné avec les autres. Chez le chimpanzé : trou occipital reculé, colonne en arc, bassin long et étroit, bras longs, gros orteil écarté. D'autres caractères diffèrent : volume crânien (environ 1 350 cm³ chez l'Homme, environ 400 cm³ chez le chimpanzé), face plate avec menton chez l'Homme (face allongée sans menton chez le chimpanzé), canines petites chez l'Homme (grandes chez le chimpanzé). Valeurs moyennes arrondies.",
+          "method": [
+            "Lire le tableau : relever, pour chaque caractère, la valeur ou la description chez l'Homme et chez le chimpanzé.",
+            "Comparer : dire pour chaque caractère si les deux sont identiques ou différents, et de combien.",
+            "Relier chaque différence à une fonction : marche debout, cerveau, alimentation.",
+            "Conclure par une phrase qui s'appuie sur les caractères comparés."
+          ],
+          "example": {
+            "statement": "Un panneau du musée donne ce tableau simplifié (valeurs arrondies). Trou occipital : sous le crâne chez l'Homme, à l'arrière chez le chimpanzé. Bassin : court et large chez l'Homme, long et étroit chez le chimpanzé. Volume crânien : 1 350 cm³ chez l'Homme, 400 cm³ chez le chimpanzé. Canines : petites chez l'Homme, grandes chez le chimpanzé. Dire ce que ce tableau montre du déplacement.",
+            "steps": [
+              "Lire : le trou occipital, le bassin, le volume crânien et les canines sont décrits pour l'Homme et pour le chimpanzé.",
+              "Comparer : les quatre caractères sont différents ; le volume crânien est environ trois fois plus grand chez l'Homme (1 350 contre 400 cm³).",
+              "Relier : le trou occipital sous le crâne et le bassin court et large sont liés à la marche debout ; le volume crânien est lié au cerveau ; les canines sont liées à l'alimentation.",
+              "Conclure : l'Homme a un squelette adapté à la marche debout, ce que n'a pas le chimpanzé."
+            ]
+          },
+          "pitfall": "Ne relie pas tous les caractères à la même fonction. Le volume crânien dit la taille du cerveau, pas la façon de se déplacer ; le trou occipital et le bassin disent la façon de se déplacer, pas la taille du cerveau. Contre-exemple : Lucy, une australopithèque, a le trou occipital et le bassin d'un être qui marche debout, mais un cerveau d'environ 400 cm³, environ trois fois plus petit que celui de l'Homme.",
+          "figure": null,
+          "exercise": {
+            "title": "Comparer des squelettes et des crânes",
+            "statement": "Dans cet exercice, tu analyses des données comparant l'Homme et le chimpanzé, avec la méthode de la fiche : lire, comparer, relier à une fonction, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Sur le crâne d'un fossile, le trou occipital est placé sous le crâne. Que peut-on en déduire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'énoncé indique la position du trou occipital, sous le crâne. Étape 2 — Comparer : chez l'Homme il est sous le crâne, chez le chimpanzé il est à l'arrière. Étape 3 — Relier à une fonction : un trou occipital sous le crâne est lié à la marche debout. Étape 4 — Conclure : l'être vivant marchait debout. Le volume du cerveau et les canines sont d'autres fonctions, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "L'être vivant marchait debout, la tête en équilibre sur la colonne vertébrale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son cerveau était très volumineux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il avait de grandes canines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il marchait à quatre pattes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le volume crânien est de 1 350 cm³ chez l'Homme et de 400 cm³ chez le chimpanzé (valeurs arrondies). Quelle est la différence entre les deux ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : l'Homme a 1 350 cm³, le chimpanzé 400 cm³. Étape 2 — Comparer : on calcule l'écart, 1 350 − 400 = 950. Étape 3 — Relier à une fonction : cet écart traduit un cerveau beaucoup plus volumineux chez l'Homme. Étape 4 — Conclure : la différence est de 950 cm³.",
+                "answers": [
+                  {
+                    "content": "950",
+                    "correct": true
+                  }
+                ],
+                "unit": "cm³",
+                "tolerance": 0
+              },
+              {
+                "content": "Relie chaque caractère du squelette humain à son rôle dans la marche debout.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire : quatre caractères du squelette humain sont donnés. Étape 2 — Comparer : chacun diffère de celui du chimpanzé (trou occipital reculé, colonne en arc, bassin long et étroit, gros orteil écarté). Étape 3 — Relier à une fonction : le trou occipital équilibre la tête, la colonne en S amortit les chocs, le bassin court et large soutient les organes, le gros orteil aligné pousse sur le sol. Étape 4 — Conclure : tous ces caractères sont liés à la marche debout.",
+                "answers": [
+                  {
+                    "content": "Trou occipital sous le crâne",
+                    "match": "Tête en équilibre sur la colonne vertébrale"
+                  },
+                  {
+                    "content": "Colonne vertébrale en S",
+                    "match": "Amortit les chocs de la marche"
+                  },
+                  {
+                    "content": "Bassin court et large",
+                    "match": "Soutient les organes du ventre en station debout"
+                  },
+                  {
+                    "content": "Gros orteil aligné avec les autres",
+                    "match": "Pousse sur le sol à chaque pas"
+                  }
+                ]
+              },
+              {
+                "content": "Chez le chimpanzé, le trou occipital est placé à l'arrière du crâne.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : on compare la position du trou occipital. Étape 2 — Comparer : sous le crâne chez l'Homme, à l'arrière chez le chimpanzé. Étape 3 — Relier à une fonction : cette position reculée correspond à une tête portée vers l'avant, comme chez un animal qui marche à quatre pattes. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels deux caractères du squelette de l'Homme sont liés à la marche debout ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : cinq caractères humains sont proposés. Étape 2 — Comparer : tous diffèrent de ceux du chimpanzé. Étape 3 — Relier à une fonction : le bassin court et large et la colonne en S sont liés à la marche debout ; le volume crânien est lié au cerveau, les canines et le menton à la mâchoire et à l'alimentation. Étape 4 — Conclure : les deux caractères de la marche debout sont le bassin et la colonne en S.",
+                "answers": [
+                  {
+                    "content": "Un bassin court et large",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une colonne vertébrale en S",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un volume crânien de 1 350 cm³",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des canines petites",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un menton",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « L'Homme a un gros cerveau, donc il marche debout. » Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'élève cite le volume crânien (1 350 cm³ chez l'Homme). Étape 2 — Comparer : ce volume est plus grand que celui du chimpanzé (400 cm³). Étape 3 — Relier à une fonction : le volume crânien est lié au cerveau, pas au déplacement ; Lucy marchait debout avec un cerveau d'environ 400 cm³. Étape 4 — Conclure : l'élève relie un caractère à la mauvaise fonction.",
+                "answers": [
+                  {
+                    "content": "Le volume du cerveau n'explique pas la marche : c'est le trou occipital, le bassin et la colonne qui l'indiquent",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est correct : plus le cerveau est gros, plus on marche debout",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est faux : l'Homme ne marche pas debout",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est correct : le cerveau grossit quand on marche debout",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un tableau de données, à comparer l'Homme et le chimpanzé et à relier une différence à sa fonction, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour comparer l'Homme et le chimpanzé.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire : on relève d'abord les données du tableau. Étape 2 — Comparer : on compare ensuite les valeurs, caractère par caractère. Étape 3 — Relier à une fonction : on explique chaque différence par une fonction. Étape 4 — Conclure : on termine par une phrase qui s'appuie sur ce qui précède.",
+                "answers": [
+                  {
+                    "content": "Lire le tableau"
+                  },
+                  {
+                    "content": "Comparer les valeurs"
+                  },
+                  {
+                    "content": "Relier chaque différence à une fonction"
+                  },
+                  {
+                    "content": "Conclure"
+                  }
+                ],
+                "hint": "On commence par regarder les données et on finit par la phrase de réponse."
+              },
+              {
+                "content": "Un tableau simplifié donne 400 cm³ pour un chimpanzé et 1 200 cm³ pour un crâne humain. Combien de fois le volume humain est-il plus grand ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : 400 cm³ pour le chimpanzé et 1 200 cm³ pour le crâne humain. Étape 2 — Comparer : on divise, 1 200 ÷ 400 = 3. Étape 3 — Relier à une fonction : un volume plus grand traduit un cerveau plus volumineux. Étape 4 — Conclure : le volume humain est 3 fois plus grand (valeurs simplifiées).",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "fois",
+                "tolerance": 0,
+                "hint": "Divise le grand volume par le petit."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Situer les grands fossiles de la lignée humaine",
+          "remember": "La **lignée humaine** est l'ensemble des espèces plus proches de l'Homme que du chimpanzé. Elle est **buissonnante** : plusieurs espèces ont vécu en même temps et ne descendent pas toutes les unes des autres. Des fossiles plus anciens existent, comme Toumaï (Tchad, environ 7 millions d'années). Voici quatre grands repères, du plus ancien au plus récent (ordres de grandeur, valeurs moyennes arrondies) : les **Australopithèques** (environ 450 cm³ en moyenne), dont **Lucy**, découverte en Éthiopie (environ 3 millions d'années ; bipède ; environ 400 cm³) ; **Homo habilis** (environ 2 millions d'années ; environ 650 cm³ ; premiers outils de pierre taillée) ; **Homo erectus** (environ 1,8 million d'années et après ; environ 950 cm³ ; bipède complet, feu, bifaces) ; **Homo sapiens** (environ 300 000 ans ; environ 1 350 cm³ ; front vertical, menton). Au fil de ces repères, le volume crânien augmente. La bipédie est apparue avant le gros cerveau.",
+          "method": [
+            "Relever les caractères du fossile : volume crânien, posture, outils éventuels, âge.",
+            "Comparer ces caractères avec ceux des grands fossiles de la lignée connus.",
+            "Situer le fossile dans le temps et le classer par rapport aux autres.",
+            "Conclure en nommant le fossile et en disant ce qu'il montre de l'évolution de la lignée."
+          ],
+          "example": {
+            "statement": "Sur un chantier de fouilles (exemple fictif, valeurs simplifiées), une équipe dégage un crâne. Fiche de terrain : volume crânien d'environ 900 cm³, marche debout, bifaces et traces de foyer à côté, âge d'environ 1 million d'années. Quel est ce fossile et que montre-t-il ?",
+            "steps": [
+              "Relever : volume d'environ 900 cm³, marche debout, bifaces et foyer, âge d'environ 1 million d'années.",
+              "Comparer : 900 cm³ est proche de celui d'Homo erectus (environ 950 cm³) ; les bifaces et le feu correspondent aussi à Homo erectus.",
+              "Situer : 1 million d'années est plus récent que Lucy (3 millions) et Homo habilis (2 millions), et plus ancien qu'Homo sapiens (300 000 ans).",
+              "Conclure : le fossile est un Homo erectus ; il montre un cerveau plus grand que celui de Lucy et un début de maîtrise du feu."
+            ]
+          },
+          "pitfall": "Ne classe pas un fossile d'après un seul caractère. Contre-exemple : la bipédie ne suffit pas à faire un Homo : Lucy marche debout, mais elle est une australopithèque, avec un cerveau d'environ 400 cm³ contre environ 950 cm³ chez Homo erectus. Compare toujours plusieurs caractères (volume crânien, outils, âge) avant de conclure.",
+          "figure": "volume-cranien",
+          "exercise": {
+            "title": "Les grands fossiles de la lignée humaine",
+            "statement": "Sur un chantier de fouilles, puis au musée, tu situes les grands fossiles de la lignée humaine. Applique la méthode de la fiche : relever, comparer, situer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Classe ces fossiles du plus ancien au plus récent.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever : les âges sont d'environ 3 millions d'années (Lucy), 2 millions (Homo habilis), 1,8 million et après (Homo erectus), 300 000 ans (Homo sapiens). Étape 2 — Comparer : on compare les âges. Étape 3 — Situer : le plus grand nombre d'années est le plus ancien. Étape 4 — Conclure : Lucy, Homo habilis, Homo erectus, puis Homo sapiens.",
+                "answers": [
+                  {
+                    "content": "Australopithèque (Lucy)"
+                  },
+                  {
+                    "content": "Homo habilis"
+                  },
+                  {
+                    "content": "Homo erectus"
+                  },
+                  {
+                    "content": "Homo sapiens"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque fossile à son volume crânien moyen arrondi.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever : on lit le volume crânien de chaque fossile. Étape 2 — Comparer : ces volumes sont des moyennes arrondies, qui vont en augmentant. Étape 3 — Situer : le plus ancien de ces fossiles a le plus petit volume, le plus récent le plus grand. Étape 4 — Conclure : australopithèques 450, Homo habilis 650, Homo erectus 950, Homo sapiens 1 350 cm³.",
+                "answers": [
+                  {
+                    "content": "Australopithèques (moyenne)",
+                    "match": "Environ 450 cm³"
+                  },
+                  {
+                    "content": "Homo habilis",
+                    "match": "Environ 650 cm³"
+                  },
+                  {
+                    "content": "Homo erectus",
+                    "match": "Environ 950 cm³"
+                  },
+                  {
+                    "content": "Homo sapiens",
+                    "match": "Environ 1 350 cm³"
+                  }
+                ]
+              },
+              {
+                "content": "Fiche de terrain d'un fossile (exemple fictif) : volume crânien d'environ 450 cm³, marche debout, aucun outil, âge d'environ 3 millions d'années. De quel fossile s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 450 cm³, marche debout, aucun outil, 3 millions d'années. Étape 2 — Comparer : ces valeurs sont celles d'un australopithèque comme Lucy ; Homo habilis a un volume d'environ 650 cm³ et des outils. Étape 3 — Situer : 3 millions d'années est l'âge le plus ancien de ces quatre fossiles (Toumaï, environ 7 millions d'années, est plus ancien encore). Étape 4 — Conclure : c'est un australopithèque comme Lucy.",
+                "answers": [
+                  {
+                    "content": "Un australopithèque, comme Lucy",
+                    "correct": true
+                  },
+                  {
+                    "content": "Homo habilis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homo erectus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homo sapiens",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Lucy appartient au genre Homo.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : Lucy marche debout, son volume crânien est d'environ 400 cm³, elle a environ 3 millions d'années. Étape 2 — Comparer : ces valeurs sont celles d'une australopithèque, pas d'un Homo (habilis : environ 650 cm³, et outils). Étape 3 — Situer : elle précède les premiers Homo. Étape 4 — Conclure : l'affirmation est fausse, Lucy est une australopithèque. La bipédie seule ne fait pas un Homo, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le volume crânien d'Homo sapiens est d'environ 1 350 cm³ et celui d'un australopithèque d'environ 450 cm³ (valeur moyenne). Combien de fois le volume d'Homo sapiens est-il plus grand que celui d'un australopithèque ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 1 350 cm³ pour Homo sapiens, 450 cm³ pour un australopithèque. Étape 2 — Comparer : on divise, 1 350 ÷ 450 = 3. Étape 3 — Situer : l'australopithèque est le plus ancien des deux, Homo sapiens le plus récent. Étape 4 — Conclure : le volume d'Homo sapiens est 3 fois plus grand.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "fois",
+                "tolerance": 0
+              },
+              {
+                "content": "Du plus ancien au plus récent de ces quatre repères de la lignée humaine, le volume crânien ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Relever : 450 (australopithèques), 650, 950 puis 1 350 cm³. Étape 2 — Comparer : chaque valeur est plus grande que la précédente. Étape 3 — Situer : les valeurs croissantes suivent l'ordre du plus ancien au plus récent. Étape 4 — Conclure : le volume crânien augmente.",
+                "answers": [
+                  {
+                    "content": "augmente",
+                    "correct": true
+                  },
+                  {
+                    "content": "diminue",
+                    "correct": false
+                  },
+                  {
+                    "content": "reste identique",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un fossile de la lignée humaine à partir de ses caractères, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un fossile (exemple fictif) a un volume crânien d'environ 1 350 cm³, un menton et un âge de quelques centaines de milliers d'années. De quel fossile s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 1 350 cm³, menton, quelques centaines de milliers d'années. Étape 2 — Comparer : ce volume est celui d'Homo sapiens. Étape 3 — Situer : c'est le plus récent de la lignée. Étape 4 — Conclure : c'est Homo sapiens.",
+                "answers": [
+                  {
+                    "content": "Homo sapiens",
+                    "correct": true
+                  },
+                  {
+                    "content": "Homo habilis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un australopithèque",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le fossile le plus récent et au plus grand cerveau."
+              },
+              {
+                "content": "Lucy est une ___ découverte en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : Lucy marche debout, son cerveau est d'environ 400 cm³. Étape 2 — Comparer : elle ressemble aux australopithèques, pas aux Homo. Étape 3 — Situer : elle a environ 3 millions d'années et a été découverte en Éthiopie. Étape 4 — Conclure : Lucy est une australopithèque d'Éthiopie.",
+                "answers": [
+                  {
+                    "content": "australopithèque",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "australopithecus",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Éthiopie",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un groupe de fossiles qui marchaient debout avec un petit cerveau, il y a environ 3 millions d'années ; un pays d'Afrique de l'Est."
+              },
+              {
+                "content": "Sur un chantier de fouilles (exemple fictif), on trouve un crâne d'environ 650 cm³ à côté de galets taillés, vieux d'environ 2 millions d'années. De quel fossile s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 650 cm³, galets taillés, environ 2 millions d'années. Étape 2 — Comparer : ce volume et ces outils de pierre sont ceux d'Homo habilis ; un australopithèque a environ 450 cm³ et pas d'outil, Homo erectus environ 950 cm³. Étape 3 — Situer : 2 millions d'années se place après les australopithèques et avant Homo erectus. Étape 4 — Conclure : c'est Homo habilis, qui montre un cerveau plus grand et des outils.",
+                "answers": [
+                  {
+                    "content": "Homo habilis",
+                    "correct": true
+                  },
+                  {
+                    "content": "Homo erectus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un australopithèque",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare le volume (650 cm³) et la présence d'outils avec les fossiles de la fiche."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Retrouver le berceau africain de la lignée humaine",
+          "remember": "Un **berceau** est la région où apparaît un groupe d'êtres vivants. Les plus anciens fossiles connus de la lignée humaine ont été trouvés en **Afrique** : en Afrique de l'Est (Éthiopie, Kenya, Tanzanie), en Afrique australe (Afrique du Sud) et au Tchad (Toumaï, découvert en 2001, âgé d'environ 7 millions d'années). Les fossiles trouvés en Asie et en Europe sont **plus récents**. On en déduit que la lignée humaine est apparue en **Afrique**. Cette conclusion repose sur les fossiles connus à ce jour : de nouvelles découvertes peuvent la préciser.",
+          "method": [
+            "Relever, pour chaque fossile, le lieu de la découverte et l'âge.",
+            "Classer les fossiles du plus ancien au plus récent.",
+            "Repérer où se trouvent les plus anciens fossiles.",
+            "Conclure sur le berceau de la lignée, en précisant que cela repose sur les fossiles connus."
+          ],
+          "example": {
+            "statement": "Un musée présente quatre fossiles (exemple simplifié). Fossile 1 : Afrique de l'Est, environ 3 millions d'années. Fossile 2 : Afrique du Sud, environ 2,5 millions d'années. Fossile 3 : Asie, environ 1,5 million d'années. Fossile 4 : Europe, environ 1 million d'années. Où la lignée est-elle apparue ?",
+            "steps": [
+              "Relever : Afrique de l'Est 3 millions, Afrique du Sud 2,5 millions, Asie 1,5 million, Europe 1 million d'années.",
+              "Classer : Afrique de l'Est (3 millions), Afrique du Sud (2,5 millions), Asie (1,5 million), Europe (1 million).",
+              "Repérer : les deux plus anciens fossiles viennent d'Afrique, les plus récents d'Asie et d'Europe.",
+              "Conclure : la lignée est apparue en Afrique, d'après les fossiles connus à ce jour."
+            ]
+          },
+          "pitfall": "Ne conclus pas d'après le seul lieu, sans comparer les âges. Contre-exemple : un fossile de 1 million d'années trouvé en Europe est bien plus récent que des fossiles africains de 3 millions d'années ; il ne prouve pas que la lignée est apparue en Europe. Compare toujours l'âge des fossiles avant de désigner le lieu d'origine.",
+          "figure": "berceau-africain",
+          "exercise": {
+            "title": "Le berceau africain de la lignée humaine",
+            "statement": "À la sortie de fouilles, ton professeur te donne des fossiles à situer. Applique la méthode de la fiche : relever, classer, repérer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Classe ces fossiles du plus ancien au plus récent : Kenya (environ 2 millions d'années), Tchad (environ 7 millions), Europe (environ 800 000 ans), Asie (environ 1,8 million).",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever : quatre lieux et quatre âges. Étape 2 — Classer : on range les âges du plus grand nombre d'années au plus petit, 7 millions, 2 millions, 1,8 million puis 800 000 ans. Étape 3 — Repérer : les deux plus anciens fossiles sont africains. Étape 4 — Conclure : le classement va du Tchad à l'Europe.",
+                "answers": [
+                  {
+                    "content": "Tchad (environ 7 millions d'années)"
+                  },
+                  {
+                    "content": "Kenya (environ 2 millions d'années)"
+                  },
+                  {
+                    "content": "Asie (environ 1,8 million d'années)"
+                  },
+                  {
+                    "content": "Europe (environ 800 000 ans)"
+                  }
+                ]
+              },
+              {
+                "content": "Où ont été trouvés les plus anciens fossiles connus de la lignée humaine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : Lucy (Éthiopie, environ 3 millions d'années) et Toumaï (Tchad, environ 7 millions) sont africains. Étape 2 — Classer : les fossiles d'Asie et d'Europe sont plus récents. Étape 3 — Repérer : les plus anciens viennent d'Afrique. Étape 4 — Conclure : en Afrique, d'après les fossiles connus.",
+                "answers": [
+                  {
+                    "content": "En Afrique",
+                    "correct": true
+                  },
+                  {
+                    "content": "En Europe",
+                    "correct": false
+                  },
+                  {
+                    "content": "En Asie",
+                    "correct": false
+                  },
+                  {
+                    "content": "En Amérique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un fossile trouvé en Europe, âgé d'environ 1 million d'années, est plus ancien que les fossiles d'Afrique de l'Est de 3 millions d'années.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : 1 million d'années pour le fossile européen, 3 millions pour les fossiles d'Afrique de l'Est. Étape 2 — Classer : 3 millions est plus ancien que 1 million. Étape 3 — Repérer : le fossile le plus ancien est africain. Étape 4 — Conclure : l'affirmation est fausse, le fossile européen est le plus récent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces pays, lesquels ont livré des fossiles de la lignée humaine âgés d'au moins 3 millions d'années ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : cinq pays sont proposés. Étape 2 — Classer : les fossiles les plus anciens viennent d'Afrique. Étape 3 — Repérer : l'Éthiopie (Lucy, environ 3 millions d'années) et le Tchad (Toumaï, environ 7 millions) ont livré de tels fossiles ; en Espagne, en Indonésie et en Russie, les fossiles connus de la lignée ont moins de 2 millions d'années. Étape 4 — Conclure : l'Éthiopie et le Tchad.",
+                "answers": [
+                  {
+                    "content": "L'Éthiopie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Tchad",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Espagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Indonésie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Russie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un fossile de 1 million d'années est trouvé en Europe. Un élève conclut : « La lignée humaine est apparue en Europe. » Pourquoi est-ce faux ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : le fossile européen a 1 million d'années ; des fossiles africains ont 3 millions d'années. Étape 2 — Classer : le fossile européen est le plus récent. Étape 3 — Repérer : les plus anciens sont en Afrique. Étape 4 — Conclure : l'élève oublie de comparer les âges, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Il faut comparer les âges : ce fossile est bien plus récent que les fossiles africains de 3 millions d'années",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce qu'il n'y a jamais eu d'êtres humains en Europe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'Europe est trop froide pour conserver des fossiles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que les fossiles européens n'ont pas d'âge",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Toumaï, découvert en 2001, a été trouvé au ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : Toumaï a été découvert en 2001 et son âge est d'environ 7 millions d'années. Étape 2 — Classer : c'est l'un des plus anciens fossiles connus de la lignée humaine. Étape 3 — Repérer : il a été trouvé au Tchad, en Afrique. Étape 4 — Conclure : au Tchad, ce qui confirme le berceau africain.",
+                "answers": [
+                  {
+                    "content": "Tchad",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer des fossiles dans le temps et dans l'espace pour retrouver le berceau de la lignée, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un fossile trouvé en Asie et âgé d'environ 1,8 million d'années est plus récent que Toumaï, âgé d'environ 7 millions d'années.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le fossile d'Asie a environ 1,8 million d'années, Toumaï environ 7 millions. Étape 2 — Classer : 7 millions est plus grand que 1,8 million, donc Toumaï est plus ancien. Étape 3 — Repérer : le plus ancien des deux a été trouvé en Afrique, au Tchad. Étape 4 — Conclure : l'affirmation est vraie, le fossile d'Asie est plus récent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le plus grand nombre d'années est le plus ancien."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour retrouver le berceau de la lignée.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever : on relève d'abord les lieux et les âges. Étape 2 — Classer : on range les fossiles dans le temps. Étape 3 — Repérer : on regarde où sont les plus anciens. Étape 4 — Conclure : on termine par le berceau de la lignée.",
+                "answers": [
+                  {
+                    "content": "Relever le lieu et l'âge de chaque fossile"
+                  },
+                  {
+                    "content": "Classer les fossiles du plus ancien au plus récent"
+                  },
+                  {
+                    "content": "Repérer où se trouvent les plus anciens"
+                  },
+                  {
+                    "content": "Conclure sur le berceau"
+                  }
+                ],
+                "hint": "On commence par les données et on finit par la conclusion."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Relier les innovations culturelles aux étapes de la lignée",
+          "remember": "L'**évolution culturelle** est celle des savoir-faire et des idées, transmis par **apprentissage** de génération en génération : on ne les hérite pas à la naissance, contrairement aux caractères du corps. Les traces laissées par les fouilles montrent des étapes : **outils de pierre taillée** (Homo habilis) pour couper et casser ; **bifaces** et **maîtrise du feu** (Homo erectus) pour se chauffer, cuire, s'éclairer et se protéger ; **art** (peintures de grottes, parures) et **sépultures** (Homo sapiens), qui montrent une pensée symbolique. Les outils deviennent plus variés et plus élaborés au fil du temps.",
+          "method": [
+            "Identifier la trace laissée par les fouilles : outil, foyer, peinture ou sépulture.",
+            "Décrire ce qu'elle montre du mode de vie.",
+            "Situer la trace dans le temps et la rattacher à une étape de la lignée.",
+            "Conclure sur le progrès culturel qu'elle montre."
+          ],
+          "example": {
+            "statement": "Lors de fouilles (exemple fictif, valeurs simplifiées), une équipe découvre dans une grotte des peintures d'animaux et un squelette allongé entouré de coquillages percés, vieux de plusieurs dizaines de milliers d'années. Que montrent ces traces ?",
+            "steps": [
+              "Identifier : ce sont des peintures d'animaux, un squelette allongé (une sépulture) et des coquillages percés (des parures).",
+              "Décrire : les peintures représentent le monde, la sépulture honore un mort, les parures servent à se parer : ces gestes expriment des idées et des croyances.",
+              "Situer : l'âge de plusieurs dizaines de milliers d'années correspond à Homo sapiens.",
+              "Conclure : Homo sapiens a une culture riche avec art et sépultures, preuve d'une pensée symbolique."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'évolution biologique et l'évolution culturelle. Contre-exemple : un enfant ne naît pas en sachant tailler un silex ; il l'apprend. Les savoir-faire se transmettent par apprentissage, alors que le volume du cerveau ou la forme du bassin se transmettent par les gènes. Un outil découvert dans une fouille montre une culture, pas un caractère héréditaire.",
+          "figure": null,
+          "exercise": {
+            "title": "Outils, feu et art : la culture dans la lignée",
+            "statement": "Dans la vitrine d'un musée, tu lis des traces de la culture des hommes préhistoriques. Applique la méthode de la fiche : identifier, décrire, situer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque trace trouvée en fouille à ce qu'elle montre du mode de vie.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : quatre traces sont données. Étape 2 — Décrire : l'outil sert à couper, le foyer à se chauffer et à cuire, la peinture à représenter le monde, la sépulture à honorer un mort. Étape 3 — Situer : outils et foyers sont plus anciens, peintures et sépultures plus récentes. Étape 4 — Conclure : ces traces montrent des progrès techniques puis symboliques.",
+                "answers": [
+                  {
+                    "content": "Outil de pierre taillée",
+                    "match": "Couper la viande et casser des os"
+                  },
+                  {
+                    "content": "Foyer aménagé",
+                    "match": "Se chauffer, cuire les aliments, s'éclairer"
+                  },
+                  {
+                    "content": "Peinture d'animaux dans une grotte",
+                    "match": "Représenter le monde et exprimer des idées"
+                  },
+                  {
+                    "content": "Squelette entouré de parures",
+                    "match": "Honorer un mort, signe de croyances"
+                  }
+                ]
+              },
+              {
+                "content": "Classe ces innovations de la plus ancienne à la plus récente.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : trois innovations sont données. Étape 2 — Décrire : les outils de pierre taillée sont liés à Homo habilis, le feu à Homo erectus, les peintures à Homo sapiens. Étape 3 — Situer : habilis est plus ancien qu'erectus, lui-même plus ancien que sapiens. Étape 4 — Conclure : outils de pierre taillée, maîtrise du feu, peintures de grottes.",
+                "answers": [
+                  {
+                    "content": "Outils de pierre taillée"
+                  },
+                  {
+                    "content": "Maîtrise du feu"
+                  },
+                  {
+                    "content": "Peintures de grottes"
+                  }
+                ]
+              },
+              {
+                "content": "Savoir tailler un silex s'hérite à la naissance, comme la couleur des yeux.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : on parle d'un savoir-faire, la taille d'un silex. Étape 2 — Décrire : un savoir-faire s'acquiert en observant et en s'exerçant. Étape 3 — Situer : il se transmet de génération en génération par apprentissage, alors que la couleur des yeux se transmet par les gènes. Étape 4 — Conclure : l'affirmation est fausse, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les peintures d'animaux d'une grotte ornée sont attribuées à quel fossile de la lignée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : ce sont des peintures, donc de l'art. Étape 2 — Décrire : l'art exprime des idées et une pensée symbolique. Étape 3 — Situer : l'art est lié à Homo sapiens, bien après les outils de Homo habilis et le feu de Homo erectus. Étape 4 — Conclure : c'est Homo sapiens.",
+                "answers": [
+                  {
+                    "content": "Homo sapiens",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un australopithèque comme Lucy",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homo habilis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homo erectus",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels deux avantages la maîtrise du feu apporte-t-elle ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : le feu est une trace laissée par les foyers. Étape 2 — Décrire : le feu permet de cuire, de se chauffer, de s'éclairer et de se protéger. Étape 3 — Situer : il est lié à Homo erectus. Étape 4 — Conclure : cuire et s'éclairer ou se protéger. Le feu ne fait pas grossir le cerveau des enfants : c'est confondre culture et caractère héréditaire.",
+                "answers": [
+                  {
+                    "content": "Cuire les aliments",
+                    "correct": true
+                  },
+                  {
+                    "content": "S'éclairer et se protéger des animaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faire grossir le cerveau de ses enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Se passer d'outils",
+                    "correct": false
+                  },
+                  {
+                    "content": "Voyager plus vite",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier une trace de fouille à une étape de la lignée, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Des galets taillés sont trouvés à côté d'un fossile d'environ 2 millions d'années. À quel fossile les rattacher ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : ce sont des galets taillés, donc des outils de pierre. Étape 2 — Décrire : ils servent à couper et à casser. Étape 3 — Situer : environ 2 millions d'années correspondent à Homo habilis. Étape 4 — Conclure : ces outils sont ceux d'Homo habilis.",
+                "answers": [
+                  {
+                    "content": "Homo habilis",
+                    "correct": true
+                  },
+                  {
+                    "content": "Homo sapiens",
+                    "correct": false
+                  },
+                  {
+                    "content": "Homo erectus",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les premiers outils de pierre taillée sont très anciens."
+              },
+              {
+                "content": "Une peinture de grotte et une sépulture sont des traces de la pensée ___ d'Homo ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : peinture et sépulture sont des traces d'art et de croyances. Étape 2 — Décrire : elles expriment des idées, c'est une pensée symbolique. Étape 3 — Situer : elles sont liées à Homo sapiens. Étape 4 — Conclure : pensée symbolique d'Homo sapiens.",
+                "answers": [
+                  {
+                    "content": "symbolique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sapiens",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'espèce actuelle de l'Homme ; une pensée qui utilise des symboles."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une sortie de classe au musée : l'Homme et le chimpanzé",
+          "statement": "Ta classe visite un musée d'histoire naturelle. Un panneau compare l'Homme et le chimpanzé (valeurs arrondies, présentation simplifiée). Homme : pouce opposable, ongles plats, yeux vers l'avant, trou occipital sous le crâne, colonne vertébrale en S, bassin court et large, volume crânien de 1 350 cm³, canines petites, menton. Chimpanzé : pouce opposable, ongles plats, yeux vers l'avant, trou occipital à l'arrière, colonne en arc, bassin long et étroit, volume crânien de 400 cm³, canines grandes, pas de menton.",
+          "exercise_type": "fixation",
+          "figure": "classement-primates",
+          "questions": [
+            {
+              "content": "D'après le panneau du musée (pouce opposable, ongles plats et yeux vers l'avant chez l'Homme et chez le chimpanzé), pourquoi l'Homme est-il classé parmi les primates ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister les caractères : le panneau donne pouce opposable, ongles plats et yeux vers l'avant chez les deux. Étape 2 — Repérer les caractères communs : ces trois caractères sont présents chez l'Homme et chez le chimpanzé. Étape 3 — Repérer les caractères propres : marche debout, volume de 1 350 cm³ et menton ne sont pas communs. Étape 4 — Conclure : l'Homme est un primate grâce aux caractères communs. Il ne descend pas du chimpanzé actuel, ils ont un ancêtre commun ; c'est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "Parce qu'il partage avec les autres primates des caractères communs",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'il descend du chimpanzé actuel",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il marche debout comme tous les primates",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il a le même volume crânien que le chimpanzé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le panneau, quels trois caractères du squelette de l'Homme sont liés à la marche debout ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Lire le tableau : le panneau décrit neuf caractères pour chacun. Étape 2 — Comparer : trou occipital, colonne et bassin diffèrent entre l'Homme et le chimpanzé. Étape 3 — Relier chaque différence à une fonction : le trou occipital équilibre la tête, la colonne en S amortit, le bassin court et large soutient les organes : trois caractères liés à la marche debout. Le menton, les canines et le volume crânien relèvent de la face, de l'alimentation et du cerveau. Étape 4 — Conclure : ce sont ces trois caractères du squelette.",
+              "answers": [
+                {
+                  "content": "Le trou occipital sous le crâne",
+                  "correct": true
+                },
+                {
+                  "content": "La colonne vertébrale en S",
+                  "correct": true
+                },
+                {
+                  "content": "Le bassin court et large",
+                  "correct": true
+                },
+                {
+                  "content": "Le menton",
+                  "correct": false
+                },
+                {
+                  "content": "Les canines petites",
+                  "correct": false
+                },
+                {
+                  "content": "Le volume crânien de 1 350 cm³",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le panneau indique 1 350 cm³ pour le volume crânien de l'Homme et 400 cm³ pour celui du chimpanzé. Combien de fois le volume humain est-il plus grand ? Arrondis à l'unité.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire le tableau : 1 350 cm³ pour l'Homme, 400 cm³ pour le chimpanzé. Étape 2 — Comparer : on divise, 1 350 ÷ 400 = 3,375, soit environ 3. Étape 3 — Relier à une fonction : un volume plus grand traduit un cerveau plus volumineux. Étape 4 — Conclure : le volume humain est environ 3 fois plus grand.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "fois",
+              "tolerance": 0.5
+            },
+            {
+              "content": "Le chimpanzé actuel est l'ancêtre de l'Homme.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lister : l'Homme et le chimpanzé ont des caractères communs. Étape 2 — Repérer les caractères communs : ils montrent une parenté, pas une descendance. Étape 3 — Repérer les caractères propres : chacun a évolué de son côté, avec ses propres caractères. Étape 4 — Conclure : l'affirmation est fausse, l'Homme et le chimpanzé ont un ancêtre commun, le chimpanzé actuel n'est pas l'ancêtre de l'Homme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un camarade écrit : « Le menton prouve que l'Homme est un primate. » Que lui répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister : le panneau indique un menton chez l'Homme, pas de menton chez le chimpanzé. Étape 2 — Repérer les caractères communs : le menton n'est pas commun. Étape 3 — Repérer les caractères propres : le menton est propre à l'Homme. Étape 4 — Conclure : ce sont les caractères communs (pouce opposable, ongles plats, yeux vers l'avant) qui classent l'Homme parmi les primates.",
+              "answers": [
+                {
+                  "content": "C'est faux : le menton est un caractère propre à l'Homme, il ne sert pas à le classer parmi les primates",
+                  "correct": true
+                },
+                {
+                  "content": "C'est vrai : le menton est commun à tous les primates",
+                  "correct": false
+                },
+                {
+                  "content": "C'est vrai : le chimpanzé a un menton plus grand",
+                  "correct": false
+                },
+                {
+                  "content": "C'est faux : le menton n'existe pas chez l'Homme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En 3 ou 4 phrases, explique à un camarade en suivant la méthode (lister, repérer les caractères communs, repérer les caractères propres, conclure) que l'Homme est un primate mais qu'il se distingue du chimpanzé.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Au moins deux caractères communs sont cités (pouce opposable, ongles plats, yeux vers l'avant)",
+                "Au moins deux caractères propres à l'Homme sont cités (marche debout, volume crânien, menton, canines)",
+                "La conclusion dit que l'Homme est un primate qui se distingue du chimpanzé",
+                "Le vocabulaire est précis (commun, propre, bipédie, volume crânien)"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lister : je compare l'Homme et le chimpanzé du panneau. Étape 2 — Repérer les caractères communs : tous deux ont un pouce opposable, des ongles plats et des yeux vers l'avant, ce qui fait de l'Homme un primate. Étape 3 — Repérer les caractères propres : l'Homme marche debout, son volume crânien est de 1 350 cm³ contre 400 cm³, et il a un menton. Étape 4 — Conclure : l'Homme est un primate, mais il se distingue du chimpanzé par ces caractères propres. Barème sur 3 : caractères communs (1 point), caractères propres (1 point), conclusion et vocabulaire (1 point).",
+              "answers": [],
+              "starter": "L'Homme est un primate parce que..."
+            }
+          ]
+        },
+        {
+          "title": "Au chantier de fouilles : trois fossiles à situer",
+          "statement": "Sur un chantier de fouilles, une équipe dégage trois fossiles (exemple fictif, résultats simplifiés). Fossile A : volume crânien d'environ 450 cm³, marche debout, aucun outil, environ 3 millions d'années, Afrique de l'Est. Fossile B : volume crânien d'environ 950 cm³, marche debout, bifaces et foyer, environ 1,5 million d'années, Afrique puis Asie. Fossile C : volume crânien d'environ 1 350 cm³, menton, outils variés, environ 300 000 ans, Afrique.",
+          "exercise_type": "fixation",
+          "figure": "volume-cranien",
+          "questions": [
+            {
+              "content": "Classe les fossiles A, B et C du plus ancien au plus récent.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Relever les caractères : les âges sont 3 millions, 1,5 million et 300 000 ans. Étape 2 — Comparer : 3 millions est plus grand que 1,5 million, lui-même plus grand que 300 000. Étape 3 — Situer : le plus grand âge est le plus ancien. Étape 4 — Conclure : A, B puis C.",
+              "answers": [
+                {
+                  "content": "Fossile A (environ 3 millions d'années)"
+                },
+                {
+                  "content": "Fossile B (environ 1,5 million d'années)"
+                },
+                {
+                  "content": "Fossile C (environ 300 000 ans)"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fossile à son identification.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever les caractères : A a 450 cm³ et pas d'outil, B a 950 cm³ avec bifaces et foyer, C a 1 350 cm³ avec menton et outils variés. Étape 2 — Comparer : ces valeurs sont celles d'un australopithèque comme Lucy, d'Homo erectus et d'Homo sapiens. Étape 3 — Situer : 3 millions, 1,5 million et 300 000 ans correspondent à ces fossiles. Étape 4 — Conclure : A est un australopithèque, B Homo erectus, C Homo sapiens.",
+              "answers": [
+                {
+                  "content": "Fossile A",
+                  "match": "Un australopithèque, comme Lucy"
+                },
+                {
+                  "content": "Fossile B",
+                  "match": "Homo erectus"
+                },
+                {
+                  "content": "Fossile C",
+                  "match": "Homo sapiens"
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la différence de volume crânien, en cm³, entre le fossile B (950 cm³) et le fossile A (450 cm³) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever les caractères : B a 950 cm³ et A a 450 cm³. Étape 2 — Comparer : on calcule 950 − 450 = 500. Étape 3 — Situer : B est plus récent qu'A. Étape 4 — Conclure : le volume crânien a augmenté de 500 cm³ entre A et B.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ],
+              "unit": "cm³",
+              "tolerance": 0
+            },
+            {
+              "content": "Les fossiles A, B et C ont tous été trouvés en Afrique : on peut donc affirmer que l'Afrique est le seul endroit où a vécu la lignée humaine.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : A, B et C sont africains, mais B a aussi été trouvé en Asie. Étape 2 — Classer : les fossiles asiatiques et européens sont connus mais plus récents que les plus anciens fossiles africains. Étape 3 — Repérer : les plus anciens sont en Afrique, ce qui ne veut pas dire que la lignée n'a vécu qu'en Afrique. Étape 4 — Conclure : l'affirmation est fausse, l'Afrique est le berceau, pas le seul lieu de vie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles deux conclusions s'appuient bien sur le diagramme des volumes crâniens (le chimpanzé actuel, à 400, sert seulement de repère ; australopithèques 450, Homo habilis 650, Homo erectus 950, Homo sapiens 1 350 cm³) ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Relever les caractères : les volumes de la lignée sont 450 (australopithèques), 650, 950 et 1 350 cm³ ; le chimpanzé actuel (400) sert seulement de repère, il ne fait pas partie de la lignée. Étape 2 — Comparer : chaque valeur de la lignée est plus grande que la précédente, et 1 350 ÷ 450 = 3. Étape 3 — Situer : les valeurs de la lignée vont dans le sens du temps. Étape 4 — Conclure : le volume augmente, et Homo sapiens a un volume environ 3 fois plus grand que celui d'un australopithèque. Les autres propositions contredisent les valeurs.",
+              "answers": [
+                {
+                  "content": "Le volume crânien augmente le long de la lignée humaine",
+                  "correct": true
+                },
+                {
+                  "content": "Homo sapiens a un volume crânien environ trois fois plus grand que celui d'un australopithèque",
+                  "correct": true
+                },
+                {
+                  "content": "Le volume crânien diminue au cours du temps",
+                  "correct": false
+                },
+                {
+                  "content": "Le chimpanzé a un volume crânien plus grand que celui de Lucy",
+                  "correct": false
+                },
+                {
+                  "content": "Tous les fossiles ont le même volume crânien",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La vitrine du musée : outils, feu et art",
+          "statement": "Une vitrine de musée présente trois séries d'objets trouvés en fouille (exemple fictif, résultats simplifiés). Série 1 : galets taillés simplement, à côté d'un fossile d'environ 650 cm³, vieux d'environ 2 millions d'années. Série 2 : bifaces et traces de foyer, à côté d'un fossile d'environ 950 cm³, vieux d'environ 1 million d'années. Série 3 : peintures d'animaux et squelette allongé entouré de coquillages percés, à côté d'un fossile d'environ 1 350 cm³, vieux de plusieurs dizaines de milliers d'années.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque série d'objets au fossile de la lignée qui l'a laissée.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever les caractères du fossile : 650 cm³ avec galets taillés, 950 cm³ avec bifaces et foyer, 1 350 cm³ avec peintures. Étape 2 — Comparer : ces valeurs sont celles d'Homo habilis, d'Homo erectus et d'Homo sapiens. Étape 3 — Situer : 2 millions d'années, 1 million d'années et quelques dizaines de milliers d'années. Étape 4 — Conclure : habilis, erectus et sapiens. Pour chaque série, on identifie aussi la trace, on décrit le mode de vie et on la rattache à son étape.",
+              "answers": [
+                {
+                  "content": "Série 1 : galets taillés simplement",
+                  "match": "Homo habilis"
+                },
+                {
+                  "content": "Série 2 : bifaces et foyer",
+                  "match": "Homo erectus"
+                },
+                {
+                  "content": "Série 3 : peintures et sépulture",
+                  "match": "Homo sapiens"
+                }
+              ]
+            },
+            {
+              "content": "Quelle trace de la vitrine montre le mieux une pensée symbolique, c'est-à-dire des croyances et des idées ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier la trace : une sépulture avec des parures. Étape 2 — Décrire : honorer un mort et se parer expriment des idées et des croyances. Étape 3 — Situer : cette trace est liée à Homo sapiens. Étape 4 — Conclure : la sépulture avec parures montre une pensée symbolique, alors que galets, bifaces et foyer sont des traces techniques.",
+              "answers": [
+                {
+                  "content": "Le squelette allongé entouré de coquillages percés",
+                  "correct": true
+                },
+                {
+                  "content": "Les galets taillés simplement",
+                  "correct": false
+                },
+                {
+                  "content": "Les traces de foyer",
+                  "correct": false
+                },
+                {
+                  "content": "Les bifaces",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au fil des séries de la vitrine, les outils et les traces de culture deviennent plus variés et plus élaborés.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : galets taillés, puis bifaces et foyer, puis peintures et sépulture. Étape 2 — Décrire : on passe d'outils simples à des outils plus travaillés, puis à l'art. Étape 3 — Situer : ces séries vont de 2 millions d'années à quelques dizaines de milliers d'années. Étape 4 — Conclure : l'affirmation est vraie, la culture se développe au fil de la lignée.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le fossile de la série 3 a un volume crânien de 1 350 cm³ et celui de la série 1 de 650 cm³. Combien de fois le premier est-il plus grand que le second ? Arrondis à l'unité.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever les caractères : 1 350 cm³ pour la série 3, 650 cm³ pour la série 1. Étape 2 — Comparer : 1 350 ÷ 650 est un peu plus de 2 (environ 2,1). Étape 3 — Situer : la série 1 est la plus ancienne, la série 3 la plus récente. Étape 4 — Conclure : le volume de la série 3 est environ 2 fois plus grand.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "unit": "fois",
+              "tolerance": 0.5
+            },
+            {
+              "content": "Savoir fabriquer un biface se transmet par ___, de génération en génération.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Identifier la trace : un biface est un outil fabriqué. Étape 2 — Décrire : fabriquer un outil est un savoir-faire. Étape 3 — Situer : ce savoir-faire appartient à l'évolution culturelle et se transmet par apprentissage, pas par les gènes. Étape 4 — Conclure : par apprentissage.",
+              "answers": [
+                {
+                  "content": "apprentissage",
+                  "correct": true
+                },
+                {
+                  "content": "les gènes",
+                  "correct": false
+                },
+                {
+                  "content": "le hasard",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En 4 ou 5 phrases, explique ce que montrent les trois séries de la vitrine de l'évolution de la lignée humaine, en suivant la méthode (identifier, décrire, situer, conclure).",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Chaque série est identifiée (galets, bifaces et foyer, peintures et sépulture)",
+                "Ce que chaque série montre du mode de vie est décrit",
+                "Les séries sont situées dans le temps et rattachées à habilis, erectus et sapiens",
+                "La conclusion parle du progrès culturel et de l'augmentation du volume crânien",
+                "Le vocabulaire est précis et les phrases sont construites"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : la vitrine montre des galets taillés, des bifaces avec un foyer, puis des peintures et une sépulture. Étape 2 — Décrire : les galets servent à couper, les bifaces et le feu à chasser, cuire et se chauffer, les peintures et la sépulture montrent des idées et des croyances. Étape 3 — Situer : ces séries vont d'Homo habilis (environ 2 millions d'années) à Homo erectus (environ 1 million) puis à Homo sapiens (quelques dizaines de milliers d'années), avec un volume crânien de 650, 950 puis 1 350 cm³. Étape 4 — Conclure : au fil de la lignée, le cerveau grossit et la culture se développe, des outils simples à l'art. Barème sur 4 : identification (1 point), description (1 point), situation dans le temps (1 point), conclusion (1 point).",
+              "answers": [],
+              "starter": "La vitrine montre que, au fil de la lignée humaine..."
+            }
+          ]
+        },
+        {
+          "title": "Dossier d'exposé : de Lucy à Homo sapiens",
+          "statement": "Pour un exposé, un élève rassemble ce dossier (résultats simplifiés, ordres de grandeur). Lucy, une australopithèque : Éthiopie, environ 3 millions d'années, marche debout, volume crânien d'environ 400 cm³, aucun outil. Homo habilis : Afrique, environ 2 millions d'années, environ 650 cm³, outils de pierre taillée. Homo erectus : Afrique, puis Asie et Europe, environ 1,8 million d'années et après, environ 950 cm³, feu et bifaces. Homo sapiens : Afrique d'abord, environ 300 000 ans, environ 1 350 cm³, outils variés ; l'art et les sépultures viennent bien plus tard que l'apparition d'Homo sapiens (quelques dizaines de milliers d'années).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "D'après le dossier, où ont été trouvés les plus anciens fossiles de la lignée humaine ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever le lieu et l'âge : Lucy, Éthiopie, 3 millions d'années ; Homo habilis, Afrique, 2 millions ; Homo erectus, Afrique puis Asie et Europe. Étape 2 — Classer du plus ancien au plus récent : Lucy, Homo habilis, Homo erectus, Homo sapiens. Étape 3 — Repérer où se trouvent les plus anciens : en Afrique. Étape 4 — Conclure : le berceau de la lignée est africain, d'après les fossiles connus à ce jour.",
+              "answers": [
+                {
+                  "content": "En Afrique",
+                  "correct": true
+                },
+                {
+                  "content": "En Asie",
+                  "correct": false
+                },
+                {
+                  "content": "En Europe",
+                  "correct": false
+                },
+                {
+                  "content": "Dans plusieurs continents à la fois, sans ordre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le dossier, quelles trois évolutions observe-t-on de Lucy à Homo sapiens ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Relever les caractères : 400, 650, 950 puis 1 350 cm³ ; aucun outil, puis pierre taillée, feu et bifaces, art et sépultures ; Afrique, puis Asie et Europe pour Homo erectus. Étape 2 — Comparer : le volume augmente et la culture se diversifie. Étape 3 — Situer : ces changements suivent l'ordre dans le temps. Étape 4 — Conclure : ce sont les trois évolutions citées ; la marche debout est présente dès Lucy et ne disparaît pas.",
+              "answers": [
+                {
+                  "content": "Le volume crânien augmente",
+                  "correct": true
+                },
+                {
+                  "content": "Les traces de culture deviennent plus variées (outils, feu, art)",
+                  "correct": true
+                },
+                {
+                  "content": "Homo erectus sort d'Afrique pour gagner l'Asie et l'Europe",
+                  "correct": true
+                },
+                {
+                  "content": "Le volume crânien diminue",
+                  "correct": false
+                },
+                {
+                  "content": "La marche debout disparaît",
+                  "correct": false
+                },
+                {
+                  "content": "Les outils disparaissent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le dossier, Lucy a environ 3 millions d'années et Homo sapiens environ 300 000 ans. Quelle est la durée qui les sépare, en années ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Relever les caractères : Lucy, 3 000 000 d'années ; Homo sapiens, 300 000 ans. Étape 2 — Comparer : on calcule 3 000 000 − 300 000 = 2 700 000. Étape 3 — Situer : Lucy est la plus ancienne, Homo sapiens la plus récente. Étape 4 — Conclure : environ 2 700 000 ans les séparent (ordre de grandeur).",
+              "answers": [
+                {
+                  "content": "2700000",
+                  "correct": true
+                }
+              ],
+              "unit": "ans",
+              "tolerance": 0
+            },
+            {
+              "content": "Dans la lignée humaine, le gros cerveau est apparu avant la marche debout.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever les caractères : Lucy marche debout avec un cerveau d'environ 400 cm³. Étape 2 — Comparer : le gros cerveau d'Homo sapiens (1 350 cm³) est bien plus récent. Étape 3 — Situer : la marche debout est présente dès les Australopithèques, il y a environ 3 millions d'années. Étape 4 — Conclure : l'affirmation est fausse, la marche debout est apparue avant le gros cerveau.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle phrase est une conclusion correcte pour l'exposé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lister les caractères : l'Homme et le chimpanzé ont un pouce opposable, des ongles plats et des yeux vers l'avant. Étape 2 — Repérer les caractères communs : ces trois caractères sont partagés, ils montrent une parenté avec le chimpanzé, pas une descendance. Étape 3 — Repérer les caractères propres : la marche debout et le grand volume crânien sont propres à l'Homme, le pouce opposable ne l'est donc pas. Étape 4 — Conclure : l'Homme est un primate qui partage un ancêtre commun avec le chimpanzé ; le dossier place en outre les plus anciens fossiles de sa lignée en Afrique. Les autres phrases confondent descendance, caractère propre ou lieu d'origine.",
+              "answers": [
+                {
+                  "content": "L'Homme est un primate qui partage un ancêtre commun avec le chimpanzé, et sa lignée est apparue en Afrique",
+                  "correct": true
+                },
+                {
+                  "content": "L'Homme descend du chimpanzé actuel",
+                  "correct": false
+                },
+                {
+                  "content": "L'Homme est le seul primate à avoir un pouce opposable",
+                  "correct": false
+                },
+                {
+                  "content": "La lignée humaine est apparue en Europe",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe de 5 à 6 phrases pour conclure l'exposé : place l'Homme parmi les primates, puis explique comment la lignée humaine a évolué (corps et culture) en t'appuyant sur le dossier.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "L'Homme est situé parmi les primates, avec au moins un caractère commun et un caractère propre",
+                "L'évolution du corps est décrite avec des valeurs du dossier (volume crânien de 400 à 1 350 cm³, marche debout)",
+                "L'évolution culturelle est décrite (outils, feu, art, sépultures) et reliée aux fossiles",
+                "Le berceau africain est mentionné",
+                "Le vocabulaire est précis et le paragraphe est structuré"
+              ],
+              "explanation": "Corrigé modèle : L'Homme est un primate, car il partage avec le chimpanzé des caractères communs comme le pouce opposable et les ongles plats ; il se distingue par la marche debout et un grand volume crânien. Les plus anciens fossiles de sa lignée viennent d'Afrique, avec Lucy il y a environ 3 millions d'années. Au fil des fossiles, le volume crânien passe d'environ 400 à 1 350 cm³ et la marche debout est déjà présente dès Lucy. La culture évolue aussi : outils de pierre taillée avec Homo habilis, feu et bifaces avec Homo erectus, art et sépultures avec Homo sapiens. La lignée humaine est donc née en Afrique et s'est transformée par le corps et par la culture. Barème sur 4 : place parmi les primates (1 point), évolution du corps (1 point), évolution culturelle (1 point), berceau africain et qualité du paragraphe (1 point).",
+              "answers": [],
+              "starter": "L'Homme est un primate parce que..."
+            },
+            {
+              "content": "Un camarade affirme que « le feu a fait grossir le cerveau des enfants ». En 2 phrases, explique en quoi il confond évolution culturelle et caractère héréditaire.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le feu est présenté comme un savoir-faire transmis par apprentissage",
+                "Le volume du cerveau est présenté comme un caractère du corps, hérité par les gènes"
+              ],
+              "explanation": "Corrigé modèle : Maîtriser le feu est un savoir-faire de l'évolution culturelle : il se transmet par apprentissage et ne change pas le cerveau d'un enfant. Le volume du cerveau est un caractère du corps, transmis par les gènes ; il a augmenté lentement au fil de la lignée. Barème sur 2 : 1 point pour le savoir-faire transmis par apprentissage, 1 point pour le caractère du corps transmis par les gènes.",
+              "answers": [],
+              "starter": "Le feu est un savoir-faire..."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

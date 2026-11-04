@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0106, 0115
+# ADR  : 0033, 0043, 0106, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
 module Entities
   module Assessment
     module Grading
@@ -56,15 +56,39 @@ module Entities
         total.zero? ? 0 : (correct * 100) / total
       end
 
-      # ADR-0115 : les points des questions justes sur ceux des questions corrigées automatiquement, arrondi vers le bas.
-      # graded : [[points (BigDecimal), correct (Boolean)]] des seules questions corrigées automatiquement. Avec toutes les
-      # questions à 1 point, c'est score_percent. Sans question corrigée automatiquement, 0.
+      # Part des points d'une question que la tentative rapporte, de 0 à 1 (ADR cases §4, §6) : une case, 1 si juste et 0 sinon ;
+      # plusieurs, cases justes / cases. Sans tentative, 0. Une question sans case jugée garde `correct` : les tentatives d'avant les cases.
+      def self.share(question, attempt)
+        return Rational(0) if attempt.nil?
+
+        share_of(blanks: question.blanks, correct: attempt.correct, blank_results: attempt.blank_results)
+      end
+
+      # La même règle, pour qui n'a pas la question sous la main (le résultat) : blanks, le nombre de cases de la question. Une
+      # question à plusieurs cases sans verdict par case (copie laissée vide) rapporte 0.
+      def self.share_of(blanks:, correct:, blank_results:)
+        return Rational(correct == true ? 1 : 0) if blanks == 1
+
+        Rational(blank_results.count(true), blanks)
+      end
+
+      # ADR-0115, ADR cases §6 : les points rapportés sur ceux des questions corrigées automatiquement, en fractions de points, arrondi
+      # vers le bas une seule fois, à la fin. graded : [[points (BigDecimal), part juste (Rational de 0 à 1, ou booléen pour une case)]]
+      # des seules questions corrigées automatiquement. Avec toutes les questions à 1 point et une case, c'est score_percent. Sans
+      # question corrigée automatiquement, 0.
       def self.points_percent(graded)
-        total = graded.sum { |points, _| points }
+        total = graded.sum(Rational(0)) { |points, _| points.to_r }
         return 0 if total.zero?
 
-        (graded.sum { |points, correct| correct ? points : 0 } * 100 / total).floor
+        (graded.sum(Rational(0)) { |points, share| points.to_r * as_share(share) } * 100 / total).floor
       end
+
+      def self.as_share(share)
+        return Rational(share ? 1 : 0) if share == true || share == false || share.nil?
+
+        share.to_r
+      end
+      private_class_method :as_share
 
       def self.grade_on_20(score_percent) = (score_percent / 5.0).round
 

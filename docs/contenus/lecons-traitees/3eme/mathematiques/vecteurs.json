@@ -550,6 +550,80 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans un repère, on donne $P(3 ; -2)$, $Q(8 ; 4)$ et $R(-1 ; 5)$.",
+            "questions": [
+              {
+                "content": "Calcule les coordonnées de $\\overrightarrow{PQ}$. $\\overrightarrow{PQ}$ ( ___ ; ___ )",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Extrémité moins origine : la première lettre du nom du vecteur est l'origine.",
+                "explanation": "Étape 1 — Lire : l'origine est $P(3 ; -2)$, l'extrémité est $Q(8 ; 4)$. Étape 2 — Calculer l'abscisse : $x_Q - x_P = 8 - 3 = 5$. Étape 3 — Calculer l'ordonnée : $y_Q - y_P = 4 - (-2) = 4 + 2 = 6$. Étape 4 — Écrire : $\\overrightarrow{PQ}(5\\,;\\,6)$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour $\\overrightarrow{QR}$, choisis l'abscisse et l'ordonnée. Abscisse : ___   Ordonnée : ___",
+                "question_type": "select",
+                "hint": "Attention au sens : l'origine est $Q$, l'extrémité est $R$.",
+                "explanation": "Étape 1 — Lire : l'origine est $Q(8 ; 4)$, l'extrémité est $R(-1 ; 5)$. Étape 2 — Abscisse : $x_R - x_Q = -1 - 8 = -9$. Étape 3 — Ordonnée : $y_R - y_Q = 5 - 4 = 1$. Étape 4 — Écrire : $\\overrightarrow{QR}(-9\\,;\\,1)$. Les propositions $9$ (abscisse) et $-1$ (ordonnée) viennent de « origine moins extrémité » : c'est le vecteur opposé $\\overrightarrow{RQ}$. Le $7$ et le $9$ de l'ordonnée viennent d'une addition au lieu d'une soustraction.",
+                "answers": [
+                  {
+                    "content": "$-9$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$-1$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'abscisse du vecteur $\\overrightarrow{RP}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : l'origine est $R(-1 ; 5)$, l'extrémité est $P(3 ; -2)$. Étape 2 — Calculer l'abscisse : $x_P - x_R = 3 - (-1) = 3 + 1 = 4$. Étape 3 — L'ordonnée vaut $y_P - y_R = -2 - 5 = -7$. Étape 4 — Écrire : $\\overrightarrow{RP}(4\\,;\\,-7)$, l'abscisse est $4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -677,6 +751,73 @@
                   },
                   {
                     "content": "$\\overrightarrow{AB} = \\overrightarrow{AD}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un repère, on donne $A(-1 ; 2)$, $B(3 ; 3)$ et $C(5 ; 6)$. On cherche le point $D$ tel que $ABCD$ soit un parallélogramme.",
+            "questions": [
+              {
+                "content": "Calcule les coordonnées de $\\overrightarrow{AB}$. $\\overrightarrow{AB}$ ( ___ ; ___ )",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Extrémité moins origine : $B$ moins $A$.",
+                "explanation": "Étape 1 — Écrire : $ABCD$ est un parallélogramme si $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(3 - (-1)\\,;\\,3 - 2) = (4\\,;\\,1)$. Étape 3 — Ces coordonnées serviront à comparer avec celles de $\\overrightarrow{DC}$. Étape 4 — Il reste à trouver $D$ avec cette égalité.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour que $ABCD$ soit un parallélogramme, il faut $\\overrightarrow{AB} = \\overrightarrow{DC}$. Donne les coordonnées de $D$. $D$ ( ___ ; ___ )",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris $\\overrightarrow{DC}(5 - x_D\\,;\\,6 - y_D)$ puis une équation par coordonnée.",
+                "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(4\\,;\\,1)$ et $\\overrightarrow{DC}(5 - x_D\\,;\\,6 - y_D)$. Étape 3 — Comparer, une équation par coordonnée : $5 - x_D = 4$ donc $x_D = 1$ ; $6 - y_D = 1$ donc $y_D = 5$. Étape 4 — Conclure : $D(1 ; 5)$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour le parallélogramme $ABCD$, quelle égalité de vecteurs est correcte ?",
+                "question_type": "select",
+                "hint": "Les côtés opposés $[AB]$ et $[DC]$ se parcourent dans le même sens.",
+                "explanation": "Étape 1 — Écrire l'égalité en suivant l'ordre des sommets : $\\overrightarrow{AB} = \\overrightarrow{DC}$ (côtés opposés dans le même sens de parcours). Étape 2 — La proposition $\\overrightarrow{AB} = \\overrightarrow{CD}$ est le piège classique : $\\overrightarrow{CD}$ est l'opposé de $\\overrightarrow{DC}$. Étape 3 — Les propositions $\\overrightarrow{AB} = \\overrightarrow{AD}$ et $\\overrightarrow{AC} = \\overrightarrow{BD}$ comparent des vecteurs qui ne sont pas des côtés opposés. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{DC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{CD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{AD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AC} = \\overrightarrow{BD}$",
                     "correct": false
                   }
                 ]
@@ -814,6 +955,72 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans un repère, on donne $A(-2 ; 1)$, $B(1 ; 4)$ et $C(4 ; 2)$.",
+            "questions": [
+              {
+                "content": "Calcule $\\overrightarrow{AB} + \\overrightarrow{BC}$. ( ___ ; ___ )",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Calcule d'abord $\\overrightarrow{AB}$ et $\\overrightarrow{BC}$ avec « extrémité moins origine ».",
+                "explanation": "Étape 1 — Lire : $\\overrightarrow{AB}(3\\,;\\,3)$ car $1 - (-2) = 3$ et $4 - 1 = 3$ ; $\\overrightarrow{BC}(3\\,;\\,-2)$ car $4 - 1 = 3$ et $2 - 4 = -2$. Étape 2 — Additionner les abscisses : $3 + 3 = 6$. Étape 3 — Additionner les ordonnées : $3 + (-2) = 1$. Étape 4 — Conclure : la somme vaut $(6\\,;\\,1)$, et comme les vecteurs sont bout à bout, c'est $\\overrightarrow{AC}$ (en effet $\\overrightarrow{AC}(6\\,;\\,1)$).",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour trois points $A$, $B$ et $C$, quelle égalité est correcte d'après la relation de Chasles ?",
+                "question_type": "select",
+                "hint": "Il faut que les vecteurs soient bout à bout : l'extrémité du premier est l'origine du second.",
+                "explanation": "Étape 1 — Lire : la relation de Chasles s'applique quand l'extrémité du premier vecteur est l'origine du second. Étape 2 — Dans $\\overrightarrow{AB} + \\overrightarrow{BC}$, l'extrémité $B$ du premier est l'origine du second. Étape 3 — La somme va de $A$ à $C$ : $\\overrightarrow{AC}$. Étape 4 — Les autres propositions mettent un vecteur dans le mauvais sens ($\\overrightarrow{CB}$, $\\overrightarrow{BA}$) ou donnent le vecteur opposé ($\\overrightarrow{CA}$).",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{CB} = \\overrightarrow{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{BA} + \\overrightarrow{BC} = \\overrightarrow{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{CA}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\vec{u}(5\\,;\\,-2)$ et $\\vec{v}(-3\\,;\\,6)$. Calcule $\\vec{u} + \\vec{v}$. ( ___ ; ___ )",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : $\\vec{u}(5\\,;\\,-2)$ et $\\vec{v}(-3\\,;\\,6)$. Étape 2 — Additionner les abscisses : $5 + (-3) = 2$. Étape 3 — Additionner les ordonnées : $-2 + 6 = 4$. Étape 4 — Conclure : $\\vec{u} + \\vec{v}(2\\,;\\,4)$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -941,6 +1148,87 @@
                   },
                   {
                     "content": "Oui, car les deux vecteurs ont des coordonnées positives.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On donne les vecteurs $\\vec{u}(4\\,;\\,-6)$, $\\vec{v}(-6\\,;\\,9)$ et $\\vec{w}(3\\,;\\,5)$.",
+            "questions": [
+              {
+                "content": "Calcule les produits en croix de $\\vec{u}$ et $\\vec{v}$. $x \\times y'$ = ___   $x' \\times y$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Un produit de deux nombres négatifs est positif.",
+                "explanation": "Étape 1 — Calculer : les coordonnées sont données, $\\vec{u}(4\\,;\\,-6)$ et $\\vec{v}(-6\\,;\\,9)$. Étape 2 — Calculer les produits en croix : $x \\times y' = 4 \\times 9 = 36$ et $x' \\times y = (-6) \\times (-6) = 36$. Étape 3 — Comparer : les deux produits sont égaux. Étape 4 — Conclure : $\\vec{u}$ et $\\vec{v}$ sont colinéaires (en fait $\\vec{v} = -1{,}5\\,\\vec{u}$).",
+                "answers": [
+                  {
+                    "content": "36",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "36",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Compare les produits en croix de $\\vec{u}$ et $\\vec{w}$ : ils sont ___, donc $\\vec{u}$ et $\\vec{w}$ sont ___.",
+                "question_type": "select",
+                "hint": "Calcule $x \\times y'$ et $x' \\times y$ avec les coordonnées de $\\vec{u}$ et de $\\vec{w}$, puis compare.",
+                "explanation": "Étape 1 — Calculer : $\\vec{u}(4\\,;\\,-6)$ et $\\vec{w}(3\\,;\\,5)$. Étape 2 — Calculer les produits en croix : $4 \\times 5 = 20$ et $3 \\times (-6) = -18$. Étape 3 — Comparer : $20 \\neq -18$, les produits sont différents. Étape 4 — Conclure : $\\vec{u}$ et $\\vec{w}$ ne sont pas colinéaires.",
+                "answers": [
+                  {
+                    "content": "différents",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "égaux",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "non colinéaires",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "colinéaires",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour quelle valeur de $k$ les vecteurs $\\vec{a}(5\\,;\\,k)$ et $\\vec{b}(10\\,;\\,-8)$ sont-ils colinéaires ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris l'égalité des deux produits en croix, puis résous l'équation en $k$.",
+                "explanation": "Étape 1 — Calculer : $\\vec{a}(5\\,;\\,k)$ et $\\vec{b}(10\\,;\\,-8)$ sont donnés. Étape 2 — Produits en croix : $5 \\times (-8) = -40$ et $10 \\times k$. Étape 3 — Comparer : colinéaires si $10k = -40$. Étape 4 — Conclure : $k = -4$.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(1 ; 1)$, $B(3 ; 4)$ et $C(7 ; 10)$. Les points $A$, $B$ et $C$ sont ___.",
+                "question_type": "select",
+                "hint": "Choisis deux vecteurs partant du même point, par exemple $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$.",
+                "explanation": "Étape 1 — Calculer : $\\overrightarrow{AB}(2\\,;\\,3)$ car $3 - 1 = 2$ et $4 - 1 = 3$ ; $\\overrightarrow{AC}(6\\,;\\,9)$ car $7 - 1 = 6$ et $10 - 1 = 9$. Étape 2 — Produits en croix : $2 \\times 9 = 18$ et $6 \\times 3 = 18$. Étape 3 — Comparer : les deux produits sont égaux. Étape 4 — Conclure : $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont colinéaires (ici $\\overrightarrow{AC} = 3\\,\\overrightarrow{AB}$), donc $A$, $B$ et $C$ sont alignés.",
+                "answers": [
+                  {
+                    "content": "alignés",
+                    "correct": true
+                  },
+                  {
+                    "content": "non alignés",
                     "correct": false
                   }
                 ]

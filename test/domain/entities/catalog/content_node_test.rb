@@ -116,6 +116,23 @@ module Entities
         assert_equal [ [ "e.questions[0].criteria", "schema" ] ], codes(errors.call(criteria: [ 1 ]))
       end
 
+      test "l'indice d'une question (500 caractères au plus) et la case de chaque réponse (un entier de 0 à 5) doivent avoir la forme du schéma" do
+        errors = ->(**changes) { ContentNode.validate_exercise(exercise("questions" => [ question.merge(changes.stringify_keys) ]), path: "e") }
+        with_blank = ->(blank) { [ { "content" => "p", "is_correct" => true, "blank" => blank }, { "content" => "q", "is_correct" => false } ] }
+
+        assert_empty errors.call(hint: "Pense au rapport de proportionnalité.")
+        assert_equal [ [ "e.questions[0].hint", "too_long" ] ], codes(errors.call(hint: "a" * 501))
+        assert_equal [ [ "e.questions[0].hint", "schema" ] ], codes(errors.call(hint: 3))
+        assert_equal [ [ "e.questions[0].answers[0].blank", "invalid_value" ] ], codes(errors.call(answers: with_blank.call(6)))
+        assert_equal [ [ "e.questions[0].answers[0].blank", "schema" ] ], codes(errors.call(answers: with_blank.call("a")))
+      end
+
+      test "un entraînement de notion qui n'est pas une table est refusé à l'endroit de l'entraînement" do
+        notion = ->(practice) { revision_notion("N").merge("practice" => practice) }
+
+        assert_equal [ [ "n.practice", "schema" ] ], codes(ContentNode.validate_notion(notion.call("x"), path: "n"))
+      end
+
       test "la description de l'image d'une question ne peut pas être faite d'espaces" do
         errors = ->(image) { ContentNode.validate_exercise(exercise("questions" => [ question.merge("image" => image) ]), path: "e") }
 

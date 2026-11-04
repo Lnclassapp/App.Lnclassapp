@@ -1,0 +1,56 @@
+<%# 🌐 UI · catalog/practice_checks/_result — le frame « practice_<notion> » : le formulaire d'entraînement, et après « Vérifier » le verdict de chaque case puis « Correction » %>
+<%# Rôle : `course_slug`, `notion_slug`, `practice` (NotionPractice sans correction), `check` (CheckPractice::Check | nil avant le premier « Vérifier »), `values` (saisie gardée), `state` (:ready, :checked, :changed, :rate_limited), `title_id` ; la page de la leçon le rend sans verdict ni corrigé, le serveur seul les ajoute %>
+<%# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0147-je-m-entraine-dans-la-fiche §3.2, §3.4, §3.5, §3.10 %>
+<% scope = "catalog.revision_sheets.practice" %>
+<% frame = "practice_#{notion_slug}" %>
+<% anchor = course_path(course_slug, anchor: "notion-#{notion_slug}") %>
+<%# Le frame remplacé n'a pas de contrôleur de formules au-dessus de lui à reconnecter : le sien rend celles de la réponse. %>
+<%= turbo_frame_tag frame, data: { controller: "math" } do %>
+  <% if state == :changed %>
+    <p class="sheet-verdict" data-verdict="wrong" role="alert"><%= t("#{scope}.changed") %></p>
+    <p><%= link_to t("#{scope}.reload"), anchor, class: "sheet-button", data: { turbo_frame: "_top" } %></p>
+  <% else %>
+    <% only_written = practice.questions.none? { |question| %w[written notebook].exclude?(question.kind_name) } %>
+    <%= form_with url: practice_check_path(course_slug:, slug: notion_slug), method: :post, data: { turbo_frame: frame },
+                  html: { "aria-labelledby": title_id } do %>
+      <%= hidden_field_tag :digest, practice.digest, id: nil %>
+      <% if state == :rate_limited %>
+        <p class="sheet-verdict" data-verdict="wrong" role="alert"><%= t("#{scope}.rate_limited") %></p>
+      <% end %>
+      <ol class="sheet-practice-questions">
+        <% practice.questions.each_with_index do |question, index| %>
+          <%= render "catalog/practice_checks/question", question:, index:, slug: notion_slug, result: check&.questions&.at(index), values: values[index.to_s] || {} %>
+        <% end %>
+      </ol>
+      <% if check %>
+        <div class="sheet-practice-feedback" role="status" aria-live="polite">
+          <% message = { all_correct: "all_correct", some_wrong: "some_wrong", incomplete: "incomplete" }[check.status] %>
+          <% if message %><p><%= t("#{scope}.#{message}") %></p><% end %>
+        </div>
+      <% else %>
+        <p class="sheet-practice-help"><%= t("#{scope}.help") %></p>
+      <% end %>
+      <div class="sheet-practice-actions">
+        <%= button_tag (only_written ? t("#{scope}.done") : t("#{scope}.check")), type: "submit", class: "sheet-button",
+                       data: { turbo_submits_with: t("#{scope}.checking") } %>
+        <% if check %>
+          <%= tag.details class: "sheet-practice-correction", open: check.status == :done do %>
+            <summary class="sheet-button" data-variant="ghost"><%= t("#{scope}.correction") %></summary>
+            <ol>
+              <% check.questions.each do |result| %>
+                <li>
+                  <% if result.expected.any? %>
+                    <span class="sheet-practice-expected"><%= t("#{scope}.expected", question: t("#{scope}.question", number: result.number), answers: result.expected.join(" ; ")) %></span>
+                  <% else %>
+                    <span class="sheet-practice-expected"><%= t("#{scope}.question", number: result.number) %></span>
+                  <% end %>
+                  <span class="sheet-text"><%= sheet_text(result.explanation) %></span>
+                </li>
+              <% end %>
+            </ol>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

@@ -22,7 +22,10 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
   def toggle_id(classroom, exercise) = "assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}"
   def no_toggle = assert_select("[id^=assignment_], form[action*=assignments]", 0)
 
-  test "the teacher sees the header and both sections, exercises grouped by sheet then the whole lesson" do
+  def sheet_href(dom_id) = classroom_course_sheet_path(@classroom.public_id, @course.slug, dom_id)
+
+  # sujet-avant-de-commencer, Lot B : la page ne porte que des cases, chacune vers la feuille dans cette classe.
+  test "the teacher sees the header and both sections, a card per sheet towards the sheet in her classroom" do
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
@@ -32,71 +35,41 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#notion-#{@meiose.slug}[aria-label=?]", "La méiose"
-    assert_select "#prepare-interros #notion-#{@mitose.slug}", 1
-    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
-    assert_select "#prepare-interros h3", text: "La méiose", count: 0
-    assert_select "#prepare-interros h3", text: tl("lesson_wide_title"), count: 0
-    assert_select "#prepare-interros li#exercise-#{@ex_wide.public_id}"
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id} a[href='#{exercise_path(@ex_meiose.public_id)}']"
+    assert_select "#prepare-interros a.ps-card#notion-#{@meiose.slug}[href=?]", sheet_href("notion-#{@meiose.slug}") do
+      assert_select ".ps-card-kind", text: "Prépare interros n°1"
+      assert_select ".ps-card-title", text: "La méiose"
+    end
+    assert_select "#prepare-interros a.ps-card#notion-#{@mitose.slug}[href=?]", sheet_href("notion-#{@mitose.slug}")
+    assert_select "#prepare-interros a.ps-card#toute-la-lecon[href=?]", sheet_href("toute-la-lecon") do
+      assert_select ".ps-card-title", text: tl("lesson_wide_title")
+    end
+    assert_select ".ps-sheet, turbo-frame[id^=sheet-exercise-], .ps-input, [data-ps-choice]", 0
     # CA-05 : aucun ancien intitulé.
     assert_no_match(/Révisions de la leçon|Fiche de cours/, response.body)
   end
 
-  # UDR-0139 §3.4 : « Assigner » pour cette classe seulement, jamais pour une autre classe de l'enseignant.
-  test "the toggles are those of this classroom only, the first « Assigner » being filled" do
+  # UDR-0139 §3.4 : « Assigner » pour cette classe seulement, jamais pour une autre classe de l'enseignant ; ces bascules sont sur la page de la feuille.
+  test "the toggles, on the sheet page, are those of this classroom only, the first « Assigner » being filled" do
     other = create_classroom(name: "Tle D 2", level: @course.level, series: @course.series, school: @classroom.school)
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)
     assignment = create_assignment(classroom: @classroom, assignable: @ex_mitose, by: @teacher, due_on: Date.current + 2)
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
+    no_toggle
 
+    get sheet_href("notion-#{@meiose.slug}")
     assert_select "##{toggle_id(@classroom, @ex_meiose)}", text: including(toggle("assign"))
-    assert_select "##{toggle_id(@classroom, @ex_wide)}"
+    assert_select "[id^='assignment_#{other.public_id}']", 0
+    assert_select "[id^='assignment_'] .ps-btn--primary", 1
+    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ps-btn--primary"
+
+    get sheet_href("notion-#{@mitose.slug}")
     assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
     assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
-    assert_select "[id^='assignment_#{other.public_id}']", 0
-    assert_select ".ui-button-primary", 1
-    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
-  end
 
-  # UDR-0145 §3.2 ter : les évaluations vont dans « Prépare devoirs », les fixations dans « Prépare interros », jamais l'inverse.
-  test "evaluations go to « Prépare devoirs » with their toggles, fixations stay in « Prépare interros »" do
-    eval_mitose = create_exercise(essential: @mitose, title: "Devoir mitose", exercise_type: "evaluation")
-    eval_wide = create_lesson_wide_exercise(course: @course, title: "Devoir de la leçon", exercise_type: "evaluation")
-    sign_in_as @teacher
-
-    get classroom_course_path(@classroom.public_id, @course.slug)
-
-    assert_select "section#prepare-devoirs[aria-labelledby=prepare_devoirs_title] h2#prepare_devoirs_title", text: tl("prepare_devoirs_title")
-    assert_select "section#prepare-devoirs", text: including(tl("prepare_devoirs_intro"))
-    assert_select "ul#prepare-devoirs-grid li[id^=exercise-]", 2
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_wide.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{@ex_meiose.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{eval_mitose.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{eval_wide.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{@ex_meiose.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id} ##{toggle_id(@classroom, eval_mitose)}"
-    assert_select ".ui-button-primary", 1
-    # Chaque repère n'existe qu'une fois : « notion-mitose » a déjà sa fixation, « toute-la-lecon » la sienne.
-    assert_select "##{"notion-#{@mitose.slug}"}", 1
-    assert_select "#toute-la-lecon", 1
-    assert_select "ul#prepare-devoirs-grid span[id]", 0
-  end
-
-  test "a notion with only an evaluation carries its anchor in « Prépare devoirs », which is absent without evaluation" do
-    sign_in_as @teacher
-    get classroom_course_path(@classroom.public_id, @course.slug)
-    assert_select "section#prepare-devoirs", 0
-
-    @ex_mitose.update!(exercise_type: "evaluation")
-    get classroom_course_path(@classroom.public_id, @course.slug)
-
-    assert_select "##{"notion-#{@mitose.slug}"}", 1
-    assert_select "ul#prepare-devoirs-grid > li > span#notion-#{@mitose.slug}"
-    assert_select "ul#prepare-interros-grid span#notion-#{@mitose.slug}", 0
+    get sheet_href("toute-la-lecon")
+    assert_select "##{toggle_id(@classroom, @ex_wide)}"
   end
 
   # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
@@ -142,14 +115,14 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_no_match "Génétique et évolution", response.body
   end
 
-  test "the team reads the page, with the status of each exercise and without any toggle" do
+  test "the team reads the page: cards, without any toggle" do
     sign_in_as create_team_member
 
     get classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros li[id^=exercise-]", 3
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id}", text: including(I18n.t("catalog.content_status.published"))
+    assert_select "#prepare-interros a.ps-card", 3
+    assert_select "turbo-frame[id^=sheet-exercise-]", 0
     no_toggle
   end
 

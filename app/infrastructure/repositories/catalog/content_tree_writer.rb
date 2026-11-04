@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121, chargement-automatique-des-lecons-hors-production, 0123
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -9,12 +9,13 @@ module Repositories
       # Un contenu de la leçon réimportée n'est plus en brouillon : la base du lot refuse, le moteur le note (Transaction::WRITE_FAILURES).
       class NotDraft < ActiveRecord::CheckViolation; end
 
-      NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
-      EXERCISE_COLUMNS = %w[id public_id course_id essential_id title statement statement_blocks figure_key exercise_type position author_id
-                            status created_at updated_at].freeze
+      NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::Subject" => %w[course_id position],
+                       "Orm::RichTextRow" => [] }.freeze
+      EXERCISE_COLUMNS = %w[id public_id course_id essential_id subject_id title statement statement_blocks figure_key hint exercise_type position
+                            author_id status created_at updated_at].freeze
       QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description points unit
-                            starter criteria created_at updated_at].freeze
-      ANSWER_COLUMNS = %w[question_id position content correct match_content created_at updated_at].freeze
+                            starter criteria hint created_at updated_at].freeze
+      ANSWER_COLUMNS = %w[question_id position content correct match_content blank created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
       COPY_SPECIALS = /[\\\t\n\r]/
@@ -44,22 +45,73 @@ module Repositories
         exercises += notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.slug)) } }
         exercises += kept.flat_map { |course| course.essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential.existing_id) } } }
         # Les exercices de toute la leçon viennent après ceux des notions : sans notion, ils prennent la leçon de leur cours (ADR-0113 §4.1).
-        lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug) ] } } +
-                      kept.flat_map { |course| course.exercises.map { |node| [ node, course.existing_id ] } }
-        counts = write_exercises(exercises + lesson_wide.map(&:first), lesson_wide)
+        lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug), nil ] } } +
+                      kept.flat_map { |course| course.exercises.map { |node| [ node, course.existing_id, nil ] } }
+        # Les sujets de devoir (ADR-0121 §4) viennent après les exercices de la leçon : leurs exercices sont les derniers de la leçon.
+        subjects = courses.flat_map { |course| course.subjects.map { |node| node.with(course_id: course_ids.fetch(course.slug)) } }
+        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
 
         { courses: courses.size, essentials: essentials.size + notions.size, **counts, archived: }
       end
 
       # ADR-0116 §4.4 : remplace une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée. Elle garde son id,
-      # son slug et son auteur (les lignes réécrites lui appartiennent). → { courses:, essentials:, exercises:, questions:, answers: }
+      # son slug et son auteur (les lignes réécrites lui appartiennent). → { courses:, essentials:, exercises:, questions:, answers:, subjects: }
       def replace_draft(course_id:, tree:)
         connection.execute("SET LOCAL enable_seqscan = off")
         course = Orm::Course.lock.find(course_id)
         raise NotDraft, "la leçon #{course.slug} ou l'un de ses contenus n'est plus en brouillon" unless draft?(course)
 
+        rewrite(course, tree)
+      end
+
+      # ADR-0123 (chargement automatique, Develop seul) : remplace entière une leçon, publiée ou non, comme replace_draft mais sans sa garde,
+      # avec ce qui s'y rattache (séances, tentatives, badges, lacunes, lectures, devoirs envoyés, texte du cours), dans la transaction de
+      # l'appelant, la leçon verrouillée. Son statut ne change pas ; tout ce qui est réécrit est en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées)
+      def replace_lesson(course_id:, tree:)
+        connection.execute("SET LOCAL enable_seqscan = off")
+        rewrite(Orm::Course.lock.find(course_id), tree)
+      end
+
+      # Chargement automatique hors production (ADR chargement-automatique-des-lecons-hors-production §4.4) : remplace, dans la transaction
+      # de l'appelant et la leçon verrouillée, les exercices de ses notions, ses problèmes et ses sujets de devoir, publiée ou non, avec ce qui
+      # s'y rattache (séances, tentatives, badges, lacunes nées de ces séances, devoirs envoyés). Le cours (nom, sous-titre, thème, texte), ses
+      # notions, leurs fiches et leurs lectures ne bougent pas : les exercices du nœud se rattachent aux notions en place par leur nom
+      # (squish ; une notion introuvable lève KeyError, rien n'est écrit). Les figures citées par les exercices et les sujets du nœud sont
+      # ajoutées aux figures de la leçon, ou les remplacent par leur clé ; les autres restent. Les lignes écrites sont en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées, essentials vaut 0)
+      def replace_exercises(course_id:, tree:)
+        connection.execute("SET LOCAL enable_seqscan = off")
+        course = Orm::Course.lock.find(course_id)
+        notion_ids = Orm::Essential.where(course_id:).lock.pluck(:name, :id).to_h { |name, id| [ name.squish, id ] }
+        exercises = tree.notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.name.squish)) } }
+
+        stamp(course.author_id, Time.current)
+        deleted = delete_content(course_id, keep_notions: true)
+        Rails.logger.info("[import] exercices remplacés : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
+        subjects = tree.subjects.map { it.with(course_id:) }
+        cited = (exercises + tree.exercises + subjects.flat_map(&:exercises)).filter_map(&:figure_key)
+        course.update_columns(figures: merged_figures(course.figures, tree.figures, cited), updated_at: @at)
+
+        lesson_wide = tree.exercises.map { [ it, course_id, nil ] }
+        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
+
+        { courses: 1, essentials: 0, **counts, subjects: subjects.size }
+      end
+
+      private
+
+      def connection = ActiveRecord::Base.connection
+
+      # La leçon verrouillée (course) réécrite entière depuis tree : elle garde son id, son slug, son auteur et son statut ; son texte de
+      # cours (format 1) part, le format 3 n'en a pas.
+      def rewrite(course, tree)
+        course_id = course.id
         stamp(course.author_id, Time.current)
         deleted = delete_content(course_id)
+        # Détruit par Action Text, pour que ses pièces jointes (embeds) partent avec lui.
+        texts = ActionText::RichText.where(record_type: "Orm::Course", record_id: course_id, name: "content")
+        deleted[:course_text] = texts.each(&:destroy!).size
         Rails.logger.info("[import] leçon remplacée : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
         course.update_columns(name: tree.name, subtitle: tree.subtitle, figures: tree.figures, sheet_theme: tree.sheet_theme, updated_at: @at)
 
@@ -67,15 +119,19 @@ module Repositories
         notions = tree.notions.map { |node| node.with(course_id:, slug: Entities::Catalog::Slug.unique(node.slug, taken:)) }
         notion_ids = ids_by(insert(Orm::Essential, notions.map { |node| notion_row(node) }), "slug")
         exercises = notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.slug)) } }
-        lesson_wide = tree.exercises.map { [ it, course_id ] }
-        counts = write_exercises(exercises + lesson_wide.map(&:first), lesson_wide)
+        lesson_wide = tree.exercises.map { [ it, course_id, nil ] }
+        subjects = tree.subjects.map { it.with(course_id:) }
+        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
 
-        { courses: 1, essentials: notions.size, **counts }
+        { courses: 1, essentials: notions.size, **counts, subjects: subjects.size }
       end
 
-      private
-
-      def connection = ActiveRecord::Base.connection
+      # Les figures de la leçon, celles du fichier citées (cited) y remplaçant leur homonyme ou s'y ajoutant ; les autres restent.
+      def merged_figures(current, incoming, cited)
+        fresh = incoming.select { cited.include?(it["key"]) }.index_by { it["key"] }
+        kept = current.map { |figure| fresh.delete(figure["key"]) || figure }
+        kept + fresh.values
+      end
 
       def stamp(author_id, at)
         @author_id = author_id
@@ -83,14 +139,34 @@ module Repositories
         @copy_at = copy_timestamp(at)
       end
 
-      # Les exercices (ceux des notions d'abord, puis, à la fin, ceux de toute la leçon : lesson_wide, avec l'id de leur leçon), leurs
-      # questions et leurs propositions. Exercices, questions et propositions s'écrivent par COPY (ADR-0068 §4).
-      def write_exercises(exercises, lesson_wide)
-        course_of = course_ids_of(exercises)
-        owners = exercises.first(exercises.size - lesson_wide.size).map { course_of.fetch(it.essential_id) } + lesson_wide.map(&:last)
+      # Les sujets de devoir des leçons (course_id posé), numérotés de 1 dans l'ordre reçu. → { [course_id, position] => id }
+      def insert_subjects(subjects)
+        rows = subjects.group_by(&:course_id).flat_map do |course_id, nodes|
+          nodes.each_with_index.map { |node, index| { course_id:, position: index + 1, title: node.title, notions: node.notions } }
+        end
+        insert(Orm::Subject, rows).to_h { |row| [ [ row.fetch("course_id"), row.fetch("position") ], row.fetch("id") ] }
+      end
+
+      # Les exercices des sujets, avec l'id de leur leçon et celui de leur sujet : [nœud, course_id, subject_id].
+      def subject_exercises(subjects, ids)
+        subjects.group_by(&:course_id).flat_map do |course_id, nodes|
+          nodes.each_with_index.flat_map do |node, index|
+            node.exercises.map { |exercise| [ exercise, course_id, ids.fetch([ course_id, index + 1 ]) ] }
+          end
+        end
+      end
+
+      # Les exercices : ceux des notions (head) d'abord, puis, à la fin, ceux de toute la leçon et ceux des sujets (tail, des triplets
+      # [nœud, id de la leçon, id du sujet ou nil]), leurs questions et leurs propositions. Exercices, questions et propositions
+      # s'écrivent par COPY (ADR-0068 §4).
+      def write_exercises(head, tail)
+        exercises = head + tail.map(&:first)
+        course_of = course_ids_of(head)
+        owners = head.map { course_of.fetch(it.essential_id) } + tail.map { it[1] }
+        subject_of = Array.new(head.size) + tail.map(&:last)
         exercise_ids = reserve_ids(Orm::Exercise, exercises.size)
         positions = course_positions(owners)
-        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids, owners, positions).map { |node, id, owner, position| exercise_row(id, node, owner, position) })
+        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids, owners, positions, subject_of).map { |node, id, owner, position, subject_id| exercise_row(id, node, owner, position, subject_id) })
 
         questions = exercises.zip(exercise_ids).flat_map { |exercise, exercise_id| exercise.questions.map { |node| [ exercise_id, node ] } }
         question_ids = reserve_ids(Orm::Question, questions.size)
@@ -108,17 +184,19 @@ module Repositories
       end
 
       # Du plus dépendant au moins dépendant (toutes les clés étrangères sont RESTRICT) : lacunes, copies, séances, badges, questions,
-      # exercices, puis notions, leurs lectures, images et texte riche. Les images (fichiers stockés) sont détruites pour être purgées.
+      # exercices, sujets, puis notions, leurs lectures, images et texte riche. Les images (fichiers stockés) sont détruites pour être purgées.
+      # keep_notions : les notions, leurs lectures et les lacunes qui ne naissent pas des séances supprimées restent (replace_exercises).
       # → nombre de lignes supprimées par table.
-      def delete_content(course_id)
+      def delete_content(course_id, keep_notions: false)
         exercise_ids = Orm::Exercise.where(course_id:).pluck(:id)
         essential_ids = Orm::Essential.where(course_id:).pluck(:id)
         question_ids = Orm::Question.where(exercise_id: exercise_ids).pluck(:id)
         session_ids = Orm::ExerciseSession.where(exercise_id: exercise_ids).pluck(:id)
         deleted = {}
 
-        gap_ids = Orm::KnowledgeGap.where(essential_id: essential_ids).or(Orm::KnowledgeGap.where(source_session_id: session_ids))
-                                   .or(Orm::KnowledgeGap.where(resolved_by_session_id: session_ids)).pluck(:id)
+        gaps = Orm::KnowledgeGap.where(source_session_id: session_ids).or(Orm::KnowledgeGap.where(resolved_by_session_id: session_ids))
+        gaps = gaps.or(Orm::KnowledgeGap.where(essential_id: essential_ids)) unless keep_notions
+        gap_ids = gaps.pluck(:id)
         # Une séance de remédiation (la base veut une lacune avec elle) devient une séance ordinaire quand sa lacune disparaît ; celles des
         # exercices supprimés partent ensuite avec eux.
         Orm::ExerciseSession.where(knowledge_gap_id: gap_ids).update_all(kind: "standard", knowledge_gap_id: nil)
@@ -133,6 +211,9 @@ module Repositories
         deleted[:answers] = Orm::Answer.where(question_id: question_ids).delete_all
         deleted[:questions] = Orm::Question.where(id: question_ids).delete_all
         deleted[:exercises] = Orm::Exercise.where(id: exercise_ids).delete_all
+        deleted[:subjects] = Orm::Subject.where(course_id:).delete_all
+        return deleted if keep_notions
+
         deleted[:essential_reads] = Orm::EssentialRead.where(essential_id: essential_ids).delete_all
         deleted[:essentials] = Orm::Essential.where(id: essential_ids).delete_all
         deleted
@@ -224,15 +305,15 @@ module Repositories
       end
 
       # Dans l'ordre d'EXERCISE_COLUMNS.
-      def exercise_row(id, node, course_id, position)
-        [ id, node.public_id, course_id, node.essential_id, node.title, node.statement, node.statement_blocks&.to_json, node.figure_key,
-          node.exercise_type, position, @author_id, "draft", @copy_at, @copy_at ]
+      def exercise_row(id, node, course_id, position, subject_id)
+        [ id, node.public_id, course_id, node.essential_id, subject_id, node.title, node.statement, node.statement_blocks&.to_json, node.figure_key,
+          node.hint, node.exercise_type, position, @author_id, "draft", @copy_at, @copy_at ]
       end
 
       # Dans l'ordre de QUESTION_COLUMNS. Chaînes vides → null, critères vides retirés (ADR-0115) ; la base refuse le reste.
       def question_row(id, exercise_id, node)
         [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, node.numeric_tolerance, node.image_description,
-          node.points, node.unit.presence, node.starter.presence, copy_array(node.criteria), @copy_at, @copy_at ]
+          node.points, node.unit.presence, node.starter.presence, copy_array(node.criteria), node.hint.presence, @copy_at, @copy_at ]
       end
 
       # Un tableau de textes au format COPY d'une colonne PostgreSQL array : {"a","b"}, chaque texte entre guillemets.
@@ -243,7 +324,7 @@ module Repositories
 
       # Dans l'ordre d'ANSWER_COLUMNS.
       def answer_row(question_id, node)
-        [ question_id, node.position, node.content, node.correct, node.match_content, @copy_at, @copy_at ]
+        [ question_id, node.position, node.content, node.correct, node.match_content, node.blank, @copy_at, @copy_at ]
       end
 
       # Le contenu importé est assaini avant d'entrer dans le contenu riche ; un contenu vide ne crée pas de ligne.

@@ -1,0 +1,46 @@
+<%# 🌐 UI · catalog/courses/_prepare_sheets — « Prépare interros » et « Prépare devoirs » de la page d'une leçon (catalogue et classe) %>
+<%# Rôle : une case par feuille (une par notion puis « Toute la leçon » ; une par sujet, section seulement s'il y en a), chacune vers la page de lecture du sujet ; état vide sans exercice ; plus aucune feuille à remplir ici %>
+<%# ADR  : 0121, 0113 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 %>
+<%# locals: (prepare:, course_slug: nil, href: nil) -%>
+<%# href : un lambda (ancre de la feuille → adresse) ; par défaut la page de la feuille dans le catalogue (la page de la classe le remplacera) %>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<% actor = current_actor %>
+<% student = actor&.student? %>
+<% slug = course_slug || params[:slug] || params[:course_slug] %>
+<% href ||= ->(dom_id) { course_sheet_path(slug, dom_id) } %>
+<% empty = prepare.interros.empty? && prepare.devoirs.empty? %>
+<%# Ouvrir la page enregistre la lecture des notions (ADR-0113 §4.3) : pas de préchargement au survol. %>
+<section id="prepare-interros" aria-labelledby="prepare_title" data-turbo-prefetch="false">
+  <h2 id="prepare_title" class="mb-4 font-display text-xl font-medium"><%= t("catalog.courses.sheets.interros_section") %></h2>
+  <% if empty %>
+    <%= ui_empty_state title: t("catalog.courses.show.exercises_empty"), icon: "pencil-square" %>
+  <% end %>
+  <%# Les liens et les redirections visent « notion-<slug> » pour toute notion (UDR-0139 §3.7) : celle qui n'a pas d'exercice a son repère. %>
+  <% prepare.bare.each do |notion| %>
+    <div id="notion-<%= notion.essential_slug %>" class="mt-6 scroll-mt-24" tabindex="-1">
+      <h3 class="mb-1 font-display text-lg font-medium"><%= notion.title %></h3>
+      <p class="text-sm text-mute"><%= t("catalog.courses.show.notion_without_exercise") %></p>
+    </div>
+  <% end %>
+  <% unless prepare.interros.empty? %>
+    <div class="ps-cards">
+      <% prepare.interros.each do |sheet| %>
+        <%= render "catalog/courses/sheets/card", id: sheet.dom_id, kind: :interros, number: sheet.number, total: sheet.exercises.size,
+                   title: (sheet.kind == :lesson_wide ? t("catalog.courses.show.lesson_wide_title") : sheet.title),
+                   href: href.call(sheet.dom_id), passed: (sheet.passed if student) %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<% unless prepare.devoirs.empty? %>
+  <section id="prepare-devoirs" aria-labelledby="devoirs_title" data-turbo-prefetch="false">
+    <h2 id="devoirs_title" class="mb-4 font-display text-xl font-medium"><%= t("catalog.courses.sheets.devoirs_section") %></h2>
+    <div class="ps-cards">
+      <% prepare.devoirs.each do |sheet| %>
+        <%= render "catalog/courses/sheets/card", id: sheet.dom_id, kind: :devoirs, number: sheet.number, total: sheet.exercises.size,
+                   title: sheet.title, href: href.call(sheet.dom_id), passed: (sheet.passed if student) %>
+      <% end %>
+    </div>
+  </section>
+<% end %>

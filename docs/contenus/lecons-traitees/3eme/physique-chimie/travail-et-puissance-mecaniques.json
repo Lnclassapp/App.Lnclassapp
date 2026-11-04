@@ -281,6 +281,59 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Sur le quai du port, la force est constante et son point d'application se déplace dans sa direction et son sens.",
+            "questions": [
+              {
+                "content": "Une force de 250 N déplace son point d'application de 8 m : $W$ = ___   Une force de 0,6 kN déplace son point d'application de 5 m : $W$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Convertis d'abord la force en newtons.",
+                "explanation": "Étape 1 — Convertir : 0,6 kN = 600 N. Étape 2 — Écrire : $W = F \\times d$. Étape 3 — Calculer : $250 \\times 8 = 2\\,000$ J et $600 \\times 5 = 3\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "2000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un treuil exerce une force de 800 N sur 25 m. Quel est le travail de cette force ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 800$ N et $d = 25$ m. Étape 2 — Calculer : $W = 800 \\times 25 = 20\\,000$ J. Étape 3 — Convertir : 20 000 J = 20 kJ.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une force de 500 N dont le point d'application ne se déplace pas effectue un travail nul.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le point d'application ne se déplace pas, donc $d = 0$. Étape 2 — Calculer : $W = F \\times d = 500 \\times 0 = 0$ J. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -429,6 +482,45 @@
                   },
                   {
                     "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu calcules le travail du poids de charges déplacées sur le port ($g = 10$ N/kg).",
+            "questions": [
+              {
+                "content": "Une caisse A de masse 80 kg descend de 3 m : $W$ = ___   Une caisse B de masse 150 kg descend de 2 m : $W$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Passe d'abord par le poids en newtons, puis multiplie par la hauteur.",
+                "explanation": "Étape 1 — Calculer les poids : $P_A = 80 \\times 10 = 800$ N et $P_B = 150 \\times 10 = 1\\,500$ N. Étape 2 — Écrire : $W = P \\times h$. Étape 3 — Calculer : $W_A = 800 \\times 3 = 2\\,400$ J et $W_B = 1\\,500 \\times 2 = 3\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "2400",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une grue soulève lentement un bloc de masse 300 kg à 8 m de hauteur. Quel est le travail de la force exercée par la grue ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "hint": "Pour soulever lentement le bloc, la force de la grue a la même intensité que son poids.",
+                "explanation": "Étape 1 — Calculer le poids : $P = 300 \\times 10 = 3\\,000$ N, c'est aussi l'intensité de la force de la grue. Étape 2 — Calculer : $W = 3\\,000 \\times 8 = 24\\,000$ J. Étape 3 — Convertir : 24 kJ.",
+                "answers": [
+                  {
+                    "content": "24",
                     "correct": true
                   }
                 ]
@@ -614,6 +706,45 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu calcules des puissances de machines du port.",
+            "questions": [
+              {
+                "content": "Le treuil A effectue 4 000 J en 8 s : $\\mathcal{P}$ = ___   Le treuil B effectue 36 kJ en 2 min : $\\mathcal{P}$ = ___",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "hint": "Convertis le travail en joules et la durée en secondes.",
+                "explanation": "Étape 1 — Convertir pour B : 36 kJ = 36 000 J et 2 min = 120 s. Étape 2 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 3 — Calculer : A, $\\dfrac{4\\,000}{8} = 500$ W ; B, $\\dfrac{36\\,000}{120} = 300$ W.",
+                "answers": [
+                  {
+                    "content": "500",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "300",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur effectue un travail de 1 800 kJ en 10 min. Quelle est sa puissance ?",
+                "question_type": "numeric",
+                "unit": "kW",
+                "tolerance": 0,
+                "hint": "Calcule d'abord la puissance en watts, puis convertis en kilowatts.",
+                "explanation": "Étape 1 — Convertir : 1 800 kJ = 1 800 000 J et 10 min = 600 s. Étape 2 — Calculer : $\\mathcal{P} = \\dfrac{1\\,800\\,000}{600} = 3\\,000$ W. Étape 3 — Convertir : 3 000 W = 3 kW.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -754,6 +885,60 @@
                 "answers": [
                   {
                     "content": "20",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu relies le travail, la durée et la puissance.",
+            "questions": [
+              {
+                "content": "Un moteur de 800 W fonctionne 25 s : $W$ = ___   Un moteur de 3 kW fonctionne 40 s : $W$ = ___",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "hint": "Convertis la puissance en watts, puis utilise $W = \\mathcal{P} \\times t$.",
+                "explanation": "Étape 1 — Convertir : 3 kW = 3 000 W. Étape 2 — Écrire : $W = \\mathcal{P} \\times t$. Étape 3 — Calculer : $800 \\times 25 = 20\\,000$ J et $3\\,000 \\times 40 = 120\\,000$ J.",
+                "answers": [
+                  {
+                    "content": "20000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "120000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de puissance 2 kW doit effectuer un travail de 480 kJ. Quelle durée lui faut-il ?",
+                "question_type": "numeric",
+                "unit": "min",
+                "tolerance": 0,
+                "hint": "Calcule la durée en secondes, puis convertis-la en minutes.",
+                "explanation": "Étape 1 — Convertir : $\\mathcal{P} = 2\\,000$ W et $W = 480\\,000$ J. Étape 2 — Écrire : $t = \\dfrac{W}{\\mathcal{P}} = \\dfrac{480\\,000}{2\\,000} = 240$ s. Étape 3 — Convertir : 240 ÷ 60 = 4 min.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La machine la plus puissante a toujours effectué le plus grand travail.",
+                "question_type": "true_false",
+                "explanation": "La puissance n'est pas le travail : $W = \\mathcal{P} \\times t$. Une machine puissante n'effectue un grand travail que si elle fonctionne assez longtemps. Pour comparer des travaux, il faut calculer $\\mathcal{P} \\times t$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
                     "correct": true
                   }
                 ]

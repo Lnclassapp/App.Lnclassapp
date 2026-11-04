@@ -312,6 +312,70 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu travailles sur les alcanes, de formule brute générale $\\mathrm{C_nH_{2n+2}}$.",
+            "questions": [
+              {
+                "content": "L'alcane A a 3 atomes de carbone : il contient ___ atomes d'hydrogène. L'alcane B a 8 atomes de carbone : il contient ___ atomes d'hydrogène.",
+                "question_type": "numeric",
+                "unit": "atomes",
+                "tolerance": 0,
+                "hint": "Applique $2n+2$ pour chaque alcane, sans oublier le « +2 ».",
+                "explanation": "Étape 1 — Repérer : $n=3$ pour A et $n=8$ pour B. Étape 2 — Calculer : A, $2 \\times 3 + 2 = 8$ ; B, $2 \\times 8 + 2 = 18$. Étape 3 — Écrire : A est $\\mathrm{C_3H_8}$ (propane) et B est $\\mathrm{C_8H_{18}}$ (octane).",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "18",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nom de l'alcane de formule brute $\\mathrm{C_8H_{18}}$ ?",
+                "question_type": "single_choice",
+                "hint": "Trouve d'abord le nombre $n$ d'atomes de carbone.",
+                "explanation": "Étape 1 — Repérer : $\\mathrm{C_8H_{18}}$ a 8 atomes de carbone, donc $n=8$. Étape 2 — Donner le nom : $n=8$ se dit « oct » et on ajoute -ane : c'est l'octane. Vérification : $2 \\times 8 + 2 = 18$ atomes d'hydrogène.",
+                "answers": [
+                  {
+                    "content": "L'heptane",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nonane",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hexane",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'octane",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La formule $\\mathrm{C_5H_{10}}$ est celle d'un alcane.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $n=5$. Étape 2 — Calculer : un alcane à 5 atomes de carbone a $2 \\times 5 + 2 = 12$ atomes d'hydrogène, c'est $\\mathrm{C_5H_{12}}$. $\\mathrm{C_5H_{10}}$ a deux atomes d'hydrogène de moins : ce n'est pas un alcane.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -470,6 +534,55 @@
                   {
                     "content": "Il n'y a aucune erreur",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu écris des formules semi-développées d'alcanes à chaîne linéaire : chaque carbone fait 4 liaisons.",
+            "questions": [
+              {
+                "content": "Dans la formule semi-développée de l'hexane $\\mathrm{C_6H_{14}}$, il y a ___ groupes $\\mathrm{CH_3}$ et ___ groupes $\\mathrm{CH_2}$.",
+                "question_type": "numeric",
+                "unit": "groupes",
+                "tolerance": 0,
+                "hint": "Les groupes $\\mathrm{CH_3}$ sont aux deux extrémités de la chaîne. Combien de carbones restent au milieu ?",
+                "explanation": "Étape 1 — Aligner : 6 atomes de carbone en chaîne. Étape 2 — Compléter : les 2 carbones des extrémités portent 3 hydrogènes ($\\mathrm{CH_3}$), les 4 carbones du milieu en portent 2 ($\\mathrm{CH_2}$). Étape 3 — Vérifier : $2 \\times 3 + 4 \\times 2 = 14$ hydrogènes, comme dans $\\mathrm{C_6H_{14}}$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la formule semi-développée du pentane ($\\mathrm{C_5H_{12}}$) ?",
+                "question_type": "single_choice",
+                "hint": "Compte les atomes de carbone, puis vérifie que les carbones d'extrémité portent 3 hydrogènes.",
+                "explanation": "Étape 1 — Déterminer : $n=5$, donc $\\mathrm{C_5H_{12}}$. Étape 2 — Aligner 5 carbones. Étape 3 — Compléter : $\\mathrm{CH_3-CH_2-CH_2-CH_2-CH_3}$. Vérification : $3+2+2+2+3 = 12$ hydrogènes.",
+                "answers": [
+                  {
+                    "content": "$mathrm{CH_3-CH_2-CH_2-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$mathrm{CH_3-CH_2-CH_2-CH_2-CH_2-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$mathrm{CH_2-CH_2-CH_2-CH_2-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$mathrm{CH_3-CH_2-CH_2-CH_2-CH_3}$",
+                    "correct": true
                   }
                 ]
               }
@@ -640,6 +753,72 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu analyses la combustion complète du gaz d'une bouteille de butane.",
+            "questions": [
+              {
+                "content": "Le sulfate de cuivre anhydre blanc devient bleu : ce test met en évidence ___. L'eau de chaux devient laiteuse : ce test met en évidence ___.",
+                "question_type": "select",
+                "hint": "Chaque test met en évidence un seul des deux produits de la combustion complète.",
+                "explanation": "Étape 1 — Tester l'eau : le sulfate de cuivre anhydre passe du blanc au bleu en présence d'eau. Étape 2 — Tester le dioxyde de carbone : il trouble l'eau de chaux, qui devient laiteuse. Les deux produits de la combustion complète sont donc l'eau et le dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "le dioxyde de carbone",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le monoxyde de carbone",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'eau",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le dioxyde de carbone",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "l'eau",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le monoxyde de carbone",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le bilan en mots de la combustion complète du propane dans l'air ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer les réactifs : l'alcane (propane) et le dioxygène de l'air. Étape 2 — Nommer les produits de la combustion complète : le dioxyde de carbone et l'eau. Le monoxyde de carbone n'apparaît qu'en cas de combustion incomplète.",
+                "answers": [
+                  {
+                    "content": "propane + dioxygène → monoxyde de carbone + eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "propane + dioxyde de carbone → dioxygène + eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "propane + dioxygène → dioxyde de carbone + eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "propane + eau → dioxyde de carbone + dioxygène",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -780,6 +959,49 @@
                   }
                 ],
                 "tolerance": 0
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu équilibres des équations de combustion complète : carbone, puis hydrogène, puis oxygène.",
+            "questions": [
+              {
+                "content": "Équilibre la combustion de l'éthane : $\\mathrm{2\\,C_2H_6 +}$ ___ $\\mathrm{O_2 \\rightarrow}$ ___ $\\mathrm{CO_2 +}$ ___ $\\mathrm{H_2O}$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Équilibre d'abord le carbone, puis l'hydrogène, et l'oxygène en dernier.",
+                "explanation": "Étape 1 — Carbone : 2 × 2 = 4 atomes de C à gauche, donc 4 $\\mathrm{CO_2}$. Étape 2 — Hydrogène : 2 × 6 = 12 atomes de H à gauche, donc 6 $\\mathrm{H_2O}$. Étape 3 — Oxygène : à droite 4 × 2 + 6 = 14 atomes de O, donc 7 $\\mathrm{O_2}$. Équation : $\\mathrm{2\\,C_2H_6 + 7\\,O_2 \\rightarrow 4\\,CO_2 + 6\\,H_2O}$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Dans $\\mathrm{C_3H_8 + 5\\,O_2 \\rightarrow 3\\,CO_2 + 4\\,H_2O}$, combien d'atomes d'oxygène y a-t-il à droite de la flèche ?",
+                "question_type": "numeric",
+                "unit": "atomes",
+                "tolerance": 0,
+                "hint": "Compte séparément les atomes d'oxygène de $\\mathrm{CO_2}$ et ceux de $\\mathrm{H_2O}$.",
+                "explanation": "Étape 1 — Compter dans $3\\,\\mathrm{CO_2}$ : 3 × 2 = 6 atomes d'oxygène. Étape 2 — Compter dans $4\\,\\mathrm{H_2O}$ : 4 × 1 = 4 atomes d'oxygène. Étape 3 — Additionner : 6 + 4 = 10, comme les 5 × 2 = 10 de gauche : l'équation est équilibrée.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
               }
             ]
           }

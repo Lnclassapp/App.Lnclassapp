@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, appréciation (« Très bien » à « À retravailler »), note (verte dès 14/20), points, « À revoir », maîtrise, progrès, effet sur la fiche, « Refaire l'exercice » (caché au sans-faute, Grading.perfect?) ou l'heure de reprise, correction complète %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX refaire-ou-continuer §3, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -10,6 +10,28 @@
 <% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
 <% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
+<%# refaire-ou-continuer (UDR §3) : venue d'une feuille trouvée, « Refaire l'exercice » et le second bouton ramènent à la feuille ; le
+    second est « Continuer les exercices » / « Reprendre le devoir » vers le suivant non fait, ou « Retour à la leçon » / « Retour à Ma classe »
+    quand tout est fait. Feuille introuvable ou sans feuille : les retours d'avant. %>
+<% exercise_id = result.exercise.public_id %>
+<% next_anchor = "sheet-exercise-#{@next_exercise}" %>
+<% redo_href = if @sheet_found
+                 @return_to == "sheet" ? fill_course_sheet_path(result.course_slug, @sheet, redo: exercise_id, anchor: "sheet-exercise-#{exercise_id}") : fill_student_assigned_sheet_path(@sheet, redo: exercise_id, anchor: "sheet-exercise-#{exercise_id}")
+               end %>
+<% back_href, back_label = case @return_to
+                           when "sheet"
+                             if !@sheet then [ course_path(result.course_slug, anchor: "sheet-exercise-#{exercise_id}"), t(".back_to_lesson") ]
+                             elsif !@sheet_found then [ lesson_href, t(".back_to_lesson") ]
+                             elsif @next_exercise then [ fill_course_sheet_path(result.course_slug, @sheet, anchor: next_anchor), t(".continue_exercises") ]
+                             else [ course_path(result.course_slug, anchor: @sheet), t(".back_to_lesson") ]
+                             end
+                           when "class"
+                             if @sheet_found && @next_exercise then [ fill_student_assigned_sheet_path(@sheet, anchor: next_anchor), t(".back_to_assignment") ]
+                             elsif @sheet_found then [ student_classroom_path(anchor: @sheet), t(".back_to_class") ]
+                             else [ student_classroom_path, t(".back_to_class") ]
+                             end
+                           else [ lesson_href, t(".back_to_lesson") ]
+                           end %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px. UDR écrans élève §3.6 bis (CA-E13) : dès 1 024 px, la note et « Recommencer »
     dans une colonne de 340 px collante à gauche, la correction à droite. %>
 <div id="session_result_layout"
@@ -98,18 +120,22 @@
     <% end %>
     <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
     <% if @owner && result.gap_outcome && result.essential %>
-      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential %>
+      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential, href: (redo_href if !@resume_at && @can_restart) %>
     <% end %>
 
-    <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis « Retour à la leçon ». UDR-0140 : pendant la pause, l'heure de reprise à sa place. %>
+    <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis le second bouton (XXXX refaire-ou-continuer §3). UDR-0140 : pendant la pause, l'heure de reprise à sa place. %>
     <% if @resume_at && !grading.perfect?(result.score_percent) %>
       <p id="restart_pause" class="text-center text-ink"><%= t(".restart_pause", time: l(@resume_at, format: :hour_minute)) %></p>
     <% elsif @can_restart && !grading.perfect?(result.score_percent) %>
-      <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
-        <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+      <% if redo_href %>
+        <%= ui_button t("assessment.exercises.show.redo"), href: redo_href, id: "restart-exercise-link", variant: :brand, size: :lg, full: true, icon: "arrow-path", data: { turbo_prefetch: false } %>
+      <% else %>
+        <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
+          <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+        <% end %>
       <% end %>
     <% end %>
-    <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
+    <%= ui_button back_label, href: back_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
   </div>
 
   <%# ADR-0115, CA-25 : le sujet en blocs, rendu au-dessus de la correction pour la lire avec lui. %>
@@ -137,6 +163,16 @@
     </ol>
     <% if @owner %>
       <div class="mt-2"><%= ui_reveal_more result.review.size %></div>
+    <% end %>
+    <%# UDR-0149 §3 (ajout du 2026-10-31) : toutes les explications en un bloc sous l'exercice, « a. … b. … » (lettre = rang de la question) ; sans explication, la question est sautée ; les réponses rédigées et le cahier gardent leur corrigé type. %>
+    <% explained = result.review.select { it.auto_graded? && it.explanation.present? } %>
+    <% if explained.any? %>
+      <div id="session_correction" class="mt-4 rounded-ln bg-mist p-4" data-controller="math">
+        <h3 class="font-display text-lg font-medium"><%= t(".correction") %></h3>
+        <% explained.each do |question| %>
+          <p class="mt-2 text-sm whitespace-pre-line text-ink"><%= t(".correction_line", letter: ("a".ord + question.number - 1).chr, text: question.explanation) %></p>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>

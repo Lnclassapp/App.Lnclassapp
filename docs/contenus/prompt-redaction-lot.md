@@ -20,7 +20,7 @@ Chaque leçon est rédigée **exactement** comme le décrit `docs/contenus/promp
 
 ## Étape 1 — Composer le plan du niveau
 
-1. **Les leçons.** Ouvre `docs/contenus/progressions-2026-2027/progressions-2026-2027-<matière>.json` (`mathematiques`, `francais`, `histoire-geographie`, `svt`, `physique-chimie`, `edhc`) et garde les fiches de cours du niveau demandé :
+1. **Les leçons.** Ouvre `docs/contenus/progressions-2026-2027/progressions-2026-2027-<matière>.json` (`mathematiques`, `francais`, `histoire-geographie`, `svt`, `physique-chimie`, `edhc`, `philosophie`) et garde les fiches de cours du niveau demandé :
    - au 1er cycle : ceux sans `series_name` ;
    - à partir de la 2nde : ceux dont `series_name` est la série demandée.
 
@@ -65,7 +65,7 @@ Règles de fond, pour toutes les leçons :
 
 ## Étape 4 — Ranger
 
-- Dossier : `docs/contenus/lecons-traitees/<niveau>-<série>/<matière>/` (`mathematiques`, `francais`, `histoire-geographie`, `svt`, `physique-chimie`, `edhc`). Le niveau s'écrit `6eme`, `5eme`, `4eme`, `3eme`, `2nde`, `1ere` ou `tle` ; la série suit en minuscules (`tle-d`, `1ere-d`) et manque au 1er cycle (`3eme`).
+- Dossier : `docs/contenus/lecons-traitees/<niveau>-<série>/<matière>/` (`mathematiques`, `francais`, `histoire-geographie`, `svt`, `physique-chimie`, `edhc`, `philosophie`). Le niveau s'écrit `6eme`, `5eme`, `4eme`, `3eme`, `2nde`, `1ere` ou `tle` ; la série suit en minuscules (`tle-d`, `1ere-d`) et manque au 1er cycle (`3eme`).
 - Fichier : l'intitulé de la fiche de cours en minuscules, sans accents, tout caractère non alphanumérique remplacé par un tiret, tirets multiples réduits à un (l'intitulé « Histoire — L'ONU » donne `histoire-l-onu.json`). Exemple : `3eme/mathematiques/racines-carrees.json`.
 - Ne remplace jamais un fichier v3 existant : s'il existe, saute la leçon et dis-le. Un fichier v1 ou v2 au même nom est remplacé.
 - L'intitulé (`name`) est **celui de la progression, à l'identique** : l'import détecte les doublons à ce nom.
@@ -89,7 +89,7 @@ Selon le champ **Livraison** de l'ENTRÉE :
 
 ## ENTRÉE (à remplir à chaque appel)
 
-- **Matière** : <`Mathématiques`, `Français`, `Histoire-Géographie`, `SVT`, `Physique-Chimie` ou `EDHC`>
+- **Matière** : <`Mathématiques`, `Français`, `Histoire-Géographie`, `SVT`, `Physique-Chimie`, `EDHC` ou `Philosophie`>
 - **Niveau** : <`6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`>
 - **Série** : <`A`, `C` en 2nde ; `A`, `C`, `D` en 1ère ; `A1`, `A2`, `C`, `D` en Tle ; vide au 1er cycle>
 - **Rangs** (facultatif) : <vide = tous les rangs du niveau ; sinon une liste, ex. « 1 à 5 »>

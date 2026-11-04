@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::AssignmentRepositoryPort
 # Rôle : contrat des assignations d'une classe, et résolution polymorphe de la ressource assignée
-# ADR  : 0035, 0048, 0071, 0072
+# ADR  : 0035, 0048, 0071, 0072, sujets-de-devoir (ajout du 2026-10-30)
 module Ports
   module Classroom
     module AssignmentRepositoryPort
@@ -24,6 +24,21 @@ module Ports
       # → Result(Assignment) | failure(:conflict, errors: { base: [:already_assigned] })
       def create(assignment:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
+      end
+
+      # Résultat d'un envoi : created = Array<Assignment> créées, dans l'ordre d'entrée ;
+      # skipped = Array<Assignable> écartées car déjà assignées (actives) à la classe.
+      BatchCreation = Data.define(:created, :skipped)
+
+      # Un envoi (ADR sujets-de-devoir, ajout du 2026-10-30). Contrat gelé par le Lot 0b, implémenté par le Lot E.
+      # Entrée : assignments = Array<Entities::Classroom::Assignment>, de 1 à 10, d'une même classe, chacune avec le même
+      #   batch_public_id et son échéance (due_on) ; ni id ni public_id n'existent encore (comme pour #create).
+      # Écrit, en une seule transaction, une ligne par assignation reçue, dans l'ordre reçu. Un exercice déjà assigné à la
+      #   classe (index partiel actif) est écarté et nommé, il n'annule pas l'envoi : les autres partent.
+      # → Result(BatchCreation) ; created est vide si tous les exercices étaient déjà assignés.
+      #   Aucune autre erreur n'est rendue : le choix des exercices et les droits se vérifient avant, dans le use case.
+      def create_batch(assignments:)
+        raise NotImplementedError, "#{self.class} doit implémenter #create_batch"
       end
 
       # → true

@@ -121,6 +121,8 @@ Le titre de notion au-dessus de chaque carte répétait le titre de l'exercice, 
 
 ### 3.2 ter — « Prépare devoirs » pour les évaluations (amendement du 2026-10-30, demande du porteur)
 
+> **Remplacé** le 2026-10-31 par UDR-0149 (chantier `prepare-interros-cahier`) : la page de la leçon montre des feuilles de cahier ; « Prépare devoirs » y est une feuille par sujet de devoir.
+
 La page d'une leçon (catalogue et page de leçon dans une classe) sépare les exercices par **type** :
 
 - **« Prépare interros »** (`section#prepare-interros`) : les exercices de **fixation**, notions dans leur ordre puis ceux de toute la leçon. Intro : « Pour t'entraîner : un exercice par notion, puis sur toute la leçon. » Les notions sans exercice et l'état vide restent dans cette section.

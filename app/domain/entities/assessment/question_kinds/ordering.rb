@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Ordering
 # Rôle : remettre dans l'ordre : juste seulement si toutes les étapes sont à leur place, sans points partiels
-# ADR  : 0091 (§4.2 : trois à six étapes, dans le bon ordre par position ; §4.3 ; §4.4 : indices d'affichage), 0115
+# ADR  : 0091 (§4.2 : trois à six étapes, dans le bon ordre par position ; §4.3 ; §4.4 : indices d'affichage), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
@@ -15,8 +15,11 @@ module Entities
           errors = []
           errors << :steps_count unless STEPS.cover?(answers.size)
           errors << :duplicate_steps if FillBlank.duplicates?(answers.map(&:content))
-          errors
+          errors.concat(Blanks.single_case_errors(answers))
         end
+
+        # Une seule case : le verdict est celui de la question.
+        def self.blank_results(question, response) = [ correct?(question, response) ]
 
         # ids : reconstitués par AnswerShuffle, dans l'ordre de l'élève ; chaque étape une fois.
         def self.well_formed?(question, ids) = ids.sort == question.answer_ids.sort

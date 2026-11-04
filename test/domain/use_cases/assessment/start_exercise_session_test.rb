@@ -119,14 +119,14 @@ module UseCases
       end
 
       def start(actor: STUDENT, public_id: "ExErCiCe000040", restart: false, exercises: [ exercise ], sessions: [], gaps: [],
-                membership: nil, assignments: [], now: NOW)
+                membership: nil, assignments: [], now: NOW, attach_assignment: true)
         @sessions = FakeSessions.new(*sessions)
         @transaction = FakeTransaction.new
         StartExerciseSession.new(
           exercises: FakeExercises.new(*exercises), sessions: @sessions, gaps: FakeGaps.new(*gaps),
           memberships: FakeMemberships.new(membership), assignments: FakeAssignments.new(*assignments),
           policy: Policies::Assessment::StartSessionPolicy.new, transaction: @transaction, clock: Clock.new(now)
-        ).call(actor:, exercise_public_id: public_id, restart:)
+        ).call(actor:, exercise_public_id: public_id, restart:, attach_assignment:)
       end
 
       test "un exercice publié non assigné se démarre : session ouverte, nombre de questions figé, rattachée à rien" do
@@ -142,6 +142,12 @@ module UseCases
                      [ session.kind, session.knowledge_gap_id, session.classroom_assignment_id, session.started_at ]
         assert_nil session.score_percent
         assert_equal 1, @transaction.calls
+      end
+
+      test "attach_assignment: false (copie d'entraînement refaite après le rendu) : la session n'est rattachée à rien" do
+        result = start(membership: membership, assignments: [ assignment ], attach_assignment: false)
+
+        assert_nil result.value.classroom_assignment_id
       end
 
       test "assigné à la classe principale active de l'élève : la session est rattachée à l'assignation" do

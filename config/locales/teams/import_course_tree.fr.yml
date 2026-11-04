@@ -6,7 +6,7 @@ fr:
         course_tree:
           title: "Format du fichier"
           intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.course-tree</code>, version 3. Chaque élément de <code class=\"font-mono text-xs text-ink\">courses</code> est une fiche de cours avec toute sa descendance : figures, notions (chacune avec sa fiche de révision et son exercice), problèmes, questions et propositions. Une fiche de cours entre entière, ou pas du tout."
-          exercise_rule: "Les règles de la fiche de cours : de 1 à 12 notions, chacune avec sa fiche (À retenir, La méthode, Un exemple corrigé, Le piège à éviter) et exactement un exercice ; quatre problèmes pour l'ensemble de la fiche de cours ; de 5 à 30 questions par exercice, chacune avec sa correction rédigée (de 20 à 2 000 caractères) ; l'exemple corrigé a autant d'étapes que La méthode. Une fiche de cours qui ne tient pas la règle est refusée entière, l'élément en cause nommé."
+          exercise_rule: "Les règles de la fiche de cours : de 1 à 12 notions, chacune avec sa fiche (À retenir, La méthode, Un exemple corrigé, Le piège à éviter) et un ou deux exercices ; quatre problèmes pour l'ensemble de la fiche de cours ; de 5 à 30 questions par exercice, chacune avec sa correction rédigée (de 20 à 2 000 caractères) ; l'exemple corrigé a autant d'étapes que La méthode. Une fiche de cours qui ne tient pas la règle est refusée entière, l'élément en cause nommé."
           legacy_version: "Les versions 1 et 2 du format sont retirées : un fichier à ces versions est refusé en entier, raison « format retiré »."
           multiple: "Vous pouvez choisir jusqu'à %{files} fichiers : ils forment un seul import, avec un bilan par fichier. Une même fiche de cours dans deux fichiers n'est importée dans aucun des deux."
           nodes:
@@ -14,6 +14,7 @@ fr:
             figure: "Figure"
             notion: "Notion"
             exercise: "Exercice"
+            subject: "Sujet de devoir"
             question: "Question"
             answer: "Proposition"
           paths:
@@ -21,6 +22,7 @@ fr:
             figure: "figures[]"
             notion: "notions[]"
             exercise: "exercise · exercises[]"
+            subject: "subjects[]"
             question: "questions[]"
             answer: "answers[]"
           keys:
@@ -34,6 +36,7 @@ fr:
               figures: "Ses figures paramétrées, de 0 à 12, citées par leur clé."
               notions: "Ses notions, dans l'ordre. De 1 à 12."
               exercises: "Ses quatre problèmes portant sur l'ensemble de la fiche de cours, dans l'ordre. Exactement quatre."
+              subjects: "Ses sujets de devoir, dans l'ordre. Facultatifs, 10 au plus."
             figure:
               key: "Clé de la figure, unique dans la fiche de cours : minuscules, chiffres et tirets, 40 caractères au plus."
               kind: "Sorte : geometry, coordinate_plane, number_line, stat_chart ou solid."
@@ -53,7 +56,12 @@ fr:
               statement: "Sujet de l'exercice : le texte que l'élève lit avant ses questions. Obligatoire."
               exercise_type: "fixation ou evaluation. Obligatoire."
               figure: "Clé d'une figure de la fiche de cours, rendue sous le sujet. Facultative."
+              hint: "Indice montré à l'élève avant qu'il vérifie sa réponse. Facultatif, de 1 à 400 caractères, texte seul."
               questions: "Ses questions, dans l'ordre. De 5 à 30."
+            subject:
+              title: "Titre du sujet, par exemple « Sujet 1 · Thalès ». Obligatoire, 200 caractères au plus."
+              notions: "Les notions mobilisées, en une phrase. Obligatoire, 600 caractères au plus."
+              exercises: "Ses exercices, dans l'ordre, au format d'un exercice. Un exercice de sujet n'a pas de notion : la clé « notion » y est refusée si elle est renseignée. De 1 à 10."
             question:
               content: "Énoncé. Obligatoire."
               question_type: "true_false, single_choice, multiple_correct_2, multiple_correct_3, fill_blank, numeric, ordering ou matching. Vrai/Faux : 2 propositions dont 1 correcte ; choix : 1, 2 ou 3 correctes, et au moins une incorrecte en plus. Les quatre derniers : voir les exemples ci-dessous."
@@ -82,3 +90,4 @@ fr:
           exercises_ignored_v1: "Exercices ignorés (format v1)"
           questions_created: "Questions créées"
           answers_created: "Propositions créées"
+          subjects_created: "Sujets de devoir créés"

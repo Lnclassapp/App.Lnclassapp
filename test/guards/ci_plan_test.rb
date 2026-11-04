@@ -16,6 +16,8 @@ class CiPlanTest < Minitest::Test
   # « plan », « system » a matrix of SYSTEM_PARTS parts. No job runs longer than JOB_MINUTES (the owner's ceiling).
   TEST_JOBS = %w[unit system].freeze
   SYSTEM_PARTS = 6
+  # Chantier ci-unit-en-parts: the unit suite in two parts, their coverage merged by « coverage ».
+  UNIT_PARTS = 2
   PERF_PARTS = 2
   JOB_MINUTES = 5
 
@@ -41,22 +43,35 @@ class CiPlanTest < Minitest::Test
   # ADR-0069 §9 : « plan » decides, the parts of « unit » and « system » play bin/ci side by side, « ci » is the one
   # status the branches wait for. The only matrices are the parts of « unit » and « system ».
   def test_plan_decides_the_test_jobs_play_bin_ci_and_ci_gives_the_verdict
-    assert_equal %w[plan unit system ci], jobs.keys
+    assert_equal %w[plan unit coverage system lecons ci], jobs.keys
     jobs.each do |name, job|
       assert_equal name, job["name"].to_s.split.first, "le job « #{name} » porte son nom"
-      assert_nil job["strategy"], "pas de matrice : #{name}" unless TEST_JOBS.include?(name)
+      assert_nil job["strategy"], "pas de matrice : #{name}" unless (TEST_JOBS + %w[lecons]).include?(name)
     end
     TEST_JOBS.each do |name|
       assert_equal "plan", jobs.dig(name, "needs")
       assert_equal 1, steps(name).count { it["run"] == "bin/ci" }, "« #{name} » lance bin/ci une fois"
     end
-    assert_equal %w[plan unit system], jobs.dig("ci", "needs")
-    %w[plan ci].each { |name| assert_nil bin_ci(name), "« #{name} » ne joue pas bin/ci" }
+    assert_equal %w[plan unit coverage system lecons], jobs.dig("ci", "needs")
+    %w[plan coverage ci lecons].each { |name| assert_nil bin_ci(name), "« #{name} » ne joue pas bin/ci" }
+  end
+
+  # standard-de-test (Lot D) : the lessons are rendered in parts of 5 minutes at most, one process per part (several
+  # processes deadlock PostgreSQL on the shared referential), and the verdict waits for them.
+  def test_the_lessons_are_rendered_in_parts_of_five_minutes_one_process_each
+    lecons = jobs["lecons"]
+    assert_equal "plan", lecons["needs"]
+    assert_equal 5, lecons["timeout-minutes"]
+    parts = lecons.dig("strategy", "matrix", "part")
+    assert_equal (1..parts.size).to_a, parts
+    run = steps("lecons").map { it["run"].to_s }.join("\n")
+    assert_includes run, "PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb"
+    assert_equal "#{'${{ matrix.part }}'}/#{parts.size}", steps("lecons").find { it.dig("env", "LECONS_PART") }.dig("env", "LECONS_PART")
   end
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,
   # nothing twice; any other run that replays the suite leaves out the import performance tests only (ADR-0039),
-  # checked again at the promotion. The unit suite is one part of its own: its coverage measures the whole suite.
+  # checked again at the promotion. The unit suite plays in UNIT_PARTS parts, every file in one part only.
   def test_the_two_jobs_add_up_to_bin_ci_and_a_partial_run_leaves_out_the_performance_tests_only
     assert_equal "${{ fromJSON(needs.plan.outputs.unit) }}", jobs.dig("unit", "strategy", "matrix", "groups")
     assert_equal "${{ matrix.groups }}", bin_ci("unit").dig("env", "CI_GROUP")
@@ -64,8 +79,10 @@ class CiPlanTest < Minitest::Test
     assert_equal "system:${{ matrix.part }}/#{SYSTEM_PARTS}", bin_ci("system").dig("env", "CI_GROUP")
     split = CI_PLAN.split("system", SYSTEM_PARTS)
     assert_equal CiPlan.files("test/system/**/*_test.rb").sort, split.flatten.sort, "chaque fichier système dans une part, une seule"
-    assert_includes unit_parts("&&"), "unit", "la suite unitaire, seule dans sa part"
-    assert_includes unit_parts("||"), "unit"
+    (1..UNIT_PARTS).each do |part|
+      assert_includes unit_parts("&&"), "unit:#{part}/#{UNIT_PARTS}", "la suite unitaire, seule dans sa part"
+      assert_includes unit_parts("||"), "unit:#{part}/#{UNIT_PARTS}"
+    end
     (1..PERF_PARTS).each { assert_includes unit_parts("&&"), "perf:#{it}/#{PERF_PARTS}" }
     assert_equal CI_PLAN.steps_for("perf").last.command.scan(%r{test/performance/\S+_test\.rb}).uniq.sort, CI_PLAN.split("perf", PERF_PARTS).flatten.sort
     full = unit_parts("&&").join(",")
@@ -76,7 +93,45 @@ class CiPlanTest < Minitest::Test
     assert_equal CI_PLAN.groups.keys.sort, (groups.(full) + [ "system" ]).sort, "un run complet joue chaque groupe une fois"
     assert_equal CI_PLAN.groups.keys.sort - [ "perf" ], (groups.(partial) + [ "system" ]).sort, "le run partiel laisse « perf »"
     assert_equal titles(nil).sort, (whole.(full) + titles("system")).sort
-    assert_equal (titles(nil) - titles("perf")).sort, (titles(partial) + titles("system")).sort
+    assert_equal (titles(nil) - titles("perf")).sort, (whole.(partial) + titles("system")).sort
+  end
+
+  # ADR-0024, chantier ci-unit-en-parts : the unit suite in parts leaves no test out, and the threshold still measures
+  # the whole suite. The parts play every file the whole run plays, each once; a part measures under its own name and
+  # checks nothing; « coverage » merges exactly UNIT_PARTS results with the threshold, and the verdict waits for it.
+  def test_the_unit_parts_play_the_whole_suite_and_coverage_checks_the_threshold_on_their_merge
+    whole = CI_PLAN.steps_for("unit").last.command
+    excluded = whole[/DEFAULT_TEST_EXCLUDE='([^']+)'/, 1]
+    suite = (CiPlan.files("test/**/*_test.rb") - CiPlan.files(excluded)).sort
+    parts = (1..UNIT_PARTS).map { CI_PLAN.steps_for("unit:#{it}/#{UNIT_PARTS}").last.command }
+
+    assert_equal suite, parts.flat_map { it.scan(%r{test/\S+_test\.rb}) }.sort, "chaque fichier unitaire dans une part, une seule"
+    assert_operator suite.size, :>, 100
+    parts.each.with_index(1) do |command, part|
+      assert_includes command, "env COVERAGE_PART=#{part}/#{UNIT_PARTS} bin/rails test "
+      refute_includes command, "COVERAGE=0"
+    end
+    refute_includes whole, "COVERAGE_PART", "en local, la suite entière vérifie elle-même le seuil"
+
+    helper = File.read(File.expand_path("../test_helper.rb", __dir__))
+    assert_match(/if \(part = ENV\["COVERAGE_PART"\]\.to_s\.strip\)\.empty\?\n\s+minimum_coverage LnclassCoverage::MINIMUM\n\s+else\n\s+command_name "unit \#\{part\}"/, helper)
+    profile = File.read(File.expand_path("../coverage_profile.rb", __dir__))
+    assert_includes profile, "MINIMUM = { line: 100, branch: 100 }"
+
+    upload = steps("unit").find { it["uses"].to_s.start_with?("actions/upload-artifact") && it.dig("with", "name").to_s.start_with?("coverage-unit-") }
+    assert_equal "startsWith(matrix.groups, 'unit:')", upload["if"]
+    assert_equal true, upload.dig("with", "include-hidden-files")
+    assert_equal "error", upload.dig("with", "if-no-files-found")
+
+    coverage = jobs.fetch("coverage")
+    assert_equal %w[plan unit], coverage["needs"]
+    assert_equal "${{ !cancelled() && needs.plan.outputs.code == 'true' }}", coverage["if"]
+    download = steps("coverage").find { it["uses"].to_s.start_with?("actions/download-artifact") }
+    assert_equal "coverage-unit-*", download.dig("with", "pattern")
+    assert_includes steps("coverage").map { it["run"].to_s }, "script/ci/coverage_collate #{UNIT_PARTS} \"$RUNNER_TEMP/coverage-parts\""
+
+    verdict = steps("ci").find { it["id"] == "verdict" }["run"]
+    assert_match(/\[ "\$COVERAGE" = success \]/, verdict, "la preuve attend le seuil sur la suite entière")
   end
 
   # ADR-0069 : 45 % of the runs were pushes that merged a tree their pull request had already tested.
@@ -107,7 +162,7 @@ class CiPlanTest < Minitest::Test
     assert_equal "${{ steps.changes.outputs.code }}", jobs.dig("plan", "outputs", "code")
 
     verdict = steps("ci").find { it["id"] == "verdict" }["run"]
-    assert_match(/\[ "\$UNIT" = success \] && \[ "\$SYSTEM" = success \]/, verdict, "la preuve attend les deux jobs verts")
+    assert_match(/\[ "\$UNIT" = success \] && \[ "\$COVERAGE" = success \] && \[ "\$SYSTEM" = success \]/, verdict, "la preuve attend les jobs de test verts")
     publish = steps("ci").find { it.dig("with", "name").to_s.start_with?("ci-tree-") }
     assert_equal "steps.verdict.outputs.proof == 'true'", publish["if"]
     assert_equal "ci-tree-${{ needs.plan.outputs.tree }}", publish.dig("with", "name")
@@ -256,6 +311,15 @@ class CiPlanTest < Minitest::Test
     plan = CiPlan.define { sharded("demo", files: %w[a b c new]) { |files, _| step "x", files.join(" ") } }
 
     assert_equal [ %w[a], %w[b c new] ], plan.split("demo", 2, timings: { "a" => 9.0, "b" => 1.0, "c" => 2.0 })
+  end
+
+  # The import performance tests skip in the unit suite without PERF: their recorded duration (the perf group's) weighs
+  # nothing in the unit split, and they still play there, in one part.
+  def test_a_light_file_weighs_nothing_in_its_group_and_still_plays
+    plan = CiPlan.define { sharded("demo", files: %w[a b c perf], light: %w[perf]) { |files, _| step "x", files.join(" ") } }
+
+    assert_equal [ %w[a perf], %w[b c] ], plan.split("demo", 2, timings: { "a" => 5.0, "b" => 3.0, "c" => 2.0, "perf" => 40.0 })
+    CiPlan.files("test/performance/**/*_test.rb").each { assert_includes CI_PLAN.groups["unit"].light, it }
   end
 
   def test_an_unknown_group_or_part_fails_loudly_instead_of_playing_nothing

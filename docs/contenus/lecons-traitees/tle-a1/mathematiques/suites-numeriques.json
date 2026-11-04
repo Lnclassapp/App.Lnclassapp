@@ -1,0 +1,1359 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Suites numériques",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A1",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "points-a-reconnaitre",
+          "kind": "coordinate_plane",
+          "description": "Repère où l'on place quatre points de coordonnées (n ; u(n)) : (0 ; 3), (1 ; 6), (2 ; 12) et (3 ; 24). L'axe horizontal donne le rang n, l'axe vertical la valeur du terme. On peut lire chaque point et comparer la façon dont les valeurs changent d'un rang au suivant.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": 0,
+            "ymax": 30,
+            "points": [
+              {
+                "id": "u0",
+                "x": 0,
+                "y": 3
+              },
+              {
+                "id": "u1",
+                "x": 1,
+                "y": 6
+              },
+              {
+                "id": "u2",
+                "x": 2,
+                "y": 12
+              },
+              {
+                "id": "u3",
+                "x": 3,
+                "y": 24
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "epargnes-deux-banques",
+          "kind": "coordinate_plane",
+          "description": "Repère pour deux épargnes de 100 000 FCFA, en dizaines de milliers de FCFA. Banque A (intérêts simples) : points (0 ; 10), (1 ; 11) et (2 ; 12). Banque B (intérêts composés) : points (0 ; 10), (1 ; 11) et (2 ; 12,1). Aux rangs 0 et 1, les deux banques donnent les mêmes points.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": 8,
+            "ymax": 14,
+            "points": [
+              {
+                "id": "a0",
+                "x": 0,
+                "y": 10
+              },
+              {
+                "id": "a1",
+                "x": 1,
+                "y": 11
+              },
+              {
+                "id": "a2",
+                "x": 2,
+                "y": 12
+              },
+              {
+                "id": "b2",
+                "x": 2,
+                "y": 12.1
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître une suite arithmétique ou géométrique",
+          "remember": "Une **suite** $(u_n)$ est une liste de nombres rangés : $u_0$ (premier terme), $u_1$, $u_2$… **Suite arithmétique** : on passe d'un terme au suivant en **ajoutant** toujours le même nombre $r$, la **raison** : $u_{n+1} = u_n + r$. **Suite géométrique** : on passe d'un terme au suivant en **multipliant** toujours par le même nombre $q$ (non nul), la **raison** : $u_{n+1} = q \\times u_n$. Pour reconnaître la nature d'une suite : si l'écart $u_{n+1} - u_n$ est toujours le même, elle est arithmétique ; si le rapport $\\dfrac{u_{n+1}}{u_n}$ est toujours le même, elle est géométrique. Une suite peut n'être ni l'une ni l'autre.",
+          "method": [
+            "Écrire les premiers termes $u_0$, $u_1$, $u_2$, $u_3$ de la suite.",
+            "Calculer les écarts $u_{n+1} - u_n$ et les rapports $\\dfrac{u_{n+1}}{u_n}$.",
+            "Comparer : les écarts sont-ils tous égaux ? les rapports sont-ils tous égaux ? ou aucun des deux ?",
+            "Conclure : donner la nature de la suite et sa raison."
+          ],
+          "example": {
+            "statement": "Les versements d'une tontine, en FCFA, sont $4\\,000$ ; $8\\,000$ ; $16\\,000$ ; $32\\,000$. Quelle est la nature de cette suite ?",
+            "steps": [
+              "Écrire : $u_0 = 4\\,000$, $u_1 = 8\\,000$, $u_2 = 16\\,000$, $u_3 = 32\\,000$.",
+              "Calculer : les écarts sont $4\\,000$, $8\\,000$, $16\\,000$ ; les rapports sont $\\dfrac{8\\,000}{4\\,000} = 2$, $\\dfrac{16\\,000}{8\\,000} = 2$, $\\dfrac{32\\,000}{16\\,000} = 2$.",
+              "Comparer : les écarts sont différents, mais les trois rapports sont égaux à $2$.",
+              "Conclure : la suite est géométrique, de raison $q = 2$."
+            ]
+          },
+          "pitfall": "Ne conclure qu'après avoir comparé **tous** les écarts ou tous les rapports, pas seulement les deux premiers. Contre-exemple : $2$ ; $4$ ; $8$ ; $14$. Les deux premiers rapports valent $2$ ($\\frac{4}{2}$ et $\\frac{8}{4}$), mais le troisième vaut $\\frac{14}{8} = 1{,}75$ : la suite n'est pas géométrique. Autre confusion : « on ajoute » donne une suite arithmétique, « on multiplie » une suite géométrique ; ne mélange pas les deux.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître la nature d'une suite",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : écrire, calculer, comparer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "points-a-reconnaitre",
+            "questions": [
+              {
+                "content": "Une épargne vérifie $u_0 = 7\\,000$ et $u_{n+1} = u_n + 500$ (montants en FCFA). Quelle est la nature de la suite $(u_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_0 = 7\\,000$, $u_1 = 7\\,500$, $u_2 = 8\\,000$, $u_3 = 8\\,500$. Étape 2 — Calculer : les écarts valent $500$, $500$, $500$ ; les rapports valent environ $1{,}071$, $1{,}067$ et $1{,}0625$ : ils changent. Étape 3 — Comparer : les écarts sont tous égaux. Étape 4 — Conclure : la suite est arithmétique de raison $500$. « Géométrique de raison $500$ » confond ajouter et multiplier : on ajoute $500$, on ne multiplie pas par $500$. « Raison $7\\,000$ » prend le premier terme pour la raison. « Ni l'une ni l'autre » est faux car l'écart est constant.",
+                "answers": [
+                  {
+                    "content": "Arithmétique de raison $500$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Géométrique de raison $500$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison $7\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite géométrique a pour premiers termes $u_0 = 3$ et $u_1 = 12$. Quelle est sa raison $q$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $u_0 = 3$ et $u_1 = 12$. Étape 2 — Calculer : l'écart vaut $12 - 3 = 9$ et le rapport vaut $\\frac{12}{3} = 4$. Étape 3 — Comparer : la suite est dite géométrique, donc on retient le rapport. Étape 4 — Conclure : $q = 4$. Le nombre $9$ est l'écart : il donnerait la raison d'une suite arithmétique, pas celle d'une suite géométrique.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque suite à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Écrire : $10, 14, 18$ ; $5, 10, 20$ ; $1, 2, 4, 7, 11$. Étape 2 — Calculer : écarts de $4$ (première suite) ; rapports de $2$ (deuxième suite) ; écarts $1, 2, 3, 4$ et rapports $2, 2, 1{,}75$ (troisième). Étape 3 — Comparer : écart constant, rapport constant, aucun des deux. Étape 4 — Conclure : arithmétique de raison $4$, géométrique de raison $2$, ni l'une ni l'autre.",
+                "answers": [
+                  {
+                    "content": "$u_0 = 10$ et $u_{n+1} = u_n + 4$",
+                    "match": "Arithmétique de raison 4"
+                  },
+                  {
+                    "content": "$u_0 = 5$ et $u_{n+1} = 2 \\times u_n$",
+                    "match": "Géométrique de raison 2"
+                  },
+                  {
+                    "content": "1 ; 2 ; 4 ; 7 ; 11",
+                    "match": "Ni l'une ni l'autre"
+                  }
+                ]
+              },
+              {
+                "content": "Le crédit restant sur un abonnement est $20\\,000$ ; $17\\,000$ ; $14\\,000$ ; $11\\,000$ FCFA. Cette suite est arithmétique : quelle est sa raison $r$ ? Écris le nombre sans espace.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $u_0 = 20\\,000$, $u_1 = 17\\,000$, $u_2 = 14\\,000$, $u_3 = 11\\,000$. Étape 2 — Calculer : $17\\,000 - 20\\,000 = -3\\,000$, $14\\,000 - 17\\,000 = -3\\,000$, $11\\,000 - 14\\,000 = -3\\,000$. Étape 3 — Comparer : les trois écarts sont égaux. Étape 4 — Conclure : la raison est $r = -3\\,000$ (le signe moins est important : la suite diminue).",
+                "answers": [
+                  {
+                    "content": "-3000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les points $(n ; u_n)$ d'une suite ont pour coordonnées $(0 ; 3)$, $(1 ; 6)$, $(2 ; 12)$, $(3 ; 24)$. Quelle est la nature de cette suite ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_0 = 3$, $u_1 = 6$, $u_2 = 12$, $u_3 = 24$. Étape 2 — Calculer : les écarts valent $3$, $6$, $12$ ; les rapports valent $\\frac{6}{3} = 2$, $\\frac{12}{6} = 2$, $\\frac{24}{12} = 2$. Étape 3 — Comparer : les écarts changent, les rapports sont tous égaux. Étape 4 — Conclure : géométrique de raison $2$. « Raison $3$ » ne regarde que le premier écart ($6 - 3 = 3$), qui n'est pas répété ensuite ; « raison $6$ » prend $u_1$ pour la raison. « Ni l'une ni l'autre » oublie de calculer les rapports.",
+                "answers": [
+                  {
+                    "content": "Arithmétique de raison $3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Géométrique de raison $2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Arithmétique de raison $6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les nombres $2$ ; $4$ ; $8$ ; $14$ forment le début d'une suite géométrique de raison $2$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $u_0 = 2$, $u_1 = 4$, $u_2 = 8$, $u_3 = 14$. Étape 2 — Calculer : les rapports valent $\\frac{4}{2} = 2$, $\\frac{8}{4} = 2$ et $\\frac{14}{8} = 1{,}75$. Étape 3 — Comparer : les rapports ne sont pas tous égaux. Étape 4 — Conclure : ce n'est pas une suite géométrique, l'affirmation est fausse. Il faut comparer tous les rapports, pas seulement les deux premiers.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Awa observe trois listes de versements en FCFA.",
+            "questions": [
+              {
+                "content": "Pour la liste $5$ ; $9$ ; $13$ ; $17$, calcule les écarts. $9 - 5 =$ ___ et $13 - 9 =$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $5, 9, 13, 17$. Étape 2 — Calculer : $9 - 5 = 4$ et $13 - 9 = 4$. Étape 3 — Comparer : les écarts sont égaux. Étape 4 — Conclure : la suite est arithmétique de raison $4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "On soustrait le terme précédent au terme suivant."
+              },
+              {
+                "content": "La liste $3$ ; $6$ ; $12$ ; $24$ est une suite ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Écrire : $3, 6, 12, 24$. Étape 2 — Calculer : les rapports valent $2$, $2$, $2$ alors que les écarts valent $3$, $6$, $12$. Étape 3 — Comparer : les rapports sont égaux. Étape 4 — Conclure : géométrique. Les écarts ne sont pas égaux, donc elle n'est pas arithmétique.",
+                "answers": [
+                  {
+                    "content": "géométrique",
+                    "correct": true
+                  },
+                  {
+                    "content": "arithmétique",
+                    "correct": false
+                  },
+                  {
+                    "content": "ni arithmétique ni géométrique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La liste $100$ ; $50$ ; $25$ est géométrique. Quelle est sa raison $q$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $100, 50, 25$. Étape 2 — Calculer : $\\frac{50}{100} = 0{,}5$ et $\\frac{25}{50} = 0{,}5$. Étape 3 — Comparer : rapports égaux. Étape 4 — Conclure : $q = 0{,}5$.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suite arithmétique : terme général et sens de variation",
+          "remember": "Une suite arithmétique de premier terme $u_0$ et de raison $r$ vérifie $u_{n+1} = u_n + r$. Son **terme général** est $u_n = u_0 + n \\times r$. Plus généralement, $u_n = u_p + (n - p) \\times r$. **Sens de variation** : si $r > 0$, la suite est **croissante** ; si $r < 0$, elle est **décroissante** ; si $r = 0$, elle est **constante**. Le rang $n$ commence à $0$ : $u_0$ est le 1er terme, $u_9$ est le 10e terme.",
+          "method": [
+            "Identifier le premier terme $u_0$ et la raison $r$ (avec deux termes connus : $r = \\dfrac{u_n - u_p}{n - p}$).",
+            "Écrire la formule $u_n = u_0 + n \\times r$.",
+            "Remplacer $n$ par le rang demandé, puis calculer.",
+            "Déduire le sens de variation du signe de $r$."
+          ],
+          "example": {
+            "statement": "Awa commence une tontine : elle verse $10\\,000$ FCFA au mois 0, puis $2\\,000$ FCFA de plus chaque mois. Calculer son versement $u_{12}$ au mois 12 et donner le sens de variation de la suite.",
+            "steps": [
+              "Identifier : le premier terme est $u_0 = 10\\,000$ et la raison est $r = 2\\,000$.",
+              "Écrire : $u_n = 10\\,000 + n \\times 2\\,000$.",
+              "Remplacer : $u_{12} = 10\\,000 + 12 \\times 2\\,000 = 10\\,000 + 24\\,000 = 34\\,000$ FCFA.",
+              "Déduire : $r = 2\\,000 > 0$, donc la suite est croissante."
+            ]
+          },
+          "pitfall": "Ne pas confondre le rang et le numéro du terme. Comme la suite commence à $u_0$, le 10e terme est $u_9$, pas $u_{10}$. Contre-exemple : avec $u_0 = 5$ et $r = 3$, le 10e terme est $u_9 = 5 + 9 \\times 3 = 32$, alors que $u_{10} = 5 + 10 \\times 3 = 35$. N'oublie pas non plus de garder $u_0$ dans la formule : $n \\times r$ seul ne donne pas $u_n$.",
+          "figure": null,
+          "exercise": {
+            "title": "Utiliser le terme général d'une suite arithmétique",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : identifier, écrire, remplacer, déduire.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une suite arithmétique a pour premier terme $u_0 = 4\\,000$ et pour raison $r = 500$ (épargne en FCFA). Calcule $u_{10}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 4\\,000$ et $r = 500$. Étape 2 — Écrire : $u_n = 4\\,000 + n \\times 500$. Étape 3 — Remplacer : $u_{10} = 4\\,000 + 10 \\times 500 = 4\\,000 + 5\\,000 = 9\\,000$. Étape 4 — Déduire : $r > 0$, la suite est croissante, ce qui est cohérent avec $u_{10} > u_0$.",
+                "answers": [
+                  {
+                    "content": "9000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Un abonnement coûte $1\\,500$ FCFA au mois 0, puis son prix baisse de $100$ FCFA chaque mois. Que coûte-t-il au mois 6 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_0 = 1\\,500$ et $r = -100$ (le prix baisse). Étape 2 — Écrire : $u_n = 1\\,500 + n \\times (-100)$. Étape 3 — Remplacer : $u_6 = 1\\,500 - 600 = 900$. Étape 4 — Déduire : $r < 0$, la suite est décroissante. $2\\,100$ vient d'une raison $+100$ au lieu de $-100$. $1\\,400$ est le prix du mois 1 ($u_1$). $600$ est le total des baisses ($6 \\times 100$) : il faut le retrancher à $1\\,500$.",
+                "answers": [
+                  {
+                    "content": "$2\\,100$ FCFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1\\,400$ FCFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "$900$ FCFA",
+                    "correct": true
+                  },
+                  {
+                    "content": "$600$ FCFA",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite arithmétique vérifie $u_1 = 8$ et $u_4 = 20$. Calcule sa raison $r$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : on connaît $u_1 = 8$ et $u_4 = 20$, donc $r = \\dfrac{u_4 - u_1}{4 - 1} = \\dfrac{20 - 8}{3} = \\dfrac{12}{3} = 4$. Étape 2 — Écrire : $u_n = u_1 + (n - 1) \\times 4$. Étape 3 — Remplacer : $u_4 = 8 + 3 \\times 4 = 20$, ce qui vérifie le résultat. Étape 4 — Déduire : $r = 4 > 0$, la suite est croissante.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour la suite arithmétique $u_n = 50 - 3n$, quelle affirmation est vraie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_n = 50 + n \\times (-3)$, donc $u_0 = 50$ et $r = -3$. Étape 2 — Écrire : la formule est déjà donnée. Étape 3 — Remplacer : $u_1 = 47$, $u_2 = 44$ : les termes diminuent. Étape 4 — Déduire : c'est le signe de $r$ qui donne le sens, ici $r = -3 < 0$ donc décroissante. Le signe de $u_0$ ne compte pas ; le nombre $3$ est précédé d'un signe moins ; $50$ est le point de départ, pas la raison.",
+                "answers": [
+                  {
+                    "content": "Elle est décroissante, car $r = -3 < 0$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est croissante, car $u_0 = 50 > 0$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est croissante, car on trouve $3$ dans la formule.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est constante, car $50$ ne change pas.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite arithmétique a pour premier terme $u_0 = 5$ et pour raison $r = 3$. Calcule la valeur de son 10e terme.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 5$ et $r = 3$. Étape 2 — Écrire : $u_n = 5 + n \\times 3$. Étape 3 — Remplacer : la suite commence à $u_0$, donc le 10e terme est $u_9 = 5 + 9 \\times 3 = 32$. Étape 4 — Déduire : $r > 0$, croissante. Calculer $u_{10} = 35$ donnerait le 11e terme : c'est le piège du rang.",
+                "answers": [
+                  {
+                    "content": "32",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La suite arithmétique de premier terme $u_0 = 20$ et de raison $r = -5$ est ___ (croissante ou décroissante).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : $u_0 = 20$ et $r = -5$. Étape 2 — Écrire : $u_n = 20 - 5n$. Étape 3 — Remplacer : $u_1 = 15$, $u_2 = 10$ : les termes baissent. Étape 4 — Déduire : $r < 0$, donc la suite est décroissante.",
+                "answers": [
+                  {
+                    "content": "décroissante",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Mamadou épargne : il a $2\\,000$ FCFA au mois 0 ($u_0 = 2\\,000$) et il ajoute $1\\,500$ FCFA chaque mois ($r = 1\\,500$).",
+            "questions": [
+              {
+                "content": "Complète le terme général : $u_n =$ ___ $+ n \\times$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 2\\,000$ et $r = 1\\,500$. Étape 2 — Écrire : $u_n = u_0 + n \\times r = 2\\,000 + n \\times 1\\,500$.",
+                "answers": [
+                  {
+                    "content": "2000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1500",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La formule est u_n = u_0 + n × r : le premier terme d'abord, puis la raison."
+              },
+              {
+                "content": "Calcule son épargne $u_4$ au mois 4, en FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 2\\,000$, $r = 1\\,500$. Étape 2 — Écrire : $u_n = 2\\,000 + n \\times 1\\,500$. Étape 3 — Remplacer : $u_4 = 2\\,000 + 4 \\times 1\\,500 = 8\\,000$.",
+                "answers": [
+                  {
+                    "content": "8000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sa suite d'épargne est ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Déduire : $r = 1\\,500 > 0$, donc la suite est croissante. Elle ne peut pas être décroissante ou constante puisqu'on ajoute chaque mois.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suite géométrique : terme général et sens de variation",
+          "remember": "Une suite géométrique de premier terme $u_0$ et de raison $q$ vérifie $u_{n+1} = q \\times u_n$. Son **terme général** est $u_n = u_0 \\times q^n$. **Sens de variation** (pour $u_0 > 0$) : si $q > 1$, la suite est **croissante** ; si $0 < q < 1$, elle est **décroissante** ; si $q = 1$, elle est **constante**. Une **hausse de $t\\,\\%$** revient à multiplier par $1 + \\dfrac{t}{100}$ ; une **baisse de $t\\,\\%$** revient à multiplier par $1 - \\dfrac{t}{100}$.",
+          "method": [
+            "Identifier le premier terme $u_0$ et la raison $q$ ($q = 1 + \\frac{t}{100}$ pour une hausse de $t\\,\\%$, $q = 1 - \\frac{t}{100}$ pour une baisse).",
+            "Écrire la formule $u_n = u_0 \\times q^n$.",
+            "Remplacer $n$ par le rang demandé, puis calculer.",
+            "Déduire le sens de variation de la valeur de $q$ (avec $u_0 > 0$)."
+          ],
+          "example": {
+            "statement": "Un village compte $2\\,000$ habitants en 2020 (rang 0) et sa population augmente de $10\\,\\%$ par an. Calculer la population $u_3$ en 2023 et donner le sens de variation de la suite.",
+            "steps": [
+              "Identifier : le premier terme est $u_0 = 2\\,000$ et la raison est $q = 1 + \\frac{10}{100} = 1{,}1$.",
+              "Écrire : $u_n = 2\\,000 \\times 1{,}1^n$.",
+              "Remplacer : $u_3 = 2\\,000 \\times 1{,}1^3 = 2\\,000 \\times 1{,}331 = 2\\,662$ habitants.",
+              "Déduire : $q = 1{,}1 > 1$ et $u_0 > 0$, donc la suite est croissante."
+            ]
+          },
+          "pitfall": "Une hausse de $10\\,\\%$ ne se traduit ni par « $\\times 10$ », ni par « $+ 10$ », ni par « $\\times 0{,}1$ » : c'est « $\\times 1{,}1$ ». Contre-exemple : $2\\,000$ habitants avec $10\\,\\%$ de hausse donnent $2\\,000 \\times 1{,}1 = 2\\,200$, et non $2\\,000 \\times 0{,}1 = 200$. Autre erreur : $q^n$ n'est pas $n \\times q$. Ici $2\\,000 \\times 1{,}1^3 = 2\\,662$, alors que $2\\,000 \\times 3 \\times 1{,}1 = 6\\,600$ est faux.",
+          "figure": null,
+          "exercise": {
+            "title": "Utiliser le terme général d'une suite géométrique",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : identifier, écrire, remplacer, déduire.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une suite géométrique a pour premier terme $u_0 = 3$ et pour raison $q = 2$. Calcule $u_5$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 3$ et $q = 2$. Étape 2 — Écrire : $u_n = 3 \\times 2^n$. Étape 3 — Remplacer : $u_5 = 3 \\times 2^5 = 3 \\times 32 = 96$. Étape 4 — Déduire : $q = 2 > 1$ et $u_0 > 0$, la suite est croissante.",
+                "answers": [
+                  {
+                    "content": "96",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un téléphone neuf vaut $100\\,000$ FCFA et perd $20\\,\\%$ de sa valeur chaque année. Quelle est sa valeur après 2 ans ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 100\\,000$ et, pour une baisse de $20\\,\\%$, $q = 1 - \\frac{20}{100} = 0{,}8$. Étape 2 — Écrire : $u_n = 100\\,000 \\times 0{,}8^n$. Étape 3 — Remplacer : $u_2 = 100\\,000 \\times 0{,}8^2 = 100\\,000 \\times 0{,}64 = 64\\,000$. Étape 4 — Déduire : $0 < q < 1$, la suite est décroissante. Baisser deux fois de $20\\,\\%$ ne fait pas baisser de $40\\,\\%$ (ce qui donnerait $60\\,000$).",
+                "answers": [
+                  {
+                    "content": "64000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Un prix augmente de $5\\,\\%$ par an. Quelle est la raison $q$ de la suite géométrique des prix ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : pour une hausse de $t\\,\\%$, $q = 1 + \\frac{t}{100} = 1 + \\frac{5}{100} = 1{,}05$. Étape 2 — Écrire : $u_n = u_0 \\times 1{,}05^n$. Étape 3 — Remplacer : par exemple $u_1 = 1{,}05\\,u_0$, soit $5\\,\\%$ de plus. Étape 4 — Déduire : $q > 1$, la suite est croissante. $0{,}05$ oublie d'ajouter $1$ (on ne garderait que l'augmentation). $5$ multiplierait le prix par $5$. $1{,}5$ correspondrait à $50\\,\\%$ de hausse.",
+                "answers": [
+                  {
+                    "content": "$q = 0{,}05$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$q = 1{,}05$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$q = 5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$q = 1{,}5$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La suite géométrique de premier terme $u_0 = 100$ et de raison $q = 0{,}9$ est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_0 = 100$ et $q = 0{,}9$. Étape 2 — Écrire : $u_n = 100 \\times 0{,}9^n$. Étape 3 — Remplacer : $u_1 = 90$ et $u_2 = 81$ : les termes diminuent. Étape 4 — Déduire : $0 < q < 1$ et $u_0 > 0$, donc décroissante. Le signe de $u_0$ ne suffit pas : c'est la position de $q$ par rapport à $1$ qui décide. Un $q$ positif peut donner une suite décroissante. $q = 0{,}9$ n'est pas égal à $1$, donc la suite n'est pas constante.",
+                "answers": [
+                  {
+                    "content": "Croissante, car $u_0 > 0$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Croissante, car $q$ est positif.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Constante, car $q$ est proche de $1$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décroissante, car $0 < q < 1$.",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une population de $1\\,000$ habitants augmente de $10\\,\\%$ par an. Combien d'habitants a-t-elle après 2 ans ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u_0 = 1\\,000$ et $q = 1{,}1$. Étape 2 — Écrire : $u_n = 1\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $u_2 = 1\\,000 \\times 1{,}21 = 1\\,210$. Étape 4 — Déduire : $q > 1$, croissante. $1\\,200$ additionne deux fois $10\\,\\%$ de $1\\,000$ : la deuxième hausse porte sur $1\\,100$, pas sur $1\\,000$. $1\\,100$ est la population après un an seulement. $2\\,000$ vient d'une multiplication par $2$.",
+                "answers": [
+                  {
+                    "content": "$1\\,210$ habitants",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1\\,200$ habitants",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1\\,100$ habitants",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2\\,000$ habitants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une baisse de $20\\,\\%$ correspond à une multiplication par $0{,}2$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : pour une baisse de $t\\,\\%$, $q = 1 - \\frac{t}{100} = 1 - 0{,}2 = 0{,}8$. Étape 2 — Écrire : $u_n = u_0 \\times 0{,}8^n$. Étape 3 — Remplacer : $100 \\times 0{,}8 = 80$, soit $20$ de moins ; $100 \\times 0{,}2 = 20$ serait une baisse de $80\\,\\%$. Étape 4 — Déduire : $0 < q < 1$ donc décroissante. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un compte contient $1\\,000$ FCFA au départ ($u_0 = 1\\,000$) et son montant double chaque semaine ($q = 2$).",
+            "questions": [
+              {
+                "content": "Complète le terme général : $u_n =$ ___ $\\times$ ___$^n$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 1\\,000$ et $q = 2$. Étape 2 — Écrire : $u_n = u_0 \\times q^n = 1\\,000 \\times 2^n$.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La formule est u_n = u_0 × q^n : le premier terme, puis la raison à la puissance n."
+              },
+              {
+                "content": "Calcule le montant $u_4$ après 4 semaines, en FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u_0 = 1\\,000$, $q = 2$. Étape 2 — Écrire : $u_n = 1\\,000 \\times 2^n$. Étape 3 — Remplacer : $u_4 = 1\\,000 \\times 2^4 = 1\\,000 \\times 16 = 16\\,000$.",
+                "answers": [
+                  {
+                    "content": "16000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une hausse de $25\\,\\%$ correspond à la raison $q =$ ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : $q = 1 + \\frac{25}{100} = 1{,}25$. Le nombre $0{,}25$ oublie le $1$, $25$ multiplierait par $25$, et $1{,}025$ divise le taux par $1\\,000$ au lieu de $100$.",
+                "answers": [
+                  {
+                    "content": "1,25",
+                    "correct": true
+                  },
+                  {
+                    "content": "0,25",
+                    "correct": false
+                  },
+                  {
+                    "content": "25",
+                    "correct": false
+                  },
+                  {
+                    "content": "1,025",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une somme de termes consécutifs",
+          "remember": "Le **nombre de termes** de $u_p + u_{p+1} + \\dots + u_n$ est $n - p + 1$ ; par exemple $u_0 + \\dots + u_{10}$ compte $11$ termes. **Suite arithmétique** : $S = \\text{nombre de termes} \\times \\dfrac{\\text{premier terme} + \\text{dernier terme}}{2}$. **Suite géométrique** de raison $q \\neq 1$ : $S = \\text{premier terme} \\times \\dfrac{1 - q^{\\text{nombre de termes}}}{1 - q}$.",
+          "method": [
+            "Compter le nombre de termes de la somme.",
+            "Identifier la nature de la suite, son premier terme, son dernier terme et sa raison.",
+            "Appliquer la formule qui correspond à la nature de la suite.",
+            "Calculer et conclure avec l'unité."
+          ],
+          "example": {
+            "statement": "Une femme verse $5\\,000$ FCFA au mois 0, puis $1\\,000$ FCFA de plus chaque mois, jusqu'au mois 11 compris. Calculer le total versé.",
+            "steps": [
+              "Compter : de $u_0$ à $u_{11}$, il y a $11 - 0 + 1 = 12$ termes.",
+              "Identifier : la suite est arithmétique, de premier terme $u_0 = 5\\,000$ et de raison $r = 1\\,000$ ; le dernier terme est $u_{11} = 5\\,000 + 11 \\times 1\\,000 = 16\\,000$.",
+              "Appliquer : $S = 12 \\times \\dfrac{5\\,000 + 16\\,000}{2}$.",
+              "Calculer : $S = 12 \\times 10\\,500 = 126\\,000$. Elle a versé $126\\,000$ FCFA en tout."
+            ]
+          },
+          "pitfall": "Ne pas se tromper sur le nombre de termes, et ne pas oublier de diviser par $2$. Contre-exemple : pour $u_0 + u_1 + u_2$ avec $u_0 = 2$ et $r = 2$ (soit $2 + 4 + 6 = 12$), il y a $3$ termes et non $2$ : $3 \\times \\frac{2 + 6}{2} = 12$, alors que $2 \\times \\frac{2 + 6}{2} = 8$ est faux. Et $3 \\times (2 + 6) = 24$ est faux aussi : il manque la division par $2$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer des sommes de termes",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : compter, identifier, appliquer, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Combien de termes contient la somme $u_3 + u_4 + \\dots + u_{10}$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : le nombre de termes de $u_p$ à $u_n$ est $n - p + 1 = 10 - 3 + 1 = 8$. Étape 2 — Identifier : le premier terme de la somme est $u_3$, le dernier est $u_{10}$. Étape 3 — Appliquer : on utiliserait ce nombre $8$ dans la formule. Étape 4 — Calculer : $10 - 3 = 7$ est faux, car cela oublie de compter $u_3$ lui-même.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une suite arithmétique a pour premier terme $u_0 = 2$ et pour raison $r = 2$. Calcule $u_0 + u_1 + u_2 + u_3 + u_4$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : de $u_0$ à $u_4$, il y a $5$ termes. Étape 2 — Identifier : suite arithmétique, $u_0 = 2$, $r = 2$, dernier terme $u_4 = 2 + 4 \\times 2 = 10$. Étape 3 — Appliquer : $S = 5 \\times \\dfrac{2 + 10}{2}$. Étape 4 — Calculer : $S = 5 \\times 6 = 30$. Vérification : $2 + 4 + 6 + 8 + 10 = 30$.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une tontine rapporte $2\\,000$ FCFA la semaine 1, $3\\,000$ la semaine 2, $4\\,000$ la semaine 3, et ainsi de suite jusqu'à la semaine 10 (on ajoute toujours $1\\,000$). Quel est le total reçu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Compter : de la semaine 1 à la semaine 10, il y a $10$ termes. Étape 2 — Identifier : suite arithmétique de premier terme $2\\,000$ et de raison $1\\,000$ ; le dernier terme est $2\\,000 + 9 \\times 1\\,000 = 11\\,000$. Étape 3 — Appliquer : $S = 10 \\times \\dfrac{2\\,000 + 11\\,000}{2}$. Étape 4 — Calculer : $S = 10 \\times 6\\,500 = 65\\,000$ FCFA. $130\\,000$ oublie de diviser par $2$. $58\\,500$ multiplie la moyenne $6\\,500$ par $9$ au lieu de $10$ (un terme de moins compté). $71\\,500$ la multiplie par $11$ (un terme de trop).",
+                "answers": [
+                  {
+                    "content": "$65\\,000$ FCFA",
+                    "correct": true
+                  },
+                  {
+                    "content": "$130\\,000$ FCFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "$58\\,500$ FCFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "$71\\,500$ FCFA",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes du calcul d'une somme de termes consécutifs.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Compter : le nombre de termes est une donnée de la formule. Étape 2 — Identifier : la nature décide de la formule, et il faut le dernier terme. Étape 3 — Appliquer : on choisit la bonne formule avec ces données. Étape 4 — Calculer : on termine par le calcul et l'unité. Calculer avant d'avoir compté ou identifié donnerait un résultat faux.",
+                "answers": [
+                  {
+                    "content": "Compter le nombre de termes de la somme."
+                  },
+                  {
+                    "content": "Identifier la nature de la suite, son premier terme, son dernier terme et sa raison."
+                  },
+                  {
+                    "content": "Appliquer la formule qui correspond à la nature de la suite."
+                  },
+                  {
+                    "content": "Calculer et conclure avec l'unité."
+                  }
+                ]
+              },
+              {
+                "content": "Un message est envoyé à $3$ personnes le jour 0, puis chaque jour il y a $3$ fois plus d'envois que la veille : $3$ ; $9$ ; $27$ ; $81$. Combien d'envois en tout du jour 0 au jour 3 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : du jour 0 au jour 3, il y a $4$ termes. Étape 2 — Identifier : suite géométrique de premier terme $3$ et de raison $q = 3$. Étape 3 — Appliquer : $S = 3 \\times \\dfrac{1 - 3^4}{1 - 3}$. Étape 4 — Calculer : $S = 3 \\times \\dfrac{1 - 81}{-2} = 3 \\times 40 = 120$ envois. Vérification : $3 + 9 + 27 + 81 = 120$.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La somme $u_0 + u_1 + \\dots + u_{10}$ contient $10$ termes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Compter : de $u_0$ à $u_{10}$, il y a $10 - 0 + 1 = 11$ termes, car on compte aussi $u_0$. Étape 2 — Identifier : le nombre de termes est la première donnée de la formule. Étape 3 — Appliquer : avec $10$ au lieu de $11$, la formule donnerait un résultat faux. Étape 4 — Calculer : on garde donc $11$. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une suite arithmétique commence par $3$ ; $5$ ; $7$ ; $9$ ; $11$ ; $13$. On additionne ces six termes.",
+            "questions": [
+              {
+                "content": "Complète : le nombre de termes est ___ et la somme « premier terme + dernier terme » vaut ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : il y a $6$ termes. Étape 2 — Identifier : le premier terme est $3$ et le dernier est $13$, donc $3 + 13 = 16$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "16",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Additionne le premier et le dernier terme de la liste."
+              },
+              {
+                "content": "Calcule la somme $3 + 5 + 7 + 9 + 11 + 13$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : $6$ termes. Étape 2 — Identifier : premier terme $3$, dernier terme $13$. Étape 3 — Appliquer : $S = 6 \\times \\frac{3 + 13}{2}$. Étape 4 — Calculer : $S = 6 \\times 8 = 48$.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien de termes contient la somme $u_2 + u_3 + \\dots + u_7$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Compter : $7 - 2 + 1 = 6$ termes.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre un problème d'épargne ou de population",
+          "remember": "**Intérêts simples** : chaque année, l'intérêt se calcule sur le capital de départ $C$, au taux $t\\,\\%$. Le capital après $n$ années est une suite arithmétique : $u_n = C + n \\times \\dfrac{C \\times t}{100}$. **Intérêts composés** : chaque année, l'intérêt s'ajoute au capital et rapporte à son tour. Le capital est une suite géométrique de raison $q = 1 + \\dfrac{t}{100}$ : $u_n = C \\times q^n$. **Seuil** : pour trouver le plus petit entier $n$ tel que $C \\times q^n \\geq S$ (avec $q > 1$), on écrit $q^n \\geq \\dfrac{S}{C}$, puis $n \\ln q \\geq \\ln \\dfrac{S}{C}$ (car $\\ln$ est croissante), donc $n \\geq \\dfrac{\\ln(S/C)}{\\ln q}$ ; on garde le premier entier qui convient.",
+          "method": [
+            "Lire l'énoncé : repérer le capital de départ, le taux, la durée et la question posée.",
+            "Choisir le modèle : intérêts simples, suite arithmétique ; intérêts composés ou pourcentage répété, suite géométrique. Donner $u_0$ et la raison.",
+            "Écrire la formule du terme général $u_n$.",
+            "Calculer la valeur demandée, ou résoudre l'inéquation du seuil avec $\\ln$.",
+            "Conclure par une phrase avec l'unité."
+          ],
+          "example": {
+            "statement": "Awa place $100\\,000$ FCFA à $10\\,\\%$ par an, à intérêts composés. Au bout de combien d'années aura-t-elle au moins $200\\,000$ FCFA ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}1 \\approx 0{,}095$.",
+            "steps": [
+              "Lire : le capital de départ est $100\\,000$ FCFA, le taux est $10\\,\\%$ par an, et on cherche la durée pour atteindre $200\\,000$ FCFA.",
+              "Choisir : intérêts composés, donc suite géométrique de premier terme $u_0 = 100\\,000$ et de raison $q = 1{,}1$.",
+              "Écrire : $u_n = 100\\,000 \\times 1{,}1^n$.",
+              "Calculer : on résout $100\\,000 \\times 1{,}1^n \\geq 200\\,000$, soit $1{,}1^n \\geq 2$, donc $n \\ln 1{,}1 \\geq \\ln 2$ et $n \\geq \\dfrac{0{,}693}{0{,}095} \\approx 7{,}3$ ; le plus petit entier est $n = 8$.",
+              "Conclure : au bout de $8$ ans, Awa aura au moins $200\\,000$ FCFA."
+            ]
+          },
+          "pitfall": "Ne pas confondre intérêts simples et intérêts composés. Avec $10\\,\\%$ par an pendant 3 ans sur $100\\,000$ FCFA, les intérêts simples donnent $100\\,000 + 3 \\times 10\\,000 = 130\\,000$, mais les intérêts composés donnent $100\\,000 \\times 1{,}1^3 = 133\\,100$. On ne multiplie pas $3 \\times 10\\,\\%$ pour trouver « $30\\,\\%$ de plus ». Pour un seuil, on arrondit **au-dessus** : $7{,}3$ ans ne suffisent pas, il faut $8$ ans.",
+          "figure": null,
+          "exercise": {
+            "title": "Résoudre des problèmes d'épargne",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : lire, choisir, écrire, calculer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Awa place $200\\,000$ FCFA à $5\\,\\%$ par an en intérêts simples. Quelle est la nature de la suite de son capital $(u_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : capital $200\\,000$ FCFA, taux $5\\,\\%$, intérêts simples. Étape 2 — Choisir : intérêts simples, donc suite arithmétique ; l'intérêt annuel est $\\frac{200\\,000 \\times 5}{100} = 10\\,000$, qui est la raison. Étape 3 — Écrire : $u_n = 200\\,000 + n \\times 10\\,000$. Étape 4 — Calculer : $u_1 = 210\\,000$. Étape 5 — Conclure : arithmétique de raison $10\\,000$. « Géométrique de raison $1{,}05$ » serait le cas des intérêts composés. « Raison $5$ » confond le taux avec le montant des intérêts. « Géométrique de raison $10\\,000$ » mélange les deux modèles.",
+                "answers": [
+                  {
+                    "content": "Géométrique de raison $1{,}05$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison $10\\,000$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Arithmétique de raison $5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Géométrique de raison $10\\,000$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Awa place $200\\,000$ FCFA à $5\\,\\%$ par an en intérêts simples. Quel est son capital après 4 ans ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : capital $200\\,000$, taux $5\\,\\%$, durée 4 ans, intérêts simples. Étape 2 — Choisir : suite arithmétique de premier terme $200\\,000$ et de raison $10\\,000$. Étape 3 — Écrire : $u_n = 200\\,000 + n \\times 10\\,000$. Étape 4 — Calculer : $u_4 = 200\\,000 + 40\\,000 = 240\\,000$. Étape 5 — Conclure : après 4 ans, son capital est de $240\\,000$ FCFA.",
+                "answers": [
+                  {
+                    "content": "240000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Moussa place $50\\,000$ FCFA à $20\\,\\%$ par an, à intérêts composés. Quel est son capital après 2 ans ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : capital $50\\,000$, taux $20\\,\\%$, durée 2 ans, intérêts composés. Étape 2 — Choisir : suite géométrique de premier terme $50\\,000$ et de raison $q = 1{,}2$. Étape 3 — Écrire : $u_n = 50\\,000 \\times 1{,}2^n$. Étape 4 — Calculer : $u_2 = 50\\,000 \\times 1{,}44 = 72\\,000$. Étape 5 — Conclure : son capital est de $72\\,000$ FCFA. Les intérêts simples auraient donné $70\\,000$ seulement.",
+                "answers": [
+                  {
+                    "content": "72000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Une ville compte $10\\,000$ habitants et sa population augmente de $5\\,\\%$ par an. Au bout de combien d'années (nombre entier) aura-t-elle au moins $20\\,000$ habitants ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}05 \\approx 0{,}049$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : $10\\,000$ habitants au départ, hausse de $5\\,\\%$ par an, seuil de $20\\,000$. Étape 2 — Choisir : pourcentage répété, suite géométrique avec $u_0 = 10\\,000$ et $q = 1{,}05$. Étape 3 — Écrire : $u_n = 10\\,000 \\times 1{,}05^n$. Étape 4 — Calculer : $10\\,000 \\times 1{,}05^n \\geq 20\\,000$ donne $1{,}05^n \\geq 2$, donc $n \\ln 1{,}05 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}049} \\approx 14{,}1$ ; on arrondit au-dessus : $n = 15$. Étape 5 — Conclure : il faut 15 ans. Avec $14$ ans on n'a pas encore doublé ($1{,}05^{14} \\approx 1{,}98 < 2$).",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À $10\\,\\%$ par an, un capital placé 3 ans à intérêts composés augmente de $30\\,\\%$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : taux $10\\,\\%$ par an, 3 ans, intérêts composés. Étape 2 — Choisir : suite géométrique de raison $q = 1{,}1$. Étape 3 — Écrire : $u_3 = u_0 \\times 1{,}1^3$. Étape 4 — Calculer : $1{,}1^3 = 1{,}331$, soit une hausse de $33{,}1\\,\\%$ et non de $30\\,\\%$. Étape 5 — Conclure : l'affirmation est fausse. Additionner $10\\,\\% + 10\\,\\% + 10\\,\\%$ oublie que les intérêts rapportent des intérêts.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces situations, lesquelles se modélisent par une suite géométrique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : on cherche si on multiplie ou si on ajoute. Étape 2 — Choisir : un pourcentage répété est une multiplication par $1 + \\frac{t}{100}$ (ou $1 - \\frac{t}{100}$), donc une suite géométrique ; ajouter un montant fixe donne une suite arithmétique. Étape 3 — Écrire : capital $C \\times 1{,}04^n$ ; population $P \\times 0{,}97^n$. Étape 4 — Calculer : la tontine et le loyer ajoutent un montant constant ($2\\,000$ et $5\\,000$), c'est le modèle arithmétique. Étape 5 — Conclure : les deux bonnes réponses sont le capital à intérêts composés et la population qui baisse de $3\\,\\%$.",
+                "answers": [
+                  {
+                    "content": "Un capital placé à $4\\,\\%$ par an en intérêts composés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une tontine où l'on ajoute $2\\,000$ FCFA chaque mois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une population qui baisse de $3\\,\\%$ par an",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un loyer qui augmente de $5\\,000$ FCFA chaque année",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Mamadou place $50\\,000$ FCFA à $10\\,\\%$ par an.",
+            "questions": [
+              {
+                "content": "À intérêts simples : l'intérêt annuel est de ___ FCFA, donc le capital après 2 ans est de ___ FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : capital $50\\,000$, taux $10\\,\\%$. Étape 2 — Choisir : intérêts simples, suite arithmétique. L'intérêt annuel est $\\frac{50\\,000 \\times 10}{100} = 5\\,000$. Étape 3 — Écrire : $u_n = 50\\,000 + n \\times 5\\,000$. Étape 4 — Calculer : $u_2 = 50\\,000 + 10\\,000 = 60\\,000$.",
+                "answers": [
+                  {
+                    "content": "5000",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "60000",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'intérêt annuel est 10 % de 50 000 ; ensuite on l'ajoute 2 fois."
+              },
+              {
+                "content": "À intérêts composés : calcule le capital après 2 ans, en FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : capital $50\\,000$, taux $10\\,\\%$, 2 ans. Étape 2 — Choisir : suite géométrique, $q = 1{,}1$. Étape 3 — Écrire : $u_n = 50\\,000 \\times 1{,}1^n$. Étape 4 — Calculer : $u_2 = 50\\,000 \\times 1{,}21 = 60\\,500$.",
+                "answers": [
+                  {
+                    "content": "60500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Avec le même taux, à intérêts composés, le capital après 2 ans est ___ qu'à intérêts simples.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Calculer : $60\\,500$ (composés) contre $60\\,000$ (simples). Dès la deuxième année, les intérêts composés rapportent des intérêts sur les intérêts : le capital est plus grand.",
+                "answers": [
+                  {
+                    "content": "plus grand",
+                    "correct": true
+                  },
+                  {
+                    "content": "plus petit",
+                    "correct": false
+                  },
+                  {
+                    "content": "égal",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La tontine de Mariam",
+          "statement": "Mariam participe à une tontine. Elle verse 8 000 FCFA le mois 0, puis 1 500 FCFA de plus chaque mois. On note u(n) son versement au mois n : u(0) = 8 000 et u(n+1) = u(n) + 1 500.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Mariam verse $8\\,000$ FCFA le mois 0, puis $1\\,500$ FCFA de plus chaque mois ($u_{n+1} = u_n + 1\\,500$). Quelle est la nature de la suite $(u_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (reconnaître une suite) : Étape 1 — Écrire : $u_0 = 8\\,000$, $u_1 = 9\\,500$, $u_2 = 11\\,000$. Étape 2 — Calculer : écarts $1\\,500$ et $1\\,500$ ; rapports $\\frac{9\\,500}{8\\,000} \\approx 1{,}19$ et $\\frac{11\\,000}{9\\,500} \\approx 1{,}16$. Étape 3 — Comparer : les écarts sont égaux. Étape 4 — Conclure : arithmétique de raison $1\\,500$. La formule $u_{n+1} = u_n + 1\\,500$ ajoute : un « ×1 500 » ou un « ×1,5 » ferait multiplier. La raison n'est pas $8\\,000$, qui est $u_0$.",
+              "answers": [
+                {
+                  "content": "Arithmétique de raison $1\\,500$",
+                  "correct": true
+                },
+                {
+                  "content": "Géométrique de raison $1\\,500$",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $8\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $1{,}5$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam verse $8\\,000$ FCFA le mois 0, puis $1\\,500$ FCFA de plus chaque mois. Calcule son versement $u_8$ au mois 8.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (terme général d'une suite arithmétique) : Étape 1 — Identifier : $u_0 = 8\\,000$ et $r = 1\\,500$. Étape 2 — Écrire : $u_n = 8\\,000 + n \\times 1\\,500$. Étape 3 — Remplacer : $u_8 = 8\\,000 + 8 \\times 1\\,500 = 8\\,000 + 12\\,000 = 20\\,000$. Étape 4 — Déduire : $r > 0$, la suite est croissante. Réponse : $20\\,000$ FCFA.",
+              "answers": [
+                {
+                  "content": "20000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Mariam verse $8\\,000$ FCFA le mois 0, puis $1\\,500$ FCFA de plus chaque mois, jusqu'au mois 8 compris (le versement du mois 8 est $20\\,000$ FCFA). Calcule le total versé du mois 0 au mois 8.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (somme de termes consécutifs) : Étape 1 — Compter : du mois 0 au mois 8, il y a $8 - 0 + 1 = 9$ termes. Étape 2 — Identifier : suite arithmétique, premier terme $8\\,000$, dernier terme $20\\,000$. Étape 3 — Appliquer : $S = 9 \\times \\dfrac{8\\,000 + 20\\,000}{2}$. Étape 4 — Calculer : $S = 9 \\times 14\\,000 = 126\\,000$ FCFA. Avec $8$ termes on obtiendrait $112\\,000$ : c'est l'erreur de comptage.",
+              "answers": [
+                {
+                  "content": "126000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Mariam verse $8\\,000 + 1\\,500\\,n$ FCFA au mois $n$. À partir de quel mois (nombre entier) son versement dépasse-t-il $25\\,000$ FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (problème d'épargne ou de population) : Étape 1 — Lire : premier versement $8\\,000$, $1\\,500$ de plus par mois, seuil $25\\,000$. Étape 2 — Choisir : on ajoute un montant fixe, donc suite arithmétique de premier terme $8\\,000$ et de raison $1\\,500$. Étape 3 — Écrire : $u_n = 8\\,000 + 1\\,500\\,n$. Étape 4 — Calculer : on résout $8\\,000 + 1\\,500\\,n > 25\\,000$, soit $1\\,500\\,n > 17\\,000$, donc $n > \\frac{17\\,000}{1\\,500} \\approx 11{,}3$ ; on arrondit au-dessus : $n = 12$. Étape 5 — Conclure : à partir du mois 12. Vérification : $u_{11} = 24\\,500 < 25\\,000$ et $u_{12} = 26\\,000 > 25\\,000$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le versement de Mariam ($u_0 = 8\\,000$, $r = 1\\,500$) est décroissant.",
+              "question_type": "true_false",
+              "explanation": "Méthode (sens de variation) : Étape 1 — Identifier : $u_0 = 8\\,000$ et $r = 1\\,500$. Étape 2 — Écrire : $u_n = 8\\,000 + n \\times 1\\,500$. Étape 3 — Remplacer : $u_1 = 9\\,500 > u_0$. Étape 4 — Déduire : $r = 1\\,500 > 0$, donc la suite est croissante. L'affirmation est fausse : le versement augmente.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La population d'un village",
+          "statement": "Un village compte 5 000 habitants en 2024 (rang 0). Sa population augmente de 20 % par an. On note u(n) la population au rang n. Pour les calculs de seuil, on donne ln 2 ≈ 0,693 et ln 1,2 ≈ 0,182.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La population d'un village (5 000 habitants en 2024) augmente de $20\\,\\%$ par an. Quelle est la raison de la suite géométrique $(u_n)$ de sa population ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (terme général d'une suite géométrique) : Étape 1 — Identifier : $u_0 = 5\\,000$ et, pour une hausse de $t = 20\\,\\%$, $q = 1 + \\frac{20}{100} = 1{,}2$. Étape 2 — Écrire : $u_n = 5\\,000 \\times 1{,}2^n$. Étape 3 — Remplacer : $u_1 = 6\\,000$, soit $20\\,\\%$ de plus. Étape 4 — Déduire : $q > 1$, croissante. $0{,}2$ oublie le $1$ ; $20$ multiplierait par $20$ ; $1{,}02$ divise le taux par $1\\,000$ au lieu de $100$.",
+              "answers": [
+                {
+                  "content": "$q = 1{,}2$",
+                  "correct": true
+                },
+                {
+                  "content": "$q = 0{,}2$",
+                  "correct": false
+                },
+                {
+                  "content": "$q = 20$",
+                  "correct": false
+                },
+                {
+                  "content": "$q = 1{,}02$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un village compte $5\\,000$ habitants en 2024 (rang 0) et sa population augmente de $20\\,\\%$ par an. Combien d'habitants aura-t-il au rang 3 (en 2027) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (terme général d'une suite géométrique) : Étape 1 — Identifier : $u_0 = 5\\,000$ et $q = 1{,}2$. Étape 2 — Écrire : $u_n = 5\\,000 \\times 1{,}2^n$. Étape 3 — Remplacer : $1{,}2^3 = 1{,}728$, donc $u_3 = 5\\,000 \\times 1{,}728 = 8\\,640$. Étape 4 — Déduire : croissante. Réponse : $8\\,640$ habitants.",
+              "answers": [
+                {
+                  "content": "8640",
+                  "correct": true
+                }
+              ],
+              "unit": "habitants"
+            },
+            {
+              "content": "Un village a $5\\,000$ habitants en 2024 et sa population augmente de $20\\,\\%$ par an. Chaque année, elle augmente donc du même nombre d'habitants : $1\\,000$.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Identifier : $20\\,\\%$ de hausse, donc $q = 1{,}2$. Étape 2 — Écrire : $u_n = 5\\,000 \\times 1{,}2^n$. Étape 3 — Remplacer : $u_1 = 6\\,000$ (hausse de $1\\,000$) puis $u_2 = 7\\,200$ (hausse de $1\\,200$). Étape 4 — Conclure : la hausse en nombre d'habitants grandit chaque année, car les $20\\,\\%$ s'appliquent à une population plus grande. Une hausse constante de $1\\,000$ serait une suite arithmétique : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La suite $u_n = 5\\,000 \\times 1{,}2^n$ (population d'un village) est :",
+              "question_type": "single_choice",
+              "explanation": "Méthode (sens de variation) : Étape 1 — Identifier : $u_0 = 5\\,000 > 0$ et $q = 1{,}2$. Étape 2 — Écrire : $u_n = u_0 \\times q^n$. Étape 3 — Remplacer : $u_1 = 6\\,000 > u_0$. Étape 4 — Déduire : $q > 1$ et $u_0 > 0$ donnent une suite croissante. Le taux est fixe, mais la population ne l'est pas ; la valeur $5\\,000$ n'intervient pas dans le sens de variation ; $q$ est supérieur à $1$, pas inférieur.",
+              "answers": [
+                {
+                  "content": "Décroissante, car $q$ est proche de $1$.",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante, car $5\\,000$ est grand.",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante, car $q = 1{,}2 > 1$ et $u_0 > 0$.",
+                  "correct": true
+                },
+                {
+                  "content": "Constante, car le taux est fixe.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un village compte $5\\,000$ habitants en 2024 et sa population augmente de $20\\,\\%$ par an. Au bout de combien d'années (nombre entier) aura-t-il au moins $10\\,000$ habitants ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}2 \\approx 0{,}182$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : $5\\,000$ habitants, hausse de $20\\,\\%$, seuil $10\\,000$. Étape 2 — Choisir : pourcentage répété, donc suite géométrique de raison $q = 1{,}2$. Étape 3 — Écrire : $u_n = 5\\,000 \\times 1{,}2^n$. Étape 4 — Calculer : on résout $5\\,000 \\times 1{,}2^n \\geq 10\\,000$, soit $1{,}2^n \\geq 2$, donc $n \\ln 1{,}2 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}182} \\approx 3{,}8$ ; on arrondit au-dessus : $n = 4$. Vérification : $u_3 = 8\\,640 < 10\\,000$ et $u_4 = 10\\,368 \\geq 10\\,000$. Étape 5 — Conclure : au bout de $4$ ans.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux banques, deux façons de placer",
+          "statement": "Awa place 100 000 FCFA, pour plusieurs années. Banque A : 10 % par an en intérêts simples. Banque B : 10 % par an en intérêts composés. Le repère montre, en dizaines de milliers de FCFA, les capitaux des rangs 0, 1 et 2.",
+          "exercise_type": "evaluation",
+          "figure": "epargnes-deux-banques",
+          "questions": [
+            {
+              "content": "Awa place 100 000 FCFA à 10 % par an. Relie chaque placement à la nature de la suite de son capital.",
+              "question_type": "matching",
+              "explanation": "Méthode (choisir le modèle) : Étape 1 — Lire : capital $100\\,000$ FCFA, taux $10\\,\\%$. Étape 2 — Choisir : intérêts simples, suite arithmétique, raison $\\frac{100\\,000 \\times 10}{100} = 10\\,000$ ; intérêts composés, suite géométrique, raison $1 + \\frac{10}{100} = 1{,}1$ ; sans intérêt, on n'ajoute rien, raison $0$. Étape 3 — Écrire : $A_n = 100\\,000 + 10\\,000\\,n$ ; $B_n = 100\\,000 \\times 1{,}1^n$ ; $100\\,000$ constant. Étape 4 — Conclure : A est arithmétique de raison $10\\,000$, B est géométrique de raison $1{,}1$, et le compte sans intérêt est arithmétique de raison $0$. Remarque : une suite constante est aussi géométrique de raison $1$, mais l'énoncé ne propose que la raison $10\\,000$ et la raison $1{,}1$ pour A et B, donc la seule association possible pour le compte sans intérêt est celle de raison $0$.",
+              "answers": [
+                {
+                  "content": "Banque A, intérêts simples",
+                  "match": "Arithmétique de raison 10 000"
+                },
+                {
+                  "content": "Banque B, intérêts composés",
+                  "match": "Géométrique de raison 1,1"
+                },
+                {
+                  "content": "Compte sans intérêt (100 000 FCFA qui ne bougent pas)",
+                  "match": "Arithmétique de raison 0"
+                }
+              ]
+            },
+            {
+              "content": "Dans la banque A (100 000 FCFA à 10 % par an en intérêts simples), quel est le capital après 20 ans ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (suite arithmétique) : Étape 1 — Identifier : $u_0 = 100\\,000$ et $r = 10\\,000$. Étape 2 — Écrire : $u_n = 100\\,000 + n \\times 10\\,000$. Étape 3 — Remplacer : $u_{20} = 100\\,000 + 20 \\times 10\\,000 = 300\\,000$. Étape 4 — Déduire : croissante. Réponse : $300\\,000$ FCFA.",
+              "answers": [
+                {
+                  "content": "300000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Dans la banque B (100 000 FCFA à 10 % par an en intérêts composés), quel est le capital après 4 ans ? On donne $1{,}1^2 = 1{,}21$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (suite géométrique) : Étape 1 — Identifier : $u_0 = 100\\,000$ et $q = 1{,}1$. Étape 2 — Écrire : $u_n = 100\\,000 \\times 1{,}1^n$. Étape 3 — Remplacer : $1{,}1^4 = 1{,}21^2 = 1{,}4641$, donc $u_4 = 100\\,000 \\times 1{,}4641 = 146\\,410$. Étape 4 — Déduire : $q > 1$, croissante. Réponse : $146\\,410$ FCFA.",
+              "answers": [
+                {
+                  "content": "146410",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Après 4 ans, le capital de la banque A est $140\\,000$ FCFA et celui de la banque B est $146\\,410$ FCFA. De combien de FCFA la banque B est-elle en avance ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : on compare deux capitaux au même rang, $A_4 = 100\\,000 + 4 \\times 10\\,000 = 140\\,000$ et $B_4 = 100\\,000 \\times 1{,}1^4 = 146\\,410$. Étape 2 — Choisir : une soustraction, la plus grande valeur moins la plus petite. Étape 3 — Écrire : écart $= B_4 - A_4$. Étape 4 — Calculer : $146\\,410 - 140\\,000 = 6\\,410$. Étape 5 — Conclure : B est en avance de $6\\,410$ FCFA.",
+              "answers": [
+                {
+                  "content": "6410",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Les deux banques donnent le même capital au rang 1 (110 000 FCFA), puis la banque B donne plus que la banque A. Explique en deux ou trois phrases pourquoi, avec le même taux de 10 %, la banque B rapporte plus.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dire que les intérêts de la banque A sont toujours calculés sur le capital de départ (10 000 FCFA par an)",
+                "Dire que, dans la banque B, les intérêts s'ajoutent au capital et rapportent à leur tour des intérêts",
+                "Donner un chiffre qui le montre (par exemple 121 000 contre 120 000 FCFA au rang 2)"
+              ],
+              "explanation": "Corrigé modèle : Dans la banque A, l'intérêt est toujours $10\\,\\%$ de $100\\,000$, soit $10\\,000$ FCFA chaque année : le capital augmente d'un montant fixe (suite arithmétique). Dans la banque B, l'intérêt de chaque année est calculé sur le capital déjà augmenté des intérêts précédents : au rang 2, $10\\,\\%$ de $110\\,000$ font $11\\,000$ FCFA, donc le capital passe à $121\\,000$ FCFA contre $120\\,000$ dans la banque A (suite géométrique de raison $1{,}1$). L'écart grandit ensuite chaque année. Barème : 1 point pour l'explication des intérêts simples, 1 point pour celle des intérêts composés, 1 point pour un chiffre qui le montre.",
+              "answers": [],
+              "starter": "Dans la banque A, les intérêts…"
+            }
+          ]
+        },
+        {
+          "title": "Les comptes de Kouassi et d'Adjoua",
+          "statement": "Partie A. Kouassi place 200 000 FCFA à 4 % par an en intérêts composés ; on note c(n) son capital au bout de n années. Partie B. Sa fille Adjoua verse chaque mois dans une caisse : 3 000 FCFA au mois 0, puis 500 FCFA de plus chaque mois, jusqu'au mois 11 compris. On donne ln 2 ≈ 0,693 et ln 1,04 ≈ 0,039.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Kouassi place $200\\,000$ FCFA à $4\\,\\%$ par an en intérêts composés. Quelle est la nature de la suite $(c_n)$ de son capital ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (problème d'épargne) : Étape 1 — Lire : capital $200\\,000$, taux $4\\,\\%$, intérêts composés. Étape 2 — Choisir : intérêts composés, suite géométrique, $c_0 = 200\\,000$ et $q = 1 + \\frac{4}{100} = 1{,}04$. Étape 3 — Écrire : $c_n = 200\\,000 \\times 1{,}04^n$. Étape 4 — Conclure : géométrique de raison $1{,}04$. « Arithmétique de raison $8\\,000$ » correspond aux intérêts simples ($4\\,\\%$ de $200\\,000$). « Raison $0{,}04$ » oublie d'ajouter $1$. « Raison $4$ » confond taux et raison.",
+              "answers": [
+                {
+                  "content": "Géométrique de raison $1{,}04$",
+                  "correct": true
+                },
+                {
+                  "content": "Arithmétique de raison $8\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $0{,}04$",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi place $200\\,000$ FCFA à $4\\,\\%$ par an en intérêts composés. Calcule son capital au bout de 2 ans. On donne $1{,}04^2 = 1{,}0816$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (terme général d'une suite géométrique) : Étape 1 — Identifier : $c_0 = 200\\,000$ et $q = 1{,}04$. Étape 2 — Écrire : $c_n = 200\\,000 \\times 1{,}04^n$. Étape 3 — Remplacer : $c_2 = 200\\,000 \\times 1{,}0816 = 216\\,320$. Étape 4 — Déduire : $q > 1$, croissante. Réponse : $216\\,320$ FCFA.",
+              "answers": [
+                {
+                  "content": "216320",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Le capital de Kouassi est $c_n = 200\\,000 \\times 1{,}04^n$. Au bout de combien d'années (nombre entier) aura-t-il au moins $400\\,000$ FCFA ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}04 \\approx 0{,}039$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : capital $200\\,000$, taux $4\\,\\%$, seuil $400\\,000$. Étape 2 — Choisir : intérêts composés, donc suite géométrique de raison $q = 1{,}04$. Étape 3 — Écrire : $c_n = 200\\,000 \\times 1{,}04^n$. Étape 4 — Calculer : on résout $200\\,000 \\times 1{,}04^n \\geq 400\\,000$, soit $1{,}04^n \\geq 2$, donc $n \\ln 1{,}04 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}039} \\approx 17{,}8$ ; on arrondit au-dessus : $n = 18$. Étape 5 — Conclure : au bout de $18$ ans ($17$ ans ne suffisent pas).",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Adjoua verse $3\\,000$ FCFA au mois 0, puis $500$ FCFA de plus chaque mois, jusqu'au mois 11. Quel est son dernier versement $u_{11}$, en FCFA ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (terme général d'une suite arithmétique) : Étape 1 — Identifier : $u_0 = 3\\,000$ et $r = 500$. Étape 2 — Écrire : $u_n = 3\\,000 + n \\times 500$. Étape 3 — Remplacer : $u_{11} = 3\\,000 + 11 \\times 500 = 3\\,000 + 5\\,500 = 8\\,500$. Étape 4 — Déduire : croissante. Réponse : $8\\,500$ FCFA.",
+              "answers": [
+                {
+                  "content": "8500",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Adjoua verse $3\\,000$ FCFA au mois 0, puis $500$ FCFA de plus chaque mois, jusqu'au mois 11 compris (le versement du mois 11 est $8\\,500$ FCFA). Quel est le total versé ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode (somme de termes consécutifs) : Étape 1 — Compter : de $u_0$ à $u_{11}$, il y a $12$ termes. Étape 2 — Identifier : suite arithmétique, premier terme $3\\,000$, dernier terme $8\\,500$. Étape 3 — Appliquer : $S = 12 \\times \\dfrac{3\\,000 + 8\\,500}{2}$. Étape 4 — Calculer : $S = 12 \\times 5\\,750 = 69\\,000$ FCFA.",
+              "answers": [
+                {
+                  "content": "69000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Kouassi dit : « Mon capital de $200\\,000$ FCFA augmente de $8\\,000$ FCFA chaque année. » Son capital est $c_n = 200\\,000 \\times 1{,}04^n$. Calcule $c_1$ et $c_2$ (on donne $1{,}04^2 = 1{,}0816$) et dis si Kouassi a raison.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Calculer c_1 = 208 000 FCFA",
+                "Calculer c_2 = 216 320 FCFA",
+                "Comparer les augmentations : 8 000 FCFA la première année, 8 320 FCFA la deuxième",
+                "Conclure que Kouassi se trompe et nommer la cause : les intérêts composés rapportent des intérêts"
+              ],
+              "explanation": "Corrigé modèle : $c_1 = 200\\,000 \\times 1{,}04 = 208\\,000$ FCFA. $c_2 = 200\\,000 \\times 1{,}0816 = 216\\,320$ FCFA. La première année, le capital augmente de $208\\,000 - 200\\,000 = 8\\,000$ FCFA. La deuxième année, il augmente de $216\\,320 - 208\\,000 = 8\\,320$ FCFA, pas de $8\\,000$. Kouassi a donc raison la première année seulement : à intérêts composés, la suite est géométrique et non arithmétique, car les intérêts de la deuxième année portent aussi sur ceux de la première. Barème : 1 point pour $c_1$, 1 point pour $c_2$, 1 point pour la comparaison des deux augmentations, 1 point pour la conclusion justifiée.",
+              "answers": [],
+              "starter": "Au bout de 1 an, le capital est…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

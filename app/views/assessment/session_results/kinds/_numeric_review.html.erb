@@ -2,6 +2,10 @@
 <%# Rôle : la saisie de l'élève ; avec reveal, la valeur attendue suivie de son unité, et sa marge %>
 <%# ADR  : 0091 §4.4, 0115 · UDR : 0023, 0087 §3.6, 0140 %>
 <%# locals: (question:, reveal:) -%>
+<%# Plusieurs cases (0120-questions-a-plusieurs-cases-et-indice §4) : la phrase et un verdict par case. %>
+<% if question.multi_blank? %>
+  <%= render "assessment/session_results/kinds/blanks_review", question:, reveal:, unit: question.unit %>
+<% else %>
 <% if question.response_text %>
   <p class="text-sm text-mute"><%= t("assessment.session_results.question_review.selected") %> : <strong class="text-ink"><%= question.response_text %></strong></p>
 <% end %>
@@ -12,4 +16,5 @@
       <%= t("assessment.exercises.solution.tolerance", tolerance: question.numeric_tolerance.to_s("F").delete_suffix(".0").tr(".", ",")) %>
     <% end %>
   </p>
+<% end %>
 <% end %>

@@ -1,5 +1,5 @@
 // ⚡ FRONT · catalog/revision_more_controller — « Voir plus » / « Voir moins » de la fiche de révision, sans requête
-// Rôle : masque au démarrage ce que le serveur a marqué `rest` (la suite après 150 mots) et déplie / replie sur place ; sans JavaScript, tout reste visible
+// Rôle : masque au démarrage ce que le serveur a marqué `rest` (la suite après 50 mots) et déplie / replie sur place ; sans JavaScript, tout reste visible
 // ADR  : 0113 · UDR : 0139 §3.3 (état, focus, annonce) · le serveur ne pose jamais `hidden` sur le texte
 import { Controller } from "@hotwired/stimulus"
 

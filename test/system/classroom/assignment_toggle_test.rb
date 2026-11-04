@@ -28,7 +28,9 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   end
 
   def toggle(type, key) = "#assignment_#{@classroom.public_id}_#{type}_#{key}"
-  def lesson_path = classroom_course_path(@classroom.public_id, @course.slug)
+  # sujet-avant-de-commencer, Lot B : la page de la leçon dans la classe ne porte que des cases ; les bascules de la classe se manient sur
+  # la page de la feuille dans cette classe.
+  def lesson_path = classroom_course_sheet_path(@classroom.public_id, @course.slug, "notion-#{@meiose.slug}")
   def withdraw_button = "button[aria-label^='Retirer']"
 
   def sign_in_teacher
@@ -39,21 +41,18 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   # UDR-0139 §3.4 : la page de la leçon dans la classe liste « Prépare interros », avec les bascules de cette classe seulement.
   test "the course page of the classroom lists the exercises, each with the toggle of this classroom only" do
     sign_in_teacher
-    visit classroom_course_path(@classroom.public_id, @course.slug)
-    assert_selector "h1", text: "Génétique"
-    assert_selector "#prepare-interros li[id^=exercise-]", count: 2
+    visit lesson_path
+    assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_selector ".ps-sheet section.ps-paper-exercise[id^=sheet-exercise-]", count: 2
     assert_selector "#assignment_#{@classroom.public_id}_Exercise_#{@phases.public_id}"
     assert_no_selector "#assignment_#{@classroom.public_id}_Essential_#{@meiose.slug}"
-
-    click_on "Les phases"
-    assert_current_path exercise_path(@phases.public_id)
   end
 
   # PRD, chemin nominal A ; plan, Lot C « Done quand ».
   test "without days, « Assigner » asks the days; Monday and Thursday give « Pour jeu. 8 oct. », then one click is enough" do
     sign_in_teacher
     visit lesson_path
-    assert_selector "#prepare-interros li[id^=exercise-]", count: 2
+    assert_selector ".ps-sheet section.ps-paper-exercise[id^=sheet-exercise-]", count: 2
 
     assert_no_page_reload do
       within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }

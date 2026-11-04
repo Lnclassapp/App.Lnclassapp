@@ -512,6 +512,75 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Le triangle $ABC$ est rectangle en $A$. $H$ est le pied de la hauteur issue de $A$. On donne $BH = 9$ cm et $HC = 16$ cm.",
+            "questions": [
+              {
+                "content": "Quelle égalité permet de calculer $AB$ ?",
+                "question_type": "select",
+                "hint": "$AB$ est un côté de l'angle droit : son carré est égal à sa projection sur l'hypoténuse fois l'hypoténuse entière.",
+                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$ et $H$ est sur $[BC]$. Étape 2 — Choisir : la relation qui contient $AB$ est $AB^2 = BH \\times BC$. Le second facteur est l'hypoténuse entière $BC$, pas $HC$ : l'égalité avec $HC$ est l'erreur de la fiche, et $AB = BH \\times BC$ oublie le carré.",
+                "answers": [
+                  {
+                    "content": "$AB^2 = BH \\times BC$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$AB^2 = BH \\times HC$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$AB^2 = CH \\times CB$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$AB = BH \\times BC$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $BC$ et $AH$. $BC$ (cm) = ___   $AH$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "$H$ est sur $[BC]$, donc $BC = BH + HC$. Pour $AH$, cherche la relation qui contient $HB$ et $HC$.",
+                "explanation": "Étape 1 — Repérer : $H$ est sur l'hypoténuse $[BC]$, donc $BC = BH + HC$. Étape 2 — Choisir : pour $AH$, la relation est $AH^2 = HB \\times HC$. Étape 3 — Remplacer : $BC = 9 + 16 = 25$ et $AH^2 = 9 \\times 16$. Étape 4 — Calculer : $BC = 25$ cm, $AH^2 = 144$ donc $AH = \\sqrt{144} = 12$ cm.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $AB$ et $AC$. $AB$ (cm) = ___   $AC$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Utilise $BC = 25$ cm. Pour chaque côté de l'angle droit : carré du côté = sa projection × $BC$.",
+                "explanation": "Étape 1 — Repérer : angle droit en $A$, hypoténuse $BC = 25$ cm. Étape 2 — Choisir : $AB^2 = BH \\times BC$ et $AC^2 = CH \\times CB$. Étape 3 — Remplacer : $AB^2 = 9 \\times 25$ et $AC^2 = 16 \\times 25$. Étape 4 — Calculer : $AB^2 = 225$ donc $AB = 15$ cm ; $AC^2 = 400$ donc $AC = 20$ cm. Contrôle avec Pythagore : $15^2 + 20^2 = 625 = 25^2$.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "20",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -673,6 +742,89 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Le triangle $ABC$ est rectangle en $A$, avec $BC = 25$ cm, $\\sin \\widehat{B} = 0{,}28$ et $\\cos \\widehat{B} = 0{,}96$.",
+            "questions": [
+              {
+                "content": "Quel rapport permet de calculer $AC$ à partir de $BC$ ?",
+                "question_type": "select",
+                "hint": "Par rapport à $\\widehat{B}$, $[AC]$ est en face de l'angle et $[BC]$ est l'hypoténuse.",
+                "explanation": "Étape 1 — Repérer : l'angle connu est $\\widehat{B}$ ; $[BC]$ est l'hypoténuse et $[AC]$ est le côté opposé à $\\widehat{B}$. Étape 2 — Choisir : opposé et hypoténuse, donc le sinus : $\\sin \\widehat{B} = \\dfrac{AC}{BC}$. Le cosinus relie l'adjacent $AB$ à l'hypoténuse, et la tangente relie l'opposé à l'adjacent.",
+                "answers": [
+                  {
+                    "content": "$\\sin \\widehat{B} = \\dfrac{AC}{BC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\cos \\widehat{B} = \\dfrac{AC}{BC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\tan \\widehat{B} = \\dfrac{AC}{BC}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $AC$ et $AB$. $AC$ (cm) = ___   $AB$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Pour $AC$ utilise le sinus, pour $AB$ le cosinus : dans les deux cas, multiplie la valeur du rapport par $BC$.",
+                "explanation": "Étape 1 — Repérer : $[BC]$ hypoténuse, $[AC]$ opposé, $[AB]$ adjacent à $\\widehat{B}$. Étape 2 — Choisir : sinus pour $AC$, cosinus pour $AB$. Étape 3 — Écrire : $\\sin \\widehat{B} = \\dfrac{AC}{BC}$ et $\\cos \\widehat{B} = \\dfrac{AB}{BC}$. Étape 4 — Remplacer : $0{,}28 = \\dfrac{AC}{25}$ et $0{,}96 = \\dfrac{AB}{25}$. Étape 5 — Calculer : $AC = 0{,}28 \\times 25 = 7$ cm et $AB = 0{,}96 \\times 25 = 24$ cm.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\tan \\widehat{B}$ est le quotient de ___ par ___.",
+                "question_type": "select",
+                "hint": "La tangente ne fait pas intervenir l'hypoténuse.",
+                "explanation": "Étape 1 — Repérer : par rapport à $\\widehat{B}$, on distingue l'hypoténuse, l'adjacent et l'opposé. Étape 2 — Choisir et écrire : la tangente relie le côté opposé au côté adjacent, donc $\\tan \\widehat{B} = \\dfrac{\\text{opposé}}{\\text{adjacent}}$. Ici, $\\tan \\widehat{B} = \\dfrac{AC}{AB} = \\dfrac{7}{24}$.",
+                "answers": [
+                  {
+                    "content": "le côté opposé",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le côté adjacent",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'hypoténuse",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le côté adjacent",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le côté opposé",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "l'hypoténuse",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -810,6 +962,67 @@
                   },
                   {
                     "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "$x$ est un angle aigu et $\\sin x = 0{,}28$.",
+            "questions": [
+              {
+                "content": "Quelle relation permet de calculer $\\cos x$ ?",
+                "question_type": "select",
+                "hint": "Les deux rapports sont élevés au carré.",
+                "explanation": "Étape 1 — Repérer : on connaît $\\sin x$ et on cherche $\\cos x$. Étape 2 — Écrire : la relation est $\\cos^2 x + \\sin^2 x = 1$. L'égalité $\\cos x + \\sin x = 1$ est l'erreur de la fiche (carrés oubliés).",
+                "answers": [
+                  {
+                    "content": "$\\cos^2 x + \\sin^2 x = 1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\cos x + \\sin x = 1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\cos x = 1 - \\sin x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\tan x = \\sin x \\times \\cos x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\cos^2 x$ puis $\\cos x$. $\\cos^2 x$ = ___   $\\cos x$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0.0001,
+                "hint": "Isole $\\cos^2 x$ : $1$ moins le carré de $0{,}28$. Puis prends la racine carrée positive.",
+                "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}28$ et on cherche $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + 0{,}28^2 = 1$, soit $\\cos^2 x + 0{,}0784 = 1$. Étape 4 — Isoler : $\\cos^2 x = 1 - 0{,}0784 = 0{,}9216$. Étape 5 — Racine carrée positive (angle aigu) : $\\cos x = \\sqrt{0{,}9216} = 0{,}96$.",
+                "answers": [
+                  {
+                    "content": "0.9216",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0.96",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\tan x$, arrondi au centième. $\\tan x$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0.005,
+                "hint": "Utilise $\\tan x = \\dfrac{\\sin x}{\\cos x}$ avec $\\cos x = 0{,}96$.",
+                "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}28$, on a trouvé $\\cos x = 0{,}96$, et on cherche $\\tan x$. Étape 5 — Calculer : $\\tan x = \\dfrac{\\sin x}{\\cos x} = \\dfrac{0{,}28}{0{,}96} = \\dfrac{7}{24} \\approx 0{,}29$ au centième.",
+                "answers": [
+                  {
+                    "content": "0.29",
                     "correct": true
                   }
                 ]
@@ -974,6 +1187,79 @@
                   {
                     "content": "Faux",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Le triangle $ABC$ est rectangle en $A$, avec $\\widehat{B} = 60°$ et $BC = 20$ cm.",
+            "questions": [
+              {
+                "content": "Quel rapport permet de calculer $AB$ ?",
+                "question_type": "select",
+                "hint": "$[AB]$ touche l'angle $\\widehat{B}$ sans être l'hypoténuse.",
+                "explanation": "Étape 1 — Repérer : l'angle est $60°$, $[BC]$ est l'hypoténuse connue et $[AB]$ est le côté adjacent cherché. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus : $\\cos 60° = \\dfrac{AB}{BC}$. Le sinus relierait l'opposé $AC$ à l'hypoténuse.",
+                "answers": [
+                  {
+                    "content": "$\\cos 60° = \\dfrac{AB}{BC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\sin 60° = \\dfrac{AB}{BC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\tan 60° = \\dfrac{AB}{BC}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $AB$ et $AC$, arrondis au dixième. $AB$ (cm) = ___   $AC$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.05,
+                "hint": "Utilise $\\cos 60° = \\dfrac{1}{2}$ et $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$. Pour $AC$, donne l'arrondi au dixième.",
+                "explanation": "Étape 1 — Repérer : angle $60°$, hypoténuse $BC = 20$ cm connue ; on cherche $AB$ (adjacent) et $AC$ (opposé). Étape 2 — Choisir : cosinus pour $AB$, sinus pour $AC$. Étape 3 — Remplacer : $\\cos 60° = \\dfrac{1}{2}$ et $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$. Étape 4 — Calculer : $AB = 20 \\times \\dfrac{1}{2} = 10$ cm et $AC = 20 \\times \\dfrac{\\sqrt{3}}{2} = 10\\sqrt{3} \\approx 17{,}3$ cm.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "17.3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 45°$ et $AB = 9$ cm. Calcule $AC$.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Quel rapport relie l'opposé et l'adjacent ? Rappelle-toi la valeur de $\\tan 45°$.",
+                "explanation": "Étape 1 — Repérer : angle $45°$, $[AB]$ adjacent connu, $[AC]$ opposé cherché. Étape 2 — Choisir : la tangente, $\\tan 45° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $\\tan 45° = 1$, donc $1 = \\dfrac{AC}{9}$. Étape 4 — Calculer : $AC = 9 \\times 1 = 9$ cm.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $AC = 7$ cm. Calcule $BC$.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "$[AC]$ est opposé à l'angle de $30°$ et $[BC]$ est l'hypoténuse : quel rapport ?",
+                "explanation": "Étape 1 — Repérer : angle $30°$, $[AC]$ opposé connu, $[BC]$ hypoténuse cherchée. Étape 2 — Choisir : le sinus, $\\sin 30° = \\dfrac{AC}{BC}$. Étape 3 — Remplacer : $\\dfrac{1}{2} = \\dfrac{7}{BC}$. Étape 4 — Calculer : $BC = 7 \\times 2 = 14$ cm. Contrôle : l'hypoténuse est le plus grand côté, $14 > 7$.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
                   }
                 ]
               }

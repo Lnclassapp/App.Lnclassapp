@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#111"/><text x="50" y="62" font-size="30" font-family="Georgia,serif" font-weight="700" fill="#fff" text-anchor="middle">PI</text></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#d6d6d6;-webkit-font-smoothing:antialiased}a{color:#000}a:hover{color:#333}html{scroll-behavior:smooth}input:focus{outline:2px solid #000;outline-offset:1px}</style>
+<script src="signalement-erreurs/lnclass-signalement.js" data-email="contact@lnclass.com" data-fiche="Prépare interros — La propriété de Thalès (Maths 3e)" data-zone="main"></script>
+</helmet>
+<main style="display:flex;flex-direction:column;align-items:center;gap:clamp(0px,(100vw - 700px) * 100,32px);padding:clamp(0px,(100vw - 700px) * 100,32px) clamp(0px,(100vw - 700px) * 100,12px) 64px;font-family:'Source Serif 4','DejaVu Serif',Georgia,serif;color:#000;font-size:16px;line-height:1.5">
+<sc-for list="{{ notions }}" as="no" hint-placeholder-count="1">
+<div data-screen-label="Notion {{ no.num }}" id="{{ no.id }}" style="width:100%;max-width:880px;box-sizing:border-box;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.15);padding:clamp(20px,4vw,44px) clamp(16px,5vw,52px) 48px;display:flex;flex-direction:column;gap:16px">
+<div style="border:2px solid #000;padding:12px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px 16px">
+<b style="font-size:18px">PRÉPARE INTERROS</b>
+<b style="font-size:18px;text-align:right">MATHÉMATIQUES</b>
+<span>Lnclass · La propriété de Thalès</span>
+<span style="text-align:right">Classe de 3<sup>e</sup> · Notion {{ no.num }} / 4</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+<b style="font-size:22px;text-align:center;text-transform:uppercase;text-wrap:balance">{{ no.title }}</b>
+<i style="font-size:15px">{{ no.score }}</i>
+</div>
+<div style="border:1px solid #000;background:#f5f5f5;padding:8px 12px;font-size:15px;text-wrap:pretty"><b>À retenir :</b> {{ no.rappel }}</div>
+<sc-for list="{{ no.exs }}" as="ex" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:10px;border:1px solid #999;padding:12px 14px">
+<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start">
+<div style="flex:1 1 320px;display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;gap:10px"><b>Exercice {{ ex.n }}</b><span style="font-size:14px;font-weight:700">{{ ex.status }}</span></div>
+<p style="margin:0;text-wrap:pretty">{{ ex.enonce }}</p>
+</div>
+<sc-if value="{{ ex.figTri }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 140" width="190" height="133" style="max-width:100%;height:auto;flex:none"><polygon points="100,14 20,126 186,126" fill="none" stroke="#000" stroke-width="1.5"></polygon><line x1="64" y1="64.4" x2="140" y2="64.4" stroke="#000" stroke-width="1.5"></line><g font-family="Georgia,serif" font-style="italic" font-size="15" fill="#000"><text x="95" y="10">A</text><text x="6" y="136">B</text><text x="188" y="136">C</text><text x="48" y="66">M</text><text x="144" y="66">N</text></g></svg></sc-if>
+<sc-if value="{{ ex.figPap }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 160" width="190" height="152" style="max-width:100%;height:auto;flex:none"><line x1="30" y1="22" x2="176" y2="142" stroke="#000" stroke-width="1.5"></line><line x1="80" y1="22" x2="114" y2="142" stroke="#000" stroke-width="1.5"></line><line x1="30" y1="22" x2="80" y2="22" stroke="#000" stroke-width="1.5"></line><line x1="114" y1="142" x2="176" y2="142" stroke="#000" stroke-width="1.5"></line><g font-family="Georgia,serif" font-style="italic" font-size="15" fill="#000"><text x="16" y="18">B</text><text x="84" y="18">C</text><text x="104" y="78">A</text><text x="178" y="156">M</text><text x="100" y="156">N</text></g></svg></sc-if>
+</div>
+<sc-for list="{{ ex.qs }}" as="q" hint-placeholder-count="1">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px">
+<span style="flex:1 1 220px;display:flex;gap:8px;align-items:baseline;text-wrap:pretty"><span style="flex:none;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid #000;padding:0 5px;line-height:1.6">{{ q.tag }}</span><span>{{ q.label }}</span></span>
+<sc-if value="{{ q.isVf }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px"><sc-for list="{{ q.choices }}" as="c" hint-placeholder-count="2"><button onClick="{{ c.pick }}" style="min-width:72px;min-height:38px;padding:4px 12px;border:1px solid #000;border-width:{{ c.bw }};border-radius:0;background:{{ c.bg }};color:#000;font:inherit;font-size:15px;cursor:pointer">{{ c.label }}</button></sc-for></div></sc-if>
+<sc-if value="{{ q.isTxt }}" hint-placeholder-val="{{ false }}"><input type="text" value="{{ q.value }}" onChange="{{ q.onChange }}" onKeyDown="{{ q.onKey }}" placeholder="…" style="width:150px;font:inherit;padding:3px 8px;border:1px solid #000;border-width:{{ q.bw }};border-radius:0;background:#fff;text-align:center"></sc-if>
+<sc-if value="{{ q.isNum }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:6px"><span>{{ q.prefix }}</span><input type="text" inputmode="decimal" value="{{ q.value }}" onChange="{{ q.onChange }}" onKeyDown="{{ q.onKey }}" style="width:84px;font:inherit;padding:3px 8px;border:1px solid {{ q.bd }};border-width:{{ q.bw }};border-radius:0;background:#fff;text-align:center"><span>{{ q.unit }}</span></div></sc-if>
+</div>
+<sc-if value="{{ q.isMcq }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ q.choices }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.pick }}" style="display:flex;align-items:flex-start;gap:10px;text-align:left;min-height:40px;padding:6px 12px 6px 8px;border:1px solid #000;border-width:{{ c.bw }};border-radius:0;background:{{ c.bg }};color:#000;font:inherit;font-size:15.5px;cursor:pointer"><b style="flex:none;width:22px">{{ c.letter }}.</b><span style="text-wrap:pretty">{{ c.label }}</span></button></sc-for>
+</div></sc-if>
+<sc-if value="{{ q.show }}" hint-placeholder-val="{{ false }}"><span style="font-size:14.5px;font-weight:700;font-style:{{ q.fs }}">{{ q.verdict }}</span></sc-if>
+</div>
+</sc-for>
+<sc-if value="{{ ex.showInd }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #000;padding:8px 12px;font-size:15px;text-wrap:pretty"><b>Indice :</b> {{ ex.indice }}</div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #999;padding-top:10px;margin-top:4px">
+<sc-if value="{{ ex.notChecked }}" hint-placeholder-val="{{ true }}"><button onClick="{{ ex.check }}" style="min-height:44px;padding:6px 22px;border:1px solid #000;border-radius:0;background:#000;color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#333">Vérifier ma réponse</button></sc-if>
+<sc-if value="{{ ex.notChecked }}" hint-placeholder-val="{{ true }}"><button onClick="{{ ex.toggleInd }}" style="min-height:44px;padding:6px 14px;border:1px solid #000;border-radius:0;background:#fff;color:#000;font:inherit;font-size:15px;cursor:pointer" style-hover="background:#f2f2f2">{{ ex.indLabel }}</button></sc-if>
+<sc-if value="{{ ex.checked }}" hint-placeholder-val="{{ false }}"><button onClick="{{ ex.retry }}" style="min-height:44px;padding:6px 16px;border:1px solid #000;border-radius:0;background:#fff;color:#000;font:inherit;font-size:15px;cursor:pointer" style-hover="background:#f2f2f2">Refaire l'exercice</button></sc-if>
+</div>
+<sc-if value="{{ ex.checked }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:10px;border:2px solid #000;padding:12px 14px">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;border-bottom:1px solid #000;padding-bottom:8px">
+<b style="font-size:22px">Ta note : {{ ex.note }} / 10</b>
+<b style="font-size:17px;font-style:italic">Mention : {{ ex.mention }}</b>
+<span style="flex-basis:100%;font-size:14px">{{ ex.detail }}</span>
+</div>
+<b style="font-size:16px;text-transform:uppercase;letter-spacing:.04em">Correction</b>
+<sc-for list="{{ ex.cor }}" as="r" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:2px;padding:6px 0;border-bottom:1px dotted #999;font-size:15px;text-wrap:pretty">
+<div style="display:flex;flex-wrap:wrap;gap:4px 10px"><b>{{ r.letter }}.</b><b>{{ r.verdict }}</b><span>Bonne réponse : <b>{{ r.good }}</b></span></div>
+<span><i>Explication :</i> {{ r.expl }}</span>
+</div></sc-for>
+</div></sc-if>
+</div>
+</sc-for>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1.5px solid #000;padding-top:10px;font-size:14px">
+<span>Lnclass · Prépare interros · Notion {{ no.num }}</span>
+<button onClick="{{ no.reset }}" style="border:none;background:none;padding:0;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;color:#000">Recommencer cette notion</button>
+</div>
+</div>
+</sc-for>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;notion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;toutes&quot;,&quot;n1&quot;,&quot;n2&quot;,&quot;n3&quot;,&quot;n4&quot;],&quot;default&quot;:&quot;toutes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Notion&quot;}}">
+const Q=(t,label,o)=>({t,label,...o});
+const N=[
+ {id:'n1',title:'La propriété de Thalès',rappel:'Dans un triangle ABC, si M ∈ (AB), N ∈ (AC) et (MN) // (BC), alors AM/AB = AN/AC = MN/BC. Les côtés du petit triangle AMN sont au numérateur, ceux du grand triangle ABC au dénominateur.',exs:[
+  {fig:'tri',enonce:'Dans le triangle ABC, M est un point de [AB], N un point de [AC], et les droites (MN) et (BC) sont parallèles.',qs:[
+   Q('mcq','a. Quelle égalité est vraie ?',{opts:['AM/AB = AN/AC = MN/BC','AM/MB = AN/NC = MN/BC','AB/AM = AN/AC = BC/MN'],ok:0}),
+   Q('txt','b. Complète : AM/AB = AN/…',{acc:['AC','CA']}),
+   Q('txt','c. Complète : AN/AC = …/BC',{acc:['MN','NM']}),
+   Q('vf','d. Le triangle AMN est une réduction du triangle ABC.',{ok:0}),
+   Q('vf','e. AM/AB = MB/AB.',{ok:1})],
+   indice:'Écris d\'abord les côtés du petit triangle AMN, puis les côtés correspondants du grand triangle ABC.',
+   correction:'a. On écrit chaque côté du petit triangle AMN sur le côté correspondant du grand triangle ABC : AM/AB = AN/AC = MN/BC. b. AN et AC sont sur la même droite (AC) : le côté AN du petit triangle correspond au côté AC du grand. c. MN est parallèle à BC : ces deux côtés se correspondent, donc AN/AC = MN/BC. d. Les côtés de AMN sont proportionnels à ceux de ABC et plus petits : AMN est une réduction de ABC. e. MB est la partie de [AB] qui reste après M ; en général AM et MB sont différents, donc AM/AB ≠ MB/AB.'},
+  {fig:null,enonce:'Réponds aux questions sur l\'énoncé de la propriété de Thalès.',qs:[
+   Q('mcq','a. Pour appliquer la propriété de Thalès dans le triangle ABC, il faut savoir que…',{opts:['le triangle ABC est rectangle.','les droites (MN) et (BC) sont parallèles.','AM = AN.'],ok:1}),
+   Q('vf','b. La propriété de Thalès sert à calculer des longueurs.',{ok:0}),
+   Q('vf','c. La propriété de Thalès sert à prouver que deux droites sont parallèles.',{ok:1}),
+   Q('txt','d. Complète avec un mot : « Si (MN) et (BC) sont …, alors les rapports sont égaux. »',{acc:['parallèles','parallele']})],
+   indice:'Relis l\'énoncé : « Si … , alors les rapports sont égaux ». Ce qui suit « si » est la condition.',
+   correction:'a. La propriété de Thalès commence par « Si (MN) // (BC) » : le parallélisme est la condition indispensable. b. Quand on sait que les droites sont parallèles, l\'égalité des rapports permet de calculer une longueur inconnue. c. Pour prouver un parallélisme, on utilise la réciproque, pas la propriété directe. d. La condition de la propriété est que les droites (MN) et (BC) soient parallèles.'},
+  {fig:'pap',enonce:'Les droites (BM) et (CN) sont sécantes en A et les droites (BC) et (MN) sont parallèles : c\'est la configuration « papillon ».',qs:[
+   Q('mcq','a. Quelle égalité est vraie ?',{opts:['AM/AC = AN/AB = MN/BC','AM/AB = AN/AC = MN/BC','AB/AN = AC/AM = BC/MN'],ok:1}),
+   Q('vf','b. Dans cette configuration, le point A est entre B et M.',{ok:0}),
+   Q('txt','c. Complète : AB/AM = AC/…',{acc:['AN','NA']}),
+   Q('num','d. On sait que AM/AB = 2,5 et BC = 4 cm. Calcule MN.',{prefix:'MN =',unit:'cm',ans:10})],
+   indice:'M est sur la droite (AB) et N sur la droite (AC). Associe chaque point à la bonne droite.',
+   correction:'a. M est sur la droite (AB) et N sur la droite (AC), donc on écrit AM/AB = AN/AC = MN/BC, comme dans un triangle. b. Dans un papillon, les droites se croisent en A : A se trouve entre B et M, et aussi entre C et N. c. On inverse l\'égalité AM/AB = AN/AC : AB/AM = AC/AN. d. MN/BC = AM/AB = 2,5, donc MN = 2,5 × BC = 2,5 × 4 = 10 cm.'}
+ ]},
+ {id:'n2',title:'Calculer une longueur avec Thalès',rappel:'On écrit l\'égalité des rapports, on remplace par les longueurs connues, puis on calcule la longueur cherchée par un produit en croix.',exs:[
+  {fig:'tri',enonce:'L\'unité est le centimètre. M ∈ [AB], N ∈ [AC] et (MN) // (BC). On donne AM = 3, AB = 5, AC = 8 et BC = 10.',qs:[
+   Q('num','a. Complète l\'égalité : 3/5 = AN/…',{prefix:'3/5 = AN /',unit:'',ans:8}),
+   Q('mcq','b. Le bon calcul de AN est…',{opts:['AN = 8 × 3 ÷ 5','AN = 8 × 5 ÷ 3','AN = 3 × 5 ÷ 8'],ok:0}),
+   Q('num','c. Calcule AN.',{prefix:'AN =',unit:'cm',ans:4.8}),
+   Q('num','d. Calcule MN.',{prefix:'MN =',unit:'cm',ans:6}),
+   Q('vf','e. Le coefficient de réduction est 0,6.',{ok:0})],
+   indice:'AM/AB = AN/AC = MN/BC, donc 3/5 = AN/8 = MN/10.',
+   correction:'a. On remplace dans AM/AB = AN/AC : 3/5 = AN/8, car AC = 8. b. Avec le produit en croix sur 3/5 = AN/8, on obtient AN = 8 × 3 ÷ 5. c. AN = 8 × 3 ÷ 5 = 24 ÷ 5 = 4,8 cm. d. MN/BC = 3/5, donc MN = 10 × 3 ÷ 5 = 6 cm. e. Le coefficient est AM/AB = 3/5 = 0,6 : chaque longueur de AMN vaut 0,6 fois celle de ABC.'},
+  {fig:'pap',enonce:'L\'unité est le centimètre. Les droites (BM) et (CN) sont sécantes en A et (BC) // (MN). On donne AB = 4, AC = 6, BC = 5 et AM = 10.',qs:[
+   Q('mcq','a. Le triangle AMN est… du triangle ABC.',{opts:['une réduction','un agrandissement','une copie identique'],ok:1}),
+   Q('num','b. Calcule le coefficient AM/AB.',{prefix:'AM/AB =',unit:'',ans:2.5}),
+   Q('num','c. Calcule AN.',{prefix:'AN =',unit:'cm',ans:15}),
+   Q('num','d. Calcule MN.',{prefix:'MN =',unit:'cm',ans:12.5}),
+   Q('vf','e. AN est plus grand que AC.',{ok:0})],
+   indice:'Le coefficient AM/AB est plus grand que 1 : toutes les longueurs de AMN sont multipliées par ce nombre.',
+   correction:'a. AM = 10 est plus grand que AB = 4 : le triangle AMN est plus grand que ABC, c\'est un agrandissement. b. AM/AB = 10 ÷ 4 = 2,5. c. AN/AC = 2,5, donc AN = 6 × 2,5 = 15 cm. d. MN/BC = 2,5, donc MN = 5 × 2,5 = 12,5 cm. e. AN = 15 cm et AC = 6 cm : AN est bien plus grand, ce qui est normal pour un agrandissement.'},
+  {fig:'tri',enonce:'L\'unité est le centimètre. M ∈ [AB], N ∈ [AC] et (MN) // (BC). On donne AN = 2, AC = 7 et MN = 3.',qs:[
+   Q('mcq','a. Pour calculer BC, quels rapports utilises-tu ?',{opts:['AN/AC et MN/BC','AM/AB et AN/AC','AM/AB et MN/BC'],ok:0}),
+   Q('num','b. Complète : BC = 3 × … ÷ 2',{prefix:'BC = 3 ×',unit:'÷ 2',ans:7}),
+   Q('num','c. Calcule BC.',{prefix:'BC =',unit:'cm',ans:10.5}),
+   Q('vf','d. Avec ces données, on peut calculer AM.',{ok:1})],
+   indice:'Choisis les rapports qui contiennent des longueurs connues et la longueur cherchée.',
+   correction:'a. On connaît AN, AC et MN, et on cherche BC : les rapports AN/AC et MN/BC contiennent ces quatre longueurs. b. Avec 2/7 = 3/BC, le produit en croix donne BC = 3 × 7 ÷ 2. c. BC = 3 × 7 ÷ 2 = 21 ÷ 2 = 10,5 cm. d. Pour calculer AM, il faudrait connaître AB, qui n\'est pas donnée.'}
+ ]},
+ {id:'n3',title:'La réciproque de Thalès',rappel:'Si les points A, M, B et A, N, C sont alignés dans le même ordre et si AM/AB = AN/AC, alors (MN) // (BC). Si les rapports sont différents, la contraposée prouve que les droites ne sont pas parallèles.',exs:[
+  {fig:'tri',enonce:'Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 2,4 ; AB = 6 ; AN = 3 et AC = 7,5.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:0.4}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:0.4}),
+   Q('vf','c. Les deux rapports sont égaux.',{ok:0}),
+   Q('mcq','d. Que peut-on conclure ?',{opts:['(MN) et (BC) sont parallèles.','(MN) et (BC) ne sont pas parallèles.','On ne peut rien conclure.'],ok:0}),
+   Q('txt','e. Complète : « D\'après la … de la propriété de Thalès, (MN) // (BC). »',{acc:['réciproque']})],
+   indice:'Compare les deux rapports, puis vérifie l\'ordre des points.',
+   correction:'a. AM/AB = 2,4 ÷ 6 = 0,4. b. AN/AC = 3 ÷ 7,5 = 0,4. c. Les deux rapports valent 0,4 : ils sont égaux. d. Les rapports sont égaux et les points sont alignés dans le même ordre : les deux conditions de la réciproque sont remplies, donc (MN) // (BC). e. On prouve un parallélisme à partir de rapports égaux : c\'est la réciproque de la propriété de Thalès.'},
+  {fig:'tri',enonce:'Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 3, AB = 8, AN = 4 et AC = 10.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:0.375}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:0.4}),
+   Q('mcq','c. Que peut-on conclure ?',{opts:['(MN) et (BC) sont parallèles.','(MN) et (BC) ne sont pas parallèles.','On ne peut rien conclure.'],ok:1}),
+   Q('txt','d. Complète : « On utilise la … de la propriété de Thalès. »',{acc:['contraposée']})],
+   indice:'Les deux rapports sont-ils égaux ?',
+   correction:'a. AM/AB = 3 ÷ 8 = 0,375. b. AN/AC = 4 ÷ 10 = 0,4. c. 0,375 ≠ 0,4 : les rapports sont différents, donc les droites ne peuvent pas être parallèles. d. Pour prouver que deux droites ne sont pas parallèles avec des rapports différents, on utilise la contraposée.'},
+  {fig:null,enonce:'On étudie plusieurs situations avec des points A, M, B et A, N, C alignés.',qs:[
+   Q('mcq','a. AM/AB = AN/AC, mais les points N, A, C sont alignés dans cet ordre. Peut-on conclure que (MN) // (BC) ?',{opts:['Oui, car les rapports sont égaux.','Non, car les points ne sont pas dans le même ordre.','Oui, mais seulement si MN = BC.'],ok:1}),
+   Q('vf','b. Pour appliquer la réciproque, il suffit que AM/AB = AN/AC.',{ok:1}),
+   Q('vf','c. Si AM/AB ≠ AN/AC, alors (MN) et (BC) ne sont pas parallèles.',{ok:0}),
+   Q('mcq','d. AM/AB = 0,5 et AN/AC = 0,50, points dans le même ordre. Conclusion ?',{opts:['(MN) // (BC)','(MN) et (BC) sont sécantes','On ne peut rien dire'],ok:0})],
+   indice:'La réciproque a deux conditions : l\'égalité des rapports ET le même ordre des points.',
+   correction:'a. La réciproque exige que les points soient dans le même ordre ; ici N n\'est pas du même côté de A que C, donc on ne peut pas conclure. b. Il faut deux conditions : l\'égalité des rapports et le même ordre des points. c. C\'est la contraposée : si les rapports sont différents, les droites ne sont pas parallèles. d. 0,5 et 0,50 sont le même nombre et l\'ordre des points est respecté : la réciproque donne (MN) // (BC).'}
+ ]},
+ {id:'n4',title:'Directe ou réciproque : bien rédiger',rappel:'Propriété de Thalès : on SAIT que les droites sont parallèles et on CALCULE une longueur. Réciproque : on CONNAÎT les longueurs et on PROUVE que les droites sont parallèles. Contraposée : on prouve qu\'elles ne le sont pas.',exs:[
+  {fig:null,enonce:'Pour chaque situation, choisis la propriété à utiliser.',qs:[
+   Q('mcq','a. On sait que (MN) // (BC) et on cherche AN.',{opts:['La propriété de Thalès','La réciproque','La contraposée'],ok:0}),
+   Q('mcq','b. On trouve AM/AB = AN/AC et on veut prouver que (MN) // (BC).',{opts:['La propriété de Thalès','La réciproque','La contraposée'],ok:1}),
+   Q('mcq','c. On trouve AM/AB ≠ AN/AC.',{opts:['La propriété de Thalès','La réciproque','La contraposée'],ok:2}),
+   Q('vf','d. On utilise la réciproque pour calculer une longueur.',{ok:1})],
+   indice:'Le parallélisme est-il une donnée ou ce que l\'on veut démontrer ?',
+   correction:'a. Le parallélisme est donné et on cherche une longueur : c\'est la propriété de Thalès. b. On veut prouver un parallélisme à partir de rapports égaux : c\'est la réciproque. c. Des rapports différents prouvent que les droites ne sont pas parallèles : c\'est la contraposée. d. La réciproque sert à prouver que deux droites sont parallèles, pas à calculer une longueur.'},
+  {fig:null,enonce:'Rachel doit démontrer que (MN) // (BC). Elle a trouvé AM/AB = AN/AC.',qs:[
+   Q('mcq','a. Quelle rédaction est correcte ?',{opts:['D\'après la propriété de Thalès, (MN) // (BC), car AM/AB = AN/AC.','Les points A, M, B et A, N, C sont alignés dans le même ordre et AM/AB = AN/AC. D\'après la réciproque de la propriété de Thalès, (MN) // (BC).','Comme (MN) // (BC), d\'après la réciproque, AM/AB = AN/AC.'],ok:1}),
+   Q('txt','b. Complète : « Les points A, M, B et A, N, C sont alignés dans le même … »',{acc:['ordre']}),
+   Q('vf','c. Dans une rédaction, on doit citer le nom de la propriété utilisée.',{ok:0}),
+   Q('vf','d. On peut commencer par écrire la conclusion, puis la justifier.',{ok:1})],
+   indice:'Une bonne rédaction donne les hypothèses, puis le nom exact de la propriété, puis la conclusion.',
+   correction:'a. La rédaction B cite les deux conditions (même ordre des points, rapports égaux), puis la réciproque, puis la conclusion. A cite la mauvaise propriété ; C part de ce qu\'il faut démontrer. b. Le même ordre des points est l\'une des deux conditions de la réciproque. c. Le correcteur doit savoir quelle propriété justifie la conclusion : il faut toujours la nommer. d. On part des données, on cite la propriété, et la conclusion vient en dernier.'},
+  {fig:'tri',enonce:'L\'unité est le centimètre. Les points A, M, B et A, N, C sont alignés dans cet ordre. AB = 6, AC = 9, AM = 2, AN = 3 et BC = 7,5.',qs:[
+   Q('num','a. Calcule AM/AB (arrondi au centième).',{prefix:'AM/AB ≈',unit:'',ans:1/3}),
+   Q('num','b. Calcule AN/AC (arrondi au centième).',{prefix:'AN/AC ≈',unit:'',ans:1/3}),
+   Q('mcq','c. Pour prouver que (MN) // (BC), on utilise…',{opts:['la propriété de Thalès','la réciproque','la contraposée'],ok:1}),
+   Q('mcq','d. Maintenant que (MN) // (BC), pour calculer MN on utilise…',{opts:['la propriété de Thalès','la réciproque','la contraposée'],ok:0}),
+   Q('num','e. Calcule MN.',{prefix:'MN =',unit:'cm',ans:2.5})],
+   indice:'Dans un même exercice, on peut d\'abord prouver le parallélisme, puis l\'utiliser pour calculer.',
+   correction:'a. AM/AB = 2 ÷ 6 = 1/3 ≈ 0,33. b. AN/AC = 3 ÷ 9 = 1/3 ≈ 0,33. c. Les rapports sont égaux et les points sont dans le même ordre : on prouve le parallélisme avec la réciproque. d. Maintenant que (MN) // (BC) est démontré, on calcule une longueur avec la propriété de Thalès. e. MN/BC = 1/3, donc MN = 7,5 ÷ 3 = 2,5 cm.'}
+ ]}
+];
+const frn=x=>String(Math.round(x*1000)/1000).replace('.',',');
+const TAG={mcq:'QCM',vf:'Vrai ou faux',txt:'Complète',num:'Calcul'};
+const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\s()[\]«»"'.…]/g,'');
+const LET=['A','B','C','D'];
+const num=v=>{const s=String(v??'').trim().replace(/\s/g,'').replace(',','.');return s===''||isNaN(+s)?null:+s;};
+const KEY='lnclass-prepare-interros-thales-v2';
+
+class Component extends DCLogic {
+  state={inp:{},chk:{},open:{}};
+  componentDidMount(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)this.setState(s);}catch(_){}}
+  componentDidUpdate(){try{localStorage.setItem(KEY,JSON.stringify(this.state));}catch(_){}}
+  qOk(k,q){const v=this.state.inp[k];if(q.t==='num')return num(v)!==null&&Math.abs(num(v)-q.ans)<0.011;if(q.t==='txt')return v!=null&&norm(v)!==''&&q.acc.some(x=>norm(x)===norm(v));return v===q.ok;}
+  set(k,v,ek){if(this.state.chk[ek])return;this.setState(s=>({inp:{...s.inp,[k]:v},chk:{...s.chk,[ek]:false}}));}
+  renderVals(){
+    const {inp,chk,open}=this.state;
+    let solved=0,count=0;
+    const want=this.props.notion??'toutes';
+    const notions=N.map((no,ni)=>{
+      let ns=0;
+      const exs=no.exs.map((ex,ei)=>{
+        const ek=no.id+'e'+ei, checked=!!chk[ek];
+        const allOk=ex.qs.every((q,qi)=>this.qOk(ek+'q'+qi,q));
+        if(checked&&allOk)ns++;
+        const qs=ex.qs.map((q,qi)=>{
+          const k=ek+'q'+qi, ok=this.qOk(k,q), v=inp[k];
+          const base={label:q.label,isNum:q.t==='num',isMcq:q.t==='mcq',isVf:q.t==='vf',isTxt:q.t==='txt',tag:TAG[q.t],show:checked,verdict:ok?'✓ Juste':(v===undefined||v==='')?'À compléter':'✗ À revoir',fs:ok?'normal':'italic'};
+          if(q.t==='num'||q.t==='txt')return {...base,prefix:q.prefix,unit:q.unit,value:v??'',bd:'#000',bw:checked?'2px':'1px',
+            onChange:e=>this.set(k,e.target.value,ek),onKey:e=>{if(e.key==='Enter')this.setState(s=>({chk:{...s.chk,[ek]:true}}));}};
+          return {...base,choices:(q.t==='vf'?['Vrai','Faux']:q.opts).map((label,ci)=>({label,letter:LET[ci],bg:v===ci?'#e8e8e8':'#fff',bw:v===ci?'2px':'1px',pick:()=>this.set(k,ci,ek)}))};
+        });
+        return {n:ei+1,enonce:ex.enonce,figTri:ex.fig==='tri',figPap:ex.fig==='pap',qs,indice:ex.indice,correction:ex.correction,
+          status:checked?(allOk?'Réussi':'À revoir'):'',
+          checked,notChecked:!checked,
+          ...(()=>{const ok=ex.qs.filter((q,qi)=>this.qOk(ek+'q'+qi,q)).length, tot=ex.qs.length, note=Math.round(ok/tot*20)/2;
+            const parts=ex.correction.split(/\s(?=[b-h]\.\s)/).map(s=>s.replace(/^[a-h]\.\s*/,''));
+            return {note:frn(note),mention:note>=9?'Excellent':note>=7?'Très bien':note>=5?'Assez bien':'À retravailler',
+              detail:ok+' bonne'+(ok>1?'s':'')+' réponse'+(ok>1?'s':'')+' sur '+tot+'.',
+              cor:ex.qs.map((q,qi)=>{const k=ek+'q'+qi,v=inp[k],good=this.qOk(k,q),empty=v===undefined||v===null||v==='';
+                const g=q.t==='mcq'?LET[q.ok]+'. '+q.opts[q.ok]:q.t==='vf'?['Vrai','Faux'][q.ok]:q.t==='txt'?q.acc[0]:frn(Math.round(q.ans*100)/100)+(q.unit&&q.unit.length<4?' '+q.unit:'');
+                return {letter:String.fromCharCode(97+qi),verdict:good?'✓ Juste':empty?'✗ Sans réponse':'✗ Faux',good:g,expl:parts[qi]||ex.correction};})};})(),
+          retry:()=>this.setState(s=>{const f=o=>Object.fromEntries(Object.entries(o).filter(([k])=>!k.startsWith(ek)));return {inp:f(s.inp),chk:f(s.chk)};}),
+          hasMsg:checked,msg:allOk?'Tout est juste, bravo !':'Certaines réponses sont à revoir.',
+          showInd:!!open[ek+'i'],showCor:!!open[ek+'c'],
+          indLabel:open[ek+'i']?'Masquer l\'indice':'Indice',corLabel:open[ek+'c']?'Masquer la correction':'Correction',
+          check:()=>this.setState(s=>({chk:{...s.chk,[ek]:true}})),
+          toggleInd:()=>this.setState(s=>({open:{...s.open,[ek+'i']:!s.open[ek+'i']}})),
+          toggleCor:()=>this.setState(s=>({open:{...s.open,[ek+'c']:!s.open[ek+'c']}}))};
+      });
+      solved+=ns;count+=no.exs.length;
+      return {reset:()=>this.setState(s=>{const f=o=>Object.fromEntries(Object.entries(o).filter(([k])=>!k.startsWith(no.id)));return {inp:f(s.inp),chk:f(s.chk),open:f(s.open)};}),id:no.id,href:'#'+no.id,num:ni+1,title:no.title,rappel:no.rappel,exs,score:ns+' / '+no.exs.length+' exercice'+(ns>1?'s':'')+' réussi'+(ns>1?'s':'')};
+    });
+    return {notions:notions.filter(x=>want==='toutes'||x.id===want),total:'Progression : '+solved+' / '+count+' exercices réussis',resetAll:()=>this.setState({inp:{},chk:{},open:{}})};
+  }
+}
+</script>
+</body>
+</html>

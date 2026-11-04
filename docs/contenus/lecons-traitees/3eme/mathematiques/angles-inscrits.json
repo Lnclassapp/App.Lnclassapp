@@ -629,6 +629,77 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Un cercle a pour centre $O$. Les points $C$, $D$ et $N$ sont sur le cercle, $[NC]$ et $[ND]$ sont des cordes.",
+            "questions": [
+              {
+                "content": "Complète : $\\widehat{COD}$ est un angle ___ et $\\widehat{CND}$ est un angle ___.",
+                "question_type": "select",
+                "hint": "Regarde où se trouve le sommet de chaque angle : c'est lui qui décide, pas les points $C$ et $D$.",
+                "explanation": "Étape 1 — Repérer le sommet : celui de $\\widehat{COD}$ est $O$, le centre ; celui de $\\widehat{CND}$ est $N$, sur le cercle. Étape 2 — Nommer : les côtés coupent le cercle en $C$ et en $D$. Étape 3 — Identifier : les deux angles interceptent l'arc $CD$. Étape 4 — Conclure : sommet au centre, c'est un angle au centre ; sommet sur le cercle avec deux côtés qui sont des cordes, c'est un angle inscrit.",
+                "answers": [
+                  {
+                    "content": "au centre",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "inscrit",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "inscrit",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "au centre",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'angle au centre qui intercepte le même arc $CD$ que l'angle inscrit $\\widehat{CND}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un angle au centre a son sommet en $O$. Étape 2 — Nommer : l'arc intercepté a pour extrémités $C$ et $D$. Étape 3 — Identifier : l'arc est l'arc $CD$. Étape 4 — Conclure : l'angle de sommet $O$ dont les côtés passent par $C$ et $D$ est $\\widehat{COD}$. Les angles $\\widehat{NCD}$ et $\\widehat{CDN}$ ont leur sommet sur le cercle : ils ne sont pas au centre.",
+                "answers": [
+                  {
+                    "content": "$\\widehat{COD}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{NCD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{CDN}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{CND}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'angle $\\widehat{CND}$ a son sommet $N$ sur le cercle et ses côtés $[NC]$ et $[ND]$ sont des cordes : c'est un angle inscrit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le sommet $N$ est sur le cercle, ce n'est pas le centre $O$. Étape 2 — Nommer : les côtés coupent le cercle en $C$ et en $D$. Étape 3 — Identifier : l'arc intercepté est l'arc $CD$. Étape 4 — Conclure : sommet sur le cercle et deux côtés qui sont des cordes, donc $\\widehat{CND}$ est un angle inscrit. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -792,6 +863,60 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Un cercle a pour centre $O$. Les points $E$, $F$ et $N$ sont sur le cercle, avec $N$ sur le grand arc $EF$.",
+            "questions": [
+              {
+                "content": "Calcule les deux angles. $\\widehat{ENF}$ (°) quand $\\widehat{EOF} = 84°$ : ___   $\\widehat{EOF}$ (°) quand $\\widehat{ENF} = 29°$ : ___",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "L'angle au centre est toujours le plus grand : divise par 2 pour trouver l'angle inscrit, double pour trouver l'angle au centre.",
+                "explanation": "Étape 1 — Vérifier : $\\widehat{EOF}$ et $\\widehat{ENF}$ interceptent le même arc $EF$. Étape 2 — Identifier : $\\widehat{EOF}$ est l'angle au centre et $\\widehat{ENF}$ l'angle inscrit. Étape 3 — Écrire : $\\widehat{EOF} = 2 \\times \\widehat{ENF}$. Étape 4 — Calculer : dans le premier cas on divise par 2, $\\widehat{ENF} = 84° \\div 2 = 42°$ ; dans le second on double, $\\widehat{EOF} = 2 \\times 29° = 58°$.",
+                "answers": [
+                  {
+                    "content": "42",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "58",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\widehat{ENF} = 55°$. Alors $\\widehat{EOF} = 27{,}5°$.",
+                "question_type": "true_false",
+                "hint": "Demande-toi lequel des deux angles est au centre : c'est le plus grand.",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $EF$. Étape 2 — Identifier : $\\widehat{ENF} = 55°$ est inscrit, $\\widehat{EOF}$ est au centre. Étape 3 — Écrire : $\\widehat{EOF} = 2 \\times \\widehat{ENF}$. Étape 4 — Calculer : $\\widehat{EOF} = 2 \\times 55° = 110°$ et non $55° \\div 2 = 27{,}5°$. L'angle au centre est le plus grand : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\widehat{EOF} = (4x)°$ et $\\widehat{ENF} = (x + 27)°$. Calcule $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris que l'angle au centre est le double de l'angle inscrit, puis résous l'équation.",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $EF$. Étape 2 — Identifier : $\\widehat{EOF} = (4x)°$ est au centre, $\\widehat{ENF} = (x + 27)°$ est inscrit. Étape 3 — Écrire : $4x = 2 \\times (x + 27)$. Étape 4 — Calculer : $4x = 2x + 54$, donc $2x = 54$ et $x = 27$. Contrôle : $\\widehat{EOF} = 108°$ et $\\widehat{ENF} = 54°$.",
+                "answers": [
+                  {
+                    "content": "27",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -942,6 +1067,85 @@
                   },
                   {
                     "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un cercle contient les points $E$, $F$, $M$, $N$ et $P$. Les points $M$ et $N$ sont sur le grand arc $EF$ et $P$ est sur le petit arc $EF$.",
+            "questions": [
+              {
+                "content": "On donne $\\widehat{EMF} = 64°$. Calcule $\\widehat{ENF}$.",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "Les deux sommets sont du même côté de la corde : que dit la propriété ?",
+                "explanation": "Étape 1 — Repérer : $\\widehat{EMF}$ et $\\widehat{ENF}$ sont inscrits, et $M$ et $N$ sont du même côté de $(EF)$ : même arc intercepté. Étape 2 — Citer : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $\\widehat{ENF} = \\widehat{EMF}$. Étape 4 — Remplacer : $\\widehat{ENF} = 64°$.",
+                "answers": [
+                  {
+                    "content": "64",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : comme $M$ et $N$ sont ___ de la corde $[EF]$, les angles $\\widehat{EMF}$ et $\\widehat{ENF}$ sont ___.",
+                "question_type": "select",
+                "hint": "Pour intercepter le même arc, les deux sommets doivent être placés de la même façon par rapport à la corde.",
+                "explanation": "Étape 1 — Repérer : $M$ et $N$ sont tous deux sur le grand arc $EF$, donc du même côté de la corde. Étape 2 — Citer : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $\\widehat{EMF} = \\widehat{ENF}$. Étape 4 — Conclure : ils sont égaux, pas doubles l'un de l'autre (cela concerne l'angle au centre).",
+                "answers": [
+                  {
+                    "content": "du même côté",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "de part et d'autre",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "égaux",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "doubles l'un de l'autre",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "supplémentaires",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\widehat{EMF} = (2x + 10)°$ et $\\widehat{ENF} = (4x - 30)°$. Calcule $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris l'égalité des deux mesures, puis résous l'équation.",
+                "explanation": "Étape 1 — Repérer : les deux angles sont inscrits et $M$, $N$ sont du même côté de $(EF)$. Étape 2 — Citer : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $2x + 10 = 4x - 30$. Étape 4 — Calculer : $40 = 2x$, donc $x = 20$. Contrôle : chaque angle vaut $50°$.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\widehat{EMF} = 70°$. Les sommets $M$ et $P$ sont de part et d'autre de $(EF)$. Calcule $\\widehat{EPF}$.",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "Les sommets ne sont pas du même côté : l'autre arc mesure $360°$ moins l'arc $EF$.",
+                "explanation": "Étape 1 — Repérer : $M$ est sur le grand arc et $P$ sur le petit arc : les angles n'interceptent pas le même arc, la propriété des angles égaux ne s'applique pas. Étape 2 — Calculer l'angle au centre : $\\widehat{EOF} = 2 \\times 70° = 140°$ pour l'arc $EF$ ; l'autre arc mesure $360° - 140° = 220°$. Étape 3 — Écrire : l'angle inscrit $\\widehat{EPF}$ vaut la moitié de l'arc qu'il intercepte. Étape 4 — Calculer : $\\widehat{EPF} = 220° \\div 2 = 110°$ et non $70°$.",
+                "answers": [
+                  {
+                    "content": "110",
                     "correct": true
                   }
                 ]
@@ -1105,6 +1309,69 @@
                   },
                   {
                     "content": "$70°$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Le point $G$ est sur un cercle de diamètre $[EF]$, avec $G$ différent de $E$ et de $F$.",
+            "questions": [
+              {
+                "content": "Le cercle a un rayon de $7{,}5$ cm et $EG = 9$ cm. Calcule $FG$.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Le diamètre est le double du rayon. Le triangle $EFG$ est rectangle : quel est son côté le plus long ?",
+                "explanation": "Étape 1 — Repérer : le cercle a pour diamètre $[EF]$ et le troisième point est $G$. Étape 2 — Vérifier : $[EF]$ est un diamètre, donc $EF = 2 \\times 7{,}5 = 15$ cm. Étape 3 — Citer : un angle inscrit qui intercepte un diamètre est droit, donc $EFG$ est rectangle en $G$. Étape 4 — Conclure avec Pythagore : $FG^2 = EF^2 - EG^2 = 225 - 81 = 144$, donc $FG = \\sqrt{144} = 12$ cm.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On donne $\\widehat{EFG} = 50°$. Calcule $\\widehat{EGF}$ (°) = ___   $\\widehat{FEG}$ (°) = ___",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "Commence par l'angle en $G$. Pour le dernier angle, utilise la somme des angles d'un triangle.",
+                "explanation": "Étape 1 — Repérer : le diamètre est $[EF]$ et le troisième point est $G$. Étape 2 — Vérifier : $[EF]$ passe par le centre, c'est un diamètre. Étape 3 — Citer : l'angle inscrit $\\widehat{EGF}$ intercepte un diamètre, il est droit : $\\widehat{EGF} = 90°$. Étape 4 — Conclure : dans le triangle $EFG$, la somme des angles vaut $180°$, donc $\\widehat{FEG} = 180° - 90° - 50° = 40°$.",
+                "answers": [
+                  {
+                    "content": "90",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "40",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le triangle $EFG$ est rectangle en $G$. Où est le centre de son cercle circonscrit ?",
+                "question_type": "select",
+                "hint": "Dans un triangle rectangle, l'hypoténuse est le côté opposé à l'angle droit.",
+                "explanation": "Étape 1 — Repérer : le triangle $EFG$ est rectangle en $G$, son hypoténuse est $[EF]$. Étape 2 — Vérifier : l'hypoténuse est le côté opposé à l'angle droit. Étape 3 — Citer la réciproque : si un triangle est rectangle, son hypoténuse est un diamètre de son cercle circonscrit. Étape 4 — Conclure : le centre est le milieu de l'hypoténuse $[EF]$.",
+                "answers": [
+                  {
+                    "content": "Au milieu de $[EF]$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Au point $G$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au milieu de $[EG]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au milieu de $[FG]$",
                     "correct": false
                   }
                 ]

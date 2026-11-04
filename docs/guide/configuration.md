@@ -94,6 +94,49 @@ Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR env
 3. *Service web de Develop › Settings › Deploy › Serverless* : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
 4. Après la fusion du chantier : ouvrir une PR d'essai, constater les données, le mot de passe et la veille, et vérifier dans le journal que le stockage de fichiers de la PR n'est pas celui de Develop.
 
+### Environnement Demo (demo.lnclass.com)
+
+Chantier standard-de-test, Lot H. L'environnement Railway nommé `Demo` (casse et espaces ignorés, `DemoEnvironment.active?`, `config/demo_environment.rb`) est un stade à part : ni production, ni environnement de PR, même si `PR_BASE_ENVIRONMENT` y a été copiée depuis Develop (`PrEnvironment.active?` y est faux : pas de mot de passe PR, pas d'adaptateur `async`, worker Solid Queue normal). `bin/rails db:prepare db:seed` y sème, à chaque déploiement et sans rien supprimer, l'identité, le référentiel, les établissements du référentiel et le jeu standard (`db/seeds/standard.rb`, élèves, enseignants et directions au PIN de test public `2468` : c'est une démo). Il ne charge ni `contenus`, ni les leçons du dépôt (`contenus:charger` se tait), ni `lecons_completes`, ni les comptes de développement.
+
+**Comptes équipe : seulement si `DEMO_TEAM_PIN` est posée** (variable **scellée**) : les trois comptes équipe du jeu prennent ce PIN. Sans elle, aucun compte équipe utilisable (un administrateur inerte, au PIN aléatoire, publie les leçons du jeu). Le PIN suit la variable à chaque déploiement (pose, rotation, retrait), et aucun second facteur n'est créé : chaque compte équipe enrôle le sien à sa première connexion : un PIN public sur un compte équipe d'un site ouvert donnerait l'administration à tout visiteur. `STANDARD_TEAM_PIN` est ignorée sur Demo.
+
+**Pas de remise à zéro automatique** : le semis est idempotent, il ne vide rien, car une remise à zéro supprimerait les données des visiteurs. Pour repartir de zéro, à la main au tableau de bord Railway : recréer la base PostgreSQL de Demo (la supprimer puis en ajouter une, en reliant `DATABASE_URL`), puis redéployer ; le pré-déploiement (`db:prepare db:seed`) recrée tout. `bin/jeu-standard --reset` ne vaut que pour une base locale.
+
+**À poser sur Demo :**
+
+| Variable | Valeur |
+|---|---|
+| `RAILS_MASTER_KEY` | Contenu de `config/master.key` |
+| `RAILS_ENV` | `production` |
+| `DATABASE_URL` | Celle de **sa propre** base PostgreSQL |
+| `BUCKET_NAME`, `BUCKET_ENDPOINT`, `BUCKET_ACCESS_KEY_ID`, `BUCKET_SECRET_ACCESS_KEY` (et au besoin `BUCKET_REGION`, `BUCKET_FORCE_PATH_STYLE`) | Ceux de **son propre** bucket |
+| `APP_HOSTS` | `demo.lnclass.com` |
+| `CANONICAL_HOST` | `demo.lnclass.com` |
+| `DEMO_TEAM_PIN` | PIN des comptes équipe, **scellée** ; absente : pas de compte équipe |
+| `SCHOOL_SPACE_ENABLED`, `TEACHER_ANNOUNCEMENTS_ENABLED` | Drapeaux du pilote, au choix |
+| `WEB_CONCURRENCY`, `RAILS_MAX_THREADS`, `JOB_CONCURRENCY`, `RAILS_LOG_LEVEL` | Facultatives, valeurs par défaut sinon |
+| `RAILWAY_ENVIRONMENT_NAME`, `RAILWAY_PUBLIC_DOMAIN`, `PORT` | Fournies par Railway |
+
+**À ne pas copier depuis Develop :**
+
+| Variable | Pourquoi |
+|---|---|
+| `PR_BASE_ENVIRONMENT`, `PR_ACCESS_PASSWORD` | Sans effet sur Demo (jamais un environnement de PR) : ne pas les y laisser, elles feraient croire le contraire |
+| `TEAM_BOOTSTRAP_CONTACT` | Imprimerait un lien d'invitation équipe dans les logs d'un site ouvert |
+| `DATABASE_URL`, `BUCKET_*` de Develop | Demo écrirait dans la base et les fichiers de Develop |
+| `ANDROID_PACKAGE_NAME`, `ANDROID_TEACHER_PACKAGE_NAME`, `ANDROID_STUDENT_STORE_URL`, `ANDROID_TEACHER_STORE_URL`, `ANDROID_CERT_FINGERPRINTS` | Les apps de test ne s'ouvrent pas sur demo.lnclass.com |
+| `STANDARD_TEAM_PIN`, `STANDARD_LESSONS_LIMIT`, `STANDARD_MANIFEST`, `STANDARD_QUIET` | Réglages du semis local, ignorés ou contre-productifs sur Demo |
+
+### Jeu standard sur Develop
+
+Chantier standard-de-test, Lot I (ADR standard-de-test §4 point 5). À chaque déploiement de Develop (reconnu par `RAILWAY_ENVIRONMENT_NAME=Develop`, jamais Staging, production, Demo ni une PR), le semis **ajoute** ce qui manque du jeu standard : les trois établissements, leurs classes, les élèves, enseignants et directions (PIN de test public `2468`, comme en PR). Puis l'activité simulée du jeu (`standard/activite`, Lot B), sur les seuls comptes du jeu : un vrai testeur qui a rejoint une classe ou un établissement du jeu n'y est ni rejoué ni redaté. Le premier déploiement qui la joue est plus long (quelques minutes). **Rien n'est supprimé ni modifié** : un contact du jeu déjà pris par un autre compte (autre rôle ou autre nom, un vrai testeur par exemple) est laissé tel quel, sans rattachement, et une ligne `[standard] 05******10 déjà pris par un autre compte` le signale dans le journal du déploiement (contact masqué). Un établissement réel qui porterait le nom d'un établissement du jeu n'est jamais repris : le jeu n'est alors pas semé, et le journal le dit. Les leçons du manifeste restent chargées par `contenus:charger`, jamais une seconde fois par le jeu. Un échec du jeu ne fait pas échouer le déploiement : il est imprimé et journalisé (`[standard] semis impossible sur Develop : …`).
+
+**Comptes équipe du jeu : seulement si `STANDARD_TEAM_PIN` est posée sur Develop**, en variable **scellée** : app-develop.lnclass.com est un site ouvert, un PIN public sur un compte équipe y donnerait l'administration à tout visiteur. Sans elle, aucun compte équipe du jeu. Avec elle, les trois comptes équipe sont créés une fois à ce PIN, sans second facteur (chacun enrôle le sien à sa première connexion) ; un compte déjà là n'est jamais modifié, une rotation de la variable ne change donc pas leur PIN. Sur Demo, c'est `DEMO_TEAM_PIN` qui compte (`STANDARD_TEAM_PIN` y est ignorée).
+
+| Variable | Valeur |
+|---|---|
+| `STANDARD_TEAM_PIN` | PIN des comptes équipe du jeu sur Develop, **scellée** ; absente : pas de compte équipe du jeu |
+
 ### Facultatives — réglage de charge
 
 Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure à l'appui.

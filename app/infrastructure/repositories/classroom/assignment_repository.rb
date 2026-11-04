@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::AssignmentRepository
 # Rôle : assignations d'une classe et leur échéance ; résout l'exercice assigné, seul type assignable, sans association polymorphe
-# ADR  : 0035, 0048, 0071, 0072
+# ADR  : 0035, 0048, 0071, 0072, sujets-de-devoir (ajout du 2026-10-30)
 module Repositories
   module Classroom
     class AssignmentRepository
@@ -26,13 +26,33 @@ module Repositories
         record = Orm::ClassroomAssignment.new(
           public_id: assignment.public_id, classroom_id: assignment.classroom_id,
           assignable_type: assignment.assignable.type, assignable_id: assignment.assignable.id, status: "active",
-          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on
+          assigned_by_id: assignment.assigned_by_id, assigned_at: assignment.assigned_at, due_on: assignment.due_on,
+          batch_public_id: assignment.batch_public_id
         )
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record, assignment.assignable))
       rescue ActiveRecord::RecordNotUnique
         ::Shared::Result.failure(:conflict, errors: { base: [ :already_assigned ] })
+      end
+
+      # Une transaction ; chaque #create a son point de sauvegarde, un doublon écarte l'exercice sans abîmer les autres.
+      def create_batch(assignments:)
+        results = {}
+        Orm::ClassroomAssignment.transaction do
+          # Deux envois simultanés des mêmes exercices dans l'ordre inverse se bloqueraient mutuellement : on écrit toujours dans l'ordre
+          # croissant d'assignable.id ; created et skipped, eux, gardent l'ordre demandé.
+          assignments.each_with_index.sort_by { |assignment, index| [ assignment.assignable.id, index ] }.each do |assignment, index|
+            results[index] = create(assignment:)
+          end
+        end
+        created = []
+        skipped = []
+        assignments.each_with_index do |assignment, index|
+          result = results.fetch(index)
+          result.success? ? created << result.value : skipped << assignment.assignable
+        end
+        ::Shared::Result.success(BatchCreation.new(created:, skipped:))
       end
 
       def archive(id:, archived_by_id:, at:)
@@ -79,7 +99,7 @@ module Repositories
         Entities::Classroom::Assignment.new(
           id: record.id, public_id: record.public_id, classroom_id: record.classroom_id, assignable:, status: record.status,
           assigned_by_id: record.assigned_by_id, assigned_at: record.assigned_at, archived_at: record.archived_at,
-          due_on: record.due_on
+          due_on: record.due_on, batch_public_id: record.batch_public_id
         )
       end
     end

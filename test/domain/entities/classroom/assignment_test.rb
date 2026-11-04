@@ -20,6 +20,14 @@ module Entities
         assert_equal Date.new(2026, 10, 8), build("active", due_on: Date.new(2026, 10, 8)).due_on
         assert_includes Assignment.members, :due_on
       end
+
+      # ADR sujets-de-devoir (ajout du 2026-10-30) : les assignations d'un même envoi partagent un batch_public_id ;
+      # un exercice assigné seul n'en a pas.
+      test "porte son envoi, nul pour un exercice assigné seul" do
+        assert_nil build("active").batch_public_id
+        assert_equal "Ab3dEf5hJk7mNp", build("active", batch_public_id: "Ab3dEf5hJk7mNp").batch_public_id
+        assert_includes Assignment.members, :batch_public_id
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Le devenir des cellules sexuelles chez les mammifères",
@@ -8,1258 +8,1431 @@
       "level_name": "Tle",
       "material_name": "SVT",
       "series_name": "D",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "appareil-feminin-trajet",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin, vue de face : l'ovaire, le pavillon qui s'ouvre près de l'ovaire, la trompe (oviducte), l'utérus, le col de l'utérus et le vagin. La trompe est mise en évidence : c'est là, dans son tiers supérieur, que se rencontrent l'ovocyte II et les spermatozoïdes venus du vagin.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary",
+                "text": "ovaire"
+              },
+              {
+                "part": "infundibulum",
+                "text": "pavillon"
+              },
+              {
+                "part": "oviduct",
+                "text": "trompe (oviducte)"
+              },
+              {
+                "part": "uterus",
+                "text": "utérus"
+              },
+              {
+                "part": "cervix",
+                "text": "col de l'utérus"
+              },
+              {
+                "part": "vagina",
+                "text": "vagin"
+              }
+            ],
+            "highlight": [
+              "oviduct"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-feminin-exercice",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin, vue de face, sans partie mise en évidence : l'ovaire, le pavillon qui s'ouvre près de l'ovaire, la trompe (oviducte), l'utérus, le col de l'utérus et le vagin. On y suit le trajet des gamètes, du dépôt des spermatozoïdes dans le vagin jusqu'au lieu de la rencontre.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary",
+                "text": "ovaire"
+              },
+              {
+                "part": "infundibulum",
+                "text": "pavillon"
+              },
+              {
+                "part": "oviduct",
+                "text": "trompe (oviducte)"
+              },
+              {
+                "part": "uterus",
+                "text": "utérus"
+              },
+              {
+                "part": "cervix",
+                "text": "col de l'utérus"
+              },
+              {
+                "part": "vagina",
+                "text": "vagin"
+              }
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-feminin-nidation",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin : l'ovaire, la trompe, l'utérus et le col, avec la muqueuse utérine (endomètre) mise en évidence. L'embryon (morula) descend la trompe et entre dans la cavité de l'utérus, où il devient un blastocyste qui s'enfonce dans la muqueuse utérine : c'est la nidation.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary",
+                "text": "ovaire"
+              },
+              {
+                "part": "oviduct",
+                "text": "trompe (oviducte)"
+              },
+              {
+                "part": "uterus",
+                "text": "utérus"
+              },
+              {
+                "part": "endometrium",
+                "text": "muqueuse utérine (endomètre)"
+              },
+              {
+                "part": "cervix",
+                "text": "col de l'utérus"
+              }
+            ],
+            "highlight": [
+              "endometrium"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-fecondation",
+          "kind": "diagram",
+          "description": "Schéma fléché des étapes de la fécondation, de haut en bas : spermatozoïde capacité, traversée de la corona radiata, réaction acrosomique et traversée de la zone pellucide, fusion des membranes, réaction corticale (monospermie), fin de la méiose II de l'ovocyte, pronucléi mâle et femelle, puis caryogamie et cellule-œuf diploïde.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "capa",
+                "label": "Spermatozoïde capacité",
+                "category": 1
+              },
+              {
+                "id": "cor",
+                "label": "Traversée de la corona radiata",
+                "category": 1
+              },
+              {
+                "id": "acro",
+                "label": "Réaction acrosomique, zone pellucide traversée",
+                "category": 1
+              },
+              {
+                "id": "fus",
+                "label": "Fusion des membranes, entrée du noyau",
+                "category": 2
+              },
+              {
+                "id": "cort",
+                "label": "Réaction corticale : monospermie",
+                "category": 2
+              },
+              {
+                "id": "meio",
+                "label": "Fin de la méiose II, 2e globule polaire",
+                "category": 2
+              },
+              {
+                "id": "pro",
+                "label": "Pronucléi mâle et femelle à n chromosomes",
+                "category": 3
+              },
+              {
+                "id": "zyg",
+                "label": "Caryogamie : cellule-œuf à 2n chromosomes",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "capa",
+                "to": "cor"
+              },
+              {
+                "from": "cor",
+                "to": "acro"
+              },
+              {
+                "from": "acro",
+                "to": "fus"
+              },
+              {
+                "from": "fus",
+                "to": "cort"
+              },
+              {
+                "from": "cort",
+                "to": "meio"
+              },
+              {
+                "from": "meio",
+                "to": "pro"
+              },
+              {
+                "from": "pro",
+                "to": "zyg"
+              }
+            ],
+            "legend": [
+              "Le spermatozoïde traverse les enveloppes",
+              "Le spermatozoïde entre, l'ovocyte réagit",
+              "Formation de la cellule-œuf"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "du-zygote-au-blastocyste",
+          "kind": "diagram",
+          "description": "Schéma fléché du devenir de la cellule-œuf, de haut en bas : cellule-œuf dans la trompe, segmentation en 2 puis 4 blastomères, morula qui arrive dans l'utérus, blastocyste dans la cavité utérine, éclosion hors de la zone pellucide, nidation dans la muqueuse utérine, puis sécrétion d'hCG par le trophoblaste.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "zyg",
+                "label": "Cellule-œuf (trompe)",
+                "category": 1
+              },
+              {
+                "id": "seg",
+                "label": "Segmentation : 2, puis 4 blastomères",
+                "category": 1
+              },
+              {
+                "id": "mor",
+                "label": "Morula : entrée dans l'utérus",
+                "category": 1
+              },
+              {
+                "id": "blas",
+                "label": "Blastocyste dans la cavité utérine",
+                "category": 2
+              },
+              {
+                "id": "eclo",
+                "label": "Éclosion : sortie de la zone pellucide",
+                "category": 2
+              },
+              {
+                "id": "nid",
+                "label": "Nidation dans la muqueuse utérine",
+                "category": 3
+              },
+              {
+                "id": "hcg",
+                "label": "Le trophoblaste sécrète l'hCG",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "zyg",
+                "to": "seg"
+              },
+              {
+                "from": "seg",
+                "to": "mor"
+              },
+              {
+                "from": "mor",
+                "to": "blas"
+              },
+              {
+                "from": "blas",
+                "to": "eclo"
+              },
+              {
+                "from": "eclo",
+                "to": "nid"
+              },
+              {
+                "from": "nid",
+                "to": "hcg"
+              }
+            ],
+            "legend": [
+              "Dans la trompe, jusqu'à l'entrée dans l'utérus",
+              "Dans la cavité de l'utérus",
+              "Dans la muqueuse utérine"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "adn-fecondation",
+          "kind": "stat_chart",
+          "description": "Courbe de la quantité totale d'ADN nucléaire de la cellule étudiée, en unités arbitraires (u.a.), à six stades : ovocyte II (2 u.a.), spermatozoïde entré (3), deuxième globule polaire expulsé (2), pronucléi après réplication (4), cellule-œuf après caryogamie (4), chaque cellule après la première division (2). L'unité est la quantité d'ADN du noyau d'un spermatozoïde.",
+          "params": {
+            "chart": "line",
+            "series": [
+              2,
+              3,
+              2,
+              4,
+              4,
+              2
+            ],
+            "labels": [
+              "Ovocyte II",
+              "Spermatozoïde entré",
+              "2e globule polaire expulsé",
+              "Pronucléi après réplication",
+              "Cellule-œuf (caryogamie)",
+              "1re division : chaque cellule"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
         {
           "name": "La rencontre des gamètes",
-          "subtitle": "Suivre le trajet des spermatozoïdes jusqu'à l'ovocyte, dans le haut de la trompe",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Décrire le trajet des spermatozoïdes, du vagin jusqu'au lieu de la fécondation.</li><li>Situer le lieu et le moment de la rencontre des gamètes.</li><li>Expliquer ce qu'est la capacitation et pourquoi elle est indispensable.</li></ul><h2>L'image pour comprendre</h2><p><strong>L'image.</strong> Des centaines de millions de coureurs prennent ensemble le départ d'un marathon. Tout au bout d'une des deux routes, un seul invité les attend, et il ne restera là qu'une journée. En chemin, il y a un portail presque fermé la plupart du mois, puis un carrefour, et la plupart des coureurs s'épuisent ou se perdent. Ceux qui arrivent ne peuvent entrer que s'ils se sont « échauffés » pendant la course.</p><p><strong>Le pont.</strong> Les coureurs, ce sont les <strong>spermatozoïdes</strong>, les gamètes (cellules sexuelles) du mâle, déposés dans le vagin : c'est le départ. Le portail, c'est le <strong>col de l'utérus</strong> et sa <strong>glaire cervicale</strong>, un mucus (une sorte de gel) qui ne laisse bien passer les spermatozoïdes qu'autour de l'ovulation. Le carrefour, c'est la cavité de l'utérus, d'où partent les deux <strong>trompes</strong> (on dit aussi oviductes). L'invité, c'est l'<strong>ovocyte II</strong>, le gamète femelle libéré par l'ovaire, qui attend dans le tiers supérieur d'une trompe. L'échauffement, c'est la <strong>capacitation</strong>.</p><p><strong>Là où l'image s'arrête.</strong> Les spermatozoïdes ne sont pas des coureurs qui réfléchissent : ils sont aussi transportés par les contractions de l'utérus et des trompes. Et ce n'est pas une course où le premier arrivé gagne forcément : il faut que de nombreux spermatozoïdes entourent l'ovocyte pour qu'un seul le féconde.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Lors de l'accouplement, des centaines de millions de spermatozoïdes sont déposés dans le vagin.</li><li>Ils traversent le col de l'utérus, la cavité utérine, puis remontent une trompe, grâce aux battements de leur flagelle (leur « queue ») et aux contractions des voies génitales femelles.</li><li>Seules quelques centaines de spermatozoïdes arrivent près de l'ovocyte.</li><li>En chemin, ils subissent la <strong>capacitation</strong> : dans les voies génitales femelles, ils acquièrent leur pouvoir fécondant. Sans capacitation, pas de fécondation.</li><li>La rencontre a lieu dans le <strong>tiers supérieur de la trompe</strong>. L'ovocyte II y est bloqué en métaphase de la deuxième division de méiose. Il est entouré de la <strong>zone pellucide</strong> (une enveloppe transparente) et de cellules folliculaires qui forment la <strong>corona radiata</strong>.</li><li>La rencontre n'est possible que pendant une courte période : l'ovocyte ne survit qu'environ 24 heures après l'ovulation, les spermatozoïdes quelques jours.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Une femme a un cycle régulier et ovule au 14e jour. On admet que l'ovocyte survit 24 heures et que les spermatozoïdes survivent 3 jours dans les voies génitales. Un rapport sexuel a lieu au 12e jour. Une fécondation est-elle possible ? Et si le rapport avait lieu au 17e jour ?</p><ol><li><strong>Période de vie des spermatozoïdes.</strong> Déposés au jour 12, ils vivent 3 jours : ils sont vivants jusqu'au jour 15.</li><li><strong>Période de vie de l'ovocyte.</strong> Libéré au jour 14, il vit 24 heures : il est fécondable du jour 14 au jour 15.</li><li><strong>Comparaison.</strong> Les deux périodes se chevauchent au jour 14. Les spermatozoïdes, déjà capacités, peuvent attendre l'ovocyte dans la trompe. La fécondation est donc possible.</li><li><strong>Cas du jour 17.</strong> L'ovocyte est mort depuis le jour 15. Peu importe que les spermatozoïdes soient vivants : aucune fécondation n'est possible.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves écrivent que la fécondation a lieu <strong>dans l'utérus</strong>. C'est faux : elle a lieu dans le <strong>tiers supérieur de la trompe</strong>. L'utérus accueille l'embryon plus tard, lors de la nidation.</p><p>Pour repérer l'erreur : dès qu'une réponse place la rencontre des gamètes dans l'utérus ou dans l'ovaire, elle est fausse.</p><h2>En une phrase</h2><p>Des centaines de millions de spermatozoïdes partent du vagin, mais seules quelques centaines, rendues fécondantes par la capacitation, retrouvent l'ovocyte II dans le haut de la trompe.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Le trajet des spermatozoïdes et le lieu de la rencontre",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Chez la femme, où a lieu la rencontre entre le spermatozoïde et l'ovocyte ?",
-                  "question_type": "single_choice",
-                  "explanation": "La rencontre a lieu dans le tiers supérieur de la trompe : c'est là que « l'invité » attend les coureurs. L'erreur la plus tentante est l'utérus : il accueille l'embryon plus tard, pour la nidation, mais ce n'est pas le lieu de la fécondation.",
-                  "answers": [
-                    {
-                      "content": "Dans le tiers supérieur de la trompe",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans la cavité de l'utérus",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans le vagin, juste après le rapport sexuel",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans l'ovaire, avant l'ovulation",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Au moment de la rencontre des gamètes, quelles affirmations sur le gamète femelle sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le gamète femelle libéré est un ovocyte II, bloqué en métaphase de la deuxième division de méiose, entouré de la zone pellucide et de la corona radiata. L'erreur la plus tentante est de croire que sa méiose est déjà terminée : elle ne s'achève qu'après l'entrée du spermatozoïde.",
-                  "answers": [
-                    {
-                      "content": "C'est un ovocyte II.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est bloqué en métaphase de la deuxième division de méiose.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est entouré de la zone pellucide et des cellules de la corona radiata.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il a déjà terminé sa méiose : c'est un ovule prêt à l'emploi.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il se trouve dans la cavité de l'utérus.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Rappel de l'image : des centaines de millions de coureurs partent ensemble ; en chemin, ils trouvent un portail presque fermé la plupart du mois, puis un carrefour ; au bout d'une des deux routes, un seul invité les attend pendant une journée. Dans cette image, que représente le portail ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le portail, c'est le col de l'utérus avec sa glaire cervicale : elle ne laisse bien passer les spermatozoïdes qu'autour de l'ovulation. L'erreur tentante est la zone pellucide : c'est aussi une barrière, mais elle entoure l'ovocyte, tout au bout du trajet, pas à l'entrée de l'utérus.",
-                  "answers": [
-                    {
-                      "content": "Le col de l'utérus et sa glaire cervicale",
-                      "correct": true
-                    },
-                    {
-                      "content": "La zone pellucide qui entoure l'ovocyte",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'entrée de la trompe, du côté de l'ovaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ovocyte II lui-même",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Qu'est-ce qui fait avancer les spermatozoïdes jusqu'à la trompe ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les spermatozoïdes avancent grâce aux battements de leur flagelle et sont aidés par les contractions de l'utérus et des trompes : souviens-toi que les coureurs sont aussi « portés ». La glaire cervicale ne les aspire pas : elle les laisse seulement passer ou les bloque, selon le moment du cycle.",
-                  "answers": [
-                    {
-                      "content": "Les battements de leur flagelle",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les contractions de l'utérus et des trompes",
-                      "correct": true
-                    },
-                    {
-                      "content": "La glaire cervicale, qui les aspire vers l'utérus",
-                      "correct": false
-                    },
-                    {
-                      "content": "La capacitation, qui leur fabrique un flagelle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Qu'appelle-t-on la capacitation ?",
-                  "question_type": "single_choice",
-                  "explanation": "La capacitation est l'acquisition du pouvoir fécondant par les spermatozoïdes, dans les voies génitales femelles : c'est « l'échauffement » de l'image. L'erreur tentante est de la confondre avec la maturation dans l'épididyme : celle-ci rend les spermatozoïdes mobiles, mais pas encore capables de féconder.",
-                  "answers": [
-                    {
-                      "content": "L'acquisition du pouvoir fécondant par les spermatozoïdes, dans les voies génitales femelles",
-                      "correct": true
-                    },
-                    {
-                      "content": "La maturation des spermatozoïdes dans l'épididyme, qui les rend mobiles",
-                      "correct": false
-                    },
-                    {
-                      "content": "La fabrication des spermatozoïdes dans les testicules",
-                      "correct": false
-                    },
-                    {
-                      "content": "La libération de l'ovocyte par l'ovaire",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Sur les centaines de millions de spermatozoïdes déposés dans le vagin, seules quelques centaines arrivent près de l'ovocyte.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : la glaire cervicale, l'acidité du vagin, le choix de la mauvaise trompe et l'épuisement éliminent presque tous les spermatozoïdes, comme les coureurs qui abandonnent en route. Seules quelques centaines atteignent le tiers supérieur de la trompe.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Raisonner sur le moment et les conditions de la rencontre",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Une femme ovule au 14e jour de son cycle. On admet que l'ovocyte survit 24 heures et les spermatozoïdes 3 jours. Lequel de ces rapports sexuels peut conduire à une fécondation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un rapport au jour 13 donne des spermatozoïdes vivants jusqu'au jour 16 : ils sont présents quand l'ovocyte est libéré au jour 14. Au jour 17, l'erreur tentante, l'ovocyte est déjà mort depuis le jour 15 : la survie des spermatozoïdes ne sert plus à rien.",
-                  "answers": [
-                    {
-                      "content": "Un rapport au jour 13",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un rapport au jour 8",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un rapport au jour 17",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un rapport au jour 20",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une femme ovule au 16e jour de son cycle. On admet que l'ovocyte survit 24 heures et les spermatozoïdes 3 jours. Quels rapports sexuels peuvent conduire à une fécondation ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'ovocyte est fécondable du jour 16 au jour 17. Un rapport au jour 14 donne des spermatozoïdes vivants jusqu'au jour 17 : cela chevauche. Un rapport au jour 16 convient aussi. Au jour 11, les spermatozoïdes meurent au jour 14, avant l'ovulation. Au jour 18, l'ovocyte est déjà mort.",
-                  "answers": [
-                    {
-                      "content": "Au jour 10",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au jour 11",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au jour 14",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 16",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 18",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une femme a les deux trompes bouchées près de l'utérus. Ses ovaires fonctionnent normalement. Pourquoi ne peut-elle pas avoir de grossesse naturellement ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les trompes bouchées empêchent les spermatozoïdes d'atteindre le tiers supérieur de la trompe, où attend l'ovocyte : la route du marathon est coupée. L'erreur tentante est de penser aux ovaires, mais l'énoncé dit qu'ils fonctionnent : l'ovulation a bien lieu.",
-                  "answers": [
-                    {
-                      "content": "Les spermatozoïdes ne peuvent pas atteindre l'ovocyte dans le haut de la trompe.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ses ovaires ne libèrent plus d'ovocytes.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa glaire cervicale bloque tous les spermatozoïdes.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes ne peuvent plus subir la capacitation dans le vagin.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Lors d'un rapport, environ 300 millions de spermatozoïdes sont déposés dans le vagin et environ 300 arrivent près de l'ovocyte. Quelle proportion des spermatozoïdes arrive près de l'ovocyte ?",
-                  "question_type": "single_choice",
-                  "explanation": "On divise : $300\\,000\\,000 \\div 300 = 1\\,000\\,000$. Un spermatozoïde sur un million arrive près de l'ovocyte. L'erreur tentante est « 1 sur 1 000 », qui vient d'un zéro mal compté : vérifie en écrivant 300 millions en entier.",
-                  "answers": [
-                    {
-                      "content": "Environ 1 spermatozoïde sur 1 000 000",
-                      "correct": true
-                    },
-                    {
-                      "content": "Environ 1 spermatozoïde sur 1 000",
-                      "correct": false
-                    },
-                    {
-                      "content": "Environ 1 spermatozoïde sur 100 000",
-                      "correct": false
-                    },
-                    {
-                      "content": "Environ 1 spermatozoïde sur 10 000 000",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un spermatozoïde qui vient d'être éjaculé peut féconder l'ovocyte immédiatement, sans autre transformation.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : un spermatozoïde fraîchement éjaculé n'a pas encore son pouvoir fécondant. Il doit d'abord subir la capacitation dans les voies génitales femelles, comme le coureur qui doit s'échauffer avant de franchir la dernière porte.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Exploiter des résultats sur la rencontre des gamètes",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "On prélève des spermatozoïdes mobiles dans l'épididyme d'un lapin. Mis directement avec des ovocytes de lapine dans un tube, ils ne les fécondent pas. D'autres spermatozoïdes du même lapin sont d'abord placés quelques heures dans l'utérus d'une lapine, récupérés, puis mis avec des ovocytes dans un tube : la fécondation a lieu. Quelle conclusion peux-tu tirer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Seuls les spermatozoïdes passés par les voies génitales femelles fécondent : ils y ont acquis leur pouvoir fécondant, c'est la capacitation. L'erreur tentante est de dire que la fécondation doit se faire dans l'utérus : or, dans la 2e expérience, elle se fait dans un tube. C'est le séjour préalable qui compte, pas le lieu de la fécondation.",
-                  "answers": [
-                    {
-                      "content": "Les spermatozoïdes doivent séjourner dans les voies génitales femelles pour devenir fécondants.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La fécondation ne peut se produire qu'à l'intérieur de l'utérus.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes de l'épididyme sont morts.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La fécondation nécessite la présence de glaire cervicale autour de l'ovocyte.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Mme Koné a des cycles réguliers de 32 jours. On admet que l'ovulation a lieu au jour (durée du cycle − 14), que l'ovocyte survit 24 heures et les spermatozoïdes 3 jours. Quels rapports sexuels peuvent conduire à une fécondation ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Étape 1 : l'ovulation a lieu au jour $32 - 14 = 18$ ; l'ovocyte est fécondable du jour 18 au jour 19. Étape 2 : un rapport au jour 16 donne des spermatozoïdes vivants jusqu'au jour 19, ce qui convient, tout comme les jours 17 et 18. Le jour 13 est tentant si l'on oublie de recalculer l'ovulation (le jour 14 ne vaut que pour un cycle de 28 jours) : ses spermatozoïdes meurent au jour 16. Au jour 21, l'ovocyte est déjà mort.",
-                  "answers": [
-                    {
-                      "content": "Au jour 13",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au jour 16",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 17",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 18",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 21",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez une femme, la glaire cervicale reste épaisse, avec un réseau à mailles très serrées, pendant tout le cycle, même autour de l'ovulation. Ses ovaires et ses trompes sont normaux. Elle n'arrive pas à avoir d'enfant. Quelle est l'explication la plus probable ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une glaire toujours serrée est un « portail » qui ne s'ouvre jamais : les spermatozoïdes restent bloqués au col et n'atteignent pas la trompe. L'erreur tentante est d'accuser la nidation, mais le problème se situe bien avant : la rencontre des gamètes ne peut même pas avoir lieu.",
-                  "answers": [
-                    {
-                      "content": "Les spermatozoïdes sont bloqués au niveau du col et n'atteignent pas l'ovocyte.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'embryon ne peut pas s'implanter dans l'utérus.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ses ovaires ne libèrent pas d'ovocyte.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes subissent la capacitation trop tôt et meurent.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un rapport sexuel 4 jours après l'ovulation peut conduire à une fécondation, puisque les spermatozoïdes survivent plusieurs jours dans les voies génitales femelles.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : ce qui limite ici, c'est l'ovocyte, qui ne survit qu'environ 24 heures après l'ovulation. Quatre jours après, il n'y a plus d'ovocyte vivant, donc plus « d'invité » au bout de la route, même si les spermatozoïdes sont en pleine forme.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Lors d'une fécondation in vitro (dans un tube, au laboratoire), le médecin place d'abord les spermatozoïdes quelques heures dans un milieu de culture particulier, avant de les mettre avec les ovocytes. Pourquoi ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce milieu reproduit les conditions des voies génitales femelles : il permet la capacitation, sans laquelle les spermatozoïdes ne peuvent pas féconder. L'erreur tentante est « les faire se multiplier » : un spermatozoïde est une cellule spécialisée qui ne se divise plus.",
-                  "answers": [
-                    {
-                      "content": "Pour provoquer leur capacitation",
-                      "correct": true
-                    },
-                    {
-                      "content": "Pour les faire se multiplier",
-                      "correct": false
-                    },
-                    {
-                      "content": "Pour leur permettre d'achever leur méiose",
-                      "correct": false
-                    },
-                    {
-                      "content": "Pour qu'ils fabriquent leur flagelle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces situations, lesquelles empêchent la rencontre des gamètes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Deux trompes obstruées coupent la route, et une glaire infranchissable ferme le « portail » : dans les deux cas, les spermatozoïdes n'atteignent pas l'ovocyte. Un endomètre trop mince gêne la nidation, qui a lieu après la fécondation. Un ovocyte bloqué en métaphase II et des spermatozoïdes non capacités à l'éjaculation sont des situations normales.",
-                  "answers": [
-                    {
-                      "content": "Les deux trompes sont obstruées.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La glaire cervicale reste infranchissable pendant tout le cycle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'endomètre, la muqueuse de l'utérus, est trop mince.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ovocyte libéré est bloqué en métaphase de la deuxième division de méiose.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes ne sont pas encore capacités au moment de l'éjaculation.",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "remember": "La **rencontre des gamètes** a lieu dans les voies génitales de la femelle. Lors de l'accouplement, des centaines de millions de **spermatozoïdes** sont déposés dans le **vagin**. Ils traversent le **col de l'utérus**, la **cavité utérine**, puis remontent une **trompe** (ou oviducte), grâce aux battements de leur flagelle et aux contractions des voies génitales. Très peu arrivent près de l'ovocyte. En chemin, ils subissent la **capacitation** : dans les voies génitales femelles, ils acquièrent le pouvoir de féconder. Sans capacitation, pas de fécondation. De son côté, l'ovaire libère un **ovocyte II**, bloqué en métaphase de la deuxième division de méiose, entouré de la **zone pellucide** et de la **corona radiata** ; le **pavillon** le recueille. La rencontre a lieu dans le **tiers supérieur de la trompe**. Elle n'est possible que si les deux gamètes sont vivants en même temps : l'ovocyte reste fécondable peu de temps (environ une journée), les spermatozoïdes plus longtemps (quelques jours).",
+          "method": [
+            "Situer le lieu de dépôt des spermatozoïdes et le lieu de la rencontre sur le schéma de l'appareil génital féminin.",
+            "Suivre le trajet : citer dans l'ordre les organes traversés par les spermatozoïdes.",
+            "Expliquer ce qui fait avancer les spermatozoïdes et ce qui les rend capables de féconder : flagelle, contractions, capacitation.",
+            "Conclure : dire où la rencontre a lieu et si les deux gamètes sont vivants en même temps, d'après les durées de vie données."
+          ],
+          "example": {
+            "statement": "Chez une femme, l'ovulation a lieu le 14e jour du cycle. On admet que l'ovocyte reste fécondable 24 heures et que les spermatozoïdes restent vivants 3 jours dans les voies génitales. Un rapport sexuel a lieu le 12e jour. Décrire le trajet des spermatozoïdes et dire si une fécondation est possible.",
+            "steps": [
+              "Situer : les spermatozoïdes sont déposés dans le vagin (jour 12) ; la rencontre se fera dans le tiers supérieur de la trompe, où attend l'ovocyte II.",
+              "Suivre : ils traversent le vagin, le col de l'utérus, la cavité de l'utérus, puis remontent la trompe jusqu'à son tiers supérieur.",
+              "Expliquer : les battements du flagelle et les contractions des voies génitales les font avancer ; la capacitation, dans ces voies, les rend capables de féconder.",
+              "Conclure : spermatozoïdes vivants du jour 12 au jour 15, ovocyte fécondable du jour 14 au jour 15 ; les deux durées se chevauchent, donc la fécondation est possible dans la trompe."
+            ]
+          },
+          "pitfall": "Ne pas croire que la fécondation a lieu dans l'utérus, ni que les spermatozoïdes peuvent féconder dès leur dépôt. Contre-exemple : en laboratoire, des spermatozoïdes frais mis directement avec un ovocyte ne le fécondent pas ; gardés d'abord dans un liquide des voies génitales femelles (capacitation), ils le fécondent. L'utérus n'est qu'un lieu de passage pour les spermatozoïdes : la rencontre se fait dans le tiers supérieur de la trompe. Pour éviter l'erreur, pose-toi deux questions : où ? et les spermatozoïdes sont-ils capacités ?",
+          "figure": "appareil-feminin-trajet",
+          "exercise": {
+            "title": "La rencontre des gamètes",
+            "statement": "À la maternité de Bingerville, une sage-femme explique à des lycéens le trajet des gamètes. Dans cet exercice, tu appliques la méthode de la fiche : situer, suivre, expliquer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "appareil-feminin-exercice",
+            "questions": [
+              {
+                "content": "Chez la femme, dans quelle partie de l'appareil génital a lieu la rencontre entre le spermatozoïde et l'ovocyte II ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : les spermatozoïdes partent du vagin, l'ovocyte II est recueilli par le pavillon puis attend dans la trompe. Étape 2 — Suivre : les spermatozoïdes traversent le col, l'utérus et remontent la trompe. Étape 4 — Conclure : la rencontre a lieu dans le tiers supérieur de la trompe. L'utérus est le piège classique : les spermatozoïdes y passent seulement, et l'embryon s'y fixera bien plus tard (nidation).",
+                "answers": [
+                  {
+                    "content": "Dans la cavité de l'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le tiers supérieur de la trompe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les parties de l'appareil génital féminin traversées par les spermatozoïdes, du dépôt jusqu'au lieu de la rencontre.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : le point de départ est le vagin, le point d'arrivée le tiers supérieur de la trompe. Étape 2 — Suivre : on cite les organes dans l'ordre du trajet : vagin, col de l'utérus (passage entre vagin et utérus), cavité de l'utérus, puis trompe. Placer l'utérus après la trompe serait une erreur : la trompe part de l'utérus et se termine près de l'ovaire.",
+                "answers": [
+                  {
+                    "content": "Vagin"
+                  },
+                  {
+                    "content": "Col de l'utérus"
+                  },
+                  {
+                    "content": "Cavité de l'utérus"
+                  },
+                  {
+                    "content": "Trompe (jusqu'à son tiers supérieur)"
+                  }
+                ]
+              },
+              {
+                "content": "Les modifications que subissent les spermatozoïdes dans les voies génitales femelles et qui leur donnent le pouvoir de féconder s'appellent la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Expliquer : les battements du flagelle et les contractions font avancer les spermatozoïdes, mais c'est la capacitation, dans les voies génitales femelles, qui les rend capables de féconder. Sans elle, pas de fécondation, même si les spermatozoïdes sont vivants et arrivés près de l'ovocyte.",
+                "answers": [
+                  {
+                    "content": "capacitation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une femme ovule le 14e jour de son cycle. L'ovocyte reste fécondable 24 heures ; les spermatozoïdes restent vivants 3 jours dans ses voies génitales. Un rapport a lieu le 13e jour. Jusqu'à quel jour du cycle les spermatozoïdes déposés sont-ils vivants ?",
+                "question_type": "numeric",
+                "unit": "jour",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Situer : les spermatozoïdes sont déposés le jour 13. Étape 4 — Conclure : ils vivent 3 jours, donc ils sont vivants jusqu'au jour $13 + 3 = 16$. L'ovocyte (libéré le jour 14) est fécondable jusqu'au jour 15 : les deux durées se chevauchent, la fécondation est possible. Répondre 14 ou 15 serait oublier d'ajouter les 3 jours à la date du rapport.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les spermatozoïdes sont capables de féconder un ovocyte dès leur dépôt dans le vagin, sans aucune modification préalable.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : les spermatozoïdes ne deviennent aptes à féconder qu'après la capacitation, qui se déroule dans les voies génitales femelles. L'affirmation est donc fausse. Contre-exemple : des spermatozoïdes frais mis directement avec un ovocyte en laboratoire ne le fécondent pas. Étape 4 — Conclure : arriver près de l'ovocyte ne suffit pas, il faut avoir été capacité.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer la rencontre des gamètes, à suivre le trajet des spermatozoïdes et à expliquer leur capacitation, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Chez la femme, les spermatozoïdes sont déposés dans le ___ et la rencontre avec l'ovocyte II a lieu dans le tiers supérieur de la ___.",
+                "question_type": "fill_blank",
+                "hint": "Pense à l'organe de dépôt, puis à l'organe qui relie l'utérus à l'ovaire.",
+                "explanation": "Étape 1 — Situer : le dépôt a lieu dans le vagin, la rencontre dans le tiers supérieur de la trompe (ou oviducte). Étape 2 — Suivre : entre les deux, les spermatozoïdes traversent le col de l'utérus et la cavité utérine.",
+                "answers": [
+                  {
+                    "content": "vagin",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "trompe",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "oviducte",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "trompes",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La capacitation des spermatozoïdes se déroule dans les voies génitales de la femelle.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : la capacitation a lieu pendant le trajet, dans les voies génitales femelles. Étape 4 — Conclure : l'affirmation est vraie ; c'est elle qui donne aux spermatozoïdes leur pouvoir fécondant.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux phénomènes qui font avancer les spermatozoïdes dans les voies génitales femelles ?",
+                "question_type": "multiple_correct_2",
+                "hint": "Cherche ce qui vient du spermatozoïde lui-même et ce qui vient de l'organe de la femelle.",
+                "explanation": "Étape 3 — Expliquer : le flagelle propulse chaque spermatozoïde et les contractions de l'utérus et des trompes les transportent. Les cils de la trompe poussent plutôt l'ovocyte et l'embryon vers l'utérus, et la capacitation ne fait pas avancer : elle donne le pouvoir de féconder.",
+                "answers": [
+                  {
+                    "content": "Les battements de leur flagelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les contractions des voies génitales femelles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les battements des cils de la trompe, qui les poussent vers l'ovaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "La capacitation, qui les fait grossir",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un rapport a lieu 5 jours avant l'ovulation. On admet que les spermatozoïdes restent vivants 3 jours et que l'ovocyte reste fécondable 24 heures. La fécondation est-elle possible ?",
+                "question_type": "single_choice",
+                "hint": "Calcule le dernier jour de vie des spermatozoïdes et compare-le au jour de l'ovulation.",
+                "explanation": "Étape 1 — Situer : on place le rapport au jour 0, l'ovulation au jour 5. Étape 4 — Conclure : les spermatozoïdes vivent jusqu'au jour 3, l'ovocyte n'est libéré qu'au jour 5 : les deux durées ne se chevauchent pas, donc il n'y a pas de rencontre. Les spermatozoïdes peuvent bien atteindre la trompe ; c'est leur durée de vie qui est trop courte.",
+                "answers": [
+                  {
+                    "content": "Oui : l'ovocyte attend les spermatozoïdes dans la trompe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : les spermatozoïdes sont morts avant la libération de l'ovocyte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : les spermatozoïdes vivent jusqu'à l'ovulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : les spermatozoïdes ne peuvent pas atteindre la trompe",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "La fécondation et la formation de la cellule-œuf",
-          "subtitle": "De l'entrée du spermatozoïde dans l'ovocyte à la première cellule de l'embryon",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Décrire, dans l'ordre, les étapes de la fécondation.</li><li>Expliquer comment l'ovocyte empêche l'entrée d'un deuxième spermatozoïde.</li><li>Expliquer comment la cellule-œuf retrouve $2n$ chromosomes.</li></ul><h2>L'image pour comprendre</h2><p><strong>Première image : le dernier passager du gbaka.</strong> Au marché, un gbaka n'a plus qu'une seule place libre, et une foule l'entoure. Plusieurs passagers se fraient un chemin dans la foule, puis l'un d'eux réussit à ouvrir la portière et s'assoit. Aussitôt, l'apprenti claque la portière et la verrouille : les autres restent dehors. Alors seulement le chauffeur, qui attendait moteur au ralenti, termine ses préparatifs et démarre.</p><p><strong>Le pont.</strong> Le gbaka, c'est l'ovocyte II. La foule, ce sont les cellules folliculaires de la <strong>corona radiata</strong>. La portière, c'est la <strong>zone pellucide</strong>, une enveloppe faite de glycoprotéines (des protéines liées à des sucres). Ouvrir la portière, c'est la <strong>réaction acrosomique</strong> : l'acrosome, un petit sac d'enzymes à l'avant de la tête du spermatozoïde, libère ses enzymes, qui creusent un passage. S'asseoir, c'est la <strong>fusion</strong> des membranes du spermatozoïde et de l'ovocyte. Verrouiller la portière, c'est la <strong>réaction corticale</strong>. Le chauffeur qui démarre, c'est l'ovocyte <strong>activé</strong>, qui termine sa méiose.</p><p><strong>Là où l'image s'arrête.</strong> Le passager ne s'assoit pas à côté de l'ovocyte : les membranes fusionnent et le noyau du spermatozoïde passe dans le cytoplasme de l'ovocyte. Le reste du spermatozoïde (flagelle, mitochondries) disparaît ensuite.</p><p><strong>Deuxième image : les deux sacs de chaussures.</strong> Le papa apporte un sac de 23 chaussures, toutes du pied gauche. La maman apporte un sac de 23 chaussures du pied droit, des mêmes modèles. Avec un seul sac, personne ne peut marcher. En vidant les deux sacs ensemble, on obtient 23 paires complètes.</p><p><strong>Le pont.</strong> Chaque sac, c'est un <strong>pronucléus</strong> : le noyau du spermatozoïde ou de l'ovocyte après la fécondation, qui contient $n = 23$ chromosomes chez l'humain. Vider les deux sacs ensemble, c'est l'<strong>amphimixie</strong> : les chromosomes paternels et maternels se réunissent. Les 23 paires, ce sont les $2n = 46$ chromosomes de la <strong>cellule-œuf</strong>, rangés en paires de chromosomes homologues (deux chromosomes qui portent les mêmes gènes).</p><p><strong>Là où l'image s'arrête.</strong> Deux chromosomes homologues ne sont pas des copies l'un de l'autre : ils portent les mêmes gènes, mais parfois des versions différentes. Et chez le garçon, une paire est « dépareillée » : les chromosomes sexuels X et Y.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>La fécondation est l'union d'un spermatozoïde et d'un ovocyte II. Elle se déroule en étapes, toujours dans cet ordre :</p><ol><li>Traversée de la corona radiata.</li><li><strong>Réaction acrosomique</strong> au contact de la zone pellucide : les enzymes de l'acrosome creusent un passage.</li><li><strong>Fusion</strong> des membranes : le noyau du spermatozoïde entre dans le cytoplasme de l'ovocyte.</li><li><strong>Réaction corticale</strong> : les granules corticaux (petits sacs situés sous la membrane de l'ovocyte) déversent leur contenu, et la zone pellucide devient infranchissable. C'est le <strong>blocage de la polyspermie</strong> (l'entrée de plusieurs spermatozoïdes).</li><li><strong>Activation</strong> de l'ovocyte : il achève sa deuxième division de méiose et expulse le <strong>deuxième globule polaire</strong>.</li><li>Formation de deux <strong>pronucléi</strong>, mâle et femelle, à $n$ chromosomes chacun. Chacun double son ADN, puis ils se rapprochent.</li><li><strong>Amphimixie</strong> : les chromosomes des deux pronucléi se réunissent. On obtient la <strong>cellule-œuf</strong>, ou zygote, à $2n$ chromosomes ($2n = 46$ chez l'humain).</li></ol><p>La méiose avait divisé par deux le nombre de chromosomes ; la fécondation le rétablit. L'ovocyte porte toujours un chromosome X ; le spermatozoïde porte X ou Y. Une cellule-œuf XX donne une fille, XY un garçon.</p></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Au microscope, on observe une cellule entourée d'une zone pellucide. Sous cette zone, on voit deux globules polaires. Dans le cytoplasme, deux noyaux de même taille se rapprochent. Identifie cette cellule et justifie.</p><ol><li><strong>Les deux globules polaires.</strong> Le deuxième globule polaire n'est expulsé qu'après l'entrée d'un spermatozoïde. Donc l'ovocyte a été fécondé et activé.</li><li><strong>Les deux noyaux.</strong> Ce sont le pronucléus mâle et le pronucléus femelle, chacun à $n$ chromosomes.</li><li><strong>Ils ne sont pas encore réunis.</strong> L'amphimixie n'a donc pas encore eu lieu.</li><li><strong>Conclusion.</strong> C'est un ovocyte fécondé au stade des deux pronucléi, juste avant la formation de la cellule-œuf.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves croient que l'ovocyte a terminé sa méiose avant la fécondation. C'est faux : l'ovocyte II reste bloqué en métaphase de la deuxième division de méiose. C'est l'entrée du spermatozoïde qui déclenche la fin de la méiose et l'expulsion du deuxième globule polaire.</p><p>Pour repérer l'erreur : un seul globule polaire, l'ovocyte n'est pas encore fécondé ; deux globules polaires, il l'est. Et retiens : réaction <strong>acrosomique</strong> = spermatozoïde, réaction <strong>corticale</strong> = ovocyte.</p><h2>En une phrase</h2><p>Un seul spermatozoïde franchit les enveloppes de l'ovocyte, la « portière » se verrouille derrière lui, l'ovocyte termine sa méiose, et les deux lots de $n$ chromosomes se réunissent pour former la cellule-œuf à $2n$ chromosomes.</p>",
-          "exercises": [
+          "remember": "La **fécondation** est l'union d'un spermatozoïde et d'un ovocyte II ; elle forme la **cellule-œuf** (ou zygote). Étapes, dans l'ordre : le spermatozoïde capacité traverse la corona radiata ; au contact de la zone pellucide, la **réaction acrosomique** libère les enzymes de l'acrosome, qui creusent un passage ; les membranes fusionnent et le noyau du spermatozoïde entre dans l'ovocyte ; la **réaction corticale** libère le contenu des granules corticaux et rend la zone pellucide infranchissable : un seul spermatozoïde entre, c'est la **monospermie** (la polyspermie est bloquée) ; l'ovocyte achève sa **deuxième division de méiose** et expulse le **deuxième globule polaire** ; les noyaux forment deux **pronucléi**, mâle et femelle, à $n$ chromosomes chacun ; ils se rapprochent et leurs chromosomes se réunissent : c'est la **caryogamie**. La cellule-œuf a $2n$ chromosomes ($2n = 46$ chez l'Homme). La fécondation **rétablit la diploïdie** que la méiose avait réduite de $2n$ à $n$.",
+          "method": [
+            "Identifier le stade observé : où est le spermatozoïde, que contient l'ovocyte (globules polaires, noyaux).",
+            "Ordonner : replacer ce stade dans la suite des étapes de la fécondation.",
+            "Expliquer le rôle de cette étape (réaction acrosomique, réaction corticale, fin de la méiose, caryogamie).",
+            "Compter les chromosomes présents à ce stade : $n$ ou $2n$.",
+            "Conclure : dire ce qui vient de se produire et ce qui va suivre."
+          ],
+          "example": {
+            "statement": "Au laboratoire d'une maternité, un biologiste observe une cellule entourée d'une zone pellucide. Sous cette zone, il voit deux globules polaires. Dans la cellule, deux noyaux de même taille, l'un d'origine paternelle et l'autre d'origine maternelle, se rapprochent ; chacun contient 23 chromosomes. Interpréter l'observation.",
+            "steps": [
+              "Identifier : la cellule a deux globules polaires et deux noyaux qui se rapprochent, sous une zone pellucide intacte.",
+              "Ordonner : le deuxième globule polaire n'est expulsé qu'après l'entrée du spermatozoïde ; on est donc après la réaction corticale et la fin de la méiose, mais avant la caryogamie.",
+              "Expliquer : l'ovocyte II, activé par l'entrée du spermatozoïde, a achevé sa deuxième division de méiose ; les deux noyaux sont le pronucléus mâle et le pronucléus femelle.",
+              "Compter : chaque pronucléus contient $n = 23$ chromosomes ; aucun noyau n'a encore $2n$ chromosomes.",
+              "Conclure : l'ovocyte a été fécondé ; à la caryogamie, les chromosomes se réuniront pour former la cellule-œuf à $2n = 46$ chromosomes."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'ovocyte II a achevé sa méiose : il a déjà $n$ chromosomes, mais à deux chromatides, et il est bloqué en métaphase II jusqu'à l'entrée du spermatozoïde. Contre-exemple : avant l'entrée du spermatozoïde, on ne voit qu'un seul globule polaire ; le deuxième n'est expulsé qu'après. Autre erreur : écrire que la cellule-œuf a $n$ chromosomes. Elle en a $n + n = 2n$, soit 23 + 23 = 46 chez l'Homme.",
+          "figure": "etapes-fecondation",
+          "exercise": {
+            "title": "La fécondation et la cellule-œuf",
+            "statement": "Des élèves d'un lycée agricole étudient au microscope la fécondation chez un mammifère. Dans cet exercice, tu appliques la méthode de la fiche : identifier, ordonner, expliquer, compter, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Remets dans l'ordre ces événements de la fécondation.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : chaque événement est un stade de la fécondation. Étape 2 — Ordonner : le spermatozoïde traverse d'abord la zone pellucide (réaction acrosomique), puis les membranes fusionnent ; l'entrée déclenche la réaction corticale et la fin de la méiose II ; la caryogamie vient en dernier. Mettre la réaction corticale avant la fusion serait une erreur : elle est la réponse de l'ovocyte à l'entrée du spermatozoïde.",
+                "answers": [
+                  {
+                    "content": "Réaction acrosomique et traversée de la zone pellucide"
+                  },
+                  {
+                    "content": "Fusion des membranes et entrée du noyau du spermatozoïde"
+                  },
+                  {
+                    "content": "Réaction corticale"
+                  },
+                  {
+                    "content": "Fin de la méiose II et expulsion du deuxième globule polaire"
+                  },
+                  {
+                    "content": "Caryogamie"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Expliquer : l'acrosome contient des enzymes qui permettent la traversée de la zone pellucide ; les granules corticaux la rendent infranchissable pour les autres spermatozoïdes ; la méiose II s'achève par l'expulsion du deuxième globule polaire, seulement après l'entrée du spermatozoïde ; la caryogamie réunit les chromosomes mâles et femelles dans un seul noyau.",
+                "answers": [
+                  {
+                    "content": "Réaction acrosomique",
+                    "match": "Libère les enzymes qui creusent la zone pellucide"
+                  },
+                  {
+                    "content": "Réaction corticale",
+                    "match": "Rend la zone pellucide infranchissable : monospermie"
+                  },
+                  {
+                    "content": "Deuxième globule polaire",
+                    "match": "Expulsé après l'entrée du spermatozoïde"
+                  },
+                  {
+                    "content": "Caryogamie",
+                    "match": "Réunit les chromosomes des deux pronucléi"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un ovocyte fécondé, les deux pronucléi contiennent chacun 23 chromosomes. Combien de chromosomes la cellule-œuf aura-t-elle après la caryogamie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : deux pronucléi, mâle et femelle. Étape 4 — Compter : chacun a $n = 23$ chromosomes. Étape 5 — Conclure : la caryogamie les réunit, donc $23 + 23 = 46 = 2n$ chromosomes. Répondre 23 serait oublier d'additionner ; 92 viendrait d'un double comptage sans raison.",
+                "answers": [
+                  {
+                    "content": "23 chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "46 chromosomes",
+                    "correct": true
+                  },
+                  {
+                    "content": "92 chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "69 chromosomes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le blocage de la polyspermie est assuré par la ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Expliquer : après l'entrée du spermatozoïde, les granules corticaux libèrent leur contenu et la zone pellucide devient infranchissable : c'est la réaction corticale, qui assure la monospermie. La réaction acrosomique est le piège classique : elle sert à traverser la zone pellucide, pas à fermer la porte derrière le premier spermatozoïde.",
+                "answers": [
+                  {
+                    "content": "capacitation",
+                    "correct": false
+                  },
+                  {
+                    "content": "réaction acrosomique",
+                    "correct": false
+                  },
+                  {
+                    "content": "réaction corticale",
+                    "correct": true
+                  },
+                  {
+                    "content": "caryogamie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avant l'entrée du spermatozoïde, l'ovocyte II a déjà achevé sa deuxième division de méiose.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Ordonner : l'ovocyte II est bloqué en métaphase de la deuxième division de méiose ; c'est l'entrée du spermatozoïde qui l'active. Étape 3 — Expliquer : la méiose II s'achève alors, avec l'expulsion du deuxième globule polaire. L'affirmation est donc fausse : avant l'entrée, un seul globule polaire est présent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à replacer une étape de la fécondation, à expliquer son rôle et à compter les chromosomes, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La réunion des chromosomes des deux pronucléi en un seul noyau s'appelle la ___ ; elle rétablit la ___ de l'espèce.",
+                "question_type": "fill_blank",
+                "hint": "Premier mot : le nom de la réunion des chromosomes. Deuxième mot : le nom de l'état où les chromosomes sont par paires ($2n$).",
+                "explanation": "Étape 3 — Expliquer : la caryogamie réunit les chromosomes mâles et femelles dans un seul noyau. Étape 4 — Compter : on passe de deux noyaux à $n$ chromosomes à un noyau à $2n$ chromosomes. Étape 5 — Conclure : la fécondation rétablit la diploïdie, que la méiose avait réduite.",
+                "answers": [
+                  {
+                    "content": "caryogamie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "amphimixie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "diploïdie",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La réaction acrosomique libère des enzymes qui permettent au spermatozoïde de traverser la zone pellucide.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : l'acrosome contient des enzymes ; au contact de la zone pellucide, elles sont libérées et creusent un passage. Étape 2 — Ordonner : cette étape précède la fusion des membranes. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ovocyte est déjà fécondé par un premier spermatozoïde. Un deuxième spermatozoïde capacité arrive contre sa zone pellucide. Pourquoi ne peut-il pas y entrer ?",
+                "question_type": "single_choice",
+                "hint": "Cherche l'étape qui suit immédiatement l'entrée du premier spermatozoïde et qui protège l'ovocyte.",
+                "explanation": "Étape 2 — Ordonner : l'entrée du premier spermatozoïde déclenche la réaction corticale. Étape 3 — Expliquer : les granules corticaux libèrent leur contenu et la zone pellucide devient infranchissable, ce qui bloque la polyspermie. Les autres propositions sont fausses : la membrane existe toujours, l'acrosome est présent, et la caryogamie n'intervient qu'après.",
+                "answers": [
+                  {
+                    "content": "Parce que la zone pellucide est devenue infranchissable après la réaction corticale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que l'ovocyte n'a plus de membrane",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le deuxième spermatozoïde n'a pas d'acrosome",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que la caryogamie est déjà terminée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux conséquences de l'entrée du spermatozoïde dans l'ovocyte II ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer : l'entrée active l'ovocyte, qui achève la méiose II (deuxième globule polaire), et déclenche la réaction corticale (zone pellucide infranchissable). La corona radiata entoure déjà l'ovocyte avant la fécondation, et un ovocyte ne produit jamais de spermatozoïde.",
+                "answers": [
+                  {
+                    "content": "L'ovocyte achève sa deuxième division de méiose",
+                    "correct": true
+                  },
+                  {
+                    "content": "La zone pellucide devient infranchissable",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ovocyte produit un nouveau spermatozoïde",
+                    "correct": false
+                  },
+                  {
+                    "content": "La corona radiata se forme autour de l'ovocyte",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "De la cellule-œuf à la nidation",
+          "remember": "Après la fécondation, la cellule-œuf se divise par une suite de **mitoses** : c'est la **segmentation**. Les cellules obtenues sont les **blastomères**. Si les divisions sont simultanées, leur nombre est $2^k$ après $k$ divisions (2, 4, 8, 16…) ; leur taille diminue, l'embryon garde presque la même taille et chaque blastomère garde $2n$ chromosomes. Aspects successifs : la **morula**, amas plein en forme de mûre, puis le **blastocyste**, creusé d'une cavité, avec le **trophoblaste** à l'extérieur et le **bouton embryonnaire** à l'intérieur, qui donnera l'embryon. Pendant ce temps, l'embryon **migre** dans la trompe, poussé par les battements des cils et les contractions de la trompe, puis arrive dans la cavité de l'utérus. Le blastocyste sort de la zone pellucide (éclosion) et s'enfonce dans la muqueuse utérine : c'est la **nidation**, environ une semaine après la fécondation. L'hormone **hCG** est sécrétée par l'embryon (trophoblaste) dès l'implantation : c'est un signe de gestation, que dosent les tests de grossesse.",
+          "method": [
+            "Repérer le stade de l'embryon d'après le nombre de cellules et son aspect : cellule-œuf, morula ou blastocyste.",
+            "Calculer le nombre de blastomères ($2^k$ après $k$ divisions simultanées) et le nombre de chromosomes de chaque blastomère.",
+            "Situer l'embryon dans les voies génitales, trompe ou utérus, d'après le temps écoulé depuis la fécondation.",
+            "Conclure : dire ce qui précède et ce qui suit (migration, nidation, sécrétion d'hCG)."
+          ],
+          "example": {
+            "statement": "Chez une femme, la cellule-œuf se forme dans la trompe au jour J0. On admet que les blastomères se divisent tous en même temps, qu'à J3 trois divisions ont eu lieu et que l'embryon entre dans l'utérus à J4. Décrire l'embryon à J3.",
+            "steps": [
+              "Repérer : une cellule-œuf qui s'est divisée trois fois est un embryon en segmentation, amas plein de cellules sans cavité.",
+              "Calculer : $2^3 = 8$ blastomères ; chacun garde $2n = 46$ chromosomes, car la segmentation est une suite de mitoses.",
+              "Situer : à J3, l'embryon n'est pas encore arrivé dans l'utérus (il y entre à J4) : il est dans la trompe, qu'il descend.",
+              "Conclure : à J3, l'embryon à 8 blastomères descend la trompe ; il entrera dans l'utérus, deviendra un blastocyste, puis s'implantera (nidation) environ une semaine après la fécondation."
+            ]
+          },
+          "pitfall": "Ne pas croire que la segmentation fait grossir l'embryon, ni que les blastomères ont $n$ chromosomes. Contre-exemple : après 3 divisions, il y a 8 blastomères, mais l'ensemble a presque la taille de la cellule-œuf, car chaque division partage la cellule sans qu'elle grandisse ; chaque blastomère a 46 chromosomes, comme la cellule-œuf, car la segmentation est faite de mitoses et non de méioses. Ne pas confondre non plus la nidation (fixation dans l'utérus) et la fécondation (dans la trompe).",
+          "figure": "du-zygote-au-blastocyste",
+          "exercise": {
+            "title": "Segmentation, migration et nidation",
+            "statement": "À la maternité de Bingerville, une équipe suit le développement des tout premiers jours d'un embryon humain. Dans cet exercice, tu appliques la méthode de la fiche : repérer, calculer, situer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "appareil-feminin-nidation",
+            "questions": [
+              {
+                "content": "Une cellule-œuf se segmente. Si toutes les cellules se divisent en même temps, combien de blastomères y a-t-il après 4 divisions ?",
+                "question_type": "numeric",
+                "unit": "cellules",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : après 4 divisions, l'embryon est encore en segmentation. Étape 2 — Calculer : le nombre double à chaque division, donc $2^4 = 16$ blastomères ($1 \\to 2 \\to 4 \\to 8 \\to 16$). Répondre 8 serait confondre $2^4$ avec $2 \\times 4$ (ou compter une division de moins).",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le nombre de chromosomes de chaque blastomère d'un embryon humain en segmentation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer : la segmentation est une suite de mitoses, qui conservent le nombre de chromosomes. Chaque blastomère a donc $2n = 46$ chromosomes, comme la cellule-œuf. Répondre 23 serait confondre mitose et méiose ; la taille des blastomères diminue, mais pas leur nombre de chromosomes.",
+                "answers": [
+                  {
+                    "content": "23 chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "46 chromosomes",
+                    "correct": true
+                  },
+                  {
+                    "content": "92 chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un nombre qui diminue à chaque division",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les stades du développement de l'embryon, de la fécondation à la nidation.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on classe chaque stade d'après le nombre de cellules et l'aspect. Étape 4 — Conclure : cellule-œuf, puis blastomères de plus en plus nombreux, morula (amas plein), blastocyste (avec une cavité), enfin nidation. La morula précède le blastocyste, qui a déjà une cavité.",
+                "answers": [
+                  {
+                    "content": "Cellule-œuf"
+                  },
+                  {
+                    "content": "Embryon de 2 puis 4 blastomères"
+                  },
+                  {
+                    "content": "Morula"
+                  },
+                  {
+                    "content": "Blastocyste"
+                  },
+                  {
+                    "content": "Nidation dans la muqueuse utérine"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : chaque terme désigne un stade ou une partie de l'embryon. Étape 4 — Conclure : la morula est pleine, le blastocyste a une cavité ; le trophoblaste est la couche externe et sécrète l'hCG ; le bouton embryonnaire, à l'intérieur, donnera l'embryon lui-même.",
+                "answers": [
+                  {
+                    "content": "Morula",
+                    "match": "Amas plein de blastomères, en forme de mûre"
+                  },
+                  {
+                    "content": "Blastocyste",
+                    "match": "Embryon creusé d'une cavité"
+                  },
+                  {
+                    "content": "Trophoblaste",
+                    "match": "Couche externe du blastocyste, qui sécrète l'hCG"
+                  },
+                  {
+                    "content": "Bouton embryonnaire",
+                    "match": "Amas interne qui donnera l'embryon"
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la segmentation, l'embryon double de taille à chaque division.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : le nombre de blastomères double à chaque division, mais leur taille diminue : l'embryon garde presque la taille de la cellule-œuf. L'affirmation est fausse. Contre-exemple : 8 blastomères ne sont pas 8 fois plus gros qu'une cellule-œuf, ils tiennent dans le même volume.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après la nidation, le trophoblaste sécrète l'hormone ___, qui signale le début de la gestation.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : la nidation est suivie de la sécrétion d'hCG par le trophoblaste. Cette hormone, sécrétée par l'embryon dès l'implantation, est un signe de gestation que dosent les tests de grossesse.",
+                "answers": [
+                  {
+                    "content": "hCG",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à repérer le stade d'un embryon, à calculer le nombre de blastomères et à situer l'embryon, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La suite de mitoses de la cellule-œuf s'appelle la ___ ; les cellules obtenues s'appellent les ___.",
+                "question_type": "fill_blank",
+                "hint": "Le premier mot commence par « seg », le second par « blasto ».",
+                "explanation": "Étape 1 — Repérer : la cellule-œuf se divise en cellules de plus en plus petites. Étape 2 — Calculer : leur nombre double à chaque division. Étape 4 — Conclure : cette suite de mitoses est la segmentation, et les cellules obtenues sont les blastomères.",
+                "answers": [
+                  {
+                    "content": "segmentation",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "blastomères",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "blastomère",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "L'embryon descend la trompe vers l'utérus grâce aux battements des cils et aux contractions de la trompe.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Situer : pendant la segmentation, l'embryon migre dans la trompe vers l'utérus. Les cils et les contractions de la trompe le poussent. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un embryon compte 8 blastomères. Si toutes les cellules se divisent encore 2 fois en même temps, combien de blastomères y aura-t-il ?",
+                "question_type": "numeric",
+                "hint": "Double le nombre de cellules à chaque division, deux fois de suite.",
+                "unit": "cellules",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer : à chaque division, le nombre double : 8 devient 16, puis 32. On peut aussi écrire $8 \\times 2^2 = 32$. Répondre 16 serait oublier la deuxième division ; répondre 12 serait ajouter 2 par division au lieu de doubler.",
+                "answers": [
+                  {
+                    "content": "32",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un blastocyste, quelle partie donnera l'embryon lui-même ?",
+                "question_type": "single_choice",
+                "hint": "L'embryon vient de l'amas de cellules situé à l'intérieur.",
+                "explanation": "Étape 1 — Repérer : le blastocyste est creusé d'une cavité, avec une couche externe et un amas interne. Étape 4 — Conclure : le bouton embryonnaire, amas interne, donnera l'embryon ; le trophoblaste, couche externe, participera au placenta et sécrète l'hCG.",
+                "answers": [
+                  {
+                    "content": "Le trophoblaste",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le bouton embryonnaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "La zone pellucide",
+                    "correct": false
+                  },
+                  {
+                    "content": "La cavité du blastocyste",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "À la maternité de Bingerville : la rencontre des gamètes",
+          "statement": "À la maternité de Bingerville, une sage-femme explique à des lycéens comment un spermatozoïde et un ovocyte se rencontrent. Elle s'appuie sur la planche de l'appareil génital féminin (ovaire, pavillon, trompe, utérus, col de l'utérus, vagin). Elle donne les données suivantes pour une femme au cycle régulier : l'ovulation a lieu le 14e jour du cycle ; l'ovocyte II reste fécondable 24 heures ; les spermatozoïdes restent vivants 3 jours dans les voies génitales.",
+          "exercise_type": "fixation",
+          "figure": "appareil-feminin-exercice",
+          "questions": [
             {
-              "title": "Comprendre — Les étapes de la fécondation",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Sur la planche de l'appareil génital féminin, quelle partie recueille l'ovocyte II libéré par l'ovaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Situer : l'ovaire libère l'ovocyte II à l'ovulation ; il faut trouver la partie de l'appareil génital qui s'ouvre près de l'ovaire. Étape 2 — Suivre : le trajet de l'ovocyte commence à l'ovaire et se poursuit dans la trompe. Étape 3 — Expliquer : l'extrémité évasée de la trompe, le pavillon, recueille l'ovocyte II. Étape 4 — Conclure : la réponse est le pavillon. L'utérus, le col et le vagin sont éloignés de l'ovaire : ils servent au passage des spermatozoïdes ou à la nidation.",
+              "answers": [
                 {
-                  "content": "Quel est le rôle de la réaction acrosomique ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les enzymes libérées par l'acrosome creusent un passage dans la zone pellucide : c'est le passager qui ouvre la portière du gbaka. L'erreur tentante est « empêcher l'entrée d'autres spermatozoïdes » : c'est le rôle de la réaction corticale, qui se passe dans l'ovocyte.",
-                  "answers": [
-                    {
-                      "content": "Libérer des enzymes qui creusent un passage dans la zone pellucide",
-                      "correct": true
-                    },
-                    {
-                      "content": "Empêcher l'entrée d'autres spermatozoïdes dans l'ovocyte",
-                      "correct": false
-                    },
-                    {
-                      "content": "Permettre à l'ovocyte d'achever sa méiose",
-                      "correct": false
-                    },
-                    {
-                      "content": "Rendre le spermatozoïde mobile",
-                      "correct": false
-                    }
-                  ]
+                  "content": "L'utérus",
+                  "correct": false
                 },
                 {
-                  "content": "La réaction corticale se produit dans l'ovocyte, juste après la fusion avec le spermatozoïde.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : dès la fusion, les granules corticaux de l'ovocyte déversent leur contenu et la zone pellucide devient infranchissable. C'est l'apprenti qui verrouille la portière juste après l'entrée du passager. Ne confonds pas avec la réaction acrosomique, qui a lieu dans le spermatozoïde, avant la fusion.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le col de l'utérus",
+                  "correct": false
                 },
                 {
-                  "content": "Rappel de l'image : un gbaka n'a plus qu'une place libre ; un passager traverse la foule, ouvre la portière et s'assoit ; aussitôt, l'apprenti claque la portière et la verrouille ; alors seulement le chauffeur démarre. Dans cette image, que représente l'apprenti qui verrouille la portière ?",
-                  "question_type": "single_choice",
-                  "explanation": "Verrouiller la portière pour que personne d'autre n'entre, c'est la réaction corticale, qui bloque la polyspermie. L'erreur tentante est la réaction acrosomique : elle correspond au passager qui ouvre la portière, pas à celui qui la ferme.",
-                  "answers": [
-                    {
-                      "content": "La réaction corticale, qui bloque la polyspermie",
-                      "correct": true
-                    },
-                    {
-                      "content": "La réaction acrosomique",
-                      "correct": false
-                    },
-                    {
-                      "content": "La capacitation",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'amphimixie",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le pavillon de la trompe",
+                  "correct": true
                 },
                 {
-                  "content": "Qu'est-ce qu'un pronucléus ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un pronucléus est le noyau à $n$ chromosomes du spermatozoïde ou de l'ovocyte, dans l'ovocyte fécondé, avant l'amphimixie : c'est un des deux « sacs de chaussures ». L'erreur tentante est « le noyau de la cellule-œuf » : celui-ci contient $2n$ chromosomes, il n'existe qu'après la réunion des deux pronucléi.",
-                  "answers": [
-                    {
-                      "content": "Le noyau à $n$ chromosomes du spermatozoïde ou de l'ovocyte, dans l'ovocyte fécondé, avant leur réunion",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le noyau à $2n$ chromosomes de la cellule-œuf",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un globule polaire expulsé par l'ovocyte",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le noyau d'une cellule de la corona radiata",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces événements, lesquels sont déclenchés par l'entrée du spermatozoïde dans l'ovocyte ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "L'entrée du spermatozoïde déclenche la réaction corticale, puis l'achèvement de la méiose II avec l'expulsion du 2e globule polaire : le chauffeur démarre. Le 1er globule polaire, lui, est expulsé avant l'ovulation, à la fin de la première division de méiose. La réaction acrosomique a lieu avant l'entrée, dans le spermatozoïde.",
-                  "answers": [
-                    {
-                      "content": "La réaction corticale",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'achèvement de la deuxième division de méiose",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'expulsion du deuxième globule polaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'expulsion du premier globule polaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "La réaction acrosomique",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez l'humain, la cellule-œuf possède 23 chromosomes, comme chacun des gamètes.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : chaque gamète apporte $n = 23$ chromosomes, et la cellule-œuf en réunit $2n = 46$. Souviens-toi des deux sacs de 23 chaussures qui donnent 23 paires, soit 46 chaussures.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Le vagin",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Ordonner les étapes et compter les chromosomes",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelles sont les trois affirmations exactes sur la rencontre des gamètes chez la femme ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Situer : on reprend le trajet des gamètes. Étape 2 — Vérifier chaque affirmation avec la fiche. La rencontre a lieu dans le tiers supérieur de la trompe : exact. La capacitation se déroule dans les voies génitales femelles : exact. L'ovocyte II attend en métaphase de la méiose II jusqu'à l'entrée d'un spermatozoïde : exact. La cavité utérine n'est qu'un lieu de passage : la rencontre n'y a pas lieu, c'est faux. Sans capacitation, les spermatozoïdes ne fécondent pas : dire qu'ils fécondent dès leur dépôt est faux.",
+              "answers": [
                 {
-                  "content": "Quel est l'ordre correct de ces étapes de la fécondation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le spermatozoïde ouvre d'abord un passage (réaction acrosomique), puis les membranes fusionnent, la portière se verrouille (réaction corticale), l'ovocyte achève sa méiose et expulse le 2e globule polaire, et enfin les chromosomes se réunissent (amphimixie). L'erreur tentante est de placer la réaction corticale en premier : elle ne peut se produire qu'après l'entrée d'un spermatozoïde.",
-                  "answers": [
-                    {
-                      "content": "Réaction acrosomique → fusion des membranes → réaction corticale → expulsion du 2e globule polaire → amphimixie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Réaction corticale → réaction acrosomique → fusion des membranes → expulsion du 2e globule polaire → amphimixie",
-                      "correct": false
-                    },
-                    {
-                      "content": "Fusion des membranes → réaction acrosomique → réaction corticale → amphimixie → expulsion du 2e globule polaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "Réaction acrosomique → réaction corticale → fusion des membranes → amphimixie → expulsion du 2e globule polaire",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle a lieu dans le tiers supérieur de la trompe",
+                  "correct": true
                 },
                 {
-                  "content": "Chez le chien, $2n = 78$. Combien de chromosomes contient le pronucléus mâle, juste après son entrée dans l'ovocyte ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le pronucléus mâle vient d'un spermatozoïde, un gamète issu de la méiose : il contient $n = 78 \\div 2 = 39$ chromosomes. L'erreur tentante est 78 : c'est le nombre de la cellule-œuf, obtenu seulement après la réunion des deux pronucléi.",
-                  "answers": [
-                    {
-                      "content": "39",
-                      "correct": true
-                    },
-                    {
-                      "content": "78",
-                      "correct": false
-                    },
-                    {
-                      "content": "156",
-                      "correct": false
-                    },
-                    {
-                      "content": "19",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les spermatozoïdes subissent la capacitation dans les voies génitales femelles",
+                  "correct": true
                 },
                 {
-                  "content": "On observe une cellule entourée d'une zone pellucide, avec un seul globule polaire et un seul noyau dont les chromosomes sont alignés en métaphase. De quelle cellule s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un seul globule polaire signifie que le 2e n'a pas encore été expulsé : la méiose II est toujours bloquée en métaphase. C'est donc un ovocyte II non fécondé. L'erreur tentante est la cellule-œuf en division : elle aurait deux globules polaires, puisque la méiose serait terminée.",
-                  "answers": [
-                    {
-                      "content": "Un ovocyte II non fécondé, bloqué en métaphase de la deuxième division de méiose",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une cellule-œuf en train de faire sa première mitose",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un ovocyte fécondé au stade des deux pronucléi",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un ovocyte I au début de sa première division de méiose",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au moment de la rencontre, l'ovocyte II est bloqué en métaphase de la deuxième division de méiose",
+                  "correct": true
                 },
                 {
-                  "content": "Un spermatozoïde porteur d'un chromosome Y féconde un ovocyte humain normal. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'ovocyte apporte toujours un X ; avec le Y du spermatozoïde, la cellule-œuf est XY et l'enfant sera un garçon. C'est donc le spermatozoïde qui détermine le sexe. L'erreur tentante est de croire que Y s'ajoute aux 46 chromosomes : il fait partie des 23 chromosomes du spermatozoïde, le total reste 46.",
-                  "answers": [
-                    {
-                      "content": "La cellule-œuf est XY.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'enfant sera de sexe masculin.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La cellule-œuf est XX.",
-                      "correct": false
-                    },
-                    {
-                      "content": "C'est l'ovocyte qui a déterminé le sexe de l'enfant.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La cellule-œuf possède 47 chromosomes, à cause du Y en plus.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle a lieu dans la cavité de l'utérus",
+                  "correct": false
                 },
                 {
-                  "content": "Si la réaction corticale ne se produit pas, plusieurs spermatozoïdes peuvent entrer dans le même ovocyte.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : sans réaction corticale, la zone pellucide ne devient pas infranchissable, et d'autres spermatozoïdes peuvent entrer. C'est la polyspermie : la portière du gbaka n'a pas été verrouillée.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux spermatozoïdes entrent dans le même ovocyte humain. Si tous leurs chromosomes se réunissaient, combien de chromosomes aurait la cellule obtenue ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'ovocyte apporte 23 chromosomes et chaque spermatozoïde 23 : $23 \\times 3 = 69$, soit $3n$. L'erreur tentante est 92 : ce serait deux cellules-œufs complètes, mais ici il n'y a qu'un seul lot maternel.",
-                  "answers": [
-                    {
-                      "content": "69",
-                      "correct": true
-                    },
-                    {
-                      "content": "46",
-                      "correct": false
-                    },
-                    {
-                      "content": "92",
-                      "correct": false
-                    },
-                    {
-                      "content": "23",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les spermatozoïdes sont capables de féconder dès leur dépôt dans le vagin",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Analyser des observations sur la fécondation",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Un rapport sexuel a lieu le 10e jour du cycle. Jusqu'à quel jour du cycle les spermatozoïdes déposés sont-ils vivants ?",
+              "question_type": "numeric",
+              "unit": "jour",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les données : dépôt au jour 10, durée de vie 3 jours. Étape 2 — Calculer : $10 + 3 = 13$. Les spermatozoïdes sont vivants jusqu'au jour 13. Répondre 14 serait confondre avec le jour de l'ovulation, donnée de l'énoncé et non résultat du calcul.",
+              "answers": [
                 {
-                  "content": "Au laboratoire, des spermatozoïdes humains ne pénètrent jamais dans des ovocytes de hamster entourés de leur zone pellucide. Si l'on retire la zone pellucide de ces ovocytes, les spermatozoïdes humains peuvent y entrer (sans qu'un embryon se forme). Quelle conclusion peux-tu tirer ?",
-                  "question_type": "single_choice",
-                  "explanation": "La seule différence entre les deux cas est la présence de la zone pellucide : c'est donc elle qui ne laisse passer que les spermatozoïdes de la même espèce. L'erreur tentante est d'accuser la membrane de l'ovocyte, mais sans zone pellucide, elle laisse justement entrer le spermatozoïde humain.",
-                  "answers": [
-                    {
-                      "content": "La zone pellucide ne laisse passer que les spermatozoïdes de la même espèce.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La membrane de l'ovocyte de hamster refuse les spermatozoïdes humains.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes humains ne sont pas capables de faire leur réaction acrosomique.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La réaction corticale de l'ovocyte de hamster a lieu avant la fécondation.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "13",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour lequel de ces jours de rapport sexuel une fécondation est-elle possible ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Situer : un rapport dépose les spermatozoïdes dans le vagin le jour choisi. Étape 2 — Suivre : ils remontent vers la trompe tant qu'ils sont vivants, donc jusqu'au jour du rapport plus 3. Étape 3 — Expliquer : l'ovocyte n'est fécondable que du jour 14 au jour 15. Étape 4 — Conclure : rapport au jour 8, spermatozoïdes vivants jusqu'au jour 11 ; au jour 10, jusqu'au jour 13 ; au jour 16, l'ovocyte est mort depuis le jour 15 ; seul le jour 13 (vivants jusqu'au jour 16) donne un chevauchement avec les jours 14-15 : la fécondation est possible.",
+              "answers": [
+                {
+                  "content": "Le 8e jour",
+                  "correct": false
                 },
                 {
-                  "content": "On décrit trois cellules observées au cours d'une fécondation. Cellule A : deux pronucléi séparés et deux globules polaires. Cellule B : un seul globule polaire et un spermatozoïde en train de traverser la zone pellucide. Cellule C : chromosomes rassemblés sur une seule plaque au centre de la cellule, et deux globules polaires. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "B est la plus précoce : le spermatozoïde n'est pas encore entré, la méiose II reste bloquée et la réaction corticale n'a pas encore eu lieu. Puis A : les deux pronucléi sont formés. Enfin C : les chromosomes réunis, c'est l'amphimixie, qui débouche sur la première mitose. L'erreur tentante est de donner $2n$ chromosomes à chaque pronucléus : chacun n'en a que $n$.",
-                  "answers": [
-                    {
-                      "content": "L'ordre chronologique est B, puis A, puis C.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans la cellule B, la méiose II de l'ovocyte n'est pas encore achevée.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La cellule C correspond à l'amphimixie, suivie de la première mitose de la cellule-œuf.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans la cellule A, chaque pronucléus contient $2n$ chromosomes.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ordre chronologique est A, puis B, puis C.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans la cellule B, la réaction corticale a déjà eu lieu.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le 10e jour",
+                  "correct": false
                 },
                 {
-                  "content": "Une cellule-œuf humaine possède 47 chromosomes, dont trois chromosomes 21 (trisomie 21). Le spermatozoïde était normal ; l'anomalie vient d'une méiose anormale chez la mère. Combien de chromosomes contenait l'ovocyte fécondé ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le spermatozoïde normal apporte 23 chromosomes. L'ovocyte a donc apporté $47 - 23 = 24$ chromosomes, dont deux chromosomes 21. L'erreur tentante est 23 : c'est le nombre normal, mais alors la cellule-œuf aurait 46 chromosomes.",
-                  "answers": [
-                    {
-                      "content": "24",
-                      "correct": true
-                    },
-                    {
-                      "content": "23",
-                      "correct": false
-                    },
-                    {
-                      "content": "47",
-                      "correct": false
-                    },
-                    {
-                      "content": "22",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le 13e jour",
+                  "correct": true
                 },
                 {
-                  "content": "Chez les mammifères, la fécondation rétablit le nombre de chromosomes de l'espèce, qui avait été divisé par deux par la méiose lors de la formation des gamètes.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : la méiose fait passer de $2n$ à $n$ dans les gamètes, et la fécondation réunit deux lots de $n$ pour retrouver $2n$. Méiose et fécondation se complètent et maintiennent constant le nombre de chromosomes de génération en génération.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le 16e jour",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi un rapport sexuel au 10e jour du cycle ne peut pas aboutir à une fécondation, en comparant la durée de vie des deux gamètes.",
+              "question_type": "written",
+              "points": 2,
+              "starter": "Les spermatozoïdes déposés au 10e jour…",
+              "criteria": [
+                "Donne la durée de vie des spermatozoïdes (3 jours) et le dernier jour où ils sont vivants (jour 13)",
+                "Donne la période où l'ovocyte est fécondable (jours 14 à 15)",
+                "Compare les deux périodes : elles ne se chevauchent pas",
+                "Conclut qu'il n'y a pas de rencontre des gamètes, donc pas de fécondation"
+              ],
+              "explanation": "Corrigé modèle : Un rapport au 10e jour dépose les spermatozoïdes dans le vagin ; ils restent vivants 3 jours, donc jusqu'au 13e jour. L'ovocyte n'est libéré qu'au 14e jour et n'est fécondable que 24 heures, du 14e au 15e jour. Les deux périodes ne se chevauchent pas : les spermatozoïdes sont morts avant l'arrivée de l'ovocyte dans la trompe. Il n'y a donc pas de rencontre des gamètes et pas de fécondation. Barème : 0,5 point pour la durée de vie et le jour 13 ; 0,5 point pour la période de l'ovocyte ; 0,5 point pour la comparaison ; 0,5 point pour la conclusion.",
+              "answers": []
+            },
+            {
+              "content": "Relie chaque partie de l'appareil génital féminin à son rôle dans la rencontre des gamètes.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 1 — Situer chaque partie sur la planche. Étape 2 — Suivre le trajet : dépôt dans le vagin, passage par le col, puis la cavité utérine, puis la trompe. Étape 3 — Associer : le pavillon, près de l'ovaire, recueille l'ovocyte II ; la rencontre a lieu dans le tiers supérieur de la trompe, jamais dans l'utérus.",
+              "answers": [
+                {
+                  "content": "Vagin",
+                  "match": "Lieu de dépôt des spermatozoïdes"
                 },
                 {
-                  "content": "Pourquoi le blocage de la polyspermie est-il indispensable au développement normal de l'embryon ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec deux spermatozoïdes, la cellule obtenue aurait au moins $3n$ chromosomes, et un tel embryon ne se développe pas normalement. L'erreur tentante est « cela donnerait des jumeaux » : les vrais jumeaux viennent de la séparation d'un embryon issu d'une seule fécondation normale, pas de plusieurs spermatozoïdes dans un même ovocyte.",
-                  "answers": [
-                    {
-                      "content": "Sinon, la cellule obtenue aurait trop de chromosomes (au moins $3n$) et l'embryon ne se développerait pas normalement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sinon, l'ovocyte donnerait des jumeaux.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sinon, l'ovocyte ne pourrait plus achever sa méiose.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sinon, la nidation se ferait dans la trompe.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Col de l'utérus",
+                  "match": "Passage entre le vagin et la cavité utérine"
                 },
                 {
-                  "content": "Parmi ces affirmations sur ce qu'apporte chaque gamète à la cellule-œuf, lesquelles sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le spermatozoïde apporte surtout son lot de $n$ chromosomes ; l'ovocyte apporte aussi $n$ chromosomes, et presque tout le cytoplasme, car il est beaucoup plus gros. L'erreur tentante est de croire que seul l'ovocyte apporte des chromosomes : les deux « sacs de chaussures » sont nécessaires pour obtenir les paires.",
-                  "answers": [
-                    {
-                      "content": "Le spermatozoïde apporte surtout un lot de $n$ chromosomes.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'ovocyte apporte un lot de $n$ chromosomes et presque tout le cytoplasme.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le spermatozoïde apporte l'essentiel du cytoplasme de la cellule-œuf.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Seul l'ovocyte apporte des chromosomes ; le spermatozoïde ne fait que l'activer.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le spermatozoïde apporte $2n$ chromosomes, l'ovocyte n'en apporte aucun.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Pavillon",
+                  "match": "Recueille l'ovocyte II libéré par l'ovaire"
+                },
+                {
+                  "content": "Tiers supérieur de la trompe",
+                  "match": "Lieu de la rencontre des gamètes"
                 }
               ]
             }
           ]
         },
         {
-          "name": "De la cellule-œuf à la nidation",
-          "subtitle": "Segmentation, migration dans la trompe, nidation et début de la gestation",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Décrire la segmentation de la cellule-œuf jusqu'au stade blastocyste.</li><li>Situer dans le temps et dans les voies génitales la migration et la nidation de l'embryon.</li><li>Expliquer comment l'embryon empêche les règles et permet le début de la gestation.</li></ul><h2>L'image pour comprendre</h2><p><strong>Première image : le pain du maquis.</strong> Au maquis, la tenancière coupe un gros pain rond en deux, puis chaque moitié en deux, et ainsi de suite. Le nombre de morceaux double à chaque coupe : 2, 4, 8, 16… Mais le pain, lui, ne grossit pas : les morceaux sont de plus en plus petits, et tout reste serré dans le même sachet.</p><p><strong>Le pont.</strong> Le pain, c'est la <strong>cellule-œuf</strong>. Chaque coupe, c'est une <strong>mitose</strong> (une division cellulaire qui donne deux cellules avec les mêmes chromosomes). Les morceaux, ce sont les <strong>blastomères</strong>, les cellules issues de la segmentation. Le sachet, c'est la <strong>zone pellucide</strong>, qui entoure encore le jeune embryon.</p><p><strong>Là où l'image s'arrête.</strong> Couper un pain partage la mie. Une mitose, elle, ne partage pas les chromosomes : chaque blastomère reçoit une copie complète des $2n = 46$ chromosomes. Et les cellules ne se divisent pas toutes au même moment : on peut observer un stade à 3 cellules.</p><p><strong>Deuxième image : la chambre d'amis.</strong> Chaque mois, maman prépare la chambre d'amis avec un matelas bien épais, mais elle ne la garde prête que deux semaines environ. Si aucun invité n'est arrivé, elle défait tout, et elle recommence le mois suivant. Si l'invité arrive, après un long voyage en gbaka, il s'installe dans le matelas et envoie tout de suite un message à maman : « Je suis là, ne défais rien ! ». Alors la chambre reste prête pendant tout son séjour.</p><p><strong>Le pont.</strong> La chambre au matelas épais, c'est l'<strong>endomètre</strong>, la muqueuse (la couche interne) de l'utérus, épaissie et riche en vaisseaux sanguins. Maman, c'est le <strong>corps jaune</strong> de l'ovaire, qui entretient l'endomètre grâce à une hormone, la <strong>progestérone</strong>. Défaire le lit, ce sont les <strong>règles</strong>. Le voyage en gbaka, c'est la <strong>migration</strong> de l'embryon dans la trompe. S'installer dans le matelas, c'est la <strong>nidation</strong>. Le message, c'est l'hormone <strong>hCG</strong>, fabriquée par l'embryon.</p><p><strong>Là où l'image s'arrête.</strong> L'embryon ne voyage pas par ses propres moyens : il est poussé par la trompe. Le « message » hCG ne va pas directement à l'ovaire : il passe dans le sang de la mère. Et le corps jaune ne garde pas la chambre pendant toute la grossesse : plus tard, le placenta prend le relais.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li><strong>Segmentation</strong> : succession de mitoses de la cellule-œuf. Le nombre de blastomères augmente, leur taille diminue, la taille totale de l'embryon ne change presque pas. Chaque blastomère garde $2n$ chromosomes.</li><li><strong>Morula</strong> : amas plein de blastomères, en forme de petite mûre. <strong>Blastocyste</strong> : embryon creusé d'une cavité, formé d'une couche externe, le <strong>trophoblaste</strong> (qui participera au placenta), et d'un amas interne, le <strong>bouton embryonnaire</strong> (qui donnera l'embryon).</li><li><strong>Migration</strong> : pendant la segmentation, l'embryon descend la trompe, poussé par les battements des cils et les contractions de la trompe.</li><li><strong>Nidation</strong> : le blastocyste sort de la zone pellucide (on parle d'éclosion), puis s'enfonce dans l'endomètre. Elle commence vers le 7e jour après la fécondation.</li><li><strong>Début de la gestation</strong> : le trophoblaste sécrète l'hormone <strong>hCG</strong>, qui maintient le corps jaune. Le corps jaune continue à sécréter la progestérone : l'endomètre est conservé et les règles n'arrivent pas. La gestation est la période où l'embryon, puis le fœtus, se développe dans l'utérus.</li></ul><p><strong>Le calendrier du jeune embryon</strong> (durées approximatives, comptées à partir de la fécondation) :</p><ul><li><strong>Jour 0</strong> : cellule-œuf, dans le tiers supérieur de la trompe.</li><li><strong>Jours 1 à 2</strong> : 2 puis 4 blastomères, dans la trompe.</li><li><strong>Jours 3 à 4</strong> : morula, à la fin de la trompe, puis entrée dans l'utérus.</li><li><strong>Jour 5</strong> : blastocyste, dans la cavité de l'utérus.</li><li><strong>Jours 6 à 7</strong> : éclosion, puis début de la nidation dans l'endomètre.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Chez une femme, une cellule-œuf se forme au 14e jour du cycle. (a) Si tous les blastomères se divisent en même temps, combien y en a-t-il après 4 divisions, et combien de chromosomes contient chacun ? (b) Où se trouve l'embryon au 21e jour du cycle, et que fait-il ?</p><ol><li><strong>Compter les blastomères.</strong> Chaque division double le nombre de cellules : $1 \\to 2 \\to 4 \\to 8 \\to 16$. Après 4 divisions, il y a $2^4 = 16$ blastomères.</li><li><strong>Compter les chromosomes.</strong> La segmentation est faite de mitoses, qui conservent le nombre de chromosomes. Chaque blastomère a donc $2n = 46$ chromosomes, pas moins.</li><li><strong>Calculer l'âge de l'embryon.</strong> Au jour 21 du cycle, l'embryon a $21 - 14 = 7$ jours.</li><li><strong>Lire le calendrier.</strong> Vers 7 jours, le blastocyste est dans l'utérus, sorti de la zone pellucide : il commence sa nidation dans l'endomètre.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves pensent que chaque division de la segmentation divise aussi par deux le nombre de chromosomes, ou qu'elle fait grossir l'embryon. C'est faux : la segmentation est faite de <strong>mitoses</strong>, pas de méioses. Chaque blastomère garde $2n$ chromosomes, et c'est la taille des cellules qui diminue, pas celle de l'embryon qui augmente.</p><p>Pour repérer l'erreur : si une réponse donne 23 chromosomes à un blastomère humain, ou un embryon « 16 fois plus gros » après 4 divisions, elle est fausse.</p><h2>En une phrase</h2><p>La cellule-œuf se divise en cellules de plus en plus petites en descendant la trompe, arrive dans l'utérus sous forme de blastocyste, s'y enfonce vers le 7e jour, et envoie l'hCG pour que le corps jaune reste actif et que les règles ne viennent pas.</p>",
-          "exercises": [
+          "title": "Un élevage de lapins : pourquoi les spermatozoïdes doivent être capacités",
+          "statement": "Dans l'élevage de lapins d'un lycée agricole près de Bingerville, des élèves étudient la fécondation de la lapine avec leur technicien. Dans des boîtes de culture, il met des ovocytes II de lapine, prélevés dans la trompe, avec des spermatozoïdes de lapin. Il observe si les spermatozoïdes traversent la zone pellucide et si l'ovocyte est fécondé (présence de deux pronucléi). Résultats donnés par l'énoncé, pour 40 ovocytes par lot. Lot 1 : spermatozoïdes frais, sans traitement : aucun ne traverse la zone pellucide, 0 ovocyte fécondé. Lot 2 : spermatozoïdes gardés plusieurs heures dans un liquide prélevé dans les voies génitales d'une lapine : ils traversent la zone pellucide, 36 ovocytes fécondés. Lot 3 : mêmes spermatozoïdes qu'au lot 2, mais avec un produit qui empêche la libération des enzymes de l'acrosome : ils restent collés contre la zone pellucide, 0 ovocyte fécondé.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Les stades du jeune embryon et la nidation",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quel facteur est testé quand on compare le lot 1 et le lot 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Observer : le lot 1 ne féconde rien, le lot 2 féconde 36 ovocytes sur 40. Étape 2 — Comparer : pour trouver le facteur testé, on cherche la seule différence entre les deux lots : le lot 2 a séjourné dans un liquide des voies génitales d'une lapine. Étape 3 — Conclure : c'est ce séjour qui est testé, c'est-à-dire la capacitation. Le nombre d'ovocytes (40 par lot) et les autres conditions sont identiques.",
+              "answers": [
                 {
-                  "content": "Qu'appelle-t-on la segmentation de la cellule-œuf ?",
-                  "question_type": "single_choice",
-                  "explanation": "La segmentation est une suite de mitoses qui multiplie les blastomères sans faire grossir l'embryon : c'est le pain coupé en morceaux de plus en plus petits. L'erreur tentante est « une suite de méioses » : les blastomères gardent tous leurs $2n$ chromosomes.",
-                  "answers": [
-                    {
-                      "content": "Une succession de mitoses de la cellule-œuf, sans augmentation de la taille totale de l'embryon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une succession de méioses qui réduisent le nombre de chromosomes",
-                      "correct": false
-                    },
-                    {
-                      "content": "La sortie de l'embryon hors de la zone pellucide",
-                      "correct": false
-                    },
-                    {
-                      "content": "La fixation de l'embryon dans la muqueuse de l'utérus",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le séjour des spermatozoïdes dans un liquide des voies génitales femelles",
+                  "correct": true
                 },
                 {
-                  "content": "Parmi ces affirmations sur le blastocyste, lesquelles sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le blastocyste a une couche externe, le trophoblaste, qui participera au placenta, et un amas interne, le bouton embryonnaire, qui donnera l'embryon. L'erreur tentante est de décrire un amas plein sans cavité : c'est la morula, le stade d'avant.",
-                  "answers": [
-                    {
-                      "content": "Sa couche externe, le trophoblaste, participera à la formation du placenta.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son amas interne, le bouton embryonnaire, donnera l'embryon.",
-                      "correct": true
-                    },
-                    {
-                      "content": "C'est un amas plein de cellules, sans cavité.",
-                      "correct": false
-                    },
-                    {
-                      "content": "C'est le trophoblaste qui donnera l'embryon.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le nombre d'ovocytes dans la boîte de culture",
+                  "correct": false
                 },
                 {
-                  "content": "Rappel de l'image : chaque mois, maman prépare la chambre d'amis avec un matelas épais ; si aucun invité n'arrive, elle défait tout ; si l'invité arrive, il s'installe dans le matelas et lui envoie un message « Je suis là, ne défais rien ! ». Dans cette image, que représente maman, qui garde la chambre prête ?",
-                  "question_type": "single_choice",
-                  "explanation": "Maman, c'est le corps jaune : il entretient l'endomètre grâce à la progestérone. L'erreur tentante est l'hormone hCG : elle correspond au message de l'invité, c'est-à-dire de l'embryon, qui demande à maman de ne rien défaire.",
-                  "answers": [
-                    {
-                      "content": "Le corps jaune de l'ovaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'hormone hCG",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'endomètre",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'embryon",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La température de la boîte de culture",
+                  "correct": false
                 },
                 {
-                  "content": "La nidation est l'implantation de l'embryon dans l'endomètre, la muqueuse de l'utérus.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : lors de la nidation, le blastocyste sorti de la zone pellucide s'enfonce dans l'endomètre, comme l'invité qui s'installe dans le matelas. Elle commence vers le 7e jour après la fécondation.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle hormone, produite par l'embryon, permet de maintenir le corps jaune au début de la gestation ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est l'hCG, sécrétée par le trophoblaste de l'embryon. L'erreur tentante est la progestérone : elle est indispensable, mais c'est le corps jaune qui la fabrique, pas l'embryon.",
-                  "answers": [
-                    {
-                      "content": "L'hCG",
-                      "correct": true
-                    },
-                    {
-                      "content": "La progestérone",
-                      "correct": false
-                    },
-                    {
-                      "content": "La LH",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les œstrogènes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pendant la segmentation, chaque blastomère reçoit la moitié des chromosomes de la cellule qui s'est divisée.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : la segmentation est faite de mitoses. Avant chaque division, les chromosomes sont copiés, et chaque blastomère reçoit un lot complet de $2n$ chromosomes. C'est là que l'image du pain s'arrête : le pain se partage, pas les chromosomes.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Le nombre de globules polaires de l'ovocyte",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Suivre l'embryon jour après jour",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "La comparaison des lots 1 et 2 montre que des spermatozoïdes non capacités ne fécondent pas l'ovocyte.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Observer : lot 1, spermatozoïdes frais, 0 ovocyte fécondé ; lot 2, spermatozoïdes ayant séjourné dans le liquide, 36 fécondés sur 40. Étape 2 — Comparer : la seule différence est le séjour dans le liquide des voies génitales. Étape 3 — Conclure : sans ce séjour (capacitation), les spermatozoïdes ne fécondent pas ; l'affirmation est vraie.",
+              "answers": [
                 {
-                  "content": "Une cellule-œuf subit 3 divisions successives, et toutes les cellules se divisent en même temps. Combien de blastomères obtient-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque division double le nombre de cellules : $1 \\to 2 \\to 4 \\to 8$, soit $2^3 = 8$. L'erreur tentante est 6, obtenue en ajoutant 2 cellules à chaque division au lieu de doubler.",
-                  "answers": [
-                    {
-                      "content": "8",
-                      "correct": true
-                    },
-                    {
-                      "content": "6",
-                      "correct": false
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "16",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une femme, la fécondation a lieu au 14e jour du cycle. Au 18e jour, sous quelle forme et où se trouve l'embryon, environ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Au jour 18, l'embryon a environ 4 jours : c'est une morula, qui arrive au bout de la trompe et entre dans l'utérus. L'erreur tentante est le blastocyste déjà niché : la nidation ne commence que vers le 7e jour, soit vers le 21e jour du cycle.",
-                  "answers": [
-                    {
-                      "content": "Une morula, à la fin de la trompe ou à l'entrée de l'utérus",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un blastocyste déjà niché dans l'endomètre",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une cellule-œuf non divisée, dans le tiers supérieur de la trompe",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un blastocyste en train d'éclore dans le tiers supérieur de la trompe",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une femme est enceinte depuis 3 semaines. Quelles observations s'attend-on à faire chez elle ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'embryon niché sécrète l'hCG, que l'on retrouve dans le sang et l'urine. L'hCG maintient le corps jaune, donc la progestérone reste élevée, l'endomètre est conservé et les règles n'arrivent pas. L'erreur tentante est un corps jaune qui dégénère : c'est ce qui se passe quand il n'y a pas de grossesse.",
-                  "answers": [
-                    {
-                      "content": "Absence de règles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Présence d'hCG dans le sang ou dans l'urine",
-                      "correct": true
-                    },
-                    {
-                      "content": "Corps jaune en train de dégénérer",
-                      "correct": false
-                    },
-                    {
-                      "content": "Endomètre éliminé",
-                      "correct": false
-                    },
-                    {
-                      "content": "Taux de progestérone très faible",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une morula de 16 blastomères est environ 16 fois plus grosse que la cellule-œuf dont elle provient.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : pendant la segmentation, la taille totale de l'embryon change à peine, car il reste dans la zone pellucide. Ce sont les blastomères qui deviennent de plus en plus petits, comme les morceaux d'un même pain.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez une femme, l'embryon s'est implanté dans la trompe au lieu de l'utérus (grossesse extra-utérine). Quelle étape s'est mal déroulée ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'embryon aurait dû descendre la trompe jusqu'à l'utérus : c'est la migration qui a échoué, le « gbaka » s'est arrêté en route. L'erreur tentante est la fécondation, mais elle a normalement lieu dans la trompe : ce n'est pas elle qui est en cause.",
-                  "answers": [
-                    {
-                      "content": "La migration de l'embryon vers l'utérus",
-                      "correct": true
-                    },
-                    {
-                      "content": "La fécondation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La segmentation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La capacitation des spermatozoïdes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez l'humain, $2n = 46$. Combien de chromosomes contient chaque cellule d'une morula de 16 blastomères ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les blastomères sont issus de mitoses : chacun a $2n = 46$ chromosomes. L'erreur tentante est de diviser 46 par 16, comme si l'on partageait un pain : les chromosomes sont copiés avant chaque division, pas partagés.",
-                  "answers": [
-                    {
-                      "content": "46",
-                      "correct": true
-                    },
-                    {
-                      "content": "23",
-                      "correct": false
-                    },
-                    {
-                      "content": "Environ 3, car $46 \\div 16 \\approx 2{,}9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "736, car $46 \\times 16 = 736$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Expliquer le début de la gestation",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quelles sont les deux conclusions que permet la comparaison des lots 2 et 3 ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Observer : lots 2 et 3 ont les mêmes spermatozoïdes capacités ; seul change le produit qui bloque les enzymes de l'acrosome. Étape 2 — Comparer : au lot 3, les spermatozoïdes restent contre la zone pellucide et 0 ovocyte est fécondé. Étape 3 — Conclure : la réaction acrosomique est nécessaire pour traverser la zone pellucide, et la capacitation seule ne suffit pas. Dire que la capacitation est inutile est contredit par le lot 1. Dire que les spermatozoïdes du lot 3 n'ont pas subi la capacitation est faux : ils ont séjourné dans le même liquide qu'au lot 2.",
+              "answers": [
                 {
-                  "content": "Chez une femme non enceinte, le corps jaune dégénère environ deux semaines après l'ovulation : le taux de progestérone chute et les règles surviennent. Chez une femme enceinte, on détecte de l'hCG dans le sang environ 8 à 10 jours après la fécondation ; le corps jaune persiste et le taux de progestérone reste élevé. Quelle relation peux-tu établir ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'hCG apparaît seulement en cas de grossesse, et c'est seulement dans ce cas que le corps jaune persiste : l'hCG, sécrétée par le trophoblaste, maintient le corps jaune, qui continue à sécréter la progestérone. L'erreur tentante est « l'hCG agit directement sur l'endomètre » : l'énoncé montre que c'est la progestérone du corps jaune qui reste élevée.",
-                  "answers": [
-                    {
-                      "content": "L'hCG, sécrétée par le trophoblaste, maintient le corps jaune, qui continue à sécréter la progestérone.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'hCG remplace directement la progestérone pour entretenir l'endomètre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le corps jaune fabrique l'hCG pour entretenir l'endomètre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La progestérone provoque la fabrication de l'hCG par l'ovaire.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La libération des enzymes de l'acrosome est nécessaire pour traverser la zone pellucide",
+                  "correct": true
                 },
                 {
-                  "content": "On injecte de l'hCG à une femme non enceinte, quelques jours après son ovulation. Quelles conséquences peut-on prévoir ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "L'hCG injectée joue le rôle du « message » de l'embryon : le corps jaune est maintenu, il continue à sécréter la progestérone, et les règles sont retardées. En revanche, l'hCG ne crée pas d'embryon : il n'y a ni blastocyste, ni nidation sans fécondation.",
-                  "answers": [
-                    {
-                      "content": "Le corps jaune est maintenu.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le taux de progestérone reste élevé.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les règles sont retardées.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un embryon se forme et s'implante.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ovaire libère aussitôt un nouvel ovocyte.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Un spermatozoïde capacité dont l'acrosome est bloqué ne féconde pas",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une femelle de mammifère, on enlève les ovaires au tout début de la gestation, à un moment où le placenta ne fabrique pas encore de progestérone. Que se passe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans ovaires, il n'y a plus de corps jaune, donc plus de progestérone : l'endomètre n'est plus entretenu et l'embryon est éliminé. L'erreur tentante est « l'hCG suffit » : l'hCG n'agit qu'en maintenant le corps jaune ; sans lui, elle ne sert à rien. C'est « maman » qui a disparu, le message n'a plus de destinataire.",
-                  "answers": [
-                    {
-                      "content": "L'endomètre n'est plus maintenu et l'embryon est éliminé : la gestation s'arrête.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Rien ne change, car l'hCG de l'embryon suffit à maintenir l'endomètre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La gestation continue, car l'embryon fabrique lui-même la progestérone dont il a besoin.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'embryon quitte l'endomètre et retourne dans la trompe.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La capacitation est inutile pour féconder",
+                  "correct": false
                 },
                 {
-                  "content": "L'hormone hCG est fabriquée par le corps jaune de l'ovaire.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : l'hCG est fabriquée par le trophoblaste de l'embryon. Le corps jaune, lui, fabrique la progestérone. Dans l'image, l'hCG est le message de l'invité, pas une production de maman.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "La fécondation a lieu au 15e jour du cycle. On admet que l'embryon arrive dans l'utérus environ 4 jours plus tard et que la nidation commence environ 7 jours après la fécondation. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Arrivée dans l'utérus : $15 + 4 = 19$, au jour 19. Début de la nidation : $15 + 7 = 22$, au jour 22. L'erreur tentante est de dire que l'embryon est encore dans le haut de la trompe au jour 22 : il a quitté la trompe depuis le jour 19.",
-                  "answers": [
-                    {
-                      "content": "Au jour 19, l'embryon arrive dans l'utérus.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 22, la nidation commence.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au jour 16, l'embryon est un blastocyste en cours de nidation.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au jour 22, l'embryon se trouve encore dans le tiers supérieur de la trompe.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au jour 17, les règles surviennent.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pourquoi la nidation ne peut-elle commencer qu'après l'éclosion du blastocyste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Tant que la zone pellucide entoure le blastocyste, le trophoblaste ne peut pas toucher l'endomètre ni s'y enfoncer : il faut d'abord « ouvrir le sachet ». L'erreur tentante est de croire que la zone pellucide deviendra le placenta : c'est le trophoblaste qui participera au placenta.",
-                  "answers": [
-                    {
-                      "content": "Tant que la zone pellucide l'entoure, le trophoblaste ne peut pas entrer en contact avec l'endomètre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Parce que la zone pellucide doit d'abord se transformer en placenta.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que c'est la zone pellucide qui fabrique l'hCG.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que le bouton embryonnaire doit d'abord sortir seul de l'embryon.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les spermatozoïdes du lot 3 n'ont pas subi la capacitation",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes suivies par un spermatozoïde du lot 2 qui féconde un ovocyte.",
+              "question_type": "ordering",
+              "explanation": "Méthode. Étape 1 — Repérer chaque étape. Étape 2 — Ordonner : le spermatozoïde est d'abord capacité, puis traverse la corona radiata, puis la zone pellucide grâce à la réaction acrosomique. Il fusionne ensuite avec l'ovocyte, ce qui déclenche la réaction corticale. La réaction corticale vient après la fusion, car elle est la réponse de l'ovocyte à l'entrée du spermatozoïde.",
+              "answers": [
+                {
+                  "content": "Capacitation dans le liquide des voies génitales"
+                },
+                {
+                  "content": "Traversée de la corona radiata"
+                },
+                {
+                  "content": "Réaction acrosomique et traversée de la zone pellucide"
+                },
+                {
+                  "content": "Fusion des membranes"
+                },
+                {
+                  "content": "Réaction corticale de l'ovocyte"
+                }
+              ]
+            },
+            {
+              "content": "Les spermatozoïdes du lot 3 restent bloqués contre la zone pellucide parce que la réaction ___ n'a pas eu lieu.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Observer : au lot 3, les spermatozoïdes restent collés contre l'enveloppe de l'ovocyte. Étape 2 — Expliquer : cette enveloppe est la zone pellucide ; le produit empêche la libération des enzymes de l'acrosome. Étape 3 — Conclure : sans réaction acrosomique, le passage dans la zone pellucide n'est pas creusé.",
+              "answers": [
+                {
+                  "content": "acrosomique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le lot 2, 36 ovocytes sur 40 sont fécondés. Quel est le pourcentage d'ovocytes fécondés ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les données : 36 ovocytes fécondés sur 40. Étape 2 — Calculer : $\\dfrac{36}{40} \\times 100 = 90$. Étape 3 — Conclure : 90 % des ovocytes du lot 2 sont fécondés, contre 0 % au lot 1. Répondre 36 serait donner un effectif et non un pourcentage.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Monospermie et quantité d'ADN pendant la fécondation",
+          "statement": "Des chercheurs étudient la fécondation chez un mammifère. Expérience 1 : des ovocytes II sont mis en présence de spermatozoïdes capacités. Lot A : ovocytes normaux. Lot B : ovocytes traités par un produit qui empêche les granules corticaux de libérer leur contenu. Après quelques heures, on compte les spermatozoïdes entrés dans chaque ovocyte, sur 50 ovocytes par lot. Résultats donnés par l'énoncé : lot A, 50 ovocytes sur 50 contiennent un seul spermatozoïde ; lot B, 31 ovocytes sur 50 contiennent deux spermatozoïdes ou plus. Expérience 2 : on mesure la quantité totale d'ADN nucléaire d'une cellule à six stades successifs, en unités arbitraires (u.a.). L'unité est la quantité d'ADN du noyau d'un spermatozoïde. Les valeurs sont données par la courbe de la figure : ovocyte II : 2 ; spermatozoïde entré : 3 ; deuxième globule polaire expulsé : 2 ; pronucléi après réplication : 4 ; cellule-œuf après caryogamie : 4 ; chaque cellule après la première division : 2.",
+          "exercise_type": "evaluation",
+          "figure": "adn-fecondation",
+          "questions": [
+            {
+              "content": "Que montre la comparaison des lots A et B de l'expérience 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Observer : au lot A, chaque ovocyte contient un seul spermatozoïde ; au lot B, 31 ovocytes sur 50 en contiennent plusieurs. Étape 2 — Comparer : la seule différence est le blocage de la libération du contenu des granules corticaux. Étape 3 — Conclure : la réaction corticale rend la zone pellucide infranchissable et assure la monospermie. Le produit n'empêche pas l'entrée de spermatozoïdes, il en laisse entrer plusieurs : dire que le produit empêche toute fécondation est donc faux.",
+              "answers": [
+                {
+                  "content": "La libération du contenu des granules corticaux empêche l'entrée de plusieurs spermatozoïdes : elle assure la monospermie",
+                  "correct": true
+                },
+                {
+                  "content": "Les granules corticaux permettent l'entrée du spermatozoïde dans l'ovocyte",
+                  "correct": false
+                },
+                {
+                  "content": "Le produit utilisé empêche toute fécondation",
+                  "correct": false
+                },
+                {
+                  "content": "La monospermie ne dépend pas de l'ovocyte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le lot B, 31 ovocytes sur 50 contiennent plusieurs spermatozoïdes. Quel est le pourcentage d'ovocytes concernés par la polyspermie ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Relever les données : 31 ovocytes sur 50. Étape 2 — Calculer : $\\dfrac{31}{50} \\times 100 = 62$. Étape 3 — Conclure : 62 % des ovocytes du lot B sont polyspermiques, contre 0 % au lot A. Répondre 31 serait donner un effectif et non un pourcentage.",
+              "answers": [
+                {
+                  "content": "62",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après la courbe de l'expérience 2, quelle est la quantité d'ADN, en u.a., de la cellule au stade « pronucléi après réplication » ?",
+              "question_type": "numeric",
+              "unit": "ua",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer sur l'axe horizontal le stade « pronucléi après réplication », quatrième point de la courbe. Étape 2 — Lire la valeur correspondante sur l'axe vertical : 4 u.a. Étape 3 — Conclure : la cellule contient 4 u.a. d'ADN à ce stade. Lire 2 serait lire le stade précédent, avant la réplication.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la quantité d'ADN passe-t-elle de 2 à 4 u.a. entre le stade « deuxième globule polaire expulsé » et le stade « pronucléi après réplication » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Observer : entre les deux stades, la quantité d'ADN double (2 puis 4 u.a.). Étape 2 — Expliquer : la fin de la méiose II et l'expulsion du globule polaire ont déjà eu lieu au stade précédent ; la monospermie exclut un deuxième spermatozoïde ; la caryogamie réunit les chromosomes sans changer la quantité d'ADN (4 puis 4 u.a.). Étape 3 — Conclure : le doublement vient de la réplication de l'ADN dans chaque pronucléus, qui prépare la première mitose.",
+              "answers": [
+                {
+                  "content": "Chaque pronucléus réplique son ADN",
+                  "correct": true
+                },
+                {
+                  "content": "Un deuxième spermatozoïde est entré dans l'ovocyte",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovocyte achève sa deuxième division de méiose",
+                  "correct": false
+                },
+                {
+                  "content": "La caryogamie double la quantité d'ADN",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La diminution de 3 à 2 u.a. après l'entrée du spermatozoïde s'explique par l'expulsion du deuxième globule ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. Étape 1 — Observer : la quantité d'ADN passe de 3 u.a. (ovocyte de 2 u.a. plus noyau du spermatozoïde de 1 u.a.) à 2 u.a. Étape 2 — Expliquer : l'ovocyte achève sa deuxième division de méiose et expulse le deuxième globule polaire, qui emporte 1 u.a. d'ADN. Étape 3 — Conclure : $3 - 1 = 2$ u.a.",
+              "answers": [
+                {
+                  "content": "polaire",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À l'aide de la courbe, montre que la fécondation réunit deux lots de chromosomes à $n$ chromosomes dans une cellule à $2n$ chromosomes, puis que la première division conserve cette garniture chromosomique.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Au stade « deuxième globule polaire expulsé », la cellule contient…",
+              "criteria": [
+                "Les deux noyaux (pronucléi) contiennent chacun 1 u.a. d'ADN, soit 2 u.a. au stade « deuxième globule polaire expulsé »",
+                "La réplication porte la quantité d'ADN à 4 u.a., qui reste à 4 u.a. à la caryogamie",
+                "Après la première division, chaque cellule a 2 u.a., comme une cellule à $2n$ chromosomes avant réplication",
+                "Conclut que la fécondation rétablit la diploïdie et que la première division est une mitose"
+              ],
+              "explanation": "Corrigé modèle : Au stade « deuxième globule polaire expulsé », la cellule contient 2 u.a. : le pronucléus femelle et le pronucléus mâle ont chacun 1 u.a., donc $n$ chromosomes chacun. Chaque pronucléus réplique son ADN (4 u.a. au total) ; la caryogamie réunit les chromosomes en un seul noyau, sans changer la quantité d'ADN (4 u.a.) : la cellule-œuf est diploïde, à $2n$ chromosomes. Après la première division, chaque cellule a 2 u.a., la même quantité d'ADN qu'une cellule diploïde non répliquée : la division est une mitose qui conserve les $2n$ chromosomes. Barème : 1 point pour les pronucléi (2 u.a.), 1 point pour la réplication et la caryogamie, 0,5 point pour la première division, 0,5 point pour la conclusion.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "De la cellule-œuf à la gestation : le suivi d'un embryon à la maternité",
+          "statement": "À la maternité de Bingerville, une équipe suit les premiers jours d'un embryon humain. Les jours sont comptés à partir de la fécondation (J0). Données de l'énoncé : la cellule-œuf se forme dans la trompe à J0 ; les blastomères se divisent tous en même temps ; à J3, l'embryon compte 8 blastomères et se trouve encore dans la trompe ; la morula entre dans l'utérus à J4 ; le blastocyste est présent à J5 ; la nidation commence à J7. Le dosage de l'hormone hCG dans le sang de la femme, en unités arbitraires, donne : J4 : 0 ; J6 : 0 ; J8 : 2 ; J10 : 10 ; J12 : 40 ; J14 : 150.",
+          "exercise_type": "evaluation",
+          "figure": "appareil-feminin-nidation",
+          "questions": [
+            {
+              "content": "À J3, l'embryon compte 8 blastomères. Combien de divisions successives la cellule-œuf a-t-elle subies depuis J0 ?",
+              "question_type": "numeric",
+              "unit": "divisions",
+              "tolerance": 0,
+              "explanation": "Méthode. Étape 1 — Repérer : à J3, l'embryon est en segmentation, avec 8 blastomères. Étape 2 — Calculer : le nombre double à chaque division, donc 8 blastomères correspondent à $2^3 = 8$, soit 3 divisions ($1 \\to 2 \\to 4 \\to 8$). Étape 3 — Conclure : 3 divisions ont eu lieu. Répondre 8 serait donner le nombre de blastomères et non le nombre de divisions.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de chromosomes contient chaque blastomère de l'embryon à J3 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : l'embryon à J3 est en segmentation. Étape 2 — Calculer : la segmentation est une suite de mitoses, qui conservent le nombre de chromosomes ; chaque blastomère a $2n = 46$ chromosomes, comme la cellule-œuf. Étape 3 — Conclure : 46 chromosomes. Répondre 23 serait confondre mitose et méiose ; 8 confondrait le nombre de blastomères et le nombre de chromosomes.",
+              "answers": [
+                {
+                  "content": "23 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "46 chromosomes",
+                  "correct": true
+                },
+                {
+                  "content": "8 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "92 chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Où se trouve l'embryon à J3, d'après les données de l'énoncé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Relever les données : la nidation commence à J7 et la morula entre dans l'utérus à J4. Étape 2 — Situer : à J3, l'embryon n'est pas encore entré dans l'utérus, et la nidation n'a pas commencé. Étape 3 — Conclure : il est dans la trompe, qu'il descend vers l'utérus, poussé par les battements des cils et les contractions de la trompe.",
+              "answers": [
+                {
+                  "content": "Dans la cavité de l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la trompe, où il migre vers l'utérus",
+                  "correct": true
+                },
+                {
+                  "content": "Dans la muqueuse utérine, après la nidation",
+                  "correct": false
+                },
+                {
+                  "content": "Dans l'ovaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'hCG apparaît dans le sang à partir de J8, juste après le début de la nidation (J7). Que peut-on en conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Observer : l'hCG est absente à J4 et J6, puis apparaît à J8 et augmente (2, 10, 40, 150). Étape 2 — Mettre en relation : l'apparition suit de près le début de la nidation (J7), et non la fécondation (J0). Étape 3 — Conclure : l'hCG est sécrétée par le trophoblaste de l'embryon implanté ; sa présence est le signe d'une gestation commençante. Elle ne peut ni provoquer la fécondation (elle apparaît 8 jours après) ni venir du spermatozoïde.",
+              "answers": [
+                {
+                  "content": "Le trophoblaste de l'embryon implanté sécrète l'hCG : sa présence signale une gestation débutante",
+                  "correct": true
+                },
+                {
+                  "content": "L'ovaire sécrète l'hCG avant la fécondation",
+                  "correct": false
+                },
+                {
+                  "content": "L'hCG provoque la fécondation de l'ovocyte",
+                  "correct": false
+                },
+                {
+                  "content": "Le spermatozoïde sécrète l'hCG pendant la fécondation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au jour J6, l'hCG n'est pas détectée parce que la nidation n'a pas encore commencé.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Observer : à J6, la valeur d'hCG est de 0. Étape 2 — Mettre en relation : la nidation commence à J7, donc à J6 le blastocyste n'est pas encore implanté et le trophoblaste ne sécrète pas encore d'hCG. Étape 3 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un texte de synthèse qui retrace l'évolution et le déplacement de l'embryon de la fécondation à la nidation, puis explique comment le dosage de l'hCG permet de savoir qu'une gestation a commencé.",
+              "question_type": "written",
+              "points": 6,
+              "starter": "La fécondation a lieu dans la trompe…",
+              "criteria": [
+                "Situe la fécondation dans la trompe et la formation de la cellule-œuf à $2n$ chromosomes",
+                "Décrit la segmentation en mitoses : blastomères de plus en plus nombreux et petits, morula puis blastocyste",
+                "Décrit la migration dans la trompe jusqu'à l'utérus (cils, contractions)",
+                "Décrit la nidation du blastocyste dans la muqueuse utérine, à partir de J7",
+                "Explique que le trophoblaste sécrète l'hCG après la nidation et que sa présence dans le sang signale la gestation",
+                "Structure du texte, vocabulaire scientifique exact et phrases claires"
+              ],
+              "explanation": "Corrigé modèle : La fécondation a lieu dans la trompe : la cellule-œuf, à $2n$ chromosomes, se forme à J0. Elle se divise par une suite de mitoses, la segmentation : le nombre de blastomères double à chaque division (8 à J3) alors que leur taille diminue ; chaque blastomère garde $2n$ chromosomes. Pendant ce temps, l'embryon migre dans la trompe, poussé par les cils et les contractions, et la morula entre dans l'utérus à J4. À J5, le blastocyste, creusé d'une cavité, comprend le trophoblaste et le bouton embryonnaire. Avant de s'implanter, il sort de la zone pellucide ; la nidation commence à J7 : il s'enfonce dans la muqueuse utérine. Le trophoblaste sécrète alors l'hCG, absente jusqu'à J6 puis croissante de J8 à J14 : sa présence dans le sang prouve qu'une gestation a commencé. Barème : 1 point par critère.",
+              "answers": []
             }
           ]
         }

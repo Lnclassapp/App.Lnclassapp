@@ -97,6 +97,56 @@ module Entities
           assert_equal [ :unit_too_long ], question("4,8").with(unit: "a" * 11).structure_errors
           %w[0 m3 - + , . −].each { assert_equal [ :unit_invalid ], question("4,8").with(unit: it).structure_errors, it }
         end
+
+        # ADR cases §4 : une réponse correcte par case, l'unité et la marge de la question valent pour toutes ses cases.
+        def multi(*values, content: "AN (cm) = ___  MN (cm) = ___", tolerance: nil, unit: nil, blanks: nil)
+          answers = values.each_with_index.map { |text, index| Answer.new(id: index + 1, position: index + 1, content: text, correct: true, blank: (blanks || (0...values.size).to_a)[index]) }
+          Question.new(id: 1, position: 1, content:, explanation: nil, question_type: "numeric", numeric_tolerance: tolerance, unit:, answers:)
+        end
+
+        test "plusieurs cases : le verdict de chaque case, la marge et l'unité de la question pour toutes" do
+          two = multi("3,5", "4", tolerance: BigDecimal("0.1"), unit: "cm")
+
+          assert_equal 2, two.blanks
+          assert_equal [ true, false ], two.blank_results([ "3,45 cm", "5" ])
+          assert_equal [ true, true ], two.blank_results([ "3,6", "4 cm" ])
+          assert_equal [ false, false ], two.blank_results([ "", "abc" ])
+          assert two.correct?([ "3,5", "4" ])
+          assert_not two.correct?([ "3,5", "5" ])
+        end
+
+        test "une question à une case a un seul verdict, comme sa réponse" do
+          assert_equal [ true ], question("3,5").blank_results("3,5")
+          assert_equal [ false ], question("3,5").blank_results("3,7")
+          assert_equal [ true ], question("3,5").blank_results([ "3,5" ])
+        end
+
+        test "plusieurs cases : une réponse par case, une case vide est fausse, une saisie illisible est refusée" do
+          two = multi("3,5", "4")
+
+          assert two.well_formed?([ "3,5", "" ])
+          assert_not two.well_formed?([ "3,5" ])
+          assert_not two.well_formed?([ "3,5", "4", "5" ])
+          assert_not two.well_formed?([ "3,5", "4,,2" ])
+          assert_not two.well_formed?("3,5")
+        end
+
+        test "structure : une valeur lisible par case, autant de ___ que de cases" do
+          assert_empty multi("3,5", "4").structure_errors
+          assert_empty multi(*%w[1 2 3 4 5 6], content: "___ ___ ___ ___ ___ ___").structure_errors
+          assert_equal [ :blank_markers_mismatch ], multi("3,5", "4", content: "Un seul ___").structure_errors
+          assert_equal [ :blank_markers_mismatch ], multi("3,5", "4", content: "Sans case").structure_errors
+          assert_equal [ :numeric_value_unreadable ], multi("3,5", "trois").structure_errors
+          assert_equal [ :numeric_needs_one_value ], multi("3,5", "4", "7", blanks: [ 0, 1, 1 ], content: "___ ___").structure_errors
+        end
+
+        test "structure : une case sans valeur est refusée" do
+          assert_equal [ :blank_without_answer ], multi("3,5", "4", blanks: [ 0, 2 ], content: "___ ___ ___").structure_errors
+        end
+
+        test "structure : au plus six cases" do
+          assert_equal [ :too_many_blanks ], multi(*%w[1 2 3 4 5 6 7], content: "___ ___ ___ ___ ___ ___ ___").structure_errors
+        end
       end
     end
   end

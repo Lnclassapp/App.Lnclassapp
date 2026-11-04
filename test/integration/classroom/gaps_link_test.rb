@@ -44,15 +44,14 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_gaps a[href*='/essentials/']", 0
   end
 
-  test "the anchor exists on the lesson page, on the card of the notion's exercise" do
+  test "the anchor exists on the lesson page, on the card of the notion, which leads to its sheet" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
-    # UDR-0145 §3.2 bis : l'ancre est le premier enfant du <li> de la première carte de la notion.
-    assert_select "##{anchor}", 1
-    assert_select "#prepare-interros-grid li > span##{anchor}", 1
+    assert_select "a.ps-card##{anchor}[href=?]", course_sheet_path(@course.slug, anchor)
     exercise = Orm::Exercise.find_by!(essential: @notion)
-    assert_select "li:has(> span##{anchor}) a[href=?]", exercise_path(exercise.public_id)
+    get fill_course_sheet_path(@course.slug, anchor)
+    assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"
   end
 end

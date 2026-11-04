@@ -18,7 +18,7 @@ class Orm::QuestionAttemptTest < ActiveSupport::TestCase
 
   # W8 : la grille cochée à l'écran n'est jamais enregistrée ; une tentative ne garde que ses réponses.
   test "une tentative n'a pas de colonne pour une grille de vérification" do
-    assert_equal %w[answered_at correct exercise_session_id id question_id response_text selected_answer_ids unanswered],
+    assert_equal %w[answered_at blank_responses blank_results correct exercise_session_id id question_id response_text selected_answer_ids unanswered],
                  Orm::QuestionAttempt.column_names.sort
   end
 end

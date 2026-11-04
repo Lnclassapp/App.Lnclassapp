@@ -34,14 +34,14 @@ module Queries
         assert_equal [ @classroom.public_id, "Tle D 1", "Tle", "D", "Lycée Classique", "2026-2027" ],
                      row.to_h.values_at(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
         assert_equal %i[public_id classroom_name level_name series_name school_name school_year has_teacher courses
-                        assigned_exercises pending_gaps treated_exercises], row.to_h.keys
+                        pending_gaps treated_exercises], row.to_h.keys
         assert_no_match "Yapo", row.inspect
       end
 
       # UDR-0086 §3.3 (ma-classe-eleve): « Aucun enseignant sur Lnclass » reads teacher_classrooms, in the same query
       # as the header; a teacher of another classroom of the same school does not count.
-      # ADR-0067: the count is pinned, with or without a teacher (relevé le 2026-10-15).
-      QUERIES = 7
+      # ADR-0067: the count is pinned, with or without a teacher (relevé le 2026-10-31, après le retrait de assigned_exercises).
+      QUERIES = 6
 
       test "has_teacher: false without a teacher in the classroom, true with one, in the same number of queries" do
         create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
@@ -111,18 +111,6 @@ module Queries
                      classroom.courses.map { it.to_h.values_at(:slug, :name, :material_slug, :assigned_count) }
       end
 
-      # CA-5: the assigned exercises in the order of « À faire », without the ones already done.
-      test "the assigned exercises not done yet, in the order of « À faire »" do
-        done = exercise("Déjà fait")
-        create_assignment(classroom: @classroom, assignable: done, assigned_at: 1.minute.ago)
-        create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 50)
-        create_assignment(classroom: @classroom, assignable: exercise("Ancien"), assigned_at: 2.hours.ago)
-        create_assignment(classroom: @classroom, assignable: exercise("Récent"), assigned_at: 1.hour.ago)
-        create_assignment(classroom: create_classroom, assignable: exercise("Autre classe"))
-
-        assert_equal %w[Récent Ancien], classroom.assigned_exercises.map(&:title)
-      end
-
       # CA-E3 (mvp-teacher-student, option A): « Fiches à revoir » reads the pending gaps of the student, the newest first, with
       # the published sheet; a remediated gap, an archived sheet, another student's gap or another level is left out.
       test "the pending gaps: the sheets to review of the student, the newest first, of their level only" do
@@ -180,8 +168,8 @@ module Queries
         assert_equal [ "Archivé ensuite" ], classroom.treated_exercises.map(&:title)
       end
 
-      test "nothing assigned, nothing treated: three empty lists" do
-        assert_equal [ [], [], [] ], classroom.to_h.values_at(:courses, :assigned_exercises, :treated_exercises)
+      test "nothing assigned, nothing treated: two empty lists" do
+        assert_equal [ [], [] ], classroom.to_h.values_at(:courses, :treated_exercises)
       end
 
       # ADR-0067: a fixed number of queries, whatever the number of courses, exercises and sessions.
@@ -197,7 +185,7 @@ module Queries
         4.times { add.call("E#{it + 1}") }
 
         assert_equal one, count_queries { classroom }
-        assert_equal [ 5, 5, 5 ], classroom.to_h.values_at(:courses, :assigned_exercises, :treated_exercises).map(&:size)
+        assert_equal [ 5, 5 ], classroom.to_h.values_at(:courses, :treated_exercises).map(&:size)
       end
 
       test "the primary classroom only" do

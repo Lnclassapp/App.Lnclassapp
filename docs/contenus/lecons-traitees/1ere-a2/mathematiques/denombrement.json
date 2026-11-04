@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Dénombrement",
@@ -8,1686 +8,1079 @@
       "level_name": "1ère",
       "material_name": "Mathématiques",
       "series_name": "A2",
-      "essentials": [
+      "theme": "teal",
+      "figures": [],
+      "notions": [
         {
-          "name": "Cardinal d'un ensemble fini, réunion et complémentaire",
-          "subtitle": "Compter les éléments d'un ensemble fini sans les compter deux fois",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Donner le cardinal d'un ensemble fini.</li>\n<li>Calculer le cardinal d'une réunion, d'une intersection et d'un complémentaire.</li>\n<li>Résoudre un petit problème de comptage à deux catégories (« les deux », « au moins un », « ni l'un ni l'autre »).</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le sondage dans la classe.</strong> Dans une classe de 40 élèves, la professeure demande : « Lève la main si tu as un compte Orange Money. » 25 élèves lèvent la main. Puis : « Lève la main si tu as un compte Wave. » 18 élèves lèvent la main. Parmi eux, 7 élèves avaient déjà levé la main la première fois : ils ont les deux comptes. Combien d'élèves ont au moins un compte ? Si tu écris $25 + 18 = 43$, tu trouves plus d'élèves que dans la classe ! Les 7 élèves qui ont les deux comptes ont été comptés deux fois. On les retire une fois : $25 + 18 - 7 = 36$. Les 4 autres élèves n'ont aucun compte.</p>\n<p><em>Le pont.</em> La classe est un ensemble $E$ de 40 élèves. Les élèves qui ont Orange Money forment l'ensemble $A$, ceux qui ont Wave forment l'ensemble $B$. Un ensemble qu'on peut compter élément par élément est un <strong>ensemble fini</strong>, et le nombre de ses éléments s'appelle son <strong>cardinal</strong> : on écrit $\\text{card}(A) = 25$. Les 7 élèves qui ont levé la main deux fois forment l'<strong>intersection</strong> $A \\cap B$. Les 36 élèves qui ont au moins un compte forment la <strong>réunion</strong> $A \\cup B$. Les 4 élèves sans compte forment le <strong>complémentaire</strong> de $A \\cup B$ dans $E$, c'est-à-dire tous les élèves de la classe qui ne sont pas dans $A \\cup B$.</p>\n<p><em>Où l'image s'arrête.</em> Le mot « ou » en mathématiques est large : un élève qui a les deux comptes est dans la réunion. Et si aucun élève n'avait les deux comptes, il n'y aurait personne à retirer : on additionnerait simplement les deux nombres.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Cardinal.</strong> Le cardinal d'un ensemble fini $A$, noté $\\text{card}(A)$, est le nombre de ses éléments. L'ensemble vide $\\emptyset$ n'a aucun élément : $\\text{card}(\\emptyset) = 0$.</p>\n<ul>\n<li><strong>Réunion.</strong> $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$.</li>\n<li><strong>Ensembles sans élément commun.</strong> Si $A \\cap B = \\emptyset$, alors $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$.</li>\n<li><strong>Complémentaire.</strong> Si $A$ est une partie de $E$, le complémentaire $\\overline{A}$ est formé des éléments de $E$ qui ne sont pas dans $A$, et $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un groupe de 50 élèves, 30 ont un téléphone ($T$), 22 ont un compte de mobile money ($M$) et 12 ont les deux. Combien ont au moins l'un des deux ? Combien n'ont ni l'un ni l'autre ? Combien ont un téléphone sans mobile money ?</strong></p>\n<ol>\n<li>Au moins l'un des deux : c'est la réunion. $\\text{card}(T \\cup M) = 30 + 22 - 12 = 40$.</li>\n<li>Ni l'un ni l'autre : c'est le complémentaire de la réunion dans le groupe. $50 - 40 = 10$.</li>\n<li>Téléphone sans mobile money : parmi les 30 qui ont un téléphone, on retire les 12 qui ont aussi le mobile money. $30 - 12 = 18$.</li>\n</ol>\n<p>Vérification : $18 + 12 + (22 - 12) + 10 = 18 + 12 + 10 + 10 = 50$. On retrouve bien tout le groupe.</p>\n<h2>Le piège à éviter</h2>\n<p>Additionner les deux cardinaux et oublier de retirer l'intersection. Ici, $30 + 22 = 52$ élèves « avec au moins un des deux » alors que le groupe n'en compte que 50 : c'est impossible, et c'est le signal d'alerte.</p>\n<p>Autre piège : confondre « au moins un » (la réunion) et « ni l'un ni l'autre » (le complémentaire de la réunion). Comment le repérer : demande-toi si le résultat doit être plus petit ou plus grand que l'effectif total, et vérifie que toutes les parties additionnées redonnent bien le total.</p>\n<h2>En une phrase</h2>\n<p>Le cardinal d'une réunion s'obtient en additionnant les deux cardinaux puis en retirant une fois l'intersection, et le cardinal d'un complémentaire s'obtient en retirant celui de la partie au cardinal de l'ensemble entier.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Cardinal, réunion et complémentaire",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Awa a cinq contacts dans la liste de ses favoris : Koffi, Mariam, Yao, Aya et Kader. Quel est le cardinal de l'ensemble de ces contacts ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le cardinal est le nombre d'éléments : Koffi, Mariam, Yao, Aya et Kader font 5 contacts. Awa est la propriétaire du téléphone, pas un élément de l'ensemble de ses contacts.",
-                  "answers": [
-                    {
-                      "content": "$5$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6$, car on compte aussi Awa, la propriétaire du téléphone",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour deux ensembles finis $A$ et $B$ qui ont des éléments en commun, on a toujours $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Les éléments communs sont comptés deux fois dans la somme. Souviens-toi des élèves qui ont levé la main deux fois : il faut les retirer une fois, soit $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe, $A$ est l'ensemble des élèves qui ont un compte Orange Money et $B$ celui des élèves qui ont un compte Wave. Que représente $A \\cap B$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'intersection $A \\cap B$ regroupe les éléments qui sont dans $A$ et dans $B$ : ceux qui ont les deux comptes. Les élèves qui ont au moins un compte forment la réunion $A \\cup B$.",
-                  "answers": [
-                    {
-                      "content": "Les élèves qui ont les deux comptes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les élèves qui ont au moins un des deux comptes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les élèves qui n'ont aucun des deux comptes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les élèves qui ont un seul des deux comptes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe $E$, $A$ est l'ensemble des élèves qui ont un compte Orange Money. Que représente le complémentaire $\\overline{A}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le complémentaire $\\overline{A}$ est formé des éléments de $E$ qui ne sont pas dans $A$ : les élèves sans compte Orange Money. Avoir un compte Wave est un autre critère : cela ne dit rien sur Orange Money.",
-                  "answers": [
-                    {
-                      "content": "Les élèves de la classe qui n'ont pas de compte Orange Money",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les élèves de la classe qui ont un compte Orange Money",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les élèves de la classe qui ont un compte Wave",
-                      "correct": false
-                    },
-                    {
-                      "content": "Tous les élèves de la classe",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soit $E$ un ensemble fini, et $A$ et $B$ deux parties de $E$. Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'ensemble vide n'a aucun élément, et le complémentaire contient tout ce qui reste de $E$. La somme $\\text{card}(A) + \\text{card}(B)$ ne donne la réunion que si $A$ et $B$ n'ont rien en commun. Le cardinal est un nombre d'éléments.",
-                  "answers": [
-                    {
-                      "content": "$\\text{card}(\\emptyset) = 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$ dans tous les cas",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le cardinal d'un ensemble est son plus grand élément",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\text{card}(A \\cap B)$ est toujours égal à $\\text{card}(A) + \\text{card}(B)$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 40 élèves, 25 ont un compte Orange Money, 18 ont un compte Wave et 7 ont les deux. Pourquoi ne peut-on pas dire que $25 + 18 = 43$ élèves ont au moins un compte ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les 7 élèves qui ont les deux comptes figurent dans les 25 et dans les 18 : on les retire une fois, $25 + 18 - 7 = 36$. Ils doivent rester comptés une fois, pas zéro fois. Il n'y a rien à multiplier.",
-                  "answers": [
-                    {
-                      "content": "Parce que les 7 élèves qui ont les deux comptes sont comptés deux fois",
-                      "correct": true
-                    },
-                    {
-                      "content": "Parce qu'il faut multiplier 25 par 18",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que les élèves qui ont les deux comptes ne doivent pas être comptés du tout",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que 43 est un nombre impair",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Réunion, intersection et complémentaire en situation",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Dans une classe de 30 élèves, 18 ont un smartphone, 14 utilisent le mobile money et 8 font les deux. Combien d'élèves ont un smartphone ou utilisent le mobile money (au moins l'un des deux) ?",
-                  "question_type": "single_choice",
-                  "explanation": "$18 + 14 - 8 = 24$. Les 8 élèves qui font les deux sont comptés deux fois dans $18 + 14 = 32$ : on les retire une fois. Le nombre 6 est celui des élèves qui n'ont ni l'un ni l'autre.",
-                  "answers": [
-                    {
-                      "content": "$24$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$32$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$22$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 30 élèves, 18 ont un smartphone, 14 utilisent le mobile money et 8 font les deux. Combien d'élèves n'ont ni smartphone ni mobile money ?",
-                  "question_type": "single_choice",
-                  "explanation": "Au moins l'un des deux : $18 + 14 - 8 = 24$. Les autres forment le complémentaire : $30 - 24 = 6$. Si tu calcules $30 - 18 - 14 = -2$, tu retires deux fois les 8 élèves qui font les deux.",
-                  "answers": [
-                    {
-                      "content": "$6$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$8$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-2$, ce qui montre que les données sont fausses",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 30 élèves, 18 ont un smartphone, 14 utilisent le mobile money et 8 font les deux. Combien d'élèves ont un smartphone mais n'utilisent pas le mobile money ?",
-                  "question_type": "single_choice",
-                  "explanation": "Parmi les 18 élèves qui ont un smartphone, 8 utilisent aussi le mobile money. On les retire : $18 - 8 = 10$. Le nombre 18 compte encore ceux qui font les deux.",
-                  "answers": [
-                    {
-                      "content": "$10$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$18$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$26$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une cabine téléphonique, 25 clients font un dépôt d'argent et 20 clients font un retrait. Aucun client ne fait les deux. Alors 45 clients font au moins l'une de ces deux opérations.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Les deux groupes n'ont aucun client en commun, donc $\\text{card}(A \\cup B) = 25 + 20 = 45$. Il n'y a personne à retirer, puisque personne n'a été compté deux fois.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soit $E$ un ensemble de 30 éléments, $A$ une partie de $E$ de 12 éléments et $B$ une partie de $E$ de 9 éléments, avec $\\text{card}(A \\cap B) = 4$. Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$12 + 9 - 4 = 17$ et $30 - 12 = 18$. Le nombre 21 oublie de retirer les 4 éléments communs. Le nombre 26 vient de $30 - 4$ : on a retiré l'intersection au lieu de $\\text{card}(A)$.",
-                  "answers": [
-                    {
-                      "content": "$\\text{card}(A \\cup B) = 17$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\text{card}(\\overline{A}) = 18$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\text{card}(A \\cup B) = 21$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\text{card}(\\overline{A}) = 26$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On sait que $\\text{card}(A \\cup B) = 40$, $\\text{card}(B) = 22$ et $\\text{card}(A \\cap B) = 9$. Que vaut $\\text{card}(A)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "De $40 = \\text{card}(A) + 22 - 9$, on tire $\\text{card}(A) = 40 - 22 + 9 = 27$. Vérification : $27 + 22 - 9 = 40$. Le nombre 18 oublie les 9 éléments communs ; le nombre 31 oublie le cardinal de $B$.",
-                  "answers": [
-                    {
-                      "content": "$27$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$31$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$18$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$53$",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Problèmes de comptage à deux catégories",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Dans une école de 80 élèves, 52 ont un téléphone, 35 ont un compte de mobile money et 20 ont les deux. Combien d'élèves n'ont ni téléphone ni compte de mobile money ?",
-                  "question_type": "single_choice",
-                  "explanation": "Au moins l'un des deux : $52 + 35 - 20 = 67$. Les autres : $80 - 67 = 13$. Le nombre 67 est la réunion, pas le complémentaire. Le nombre 28 ne tient compte que du téléphone ($80 - 52$).",
-                  "answers": [
-                    {
-                      "content": "$13$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$67$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$28$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-7$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un opérateur a 200 clients. 120 ont un forfait internet, 90 ont un forfait appels et 50 ont les deux forfaits. Combien de clients ont exactement un seul des deux forfaits ?",
-                  "question_type": "single_choice",
-                  "explanation": "Seulement internet : $120 - 50 = 70$. Seulement appels : $90 - 50 = 40$. Au total $70 + 40 = 110$. Le nombre 160 est la réunion : il compte aussi les 50 clients qui ont les deux forfaits.",
-                  "answers": [
-                    {
-                      "content": "$110$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$160$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$210$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$50$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 40 élèves, 28 jouent au football et 18 jouent au basket. Il est possible qu'aucun élève ne pratique les deux sports.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Si personne ne faisait les deux sports, il y aurait $28 + 18 = 46$ élèves, or la classe n'en compte que 40. Au moins $28 + 18 - 40 = 6$ élèves pratiquent les deux sports.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 45 élèves, 30 utilisent une application de messagerie, 25 utilisent le mobile money, et chaque élève utilise au moins l'une des deux. Combien d'élèves utilisent les deux ?",
-                  "question_type": "single_choice",
-                  "explanation": "On a $45 = 30 + 25 - \\text{card}(A \\cap B)$, donc $\\text{card}(A \\cap B) = 55 - 45 = 10$. Le nombre 55 est la somme brute des deux effectifs ; le nombre 15 vient de $45 - 30$ et ignore le mobile money.",
-                  "answers": [
-                    {
-                      "content": "$10$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$15$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$55$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une école compte 50 élèves. 30 ont un smartphone, 24 utilisent le mobile money et 10 font les deux. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Réunion : $30 + 24 - 10 = 44$. Ni l'un ni l'autre : $50 - 44 = 6$. Smartphone seul : $30 - 10 = 20$. Mobile money seul : $24 - 10 = 14$, pas 24. Sans smartphone : $50 - 30 = 20$, pas 10.",
-                  "answers": [
-                    {
-                      "content": "44 élèves ont un smartphone ou utilisent le mobile money (au moins l'un des deux)",
-                      "correct": true
-                    },
-                    {
-                      "content": "6 élèves n'ont ni smartphone ni mobile money",
-                      "correct": true
-                    },
-                    {
-                      "content": "20 élèves ont un smartphone mais n'utilisent pas le mobile money",
-                      "correct": true
-                    },
-                    {
-                      "content": "24 élèves utilisent le mobile money sans avoir de smartphone",
-                      "correct": false
-                    },
-                    {
-                      "content": "10 élèves n'ont pas de smartphone",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe, 15 élèves ont un compte Wave, 12 ont un compte Orange Money, 5 ont les deux comptes et 3 n'ont aucun des deux. Quel est l'effectif de la classe ?",
-                  "question_type": "single_choice",
-                  "explanation": "Au moins un compte : $15 + 12 - 5 = 22$. On ajoute les 3 élèves sans compte : $22 + 3 = 25$. Le nombre 22 oublie ceux qui n'ont aucun compte ; le nombre 30 ne retire pas les 5 élèves comptés deux fois.",
-                  "answers": [
-                    {
-                      "content": "$25$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$22$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$30$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$35$",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "Réunion, intersection et complémentaire",
+          "remember": "Le **cardinal** d'un ensemble fini $E$, noté $\\text{card}(E)$, est son nombre d'éléments. Pour deux parties $A$ et $B$ de $E$ : « $A$ ou $B$ » (au moins l'un des deux) se note $A \\cup B$ ; « $A$ et $B$ » (les deux à la fois) se note $A \\cap B$. On a $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$. Si $A$ et $B$ n'ont aucun élément commun (ils sont **disjoints**), alors $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$. Le **complémentaire** $\\overline{A}$ de $A$ (les éléments de $E$ qui ne sont pas dans $A$) vérifie $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$.",
+          "method": [
+            "Nommer l'ensemble de départ $E$ et les parties $A$ et $B$ de l'énoncé, puis relever leurs cardinaux.",
+            "Repérer les éléments communs à $A$ et à $B$ : ils sont comptés deux fois quand on additionne.",
+            "Appliquer la formule $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$, ou $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$ pour un complémentaire.",
+            "Vérifier que le résultat est un entier compris entre 0 et $\\text{card}(E)$."
+          ],
+          "example": {
+            "statement": "Dans une classe de 45 élèves, 28 sont inscrits au club de lecture et 20 au club de théâtre ; 9 élèves sont inscrits aux deux clubs. Combien d'élèves sont inscrits à au moins un club, et combien n'en fréquentent aucun ?",
+            "steps": [
+              "Nommer : $E$ est la classe, $\\text{card}(E) = 45$ ; $L$ est l'ensemble des élèves du club de lecture, $\\text{card}(L) = 28$ ; $T$ celui du club de théâtre, $\\text{card}(T) = 20$.",
+              "Repérer : les 9 élèves inscrits aux deux clubs sont dans $L \\cap T$ ; ils sont comptés deux fois dans $28 + 20$.",
+              "Appliquer : $\\text{card}(L \\cup T) = 28 + 20 - 9 = 39$. Pour ceux qui n'en fréquentent aucun : $\\text{card}(\\overline{L \\cup T}) = 45 - 39 = 6$.",
+              "Vérifier : 39 et 6 sont des entiers compris entre 0 et 45, et $39 + 6 = 45$."
+            ]
+          },
+          "pitfall": "Ne pas oublier de soustraire l'intersection. Contre-exemple avec la classe de 45 élèves : $28 + 20 = 48$ élèves, ce qui est impossible puisque la classe n'en compte que 45. Les 9 élèves inscrits aux deux clubs étaient comptés deux fois : $28 + 20 - 9 = 39$. Si ta somme dépasse $\\text{card}(E)$, tu as oublié l'intersection.",
+          "figure": null,
+          "practice": {
+            "statement": "Une classe compte 30 élèves. On compte ceux qui aiment le riz et ceux qui aiment l'attiéké.",
+            "questions": [
+              {
+                "content": "18 élèves aiment le riz ($R$), 10 aiment l'attiéké ($T$) et 4 aiment les deux. Complète : $\\text{card}(R \\cup T) = 18 + 10 - $ ___ $=$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $\\text{card}(R) = 18$ et $\\text{card}(T) = 10$. Étape 2 — Repérer : les 4 élèves qui aiment les deux sont comptés deux fois. Étape 3 — Appliquer : $\\text{card}(R \\cup T) = 18 + 10 - 4 = 24$. Étape 4 — Vérifier : 24 est compris entre 0 et 30.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les élèves qui aiment les deux sont comptés deux fois dans l'addition : retire-les une fois."
+              },
+              {
+                "content": "Dans l'addition $\\text{card}(A) + \\text{card}(B)$, les éléments comptés deux fois sont ceux de ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Nommer : $A$ et $B$ sont deux parties de $E$. Étape 2 — Repérer : un élément compté deux fois est à la fois dans $A$ et dans $B$, donc dans $A \\cap B$. Étape 3 — Appliquer : c'est pour cela qu'on retire $\\text{card}(A \\cap B)$. Étape 4 — Vérifier : $A \\cup B$ est le résultat final et $\\overline{A}$ est l'ensemble des éléments hors de $A$ : ni l'un ni l'autre ne sont les éléments comptés deux fois.",
+                "answers": [
+                  {
+                    "content": "$A \\cap B$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$A \\cup B$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overline{A}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une classe compte 30 élèves et 12 sont sortis en récréation. Combien d'élèves restent en classe ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $\\text{card}(E) = 30$ et $S$ est l'ensemble des élèves sortis, $\\text{card}(S) = 12$. Étape 2 — Repérer : ceux qui restent forment le complémentaire $\\overline{S}$. Étape 3 — Appliquer : $\\text{card}(\\overline{S}) = 30 - 12 = 18$. Étape 4 — Vérifier : 18 est compris entre 0 et 30.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Compter avec la réunion, l'intersection et le complémentaire",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : nommer, repérer, appliquer, vérifier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une classe de 40 élèves, 24 aiment le football, 15 aiment le basketball et 6 aiment les deux sports. Combien d'élèves aiment au moins un des deux sports ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 40$ ; $F$ est l'ensemble des élèves qui aiment le football, $\\text{card}(F) = 24$ ; $B$ celui des élèves qui aiment le basketball, $\\text{card}(B) = 15$. Étape 2 — Repérer : les 6 élèves qui aiment les deux sports sont dans $F \\cap B$ ; ils sont comptés deux fois dans $24 + 15$. Étape 3 — Appliquer : $\\text{card}(F \\cup B) = 24 + 15 - 6 = 33$. Étape 4 — Vérifier : 33 est un entier compris entre 0 et 40. La réponse 39 oublie de retirer les 6 élèves comptés deux fois ; 45 additionne les trois nombres au lieu de soustraire ; 18 retire 6 de 24 seulement et oublie le basketball.",
+                "answers": [
+                  {
+                    "content": "33",
+                    "correct": true
+                  },
+                  {
+                    "content": "39",
+                    "correct": false
+                  },
+                  {
+                    "content": "45",
+                    "correct": false
+                  },
+                  {
+                    "content": "18",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 40 élèves, 24 aiment le football, 15 aiment le basketball et 6 aiment les deux sports. Combien d'élèves n'aiment aucun de ces deux sports ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 40$ ; $F$ (football) a pour cardinal 24 ; $B$ (basketball) a pour cardinal 15. Étape 2 — Repérer : les 6 élèves qui aiment les deux sports sont comptés deux fois dans $24 + 15$. Étape 3 — Appliquer : $\\text{card}(F \\cup B) = 24 + 15 - 6 = 33$, puis le complémentaire de $F \\cup B$ a pour cardinal $40 - 33 = 7$. Étape 4 — Vérifier : 7 est un entier compris entre 0 et 40, et $33 + 7 = 40$. Si on oublie l'intersection, on trouve $40 - 39 = 1$ : c'est faux.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au CDI d'un lycée, 60 élèves sont venus. 35 ont emprunté un roman, 28 ont emprunté un journal et 13 ont emprunté les deux. Combien d'élèves ont emprunté au moins un roman ou un journal ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des 60 élèves ; $R$ (roman) a pour cardinal 35 ; $J$ (journal) a pour cardinal 28. Étape 2 — Repérer : les 13 élèves qui ont emprunté les deux sont dans $R \\cap J$ ; ils sont comptés deux fois dans $35 + 28$. Étape 3 — Appliquer : $\\text{card}(R \\cup J) = 35 + 28 - 13 = 50$. Étape 4 — Vérifier : 50 est un entier compris entre 0 et 60. Écrire $35 + 28 = 63$ est impossible, car 63 dépasse les 60 élèves.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 45 élèves, 8 sont absents ce matin. Combien d'élèves sont présents ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 45$ ; $A$ est l'ensemble des absents, $\\text{card}(A) = 8$. Étape 2 — Repérer : les présents sont ceux qui ne sont pas dans $A$, donc le complémentaire $\\overline{A}$ ; aucun élément n'est compté deux fois ici. Étape 3 — Appliquer : $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A) = 45 - 8 = 37$. Étape 4 — Vérifier : 37 est un entier compris entre 0 et 45, et $37 + 8 = 45$.",
+                "answers": [
+                  {
+                    "content": "37",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 50 élèves, 32 parlent le baoulé et 25 parlent le dioula. Chaque élève parle au moins une de ces deux langues. Combien d'élèves parlent les deux langues ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 50$ ; $B$ (baoulé) a pour cardinal 32 ; $D$ (dioula) a pour cardinal 25 ; comme chaque élève parle au moins une langue, $\\text{card}(B \\cup D) = 50$. Étape 2 — Repérer : $32 + 25 = 57$ dépasse 50, donc les élèves qui parlent les deux langues sont comptés deux fois : ce sont eux, dans $B \\cap D$, qui font le surplus. Étape 3 — Appliquer : $50 = 32 + 25 - \\text{card}(B \\cap D)$, donc $\\text{card}(B \\cap D) = 57 - 50 = 7$. Étape 4 — Vérifier : 7 est un entier compris entre 0 et 25, et $32 + 25 - 7 = 50$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 40 élèves, 25 jouent au football, 18 jouent au handball et 7 jouent aux deux. Affirmation : « $25 + 18 = 43$ élèves jouent à au moins un des deux sports. »",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 40$ ; $F$ a pour cardinal 25 ; $H$ a pour cardinal 18. Étape 2 — Repérer : les 7 élèves qui jouent aux deux sports sont dans $F \\cap H$ et sont comptés deux fois dans $25 + 18$. Étape 3 — Appliquer : $\\text{card}(F \\cup H) = 25 + 18 - 7 = 36$. Étape 4 — Vérifier : 43 dépasse les 40 élèves de la classe, c'est impossible. L'affirmation est fausse : il y a 36 élèves.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
-          "name": "Le principe multiplicatif et l'arbre des choix",
-          "subtitle": "Compter des choix successifs, répétitions permises",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Dessiner, avec des mots, l'arbre des choix d'une situation à plusieurs étapes.</li>\n<li>Appliquer le principe multiplicatif pour compter des choix successifs.</li>\n<li>Distinguer quand on multiplie (« et ») et quand on additionne (« ou »).</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le forfait de Kader (les choix successifs).</strong> Kader veut acheter un forfait pour son téléphone. Il choisit d'abord un réseau parmi 3 : Orange, MTN ou Moov. Ensuite, quel que soit le réseau, il choisit une durée parmi 3 : un jour, une semaine ou un mois. Dessine l'arbre : du départ partent 3 branches, une par réseau. Au bout de chacune, 3 nouvelles branches partent, une par durée. Un chemin complet, du départ jusqu'au bout d'une branche, est un forfait possible, par exemple « MTN et une semaine ». Il y a 3 groupes de 3 chemins : $3 \\times 3 = 9$ forfaits.</p>\n<p><em>Le pont.</em> Le choix du réseau est la première étape avec $n_1 = 3$ possibilités. Le choix de la durée est la deuxième étape avec $n_2 = 3$ possibilités, quel que soit le réseau. Chaque chemin complet est un résultat. Le nombre de chemins est $n_1 \\times n_2$. Dans le langage des ensembles, si $R$ est l'ensemble des réseaux et $D$ celui des durées, les forfaits sont les couples (réseau ; durée), c'est-à-dire les éléments du <strong>produit cartésien</strong> $R \\times D$.</p>\n<p><em>Où l'image s'arrête.</em> On multiplie quand on fait <strong>un choix à chaque étape</strong> (« et »). Si Kader choisissait un seul forfait, soit parmi 3 forfaits d'appels, soit parmi 4 forfaits d'internet, sans jamais prendre les deux, il n'y aurait pas deux étapes : on additionnerait $3 + 4 = 7$. De plus, il faut que le nombre de possibilités de la deuxième étape soit le même quel que soit le premier choix.</p>\n<p><strong>2. Le code secret du mobile money (le même choix répété).</strong> Pour valider un retrait, tu tapes un code secret de 4 chiffres. Chaque chiffre est choisi de 0 à 9, et rien n'interdit d'utiliser deux fois le même chiffre. Pour le premier chiffre, il y a 10 branches. À chacune, 10 branches pour le deuxième chiffre, puis 10 pour le troisième, puis 10 pour le quatrième.</p>\n<p><em>Le pont.</em> Il y a 4 étapes (les 4 chiffres) et, à chaque étape, 10 possibilités : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$ codes. Quand on fait $p$ choix successifs parmi les mêmes $n$ possibilités, avec répétition permise, on trouve $n^p$.</p>\n<p><em>Où l'image s'arrête.</em> Ici on peut répéter un chiffre. Si on l'interdisait, le nombre de possibilités diminuerait à chaque étape et le calcul ne serait plus $10^4$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Principe multiplicatif.</strong> Si un résultat se construit par $p$ choix successifs, avec $n_1$ possibilités pour le premier, $n_2$ pour le deuxième (quel que soit le premier), …, $n_p$ pour le $p$-ième, alors le nombre de résultats est $n_1 \\times n_2 \\times \\dots \\times n_p$.</p>\n<ul>\n<li><strong>Produit cartésien.</strong> $\\text{card}(A \\times B) = \\text{card}(A) \\times \\text{card}(B)$.</li>\n<li><strong>Même choix répété.</strong> $p$ choix successifs parmi $n$ possibilités, avec répétition permise : $n^p$ résultats.</li>\n<li><strong>Principe additif.</strong> Si on choisit un seul élément, soit dans un ensemble $A$, soit dans un ensemble $B$ sans élément commun, il y a $\\text{card}(A) + \\text{card}(B)$ choix.</li>\n</ul>\n<p>Pour retenir : « et » (choix successifs) se traduit par $\\times$ ; « ou » (un seul choix dans l'une ou l'autre famille) se traduit par $+$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un code de retrait a 4 chiffres, de 0 à 9, la répétition étant permise. Combien y a-t-il de codes ? Combien commencent par 7 ?</strong></p>\n<ol>\n<li>Il y a 4 étapes (les 4 chiffres), chacune avec 10 possibilités : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$ codes.</li>\n<li>Si le code commence par 7, le premier chiffre n'a plus qu'une possibilité. Les trois autres gardent 10 possibilités chacun : $1 \\times 10 \\times 10 \\times 10 = 1\\,000$ codes.</li>\n</ol>\n<p>Contrôle : les codes se répartissent selon leur premier chiffre (0, 1, …, 9), soit 10 groupes de 1 000 codes : $10 \\times 1\\,000 = 10\\,000$.</p>\n<h2>Le piège à éviter</h2>\n<p>Additionner au lieu de multiplier : pour 3 réseaux et 3 durées, $3 + 3 = 6$ est faux, il y a 9 forfaits. Autre piège : inverser la base et l'exposant. Pour un code de 4 chiffres, on écrit $10^4$ (10 possibilités, 4 fois) et non $4^{10}$.</p>\n<p>Comment le repérer : demande-toi « combien d'étapes ? » (l'exposant) et « combien de possibilités à chaque étape ? » (la base). Dessine l'arbre en mots si tu hésites.</p>\n<h2>En une phrase</h2>\n<p>Quand on fait plusieurs choix l'un après l'autre, on multiplie le nombre de possibilités de chaque étape, et quand on choisit une seule chose dans l'une ou l'autre famille, on additionne.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Choix successifs et arbre",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Kader choisit un forfait : un réseau parmi 3, puis une durée parmi 4. Combien de forfaits différents peut-il obtenir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pour chacun des 3 réseaux, il y a 4 durées : $3 \\times 4 = 12$ forfaits. Additionner ($3 + 4 = 7$) reviendrait à choisir soit un réseau, soit une durée, alors qu'il faut faire les deux choix.",
-                  "answers": [
-                    {
-                      "content": "$12$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$7$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$81$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour choisir successivement un réseau parmi 3, puis une durée parmi 4, on additionne $3 + 4$ parce qu'on fait deux choix.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Chaque réseau peut être associé à chacune des 4 durées : on multiplie. On additionne seulement quand on fait un seul choix, dans l'une ou l'autre de deux familles séparées, sans jamais prendre les deux.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'arbre des choix d'une situation, que représente un chemin complet, du départ jusqu'au bout d'une branche ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un chemin complet traverse toutes les étapes : c'est un résultat entier, comme « MTN et une semaine ». C'est le nombre de chemins, et non un seul chemin, qui donne le nombre total de résultats.",
-                  "answers": [
-                    {
-                      "content": "Un résultat possible complet, avec un choix à chaque étape",
-                      "correct": true
-                    },
-                    {
-                      "content": "Seulement le choix de la première étape",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le nombre total de résultats possibles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une erreur de comptage",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soit $A$ un ensemble de 5 éléments et $B$ un ensemble de 3 éléments. Combien de couples $(x \\,;\\, y)$ avec $x \\in A$ et $y \\in B$ peut-on former ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le nombre de couples est $\\text{card}(A \\times B) = 5 \\times 3 = 15$. La somme 8 compterait les éléments pris séparément, et non les couples formés avec un élément de chaque ensemble.",
-                  "answers": [
-                    {
-                      "content": "$15$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$8$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$125$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code secret a 3 chiffres, chacun de 0 à 9, un même chiffre pouvant être répété. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque chiffre a 10 possibilités, 3 fois de suite : $10 \\times 10 \\times 10 = 10^3 = 1\\,000$. Le nombre 720 supposerait qu'on ne peut pas répéter un chiffre ; le nombre 59 049 est $3^{10}$, avec la base et l'exposant inversés.",
-                  "answers": [
-                    {
-                      "content": "$1\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$30$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$720$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$59\\,049$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans quelles situations multiplie-t-on le nombre de possibilités de chaque choix ? Choisis les deux bonnes situations.",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "On multiplie quand on fait plusieurs choix l'un après l'autre : un haut et un pantalon, ou des chiffres successifs. Quand on prend un seul élément dans l'une ou l'autre famille, on additionne : $5 + 3$ ou $3 + 2$.",
-                  "answers": [
-                    {
-                      "content": "Choisir un haut parmi 4 et un pantalon parmi 3 pour s'habiller",
-                      "correct": true
-                    },
-                    {
-                      "content": "Former un code secret de 4 chiffres, la répétition étant permise",
-                      "correct": true
-                    },
-                    {
-                      "content": "Choisir un seul fruit, soit parmi 5 mangues, soit parmi 3 oranges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Prendre un seul véhicule, soit parmi 3 lignes de gbaka, soit parmi 2 lignes de taxi",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Compter des codes et des combinaisons de choix",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un code de déverrouillage a 4 chiffres (de 0 à 9), un chiffre pouvant être répété. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Quatre choix successifs de 10 possibilités : $10^4 = 10\\,000$. Le nombre 5 040 est $10 \\times 9 \\times 8 \\times 7$ : il supposerait des chiffres tous différents, ce que l'énoncé n'impose pas.",
-                  "answers": [
-                    {
-                      "content": "$10\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$40$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,040$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,000$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code secret a 6 chiffres (de 0 à 9), la répétition étant permise. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Six choix successifs de 10 possibilités : $10^6 = 1\\,000\\,000$. Le nombre 100 000 est $10^5$ : il manque une étape. Le nombre 151 200 est $10 \\times 9 \\times 8 \\times 7 \\times 6 \\times 5$ : il interdit de répéter un chiffre.",
-                  "answers": [
-                    {
-                      "content": "$1\\,000\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$60$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$151\\,200$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code de retrait a 4 chiffres, la répétition étant permise. Combien de ces codes commencent par 5 ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le premier chiffre est imposé : 1 possibilité. Il reste 3 chiffres à 10 possibilités : $1 \\times 10^3 = 1\\,000$. Le nombre 10 000 est le total, sans tenir compte de la condition.",
-                  "answers": [
-                    {
-                      "content": "$1\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$10\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4\\,000$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code de 4 chiffres n'utilise que des chiffres pairs (0, 2, 4, 6 et 8), la répétition étant permise. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque chiffre a 5 possibilités, 4 fois de suite : $5^4 = 625$. Le nombre 1 024 est $4^5$ : base et exposant inversés. Le nombre 5 000 est la moitié de 10 000 : la contrainte porte sur chaque chiffre, pas sur le total.",
-                  "answers": [
-                    {
-                      "content": "$625$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$20$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,024$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,000$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Awa choisit un téléphone parmi 4 modèles, une coque parmi 5 couleurs et un chargeur parmi 2 types. Combien d'ensembles (téléphone, coque, chargeur) différents peut-elle composer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Trois choix successifs : $4 \\times 5 \\times 2 = 40$. La somme 11 compterait des objets séparés. Le nombre 20 est $4 \\times 5$ : il oublie l'étape du chargeur.",
-                  "answers": [
-                    {
-                      "content": "$40$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$11$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$20$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Aïcha veut une offre : soit un forfait d'appels parmi 4, soit un forfait d'internet parmi 6, mais jamais les deux. Combien de choix a-t-elle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Elle choisit l'un ou l'autre, jamais les deux : $4 + 6 = 10$ choix. On multiplierait ($4 \\times 6 = 24$) si elle prenait un forfait d'appels et un forfait d'internet.",
-                  "answers": [
-                    {
-                      "content": "$10$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2$",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Dénombrer des codes avec conditions",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un opérateur imagine des numéros formés d'un préfixe fixe suivi de 6 chiffres quelconques (de 0 à 9, répétition permise). Combien de numéros différents peut-il créer avec ce préfixe ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le préfixe est fixe : 1 possibilité. Les 6 chiffres donnent $10^6 = 1\\,000\\,000$ numéros. Le nombre 151 200 supposerait des chiffres tous différents ; le nombre 100 000 oublie un chiffre.",
-                  "answers": [
-                    {
-                      "content": "$1\\,000\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$60$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$151\\,200$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100\\,000$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code de 4 chiffres (de 0 à 9, répétition permise) ne doit pas commencer par 0. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Premier chiffre : 9 possibilités (de 1 à 9). Les trois autres : 10 chacun. Total : $9 \\times 10^3 = 9\\,000$. Le nombre 6 561 est $9^4$ : il interdit le 0 à tous les chiffres, pas seulement au premier.",
-                  "answers": [
-                    {
-                      "content": "$9\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$10\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6\\,561$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9\\,999$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code de 4 chiffres (de 0 à 9, répétition permise) doit se terminer par un chiffre impair. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dernier chiffre : 5 possibilités (1, 3, 5, 7 ou 9). Les trois autres chiffres : 10 chacun. Total : $10^3 \\times 5 = 5\\,000$. Le nombre 10 000 ignore la condition.",
-                  "answers": [
-                    {
-                      "content": "$5\\,000$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$10\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\,500$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$500$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mot de passe est formé de 3 lettres de l'alphabet (26 lettres) suivies de 2 chiffres (de 0 à 9). Les répétitions sont permises. Combien de mots de passe existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Trois lettres : $26^3 = 17\\,576$. Deux chiffres : $10^2 = 100$. Total : $17\\,576 \\times 100 = 1\\,757\\,600$. Le nombre 676 000 est $26^2 \\times 10^3$ : exposants échangés. La somme 98 est fausse : les choix s'enchaînent, on multiplie.",
-                  "answers": [
-                    {
-                      "content": "$1\\,757\\,600$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$676\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$98$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code a 3 chiffres (de 0 à 9), la répétition étant permise. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "On a $10^3 = 1\\,000$ ; en fixant le premier chiffre à 0, $10^2 = 100$ ; sans le chiffre 0, chaque chiffre a 9 possibilités : $9^3 = 729$. Retirer seulement 100 codes oublie ceux qui ont un 0 en deuxième ou en troisième position.",
-                  "answers": [
-                    {
-                      "content": "Il y a 1 000 codes possibles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 100 codes qui commencent par 0",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 729 codes qui ne contiennent aucun 0",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 30 codes possibles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il y a 900 codes qui ne contiennent aucun 0, car on retire les 100 codes qui commencent par 0",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On passe d'un code de 4 chiffres à un code de 8 chiffres (de 0 à 9, répétition permise). Le nombre de codes possibles est alors multiplié par 2.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. On passe de $10^4$ à $10^8$ codes, soit $10^4 = 10\\,000$ fois plus de codes. Chaque chiffre ajouté multiplie le total par 10, il ne l'augmente pas de façon proportionnelle au nombre de chiffres.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "Principe multiplicatif et p-listes",
+          "remember": "**Principe multiplicatif** : si une situation se décompose en $p$ choix successifs, avec $n_1$ possibilités pour le premier choix, $n_2$ pour le deuxième, …, $n_p$ pour le dernier, le nombre de résultats est $n_1 \\times n_2 \\times \\cdots \\times n_p$. Quand on choisit l'un **ou** l'autre (cas qui s'excluent), on **additionne** ; quand on fait un choix **puis** un autre, on **multiplie**. Une **$p$-liste** d'un ensemble à $n$ éléments est une liste ordonnée de $p$ éléments, répétitions permises (tirages **avec remise**) : il y en a $n^p$.",
+          "method": [
+            "Décomposer la situation en choix successifs, et dire si l'ordre compte et si les répétitions sont permises.",
+            "Compter les possibilités de chaque choix.",
+            "Multiplier ces nombres, ou écrire $n^p$ si les $p$ choix ont tous $n$ possibilités.",
+            "Contrôler que le résultat est un entier et que chaque résultat possible est compté une seule fois."
+          ],
+          "example": {
+            "statement": "Le cadenas du coffre de la salle des professeurs a un code de 4 chiffres, chacun choisi de 0 à 9 (un chiffre peut se répéter). Combien de codes différents existe-t-il ?",
+            "steps": [
+              "Décomposer : on choisit le 1er, le 2e, le 3e puis le 4e chiffre, soit 4 choix successifs ; l'ordre compte (1234 et 4321 sont deux codes) et les répétitions sont permises (0077 est un code).",
+              "Compter : il y a 10 possibilités à chaque choix (les chiffres 0, 1, …, 9).",
+              "Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$.",
+              "Contrôler : 10 000 est un entier ; les codes vont de 0000 à 9999, soit exactement 10 000 codes, chacun compté une seule fois."
+            ]
+          },
+          "pitfall": "Ne pas additionner les nombres de choix. Contre-exemple : un repas se compose d'une entrée parmi 2 (salade, avocat) et d'un plat parmi 3 (riz, attiéké, foutou). Écrire $2 + 3 = 5$ est faux : on peut composer salade-riz, salade-attiéké, salade-foutou, avocat-riz, avocat-attiéké et avocat-foutou, soit $2 \\times 3 = 6$ repas. On **additionne** quand on choisit l'un **ou** l'autre (cas qui s'excluent), on **multiplie** quand on fait un choix **puis** un autre.",
+          "figure": null,
+          "practice": {
+            "statement": "Nafissatou prépare ses tenues pour la semaine et le code de son cadenas.",
+            "questions": [
+              {
+                "content": "Nafissatou a 3 chemises et 2 pantalons. Complète : il y a ___ choix de chemise, ___ choix de pantalon, donc ___ tenues différentes.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : une tenue est une chemise puis un pantalon, soit 2 choix successifs. Étape 2 — Compter : 3 possibilités pour la chemise, 2 pour le pantalon. Étape 3 — Multiplier : $3 \\times 2 = 6$. Étape 4 — Contrôler : 6 est un entier et chaque tenue est comptée une seule fois.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Une tenue, c'est une chemise puis un pantalon : on multiplie les nombres de choix."
+              },
+              {
+                "content": "Le cadenas de Nafissatou a un code de 2 chiffres, chacun choisi de 0 à 9, un chiffre pouvant se répéter. Combien de codes existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs, l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 = 10^2 = 100$. Étape 4 — Contrôler : les codes vont de 00 à 99, soit exactement 100 codes.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand on choisit l'un OU l'autre, avec des cas qui s'excluent, on ___ les nombres de possibilités.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Décomposer : choisir l'un ou l'autre n'est pas une suite de choix, c'est un seul choix entre deux cas qui s'excluent. Étape 2 — Compter : on compte les possibilités de chaque cas. Étape 3 — Multiplier ou additionner : ici on additionne ; on ne multiplie que lorsqu'on fait un choix puis un autre. Étape 4 — Contrôler : un menu avec 2 entrées ou 3 plats, sans autre choix, offre bien $2 + 3 = 5$ possibilités.",
+                "answers": [
+                  {
+                    "content": "additionne",
+                    "correct": true
+                  },
+                  {
+                    "content": "multiplie",
+                    "correct": false
+                  },
+                  {
+                    "content": "soustrait",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Compter avec le principe multiplicatif",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : décomposer, compter, multiplier, contrôler.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "À la cantine, le menu propose 3 plats différents et 2 boissons différentes. Un repas se compose d'un plat et d'une boisson. Combien de repas différents peut-on composer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : on choisit un plat puis une boisson, soit 2 choix successifs de natures différentes ; il n'y a pas de répétition à craindre. Étape 2 — Compter : 3 possibilités pour le plat, 2 pour la boisson. Étape 3 — Multiplier : $3 \\times 2 = 6$ repas. Étape 4 — Contrôler : 6 est un entier ; en associant chaque plat à chaque boisson, on retrouve 6 repas, chacun compté une seule fois. La réponse 5 additionne $3 + 2$ au lieu de multiplier ; 9 calcule $3^2$ et 8 calcule $2^3$, alors que les deux choix n'ont pas le même nombre de possibilités.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  },
+                  {
+                    "content": "5",
+                    "correct": false
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour la rentrée, Fatou choisit un stylo parmi 4 couleurs, un cahier parmi 5 modèles et une règle parmi 3 modèles. Combien de lots différents (un stylo, un cahier, une règle) peut-elle composer ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : on choisit un stylo, puis un cahier, puis une règle, soit 3 choix successifs ; les objets sont de natures différentes, pas de répétition. Étape 2 — Compter : 4 possibilités, puis 5, puis 3. Étape 3 — Multiplier : $4 \\times 5 \\times 3 = 60$. Étape 4 — Contrôler : 60 est un entier et chaque lot est compté une seule fois. Additionner $4 + 5 + 3 = 12$ serait faux : on fait un choix puis un autre, donc on multiplie.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le code d'un casier est formé de 3 chiffres pris dans $\\{1\\,;2\\,;3\\,;4\\,;5\\}$, un chiffre pouvant se répéter. Combien de codes différents existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : on choisit le 1er, le 2e puis le 3e chiffre, soit 3 choix successifs ; l'ordre compte (123 et 321 sont deux codes) et les répétitions sont permises (112 est un code). Étape 2 — Compter : 5 possibilités à chaque choix. Étape 3 — Multiplier : les 3 choix ont tous 5 possibilités, donc $5 \\times 5 \\times 5 = 5^3 = 125$. Étape 4 — Contrôler : 125 est un entier et chaque code est compté une seule fois. Le nombre $5 \\times 3 = 15$ est faux : l'exposant 3 est le nombre de chiffres, il indique combien de fois on multiplie 5.",
+                "answers": [
+                  {
+                    "content": "125",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un mot de passe est formé de 2 lettres choisies parmi les 26 lettres de l'alphabet, une même lettre pouvant être utilisée deux fois. Combien de mots de passe différents existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : on choisit la 1re lettre puis la 2e, soit 2 choix successifs ; l'ordre compte (AB et BA sont deux mots de passe) et les répétitions sont permises (AA est possible). Étape 2 — Compter : 26 possibilités à chaque choix. Étape 3 — Multiplier : $26 \\times 26 = 26^2 = 676$. Étape 4 — Contrôler : 676 est un entier ; en comptant 26 mots qui commencent par chaque lettre, on trouve bien $26 \\times 26$ mots, sans doublon. Écrire $26 + 26 = 52$ serait faux : les deux choix se font l'un après l'autre.",
+                "answers": [
+                  {
+                    "content": "676",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un test comporte 5 questions. Pour chacune, on répond par Vrai ou par Faux. Le nombre de façons différentes de répondre au test est $2^5 =$ ___",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Décomposer : on répond à la question 1, puis à la 2, puis à la 3, à la 4 et à la 5, soit 5 choix successifs ; l'ordre compte et on peut répondre « Vrai » plusieurs fois. Étape 2 — Compter : 2 possibilités à chaque choix (Vrai ou Faux). Étape 3 — Multiplier : $2 \\times 2 \\times 2 \\times 2 \\times 2 = 2^5 = 32$. Étape 4 — Contrôler : 32 est un entier. Écrire $2 \\times 5 = 10$ est une erreur : on multiplie 2 cinq fois, on ne multiplie pas 2 par 5.",
+                "answers": [
+                  {
+                    "content": "32",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un code est formé de 2 chiffres pris dans $\\{1\\,;2\\,;3\\,;4\\}$, un chiffre pouvant se répéter. Affirmation : « Il y a $4 + 4 = 8$ codes possibles. »",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décomposer : on choisit le 1er puis le 2e chiffre, soit 2 choix successifs ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 4 possibilités à chaque choix. Étape 3 — Multiplier : $4 \\times 4 = 4^2 = 16$. Étape 4 — Contrôler : pour le 1er chiffre 1, on peut écrire 11, 12, 13, 14, soit 4 codes ; il y a 4 premiers chiffres possibles, donc 16 codes en tout. L'affirmation est fausse : on additionne seulement quand on choisit l'un ou l'autre, ici on fait un choix puis un autre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "Arrangements et permutations",
-          "subtitle": "Ranger des éléments dans un ordre, sans répétition",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer une factorielle et simplifier un quotient de factorielles.</li>\n<li>Reconnaître une situation où l'ordre compte et où l'on ne peut pas répéter un élément.</li>\n<li>Calculer le nombre d'arrangements et de permutations.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les contacts favoris (les arrangements).</strong> Dans le répertoire d'Awa, il y a 6 amis. Elle veut en mettre 3 dans sa liste de favoris, à la première, à la deuxième et à la troisième place, sans mettre deux fois la même personne. Pour la première place, elle a 6 choix. Une fois la première personne placée, il n'en reste que 5 pour la deuxième place. Puis 4 pour la troisième. Cela fait $6 \\times 5 \\times 4 = 120$ listes différentes.</p>\n<p><em>Le pont.</em> Les 3 places de la liste sont les 3 étapes. À chaque étape, le nombre de choix diminue de 1, puisqu'un ami déjà placé ne peut plus être choisi. Une liste ordonnée de $p$ éléments <strong>tous différents</strong> pris parmi $n$ s'appelle un <strong>arrangement</strong>. Ici, c'est un arrangement de 3 amis parmi 6, noté $A_6^3$.</p>\n<p><em>Où l'image s'arrête.</em> Dans un arrangement, <strong>l'ordre compte</strong> : la liste (Koffi, Mariam, Yao) n'est pas la même que (Mariam, Koffi, Yao). Et les éléments sont tous différents. Si on pouvait remettre le même ami à plusieurs places, on retomberait sur le cas de la fiche essentielle précédente : $6^3$.</p>\n<p><strong>2. Les applications sur l'écran d'accueil (les permutations).</strong> Tu as 4 applications à ranger sur 4 emplacements de l'écran d'accueil, une par emplacement. Premier emplacement : 4 choix. Deuxième : 3 choix. Troisième : 2 choix. Dernier : 1 seul choix. Cela fait $4 \\times 3 \\times 2 \\times 1 = 24$ rangements.</p>\n<p><em>Le pont.</em> Quand on range <strong>tous</strong> les éléments, on obtient une <strong>permutation</strong>. Le produit $4 \\times 3 \\times 2 \\times 1$ s'écrit $4!$ et se lit « factorielle 4 ».</p>\n<p><em>Où l'image s'arrête.</em> La factorielle grandit très vite : $10!$ dépasse déjà 3 millions. Et pour qu'une formule reste valable dans tous les cas, on convient que $0! = 1$ : il y a une seule façon de ne rien ranger.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Factorielle.</strong> Pour un entier $n \\ge 1$, $n! = n \\times (n-1) \\times (n-2) \\times \\dots \\times 2 \\times 1$. Par convention, $0! = 1$.</p>\n<p><strong>Arrangement.</strong> Un arrangement de $p$ éléments pris parmi $n$ est une liste ordonnée de $p$ éléments distincts choisis parmi $n$ (avec $0 \\le p \\le n$). Leur nombre est\n$$A_n^p = n \\times (n-1) \\times \\dots \\times (n-p+1) \\quad (p \\text{ facteurs}), \\qquad A_n^p = \\frac{n!}{(n-p)!}.$$</p>\n<p><strong>Permutation.</strong> Une permutation de $n$ éléments est un arrangement de $n$ éléments pris parmi $n$ : on les range tous. Leur nombre est $A_n^n = n!$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Parmi 10 abonnés tirés au sort, le premier gagne un téléphone, le deuxième un forfait et le troisième une carte SIM. Combien de façons de désigner les trois gagnants ? Et de ranger 5 amis en ligne pour une photo ?</strong></p>\n<ol>\n<li>Les lots sont différents : l'ordre compte, et un abonné ne gagne qu'un lot. C'est un arrangement de 3 parmi 10.</li>\n<li>$A_{10}^3 = 10 \\times 9 \\times 8 = 720$. On vérifie avec la deuxième formule : $\\dfrac{10!}{7!} = 10 \\times 9 \\times 8 = 720$.</li>\n<li>Pour la photo, on range les 5 amis : c'est une permutation. $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$ façons.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Se tromper dans le nombre de facteurs de $A_n^p$. Il y en a exactement $p$, et le dernier est $n-p+1$. Pour $A_9^4$, on écrit $9 \\times 8 \\times 7 \\times 6$ : 4 facteurs, et le dernier est $9 - 4 + 1 = 6$.</p>\n<p>Autre piège : écrire $n^p$ au lieu de $A_n^p$. Comment le repérer : demande-toi « le même élément peut-il être pris deux fois ? ». Si non, les possibilités diminuent à chaque étape ; si oui, elles restent les mêmes.</p>\n<h2>En une phrase</h2>\n<p>Quand l'ordre compte et qu'un même élément ne peut pas servir deux fois, on multiplie des nombres qui diminuent de 1 : c'est $A_n^p$, et si on range tous les éléments, c'est $n!$.</p>",
-          "exercises": [
+          "remember": "Pour un entier $n \\geq 1$, la **factorielle** de $n$ est $n! = 1 \\times 2 \\times \\cdots \\times n$ ; par convention $0! = 1$. Un **arrangement** de $p$ éléments d'un ensemble à $n$ éléments ($1 \\leq p \\leq n$) est une liste **ordonnée** de $p$ éléments **distincts** (tirages sans remise, l'ordre compte). Leur nombre est $A_n^p = n(n-1)(n-2)\\cdots(n-p+1)$, un produit de $p$ facteurs. Une **permutation** de $n$ éléments est un arrangement de $n$ éléments parmi $n$ : il y en a $A_n^n = n!$.",
+          "method": [
+            "Vérifier que l'ordre compte et que les éléments sont distincts (pas de répétition).",
+            "Identifier $n$, le nombre d'éléments disponibles, et $p$, le nombre d'éléments placés.",
+            "Écrire $A_n^p = n(n-1)\\cdots(n-p+1)$, produit de $p$ facteurs ; si $p = n$, c'est $n!$.",
+            "Calculer le produit et contrôler que $p \\leq n$."
+          ],
+          "example": {
+            "statement": "Neuf élèves sont candidats. On élit un délégué, un sous-délégué et un secrétaire, trois élèves différents. Combien de résultats différents peut-on obtenir ?",
+            "steps": [
+              "Vérifier : l'ordre compte (être délégué n'est pas être secrétaire) et un élève ne peut pas avoir deux postes : les éléments sont distincts.",
+              "Identifier : $n = 9$ élèves disponibles et $p = 3$ postes.",
+              "Écrire : $A_9^3 = 9 \\times 8 \\times 7$ (3 facteurs).",
+              "Calculer : $9 \\times 8 \\times 7 = 504$ résultats, et $p = 3 \\leq n = 9$."
+            ]
+          },
+          "pitfall": "Ne pas confondre arrangement et $p$-liste. Contre-exemple : 4 élèves se disputent 2 postes. Écrire $4^2 = 16$ est faux : cela compterait des résultats où le même élève a les deux postes. Le bon calcul retire, à chaque place, l'élève déjà placé : $4 \\times 3 = 12$. Dans $A_n^p$ il y a $p$ facteurs, pas $n$ : $A_5^2 = 5 \\times 4 = 20$, et non $5 \\times 4 \\times 3 \\times 2 \\times 1$.",
+          "figure": null,
+          "practice": {
+            "statement": "Quatre élèves se disputent les deux premières places du concours de lecture.",
+            "questions": [
+              {
+                "content": "4 élèves se disputent la 1re et la 2e place. Complète : il y a 4 choix pour la 1re place, ___ choix pour la 2e place, donc $A_4^2 = 4 \\times$ ___ $=$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (1er n'est pas 2e) et un élève ne peut avoir qu'une place. Étape 2 — Identifier : $n = 4$ et $p = 2$. Étape 3 — Écrire : $A_4^2 = 4 \\times 3$, car l'élève placé 1er n'est plus disponible pour la 2e place. Étape 4 — Calculer : $4 \\times 3 = 12$, et $p = 2 \\leq n = 4$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Un élève placé 1er ne peut plus être 2e : combien d'élèves restent pour la 2e place ?"
+              },
+              {
+                "content": "Calcule $3!$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $3!$ est le nombre de permutations de 3 éléments distincts. Étape 2 — Identifier : $n = 3$ et $p = 3$. Étape 3 — Écrire : $3! = 3 \\times 2 \\times 1$. Étape 4 — Calculer : $3 \\times 2 \\times 1 = 6$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un arrangement, l'ordre ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Vérifier : un arrangement est une liste ordonnée d'éléments distincts, donc l'ordre compte. Étape 2 — Identifier : pour $n$ et $p$ donnés, (a ; b) et (b ; a) sont deux arrangements différents. Étape 3 — Écrire : c'est pourquoi on multiplie $n(n-1)\\cdots$ en tenant compte des places. Étape 4 — Calculer : quand l'ordre ne compte pas, c'est une combinaison, on le verra dans la fiche suivante.",
+                "answers": [
+                  {
+                    "content": "compte",
+                    "correct": true
+                  },
+                  {
+                    "content": "ne compte pas",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Compter avec les arrangements et les permutations",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : vérifier, identifier, écrire, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque situation au type de dénombrement qui convient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Vérifier : dans les trois cas l'ordre compte ; seule la possibilité de répéter change. Étape 2 — Identifier : le code de 3 chiffres a $n = 10$ chiffres et $p = 3$ places avec répétitions, c'est une 3-liste ($10^3 = 1000$) ; pour les 4 livres, $n = p = 4$ et tous sont rangés, c'est une permutation ($4! = 24$) ; pour le podium, 3 coureurs distincts parmi 10, c'est un arrangement. Étape 3 — Écrire : $A_{10}^3 = 10 \\times 9 \\times 8$ pour le podium. Étape 4 — Calculer : $10 \\times 9 \\times 8 = 720$ podiums. La répétition n'est permise que dans le code : un coureur ne peut pas être 1er et 2e.",
+                "answers": [
+                  {
+                    "content": "Écrire un code de 3 chiffres, un chiffre pouvant se répéter",
+                    "match": "3-liste"
+                  },
+                  {
+                    "content": "Ranger 4 livres différents sur une étagère",
+                    "match": "Permutation"
+                  },
+                  {
+                    "content": "Choisir un podium de 3 coureurs parmi 10, sans ex aequo",
+                    "match": "Arrangement"
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $4!$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $4!$ est la factorielle de 4, c'est aussi le nombre de permutations de 4 éléments (tous distincts). Étape 2 — Identifier : $n = 4$ et $p = 4$. Étape 3 — Écrire : $4! = 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $4 \\times 3 = 12$, puis $12 \\times 2 = 24$, puis $24 \\times 1 = 24$. Ne pas confondre avec $4 \\times 2 = 8$ : la factorielle multiplie tous les entiers de 1 à 4.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 6 élèves, on désigne un délégué puis un adjoint, deux élèves différents. Combien de choix différents existe-t-il ? (Il s'agit de $A_6^2$.)",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (délégué et adjoint sont deux rôles différents) et un élève ne peut pas avoir les deux rôles : éléments distincts. Étape 2 — Identifier : $n = 6$ élèves disponibles et $p = 2$ places. Étape 3 — Écrire : $A_6^2 = 6 \\times 5$ (2 facteurs). Étape 4 — Calculer : $6 \\times 5 = 30$, et $p = 2 \\leq n = 6$. Écrire $6^2 = 36$ serait une erreur : un même élève serait délégué et adjoint.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sept athlètes participent à la course de 100 mètres de l'école. Combien de podiums différents (1er, 2e et 3e) peut-on obtenir, sans ex aequo ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (être 1er n'est pas être 2e) et un athlète ne peut occuper qu'une place : éléments distincts. Étape 2 — Identifier : $n = 7$ athlètes et $p = 3$ places. Étape 3 — Écrire : $A_7^3 = 7 \\times 6 \\times 5$ (3 facteurs). Étape 4 — Calculer : $7 \\times 6 = 42$, puis $42 \\times 5 = 210$ podiums, et $p = 3 \\leq n = 7$.",
+                "answers": [
+                  {
+                    "content": "210",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Six amis se mettent en ligne, côte à côte, pour une photo. De combien de façons différentes peuvent-ils se placer ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (Awa à gauche n'est pas Awa à droite) et chaque ami n'apparaît qu'une fois : éléments distincts. Étape 2 — Identifier : $n = 6$ amis et $p = 6$ places, c'est une permutation. Étape 3 — Écrire : $A_6^6 = 6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $6 \\times 5 = 30$, $30 \\times 4 = 120$, $120 \\times 3 = 360$, $360 \\times 2 = 720$ façons.",
+                "answers": [
+                  {
+                    "content": "720",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un podium de 3 élèves est choisi parmi 5 élèves, sans ex aequo. Affirmation : « Il y a $5^3 = 125$ podiums différents. »",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : l'ordre compte et un élève ne peut pas occuper deux places : éléments distincts, donc ce n'est pas une 3-liste. Étape 2 — Identifier : $n = 5$ élèves et $p = 3$ places. Étape 3 — Écrire : $A_5^3 = 5 \\times 4 \\times 3$ (3 facteurs). Étape 4 — Calculer : $5 \\times 4 \\times 3 = 60$ podiums. Le calcul $5^3 = 125$ compterait des podiums où le même élève est 1er et 2e : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le calcul de $A_9^4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $A_9^4$ compte des listes ordonnées de 4 éléments distincts parmi 9. Étape 2 — Identifier : $n = 9$ et $p = 4$. Étape 3 — Écrire : $A_9^4 = n(n-1)\\cdots(n-p+1)$ est un produit de $p = 4$ facteurs qui commence à 9 et descend de 1 en 1 : $9 \\times 8 \\times 7 \\times 6$. Étape 4 — Calculer : on contrôle que $p = 4 \\leq n = 9$. Le produit de 9 à 1 est $9!$ et a 9 facteurs ; $9 \\times 4$ est un simple produit de deux nombres ; $9^4$ est le nombre de 4-listes, avec répétitions permises.",
+                "answers": [
+                  {
+                    "content": "$9 \\times 8 \\times 7 \\times 6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$9 \\times 8 \\times 7 \\times 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$9 \\times 4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$9^4$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Combinaisons",
+          "remember": "Une **combinaison** de $p$ éléments d'un ensemble à $n$ éléments ($0 \\leq p \\leq n$) est une **partie** à $p$ éléments : l'ordre ne compte pas et les éléments sont distincts (tirage **simultané**). Leur nombre est $C_n^p = \\dfrac{A_n^p}{p!} = \\dfrac{n(n-1)\\cdots(n-p+1)}{p!}$. En effet, un groupe de $p$ éléments donne $p!$ arrangements (on le range dans tous les ordres possibles), mais il ne compte que pour une combinaison. Propriétés : $C_n^p = C_n^{n-p}$, $C_n^1 = n$ et $C_n^n = 1$.",
+          "method": [
+            "Vérifier que l'ordre ne compte pas (on choisit un groupe) et que les éléments sont distincts.",
+            "Identifier $n$, le nombre d'éléments disponibles, et $p$, la taille du groupe.",
+            "Écrire $C_n^p = \\dfrac{A_n^p}{p!} = \\dfrac{n(n-1)\\cdots(n-p+1)}{p!}$.",
+            "Calculer en simplifiant avant de multiplier, en passant à $C_n^{n-p}$ si $p$ est grand."
+          ],
+          "example": {
+            "statement": "Un professeur choisit 2 élèves parmi 6 pour nettoyer le tableau, sans fonction particulière. Combien de groupes différents peut-il former ?",
+            "steps": [
+              "Vérifier : on choisit un groupe de 2 élèves sans fonction ; l'ordre ne compte pas, car (Aya, Yao) et (Yao, Aya) forment le même groupe.",
+              "Identifier : $n = 6$ élèves disponibles et $p = 2$ élèves dans le groupe.",
+              "Écrire : $C_6^2 = \\dfrac{A_6^2}{2!} = \\dfrac{6 \\times 5}{2 \\times 1}$.",
+              "Calculer : en simplifiant, $\\dfrac{6 \\times 5}{2 \\times 1} = 3 \\times 5 = 15$ groupes."
+            ]
+          },
+          "pitfall": "Ne pas utiliser $A_n^p$ quand l'ordre ne compte pas : chaque groupe serait compté plusieurs fois. Contre-exemple : avec 4 élèves Aya, Bakary, Chantal et Drissa, on choisit 2 élèves pour décorer la classe. Les groupes sont AB, AC, AD, BC, BD et CD, soit 6 groupes. Or $A_4^2 = 12$ compte chaque groupe deux fois (AB et BA), d'où $\\dfrac{12}{2} = 6$. Question de contrôle : « si j'échange deux éléments, ai-je un autre résultat ? » Non : combinaison. Oui : arrangement.",
+          "figure": null,
+          "practice": {
+            "statement": "Le professeur d'EPS choisit des élèves pour une démonstration.",
+            "questions": [
+              {
+                "content": "Pour choisir 2 élèves parmi 7 sans fonction : $A_7^2 = 7 \\times 6 = 42$. Chaque groupe de 2 élèves est compté ___ fois dans $A_7^2$, donc $C_7^2 = 42 \\div$ ___ $=$ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe de 2 élèves, l'ordre ne compte pas. Étape 2 — Identifier : $n = 7$ et $p = 2$. Étape 3 — Écrire : $C_7^2 = \\dfrac{A_7^2}{2!} = \\dfrac{42}{2}$, car un groupe de 2 élèves se range de $2! = 2$ façons. Étape 4 — Calculer : $42 \\div 2 = 21$ groupes.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "21",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Un groupe de 2 élèves se range de $2!$ façons : combien de fois est-il compté dans $A_7^2$ ?"
+              },
+              {
+                "content": "Pour une combinaison, échanger deux éléments du groupe donne ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Vérifier : une combinaison est une partie : l'ordre ne compte pas. Étape 2 — Identifier : (Aya, Yao) et (Yao, Aya) forment le même groupe. Étape 3 — Écrire : c'est pourquoi on divise $A_n^p$ par $p!$. Étape 4 — Calculer : si échanger deux éléments donnait un autre résultat, ce serait un arrangement.",
+                "answers": [
+                  {
+                    "content": "le même résultat",
+                    "correct": true
+                  },
+                  {
+                    "content": "un autre résultat",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $C_4^3$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe de 3 éléments parmi 4 ; l'ordre ne compte pas. Étape 2 — Identifier : $n = 4$ et $p = 3$. Étape 3 — Écrire : $C_4^3 = C_4^{1}$, car choisir 3 éléments revient à choisir celui qu'on laisse. Étape 4 — Calculer : $C_4^1 = 4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Compter avec les combinaisons",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : vérifier, identifier, écrire, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelles sont les deux situations où l'ordre ne compte pas ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Vérifier : on se demande « si j'échange deux éléments, ai-je un autre résultat ? ». Pour le comité de 3 élèves sans fonction et pour les 2 billes tirées ensemble, échanger deux éléments donne le même groupe : c'est une combinaison. Étape 2 — Identifier : les autres situations ont des places distinctes (président, secrétaire, trésorier ; 1er, 2e, 3e ; positions dans un code). Étape 3 — Écrire : dans ces cas, on utilise $A_n^p$ ou $n^p$, pas $C_n^p$. Étape 4 — Calculer : le nombre de groupes se calcule ensuite avec $C_n^p$ seulement pour le comité sans fonction et pour les billes tirées ensemble. Le bureau et le podium sont des arrangements ; le code est une liste ordonnée.",
+                "answers": [
+                  {
+                    "content": "Former un comité de 3 élèves, sans fonction particulière",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tirer simultanément 2 billes dans un sac",
+                    "correct": true
+                  },
+                  {
+                    "content": "Choisir un président, un secrétaire et un trésorier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Écrire un code de 4 chiffres",
+                    "correct": false
+                  },
+                  {
+                    "content": "Classer 3 coureurs : 1er, 2e et 3e",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi 5 élèves, le professeur désigne 2 élèves pour porter les cahiers, sans fonction particulière. Combien de groupes de 2 élèves peut-il former ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe de 2 élèves sans fonction ; l'ordre ne compte pas et les élèves sont distincts. Étape 2 — Identifier : $n = 5$ et $p = 2$. Étape 3 — Écrire : $C_5^2 = \\dfrac{A_5^2}{2!} = \\dfrac{5 \\times 4}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{20}{2} = 10$ groupes. Dire 20 oublie de diviser par $2!$ : chaque groupe est alors compté deux fois.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une enseignante choisit 3 livres parmi 8 pour la bibliothèque de classe. L'ordre des livres n'a pas d'importance. Combien de choix différents existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe de 3 livres ; l'ordre ne compte pas et les livres sont distincts. Étape 2 — Identifier : $n = 8$ et $p = 3$. Étape 3 — Écrire : $C_8^3 = \\dfrac{A_8^3}{3!} = \\dfrac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : en simplifiant, $\\dfrac{8 \\times 7 \\times 6}{6} = 8 \\times 7 = 56$ choix. Le nombre $8 \\times 7 \\times 6 = 336$ est $A_8^3$ : il compte chaque groupe de 3 livres 6 fois.",
+                "answers": [
+                  {
+                    "content": "56",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un groupe de 10 élèves, on forme des binômes de 2 élèves. Combien de binômes différents peut-on former ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : un binôme est un groupe de 2 élèves sans rôle particulier ; l'ordre ne compte pas et les élèves sont distincts. Étape 2 — Identifier : $n = 10$ et $p = 2$. Étape 3 — Écrire : $C_{10}^2 = \\dfrac{A_{10}^2}{2!} = \\dfrac{10 \\times 9}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{90}{2} = 45$ binômes. La réponse 90 compte chaque binôme deux fois (Aya-Yao et Yao-Aya).",
+                "answers": [
+                  {
+                    "content": "45",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au loto scolaire, on coche 4 numéros parmi 6, dans n'importe quel ordre. Combien de grilles différentes peut-on remplir ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : on coche un groupe de 4 numéros ; l'ordre ne compte pas et les numéros sont distincts. Étape 2 — Identifier : $n = 6$ numéros disponibles et $p = 4$ numéros cochés. Étape 3 — Écrire : $C_6^4 = \\dfrac{6 \\times 5 \\times 4 \\times 3}{4!}$, ou plus simplement $C_6^4 = C_6^{2}$ car cocher 4 numéros revient à choisir les 2 qu'on laisse. Étape 4 — Calculer : en passant à $C_6^2$ pour éviter un grand produit, $\\dfrac{6 \\times 5}{2 \\times 1} = 15$ grilles.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un comité de 3 élèves est choisi parmi 5 élèves, sans fonction particulière. Affirmation : « Il y a $A_5^3 = 60$ comités différents. »",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : le comité n'a pas de fonction, donc l'ordre ne compte pas. Étape 2 — Identifier : $n = 5$ et $p = 3$. Étape 3 — Écrire : $C_5^3 = \\dfrac{A_5^3}{3!} = \\dfrac{5 \\times 4 \\times 3}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{60}{6} = 10$ comités. Le nombre $A_5^3 = 60$ compte chaque comité $3! = 6$ fois (une fois par ordre possible des 3 élèves) : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les clubs du lycée",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Dans la classe de 1ère A du lycée moderne de Daloa, il y a 42 élèves. 26 sont inscrits au club de théâtre, 19 au club d'environnement et 8 aux deux clubs.",
+          "questions": [
             {
-              "title": "Comprendre — Ordre, répétition et factorielle",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Dans une classe de 42 élèves, 26 sont inscrits au club de théâtre, 19 au club d'environnement et 8 aux deux clubs. Combien d'élèves sont inscrits à au moins un des deux clubs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 42$ ; $T$ (théâtre) a pour cardinal 26 ; $G$ (environnement) a pour cardinal 19. Étape 2 — Repérer : les 8 élèves inscrits aux deux clubs sont dans $T \\cap G$ et sont comptés deux fois dans $26 + 19$. Étape 3 — Appliquer la formule $\\text{card}(T \\cup G) = \\text{card}(T) + \\text{card}(G) - \\text{card}(T \\cap G) = 26 + 19 - 8 = 37$. Étape 4 — Vérifier : 37 est un entier compris entre 0 et 42. Écrire $26 + 19 = 45$ serait faux : 45 dépasse l'effectif de la classe.",
+              "answers": [
                 {
-                  "content": "Awa veut classer exactement 3 amis (Koffi, Mariam et Yao) comme premier, deuxième et troisième contact favori. De combien de façons peut-elle les ranger ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a 3 choix pour la première place, puis 2, puis 1 : $3 \\times 2 \\times 1 = 3! = 6$. Le nombre 9 serait $3 \\times 3$ : il autoriserait à remettre la même personne à plusieurs places.",
-                  "answers": [
-                    {
-                      "content": "$6$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que vaut $5!$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$. Le nombre 25 est $5^2$, et le nombre 15 est $5 + 4 + 3 + 2 + 1$ : la factorielle est un produit, pas une somme.",
-                  "answers": [
-                    {
-                      "content": "$120$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$25$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$15$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$60$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On a $0! = 0$.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Par convention, $0! = 1$ : il y a une seule façon de ranger zéro élément, celle de ne rien ranger. Cette convention permet aux formules d'arrangements de rester valables dans tous les cas.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi 6 amis, on choisit 3 contacts rangés dans l'ordre (premier, deuxième, troisième), sans répéter la même personne. Quelle écriture donne le nombre $A_6^3$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A_6^3$ est un produit de 3 facteurs qui diminuent de 1 à partir de 6 : $6 \\times 5 \\times 4$. Le nombre $6^3$ autoriserait les répétitions. Le produit complet de 6 à 1 est $6!$, qui range les 6 amis.",
-                  "answers": [
-                    {
-                      "content": "$6 \\times 5 \\times 4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6 \\times 3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6^3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle phrase décrit un arrangement de $p$ éléments pris parmi $n$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans un arrangement, les éléments sont distincts et l'ordre compte : (Koffi, Mariam) n'est pas (Mariam, Koffi). Si l'ordre ne compte pas, c'est une combinaison. Si les éléments peuvent se répéter, on obtient $n^p$.",
-                  "answers": [
-                    {
-                      "content": "On choisit $p$ éléments tous différents, et l'ordre compte",
-                      "correct": true
-                    },
-                    {
-                      "content": "On choisit $p$ éléments tous différents, et l'ordre ne compte pas",
-                      "correct": false
-                    },
-                    {
-                      "content": "On choisit $p$ éléments qui peuvent se répéter, et l'ordre compte",
-                      "correct": false
-                    },
-                    {
-                      "content": "On choisit $p$ éléments qui peuvent se répéter, et l'ordre ne compte pas",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Ranger tous les éléments, c'est choisir $n$ éléments parmi $n$ en tenant compte de l'ordre. La factorielle est un produit. Mais $3! + 2! = 6 + 2 = 8$, alors que $5! = 120$ : les factorielles ne s'additionnent pas ainsi.",
-                  "answers": [
-                    {
-                      "content": "Une permutation de $n$ éléments est un arrangement de $n$ éléments pris parmi $n$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$n! = n \\times (n-1) \\times \\dots \\times 2 \\times 1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$A_n^p = n^p$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$3! + 2! = 5!$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans un arrangement, l'ordre des éléments n'a aucune importance",
-                      "correct": false
-                    }
-                  ]
+                  "content": "37",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Arrangements et permutations",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Dans une classe de 42 élèves, 37 élèves sont inscrits à au moins un des deux clubs (théâtre ou environnement). Combien d'élèves ne sont inscrits à aucun club ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 42$ ; $T \\cup G$ est l'ensemble des élèves inscrits à au moins un club, $\\text{card}(T \\cup G) = 37$. Étape 2 — Repérer : les élèves sans club forment le complémentaire de $T \\cup G$ ; il n'y a pas d'élément compté deux fois ici. Étape 3 — Appliquer la formule du complémentaire : $\\text{card}(\\overline{T \\cup G}) = \\text{card}(E) - \\text{card}(T \\cup G) = 42 - 37 = 5$. Étape 4 — Vérifier : 5 est un entier compris entre 0 et 42, et $37 + 5 = 42$.",
+              "answers": [
                 {
-                  "content": "Parmi 6 amis, Awa choisit 3 contacts pour sa liste de favoris, rangés en première, deuxième et troisième place, sans répéter la même personne. Combien de listes différentes peut-elle former ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A_6^3 = 6 \\times 5 \\times 4 = 120$. Le nombre 216 est $6^3$ : il autoriserait les répétitions. Le nombre 20 est le nombre de groupes de 3 amis sans ordre : ici, l'ordre compte.",
-                  "answers": [
-                    {
-                      "content": "$120$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$216$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$20$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$18$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi 8 contacts, Awa choisit un contact d'urgence principal, puis un contact de secours différent. Combien de choix ordonnés différents a-t-elle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un arrangement de 2 parmi 8 : $A_8^2 = 8 \\times 7 = 56$. Le nombre 64 autoriserait le même contact aux deux rôles. Le nombre 28 est $56 \\div 2$ : il ignorerait l'ordre, alors que principal et secours sont deux rôles différents.",
-                  "answers": [
-                    {
-                      "content": "$56$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$64$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$16$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$28$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Tu ranges 6 applications différentes sur 6 emplacements de ton écran d'accueil, une par emplacement. Combien de rangements différents existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est une permutation de 6 éléments : $6! = 6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1 = 720$. Le nombre 36 est $6^2$, le nombre 120 est $5!$ : il manque le facteur 6.",
-                  "answers": [
-                    {
-                      "content": "$720$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$36$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$120$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que vaut $\\dfrac{7!}{5!}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$\\dfrac{7!}{5!} = \\dfrac{7 \\times 6 \\times 5!}{5!} = 7 \\times 6 = 42$. On simplifie $5!$. Le nombre 2 vient de $7 - 5$ : une factorielle ne se simplifie pas comme une soustraction.",
-                  "answers": [
-                    {
-                      "content": "$42$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$35$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,040$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que vaut $A_9^4$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A_9^4 = 9 \\times 8 \\times 7 \\times 6 = 3\\,024$ : 4 facteurs, le dernier étant $9 - 4 + 1 = 6$. Le nombre 504 n'a que 3 facteurs ; le nombre 6 561 est $9^4$, qui autoriserait les répétitions.",
-                  "answers": [
-                    {
-                      "content": "$3\\,024$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6\\,561$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$504$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$36$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un code de 4 chiffres (de 0 à 9) doit avoir ses 4 chiffres tous différents. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Premier chiffre : 10 choix, puis 9, puis 8, puis 7 : $A_{10}^4 = 10 \\times 9 \\times 8 \\times 7 = 5\\,040$. Le nombre 10 000 autoriserait la répétition des chiffres.",
-                  "answers": [
-                    {
-                      "content": "$5\\,040$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$10\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$210$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$40$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Classements, podiums et codes sans répétition",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Dans une classe de 42 élèves, 26 sont inscrits au club de théâtre et 8 de ces élèves sont aussi inscrits au club d'environnement. Combien d'élèves sont inscrits au théâtre seulement ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $T$ est l'ensemble des élèves du théâtre, $\\text{card}(T) = 26$ ; $T \\cap G$ est l'ensemble de ceux qui sont aussi à l'environnement, $\\text{card}(T \\cap G) = 8$. Étape 2 — Repérer : les élèves du théâtre seulement sont ceux de $T$ qui ne sont pas dans $T \\cap G$. Étape 3 — Appliquer : $26 - 8 = 18$ (on retire de $T$ les élèves de l'intersection). Étape 4 — Vérifier : 18 est un entier compris entre 0 et 26, et $18 + 8 = 26$.",
+              "answers": [
                 {
-                  "content": "Douze participants jouent à un concours sur téléphone. Le premier gagne un smartphone, le deuxième un forfait et le troisième une carte SIM. Un participant ne gagne qu'un seul lot. Combien de façons de désigner les trois gagnants, dans l'ordre des lots ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les lots sont différents : l'ordre compte. $A_{12}^3 = 12 \\times 11 \\times 10 = 1\\,320$. Le nombre 220 compterait des groupes de 3 sans ordre ; le nombre $12^3 = 1\\,728$ autoriserait qu'un même participant gagne plusieurs lots.",
-                  "answers": [
-                    {
-                      "content": "$1\\,320$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$220$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,728$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$36$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 42 élèves, 26 sont inscrits au club de théâtre, 19 au club d'environnement et 8 aux deux. Affirmation : « Le nombre d'élèves inscrits à au moins un club est $26 + 19 = 45$. »",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Nommer : $\\text{card}(E) = 42$, $\\text{card}(T) = 26$ et $\\text{card}(G) = 19$. Étape 2 — Repérer : les 8 élèves des deux clubs sont comptés deux fois dans $26 + 19$. Étape 3 — Appliquer : $\\text{card}(T \\cup G) = 26 + 19 - 8 = 37$. Étape 4 — Vérifier : 45 dépasse les 42 élèves de la classe, ce qui est impossible. L'affirmation est fausse : l'erreur est d'avoir oublié l'intersection.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Cinq amis, dont Awa, se placent en ligne pour un selfie. Awa doit se trouver à l'une des deux extrémités de la ligne. De combien de façons les 5 amis peuvent-ils se placer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Awa a 2 places possibles (à gauche ou à droite). Les 4 autres amis se rangent dans les 4 places restantes : $4! = 24$. Total : $2 \\times 24 = 48$. Le nombre 24 oublie l'autre extrémité ; 120 ignore la condition.",
-                  "answers": [
-                    {
-                      "content": "$48$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$120$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$96$",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi les 8 élèves inscrits aux deux clubs, on choisit 2 élèves pour représenter les clubs, sans fonction particulière. Combien de choix différents existe-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 2 élèves sans fonction ; l'ordre ne compte pas et les élèves sont distincts. Étape 2 — Identifier : $n = 8$ et $p = 2$. Étape 3 — Écrire : $C_8^2 = \\dfrac{A_8^2}{2!} = \\dfrac{8 \\times 7}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{56}{2} = 28$ choix. Le nombre 56 est $A_8^2$ : il compte chaque groupe deux fois.",
+              "answers": [
                 {
-                  "content": "Un code de 4 chiffres (de 0 à 9) a ses chiffres tous différents et commence par 7. Combien de codes existe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le premier chiffre est 7. Il reste 9 chiffres pour les 3 places suivantes, sans répétition : $9 \\times 8 \\times 7 = 504$. Le nombre 5 040 est le total sans la condition ; le nombre 720 est $A_{10}^3$ : il laisse 10 chiffres disponibles alors que le 7 est déjà pris.",
-                  "answers": [
-                    {
-                      "content": "$504$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5\\,040$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,000$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$720$",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les 5 élèves qui ne sont inscrits à aucun club se placent en ligne pour une photo. De combien de façons différentes peuvent-ils se placer ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte (la place dans la ligne) et les 5 élèves sont distincts. Étape 2 — Identifier : $n = 5$ élèves et $p = 5$ places, c'est une permutation. Étape 3 — Écrire : $A_5^5 = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 = 20$, $20 \\times 3 = 60$, $60 \\times 2 = 120$ façons, et $p = 5 \\leq n = 5$.",
+              "answers": [
                 {
-                  "content": "Il y a plus de codes de 4 chiffres tous différents que de codes de 4 chiffres dont les chiffres peuvent se répéter.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Avec répétition permise, il y a $10^4 = 10\\,000$ codes. Si les chiffres doivent être tous différents, il y en a $10 \\times 9 \\times 8 \\times 7 = 5\\,040$. Interdire la répétition ne peut que retirer des codes.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On sait que $A_n^2 = 30$, avec $n$ entier et $n \\ge 2$. Que vaut $n$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A_n^2 = n(n-1) = 30$. Comme $6 \\times 5 = 30$, on a $n = 6$. Pour $n = 5$, on obtiendrait $5 \\times 4 = 20$. Le nombre 15 est $30 \\div 2$ : ce n'est pas $n$.",
-                  "answers": [
-                    {
-                      "content": "$6$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$15$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$30$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Six participants courent une course, sans ex æquo. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Classements complets : $6! = 720$. Podium : $A_6^3 = 6 \\times 5 \\times 4 = 120$. Deux premiers : $A_6^2 = 6 \\times 5 = 30$. Le nombre 216 est $6^3$ : il autoriserait un coureur à occuper plusieurs places du podium. Le nombre 36 est $6^2$.",
-                  "answers": [
-                    {
-                      "content": "Il y a 720 classements complets possibles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 120 façons de désigner le podium (premier, deuxième, troisième)",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 30 façons de désigner les deux premiers, dans l'ordre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 216 façons de désigner le podium",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il y a 36 classements complets possibles",
-                      "correct": false
-                    }
-                  ]
+                  "content": "120",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Combinaisons",
-          "subtitle": "Choisir p éléments sans tenir compte de l'ordre. À compléter : triangle de Pascal et binôme de Newton",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une situation où l'ordre ne compte pas.</li>\n<li>Calculer le nombre de combinaisons $C_n^p$.</li>\n<li>Utiliser $C_n^p = C_n^{n-p}$ pour simplifier un calcul.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le groupe de discussion (les combinaisons).</strong> Awa crée un groupe de discussion avec 3 amis choisis parmi les 6 de son répertoire. Elle ajoute d'abord Koffi, puis Mariam, puis Yao. Un peu plus tard, une autre amie crée le même groupe, mais elle ajoute Yao, puis Koffi, puis Mariam. Est-ce un autre groupe ? Non : ce sont les mêmes 3 personnes. L'ordre dans lequel on les ajoute ne change rien. Si l'ordre comptait, on aurait $A_6^3 = 120$ listes. Mais chaque groupe est compté autant de fois qu'on peut ranger ses 3 membres, soit $3! = 6$ fois. Le nombre de groupes est donc $120 \\div 6 = 20$.</p>\n<p><em>Le pont.</em> Un groupe de $p$ éléments choisis parmi $n$, sans tenir compte de l'ordre, s'appelle une <strong>combinaison</strong>. On la note $C_n^p$. Les 120 listes sont les arrangements, les 6 rangements d'un même groupe sont les permutations de ses 3 membres, et le résultat est $C_6^3 = \\dfrac{A_6^3}{3!} = 20$.</p>\n<p><em>Où l'image s'arrête.</em> Si les 3 amis avaient des rôles différents (un administrateur, un trésorier, un secrétaire), l'ordre compterait de nouveau et ce serait un arrangement.</p>\n<p><strong>2. Qui inviter, qui laisser dehors (la symétrie).</strong> Awa veut inviter 2 personnes parmi 6. Choisir les 2 invités revient exactement à choisir les 4 personnes qu'elle laisse de côté. Le nombre de façons est le même : $C_6^2 = C_6^4 = 15$.</p>\n<p><em>Le pont.</em> À chaque choix de $p$ éléments gardés correspond un choix de $n-p$ éléments écartés. D'où $C_n^p = C_n^{n-p}$.</p>\n<p><em>Où l'image s'arrête.</em> Cette égalité compare deux combinaisons de la même série de $n$ éléments. Elle ne dit pas que $C_n^p$ est égal à $C_n^q$ pour deux nombres $p$ et $q$ quelconques.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Combinaison.</strong> Une combinaison de $p$ éléments pris parmi $n$ est une partie de $p$ éléments d'un ensemble de $n$ éléments (l'ordre ne compte pas). Leur nombre est\n$$C_n^p = \\frac{A_n^p}{p!} = \\frac{n!}{p!\\,(n-p)!}.$$</p>\n<ul>\n<li>$C_n^0 = 1$, $C_n^n = 1$ et $C_n^1 = n$.</li>\n<li>$C_n^p = C_n^{n-p}$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans une classe de 10 élèves, on choisit 3 élèves pour représenter la classe. Combien de groupes différents ? Combien y a-t-il de façons d'attribuer plutôt les rôles de président, de vice-président et de trésorier à 3 des 10 élèves ?</strong></p>\n<ol>\n<li>Les 3 représentants forment un groupe : l'ordre ne compte pas. C'est une combinaison de 3 parmi 10.</li>\n<li>$C_{10}^3 = \\dfrac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = \\dfrac{720}{6} = 120$ groupes.</li>\n<li>Pour attribuer les rôles de président, de vice-président et de trésorier à 3 des 10 élèves, les rôles sont différents : l'ordre compte. C'est un arrangement : $A_{10}^3 = 10 \\times 9 \\times 8 = 720$.</li>\n</ol>\n<p>On retrouve le lien : $720 = 120 \\times 3!$. Chaque groupe de 3 peut recevoir les 3 rôles de $3! = 6$ façons.</p>\n<h2>Le piège à éviter</h2>\n<p>Calculer $A_n^p$ (le nombre de listes ordonnées) alors que l'ordre ne compte pas, c'est-à-dire oublier de diviser par $p!$. Le résultat est alors trop grand : chaque groupe est compté $p!$ fois.</p>\n<p>Comment le repérer : échange deux éléments choisis. Si la situation reste la même (le même groupe, la même équipe), c'est une combinaison. Si elle change (un autre rôle, une autre place), c'est un arrangement.</p>\n<h2>En une phrase</h2>\n<p>Quand on choisit un groupe sans se soucier de l'ordre, on calcule d'abord les arrangements puis on divise par $p!$ : c'est $C_n^p$.</p>",
-          "exercises": [
+          "title": "Les codes de la salle informatique",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Le code de la salle informatique d'un lycée est formé de 4 chiffres pris de 0 à 9. Le directeur veut comprendre combien de codes sont possibles selon les règles qu'il choisit.",
+          "questions": [
             {
-              "title": "Comprendre — Choisir sans tenir compte de l'ordre",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le code de la salle informatique est formé de 4 chiffres pris de 0 à 9, un chiffre pouvant se répéter. Combien de codes différents existe-t-il ? Écris le nombre sans espace.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : on choisit le 1er, le 2e, le 3e puis le 4e chiffre, soit 4 choix successifs ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$. Étape 4 — Contrôler : les codes vont de 0000 à 9999, soit 10 000 codes. Écrire $10 \\times 4 = 40$ est une erreur classique : on multiplie 10 quatre fois.",
+              "answers": [
                 {
-                  "content": "Awa choisit 3 amis parmi 6 pour créer un groupe de discussion. L'ordre dans lequel elle les ajoute ne change pas le groupe. Quel type de dénombrement utilise-t-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le groupe ne dépend pas de l'ordre des ajouts : c'est une combinaison. L'arrangement compterait (Koffi, Mariam, Yao) et (Yao, Koffi, Mariam) comme deux listes différentes, alors que c'est le même groupe.",
-                  "answers": [
-                    {
-                      "content": "Une combinaison de 3 éléments parmi 6",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un arrangement de 3 éléments parmi 6",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une permutation de 6 éléments",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un choix avec répétition, soit $6^3$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pourquoi divise-t-on $A_n^p$ par $p!$ pour obtenir $C_n^p$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un même groupe de $p$ éléments peut être écrit dans $p!$ ordres différents. Les arrangements le comptent $p!$ fois ; la division par $p!$ ne le compte plus qu'une fois. Il n'est pas question de répétition ici.",
-                  "answers": [
-                    {
-                      "content": "Parce que chaque groupe de $p$ éléments apparaît $p!$ fois parmi les listes ordonnées, une fois par ordre possible",
-                      "correct": true
-                    },
-                    {
-                      "content": "Parce que $p!$ est le nombre total d'éléments de départ",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce qu'il faut retirer les éléments qui se répètent",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce qu'on a oublié un facteur dans le calcul de l'arrangement",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le groupe (Awa, Kader, Yao) et le groupe (Yao, Awa, Kader) sont deux combinaisons différentes de 3 amis.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Une combinaison est un groupe sans ordre : ce sont les mêmes 3 personnes, donc la même combinaison. Ce sont deux arrangements différents, mais une seule combinaison.",
-                  "answers": [
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Combien vaut $C_5^1$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Choisir 1 élément parmi 5, c'est choisir l'un des 5 : $C_5^1 = 5$. En général, $C_n^1 = n$. Le nombre 1 est la valeur de $C_5^0$ et de $C_5^5$.",
-                  "answers": [
-                    {
-                      "content": "$5$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$120$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Il y a une seule façon de ne rien choisir et $n$ façons de choisir un seul élément. Choisir les $n$ éléments, c'est une seule façon : $C_n^n = 1$. Et $C_n^p = A_n^p \\div p!$ ne vaut $A_n^p$ que si $p = 0$ ou $p = 1$.",
-                  "answers": [
-                    {
-                      "content": "$C_n^0 = 1$ pour tout entier $n \\ge 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$C_n^1 = n$ pour tout entier $n \\ge 1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$C_n^n = n$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$C_n^0 = 0$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$C_n^p = A_n^p$ pour tout entier $p$ compris entre 1 et $n$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Laquelle de ces situations se compte avec une combinaison ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans un groupe, l'ordre ne compte pas : c'est une combinaison. Un classement, un code et un rangement sur des emplacements distincts dépendent de l'ordre, donc de la position de chaque élément.",
-                  "answers": [
-                    {
-                      "content": "Choisir 3 contacts parmi 6 pour créer un groupe de discussion",
-                      "correct": true
-                    },
-                    {
-                      "content": "Classer 3 contacts parmi 6 comme premier, deuxième et troisième favori",
-                      "correct": false
-                    },
-                    {
-                      "content": "Former un code secret de 3 chiffres",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ranger 3 applications sur 3 emplacements distincts de l'écran",
-                      "correct": false
-                    }
-                  ]
+                  "content": "10000",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer des combinaisons",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le code de la salle informatique est formé de 4 chiffres pris de 0 à 9, tous différents. Combien de codes différents existe-t-il ? Écris le nombre sans espace.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et les éléments sont distincts (pas de répétition). Étape 2 — Identifier : $n = 10$ chiffres disponibles et $p = 4$ places. Étape 3 — Écrire : $A_{10}^4 = 10 \\times 9 \\times 8 \\times 7$ (4 facteurs). Étape 4 — Calculer : $10 \\times 9 = 90$, $90 \\times 8 = 720$, $720 \\times 7 = 5\\,040$ codes, et $p = 4 \\leq n = 10$. Le nombre $10^4$ compterait aussi les codes qui répètent un chiffre.",
+              "answers": [
                 {
-                  "content": "Awa choisit 3 amis parmi 6 pour créer un groupe de discussion, sans tenir compte de l'ordre. Combien de groupes différents peut-elle former ?",
-                  "question_type": "single_choice",
-                  "explanation": "$C_6^3 = \\dfrac{6 \\times 5 \\times 4}{3 \\times 2 \\times 1} = \\dfrac{120}{6} = 20$. Le nombre 120 est $A_6^3$ : il compte chaque groupe 6 fois, une fois par ordre possible.",
-                  "answers": [
-                    {
-                      "content": "$20$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$120$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$216$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$18$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que vaut $C_5^2$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$C_5^2 = \\dfrac{5 \\times 4}{2 \\times 1} = 10$. Le nombre 20 est $A_5^2$ : on n'a pas divisé par $2!$. Le nombre 25 est $5^2$ et le nombre 7 est $5 + 2$ : ce ne sont pas des combinaisons.",
-                  "answers": [
-                    {
-                      "content": "$10$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$20$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$25$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que vaut $C_8^3$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$C_8^3 = \\dfrac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = \\dfrac{336}{6} = 56$. Le nombre 336 est $A_8^3$ : on a oublié de diviser par $3! = 6$. Le nombre 512 est $8^3$.",
-                  "answers": [
-                    {
-                      "content": "$56$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$336$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$512$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "En utilisant l'égalité $C_n^p = C_n^{n-p}$, que vaut $C_{10}^9$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Choisir 9 éléments parmi 10, c'est choisir l'unique élément à écarter : $C_{10}^9 = C_{10}^1 = 10$. Inutile de calculer de grands produits. Le nombre 90 serait $A_{10}^2$, qui n'est pas ce qu'on cherche.",
-                  "answers": [
-                    {
-                      "content": "$10$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$90$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une classe de 12 élèves, on en tire 2 au sort pour recevoir le même bonus de crédit téléphonique. Combien de paires d'élèves gagnantes peut-on obtenir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le bonus est le même pour les deux : l'ordre ne compte pas. $C_{12}^2 = \\dfrac{12 \\times 11}{2} = 66$. Le nombre 132 est $A_{12}^2$ : il compte chaque paire deux fois. Le nombre 144 est $12^2$.",
-                  "answers": [
-                    {
-                      "content": "$66$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$132$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$144$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On a $C_7^3 = C_7^4$.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Choisir 3 éléments à garder parmi 7 revient à choisir les 4 à écarter : $C_7^3 = C_7^{7-3} = C_7^4$. Les deux valent 35.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5040",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Délégations et choix avec conditions",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le code de la salle informatique est formé de 4 chiffres pris de 0 à 9, un chiffre pouvant se répéter, et le premier chiffre est obligatoirement 7. Combien de codes différents existe-t-il ? Écris le nombre sans espace.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : le 1er chiffre est imposé (7) ; il reste 3 choix successifs, l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 1 possibilité pour le 1er chiffre, puis 10 pour chacun des 3 suivants. Étape 3 — Multiplier : $1 \\times 10 \\times 10 \\times 10 = 10^3 = 1\\,000$. Étape 4 — Contrôler : les codes vont de 7000 à 7999, soit 1 000 codes.",
+              "answers": [
                 {
-                  "content": "Dans une classe de 20 élèves, on choisit 4 délégués qui auront tous le même rôle. Combien de groupes de délégués peut-on former ?",
-                  "question_type": "single_choice",
-                  "explanation": "$C_{20}^4 = \\dfrac{20 \\times 19 \\times 18 \\times 17}{4 \\times 3 \\times 2 \\times 1} = \\dfrac{116\\,280}{24} = 4\\,845$. Le nombre 116 280 est $A_{20}^4$ : on a oublié de diviser par $4!$. Le nombre 1 140 est $C_{20}^3$ : un délégué de moins.",
-                  "answers": [
-                    {
-                      "content": "$4\\,845$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$116\\,280$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,140$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$80$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "1000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un code de 4 chiffres pris de 0 à 9 est préparé de deux façons : avec des chiffres qui peuvent se répéter, ou avec des chiffres tous différents. Affirmation : « Il y a plus de codes à chiffres tous différents que de codes où les chiffres peuvent se répéter. »",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Décomposer : dans les deux cas, on fait 4 choix successifs et l'ordre compte ; seule la répétition change. Étape 2 — Compter : avec répétitions, 10 possibilités à chaque choix ; sans répétition, 10, puis 9, puis 8, puis 7. Étape 3 — Multiplier : $10^4 = 10\\,000$ codes avec répétitions et $10 \\times 9 \\times 8 \\times 7 = 5\\,040$ codes sans répétition. Étape 4 — Contrôler : $5\\,040 < 10\\,000$, car les codes à chiffres tous différents sont un sous-ensemble des autres. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Un club compte 9 jeunes : 5 filles et 4 garçons. On forme une délégation de 3 personnes avec exactement 2 filles et 1 garçon. Combien de délégations différentes peut-on former ?",
-                  "question_type": "single_choice",
-                  "explanation": "On choisit 2 filles parmi 5 ($C_5^2 = 10$) puis 1 garçon parmi 4 ($C_4^1 = 4$) : $10 \\times 4 = 40$. Le nombre 84 est $C_9^3$ : il ignore la condition « 2 filles et 1 garçon ».",
-                  "answers": [
-                    {
-                      "content": "$40$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$84$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$20$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le code de la salle informatique est formé de 4 chiffres pris de 0 à 9, tous différents, et le premier chiffre est obligatoirement 7. Combien de codes différents existe-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et les chiffres sont distincts. Étape 2 — Identifier : le 1er chiffre est imposé (7) ; il reste 3 places à remplir avec les 9 chiffres restants, donc $n = 9$ et $p = 3$. Étape 3 — Écrire : $A_9^3 = 9 \\times 8 \\times 7$ (3 facteurs). Étape 4 — Calculer : $9 \\times 8 = 72$, $72 \\times 7 = 504$ codes, et $p = 3 \\leq n = 9$.",
+              "answers": [
+                {
+                  "content": "504",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On range les 4 chiffres 1, 2, 3 et 4 dans un code, chacun utilisé une seule fois. Le nombre de codes différents est $4! =$ ___",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et chaque chiffre est utilisé une seule fois. Étape 2 — Identifier : $n = 4$ chiffres et $p = 4$ places, c'est une permutation. Étape 3 — Écrire : $A_4^4 = 4! = 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $4 \\times 3 = 12$, $12 \\times 2 = 24$, $24 \\times 1 = 24$ codes.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La kermesse du lycée",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Pour la kermesse du lycée, 12 élèves sont volontaires : 7 filles et 5 garçons. Le proviseur veut former des groupes à partir de ces volontaires.",
+          "questions": [
+            {
+              "content": "Parmi 12 élèves volontaires, on forme un comité de 3 élèves, sans fonction particulière. Combien de comités différents peut-on former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : le comité n'a pas de fonction ; l'ordre ne compte pas et les élèves sont distincts. Étape 2 — Identifier : $n = 12$ volontaires et $p = 3$. Étape 3 — Écrire : $C_{12}^3 = \\dfrac{A_{12}^3}{3!} = \\dfrac{12 \\times 11 \\times 10}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : en simplifiant, $\\dfrac{12 \\times 11 \\times 10}{6} = 2 \\times 11 \\times 10 = 220$ comités.",
+              "answers": [
+                {
+                  "content": "220",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi 12 élèves volontaires, on forme un bureau de 3 élèves différents : un président, un secrétaire et un trésorier. Combien de bureaux différents peut-on former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : les fonctions sont différentes, donc l'ordre compte ; un élève n'a qu'une fonction, donc les éléments sont distincts. Étape 2 — Identifier : $n = 12$ volontaires et $p = 3$ fonctions. Étape 3 — Écrire : $A_{12}^3 = 12 \\times 11 \\times 10$ (3 facteurs). Étape 4 — Calculer : $12 \\times 11 = 132$, puis $132 \\times 10 = 1\\,320$ bureaux. Écrire 220 (le nombre de comités) oublierait que les fonctions comptent.",
+              "answers": [
+                {
+                  "content": "1320",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi 7 filles volontaires, on forme un comité de 3 filles, sans fonction particulière. Combien de comités différents peut-on former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : le comité n'a pas de fonction ; l'ordre ne compte pas. Étape 2 — Identifier : $n = 7$ filles et $p = 3$. Étape 3 — Écrire : $C_7^3 = \\dfrac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : en simplifiant, $\\dfrac{7 \\times 6 \\times 5}{6} = 7 \\times 5 = 35$ comités.",
+              "answers": [
+                {
+                  "content": "35",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi 7 filles et 5 garçons volontaires, on forme un comité de 3 élèves composé de 2 filles et 1 garçon. Combien de comités différents peut-on former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : on choisit d'abord les 2 filles, puis le garçon, soit 2 choix successifs indépendants. Étape 2 — Compter : choisir 2 filles parmi 7 est une combinaison, $C_7^2 = \\dfrac{7 \\times 6}{2 \\times 1} = 21$ ; choisir 1 garçon parmi 5 donne 5 possibilités. Étape 3 — Multiplier : $21 \\times 5 = 105$. Étape 4 — Contrôler : 105 est un entier, inférieur aux 220 comités possibles au total, et chaque comité est compté une seule fois.",
+              "answers": [
+                {
+                  "content": "105",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi 7 filles et 5 garçons volontaires, on forme un comité de 3 élèves. Combien de comités contiennent au moins une fille ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des comités de 3 élèves, $\\text{card}(E) = C_{12}^3 = 220$ ; $A$ est l'ensemble des comités sans aucune fille, c'est-à-dire 3 garçons. Étape 2 — Repérer : « au moins une fille » est le complémentaire de « aucune fille » : il est plus simple de compter $\\overline{A}$ en passant par $A$. Étape 3 — Appliquer : $\\text{card}(A) = C_5^3 = C_5^2 = \\dfrac{5 \\times 4}{2} = 10$, puis $\\text{card}(\\overline{A}) = 220 - 10 = 210$. Étape 4 — Vérifier : 210 est un entier compris entre 0 et 220.",
+              "answers": [
+                {
+                  "content": "210",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour la kermesse, 12 élèves sont volontaires. On peut former 220 comités de 3 élèves (sans fonction) et 1 320 bureaux de 3 élèves (président, secrétaire, trésorier). Explique pourquoi il y a plus de bureaux que de comités.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dans un bureau, l'ordre compte (les fonctions sont différentes) ; dans un comité, il ne compte pas",
+                "Un même groupe de 3 élèves donne $3! = 6$ bureaux différents",
+                "Le calcul $1\\,320 = 220 \\times 6$ est cité"
+              ],
+              "explanation": "Corrigé modèle : dans un comité, l'ordre ne compte pas, donc un groupe de 3 élèves est une seule combinaison. Dans un bureau, les fonctions sont différentes, donc l'ordre compte : un même groupe de 3 élèves peut être rangé de $3! = 6$ façons (6 bureaux différents). Ainsi $A_{12}^3 = 3! \\times C_{12}^3$, c'est-à-dire $1\\,320 = 6 \\times 220$. Barème : 1 point pour la différence entre ordre qui compte et ordre qui ne compte pas, 0,5 point pour $3! = 6$, 0,5 point pour le calcul $1\\,320 = 220 \\times 6$.",
+              "answers": [],
+              "starter": "Dans un comité, l'ordre ne compte pas, alors que dans un bureau…"
+            }
+          ]
+        },
+        {
+          "title": "Le tournoi de football de l'école",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Huit équipes de l'école participent à un tournoi de football. Chaque équipe compte 11 joueurs. Chaque équipe rencontre une seule fois chacune des autres équipes.",
+          "questions": [
+            {
+              "content": "Huit équipes participent à un tournoi. Chaque équipe rencontre une seule fois chacune des autres. Combien de matchs seront joués ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : un match est un groupe de 2 équipes ; l'ordre ne compte pas (le match A contre B est le même que B contre A) et les équipes sont distinctes. Étape 2 — Identifier : $n = 8$ équipes et $p = 2$. Étape 3 — Écrire : $C_8^2 = \\dfrac{A_8^2}{2!} = \\dfrac{8 \\times 7}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{56}{2} = 28$ matchs. Le nombre 56 compterait chaque match deux fois.",
+              "answers": [
+                {
+                  "content": "28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Huit équipes participent à un tournoi. On établit le classement des trois premières places (1re, 2e et 3e), sans ex aequo. Combien de podiums différents peut-on obtenir ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte (1re n'est pas 3e) et une équipe ne peut occuper qu'une place : éléments distincts. Étape 2 — Identifier : $n = 8$ équipes et $p = 3$ places. Étape 3 — Écrire : $A_8^3 = 8 \\times 7 \\times 6$ (3 facteurs). Étape 4 — Calculer : $8 \\times 7 = 56$, puis $56 \\times 6 = 336$ podiums, et $p = 3 \\leq n = 8$.",
+              "answers": [
+                {
+                  "content": "336",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quatre équipes sont qualifiées pour les demi-finales. On tire au sort leur ordre de passage. Combien d'ordres de passage différents existe-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et chaque équipe passe une seule fois. Étape 2 — Identifier : $n = 4$ équipes et $p = 4$ places, c'est une permutation. Étape 3 — Écrire : $A_4^4 = 4! = 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $4 \\times 3 \\times 2 \\times 1 = 24$ ordres de passage.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans une équipe de 11 joueurs, l'entraîneur choisit un capitaine, puis un gardien de but différent du capitaine. Combien de choix différents existe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Vérifier : le capitaine et le gardien sont deux rôles différents, donc l'ordre compte ; un joueur ne peut pas avoir les deux rôles. Étape 2 — Identifier : $n = 11$ joueurs et $p = 2$ rôles. Étape 3 — Écrire : $A_{11}^2 = 11 \\times 10$ (2 facteurs). Étape 4 — Calculer : $11 \\times 10 = 110$ choix. La réponse 55 est $C_{11}^2$ : elle ignore que les rôles sont différents. La réponse 121 est $11^2$ : elle autoriserait le même joueur capitaine et gardien. La réponse 22 additionne $11 + 11$ au lieu de multiplier.",
+              "answers": [
+                {
+                  "content": "110",
+                  "correct": true
                 },
                 {
-                  "content": "Un club compte 9 jeunes : 5 filles et 4 garçons. On forme une délégation de 3 personnes. Combien de délégations contiennent au moins un garçon ?",
-                  "question_type": "single_choice",
-                  "explanation": "Total : $C_9^3 = 84$. Délégations sans garçon (3 filles) : $C_5^3 = 10$. Au moins un garçon : $84 - 10 = 74$. Le calcul $4 \\times C_8^2 = 112$ compte plusieurs fois les délégations qui ont plusieurs garçons.",
-                  "answers": [
-                    {
-                      "content": "$74$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$84$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$10$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$112$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "55",
+                  "correct": false
                 },
                 {
-                  "content": "On sait que $C_n^2 = 15$, avec $n$ entier et $n \\ge 2$. Que vaut $n$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$C_n^2 = \\dfrac{n(n-1)}{2} = 15$ donc $n(n-1) = 30$, soit $n = 6$. Vérification : $C_6^2 = 15$. Pour $n = 5$ on obtient 10, et pour $n = 7$ on obtient 21.",
-                  "answers": [
-                    {
-                      "content": "$6$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$15$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "121",
+                  "correct": false
                 },
                 {
-                  "content": "Dans un club de 10 jeunes, on élit un président, puis on choisit 3 autres membres du bureau parmi les 9 restants, sans tenir compte de l'ordre pour ces 3 membres. Combien de bureaux différents peut-on former ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le président : 10 choix. Les 3 membres : $C_9^3 = 84$ groupes. On multiplie : $10 \\times 84 = 840$. Le nombre 210 est $C_{10}^4$ : il ignore le rôle de président. Le nombre 5 040 est $A_{10}^4$ : il ordonne aussi les 3 membres.",
-                  "answers": [
-                    {
-                      "content": "$840$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$210$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,040$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$84$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "22",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une équipe de 11 joueurs, l'entraîneur choisit 3 tireurs pour une séance de tirs au but, sans ordre de passage. Combien de groupes de 3 tireurs peut-il former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 3 tireurs ; l'ordre ne compte pas et les joueurs sont distincts. Étape 2 — Identifier : $n = 11$ joueurs et $p = 3$ tireurs. Étape 3 — Écrire : $C_{11}^3 = \\dfrac{A_{11}^3}{3!} = \\dfrac{11 \\times 10 \\times 9}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : en simplifiant, $\\dfrac{11 \\times 10 \\times 9}{6} = 11 \\times 5 \\times 3 = 165$ groupes.",
+              "answers": [
+                {
+                  "content": "165",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Huit équipes jouent un tournoi : chaque équipe rencontre une seule fois chacune des autres (28 matchs) et un podium (1re, 2e, 3e) est établi (336 podiums possibles). Quelles sont les trois affirmations vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Vérifier : pour les matchs, l'ordre ne compte pas ; pour le podium, l'ordre compte. Étape 2 — Identifier : $n = 8$ dans les deux cas, avec $p = 2$ pour les matchs et $p = 3$ pour le podium. Étape 3 — Écrire : matchs : $C_8^2 = 28$ ; podiums : $A_8^3 = 336$ ; et $C_8^3 = \\dfrac{336}{3!} = 56$. Étape 4 — Calculer : $336 > 56$, donc $A_8^3$ est plus grand que $C_8^3$. L'affirmation « le nombre de podiums est $C_8^3$ » est fausse : elle ignore l'ordre des trois places. L'affirmation « le nombre de matchs est $A_8^2 = 56$ » est fausse : elle compte chaque match deux fois.",
+              "answers": [
+                {
+                  "content": "Le nombre de matchs est $C_8^2$, car l'ordre des deux équipes ne compte pas",
+                  "correct": true
                 },
                 {
-                  "content": "Cinq élèves se présentent à une élection. Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Groupes de 2 sans ordre : $C_5^2 = 10$. Premier et deuxième dans l'ordre : $A_5^2 = 5 \\times 4 = 20$. Chaque groupe de 2 donne $2! = 2$ classements, donc $C_5^2$ vaut moitié moins que $A_5^2$ : ces deux nombres sont différents.",
-                  "answers": [
-                    {
-                      "content": "Il y a 10 groupes de 2 élèves possibles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 20 façons de choisir un premier et un deuxième, dans l'ordre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il y a 20 groupes de 2 élèves possibles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il y a 10 façons de choisir un premier et un deuxième, dans l'ordre",
-                      "correct": false
-                    },
-                    {
-                      "content": "$C_5^2 = A_5^2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le nombre de podiums est $A_8^3$, car l'ordre compte",
+                  "correct": true
+                },
+                {
+                  "content": "$A_8^3$ est plus grand que $C_8^3$",
+                  "correct": true
+                },
+                {
+                  "content": "Le nombre de podiums est $C_8^3$",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de matchs est $A_8^2 = 56$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour les 3 premiers matchs du tournoi, chaque match peut finir par une victoire de la première équipe, une victoire de la seconde ou un match nul (3 issues possibles par match). Combien de suites de résultats différentes existe-t-il pour ces 3 matchs ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : on regarde le résultat du match 1, puis du match 2, puis du match 3, soit 3 choix successifs ; l'ordre compte (le résultat du match 1 n'est pas celui du match 3) et les répétitions sont permises (trois nuls est possible). Étape 2 — Compter : 3 possibilités à chaque choix. Étape 3 — Multiplier : $3 \\times 3 \\times 3 = 3^3 = 27$. Étape 4 — Contrôler : 27 est un entier et chaque suite de résultats est comptée une seule fois. Écrire $3 \\times 3 = 9$ oublierait un match, et $3 + 3 + 3 = 9$ additionnerait au lieu de multiplier.",
+              "answers": [
+                {
+                  "content": "27",
+                  "correct": true
                 }
               ]
             }

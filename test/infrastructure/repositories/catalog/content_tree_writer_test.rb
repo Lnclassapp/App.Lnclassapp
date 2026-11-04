@@ -224,10 +224,15 @@ module Repositories
 
       # --- Format 3 (ADR-0116 §4.3, §4.4) ---
 
-      def v3_exercise(title, figure_key: nil)
+      def v3_exercise(title, figure_key: nil, hint: nil)
         Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id: nil, title:, statement: "Sujet", exercise_type: "fixation",
                                position: nil, questions: [ 1, 2 ].map { |rank| Port::QuestionNode.new(position: rank, content: "#{title} Q#{rank}", explanation: "x" * 25, question_type: "true_false", answers:) },
-                               figure_key:)
+                               figure_key:, hint:)
+      end
+
+      def v3_subject(title, exercises: 2, hint: nil, notions: "Thalès · proportionnalité", course_id: nil)
+        Port::SubjectNode.new(course_id:, position: nil, title:, notions:,
+                              exercises: Array.new(exercises) { |rank| v3_exercise("#{title} E#{rank + 1}", hint: (hint if rank.zero?)) })
       end
 
       def v3_notion(slug, name, position, figure_key: nil)
@@ -274,7 +279,7 @@ module Repositories
 
         counts = @writer.replace_draft(course_id: course.id, tree:)
 
-        assert_equal({ courses: 1, essentials: 2, exercises: 4, questions: 8, answers: 16 }, counts)
+        assert_equal({ courses: 1, essentials: 2, exercises: 4, questions: 8, answers: 16, subjects: 0 }, counts)
         replaced = Orm::Course.find(course.id)
         assert_equal [ "racines", "Leçon corrigée", "burgundy", [], @author.id, "draft" ],
                      [ replaced.slug, replaced.name, replaced.sheet_theme, replaced.figures, replaced.author_id, replaced.status ]
@@ -344,6 +349,84 @@ module Repositories
         end
         assert Repositories::Shared::Transaction.new.attempt { @writer.write(author_id: @author.id, at: @at, courses: [ course("ecologie", content: nil) ]) }.success?
         assert_equal 8, Orm::Question.joins(exercise: { essential: :course }).where(courses: { slug: "ecologie" }).count
+      end
+
+      # --- ADR-0121 : l'indice et les sujets de devoir ---
+
+      test "écrit les sujets d'une leçon neuve : numérotés de 1, exercices sans notion après ceux de la leçon, indice relu à l'identique" do
+        hint = "Pense à\tl'unité,\nrelis l'énoncé \\ <b>"
+        tree = v3_course("racines").with(subjects: [ v3_subject("Sujet A", hint:), v3_subject("Sujet B", exercises: 1) ])
+
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ tree ])
+
+        assert_equal({ courses: 1, essentials: 2, exercises: 7, questions: 14, answers: 28, archived: 0 }, counts)
+        course = Orm::Course.find_by!(slug: "racines")
+        assert_equal [ [ 1, "Sujet A", "Thalès · proportionnalité" ], [ 2, "Sujet B", "Thalès · proportionnalité" ] ],
+                     course.subjects.order(:position).pluck(:position, :title, :notions)
+        rows = Orm::Exercise.where(course_id: course.id).order(:position).includes(:subject)
+        assert_equal [ [ 1, nil ], [ 2, nil ], [ 3, nil ], [ 4, nil ], [ 5, "Sujet A" ], [ 6, "Sujet A" ], [ 7, "Sujet B" ] ],
+                     rows.map { [ it.position, it.subject&.title ] }
+        assert_equal [ nil ] * 4 + [ hint, nil, nil ], rows.map(&:hint)
+        assert_equal [ nil ], rows.select(&:subject_id).map(&:essential_id).uniq
+      end
+
+      test "un indice d'exercice de notion ou de leçon s'écrit aussi, une leçon sans sujet n'écrit aucune ligne de sujet" do
+        notion = v3_notion("racines-n1", "Notion 1", 1).then { |node| node.with(exercises: [ node.exercises.first.with(hint: "Un indice") ]) }
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines", notions: [ notion ]) ])
+
+        assert_equal [ "Un indice" ], Orm::Exercise.where.not(hint: nil).pluck(:hint)
+        assert_equal 0, Orm::Subject.count
+      end
+
+      test "des sujets de deux leçons s'écrivent chacun dans la leçon de leur nœud" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("une").with(subjects: [ v3_subject("U1") ]),
+                                                                  v3_course("deux").with(subjects: [ v3_subject("D1"), v3_subject("D2") ]) ])
+
+        assert_equal [ [ "une", [ "U1" ] ], [ "deux", [ "D1", "D2" ] ] ],
+                     %w[une deux].map { |slug| [ slug, Orm::Course.find_by!(slug:).subjects.order(:position).pluck(:title) ] }
+      end
+
+      test "replace_draft réécrit les sujets de la leçon et rend leur nombre" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines").with(subjects: [ v3_subject("Ancien 1"), v3_subject("Ancien 2") ]) ])
+        course = Orm::Course.find_by!(slug: "racines")
+        old_subject_ids = course.subjects.ids
+        tree = v3_course("racines", existing_id: course.id).with(subjects: [ v3_subject("Nouveau", hint: "Nouvel indice", course_id: course.id) ])
+
+        counts = @writer.replace_draft(course_id: course.id, tree:)
+
+        assert_equal({ courses: 1, essentials: 2, exercises: 6, questions: 12, answers: 24, subjects: 1 }, counts)
+        assert_empty Orm::Subject.where(id: old_subject_ids)
+        assert_equal [ [ "Nouveau", 5, "Nouvel indice" ] ],
+                     [ [ course.subjects.first.title, Orm::Exercise.find_by!(subject_id: course.subjects.first.id, position: 5).position,
+                         Orm::Exercise.find_by!(subject_id: course.subjects.first.id, position: 5).hint ] ]
+        assert_equal [ 1 ], Orm::Subject.where(course_id: course.id).pluck(:position)
+        assert_equal 6, Orm::Exercise.where(course_id: course.id).count
+      end
+
+      test "replace_draft d'une leçon sans sujet supprime les anciens sujets et n'en écrit aucun" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines").with(subjects: [ v3_subject("Ancien") ]) ])
+        course = Orm::Course.find_by!(slug: "racines")
+
+        counts = @writer.replace_draft(course_id: course.id, tree: v3_course("racines", existing_id: course.id))
+
+        assert_equal 0, counts.fetch(:subjects)
+        assert_equal 0, Orm::Subject.count
+      end
+
+      test "la base refuse un indice, un titre ou des notions trop longs, et rien du cours n'est écrit" do
+        refused = { ActiveRecord::CheckViolation => [ v3_subject("Sujet", hint: "x" * 401), v3_subject("Sujet", notions: "n" * 601) ],
+                    ActiveRecord::ValueTooLong => [ v3_subject("S" * 201) ] }
+        refused.each do |error, subjects|
+          subjects.each do |subject|
+            assert_no_difference [ "Orm::Course.count", "Orm::Subject.count", "Orm::Exercise.count" ] do
+              assert_raises(error) do
+                ActiveRecord::Base.transaction(requires_new: true) do
+                  @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines").with(subjects: [ subject ]) ])
+                end
+              end
+            end
+          end
+        end
       end
     end
   end

@@ -1,0 +1,1570 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les mouvements des plaques lithosphériques",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "atlantique-carte",
+          "kind": "map",
+          "description": "Planisphère du monde entier : l'Afrique et l'Amérique du Sud y sont mises en valeur, chacune avec sa teinte et son motif ; les autres terres restent sans couleur. Leurs côtes, face à face de part et d'autre de l'océan Atlantique, semblent s'emboîter. La dorsale médio-atlantique, au milieu de l'océan, n'est pas dessinée.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "africa",
+                "category": 1
+              },
+              {
+                "id": "south_america",
+                "category": 2
+              }
+            ],
+            "legend": [
+              "Afrique",
+              "Amérique du Sud"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ages-fonds",
+          "kind": "stat_chart",
+          "description": "Courbe de l'âge des basaltes d'un plancher océanique fictif selon la distance à l'axe de la dorsale. Valeurs lues en millions d'années : 0 à 0 km, 10 à 200 km, 20 à 400 km, 30 à 600 km et 40 à 800 km. L'âge augmente régulièrement avec la distance.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              10,
+              20,
+              30,
+              40
+            ],
+            "labels": [
+              "0 km",
+              "200 km",
+              "400 km",
+              "600 km",
+              "800 km"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "subduction-chaine",
+          "kind": "diagram",
+          "description": "Schéma fléché de la dorsale à la côte : la dorsale produit un plancher qui s'éloigne et vieillit, puis plonge à la fosse. De la fosse partent deux flèches : l'une vers des séismes de plus en plus profonds, l'autre vers des magmas qui remontent et donnent des volcans alignés près de la côte.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "dorsale",
+                "label": "Dorsale : naissance du plancher"
+              },
+              {
+                "id": "plancher",
+                "label": "Plancher qui s'éloigne et vieillit"
+              },
+              {
+                "id": "fosse",
+                "label": "Fosse : la plaque océanique plonge"
+              },
+              {
+                "id": "seismes",
+                "label": "Séismes de plus en plus profonds"
+              },
+              {
+                "id": "magmas",
+                "label": "Magmas qui remontent"
+              },
+              {
+                "id": "volcans",
+                "label": "Volcans alignés près de la côte"
+              }
+            ],
+            "edges": [
+              {
+                "from": "dorsale",
+                "to": "plancher"
+              },
+              {
+                "from": "plancher",
+                "to": "fosse"
+              },
+              {
+                "from": "fosse",
+                "to": "seismes"
+              },
+              {
+                "from": "fosse",
+                "to": "magmas"
+              },
+              {
+                "from": "magmas",
+                "to": "volcans"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les plaques lithosphériques et la répartition des séismes et des volcans",
+          "remember": "La **lithosphère** est la couche rigide externe du globe : elle comprend la croûte et la partie supérieure du manteau. Elle repose sur l'**asthénosphère**, plus plastique. La lithosphère est découpée en **plaques** rigides (plaque africaine, sud-américaine, pacifique, eurasiatique…). Les **séismes** et les **volcans** ne sont pas répartis au hasard : ils forment des bandes étroites qui marquent les **limites des plaques**. L'intérieur d'une plaque est peu actif.",
+          "method": [
+            "Repérer sur la carte ou dans le tableau les lieux des séismes et des volcans.",
+            "Regrouper ceux qui forment des bandes étroites et continues.",
+            "Déduire que ces bandes sont des limites de plaques et délimiter les plaques qu'elles entourent.",
+            "Conclure : les plaques sont stables à l'intérieur et actives à leurs bords."
+          ],
+          "example": {
+            "statement": "Une carte simplifiée (résultats simplifiés) montre 50 séismes et 12 volcans. Parmi eux, 46 séismes et les 12 volcans sont alignés sur une bande étroite au milieu d'un océan. Les 4 autres séismes sont dispersés dans un continent voisin. Que peut-on en déduire ?",
+            "steps": [
+              "Repérer : la carte indique 50 séismes et 12 volcans.",
+              "Regrouper : 46 séismes et 12 volcans forment une seule bande étroite et continue au milieu de l'océan.",
+              "Déduire : cette bande est une limite de plaques, avec une plaque de chaque côté.",
+              "Conclure : le continent, où seuls 4 séismes sont dispersés, est à l'intérieur d'une plaque stable ; l'activité se concentre sur la limite."
+            ]
+          },
+          "pitfall": "Ne confonds pas **plaque** et **continent**. Une plaque peut porter à la fois un continent et une partie d'océan. Contre-exemple : la plaque africaine s'étend du continent africain jusqu'à la dorsale au milieu de l'Atlantique. Pour la délimiter, suis les bandes de séismes et de volcans, pas les côtes.",
+          "figure": null,
+          "exercise": {
+            "title": "Lire la répartition des séismes et des volcans",
+            "statement": "Dans cet exercice, tu utilises la répartition des séismes et des volcans pour repérer les plaques, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Que désigne la lithosphère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Déduire : la lithosphère est la couche rigide externe, formée de la croûte et de la partie supérieure du manteau. Elle est découpée en plaques. La couche plastique située dessous est l'asthénosphère : la confondre avec la lithosphère est une erreur fréquente.",
+                "answers": [
+                  {
+                    "content": "La couche rigide externe du globe, qui comprend la croûte et la partie supérieure du manteau",
+                    "correct": true
+                  },
+                  {
+                    "content": "La couche liquide située sous la croûte, qui entoure le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Uniquement la croûte des continents, sans les océans",
+                    "correct": false
+                  },
+                  {
+                    "content": "La couche plastique située sous les plaques, qui les entraîne",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les séismes et les volcans sont répartis de façon uniforme à la surface du globe.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : sur une carte, les foyers de séismes et les volcans ne sont pas dispersés au hasard. Étape 2 — Regrouper : ils forment des bandes étroites et continues. La répartition n'est donc pas uniforme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les séismes et les volcans se concentrent le long des ___ de plaques.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Regrouper : les foyers de séismes et les volcans forment des bandes étroites. Étape 3 — Déduire : ces bandes marquent les limites entre les plaques. Au centre des plaques, l'activité est faible.",
+                "answers": [
+                  {
+                    "content": "limites",
+                    "correct": true
+                  },
+                  {
+                    "content": "limite",
+                    "correct": true
+                  },
+                  {
+                    "content": "frontières",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces observations faites sur une carte, lesquelles permettent de tracer la limite d'une plaque ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on place les séismes et les volcans. Étape 2 — Regrouper : seuls les bandes étroites et continues de séismes et les ceintures de volcans accompagnées de séismes dessinent une limite. Des séismes isolés ou une région calme ne tracent aucune limite, et une côte n'est pas une limite de plaque.",
+                "answers": [
+                  {
+                    "content": "Une bande étroite et continue de séismes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une ceinture de volcans actifs, accompagnée de séismes, sur plusieurs milliers de kilomètres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Quelques séismes isolés dispersés au centre d'un continent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une grande région où l'on ne signale ni séisme ni volcan",
+                    "correct": false
+                  },
+                  {
+                    "content": "La seule présence d'une côte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une carte simplifiée (résultats simplifiés) montre 120 séismes. Parmi eux, 90 forment des bandes étroites le long des limites de plaques. Quel pourcentage des séismes est situé sur les limites ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 120 séismes au total, 90 sur des bandes. Étape 2 — Regrouper : la part des séismes regroupés est 90 divisé par 120, soit 0,75, c'est-à-dire 75 %. Étape 4 — Conclure : la majorité des séismes est située sur les limites des plaques, ce qui confirme que l'intérieur des plaques est calme.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La plaque africaine s'arrête-t-elle aux côtes du continent africain ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Déduire : les plaques sont limitées par les bandes de séismes et de volcans, pas par les côtes. Le piège est de confondre plaque et continent : la plaque africaine s'étend sur le plancher océanique voisin jusqu'à la dorsale médio-atlantique. L'Amérique du Sud appartient à une autre plaque.",
+                "answers": [
+                  {
+                    "content": "Non : elle porte aussi une partie du plancher de l'océan Atlantique, jusqu'à la dorsale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : une plaque est toujours un continent entier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : une plaque ne contient jamais de plancher océanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : elle englobe aussi toute l'Amérique du Sud",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à repérer des plaques avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "La lithosphère est la couche ___ externe du globe ; elle repose sur l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Déduire : la lithosphère est rigide et découpée en plaques. Elle repose sur l'asthénosphère, couche plus plastique qui permet aux plaques de se déplacer.",
+                "answers": [
+                  {
+                    "content": "rigide",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "asthénosphère",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'une est rigide, l'autre plastique."
+              },
+              {
+                "content": "Au centre d'une plaque, les séismes et les volcans sont très nombreux.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : l'activité se concentre sur les bords des plaques. L'intérieur d'une plaque est stable, avec peu de séismes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une bande étroite de séismes et de volcans de plusieurs milliers de kilomètres traverse un océan. Que représente-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Regrouper : une bande étroite et continue est repérée. Étape 3 — Déduire : une telle bande est une limite entre deux plaques, pas le centre d'une plaque.",
+                "answers": [
+                  {
+                    "content": "Une limite entre deux plaques",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le centre d'une plaque",
+                    "correct": false
+                  },
+                  {
+                    "content": "La côte d'un continent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une région sans activité",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une bande étroite et continue indique une frontière."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode.",
+                "question_type": "ordering",
+                "explanation": "La méthode va de l'observation (étape 1) au regroupement (étape 2), puis à la déduction des limites (étape 3) et à la conclusion (étape 4).",
+                "answers": [
+                  {
+                    "content": "Repérer les séismes et les volcans"
+                  },
+                  {
+                    "content": "Regrouper ceux qui forment des bandes étroites"
+                  },
+                  {
+                    "content": "Déduire les limites de plaques"
+                  },
+                  {
+                    "content": "Conclure sur la stabilité de l'intérieur des plaques"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'expansion des fonds océaniques",
+          "remember": "Au niveau d'une **dorsale océanique**, du magma remonte, refroidit et forme du **basalte** : c'est la naissance de la croûte océanique. Le nouveau plancher repousse l'ancien de chaque côté de l'axe : c'est l'**expansion des fonds océaniques**. Les basaltes sont les plus jeunes à l'axe et de plus en plus âgés en s'éloignant, de façon symétrique. Ils enregistrent le **champ magnétique** terrestre quand ils refroidissent : comme il s'inverse parfois, on observe des **anomalies magnétiques** en bandes alternées et symétriques. Vitesse d'éloignement = distance divisée par âge ; 1 km par million d'années = 0,1 cm par an.",
+          "method": [
+            "Relever l'âge des roches (ou la polarité magnétique) selon leur distance à la dorsale.",
+            "Comparer les deux côtés de la dorsale.",
+            "Calculer la vitesse d'éloignement : distance divisée par âge, après conversion des unités.",
+            "Conclure sur l'expansion et l'écartement des plaques."
+          ],
+          "example": {
+            "statement": "Des basaltes sont prélevés (résultats simplifiés) à 500 km à l'ouest et à 500 km à l'est d'une dorsale. Les deux ont 10 millions d'années. Calculer la vitesse d'éloignement de chaque côté et conclure.",
+            "steps": [
+              "Relever : 500 km de l'axe, âge de 10 millions d'années, de chaque côté.",
+              "Comparer : les deux côtés ont le même âge à la même distance : la répartition est symétrique.",
+              "Calculer : 500 km = 50 000 000 cm et 10 millions d'années = 10 000 000 ans ; 50 000 000 divisé par 10 000 000 donne 5 cm par an.",
+              "Conclure : le plancher se forme à l'axe et s'éloigne de 5 cm par an de chaque côté : les deux plaques s'écartent à 10 cm par an."
+            ]
+          },
+          "pitfall": "N'oublie pas de **convertir les unités** avant de diviser. Contre-exemple : 500 km en 10 millions d'années ne font pas « 50 cm par an » (500 divisé par 10) ; on convertit : 50 000 000 cm divisé par 10 000 000 ans = 5 cm par an. Retiens : 1 km par million d'années = 0,1 cm par an.",
+          "figure": null,
+          "exercise": {
+            "title": "Utiliser les âges des roches pour étudier l'expansion",
+            "statement": "Dans cet exercice, tu utilises l'âge et le magnétisme des roches du plancher océanique pour étudier l'expansion, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Où se trouvent les basaltes les plus jeunes du plancher océanique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : on compare les âges des basaltes selon leur distance à la dorsale. Étape 2 — Comparer : les plus jeunes sont à l'axe, car c'est là que le magma remonte et forme la nouvelle croûte. Les plus âgés sont loin de l'axe.",
+                "answers": [
+                  {
+                    "content": "À l'axe de la dorsale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Au pied du continent, près de la côte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au fond de la fosse océanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "À égale distance de la dorsale et de la côte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Plus on s'éloigne de la dorsale, plus les basaltes du plancher océanique sont jeunes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : à l'axe, l'âge est proche de zéro. Étape 2 — Comparer : l'âge augmente avec la distance à la dorsale. L'affirmation est donc fausse : les basaltes sont de plus en plus âgés en s'éloignant.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un basalte prélevé à 1 000 km de la dorsale a 20 millions d'années (résultats simplifiés). Quelle est la vitesse d'éloignement de ce côté de la dorsale, en cm par an ?",
+                "question_type": "numeric",
+                "unit": "cm/an",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : distance 1 000 km, âge 20 millions d'années. Étape 3 — Calculer : 1 000 km = 100 000 000 cm et 20 millions d'années = 20 000 000 ans ; la vitesse est 100 000 000 divisé par 20 000 000, soit 5 cm par an. Piège : diviser sans convertir donne 1 000 divisé par 20 = 50 ; ce sont 50 km par million d'années, c'est-à-dire 5 cm par an, et non 50 cm par an.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un côté de la dorsale s'éloigne de l'axe à la vitesse de 2 cm par an (résultats simplifiés). Quelle distance, en kilomètres, le plancher parcourt-il en 10 millions d'années ?",
+                "question_type": "numeric",
+                "unit": "km",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Calculer : en 10 millions d'années, la distance est 2 cm × 10 000 000 = 20 000 000 cm. Comme 1 km = 100 000 cm, on obtient 20 000 000 divisé par 100 000, soit 200 km. Étape 4 — Conclure : l'expansion produit un déplacement de 200 km de ce côté de la dorsale en 10 millions d'années.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles observations montrent l'expansion des fonds océaniques ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Comparer : de part et d'autre de la dorsale, on observe la même succession d'âges et la même succession de bandes magnétiques. Étape 4 — Conclure : cette symétrie montre que le plancher se forme à l'axe et s'écarte des deux côtés. Un âge identique partout, ou des roches âgées à l'axe, contredirait l'expansion.",
+                "answers": [
+                  {
+                    "content": "Les âges des basaltes augmentent de façon symétrique de part et d'autre de la dorsale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les bandes d'anomalies magnétiques sont alternées et symétriques de part et d'autre de l'axe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les basaltes ont partout le même âge",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les basaltes les plus âgés se trouvent à l'axe de la dorsale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le champ magnétique est identique dans toutes les roches",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre la formation du plancher océanique à une dorsale.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Comparer : à l'axe, le magma remonte et se refroidit en basalte. Étape 4 — Conclure : le basalte nouveau repousse l'ancien de chaque côté, qui s'éloigne de l'axe et vieillit.",
+                "answers": [
+                  {
+                    "content": "Le magma remonte à l'axe de la dorsale"
+                  },
+                  {
+                    "content": "Le magma refroidit et forme du basalte"
+                  },
+                  {
+                    "content": "Le basalte nouveau repousse de chaque côté le basalte plus ancien"
+                  },
+                  {
+                    "content": "Le basalte s'éloigne de l'axe et vieillit"
+                  }
+                ]
+              },
+              {
+                "content": "Les basaltes enregistrent le champ ___ terrestre au moment de leur refroidissement.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : les basaltes gardent la direction du champ magnétique terrestre au moment où ils refroidissent. Comme ce champ s'est inversé plusieurs fois, ils forment des bandes d'anomalies magnétiques alternées.",
+                "answers": [
+                  {
+                    "content": "magnétique",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire l'âge des roches du plancher océanique avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "À l'axe d'une dorsale, les basaltes sont les plus ___ ; plus on s'en éloigne, plus ils sont ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Comparer : à l'axe, le magma vient de refroidir, donc les basaltes sont les plus jeunes. L'âge augmente avec la distance, de façon symétrique des deux côtés.",
+                "answers": [
+                  {
+                    "content": "jeunes",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "récents",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "âgés",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vieux",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "anciens",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à l'endroit où le magma remonte."
+              },
+              {
+                "content": "Un basalte situé à 300 km de la dorsale a 10 millions d'années (résultats simplifiés). Quelle est sa vitesse d'éloignement, en cm par an ?",
+                "question_type": "numeric",
+                "unit": "cm/an",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Calculer : 300 km = 30 000 000 cm et 10 millions d'années = 10 000 000 ans ; la vitesse est 30 000 000 divisé par 10 000 000, soit 3 cm par an.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "300 km = 300 × 100 000 cm."
+              },
+              {
+                "content": "Les anomalies magnétiques du plancher forment des bandes alternées et symétriques de part et d'autre de la dorsale.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Comparer : les deux côtés de la dorsale présentent la même succession de bandes. Étape 4 — Conclure : cette symétrie confirme que le plancher se forme à l'axe et s'écarte des deux côtés.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un navire constate que les basaltes ont partout le même âge sur 1 000 km de part et d'autre d'une ligne. Cela correspond-il à une dorsale en expansion ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer : dans une dorsale en expansion, l'âge croît avec la distance à l'axe. Un âge identique partout contredit cette observation.",
+                "answers": [
+                  {
+                    "content": "Non : de part et d'autre d'une dorsale en expansion, l'âge augmente avec la distance à l'axe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : une dorsale produit des roches de même âge partout",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : les roches les plus âgées sont à l'axe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : l'âge n'a aucun lien avec la distance à l'axe",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les trois types de limites de plaques",
+          "remember": "Il existe trois types de limites. **Divergente** : les plaques s'écartent (dorsale océanique) ; de la lithosphère océanique y est créée ; séismes peu profonds et volcans. **Convergente** : les plaques se rapprochent ; la lithosphère océanique plonge et est détruite (subduction), ou la croûte continentale se plisse (collision) ; séismes, volcans ou chaînes de montagnes. **Coulissante** : les plaques glissent l'une contre l'autre ; la lithosphère n'est ni créée ni détruite ; séismes sans volcans (exemple : la faille de San Andreas).",
+          "method": [
+            "Repérer le mouvement relatif des deux plaques : elles s'écartent, se rapprochent ou glissent.",
+            "Relever les manifestations observées : séismes, volcans, reliefs.",
+            "Nommer le type de limite : divergente, convergente ou coulissante.",
+            "Conclure sur le sort de la lithosphère : créée, détruite ou conservée."
+          ],
+          "example": {
+            "statement": "Deux plaques s'écartent de 2 cm par an (résultats simplifiés). On observe des séismes superficiels et des volcans le long d'un relief sous-marin au milieu de l'océan. Quel est le type de limite ?",
+            "steps": [
+              "Repérer : les deux plaques s'écartent de 2 cm par an.",
+              "Relever : des séismes superficiels, des volcans et un relief sous-marin allongé.",
+              "Nommer : plaques qui s'écartent, avec dorsale et volcans : limite divergente.",
+              "Conclure : de la lithosphère océanique est créée à l'axe de la dorsale."
+            ]
+          },
+          "pitfall": "Ne crois pas que toute limite de plaques porte des volcans. Contre-exemple : la faille de San Andreas, entre la plaque pacifique et la plaque nord-américaine, est une limite coulissante : elle produit des séismes mais pas de volcan. Une zone de séismes sans volcan reste une limite de plaques.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître les trois types de limites de plaques",
+            "statement": "Dans cet exercice, tu identifies le type de limite entre deux plaques avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque type de limite au mouvement relatif des deux plaques.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on observe d'abord le mouvement relatif des plaques. Étape 3 — Nommer : plaques qui s'écartent, limite divergente ; plaques qui se rapprochent, limite convergente ; plaques qui glissent latéralement, limite coulissante.",
+                "answers": [
+                  {
+                    "content": "Limite divergente",
+                    "match": "Les plaques s'écartent"
+                  },
+                  {
+                    "content": "Limite convergente",
+                    "match": "Les plaques se rapprochent"
+                  },
+                  {
+                    "content": "Limite coulissante",
+                    "match": "Les plaques glissent l'une contre l'autre"
+                  }
+                ]
+              },
+              {
+                "content": "La dorsale médio-atlantique est une limite de quel type ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : de part et d'autre de la dorsale, le plancher s'éloigne de l'axe. Étape 3 — Nommer : plaques qui s'écartent, c'est une limite divergente. Étape 4 — Conclure : de la lithosphère océanique y est créée.",
+                "answers": [
+                  {
+                    "content": "Divergente : les plaques s'écartent et de la lithosphère océanique se forme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Convergente : les plaques se rapprochent et se heurtent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Coulissante : les plaques glissent sans rien créer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune limite : l'océan est au centre d'une plaque",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À une limite coulissante, de la lithosphère océanique est créée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les plaques glissent latéralement l'une contre l'autre. Étape 4 — Conclure : la lithosphère n'est ni créée ni détruite. C'est à une limite divergente que de la lithosphère est créée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles manifestations accompagnent une limite convergente ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer : les plaques se rapprochent. Étape 2 — Relever : on observe des séismes, des reliefs et la disparition ou le raccourcissement de lithosphère. Création de lithosphère, absence de séismes ou écartement sont propres à d'autres limites.",
+                "answers": [
+                  {
+                    "content": "Des séismes, parfois profonds",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des reliefs comme les chaînes de montagnes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une destruction ou un raccourcissement de la lithosphère",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une création de lithosphère océanique à l'axe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une absence de séismes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un écartement continu des deux plaques",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux plaques qui s'écartent forment une limite ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : les plaques s'écartent. Étape 3 — Nommer : c'est une limite divergente. Une limite convergente rapproche les plaques, une limite coulissante les fait glisser.",
+                "answers": [
+                  {
+                    "content": "divergente",
+                    "correct": true
+                  },
+                  {
+                    "content": "convergente",
+                    "correct": false
+                  },
+                  {
+                    "content": "coulissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "stable",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une zone de séismes sans aucun volcan peut être une limite de plaques.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever : à une limite coulissante, on observe des séismes mais pas de volcan, car il n'y a ni écartement ni plongée de lithosphère. Étape 3 — Nommer : c'est une limite coulissante. Croire que toute limite porte des volcans est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à nommer les limites de plaques avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Une limite où les plaques s'écartent est ___ ; une limite où elles se rapprochent est ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on observe le mouvement des plaques. Étape 3 — Nommer : plaques qui s'écartent, limite divergente ; plaques qui se rapprochent, limite convergente.",
+                "answers": [
+                  {
+                    "content": "divergente",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "convergente",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Divergente ou convergente ? Pense au préfixe di- et con-."
+              },
+              {
+                "content": "Deux plaques glissent latéralement l'une contre l'autre. On observe des séismes, mais ni volcan ni création de lithosphère. De quel type de limite s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les plaques glissent. Étape 3 — Nommer : c'est une limite coulissante. Étape 4 — Conclure : la lithosphère est conservée.",
+                "answers": [
+                  {
+                    "content": "Coulissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "Divergente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Convergente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a aucune limite",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À une limite divergente, de la lithosphère océanique est détruite.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : à une limite divergente, les plaques s'écartent et de la lithosphère est créée, pas détruite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque phénomène au type de limite correspondant.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Relever : chaque phénomène caractérise un mouvement. Étape 3 — Nommer : naissance de lithosphère, divergente ; séismes sans volcan, coulissante ; rapprochement, convergente.",
+                "answers": [
+                  {
+                    "content": "Naissance de lithosphère océanique à une dorsale",
+                    "match": "Limite divergente"
+                  },
+                  {
+                    "content": "Séismes sans volcan le long d'une faille",
+                    "match": "Limite coulissante"
+                  },
+                  {
+                    "content": "Rapprochement de deux plaques",
+                    "match": "Limite convergente"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La subduction et la collision",
+          "remember": "À une limite convergente, deux cas se présentent. **Subduction** : la lithosphère océanique, refroidie et plus dense, plonge sous l'autre plaque. En surface, une **fosse océanique** marque la plongée ; les foyers de séismes sont de plus en plus profonds le long de la plongée ; des magmas se forment et remontent, donnant des **volcans** alignés près de la fosse. **Collision** : quand l'océan a disparu, deux lithosphères continentales, plus légères, se rencontrent. Elles ne plongent pas : la croûte se plisse et s'épaissit, formant une **chaîne de montagnes** (Himalaya : Inde et Eurasie).",
+          "method": [
+            "Identifier la nature des deux lithosphères qui se rapprochent : océanique ou continentale.",
+            "Comparer leurs densités : la lithosphère océanique plonge, la lithosphère continentale ne s'enfonce pas.",
+            "Nommer le phénomène : subduction ou collision.",
+            "Relever les manifestations : fosse, séismes profonds et volcans, ou plis et chaîne de montagnes."
+          ],
+          "example": {
+            "statement": "Une plaque océanique et une plaque continentale se rapprochent (résultats simplifiés). On observe une fosse très profonde, des séismes dont les foyers sont de plus en plus profonds sous le continent, et des volcans alignés près de la côte. Quel phénomène est en cours ?",
+            "steps": [
+              "Identifier : une lithosphère océanique et une lithosphère continentale se rapprochent.",
+              "Comparer : la lithosphère océanique est plus dense et plonge ; la continentale, plus légère, reste en surface.",
+              "Nommer : c'est une subduction de la plaque océanique sous la plaque continentale.",
+              "Relever : fosse, séismes de plus en plus profonds et volcans alignés correspondent bien à une subduction."
+            ]
+          },
+          "pitfall": "Ne crois pas que, lorsque deux continents se rencontrent, l'un plonge comme une plaque océanique. Contre-exemple : l'Himalaya est né de la collision de l'Inde et de l'Eurasie ; il n'y a ni fosse océanique ni alignement de volcans de subduction, mais des plis, des failles et une chaîne de montagnes. La lithosphère continentale est trop légère pour s'enfoncer profondément.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer subduction et collision",
+            "statement": "Dans cet exercice, tu distingues subduction et collision à une limite convergente, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une subduction, quelle lithosphère plonge sous l'autre plaque ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une lithosphère océanique rencontre une lithosphère continentale. Étape 2 — Comparer : la lithosphère océanique, refroidie, est plus dense que la lithosphère continentale et plonge. La lithosphère continentale, légère, ne s'enfonce pas profondément.",
+                "answers": [
+                  {
+                    "content": "La lithosphère océanique, plus dense",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lithosphère continentale, plus dense",
+                    "correct": false
+                  },
+                  {
+                    "content": "La lithosphère continentale, plus légère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux lithosphères plongent à égalité",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une zone de subduction, les foyers des séismes sont de plus en plus profonds quand on s'éloigne de la fosse vers le continent.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer : la lithosphère plonge en s'inclinant sous l'autre plaque. Étape 4 — Relever : les foyers des séismes se répartissent le long de cette plongée, donc de plus en plus profondément quand on va de la fosse vers le continent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le relief creux situé au-dessus de la plongée de la lithosphère océanique est la ___ océanique.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer : on est en situation de subduction. Étape 4 — Relever : en surface, la plongée de la lithosphère océanique est marquée par une fosse océanique très profonde.",
+                "answers": [
+                  {
+                    "content": "fosse",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles manifestations caractérisent une collision continentale ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Nommer : deux lithosphères continentales se rencontrent. Étape 4 — Relever : aucune ne plonge profondément, elles se plissent et s'épaississent : on observe des plis, des failles et une chaîne de montagnes. Fosse et volcans côtiers sont liés à la subduction, la naissance de croûte à une dorsale.",
+                "answers": [
+                  {
+                    "content": "Des plis et des failles qui raccourcissent et épaississent la croûte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une chaîne de montagnes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une fosse océanique très profonde",
+                    "correct": false
+                  },
+                  {
+                    "content": "La naissance d'une nouvelle croûte océanique à l'axe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un alignement de volcans côtiers produits par la plongée de la plaque",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre l'évolution qui mène à une chaîne de collision.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Nommer : d'abord la subduction consomme la lithosphère océanique. Étape 4 — Relever : quand l'océan a disparu, les continents se rencontrent, ce qui donne la collision et une chaîne de montagnes.",
+                "answers": [
+                  {
+                    "content": "Deux continents sont séparés par un océan"
+                  },
+                  {
+                    "content": "La lithosphère océanique plonge en subduction et rapproche les continents"
+                  },
+                  {
+                    "content": "L'océan disparaît"
+                  },
+                  {
+                    "content": "Les deux continents entrent en collision et une chaîne de montagnes se forme"
+                  }
+                ]
+              },
+              {
+                "content": "Un océan large de 3 000 km se referme par subduction à la vitesse de 5 cm par an (résultats simplifiés). En combien de millions d'années les deux continents se touchent-ils ?",
+                "question_type": "numeric",
+                "unit": "Ma",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Nommer : l'océan se referme, avant la collision. Calcul : 3 000 km = 300 000 000 cm. En divisant par 5 cm par an, on obtient 60 000 000 ans, soit 60 millions d'années. Étape 4 — Relever : les continents se rencontrent ensuite, ce qui produit une collision.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'origine de la chaîne de l'Himalaya ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : l'Himalaya se trouve entre deux lithosphères continentales, celles de l'Inde et de l'Eurasie. Étape 3 — Nommer : c'est une collision. Il n'y a ni fosse ni volcan de subduction, ni dorsale.",
+                "answers": [
+                  {
+                    "content": "La collision entre l'Inde et l'Eurasie",
+                    "correct": true
+                  },
+                  {
+                    "content": "La subduction d'une plaque océanique sous un continent",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'expansion d'une dorsale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une limite coulissante comme la faille de San Andreas",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une subduction et une collision avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "En subduction, la lithosphère ___ plonge sous l'autre plaque, car elle est plus ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Comparer : la lithosphère océanique, refroidie, est plus dense et plonge. Étape 3 — Nommer : on parle de subduction.",
+                "answers": [
+                  {
+                    "content": "océanique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "dense",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "lourde",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une lithosphère qui plonge est plus lourde."
+              },
+              {
+                "content": "Lors d'une collision, une fosse océanique très profonde apparaît entre les deux continents.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer : en collision, deux lithosphères continentales se rencontrent. Étape 4 — Relever : on observe des plis, des failles et une chaîne de montagnes, pas une fosse océanique, qui est liée à la subduction.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux lithosphères continentales se rapprochent après la disparition d'un océan. Que se forme-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : deux lithosphères continentales. Étape 3 — Nommer : collision. Étape 4 — Relever : plis, failles et chaîne de montagnes.",
+                "answers": [
+                  {
+                    "content": "Une chaîne de montagnes plissée par collision",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une nouvelle dorsale océanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une fosse océanique profonde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une faille coulissante sans relief",
+                    "correct": false
+                  }
+                ],
+                "hint": "Aucune des deux lithosphères ne plonge."
+              },
+              {
+                "content": "Relie chaque manifestation au phénomène qui la produit.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Relever : fosse et volcans alignés près de la côte caractérisent une subduction ; chaîne de montagnes plissée sans volcan de subduction, une collision.",
+                "answers": [
+                  {
+                    "content": "Fosse océanique et volcans alignés près de la côte",
+                    "match": "Subduction"
+                  },
+                  {
+                    "content": "Chaîne de montagnes plissée sans volcan de subduction",
+                    "match": "Collision"
+                  },
+                  {
+                    "content": "Naissance de lithosphère océanique à l'axe",
+                    "match": "Dorsale"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "De part et d'autre de l'Atlantique",
+          "statement": "Les côtes de l'Afrique et de l'Amérique du Sud, de part et d'autre de l'océan Atlantique, semblent s'emboîter. Pour savoir si l'Atlantique s'ouvre, on étudie des basaltes prélevés sur le plancher océanique. Les valeurs ci-dessous sont des résultats simplifiés : un basalte prélevé à 600 km à l'est de la dorsale médio-atlantique a 30 millions d'années.",
+          "exercise_type": "fixation",
+          "figure": "atlantique-carte",
+          "questions": [
+            {
+              "content": "La complémentarité des côtes de l'Afrique et de l'Amérique du Sud suffit à elle seule à donner la vitesse d'écartement des deux continents.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 de la fiche sur l'expansion — Relever : la forme des côtes est un indice d'un ancien rapprochement, mais elle ne donne ni âge ni distance. Pour obtenir une vitesse, il faut des âges de roches et des distances à l'axe de la dorsale.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un basalte prélevé à 600 km à l'est de la dorsale a 30 millions d'années. Quelle est la vitesse d'éloignement de ce côté, en cm par an ?",
+              "question_type": "numeric",
+              "unit": "cm/an",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Relever : distance 600 km, âge 30 millions d'années. Étape 3 — Calculer : 600 km = 60 000 000 cm et 30 millions d'années = 30 000 000 ans ; 60 000 000 divisé par 30 000 000 donne 2 cm par an. Piège : sans conversion, 600 divisé par 30 donnerait 20, faux : ce sont 20 km par million d'années, soit 2 cm par an.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En supposant l'expansion symétrique, quel âge attend-on pour un basalte prélevé à 600 km à l'ouest de la dorsale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Comparer : l'expansion est symétrique, donc à la même distance de l'axe les basaltes ont le même âge des deux côtés. Un âge moitié ou double supposerait une asymétrie. Étape 4 — Conclure : l'âge attendu est 30 millions d'années.",
+              "answers": [
+                {
+                  "content": "30 millions d'années, comme du côté est",
+                  "correct": true
+                },
+                {
+                  "content": "15 millions d'années, la moitié de l'âge du côté est",
+                  "correct": false
+                },
+                {
+                  "content": "60 millions d'années, le double de l'âge du côté est",
+                  "correct": false
+                },
+                {
+                  "content": "0 an, car il est au bord du continent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chaque côté de la dorsale s'éloigne à 2 cm par an. Quelle distance sépare, en kilomètres, deux points situés de part et d'autre de l'axe au bout de 20 millions d'années, s'ils étaient réunis à l'axe au départ ?",
+              "question_type": "numeric",
+              "unit": "km",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : de chaque côté, 2 cm × 20 000 000 = 40 000 000 cm, soit 400 km. Les deux points étant de part et d'autre de l'axe, la distance qui les sépare est 2 × 400 = 800 km. Piège : oublier le second côté donnerait 400 km.",
+              "answers": [
+                {
+                  "content": "800",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles observations, faites à partir de roches du plancher de l'Atlantique, appuient l'ouverture de l'océan par expansion ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Comparer : l'expansion se reconnaît à des âges croissants avec la distance et à une symétrie des deux côtés. Les basaltes les plus âgés à l'axe, des âges partout identiques ou des bandes d'un seul côté contredisent l'expansion.",
+              "answers": [
+                {
+                  "content": "Les basaltes sont de plus en plus âgés quand on s'éloigne de la dorsale",
+                  "correct": true
+                },
+                {
+                  "content": "Les âges et les bandes d'anomalies magnétiques sont symétriques de part et d'autre de l'axe",
+                  "correct": true
+                },
+                {
+                  "content": "Les basaltes les plus âgés sont situés à l'axe de la dorsale",
+                  "correct": false
+                },
+                {
+                  "content": "Les basaltes ont partout le même âge",
+                  "correct": false
+                },
+                {
+                  "content": "Les bandes magnétiques n'existent que d'un côté de la dorsale",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La ligne de séismes et de volcans qui traverse l'Atlantique du nord au sud est la ___ médio-atlantique.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Déduire (fiche sur les plaques) : une bande étroite de séismes et de volcans au milieu d'un océan est une dorsale. Ici, la dorsale médio-atlantique sépare notamment la plaque africaine de la plaque sud-américaine.",
+              "answers": [
+                {
+                  "content": "dorsale",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une dorsale dans un océan fictif",
+          "statement": "Un navire océanographique prélève des basaltes sur le plancher d'un océan, le long d'une ligne perpendiculaire à la dorsale. Expérience fictive, résultats simplifiés : à 0, 200, 400, 600 et 800 km de l'axe, les basaltes ont respectivement 0, 10, 20, 30 et 40 millions d'années.",
+          "exercise_type": "fixation",
+          "figure": "ages-fonds",
+          "questions": [
+            {
+              "content": "Quel âge a le basalte prélevé à 400 km de l'axe ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : on lit l'âge correspondant à la distance de 400 km : 20 millions d'années. Les autres valeurs correspondent à d'autres distances (200 km pour 10, 600 km pour 30, 800 km pour 40 millions d'années).",
+              "answers": [
+                {
+                  "content": "20 millions d'années",
+                  "correct": true
+                },
+                {
+                  "content": "10 millions d'années",
+                  "correct": false
+                },
+                {
+                  "content": "30 millions d'années",
+                  "correct": false
+                },
+                {
+                  "content": "40 millions d'années",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse d'éloignement du plancher, en cm par an, calculée avec le basalte situé à 800 km de l'axe ?",
+              "question_type": "numeric",
+              "unit": "cm/an",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : 800 km et 40 millions d'années. Étape 3 — Calculer : 800 km = 80 000 000 cm et 40 millions d'années = 40 000 000 ans ; 80 000 000 divisé par 40 000 000 donne 2 cm par an.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'âge des basaltes est proportionnel à la distance à l'axe : la vitesse d'éloignement est constante.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Comparer : chaque fois qu'on s'éloigne de 200 km, l'âge augmente de 10 millions d'années. Le rapport distance sur âge est toujours le même : 2 cm par an. Étape 4 — Conclure : la vitesse est constante.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si la vitesse reste constante, quel âge, en millions d'années, aura un basalte situé à 1 000 km de l'axe ?",
+              "question_type": "numeric",
+              "unit": "Ma",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : à 2 cm par an, 1 000 km = 100 000 000 cm ; l'âge est 100 000 000 divisé par 2, soit 50 000 000 ans, c'est-à-dire 50 millions d'années. On retrouve aussi la progression de 10 millions d'années tous les 200 km.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions peut-on tirer de ces résultats ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Conclure : l'âge vaut zéro à l'axe, donc le plancher s'y forme, puis augmente avec la distance : le plancher s'éloigne et vieillit. Dire qu'il est plus jeune loin de l'axe ou qu'il est détruit à l'axe contredit les résultats.",
+              "answers": [
+                {
+                  "content": "Le plancher se forme à l'axe de la dorsale",
+                  "correct": true
+                },
+                {
+                  "content": "Le plancher s'éloigne de l'axe et vieillit avec la distance",
+                  "correct": true
+                },
+                {
+                  "content": "Le plancher est plus jeune loin de la dorsale",
+                  "correct": false
+                },
+                {
+                  "content": "Le plancher est détruit à l'axe de la dorsale",
+                  "correct": false
+                },
+                {
+                  "content": "Les basaltes ont tous le même âge",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les basaltes sont de plus en plus ___ quand on s'éloigne de la dorsale.",
+              "question_type": "select",
+              "explanation": "Étape 2 — Comparer : l'âge passe de 0 à 40 millions d'années entre l'axe et 800 km. Les basaltes sont donc de plus en plus âgés en s'éloignant de la dorsale.",
+              "answers": [
+                {
+                  "content": "âgés",
+                  "correct": true
+                },
+                {
+                  "content": "jeunes",
+                  "correct": false
+                },
+                {
+                  "content": "chauds",
+                  "correct": false
+                },
+                {
+                  "content": "liquides",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les bandes magnétiques d'un océan",
+          "statement": "Un navire mesure le champ magnétique le long d'une ligne perpendiculaire à la dorsale d'un océan. Expérience fictive, résultats simplifiés : on relève des bandes où le champ est plus fort que la normale, séparées par des bandes où il est plus faible. La succession est la même de part et d'autre de l'axe. La limite de bande la plus proche de l'axe correspond à la dernière inversion du champ magnétique terrestre, datée d'environ 800 000 ans (valeur arrondie) ; elle est située à 40 km de l'axe.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pourquoi les basaltes du plancher gardent-ils une trace du champ magnétique ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : en refroidissant, le basalte fige la direction du champ magnétique terrestre du moment. Étape 2 — Comparer : comme le champ s'inverse parfois, des bandes alternées apparaissent. Les autres propositions ne correspondent à aucun mécanisme du cours.",
+              "answers": [
+                {
+                  "content": "Ils enregistrent la direction du champ terrestre au moment où ils refroidissent",
+                  "correct": true
+                },
+                {
+                  "content": "Ils produisent eux-mêmes un champ magnétique en vieillissant",
+                  "correct": false
+                },
+                {
+                  "content": "Le champ magnétique les fait fondre à l'axe",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont aimantés par les navires qui les étudient",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La symétrie des bandes de part et d'autre de l'axe montre que le plancher se forme à l'axe et s'écarte des deux côtés.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Comparer : la même succession de bandes apparaît des deux côtés. Étape 4 — Conclure : c'est ce que produit un plancher formé à l'axe, enregistrant les inversions du champ, puis écarté de chaque côté.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La limite de bande datée de 800 000 ans se trouve à 40 km de l'axe. Quelle est la vitesse d'éloignement de ce côté, en cm par an ?",
+              "question_type": "numeric",
+              "unit": "cm/an",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : 40 km et 800 000 ans. Étape 3 — Calculer : 40 km = 4 000 000 cm ; 4 000 000 divisé par 800 000 donne 5 cm par an. Piège : sans conversion, 40 divisé par 800 000 donne un nombre minuscule qui n'est pas en cm par an : il faut d'abord convertir les kilomètres en centimètres.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque structure à sa description.",
+              "question_type": "matching",
+              "explanation": "Étape 3 de la fiche sur les limites — Nommer : dorsale, limite divergente avec naissance de croûte ; fosse, plongée en subduction ; faille coulissante, glissement latéral ; chaîne de collision, rencontre de deux continents.",
+              "answers": [
+                {
+                  "content": "Dorsale océanique",
+                  "match": "Limite divergente où naît la croûte océanique"
+                },
+                {
+                  "content": "Fosse océanique",
+                  "match": "Creux au-dessus de la plongée d'une lithosphère"
+                },
+                {
+                  "content": "Faille coulissante",
+                  "match": "Limite où les plaques glissent latéralement"
+                },
+                {
+                  "content": "Chaîne de collision",
+                  "match": "Relief plissé formé par la rencontre de deux continents"
+                }
+              ]
+            },
+            {
+              "content": "À l'axe d'un océan, on trouve des séismes superficiels, des volcans basaltiques et des basaltes d'autant plus âgés qu'ils sont éloignés. De quel type de limite s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'âge augmente avec la distance, donc les plaques s'écartent. Étape 3 — Nommer : limite divergente. Les limites convergentes et coulissantes ne créent pas de lithosphère ; la collision n'a pas de dorsale.",
+              "answers": [
+                {
+                  "content": "Une limite divergente",
+                  "correct": true
+                },
+                {
+                  "content": "Une limite convergente",
+                  "correct": false
+                },
+                {
+                  "content": "Une limite coulissante",
+                  "correct": false
+                },
+                {
+                  "content": "Une collision continentale",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique comment les âges des roches et les anomalies magnétiques montrent l'expansion des fonds océaniques.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les âges augmentent avec la distance à l'axe",
+                "Les bandes magnétiques alternées sont symétriques",
+                "Les deux observations sont reliées à la formation de croûte à l'axe"
+              ],
+              "explanation": "Corrigé modèle : les basaltes sont les plus jeunes à l'axe de la dorsale et de plus en plus âgés quand on s'éloigne, de la même façon des deux côtés. Les basaltes ont enregistré les inversions du champ magnétique terrestre au moment de leur refroidissement, ce qui donne des bandes alternées et symétriques. Ces deux observations s'expliquent si de la croûte naît à l'axe et s'écarte de chaque côté : c'est l'expansion. Barème : 1 point pour les âges, 1 point pour la symétrie des bandes, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "Les basaltes les plus jeunes se trouvent…"
+            }
+          ]
+        },
+        {
+          "title": "Du milieu de l'océan à la côte d'un continent",
+          "statement": "Dans une région simplifiée, une plaque océanique naît à une dorsale puis s'éloigne vers un continent. Elle plonge ensuite sous la bordure de ce continent, le long d'une fosse très profonde. Les foyers de séismes sont de plus en plus profonds sous le continent, et des volcans sont alignés près de la côte. Expérience fictive, résultats simplifiés : la plaque s'éloigne de la dorsale à 5 cm par an et le basalte situé près de la fosse a 60 millions d'années.",
+          "exercise_type": "evaluation",
+          "figure": "subduction-chaine",
+          "questions": [
+            {
+              "content": "De quel type est la limite au niveau de la fosse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la plaque océanique plonge sous la plaque continentale, donc les plaques se rapprochent. Étape 3 — Nommer : limite convergente, avec subduction. La fosse, les séismes profonds et les volcans alignés sont des signes de cette limite.",
+              "answers": [
+                {
+                  "content": "Convergente : la plaque océanique plonge sous la plaque continentale",
+                  "correct": true
+                },
+                {
+                  "content": "Divergente : les plaques s'écartent",
+                  "correct": false
+                },
+                {
+                  "content": "Coulissante : les plaques glissent latéralement",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'y a aucune limite à cet endroit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre ce qu'on rencontre en allant de la dorsale vers l'intérieur du continent.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : de la dorsale à la côte, le plancher vieillit jusqu'à la fosse. Étape 4 — Relever : au-delà de la fosse, la plongée alimente des volcans alignés près de la côte.",
+              "answers": [
+                {
+                  "content": "Dorsale"
+                },
+                {
+                  "content": "Plancher océanique de plus en plus âgé"
+                },
+                {
+                  "content": "Fosse océanique"
+                },
+                {
+                  "content": "Volcans alignés près de la côte"
+                }
+              ]
+            },
+            {
+              "content": "Quelle distance, en kilomètres, sépare la dorsale de la fosse ?",
+              "question_type": "numeric",
+              "unit": "km",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer : la plaque s'éloigne de 5 cm par an pendant 60 millions d'années, soit 5 × 60 000 000 = 300 000 000 cm. Comme 1 km = 100 000 cm, la distance est 300 000 000 divisé par 100 000, soit 3 000 km.",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles manifestations observe-t-on dans cette zone de subduction ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 4 — Relever : une subduction se reconnaît à la fosse, aux séismes de plus en plus profonds et aux volcans alignés. La naissance de croûte et les bandes magnétiques sont liées à la dorsale, la chaîne de collision à la rencontre de deux continents.",
+              "answers": [
+                {
+                  "content": "Une fosse océanique",
+                  "correct": true
+                },
+                {
+                  "content": "Des séismes dont les foyers sont de plus en plus profonds",
+                  "correct": true
+                },
+                {
+                  "content": "Des volcans alignés près de la côte",
+                  "correct": true
+                },
+                {
+                  "content": "La naissance de croûte océanique à la fosse",
+                  "correct": false
+                },
+                {
+                  "content": "Des bandes d'anomalies magnétiques à la fosse",
+                  "correct": false
+                },
+                {
+                  "content": "Une chaîne de montagnes produite par collision",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le basalte situé près de la fosse est plus jeune que celui situé près de la dorsale.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : le plancher s'éloigne de la dorsale en vieillissant. Étape 2 — Comparer : celui de la fosse a 60 millions d'années, celui de la dorsale presque zéro. L'affirmation est donc fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi c'est la plaque océanique qui plonge sous le continent, et cite deux manifestations de cette plongée.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "La lithosphère océanique est plus dense que la continentale",
+                "La lithosphère continentale ne s'enfonce pas profondément",
+                "Deux manifestations exactes sont citées"
+              ],
+              "explanation": "Corrigé modèle : étape 1, les deux lithosphères sont de nature différente. Étape 2, la lithosphère océanique, refroidie, est plus dense que la lithosphère continentale, tandis que la lithosphère continentale, légère, ne s'enfonce pas profondément : c'est la plaque océanique qui plonge. Étape 3, c'est une subduction. Étape 4, elle se manifeste par une fosse océanique et par des séismes de plus en plus profonds (ou des volcans alignés près de la côte). Barème : 1 point pour la densité, 1 point pour le comportement du continent, 1 point par manifestation exacte.",
+              "answers": [],
+              "starter": "La plaque océanique plonge parce que…"
+            },
+            {
+              "content": "Dans une zone de subduction, la plaque qui plonge porte un continent derrière son plancher océanique. Quand tout ce plancher a plongé et que l'océan a disparu, ce continent arrive contre l'autre continent. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Comparer : à la disparition de l'océan, deux lithosphères continentales, légères, se rencontrent. Étape 3 — Nommer : c'est une collision. Étape 4 — Relever : plis, failles et chaîne de montagnes, comme l'Himalaya. Un continent ne plonge pas entièrement et aucune dorsale ne naît du rapprochement.",
+              "answers": [
+                {
+                  "content": "Les continents entrent en collision et une chaîne de montagnes plissée se forme",
+                  "correct": true
+                },
+                {
+                  "content": "Une nouvelle dorsale s'installe au point de contact",
+                  "correct": false
+                },
+                {
+                  "content": "La fosse devient plus profonde sans rien changer d'autre",
+                  "correct": false
+                },
+                {
+                  "content": "Le continent plonge entièrement sous l'autre",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

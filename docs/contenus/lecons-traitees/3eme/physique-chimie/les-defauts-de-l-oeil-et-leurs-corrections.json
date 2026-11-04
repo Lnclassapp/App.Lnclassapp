@@ -208,6 +208,64 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu utilises le modèle de l'œil réduit pour une personne qui regarde un arbre lointain.",
+            "questions": [
+              {
+                "content": "Pour voir l'arbre lointain, c'est ___ qui fait converger les rayons, et c'est ___ qui reçoit l'image.",
+                "question_type": "select",
+                "hint": "Dans le modèle, un élément joue le rôle de la lentille et un autre celui de l'écran.",
+                "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente, il fait converger les rayons. Étape 2 — Identifier : la rétine, au fond de l'œil, est l'écran où se forme l'image. L'iris, lui, règle seulement la quantité de lumière.",
+                "answers": [
+                  {
+                    "content": "l'iris",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le cristallin",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le diaphragme",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "la pupille",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "la lentille",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "la rétine",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La pupille est plus petite en plein soleil que dans la pénombre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : l'iris, percé de la pupille, règle la quantité de lumière qui entre. Étape 2 — Comparer : en plein soleil la pupille mesure environ 2 mm, dans la pénombre environ 7 mm. L'image reste au même endroit : seule la quantité de lumière change.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -346,6 +404,87 @@
                   },
                   {
                     "content": "Aucun défaut",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu reconnais un défaut de vision à partir de ce que la personne voit mal.",
+            "questions": [
+              {
+                "content": "Un œil hypermétrope voit mal ___. Il n'est pas assez ___ : l'image d'un objet lointain se forme ___ la rétine.",
+                "question_type": "select",
+                "hint": "Pense à la position de l'image par rapport à la rétine pour un œil qui manque de convergence.",
+                "explanation": "Étape 1 — Repérer : l'œil hypermétrope voit mal de près. Étape 2 — Expliquer : il n'est pas assez convergent. Étape 3 — Situer l'image : elle se forme après la rétine, donc elle est floue.",
+                "answers": [
+                  {
+                    "content": "de loin",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "de près",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "dans la pénombre",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "lumineux",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "divergent",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "convergent",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "après",
+                    "correct": true,
+                    "blank": 2
+                  },
+                  {
+                    "content": "avant",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "sur",
+                    "correct": false,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Un élève lit sans effort le panneau d'affichage de la cour, mais il doit éloigner son livre pour lire. Quel est son défaut de vision et pourquoi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'élève voit bien de loin et mal de près. Étape 2 — Nommer : c'est l'hypermétropie. Étape 3 — Expliquer : l'œil n'est pas assez convergent, l'image se forme après la rétine.",
+                "answers": [
+                  {
+                    "content": "Myope : son œil est trop convergent.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Hypermétrope : son œil est trop convergent.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Hypermétrope : son œil n'est pas assez convergent.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Myope : son œil n'est pas assez convergent.",
                     "correct": false
                   }
                 ]
@@ -492,6 +631,82 @@
                 "starter": "Le myope a l'image…"
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu choisis la lentille qui corrige un défaut de vision.",
+            "questions": [
+              {
+                "content": "Myopie : il faut ___ l'image, donc une lentille ___. Hypermétropie : il faut ___ l'image, donc une lentille ___.",
+                "question_type": "select",
+                "hint": "Sans correction, où se forme l'image : avant ou après la rétine ? Dans quel sens faut-il la déplacer ?",
+                "explanation": "Étape 1 — Situer : pour la myopie l'image est avant la rétine, il faut la reculer avec une lentille divergente. Étape 2 — Situer : pour l'hypermétropie l'image est après la rétine, il faut l'avancer avec une lentille convergente.",
+                "answers": [
+                  {
+                    "content": "avancer",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "reculer",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "convergente",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "divergente",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "avancer",
+                    "correct": true,
+                    "blank": 2
+                  },
+                  {
+                    "content": "reculer",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "divergente",
+                    "correct": false,
+                    "blank": 3
+                  },
+                  {
+                    "content": "convergente",
+                    "correct": true,
+                    "blank": 3
+                  }
+                ]
+              },
+              {
+                "content": "Sans correction, l'image d'un objet lointain se forme après la rétine. Quel effet doit avoir le verre correcteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : l'image est après la rétine, c'est l'hypermétropie. Étape 2 — Choisir : il faut avancer l'image, donc rendre l'œil plus convergent avec une lentille convergente. Étape 3 — Vérifier : l'image se forme alors sur la rétine.",
+                "answers": [
+                  {
+                    "content": "Reculer l'image, en rendant l'œil moins convergent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Avancer l'image vers la rétine, en rendant l'œil plus convergent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ne pas déplacer l'image, mais la rendre plus lumineuse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Reculer l'image, en rendant l'œil plus convergent",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -614,6 +829,68 @@
                   },
                   {
                     "content": "$-2{,}5$ δ",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu calcules des vergences avec $C = \\dfrac{1}{f}$, la distance focale $f$ étant en mètres.",
+            "questions": [
+              {
+                "content": "Verre A : lentille convergente de distance focale 50 cm. $C_A$ = ___   Verre B : lentille divergente de distance focale 20 cm. $C_B$ = ___   Donne chaque vergence avec son signe.",
+                "question_type": "numeric",
+                "unit": "δ",
+                "tolerance": 0,
+                "hint": "Convertis d'abord les centimètres en mètres, puis pense au signe de chaque lentille.",
+                "explanation": "Étape 1 — Identifier le signe : convergente, vergence positive ; divergente, vergence négative. Étape 2 — Convertir : 50 cm = 0,5 m et 20 cm = 0,2 m. Étape 3 — Appliquer : $C_A = \\dfrac{1}{0{,}5} = +2$ δ et $C_B = -\\dfrac{1}{0{,}2} = -5$ δ.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un verre de lunettes a une vergence de 8 δ. Quelle est sa distance focale, en centimètres ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "hint": "Écris $f = \\dfrac{1}{C}$, le résultat est en mètres.",
+                "explanation": "Étape 1 — Écrire : $f = \\dfrac{1}{C}$. Étape 2 — Calculer : $f = \\dfrac{1}{8} = 0{,}125$ m. Étape 3 — Convertir : 0,125 m = 12,5 cm.",
+                "answers": [
+                  {
+                    "content": "12.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le verre A a une vergence de +2 δ et le verre B une vergence de +4 δ. Lequel a la plus petite distance focale ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $f_A = \\dfrac{1}{2} = 0{,}5$ m et $f_B = \\dfrac{1}{4} = 0{,}25$ m. Étape 2 — Comparer : plus la distance focale est petite, plus la vergence est grande. Le verre B a la plus petite distance focale.",
+                "answers": [
+                  {
+                    "content": "Le verre A, car sa vergence est la plus petite.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le verre B, car sa vergence est la plus grande.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils ont la même distance focale.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas comparer sans connaître le défaut de l'œil.",
                     "correct": false
                   }
                 ]

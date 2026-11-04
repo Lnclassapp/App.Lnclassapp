@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/show — la copie de l'élève : le sujet, toutes les questions, « Vérifier ma copie » %>
 <%# Rôle : sujet repliable, compteur « n/T répondues », une carte par question (fieldset), bouton collé en bas, confirmation des questions vides ; 422 : résumé et message par question %>
-<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112, 0115 · UDR : 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7, 0140 · Stimulus : math, assessment--copy, modal %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7, 0140, 0147-je-m-entraine-dans-la-fiche §3.8 · Stimulus : math, assessment--copy, modal %>
 <%# Sans JavaScript : le formulaire part tel quel, sans confirmation ni brouillon ; les questions vides comptent fausses. %>
 <% play = @play %>
 <% posted = @posted || {} %>
@@ -9,6 +9,9 @@
 <% weighted = play.questions.any? { it.points != 1 } %>
 <%# Une réponse rédigée ou du cahier ne se compte pas parmi les questions « répondues » : une copie sans elles part sans demande de confirmation. %>
 <% counted = play.questions.count(&:counted?) %>
+<%# UDR-0147 §3.8 : le texte d'un indice n'est dans la page que si son ouverture est enregistrée (hinted_question_ids). %>
+<% hinted = play.hinted_question_ids %>
+<% closed_hints = play.questions.select { it.hint? && hinted.exclude?(it.id) } %>
 <% page_title t(".page_title", title: play.exercise_title) %>
 <% content_for :nav_key, "courses" %>
 <%= ui_back_link play.exercise_title, href: exercise_path(play.exercise_public_id) %>
@@ -24,6 +27,10 @@
       <%= ui_icon "document-text", variant: :mini, size: :sm %><%= t(".review_statement") %>
     </a>
   </div>
+
+  <% if play.questions.any?(&:hint?) %>
+    <p class="mb-4 text-sm text-mute"><%= t(".hint_notice") %></p>
+  <% end %>
 
   <%= tag.details id: "copy-statement", open: true, class: "mb-6 rounded-card border border-line bg-white p-5 shadow-card", data: { controller: "math" } do %>
     <summary class="min-h-tap cursor-pointer font-display text-lg font-medium"><%= t(".statement") %></summary>
@@ -62,7 +69,8 @@
         <% number = question.number %>
         <% problem = errors[number] %>
         <%# L'énoncé d'un texte à trous, ou d'une liste dont le trou est dans la phrase, est la phrase, qui porte le champ : la légende en est la consigne (UDR-0087 §3.4, 0140 §3). %>
-        <% legend = if question.kind_name == "fill_blank" then t("assessment.exercise_sessions.kinds.fill_blank.legend")
+        <%# Une question chiffrée à plusieurs cases est de même une phrase à champs (UDR fiche §3.8) : la phrase remplace l'énoncé, la légende est la consigne. %>
+        <% legend = if question.kind_name == "fill_blank" || (question.kind_name == "numeric" && question.multi_blank?) then t("assessment.exercise_sessions.kinds.fill_blank.legend")
                     elsif question.kind_name == "select" && question.content.include?(Entities::Assessment::QuestionKinds::FillBlank::MARKER) then t("assessment.exercise_sessions.kinds.select.legend")
                     else question.content end %>
         <li id="question-<%= number %>">
@@ -82,6 +90,18 @@
                 <%= render "assessment/exercise_sessions/kinds/#{question.kind_name}", f:, question:, number:,
                            values: (posted[question.id.to_s] || {}).with_indifferent_access %>
               </fieldset>
+            <% end %>
+            <% if question.hint? %>
+              <div class="mt-4">
+                <% if hinted.include?(question.id) %>
+                  <%= render "assessment/hints/hint", question_id: question.id, hint: question.hint %>
+                <% else %>
+                  <%# Le formulaire est hors de la copie (un formulaire ne s'imbrique pas) : le bouton le désigne par form=. %>
+                  <%= turbo_frame_tag "hint_#{question.id}" do %>
+                    <%= ui_button t(".hint_button"), type: :submit, variant: :ghost, size: :sm, icon: "light-bulb", form: "hint-form-#{question.id}" %>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
             <% if problem %>
               <p id="question-<%= number %>-error" class="mt-3 flex items-start gap-2 text-sm font-medium text-warning">
@@ -109,5 +129,12 @@
     <% end %>
 
     <template data-assessment--copy-target="offline"><%= ui_toast t(".offline"), type: :error %></template>
+  <% end %>
+
+  <%# Un formulaire par indice encore fermé, hors du formulaire de la copie : le POST ne rend ni ne modifie la copie. %>
+  <% closed_hints.each do |question| %>
+    <%= form_with url: exercise_session_hints_path(play.session_public_id), method: :post, id: "hint-form-#{question.id}" do %>
+      <%= hidden_field_tag :question_id, question.id, id: nil %>
+    <% end %>
   <% end %>
 </div>

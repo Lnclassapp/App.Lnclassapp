@@ -1,0 +1,121 @@
+<%# 🌐 UI · catalog/courses/sheets/_paper — le sujet d'une feuille en forme d'épreuve : cartouche, titre, exercices avec leurs points, tableaux V/F et QCM, questions en liste %>
+<%# Rôle : rendu par _sheet en lecture (:reading, :teacher, :team) ; aucun champ ni aide (ni « À retenir », ni indice, ni correction) ; les bascules de l'enseignant (_teacher_bar) sous chaque exercice ; locals de _sheet, les autres sont ignorés %>
+<%# ADR  : 0121 · UDR : sujet-comme-une-epreuve §3 (amende 0151 §3) · Stimulus : math (une fois par exercice) %>
+<%# locals: (kind:, number:, material:, header_left:, header_right:, title:, exercises:, sheet_id:, mode: :reading, targets: nil, classrooms: [], heading: :h1, **) -%>
+<% scope = "catalog.courses.sheets.paper" %>
+<% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
+<%# Une suite = des questions consécutives de même genre : vrai ou faux, QCM, ou toute autre. %>
+<% genre = ->(question) { %i[true_false mcq].include?(question.kind) ? question.kind : :other } %>
+<% letter = ->(question) { (96 + question.number).chr } %>
+<%# 6 · 2,5 : une virgule, sans zéro inutile. %>
+<% format_points = ->(sum) { (sum.frac.zero? ? sum.to_i : sum.to_s("F")).to_s.tr(".", ",") } %>
+<%= tag.div id: sheet_id, class: "ps-sheet ps-paper" do %>
+  <div class="ps-header">
+    <b class="ps-header-title"><%= t("catalog.courses.sheets.#{kind}_title") %></b>
+    <b class="ps-header-title ps-header-title--right"><%= material.to_s.upcase %></b>
+    <span><%= header_left %></span>
+    <span class="ps-header-right"><%= header_right %></span>
+  </div>
+  <div class="ps-paper-title">
+    <%= content_tag(heading, t("#{scope}.heading", material: material.to_s.upcase), class: "ps-paper-heading") %>
+    <p class="ps-paper-name"><%= t("catalog.courses.sheets.numbered_title.#{kind}", number:) %> · <%= title %></p>
+    <p class="ps-paper-rubric"><%= t("#{scope}.rubric", count: exercises.size) %></p>
+  </div>
+  <% exercises.each do |exercise| %>
+    <% sum = exercise.questions.sum(&:points) %>
+    <% dom_id = "sheet-exercise-#{exercise.public_id}" %>
+    <%= tag.section id: dom_id, class: "ps-paper-exercise", aria: { labelledby: "#{dom_id}-title" }, data: { controller: "math" } do %>
+      <h2 id="<%= dom_id %>-title" class="ps-paper-exercise-title">
+        <span class="ps-paper-exercise-number"><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></span>
+        <% if exercise.questions.any? %><%= t("#{scope}.points", count: sum, points: format_points.(sum)) %><% end %>
+        <% if mode == :team && exercise.status == "draft" %><span class="ps-status"><%= t("catalog.content_status.draft") %></span><% end %>
+      </h2>
+      <div class="ps-paper-top <%= "ps-paper-top--figure" if exercise.figure %>">
+        <div class="ps-paper-statement">
+          <% if exercise.statement.present? %>
+            <div class="ps-statement"><%= simple_format(exercise.statement) %></div>
+          <% end %>
+          <% if exercise.statement_blocks.present? %>
+            <div class="space-y-3"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
+          <% end %>
+        </div>
+        <% if exercise.figure %>
+          <div class="ps-figure ps-paper-figure [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
+        <% end %>
+      </div>
+      <% exercise.questions.slice_when { |before, after| genre.(before) != genre.(after) }.each do |run| %>
+        <% first = run.first %>
+        <% caption = t("#{scope}.caption", number: exercise.number, first: letter.(first), last: letter.(run.last)) %>
+        <% case genre.(first) %>
+        <% when :true_false %>
+          <p class="ps-paper-instruction"><%= t("#{scope}.instruction.true_false") %></p>
+          <table class="ps-paper-table ps-paper-table--tf">
+            <caption class="sr-only"><%= caption %></caption>
+            <thead><tr><th scope="col"><%= t("#{scope}.number") %></th><th scope="col"><%= t("#{scope}.statement") %></th></tr></thead>
+            <tbody>
+              <% run.each do |question| %>
+                <tr>
+                  <th scope="row"><%= letter.(question) %></th>
+                  <td>
+                    <% if question.image %><%= tag.img src: question_image_path(question.image.public_id), alt: question.image.alt.to_s, width: question.image.width, height: question.image.height, loading: "lazy", decoding: "async", class: "ps-figure" %><% end %>
+                    <%= sheet_text(question.content) %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% when :mcq %>
+          <% columns = run.map { it.choices.size }.max %>
+          <p class="ps-paper-instruction"><%= t("#{scope}.instruction.#{run.any?(&:multiple) ? :mcq_multiple : :mcq}") %></p>
+          <%# Sur téléphone, la ligne devient une grille (affirmation, puis ses propositions deux par deux, lettre en tête) : les rôles gardent le tableau aux lecteurs d'écran. %>
+          <table class="ps-paper-table ps-paper-table--mcq" role="table">
+            <caption class="sr-only"><%= caption %></caption>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th scope="col" role="columnheader"><%= t("#{scope}.number") %></th><th scope="col" role="columnheader"><%= t("#{scope}.statement") %></th>
+                <% columns.times do |rank| %><th scope="col" role="columnheader"><%= ("A".ord + rank).chr %></th><% end %>
+              </tr>
+            </thead>
+            <tbody role="rowgroup">
+              <% run.each do |question| %>
+                <tr role="row">
+                  <th scope="row" role="rowheader"><%= letter.(question) %></th>
+                  <td role="cell">
+                    <% if question.image %><%= tag.img src: question_image_path(question.image.public_id), alt: question.image.alt.to_s, width: question.image.width, height: question.image.height, loading: "lazy", decoding: "async", class: "ps-figure" %><% end %>
+                    <%= sheet_text(question.content) %>
+                    <% if question.multiple %><br><span class="ps-instruction"><%= t("catalog.courses.sheets.choose_count", count: question.expected) %></span><% end %>
+                  </td>
+                  <% columns.times do |rank| %><td role="cell" data-letter="<%= ("A".ord + rank).chr %>"><% if (choice = question.choices[rank]) %><div class="ps-paper-choice"><%= sheet_text(choice.content) %></div><% end %></td><% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <ol class="ps-paper-list">
+            <% run.each do |question| %>
+              <li>
+                <b><%= letter.(question) %>.</b>
+                <% if question.image %><%= tag.img src: question_image_path(question.image.public_id), alt: question.image.alt.to_s, width: question.image.width, height: question.image.height, loading: "lazy", decoding: "async", class: "ps-figure" %><% end %>
+                <%= sheet_text(question.content.to_s.gsub(marker, "…")) %>
+                <% if question.kind == :calculation && question.unit %><span class="ps-paper-unit">…… <%= question.unit %></span><% end %>
+                <%# Éléments à ordonner, à relier ou à choisir : la liste à lire, sans champ ni menu. %>
+                <% play = question.play %>
+                <% if play %>
+                  <% [ play.prompts, play.items, play.answers ].each do |list| %>
+                    <% if list.present? %>
+                      <ul class="ps-paper-items"><% list.each { |element| %><li><%= sheet_text(element.respond_to?(:content) ? element.content : element) %></li><% } %></ul>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ol>
+        <% end %>
+      <% end %>
+      <% if mode == :teacher %>
+        <div class="ps-actions"><%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <p class="ps-paper-footer"><%= t("#{scope}.footer") %></p>
+<% end %>

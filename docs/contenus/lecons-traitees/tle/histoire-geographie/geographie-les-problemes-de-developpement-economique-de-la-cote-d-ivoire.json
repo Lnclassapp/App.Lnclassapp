@@ -1,0 +1,2003 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Les problèmes de développement économique de la Côte d'Ivoire",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "cercle-dette",
+          "kind": "diagram",
+          "description": "Schéma en cycle du cercle vicieux de la dette : la dépendance à un produit brut expose aux chutes de cours, qui font baisser les recettes de l'État, qui emprunte ; le remboursement pèse ensuite sur le budget, laisse peu d'argent pour diversifier l'économie et entretient la dépendance.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "dep",
+                "label": "Dépendance à un produit exporté brut"
+              },
+              {
+                "id": "chute",
+                "label": "Chute des cours mondiaux"
+              },
+              {
+                "id": "recettes",
+                "label": "Baisse des recettes de l'État"
+              },
+              {
+                "id": "dette",
+                "label": "Emprunts et hausse de la dette"
+              },
+              {
+                "id": "service",
+                "label": "Remboursements qui pèsent sur le budget"
+              }
+            ],
+            "edges": [
+              {
+                "from": "dep",
+                "to": "chute",
+                "label": "expose à"
+              },
+              {
+                "from": "chute",
+                "to": "recettes",
+                "label": "provoque"
+              },
+              {
+                "from": "recettes",
+                "to": "dette",
+                "label": "pousse à emprunter"
+              },
+              {
+                "from": "dette",
+                "to": "service",
+                "label": "entraîne"
+              },
+              {
+                "from": "service",
+                "to": "dep",
+                "label": "freine la diversification"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "crise-ajustement",
+          "kind": "diagram",
+          "description": "Schéma fléché de la crise ivoirienne : la chute des cours du cacao et du café fait baisser les recettes d'exportation, l'État s'endette, des programmes d'ajustement structurel sont conclus, le franc CFA est dévalué en janvier 1994, puis l'initiative PPTE allège la dette.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "chute",
+                "label": "Chute des cours du cacao et du café"
+              },
+              {
+                "id": "recettes",
+                "label": "Baisse des recettes d'exportation"
+              },
+              {
+                "id": "dette",
+                "label": "Endettement de l'État"
+              },
+              {
+                "id": "pas",
+                "label": "Programmes d'ajustement structurel"
+              },
+              {
+                "id": "deval",
+                "label": "Dévaluation du franc CFA (janvier 1994)"
+              },
+              {
+                "id": "ppte",
+                "label": "Initiative PPTE : allègement de la dette"
+              }
+            ],
+            "edges": [
+              {
+                "from": "chute",
+                "to": "recettes"
+              },
+              {
+                "from": "recettes",
+                "to": "dette"
+              },
+              {
+                "from": "dette",
+                "to": "pas"
+              },
+              {
+                "from": "pas",
+                "to": "deval"
+              },
+              {
+                "from": "deval",
+                "to": "ppte"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "foret-couvert",
+          "kind": "stat_chart",
+          "description": "Courbe du couvert forestier de la Côte d'Ivoire, en millions d'hectares, en ordres de grandeur couramment cités : environ 16 en 1900, 12 en 1960, 3 en 2015. Les trois points sont inégalement espacés (1900, 1960, 2015) sur un axe régulier. La courbe descend nettement : la forêt a fortement reculé depuis 1900. Valeurs arrondies, variables selon la définition de la forêt.",
+          "params": {
+            "chart": "line",
+            "series": [
+              16,
+              12,
+              3
+            ],
+            "labels": [
+              "1900",
+              "1960",
+              "2015"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-desequilibres",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire montrant des déséquilibres régionaux : le district d'Abidjan, pôle économique et port, est coloré à part ; les districts du nord, du nord-ouest et du nord-est (Savanes, Denguélé, Woroba, Zanzan) sont colorés d'une autre teinte ; Bouaké, Daloa, Korhogo et San Pedro sont placés.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "abidjan",
+                "category": 1
+              },
+              {
+                "id": "savanes",
+                "category": 2
+              },
+              {
+                "id": "denguele",
+                "category": 2
+              },
+              {
+                "id": "zanzan",
+                "category": 2
+              },
+              {
+                "id": "woroba",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan (port, industries)"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San Pedro (port)"
+              },
+              {
+                "id": "bouake"
+              },
+              {
+                "id": "daloa"
+              },
+              {
+                "id": "korhogo"
+              }
+            ],
+            "legend": [
+              "Abidjan : pôle économique",
+              "Nord, nord-ouest et nord-est : districts moins équipés"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Analyser la dépendance à l'égard des matières premières agricoles",
+          "remember": "La Côte d'Ivoire exporte surtout des **matières premières agricoles** (produits agricoles bruts, non transformés) : le cacao, l'anacarde, l'hévéa (caoutchouc) et le café. Elle est le premier producteur mondial de cacao, environ 40 % de la production mondiale (ICCO, campagne 2022-2023). Un pays est **dépendant** quand son économie repose sur peu de produits dont il ne fixe pas le prix : les **cours mondiaux** se décident sur les marchés internationaux et varient beaucoup. Les **termes de l'échange** comparent le prix de ce qu'un pays vend à celui de ce qu'il achète : indice des prix des exportations ÷ indice des prix des importations × 100. Quand ils baissent, ils se **détériorent** : le pays doit vendre davantage de matières premières pour acheter la même quantité de machines, de véhicules ou de médicaments importés.",
+          "method": [
+            "Identifier le produit exporté et sa part dans les recettes du pays.",
+            "Repérer qui fixe son prix : les cours mondiaux.",
+            "Comparer l'évolution des prix des exportations et celle des prix des importations (termes de l'échange).",
+            "Dégager les conséquences pour les recettes de l'État et pour les revenus des producteurs."
+          ],
+          "example": {
+            "statement": "Texte écrit pour Lnclass (chiffres fictifs). Une année, l'indice du prix du cacao exporté par un pays passe de 100 à 60, alors que l'indice du prix des produits manufacturés qu'il importe reste à 100. Analyser la situation de ce pays.",
+            "steps": [
+              "Identifier : le cacao est le produit exporté ; il fournit à ce pays une grande part de ses recettes d'exportation, comme en Côte d'Ivoire, premier producteur mondial.",
+              "Repérer : ce prix est fixé sur les marchés internationaux, par les cours mondiaux, et non par le pays.",
+              "Comparer : termes de l'échange = 60 ÷ 100 × 100 = 60. Ils se détériorent : il faut vendre plus de cacao pour acheter la même machine.",
+              "Dégager : l'État encaisse moins de recettes pour financer écoles et routes, et les planteurs gagnent moins, même si la récolte est identique."
+            ]
+          },
+          "pitfall": "Ne confonds pas une baisse des cours avec une baisse de la production. Contre-exemple fictif : un planteur récolte 100 kg de fèves chaque année. Si le prix passe de 1 000 à 600 FCFA le kilo, ses revenus tombent de 100 000 à 60 000 FCFA alors qu'il a produit autant. La baisse vient du marché mondial, pas d'une faute du planteur.",
+          "figure": "cercle-dette",
+          "exercise": {
+            "title": "Dépendance et termes de l'échange",
+            "statement": "Dans cet exercice, tu analyses la dépendance de la Côte d'Ivoire à ses matières premières agricoles avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "cercle-dette",
+            "questions": [
+              {
+                "content": "Quel rang occupe la Côte d'Ivoire parmi les producteurs mondiaux de cacao (ICCO, campagne 2022-2023) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le produit exporté et sa part : le cacao est le produit phare du pays, et la Côte d'Ivoire est le premier producteur mondial, avec environ 40 % de la production. Le Ghana, voisin, est un grand producteur mais il vient après.",
+                "answers": [
+                  {
+                    "content": "Deuxième, derrière le Ghana",
+                    "correct": false
+                  },
+                  {
+                    "content": "Premier producteur mondial",
+                    "correct": true
+                  },
+                  {
+                    "content": "Premier producteur d'Afrique seulement, mais pas du monde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Quatrième, derrière l'Indonésie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le prix du cacao fixé sur les marchés internationaux s'appelle le cours ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer qui fixe le prix : ce n'est ni le planteur ni l'État ivoirien, mais le marché international. On parle du cours mondial.",
+                "answers": [
+                  {
+                    "content": "mondial",
+                    "correct": true
+                  },
+                  {
+                    "content": "mondiaux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pays exporte du café et importe des machines. L'indice du prix du café exporté est 90 et l'indice du prix des machines importées est 120. Quels sont ses termes de l'échange (indice des prix exportés ÷ indice des prix importés × 100) ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Comparer les prix des exportations et des importations : 90 ÷ 120 × 100 = 75. Un résultat inférieur à 100 montre une détérioration : le pays vend moins cher ce qu'il exporte qu'il n'achète cher ce qu'il importe.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Quand les termes de l'échange se détériorent, un pays doit vendre davantage de produits exportés pour acheter la même quantité de produits importés.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer les prix : si les prix exportés baissent par rapport aux prix importés, il faut plus de tonnes de cacao pour payer la même machine. L'affirmation est donc vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux conséquences d'une forte baisse des cours du cacao pour la Côte d'Ivoire ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Dégager les conséquences : la baisse des cours réduit les recettes d'exportation de l'État et les revenus des planteurs. Les recettes ne montent pas quand le prix baisse, et la dette ne disparaît pas pour autant.",
+                "answers": [
+                  {
+                    "content": "Une baisse des recettes d'exportation de l'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une baisse des revenus des planteurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une hausse des recettes de l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "La disparition de la dette extérieure",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un planteur récolte autant de cacao cette année que l'an dernier, mais il gagne moins. Quelle est la cause la plus probable ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer qui fixe le prix, puis étape 4 — Dégager : la quantité produite n'a pas changé, donc la cause est la baisse du prix du cacao sur le marché mondial. Penser que le planteur a mal travaillé est l'erreur du piège : confondre baisse des cours et baisse de la production.",
+                "answers": [
+                  {
+                    "content": "Il a produit moins que l'an dernier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a mal travaillé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cours mondial a baissé",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'État a supprimé tous les prix",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à analyser la dépendance d'un pays avec la méthode : identifier le produit, repérer qui fixe le prix, comparer les prix, dégager les conséquences.",
+            "questions": [
+              {
+                "content": "Un pays dont l'économie repose sur peu de produits est ___ ; quand les prix de ces produits baissent, ses termes de l'échange se ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : un pays qui vit de peu de produits est dépendant. Étape 3 — Comparer : si les prix des exportations baissent par rapport à ceux des importations, les termes de l'échange se détériorent.",
+                "answers": [
+                  {
+                    "content": "dépendant",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "autonome",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "industrialisé",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "détériorent",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "améliorent",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "stabilisent toujours",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier trou parle de la dépendance, le second de ce qui arrive quand les prix exportés baissent."
+              },
+              {
+                "content": "L'indice des prix exportés vaut 80 et celui des prix importés vaut 100 : les termes de l'échange se sont détériorés.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : 80 ÷ 100 × 100 = 80, soit moins de 100. Les prix exportés ont moins progressé que les prix importés : les termes de l'échange se détériorent.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Calcule 80 ÷ 100 × 100 et compare le résultat à 100."
+              },
+              {
+                "content": "Quelles sont les deux matières premières agricoles les plus citées pour l'histoire des exportations ivoiriennes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le produit exporté : le cacao et le café ont longtemps dominé les exportations agricoles ivoiriennes. Le pétrole et l'or sont d'autres richesses, mais ne sont pas des produits de plantation.",
+                "answers": [
+                  {
+                    "content": "Le cacao",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le café",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pétrole brut",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'acier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour analyser la dépendance d'un pays.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 à 4 : on identifie d'abord le produit exporté, puis on repère qui fixe son prix (les cours mondiaux), on compare les prix exportés et importés (termes de l'échange), enfin on dégage les conséquences pour l'État et les producteurs.",
+                "answers": [
+                  {
+                    "content": "Identifier le produit exporté"
+                  },
+                  {
+                    "content": "Repérer qui fixe son prix"
+                  },
+                  {
+                    "content": "Comparer les prix exportés et importés"
+                  },
+                  {
+                    "content": "Dégager les conséquences"
+                  }
+                ]
+              },
+              {
+                "content": "Un cacaoculteur dit : « Mon revenu baisse parce que le prix a chuté sur le marché mondial. » Quelle étape de la méthode son affirmation illustre-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager les conséquences : il relie la baisse du cours mondial (étape 2) à la baisse de son revenu. Il ne compare pas encore les indices de prix.",
+                "answers": [
+                  {
+                    "content": "Identifier le produit exporté",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dégager les conséquences pour les producteurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "Calculer le service de la dette",
+                    "correct": false
+                  },
+                  {
+                    "content": "Localiser le district",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la crise des années 1980 et l'endettement",
+          "remember": "Dans les années 1970, la hausse des prix du café et du cacao enrichit la Côte d'Ivoire, qui emprunte pour investir. À la fin des années 1970 et surtout dans les années 1980, les cours chutent : les recettes d'exportation baissent alors que les remboursements restent dus. La **dette extérieure** (sommes dues à l'étranger) s'alourdit ; le **service de la dette** est le remboursement du capital et des intérêts. Les **programmes d'ajustement structurel** (PAS) sont des réformes conclues avec le FMI et la Banque mondiale en échange de prêts : réduire les dépenses publiques, privatiser des entreprises d'État, libérer les prix et le commerce. En janvier 1994, le franc CFA est **dévalué** : sa valeur baisse de moitié par rapport au franc français (1 FF = 50 FCFA devient 1 FF = 100 FCFA). Les importations coûtent plus cher en FCFA ; les exportations deviennent moins chères pour l'acheteur étranger. L'**initiative PPTE** (pays pauvres très endettés, lancée en 1996) allège la dette de pays pauvres très endettés ; la Côte d'Ivoire atteint son point d'achèvement en 2012.",
+          "method": [
+            "Situer les faits dans le temps : années 1970, années 1980, 1994.",
+            "Chercher les causes de la crise : chute des cours, baisse des recettes, emprunts.",
+            "Décrire les mesures prises : ajustement structurel, dévaluation, initiative PPTE.",
+            "Dégager les effets : allègement de la dette et conséquences pour les habitants."
+          ],
+          "example": {
+            "statement": "Expliquer pourquoi la Côte d'Ivoire est entrée en crise dans les années 1980 et comment elle a cherché à en sortir.",
+            "steps": [
+              "Situer : après la hausse des prix des années 1970, les cours du café et du cacao chutent dans les années 1980 ; la dévaluation date de janvier 1994.",
+              "Chercher : les recettes d'exportation baissent, les remboursements restent dus, l'État emprunte et la dette extérieure grossit.",
+              "Décrire : le pays conclut des programmes d'ajustement structurel (réduire les dépenses, privatiser), puis le franc CFA est dévalué en 1994, puis l'initiative PPTE allège la dette.",
+              "Dégager : la dette est réduite, mais des dépenses publiques serrées et des importations plus chères pèsent sur les ménages."
+            ]
+          },
+          "pitfall": "Ne dis pas que la dévaluation fait baisser le prix des produits importés. Contre-exemple : avant janvier 1994, un produit importé qui coûte 10 FF revient à 500 FCFA (10 × 50) ; après, il revient à 1 000 FCFA (10 × 100). La monnaie vaut moins, donc les importations coûtent plus cher en FCFA, tandis que les exportations deviennent moins chères pour l'étranger.",
+          "figure": "crise-ajustement",
+          "exercise": {
+            "title": "Crise, dette et ajustement",
+            "statement": "Dans cet exercice, tu expliques la crise des années 1980 et ses suites avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "crise-ajustement",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre chronologique cette chaîne de la crise ivoirienne.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer les faits dans le temps : les cours chutent d'abord (fin des années 1970 et années 1980). Étape 2 — Chercher les causes : les recettes baissent, l'État emprunte davantage pour couvrir ses déficits. Étape 3 — Décrire les mesures : programmes d'ajustement structurel, puis dévaluation de janvier 1994.",
+                "answers": [
+                  {
+                    "content": "Chute des cours du cacao et du café"
+                  },
+                  {
+                    "content": "Baisse des recettes d'exportation de l'État"
+                  },
+                  {
+                    "content": "Emprunts supplémentaires pour couvrir les déficits"
+                  },
+                  {
+                    "content": "Programmes d'ajustement structurel"
+                  },
+                  {
+                    "content": "Dévaluation du franc CFA"
+                  }
+                ]
+              },
+              {
+                "content": "Le franc CFA a été dévalué en janvier ___ (année).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer les faits dans le temps : la dévaluation du franc CFA date de janvier 1994. Elle fait passer la parité de 50 à 100 FCFA pour 1 franc français.",
+                "answers": [
+                  {
+                    "content": "1994",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après la dévaluation de janvier 1994, 1 FF vaut 100 FCFA. Un produit importé coûte 20 FF. Combien coûte-t-il en FCFA ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Dégager les effets : après la dévaluation, 20 FF × 100 = 2 000 FCFA. Avant 1994, le même produit coûtait 20 × 50 = 1 000 FCFA : les importations coûtent plus cher.",
+                "answers": [
+                  {
+                    "content": "2000",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "FCFA"
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Décrire les mesures : les programmes d'ajustement structurel sont des réformes liées à des prêts ; la dévaluation baisse la valeur de la monnaie ; l'initiative PPTE allège la dette ; le service de la dette est ce que l'État rembourse chaque année.",
+                "answers": [
+                  {
+                    "content": "Programmes d'ajustement structurel",
+                    "match": "Réformes conclues avec le FMI et la Banque mondiale en échange de prêts"
+                  },
+                  {
+                    "content": "Dévaluation",
+                    "match": "Baisse officielle de la valeur d'une monnaie"
+                  },
+                  {
+                    "content": "Initiative PPTE",
+                    "match": "Allègement de la dette des pays pauvres très endettés"
+                  },
+                  {
+                    "content": "Service de la dette",
+                    "match": "Remboursement du capital et des intérêts d'un emprunt"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont trois mesures typiques d'un programme d'ajustement structurel ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Décrire les mesures prises : un programme d'ajustement demande de réduire les dépenses publiques, de privatiser des entreprises d'État et de libérer les prix et le commerce. Nationaliser des banques ou augmenter les subventions irait en sens inverse.",
+                "answers": [
+                  {
+                    "content": "Réduire les dépenses publiques",
+                    "correct": true
+                  },
+                  {
+                    "content": "Nationaliser toutes les banques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Privatiser des entreprises d'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "Libérer les prix et le commerce",
+                    "correct": true
+                  },
+                  {
+                    "content": "Augmenter les subventions sans limite",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'effet immédiat d'une dévaluation sur le prix en FCFA des produits importés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager les effets : la monnaie vaut moins, donc il faut plus de FCFA pour acheter la même somme en devise étrangère. Les importations deviennent plus chères. Croire qu'elles baissent est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Ils baissent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils ne changent pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils augmentent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils disparaissent",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la crise avec la méthode : situer, chercher les causes, décrire les mesures, dégager les effets.",
+            "questions": [
+              {
+                "content": "L'initiative ___ allège la dette des pays pauvres très endettés ; la Côte d'Ivoire a atteint son point d'achèvement en ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Décrire les mesures : l'initiative PPTE (pays pauvres très endettés) a été lancée en 1996 pour alléger les dettes. Étape 1 — Situer : la Côte d'Ivoire a atteint son point d'achèvement en 2012.",
+                "answers": [
+                  {
+                    "content": "PPTE",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CEDEAO",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "UEMOA",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2012",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1994",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1960",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier trou est un sigle de quatre lettres ; le second est une année du XXIe siècle."
+              },
+              {
+                "content": "En 1994, 1 franc français valait 50 FCFA avant la dévaluation et 100 FCFA après.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : la dévaluation de janvier 1994 a fait passer la parité de 50 à 100 FCFA pour 1 franc français. La valeur du FCFA a donc été divisée par deux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le remboursement du capital et des intérêts d'un emprunt s'appelle le service de la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher les causes : quand les recettes baissent, le service de la dette pèse davantage. C'est le remboursement du capital et des intérêts de la dette.",
+                "answers": [
+                  {
+                    "content": "dette",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot est le même que dans « dette extérieure »."
+              },
+              {
+                "content": "Quelle est la cause première de la crise des années 1980 en Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher les causes : la chute des cours du café et du cacao a fait baisser les recettes d'exportation. Les programmes d'ajustement et la dévaluation sont des réponses à la crise, pas sa cause.",
+                "answers": [
+                  {
+                    "content": "La dévaluation du franc CFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "La chute des cours du café et du cacao",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'initiative PPTE",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une hausse des recettes d'exportation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans quelles années la hausse des prix du café et du cacao a-t-elle enrichi le pays avant la crise ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer les faits dans le temps : les années 1970 sont celles de la hausse des prix, avant la chute des cours de la fin des années 1970 et des années 1980.",
+                "answers": [
+                  {
+                    "content": "Les années 1990",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les années 2010",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les années 1970",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les années 1920",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser les problèmes sociaux",
+          "remember": "Les **problèmes sociaux** touchent la vie des habitants. Le **chômage des jeunes** : la population ivoirienne est très jeune et beaucoup de jeunes arrivent chaque année sur le marché du travail, alors que les emplois formels (avec contrat et protection sociale) sont trop peu nombreux ; le **sous-emploi** désigne ceux qui travaillent trop peu ou pour un revenu trop faible. Le **secteur informel** regroupe les activités non déclarées, sans contrat ni protection sociale (commerce de rue, petits métiers) : il fait vivre beaucoup de familles mais reste précaire. La **pauvreté** : près de 4 Ivoiriens sur 10 vivaient sous le seuil de pauvreté en 2018-2019 (INS, enquête sur le niveau de vie), davantage dans le nord et en milieu rural. L'**urbanisation rapide** : un peu plus de la moitié des habitants vivent en ville (INS, RGPH 2021) ; elle multiplie les quartiers précaires et met l'eau, le logement et les transports sous pression.",
+          "method": [
+            "Identifier le problème social et les personnes qu'il touche.",
+            "Chercher ses causes économiques et démographiques.",
+            "Décrire ses manifestations avec une donnée datée et sourcée.",
+            "Dégager ses conséquences pour la société et pour l'économie."
+          ],
+          "example": {
+            "statement": "Texte écrit pour Lnclass. Awa, 23 ans, a un diplôme mais ne trouve pas d'emploi avec contrat. Elle vend des vêtements au bord d'une route d'Abidjan, sans contrat ni assurance. Analyser le problème social qu'illustre sa situation.",
+            "steps": [
+              "Identifier : le problème est l'emploi des jeunes ; Awa, jeune diplômée, est touchée par le manque d'emplois formels.",
+              "Chercher : beaucoup de jeunes arrivent sur le marché du travail alors que peu d'emplois avec contrat sont créés.",
+              "Décrire : Awa travaille dans le secteur informel (vente de rue, sans contrat ni assurance) ; à l'échelle du pays, près de 4 Ivoiriens sur 10 vivaient sous le seuil de pauvreté en 2018-2019 (INS).",
+              "Dégager : revenu irrégulier, pas de protection sociale, risque de pauvreté ; pour l'économie, peu de cotisations et d'impôts."
+            ]
+          },
+          "pitfall": "Ne confonds pas chômage et secteur informel. Contre-exemple : un jeune qui vend des fruits 8 heures par jour travaille : il n'est pas chômeur, mais son emploi est précaire (sans contrat ni protection). Le chômeur, lui, n'a aucune activité et en cherche une. Le secteur informel s'accompagne souvent de sous-emploi, mais il n'est pas une absence de travail.",
+          "figure": null,
+          "exercise": {
+            "title": "Chômage, informel et pauvreté",
+            "statement": "Dans cet exercice, tu analyses des problèmes sociaux de la Côte d'Ivoire avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle définition correspond au secteur informel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le problème social : le secteur informel regroupe des activités non déclarées, sans contrat ni protection sociale (commerce de rue, petits métiers). Il ne s'agit ni de l'administration, ni des entreprises exportatrices, ni d'emplois réservés aux diplômés.",
+                "answers": [
+                  {
+                    "content": "Les activités de l'administration publique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les entreprises qui exportent leurs produits",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des activités non déclarées, sans contrat ni protection sociale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les emplois réservés aux diplômés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le pourcentage d'habitants qui vivent sous le seuil de pauvreté s'appelle le taux de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire ses manifestations avec une donnée : le taux de pauvreté mesure la part de la population sous le seuil de pauvreté. Il est calculé par l'INS à partir d'enquêtes sur le niveau de vie.",
+                "answers": [
+                  {
+                    "content": "pauvreté",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux causes du chômage des jeunes en Côte d'Ivoire ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Chercher les causes économiques et démographiques : la population est jeune, donc beaucoup de jeunes arrivent chaque année sur le marché du travail, et les emplois formels créés sont trop peu nombreux. Le vieillissement de la population ou un excès d'emplois formels non pourvus iraient en sens inverse.",
+                "answers": [
+                  {
+                    "content": "Une population qui vieillit rapidement",
+                    "correct": false
+                  },
+                  {
+                    "content": "De nombreux jeunes arrivent chaque année sur le marché du travail",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le nombre d'emplois formels créés est trop faible",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un excès d'emplois formels que personne n'occupe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une urbanisation rapide multiplie les quartiers ___ et met l'eau et le logement sous pression.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Dégager les conséquences pour la société : quand les villes grandissent plus vite que les logements et les services, on voit se multiplier les quartiers précaires. Les mots « de luxe », « industriels » ou « agricoles » ne décrivent pas cette conséquence.",
+                "answers": [
+                  {
+                    "content": "résidentiels de luxe",
+                    "correct": false
+                  },
+                  {
+                    "content": "industriels",
+                    "correct": false
+                  },
+                  {
+                    "content": "précaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "agricoles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Texte écrit pour Lnclass (chiffres fictifs). Dans une ville, sur 200 travailleurs, 150 travaillent dans le secteur informel. Quelle part des travailleurs cela représente-t-il (en %) ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Décrire ses manifestations avec une donnée : part = 150 ÷ 200 = 0,75, soit 75 %. Trois travailleurs sur quatre sont dans l'informel dans cette ville fictive.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Un jeune qui vend des fruits tous les jours au bord de la route est un chômeur.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier le problème : ce jeune travaille, il n'est donc pas chômeur. Son emploi est informel : sans contrat ni protection sociale. Confondre chômage et secteur informel est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un problème social avec la méthode : identifier, chercher les causes, décrire avec une donnée, dégager les conséquences.",
+            "questions": [
+              {
+                "content": "Le travail sans contrat ni protection sociale relève du secteur ___ ; la croissance de la part des habitants qui vivent en ville s'appelle l'___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : un travail sans contrat ni protection sociale relève du secteur informel. Étape 3 — Décrire : la croissance de la part des citadins s'appelle l'urbanisation ; l'exode rural est le départ des campagnes, ce n'est pas la même notion.",
+                "answers": [
+                  {
+                    "content": "informel",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "formel",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "public",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "urbanisation",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "exode rural",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "industrialisation",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier trou s'oppose à « formel » ; le second parle de la part des habitants qui vivent en ville."
+              },
+              {
+                "content": "D'après l'INS (2018-2019), moins de 1 Ivoirien sur 10 vivait sous le seuil de pauvreté.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Décrire avec une donnée datée et sourcée : près de 4 Ivoiriens sur 10 vivaient sous le seuil de pauvreté en 2018-2019 (INS). Moins de 1 sur 10 serait très loin de ce chiffre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le chiffre à retenir est de l'ordre de 4 habitants sur 10."
+              },
+              {
+                "content": "Quel est le premier pas de la méthode pour analyser un problème social ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le problème social et les personnes qu'il touche : on nomme d'abord le problème avant d'en chercher les causes et les conséquences.",
+                "answers": [
+                  {
+                    "content": "Dégager les conséquences",
+                    "correct": false
+                  },
+                  {
+                    "content": "Identifier le problème et les personnes touchées",
+                    "correct": true
+                  },
+                  {
+                    "content": "Citer une solution",
+                    "correct": false
+                  },
+                  {
+                    "content": "Recopier un chiffre sans source",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne qui travaille trop peu ou pour un revenu trop faible est en ___ (un mot).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : le sous-emploi désigne ceux qui travaillent trop peu ou pour un revenu trop faible. Ce n'est pas le chômage, qui est l'absence totale d'activité.",
+                "answers": [
+                  {
+                    "content": "sous-emploi",
+                    "correct": true
+                  },
+                  {
+                    "content": "sous emploi",
+                    "correct": true
+                  },
+                  {
+                    "content": "sousemploi",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot commence par « sous »."
+              },
+              {
+                "content": "Quelles sont deux conséquences d'une urbanisation rapide ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Dégager les conséquences : l'urbanisation rapide multiplie les quartiers précaires et met l'eau, le logement et les transports sous pression. Elle ne fait ni baisser la demande de logements ni disparaître le secteur informel.",
+                "answers": [
+                  {
+                    "content": "La multiplication des quartiers précaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une pression sur l'eau, le logement et les transports",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une baisse de la demande de logements",
+                    "correct": false
+                  },
+                  {
+                    "content": "La disparition du secteur informel",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser les problèmes environnementaux et les déséquilibres régionaux",
+          "remember": "La **déforestation** est la disparition de la forêt. Le couvert forestier ivoirien est passé d'environ 16 millions d'hectares en 1900 à environ 12 en 1960, puis à environ 3 en 2015 (ordres de grandeur couramment cités (documents de la stratégie nationale REDD+ ; les valeurs varient selon la définition de la forêt)). Ses causes sont humaines et économiques : extension des plantations de cacao et de café, exploitation du bois, croissance des villes. Ses conséquences : érosion des sols, perte de **biodiversité** (diversité des espèces vivantes), pluies plus irrégulières, baisse des rendements. Les **déséquilibres régionaux** sont les écarts de développement entre régions : Abidjan et le sud concentrent la population, les industries, les ports et les meilleures routes ; le nord, le nord-ouest et le nord-est sont moins équipés et connaissent plus de pauvreté. Ces écarts alimentent l'**exode rural**, le départ des habitants des campagnes vers les villes, surtout Abidjan.",
+          "method": [
+            "Localiser le problème sur une carte : où se passe-t-il ?",
+            "Décrire ses manifestations avec une donnée datée et sourcée.",
+            "Expliquer ses causes humaines et économiques.",
+            "Dégager ses conséquences et les écarts entre régions."
+          ],
+          "example": {
+            "statement": "Expliquer la déforestation dans la zone forestière du sud et de l'ouest de la Côte d'Ivoire.",
+            "steps": [
+              "Localiser : la forêt dense couvre le sud et l'ouest du pays, la zone des plantations de cacao et de café.",
+              "Décrire : le couvert forestier passe d'environ 12 millions d'hectares en 1960 à environ 3 en 2015 (ordres de grandeur couramment cités), soit une perte d'environ 9 millions d'hectares.",
+              "Expliquer : les planteurs défrichent pour étendre leurs cultures ; s'y ajoutent l'exploitation du bois et la croissance des villes.",
+              "Dégager : érosion des sols, perte de biodiversité, pluies plus irrégulières et, à terme, baisse des rendements pour les planteurs eux-mêmes."
+            ]
+          },
+          "pitfall": "Ne confonds pas cause et conséquence. L'érosion des sols est une conséquence de la déforestation, pas sa cause. Contre-exemple chiffré : si la forêt passe d'environ 12 à environ 3 millions d'hectares, elle perd environ 9 millions d'hectares, soit les trois quarts (9 ÷ 12 = 0,75). Cette perte vient des défrichements (la cause) ; l'érosion s'ensuit (la conséquence).",
+          "figure": "foret-couvert",
+          "exercise": {
+            "title": "Déforestation et déséquilibres régionaux",
+            "statement": "Dans cet exercice, tu analyses un problème environnemental et un déséquilibre régional avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "carte-desequilibres",
+            "questions": [
+              {
+                "content": "Quelle zone naturelle a été la plus touchée par la déforestation en Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser le problème sur une carte : la déforestation touche la forêt dense du sud et de l'ouest, là où se trouvent les plantations. La savane du nord n'est pas une zone de forêt dense.",
+                "answers": [
+                  {
+                    "content": "La savane du nord",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les rives des lagunes de la côte seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "La forêt dense du sud et de l'ouest",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aucune : la forêt a augmenté",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le couvert forestier ivoirien est passé d'environ 12 millions d'hectares en 1960 à environ 3 millions d'hectares en 2015 (ordres de grandeur couramment cités, documents REDD+ ; les valeurs varient selon la définition de la forêt). Quelle perte cela représente-t-il, en millions d'hectares ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Décrire ses manifestations avec une donnée : perte = 12 − 3 = 9 millions d'hectares, soit les trois quarts de la forêt de 1960.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "M ha"
+              },
+              {
+                "content": "Quelles sont trois causes de la déforestation en Côte d'Ivoire ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer ses causes humaines et économiques : l'extension des plantations, l'exploitation du bois et la croissance des villes réduisent la forêt. Un reboisement massif ou une baisse de la population iraient en sens inverse.",
+                "answers": [
+                  {
+                    "content": "L'extension des plantations de cacao et de café",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un reboisement massif des savanes",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'exploitation du bois",
+                    "correct": true
+                  },
+                  {
+                    "content": "La croissance des villes et des besoins en terres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une baisse de la population",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'érosion des sols est une cause de la déforestation.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer les causes : les causes de la déforestation sont les défrichements, l'exploitation du bois et la croissance des villes. Étape 4 — Dégager les conséquences : l'érosion des sols est une conséquence. Les confondre est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Dégager ses conséquences et les écarts entre régions : la déforestation est la disparition de la forêt, le déséquilibre régional un écart entre régions, l'exode rural un départ vers les villes, la biodiversité la diversité des espèces.",
+                "answers": [
+                  {
+                    "content": "Déforestation",
+                    "match": "Disparition progressive de la forêt"
+                  },
+                  {
+                    "content": "Déséquilibre régional",
+                    "match": "Écart de développement entre des régions d'un même pays"
+                  },
+                  {
+                    "content": "Exode rural",
+                    "match": "Départ des habitants des campagnes vers les villes"
+                  },
+                  {
+                    "content": "Biodiversité",
+                    "match": "Diversité des espèces vivantes"
+                  }
+                ]
+              },
+              {
+                "content": "Quel district concentre la plus grande part des industries et le principal port du pays ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager les écarts entre régions : Abidjan, avec son port et ses industries, concentre l'essentiel de l'activité, alors que le nord, le nord-ouest et le nord-est sont moins équipés. Cela explique le déséquilibre régional et l'exode rural vers Abidjan.",
+                "answers": [
+                  {
+                    "content": "Le district des Savanes, dans le nord",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le district du Zanzan, dans le nord-est",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le district du Woroba, dans le nord-ouest",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le district d'Abidjan, dans le sud",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un problème environnemental et régional avec la méthode : localiser, décrire, expliquer, dégager.",
+            "questions": [
+              {
+                "content": "La disparition de la forêt s'appelle la ___ ; la diversité des espèces vivantes s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Décrire : la disparition de la forêt est la déforestation. Étape 4 — Dégager les conséquences : elle menace la biodiversité, c'est-à-dire la diversité des espèces vivantes.",
+                "answers": [
+                  {
+                    "content": "déforestation",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "désertification",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "urbanisation",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "biodiversité",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "démographie",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "dévaluation",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les deux mots commencent par « dé » et « bio » ; l'un parle de forêt, l'autre d'espèces vivantes."
+              },
+              {
+                "content": "Le nord, le nord-ouest et le nord-est du pays sont aussi équipés en industries et en ports qu'Abidjan.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Dégager les écarts entre régions : Abidjan et le sud concentrent les industries, les ports et les meilleures routes ; le nord, le nord-ouest et le nord-est sont moins équipés. C'est un déséquilibre régional.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à la carte : où se trouve le port principal ?"
+              },
+              {
+                "content": "Le départ des habitants des campagnes vers les villes s'appelle l'exode ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Dégager les conséquences et les écarts : l'exode rural est le départ des campagnes vers les villes, surtout Abidjan. Il est alimenté par les écarts entre régions.",
+                "answers": [
+                  {
+                    "content": "rural",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour analyser un problème environnemental.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 à 4 : on localise d'abord le problème, puis on le décrit avec une donnée datée et sourcée, on explique ses causes humaines et économiques, enfin on dégage ses conséquences.",
+                "answers": [
+                  {
+                    "content": "Localiser le problème sur une carte"
+                  },
+                  {
+                    "content": "Décrire ses manifestations avec une donnée"
+                  },
+                  {
+                    "content": "Expliquer ses causes"
+                  },
+                  {
+                    "content": "Dégager ses conséquences"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle donnée décrit le mieux l'ampleur de la déforestation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire ses manifestations avec une donnée datée et sourcée : le couvert forestier passe d'environ 12 millions d'hectares (1960) à environ 3 (2015). Les autres chiffres concernent d'autres sujets.",
+                "answers": [
+                  {
+                    "content": "Le nombre d'habitants d'Abidjan en 2021",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le prix du cacao en 1980",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le couvert forestier passe d'environ 12 millions d'hectares en 1960 à environ 3 en 2015",
+                    "correct": true
+                  },
+                  {
+                    "content": "La dette extérieure en 1994",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Envisager des solutions et analyser un document",
+          "remember": "Face aux problèmes de développement, plusieurs **solutions** sont envisagées. La **diversification** consiste à produire et à vendre des produits plus variés : d'autres cultures (hévéa, anacarde, palmier à huile, cultures vivrières) et d'autres secteurs (industrie, services) ; elle réduit la dépendance à un seul produit. La **transformation locale** consiste à transformer les matières premières sur place (broyer les fèves de cacao en beurre et en poudre) : elle crée de la **valeur ajoutée** (richesse créée par la transformation) et des emplois. Les **plans nationaux de développement** (PND) fixent des objectifs sur plusieurs années : infrastructures, formation des jeunes, aménagement du territoire. S'y ajoutent le reboisement et la formation professionnelle. Aucune solution ne suffit seule : leur effet se mesure dans le temps. Pour **analyser un document** de type bac : le présenter, dégager les problèmes, associer les solutions, conclure.",
+          "method": [
+            "Présenter le document : nature, auteur, date et thème.",
+            "Dégager les problèmes et les idées principales qu'il contient.",
+            "Associer à chaque problème une solution adaptée.",
+            "Conclure en nuançant : les limites et les conditions des solutions."
+          ],
+          "example": {
+            "statement": "Texte écrit pour Lnclass (document fictif, 2024). Une coopérative de cacao ouvre un petit atelier qui broie une partie de ses fèves, plante aussi des anacardiers et forme des jeunes du village. Analyser ce document.",
+            "steps": [
+              "Présenter : texte écrit pour Lnclass, daté de 2024 ; il décrit les initiatives d'une coopérative de cacao.",
+              "Dégager : les problèmes visés sont la dépendance au cacao brut et le chômage des jeunes.",
+              "Associer : l'atelier de broyage est une transformation locale ; les anacardiers sont une diversification ; la formation répond au chômage des jeunes.",
+              "Conclure : ces initiatives créent revenus et emplois, mais une coopérative seule ne règle pas la dépendance du pays ; elles doivent s'inscrire dans un plan national et durer."
+            ]
+          },
+          "pitfall": "Ne confonds pas diversifier et transformer. Contre-exemple : une coopérative qui passe de 1 produit (le cacao) à 3 (cacao, anacarde, hévéa) diversifie ; une coopérative qui reste à 1 produit mais le broie en beurre de cacao transforme. Planter des anacardiers n'est pas de la transformation, et broyer des fèves n'est pas de la diversification.",
+          "figure": null,
+          "exercise": {
+            "title": "Solutions et analyse d'un document",
+            "statement": "Dans cet exercice, tu associes des solutions aux problèmes de développement avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque solution au problème auquel elle répond.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Associer à chaque problème une solution adaptée : la diversification répond à la dépendance, la transformation locale à l'exportation de produits bruts, le reboisement à la déforestation, la formation professionnelle au chômage des jeunes.",
+                "answers": [
+                  {
+                    "content": "Diversification",
+                    "match": "Dépendance à un seul produit"
+                  },
+                  {
+                    "content": "Transformation locale",
+                    "match": "Exportation de matières premières brutes"
+                  },
+                  {
+                    "content": "Reboisement",
+                    "match": "Déforestation"
+                  },
+                  {
+                    "content": "Formation professionnelle",
+                    "match": "Chômage des jeunes"
+                  }
+                ]
+              },
+              {
+                "content": "Que signifie transformer le cacao sur place ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer une solution : transformer sur place, c'est broyer les fèves en beurre et en poudre dans le pays, ce qui crée de la valeur ajoutée et des emplois. Exporter les fèves sans traitement est le contraire.",
+                "answers": [
+                  {
+                    "content": "Exporter les fèves sans les traiter",
+                    "correct": false
+                  },
+                  {
+                    "content": "Importer du chocolat de l'étranger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Broyer les fèves en beurre et en poudre dans le pays",
+                    "correct": true
+                  },
+                  {
+                    "content": "Replanter des cacaoyers",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Diversifier, c'est produire davantage du même produit.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Associer une solution : diversifier, c'est produire et vendre des produits différents pour réduire la dépendance à un seul. Produire davantage du même produit n'est pas de la diversification, c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un plan national de développement fixe des ___ à atteindre sur plusieurs années.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Associer une solution : un plan national de développement fixe des objectifs à atteindre sur plusieurs années (infrastructures, formation, aménagement du territoire).",
+                "answers": [
+                  {
+                    "content": "objectifs",
+                    "correct": true
+                  },
+                  {
+                    "content": "objectif",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux conséquences de la transformation locale du cacao ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure en nuançant : transformer sur place crée des emplois dans les usines et de la valeur ajoutée dans le pays. Elle ne fait pas baisser les emplois ni augmenter la dépendance aux fèves brutes.",
+                "answers": [
+                  {
+                    "content": "La création d'emplois dans les usines",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une hausse de la dépendance aux fèves brutes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une hausse de la valeur ajoutée dans le pays",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une baisse du nombre d'emplois",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'analyse d'un document de type bac.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 à 4 : on présente d'abord le document (nature, auteur, date), on dégage les problèmes, on associe une solution adaptée à chacun, enfin on conclut en nuançant.",
+                "answers": [
+                  {
+                    "content": "Présenter le document"
+                  },
+                  {
+                    "content": "Dégager les problèmes et les idées principales"
+                  },
+                  {
+                    "content": "Associer à chaque problème une solution"
+                  },
+                  {
+                    "content": "Conclure en nuançant"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à envisager des solutions et à analyser un document avec la méthode : présenter, dégager, associer, conclure.",
+            "questions": [
+              {
+                "content": "Produire et vendre des produits plus variés s'appelle la ___ ; la richesse créée par la transformation d'un produit s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Associer : produire des produits plus variés, c'est la diversification. La richesse créée par la transformation est la valeur ajoutée.",
+                "answers": [
+                  {
+                    "content": "diversification",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "spécialisation",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "dévaluation",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "valeur ajoutée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "dette extérieure",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "pauvreté",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot vient de « divers » ; le second est une richesse en plus."
+              },
+              {
+                "content": "Reboiser des forêts répond au problème de la déforestation.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Associer à chaque problème une solution adaptée : replanter des arbres répond directement à la disparition de la forêt. Le reboisement fait partie des solutions envisagées.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel problème a pour cause la disparition des arbres ?"
+              },
+              {
+                "content": "Quelle solution répond au chômage des jeunes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer une solution adaptée : la formation professionnelle et la création d'emplois répondent au chômage des jeunes. Exporter plus de fèves brutes ou dévaluer ne créent pas d'emplois qualifiés.",
+                "answers": [
+                  {
+                    "content": "La hausse des exportations de fèves brutes",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dévaluation du franc CFA",
+                    "correct": false
+                  },
+                  {
+                    "content": "La formation professionnelle et la création d'emplois",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le défrichement de nouvelles forêts",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Faire passer une matière première de l'état brut à un produit fini s'appelle la ___ locale.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Associer une solution : la transformation locale fait passer la matière première de l'état brut à un produit fini, dans le pays.",
+                "answers": [
+                  {
+                    "content": "transformation",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le mot est le même que dans « transformer »."
+              },
+              {
+                "content": "Quelle est la dernière étape de la méthode pour analyser un document ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure en nuançant : après avoir présenté le document, dégagé les problèmes et associé les solutions, on termine en montrant les limites et les conditions des solutions.",
+                "answers": [
+                  {
+                    "content": "Présenter le document",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dégager les problèmes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Conclure en nuançant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Associer une solution",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le cacao : dépendance, chute des cours et dette",
+          "statement": "Document : texte écrit pour Lnclass. Dans un village de la zone forestière, les planteurs vendent leurs fèves de cacao brutes. Le prix est fixé sur les marchés internationaux. Une année, il baisse fortement : les familles gagnent moins et l'État, qui reçoit moins de recettes, emprunte davantage. Le pays est le premier producteur mondial de cacao (ICCO, campagne 2022-2023). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "cercle-dette",
+          "questions": [
+            {
+              "content": "Comment appelle-t-on la situation d'un pays dont l'économie repose sur peu de produits dont le prix est fixé à l'extérieur ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le produit exporté et sa part : un pays qui vit surtout d'un produit brut, le cacao ici, est dans une situation de dépendance. Étape 2 — Repérer qui fixe le prix : les cours mondiaux, hors de son contrôle. La diversification est au contraire une solution à cette dépendance.",
+              "answers": [
+                {
+                  "content": "L'autonomie",
+                  "correct": false
+                },
+                {
+                  "content": "La diversification",
+                  "correct": false
+                },
+                {
+                  "content": "La dépendance",
+                  "correct": true
+                },
+                {
+                  "content": "L'urbanisation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les planteurs ivoiriens fixent eux-mêmes le cours mondial du cacao.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Repérer qui fixe le prix : le cours mondial se décide sur les marchés internationaux, entre acheteurs et vendeurs du monde entier. Un pays, même premier producteur, ne le contrôle pas ; encore moins un planteur.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Texte écrit pour Lnclass (chiffres fictifs). L'indice du prix du cacao exporté d'un pays est 45 et l'indice du prix des produits qu'il importe est 90. Quels sont ses termes de l'échange (indice des prix exportés ÷ indice des prix importés × 100) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Comparer les prix des exportations et des importations : 45 ÷ 90 × 100 = 50. Un résultat très inférieur à 100 montre une forte détérioration : le pays doit vendre deux fois plus de cacao pour acheter la même quantité de produits importés.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quelles sont deux conséquences de la baisse du prix du cacao décrite dans le texte de l'énoncé ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Dégager les conséquences : les recettes de l'État diminuent, ce qui le pousse à emprunter, et les familles de planteurs gagnent moins. L'État ne voit pas ses recettes monter, et la dette ne se réduit pas d'elle-même.",
+              "answers": [
+                {
+                  "content": "Les recettes de l'État augmentent",
+                  "correct": false
+                },
+                {
+                  "content": "L'État emprunte davantage et sa dette augmente",
+                  "correct": true
+                },
+                {
+                  "content": "Les revenus des familles de planteurs baissent",
+                  "correct": true
+                },
+                {
+                  "content": "La dette de l'État disparaît",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du cercle vicieux de la dette d'un pays producteur de cacao.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Identifier le produit : la dépendance à un produit brut expose le pays. Étape 2 — Repérer le prix : les cours mondiaux chutent. Étape 4 — Dégager les conséquences : les recettes baissent, l'État emprunte et la dette monte. Le remboursement freine ensuite la diversification et entretient la dépendance : c'est un cercle vicieux.",
+              "answers": [
+                {
+                  "content": "Dépendance à un produit exporté brut"
+                },
+                {
+                  "content": "Chute des cours mondiaux"
+                },
+                {
+                  "content": "Baisse des recettes de l'État"
+                },
+                {
+                  "content": "Emprunts et hausse de la dette"
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi la chute des cours du cacao peut conduire un État à s'endetter davantage.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Quand les cours du cacao chutent, la Côte d'Ivoire vend la même quantité de fèves pour moins d'argent, donc les recettes de l'État baissent. Comme ses dépenses (écoles, routes, remboursements) restent à payer, il emprunte davantage et sa dette augmente. Barème : baisse des recettes (0,5 point), emprunt pour financer les dépenses (1 point), lien logique (0,5 point).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Cite la baisse des recettes d'exportation de l'État (0,5 point)",
+                "Explique que l'État emprunte pour financer ses dépenses (1 point)",
+                "Relie les deux idées par un mot de liaison (0,5 point)"
+              ],
+              "starter": "Quand les cours du cacao chutent, les recettes de l'État…"
+            }
+          ]
+        },
+        {
+          "title": "Ajustement structurel et dévaluation",
+          "statement": "Document : texte écrit pour Lnclass. En janvier 1994, le franc CFA est dévalué : 1 franc français passe de 50 à 100 FCFA. Un commerçant d'Abidjan qui importe des tissus constate que ses prix d'achat augmentent. Un exportateur de café voit ses produits devenir moins chers pour les acheteurs étrangers. À la même époque, l'État applique un programme d'ajustement structurel conclu avec les institutions financières internationales. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "crise-ajustement",
+          "questions": [
+            {
+              "content": "Que demande en général un programme d'ajustement structurel à un État ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Décrire les mesures prises : un programme d'ajustement structurel est un ensemble de réformes en échange de prêts, du FMI et de la Banque mondiale. Il demande de réduire les dépenses publiques, de privatiser des entreprises d'État et de libérer les prix et le commerce.",
+              "answers": [
+                {
+                  "content": "Augmenter sans limite les dépenses publiques",
+                  "correct": false
+                },
+                {
+                  "content": "Réduire les dépenses publiques et privatiser des entreprises d'État",
+                  "correct": true
+                },
+                {
+                  "content": "Fermer toutes les frontières au commerce",
+                  "correct": false
+                },
+                {
+                  "content": "Annuler la dette de l'État",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après la dévaluation de janvier 1994, 1 FF vaut 100 FCFA. Un tissu importé coûte 30 FF. Combien coûte-t-il en FCFA ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Décrire les mesures : la parité est passée à 100 FCFA pour 1 FF. Étape 4 — Dégager les effets : 30 FF × 100 = 3 000 FCFA. Avant la dévaluation, le même tissu coûtait 30 × 50 = 1 500 FCFA : le prix en FCFA a doublé.",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "FCFA"
+            },
+            {
+              "content": "Pourquoi l'exportateur de café du texte de l'énoncé est-il avantagé par la dévaluation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Dégager les effets : la monnaie vaut moins, donc le café, payé en devises par l'acheteur étranger, devient moins cher pour lui, ce qui favorise les ventes. Les importations, elles, coûtent plus cher : c'est l'inverse pour le commerçant.",
+              "answers": [
+                {
+                  "content": "Son café devient moins cher pour les acheteurs étrangers",
+                  "correct": true
+                },
+                {
+                  "content": "Son café devient plus cher pour les acheteurs étrangers",
+                  "correct": false
+                },
+                {
+                  "content": "L'État lui rembourse sa dette",
+                  "correct": false
+                },
+                {
+                  "content": "Les prix mondiaux sont fixés par lui",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le programme d'ajustement structurel vise à augmenter fortement les dépenses publiques.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Décrire les mesures prises : un programme d'ajustement structurel demande au contraire de réduire les dépenses publiques, de privatiser et de libérer les prix. Augmenter fortement les dépenses irait en sens inverse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux conséquences de la dévaluation de janvier 1994 pour les habitants ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Dégager les effets : les produits importés coûtent plus cher en FCFA, et les produits exportés deviennent moins chers pour les étrangers. Les importations ne baissent pas de prix, et la dévaluation n'efface pas la dette.",
+              "answers": [
+                {
+                  "content": "Les produits importés coûtent plus cher en FCFA",
+                  "correct": true
+                },
+                {
+                  "content": "Les produits importés coûtent moins cher en FCFA",
+                  "correct": false
+                },
+                {
+                  "content": "Les produits exportés deviennent moins chers pour les acheteurs étrangers",
+                  "correct": true
+                },
+                {
+                  "content": "La dette extérieure est effacée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi le commerçant qui importe des tissus et l'exportateur de café ne sont pas touchés de la même façon par la dévaluation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Après la dévaluation, il faut plus de FCFA pour acheter la même somme en devises. Le commerçant paie donc ses tissus importés plus cher en FCFA : son prix d'achat augmente. À l'inverse, l'exportateur vend son café en devises : pour l'acheteur étranger, il devient moins cher, ce qui peut augmenter ses ventes. Barème : importations plus chères (0,5 point), exportations moins chères pour l'étranger (1 point), comparaison (0,5 point).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Explique l'effet de la dévaluation sur le prix des importations en FCFA (0,5 point)",
+                "Explique l'effet sur le prix des exportations pour l'acheteur étranger (1 point)",
+                "Conclut que l'un paie plus cher et l'autre vend plus facilement (0,5 point)"
+              ],
+              "starter": "Le commerçant paie ses importations plus cher, alors que l'exportateur…"
+            }
+          ]
+        },
+        {
+          "title": "Forêt, jeunesse et urbanisation",
+          "statement": "Document 1 : courbe du couvert forestier de la Côte d'Ivoire, en millions d'hectares, en ordres de grandeur : environ 16 en 1900, 12 en 1960, 3 en 2015 (ordres de grandeur couramment cités, documents de la stratégie nationale REDD+ ; les valeurs varient selon la définition de la forêt ; trois points inégalement espacés, 1900, 1960 et 2015, sur un axe régulier). Document 2 : texte écrit pour Lnclass. À Abidjan, de nombreux jeunes arrivés des campagnes travaillent dans le commerce de rue, sans contrat, et vivent dans des quartiers précaires. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "foret-couvert",
+          "questions": [
+            {
+              "content": "Le couvert forestier ivoirien est passé d'environ 16 millions d'hectares en 1900 à environ 12 millions en 1960 (ordres de grandeur couramment cités, documents REDD+). Quelle perte cela représente-t-il, en millions d'hectares ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Localiser et lire la donnée : la courbe descend de 16 à 12. Étape 2 — Décrire avec une donnée : perte = 16 − 12 = 4 millions d'hectares entre 1900 et 1960.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "M ha"
+            },
+            {
+              "content": "Le couvert forestier est passé d'environ 12 millions d'hectares en 1960 à environ 3 millions en 2015 (ordres de grandeur couramment cités, documents REDD+). Quel pourcentage de la forêt de 1960 a disparu ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Décrire avec une donnée : perte = 12 − 3 = 9 millions d'hectares. Part perdue = 9 ÷ 12 = 0,75, soit 75 %. Les trois quarts de la forêt de 1960 ont disparu en 2015.",
+              "answers": [
+                {
+                  "content": "75",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Quelle est la cause principale de la déforestation dans la zone forestière du sud et de l'ouest ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer les causes humaines et économiques : les planteurs défrichent pour étendre les plantations de cacao et de café. L'érosion des sols est une conséquence, pas une cause ; la baisse de la population irait en sens inverse.",
+              "answers": [
+                {
+                  "content": "L'érosion des sols",
+                  "correct": false
+                },
+                {
+                  "content": "L'extension des plantations de cacao et de café",
+                  "correct": true
+                },
+                {
+                  "content": "Une baisse de la population",
+                  "correct": false
+                },
+                {
+                  "content": "La dévaluation du franc CFA",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque problème à sa conséquence principale.",
+              "question_type": "matching",
+              "explanation": "Étape 4 — Dégager les conséquences : chaque problème étudié a sa conséquence propre. La déforestation provoque l'érosion et la perte de biodiversité ; l'informel donne des emplois précaires ; l'urbanisation rapide multiplie les quartiers précaires ; le chômage laisse les jeunes sans revenu régulier.",
+              "answers": [
+                {
+                  "content": "Déforestation",
+                  "match": "Érosion des sols et perte de biodiversité"
+                },
+                {
+                  "content": "Travail informel",
+                  "match": "Revenus irréguliers et pas de protection sociale"
+                },
+                {
+                  "content": "Urbanisation rapide",
+                  "match": "Quartiers précaires et pression sur l'eau et le logement"
+                },
+                {
+                  "content": "Chômage des jeunes",
+                  "match": "Jeunes sans revenu régulier et risque de pauvreté"
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux problèmes sociaux cités dans le texte de l'énoncé ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Identifier les problèmes sociaux : le texte parle du travail informel (commerce de rue, sans contrat) et des quartiers précaires liés à l'urbanisation. La déforestation est un problème environnemental ; la dévaluation est une mesure monétaire.",
+              "answers": [
+                {
+                  "content": "Le travail informel",
+                  "correct": true
+                },
+                {
+                  "content": "La déforestation du sud",
+                  "correct": false
+                },
+                {
+                  "content": "Les quartiers précaires",
+                  "correct": true
+                },
+                {
+                  "content": "La dévaluation du franc CFA",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases le lien entre la déforestation et la dépendance de la Côte d'Ivoire à l'agriculture d'exportation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : La Côte d'Ivoire vit en grande partie de produits agricoles exportés bruts, comme le cacao, dont le prix est fixé par les cours mondiaux. Pour accroître la production, les planteurs étendent leurs plantations en défrichant la forêt, ce qui entraîne la déforestation. Ainsi la dépendance à l'agriculture d'exportation contribue au recul de la forêt, avec des risques d'érosion et de perte de biodiversité. Barème : cause (1 point), dépendance expliquée (1 point), lien (1 point).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Cite l'extension des plantations d'exportation comme cause de la déforestation (1 point)",
+                "Explique la dépendance à un produit brut dont le prix est fixé à l'extérieur (1 point)",
+                "Relie les deux idées dans une phrase explicative (1 point)"
+              ],
+              "starter": "Pour produire davantage de cacao, les planteurs…"
+            }
+          ]
+        },
+        {
+          "title": "Commentaire de document : problèmes et solutions du développement",
+          "statement": "Document : extrait d'un rapport fictif sur le développement d'un pays producteur de cacao, texte écrit pour Lnclass, daté de 2024. « Le pays tire l'essentiel de ses devises de quelques produits agricoles vendus bruts. Ces dernières décennies, les cours ont chuté à plusieurs reprises, l'État s'est endetté, puis a conclu des programmes d'ajustement avec les institutions financières internationales. Les jeunes, très nombreux, trouvent surtout des emplois informels. La forêt recule à mesure que s'étendent les plantations. La capitale économique concentre les industries et les services, tandis que le nord est moins équipé. Pour sortir de cette situation, les autorités misent sur la diversification, la transformation locale des produits et des plans de développement pluriannuels. » Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "carte-desequilibres",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document de l'énoncé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter le document : on en donne la nature, l'auteur et la date. Ici, c'est un extrait de rapport, texte écrit pour Lnclass, daté de 2024. Ce n'est ni un tableau statistique, ni une carte, ni un discours.",
+              "answers": [
+                {
+                  "content": "Un tableau statistique",
+                  "correct": false
+                },
+                {
+                  "content": "Une carte",
+                  "correct": false
+                },
+                {
+                  "content": "Un extrait de rapport",
+                  "correct": true
+                },
+                {
+                  "content": "Un discours",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont trois problèmes de développement que relève le document de l'énoncé ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Dégager les problèmes : le texte cite la dépendance à quelques produits agricoles bruts, l'endettement de l'État et le recul de la forêt. Il ne parle ni d'un excès d'industries ni de l'absence de production agricole.",
+              "answers": [
+                {
+                  "content": "La dépendance à quelques produits agricoles vendus bruts",
+                  "correct": true
+                },
+                {
+                  "content": "Un excès d'industries dans tout le pays",
+                  "correct": false
+                },
+                {
+                  "content": "L'endettement de l'État",
+                  "correct": true
+                },
+                {
+                  "content": "Le recul de la forêt",
+                  "correct": true
+                },
+                {
+                  "content": "L'absence de toute production agricole",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Selon le document de l'énoncé, la capitale économique est moins équipée que le nord.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Dégager les idées principales : le texte dit que la capitale économique concentre les industries et les services, tandis que le nord est moins équipé. L'affirmation inverse est fausse : il s'agit d'un déséquilibre régional.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Selon le document, les autorités misent sur la diversification, la transformation locale et des plans de ___ pluriannuels.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Associer à chaque problème une solution : le texte cite trois solutions, dont les plans de développement pluriannuels, qui rejoignent les plans nationaux de développement du cours.",
+              "answers": [
+                {
+                  "content": "développement",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre cette chaîne de faits décrite dans le document de l'énoncé.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Dégager les idées : le texte suit l'ordre des faits. D'abord les cours chutent, ce qui conduit l'État à s'endetter, puis il conclut des programmes d'ajustement avec les institutions financières internationales. Cet enchaînement est celui de la crise vue en cours.",
+              "answers": [
+                {
+                  "content": "Les cours chutent à plusieurs reprises"
+                },
+                {
+                  "content": "L'État s'endette"
+                },
+                {
+                  "content": "L'État conclut des programmes d'ajustement"
+                }
+              ]
+            },
+            {
+              "content": "Le document évoque une capitale économique qui concentre les industries et un nord moins équipé. Explique en deux phrases un risque de ce déséquilibre régional pour le pays.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Quand les industries et les services sont concentrés dans la capitale économique, les habitants du nord, moins équipé, partent vers la capitale à la recherche d'un emploi : c'est l'exode rural. Il alourdit la pression sur le logement, l'eau et les transports de la ville, tandis que la pauvreté persiste dans les régions les moins équipées. Barème : déséquilibre nommé (0,5 point), risque cité (1 point), explication (0,5 point).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Nomme le déséquilibre entre la capitale et le nord (0,5 point)",
+                "Cite un risque : exode rural, pression sur les villes ou pauvreté du nord (1 point)",
+                "Relie le risque à son explication (0,5 point)"
+              ],
+              "starter": "Quand tout se concentre dans la capitale économique, les habitants du nord…"
+            },
+            {
+              "content": "Commentaire guidé : en un paragraphe organisé d'une dizaine de lignes, présente le document, montre les problèmes de développement du pays puis les solutions envisagées, et conclus en nuançant.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Ce document est un extrait de rapport fictif, écrit pour Lnclass en 2024, sur le développement d'un pays producteur de cacao. Il relève plusieurs problèmes : la dépendance à des produits agricoles vendus bruts, dont le prix est fixé par les cours mondiaux, l'endettement de l'État après les chutes de cours et les programmes d'ajustement structurel, et le recul de la forêt, ainsi que le chômage et l'informel chez les jeunes et un déséquilibre entre la capitale et le nord. Face à cela, les autorités misent sur la diversification, qui réduit la dépendance à un seul produit, sur la transformation locale, qui crée de la valeur ajoutée et des emplois, et sur des plans de développement qui fixent des objectifs sur plusieurs années. Ces solutions sont cohérentes avec les problèmes, mais leur effet est lent et dépend aussi des cours mondiaux : aucune ne suffit seule. Barème : présentation (1 point), problèmes (2 points), solutions associées (2 points), notions du cours (2 points), conclusion nuancée (1 point).",
+              "answers": [],
+              "points": 8,
+              "criteria": [
+                "Présente le document : nature, date, thème (1 point)",
+                "Dégage plusieurs problèmes avec les mots du cours (2 points)",
+                "Associe chaque solution du texte au problème qu'elle vise (2 points)",
+                "Mobilise le cours : cours mondiaux, ajustement structurel, valeur ajoutée (2 points)",
+                "Conclut en nuançant avec un texte organisé (1 point)"
+              ],
+              "starter": "Ce document est un extrait de rapport qui…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

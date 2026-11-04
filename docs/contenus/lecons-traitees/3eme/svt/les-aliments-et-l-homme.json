@@ -381,6 +381,72 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à classer un aliment selon son rôle, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un aliment riche en glucides est un aliment ___. Un aliment riche en protides est un aliment ___.",
+                "question_type": "fill_blank",
+                "hint": "Pour chaque constituant principal, pense au rôle qu'il joue dans le corps.",
+                "explanation": "Étape 1 — Repérer l'origine : elle ne donne pas le rôle. Étape 2 — Identifier le constituant principal. Étape 3 — Associer au rôle : les glucides fournissent de l'énergie, les protides construisent et réparent le corps. Étape 4 — Conclure : riche en glucides, l'aliment est énergétique ; riche en protides, il est bâtisseur.",
+                "answers": [
+                  {
+                    "content": "énergétique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bâtisseur",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "L'igname est d'origine végétale. Que faut-il chercher d'abord pour dire s'il est énergétique, bâtisseur ou protecteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer l'origine : ici, végétale. Mais l'origine ne dit pas le rôle. Étape 2 — Identifier le constituant principal : c'est lui qui permet d'associer le rôle (étape 3) et de nommer la classe (étape 4).",
+                "answers": [
+                  {
+                    "content": "Son constituant principal",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son origine seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa couleur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le lieu où on l'achète",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque constituant principal à la classe d'aliments qu'il donne.",
+                "question_type": "matching",
+                "hint": "Les glucides et les lipides sont dans la même classe, celle de l'énergie.",
+                "explanation": "Étape 2 — Identifier le constituant principal. Étape 3 — Associer au rôle : les protides construisent et réparent le corps, les vitamines aident le corps à bien fonctionner et à se défendre, les lipides fournissent de l'énergie. Étape 4 — Conclure en nommant la classe : bâtisseur, protecteur ou énergétique.",
+                "answers": [
+                  {
+                    "content": "Les protides",
+                    "match": "Aliment bâtisseur"
+                  },
+                  {
+                    "content": "Les vitamines",
+                    "match": "Aliment protecteur"
+                  },
+                  {
+                    "content": "Les lipides",
+                    "match": "Aliment énergétique"
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -515,6 +581,87 @@
                   },
                   {
                     "content": "D'eau",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à choisir le bon réactif et à lire son résultat, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "L'eau iodée, brun-orangé, devient ___ en présence d'amidon. Le sulfate de cuivre anhydre, blanc, devient ___ en présence d'eau.",
+                "question_type": "fill_blank",
+                "hint": "Chaque réactif a sa couleur de départ et sa couleur d'arrivée.",
+                "explanation": "Étape 1 — Identifier le constituant recherché : l'amidon, puis l'eau. Étape 2 — Choisir le réactif : l'eau iodée pour l'amidon, le sulfate de cuivre anhydre pour l'eau. Étape 3 — Observer le résultat : l'eau iodée devient bleu-noir ; le sulfate de cuivre anhydre blanc devient bleu. Étape 4 — Conclure : le constituant est présent.",
+                "answers": [
+                  {
+                    "content": "bleu-noir",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bleu noir",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bleu",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour rechercher le glucose, on utilise la ___ en chauffant. Si le glucose est présent, elle donne un précipité ___.",
+                "question_type": "select",
+                "hint": "L'eau iodée ne détecte que l'amidon.",
+                "explanation": "Étape 1 — Identifier le constituant recherché : le glucose. Étape 2 — Choisir le réactif : la liqueur de Fehling, bleue, que l'on chauffe. Étape 3 — Observer : en présence de glucose, elle donne un précipité rouge brique. Étape 4 — Conclure : précipité rouge brique, le glucose est présent.",
+                "answers": [
+                  {
+                    "content": "liqueur de Fehling",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "eau iodée",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "réactif du biuret",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "rouge brique",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "bleu-noir",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "violet",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le réactif du biuret reste bleu sur un aliment écrasé : on peut seulement dire que les protides ne sont pas détectés, ils sont absents ou en trop faible quantité.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Réaliser le test et observer : le réactif reste bleu, il n'y a pas de changement. Étape 4 — Conclure : pas de changement signifie que le constituant testé n'est pas détecté. Il est absent ou en trop faible quantité.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
                     "correct": false
                   }
                 ]
@@ -666,6 +813,71 @@
                   {
                     "content": "Il n'y a aucune erreur : 170 kJ est juste.",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une valeur énergétique en kJ, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pour 100 g d'un aliment, on relève 10 g de glucides, 5 g de protides et 2 g de lipides. Énergie des glucides (kJ) = ___   Énergie des protides (kJ) = ___   Énergie des lipides (kJ) = ___",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "hint": "Les glucides et les protides libèrent 17 kJ par gramme, les lipides 38 kJ par gramme.",
+                "explanation": "Étape 1 — Relever les masses : 10 g, 5 g et 2 g. Étape 2 — Multiplier chaque masse par l'énergie libérée par 1 g : 10 × 17 = 170 kJ pour les glucides ; 5 × 17 = 85 kJ pour les protides ; 2 × 38 = 76 kJ pour les lipides.",
+                "answers": [
+                  {
+                    "content": "170",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "85",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "76",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Avec les masses de l'aliment précédent (10 g de glucides, 5 g de protides et 2 g de lipides pour 100 g), valeur énergétique de 100 g (kJ) = ___   valeur énergétique de 300 g (kJ) = ___",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "hint": "Pour 300 g, multiplie la valeur de 100 g par 3.",
+                "explanation": "Étape 1 — Relever les masses. Étape 2 — Multiplier : 170 kJ, 85 kJ et 76 kJ. Étape 3 — Additionner : 170 + 85 + 76 = 331 kJ pour 100 g. Étape 4 — Adapter à la masse mangée : 300 g = 3 × 100 g, donc 331 × 3 = 993 kJ.",
+                "answers": [
+                  {
+                    "content": "331",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "993",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une ration qui couvre les besoins en énergie est forcément équilibrée.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure en comparant la ration aux besoins. Une ration est équilibrée si elle couvre les besoins en énergie (quantité) et si elle est variée (qualité), avec des aliments énergétiques, bâtisseurs et protecteurs et de l'eau. Couvrir l'énergie ne suffit pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
                   }
                 ]
               }
@@ -844,6 +1056,72 @@
                   {
                     "content": "vitamine D",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier des signes et une alimentation à un déséquilibre, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le manque de fer provoque l'___. Le manque de vitamine C provoque le ___.",
+                "question_type": "fill_blank",
+                "hint": "Chaque maladie de carence correspond à un manque précis.",
+                "explanation": "Étape 2 — Comparer l'alimentation aux besoins : repérer ce qui manque. Étape 3 — Nommer la maladie de carence qui correspond : le manque de fer donne l'anémie, le manque de vitamine C donne le scorbut.",
+                "answers": [
+                  {
+                    "content": "anémie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "scorbut",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Tu as relevé les signes observés chez une personne et la composition de son alimentation. Que fais-tu ensuite ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever les signes et la composition de l'alimentation. Étape 2 — Comparer l'alimentation aux besoins : repérer ce qui manque ou ce qui est en excès. Ce n'est qu'après que l'on nomme le déséquilibre (étape 3) et que l'on propose la prévention (étape 4). La malnutrition peut venir d'un manque de qualité, pas seulement de quantité.",
+                "answers": [
+                  {
+                    "content": "Je compare l'alimentation aux besoins",
+                    "correct": true
+                  },
+                  {
+                    "content": "Je nomme tout de suite la maladie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Je propose la prévention avant de comparer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Je regarde seulement la quantité mangée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour reconnaître un déséquilibre alimentaire.",
+                "question_type": "ordering",
+                "hint": "On ne peut pas nommer avant d'avoir comparé.",
+                "explanation": "Étape 1 — Relever les signes et la composition de l'alimentation. Étape 2 — Comparer l'alimentation aux besoins. Étape 3 — Nommer le déséquilibre ou la maladie. Étape 4 — Proposer la prévention : ration suffisante et variée, sel iodé, hygiène alimentaire.",
+                "answers": [
+                  {
+                    "content": "Relever les signes observés et la composition de l'alimentation"
+                  },
+                  {
+                    "content": "Comparer l'alimentation aux besoins"
+                  },
+                  {
+                    "content": "Nommer le déséquilibre ou la maladie"
+                  },
+                  {
+                    "content": "Proposer la prévention"
                   }
                 ]
               }

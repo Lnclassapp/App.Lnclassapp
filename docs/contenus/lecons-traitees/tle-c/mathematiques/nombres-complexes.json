@@ -1,0 +1,1734 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Nombres complexes",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "points-affixes",
+          "kind": "coordinate_plane",
+          "description": "Un repère orthonormé gradué de 0 à 7 en abscisse et de 0 à 7 en ordonnée. Le point A a pour affixe 1 + 2i et le point B a pour affixe 4 + 6i. La flèche d'origine A et d'extrémité B représente le vecteur AB d'affixe 3 + 4i : on avance de 3 vers la droite et de 4 vers le haut. Le segment AB mesure 5.",
+          "params": {
+            "xmin": 0,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 3,
+                "dy": 4,
+                "ox": 1,
+                "oy": 2
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 2,
+                "x2": 4,
+                "y2": 6
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "point-module-argument",
+          "kind": "coordinate_plane",
+          "description": "Un repère orthonormé de -2 à 2 en abscisse et de -1 à 2 en ordonnée. Le point M(1 ; 1) a pour affixe 1 + i, de module racine de 2 et d'argument pi sur 4. Le point N(-1 ; 1) a pour affixe -1 + i, de même module mais d'argument 3 pi sur 4. Deux flèches partent de l'origine O vers M et vers N.",
+          "params": {
+            "xmin": -2,
+            "xmax": 2,
+            "ymin": -1,
+            "ymax": 2,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "N",
+                "x": -1,
+                "y": 1
+              }
+            ],
+            "vectors": [
+              {
+                "label": "OM",
+                "dx": 1,
+                "dy": 1,
+                "ox": 0,
+                "oy": 0
+              },
+              {
+                "label": "ON",
+                "dx": -1,
+                "dy": 1,
+                "ox": 0,
+                "oy": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "points-parallelogramme",
+          "kind": "coordinate_plane",
+          "description": "Un repère orthonormé de -3 à 7 en abscisse et de 0 à 18 en ordonnée. Les points A(-2 ; 1), B(1 ; 5), C(3 ; 13) et D(6 ; 17) sont placés. Une flèche relie A à B et une flèche de même longueur et de même direction relie C à D : les vecteurs AB et CD ont la même affixe 3 + 4i. Le segment AC est aussi tracé.",
+          "params": {
+            "xmin": -3,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 18,
+            "points": [
+              {
+                "id": "A",
+                "x": -2,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 5
+              },
+              {
+                "id": "C",
+                "x": 3,
+                "y": 13
+              },
+              {
+                "id": "D",
+                "x": 6,
+                "y": 17
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 3,
+                "dy": 4,
+                "ox": -2,
+                "oy": 1
+              },
+              {
+                "label": "CD",
+                "dx": 3,
+                "dy": 4,
+                "ox": 3,
+                "oy": 13
+              }
+            ],
+            "segments": [
+              {
+                "x1": -2,
+                "y1": 1,
+                "x2": 3,
+                "y2": 13
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer avec la forme algébrique et le conjugué",
+          "remember": "Un nombre complexe s'écrit $z = a + ib$ avec $a$ et $b$ réels, et $i^2 = -1$. On appelle $a$ la partie réelle et $b$ la partie imaginaire. Deux complexes sont égaux quand ils ont la même partie réelle et la même partie imaginaire. Le conjugué de $z = a + ib$ est $\\overline{z} = a - ib$, et $z\\,\\overline{z} = a^2 + b^2$ est un réel positif. Pour un quotient, on multiplie en haut et en bas par le conjugué du dénominateur : $\\dfrac{1}{a+ib} = \\dfrac{a - ib}{a^2 + b^2}$. Le conjugué d'une somme (d'un produit) est la somme (le produit) des conjugués.",
+          "method": [
+            "Repérer l'opération ; pour un quotient $\\dfrac{z}{z'}$, écrire le conjugué $\\overline{z'}$ du dénominateur.",
+            "Multiplier le numérateur et le dénominateur par ce conjugué $\\overline{z'}$.",
+            "Développer en remplaçant $i^2$ par $-1$ ; le dénominateur devient le réel $a^2 + b^2$.",
+            "Séparer la partie réelle et la partie imaginaire, puis écrire le résultat sous la forme $a + ib$."
+          ],
+          "example": {
+            "statement": "Écrire $\\dfrac{3 + 2i}{1 - i}$ sous forme algébrique.",
+            "steps": [
+              "Repérer : c'est un quotient ; le dénominateur est $1 - i$, son conjugué est $1 + i$.",
+              "Multiplier : $\\dfrac{3 + 2i}{1 - i} = \\dfrac{(3 + 2i)(1 + i)}{(1 - i)(1 + i)}$.",
+              "Développer : le numérateur vaut $3 + 3i + 2i + 2i^2 = 1 + 5i$ ; le dénominateur vaut $1^2 + 1^2 = 2$.",
+              "Séparer : $\\dfrac{1 + 5i}{2} = \\dfrac{1}{2} + \\dfrac{5}{2}\\,i$."
+            ]
+          },
+          "pitfall": "Ne pas oublier que $i^2 = -1$, et non $+1$. Contre-exemple : $(1 + i)^2 = 1 + 2i + i^2 = 1 + 2i - 1 = 2i$. Si on écrit $i^2 = 1$, on trouve $2 + 2i$, ce qui est faux. Autre piège : ne pas écrire $(2 + i)^2 = 4 + 1$ : il y a un double produit, $(2 + i)^2 = 4 + 4i - 1 = 3 + 4i$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec les nombres complexes",
+            "statement": "Dans cet exercice, tu calcules avec des nombres complexes en suivant la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la forme algébrique de $(2 + 3i)(1 - 2i)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un produit, il n'y a pas de dénominateur. Étape 2 — Multiplier : rien à multiplier par un conjugué. Étape 3 — Développer : $(2 + 3i)(1 - 2i) = 2 - 4i + 3i - 6i^2 = 2 - i + 6$ car $i^2 = -1$. Étape 4 — Séparer : $8 - i$. La proposition $-4 - i$ vient de $i^2 = +1$. La proposition $2 - 6i$ multiplie seulement les parties réelles entre elles et les parties imaginaires entre elles, en oubliant les produits croisés. La proposition $8 + i$ vient d'une erreur de signe sur les termes croisés.",
+                "answers": [
+                  {
+                    "content": "$8 - i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-4 - i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2 - 6i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8 + i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la forme algébrique de $\\dfrac{5 + i}{2 - i}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le dénominateur est $2 - i$, son conjugué est $2 + i$. Étape 2 — Multiplier : $\\dfrac{(5 + i)(2 + i)}{(2 - i)(2 + i)}$. Étape 3 — Développer : le numérateur vaut $10 + 5i + 2i + i^2 = 9 + 7i$ ; le dénominateur vaut $2^2 + 1^2 = 5$. Étape 4 — Séparer : $\\dfrac{9 + 7i}{5} = \\dfrac{9}{5} + \\dfrac{7}{5}\\,i$, soit $1{,}8 + 1{,}4\\,i$. La proposition $\\dfrac{11}{5} + \\dfrac{7}{5}\\,i$ vient de $i^2 = +1$ (le numérateur serait $11 + 7i$). La proposition avec le dénominateur $3$ calcule $2^2 - 1^2$ au lieu de $2^2 + 1^2$. La proposition $\\dfrac{9}{5} - \\dfrac{7}{5}\\,i$ change le signe de la partie imaginaire.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{9}{5} + \\dfrac{7}{5}\\,i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{11}{5} + \\dfrac{7}{5}\\,i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{9}{3} + \\dfrac{7}{3}\\,i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{9}{5} - \\dfrac{7}{5}\\,i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la partie imaginaire du conjugué de $z = -3 + 5i$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : on cherche le conjugué de $z = -3 + 5i$. Étapes 2 et 3 : aucun produit à développer. Étape 4 — Séparer : $\\overline{z} = -3 - 5i$ ; sa partie imaginaire est $-5$. Le conjugué change le signe de la partie imaginaire seulement, pas celui de la partie réelle.",
+                "answers": [
+                  {
+                    "content": "-5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Pour $z = 3 - 4i$, calcule $z\\,\\overline{z}$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $\\overline{z} = 3 + 4i$. Étape 2 — Multiplier : $z\\,\\overline{z} = (3 - 4i)(3 + 4i)$. Étape 3 — Développer : $9 + 12i - 12i - 16i^2 = 9 + 16 = 25$, c'est $a^2 + b^2$. Étape 4 — Séparer : le résultat est le réel $25$, de partie imaginaire nulle.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Quels sont les deux nombres réels parmi ces quatre nombres ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Développer chaque nombre en remplaçant $i^2$ par $-1$. $(1 + i)(1 - i) = 1 - i^2 = 2$ est réel. $i^4 = (i^2)^2 = (-1)^2 = 1$ est réel. Étape 4 — Séparer : $(1 + i)^2 = 2i$ est imaginaire pur, et $i^3 = i^2 \\times i = -i$ aussi. Ces deux nombres ont une partie réelle nulle.",
+                "answers": [
+                  {
+                    "content": "$(1 + i)^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(1 + i)(1 - i)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$i^4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$i^3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer $(2 + i)^2$, on peut écrire $2^2 + i^2 = 4 + 1 = 5$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Développer : $(2 + i)^2 = 2^2 + 2 \\times 2 \\times i + i^2 = 4 + 4i - 1 = 3 + 4i$. On ne peut pas oublier le double produit $4i$, et $i^2$ vaut $-1$ et non $+1$. Le résultat $5$ est donc faux ; la forme algébrique est $3 + 4i$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On donne $u = 1 + 2i$ et $v = 3 - i$.",
+            "questions": [
+              {
+                "content": "Calcule $uv$ sous forme algébrique : $uv$ = ___ + ___ $i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : c'est un produit. Étape 3 — Développer : $(1 + 2i)(3 - i) = 3 - i + 6i - 2i^2 = 3 + 5i + 2$. Étape 4 — Séparer : $uv = 5 + 5i$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Développe comme avec des lettres, puis remplace $i^2$ par $-1$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Écris $\\dfrac{u}{v}$ sous la forme $a + ib$. Partie réelle $a$ : ___   Partie imaginaire $b$ : ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le dénominateur est $3 - i$, son conjugué est $3 + i$. Étape 2 — Multiplier : $\\dfrac{(1 + 2i)(3 + i)}{(3 - i)(3 + i)}$. Étape 3 — Développer : le numérateur vaut $3 + i + 6i + 2i^2 = 1 + 7i$, le dénominateur vaut $9 + 1 = 10$. Étape 4 — Séparer : $\\dfrac{1}{10} + \\dfrac{7}{10}\\,i$. Les propositions avec $8$ viennent de $9 - 1$ : le dénominateur est $a^2 + b^2$, pas $a^2 - b^2$. Le $\\dfrac{1}{2}$ vient de $i^2 = +1$.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1}{10}$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$\\dfrac{1}{8}$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$\\dfrac{7}{10}$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$\\dfrac{7}{8}$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$\\dfrac{5}{10}$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $u\\,\\overline{u}$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $\\overline{u} = 1 - 2i$. Étape 2 — Multiplier : $u\\,\\overline{u} = (1 + 2i)(1 - 2i)$. Étape 3 — Développer : $1 - 4i^2 = 1 + 4 = 5$, soit $a^2 + b^2$. Étape 4 — Séparer : le résultat est le réel $5$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le produit d'un complexe et de son conjugué vaut $a^2 + b^2$.",
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Placer des points et calculer des distances dans le plan complexe",
+          "remember": "Le plan est muni d'un repère orthonormé direct $(O ; \\vec{u}, \\vec{v})$. Le point $M(a ; b)$ et le vecteur $\\vec{w}(a ; b)$ ont pour affixe $z = a + ib$. L'affixe du vecteur $\\overrightarrow{AB}$ est $z_B - z_A$, et celle du milieu $I$ de $[AB]$ est $\\dfrac{z_A + z_B}{2}$. Le module de $z = a + ib$ est $|z| = \\sqrt{a^2 + b^2}$ : c'est la distance $OM$. La distance $AB$ est $|z_B - z_A|$. On a $|\\overline{z}| = |z|$, $|z|^2 = z\\,\\overline{z}$ et $|zz'| = |z|\\,|z'|$.",
+          "method": [
+            "Lire les affixes $z_A$ et $z_B$ des deux points.",
+            "Calculer l'affixe du vecteur : $z_{\\overrightarrow{AB}} = z_B - z_A$.",
+            "Identifier la partie réelle $a$ et la partie imaginaire $b$ du résultat.",
+            "Calculer le module $\\sqrt{a^2 + b^2}$ : c'est la distance $AB$."
+          ],
+          "example": {
+            "statement": "Dans le plan complexe, $A$ a pour affixe $1 + 2i$ et $B$ a pour affixe $4 + 6i$. Calculer la distance $AB$.",
+            "steps": [
+              "Lire : $z_A = 1 + 2i$ et $z_B = 4 + 6i$.",
+              "Calculer l'affixe du vecteur : $z_B - z_A = (4 + 6i) - (1 + 2i) = 3 + 4i$.",
+              "Identifier : la partie réelle est $a = 3$ et la partie imaginaire est $b = 4$.",
+              "Calculer le module : $AB = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$."
+            ]
+          },
+          "pitfall": "Ne pas écrire $|a + ib| = a + b$, ni $|z + z'| = |z| + |z'|$. Contre-exemple : $|3 + 4i| = \\sqrt{9 + 16} = 5$, et non $3 + 4 = 7$. Avec $z = 3$ et $z' = 4i$, on a $|z| + |z'| = 3 + 4 = 7$, mais $|z + z'| = 5$. Le module est la racine carrée de la somme des carrés. Pour une distance, on soustrait les affixes avant de prendre le module.",
+          "figure": "points-affixes",
+          "exercise": {
+            "title": "Affixes, vecteurs et distances",
+            "statement": "Dans cet exercice, tu calcules des affixes de vecteurs et des distances dans le plan complexe avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Le point $A$ a pour affixe $-2 + i$ et le point $B$ a pour affixe $3 + 13i$. Calcule la distance $AB$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 3 + 13i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = 5 + 12i$. Étape 3 — Identifier : $a = 5$ et $b = 12$. Étape 4 — Calculer le module : $AB = \\sqrt{25 + 144} = \\sqrt{169} = 13$.",
+                "answers": [
+                  {
+                    "content": "13",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Le point $C$ a pour affixe $4 - 3i$ et le point $D$ a pour affixe $-1 + 2i$. Quelle est l'affixe du vecteur $\\overrightarrow{CD}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $z_C = 4 - 3i$ et $z_D = -1 + 2i$. Étape 2 — Calculer l'affixe du vecteur : $z_D - z_C = (-1 - 4) + (2 + 3)i$. Étape 3 — Identifier : $a = -5$ et $b = 5$. L'affixe du vecteur $\\overrightarrow{CD}$ est $-5 + 5i$. Calculer $z_C - z_D$ donnerait $5 - 5i$, c'est le vecteur $\\overrightarrow{DC}$.",
+                "answers": [
+                  {
+                    "content": "$-5 + 5i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5 - 5i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3 - i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-5 - 5i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le module de $z = -6 + 8i$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier : $a = -6$ et $b = 8$. Étape 4 — Calculer le module : $\\sqrt{(-6)^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$. La proposition $14$ additionne $6 + 8$. La proposition $2$ calcule $-6 + 8$. La proposition $\\sqrt{28}$ calcule $-36 + 64$ : le carré de $-6$ est $+36$.",
+                "answers": [
+                  {
+                    "content": "$10$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$14$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{28}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le module de $\\overline{z}$ pour $z = 8 - 15i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $\\overline{z} = 8 + 15i$. Étape 3 — Identifier : $a = 8$ et $b = 15$. Étape 4 — Calculer le module : $\\sqrt{64 + 225} = \\sqrt{289} = 17$. On a bien $|\\overline{z}| = |z| = 17$.",
+                "answers": [
+                  {
+                    "content": "17",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Le point $A$ a pour affixe $2 - i$ et le point $B$ a pour affixe $-1 + 3i$. Quelle est l'affixe de $\\overrightarrow{AB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $z_A = 2 - i$ et $z_B = -1 + 3i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = (-1 - 2) + (3 + 1)i = -3 + 4i$. Étape 3 — Identifier : $a = -3$ et $b = 4$. La proposition $3 - 4i$ est l'affixe de $\\overrightarrow{BA}$ : elle vient de $z_A - z_B$, l'origine et l'extrémité étant inversées. La proposition $1 + 2i$ vient de $z_A + z_B$ : on additionne au lieu de soustraire.",
+                "answers": [
+                  {
+                    "content": "$-3 + 4i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3 - 4i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1 + 2i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le point $A$ a pour affixe $2 - i$ et le point $B$ a pour affixe $-1 + 3i$. Quelle est la distance $AB$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $z_A = 2 - i$ et $z_B = -1 + 3i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = (-1 - 2) + (3 + 1)i = -3 + 4i$. Étape 3 — Identifier : $a = -3$ et $b = 4$. Étape 4 — Calculer le module : $AB = \\sqrt{9 + 16} = \\sqrt{25} = 5$. La proposition $7$ additionne $3 + 4$ au lieu de prendre la racine de la somme des carrés. La proposition $25$ oublie la racine carrée.",
+                "answers": [
+                  {
+                    "content": "$5$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$25$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si $z_1 = 3$ et $z_2 = 4i$, alors le module $|z_1 + z_2|$ est égal à $7$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Identifier : $z_1 + z_2 = 3 + 4i$, avec $a = 3$ et $b = 4$. Étape 4 — Calculer le module : $\\sqrt{9 + 16} = 5$, et non $3 + 4 = 7$. Le module d'une somme n'est pas la somme des modules.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans le plan complexe, on donne le point $E$ d'affixe $-1 + 2i$, le point $F$ d'affixe $5 + 10i$ et le point $G$ d'affixe $2 - 2i$.",
+            "questions": [
+              {
+                "content": "L'affixe du vecteur $\\overrightarrow{EF}$ est ___ + ___ $i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $z_E = -1 + 2i$ et $z_F = 5 + 10i$. Étape 2 — Calculer l'affixe du vecteur : $z_F - z_E = (5 + 1) + (10 - 2)i$. Étape 3 — Identifier : $a = 6$ et $b = 8$. L'affixe est $6 + 8i$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Extrémité moins origine : $z_F - z_E$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Calcule la distance $EF$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $z_E = -1 + 2i$ et $z_F = 5 + 10i$. Étape 2 — Calculer l'affixe du vecteur : $z_F - z_E = 6 + 8i$. Étape 3 — Identifier : $a = 6$ et $b = 8$. Étape 4 — Calculer le module : $EF = \\sqrt{36 + 64} = 10$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "La distance est le module de l'affixe du vecteur $\\overrightarrow{EF}$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Calcule la distance $EG$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : $z_E = -1 + 2i$ et $z_G = 2 - 2i$. Étape 2 — Calculer l'affixe du vecteur : $z_G - z_E = 3 - 4i$. Étape 3 — Identifier : $a = 3$ et $b = -4$. Étape 4 — Calculer le module : $EG = \\sqrt{9 + 16} = 5$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Passer à la forme trigonométrique et exponentielle",
+          "remember": "Pour $z = a + ib \\neq 0$, de module $r = \\sqrt{a^2 + b^2}$, un argument de $z$ est un réel $\\theta$ tel que $\\cos\\theta = \\dfrac{a}{r}$ et $\\sin\\theta = \\dfrac{b}{r}$ ; il est défini à $2\\pi$ près. La forme trigonométrique est $z = r(\\cos\\theta + i\\sin\\theta)$ et la forme exponentielle est $z = re^{i\\theta}$. Valeurs à connaître : $\\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2}$, $\\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$ ; $\\cos\\dfrac{\\pi}{4} = \\sin\\dfrac{\\pi}{4} = \\dfrac{\\sqrt{2}}{2}$ ; $\\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$, $\\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}$. Produit : $re^{i\\theta} \\times r'e^{i\\theta'} = rr'e^{i(\\theta + \\theta')}$ ; conjugué : $\\overline{re^{i\\theta}} = re^{-i\\theta}$.",
+          "method": [
+            "Calculer le module $r = \\sqrt{a^2 + b^2}$.",
+            "Factoriser par $r$ : écrire $z = r\\left(\\dfrac{a}{r} + i\\,\\dfrac{b}{r}\\right)$.",
+            "Reconnaître l'angle $\\theta$ tel que $\\cos\\theta = \\dfrac{a}{r}$ et $\\sin\\theta = \\dfrac{b}{r}$ (valeurs usuelles).",
+            "Écrire $z = r(\\cos\\theta + i\\sin\\theta) = re^{i\\theta}$."
+          ],
+          "example": {
+            "statement": "Écrire $z = 1 + i\\sqrt{3}$ sous forme trigonométrique, puis exponentielle.",
+            "steps": [
+              "Calculer le module : $r = \\sqrt{1^2 + (\\sqrt{3})^2} = \\sqrt{4} = 2$.",
+              "Factoriser : $z = 2\\left(\\dfrac{1}{2} + i\\,\\dfrac{\\sqrt{3}}{2}\\right)$.",
+              "Reconnaître : $\\cos\\theta = \\dfrac{1}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{3}}{2}$, donc $\\theta = \\dfrac{\\pi}{3}$.",
+              "Écrire : $z = 2\\left(\\cos\\dfrac{\\pi}{3} + i\\sin\\dfrac{\\pi}{3}\\right) = 2e^{i\\pi/3}$."
+            ]
+          },
+          "pitfall": "Ne pas calculer l'argument avec le seul rapport $\\dfrac{b}{a}$ : il faut regarder les signes de $\\cos\\theta$ et de $\\sin\\theta$. Contre-exemple : pour $z = -1 + i$, on a $\\dfrac{b}{a} = -1$, donc la calculatrice donnerait $-\\dfrac{\\pi}{4}$. Mais $\\cos\\theta = -\\dfrac{\\sqrt{2}}{2}$ est négatif et $\\sin\\theta = \\dfrac{\\sqrt{2}}{2}$ est positif, donc $\\theta = \\dfrac{3\\pi}{4}$. L'angle $-\\dfrac{\\pi}{4}$ correspond au point $1 - i$.",
+          "figure": "point-module-argument",
+          "exercise": {
+            "title": "Écrire un complexe sous forme exponentielle",
+            "statement": "Dans cet exercice, tu passes d'une forme à l'autre avec la méthode de la fiche : module, factorisation, angle, écriture.",
+            "exercise_type": "fixation",
+            "figure": "point-module-argument",
+            "questions": [
+              {
+                "content": "Quelle est la forme exponentielle de $z = \\sqrt{3} + i$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{3 + 1} = 2$. Étape 2 — Factoriser : $z = 2\\left(\\dfrac{\\sqrt{3}}{2} + i\\,\\dfrac{1}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\dfrac{\\sqrt{3}}{2}$ et $\\sin\\theta = \\dfrac{1}{2}$, donc $\\theta = \\dfrac{\\pi}{6}$. Étape 4 — Écrire : $z = 2e^{i\\pi/6}$. La proposition $2e^{i\\pi/3}$ échange le cosinus et le sinus. La proposition $4e^{i\\pi/6}$ oublie la racine carrée du module.",
+                "answers": [
+                  {
+                    "content": "$2e^{i\\pi/6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2e^{i\\pi/3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4e^{i\\pi/6}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{2}\\,e^{i\\pi/6}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On considère $z = -1 + i$. Quel est le module de $z$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le module : $z = -1 + i$, donc $a = -1$ et $b = 1$ et $r = \\sqrt{(-1)^2 + 1^2} = \\sqrt{2}$. La proposition $2$ oublie la racine carrée : $1 + 1 = 2$. La proposition $1$ prend la valeur de $|a|$ ou de $|b|$ au lieu de $\\sqrt{a^2 + b^2}$. Les étapes suivantes servent à trouver l'argument.",
+                "answers": [
+                  {
+                    "content": "$\\sqrt{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On considère $z = -1 + i$. Quel est un argument de $z$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{1 + 1} = \\sqrt{2}$. Étape 2 — Factoriser : $z = \\sqrt{2}\\left(-\\dfrac{\\sqrt{2}}{2} + i\\,\\dfrac{\\sqrt{2}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = -\\dfrac{\\sqrt{2}}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{2}}{2}$, donc $\\theta = \\dfrac{3\\pi}{4}$. La proposition $-\\dfrac{\\pi}{4}$ vient du seul rapport $\\dfrac{b}{a} = -1$ : son cosinus est positif. La proposition $\\dfrac{\\pi}{4}$ ignore le signe de $a$, et $\\dfrac{5\\pi}{4}$ a un sinus négatif.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{3\\pi}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-\\dfrac{\\pi}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{\\pi}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{5\\pi}{4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un nombre complexe s'écrit $z = 6e^{i\\pi/3}$. Quelle est sa partie réelle ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Écrire en sens inverse : $z = 6\\left(\\cos\\dfrac{\\pi}{3} + i\\sin\\dfrac{\\pi}{3}\\right)$. Étape 3 — Reconnaître : $\\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$ et $\\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}$. Étape 2 — Distribuer le module : $z = 3 + 3i\\sqrt{3}$. La partie réelle est $6 \\times \\dfrac{1}{2} = 3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Calcule le module de $z = 7 - 24i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{7^2 + (-24)^2} = \\sqrt{49 + 576} = \\sqrt{625} = 25$. Les étapes suivantes servent à trouver l'argument ; ici seul le module est demandé.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Pour $z = -1 + i$, un argument est $-\\dfrac{\\pi}{4}$ car $\\dfrac{b}{a} = -1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Reconnaître : il faut $\\cos\\theta = \\dfrac{a}{r} = -\\dfrac{\\sqrt{2}}{2}$ et $\\sin\\theta = \\dfrac{b}{r} = \\dfrac{\\sqrt{2}}{2}$. L'angle $-\\dfrac{\\pi}{4}$ a un cosinus positif : il convient au point $1 - i$. L'argument de $z = -1 + i$ est $\\dfrac{3\\pi}{4}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire $z = a + ib$ sous forme exponentielle.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Calculer le module. Étape 2 — Factoriser par $r$. Étape 3 — Reconnaître l'angle $\\theta$ grâce aux valeurs usuelles. Étape 4 — Écrire $z = re^{i\\theta}$. Il faut connaître $r$ avant de factoriser, et factoriser avant de lire le cosinus et le sinus.",
+                "answers": [
+                  {
+                    "content": "Calculer le module $r = \\sqrt{a^2 + b^2}$."
+                  },
+                  {
+                    "content": "Factoriser par $r$ pour faire apparaître $\\dfrac{a}{r}$ et $\\dfrac{b}{r}$."
+                  },
+                  {
+                    "content": "Reconnaître l'angle $\\theta$ dont le cosinus est $\\dfrac{a}{r}$ et le sinus $\\dfrac{b}{r}$."
+                  },
+                  {
+                    "content": "Écrire $z = re^{i\\theta}$."
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On considère $u = 2 + 2i\\sqrt{3}$ et $v = -4i$.",
+            "questions": [
+              {
+                "content": "Calcule le module de $u$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{2^2 + (2\\sqrt{3})^2} = \\sqrt{4 + 12} = \\sqrt{16} = 4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "$(2\\sqrt{3})^2 = 4 \\times 3 = 12$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Un argument de $u$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Calculer le module : $r = 4$. Étape 2 — Factoriser : $u = 4\\left(\\dfrac{1}{2} + i\\,\\dfrac{\\sqrt{3}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\dfrac{1}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{3}}{2}$, donc $\\theta = \\dfrac{\\pi}{3}$. Étape 4 — Écrire : $u = 4e^{i\\pi/3}$. La proposition $\\dfrac{\\pi}{6}$ échange cosinus et sinus ; $\\dfrac{2\\pi}{3}$ a un cosinus négatif.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{\\pi}{3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{\\pi}{6}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{2\\pi}{3}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare $\\cos\\theta = \\dfrac{a}{r}$ et $\\sin\\theta = \\dfrac{b}{r}$ aux valeurs usuelles."
+              },
+              {
+                "content": "On écrit $v = -4i = 4e^{i\\theta}$. Alors $\\theta$ vaut ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{0 + 16} = 4$. Étape 2 — Factoriser : $v = 4(0 - i)$. Étape 3 — Reconnaître : $\\cos\\theta = 0$ et $\\sin\\theta = -1$, donc $\\theta = -\\dfrac{\\pi}{2}$. Étape 4 — Écrire : $v = 4e^{-i\\pi/2}$. La proposition $\\dfrac{\\pi}{2}$ donne $+4i$ ; la proposition $\\pi$ donne $-4$.",
+                "answers": [
+                  {
+                    "content": "$-\\dfrac{\\pi}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{\\pi}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\pi$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer des puissances avec Moivre et Euler",
+          "remember": "Formule de Moivre : pour tout entier $n$, $(\\cos\\theta + i\\sin\\theta)^n = \\cos n\\theta + i\\sin n\\theta$, c'est-à-dire $(e^{i\\theta})^n = e^{in\\theta}$. Donc, pour $z = re^{i\\theta}$, on a $z^n = r^n e^{in\\theta}$ : on élève le module à la puissance $n$ et on multiplie l'argument par $n$. Formules d'Euler : $\\cos\\theta = \\dfrac{e^{i\\theta} + e^{-i\\theta}}{2}$ et $\\sin\\theta = \\dfrac{e^{i\\theta} - e^{-i\\theta}}{2i}$. Rappel : $e^{i\\pi/2} = i$, $e^{i\\pi} = -1$, $e^{i\\cdot 2\\pi} = 1$.",
+          "method": [
+            "Écrire $z$ sous forme exponentielle $re^{i\\theta}$ (module et argument).",
+            "Appliquer la formule de Moivre : $z^n = r^n e^{in\\theta}$ (ou la formule d'Euler pour exprimer $\\cos\\theta$ et $\\sin\\theta$).",
+            "Simplifier l'angle $n\\theta$ en retirant des multiples de $2\\pi$.",
+            "Revenir à la forme algébrique avec les valeurs de $\\cos$ et de $\\sin$ de l'angle obtenu."
+          ],
+          "example": {
+            "statement": "Calculer $(1 + i)^{10}$.",
+            "steps": [
+              "Écrire : $1 + i = \\sqrt{2}\\,e^{i\\pi/4}$ (module $\\sqrt{2}$, argument $\\dfrac{\\pi}{4}$).",
+              "Appliquer Moivre : $(1 + i)^{10} = (\\sqrt{2})^{10}\\,e^{i\\,10\\pi/4} = 32\\,e^{i\\,5\\pi/2}$.",
+              "Simplifier : $\\dfrac{5\\pi}{2} = \\dfrac{\\pi}{2} + 2\\pi$, donc $e^{i\\,5\\pi/2} = e^{i\\pi/2}$.",
+              "Revenir : $32\\left(\\cos\\dfrac{\\pi}{2} + i\\sin\\dfrac{\\pi}{2}\\right) = 32i$."
+            ]
+          },
+          "pitfall": "Ne pas oublier d'élever le module à la puissance $n$ : seul l'argument est multiplié par $n$, et le module est mis à la puissance $n$. Contre-exemple : $(1 + i)^2 = 1 + 2i - 1 = 2i$. Avec la forme exponentielle, $\\left(\\sqrt{2}\\,e^{i\\pi/4}\\right)^2 = 2e^{i\\pi/2} = 2i$. Si on écrit $\\sqrt{2}\\,e^{i\\pi/2}$, on trouve $\\sqrt{2}\\,i$, ce qui est faux.",
+          "figure": null,
+          "exercise": {
+            "title": "Puissances de nombres complexes",
+            "statement": "Dans cet exercice, tu calcules des puissances et tu utilises les formules d'Euler avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la valeur de $(1 + i\\sqrt{3})^3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $1 + i\\sqrt{3} = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $(1 + i\\sqrt{3})^3 = 2^3 e^{i\\pi} = 8e^{i\\pi}$. Étape 3 — Simplifier : $3 \\times \\dfrac{\\pi}{3} = \\pi$, rien à retirer. Étape 4 — Revenir : $8(\\cos\\pi + i\\sin\\pi) = -8$. La proposition $-2$ oublie d'élever le module à la puissance $3$. La proposition $8$ oublie que $e^{i\\pi} = -1$. La proposition $-8i$ confond $\\pi$ et $\\dfrac{3\\pi}{2}$.",
+                "answers": [
+                  {
+                    "content": "$-8$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-8i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $(\\sqrt{3} + i)^6$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $\\sqrt{3} + i = 2e^{i\\pi/6}$. Étape 2 — Appliquer Moivre : $(\\sqrt{3} + i)^6 = 2^6 e^{i\\pi} = 64e^{i\\pi}$. Étape 3 — Simplifier : $6 \\times \\dfrac{\\pi}{6} = \\pi$. Étape 4 — Revenir : $64(\\cos\\pi + i\\sin\\pi) = -64$.",
+                "answers": [
+                  {
+                    "content": "-64",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Quelle est la valeur de $(1 - i)^4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $1 - i = \\sqrt{2}\\,e^{-i\\pi/4}$. Étape 2 — Appliquer Moivre : $(1 - i)^4 = (\\sqrt{2})^4 e^{-i\\pi} = 4e^{-i\\pi}$. Étape 3 — Simplifier : l'angle $-\\pi$ convient. Étape 4 — Revenir : $4(\\cos\\pi - i\\sin\\pi) = -4$. La proposition $4$ oublie que $e^{-i\\pi} = -1$. La proposition $-4i$ confond l'angle $-\\pi$ avec $-\\dfrac{\\pi}{2}$. La proposition $-2i$ calcule seulement $(1 - i)^2 = -2i$ et s'arrête là.",
+                "answers": [
+                  {
+                    "content": "$-4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-4i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-2i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $e^{i\\pi/3} + e^{-i\\pi/3}$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : les deux nombres sont déjà sous forme exponentielle, d'argument $\\pm\\dfrac{\\pi}{3}$. Étape 2 — Appliquer la formule d'Euler : $e^{i\\theta} + e^{-i\\theta} = 2\\cos\\theta$, avec $\\theta = \\dfrac{\\pi}{3}$. Étape 4 — Revenir : $2\\cos\\dfrac{\\pi}{3} = 2 \\times \\dfrac{1}{2} = 1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "On a $\\left(2e^{i\\pi/6}\\right)^3 = 2e^{i\\pi/2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Appliquer Moivre : le module doit être élevé à la puissance $3$. $\\left(2e^{i\\pi/6}\\right)^3 = 2^3 e^{i\\pi/2} = 8e^{i\\pi/2}$. Étape 4 — Revenir : $8i$. L'égalité proposée donne $2i$, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux nombres égaux à $i$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Simplifier l'angle. $e^{i\\pi/2} = \\cos\\dfrac{\\pi}{2} + i\\sin\\dfrac{\\pi}{2} = i$. Pour $e^{i\\,5\\pi/2}$, on retire $2\\pi$ : $\\dfrac{5\\pi}{2} - 2\\pi = \\dfrac{\\pi}{2}$, donc c'est aussi $i$. Étape 4 — Revenir : $e^{i\\pi} = -1$ et $e^{-i\\pi/2} = -i$ ne conviennent pas.",
+                "answers": [
+                  {
+                    "content": "$e^{i\\pi/2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{i\\,5\\pi/2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{i\\pi}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{-i\\pi/2}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On donne $a = \\sqrt{2}\\,e^{i\\pi/4}$ et $b = 2e^{i\\pi/3}$.",
+            "questions": [
+              {
+                "content": "Calcule $a^4$ sous forme algébrique.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $a$ est déjà sous forme exponentielle. Étape 2 — Appliquer Moivre : $a^4 = (\\sqrt{2})^4 e^{i\\pi} = 4e^{i\\pi}$. Étape 3 — Simplifier : $4 \\times \\dfrac{\\pi}{4} = \\pi$. Étape 4 — Revenir : $4(\\cos\\pi + i\\sin\\pi) = -4$.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ],
+                "hint": "$(\\sqrt{2})^4 = 4$ et $e^{i\\pi} = -1$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Le module de $b^3$ est ___ et la valeur de $b^3$ est ___.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $b = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $b^3 = 2^3 e^{i\\pi} = 8e^{i\\pi}$ ; le module est $8$. Étape 3 — Simplifier : $3 \\times \\dfrac{\\pi}{3} = \\pi$. Étape 4 — Revenir : $8(\\cos\\pi + i\\sin\\pi) = -8$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Calcule $\\dfrac{e^{i\\pi/2} - e^{-i\\pi/2}}{2i}$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : on reconnaît $\\sin\\theta = \\dfrac{e^{i\\theta} - e^{-i\\theta}}{2i}$ avec $\\theta = \\dfrac{\\pi}{2}$. Étape 2 — Appliquer la formule d'Euler. Étape 4 — Revenir : $\\sin\\dfrac{\\pi}{2} = 1$. Vérification : $e^{i\\pi/2} = i$ et $e^{-i\\pi/2} = -i$, donc $\\dfrac{i - (-i)}{2i} = \\dfrac{2i}{2i} = 1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ],
+                "hint": "Utilise $e^{i\\pi/2} = i$ et $e^{-i\\pi/2} = -i$.",
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre une équation du second degré dans ℂ",
+          "remember": "Tout complexe $\\Delta$ a deux racines carrées opposées : ce sont les complexes $\\delta$ tels que $\\delta^2 = \\Delta$. Si $\\Delta$ est un réel négatif, $\\delta = i\\sqrt{-\\Delta}$. Si $\\Delta = p + iq$, on pose $\\delta = x + iy$ et on résout $x^2 - y^2 = p$, $2xy = q$ et $x^2 + y^2 = |\\Delta| = \\sqrt{p^2 + q^2}$. Dans ℂ, l'équation $az^2 + bz + c = 0$ ($a \\neq 0$) a toujours deux solutions (confondues si $\\Delta = 0$) : $z = \\dfrac{-b \\pm \\delta}{2a}$ où $\\Delta = b^2 - 4ac$ et $\\delta^2 = \\Delta$. Leur somme est $-\\dfrac{b}{a}$ et leur produit est $\\dfrac{c}{a}$.",
+          "method": [
+            "Calculer le discriminant $\\Delta = b^2 - 4ac$.",
+            "Trouver une racine carrée $\\delta$ de $\\Delta$ : si $\\Delta < 0$, $\\delta = i\\sqrt{-\\Delta}$ ; sinon poser $\\delta = x + iy$ et résoudre $x^2 - y^2 = p$, $2xy = q$, $x^2 + y^2 = |\\Delta|$.",
+            "Calculer les deux solutions $z_1 = \\dfrac{-b - \\delta}{2a}$ et $z_2 = \\dfrac{-b + \\delta}{2a}$.",
+            "Vérifier avec la somme $-\\dfrac{b}{a}$ et le produit $\\dfrac{c}{a}$, puis conclure."
+          ],
+          "example": {
+            "statement": "Résoudre dans ℂ l'équation $z^2 - 2z + 5 = 0$.",
+            "steps": [
+              "Calculer le discriminant : $\\Delta = (-2)^2 - 4 \\times 1 \\times 5 = 4 - 20 = -16$.",
+              "Trouver une racine carrée : $\\Delta < 0$, donc $\\delta = i\\sqrt{16} = 4i$ (car $(4i)^2 = -16$).",
+              "Calculer les solutions : $z_1 = \\dfrac{2 - 4i}{2} = 1 - 2i$ et $z_2 = \\dfrac{2 + 4i}{2} = 1 + 2i$.",
+              "Vérifier : la somme vaut $2 = -\\dfrac{b}{a}$ et le produit vaut $(1 - 2i)(1 + 2i) = 5 = \\dfrac{c}{a}$. Les solutions sont $1 - 2i$ et $1 + 2i$."
+            ]
+          },
+          "pitfall": "Ne pas conclure « pas de solution » quand $\\Delta < 0$ : dans ℂ, il y a toujours deux solutions. Ne pas oublier le $i$ dans la racine carrée d'un réel négatif. Contre-exemple : l'équation $z^2 + 16 = 0$ a pour solutions $4i$ et $-4i$, car $(4i)^2 = 16 \\times i^2 = -16$. Écrire $\\sqrt{-16} = 4$ est faux, puisque $4^2 = 16$ et non $-16$.",
+          "figure": null,
+          "exercise": {
+            "title": "Équations du second degré dans l'ensemble des complexes",
+            "statement": "Dans cet exercice, tu résous des équations du second degré dans ℂ avec la méthode de la fiche : discriminant, racine carrée, solutions, vérification.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelles sont les solutions dans ℂ de l'équation $z^2 + 9 = 0$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = 0 - 4 \\times 1 \\times 9 = -36$. Étape 2 — Trouver une racine carrée : $\\Delta < 0$, donc $\\delta = i\\sqrt{36} = 6i$. Étape 3 — Calculer les solutions : $z = \\dfrac{0 \\pm 6i}{2} = \\pm 3i$. Étape 4 — Vérifier : le produit vaut $3i \\times (-3i) = 9 = \\dfrac{c}{a}$. La proposition $6i$ et $-6i$ oublie de diviser par $2a$. La proposition « aucune solution » est fausse dans ℂ.",
+                "answers": [
+                  {
+                    "content": "$3i$ et $-3i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3$ et $-3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6i$ et $-6i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "aucune solution",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous $z^2 - 4z + 13 = 0$. Quelle est la solution de partie imaginaire positive ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = 16 - 52 = -36$. Étape 2 — Trouver une racine carrée : $\\delta = 6i$. Étape 3 — Calculer les solutions : $z = \\dfrac{4 \\pm 6i}{2} = 2 \\pm 3i$. Étape 4 — Vérifier : la somme vaut $4$ et le produit vaut $4 + 9 = 13$. La solution de partie imaginaire positive est $2 + 3i$. La proposition $3 + 2i$ échange les parties réelle et imaginaire. La proposition $-2 + 3i$ oublie que c'est $-b = 4$ qui est au numérateur. La proposition $4 + 6i$ oublie de diviser par $2a$.",
+                "answers": [
+                  {
+                    "content": "$2 + 3i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3 + 2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-2 + 3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4 + 6i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $\\Delta = -5 + 12i$. Quelle est la racine carrée de $\\Delta$ de partie réelle positive ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer le discriminant : il est donné, $\\Delta = -5 + 12i$, de module $\\sqrt{25 + 144} = 13$. Étape 2 — Trouver une racine carrée : on pose $\\delta = x + iy$ avec $x^2 - y^2 = -5$, $2xy = 12$ et $x^2 + y^2 = 13$. En additionnant puis en soustrayant : $x^2 = 4$ et $y^2 = 9$. Comme $2xy = 12 > 0$, $x$ et $y$ ont le même signe : avec $x > 0$, $\\delta = 2 + 3i$. Vérification : $(2 + 3i)^2 = 4 + 12i - 9 = -5 + 12i$. La proposition $3 + 2i$ échange $x$ et $y$ : son carré vaut $5 + 12i$. La proposition $2 - 3i$ ignore le signe de $2xy$ : son carré vaut $-5 - 12i$. La proposition $1 + 6i$ ne vérifie que $2xy = 12$ : son carré vaut $-35 + 12i$.",
+                "answers": [
+                  {
+                    "content": "$2 + 3i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3 + 2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2 - 3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1 + 6i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux nombres solutions de l'équation $z^2 - (3 + i)z + 2 + 2i = 0$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = (3 + i)^2 - 4(2 + 2i) = 9 + 6i - 1 - 8 - 8i = -2i$. Étape 2 — Trouver une racine carrée : $x^2 - y^2 = 0$, $2xy = -2$, $x^2 + y^2 = 2$, donc $\\delta = 1 - i$. Étape 3 — Calculer les solutions : $\\dfrac{3 + i - (1 - i)}{2} = 1 + i$ et $\\dfrac{3 + i + 1 - i}{2} = 2$. Étape 4 — Vérifier : la somme vaut $3 + i$ et le produit vaut $2(1 + i) = 2 + 2i$. Les nombres $1 - i$, $3 + i$ et $2i$ ne vérifient pas ces deux relations.",
+                "answers": [
+                  {
+                    "content": "$2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1 + i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1 - i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3 + i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $z^2 - 2z + 5 = 0$ n'a pas de solution car son discriminant est négatif.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = 4 - 20 = -16 < 0$. Étape 2 — Trouver une racine carrée : $\\delta = 4i$. Étape 3 — Calculer les solutions : $z = \\dfrac{2 \\pm 4i}{2} = 1 \\pm 2i$. Dans ℂ, un discriminant négatif donne deux solutions complexes conjuguées.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le produit des deux solutions de l'équation $z^2 - 6z + 25 = 0$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = 36 - 100 = -64$. Étape 2 — Trouver une racine carrée : $\\delta = 8i$. Étape 3 — Calculer les solutions : $z = \\dfrac{6 \\pm 8i}{2} = 3 \\pm 4i$. Étape 4 — Vérifier : le produit vaut $(3 + 4i)(3 - 4i) = 9 + 16 = 25 = \\dfrac{c}{a}$.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On considère l'équation $(E) : z^2 + 2z + 10 = 0$ et le complexe $w = 8 + 6i$.",
+            "questions": [
+              {
+                "content": "La solution de $(E)$ de partie imaginaire positive s'écrit $a + ib$ : $a$ = ___ et $b$ = ___.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = 4 - 40 = -36$. Étape 2 — Trouver une racine carrée : $\\delta = 6i$. Étape 3 — Calculer les solutions : $z = \\dfrac{-2 \\pm 6i}{2} = -1 \\pm 3i$. Étape 4 — Vérifier : la somme vaut $-2$ et le produit vaut $1 + 9 = 10$. La solution cherchée est $-1 + 3i$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "$\\Delta < 0$ : une racine carrée de $-36$ est $6i$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Une racine carrée de $w$ s'écrit $x + iy$ avec $x > 0$ : $x$ = ___ et $y$ = ___.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Calculer le discriminant : il n'y a pas d'équation ici, $w = 8 + 6i$ est donné ; on calcule son module $|w| = \\sqrt{64 + 36} = 10$. Étape 2 — Trouver une racine carrée : $x^2 - y^2 = 8$, $2xy = 6$ et $x^2 + y^2 = 10$, donc $x^2 = 9$ et $y^2 = 1$. Comme $2xy > 0$, $x$ et $y$ ont le même signe : $\\delta = 3 + i$. Vérification : $(3 + i)^2 = 9 + 6i - 1 = 8 + 6i$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Additionne $x^2 - y^2 = 8$ et $x^2 + y^2 = 10$ pour trouver $x^2$.",
+                "tolerance": 0
+              },
+              {
+                "content": "Calcule le produit des deux solutions de $(E)$.",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Calculer les solutions : $-1 + 3i$ et $-1 - 3i$. Étape 4 — Vérifier : le produit vaut $(-1 + 3i)(-1 - 3i) = 1 + 9 = 10$, soit $\\dfrac{c}{a} = 10$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Calculs dans l'ensemble des complexes",
+          "statement": "On donne les nombres complexes $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Dans cet exercice, tu calcules avec la forme algébrique, le conjugué et le module.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Calcule $z_1 z_2$ sous forme algébrique. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : c'est un produit, sans quotient. Étape 2 — Multiplier : aucun conjugué n'est nécessaire pour un produit. Étape 3 — Développer en remplaçant $i^2$ par $-1$ : $(2 + 3i)(1 - i) = 2 - 2i + 3i - 3i^2 = 2 + i + 3$. Étape 4 — Séparer : $z_1 z_2 = 5 + i$. La partie réelle est $5$. Piège : avec $i^2 = +1$, on trouverait $2 - 3 = -1$.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Calcule $z_1 z_2$ sous forme algébrique. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : c'est un produit, sans quotient. Étape 2 — Multiplier : aucun conjugué n'est nécessaire pour un produit. Étape 3 — Développer en remplaçant $i^2$ par $-1$ : $(2 + 3i)(1 - i) = 2 - 2i + 3i - 3i^2 = 2 + i + 3$. Étape 4 — Séparer : $z_1 z_2 = 5 + i$. La partie imaginaire est $1$. Piège : oublier un produit croisé donnerait $-2 + 3 = 1$ seulement par hasard ; il faut bien regrouper $-2i + 3i$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Écris $\\dfrac{z_1}{z_2}$ sous forme algébrique, en écriture décimale. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer le conjugué du dénominateur : $\\overline{z_2} = 1 + i$. Étape 2 — Multiplier le numérateur et le dénominateur par $1 + i$ : $\\dfrac{(2 + 3i)(1 + i)}{(1 - i)(1 + i)}$. Étape 3 — Développer : le numérateur vaut $2 + 2i + 3i + 3i^2 = -1 + 5i$ et le dénominateur vaut $1 + 1 = 2$. Étape 4 — Séparer : $\\dfrac{-1 + 5i}{2} = -0{,}5 + 2{,}5\\,i$.",
+              "answers": [
+                {
+                  "content": "-0,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Écris $\\dfrac{z_1}{z_2}$ sous forme algébrique, en écriture décimale. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer le conjugué du dénominateur : $\\overline{z_2} = 1 + i$. Étape 2 — Multiplier le numérateur et le dénominateur par $1 + i$ : $\\dfrac{(2 + 3i)(1 + i)}{(1 - i)(1 + i)}$. Étape 3 — Développer : le numérateur vaut $2 + 2i + 3i + 3i^2 = -1 + 5i$ et le dénominateur vaut $1 + 1 = 2$. Étape 4 — Séparer : $\\dfrac{-1 + 5i}{2} = -0{,}5 + 2{,}5\\,i$.",
+              "answers": [
+                {
+                  "content": "2,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Calcule $z_1\\,\\overline{z_1}$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : $\\overline{z_1} = 2 - 3i$. Étape 2 — Multiplier : $z_1\\,\\overline{z_1} = (2 + 3i)(2 - 3i)$. Étape 3 — Développer : $4 - 9i^2 = 4 + 9 = 13$. Étape 4 — Séparer : le résultat est le réel $13 = a^2 + b^2$, de partie imaginaire nulle. Piège : avec $i^2 = +1$, on trouverait $4 - 9 = -5$.",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Le point $A$ a pour affixe $z_1 = 2 + 3i$ et le point $B$ a pour affixe $z_2 = 1 - i$. Quelle est la distance $AB$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire les affixes : $z_A = 2 + 3i$ et $z_B = 1 - i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = (1 - 2) + (-1 - 3)i = -1 - 4i$. Étape 3 — Identifier : $a = -1$ et $b = -4$. Étape 4 — Calculer le module : $AB = \\sqrt{1 + 16} = \\sqrt{17}$. La proposition $5$ additionne $|-1| + |-4|$. La proposition $\\sqrt{15}$ calcule $-1 + 16$ : le carré de $-1$ est $1$. La proposition $\\sqrt{13}$ est le module de $z_1$ seul, pas la distance $AB$.",
+              "answers": [
+                {
+                  "content": "$\\sqrt{17}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\sqrt{13}$",
+                  "correct": false
+                },
+                {
+                  "content": "$5$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\sqrt{15}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $z_1 = 2 + 3i$ et $z_2 = 1 - i$. Le conjugué de $z_1 z_2$ est égal à $\\overline{z_1}\\ \\overline{z_2}$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : $z_1 z_2 = 5 + i$, donc son conjugué est $5 - i$. Étape 2 — Multiplier : $\\overline{z_1}\\ \\overline{z_2} = (2 - 3i)(1 + i)$. Étape 3 — Développer : $2 + 2i - 3i - 3i^2 = 5 - i$. Étape 4 — Séparer : les deux résultats sont égaux à $5 - i$ : le conjugué d'un produit est le produit des conjugués.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Trouve le réel $x$ tel que $(x + 2i)(1 - i)$ soit un nombre réel.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : c'est un produit avec une inconnue réelle $x$. Étape 2 — Multiplier : aucun conjugué n'est nécessaire. Étape 3 — Développer : $(x + 2i)(1 - i) = x - xi + 2i - 2i^2 = (x + 2) + (2 - x)i$. Étape 4 — Séparer : le nombre est réel si et seulement si sa partie imaginaire est nulle : $2 - x = 0$. Donc $x = 2$ ; le produit vaut alors $4$.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "title": "Affixes et distances dans le plan complexe",
+          "statement": "Dans le plan complexe, on donne les points $A$ d'affixe $-2 + i$, $B$ d'affixe $1 + 5i$ et $C$ d'affixe $3 + 13i$. On cherche ensuite le point $D$ tel que $\\overrightarrow{CD} = \\overrightarrow{AB}$. Dans cet exercice, tu utilises les affixes de vecteurs et le module.",
+          "exercise_type": "fixation",
+          "figure": "points-parallelogramme",
+          "questions": [
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. Calcule l'affixe du vecteur $\\overrightarrow{AB}$. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 1 + 5i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = (1 + 2) + (5 - 1)i$. Étape 3 — Identifier la partie réelle $3$ et la partie imaginaire $4$ : l'affixe de $\\overrightarrow{AB}$ est $3 + 4i$. Piège : $z_A - z_B = -3 - 4i$ est l'affixe de $\\overrightarrow{BA}$, pas de $\\overrightarrow{AB}$. La partie réelle de $\\overrightarrow{AB}$ est $3$, et non $-3$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. Calcule l'affixe du vecteur $\\overrightarrow{AB}$. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 1 + 5i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = (1 + 2) + (5 - 1)i$. Étape 3 — Identifier la partie réelle $3$ et la partie imaginaire $4$ : l'affixe de $\\overrightarrow{AB}$ est $3 + 4i$. Piège : en calculant $z_A - z_B$, on trouverait $-4$ au lieu de $4$ : c'est le vecteur $\\overrightarrow{BA}$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. Calcule la distance $AB$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 1 + 5i$. Étape 2 — Calculer l'affixe du vecteur : $z_B - z_A = 3 + 4i$. Étape 3 — Identifier : $a = 3$ et $b = 4$. Étape 4 — Calculer le module : $AB = \\sqrt{9 + 16} = 5$. Piège : $z_A - z_B = -3 - 4i$ a le même module $5$ ; mais additionner les affixes, $|z_A + z_B| = \\sqrt{37}$, ne donne pas la distance.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $C$ a pour affixe $3 + 13i$. Calcule la distance $AC$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_C = 3 + 13i$. Étape 2 — Calculer l'affixe du vecteur : $z_C - z_A = 5 + 12i$. Étape 3 — Identifier : $a = 5$ et $b = 12$. Étape 4 — Calculer le module : $AC = \\sqrt{25 + 144} = \\sqrt{169} = 13$. Piège : $\\sqrt{25} + \\sqrt{144} = 5 + 12 = 17$ est faux ; on prend la racine de la somme $25 + 144$ des carrés.",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$, $B$ a pour affixe $1 + 5i$ et $C$ a pour affixe $3 + 13i$. Le point $D$ vérifie $\\overrightarrow{CD} = \\overrightarrow{AB}$. Calcule l'affixe de $D$. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_C = 3 + 13i$ et l'affixe de $\\overrightarrow{AB}$ est $3 + 4i$. Étape 2 — Calculer : l'égalité $\\overrightarrow{CD} = \\overrightarrow{AB}$ donne $z_D - z_C = 3 + 4i$, donc $z_D = z_C + 3 + 4i$. Étape 3 — Identifier : $z_D = (3 + 3) + (13 + 4)i = 6 + 17i$. Piège : écrire $z_D = z_C - (3 + 4i) = 0 + 9i$ revient à utiliser $\\overrightarrow{DC} = \\overrightarrow{AB}$ ; l'égalité donnée est $\\overrightarrow{CD} = \\overrightarrow{AB}$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$, $B$ a pour affixe $1 + 5i$ et $C$ a pour affixe $3 + 13i$. Le point $D$ vérifie $\\overrightarrow{CD} = \\overrightarrow{AB}$. Calcule l'affixe de $D$. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_C = 3 + 13i$ et l'affixe de $\\overrightarrow{AB}$ est $3 + 4i$. Étape 2 — Calculer : l'égalité $\\overrightarrow{CD} = \\overrightarrow{AB}$ donne $z_D - z_C = 3 + 4i$, donc $z_D = z_C + 3 + 4i$. Étape 3 — Identifier : $z_D = (3 + 3) + (13 + 4)i = 6 + 17i$. Piège : la partie imaginaire est $13 + 4 = 17$, et non $13 - 4 = 9$ qui serait celle de $z_C - (3 + 4i)$.",
+              "answers": [
+                {
+                  "content": "17",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. Le point $I$ est le milieu de $[AB]$. Calcule son affixe, en écriture décimale. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 1 + 5i$. Étape 2 — Calculer : l'affixe du milieu est $\\dfrac{z_A + z_B}{2} = \\dfrac{-1 + 6i}{2}$. Étape 3 — Identifier : la partie réelle est $-0{,}5$ et la partie imaginaire est $3$. Piège : oublier de diviser par $2$ donnerait $-1$ au lieu de $-0{,}5$ ; ou calculer $z_B - z_A = 3 + 4i$, qui est l'affixe du vecteur et non du milieu.",
+              "answers": [
+                {
+                  "content": "-0,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. Le point $I$ est le milieu de $[AB]$. Calcule son affixe, en écriture décimale. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire : $z_A = -2 + i$ et $z_B = 1 + 5i$. Étape 2 — Calculer : l'affixe du milieu est $\\dfrac{z_A + z_B}{2} = \\dfrac{-1 + 6i}{2}$. Étape 3 — Identifier : la partie réelle est $-0{,}5$ et la partie imaginaire est $3$. Piège : oublier de diviser par $2$ donnerait $6$ au lieu de $3$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans le plan complexe, $A$ a pour affixe $-2 + i$ et $B$ a pour affixe $1 + 5i$. La distance $AB$ est égale à $|z_A + z_B|$.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Calculer l'affixe du vecteur : la distance $AB$ est $|z_B - z_A|$, une différence et non une somme. Ici $|z_B - z_A| = |3 + 4i| = 5$, alors que $|z_A + z_B| = |-1 + 6i| = \\sqrt{37}$. Étape 4 — Le module d'une somme ne donne pas la distance entre les deux points. Piège : la distance se calcule avec la différence $z_B - z_A$ (ou $z_A - z_B$), jamais avec la somme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Forme exponentielle et puissances",
+          "statement": "On considère les nombres complexes $z = 1 + i\\sqrt{3}$ et $z' = 1 + i$. Dans ce devoir, tu passes à la forme exponentielle et tu calcules des puissances avec la formule de Moivre.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On considère $z = 1 + i\\sqrt{3}$. Quel est le module de $z$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{1 + 3} = 2$. Étape 2 — Factoriser : $z = 2\\left(\\dfrac{1}{2} + i\\,\\dfrac{\\sqrt{3}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\dfrac{1}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{3}}{2}$, donc $\\theta = \\dfrac{\\pi}{3}$. Étape 4 — Écrire : $z = 2e^{i\\pi/3}$. La proposition $\\sqrt{2}$ vient de $\\sqrt{1 + 1}$ : on a pris $b = 1$ au lieu de $b = \\sqrt{3}$. La proposition $4$ oublie la racine carrée : $1 + 3 = 4$.",
+              "answers": [
+                {
+                  "content": "$2$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\sqrt{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On considère $z = 1 + i\\sqrt{3}$. Quel est un argument de $z$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{1 + 3} = 2$. Étape 2 — Factoriser : $z = 2\\left(\\dfrac{1}{2} + i\\,\\dfrac{\\sqrt{3}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\dfrac{1}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{3}}{2}$, donc $\\theta = \\dfrac{\\pi}{3}$. Étape 4 — Écrire : $z = 2e^{i\\pi/3}$. La proposition $\\dfrac{\\pi}{6}$ échange le cosinus et le sinus. La proposition $\\dfrac{2\\pi}{3}$ a un cosinus négatif ($-\\dfrac{1}{2}$) : elle conviendrait à $-1 + i\\sqrt{3}$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{\\pi}{3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{\\pi}{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{2\\pi}{3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $z' = 1 + i$. Quelle est la forme exponentielle de $z' = 1 + i$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le module : $r = \\sqrt{1 + 1} = \\sqrt{2}$. Étape 2 — Factoriser : $z' = \\sqrt{2}\\left(\\dfrac{\\sqrt{2}}{2} + i\\,\\dfrac{\\sqrt{2}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\sin\\theta = \\dfrac{\\sqrt{2}}{2}$, donc $\\theta = \\dfrac{\\pi}{4}$. Étape 4 — Écrire : $z' = \\sqrt{2}\\,e^{i\\pi/4}$. La proposition $2e^{i\\pi/4}$ oublie la racine carrée du module. La proposition $-\\dfrac{\\pi}{4}$ correspond à $1 - i$.",
+              "answers": [
+                {
+                  "content": "$\\sqrt{2}\\,e^{i\\pi/4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$2e^{i\\pi/4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\sqrt{2}\\,e^{i\\pi/2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\sqrt{2}\\,e^{-i\\pi/4}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $z = 1 + i\\sqrt{3}$ et $z' = 1 + i$. Quel est un argument du produit $z z'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire sous forme exponentielle : $z = 2e^{i\\pi/3}$ et $z' = \\sqrt{2}\\,e^{i\\pi/4}$. Étape 2 — Multiplier : on multiplie les modules et on additionne les arguments, $z z' = 2\\sqrt{2}\\,e^{i(\\pi/3 + \\pi/4)}$. Étape 3 — Simplifier : $\\dfrac{\\pi}{3} + \\dfrac{\\pi}{4} = \\dfrac{4\\pi + 3\\pi}{12} = \\dfrac{7\\pi}{12}$. La proposition $\\dfrac{\\pi}{12}$ soustrait les arguments : c'est celui du quotient $\\dfrac{z}{z'}$. La proposition $\\dfrac{\\pi}{7}$ vient de $\\dfrac{\\pi}{3 + 4}$ : on additionne les dénominateurs. La proposition $\\dfrac{\\pi^2}{12}$ multiplie les arguments $\\dfrac{\\pi}{3} \\times \\dfrac{\\pi}{4}$ au lieu de les additionner.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{7\\pi}{12}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{\\pi}{12}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{\\pi}{7}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{\\pi^2}{12}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $z = 1 + i\\sqrt{3}$. Calcule $z^6$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $z^6 = 2^6 e^{i\\,6\\pi/3} = 64\\,e^{i\\,2\\pi}$. Étape 3 — Simplifier : $e^{i\\,2\\pi} = 1$. Étape 4 — Revenir : $z^6 = 64$.",
+              "answers": [
+                {
+                  "content": "64",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On pose $z' = 1 + i$. Calcule $z'^6$ sous forme algébrique. Donne la partie réelle.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z' = \\sqrt{2}\\,e^{i\\pi/4}$. Étape 2 — Appliquer Moivre : $z'^6 = (\\sqrt{2})^6 e^{i\\,6\\pi/4} = 8\\,e^{i\\,3\\pi/2}$. Étape 3 — Simplifier : $\\dfrac{3\\pi}{2}$ est déjà dans $[0 ; 2\\pi[$. Étape 4 — Revenir : $8\\left(\\cos\\dfrac{3\\pi}{2} + i\\sin\\dfrac{3\\pi}{2}\\right) = 8(0 - i) = -8i$. Contrôle : $(1 + i)^2 = 2i$, donc $(1 + i)^6 = (2i)^3 = 8i^3 = -8i$.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On pose $z' = 1 + i$. Calcule $z'^6$ sous forme algébrique. Donne la partie imaginaire.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z' = \\sqrt{2}\\,e^{i\\pi/4}$. Étape 2 — Appliquer Moivre : $z'^6 = (\\sqrt{2})^6 e^{i\\,6\\pi/4} = 8\\,e^{i\\,3\\pi/2}$. Étape 3 — Simplifier : $\\dfrac{3\\pi}{2}$ est déjà dans $[0 ; 2\\pi[$. Étape 4 — Revenir : $8\\left(\\cos\\dfrac{3\\pi}{2} + i\\sin\\dfrac{3\\pi}{2}\\right) = 8(0 - i) = -8i$. Contrôle : $(1 + i)^2 = 2i$, donc $(1 + i)^6 = (2i)^3 = 8i^3 = -8i$.",
+              "answers": [
+                {
+                  "content": "-8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "On donne $z = 1 + i\\sqrt{3}$. Quel est le plus petit entier naturel non nul $n$ tel que $z^n$ soit un nombre réel ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $z^n = 2^n e^{in\\pi/3}$. Étape 3 — Simplifier : $z^n$ est réel si et seulement si $\\dfrac{n\\pi}{3}$ est un multiple de $\\pi$, donc si $n$ est un multiple de $3$. Le plus petit entier non nul est $n = 3$ ; Étape 4 — Revenir : $z^3 = 8e^{i\\pi} = -8$, qui est bien réel.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "title": "Équations dans ℂ et puissances",
+          "statement": "Partie A. On considère dans ℂ l'équation $(E) : z^2 - 2z + 4 = 0$. On note $z_1$ la solution de partie imaginaire positive et $z_2 = \\overline{z_1}$. Partie B. On considère aussi l'équation $(E') : z^2 - (4 + i)z + 5 + 5i = 0$. Dans cet exercice de niveau baccalauréat, tu combines équation du second degré, forme exponentielle, formules de Moivre et d'Euler.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Calcule le discriminant $\\Delta$ de l'équation $(E)$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = b^2 - 4ac = (-2)^2 - 4 \\times 1 \\times 4 = 4 - 16 = -12$. Comme $\\Delta < 0$, l'équation n'a pas de solution réelle, mais elle a deux solutions complexes conjuguées.",
+              "answers": [
+                {
+                  "content": "-12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Quelles sont les solutions de $(E)$ dans ℂ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le discriminant : $\\Delta = -12$. Étape 2 — Trouver une racine carrée : $\\delta = i\\sqrt{12} = 2i\\sqrt{3}$. Étape 3 — Calculer les solutions : $z = \\dfrac{2 \\pm 2i\\sqrt{3}}{2} = 1 \\pm i\\sqrt{3}$. Étape 4 — Vérifier : la somme vaut $2$ et le produit vaut $1 + 3 = 4$. La proposition avec $2 \\pm 2i\\sqrt{3}$ oublie de diviser par $2a$. La proposition avec $-1$ oublie que c'est $-b = 2$. La dernière oublie le $i$ dans la racine carrée d'un nombre négatif.",
+              "answers": [
+                {
+                  "content": "$1 + i\\sqrt{3}$ et $1 - i\\sqrt{3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$2 + 2i\\sqrt{3}$ et $2 - 2i\\sqrt{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-1 + i\\sqrt{3}$ et $-1 - i\\sqrt{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$1 + \\sqrt{3}$ et $1 - \\sqrt{3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Partie A. Dans ℂ, l'équation $(E) : z^2 - 2z + 4 = 0$ a pour solution de partie imaginaire positive $z_1 = 1 + i\\sqrt{3}$. Quel est le module de $z_1$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le module : $z_1 = 1 + i\\sqrt{3}$, donc $r = \\sqrt{1 + 3} = 2$. La proposition $\\sqrt{3}$ prend seulement la partie imaginaire pour le module. La proposition $4$ oublie la racine carrée : $1 + 3 = 4$.",
+              "answers": [
+                {
+                  "content": "$2$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\sqrt{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Partie A. Dans ℂ, l'équation $(E) : z^2 - 2z + 4 = 0$ a pour solution de partie imaginaire positive $z_1 = 1 + i\\sqrt{3}$. Quel est un argument de $z_1$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le module : $r = 2$. Étape 2 — Factoriser : $z_1 = 2\\left(\\dfrac{1}{2} + i\\,\\dfrac{\\sqrt{3}}{2}\\right)$. Étape 3 — Reconnaître : $\\cos\\theta = \\dfrac{1}{2}$ et $\\sin\\theta = \\dfrac{\\sqrt{3}}{2}$, donc $\\theta = \\dfrac{\\pi}{3}$. Étape 4 — Écrire : $z_1 = 2e^{i\\pi/3}$. La proposition $\\dfrac{\\pi}{6}$ échange le cosinus et le sinus. L'argument $-\\dfrac{\\pi}{3}$ est celui de $z_2$, le conjugué de $z_1$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{\\pi}{3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{\\pi}{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\dfrac{\\pi}{3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Ses solutions sont $z_1 = 1 + i\\sqrt{3}$ et $z_2 = 1 - i\\sqrt{3}$. Calcule $z_1^3$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_1 = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $z_1^3 = 2^3 e^{i\\pi} = 8e^{i\\pi}$. Étape 3 — Simplifier : $3 \\times \\dfrac{\\pi}{3} = \\pi$. Étape 4 — Revenir : $z_1^3 = 8(\\cos\\pi + i\\sin\\pi) = -8$.",
+              "answers": [
+                {
+                  "content": "-8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Ses solutions sont $z_1 = 1 + i\\sqrt{3}$ et $z_2 = 1 - i\\sqrt{3}$. Calcule $z_1^3 + z_2^3$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_1 = 2e^{i\\pi/3}$ et $z_2 = 2e^{-i\\pi/3}$. Étape 2 — Appliquer Moivre puis Euler : $z_1^3 + z_2^3 = 8\\left(e^{i\\pi} + e^{-i\\pi}\\right) = 8 \\times 2\\cos\\pi$. Étape 3 — Simplifier : $\\cos\\pi = -1$. Étape 4 — Revenir : $z_1^3 + z_2^3 = -16$. Contrôle : $z_2^3 = \\overline{z_1^3} = -8$, donc la somme vaut $-8 - 8 = -16$.",
+              "answers": [
+                {
+                  "content": "-16",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Ses solutions sont $z_1 = 1 + i\\sqrt{3}$ et $z_2 = 1 - i\\sqrt{3}$. Quel est le plus petit entier naturel non nul $n$ tel que $z_1^n$ soit un réel strictement positif ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_1 = 2e^{i\\pi/3}$. Étape 2 — Appliquer Moivre : $z_1^n = 2^n e^{in\\pi/3}$. Étape 3 — Simplifier : $z_1^n$ est un réel strictement positif si et seulement si $\\dfrac{n\\pi}{3}$ est un multiple de $2\\pi$, donc si $n$ est un multiple de $6$. Pour $n = 3$, on trouve $-8 < 0$ : cela ne convient pas. Étape 4 — Revenir : $z_1^6 = 64 > 0$, donc $n = 6$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Partie A. On considère l'équation $(E) : z^2 - 2z + 4 = 0$. Ses solutions sont $z_1 = 1 + i\\sqrt{3}$ et $z_2 = 1 - i\\sqrt{3}$. Calcule le produit $z_1 z_2$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_1 = 2e^{i\\pi/3}$ et $z_2 = 2e^{-i\\pi/3}$. Étape 2 — Appliquer la règle du produit : $z_1 z_2 = 4e^{0} = 4$. Étape 4 — Vérifier avec le produit des racines de $(E)$ : $\\dfrac{c}{a} = 4$. On retrouve aussi $z_1\\overline{z_1} = |z_1|^2 = 4$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Partie B. On considère $(E') : z^2 - (4 + i)z + 5 + 5i = 0$. Soit $\\Delta' = -5 - 12i$ le discriminant de $(E')$. Quelle est la racine carrée de $\\Delta'$ de partie réelle positive ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer le discriminant : $\\Delta' = (4 + i)^2 - 4(5 + 5i) = 16 + 8i - 1 - 20 - 20i = -5 - 12i$, de module $13$. Étape 2 — Trouver une racine carrée : $x^2 - y^2 = -5$, $2xy = -12$ et $x^2 + y^2 = 13$, donc $x^2 = 4$ et $y^2 = 9$. Comme $2xy < 0$, $x$ et $y$ sont de signes contraires : avec $x > 0$, $\\delta = 2 - 3i$. Vérification : $(2 - 3i)^2 = 4 - 12i - 9 = -5 - 12i$.",
+              "answers": [
+                {
+                  "content": "$2 - 3i$",
+                  "correct": true
+                },
+                {
+                  "content": "$2 + 3i$",
+                  "correct": false
+                },
+                {
+                  "content": "$3 - 2i$",
+                  "correct": false
+                },
+                {
+                  "content": "$1 - 6i$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Partie B. On considère $(E') : z^2 - (4 + i)z + 5 + 5i = 0$, de discriminant $-5 - 12i$ et de racine carrée de discriminant $2 - 3i$. Quelles sont les deux solutions de $(E')$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Calculer les solutions avec $\\delta = 2 - 3i$ : $z_3 = \\dfrac{4 + i - (2 - 3i)}{2} = \\dfrac{2 + 4i}{2} = 1 + 2i$ et $z_4 = \\dfrac{4 + i + 2 - 3i}{2} = \\dfrac{6 - 2i}{2} = 3 - i$. Étape 4 — Vérifier : la somme vaut $4 + i$ et le produit vaut $(1 + 2i)(3 - i) = 3 - i + 6i + 2 = 5 + 5i$. Les nombres $3 + i$ et $1 - 2i$ sont les conjugués de $z_4$ et $z_3$ : ils ne conviennent pas, car les coefficients de $(E')$ ne sont pas réels. Le nombre $5 + 5i$ est le produit des solutions, pas une solution.",
+              "answers": [
+                {
+                  "content": "$1 + 2i$",
+                  "correct": true
+                },
+                {
+                  "content": "$3 - i$",
+                  "correct": true
+                },
+                {
+                  "content": "$3 + i$",
+                  "correct": false
+                },
+                {
+                  "content": "$1 - 2i$",
+                  "correct": false
+                },
+                {
+                  "content": "$5 + 5i$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
