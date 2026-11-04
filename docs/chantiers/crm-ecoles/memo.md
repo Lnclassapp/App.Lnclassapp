@@ -45,6 +45,7 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 |---|---|---|
 | Qui démarche les écoles et utilisera le suivi ? | Le porteur, Touré, Konan, puis les futures recrues de l'équipe. | Le suivi est multi-utilisateur : chaque école a un **responsable**, chaque relance a un destinataire, « Mes relances » a un sens. Le changement de responsable (départ, réorganisation) est un parcours à part entière. Un responsable dont le compte est retiré ne doit pas laisser ses écoles orphelines en silence. |
 | Qu'est-ce qui rend l'outil « intelligent » en V1 ? | Une règle calculée, sans IA générative : chaque jour, l'outil propose les écoles à relancer d'après leur usage réel. Les agents IA (Kimi, DeepSeek ou Gemini) viendront après. | Une liste « à relancer » calculée entre dans le périmètre (environ 1 jour, pris sur la marge). Le journal des échanges doit être **structuré dès la V1** (type d'échange, interlocuteur, résultat, motif en cas de perte, note libre) : c'est la matière première des futurs agents. |
+| Les étapes « Inscrite » et « Active » sont-elles saisies ou calculées ? | Mélange validé : **Inscrite** (au moins un compte rattaché à l'école) et **Active** (activité dans les 14 derniers jours) sont calculées d'après l'usage réel ; **Prospect, Démo faite, Abonnée, Perdue** sont saisies à la main. | L'étape affichée n'est pas une simple colonne : elle combine une étape saisie et l'usage lu dans l'app. Il faut fixer laquelle l'emporte (une école « Perdue » qui se remet à servir, une école « Abonnée » devenue inactive). Personne ne peut marquer « Active » une école sans usage. |
 
 ## Cas limites identifiés
 
@@ -54,3 +55,4 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 
 - **Konan est enseignant sur Lnclass.** Un compte n'a qu'un rôle et un numéro ne sert qu'à un compte : pour utiliser le suivi, il lui faut un compte équipe distinct, avec un autre numéro. Le porteur doit trancher (second numéro, ou Konan reste hors de l'outil).
 - Touré doit recevoir une invitation équipe `field` avant le premier lot démontrable.
+- **Intelligence retenue** : compte rendu dicté, fiche de briefing avant appel, rapport pédagogique pour la direction, brouillon de relance WhatsApp. Accès aux modèles par OpenRouter. Reste à fixer ce qui entre dans la livraison du 15 novembre et ce qui part dans un chantier suivant.
