@@ -56,6 +56,12 @@ module Entities
         assert_not stage("Develop", pr_environment: true).whole_lessons?
       end
 
+      test "Develop and Staging complete the referential before loading; production, Demo, a PR and an unknown name never do" do
+        [ "Develop", " staging ", "STAGING" ].each { assert stage(it).completes_referential?, it }
+        [ "production", "Demo", "Recette", nil ].each { assert_not stage(it).completes_referential?, it.inspect }
+        assert_not stage("Staging", pr_environment: true).completes_referential?
+      end
+
       test "outside Develop, a lesson with subjects keeps its exercises-only mode, whatever its folder" do
         [ "Staging", " staging ", "STAGING" ].each do |name|
           assert_equal :exercises, stage(name).mode_for(level_directory: "tle-c", subjects: true), name

@@ -249,22 +249,17 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
                  I18n.t("teams.imports.error_codes.unknown_environment", name: "Recette", locale: :fr)
   end
 
-  # CA : un référentiel absent refuse la leçon sans bloquer
-  test "Staging without the 3ème level refuses the lesson in its line, without exception, and tries again next time" do
+  # ADR-0123 §8, amendé le 2026-11-04 : une base Staging remise à neuf (sans 3ème) crée d'abord le référentiel, puis la leçon
+  test "Staging without the 3ème level completes the referential, then creates the lesson" do
     create_material(name: "Mathématiques")
 
     output = charger("Staging")
 
     assert_not_includes output, "interrompu"
-    assert_equal 0, Orm::Course.count
-    line = automatic_reports.sole
-    assert_equal [ "completed", 0, 1, [ "unknown_level" ] ], [ line.status, line.imported_count, line.error_count, line.import_errors.map { it["code"] } ]
-    assert_includes output, "#{IMPORT_NAME} : refused"
-
-    Orm::Material.delete_all
-    seed_referential
-    assert_includes charger("Staging"), "loaded"
-    assert_equal 2, automatic_reports.count
+    assert Orm::Level.exists?(slug: "3eme")
+    assert_includes output, "#{IMPORT_NAME} : loaded"
+    assert_includes output, "0 en échec ou incomplète(s)"
+    assert Orm::Course.exists?(level: Orm::Level.find_by!(slug: "3eme"))
   end
 
   # CA (ADR-0122, Staging) : une notion introuvable refuse la leçon ; sur Develop la leçon est remplacée entière (test plus haut)
@@ -538,12 +533,20 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal [ 0, 0 ], [ Orm::School.count, Orm::Classroom.count ]
   end
 
-  test "Staging and production never create a level, a series or a material" do
+  test "production never creates a level, a series or a material; Staging completes the base referential like Develop" do
     college_referential
+    counts = -> { [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ] }
 
-    [ "Staging", "production" ].each { charger(it) }
+    charger("production")
+    assert_equal [ 1, 0, 1, 0, 0 ], counts.call
 
-    assert_equal [ 1, 0, 1, 0, 0 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ]
+    charger("Staging")
+    staging = counts.call
+    assert_equal [ 7, 5 ], staging.first(2)
+    assert_equal 41, staging[3]
+
+    charger("Develop")
+    assert_equal staging, counts.call, "Develop n'ajoute rien à ce que Staging a complété"
   end
 
   # ADR-0123 §9 : le cas de Develop du 2026-11-02 — un déploiement a tué le chargement en pleine leçon ; le suivant, dans les 10 minutes,

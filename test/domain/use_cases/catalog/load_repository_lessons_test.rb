@@ -505,7 +505,7 @@ module UseCases
         assert_equal({ lesson.import_name => :refused }, summary.lessons)
         assert_equal [ [ :warn, "[contenus] Pythagore : import refusé (completed, 1 erreur(s)), voir Imports" ] ], @logs
       end
-      # --- ADR-0123 §8 : sur Develop seul, le référentiel manquant est créé avant le chargement ---
+      # --- ADR-0123 §8 (amendé le 2026-11-04) : sur Develop et Staging, le référentiel manquant est créé avant le chargement ---
 
       test "Develop completes the referential before loading and logs what it created" do
         referential = Referential.new(levels: [ "1ère" ], series: %w[A1 A2], pairs: [ "1ère A1", "1ère A2" ], materials: [ "EDHC" ],
@@ -527,9 +527,18 @@ module UseCases
         assert_empty(@logs.select { it.last.include?("référentiel") })
       end
 
-      test "Staging, production, a PR environment and an unknown name never touch the referential" do
+      test "Staging, emptied, completes the referential before creating its missing lessons" do
+        referential = Referential.new(levels: [ "Tle" ], series: [ "D" ], pairs: [ "Tle D" ], materials: [ "SVT" ])
+
+        call(use_case(referential:), name: "Staging")
+
+        assert_equal 1, referential.calls
+        assert_equal [ :info, "[contenus] référentiel complété : niveaux Tle ; séries D ; couples Tle D ; matières SVT" ], @logs.first
+      end
+
+      test "production, Demo, a PR environment and an unknown name never touch the referential" do
         referential = Referential.new
-        [ [ "Staging", false ], [ "production", false ], [ "Develop", true ], [ "Recette", false ] ].each do |name, pr|
+        [ [ "production", false ], [ "Demo", false ], [ "Develop", true ], [ "Staging", true ], [ "Recette", false ] ].each do |name, pr|
           call(use_case(referential:), name:, pr:)
         end
 

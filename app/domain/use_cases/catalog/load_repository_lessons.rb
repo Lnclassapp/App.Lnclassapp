@@ -73,7 +73,7 @@ module UseCases
         return reject_unknown(stage, actor) if stage.unknown?
 
         fail_orphans
-        complete_referential if stage.whole_lessons?
+        complete_referential if stage.completes_referential?
         chosen, ignored = @source.lessons.map { [ it, mode_of(stage, it) ] }.partition(&:last)
         log_ignored(ignored.map(&:first))
         done(:done, chosen.to_h { |lesson, mode| [ lesson.import_name, load_safely(lesson, mode, actor) ] })
@@ -104,7 +104,7 @@ module UseCases
         @logger.error("[contenus] imports interrompus non nettoyés (#{error.class} : #{error.message})")
       end
 
-      # ADR-0123 §8 : Develop seul crée, avant le chargement, ce qui manque du référentiel de base ; journalisé. Un échec ne bloque rien.
+      # ADR-0123 §8 (amendé le 2026-11-04) : Develop et Staging créent, avant le chargement, ce qui manque du référentiel de base ; journalisé. Un échec ne bloque rien.
       def complete_referential
         created = @referential.complete
         parts = { levels: "niveaux", series: "séries", pairs: "couples", materials: "matières" }
