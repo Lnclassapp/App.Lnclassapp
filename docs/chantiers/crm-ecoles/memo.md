@@ -44,6 +44,7 @@ L'espace équipe connaît déjà chaque établissement (la liste nationale est i
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Qui démarche les écoles et utilisera le suivi ? | Le porteur, Touré, Konan, puis les futures recrues de l'équipe. | Le suivi est multi-utilisateur : chaque école a un **responsable**, chaque relance a un destinataire, « Mes relances » a un sens. Le changement de responsable (départ, réorganisation) est un parcours à part entière. Un responsable dont le compte est retiré ne doit pas laisser ses écoles orphelines en silence. |
+| Qu'est-ce qui rend l'outil « intelligent » en V1 ? | Une règle calculée, sans IA générative : chaque jour, l'outil propose les écoles à relancer d'après leur usage réel. Les agents IA (Kimi, DeepSeek ou Gemini) viendront après. | Une liste « à relancer » calculée entre dans le périmètre (environ 1 jour, pris sur la marge). Le journal des échanges doit être **structuré dès la V1** (type d'échange, interlocuteur, résultat, motif en cas de perte, note libre) : c'est la matière première des futurs agents. |
 
 ## Cas limites identifiés
 
