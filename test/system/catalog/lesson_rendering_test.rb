@@ -228,23 +228,23 @@ module LessonRendering
             .map { it["key"] }
     end
 
-    # Les clés de figure citées dans un exercice (de la leçon ou d'une notion) et nulle part ailleurs dans la leçon, la liste des
-    # figures exceptée.
+    # Les clés de figure citées par un exercice (de la leçon ou d'une notion) et par rien d'autre dans la leçon. Une citation est
+    # un champ dont la valeur est exactement la clé (« figure », ou un bloc de contenu), jamais un mot du texte.
     EXERCISE_KEYS = %w[exercise exercises].freeze
 
     def exercise_only_figure_keys(lesson)
+      keys = lesson.fetch("figures", []).map { it["key"] }
       in_exercises = []
       elsewhere = []
-      collect_strings(lesson.except("figures"), in_exercises, elsewhere, inside: false)
-      lesson.fetch("figures", []).map { it["key"] }
-            .select { |key| in_exercises.any? { it.include?(key) } && elsewhere.none? { it.include?(key) } }
+      collect_citations(lesson.except("figures"), keys, in_exercises, elsewhere, inside: false)
+      in_exercises.uniq - elsewhere
     end
 
-    def collect_strings(node, in_exercises, elsewhere, inside:)
+    def collect_citations(node, keys, in_exercises, elsewhere, inside:)
       case node
-      when Hash then node.each { |key, value| collect_strings(value, in_exercises, elsewhere, inside: inside || EXERCISE_KEYS.include?(key)) }
-      when Array then node.each { collect_strings(it, in_exercises, elsewhere, inside:) }
-      when String then (inside ? in_exercises : elsewhere) << node
+      when Hash then node.each { |key, value| collect_citations(value, keys, in_exercises, elsewhere, inside: inside || EXERCISE_KEYS.include?(key)) }
+      when Array then node.each { collect_citations(it, keys, in_exercises, elsewhere, inside:) }
+      when String then (inside ? in_exercises : elsewhere) << node if keys.include?(node)
       end
     end
   end
