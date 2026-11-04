@@ -21,6 +21,14 @@ module Queries
         # Le compte de « x / n exercices réussis » : l'id du repère est `sheet-progress-<dom_id>`.
         def passed = exercises.count { it.copy&.passed }
         def progress_id = "sheet-progress-#{dom_id}"
+
+        # L'exercice à continuer après `after` (public_id) : le suivant sans copie, sinon le premier sans copie, sinon nil. « Fait » = copie
+        # terminée, réussie ou non (comme la progression de la case).
+        def next_open(after:)
+          rank = exercises.index { it.public_id == after }
+          open = exercises.each_with_index.reject { |exercise, _| exercise.copy }
+          (open.find { |_, index| rank && index > rank } || open.first)&.first
+        end
       end
       # copy : la dernière copie terminée de l'élève (Copy), nil sans copie ou hors élève ; questions : [Question] ;
       # due : un élève qui doit encore rendre cet exercice à son enseignant (CA-17) : la feuille ne le vérifie pas ;

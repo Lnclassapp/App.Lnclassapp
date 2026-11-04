@@ -10,7 +10,15 @@ module Queries
       # exercises : [PrepareSheetsQuery::SheetExercise] ; hand_ins : { exercise_public_id => public_id de l'assignation à rendre } ;
       # number : son rang parmi les feuilles de même kind (la plus récente est la n°1) ; position / total : son rang parmi tous les envois.
       Sheet = Data.define(:kind, :dom_id, :assigned_on, :due_on, :notion, :remember, :notions, :courses, :materials, :exercises, :hand_ins,
-                          :number, :position, :total)
+                          :number, :position, :total) do
+        # L'exercice à continuer après `after` (public_id) : le suivant sans copie rendue, sinon le premier, sinon nil (avant le rendu,
+        # `copy` est nil : « fait » = rendu).
+        def next_open(after:)
+          rank = exercises.index { it.public_id == after }
+          open = exercises.each_with_index.reject { |exercise, _| exercise.copy }
+          (open.find { |_, index| rank && index > rank } || open.first)&.first
+        end
+      end
       Row = Data.define(:id, :public_id, :batch, :assigned_at, :due_on, :exercise_public_id, :course_slug, :course_name, :material_name,
                         :essential_id, :essential_name, :remember)
 

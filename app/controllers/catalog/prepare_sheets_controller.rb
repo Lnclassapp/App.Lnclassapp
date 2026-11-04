@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::PrepareSheetsController
 # Rôle : une feuille « Prépare interros » ou « Prépare devoirs » de la leçon : son sujet en lecture (show), puis la feuille à remplir (fill) ; mêmes refus que la leçon
-# ADR  : 0121, 0028, 0035 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 · :sheet = l'ancre de la feuille (notion-<slug>, toute-la-lecon, sujet-<n>)
+# ADR  : 0121, 0028, 0035 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3, XXXX refaire-ou-continuer §3 · :redo (fill) = l'exercice à refaire, vérifié parmi ceux de la feuille ; :sheet = l'ancre de la feuille (notion-<slug>, toute-la-lecon, sujet-<n>)
 module Catalog
   class PrepareSheetsController < AuthenticatedController
     include ReadsOwnLevel
@@ -15,6 +15,7 @@ module Catalog
       open_sheet do
         next redirect_to course_sheet_path(params[:course_slug], params[:sheet]) unless fillable?
 
+        @redo = redo_of(@sheet)
         render :fill
       end
     end
@@ -40,6 +41,12 @@ module Catalog
       return redirect_to course_path(params[:course_slug]), alert: t("catalog.courses.sheets.gone"), status: :see_other if @sheet.nil?
 
       yield
+    end
+
+    # refaire-ou-continuer (UDR §3) : l'exercice à remettre à blanc, seulement s'il est de la feuille ; toute autre valeur est ignorée.
+    def redo_of(sheet)
+      requested = params[:redo]
+      requested if requested.is_a?(String) && sheet.exercises.any? { it.public_id == requested }
     end
 
     # AuthenticatedController : un acteur est toujours connecté ici.

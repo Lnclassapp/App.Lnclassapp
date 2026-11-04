@@ -57,6 +57,26 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
     assert_select "a[href=?]", student_assigned_sheet_path(@sheet), text: "Lire le sujet"
   end
 
+  test "the sheet to fill carries the exercise to redo when it belongs to the assignment, and ignores any other value" do
+    sign_in_as @student
+
+    get fill_student_assigned_sheet_path(@sheet, redo: @exercises.second.public_id)
+
+    assert_select "[data-controller=prepare-sheet][data-prepare-sheet-redo-value=?]", @exercises.second.public_id
+
+    [ create_exercise(essential: @notion).public_id, "inconnu", "" ].each do |value|
+      get fill_student_assigned_sheet_path(@sheet, redo: value)
+
+      assert_response :success
+      assert_select "[data-prepare-sheet-redo-value]", 0
+    end
+
+    get fill_student_assigned_sheet_path(@sheet, redo: [ @exercises.second.public_id ])
+
+    assert_response :success
+    assert_select "[data-prepare-sheet-redo-value]", 0
+  end
+
   test "an assignment of another classroom is gone: 303 to « Ma classe » with the message, on both pages" do
     other = create_classroom(level: @course.level, series: @course.series, name: "3e 2")
     create_assignment(classroom: other, assignable: create_exercise(essential: @notion, title: "Secret"), batch_public_id: "OTHERBATCHXXXX")
