@@ -14,6 +14,15 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
 
   def frame(exercise) = "#sheet-exercise-#{exercise.public_id}"
 
+  # feuille-pleine-largeur (UDR « feuille pleine largeur sur téléphone ») : sous 640 px la feuille touche les deux bords de l'écran.
+  def assert_sheet_edge_to_edge
+    rect = find(".ps-sheet").rect
+    width = page.evaluate_script("document.documentElement.clientWidth")
+    assert_in_delta 0, rect.x, 0.5
+    assert_in_delta width, rect.x + rect.width, 0.5
+    assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=, width
+  end
+
   test "case, lecture, Commencer, vérifier, retour à la feuille, puis « Continuer » et le progrès sur la case" do
     visit course_path(@course.slug)
     assert_selector "a.ps-card", count: 1
@@ -30,7 +39,7 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     assert_no_button "Vérifier ma réponse"
     assert_no_button "Indice"
 
-    click_link "Commencer Prépare devoirs"
+    find("a.ps-start", text: "Commencer l'exercice").click
     assert_current_path fill_course_sheet_path(@course.slug, "sujet-#{@subject.position}")
     within(frame(@exercises.first)) do
       click_button "A."
@@ -45,7 +54,7 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     visit course_path(@course.slug)
     assert_selector "#sujet-#{@subject.position} .ps-card-meta", text: "1 / 4 exercice réussi"
     find("a.ps-card#sujet-#{@subject.position}").click
-    assert_link "Continuer Prépare devoirs"
+    assert_selector "a.ps-start", text: "Commencer l'exercice"
   end
 
   test "on a 390 px screen the reading page does not overflow and « Commencer » is 48 px high" do
@@ -55,6 +64,14 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
       assert_selector "a.ps-start"
       assert_operator page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth"), :<=, 0
       assert_operator find("a.ps-start").rect.height, :>=, 48
+      assert_sheet_edge_to_edge
+      button = find("a.ps-start").rect
+      assert_in_delta find(".ps-sheet .ps-header").rect.x, button.x, 2
+      assert_operator button.x + button.width, :<, page.evaluate_script("document.documentElement.clientWidth") - 8
+
+      visit fill_course_sheet_path(@course.slug, "sujet-#{@subject.position}")
+      assert_selector ".ps-sheet"
+      assert_sheet_edge_to_edge
     end
   end
 

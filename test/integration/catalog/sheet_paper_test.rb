@@ -53,7 +53,7 @@ class Catalog::SheetPaperTest < ActionDispatch::IntegrationTest
       assert_select ".ps-paper-footer", text: "Sujet d'entraînement rédigé par Lnclass. Ce n'est pas un sujet officiel."
       assert_select "[data-controller=prepare-sheet]", 0
     end
-    assert_select "a.ps-start", text: "Commencer Prépare devoirs"
+    assert_select "a.ps-start", text: "Commencer l'exercice"
     assert_select ".ps-paper input, .ps-paper select, .ps-paper textarea, .ps-paper fieldset, .ps-paper form, .ps-paper button", 0
     assert_select ".ps-remember, .ps-progress, .ps-hint, .ps-actions", 0
     [ "Indice", "Pense au rapport.", "Notions mobilisées", "À retenir", "Vérifier ma réponse" ].each { assert_no_match including(it), response.body }

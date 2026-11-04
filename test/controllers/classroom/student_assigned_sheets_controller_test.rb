@@ -34,7 +34,7 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
     @exercises.each { |exercise| assert_select %w[input select textarea fieldset button].map { "#{paper(exercise)} #{it}" }.join(", "), 0 }
     assert_select ".ps-sheet button.ps-btn--primary", 0
     assert_select ".ps-sheet form", 0
-    assert_select "a.ps-start[href=?]", fill_student_assigned_sheet_path(@sheet), text: "Commencer Prépare devoirs"
+    assert_select "a.ps-start[href=?]", fill_student_assigned_sheet_path(@sheet), text: "Commencer l'exercice"
     assert_select "a[href=?]", student_classroom_path(anchor: @sheet), text: /Ma classe/
   end
 
@@ -44,7 +44,7 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
 
     get student_assigned_sheet_path(@sheet)
 
-    assert_select "a.ps-start", text: "Continuer Prépare devoirs"
+    assert_select "a.ps-start", text: "Commencer l'exercice"
   end
 
   test "the sheet to fill: « Rendre à l'enseignant » per exercise, back to the reading page" do

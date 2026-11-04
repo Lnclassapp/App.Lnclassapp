@@ -36,7 +36,7 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
         assert_no_button "Assigner à 3e 1"
       end
     end
-    assert_no_link "Commencer Prépare interros"
+    assert_no_selector "a.ps-start"
 
     assert page.evaluate_script("window.lnclassNotReloaded")
     assert_equal 1, Orm::ClassroomAssignment.where(assignable_id: @exercise.id, classroom_id: @classroom.id, status: "active").count

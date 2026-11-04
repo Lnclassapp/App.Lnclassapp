@@ -1,5 +1,5 @@
 <%# 🌐 UI · catalog/prepare_sheets/show — le sujet d'une feuille de la leçon, à lire avant de commencer %>
-<%# Rôle : retour à la case de la leçon, la feuille en lecture (champs désactivés), puis « Commencer » / « Continuer » ; l'enseignant garde ses bascules d'envoi et le bandeau, sans bouton %>
+<%# Rôle : retour à la case de la leçon, la feuille en lecture (champs désactivés), puis « Commencer l'exercice » (toujours ce libellé, UDR feuille-pleine-largeur-sur-telephone §3) ; l'enseignant garde ses bascules d'envoi et le bandeau, sans bouton %>
 <%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3 · Stimulus : math %>
 <% course = @detail.course %>
 <% targets = @prepare.targets %>
@@ -18,7 +18,6 @@
 <div class="ps-page">
   <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: (fillable ? :reading : sheet_mode), targets:, classrooms:, heading: :h1 %>
   <% if fillable %>
-    <% started = @sheet.exercises.any?(&:copy) %>
-    <%= link_to t("catalog.courses.sheets.#{started ? :resume : :start}.#{kind}"), fill_course_sheet_path(course.slug, @sheet.dom_id), class: "ps-start" %>
+    <%= link_to t("catalog.courses.sheets.start"), fill_course_sheet_path(course.slug, @sheet.dom_id), class: "ps-start" %>
   <% end %>
 </div>
