@@ -42,7 +42,7 @@ Un bloc « Suivi » placé **juste sous l'en-tête** de la fiche, chargé dans u
 
 - `<section aria-labelledby="school_crm_title" class="mb-8">`, titre `<h2 id="school_crm_title" class="mb-4 font-display text-xl font-medium">` « Suivi ».
 - Grille : `grid gap-6 lg:grid-cols-3`. Colonne de droite (`lg:col-span-1`, en premier dans le DOM) : Étape et responsable → Assistants → Relances ouvertes → Contacts. Colonne de gauche (`lg:col-span-2 lg:row-start-1 lg:col-start-1`) : Usage → Journal. À 390 px, une colonne dans l'ordre du DOM : Étape et responsable, Assistants, Relances, Contacts, Usage, Journal.
-- Chaque sous-bloc est un `ui_card(title:, heading: :h3)` avec un `id` stable, cible des Turbo Streams : `school_crm_stage`, `school_crm_assistants`, `school_crm_follow_ups`, `school_crm_contacts`, `school_crm_usage`, `school_crm_journal`.
+- Chaque sous-bloc est un **`turbo-frame` paresseux** à `id` stable, servi par son propre contrôleur, qui contient un `ui_card(title:, heading: :h3)` ; l'`id` est aussi la cible des Turbo Streams : `school_crm_stage`, `school_crm_assistants`, `school_crm_follow_ups`, `school_crm_contacts`, `school_crm_usage`, `school_crm_journal`. Chaque frame affiche `ui_loading_state(variant: :skeleton, lines: 2)` en attendant. Ainsi chaque sous-bloc se charge, échoue et se rafraîchit seul.
 
 **Étape et responsable** (`_stage.html.erb`)
 

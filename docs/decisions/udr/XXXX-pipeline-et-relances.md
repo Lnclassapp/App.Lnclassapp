@@ -38,7 +38,7 @@ Le matin, un membre `admin` ou `field` veut savoir qui appeler aujourd'hui et po
 - Pour `content` : ni filtres ni colonnes (la liste reste celle d'aujourd'hui).
 - Vide après filtre : l'état vide existant de la liste.
 
-**Carte « À relancer » de l'Accueil équipe** (`app/views/teams/homes/_follow_up_card.html.erb`, rendue par `show.html.erb` après `_shortcuts`, Lot 0 pour l'emplacement)
+**Carte « À relancer » de l'Accueil équipe** (`app/views/teams/crm/home_follow_ups/show.html.erb`, servie dans le frame que `teams/homes/show.html.erb` pose après `_shortcuts` ; Lot 0 pour l'emplacement)
 
 - Visible pour `admin`/`field` seulement.
 - `ui_card(title: "À relancer", icon: "bell-alert", href: teams_follow_ups_path)` : un chiffre `font-display text-3xl` (écoles à relancer dont je suis responsable, plus mes relances échues), puis les 3 premières écoles (nom + premier badge de raison), puis le lien « Voir mes relances ».
