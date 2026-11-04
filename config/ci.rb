@@ -65,7 +65,8 @@ CI_PLAN = CiPlan.define do
   # A part names its files, so `bin/rails test` skips test:prepare: the part builds the assets itself.
   # -v prints each test's duration: script/ci/record_timings rebuilds the timings of the split from any log.
   # The two guards above already ran: the suite leaves them out here (Rails' default exclusion, plus the guards).
-  sharded "unit", files: unit_files do |files, part|
+  # The import performance tests skip here without PERF: they weigh nothing in this split.
+  sharded "unit", files: unit_files, light: CiPlan.files("test/performance/**/*_test.rb") do |files, part|
     if part
       step "Tests: Rails (coverage 100 % lines and branches) #{part}",
            "bin/rails test:prepare && env COVERAGE_PART=#{part} bin/rails test #{files.join(' ')} -v", inputs: :unit

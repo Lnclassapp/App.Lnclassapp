@@ -313,6 +313,15 @@ class CiPlanTest < Minitest::Test
     assert_equal [ %w[a], %w[b c new] ], plan.split("demo", 2, timings: { "a" => 9.0, "b" => 1.0, "c" => 2.0 })
   end
 
+  # The import performance tests skip in the unit suite without PERF: their recorded duration (the perf group's) weighs
+  # nothing in the unit split, and they still play there, in one part.
+  def test_a_light_file_weighs_nothing_in_its_group_and_still_plays
+    plan = CiPlan.define { sharded("demo", files: %w[a b c perf], light: %w[perf]) { |files, _| step "x", files.join(" ") } }
+
+    assert_equal [ %w[a perf], %w[b c] ], plan.split("demo", 2, timings: { "a" => 5.0, "b" => 3.0, "c" => 2.0, "perf" => 40.0 })
+    CiPlan.files("test/performance/**/*_test.rb").each { assert_includes CI_PLAN.groups["unit"].light, it }
+  end
+
   def test_an_unknown_group_or_part_fails_loudly_instead_of_playing_nothing
     [ "lnit", "system:5/4", "system:0/4", "lint:1/2" ].each do |selection|
       assert_raises(CiPlan::SelectionError, selection) { CI_PLAN.steps_for(selection) }
