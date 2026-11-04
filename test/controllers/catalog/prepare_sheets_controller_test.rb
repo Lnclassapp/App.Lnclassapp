@@ -62,22 +62,23 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "Relis l", response.body
   end
 
-  test "the page offers « Commencer » towards the sheet to fill, and a link back to the lesson at the sheet's card" do
+  test "the page offers « Commencer l'exercice » towards the sheet to fill, and a link back to the lesson at the sheet's card" do
     sign_in_as @student
 
     get course_sheet_path(@course.slug, @devoir_sheet)
 
-    assert_select "a.ps-start[href=?]", fill_course_sheet_path(@course.slug, @devoir_sheet), text: "Commencer Prépare devoirs"
+    assert_select "a.ps-start[href=?]", fill_course_sheet_path(@course.slug, @devoir_sheet), text: "Commencer l'exercice"
     assert_select "a[href=?]", course_path(@course.slug, anchor: @devoir_sheet), text: including("Thalès")
   end
 
-  test "the button says « Continuer » once an exercise of the sheet has a finished copy" do
+  test "the button still says « Commencer l'exercice » once an exercise of the sheet has a finished copy" do
     create_exercise_session(student: @student, exercise: @devoirs.first, status: "completed", score_percent: 100)
     sign_in_as @student
 
     get course_sheet_path(@course.slug, @devoir_sheet)
 
-    assert_select "a.ps-start", text: "Continuer Prépare devoirs"
+    assert_select "a.ps-start", text: "Commencer l'exercice"
+    assert_select "a.ps-start", text: /Continuer/, count: 0
     assert_select "#sheet-progress-#{@devoir_sheet}", 0
 
     # La progression se lit sur la feuille à remplir.
@@ -85,14 +86,15 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#sheet-progress-#{@devoir_sheet}", text: "1 / 2 exercice réussi"
   end
 
-  test "the interros sheet starts with « Commencer Prépare interros »" do
+  test "the interros sheet offers « Commencer l'exercice »" do
     sign_in_as @student
 
     get course_sheet_path(@course.slug, @notion_sheet)
 
     assert_select "h1.ps-paper-heading"
     assert_select ".ps-paper-name", text: including("Prépare interros n°1")
-    assert_select "a.ps-start", text: "Commencer Prépare interros"
+    assert_select "a.ps-start", text: "Commencer l'exercice"
+    assert_select "a.ps-start", text: /Continuer/, count: 0
   end
 
   test "the sheet to fill is today's sheet: active fields, the check button, and the sheet posted with the check" do
