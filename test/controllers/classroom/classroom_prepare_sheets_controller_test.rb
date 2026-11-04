@@ -101,7 +101,7 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
   test "a signed-out visitor is sent to sign in" do
     get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
 
-    assert_response :redirect
+    assert_redirected_to new_session_path
     assert_no_match "Exercice notion", response.body
   end
 end

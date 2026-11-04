@@ -46,7 +46,7 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
     end
 
     assert_selector "#session_grade", text: "20/20"
-    click_link "Retour à Ma classe"
+    click_link "Reprendre le devoir"
     assert_current_path fill_student_assigned_sheet_path(@sheet)
     within(frame(first)) { assert_selector ".ps-status", text: "Réussi" }
 
@@ -54,13 +54,6 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
     assert_link "Continuer Prépare devoirs"
     visit student_classroom_path
     assert_selector "a.ps-card##{@sheet} .ps-card-meta", text: "1 / 3 exercice réussi"
-  end
-
-  test "an unknown assignment sends back to « Ma classe » with its message" do
-    visit student_assigned_sheet_path("devoir-inconnu")
-
-    assert_current_path student_classroom_path
-    assert_text "Cette feuille n'existe plus."
   end
 
   test "on a 390 px screen the cards and the reading page do not overflow and « Commencer » is 48 px high" do

@@ -59,10 +59,10 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assignment = create_assignment(classroom: @classroom, assignable: @exercise)
     sign_in_as @student
 
-    check(assignment_public_id: assignment.public_id, sheet: "sujet-2")
+    check(assignment_public_id: assignment.public_id, sheet: "devoir-abc123")
 
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise, status: "completed")
-    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "class", sheet: "sujet-2")
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
   end
 
   test "une ancre qui n'a pas la forme d'une feuille n'est pas transmise" do
@@ -89,13 +89,27 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", back, text: "Retour à la leçon"
   end
 
+  # Le slug d'une notion vient de parameterize : il garde « _ » (u_n) et n'a pas de longueur maximale.
+  test "l'ancre d'une notion au nom en u_n, ou longue, ramène bien à la feuille à remplir" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+
+    [ "notion-suites-u_n-et-v_n", "notion-#{'a' * 200}" ].each do |sheet|
+      get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
+
+      assert_select "a[href=?]", fill_course_sheet_path(@course.slug, sheet, anchor: "sheet-exercise-#{@exercise.public_id}"),
+                    text: "Retour à la leçon"
+    end
+  end
+
   test "l'ancre de la feuille ne vaut que si elle a la forme attendue ; sinon l'ancien retour s'applique" do
     sign_in_as @student
     check
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
     old = "#{course_path(@course.slug)}#sheet-exercise-#{@exercise.public_id}"
 
-    [ "../admin", "Sujet 2", "a" * 121, "javascript:alert(1)" ].each do |bad|
+    [ "../admin", "Sujet 2", "a" * 256, "javascript:alert(1)" ].each do |bad|
       get exercise_session_result_path(session.public_id, return_to: "sheet", sheet: bad)
 
       assert_select "a[href=?]", old, text: "Retour à la leçon"
@@ -112,9 +126,9 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
 
     get exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
     assert_select "a[href=?]", fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}"),
-                  text: "Retour à Ma classe"
+                  text: "Reprendre le devoir"
 
-    [ "Devoir/../x", "", "a" * 121 ].each do |bad|
+    [ "Devoir/../x", "", "a" * 256 ].each do |bad|
       get exercise_session_result_path(session.public_id, return_to: "class", sheet: bad)
       assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
     end

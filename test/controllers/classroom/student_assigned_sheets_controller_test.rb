@@ -93,7 +93,7 @@ class Classroom::StudentAssignedSheetsControllerTest < ActionDispatch::Integrati
     end
 
     get student_assigned_sheet_path(@sheet)
-    assert_response :redirect
+    assert_redirected_to new_session_path
     assert_no_match "Devoir 1", response.body
   end
 

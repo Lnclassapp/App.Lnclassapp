@@ -6,7 +6,9 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-11-04 | Après un devoir, la page de résultat dit « Reprendre le devoir » (et non « Retour à Ma classe ») | Le lien ramène à la feuille du devoir (choix du pilote) | non (UDR) |
+| 2026-11-04 | La case d'un devoir garde « DEVOIR DU <date> » | Libellé existant, gardé par le pilote | non |
+| 2026-11-04 | Ancre `sheet` : `\A[a-z0-9_-]{1,255}\z` au lieu de `{1,120}` sans `_` | Revue (pannes silencieuses) : une notion « u_n » ou longue perdait sa feuille au retour, sans trace | non (UDR) |
 
 ## Ce qui a dérapé
 
@@ -39,7 +41,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| La progression d'une case de devoir lit la dernière copie de l'exercice, tous contextes ; refait depuis la leçon après le rendu, l'exercice compte l'entraînement | Sémantique déjà celle de la progression de la feuille (`PrepareSheetsQuery#copies`) ; « Rendu » reste juste | à ouvrir : copie liée au devoir dans `StudentAssignedSheetsQuery` |
+| `return_to` et le préfixe de l'ancre (`devoir-` ou non) ne sont pas contrôlés ensemble | Atteint seulement avec des paramètres fabriqués ; la page cible répond « Cette feuille n'existe plus. » | aucun |
 
 ## Clôture
 

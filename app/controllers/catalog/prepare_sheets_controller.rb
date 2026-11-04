@@ -42,11 +42,11 @@ module Catalog
       yield
     end
 
-    def fillable? = %i[student visitor].include?(sheet_mode)
+    # AuthenticatedController : un acteur est toujours connecté ici.
+    def fillable? = sheet_mode == :student
 
     def sheet_mode
-      if current_actor.nil? then :visitor
-      elsif current_actor.student? then :student
+      if current_actor.student? then :student
       elsif current_actor.team? then :team
       else :teacher
       end

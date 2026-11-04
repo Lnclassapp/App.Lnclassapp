@@ -49,7 +49,7 @@ Chaque feuille devient une **case** sur la page qui l'accueillait. La case mène
   1. « PRÉPARE INTERROS N°1 » / « PRÉPARE DEVOIRS N°2 » (gras, capitales, même clé que le titre de la feuille) ;
   2. le titre de la feuille (nom de la notion, « Toute la leçon », titre du sujet, « Devoir du <date> ») ;
   3. « n exercices » (`n exercice` au singulier) ;
-  4. élève seulement : la progression « x / n exercices réussis » (même clé que la feuille) ; pour un devoir reçu, « À rendre le <date> » ou « Rendu » quand tous ses exercices le sont ;
+  4. élève seulement : la progression « x / n exercice(s) réussi(s) » (même clé que la feuille, singulier à 0 et 1) ; pour un devoir reçu, « À rendre le <date> » ou « Rendu » quand tous ses exercices le sont ;
   5. à droite, une flèche `chevron-right` (`aria-hidden="true"`).
 - Grille `.ps-cards` : 1 colonne sous 640 px, 2 colonnes de 640 à 1 023 px, 3 colonnes dès 1 024 px ; écart 16 px. Hauteur minimale de la case 112 px.
 - Sections inchangées : titre « Prépare interros » puis ses cases (notions dans l'ordre, puis « Toute la leçon ») ; « Prépare devoirs » puis ses cases, seulement s'il y a un sujet. « Ma classe » : une case par devoir reçu, le plus récent en premier.
@@ -65,7 +65,7 @@ Chaque feuille devient une **case** sur la page qui l'accueillait. La case mène
 
 **Page à remplir**
 - Le lien retour vers la page de lecture (« ← Lire le sujet »), puis la feuille d'aujourd'hui (`mode: :student` ou `:visitor`, `hand_ins` pour un devoir reçu), inchangée : champs, « Vérifier ma réponse » / « Rendre à l'enseignant », indice, « Recommencer ».
-- La page de résultat (`session_results#show`) ramène à cette page, à l'ancre `#sheet-exercise-<public_id>` : le formulaire de la feuille poste `sheet` (l'ancre de la feuille) avec `return_to`, que la vérification transmet à la page de résultat ; `sheet` n'est lu que s'il correspond à `\A[a-z0-9-]{1,120}\z`, sinon l'ancien retour (la leçon) s'applique.
+- La page de résultat (`session_results#show`) ramène à cette page, à l'ancre `#sheet-exercise-<public_id>` : le formulaire de la feuille poste `sheet` (l'ancre de la feuille) avec `return_to`, que la vérification transmet à la page de résultat ; `sheet` n'est lu que s'il correspond à `\A[a-z0-9_-]{1,255}\z` (le slug d'une notion garde « _ » et n'a pas de longueur maximale), sinon l'ancien retour (la leçon) s'applique. Venu d'un devoir (`return_to=class` avec `sheet`), le lien dit « Reprendre le devoir » et mène à la feuille du devoir à remplir (choix du pilote, 2026-11-04) ; sans `sheet`, « Retour à Ma classe ».
 - Le lien « Ce devoir est à rendre : ouvre-le dans Ma classe. » mène à « Ma classe » (inchangé).
 
 **Tokens**

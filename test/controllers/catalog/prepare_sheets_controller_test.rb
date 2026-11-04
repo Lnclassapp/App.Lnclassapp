@@ -49,6 +49,10 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{frame(@ex)} fieldset[disabled] .ps-choice[aria-checked=true]", 0
     assert_select "#{frame(@ex)} .ps-choice[data-action]", 0
     assert_select "#{frame(@ex)} .ps-choice-label", text: "Proposition 1", minimum: 1
+    # @ex porte un indice : la lecture ne le montre pas, ni son bouton.
+    assert_select "#{frame(@ex)} button.ps-btn--hint", 0
+    assert_select "#{frame(@ex)} .ps-hint", 0
+    assert_no_match "Relis l", response.body
   end
 
   test "the page offers « Commencer » towards the sheet to fill, and a link back to the lesson at the sheet's card" do

@@ -22,11 +22,11 @@ Aucune policy nouvelle : chaque page reprend celle de sa page hôte (`ReadPublis
 
 ### Chemin nominal
 
-1. L'élève ouvre la leçon Thalès : sous « Prépare interros », 4 cases (3 notions, « Toute la leçon ») ; sous « Prépare devoirs », 4 cases. Chacune dit son numéro, son titre, son nombre d'exercices et « x / n exercices réussis ».
+1. L'élève ouvre la leçon Thalès : sous « Prépare interros », 4 cases (3 notions, « Toute la leçon ») ; sous « Prépare devoirs », 4 cases. Chacune dit son numéro, son titre, son nombre d'exercices et « x / n exercice(s) réussi(s) » (singulier à 0 et 1).
 2. Il touche « Prépare devoirs n°2 » : la page montre le sujet complet, champs désactivés, sans bouton dans les exercices ; en bas, « Commencer Prépare devoirs ».
 3. Il touche « Commencer » : la feuille à remplir s'ouvre, comme aujourd'hui.
 4. Il vérifie l'exercice 1 : la page de résultat s'affiche ; « Retour » le ramène à la feuille remplie, sur l'exercice 1.
-5. De retour sur la leçon, la case dit « 1 / 4 exercices réussis » ; rouverte, son bouton dit « Continuer Prépare devoirs ».
+5. De retour sur la leçon, la case dit « 1 / 4 exercice réussi » ; rouverte, son bouton dit « Continuer Prépare devoirs ».
 
 ### Chemins alternatifs et erreurs
 
@@ -67,9 +67,9 @@ Scénario: le résultat ramène à la feuille remplie
   Alors le lien retour de la page de résultat mène à la feuille à remplir du sujet 2, à l'exercice 1
 
 Scénario: une feuille commencée dit « Continuer » et montre le progrès
-  Étant donné un élève qui a réussi 1 exercice du sujet 2
+  Étant donné un élève qui a réussi 1 exercice du sujet 2 (« Continuer » dès une copie terminée, réussie ou non)
   Quand il ouvre la leçon
-  Alors la case du sujet 2 dit « 1 / 4 exercices réussis »
+  Alors la case du sujet 2 dit « 1 / 4 exercice réussi »
   Et la page de lecture du sujet 2 propose « Continuer Prépare devoirs »
 
 Scénario: l'enseignant lit le sujet avec ses bascules, sans commencer

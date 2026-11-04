@@ -67,7 +67,7 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
     assert_selector "#session_grade", text: "20/20"
     assert_selector "#session_review li[id^=question_review_]", count: 2
     assert_equal [ @assignments.fetch(first).id ], sessions(first).pluck(:classroom_assignment_id)
-    click_link "Retour à Ma classe"
+    click_link "Reprendre le devoir"
 
     assert_current_path fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
     within(frame(first)) do
@@ -85,7 +85,7 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
 
     assert_selector "#session_grade", text: "0/20"
     assert_equal [ @assignments.fetch(first).id, nil ], sessions(first).order(:id).pluck(:classroom_assignment_id)
-    click_link "Retour à Ma classe"
+    click_link "Reprendre le devoir"
     assert_current_path fill_student_assigned_sheet_path("devoir-batchdevoirxxx")
   end
 end

@@ -1,7 +1,7 @@
 <%# 🌐 UI · catalog/courses/_prepare_sheets — « Prépare interros » et « Prépare devoirs » de la page d'une leçon (catalogue et classe) %>
 <%# Rôle : une case par feuille (une par notion puis « Toute la leçon » ; une par sujet, section seulement s'il y en a), chacune vers la page de lecture du sujet ; état vide sans exercice ; plus aucune feuille à remplir ici %>
 <%# ADR  : 0121, 0113 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 %>
-<%# locals: (prepare:, classroom_public_id: nil, course_slug: nil, href: nil) -%>
+<%# locals: (prepare:, course_slug: nil, href: nil) -%>
 <%# href : un lambda (ancre de la feuille → adresse) ; par défaut la page de la feuille dans le catalogue (la page de la classe le remplacera) %>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% actor = current_actor %>

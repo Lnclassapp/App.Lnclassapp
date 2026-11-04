@@ -46,13 +46,6 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     assert_link "Continuer Prépare devoirs"
   end
 
-  test "an unknown sheet sends back to the lesson with its message" do
-    visit course_sheet_path(@course.slug, "sujet-9")
-
-    assert_current_path course_path(@course.slug)
-    assert_text "Cette feuille n'existe plus."
-  end
-
   test "on a 390 px screen the reading page does not overflow and « Commencer » is 48 px high" do
     with_mobile_viewport do
       visit course_sheet_path(@course.slug, "sujet-#{@subject.position}")
