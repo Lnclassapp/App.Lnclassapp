@@ -55,7 +55,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-04 |
+| **PR** | [#463](https://github.com/Lnclassapp/App.Lnclassapp/pull/463) vers `Develop` |
+| **ADR produits** | aucun |
+| **UDR produits** | [UDR-0150](../../decisions/udr/0150-qcm-plusieurs-reponses-sur-la-feuille.md) (amende l'UDR-0149 §3) |

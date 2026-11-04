@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | planifié |
+| **Statut** | livré ([#463](https://github.com/Lnclassapp/App.Lnclassapp/pull/463) vers `Develop`, 2026-11-04), clos |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `fix/qcm-plusieurs-reponses` |
 | **Programme** | — |
@@ -55,7 +55,7 @@ Sur la feuille « Prépare interros » de Thalès (notion 1, exercice 1), l'él�
 ## Portes de sortie
 
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
-- [ ] Bug reproduit **à la main** dans l'application avant toute ligne de code
+- [x] Bug reproduit **à la main** dans l'application avant toute ligne de code
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
 - [x] Test de reproduction écrit **avant** le correctif
 - [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
@@ -63,13 +63,13 @@ Sur la feuille « Prépare interros » de Thalès (notion 1, exercice 1), l'él�
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Lot unique — contrat d'exécution
 
-- **UDR** : UDR-XXXX-qcm-plusieurs-reponses-sur-la-feuille.
+- **UDR** : UDR-0150.
 - **Fichiers** : `app/infrastructure/queries/catalog/prepare_sheets_query.rb` (le nombre de propositions attendues d'un QCM, à côté de `multiple`) · `app/views/catalog/courses/sheets/_question.html.erb` (« Coche 2 réponses. » sous un QCM multiple) · `app/controllers/assessment/sheet_checks_controller.rb` (garder les erreurs par question) · `app/views/assessment/sheet_checks/_error.html.erb` · `config/locales/assessment/sheet_checks.fr.yml` · `config/locales/catalog/courses.fr.yml` · `app/assets/stylesheets/prepare_sheet.css` (`.ps-instruction`)
 - **Tests** : `test/controllers/assessment/sheet_checks_controller_test.rb` (reproduction : une seule proposition à un QCM à deux bonnes réponses → 422 et « Question e : coche 2 réponses. », rouge d'abord) · `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb` · `test/system/assessment/sheet_check_test.rb` (la feuille affiche « Coche 2 réponses. »)
 - **Séquence** : test de reproduction → rouge pour la bonne raison → correctif → vert → suite `assessment` et `catalog` → `bin/system-changed`.
