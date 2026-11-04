@@ -50,20 +50,21 @@ Le compte rendu dicté lit un **fichier envoyé par un utilisateur** (enregistre
 #   messages : [{ role: "system"|"user", content: String }]
 #   audio    : { data: String (octets), format: "webm"|"ogg"|"mp4" } ou nil
 #   succès   : Shared::Result.success({ text:, model:, input_tokens:, output_tokens:, duration_ms: })
-#   échecs   : :not_configured | :timeout | :provider_error | :invalid_response
+#   échecs   : Shared::Result.failure(:unavailable, errors: { reason: :not_configured | :timeout | :provider_error | :invalid_response })
+#              (ERROR_CODES de Shared::Result est une liste fermée, non étendue : la raison voyage dans errors[:reason])
 ```
 
 **Configuration** (variables Railway, lues une fois dans `config/initializers/language_models.rb` vers `Rails.configuration.x.language_models`) :
 
 | Variable | Rôle | Exemple de valeur |
 |---|---|---|
-| `OPENROUTER_API_KEY` | Clé ; absente → `:not_configured`, boutons remplacés par « Assistant non configuré » | — |
+| `OPENROUTER_API_KEY` | Clé ; absente → raison `:not_configured`, boutons remplacés par « Assistant non configuré » | — |
 | `OPENROUTER_MODEL_TEXT` | Briefing, brouillon, rapport | `deepseek/deepseek-chat` |
 | `OPENROUTER_MODEL_AUDIO` | Compte rendu dicté | `google/gemini-2.5-flash` |
 
 Délai : 5 s pour ouvrir la connexion, 30 s pour la réponse, aucune nouvelle tentative automatique (l'utilisateur réessaie).
 
-**Table `crm_generations`** : `public_id`, `school_id`, `kind` ∈ {`briefing`, `dictation`, `whatsapp_draft`, `pedagogy_report`}, `status` ∈ {`pending`, `done`, `failed`}, `requested_by_id`, `follow_up_id` (nul), `input_fingerprint` (SHA-256 des entrées), `content` (texte ou JSON), `error_code`, `model`, `input_tokens`, `output_tokens`, `duration_ms`. Index unique partiel `(school_id, kind) WHERE status = 'pending'` : une seule génération en cours par école et par type. Un briefing dont l'empreinte des entrées est inchangée réutilise le dernier `done`.
+**Table `crm_generations`** : `public_id`, `school_id`, `kind` ∈ {`briefing`, `dictation`, `whatsapp_draft`, `pedagogy_report`}, `status` ∈ {`pending`, `done`, `failed`}, `requested_by_id`, `follow_up_id` (nul), `input_fingerprint` (SHA-256 des entrées), `content` (texte ou JSON), `error_code`, `model`, `input_tokens`, `output_tokens`, `duration_ms`. Le port `GenerationRepositoryPort` marque l'échec par `mark_failed(public_id:, error_code:, duration_ms:)` (et non `fail`, qui masquerait `Kernel#fail`). Index unique partiel `(school_id, kind) WHERE status = 'pending'` : une seule génération en cours par école et par type. Un briefing dont l'empreinte des entrées est inchangée réutilise le dernier `done`.
 
 **Sondage** : l'état `pending` rend un frame Turbo que le contrôleur Stimulus `generation-poll` recharge toutes les 2 s, 45 s au plus, puis affiche l'état d'erreur.
 
@@ -109,9 +110,9 @@ module Crm
     end
 
     def complete(messages:, model:, max_tokens:, json: false, audio: nil)
-      return Shared::Result.failure(:not_configured) if @api_key.blank?
-      # POST JSON, open_timeout 5, read_timeout 30 ; Net::ReadTimeout → :timeout ;
-      # code ≠ 2xx → :provider_error ; corps sans choices[0].message.content → :invalid_response
+      return Shared::Result.failure(:unavailable, errors: { reason: :not_configured }) if @api_key.blank?
+      # POST JSON, open_timeout 5, read_timeout 30 ; Net::ReadTimeout → raison :timeout ;
+      # code ≠ 2xx → raison :provider_error ; corps sans choices[0].message.content → raison :invalid_response
     end
   end
 end

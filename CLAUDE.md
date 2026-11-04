@@ -92,7 +92,7 @@ Le travail vit dans [`docs/chantiers/<slug>/`](docs/chantiers/). Un chantier san
 | **Delivery** | `app/controllers/` | Transforme les params, appelle le use case, décide du rendu. Zéro logique métier. |
 | **UI** | `app/views/`, `app/javascript/` | Vues ERB, Turbo Streams, contrôleurs Stimulus |
 
-**Contextes bornés** : `assessment`, `catalog`, `classroom`, `communication`, `identity`, `school`.
+**Contextes bornés** : `assessment`, `catalog`, `classroom`, `communication`, `crm`, `identity`, `school`.
 
 Patterns de code par couche : [`docs/blueprints/`](docs/blueprints/)
 

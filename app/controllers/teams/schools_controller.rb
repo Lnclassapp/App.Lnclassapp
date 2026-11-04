@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
 # Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, confirmations lues à la demande, désactivation
-# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077, 0088 · UDR : 0006, 0036, 0046, 0050, 0070, 0083 · aucune création : un établissement n'entre que par l'import
+# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077, 0088, XXXX (contexte crm) · UDR : 0006, 0036, 0046, 0050, 0070, 0083, XXXX (bloc « Suivi ») · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     include SchoolStaffBlock
@@ -21,6 +21,8 @@ module Teams
       @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id], archives: params[:archives] == "1")
       return render_not_found if @school.nil?
 
+      # UDR-XXXX (bloc « Suivi ») : `content` ne voit pas le bloc (CA-01).
+      @can_manage_crm = Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       @join_requests = Queries::School::JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
       load_school_staff(Repositories::School::SchoolRepository.new.find_by_public_id(public_id: @school.public_id))

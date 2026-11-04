@@ -101,9 +101,16 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
                      `app/helpers/navigation_helper.rb` · `config/locales/shared/navigation.fr.yml` *(« Relances » dans « Plus »)*
                      `test/support/fake_language_model.rb`
                      `docs/guide/conventions.md` §2 · `CLAUDE.md` · `docs/guide/glossaire.md` *(septième contexte `crm`)*
+                     `db/seeds/development.rb` *(deux comptes équipe fictifs, PIN 2468 : `0700000001` `field`, `0700000002` `content`)*
+                     *Squelettes de contrôleur et de vue (arbitrage du porteur : tout frame ou lien que le Lot 0 pose doit répondre ; chacun hérite de `Teams::Crm::BaseController` et rend son frame vide, puis passe au lot nommé)* :
+                     `app/controllers/teams/crm/stages_controller.rb` · `usages_controller.rb` (Lot A) · `contacts_controller.rb` (Lot B) · `interactions_controller.rb` (Lot C) · `follow_ups_controller.rb` (`#school`, `#index` : Lot D) · `home_follow_ups_controller.rb` (Lot E) · `assistants_controller.rb` (Lot G)
+                     `app/views/teams/crm/stages/show.html.erb` · `usages/show.html.erb` · `contacts/index.html.erb` · `interactions/index.html.erb` · `follow_ups/school.html.erb` · `follow_ups/index.html.erb` · `home_follow_ups/show.html.erb` · `assistants/show.html.erb`
+                     *Adaptateurs squelettes (chaque méthode a la signature du port et lève `NotImplementedError, "Lot X"`, pour que `port_contracts_test` reste vert)* :
+                     `app/infrastructure/repositories/crm/account_repository.rb` (Lot A) · `contact_repository.rb` (Lot B) · `interaction_repository.rb` (Lot C) · `generation_repository.rb` (Lot G) · `app/infrastructure/crm/open_router_language_model.rb` (Lot G)
+                     `test/db/schema_constraints_test.rb` *(liste fermée `CRM_CASCADES`)* · `docs/guide/architecture.md` §5 *(sept contextes)* · `docs/decisions/adr/XXXX-modeles-de-langage-par-openrouter.md` *(échecs du port : `:unavailable` + `errors[:reason]` ; `mark_failed`)*
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/crm/stage_test.rb` (CA-03, CA-04, CA-05) · `test/domain/policies/crm/manage_crm_policy_test.rb` · `test/infrastructure/queries/crm/school_usage_query_test.rb` · `test/infrastructure/queries/crm/assignable_members_query_test.rb` · `test/infrastructure/repositories/crm/follow_up_repository_test.rb` · `test/controllers/teams/crm/accounts_controller_test.rb` (CA-01, CA-02 : 403 pour `content` et enseignant ; frame absent de la fiche pour `content`)
-- **Done quand**   : un membre `field` ouvre une fiche établissement et voit le bloc « Suivi » et ses six squelettes ; un membre `content` ne le voit pas et reçoit 403 sur `/teams/schools/:id/follow-up` ; `bin/rails runner "puts Ports::Crm::LanguageModelPort.name"` passe ; les ports sont gelés
+- **Done quand**   : après le seed, on se connecte avec `0700000001` (`field`) et `0700000002` (`content`) ; un membre `field` ouvre une fiche établissement et voit le bloc « Suivi » et ses six squelettes ; un membre `content` ne le voit pas et reçoit 403 sur `/teams/schools/:id/follow-up` ; `bin/rails runner "puts Ports::Crm::LanguageModelPort.name"` passe ; les ports sont gelés
 
 ---
 
@@ -112,7 +119,7 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
 - **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/crm/set_stage.rb` · `assign_owner.rb`
                      `app/infrastructure/repositories/crm/account_repository.rb`
-                     `app/controllers/teams/crm/stages_controller.rb` · `owners_controller.rb` · `usages_controller.rb`
+                     `app/controllers/teams/crm/stages_controller.rb` *(`#show`, `#update`)* · `owners_controller.rb` *(`#edit`, `#update`)* · `usages_controller.rb` *(`#show`)* *(squelettes de stages et usages posés par le Lot 0)*
                      `app/views/teams/crm/stages/show.html.erb` · `_stage.html.erb` · `_form.html.erb` · `update.turbo_stream.erb`
                      `app/views/teams/crm/owners/_form.html.erb` · `update.turbo_stream.erb`
                      `app/views/teams/crm/usages/show.html.erb`
@@ -128,7 +135,7 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
 - **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/crm/add_contact.rb` · `archive_contact.rb`
                      `app/infrastructure/repositories/crm/contact_repository.rb`
-                     `app/controllers/teams/crm/contacts_controller.rb`
+                     `app/controllers/teams/crm/contacts_controller.rb` *(`#index`, `#new`, `#create`, `#archive` en GET pour la confirmation, `#destroy` ; squelette du Lot 0)*
                      `app/views/teams/crm/contacts/index.html.erb` · `_contact.html.erb` · `_form.html.erb` · `new.html.erb` · `archive.html.erb` · `create.turbo_stream.erb` · `destroy.turbo_stream.erb`
                      `config/locales/teams/crm/contacts.fr.yml`
 - **Dépend de**    : Lot 0
@@ -156,8 +163,8 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
 - **Couche**       : domaine + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/crm/schedule_follow_up.rb` · `complete_follow_up.rb` · `reassign_follow_up.rb`
                      `app/infrastructure/queries/crm/follow_ups_query.rb` *(relances d'une école ; « mes relances » ; orphelines)*
-                     `app/controllers/teams/crm/follow_ups_controller.rb` · `follow_up_completions_controller.rb` · `follow_up_assignees_controller.rb`
-                     `app/views/teams/crm/follow_ups/index.html.erb` *(page « Relances », onglets « Mes relances » et « Sans destinataire »)* · `school.html.erb` *(frame de la fiche)* · `_follow_up.html.erb` · `_form.html.erb` · `new.html.erb` · `_assignee_form.html.erb` · `create.turbo_stream.erb` · `complete.turbo_stream.erb` · `reassign.turbo_stream.erb`
+                     `app/controllers/teams/crm/follow_ups_controller.rb` *(`#index`, `#school`, `#new`, `#create` ; squelette du Lot 0)* · `follow_up_completions_controller.rb` *(`#update`)* · `follow_up_assignees_controller.rb` *(`#edit`, `#update`)* *(routes gelées par le Lot 0 : `complete.turbo_stream.erb` et `reassign.turbo_stream.erb` sont rendus explicitement par `update`)*
+                     `app/views/teams/crm/follow_ups/index.html.erb` *(page « Relances », onglets « Mes relances » et « Sans destinataire »)* · `school.html.erb` *(frame de la fiche)* · `_follow_up.html.erb` · `_form.html.erb` · `new.html.erb` · `_assignee_form.html.erb` · `edit.html.erb` · `create.turbo_stream.erb` · `complete.turbo_stream.erb` · `reassign.turbo_stream.erb`
                      `config/locales/teams/crm/follow_ups.fr.yml`
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/crm/schedule_follow_up_test.rb` · `test/domain/use_cases/crm/complete_follow_up_test.rb` (CA-13, déjà faite sans effet) · `test/domain/use_cases/crm/reassign_follow_up_test.rb` (CA-14) · `test/infrastructure/queries/crm/follow_ups_query_test.rb` · `test/controllers/teams/crm/follow_ups_controller_test.rb` · `test/system/teams/crm_follow_ups_test.rb`
@@ -250,7 +257,7 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
                      `app/domain/entities/crm/pedagogy_report_prompt.rb`
                      `app/infrastructure/queries/crm/pedagogy_report_query.rb` *(30 jours : élèves actifs, devoirs, taux de rendu, réussite par matière, 5 lacunes)*
                      `app/jobs/crm/pedagogy_report_job.rb`
-                     `app/controllers/teams/crm/pedagogy_reports_controller.rb`
+                     `app/controllers/teams/crm/pedagogy_reports_controller.rb` *(`#create` : POST depuis la carte puis redirection ; `#show` : `/teams/pedagogy-reports/:public_id`)*
                      `app/views/teams/crm/pedagogy_reports/show.html.erb` · `_figures.html.erb` · `_subjects.html.erb` · `_gaps.html.erb`
                      `app/javascript/controllers/print_controller.js`
                      `config/locales/teams/crm/pedagogy_reports.fr.yml`
@@ -317,6 +324,13 @@ Aucun critère orphelin.
 | `app/controllers/teams/crm/follow_ups_controller.rb`, `app/views/teams/crm/follow_ups/index.html.erb` | Lot D, puis Lot E **en série** |
 | `app/views/teams/crm/interactions/_form.html.erb` | Lot C ; le Lot K le **rend** sans le modifier |
 | `test/support/fake_language_model.rb` | Lot 0 |
+| `app/controllers/teams/crm/{stages,usages}_controller.rb`, `app/views/teams/crm/{stages,usages}/show.html.erb`, `app/infrastructure/repositories/crm/account_repository.rb` | Lot 0 → Lot A (séquentiel) |
+| `app/controllers/teams/crm/contacts_controller.rb`, `app/views/teams/crm/contacts/index.html.erb`, `app/infrastructure/repositories/crm/contact_repository.rb` | Lot 0 → Lot B (séquentiel) |
+| `app/controllers/teams/crm/interactions_controller.rb`, `app/views/teams/crm/interactions/index.html.erb`, `app/infrastructure/repositories/crm/interaction_repository.rb` | Lot 0 → Lot C (séquentiel) |
+| `app/controllers/teams/crm/follow_ups_controller.rb`, `app/views/teams/crm/follow_ups/{school,index}.html.erb` | Lot 0 → Lot D → Lot E (séquentiel) |
+| `app/controllers/teams/crm/home_follow_ups_controller.rb`, `app/views/teams/crm/home_follow_ups/show.html.erb` | Lot 0 → Lot E (séquentiel) |
+| `app/controllers/teams/crm/assistants_controller.rb`, `app/views/teams/crm/assistants/show.html.erb`, `app/infrastructure/repositories/crm/generation_repository.rb`, `app/infrastructure/crm/open_router_language_model.rb` | Lot 0 → Lot G (séquentiel) |
+| `test/db/schema_constraints_test.rb`, `test/system/role_homes_test.rb` | Lot 0 (liste `CRM_CASCADES` ; entrée « Relances » du menu « Plus ») |
 | `test/fixtures/` | Aucun lot ne modifie de fixture partagée ; s'il en faut une pour `crm_*`, elle remonte au Lot 0 |
 
 Contrôle mécanique à relancer après toute modification du plan :
@@ -326,7 +340,7 @@ awk '/^## Vérification de collision/{exit} 1' docs/chantiers/crm-ecoles/plan.md
   | grep -oE '(app|test|config|db|lib)/[A-Za-z0-9_/.-]+\.(rb|erb|yml|js)' | sort | uniq -d
 ```
 
-Sortie attendue : `app/controllers/teams/crm/follow_ups_controller.rb`, `app/controllers/teams/schools_controller.rb`, `app/views/teams/crm/follow_ups/index.html.erb` (tous en série, voir le tableau).
+Sortie attendue : `follow_ups_controller.rb`, `stages_controller.rb`, `schools_controller.rb`, `open_router_language_model.rb`, `account_repository.rb`, `follow_ups/index.html.erb` et `stages/show.html.erb` (tous en série : squelette du Lot 0 puis lot propriétaire, voir le tableau).
 
 ## Portes de sortie
 
