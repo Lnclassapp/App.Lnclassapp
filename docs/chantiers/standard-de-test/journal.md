@@ -148,10 +148,10 @@ Fichiers en défaut :
 - Environnement local : ChromeDriver du PATH (147) incompatible avec le Chromium (153) ; poser `CHROME_BIN` et `CHROMEDRIVER_PATH`.
 
 **Ce qui reste ouvert (pour le porteur)**
-- Poser `STANDARD_TEAM_PIN` (scellée) sur Develop : sans elle, aucun compte équipe du jeu (constaté au déploiement de #453).
+- ~~Poser `STANDARD_TEAM_PIN` sur Develop~~ — posée le 2026-11-04, avec `DEMO_TEAM_PIN` sur Demo ; à sceller dans Railway.
 - Demo sur `main` : le code qui reconnaît Demo (#451) n'y arrive qu'avec le train ; vérifier ses variables (`DATABASE_URL` et `BUCKET_*` propres, pas de `PR_BASE_ENVIRONMENT`).
 - Remise à neuf de Demo : proposition d'une commande dédiée (petit lot), en attente.
-- Staging : une leçon créée dont la publication échoue reste en brouillon (proposé : garder ainsi).
+- ~~Staging : une leçon créée dont la publication échoue reste en brouillon~~ — **tranché par le porteur le 2026-11-04 : on garde le brouillon**, publié à la main.
 - Develop : la leçon à sujets hors manifeste reste rechargée en `:exercises`.
 - Remise à zéro de Develop au seul jeu standard : laissée de côté par le porteur le 2026-11-02.
 - Garde automatique de la section « Prouvé sur le jeu standard » : une GitHub Action si le porteur la veut.
