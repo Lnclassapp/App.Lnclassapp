@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Catalog::ReferentialCompleter
-# Rôle : crée sur Develop ce qui manque du référentiel (niveaux, séries, couples, matières, barème des classes, DRENA), sans toucher à l'existant
+# Rôle : crée sur Develop et Staging ce qui manque du référentiel (niveaux, séries, couples, matières, barème des classes, DRENA), sans toucher à l'existant
 # ADR  : 0123, 0034, 0058, 0090
 module Repositories
   module Catalog
