@@ -35,7 +35,7 @@ Pas de Lot 0 : aucune migration, aucune entité, aucun port, aucune route. Vague
 - **Test associé** : `test/controllers/assessment/session_results_controller_test.rb` (continuer : suivant, premier non fait, tout fait, devoir, feuille introuvable, sans feuille ; lien « Refaire » vers la feuille avec `redo`) ; tests de query pour `next_open` ; tests contrôleur de `fill` (`redo` connu → `data-prepare-sheet-redo-value`, inconnu → absent) ; `test/system/assessment/sheet_check_test.rb` (Refaire : l'exercice revient vide, l'autre garde ses réponses)
 - **Done quand**   : depuis la correction d'un exercice de « Prépare devoirs n°1 », « Continuer les exercices » ouvre la feuille sur l'exercice suivant non fait avec les réponses du premier visibles, et « Refaire l'exercice » ouvre la feuille avec cet exercice vide ; tout fait → « Retour à la leçon »
 
-Ordre intra-lot : tests rouges → queries → contrôleurs → vues et JS. Règles d'interface : [UDR-XXXX-refaire-ou-continuer](../../decisions/udr/XXXX-refaire-ou-continuer.md) §3. PRD : [`prd.md`](prd.md).
+Ordre intra-lot : tests rouges → queries → contrôleurs → vues et JS. Règles d'interface : [UDR-0153](../../decisions/udr/0153-refaire-ou-continuer.md) §3. PRD : [`prd.md`](prd.md).
 
 ---
 

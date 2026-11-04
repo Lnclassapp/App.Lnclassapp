@@ -1,4 +1,4 @@
-# UDR-XXXX : Depuis la correction, « Refaire l'exercice » et « Continuer les exercices » ramènent à la feuille
+# UDR-0153 : Depuis la correction, « Refaire l'exercice » et « Continuer les exercices » ramènent à la feuille
 <!-- index
 titre: Refaire ou continuer depuis la correction
 statut: Accepté
