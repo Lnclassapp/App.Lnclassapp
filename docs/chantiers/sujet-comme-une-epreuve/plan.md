@@ -32,7 +32,7 @@ Dispatch : **vague 1 : Lot A → 1 agent** (`executant-lot`), dans le worktree d
 
 Ordre intra-lot : tests rouges d'abord (intégration + query), puis la query, puis le partiel, `_sheet`, le CSS, les locales ; enfin les tests existants. La feuille à remplir (`fill`) ne change pas : ses tests ne bougent pas.
 
-Règles d'interface : [UDR-XXXX-sujet-comme-une-epreuve](../../decisions/udr/XXXX-sujet-comme-une-epreuve.md) §3, à suivre à la lettre. PRD : [`prd.md`](prd.md).
+Règles d'interface : [UDR-0152](../../decisions/udr/0152-sujet-comme-une-epreuve.md) §3, à suivre à la lettre. PRD : [`prd.md`](prd.md).
 
 ---
 

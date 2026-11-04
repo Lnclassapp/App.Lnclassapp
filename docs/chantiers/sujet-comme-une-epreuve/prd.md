@@ -101,7 +101,7 @@ Scénario: à 390 px, rien ne déborde
 ## 6. Décisions rattachées
 
 - Pas d'ADR : ni port, ni table, ni dépendance, ni contrat nouveaux ; une colonne existante (les points des questions) entre dans une requête de lecture existante.
-- UDR-XXXX-sujet-comme-une-epreuve (amende l'UDR-0151 §3, page de lecture).
+- UDR-0152 (amende l'UDR-0151 §3, page de lecture).
 
 ## 7. Mesures
 

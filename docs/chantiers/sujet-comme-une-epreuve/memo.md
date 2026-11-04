@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré ([#466](https://github.com/Lnclassapp/App.Lnclassapp/pull/466) vers `Develop`, 2026-11-04), clos |
 | **Ouvert le** | 2026-11-04 |
 | **Branche** | `feature/sujet-comme-une-epreuve` |
 | **Programme** | — |

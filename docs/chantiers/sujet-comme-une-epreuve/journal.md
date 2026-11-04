@@ -34,13 +34,14 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Au-delà de 26 questions dans un exercice, la lettre `(96 + number).chr` sort de l'alphabet (« { » après « z ») | motif déjà présent sur la feuille à remplir ; aucun sujet n'en a plus de 10 | aucun : à reprendre si un sujet dépasse 26 questions |
+| Les tests d'épreuve renforcés après la revue n'ont pas été vus rouges (le code était déjà conforme) | le rendu existait avant les tests | — |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-04 |
+| **PR** | [#466](https://github.com/Lnclassapp/App.Lnclassapp/pull/466) vers `Develop` |
+| **ADR produits** | — |
+| **UDR produits** | UDR-0152 (amende UDR-0151 §3) |
