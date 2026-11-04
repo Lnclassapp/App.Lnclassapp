@@ -68,6 +68,11 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
       assert_selector BUTTON, text: more
       assert_operator find(BUTTON).native.size.height, :>=, 48
       assert no_sideways_scroll?, "la page défile sur le côté"
+      edges = page.evaluate_script(
+        "(() => { const r = document.querySelector('.sheet-screen[data-embedded]').getBoundingClientRect();" \
+        "return [Math.round(r.left), Math.round(r.right), document.documentElement.clientWidth] })()"
+      )
+      assert_equal [ 0, edges[2] ], edges.first(2), "la fiche ne va pas bord à bord sur téléphone"
       find(BUTTON).click
       assert_selector "h4", text: "Seconde notion"
       assert no_sideways_scroll?, "la page défile sur le côté, dépliée"
