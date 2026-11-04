@@ -22,7 +22,7 @@ Pas de Lot 0 : aucune migration, entité, port ni route. Vague 1 : Lot A → 1 a
 - **Test associé** : `test/system/catalog/revision_sheet_test.rb` (à 390 px : `.sheet-screen[data-embedded]` de 0 à la largeur de l'écran, pas de défilement en largeur, repliée et dépliée)
 - **Done quand**   : à 390 px, sur « Propriétés de Thalès dans un triangle », le cahier touche les deux bords, le texte d'un encadré commence à 30 px et une étape de « La méthode » à 50 px ; à 1280 px, rien n'a changé
 
-Règles d'interface : UDR-XXXX-fiche-de-cours-pleine-largeur-sur-telephone §3. PRD : [`prd.md`](prd.md).
+Règles d'interface : UDR-0155 §3. PRD : [`prd.md`](prd.md).
 
 ---
 

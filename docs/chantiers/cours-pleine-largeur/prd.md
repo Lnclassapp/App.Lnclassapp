@@ -54,12 +54,12 @@ Alors le cahier garde son cadre et ses marges d'avant
 ## 6. Décisions rattachées
 
 - Pas d'ADR : aucune architecture ne bouge.
-- UDR-XXXX-fiche-de-cours-pleine-largeur-sur-telephone : amende l'UDR-0139 §3.2 et l'UDR-0137 §4 sous 640 px.
+- UDR-0155 : amende l'UDR-0139 §3.2 et l'UDR-0137 §4 sous 640 px.
 
 ## 7. Mesures
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Début du texte d'un encadré à 390 px | 66 px | 30 px | |
-| Début d'une étape de « La méthode » à 390 px | 88 px | 50 px | |
-| Hauteur de la page de Thalès repliée à 390 px | 3 396 px | moins | |
+| Début du texte d'un encadré à 390 px | 66 px | 30 px | 30 px |
+| Début d'une étape de « La méthode » à 390 px | 88 px | 50 px | 50 px |
+| Hauteur de la page de Thalès repliée à 390 px | 3 396 px | moins | 3 238 px |

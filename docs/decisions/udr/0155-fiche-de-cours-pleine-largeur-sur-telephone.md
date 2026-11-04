@@ -1,4 +1,4 @@
-# UDR-XXXX : Sur téléphone, le cahier de la fiche de cours occupe toute la largeur de l'écran
+# UDR-0155 : Sur téléphone, le cahier de la fiche de cours occupe toute la largeur de l'écran
 <!-- index
 titre: Fiche de cours pleine largeur sur téléphone
 statut: Accepté
