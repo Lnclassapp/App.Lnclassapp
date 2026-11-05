@@ -45,13 +45,14 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     assert_select "##{toggle_id(@classroom, @devoir)}"
   end
 
-  test "the team reads the sheet without any toggle" do
+  test "the team reads the sheet with the toggle of this classroom only (suivi-classe-lecon CA-16)" do
     sign_in_as create_team_member
 
     get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
 
     assert_response :success
-    assert_select "[id^=assignment_]", 0
+    assert_select "[id^=assignment_]", 1
+    assert_select "[id^=assignment_#{@classroom.public_id}_]", 1
     # sujet-comme-une-epreuve : l'équipe ne voit plus « Publié » ; seul un brouillon porte sa mention (sheet_paper_test).
     assert_select ".ps-paper-exercise", 1
     assert_select ".ps-paper-exercise-title .ps-status", 0

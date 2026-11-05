@@ -22,7 +22,8 @@ module Classroom
       @course = Queries::Classroom::ClassroomCourseQuery.new.call(classroom_public_id: @classroom.public_id, course_slug: params[:course_slug])
       return render_not_found if @course.nil?
 
-      @prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
+      @prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: params[:course_slug], actor: current_actor,
+                                                                  classroom_public_id: @classroom.public_id)
       @sheet = @prepare.sheet(params[:sheet])
       return redirect_to classroom_course_path(@classroom.public_id, params[:course_slug]), alert: t("catalog.courses.sheets.gone"), status: :see_other if @sheet.nil?
 
@@ -33,6 +34,7 @@ module Classroom
       render :show
     end
 
-    def sheet_mode = current_actor.team? ? :team : :teacher
+    # Dans la classe l'équipe a la barre de l'enseignant (suivi-classe-lecon, UDR §3.5) : le mode :team ne la rend pas.
+    def sheet_mode = :teacher
   end
 end
