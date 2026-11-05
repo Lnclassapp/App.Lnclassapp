@@ -16,10 +16,13 @@ class CiPlanTest < Minitest::Test
   # « plan », « system » a matrix of SYSTEM_PARTS parts. No job runs longer than JOB_MINUTES (the owner's ceiling).
   TEST_JOBS = %w[unit system].freeze
   SYSTEM_PARTS = 6
-  # Chantier ci-unit-en-parts: the unit suite in two parts, their coverage merged by « coverage ».
-  UNIT_PARTS = 2
+  # Chantiers ci-unit-en-parts and ci-train-rapide: the unit suite in three parts (under 3 minutes each with their setup),
+  # their coverage merged by « coverage ».
+  UNIT_PARTS = 3
   PERF_PARTS = 2
   JOB_MINUTES = 5
+  # Chantier ci-train-rapide: the jobs GitHub runs at once on this account; a 21st waits for a free runner.
+  CONCURRENT_JOBS = 20
 
   def workflow = YAML.safe_load_file(WORKFLOW, aliases: true)
 
@@ -67,6 +70,15 @@ class CiPlanTest < Minitest::Test
     run = steps("lecons").map { it["run"].to_s }.join("\n")
     assert_includes run, "PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb"
     assert_equal "#{'${{ matrix.part }}'}/#{parts.size}", steps("lecons").find { it.dig("env", "LECONS_PART") }.dig("env", "LECONS_PART")
+  end
+
+  # Chantier ci-train-rapide (ADR-0107 §9) : after « plan », a full run makes every test job ready at once. They stay
+  # under the account's limit of simultaneous jobs, with one runner left for another run: none waits in the queue
+  # (before: 23 ready jobs, 3 queued for 64 to 114 s on the train).
+  def test_a_full_run_starts_every_test_job_at_once_under_the_concurrency_limit
+    ready = unit_parts("&&").size + jobs.dig("system", "strategy", "matrix", "part").size + jobs.dig("lecons", "strategy", "matrix", "part").size
+
+    assert_operator ready, :<=, CONCURRENT_JOBS - 1, "#{ready} tâches prêtes ensemble : au plus #{CONCURRENT_JOBS - 1}"
   end
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,

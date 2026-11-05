@@ -12,7 +12,7 @@ problematique: Une CI complète par PR fait jouer la suite entière à chaque fu
 | **Chantier** | [`docs/chantiers/ci-par-train`](../../chantiers/ci-par-train/memo.md) |
 | **Remplace** | la règle « une CI complète par PR » (`docs/workflows/README.md` §5.3, chantier `ci-perf-a-la-demande`) |
 | **Remplacé par** | — |
-| **Amendé** | 2026-11-04 : la suite unitaire en deux parts sur GitHub, couverture fusionnée (§8, chantier `ci-unit-en-parts`) |
+| **Amendé** | 2026-11-04 : la suite unitaire en deux parts sur GitHub, couverture fusionnée (§8, chantier `ci-unit-en-parts`) · 2026-11-05 : trois parts unitaires, sept parts de leçons, pas de file d'attente (§9, chantier `ci-train-rapide`) |
 
 ---
 
@@ -82,4 +82,14 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 ## 8. Amendement du 2026-11-04 — la suite unitaire passe en parts
 
 La tâche `unit unit` a dépassé 5 minutes trois fois le 2026-11-04 (316 s et 317 s, coupée par `timeout-minutes: 5`) et a bloqué le train #476. Décision du porteur, sans relever le plafond : la suite unitaire tourne sur GitHub en deux parts, et la tâche `coverage` fusionne leurs couvertures pour vérifier le seuil de 100 % / 100 % sur la suite entière (détail : [ADR-0064 §8](./0064-ci-parallele-par-groupes-de-bin-ci.md#8-amendement-du-2026-11-04--la-suite-unitaire-en-parts-la-couverture-fusionnée)). Quand une part approche à son tour 5 minutes, on relève `UNIT_PARTS` (garde, tirage de `plan`, appel de `script/ci/coverage_collate`).
+
+## 9. Amendement du 2026-11-05 — un train plus court
+
+Chantier [`ci-train-rapide`](../../chantiers/ci-train-rapide/memo.md), ouverture validée par le porteur.
+
+**Constat.** Un train dure 293 s d'horloge (médiane de 3 runs) : la part `unit:1/2` (226 s) puis `coverage` font le chemin critique. Et GitHub ne lance que 20 tâches à la fois sur ce compte : sur 23 tâches prêtes après `plan`, 3 attendaient de 64 à 114 s.
+
+**Décision.** La suite unitaire tourne en **trois parts** sur GitHub (`UNIT_PARTS = 3`) ; `coverage` fusionne trois résultats, avec le même seuil sur la suite entière. Le plafond de 5 minutes ne change pas.
+
+Les leçons v3 se rendent en **sept parts** au lieu de douze (≈ 80 s fixes par part, ≈ 2,1 s par leçon). Un run complet rend prêtes ensemble au plus **19 tâches de test** (6 `unit`, 6 `system`, 7 `lecons`) : aucune n'attend, et une place reste libre pour un autre run. La garde `test/guards/ci_plan_test.rb` (`CONCURRENT_JOBS`) refuse une matrice qui dépasserait cette limite ; si les leçons grandissent au point qu'une part approche 5 minutes, on ajoute une part ailleurs ou on relève la limite (plan GitHub : décision du porteur).
 
