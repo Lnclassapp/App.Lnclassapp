@@ -1,0 +1,44 @@
+# Rapport pédagogique (chantier crm-ecoles, Lot J) — ADR-XXXX (modèles de langage), UDR-XXXX (assistants du suivi)
+fr:
+  teams:
+    crm:
+      pedagogy_reports:
+        show:
+          page_title: "Rapport pédagogique · %{school}"
+          title: "Rapport pédagogique"
+          subtitle: "%{school} · %{days} derniers jours"
+          print: "Imprimer"
+          school: "Établissement :"
+          drena: "DRENA :"
+          period: "Période :"
+          period_value: "%{days} derniers jours"
+          prepared_on: "Préparé le :"
+          subjects: "Réussite par matière"
+          gaps: "Notions à retravailler"
+          synthesis: "Synthèse"
+        figures:
+          active: "Élèves actifs"
+          assignments: "Devoirs donnés"
+          submission: "Taux de rendu des devoirs"
+          success: "Réussite moyenne"
+          percent: "%{value} %"
+          unknown: "—"
+        subjects:
+          empty: "Aucun exercice terminé sur la période."
+          caption: "Réussite par matière sur les 30 derniers jours"
+          subject: "Matière"
+          sessions: "Exercices terminés"
+          average: "Réussite moyenne"
+          percent: "%{value} %"
+        gaps:
+          empty: "Aucune notion à retravailler pour le moment."
+          students:
+            one: "%{count} élève"
+            other: "%{count} élèves"
+        synthesis:
+          review: "Texte proposé par l'assistant : relisez avant de partager."
+          copy: "Copier la synthèse"
+          copied: "Synthèse copiée"
+        no_activity:
+          title: "Pas encore assez d'activité"
+          description: "Le rapport se prépare dès que des élèves travaillent sur Lnclass."

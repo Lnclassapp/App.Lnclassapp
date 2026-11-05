@@ -112,6 +112,26 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "p.text-mute", text: /Préparée il y a/
   end
 
+  test "a failed pedagogy report offers a retry towards its own route" do
+    generation = pending(kind: "pedagogy_report")
+    @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
+
+    show generation
+
+    assert_select "a[href=?][data-turbo-method=post]", teams_school_pedagogy_reports_path(@school.public_id), text: /Réessayer/
+  end
+
+  test "a done pedagogy report found by the poll renders the synthesis, escaped, with its copy button" do
+    generation = pending(kind: "pedagogy_report")
+    @repository.complete(public_id: generation.public_id, content: "<b>Bon</b>\nDeuxième ligne", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
+
+    show generation
+
+    assert_select "turbo-frame#generation_#{generation.public_id} p.whitespace-pre-line", 2
+    assert_includes response.body, "&lt;b&gt;Bon&lt;/b&gt;"
+    assert_select "[data-controller=generation-poll]", count: 0
+  end
+
   test "an unknown generation is a 404, a content member is a 403" do
     get teams_generation_path("unknown-public")
     assert_response :not_found
