@@ -85,21 +85,28 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
 
     get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
 
-    back = "#{fill_course_sheet_path(@course.slug, sheet)}#sheet-exercise-#{@exercise.public_id}"
-    assert_select "a[href=?]", back, text: "Retour à la leçon"
+    # refaire-ou-continuer : la correction ramène à la feuille à remplir, sur l'exercice, par « Refaire l'exercice » (le seul exercice de la feuille).
+    back = "#{fill_course_sheet_path(@course.slug, sheet, redo: @exercise.public_id)}#sheet-exercise-#{@exercise.public_id}"
+    assert_select "a#restart-exercise-link[href=?]", back, text: "Refaire l'exercice"
+    # Rien d'autre à faire sur la feuille : le second bouton ramène à la case de la feuille sur la leçon.
+    assert_select "a[href=?]", course_path(@course.slug, anchor: sheet), text: "Retour à la leçon"
   end
 
   # Le slug d'une notion vient de parameterize : il garde « _ » (u_n) et n'a pas de longueur maximale.
   test "l'ancre d'une notion au nom en u_n, ou longue, ramène bien à la feuille à remplir" do
     sign_in_as @student
-    check
-    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
 
-    [ "notion-suites-u_n-et-v_n", "notion-#{'a' * 200}" ].each do |sheet|
+    [ "Suites u_n et v_n", "a" * 140 ].each_with_index do |name, rank|
+      notion = create_essential(course: @course, name:, position: rank + 2)
+      exercise = create_exercise(essential: notion, questions: 5)
+      session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
+      exercise.questions.each { |question| create_attempt(session:, question:) }
+      sheet = "notion-#{notion.slug}"
+
       get exercise_session_result_path(session.public_id, return_to: "sheet", sheet:)
 
-      assert_select "a[href=?]", fill_course_sheet_path(@course.slug, sheet, anchor: "sheet-exercise-#{@exercise.public_id}"),
-                    text: "Retour à la leçon"
+      assert_select "a#restart-exercise-link[href=?]", fill_course_sheet_path(@course.slug, sheet, redo: exercise.public_id, anchor: "sheet-exercise-#{exercise.public_id}")
+      assert_select "a[href=?]", course_path(@course.slug, anchor: sheet), text: "Retour à la leçon"
     end
   end
 
@@ -123,6 +130,8 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     check
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    # Le devoir existe (refaire-ou-continuer lit la feuille) : sa copie n'est pas rendue, l'exercice reste à faire.
+    create_assignment(classroom: @classroom, assignable: @exercise, by: create_teacher(classrooms: [ @classroom ]), batch_public_id: "ABC123")
 
     get exercise_session_result_path(session.public_id, return_to: "class", sheet: "devoir-abc123")
     assert_select "a[href=?]", fill_student_assigned_sheet_path("devoir-abc123", anchor: "sheet-exercise-#{@exercise.public_id}"),
@@ -343,6 +352,15 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "template p.ps-error[role=alert]", text: /Une réponse n'est pas lisible/
     assert_no_match(/un nombre est attendu/, response.body)
+  end
+
+  test "sans JavaScript, une copie illisible dans sa forme revient à la leçon avec le message général" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { "999999" => { display_order: [ "0" ] } } } }
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal I18n.t("assessment.sheet_checks.errors.invalid_copy"), flash[:alert]
   end
 
   test "sans JavaScript, une réponse illisible revient à la leçon avec son message (R1)" do

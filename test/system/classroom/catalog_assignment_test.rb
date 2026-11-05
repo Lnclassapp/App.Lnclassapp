@@ -31,7 +31,7 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
   # PRD, chemin nominal enseignant, étape 4 ; plan, Lot F « Done quand ».
   test "from a catalogue sheet: the days modal the first time, then « Assigné · Pour jeu. 8 oct. » in place, Tle D 1 only" do
     visit sheet_page
-    assert_selector "h1.ps-title", text: "PRÉPARE INTERROS N°1"
+    assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
     assert_selector ".ps-sheet [id^='assignment_']", count: 4
     assert_no_selector "[id^='assignment_#{@tle_c1.public_id}_']"
     assert_no_text "Tle C 1"
@@ -105,7 +105,7 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       visit sheet_page
 
       frame = find("#sheet-exercise-#{@phases.public_id}")
-      title = frame.find(".ps-exercise-head")
+      title = frame.find(".ps-paper-exercise-title")
       assigned = frame.find("[role=status]", text: "Pour jeu. 8 oct.").rect
       assert_operator assigned.y, :>, title.rect.y
       assert_operator assigned.x + assigned.width, :<=, frame.rect.x + frame.rect.width, "la bascule déborde de la feuille"

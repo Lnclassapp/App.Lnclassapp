@@ -32,12 +32,12 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
 
     find("a.ps-card##{@sheet}").click
     assert_current_path student_assigned_sheet_path(@sheet)
-    assert_selector "h1.ps-title", text: "PRÉPARE DEVOIRS N°1"
-    assert_selector ".ps-exercise", count: 3
-    assert_selector "fieldset[disabled]", count: 3
+    assert_selector "h1.ps-paper-heading", text: /\AÉPREUVE DE /
+    assert_selector ".ps-paper-exercise", count: 3
+    assert_no_selector "fieldset, input, textarea, select"
     assert_no_button "Rendre à l'enseignant"
 
-    click_link "Commencer Prépare devoirs"
+    find("a.ps-start", text: "Commencer l'exercice").click
     assert_current_path fill_student_assigned_sheet_path(@sheet)
     first = @devoir.first
     within(frame(first)) do
@@ -51,7 +51,7 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
     within(frame(first)) { assert_selector ".ps-status", text: "Réussi" }
 
     visit student_assigned_sheet_path(@sheet)
-    assert_link "Continuer Prépare devoirs"
+    assert_selector "a.ps-start", text: "Commencer l'exercice"
     visit student_classroom_path
     assert_selector "a.ps-card##{@sheet} .ps-card-meta", text: "1 / 3 exercice réussi"
   end

@@ -30,7 +30,7 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
 
     # sujet-avant-de-commencer, Lot B : l'exercice à faire est une case ; sa feuille se lit puis se commence.
     within("#student_classroom_assigned") { click_link "Prépare interros n°1" }
-    click_link "Commencer Prépare interros"
+    find("a.ps-start", text: "Commencer l'exercice").click
     within "#sheet-exercise-#{@todo.public_id}" do
       assert_text "Exercice 1"
       assert_button "Rendre à l'enseignant"

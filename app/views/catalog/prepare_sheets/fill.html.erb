@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/prepare_sheets/fill — la feuille à remplir d'une feuille de la leçon (la feuille d'aujourd'hui) %>
-<%# Rôle : retour au sujet en lecture, puis la feuille : champs, « Vérifier ma réponse », indice, « Recommencer » ; l'élève et le visiteur seulement %>
-<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 · Stimulus : prepare-sheet, math %>
+<%# Rôle : retour au sujet en lecture, puis la feuille : champs, « Vérifier ma réponse », indice, « Recommencer », l'exercice à refaire quand la correction y ramène ; l'élève et le visiteur seulement %>
+<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3, XXXX refaire-ou-continuer §3 · Stimulus : prepare-sheet, math %>
 <% course = @detail.course %>
 <% kind = @sheet.kind == :subject ? :devoirs : :interros %>
 <% page_title t("catalog.courses.sheets.page_title", title: t("catalog.courses.sheets.numbered_title.#{kind}", number: @sheet.number), course: course.name) %>
@@ -8,5 +8,5 @@
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <div data-turbo-prefetch="false"><%= ui_back_link t("catalog.courses.sheets.read_subject"), href: course_sheet_path(course.slug, @sheet.dom_id) %></div>
 <div class="ps-page">
-  <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: sheet_mode %>
+  <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: sheet_mode, redo_exercise: @redo %>
 </div>

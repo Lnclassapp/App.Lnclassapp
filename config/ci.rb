@@ -3,9 +3,9 @@
 # Order: cheapest and most fundamental first.
 #
 # The steps are grouped (ADR-0064). bin/ci plays every group, in this order, locally; GitHub plays them in two
-# kinds of jobs side by side, « unit » (every group but system) and three parts of « system » (ADR-0069 §9: the
-# minutes are counted per job, the clock stays under ten minutes). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
-# (`system:2/4`) plays a subset.
+# kinds of jobs side by side, « unit » (every group but system, the unit suite in two parts) and six parts of « system »
+# (ADR-0069 §9, ADR-0107: no job longer than five minutes). `CI_GROUP=<group>[,<group>…]` or a part of a sharded group
+# (`system:2/4`, `unit:1/2`) plays a subset.
 require_relative "../script/ci/plan"
 require_relative "../script/ci/scope"
 
@@ -56,12 +56,24 @@ CI_PLAN = CiPlan.define do
     step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error", inputs: :brakeman
   end
 
-  group "unit", db: true do
-    # Full suite: SimpleCov fails the step below 100 % lines or branches (ADR-0024). Never split: the threshold
-    # measures the whole suite, and this group is not the longest one (docs/chantiers/ci-rapide/memo.md).
-    # The two guards above already ran: the suite leaves them out here (Rails' default exclusion, plus the guards).
-    step "Tests: Rails (coverage 100 % lines and branches)",
-         "env DEFAULT_TEST_EXCLUDE='#{guards_excluded}' bin/rails test", inputs: :unit
+  # The files of the unit suite: what `bin/rails test` plays with the exclusion above.
+  unit_files = CiPlan.files("test/**/*_test.rb") - CiPlan.files(guards_excluded)
+  # Locally, the whole suite in one run: SimpleCov fails the step below 100 % lines or branches (ADR-0024).
+  # On GitHub, two parts of similar recorded duration (ADR-0064 §1 and ADR-0107, amended by chantier ci-unit-en-parts):
+  # each part measures its coverage under its own name (COVERAGE_PART) and checks nothing; the « coverage » job merges
+  # the parts (script/ci/coverage_collate) and checks the same threshold on the whole suite. No test is left out.
+  # A part names its files, so `bin/rails test` skips test:prepare: the part builds the assets itself.
+  # -v prints each test's duration: script/ci/record_timings rebuilds the timings of the split from any log.
+  # The two guards above already ran: the suite leaves them out here (Rails' default exclusion, plus the guards).
+  # The import performance tests skip here without PERF: they weigh nothing in this split.
+  sharded "unit", files: unit_files, light: CiPlan.files("test/performance/**/*_test.rb") do |files, part|
+    if part
+      step "Tests: Rails (coverage 100 % lines and branches) #{part}",
+           "bin/rails test:prepare && env COVERAGE_PART=#{part} bin/rails test #{files.join(' ')} -v", inputs: :unit
+    else
+      step "Tests: Rails (coverage 100 % lines and branches)",
+           "env DEFAULT_TEST_EXCLUDE='#{guards_excluded}' bin/rails test", inputs: :unit
+    end
   end
 
   # Real browser, never rack_test (configuration.md §4.3). Partial run: no threshold (§4.1).

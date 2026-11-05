@@ -160,6 +160,10 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0149](./0149-feuilles-prepare-interros-et-devoirs.md) | Feuilles Prépare interros et Prépare devoirs | Accepté | 2026-10-30 | 0121 | L'élève ne voit jamais une notion ni un sujet de devoir en entier et quitte la leçon pour chaque exercice |
 | [0150](./0150-qcm-plusieurs-reponses-sur-la-feuille.md) | QCM à plusieurs réponses sur la feuille | Accepté | 2026-11-04 | — | Sur la feuille de cahier, un QCM à plusieurs bonnes réponses ne dit pas combien en cocher, et un refus de vérification ne dit pas quelle question est en cause. |
 | [0151](./0151-feuilles-en-cases-lues-avant-de-commencer.md) | Feuilles en cases, lues avant de commencer | Accepté | 2026-10-31 | — | Sur la page d'une leçon et dans « Ma classe », les feuilles sont empilées et déjà prêtes à remplir ; l'élève ne voit ni combien il y en a ni le sujet en entier avant de commencer. |
+| [0152](./0152-sujet-comme-une-epreuve.md) | Sujet lu comme une épreuve | Accepté | 2026-11-04 | — | La page de lecture d'une feuille « Prépare interros » ou « Prépare devoirs » montre le sujet dans la mise en page du cahier à remplir, pas dans celle d'une épreuve d'examen. |
+| [0153](./0153-refaire-ou-continuer.md) | Refaire ou continuer depuis la correction | Accepté | 2026-11-04 | — | Sur la correction d'une copie vérifiée depuis une feuille, « Refaire » ouvre l'ancien lecteur et « Retour à la leçon » ramène à l'exercice déjà fait. |
+| [0154](./0154-feuille-pleine-largeur-sur-telephone.md) | Feuille pleine largeur sur téléphone | Accepté | 2026-11-04 | — | Sur téléphone, la feuille (épreuve à lire ou feuille à remplir) perd 36 à 51 px de chaque côté en marges empilées : le texte et les champs sont serrés. |
+| [0155](./0155-fiche-de-cours-pleine-largeur-sur-telephone.md) | Fiche de cours pleine largeur sur téléphone | Accepté | 2026-11-04 | — | Sur téléphone, la fiche de révision dans la page d'une fiche de cours perd 66 à 88 px de chaque côté en marges empilées : les lignes sont courtes et la fiche est longue. |
 <!-- index:end -->
 
 ---

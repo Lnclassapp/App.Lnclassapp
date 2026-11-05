@@ -3,7 +3,7 @@
   Rôle : styles des maquettes de Touré (docs/chantiers/prepare-interros-cahier/maquettes/) transcrits tels quels en classes `.ps-*` :
          noir, blanc et gris (#d6d6d6, #f5f5f5, #e8e8e8, #999), rayon 0, police Source Serif 4 auto-hébergée. Isolé du reste de
          l'application, chargé seulement sur la page d'une leçon (stylesheet_link_tag "prepare_sheet"), servi tel quel par Propshaft.
-  ADR  : 0121 · UDR-0149 (§3 Tokens : exception assumée)
+  ADR  : 0121 · UDR-0149 (§3 Tokens : exception assumée) · UDR feuille-pleine-largeur-sur-telephone (sous 640 px : bord à bord, en fin de fichier)
 
   Classes : .ps-page (fond gris, conteneur des feuilles) > .ps-sheet (feuille blanche de 880 px) > .ps-header (cartouche), .ps-title-block,
   .ps-remember, .ps-exercise, .ps-footer. Dans .ps-exercise : .ps-exercise-top (.ps-exercise-main > .ps-exercise-head > .ps-status,
@@ -138,6 +138,8 @@
   gap: 10px;
   border: 1px solid #999;
   padding: 12px 14px;
+  /* « Continuer les exercices » / « Refaire l'exercice » arrivent sur l'ancre de l'exercice : son titre s'arrête sous la barre collante. */
+  scroll-margin-top: calc(var(--spacing-bar) + 0.75rem);
 }
 
 .ps-exercise-top {
@@ -528,6 +530,268 @@
   font-size: 15px;
 }
 
+/* ---- L'épreuve (sujet-comme-une-epreuve) : la page de lecture d'une feuille, en forme d'examen ------------------------- */
+.ps-paper {
+  color: #000;
+}
+
+.ps-paper-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ps-paper-heading {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.ps-paper-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ps-paper-rubric {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.ps-paper-exercise {
+  margin-top: 24px;
+  min-width: 0;
+}
+
+.ps-paper-exercise-title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.ps-paper-exercise-number {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Énoncé et figure : côte à côte dès 700 px (figure 40 % au plus), la figure sous l'énoncé en dessous. */
+.ps-paper-top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ps-paper-statement {
+  min-width: 0;
+}
+
+.ps-paper-figure {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 700px) {
+  .ps-paper-top--figure {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .ps-paper-top--figure .ps-paper-statement {
+    flex: 1 1 0;
+  }
+
+  .ps-paper-figure {
+    flex: 0 0 40%;
+    width: 40%;
+  }
+}
+
+.ps-paper-instruction {
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.ps-paper-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.ps-paper-table th,
+.ps-paper-table td {
+  border: 1px solid #000;
+  padding: 6px 8px;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.ps-paper-table thead th {
+  background: #eee;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ps-paper-table tbody th,
+.ps-paper-table thead th:first-child {
+  width: 2.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ps-paper-table--mcq thead th:nth-child(n + 3) {
+  width: 4.5em;
+}
+
+.ps-paper-table--mcq tbody td:nth-child(n + 3) {
+  text-align: center;
+  /* Une proposition se coupe entre deux mots, ou par un trait d'union, jamais au milieu d'une syllabe (« prop|riété »). */
+  overflow-wrap: normal;
+  hyphens: auto;
+}
+
+/* Une proposition en formule plus large que sa case défile dans la case, jamais la page. */
+.ps-paper-choice {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ps-paper-table--mcq .ps-instruction {
+  font-size: 0.9em;
+}
+
+/* Une formule plus large que sa cellule défile dans la cellule, jamais la page. */
+.ps-paper-table .katex-display,
+.ps-paper-table .katex {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ps-paper-table .katex-display {
+  display: block;
+}
+
+/* Une formule en ligne (une proposition « DE = 37,5 » dans une colonne de lettre) : un bloc en ligne, seul moyen de la borner à sa cellule. */
+.ps-paper-table .katex {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ps-paper-list {
+  margin: 8px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ps-paper-list > li {
+  margin: 6px 0;
+  overflow-wrap: anywhere;
+}
+
+.ps-paper-items {
+  margin: 4px 0 0;
+  padding-left: 1.5em;
+}
+
+.ps-paper-footer {
+  margin: 24px 0 0;
+  border-top: 1px solid #000;
+  padding-top: 8px;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 479px) {
+  .ps-paper-table {
+    font-size: 13px;
+  }
+
+  .ps-paper-table th,
+  .ps-paper-table td {
+    padding: 4px;
+  }
+
+  .ps-paper-table tbody th,
+  .ps-paper-table thead th:first-child {
+    width: 2em;
+  }
+
+  /* Sur téléphone, une ligne de QCM devient une grille : le N° à gauche, l'affirmation sur toute la largeur, puis ses
+     propositions deux par deux, chacune précédée de sa lettre (« A. »), assez larges pour une formule. Les en-têtes « A B C D »
+     restent pour les lecteurs d'écran seulement ; une case sans proposition disparaît. */
+  .ps-paper-table--mcq,
+  .ps-paper-table--mcq thead,
+  .ps-paper-table--mcq tbody {
+    display: block;
+  }
+
+  .ps-paper-table--mcq {
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+  }
+
+  .ps-paper-table--mcq tr {
+    display: grid;
+    grid-template-columns: 2em repeat(2, minmax(0, 1fr));
+  }
+
+  .ps-paper-table--mcq th,
+  .ps-paper-table--mcq td {
+    min-width: 0;
+    border: 0;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+  }
+
+  .ps-paper-table--mcq thead th,
+  .ps-paper-table--mcq tbody th {
+    width: auto;
+  }
+
+  .ps-paper-table--mcq tr > :first-child {
+    grid-row: span 4;
+  }
+
+  .ps-paper-table--mcq tr > :nth-child(2) {
+    grid-column: 2 / -1;
+  }
+
+  .ps-paper-table--mcq thead th:nth-child(n + 3) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .ps-paper-table--mcq tbody td:nth-child(n + 3) {
+    display: flex;
+    gap: 4px;
+    align-items: baseline;
+    text-align: left;
+  }
+
+  .ps-paper-table--mcq tbody td:nth-child(n + 3)::before {
+    content: attr(data-letter) ".";
+    font-weight: 700;
+  }
+
+  .ps-paper-table--mcq tbody td:empty {
+    display: none;
+  }
+
+  .ps-paper-table--mcq .ps-paper-choice {
+    min-width: 0;
+  }
+}
+
 /* ---- Les feuilles en cases (sujet-avant-de-commencer) : mêmes valeurs que la feuille, hors .ps-page --------------------- */
 .ps-cards {
   display: grid;
@@ -620,4 +884,26 @@
 .ps-page .ps-start:hover {
   background: #333;
   color: #fff;
+}
+
+/* ---- Sous 640 px, la feuille touche les deux bords de l'écran (UDR feuille-pleine-largeur-sur-telephone, amende UDR-0149 §3 et UDR-0152 §3) ---- */
+@media (max-width: 639px) {
+  .ps-page {
+    margin-inline: calc(-1 * var(--spacing-gutter));
+  }
+
+  .ps-sheet {
+    padding: 16px 12px 32px;
+    box-shadow: none;
+  }
+
+  .ps-exercise {
+    padding: 10px 8px;
+  }
+
+  .ps-page .ps-start {
+    align-self: stretch;
+    width: auto;
+    margin-inline: 12px;
+  }
 }

@@ -6,6 +6,8 @@ require "rake"
 class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
   FILE = Rails.root.join("docs/contenus/lecons-traitees/3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json")
   IMPORT_NAME = "chargement-automatique-3eme-mathematiques-proprietes-de-thales-dans-un-triangle.json"
+  # Le nom de la ligne d'import d'un chargement entier (Develop, amendement du 2026-11-04).
+  WHOLE_IMPORT_NAME = "chargement-automatique-entiere-3eme-mathematiques-proprietes-de-thales-dans-un-triangle.json"
   LOCK = "SELECT %s(hashtext('contenus:charger'))"
   # ADR-0123 : une leçon v3 du programme, sans sujet (Tle C).
   PROGRAMME_FILE = Rails.root.join("docs/contenus/lecons-traitees/tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json")
@@ -75,12 +77,13 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     end
   end
 
-  def automatic_reports = Orm::ImportReport.where(kind: "course_tree").where("files @> ?::jsonb", [ { name: IMPORT_NAME } ].to_json)
+  def automatic_reports(name = IMPORT_NAME) = Orm::ImportReport.where(kind: "course_tree").where("files @> ?::jsonb", [ { name: } ].to_json)
+  def whole_reports = automatic_reports(WHOLE_IMPORT_NAME)
 
   def subject_exercise_count = @lesson["subjects"].sum { it["exercises"].size }
 
-  # CA : une leçon publiée est remplacée sur Develop
-  test "Develop replaces the exercises and subjects of the published Thalès lesson, keeps its sheets, erases the student's session, and leaves a finished line" do
+  # CA (ADR-0122) : sur Staging, une leçon à sujets publiée n'a que ses exercices et sujets remplacés
+  test "Staging replaces the exercises and subjects of the published Thalès lesson, keeps its sheets, erases the student's session, and leaves a finished line" do
     seed_referential
     course = import_old_version
     notion = course.essentials.order(:position).first
@@ -90,7 +93,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     sheets = course.essentials.order(:position).pluck(:slug, :name, :sheet)
     assert_equal 1, course.subjects.count
 
-    output = charger("Develop")
+    output = charger("Staging")
 
     assert_includes output, "#{IMPORT_NAME} : loaded"
     course.reload
@@ -108,10 +111,37 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal [ IMPORT_NAME ], line.files.map { it["name"] }
   end
 
+  # CA (amendement du 2026-11-04) : sur Develop, la leçon à sujets (Thalès) est remplacée entière, sujets compris : Develop a exactement le fichier
+  test "Develop replaces whole the published Thalès lesson: notions, sheets, exercises and subjects of the file; the student's work is erased" do
+    seed_referential
+    course = import_old_version
+    course.essentials.order(:position).second.update_columns(name: "Autre nom")
+    notion = course.essentials.order(:position).first
+    student = create_student
+    session = create_exercise_session(student:, exercise: notion.exercises.first, status: "completed")
+    create_attempt(session:, question: session.exercise.questions.first)
+
+    output = charger("Develop")
+
+    assert_includes output, "#{IMPORT_NAME} : replaced"
+    assert_not_includes output, "#{IMPORT_NAME} : loaded"
+    course.reload
+    assert_equal 1, Orm::Course.where(name: @lesson["name"]).count
+    assert_equal [ "published" ], [ course.status ]
+    assert_equal @lesson["notions"].map { it["name"].squish }, course.essentials.order(:position).pluck(:name)
+    assert_equal @lesson["notions"].map { Array.wrap(it["exercise"]).size }, course.essentials.order(:position).map { it.exercises.count }
+    assert_empty(course.essentials.flat_map { it.sheet.to_s.scan("Texte d'avant") })
+    assert_equal @lesson["subjects"].map { it["title"] }, course.subjects.order(:position).pluck(:title)
+    assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+    assert_equal [ 0, 0 ], [ Orm::ExerciseSession.count, Orm::QuestionAttempt.count ]
+    assert_equal [ "completed", 1, 0 ], whole_reports.sole.values_at(:status, :imported_count, :error_count)
+    assert_includes charger("Develop"), "#{IMPORT_NAME} : unchanged"
+  end
+
   test "Develop creates the lesson whole when it is absent, then publishes it" do
     seed_referential
 
-    charger("Develop")
+    assert_includes charger("Develop"), "#{IMPORT_NAME} : created"
 
     course = Orm::Course.find_by!(name: @lesson["name"])
     assert_equal [ "published" ], [ course.status ]
@@ -136,9 +166,11 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     second = charger("Develop")
 
-    assert_includes first, "loaded"
+    assert_includes first, "#{IMPORT_NAME} : created"
     assert_includes second, "#{IMPORT_NAME} : unchanged"
-    assert_equal 1, automatic_reports.count
+    assert_includes second, "#{PROGRAMME_IMPORT_NAME} : unchanged"
+    assert_includes second, "2 leçon(s) examinée(s) : 0 créée(s), 0 ignorée(s) (déjà présente), 0 remplacée(s), 0 à sujets rechargée(s), 2 inchangée(s)"
+    assert_equal [ 1, 0 ], [ whole_reports.count, automatic_reports.count ]
   end
 
   test "an unchanged file whose publication was interrupted is published again, without a new import line" do
@@ -151,17 +183,35 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     assert_includes output, "#{IMPORT_NAME} : republished"
     assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
-    assert_equal 1, automatic_reports.count
+    assert_equal 1, whole_reports.count
   end
 
-  test "a changed file is loaded again" do
+  test "a changed file is loaded again, replaced whole on Develop" do
     seed_referential
     charger("Develop")
-    automatic_reports.update_all(checksum_sha256: "0" * 64)
+    whole_reports.update_all(checksum_sha256: "0" * 64)
 
-    charger("Develop")
+    output = charger("Develop")
 
-    assert_equal 2, automatic_reports.count
+    assert_includes output, "#{IMPORT_NAME} : replaced"
+    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : unchanged"
+    assert_equal 2, whole_reports.count
+  end
+
+  # Le premier déploiement après l'amendement : Develop avait chargé Thalès en « exercices et sujets » (même fichier, même empreinte).
+  test "Develop replaces whole a lesson whose unchanged file was loaded exercises-only before, then says unchanged" do
+    seed_referential
+    course = import_old_version
+    assert_includes charger("Staging"), "#{IMPORT_NAME} : loaded"
+    course.essentials.order(:position).second.update_columns(name: "Autre nom")
+
+    output = charger("Develop")
+
+    assert_includes output, "#{IMPORT_NAME} : replaced"
+    assert_equal @lesson["notions"].map { it["name"].squish }, course.reload.essentials.order(:position).pluck(:name)
+    assert_empty(course.essentials.flat_map { it.sheet.to_s.scan("Texte d'avant") })
+    assert_equal [ 1, 1 ], [ automatic_reports.count, whole_reports.count ]
+    assert_includes charger("Develop"), "#{IMPORT_NAME} : unchanged"
   end
 
   # CA : la production n'est jamais touchée
@@ -199,33 +249,28 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
                  I18n.t("teams.imports.error_codes.unknown_environment", name: "Recette", locale: :fr)
   end
 
-  # CA : un référentiel absent refuse la leçon sans bloquer
-  test "Staging without the 3ème level refuses the lesson in its line, without exception, and tries again next time" do
+  # ADR-0123 §8, amendé le 2026-11-04 : une base Staging remise à neuf (sans 3ème) crée d'abord le référentiel, puis la leçon
+  test "Staging without the 3ème level completes the referential, then creates the lesson" do
     create_material(name: "Mathématiques")
 
     output = charger("Staging")
 
     assert_not_includes output, "interrompu"
-    assert_equal 0, Orm::Course.count
-    line = automatic_reports.sole
-    assert_equal [ "completed", 0, 1, [ "unknown_level" ] ], [ line.status, line.imported_count, line.error_count, line.import_errors.map { it["code"] } ]
-    assert_includes output, "#{IMPORT_NAME} : refused"
-
-    Orm::Material.delete_all
-    seed_referential
-    assert_includes charger("Staging"), "loaded"
-    assert_equal 2, automatic_reports.count
+    assert Orm::Level.exists?(slug: "3eme")
+    assert_includes output, "#{IMPORT_NAME} : loaded"
+    assert_includes output, "0 en échec ou incomplète(s)"
+    assert Orm::Course.exists?(level: Orm::Level.find_by!(slug: "3eme"))
   end
 
-  # CA : une notion introuvable refuse la leçon
-  test "a notion renamed in the environment refuses the lesson naming the notion, and no exercise or subject changes" do
+  # CA (ADR-0122, Staging) : une notion introuvable refuse la leçon ; sur Develop la leçon est remplacée entière (test plus haut)
+  test "on Staging a notion renamed in the environment refuses the lesson naming the notion, and no exercise or subject changes" do
     seed_referential
     course = import_old_version
     renamed = course.essentials.order(:position).second
     renamed.update_columns(name: "Autre nom")
     before = [ Orm::Exercise.where(course_id: course.id).pluck(:id).sort, course.subjects.pluck(:id).sort ]
 
-    charger("Develop")
+    charger("Staging")
 
     line = automatic_reports.sole
     assert_equal [ 1, 0 ], [ line.error_count, line.imported_count ]
@@ -279,7 +324,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_includes output, "un autre démarrage charge déjà"
     assert_equal 0, Orm::Course.count
     other.exec(format(LOCK, "pg_advisory_unlock"))
-    assert_includes charger("Develop"), "loaded"
+    assert_includes charger("Develop"), "#{IMPORT_NAME} : created"
   ensure
     other&.close
   end
@@ -294,7 +339,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     assert_includes output, "chargement automatique interrompu : RuntimeError : boom"
     assert_match(/interrompu : RuntimeError : boom/, logged.sole)
-    assert_includes charger("Develop"), "loaded"
+    assert_includes charger("Develop"), "#{IMPORT_NAME} : created"
   end
 
   test "an author the policy refuses leaves the task saying so, without exception" do
@@ -384,32 +429,53 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal "published", Orm::Course.find_by!(name: programme_lesson["name"]).status
   end
 
-  test "only Develop reads the manifest: Staging and production load as usual or say nothing even when jeu.yml cannot be read" do
+  # Amendement du 2026-11-04 : plus aucun environnement ne lit jeu.yml pour choisir les leçons.
+  test "no environment reads the manifest any more: with jeu.yml unreadable, Develop and Staging load as usual and production says nothing" do
     seed_referential
     unreadable = ->(*) { raise Errno::ENOENT, "jeu.yml" }
-    manifest = Entities::Catalog::StandardTestSet
 
-    stub_method(manifest, :new, unreadable) do
+    stub_method(Entities::Catalog::StandardTestSet, :new, unreadable) do
       assert_includes charger("production"), "rien n'est chargé"
-      assert_includes charger("Staging"), "#{PROGRAMME_IMPORT_NAME} : created"
-      assert_includes charger("Develop"), "chargement automatique interrompu"
+      output = charger("Develop")
+      assert_not_includes output, "interrompu"
+      assert_includes output, "#{IMPORT_NAME} : created"
+      assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
+      staging = charger("Staging")
+      assert_includes staging, "#{IMPORT_NAME} : loaded"
+      assert_includes staging, "#{PROGRAMME_IMPORT_NAME} : ignored"
     end
   end
 
-  test "Develop loads only the manifest: a programme file outside it is not created, a present lesson outside it is untouched" do
+  test "Develop loads every v3 file of every folder, 3ème included; a lesson without a file stays as it is" do
     seed_referential
     @root.join("tle-d/mathematiques").mkpath
     stranger = programme_lesson.merge("name" => "Leçon hors manifeste", "series_name" => "D")
     @root.join("tle-d/mathematiques/hors-manifeste.json").write(JSON.generate(@document.merge("courses" => [ stranger ])))
+    third = programme_lesson.merge("name" => "Leçon de troisième", "level_name" => "3ème", "series_name" => nil)
+    @root.join("3eme/mathematiques/sans-sujet.json").write(JSON.generate(@document.merge("courses" => [ third ])))
     present = create_course(level: Orm::Level.find_by!(name: "Tle"), material: Orm::Material.find_by!(name: "Mathématiques"), name: "Leçon ancienne",
                             status: "published", author: @oldest)
 
     output = charger("Develop")
 
-    assert_includes output, "#{PROGRAMME_IMPORT_NAME} : created"
-    assert_not_includes output, "hors-manifeste"
-    assert_nil Orm::Course.find_by(name: "Leçon hors manifeste")
+    assert_includes output, "4 leçon(s) examinée(s) : 4 créée(s), 0 ignorée(s) (déjà présente), 0 remplacée(s), 0 à sujets rechargée(s), 0 inchangée(s), " \
+                            "0 republiée(s), 0 en échec ou incomplète(s)"
+    [ IMPORT_NAME, PROGRAMME_IMPORT_NAME, "chargement-automatique-tle-d-mathematiques-hors-manifeste.json",
+      "chargement-automatique-3eme-mathematiques-sans-sujet.json" ].each { assert_includes output, "#{it} : created" }
+    assert_equal "published", Orm::Course.find_by!(name: "Leçon hors manifeste").status
+    assert_equal "published", Orm::Course.find_by!(name: "Leçon de troisième").status
     assert_equal [ "published", present.updated_at ], present.reload.values_at(:status, :updated_at)
+  end
+
+  test "Staging still does not load a 3ème lesson without subjects" do
+    seed_referential
+    third = programme_lesson.merge("name" => "Leçon de troisième", "level_name" => "3ème", "series_name" => nil)
+    @root.join("3eme/mathematiques/sans-sujet.json").write(JSON.generate(@document.merge("courses" => [ third ])))
+
+    output = charger("Staging")
+
+    assert_not_includes output, "sans-sujet"
+    assert_nil Orm::Course.find_by(name: "Leçon de troisième")
   end
 
   test "by hand, the published v1 lesson of a programme title is still refused" do
@@ -467,12 +533,20 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal [ 0, 0 ], [ Orm::School.count, Orm::Classroom.count ]
   end
 
-  test "Staging and production never create a level, a series or a material" do
+  test "production never creates a level, a series or a material; Staging completes the base referential like Develop" do
     college_referential
+    counts = -> { [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ] }
 
-    [ "Staging", "production" ].each { charger(it) }
+    charger("production")
+    assert_equal [ 1, 0, 1, 0, 0 ], counts.call
 
-    assert_equal [ 1, 0, 1, 0, 0 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count, Orm::Drena.count, Orm::ClassroomPlanEntry.count ]
+    charger("Staging")
+    staging = counts.call
+    assert_equal [ 7, 5 ], staging.first(2)
+    assert_equal 41, staging[3]
+
+    charger("Develop")
+    assert_equal staging, counts.call, "Develop n'ajoute rien à ce que Staging a complété"
   end
 
   # ADR-0123 §9 : le cas de Develop du 2026-11-02 — un déploiement a tué le chargement en pleine leçon ; le suivant, dans les 10 minutes,
@@ -483,7 +557,7 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
 
     output = charger("Develop")
 
-    assert_includes output, "#{IMPORT_NAME} : loaded"
+    assert_includes output, "#{IMPORT_NAME} : created"
     assert_equal [ "failed" ], Orm::ImportReport.where(status: %w[failed]).pluck(:status)
     assert_equal 0, Orm::ImportReport.where(status: %w[queued validating importing]).count
   end
