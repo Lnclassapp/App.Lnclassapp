@@ -105,6 +105,8 @@ Trois règles :
 
 Chaque vague est exécutée par ses chantiers, qui suivent **leur** cycle sans exception : Lot 0 séquentiel, lots parallèles en worktrees, test rouge d'abord, ordre des couches imposé. Le programme n'assouplit aucune règle d'un chantier.
 
+L'orchestration suit [`orchestrateur.md`](orchestrateur.md) : une session par vague, jamais par programme ; l'état vit dans `docs/chantiers/<programme>/etat.md`, lu en début de session, mis à jour en fin de session.
+
 Deux vagues peuvent se chevaucher **uniquement** si elles ne partagent aucun fichier et aucun contrat — la règle de collision des lots s'applique entre vagues.
 
 ### 5. Prouver — à chaque vague, puis au programme

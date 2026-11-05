@@ -128,7 +128,72 @@ class BuildIndexTest < ActiveSupport::TestCase
     end
   end
 
+  test "the chantiers index lists each folder from its memo header, in alphabetical order, the template left out" do
+    in_repository do |repo|
+      memo(repo, "zeta", "# Memo — Zêta | bis", "livré ([#483](https://x/483) vers `Develop`, 2026-11-05), clos", "feature", "2026-11-05")
+      memo(repo, "alpha", "# Alpha", "**En cours** — lots 1 et 2 livrés", nil, "2026-10-01", type_row: "Type")
+      write(repo, "docs/chantiers/_TEMPLATE/memo.md", "# Memo — Modèle\n")
+      write(repo, "docs/chantiers/sans-memo/journal.md", "# Journal\n")
+      assert_not build_index(repo, "--check").last.success?, "un chantier ajouté rend l'index périmé"
+
+      build_index(repo)
+
+      assert_equal <<~MD, read(repo, "docs/chantiers/README.md")
+        <!-- chantiers:start -->
+        | Chantier | Statut | Type | Ouvert le | Sujet |
+        |---|---|---|---|---|
+        | [`alpha`](alpha/memo.md) | en cours | — | 2026-10-01 | Alpha |
+        | [`sans-memo`](sans-memo/) | pas de memo | — | — | — |
+        | [`zeta`](zeta/memo.md) | livré | feature | 2026-11-05 | Zêta \\| bis |
+        <!-- chantiers:end -->
+      MD
+      assert build_index(repo, "--check").last.success?
+    end
+  end
+
+  test "a memo without a Statut row is listed with a dash, and named on stderr" do
+    in_repository do |repo|
+      write(repo, "docs/chantiers/casse/memo.md", "# Memo — Cassé\n\n| **Ouvert le** | 2026-11-05 |\n")
+
+      output, status = build_index(repo)
+
+      assert status.success?, output
+      assert_includes output, "docs/chantiers/casse/memo.md: no | **Statut** | row in the header, shown as —"
+      assert_includes read(repo, "docs/chantiers/README.md"), "| [`casse`](casse/memo.md) | — | — | 2026-11-05 | Cassé |"
+    end
+  end
+
+  test "a number that origin/Develop gave since the branch left it is never given again, and --check refuses it" do
+    in_repository do |repo|
+      decision(repo, "adr/0002-sur-develop.md", "ADR-0002")
+      git(repo, "add", "-A")
+      git(repo, "commit", "-q", "-m", "develop")
+      git(repo, "update-ref", "refs/remotes/origin/Develop", "HEAD")
+      git(repo, "reset", "-q", "--hard", "HEAD~1")
+      decision(repo, "adr/XXXX-mon-choix.md", "ADR-XXXX")
+
+      output, status = build_index(repo, "--number")
+
+      assert status.success?, output
+      assert_includes output, "origin/Develop not fetched", "pas de dépôt distant : on le dit"
+      assert_equal %w[0001-premier.md 0003-mon-choix.md], decisions(repo, "adr")
+
+      FileUtils.mv(File.join(repo, "docs/decisions/adr/0003-mon-choix.md"), File.join(repo, "docs/decisions/adr/0002-mon-choix.md"))
+      build_index(repo)
+      output, status = build_index(repo, "--check")
+
+      assert_not status.success?
+      assert_includes output, "ADR-0002 taken on origin/Develop by 0002-sur-develop.md: rename docs/decisions/adr/0002-mon-choix.md " \
+                              "to XXXX-mon-choix.md"
+    end
+  end
+
   private
+
+  def memo(repo, slug, title, statut, type, opened, type_row: "Type de cycle")
+    rows = [ ("| **#{type_row}** | #{type} |" if type), "| **Statut** | #{statut} |", "| **Ouvert le** | #{opened} |" ].compact
+    write(repo, "docs/chantiers/#{slug}/memo.md", "#{title}\n\n| | |\n|---|---|\n#{rows.join("\n")}\n")
+  end
 
   def git(repo, *args)
     env = ENV.keys.grep(/\AGIT_/).to_h { [ it, nil ] }
@@ -137,7 +202,9 @@ class BuildIndexTest < ActiveSupport::TestCase
 
   def build_index(repo, *args)
     env = args.last.is_a?(Hash) ? args.pop : {}
-    Open3.capture2e({ "GITHUB_BASE_REF" => nil, "GITHUB_REF_NAME" => nil }.merge(env), File.join(repo, "script/docs/build_index"), *args, chdir: repo)
+    # Under the pre-commit hook, GIT_DIR and GIT_INDEX_FILE point at this repository: the throwaway one must not see them.
+    env = ENV.keys.grep(/\AGIT_/).to_h { [ it, nil ] }.merge("GITHUB_BASE_REF" => nil, "GITHUB_REF_NAME" => nil).merge(env)
+    Open3.capture2e(env, File.join(repo, "script/docs/build_index"), *args, chdir: repo)
   end
 
   def read(repo, path) = File.read(File.join(repo, path))
@@ -163,12 +230,13 @@ class BuildIndexTest < ActiveSupport::TestCase
     MD
   end
 
-  # A chantier branch whose ADR index holds 0001-premier.md, and whose UDR index is empty.
+  # A chantier branch whose ADR index holds 0001-premier.md, and whose UDR and chantiers indexes are empty.
   def in_repository
     Dir.mktmpdir do |repo|
       FileUtils.mkdir_p(File.join(repo, "script/docs"))
       FileUtils.cp(SCRIPT, File.join(repo, "script/docs/build_index"))
       %w[adr udr].each { write(repo, "docs/decisions/#{it}/README.md", "<!-- index:start -->\n<!-- index:end -->\n") }
+      write(repo, "docs/chantiers/README.md", "<!-- chantiers:start -->\n<!-- chantiers:end -->\n")
       decision(repo, "adr/0001-premier.md", "ADR-0001")
       assert build_index(repo).last.success?
       git(repo, "init", "-q", "-b", "refactor/x")

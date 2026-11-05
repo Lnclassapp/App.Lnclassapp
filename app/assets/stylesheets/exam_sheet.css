@@ -1,0 +1,251 @@
+/*
+  🌐 UI · exam_sheet.css — le sujet, la copie et le résultat d'un exercice en cahier noir et blanc (#390)
+  Rôle : redéfinit, dans le seul conteneur `.exam-sheet`, les variables de couleur, de rayon, d'ombre et de police du design system :
+         les classes Tailwind existantes (cartes, badges, boutons) passent en noir, blanc et gris sans réécrire les partiels, comme les
+         thèmes d'annonce. Isolé du reste de l'application : chargé par trois vues (stylesheet_link_tag "exam_sheet"), servi tel quel par
+         Propshaft, jamais par le layout. Une couleur ajoutée au @theme doit être redéfinie ici (test/design/design_tokens_test.rb).
+  ADR  : 0049 (police auto-hébergée) · UDR-XXXX-sujets-cahier-noir-blanc (§3 Tokens) · UDR-0149 (feuilles noir et blanc, exception aux jetons)
+*/
+
+/* ---- Police hébergée par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ------------------- */
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/source-serif-4-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/source-serif-4-latin-wght-italic.woff2") format("woff2-variations");
+}
+
+/* ---- Les variables du design system, neutralisées dans la feuille (plus proche que :root, le mode sombre y perd) ------- */
+
+.exam-sheet {
+  --color-white: #fbf6e9;
+  --color-ink: #1a1a1a;
+  --color-mute: #555555;
+  --color-line: #d6d6d6;
+  --color-line-strong: #b5b5b5;
+  --color-mist: #f5f5f5;
+  --color-paper: #fbf6e9;
+  --color-brand: #1a1a1a;
+  --color-brand-soft: rgba(0, 0, 0, 0.08);
+  --color-brand-strong: #1a1a1a;
+  --color-band-ink: #ffffff;
+  --color-teacher: #1a1a1a;
+  --color-school: #1a1a1a;
+  --color-team: #1a1a1a;
+  --color-gold: #1a1a1a;
+  --color-success: #1a1a1a;
+  --color-success-soft: #f5f5f5;
+  --color-warning: #1a1a1a;
+  --color-warning-soft: #f5f5f5;
+  --color-warning-dot: #1a1a1a;
+  --color-error: #1a1a1a;
+  --color-error-soft: #f5f5f5;
+  --color-info: #1a1a1a;
+  --color-info-soft: #f5f5f5;
+  --color-struggling: #1a1a1a;
+  --color-struggling-soft: #f5f5f5;
+  --color-fragile: #1a1a1a;
+  --color-fragile-soft: #f5f5f5;
+  --color-tint-indigo: #f5f5f5;
+  --color-tint-lilac: #f5f5f5;
+  --color-tint-green: #f5f5f5;
+  --color-tint-yellow: #f5f5f5;
+  --color-tint-lavender: #f5f5f5;
+  --color-tint-pink: #f5f5f5;
+  --color-tint-red: #f5f5f5;
+  --color-signal-green: #1a1a1a;
+  --color-signal-yellow: #1a1a1a;
+  --color-signal-red: #1a1a1a;
+
+  --radius-sm: 0;
+  --radius-ln: 0;
+  --radius-card: 0;
+  --radius-sheet: 0;
+  --shadow-card: none;
+  --shadow-lift: none;
+  --shadow-pop: none;
+  --font-sans: "Source Serif 4", "DejaVu Serif", Georgia, serif;
+  --font-display: "Source Serif 4", "DejaVu Serif", Georgia, serif;
+
+  color-scheme: light;
+  background: #fbf6e9;
+  color: #1a1a1a;
+  font-family: "Source Serif 4", "DejaVu Serif", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fond gris en marge de page dès 700 px, comme les feuilles de la leçon ; en dessous, la feuille est la page, bord à bord
+   (la gouttière du shell, 1 rem, est rendue à la feuille : UDR-0154). */
+@media (max-width: 639px) {
+  .exam-sheet {
+    margin-inline: calc(-1 * var(--spacing-gutter));
+  }
+}
+
+@media (min-width: 700px) {
+  .exam-sheet {
+    background: #d6d6d6;
+    padding: 32px 12px 64px;
+  }
+}
+
+/* ---- Le papier cahier : gabarit commun des sujets d'interrogation et de devoir, de toutes les leçons -------------------
+   Papier #fbf6e9, lignes Seyès grises (fortes tous les 32 px, fines tous les 8 px), marge verticale grise à 74 px (téléphone :
+   clamp(18px, 7.4vw, 74px)). Même géométrie que .sheet-page de course_sheet.css, en gris. `.ps-sheet` (prepare_sheet.css) le reprend.
+   Les lignes sont derrière le texte (z-index -1 dans un contexte isolé) : une seule feuille, jamais de lignes coupées par une carte. */
+
+.exam-sheet,
+.sheet-cahier,
+.ps-sheet {
+  --sheet-paper: #fbf6e9;
+  --sheet-ink: #1a1a1a;
+  --sheet-ink-secondary: #333333;
+  --sheet-muted: #555555;
+  --sheet-rule: rgba(0, 0, 0, 0.13);
+  --sheet-rule-fine: rgba(0, 0, 0, 0.05);
+  --sheet-margin: rgba(0, 0, 0, 0.28);
+  --sheet-field: #b5b5b5;
+  --sheet-selected: rgba(0, 0, 0, 0.08);
+  --sheet-margin-x: 74px;
+  --sheet-pad-x: clamp(14px, 5vw, 52px);
+}
+
+@media (max-width: 639px) {
+  .exam-sheet,
+  .sheet-cahier,
+  .ps-sheet {
+    --sheet-margin-x: clamp(18px, 7.4vw, 74px);
+  }
+}
+
+.sheet-cahier {
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  background: var(--sheet-paper);
+  padding: clamp(20px, 4vw, 44px) var(--sheet-pad-x) 48px calc(var(--sheet-margin-x) + var(--sheet-pad-x));
+}
+
+.sheet-cahier::before,
+.ps-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, transparent var(--sheet-margin-x), var(--sheet-margin) var(--sheet-margin-x), var(--sheet-margin) calc(var(--sheet-margin-x) + 2px), transparent calc(var(--sheet-margin-x) + 2px)),
+    repeating-linear-gradient(to bottom, var(--sheet-rule) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(to bottom, var(--sheet-rule-fine) 0 1px, transparent 1px 8px);
+}
+
+/* Une carte est un cadre sur la feuille, pas un fond : les lignes passent derrière. Bord noir fin. */
+.exam-sheet .rounded-card {
+  background: transparent;
+}
+
+/* Champ et choix sélectionné. */
+.exam-sheet input[type="text"],
+.exam-sheet input[type="number"],
+.exam-sheet textarea,
+.exam-sheet select {
+  border-color: var(--sheet-field);
+}
+
+/* Ombres : les utilitaires Tailwind écrivent leur valeur, pas la variable. */
+.exam-sheet .shadow-card,
+.exam-sheet .shadow-lift,
+.exam-sheet .shadow-pop {
+  --tw-shadow: 0 0 #0000;
+  box-shadow: none;
+}
+
+/* Cartes blanches à bord noir fin. */
+.exam-sheet .rounded-card.border,
+.exam-sheet .rounded-card.border-line {
+  border-color: #1a1a1a;
+}
+
+/* Boutons : carrés, noirs sur blanc. Le bouton « brand » est texte `ink` sur fond `brand`, deux fois #1a1a1a ici. */
+.exam-sheet .ui-button {
+  border-radius: 0;
+}
+
+.exam-sheet .ui-button-brand,
+.exam-sheet .ui-button-primary {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.exam-sheet .ui-button-brand:hover,
+.exam-sheet .ui-button-primary:hover {
+  background: #333333;
+}
+
+.exam-sheet .ui-button-secondary {
+  border-color: #1a1a1a;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.exam-sheet a {
+  color: inherit;
+}
+
+.exam-sheet :focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
+}
+
+/* ---- Cartouche, titre et consigne (sujet et copie) ------------------------------------------------------------------- */
+
+.exam-sheet .exam-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 6px;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.12em;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.exam-sheet .exam-header-brand {
+  font-variant-caps: normal;
+  letter-spacing: 0.02em;
+  font-style: italic;
+}
+
+.exam-sheet .exam-title {
+  margin: 16px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 3px double #1a1a1a;
+  font-family: "Source Serif 4", "DejaVu Serif", Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.exam-sheet .exam-instructions {
+  margin: 8px 0 0;
+  font-style: italic;
+  color: #333333;
+}
+
+/* Pas de défilement horizontal : les figures et les tableaux se plient à la feuille. */
+.exam-sheet img,
+.exam-sheet svg {
+  max-width: 100%;
+}
