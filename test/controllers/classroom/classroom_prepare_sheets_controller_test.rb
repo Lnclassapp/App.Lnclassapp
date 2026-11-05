@@ -108,4 +108,15 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     assert_redirected_to new_session_path
     assert_no_match "Exercice notion", response.body
   end
+
+  test "the teacher reads under each exercise how many students of the class passed it (CA-5, CA-6)" do
+    awa = create_student(classroom: @classroom)
+    create_student(classroom: @classroom)
+    create_exercise_session(student: awa, exercise: @ex, status: "completed", score_percent: 80)
+    sign_in_as @teacher
+
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_select "#sheet-success-#{@ex.public_id}", text: /1 \/ 2 élèves ont réussi/
+  end
 end
