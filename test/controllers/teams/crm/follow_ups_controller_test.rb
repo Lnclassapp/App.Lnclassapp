@@ -139,10 +139,11 @@ class Teams::Crm::FollowUpsControllerTest < ActionDispatch::IntegrationTest
     follow_up(assignee: @admin, reason: "Celle de l'admin")
     sign_in_as @field
 
-    get teams_follow_ups_path
+    get teams_follow_ups_path(tab: "mine")
 
     assert_select "h1", text: I18n.t("teams.crm.follow_ups.index.title")
-    assert_select "[role=tab]", count: 1
+    assert_select "[role=tab]", count: 2
+    assert_select "#follow-ups-panel-mine:not([hidden])"
     assert_equal [ "En retard", "Plus tard" ], css_select("tr td[data-field=reason]").map { it.text.strip }
     assert_select "a[href=?]", "#{school_path(@school.public_id)}#school_crm"
     assert_no_match(/Celle de l'admin/, response.body)
@@ -151,9 +152,54 @@ class Teams::Crm::FollowUpsControllerTest < ActionDispatch::IntegrationTest
   test "Mes relances says when nothing is open" do
     sign_in_as @field
 
-    get teams_follow_ups_path
+    get teams_follow_ups_path(tab: "mine")
 
     assert_select "p", text: I18n.t("teams.crm.follow_ups.index.empty_mine")
+  end
+
+  test "CA-15, CA-20: « À relancer » is the default tab; it lists my schools with their reasons and badges" do
+    Orm::CrmAccount.create!(school: @school, owner: @field, stage_changed_at: Time.current)
+    follow_up(due_on: Date.current - 1)
+    other = create_school(name: "Collège voisin")
+    Orm::CrmAccount.create!(school: other, owner: @admin, stage_changed_at: Time.current)
+    follow_up(school: other, assignee: @admin, due_on: Date.current - 1)
+    sign_in_as @field
+
+    get teams_follow_ups_path
+
+    assert_select "[role=tab][aria-selected=true]", text: I18n.t("teams.crm.signals.tabs.signals")
+    assert_select "#follow-ups-panel-signals:not([hidden])", text: /Lycée Classique/
+    assert_select "#follow-ups-panel-signals", text: /#{I18n.t("teams.crm.signals.reasons.overdue")}/
+    assert_select "#follow-ups-panel-signals", text: /Collège voisin/, count: 0
+    assert_select "#follow-ups-panel-signals a[href=?]", "#{school_path(@school.public_id)}#school_crm"
+  end
+
+  test "« Toutes les écoles » lists every school with a signal, with its owner" do
+    other = create_school(name: "Collège voisin")
+    Orm::CrmAccount.create!(school: other, owner: @admin, stage_changed_at: Time.current)
+    follow_up(school: other, assignee: @admin, due_on: Date.current - 1)
+    sign_in_as @field
+
+    get teams_follow_ups_path(scope: "all")
+
+    assert_select "#follow-ups-panel-signals:not([hidden])", text: /Collège voisin/
+    assert_select "#follow-ups-panel-signals", text: /#{@admin.first_name}/
+  end
+
+  test "« À relancer » says when nothing is to follow up" do
+    sign_in_as @field
+
+    get teams_follow_ups_path
+
+    assert_select "#follow-ups-panel-signals p", text: I18n.t("teams.crm.signals.empty")
+  end
+
+  test "a page parameter of another tab keeps that tab selected" do
+    sign_in_as @field
+
+    get teams_follow_ups_path(mine_page: 1)
+
+    assert_select "#follow-ups-panel-mine:not([hidden])"
   end
 
   test "CA-14: only an admin sees « Sans destinataire », with the unavailable recipients flagged" do
@@ -161,13 +207,13 @@ class Teams::Crm::FollowUpsControllerTest < ActionDispatch::IntegrationTest
     follow_up(assignee: gone, reason: "Orpheline")
     sign_in_as @field
     get teams_follow_ups_path
-    assert_select "[role=tab]", count: 1
+    assert_select "[role=tab]", count: 2
     assert_no_match(/Orpheline/, response.body)
 
     sign_in_as @admin
     get teams_follow_ups_path(tab: "orphans")
 
-    assert_select "[role=tab]", count: 2
+    assert_select "[role=tab]", count: 3
     assert_select "#follow-ups-panel-orphans:not([hidden])", text: /Orpheline/
     assert_select "#follow-ups-panel-orphans", text: /#{I18n.t("teams.crm.follow_ups.follow_up.unavailable")}/
   end

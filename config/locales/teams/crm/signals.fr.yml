@@ -1,0 +1,30 @@
+# Suivi des écoles (chantier crm-ecoles, Lot E) — ADR-XXXX (contexte crm), UDR-XXXX (pipeline et relances)
+# « À relancer » : raisons, onglet de la page « Relances » et carte de l'Accueil.
+fr:
+  teams:
+    crm:
+      signals:
+        tabs:
+          signals: "À relancer"
+        reasons:
+          overdue: "Relance échue"
+          usage_lost: "Perte d'usage"
+          demo_stalled: "Démo sans suite"
+          registered_idle: "Inscrite sans démarrage"
+        scope_label: "Périmètre"
+        scope:
+          mine: "Mes écoles"
+          all: "Toutes les écoles"
+        columns:
+          school: "École"
+          owner: "Responsable"
+          reasons: "Raisons"
+        empty: "Rien à relancer"
+        no_owner: "Sans responsable"
+      home_follow_ups:
+        show:
+          title: "À relancer"
+          count: "%{count} à relancer"
+          empty: "Rien à relancer aujourd'hui"
+          see_all: "Voir mes relances"
+          more: "et %{count} autres"

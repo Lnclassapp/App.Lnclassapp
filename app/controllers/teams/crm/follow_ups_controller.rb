@@ -1,11 +1,10 @@
 # 🌐 DELIVERY · Teams::Crm::FollowUpsController
-# Rôle : relances ouvertes d'une école (frame de la fiche), création en modale, page « Relances » (« Mes relances », « Sans destinataire » pour l'admin)
+# Rôle : relances ouvertes d'une école (frame de la fiche), création en modale, page « Relances » (« À relancer », « Mes relances », « Sans destinataire » pour l'admin)
 # ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi »), XXXX (pipeline et relances)
 module Teams
   module Crm
     class FollowUpsController < BaseController
-      TABS = %w[mine orphans].freeze
-      DEFAULT_DELAY = 3 # jours
+            DEFAULT_DELAY = 3 # jours
 
       # Saisie du formulaire de création : les règles sont celles du use case, qui rend ses erreurs ici.
       class Form
@@ -29,6 +28,8 @@ module Teams
       def index
         @orphans_visible = current_actor.team_role == "admin"
         @tab = selected_tab
+        @all_schools = params[:scope] == "all"
+        @signals = @all_schools ? signals_query.all(page: params[:signals_page]) : signals_query.mine(user_id: current_actor.user_id, page: params[:signals_page])
         @mine = query.mine(user_id: current_actor.user_id, page: params[:mine_page])
         @orphans = query.orphans(page: params[:orphans_page]) if @orphans_visible
       end
@@ -72,8 +73,9 @@ module Teams
 
       def selected_tab
         return "orphans" if @orphans_visible && (params[:tab] == "orphans" || (params[:tab].blank? && params[:orphans_page].present?))
+        return "mine" if params[:tab] == "mine" || (params[:tab].blank? && params[:mine_page].present?)
 
-        "mine"
+        "signals" # l'onglet par défaut (UDR pipeline et relances)
       end
 
       def form_params = params.fetch(:follow_up, {}).permit(:due_on, :assignee_public_id, :reason)
@@ -98,6 +100,8 @@ module Teams
       end
 
       def query = Queries::Crm::FollowUpsQuery.new
+
+      def signals_query = Queries::Crm::FollowUpSignalsQuery.new
     end
   end
 end

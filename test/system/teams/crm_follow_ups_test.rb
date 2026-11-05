@@ -35,7 +35,7 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
       assert_text tl("follow_up.tomorrow")
     end
 
-    visit teams_follow_ups_path
+    visit teams_follow_ups_path(tab: "mine")
     within("table") { assert_text "Rappeler la direction" }
     within("#follow_up_row_#{Orm::CrmFollowUp.last.public_id}") { click_on tl("follow_up.complete") }
 
@@ -67,7 +67,7 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
     record = Orm::CrmFollowUp.create!(school: @school, assignee: @field, due_on: Date.current, reason: "À moi", created_by: @field)
     sign_in_as @field
 
-    visit teams_follow_ups_path
+    visit teams_follow_ups_path(tab: "mine")
 
     within("#follow_up_row_#{record.public_id}") do
       assert_text "À moi"
@@ -80,7 +80,7 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
     sign_in_as @field
 
     with_mobile_viewport do
-      visit teams_follow_ups_path
+      visit teams_follow_ups_path(tab: "mine")
 
       assert_no_selector "table"
       within("#follow_up_card_#{record.public_id}") do
