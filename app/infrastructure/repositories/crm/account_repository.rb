@@ -1,5 +1,5 @@
 # 🔌 INFRA · Repositories::Crm::AccountRepository
-# Rôle : squelette du Lot 0 (adaptateur de Ports::Crm::AccountRepositoryPort), complété par le Lot A
+# Rôle : lit et écrit le suivi d'une école (table crm_accounts) ; une ligne par école, créée à la première écriture
 # ADR  : XXXX (contexte crm)
 module Repositories
   module Crm
@@ -7,11 +7,30 @@ module Repositories
       include Ports::Crm::AccountRepositoryPort
 
       def find_by_school_id(school_id:)
-        raise NotImplementedError, "Lot A"
+        record = Orm::CrmAccount.find_by(school_id:)
+        to_entity(record) if record
       end
 
+      # « Perdue » sans motif : refusée aussi par la base (crm_accounts_lost_has_reason), ici avant l'écriture.
       def save(account:)
-        raise NotImplementedError, "Lot A"
+        return ::Shared::Result.failure(:invalid, errors: { lost_reason: [ :blank ] }) if account.stage == "lost" && account.lost_reason.nil?
+
+        record = write(account)
+        ::Shared::Result.success(to_entity(record))
+      end
+
+      private
+
+      def write(account)
+        record = Orm::CrmAccount.find_or_initialize_by(school_id: account.school_id)
+        record.update!(stage: account.stage, owner_id: account.owner_id, lost_reason: account.lost_reason,
+                       stage_changed_at: account.stage_changed_at || record.stage_changed_at || Time.current)
+        record
+      end
+
+      def to_entity(record)
+        Entities::Crm::Account.new(school_id: record.school_id, stage: record.stage, owner_id: record.owner_id,
+                                   lost_reason: record.lost_reason, stage_changed_at: record.stage_changed_at)
       end
     end
   end
