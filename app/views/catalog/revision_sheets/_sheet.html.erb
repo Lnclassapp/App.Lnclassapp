@@ -1,7 +1,10 @@
 <%# 🌐 UI · catalog/revision_sheets/_sheet — la fiche de révision d'une leçon : une page de cahier, une section par notion, quatre blocs au gabarit fixe, et « Je m'entraîne » entre l'exemple et le piège quand la notion en a un %>
 <%# Rôle : `sheet` (RevisionSheetQuery::Lesson) ; `cut` (RevisionPreview, nil sans coupe) marque la suite (`rest`) ; sans JavaScript tout se lit %>
-<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2, 0147-je-m-entraine-dans-la-fiche §3.1 %>
+<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2, 0147-je-m-entraine-dans-la-fiche §3.1, suivi-de-la-classe-sur-une-lecon §3.1 §3.3 %>
 <% cut = local_assigns[:cut] %>
+<%# suivi-classe-lecon (Lot 0, contrat gelé) : class_gaps { essential_slug => Detail } (leçon vue depuis une classe) et proposals { essential_slug => proposition } (élève) valent nil ailleurs : rien n'est rendu %>
+<% class_gaps = local_assigns[:class_gaps] %>
+<% proposals = local_assigns[:proposals] %>
 <% rest_data = { catalog__revision_more_target: "rest" } %>
 <% preview = Entities::Catalog::RevisionPreview %>
 <%# Un bloc après la coupe porte la cible `rest` ; une notion entièrement après elle la porte sur sa section. %>
@@ -24,6 +27,10 @@
         <%= tag.section id: notion.anchor, class: "sheet-section", aria: { labelledby: "#{notion.anchor}-title" },
                         data: (cut&.rest?(index) ? rest_data : {}) do %>
           <h4 class="sheet-h2" id="<%= notion.anchor %>-title"><span class="sheet-h2-number"><%= index + 1 %>.</span> <%= notion.name %></h4>
+
+          <% if (proposal = proposals&.dig(notion.slug)) %>
+            <%= render "catalog/revision_sheets/todo", proposal: %>
+          <% end %>
 
           <%= tag.div class: "sheet-box", data: { tone: "remember", **rest_for.(index, preview::REMEMBER) } do %>
             <span class="sheet-box-label"><%= t(".remember") %></span>
@@ -61,6 +68,10 @@
           <%= tag.div class: "sheet-box", data: { tone: "pitfall", **rest_for.(index, preview::PITFALL) } do %>
             <span class="sheet-box-label"><%= t(".pitfall") %></span>
             <div class="sheet-text"><%= sheet_text(content.pitfall) %></div>
+          <% end %>
+
+          <% if (detail = class_gaps&.dig(notion.slug)) %>
+            <%= render "classroom/classroom_courses/notion_gaps", detail:, essential_slug: notion.slug %>
           <% end %>
         <% end %>
       <% end %>

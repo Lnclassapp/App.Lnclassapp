@@ -25,6 +25,19 @@ module Queries
       def team_actor = Actor.new(user_id: create_team_member.id, role: :team, team_role: "admin")
       def titles(sheet) = sheet.exercises.map(&:title)
 
+      test "pour l'équipe, la classe courante donne la seule cible, sans jour à saisir ; sans classe, pas de cible" do
+        classroom = create_classroom(name: "3e 2", level: @course.level, series: @course.series)
+        create_classroom(name: "3e 3", level: @course.level, series: @course.series, school: classroom.school)
+        team = team_actor
+
+        targets = PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: team, classroom_public_id: classroom.public_id).targets
+
+        assert_equal [ [ classroom.public_id, "3e 2", false ] ], targets.classrooms.map { [ it.public_id, it.name, it.needs_session_days ] }
+        assert_empty targets.states
+        assert_nil PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: team).targets
+        assert_nil PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: student_actor(create_student), classroom_public_id: classroom.public_id).targets
+      end
+
       test "le contrat porte les feuilles de Prépare interros et de Prépare devoirs, les cibles, les notions vides et l'en-tête du cours" do
         assert_equal %i[interros devoirs targets bare course_name material_name level_name], PrepareSheetsQuery::Prepare.members
         prepare = call(nil)

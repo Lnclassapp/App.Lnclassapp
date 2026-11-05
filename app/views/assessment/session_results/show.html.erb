@@ -122,7 +122,7 @@
     <% end %>
     <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
     <% if @owner && result.gap_outcome && result.essential %>
-      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential, href: (redo_href if !@resume_at && @can_restart) %>
+      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential, href: (redo_href if !@resume_at && @can_restart), proposal: @remediation_proposal %>
     <% end %>
 
     <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis le second bouton (XXXX refaire-ou-continuer §3). UDR-0140 : pendant la pause, l'heure de reprise à sa place. %>

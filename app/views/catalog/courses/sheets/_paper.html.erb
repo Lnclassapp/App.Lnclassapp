@@ -1,7 +1,7 @@
 <%# 🌐 UI · catalog/courses/sheets/_paper — le sujet d'une feuille en forme d'épreuve : cartouche, titre, exercices avec leurs points, tableaux V/F et QCM, questions en liste %>
 <%# Rôle : rendu par _sheet en lecture (:reading, :teacher, :team) ; aucun champ ni aide (ni « À retenir », ni indice, ni correction) ; les bascules de l'enseignant (_teacher_bar) sous chaque exercice ; locals de _sheet, les autres sont ignorés %>
 <%# ADR  : 0121 · UDR : sujet-comme-une-epreuve §3 (amende 0151 §3) · Stimulus : math (une fois par exercice) %>
-<%# locals: (kind:, number:, material:, header_left:, header_right:, title:, exercises:, sheet_id:, mode: :reading, targets: nil, classrooms: [], heading: :h1, **) -%>
+<%# locals: (kind:, number:, material:, header_left:, header_right:, title:, exercises:, sheet_id:, mode: :reading, targets: nil, classrooms: [], heading: :h1, can_assign: true, success: nil, **) -%>
 <% scope = "catalog.courses.sheets.paper" %>
 <% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
 <%# Une suite = des questions consécutives de même genre : vrai ou faux, QCM, ou toute autre. %>
@@ -112,8 +112,8 @@
           </ol>
         <% end %>
       <% end %>
-      <% if mode == :teacher %>
-        <div class="ps-actions"><%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %></div>
+      <% if %i[teacher team].include?(mode) %>
+        <div class="ps-actions"><%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign: can_assign && exercise.status != "draft", success: success&.dig(exercise.public_id) %></div>
       <% end %>
     <% end %>
   <% end %>

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::ClassroomsController
 # Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe : lien, nouveaux, retrait ; 404 hors établissement
-# ADR  : 0006, 0065, 0077, 0078, 0085 · UDR : 0052, 0054, 0070, 0071, 0074, 0081 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
+# ADR  : 0006, 0065, 0077, 0078, 0085, 0101 (§4.4) · UDR : 0052, 0054, 0070, 0071, 0074, 0081, 0121 (§3.1), suivi-de-la-classe-sur-une-lecon (§3.6) · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
 module SchoolAdmin
   class ClassroomsController < BaseController
     def index
@@ -20,9 +20,19 @@ module SchoolAdmin
 
       @search = params[:q].to_s.squish
       @students = matching_students(@detail.members, @search)
+      @gaps = gaps
     end
 
     private
+
+    # UDR suivi-de-la-classe-sur-une-lecon §3.6 : les fiches à revoir des cours que la classe affiche (toutes matières, comme
+    # l'équipe : teacher_id nil). L'accès de la direction à sa classe est déjà vérifié par `classroom` : show_roster vrai.
+    def gaps
+      public_id = @detail.classroom.public_id
+      courses = Queries::Classroom::ClassroomOverviewQuery.new.call(public_id:, show_roster: false).courses
+      Queries::Assessment::ClassroomGapsQuery.new.summary(classroom_public_id: public_id, show_roster: true,
+                                                          course_slugs: courses.map(&:slug))
+    end
 
     def query = Queries::School::StudentWorkQuery.new
 

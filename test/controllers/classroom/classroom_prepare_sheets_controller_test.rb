@@ -34,6 +34,22 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     assert_select "a[href=?]", classroom_course_path(@classroom.public_id, @course.slug, anchor: @sheet), text: /Thalès/
   end
 
+  # suivi-classe-lecon (ADR lecture-de-la-classe-par-la-direction, CA-12, CA-13) : la direction lit la réussite, sans agir ; ailleurs, 404.
+  test "the school admin of the same school reads the class success, without « Choisir » nor toggle; another school gets 404" do
+    sign_in_as create_school_admin(school: @classroom.school)
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_response :success
+    assert_select "#sheet-success-#{@ex.public_id}"
+    assert_select "##{toggle_id(@classroom, @ex)}", 0
+    assert_select "[data-batch-choice], .ps-btn--choose, #sheet-batch-bar", 0
+
+    sign_in_as create_school_admin(school: create_school(name: "Autre lycée"))
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_response :not_found
+  end
+
   test "a subject is read the same way" do
     sign_in_as @teacher
 
@@ -45,13 +61,14 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     assert_select "##{toggle_id(@classroom, @devoir)}"
   end
 
-  test "the team reads the sheet without any toggle" do
+  test "the team reads the sheet with the toggle of this classroom only (suivi-classe-lecon CA-16)" do
     sign_in_as create_team_member
 
     get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
 
     assert_response :success
-    assert_select "[id^=assignment_]", 0
+    assert_select "[id^=assignment_]", 1
+    assert_select "[id^=assignment_#{@classroom.public_id}_]", 1
     # sujet-comme-une-epreuve : l'équipe ne voit plus « Publié » ; seul un brouillon porte sa mention (sheet_paper_test).
     assert_select ".ps-paper-exercise", 1
     assert_select ".ps-paper-exercise-title .ps-status", 0
@@ -107,5 +124,25 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
 
     assert_redirected_to new_session_path
     assert_no_match "Exercice notion", response.body
+  end
+
+  test "the teacher reads under each exercise how many students of the class passed it (CA-5, CA-6)" do
+    awa = create_student(classroom: @classroom)
+    create_student(classroom: @classroom)
+    create_exercise_session(student: awa, exercise: @ex, status: "completed", score_percent: 80)
+    sign_in_as @teacher
+
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_select "#sheet-success-#{@ex.public_id}", text: /1 \/ 2 élèves ont réussi/
+  end
+
+  test "an exercise nobody of the class finished reads « Pas encore fait par la classe » (CA-6)" do
+    create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_select "#sheet-success-#{@ex.public_id}", text: "Pas encore fait par la classe"
   end
 end

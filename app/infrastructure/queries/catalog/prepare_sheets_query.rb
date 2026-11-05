@@ -54,7 +54,7 @@ module Queries
       EMPTY = Prepare.new(interros: [], devoirs: [], targets: nil, bare: [], course_name: nil, material_name: nil, level_name: nil)
 
       # → Prepare. Un cours inconnu rend des listes vides ; la lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
-      def call(course_slug:, actor:)
+      def call(course_slug:, actor:, classroom_public_id: nil)
         course = Orm::Course.joins(:material, :level).where(slug: course_slug)
                             .pick("courses.id", "courses.name", "courses.figures", "materials.name", "levels.name")
         return EMPTY if course.nil?
@@ -64,7 +64,7 @@ module Queries
         rows = exercises(course_id, team)
         built = build_exercises(rows, figures, actor)
         Prepare.new(interros: interros(course_id, rows, built), devoirs: devoirs(course_id, rows, built),
-                    targets: targets(course_slug, actor, rows), bare: bare(course_id, rows, team), course_name:, material_name:, level_name:)
+                    targets: targets(course_slug, actor, rows, classroom_public_id), bare: bare(course_id, rows, team), course_name:, material_name:, level_name:)
       end
 
       private
@@ -132,12 +132,37 @@ module Queries
         scope.order(:position, :id).pluck(:slug, :name).map { |slug, name| Bare.new(essential_slug: slug, title: name) }
       end
 
-      def targets(course_slug, actor, rows)
+      def targets(course_slug, actor, rows, classroom_public_id)
+        published = rows.select { it[3] == "published" }.map { it[1] }
+        return team_targets(course_slug, classroom_public_id, published) if actor&.team? && classroom_public_id
         return unless actor&.teacher?
 
         Queries::Classroom::CatalogAssignmentTargetsQuery.new.call(
-          teacher_id: actor.user_id, school_id: actor.school_id, course_slug:,
-          exercise_public_ids: rows.select { it[3] == "published" }.map { it[1] }
+          teacher_id: actor.user_id, school_id: actor.school_id, course_slug:, exercise_public_ids: published
+        )
+      end
+
+      # suivi-classe-lecon (UDR §3.5) : l'équipe lue depuis une classe n'a que celle-ci pour cible (niveau et série du cours, classe
+      # active) ; elle n'a pas de jours de séance, donc jamais la modale (ADR-0072 §4.3). Si la classe ne convient pas au cours :
+      # aucune classe cible (classrooms vide), la vue dit « aucune classe ».
+      def team_targets(course_slug, classroom_public_id, exercise_public_ids)
+        level_id, series_id, level_name, series_name =
+          Orm::Course.joins(:level).left_joins(:series).where(slug: course_slug).pick("courses.level_id", "courses.series_id", "levels.name", "series.name")
+        scope = Orm::Classroom.where(public_id: classroom_public_id, status: "active", level_id:)
+        scope = scope.where(series_id:) if series_id
+        classroom = scope.pick(:id, :public_id, :name)
+        scope_label = [ level_name, series_name ].compact.join(" ")
+        return Queries::Classroom::CatalogAssignmentTargetsQuery::Targets.new(scope_label:, classrooms: [], states: {}) if classroom.nil?
+
+        id, public_id, name = classroom
+        active = Orm::ClassroomAssignment.joins("INNER JOIN exercises ON exercises.id = classroom_assignments.assignable_id")
+                                         .where(classroom_id: id, status: "active", assignable_type: "Exercise", exercises: { public_id: exercise_public_ids })
+                                         .pluck("exercises.public_id", "classroom_assignments.public_id", "classroom_assignments.due_on")
+        states = active.to_h do |exercise_public_id, assignment_public_id, due_on|
+          [ [ public_id, exercise_public_id ], Queries::Classroom::CatalogAssignmentTargetsQuery::State.new(assignment_public_id:, due_on:) ]
+        end
+        Queries::Classroom::CatalogAssignmentTargetsQuery::Targets.new(
+          scope_label:, classrooms: [ Queries::Classroom::CatalogAssignmentTargetsQuery::Target.new(public_id:, name:, needs_session_days: false) ], states:
         )
       end
 

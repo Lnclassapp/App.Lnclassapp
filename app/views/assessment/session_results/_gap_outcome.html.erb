@@ -1,7 +1,8 @@
 <%# 🌐 UI · assessment/session_results/_gap_outcome — ce qu'il advient de la fiche : à revoir, levée ou encore à revoir %>
 <%# Rôle : une ligne sous la phrase de progrès, message puis consigne sur 20 ; lien « Refaire l'exercice » tant qu'elle est à revoir : vers la feuille avec l'exercice remis à blanc (href, venu d'une feuille : UDR XXXX refaire-ou-continuer §3), sinon vers la notion de la leçon %>
 <%# ADR  : 0043, 0101 §4.3, 0113 · UDR : 0120, 0087 §3.6, 0138 §3.4 · propriétaire seul · titre et confettis inchangés · jamais rendu pour un exercice de toute la leçon %>
-<%# locals: (outcome:, essential:, href: nil) -%>
+<%# suivi-classe-lecon §3.3 : `proposal` (Proposal | nil) ajoute « Refais un exercice sur cette notion » quand la fiche a un exercice à proposer %>
+<%# locals: (outcome:, essential:, href: nil, proposal: nil) -%>
 <% lifted = outcome == :lifted %>
 <% grade = Entities::Assessment::Grading.grade_on_20(Entities::Assessment::Grading::REMEDIATION_THRESHOLD) %>
 <div id="session_gap_outcome" class="flex items-start gap-3 rounded-card px-4 py-4 text-sm text-ink <%= lifted ? "bg-success-soft" : "bg-warning-soft" %>">
@@ -9,6 +10,10 @@
   <div class="min-w-0 space-y-1">
     <p class="font-medium"><%= t(".#{outcome}.message") %></p>
     <p><%= t(".#{outcome}.hint", essential: essential.name, grade:) %></p>
+        <% if !lifted && proposal&.exercise_public_id %>
+      <%= ui_button t(".redo_proposal"), variant: :primary, icon_end: "arrow-right", data: { turbo_prefetch: false },
+                    href: course_sheet_path(proposal.course_slug, "notion-#{proposal.essential_slug}", anchor: "sheet-exercise-#{proposal.exercise_public_id}") %>
+    <% end %>
     <% unless lifted %>
       <%= link_to t(".open_essential"), href || course_path(essential.course_slug, anchor: "notion-#{essential.slug}"), data: { turbo_prefetch: false },
                   class: "inline-flex min-h-tap items-center font-medium text-brand underline-offset-2 hover:underline
