@@ -40,6 +40,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `bin/system-changed` sur une branche de lot : `BASE=feature/crm-ecoles` (la base par défaut est `origin/Develop`).
 - `test/architecture/port_contracts_test.rb` exige un adaptateur par port, `test/db/schema_constraints_test.rb` une liste fermée de cascades : tout nouveau port ou toute clé en cascade passe par ces deux gardes.
 - Un frame paresseux dont le contrôleur n'existe pas fait lever `MissingController` à tout test système qui ouvre la page : le Lot 0 pose un squelette pour chaque adresse qu'il charge ou lie.
+- Lot F : l'étape affichée dépend de l'usage, pas d'une colonne : filtrer par étape calcule l'usage de toutes les écoles filtrées (3 requêtes, constantes), puis pagine ; sans filtre d'étape, seul l'usage de la page est lu. `SchoolsQuery::Row` reste inchangé (ses tests le comparent) : le suivi voyage dans `Page#crm`, par `public_id`. La ligne re-rendue par Turbo Stream (modifier, désactiver, supprimer) relit ses cellules du suivi, sinon elle se décale. Le menu « Codes » (sélection de masse) s'efface quand un filtre d'étape ou de responsable est actif : ces filtres ne font pas partie de la sélection de masse.
 
 ## Dette laissée derrière
 

@@ -116,6 +116,87 @@ module Queries
         assert_equal 1, SchoolsQuery.new.call.rows.sole.classrooms_count
         assert_nil SchoolsQuery.new.find(public_id: "new")
       end
+
+      # CA-21 (ADR-XXXX contexte crm, UDR-XXXX pipeline et relances) : étape affichée et responsable, calculés à la lecture.
+      def crm_query(**filters) = SchoolsQuery.new.call(school_year: YEAR, with_crm: true, **filters)
+
+      def crm_account(school, owner: nil, stage: "prospect")
+        Orm::CrmAccount.create!(school:, owner:, stage:, stage_changed_at: Time.current)
+      end
+
+      test "CA-21 : sans with_crm, la page ne porte aucune donnée du suivi" do
+        create_school(name: "A")
+
+        assert_empty query.crm
+      end
+
+      test "CA-21 : filtre par étape affichée et par responsable ; « none » est sans responsable ; une valeur inconnue est ignorée" do
+        me = create_team_member(team_role: "field")
+        other = create_team_member(team_role: "admin")
+        mine_demo = create_school(name: "A démo à moi")
+        crm_account(mine_demo, owner: me, stage: "demo_done")
+        crm_account(create_school(name: "B démo à l'autre"), owner: other, stage: "demo_done")
+        crm_account(create_school(name: "C prospect à moi"), owner: me)
+        orphan = create_school(name: "D sans responsable")
+        crm_account(orphan, stage: "demo_done")
+        create_school(name: "E sans suivi")
+
+        names = ->(**filters) { crm_query(**filters).rows.map(&:name) }
+        assert_equal [ "A démo à moi", "B démo à l'autre", "D sans responsable" ], names.call(stage: "demo_done")
+        assert_equal [ "A démo à moi" ], names.call(stage: "demo_done", owner: me.public_id)
+        assert_equal [ "D sans responsable", "E sans suivi" ], names.call(owner: "none")
+        assert_equal [ "E sans suivi" ], names.call(stage: "prospect", owner: "none")
+        assert_equal 5, names.call(stage: "inconnue").size
+        assert_equal 0, names.call(owner: "inconnu").size
+        assert_equal [ :demo_done, [ me.first_name, me.last_name ].compact_blank.join(" ") ], crm_query(stage: "demo_done", owner: me.public_id).crm.values.sole.to_h.values
+      end
+
+      test "CA-03 : l'étape affichée croise l'étape saisie et l'usage (une école abonnée reste abonnée, une école avec un compte est inscrite)" do
+        subscribed = create_school(name: "A abonnée")
+        crm_account(subscribed, stage: "subscribed")
+        registered = create_school(name: "B inscrite")
+        create_teacher(school: registered)
+        crm_account(registered, stage: "demo_done")
+        lost = create_school(name: "C perdue")
+        Orm::CrmAccount.create!(school: lost, stage: "lost", lost_reason: "price", stage_changed_at: Time.current)
+
+        stages = crm_query.crm.transform_values(&:stage)
+        assert_equal({ subscribed.public_id => :subscribed, registered.public_id => :registered, lost.public_id => :lost }, stages)
+        assert_equal [ "B inscrite" ], crm_query(stage: "registered").rows.map(&:name)
+      end
+
+      test "CA-21 : le total et les pages suivent le filtre d'étape, pas la liste entière" do
+        insert_schools(120, [ create_drena ])
+        Orm::CrmAccount.insert_all!(Orm::School.order(:id).limit(60).pluck(:id).map do |id|
+          { school_id: id, stage: "demo_done", stage_changed_at: Time.current, created_at: Time.current, updated_at: Time.current }
+        end)
+
+        page = crm_query(stage: "demo_done", page: "2")
+        assert_equal [ 60, 2, 10 ], [ page.total_count, page.page, page.rows.size ]
+        assert_equal 2, page.pages
+      end
+
+      test "CA-21 : le nombre de requêtes est le même pour 3 et pour 30 écoles, avec ou sans filtre d'étape" do
+        owner = create_team_member(team_role: "field")
+        count = lambda do |**filters|
+          n = 0
+          counter = ->(*, payload) { n += 1 unless payload[:name] == "SCHEMA" }
+          ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { crm_query(**filters) }
+          n
+        end
+        seed = lambda do |times|
+          times.times do
+            school = create_school
+            create_teacher(school:)
+            crm_account(school, owner:, stage: "demo_done")
+          end
+        end
+
+        seed.call(3)
+        few = [ count.call, count.call(stage: "registered"), count.call(owner: owner.public_id) ]
+        seed.call(27)
+        assert_equal few, [ count.call, count.call(stage: "registered"), count.call(owner: owner.public_id) ]
+      end
     end
   end
 end

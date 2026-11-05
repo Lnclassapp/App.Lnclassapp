@@ -83,7 +83,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_#{school.public_id}", text: /LCA/
     # IE-21 (UDR-0079 §3.8 bis) : le tableau n'a plus de colonne « Code d'établissement », ni son code ni son aide.
     assert_select "thead th", text: /Code d'établissement/, count: 0
-    assert_select "thead th", 8
+    assert_select "thead th", 10 # sept colonnes, « Étape » et « Responsable » (admin/field), les actions
     assert_select "#school_#{school.public_id} td.font-mono", 0
     assert_select "#school_#{school.public_id}",
                   text: /#{Entities::School::SchoolCode.display(Orm::School.find(school.id).school_code)}/, count: 0
@@ -832,5 +832,111 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=update][target=modal] template", text: ""
     assert Orm::School.exists?(school.id)
+  end
+
+  # CA-21, CA-01 (ADR-XXXX contexte crm, UDR-XXXX pipeline et relances): the pipeline is the list with two filters and two columns.
+  def crm_account(school, owner: nil, stage: "prospect")
+    Orm::CrmAccount.create!(school:, owner:, stage:, stage_changed_at: Time.current)
+  end
+
+  test "CA-21: a field member filters by stage « Démo faite » and owner « Moi »; the address carries both, the Étape column shows" do
+    field = create_team_member(team_role: "field")
+    other = create_team_member(team_role: "admin")
+    crm_account(create_school(drena: @drena, name: "Collège A"), owner: field, stage: "demo_done")
+    crm_account(create_school(drena: @drena, name: "Collège B"), owner: other, stage: "demo_done")
+    crm_account(create_school(drena: @drena, name: "Collège C"), owner: field)
+    sign_in_as field
+
+    get schools_path(stage: "demo_done", owner: "me")
+
+    assert_response :success
+    assert_select "#schools_list tr", 1
+    assert_select "#schools_list tr", text: /Collège A/
+    assert_select "#schools_list tr", text: /#{I18n.t('teams.crm.common.stages.demo_done')}/
+    assert_select "th", text: I18n.t("teams.schools.index.columns.stage")
+    assert_select "th", text: I18n.t("teams.schools.index.columns.owner")
+    assert_select "select[name=stage] option[selected][value=demo_done]"
+    assert_select "select[name=owner] option[selected][value=me]"
+    assert_select "select[name=owner] option[value=none]"
+    assert_select "select[name=owner] option[value='#{other.public_id}']"
+    assert_select "form[action='#{schools_path}'][method=get]"
+  end
+
+  test "CA-21: « sans responsable » lists the schools nobody owns, and the pagination keeps the filters" do
+    owner = create_team_member(team_role: "field")
+    crm_account(create_school(drena: @drena, name: "Collège A"), owner:)
+    create_school(drena: @drena, name: "Collège B")
+    sign_in_as owner
+
+    get schools_path(owner: "none")
+
+    assert_select "#schools_list tr", 1
+    assert_select "#schools_list tr", text: /Collège B/
+    assert_select "select[name=owner] option[selected][value=none]"
+  end
+
+  test "CA-21: the school list shows the displayed stage, computed from the usage, not the saved one" do
+    field = create_team_member(team_role: "field")
+    school = create_school(drena: @drena, name: "Collège A")
+    create_teacher(school:)
+    crm_account(school, owner: field, stage: "demo_done")
+    sign_in_as field
+
+    get schools_path
+
+    assert_select "#school_#{school.public_id}", text: /#{I18n.t('teams.crm.common.stages.registered')}/
+    assert_select "#school_#{school.public_id}", text: /#{field.first_name}/
+  end
+
+  test "CA-01: a content member gets the list as before, without the filters, the columns, and ignores the pipeline parameters" do
+    owner = create_team_member(team_role: "field")
+    crm_account(create_school(drena: @drena, name: "Collège A"), owner:, stage: "demo_done")
+    create_school(drena: @drena, name: "Collège B")
+    sign_in_as create_team_member(team_role: "content")
+
+    get schools_path(stage: "demo_done", owner: "me")
+
+    assert_response :success
+    assert_select "#schools_list tr", 2
+    assert_select "select[name=stage], select[name=owner]", 0
+    assert_select "th", text: I18n.t("teams.schools.index.columns.stage"), count: 0
+    assert_select "th", text: I18n.t("teams.schools.index.columns.owner"), count: 0
+    assert_select "#schools_list", text: /#{I18n.t('teams.crm.common.stages.demo_done')}/, count: 0
+  end
+
+  test "CA-21: the number of queries of the list does not grow with the number of schools" do
+    field = create_team_member(team_role: "field")
+    sign_in_as field
+    count = lambda do
+      n = 0
+      counter = ->(*, payload) { n += 1 unless payload[:name] == "SCHEMA" }
+      ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get schools_path(stage: "registered", owner: "me") }
+      n
+    end
+    seed = lambda do |times|
+      times.times do
+        school = create_school(drena: @drena)
+        create_teacher(school:)
+        crm_account(school, owner: field)
+      end
+    end
+
+    seed.call(2)
+    few = count.call
+    seed.call(20)
+    assert_equal few, count.call
+  end
+
+  test "CA-21: a row re-rendered after a deactivation keeps its Étape and Responsable cells" do
+    owner = create_team_member(team_role: "field")
+    school = create_school(drena: @drena, name: "Collège A")
+    crm_account(school, owner:, stage: "demo_done")
+    sign_in_as @member
+
+    patch deactivate_school_path(school.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=replace][target=school_#{school.public_id}] td", 10
+    assert_select "turbo-stream[target=school_#{school.public_id}]", text: /#{owner.first_name}/
   end
 end
