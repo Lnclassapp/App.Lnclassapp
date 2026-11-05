@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | PR prête vers `Develop` (2026-11-05) |
 | **Ouvert le** | 2026-11-05 |
 | **Branche** | `feature/lecons-3eme-comme-thales` |
 | **Ticket** | [#484](https://github.com/Lnclassapp/App.Lnclassapp/issues/484), étape 1 |
