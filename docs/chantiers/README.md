@@ -172,6 +172,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`interface-epuree`](interface-epuree/memo.md) | planifié | feature | 2026-09-30 | Interface épurée |
 | [`interrupteur-theme`](interrupteur-theme/memo.md) | en cours | feature | 2026-10-03 | Interrupteur clair / sombre |
 | [`je-m-entraine-dans-la-fiche`](je-m-entraine-dans-la-fiche/memo.md) | livré | feature | 2026-10-30 | « Je m’entraîne » dans la fiche de révision |
+| [`lecons-3eme-comme-thales`](lecons-3eme-comme-thales/memo.md) | PR prête | feature | 2026-11-05 | Les leçons de 3ème préparées comme Thalès |
 | [`lecons-defauts-affichage`](lecons-defauts-affichage/memo.md) | décision | bugfix | 2026-11-02 | Leçons v3 en défaut d'affichage |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
@@ -227,6 +228,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`suites-inscription-direction`](suites-inscription-direction/memo.md) | livré | bugfix | 2026-10-04 | Suites de l'inscription de la direction |
 | [`sujet-avant-de-commencer`](sujet-avant-de-commencer/memo.md) | livré | feature | 2026-10-31 | Chaque feuille dans une case, lue avant de commencer |
 | [`sujet-comme-une-epreuve`](sujet-comme-une-epreuve/memo.md) | livré | feature | 2026-11-04 | Le sujet se lit comme une vraie épreuve |
+| [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | planifié | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré | feature | 2026-10-31 | Sujets de devoir Thalès, titres numérotés des feuilles, correction en bloc |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
