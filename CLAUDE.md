@@ -17,6 +17,10 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 **Captures d'écran.** Tout travail d'interface (UI/UX) se montre au porteur en images : chaque écran modifié à 390 px (téléphone) et sur ordinateur, menus ouverts si besoin. Les captures sont envoyées, jamais commitées.
 
+**Zéro question en fin de session.** Une session lancée par une autre surveille d'office sa PR et ne finit jamais sur une question. Une décision réversible non tranchée : appliquer l'option prudente et l'écrire dans `## À trancher` du journal du chantier. Une décision non réversible (droits, données, sécurité) : s'arrêter sur ce seul point, l'écrire au même endroit. L'orchestrateur pose les décisions ouvertes en un seul `AskUserQuestion` avant tout lancement ; la boîte de décisions de 12 h relève le reste. Règle complète : [`docs/workflows/contrat-de-session.md`](docs/workflows/contrat-de-session.md).
+
+**Secrets.** Jamais dans le chat : ni token, ni PIN, ni code. Ils sont dans les variables de l'environnement Claude Code (`RAILWAY_API_TOKEN`, `LNCLASS_TEAM_CONTACT`, `LNCLASS_TEAM_PIN`). S'il en manque une, la session donne son nom et ne la demande pas. Les comptes de recette élève, enseignant et direction sont ceux du jeu standard (PIN `2468`).
+
 ---
 
 ## Sobriété de tokens
