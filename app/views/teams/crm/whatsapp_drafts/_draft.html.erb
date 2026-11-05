@@ -1,0 +1,40 @@
+<%# 🌐 UI · teams/crm/whatsapp_drafts/_draft — le brouillon prêt : texte modifiable (600 caractères), « Copier », « Ouvrir dans WhatsApp » vers le contact choisi %>
+<%# Rôle : l'application n'envoie rien ; le contrôleur whatsapp-link recalcule le lien wa.me et le texte à copier à chaque modification ; le texte du modèle est échappé %>
+<%# UDR  : XXXX (assistants du suivi, « Brouillon WhatsApp ») · local : generation (+ school_public_id, inutilisé ici) %>
+<% text = generation.content.to_s %>
+<% max = Entities::Crm::WhatsappDraftPrompt::MAX %>
+<% field_id = "whatsapp-draft-text-#{generation.public_id}" %>
+<% counter_id = "whatsapp-draft-counter-#{generation.public_id}" %>
+<% recipients = Repositories::Crm::ContactRepository.new.active_for_school(school_id: generation.school_id).select { it.phone.present? } %>
+<% link_for = ->(phone) { "https://wa.me/225#{phone}?text=#{ERB::Util.url_encode(text)}" } %>
+<%= turbo_frame_tag "generation_#{generation.public_id}" do %>
+  <div class="space-y-4"
+       data-controller="whatsapp-link"
+       data-whatsapp-link-base-value="https://wa.me/"
+       data-whatsapp-link-prefix-value="225"
+       data-whatsapp-link-max-value="<%= max %>"
+       data-whatsapp-link-counter-template-value="<%= t(".counter") %>">
+    <div class="space-y-1">
+      <label for="<%= field_id %>" class="block text-sm font-medium text-ink"><%= t(".label") %></label>
+      <%= text_area_tag nil, text, id: field_id, rows: 8, maxlength: max, "aria-describedby": counter_id,
+                        class: field_classes(:textarea, nil, nil),
+                        data: { whatsapp_link_target: "text", action: "input->whatsapp-link#update" } %>
+      <p id="<%= counter_id %>" class="text-xs text-mute" data-whatsapp-link-target="counter"><%= t(".counter", count: text.length, max:) %></p>
+    </div>
+    <% if recipients.any? %>
+      <%= fields :whatsapp do |form| %>
+        <%= ui_field form, :recipient, as: :select, label: t(".recipient"), choices: recipients.map { [ it.full_name, it.phone ] },
+                     data: { whatsapp_link_target: "recipient", action: "change->whatsapp-link#update" } %>
+      <% end %>
+    <% else %>
+      <p class="text-sm text-mute"><%= t(".no_phone") %></p>
+    <% end %>
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <%= ui_copy_button text, label: t(".copy"), copied: t(".copied"), size: :md %>
+      <% if recipients.any? %>
+        <%= ui_button t(".open"), href: link_for.call(recipients.first.phone), variant: :primary, icon: "chat-bubble-left-right",
+                                  target: "_blank", rel: "noopener", data: { whatsapp_link_target: "link" } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

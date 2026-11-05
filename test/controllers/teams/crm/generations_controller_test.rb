@@ -38,7 +38,7 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "a done generation of a kind with no partial of its own shows its text escaped, with no poll" do
-    generation = pending(kind: "whatsapp_draft")
+    generation = pending(kind: "pedagogy_report")
     @repository.complete(public_id: generation.public_id, content: "<script>alert(1)</script>\nLigne 2", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
 
     show generation
@@ -77,6 +77,16 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
 
   test "a failed generation of a kind whose route is not served yet offers no retry" do
     generation = pending(kind: "dictation")
+    @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
+
+    show generation
+
+    assert_select "[role=alert]"
+    assert_select "[role=alert] a", count: 0
+  end
+
+  test "a failed whatsapp draft that is linked to no follow-up offers no retry" do
+    generation = pending(kind: "whatsapp_draft")
     @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
 
     show generation
