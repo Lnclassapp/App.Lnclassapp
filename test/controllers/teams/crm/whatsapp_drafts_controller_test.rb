@@ -33,6 +33,21 @@ class Teams::Crm::WhatsappDraftsControllerTest < ActionDispatch::IntegrationTest
     generation
   end
 
+  test "when the queue refuses and the failure cannot be written, the modal says the assistant is unavailable, not that a draft is running" do
+    sign_in_as @field
+    refusing = Class.new(Repositories::Crm::GenerationRepository) { def mark_failed(**) = Shared::Result.failure(:not_found) }.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| refusing }
+    Crm::WhatsappDraftJob.define_singleton_method(:perform_later) { |*| false }
+
+    post_draft
+
+    assert_select "[role=alert]", text: /L'assistant est indisponible/
+    assert_no_match(/déjà en cours/, response.body)
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+    Crm::WhatsappDraftJob.singleton_class.send(:remove_method, :perform_later)
+  end
+
   test "the modal opens in the modal frame with a form that posts to the draft route" do
     sign_in_as @field
 

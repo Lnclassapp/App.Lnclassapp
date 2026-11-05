@@ -41,14 +41,28 @@ module Repositories
         finish(public_id, status: "failed", error_code:, duration_ms:)
       end
 
+      # L'audio est purgé avant la fermeture : si la purge échoue, la ligne reste en attente et sera reprise au prochain passage.
+      def fail_stale(school_id:, kind:, before:)
+        stale = Orm::CrmGeneration.where(status: "pending", created_at: ...before)
+        stale = stale.where(school_id:) if school_id
+        stale = stale.where(kind:) if kind
+        stale.with_attached_audio.find_each.sum do |record|
+          record.audio.purge if record.audio.attached?
+          Orm::CrmGeneration.where(id: record.id, status: "pending").update_all(status: "failed", error_code: "timeout", updated_at: Time.current)
+        end
+      end
+
       private
 
+      # Écriture conditionnelle : seule une ligne encore en attente est écrite (un second job ne peut pas écraser un résultat).
       def finish(public_id, **attributes)
         record = Orm::CrmGeneration.find_by(public_id:)
         return ::Shared::Result.failure(:not_found) if record.nil?
 
-        record.update!(attributes)
-        ::Shared::Result.success(to_entity(record))
+        written = Orm::CrmGeneration.where(public_id:, status: "pending").update_all(attributes.merge(updated_at: Time.current))
+        return ::Shared::Result.failure(:conflict) if written.zero?
+
+        ::Shared::Result.success(to_entity(record.reload))
       end
 
       def to_entity(record)

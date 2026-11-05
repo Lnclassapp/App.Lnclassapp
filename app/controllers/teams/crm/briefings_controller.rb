@@ -7,7 +7,7 @@ module Teams
       def create
         result = request_briefing.call(actor: current_actor, school_public_id: params[:school_public_id])
         return render_not_found if result.code == :not_found
-        return head(:conflict) if result.failure?
+        return render_refused(result) if result.failure?
 
         @school_public_id = params[:school_public_id]
         # Relue après la demande : un travail déjà exécuté (file en ligne) est montré fini, pas en attente.
@@ -17,12 +17,18 @@ module Teams
 
       private
 
+      # 409 est réservé au code :conflict (une préparation est déjà en cours) ; tout autre échec a son message et un 503.
+      def render_refused(result)
+        @conflict = result.code == :conflict
+        render :refused, status: @conflict ? :conflict : :service_unavailable
+      end
+
       def generations = @generations ||= Repositories::Crm::GenerationRepository.new
 
       def request_briefing
         UseCases::Crm::RequestBriefing.new(
           generations:, inputs: Queries::Crm::BriefingInputsQuery.new, policy: Policies::Crm::ManageCrmPolicy.new,
-          enqueue: ->(public_id) { ::Crm::BriefingJob.perform_later(public_id) != false }
+          logger: Rails.logger, enqueue: ->(public_id) { ::Crm::BriefingJob.perform_later(public_id) != false }
         )
       end
     end

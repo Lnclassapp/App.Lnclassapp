@@ -29,6 +29,16 @@ module Crm
       TestJob.model_double = @fake
     end
 
+    # Remplace une méthode d'un objet le temps du bloc, puis la restaure (le projet n'utilise pas minitest/mock).
+    def with_replaced(target, name, value)
+      own = target.singleton_class.instance_method(name) if target.singleton_class.method_defined?(name, false)
+      target.define_singleton_method(name) { |*, **, &| value }
+      yield
+    ensure
+      target.singleton_class.send(:remove_method, name)
+      target.singleton_class.send(:define_method, name, own) if own
+    end
+
     def pending
       @repository.create_pending(generation: Entities::Crm::Generation.new(
         public_id: nil, school_id: @school.id, kind: "dictation", status: "pending", requested_by_id: @user.id, follow_up_id: nil,
@@ -115,7 +125,7 @@ module Crm
       attach_audio(generation)
       TestJob.model_double = ExplodingModel.new
 
-      TestJob.perform_now(generation.public_id)
+      assert_raises(IOError) { TestJob.perform_now(generation.public_id) }
 
       failed = @repository.find_by_public_id(public_id: generation.public_id)
       assert failed.failed?
@@ -149,6 +159,49 @@ module Crm
 
       assert_not audio_attached?(generation)
       assert_equal 0, ActiveStorage::Blob.count
+    end
+
+    test "submit purges the blob it created when attaching it raises" do
+      generation = pending
+      upload = UseCases::Crm::SubmitDictation::Upload.new(io: StringIO.new("OggS-bytes"), byte_size: 10, content_type: "audio/ogg")
+      record = Orm::CrmGeneration.find_by!(public_id: generation.public_id)
+      audio = Object.new
+      audio.define_singleton_method(:attach) { |_blob| raise IOError, "disque plein" }
+      audio.define_singleton_method(:attached?) { false }
+      before = ActiveStorage::Blob.count
+
+      with_replaced(record, :audio, audio) do
+        with_replaced(Orm::CrmGeneration, :find_by!, record) do
+          assert_equal false, Crm::DictationJob.submit(generation.public_id, upload)
+        end
+      end
+
+      assert_equal before, ActiveStorage::Blob.count
+      assert_no_enqueued_jobs
+    end
+
+    test "submit logs the blob key when even the purge of the blob fails" do
+      generation = pending
+      upload = UseCases::Crm::SubmitDictation::Upload.new(io: StringIO.new("OggS-bytes"), byte_size: 10, content_type: "audio/ogg")
+      record = Orm::CrmGeneration.find_by!(public_id: generation.public_id)
+      audio = Object.new
+      audio.define_singleton_method(:attach) { |_blob| raise IOError, "disque plein" }
+      audio.define_singleton_method(:attached?) { false }
+      io = StringIO.new
+      original = Rails.logger
+      Rails.logger = ActiveSupport::Logger.new(io)
+
+      blob = ActiveStorage::Blob.create_and_upload!(io: StringIO.new("x"), filename: "d.ogg", content_type: "audio/ogg", identify: false)
+      blob.define_singleton_method(:purge) { raise IOError, "stockage coupé" }
+      with_replaced(ActiveStorage::Blob, :create_and_upload!, blob) do
+        with_replaced(record, :audio, audio) do
+          with_replaced(Orm::CrmGeneration, :find_by!, record) { Crm::DictationJob.submit(generation.public_id, upload) }
+        end
+      end
+
+      assert_includes io.string, blob.key
+    ensure
+      Rails.logger = original
     end
 
     test "submit keeps nothing and says no for an unknown generation or a type it does not store" do

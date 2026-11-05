@@ -86,6 +86,45 @@ module Repositories
         assert_equal [ "provider_error", 800 ], result.value.to_h.values_at(:error_code, :duration_ms)
       end
 
+      test "complete and mark_failed write only a pending row: a finished generation is never overwritten" do
+        created = @repository.create_pending(generation: generation).value
+        @repository.complete(public_id: created.public_id, content: "Fiche", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
+
+        assert_equal :conflict, @repository.mark_failed(public_id: created.public_id, error_code: "timeout", duration_ms: 1).code
+        assert_equal :conflict, @repository.complete(public_id: created.public_id, content: "Autre", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1).code
+        kept = @repository.find_by_public_id(public_id: created.public_id)
+        assert_equal [ "done", "Fiche", nil ], [ kept.status, kept.content, kept.error_code ]
+      end
+
+      test "fail_stale closes the old pending rows with a timeout and purges their audio" do
+        old = @repository.create_pending(generation: generation(kind: "dictation")).value
+        Orm::CrmGeneration.find_by(public_id: old.public_id).audio.attach(io: StringIO.new("OCTETS"), filename: "dictation.webm", content_type: "audio/webm")
+        Orm::CrmGeneration.where(public_id: old.public_id).update_all(created_at: 10.minutes.ago)
+        recent = @repository.create_pending(generation: generation(kind: "briefing")).value
+
+        assert_equal 1, @repository.fail_stale(school_id: @school.id, kind: "dictation", before: 2.minutes.ago)
+
+        failed = @repository.find_by_public_id(public_id: old.public_id)
+        assert_equal [ "failed", "timeout" ], [ failed.status, failed.error_code ]
+        assert_not Orm::CrmGeneration.find_by(public_id: old.public_id).audio.attached?
+        assert @repository.find_by_public_id(public_id: recent.public_id).pending?
+      end
+
+      test "fail_stale leaves a recent pending row and other schools alone, and covers every school when none is given" do
+        other_school = create_school
+        mine = @repository.create_pending(generation: generation).value
+        theirs = @repository.create_pending(generation: generation(school_id: other_school.id)).value
+        Orm::CrmGeneration.update_all(created_at: 10.minutes.ago)
+
+        assert_equal 0, @repository.fail_stale(school_id: @school.id, kind: "briefing", before: 20.minutes.ago)
+        assert_equal 1, @repository.fail_stale(school_id: @school.id, kind: "briefing", before: 2.minutes.ago)
+        assert @repository.find_by_public_id(public_id: theirs.public_id).pending?
+        assert @repository.find_by_public_id(public_id: mine.public_id).failed?
+
+        assert_equal 1, @repository.fail_stale(school_id: nil, kind: nil, before: 2.minutes.ago)
+        assert @repository.find_by_public_id(public_id: theirs.public_id).failed?
+      end
+
       test "complete and mark_failed on an unknown id are not_found" do
         assert_equal :not_found, @repository.complete(public_id: "unknown-public", content: "x", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1).code
         assert_equal :not_found, @repository.mark_failed(public_id: "unknown-public", error_code: "timeout", duration_ms: 1).code

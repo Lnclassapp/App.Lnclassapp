@@ -7,23 +7,57 @@ module Crm
 
     AUDIO_FORMATS = { "audio/webm" => "webm", "audio/ogg" => "ogg", "audio/mp4" => "mp4" }.freeze
 
+    # Panne du fournisseur : l'adaptateur la rend en échec, jamais en exception. Une exception ici est donc un bug du code :
+    # la génération est fermée (`provider_error`), l'exception est journalisée sans le contenu du prompt, puis relancée pour Solid Queue.
     def perform(public_id)
+      original = nil
+      begin
+        process(public_id)
+      rescue StandardError => error
+        original = error
+        raise
+      ensure
+        purge_audio(public_id, original:)
+      end
+    end
+
+    private
+
+    def process(public_id)
       generation = repository.find_by_public_id(public_id:)
       return if generation.nil? || !generation.pending?
 
       started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       begin
-        result = language_model.complete(messages: messages(generation), model: model_name, max_tokens:, json: json?, audio: audio_for(public_id))
+        prompt = prompt_for(generation)
+        return repository.mark_failed(public_id:, error_code: "invalid_response", duration_ms: elapsed_ms(started)) if prompt.nil?
+
+        result = language_model.complete(messages: prompt, model: model_name, max_tokens:, json: json?, audio: audio_for(public_id))
         finish(generation, result, elapsed_ms(started))
       rescue StandardError => error
-        Rails.logger.error("[crm.generation] #{self.class.name} #{public_id} : #{error.class}")
-        repository.mark_failed(public_id:, error_code: "provider_error", duration_ms: elapsed_ms(started))
-      ensure
-        purge_audio(public_id)
+        log_bug(public_id, error)
+        close_as_failed(public_id, elapsed_ms(started))
+        raise
       end
     end
 
-    private
+    # Le cas voulu « rien à générer » (ArgumentError de `messages`, ex. école sans activité) → nil : réponse inutilisable, sans relance.
+    def prompt_for(generation)
+      messages(generation)
+    rescue ArgumentError
+      nil
+    end
+
+    # Ni le prompt ni le corps de la réponse : la classe, le message d'erreur et la première ligne de la pile.
+    def log_bug(public_id, error)
+      Rails.logger.error("[crm.generation] #{self.class.name} #{public_id} : #{error.class}: #{error.message} (#{error.backtrace&.first})")
+    end
+
+    def close_as_failed(public_id, duration_ms)
+      repository.mark_failed(public_id:, error_code: "provider_error", duration_ms:)
+    rescue StandardError => error
+      Rails.logger.error("[crm.generation] #{public_id} : mark_failed impossible (#{error.class})")
+    end
 
     def repository = @repository ||= Repositories::Crm::GenerationRepository.new
 
@@ -57,7 +91,7 @@ module Crm
       return nil if text.to_s.strip.empty?
 
       content_for(text).presence
-    rescue StandardError
+    rescue ArgumentError
       nil
     end
 
@@ -65,13 +99,17 @@ module Crm
       attachment = Orm::CrmGeneration.find_by(public_id:)&.audio
       return unless attachment&.attached?
 
-      { data: attachment.download, format: AUDIO_FORMATS.fetch(attachment.content_type, "webm") }
+      { data: attachment.download, format: AUDIO_FORMATS.fetch(attachment.content_type) }
     end
 
-    # Purgé en succès comme en échec : l'enregistrement ne reste jamais après le job.
-    def purge_audio(public_id)
+    # Purgé en succès, en échec et quand la génération n'est plus en attente : l'enregistrement ne reste jamais après le job.
+    # Une purge qui échoue est journalisée (public_id) puis relancée, sauf si une exception d'origine est déjà en route (elle prime).
+    def purge_audio(public_id, original: nil)
       attachment = Orm::CrmGeneration.find_by(public_id:)&.audio
       attachment.purge if attachment&.attached?
+    rescue StandardError => error
+      Rails.logger.error("[crm.generation] purge de l'audio impossible #{public_id} : #{error.class}")
+      raise error if original.nil?
     end
 
     def elapsed_ms(started) = ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000).round

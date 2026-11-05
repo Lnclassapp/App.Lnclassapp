@@ -29,6 +29,7 @@ module Teams
         result = submit_dictation.call(actor: current_actor, school_public_id: params[:school_public_id], audio: upload)
         return render_not_found if result.code == :not_found
         return render_recorder(error: :running, status: :conflict) if result.code == :conflict
+        return render_recorder(error: :unavailable, status: :service_unavailable) if result.code == :unavailable
         return render_recorder(error: result.errors[:audio], status: :unprocessable_entity) if result.failure?
 
         # Relue après la demande : un travail déjà exécuté (file en ligne) est montré fini, pas en attente.
@@ -66,7 +67,7 @@ module Teams
 
       def submit_dictation
         UseCases::Crm::SubmitDictation.new(
-          generations:, schools: Repositories::School::SchoolRepository.new, policy: Policies::Crm::ManageCrmPolicy.new,
+          generations:, schools: Repositories::School::SchoolRepository.new, policy: Policies::Crm::ManageCrmPolicy.new, logger: Rails.logger,
           # Le type réel par les octets magiques seuls : ni le nom, ni le type annoncé par le navigateur.
           type_of: ->(io) { Marcel::MimeType.for(io) },
           enqueue: ->(public_id, stored) { ::Crm::DictationJob.submit(public_id, stored) }

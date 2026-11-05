@@ -75,17 +75,9 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil @repository.pending_for(school_id: @school.id, kind: "briefing")
   end
 
-  test "a failed generation of a kind whose route is not served yet offers no retry" do
-    # Chaque lot d'assistant (briefing, dictée, brouillon, rapport) ajoute sa ligne : on prend les types qui n'en ont pas encore.
-    (Entities::Crm::Generation::KINDS - Teams::Crm::GenerationsController::ASSISTANTS.keys).each do |kind|
-      generation = pending(kind:)
-      @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
-
-      show generation
-
-      assert_select "[role=alert]"
-      assert_select "[role=alert] a", count: 0
-    end
+  test "every kind of generation has its retry route" do
+    assert_equal Entities::Crm::Generation::KINDS.sort, Teams::Crm::GenerationsController::ASSISTANTS.keys.sort,
+                 "Un nouveau type de génération doit avoir sa ligne dans Teams::Crm::GenerationsController::ASSISTANTS (route « Réessayer »)."
   end
 
   test "a failed whatsapp draft that is linked to no follow-up offers no retry" do

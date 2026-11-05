@@ -9,6 +9,9 @@ module Crm
     PATH = "/api/v1/chat/completions".freeze
     OPEN_TIMEOUT = 5
     READ_TIMEOUT = 30
+    # Une réponse de chat tient en quelques Ko : au-delà de 256 Ko, la réponse est refusée sans être lue en entier.
+    MAX_BODY_BYTES = 256 * 1024
+    Reply = Data.define(:code, :body)
     NETWORK_ERRORS = [ SocketError, SystemCallError, IOError, OpenSSL::SSL::SSLError, Net::ProtocolError ].freeze
 
     # À VÉRIFIER dans la documentation OpenRouter (réseau bloqué au Lot G) : réglage de routage qui n'envoie les requêtes
@@ -26,14 +29,25 @@ module Crm
     end
 
     def complete(messages:, model:, max_tokens:, json: false, audio: nil)
-      return failure(:not_configured) if @api_key.blank?
+      if @api_key.blank?
+        Rails.logger.warn("[crm.openrouter] not_configured")
+        return failure(:not_configured)
+      end
 
       started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       response = post(payload(messages:, model:, max_tokens:, json:, audio:))
-      return failure(:provider_error) unless response.code.to_s.start_with?("2")
+      unless response.code.start_with?("2")
+        # Ni le corps, ni la clé, ni les messages : seulement le statut et le modèle.
+        Rails.logger.warn("[crm.openrouter] status=#{response.code} model=#{model}")
+        return failure(:provider_error)
+      end
+      if response.body.nil?
+        Rails.logger.warn("[crm.openrouter] status=#{response.code} model=#{model} body_too_large")
+        return failure(:invalid_response)
+      end
 
       parse(response.body, model:, duration_ms: ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000).round)
-    rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error
+    rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error, Errno::ETIMEDOUT
       failure(:timeout)
     rescue *NETWORK_ERRORS
       failure(:provider_error)
@@ -48,7 +62,23 @@ module Crm
       request["Authorization"] = "Bearer #{@api_key}"
       request["Content-Type"] = "application/json"
       request.body = body.to_json
-      @http.start(HOST, 443, use_ssl: true, open_timeout: OPEN_TIMEOUT, read_timeout: READ_TIMEOUT) { |connection| connection.request(request) }
+      reply = nil
+      @http.start(HOST, 443, use_ssl: true, open_timeout: OPEN_TIMEOUT, read_timeout: READ_TIMEOUT) do |connection|
+        connection.request(request) { |response| reply = Reply.new(code: response.code.to_s, body: read_capped(response)) }
+      end
+      reply
+    end
+
+    # Le corps n'est lu (par morceaux) que pour une réponse 2xx ; nil si le plafond est dépassé.
+    def read_capped(response)
+      return "" unless response.code.to_s.start_with?("2")
+
+      body = +""
+      response.read_body do |chunk|
+        body << chunk
+        return nil if body.bytesize > MAX_BODY_BYTES
+      end
+      body
     end
 
     def payload(messages:, model:, max_tokens:, json:, audio:)
@@ -77,7 +107,7 @@ module Crm
       usage = data["usage"].is_a?(Hash) ? data["usage"] : {}
       Shared::Result.success({ text:, model: data["model"].presence || model, input_tokens: usage["prompt_tokens"].to_i,
                                output_tokens: usage["completion_tokens"].to_i, duration_ms: })
-    rescue JSON::ParserError, TypeError, NoMethodError
+    rescue JSON::ParserError, TypeError
       failure(:invalid_response)
     end
   end

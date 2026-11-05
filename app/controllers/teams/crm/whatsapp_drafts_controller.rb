@@ -14,6 +14,7 @@ module Teams
         result = request_draft.call(actor: current_actor, follow_up_public_id: @follow_up.public_id)
         return render_not_found if result.code == :not_found
 
+        @unavailable = result.code == :unavailable
         # :conflict, c'est un brouillon déjà en cours pour une autre relance de la même école : la vue le dit.
         # Relue après la demande : un travail déjà exécuté (file en ligne) est montré fini, pas en attente.
         @generation = generations.find_by_public_id(public_id: result.value.generation.public_id) if result.success?
@@ -31,7 +32,7 @@ module Teams
 
       def request_draft
         UseCases::Crm::RequestWhatsappDraft.new(
-          generations:, inputs: Queries::Crm::WhatsappDraftInputsQuery.new, policy: Policies::Crm::ManageCrmPolicy.new,
+          generations:, inputs: Queries::Crm::WhatsappDraftInputsQuery.new, policy: Policies::Crm::ManageCrmPolicy.new, logger: Rails.logger,
           enqueue: ->(public_id) { ::Crm::WhatsappDraftJob.perform_later(public_id) != false }
         )
       end

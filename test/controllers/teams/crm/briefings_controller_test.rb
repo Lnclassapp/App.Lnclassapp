@@ -56,10 +56,55 @@ class Teams::Crm::BriefingsControllerTest < ActionDispatch::IntegrationTest
     config.api_key = original
   end
 
-  test "content, a teacher and a visitor are refused" do
-    sign_in_as create_team_member(team_role: "content")
+  test "content and a teacher get 403, a visitor is sent to sign in, and nothing is enqueued" do
+    [ create_team_member(team_role: "content"), create_teacher ].each do |user|
+      sign_in_as user
+      assert_no_enqueued_jobs { post_briefing }
+      assert_response :forbidden
+      sign_out
+    end
+
     assert_no_enqueued_jobs { post_briefing }
-    assert_response :forbidden
+    assert_redirected_to new_session_path
+    assert_equal 0, Orm::CrmGeneration.count
+  end
+
+  # Une course perdue : l'index unique refuse la création et la ligne en cours a disparu entre-temps.
+  def with_lost_race
+    racing = Class.new(Repositories::Crm::GenerationRepository) do
+      def create_pending(generation:) = Shared::Result.failure(:conflict)
+      def pending_for(school_id:, kind:) = nil
+    end.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| racing }
+    yield
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+  end
+
+  test "a conflict is a visible message in the frame, with a 409" do
+    sign_in_as @field
+
+    with_lost_race { post_briefing }
+
+    assert_response :conflict
+    assert_select "turbo-stream[action=update][target=school_crm_briefing]"
+    assert_select "[role=status]", text: /Une préparation est déjà en cours, réessayez dans un instant/
+  end
+
+  test "any other failure is a message in the frame too, not a 409" do
+    sign_in_as @field
+    refusing = Class.new(Repositories::Crm::GenerationRepository) { def mark_failed(**) = Shared::Result.failure(:not_found) }.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| refusing }
+    Crm::BriefingJob.define_singleton_method(:perform_later) { |*| false }
+
+    post_briefing
+
+    assert_response :service_unavailable
+    assert_select "turbo-stream[action=update][target=school_crm_briefing]"
+    assert_select "[role=alert]", text: /L'assistant est indisponible/
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+    Crm::BriefingJob.singleton_class.send(:remove_method, :perform_later)
   end
 
   test "an unknown school is a 404" do

@@ -23,7 +23,14 @@ module UseCases
         def find_by_public_id(public_id:) = @rows.find { it.public_id == public_id }
         def pending_for(school_id:, kind:) = @rows.find { it.school_id == school_id && it.kind == kind && it.pending? }
 
+
         attr_accessor :unwritable
+
+        def fail_stale(school_id:, kind:, before:)
+          stale = @rows.select { it.pending? && it.school_id == school_id && it.kind == kind && it.created_at && it.created_at < before }
+          stale.each { |row| @rows[@rows.index(row)] = row.with(status: "failed", error_code: "timeout") }
+          stale.size
+        end
 
         def mark_failed(public_id:, error_code:, duration_ms:)
           return Shared::Result.failure(:not_found) if unwritable
@@ -56,7 +63,7 @@ module UseCases
         @enqueued = []
         @accepting = true
         @use_case = SubmitDictation.new(generations: @generations, schools: FakeSchools.new, policy: Policies::Crm::ManageCrmPolicy.new,
-                                        type_of: TYPE_OF, enqueue: ->(public_id, stored) { @enqueued << [ public_id, stored ]; @accepting })
+                                        type_of: TYPE_OF, enqueue: ->(public_id, stored) { @enqueued << [ public_id, stored ]; @accepting }, logger: Logger.new(@log = StringIO.new))
       end
 
       def submit(audio = upload, actor: self.actor, school_public_id: "school-pub") = @use_case.call(actor:, school_public_id:, audio:)
@@ -144,14 +151,38 @@ module UseCases
         assert_equal "provider_error", result.value.generation.error_code
       end
 
-      test "when the queue refuses and the failure cannot be written, the pending dictation is returned as it is" do
+      test "a stale pending generation is closed and a new request goes through" do
+        first = submit.value.generation
+        index = @generations.rows.index { it.public_id == first.public_id }
+        @generations.rows[index] = first.with(created_at: 10.minutes.ago)
+        @enqueued.clear
+
+        result = submit
+
+        assert result.success?
+        assert_not_equal first.public_id, result.value.generation.public_id
+        assert_equal "timeout", @generations.find_by_public_id(public_id: first.public_id).error_code
+        assert_equal [ result.value.generation.public_id ], @enqueued.map(&:first)
+      end
+
+      test "when the queue refuses and the failure cannot be written, the request is unavailable and the ids are logged" do
         @accepting = false
         @generations.unwritable = true
 
         result = submit
 
-        assert result.success?
-        assert_predicate result.value.generation, :pending?
+        assert_equal :unavailable, result.code
+        assert_equal :provider_error, result.errors[:reason]
+        assert_includes @log.string, "gen-1"
+        assert_includes @log.string, "provider_error"
+      end
+
+      test "a recent pending dictation is still a conflict, and the recording is not enqueued" do
+        submit
+        @enqueued.clear
+
+        assert_equal :conflict, submit.code
+        assert_empty @enqueued
       end
     end
   end

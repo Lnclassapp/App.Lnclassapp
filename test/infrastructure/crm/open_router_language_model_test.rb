@@ -4,7 +4,10 @@ require "test_helper"
 # (never the network), and maps every failure to a reason of the port: not_configured, timeout, provider_error, invalid_response.
 module Crm
   class OpenRouterLanguageModelTest < ActiveSupport::TestCase
-    Response = Struct.new(:code, :body)
+    # Like Net::HTTP::Response: the body is read in chunks by #read_body.
+    Response = Struct.new(:code, :body) do
+      def read_body(&) = body.to_s.scan(/.{1,65536}/m).each(&)
+    end
 
     # Replaces Net::HTTP: records the request, answers a programmed response or raises a programmed error.
     class FakeHttp
@@ -18,18 +21,13 @@ module Crm
         @started_with = { host:, port:, **options }
         raise @error if @error
 
+        owner = self
         connection = Object.new
-        connection.define_singleton_method(:request) { |request| (@captured = request) && @response_for.call }
-        outer = self
-        connection.instance_variable_set(:@response_for, -> { outer.send(:answer, connection) })
+        connection.define_singleton_method(:request) do |request, &block|
+          owner.instance_variable_set(:@request, request)
+          block ? block.call(owner.instance_variable_get(:@response)) : owner.instance_variable_get(:@response)
+        end
         yield connection
-      end
-
-      private
-
-      def answer(connection)
-        @request = connection.instance_variable_get(:@captured)
-        @response
       end
     end
 
@@ -38,6 +36,16 @@ module Crm
 
     def call(http, api_key: "sk-test", **args)
       OpenRouterLanguageModel.new(api_key:, http:).complete(messages: MESSAGES, model: "deepseek/deepseek-chat", max_tokens: 300, **args)
+    end
+
+    def capture_log
+      io = StringIO.new
+      original = Rails.logger
+      Rails.logger = ActiveSupport::Logger.new(io)
+      yield
+      io.string
+    ensure
+      Rails.logger = original
     end
 
     def assert_reason(reason, result)
@@ -135,6 +143,33 @@ module Crm
       result = call(FakeHttp.new(response: Response.new("200", body)))
 
       assert_equal [ "deepseek/deepseek-chat-v3", 0, 0 ], result.value.values_at(:model, :input_tokens, :output_tokens)
+    end
+
+    test "a non-2xx answer is logged with its status and model, never the body, the key or the messages" do
+      logged = capture_log { call(FakeHttp.new(response: Response.new("401", "refusé sk-test Bonjour"))) }
+
+      assert_includes logged, "[crm.openrouter] status=401 model=deepseek/deepseek-chat"
+      %w[Bearer sk-test Bonjour refusé].each { assert_not_includes logged, it }
+    end
+
+    test "not_configured is logged as a warning" do
+      assert_includes capture_log { call(FakeHttp.new(response: Response.new("200", BODY)), api_key: nil) }, "[crm.openrouter] not_configured"
+    end
+
+    test "Errno::ETIMEDOUT is a timeout" do
+      assert_reason :timeout, call(FakeHttp.new(error: Errno::ETIMEDOUT.new))
+    end
+
+    test "a body of 2 MB is an invalid response, read in chunks under a 256 KB cap" do
+      huge = { choices: [ { message: { content: "x" * (2 * 1024 * 1024) } } ] }.to_json
+
+      assert_reason :invalid_response, call(FakeHttp.new(response: Response.new("200", huge)))
+    end
+
+    test "a body just under the cap is read" do
+      body = { choices: [ { message: { content: "x" * 200_000 } } ] }.to_json
+
+      assert call(FakeHttp.new(response: Response.new("200", body))).success?
     end
 
     test "a failure never carries the key" do

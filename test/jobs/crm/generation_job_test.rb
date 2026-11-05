@@ -76,15 +76,95 @@ module Crm
       assert_equal "invalid_response", failed.error_code
     end
 
-    test "an unexpected error marks the generation failed instead of leaving it pending" do
+    test "an unexpected error marks the generation failed, is logged without the prompt, and is re-raised" do
       generation = pending
       @fake.define_singleton_method(:complete) { |**| raise "boom" }
-
-      TestJob.perform_now(generation.public_id)
+      logged = capture_log { assert_raises(RuntimeError) { TestJob.perform_now(generation.public_id) } }
 
       failed = @repository.find_by_public_id(public_id: generation.public_id)
       assert failed.failed?
       assert_equal "provider_error", failed.error_code
+      assert_includes logged, "RuntimeError"
+      assert_includes logged, "boom"
+      assert_not_includes logged, "Dis bonjour"
+    end
+
+    test "a bug in the inputs query is a failed generation and the exception reaches the queue" do
+      buggy = Class.new(TestJob) { def messages(_generation) = nil.unknown_method }
+      generation = pending
+
+      assert_raises(NoMethodError) { buggy.perform_now(generation.public_id) }
+
+      assert_equal "provider_error", @repository.find_by_public_id(public_id: generation.public_id).error_code
+    end
+
+    test "a bug in content_for is not an invalid_response: failed as provider_error and re-raised" do
+      buggy = Class.new(TestJob) { def content_for(_text) = nil.unknown_method }
+      generation = pending
+
+      assert_raises(NoMethodError) { buggy.perform_now(generation.public_id) }
+
+      assert_equal "provider_error", @repository.find_by_public_id(public_id: generation.public_id).error_code
+    end
+
+    test "an ArgumentError from messages (a school without activity) is an invalid_response and is not re-raised" do
+      quiet = Class.new(TestJob) { def messages(_generation) = raise(ArgumentError, "école sans activité") }
+      generation = pending
+
+      assert_nothing_raised { quiet.perform_now(generation.public_id) }
+
+      assert_equal "invalid_response", @repository.find_by_public_id(public_id: generation.public_id).error_code
+      assert_empty @fake.calls
+    end
+
+    test "a second job on a finished generation does not overwrite it, and still purges the audio" do
+      generation = pending(kind: "dictation")
+      attach_audio(generation)
+      @repository.complete(public_id: generation.public_id, content: "Déjà", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
+
+      TestJob.perform_now(generation.public_id)
+
+      assert_empty @fake.calls
+      assert_equal "Déjà", @repository.find_by_public_id(public_id: generation.public_id).content
+      assert_not Orm::CrmGeneration.find_by(public_id: generation.public_id).audio.attached?
+    end
+
+    test "a result arriving after the generation was closed is ignored" do
+      generation = pending
+      repository = @repository
+      @fake.define_singleton_method(:complete) do |**|
+        repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 1)
+        Shared::Result.success({ text: "Tard", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1 })
+      end
+
+      TestJob.perform_now(generation.public_id)
+
+      assert_equal "timeout", @repository.find_by_public_id(public_id: generation.public_id).error_code
+    end
+
+    test "a failing purge is logged with the public id and raised" do
+      generation = pending(kind: "dictation")
+      attach_audio(generation)
+
+      logged = capture_log { with_failing_purge(generation) { assert_raises(IOError) { TestJob.perform_now(generation.public_id) } } }
+
+      assert_includes logged, generation.public_id
+      assert @repository.find_by_public_id(public_id: generation.public_id).done?
+    end
+
+    test "a failing purge never hides the original exception" do
+      generation = pending(kind: "dictation")
+      attach_audio(generation)
+      @fake.define_singleton_method(:complete) { |**| raise ArgumentError, "origine" }
+
+      logged = capture_log do
+        with_failing_purge(generation) do
+          error = assert_raises(ArgumentError) { TestJob.perform_now(generation.public_id) }
+          assert_equal "origine", error.message
+        end
+      end
+
+      assert_includes logged, generation.public_id
     end
 
     test "a generation that is no longer pending is left alone" do
@@ -144,6 +224,36 @@ module Crm
     end
 
     private
+
+    def capture_log
+      io = StringIO.new
+      original = Rails.logger
+      Rails.logger = ActiveSupport::Logger.new(io)
+      yield
+      io.string
+    ensure
+      Rails.logger = original
+    end
+
+    # Remplace une méthode d'un objet le temps du bloc, puis la restaure (le projet n'utilise pas minitest/mock).
+    def with_replaced(target, name, value)
+      own = target.singleton_class.instance_method(name) if target.singleton_class.method_defined?(name, false)
+      target.define_singleton_method(name) { |*, **, &| value }
+      yield
+    ensure
+      target.singleton_class.send(:remove_method, name)
+      target.singleton_class.send(:define_method, name, own) if own
+    end
+
+    def with_failing_purge(generation, &block)
+      record = Orm::CrmGeneration.find_by(public_id: generation.public_id)
+      audio = Object.new
+      audio.define_singleton_method(:attached?) { true }
+      audio.define_singleton_method(:content_type) { "audio/webm" }
+      audio.define_singleton_method(:download) { "OCTETS" }
+      audio.define_singleton_method(:purge) { raise IOError, "disque" }
+      with_replaced(record, :audio, audio) { with_replaced(Orm::CrmGeneration, :find_by, record, &block) }
+    end
 
     def attach_audio(generation)
       Orm::CrmGeneration.find_by(public_id: generation.public_id).audio.attach(io: StringIO.new("OCTETS"), filename: "dictee.webm", content_type: "audio/webm")

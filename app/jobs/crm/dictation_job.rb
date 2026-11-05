@@ -9,6 +9,7 @@ module Crm
     # Garde l'enregistrement (pièce privée de la génération, sous un nom fixe : jamais celui de l'utilisateur) puis met le job en file.
     # Faux, sans rien garder, si l'un ou l'autre échoue.
     def self.submit(public_id, upload)
+      blob = nil
       record = Orm::CrmGeneration.find_by!(public_id:)
       # `analyzed: true` : Active Storage n'analyse pas la pièce (ffprobe lirait un fichier de l'utilisateur) ; le type est celui lu par les octets.
       blob = ActiveStorage::Blob.create_and_upload!(io: upload.io, filename: "dictation.#{EXTENSIONS.fetch(upload.content_type)}",
@@ -20,9 +21,18 @@ module Crm
       false
     rescue StandardError => error
       Rails.logger.error("[crm.dictation] submit #{public_id} : #{error.class}")
-      record.audio.purge if record
+      discard_upload(record, blob)
       false
     end
+
+    # Rien ne reste : la pièce attachée, et le blob créé même si l'attache a échoué (sa clé est journalisée si la purge échoue aussi).
+    def self.discard_upload(record, blob)
+      record.audio.purge if record&.audio&.attached?
+      blob.purge if blob && ActiveStorage::Blob.exists?(blob.id)
+    rescue StandardError => error
+      Rails.logger.error("[crm.dictation] purge impossible, blob #{blob&.key} : #{error.class}")
+    end
+    private_class_method :discard_upload
 
     private
 

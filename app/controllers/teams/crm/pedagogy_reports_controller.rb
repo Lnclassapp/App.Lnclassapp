@@ -7,7 +7,7 @@ module Teams
       def create
         result = request_report.call(actor: current_actor, school_public_id: params[:school_public_id])
         return render_not_found if result.code == :not_found
-        return head(:conflict) if result.failure?
+        return render_refused(result) if result.failure?
 
         @school_public_id = params[:school_public_id]
         # CA-30 : l'école n'a pas assez d'activité, rien n'est demandé au modèle ; le message prend la place de la fiche de briefing.
@@ -34,12 +34,18 @@ module Teams
 
       private
 
+      # 409 est réservé au code :conflict (une préparation est déjà en cours) ; tout autre échec a son message et un 503.
+      def render_refused(result)
+        @conflict = result.code == :conflict
+        render :refused, status: @conflict ? :conflict : :service_unavailable
+      end
+
       def generations = @generations ||= Repositories::Crm::GenerationRepository.new
 
       def request_report
         UseCases::Crm::RequestPedagogyReport.new(
           generations:, inputs: Queries::Crm::PedagogyReportQuery.new, policy: Policies::Crm::ManageCrmPolicy.new,
-          enqueue: ->(public_id) { ::Crm::PedagogyReportJob.perform_later(public_id) != false }
+          logger: Rails.logger, enqueue: ->(public_id) { ::Crm::PedagogyReportJob.perform_later(public_id) != false }
         )
       end
     end

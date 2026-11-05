@@ -13,6 +13,7 @@ module UseCases
         def initialize = @rows = []
 
         def create_pending(generation:)
+          return Shared::Result.failure(:conflict) if conflict_only
           return Shared::Result.failure(:conflict) if pending_for(school_id: generation.school_id, kind: generation.kind)
 
           row = generation.with(public_id: "gen-#{@rows.size + 1}")
@@ -21,14 +22,26 @@ module UseCases
         end
 
         def find_by_public_id(public_id:) = @rows.find { it.public_id == public_id }
-        def pending_for(school_id:, kind:) = @rows.find { it.school_id == school_id && it.kind == kind && it.pending? }
+        def pending_for(school_id:, kind:) = conflict_only ? nil : @rows.find { it.school_id == school_id && it.kind == kind && it.pending? }
 
         def latest_done(school_id:, kind:, input_fingerprint:)
           @rows.reverse.find { it.done? && it.school_id == school_id && it.kind == kind && it.input_fingerprint == input_fingerprint }
         end
 
         def complete(public_id:, content:, **) = update(public_id, status: "done", content:)
-        def mark_failed(public_id:, error_code:, duration_ms:) = update(public_id, status: "failed", error_code:)
+        attr_accessor :unwritable, :conflict_only
+
+        def fail_stale(school_id:, kind:, before:)
+          stale = @rows.select { it.pending? && it.school_id == school_id && it.kind == kind && it.created_at && it.created_at < before }
+          stale.each { |row| @rows[@rows.index(row)] = row.with(status: "failed", error_code: "timeout") }
+          stale.size
+        end
+
+        def mark_failed(public_id:, error_code:, duration_ms:)
+          return Shared::Result.failure(:not_found) if unwritable
+
+          update(public_id, status: "failed", error_code:)
+        end
 
         private
 
@@ -64,7 +77,7 @@ module UseCases
         @enqueued = []
         @accepting = true
         @use_case = RequestPedagogyReport.new(generations: @generations, inputs: @inputs, policy: Policies::Crm::ManageCrmPolicy.new,
-                                              enqueue: ->(public_id) { @enqueued << public_id; @accepting })
+                                              enqueue: ->(public_id) { @enqueued << public_id; @accepting }, logger: Logger.new(@log = StringIO.new))
       end
 
       def request(actor: self.actor) = @use_case.call(actor:, school_public_id: "school-pub")
@@ -146,6 +159,38 @@ module UseCases
 
       test "an unknown school is :not_found" do
         assert_equal :not_found, @use_case.call(actor:, school_public_id: "nope").code
+      end
+
+      test "a stale pending generation is closed and a new request goes through" do
+        first = request.value.generation
+        index = @generations.rows.index { it.public_id == first.public_id }
+        @generations.rows[index] = first.with(created_at: 10.minutes.ago)
+        @enqueued.clear
+
+        result = request
+
+        assert result.success?
+        assert_not_equal first.public_id, result.value.generation.public_id
+        assert_equal "timeout", @generations.find_by_public_id(public_id: first.public_id).error_code
+        assert_equal [ result.value.generation.public_id ], @enqueued
+      end
+
+      test "when the queue refuses and the failure cannot be written, the request is unavailable and the ids are logged" do
+        @accepting = false
+        @generations.unwritable = true
+
+        result = request
+
+        assert_equal :unavailable, result.code
+        assert_equal :provider_error, result.errors[:reason]
+        assert_includes @log.string, "gen-1"
+        assert_includes @log.string, "provider_error"
+      end
+
+      test "a conflict with no pending row to show is a :conflict" do
+        @generations.conflict_only = true
+
+        assert_equal :conflict, request.code
       end
     end
   end

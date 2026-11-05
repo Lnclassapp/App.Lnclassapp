@@ -6,15 +6,10 @@ require "test_helper"
 class Teams::Crm::DictationsControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
-  # Le faux modèle remplace le client OpenRouter dans le job réel (jamais le réseau).
+  # Le faux modèle remplace le client OpenRouter dans le job réel (jamais le réseau) : le remplacement est posé au setup et retiré au teardown.
   module ModelDouble
     mattr_accessor :double
-
-    private
-
-    def language_model = ModelDouble.double || super
   end
-  Crm::DictationJob.prepend(ModelDouble)
 
   WEBM = [ "1A45DFA39F4286" ].pack("H*") + "webm" + ("\0" * 200)
   ANSWER = { kind: "call", outcome: "positive", contact_name: "Mme Kouassi", next_step: "Envoyer la plaquette",
@@ -25,9 +20,14 @@ class Teams::Crm::DictationsControllerTest < ActionDispatch::IntegrationTest
     @field = create_team_member(team_role: "field")
     @repository = Repositories::Crm::GenerationRepository.new
     sign_in_as @field
+    Crm::DictationJob.send(:define_method, :language_model) { ModelDouble.double || Crm::OpenRouterLanguageModel.new }
+    Crm::DictationJob.send(:private, :language_model)
   end
 
-  teardown { ModelDouble.double = nil }
+  teardown do
+    ModelDouble.double = nil
+    Crm::DictationJob.send(:remove_method, :language_model)
+  end
 
   def dictation_path = teams_school_dictation_path(@school.public_id)
 
@@ -52,6 +52,20 @@ class Teams::Crm::DictationsControllerTest < ActionDispatch::IntegrationTest
       input_fingerprint: nil, content: nil, error_code: nil, model: nil, input_tokens: nil, output_tokens: nil, duration_ms: nil
     )).value
     @repository.complete(public_id: created.public_id, content:, model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1).value
+  end
+
+  test "when the queue refuses and the failure cannot be written, the recorder says the assistant is unavailable" do
+    refusing = Class.new(Repositories::Crm::GenerationRepository) { def mark_failed(**) = Shared::Result.failure(:not_found) }.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| refusing }
+    Crm::DictationJob.define_singleton_method(:perform_later) { |*| false }
+
+    send_audio
+
+    assert_response :service_unavailable
+    assert_includes response.body, "L&#39;assistant est indisponible"
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+    Crm::DictationJob.singleton_class.send(:remove_method, :perform_later)
   end
 
   test "new: the recorder modal, inside the modal frame" do
@@ -135,7 +149,7 @@ class Teams::Crm::DictationsControllerTest < ActionDispatch::IntegrationTest
     no_trace_of_the_upload!
   end
 
-  test "CA-26: 12 Mo is refused before the body is read, with the same message" do
+  test "CA-26: a request announcing more than 11 Mo (Content-Length) is refused with a 422 for the interface, and nothing is stored" do
     send_audio(recording(WEBM + ("\0" * (12 * 1024 * 1024))))
 
     assert_response :unprocessable_entity
@@ -220,13 +234,25 @@ class Teams::Crm::DictationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, ActiveStorage::Blob.count
   end
 
-  test "the polled generation shows the prefilled form frame once done, and a retry once failed" do
+  test "the polled generation shows the prefilled form frame once done" do
     done = finished_generation(Entities::Crm::DictationDraft.parse(ANSWER).to_content)
 
     get teams_generation_path(done.public_id), headers: { "Turbo-Frame" => "generation_#{done.public_id}" }
 
     assert_response :success
     assert_select "turbo-frame#generation_#{done.public_id} turbo-frame#dictation_prefill_#{done.public_id}[target=modal][src*='/dictation/new?generation=#{done.public_id}']"
+  end
+
+  test "the polled generation shows a retry once failed" do
+    failed = finished_generation(nil)
+    Orm::CrmGeneration.where(public_id: failed.public_id).update_all(status: "failed", error_code: "timeout", content: nil)
+
+    get teams_generation_path(failed.public_id), headers: { "Turbo-Frame" => "generation_#{failed.public_id}" }
+
+    assert_response :success
+    assert_select "[role=alert]", text: /L'assistant n'a pas répondu/
+    assert_select "a[href=?][data-turbo-method=post]", dictation_path, text: /Réessayer/
+    assert_select "turbo-frame[id^=dictation_prefill_]", count: 0
   end
 
   test "CA-25: the prefilled form carries the dictation, escaped, with the source, and nothing is noted" do

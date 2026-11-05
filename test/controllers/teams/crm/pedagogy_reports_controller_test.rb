@@ -83,11 +83,52 @@ class Teams::Crm::PedagogyReportsControllerTest < ActionDispatch::IntegrationTes
     assert_includes response.body, "generation_#{renewed.public_id}"
   end
 
-  test "content, a teacher and a visitor are refused" do
+  test "content and a teacher get 403, a visitor is sent to sign in, and nothing is enqueued" do
     add_activity
-    sign_in_as create_team_member(team_role: "content")
+    [ create_team_member(team_role: "content"), create_teacher ].each do |user|
+      sign_in_as user
+      assert_no_enqueued_jobs { post_report }
+      assert_response :forbidden
+      sign_out
+    end
+
     assert_no_enqueued_jobs { post_report }
-    assert_response :forbidden
+    assert_redirected_to new_session_path
+    assert_equal 0, Orm::CrmGeneration.count
+  end
+
+  test "a conflict is a visible message in the frame, with a 409" do
+    add_activity
+    sign_in_as @field
+    racing = Class.new(Repositories::Crm::GenerationRepository) do
+      def create_pending(generation:) = Shared::Result.failure(:conflict)
+      def pending_for(school_id:, kind:) = nil
+    end.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| racing }
+
+    post_report
+
+    assert_response :conflict
+    assert_select "turbo-stream[action=update][target=school_crm_briefing]"
+    assert_select "[role=status]", text: /Une préparation est déjà en cours, réessayez dans un instant/
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+  end
+
+  test "any other failure is a message in the frame too, not a 409" do
+    add_activity
+    sign_in_as @field
+    refusing = Class.new(Repositories::Crm::GenerationRepository) { def mark_failed(**) = Shared::Result.failure(:not_found) }.new
+    Repositories::Crm::GenerationRepository.define_singleton_method(:new) { |*| refusing }
+    Crm::PedagogyReportJob.define_singleton_method(:perform_later) { |*| false }
+
+    post_report
+
+    assert_response :service_unavailable
+    assert_select "[role=alert]", text: /L'assistant est indisponible/
+  ensure
+    Repositories::Crm::GenerationRepository.singleton_class.send(:remove_method, :new)
+    Crm::PedagogyReportJob.singleton_class.send(:remove_method, :perform_later)
   end
 
   test "an unknown school is a 404" do
@@ -208,15 +249,21 @@ class Teams::Crm::PedagogyReportsControllerTest < ActionDispatch::IntegrationTes
     assert_response :not_found
   end
 
-  test "content gets 403 on the page, a visitor is sent to sign in" do
+  test "content and a teacher get 403 on the page, a visitor is sent to sign in" do
     add_activity
     sign_in_as @field
     post_report
     generation = @repository.pending_for(school_id: @school.id, kind: "pedagogy_report")
+    sign_out
 
-    sign_in_as create_team_member(team_role: "content")
+    [ create_team_member(team_role: "content"), create_teacher ].each do |user|
+      sign_in_as user
+      get teams_pedagogy_report_path(generation.public_id)
+      assert_response :forbidden
+      sign_out
+    end
+
     get teams_pedagogy_report_path(generation.public_id)
-
-    assert_response :forbidden
+    assert_redirected_to new_session_path
   end
 end

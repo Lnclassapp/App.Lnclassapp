@@ -24,14 +24,20 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #latest_done"
       end
 
-      # → Result(Generation) | failure(:not_found)
+      # → Result(Generation) | failure(:not_found) | failure(:conflict) si la génération n'est plus en attente (jamais écrasée)
       def complete(public_id:, content:, model:, input_tokens:, output_tokens:, duration_ms:)
         raise NotImplementedError, "#{self.class} doit implémenter #complete"
       end
 
-      # error_code ∈ Generation::ERROR_CODES. → Result(Generation) | failure(:not_found)
+      # error_code ∈ Generation::ERROR_CODES. → Result(Generation) | failure(:not_found) | failure(:conflict) si la génération n'est plus en attente
       def mark_failed(public_id:, error_code:, duration_ms:)
         raise NotImplementedError, "#{self.class} doit implémenter #mark_failed"
+      end
+
+      # Ferme (`failed`, error_code "timeout") les générations encore en attente créées avant `before`, et purge leur audio.
+      # school_id / kind nil : toutes les écoles / tous les types. → Integer (nombre de lignes fermées)
+      def fail_stale(school_id:, kind:, before:)
+        raise NotImplementedError, "#{self.class} doit implémenter #fail_stale"
       end
     end
   end

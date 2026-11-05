@@ -1,7 +1,11 @@
 <%# 🌐 UI · teams/crm/whatsapp_drafts/create — remplit le frame whatsapp_draft de la modale « Message de relance » %>
 <%# Rôle : brouillon prêt (partial _draft), cycle de génération (attente, échec avec « Réessayer » vers cette même route POST) ou refus d'un second brouillon en cours %>
 <%# UDR  : XXXX (assistants du suivi) %>
-<% if @generation.nil? %>
+<% if @unavailable %>
+  <%= turbo_stream.update "whatsapp_draft" do %>
+    <p class="text-sm text-error" role="alert"><%= t(".unavailable") %></p>
+  <% end %>
+<% elsif @generation.nil? %>
   <%= turbo_stream.update "whatsapp_draft" do %>
     <p class="text-sm text-mute" role="status"><%= t(".busy") %></p>
   <% end %>

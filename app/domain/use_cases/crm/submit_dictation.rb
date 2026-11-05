@@ -4,6 +4,8 @@
 module UseCases
   module Crm
     class SubmitDictation
+      # Au-delà (5 s + 30 s de délais du fournisseur, plus la file), une génération « en attente » est orpheline : elle est fermée avant toute nouvelle demande.
+      STALE_AFTER = 2.minutes
       KIND = "dictation".freeze
       MAX_BYTES = 10 * 1024 * 1024
       # Le type détecté par les octets → le type sous lequel la pièce est gardée (celui que lit Crm::GenerationJob).
@@ -19,15 +21,16 @@ module UseCases
 
       # schools : #find_by_public_id(public_id:) → objet avec #id | nil ; type_of : #call(io) → type MIME détecté par les octets | nil ;
       # enqueue : #call(public_id, upload) → false si la pièce ou la file refuse.
-      def initialize(generations:, schools:, policy:, type_of:, enqueue:)
+      def initialize(generations:, schools:, policy:, type_of:, enqueue:, logger: nil)
         @generations = generations
         @schools = schools
         @policy = policy
         @type_of = type_of
         @enqueue = enqueue
+        @logger = logger
       end
 
-      # → success(Submitted) | :forbidden | :not_found | :invalid (errors[:audio] ∈ :empty, :too_large, :unsupported_type) | :conflict
+      # → success(Submitted) | :forbidden | :not_found | :invalid (errors[:audio] ∈ :empty, :too_large, :unsupported_type) | :conflict | :unavailable (file refusée)
       def call(actor:, school_public_id:, audio:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -55,6 +58,7 @@ module UseCases
       end
 
       def start(actor, school, upload)
+        @generations.fail_stale(school_id: school.id, kind: KIND, before: Time.current - STALE_AFTER)
         created = @generations.create_pending(generation: Entities::Crm::Generation.new(
           public_id: nil, school_id: school.id, kind: KIND, status: "pending", requested_by_id: actor.user_id, follow_up_id: nil,
           input_fingerprint: nil, content: nil, error_code: nil, model: nil, input_tokens: nil, output_tokens: nil, duration_ms: nil
@@ -66,7 +70,15 @@ module UseCases
         return Shared::Result.success(Submitted.new(generation:)) if @enqueue.call(generation.public_id, upload) != false
 
         failed = @generations.mark_failed(public_id: generation.public_id, error_code: "provider_error", duration_ms: 0)
-        Shared::Result.success(Submitted.new(generation: failed.success? ? failed.value : generation))
+        return unavailable(generation) if failed.failure?
+
+        Shared::Result.success(Submitted.new(generation: failed.value))
+      end
+
+      # La file a refusé et la ligne n'a pas pu être fermée : elle reste « en attente » jusqu'à sa péremption (STALE_AFTER) ; ce n'est pas un succès.
+      def unavailable(generation)
+        @logger&.error("[crm.generation] #{KIND} #{generation.public_id} : file refusée, mark_failed impossible (error_code=provider_error)")
+        Shared::Result.failure(:unavailable, errors: { reason: :provider_error })
       end
     end
   end
