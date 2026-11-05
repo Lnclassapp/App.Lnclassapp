@@ -34,18 +34,25 @@ module Queries
 
         scope = gaps(classroom_public_id).where(essentials: { slug: essential_slug }, courses: { slug: course_slug })
         rows = scope.where(status: "pending").or(scope.where(resolved_at: year_range(school_year))).pluck(*DETAIL_COLUMNS)
-        pending, lifted = rows.partition { it[1] == "pending" }
-        Detail.new(pending: pending.sort_by { [ it[4], it[0] ] }.map { pending_row(it) },
-                   lifted: lifted.sort_by { [ it[5], it[0] ] }.reverse.map { lifted_row(it) })
+        detail_of(rows)
       end
 
       # Contrat gelé (suivi-classe-lecon, Lot 0), corps écrit au Lot A : le Detail de chaque notion de la leçon qui a au moins
       # une ligne, en une requête. → { essential_slug => Detail }
       def details_for_course(classroom_public_id:, course_slug:, school_year:)
-        {}
+        scope = gaps(classroom_public_id).where(courses: { slug: course_slug })
+        rows = scope.where(status: "pending").or(scope.where(resolved_at: year_range(school_year)))
+                    .pluck("essentials.slug", *DETAIL_COLUMNS)
+        rows.group_by(&:first).transform_values { |group| detail_of(group.map { it.drop(1) }) }
       end
 
       private
+
+      def detail_of(rows)
+        pending, lifted = rows.partition { it[1] == "pending" }
+        Detail.new(pending: pending.sort_by { [ it[4], it[0] ] }.map { pending_row(it) },
+                   lifted: lifted.sort_by { [ it[5], it[0] ] }.reverse.map { lifted_row(it) })
+      end
 
       # Les élèves présents de la classe (ADR-0079) : adhésion non quittée, compte non anonymisé.
       def gaps(classroom_public_id)
