@@ -189,7 +189,7 @@ jobs:
           bundler-cache: true
 
       - name: Download the coverage of the unit parts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: coverage-unit-*
           path: ${{ runner.temp }}/coverage-parts
