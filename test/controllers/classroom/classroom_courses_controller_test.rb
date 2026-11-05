@@ -184,9 +184,9 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     sign_in_as create_school_admin(school: @classroom.school)
 
     assert_no_difference -> { Orm::ClassroomAssignment.count } do
-      post classroom_assignments_path(@classroom.public_id), params: { assignable_type: "Exercise",
-                                       assignable_key: @ex_meiose.public_id }
+      post classroom_assignments_path(@classroom.public_id),
+           params: { assignment: { assignable_type: "Exercise", assignable_key: @ex_meiose.public_id } }
     end
-    assert_not response.successful?
+    assert_response :forbidden
   end
 end

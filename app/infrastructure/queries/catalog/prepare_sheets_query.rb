@@ -143,7 +143,8 @@ module Queries
       end
 
       # suivi-classe-lecon (UDR §3.5) : l'équipe lue depuis une classe n'a que celle-ci pour cible (niveau et série du cours, classe
-      # active) ; elle n'a pas de jours de séance, donc jamais la modale (ADR-0072 §4.3). nil si la classe ne convient pas au cours.
+      # active) ; elle n'a pas de jours de séance, donc jamais la modale (ADR-0072 §4.3). Si la classe ne convient pas au cours :
+      # aucune classe cible (classrooms vide), la vue dit « aucune classe ».
       def team_targets(course_slug, classroom_public_id, exercise_public_ids)
         level_id, series_id, level_name, series_name =
           Orm::Course.joins(:level).left_joins(:series).where(slug: course_slug).pick("courses.level_id", "courses.series_id", "levels.name", "series.name")

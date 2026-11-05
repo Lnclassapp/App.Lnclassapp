@@ -22,7 +22,8 @@ class Classroom::TeamAssignsFromSheetTest < ActionDispatch::IntegrationTest
     assert_select "##{toggle_id(@classroom)} button[aria-label=?]",
                   I18n.t("classroom.assignments.toggle.assign_to_label", name: @exercise.title, classroom: "3e 2")
     assert_select "##{toggle_id(@other)}", count: 0
-    assert_select "button[role=checkbox][data-batch-choice='#{@exercise.public_id}']"
+    # Le devoir composé reste à l'enseignant : l'envoi par lot refuse l'équipe, la page ne le lui propose pas.
+    assert_select "[data-batch-choice], #sheet-batch-bar", count: 0
 
     assert_difference -> { Orm::ClassroomAssignment.where(classroom_id: @classroom.id, status: "active").count }, 1 do
       post classroom_assignments_path(@classroom.public_id),

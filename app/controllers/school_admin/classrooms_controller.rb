@@ -29,7 +29,7 @@ module SchoolAdmin
     # l'équipe : teacher_id nil). L'accès de la direction à sa classe est déjà vérifié par `classroom` : show_roster vrai.
     def gaps
       public_id = @detail.classroom.public_id
-      courses = Queries::Classroom::ClassroomOverviewQuery.new.call(public_id:, show_roster: false)&.courses.to_a
+      courses = Queries::Classroom::ClassroomOverviewQuery.new.call(public_id:, show_roster: false).courses
       Queries::Assessment::ClassroomGapsQuery.new.summary(classroom_public_id: public_id, show_roster: true,
                                                           course_slugs: courses.map(&:slug))
     end

@@ -23,8 +23,8 @@ module Queries
       end
 
       test "best copy of each student, over the students present of the class (CA-5)" do
-        copy(@awa, @e1, 40)
         copy(@awa, @e1, 70)
+        copy(@awa, @e1, 40)
         copy(@koffi, @e1, 30)
 
         success = call.fetch(@e1.public_id)

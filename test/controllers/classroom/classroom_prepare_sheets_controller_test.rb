@@ -136,4 +136,13 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
 
     assert_select "#sheet-success-#{@ex.public_id}", text: /1 \/ 2 élèves ont réussi/
   end
+
+  test "an exercise nobody of the class finished reads « Pas encore fait par la classe » (CA-6)" do
+    create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_select "#sheet-success-#{@ex.public_id}", text: "Pas encore fait par la classe"
+  end
 end
