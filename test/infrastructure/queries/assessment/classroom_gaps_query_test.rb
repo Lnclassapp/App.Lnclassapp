@@ -110,6 +110,39 @@ module Queries
         assert_equal [ [], [] ], detail.to_h.values_at(:pending, :lifted)
       end
 
+      def details_for_course(course = @course, school_year: "2026-2027")
+        ClassroomGapsQuery.new.details_for_course(classroom_public_id: @classroom.public_id, course_slug: course.slug, school_year:)
+      end
+
+      test "details_for_course: one Detail per sheet of the lesson that has a row, same rules as detail" do
+        angles = create_essential(course: @course, name: "Angles")
+        create_essential(course: @course, name: "Sans lacune")
+        gap(@bintou, created_at: Time.zone.local(2026, 10, 13, 8))
+        gap(@awa, created_at: Time.zone.local(2026, 10, 12, 8), failed_sessions_count: 3)
+        gap(@yao, status: "remediated", resolved_at: Time.zone.local(2026, 10, 14, 9))
+        gap(@yao, angles, status: "self_corrected", resolved_at: Time.zone.local(2026, 6, 20, 9))
+        gap(@awa, angles, status: "remediated", resolved_at: Time.zone.local(2026, 10, 1, 9))
+        gap(create_student(classroom: create_classroom(level: @level)))
+        other = create_course(level: @level, name: "Optique")
+        gap(@awa, create_essential(course: other, name: "Lentilles"))
+
+        result = assert_queries_count(1) { details_for_course }
+
+        assert_equal [ @thales.slug, angles.slug ].sort, result.keys.sort
+        assert_equal detail(@thales), result[@thales.slug]
+        assert_equal detail(angles), result[angles.slug]
+        assert_equal [ "Awa Bamba", "Bintou Diallo" ], result[@thales.slug].pending.map(&:display_name)
+        assert_equal [ "Awa Bamba" ], result[angles.slug].lifted.map(&:display_name)
+      end
+
+      test "details_for_course: a student who left, an old year, nothing at all" do
+        gap(@awa)
+        gap(@bintou, status: "remediated", resolved_at: Time.zone.local(2025, 10, 14, 9))
+        Orm::ClassroomStudent.where(student: @awa).update_all(left_at: Time.current)
+
+        assert_equal({}, details_for_course)
+      end
+
       test "without show_roster, nothing is read" do
         gap(@awa)
 
