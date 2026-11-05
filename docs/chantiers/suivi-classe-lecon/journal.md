@@ -15,6 +15,8 @@
 
 - [ ] 2026-11-05 · suivi-classe-lecon Lot 0 · clé du Hash de réussite : `public_id` de l'exercice (la feuille n'expose pas l'id interne), `exercise_ids:` = les public_id — appliqué : public_id ; autres : id interne ; recommandé : public_id
 - [ ] 2026-11-05 · suivi-classe-lecon Lot 0 · l'UDR §3 ne donne que des textes, pas les clés : clés posées dans les locales des partiels A (`classroom.classroom_courses.notion_gaps.*`), B (`catalog.courses.sheets.success.*`), C (`catalog.revision_sheets.todo.*`, `classroom.student_classrooms.pending_gaps.redo_label`, `assessment.session_results.gap_outcome.redo_proposal`) ; les lots peuvent y ajouter des clés dans leurs propres partiels seulement si le fichier de locale reste celui du Lot 0 — appliqué : clés ci-dessus ; recommandé : idem
+- [ ] 2026-11-05 · suivi-classe-lecon Lot D · les cours « affichés par la classe » pour la direction : la page direction ne les liste pas, `ClassroomOverviewQuery#call(show_roster: false, teacher_id: nil)` les fournit (toutes matières, comme l'équipe) — appliqué : toutes les matières ; autres : limiter aux matières des enseignants de la classe ; recommandé : toutes les matières
+- [ ] 2026-11-05 · suivi-classe-lecon Lot D · `test/system/classroom/classroom_page_test.rb` (hors Fichiers du lot) assertait l'absence de `#classroom_session_days` sur mobile : inversé en présence, comportement voulu par l'UDR §3.4 — appliqué : une ligne modifiée ; recommandé : idem
 
 ## Ce qui a dérapé
 
