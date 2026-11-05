@@ -16,8 +16,9 @@ class SystemBudget
   # Dérogations du porteur (ADR-0069 §9, amendement du 2026-10-03) : un chantier, ses fichiers système, son budget.
   # Une PR dont tous les fichiers qui grandissent sont ceux d'une dérogation a ce budget-là ; toute autre, BUDGET.
   GRANTS = {
-    # Accord du porteur du 2026-11-05 (crm-ecoles, PR #465, pilote Touré) : 25 s pour les sept fichiers système du suivi des écoles.
-    "crm-ecoles" => { budget: 25.0, files: %w[
+    # Accord du porteur du 2026-11-05 (crm-ecoles, PR #465, pilote Touré) : 25 s, puis 26 s le même jour (test du brouillon WhatsApp),
+    # pour les sept fichiers système du suivi des écoles.
+    "crm-ecoles" => { budget: 26.0, files: %w[
       test/system/role_homes_test.rb test/system/school/classrooms_by_level_test.rb
       test/system/teams/configuration_navigation_test.rb test/system/teams/crm_briefing_test.rb
       test/system/teams/crm_follow_ups_test.rb test/system/teams/crm_journal_test.rb test/system/teams/team_home_test.rb

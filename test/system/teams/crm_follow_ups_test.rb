@@ -4,6 +4,8 @@ require "application_system_test_case"
 # finds it in « Mes relances » and marks it done; an admin reassigns the follow-up of an anonymized member, a field member
 # who does not own the school cannot; on a 390 px phone the page does not scroll sideways.
 class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
+  cattr_accessor :fake_model # le serveur du test tourne dans un autre fil : pas de Thread.current
+
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
     @field = create_team_member(team_role: "field", first_name: "Awa", last_name: "Koné")
@@ -77,6 +79,27 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
         assert_no_text tl("follow_up.reassign")
       end
     end
+  end
+
+  test "the WhatsApp draft appears inside the open modal, which « Fermer » then closes" do
+    fake = FakeLanguageModel.new("Bonjour Mme Kouassi, je vous rappelle jeudi.", model: "fake/text")
+    self.class.fake_model = fake
+    Crm::WhatsappDraftJob.define_method(:language_model) { Teams::CrmFollowUpsTest.fake_model }
+    queue_adapter, ActiveJob::Base.queue_adapter = ActiveJob::Base.queue_adapter, :inline
+    api_key, Rails.configuration.x.language_models.api_key = Rails.configuration.x.language_models.api_key, "sk-test"
+    record = Orm::CrmFollowUp.create!(school: @school, assignee: @field, due_on: Date.current, reason: "Rappeler la direction", created_by: @field)
+    sign_in_as @field
+
+    visit teams_follow_ups_path(tab: "mine")
+    click_menu_action("#follow_up_row_#{record.public_id}", I18n.t("teams.crm.whatsapp_drafts.menu_item"))
+    within("dialog[open]") { click_on I18n.t("teams.crm.whatsapp_drafts.new.submit") }
+    assert_selector "dialog[open] textarea", text: "Bonjour Mme Kouassi, je vous rappelle jeudi."
+    within("dialog[open]") { click_on I18n.t("teams.crm.whatsapp_drafts.new.close") }
+    assert_no_selector "dialog[open]"
+  ensure
+    Rails.configuration.x.language_models.api_key = api_key
+    Crm::WhatsappDraftJob.remove_method(:language_model)
+    ActiveJob::Base.queue_adapter = queue_adapter
   end
 
   test "on a 390 px phone the cards replace the table, without horizontal scroll" do
