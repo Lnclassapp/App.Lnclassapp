@@ -19,6 +19,11 @@
     nouveau « Copier le lien », que le contrôleur clipboard a montré à son arrivée. %>
 <div id="classroom_link_block_<%= classroom.public_id %>" class="mb-5" data-turbo-permanent><%= render "classroom/classrooms/link", classroom: @detail.link %></div>
 
+<%# UDR suivi-de-la-classe-sur-une-lecon §3.6 : les fiches à revoir, même partiel que l'enseignant ; absent s'il est vide. %>
+<% if @gaps.present? %>
+  <div class="mb-5"><%= render "classroom/classrooms/gaps", classroom: classroom, gaps: @gaps %></div>
+<% end %>
+
 <ul id="classroom_figures" class="mb-5 grid grid-cols-3 gap-3">
   <% [ [ :assignments, classroom.assignments_count, nil ], [ :submission_rate, percent.call(classroom.submission_rate), :submission_rate ],
        [ :average, percent.call(classroom.average_percent), :average ] ].each do |key, value, tip| %>
