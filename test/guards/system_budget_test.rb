@@ -69,6 +69,19 @@ class SystemBudgetTest < Minitest::Test
     assert_equal 15.0, mixed.budget, "un autre fichier qui grandit avec eux ramène à 15 s"
   end
 
+  # Accord du porteur du 2026-11-05 : 25 s pour les sept fichiers système de crm-ecoles, et pour eux seuls.
+  def test_crm_ecoles_has_twenty_five_seconds_for_its_own_files_only
+    files = SystemBudget::GRANTS.fetch("crm-ecoles")[:files]
+    follow_ups, journal = %w[test/system/teams/crm_follow_ups_test.rb test/system/teams/crm_journal_test.rb]
+
+    assert_equal 7, files.size
+    assert_equal 25.0, SystemBudget::GRANTS.fetch("crm-ecoles")[:budget]
+    assert budget(timings: { follow_ups => 20.0, journal => 5.0 }, touched: [ follow_ups, journal ]).within_budget?, "25 s : accepté"
+    refute budget(timings: { follow_ups => 20.0, journal => 5.1 }, touched: [ follow_ups, journal ]).within_budget?, "25,1 s : au-delà"
+
+    assert_equal 15.0, budget(timings: { follow_ups => 10.0, "other" => 0.5 }, touched: [ follow_ups, "other" ]).budget
+  end
+
   # The recorded durations come from script/ci/record_timings: a lost line is a file that weighs less than it costs.
   def test_every_duration_of_a_verbose_run_is_read_even_when_the_test_prints_before_it
     log = <<~LOG
