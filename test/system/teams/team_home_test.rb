@@ -30,7 +30,7 @@ class Teams::TeamHomeTest < ApplicationSystemTestCase
     end
     within("#team_home_recent_courses") { assert_link "Génétique et évolution" }
     within("main#main") do
-      assert_equal [ tl("show.regions_title"), tl("show.activity_title") ], all("h2", minimum: 2).map(&:text)
+      assert_equal [ I18n.t("teams.crm.home_follow_ups.show.title"), tl("show.regions_title"), tl("show.activity_title") ], all("h2", minimum: 3).map(&:text)
       assert_no_selector "#team_home_referential"
       assert_no_link href: levels_path
       assert_no_selector "li#level_tle"
