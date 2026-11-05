@@ -255,6 +255,37 @@ module Crm
       with_replaced(record, :audio, audio) { with_replaced(Orm::CrmGeneration, :find_by, record, &block) }
     end
 
+    test "audio_for is nil for an unknown generation or one without a recording" do
+      job = TestJob.new
+
+      assert_nil job.send(:audio_for, "inconnue")
+      assert_nil job.send(:audio_for, pending.public_id)
+    end
+
+    test "log_bug writes the class and message even for an error that has no backtrace" do
+      io = StringIO.new
+      sink = Logger.new(io)
+      Rails.logger.broadcast_to(sink)
+      TestJob.new.send(:log_bug, "gen-1", RuntimeError.new("boom"))
+      Rails.logger.stop_broadcasting_to(sink)
+
+      assert_includes io.string, "gen-1 : RuntimeError: boom ()"
+    end
+
+    test "when the failure itself cannot be written, close_as_failed logs the class and does not raise" do
+      job = TestJob.new
+      broken = Object.new
+      broken.define_singleton_method(:mark_failed) { |**| raise IOError, "base coupée" }
+      job.define_singleton_method(:repository) { broken }
+      io = StringIO.new
+      sink = Logger.new(io)
+      Rails.logger.broadcast_to(sink)
+      job.send(:close_as_failed, "gen-1", 5)
+      Rails.logger.stop_broadcasting_to(sink)
+
+      assert_includes io.string, "gen-1 : mark_failed impossible (IOError)"
+    end
+
     def attach_audio(generation)
       Orm::CrmGeneration.find_by(public_id: generation.public_id).audio.attach(io: StringIO.new("OCTETS"), filename: "dictee.webm", content_type: "audio/webm")
     end

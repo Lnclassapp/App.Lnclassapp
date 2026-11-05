@@ -39,6 +39,15 @@ module Crm
       target.singleton_class.send(:define_method, name, own) if own
     end
 
+    def with_raising(target, name, &)
+      with_replaced(target, name, nil) { raise_in(target, name, &) }
+    end
+
+    def raise_in(target, name)
+      target.define_singleton_method(name) { |*, **, &| raise IOError, "indisponible" }
+      yield
+    end
+
     def pending
       @repository.create_pending(generation: Entities::Crm::Generation.new(
         public_id: nil, school_id: @school.id, kind: "dictation", status: "pending", requested_by_id: @user.id, follow_up_id: nil,
@@ -200,6 +209,40 @@ module Crm
       end
 
       assert_includes io.string, blob.key
+    ensure
+      Rails.logger = original
+    end
+
+    test "submit purges the attached recording when enqueuing raises" do
+      generation = pending
+      upload = UseCases::Crm::SubmitDictation::Upload.new(io: StringIO.new("OggS-bytes"), byte_size: 10, content_type: "audio/ogg")
+
+      with_raising(Crm::DictationJob, :perform_later) do
+        assert_equal false, Crm::DictationJob.submit(generation.public_id, upload)
+      end
+
+      assert_not audio_attached?(generation)
+      assert_equal 0, ActiveStorage::Blob.count
+    end
+
+    test "submit logs an empty key when no blob exists and the purge of the attachment fails" do
+      generation = pending
+      upload = UseCases::Crm::SubmitDictation::Upload.new(io: StringIO.new("OggS-bytes"), byte_size: 10, content_type: "audio/ogg")
+      record = Orm::CrmGeneration.find_by!(public_id: generation.public_id)
+      audio = Object.new
+      audio.define_singleton_method(:attached?) { true }
+      audio.define_singleton_method(:purge) { raise IOError, "stockage coupé" }
+      io = StringIO.new
+      original = Rails.logger
+      Rails.logger = ActiveSupport::Logger.new(io)
+
+      with_raising(ActiveStorage::Blob, :create_and_upload!) do
+        with_replaced(record, :audio, audio) do
+          with_replaced(Orm::CrmGeneration, :find_by!, record) { assert_equal false, Crm::DictationJob.submit(generation.public_id, upload) }
+        end
+      end
+
+      assert_includes io.string, "purge impossible, blob  : IOError"
     ensure
       Rails.logger = original
     end

@@ -158,6 +158,25 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal [id$=_error]"
   end
 
+  test "new: the active contacts of the school are offered by name" do
+    contact = Orm::CrmContact.create!(school_id: @school.id, full_name: "Mme Kouassi", position: "director", created_by: @field)
+
+    get new_teams_school_interaction_path(@school.public_id), headers: frame_headers("modal")
+
+    assert_select "option[value=?]", contact.public_id, text: "Mme Kouassi"
+  end
+
+  test "an impossible date, or a follow-up date that is not a date, is refused in 422 and writes nothing" do
+    assert_no_difference [ "Orm::CrmInteraction.count", "Orm::CrmFollowUp.count" ] do
+      post teams_school_interactions_path(@school.public_id), params: valid_params(occurred_at: "2026-13-45T99:99"), as: :turbo_stream
+      assert_response :unprocessable_entity
+
+      post teams_school_interactions_path(@school.public_id),
+           params: valid_params(create_follow_up: "1", follow_up_due_on: "pas une date"), as: :turbo_stream
+      assert_response :unprocessable_entity
+    end
+  end
+
   test "an unknown school is a 404" do
     get teams_school_interactions_path("unknown-public"), headers: frame_headers
 
@@ -185,6 +204,17 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "turbo-frame#modal [id$=_error]"
+  end
+
+  test "a blank date means now, and a follow-up without next step gets the default reason" do
+    assert_difference [ "Orm::CrmInteraction.count", "Orm::CrmFollowUp.count" ], 1 do
+      post teams_school_interactions_path(@school.public_id),
+           params: valid_params(occurred_at: "", next_step: "", create_follow_up: "1"), as: :turbo_stream
+    end
+
+    assert_response :success
+    assert_in_delta Time.current, Orm::CrmInteraction.last.occurred_at, 1.minute
+    assert_equal I18n.t("teams.crm.interactions.create.default_reason"), Orm::CrmFollowUp.last.reason
   end
 
   test "R2: a follow-up the repository refuses cancels the whole exchange and announces nothing" do

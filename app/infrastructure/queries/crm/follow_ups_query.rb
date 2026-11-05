@@ -9,9 +9,12 @@ module Queries
                         :assignee_available, :due_on, :reason, :owner_id)
       Page = Data.define(:rows, :total_count, :page, :pages)
 
-      AVAILABLE = Orm::CrmFollowUp.sanitize_sql_array(
-        [ "(users.anonymized_at IS NULL AND users.role = 'team' AND users.team_role IN (?))", Policies::Crm::ManageCrmPolicy::TEAM_ROLES ]
-      ).freeze
+      # Rôles de la policy, cités en littéraux après contrôle : aucune connexion à la base au chargement de la classe
+      # Un rôle hors [a-z_]+ lève (match nil → NoMethodError à la construction) au lieu d'entrer dans le SQL
+      ROLES_SQL = Policies::Crm::ManageCrmPolicy::TEAM_ROLES.map do |role|
+        "'#{role.match(/\A[a-z_]+\z/).then { it[0] }}'"
+      end.join(", ").freeze
+      AVAILABLE = "(users.anonymized_at IS NULL AND users.role = 'team' AND users.team_role IN (#{ROLES_SQL}))".freeze
       COLUMNS = [ "crm_follow_ups.public_id", "crm_follow_ups.school_id", "schools.public_id", "schools.name", "drenas.name",
                   "users.public_id", "users.first_name", "users.last_name", Arel.sql(AVAILABLE), "crm_follow_ups.due_on",
                   "crm_follow_ups.reason", "crm_accounts.owner_id" ].freeze

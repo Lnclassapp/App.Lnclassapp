@@ -181,6 +181,15 @@ class Teams::Crm::WhatsappDraftsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "a follow-up that vanishes between the page and the request is a 404" do
+    sign_in_as @field
+
+    stub_any_instance(Queries::Crm::WhatsappDraftInputsQuery, :call, ->(**) { nil }) { post_draft }
+
+    assert_response :not_found
+    assert_equal 0, Orm::CrmGeneration.count
+  end
+
   test "the menu of an open follow-up offers Rédiger un message in the modal frame" do
     sign_in_as @field
 

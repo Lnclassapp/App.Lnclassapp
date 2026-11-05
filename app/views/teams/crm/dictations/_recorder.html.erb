@@ -2,7 +2,7 @@
 <%# Rôle : le contrôleur voice-recorder porte les états (prêt, enregistrement, enregistré) ; avec `generation`, l'attente (ou la dictée déjà finie) remplace l'enregistreur ; « Saisir à la main » ouvre le formulaire vide %>
 <%# UDR  : XXXX (assistants du suivi, « Compte rendu dicté ») · CA-26 : refus en 422, 3 min, 10 Mo, webm/ogg/mp4 %>
 <%= ui_modal title: t(".title"), id: "dictation-modal", size: :md, open: true, document_title: page_title(t(".title")) do |modal| %>
-  <div class="group/dictation space-y-4">
+  <div class="ui-dictation space-y-4">
     <% if generation&.done? %>
       <%= render "teams/crm/dictations/ready", generation:, school_public_id: %>
     <% elsif generation %>
@@ -47,7 +47,7 @@
     <% end %>
 
     <%# Rien d'enregistré par l'assistant : « Noter un échange » reste utilisable sans dictée (masqué quand le formulaire pré-rempli est là). %>
-    <div class="group-has-data-[prefilled]/dictation:hidden">
+    <div data-hide-if-prefilled>
       <%= ui_button t(".manual"), href: new_teams_school_interaction_path(school_public_id), variant: :ghost, size: :sm, icon: "pencil-square",
                     data: { turbo_frame: "modal" } %>
     </div>

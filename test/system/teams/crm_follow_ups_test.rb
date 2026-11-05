@@ -71,7 +71,11 @@ class Teams::CrmFollowUpsTest < ApplicationSystemTestCase
 
     within("#follow_up_row_#{record.public_id}") do
       assert_text "À moi"
-      assert_no_selector "button[aria-haspopup=menu]"
+      find("button[aria-haspopup=menu]").click
+      within("[role=menu]") do
+        assert_text I18n.t("teams.crm.whatsapp_drafts.menu_item")
+        assert_no_text tl("follow_up.reassign")
+      end
     end
   end
 

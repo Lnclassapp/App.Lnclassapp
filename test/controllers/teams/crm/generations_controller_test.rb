@@ -19,6 +19,14 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
 
   def show(generation) = get teams_generation_path(generation.public_id), headers: { "Turbo-Frame" => "generation_#{generation.public_id}" }
 
+  test "a generation whose school cannot be found is still shown, without a retry target" do
+    generation = pending
+
+    stub_any_instance(Repositories::School::SchoolRepository, :find_by_id, ->(**) { nil }) { show generation }
+
+    assert_response :success
+  end
+
   test "a pending generation renders the loading state and the poll wiring" do
     generation = pending
     show generation

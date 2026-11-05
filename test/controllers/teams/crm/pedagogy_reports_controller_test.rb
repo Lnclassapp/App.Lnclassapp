@@ -249,6 +249,19 @@ class Teams::Crm::PedagogyReportsControllerTest < ActionDispatch::IntegrationTes
     assert_response :not_found
   end
 
+  test "a report whose school cannot be found is a 404" do
+    add_activity
+    sign_in_as @field
+    post_report
+    generation = @repository.pending_for(school_id: @school.id, kind: "pedagogy_report")
+
+    stub_any_instance(Repositories::School::SchoolRepository, :find_by_id, ->(**) { nil }) do
+      get teams_pedagogy_report_path(generation.public_id)
+    end
+
+    assert_response :not_found
+  end
+
   test "content and a teacher get 403 on the page, a visitor is sent to sign in" do
     add_activity
     sign_in_as @field

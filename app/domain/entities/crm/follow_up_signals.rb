@@ -18,7 +18,7 @@ module Entities
           when :overdue then overdue
           when :usage_lost then last_activity_on && USAGE_LOST_RANGE.cover?((today - last_activity_on).to_i)
           when :demo_stalled then stage == :demo_done && (last_interaction_on.nil? || today - last_interaction_on >= DEMO_SILENCE)
-          when :registered_idle then first_attached_on && last_activity_on.nil? && today - first_attached_on > IDLE_AFTER
+          else first_attached_on && last_activity_on.nil? && today - first_attached_on > IDLE_AFTER # :registered_idle, dernier des REASONS
           end
         end
       end

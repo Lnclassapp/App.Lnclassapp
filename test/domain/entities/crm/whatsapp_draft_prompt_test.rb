@@ -63,6 +63,17 @@ module Entities
         assert_nil WhatsappDraftPrompt.compose("  \n ")
         assert_nil WhatsappDraftPrompt.compose(nil)
       end
+
+      test "an undated follow-up and a bare exchange are written and fingerprinted without failing" do
+        bare = prompt(due_on: nil, interactions: [])
+        assert_includes bare.messages.last[:content], "- aucun"
+        assert_match(/\A\h{64}\z/, bare.fingerprint)
+
+        undated = prompt(interactions: [ { occurred_on: nil, kind: "call", outcome: "positive", next_step: "", note: nil } ])
+        assert_not_includes undated.messages.last[:content], "suite prévue"
+        assert_not_includes undated.messages.last[:content], "note :"
+        assert_match(/\A\h{64}\z/, undated.fingerprint)
+      end
     end
   end
 end

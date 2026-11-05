@@ -190,6 +190,14 @@ module UseCases
         assert_includes @log.string, "provider_error"
       end
 
+      test "without a logger, an unwritable refusal is still unavailable" do
+        @use_case.instance_variable_set(:@logger, nil)
+        @accepting = false
+        @generations.unwritable = true
+
+        assert_equal :unavailable, request.code
+      end
+
       test "a conflict with no pending row to show is a :conflict" do
         @generations.conflict_only = true
 

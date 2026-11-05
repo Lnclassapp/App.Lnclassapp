@@ -68,6 +68,18 @@ module UseCases
         def create(follow_up:, interaction_public_id: nil) = Shared::Result.failure(:not_found)
       end
 
+      class RefusingInteractions
+        include Ports::Crm::InteractionRepositoryPort
+
+        def create(interaction:, contact_public_id: nil) = Shared::Result.failure(:not_found)
+      end
+
+      class ConflictingTransaction
+        include Ports::Shared::TransactionPort
+
+        def attempt = Shared::Result.failure(:conflict)
+      end
+
       setup do
         @interactions = FakeInteractions.new
         @follow_ups = FakeFollowUps.new
@@ -150,6 +162,33 @@ module UseCases
         assert result.failure?
         assert_equal :not_found, result.code
         assert @transaction.rolled_back
+      end
+
+      test "an over-long interlocutor name, and an empty or over-long follow-up reason, are refused" do
+        assert_equal [ :invalid ], call(contact_name: "a" * 201).errors[:contact_name]
+        [ " ", "a" * 201 ].each do |reason|
+          result = call(follow_up: { due_on: Date.new(2026, 11, 8), assignee_id: 7, reason: })
+
+          assert_equal [ :invalid ], result.errors[:follow_up_reason], reason.length
+        end
+        assert_empty @interactions.created
+      end
+
+      test "an interaction the repository refuses (unknown contact) fails with its code and creates no follow-up" do
+        use_case = RecordInteraction.new(interactions: RefusingInteractions.new, follow_ups: @follow_ups,
+                                         policy: Policies::Crm::ManageCrmPolicy.new, transaction: @transaction, clock: Clock.new(now: NOW))
+
+        result = use_case.call(actor: @actor, school_id: 31, kind: "call", outcome: "positive", contact_public_id: "nope")
+
+        assert_equal :not_found, result.code
+        assert_empty @follow_ups.created
+      end
+
+      test "a transaction the database refuses is returned as is (conflict)" do
+        use_case = RecordInteraction.new(interactions: @interactions, follow_ups: @follow_ups,
+                                         policy: Policies::Crm::ManageCrmPolicy.new, transaction: ConflictingTransaction.new, clock: Clock.new(now: NOW))
+
+        assert_equal :conflict, use_case.call(actor: @actor, school_id: 31, kind: "call", outcome: "positive").code
       end
 
       test "a created follow-up is returned with the interaction" do

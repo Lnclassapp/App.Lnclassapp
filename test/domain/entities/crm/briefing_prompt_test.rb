@@ -54,6 +54,24 @@ module Entities
         assert_nil BriefingPrompt.summarize("  \n \n")
         assert_nil BriefingPrompt.summarize(nil)
       end
+
+      test "sparse facts (no date, no contact, no exchange, no follow-up, bare exchange) are written and fingerprinted without failing" do
+        bare = prompt(last_activity_on: nil, contact_positions: [], interactions: [], follow_ups: [])
+        facts = bare.messages.last[:content]
+
+        assert_includes facts, "dernière activité : aucune"
+        assert_includes facts, "Contacts (fonctions) : aucun"
+        assert_includes facts, "- aucun"
+        assert_includes facts, "- aucune"
+        assert_match(/\A\h{64}\z/, bare.fingerprint)
+
+        undated = prompt(interactions: [ { occurred_on: nil, kind: "call", outcome: "positive", next_step: "", note: nil } ],
+                         follow_ups: [ { due_on: nil, reason: "Rappeler" } ])
+        assert_includes undated.messages.last[:content], "- pour le  : Rappeler"
+        assert_not_includes undated.messages.last[:content], "suite prévue"
+        assert_not_includes undated.messages.last[:content], "note :"
+        assert_match(/\A\h{64}\z/, undated.fingerprint)
+      end
     end
   end
 end

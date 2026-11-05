@@ -49,6 +49,19 @@ module Entities
         assert_nil PedagogyReportPrompt.summarize("  \n <br> ")
         assert_nil PedagogyReportPrompt.summarize(nil)
       end
+
+      test "a missing rate or average is written as not available" do
+        sent = build(submission_rate: nil, average_percent: nil).messages.map { it[:content] }.join("\n")
+
+        assert_includes sent, "Taux de rendu des devoirs : non disponible"
+        assert_includes sent, "Réussite moyenne : non disponible"
+      end
+
+      test "no subject and no gap are written as none" do
+        sent = build(subjects: [], gaps: []).messages.map { it[:content] }.join("\n")
+
+        assert_equal 2, sent.scan("- aucune").size
+      end
     end
   end
 end

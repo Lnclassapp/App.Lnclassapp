@@ -31,6 +31,17 @@ module Crm
       assert_not Orm::CrmGeneration.find_by(public_id: first.public_id).audio.attached?
     end
 
+    test "with nothing stale it closes nothing and logs nothing" do
+      pending(create_school, "briefing")
+      io = StringIO.new
+      sink = Logger.new(io)
+      Rails.logger.broadcast_to(sink)
+      FailStaleGenerationsJob.perform_now
+      Rails.logger.stop_broadcasting_to(sink)
+
+      assert_not_includes io.string, "orpheline"
+    end
+
     test "it runs every 15 minutes" do
       task = Rails.application.config_for(:recurring, env: "production").fetch(:fail_stale_crm_generations)
 

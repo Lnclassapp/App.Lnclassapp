@@ -515,6 +515,16 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t("teams.schools.update.done", name: "Lycée Classique d'Abidjan"), flash[:notice]
   end
 
+  test "CA-01: a content member edits a school in Turbo Stream, the row comes back without the follow-up columns" do
+    school = create_school(drena: @drena, name: "Lycée Classique")
+    sign_in_as create_team_member(team_role: "content")
+
+    patch school_path(school.public_id), params: school_params, as: :turbo_stream
+
+    assert_response :success
+    assert_equal "text/vnd.turbo-stream.html", response.media_type
+  end
+
   test "SC-07: deactivating keeps the school, its classrooms and students, and takes it out of the teacher sign-up" do
     school = create_school(drena: @drena, name: "Lycée Classique")
     classroom = create_classroom(school:)

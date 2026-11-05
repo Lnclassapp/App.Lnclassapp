@@ -22,6 +22,11 @@ module Queries
         assert_includes content, "[numéro]"
         assert_includes content, "[contact]"
       end
+
+      test "an unknown follow-up gives nothing" do
+        assert_nil WhatsappDraftInputsQuery.new.call(public_id: "inconnue")
+        assert_nil WhatsappDraftInputsQuery.new.call(id: 0)
+      end
     end
   end
 end

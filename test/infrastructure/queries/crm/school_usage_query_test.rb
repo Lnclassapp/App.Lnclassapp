@@ -16,6 +16,10 @@ class Queries::Crm::SchoolUsageQueryTest < ActiveSupport::TestCase
     create_exercise_session(student:, started_at: days_ago.days.ago)
   end
 
+  test "no school asked, nothing answered" do
+    assert_equal({}, Queries::Crm::SchoolUsageQuery.new.call(school_ids: [], today: TODAY))
+  end
+
   test "a school nobody joined has zeros and no date" do
     usage = usage_of(@school).fetch(@school.id)
 

@@ -12,9 +12,9 @@
         <%= render "teams/crm/follow_ups/signals_panel", page:, all_schools: @all_schools %>
       <% else %>
       <%# Le vide et la liste sont tous deux rendus : le CSS montre le vide quand « Faite » ou « Réattribuer » retire la dernière ligne. %>
-      <div class="group/follow-ups">
-        <div class="group-has-[[data-follow-up]]/follow-ups:hidden"><%= ui_empty_state title: t(".empty_#{key}"), icon: "check-circle" %></div>
-        <div class="hidden group-has-[[data-follow-up]]/follow-ups:block">
+      <div class="ui-follow-ups">
+        <div data-follow-ups-empty><%= ui_empty_state title: t(".empty_#{key}"), icon: "check-circle" %></div>
+        <div data-follow-ups-list>
           <div class="hidden md:block">
             <table class="w-full text-left text-sm">
               <caption class="sr-only"><%= tab_label.(key) %></caption>
