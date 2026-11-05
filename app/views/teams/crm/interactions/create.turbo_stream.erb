@@ -1,0 +1,13 @@
+<%# 🌐 UI · teams/crm/interactions/create — succès : l'échange est noté %>
+<%# Rôle : toast, modale refermée, journal rechargé en tête de liste ; les relances de la fiche se rechargent si une relance a été créée %>
+<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%= turbo_stream_toast t(".created"), type: :success %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.replace "school_crm_journal", template: "teams/crm/interactions/index" %>
+<% if @follow_up_created %>
+  <%= turbo_stream.replace "school_crm_follow_ups" do %>
+    <%= turbo_frame_tag "school_crm_follow_ups", src: teams_school_open_follow_ups_path(@school.public_id), loading: :lazy do %>
+      <%= ui_loading_state variant: :skeleton, lines: 2 %>
+    <% end %>
+  <% end %>
+<% end %>

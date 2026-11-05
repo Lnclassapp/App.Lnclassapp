@@ -1,0 +1,123 @@
+require "test_helper"
+
+# CA-11 (ADR-XXXX contexte crm, UDR-XXXX bloc « Suivi ») : noter un échange, avec en option la relance proposée,
+# créée dans la même transaction. Domaine pur : dépôts factices, horloge fixe.
+module UseCases
+  module Crm
+    class RecordInteractionTest < ActiveSupport::TestCase
+      NOW = Time.utc(2026, 11, 5, 10)
+      Clock = Data.define(:now)
+      Actor = Data.define(:user_id, :team_role) do
+        def team? = true
+      end
+
+      class FakeInteractions
+        include Ports::Crm::InteractionRepositoryPort
+
+        attr_reader :created
+
+        def initialize
+          @created = []
+        end
+
+        def create(interaction:)
+          stored = interaction.with(public_id: "int-#{@created.size + 1}")
+          @created << stored
+          Shared::Result.success(stored)
+        end
+      end
+
+      class FakeFollowUps
+        include Ports::Crm::FollowUpRepositoryPort
+
+        attr_reader :created
+
+        def initialize
+          @created = []
+        end
+
+        def create(follow_up:)
+          @created << follow_up
+          Shared::Result.success(follow_up.with(public_id: "fup-#{@created.size}"))
+        end
+      end
+
+      class FakeTransaction
+        include Ports::Shared::TransactionPort
+
+        def call = yield
+        def attempt = Shared::Result.success(yield)
+      end
+
+      setup do
+        @interactions = FakeInteractions.new
+        @follow_ups = FakeFollowUps.new
+        @use_case = RecordInteraction.new(interactions: @interactions, follow_ups: @follow_ups,
+                                          policy: Policies::Crm::ManageCrmPolicy.new, transaction: FakeTransaction.new,
+                                          clock: Clock.new(now: NOW))
+        @actor = Actor.new(user_id: 7, team_role: "field")
+      end
+
+      def call(**overrides)
+        @use_case.call(actor: @actor, school_id: 31, kind: "call", outcome: "positive", note: "Directrice intéressée", **overrides)
+      end
+
+      test "CA-11: a positive call is recorded with its author, a default date of now and the manual source" do
+        result = call
+
+        assert result.success?
+        interaction = result.value
+        assert_equal [ 31, 7, "call", "positive", "Directrice intéressée", "manual", NOW ],
+                     [ interaction.school_id, interaction.author_id, interaction.kind, interaction.outcome, interaction.note,
+                       interaction.source, interaction.occurred_at ]
+        assert_equal [ interaction ], @interactions.created
+        assert_empty @follow_ups.created
+      end
+
+      test "the interlocutor, next step and dictation source are kept, blanks become nil" do
+        result = call(contact_id: 4, contact_name: "Mme Kouassi", next_step: " Envoyer la plaquette ", note: " ", source: "dictation")
+
+        interaction = result.value
+        assert_equal [ 4, "Mme Kouassi", "Envoyer la plaquette", nil, "dictation" ],
+                     [ interaction.contact_id, interaction.contact_name, interaction.next_step, interaction.note, interaction.source ]
+      end
+
+      test "a follow-up is created open, for the same school, in the same call" do
+        call(follow_up: { due_on: Date.new(2026, 11, 8), assignee_id: 7, reason: "Envoyer la plaquette" })
+
+        follow_up = @follow_ups.created.sole
+        assert_equal [ 31, 7, Date.new(2026, 11, 8), "Envoyer la plaquette", "open", 7, nil ],
+                     [ follow_up.school_id, follow_up.assignee_id, follow_up.due_on, follow_up.reason, follow_up.status,
+                       follow_up.created_by_id, follow_up.interaction_id ]
+      end
+
+      test "a follow-up dated in the past is refused and nothing is written" do
+        result = call(follow_up: { due_on: Date.new(2026, 11, 4), assignee_id: 7, reason: "x" })
+
+        assert result.failure?
+        assert_equal :invalid, result.code
+        assert_equal [ :invalid ], result.errors[:follow_up_due_on]
+        assert_empty @interactions.created
+        assert_empty @follow_ups.created
+      end
+
+      test "unknown kind, outcome or source, an over-long note or next step, a future date are refused" do
+        { kind: "email", outcome: "great", source: "import", note: "a" * 2001, next_step: "a" * 201,
+          occurred_at: NOW + 2.days }.each do |field, value|
+          result = call(field => value)
+
+          assert_equal :invalid, result.code, field
+          assert_equal [ :invalid ], result.errors[field], field
+        end
+        assert_empty @interactions.created
+      end
+
+      test "a role outside admin and field is forbidden" do
+        result = @use_case.call(actor: Actor.new(user_id: 9, team_role: "content"), school_id: 31, kind: "call", outcome: "neutral")
+
+        assert_equal :forbidden, result.code
+        assert_empty @interactions.created
+      end
+    end
+  end
+end

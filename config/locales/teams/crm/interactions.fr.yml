@@ -1,0 +1,38 @@
+# Journal des échanges (chantier crm-ecoles, Lot C) — ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi » de la fiche établissement)
+# Types, résultats et fonctions : teams.crm.common (Lot 0).
+fr:
+  teams:
+    crm:
+      interactions:
+        index:
+          title: "Journal des échanges"
+          new: "Noter un échange"
+          older: "Voir les échanges plus anciens"
+          empty:
+            title: "Aucun échange noté"
+            description: "Notez votre premier appel ou votre première visite."
+        interaction:
+          dictated: "Dicté"
+          ago: "il y a %{time}"
+          with: "avec %{name}"
+          former_member: "Ancien membre"
+        new:
+          title: "Noter un échange"
+          cancel: "Annuler"
+          submit: "Noter l'échange"
+        form:
+          kind: "Type d'échange"
+          occurred_at: "Date et heure"
+          contact: "Interlocuteur"
+          contact_other: "Autre"
+          contact_name: "Nom de l'interlocuteur (si « Autre »)"
+          contact_name_hint: "Laissez vide pour un échange sans interlocuteur précis."
+          outcome: "Résultat"
+          next_step: "Prochaine étape"
+          note: "Note"
+          note_hint: "%{count} caractères au plus."
+          create_follow_up: "Créer une relance"
+          follow_up_due_on: "Date de la relance"
+        create:
+          created: "Échange noté"
+          default_reason: "Relancer l'école"

@@ -15,6 +15,11 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Lot 0 : `port_contracts_test` exige un adaptateur par port ; résolu par des adaptateurs squelettes (`NotImplementedError, "Lot X"`) livrés par le Lot 0 et repris par les Lots A, B, C, G.
 - Lot 0 : les échecs du port de modèle de langage ne pouvaient pas être des codes de `Shared::Result` (liste fermée) ; décidé : `failure(:unavailable, errors: { reason: … })`, ADR modèles de langage mis à jour.
 
+- Lot C : contrats du Lot 0 incohérents entre eux. `Entities::Crm::Interaction` et `Entities::Crm::Contact` n'exposent que `public_id`, alors que `crm_follow_ups.interaction_id` et `crm_interactions.contact_id` sont des clés étrangères entières. Le lot n'a donc ni lien relance -> échange (`interaction_id` reste nul) ni lien échange -> contact (le nom du contact choisi est copié dans `contact_name`). À trancher avant la clôture (ajouter `id` aux entités, ou clés publiques dans les ports) ; aucun écran du lot ne dépend de ces liens.
+- Lot C : le dépôt de contacts est encore le squelette du Lot B (`NotImplementedError`) ; la modale en a besoin pour son sélecteur d'interlocuteur. Les tests du lot le remplacent par un faux (`define_method`, restauré au `teardown`) : à retirer à la fusion du Lot B.
+- Lot C : aucune action d'audit `crm.*` pour un échange (liste fermée posée par le Lot 0) : le journal est lui-même la trace. Le nom de l'auteur vient de `AssignableMembersQuery` (admin/field non anonymisés), « Ancien membre » sinon. Un champ radio `required` est arrêté par le navigateur : le test système de l'erreur serveur passe par une date de relance passée.
+- Lot C : 23 tests écrits (6 domaine, 3 dépôt, 12 contrôleur, 2 système), tous rouges avant le code (dépôt : `NotImplementedError "Lot C"` ; contrôleur : frame vide).
+
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
