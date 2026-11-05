@@ -249,11 +249,12 @@ jobs:
           if-no-files-found: ignore
 
   # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : chaque leçon v3 est importée dans la base de test, publiée et lue
-  # par un élève à 390 px puis sur ordinateur (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 4,2 s environ, soit 35 fichiers et 2 min 30 par part
-  # (journal du chantier) : le découpage tient chaque part sous les cinq minutes avec son installation. Rien n'est publié
-  # hors de la base de test. Une part rouge n'annule pas les autres.
+  # par un élève à 390 px puis sur ordinateur (test/system/catalog/lesson_rendering_test.rb). Sept parts (chantier ci-train-rapide) :
+  # ≈ 80 s fixes par part (installation, démarrage de Chrome) et ≈ 2,1 s par leçon, soit ≈ 70 fichiers et moins de 3 minutes par
+  # part. Sept et pas plus : un run complet garde ses tâches de test sous la limite de 20 tâches simultanées du compte
+  # (garde ci_plan_test), sans file d'attente. Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
-    name: lecons ${{ matrix.part }}/12
+    name: lecons ${{ matrix.part }}/7
     needs: plan
     if: needs.plan.outputs.code == 'true' || needs.plan.outputs.lessons == 'true'
     runs-on: ubuntu-latest
@@ -261,7 +262,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+        part: [ 1, 2, 3, 4, 5, 6, 7 ]
     permissions:
       contents: read
 
@@ -279,7 +280,7 @@ jobs:
       - name: Render the lessons of this part
         env:
           LECONS: tout
-          LECONS_PART: ${{ matrix.part }}/12
+          LECONS_PART: ${{ matrix.part }}/7
           COVERAGE: "0"
         run: |
           bin/setup --skip-server
