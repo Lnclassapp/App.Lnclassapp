@@ -14,15 +14,17 @@ module UseCases
       class FakeInteractions
         include Ports::Crm::InteractionRepositoryPort
 
-        attr_reader :created
+        attr_reader :created, :contact_public_ids
 
         def initialize
           @created = []
+          @contact_public_ids = []
         end
 
-        def create(interaction:)
+        def create(interaction:, contact_public_id: nil)
           stored = interaction.with(public_id: "int-#{@created.size + 1}")
           @created << stored
+          @contact_public_ids << contact_public_id
           Shared::Result.success(stored)
         end
       end
@@ -30,14 +32,16 @@ module UseCases
       class FakeFollowUps
         include Ports::Crm::FollowUpRepositoryPort
 
-        attr_reader :created
+        attr_reader :created, :interaction_public_ids
 
         def initialize
           @created = []
+          @interaction_public_ids = []
         end
 
-        def create(follow_up:)
+        def create(follow_up:, interaction_public_id: nil)
           @created << follow_up
+          @interaction_public_ids << interaction_public_id
           Shared::Result.success(follow_up.with(public_id: "fup-#{@created.size}"))
         end
       end
@@ -75,11 +79,12 @@ module UseCases
       end
 
       test "the interlocutor, next step and dictation source are kept, blanks become nil" do
-        result = call(contact_id: 4, contact_name: "Mme Kouassi", next_step: " Envoyer la plaquette ", note: " ", source: "dictation")
+        result = call(contact_public_id: "ctc-4", contact_name: "Mme Kouassi", next_step: " Envoyer la plaquette ", note: " ", source: "dictation")
 
         interaction = result.value
-        assert_equal [ 4, "Mme Kouassi", "Envoyer la plaquette", nil, "dictation" ],
-                     [ interaction.contact_id, interaction.contact_name, interaction.next_step, interaction.note, interaction.source ]
+        assert_equal [ "Mme Kouassi", "Envoyer la plaquette", nil, "dictation" ],
+                     [ interaction.contact_name, interaction.next_step, interaction.note, interaction.source ]
+        assert_equal [ "ctc-4" ], @interactions.contact_public_ids
       end
 
       test "a follow-up is created open, for the same school, in the same call" do
@@ -89,6 +94,12 @@ module UseCases
         assert_equal [ 31, 7, Date.new(2026, 11, 8), "Envoyer la plaquette", "open", 7, nil ],
                      [ follow_up.school_id, follow_up.assignee_id, follow_up.due_on, follow_up.reason, follow_up.status,
                        follow_up.created_by_id, follow_up.interaction_id ]
+      end
+
+      test "the follow-up proposed by an interaction is linked to it by the interaction's public id" do
+        call(follow_up: { due_on: Date.new(2026, 11, 8), assignee_id: 7, reason: "Envoyer la plaquette" })
+
+        assert_equal [ "int-1" ], @follow_ups.interaction_public_ids
       end
 
       test "a follow-up dated in the past is refused and nothing is written" do

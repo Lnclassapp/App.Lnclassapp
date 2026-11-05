@@ -21,6 +21,17 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
     Repositories::Crm::ContactRepository.define_method(:active_for_school, @original)
   end
 
+  # Le dépôt de contacts est encore le squelette du Lot B : find_by_public_id est remplacé par une lecture de la base (restauré après).
+  def stub_find_contact(contact)
+    original = Repositories::Crm::ContactRepository.instance_method(:find_by_public_id)
+    entity = Entities::Crm::Contact.new(public_id: contact.public_id, school_id: contact.school_id, full_name: contact.full_name,
+                                        position: contact.position, phone: nil, note: nil, created_by_id: contact.created_by_id, archived_at: nil)
+    Repositories::Crm::ContactRepository.define_method(:find_by_public_id) { |public_id:| entity }
+    yield
+  ensure
+    Repositories::Crm::ContactRepository.define_method(:find_by_public_id, original)
+  end
+
   def note!(count = 1, **overrides)
     count.times do |i|
       Orm::CrmInteraction.create!({ school: Orm::School.find(@school.id), author: @field, kind: "call", outcome: "positive",
@@ -148,6 +159,18 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
          params: valid_params(contact_name: "Le censeur", source: "dictation"), as: :turbo_stream
 
     assert_equal [ "Le censeur", "dictation" ], Orm::CrmInteraction.last.then { [ it.contact_name, it.source ] }
+  end
+
+  test "create with a chosen contact links the interaction to it" do
+    contact = Orm::CrmContact.create!(school_id: @school.id, full_name: "Mme Kouassi", position: "director", created_by: @field)
+
+    stub_find_contact(contact) do
+      post teams_school_interactions_path(@school.public_id),
+           params: valid_params(contact_public_id: contact.public_id), as: :turbo_stream
+    end
+
+    created = Orm::CrmInteraction.last
+    assert_equal [ contact.id, "Mme Kouassi" ], [ created.contact_id, created.contact_name ]
   end
 
   test "create with an invalid follow-up date or no outcome re-renders the modal in 422 and writes nothing" do

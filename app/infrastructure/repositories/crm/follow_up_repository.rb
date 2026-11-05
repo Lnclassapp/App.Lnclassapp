@@ -6,11 +6,18 @@ module Repositories
     class FollowUpRepository
       include Ports::Crm::FollowUpRepositoryPort
 
-      def create(follow_up:)
+      # Un identifiant public inconnu (ou d'une autre école) est refusé : jamais un lien nul en silence.
+      def create(follow_up:, interaction_public_id: nil)
+        interaction_id = follow_up.interaction_id
+        if interaction_public_id
+          interaction_id = Orm::CrmInteraction.where(school_id: follow_up.school_id).find_by(public_id: interaction_public_id)&.id
+          return ::Shared::Result.failure(:not_found) if interaction_id.nil?
+        end
+
         record = Orm::CrmFollowUp.create!(school_id: follow_up.school_id, assignee_id: follow_up.assignee_id, due_on: follow_up.due_on,
                                           reason: follow_up.reason, status: follow_up.status, done_at: follow_up.done_at,
                                           done_by_id: follow_up.done_by_id, created_by_id: follow_up.created_by_id,
-                                          interaction_id: follow_up.interaction_id)
+                                          interaction_id:)
         ::Shared::Result.success(to_entity(record))
       end
 

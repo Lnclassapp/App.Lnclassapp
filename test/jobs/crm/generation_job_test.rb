@@ -56,6 +56,26 @@ module Crm
       end
     end
 
+    test "an empty or unreadable text from the model is recorded invalid_response, not provider_error" do
+      generation = pending
+      TestJob.model_double = FakeLanguageModel.new("   ", model: "fake/text", input_tokens: 1, output_tokens: 0)
+
+      TestJob.perform_now(generation.public_id)
+
+      assert_equal "invalid_response", @repository.find_by_public_id(public_id: generation.public_id).error_code
+    end
+
+    test "a text the subclass cannot read is recorded invalid_response" do
+      picky = Class.new(TestJob) { def content_for(_text) = raise(ArgumentError, "illisible") }
+      generation = pending
+
+      picky.perform_now(generation.public_id)
+
+      failed = @repository.find_by_public_id(public_id: generation.public_id)
+      assert failed.failed?
+      assert_equal "invalid_response", failed.error_code
+    end
+
     test "an unexpected error marks the generation failed instead of leaving it pending" do
       generation = pending
       @fake.define_singleton_method(:complete) { |**| raise "boom" }

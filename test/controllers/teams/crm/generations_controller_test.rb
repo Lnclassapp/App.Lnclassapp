@@ -37,8 +37,8 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "a done generation shows its text escaped, with no poll" do
-    generation = pending
+  test "a done generation of a kind with no partial of its own shows its text escaped, with no poll" do
+    generation = pending(kind: "whatsapp_draft")
     @repository.complete(public_id: generation.public_id, content: "<script>alert(1)</script>\nLigne 2", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
 
     show generation
@@ -61,6 +61,45 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[role=alert]", text: /#{Regexp.escape(message)}/
       assert_select "[data-controller=generation-poll]", count: 0
     end
+  end
+
+  test "a failed briefing offers a retry that really starts a new generation" do
+    generation = pending
+    @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
+
+    show generation
+
+    assert_select "a[href=?][data-turbo-method=post]", teams_school_briefing_path(@school.public_id), text: /Réessayer/
+    post teams_school_briefing_path(@school.public_id), as: :turbo_stream
+    assert_response :success
+    assert_not_nil @repository.pending_for(school_id: @school.id, kind: "briefing")
+  end
+
+  test "a failed generation of a kind whose route is not served yet offers no retry" do
+    generation = pending(kind: "dictation")
+    @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
+
+    show generation
+
+    assert_select "[role=alert]"
+    assert_select "[role=alert] a", count: 0
+  end
+
+  test "a timed-out poll of a briefing offers the same retry" do
+    show pending
+    assert_select "[data-generation-poll-target=timedOut] a[href=?][data-turbo-method=post]", teams_school_briefing_path(@school.public_id)
+  end
+
+  test "a done briefing found by the poll renders the briefing list with its regenerate button" do
+    generation = pending
+    @repository.complete(public_id: generation.public_id, content: "- Ligne un\n- Ligne deux", model: "m", input_tokens: 1, output_tokens: 1, duration_ms: 1)
+
+    show generation
+
+    assert_select "turbo-frame#generation_#{generation.public_id} ul[role=list] li", 2
+    assert_select "a[href=?][data-turbo-method=post]", teams_school_briefing_path(@school.public_id), text: /Régénérer/
+    assert_select "p.whitespace-pre-line", count: 0
+    assert_select "p.text-mute", text: /Préparée il y a/
   end
 
   test "an unknown generation is a 404, a content member is a 403" do

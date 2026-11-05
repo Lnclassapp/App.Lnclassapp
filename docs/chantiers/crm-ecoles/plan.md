@@ -114,6 +114,26 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
 
 ---
 
+## Lot 0 bis — Correction des contrats communs
+
+*Réouverture du Lot 0, décidée par l'orchestrateur après les Lots C, D, G et H.*
+
+- **Couche**       : domaine (ports, entité, use case) + infrastructure (dépôts, job) + delivery + UI
+- **Fichiers**     : `app/domain/ports/crm/interaction_repository_port.rb` · `follow_up_repository_port.rb` *(+ `contact_public_id:`, `interaction_public_id:`)*
+                     `app/infrastructure/repositories/crm/interaction_repository.rb` · `follow_up_repository.rb` · `generation_repository.rb` *(`created_at`)*
+                     `app/domain/entities/crm/generation.rb` *(+ `created_at`, facultatif à la construction)* · `app/domain/use_cases/crm/record_interaction.rb`
+                     `app/controllers/teams/crm/interactions_controller.rb` *(`contact_public_id:`)* · `app/jobs/crm/briefing_job.rb` *(commentaire)*
+                     `app/jobs/crm/generation_job.rb` *(réponse vide ou illisible : `invalid_response`)*
+                     `app/helpers/components_helper.rb` · `app/views/components/_error_state.html.erb` *(`retry_method:`)*
+                     `app/controllers/teams/crm/generations_controller.rb` *(table type → route de relance, partial prêt)* · `app/views/teams/crm/generations/{show,_generation}.html.erb`
+                     `app/views/teams/crm/briefings/_briefing.html.erb` · `config/locales/teams/crm/briefings.fr.yml` *(« Préparée il y a X »)*
+                     `docs/decisions/adr/XXXX-contexte-crm-suivi-des-ecoles.md` · `docs/decisions/udr/XXXX-assistants-du-suivi.md`
+- **Dépend de**    : Lots 0, C, D, G, H
+- **Test associé** : `test/domain/use_cases/crm/record_interaction_test.rb` · `test/infrastructure/repositories/crm/{interaction,follow_up,generation}_repository_test.rb` · `test/controllers/teams/crm/generations_controller_test.rb` · `test/helpers/components_helper_test.rb` · `test/jobs/crm/generation_job_test.rb`
+- **Done quand**   : un échange noté avec un contact a son `contact_id` ; la relance proposée a son `interaction_id` ; un identifiant public inconnu est refusé (`:not_found`) ; « Réessayer » relance réellement une génération (POST) ; la fiche prête d'un briefing, relue par le sondage, montre la liste et « Régénérer » ; « Préparée il y a X » ; une réponse vide est `invalid_response`
+
+---
+
 ## Lot A — Étape, responsable et usage
 
 - **Couche**       : domaine + infrastructure + delivery + ui
@@ -331,6 +351,7 @@ Aucun critère orphelin.
 | `app/controllers/teams/crm/home_follow_ups_controller.rb`, `app/views/teams/crm/home_follow_ups/show.html.erb` | Lot 0 → Lot E (séquentiel) |
 | `app/controllers/teams/crm/assistants_controller.rb`, `app/views/teams/crm/assistants/show.html.erb`, `app/infrastructure/repositories/crm/generation_repository.rb`, `app/infrastructure/crm/open_router_language_model.rb` | Lot 0 → Lot G (séquentiel) |
 | `test/db/schema_constraints_test.rb`, `test/system/role_homes_test.rb` | Lot 0 (liste `CRM_CASCADES` ; entrée « Relances » du menu « Plus ») |
+| Fichiers du Lot 0 bis (ports et dépôts `interaction`/`follow_up`/`generation`, `entities/crm/generation.rb`, `record_interaction.rb`, `generation_job.rb`, `components_helper.rb`, `_error_state`, `generations_controller.rb` et ses vues, `_briefing`, `briefings.fr.yml`) | Lot 0 bis, après les Lots C, D, G, H (séquentiel) ; le Lot 0 bis ne touche aucun fichier des Lots A et E |
 | `test/fixtures/` | Aucun lot ne modifie de fixture partagée ; s'il en faut une pour `crm_*`, elle remonte au Lot 0 |
 
 Contrôle mécanique à relancer après toute modification du plan :

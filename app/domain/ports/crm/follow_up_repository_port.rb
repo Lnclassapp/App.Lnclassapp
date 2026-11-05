@@ -4,8 +4,8 @@
 module Ports
   module Crm
     module FollowUpRepositoryPort
-      # → Result(FollowUp) ouverte, avec son public_id
-      def create(follow_up:)
+      # → Result(FollowUp) ouverte, avec son public_id | failure(:not_found) si interaction_public_id ne désigne aucun échange de cette école
+      def create(follow_up:, interaction_public_id: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 

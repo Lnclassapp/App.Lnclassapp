@@ -19,6 +19,18 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Lot C : le dépôt de contacts est encore le squelette du Lot B (`NotImplementedError`) ; la modale en a besoin pour son sélecteur d'interlocuteur. Les tests du lot le remplacent par un faux (`define_method`, restauré au `teardown`) : à retirer à la fusion du Lot B.
 - Lot C : aucune action d'audit `crm.*` pour un échange (liste fermée posée par le Lot 0) : le journal est lui-même la trace. Le nom de l'auteur vient de `AssignableMembersQuery` (admin/field non anonymisés), « Ancien membre » sinon. Un champ radio `required` est arrêté par le navigateur : le test système de l'erreur serveur passe par une date de relance passée.
 - Lot C : 23 tests écrits (6 domaine, 3 dépôt, 12 contrôleur, 2 système), tous rouges avant le code (dépôt : `NotImplementedError "Lot C"` ; contrôleur : frame vide).
+- Les agents ont une limite de 5 heures : elle a coupé les Lots C et H le 4 au soir ; ils ont repris le 5 au matin, avec environ une demi-journée de retard.
+- Lot G : le test rouge avant le code n'a pas été vu pour l'adaptateur ni pour le dépôt (écart à la règle).
+- Lot G : `test/javascript/generation_poll_controller.test.js` n'est lancé par aucune commande de la CI.
+- Lot D : un squelette du Lot 0 cassait `ui_page_header` (`back:` attend `{label:, href:}`) ; un 422 en Turbo Stream exige `Accept: text/vnd.turbo-stream.html, text/html` dans les tests ; un template partagé entre contrôleurs se rend par `render template:`.
+- Lot H : dans un test système, le serveur tourne dans un autre fil (file `:inline` et `cattr_accessor` pour le faux modèle) ; dans `Data.define`, les constantes se qualifient.
+- Garde `system_budget_test` : le budget de 15 s du chantier est dépassé (24,9 s après C, D et H) ; décision du porteur attendue.
+- Lot 0 : le compteur de `models_test` n'a pas suivi les cinq tables crm ; vu au Lot E, corrigé au Lot 0 bis.
+- Lot 0 bis, correction 1 (liens par identifiant public) : le contrat d'entités du Lot 0 (seulement `public_id`) ne pouvait pas remplir `contact_id` ni `interaction_id`. Les ports prennent `contact_public_id:` et `interaction_public_id:`, les dépôts les résolvent (même école) ; un inconnu donne `:not_found`. `RecordInteraction` transmet `contact_public_id:` (remplace `contact_id:`, jamais utilisé). `interactions_controller.rb` (Lot C) passe `contact_public_id:`, testé.
+- Lot 0 bis, correction 2 : « Réessayer » était un lien GET vers des routes POST (404), et `generations#show` ne passait aucun `retry_href`. `ui_error_state(retry_method:)` pose `data-turbo-method` (GET par défaut) ; le partial `_generation` réessaie en POST par défaut (ce qui répare aussi `briefings/create.turbo_stream`) ; une table `ASSISTANTS` du contrôleur donne la route par type.
+- Lot 0 bis, correction 3 : la vue prête du sondage est celle du type (table `ASSISTANTS`, clé `ready`), sinon le texte générique. Les Lots I, J et K ajoutent leur ligne.
+- Contrat de `Crm::GenerationJob` pour les Lots I à K : `messages(generation)`, `model_name`, `max_tokens`, `json?`, `content_for(text)`, `language_model` surchargeable, `perform(public_id)` ; une génération finie est ignorée ; l'audio est purgé dans un `ensure`.
+- Lot 0 bis, correction 4 : `Generation#created_at` (facultatif à la construction, pour ne casser aucun appel) alimente « Préparée il y a X » ; une réponse vide ou que `content_for` refuse est `invalid_response`, plus `provider_error`.
 
 ## Ce qu'on a appris sur la codebase
 

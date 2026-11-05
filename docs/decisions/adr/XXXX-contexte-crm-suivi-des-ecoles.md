@@ -55,6 +55,8 @@ Troisième question : qui. La policy existante de gestion des établissements au
 | `crm_follow_ups` | `public_id`, `school_id`, `assignee_id`, `due_on`, `reason` (≤ 200), `status` ∈ {`open`, `done`}, `done_at`, `done_by_id`, `created_by_id`, `interaction_id` (nul) | Index `(assignee_id, status, due_on)` |
 | `crm_generations` | voir ADR-XXXX-modeles-de-langage-par-openrouter | — |
 
+> Liens par identifiant public (Lot 0 bis) : `InteractionRepositoryPort#create(interaction:, contact_public_id: nil)` et `FollowUpRepositoryPort#create(follow_up:, interaction_public_id: nil)` résolvent l'identifiant en interne (même école) ; un identifiant inconnu donne `failure(:not_found)`, jamais un lien nul.
+
 Clés étrangères vers `schools` en `on_delete: :cascade` : une école supprimée emporte son suivi.
 
 **Étape affichée** (ordre de priorité, `today` injecté) :

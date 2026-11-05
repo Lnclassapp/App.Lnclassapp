@@ -6,6 +6,6 @@
   <p class="mt-4 font-display text-lg font-medium"><%= title || t(".title") %></p>
   <p class="mt-1 max-w-sm text-sm text-mute"><%= message || t(".message") %></p>
   <% if retry_href %>
-    <div class="mt-5"><%= ui_button retry_label || t(".retry"), href: retry_href, variant: :secondary, icon: "arrow-path" %></div>
+    <div class="mt-5"><%= ui_button retry_label || t(".retry"), href: retry_href, method: retry_method, variant: :secondary, icon: "arrow-path" %></div>
   <% end %>
 </div>

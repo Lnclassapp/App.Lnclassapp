@@ -56,7 +56,7 @@ module Repositories
                                       requested_by_id: record.requested_by_id, follow_up_id: record.follow_up_id,
                                       input_fingerprint: record.input_fingerprint, content: record.content, error_code: record.error_code,
                                       model: record.model, input_tokens: record.input_tokens, output_tokens: record.output_tokens,
-                                      duration_ms: record.duration_ms)
+                                      duration_ms: record.duration_ms, created_at: record.created_at)
       end
     end
   end

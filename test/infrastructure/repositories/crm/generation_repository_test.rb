@@ -26,6 +26,13 @@ module Repositories
         assert_equal [ @school.id, "briefing", @user.id, "a" * 64 ], result.value.to_h.values_at(:school_id, :kind, :requested_by_id, :input_fingerprint)
       end
 
+      test "the entity carries the creation time" do
+        created = @repository.create_pending(generation: generation).value
+
+        assert_in_delta Time.current, created.created_at, 5
+        assert_equal created.created_at, @repository.find_by_public_id(public_id: created.public_id).created_at
+      end
+
       test "only one pending generation per school and kind: the second is a conflict" do
         @repository.create_pending(generation: generation)
 

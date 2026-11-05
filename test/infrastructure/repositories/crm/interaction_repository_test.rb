@@ -17,6 +17,10 @@ module Repositories
                                        **overrides)
       end
 
+      def create_crm_contact(school)
+        Orm::CrmContact.create!(school:, full_name: "Mme Kouassi", position: "director", created_by: @author)
+      end
+
       test "create writes the interaction and returns it with its public id" do
         result = @repository.create(interaction:)
 
@@ -26,6 +30,27 @@ module Repositories
         assert_equal [ @school.id, @author.id, "call", "positive", "Mme Kouassi", "Envoyer la plaquette", "Intéressée", "manual" ],
                      [ created.school_id, created.author_id, created.kind, created.outcome, created.contact_name, created.next_step,
                        created.note, created.source ]
+      end
+
+      test "create links the contact chosen by public id" do
+        contact = create_crm_contact(@school)
+
+        created = @repository.create(interaction:, contact_public_id: contact.public_id).value
+
+        assert_equal contact.id, created.contact_id
+        assert_equal contact.id, Orm::CrmInteraction.find_by!(public_id: created.public_id).contact_id
+      end
+
+      test "create refuses an unknown contact public id, or a contact of another school, and writes nothing" do
+        other_contact = create_crm_contact(create_school)
+
+        [ "unknown-public", other_contact.public_id ].each do |public_id|
+          result = @repository.create(interaction:, contact_public_id: public_id)
+
+          assert result.failure?
+          assert_equal :not_found, result.code
+        end
+        assert_equal 0, Orm::CrmInteraction.count
       end
 
       test "recent_for_school lists newest first, only this school, and pages with limit and offset" do

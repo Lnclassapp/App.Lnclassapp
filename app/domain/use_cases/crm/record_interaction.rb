@@ -15,20 +15,21 @@ module UseCases
         @clock = clock
       end
 
+      # contact_public_id : le contact choisi, résolu par le dépôt (inconnu → :not_found, rien n'est écrit).
       # follow_up : nil, ou { due_on:, assignee_id:, reason: } (la relance proposée).
-      # → Result(Interaction) | :forbidden | :invalid (errors par champ) | :conflict (écriture refusée, rien n'est gardé)
-      def call(actor:, school_id:, kind:, outcome:, occurred_at: nil, contact_id: nil, contact_name: nil, next_step: nil, note: nil,
+      # → Result(Interaction) | :forbidden | :invalid (errors par champ) | :not_found (contact inconnu) | :conflict (écriture refusée, rien n'est gardé)
+      def call(actor:, school_id:, kind:, outcome:, occurred_at: nil, contact_public_id: nil, contact_name: nil, next_step: nil, note: nil,
                source: "manual", follow_up: nil)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
 
         now = @clock.now
-        interaction = build(actor, school_id, { kind:, outcome:, source:, occurred_at: occurred_at || now, contact_id:,
+        interaction = build(actor, school_id, { kind:, outcome:, source:, occurred_at: occurred_at || now, contact_id: nil,
                                                 contact_name: clean(contact_name), next_step: clean(next_step), note: clean(note) })
         errors = interaction_errors(interaction, now).merge(follow_up_errors(follow_up, now))
         return Shared::Result.failure(:invalid, errors:) if errors.any?
 
-        persist(interaction, follow_up, actor)
+        persist(interaction, contact_public_id, follow_up, actor)
       end
 
       private
@@ -64,9 +65,9 @@ module UseCases
       end
 
       # Une écriture refusée par la base annule les deux : pas d'échange sans la relance promise, ni l'inverse.
-      def persist(interaction, follow_up, actor)
+      def persist(interaction, contact_public_id, follow_up, actor)
         written = @transaction.attempt do
-          saved = @interactions.create(interaction:)
+          saved = @interactions.create(interaction:, contact_public_id:)
           schedule(saved.value, follow_up, actor) if saved.success? && follow_up
           saved
         end
@@ -77,8 +78,8 @@ module UseCases
         @follow_ups.create(follow_up: Entities::Crm::FollowUp.new(
           public_id: nil, school_id: interaction.school_id, assignee_id: follow_up[:assignee_id], due_on: follow_up[:due_on],
           reason: follow_up[:reason].to_s.strip, status: "open", done_at: nil, done_by_id: nil, created_by_id: actor.user_id,
-          interaction_id: nil # l'entité Interaction n'expose pas son identifiant interne (contrat gelé) : pas de lien FK, voir le journal
-        ))
+          interaction_id: nil # le dépôt le résout depuis interaction_public_id (l'entité n'expose pas l'identifiant interne)
+        ), interaction_public_id: interaction.public_id)
       end
     end
   end

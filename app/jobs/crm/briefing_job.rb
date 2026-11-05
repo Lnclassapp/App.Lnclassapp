@@ -13,7 +13,7 @@ module Crm
 
     def max_tokens = MAX_TOKENS
 
-    # Une réponse vide n'est pas une fiche : l'exception devient un échec « provider_error » que l'utilisateur peut réessayer.
+    # Une réponse vide n'est pas une fiche : l'exception devient un échec « invalid_response » (voir GenerationJob) que l'utilisateur peut réessayer.
     def content_for(text)
       Entities::Crm::BriefingPrompt.summarize(text) || raise(ArgumentError, "fiche de briefing vide")
     end

@@ -99,7 +99,7 @@ module Teams
 
       def interaction_values(contact)
         { kind: @form.kind, outcome: @form.outcome, occurred_at: parse_time(@form.occurred_at), source: @form.source,
-          contact_name: contact&.full_name || @form.contact_name, next_step: @form.next_step, note: @form.note,
+          contact_public_id: contact&.public_id, contact_name: contact&.full_name || @form.contact_name, next_step: @form.next_step, note: @form.note,
           follow_up: follow_up_values }
       end
 

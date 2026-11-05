@@ -11,10 +11,17 @@ module Repositories
         Orm::CrmInteraction.where(school_id:).order(occurred_at: :desc, id: :desc).limit(limit).offset(offset).map { to_entity(it) }
       end
 
-      def create(interaction:)
+      # Un identifiant public inconnu (ou d'une autre école) est refusé : jamais un lien nul en silence.
+      def create(interaction:, contact_public_id: nil)
+        contact_id = interaction.contact_id
+        if contact_public_id
+          contact_id = Orm::CrmContact.where(school_id: interaction.school_id).find_by(public_id: contact_public_id)&.id
+          return ::Shared::Result.failure(:not_found) if contact_id.nil?
+        end
+
         record = Orm::CrmInteraction.create!(
           school_id: interaction.school_id, author_id: interaction.author_id, kind: interaction.kind,
-          occurred_at: interaction.occurred_at, contact_id: interaction.contact_id, contact_name: interaction.contact_name,
+          occurred_at: interaction.occurred_at, contact_id:, contact_name: interaction.contact_name,
           outcome: interaction.outcome, next_step: interaction.next_step, note: interaction.note, source: interaction.source
         )
         ::Shared::Result.success(to_entity(record))

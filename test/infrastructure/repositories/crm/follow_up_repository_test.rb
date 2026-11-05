@@ -29,6 +29,26 @@ module Repositories
         assert created.open?
       end
 
+      test "create links the interaction given by public id" do
+        interaction = Repositories::Crm::InteractionRepository.new.create(
+          interaction: Entities::Crm::Interaction.new(public_id: nil, school_id: @school.id, author_id: @author.id, kind: "call",
+                                                      occurred_at: @at, contact_id: nil, contact_name: nil, outcome: "neutral",
+                                                      next_step: nil, note: nil, source: "manual")
+        ).value
+
+        created = @repository.create(follow_up:, interaction_public_id: interaction.public_id).value
+
+        assert_equal Orm::CrmInteraction.find_by!(public_id: interaction.public_id).id, created.interaction_id
+      end
+
+      test "create refuses an unknown interaction public id and writes nothing" do
+        result = @repository.create(follow_up:, interaction_public_id: "unknown-public")
+
+        assert result.failure?
+        assert_equal :not_found, result.code
+        assert_equal 0, Orm::CrmFollowUp.count
+      end
+
       test "find_by_public_id returns the entity, or nil" do
         created = @repository.create(follow_up: follow_up).value
 

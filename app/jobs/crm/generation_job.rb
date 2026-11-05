@@ -40,13 +40,25 @@ module Crm
     def finish(generation, result, duration_ms)
       if result.success?
         value = result.value
-        repository.complete(public_id: generation.public_id, content: content_for(value[:text]), model: value[:model],
+        content = readable_content(value[:text])
+        return repository.mark_failed(public_id: generation.public_id, error_code: "invalid_response", duration_ms:) if content.nil?
+
+        repository.complete(public_id: generation.public_id, content:, model: value[:model],
                             input_tokens: value[:input_tokens], output_tokens: value[:output_tokens], duration_ms: value[:duration_ms])
       else
         reason = result.errors[:reason].to_s
         reason = "provider_error" unless Entities::Crm::Generation::ERROR_CODES.include?(reason)
         repository.mark_failed(public_id: generation.public_id, error_code: reason, duration_ms:)
       end
+    end
+
+    # Une réponse vide, ou que la sous-classe refuse de lire (content_for lève une exception), est une `invalid_response`.
+    def readable_content(text)
+      return nil if text.to_s.strip.empty?
+
+      content_for(text).presence
+    rescue StandardError
+      nil
     end
 
     def audio_for(public_id)
