@@ -35,7 +35,7 @@ Pas de nouvelle page. Le détail vit là où le lien de « Fiches à revoir » m
   - « À revoir (n) » : `<ul>` dont chaque `<li class="flex flex-wrap items-baseline justify-between gap-x-3 py-1 text-sm">` porte le nom (`text-ink`) et, en `text-mute`, « depuis le 3 nov. · 2 copies ratées » (`l(date, format: :short)`, pluriel par `count`). Ordre : de la plus ancienne à la plus récente.
   - « Lacune levée (n) » : même ligne, « levée le 4 nov. ». Ordre : de la plus récente à la plus ancienne.
   - Une liste vide n'est pas rendue (ni son titre).
-- **Repli** : chaque liste montre 5 noms puis `ui_reveal_more` (`ui_reveal_data` sur la liste, `ui_reveal_item(index)` sur chaque `li`).
+- **Repli** : chaque liste montre 3 noms (`REVEAL_LIMIT` des helpers, UDR-0057 R3) puis `ui_reveal_more` (`ui_reveal_data` sur la liste, `ui_reveal_item(index)` sur chaque `li`).
 - **Tokens** : `border-line`, `bg-white`, `text-ink`, `text-mute`, `rounded-card`, `shadow-card` seulement. L'encadré est hors de la feuille cahier : pas de jeton de `course_sheet.css`.
 
 ### 3.2 Réussite sous un exercice (feuille vue depuis la classe)

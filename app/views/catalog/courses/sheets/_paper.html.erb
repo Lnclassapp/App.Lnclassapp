@@ -112,8 +112,8 @@
           </ol>
         <% end %>
       <% end %>
-      <% if mode == :teacher %>
-        <div class="ps-actions"><%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign:, success: success&.dig(exercise.public_id) %></div>
+      <% if %i[teacher team].include?(mode) %>
+        <div class="ps-actions"><%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign: can_assign && exercise.status != "draft", success: success&.dig(exercise.public_id) %></div>
       <% end %>
     <% end %>
   <% end %>

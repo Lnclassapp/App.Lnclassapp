@@ -75,8 +75,8 @@
       <% end %>
       <%= tag.button t("catalog.courses.sheets.redo"), type: :button, class: "ps-btn ps-btn--redo", hidden: !checked,
                       data: { ps: "done", action: "prepare-sheet#redo" } %>
-    <% elsif mode == :teacher %>
-      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign:, success: success&.dig(exercise.public_id) %>
+    <% elsif %i[teacher team].include?(mode) %>
+      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign: can_assign && exercise.status != "draft", success: success&.dig(exercise.public_id) %>
     <% end %>
   </div>
   <% end %>

@@ -34,7 +34,7 @@ module Classroom
       render :show
     end
 
-    # Dans la classe l'équipe a la barre de l'enseignant (suivi-classe-lecon, UDR §3.5) : le mode :team ne la rend pas.
-    def sheet_mode = :teacher
+    # L'équipe garde son mode (pastille « Brouillon ») ; _exercise et _paper lui rendent la barre dans la classe, sans bascule sur un brouillon (UDR §3.5).
+    def sheet_mode = current_actor.team? ? :team : :teacher
   end
 end

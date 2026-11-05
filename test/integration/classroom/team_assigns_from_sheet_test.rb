@@ -31,6 +31,18 @@ class Classroom::TeamAssignsFromSheetTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "in a classroom the team still sees « Brouillon » and gets no toggle on a draft exercise" do
+    draft = create_exercise(essential: @notion, status: "draft", position: 2)
+
+    get sheet_in_class
+
+    assert_response :success
+    assert_select ".ps-status", text: I18n.t("catalog.content_status.draft")
+    assert_select "#assignment_#{@classroom.public_id}_Exercise_#{draft.public_id}", count: 0
+    assert_select "button[role=checkbox][data-batch-choice='#{draft.public_id}']", count: 0
+    assert_select "##{toggle_id(@classroom)}"
+  end
+
   test "outside a classroom the team still has no bar" do
     get course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
