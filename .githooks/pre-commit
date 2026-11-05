@@ -11,6 +11,7 @@
 #   4. Pureté du domaine      (si app/domain/ est touché)
 #   5. Style                  (rubocop sur les fichiers stagés)
 #   6. Tests correspondants   (mapping app/… → test/…, s'ils existent)
+#   7. Index générés          (memo ou décision stagé : script/docs/build_index, READMEs ajoutés au commit)
 #
 # Les contrôles sont ordonnés du moins cher au plus cher : une faute de syntaxe
 # se voit en 50 ms, sans payer le démarrage de Rails.
@@ -210,6 +211,32 @@ if [ ${#TESTS_TO_RUN[@]} -gt 0 ]; then
     echo ""
     echo "❌ [Tests] Les tests correspondant à tes fichiers échouent."
     echo "     Reproduis-les avec :  bin/rails test ${TESTS_TO_RUN[*]}"
+    fail
+  fi
+fi
+
+# --- 7. Index générés (chantier orchestrateur-court-et-index) -------------------
+# Un memo ou une décision stagé (ajouté, modifié, renommé ou supprimé) : les trois index
+# générés suivent dans le même commit. Plus de commit « index » à part, plus d'oubli.
+INDEXES=(docs/chantiers/README.md docs/decisions/adr/README.md docs/decisions/udr/README.md)
+# Le script lit l'arbre de travail : un memo, une décision ou un index modifié sans être stagé,
+# ou un dossier non suivi, finirait dans l'index commité sans être commité lui-même. On refuse.
+# (grep sans -q : sous pipefail, -q couperait git diff par SIGPIPE sur une longue liste.)
+if git diff --cached --name-only | grep -E '^docs/(chantiers/[^/_][^/]*/memo\.md|decisions/(adr|udr)/[0-9X]{4}-[^/]+\.md)$' >/dev/null; then
+  UNSTAGED="$(git diff --name-only -- 'docs/chantiers/*/memo.md' 'docs/decisions/adr/*.md' 'docs/decisions/udr/*.md' "${INDEXES[@]}"; git ls-files --others --exclude-standard -- docs/chantiers docs/decisions)"
+  if [ -n "$UNSTAGED" ]; then
+    echo ""
+    echo "❌ [Index] Les index se génèrent depuis l'arbre de travail : stage ou mets de côté d'abord :"
+    echo "$UNSTAGED" | sed 's/^/     /'
+    fail
+  elif script/docs/build_index; then
+    if ! git diff --quiet -- "${INDEXES[@]}"; then
+      git add -- "${INDEXES[@]}"
+      echo "🗂️  [Index] Index régénérés et ajoutés au commit (script/docs/build_index)."
+    fi
+  else
+    echo ""
+    echo "❌ [Index] script/docs/build_index a échoué : corrige le memo ou la décision signalé ci-dessus."
     fail
   fi
 fi

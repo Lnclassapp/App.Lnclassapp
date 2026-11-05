@@ -1,13 +1,15 @@
 #!/usr/bin/env ruby
 # Rebuilds the index tables of docs/decisions/adr/README.md and docs/decisions/udr/README.md from the
 # `<!-- index … -->` block that each ADR / UDR carries under its title (chantier sobriete-tokens: no more
-# hand-edited rows, no more conflicts to merge by hand in the shared README).
+# hand-edited rows, no more conflicts to merge by hand in the shared README), and the table of docs/chantiers/README.md
+# from the header of each memo.md (chantier orchestrateur-court-et-index: no more commit that only touches that index).
+# The pre-commit hook runs it whenever a memo or a decision is staged.
 #
-#   script/docs/build_index            # rewrites the two READMEs
+#   script/docs/build_index            # rewrites the three READMEs
 #   script/docs/build_index --number   # numbers the pending decisions (XXXX-<slug>.md), then rewrites the READMEs
-#   script/docs/build_index --check    # exits 1 on a stale README, a number taken twice, or a pending decision on
-#                                      # Develop, Staging, main, a pull request into one, or an unknown branch;
-#                                      # writes nothing
+#   script/docs/build_index --check    # exits 1 on a stale README, a number taken twice (here, or here and on
+#                                      # origin/Develop when that ref is known), or a pending decision on Develop,
+#                                      # Staging, main, a pull request into one, or an unknown branch; writes nothing
 #
 # Block, one `key: value` per line: titre, statut, date (only when it differs from the **Date** row of the header),
 # adr-lie (UDR only), problematique. The number and the link come from the file name.
@@ -15,7 +17,8 @@
 # A number is set when the chantier merges, never when it opens (conventions.md §2, chantier acceleration-du-flux): a
 # decision is written XXXX-<slug>.md and cited ADR-XXXX-<slug> / UDR-XXXX-<slug>. --number gives each pending decision
 # the next free number of its kind, in the order of the slugs, renames it with `git mv` and rewrites its references in
-# every file git knows (tracked, or untracked and not ignored).
+# every file git knows (tracked, or untracked and not ignored). The next free number also counts the decisions of
+# origin/Develop (fetched first), so that a branch behind Develop does not take a number Develop already gave.
 KINDS = {
   "adr" => { columns: [ "N°", "Titre", "Statut", "Date", "Problématique" ], keys: %w[titre statut date problematique] },
   "udr" => { columns: [ "N°", "Titre", "Statut", "Date", "ADR lié", "Problématique" ], keys: %w[titre statut date adr-lie problematique] }
@@ -26,6 +29,10 @@ REPO = File.expand_path("../..", __dir__)
 ROOT = File.join(REPO, "docs/decisions")
 PENDING = "XXXX".freeze
 LONG_BRANCHES = %w[Develop Staging main].freeze
+BASE = "origin/Develop".freeze
+CHANTIERS = File.join(REPO, "docs/chantiers")
+CHANTIERS_START = "<!-- chantiers:start -->".freeze
+CHANTIERS_FINISH = "<!-- chantiers:end -->".freeze
 
 def metadata(path)
   text = File.read(path)
@@ -42,6 +49,12 @@ def pending(kind) = Dir[File.join(ROOT, kind, "#{PENDING}-*.md")].sort
 
 def relative(path) = path.delete_prefix("#{REPO}/")
 
+# → the numbered decisions of a kind on origin/Develop, file names only; none when that ref is unknown.
+def base_numbered(kind)
+  listed = IO.popen([ "git", "-C", REPO, "ls-tree", "--name-only", "#{BASE}:docs/decisions/#{kind}" ], err: File::NULL, &:read)
+  $?.success? ? listed.lines.map(&:chomp).grep(/\A\d{4}-.+\.md\z/) : []
+end
+
 # → one message per number that two files of a kind share.
 def duplicates
   KINDS.keys.flat_map do |kind|
@@ -49,7 +62,27 @@ def duplicates
       "#{kind.upcase}-#{number} taken twice: #{files.map { relative(it) }.join(', ')} (rename the one of this branch " \
         "#{PENDING}-<slug>.md, cite it #{kind.upcase}-#{PENDING}-<slug>, then run script/docs/build_index --number)"
     end
+  end + taken_on_base
+end
+
+# → one message per number this branch gave that origin/Develop gave to another decision since the branch left it.
+def taken_on_base
+  KINDS.keys.flat_map do |kind|
+    base = base_numbered(kind)
+    local = numbered(kind).map { File.basename(it) }
+    (local - base).filter_map do |file|
+      other = (base - local).find { it.start_with?(file[0, 5]) } or next
+      slug = file.delete_prefix(file[0, 5]).delete_suffix(".md")
+      "#{kind.upcase}-#{file[0, 4]} taken on #{BASE} by #{other}: rename docs/decisions/#{kind}/#{file} to " \
+        "#{PENDING}-#{slug}.md, cite it #{kind.upcase}-#{PENDING}-#{slug}, then run script/docs/build_index --number"
+    end
   end
+end
+
+def fetch_base
+  return if system("git", "-C", REPO, "fetch", "--quiet", "origin", "Develop", out: File::NULL, err: File::NULL)
+
+  warn "#{BASE} not fetched: the numbers that Develop gave since the last fetch are not counted"
 end
 
 # The current branch (GITHUB_REF_NAME on a detached head), and the target of the pull request under GitHub Actions.
@@ -69,7 +102,7 @@ end
 
 def number_pending
   renames = KINDS.keys.flat_map do |kind|
-    last = numbered(kind).map { File.basename(it)[0, 4].to_i }.max.to_i
+    last = (numbered(kind).map { File.basename(it) } + base_numbered(kind)).map { it[0, 4].to_i }.max.to_i
     pending(kind).each_with_index.map do |path, index|
       [ kind, File.basename(path, ".md").delete_prefix("#{PENDING}-"), format("%04d", last + 1 + index) ]
     end
@@ -123,7 +156,54 @@ def table(kind)
   [ "| #{spec[:columns].join(' | ')} |", "| #{([ '---' ] * spec[:columns].size).map { |s| ":#{s}" }.join(' | ')} |", *rows ].join("\n")
 end
 
+# → the memo header row `| **<name>** | <value> |`, stripped.
+def memo_field(text, name) = text[/^\| \*\*#{Regexp.escape(name)}\*\* \| (.*) \|$/, 1]&.strip
+
+STATES = /\A(livré en PR|PR prête|en cours|en pause|en revue|en attente|livré|terminé|planifié|planification|cadrage|abandonné|preuve|exécution|décision|backlog)\b/i
+
+# → the head of a memo cell, without emphasis, links or the detail after the first parenthesis, dash, colon or comma:
+# « livré ([#483](…) vers `Develop`, 2026-11-05), clos » → « livré » ; a known state alone when the cell starts with one.
+def short(cell)
+  plain = cell.to_s.gsub(/\[([^\]]*)\]\([^)]*\)/, '\1').delete("*_`").strip
+  state = plain[STATES, 1]
+  return state.downcase.gsub(/\bpr\b/, "PR") if state
+
+  head = plain.split(/\s+[(—–]|\s*[;:,]\s/).first.to_s.strip
+  head = "#{head[0, 40].rstrip}…" if head.length > 41
+  head.empty? ? "—" : head.gsub("|", "\\|")
+end
+
+def chantier_row(dir)
+  slug = File.basename(dir)
+  memo = File.join(dir, "memo.md")
+  return "| [`#{slug}`](#{slug}/) | pas de memo | — | — | — |" unless File.file?(memo)
+
+  text = File.read(memo)
+  warn "#{relative(memo)}: no | **Statut** | row in the header, shown as —" unless memo_field(text, "Statut")
+  subject = text[/^# (.*)$/, 1].to_s.sub(/\AM[ée]mo\s*[—–:-]\s*/i, "").strip.gsub("|", "\\|")
+  cells = [ "[`#{slug}`](#{slug}/memo.md)", short(memo_field(text, "Statut")), short(memo_field(text, "Type de cycle") || memo_field(text, "Type")),
+            short(memo_field(text, "Ouvert le")), subject.empty? ? "—" : subject ]
+  "| #{cells.join(' | ')} |"
+end
+
+# Alphabetical: two branches that each add a chantier rarely touch neighbouring lines, so git merges them alone.
+def chantiers_table
+  rows = Dir[File.join(CHANTIERS, "*/")].map { it.chomp("/") }.reject { File.basename(it).start_with?("_") }.sort
+  [ "| Chantier | Statut | Type | Ouvert le | Sujet |", "|---|---|---|---|---|", *rows.map { chantier_row(it) } ].join("\n")
+end
+
+# → true when the region between the markers already holds the table; rewrites it otherwise, unless checking.
+def refresh(readme, start, finish, table, check)
+  current = File.read(readme)
+  region = /#{Regexp.escape(start)}\n(?:.*?\n)?#{Regexp.escape(finish)}/m
+  abort "#{readme}: markers #{start} / #{finish} missing" unless current.match?(region)
+  updated = current.sub(region) { "#{start}\n#{table}\n#{finish}" }
+  File.write(readme, updated) unless check || updated == current
+  updated == current
+end
+
 check = ARGV.include?("--check")
+fetch_base if ARGV.include?("--number")
 taken_twice = duplicates
 if ARGV.include?("--number")
   abort taken_twice.join("\n") if taken_twice.any?
@@ -131,21 +211,17 @@ if ARGV.include?("--number")
 end
 
 stale = KINDS.keys.reject do |kind|
-  readme = File.join(ROOT, kind, "README.md")
-  current = File.read(readme)
-  region = /#{Regexp.escape(START)}\n(?:.*?\n)?#{Regexp.escape(FINISH)}/m
-  abort "#{readme}: markers #{START} / #{FINISH} missing" unless current.match?(region)
-  updated = current.sub(region) { "#{START}\n#{table(kind)}\n#{FINISH}" }
-  File.write(readme, updated) unless check || updated == current
-  updated == current
-end
+  refresh(File.join(ROOT, kind, "README.md"), START, FINISH, table(kind), check)
+end.map { "docs/decisions/#{it}/README.md" }
+chantiers_readme = File.join(CHANTIERS, "README.md")
+stale << "docs/chantiers/README.md" unless refresh(chantiers_readme, CHANTIERS_START, CHANTIERS_FINISH, chantiers_table, check)
 
 exit unless check
 
 long = branches & (LONG_BRANCHES + [ "unknown branch" ])
 unnumbered = long.any? ? KINDS.keys.flat_map { pending(it) } : []
 problems = taken_twice
-problems += [ "stale index: #{stale.map { "docs/decisions/#{it}/README.md" }.join(', ')} (run script/docs/build_index)" ] if stale.any?
+problems += [ "stale index: #{stale.join(', ')} (run script/docs/build_index)" ] if stale.any?
 if unnumbered.any?
   problems += [ "pending decision on #{long.join(', ')}: #{unnumbered.map { relative(it) }.join(', ')} " \
                 "(run script/docs/build_index --number on the chantier branch)" ]

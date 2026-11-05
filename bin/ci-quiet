@@ -70,8 +70,9 @@ Step = Struct.new(:title, :env, :command, :inputs, :unit, :extra, :setup, keywor
 # loads every file (eager_load), which the coverage of the whole suite needs.
 plan_env = level == :train ? { "CI" => "true" } : {}
 # The audits ask a database of advisories that moves without the code: their verdict lasts one day. The decision index
-# reads the Markdown of docs/decisions, which the fingerprint leaves out.
-decisions = git("ls-tree", "-r", "HEAD", "docs/decisions").to_s
+# reads the Markdown of docs/decisions and docs/chantiers, which the fingerprint leaves out, and the numbers of
+# origin/Develop: a number Develop gives after a green run must replay the step.
+decisions = [ git("ls-tree", "-r", "HEAD", "docs/decisions", "docs/chantiers"), git("rev-parse", "--verify", "-q", "origin/Develop") ].join("\n")
 from_plan = ->(step) {
   extra = (Time.now.strftime("%F") if %i[gems yarn].include?(step.inputs)) || (decisions if step.command.include?("build_index"))
   Step.new(title: step.title, env: plan_env, command: [ step.command ], inputs: step.inputs, unit: step.inputs == :unit ? :all : nil, extra:)
