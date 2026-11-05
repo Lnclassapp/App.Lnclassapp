@@ -130,9 +130,10 @@ Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quan
 
 | Rôle | Modèle |
 |---|---|
-| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions | **Opus** |
+| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions qui ne sont pas de routine ; une session par vague ou par jour, état dans `etat.md` ([`orchestrateur.md`](orchestrateur.md)) | **Opus** |
 | Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
 | Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
+| Fusions de routine vers `Develop` (`fusionneur`) : conditions vérifiées une à une, aucune manquante ([`orchestrateur.md`](orchestrateur.md#3-qui-fait-quoi)) | **Sonnet** |
 | Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |
 | Recherche de code (`Explore`) : trouver un fichier, lire du code ou un journal | **Haiku** |
 | Tâches mécaniques hors lot (`chores`) : lancer une commande, lire un journal, renommer un fichier de doc ; jamais le code de `app/` | **Haiku** |
