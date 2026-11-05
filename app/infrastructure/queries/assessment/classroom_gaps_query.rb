@@ -39,6 +39,12 @@ module Queries
                    lifted: lifted.sort_by { [ it[5], it[0] ] }.reverse.map { lifted_row(it) })
       end
 
+      # Contrat gelé (suivi-classe-lecon, Lot 0), corps écrit au Lot A : le Detail de chaque notion de la leçon qui a au moins
+      # une ligne, en une requête. → { essential_slug => Detail }
+      def details_for_course(classroom_public_id:, course_slug:, school_year:)
+        {}
+      end
+
       private
 
       # Les élèves présents de la classe (ADR-0079) : adhésion non quittée, compte non anonymisé.

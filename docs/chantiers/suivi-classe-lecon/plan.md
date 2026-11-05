@@ -36,6 +36,13 @@ Vague 2 : Lots A ‖ B ‖ C ‖ D ‖ E ‖ F → 6 agents, worktrees isolés (
                     app/views/catalog/revision_sheets/_sheet.html.erb
                     app/views/catalog/courses/_revision_sheet.html.erb
                     app/views/catalog/courses/sheets/_teacher_bar.html.erb
+                    app/views/catalog/courses/sheets/_sheet.html.erb (passage des locaux can_assign, success)
+                    app/views/catalog/courses/sheets/_paper.html.erb (idem)
+                    app/views/catalog/courses/sheets/_exercise.html.erb (idem)
+                    app/views/catalog/prepare_sheets/_sheet.html.erb (idem)
+                    app/infrastructure/queries/assessment/classroom_gaps_query.rb (stub `details_for_course` → {}, corps écrit au Lot A)
+                    app/infrastructure/queries/assessment/class_exercise_success_query.rb (stub → {}, remplacé au Lot B)
+                    test/controllers/classroom/archived_classroom_reads_test.rb (la direction n'est plus refusée en 403 sur la leçon)
                     config/locales/classroom/classroom_courses.fr.yml
                     config/locales/classroom/classrooms.fr.yml
                     config/locales/classroom/student_classrooms.fr.yml

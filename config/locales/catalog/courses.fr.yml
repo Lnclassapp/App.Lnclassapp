@@ -120,6 +120,11 @@ fr:
       # _prepare_sheets, sheets/_sheet et _exercise. La note et la correction d'une copie sont celles de sa page de résultat (assessment.session_results).
       # « TOUTE LA LEÇON » : catalog.courses.show.lesson_wide_title (« Toute la leçon »), mis en capitales par .ps-title.
       sheets:
+        # UDR suivi-de-la-classe-sur-une-lecon §3.2 : la réussite de la classe sous un exercice (Lot B). Jamais de pourcentage seul.
+        success:
+          one: "%{passed} / %{count} élève a réussi"
+          other: "%{passed} / %{count} élèves ont réussi"
+          none: "Pas encore fait par la classe"
         interros_title: "PRÉPARE INTERROS"
         devoirs_title: "PRÉPARE DEVOIRS"
         # UDR-0149 §3 (ajout du 2026-10-31) : le titre d'une feuille est numéroté, mis en capitales par .ps-title ; le nom de la notion

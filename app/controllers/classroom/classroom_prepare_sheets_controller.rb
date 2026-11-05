@@ -4,14 +4,14 @@
 module Classroom
   class ClassroomPrepareSheetsController < AuthenticatedController
     # Comme la leçon dans la classe : l'élève lit ses devoirs sur ses propres pages.
-    allow_roles :teacher, :team
+    allow_roles :teacher, :team, :school_admin
 
     def show
       @classroom = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
       return render_not_found if @classroom.nil? || @classroom.status == "archived"
 
-      render_result Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @classroom),
-                    success: ->(_access) { load_course }
+      render_result Policies::Classroom::ReadClassroomLessonPolicy.new.call(actor: current_actor, classroom: @classroom),
+                    success: ->(access) { @can_assign = access.can_assign; load_course }
     end
 
     private
@@ -26,6 +26,10 @@ module Classroom
       @sheet = @prepare.sheet(params[:sheet])
       return redirect_to classroom_course_path(@classroom.public_id, params[:course_slug]), alert: t("catalog.courses.sheets.gone"), status: :see_other if @sheet.nil?
 
+      # Contrat gelé (suivi-classe-lecon, Lot 0) : { public_id de l'exercice => ClassSuccess }, une requête ; {} jusqu'au Lot B.
+      @success = Queries::Assessment::ClassExerciseSuccessQuery.new.call(
+        classroom_public_id: @classroom.public_id, exercise_ids: @sheet.exercises.map(&:public_id)
+      )
       render :show
     end
 

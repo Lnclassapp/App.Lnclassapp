@@ -149,4 +149,44 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
       assert_response :not_found
     end
   end
+  # suivi-classe-lecon, Lot 0 (ADR lecture-de-la-classe-par-la-direction, CA-13) : la direction lit, sans agir.
+  test "the school admin of the same school reads the lesson without any toggle" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+
+    assert_response :success
+    assert_select "h1", text: "Génétique et évolution"
+    no_toggle
+    assert_no_match(/Assigner/, response.body)
+  end
+
+  test "the school admin of the same school reads a sheet, without « Choisir » nor toggle" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    get sheet_href("notion-#{@meiose.slug}")
+
+    assert_response :success
+    no_toggle
+    assert_select "[data-batch-choice], .ps-btn--choose", 0
+  end
+
+  test "the school admin of another school receives 404" do
+    sign_in_as create_school_admin(school: create_school(name: "Autre lycée"))
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_response :not_found
+    get sheet_href("notion-#{@meiose.slug}")
+    assert_response :not_found
+  end
+
+  test "the school admin cannot assign" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    assert_no_difference -> { Orm::ClassroomAssignment.count } do
+      post classroom_assignments_path(@classroom.public_id), params: { assignable_type: "Exercise",
+                                       assignable_key: @ex_meiose.public_id }
+    end
+    assert_not response.successful?
+  end
 end

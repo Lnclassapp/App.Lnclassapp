@@ -1,7 +1,7 @@
 <%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions %>
 <%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; `mode: :reading` (sujet-avant-de-commencer) : le sujet à lire, un <fieldset disabled> autour des questions, ni statut, ni marque, ni barre de boutons, ni indice ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà vérifié : son statut, « Voir ma correction » (la page de résultat, note sur 20) et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
 <%# ADR  : 0121, 0120, 0091 §4.4 (aucune correction avant la vérification) · UDR : 0149 §3 · Stimulus : prepare-sheet, math %>
-<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet", sheet: nil) -%>
+<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet", sheet: nil, can_assign: true, success: nil) -%>
 <%# return_to : où la page de résultat ramène l'élève, "sheet" (l'exercice dans la leçon) ou "class" (« Ma classe ») ; jamais une adresse %>
 <%# sheet : l'ancre de la feuille (notion-<slug>, toute-la-lecon, sujet-<n>), postée avec la vérification et passée à la page de résultat, qui ramène à cette feuille %>
 <%# assignment_public_id : l'exercice est un devoir à rendre (« Ma classe ») ; exercise.copy y est la copie rendue, nil avant : ni statut ni correction avant le rendu %>
@@ -76,7 +76,7 @@
       <%= tag.button t("catalog.courses.sheets.redo"), type: :button, class: "ps-btn ps-btn--redo", hidden: !checked,
                       data: { ps: "done", action: "prepare-sheet#redo" } %>
     <% elsif mode == :teacher %>
-      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %>
+      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign:, success: success&.dig(exercise.public_id) %>
     <% end %>
   </div>
   <% end %>

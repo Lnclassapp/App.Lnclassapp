@@ -2,6 +2,9 @@
 <%# Rôle : `course`, `revision` (RevisionSheetQuery::Revision) ; le serveur marque la suite (`rest`), catalog--revision-more la masque ; sans JavaScript tout se lit, sans « Voir plus » %>
 <%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0137, 0139 §3.2, §3.3, §3.6 %>
 <% cut = revision.cut %>
+<%# suivi-classe-lecon (Lot 0) : class_gaps et proposals, passés tels quels à la fiche ; nil par défaut %>
+<% class_gaps = local_assigns[:class_gaps] %>
+<% proposals = local_assigns[:proposals] %>
 <%# Le contrôleur ne vit que s'il y a une coupe ; ses trois textes lui viennent des locales. %>
 <% more_data = if cut
                  { controller: "catalog--revision-more",
@@ -27,7 +30,7 @@
 <% when :sheet %>
   <% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
   <%= tag.div data: more_data do %>
-    <%= render "catalog/revision_sheets/sheet", sheet: revision.sheet, cut: %>
+    <%= render "catalog/revision_sheets/sheet", sheet: revision.sheet, cut:, class_gaps:, proposals: %>
     <%= controls %>
   <% end %>
 <% when :empty %>
