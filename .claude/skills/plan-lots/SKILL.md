@@ -132,10 +132,13 @@ git worktree add ../lnclass-<slug>-lot-a -b feature/<slug>-lot-a feature/<slug>
 
 Puis un agent par lot via l'outil `Agent`, **tous lancés dans le même message** pour qu'ils tournent réellement en parallèle (un `Agent` par appel, plusieurs appels dans le même bloc). Le brief de chaque agent contient : le chemin **absolu** de son worktree, son lot recopié en entier (les 4 champs), le lien vers `docs/chantiers/<slug>/prd.md` et vers l'UDR s'il touche une vue, et l'ordre d'exécution intra-lot (test rouge → domaine → infrastructure → delivery → UI).
 
-Deux avertissements à transmettre à chaque agent de lot :
+**Avant tout lancement, les décisions ouvertes.** Tout ce qu'aucun lot ne peut trancher seul (règle métier, droit d'accès, libellé, choix d'interface que l'UDR laisse ouvert) va dans la section `## Décisions ouvertes` de `plan.md`, une entrée `- [ ]` par décision, avec ses options et une recommandation. L'orchestrateur les pose au porteur **en un seul `AskUserQuestion`** avant de lancer le moindre agent, puis coche les réponses dans le plan. Un lot ne part jamais avec une décision qu'on savait ouverte (`docs/workflows/contrat-de-session.md` §2).
+
+Trois avertissements à transmettre à chaque agent de lot :
 
 - les chemins doivent être **absolus** : le répertoire courant est réinitialisé entre les appels shell, et l'agent n'est pas dans le worktree par défaut — qu'il utilise `git -C <worktree absolu>` ;
-- **interdiction de toucher un fichier qui n'est pas dans son champ `Fichiers`.** S'il en a besoin, il s'arrête et remonte : soit le fichier appartient au Lot 0, soit le plan est faux.
+- **interdiction de toucher un fichier qui n'est pas dans son champ `Fichiers`.** S'il en a besoin, il s'arrête et remonte : soit le fichier appartient au Lot 0, soit le plan est faux ;
+- **contrat de session** (`docs/workflows/contrat-de-session.md`) : pas de question en fin de lot. Une décision réversible est appliquée dans sa version prudente et notée dans `## À trancher` du journal du chantier ; une décision non réversible y est écrite avec options et recommandation, et seul ce point s'arrête. Une session qui ouvre une PR la surveille d'office.
 
 Merge dans la branche de chantier au fur et à mesure, **une seule PR par chantier** vers `Develop` (`docs/guide/conventions.md` §3 — `main` ne reçoit que `Staging`, sauf hotfix).
 
