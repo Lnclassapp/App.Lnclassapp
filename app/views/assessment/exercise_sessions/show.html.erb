@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/show — la copie de l'élève : le sujet, toutes les questions, « Vérifier ma copie » %>
 <%# Rôle : sujet repliable, compteur « n/T répondues », une carte par question (fieldset), bouton collé en bas, confirmation des questions vides ; 422 : résumé et message par question %>
-<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7, 0140, 0147-je-m-entraine-dans-la-fiche §3.8 · Stimulus : math, assessment--copy, modal %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : XXXX-sujets-cahier-noir-blanc (§3 : feuille noir et blanc, cartouche), 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7, 0140, 0147-je-m-entraine-dans-la-fiche §3.8 · Stimulus : math, assessment--copy, modal %>
 <%# Sans JavaScript : le formulaire part tel quel, sans confirmation ni brouillon ; les questions vides comptent fausses. %>
 <% play = @play %>
 <% posted = @posted || {} %>
@@ -14,13 +14,20 @@
 <% closed_hints = play.questions.select { it.hint? && hinted.exclude?(it.id) } %>
 <% page_title t(".page_title", title: play.exercise_title) %>
 <% content_for :nav_key, "courses" %>
+<% content_for :head do %><%= stylesheet_link_tag "exam_sheet" %><% end %>
+<% total_points = play.questions.sum(&:points) %>
+<div class="exam-sheet">
 <%= ui_back_link play.exercise_title, href: exercise_path(play.exercise_public_id) %>
-<div class="mx-auto w-full max-w-180"
+<div class="sheet-cahier mx-auto w-full max-w-180"
      data-controller="assessment--copy" data-assessment--copy-key-value="lnclass:copy:<%= play.session_public_id %>"
      data-assessment--copy-total-value="<%= counted %>"
      data-assessment--copy-counter-value="<%= t(".counter", answered: "%{answered}", total: "%{total}") %>"
      data-assessment--copy-missing-one-value="<%= t(".missing", count: 1) %>"
      data-assessment--copy-missing-other-value="<%= t(".missing", count: 2).sub("2", "%{count}") %>">
+  <%# UDR-XXXX-sujets-cahier-noir-blanc §3 : cartouche, titre à double trait, consigne ; ni durée, ni nombre de tentatives. %>
+  <header id="exam-header" class="exam-header"><span><%= t(".exam_kind") %></span><span class="exam-header-brand"><%= t(".exam_brand") %></span></header>
+  <h1 class="exam-title"><%= play.exercise_title %></h1>
+  <p id="exam-instructions" class="exam-instructions mb-4"><%= t(".questions", count: play.questions.size) %><%= t(".scale", count: total_points, points: number_with_precision(total_points, precision: 1, strip_insignificant_zeros: true)) if weighted %></p>
   <div class="sticky top-0 z-10 flex items-center justify-between gap-3 bg-paper py-3">
     <p id="copy-counter" class="text-sm font-medium text-ink tabular-nums" aria-live="polite" data-assessment--copy-target="counter"><%= t(".counter", answered: 0, total: counted) %></p>
     <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
@@ -137,4 +144,5 @@
       <%= hidden_field_tag :question_id, question.id, id: nil %>
     <% end %>
   <% end %>
+</div>
 </div>

@@ -14,6 +14,9 @@
   sur un champ rempli. Réponse fausse : .ps-verdict--wrong (italique).
 */
 
+/* Le papier cahier (variables --sheet-*, lignes Seyès, marge) est le gabarit commun de exam_sheet.css : .ps-sheet le reprend. */
+@import url("./exam_sheet.css");
+
 /* ---- Police hébergée par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ------------------- */
 
 @font-face {
@@ -71,9 +74,11 @@
   width: 100%;
   max-width: 880px;
   box-sizing: border-box;
-  background: #fff;
+  position: relative;
+  isolation: isolate;
+  background: var(--sheet-paper);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
-  padding: clamp(20px, 4vw, 44px) clamp(16px, 5vw, 52px) 48px;
+  padding: clamp(20px, 4vw, 44px) var(--sheet-pad-x) 48px calc(var(--sheet-margin-x) + var(--sheet-pad-x));
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -893,7 +898,7 @@
   }
 
   .ps-sheet {
-    padding: 16px 12px 32px;
+    padding: 16px 12px 32px calc(var(--sheet-margin-x) + 12px);
     box-shadow: none;
   }
 
