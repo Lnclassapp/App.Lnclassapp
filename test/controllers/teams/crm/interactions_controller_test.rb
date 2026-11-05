@@ -1,35 +1,12 @@
 require "test_helper"
 
 # CA-11, CA-12 (ADR-XXXX contexte crm, UDR-XXXX bloc « Suivi ») : le journal d'une école, servi dans le frame
-# school_crm_journal, 20 échanges par page, en ajout seul. Le dépôt de contacts est celui du Lot B : factice ici.
+# school_crm_journal, 20 échanges par page, en ajout seul.
 class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school
     @field = create_team_member(team_role: "field", first_name: "Awa", last_name: "Koné")
     sign_in_as @field
-    stub_contacts
-  end
-
-  teardown { unstub_contacts }
-
-  def stub_contacts
-    @original = Repositories::Crm::ContactRepository.instance_method(:active_for_school)
-    Repositories::Crm::ContactRepository.define_method(:active_for_school) { |school_id:| [] }
-  end
-
-  def unstub_contacts
-    Repositories::Crm::ContactRepository.define_method(:active_for_school, @original)
-  end
-
-  # Le dépôt de contacts est encore le squelette du Lot B : find_by_public_id est remplacé par une lecture de la base (restauré après).
-  def stub_find_contact(contact)
-    original = Repositories::Crm::ContactRepository.instance_method(:find_by_public_id)
-    entity = Entities::Crm::Contact.new(public_id: contact.public_id, school_id: contact.school_id, full_name: contact.full_name,
-                                        position: contact.position, phone: nil, note: nil, created_by_id: contact.created_by_id, archived_at: nil)
-    Repositories::Crm::ContactRepository.define_method(:find_by_public_id) { |public_id:| entity }
-    yield
-  ensure
-    Repositories::Crm::ContactRepository.define_method(:find_by_public_id, original)
   end
 
   def note!(count = 1, **overrides)
@@ -164,10 +141,8 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
   test "create with a chosen contact links the interaction to it" do
     contact = Orm::CrmContact.create!(school_id: @school.id, full_name: "Mme Kouassi", position: "director", created_by: @field)
 
-    stub_find_contact(contact) do
-      post teams_school_interactions_path(@school.public_id),
-           params: valid_params(contact_public_id: contact.public_id), as: :turbo_stream
-    end
+    post teams_school_interactions_path(@school.public_id),
+         params: valid_params(contact_public_id: contact.public_id), as: :turbo_stream
 
     created = Orm::CrmInteraction.last
     assert_equal [ contact.id, "Mme Kouassi" ], [ created.contact_id, created.contact_name ]

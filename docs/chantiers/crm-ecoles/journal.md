@@ -7,6 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-11-05 | Lot 0 : routes du suivi sous `namespace :teams` (`teams_school_*`, param `:school_public_id`), relances en `teams_follow_up_*`, port `GenerationRepositoryPort#mark_failed` (et non `fail`, qui masque `Kernel#fail`) | Les noms `school_*` existent déjà pour la fiche ; les UDR citent `teams_school_follow_up_path` et `teams_follow_ups_path` | Non (contrat gelé par le Lot 0) |
+| 2026-11-05 | Lot B : numéro facultatif (colonne nullable), normalisé par `Entities::Identity::Contact.normalize` (espaces, +225 acceptés) ; WhatsApp = `https://wa.me/225` + les 10 chiffres (le 0 reste, comme dans l'UDR) ; retrait d'un contact d'une autre école = 404 ; pas de test système (budget dépassé), tout prouvé au niveau contrôleur | Colonne nullable ; UDR §Contacts ; consigne de l'orchestrateur | Non |
 
 ## Ce qui a dérapé
 

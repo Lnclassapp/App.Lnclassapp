@@ -2,18 +2,13 @@ require "application_system_test_case"
 
 # CA-11 (ADR-XXXX contexte crm, UDR-XXXX bloc « Suivi ») : un membre `field` note un appel positif depuis la fiche d'un
 # établissement ; l'échange passe en tête du journal et la relance est créée ; au-delà de 20 échanges, un lien charge la suite.
-# Le dépôt de contacts est celui du Lot B : factice ici (à retirer à la fusion du Lot B).
 class Teams::CrmJournalTest < ApplicationSystemTestCase
   setup do
     @school = create_school
     @field = create_team_member(team_role: "field", first_name: "Awa", last_name: "Koné")
-    @original_contacts = Repositories::Crm::ContactRepository.instance_method(:active_for_school)
-    Repositories::Crm::ContactRepository.define_method(:active_for_school) { |school_id:| [] }
     sign_in_as @field
     assert_current_path team_home_path
   end
-
-  teardown { Repositories::Crm::ContactRepository.define_method(:active_for_school, @original_contacts) }
 
   test "CA-11: a positive call with a note and a follow-up in 3 days leads the journal; older ones load on demand" do
     25.times do |i|
