@@ -48,6 +48,13 @@ Lot 0 — SOCLE (séquentiel)
 
 ---
 
+## Décisions ouvertes
+
+> Ce qu'aucun lot ne peut trancher seul. Posé au porteur en un seul `AskUserQuestion` **avant** de lancer les lots, puis coché (`docs/workflows/contrat-de-session.md` §2).
+> Format : `- [ ] <question> — options : <A>, <B> ; recommandé : <A>`.
+
+- …
+
 ## Vérification de collision
 
 > À remplir avant de lancer les lots en parallèle. Deux lots ne listent jamais le même fichier.

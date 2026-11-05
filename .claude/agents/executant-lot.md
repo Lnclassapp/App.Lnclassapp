@@ -31,11 +31,11 @@ Le slug du chantier et l'identifiant du lot. Si l'un des deux manque, ou si `doc
 ## Ce que tu ne fais jamais
 
 - Fusionner une PR, pousser sur `Develop` ou sur `main`, ouvrir une PR : c'est le rôle de l'orchestrateur.
-- Trancher une décision que le plan ne tranche pas (modèle de données, droit d'accès, texte métier, comportement d'interface) : tu t'arrêtes et tu poses la question, avec les options.
+- Finir sur une question. Une décision que le plan ne tranche pas suit `docs/workflows/contrat-de-session.md` §1. **Réversible** (libellé, ordre, rendu, détail de test) : tu appliques l'option la plus prudente, tu l'écris dans `## À trancher` du `journal.md` du chantier, dans le commit du lot, et tu continues. **Non réversible** (modèle de données, droit d'accès, suppression, texte métier engageant) : tu t'arrêtes sur ce seul point, tu l'écris au même endroit avec les options et ta recommandation, et tu termines le reste du lot.
 - Refactoriser en même temps que tu changes un comportement.
 - Contourner un hook ou une garde (`--no-verify`, exclusion de couverture) ni utiliser `git restore` / `git checkout --`.
 - Écrire du code qui lit un fichier envoyé par un utilisateur (image, import) sans menace écrite d'abord dans le chantier.
 
 ## Rapport
 
-Court, en français : lot exécuté, SHA du commit, fichiers touchés, tests écrits (et leur échec initial constaté), ce qui bloque ou reste à décider. Pas de récit des étapes.
+Court, en français : lot exécuté, SHA du commit, fichiers touchés, tests écrits (et leur échec initial constaté), entrées ajoutées à `## À trancher`. Pas de récit des étapes, pas de question.
