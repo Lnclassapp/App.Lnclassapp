@@ -14,7 +14,7 @@ module Queries
         school = Orm::School.includes(:drena).find(follow_up.school_id)
         Entities::Crm::WhatsappDraftPrompt.new(
           school_id: school.id, follow_up_id: follow_up.id, follow_up_public_id: follow_up.public_id, school_name: school.name,
-          drena_name: school.drena.name, reason: follow_up.reason, due_on: follow_up.due_on, interactions: interactions(school.id)
+          drena_name: school.drena.name, reason: Entities::Crm::Redaction.call(follow_up.reason, names: contact_names(school.id)), due_on: follow_up.due_on, interactions: interactions(school.id)
         )
       end
 
@@ -23,10 +23,17 @@ module Queries
 
       private
 
+      # Contacts archivés compris : un nom retiré de la liste reste un nom de personne.
+      def contact_names(school_id) = Orm::CrmContact.where(school_id:).pluck(:full_name)
+
       def interactions(school_id)
+        names = contact_names(school_id)
         Orm::CrmInteraction.where(school_id:).order(occurred_at: :desc, id: :desc).limit(EXCHANGES)
                            .pluck(:occurred_at, :kind, :outcome, :next_step, :note)
-                           .map { |at, kind, outcome, next_step, note| { occurred_on: at.in_time_zone.to_date, kind:, outcome:, next_step:, note: } }
+                           .map do |at, kind, outcome, next_step, note|
+          { occurred_on: at.in_time_zone.to_date, kind:, outcome:,
+            next_step: Entities::Crm::Redaction.call(next_step, names:), note: Entities::Crm::Redaction.call(note, names:) }
+        end
       end
     end
   end

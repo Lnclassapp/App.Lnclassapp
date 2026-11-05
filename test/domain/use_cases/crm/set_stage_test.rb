@@ -14,6 +14,10 @@ module UseCases
         def save(account:) = Shared::Result.success(@saved = account)
       end
 
+      class ConflictAccounts < FakeAccounts
+        def save(account:) = Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
+      end
+
       class FakeAudit
         attr_reader :entries
 
@@ -33,6 +37,16 @@ module UseCases
       def use_case(account = nil)
         SetStage.new(accounts: (@accounts = FakeAccounts.new(account)), audit_log: (@audit = FakeAudit.new),
                      transaction: FakeTransaction.new, policy: Policies::Crm::ManageCrmPolicy.new, clock: Clock)
+      end
+
+      test "R2: a refused first write is returned as a conflict and nothing is audited" do
+        use_case = SetStage.new(accounts: ConflictAccounts.new, audit_log: (audit = FakeAudit.new),
+                              transaction: FakeTransaction.new, policy: Policies::Crm::ManageCrmPolicy.new, clock: Clock)
+
+        result = use_case.call(actor: actor, school_id: 31, stage: "demo_done", lost_reason: nil)
+
+        assert_equal :conflict, result.code
+        assert_empty audit.entries
       end
 
       test "CA-07: a first stage creates the account and is audited with from and to" do

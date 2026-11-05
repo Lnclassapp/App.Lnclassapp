@@ -17,7 +17,7 @@
                      choices: entity::OUTCOMES.map { [ t("teams.crm.common.outcomes.#{it}"), it ] } %>
   <%= ui_field form, :next_step, label: t(".next_step"), maxlength: entity::NEXT_STEP_MAX, autocomplete: "off" %>
   <%= ui_field form, :note, as: :textarea, label: t(".note"), rows: 4, maxlength: entity::NOTE_MAX,
-               hint: t(".note_hint", count: entity::NOTE_MAX) %>
+               hint: "#{t(".note_hint", count: entity::NOTE_MAX)} #{t(".note_pupil_hint")}" %>
   <div class="space-y-3 rounded-ln bg-mist p-4">
     <%= ui_field form, :create_follow_up, as: :checkbox, label: t(".create_follow_up") %>
     <%= ui_field form, :follow_up_due_on, as: :date, label: t(".follow_up_due_on") %>

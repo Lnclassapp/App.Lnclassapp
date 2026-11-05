@@ -50,10 +50,18 @@ module Teams
         @form = @stage_form = StageForm.new(params.fetch(:stage, {}).permit(:stage, :lost_reason))
         result = use_case.call(actor: current_actor, school_id: @school.id, stage: @form.stage, lost_reason: @form.lost_reason)
         @open = :stage
+        result = conflict_message(result)
         render_result result, form: "teams/crm/stages/show", success: ->(_) { respond_updated }
       end
 
       private
+
+      # Une première écriture simultanée perdue : le message dit quoi faire, dans la modale.
+      def conflict_message(result)
+        return result unless result.failure? && result.code == :conflict
+
+        Shared::Result.failure(:conflict, errors: { base: [ t("teams.crm.stages.conflict") ] })
+      end
 
       def load_school
         @school = Repositories::School::SchoolRepository.new.find_by_public_id(public_id: params[:school_public_id])

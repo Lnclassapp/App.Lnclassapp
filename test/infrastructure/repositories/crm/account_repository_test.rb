@@ -25,6 +25,17 @@ class Repositories::Crm::AccountRepositoryTest < ActiveSupport::TestCase
     assert_equal [ "subscribed", nil ], @repo.find_by_school_id(school_id: @school.id).then { [ it.stage, it.owner_id ] }
   end
 
+  test "R2: a concurrent first write (unique violation) is a conflict, not an exception" do
+    raising = ->(*, **) { raise ActiveRecord::RecordNotUnique, "crm_accounts_school_id_key" }
+
+    result = stub_any_instance(Orm::CrmAccount, :update!, raising) do
+      @repo.save(account: Entities::Crm::Account.blank(@school.id).with(owner_id: @owner.id))
+    end
+
+    assert result.failure?
+    assert_equal :conflict, result.code
+  end
+
   test "a first write without a stage date stamps now" do
     @repo.save(account: Entities::Crm::Account.blank(@school.id).with(owner_id: @owner.id))
 

@@ -149,7 +149,7 @@ Scénario: CA-19 exclusions
 
 Scénario: CA-20 carte de l'Accueil
   Étant donné trois écoles à relancer dont deux ont pour responsable le membre connecté
-  Alors la carte « À relancer » de son Accueil en compte 2 et mène à « Mes relances »
+  Alors la carte « À relancer » de son Accueil en compte 2 et mène à l'onglet « À relancer » de la page « Relances »
 
 # Pipeline
 Scénario: CA-21 filtrer la liste par étape et responsable

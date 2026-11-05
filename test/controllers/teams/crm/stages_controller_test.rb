@@ -162,4 +162,33 @@ class Teams::Crm::StagesControllerTest < ActionDispatch::IntegrationTest
     get teams_school_usage_path(@id), headers: { "Turbo-Frame" => "school_crm_usage" }
     assert_select "dd", text: "1"
   end
+
+  test "R2: a concurrent first write shows « Quelqu'un vient de modifier cette école » in the modal, for the stage and the owner" do
+    sign_in_as @field
+    conflict = ->(**) { Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] }) }
+    message = I18n.t("teams.crm.stages.conflict")
+
+    stub_any_instance(Repositories::Crm::AccountRepository, :save, conflict) do
+      patch teams_school_stage_path(@id), params: { stage: { stage: "demo_done" } }, headers: turbo
+      assert_response :unprocessable_entity
+      assert_select "turbo-frame#school_crm_stage dialog[open]"
+      assert_includes response.body, CGI.escapeHTML(message)
+
+      patch teams_school_owner_path(@id), params: { owner: { owner_public_id: @field.public_id } }, headers: turbo
+      assert_response :unprocessable_entity
+      assert_includes response.body, CGI.escapeHTML(message)
+    end
+    assert_nil account
+  end
+
+  test "M-2 CA-04: a « lost » school with a real exercise session 3 days ago is shown « Active »" do
+    Orm::CrmAccount.create!(school: @school, stage: "lost", lost_reason: "price", stage_changed_at: Time.current)
+    student = create_student(classroom: create_classroom(school: @school))
+    create_exercise_session(student:, started_at: 3.days.ago)
+    sign_in_as @field
+
+    get teams_school_stage_path(@id), headers: { "Turbo-Frame" => "school_crm_stage" }
+
+    assert_select "span", text: I18n.t("teams.crm.common.stages.active")
+  end
 end

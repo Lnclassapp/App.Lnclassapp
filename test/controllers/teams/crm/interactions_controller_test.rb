@@ -177,4 +177,51 @@ class Teams::Crm::InteractionsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_equal 0, Orm::CrmInteraction.count
   end
+
+  test "R2: an unreadable date is a 422 on occurred_at and writes nothing" do
+    assert_no_difference "Orm::CrmInteraction.count" do
+      post teams_school_interactions_path(@school.public_id), params: valid_params(occurred_at: "pas une date"), as: :turbo_stream
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal [id$=_error]"
+  end
+
+  test "R2: a follow-up the repository refuses cancels the whole exchange and announces nothing" do
+    stub_any_instance(Repositories::Crm::FollowUpRepository, :create, ->(**) { Shared::Result.failure(:not_found) }) do
+      assert_no_difference [ "Orm::CrmInteraction.count", "Orm::CrmFollowUp.count" ] do
+        post teams_school_interactions_path(@school.public_id), params: valid_params(create_follow_up: "1"), as: :turbo_stream
+      end
+    end
+
+    assert_not_equal 200, response.status
+    assert_not_includes response.body, 'target="school_crm_follow_ups"'
+  end
+
+  test "I-1: an archived contact is refused and no exchange is written" do
+    contact = Orm::CrmContact.create!(school_id: @school.id, full_name: "Mme Kouassi", position: "director", created_by: @field,
+                                      archived_at: Time.current)
+
+    assert_no_difference "Orm::CrmInteraction.count" do
+      post teams_school_interactions_path(@school.public_id), params: valid_params(contact_public_id: contact.public_id), as: :turbo_stream
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "I-1: a contact of another school is refused and no exchange is written" do
+    contact = Orm::CrmContact.create!(school_id: create_school.id, full_name: "Mme Autre", position: "director", created_by: @field)
+
+    assert_no_difference "Orm::CrmInteraction.count" do
+      post teams_school_interactions_path(@school.public_id), params: valid_params(contact_public_id: contact.public_id), as: :turbo_stream
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "R2: the note field warns not to write a student's name" do
+    get new_teams_school_interaction_path(@school.public_id), headers: frame_headers("modal")
+
+    assert_includes response.body, CGI.escapeHTML(I18n.t("teams.crm.interactions.form.note_pupil_hint"))
+  end
 end

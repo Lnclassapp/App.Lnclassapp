@@ -3,6 +3,12 @@
 <%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
 <% members = panel.members.partition { it.user_id == current_actor.user_id }.flatten %>
 <%= form_with model: owner_form, scope: :owner, url: teams_school_owner_path(@school.public_id), method: :patch, id: "crm-owner-form", class: "space-y-5" do |form| %>
+  <% if owner_form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= owner_form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
   <%= ui_field form, :owner_public_id, as: :select, label: t(".owner"),
                choices: members.map { [ (it.user_id == current_actor.user_id ? t(".me", name: it.name) : it.name), it.public_id ] } + [ [ t(".none"), "" ] ] %>
 <% end %>

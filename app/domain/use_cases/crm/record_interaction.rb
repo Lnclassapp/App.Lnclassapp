@@ -6,6 +6,20 @@ module UseCases
     class RecordInteraction
       # Tolérance d'horloge entre un téléphone et le serveur : un échange noté « maintenant » n'est jamais refusé.
       FUTURE_TOLERANCE = 5 * 60 # secondes
+      PAST_LIMIT = 366 * 24 * 60 * 60 # secondes : un échange noté ne remonte pas à plus d'un an
+
+      # Ce qui a été gardé : l'échange et, s'il était demandé, la relance créée avec lui.
+      Recorded = Data.define(:interaction, :follow_up)
+
+      # Lève dans la transaction pour l'annuler quand la relance promise échoue : pas d'échange sans elle.
+      Rollback = Class.new(StandardError) do
+        attr_reader :failure
+
+        def initialize(failure)
+          @failure = failure
+          super("relance non créée")
+        end
+      end
 
       def initialize(interactions:, follow_ups:, policy:, transaction:, clock:)
         @interactions = interactions
@@ -17,7 +31,7 @@ module UseCases
 
       # contact_public_id : le contact choisi, résolu par le dépôt (inconnu → :not_found, rien n'est écrit).
       # follow_up : nil, ou { due_on:, assignee_id:, reason: } (la relance proposée).
-      # → Result(Interaction) | :forbidden | :invalid (errors par champ) | :not_found (contact inconnu) | :conflict (écriture refusée, rien n'est gardé)
+      # → Result(Recorded) | :forbidden | :invalid (errors par champ) | :not_found (contact inconnu) | :conflict (écriture refusée, rien n'est gardé) ; l'échec du dépôt de la relance est rendu tel quel, l'échange annulé
       def call(actor:, school_id:, kind:, outcome:, occurred_at: nil, contact_public_id: nil, contact_name: nil, next_step: nil, note: nil,
                source: "manual", follow_up: nil)
         allowed = @policy.call(actor:)
@@ -49,7 +63,7 @@ module UseCases
         invalid << :next_step if interaction.next_step && interaction.next_step.length > entity::NEXT_STEP_MAX
         invalid << :note if interaction.note && interaction.note.length > entity::NOTE_MAX
         invalid << :contact_name if interaction.contact_name && interaction.contact_name.length > Entities::Crm::Contact::NAME_MAX
-        invalid << :occurred_at if interaction.occurred_at > now + FUTURE_TOLERANCE
+        invalid << :occurred_at if interaction.occurred_at > now + FUTURE_TOLERANCE || interaction.occurred_at < now - PAST_LIMIT
         invalid.to_h { [ it, [ :invalid ] ] }
       end
 
@@ -64,14 +78,24 @@ module UseCases
         errors
       end
 
-      # Une écriture refusée par la base annule les deux : pas d'échange sans la relance promise, ni l'inverse.
+      # Une écriture refusée par la base, ou une relance refusée par son dépôt, annule les deux : pas d'échange sans la relance promise.
       def persist(interaction, contact_public_id, follow_up, actor)
         written = @transaction.attempt do
           saved = @interactions.create(interaction:, contact_public_id:)
-          schedule(saved.value, follow_up, actor) if saved.success? && follow_up
-          saved
+          raise Rollback, saved if saved.failure?
+
+          Recorded.new(interaction: saved.value, follow_up: follow_up && scheduled(saved.value, follow_up, actor))
         end
-        written.success? ? written.value : written
+        written.success? ? Shared::Result.success(written.value) : written
+      rescue Rollback => e
+        e.failure
+      end
+
+      def scheduled(interaction, follow_up, actor)
+        created = schedule(interaction, follow_up, actor)
+        raise Rollback, created if created.failure?
+
+        created.value
       end
 
       def schedule(interaction, follow_up, actor)

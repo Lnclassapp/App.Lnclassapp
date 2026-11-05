@@ -15,17 +15,22 @@ module Repositories
       def save(account:)
         return ::Shared::Result.failure(:invalid, errors: { lost_reason: [ :blank ] }) if account.stage == "lost" && account.lost_reason.nil?
 
-        record = write(account)
-        ::Shared::Result.success(to_entity(record))
+        ::Shared::Result.success(to_entity(write(account)))
+      rescue ActiveRecord::RecordNotUnique
+        # Deux premières écritures simultanées : la perdante rend un conflit, la ligne gagnante reste.
+        ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
       end
 
       private
 
       def write(account)
-        record = Orm::CrmAccount.find_or_initialize_by(school_id: account.school_id)
-        record.update!(stage: account.stage, owner_id: account.owner_id, lost_reason: account.lost_reason,
-                       stage_changed_at: account.stage_changed_at || record.stage_changed_at || Time.current)
-        record
+        # Point de sauvegarde : un refus de la base n'abîme pas la transaction du use case.
+        Orm::CrmAccount.transaction(requires_new: true) do
+          record = Orm::CrmAccount.find_or_initialize_by(school_id: account.school_id)
+          record.update!(stage: account.stage, owner_id: account.owner_id, lost_reason: account.lost_reason,
+                         stage_changed_at: account.stage_changed_at || record.stage_changed_at || Time.current)
+          record
+        end
       end
 
       def to_entity(record)

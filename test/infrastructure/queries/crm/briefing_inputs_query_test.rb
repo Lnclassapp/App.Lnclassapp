@@ -13,6 +13,19 @@ module Queries
         Orm::CrmInteraction.create!(school: @school, author: @user, kind: "call", occurred_at: at, outcome: "positive", note:, next_step: "Devis")
       end
 
+      test "R2: a contact's full name (even archived) and a phone number in a note never reach the messages" do
+        Orm::CrmContact.create!(school: @school, full_name: "Mme Kouassi Ahou", position: "director", created_by: @user)
+        Orm::CrmContact.create!(school: @school, full_name: "Yao Archivé", position: "censor", created_by: @user, archived_at: Time.current)
+        interaction(note: "Kouassi Ahou joignable au 07 01 02 03 04, Yao Archivé aussi", at: 1.day.ago)
+
+        content = BriefingInputsQuery.new.call(public_id: @school.public_id).messages.map { it[:content] }.join("\n")
+
+        %w[Kouassi Ahou Yao Archivé].each { assert_not_includes content, it }
+        assert_not_includes content, "07 01 02 03 04"
+        assert_includes content, "[numéro]"
+        assert_includes content, "[contact]"
+      end
+
       test "an unknown school is nil, by public_id or id" do
         assert_nil BriefingInputsQuery.new.call(public_id: "unknown-public")
         assert_nil BriefingInputsQuery.new.call(school_id: 0)

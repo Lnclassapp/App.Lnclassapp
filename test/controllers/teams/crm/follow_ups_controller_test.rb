@@ -186,6 +186,37 @@ class Teams::Crm::FollowUpsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#follow-ups-panel-signals", text: /#{@admin.first_name}/
   end
 
+  test "M-1 CA-16: a school whose usage stopped 20 days ago shows « Perte d'usage » in the « À relancer » tab" do
+    Orm::CrmAccount.create!(school: @school, owner: @field, stage_changed_at: Time.current)
+    create_exercise_session(student: create_student(classroom: create_classroom(school: @school)), started_at: 20.days.ago)
+    sign_in_as @field
+
+    get teams_follow_ups_path
+
+    assert_select "#follow-ups-panel-signals", text: /#{Regexp.escape(I18n.t("teams.crm.signals.reasons.usage_lost"))}/
+  end
+
+  test "M-1 CA-17: a « Démo faite » school without exchange for 8 days shows « Démo sans suite »" do
+    Orm::CrmAccount.create!(school: @school, owner: @field, stage: "demo_done", stage_changed_at: Time.current)
+    Orm::CrmInteraction.create!(school: @school, author: @field, kind: "call", occurred_at: 8.days.ago, outcome: "neutral")
+    sign_in_as @field
+
+    get teams_follow_ups_path
+
+    assert_select "#follow-ups-panel-signals", text: /#{Regexp.escape(I18n.t("teams.crm.signals.reasons.demo_stalled"))}/
+  end
+
+  test "M-1 CA-18: a school attached 15 days ago with no activity shows « Inscrite sans démarrage »" do
+    Orm::CrmAccount.create!(school: @school, owner: @field, stage_changed_at: Time.current)
+    create_teacher(school: @school)
+    Orm::TeacherSchool.where(school: @school).update_all(created_at: 15.days.ago)
+    sign_in_as @field
+
+    get teams_follow_ups_path
+
+    assert_select "#follow-ups-panel-signals", text: /#{Regexp.escape(I18n.t("teams.crm.signals.reasons.registered_idle"))}/
+  end
+
   test "« À relancer » says when nothing is to follow up" do
     sign_in_as @field
 

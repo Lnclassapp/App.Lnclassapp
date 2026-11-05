@@ -43,15 +43,16 @@ module Teams
         @form = form_input
         contact = resolve_contact
         return render_unknown_contact if contact == :unknown
+        return render_unreadable_date if unreadable_time?(@form.occurred_at)
 
         result = record_interaction.call(actor: current_actor, school_id: @school.id, **interaction_values(contact))
-        render_result(result, form: :new, success: ->(_interaction) { respond_created })
+        render_result(result, form: :new, success: ->(recorded) { respond_created(recorded) })
       end
 
       private
 
-      def respond_created
-        @follow_up_created = @form.create_follow_up
+      def respond_created(recorded)
+        @follow_up_created = recorded.follow_up.present?
         load_journal(1)
         respond_to do |format|
           format.turbo_stream
@@ -97,20 +98,27 @@ module Teams
         render :new, status: :unprocessable_entity
       end
 
+      def render_unreadable_date
+        @form.errors.add(:occurred_at, t("teams.crm.interactions.create.unreadable_date"))
+        render :new, status: :unprocessable_entity
+      end
+
       def interaction_values(contact)
         { kind: @form.kind, outcome: @form.outcome, occurred_at: parse_time(@form.occurred_at), source: @form.source,
           contact_public_id: contact&.public_id, contact_name: contact&.full_name || @form.contact_name, next_step: @form.next_step, note: @form.note,
           follow_up: follow_up_values }
       end
 
-      # Un instant illisible reste illisible (le use case le refuse) : il ne devient pas « maintenant ».
+      # Blanc : le use case prend « maintenant ». Illisible : refusé avant le use case (jamais un 1er janvier 1970).
       def parse_time(text)
         return nil if text.blank?
 
-        Time.zone.parse(text) || Time.zone.at(0)
+        Time.zone.parse(text)
       rescue ArgumentError
-        Time.zone.at(0)
+        nil
       end
+
+      def unreadable_time?(text) = text.present? && parse_time(text).nil?
 
       def follow_up_values
         return nil unless @form.create_follow_up

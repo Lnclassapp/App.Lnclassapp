@@ -77,6 +77,7 @@ Délai : 5 s pour ouvrir la connexion, 30 s pour la réponse, aucune nouvelle te
 | Durée annoncée mensongère | Le serveur ne décode jamais l'audio ; la taille plafonne la durée réelle |
 | Analyseur audio vulnérable côté serveur | Aucun : l'audio n'est ni décodé, ni transcodé, ni analysé par l'application ; il est transmis tel quel au fournisseur |
 | Fichier conservé et réexposé | Stocké privé, jamais servi par URL ; purgé dès la fin du job, en succès comme en échec |
+| Données personnelles dans les notes envoyées au modèle | Les champs libres (`note`, `next_step`, `reason`) partent masqués par `Entities::Crm::Redaction` : numéros ivoiriens (« [numéro] ») et noms des contacts de l'école, archivés compris (« [contact] »). Les noms d'élèves ne peuvent pas être filtrés : le formulaire d'échange demande de ne pas les écrire |
 | Accès d'un autre rôle | Route et use case derrière `ManageCrmPolicy` |
 | Réponse du modèle qui injecte du HTML ou des instructions | Sortie toujours affichée comme texte échappé ; JSON du compte rendu validé par un schéma fermé (types et longueurs du formulaire) ; aucun outil n'est donné au modèle, il ne peut rien déclencher |
 
