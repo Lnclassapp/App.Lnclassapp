@@ -7,12 +7,14 @@
 # Sur Demo (DemoEnvironment) : ENV["DEMO_TEAM_PIN"] seule, sinon aucun compte équipe utilisable (un administrateur inerte publie les leçons).
 # Sur Develop (Lot I) : établissements, classes et comptes seulement, rien supprimé ni modifié ; les leçons restent à contenus:charger ;
 # comptes équipe seulement avec ENV["STANDARD_TEAM_PIN"] (scellée), créés sans second facteur.
+# Sur Staging (chantier comptes-de-test-staging, ADR-0124 §9) : même chose que Develop, les leçons restant au chargement de Staging (:create_only).
 # Partout, un contact du jeu déjà pris par un autre compte (autre rôle ou autre nom) n'est jamais modifié ni rattaché : il est signalé.
 # ENV["STANDARD_LESSONS_LIMIT"] ne charge que les N premières leçons (boucles courtes, tests) ; ENV["STANDARD_MANIFEST"] change de manifeste.
-develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).whole_lessons? &&
-          !DemoEnvironment.active?
+load_stage = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?)
+# « develop » : Develop ou Staging, les stades ouverts où le jeu s'ajoute sans leçons (Develop et Staging chargent les leurs eux-mêmes).
+develop = (load_stage.whole_lessons? || load_stage.create_missing?) && !DemoEnvironment.active?
 unless Rails.env.local? || PrEnvironment.active? || DemoEnvironment.active? || develop
-  raise "db/seeds/standard.rb est réservé au développement, au test, aux environnements de PR, à Demo et à Develop"
+  raise "db/seeds/standard.rb est réservé au développement, au test, aux environnements de PR, à Demo, à Develop et à Staging"
 end
 
 standard_dir = Rails.root.join("db/seeds/standard")
@@ -252,7 +254,7 @@ published = courses.count do |course|
 
   true
 end
-log.call(develop ? "leçons du manifeste : laissées à contenus:charger" : "#{courses.size} leçons du manifeste, #{published} publiées maintenant")
+log.call(develop ? "leçons du manifeste : laissées #{load_stage.create_missing? ? 'au chargement de Staging' : 'à contenus:charger'}" : "#{courses.size} leçons du manifeste, #{published} publiées maintenant")
 
 # 9. Les comptes par rôle (contact, rôle, établissement) ; le premier élève de chaque classe est son compte de test.
 if ENV["STANDARD_QUIET"].blank?
