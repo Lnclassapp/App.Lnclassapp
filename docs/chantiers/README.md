@@ -225,8 +225,10 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |
 | [`suites-inscription-direction`](suites-inscription-direction/memo.md) | livré | bugfix | 2026-10-04 | Suites de l'inscription de la direction |
+| [`suivi-classe-lecon`](suivi-classe-lecon/memo.md) | planifié | feature | 2026-11-05 | Suivi de la classe sur une leçon : lacunes, réussite par exercice, remédiation |
 | [`sujet-avant-de-commencer`](sujet-avant-de-commencer/memo.md) | livré | feature | 2026-10-31 | Chaque feuille dans une case, lue avant de commencer |
 | [`sujet-comme-une-epreuve`](sujet-comme-une-epreuve/memo.md) | livré | feature | 2026-11-04 | Le sujet se lit comme une vraie épreuve |
+| [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | planifié | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré | feature | 2026-10-31 | Sujets de devoir Thalès, titres numérotés des feuilles, correction en bloc |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |
