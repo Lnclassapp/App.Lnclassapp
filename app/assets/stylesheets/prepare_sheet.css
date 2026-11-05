@@ -910,9 +910,10 @@
     padding: 10px 8px;
   }
 
+  /* Aligné sur le texte de la feuille, qui commence après la marge Seyès (UDR-XXXX-sujets-cahier-noir-blanc). */
   .ps-page .ps-start {
     align-self: stretch;
     width: auto;
-    margin-inline: 12px;
+    margin-inline: calc(var(--sheet-margin-x) + 12px) 12px;
   }
 }
