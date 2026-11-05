@@ -10,7 +10,8 @@ module Teams
         "briefing" => { retry: :teams_school_briefing_path, ready: "teams/crm/briefings/briefing" },
         # « Réessayer » du brouillon WhatsApp porte l'identifiant public de la relance, pas celui de l'école.
         "whatsapp_draft" => { retry: :teams_follow_up_whatsapp_draft_path, retry_for: :follow_up, ready: "teams/crm/whatsapp_drafts/draft" },
-        "pedagogy_report" => { retry: :teams_school_pedagogy_reports_path, ready: "teams/crm/pedagogy_reports/synthesis" }
+        "pedagogy_report" => { retry: :teams_school_pedagogy_reports_path, ready: "teams/crm/pedagogy_reports/synthesis" },
+        "dictation" => { retry: :teams_school_dictation_path, ready: "teams/crm/dictations/ready" }
       }.freeze
 
       def show

@@ -76,13 +76,16 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "a failed generation of a kind whose route is not served yet offers no retry" do
-    generation = pending(kind: "dictation")
-    @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
+    # Chaque lot d'assistant (briefing, dictée, brouillon, rapport) ajoute sa ligne : on prend les types qui n'en ont pas encore.
+    (Entities::Crm::Generation::KINDS - Teams::Crm::GenerationsController::ASSISTANTS.keys).each do |kind|
+      generation = pending(kind:)
+      @repository.mark_failed(public_id: generation.public_id, error_code: "timeout", duration_ms: 10)
 
-    show generation
+      show generation
 
-    assert_select "[role=alert]"
-    assert_select "[role=alert] a", count: 0
+      assert_select "[role=alert]"
+      assert_select "[role=alert] a", count: 0
+    end
   end
 
   test "a failed whatsapp draft that is linked to no follow-up offers no retry" do

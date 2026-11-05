@@ -302,6 +302,19 @@ Consignes à chaque agent : chemins **absolus** (`git -C <worktree>`) ; **interd
 - **Test associé** : `test/domain/use_cases/crm/submit_dictation_test.rb` (CA-26) · `test/domain/entities/crm/dictation_draft_test.rb` (CA-27) · `test/jobs/crm/dictation_job_test.rb` (CA-25 : audio purgé) · `test/controllers/teams/crm/dictations_controller_test.rb` · `test/system/teams/crm_dictation_test.rb`
 - **Done quand**   : avec le faux modèle, un enregistrement de 40 s ouvre « Noter un échange » pré-rempli ; rien n'est enregistré avant validation ; l'audio a disparu du stockage ; 12 Mo ou `audio/wav` sont refusés ; le vrai modèle audio d'OpenRouter est vérifié une fois à la main (sinon : repli transcription, noté au journal)
 
+### Menace — téléversement audio (Lot K)
+
+- **Ce qui entre** : un fichier `audio` envoyé en `multipart` par un membre `admin` ou `field` (ManageCrmPolicy ; `content` reçoit 403). Rien d'autre n'est lu de la requête : ni durée, ni nom, ni extension, ni `content_type` annoncé par le navigateur, qui ne servent jamais à décider.
+- **Taille** : 10 Mo au plus. Le `Content-Length` est refusé (422) avant l'analyse du corps ; la taille réelle du fichier reçu est revérifiée dans le use case. Un fichier vide est refusé. Test : contrôleur (12 Mo) + `submit_dictation_test` (taille réelle).
+- **Type réel** : détecté par les octets magiques (Marcel, sans nom ni type annoncé). Liste blanche : webm/matroska (`MediaRecorder` Chrome, Firefox), ogg, mp4/m4a (Safari). `audio/wav` (RIFF), texte, image, HTML : refusés (CA-26) ; des octets webm annoncés `audio/wav` passent, des octets wav annoncés `audio/webm` sont refusés. Test : `submit_dictation_test` et contrôleur.
+- **Durée** : annoncée par le navigateur (3 min), jamais crue ni décodée par le serveur : la taille plafonne la durée réelle. Aucun analyseur audio côté serveur : l'audio n'est ni décodé, ni transcodé, ni lu ; la pièce est créée « déjà analysée » pour qu'Active Storage ne lance pas ffprobe dessus (test : `dictation_job_test`, `blob.analyzed?`).
+- **Ordre** : tous les refus ont lieu avant tout appel au modèle et avant tout stockage durable (aucune génération n'est créée, aucune pièce attachée). Test : le faux modèle n'est pas appelé, `Orm::CrmGeneration` et `ActiveStorage::Blob` ne bougent pas.
+- **Stockage** : pièce jointe privée de `Orm::CrmGeneration#audio` (service Active Storage privé, jamais servi par une URL), pendant la durée du job seulement. Purgée dans un `ensure` du job, en succès comme en échec (CA-25). Test : `dictation_job_test` (succès, échec du modèle, exception).
+- **Chez OpenRouter** : l'audio en base64 et une consigne fixe, rien d'autre (ni nom d'élève, ni numéro, ni historique de l'école). Aucun outil n'est donné au modèle.
+- **À l'écran** : la réponse est validée par un schéma fermé (clés connues, listes de valeurs, longueurs du formulaire) ; sinon repli sur la transcription brute dans la note (CA-27). Elle pré-remplit un formulaire que l'humain valide : rien n'est enregistré avant. Elle est toujours affichée échappée par ERB (jamais `html_safe`). Test : `dictation_draft_test`, contrôleur avec `<script>` dans la réponse.
+- **Une dictée à la fois par école** (index unique partiel) : une seconde envoyée pendant l'attente reçoit 409, et son audio n'est jamais stocké.
+- **Résiduel accepté** : Rack écrit le corps multipart dans un fichier temporaire avant le contrôle de taille réelle (le contrôle de `Content-Length` en amont borne le cas courant) ; un fichier webm/matroska qui n'est pas de l'audio passe le contrôle des octets et est refusé par le fournisseur (échec `provider_error`, audio purgé).
+
 ---
 
 ## Rattachement des critères d'acceptation
