@@ -183,6 +183,39 @@
             ]
           },
           "controls": []
+        },
+        {
+          "key": "peson-ressort",
+          "kind": "plate",
+          "description": "Planche d'un dynamomètre à ressort vertical : on repère l'anneau, le tube, le ressort, la graduation en newtons, l'index, le crochet et le corps suspendu. Quand le corps est immobile, l'index indique la tension du ressort, égale au poids du corps.",
+          "params": {
+            "plate": "dynamometer",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "ring"
+              },
+              {
+                "part": "spring"
+              },
+              {
+                "part": "scale"
+              },
+              {
+                "part": "pointer"
+              },
+              {
+                "part": "hook"
+              },
+              {
+                "part": "load"
+              }
+            ],
+            "highlight": [
+              "pointer"
+            ]
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -208,120 +241,231 @@
           },
           "pitfall": "Ne crois pas que deux forces de même intensité suffisent. Contre-exemple : deux forces de 5 N qui tirent toutes les deux vers la droite ont la même intensité, mais pas des sens contraires : elles s'ajoutent (10 N) et le solide se met en mouvement. Et deux forces de 5 N de sens contraires, mais portées par deux droites parallèles différentes, font tourner le solide. Avant de conclure, vérifie toujours les trois conditions, l'une après l'autre.",
           "figure": "deux-forces-opposees",
-          "exercise": {
-            "title": "Reconnaître l'équilibre de deux forces",
-            "statement": "Dans cet exercice, tu décides si un solide soumis à deux forces est en équilibre, avec la méthode de la fiche : repérer, comparer les droites d'action, les sens et les intensités, puis conclure.",
-            "exercise_type": "fixation",
-            "figure": "forces-inegales",
-            "questions": [
-              {
-                "content": "Quelles sont les trois conditions pour qu'un solide soumis à deux forces soit en équilibre ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 2 — Comparer les droites d'action : les deux forces doivent être portées par la même droite. Étape 3 — Comparer les sens : ils doivent être contraires. Étape 4 — Comparer les intensités : elles doivent être égales, $F_1 = F_2$. Seule la première proposition réunit les trois conditions. Avec le même sens, les deux forces s'ajoutent et mettent le solide en mouvement. Avec des intensités différentes, la plus grande l'emporte. Avec des droites d'action différentes, les forces font tourner le solide.",
-                "answers": [
-                  {
-                    "content": "Même droite d'action, sens contraires, même intensité",
-                    "correct": true
-                  },
-                  {
-                    "content": "Même droite d'action, même sens, même intensité",
-                    "correct": false
-                  },
-                  {
-                    "content": "Même droite d'action, sens contraires, intensités quelconques",
-                    "correct": false
-                  },
-                  {
-                    "content": "Droites d'action différentes, sens contraires, même intensité",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un solide est soumis à deux forces de 8 N chacune, portées par la même droite et dirigées dans le même sens. Il est en équilibre.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : $F_1 = F_2 = 8$ N, même droite d'action, même sens. Étape 2 — Droites d'action : elles sont confondues, condition vérifiée. Étape 3 — Sens : ils sont identiques alors qu'il faut des sens contraires, condition non vérifiée. Étape 4 — Intensités : elles sont égales, condition vérifiée. Étape 5 — Conclure : une condition manque, donc le solide n'est pas en équilibre. L'erreur tentante est de croire que deux intensités égales suffisent : ici les deux forces s'ajoutent et valent 16 N dans le même sens.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour savoir si un solide soumis à deux forces est en équilibre.",
-                "question_type": "ordering",
-                "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Repérer les deux forces et leurs caractéristiques. Étape 2 — Comparer les droites d'action. Étape 3 — Comparer les sens. Étape 4 — Comparer les intensités. Étape 5 — Conclure. On ne peut conclure qu'à la fin, car il faut avoir vérifié les trois conditions avant de décider.",
-                "answers": [
-                  {
-                    "content": "Repérer les deux forces et lire leurs caractéristiques."
-                  },
-                  {
-                    "content": "Comparer les droites d'action."
-                  },
-                  {
-                    "content": "Comparer les sens."
-                  },
-                  {
-                    "content": "Comparer les intensités."
-                  },
-                  {
-                    "content": "Conclure sur l'équilibre du solide."
-                  }
-                ]
-              },
-              {
-                "content": "Un solide est soumis à deux forces. Choisis les deux cas où il est en équilibre.",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer chaque cas. Étape 2 — Droites d'action : elles sont confondues dans les quatre cas. Étape 3 — Sens : contraires dans les cas 1, 2 et 3 ; identiques dans le cas 4, donc le cas 4 est exclu. Étape 4 — Intensités : égales dans les cas 1 (6 N et 6 N) et 3 (10 N et 10 N) ; différentes dans le cas 2 (6 N et 4 N), donc le cas 2 est exclu. Étape 5 — Conclure : seuls les cas 1 et 3 sont en équilibre.",
-                "answers": [
-                  {
-                    "content": "F1 = 6 N vers la droite et F2 = 6 N vers la gauche, sur la même droite horizontale",
-                    "correct": true
-                  },
-                  {
-                    "content": "F1 = 6 N vers la droite et F2 = 4 N vers la gauche, sur la même droite horizontale",
-                    "correct": false
-                  },
-                  {
-                    "content": "F1 = 10 N vers le haut et F2 = 10 N vers le bas, sur la même droite verticale",
-                    "correct": true
-                  },
-                  {
-                    "content": "F1 = 5 N vers le haut et F2 = 5 N vers le haut, sur la même droite verticale",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un solide est soumis à deux forces portées par la même droite horizontale : F1 de 4 N vers la droite et F2 de 2 N vers la gauche. Que peut-on dire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $F_1 = 4$ N vers la droite, $F_2 = 2$ N vers la gauche, même droite horizontale. Étape 2 — Droites d'action : confondues, condition vérifiée. Étape 3 — Sens : contraires, condition vérifiée. Étape 4 — Intensités : $4 \\neq 2$, condition non vérifiée. Étape 5 — Conclure : une condition manque, le solide n'est pas en équilibre ; la force de 4 N l'emporte et le solide part vers la droite. C'est le piège de la fiche : deux conditions sur trois ne suffisent pas.",
-                "answers": [
-                  {
-                    "content": "Il n'est pas en équilibre, car les intensités sont différentes (4 N et 2 N)",
-                    "correct": true
-                  },
-                  {
-                    "content": "Il est en équilibre, car les sens sont contraires",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il est en équilibre, car les droites d'action sont confondues",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il n'est pas en équilibre, car les sens sont les mêmes",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître l'équilibre de deux forces",
+              "statement": "Dans cet exercice, tu décides si un solide soumis à deux forces est en équilibre, avec la méthode de la fiche : repérer, comparer les droites d'action, les sens et les intensités, puis conclure.",
+              "exercise_type": "fixation",
+              "figure": "forces-inegales",
+              "questions": [
+                {
+                  "content": "Quelles sont les trois conditions pour qu'un solide soumis à deux forces soit en équilibre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Comparer les droites d'action : les deux forces doivent être portées par la même droite. Étape 3 — Comparer les sens : ils doivent être contraires. Étape 4 — Comparer les intensités : elles doivent être égales, $F_1 = F_2$. Seule la première proposition réunit les trois conditions. Avec le même sens, les deux forces s'ajoutent et mettent le solide en mouvement. Avec des intensités différentes, la plus grande l'emporte. Avec des droites d'action différentes, les forces font tourner le solide.",
+                  "answers": [
+                    {
+                      "content": "Même droite d'action, sens contraires, même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Même droite d'action, même sens, même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Même droite d'action, sens contraires, intensités quelconques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Droites d'action différentes, sens contraires, même intensité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces de 8 N chacune, portées par la même droite et dirigées dans le même sens. Il est en équilibre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $F_1 = F_2 = 8$ N, même droite d'action, même sens. Étape 2 — Droites d'action : elles sont confondues, condition vérifiée. Étape 3 — Sens : ils sont identiques alors qu'il faut des sens contraires, condition non vérifiée. Étape 4 — Intensités : elles sont égales, condition vérifiée. Étape 5 — Conclure : une condition manque, donc le solide n'est pas en équilibre. L'erreur tentante est de croire que deux intensités égales suffisent : ici les deux forces s'ajoutent et valent 16 N dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si un solide soumis à deux forces est en équilibre.",
+                  "question_type": "ordering",
+                  "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Repérer les deux forces et leurs caractéristiques. Étape 2 — Comparer les droites d'action. Étape 3 — Comparer les sens. Étape 4 — Comparer les intensités. Étape 5 — Conclure. On ne peut conclure qu'à la fin, car il faut avoir vérifié les trois conditions avant de décider.",
+                  "answers": [
+                    {
+                      "content": "Repérer les deux forces et lire leurs caractéristiques."
+                    },
+                    {
+                      "content": "Comparer les droites d'action."
+                    },
+                    {
+                      "content": "Comparer les sens."
+                    },
+                    {
+                      "content": "Comparer les intensités."
+                    },
+                    {
+                      "content": "Conclure sur l'équilibre du solide."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces. Choisis les deux cas où il est en équilibre.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer chaque cas. Étape 2 — Droites d'action : elles sont confondues dans les quatre cas. Étape 3 — Sens : contraires dans les cas 1, 2 et 3 ; identiques dans le cas 4, donc le cas 4 est exclu. Étape 4 — Intensités : égales dans les cas 1 (6 N et 6 N) et 3 (10 N et 10 N) ; différentes dans le cas 2 (6 N et 4 N), donc le cas 2 est exclu. Étape 5 — Conclure : seuls les cas 1 et 3 sont en équilibre.",
+                  "answers": [
+                    {
+                      "content": "F1 = 6 N vers la droite et F2 = 6 N vers la gauche, sur la même droite horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "F1 = 6 N vers la droite et F2 = 4 N vers la gauche, sur la même droite horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "F1 = 10 N vers le haut et F2 = 10 N vers le bas, sur la même droite verticale",
+                      "correct": true
+                    },
+                    {
+                      "content": "F1 = 5 N vers le haut et F2 = 5 N vers le haut, sur la même droite verticale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces portées par la même droite horizontale : F1 de 4 N vers la droite et F2 de 2 N vers la gauche. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $F_1 = 4$ N vers la droite, $F_2 = 2$ N vers la gauche, même droite horizontale. Étape 2 — Droites d'action : confondues, condition vérifiée. Étape 3 — Sens : contraires, condition vérifiée. Étape 4 — Intensités : $4 \\neq 2$, condition non vérifiée. Étape 5 — Conclure : une condition manque, le solide n'est pas en équilibre ; la force de 4 N l'emporte et le solide part vers la droite. C'est le piège de la fiche : deux conditions sur trois ne suffisent pas.",
+                  "answers": [
+                    {
+                      "content": "Il n'est pas en équilibre, car les intensités sont différentes (4 N et 2 N)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est en équilibre, car les sens sont contraires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est en équilibre, car les droites d'action sont confondues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est pas en équilibre, car les sens sont les mêmes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Vérifier les trois conditions d'équilibre dans des situations de la vie courante",
+              "statement": "Dans cet exercice, tu décides si un solide soumis à deux forces est en équilibre, avec la méthode de la fiche : repérer les forces, comparer les droites d'action, les sens et les intensités, puis conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Vérifie les trois conditions l'une après l'autre : la droite d'action, le sens, l'intensité. Une seule qui manque suffit pour que le solide ne soit pas en équilibre.",
+              "questions": [
+                {
+                  "content": "Un cageot est tiré par deux cordes portées par la même droite horizontale : l'une exerce 25 N vers la droite, l'autre 25 N vers la gauche. Que peut-on dire du cageot ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : F1 = 25 N vers la droite, F2 = 25 N vers la gauche, toutes deux sur la même droite horizontale. Étape 2 — Comparer les droites d'action : c'est la même droite, condition vérifiée. Étape 3 — Comparer les sens : droite et gauche sont contraires, condition vérifiée. Étape 4 — Comparer les intensités : 25 N = 25 N, condition vérifiée. Étape 5 — Conclure : les trois conditions sont vérifiées, donc le cageot est en équilibre. Dire qu'il n'est pas en équilibre parce que les intensités sont égales est faux : l'égalité des intensités est justement l'une des trois conditions. Dire qu'il n'est pas en équilibre parce que les sens sont contraires est faux aussi : des sens contraires sont requis. Exiger le même sens est l'erreur du piège : deux forces de même sens s'ajoutent et mettent le solide en mouvement.",
+                  "answers": [
+                    {
+                      "content": "Il n'est pas en équilibre, car les deux forces ont la même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est en équilibre, car les trois conditions sont vérifiées",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'est pas en équilibre, car les deux forces sont de sens contraires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est en équilibre seulement si les deux forces ont le même sens",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces de 9 N chacune, de sens contraires, mais portées par deux droites parallèles distinctes. Il est en équilibre.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : deux forces de 9 N, de sens contraires, sur deux droites parallèles distinctes. Étape 2 — Comparer les droites d'action : ce sont deux droites différentes, la condition n'est pas vérifiée. Étape 3 — Comparer les sens : contraires, vérifiée. Étape 4 — Comparer les intensités : 9 N = 9 N, vérifiée. Étape 5 — Conclure : une condition manque, donc le solide n'est pas en équilibre ; il se met à tourner. Répondre « Vrai » revient à croire que l'égalité des intensités et des sens contraires suffisent, alors qu'il faut aussi la même droite d'action.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide soumis à deux forces est en équilibre si elles ont la même droite d'action, des sens contraires et la même ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche la troisième caractéristique d'une force après la droite d'action et le sens. Étape 2 — Comparer les droites d'action : première condition, la même droite. Étape 3 — Comparer les sens : deuxième condition, des sens contraires. Étape 4 — Comparer les intensités : troisième condition, la même intensité, c'est-à-dire la même valeur en newtons. Étape 5 — Conclure : les trois conditions ensemble donnent l'équilibre. Écrire « masse » serait une erreur : la masse est en kilogrammes et n'est pas une caractéristique d'une force.",
+                  "answers": [
+                    {
+                      "content": "intensité",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces portées par une même droite verticale. Choisis les deux cas où il est en équilibre.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : dans chaque cas, les deux forces sont sur la même droite verticale. Étape 2 — Comparer les droites d'action : confondues dans les quatre cas. Étape 3 — Comparer les sens : contraires pour 14 N haut / 14 N bas, pour 20 N bas / 20 N haut et pour 14 N haut / 7 N bas ; identiques pour 3 N bas / 3 N bas. Étape 4 — Comparer les intensités : égales pour 14 / 14 et 20 / 20, différentes pour 14 / 7. Étape 5 — Conclure : seuls 14 N haut / 14 N bas et 20 N bas / 20 N haut vérifient les trois conditions. Le cas 14 N et 7 N a des intensités différentes : le solide est entraîné vers le haut. Le cas 3 N et 3 N a le même sens : les forces s'ajoutent (6 N vers le bas).",
+                  "answers": [
+                    {
+                      "content": "F1 = 14 N vers le haut et F2 = 7 N vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "F1 = 3 N vers le bas et F2 = 3 N vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "F1 = 14 N vers le haut et F2 = 14 N vers le bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "F1 = 20 N vers le bas et F2 = 20 N vers le haut",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces de 10 N chacune, portées par la même droite et dirigées dans le même sens. Le solide ___ en équilibre.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : deux forces de 10 N, sur la même droite, dans le même sens. Étape 2 — Comparer les droites d'action : confondues, vérifiée. Étape 3 — Comparer les sens : identiques, donc non contraires : la condition manque. Étape 4 — Comparer les intensités : 10 N = 10 N, vérifiée. Étape 5 — Conclure : une condition manque, le solide n'est pas en équilibre. Les deux forces s'ajoutent (20 N) et le solide se met en mouvement ; choisir « est » serait croire que deux forces de même intensité suffisent.",
+                  "answers": [
+                    {
+                      "content": "est",
+                      "correct": false
+                    },
+                    {
+                      "content": "n'est pas",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est en équilibre sous l'action de deux forces portées par une droite horizontale. La force F1 vaut 35 N vers la droite. Quelle est l'intensité de la force F2, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : F1 = 35 N vers la droite, F2 inconnue, le solide est en équilibre. Étape 2 — Comparer les droites d'action : F2 est sur la même droite horizontale. Étape 3 — Comparer les sens : F2 est dirigée vers la gauche. Étape 4 — Comparer les intensités : à l'équilibre, F2 = F1 = 35 N. Étape 5 — Conclure : F2 vaut 35 N, vers la gauche. La réponse 70 N additionne les deux forces ; la réponse 0 N confond équilibre et absence de force : les deux forces existent, c'est leur somme vectorielle qui est nulle.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un sac est tiré par deux cordes portées par la même droite horizontale. Tu décides s'il est en équilibre.",
             "questions": [
@@ -409,97 +553,212 @@
           },
           "pitfall": "Ne confonds pas la masse et le poids, et n'oublie pas l'unité. Contre-exemple : une lampe de 2 kg suspendue à un fil a une tension $T = 20$ N, pas 2 N. Écrire $T = 2$ est faux : 2 est la masse en kg, pas une force en N. Pense aussi à convertir la masse : 500 g = 0,5 kg, donc $P = 0{,}5 \\times 10 = 5$ N, et non 5 000 N.",
           "figure": "lampe-suspendue",
-          "exercise": {
-            "title": "Calculer la tension d'un fil ou d'un ressort",
-            "statement": "Dans cet exercice, tu calcules la tension d'un fil ou d'un ressort qui porte un corps immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. On prend g = 10 N/kg.",
-            "exercise_type": "fixation",
-            "figure": "lampe-suspendue",
-            "questions": [
-              {
-                "content": "Un corps immobile est suspendu à un fil. Quelles sont les deux forces qu'il subit ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Faire le bilan des forces : le corps subit son poids $\\vec{P}$, exercé par la Terre, vertical et dirigé vers le bas, et la tension $\\vec{T}$ du fil, verticale et dirigée vers le haut. Étape 2 — Pour que le corps reste immobile, les deux forces doivent avoir des sens contraires. Les propositions avec deux forces vers le bas, ou avec le poids vers le haut, sont donc fausses. La masse n'est pas une force : elle se mesure en kilogrammes, pas en newtons.",
-                "answers": [
-                  {
-                    "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le haut",
-                    "correct": true
-                  },
-                  {
-                    "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le bas",
-                    "correct": false
-                  },
-                  {
-                    "content": "Sa masse, vers le bas, et la tension du fil, vers le haut",
-                    "correct": false
-                  },
-                  {
-                    "content": "Son poids, vertical vers le haut, et la tension du fil, verticale vers le bas",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un corps de masse 1,5 kg est suspendu à un ressort et reste immobile. On prend g = 10 N/kg. Quelle est l'intensité de la force exercée par le ressort sur le corps ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ (vers le bas) et la force $\\vec{T}$ du ressort (vers le haut). Étape 2 — Condition d'équilibre : même droite verticale, sens contraires, donc $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 1{,}5 \\times 10 = 15$ N. Étape 4 — Conclure : $T = P = 15$ N, force verticale vers le haut. Répondre 1,5 serait confondre la masse en kg avec une force en N.",
-                "answers": [
-                  {
-                    "content": "15",
-                    "correct": true
-                  }
-                ],
-                "unit": "N",
-                "tolerance": 0
-              },
-              {
-                "content": "Un seau de masse 500 g est suspendu à une corde et reste immobile. On prend g = 10 N/kg. Quelle est la tension de la corde ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la tension $\\vec{T}$ de la corde. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids, après conversion de la masse : $500$ g $= 0{,}5$ kg, donc $P = 0{,}5 \\times 10 = 5$ N. Étape 4 — Conclure : $T = 5$ N, verticale vers le haut. Si tu oublies de convertir, tu trouves $500 \\times 10 = 5\\,000$ N, valeur absurde pour un seau.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ],
-                "unit": "N",
-                "tolerance": 0
-              },
-              {
-                "content": "Un corps est suspendu à un fil et reste immobile. L'intensité de la tension du fil est ___ à l'intensité du poids du corps.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ et la tension $\\vec{T}$ du fil. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires et même intensité, donc $T = P$. La tension est égale au poids. Si elle était supérieure, le corps monterait ; si elle était inférieure, il descendrait : il ne resterait pas immobile.",
-                "answers": [
-                  {
-                    "content": "égale",
-                    "correct": true
-                  },
-                  {
-                    "content": "supérieure",
-                    "correct": false
-                  },
-                  {
-                    "content": "inférieure",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une lampe de masse 4 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. La tension du fil vaut 4 N.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ vers le bas, tension $\\vec{T}$ vers le haut. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 4 \\times 10 = 40$ N. Étape 4 — Conclure : $T = 40$ N, donc l'affirmation « 4 N » est fausse. Le nombre 4 est la masse en kilogrammes, pas une force en newtons : c'est le piège de la fiche.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer la tension d'un fil ou d'un ressort",
+              "statement": "Dans cet exercice, tu calcules la tension d'un fil ou d'un ressort qui porte un corps immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. On prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": "lampe-suspendue",
+              "questions": [
+                {
+                  "content": "Un corps immobile est suspendu à un fil. Quelles sont les deux forces qu'il subit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Faire le bilan des forces : le corps subit son poids $\\vec{P}$, exercé par la Terre, vertical et dirigé vers le bas, et la tension $\\vec{T}$ du fil, verticale et dirigée vers le haut. Étape 2 — Pour que le corps reste immobile, les deux forces doivent avoir des sens contraires. Les propositions avec deux forces vers le bas, ou avec le poids vers le haut, sont donc fausses. La masse n'est pas une force : elle se mesure en kilogrammes, pas en newtons.",
+                  "answers": [
+                    {
+                      "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa masse, vers le bas, et la tension du fil, vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son poids, vertical vers le haut, et la tension du fil, verticale vers le bas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 1,5 kg est suspendu à un ressort et reste immobile. On prend g = 10 N/kg. Quelle est l'intensité de la force exercée par le ressort sur le corps ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ (vers le bas) et la force $\\vec{T}$ du ressort (vers le haut). Étape 2 — Condition d'équilibre : même droite verticale, sens contraires, donc $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 1{,}5 \\times 10 = 15$ N. Étape 4 — Conclure : $T = P = 15$ N, force verticale vers le haut. Répondre 1,5 serait confondre la masse en kg avec une force en N.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "N",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un seau de masse 500 g est suspendu à une corde et reste immobile. On prend g = 10 N/kg. Quelle est la tension de la corde ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la tension $\\vec{T}$ de la corde. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids, après conversion de la masse : $500$ g $= 0{,}5$ kg, donc $P = 0{,}5 \\times 10 = 5$ N. Étape 4 — Conclure : $T = 5$ N, verticale vers le haut. Si tu oublies de convertir, tu trouves $500 \\times 10 = 5\\,000$ N, valeur absurde pour un seau.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "N",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un corps est suspendu à un fil et reste immobile. L'intensité de la tension du fil est ___ à l'intensité du poids du corps.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ et la tension $\\vec{T}$ du fil. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires et même intensité, donc $T = P$. La tension est égale au poids. Si elle était supérieure, le corps monterait ; si elle était inférieure, il descendrait : il ne resterait pas immobile.",
+                  "answers": [
+                    {
+                      "content": "égale",
+                      "correct": true
+                    },
+                    {
+                      "content": "supérieure",
+                      "correct": false
+                    },
+                    {
+                      "content": "inférieure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de masse 4 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. La tension du fil vaut 4 N.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ vers le bas, tension $\\vec{T}$ vers le haut. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 4 \\times 10 = 40$ N. Étape 4 — Conclure : $T = 40$ N, donc l'affirmation « 4 N » est fausse. Le nombre 4 est la masse en kilogrammes, pas une force en newtons : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer la tension d'un fil dans des situations variées",
+              "statement": "Dans cet exercice, tu calcules la tension d'un fil ou d'un ressort qui retient un corps immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. On prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Le poids se calcule avec P = m × g, la masse étant en kilogrammes. À l'équilibre, la tension a la même intensité que le poids.",
+              "questions": [
+                {
+                  "content": "Une cloche de masse 12 kg est suspendue à une poutre par une chaîne et reste immobile. On prend g = 10 N/kg. Quelle est la tension de la chaîne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Faire le bilan : la cloche subit son poids (vertical, vers le bas) et la tension de la chaîne (verticale, vers le haut). Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : P = m × g = 12 × 10 = 120 N. Étape 4 — Conclure : T = 120 N, verticale et dirigée vers le haut. La réponse 12 N confond la masse en kg et le poids en N ; la réponse 1,2 N divise par g au lieu de multiplier ; la réponse 22 N additionne 12 et 10 au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "120 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "12 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,2 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "22 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une calebasse de masse 750 g est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelle est la tension du fil, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Faire le bilan : la calebasse subit son poids (vers le bas) et la tension du fil (vers le haut). Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : on convertit d'abord 750 g = 0,75 kg, puis P = 0,75 × 10 = 7,5 N. Étape 4 — Conclure : T = 7,5 N, verticale vers le haut. Calculer 750 × 10 = 7 500 N oublie la conversion des grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 6 kg est suspendu à un fil et reste immobile. On prend g = 10 N/kg. Le fil exerce sur le corps une force de ___ N.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Faire le bilan : le corps subit son poids et la tension du fil. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : P = 6 × 10 = 60 N. Étape 4 — Conclure : le fil exerce une force de 60 N. Écrire 6 est l'erreur du piège : 6 est la masse en kg, pas une force en N.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 500 g est suspendu à un fil et reste immobile. On prend g = 10 N/kg. La tension du fil vaut 5 N.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Faire le bilan : le corps subit son poids et la tension du fil. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : 500 g = 0,5 kg, donc P = 0,5 × 10 = 5 N. Étape 4 — Conclure : T = 5 N, l'affirmation est vraie. Qui répond « Faux » a sans doute calculé 500 × 10 = 5 000 N sans convertir les grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un lustre de masse 8 kg est suspendu à un fil et reste immobile. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Faire le bilan : le lustre subit son poids (vers le bas) et la tension du fil (vers le haut). Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : P = 8 × 10 = 80 N, donc T = 80 N. Étape 4 — Conclure : le poids et la tension valent 80 N ; la tension est dirigée vers le haut. L'affirmation « 8 N » confond la masse et la force ; l'affirmation « vers le bas » donne à la tension le même sens que le poids, alors que les sens doivent être contraires.",
+                  "answers": [
+                    {
+                      "content": "La tension du fil vaut 80 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du fil vaut 8 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension du fil est dirigée vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du lustre vaut 80 N",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la tension d'un fil qui retient un corps immobile.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Faire le bilan : on nomme d'abord les deux forces, poids et tension. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids avec P = m × g, après avoir converti la masse en kilogrammes. Étape 4 — Conclure par la valeur de T avec son unité, sa direction et son sens. Calculer avant d'avoir écrit la condition d'équilibre est l'erreur courante : on ne sait alors pas pourquoi le poids donne la tension.",
+                  "answers": [
+                    {
+                      "content": "Faire le bilan des forces : nommer le poids et la tension."
+                    },
+                    {
+                      "content": "Écrire la condition d'équilibre : T = P."
+                    },
+                    {
+                      "content": "Calculer le poids avec P = m × g, la masse étant en kilogrammes."
+                    },
+                    {
+                      "content": "Conclure : donner l'intensité de la tension avec son unité, sa direction et son sens."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu étudies des corps immobiles suspendus à un fil ou à un ressort, avec $g = 10$ N/kg.",
             "questions": [
@@ -583,105 +842,220 @@
           },
           "pitfall": "Ne dessine jamais la réaction vers le bas, et ne la confonds pas avec la masse. Contre-exemple : un sac de 6 kg a un poids de 60 N vers le bas. Sa réaction vaut 60 N vers le haut, pas 6 N. Si $\\vec{R}$ était dirigée vers le bas, les deux forces auraient le même sens : elles s'ajouteraient (120 N vers le bas) et le sac s'enfoncerait dans la table. La réaction est toujours de sens contraire au poids.",
           "figure": "sac-pose",
-          "exercise": {
-            "title": "Calculer la réaction d'un support",
-            "statement": "Dans cet exercice, tu calcules la réaction d'un support qui porte un objet immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. Les frottements sont négligés et on prend g = 10 N/kg.",
-            "exercise_type": "fixation",
-            "figure": "sac-pose",
-            "questions": [
-              {
-                "content": "Un livre immobile est posé sur une table horizontale (frottements négligés). Quelle est la réaction de la table sur le livre ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Faire le bilan : le livre subit son poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $\\vec{R}$ a la même droite d'action (la verticale), le sens contraire (vers le haut) et la même intensité, $R = P$. Vers le bas, elle aurait le même sens que le poids. Horizontale, elle ne compenserait pas le poids. D'intensité nulle, elle laisserait le livre tomber.",
-                "answers": [
-                  {
-                    "content": "Verticale, dirigée vers le haut, de même intensité que le poids du livre",
-                    "correct": true
-                  },
-                  {
-                    "content": "Verticale, dirigée vers le bas, de même intensité que le poids du livre",
-                    "correct": false
-                  },
-                  {
-                    "content": "Horizontale, de même intensité que le poids du livre",
-                    "correct": false
-                  },
-                  {
-                    "content": "Verticale, dirigée vers le haut, d'intensité nulle",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un sac de masse 3 kg est posé et immobile sur une table horizontale. On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Faire le bilan : le sac subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids : $P = m \\times g = 3 \\times 10 = 30$ N. Étape 4 — Conclure : $R = 30$ N, verticale et dirigée vers le haut. Répondre 3 N serait confondre la masse (3 kg) avec la force.",
-                "answers": [
-                  {
-                    "content": "30",
-                    "correct": true
-                  }
-                ],
-                "unit": "N",
-                "tolerance": 0
-              },
-              {
-                "content": "Une brique de masse 800 g est posée et immobile sur le sol horizontal. On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Faire le bilan : la brique subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids, après conversion : $800$ g $= 0{,}8$ kg, donc $P = 0{,}8 \\times 10 = 8$ N. Étape 4 — Conclure : $R = 8$ N, verticale vers le haut. Sans conversion, on obtiendrait 8 000 N, valeur absurde pour une brique.",
-                "answers": [
-                  {
-                    "content": "8",
-                    "correct": true
-                  }
-                ],
-                "unit": "N",
-                "tolerance": 0
-              },
-              {
-                "content": "Un seau de masse 6 kg est posé et immobile sur le sol horizontal. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$, avec des sens contraires ; le poids étant vers le bas, $\\vec{R}$ est dirigée vers le haut. Étape 3 — Calculer le poids : $P = 6 \\times 10 = 60$ N. Étape 4 — Conclure : $R = 60$ N vers le haut. L'affirmation « 6 N » confond la masse et la force. L'affirmation « vers le bas » donnerait deux forces de même sens, sans équilibre.",
-                "answers": [
-                  {
-                    "content": "La réaction du sol vaut 60 N",
-                    "correct": true
-                  },
-                  {
-                    "content": "La réaction du sol vaut 6 N",
-                    "correct": false
-                  },
-                  {
-                    "content": "La réaction du sol est dirigée vers le haut",
-                    "correct": true
-                  },
-                  {
-                    "content": "La réaction du sol est dirigée vers le bas",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque élément d'un sac immobile posé sur une table à sa description.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Faire le bilan : deux forces s'exercent sur le sac. Le poids $\\vec{P}$ est exercé par la Terre, vertical et dirigé vers le bas. La réaction $\\vec{R}$ est exercée par la table, verticale et dirigée vers le haut. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires, donc $R = P$. Ne confonds pas les deux forces : elles n'ont pas le même auteur et pas le même sens.",
-                "answers": [
-                  {
-                    "content": "Le poids P du sac",
-                    "match": "Verticale, vers le bas, exercée par la Terre"
-                  },
-                  {
-                    "content": "La réaction R de la table",
-                    "match": "Verticale, vers le haut, exercée par la table"
-                  },
-                  {
-                    "content": "La condition d'équilibre du sac",
-                    "match": "R = P"
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer la réaction d'un support",
+              "statement": "Dans cet exercice, tu calcules la réaction d'un support qui porte un objet immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. Les frottements sont négligés et on prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": "sac-pose",
+              "questions": [
+                {
+                  "content": "Un livre immobile est posé sur une table horizontale (frottements négligés). Quelle est la réaction de la table sur le livre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Faire le bilan : le livre subit son poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $\\vec{R}$ a la même droite d'action (la verticale), le sens contraire (vers le haut) et la même intensité, $R = P$. Vers le bas, elle aurait le même sens que le poids. Horizontale, elle ne compenserait pas le poids. D'intensité nulle, elle laisserait le livre tomber.",
+                  "answers": [
+                    {
+                      "content": "Verticale, dirigée vers le haut, de même intensité que le poids du livre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le bas, de même intensité que le poids du livre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Horizontale, de même intensité que le poids du livre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le haut, d'intensité nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de masse 3 kg est posé et immobile sur une table horizontale. On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Faire le bilan : le sac subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids : $P = m \\times g = 3 \\times 10 = 30$ N. Étape 4 — Conclure : $R = 30$ N, verticale et dirigée vers le haut. Répondre 3 N serait confondre la masse (3 kg) avec la force.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "N",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Une brique de masse 800 g est posée et immobile sur le sol horizontal. On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Faire le bilan : la brique subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids, après conversion : $800$ g $= 0{,}8$ kg, donc $P = 0{,}8 \\times 10 = 8$ N. Étape 4 — Conclure : $R = 8$ N, verticale vers le haut. Sans conversion, on obtiendrait 8 000 N, valeur absurde pour une brique.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "N",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un seau de masse 6 kg est posé et immobile sur le sol horizontal. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$, avec des sens contraires ; le poids étant vers le bas, $\\vec{R}$ est dirigée vers le haut. Étape 3 — Calculer le poids : $P = 6 \\times 10 = 60$ N. Étape 4 — Conclure : $R = 60$ N vers le haut. L'affirmation « 6 N » confond la masse et la force. L'affirmation « vers le bas » donnerait deux forces de même sens, sans équilibre.",
+                  "answers": [
+                    {
+                      "content": "La réaction du sol vaut 60 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol vaut 6 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction du sol est dirigée vers le haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol est dirigée vers le bas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément d'un sac immobile posé sur une table à sa description.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Faire le bilan : deux forces s'exercent sur le sac. Le poids $\\vec{P}$ est exercé par la Terre, vertical et dirigé vers le bas. La réaction $\\vec{R}$ est exercée par la table, verticale et dirigée vers le haut. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires, donc $R = P$. Ne confonds pas les deux forces : elles n'ont pas le même auteur et pas le même sens.",
+                  "answers": [
+                    {
+                      "content": "Le poids P du sac",
+                      "match": "Verticale, vers le bas, exercée par la Terre"
+                    },
+                    {
+                      "content": "La réaction R de la table",
+                      "match": "Verticale, vers le haut, exercée par la table"
+                    },
+                    {
+                      "content": "La condition d'équilibre du sac",
+                      "match": "R = P"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer la réaction d'un support sur des objets posés",
+              "statement": "Dans cet exercice, tu calcules la réaction d'une table ou du sol sur un objet immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. Les frottements sont négligés et on prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "La réaction d'un support horizontal est verticale, vers le haut, et son intensité est égale à celle du poids. Convertis la masse en kilogrammes avant de calculer.",
+              "questions": [
+                {
+                  "content": "Un fût de masse 40 kg est posé et immobile sur le sol horizontal. On néglige les frottements et on prend g = 10 N/kg. Quelle est la réaction du sol sur le fût ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Faire le bilan : le fût subit son poids (vers le bas) et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : la réaction est verticale vers le haut, le poids verticale vers le bas, donc R = P. Étape 3 — Calculer le poids : P = 40 × 10 = 400 N. Étape 4 — Conclure : R = 400 N, verticale vers le haut. La réponse 40 N prend la masse pour la force ; la réponse 4 N divise par g ; la réponse « vers le bas » donne à la réaction le sens du poids, ce qui ferait s'enfoncer le fût dans le sol.",
+                  "answers": [
+                    {
+                      "content": "40 N, verticale, dirigée vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 N, verticale, dirigée vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "400 N, verticale, dirigée vers le haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "400 N, verticale, dirigée vers le bas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cahier de masse 400 g est posé et immobile sur une table horizontale. On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Faire le bilan : le cahier subit son poids et la réaction de la table. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : 400 g = 0,4 kg, donc P = 0,4 × 10 = 4 N. Étape 4 — Conclure : R = 4 N, verticale vers le haut. Calculer 400 × 10 = 4 000 N oublie de convertir les grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une valise de masse 12 kg est posée et immobile sur le sol horizontal (frottements négligés, g = 10 N/kg). Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Faire le bilan : la valise subit son poids et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P, avec R verticale vers le haut. Étape 3 — Calculer le poids : P = 12 × 10 = 120 N. Étape 4 — Conclure : P = R = 120 N. L'affirmation « 12 N » confond la masse en kg et la force en N ; l'affirmation « horizontale » est fausse car, sans frottements, la réaction est perpendiculaire au support, donc verticale.",
+                  "answers": [
+                    {
+                      "content": "La réaction du sol est horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids de la valise vaut 120 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol vaut 120 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol vaut 12 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte de masse 5 kg est posée et immobile sur une table horizontale. On prend g = 10 N/kg. La réaction de la table vaut 5 N.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Faire le bilan : la boîte subit son poids et la réaction de la table. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 5 × 10 = 50 N. Étape 4 — Conclure : R = 50 N et non 5 N ; l'affirmation est fausse. Le nombre 5 est la masse en kilogrammes, pas une force en newtons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de masse 9 kg est posé et immobile sur un support horizontal. On prend g = 10 N/kg. La réaction du support sur l'objet vaut ___ N.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Faire le bilan : l'objet subit son poids et la réaction du support. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 9 × 10 = 90 N. Étape 4 — Conclure : R = 90 N, verticale vers le haut. Écrire 9 reviendrait à donner la masse en kg au lieu de la force en N.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livre est posé et immobile sur une table horizontale (frottements négligés). La réaction de la table sur le livre est dirigée vers le ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Faire le bilan : le livre subit son poids, vertical vers le bas, et la réaction de la table. Étape 2 — Écrire la condition d'équilibre : les deux forces ont des sens contraires, donc la réaction est verticale vers le haut. Étape 3 — Calculer le poids : non demandé ici, mais R = P. Étape 4 — Conclure : la réaction est dirigée vers le haut. Vers le bas, elle aurait le sens du poids et s'ajouterait à lui ; vers le côté, elle ne serait plus perpendiculaire au support, ce qui exige des frottements.",
+                  "answers": [
+                    {
+                      "content": "bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "haut",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu étudies des objets immobiles posés sur un support horizontal. Les frottements sont négligés et $g = 10$ N/kg.",
             "questions": [
@@ -773,85 +1147,198 @@
           },
           "pitfall": "Ne lis pas une force comme une masse. Contre-exemple : un peson indique 120 N ; la masse n'est pas 120 kg, mais $120 / 10 = 12$ kg. Et si la masse est donnée en grammes, convertis avant de calculer le poids : 250 g = 0,25 kg, donc $P = 0{,}25 \\times 10 = 2{,}5$ N, et non 2 500 N. Le newton mesure une force, le kilogramme une masse : relis toujours l'unité de ta réponse.",
           "figure": "regime-bananes",
-          "exercise": {
-            "title": "Trouver une force ou une masse inconnue",
-            "statement": "Dans cet exercice, tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec la méthode de la fiche : identifier, écrire l'égalité des intensités, calculer, conclure. On prend g = 10 N/kg.",
-            "exercise_type": "fixation",
-            "figure": "regime-bananes",
-            "questions": [
-              {
-                "content": "Un peson auquel est accroché un sac de maïs immobile indique 60 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 60$ N du peson ; la force inconnue est le poids $P$ du sac ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : le sac est en équilibre, donc $P = T = 60$ N. Étape 3 — Calculer la masse : $m = P / g = 60 / 10 = 6$ kg. Étape 4 — Conclure : le sac a une masse de 6 kg. Répondre 60 kg serait lire la force comme une masse.",
-                "answers": [
-                  {
-                    "content": "6",
-                    "correct": true
-                  }
-                ],
-                "unit": "kg",
-                "tolerance": 0
-              },
-              {
-                "content": "Un dynamomètre auquel est suspendu un corps immobile indique 25 N. On prend g = 10 N/kg. Quelle est la masse du corps, en kilogrammes ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 25$ N ; la force inconnue est le poids $P$ ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $P = T = 25$ N. Étape 3 — Calculer la masse : $m = P / g = 25 / 10 = 2{,}5$ kg. Étape 4 — Conclure : le corps a une masse de 2,5 kg. Répondre 25 kg oublie de diviser par $g$.",
-                "answers": [
-                  {
-                    "content": "2,5",
-                    "correct": true
-                  }
-                ],
-                "unit": "kg",
-                "tolerance": 0
-              },
-              {
-                "content": "Un corps de masse 8 kg est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Le dynamomètre indique ___ N.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Identifier : la force inconnue est la tension $T$ lue sur le dynamomètre ; la force connue se calcule : c'est le poids $P$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $T = P$. Étape 3 — Calculer : $P = m \\times g = 8 \\times 10 = 80$ N, donc $T = 80$ N. Étape 4 — Conclure : le dynamomètre indique 80 N. La réponse 8 confond la masse en kg et la force en N.",
-                "answers": [
-                  {
-                    "content": "80",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour trouver la masse d'un corps immobile suspendu à un dynamomètre.",
-                "question_type": "ordering",
-                "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Identifier la force connue, la force inconnue et la grandeur demandée. Étape 2 — Écrire l'égalité des intensités, valable à l'équilibre. Étape 3 — Calculer la force inconnue, puis la masse avec $m = P / g$. Étape 4 — Conclure avec l'unité. On ne peut pas calculer avant d'avoir écrit l'égalité qui relie les deux forces.",
-                "answers": [
-                  {
-                    "content": "Identifier la force connue, la force inconnue et la grandeur demandée."
-                  },
-                  {
-                    "content": "Écrire l'égalité des intensités des deux forces."
-                  },
-                  {
-                    "content": "Calculer la force inconnue, puis la masse avec m = P / g."
-                  },
-                  {
-                    "content": "Conclure par une phrase avec le résultat et son unité."
-                  }
-                ]
-              },
-              {
-                "content": "Un peson indique 120 N quand on lui suspend un régime de bananes immobile. On prend g = 10 N/kg. La masse du régime est 120 kg.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 120$ N ; la force inconnue est le poids $P$ ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : $P = T = 120$ N. Étape 3 — Calculer la masse : $m = P / g = 120 / 10 = 12$ kg. Étape 4 — Conclure : la masse est 12 kg, donc l'affirmation « 120 kg » est fausse. Le piège est de lire en kilogrammes une valeur donnée en newtons.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Trouver une force ou une masse inconnue",
+              "statement": "Dans cet exercice, tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec la méthode de la fiche : identifier, écrire l'égalité des intensités, calculer, conclure. On prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": "regime-bananes",
+              "questions": [
+                {
+                  "content": "Un peson auquel est accroché un sac de maïs immobile indique 60 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 60$ N du peson ; la force inconnue est le poids $P$ du sac ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : le sac est en équilibre, donc $P = T = 60$ N. Étape 3 — Calculer la masse : $m = P / g = 60 / 10 = 6$ kg. Étape 4 — Conclure : le sac a une masse de 6 kg. Répondre 60 kg serait lire la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un dynamomètre auquel est suspendu un corps immobile indique 25 N. On prend g = 10 N/kg. Quelle est la masse du corps, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 25$ N ; la force inconnue est le poids $P$ ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $P = T = 25$ N. Étape 3 — Calculer la masse : $m = P / g = 25 / 10 = 2{,}5$ kg. Étape 4 — Conclure : le corps a une masse de 2,5 kg. Répondre 25 kg oublie de diviser par $g$.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg",
+                  "tolerance": 0
+                },
+                {
+                  "content": "Un corps de masse 8 kg est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Le dynamomètre indique ___ N.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la force inconnue est la tension $T$ lue sur le dynamomètre ; la force connue se calcule : c'est le poids $P$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $T = P$. Étape 3 — Calculer : $P = m \\times g = 8 \\times 10 = 80$ N, donc $T = 80$ N. Étape 4 — Conclure : le dynamomètre indique 80 N. La réponse 8 confond la masse en kg et la force en N.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la masse d'un corps immobile suspendu à un dynamomètre.",
+                  "question_type": "ordering",
+                  "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Identifier la force connue, la force inconnue et la grandeur demandée. Étape 2 — Écrire l'égalité des intensités, valable à l'équilibre. Étape 3 — Calculer la force inconnue, puis la masse avec $m = P / g$. Étape 4 — Conclure avec l'unité. On ne peut pas calculer avant d'avoir écrit l'égalité qui relie les deux forces.",
+                  "answers": [
+                    {
+                      "content": "Identifier la force connue, la force inconnue et la grandeur demandée."
+                    },
+                    {
+                      "content": "Écrire l'égalité des intensités des deux forces."
+                    },
+                    {
+                      "content": "Calculer la force inconnue, puis la masse avec m = P / g."
+                    },
+                    {
+                      "content": "Conclure par une phrase avec le résultat et son unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peson indique 120 N quand on lui suspend un régime de bananes immobile. On prend g = 10 N/kg. La masse du régime est 120 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 120$ N ; la force inconnue est le poids $P$ ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : $P = T = 120$ N. Étape 3 — Calculer la masse : $m = P / g = 120 / 10 = 12$ kg. Étape 4 — Conclure : la masse est 12 kg, donc l'affirmation « 120 kg » est fausse. Le piège est de lire en kilogrammes une valeur donnée en newtons.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Retrouver une force ou une masse inconnue à l'équilibre",
+              "statement": "Dans cet exercice, tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec la méthode de la fiche : identifier, écrire l'égalité des intensités, calculer, conclure. On prend g = 10 N/kg.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "À l'équilibre, les deux forces ont la même intensité. Pour passer d'un poids à une masse, divise par g ; pour une masse en grammes, convertis d'abord en kilogrammes.",
+              "questions": [
+                {
+                  "content": "Un peson auquel est suspendu un sac de riz immobile indique 250 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : la force connue est la tension du peson, 250 N ; la force inconnue est le poids du sac ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : le sac est en équilibre, donc P = T = 250 N. Étape 3 — Calculer : m = P / g = 250 / 10 = 25 kg. Étape 4 — Conclure : le sac a une masse de 25 kg. Répondre 250 kg lit une force en newtons comme une masse en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 700 g est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Quelle est l'indication du dynamomètre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : la force inconnue est la tension indiquée par le dynamomètre ; la donnée est la masse, 700 g. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, T = P. Étape 3 — Calculer : 700 g = 0,7 kg, donc P = 0,7 × 10 = 7 N. Étape 4 — Conclure : le dynamomètre indique 7 N. Le résultat 7 000 N vient d'un oubli de conversion des grammes.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un dynamomètre indique 36 N quand un panier immobile y est suspendu. On prend g = 10 N/kg. Quelle est la masse du panier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la force connue est la tension du dynamomètre, 36 N ; on demande la masse du panier. Étape 2 — Écrire l'égalité des intensités : P = T = 36 N. Étape 3 — Calculer : m = P / g = 36 / 10 = 3,6 kg. Étape 4 — Conclure : le panier a une masse de 3,6 kg. La réponse 36 kg lit la force comme une masse ; la réponse 360 kg multiplie par g au lieu de diviser ; la réponse 0,36 kg se trompe d'une puissance de dix en divisant.",
+                  "answers": [
+                    {
+                      "content": "36 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "3,6 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "360 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,36 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 2,5 kg est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Le dynamomètre indique 25 N.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la masse est 2,5 kg ; on cherche l'indication du dynamomètre, c'est-à-dire la tension. Étape 2 — Écrire l'égalité des intensités : T = P. Étape 3 — Calculer : P = 2,5 × 10 = 25 N. Étape 4 — Conclure : le dynamomètre indique 25 N, l'affirmation est vraie. Répondre « Faux » vient d'une confusion entre la masse (2,5 kg) et la force (25 N).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de poids 90 N est suspendu à un fil et reste immobile. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : le poids est 90 N, la tension du fil est inconnue, on peut aussi trouver la masse. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, T = P = 90 N. Étape 3 — Calculer : m = P / g = 90 / 10 = 9 kg. Étape 4 — Conclure : la masse vaut 9 kg et la tension 90 N. La masse de 90 kg lit le poids comme une masse ; la tension de 9 N confond la tension avec la masse.",
+                  "answers": [
+                    {
+                      "content": "La masse du corps vaut 90 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension du fil vaut 9 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse du corps vaut 9 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du fil vaut 90 N",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet posé et immobile sur le sol reçoit du sol une réaction de 85 N. On prend g = 10 N/kg. La masse de l'objet vaut ___ kg.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la force connue est la réaction du sol, 85 N ; on demande la masse de l'objet. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, P = R = 85 N. Étape 3 — Calculer : m = P / g = 85 / 10 = 8,5 kg. Étape 4 — Conclure : l'objet a une masse de 8,5 kg. Écrire 85 reviendrait à prendre une force en newtons pour une masse en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "8,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "8.5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec $g = 10$ N/kg.",
             "questions": [
@@ -1285,6 +1772,1607 @@
                 {
                   "content": "Faux",
                   "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Conditions d'équilibre d'un solide soumis à deux forces (droite d'action, sens, intensité) ; tension d'un fil ou d'un ressort ; réaction d'un support ; calcul du poids P = m × g avec conversion des masses ; détermination d'une force ou d'une masse inconnue.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un solide, représenté par le point G sur le dessin, est soumis à deux forces F1 et F2 portées par la même droite horizontale. Elles ont des sens contraires et la même longueur : 3 carreaux, soit 3 N chacune à l'échelle de 1 carreau pour 1 N. On étudie les conditions d'équilibre de ce solide.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque question, compare les trois caractéristiques des forces : droite d'action, sens, intensité. L'équilibre exige les trois.",
+              "figure": "deux-forces-opposees",
+              "questions": [
+                {
+                  "content": "Deux forces F1 = 3 N vers la droite et F2 = 3 N vers la gauche, portées par la même droite horizontale, s'exercent sur un solide. Que vaut la somme vectorielle F1 + F2 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 = 3 N vers la droite, F2 = 3 N vers la gauche, même droite d'action. Étape 2 — Comparer les droites d'action : confondues. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : 3 N = 3 N. Étape 5 — Conclure : les trois conditions sont vérifiées, donc les effets des deux forces se compensent et F1 + F2 est le vecteur nul. La réponse 6 N additionne les intensités sans tenir compte des sens contraires ; les réponses 3 N sont des erreurs d'oubli d'une des deux forces.",
+                  "answers": [
+                    {
+                      "content": "Une force de 6 N vers la droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une force de 3 N vers la droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une force de 6 N vers la gauche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vecteur nul",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à deux forces de 3 N et de 5 N, de sens contraires, portées par la même droite. Il reste immobile.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 = 3 N et F2 = 5 N, sens contraires, même droite. Étape 2 — Comparer les droites d'action : confondues. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : 3 N est différent de 5 N, la condition n'est pas vérifiée. Étape 5 — Conclure : le solide n'est pas en équilibre, donc il ne reste pas immobile. Croire que des sens contraires suffisent est l'erreur à éviter : il faut aussi l'égalité des intensités.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est en équilibre sous l'action de deux forces. La force F1 est représentée par une flèche de 4 carreaux, à l'échelle de 1 carreau pour 5 N. Quelle est l'intensité de la force F2, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 mesure 4 carreaux à l'échelle de 1 carreau pour 5 N, donc F1 = 4 × 5 = 20 N. Étape 2 — Comparer les droites d'action : F2 est sur la même droite. Étape 3 — Comparer les sens : F2 est de sens contraire à F1. Étape 4 — Comparer les intensités : à l'équilibre, F2 = F1 = 20 N. Étape 5 — Conclure : F2 vaut 20 N. Répondre 4 N lit le nombre de carreaux sans tenir compte de l'échelle ; répondre 40 N additionne les deux forces.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide soumis à deux forces F1 et F2 est en équilibre. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : le solide est en équilibre sous F1 et F2. Étape 2 — Comparer les droites d'action : elles sont confondues. Étape 3 — Comparer les sens : ils sont contraires, donc « même sens » est faux. Étape 4 — Comparer les intensités : elles sont égales, donc « intensités différentes » est faux. Étape 5 — Conclure : à l'équilibre, la même droite d'action et la même intensité sont vérifiées, avec des sens contraires. Dire « même sens » est l'erreur qui fait que les forces s'ajoutent au lieu de se compenser.",
+                  "answers": [
+                    {
+                      "content": "F1 et F2 ont la même droite d'action",
+                      "correct": true
+                    },
+                    {
+                      "content": "F1 et F2 ont la même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "F1 et F2 ont le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "F1 et F2 ont des intensités différentes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux forces de 5 N, de sens contraires, sont portées par deux droites parallèles distinctes. Que se passe-t-il pour le solide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : deux forces de 5 N, sens contraires, deux droites parallèles distinctes. Étape 2 — Comparer les droites d'action : ce sont deux droites différentes, la condition n'est pas vérifiée. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : égales. Étape 5 — Conclure : une condition manque, le solide n'est pas en équilibre ; il tourne. Dire qu'il est en équilibre parce que les intensités sont égales et les sens contraires oublie la droite d'action ; dire qu'il se déplace en ligne droite oublie que les droites sont décalées, ce qui fait tourner le solide.",
+                  "answers": [
+                    {
+                      "content": "Il est en équilibre, car les intensités sont égales et les sens contraires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il tourne, car les droites d'action ne sont pas confondues",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est en équilibre, car les deux droites sont parallèles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se déplace en ligne droite vers la droite",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une lampe de masse 2 kg est suspendue au plafond par un fil. Elle reste immobile. Sur le dessin, le poids P est dirigé vers le bas et la tension T du fil vers le haut. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "La tension a la même intensité que le poids : T = P = m × g, avec la masse en kilogrammes.",
+              "figure": "lampe-suspendue",
+              "questions": [
+                {
+                  "content": "Une lampe de masse 3 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelle est la tension du fil, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : la lampe subit son poids (vers le bas) et la tension du fil (vers le haut). Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : P = m × g = 3 × 10 = 30 N. Étape 4 — Conclure : T = 30 N, verticale vers le haut. La réponse 3 N confond la masse en kg avec une force en N.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est suspendue à un fil et reste immobile. Quelle phrase compare correctement la tension du fil et le poids de la lampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le poids est vertical vers le bas, la tension est verticale vers le haut. Étape 2 — Écrire la condition d'équilibre : même droite d'action verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : non demandé ici, on compare les caractéristiques. Étape 4 — Conclure : la bonne phrase est « même droite verticale, sens contraires, même intensité ». Le même sens ferait s'ajouter les forces ; une tension plus grande que le poids ferait monter la lampe ; des droites différentes feraient tourner la lampe.",
+                  "answers": [
+                    {
+                      "content": "Même droite d'action verticale, même sens, même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Même droite d'action verticale, sens contraires, intensité de la tension plus grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Même droite d'action verticale, sens contraires, même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Droites d'action différentes, sens contraires, même intensité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de masse 250 g est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelle est la tension du fil, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids vers le bas, tension vers le haut. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : 250 g = 0,25 kg, donc P = 0,25 × 10 = 2,5 N. Étape 4 — Conclure : T = 2,5 N. Le résultat 2 500 N vient d'un oubli de conversion des grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de masse 2 kg est suspendue à un fil et reste immobile ; la tension du fil vaut 20 N. On remplace la lampe par une lampe de 4 kg, immobile elle aussi : la tension vaut alors 40 N. On prend g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et tension, dans les deux cas. Étape 2 — Écrire la condition d'équilibre : T = P dans chaque cas. Étape 3 — Calculer le poids : 2 × 10 = 20 N, puis 4 × 10 = 40 N. Étape 4 — Conclure : la tension passe bien de 20 N à 40 N, l'affirmation est vraie. Répondre « Faux » reviendrait à croire que la tension ne dépend pas de la masse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe suspendue à un fil reste immobile et la tension du fil vaut 35 N. On prend g = 10 N/kg. La masse de la lampe est ___ kg.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et tension. Étape 2 — Écrire la condition d'équilibre : P = T = 35 N. Étape 3 — Calculer la masse : m = P / g = 35 / 10 = 3,5 kg. Étape 4 — Conclure : la lampe a une masse de 3,5 kg. Répondre 35 lit la force en newtons comme une masse en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "3,5",
+                      "correct": true
+                    },
+                    {
+                      "content": "3.5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un sac de masse 3 kg est posé sur une table horizontale et reste immobile. Sur le dessin, le poids P est dirigé vers le bas et la réaction R de la table vers le haut. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "La réaction du support est verticale, vers le haut, et R = P = m × g.",
+              "figure": "sac-pose",
+              "questions": [
+                {
+                  "content": "Un sac de riz de masse 8 kg est posé et immobile sur le sol horizontal. On néglige les frottements et on prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le sac subit son poids et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : R verticale vers le haut, P verticale vers le bas, donc R = P. Étape 3 — Calculer le poids : P = 8 × 10 = 80 N. Étape 4 — Conclure : R = 80 N, vers le haut. La réponse 8 N confond la masse et la force.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac est posé et immobile sur une table horizontale (frottements négligés). Quelles sont les caractéristiques de la réaction de la table sur le sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction. Étape 2 — Écrire la condition d'équilibre : la réaction est perpendiculaire à la table, donc verticale, et de sens contraire au poids, donc vers le haut ; R = P. Étape 3 — Calculer le poids : non demandé ici. Étape 4 — Conclure : verticale, vers le haut, même intensité que le poids. Vers le bas, la réaction s'ajouterait au poids ; horizontale, elle ne serait pas perpendiculaire à la table ; deux fois plus grande, elle ferait décoller le sac.",
+                  "answers": [
+                    {
+                      "content": "Verticale, dirigée vers le bas, de même intensité que le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Horizontale, de même intensité que le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le haut, d'intensité deux fois plus grande que le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le haut, de même intensité que le poids",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livre est posé et immobile sur une table. La réaction de la table est dirigée vers le bas, comme le poids du livre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction de la table. Étape 2 — Écrire la condition d'équilibre : les deux forces ont des sens contraires, donc la réaction est vers le haut quand le poids est vers le bas. Étape 3 — Calculer le poids : non demandé. Étape 4 — Conclure : l'affirmation est fausse. Si la réaction était vers le bas, les deux forces s'ajouteraient et le livre s'enfoncerait dans la table.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de maïs de masse 20 kg est posé et immobile sur le sol horizontal (frottements négligés, g = 10 N/kg). Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le sac subit son poids et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 20 × 10 = 200 N. Étape 4 — Conclure : P = R = 200 N. Les valeurs 20 N et 2 N viennent respectivement de la confusion entre masse et poids, et d'une division par g au lieu d'une multiplication.",
+                  "answers": [
+                    {
+                      "content": "Le poids du sac vaut 200 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol vaut 200 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poids du sac vaut 20 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction du sol vaut 2 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plateau de masse 1 200 g est posé et immobile sur une table horizontale (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction de la table. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : 1 200 g = 1,2 kg, donc P = 1,2 × 10 = 12 N. Étape 4 — Conclure : R = 12 N, vers le haut. Calculer 1 200 × 10 = 12 000 N oublie de convertir les grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un vendeur suspend un régime de bananes au crochet d'un peson (dynamomètre). Le régime est immobile et le peson indique 120 N. Sur le dessin, le poids P est dirigé vers le bas et la tension T du crochet vers le haut, à l'échelle de 1 carreau pour 20 N. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "À l'équilibre, la tension et le poids ont la même intensité. Pour trouver une masse, divise le poids par g.",
+              "figure": "regime-bananes",
+              "questions": [
+                {
+                  "content": "Un peson auquel est suspendu un sac immobile indique 80 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension du peson, 80 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, P = T = 80 N. Étape 3 — Calculer : m = P / g = 80 / 10 = 8 kg. Étape 4 — Conclure : le sac a une masse de 8 kg. Répondre 80 kg lit la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 1,2 kg est suspendu à un peson et reste immobile. On prend g = 10 N/kg. Quelle est l'indication du peson, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la grandeur demandée est la tension indiquée par le peson ; la donnée est la masse, 1,2 kg. Étape 2 — Écrire l'égalité des intensités : T = P. Étape 3 — Calculer : P = 1,2 × 10 = 12 N. Étape 4 — Conclure : le peson indique 12 N. La réponse 1,2 N oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peson indique 150 N quand un sac de manioc immobile y est suspendu. On prend g = 10 N/kg. Quelle est la masse du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 150 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 150 N. Étape 3 — Calculer : m = P / g = 150 / 10 = 15 kg. Étape 4 — Conclure : la masse du sac est 15 kg. La réponse 150 kg prend la force pour une masse ; 1 500 kg multiplie par g ; 1,5 kg divise deux fois par dix.",
+                  "answers": [
+                    {
+                      "content": "150 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 500 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la masse d'un corps immobile suspendu à un peson.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Identifier : on repère la force connue (la tension lue sur le peson), la force inconnue (le poids) et la grandeur demandée (la masse). Étape 2 — Écrire l'égalité des intensités : à l'équilibre, P = T. Étape 3 — Calculer : on obtient P, puis la masse avec m = P / g. Étape 4 — Conclure par une phrase avec l'unité (kg). Commencer par le calcul avant d'avoir identifié ce que l'on cherche conduit à confondre force et masse.",
+                  "answers": [
+                    {
+                      "content": "Identifier la force connue, la force inconnue et la grandeur demandée."
+                    },
+                    {
+                      "content": "Écrire l'égalité des intensités des deux forces, valable à l'équilibre."
+                    },
+                    {
+                      "content": "Calculer la force inconnue, puis la masse avec m = P / g."
+                    },
+                    {
+                      "content": "Conclure par une phrase qui donne le résultat avec son unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 30 kg est suspendu à un peson et reste immobile. Le peson indique 3 N. On prend g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : la masse est 30 kg ; on cherche l'indication du peson, donc la tension. Étape 2 — Écrire l'égalité des intensités : T = P. Étape 3 — Calculer : P = 30 × 10 = 300 N. Étape 4 — Conclure : le peson indique 300 N, pas 3 N ; l'affirmation est fausse. Le nombre 3 viendrait d'une division par g au lieu d'une multiplication.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Équilibre d'un corps suspendu à un peson, d'un objet posé sur le sol ou sur une table, et d'un seau au bout d'une corde, dans des situations de marché, de chantier, d'école et de village : tension, réaction, poids, masse, conversions et prix en francs CFA.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Bouaké, Mme Affoué pèse un régime de plantains avec un peson (dynamomètre). Le régime reste immobile, accroché au crochet du peson. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Le peson indique la tension du crochet, qui est égale au poids du régime. Divise le poids par g pour trouver la masse.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au marché de Bouaké, un peson auquel est accroché un régime de plantains immobile indique 150 N. On prend g = 10 N/kg. Quelle est la masse du régime, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension du peson, 150 N ; la force inconnue est le poids du régime ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : le régime est en équilibre, donc P = T = 150 N. Étape 3 — Calculer : m = P / g = 150 / 10 = 15 kg. Étape 4 — Conclure : le régime a une masse de 15 kg. Répondre 150 kg lit le newton comme un kilogramme.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vendeur accroche un sac d'ignames de 18 kg au crochet d'un peson. Le sac reste immobile. On prend g = 10 N/kg. Quelle est l'indication du peson, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la grandeur demandée est la tension indiquée par le peson ; la donnée est la masse, 18 kg. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, T = P. Étape 3 — Calculer : P = m × g = 18 × 10 = 180 N. Étape 4 — Conclure : le peson indique 180 N. Répondre 18 N confond la masse et le poids.",
+                  "answers": [
+                    {
+                      "content": "180",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un régime de plantains de 15 kg est vendu 300 F CFA le kilogramme. Quel est le prix du régime, en francs CFA ?",
+                  "question_type": "numeric",
+                  "unit": "F CFA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la masse est 15 kg (déjà en kilogrammes) et le prix unitaire est 300 F CFA par kilogramme. Étape 2 — Écrire la relation : le prix est proportionnel à la masse, prix = masse × prix du kilogramme. Étape 3 — Calculer : 15 × 300 = 4 500. Étape 4 — Conclure : le régime coûte 4 500 F CFA. Multiplier par g (15 × 10 × 300) serait une erreur : on paie à la masse en kg et non au poids en newtons.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un peson indique 140 N quand un régime de plantains immobile y est accroché. On prend g = 10 N/kg. La masse du régime est 14 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Identifier : la tension du peson est 140 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 140 N. Étape 3 — Calculer : m = P / g = 140 / 10 = 14 kg. Étape 4 — Conclure : l'affirmation est vraie. Répondre « Faux » viendrait d'une confusion entre le newton et le kilogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un régime de plantains est immobile, accroché au crochet d'un peson. Comment se comparent la tension du crochet et le poids du régime ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : les deux forces sont le poids (vers le bas) et la tension du crochet (vers le haut). Étape 2 — Écrire l'égalité des intensités : le régime est immobile, donc il est en équilibre. Étape 3 — Calculer : non demandé, on compare les caractéristiques. Étape 4 — Conclure : même droite verticale, sens contraires, même intensité. Le même sens ferait s'ajouter les forces ; une tension plus grande ferait monter le régime ; des droites différentes le feraient tourner.",
+                  "answers": [
+                    {
+                      "content": "Même droite d'action verticale, même sens, même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Droites d'action différentes, sens contraires, même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Même droite d'action verticale, sens contraires, même intensité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Même droite d'action, sens contraires, la tension est plus grande que le poids",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur un chantier à Abidjan, des sacs de ciment de 50 kg sont posés sur le sol horizontal et restent immobiles. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque situation, la réaction du sol a la même intensité que le poids de ce qui est posé.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sac de ciment de 50 kg est posé et immobile sur le sol horizontal (frottements négligés, g = 10 N/kg). Quelle est l'intensité de la réaction du sol, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le sac subit son poids et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : R verticale vers le haut, P verticale vers le bas, donc R = P. Étape 3 — Calculer le poids : P = 50 × 10 = 500 N. Étape 4 — Conclure : R = 500 N, vers le haut. La réponse 50 N prend la masse pour la force.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon empile trois sacs de ciment de 50 kg chacun sur le sol horizontal. L'ensemble reste immobile (frottements négligés, g = 10 N/kg). Quelle est l'intensité de la réaction du sol sur la pile, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : la pile subit son poids et la réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : la masse totale est 3 × 50 = 150 kg, donc P = 150 × 10 = 1 500 N. Étape 4 — Conclure : R = 1 500 N, vers le haut. Calculer la réaction d'un seul sac (500 N) oublie les deux autres sacs.",
+                  "answers": [
+                    {
+                      "content": "1500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de ciment est posé et immobile sur le sol horizontal (frottements négligés). Quelles sont les caractéristiques de la réaction du sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction du sol. Étape 2 — Écrire la condition d'équilibre : la réaction est perpendiculaire au sol, donc verticale, de sens contraire au poids, donc vers le haut, et R = P. Étape 3 — Calculer le poids : non demandé. Étape 4 — Conclure : verticale, vers le haut, de même intensité que le poids. Vers le bas, elle s'ajouterait au poids ; horizontale, elle ne serait pas perpendiculaire au sol ; égale à la masse en kg, elle confondrait kg et N.",
+                  "answers": [
+                    {
+                      "content": "Verticale, vers le bas, de même intensité que le poids du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Horizontale, de même intensité que le poids du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, vers le haut, d'intensité égale à la masse en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, vers le haut, de même intensité que le poids du sac",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de ciment immobile sur le sol a un poids de 500 N. La réaction du sol sur le sac vaut ___ N.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du sac, 500 N vers le bas, et réaction du sol. Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc R = P. Étape 3 — Calculer le poids : il est déjà donné, P = 500 N. Étape 4 — Conclure : R = 500 N. Répondre 50 viendrait d'une division par g, alors que le poids est déjà une force.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de ciment de 50 kg est posé et immobile sur le sol horizontal. On prend g = 10 N/kg. La réaction du sol vaut 50 N.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 50 × 10 = 500 N. Étape 4 — Conclure : R = 500 N, l'affirmation est fausse. Le nombre 50 est la masse en kilogrammes, pas une force.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de sable est posé et immobile sur le sol horizontal. La réaction du sol vaut 2 000 N. On prend g = 10 N/kg. Quelle est la masse du tas de sable, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la réaction du sol, 2 000 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, P = R = 2 000 N. Étape 3 — Calculer : m = P / g = 2 000 / 10 = 200 kg. Étape 4 — Conclure : le tas de sable a une masse de 200 kg. Répondre 2 000 kg lit le newton comme un kilogramme.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À l'école de Yopougon, la maîtresse suspend un cartable de masse 4 kg au crochet d'un dynamomètre fixé au mur ; il reste immobile. Elle le pose ensuite sur une table horizontale, où il reste immobile aussi. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Dans les deux cas, le cartable est en équilibre sous deux forces : son poids et une force de même intensité exercée par le support.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un cartable de masse 4 kg est suspendu au crochet d'un dynamomètre et reste immobile. On prend g = 10 N/kg. Quelle est l'indication du dynamomètre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le cartable subit son poids (vers le bas) et la tension du crochet (vers le haut). Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : P = 4 × 10 = 40 N. Étape 4 — Conclure : le dynamomètre indique 40 N. La réponse 4 N confond masse et force.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même cartable, de masse 4 kg, est posé et immobile sur une table horizontale (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le cartable subit son poids et la réaction de la table. Étape 2 — Écrire la condition d'équilibre : R verticale vers le haut, P verticale vers le bas, donc R = P. Étape 3 — Calculer le poids : P = 4 × 10 = 40 N. Étape 4 — Conclure : R = 40 N, vers le haut. La réponse 4 N confond masse et force.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cartable de masse 4 kg est suspendu à un dynamomètre, immobile, puis posé et immobile sur une table. La force exercée par le dynamomètre dans le premier cas et la réaction de la table dans le second ont la même intensité. On prend g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : dans les deux cas, poids du cartable et une force du support. Étape 2 — Écrire la condition d'équilibre : T = P dans le premier cas, R = P dans le second. Étape 3 — Calculer le poids : P = 4 × 10 = 40 N dans les deux cas. Étape 4 — Conclure : T = R = 40 N, l'affirmation est vraie. Répondre « Faux » reviendrait à croire que la force du support dépend de sa nature (ressort ou table), alors qu'elle ne dépend que du poids.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre cartable est suspendu au dynamomètre et reste immobile : le dynamomètre indique 30 N. On prend g = 10 N/kg. Quelle est la masse de ce cartable, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 30 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 30 N. Étape 3 — Calculer : m = P / g = 30 / 10 = 3 kg. Étape 4 — Conclure : le cartable a une masse de 3 kg. Répondre 30 kg lit le newton comme un kilogramme.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cartable de masse 4 kg est suspendu au crochet d'un dynamomètre et reste immobile (g = 10 N/kg). Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le poids est vertical vers le bas, la tension du crochet est verticale vers le haut. Étape 2 — Écrire la condition d'équilibre : sens contraires et T = P. Étape 3 — Calculer le poids : P = 4 × 10 = 40 N, donc T = 40 N. Étape 4 — Conclure : la tension est vers le haut et le poids vaut 40 N. L'affirmation « 4 N » confond masse et force ; l'affirmation « poids vers le haut » inverse le sens du poids, qui est toujours vers le bas.",
+                  "answers": [
+                    {
+                      "content": "La tension du crochet est dirigée vers le haut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poids du cartable vaut 40 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du crochet vaut 4 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du cartable est dirigé vers le haut",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au village, Yao puise de l'eau. Il accroche un seau plein à la corde du puits ; le seau et son eau ont une masse de 15 kg et restent immobiles. La corde supporte au plus 200 N. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "À l'équilibre, la tension de la corde est égale au poids du seau plein. Compare-la à la limite de 200 N.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un seau plein d'eau, de masse totale 15 kg, est suspendu à une corde et reste immobile. On prend g = 10 N/kg. Quelle est la tension de la corde, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le seau subit son poids (vers le bas) et la tension de la corde (vers le haut). Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : P = 15 × 10 = 150 N. Étape 4 — Conclure : T = 150 N, verticale vers le haut. La réponse 15 N confond masse et force.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao ajoute 3 kg d'eau : le seau plein a maintenant une masse de 18 kg et reste immobile, suspendu à la corde. On prend g = 10 N/kg. Quelle est la tension de la corde ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du seau avec son eau et tension de la corde. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : la masse totale est 18 kg, donc P = 18 × 10 = 180 N. Étape 4 — Conclure : T = 180 N. La réponse 153 N ajoute 3 kg à 150 N, c'est-à-dire une masse à une force ; 18 N confond masse et force ; 150 N oublie l'eau ajoutée.",
+                  "answers": [
+                    {
+                      "content": "153 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "180 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "18 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "150 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une corde supporte au plus 200 N. Un seau suspendu à cette corde reste immobile. On prend g = 10 N/kg. Quelle est la masse maximale du seau, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension maximale, 200 N ; on demande la masse maximale. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, P = T = 200 N. Étape 3 — Calculer : m = P / g = 200 / 10 = 20 kg. Étape 4 — Conclure : la masse maximale est 20 kg. Répondre 200 kg lit le newton comme un kilogramme.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seau plein d'eau de masse 22 kg est suspendu à une corde qui supporte au plus 200 N. Le seau reste immobile et la corde résiste. On prend g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du seau et tension de la corde. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : P = 22 × 10 = 220 N, donc la corde devrait exercer 220 N. Étape 4 — Conclure : 220 N dépasse la limite de 200 N, la corde casserait ; l'affirmation est fausse. Comparer 22 à 200 sans passer par le poids est l'erreur de confusion entre masse et force.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand le seau est immobile au bout de la corde, la tension de la corde et le ___ du seau ont la même intensité.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : le seau subit son poids et la tension de la corde. Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : non demandé. Étape 4 — Conclure : la tension de la corde a la même intensité que le poids du seau. Écrire « masse » serait une erreur : une masse s'exprime en kilogrammes et ne se compare pas à une tension en newtons.",
+                  "answers": [
+                    {
+                      "content": "poids",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et rédiger",
+          "notions": "Justifier l'équilibre avec les trois conditions ; enchaîner les étapes d'un raisonnement ; repérer l'erreur d'un élève (masse et force, conversion, condition oubliée) ; choisir le bon mot (tension, réaction, poids) et la bonne unité.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un tableau de masse 3 kg est accroché par un fil à un clou et reste immobile. On veut justifier, avec les trois conditions d'équilibre, que son poids et la tension du fil se compensent. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Une bonne justification nomme les deux forces, puis vérifie la droite d'action, le sens et l'intensité avant de conclure.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un tableau de masse 3 kg est suspendu à un fil et reste immobile. Quelle phrase est la justification complète de son équilibre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode de rédaction. Étape 1 — Nommer les forces : le poids (vers le bas) et la tension du fil (vers le haut). Étape 2 — Comparer les droites d'action : la verticale pour les deux. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : égales, T = P. Étape 5 — Conclure : les trois conditions sont vérifiées. Une justification qui s'arrête à l'intensité ou aux sens oublie une condition ; dire « il est immobile donc en équilibre » ne justifie rien, car on doit montrer que les forces se compensent.",
+                  "answers": [
+                    {
+                      "content": "Il est immobile, donc il est en équilibre, et il n'y a rien d'autre à vérifier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il subit son poids et la tension du fil, qui ont la même intensité, donc il est en équilibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il subit son poids et la tension du fil : même droite d'action verticale, sens contraires, même intensité, donc il est en équilibre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il subit son poids et la tension du fil, qui sont de sens contraires, donc il est en équilibre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les phrases d'une justification de l'équilibre du tableau de 3 kg.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode de rédaction. Étape 1 — Repérer les forces : on commence par nommer le poids et la tension. Étape 2 — Comparer les droites d'action : la verticale. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : T = P = 3 × 10 = 30 N. Étape 5 — Conclure : les trois conditions sont vérifiées. Conclure avant d'avoir vérifié les trois conditions est l'erreur courante : la conclusion vient toujours en dernier.",
+                  "answers": [
+                    {
+                      "content": "Le tableau est immobile et soumis à deux forces : son poids et la tension du fil."
+                    },
+                    {
+                      "content": "Ces deux forces ont la même droite d'action : la verticale."
+                    },
+                    {
+                      "content": "Leurs sens sont contraires : le poids vers le bas, la tension vers le haut."
+                    },
+                    {
+                      "content": "Leurs intensités sont égales : T = P = 30 N."
+                    },
+                    {
+                      "content": "Les trois conditions sont vérifiées, donc le tableau est en équilibre."
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque condition d'équilibre à ce qu'on vérifie sur les deux forces.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Repérer les deux forces. Étape 2 — Comparer les droites d'action : on vérifie qu'elles sont portées par une même droite. Étape 3 — Comparer les sens : on vérifie que les flèches sont en sens opposés. Étape 4 — Comparer les intensités : on vérifie que les valeurs en newtons sont égales. Confondre « même droite » et « même sens » est une erreur fréquente : deux forces peuvent être sur la même droite avec le même sens, et alors elles s'additionnent.",
+                  "answers": [
+                    {
+                      "content": "La même droite d'action",
+                      "match": "Les deux forces sont portées par une même droite"
+                    },
+                    {
+                      "content": "Des sens contraires",
+                      "match": "Les deux flèches sont dirigées en sens opposés"
+                    },
+                    {
+                      "content": "La même intensité",
+                      "match": "Les deux forces ont la même valeur en newtons"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tableau de masse 3 kg est suspendu à un fil et reste immobile. On prend g = 10 N/kg. Quelle est la tension du fil, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du tableau et tension du fil. Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : P = 3 × 10 = 30 N. Étape 4 — Conclure : T = 30 N, verticale vers le haut. La réponse 3 N confond la masse et la force.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « Les deux forces ont la même intensité, donc le solide est en équilibre. » Quelle réponse est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode de rédaction. Étape 1 — Repérer : l'élève ne vérifie qu'une condition. Étape 2 — Comparer les droites d'action : non vérifiée dans son raisonnement. Étape 3 — Comparer les sens : non vérifiés non plus. Étape 4 — Comparer les intensités : seule condition vérifiée. Étape 5 — Conclure : il faut les trois conditions ensemble. Deux forces de même intensité et de même sens s'ajoutent au lieu de se compenser ; l'intensité joue bien un rôle, mais elle ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "C'est suffisant : l'égalité des intensités garantit l'équilibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : l'intensité n'a aucun rôle dans l'équilibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est suffisant si les deux forces ont le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas suffisant : il faut aussi la même droite d'action et des sens contraires",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour justifier qu'un solide soumis à deux forces est en équilibre, il suffit de vérifier deux des trois conditions.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode de rédaction. Étape 1 — Repérer les deux forces. Étape 2 — Comparer les droites d'action. Étape 3 — Comparer les sens. Étape 4 — Comparer les intensités. Étape 5 — Conclure : le solide est en équilibre si les trois conditions sont vérifiées, sinon il ne l'est pas. Deux conditions sur trois laissent le solide se déplacer ou tourner : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Quatre élèves résolvent des exercices d'équilibre. Pour chaque élève, tu dois trouver l'erreur ou donner la bonne valeur. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Cherche d'abord si l'élève a confondu masse et force, oublié de convertir une masse en kilogrammes ou oublié une condition d'équilibre.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Kofi écrit : « Un sac de 5 kg est posé et immobile sur une table. La réaction de la table vaut 5 N. » Où est son erreur ? (g = 10 N/kg)",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du sac et réaction de la table. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 5 × 10 = 50 N. Étape 4 — Conclure : R = 50 N. Kofi a pris la masse (5 kg) pour une force. La masse est déjà en kilogrammes, donc aucune conversion n'était à faire ; la réaction est bien vers le haut, pas vers le bas.",
+                  "answers": [
+                    {
+                      "content": "Il a pris la masse en kg pour une force en N : la réaction vaut 5 × 10 = 50 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié que la réaction est dirigée vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié de convertir des grammes en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas fait d'erreur : la réaction vaut bien 5 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa écrit : « Un seau de 300 g est suspendu à une corde et reste immobile. T = 300 × 10 = 3 000 N. » Quelle est la bonne tension ? (g = 10 N/kg)",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du seau et tension de la corde. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : on convertit 300 g = 0,3 kg, puis P = 0,3 × 10 = 3 N. Étape 4 — Conclure : T = 3 N. Awa a oublié la conversion des grammes en kilogrammes. La réponse 30 N se trompe d'une puissance de dix dans la conversion ; la réponse 0,3 N s'arrête à la masse sans multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "30 N, car 3 × 10 = 30 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 N, car 300 g = 0,3 kg et 0,3 × 10 = 3 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,3 N, car 300 / 1 000 = 0,3 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 000 N, le calcul d'Awa est correct",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao écrit : « Un peson indique 90 N quand un sac immobile y est suspendu, donc la masse du sac est 90 kg. » Quelle est la bonne masse ? (g = 10 N/kg)",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 90 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 90 N. Étape 3 — Calculer : m = P / g = 90 / 10 = 9 kg. Étape 4 — Conclure : la masse est 9 kg. Yao a lu une force en newtons comme une masse en kilogrammes ; multiplier par g (900 kg) ou diviser deux fois (0,9 kg) sont d'autres erreurs de calcul.",
+                  "answers": [
+                    {
+                      "content": "90 kg : le raisonnement de Yao est correct",
+                      "correct": false
+                    },
+                    {
+                      "content": "900 kg, car m = P × g",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 kg, car m = P / g = 90 / 10",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,9 kg, car m = P / g / 10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam écrit : « Deux forces de 7 N, portées par la même droite et dirigées dans le même sens, se compensent : le solide est en équilibre. »",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : deux forces de 7 N, même droite, même sens. Étape 2 — Comparer les droites d'action : confondues. Étape 3 — Comparer les sens : identiques, donc non contraires : la condition manque. Étape 4 — Comparer les intensités : 7 N = 7 N. Étape 5 — Conclure : le solide n'est pas en équilibre. Les deux forces s'ajoutent (14 N). Mariam a cru que l'égalité des intensités suffisait.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi corrige son erreur : une caisse de 20 kg est posée et immobile sur le sol horizontal (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids de la caisse et réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 20 × 10 = 200 N. Étape 4 — Conclure : R = 200 N, verticale vers le haut. Écrire 20 N est l'erreur de Kofi : confondre la masse et le poids.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un commerçant suspend un sac de manioc à un peson : le sac est immobile et le peson indique 60 N. Il pose ensuite le même sac sur le sol horizontal, où il reste immobile. On néglige les frottements et on prend g = 10 N/kg. Il faut enchaîner les étapes d'un raisonnement.",
+              "exercise_type": "evaluation",
+              "hint": "Commence par la masse du sac, qui ne change pas. Elle te donne le poids, donc la force du support dans chaque situation.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un peson auquel est suspendu un sac de manioc immobile indique 60 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 60 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 60 N. Étape 3 — Calculer : m = P / g = 60 / 10 = 6 kg. Étape 4 — Conclure : le sac a une masse de 6 kg. Répondre 60 kg lit la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de manioc de masse 6 kg est posé et immobile sur le sol horizontal (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du sac et réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 6 × 10 = 60 N. Étape 4 — Conclure : R = 60 N, vers le haut. La réponse 6 N confond la masse et la force.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui donne la réaction du sol à partir de l'indication du peson (60 N).",
+                  "question_type": "ordering",
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension du peson, 60 N. Étape 2 — Écrire l'égalité des intensités : le sac est en équilibre au crochet, donc P = T = 60 N. Étape 3 — Calculer la masse avec m = P / g = 6 kg. Étape 4 — Conclure pour le sac posé : R = P = 60 N. On aurait pu passer directement du poids à la réaction ; la masse sert de contrôle. Appliquer la condition d'équilibre du sac posé avant d'avoir trouvé le poids est l'erreur d'ordre à éviter.",
+                  "answers": [
+                    {
+                      "content": "Identifier la force connue : la tension du peson, 60 N."
+                    },
+                    {
+                      "content": "Écrire l'égalité des intensités : le poids du sac vaut aussi 60 N."
+                    },
+                    {
+                      "content": "Calculer la masse avec m = P / g, soit 6 kg."
+                    },
+                    {
+                      "content": "Écrire la condition d'équilibre du sac posé : la réaction du sol est égale au poids, donc 60 N."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la réaction du sol sur le sac posé a-t-elle la même intensité que la tension du peson sur le sac suspendu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Identifier : dans les deux situations, la grandeur commune est le poids du sac. Étape 2 — Écrire l'égalité des intensités : T = P pour le sac suspendu, R = P pour le sac posé. Étape 3 — Calculer : P = 6 × 10 = 60 N dans les deux cas. Étape 4 — Conclure : T = R = 60 N, car la masse, donc le poids, ne change pas. La matière du support n'intervient pas ; la masse reste 6 kg ; la réaction n'est pas deux fois plus grande que le poids, elle lui est égale.",
+                  "answers": [
+                    {
+                      "content": "Parce que le sol et le peson sont faits de la même matière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la masse du sac change en passant du peson au sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la réaction du sol est toujours deux fois plus grande que le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que, dans les deux cas, le sac est en équilibre : la force du support est égale au poids, qui ne change pas",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de manioc de masse 6 kg est suspendu à un peson, immobile, puis posé sur le sol, immobile. On prend g = 10 N/kg. L'indication du peson (60 N) est égale à la réaction du sol (60 N).",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : dans les deux cas, le poids et une force du support. Étape 2 — Écrire la condition d'équilibre : T = P puis R = P. Étape 3 — Calculer le poids : P = 6 × 10 = 60 N. Étape 4 — Conclure : T = R = 60 N, l'affirmation est vraie. Répondre « Faux » vient de l'idée que le sol et le peson exercent des forces différentes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant retire 2 kg de manioc du sac de 6 kg, qui reste suspendu et immobile au peson. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Identifier : la nouvelle masse est 6 − 2 = 4 kg et on cherche la nouvelle tension. Étape 2 — Écrire l'égalité des intensités : T = P. Étape 3 — Calculer : P = 4 × 10 = 40 N. Étape 4 — Conclure : le peson indique 40 N. L'indication 60 N oublie que la masse a diminué ; l'indication 58 N retire 2 N au lieu de 2 kg, c'est-à-dire 20 N : on soustrait une masse à une force.",
+                  "answers": [
+                    {
+                      "content": "La masse du sac vaut maintenant 4 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le peson indique maintenant 40 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le peson indique toujours 60 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le peson indique maintenant 58 N",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Cet exercice demande de choisir le bon mot et le bon argument pour parler d'un solide en équilibre sous deux forces : tension, réaction, poids, masse, unités. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Retiens : la tension est la force d'un fil ou d'un ressort, la réaction est la force d'un support, le poids se calcule avec P = m × g.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quand un solide est en équilibre sous l'action de deux forces, la somme vectorielle des deux forces F1 et F2 est égale au vecteur ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode. Étape 1 — Repérer : deux forces en équilibre. Étape 2 — Comparer les droites d'action : confondues. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : égales. Étape 5 — Conclure : leurs effets se compensent, donc leur somme est le vecteur nul. Un vecteur égal à 2 × F1 correspondrait à deux forces de même sens, qui s'ajoutent ; un vecteur égal à F1 correspondrait à une seule force qui agit.",
+                  "answers": [
+                    {
+                      "content": "unité",
+                      "correct": false
+                    },
+                    {
+                      "content": "nul",
+                      "correct": true
+                    },
+                    {
+                      "content": "égal à F1",
+                      "correct": false
+                    },
+                    {
+                      "content": "égal à 2 × F1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on la force exercée par un fil sur un corps suspendu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : un corps suspendu subit son poids et une force exercée par le fil. Étape 2 — Écrire la condition d'équilibre : la force du fil est verticale vers le haut. Étape 3 — Nommer : la force exercée par le fil sur le corps est la tension. Étape 4 — Conclure : la tension. Le poids est dirigé vers le bas ; la réaction est la force d'un support ; la masse n'est pas une force, elle s'exprime en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "Le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comment appelle-t-on la force exercée par une table sur un objet posé dessus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : un objet posé subit son poids et une force exercée par le support. Étape 2 — Écrire la condition d'équilibre : la force du support est verticale vers le haut. Étape 3 — Nommer : la force exercée par le support sur l'objet est la réaction. Étape 4 — Conclure : la réaction. La tension est réservée au fil ou au ressort ; le poids est dirigé vers le bas ; la masse n'est pas une force.",
+                  "answers": [
+                    {
+                      "content": "La tension",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur à son unité ou à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Méthode. Étape 1 — Identifier : trois grandeurs servent à calculer P = m × g. Étape 2 — Associer : le poids est une force, il se mesure en newtons ; la masse se mesure en kilogrammes ; g vaut 10 N/kg. Étape 3 — Conclure : P en N, m en kg, g = 10 N/kg. Confondre newton et kilogramme est l'erreur la plus fréquente : le newton mesure une force, le kilogramme une masse.",
+                  "answers": [
+                    {
+                      "content": "Le poids d'un corps",
+                      "match": "Le newton (N)"
+                    },
+                    {
+                      "content": "La masse d'un corps",
+                      "match": "Le kilogramme (kg)"
+                    },
+                    {
+                      "content": "La valeur de g",
+                      "match": "10 N/kg"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une masse de 0,5 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelle écriture donne correctement la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et tension. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : P = m × g = 0,5 × 10 = 5 N. Étape 4 — Conclure : T = 5 N, avec l'unité des forces. T = 0,5 N confond masse et force ; T = 0,05 N divise par g au lieu de multiplier ; écrire 5 kg donne à une force l'unité d'une masse.",
+                  "answers": [
+                    {
+                      "content": "T = 0,5 × 10 = 5 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "T = 0,5 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "T = 0,5 / 10 = 0,05 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "T = 0,5 × 10 = 5 kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : conditions d'équilibre de deux forces, tension d'un fil ou d'un ressort, réaction d'un support, poids P = m × g, détermination d'une force ou d'une masse inconnue, conversions de masses et lecture d'un dynamomètre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Salimata suspend une lampe de masse 1,5 kg au plafond par un fil. La lampe reste immobile. Elle la pose ensuite sur une table horizontale, où elle reste immobile aussi. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Dans les deux situations, la lampe est en équilibre sous deux forces : son poids et la force du support, de même intensité.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une lampe de masse 1,5 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelle est la tension du fil, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : la lampe subit son poids (vers le bas) et la tension du fil (vers le haut). Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc T = P. Étape 3 — Calculer le poids : P = 1,5 × 10 = 15 N. Étape 4 — Conclure : T = 15 N, verticale vers le haut. La réponse 1,5 N confond la masse et la force.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de masse 1,5 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Quelles sont les caractéristiques de la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et tension du fil. Étape 2 — Écrire la condition d'équilibre : la tension est sur la même droite verticale que le poids et de sens contraire, donc vers le haut ; T = P. Étape 3 — Calculer le poids : P = 1,5 × 10 = 15 N. Étape 4 — Conclure : verticale, vers le haut, 15 N. Vers le bas, la tension aurait le sens du poids ; 1,5 N est la masse en kg prise pour une force ; une tension horizontale ne compenserait pas un poids vertical.",
+                  "answers": [
+                    {
+                      "content": "Verticale, dirigée vers le bas, d'intensité 15 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le haut, d'intensité 15 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Verticale, dirigée vers le haut, d'intensité 1,5 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Horizontale, d'intensité 15 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Salimata remplace la lampe par une autre, qui reste suspendue et immobile : le fil exerce une force de 24 N. On prend g = 10 N/kg. Quelle est la masse de cette lampe, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension du fil, 24 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 24 N. Étape 3 — Calculer : m = P / g = 24 / 10 = 2,4 kg. Étape 4 — Conclure : la lampe a une masse de 2,4 kg. Répondre 24 kg lit la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "2,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Salimata pose sa lampe de 1,5 kg sur une table horizontale ; la lampe reste immobile. On néglige les frottements et on prend g = 10 N/kg. La réaction de la table vaut 15 N.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids de la lampe et réaction de la table. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 1,5 × 10 = 15 N. Étape 4 — Conclure : R = 15 N, l'affirmation est vraie. Répondre « Faux » viendrait de l'idée que la table exerce une force différente du fil.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est posée et immobile sur une table. La réaction R de la table et le poids P de la lampe ont la même ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction. Étape 2 — Écrire la condition d'équilibre : même droite verticale, sens contraires, donc R = P : même intensité. Étape 3 — Calculer le poids : non demandé. Étape 4 — Conclure : la réaction et le poids ont la même intensité. Écrire « masse » serait faux : la masse n'est pas une caractéristique d'une force.",
+                  "answers": [
+                    {
+                      "content": "intensité",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Adjamé, un vendeur de charbon accroche un sac au crochet d'un peson. Le sac est immobile et le peson indique 350 N. Il pose ensuite le sac sur le sol horizontal, où il reste immobile. Le charbon est vendu 200 F CFA le kilogramme. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Commence par la masse du sac, qui ne change pas. Le prix se calcule avec la masse en kilogrammes, jamais avec le poids.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un peson auquel est accroché un sac de charbon immobile indique 350 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension du peson, 350 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 350 N. Étape 3 — Calculer : m = P / g = 350 / 10 = 35 kg. Étape 4 — Conclure : le sac a une masse de 35 kg. Répondre 350 kg lit la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sac de charbon de 35 kg est posé et immobile sur le sol horizontal (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du sac et réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = 35 × 10 = 350 N. Étape 4 — Conclure : R = 350 N, verticale vers le haut. Répondre 35 N confond la masse et la force.",
+                  "answers": [
+                    {
+                      "content": "350",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le charbon est vendu 200 F CFA le kilogramme. Quel est le prix d'un sac de 35 kg, en francs CFA ?",
+                  "question_type": "numeric",
+                  "unit": "F CFA",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la masse est 35 kg et le prix du kilogramme est 200 F CFA. Étape 2 — Écrire la relation : prix = masse × prix du kilogramme. Étape 3 — Calculer : 35 × 200 = 7 000. Étape 4 — Conclure : le sac coûte 7 000 F CFA. Utiliser le poids (350 N) à la place de la masse donnerait 70 000 F CFA, ce qui est faux : on vend à la masse en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "7000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de charbon est suspendu à un peson, immobile, puis posé sur le sol, immobile. Le peson indiquait 350 N. La réaction du sol vaut alors 35 N. On prend g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du sac et réaction du sol. Étape 2 — Écrire la condition d'équilibre : R = P. Étape 3 — Calculer le poids : P = T = 350 N, car le sac est le même. Étape 4 — Conclure : R = 350 N, pas 35 N ; l'affirmation est fausse. Le nombre 35 est la masse en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sac de charbon est posé et immobile sur le sol horizontal (frottements négligés). Quelle affirmation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids et réaction du sol. Étape 2 — Écrire la condition d'équilibre : la réaction est verticale, de sens contraire au poids, donc vers le haut, et R = P. Étape 3 — Calculer le poids : non demandé. Étape 4 — Conclure : verticale, vers le haut, égale au poids. Dire qu'elle est nulle parce que le sac est immobile est faux : le sac est immobile justement parce que la réaction compense le poids.",
+                  "answers": [
+                    {
+                      "content": "La réaction du sol est verticale, vers le bas, et égale au poids du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction du sol est horizontale et égale au poids du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction du sol est verticale, vers le haut, et égale au poids du sac",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol est nulle, car le sac est immobile",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Sur le dessin, un solide représenté par le point G est soumis à deux forces portées par la même droite horizontale : F1 mesure 4 carreaux (4 N) vers la droite et F2 mesure 2 carreaux (2 N) vers la gauche, à l'échelle de 1 carreau pour 1 N. On prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Compare les trois conditions une à une. Pour rétablir l'équilibre, il faut que l'intensité manquante devienne égale à l'autre.",
+              "figure": "forces-inegales",
+              "questions": [
+                {
+                  "content": "Un solide est soumis à une force F1 de 4 N vers la droite et à une force F2 de 2 N vers la gauche, portées par la même droite horizontale. Il est en équilibre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 = 4 N vers la droite, F2 = 2 N vers la gauche, même droite horizontale. Étape 2 — Comparer les droites d'action : confondues. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : 4 N est différent de 2 N, la condition n'est pas vérifiée. Étape 5 — Conclure : le solide n'est pas en équilibre. Penser qu'il l'est parce que les sens sont contraires et les droites confondues oublie l'égalité des intensités.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à F1 = 4 N vers la droite et à une force F2 vers la gauche, sur la même droite horizontale. Quelle doit être l'intensité de F2, en newtons, pour que le solide soit en équilibre ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 = 4 N vers la droite, F2 inconnue vers la gauche. Étape 2 — Comparer les droites d'action : elles sont confondues. Étape 3 — Comparer les sens : contraires. Étape 4 — Comparer les intensités : pour l'équilibre, F2 = F1 = 4 N. Étape 5 — Conclure : F2 doit valoir 4 N. Répondre 2 N garde la valeur du dessin ; répondre 6 N additionne les deux forces.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à F1 = 4 N vers la droite et à F2 = 2 N vers la gauche, sur la même droite horizontale. Choisis les deux modifications qui rétablissent l'équilibre.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Repérer : F1 = 4 N vers la droite, F2 = 2 N vers la gauche. Étape 2 — Comparer les droites d'action : confondues dans chaque proposition. Étape 3 — Comparer les sens : contraires, sauf si F2 est retournée vers la droite. Étape 4 — Comparer les intensités : égales seulement dans « F2 à 4 N » (4 N et 4 N) et dans « F1 à 2 N » (2 N et 2 N). Étape 5 — Conclure : ces deux modifications rétablissent l'équilibre. Porter F1 à 6 N agrandit l'écart ; retourner F2 donne le même sens aux deux forces, qui s'ajoutent (6 N).",
+                  "answers": [
+                    {
+                      "content": "Retourner F2 vers la droite, avec 2 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Porter F2 à 4 N, toujours vers la gauche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Réduire F1 à 2 N, toujours vers la droite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Porter F1 à 6 N, toujours vers la droite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est soumis à F1 = 4 N vers la droite et F2 = 2 N vers la gauche, sur la même droite horizontale. Pourquoi n'est-il pas en équilibre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Repérer : deux forces sur la même droite horizontale, l'une vers la droite, l'autre vers la gauche. Étape 2 — Comparer les droites d'action : confondues, condition vérifiée. Étape 3 — Comparer les sens : contraires, condition vérifiée. Étape 4 — Comparer les intensités : 4 N et 2 N, condition non vérifiée. Étape 5 — Conclure : seule l'égalité des intensités manque. Dire que les sens sont contraires comme raison du déséquilibre est faux : c'est une condition d'équilibre.",
+                  "answers": [
+                    {
+                      "content": "Parce que les intensités sont différentes, alors que la droite d'action est commune et les sens contraires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que les droites d'action ne sont pas confondues",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les deux forces ont le même sens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les sens sont contraires",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de 4 N est le poids d'un corps suspendu à un dynamomètre qui reste immobile : le dynamomètre indique 4 N. On prend g = 10 N/kg. Quelle est la masse du corps, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 4 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 4 N. Étape 3 — Calculer : m = P / g = 4 / 10 = 0,4 kg. Étape 4 — Conclure : le corps a une masse de 0,4 kg. Répondre 4 kg lit le newton comme un kilogramme.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au laboratoire, un élève suspend des corps à un dynamomètre à ressort vertical. Chaque corps reste immobile et l'index indique la tension du ressort. L'élève pose ensuite certains de ces corps sur la paillasse horizontale. On néglige les frottements et on prend g = 10 N/kg.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque corps, calcule d'abord son poids ou sa masse. Le dynamomètre indique la tension, la paillasse exerce la réaction.",
+              "figure": "peson-ressort",
+              "questions": [
+                {
+                  "content": "Un corps suspendu à un dynamomètre reste immobile et l'index indique 48 N. On prend g = 10 N/kg. Quelle est la masse du corps, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la force connue est la tension, 48 N ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : P = T = 48 N. Étape 3 — Calculer : m = P / g = 48 / 10 = 4,8 kg. Étape 4 — Conclure : le corps a une masse de 4,8 kg. Répondre 48 kg lit la force comme une masse.",
+                  "answers": [
+                    {
+                      "content": "4,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 2,2 kg est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Quelle est l'indication du dynamomètre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Identifier : la grandeur demandée est la tension indiquée ; la donnée est la masse, 2,2 kg. Étape 2 — Écrire l'égalité des intensités : T = P. Étape 3 — Calculer : P = 2,2 × 10 = 22 N. Étape 4 — Conclure : le dynamomètre indique 22 N. La réponse 2,2 N confond masse et force.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 600 g est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Quelle est l'indication du dynamomètre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du corps et tension du ressort. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : 600 g = 0,6 kg, donc P = 0,6 × 10 = 6 N. Étape 4 — Conclure : le dynamomètre indique 6 N. La réponse 600 N prend la masse en grammes pour une force ; 60 N se trompe d'une puissance de dix dans la conversion ; 0,6 N oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "600 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "60 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,6 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 150 g est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Le dynamomètre indique 15 N.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : poids du corps et tension du ressort. Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : 150 g = 0,15 kg, donc P = 0,15 × 10 = 1,5 N. Étape 4 — Conclure : le dynamomètre indique 1,5 N, pas 15 N ; l'affirmation est fausse. 15 N vient d'une conversion fausse des grammes en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 2 kg est suspendu à un dynamomètre, immobile, puis posé et immobile sur la paillasse horizontale (frottements négligés, g = 10 N/kg). Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : dans les deux cas, le poids du corps et la force d'un support. Étape 2 — Écrire la condition d'équilibre : T = P puis R = P. Étape 3 — Calculer le poids : P = 2 × 10 = 20 N. Étape 4 — Conclure : T = R = 20 N. Les valeurs 2 N confondent la masse (2 kg) et la force.",
+                  "answers": [
+                    {
+                      "content": "Le dynamomètre indique 2 N quand le corps est suspendu",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction de la paillasse vaut 2 N quand le corps est posé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dynamomètre indique 20 N quand le corps est suspendu",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction de la paillasse vaut 20 N quand le corps est posé",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux corps, de masses 2 kg et 3 kg, sont suspendus ensemble à un dynamomètre. L'ensemble reste immobile. On prend g = 10 N/kg. Quelle est l'indication du dynamomètre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode. Étape 1 — Faire le bilan des forces : l'ensemble subit son poids total (vers le bas) et la tension du ressort (vers le haut). Étape 2 — Écrire la condition d'équilibre : T = P. Étape 3 — Calculer le poids : la masse totale est 2 + 3 = 5 kg, donc P = 5 × 10 = 50 N. Étape 4 — Conclure : le dynamomètre indique 50 N. Calculer 2 × 3 × 10 = 60 N multiplie les masses au lieu de les additionner.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
                 }
               ]
             }
