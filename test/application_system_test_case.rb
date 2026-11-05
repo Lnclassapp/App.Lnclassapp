@@ -80,6 +80,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def wait_for_lazy_frames(scope = "#school_crm")
     return unless page.has_selector?(scope, wait: 0)
 
+    # The scope may itself be a lazy frame (#school_crm): its own sub-frames exist only once it has loaded.
+    if page.has_selector?("turbo-frame#{scope}[src]", visible: :all, wait: 0)
+      page.execute_script("document.querySelector(arguments[0]).scrollIntoView({ block: 'center' })", scope)
+      assert_selector "#{scope}[complete]", visible: :all, wait: 10
+    end
     all("#{scope} turbo-frame[src]", visible: :all).map { it[:id] }.each do |id|
       page.execute_script("document.getElementById(arguments[0]).scrollIntoView({ block: 'center' })", id)
       assert_selector "##{id}[complete]", visible: :all, wait: 10

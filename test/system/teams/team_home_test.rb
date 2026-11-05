@@ -23,6 +23,7 @@ class Teams::TeamHomeTest < ApplicationSystemTestCase
 
     assert_current_path team_home_path
     assert_selector "h1", text: tl("show.greeting", name: "Aya")
+    wait_for_lazy_frames("main#main") # the follow-ups card above pushes the recent courses frame down: it loads once seen
     within("#team_home_regions") do
       assert_text figure("show.drenas", 1), normalize_ws: true
       assert_text figure("show.schools", 1), normalize_ws: true
