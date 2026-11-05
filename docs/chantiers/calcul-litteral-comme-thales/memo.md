@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré ([#483](https://github.com/Lnclassapp/App.Lnclassapp/pull/483) vers `Develop`, 2026-11-05), clos |
 | **Ouvert le** | 2026-11-05 |
 | **Branche** | `feature/calcul-litteral-comme-thales` |
 | **Programme** | — |

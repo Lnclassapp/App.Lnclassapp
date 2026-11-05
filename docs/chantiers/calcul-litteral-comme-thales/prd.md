@@ -64,5 +64,5 @@ Alors sa bonne réponse est juste et ses mauvaises réponses sont fausses (véri
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Exercices par notion | 1 | 2 | |
-| Sujets de devoir | 0 | 4 × 4 exercices | |
+| Exercices par notion | 1 | 2 | 2 |
+| Sujets de devoir | 0 | 4 × 4 exercices | 4 × 4 exercices (95 questions) |

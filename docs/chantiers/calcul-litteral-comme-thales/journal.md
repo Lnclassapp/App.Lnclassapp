@@ -28,13 +28,15 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Figures sans dimensions écrites dessus | la figure géométrique affiche des longueurs calculées qui contrediraient « x + 5 » ; dimensions dans l'énoncé | à reprendre si la figure apprend à masquer ses longueurs |
+| Revues (sécurité, pannes, tests) non lancées | contenu JSON et deux lignes de semis et de test, sans use case, policy, route ni téléversement | — |
+| Les autres leçons | le pilote a choisi Calcul littéral seul d'abord, pour voir le résultat | à décider par le pilote |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-05 |
+| **PR** | [#483](https://github.com/Lnclassapp/App.Lnclassapp/pull/483) vers `Develop` |
+| **ADR produits** | — |
+| **UDR produits** | — |
