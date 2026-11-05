@@ -34,6 +34,22 @@ class Classroom::ClassroomPrepareSheetsControllerTest < ActionDispatch::Integrat
     assert_select "a[href=?]", classroom_course_path(@classroom.public_id, @course.slug, anchor: @sheet), text: /Thalès/
   end
 
+  # suivi-classe-lecon (ADR lecture-de-la-classe-par-la-direction, CA-12, CA-13) : la direction lit la réussite, sans agir ; ailleurs, 404.
+  test "the school admin of the same school reads the class success, without « Choisir » nor toggle; another school gets 404" do
+    sign_in_as create_school_admin(school: @classroom.school)
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_response :success
+    assert_select "#sheet-success-#{@ex.public_id}"
+    assert_select "##{toggle_id(@classroom, @ex)}", 0
+    assert_select "[data-batch-choice], .ps-btn--choose, #sheet-batch-bar", 0
+
+    sign_in_as create_school_admin(school: create_school(name: "Autre lycée"))
+    get classroom_course_sheet_path(@classroom.public_id, @course.slug, @sheet)
+
+    assert_response :not_found
+  end
+
   test "a subject is read the same way" do
     sign_in_as @teacher
 
