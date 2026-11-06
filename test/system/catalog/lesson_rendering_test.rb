@@ -165,7 +165,42 @@ module LessonRendering
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
       missing_figures(lesson, seen["figures"]).each { defects << "figure « #{it} » absente de la page ou vide" }
+      sheets = all(".ps-card", minimum: 0).map { it[:id] }
+      defects += sheets.flat_map { |sheet| inspect_sheet(course, sheet) }
       defects.map { LessonRendering::Defect.new(file, width, it) }
+    end
+
+    # Une feuille (UDR-0149, feuilles-en-cases-lues-avant-de-commencer) : son sujet en lecture, puis la feuille à remplir de l'élève.
+    # Les exercices ne sont que là depuis #464 : même largeur que l'écran, pas de « ** », pas de « $…$ » resté brut, chaque
+    # figure dessinée.
+    def inspect_sheet(course, sheet)
+      [ course_sheet_path(course.slug, sheet), fill_course_sheet_path(course.slug, sheet) ].flat_map do |path|
+        visit path
+        assert_selector ".ps-page", wait: 20
+        seen = measure_sheet
+        where = "feuille #{sheet} (#{path.end_with?('/remplir') ? 'à remplir' : 'lecture'})"
+        found = []
+        found << "#{where} : page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
+        found << "#{where} : ** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
+        found << "#{where} : #{seen['bare']} formule(s) $…$ restée(s) en texte brut" if seen["bare"].positive?
+        blank = seen["figures"].count { !it["shown"] }
+        found << "#{where} : #{blank} figure(s) vide(s)" if blank.positive?
+        found
+      end
+    end
+
+    # Comme measure_page, sans fichier à comparer : la feuille est finie quand ses formules sont stables et chaque figure dessinée.
+    def measure_sheet
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + LessonRendering::Verifier::FIGURE_WAIT
+      previous = nil
+      loop do
+        seen = page.evaluate_script(MEASURE)
+        done = seen["bare"].zero? && seen["formulas"] == previous && seen["figures"].all? { it["shown"] }
+        return seen if done || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+
+        previous = seen["formulas"]
+        sleep 0.25
+      end
     end
 
     # La fiche de révision est coupée après 50 mots : « Voir plus » montre les notions suivantes, et leurs figures.
