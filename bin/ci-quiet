@@ -11,6 +11,7 @@
 #   CI_GROUP=lint bin/ci-quiet   a subset of bin/ci, as before: no level, no verdict kept
 require "open3"
 require_relative "../script/ci/scope"
+require_relative "../script/ci/record_missing"
 
 Dir.chdir(File.expand_path("..", __dir__))
 LOG = "tmp/ci.log"
@@ -52,6 +53,15 @@ if ENV["CI_GROUP"].to_s.strip != ""
 end
 
 base = ENV.fetch("BASE", "origin/Develop")
+# A system file without a recorded duration is played once and recorded in the work tree before the guards read the
+# file (chantier ci-durees-enregistrees); the budget guard then checks the measured duration, as for any other file.
+unless ARGV.include?("--plan")
+  recorded = RecordMissing.call(SystemBudget.from_git.missing, runner: RecordMissing.runner, recorder: RecordMissing.recorder)
+  puts RecordMissing.message(recorded)
+  # The recorded duration is a change to the work tree: no run proves HEAD until it is committed, so nothing else plays
+  # now and the next run, on the commit, plays once with its verdicts kept.
+  exit 1 if recorded.recorded
+end
 branch = git("rev-parse", "--abbrev-ref", "HEAD").to_s.strip
 head = git("rev-parse", "HEAD").to_s.strip
 merge_base = git("merge-base", base, "HEAD")&.strip
@@ -159,5 +169,11 @@ played = runs.count { |step, _| !step.setup }
 proof = "Preuve : `bin/ci-quiet` niveau #{level} vert sur `#{head[0, 8]}` (empreinte `#{fingerprint[0, 12]}`), " \
         "#{played} étape(s) jouée(s), #{reused} déjà verte(s) pour leurs entrées, " \
         "#{minutes} min #{seconds} s, le #{Time.now.strftime('%F %H:%M')}."
+# A proof names HEAD: a tree that differs from it proves nothing about that commit, so it gets no line to paste.
+unless clean
+  touched = git("status", "--porcelain").to_s.lines.map { it[3..].strip }.join(", ")
+  todo = touched.empty? ? "HEAD moved during the run" : "commit #{touched}"
+  abort "bin/ci: green on the work tree, not on #{head[0, 8]}: no proof line (#{todo}), then run bin/ci-quiet again."
+end
 puts proof
-verdicts.record(fingerprint, level, proof) if clean
+verdicts.record(fingerprint, level, proof)
