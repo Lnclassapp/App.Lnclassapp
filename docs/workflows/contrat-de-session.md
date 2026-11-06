@@ -48,3 +48,13 @@ S'il n'y a aucune entrée ouverte, la session s'arrête sans rien demander.
 
 - Les comptes élève, enseignant et direction de recette sont ceux du jeu standard (PIN public `2468`). Ils existent sur Develop, Staging (chantier `comptes-de-test-staging`), Demo et chaque environnement de PR. `docs/recette/README.md` les liste : on ne les redemande pas au porteur.
 - Si une variable manque, la session donne son nom en une ligne et ne la demande pas dans le chat.
+
+## 4. Écrire à une session (côté porteur)
+
+Mesure du 5/11 : un `/goal` « jusqu'au déploiement sur main », impossible à atteindre seul, a produit environ 35 blocages du hook de fin en 15 minutes ; un `/goal clear` suivi d'une autre demande dans le même message a créé un objectif.
+
+- **Une intention par message.** « Fusionne la PR 488 », puis, une fois fait, « promeus vers Staging ». Deux demandes liées peuvent partir ensemble si la seconde ne dépend pas d'une décision humaine.
+- **Un `/goal` que la session peut atteindre seule** : « PR #481 fusionnée dans Develop », « CI verte sur #491 ». Pas « déployé sur main » quand une recette ou une décision humaine est au milieu.
+- **`/goal clear` seul dans son message.** La demande suivante part dans un second message.
+- **Ce qu'on attend, pas comment** : le résultat et la contrainte (« sans toucher Staging »). La session choisit le chemin.
+

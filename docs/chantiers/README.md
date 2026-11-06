@@ -8,6 +8,8 @@
 /feature <slug>    /bugfix <slug>    /refactor <slug>    /optimize <slug>    /hotfix <slug>
 ```
 
+Un petit changement sans règle métier n'ouvre pas de chantier : `/retouche <slug>` ([`retouche.md`](../workflows/retouche.md)), une ligne dans le journal du chantier parent.
+
 Sans Claude Code : `cp -r docs/chantiers/_TEMPLATE docs/chantiers/<slug>`
 
 Le `<slug>` est en kebab-case, court, sans type ni numéro : `messagerie-classe`, pas `feature-5-messagerie`.
@@ -151,6 +153,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`fiche-revision-coupe-50-mots`](fiche-revision-coupe-50-mots/memo.md) | livré | feature | 2026-10-31 | La fiche de révision coupée à 50 mots |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | bugfix | 2026-09-28 | Finitions de la génération des classes et du menu ⋮ au téléphone |
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |
+| [`flux-allege`](flux-allege/memo.md) | livré | refactoring | 2026-11-06 | Un flux allégé : petites branches, retouches, messages, mesure mensuelle |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | planifié | feature | 2026-10-02 | Fonctions de l'espace élève |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
@@ -216,6 +219,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`renommage-fiche-revision`](renommage-fiche-revision/memo.md) | planifié | feature | 2026-10-12 | « Fiche de cours » et « Fiche de révision » à l'écran |
 | [`reorganisation-equipe-enseignant`](reorganisation-equipe-enseignant/memo.md) | livré | feature | 2026-10-03 | Réorganisation des espaces Équipe et Enseignant |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
+| [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |

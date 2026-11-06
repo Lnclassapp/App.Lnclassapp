@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+# Mesure mensuelle des règles de sobriété (chantier flux-allege, proposition 10 du rapport du 2026-11-05) : les chiffres
+# que le memo sobriete-tokens promettait de rejouer, lus dans l'historique git de Develop. Une règle qui ne fait pas
+# bouger son chiffre est retirée.
+#
+#   script/mesure/sobriete                                  # le mois civil précédent, sur origin/Develop
+#   script/mesure/sobriete --depuis 2026-10-09 --jusqu-a 2026-11-05 [--ref Develop]
+#
+# Sort un tableau Markdown. Les sessions bloquées et le coût des orchestrateurs ne sont pas dans git : la tâche
+# programmée du 1er du mois les ajoute (docs/workflows/mesure.md).
+require "date"
+require "open3"
+
+def option(name) = (index = ARGV.index(name)) && ARGV[index + 1]
+
+today = Date.today
+first = Date.new(today.year, today.month, 1)
+since = Date.iso8601(option("--depuis") || first.prev_month.iso8601)
+upto = Date.iso8601(option("--jusqu-a") || first.iso8601)
+ref = option("--ref") || "origin/Develop"
+abort "--depuis doit précéder --jusqu-a" unless since < upto
+
+def git(*args)
+  out, status = Open3.capture2("git", *args)
+  abort "git #{args.first} a échoué : #{args.join(' ')}" unless status.success?
+  out
+end
+
+git("rev-parse", "--verify", "-q", ref)
+range = [ "--since=#{since}T00:00:00", "--until=#{upto}T00:00:00" ]
+days = (upto - since).to_i
+
+# Commits hors fusion, avec leurs fichiers.
+commits = git("log", ref, "--no-merges", "--format=%x00%H", "--name-only", *range).split("\0").drop(1).map do |chunk|
+  sha, *files = chunk.lines.map(&:strip).reject(&:empty?)
+  { sha:, files: }
+end
+readme_only = commits.count { it[:files] == [ "docs/chantiers/README.md" ] }
+# Avant le 2026-11-05 l'index se modifiait à la main, souvent dans un commit « clôture — journal, index ».
+index_edits = commits.count { it[:files].include?("docs/chantiers/README.md") }
+docs_only = commits.count { |c| c[:files].any? && c[:files].all? { it.start_with?("docs/") && !it.start_with?("docs/contenus/") } }
+
+# PR fusionnées par un commit de fusion sur la ligne principale : nombre de commits et durée de vie de la branche.
+merges = git("log", ref, "--first-parent", "--merges", "--format=%H %P %ct %s", *range).lines.filter_map do |line|
+  sha, first_parent, second_parent, merged_at, *subject = line.split
+  next unless subject.join(" ").match?(/\AMerge pull request #\d+/) && second_parent
+
+  shas = git("rev-list", "--no-merges", "#{first_parent}..#{second_parent}").split
+  started = shas.map { git("show", "-s", "--format=%at", it).to_i }.min || merged_at.to_i
+  { commits: shas.size, hours: (merged_at.to_i - started) / 3600.0 }
+end
+squashed = git("log", ref, "--first-parent", "--no-merges", "--format=%s", *range).lines.count { it.match?(/\(#\d+\)\s*\z/) }
+catch_up = git("log", ref, "--merges", "--format=%s", *range).lines.count do |subject|
+  subject.match?(/\AMerge (remote-tracking )?(branch )?'?(origin\/)?Develop'?\b|\AMerge origin\/Develop\b|Merge Develop into/)
+end
+
+def median(values) = values.empty? ? nil : values.sort[(values.size - 1) / 2]
+def fmt(value, digits = 1) = value.nil? ? "—" : format("%.#{digits}f", value).sub(".", ",")
+
+per_pr = median(merges.map { it[:commits] })
+mean_per_pr = merges.empty? ? nil : merges.sum { it[:commits] }.to_f / merges.size
+lifetime = median(merges.map { it[:hours] })
+long_lived = merges.count { it[:hours] > 24 }
+big = merges.count { it[:commits] > 40 }
+
+puts "## Sobriété — #{since} → #{upto} (#{ref}, #{days} jours)"
+puts
+puts "| Mesure | Valeur | Cible |"
+puts "|---|---|---|"
+puts "| Commits hors fusion par jour | #{fmt(commits.size.to_f / days)} | en baisse |"
+puts "| PR fusionnées (commit de fusion · squash) | #{merges.size} · #{squashed} | — |"
+puts "| Commits par PR, PR à commit de fusion (moyenne · médiane) | #{fmt(mean_per_pr)} · #{fmt(per_pr, 0)} | ≤ 3 |"
+puts "| PR de plus de 40 commits | #{big} | 0 |"
+puts "| Durée de vie d'une branche (médiane, heures) | #{fmt(lifetime)} | < 24 |"
+puts "| Branches de plus d'un jour | #{long_lived} sur #{merges.size} | 0 |"
+puts "| Fusions de rattrapage (Develop dans une branche) | #{catch_up} | en baisse |"
+puts "| Commits qui touchent l'index `docs/chantiers/README.md` (dont seul) | #{index_edits} (#{readme_only}) | — (0) |"
+puts "| Commits qui ne touchent que `docs/`, hors leçons | #{docs_only} sur #{commits.size} (#{fmt(commits.empty? ? nil : 100.0 * docs_only / commits.size, 0)} %) | en baisse |"
