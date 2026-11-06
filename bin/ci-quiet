@@ -11,6 +11,7 @@
 #   CI_GROUP=lint bin/ci-quiet   a subset of bin/ci, as before: no level, no verdict kept
 require "open3"
 require_relative "../script/ci/scope"
+require_relative "../script/ci/record_missing"
 
 Dir.chdir(File.expand_path("..", __dir__))
 LOG = "tmp/ci.log"
@@ -52,6 +53,12 @@ if ENV["CI_GROUP"].to_s.strip != ""
 end
 
 base = ENV.fetch("BASE", "origin/Develop")
+# A system file without a recorded duration is played once and recorded in the work tree before the guards read the
+# file (chantier ci-durees-enregistrees); the budget guard then checks the measured duration, as for any other file.
+unless ARGV.include?("--plan")
+  recorded = RecordMissing.call(SystemBudget.from_git.missing, runner: RecordMissing.runner, recorder: RecordMissing.recorder)
+  puts RecordMissing.message(recorded)
+end
 branch = git("rev-parse", "--abbrev-ref", "HEAD").to_s.strip
 head = git("rev-parse", "HEAD").to_s.strip
 merge_base = git("merge-base", base, "HEAD")&.strip

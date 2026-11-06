@@ -82,6 +82,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`choix-classe-eleve`](choix-classe-eleve/memo.md) | lots A et B livrés sur feature/choix-cla… | feature | 2026-10-15 | « Choisis ta classe » aux couleurs Wave et Djamo |
 | [`ci-audit-yarn-local`](ci-audit-yarn-local/memo.md) | livré | optimisation | 2026-09-25 | L'audit Yarn ralentit chaque `bin/ci` local |
 | [`ci-cloud-claude`](ci-cloud-claude/memo.md) | en cours | feature | 2026-10-05 | La CI rejouée dans le cloud Claude |
+| [`ci-durees-enregistrees`](ci-durees-enregistrees/memo.md) | livré | optimisation | 2026-11-06 | Durées système enregistrées par la CI |
 | [`ci-gardes-en-double`](ci-gardes-en-double/memo.md) | livré | optimisation | 2026-09-26 | Les gardes tournent deux fois dans `bin/ci` |
 | [`ci-par-train`](ci-par-train/memo.md) | livré | optimisation | 2026-10-20 | Une CI complète par train, plus par PR |
 | [`ci-perf-a-la-demande`](ci-perf-a-la-demande/memo.md) | livré | optimisation | 2026-10-19 | La perf des imports et les CI répétées ralentissent chaque PR |
