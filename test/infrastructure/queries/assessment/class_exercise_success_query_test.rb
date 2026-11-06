@@ -67,6 +67,12 @@ module Queries
       test "no exercise, no query" do
         assert_equal({}, call(@classroom, []))
       end
+
+      test "an unknown class reads nothing" do
+        copy(@awa, @e1, 80)
+
+        assert_equal({}, ClassExerciseSuccessQuery.new.call(classroom_public_id: "inconnue", exercise_ids: [ @e1.public_id ]))
+      end
     end
   end
 end
