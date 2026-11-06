@@ -14,3 +14,9 @@
 ## Ce qui a dérapé
 
 - Premier run : la CI locale était rouge parce que le CSS n'était pas compilé dans le conteneur (`application.css` absent), sans rapport avec le code.
+
+## Clôture (2026-11-06)
+
+- Livré par #500. Les 60 leçons de la base passent le test de rendu avec leurs feuilles (avant : 59 sur 60).
+- Appris : depuis #464, la vérification d'une leçon ne voyait plus ses exercices ; une vérification doit suivre les pages où le contenu s'affiche, pas celles où il s'affichait.
+- Reste ouvert : rien.

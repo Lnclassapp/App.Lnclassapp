@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-11-06 |
 | **Branche** | `test/feuilles-rendues` |
 | **Programme** | — |
