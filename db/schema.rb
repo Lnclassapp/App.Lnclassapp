@@ -162,6 +162,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.bigint "archived_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "due_on"
+    t.string "batch_public_id", limit: 14
     t.index ["archived_by_id"], name: "index_classroom_assignments_on_archived_by_id"
     t.index ["assignable_type", "assignable_id"], name: "idx_on_assignable_type_assignable_id_89cda988b0"
     t.index ["assigned_at"], name: "index_classroom_assignments_on_assigned_at"
@@ -268,7 +270,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["series_id"], name: "index_courses_on_series_id"
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["status"], name: "index_courses_on_status"
-    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "courses_status_values"
+    t.check_constraint "jsonb_typeof(figures) = 'array'::text", name: "courses_figures_array"
+    t.check_constraint "sheet_theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "courses_sheet_theme_known"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "courses_status_values"
   end
 
   create_table "drenas", force: :cascade do |t|
@@ -312,7 +316,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["course_id", "position"], name: "index_essentials_on_course_id_and_position", unique: true
     t.index ["slug"], name: "index_essentials_on_slug", unique: true
     t.index ["status"], name: "index_essentials_on_status"
-    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "essentials_status_values"
+    t.check_constraint "jsonb_typeof(sheet) = 'object'::text", name: "essentials_sheet_object"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "essentials_status_values"
   end
 
   create_table "exercise_badges", force: :cascade do |t|
@@ -366,11 +371,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
   end
 
   create_table "exercises", force: :cascade do |t|
-    t.datetime "archived_at"
-    t.bigint "author_id", null: false
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.bigint "essential_id", null: false
+    t.string "public_id", limit: 14, null: false
+    t.bigint "essential_id"
+    t.string "title", limit: 200, null: false
+    t.text "statement"
     t.string "exercise_type", default: "fixation", null: false
     t.integer "position", null: false
     t.bigint "author_id", null: false
@@ -382,16 +386,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.bigint "course_id", null: false
     t.jsonb "statement_blocks"
     t.string "figure_key"
-    t.text "hint"
     t.bigint "subject_id"
+    t.text "hint"
     t.index ["author_id"], name: "index_exercises_on_author_id"
     t.index ["course_id", "position"], name: "index_exercises_on_course_id_and_position", unique: true
     t.index ["course_id"], name: "index_exercises_on_course_id"
     t.index ["essential_id", "status"], name: "index_exercises_on_essential_id_and_status"
     t.index ["public_id"], name: "index_exercises_on_public_id", unique: true
     t.index ["status"], name: "index_exercises_on_status"
-    t.check_constraint "exercise_type::text = ANY (ARRAY['fixation'::character varying::text, 'evaluation'::character varying::text])", name: "exercises_exercise_type_values"
-    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "exercises_status_values"
+    t.index ["subject_id"], name: "index_exercises_on_subject_id"
+    t.check_constraint "exercise_type::text = ANY (ARRAY['fixation'::character varying, 'evaluation'::character varying]::text[])", name: "exercises_exercise_type_values"
+    t.check_constraint "hint IS NULL OR char_length(btrim(hint)) >= 1 AND char_length(btrim(hint)) <= 400", name: "exercises_hint_length"
+    t.check_constraint "status::text = ANY (ARRAY['draft'::character varying, 'published'::character varying, 'archived'::character varying]::text[])", name: "exercises_status_values"
+    t.check_constraint "subject_id IS NULL OR essential_id IS NULL", name: "exercises_subject_without_essential"
   end
 
   create_table "import_reports", force: :cascade do |t|
@@ -417,7 +424,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["kind", "created_at"], name: "index_import_reports_on_kind_and_created_at"
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY ((ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying])::text[]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
-    t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying::text, 'school_codes'::character varying::text, 'classroom_links'::character varying::text])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
+    t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
     t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying, 'validating'::character varying, 'importing'::character varying, 'completed'::character varying, 'rejected'::character varying, 'failed'::character varying]::text[])", name: "import_reports_status_values"
@@ -442,7 +449,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["kind", "contact"], name: "index_invitations_one_pending", unique: true, where: "((accepted_at IS NULL) AND (revoked_at IS NULL))"
     t.index ["school_id"], name: "index_invitations_on_school_id"
     t.index ["token_digest"], name: "index_invitations_on_token_digest", unique: true
-    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying::text, 'deputy'::character varying::text, 'educator'::character varying::text, 'secretary'::character varying::text])", name: "invitations_position_values"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "invitations_position_values"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "invitations_contact_format"
     t.check_constraint "kind::text <> 'school_staff'::text OR \"position\" IS NOT NULL", name: "invitations_staff_has_position"
     t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL", name: "invitations_staff_has_school"
@@ -602,7 +609,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
-    t.string "response_text", limit: 200
+    t.boolean "correct", null: false
+    t.datetime "answered_at", null: false
+    t.string "response_text", limit: 2000
+    t.boolean "unanswered", default: false, null: false
+    t.string "blank_responses", default: [], null: false, array: true
+    t.boolean "blank_results", default: [], null: false, array: true
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
     t.check_constraint "unanswered OR cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
@@ -621,7 +633,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["public_id"], name: "index_question_images_on_public_id", unique: true
     t.index ["question_id"], name: "index_question_images_on_question_id", unique: true, where: "(question_id IS NOT NULL)"
     t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "question_images_byte_size"
-    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying::text, 'image/png'::character varying::text, 'image/webp'::character varying::text])", name: "question_images_content_type_values"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "question_images_content_type_values"
     t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "question_images_sides"
   end
 
@@ -634,10 +646,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_description", limit: 150
+    t.decimal "numeric_tolerance", precision: 12, scale: 4
+    t.decimal "points", precision: 4, scale: 1, default: "1.0", null: false
+    t.string "unit", limit: 10
+    t.string "starter", limit: 150
+    t.string "criteria", default: [], null: false, array: true
+    t.string "hint", limit: 500
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
     t.check_constraint "image_description IS NULL OR char_length(btrim(image_description::text)) >= 1", name: "questions_image_description_present"
     t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text, 'fill_blank'::character varying::text, 'numeric'::character varying::text, 'ordering'::character varying::text, 'matching'::character varying::text])", name: "questions_question_type_values"
+    t.check_constraint "points >= 0.5 AND points <= 20::numeric AND (points * 2::numeric) = round(points * 2::numeric)", name: "questions_points_range"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying, 'single_choice'::character varying, 'multiple_correct_2'::character varying, 'multiple_correct_3'::character varying, 'fill_blank'::character varying, 'numeric'::character varying, 'ordering'::character varying, 'matching'::character varying, 'select'::character varying, 'written'::character varying, 'notebook'::character varying]::text[])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|
@@ -700,7 +719,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
     t.check_constraint "(archived_at IS NULL) = (archived_by_id IS NULL)", name: "school_staffs_archived_together"
     t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "school_staffs_position_values"
-    t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying::text, 'code'::character varying::text])", name: "school_staffs_joined_via_values"
+    t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying, 'code'::character varying]::text[])", name: "school_staffs_joined_via_values"
   end
 
   create_table "schools", force: :cascade do |t|
