@@ -140,7 +140,9 @@ Trois avertissements à transmettre à chaque agent de lot :
 - **interdiction de toucher un fichier qui n'est pas dans son champ `Fichiers`.** S'il en a besoin, il s'arrête et remonte : soit le fichier appartient au Lot 0, soit le plan est faux ;
 - **contrat de session** (`docs/workflows/contrat-de-session.md`) : pas de question en fin de lot. Une décision réversible est appliquée dans sa version prudente et notée dans `## À trancher` du journal du chantier ; une décision non réversible y est écrite avec options et recommandation, et seul ce point s'arrête. Une session qui ouvre une PR la surveille d'office.
 
-Merge dans la branche de chantier au fur et à mesure, **une seule PR par chantier** vers `Develop` (`docs/guide/conventions.md` §3 — `main` ne reçoit que `Staging`, sauf hotfix).
+**Des vagues d'une journée au plus.** Si le graphe ne tient pas dans la journée, coupe-le en journées : chaque journée finit par sa PR vers `Develop`, fusionnée le soir même ; la suivante repart de `Develop` sur `<type>/<slug>-2` (`docs/guide/conventions.md` §3, une branche vit moins d'un jour). Écris ce découpage dans le plan.
+
+Merge dans la branche de chantier au fur et à mesure, **une seule PR par chantier et par jour** vers `Develop` (`docs/guide/conventions.md` §3 — `main` ne reçoit que `Staging`, sauf hotfix).
 
 Si le chantier appartient à un **programme** (ligne `Programme :` dans l'en-tête du memo), lis aussi `docs/workflows/programme.md` et la `feuille-de-route.md` du programme : les contrats des vagues déjà livrées sont gelés, et les décisions que consomme ce chantier doivent être `Accepté` avant le Lot 0.
 
