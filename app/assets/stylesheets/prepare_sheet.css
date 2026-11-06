@@ -686,10 +686,13 @@
   display: block;
 }
 
-/* Une formule en ligne (une proposition « DE = 37,5 » dans une colonne de lettre) : un bloc en ligne, seul moyen de la borner à sa cellule. */
+/* Une formule en ligne (une proposition « DE = 37,5 » dans une colonne de lettre) : un bloc en ligne, seul moyen de la borner à sa cellule.
+   KaTeX ôte 2 px après un indice (`.vlist-t2`, marge négative) : sans ces 2 px rendus, « CO₂ » déborde de son cadre et montre une barre de
+   défilement (mesure du 2026-11-06 : chaque formule finie par un indice, sw = cw + 2). */
 .ps-paper-table .katex {
   display: inline-block;
   vertical-align: middle;
+  padding-inline-end: 2px;
 }
 
 .ps-paper-list {
@@ -698,9 +701,13 @@
   list-style: none;
 }
 
+/* Une formule en ligne ne se coupe pas (`.katex`, application.tailwind.css) : plus longue que la ligne (« 2 C₄H₁₀ + 13 O₂ → … » à 390 px),
+   elle fait défiler la question, jamais la page ; une formule courte reste dans le fil du texte. */
 .ps-paper-list > li {
   margin: 6px 0;
   overflow-wrap: anywhere;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .ps-paper-items {
