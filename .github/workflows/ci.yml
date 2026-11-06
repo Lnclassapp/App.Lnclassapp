@@ -249,7 +249,8 @@ jobs:
           if-no-files-found: ignore
 
   # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : chaque leçon v3 est importée dans la base de test, publiée et lue
-  # par un élève à 390 px puis sur ordinateur (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 4,2 s environ, soit 35 fichiers et 2 min 30 par part
+  # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb). Une leçon rend en 8 s environ
+  # avec ses feuilles (mesure du 2026-11-06 : 60 leçons en 8 min 20), soit 5 fichiers et moins d'une minute par part
   # (journal du chantier) : le découpage tient chaque part sous les cinq minutes avec son installation. Rien n'est publié
   # hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
