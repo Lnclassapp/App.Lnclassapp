@@ -1,0 +1,7 @@
+<%# 🌐 UI · catalog/courses/sheets/_success — la réussite de la classe sous un exercice de la feuille %>
+<%# Rôle : « n / N élèves ont réussi » (meilleure copie de chaque élève) ou « Pas encore fait par la classe » ; jamais un pourcentage seul, aucune couleur selon le taux %>
+<%# ADR  : lecture-de-la-classe-par-la-direction · UDR : suivi-de-la-classe-sur-une-lecon §3.2 %>
+<%# locals: (success:) -%>
+<p class="ps-success" id="sheet-success-<%= success.exercise_id %>">
+  <%= success.done? ? t("catalog.courses.sheets.success.#{success.present_count == 1 ? 'one' : 'other'}", passed: success.passed_count, count: success.present_count) : t("catalog.courses.sheets.success.none") %>
+</p>

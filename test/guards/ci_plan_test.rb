@@ -16,8 +16,9 @@ class CiPlanTest < Minitest::Test
   # « plan », « system » a matrix of SYSTEM_PARTS parts. No job runs longer than JOB_MINUTES (the owner's ceiling).
   TEST_JOBS = %w[unit system].freeze
   SYSTEM_PARTS = 6
-  # Chantier ci-unit-en-parts: the unit suite in two parts, their coverage merged by « coverage ».
-  UNIT_PARTS = 2
+  # Chantiers ci-unit-en-parts and ci-train-rapide: the unit suite in three parts (under 3 minutes each with their setup),
+  # their coverage merged by « coverage ».
+  UNIT_PARTS = 3
   PERF_PARTS = 2
   JOB_MINUTES = 5
 

@@ -78,7 +78,7 @@ Trois leviers, du plus durable au plus ponctuel :
 | Fichier | `model:` |
 |---|---|
 | `security-reviewer.md`, `silent-failure-hunter.md`, `pr-test-analyzer.md` | `opus` |
-| `executant-lot.md` | `sonnet` |
+| `executant-lot.md`, `fusionneur.md` | `sonnet` |
 | `verificateur-ci.md`, `Explore.md`, `chores.md` | `haiku` |
 
 `Explore.md` remplace l'agent Explore intégré de Claude Code, qui tourne sinon sur le modèle de la session. `chores` ne touche pas au code de `app/` : en-tête HITL, I18n, couches et « un commit par lot » relèvent d'`executant-lot`.
@@ -88,6 +88,10 @@ Trois leviers, du plus durable au plus ponctuel :
 
 La règle de référence est dans [`docs/workflows/README.md`](../../workflows/README.md#quel-modèle-pour-quel-rôle) ; `CLAUDE.md` n'en est que le raccourci.
 
+## Amendement du 2026-11-05 — fusions de routine sur Sonnet
+
+Chantier [`orchestrateur-court-et-index`](../../chantiers/orchestrateur-court-et-index/memo.md). Une fusion de routine vers `Develop` (prête, sans conflit, assignée, ligne de preuve sur le SHA de tête, aucune revue bloquante) ne demande pas de jugement : l'agent `fusionneur` (`model: sonnet`) la fait. Opus garde les fusions qui ne sont pas de routine, celles vers `Staging` et `main`, et l'arbitrage. Sonnet plutôt que Haiku : une fusion ne se défait pas d'un clic, et l'économie tient déjà à ce que l'orchestrateur ne relise plus la PR. La table du §6 compte `fusionneur.md` parmi les agents `sonnet`.
+
 ## 7. Comment vérifier que la décision est respectée
 
 Aucune garde automatique : un mauvais `model:` coûte de l'argent, pas de l'intégrité. Contrôle à la main :
@@ -96,4 +100,4 @@ Aucune garde automatique : un mauvais `model:` coûte de l'argent, pas de l'int�
 grep -H '^model:' .claude/agents/*.md
 ```
 
-Les trois agents de revue doivent afficher `opus`, `executant-lot` `sonnet`, `verificateur-ci`, `Explore` et `chores` `haiku`. La décision tiendra mal si les agents d'un plugin ou d'un nouvel auteur oublient le champ : à relire au moment d'ajouter un agent.
+Les trois agents de revue doivent afficher `opus`, `executant-lot` et `fusionneur` `sonnet`, `verificateur-ci`, `Explore` et `chores` `haiku`. La décision tiendra mal si les agents d'un plugin ou d'un nouvel auteur oublient le champ : à relire au moment d'ajouter un agent.

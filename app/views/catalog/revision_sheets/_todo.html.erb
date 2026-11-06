@@ -1,0 +1,10 @@
+<%# 🌐 UI · catalog/revision_sheets/_todo — « À revoir : fais cet exercice », sous le titre d'une notion que l'élève doit revoir %>
+<%# Rôle : `proposal` (RemediationProposalsQuery::Proposal) ; un paragraphe `.sheet-todo` et un lien vers l'exercice proposé (sa feuille de notion), ou vers la notion sans exercice ; élève seul, jamais dans la partie repliée de la fiche %>
+<%# ADR  : 0043, 0101 · UDR : suivi-de-la-classe-sur-une-lecon §3.3 %>
+<%# locals: (proposal:) -%>
+<% href = if proposal.exercise_public_id
+            course_sheet_path(proposal.course_slug, "notion-#{proposal.essential_slug}", anchor: "sheet-exercise-#{proposal.exercise_public_id}")
+          else
+            course_path(proposal.course_slug, anchor: "notion-#{proposal.essential_slug}")
+          end %>
+<p class="sheet-todo"><%= t("catalog.revision_sheets.todo.label") %> <%= link_to t("catalog.revision_sheets.todo.link"), href, data: { turbo_prefetch: false } %></p>

@@ -12,6 +12,8 @@ Si une figure exige une sorte ou un paramètre nouveau : amendement d'ADR d'abor
 
 Livraison : chantier docs/chantiers/<slug>/ (memo avec `Programme : contenus-v3-tous-niveaux`, prd, plan, journal), branche feature/<slug>, 1 commit par lot, 40 commits max, PR prête (pas brouillon) vers `Develop` avec la ligne de preuve `bin/ci-quiet` ; sous-agents de revue seulement si du code est touché (règles CLAUDE.md). Ne fusionne pas toi-même. Ajoute ta ligne dans « Fin de vague » du journal du programme (dans ta PR). Ne supprime jamais de données de production. À la fin, réponds en une ligne : niveau, matière, nombre de leçons, PR.
 
+Contrat de session (docs/workflows/contrat-de-session.md) : ta PR, tu la surveilles d'office jusqu'à ce qu'elle soit prête. Ne finis jamais sur une question : une décision réversible (libellé, choix de figure, ordre) est appliquée dans sa version prudente et notée dans `## À trancher` du journal de ton chantier ; une décision non réversible (donnée à supprimer, fait ou chiffre incertain à publier) y est écrite avec options et recommandation, et seul ce point attend. Aucun identifiant ni secret à demander : les comptes de recette sont ceux du jeu standard.
+
 ## Modèles et sobriété (décision du porteur, 2026-11-01, à partir de la 1ère)
 
 - La session de vague tourne sur **Sonnet** : cadrage du chantier, rédaction, déclinaisons, contrôles, PR.

@@ -64,6 +64,8 @@ Les trois pages de lecture (feuille de la leçon, feuille dans la classe pour l'
 - `.ps-paper-list` : `list-style: none`, `padding-left: 0`, chaque `li` marge 6 px 0.
 - `.ps-paper-footer` : 12 px, centré, `border-top: 1px solid #000`, marge haute 24 px, `padding-top: 8px`.
 - Sous 480 px : tableaux 13 px, `padding: 4px`, colonne N° `2em`. Le tableau de QCM devient une grille par ligne (rôles ARIA `table`, `rowgroup`, `row`, `columnheader`, `rowheader`, `cell` posés dans le HTML pour garder le tableau aux lecteurs d'écran) : le N° à gauche sur toute la hauteur, l'affirmation sur toute la largeur, puis les propositions **deux par deux**, chacune précédée de sa lettre en gras (« A. », `data-letter`) ; les en-têtes « A B C D » restent pour les lecteurs d'écran seulement ; une case sans proposition disparaît. Ajout du 2026-11-04 (challenger) : quatre colonnes de lettres à 390 px coupaient les mots (« prop|riété ») et les formules. Une formule plus large que sa case défile dans la case (`.ps-paper-choice`, `katex` en `inline-block`), jamais la page. Dans une proposition (ordinateur), un mot se coupe par un trait d'union (`hyphens: auto`), jamais au milieu.
+- **Amendement du 2026-11-06 (porteur, chantier `feuilles-rendues`)** : sur ordinateur (480 px et plus), les colonnes de lettres ne sont plus égales à 4,5 em. Le tableau de QCM est en `table-layout: auto` ; chaque colonne de lettre prend la taille de ses propositions, au moins 3 em de texte et jamais moins que son mot ou sa formule la plus longue (`hyphens: manual`, formule non bornée) ; l'affirmation prend le reste. Une proposition ne défile plus dans sa case. Un tableau plus large que son exercice, ou dont l'affirmation tombe sous 10 em, prend `ps-paper-table--stacked` (Stimulus `catalog--paper-table`, mesure refaite à chaque changement de taille) : la même grille que sous 480 px. Sans JS, le tableau reste à la taille. Mesuré sur « Les alcanes » : « CH₃ − » et « L'hexan » coupés avant, entiers après.
+- Ajout du 2026-11-06 : une question en liste dont la formule dépasse la ligne fait défiler la question (`.ps-paper-list > li`, `overflow-x: auto`), jamais la page ; une formule en ligne d'un tableau garde 2 px à droite (`padding-inline-end`), que KaTeX ôte après un indice et qui montrait une barre de défilement sous « CO₂ ».
 
 **États**
 - Succès : l'épreuve ci-dessus.
@@ -77,7 +79,7 @@ Les trois pages de lecture (feuille de la leçon, feuille dans la classe pour l'
 - Formules : `data-controller="math"` sur chaque exercice.
 - Aucun élément focalisable sur l'épreuve, sauf les contrôles de `_teacher_bar` et le bouton « Commencer » sous la feuille.
 
-**Mesure de conformité** : à 390 px, `document.documentElement.scrollWidth <= 390` sur les 8 feuilles de « Propriétés de Thalès dans un triangle », sur la page de l'enseignant et sur un devoir de « Ma classe ».
+**Mesure de conformité** : à 390 px, `document.documentElement.scrollWidth <= 390` sur les 8 feuilles de « Propriétés de Thalès dans un triangle », sur la page de l'enseignant et sur un devoir de « Ma classe ». Depuis le 2026-11-06, `test/system/catalog/lesson_rendering_test.rb` le vérifie sur chaque feuille de chaque leçon de `docs/contenus/lecons-traitees/` (lecture et à remplir, 390 px et ordinateur), avec aucune proposition de QCM coupée quand le QCM est en tableau.
 
 ## 4. Conséquences
 
