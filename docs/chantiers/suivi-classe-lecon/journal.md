@@ -29,7 +29,7 @@
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- 2026-11-06, train #501 : la couverture fusionnée (100 %) a échoué sur GitHub, alors que `bin/ci-quiet` était vert à la fusion de #493 (il ne mesure pas la couverture de toute la suite). Le lot F avait retiré `ExerciseInput`, `CreateExercise` et `UpdateExercise` mais laissé `QuestionInput`, `AnswerInput` et leurs libellés, sans appelant ; `team_targets` (cours à série, classe qui ne convient pas, assignation active) et `ClassExerciseSuccessQuery` (classe inconnue) avaient des branches sans test. Corrigé : code mort retiré, trois branches testées.
 
 ## Ce qu'on a appris sur la codebase
 
