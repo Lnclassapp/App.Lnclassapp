@@ -172,7 +172,7 @@ module LessonRendering
 
     # Une feuille (UDR-0149, feuilles-en-cases-lues-avant-de-commencer) : son sujet en lecture, puis la feuille à remplir de l'élève.
     # Les exercices ne sont que là depuis #464 : même largeur que l'écran, pas de « ** », pas de « $…$ » resté brut, chaque
-    # figure dessinée.
+    # figure dessinée, et aucune proposition de QCM coupée dans sa colonne quand le QCM est en tableau (UDR-0152 §3, amendement du 2026-11-06).
     def inspect_sheet(course, sheet)
       [ course_sheet_path(course.slug, sheet), fill_course_sheet_path(course.slug, sheet) ].flat_map do |path|
         visit path
@@ -183,6 +183,7 @@ module LessonRendering
         found << "#{where} : page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
         found << "#{where} : ** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
         found << "#{where} : #{seen['bare']} formule(s) $…$ restée(s) en texte brut" if seen["bare"].positive?
+        seen["cut"].each { found << "#{where} : proposition de QCM coupée dans sa colonne : « #{it} »" }
         blank = seen["figures"].count { !it["shown"] }
         found << "#{where} : #{blank} figure(s) vide(s)" if blank.positive?
         found
@@ -230,7 +231,10 @@ module LessonRendering
           if (parent.closest(".katex-html")) formulas += 1
           else if (!parent.closest(".katex, option, textarea, pre, code") && parent.closest("[data-controller~=math]") && /\\$[^$\\n]+\\$/.test(node.textContent)) bare += 1
         }
-        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare,
+        const cut = [...document.querySelectorAll(".ps-paper-table--mcq .ps-paper-choice")]
+          .filter((choice) => getComputedStyle(choice.closest("table")).display === "table" && choice.scrollWidth > choice.clientWidth + 1)
+          .map((choice) => choice.textContent.trim().slice(0, 40))
+        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare, cut,
                  stars: at < 0 ? null : text.slice(Math.max(0, at - 30), at + 30).replace(/\\s+/g, " ") }
       })()
     JS

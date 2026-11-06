@@ -104,4 +104,32 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
       assert_operator cells["C"].y, :>, cells["A"].y
     end
   end
+
+  # feuilles-rendues (UDR-0152 §3, amendement du 2026-11-06) : sur ordinateur, les colonnes de lettres prennent la taille de leurs
+  # propositions, qui ne défilent plus dans leur case ; un QCM qui ne tient pas ainsi s'empile comme sur téléphone.
+  test "on a computer a QCM table sizes its letter columns to the choices, and stacks when it cannot fit" do
+    subject = create_subject(course: @course, title: "Sujet 3 · Les alcanes")
+    exercise = create_exercise(subject:, course: @course, title: "Alcanes", questions: 0, statement: "On étudie les alcanes.")
+    words = exercise.questions.create!(position: 1, content: "Quel alcane a 5 atomes de carbone ?", question_type: "single_choice")
+    [ "L'heptane", "L'octane", "L'hexane", "Le pentane" ].each_with_index { |c, i| words.answers.create!(position: i + 1, content: c, correct: i == 3) }
+    exercise.questions.create!(position: 2, content: "Un alcane ne contient que du carbone et de l'hydrogène.", question_type: "true_false")
+            .tap { |q| %w[Vrai Faux].each_with_index { |c, i| q.answers.create!(position: i + 1, content: c, correct: i.zero?) } }
+    chain = ->(n) { "$\\mathrm{" + Array.new(n) { "CH_2" }.join("-") + "}$" }
+    formulas = exercise.questions.create!(position: 3, content: "Quelle chaîne a le plus de carbones ?", question_type: "single_choice")
+    [ 6, 7, 8, 9 ].each_with_index { |n, i| formulas.answers.create!(position: i + 1, content: chain.(n), correct: i == 3) }
+
+    visit course_sheet_path(@course.slug, "sujet-#{subject.position}")
+
+    tables = all("table.ps-paper-table--mcq", count: 2)
+    assert_selector "table.ps-paper-table--mcq .katex", minimum: 4, wait: 10
+    # Les mots tiennent : le tableau reste un tableau, aucune proposition ne défile, « Le pentane » n'est pas coupé.
+    assert_no_selector "table.ps-paper-table--mcq.ps-paper-table--stacked", text: "Le pentane", wait: 2
+    assert_equal "table", tables.first.evaluate_script("getComputedStyle(this).display")
+    cut = tables.first.evaluate_script("[...this.querySelectorAll('.ps-paper-choice')].filter((c) => c.scrollWidth > c.clientWidth + 1).length")
+    assert_equal 0, cut
+    # Les quatre chaînes ne tiennent pas en colonnes à côté de l'affirmation : le QCM s'empile, sans élargir la page.
+    assert_selector "table.ps-paper-table--mcq.ps-paper-table--stacked", text: "Quelle chaîne", wait: 5
+    assert_equal "grid", tables.last.find("tbody tr").evaluate_script("getComputedStyle(this).display")
+    assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=, page.evaluate_script("window.innerWidth")
+  end
 end

@@ -67,8 +67,8 @@
         <% when :mcq %>
           <% columns = run.map { it.choices.size }.max %>
           <p class="ps-paper-instruction"><%= t("#{scope}.instruction.#{run.any?(&:multiple) ? :mcq_multiple : :mcq}") %></p>
-          <%# Sur téléphone, la ligne devient une grille (affirmation, puis ses propositions deux par deux, lettre en tête) : les rôles gardent le tableau aux lecteurs d'écran. %>
-          <table class="ps-paper-table ps-paper-table--mcq" role="table">
+          <%# Sur téléphone, la ligne devient une grille (affirmation, puis ses propositions deux par deux, lettre en tête) : les rôles gardent le tableau aux lecteurs d'écran. Sur ordinateur, colonnes à la taille ; catalog--paper-table empile le tableau qui ne tient pas (UDR-0152 §3, amendement du 2026-11-06). %>
+          <table class="ps-paper-table ps-paper-table--mcq" role="table" data-controller="catalog--paper-table">
             <caption class="sr-only"><%= caption %></caption>
             <thead role="rowgroup">
               <tr role="row">

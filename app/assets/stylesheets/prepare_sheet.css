@@ -808,6 +808,101 @@
   }
 }
 
+/* UDR-0152 §3, amendement du 2026-11-06 (porteur) : sur ordinateur, les colonnes de lettres prennent la taille de leurs propositions
+   (au moins 3 em de texte, jamais moins que le mot ou la formule la plus longue) et l'affirmation le reste ; une proposition ne défile
+   plus dans sa case (« CH₃ − » coupé, « L'hexan »). Un tableau qui ne tient pas ainsi s'empile (`ps-paper-table--stacked`, posé par
+   catalog--paper-table), comme sous 480 px. */
+@media (min-width: 480px) {
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) {
+    table-layout: auto;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) thead th:nth-child(n + 3) {
+    width: auto;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) tbody td:nth-child(n + 3) {
+    hyphens: manual;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) .ps-paper-choice {
+    min-width: 3em;
+    overflow: visible;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) .ps-paper-choice .katex {
+    max-width: none;
+    overflow: visible;
+  }
+}
+
+/* Le même empilement que sous 480 px, pour un tableau trop large à toute largeur d'écran (catalog--paper-table). */
+.ps-paper-table--mcq.ps-paper-table--stacked,
+.ps-paper-table--mcq.ps-paper-table--stacked thead,
+.ps-paper-table--mcq.ps-paper-table--stacked tbody {
+  display: block;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked {
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr {
+  display: grid;
+  grid-template-columns: 2.5em repeat(2, minmax(0, 1fr));
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked th,
+.ps-paper-table--mcq.ps-paper-table--stacked td {
+  min-width: 0;
+  border: 0;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked thead th,
+.ps-paper-table--mcq.ps-paper-table--stacked tbody th {
+  width: auto;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr > :first-child {
+  grid-row: span 4;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr > :nth-child(2) {
+  grid-column: 2 / -1;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked thead th:nth-child(n + 3) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:nth-child(n + 3) {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  text-align: left;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:nth-child(n + 3)::before {
+  content: attr(data-letter) ".";
+  font-weight: 700;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:empty {
+  display: none;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked .ps-paper-choice {
+  min-width: 0;
+}
+
 /* ---- Les feuilles en cases (sujet-avant-de-commencer) : mêmes valeurs que la feuille, hors .ps-page --------------------- */
 .ps-cards {
   display: grid;
