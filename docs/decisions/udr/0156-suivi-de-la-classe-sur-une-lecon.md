@@ -1,4 +1,4 @@
-# UDR-XXXX : Suivi de la classe sur une leçon — lacunes, réussite par exercice, remédiation proposée
+# UDR-0156 : Suivi de la classe sur une leçon — lacunes, réussite par exercice, remédiation proposée
 <!-- index
 titre: Suivi de la classe sur une leçon
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: Où l'enseignant lit les lacunes et la réussite de sa classe, et
 | **Statut** | Accepté |
 | **Date** | 2026-11-05 |
 | **Chantier** | `docs/chantiers/suivi-classe-lecon` |
-| **ADR lié** | ADR-XXXX-lecture-de-la-classe-par-la-direction |
+| **ADR lié** | ADR-0125 |
 | **Remplacé par** | — |
 
 ---

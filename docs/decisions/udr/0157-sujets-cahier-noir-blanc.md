@@ -1,4 +1,4 @@
-# UDR-XXXX : Sujet, copie et résultat d'un exercice en cahier noir et blanc
+# UDR-0157 : Sujet, copie et résultat d'un exercice en cahier noir et blanc
 <!-- index
 titre: Sujet, copie et résultat en noir et blanc
 statut: Accepté

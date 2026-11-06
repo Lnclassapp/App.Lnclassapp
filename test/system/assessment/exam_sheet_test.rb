@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# UDR-XXXX-sujets-cahier-noir-blanc (#390) : le sujet, la copie et le résultat d'un exercice sont une feuille de cahier en noir,
+# UDR-0157 (#390) : le sujet, la copie et le résultat d'un exercice sont une feuille de cahier en noir,
 # blanc et gris : papier #fbf6e9, aucun bleu, vert ni rouge calculé, « Juste » et « Faux » écrits, aucun défilement horizontal.
 class Assessment::ExamSheetTest < ApplicationSystemTestCase
   PAPER = "rgb(251, 246, 233)".freeze

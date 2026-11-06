@@ -1,4 +1,4 @@
-# ADR-XXXX : La direction lit, sans agir, la leçon d'une classe de son établissement
+# ADR-0125 : La direction lit, sans agir, la leçon d'une classe de son établissement
 <!-- index
 titre: Lecture de la leçon en classe par la direction
 statut: Accepté
