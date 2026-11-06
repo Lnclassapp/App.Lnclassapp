@@ -8,7 +8,8 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français ; les 10 leçons de Maths de Tle C et de Tle D au format 3) et `3eme/` (60 leçons au format 3, les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`a-reprendre/`](a-reprendre/) | Les 438 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
 
@@ -27,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons déjà rangées dans `lecons-traitees/` au format v1 (Tle D, 3ème, etc.) ne sont plus importables : elles seront réécrites en v3, mathématiques d'abord (chantier `refonte-contenus-maths`).
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seul `3eme/` y est resté.
 
 ## Boucle courte : corriger une leçon
 

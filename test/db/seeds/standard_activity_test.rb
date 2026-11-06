@@ -6,7 +6,7 @@ require "test_helper"
 # jeu ne double rien ; l'élève sans activité et la classe vide restent à zéro ; le trimestre se termine la veille.
 # La valeur attendue change à chaque évolution légitime d'un calcul (notes, lacunes, badges, devoirs) : on la met à jour sciemment.
 class StandardActivityTest < ActiveSupport::TestCase
-  EXPECTED_FINGERPRINT = "f1defa0fb0".freeze
+  EXPECTED_FINGERPRINT = "8645917579".freeze
   # 27 leçons : toute la 1ère et la 3ème du manifeste, de quoi activer des classes du lycée et du collège.
   LESSONS = 27
   SEEDS = Rails.root.join("db/seeds")
