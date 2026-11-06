@@ -49,8 +49,37 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # AD-02 to AD-08, AD-20, AD-22 (UDR-0074 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
-  # school card, the level bubbles and the deferred activity, in this order.
+  # CA-12 (entrée), UDR suivi-de-la-classe-sur-une-lecon §3.6 : « Fiches à revoir » sur la page d'une classe de la direction.
+  test "CA-12 : la direction voit les fiches à revoir de sa classe, chaque ligne ouvre la leçon dans la classe" do
+    course = create_course(level: @level, name: "Géométrie")
+    thales = create_essential(course:, name: "Théorème de Thalès")
+    [ "Awa", "Bintou" ].each do |name|
+      student = create_student(classroom: @classroom, first_name: name, last_name: "Test")
+      source = create_exercise_session(student:, exercise: create_exercise(essential: thales, questions: 1), status: "completed",
+                                       score_percent: 30)
+      create_gap(student:, essential: thales, source_session: source)
+    end
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps h2", text: I18n.t("classroom.classrooms.gaps.title")
+    assert_select "#classroom_gaps li a[href='#{classroom_course_path(@classroom.public_id, course.slug, anchor: "notion-#{thales.slug}")}']",
+                  text: "Théorème de Thalès"
+    assert_select "#classroom_gaps li", text: /#{I18n.t("classroom.classrooms.gaps.students", count: 2)}/
+  end
+
+  test "CA-12 : sans fiche à revoir, la direction n'a pas d'encadré, ni de jours de séance" do
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps", 0
+    assert_select "#classroom_session_days", 0
+  end
+
   def card(key, **) = tc("school_card.#{key}", **)
   def levels_t(key, **) = tc("levels.#{key}", **)
   def signal(color, key) = I18n.t("school_admin.signals.#{color}.#{key}")
@@ -64,6 +93,8 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # AD-02 to AD-08, AD-20, AD-22 (UDR-0074 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
+  # school card, the level bubbles and the deferred activity, in this order.
   test "AD-02, AD-20, AD-22: the home greets by first name, under « Accueil », with one h1 and the four sections in order" do
     sign_in_as @admin
 

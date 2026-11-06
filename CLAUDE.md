@@ -17,6 +17,10 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 **Captures d'écran.** Tout travail d'interface (UI/UX) se montre au porteur en images : chaque écran modifié à 390 px (téléphone) et sur ordinateur, menus ouverts si besoin. Les captures sont envoyées, jamais commitées.
 
+**Zéro question en fin de session.** Une session lancée par une autre surveille d'office sa PR et ne finit jamais sur une question. Une décision réversible non tranchée : appliquer l'option prudente et l'écrire dans `## À trancher` du journal du chantier. Une décision non réversible (droits, données, sécurité) : s'arrêter sur ce seul point, l'écrire au même endroit. L'orchestrateur pose les décisions ouvertes en un seul `AskUserQuestion` avant tout lancement ; la boîte de décisions de 12 h relève le reste. Règle complète : [`docs/workflows/contrat-de-session.md`](docs/workflows/contrat-de-session.md).
+
+**Secrets.** Jamais dans le chat : ni token, ni PIN, ni code. Ils sont dans les variables de l'environnement Claude Code (`RAILWAY_API_TOKEN`, `LNCLASS_TEAM_CONTACT`, `LNCLASS_TEAM_PIN`). S'il en manque une, la session donne son nom et ne la demande pas. Les comptes de recette élève, enseignant et direction sont ceux du jeu standard (PIN `2468`).
+
 ---
 
 ## Sobriété de tokens
@@ -25,13 +29,15 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 
 - **Une session par chantier**, 40 commits au maximum : au-delà, on ouvre une nouvelle session.
 - **Un commit par lot**, documentation du lot comprise. Pas de commit qui ne touche que `docs/` en cours de lot.
-- **Index** ADR / UDR : générés par `script/docs/build_index` au commit de clôture, jamais édités à la main. Index des chantiers : modifié une seule fois, à la clôture.
-- **PR ou commit direct** : PR pour le code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json` ; commit direct sur `Develop` seulement pour de la documentation seule. Une PR par chantier.
+- **Index** ADR / UDR et index des chantiers : générés par `script/docs/build_index`, que le pre-commit lance dès qu'un memo ou une décision est commité ; jamais édités à la main, jamais commités seuls. Les numéros d'ADR et d'UDR se posent à la fusion (`--number`), en comptant ceux d'`origin/Develop`.
+- **Orchestrateur court** ([`docs/workflows/orchestrateur.md`](docs/workflows/orchestrateur.md)) : une session d'orchestration par vague ou par jour, jamais par programme. Elle commence par lire `docs/chantiers/<slug>/etat.md` et finit en le mettant à jour, en un commit.
+- **PR ou commit direct** : PR pour le code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json` ; commit direct sur `Develop` seulement pour de la documentation seule. Une PR par chantier et par jour : **une branche vit moins d'un jour** (conventions §3).
 - **Pas de fusion sans preuve** : vers `Develop`, la ligne de preuve de `bin/ci-quiet` local est écrite dans la PR avant la fusion ; vers `Staging` et `main`, c'est le statut `ci` de GitHub (ADR-0069, ADR-0107).
 - **La CI suit ce que la PR touche** (ADR-0107) : entre deux lots, tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une fois, sur le head final, après les revues. Il choisit le niveau (doc, pr, train), ne rejoue ni un code déjà vert ni une étape déjà verte pour ses entrées, et affiche la ligne de preuve à coller dans la PR. **Jamais `--full` vers `Develop`.** **La suite complète ne tourne qu'une fois par train** : sur GitHub, à la PR vers `Staging`, en tâches parallèles de 5 minutes au plus. Aucune tâche de CI ne dépasse 5 minutes.
 - **`bin/ci-quiet`** à la place de `bin/ci` pour les sessions d’agent : verdict, étapes en échec et 30 dernières lignes ; le journal complet est dans `tmp/ci.log`.
 - **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché. Une revue tient en 5 minutes : 600 lignes de code au plus par agent, au-delà une part par contexte borné en parallèle ; on lui donne le verdict de la CI, qu'elle ne rejoue pas.
 - **Menace écrite d'abord** pour tout code qui lit un fichier envoyé par un utilisateur (image, import) : 6 corrections JPEG successives en ont montré le coût.
+- **Mesure le 1er du mois** ([`docs/workflows/mesure.md`](docs/workflows/mesure.md)) : `script/mesure/sobriete`. Une règle qui ne fait pas bouger son chiffre en deux mois est retirée.
 - **Charger à la demande** : `docs/guide/architecture.md` et `glossaire.md` seulement si la tâche l'exige.
 
 ---
@@ -40,8 +46,8 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 
 Règle et table : [`docs/workflows/README.md`](docs/workflows/README.md#quel-modèle-pour-quel-rôle), décision [ADR-0104](docs/decisions/adr/0104-routage-des-modeles-par-role.md).
 
-- **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
-- **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris.
+- **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions qui ne sont pas de routine) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
+- **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris ; les fusions de routine vers `Develop` (`fusionneur`).
 - **Haiku** : les vérifications pures (`verificateur-ci` : `bin/ci-quiet`, tests système relancés, verdict).
 - **Déléguer à Haiku** la recherche (trouver un fichier, lire du code ou un journal) à l'agent `Explore`, et les tâches mécaniques hors lot (lancer une commande et lire sa sortie, renommer un fichier de doc) à l'agent `chores`. Jamais le code de `app/` : c'est `executant-lot`.
 - Le plus petit modèle qui fait le travail ; on monte d'un cran dès qu'il faut du jugement (sécurité, concurrence, architecture, décision métier).
@@ -57,6 +63,7 @@ Le travail vit dans [`docs/chantiers/<slug>/`](docs/chantiers/). Un chantier san
 
 ```
 /feature <slug>    /bugfix <slug>    /refactor <slug>    /optimize <slug>
+/retouche <slug>   petit changement sans règle métier : PR directe, sans memo ni UDR
 ```
 
 ---

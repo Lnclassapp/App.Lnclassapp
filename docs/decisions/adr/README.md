@@ -134,6 +134,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0122](./0122-chargement-automatique-des-lecons-hors-production.md) | Chargement automatique des leçons hors production | Proposé | 2026-10-31 | Faire arriver sur Develop et Staging, sans import à la main, les leçons retravaillées pour Prépare interros et Prépare devoirs, même déjà publiées. |
 | [0123](./0123-develop-charge-les-lecons-v3-du-programme-entieres.md) | Develop charge les leçons v3 du programme, entières | Accepté | 2026-11-02 | Voir sur Develop, sans import à la main, toutes les leçons v3 du programme contenus-v3-tous-niveaux, à la place des leçons v1 du même titre, publiées ou non. |
 | [0124](./0124-standard-de-test.md) | Standard de test : jeu standard, activité déterministe, rôle des environnements, rendu des leçons | Accepté | 2026-11-02 | Chaque environnement teste sur des données différentes, sans activité, et l'affichage des leçons n'est vérifié qu'à la main. |
+| [0125](./0125-lecture-de-la-classe-par-la-direction.md) | Lecture de la leçon en classe par la direction | Accepté | 2026-11-05 | Qui peut lire les lacunes nominatives et la réussite par exercice d'une classe, et la direction peut-elle agir sur la classe ? |
 <!-- index:end -->
 
 ---

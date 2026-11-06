@@ -77,7 +77,9 @@ Deux règles :
 
 Types : `feature`, `fix`, `refactor`, `perf`, `hotfix`, `docs`.
 
-Un chantier = une branche. Ses lots parallèles vivent chacun dans un **worktree git isolé** sur sa propre branche, et sont mergés dans la branche de chantier au fur et à mesure. **Une seule PR par chantier**, vers `Develop`.
+Un chantier = une branche. Ses lots parallèles vivent chacun dans un **worktree git isolé** sur sa propre branche, et sont mergés dans la branche de chantier au fur et à mesure. **Une seule PR par chantier et par jour**, vers `Develop`.
+
+**Une branche vit moins d'un jour** (chantier [`flux-allege`](../chantiers/flux-allege/memo.md)). Mesure d'octobre : 119 fusions de rattrapage (`Develop` fusionné dans une branche) et 20 branches de plus d'un jour sur 154, qui portent les conflits et le travail refait. Un chantier qui ne tient pas dans la journée livre chaque soir ce qui est fini et vert : sa PR du jour est fusionnée, la suite repart de `Develop` le lendemain, sur une branche neuve (`<type>/<slug>-2`, `-3`…). Pas de branche d'intégration qui vit plusieurs jours et reçoit `Develop` à répétition. Ce qui n'est pas fini le soir reste derrière un lot non livré, jamais à moitié dans `Develop`. La mesure du 1er du mois suit la durée de vie des branches ([`mesure.md`](../workflows/mesure.md)).
 
 ### Le flux des branches longues
 
@@ -162,7 +164,7 @@ Chantier: docs/chantiers/login-contact-vide
 
 ### Granularité
 
-Un commit par lot (voir [`../workflows/README.md`](../workflows/README.md#phase-3--planifier)), avec la documentation du lot. Les index `docs/decisions/adr/README.md`, `docs/decisions/udr/README.md` et `docs/chantiers/README.md` ne changent qu'au commit de clôture du chantier. Raison mesurée : [`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md).
+Un commit par lot (voir [`../workflows/README.md`](../workflows/README.md#phase-3--planifier)), avec la documentation du lot. Les index `docs/decisions/adr/README.md`, `docs/decisions/udr/README.md` et `docs/chantiers/README.md` sont générés par `script/docs/build_index`, que le pre-commit lance dès qu'un memo ou une décision est commité : ils suivent le commit du lot, jamais un commit à part. Raison mesurée : [`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md).
 
 ---
 

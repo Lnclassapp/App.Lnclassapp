@@ -142,3 +142,13 @@ longue: <fichier v3 le plus long>.json
 **Inchangé.** Staging (`:exercises` pour une leçon à sujets, `:create_only` pour les autres leçons des dossiers du programme), production, Demo, environnements de PR.
 
 **Comment vérifier.** `test/domain/entities/catalog/automatic_load_stage_test.rb` (tout dossier, 3ème et dossier inconnu compris, sujets ou non : `:lesson` sur Develop ; Staging inchangé) ; `test/domain/use_cases/catalog/load_repository_lessons_test.rb` (aucun manifeste, seul l'import « leçon entière » appelé sur Develop, rien supprimé) ; `test/integration/catalog/automatic_lesson_load_test.rb` (Thalès remplacée entière sujets compris, 3ème sans sujet créée, `jeu.yml` illisible sans effet). Le §7 ci-dessus, « Develop restreint au manifeste », est remplacé par ces tests.
+
+## 9. Amendement du 2026-11-05 : Staging reçoit les comptes du jeu standard
+
+**Contexte.** La recette connectée d'un train sur Staging est impossible : aucun compte de test n'y existe (étape sautée le 2026-11-05). Chantier `comptes-de-test-staging`.
+
+**Décision (porteur, 2026-11-05).** À chaque déploiement de Staging (`RAILWAY_ENVIRONMENT_NAME=Staging`), le semis ajoute les établissements, classes et comptes du jeu standard, aux mêmes règles que Develop (§4 point 5) : PIN de test public `2468` pour les élèves, enseignants et directions ; comptes équipe seulement avec `STANDARD_TEAM_PIN` **scellée** sur Staging, créés sans second facteur ; rien supprimé ni modifié ; contact pris laissé tel quel et signalé ; échec journalisé, jamais levé. Différences avec Develop : **pas d'activité simulée** (`standard/activite`), et les leçons restent au chargement `:create_only` de Staging (§4 point 5, inchangé).
+
+**Inchangé.** Production (aucun jeu), Demo, Develop, environnements de PR.
+
+**Comment vérifier.** `test/db/seeds/staging_stage_test.rb`.

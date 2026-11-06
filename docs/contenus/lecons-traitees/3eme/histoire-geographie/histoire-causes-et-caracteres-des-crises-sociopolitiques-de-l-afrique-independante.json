@@ -121,6 +121,102 @@
             ]
           },
           "controls": []
+        },
+        {
+          "key": "schema-causes-consequences",
+          "kind": "diagram",
+          "description": "Schéma de gauche à droite. Cinq causes (frontières héritées de la colonisation, rivalités entre groupes et régions, parti unique et pouvoir personnel, contrôle des ressources, ingérences de la guerre froide) mènent à une crise sociopolitique. Celle-ci a trois sortes de conséquences : humaines (morts, réfugiés, déplacés), économiques (destructions, ruine) et politiques (États affaiblis, pouvoirs militaires).",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "fr",
+                "label": "Frontières héritées de la colonisation",
+                "category": 1
+              },
+              {
+                "id": "ri",
+                "label": "Rivalités entre groupes et régions",
+                "category": 1
+              },
+              {
+                "id": "pa",
+                "label": "Parti unique et pouvoir personnel",
+                "category": 1
+              },
+              {
+                "id": "re",
+                "label": "Contrôle des ressources",
+                "category": 1
+              },
+              {
+                "id": "gf",
+                "label": "Ingérences de la guerre froide",
+                "category": 1
+              },
+              {
+                "id": "cr",
+                "label": "Crise sociopolitique",
+                "category": 2
+              },
+              {
+                "id": "hu",
+                "label": "Morts, réfugiés et déplacés",
+                "category": 3
+              },
+              {
+                "id": "ec",
+                "label": "Destructions et ruine",
+                "category": 3
+              },
+              {
+                "id": "po",
+                "label": "États affaiblis et pouvoirs militaires",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "fr",
+                "to": "cr"
+              },
+              {
+                "from": "ri",
+                "to": "cr"
+              },
+              {
+                "from": "pa",
+                "to": "cr"
+              },
+              {
+                "from": "re",
+                "to": "cr"
+              },
+              {
+                "from": "gf",
+                "to": "cr"
+              },
+              {
+                "from": "cr",
+                "to": "hu"
+              },
+              {
+                "from": "cr",
+                "to": "ec"
+              },
+              {
+                "from": "cr",
+                "to": "po"
+              }
+            ],
+            "legend": [
+              "Causes",
+              "Crise",
+              "Conséquences"
+            ]
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -144,113 +240,250 @@
           },
           "pitfall": "Ne confonds pas la crise avec une simple calamité. Une sécheresse ou une inondation est un événement naturel : elle n'est pas, à elle seule, une crise sociopolitique. Elle le devient seulement si elle provoque la contestation du pouvoir ou des affrontements. Il faut toujours chercher le pouvoir contesté ET la société touchée.",
           "figure": null,
-          "exercise": {
-            "title": "Reconnaître une crise sociopolitique",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer, identifier, constater, conclure.",
-            "questions": [
-              {
-                "content": "Quelle définition correspond à une crise sociopolitique ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : une crise sociopolitique réunit le pouvoir politique et la société. Étape 2 — Identifier : les acteurs sont l'État et des groupes. Étape 3 — Constater : il y a contestation et désordre. Étape 4 — Conclure : la bonne définition est la première. Une baisse des prix est un fait économique, une inondation un fait naturel, une fête n'est pas une tension : ces propositions n'associent pas pouvoir contesté et société touchée.",
-                "answers": [
-                  {
-                    "content": "Une période de tension grave où le pouvoir est contesté et où la société est touchée",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une simple baisse du prix des produits agricoles",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une catastrophe naturelle comme une inondation",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une fête nationale organisée par l'État",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un coup d'État, où des militaires renversent un président, est une crise sociopolitique.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : le pouvoir politique du président est visé. Étape 2 — Identifier : des militaires agissent contre lui. Étape 3 — Constater : le pouvoir est renversé par la force. Étape 4 — Conclure : c'est bien une crise sociopolitique. Dire Faux serait oublier que le renversement par la force est une rupture de l'ordre politique normal.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une crise ___ touche à la fois le pouvoir politique et la société.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Repérer : on cherche le mot qui réunit le social et le politique. Étape 4 — Conclure : le mot est « sociopolitique ». Le mot « économique » est la confusion fréquente : il ne désigne que les richesses et les prix, pas le pouvoir.",
-                "answers": [
-                  {
-                    "content": "sociopolitique",
-                    "correct": true
-                  },
-                  {
-                    "content": "socio-politique",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque mot à sa définition.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Repérer : le pouvoir politique dirige l'État, la société est la population. Étape 2 — Identifier : l'armée est la force militaire, les rebelles sont ceux qui se révoltent. Ces acteurs interviennent dans les crises : le pouvoir est visé, la société est touchée.",
-                "answers": [
-                  {
-                    "content": "Pouvoir politique",
-                    "match": "Autorité qui dirige l'État"
-                  },
-                  {
-                    "content": "Société",
-                    "match": "Ensemble de la population et de ses groupes"
-                  },
-                  {
-                    "content": "Armée",
-                    "match": "Force militaire de l'État"
-                  },
-                  {
-                    "content": "Rébellion",
-                    "match": "Révolte armée contre le pouvoir en place"
-                  }
-                ]
-              },
-              {
-                "content": "Parmi ces situations, laquelle n'est pas une crise sociopolitique ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on cherche le pouvoir ET la société. Étape 2 — Identifier : coup d'État, guerre civile et sécession mettent en cause le pouvoir et touchent la population. Étape 3 — Constater : la sécheresse seule n'oppose personne au pouvoir. Étape 4 — Conclure : la sécheresse seule n'est pas une crise sociopolitique. Le piège est de croire que tout événement grave est une crise sociopolitique.",
-                "answers": [
-                  {
-                    "content": "Un coup d'État qui renverse un président",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une sécheresse qui n'entraîne aucune contestation du pouvoir",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une guerre civile entre groupes armés d'un même pays",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une région qui proclame sa sécession",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître une crise sociopolitique",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer, identifier, constater, conclure.",
+              "questions": [
+                {
+                  "content": "Quelle définition correspond à une crise sociopolitique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une crise sociopolitique réunit le pouvoir politique et la société. Étape 2 — Identifier : les acteurs sont l'État et des groupes. Étape 3 — Constater : il y a contestation et désordre. Étape 4 — Conclure : la bonne définition est la première. Une baisse des prix est un fait économique, une inondation un fait naturel, une fête n'est pas une tension : ces propositions n'associent pas pouvoir contesté et société touchée.",
+                  "answers": [
+                    {
+                      "content": "Une période de tension grave où le pouvoir est contesté et où la société est touchée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une simple baisse du prix des produits agricoles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une catastrophe naturelle comme une inondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fête nationale organisée par l'État",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coup d'État, où des militaires renversent un président, est une crise sociopolitique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le pouvoir politique du président est visé. Étape 2 — Identifier : des militaires agissent contre lui. Étape 3 — Constater : le pouvoir est renversé par la force. Étape 4 — Conclure : c'est bien une crise sociopolitique. Dire Faux serait oublier que le renversement par la force est une rupture de l'ordre politique normal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une crise ___ touche à la fois le pouvoir politique et la société.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche le mot qui réunit le social et le politique. Étape 4 — Conclure : le mot est « sociopolitique ». Le mot « économique » est la confusion fréquente : il ne désigne que les richesses et les prix, pas le pouvoir.",
+                  "answers": [
+                    {
+                      "content": "sociopolitique",
+                      "correct": true
+                    },
+                    {
+                      "content": "socio-politique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque mot à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : le pouvoir politique dirige l'État, la société est la population. Étape 2 — Identifier : l'armée est la force militaire, les rebelles sont ceux qui se révoltent. Ces acteurs interviennent dans les crises : le pouvoir est visé, la société est touchée.",
+                  "answers": [
+                    {
+                      "content": "Pouvoir politique",
+                      "match": "Autorité qui dirige l'État"
+                    },
+                    {
+                      "content": "Société",
+                      "match": "Ensemble de la population et de ses groupes"
+                    },
+                    {
+                      "content": "Armée",
+                      "match": "Force militaire de l'État"
+                    },
+                    {
+                      "content": "Rébellion",
+                      "match": "Révolte armée contre le pouvoir en place"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces situations, laquelle n'est pas une crise sociopolitique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche le pouvoir ET la société. Étape 2 — Identifier : coup d'État, guerre civile et sécession mettent en cause le pouvoir et touchent la population. Étape 3 — Constater : la sécheresse seule n'oppose personne au pouvoir. Étape 4 — Conclure : la sécheresse seule n'est pas une crise sociopolitique. Le piège est de croire que tout événement grave est une crise sociopolitique.",
+                  "answers": [
+                    {
+                      "content": "Un coup d'État qui renverse un président",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sécheresse qui n'entraîne aucune contestation du pouvoir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une guerre civile entre groupes armés d'un même pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une région qui proclame sa sécession",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Repérer le pouvoir contesté et la société touchée",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer les deux dimensions, identifier les acteurs, constater la rupture, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche toujours le pouvoir contesté ET la société touchée : une seule dimension ne suffit pas.",
+              "questions": [
+                {
+                  "content": "Une crise sociopolitique se reconnaît par deux dimensions réunies. Lesquelles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer les deux dimensions : une crise sociopolitique est une période de tension grave où le pouvoir politique est contesté et où la société est touchée. Étape 4 — Conclure : la bonne réponse réunit les deux. Le climat et les saisons relèvent de la nature, pas du pouvoir. Le prix des produits et le commerce seulement ne touchent que l'économie : c'est oublier la dimension politique. L'armée seule, sans la population, oublie la société touchée.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir politique contesté et la société touchée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le climat et les saisons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix des produits et le commerce seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'armée seule, sans la population",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une sécheresse qui provoque la contestation du pouvoir et des affrontements peut devenir une crise sociopolitique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : un événement naturel n'est pas, à lui seul, une crise sociopolitique. Étape 3 — Constater la rupture : il le devient seulement s'il provoque la contestation du pouvoir ou des affrontements. L'affirmation est donc vraie. Répondre Faux serait croire qu'un événement naturel ne peut jamais devenir une crise, alors que la contestation du pouvoir change tout.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'expression crise sociopolitique, le mot ___ concerne la population et ses groupes.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer les deux dimensions : le mot politique concerne le pouvoir et l'État, le mot social concerne la population et ses groupes. Étape 4 — Conclure : le mot attendu est social. Écrire politique serait inverser les deux dimensions.",
+                  "answers": [
+                    {
+                      "content": "social",
+                      "correct": true
+                    },
+                    {
+                      "content": "sociale",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément du coup d'État togolais de 1963 à ce qu'il illustre dans la méthode.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : le pouvoir du président est la dimension politique et le pays touché par la violence est la dimension sociale. Étape 2 — Identifier : les acteurs sont le président Olympio et des militaires. Étape 3 — Constater : le président renversé et tué est la rupture de l'ordre normal. Confondre acteurs et dimensions, ou rupture et dimension politique, revient à mélanger les étapes de la méthode.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir du président",
+                      "match": "La dimension politique"
+                    },
+                    {
+                      "content": "Le pays touché par la violence",
+                      "match": "La dimension sociale"
+                    },
+                    {
+                      "content": "Le président Olympio et des militaires",
+                      "match": "Les acteurs de la crise"
+                    },
+                    {
+                      "content": "Le président renversé par la force et tué",
+                      "match": "La rupture de l'ordre normal"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une inondation détruit des maisons dans une région, sans aucune contestation du pouvoir. Pourquoi n'est-ce pas, à elle seule, une crise sociopolitique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il faut le pouvoir contesté ET la société touchée. Étape 3 — Constater la rupture : ici aucun pouvoir n'est contesté. Étape 4 — Conclure : un événement naturel n'est pas, à lui seul, une crise sociopolitique. Dire que seul un coup d'État compte oublie la guerre civile et la sécession. Dire que la société n'est jamais touchée est faux : des maisons sont détruites. Réserver les crises aux villes invente un critère absent de la leçon.",
+                  "answers": [
+                    {
+                      "content": "Parce que c'est un événement naturel qui ne conteste pas le pouvoir",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que seul un coup d'État est une crise sociopolitique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la société n'est jamais touchée par une inondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les crises sociopolitiques ne concernent que les villes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux caractéristiques d'une crise sociopolitique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer les deux dimensions : le pouvoir contesté et la société touchée. Étape 4 — Conclure : ce sont les deux bonnes propositions. Une catastrophe naturelle n'est pas la cause obligée d'une crise : c'est la confusion du piège de la fiche. Limiter la crise à l'économie oublie le pouvoir. Dire que la population n'est jamais touchée oublie la dimension sociale.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir politique est contesté",
+                      "correct": true
+                    },
+                    {
+                      "content": "La société est touchée par des violences, des divisions ou du désordre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est toujours causée par une catastrophe naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne concerne que l'économie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne touche jamais la population",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu reconnais une crise sociopolitique avec la méthode : repérer les deux dimensions, identifier les acteurs, constater la rupture, conclure.",
             "questions": [
@@ -356,147 +589,284 @@
           },
           "pitfall": "Ne confonds pas cause et conséquence. Une cause vient avant la crise et la provoque (rivalités, frontières héritées, ressources convoitées). Une conséquence vient après (morts, réfugiés, ruine). Exemple : l'envoi de Casques bleus au Congo est une réponse à la crise, donc une conséquence, pas une cause. Ne cherche pas non plus une cause unique.",
           "figure": null,
-          "exercise": {
-            "title": "Expliquer les causes d'une crise",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, chercher les causes politiques, économiques et sociales, extérieures, puis classer.",
-            "questions": [
-              {
-                "content": "Quelles sont trois causes des crises sociopolitiques de l'Afrique indépendante ?",
-                "question_type": "multiple_correct_3",
-                "explanation": "Étape 2 — Causes politiques : le parti unique et le pouvoir personnel excluent l'opposition. Étape 4 — Causes extérieures : les frontières coloniales et la guerre froide. Ces trois propositions sont donc des causes. Les rivalités n'ont pas disparu après 1960, et les richesses étaient très inégalement réparties : les deux autres propositions sont l'inverse de la réalité.",
-                "answers": [
-                  {
-                    "content": "Les frontières héritées de la colonisation",
-                    "correct": true
-                  },
-                  {
-                    "content": "Les partis uniques et le pouvoir personnel",
-                    "correct": true
-                  },
-                  {
-                    "content": "Les ingérences extérieures pendant la guerre froide",
-                    "correct": true
-                  },
-                  {
-                    "content": "La disparition de toutes les rivalités entre groupes après 1960",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une répartition égale des richesses entre toutes les régions",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque cause à son explication.",
-                "question_type": "matching",
-                "explanation": "Étape 2 — Causes politiques : le parti unique. Étape 3 — Causes économiques : le contrôle des ressources. Étape 4 — Causes extérieures : les frontières héritées de la colonisation et la guerre froide. Chaque cause a sa place dans la méthode, ce qui aide à ne pas les mélanger.",
-                "answers": [
-                  {
-                    "content": "Frontières héritées",
-                    "match": "Tracées par les colonisateurs, elles regroupent ou séparent des peuples"
-                  },
-                  {
-                    "content": "Parti unique",
-                    "match": "Un seul parti est autorisé et l'opposition est exclue"
-                  },
-                  {
-                    "content": "Guerre froide",
-                    "match": "Rivalité Est-Ouest : les deux camps soutiennent des acteurs rivaux"
-                  },
-                  {
-                    "content": "Contrôle des ressources",
-                    "match": "Les régions riches en cuivre ou en pétrole sont convoitées"
-                  }
-                ]
-              },
-              {
-                "content": "Avant 1960, les frontières des futurs États africains avaient été tracées par les Africains eux-mêmes.",
-                "question_type": "true_false",
-                "explanation": "Étape 4 — Causes extérieures : les frontières ont été tracées par les Européens, selon les règles fixées à la conférence de Berlin (1884-1885), puis par des traités entre puissances coloniales. Elles ne suivaient pas toujours les peuples. L'affirmation est donc fausse. Le piège serait de croire que les États sont nés de frontières choisies par les Africains.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Le Katanga, région riche en ___, a voulu se séparer du Congo en 1960.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Situer : le Katanga, au sud-est du Congo, en 1960. Étape 3 — Causes économiques : cette région est riche en cuivre, une ressource que ses dirigeants voulaient garder. Le cacao et le café sont des cultures de plantation et le pétrole n'est pas la richesse du Katanga.",
-                "answers": [
-                  {
-                    "content": "cuivre",
-                    "correct": true
-                  },
-                  {
-                    "content": "cacao",
-                    "correct": false
-                  },
-                  {
-                    "content": "café",
-                    "correct": false
-                  },
-                  {
-                    "content": "pétrole",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de la méthode pour expliquer les causes d'une crise.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Situer d'abord : on ne peut pas expliquer une crise sans savoir où et quand. Étapes 2, 3 et 4 — On cherche les causes politiques, puis économiques et sociales, puis extérieures. Étape 5 — On termine par le classement. Commencer par les causes sans situer fait mélanger les pays et les dates.",
-                "answers": [
-                  {
-                    "content": "Situer le pays et la période"
-                  },
-                  {
-                    "content": "Chercher les causes politiques"
-                  },
-                  {
-                    "content": "Chercher les causes économiques et sociales"
-                  },
-                  {
-                    "content": "Chercher les causes extérieures"
-                  },
-                  {
-                    "content": "Classer et relier les causes"
-                  }
-                ]
-              },
-              {
-                "content": "Laquelle de ces propositions est une cause, et non une conséquence, de la crise du Congo ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Situer : le Congo, après 1960. Étape 2 — Causes politiques : les rivalités entre dirigeants et régions commencent dès l'indépendance, avant la crise : c'est une cause. Les morts, les Casques bleus et la désorganisation viennent après : ce sont des conséquences. Étape 5 — Classer : ne confonds pas avant et après.",
-                "answers": [
-                  {
-                    "content": "Des milliers de morts et de déplacés",
-                    "correct": false
-                  },
-                  {
-                    "content": "Les rivalités entre dirigeants et entre régions dès l'indépendance",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'envoi de Casques bleus de l'ONU",
-                    "correct": false
-                  },
-                  {
-                    "content": "La désorganisation de l'économie",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Expliquer les causes d'une crise",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, chercher les causes politiques, économiques et sociales, extérieures, puis classer.",
+              "questions": [
+                {
+                  "content": "Quelles sont trois causes des crises sociopolitiques de l'Afrique indépendante ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Causes politiques : le parti unique et le pouvoir personnel excluent l'opposition. Étape 4 — Causes extérieures : les frontières coloniales et la guerre froide. Ces trois propositions sont donc des causes. Les rivalités n'ont pas disparu après 1960, et les richesses étaient très inégalement réparties : les deux autres propositions sont l'inverse de la réalité.",
+                  "answers": [
+                    {
+                      "content": "Les frontières héritées de la colonisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les partis uniques et le pouvoir personnel",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les ingérences extérieures pendant la guerre froide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La disparition de toutes les rivalités entre groupes après 1960",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une répartition égale des richesses entre toutes les régions",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cause à son explication.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Causes politiques : le parti unique. Étape 3 — Causes économiques : le contrôle des ressources. Étape 4 — Causes extérieures : les frontières héritées de la colonisation et la guerre froide. Chaque cause a sa place dans la méthode, ce qui aide à ne pas les mélanger.",
+                  "answers": [
+                    {
+                      "content": "Frontières héritées",
+                      "match": "Tracées par les colonisateurs, elles regroupent ou séparent des peuples"
+                    },
+                    {
+                      "content": "Parti unique",
+                      "match": "Un seul parti est autorisé et l'opposition est exclue"
+                    },
+                    {
+                      "content": "Guerre froide",
+                      "match": "Rivalité Est-Ouest : les deux camps soutiennent des acteurs rivaux"
+                    },
+                    {
+                      "content": "Contrôle des ressources",
+                      "match": "Les régions riches en cuivre ou en pétrole sont convoitées"
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant 1960, les frontières des futurs États africains avaient été tracées par les Africains eux-mêmes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Causes extérieures : les frontières ont été tracées par les Européens, selon les règles fixées à la conférence de Berlin (1884-1885), puis par des traités entre puissances coloniales. Elles ne suivaient pas toujours les peuples. L'affirmation est donc fausse. Le piège serait de croire que les États sont nés de frontières choisies par les Africains.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Katanga, région riche en ___, a voulu se séparer du Congo en 1960.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Situer : le Katanga, au sud-est du Congo, en 1960. Étape 3 — Causes économiques : cette région est riche en cuivre, une ressource que ses dirigeants voulaient garder. Le cacao et le café sont des cultures de plantation et le pétrole n'est pas la richesse du Katanga.",
+                  "answers": [
+                    {
+                      "content": "cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "café",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétrole",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour expliquer les causes d'une crise.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer d'abord : on ne peut pas expliquer une crise sans savoir où et quand. Étapes 2, 3 et 4 — On cherche les causes politiques, puis économiques et sociales, puis extérieures. Étape 5 — On termine par le classement. Commencer par les causes sans situer fait mélanger les pays et les dates.",
+                  "answers": [
+                    {
+                      "content": "Situer le pays et la période"
+                    },
+                    {
+                      "content": "Chercher les causes politiques"
+                    },
+                    {
+                      "content": "Chercher les causes économiques et sociales"
+                    },
+                    {
+                      "content": "Chercher les causes extérieures"
+                    },
+                    {
+                      "content": "Classer et relier les causes"
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces propositions est une cause, et non une conséquence, de la crise du Congo ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le Congo, après 1960. Étape 2 — Causes politiques : les rivalités entre dirigeants et régions commencent dès l'indépendance, avant la crise : c'est une cause. Les morts, les Casques bleus et la désorganisation viennent après : ce sont des conséquences. Étape 5 — Classer : ne confonds pas avant et après.",
+                  "answers": [
+                    {
+                      "content": "Des milliers de morts et de déplacés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rivalités entre dirigeants et entre régions dès l'indépendance",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'envoi de Casques bleus de l'ONU",
+                      "correct": false
+                    },
+                    {
+                      "content": "La désorganisation de l'économie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer les causes d'une crise",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, chercher les causes politiques, économiques et sociales, extérieures, puis classer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Une cause vient avant la crise et la provoque ; une conséquence vient après. Les causes se combinent.",
+              "questions": [
+                {
+                  "content": "Quelles sont trois causes possibles d'une crise de l'Afrique indépendante ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 2 — Causes politiques : les rivalités entre groupes. Étape 3 — Causes économiques et sociales : la pauvreté, les inégalités et le contrôle des ressources (cuivre, pétrole, diamants). Étape 5 — Classer : ces trois propositions viennent avant la crise. Les Casques bleus sont une réponse à la crise, le retour de réfugiés une suite et la ruine de l'économie une conséquence : les confondre avec des causes est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Les rivalités ethniques et régionales",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pauvreté et les inégalités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le contrôle des ressources comme le cuivre, le pétrole ou les diamants",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'envoi de Casques bleus après la crise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le retour de réfugiés dans leur pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ruine de l'économie après les combats",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les frontières ont été tracées par les Européens, selon les règles fixées à la conférence de ___ (1884-1885).",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Chercher les causes extérieures : les frontières héritées de la colonisation ont été tracées par les Européens, selon les règles fixées à la conférence de Berlin (1884-1885). Addis-Abeba est la ville de création de l'OUA en 1963, pas celle de ce partage. Paris et Bruxelles sont des capitales européennes, mais la leçon ne les associe pas à ces règles.",
+                  "answers": [
+                    {
+                      "content": "Berlin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Addis-Abeba",
+                      "correct": false
+                    },
+                    {
+                      "content": "Paris",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bruxelles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un seul parti est autorisé et que l'opposition est exclue, on parle de parti ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher les causes politiques : les partis uniques et le pouvoir personnel excluent l'opposition. Le mot attendu est unique. Écrire multiple serait faire l'inverse : plusieurs partis laisseraient place à l'opposition.",
+                  "answers": [
+                    {
+                      "content": "unique",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'envoi de Casques bleus au Congo est l'une des causes de la crise congolaise de 1960.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 5 — Classer les causes : une cause vient avant la crise et la provoque. L'envoi de Casques bleus au Congo est une réponse à la crise, donc une conséquence, pas une cause. Répondre Vrai, c'est confondre cause et conséquence, l'erreur que la fiche signale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de la crise du Congo ex-belge à la cause qu'il illustre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Causes politiques : les rivalités entre dirigeants et entre régions. Étape 3 — Causes économiques : le cuivre du Katanga. Étape 4 — Causes extérieures : les frontières héritées et la guerre froide. Associer le cuivre aux ingérences, ou les frontières aux rivalités, mélange les catégories de la méthode.",
+                  "answers": [
+                    {
+                      "content": "Le Katanga, riche en cuivre, veut garder ses richesses",
+                      "match": "Le contrôle des ressources"
+                    },
+                    {
+                      "content": "La guerre froide attire les puissances",
+                      "match": "Les ingérences extérieures"
+                    },
+                    {
+                      "content": "Un État immense aux frontières héritées de la colonisation",
+                      "match": "Les frontières héritées"
+                    },
+                    {
+                      "content": "Des dirigeants et des régions se disputent le pouvoir",
+                      "match": "Les rivalités politiques et régionales"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une élève doit expliquer la crise du Congo ex-belge de 1960 à 1965. Quelle démarche suit la méthode de la fiche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le Congo ex-belge, de 1960 à 1965. Étapes 2 à 4 — Chercher les causes politiques, économiques et sociales, puis extérieures. Étape 5 — Classer et relier. Chercher une cause unique est le piège de la fiche : il ne faut pas une cause unique. Lister les morts et les réfugiés confond cause et conséquence. Ne garder que les causes extérieures oublie les rivalités et le cuivre du Katanga.",
+                  "answers": [
+                    {
+                      "content": "Situer la crise, chercher des causes politiques, économiques et extérieures, puis les classer",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chercher une cause unique et la plus importante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lister les morts et les réfugiés comme des causes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ne garder que les causes extérieures",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu expliques les causes d'une crise avec la méthode : situer, chercher les causes politiques, économiques et extérieures, classer.",
             "questions": [
@@ -608,131 +978,259 @@
           },
           "pitfall": "Ne confonds pas coup d'État et guerre civile. Le coup d'État est une prise du pouvoir rapide, souvent en quelques heures, au sommet de l'État (Togo, janvier 1963). La guerre civile est un affrontement armé durable entre groupes d'un même pays (Nigeria, 1967-1970). Ne confonds pas non plus sécession (une région veut partir) et coup d'État (on veut prendre le pouvoir central).",
           "figure": "carte-crises-afrique",
-          "exercise": {
-            "title": "Nommer la forme d'une crise",
-            "exercise_type": "fixation",
-            "figure": "carte-crises-afrique",
-            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, nommer, justifier. La carte indique les pays cités selon la forme de crise.",
-            "questions": [
-              {
-                "content": "En janvier 1963, des militaires renversent le président du Togo, Sylvanus Olympio. Quelle forme de crise est-ce ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Situer : Togo, janvier 1963. Étape 2 — Identifier : des militaires agissent contre le président. Étape 3 — Nommer : c'est un coup d'État. Étape 4 — Justifier : le pouvoir central est pris par la force. Ce n'est pas une sécession, car aucune région ne veut se séparer.",
-                "answers": [
-                  {
-                    "content": "Un coup d'État",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une sécession",
-                    "correct": false
-                  },
-                  {
-                    "content": "Un conflit frontalier",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une guerre civile durable",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque événement à sa forme de crise.",
-                "question_type": "matching",
-                "explanation": "Étape 2 — Identifier : au Togo, ce sont des militaires qui prennent le pouvoir. Au Katanga et au Biafra, des régions veulent se séparer. Entre l'Éthiopie et la Somalie, deux États s'affrontent pour la région de l'Ogaden. Étape 3 — Nommer : coup d'État, sécession à laquelle l'ONU met fin, sécession suivie d'une guerre de trois ans, conflit frontalier.",
-                "answers": [
-                  {
-                    "content": "Togo, janvier 1963",
-                    "match": "Coup d'État"
-                  },
-                  {
-                    "content": "Katanga, 1960",
-                    "match": "Sécession à laquelle l'ONU met fin"
-                  },
-                  {
-                    "content": "Biafra, 1967-1970",
-                    "match": "Sécession suivie d'une guerre de trois ans"
-                  },
-                  {
-                    "content": "Éthiopie et Somalie, 1977-1978",
-                    "match": "Conflit frontalier"
-                  }
-                ]
-              },
-              {
-                "content": "Un coup d'État est une prise du pouvoir par la force, souvent par des militaires, en dehors des règles de la constitution.",
-                "question_type": "true_false",
-                "explanation": "Étape 3 — Nommer : c'est la définition du coup d'État. Étape 4 — Justifier : le critère est la prise du pouvoir central par la force. Dire Faux reviendrait à confondre le coup d'État avec une élection ou avec une sécession.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quand une région proclame son indépendance et se sépare de l'État, on parle de ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 3 — Nommer : la séparation d'une région s'appelle une sécession. Étape 4 — Justifier : le critère est la volonté de former un nouvel État, comme le Katanga en 1960 ou le Biafra en 1967. Le mot « coup d'État » est le piège : il désigne la prise du pouvoir central.",
-                "answers": [
-                  {
-                    "content": "sécession",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets ces événements dans l'ordre chronologique.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Situer dans le temps : 1960 pour le Katanga, janvier 1963 pour le Togo, mai 1967 pour le Biafra, 1970 pour la fin de la guerre du Biafra, 1977 pour la guerre de l'Ogaden. Le Togo (1963) vient après le Katanga (1960) : c'est la confusion de dates la plus fréquente.",
-                "answers": [
-                  {
-                    "content": "Sécession du Katanga (1960)"
-                  },
-                  {
-                    "content": "Coup d'État au Togo (1963)"
-                  },
-                  {
-                    "content": "Proclamation du Biafra (1967)"
-                  },
-                  {
-                    "content": "Fin de la guerre du Biafra (1970)"
-                  },
-                  {
-                    "content": "Guerre de l'Ogaden (1977)"
-                  }
-                ]
-              },
-              {
-                "content": "Qu'est-ce qui distingue un coup d'État d'une guerre civile ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 2 — Identifier : dans un coup d'État, un petit groupe agit au sommet ; dans une guerre civile, des groupes armés s'affrontent dans le pays. Étape 3 — Nommer : coup d'État pour la prise rapide du pouvoir, guerre civile pour le combat durable. Étape 4 — Justifier : le critère est la rapidité et le lieu de l'action. Les autres propositions inversent les critères ou confondent avec le conflit frontalier.",
-                "answers": [
-                  {
-                    "content": "Le coup d'État est une prise du pouvoir rapide, la guerre civile un affrontement armé durable entre groupes d'un même pays",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le coup d'État dure toujours plusieurs années, la guerre civile quelques heures",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le coup d'État oppose deux États, la guerre civile une région et un État voisin",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il n'y a aucune différence entre les deux",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Nommer la forme d'une crise",
+              "exercise_type": "fixation",
+              "figure": "carte-crises-afrique",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, nommer, justifier. La carte indique les pays cités selon la forme de crise.",
+              "questions": [
+                {
+                  "content": "En janvier 1963, des militaires renversent le président du Togo, Sylvanus Olympio. Quelle forme de crise est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : Togo, janvier 1963. Étape 2 — Identifier : des militaires agissent contre le président. Étape 3 — Nommer : c'est un coup d'État. Étape 4 — Justifier : le pouvoir central est pris par la force. Ce n'est pas une sécession, car aucune région ne veut se séparer.",
+                  "answers": [
+                    {
+                      "content": "Un coup d'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une sécession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conflit frontalier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une guerre civile durable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque événement à sa forme de crise.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier : au Togo, ce sont des militaires qui prennent le pouvoir. Au Katanga et au Biafra, des régions veulent se séparer. Entre l'Éthiopie et la Somalie, deux États s'affrontent pour la région de l'Ogaden. Étape 3 — Nommer : coup d'État, sécession à laquelle l'ONU met fin, sécession suivie d'une guerre de trois ans, conflit frontalier.",
+                  "answers": [
+                    {
+                      "content": "Togo, janvier 1963",
+                      "match": "Coup d'État"
+                    },
+                    {
+                      "content": "Katanga, 1960",
+                      "match": "Sécession à laquelle l'ONU met fin"
+                    },
+                    {
+                      "content": "Biafra, 1967-1970",
+                      "match": "Sécession suivie d'une guerre de trois ans"
+                    },
+                    {
+                      "content": "Éthiopie et Somalie, 1977-1978",
+                      "match": "Conflit frontalier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coup d'État est une prise du pouvoir par la force, souvent par des militaires, en dehors des règles de la constitution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Nommer : c'est la définition du coup d'État. Étape 4 — Justifier : le critère est la prise du pouvoir central par la force. Dire Faux reviendrait à confondre le coup d'État avec une élection ou avec une sécession.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand une région proclame son indépendance et se sépare de l'État, on parle de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer : la séparation d'une région s'appelle une sécession. Étape 4 — Justifier : le critère est la volonté de former un nouvel État, comme le Katanga en 1960 ou le Biafra en 1967. Le mot « coup d'État » est le piège : il désigne la prise du pouvoir central.",
+                  "answers": [
+                    {
+                      "content": "sécession",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer dans le temps : 1960 pour le Katanga, janvier 1963 pour le Togo, mai 1967 pour le Biafra, 1970 pour la fin de la guerre du Biafra, 1977 pour la guerre de l'Ogaden. Le Togo (1963) vient après le Katanga (1960) : c'est la confusion de dates la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Sécession du Katanga (1960)"
+                    },
+                    {
+                      "content": "Coup d'État au Togo (1963)"
+                    },
+                    {
+                      "content": "Proclamation du Biafra (1967)"
+                    },
+                    {
+                      "content": "Fin de la guerre du Biafra (1970)"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden (1977)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'est-ce qui distingue un coup d'État d'une guerre civile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Identifier : dans un coup d'État, un petit groupe agit au sommet ; dans une guerre civile, des groupes armés s'affrontent dans le pays. Étape 3 — Nommer : coup d'État pour la prise rapide du pouvoir, guerre civile pour le combat durable. Étape 4 — Justifier : le critère est la rapidité et le lieu de l'action. Les autres propositions inversent les critères ou confondent avec le conflit frontalier.",
+                  "answers": [
+                    {
+                      "content": "Le coup d'État est une prise du pouvoir rapide, la guerre civile un affrontement armé durable entre groupes d'un même pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le coup d'État dure toujours plusieurs années, la guerre civile quelques heures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coup d'État oppose deux États, la guerre civile une région et un État voisin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune différence entre les deux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Nommer la forme d'une crise",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier qui agit contre qui, nommer la forme, justifier. La carte indique les formes de crise des pays cités.",
+              "exercise_type": "fixation",
+              "figure": "carte-crises-afrique",
+              "hint": "Demande-toi qui agit contre qui : l'armée contre le pouvoir, une région contre l'État, ou deux États entre eux.",
+              "questions": [
+                {
+                  "content": "Dans la leçon, le Ghana (1966) est cité comme exemple de quelle forme de crise ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : Ghana, 1966. Étape 3 — Nommer : la leçon cite le Ghana avec le Togo parmi les coups d'État. Étape 4 — Justifier : un coup d'État est une prise du pouvoir par la force. La sécession et la guerre civile avec sécession sont les exemples du Congo et du Nigeria ; le conflit frontalier est celui de l'Éthiopie et de la Somalie.",
+                  "answers": [
+                    {
+                      "content": "Un coup d'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une sécession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conflit frontalier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une guerre civile avec sécession",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque définition à la forme de crise qu'elle désigne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Identifier qui agit : l'armée contre le pouvoir, des groupes d'un même pays, une région contre l'État, ou deux États. Étape 3 — Nommer : coup d'État, guerre civile, sécession, conflit frontalier. Étape 4 — Justifier avec le critère de chaque définition. Confondre guerre civile et conflit frontalier revient à oublier que le premier oppose des groupes d'un même pays et le second deux États.",
+                  "answers": [
+                    {
+                      "content": "Prise du pouvoir par la force, hors des règles de la constitution",
+                      "match": "Coup d'État"
+                    },
+                    {
+                      "content": "Affrontement armé entre groupes d'un même pays",
+                      "match": "Guerre civile"
+                    },
+                    {
+                      "content": "Séparation d'une région qui veut former un État",
+                      "match": "Sécession"
+                    },
+                    {
+                      "content": "Affrontement entre deux États à propos d'une frontière",
+                      "match": "Conflit frontalier"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une révolte armée contre le pouvoir s'appelle une ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Nommer : une rébellion est une révolte armée contre le pouvoir. Écrire sécession serait confondre la révolte avec la séparation d'une région ; écrire coup d'État la confondrait avec la prise du pouvoir central.",
+                  "answers": [
+                    {
+                      "content": "rébellion",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La sécession du Biafra, de 1967 à 1970, a eu lieu en Éthiopie.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : le Biafra est à l'est du Nigeria, en Afrique de l'Ouest, de 1967 à 1970. L'Éthiopie est citée pour le conflit frontalier de l'Ogaden. Répondre Vrai, c'est confondre deux lieux et deux formes de crise.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements de l'Afrique indépendante dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer dans le temps : Togo en 1963, Ghana en 1966, Biafra proclamé en 1967, Angola en 1975, Ogaden en 1977. Le coup d'État du Ghana vient après celui du Togo et non avant ; l'Angola précède l'Ogaden de deux ans.",
+                  "answers": [
+                    {
+                      "content": "Coup d'État au Togo (1963)"
+                    },
+                    {
+                      "content": "Coup d'État au Ghana (1966)"
+                    },
+                    {
+                      "content": "Proclamation du Biafra (1967)"
+                    },
+                    {
+                      "content": "Début de la guerre civile en Angola (1975)"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden (1977)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel critère distingue un coup d'État d'une sécession ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Justifier avec un critère : prise du pouvoir central pour le coup d'État, séparation d'une région pour la sécession. Inverser les deux critères est la confusion du piège de la fiche. Opposer deux États décrit le conflit frontalier. Dire que les mots sont synonymes oublie le critère à donner.",
+                  "answers": [
+                    {
+                      "content": "Le coup d'État vise le pouvoir central, la sécession la séparation d'une région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le coup d'État vise la séparation d'une région, la sécession la prise du pouvoir central",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coup d'État oppose toujours deux États voisins",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucun critère, les deux mots sont synonymes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu nommes la forme d'une crise avec la méthode : situer, identifier qui agit contre qui, nommer, justifier.",
             "questions": [
@@ -835,117 +1333,250 @@
           },
           "pitfall": "Ne confonds pas réfugié et déplacé : le réfugié a franchi une frontière, le déplacé est resté dans son pays. Ne confonds pas non plus l'ONU (créée en 1945) et l'OUA (créée en 1963) : en 1960, au Congo, l'OUA n'existe pas encore, et ce sont les Casques bleus de l'ONU qui interviennent.",
           "figure": "frise-crises-1960-2000",
-          "exercise": {
-            "title": "Dégager les conséquences d'une crise",
-            "exercise_type": "fixation",
-            "figure": "frise-crises-1960-2000",
-            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, relever les conséquences humaines, économiques et politiques, identifier les réponses.",
-            "questions": [
-              {
-                "content": "Quelles sont deux conséquences d'une guerre civile ou d'une sécession ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 2 — Conséquences humaines : morts et réfugiés. Étape 3 — Conséquences économiques : destructions et ruine. Ce sont les deux bonnes propositions. Les investisseurs fuient les pays en guerre, l'armée reste présente et les rivalités ne disparaissent pas : les autres propositions sont des erreurs plausibles mais fausses.",
-                "answers": [
-                  {
-                    "content": "De nombreux morts et des réfugiés",
-                    "correct": true
-                  },
-                  {
-                    "content": "La ruine de l'économie et des destructions",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une hausse rapide des investissements étrangers",
-                    "correct": false
-                  },
-                  {
-                    "content": "La disparition de toute armée dans le pays",
-                    "correct": false
-                  },
-                  {
-                    "content": "La fin de toute rivalité entre groupes",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "En 1960, quelle organisation envoie des Casques bleus au Congo ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Situer : Congo, 1960. Étape 4 — Identifier les réponses : la mission ONUC est formée de Casques bleus de l'ONU. L'OUA est créée seulement en 1963, l'Union africaine en 2002 et la CEDEAO en 1975 : ces organisations n'existaient pas ou ne pouvaient pas intervenir en 1960.",
-                "answers": [
-                  {
-                    "content": "L'ONU",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'OUA",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'Union africaine",
-                    "correct": false
-                  },
-                  {
-                    "content": "La CEDEAO",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "L'Organisation de l'unité africaine (OUA) est créée en 1963 à Addis-Abeba.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Situer : mai 1963, Addis-Abeba, capitale de l'Éthiopie. Étape 4 — Réponses : l'OUA est une organisation africaine créée pour renforcer l'unité et régler les conflits entre Africains. L'affirmation est vraie. Ne la confonds pas avec l'ONU, créée en 1945.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une personne qui fuit son pays à cause de la guerre est un ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 2 — Conséquences humaines : la personne qui franchit la frontière pour fuir la guerre est un réfugié. Le piège est le mot « déplacé », qui désigne quelqu'un qui reste dans son pays.",
-                "answers": [
-                  {
-                    "content": "réfugié",
-                    "correct": true
-                  },
-                  {
-                    "content": "réfugiée",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une famille quitte son village à cause des combats et s'installe dans une autre région du même pays. Comment appelle-t-on cette famille ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Situer : la famille reste dans son pays. Étape 2 — Conséquences humaines : quitter son foyer à cause des combats sans franchir de frontière fait de cette famille une famille déplacée. Elle n'est pas réfugiée, car le réfugié franchit une frontière.",
-                "answers": [
-                  {
-                    "content": "Une famille déplacée",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une famille réfugiée",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une famille de migrants économiques",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une famille expatriée",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Dégager les conséquences d'une crise",
+              "exercise_type": "fixation",
+              "figure": "frise-crises-1960-2000",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, relever les conséquences humaines, économiques et politiques, identifier les réponses.",
+              "questions": [
+                {
+                  "content": "Quelles sont deux conséquences d'une guerre civile ou d'une sécession ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Conséquences humaines : morts et réfugiés. Étape 3 — Conséquences économiques : destructions et ruine. Ce sont les deux bonnes propositions. Les investisseurs fuient les pays en guerre, l'armée reste présente et les rivalités ne disparaissent pas : les autres propositions sont des erreurs plausibles mais fausses.",
+                  "answers": [
+                    {
+                      "content": "De nombreux morts et des réfugiés",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ruine de l'économie et des destructions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une hausse rapide des investissements étrangers",
+                      "correct": false
+                    },
+                    {
+                      "content": "La disparition de toute armée dans le pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fin de toute rivalité entre groupes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1960, quelle organisation envoie des Casques bleus au Congo ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : Congo, 1960. Étape 4 — Identifier les réponses : la mission ONUC est formée de Casques bleus de l'ONU. L'OUA est créée seulement en 1963, l'Union africaine en 2002 et la CEDEAO en 1975 : ces organisations n'existaient pas ou ne pouvaient pas intervenir en 1960.",
+                  "answers": [
+                    {
+                      "content": "L'ONU",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'OUA",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Union africaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CEDEAO",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'Organisation de l'unité africaine (OUA) est créée en 1963 à Addis-Abeba.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : mai 1963, Addis-Abeba, capitale de l'Éthiopie. Étape 4 — Réponses : l'OUA est une organisation africaine créée pour renforcer l'unité et régler les conflits entre Africains. L'affirmation est vraie. Ne la confonds pas avec l'ONU, créée en 1945.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui fuit son pays à cause de la guerre est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Conséquences humaines : la personne qui franchit la frontière pour fuir la guerre est un réfugié. Le piège est le mot « déplacé », qui désigne quelqu'un qui reste dans son pays.",
+                  "answers": [
+                    {
+                      "content": "réfugié",
+                      "correct": true
+                    },
+                    {
+                      "content": "réfugiée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille quitte son village à cause des combats et s'installe dans une autre région du même pays. Comment appelle-t-on cette famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la famille reste dans son pays. Étape 2 — Conséquences humaines : quitter son foyer à cause des combats sans franchir de frontière fait de cette famille une famille déplacée. Elle n'est pas réfugiée, car le réfugié franchit une frontière.",
+                  "answers": [
+                    {
+                      "content": "Une famille déplacée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une famille réfugiée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une famille de migrants économiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une famille expatriée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distinguer les conséquences et les réponses",
+              "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, relever les conséquences humaines, économiques et politiques, identifier les réponses. La frise donne les dates de la période.",
+              "exercise_type": "fixation",
+              "figure": "frise-crises-1960-2000",
+              "hint": "Réfugié : il a franchi une frontière. Déplacé : il reste dans son pays. En 1960, l'OUA n'existe pas encore.",
+              "questions": [
+                {
+                  "content": "Une famille fuit les combats et franchit la frontière vers un pays voisin. Comment appelle-t-on ses membres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever les conséquences humaines : les réfugiés sont des personnes qui fuient dans un autre pays. Étape 4 — Identifier : ici la frontière est franchie. Des déplacés restent dans leur pays : c'est le piège de la fiche. Des rebelles mènent une révolte armée et des Casques bleus sont des soldats de l'ONU : aucun des deux ne décrit la famille.",
+                  "answers": [
+                    {
+                      "content": "Des réfugiés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des déplacés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des rebelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des Casques bleus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux réponses à une crise venant d'organisations internationales ou africaines ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Identifier les réponses : l'ONU envoie parfois des Casques bleus et l'OUA cherche à régler les conflits entre Africains. La sécession et le coup d'État sont des formes de crise, pas des réponses. Le tracé des frontières par les colonisateurs est une cause ancienne de crise.",
+                  "answers": [
+                    {
+                      "content": "L'envoi de Casques bleus par l'ONU",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'action de l'OUA pour régler les conflits entre Africains",
+                      "correct": true
+                    },
+                    {
+                      "content": "La proclamation d'une sécession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un coup d'État contre un président",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tracé des frontières par les colonisateurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Classe ces quatre événements du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Situer : l'ONU est créée en 1945, l'ONUC intervient au Congo de 1960 à 1964, et l'OUA est créée en 1963. Étape 4 — Réponses : placer l'OUA avant l'ONUC serait croire qu'elle existait en 1960, or elle est créée seulement en 1963.",
+                  "answers": [
+                    {
+                      "content": "Création de l'ONU (1945)"
+                    },
+                    {
+                      "content": "Début de l'ONUC au Congo (1960)"
+                    },
+                    {
+                      "content": "Création de l'OUA (1963)"
+                    },
+                    {
+                      "content": "Fin de l'ONUC au Congo (1964)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui a quitté son foyer mais qui reste dans son pays est un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever les conséquences humaines : le déplacé a quitté son foyer mais reste dans son pays. Écrire réfugié serait l'erreur du piège de la fiche, car le réfugié a franchi une frontière.",
+                  "answers": [
+                    {
+                      "content": "déplacé",
+                      "correct": true
+                    },
+                    {
+                      "content": "déplacée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'OUA est créée en 1960 pour envoyer des Casques bleus au Congo.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : en 1960, au Congo, l'OUA n'existe pas encore. Étape 4 — Identifier les réponses : ce sont les Casques bleus de l'ONU qui interviennent. L'OUA est créée en 1963 à Addis-Abeba. Répondre Vrai, c'est confondre l'ONU et l'OUA.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les morts, les blessés, les réfugiés et les déplacés sont des conséquences ___ d'une crise.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever les conséquences humaines : des morts et des personnes déplacées par les combats. Les conséquences économiques sont les destructions et la ruine ; les conséquences politiques sont les pouvoirs militaires et les États affaiblis. Les conséquences naturelles ne figurent pas dans la leçon.",
+                  "answers": [
+                    {
+                      "content": "humaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "économiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "politiques",
+                      "correct": false
+                    },
+                    {
+                      "content": "naturelles",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu dégages les conséquences d'une crise avec la méthode : situer, relever les conséquences humaines, économiques et politiques, identifier les réponses.",
             "questions": [
@@ -1510,6 +2141,1843 @@
               "explanation": "Corrigé modèle : Après les indépendances de 1960, plusieurs États africains connaissent des crises sociopolitiques. Leurs causes sont multiples : les frontières héritées de la colonisation, les rivalités entre régions et groupes, les partis uniques, la pauvreté, le contrôle des ressources et les ingérences de la guerre froide. Elles prennent la forme de coups d'État (Togo, janvier 1963), de sécessions et de guerres civiles (Katanga 1960-1963, Biafra 1967-1970). Leurs conséquences sont nombreuses : des morts, des réfugiés et des déplacés, la ruine de l'économie. L'ONU (ONUC au Congo) et l'OUA (créée en 1963) cherchent à y répondre. Barème : 1,5 point pour les causes, 1,5 pour les conséquences, 2 pour les exemples datés, 1 pour l'introduction, 2 pour l'organisation et la rédaction.",
               "answers": [],
               "starter": "Après les indépendances de 1960, plusieurs États africains…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "définition d'une crise sociopolitique, causes (frontières héritées, rivalités, parti unique, ressources, guerre froide), formes de crise (coup d'État, sécession, guerre civile, conflit frontalier) et conséquences (réfugiés, déplacés, ONU, OUA).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Reconnaître une crise sociopolitique. Document : définition écrite pour Lnclass. « Une crise sociopolitique est une période de tension grave où le pouvoir politique est contesté et où la société est touchée par des violences, des divisions ou du désordre. Beaucoup d'États africains deviennent indépendants vers 1960. » Réponds aux questions à l'aide du document et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche à la fois le pouvoir contesté et la société touchée.",
+              "questions": [
+                {
+                  "content": "Selon la définition d'une crise sociopolitique, qu'est-ce qui est contesté ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer la définition : une crise sociopolitique est une période de tension grave où le pouvoir politique est contesté et où la société est touchée. 2. Conclure : ce qui est contesté est le pouvoir politique. Le prix du cacao relève de l'économie, la météo de la nature et le calendrier scolaire d'une règle d'école : aucun n'est le pouvoir.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir politique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le calendrier scolaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix du cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "La météo de la saison",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une crise sociopolitique touche à la fois le pouvoir politique et la société.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer les deux dimensions : le pouvoir politique et la société. 2. Conclure : l'affirmation est vraie. Répondre Faux serait ne retenir qu'une seule dimension, alors que la définition exige les deux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot politique concerne le pouvoir et l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Repérer le vocabulaire : politique concerne le pouvoir et l'État, social concerne la population et ses groupes. 2. Conclure : le mot attendu est État. Écrire population serait confondre avec la dimension sociale.",
+                  "answers": [
+                    {
+                      "content": "État",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux acteurs possibles d'une crise sociopolitique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Identifier les acteurs : dirigeants, armée, groupes de la population, régions. 2. Conclure : l'armée et des groupes de la population sont des acteurs. Une inondation, une sécheresse et un orage sont des événements naturels, pas des acteurs : les prendre pour tels est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "L'armée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des groupes de la population",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une inondation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sécheresse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un orage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vers quelle année beaucoup d'États africains deviennent-ils indépendants ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer dans le temps : beaucoup d'États deviennent indépendants vers 1960. 2. Écarter les confusions : 1884 est l'année de la conférence de Berlin, 1945 celle de la création de l'ONU, 1977 celle de la guerre de l'Ogaden.",
+                  "answers": [
+                    {
+                      "content": "Vers 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "En 1884",
+                      "correct": false
+                    },
+                    {
+                      "content": "En 1945",
+                      "correct": false
+                    },
+                    {
+                      "content": "En 1977",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Les causes des crises. Document : liste écrite pour Lnclass. « Les crises de l'Afrique indépendante ont plusieurs causes, qui se combinent : frontières héritées de la colonisation, rivalités entre groupes, partis uniques, pauvreté, ingérences extérieures, contrôle des ressources. » Réponds aux questions à l'aide du document et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une cause vient avant la crise ; une conséquence vient après.",
+              "questions": [
+                {
+                  "content": "Selon le document, combien de causes expliquent les crises de l'Afrique indépendante ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire le document : les crises ont plusieurs causes, qui se combinent. 2. Conclure. Chercher une cause unique est le piège de la fiche. Dire qu'aucune cause n'est connue contredit le document. Les causes naturelles ne sont pas citées.",
+                  "answers": [
+                    {
+                      "content": "Plusieurs causes, qui se combinent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule cause",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune cause connue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement des causes naturelles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles ressources sont citées par la leçon comme convoitées dans les crises ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Chercher les causes économiques : le contrôle des ressources, cuivre, pétrole, diamants. 2. Conclure : ce sont les trois bonnes réponses. Le cacao et le café sont des produits agricoles connus, mais la leçon ne les cite pas parmi les ressources dont le contrôle provoque des crises.",
+                  "answers": [
+                    {
+                      "content": "Le cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pétrole",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les diamants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le café",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les frontières des États africains ont été tracées après 1960 par les nouveaux États indépendants.",
+                  "question_type": "true_false",
+                  "explanation": "1. Chercher les causes extérieures : les frontières ont été tracées par les Européens, selon les règles de la conférence de Berlin (1884-1885), puis par des traités entre puissances coloniales. 2. Conclure : l'affirmation est fausse. La date de 1960 est celle des indépendances, non celle du tracé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La guerre froide est une rivalité entre l'Est et l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Chercher les causes extérieures : les ingérences pendant la guerre froide. 2. Conclure : cette rivalité oppose l'Est et l'Ouest. Écrire Nord ou Sud serait confondre avec la géographie des régions.",
+                  "answers": [
+                    {
+                      "content": "Ouest",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces propositions est une conséquence, et non une cause, d'une crise ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Classer : une cause vient avant la crise, une conséquence vient après. 2. Conclure : les réfugiés viennent après la crise. Les frontières héritées, le parti unique et les rivalités sont des causes qui la provoquent : les ranger comme conséquences est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Des réfugiés qui fuient dans un autre pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les frontières héritées de la colonisation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le parti unique et le pouvoir personnel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rivalités entre groupes pour le pouvoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Les formes de crise. Document : carte de l'Afrique de la leçon. Les pays sont colorés selon la forme de crise : coup d'État (Togo, Ghana), guerre civile ou sécession (Congo, Nigeria), conflit frontalier (Éthiopie, Somalie). Réponds aux questions à l'aide de la carte et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "carte-crises-afrique",
+              "hint": "Demande-toi qui agit contre qui : l'armée, une région ou deux États.",
+              "questions": [
+                {
+                  "content": "Relie chaque pays à la forme de crise qui le concerne dans la leçon.",
+                  "question_type": "matching",
+                  "explanation": "1. Situer chaque pays et sa date. 2. Nommer la forme : coup d'État au Togo, sécession du Biafra au Nigeria, sécession du Katanga au Congo, début d'une guerre civile en Angola. Confondre Biafra et Katanga revient à mélanger deux sécessions de pays et de dates différents.",
+                  "answers": [
+                    {
+                      "content": "Togo (1963)",
+                      "match": "Coup d'État"
+                    },
+                    {
+                      "content": "Nigeria (1967)",
+                      "match": "Sécession du Biafra"
+                    },
+                    {
+                      "content": "Congo (1960)",
+                      "match": "Sécession du Katanga"
+                    },
+                    {
+                      "content": "Angola (1975)",
+                      "match": "Début d'une guerre civile"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle forme de crise la carte indique-t-elle pour l'Éthiopie et la Somalie ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire la carte : conflit frontalier (Éthiopie, Somalie). 2. Justifier : deux États s'opposent à propos de l'Ogaden. Un coup d'État, une sécession ou une guerre civile se déroulent à l'intérieur d'un même pays.",
+                  "answers": [
+                    {
+                      "content": "Un conflit frontalier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un coup d'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une sécession",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une guerre civile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Ghana est cité dans la leçon comme exemple de ___ en 1966.",
+                  "question_type": "select",
+                  "explanation": "1. Situer : Ghana, 1966. 2. Nommer : la leçon place le Ghana avec le Togo parmi les coups d'État. La sécession est celle du Katanga ou du Biafra, le conflit frontalier celui de l'Ogaden, la guerre civile celle du Nigeria ou de l'Angola.",
+                  "answers": [
+                    {
+                      "content": "coup d'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "sécession",
+                      "correct": false
+                    },
+                    {
+                      "content": "conflit frontalier",
+                      "correct": false
+                    },
+                    {
+                      "content": "guerre civile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1967, une région de l'est du Nigeria proclame son indépendance sous le nom de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Situer : l'est du Nigeria, en 1967. 2. Nommer : la région prend le nom de Biafra. Écrire Katanga serait confondre avec la sécession du Congo en 1960.",
+                  "answers": [
+                    {
+                      "content": "Biafra",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un conflit frontalier oppose des groupes armés d'un même pays.",
+                  "question_type": "true_false",
+                  "explanation": "1. Identifier qui agit contre qui. 2. Justifier : un conflit frontalier oppose deux États à propos d'une frontière. Ce sont les groupes armés d'un même pays qui s'opposent dans une guerre civile : c'est la confusion de l'affirmation.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Les conséquences des crises. Document : frise chronologique de 1960 à 2000 de la leçon. Elle marque la crise congolaise (1960-1965) et la guerre du Biafra (1967-1970), et place la création de l'OUA en 1963 et le début de la guerre civile en Angola en 1975. Réponds aux questions à l'aide de la frise et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "frise-crises-1960-2000",
+              "hint": "Distingue les conséquences humaines, économiques et politiques, puis les réponses.",
+              "questions": [
+                {
+                  "content": "Quelle organisation envoie la mission ONUC au Congo entre 1960 et 1964 ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : Congo, 1960 à 1964. 2. Identifier la réponse : l'ONU envoie des Casques bleus (ONUC). L'OUA n'est créée qu'en 1963 : la choisir est le piège de la fiche. L'Union africaine (2002) et la CEDEAO (1975) n'existaient pas encore ou ne sont pas en cause en 1960.",
+                  "answers": [
+                    {
+                      "content": "L'ONU",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'OUA",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Union africaine",
+                      "correct": false
+                    },
+                    {
+                      "content": "La CEDEAO",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences humaines d'une guerre civile ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Situer la crise. 2. Relever les conséquences humaines : morts, réfugiés, déplacés. Les Casques bleus sont une réponse. Le retard du développement est une conséquence économique. La fin du parti unique n'est pas une conséquence citée.",
+                  "answers": [
+                    {
+                      "content": "Des morts et des blessés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des réfugiés et des déplacés",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'envoi de Casques bleus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un retard du développement",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fin du parti unique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets ces événements de la frise dans l'ordre chronologique.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer chaque événement sur la frise. 2. Ordonner : OUA en 1963, Biafra proclamé en 1967, fin de la guerre en 1970, Angola en 1975. Placer l'Angola avant le Biafra serait oublier que 1975 vient après 1970.",
+                  "answers": [
+                    {
+                      "content": "Création de l'OUA (1963)"
+                    },
+                    {
+                      "content": "Proclamation du Biafra (1967)"
+                    },
+                    {
+                      "content": "Fin de la guerre du Biafra (1970)"
+                    },
+                    {
+                      "content": "Début de la guerre civile en Angola (1975)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Les réfugiés sont des personnes qui quittent leur foyer mais restent dans leur pays.",
+                  "question_type": "true_false",
+                  "explanation": "1. Relever les conséquences humaines. 2. Distinguer : le réfugié a franchi une frontière, le déplacé reste dans son pays. L'affirmation décrit le déplacé : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle ville est créée l'OUA en 1963 ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : l'OUA est créée en 1963. 2. Identifier : elle est créée à Addis-Abeba, capitale de l'Éthiopie. Léopoldville est l'ancien nom de la capitale du Congo, Lomé est la capitale du Togo et Mogadiscio celle de la Somalie.",
+                  "answers": [
+                    {
+                      "content": "Addis-Abeba",
+                      "correct": true
+                    },
+                    {
+                      "content": "Léopoldville",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lomé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mogadiscio",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "la crise du Congo ex-belge, les formes de crise sur un panneau d'exposition, le Biafra lu par un élève de Bouaké, le vocabulaire des conséquences (réfugié, déplacé, ONU, OUA), dans des situations d'élèves ivoiriens.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un exposé au collège d'Abidjan. Situation : Aïcha, élève de 3ème à Abidjan, prépare un exposé sur la crise du Congo ex-belge. Son professeur lui donne ce texte écrit pour Lnclass : « Le Congo ex-belge devient indépendant le 30 juin 1960. Quelques jours plus tard, le Katanga, province riche en cuivre, proclame sa sécession. L'ONU envoie des Casques bleus (ONUC). La sécession prend fin en 1963. » Réponds aux questions à l'aide du texte et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Classe les faits par date, puis cherche la cause, la forme et la réponse.",
+              "questions": [
+                {
+                  "content": "Aïcha lit « Congo ex-belge » dans le titre de son exposé. Que signifie « ex-belge » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : le Congo de 1960 est un ancien territoire colonisé par la Belgique. 2. Conclure : « ex-belge » veut dire ancienne colonie de la Belgique. La France et le Portugal ont colonisé d'autres territoires. Le Congo n'est pas un territoire belge actuel.",
+                  "answers": [
+                    {
+                      "content": "Ancienne colonie de la Belgique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ancienne colonie de la France",
+                      "correct": false
+                    },
+                    {
+                      "content": "Actuel territoire de la Belgique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ancienne colonie du Portugal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha classe ses fiches de la plus ancienne à la plus récente.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer dans le temps : indépendance le 30 juin 1960, sécession quelques jours plus tard, fin en 1963, départ de l'ONUC en 1964. 2. Ordonner. La sécession suit l'indépendance et ne la précède pas ; la fin de la sécession précède le départ de l'ONUC.",
+                  "answers": [
+                    {
+                      "content": "Indépendance du Congo (30 juin 1960)"
+                    },
+                    {
+                      "content": "Sécession du Katanga (juillet 1960)"
+                    },
+                    {
+                      "content": "Fin de la sécession (1963)"
+                    },
+                    {
+                      "content": "Départ de l'ONUC (1964)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi Aïcha cite-t-elle le Katanga parmi les causes de la crise ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Chercher les causes économiques : le Katanga, riche en cuivre, veut garder ses richesses. 2. Conclure : le contrôle des ressources est une cause. La capitale du Congo en 1960 est Léopoldville. Les Casques bleus sont envoyés par l'ONU, non par le Katanga.",
+                  "answers": [
+                    {
+                      "content": "Cette province est riche en cuivre, une ressource convoitée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est la capitale du Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle envoie des Casques bleus",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est la colonie de la France",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha peut écrire que l'OUA envoie des Casques bleus au Congo en 1960.",
+                  "question_type": "true_false",
+                  "explanation": "1. Situer : en 1960, l'OUA n'existe pas encore, elle est créée en 1963. 2. Identifier : ce sont les Casques bleus de l'ONU qui interviennent. L'affirmation confond ONU et OUA.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha prépare un lexique. Relie chaque nom à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "1. Identifier les réponses : l'ONU envoie des Casques bleus, l'ONUC est sa mission au Congo, l'OUA est créée en 1963. 2. Relier. Associer l'OUA à l'envoi de Casques bleus en 1960 serait le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "ONU",
+                      "match": "Organisation qui envoie des Casques bleus au Congo"
+                    },
+                    {
+                      "content": "OUA",
+                      "match": "Organisation africaine créée à Addis-Abeba en 1963"
+                    },
+                    {
+                      "content": "ONUC",
+                      "match": "Mission de l'ONU au Congo de 1960 à 1964"
+                    }
+                  ]
+                },
+                {
+                  "content": "En 1960, la capitale du Congo s'appelait ___ ; elle porte aujourd'hui le nom de Kinshasa.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Situer : le Congo de 1960. 2. Nommer : le nom de la capitale du Congo en 1960 est Léopoldville, aujourd'hui Kinshasa. Écrire Lomé confondrait avec la capitale du Togo.",
+                  "answers": [
+                    {
+                      "content": "Léopoldville",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un panneau d'exposition à Bouaké. Situation : le club d'histoire d'un collège de Bouaké prépare un panneau sur les crises de l'Afrique indépendante, avec cinq fiches : Togo (1963), Biafra (1967-1970), Angola (1975), Ogaden (1977) et Katanga (1960). Réponds aux questions à l'aide de la situation et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque fiche, demande-toi qui agit contre qui.",
+              "questions": [
+                {
+                  "content": "Quelle fiche doit porter l'étiquette « coup d'État » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer chaque fiche. 2. Identifier qui agit : au Togo, des militaires contre le président. 3. Nommer : coup d'État. Le Biafra et le Katanga sont des sécessions, l'Ogaden un conflit frontalier.",
+                  "answers": [
+                    {
+                      "content": "Togo, janvier 1963 : des militaires renversent le président",
+                      "correct": true
+                    },
+                    {
+                      "content": "Biafra, 1967 : une région proclame son indépendance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ogaden, 1977 : deux États s'affrontent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Katanga, 1960 : une province riche en cuivre se sépare",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le club classe quatre fiches de la plus ancienne à la plus récente.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer : Biafra proclamé en 1967, fin en 1970, Angola en 1975, Ogaden en 1977. 2. Ordonner : la fin du Biafra vient après sa proclamation, et l'Angola avant l'Ogaden.",
+                  "answers": [
+                    {
+                      "content": "Proclamation du Biafra (1967)"
+                    },
+                    {
+                      "content": "Fin de la guerre du Biafra (1970)"
+                    },
+                    {
+                      "content": "Début de la guerre civile en Angola (1975)"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden (1977)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fiches illustrent une sécession ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Identifier : une région qui veut se séparer. 2. Nommer : le Katanga et le Biafra sont des sécessions. Le Togo est un coup d'État, l'Ogaden un conflit frontalier. L'Angola est cité comme début d'une guerre civile, pas comme sécession.",
+                  "answers": [
+                    {
+                      "content": "Katanga, 1960",
+                      "correct": true
+                    },
+                    {
+                      "content": "Biafra, 1967",
+                      "correct": true
+                    },
+                    {
+                      "content": "Togo, 1963",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ogaden, 1977",
+                      "correct": false
+                    },
+                    {
+                      "content": "Angola, 1975",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'étiquette « conflit frontalier » convient à la guerre de l'Ogaden en 1977.",
+                  "question_type": "true_false",
+                  "explanation": "1. Situer : Ogaden, 1977. 2. Identifier : l'Éthiopie et la Somalie, deux États. 3. Nommer : conflit frontalier. L'affirmation est vraie ; répondre Faux serait confondre avec une guerre civile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le panneau, la guerre civile en Angola commence en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Situer dans le temps : l'Angola, début de la guerre civile. 2. Dater : 1975. 1977 est la date de la guerre de l'Ogaden et 1970 celle de la fin du Biafra.",
+                  "answers": [
+                    {
+                      "content": "1975",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un visiteur lit « Biafra, 1967-1970 » et affirme que c'est un coup d'État. Que lui répond le club ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : l'est du Nigeria, de 1967 à 1970. 2. Identifier : une région contre l'État. 3. Nommer : une sécession. Un coup d'État vise le pouvoir central. Il n'y a pas d'autre État, donc pas de conflit frontalier. L'ONU n'est pas en cause. Toute guerre n'est pas un coup d'État.",
+                  "answers": [
+                    {
+                      "content": "C'est une sécession : une région de l'est du Nigeria veut se séparer",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un conflit frontalier avec un autre État",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une rébellion contre l'ONU",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison, car toute guerre est un coup d'État",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un récit sur le Biafra lu à Bouaké. Situation : Kouadio, élève de 3ème à Bouaké, lit ce récit écrit pour Lnclass : « Au Nigeria, en mai 1967, une région de l'est proclame son indépendance sous le nom de Biafra. Le gouvernement fédéral refuse cette séparation. La guerre dure jusqu'en janvier 1970. » Réponds aux questions à l'aide du récit et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Situe le Biafra, nomme la forme de crise, puis classe causes et suites.",
+              "questions": [
+                {
+                  "content": "Dans quelle région d'Afrique se trouve le Nigeria ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : l'énoncé de la leçon précise que le Nigeria est en Afrique de l'Ouest. 2. Conclure. L'Afrique centrale est celle du Congo ex-belge, l'Afrique de l'Est n'est pas citée pour le Nigeria.",
+                  "answers": [
+                    {
+                      "content": "En Afrique de l'Ouest",
+                      "correct": true
+                    },
+                    {
+                      "content": "En Afrique centrale",
+                      "correct": false
+                    },
+                    {
+                      "content": "En Afrique de l'Est",
+                      "correct": false
+                    },
+                    {
+                      "content": "En Afrique du Nord",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La guerre du Biafra se termine en janvier ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Situer dans le temps : le récit dit que la guerre dure jusqu'en janvier 1970. 2. Dater. 1967 est la date de la proclamation du Biafra, non de la fin.",
+                  "answers": [
+                    {
+                      "content": "1970",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Kouadio classe des éléments. Lesquels sont des causes de la crise du Biafra ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Classer : une cause vient avant la crise. 2. Retenir les rivalités et le contrôle des ressources. Les réfugiés et la ruine viennent après la crise : ce sont des conséquences. Les Casques bleus sont une réponse.",
+                  "answers": [
+                    {
+                      "content": "Le contrôle des ressources, dont le pétrole de la région",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des rivalités entre régions et entre groupes du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des réfugiés qui fuient la guerre",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ruine de l'économie après les combats",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'envoi de Casques bleus",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gouvernement fédéral du Nigeria accepte la séparation du Biafra en 1967.",
+                  "question_type": "true_false",
+                  "explanation": "1. Lire le récit : le gouvernement fédéral refuse cette séparation. 2. Conclure : l'affirmation est fausse. C'est ce refus qui conduit à la guerre jusqu'en 1970.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région proclame son indépendance et une guerre suit. Quelle forme de crise Kouadio nomme-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Identifier : une région contre l'État. 2. Nommer : sécession, suivie d'une guerre civile durable. Un coup d'État est rapide et vise le pouvoir central. Un conflit frontalier oppose deux États. Une calamité naturelle n'est pas une crise sociopolitique à elle seule.",
+                  "answers": [
+                    {
+                      "content": "Une sécession suivie d'une guerre civile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un coup d'État rapide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un conflit frontalier entre deux États",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une simple calamité naturelle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Réfugiés, déplacés et organisations. Situation : en cours d'histoire, une classe de 3ème d'Abidjan fait un exercice de vocabulaire sur les conséquences des crises sociopolitiques. Réponds aux questions à l'aide de la situation et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Réfugié : il a franchi une frontière. Déplacé : il reste dans son pays.",
+              "questions": [
+                {
+                  "content": "Une enseignante fuit la guerre et s'installe dans un pays voisin. Comment la nomme-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Relever la conséquence humaine. 2. Distinguer : elle a franchi une frontière, c'est donc une réfugiée. Une déplacée resterait dans son pays. Une rebelle mène une révolte armée. Les Casques bleus sont envoyés par l'ONU.",
+                  "answers": [
+                    {
+                      "content": "Une réfugiée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une déplacée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une rebelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une Casque bleu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque description au mot qui convient.",
+                  "question_type": "matching",
+                  "explanation": "1. Relever les conséquences humaines et les réponses. 2. Relier : déplacé reste dans son pays, réfugié franchit une frontière, Casque bleu appartient à l'ONU, rébellion est une révolte armée. Inverser déplacé et réfugié est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Quitter son foyer en restant dans son pays",
+                      "match": "Déplacé"
+                    },
+                    {
+                      "content": "Fuir dans un autre pays",
+                      "match": "Réfugié"
+                    },
+                    {
+                      "content": "Soldat envoyé par l'ONU",
+                      "match": "Casque bleu"
+                    },
+                    {
+                      "content": "Révolte armée contre le pouvoir",
+                      "match": "Rébellion"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ONU est créée en 1963 à Addis-Abeba.",
+                  "question_type": "true_false",
+                  "explanation": "1. Situer : l'ONU est créée en 1945, l'OUA en 1963 à Addis-Abeba. 2. Conclure : l'affirmation confond les deux organisations.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux conséquences économiques ou politiques d'une crise ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Relever les conséquences économiques et politiques : destructions, ruine, retard du développement, pouvoirs militaires, États affaiblis. 2. Retenir les destructions et les États affaiblis. Un développement plus rapide serait l'inverse du retard du développement. La fin de toute violence n'est pas une suite des crises. L'ONU date de 1945, avant les crises.",
+                  "answers": [
+                    {
+                      "content": "Des destructions et la ruine de l'économie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des États affaiblis",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fin de toute violence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un développement plus rapide du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "La création de l'ONU en 1945",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La mission ONUC reste au Congo de 1960 à ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Situer : Congo, ONUC. 2. Dater : de 1960 à 1964. 1963 est la date de fin de la sécession du Katanga et de la création de l'OUA.",
+                  "answers": [
+                    {
+                      "content": "1964",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et rédiger",
+          "notions": "classer causes, conséquences et réponses ; choisir le bon argument pour justifier une forme de crise ; lire un schéma qui enchaîne causes, crise et conséquences ; construire un paragraphe en ordre logique.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Distinguer cause, conséquence et réponse. Situation : un élève a rangé des éléments de la crise du Congo ex-belge (1960-1965) dans trois colonnes : causes, conséquences, réponses. Tu corriges son classement en appliquant la méthode de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une cause vient avant la crise et la provoque ; une conséquence ou une réponse vient après.",
+              "questions": [
+                {
+                  "content": "Où faut-il ranger « l'envoi de Casques bleus de l'ONU (ONUC) » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer l'envoi : il a lieu de 1960 à 1964, pendant et après la crise. 2. Appliquer le critère : une cause vient avant la crise, une réponse vient après. 3. Conclure : c'est une réponse, donc une conséquence. Le ranger parmi les causes est l'erreur du piège de la fiche. Le cuivre n'a aucun lien avec cet envoi. Dire que l'ONU n'intervient pas contredit la leçon.",
+                  "answers": [
+                    {
+                      "content": "Parmi les conséquences, comme réponse à la crise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parmi les causes, car il précède la crise",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parmi les causes économiques, car il concerne le cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle part, car l'ONU n'intervient pas au Congo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Où faut-il ranger « le cuivre du Katanga » ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Chercher les causes économiques : le Katanga, riche en cuivre, veut garder ses richesses. 2. Conclure : c'est le contrôle des ressources. Le cuivre n'est ni une conséquence humaine ni une réponse de l'ONU. La guerre froide est une cause extérieure distincte, qu'il ne faut pas mélanger avec lui.",
+                  "answers": [
+                    {
+                      "content": "Parmi les causes économiques, comme contrôle des ressources",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parmi les conséquences humaines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parmi les réponses de l'ONU",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parmi les causes extérieures, comme la guerre froide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont trois causes de la crise du Congo ex-belge ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Chercher les causes politiques : rivalités. 2. Chercher les causes extérieures : frontières héritées et guerre froide. 3. Classer. Les personnes déplacées sont une conséquence humaine. Le départ de l'ONUC est une réponse de l'ONU qui s'achève : les prendre pour des causes confond cause et conséquence.",
+                  "answers": [
+                    {
+                      "content": "Les rivalités entre dirigeants et entre régions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un État immense aux frontières héritées de la colonisation",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guerre froide qui attire les puissances",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les personnes déplacées par les combats",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le départ de l'ONUC en 1964",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour dégager les conséquences d'une crise.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer d'abord la crise. 2. Relever les conséquences humaines. 3. Relever les conséquences économiques et politiques. 4. Identifier les réponses. Commencer par les réponses empêche de savoir à quoi elles répondent.",
+                  "answers": [
+                    {
+                      "content": "Situer la crise dans le temps et dans l'espace"
+                    },
+                    {
+                      "content": "Relever les conséquences humaines"
+                    },
+                    {
+                      "content": "Relever les conséquences économiques et politiques"
+                    },
+                    {
+                      "content": "Identifier les réponses de l'ONU et des organisations africaines"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour expliquer une crise, il suffit de trouver la cause la plus importante.",
+                  "question_type": "true_false",
+                  "explanation": "1. Rappeler la règle : les crises ont plusieurs causes, qui se combinent. 2. Conclure : l'affirmation est fausse. Chercher une cause unique est le piège signalé dans la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Choisir le bon argument. Situation : pour un débat de classe sur les crises de l'Afrique indépendante, des élèves proposent des arguments sur le coup d'État du Togo (1963), la sécession du Biafra (1967) et la crise du Congo. Tu choisis l'argument qui convient à chaque fois.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un bon argument s'appuie sur un critère : prise du pouvoir, séparation d'une région ou frontière disputée.",
+              "questions": [
+                {
+                  "content": "Hakim doit justifier que le coup d'État du Togo en 1963 est une crise sociopolitique. Quel argument convient ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer les deux dimensions : le pouvoir du président et le pays touché par la violence. 2. Constater la rupture : renversement par la force. 3. Conclure. Une récolte perdue est un fait naturel ou économique. Une région qui veut partir décrit une sécession. Deux États qui se disputent une frontière décrivent un conflit frontalier.",
+                  "answers": [
+                    {
+                      "content": "Le pouvoir du président est renversé par la force et le pays est touché par la violence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Togo a perdu une récolte en 1963",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une région du Togo veut former un nouvel État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux États se disputent une frontière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme que la guerre du Biafra est un conflit frontalier. Quel argument le contredit ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Identifier qui agit : une région de l'est du Nigeria contre l'État fédéral. 2. Appliquer le critère : un conflit frontalier oppose deux États. 3. Conclure : c'est une sécession suivie d'une guerre civile. Une prise du pouvoir en une journée serait un coup d'État. Dire que le Biafra n'existe pas ignore sa proclamation en 1967. La date de 1967 est postérieure à l'indépendance de 1960.",
+                  "answers": [
+                    {
+                      "content": "Il s'agit d'une région d'un même pays qui veut se séparer, pas de deux États",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il s'agit d'une prise du pouvoir par des militaires en une journée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Biafra est un pays qui n'existe pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "La guerre du Biafra a eu lieu avant l'indépendance du Nigeria",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel argument montre que la crise du Congo n'a pas une cause unique ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Chercher les causes politiques, économiques et extérieures. 2. Les relier : elles se combinent. La taille du pays ne suffit pas à expliquer une crise. L'intervention de l'ONU est une réponse. Dire que le Katanga est une province est un fait, pas une explication.",
+                  "answers": [
+                    {
+                      "content": "Les rivalités, le cuivre du Katanga, les frontières héritées et la guerre froide se combinent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Congo est un pays très grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ONU est intervenue de 1960 à 1964",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Katanga est une province",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'argument « il y a eu des morts, donc c'est forcément un coup d'État » est valable.",
+                  "question_type": "true_false",
+                  "explanation": "1. Rappeler la méthode : justifier avec un critère précis. 2. Le critère du coup d'État est la prise du pouvoir par la force. Des morts existent aussi dans une guerre civile ou une sécession : l'argument ne prouve donc rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux critères qui justifient la forme d'une crise ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Justifier avec un critère. 2. Retenir la prise du pouvoir central et la séparation d'une région. La richesse en cuivre est une cause. Le nombre de Casques bleus est une réponse. Aucun nom de capitale ne définit une forme de crise.",
+                  "answers": [
+                    {
+                      "content": "La prise du pouvoir central pour un coup d'État",
+                      "correct": true
+                    },
+                    {
+                      "content": "La séparation d'une région pour une sécession",
+                      "correct": true
+                    },
+                    {
+                      "content": "La richesse du pays en cuivre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de Casques bleus envoyés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La lettre de la capitale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Enchaîner des causes à leurs conséquences. Document : schéma de la leçon. De gauche à droite, cinq causes (frontières héritées, rivalités entre groupes, parti unique, contrôle des ressources, ingérences de la guerre froide) mènent à une crise sociopolitique, qui a des conséquences humaines, économiques et politiques. Réponds aux questions à l'aide du schéma et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "schema-causes-consequences",
+              "hint": "Lis le schéma de gauche à droite : causes, crise, conséquences.",
+              "questions": [
+                {
+                  "content": "Dans le schéma, à quelle catégorie appartient le contrôle des ressources ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire le schéma de gauche à droite. 2. Classer : le contrôle des ressources (cuivre, pétrole, diamants) vient avant la crise, c'est une cause. Le ranger parmi les conséquences est la confusion du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Aux causes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aux conséquences humaines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aux réponses de l'ONU",
+                      "correct": false
+                    },
+                    {
+                      "content": "À la crise elle-même",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles boîtes du schéma sont des conséquences de la crise ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Lire la partie droite du schéma. 2. Classer : morts, réfugiés, déplacés (humaines), destructions et ruine (économiques), États affaiblis et pouvoirs militaires (politiques). Le parti unique et les frontières héritées viennent avant la crise : ce sont des causes.",
+                  "answers": [
+                    {
+                      "content": "Morts, réfugiés et déplacés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Destructions et ruine",
+                      "correct": true
+                    },
+                    {
+                      "content": "États affaiblis et pouvoirs militaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parti unique et pouvoir personnel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Frontières héritées de la colonisation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le schéma, la guerre froide est une conséquence de la crise.",
+                  "question_type": "true_false",
+                  "explanation": "1. Lire le schéma : la guerre froide est une des causes extérieures, placée à gauche. 2. Conclure : elle vient avant la crise et l'attire des puissances. L'affirmation inverse l'ordre de la chaîne.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre la chaîne que suit le schéma.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer les causes au départ. 2. Placer la crise. 3. Relever les conséquences humaines. 4. Terminer par la réponse. Commencer par la réponse, c'est inverser la chaîne.",
+                  "answers": [
+                    {
+                      "content": "Frontières héritées et rivalités entre groupes"
+                    },
+                    {
+                      "content": "Crise sociopolitique"
+                    },
+                    {
+                      "content": "Morts, réfugiés et déplacés"
+                    },
+                    {
+                      "content": "Réponse de l'ONU ou de l'OUA"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle flèche du schéma relie la crise aux réfugiés et aux déplacés ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire les flèches : elles vont des causes vers la crise, puis de la crise vers les conséquences. 2. Conclure : les réfugiés et les déplacés sont des conséquences humaines. Les autres flèches vont dans le mauvais sens ou relient d'autres éléments.",
+                  "answers": [
+                    {
+                      "content": "La flèche de la crise vers les conséquences humaines",
+                      "correct": true
+                    },
+                    {
+                      "content": "La flèche des causes vers la crise",
+                      "correct": false
+                    },
+                    {
+                      "content": "La flèche de la crise vers les causes extérieures",
+                      "correct": false
+                    },
+                    {
+                      "content": "La flèche des conséquences vers les causes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Construire un paragraphe sur la crise du Congo. Situation : tu prépares la réponse à la question « Explique les causes et les réponses à la crise du Congo ex-belge (1960-1965) ». Tu choisis les bonnes phrases et leur ordre, comme dans un devoir.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un bon paragraphe situe, explique les causes, puis donne les réponses.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les phrases d'un paragraphe sur la crise du Congo ex-belge.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer. 2. Causes politiques. 3. Causes économiques. 4. Réponse. Placer la réponse de l'ONU avant les causes serait expliquer ce à quoi l'on répond avant de dire de quoi il s'agit.",
+                  "answers": [
+                    {
+                      "content": "La crise du Congo ex-belge commence dès l'indépendance, en 1960."
+                    },
+                    {
+                      "content": "Elle a des causes politiques : des rivalités entre dirigeants et entre régions."
+                    },
+                    {
+                      "content": "Elle a des causes économiques : le Katanga, riche en cuivre, veut garder ses richesses."
+                    },
+                    {
+                      "content": "L'ONU envoie des Casques bleus (ONUC) de 1960 à 1964."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase d'introduction définit correctement une crise sociopolitique ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer les deux dimensions : pouvoir et société. 2. Choisir la phrase qui les réunit. Une catastrophe naturelle n'est pas une crise sociopolitique à elle seule. Un accord de paix et une fête nationale ne sont pas des tensions graves.",
+                  "answers": [
+                    {
+                      "content": "Une crise sociopolitique est une période de tension grave où le pouvoir est contesté et où la société est touchée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une crise sociopolitique est une catastrophe naturelle qui détruit les récoltes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une crise sociopolitique est un accord de paix entre deux États",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une crise sociopolitique est une fête nationale organisée par l'État",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure, on dit que les causes d'une crise sont ___.",
+                  "question_type": "select",
+                  "explanation": "1. Classer et relier les causes. 2. Conclure : causes internes (rivalités, ressources) et externes (colonisation, guerre froide) provoquent ensemble la crise. Une seule cause est le piège de la fiche. Les causes naturelles ne sont pas citées.",
+                  "answers": [
+                    {
+                      "content": "plusieurs, internes et externes, et elles se combinent",
+                      "correct": true
+                    },
+                    {
+                      "content": "une seule, toujours la guerre froide",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement naturelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "inconnues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont deux phrases exactes pour un paragraphe sur le Biafra ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Situer : mai 1967, est du Nigeria. 2. Dater la fin : janvier 1970. Dire 1960 au Congo confond avec le Katanga. Dire coup d'État au Togo confond avec le coup d'État de janvier 1963.",
+                  "answers": [
+                    {
+                      "content": "Le Biafra est proclamé en mai 1967 dans l'est du Nigeria",
+                      "correct": true
+                    },
+                    {
+                      "content": "La guerre du Biafra dure jusqu'en janvier 1970",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Biafra est proclamé en 1960 au Congo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Biafra est un coup d'État réussi au Togo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La sécession du Katanga prend fin en 1963, avant le départ de l'ONUC en 1964.",
+                  "question_type": "true_false",
+                  "explanation": "1. Situer : la sécession prend fin en 1963, l'ONUC quitte le pays en 1964. 2. Comparer. L'affirmation est vraie. Répondre Faux serait inverser les deux dates.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "lecture d'une frise et d'une carte, définitions, causes (frontières, rivalités, ressources, guerre froide), formes de crise, conséquences et réponses (réfugiés, déplacés, ONU, OUA), calculs d'écarts entre dates.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Lire une frise chronologique. Sujet de type BEPC. Document : frise chronologique de 1960 à 2000 (année des indépendances (1960) ; coup d'État au Togo et création de l'OUA en 1963 ; coup d'État au Ghana en 1966 ; Biafra de 1967 à 1970 ; Angola, début de la guerre civile en 1975 ; guerre de l'Ogaden en 1977 ; crise congolaise de 1960 à 1965). Réponds aux questions à l'aide de la frise et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "frise-crises-1960-2000",
+              "hint": "Repère chaque date sur la frise avant de répondre.",
+              "questions": [
+                {
+                  "content": "Range ces événements de la frise du plus ancien au plus récent.",
+                  "question_type": "ordering",
+                  "explanation": "1. Situer chaque événement sur la frise. 2. Ordonner : 1960, 1966, 1970, 1977. Placer la fin du Biafra avant le Ghana reviendrait à oublier que 1970 vient après 1966.",
+                  "answers": [
+                    {
+                      "content": "Année des indépendances africaines (1960)"
+                    },
+                    {
+                      "content": "Coup d'État au Ghana (1966)"
+                    },
+                    {
+                      "content": "Fin de la guerre du Biafra (1970)"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden (1977)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle période de la frise correspond à la crise congolaise ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire les périodes de la frise. 2. Conclure : la crise congolaise va de 1960 à 1965. La période 1967-1970 est celle du Biafra. 1963-1966 mélange les coups d'État du Togo et du Ghana. 1975-1977 va du début de la guerre civile en Angola à l'Ogaden.",
+                  "answers": [
+                    {
+                      "content": "De 1960 à 1965",
+                      "correct": true
+                    },
+                    {
+                      "content": "De 1967 à 1970",
+                      "correct": false
+                    },
+                    {
+                      "content": "De 1963 à 1966",
+                      "correct": false
+                    },
+                    {
+                      "content": "De 1975 à 1977",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coup d'État au Ghana et la création de l'OUA ont lieu la même année, en 1963.",
+                  "question_type": "true_false",
+                  "explanation": "1. Lire la frise : le coup d'État au Ghana est en 1966. 2. Comparer : la création de l'OUA, comme le coup d'État au Togo, est en 1963. L'affirmation confond le Ghana et le Togo.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque événement à son année.",
+                  "question_type": "matching",
+                  "explanation": "1. Repérer chaque événement sur la frise. 2. Relier à l'année : 1963, 1966, 1975, 1977. Confondre 1975 et 1977 revient à inverser l'Angola et l'Ogaden.",
+                  "answers": [
+                    {
+                      "content": "Création de l'OUA",
+                      "match": "1963"
+                    },
+                    {
+                      "content": "Coup d'État au Ghana",
+                      "match": "1966"
+                    },
+                    {
+                      "content": "Début de la guerre civile en Angola",
+                      "match": "1975"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden",
+                      "match": "1977"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le Togo est indépendant en 1960 et le coup d'État y a lieu en 1963. Combien d'années séparent ces deux dates ?",
+                  "question_type": "numeric",
+                  "unit": "ans",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer les dates : 1960 et 1963. 2. Calculer : 1963 - 1960 = 3. 3. Conclure : trois ans. Trouver 6 reviendrait à additionner au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Lire une carte de l'Afrique. Sujet de type BEPC. Document : carte de l'Afrique de la leçon. Les pays sont colorés selon la forme de crise : coup d'État (Togo, Ghana), guerre civile ou sécession (Congo, Nigeria), conflit frontalier (Éthiopie, Somalie). Les capitales Lomé, Kinshasa, Addis-Abeba et Mogadiscio sont repérées. Réponds aux questions à l'aide de la carte et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "carte-crises-afrique",
+              "hint": "Lis la légende de la carte avant de répondre.",
+              "questions": [
+                {
+                  "content": "Quelle forme de crise la carte indique-t-elle pour le Congo et le Nigeria ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire la légende. 2. Conclure : le Congo et le Nigeria sont colorés comme guerre civile ou sécession. Le coup d'État est la couleur du Togo et du Ghana. Le conflit frontalier est celle de l'Éthiopie et de la Somalie.",
+                  "answers": [
+                    {
+                      "content": "Guerre civile ou sécession",
+                      "correct": true
+                    },
+                    {
+                      "content": "Coup d'État",
+                      "correct": false
+                    },
+                    {
+                      "content": "Conflit frontalier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune crise",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque capitale repérée sur la carte à son pays.",
+                  "question_type": "matching",
+                  "explanation": "1. Lire les capitales repérées sur la carte. 2. Relier chacune à son pays. Confondre Addis-Abeba et Mogadiscio revient à inverser l'Éthiopie et la Somalie, qui s'opposent à l'Ogaden.",
+                  "answers": [
+                    {
+                      "content": "Lomé",
+                      "match": "Togo"
+                    },
+                    {
+                      "content": "Kinshasa",
+                      "match": "Congo"
+                    },
+                    {
+                      "content": "Addis-Abeba",
+                      "match": "Éthiopie"
+                    },
+                    {
+                      "content": "Mogadiscio",
+                      "match": "Somalie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la carte, le Togo et le Ghana sont colorés comme des cas de coup d'État.",
+                  "question_type": "true_false",
+                  "explanation": "1. Lire la légende. 2. Conclure : coup d'État (Togo, Ghana). L'affirmation est vraie ; répondre Faux la confondrait avec la sécession.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le conflit frontalier de la carte oppose l'Éthiopie et la ___.",
+                  "question_type": "select",
+                  "explanation": "1. Lire la légende : conflit frontalier (Éthiopie, Somalie). 2. Conclure : le pays opposé à l'Éthiopie est la Somalie. Le Nigeria est coloré en guerre civile ou sécession, le Ghana et le Togo en coup d'État.",
+                  "answers": [
+                    {
+                      "content": "Somalie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Nigeria",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ghana",
+                      "correct": false
+                    },
+                    {
+                      "content": "Togo",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux pays colorés comme guerre civile ou sécession ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Lire la légende. 2. Retenir le Congo et le Nigeria. Le Togo et le Ghana sont des coups d'État, l'Éthiopie est un conflit frontalier.",
+                  "answers": [
+                    {
+                      "content": "Le Congo",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Nigeria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le Togo",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'Éthiopie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Ghana",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Analyser un extrait de manuel. Sujet de type BEPC. Document : extrait d'un manuel écrit pour Lnclass. « Les crises sociopolitiques de l'Afrique indépendante ont des causes variées. Les frontières ont été tracées par les Européens, selon les règles fixées à la conférence de Berlin (1884-1885). Certaines régions riches en ressources, comme le Katanga riche en cuivre, sont convoitées. Le Katanga fait sécession en 1960, et la sécession prend fin en 1963. Les crises provoquent des morts, des réfugiés et des déplacés. » Réponds aux questions à l'aide du document et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Distingue ce que dit le document des confusions possibles.",
+              "questions": [
+                {
+                  "content": "Quelles sont trois causes citées ou rappelées dans l'extrait ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "1. Lire le document. 2. Classer : les frontières héritées, le contrôle des ressources et les rivalités sont des causes. Les réfugiés et les déplacés sont des conséquences. La fin de la sécession est un fait qui vient après la crise.",
+                  "answers": [
+                    {
+                      "content": "Les frontières tracées par les Européens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le contrôle des ressources, comme le cuivre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les rivalités entre groupes et régions",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les réfugiés et les déplacés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fin de la sécession en 1963",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'extrait de manuel sur les crises, le Katanga est une province riche en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Lire le document : le Katanga est riche en cuivre. 2. Conclure. Écrire pétrole confondrait avec la ressource du Nigeria, citée à propos du Biafra.",
+                  "answers": [
+                    {
+                      "content": "cuivre",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Selon le document, qui a tracé les frontières des États africains ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Lire le document : les frontières ont été tracées par les Européens, selon les règles de la conférence de Berlin (1884-1885). 2. Conclure. L'ONU est créée en 1945 et l'OUA en 1963 : toutes deux postérieures au tracé.",
+                  "answers": [
+                    {
+                      "content": "Les Européens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les Africains eux-mêmes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ONU en 1945",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'OUA en 1963",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le document affirme qu'une seule cause explique toutes les crises.",
+                  "question_type": "true_false",
+                  "explanation": "1. Lire le document : les crises ont des causes variées. 2. Conclure : l'affirmation est fausse. Chercher une cause unique est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Selon le document, le Katanga fait sécession en 1960 et la sécession prend fin en 1963. Combien d'années sépare-t-on ces deux dates ?",
+                  "question_type": "numeric",
+                  "unit": "ans",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer les dates : 1960 et 1963. 2. Calculer : 1963 - 1960 = 3. 3. Conclure : trois ans. Trouver 2 reviendrait à oublier de compter une année de départ.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan : comparer et conclure. Sujet de type BEPC. Situation : tu fais le bilan de la leçon en comparant le Togo (1963), le Katanga (1960), le Biafra (1967), l'Ogaden (1977) et les organisations qui répondent aux crises. Réponds aux questions à l'aide de la situation et de la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour comparer, donne le critère de chaque forme de crise.",
+              "questions": [
+                {
+                  "content": "Quelle comparaison entre le coup d'État du Togo (1963) et la sécession du Biafra (1967) est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Situer : Togo 1963, Biafra 1967. 2. Appliquer le critère : prise du pouvoir central pour le coup d'État, séparation d'une région pour la sécession. La première fausse proposition inverse les deux. La deuxième confond avec le conflit frontalier. La troisième confond lieux et dates.",
+                  "answers": [
+                    {
+                      "content": "Au Togo, des militaires prennent le pouvoir central ; au Biafra, une région veut se séparer du Nigeria",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au Togo, une région veut se séparer ; au Biafra, des militaires prennent le pouvoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux événements sont des conflits frontaliers entre deux États",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux événements ont lieu au Nigeria en 1963",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Associe chaque événement à ce qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "1. Situer chaque événement. 2. Relier : le Katanga et l'ONUC, le Biafra et la guerre jusqu'en 1970, l'Ogaden et deux États, l'OUA et les conflits entre Africains. Associer l'OUA aux Casques bleus de 1960 serait le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Sécession du Katanga (1960)",
+                      "match": "L'ONU envoie des Casques bleus"
+                    },
+                    {
+                      "content": "Proclamation du Biafra (1967)",
+                      "match": "Une guerre jusqu'en janvier 1970"
+                    },
+                    {
+                      "content": "Guerre de l'Ogaden (1977)",
+                      "match": "Affrontement entre l'Éthiopie et la Somalie"
+                    },
+                    {
+                      "content": "Création de l'OUA (1963)",
+                      "match": "Réponse africaine aux conflits entre Africains"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont deux éléments d'une réponse complète sur les conséquences des crises ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Relever les conséquences humaines. 2. Relever les conséquences économiques et politiques. Les frontières héritées et la rivalité Est-Ouest sont des causes, qui viennent avant la crise.",
+                  "answers": [
+                    {
+                      "content": "Des morts, des réfugiés et des déplacés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des destructions, la ruine et des États affaiblis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les frontières héritées de la colonisation",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rivalité entre l'Est et l'Ouest",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ONU et l'OUA ont été créées la même année.",
+                  "question_type": "true_false",
+                  "explanation": "1. Situer : l'ONU est créée en 1945, l'OUA en 1963. 2. Conclure : l'affirmation est fausse. Les confondre est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'années séparent la création de l'OUA (1963) de la guerre de l'Ogaden (1977) ?",
+                  "question_type": "numeric",
+                  "unit": "ans",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer les dates : 1963 et 1977. 2. Calculer : 1977 - 1963 = 14. 3. Conclure : quatorze ans. Trouver 24 reviendrait à se tromper dans la soustraction des dizaines.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase résume le mieux les crises sociopolitiques de l'Afrique indépendante ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Rappeler les causes, les formes et les conséquences. 2. Choisir la phrase qui les réunit. Une seule cause est le piège de la fiche. Une catastrophe naturelle n'est pas une crise sociopolitique à elle seule. Dire qu'il n'y a aucune conséquence oublie les morts, les réfugiés, la ruine et les États affaiblis.",
+                  "answers": [
+                    {
+                      "content": "Elles ont plusieurs causes qui se combinent, prennent des formes variées et ont des conséquences humaines, économiques et politiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles s'expliquent par une seule cause, la guerre froide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont toutes des catastrophes naturelles",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles n'ont aucune conséquence durable",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

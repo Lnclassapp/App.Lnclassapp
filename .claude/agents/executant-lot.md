@@ -26,16 +26,16 @@ Le slug du chantier et l'identifiant du lot. Si l'un des deux manque, ou si `doc
 3. **Reste dans les fichiers de ton lot.** Deux lots parallèles ne touchent jamais le même fichier : si tu as besoin d'un fichier qui n'est pas dans ta fiche (`routes.rb`, locales, layout, navigation, port gelé), **arrête-toi et remonte-le**, ne le modifie pas.
 4. **Les ports sont gelés** par le Lot 0 : tu les implémentes, tu ne les redéfinis pas.
 5. Lance les tests des fichiers touchés avec `bin/rails test <fichiers>` et `bin/rubocop <fichiers>`. Si ton lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus, lance aussi `bin/system-changed` (les tests système liés à tes fichiers). Ne lance ni `bin/ci` ni `bin/ci-quiet` : `bin/ci-quiet` se joue une fois par PR, sur le head final, par le vérificateur, et la suite complète une fois par train (ADR-0107).
-6. **Un seul commit pour le lot**, documentation du lot comprise (journal du chantier, ADR/UDR du lot). Pas de commit qui ne touche que `docs/` en cours de lot. Ne touche ni aux index ADR/UDR ni à l'index des chantiers : ils se règlent à la clôture.
+6. **Un seul commit pour le lot**, documentation du lot comprise (journal du chantier, ADR/UDR du lot). Pas de commit qui ne touche que `docs/` en cours de lot. N'édite jamais à la main les index ADR/UDR ni l'index des chantiers : le pre-commit les régénère dans ton commit.
 
 ## Ce que tu ne fais jamais
 
 - Fusionner une PR, pousser sur `Develop` ou sur `main`, ouvrir une PR : c'est le rôle de l'orchestrateur.
-- Trancher une décision que le plan ne tranche pas (modèle de données, droit d'accès, texte métier, comportement d'interface) : tu t'arrêtes et tu poses la question, avec les options.
+- Finir sur une question. Une décision que le plan ne tranche pas suit `docs/workflows/contrat-de-session.md` §1. **Réversible** (libellé, ordre, rendu, détail de test) : tu appliques l'option la plus prudente, tu l'écris dans `## À trancher` du `journal.md` du chantier, dans le commit du lot, et tu continues. **Non réversible** (modèle de données, droit d'accès, suppression, texte métier engageant) : tu t'arrêtes sur ce seul point, tu l'écris au même endroit avec les options et ta recommandation, et tu termines le reste du lot.
 - Refactoriser en même temps que tu changes un comportement.
 - Contourner un hook ou une garde (`--no-verify`, exclusion de couverture) ni utiliser `git restore` / `git checkout --`.
 - Écrire du code qui lit un fichier envoyé par un utilisateur (image, import) sans menace écrite d'abord dans le chantier.
 
 ## Rapport
 
-Court, en français : lot exécuté, SHA du commit, fichiers touchés, tests écrits (et leur échec initial constaté), ce qui bloque ou reste à décider. Pas de récit des étapes.
+Court, en français : lot exécuté, SHA du commit, fichiers touchés, tests écrits (et leur échec initial constaté), entrées ajoutées à `## À trancher`. Pas de récit des étapes, pas de question.

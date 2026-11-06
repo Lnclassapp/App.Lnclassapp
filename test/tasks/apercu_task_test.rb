@@ -7,7 +7,7 @@ require "open3"
 class ApercuTaskTest < ActiveSupport::TestCase
   LESSONS = "docs/contenus/lecons-traitees".freeze
   FILE = "#{LESSONS}/3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json".freeze
-  OTHER = "#{LESSONS}/tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json".freeze
+  OTHER = "test/fixtures/files/lecons_v3/barycentre-et-lignes-de-niveaux.json".freeze # copie figée, lue seulement
 
   setup do
     Rails.application.load_tasks unless Rake::Task.task_defined?("contenus:apercu")

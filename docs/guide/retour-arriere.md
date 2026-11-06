@@ -64,8 +64,19 @@ Le 2026-10-20, Railway a suspendu les nouveaux déploiements. Dans ce cas :
 3. **Pas de retour arrière non plus**, puisqu'un *Rollback* est un déploiement. — *à vérifier par le porteur.* Si la production est cassée pendant la pause, il n'existe aujourd'hui **aucune voie de secours** : Lnclass n'a ni second hébergeur ni image prête ailleurs. En choisir une est une décision du porteur, qui demande un ADR.
 4. **À la reprise**, promouvoir une seule fois, puis vérifier le déploiement : le pré-déploiement réussi, `/up` à 200 et une page connectée qui répond.
 
-## 6. Avant chaque promotion vers `main`
+## 6. Quand une fusion ne déclenche aucun déploiement
+
+Le 2026-11-04, la fusion du train dans `main` (#474, `c015125d`) n'a lancé **aucun déploiement Railway**, ni en production ni sur Demo. Les deux déploiements de ce commit ont été lancés à la main, plus de dix minutes après la fusion (chantier [`ci-train-rapide`](../chantiers/ci-train-rapide/memo.md), lot C). Rien n'échoue dans ce cas : la branche porte le nouveau code, l'image en ligne reste l'ancienne, et aucune alerte ne le signale.
+
+Après chaque fusion dans `Staging` ou `main` :
+
+1. **Vérifier que le déploiement part** dans les minutes qui suivent : onglet *Deployments* du service, pour chaque environnement qui suit la branche (`main` → production et Demo, `Staging` → recette), un déploiement dont le commit est celui de la fusion.
+2. **S'il n'est pas parti**, le lancer à la main sur le bon commit (tableau de bord : *Deploy* sur la branche suivie, ou `railway redeploy` s'il s'agit de reconstruire la même source), puis vérifier le pré-déploiement et `/up` à 200 (§1).
+3. **Chercher la cause** — *action du porteur* : dans GitHub, *Settings › Webhooks*, le webhook vers Railway › *Recent Deliveries* : une livraison absente ou en erreur pour le *push* de la fusion dit si GitHub n'a pas prévenu Railway ou si Railway a refusé. Une session d'agent n'a pas accès à ces réglages.
+
+## 7. Avant chaque promotion vers `main`
 
 - [ ] Les migrations de la livraison sont additives, ou chaque suppression porte sur une colonne que l'image en ligne ne lit plus (`bin/rails test test/guards/migration_rules_test.rb`).
 - [ ] Le numéro du déploiement en ligne est noté : c'est la cible du *Rollback* en cas de problème.
 - [ ] Railway déploie normalement : pas de pause en cours.
+- [ ] Après la fusion : le déploiement de production **et** celui de Demo sont partis sur le commit de la fusion (§6).

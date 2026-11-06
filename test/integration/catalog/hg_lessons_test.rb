@@ -7,11 +7,11 @@ class Catalog::HgLessonsTest < ActiveSupport::TestCase
   DIRECTORY = Rails.root.join("docs/contenus/lecons-traitees/3eme/histoire-geographie")
   # Dans l'ordre de la progression : [fichier, intitulé de la leçon, nombre de figures].
   LESSONS = [
-    [ "histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire", "Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire", 3 ],
-    [ "geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire", "Géographie — Les atouts du développement économique de la Côte d'Ivoire", 2 ],
+    [ "histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire", "Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire", 4 ],
+    [ "geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire", "Géographie — Les atouts du développement économique de la Côte d'Ivoire", 3 ],
     [ "histoire-l-accession-de-la-cote-d-ivoire-a-l-independance", "Histoire — L'accession de la Côte d'Ivoire à l'indépendance", 2 ],
-    [ "geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire", "Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire", 3 ],
-    [ "histoire-causes-et-caracteres-des-crises-sociopolitiques-de-l-afrique-independante", "Histoire — Causes et caractères des crises sociopolitiques de l'Afrique indépendante", 2 ],
+    [ "geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire", "Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire", 4 ],
+    [ "histoire-causes-et-caracteres-des-crises-sociopolitiques-de-l-afrique-independante", "Histoire — Causes et caractères des crises sociopolitiques de l'Afrique indépendante", 3 ],
     [ "histoire-la-crise-rwandaise-de-la-guerre-au-genocide-des-tutsi-1990-1994", "Histoire — La crise rwandaise : de la guerre au génocide des tutsi (1990-1994)", 2 ],
     [ "geographie-les-problemes-du-developpement-economique-de-la-cote-d-ivoire", "Géographie — Les problèmes du développement économique de la Côte d'Ivoire", 2 ],
     [ "histoire-les-causes-les-caracteres-et-les-consequences-de-la-deuxieme-guerre-mondiale", "Histoire — Les causes, les caractères et les conséquences de la deuxième guerre mondiale", 2 ],

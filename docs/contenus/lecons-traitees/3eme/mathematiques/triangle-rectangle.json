@@ -394,125 +394,244 @@
           },
           "pitfall": "Ne pas se tromper de facteur. Dans $AB^2 = BH \\times BC$, le second facteur est l'hypoténuse entière $BC$, pas $HC$. Contre-exemple : avec $BH = 4$ et $HC = 9$, on a $BC = 13$ et $AB^2 = 4 \\times 13 = 52$. Si on écrivait $4 \\times 9 = 36$, on trouverait $AB = 6$, mais $AB$ est l'hypoténuse du triangle $AHB$, donc $AB > AH = 6$. Pour éviter l'erreur : le côté de l'angle droit est au carré, et il est égal à sa projection sur l'hypoténuse fois l'hypoténuse entière.",
           "figure": "hauteur-triangle-rectangle",
-          "exercise": {
-            "title": "Appliquer les relations métriques",
-            "exercise_type": "fixation",
-            "figure": "hauteur-triangle-rectangle",
-            "statement": "Dans cet exercice, tu calcules des longueurs dans un triangle rectangle avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A et H est le pied de la hauteur issue de A.",
-            "questions": [
-              {
-                "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $BH = 2$ cm et $BC = 18$ cm. Quelle est la longueur $AB$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$ et on cherche $AB$. Étape 2 — Choisir : la relation qui contient $AB$, $BH$ et $BC$ est $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 2 \\times 18$. Étape 4 — Calculer : $AB^2 = 36$, donc $AB = \\sqrt{36} = 6$ cm. La proposition 36 cm oublie de prendre la racine carrée à la fin de l'étape 4.",
-                "answers": [
-                  {
-                    "content": "6 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "36 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "20 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "9 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $HB = 3$ cm et $HC = 12$ cm. Quelle est la longueur $AH$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, $H$ est sur l'hypoténuse $[BC]$ et on cherche $AH$. Étape 2 — Choisir : $AH^2 = HB \\times HC$. Étape 3 — Remplacer : $AH^2 = 3 \\times 12$. Étape 4 — Calculer : $AH^2 = 36$, donc $AH = 6$ cm. Le nombre 7,5 serait la moyenne de 3 et 12 et 15 leur somme : aucune relation métrique ne les utilise ainsi.",
-                "answers": [
-                  {
-                    "content": "7,5 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "6 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "36 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "15 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$. On a toujours $AC^2 = CH \\times CB$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[CB]$ et $H$ est sur cette hypoténuse. Étape 2 — Choisir : $AC$ est un côté de l'angle droit, $CH$ est sa projection sur l'hypoténuse, donc la relation $AC^2 = CH \\times CB$ est exacte. C'est la même que $AB^2 = BH \\times BC$ pour l'autre côté de l'angle droit. L'affirmation est vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$. Quelles égalités sont vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$. Étape 2 — Choisir parmi les relations : $AB^2 = BH \\times BC$ et $AC^2 = CH \\times CB$ sont exactes (côté de l'angle droit au carré = projection fois hypoténuse entière). $AH^2 = HB \\times HC$ est la relation de la hauteur : $AH^2 = BH \\times BC$ est donc fausse, tout comme $AB^2 = BH \\times HC$ (le piège du facteur $HC$). Enfin $AH = BH \\times HC$ oublie le carré et la racine.",
-                "answers": [
-                  {
-                    "content": "$AB^2 = BH \\times BC$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$AH^2 = BH \\times BC$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$AC^2 = CH \\times CB$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$AB^2 = BH \\times HC$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$AH = BH \\times HC$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $BH = 4$ cm et $HC = 12$ cm. Quelle est la longueur $AB$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'hypoténuse est $[BC]$, avec $BC = BH + HC = 4 + 12 = 16$ cm, et on cherche $AB$. Étape 2 — Choisir : $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 4 \\times 16$. Étape 4 — Calculer : $AB^2 = 64$, donc $AB = 8$ cm. Le résultat $4\\sqrt{3}$ vient de $AB^2 = 4 \\times 12 = 48$ : c'est le piège, car le second facteur doit être $BC$ entier et non $HC$. 64 cm oublie la racine.",
-                "answers": [
-                  {
-                    "content": "$4\\sqrt{3}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "64 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "8 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "16 cm",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Appliquer les relations métriques",
+              "exercise_type": "fixation",
+              "figure": "hauteur-triangle-rectangle",
+              "statement": "Dans cet exercice, tu calcules des longueurs dans un triangle rectangle avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A et H est le pied de la hauteur issue de A.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $BH = 2$ cm et $BC = 18$ cm. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$ et on cherche $AB$. Étape 2 — Choisir : la relation qui contient $AB$, $BH$ et $BC$ est $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 2 \\times 18$. Étape 4 — Calculer : $AB^2 = 36$, donc $AB = \\sqrt{36} = 6$ cm. La proposition 36 cm oublie de prendre la racine carrée à la fin de l'étape 4.",
+                  "answers": [
+                    {
+                      "content": "6 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "36 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $HB = 3$ cm et $HC = 12$ cm. Quelle est la longueur $AH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, $H$ est sur l'hypoténuse $[BC]$ et on cherche $AH$. Étape 2 — Choisir : $AH^2 = HB \\times HC$. Étape 3 — Remplacer : $AH^2 = 3 \\times 12$. Étape 4 — Calculer : $AH^2 = 36$, donc $AH = 6$ cm. Le nombre 7,5 serait la moyenne de 3 et 12 et 15 leur somme : aucune relation métrique ne les utilise ainsi.",
+                  "answers": [
+                    {
+                      "content": "7,5 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "36 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$. On a toujours $AC^2 = CH \\times CB$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[CB]$ et $H$ est sur cette hypoténuse. Étape 2 — Choisir : $AC$ est un côté de l'angle droit, $CH$ est sa projection sur l'hypoténuse, donc la relation $AC^2 = CH \\times CB$ est exacte. C'est la même que $AB^2 = BH \\times BC$ pour l'autre côté de l'angle droit. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$. Étape 2 — Choisir parmi les relations : $AB^2 = BH \\times BC$ et $AC^2 = CH \\times CB$ sont exactes (côté de l'angle droit au carré = projection fois hypoténuse entière). $AH^2 = HB \\times HC$ est la relation de la hauteur : $AH^2 = BH \\times BC$ est donc fausse, tout comme $AB^2 = BH \\times HC$ (le piège du facteur $HC$). Enfin $AH = BH \\times HC$ oublie le carré et la racine.",
+                  "answers": [
+                    {
+                      "content": "$AB^2 = BH \\times BC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AH^2 = BH \\times BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AC^2 = CH \\times CB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB^2 = BH \\times HC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AH = BH \\times HC$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $BH = 4$ cm et $HC = 12$ cm. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'hypoténuse est $[BC]$, avec $BC = BH + HC = 4 + 12 = 16$ cm, et on cherche $AB$. Étape 2 — Choisir : $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 4 \\times 16$. Étape 4 — Calculer : $AB^2 = 64$, donc $AB = 8$ cm. Le résultat $4\\sqrt{3}$ vient de $AB^2 = 4 \\times 12 = 48$ : c'est le piège, car le second facteur doit être $BC$ entier et non $HC$. 64 cm oublie la racine.",
+                  "answers": [
+                    {
+                      "content": "$4\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "64 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "16 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer des longueurs avec la hauteur issue de l'angle droit",
+              "statement": "Dans cet exercice, tu utilises les relations métriques d'un triangle rectangle avec la méthode de la fiche. Dans chaque question, le triangle ABC est rectangle en A et H est le pied de la hauteur issue de A.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Avant de calculer, repère l'hypoténuse : dans chaque relation, le côté de l'angle droit au carré est égal à sa projection fois l'hypoténuse entière.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $BH = 5$ cm et $BC = 20$ cm. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC]$ et $H$ est sur $[BC]$ ; on connaît $BH = 5$ et $BC = 20$, on cherche $AB$. Étape 2 — Choisir : la relation qui contient $AB$, $BH$ et $BC$ est $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 5 \\times 20$. Étape 4 — Calculer : $AB^2 = 100$, donc $AB = \\sqrt{100} = 10$ cm. La réponse 100 cm oublie la racine carrée : $100$ est $AB^2$, pas $AB$. La réponse 25 cm additionne $BH$ et $BC$ au lieu de les multiplier. La réponse $5\\sqrt{3}$ cm prend $HC = 15$ comme second facteur au lieu de l'hypoténuse entière $BC$ : c'est l'erreur de la fiche.",
+                  "answers": [
+                    {
+                      "content": "100 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\sqrt{3}$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $HB = 4$ cm et $HC = 25$ cm. Calcule $AH$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, $H$ est sur l'hypoténuse $[BC]$ ; on connaît $HB = 4$ et $HC = 25$, on cherche $AH$. Étape 2 — Choisir : la relation qui contient $AH$, $HB$ et $HC$ est $AH^2 = HB \\times HC$. Étape 3 — Remplacer : $AH^2 = 4 \\times 25$. Étape 4 — Calculer : $AH^2 = 100$, donc $AH = \\sqrt{100} = 10$ cm. Trouver $100$ oublie la racine carrée ; trouver $29$ additionne $HB$ et $HC$ au lieu de les multiplier ; trouver $14{,}5$ prend la moyenne de $HB$ et $HC$ au lieu de passer par la relation.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$, avec $BH = 2$ cm et $HC = 8$ cm. Un élève écrit : « $AB^2 = BH \\times HC = 2 \\times 8 = 16$, donc $AB = 4$ cm. » Cette affirmation est-elle correcte ?",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, $H$ est sur $[BC]$ et $BC = BH + HC = 10$ cm. Étape 2 — Choisir : la relation qui contient $AB$ est $AB^2 = BH \\times BC$. Étape 3 — Remplacer : $AB^2 = 2 \\times 10$. Étape 4 — Calculer : $AB^2 = 20$, donc $AB = \\sqrt{20} \\approx 4{,}5$ cm, et non $4$ cm. Répondre Vrai vient de l'erreur de la fiche : prendre $HC$ comme second facteur au lieu de l'hypoténuse entière $BC$. Le produit $2 \\times 8 = 16$ est en réalité $AH^2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, avec $AB = 9$ cm, $AC = 12$ cm, $BC = 15$ cm, $BH = 5{,}4$ cm, $HC = 9{,}6$ cm et $AH = 7{,}2$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : angle droit en $A$, hypoténuse $[BC]$, $H$ sur $[BC]$. Étape 2 — Choisir : pour chaque égalité, on regarde quel côté est au carré et quelle projection l'accompagne. Étape 3 — Remplacer : $AC^2 = 144$ et $CH \\times CB = 9{,}6 \\times 15 = 144$ ; $AB \\times AC = 9 \\times 12 = 108$ et $AH \\times BC = 7{,}2 \\times 15 = 108$. Étape 4 — Calculer : les deux premières égalités sont vérifiées. La réponse $AB^2 = BH \\times HC$ prend $HC$ au lieu de l'hypoténuse entière $BC$ : $AB^2 = 81$ alors que $BH \\times HC = 51{,}84$. La réponse $AH^2 = BH \\times BC$ mélange deux relations : $AH^2 = 51{,}84$ se calcule avec $HB \\times HC$, alors que $BH \\times BC = 81$.",
+                  "answers": [
+                    {
+                      "content": "$AB^2 = BH \\times HC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AC^2 = CH \\times CB$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AH^2 = BH \\times BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB \\times AC = AH \\times BC$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$, avec $CH = 3$ cm et $CB = 12$ cm. Alors la longueur $AC$ vaut ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[CB]$, on connaît $CH = 3$ et $CB = 12$. Étape 2 — Choisir : la relation qui contient $AC$ est $AC^2 = CH \\times CB$. Étape 3 — Remplacer : $AC^2 = 3 \\times 12$. Étape 4 — Calculer : $AC^2 = 36$, donc $AC = 6$ cm. Écrire $36$ oublie la racine carrée ; écrire $15$ additionne $CH$ et $CB$ au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AB = 12$ cm, $AC = 16$ cm et $BC = 20$ cm. Quelle est la longueur $AH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, l'hypoténuse est $[BC] = 20$ et on cherche la hauteur $AH$. Étape 2 — Choisir : la relation qui contient $AH$, $AB$, $AC$ et $BC$ est $AB \\times AC = AH \\times BC$. Étape 3 — Remplacer : $12 \\times 16 = AH \\times 20$. Étape 4 — Calculer : $192 = 20 \\times AH$, donc $AH = 192 \\div 20 = 9{,}6$ cm. La réponse 192 cm oublie de diviser par l'hypoténuse $BC$ : c'est le produit $AB \\times AC$. La réponse 1,4 cm additionne $AB$ et $AC$ au lieu de les multiplier avant de diviser par $BC$. La réponse 14 cm prend la moyenne de $AB$ et $AC$ au lieu d'utiliser la relation.",
+                  "answers": [
+                    {
+                      "content": "192 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "9,6 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,4 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Le triangle $ABC$ est rectangle en $A$. $H$ est le pied de la hauteur issue de $A$. On donne $BH = 9$ cm et $HC = 16$ cm.",
             "questions": [
@@ -605,144 +724,271 @@
           },
           "pitfall": "Ne pas inverser la fraction ni confondre opposé et adjacent. Contre-exemple : dans un triangle $ABC$ rectangle en $A$ avec $AB = 3$, $AC = 4$ et $BC = 5$, on a $\\cos \\widehat{B} = \\dfrac{AB}{BC} = \\dfrac{3}{5}$. Si tu écris $\\cos \\widehat{B} = \\dfrac{BC}{AB}$, tu trouves $\\dfrac{5}{3}$, plus grand que 1 : c'est impossible, car l'hypoténuse est le plus grand côté. Le cosinus et le sinus ont toujours l'hypoténuse **en bas** de la fraction.",
           "figure": "cotes-triangle-rectangle",
-          "exercise": {
-            "title": "Calculer des longueurs avec le cosinus, le sinus et la tangente",
-            "exercise_type": "fixation",
-            "figure": "cotes-triangle-rectangle",
-            "statement": "Dans cet exercice, tu reconnais les côtés d'un triangle rectangle et tu calcules des longueurs avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A.",
-            "questions": [
-              {
-                "content": "$ABC$ est rectangle en $A$. Par rapport à l'angle aigu $\\widehat{B}$, comment s'appelle le côté $[AC]$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, donc l'hypoténuse est le côté en face, $[BC]$. Le côté $[AB]$ touche l'angle $\\widehat{B}$ : c'est l'adjacent. Le côté $[AC]$ est en face de $\\widehat{B}$ : c'est le côté opposé. Les deux autres propositions confondent $[AC]$ avec $[AB]$ ou avec l'hypoténuse $[BC]$.",
-                "answers": [
-                  {
-                    "content": "Le côté opposé",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le côté adjacent",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'hypoténuse",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $BC = 15$ cm et $\\sin \\widehat{B} = 0{,}6$. Quelle est la longueur $AC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $[BC]$ est l'hypoténuse et $[AC]$ est le côté opposé à $\\widehat{B}$. Étape 2 — Choisir : on relie opposé et hypoténuse, donc le sinus. Étape 3 — Écrire : $\\sin \\widehat{B} = \\dfrac{AC}{BC}$. Étape 4 — Remplacer : $0{,}6 = \\dfrac{AC}{15}$. Étape 5 — Calculer : $AC = 0{,}6 \\times 15 = 9$ cm. La proposition 25 cm vient de la division $15 \\div 0{,}6$, c'est-à-dire de la fraction inversée.",
-                "answers": [
-                  {
-                    "content": "9 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "25 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "15,6 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,04 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $AB = 12$ cm et $\\tan \\widehat{B} = 0{,}75$. Quelle est la longueur $AC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $[AB]$ est le côté adjacent à $\\widehat{B}$ et $[AC]$ est le côté opposé. Étape 2 — Choisir : on relie opposé et adjacent, donc la tangente. Étape 3 — Écrire : $\\tan \\widehat{B} = \\dfrac{AC}{AB}$. Étape 4 — Remplacer : $0{,}75 = \\dfrac{AC}{12}$. Étape 5 — Calculer : $AC = 0{,}75 \\times 12 = 9$ cm. La proposition 16 cm vient de $12 \\div 0{,}75$ : la fraction a été inversée.",
-                "answers": [
-                  {
-                    "content": "16 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "9 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "12,75 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,0625 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $AB = 16$ cm et $\\cos \\widehat{B} = 0{,}8$. Quelle est la longueur $BC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $[AB]$ est le côté adjacent à $\\widehat{B}$ et $[BC]$ est l'hypoténuse. Étape 2 — Choisir : le cosinus relie adjacent et hypoténuse. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{AB}{BC}$. Étape 4 — Remplacer : $0{,}8 = \\dfrac{16}{BC}$. Étape 5 — Calculer : $BC = 16 \\div 0{,}8 = 20$ cm. Ici l'inconnue est en bas de la fraction : il faut diviser, pas multiplier ($16 \\times 0{,}8 = 12{,}8$ est faux).",
-                "answers": [
-                  {
-                    "content": "12,8 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "16,8 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "20 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "0,05 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. Quelles égalités sont vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : pour $\\widehat{B}$, l'adjacent est $AB = 8$, l'opposé est $AC = 6$ et l'hypoténuse est $BC = 10$. Étape 2 — Choisir : chaque égalité donne un rapport ; on vérifie quels côtés il relie. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}} = \\dfrac{8}{10}$ et $\\sin \\widehat{B} = \\dfrac{\\text{opposé}}{\\text{hypoténuse}} = \\dfrac{6}{10}$ sont vraies. $\\tan \\widehat{B} = \\dfrac{6}{8}$ (et non $\\dfrac{8}{6}$), $\\cos \\widehat{B} = \\dfrac{10}{8}$ est la fraction inversée (plus grande que 1), et $\\sin \\widehat{B} = \\dfrac{8}{10}$ prend l'adjacent à la place de l'opposé.",
-                "answers": [
-                  {
-                    "content": "$\\cos \\widehat{B} = \\dfrac{8}{10}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\tan \\widehat{B} = \\dfrac{8}{6}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\sin \\widehat{B} = \\dfrac{6}{10}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\cos \\widehat{B} = \\dfrac{10}{8}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\sin \\widehat{B} = \\dfrac{8}{10}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le cosinus d'un angle aigu d'un triangle rectangle peut être égal à 1,5.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : il s'agit du cosinus d'un angle aigu $\\widehat{B}$. Étape 2 — Choisir : le cosinus est le rapport entre le côté adjacent et l'hypoténuse. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$. Or l'hypoténuse est le plus grand côté du triangle rectangle, donc cette fraction est toujours inférieure à 1. Un cosinus de 1,5 signalerait que la fraction a été inversée. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des longueurs avec le cosinus, le sinus et la tangente",
+              "exercise_type": "fixation",
+              "figure": "cotes-triangle-rectangle",
+              "statement": "Dans cet exercice, tu reconnais les côtés d'un triangle rectangle et tu calcules des longueurs avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$. Par rapport à l'angle aigu $\\widehat{B}$, comment s'appelle le côté $[AC]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, donc l'hypoténuse est le côté en face, $[BC]$. Le côté $[AB]$ touche l'angle $\\widehat{B}$ : c'est l'adjacent. Le côté $[AC]$ est en face de $\\widehat{B}$ : c'est le côté opposé. Les deux autres propositions confondent $[AC]$ avec $[AB]$ ou avec l'hypoténuse $[BC]$.",
+                  "answers": [
+                    {
+                      "content": "Le côté opposé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le côté adjacent",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hypoténuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $BC = 15$ cm et $\\sin \\widehat{B} = 0{,}6$. Quelle est la longueur $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $[BC]$ est l'hypoténuse et $[AC]$ est le côté opposé à $\\widehat{B}$. Étape 2 — Choisir : on relie opposé et hypoténuse, donc le sinus. Étape 3 — Écrire : $\\sin \\widehat{B} = \\dfrac{AC}{BC}$. Étape 4 — Remplacer : $0{,}6 = \\dfrac{AC}{15}$. Étape 5 — Calculer : $AC = 0{,}6 \\times 15 = 9$ cm. La proposition 25 cm vient de la division $15 \\div 0{,}6$, c'est-à-dire de la fraction inversée.",
+                  "answers": [
+                    {
+                      "content": "9 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "15,6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,04 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $AB = 12$ cm et $\\tan \\widehat{B} = 0{,}75$. Quelle est la longueur $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $[AB]$ est le côté adjacent à $\\widehat{B}$ et $[AC]$ est le côté opposé. Étape 2 — Choisir : on relie opposé et adjacent, donc la tangente. Étape 3 — Écrire : $\\tan \\widehat{B} = \\dfrac{AC}{AB}$. Étape 4 — Remplacer : $0{,}75 = \\dfrac{AC}{12}$. Étape 5 — Calculer : $AC = 0{,}75 \\times 12 = 9$ cm. La proposition 16 cm vient de $12 \\div 0{,}75$ : la fraction a été inversée.",
+                  "answers": [
+                    {
+                      "content": "16 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "12,75 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,0625 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $AB = 16$ cm et $\\cos \\widehat{B} = 0{,}8$. Quelle est la longueur $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $[AB]$ est le côté adjacent à $\\widehat{B}$ et $[BC]$ est l'hypoténuse. Étape 2 — Choisir : le cosinus relie adjacent et hypoténuse. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{AB}{BC}$. Étape 4 — Remplacer : $0{,}8 = \\dfrac{16}{BC}$. Étape 5 — Calculer : $BC = 16 \\div 0{,}8 = 20$ cm. Ici l'inconnue est en bas de la fraction : il faut diviser, pas multiplier ($16 \\times 0{,}8 = 12{,}8$ est faux).",
+                  "answers": [
+                    {
+                      "content": "12,8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "16,8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "0,05 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : pour $\\widehat{B}$, l'adjacent est $AB = 8$, l'opposé est $AC = 6$ et l'hypoténuse est $BC = 10$. Étape 2 — Choisir : chaque égalité donne un rapport ; on vérifie quels côtés il relie. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}} = \\dfrac{8}{10}$ et $\\sin \\widehat{B} = \\dfrac{\\text{opposé}}{\\text{hypoténuse}} = \\dfrac{6}{10}$ sont vraies. $\\tan \\widehat{B} = \\dfrac{6}{8}$ (et non $\\dfrac{8}{6}$), $\\cos \\widehat{B} = \\dfrac{10}{8}$ est la fraction inversée (plus grande que 1), et $\\sin \\widehat{B} = \\dfrac{8}{10}$ prend l'adjacent à la place de l'opposé.",
+                  "answers": [
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{8}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan \\widehat{B} = \\dfrac{8}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin \\widehat{B} = \\dfrac{6}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{10}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin \\widehat{B} = \\dfrac{8}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cosinus d'un angle aigu d'un triangle rectangle peut être égal à 1,5.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : il s'agit du cosinus d'un angle aigu $\\widehat{B}$. Étape 2 — Choisir : le cosinus est le rapport entre le côté adjacent et l'hypoténuse. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$. Or l'hypoténuse est le plus grand côté du triangle rectangle, donc cette fraction est toujours inférieure à 1. Un cosinus de 1,5 signalerait que la fraction a été inversée. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître les côtés et calculer avec cosinus, sinus et tangente",
+              "statement": "Dans cet exercice, tu nommes les côtés d'un triangle rectangle et tu calcules des longueurs et des rapports avec la méthode de la fiche. Dans chaque question, le triangle ABC est rectangle en A.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence toujours par repérer l'angle donné : l'hypoténuse est en face de l'angle droit, l'opposé est en face de l'angle, l'adjacent touche l'angle.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$. Par rapport à l'angle aigu $\\widehat{C}$, comment s'appelle le côté $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle droit est en $A$, donc l'hypoténuse est $[BC]$ ; l'angle étudié est $\\widehat{C}$. Étape 2 — Choisir : $[AB]$ ne touche pas le sommet $C$ et n'est pas l'hypoténuse, il est en face de $\\widehat{C}$ : c'est le côté opposé. La réponse le côté adjacent confond avec $[AC]$ : c'est $[AC]$ qui touche l'angle $\\widehat{C}$. La réponse l'hypoténuse confond avec $[BC]$ : l'hypoténuse est le côté en face de l'angle droit, ici $[BC]$.",
+                  "answers": [
+                    {
+                      "content": "le côté adjacent",
+                      "correct": false
+                    },
+                    {
+                      "content": "le côté opposé",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'hypoténuse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $BC = 20$ cm et $\\cos \\widehat{B} = 0{,}8$. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est $\\widehat{B}$ ; $[BC]$ est l'hypoténuse et $[AB]$ est le côté adjacent. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus. Étape 3 — Écrire : $\\cos \\widehat{B} = \\dfrac{AB}{BC}$. Étape 4 — Remplacer : $0{,}8 = \\dfrac{AB}{20}$. Étape 5 — Calculer : $AB = 0{,}8 \\times 20 = 16$ cm. La réponse 25 cm divise $20$ par $0{,}8$ au lieu de multiplier. La réponse 0,04 cm inverse la fraction : $0{,}8 \\div 20$ au lieu de $0{,}8 \\times 20$. La réponse 12 cm utilise le sinus ($0{,}6 \\times 20$) alors que $[AB]$ est adjacent à $\\widehat{B}$, ce qui demande le cosinus.",
+                  "answers": [
+                    {
+                      "content": "25 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,04 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "16 cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $AC = 9$ cm et $\\tan \\widehat{B} = 1{,}5$. Calcule $AB$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est $\\widehat{B}$ ; $[AC]$ est le côté opposé connu et $[AB]$ est le côté adjacent cherché. Étape 2 — Choisir : opposé et adjacent, donc la tangente. Étape 3 — Écrire : $\\tan \\widehat{B} = \\dfrac{AC}{AB}$. Étape 4 — Remplacer : $1{,}5 = \\dfrac{9}{AB}$. Étape 5 — Calculer : $AB = 9 \\div 1{,}5 = 6$ cm. Trouver $13{,}5$ multiplie $9$ par $1{,}5$ au lieu de diviser ; trouver $0{,}17$ divise $1{,}5$ par $9$, ce qui inverse la fraction.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $AC = 14$ cm et $\\sin \\widehat{B} = 0{,}56$. Quelle est la longueur $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle connu est $\\widehat{B}$ ; $[AC]$ est le côté opposé connu et $[BC]$ est l'hypoténuse cherchée. Étape 2 — Choisir : opposé et hypoténuse, donc le sinus. Étape 3 — Écrire : $\\sin \\widehat{B} = \\dfrac{AC}{BC}$. Étape 4 — Remplacer : $0{,}56 = \\dfrac{14}{BC}$. Étape 5 — Calculer : $BC = 14 \\div 0{,}56 = 25$ cm. La réponse 7,84 cm multiplie $14$ par $0{,}56$ alors que l'hypoténuse est au dénominateur. La réponse 0,04 cm calcule $0{,}56 \\div 14$ : la fraction est inversée. La réponse 14,56 cm additionne $14$ et $0{,}56$ au lieu d'utiliser le produit en croix.",
+                  "answers": [
+                    {
+                      "content": "25 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "7,84 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,04 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "14,56 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 5$ cm, $AC = 12$ cm et $BC = 13$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : pour $\\widehat{B}$, l'hypoténuse est $[BC] = 13$, l'adjacent est $[AB] = 5$ et l'opposé est $[AC] = 12$. Étape 2 — Choisir : le sinus relie opposé et hypoténuse, la tangente relie opposé et adjacent. Étape 3 — Écrire et remplacer : $\\sin \\widehat{B} = \\dfrac{12}{13}$ et $\\tan \\widehat{B} = \\dfrac{12}{5}$. Étape 4 — Calculer : ces deux égalités sont vraies. La réponse $\\cos \\widehat{B} = \\dfrac{13}{5}$ met l'hypoténuse en haut de la fraction : on obtiendrait plus de 1, impossible pour un cosinus. La réponse $\\tan \\widehat{B} = \\dfrac{5}{12}$ inverse l'opposé et l'adjacent : la tangente est opposé sur adjacent, soit $\\dfrac{12}{5}$.",
+                  "answers": [
+                    {
+                      "content": "$\\tan \\widehat{B} = \\dfrac{12}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{13}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan \\widehat{B} = \\dfrac{5}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin \\widehat{B} = \\dfrac{12}{13}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un triangle rectangle, le cosinus d'un angle aigu est le quotient du côté adjacent par ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : pour un angle aigu, on distingue l'hypoténuse, l'adjacent et l'opposé. Étape 2 — Choisir : le cosinus relie l'adjacent à l'hypoténuse. Étape 3 — Écrire : $\\cos = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$ ; l'hypoténuse est toujours en bas de la fraction. Répondre « le côté opposé » donnerait $\\dfrac{\\text{adjacent}}{\\text{opposé}}$, l'inverse de la tangente ; répondre « le côté adjacent » donnerait toujours $1$.",
+                  "answers": [
+                    {
+                      "content": "l'hypoténuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "hypoténuse",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Le triangle $ABC$ est rectangle en $A$, avec $BC = 25$ cm, $\\sin \\widehat{B} = 0{,}28$ et $\\cos \\widehat{B} = 0{,}96$.",
             "questions": [
@@ -849,125 +1095,247 @@
           },
           "pitfall": "Ne pas oublier les carrés : $\\cos x + \\sin x = 1$ est faux. Contre-exemple : si $\\cos x = 0{,}6$ et $\\sin x = 0{,}8$, alors $0{,}6 + 0{,}8 = 1{,}4$ et non 1, alors que $0{,}6^2 + 0{,}8^2 = 0{,}36 + 0{,}64 = 1$. Et n'oublie pas la racine à la fin : $\\sin^2 x = 0{,}64$ donne $\\sin x = 0{,}8$, pas $0{,}64$.",
           "figure": null,
-          "exercise": {
-            "title": "Passer d'un rapport trigonométrique à un autre",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, x est toujours un angle aigu. Tu calcules un rapport trigonométrique à partir d'un autre avec la méthode de la fiche.",
-            "questions": [
-              {
-                "content": "$x$ est un angle aigu et $\\cos x = 0{,}6$. Que vaut $\\sin x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}6$ et on cherche $\\sin x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $0{,}36 + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 1 - 0{,}36 = 0{,}64$. Étape 5 — Prendre la racine carrée positive : $\\sin x = 0{,}8$. La proposition 0,4 vient de $1 - 0{,}6$ (carrés oubliés) et 0,64 de l'oubli de la racine.",
-                "answers": [
-                  {
-                    "content": "0,4",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,64",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,36",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,8",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "$x$ est un angle aigu et $\\sin x = \\dfrac{5}{13}$. Que vaut $\\cos x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on connaît $\\sin x = \\dfrac{5}{13}$ et on cherche $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + \\dfrac{25}{169} = 1$. Étape 4 — Isoler : $\\cos^2 x = 1 - \\dfrac{25}{169} = \\dfrac{144}{169}$. Étape 5 — Prendre la racine carrée positive : $\\cos x = \\dfrac{12}{13}$. La proposition $\\dfrac{8}{13}$ vient de $1 - \\dfrac{5}{13}$ (carrés oubliés) et $\\dfrac{144}{169}$ de l'oubli de la racine.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac{12}{13}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\dfrac{8}{13}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac{144}{169}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac{13}{5}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$x$ est un angle aigu et $\\cos x = 0{,}8$. Que vaut $\\tan x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}8$ ; on cherche $\\sin x$ puis $\\tan x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $0{,}64 + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 0{,}36$. Étape 5 — Prendre la racine carrée positive : $\\sin x = 0{,}6$, puis $\\tan x = \\dfrac{0{,}6}{0{,}8} = \\dfrac{3}{4}$. La proposition $\\dfrac{4}{3}$ est l'inverse : le sinus doit être en haut de la fraction.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac{4}{3}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac{3}{4}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\dfrac{3}{5}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$1{,}4$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$x$ est un angle aigu avec $\\sin x = 0{,}6$ et $\\cos x = 0{,}8$. Quelles égalités sont vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}6$ et $\\cos x = 0{,}8$. Étape 2 — Écrire et remplacer : $0{,}8^2 + 0{,}6^2 = 0{,}64 + 0{,}36 = 1$, donc la première égalité est vraie, alors que $0{,}8 + 0{,}6 = 1{,}4$ (piège des carrés oubliés). Pour la tangente : $\\tan x = \\dfrac{\\sin x}{\\cos x} = \\dfrac{0{,}6}{0{,}8} = 0{,}75$. Les propositions $\\dfrac{4}{3}$ (fraction inversée) et $0{,}6 \\times 0{,}8$ (produit au lieu du quotient) sont fausses.",
-                "answers": [
-                  {
-                    "content": "$\\cos^2 x + \\sin^2 x = 1$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\cos x + \\sin x = 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\tan x = 0{,}75$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\tan x = \\dfrac{4}{3}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\tan x = 0{,}6 \\times 0{,}8$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$x$ est un angle aigu. Si $\\sin x = 0{,}6$, alors $\\cos x = 0{,}4$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}6$ et on cherche $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + 0{,}36 = 1$. Étape 4 — Isoler : $\\cos^2 x = 0{,}64$. Étape 5 — Prendre la racine carrée positive : $\\cos x = 0{,}8$. La valeur 0,4 vient de $1 - 0{,}6$, qui oublie les carrés. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Passer d'un rapport trigonométrique à un autre",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, x est toujours un angle aigu. Tu calcules un rapport trigonométrique à partir d'un autre avec la méthode de la fiche.",
+              "questions": [
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = 0{,}6$. Que vaut $\\sin x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}6$ et on cherche $\\sin x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $0{,}36 + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 1 - 0{,}36 = 0{,}64$. Étape 5 — Prendre la racine carrée positive : $\\sin x = 0{,}8$. La proposition 0,4 vient de $1 - 0{,}6$ (carrés oubliés) et 0,64 de l'oubli de la racine.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,64",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,36",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\sin x = \\dfrac{5}{13}$. Que vaut $\\cos x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x = \\dfrac{5}{13}$ et on cherche $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + \\dfrac{25}{169} = 1$. Étape 4 — Isoler : $\\cos^2 x = 1 - \\dfrac{25}{169} = \\dfrac{144}{169}$. Étape 5 — Prendre la racine carrée positive : $\\cos x = \\dfrac{12}{13}$. La proposition $\\dfrac{8}{13}$ vient de $1 - \\dfrac{5}{13}$ (carrés oubliés) et $\\dfrac{144}{169}$ de l'oubli de la racine.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{12}{13}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{8}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{144}{169}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{13}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = 0{,}8$. Que vaut $\\tan x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}8$ ; on cherche $\\sin x$ puis $\\tan x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $0{,}64 + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 0{,}36$. Étape 5 — Prendre la racine carrée positive : $\\sin x = 0{,}6$, puis $\\tan x = \\dfrac{0{,}6}{0{,}8} = \\dfrac{3}{4}$. La proposition $\\dfrac{4}{3}$ est l'inverse : le sinus doit être en haut de la fraction.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu avec $\\sin x = 0{,}6$ et $\\cos x = 0{,}8$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}6$ et $\\cos x = 0{,}8$. Étape 2 — Écrire et remplacer : $0{,}8^2 + 0{,}6^2 = 0{,}64 + 0{,}36 = 1$, donc la première égalité est vraie, alors que $0{,}8 + 0{,}6 = 1{,}4$ (piège des carrés oubliés). Pour la tangente : $\\tan x = \\dfrac{\\sin x}{\\cos x} = \\dfrac{0{,}6}{0{,}8} = 0{,}75$. Les propositions $\\dfrac{4}{3}$ (fraction inversée) et $0{,}6 \\times 0{,}8$ (produit au lieu du quotient) sont fausses.",
+                  "answers": [
+                    {
+                      "content": "$\\cos^2 x + \\sin^2 x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos x + \\sin x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan x = 0{,}75$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan x = \\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan x = 0{,}6 \\times 0{,}8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu. Si $\\sin x = 0{,}6$, alors $\\cos x = 0{,}4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}6$ et on cherche $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + 0{,}36 = 1$. Étape 4 — Isoler : $\\cos^2 x = 0{,}64$. Étape 5 — Prendre la racine carrée positive : $\\cos x = 0{,}8$. La valeur 0,4 vient de $1 - 0{,}6$, qui oublie les carrés. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Passer d'un rapport trigonométrique à un autre",
+              "statement": "Dans cet exercice, tu calcules un rapport trigonométrique à partir d'un autre en suivant la méthode de la fiche. Dans chaque question, x est un angle aigu.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord cos² x + sin² x = 1, remplace la valeur connue élevée au carré, puis n'oublie pas la racine carrée à la fin.",
+              "questions": [
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = \\dfrac{12}{13}$. Que vaut $\\sin x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\cos x = \\dfrac{12}{13}$ et on cherche $\\sin x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\dfrac{144}{169} + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 1 - \\dfrac{144}{169} = \\dfrac{25}{169}$. Étape 5 — Prendre la racine carrée positive : $\\sin x = \\dfrac{5}{13}$. La réponse $\\dfrac{1}{13}$ calcule $1 - \\dfrac{12}{13}$ sans mettre au carré. La réponse $\\dfrac{25}{169}$ oublie la racine carrée : c'est la valeur de $\\sin^2 x$. La réponse $\\dfrac{5}{12}$ donne la tangente $\\dfrac{\\sin x}{\\cos x}$ et non le sinus.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{13}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{25}{169}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{12}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\sin x = 0{,}8$. Calcule $\\cos^2 x$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}8$ et on cherche $\\cos^2 x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + 0{,}8^2 = 1$, soit $\\cos^2 x + 0{,}64 = 1$. Étape 4 — Isoler : $\\cos^2 x = 1 - 0{,}64 = 0{,}36$. La racine carrée n'est pas demandée ici. Trouver $0{,}2$ calcule $1 - 0{,}8$ sans le carré ; trouver $0{,}64$ donne $\\sin^2 x$ et non $\\cos^2 x$ ; trouver $0{,}6$ prend déjà la racine carrée alors qu'on demande $\\cos^2 x$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0,36",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle aigu $x$ peut avoir à la fois $\\cos x = 0{,}5$ et $\\sin x = 0{,}5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}5$ et $\\sin x = 0{,}5$ et on teste leur compatibilité. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x$ doit valoir $1$. Étape 3 — Remplacer : $0{,}5^2 + 0{,}5^2 = 0{,}25 + 0{,}25$. Étape 4 — Isoler : on trouve $0{,}5$, qui est différent de $1$ : ces deux valeurs sont incompatibles. Répondre Vrai vient de l'erreur de la fiche : additionner $0{,}5 + 0{,}5 = 1$ sans élever au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\sin x = 0{,}6$. Alors $\\tan x$ vaut ___ (écriture décimale).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x = 0{,}6$ et on cherche $\\tan x$, donc d'abord $\\cos x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\cos^2 x + 0{,}36 = 1$. Étape 4 — Isoler : $\\cos^2 x = 0{,}64$. Étape 5 — Prendre la racine carrée positive : $\\cos x = 0{,}8$, puis $\\tan x = \\dfrac{0{,}6}{0{,}8} = 0{,}75$. Écrire $0{,}8$ donne le cosinus et non la tangente ; écrire $1{,}33$ inverse le quotient $\\dfrac{\\cos x}{\\sin x}$.",
+                  "answers": [
+                    {
+                      "content": "0,75",
+                      "correct": true
+                    },
+                    {
+                      "content": "3/4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu avec $\\sin x = \\dfrac{8}{17}$ et $\\cos x = \\dfrac{15}{17}$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\sin x$ et $\\cos x$ et on teste des égalités. Étape 2 — Écrire : $\\tan x = \\dfrac{\\sin x}{\\cos x}$ et $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $\\tan x = \\dfrac{8/17}{15/17} = \\dfrac{8}{15}$ et $\\cos^2 x = \\dfrac{15^2}{17^2} = \\dfrac{225}{289}$. Étape 4 — Isoler : on vérifie aussi $\\dfrac{64 + 225}{289} = 1$ ; les deux premières égalités sont vraies. La réponse $\\tan x = \\dfrac{15}{8}$ inverse le quotient : la tangente est $\\dfrac{\\sin x}{\\cos x}$, pas $\\dfrac{\\cos x}{\\sin x}$. La réponse $\\sin x + \\cos x = 1$ oublie les carrés : $\\dfrac{8}{17} + \\dfrac{15}{17} = \\dfrac{23}{17}$, alors que la bonne relation est $\\sin^2 x + \\cos^2 x = 1$.",
+                  "answers": [
+                    {
+                      "content": "$\\tan x = \\dfrac{8}{15}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan x = \\dfrac{15}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos^2 x = \\dfrac{225}{289}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin x + \\cos x = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = 0{,}6$. Quelle égalité permet de calculer $\\sin^2 x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $\\cos x = 0{,}6$ et on cherche $\\sin^2 x$. Étape 2 — Écrire : $\\cos^2 x + \\sin^2 x = 1$. Étape 3 — Remplacer : $0{,}6^2 + \\sin^2 x = 1$, soit $0{,}36 + \\sin^2 x = 1$. Étape 4 — Isoler : $\\sin^2 x = 1 - 0{,}36 = 0{,}64$. Étape 5 — Prendre la racine : on trouverait ensuite $\\sin x = 0{,}8$. La réponse $\\sin^2 x = 1 - 0{,}6$ oublie d'élever $0{,}6$ au carré. La réponse $\\sin x = 1 - 0{,}36$ confond $\\sin x$ et $\\sin^2 x$ : $0{,}64$ est le carré du sinus. La réponse $\\sin^2 x = 0{,}36 - 1$ inverse la soustraction : on obtiendrait un nombre négatif, impossible pour un carré.",
+                  "answers": [
+                    {
+                      "content": "$\\sin^2 x = 1 - 0{,}6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin x = 1 - 0{,}36$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin^2 x = 1 - 0{,}36$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin^2 x = 0{,}36 - 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "$x$ est un angle aigu et $\\sin x = 0{,}28$.",
             "questions": [
@@ -1050,148 +1418,267 @@
           },
           "pitfall": "Ne pas échanger les valeurs de 30° et de 60°. Contre-exemple : dans un triangle rectangle d'hypoténuse 8 cm avec un angle de 30°, le côté opposé vaut $8 \\times \\sin 30° = 8 \\times \\dfrac{1}{2} = 4$ cm, la moitié de l'hypoténuse. Si tu prenais $\\sin 30° = \\dfrac{\\sqrt{3}}{2}$, tu trouverais $4\\sqrt{3} \\approx 6{,}9$ cm, presque la longueur de l'hypoténuse : impossible pour un petit angle. Retiens : plus l'angle est petit, plus son sinus est petit.",
           "figure": "poteau-et-hauban",
-          "exercise": {
-            "title": "Utiliser les valeurs exactes des angles remarquables",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu calcules des longueurs dans des triangles rectangles qui ont un angle de 30°, 45° ou 60°, avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A.",
-            "questions": [
-              {
-                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $BC = 10$ cm. Quelle est la longueur $AC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle est $30°$, $[BC]$ est l'hypoténuse connue et $[AC]$ est le côté opposé cherché. Étape 2 — Choisir : opposé et hypoténuse, donc le sinus : $\\sin 30° = \\dfrac{AC}{BC}$. Étape 3 — Remplacer : $\\dfrac{1}{2} = \\dfrac{AC}{10}$. Étape 4 — Calculer : $AC = 10 \\times \\dfrac{1}{2} = 5$ cm. La proposition $5\\sqrt{3}$ prend la valeur de $\\sin 60°$ : c'est l'erreur de la fiche, l'échange des valeurs de 30° et 60°.",
-                "answers": [
-                  {
-                    "content": "$5\\sqrt{3}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "20 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "5 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "$10\\sqrt{3}$ cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 45°$ et $AB = 6$ cm. Quelle est la longueur $AC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle est $45°$, $[AB]$ est l'adjacent connu et $[AC]$ est l'opposé cherché. Étape 2 — Choisir : opposé et adjacent, donc la tangente : $\\tan 45° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $1 = \\dfrac{AC}{6}$. Étape 4 — Calculer : $AC = 6 \\times 1 = 6$ cm. Le triangle est isocèle en $A$. Les propositions avec $\\sqrt{2}$ viennent d'un cosinus ou d'un sinus de $45°$, qui ne relient pas ces deux côtés.",
-                "answers": [
-                  {
-                    "content": "$6\\sqrt{2}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3\\sqrt{2}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "12 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "6 cm",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 60°$ et $BC = 12$ cm. Quelle est la longueur $AB$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle est $60°$, $[BC]$ est l'hypoténuse connue et $[AB]$ est l'adjacent cherché. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus : $\\cos 60° = \\dfrac{AB}{BC}$. Étape 3 — Remplacer : $\\dfrac{1}{2} = \\dfrac{AB}{12}$. Étape 4 — Calculer : $AB = 12 \\times \\dfrac{1}{2} = 6$ cm. La proposition $6\\sqrt{3}$ prend $\\dfrac{\\sqrt{3}}{2}$ pour $\\cos 60°$, et 24 cm vient d'une division à la place d'une multiplication.",
-                "answers": [
-                  {
-                    "content": "6 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6\\sqrt{3}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "24 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "$12\\sqrt{3}$ cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $AB = 3\\sqrt{3}$ cm. Quelle est la longueur $AC$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : l'angle est $30°$, $[AB]$ est l'adjacent connu et $[AC]$ est l'opposé cherché. Étape 2 — Choisir : la tangente : $\\tan 30° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $\\dfrac{\\sqrt{3}}{3} = \\dfrac{AC}{3\\sqrt{3}}$. Étape 4 — Calculer : $AC = 3\\sqrt{3} \\times \\dfrac{\\sqrt{3}}{3} = \\dfrac{3 \\times 3}{3} = 3$ cm, car $\\sqrt{3} \\times \\sqrt{3} = 3$. La proposition 9 cm vient de $\\tan 30° = \\sqrt{3}$ (valeur de $\\tan 60°$).",
-                "answers": [
-                  {
-                    "content": "9 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "3 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\dfrac{3\\sqrt{3}}{2}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "6 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelles égalités sont vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : on compare avec les valeurs exactes de la fiche. Étape 2 — Choisir : pour chaque égalité, on lit l'angle et le rapport concernés. Étape 3 — Remplacer : $\\sin 30° = \\dfrac{1}{2}$ et $\\cos 60° = \\dfrac{1}{2}$ sont exactes (on a $\\sin 30° = \\cos 60°$). Les trois autres sont fausses, car $\\cos 30° = \\dfrac{\\sqrt{3}}{2}$ (erreur d'échange 30°/60°), $\\tan 45° = 1$ ($\\dfrac{\\sqrt{2}}{2}$ est le cosinus et le sinus de $45°$) et $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$ (et non $\\dfrac{1}{2}$).",
-                "answers": [
-                  {
-                    "content": "$\\sin 30° = \\dfrac{1}{2}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\cos 30° = \\dfrac{1}{2}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\cos 60° = \\dfrac{1}{2}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\tan 45° = \\dfrac{\\sqrt{2}}{2}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\sin 60° = \\dfrac{1}{2}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "On a $\\sin 45° = \\cos 45°$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : l'angle est $45°$. Étape 2 — Choisir : on compare le sinus et le cosinus de cet angle. Étape 3 — Remplacer par les valeurs exactes : $\\sin 45° = \\dfrac{\\sqrt{2}}{2}$ et $\\cos 45° = \\dfrac{\\sqrt{2}}{2}$. Ces deux nombres sont égaux, donc $\\tan 45° = \\dfrac{\\sin 45°}{\\cos 45°} = 1$. Dans un triangle rectangle avec un angle de $45°$, l'autre angle aigu vaut aussi $45°$ : les deux côtés de l'angle droit sont égaux. L'affirmation est vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Utiliser les valeurs exactes des angles remarquables",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu calcules des longueurs dans des triangles rectangles qui ont un angle de 30°, 45° ou 60°, avec la méthode de la fiche. Dans chaque question, ABC est rectangle en A.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $BC = 10$ cm. Quelle est la longueur $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle est $30°$, $[BC]$ est l'hypoténuse connue et $[AC]$ est le côté opposé cherché. Étape 2 — Choisir : opposé et hypoténuse, donc le sinus : $\\sin 30° = \\dfrac{AC}{BC}$. Étape 3 — Remplacer : $\\dfrac{1}{2} = \\dfrac{AC}{10}$. Étape 4 — Calculer : $AC = 10 \\times \\dfrac{1}{2} = 5$ cm. La proposition $5\\sqrt{3}$ prend la valeur de $\\sin 60°$ : c'est l'erreur de la fiche, l'échange des valeurs de 30° et 60°.",
+                  "answers": [
+                    {
+                      "content": "$5\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\sqrt{3}$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 45°$ et $AB = 6$ cm. Quelle est la longueur $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle est $45°$, $[AB]$ est l'adjacent connu et $[AC]$ est l'opposé cherché. Étape 2 — Choisir : opposé et adjacent, donc la tangente : $\\tan 45° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $1 = \\dfrac{AC}{6}$. Étape 4 — Calculer : $AC = 6 \\times 1 = 6$ cm. Le triangle est isocèle en $A$. Les propositions avec $\\sqrt{2}$ viennent d'un cosinus ou d'un sinus de $45°$, qui ne relient pas ces deux côtés.",
+                  "answers": [
+                    {
+                      "content": "$6\\sqrt{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\sqrt{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 60°$ et $BC = 12$ cm. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle est $60°$, $[BC]$ est l'hypoténuse connue et $[AB]$ est l'adjacent cherché. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus : $\\cos 60° = \\dfrac{AB}{BC}$. Étape 3 — Remplacer : $\\dfrac{1}{2} = \\dfrac{AB}{12}$. Étape 4 — Calculer : $AB = 12 \\times \\dfrac{1}{2} = 6$ cm. La proposition $6\\sqrt{3}$ prend $\\dfrac{\\sqrt{3}}{2}$ pour $\\cos 60°$, et 24 cm vient d'une division à la place d'une multiplication.",
+                  "answers": [
+                    {
+                      "content": "6 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\sqrt{3}$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $AB = 3\\sqrt{3}$ cm. Quelle est la longueur $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : l'angle est $30°$, $[AB]$ est l'adjacent connu et $[AC]$ est l'opposé cherché. Étape 2 — Choisir : la tangente : $\\tan 30° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $\\dfrac{\\sqrt{3}}{3} = \\dfrac{AC}{3\\sqrt{3}}$. Étape 4 — Calculer : $AC = 3\\sqrt{3} \\times \\dfrac{\\sqrt{3}}{3} = \\dfrac{3 \\times 3}{3} = 3$ cm, car $\\sqrt{3} \\times \\sqrt{3} = 3$. La proposition 9 cm vient de $\\tan 30° = \\sqrt{3}$ (valeur de $\\tan 60°$).",
+                  "answers": [
+                    {
+                      "content": "9 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3\\sqrt{3}}{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on compare avec les valeurs exactes de la fiche. Étape 2 — Choisir : pour chaque égalité, on lit l'angle et le rapport concernés. Étape 3 — Remplacer : $\\sin 30° = \\dfrac{1}{2}$ et $\\cos 60° = \\dfrac{1}{2}$ sont exactes (on a $\\sin 30° = \\cos 60°$). Les trois autres sont fausses, car $\\cos 30° = \\dfrac{\\sqrt{3}}{2}$ (erreur d'échange 30°/60°), $\\tan 45° = 1$ ($\\dfrac{\\sqrt{2}}{2}$ est le cosinus et le sinus de $45°$) et $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$ (et non $\\dfrac{1}{2}$).",
+                  "answers": [
+                    {
+                      "content": "$\\sin 30° = \\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos 30° = \\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos 60° = \\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan 45° = \\dfrac{\\sqrt{2}}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin 60° = \\dfrac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\sin 45° = \\cos 45°$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'angle est $45°$. Étape 2 — Choisir : on compare le sinus et le cosinus de cet angle. Étape 3 — Remplacer par les valeurs exactes : $\\sin 45° = \\dfrac{\\sqrt{2}}{2}$ et $\\cos 45° = \\dfrac{\\sqrt{2}}{2}$. Ces deux nombres sont égaux, donc $\\tan 45° = \\dfrac{\\sin 45°}{\\cos 45°} = 1$. Dans un triangle rectangle avec un angle de $45°$, l'autre angle aigu vaut aussi $45°$ : les deux côtés de l'angle droit sont égaux. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer avec les valeurs exactes de 30°, 45° et 60°",
+              "statement": "Dans cet exercice, tu calcules des longueurs avec les valeurs exactes des angles remarquables, selon la méthode de la fiche. Dans chaque question, le triangle ABC est rectangle en A.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Repère le côté connu et le côté cherché par rapport à l'angle, puis remplace le rapport par sa valeur exacte : plus l'angle est petit, plus son sinus est petit.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 60°$ et $AB = 5$ cm. Quelle est la longueur $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : angle $60°$, $[AB]$ est l'adjacent connu et $[BC]$ est l'hypoténuse cherchée. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus. Étape 3 — Remplacer : $\\cos 60° = \\dfrac{1}{2}$, donc $\\dfrac{1}{2} = \\dfrac{5}{BC}$. Étape 4 — Calculer : $BC = 5 \\times 2 = 10$ cm. La réponse 2,5 cm multiplie $AB$ par $\\cos 60°$ au lieu de diviser par $\\cos 60°$. La réponse $5\\sqrt{3}$ cm utilise la tangente, qui donne le côté opposé $AC$ et non l'hypoténuse. La réponse $\\dfrac{5\\sqrt{3}}{2}$ cm remplace le cosinus par $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$.",
+                  "answers": [
+                    {
+                      "content": "10 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "2,5 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\sqrt{3}}{2}$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 45°$ et $BC = 10$ cm. Calcule $AB$, arrondi au centième.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : angle $45°$, $[BC]$ est l'hypoténuse connue et $[AB]$ est l'adjacent cherché. Étape 2 — Choisir : le cosinus, $\\cos 45° = \\dfrac{AB}{BC}$. Étape 3 — Remplacer : $\\cos 45° = \\dfrac{\\sqrt{2}}{2}$, donc $AB = 10 \\times \\dfrac{\\sqrt{2}}{2}$. Étape 4 — Calculer : $AB = 5\\sqrt{2} \\approx 7{,}07$ cm. Trouver $10$ oublie de multiplier par $\\cos 45°$ ; trouver $5$ prend $\\dfrac{1}{2}$, la valeur de $\\cos 60°$ ; trouver $14{,}14$ divise par $\\cos 45°$ au lieu de multiplier.",
+                  "unit": "cm",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "7,07",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $AC = 5$ cm. Quelle est la longueur $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : angle $30°$, $[AC]$ est l'opposé connu et $[AB]$ est l'adjacent cherché. Étape 2 — Choisir : opposé et adjacent, donc la tangente, $\\tan 30° = \\dfrac{AC}{AB}$. Étape 3 — Remplacer : $\\dfrac{\\sqrt{3}}{3} = \\dfrac{5}{AB}$. Étape 4 — Calculer : $AB = 5 \\times \\dfrac{3}{\\sqrt{3}} = \\dfrac{15}{\\sqrt{3}} = 5\\sqrt{3}$ cm. La réponse $\\dfrac{5\\sqrt{3}}{3}$ cm multiplie $5$ par $\\tan 30°$ au lieu de diviser par $\\tan 30°$. La réponse 10 cm calcule l'hypoténuse $BC$ avec le sinus, alors qu'on cherche l'adjacent $AB$. La réponse $\\dfrac{5}{2}$ cm multiplie $5$ par $\\sin 30° = \\dfrac{1}{2}$, ce qui ne relie pas opposé et adjacent.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5\\sqrt{3}}{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\sqrt{3}$ cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un triangle rectangle qui a un angle de $60°$, le côté adjacent à cet angle mesure la moitié de l'hypoténuse.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : angle $60°$, on compare le côté adjacent et l'hypoténuse. Étape 2 — Choisir : adjacent et hypoténuse, donc le cosinus. Étape 3 — Remplacer : $\\cos 60° = \\dfrac{1}{2}$. Étape 4 — Calculer : $\\dfrac{\\text{adjacent}}{\\text{hypoténuse}} = \\dfrac{1}{2}$, donc l'adjacent est la moitié de l'hypoténuse. Répondre Faux vient de l'erreur de la fiche : échanger les valeurs de $30°$ et de $60°$ en pensant que $\\cos 60° = \\dfrac{\\sqrt{3}}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un triangle rectangle ayant un angle de 45°, la tangente de cet angle vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : angle remarquable de $45°$ ; on cherche sa tangente. Étape 2 — Choisir : la tangente relie l'opposé et l'adjacent, qui sont égaux dans ce triangle. Étape 3 — Remplacer : la valeur exacte à connaître est $\\tan 45° = 1$. Étape 4 — Calculer : opposé et adjacent égaux donnent un quotient de $1$. Répondre $\\dfrac{\\sqrt{2}}{2}$ donne la valeur du cosinus et du sinus de $45°$, pas celle de la tangente.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 30°$ et $BC = 12$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : angle $30°$, $[BC] = 12$ est l'hypoténuse, $[AC]$ est l'opposé et $[AB]$ est l'adjacent. Étape 2 — Choisir : sinus pour $AC$, cosinus pour $AB$. Étape 3 — Remplacer : $\\sin 30° = \\dfrac{1}{2}$ et $\\cos 30° = \\dfrac{\\sqrt{3}}{2}$. Étape 4 — Calculer : $AC = 12 \\times \\dfrac{1}{2} = 6$ cm et $AB = 12 \\times \\dfrac{\\sqrt{3}}{2} = 6\\sqrt{3}$ cm. La réponse $AC = 6\\sqrt{3}$ cm échange les valeurs de $30°$ et de $60°$ : $AC$ est opposé à $30°$, donc $AC = 12 \\times \\dfrac{1}{2}$. La réponse $AB = 6$ cm utilise $\\sin 30°$ pour le côté adjacent alors qu'il faut le cosinus.",
+                  "answers": [
+                    {
+                      "content": "$AC = 6\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AC = 6$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB = 6$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB = 6\\sqrt{3}$ cm",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Le triangle $ABC$ est rectangle en $A$, avec $\\widehat{B} = 60°$ et $BC = 20$ cm.",
             "questions": [
@@ -1827,6 +2314,1546 @@
                 {
                   "content": "Faux",
                   "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Les savoirs de base : relations métriques dans le triangle rectangle, cosinus, sinus et tangente, relation cos² + sin² = 1, valeurs exactes de 30°, 45° et 60°.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans le triangle $ABC$ rectangle en $A$, $H$ est le pied de la hauteur issue de $A$. On donne $AB = 6$ cm, $AC = 8$ cm et $BC = 10$ cm, comme sur la figure. On cherche $BH$, $HC$ et $AH$.",
+              "exercise_type": "evaluation",
+              "figure": "hauteur-triangle-rectangle",
+              "hint": "Pour chaque longueur, choisis la relation qui contient la longueur cherchée et des longueurs connues.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AB = 6$ cm et $BC = 10$ cm. Quelle relation permet de calculer $BH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté de l'angle droit $[AB]$ est au carré ; il est égal à sa projection $BH$ sur l'hypoténuse fois l'hypoténuse entière $BC$, d'où $AB^2 = BH \\times BC$ (relation métrique du triangle rectangle). La réponse $AB^2 = BH \\times HC$ prend $HC$ au lieu de l'hypoténuse entière $BC$ : $HC$ est inconnue ici. La réponse $AB^2 = CH \\times CB$ mélange les deux côtés de l'angle droit : cette relation donne $AC^2$ et non $AB^2$. La réponse $AB = BH \\times BC$ oublie le carré sur $AB$.",
+                  "answers": [
+                    {
+                      "content": "$AB^2 = BH \\times HC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB^2 = BH \\times BC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB^2 = CH \\times CB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB = BH \\times BC$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AB = 6$ cm et $BC = 10$ cm. Calcule $BH$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'angle droit en $A$, l'hypoténuse $[BC]$ et le point $H$ sur $[BC]$. 2. On choisit la relation métrique $AB^2 = BH \\times BC$. 3. On remplace : $6^2 = BH \\times 10$, soit $36 = 10 \\times BH$. 4. On calcule : $BH = 36 \\div 10 = 3{,}6$ cm. L'erreur tentante $BH = 6 \\times 10 = 60$ oublie que $AB$ est au carré et que $BH$ est à isoler.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AB = 6$ cm, $AC = 8$ cm et $BC = 10$ cm. Calcule $AH$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'angle droit en $A$, l'hypoténuse $[BC]$ et la hauteur $[AH]$. 2. On choisit la relation $AB \\times AC = AH \\times BC$ (produit des côtés de l'angle droit égal à hauteur fois hypoténuse). 3. On remplace : $6 \\times 8 = AH \\times 10$. 4. On calcule : $AH = 48 \\div 10 = 4{,}8$ cm. L'erreur tentante $AH = 10 - 6 = 4$ soustrait des longueurs sans relation valable.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, avec $HB = 3{,}6$ cm et $HC = 6{,}4$ cm. Alors $AH^2 = HB \\times HC$.",
+                  "question_type": "true_false",
+                  "explanation": "La relation $AH^2 = HB \\times HC$ est la relation métrique propre à la hauteur : $AH^2 = 3{,}6 \\times 6{,}4 = 23{,}04$, donc $AH = 4{,}8$ cm. Elle est vraie dans tout triangle rectangle ; l'erreur tentante, croire qu'elle ne marche que pour $AB^2$, est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 6$, $AC = 8$, $BC = 10$ ; $H$ est le pied de la hauteur issue de $A$ avec $BH = 3{,}6$, $HC = 6{,}4$ et $AH = 4{,}8$. Laquelle de ces égalités est fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : on teste chaque égalité avec les nombres. $AH^2 = 4{,}8^2 = 23{,}04$ alors que $BH \\times BC = 3{,}6 \\times 10 = 36$ : l'égalité est fausse, car $AH^2$ s'écrit $HB \\times HC$ et non $BH \\times BC$. La réponse $AC^2 = CH \\times CB$ est vraie : $64 = 6{,}4 \\times 10$. La réponse $AB \\times AC = AH \\times BC$ est vraie : $48 = 4{,}8 \\times 10$. La réponse $BC^2 = AB^2 + AC^2$ est vraie : $100 = 36 + 64$.",
+                  "answers": [
+                    {
+                      "content": "$AH^2 = BH \\times BC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AC^2 = CH \\times CB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB \\times AC = AH \\times BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$BC^2 = AB^2 + AC^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Le triangle $ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. On étudie l'angle aigu $\\widehat{B}$, marqué sur la figure.",
+              "exercise_type": "evaluation",
+              "figure": "cotes-triangle-rectangle",
+              "hint": "Repère d'abord l'hypoténuse, le côté adjacent et le côté opposé à l'angle $\\widehat{B}$.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$. Par rapport à l'angle aigu $\\widehat{B}$, comment s'appelle le côté $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté $[AB]$ touche le sommet $B$ sans être l'hypoténuse : c'est le côté adjacent à $\\widehat{B}$. L'hypoténuse est $[BC]$, en face de l'angle droit. La réponse le côté opposé confond avec $[AC]$, qui est en face de $\\widehat{B}$. La réponse l'hypoténuse confond avec $[BC]$, qui est en face de l'angle droit.",
+                  "answers": [
+                    {
+                      "content": "le côté opposé",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'hypoténuse",
+                      "correct": false
+                    },
+                    {
+                      "content": "le côté adjacent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. Calcule $\\cos \\widehat{B}$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'adjacent $AB = 8$ et l'hypoténuse $BC = 10$. 2. On choisit le cosinus. 3. On écrit $\\cos \\widehat{B} = \\dfrac{AB}{BC}$. 4. On calcule : $\\dfrac{8}{10} = 0{,}8$. L'erreur tentante $\\dfrac{10}{8} = 1{,}25$ inverse la fraction et dépasse 1.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. Alors $\\sin \\widehat{B}$ vaut ___ (écriture décimale).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. On repère l'opposé $AC = 6$ et l'hypoténuse $BC = 10$. 2. On choisit le sinus. 3. On écrit $\\sin \\widehat{B} = \\dfrac{AC}{BC}$. 4. On calcule : $\\dfrac{6}{10} = 0{,}6$. L'erreur tentante $0{,}8$ est le cosinus, obtenu avec l'adjacent.",
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    },
+                    {
+                      "content": "3/5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 8$ cm, $AC = 6$ cm et $BC = 10$ cm. Quelle fraction vaut $\\tan \\widehat{B}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La tangente relie l'opposé à l'adjacent : $\\tan \\widehat{B} = \\dfrac{AC}{AB} = \\dfrac{6}{8} = \\dfrac{3}{4}$ (définition de la tangente). La réponse $\\dfrac{4}{3}$ inverse l'opposé et l'adjacent. La réponse $\\dfrac{4}{5}$ est le cosinus $\\dfrac{AB}{BC}$ et non la tangente. La réponse $\\dfrac{3}{5}$ est le sinus $\\dfrac{AC}{BC}$ et non la tangente.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'angle $\\widehat{B}$ de ce triangle ($AB = 8$ cm, $AC = 6$ cm, $BC = 10$ cm), on a $\\cos^2 \\widehat{B} + \\sin^2 \\widehat{B} = 1$.",
+                  "question_type": "true_false",
+                  "explanation": "On calcule : $\\cos^2 \\widehat{B} + \\sin^2 \\widehat{B} = 0{,}8^2 + 0{,}6^2 = 0{,}64 + 0{,}36 = 1$. La relation est vraie pour tout angle aigu ; l'erreur tentante $0{,}8 + 0{,}6 = 1{,}4$ oublie les carrés.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "$x$ est un angle aigu tel que $\\cos x = 0{,}28$. On veut calculer les autres rapports trigonométriques de $x$ sans connaître l'angle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise $\\cos^2 x + \\sin^2 x = 1$, puis $\\tan x = \\dfrac{\\sin x}{\\cos x}$.",
+              "questions": [
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = 0{,}28$. Calcule $\\sin^2 x$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère $\\cos x = 0{,}28$ et on cherche $\\sin^2 x$. 2. On écrit $\\cos^2 x + \\sin^2 x = 1$. 3. On remplace : $0{,}28^2 + \\sin^2 x = 1$, soit $0{,}0784 + \\sin^2 x = 1$. 4. On isole : $\\sin^2 x = 1 - 0{,}0784 = 0{,}9216$. L'erreur tentante $1 - 0{,}28 = 0{,}72$ oublie le carré.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0,9216",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\cos x = 0{,}28$. Alors $\\sin x$ vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. On part de $\\sin^2 x = 0{,}9216$. 2. L'angle est aigu, donc $\\sin x$ est positif. 3. On prend la racine carrée positive : $\\sin x = \\sqrt{0{,}9216} = 0{,}96$. L'erreur tentante $0{,}9216$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "0,96",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu avec $\\cos x = 0{,}28$ et $\\sin x = 0{,}96$. Que vaut $\\tan x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On utilise $\\tan x = \\dfrac{\\sin x}{\\cos x} = \\dfrac{0{,}96}{0{,}28} = \\dfrac{96}{28} = \\dfrac{24}{7}$. La réponse $\\dfrac{7}{24}$ inverse le quotient : la tangente est $\\dfrac{\\sin x}{\\cos x}$. La réponse $0{,}2688$ multiplie le sinus et le cosinus au lieu de les diviser. La réponse $0{,}68$ soustrait $0{,}28$ à $0{,}96$ au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{7}{24}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}2688$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}68$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{24}{7}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle aigu $x$ vérifie $\\cos x = 0{,}28$ et $\\sin x = 0{,}72$.",
+                  "question_type": "true_false",
+                  "explanation": "Pour un angle aigu, $\\cos^2 x + \\sin^2 x$ doit valoir $1$. Ici $0{,}28^2 + 0{,}72^2 = 0{,}0784 + 0{,}5184 = 0{,}5968$, qui est différent de $1$. L'erreur tentante est de croire que $0{,}28 + 0{,}72 = 1$ suffit : les carrés sont indispensables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu avec $\\cos x = 0{,}28$ et $\\sin x = 0{,}96$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : $\\tan x = \\dfrac{0{,}96}{0{,}28} = \\dfrac{24}{7}$ (vrai) et $\\sin^2 x = 0{,}96^2 = 0{,}9216$ (vrai), ce qui est cohérent avec $\\cos^2 x + \\sin^2 x = 0{,}0784 + 0{,}9216 = 1$. La réponse $\\cos^2 x = 0{,}28$ oublie d'élever $0{,}28$ au carré : $\\cos^2 x = 0{,}0784$. La réponse $\\sin x = 1 - 0{,}28$ oublie les carrés : $1 - 0{,}28 = 0{,}72$, ce n'est pas $0{,}96$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos^2 x = 0{,}28$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan x = \\dfrac{24}{7}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin x = 1 - 0{,}28$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin^2 x = 0{,}9216$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un poteau vertical $AC$ est planté en $A$ sur un sol horizontal. Un hauban relie son sommet $C$ au point $B$ du sol. Le triangle $ABC$ est rectangle en $A$, l'angle $\\widehat{B}$ mesure $60°$, $AB = 4$ m et $BC = 8$ m, comme sur la figure.",
+              "exercise_type": "evaluation",
+              "figure": "poteau-et-hauban",
+              "hint": "Rappelle-toi les valeurs exactes : $\\sin 60°$, $\\cos 60°$, $\\tan 60°$, et le fait que $\\cos 60° = \\sin 30°$.",
+              "questions": [
+                {
+                  "content": "Que vaut $\\sin 60°$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La valeur exacte à connaître est $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$. On la distingue de $\\cos 60° = \\dfrac{1}{2}$ : plus l'angle est grand, plus son sinus est grand. La réponse $\\dfrac{1}{2}$ est $\\cos 60°$ (et $\\sin 30°$), pas $\\sin 60°$. La réponse $\\dfrac{\\sqrt{2}}{2}$ est la valeur de $\\sin 45°$. La réponse $\\sqrt{3}$ est $\\tan 60°$, pas $\\sin 60°$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt{3}}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt{2}}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 60°$ et $AB = 4$ m. Calcule $AC$, arrondi au dixième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'angle $60°$, l'adjacent connu $AB = 4$ et l'opposé cherché $AC$. 2. On choisit la tangente : $\\tan 60° = \\dfrac{AC}{AB}$. 3. On remplace : $\\sqrt{3} = \\dfrac{AC}{4}$. 4. On calcule : $AC = 4\\sqrt{3} \\approx 6{,}9$ m. L'erreur tentante $AC = 4$ utilise $\\tan 45° = 1$.",
+                  "unit": "m",
+                  "tolerance": 0.05,
+                  "answers": [
+                    {
+                      "content": "6,9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a l'égalité $\\cos 60° = \\sin 30°$.",
+                  "question_type": "true_false",
+                  "explanation": "Les deux valeurs exactes sont égales à $\\dfrac{1}{2}$ : $\\cos 60° = \\sin 30°$. C'est l'astuce de la fiche ; l'erreur tentante est de croire que $\\cos 60° = \\sin 60°$, ce qui est faux car $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle $ABC$ est rectangle en $A$ et $\\widehat{B} = 60°$. L'angle $\\widehat{C}$ mesure ___ degrés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Dans un triangle, la somme des angles est $180°$. Ici $\\widehat{A} = 90°$ et $\\widehat{B} = 60°$, donc $\\widehat{C} = 180° - 90° - 60° = 30°$. L'erreur tentante $60°$ recopie l'angle $\\widehat{B}$.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = 60°$, $AB = 4$ m, $AC = 4\\sqrt{3}$ m et $BC = 8$ m. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $\\widehat{B} = 60°$ : $\\sin 60° = \\dfrac{\\text{opposé}}{\\text{hypoténuse}} = \\dfrac{4\\sqrt{3}}{8} = \\dfrac{\\sqrt{3}}{2}$ et $\\cos 60° = \\dfrac{\\text{adjacent}}{\\text{hypoténuse}} = \\dfrac{4}{8} = \\dfrac{1}{2}$ : ces deux égalités sont vraies. La réponse $\\tan 60° = \\dfrac{AB}{AC}$ inverse l'opposé et l'adjacent : $\\tan 60° = \\dfrac{AC}{AB} = \\sqrt{3}$. La réponse $\\cos 60° = \\dfrac{AC}{BC}$ prend l'opposé avec le cosinus : $\\dfrac{AC}{BC} = \\dfrac{\\sqrt{3}}{2}$, c'est le sinus.",
+                  "answers": [
+                    {
+                      "content": "$\\cos 60° = \\dfrac{AB}{BC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan 60° = \\dfrac{AB}{AC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos 60° = \\dfrac{AC}{BC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin 60° = \\dfrac{AC}{BC}$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Problèmes de la vie courante",
+          "notions": "Situations de la vie courante à Bouaké, Yopougon, Korhogo et Grand-Bassam : échelle, terrain, pylône, rampe d'accès, avec Pythagore, relations métriques et trigonométrie.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Bouaké, un maçon appuie une échelle de 6,5 m contre un mur vertical, sur un sol horizontal. Le pied de l'échelle est à 2,5 m du mur. On note P le pied du mur, S le pied de l'échelle et T le haut de l'échelle : le triangle PST est rectangle en P.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Repère l'hypoténuse : c'est l'échelle, le côté en face de l'angle droit.",
+              "questions": [
+                {
+                  "content": "Une échelle de $6{,}5$ m est appuyée contre un mur vertical, son pied $S$ est à $2{,}5$ m du pied $P$ du mur, le sol est horizontal. À quelle hauteur $PT$ du sol le haut de l'échelle touche-t-il le mur ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Le triangle $PST$ est rectangle en $P$, l'hypoténuse est l'échelle $ST = 6{,}5$. 2. On applique le théorème de Pythagore : $ST^2 = PS^2 + PT^2$. 3. On remplace : $42{,}25 = 6{,}25 + PT^2$. 4. On calcule : $PT^2 = 36$, donc $PT = 6$ m. L'erreur tentante $6{,}5 - 2{,}5 = 4$ soustrait les longueurs au lieu des carrés.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $PST$ rectangle en $P$ avec $PS = 2{,}5$ m, $PT = 6$ m et $ST = 6{,}5$ m, que vaut $\\cos \\widehat{S}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté $[PS]$ est adjacent à $\\widehat{S}$ et $[ST]$ est l'hypoténuse : $\\cos \\widehat{S} = \\dfrac{PS}{ST} = \\dfrac{2{,}5}{6{,}5} = \\dfrac{5}{13}$. La réponse $\\dfrac{13}{5}$ inverse la fraction : le cosinus ne peut pas dépasser 1. La réponse $\\dfrac{12}{13}$ est le sinus $\\dfrac{PT}{ST}$ et non le cosinus. La réponse $\\dfrac{5}{12}$ est $\\dfrac{PS}{PT}$, c'est l'inverse de la tangente.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5}{13}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{13}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{12}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{12}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $PST$ rectangle en $P$ avec $PT = 6$ m et $ST = 6{,}5$ m, calcule $\\sin \\widehat{S}$, arrondi au centième.",
+                  "question_type": "numeric",
+                  "explanation": "Le côté $[PT]$ est opposé à $\\widehat{S}$ et $[ST]$ est l'hypoténuse : $\\sin \\widehat{S} = \\dfrac{PT}{ST} = \\dfrac{6}{6{,}5} = \\dfrac{12}{13} \\approx 0{,}92$. L'erreur tentante $\\dfrac{2{,}5}{6{,}5} \\approx 0{,}38$ est le cosinus.",
+                  "tolerance": 0.005,
+                  "answers": [
+                    {
+                      "content": "0,92",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'échelle fait un angle de $60°$ avec le sol (on sait que $\\cos \\widehat{S} = \\dfrac{5}{13}$).",
+                  "question_type": "true_false",
+                  "explanation": "Si l'angle était de $60°$, on aurait $\\cos 60° = \\dfrac{1}{2} = 0{,}5$. Or $\\cos \\widehat{S} = \\dfrac{5}{13} \\approx 0{,}38$, donc l'angle n'est pas $60°$ (il est plus grand). L'erreur tentante est de dire « l'échelle est penchée, donc $60°$ » sans calcul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $PST$ rectangle en $P$ avec $PS = 2{,}5$ m, $PT = 6$ m et $ST = 6{,}5$ m, que vaut $\\tan \\widehat{S}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La tangente relie l'opposé $PT$ à l'adjacent $PS$ : $\\tan \\widehat{S} = \\dfrac{PT}{PS} = \\dfrac{6}{2{,}5} = \\dfrac{12}{5}$. La réponse $\\dfrac{5}{12}$ inverse l'opposé et l'adjacent. La réponse $\\dfrac{12}{13}$ est le sinus $\\dfrac{PT}{ST}$ et non la tangente. La réponse $\\dfrac{5}{13}$ est le cosinus $\\dfrac{PS}{ST}$ et non la tangente.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{12}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{12}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{5}{13}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Yopougon, un terrain triangulaire ABC est rectangle en A, avec AB = 30 m, AC = 40 m et BC = 50 m. Un sentier [AH] part de l'angle droit A et rejoint la route [BC] en H, perpendiculairement à la route. Le propriétaire fait daller ce sentier pour 1 500 FCFA le mètre.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le point H est le pied de la hauteur issue de A : utilise les relations métriques.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 30$ m, $AC = 40$ m et $BC = 50$ m ; $H$ est le pied de la hauteur issue de $A$. Calcule la longueur du sentier $AH$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'angle droit en $A$, l'hypoténuse $[BC]$ et la hauteur $[AH]$. 2. On choisit la relation $AB \\times AC = AH \\times BC$. 3. On remplace : $30 \\times 40 = AH \\times 50$. 4. On calcule : $AH = 1\\,200 \\div 50 = 24$ m. L'erreur tentante $AH = 50 - 30 = 20$ soustrait des longueurs sans relation valable.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 30$ m et $BC = 50$ m ; $H$ est le pied de la hauteur issue de $A$. Quelle est la longueur $BH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. On repère l'hypoténuse $[BC] = 50$. 2. On choisit $AB^2 = BH \\times BC$. 3. On remplace : $900 = BH \\times 50$. 4. On calcule : $BH = 900 \\div 50 = 18$ m. La réponse 32 m confond $BH$ avec $HC$ : $32$ est la projection de $[AC]$. La réponse $\\sqrt{1500}$ m écrit $BH^2 = AB \\times BC$ au lieu de $AB^2 = BH \\times BC$. La réponse 900 m s'arrête à $AB^2$ sans diviser par l'hypoténuse $BC$.",
+                  "answers": [
+                    {
+                      "content": "18 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "32 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{1500}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "900 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AC = 40$ m et $BC = 50$ m ; $H$ est le pied de la hauteur issue de $A$. Alors $HC$ vaut ___ m.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : 1. On repère l'hypoténuse $[BC] = 50$ et la projection $HC$. 2. On choisit $AC^2 = CH \\times CB$. 3. On remplace : $1\\,600 = HC \\times 50$. 4. On calcule : $HC = 1\\,600 \\div 50 = 32$ m. L'erreur tentante $18$ est $BH$, l'autre projection.",
+                  "answers": [
+                    {
+                      "content": "32",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sentier $[AH]$ mesure $24$ m. Le propriétaire paie $1\\,500$ FCFA par mètre dallé. Quel est le coût total ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : le coût est la longueur multipliée par le prix du mètre : $24 \\times 1\\,500 = 36\\,000$ FCFA. L'erreur tentante $27\\,000$ FCFA utilise $18$ m, qui est $BH$ et non $AH$.",
+                  "unit": "FCFA",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "36000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce terrain, $AH^2 = HB \\times HC$ avec $HB = 18$ m et $HC = 32$ m, donc $AH = 24$ m.",
+                  "question_type": "true_false",
+                  "explanation": "La relation $AH^2 = HB \\times HC$ s'applique : $18 \\times 32 = 576$ et $\\sqrt{576} = 24$ m. Elle redonne bien la valeur trouvée avec $AB \\times AC = AH \\times BC$. L'erreur tentante est de croire que $AH = 18 + 32 = 50$, qui est la longueur $BC$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Près de Bouaké, un pylône de télécommunication AM est planté verticalement sur un sol horizontal. Il mesure 12 m de haut. Son sommet M est retenu par un hauban fixé au sol en un point B situé à 9 m du pied A du pylône.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le triangle AMB est rectangle en A : repère l'hypoténuse, l'adjacent et l'opposé à l'angle B.",
+              "questions": [
+                {
+                  "content": "Un pylône vertical $AM$ de $12$ m est retenu par un hauban $MB$ fixé au sol à $9$ m de son pied $A$. Calcule la longueur du hauban $MB$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Le triangle $AMB$ est rectangle en $A$, l'hypoténuse est le hauban $MB$. 2. On applique Pythagore : $MB^2 = AM^2 + AB^2$. 3. On remplace : $MB^2 = 144 + 81$. 4. On calcule : $MB^2 = 225$, donc $MB = 15$ m. L'erreur tentante $12 + 9 = 21$ additionne les longueurs au lieu des carrés.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $AMB$ rectangle en $A$ avec $AB = 9$ m, $AM = 12$ m et $MB = 15$ m, que vaut $\\cos \\widehat{B}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté $[AB]$ est adjacent à $\\widehat{B}$ et $[MB]$ est l'hypoténuse : $\\cos \\widehat{B} = \\dfrac{AB}{MB} = \\dfrac{9}{15} = \\dfrac{3}{5}$. La réponse $\\dfrac{4}{5}$ est le sinus $\\dfrac{AM}{MB}$ et non le cosinus. La réponse $\\dfrac{5}{3}$ inverse la fraction : le cosinus est inférieur à 1. La réponse $\\dfrac{3}{4}$ est $\\dfrac{AB}{AM}$, l'inverse de la tangente.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$\\widehat{B}$ est un angle aigu et $\\cos \\widehat{B} = 0{,}6$. Calcule $\\sin \\widehat{B}$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On connaît $\\cos \\widehat{B} = 0{,}6$. 2. On écrit $\\cos^2 \\widehat{B} + \\sin^2 \\widehat{B} = 1$. 3. On remplace : $0{,}36 + \\sin^2 \\widehat{B} = 1$. 4. On isole : $\\sin^2 \\widehat{B} = 0{,}64$, puis $\\sin \\widehat{B} = 0{,}8$. L'erreur tentante $0{,}4$ calcule $1 - 0{,}6$ sans les carrés.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'angle $\\widehat{B}$ entre le hauban et le sol mesure exactement $60°$ (on sait que $\\cos \\widehat{B} = 0{,}6$).",
+                  "question_type": "true_false",
+                  "explanation": "Si l'angle mesurait $60°$, son cosinus vaudrait $\\cos 60° = 0{,}5$. Or $\\cos \\widehat{B} = 0{,}6$ : l'angle n'est pas $60°$. L'erreur tentante est de croire que « presque $0{,}5$ » suffit pour affirmer une valeur exacte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un second hauban relie le sommet $M$ du pylône (hauteur $12$ m) au sol et fait un angle de $30°$ avec le sol horizontal. Calcule sa longueur.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Le hauban est l'hypoténuse, la hauteur $12$ m est le côté opposé à l'angle de $30°$. 2. On choisit le sinus : $\\sin 30° = \\dfrac{12}{\\text{hauban}}$. 3. On remplace : $\\dfrac{1}{2} = \\dfrac{12}{\\text{hauban}}$. 4. On calcule : hauban $= 12 \\times 2 = 24$ m. L'erreur tentante $6$ m multiplie $12$ par $\\sin 30°$ au lieu de diviser, et $13{,}9$ m utilise $\\cos 30°$ au lieu de $\\sin 30°$.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "La rampe d'accès d'une école de Korhogo est un plan incliné de 8 m de long qui fait un angle de 30° avec le sol horizontal. Le triangle formé par la rampe, le sol et la verticale est rectangle ; la rampe en est l'hypoténuse.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Rappelle-toi $\\sin 30°$, $\\cos 30°$ et $\\sin 45°$.",
+              "questions": [
+                {
+                  "content": "Une rampe de $8$ m fait un angle de $30°$ avec le sol horizontal. À quelle hauteur du sol arrive-t-elle ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. La rampe est l'hypoténuse $8$ m, la hauteur est le côté opposé à l'angle de $30°$. 2. On choisit le sinus : $\\sin 30° = \\dfrac{h}{8}$. 3. On remplace : $\\dfrac{1}{2} = \\dfrac{h}{8}$. 4. On calcule : $h = 8 \\times \\dfrac{1}{2} = 4$ m. L'erreur tentante $4\\sqrt{3}$ utilise $\\sin 30° = \\dfrac{\\sqrt{3}}{2}$, valeur de $\\sin 60°$.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rampe de $8$ m fait un angle de $30°$ avec le sol horizontal. Quelle est la distance exacte parcourue au sol, mesurée à l'horizontale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. La distance au sol est le côté adjacent à l'angle de $30°$ ; la rampe est l'hypoténuse. 2. On choisit le cosinus : $\\cos 30° = \\dfrac{d}{8}$. 3. On remplace : $\\dfrac{\\sqrt{3}}{2} = \\dfrac{d}{8}$. 4. On calcule : $d = 8 \\times \\dfrac{\\sqrt{3}}{2} = 4\\sqrt{3}$ m. La réponse 4 m utilise le sinus au lieu du cosinus : c'est la hauteur. La réponse $\\dfrac{8\\sqrt{3}}{3}$ m utilise $8 \\times \\tan 30°$ au lieu de $8 \\times \\cos 30°$. La réponse $8\\sqrt{3}$ m oublie de diviser par $2$ dans $\\cos 30° = \\dfrac{\\sqrt{3}}{2}$.",
+                  "answers": [
+                    {
+                      "content": "4 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\sqrt{3}$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{8\\sqrt{3}}{3}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\sqrt{3}$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rampe de $8$ m fait un angle de $30°$ avec le sol horizontal. La distance au sol vaut $4\\sqrt{3}$ m. Donne-la arrondie au dixième.",
+                  "question_type": "numeric",
+                  "explanation": "On calcule $4\\sqrt{3} \\approx 4 \\times 1{,}732 = 6{,}93$, soit environ $6{,}9$ m. L'erreur tentante $4 \\times 3 = 12$ oublie que $\\sqrt{3}$ n'est pas $3$.",
+                  "unit": "m",
+                  "tolerance": 0.05,
+                  "answers": [
+                    {
+                      "content": "6,9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec la même rampe de $8$ m, si l'angle passe de $30°$ à $45°$, la hauteur atteinte devient plus grande.",
+                  "question_type": "true_false",
+                  "explanation": "La hauteur est $8 \\times \\sin \\widehat{A}$. Avec $30°$, $\\sin 30° = 0{,}5$ ; avec $45°$, $\\sin 45° = \\dfrac{\\sqrt{2}}{2} \\approx 0{,}71$. Le sinus augmente avec l'angle, donc la hauteur augmente. L'erreur tentante est de croire qu'une rampe plus penchée garde la même hauteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une rampe de $8$ m fait un angle de $45°$ avec le sol horizontal. À quelle hauteur arrive-t-elle ? Arrondis au centième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. La rampe est l'hypoténuse $8$ m, la hauteur est le côté opposé à l'angle de $45°$. 2. On choisit le sinus : $\\sin 45° = \\dfrac{h}{8}$. 3. On remplace : $\\dfrac{\\sqrt{2}}{2} = \\dfrac{h}{8}$. 4. On calcule : $h = 4\\sqrt{2} \\approx 5{,}66$ m. L'erreur tentante $4$ m utilise $\\sin 30° = \\dfrac{1}{2}$.",
+                  "unit": "m",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "5,66",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Raisonner et rédiger : choisir la bonne relation, repérer une erreur, enchaîner des calculs, justifier le choix d'un rapport trigonométrique ou d'une valeur exacte.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "$ABC$ est un triangle rectangle en $A$ et $H$ est le pied de la hauteur issue de $A$. On sait que $AH = 6$ cm et $HB = 4$ cm. On veut calculer $HC$, puis $BC$, puis $AB$ en choisissant à chaque fois la bonne relation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "À chaque étape, la relation choisie doit contenir la longueur cherchée et uniquement des longueurs connues.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AH = 6$ cm et $HB = 4$ cm. Quelle relation permet de calculer $HC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La hauteur $[AH]$ et les deux projections $HB$ et $HC$ sont reliées par $AH^2 = HB \\times HC$ (relation métrique du triangle rectangle) ; elle ne contient que $AH$ et $HB$ connus, et $HC$ cherchée. La réponse $AH^2 = HB \\times BC$ fait intervenir $BC$ qui n'est pas connue, et le second facteur doit être $HC$. La réponse $AH = HB \\times HC$ oublie le carré sur $AH$. La réponse $AB^2 = HB \\times HC$ fait intervenir $AB$ qui n'est pas connue, et ce n'est pas la bonne relation pour $AB$.",
+                  "answers": [
+                    {
+                      "content": "$AH^2 = HB \\times HC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AH^2 = HB \\times BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AH = HB \\times HC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB^2 = HB \\times HC$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $AH = 6$ cm et $HB = 4$ cm. Calcule $HC$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère $H$ sur $[BC]$, $AH = 6$ et $HB = 4$. 2. On choisit $AH^2 = HB \\times HC$. 3. On remplace : $36 = 4 \\times HC$. 4. On calcule : $HC = 36 \\div 4 = 9$ cm. L'erreur tentante $HC = 6 - 4 = 2$ soustrait des longueurs sans relation valable.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $HB = 4$ cm et $HC = 9$ cm. Que vaut $AB^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. On repère $BC = HB + HC = 4 + 9 = 13$ cm. 2. On choisit $AB^2 = BH \\times BC$. 3. On remplace : $AB^2 = 4 \\times 13$. 4. On calcule : $AB^2 = 52$ cm². La réponse 36 cm² remplace $BC$ par $HC$ : c'est $AH^2 = 4 \\times 9$. La réponse 117 cm² calcule $AC^2 = CH \\times CB$ au lieu de $AB^2$. La réponse 13 cm² donne la longueur $BC = 4 + 9$, pas $AB^2$.",
+                  "answers": [
+                    {
+                      "content": "36 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "117 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "13 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "52 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, $HB = 4$ cm et $BC = 13$ cm. On peut affirmer que $AB = \\sqrt{52}$ cm, soit environ $7{,}2$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "On applique $AB^2 = BH \\times BC = 4 \\times 13 = 52$, donc $AB = \\sqrt{52} \\approx 7{,}2$ cm. L'erreur tentante est d'oublier la racine carrée et de répondre $52$ cm.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $H$ est le pied de la hauteur issue de $A$, avec $HB = 4$ cm, $HC = 9$ cm et $BC = 13$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Comme $H$ est sur le segment $[BC]$, $BC = HB + HC = 13$ cm. La relation propre à $AB$ est $AB^2 = BH \\times BC = 52$. Ces deux égalités sont vraies. La réponse $AC^2 = HB \\times BC$ mélange les côtés : la projection de $[AC]$ est $HC$, ce qui donne $AC^2 = HC \\times BC$. La réponse $AB^2 = HB \\times HC$ prend $HC$ au lieu de l'hypoténuse entière $BC$ : on obtiendrait $36$ au lieu de $52$.",
+                  "answers": [
+                    {
+                      "content": "$AC^2 = HB \\times BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$BC = HB + HC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB^2 = HB \\times HC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB^2 = HB \\times BC$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un triangle $ABC$ est rectangle en $A$ avec $AB = 5$ cm, $AC = 12$ cm et $BC = 13$ cm. Trois élèves écrivent des égalités sur l'angle $\\widehat{B}$ ; on veut repérer celles qui sont correctes et expliquer pourquoi les autres sont impossibles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un cosinus ou un sinus d'angle aigu est toujours strictement compris entre 0 et 1.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 5$ cm, $AC = 12$ cm et $BC = 13$ cm. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le cosinus est le quotient du côté adjacent par l'hypoténuse : $\\cos \\widehat{B} = \\dfrac{AB}{BC} = \\dfrac{5}{13}$. L'hypoténuse est toujours en bas de la fraction. La réponse $\\cos \\widehat{B} = \\dfrac{13}{5}$ inverse la fraction : on trouverait plus de 1, impossible pour un cosinus. La réponse $\\cos \\widehat{B} = \\dfrac{12}{13}$ utilise l'opposé $AC$ : c'est la valeur du sinus. La réponse $\\cos \\widehat{B} = \\dfrac{12}{5}$ est la valeur de la tangente, pas du cosinus.",
+                  "answers": [
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{13}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{12}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{5}{13}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = \\dfrac{12}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trouve $\\cos \\widehat{B} = \\dfrac{13}{5}$. Ce résultat est impossible, car le cosinus d'un angle aigu est strictement compris entre $0$ et $1$.",
+                  "question_type": "true_false",
+                  "explanation": "On calcule $\\dfrac{13}{5} = 2{,}6$, qui est supérieur à $1$. Or l'hypoténuse est le plus grand côté, donc adjacent divisé par hypoténuse est inférieur à $1$. Le résultat est impossible : l'élève a inversé la fraction.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 5$ cm, $AC = 12$ cm et $BC = 13$ cm. Quelle égalité est correcte pour l'angle $\\widehat{B}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour tout angle aigu, $\\cos^2 + \\sin^2 = 1$. Vérification : $\\dfrac{25}{169} + \\dfrac{144}{169} = \\dfrac{169}{169} = 1$. La réponse $\\cos \\widehat{B} + \\sin \\widehat{B} = 1$ oublie les carrés : $\\dfrac{5}{13} + \\dfrac{12}{13} = \\dfrac{17}{13}$. La réponse $\\cos \\widehat{B} = 1 - \\sin \\widehat{B}$ est équivalente à la précédente et reste fausse : $1 - \\dfrac{12}{13} = \\dfrac{1}{13}$ et non $\\dfrac{5}{13}$. La réponse $\\tan \\widehat{B} = \\sin \\widehat{B} \\times \\cos \\widehat{B}$ multiplie au lieu de diviser : la tangente est $\\dfrac{\\sin \\widehat{B}}{\\cos \\widehat{B}}$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos^2 \\widehat{B} + \\sin^2 \\widehat{B} = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} + \\sin \\widehat{B} = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos \\widehat{B} = 1 - \\sin \\widehat{B}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan \\widehat{B} = \\sin \\widehat{B} \\times \\cos \\widehat{B}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce triangle ($AB = 5$ cm, $AC = 12$ cm), $\\tan \\widehat{B}$ est le quotient de $AC$ par ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "La tangente est le quotient du côté opposé par le côté adjacent. Pour $\\widehat{B}$, l'opposé est $AC$ et l'adjacent est $AB$ : $\\tan \\widehat{B} = \\dfrac{AC}{AB} = \\dfrac{12}{5}$. L'erreur tentante est de répondre $BC$, l'hypoténuse, qui sert au sinus et au cosinus.",
+                  "answers": [
+                    {
+                      "content": "AB",
+                      "correct": true
+                    },
+                    {
+                      "content": "BA",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lequel ne peut pas être le sinus d'un angle aigu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le sinus d'un angle aigu est strictement compris entre $0$ et $1$. Or $\\dfrac{13}{12} \\approx 1{,}08$ dépasse $1$ : il ne peut pas être un sinus, car l'opposé est plus petit que l'hypoténuse. La réponse $\\dfrac{12}{13}$ est inférieur à 1 : il peut être un sinus (c'est celui de l'angle $\\widehat{B}$). La réponse $0{,}28$ est compris entre 0 et 1 : il peut être un sinus. La réponse $\\dfrac{\\sqrt{3}}{2}$ vaut environ $0{,}87$ et c'est $\\sin 60°$ : il peut être un sinus.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{12}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}28$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt{3}}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{13}{12}$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "$x$ est un angle aigu tel que $\\sin x = 0{,}8$. $ABC$ est un triangle rectangle en $A$ avec $\\widehat{B} = x$ et $BC = 15$ cm. On enchaîne les calculs : $\\cos x$, puis $\\tan x$, puis les côtés du triangle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Enchaîne : relation $\\cos^2 x + \\sin^2 x = 1$, racine carrée, puis $\\tan x = \\dfrac{\\sin x}{\\cos x}$.",
+              "questions": [
+                {
+                  "content": "$x$ est un angle aigu et $\\sin x = 0{,}8$. Quelle égalité donne $\\cos^2 x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $\\cos^2 x + \\sin^2 x = 1$, donc $\\cos^2 x = 1 - \\sin^2 x = 1 - 0{,}8^2$. La réponse $\\cos x = 1 - 0{,}8$ oublie les carrés. La réponse $\\cos^2 x = 1 - 0{,}8$ oublie d'élever $0{,}8$ au carré. La réponse $\\cos^2 x = 0{,}8^2 - 1$ inverse la soustraction et donnerait un nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "$\\cos x = 1 - 0{,}8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos^2 x = 1 - 0{,}8^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos^2 x = 1 - 0{,}8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos^2 x = 0{,}8^2 - 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu et $\\sin x = 0{,}8$. Calcule $\\cos x$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. $\\cos^2 x = 1 - 0{,}8^2 = 1 - 0{,}64 = 0{,}36$. 2. L'angle est aigu : on prend la racine carrée positive. 3. $\\cos x = \\sqrt{0{,}36} = 0{,}6$. L'erreur tentante $0{,}36$ oublie la racine carrée.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$x$ est un angle aigu avec $\\sin x = 0{,}8$ et $\\cos x = 0{,}6$. Calcule $\\tan x$, arrondi au centième.",
+                  "question_type": "numeric",
+                  "explanation": "On utilise $\\tan x = \\dfrac{\\sin x}{\\cos x} = \\dfrac{0{,}8}{0{,}6} = \\dfrac{4}{3} \\approx 1{,}33$. L'erreur tentante $0{,}75$ inverse le quotient.",
+                  "tolerance": 0.005,
+                  "answers": [
+                    {
+                      "content": "1,33",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$, $\\widehat{B} = x$ avec $\\sin x = 0{,}8$, et $BC = 15$ cm. Calcule $AC$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. $[AC]$ est opposé à $\\widehat{B}$ et $[BC]$ est l'hypoténuse. 2. On choisit le sinus : $\\sin x = \\dfrac{AC}{BC}$. 3. On remplace : $0{,}8 = \\dfrac{AC}{15}$. 4. On calcule : $AC = 0{,}8 \\times 15 = 12$ cm. L'erreur tentante $9$ utilise le cosinus ($0{,}6 \\times 15$).",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 9$ cm, $AC = 12$ cm et $BC = 15$ cm. Quelle égalité vérifie ces longueurs ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'hypoténuse $[BC]$ vérifie le théorème de Pythagore : $BC^2 = AB^2 + AC^2$, soit $225 = 81 + 144$. La réponse $BC = AB + AC$ additionne les longueurs : $9 + 12 = 21$ et non $15$. La réponse $BC^2 = AC^2 - AB^2$ soustrait au lieu d'additionner : $144 - 81 = 63$. La réponse $AB^2 = BC^2 + AC^2$ met l'hypoténuse du mauvais côté : $225 + 144 = 369$ et non $81$.",
+                  "answers": [
+                    {
+                      "content": "$BC = AB + AC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$BC^2 = AC^2 - AB^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$BC^2 = AB^2 + AC^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB^2 = BC^2 + AC^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un triangle équilatéral $ABC$ a des côtés de $6$ cm. $H$ est le milieu de $[BC]$. Le triangle $ABH$ est rectangle en $H$, l'angle $\\widehat{B}$ mesure $60°$ et $BH = 3$ cm. On choisit les bons arguments pour calculer $AH$ puis l'aire.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Repère l'angle de 60°, le côté connu $BH$ (adjacent) et le côté cherché $AH$ (opposé).",
+              "questions": [
+                {
+                  "content": "$ABH$ est rectangle en $H$, $\\widehat{B} = 60°$, $BH = 3$ cm et $AB = 6$ cm. Quelle égalité permet de calculer $AH$ à partir de $BH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à $\\widehat{B}$, $[AH]$ est le côté opposé et $[BH]$ le côté adjacent. La tangente relie opposé et adjacent : $\\tan 60° = \\dfrac{AH}{BH}$. La réponse $\\cos 60° = \\dfrac{AH}{BH}$ associe le cosinus à l'opposé : le cosinus relie l'adjacent et l'hypoténuse. La réponse $\\sin 60° = \\dfrac{AH}{BH}$ associe le sinus à $BH$ : le sinus a l'hypoténuse en bas, et $BH$ n'est pas l'hypoténuse. La réponse $\\tan 60° = \\dfrac{BH}{AH}$ inverse l'opposé et l'adjacent.",
+                  "answers": [
+                    {
+                      "content": "$\\tan 60° = \\dfrac{AH}{BH}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos 60° = \\dfrac{AH}{BH}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin 60° = \\dfrac{AH}{BH}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan 60° = \\dfrac{BH}{AH}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABH$ est rectangle en $H$, $\\widehat{B} = 60°$ et $BH = 3$ cm. Quelle est la longueur exacte de $AH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. L'angle est $60°$, l'adjacent connu est $BH = 3$, l'opposé cherché est $AH$. 2. On choisit la tangente : $\\tan 60° = \\sqrt{3}$. 3. On remplace : $\\sqrt{3} = \\dfrac{AH}{3}$. 4. On calcule : $AH = 3\\sqrt{3}$ cm. La réponse $3\\sqrt{2}$ cm utilise une valeur propre à $45°$ au lieu de celle de $60°$. La réponse $\\sqrt{3}$ cm oublie de multiplier par $BH = 3$. La réponse $\\dfrac{3}{2}$ cm multiplie $3$ par $\\cos 60° = \\dfrac{1}{2}$, ce qui ne relie pas opposé et adjacent.",
+                  "answers": [
+                    {
+                      "content": "$3\\sqrt{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{2}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\sqrt{3}$ cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle équilatéral $ABC$ a pour base $BC = 6$ cm et pour hauteur $AH = 3\\sqrt{3}$ cm. Calcule son aire, arrondie au dixième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. L'aire d'un triangle est $\\dfrac{\\text{base} \\times \\text{hauteur}}{2}$. 2. On remplace : $\\dfrac{6 \\times 3\\sqrt{3}}{2}$. 3. On calcule : $9\\sqrt{3} \\approx 15{,}6$ cm². L'erreur tentante $18\\sqrt{3}$ oublie de diviser par $2$.",
+                  "unit": "cm²",
+                  "tolerance": 0.05,
+                  "answers": [
+                    {
+                      "content": "15,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABH$ rectangle en $H$ avec $BH = 3$ cm et $AB = 6$ cm, on a $\\sin \\widehat{BAH} = \\dfrac{BH}{AB} = \\dfrac{1}{2}$, ce qui donne un angle de $30°$.",
+                  "question_type": "true_false",
+                  "explanation": "Pour l'angle $\\widehat{BAH}$, le côté $[BH]$ est opposé et $[AB]$ est l'hypoténuse : $\\sin = \\dfrac{3}{6} = \\dfrac{1}{2}$. Or $\\sin 30° = \\dfrac{1}{2}$, donc l'angle vaut $30°$, ce qui est cohérent avec $90° - 60° = 30°$. L'erreur tentante est de confondre avec $\\sin 60° = \\dfrac{\\sqrt{3}}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABH$ est rectangle en $H$, $\\widehat{B} = 60°$, $BH = 3$ cm, $AH = 3\\sqrt{3}$ cm et $AB = 6$ cm. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $\\widehat{B} = 60°$ : $\\sin 60° = \\dfrac{AH}{AB} = \\dfrac{3\\sqrt{3}}{6} = \\dfrac{\\sqrt{3}}{2}$ et $\\cos 60° = \\dfrac{BH}{AB} = \\dfrac{3}{6} = \\dfrac{1}{2}$ : les deux égalités sont vraies. La réponse $\\tan 60° = \\dfrac{BH}{AH}$ inverse l'opposé et l'adjacent : $\\tan 60° = \\sqrt{3}$. La réponse $\\cos 60° = \\dfrac{AH}{AB}$ prend l'opposé avec le cosinus : $\\dfrac{AH}{AB} = \\dfrac{\\sqrt{3}}{2}$, c'est le sinus.",
+                  "answers": [
+                    {
+                      "content": "$\\cos 60° = \\dfrac{BH}{AB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\tan 60° = \\dfrac{BH}{AH}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos 60° = \\dfrac{AH}{AB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin 60° = \\dfrac{AH}{AB}$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du triangle rectangle",
+          "notions": "Bilan de toutes les notions : relations métriques, cosinus, sinus et tangente, relation entre les rapports, angles de 30°, 45° et 60°.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le pignon d'un hangar est un triangle isocèle $ABC$ de sommet $A$, avec $BC = 12$ m. $H$ est le milieu de $[BC]$ et $[AH]$ est la hauteur verticale. Le toit fait un angle de $30°$ avec l'horizontale : $\\widehat{ABC} = 30°$. Le triangle $AHB$ est rectangle en $H$.",
+              "exercise_type": "evaluation",
+              "figure": "toit-pignon",
+              "hint": "Dans le triangle $AHB$ rectangle en $H$, $HB = 6$ m est l'adjacent de l'angle de $30°$.",
+              "questions": [
+                {
+                  "content": "$AHB$ est rectangle en $H$, $\\widehat{B} = 30°$ et $HB = 6$ m. Quelle égalité permet de calculer $AH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à $\\widehat{B}$, $[AH]$ est opposé et $[HB]$ est adjacent. La tangente relie opposé et adjacent : $\\tan 30° = \\dfrac{AH}{HB}$. La réponse $\\cos 30° = \\dfrac{AH}{HB}$ associe le cosinus à l'opposé $AH$ : le cosinus relie l'adjacent et l'hypoténuse. La réponse $\\sin 30° = \\dfrac{AH}{HB}$ met $HB$ à la place de l'hypoténuse. La réponse $\\tan 30° = \\dfrac{HB}{AH}$ inverse l'opposé et l'adjacent.",
+                  "answers": [
+                    {
+                      "content": "$\\cos 30° = \\dfrac{AH}{HB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan 30° = \\dfrac{AH}{HB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin 30° = \\dfrac{AH}{HB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan 30° = \\dfrac{HB}{AH}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$AHB$ est rectangle en $H$, $\\widehat{B} = 30°$ et $HB = 6$ m. Quelle est la hauteur exacte $AH$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. L'angle est $30°$, l'adjacent connu est $HB = 6$, l'opposé cherché est $AH$. 2. On choisit la tangente. 3. On remplace : $\\tan 30° = \\dfrac{\\sqrt{3}}{3}$, donc $\\dfrac{\\sqrt{3}}{3} = \\dfrac{AH}{6}$. 4. On calcule : $AH = 6 \\times \\dfrac{\\sqrt{3}}{3} = 2\\sqrt{3}$ m. La réponse $6\\sqrt{3}$ m utilise $\\tan 60° = \\sqrt{3}$ au lieu de $\\tan 30°$. La réponse 3 m multiplie $6$ par $\\sin 30° = \\dfrac{1}{2}$, ce qui ne relie pas opposé et adjacent. La réponse $\\dfrac{\\sqrt{3}}{3}$ m oublie de multiplier par $HB = 6$.",
+                  "answers": [
+                    {
+                      "content": "$2\\sqrt{3}$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6\\sqrt{3}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt{3}}{3}$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$AHB$ est rectangle en $H$ avec $HB = 6$ m et $AH = 2\\sqrt{3}$ m. Calcule le chevron $AB$, arrondi au dixième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. $[AB]$ est l'hypoténuse du triangle $AHB$. 2. On applique Pythagore : $AB^2 = AH^2 + HB^2$. 3. On remplace : $AB^2 = 12 + 36 = 48$. 4. On calcule : $AB = \\sqrt{48} = 4\\sqrt{3} \\approx 6{,}9$ m. L'erreur tentante $AB = 6 + 3{,}46 = 9{,}46$ additionne les longueurs.",
+                  "unit": "m",
+                  "tolerance": 0.05,
+                  "answers": [
+                    {
+                      "content": "6,9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pignon $ABC$ a pour base $BC = 12$ m et pour hauteur $AH = 2\\sqrt{3}$ m. Calcule son aire, arrondie au dixième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Aire $= \\dfrac{\\text{base} \\times \\text{hauteur}}{2}$. 2. On remplace : $\\dfrac{12 \\times 2\\sqrt{3}}{2}$. 3. On calcule : $12\\sqrt{3} \\approx 20{,}8$ m². L'erreur tentante $24\\sqrt{3}$ oublie de diviser par $2$.",
+                  "unit": "m²",
+                  "tolerance": 0.05,
+                  "answers": [
+                    {
+                      "content": "20,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $AHB$ rectangle en $H$ avec $HB = 6$ m, $AH = 2\\sqrt{3}$ m et $AB = 4\\sqrt{3}$ m, on a $AB^2 = AH^2 + HB^2$.",
+                  "question_type": "true_false",
+                  "explanation": "On vérifie le théorème de Pythagore : $AH^2 + HB^2 = 12 + 36 = 48$ et $AB^2 = (4\\sqrt{3})^2 = 16 \\times 3 = 48$. L'égalité est vraie ; l'erreur tentante $4\\sqrt{3}^2 = 12$ oublie de mettre le $4$ au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une échelle de 5 m est posée contre un mur vertical sur un sol horizontal. Son pied S est à 3 m du pied P du mur et son haut T touche le mur : le triangle PST est rectangle en P, comme sur la figure.",
+              "exercise_type": "evaluation",
+              "figure": "echelle-contre-mur",
+              "hint": "Pour chaque question, repère l'hypoténuse (l'échelle), l'adjacent et l'opposé à l'angle en S.",
+              "questions": [
+                {
+                  "content": "Une échelle de $5$ m est posée contre un mur vertical, son pied $S$ est à $3$ m du pied $P$ du mur. Calcule la hauteur $PT$ atteinte sur le mur.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Le triangle $PST$ est rectangle en $P$, l'hypoténuse est $ST = 5$. 2. On applique Pythagore : $ST^2 = PS^2 + PT^2$. 3. On remplace : $25 = 9 + PT^2$. 4. On calcule : $PT^2 = 16$, donc $PT = 4$ m. L'erreur tentante $2$ m soustrait les longueurs au lieu des carrés.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $PST$ rectangle en $P$ avec $PS = 3$ m, $PT = 4$ m et $ST = 5$ m, quelle égalité permet de calculer $PT$ à partir de $PS$ et $ST$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le triangle est rectangle en $P$, donc l'hypoténuse est $[ST]$ et le théorème de Pythagore s'écrit $ST^2 = PS^2 + PT^2$. La réponse $PT^2 = PS^2 + ST^2$ met le côté de l'angle droit à la place de l'hypoténuse. La réponse $PT = ST - PS$ soustrait des longueurs au lieu des carrés. La réponse $ST = PS + PT$ additionne des longueurs au lieu des carrés.",
+                  "answers": [
+                    {
+                      "content": "$PT^2 = PS^2 + ST^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$ST^2 = PS^2 + PT^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$PT = ST - PS$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$ST = PS + PT$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $PST$ rectangle en $P$ avec $PS = 3$ m, $PT = 4$ m et $ST = 5$ m, quelles égalités sont vraies pour l'angle $\\widehat{S}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $\\widehat{S}$ : l'opposé est $PT = 4$, l'adjacent est $PS = 3$, l'hypoténuse est $ST = 5$. Donc $\\tan \\widehat{S} = \\dfrac{4}{3}$ et $\\cos \\widehat{S} = \\dfrac{3}{5}$ : ces deux égalités sont vraies. La réponse $\\sin \\widehat{S} = \\dfrac{3}{5}$ prend l'adjacent avec le sinus : $\\sin \\widehat{S} = \\dfrac{PT}{ST} = \\dfrac{4}{5}$. La réponse $\\tan \\widehat{S} = \\dfrac{3}{4}$ inverse l'opposé et l'adjacent.",
+                  "answers": [
+                    {
+                      "content": "$\\cos \\widehat{S} = \\dfrac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin \\widehat{S} = \\dfrac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan \\widehat{S} = \\dfrac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan \\widehat{S} = \\dfrac{4}{3}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'échelle fait un angle de $60°$ avec le sol (on sait que $\\cos \\widehat{S} = \\dfrac{3}{5}$).",
+                  "question_type": "true_false",
+                  "explanation": "Si l'angle était de $60°$, on aurait $\\cos 60° = \\dfrac{1}{2}$. Or $\\cos \\widehat{S} = \\dfrac{3}{5} = 0{,}6$, donc l'angle n'est pas $60°$. L'erreur tentante est de conclure d'après la figure sans calcul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une seconde échelle de $10$ m fait avec le sol le même angle $\\widehat{S}$ que la première, avec $\\sin \\widehat{S} = 0{,}8$. À quelle hauteur touche-t-elle le mur ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. L'échelle est l'hypoténuse $10$ m, la hauteur est l'opposé de $\\widehat{S}$. 2. On choisit le sinus : $\\sin \\widehat{S} = \\dfrac{h}{10}$. 3. On remplace : $0{,}8 = \\dfrac{h}{10}$. 4. On calcule : $h = 0{,}8 \\times 10 = 8$ m. L'erreur tentante $6$ m utilise le cosinus ($0{,}6 \\times 10$).",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le triangle $ABC$ est rectangle en $A$ avec $AB = 7$ cm, $AC = 24$ cm et $BC = 25$ cm. $H$ est le pied de la hauteur issue de $A$. On utilise toutes les relations du cours.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Utilise les relations métriques pour les longueurs, puis les rapports trigonométriques pour l'angle $\\widehat{B}$.",
+              "questions": [
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 7$ cm, $AC = 24$ cm et $BC = 25$ cm ; $H$ est le pied de la hauteur issue de $A$. Calcule $AH$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'angle droit en $A$, l'hypoténuse $[BC]$ et la hauteur $[AH]$. 2. On choisit $AB \\times AC = AH \\times BC$. 3. On remplace : $7 \\times 24 = AH \\times 25$. 4. On calcule : $AH = 168 \\div 25 = 6{,}72$ cm. L'erreur tentante $168$ oublie de diviser par $BC$.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6,72",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 7$ cm et $BC = 25$ cm ; $H$ est le pied de la hauteur issue de $A$. Calcule $BH$.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. On repère l'hypoténuse $[BC] = 25$. 2. On choisit $AB^2 = BH \\times BC$. 3. On remplace : $49 = BH \\times 25$. 4. On calcule : $BH = 49 \\div 25 = 1{,}96$ cm. L'erreur tentante $BH = 7 \\times 25 = 175$ oublie le carré sur $AB$.",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1,96",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 7$ cm, $AC = 24$ cm et $BC = 25$ cm. Que vaut $\\cos \\widehat{B}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté $[AB]$ est adjacent à $\\widehat{B}$ et $[BC]$ est l'hypoténuse : $\\cos \\widehat{B} = \\dfrac{AB}{BC} = \\dfrac{7}{25}$. La réponse $\\dfrac{24}{25}$ est le sinus $\\dfrac{AC}{BC}$ et non le cosinus. La réponse $\\dfrac{25}{7}$ inverse la fraction. La réponse $\\dfrac{24}{7}$ est la tangente $\\dfrac{AC}{AB}$ et non le cosinus.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{24}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{25}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{24}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{7}{25}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 7$ cm, $AC = 24$ cm et $BC = 25$ cm. Alors $\\sin \\widehat{B}$ vaut ___ (écriture décimale).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le côté $[AC]$ est opposé à $\\widehat{B}$ et $[BC]$ est l'hypoténuse : $\\sin \\widehat{B} = \\dfrac{24}{25} = 0{,}96$. L'erreur tentante $0{,}28$ est le cosinus $\\dfrac{7}{25}$.",
+                  "answers": [
+                    {
+                      "content": "0,96",
+                      "correct": true
+                    },
+                    {
+                      "content": "24/25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$ avec $AB = 7$ cm, $AC = 24$ cm et $BC = 25$ cm ; $H$ est le pied de la hauteur issue de $A$, avec $HB = 1{,}96$ cm et $HC = 23{,}04$ cm. Alors $AH^2 = HB \\times HC$.",
+                  "question_type": "true_false",
+                  "explanation": "La relation $AH^2 = HB \\times HC$ est vraie : $HB \\times HC = 1{,}96 \\times 23{,}04 = 45{,}1584$ et $AH^2 = 6{,}72^2 = 45{,}1584$. L'erreur tentante est de penser qu'il faut l'hypoténuse entière $BC$ ici : elle sert pour $AB^2$ et $AC^2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Grand-Bassam, un enfant fait voler un cerf-volant. La ficelle est tendue, mesure 40 m et fait un angle de 45° avec le sol horizontal. On suppose le sol plat et le triangle formé par la ficelle, le sol et la verticale rectangle.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La ficelle est l'hypoténuse. Rappelle-toi $\\sin 45°$, $\\cos 45°$, $\\sin 60°$ et $\\cos 60°$.",
+              "questions": [
+                {
+                  "content": "Une ficelle de $40$ m fait un angle de $45°$ avec le sol horizontal. À quelle hauteur est le cerf-volant ? Arrondis au centième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. La ficelle est l'hypoténuse $40$ m, la hauteur est le côté opposé à l'angle de $45°$. 2. On choisit le sinus : $\\sin 45° = \\dfrac{h}{40}$. 3. On remplace : $\\dfrac{\\sqrt{2}}{2} = \\dfrac{h}{40}$. 4. On calcule : $h = 20\\sqrt{2} \\approx 28{,}28$ m. L'erreur tentante $20$ m utilise $\\sin 30° = \\dfrac{1}{2}$.",
+                  "unit": "m",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "28,28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ficelle de $40$ m fait un angle de $45°$ avec le sol horizontal. Quelle est la hauteur exacte du cerf-volant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. L'angle est $45°$, la ficelle est l'hypoténuse et la hauteur est l'opposé. 2. On choisit le sinus. 3. On remplace : $\\sin 45° = \\dfrac{\\sqrt{2}}{2}$. 4. On calcule : $h = 40 \\times \\dfrac{\\sqrt{2}}{2} = 20\\sqrt{2}$ m. La réponse 20 m utilise $\\sin 30° = \\dfrac{1}{2}$ au lieu de $\\sin 45°$. La réponse $40\\sqrt{2}$ m oublie de diviser par $2$ dans $\\sin 45° = \\dfrac{\\sqrt{2}}{2}$. La réponse $20\\sqrt{3}$ m utilise la valeur de $\\sin 60°$ au lieu de celle de $\\sin 45°$.",
+                  "answers": [
+                    {
+                      "content": "20 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\sqrt{2}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\sqrt{2}$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\sqrt{3}$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec une ficelle de $40$ m inclinée de $45°$, la distance au sol (à l'horizontale) est égale à la hauteur du cerf-volant.",
+                  "question_type": "true_false",
+                  "explanation": "Pour $45°$, $\\cos 45° = \\sin 45° = \\dfrac{\\sqrt{2}}{2}$ : la distance au sol $40 \\times \\cos 45°$ est égale à la hauteur $40 \\times \\sin 45°$. C'est le triangle rectangle isocèle ; l'erreur tentante est de croire que la distance au sol est toujours la plus grande.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ficelle de $40$ m fait maintenant un angle de $60°$ avec le sol horizontal. À quelle hauteur est le cerf-volant ? Arrondis au centième.",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. La ficelle est l'hypoténuse $40$ m, la hauteur est l'opposé de l'angle de $60°$. 2. On choisit le sinus : $\\sin 60° = \\dfrac{h}{40}$. 3. On remplace : $\\dfrac{\\sqrt{3}}{2} = \\dfrac{h}{40}$. 4. On calcule : $h = 20\\sqrt{3} \\approx 34{,}64$ m. L'erreur tentante $20$ m utilise $\\cos 60° = \\dfrac{1}{2}$.",
+                  "unit": "m",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "34,64",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une ficelle de $40$ m fait un angle de $60°$ avec le sol ; $h$ est la hauteur du cerf-volant et $d$ la distance au sol. On a $h = 20\\sqrt{3}$ m et $d = 20$ m. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La hauteur est opposée à l'angle de $60°$ : $h = 40 \\times \\sin 60° = 20\\sqrt{3}$. La distance au sol est adjacente : $d = 40 \\times \\cos 60° = 20$. Ces deux égalités sont vraies. La réponse $h = 40 \\times \\cos 60°$ utilise le cosinus pour le côté opposé : $40 \\times \\cos 60° = 20$, c'est $d$. La réponse $d = 40 \\times \\tan 60°$ utilise la tangente, qui relie opposé et adjacent et ne donne pas un côté à partir de l'hypoténuse.",
+                  "answers": [
+                    {
+                      "content": "$h = 40 \\times \\sin 60°$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h = 40 \\times \\cos 60°$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$d = 40 \\times \\cos 60°$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$d = 40 \\times \\tan 60°$",
+                      "correct": false
+                    }
+                  ]
                 }
               ]
             }

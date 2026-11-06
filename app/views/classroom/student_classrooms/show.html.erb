@@ -25,7 +25,7 @@
         <%= render "assigned_sheets", sheets: @assigned_sheets %>
 
         <% pending_gaps = @classroom.pending_gaps %>
-        <%= render "pending_gaps", gaps: pending_gaps if pending_gaps.any? %>
+        <%= render "pending_gaps", gaps: pending_gaps, proposals: @remediation_proposals if pending_gaps.any? %>
       </div>
 
       <% treated = @classroom.treated_exercises %>

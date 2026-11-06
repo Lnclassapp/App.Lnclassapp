@@ -4,15 +4,15 @@
 module Classroom
   class ClassroomCoursesController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses cours sur ses propres pages.
-    allow_roles :teacher, :team
+    allow_roles :teacher, :team, :school_admin
 
     def show
       @classroom = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
       # vie-de-la-classe, Lot C (ADR-0088, Q8) : une classe archivée n'a plus de page, quel que soit le rôle ; elle se restaure.
       return render_not_found if @classroom.nil? || @classroom.status == "archived"
 
-      render_result Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @classroom),
-                    success: ->(_access) { load_course }
+      render_result Policies::Classroom::ReadClassroomLessonPolicy.new.call(actor: current_actor, classroom: @classroom),
+                    success: ->(access) { @can_assign = access.can_assign; load_course }
     end
 
     private
@@ -25,6 +25,10 @@ module Classroom
       # Les deux sections de la page de la leçon (UDR-0139) : l'enseignant n'y voit que les bascules de cette classe.
       @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
       @prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
+      # Contrat gelé (suivi-classe-lecon, Lot 0) : { essential_slug => Detail }, une requête ; {} jusqu'au Lot A.
+      @class_gaps = Queries::Assessment::ClassroomGapsQuery.new.details_for_course(
+        classroom_public_id: @classroom.public_id, course_slug: params[:course_slug], school_year: @classroom.school_year
+      )
     end
   end
 end

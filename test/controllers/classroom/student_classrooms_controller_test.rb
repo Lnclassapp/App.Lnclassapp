@@ -119,7 +119,9 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
                     student_classroom_treated], sections
     assert_select "#student_classroom_assigned + #student_classroom_gaps" do
       assert_select "h2, h3", text: tl("pending_gaps.title")
-      assert_select "a[href=?]", course_path(course.slug, anchor: "notion-#{gap.essential.slug}"), text: including("La méiose")
+      # suivi-classe-lecon CA-9 : le seul exercice publié de la fiche est celui de la copie ratée ; c'est lui qui est proposé.
+      sheet = course_sheet_path(course.slug, "notion-#{gap.essential.slug}", anchor: "sheet-exercise-#{gap.source_session.exercise.public_id}")
+      assert_select "a[href=?]", sheet, text: including("La méiose")
     end
   end
 

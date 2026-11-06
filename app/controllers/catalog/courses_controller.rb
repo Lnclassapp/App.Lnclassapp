@@ -36,7 +36,7 @@ module Catalog
       return if refuse_out_of_level(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
-                    success: ->(_) { load_status_record; load_lesson_sections; load_next_exercise; record_reads }
+                    success: ->(_) { load_status_record; load_lesson_sections; load_next_exercise; load_remediation_proposals; record_reads }
     end
 
     # CA-12 : l'ancienne adresse de la fiche de cours mène à la fiche de révision de la page de la leçon (301) ; mêmes refus
@@ -64,6 +64,15 @@ module Catalog
 
       @next_exercise = Queries::Catalog::NextExerciseQuery.new.call(student_id: current_actor.user_id, audience: student_audience,
                                                                     course_slug: params[:slug])
+    end
+
+    # suivi-classe-lecon §3.3 : l'exercice proposé sous chaque notion de la leçon que l'élève doit revoir (@proposals) ; nil hors élève.
+    def load_remediation_proposals
+      return unless current_actor.student?
+
+      @proposals = Queries::Assessment::RemediationProposalsQuery.new.call(
+        student_id: current_actor.user_id, essential_slugs: @detail.essentials.map(&:slug)
+      )
     end
 
     # ADR-0113 §4.3 (amende ADR-0090 §4.1) : ouvrir la leçon retient, pour l'élève, la lecture de chacune de ses notions publiées.

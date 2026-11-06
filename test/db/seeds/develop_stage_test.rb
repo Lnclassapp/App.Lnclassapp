@@ -143,8 +143,8 @@ class DevelopStageTest < ActiveSupport::TestCase
     ENV.delete("RAILWAY_ENVIRONMENT_NAME")
   end
 
-  test "the standard seed refuses Staging and production by itself" do
-    [ "Staging", "production" ].each do |name|
+  test "the standard seed refuses production by itself" do
+    [ "production" ].each do |name|
       ENV["RAILWAY_ENVIRONMENT_NAME"] = name
       error = assert_raises(RuntimeError) { as_production { capture_io { load Rails.root.join("db/seeds/standard.rb").to_s, true } } }
       assert_match "est réservé", error.message
@@ -168,8 +168,8 @@ class DevelopStageTest < ActiveSupport::TestCase
     assert_equal 0, Orm::TotpCredential.where(user_id: team_users.select(:id)).where.not(confirmed_at: nil).count
   end
 
-  test "Staging and production receive nothing of the set" do
-    [ "Staging", "production" ].each { seed(name: it) }
+  test "production receives nothing of the set (Staging has its own stage: staging_stage_test)" do
+    seed(name: "production")
 
     assert_equal 0, jeu_schools.count
     assert_equal 0, Orm::User.where(contact: @identity.contact(role: :teacher, index: 10)).count

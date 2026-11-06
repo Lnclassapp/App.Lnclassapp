@@ -1,0 +1,39 @@
+<%# 🌐 UI · classroom/classroom_courses/_notion_gaps — l'encadré « Dans votre classe », à la fin d'une notion de la leçon vue depuis la classe %>
+<%# Rôle : `detail` (ClassroomGapsQuery::Detail), `essential_slug` ; deux listes (à revoir, lacune levée), une liste vide n'est pas rendue %>
+<%# ADR  : 0101 · UDR : suivi-de-la-classe-sur-une-lecon §3.1 %>
+<% title_id = "notion-gaps-#{essential_slug}-title" %>
+<%= tag.aside id: "notion-gaps-#{essential_slug}", class: "mt-4 rounded-card border border-line bg-white p-4 shadow-card font-sans",
+              aria: { labelledby: title_id } do %>
+  <h3 id="<%= title_id %>" class="text-base font-medium text-ink"><%= t(".title") %></h3>
+
+  <% if detail.pending.any? %>
+    <%= tag.div data: ui_reveal_data do %>
+      <h4 class="mt-3 text-sm font-medium"><%= t(".pending_title", count: detail.pending.size) %></h4>
+      <ul>
+        <% detail.pending.each_with_index do |row, index| %>
+          <%= tag.li class: "flex flex-wrap items-baseline justify-between gap-x-3 py-1 text-sm", **ui_reveal_item(index) do %>
+            <span class="text-ink"><%= row.display_name %></span>
+            <span class="text-mute"><%= t(".pending_since", date: l(row.opened_on, format: :short),
+                                          failed: t(".failed_copies", count: row.failed_sessions_count)) %></span>
+          <% end %>
+        <% end %>
+      </ul>
+      <%= ui_reveal_more detail.pending.size %>
+    <% end %>
+  <% end %>
+
+  <% if detail.lifted.any? %>
+    <%= tag.div data: ui_reveal_data do %>
+      <h4 class="mt-3 text-sm font-medium"><%= t(".lifted_title", count: detail.lifted.size) %></h4>
+      <ul>
+        <% detail.lifted.each_with_index do |row, index| %>
+          <%= tag.li class: "flex flex-wrap items-baseline justify-between gap-x-3 py-1 text-sm", **ui_reveal_item(index) do %>
+            <span class="text-ink"><%= row.display_name %></span>
+            <span class="text-mute"><%= t(".lifted_on", date: l(row.resolved_on, format: :short)) %></span>
+          <% end %>
+        <% end %>
+      </ul>
+      <%= ui_reveal_more detail.lifted.size %>
+    <% end %>
+  <% end %>
+<% end %>

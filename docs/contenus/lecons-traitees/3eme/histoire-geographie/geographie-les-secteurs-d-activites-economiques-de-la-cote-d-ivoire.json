@@ -105,6 +105,60 @@
             ]
           },
           "controls": []
+        },
+        {
+          "key": "chaine-cacao",
+          "kind": "diagram",
+          "description": "Schéma fléché de la chaîne du cacao : la plantation (secteur primaire) fournit les fèves à l'usine de broyage (secteur secondaire), qui les envoie au port d'Abidjan puis à la boutique qui vend le chocolat (secteur tertiaire).",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "plantation",
+                "label": "Plantation de cacao",
+                "category": 1
+              },
+              {
+                "id": "usine",
+                "label": "Usine de broyage",
+                "category": 2
+              },
+              {
+                "id": "port",
+                "label": "Port d'Abidjan",
+                "category": 3
+              },
+              {
+                "id": "boutique",
+                "label": "Boutique de chocolat",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "plantation",
+                "to": "usine",
+                "label": "fèves"
+              },
+              {
+                "from": "usine",
+                "to": "port",
+                "label": "produits"
+              },
+              {
+                "from": "port",
+                "to": "boutique",
+                "label": "marchandises"
+              }
+            ],
+            "legend": [
+              "Secteur primaire",
+              "Secteur secondaire",
+              "Secteur tertiaire"
+            ]
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -128,105 +182,234 @@
           },
           "pitfall": "Ne classe pas une activité d'après le **produit** ou le **lieu**, mais d'après **ce qui est fait**. Le cacao n'est pas toujours « primaire » : le planteur qui récolte les cabosses est dans le primaire, l'usine qui broie les fèves est dans le secondaire, le commerçant qui vend le chocolat est dans le tertiaire. Un même produit peut passer par les trois secteurs.",
           "figure": null,
-          "exercise": {
-            "title": "Classer des activités dans les trois secteurs",
-            "statement": "Dans cet exercice, tu classes des activités économiques ivoiriennes avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle définition est celle du secteur secondaire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : on cherche la définition d'un secteur. Étape 2 — Se demander : le secondaire ne prélève pas et ne rend pas de service, il change la matière. Étape 3 — Classer : c'est donc le secteur qui transforme. Étape 4 — Justifier : mot-clé « transformer ». Prélever à la nature est le primaire ; rendre des services est le tertiaire.",
-                "answers": [
-                  {
-                    "content": "Il transforme les matières premières en produits (industries, énergie, BTP).",
-                    "correct": true
-                  },
-                  {
-                    "content": "Il prélève des ressources à la nature (cultures, pêche, mines).",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il rend des services à la population et aux entreprises.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il regroupe uniquement les activités de l'État.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque activité à son secteur.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Identifier chaque activité. Étape 2 — Se demander : le planteur prélève à la nature, l'usine transforme, la banque rend un service. Étape 3 — Classer : primaire, secondaire, tertiaire. Étape 4 — Justifier par les mots-clés « prélever », « transformer », « service ».",
-                "answers": [
-                  {
-                    "content": "Un planteur récolte des cabosses de cacao.",
-                    "match": "Secteur primaire"
-                  },
-                  {
-                    "content": "Une usine fabrique du beurre de cacao.",
-                    "match": "Secteur secondaire"
-                  },
-                  {
-                    "content": "Une agence de banque accorde un crédit.",
-                    "match": "Secteur tertiaire"
-                  }
-                ]
-              },
-              {
-                "content": "Un chauffeur de taxi à Abidjan exerce une activité du secteur secondaire.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : le chauffeur transporte des personnes. Étape 2 — Se demander : il ne prélève rien et ne transforme rien, il rend un service. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service ». L'affirmation est donc fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "L'agriculture, l'élevage, la pêche et les mines appartiennent au secteur ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Identifier : ces quatre activités tirent leurs produits de la nature. Étape 2 — Se demander : elles prélèvent. Étape 3 — Classer : secteur primaire. Étape 4 — Justifier : mot-clé « prélever ».",
-                "answers": [
-                  {
-                    "content": "primaire",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une entreprise d'Abidjan achète du cacao aux planteurs, puis le revend à des exportateurs. Dans quel secteur la classer ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : l'entreprise achète et revend, elle ne cultive ni ne fabrique. Étape 2 — Se demander : elle rend un service d'intermédiaire. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « commerce ». Le piège est de classer d'après le produit (cacao donc primaire) : il faut regarder l'action.",
-                "answers": [
-                  {
-                    "content": "Le secteur tertiaire, car elle fait du commerce.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le secteur primaire, car elle manipule du cacao.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le secteur secondaire, car elle déplace des marchandises.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Aucun secteur, car elle ne produit rien.",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Classer des activités dans les trois secteurs",
+              "statement": "Dans cet exercice, tu classes des activités économiques ivoiriennes avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle définition est celle du secteur secondaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche la définition d'un secteur. Étape 2 — Se demander : le secondaire ne prélève pas et ne rend pas de service, il change la matière. Étape 3 — Classer : c'est donc le secteur qui transforme. Étape 4 — Justifier : mot-clé « transformer ». Prélever à la nature est le primaire ; rendre des services est le tertiaire.",
+                  "answers": [
+                    {
+                      "content": "Il transforme les matières premières en produits (industries, énergie, BTP).",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il prélève des ressources à la nature (cultures, pêche, mines).",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il rend des services à la population et aux entreprises.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il regroupe uniquement les activités de l'État.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque activité à son secteur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque activité. Étape 2 — Se demander : le planteur prélève à la nature, l'usine transforme, la banque rend un service. Étape 3 — Classer : primaire, secondaire, tertiaire. Étape 4 — Justifier par les mots-clés « prélever », « transformer », « service ».",
+                  "answers": [
+                    {
+                      "content": "Un planteur récolte des cabosses de cacao.",
+                      "match": "Secteur primaire"
+                    },
+                    {
+                      "content": "Une usine fabrique du beurre de cacao.",
+                      "match": "Secteur secondaire"
+                    },
+                    {
+                      "content": "Une agence de banque accorde un crédit.",
+                      "match": "Secteur tertiaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chauffeur de taxi à Abidjan exerce une activité du secteur secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le chauffeur transporte des personnes. Étape 2 — Se demander : il ne prélève rien et ne transforme rien, il rend un service. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service ». L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'agriculture, l'élevage, la pêche et les mines appartiennent au secteur ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : ces quatre activités tirent leurs produits de la nature. Étape 2 — Se demander : elles prélèvent. Étape 3 — Classer : secteur primaire. Étape 4 — Justifier : mot-clé « prélever ».",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une entreprise d'Abidjan achète du cacao aux planteurs, puis le revend à des exportateurs. Dans quel secteur la classer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'entreprise achète et revend, elle ne cultive ni ne fabrique. Étape 2 — Se demander : elle rend un service d'intermédiaire. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « commerce ». Le piège est de classer d'après le produit (cacao donc primaire) : il faut regarder l'action.",
+                  "answers": [
+                    {
+                      "content": "Le secteur tertiaire, car elle fait du commerce.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le secteur primaire, car elle manipule du cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur secondaire, car elle déplace des marchandises.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun secteur, car elle ne produit rien.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Classer d'autres activités dans les trois secteurs",
+              "statement": "Dans cet exercice, tu classes d'autres activités économiques ivoiriennes dans les trois secteurs, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi toujours ce que fait la personne : elle prélève à la nature, elle transforme une matière ou elle rend un service. Le produit ou le lieu ne décident pas.",
+              "questions": [
+                {
+                  "content": "Une pêcheuse remonte ses filets dans une lagune. Dans quel secteur classer son activité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la pêcheuse remonte du poisson dans une lagune. Étape 2 — Se demander : elle prélève ce que donne la nature, elle ne transforme rien et ne rend pas de service. Étape 3 — Classer : secteur primaire. Étape 4 — Justifier : mot-clé « prélever ». Classer d'après l'outil (les filets) est une erreur : on regarde ce qui est fait. Classer d'après la vente future (tertiaire) est aussi faux, car la vente est une autre activité. Dire que la pêche n'est pas une activité économique est faux : la pêche fait partie du primaire.",
+                  "answers": [
+                    {
+                      "content": "Le secteur primaire, car elle prélève du poisson à la nature.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le secteur secondaire, car elle utilise des filets, donc un outil fabriqué.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur tertiaire, car le poisson sera vendu plus tard au marché.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun secteur, car la pêche n'est pas une activité économique.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une entreprise de BTP qui construit une route à Abidjan exerce une activité du secteur secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'entreprise construit une route. Étape 2 — Se demander : elle ne prélève pas à la nature et ne rend pas un simple service, elle construit. Étape 3 — Classer : le BTP (bâtiment et travaux publics) fait partie du secteur secondaire. Étape 4 — Justifier : mot-clé « transformer », au sens large de fabriquer et construire. Répondre Faux, c'est croire que seules les usines sont du secondaire, ou classer le BTP dans les services parce qu'il travaille pour les habitants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une banque, un opérateur de téléphonie mobile et un hôtel rendent des services : ils appartiennent au secteur ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : crédit, communication et accueil sont des services rendus. Étape 2 — Se demander : aucune de ces activités ne prélève à la nature ni ne transforme une matière. Étape 3 — Classer : secteur tertiaire. Étape 4 — Justifier : mot-clé « service ». Primaire (on prélève) et secondaire (on transforme) ne conviennent pas : personne ne cultive ni ne fabrique ici.",
+                  "answers": [
+                    {
+                      "content": "tertiaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles activités relèvent du secteur primaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : chaque proposition décrit une action différente. Étape 2 — Se demander : l'éleveur et le mineur prélèvent ce que donne la nature. Étape 3 — Classer : élevage et mines sont du secteur primaire. Étape 4 — Justifier : mot-clé « prélever ». La conserverie de thon transforme un produit (secondaire), le commerçant rend un service (tertiaire) et le BTP construit (secondaire).",
+                  "answers": [
+                    {
+                      "content": "Une conserverie qui prépare du thon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un éleveur de bovins dans le nord",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un commerçant qui vend des vivres au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une entreprise de BTP qui construit un pont",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un mineur qui extrait de l'or",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une usine d'huile de palme change une matière première en produit : elle relève du secteur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'usine reçoit des fruits du palmier à huile et fabrique de l'huile. Étape 2 — Se demander : elle transforme une matière première. Étape 3 — Classer : secteur secondaire. Étape 4 — Justifier : mot-clé « transformer ». Primaire serait l'erreur de classer d'après le produit agricole ; tertiaire ferait croire que vendre l'huile est l'activité de l'usine.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève classe un commerçant qui vend du chocolat dans le secteur primaire, parce que le chocolat vient du cacao. Quelle correction est la bonne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le commerçant vend du chocolat déjà fabriqué. Étape 2 — Se demander : il ne prélève rien et ne transforme rien, il met un produit à la disposition des clients. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « commerce », donc service. L'erreur de l'élève est de classer d'après le produit (le cacao). Un même produit peut passer par les trois secteurs : planteur (primaire), usine (secondaire), commerçant (tertiaire). Dire que le commerçant fabrique le chocolat est faux, et le lieu ne décide pas du secteur.",
+                  "answers": [
+                    {
+                      "content": "On classe d'après ce qui est fait : vendre est un service, donc le commerçant est dans le tertiaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'élève a raison : un produit qui vient de la terre reste toujours du primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On classe d'après le lieu : en ville, toutes les activités sont du secondaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le commerçant transforme le cacao en chocolat, c'est donc du secondaire.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu classes des activités par secteur avec la méthode : identifier, se demander ce qui est fait, classer, justifier.",
             "questions": [
@@ -326,134 +509,261 @@
           },
           "pitfall": "Ne place pas toutes les cultures dans la même zone. Le **cacao** et le **café** demandent beaucoup d'eau : ils sont en **zone forestière**. Le **coton** supporte une saison sèche marquée : il est en **savane, au nord**. Il ne faut pas non plus confondre culture d'exportation (café) et culture vivrière (igname, manioc) : la première est vendue surtout à l'étranger, la seconde nourrit d'abord la population.",
           "figure": "carte-ci-zones",
-          "exercise": {
-            "title": "Situer et présenter les productions du primaire",
-            "statement": "Dans cet exercice, tu situes des productions du secteur primaire et tu les présentes avec la méthode de la fiche. Tu peux t'appuyer sur la carte des zones de cultures.",
-            "exercise_type": "fixation",
-            "figure": "carte-ci-zones",
-            "questions": [
-              {
-                "content": "Relie chaque production à sa zone principale.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Localiser : on place chaque production sur la carte. Étape 2 — Identifier : cacao et café sont des cultures d'exportation, le coton aussi, la pêche fournit du poisson. Étape 3 — Expliquer : forêt humide pour le cacao et le café, savane plus sèche pour le coton et les bovins, eau pour la pêche. Étape 4 — Conclure : chaque milieu a sa production.",
-                "answers": [
-                  {
-                    "content": "Le cacao et le café",
-                    "match": "Zone forestière du sud et de l'ouest"
-                  },
-                  {
-                    "content": "Le coton et l'élevage de bovins",
-                    "match": "Savane du nord"
-                  },
-                  {
-                    "content": "La pêche artisanale en lagune",
-                    "match": "Littoral et lagunes du sud"
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les trois cultures d'exportation de la liste ?",
-                "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Localiser : cacao, café et hévéa poussent en zone forestière. Étape 2 — Identifier : ils sont vendus surtout à l'étranger, ce sont des cultures d'exportation. Étape 3 — Expliquer : ces plantes aiment la chaleur et l'humidité. Étape 4 — Conclure : cacao, café, hévéa. L'igname, le manioc et la banane plantain sont des cultures vivrières, qui nourrissent d'abord la population.",
-                "answers": [
-                  {
-                    "content": "Le cacao",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le café",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'hévéa",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'igname",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le manioc",
-                    "correct": false
-                  },
-                  {
-                    "content": "La banane plantain",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "La Côte d'Ivoire est le premier producteur mondial de cacao. Environ quel pourcentage de la production mondiale fournit-elle (valeur arrondie) ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Localiser : le cacao vient de la forêt ivoirienne. Étape 2 — Identifier : culture d'exportation, premier producteur mondial. Étape 3 — Expliquer : le climat de la forêt convient au cacaoyer. Étape 4 — Conclure : la Côte d'Ivoire fournit environ 40 % de la production mondiale (valeur arrondie, d'où la marge acceptée).",
-                "answers": [
-                  {
-                    "content": "40",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 5,
-                "unit": "%"
-              },
-              {
-                "content": "Quelle culture d'exportation est cultivée surtout en savane, dans le nord du pays ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Localiser : le nord est une zone de savane. Étape 2 — Identifier : le coton est une culture d'exportation. Étape 3 — Expliquer : il s'adapte à une saison sèche marquée. Étape 4 — Conclure : le coton. Le cacao, l'hévéa et le palmier à huile demandent plus d'eau et sont en zone forestière.",
-                "answers": [
-                  {
-                    "content": "Le coton",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le cacao",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'hévéa",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le palmier à huile",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le principal métal exploité dans les mines ivoiriennes est l'___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Localiser : les mines se trouvent dans l'intérieur du pays. Étape 2 — Identifier : l'or est vendu à l'étranger. Étape 3 — Expliquer : il vient du sous-sol, c'est une ressource minière. Étape 4 — Conclure : l'or est la ressource minière la plus connue du pays.",
-                "answers": [
-                  {
-                    "content": "or",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un élève écrit : « Le coton est cultivé en zone forestière, avec le cacao. » Pourquoi est-ce faux ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Localiser : le cacao est en forêt, le coton en savane. Étape 2 — Identifier : les deux sont des cultures d'exportation, mais pas dans le même milieu. Étape 3 — Expliquer : le coton aime moins d'eau que le cacao. Étape 4 — Conclure : l'élève confond les zones de culture.",
-                "answers": [
-                  {
-                    "content": "Le coton supporte une saison sèche marquée : il est cultivé en savane, au nord.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le coton est une culture vivrière, donc il n'a pas de zone précise.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le coton n'est cultivé qu'à Abidjan.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le coton pousse seulement dans l'eau des lagunes.",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Situer et présenter les productions du primaire",
+              "statement": "Dans cet exercice, tu situes des productions du secteur primaire et tu les présentes avec la méthode de la fiche. Tu peux t'appuyer sur la carte des zones de cultures.",
+              "exercise_type": "fixation",
+              "figure": "carte-ci-zones",
+              "questions": [
+                {
+                  "content": "Relie chaque production à sa zone principale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Localiser : on place chaque production sur la carte. Étape 2 — Identifier : cacao et café sont des cultures d'exportation, le coton aussi, la pêche fournit du poisson. Étape 3 — Expliquer : forêt humide pour le cacao et le café, savane plus sèche pour le coton et les bovins, eau pour la pêche. Étape 4 — Conclure : chaque milieu a sa production.",
+                  "answers": [
+                    {
+                      "content": "Le cacao et le café",
+                      "match": "Zone forestière du sud et de l'ouest"
+                    },
+                    {
+                      "content": "Le coton et l'élevage de bovins",
+                      "match": "Savane du nord"
+                    },
+                    {
+                      "content": "La pêche artisanale en lagune",
+                      "match": "Littoral et lagunes du sud"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois cultures d'exportation de la liste ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Localiser : cacao, café et hévéa poussent en zone forestière. Étape 2 — Identifier : ils sont vendus surtout à l'étranger, ce sont des cultures d'exportation. Étape 3 — Expliquer : ces plantes aiment la chaleur et l'humidité. Étape 4 — Conclure : cacao, café, hévéa. L'igname, le manioc et la banane plantain sont des cultures vivrières, qui nourrissent d'abord la population.",
+                  "answers": [
+                    {
+                      "content": "Le cacao",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le café",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hévéa",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'igname",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le manioc",
+                      "correct": false
+                    },
+                    {
+                      "content": "La banane plantain",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire est le premier producteur mondial de cacao. Environ quel pourcentage de la production mondiale fournit-elle (valeur arrondie) ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Localiser : le cacao vient de la forêt ivoirienne. Étape 2 — Identifier : culture d'exportation, premier producteur mondial. Étape 3 — Expliquer : le climat de la forêt convient au cacaoyer. Étape 4 — Conclure : la Côte d'Ivoire fournit environ 40 % de la production mondiale (valeur arrondie, d'où la marge acceptée).",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 5,
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelle culture d'exportation est cultivée surtout en savane, dans le nord du pays ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le nord est une zone de savane. Étape 2 — Identifier : le coton est une culture d'exportation. Étape 3 — Expliquer : il s'adapte à une saison sèche marquée. Étape 4 — Conclure : le coton. Le cacao, l'hévéa et le palmier à huile demandent plus d'eau et sont en zone forestière.",
+                  "answers": [
+                    {
+                      "content": "Le coton",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hévéa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le palmier à huile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le principal métal exploité dans les mines ivoiriennes est l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Localiser : les mines se trouvent dans l'intérieur du pays. Étape 2 — Identifier : l'or est vendu à l'étranger. Étape 3 — Expliquer : il vient du sous-sol, c'est une ressource minière. Étape 4 — Conclure : l'or est la ressource minière la plus connue du pays.",
+                  "answers": [
+                    {
+                      "content": "or",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « Le coton est cultivé en zone forestière, avec le cacao. » Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le cacao est en forêt, le coton en savane. Étape 2 — Identifier : les deux sont des cultures d'exportation, mais pas dans le même milieu. Étape 3 — Expliquer : le coton aime moins d'eau que le cacao. Étape 4 — Conclure : l'élève confond les zones de culture.",
+                  "answers": [
+                    {
+                      "content": "Le coton supporte une saison sèche marquée : il est cultivé en savane, au nord.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le coton est une culture vivrière, donc il n'a pas de zone précise.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton n'est cultivé qu'à Abidjan.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton pousse seulement dans l'eau des lagunes.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Situer et présenter d'autres productions du primaire",
+              "statement": "Dans cet exercice, tu situes et tu présentes d'autres productions du secteur primaire avec la méthode de la fiche. Tu peux t'appuyer sur la carte des zones de cultures.",
+              "exercise_type": "fixation",
+              "figure": "carte-ci-zones",
+              "hint": "Pars toujours du milieu naturel : la forêt humide au sud et à l'ouest, la savane plus sèche au nord. Puis demande-toi si la production est vendue à l'étranger ou si elle nourrit d'abord la population.",
+              "questions": [
+                {
+                  "content": "Dans quelle zone naturelle cultive-t-on surtout l'hévéa et le palmier à huile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : l'hévéa et le palmier à huile sont des cultures du sud et de l'ouest. Étape 2 — Identifier : ce sont des cultures d'exportation. Étape 3 — Expliquer : elles demandent de la chaleur et de l'eau, que la forêt offre. Étape 4 — Conclure : zone forestière. La savane est la zone du coton, de l'anacarde et de l'élevage ; dire « partout » est l'erreur du piège de la fiche, qui place toutes les cultures dans la même zone ; les lagunes sont des lieux de pêche, pas de plantations.",
+                  "answers": [
+                    {
+                      "content": "Dans la savane, au nord, comme le coton.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la zone forestière, au sud et à l'ouest.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Partout de la même façon, sans zone précise.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement sur les lagunes de la côte.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'anacarde, cultivé dans la savane du nord, est une culture vivrière qui nourrit d'abord la population.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Localiser : l'anacarde vient de la savane du nord, avec le coton et l'élevage. Étape 2 — Identifier : l'anacarde fournit la noix de cajou, vendue à l'étranger ; c'est une culture d'exportation. Étape 3 — Expliquer : les cultures vivrières (igname, manioc, banane plantain, riz, maïs) nourrissent d'abord la population. Étape 4 — Conclure : l'affirmation est fausse. Répondre Vrai, c'est confondre culture d'exportation et culture vivrière.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois productions sont des cultures vivrières ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Localiser : igname, manioc et banane plantain se cultivent pour la consommation locale. Étape 2 — Identifier : une culture vivrière nourrit d'abord la population. Étape 3 — Expliquer : le cacao et le coton, eux, sont des cultures d'exportation, vendues surtout à l'étranger. Étape 4 — Conclure : igname, manioc, banane plantain. Cocher le cacao ou le coton, c'est confondre exportation et consommation locale.",
+                  "answers": [
+                    {
+                      "content": "L'igname",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le manioc",
+                      "correct": true
+                    },
+                    {
+                      "content": "La banane plantain",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cultures qui nourrissent d'abord la population, comme l'igname et le manioc, sont des cultures ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Localiser : l'igname et le manioc sont cultivés dans le pays pour les habitants. Étape 2 — Identifier : leur usage est la consommation locale. Étape 3 — Expliquer : on les appelle cultures vivrières, par opposition aux cultures d'exportation. Étape 4 — Conclure : le mot attendu est « vivrières ».",
+                  "answers": [
+                    {
+                      "content": "vivrières",
+                      "correct": true
+                    },
+                    {
+                      "content": "vivrière",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un lot de 200 tonnes de cacao produites dans le monde, environ combien de tonnes viendraient de la Côte d'Ivoire, qui fournit environ 40 % de la production mondiale ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Localiser : le cacao vient de la forêt ivoirienne. Étape 2 — Identifier : la Côte d'Ivoire est le premier producteur mondial, avec environ 40 % de la production. Étape 3 — Expliquer : 40 % de 200 tonnes, c'est 200 × 40 ÷ 100. Étape 4 — Conclure : environ 80 tonnes (valeur arrondie, d'où la marge acceptée). Répondre 40 serait recopier le pourcentage au lieu de l'appliquer à 200 tonnes.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 10,
+                  "unit": "t"
+                },
+                {
+                  "content": "Un élève écrit : « Le café et le coton sont cultivés dans la même zone, car ce sont deux cultures d'exportation. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le café est en zone forestière (sud et ouest), le coton en savane (nord). Étape 2 — Identifier : les deux sont bien des cultures d'exportation, mais cela ne les place pas dans le même milieu. Étape 3 — Expliquer : le café a besoin de beaucoup d'eau, le coton supporte une saison sèche marquée. Étape 4 — Conclure : l'élève confond les zones de culture. Dire que toutes les cultures d'exportation poussent en forêt ou en savane est faux ; le café n'est pas une culture vivrière.",
+                  "answers": [
+                    {
+                      "content": "C'est exact : toutes les cultures d'exportation poussent en forêt.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le café demande beaucoup d'eau et vient de la zone forestière ; le coton supporte une saison sèche marquée et vient de la savane.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est exact : le café et le coton viennent tous deux de la savane du nord.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le café est une culture vivrière, il n'a donc pas de zone précise.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu présentes une production du secteur primaire avec la méthode : localiser, identifier, expliquer le lien avec le milieu, conclure.",
             "questions": [
@@ -556,124 +866,253 @@
           },
           "pitfall": "Ne confonds pas **extraire** et **transformer**. Une mine d'or ou un puits de pétrole relèvent du **primaire** (on prélève à la nature) ; la fonderie ou la raffinerie qui traite le produit relève du **secondaire**. De même, un barrage qui produit de l'électricité est dans le secondaire, alors que l'eau du fleuve est une ressource naturelle.",
           "figure": "carte-ci-poles",
-          "exercise": {
-            "title": "Reconnaître les activités du secondaire",
-            "statement": "Dans cet exercice, tu présentes des activités du secteur secondaire avec la méthode de la fiche. Tu peux t'appuyer sur la carte des pôles industriels.",
-            "exercise_type": "fixation",
-            "figure": "carte-ci-poles",
-            "questions": [
-              {
-                "content": "Quelles villes concentrent la plus grande partie des industries ivoiriennes ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : on cherche où sont les usines. Étape 2 — Nommer : agro-industries et raffinerie transforment des produits. Étape 3 — Localiser : sur la carte, les pôles industriels sont sur la côte. Étape 4 — Expliquer : Abidjan et San Pedro ont un port, nécessaire pour exporter et importer.",
-                "answers": [
-                  {
-                    "content": "Abidjan et San Pedro",
-                    "correct": true
-                  },
-                  {
-                    "content": "Korhogo et Odienné",
-                    "correct": false
-                  },
-                  {
-                    "content": "Man et Danané",
-                    "correct": false
-                  },
-                  {
-                    "content": "Bondoukou et Bouna",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque matière première au produit obtenu après transformation.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Identifier la matière première de chaque ligne. Étape 2 — Nommer le produit transformé : le broyage donne le beurre de cacao, le raffinage donne les carburants, le décorticage donne les amandes. Étape 3 — Localiser : ces usines sont surtout à Abidjan et San Pedro. Étape 4 — Expliquer : transformer sur place garde plus de travail dans le pays.",
-                "answers": [
-                  {
-                    "content": "Les fèves de cacao",
-                    "match": "Le beurre de cacao"
-                  },
-                  {
-                    "content": "Le pétrole brut",
-                    "match": "Les carburants"
-                  },
-                  {
-                    "content": "Les noix de cajou brutes",
-                    "match": "Les amandes de cajou décortiquées"
-                  }
-                ]
-              },
-              {
-                "content": "Quelles activités relèvent du secteur secondaire ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Identifier chaque activité. Étape 2 — Nommer ce qui est obtenu : carburants, route construite. Étape 3 — Localiser : la raffinerie est à Abidjan. Étape 4 — Expliquer : on transforme ou on construit. La pêche et la culture prélèvent à la nature (primaire) ; la vente est un service (tertiaire).",
-                "answers": [
-                  {
-                    "content": "Le raffinage du pétrole",
-                    "correct": true
-                  },
-                  {
-                    "content": "La construction d'une route (BTP)",
-                    "correct": true
-                  },
-                  {
-                    "content": "La pêche en lagune",
-                    "correct": false
-                  },
-                  {
-                    "content": "La vente au marché",
-                    "correct": false
-                  },
-                  {
-                    "content": "La culture du coton",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Les barrages de Kossou, Taabo, Buyo et Ayamé produisent de l'électricité.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : l'eau retenue par le barrage fait tourner des turbines. Étape 2 — Nommer : on obtient de l'électricité. Étape 3 — Localiser : ces barrages sont sur les fleuves du pays. Étape 4 — Expliquer : la production d'énergie fait partie du secteur secondaire.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le sigle BTP signifie Bâtiment et ___ publics.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Identifier : BTP est un sigle du secondaire. Étape 2 — Nommer : il désigne la construction de logements, de routes, de ponts. Étape 3 — Localiser : surtout dans les grandes villes comme Abidjan. Étape 4 — Expliquer : B pour bâtiment, T pour travaux, P pour publics.",
-                "answers": [
-                  {
-                    "content": "travaux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mine d'or appartient au secteur secondaire, car l'or est un produit industriel.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : la mine extrait l'or du sous-sol. Étape 2 — Nommer : l'or brut, sans transformation. Étape 3 — Localiser : la mine est sur le lieu du gisement, pas dans un pôle industriel. Étape 4 — Expliquer : extraire est du primaire ; seul le traitement industriel du métal serait du secondaire.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître les activités du secondaire",
+              "statement": "Dans cet exercice, tu présentes des activités du secteur secondaire avec la méthode de la fiche. Tu peux t'appuyer sur la carte des pôles industriels.",
+              "exercise_type": "fixation",
+              "figure": "carte-ci-poles",
+              "questions": [
+                {
+                  "content": "Quelles villes concentrent la plus grande partie des industries ivoiriennes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche où sont les usines. Étape 2 — Nommer : agro-industries et raffinerie transforment des produits. Étape 3 — Localiser : sur la carte, les pôles industriels sont sur la côte. Étape 4 — Expliquer : Abidjan et San Pedro ont un port, nécessaire pour exporter et importer.",
+                  "answers": [
+                    {
+                      "content": "Abidjan et San Pedro",
+                      "correct": true
+                    },
+                    {
+                      "content": "Korhogo et Odienné",
+                      "correct": false
+                    },
+                    {
+                      "content": "Man et Danané",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bondoukou et Bouna",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque matière première au produit obtenu après transformation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la matière première de chaque ligne. Étape 2 — Nommer le produit transformé : le broyage donne le beurre de cacao, le raffinage donne les carburants, le décorticage donne les amandes. Étape 3 — Localiser : ces usines sont surtout à Abidjan et San Pedro. Étape 4 — Expliquer : transformer sur place garde plus de travail dans le pays.",
+                  "answers": [
+                    {
+                      "content": "Les fèves de cacao",
+                      "match": "Le beurre de cacao"
+                    },
+                    {
+                      "content": "Le pétrole brut",
+                      "match": "Les carburants"
+                    },
+                    {
+                      "content": "Les noix de cajou brutes",
+                      "match": "Les amandes de cajou décortiquées"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles activités relèvent du secteur secondaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier chaque activité. Étape 2 — Nommer ce qui est obtenu : carburants, route construite. Étape 3 — Localiser : la raffinerie est à Abidjan. Étape 4 — Expliquer : on transforme ou on construit. La pêche et la culture prélèvent à la nature (primaire) ; la vente est un service (tertiaire).",
+                  "answers": [
+                    {
+                      "content": "Le raffinage du pétrole",
+                      "correct": true
+                    },
+                    {
+                      "content": "La construction d'une route (BTP)",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pêche en lagune",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vente au marché",
+                      "correct": false
+                    },
+                    {
+                      "content": "La culture du coton",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les barrages de Kossou, Taabo, Buyo et Ayamé produisent de l'électricité.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'eau retenue par le barrage fait tourner des turbines. Étape 2 — Nommer : on obtient de l'électricité. Étape 3 — Localiser : ces barrages sont sur les fleuves du pays. Étape 4 — Expliquer : la production d'énergie fait partie du secteur secondaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sigle BTP signifie Bâtiment et ___ publics.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : BTP est un sigle du secondaire. Étape 2 — Nommer : il désigne la construction de logements, de routes, de ponts. Étape 3 — Localiser : surtout dans les grandes villes comme Abidjan. Étape 4 — Expliquer : B pour bâtiment, T pour travaux, P pour publics.",
+                  "answers": [
+                    {
+                      "content": "travaux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mine d'or appartient au secteur secondaire, car l'or est un produit industriel.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la mine extrait l'or du sous-sol. Étape 2 — Nommer : l'or brut, sans transformation. Étape 3 — Localiser : la mine est sur le lieu du gisement, pas dans un pôle industriel. Étape 4 — Expliquer : extraire est du primaire ; seul le traitement industriel du métal serait du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Présenter d'autres activités du secteur secondaire",
+              "statement": "Dans cet exercice, tu présentes d'autres activités du secteur secondaire avec la méthode de la fiche. Tu peux t'appuyer sur la carte des pôles industriels.",
+              "exercise_type": "fixation",
+              "figure": "carte-ci-poles",
+              "hint": "Cherche d'abord la matière première, puis le produit obtenu. Pour localiser, pense aux ports de la côte ; pour expliquer, pense au port, à l'énergie et à la main-d'œuvre.",
+              "questions": [
+                {
+                  "content": "Quelle matière première est transformée par la raffinerie d'Abidjan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la raffinerie reçoit du pétrole brut. Étape 2 — Nommer : après raffinage, elle obtient des carburants. Étape 3 — Localiser : elle est à Abidjan, sur la côte. Étape 4 — Expliquer : le port permet d'importer et d'exporter. Les fèves de cacao et les noix de cajou sont traitées dans des agro-industries ; l'eau d'un barrage donne de l'électricité, ce qui est une autre activité du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Les fèves de cacao, transformées en beurre de cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les noix de cajou brutes, transformées en amandes.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pétrole brut, transformé en carburants.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau d'un barrage, transformée en électricité.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le barrage de Soubré a été mis en service en 2017.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'eau retenue par un barrage fait tourner des turbines. Étape 2 — Nommer : on obtient de l'électricité. Étape 3 — Localiser : les barrages de Kossou, Taabo, Buyo, Ayamé et Soubré sont sur les cours d'eau du pays. Étape 4 — Expliquer : Soubré a été mis en service en 2017, il complète les barrages plus anciens. Répondre Faux, c'est confondre avec les autres barrages ou ignorer la date.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les quatre étapes pour présenter une usine qui décortique des noix de cajou à San Pedro.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on commence par la matière première (noix de cajou brute). Étape 2 — Nommer : on donne le produit obtenu (amande décortiquée). Étape 3 — Localiser : on situe l'usine (San Pedro, sur la côte). Étape 4 — Expliquer : on justifie le lieu par le port. Commencer par expliquer ou localiser est une erreur : sans matière première ni produit, on ne sait pas ce que l'usine fait.",
+                  "answers": [
+                    {
+                      "content": "Identifier : la matière première est la noix de cajou brute."
+                    },
+                    {
+                      "content": "Nommer : après transformation, le produit est l'amande de cajou décortiquée."
+                    },
+                    {
+                      "content": "Localiser : l'usine est à San Pedro, sur la côte."
+                    },
+                    {
+                      "content": "Expliquer : le port permet d'exporter les amandes."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles activités relèvent du secteur primaire et non du secondaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : la mine et le puits extraient une ressource du sol. Étape 2 — Nommer : on obtient de l'or brut et du pétrole brut, sans transformation. Étape 3 — Localiser : ces activités sont sur le lieu du gisement, pas dans un pôle industriel. Étape 4 — Expliquer : extraire est du primaire. La raffinerie, le barrage et le BTP transforment, produisent de l'énergie ou construisent : c'est le secondaire.",
+                  "answers": [
+                    {
+                      "content": "Une raffinerie qui traite le pétrole brut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un barrage qui produit de l'électricité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une entreprise de BTP qui construit un pont",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mine d'or qui extrait le métal du sous-sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un puits qui extrait du pétrole brut",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les industries ivoiriennes se concentrent surtout à Abidjan et à ___, grâce à leurs ports.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on cherche les deux grands pôles industriels. Étape 2 — Nommer : agro-industries et raffinerie y transforment des produits. Étape 3 — Localiser : sur la carte, ces deux villes sont sur la côte. Étape 4 — Expliquer : le port permet d'exporter et d'importer. La seconde ville est San Pedro.",
+                  "answers": [
+                    {
+                      "content": "San Pedro",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « La raffinerie extrait le pétrole du sol, c'est donc une activité du secteur primaire. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la raffinerie reçoit du pétrole brut déjà extrait. Étape 2 — Nommer : elle produit des carburants. Étape 3 — Localiser : elle est à Abidjan, pôle industriel. Étape 4 — Expliquer : elle transforme un produit, comme la fonderie qui traite un métal. L'erreur est de confondre extraire (primaire) et transformer (secondaire). Penser au service rendu aux automobilistes ou au lieu ne change pas la nature de l'activité.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : tout ce qui touche au pétrole est du primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La raffinerie traite le pétrole brut pour obtenir des carburants : elle transforme, c'est donc le secondaire ; seule l'extraction du pétrole est du primaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La raffinerie rend un service aux automobilistes, donc c'est du tertiaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La raffinerie est à Abidjan, donc elle est dans le tertiaire comme le port.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu présentes une activité du secteur secondaire avec la méthode : identifier la matière première, nommer le produit, localiser, expliquer le lieu.",
             "questions": [
@@ -777,125 +1216,255 @@
           },
           "pitfall": "Ne pense pas que le secteur qui compte le plus est celui des produits visibles comme le cacao. Le cacao pèse beaucoup dans les exportations, mais ce n'est pas lui qui donne la plus grande part de la richesse produite : c'est le **tertiaire**. Les services (commerce, transports, banques, télécommunications) créent de la richesse même sans rien fabriquer.",
           "figure": null,
-          "exercise": {
-            "title": "Reconnaître les services du tertiaire",
-            "statement": "Dans cet exercice, tu reconnais des services du secteur tertiaire avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Laquelle de ces activités relève du secteur tertiaire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : l'opérateur vend un accès à la communication. Étape 2 — Reconnaître : il ne prélève ni ne transforme une matière. Étape 3 — Préciser : ses clients sont la population et les entreprises. Étape 4 — Situer : les télécommunications sont un service du tertiaire. Planteur et pêcheur relèvent du primaire, l'usine du secondaire.",
-                "answers": [
-                  {
-                    "content": "Un opérateur de téléphonie mobile vend des forfaits.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Un planteur récolte des fèves de cacao.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une usine fabrique de l'huile de palme.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Un pêcheur remonte ses filets.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les trois activités de service ?",
-                "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Identifier le service rendu : crédit, transport, accueil. Étape 2 — Reconnaître : aucune de ces trois activités ne prélève ni ne transforme de matière. Étape 3 — Préciser : elles servent la population et les entreprises. Étape 4 — Situer : banque, transport et tourisme sont du tertiaire. La plantation et la pêche sont du primaire, l'usine de ciment du secondaire.",
-                "answers": [
-                  {
-                    "content": "Une banque qui accorde des crédits",
-                    "correct": true
-                  },
-                  {
-                    "content": "Un camion qui transporte des marchandises",
-                    "correct": true
-                  },
-                  {
-                    "content": "Un hôtel qui accueille des touristes",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une plantation d'hévéa",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une usine de ciment",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une pêche artisanale",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans l'économie ivoirienne, le secteur qui produit la plus grande part de la richesse est le secteur ___.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Identifier : on compare les trois secteurs. Étape 2 — Reconnaître : les services (commerce, transports, banques, télécommunications) sont très nombreux. Étape 3 — Préciser : ils profitent à toute l'économie. Étape 4 — Situer : le tertiaire est le premier secteur pour la richesse produite. Le cacao est important à l'exportation, mais le primaire ne produit pas la plus grande part.",
-                "answers": [
-                  {
-                    "content": "primaire",
-                    "correct": false
-                  },
-                  {
-                    "content": "secondaire",
-                    "correct": false
-                  },
-                  {
-                    "content": "tertiaire",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Grand-Bassam, classée au patrimoine mondial de l'UNESCO en 2012, attire des touristes : le tourisme est une activité du secteur tertiaire.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : le tourisme accueille des visiteurs (hôtels, restaurants, visites). Étape 2 — Reconnaître : il ne prélève ni ne transforme de matière, il rend un service. Étape 3 — Préciser : il profite aux visiteurs et à la population locale. Étape 4 — Situer : Grand-Bassam est une ville de la côte, proche d'Abidjan.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un élève affirme : « Le primaire produit la plus grande part de la richesse, car le cacao est le grand produit du pays. » Quelle est la bonne réponse ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : l'élève raisonne à partir d'un seul produit. Étape 2 — Reconnaître : les services créent aussi de la richesse. Étape 3 — Préciser : commerce, transports, banques, télécommunications concernent presque tout le monde. Étape 4 — Situer : le tertiaire est le premier secteur pour la richesse produite.",
-                "answers": [
-                  {
-                    "content": "C'est faux : malgré l'importance du cacao, le tertiaire produit la plus grande part de la richesse.",
-                    "correct": true
-                  },
-                  {
-                    "content": "C'est vrai : le cacao fait du primaire le premier secteur.",
-                    "correct": false
-                  },
-                  {
-                    "content": "C'est faux : c'est le secondaire, grâce à Abidjan.",
-                    "correct": false
-                  },
-                  {
-                    "content": "C'est vrai, car un service ne crée pas de richesse.",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître les services du tertiaire",
+              "statement": "Dans cet exercice, tu reconnais des services du secteur tertiaire avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Laquelle de ces activités relève du secteur tertiaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'opérateur vend un accès à la communication. Étape 2 — Reconnaître : il ne prélève ni ne transforme une matière. Étape 3 — Préciser : ses clients sont la population et les entreprises. Étape 4 — Situer : les télécommunications sont un service du tertiaire. Planteur et pêcheur relèvent du primaire, l'usine du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Un opérateur de téléphonie mobile vend des forfaits.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un planteur récolte des fèves de cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une usine fabrique de l'huile de palme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un pêcheur remonte ses filets.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois activités de service ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le service rendu : crédit, transport, accueil. Étape 2 — Reconnaître : aucune de ces trois activités ne prélève ni ne transforme de matière. Étape 3 — Préciser : elles servent la population et les entreprises. Étape 4 — Situer : banque, transport et tourisme sont du tertiaire. La plantation et la pêche sont du primaire, l'usine de ciment du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Une banque qui accorde des crédits",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un camion qui transporte des marchandises",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un hôtel qui accueille des touristes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plantation d'hévéa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une usine de ciment",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une pêche artisanale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'économie ivoirienne, le secteur qui produit la plus grande part de la richesse est le secteur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : on compare les trois secteurs. Étape 2 — Reconnaître : les services (commerce, transports, banques, télécommunications) sont très nombreux. Étape 3 — Préciser : ils profitent à toute l'économie. Étape 4 — Situer : le tertiaire est le premier secteur pour la richesse produite. Le cacao est important à l'exportation, mais le primaire ne produit pas la plus grande part.",
+                  "answers": [
+                    {
+                      "content": "primaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Grand-Bassam, classée au patrimoine mondial de l'UNESCO en 2012, attire des touristes : le tourisme est une activité du secteur tertiaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le tourisme accueille des visiteurs (hôtels, restaurants, visites). Étape 2 — Reconnaître : il ne prélève ni ne transforme de matière, il rend un service. Étape 3 — Préciser : il profite aux visiteurs et à la population locale. Étape 4 — Situer : Grand-Bassam est une ville de la côte, proche d'Abidjan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « Le primaire produit la plus grande part de la richesse, car le cacao est le grand produit du pays. » Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'élève raisonne à partir d'un seul produit. Étape 2 — Reconnaître : les services créent aussi de la richesse. Étape 3 — Préciser : commerce, transports, banques, télécommunications concernent presque tout le monde. Étape 4 — Situer : le tertiaire est le premier secteur pour la richesse produite.",
+                  "answers": [
+                    {
+                      "content": "C'est faux : malgré l'importance du cacao, le tertiaire produit la plus grande part de la richesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai : le cacao fait du primaire le premier secteur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : c'est le secondaire, grâce à Abidjan.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai, car un service ne crée pas de richesse.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître d'autres services du tertiaire",
+              "statement": "Dans cet exercice, tu reconnais d'autres services du secteur tertiaire et leur rôle avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un service ne prélève ni ne transforme aucune matière. Cherche qui en profite, et rappelle-toi quel secteur produit la plus grande part de la richesse.",
+              "questions": [
+                {
+                  "content": "Les ports d'Abidjan et de San Pedro sont des services de transport. Quel est leur rôle pour le Mali et le Burkina Faso ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : un port reçoit et expédie des marchandises, c'est un service de transport. Étape 2 — Reconnaître : il ne prélève ni ne transforme de matière. Étape 3 — Préciser : il profite à la population, aux entreprises et aux pays voisins sans accès à la mer, comme le Mali et le Burkina Faso. Étape 4 — Situer : ces ports sont sur la côte. Produire de l'électricité relève des barrages (secondaire) ; cultiver relève du primaire.",
+                  "answers": [
+                    {
+                      "content": "Ils servent seulement aux Ivoiriens, jamais aux pays voisins.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils produisent de l'électricité pour ces deux pays.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils servent aussi à ces pays voisins, qui n'ont pas d'accès à la mer.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils cultivent à leur place le coton et l'anacarde.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La santé et l'enseignement font partie du secteur tertiaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'hôpital soigne, l'école enseigne : ce sont des services rendus. Étape 2 — Reconnaître : aucune matière n'est prélevée ni transformée. Étape 3 — Préciser : ils profitent à toute la population. Étape 4 — Situer : santé et enseignement sont des services du tertiaire. Répondre Faux, c'est croire que seules les activités qui produisent des objets comptent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Grand-Bassam attire des touristes. En quelle année a-t-elle été classée au patrimoine mondial de l'UNESCO ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : le tourisme accueille des visiteurs, c'est un service. Étape 2 — Reconnaître : il ne prélève ni ne transforme de matière. Étape 3 — Préciser : il profite aux visiteurs et à la population locale. Étape 4 — Situer : Grand-Bassam, ville de la côte, a été classée au patrimoine mondial de l'UNESCO en 2012.",
+                  "answers": [
+                    {
+                      "content": "2012",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelles activités relèvent du secteur tertiaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : on vend des vivres, on transporte des personnes et des marchandises. Étape 2 — Reconnaître : ni l'une ni l'autre ne prélève ni ne transforme de matière. Étape 3 — Préciser : elles profitent aux clients et aux entreprises. Étape 4 — Situer : commerce et transports sont du tertiaire. La scierie et la raffinerie transforment (secondaire) ; la plantation prélève à la nature (primaire).",
+                  "answers": [
+                    {
+                      "content": "Une scierie qui transforme des troncs en planches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une plantation de palmiers à huile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une raffinerie qui produit des carburants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une compagnie de transport routier",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un marché où des commerçants vendent des vivres",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la part de la richesse produite, le tertiaire est le ___ secteur.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : on compare les trois secteurs. Étape 2 — Reconnaître : les services sont très nombreux et sans matière à prélever ni à transformer. Étape 3 — Préciser : ils profitent à toute l'économie. Étape 4 — Situer : le tertiaire est le premier secteur pour la richesse produite. Deuxième ou troisième seraient des erreurs de rang, souvent dues à l'importance du cacao.",
+                  "answers": [
+                    {
+                      "content": "deuxième",
+                      "correct": false
+                    },
+                    {
+                      "content": "troisième",
+                      "correct": false
+                    },
+                    {
+                      "content": "premier",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Les banques et les télécommunications ne fabriquent rien, elles ne comptent donc pas dans la richesse du pays. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : banques et télécommunications rendent des services. Étape 2 — Reconnaître : ne rien fabriquer ne veut pas dire ne rien produire. Étape 3 — Préciser : ces services concernent presque tout le monde. Étape 4 — Situer : le tertiaire produit la plus grande part de la richesse. Croire que seuls les produits visibles comptent est le piège de la fiche ; séparer banques et télécommunications n'a pas de fondement, car les deux sont des services.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : seuls les produits visibles comme le cacao créent de la richesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a raison pour les banques, mais pas pour les télécommunications.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles comptent : les services créent de la richesse même sans rien fabriquer, et le tertiaire en produit la plus grande part.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles comptent, mais seulement pour les exportations de cacao.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu présentes un service avec la méthode : identifier, reconnaître l'absence de matière, préciser qui en profite, situer.",
             "questions": [
@@ -1492,6 +2061,1772 @@
               "criteria": [
                 "Le BTP est défini (construction de logements, routes, ponts)",
                 "Le mot-clé de la construction ou de la transformation est employé"
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "les trois secteurs et leurs mots-clés, les productions du primaire et leurs zones, les activités du secondaire et les pôles industriels, les services du tertiaire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document (texte écrit pour Lnclass) : « Dans une petite ville ivoirienne, un éleveur soigne ses bovins, une entreprise de BTP construit une école, une banque accorde des crédits et un opérateur de téléphonie mobile vend des forfaits. » Tu classes ces activités.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque activité, cherche le verbe : prélever, transformer ou rendre un service.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque activité de la petite ville à son secteur.",
+                  "question_type": "matching",
+                  "explanation": "Méthode en 4 étapes. Étape 1 — Identifier l'activité. Étape 2 — Se demander si elle prélève, transforme ou rend un service. Étape 3 — Classer. Étape 4 — Justifier par le mot-clé. L'élevage prélève à la nature (primaire) ; le BTP construit (secondaire) ; la banque rend un service (tertiaire). Le piège est de classer d'après le lieu (la ville) ou l'objet, au lieu de l'action.",
+                  "answers": [
+                    {
+                      "content": "Un éleveur soigne ses bovins.",
+                      "match": "Secteur primaire"
+                    },
+                    {
+                      "content": "Une entreprise de BTP construit une école.",
+                      "match": "Secteur secondaire"
+                    },
+                    {
+                      "content": "Une banque accorde des crédits.",
+                      "match": "Secteur tertiaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le mot-clé qui définit le secteur primaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on cherche la définition du primaire. Étape 2 — Se demander : le primaire prend ce que donne la nature (agriculture, élevage, pêche, forêt, mines). Étape 3 — Classer : mot-clé « prélever ». Transformer est le mot-clé du secondaire, rendre un service celui du tertiaire. Exporter n'est pas un mot-clé de secteur : une culture d'exportation reste du primaire.",
+                  "answers": [
+                    {
+                      "content": "Transformer une matière première",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rendre un service",
+                      "correct": false
+                    },
+                    {
+                      "content": "Exporter à l'étranger",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prélever à la nature",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le BTP construit des logements, des routes et des ponts.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le BTP est le bâtiment et les travaux publics. Étape 2 — Se demander : il construit, il ne prélève rien et ne rend pas un simple service. Étape 3 — Classer : secteur secondaire. Étape 4 — Justifier : il construit logements, routes et ponts. Répondre Faux serait oublier la définition du sigle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mot-clé du secteur secondaire est « ___ » (verbe à l'infinitif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on cherche ce que fait une usine. Étape 2 — Se demander : elle change une matière première en produit. Étape 3 — Classer : secteur secondaire. Étape 4 — Justifier : le mot-clé est « transformer ». Prélever est celui du primaire.",
+                  "answers": [
+                    {
+                      "content": "transformer",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux activités appartiennent au secteur tertiaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : soigner et enseigner sont des services. Étape 2 — Se demander : aucune matière n'est prélevée ni transformée. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service ». La mine d'or prélève (primaire), la conserverie de thon transforme (secondaire).",
+                  "answers": [
+                    {
+                      "content": "Une mine d'or",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une conserverie de thon",
+                      "correct": false
+                    },
+                    {
+                      "content": "La santé",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'enseignement",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document : la carte des zones de cultures montre la forêt dense au sud et à l'ouest et la savane au nord. On y repère Abidjan, San Pedro, Daloa (zone du cacao) et Korhogo (zone du coton). Tu situes des productions du secteur primaire.",
+              "exercise_type": "evaluation",
+              "hint": "Localise d'abord la zone naturelle, puis demande-toi si la production est exportée ou consommée sur place.",
+              "figure": "carte-ci-zones",
+              "questions": [
+                {
+                  "content": "Dans quelle zone naturelle cultive-t-on surtout le cacao et le café ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : cacao et café demandent beaucoup d'eau. Étape 2 — Identifier : ce sont des cultures d'exportation. Étape 3 — Expliquer : la forêt dense du sud et de l'ouest offre chaleur et humidité. Étape 4 — Conclure : forêt dense. La savane est la zone du coton, de l'anacarde et de l'élevage, c'est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Dans la savane, au nord.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans les lagunes de la côte.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans la forêt dense, au sud et à l'ouest.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans les mines de l'intérieur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque produit à sa nature.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Localiser chaque produit. Étape 2 — Identifier l'usage : le cacao est vendu surtout à l'étranger, l'igname nourrit d'abord la population, l'or vient des mines. Étape 3 — Expliquer le lien avec le milieu. Étape 4 — Conclure. Confondre culture d'exportation et culture vivrière est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Le cacao",
+                      "match": "Culture d'exportation"
+                    },
+                    {
+                      "content": "L'igname",
+                      "match": "Culture vivrière"
+                    },
+                    {
+                      "content": "L'or",
+                      "match": "Ressource minière"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire fournit environ 40 % du cacao mondial. Sur 50 tonnes de cacao produites dans le monde, environ combien viennent de la Côte d'Ivoire ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire la donnée : environ 40 % de la production mondiale. Étape 2 — Calculer : 50 × 40 ÷ 100 = 20. Étape 3 — Conclure : environ 20 tonnes (valeur arrondie, d'où la marge). Répondre 40 recopierait le pourcentage au lieu de l'appliquer.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 5,
+                  "unit": "t"
+                },
+                {
+                  "content": "L'élevage se pratique surtout au nord du pays.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Localiser : l'élevage est une activité du primaire, surtout au nord. Étape 2 — Expliquer : la savane du nord convient aux bovins. Étape 3 — Conclure : l'affirmation est vraie. La forêt du sud est surtout celle du cacao, du café, de l'hévéa et du palmier à huile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire est le ___ producteur mondial de noix de cajou brute.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'anacarde fournit la noix de cajou. Étape 2 — Localiser : il est cultivé dans la savane du nord. Étape 3 — Conclure : la Côte d'Ivoire est le premier producteur mondial de noix de cajou brute. Les autres rangs sont des erreurs de mémoire.",
+                  "answers": [
+                    {
+                      "content": "deuxième",
+                      "correct": false
+                    },
+                    {
+                      "content": "dixième",
+                      "correct": false
+                    },
+                    {
+                      "content": "premier",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document : la carte des pôles industriels montre Abidjan et San Pedro, sur la côte, avec leurs usines et leurs ports, la raffinerie d'Abidjan et les barrages de Kossou, Taabo, Buyo, Ayamé et Soubré. Tu présentes des activités du secteur secondaire.",
+              "exercise_type": "evaluation",
+              "hint": "Pense à la matière première, au produit obtenu, puis au port, à l'énergie et à la main-d'œuvre.",
+              "figure": "carte-ci-poles",
+              "questions": [
+                {
+                  "content": "Parmi ces barrages, lequel a été mis en service en 2017 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les barrages produisent de l'électricité. Étape 2 — Nommer : Kossou, Taabo, Buyo, Ayamé et Soubré. Étape 3 — Localiser sur la carte. Étape 4 — Retenir la date : Soubré a été mis en service en 2017. Les autres barrages sont plus anciens.",
+                  "answers": [
+                    {
+                      "content": "Soubré",
+                      "correct": true
+                    },
+                    {
+                      "content": "Kossou",
+                      "correct": false
+                    },
+                    {
+                      "content": "Taabo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ayamé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi les usines sont-elles surtout à Abidjan et à San Pedro ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le besoin d'une usine : exporter, être alimentée en énergie, employer des ouvriers, vendre. Étape 2 — Nommer ce qu'offrent Abidjan et San Pedro : un port. Étape 3 — Localiser : sur la côte. Étape 4 — Expliquer : le port, l'électricité, les routes, la main-d'œuvre et le marché justifient le choix. Les trois autres propositions sont inventées.",
+                  "answers": [
+                    {
+                      "content": "Le cacao ne pousse qu'en ville.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ces villes ont un grand port pour exporter.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane du nord est interdite aux usines.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan a une main-d'œuvre nombreuse et un grand marché.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y a pas de routes dans le reste du pays.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La raffinerie d'Abidjan transforme le pétrole brut en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la matière première est le pétrole brut. Étape 2 — Nommer : le produit obtenu est le carburant. Étape 3 — Localiser : Abidjan. Étape 4 — Expliquer : le port facilite les échanges.",
+                  "answers": [
+                    {
+                      "content": "carburants",
+                      "correct": true
+                    },
+                    {
+                      "content": "carburant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En Côte d'Ivoire, l'électricité vient surtout de centrales thermiques qui fonctionnent au gaz.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'électricité est de l'énergie produite, du secteur secondaire. Étape 2 — Nommer les sources : centrales thermiques au gaz et barrages. Étape 3 — Retenir : la source principale est thermique. Étape 4 — Conclure : l'affirmation est vraie ; les barrages complètent cette production.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lieu ivoirien à son activité principale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque lieu. Étape 2 — Nommer son activité : la raffinerie et les usines à Abidjan, un barrage à Kossou, un port et des usines à San Pedro. Étape 3 — Localiser sur la carte. Étape 4 — Expliquer le choix du lieu. Ne pas mélanger les barrages (intérieur) et les ports (côte).",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "match": "Raffinerie, usines et grand port"
+                    },
+                    {
+                      "content": "Kossou",
+                      "match": "Barrage qui produit de l'électricité"
+                    },
+                    {
+                      "content": "San Pedro",
+                      "match": "Port et usines du sud-ouest"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document (texte écrit pour Lnclass) : « Grand-Bassam, classée au patrimoine mondial de l'UNESCO en 2012, accueille des touristes. Les ports d'Abidjan et de San Pedro reçoivent des bateaux. Des banques, des commerçants et des opérateurs de téléphonie mobile servent la population. » Tu reconnais des services du tertiaire.",
+              "exercise_type": "evaluation",
+              "hint": "Un service ne prélève ni ne transforme aucune matière. Cherche qui en profite.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Grand-Bassam attire des visiteurs. À quel service du tertiaire cette activité appartient-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la ville accueille des visiteurs. Étape 2 — Reconnaître : elle ne prélève ni ne transforme de matière. Étape 3 — Préciser : elle profite aux visiteurs et à la population. Étape 4 — Situer : le tourisme est un service, Grand-Bassam est classée à l'UNESCO depuis 2012. La forêt et les mines sont du primaire, la banque est un autre service.",
+                  "answers": [
+                    {
+                      "content": "La banque",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'exploitation forestière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les mines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tourisme",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les ports d'Abidjan et de San Pedro servent aussi le Mali et le Burkina Faso.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : un port est un service de transport. Étape 2 — Reconnaître : il ne prélève ni ne transforme de matière. Étape 3 — Préciser : il sert aussi aux pays voisins sans accès à la mer, comme le Mali et le Burkina Faso. Étape 4 — Situer : sur la côte. Répondre Faux serait ignorer ce rôle régional.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles trois activités relèvent des services ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le service rendu. Étape 2 — Reconnaître que rien n'est prélevé ni transformé. Étape 3 — Préciser le bénéficiaire. Étape 4 — Situer : tourisme, télécommunications et banque sont du tertiaire. La raffinerie transforme (secondaire), la plantation prélève (primaire).",
+                  "answers": [
+                    {
+                      "content": "Une raffinerie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un hôtel qui accueille des touristes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plantation d'hévéa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un opérateur de téléphonie mobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une agence bancaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le secteur tertiaire produit la ___ part de la richesse du pays.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : on compare les parts des trois secteurs. Étape 2 — Reconnaître : les services sont très nombreux. Étape 3 — Préciser : ils profitent à toute l'économie. Étape 4 — Situer : le tertiaire produit la plus grande part. Les autres propositions sont des erreurs.",
+                  "answers": [
+                    {
+                      "content": "plus petite",
+                      "correct": false
+                    },
+                    {
+                      "content": "plus grande",
+                      "correct": true
+                    },
+                    {
+                      "content": "même (égale aux autres)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le cacao ne fait-il pas du primaire le premier secteur pour la richesse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'élève raisonne à partir d'un seul produit. Étape 2 — Reconnaître : un produit visible ne résume pas l'économie. Étape 3 — Préciser : commerce, transports, banques et télécommunications créent aussi de la richesse. Étape 4 — Situer : le tertiaire est premier. Le cacao est bien exporté, et le primaire existe : les autres propositions sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Le cacao pèse beaucoup dans les exportations, mais les services produisent la plus grande part de la richesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le cacao ne se vend pas à l'étranger.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le primaire n'existe pas en Côte d'Ivoire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le cacao est un service.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "classer des activités du quotidien à Abidjan, à Daloa ou à Grand-Bassam, relier un produit à sa zone et à son usage, comprendre le rôle des ports, de l'énergie et des services.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Situation (texte écrit pour Lnclass) : « Mariam tient un étal de vivres (igname, manioc, banane plantain) dans un marché d'Abidjan. Elle achète sa marchandise à des planteurs et la revend à ses clientes, qui paient en francs CFA. Elle règle ses comptes à l'agence bancaire du quartier et commande par téléphone mobile. » Tu étudies son activité.",
+              "exercise_type": "evaluation",
+              "hint": "Regarde ce que fait Mariam : elle achète et revend, elle ne cultive pas.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans quel secteur classer l'activité de Mariam, qui achète des vivres et les revend au marché ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Mariam achète des vivres et les revend. Étape 2 — Se demander : elle ne prélève rien et ne transforme rien. Étape 3 — Classer : commerce, donc tertiaire. Étape 4 — Justifier : mot-clé « service ». Classer d'après le produit (vivres, donc primaire) est l'erreur du piège ; déplacer des marchandises ne les transforme pas ; le commerce crée de la richesse.",
+                  "answers": [
+                    {
+                      "content": "Le secteur primaire, car elle vend des produits agricoles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur tertiaire, car elle fait du commerce.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le secteur secondaire, car elle déplace des marchandises.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun secteur, car elle ne produit rien.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les planteurs qui cultivent l'igname et le manioc exercent une activité du secteur primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les planteurs cultivent. Étape 2 — Se demander : ils prélèvent ce que donne la terre. Étape 3 — Classer : primaire. Étape 4 — Justifier : mot-clé « prélever ». L'igname et le manioc sont des cultures vivrières, qui nourrissent d'abord la population.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux services Mariam utilise-t-elle pour son commerce ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier les services cités : l'agence bancaire et le téléphone mobile. Étape 2 — Reconnaître qu'ils rendent des services. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : banques et télécommunications sont dans la liste du tertiaire. La scierie et la raffinerie transforment, le barrage produit de l'énergie : ce sont des activités du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Une scierie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une raffinerie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La téléphonie mobile",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une agence bancaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un barrage",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vivres vendus par Mariam (igname, manioc, banane plantain) sont des cultures ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : igname, manioc et banane plantain. Étape 2 — Localiser : elles sont cultivées dans le pays. Étape 3 — Expliquer : elles nourrissent d'abord la population. Étape 4 — Conclure : cultures vivrières. Cultures d'exportation serait l'erreur du cacao ou du café ; minières ne concerne que les mines.",
+                  "answers": [
+                    {
+                      "content": "vivrières",
+                      "correct": true
+                    },
+                    {
+                      "content": "d'exportation",
+                      "correct": false
+                    },
+                    {
+                      "content": "minières",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cliente dit : « Mariam vend de l'igname, donc elle est dans le primaire. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : Mariam vend, elle ne cultive pas. Étape 2 — Se demander : prélève-t-elle, transforme-t-elle ou rend-elle un service ? Elle rend un service. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « commerce ». L'erreur de la cliente est de classer d'après le produit.",
+                  "answers": [
+                    {
+                      "content": "La cliente a raison : un produit agricole reste toujours du primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On classe d'après ce qui est fait : vendre est un service, donc Mariam est dans le tertiaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mariam transforme l'igname, donc elle est dans le secondaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On classe d'après le lieu : au marché, c'est toujours du primaire.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Situation (texte écrit pour Lnclass) : « À Daloa, ville de la zone du cacao, la famille Yao cultive le cacao et un peu de manioc. Un acheteur envoie les fèves à l'usine d'Abidjan. Les enfants vont à l'école du quartier. » Tu suis les activités de cette famille. Tu peux t'appuyer sur la carte des zones de cultures.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque activité de la famille, demande-toi si elle prélève, transforme ou rend un service.",
+              "figure": "carte-ci-zones",
+              "questions": [
+                {
+                  "content": "Le cacao est cultivé surtout dans la zone de ___ dense.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Localiser : le cacao est dans la zone de forêt dense, au sud et à l'ouest. Étape 2 — Identifier : culture d'exportation. Étape 3 — Expliquer : la forêt est chaude et humide. Étape 4 — Conclure : forêt. La savane est la zone du coton ; le désert n'est pas une zone de la leçon.",
+                  "answers": [
+                    {
+                      "content": "savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "forêt",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le manioc cultivé par la famille Yao nourrit d'abord la population.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Localiser : le manioc est cultivé dans le pays. Étape 2 — Identifier : c'est une culture vivrière. Étape 3 — Expliquer : elle nourrit d'abord la population. Étape 4 — Conclure : l'affirmation est vraie. Le cacao, lui, est exporté.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le parcours du cacao à travers les trois secteurs.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier le secteur de chaque maillon. Étape 2 — Ordonner : on prélève d'abord (planteur, primaire), on transforme ensuite (usine, secondaire), on vend enfin (commerçant, tertiaire). Étape 3 — Conclure : un même produit peut passer par les trois secteurs. Placer la vente avant la récolte inverse la chaîne.",
+                  "answers": [
+                    {
+                      "content": "Les planteurs récoltent les cabosses."
+                    },
+                    {
+                      "content": "L'usine broie les fèves pour fabriquer du beurre et de la poudre de cacao."
+                    },
+                    {
+                      "content": "Le commerçant vend le chocolat."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel secteur classer l'école du quartier où vont les enfants de la famille Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'école enseigne. Étape 2 — Se demander : elle ne prélève ni ne transforme de matière. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service », l'enseignement est dans la liste du tertiaire. Classer d'après le lieu ou d'après la construction du bâtiment est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Le secteur primaire, car l'école est à Daloa, zone du cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur secondaire, car l'école est construite par le BTP.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun secteur, car l'école ne vend rien.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur tertiaire, car l'enseignement est un service.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Le cacao de la famille Yao est une culture vivrière, comme le manioc. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le cacao est en forêt dense. Étape 2 — Identifier : les fèves sont vendues surtout à l'étranger, c'est une culture d'exportation. Étape 3 — Expliquer : le manioc, culture vivrière, nourrit d'abord la population. Étape 4 — Conclure : l'élève confond exportation et consommation locale. Le cacao n'est ni minier ni un service : il est cultivé.",
+                  "answers": [
+                    {
+                      "content": "Le cacao est une culture d'exportation, vendue surtout à l'étranger ; le manioc, lui, nourrit d'abord la population.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a raison : toutes les cultures de la famille sont vivrières.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao est une culture minière, car il vient du sol.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao est un service, car il est vendu par un acheteur.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Situation (texte écrit pour Lnclass) : « Aminata visite Abidjan avec sa classe. Elle voit le grand port, la raffinerie, des usines qui broient le cacao et traitent la noix de cajou, des chantiers de BTP, des hôtels et des opérateurs de téléphonie mobile. Son oncle travaille au port de San Pedro. » Tu peux t'appuyer sur la carte des pôles industriels.",
+              "exercise_type": "evaluation",
+              "hint": "Pense à l'activité de chaque lieu visité, puis aux raisons d'implanter une usine à Abidjan.",
+              "figure": "carte-ci-poles",
+              "questions": [
+                {
+                  "content": "Quels éléments expliquent que les usines soient nombreuses à Abidjan ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier le besoin d'une usine. Étape 2 — Nommer ce qu'offre Abidjan : un port, de l'électricité, des routes, une main-d'œuvre, un marché. Étape 3 — Localiser : sur la côte, pas dans la savane. Étape 4 — Expliquer : ces atouts justifient le choix. Les deux autres propositions sont fausses : Abidjan est au sud, et le pays a d'autres villes.",
+                  "answers": [
+                    {
+                      "content": "De l'électricité et des routes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est au centre de la savane du nord.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une main-d'œuvre nombreuse et un grand marché",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est la seule ville du pays.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un grand port pour exporter",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle activité visitée par Aminata relève du secteur secondaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : quatre activités sont citées. Étape 2 — Se demander : la raffinerie transforme le pétrole brut en carburants. Étape 3 — Classer : secondaire. Étape 4 — Justifier : mot-clé « transformer ». Hôtel, port et opérateur rendent des services : tertiaire.",
+                  "answers": [
+                    {
+                      "content": "La raffinerie, qui traite le pétrole brut",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hôtel, qui accueille des touristes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le port, qui expédie des marchandises",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'opérateur mobile, qui vend des forfaits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le port de San Pedro est un port important du sud-ouest.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Localiser : San Pedro est sur la côte, au sud-ouest. Étape 2 — Identifier : c'est un port. Étape 3 — Expliquer : il sert aux exportations et aux importations. Étape 4 — Conclure : l'affirmation est vraie. Abidjan est l'autre grand port.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lieu à son activité.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier chaque lieu. Étape 2 — Associer son activité : raffinerie et usines à Abidjan, barrage à Kossou, tourisme à Grand-Bassam (classée à l'UNESCO en 2012). Étape 3 — Classer : secondaire pour les deux premiers, tertiaire pour le dernier. Étape 4 — Justifier. Ne pas confondre barrage (secondaire) et tourisme (tertiaire).",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "match": "Raffinerie et usines"
+                    },
+                    {
+                      "content": "Kossou",
+                      "match": "Barrage et électricité"
+                    },
+                    {
+                      "content": "Grand-Bassam",
+                      "match": "Tourisme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Transformer le cacao à Abidjan avant de l'exporter garde plus de ___ dans le pays.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'usine transforme des fèves en produits. Étape 2 — Nommer : beurre et poudre de cacao. Étape 3 — Localiser : Abidjan. Étape 4 — Expliquer : transformer sur place garde plus de travail dans le pays. Forêt et pétrole n'ont pas de lien avec ce choix.",
+                  "answers": [
+                    {
+                      "content": "travail",
+                      "correct": true
+                    },
+                    {
+                      "content": "forêt",
+                      "correct": false
+                    },
+                    {
+                      "content": "pétrole",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Situation (texte écrit pour Lnclass) : « Le club de géographie du collège prépare un exposé sur l'électricité. Un élève dit que l'eau du fleuve est dans le secondaire, parce que le barrage produit de l'électricité. » Tu corriges cet exposé.",
+              "exercise_type": "evaluation",
+              "hint": "Distingue la ressource naturelle (l'eau) de l'activité (produire de l'électricité).",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "D'où vient surtout l'électricité ivoirienne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'électricité est de l'énergie. Étape 2 — Nommer les sources : centrales thermiques au gaz et barrages hydroélectriques. Étape 3 — Retenir : la source principale est thermique. Étape 4 — Conclure. Les trois autres réponses n'ont aucun lien avec l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Uniquement des mines d'or.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Surtout du pétrole brut brûlé dans les ports.",
+                      "correct": false
+                    },
+                    {
+                      "content": "De centrales thermiques qui fonctionnent au gaz, et aussi de barrages.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Uniquement des usines de cacao.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux noms sont des barrages ivoiriens ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier les noms. Étape 2 — Reconnaître les barrages : Kossou, Taabo, Buyo, Ayamé, Soubré. Étape 3 — Localiser. Étape 4 — Conclure. Daloa, Korhogo et Abidjan sont des villes.",
+                  "answers": [
+                    {
+                      "content": "Ayamé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Daloa",
+                      "correct": false
+                    },
+                    {
+                      "content": "Korhogo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan",
+                      "correct": false
+                    },
+                    {
+                      "content": "Buyo",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un barrage qui produit de l'électricité est dans le secteur secondaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le barrage produit de l'énergie. Étape 2 — Se demander : il ne prélève pas et ne rend pas un service direct. Étape 3 — Classer : secondaire. Étape 4 — Justifier : la production d'énergie fait partie du secondaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le barrage de Soubré a été mis en service en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : Soubré est un barrage. Étape 2 — Retenir : il a été mis en service en 2017. Étape 3 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "2017",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'élève dit : « L'eau du fleuve est du secondaire, car le barrage produit de l'électricité. » Quelle est la bonne correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux choses sont mêlées, l'eau et le barrage. Étape 2 — Se demander : l'eau est une ressource ; le barrage la transforme en énergie. Étape 3 — Classer : l'activité est du secondaire. Étape 4 — Justifier : on classe une activité, pas une ressource. Les autres propositions confondent ressource et activité.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : l'eau du fleuve est du secondaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'eau du fleuve est une ressource naturelle ; c'est le barrage, qui produit de l'électricité, qui est du secondaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'eau du fleuve est du tertiaire, car elle rend service.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le barrage est du primaire, car il utilise l'eau.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et rédiger",
+          "notions": "justifier un classement par le mot-clé, choisir le bon argument pour expliquer une localisation, comparer les secteurs, construire une réponse organisée.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document (texte écrit pour Lnclass) : « Trois élèves discutent d'une usine d'Abidjan qui décortique des noix de cajou. Koffi dit : c'est du primaire, car la noix de cajou vient des champs. Adjoua dit : c'est du secondaire, car l'usine transforme la noix. Salif dit : c'est du tertiaire, car la noix est exportée. » Tu choisis le bon raisonnement.",
+              "exercise_type": "evaluation",
+              "hint": "Une bonne justification cite le mot-clé de la définition du secteur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui a raison, et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'usine décortique des noix de cajou. Étape 2 — Se demander : elle transforme une matière première. Étape 3 — Classer : secondaire. Étape 4 — Justifier : mot-clé « transformer ». Koffi classe d'après le produit, erreur du piège. Salif classe d'après la destination, alors que le secteur dépend de l'action.",
+                  "answers": [
+                    {
+                      "content": "Koffi : le produit vient des champs, donc c'est du primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Salif : exporter est un service, donc c'est du tertiaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Adjoua : l'usine transforme une matière première en produit, mot-clé du secondaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Personne : une usine n'appartient à aucun secteur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour classer une activité.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier : on commence par savoir ce qui est fait. Étape 2 — Se demander : prélever, transformer ou rendre un service. Étape 3 — Classer : primaire, secondaire ou tertiaire. Étape 4 — Justifier par le mot-clé. Classer avant d'avoir identifié mène à l'erreur de classer d'après le produit.",
+                  "answers": [
+                    {
+                      "content": "Identifier l'activité exercée."
+                    },
+                    {
+                      "content": "Se demander si elle prélève, transforme ou rend un service."
+                    },
+                    {
+                      "content": "Classer l'activité dans un secteur."
+                    },
+                    {
+                      "content": "Justifier le classement par le mot-clé."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour justifier un classement, on cite le mot-clé de la définition du secteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier l'activité. Étape 2 — Se demander ce qu'elle fait. Étape 3 — Classer. Étape 4 — Justifier : citer « prélever », « transformer » ou « service ». Une justification sans mot-clé reste une opinion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux arguments justifient que l'usine de noix de cajou est du secteur secondaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier l'activité. Étape 2 — Se demander : elle change la noix en amande décortiquée. Étape 3 — Classer : secondaire. Étape 4 — Justifier : mot-clé « transformer ». Les deux propositions fausses raisonnent d'après le lieu ou d'après le produit.",
+                  "answers": [
+                    {
+                      "content": "Elle change la matière première en produit.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est installée dans un champ.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mot-clé du secondaire est transformer.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La noix de cajou vient de la nature, donc c'est du primaire.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le meilleur argument contre « le cacao est toujours du primaire » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'affirmation classe d'après le produit. Étape 2 — Se demander : que fait chaque acteur ? Étape 3 — Classer : primaire (planteur), secondaire (usine), tertiaire (commerçant). Étape 4 — Justifier : un même produit passe par les trois secteurs. Les autres arguments sont faux ou sans rapport.",
+                  "answers": [
+                    {
+                      "content": "Le cacao n'est vendu qu'à l'étranger.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le planteur est dans le primaire, l'usine dans le secondaire, le commerçant dans le tertiaire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao pousse surtout en savane.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao ne rapporte rien au pays.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document (texte écrit pour Lnclass) : « Un élève doit expliquer où l'on cultive quoi et où se trouvent les usines. Il propose plusieurs phrases, dont certaines sont mal argumentées. » Tu choisis les bons arguments. Tu peux t'appuyer sur la carte des zones de cultures.",
+              "exercise_type": "evaluation",
+              "hint": "Un argument relie toujours un lieu à une raison : le climat, le port ou la main-d'œuvre.",
+              "figure": "carte-ci-zones",
+              "questions": [
+                {
+                  "content": "Quel argument explique que le cacao soit cultivé en zone forestière ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le cacao est en forêt. Étape 2 — Identifier : culture d'exportation. Étape 3 — Expliquer : climat chaud et humide, pluies abondantes. Étape 4 — Conclure. Une saison sèche marquée convient au coton ; les ports expliquent les usines, pas les plantations ; le cacao n'est pas vivrier.",
+                  "answers": [
+                    {
+                      "content": "Le cacaoyer supporte une longue saison sèche.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao est cultivé là parce que les ports y sont.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacaoyer demande un climat chaud et humide et des pluies abondantes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cacao est cultivé en forêt parce que c'est une culture vivrière.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel argument explique que le coton soit cultivé au nord ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : le coton est en savane, au nord. Étape 2 — Identifier : culture d'exportation. Étape 3 — Expliquer : il supporte une saison sèche marquée. Étape 4 — Conclure. Beaucoup d'eau est le besoin du cacao ; le coton n'est pas une culture vivrière.",
+                  "answers": [
+                    {
+                      "content": "Le coton demande beaucoup d'eau, comme la forêt.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton est cultivé au nord parce que les barrages y sont.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton nourrit d'abord la population.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coton supporte une saison sèche marquée, ce que la savane offre.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque conclusion à l'argument qui la justifie.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Localiser chaque conclusion. Étape 2 — Identifier la raison attendue. Étape 3 — Expliquer le lien lieu et argument. Étape 4 — Conclure. Ne pas échanger les arguments : le port et le marché expliquent les usines, le climat explique les cultures.",
+                  "answers": [
+                    {
+                      "content": "Les usines sont à Abidjan.",
+                      "match": "Grand port, main-d'œuvre nombreuse, grand marché"
+                    },
+                    {
+                      "content": "Le cacao est cultivé en forêt.",
+                      "match": "Climat chaud et humide, pluies abondantes"
+                    },
+                    {
+                      "content": "Le coton est cultivé au nord.",
+                      "match": "Saison sèche marquée supportée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Cacao et café demandent beaucoup d'eau : ils sont en zone forestière.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Localiser : forêt du sud et de l'ouest. Étape 2 — Identifier : cultures d'exportation. Étape 3 — Expliquer : besoin d'eau. Étape 4 — Conclure : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase est la mieux argumentée sur l'implantation des usines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : Abidjan et San Pedro, sur la côte. Étape 2 — Identifier : usines, port. Étape 3 — Expliquer : le port permet d'exporter et d'importer. Étape 4 — Conclure. Les autres phrases donnent un lieu sans argument de la leçon.",
+                  "answers": [
+                    {
+                      "content": "Les usines sont à Abidjan et à San Pedro, car ces villes ont un port pour exporter.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les usines sont en savane, car il y fait chaud.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les usines sont à Daloa, car on y cultive le cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les usines sont partout au hasard.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte écrit pour Lnclass) : « Un journaliste écrit : le cacao fait la fierté du pays, donc le primaire produit la plus grande part de la richesse. » Tu examines ce raisonnement.",
+              "exercise_type": "evaluation",
+              "hint": "Le poids d'un produit dans les exportations n'est pas la part du secteur dans la richesse.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi ce raisonnement est-il faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le raisonnement part d'un seul produit. Étape 2 — Reconnaître : le cacao pèse beaucoup dans les exportations. Étape 3 — Préciser : les services créent aussi de la richesse. Étape 4 — Situer : le tertiaire est premier. Les autres réponses nient des faits établis.",
+                  "answers": [
+                    {
+                      "content": "Parce que le cacao n'est pas cultivé en Côte d'Ivoire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao pèse dans les exportations, mais le tertiaire produit la plus grande part de la richesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le tertiaire ne produit aucune richesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la Côte d'Ivoire ne produit pas de cacao.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque erreur à sa correction.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer l'erreur. Étape 2 — La nommer. Étape 3 — Appliquer la méthode. Étape 4 — Corriger. Ces trois erreurs sont les pièges des fiches sur les secteurs, le primaire et le tertiaire.",
+                  "answers": [
+                    {
+                      "content": "Classer d'après le produit",
+                      "match": "On classe d'après ce qui est fait"
+                    },
+                    {
+                      "content": "Placer toutes les cultures dans la même zone",
+                      "match": "Cacao en forêt, coton en savane"
+                    },
+                    {
+                      "content": "Penser que seuls les produits visibles comptent",
+                      "match": "Les services créent de la richesse"
+                    }
+                  ]
+                },
+                {
+                  "content": "La Côte d'Ivoire fournit environ 40 % de la production mondiale de cacao, ce qui suffit à faire du primaire le premier secteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : 40 % de la production mondiale de cacao, c'est un fait. Étape 2 — Reconnaître : cela ne dit rien de la part du primaire dans la richesse du pays. Étape 3 — Préciser : c'est le tertiaire qui est premier. Étape 4 — Situer. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux phrases sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier chaque phrase. Étape 2 — La comparer à la leçon. Étape 3 — Retenir : tertiaire premier ; cacao grand produit d'exportation. Étape 4 — Rejeter les deux autres, qui sont le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Le cacao fait du primaire le premier secteur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao est un grand produit d'exportation.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le tertiaire est le premier secteur pour la richesse produite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les services ne créent pas de richesse.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel secteur crée de la richesse même sans rien fabriquer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la question porte sur la richesse sans fabrication. Étape 2 — Reconnaître : commerce, transports, banques et télécommunications ne fabriquent rien. Étape 3 — Préciser : ils créent pourtant de la richesse. Étape 4 — Situer : c'est le tertiaire. Penser qu'il faut fabriquer pour créer de la richesse est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Le secteur tertiaire, grâce aux services.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le secteur primaire, grâce aux cultures.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur secondaire, grâce aux usines.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun : sans fabrication, il n'y a pas de richesse.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document (texte écrit pour Lnclass) : « Pour montrer que l'économie ivoirienne repose sur trois secteurs complémentaires, un élève prépare un paragraphe avec l'exemple du cacao. » Tu construis ce paragraphe.",
+              "exercise_type": "evaluation",
+              "hint": "Un bon paragraphe affirme, donne un exemple par secteur, puis conclut.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les phrases du paragraphe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Annoncer l'idée. Étape 2 — Donner l'exemple du primaire. Étape 3 — Donner l'exemple du secondaire. Étape 4 — Donner l'exemple du tertiaire. Le paragraphe suit l'ordre de la chaîne du cacao.",
+                  "answers": [
+                    {
+                      "content": "L'économie ivoirienne repose sur trois secteurs."
+                    },
+                    {
+                      "content": "Le planteur de cacao, dans le primaire, prélève à la nature."
+                    },
+                    {
+                      "content": "L'usine qui broie les fèves, dans le secondaire, les transforme."
+                    },
+                    {
+                      "content": "Le commerçant qui vend le chocolat, dans le tertiaire, rend un service."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels deux éléments doivent figurer dans ce paragraphe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la consigne. Étape 2 — Retenir : un exemple par secteur, avec mot-clé. Étape 3 — Écarter ce qui n'est pas dans la leçon. Étape 4 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Le mot-clé de chaque secteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le prix du cacao par kilo",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un exemple d'activité par secteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nom d'un chef d'État",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion convient le mieux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reprendre l'idée. Étape 2 — Lier les exemples. Étape 3 — Conclure sur la complémentarité. Étape 4 — Éviter les affirmations fausses.",
+                  "answers": [
+                    {
+                      "content": "Un seul secteur suffit à faire vivre le pays.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tertiaire est inutile.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao est uniquement primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois secteurs sont complémentaires : on prélève, on transforme, puis on vend.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les trois secteurs sont ___ : chacun joue un rôle dans la chaîne du cacao.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relire la chaîne. Étape 2 — Voir que chaque secteur dépend des autres. Étape 3 — Choisir le mot : complémentaires.",
+                  "answers": [
+                    {
+                      "content": "complémentaires",
+                      "correct": true
+                    },
+                    {
+                      "content": "complémentaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paragraphe de synthèse doit donner au moins un exemple d'activité par secteur.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier la consigne. Étape 2 — Vérifier : primaire, secondaire, tertiaire. Étape 3 — Conclure : vrai.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan des trois secteurs",
+          "notions": "classer une activité, situer les productions du primaire, présenter les activités du secondaire et leurs pôles, reconnaître les services du tertiaire, relier les secteurs entre eux.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Document (texte écrit pour Lnclass) : « Dans une ville de la côte, un pêcheur remonte ses filets, une conserverie prépare du thon, une entreprise de BTP construit un pont, une agence bancaire accorde des crédits et un hôtel accueille des touristes. » Tu classes ces activités.",
+              "exercise_type": "evaluation",
+              "hint": "Pour chaque activité, cherche le verbe : prélever, transformer ou rendre un service.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque activité de la ville côtière à son secteur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier l'activité. Étape 2 — Se demander : le pêcheur prélève, la conserverie transforme, l'hôtel rend un service. Étape 3 — Classer. Étape 4 — Justifier par le mot-clé. Classer d'après le produit (le thon, dans les trois cas) est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Un pêcheur remonte ses filets.",
+                      "match": "Secteur primaire"
+                    },
+                    {
+                      "content": "Une conserverie prépare du thon.",
+                      "match": "Secteur secondaire"
+                    },
+                    {
+                      "content": "Un hôtel accueille des touristes.",
+                      "match": "Secteur tertiaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quel secteur classer l'entreprise de BTP qui construit un pont ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'entreprise construit un pont. Étape 2 — Se demander : elle construit, elle ne prélève pas pour vendre et ne rend pas un simple service. Étape 3 — Classer : le BTP est du secondaire. Étape 4 — Justifier : bâtiment et travaux publics. Classer d'après l'usage (le service que rend le pont) ou la matière est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Le secteur secondaire, car le BTP construit.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le secteur primaire, car elle utilise du sable de la nature.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur tertiaire, car un pont rend service.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun secteur, car un pont n'est pas un produit.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une agence bancaire qui accorde des crédits exerce une activité du secteur primaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : la banque accorde des crédits. Étape 2 — Se demander : elle ne prélève rien. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service ». L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les banques, le commerce et les transports forment le secteur ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : trois services. Étape 2 — Se demander : ils ne prélèvent ni ne transforment. Étape 3 — Classer : tertiaire. Étape 4 — Justifier : mot-clé « service ».",
+                  "answers": [
+                    {
+                      "content": "tertiaire",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pêche relève du secteur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : la pêche prélève du poisson. Étape 2 — Se demander : elle ne transforme rien. Étape 3 — Classer : primaire. Étape 4 — Justifier : mot-clé « prélever ».",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Document (texte écrit pour Lnclass) : « La Côte d'Ivoire est le premier producteur mondial de cacao. Le diagramme circulaire montre qu'elle fournit environ 40 % de la production mondiale, le reste du monde environ 60 %. Le cacao pousse surtout en zone forestière. » Tu peux t'appuyer sur le diagramme.",
+              "exercise_type": "evaluation",
+              "hint": "Lis le diagramme : les deux parts font 100 %.",
+              "figure": "part-cacao-mondial",
+              "questions": [
+                {
+                  "content": "D'après le diagramme, sur 100 tonnes de cacao dans le monde, environ combien viennent du reste du monde ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : la Côte d'Ivoire fournit environ 40 %. Étape 2 — Calculer : 100 − 40 = 60. Étape 3 — Conclure : environ 60 tonnes, valeurs arrondies. Répondre 40 serait lire la mauvaise part.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 5,
+                  "unit": "t"
+                },
+                {
+                  "content": "La Côte d'Ivoire est le premier producteur mondial de cacao.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire le diagramme. Étape 2 — Comparer : 40 % pour la Côte d'Ivoire seule. Étape 3 — Conclure : premier producteur mondial.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle zone naturelle le cacao est-il cultivé surtout ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Localiser : forêt dense. Étape 2 — Identifier : culture d'exportation. Étape 3 — Expliquer : climat chaud et humide, pluies abondantes. Étape 4 — Conclure. La savane est la zone du coton ; mines et ports ne sont pas des zones de culture.",
+                  "answers": [
+                    {
+                      "content": "La savane, au nord.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les mines de l'intérieur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La zone forestière, au sud et à l'ouest.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le littoral, dans les ports uniquement.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux raisons expliquent la culture du cacao en forêt ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Localiser : forêt. Étape 2 — Identifier : le cacaoyer. Étape 3 — Expliquer : il demande chaleur, humidité et pluies. Étape 4 — Conclure. La saison sèche marquée convient au coton ; barrages et raffinerie ne concernent pas les plantations.",
+                  "answers": [
+                    {
+                      "content": "Des pluies abondantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une saison sèche très marquée",
+                      "correct": false
+                    },
+                    {
+                      "content": "La présence des barrages",
+                      "correct": false
+                    },
+                    {
+                      "content": "La proximité de la raffinerie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un climat chaud et humide",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « 40 % de la production mondiale, donc le primaire est le premier secteur du pays. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'élève raisonne à partir d'un seul produit. Étape 2 — Reconnaître : 40 % du cacao mondial est un fait. Étape 3 — Préciser : les services créent de la richesse. Étape 4 — Situer : le tertiaire est premier.",
+                  "answers": [
+                    {
+                      "content": "C'est exact : un produit visible suffit à classer les secteurs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cacao pèse beaucoup dans les exportations, mais le tertiaire produit la plus grande part de la richesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est faux : la Côte d'Ivoire ne produit pas de cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est exact : le primaire produit toujours le plus.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Document (texte écrit pour Lnclass) : « Un cours d'eau est barré à Kossou pour produire de l'électricité. À Abidjan, une raffinerie traite du pétrole brut, et des usines transforment le cacao et la noix de cajou. San Pedro est un autre port important du sud-ouest. Le barrage de Soubré a été mis en service en 2017. » Tu peux t'appuyer sur la carte des pôles industriels.",
+              "exercise_type": "evaluation",
+              "hint": "Distingue ce qui est extrait (primaire), ce qui est transformé (secondaire) et ce qui est un service (tertiaire).",
+              "figure": "carte-ci-poles",
+              "questions": [
+                {
+                  "content": "Le barrage de Kossou produit de l'électricité. Dans quel secteur le classer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le barrage produit de l'électricité. Étape 2 — Nommer : l'énergie fait partie du secondaire. Étape 3 — Localiser : sur un fleuve du pays. Étape 4 — Expliquer : l'eau est une ressource, le barrage l'exploite.",
+                  "answers": [
+                    {
+                      "content": "Le secteur primaire, car il utilise l'eau du fleuve.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur tertiaire, car l'électricité est un service.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le secteur secondaire, car il produit de l'énergie.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun secteur, car l'eau est naturelle.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles deux activités du document relèvent du secteur secondaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier chaque activité. Étape 2 — Se demander : la raffinerie et les usines transforment. Étape 3 — Classer : secondaire. Étape 4 — Justifier : mot-clé « transformer ». Le port est un service, la mine prélève, l'hôtel rend un service.",
+                  "answers": [
+                    {
+                      "content": "Le port de San Pedro",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mine d'or",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un hôtel",
+                      "correct": false
+                    },
+                    {
+                      "content": "La raffinerie qui traite du pétrole brut",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les usines qui transforment la noix de cajou",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soubré, barrage ivoirien, est entré en service en 2017.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : Soubré est un barrage. Étape 2 — Retenir la date : 2017. Étape 3 — Conclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque lieu à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le lieu. Étape 2 — Nommer son rôle. Étape 3 — Localiser. Étape 4 — Expliquer le choix. Ne pas confondre ports de la côte et barrages sur les fleuves.",
+                  "answers": [
+                    {
+                      "content": "Abidjan",
+                      "match": "Raffinerie, usines et grand port"
+                    },
+                    {
+                      "content": "San Pedro",
+                      "match": "Port important du sud-ouest"
+                    },
+                    {
+                      "content": "Kossou",
+                      "match": "Barrage qui produit de l'électricité"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mine d'or ou un puits de pétrole relèvent du secteur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : on extrait du sous-sol. Étape 2 — Nommer : on obtient un produit brut. Étape 3 — Localiser : sur le gisement. Étape 4 — Expliquer : extraire est du primaire, raffiner est du secondaire.",
+                  "answers": [
+                    {
+                      "content": "secondaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "primaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "tertiaire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Document (texte écrit pour Lnclass) : « Le schéma suit le cacao de la plantation au consommateur : la plantation, l'usine de broyage, le port d'Abidjan et la boutique qui vend le chocolat. » Tu relies ce parcours aux trois secteurs. Ce sujet est de niveau BEPC.",
+              "exercise_type": "evaluation",
+              "hint": "Un même produit peut passer par les trois secteurs : classe chaque maillon d'après ce qui est fait.",
+              "figure": "chaine-cacao",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les maillons de la chaîne du cacao.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier chaque maillon. Étape 2 — Ordonner : on cultive, on transforme, on expédie, on vend. Étape 3 — Classer : primaire, secondaire, tertiaire, tertiaire. Étape 4 — Justifier par les mots-clés.",
+                  "answers": [
+                    {
+                      "content": "La plantation de cacao"
+                    },
+                    {
+                      "content": "L'usine de broyage"
+                    },
+                    {
+                      "content": "Le port d'Abidjan"
+                    },
+                    {
+                      "content": "La boutique qui vend le chocolat"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque maillon à son secteur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier. Étape 2 — Se demander : la plantation prélève, l'usine transforme, la boutique vend. Étape 3 — Classer. Étape 4 — Justifier. Classer tout le cacao dans le primaire serait l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "La plantation de cacao",
+                      "match": "Secteur primaire"
+                    },
+                    {
+                      "content": "L'usine de broyage",
+                      "match": "Secteur secondaire"
+                    },
+                    {
+                      "content": "La boutique de chocolat",
+                      "match": "Secteur tertiaire"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'usine de broyage est-elle à Abidjan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'usine broie des fèves. Étape 2 — Nommer : beurre et poudre de cacao. Étape 3 — Localiser : Abidjan. Étape 4 — Expliquer : port, électricité, routes, main-d'œuvre, marché. San Pedro est aussi un port.",
+                  "answers": [
+                    {
+                      "content": "Parce que le cacao ne pousse qu'à Abidjan.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la savane y est plus sèche.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Abidjan a un grand port, de l'électricité, des routes, une main-d'œuvre nombreuse et un grand marché.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'aucune autre ville n'a de port.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le port d'Abidjan rend un service de transport et appartient au secteur tertiaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le port reçoit et expédie des marchandises. Étape 2 — Reconnaître : il ne prélève ni ne transforme. Étape 3 — Préciser : il sert aussi aux pays voisins. Étape 4 — Situer : tertiaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand la Côte d'Ivoire exporte des fèves sans les transformer, elle exporte une matière ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : la fève brute. Étape 2 — Reconnaître : non transformée. Étape 3 — Conclure : matière première. Transformer garde plus de travail dans le pays.",
+                  "answers": [
+                    {
+                      "content": "première",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle conclusion résume le mieux le parcours du cacao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relire la chaîne. Étape 2 — Classer chaque maillon. Étape 3 — Conclure sur la complémentarité. Les autres propositions sont les erreurs du piège : classer d'après le produit, oublier les services.",
+                  "answers": [
+                    {
+                      "content": "Le cacao reste toujours dans le primaire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le secondaire compte pour la richesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tertiaire ne concerne pas le cacao.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois secteurs sont complémentaires : on prélève, on transforme, puis on vend.",
+                      "correct": true
+                    }
+                  ]
+                }
               ]
             }
           ]

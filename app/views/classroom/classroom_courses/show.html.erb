@@ -24,7 +24,7 @@
 <div class="space-y-10">
   <section id="fiche-de-revision" aria-labelledby="revision_title">
     <h2 id="revision_title" class="mb-4 font-display text-xl font-medium"><%= t(".revision_title") %></h2>
-    <%= render "catalog/courses/revision_sheet", course:, revision: @revision %>
+    <%= render "catalog/courses/revision_sheet", course:, revision: @revision, class_gaps: @class_gaps %>
   </section>
 
   <%# Des cases seulement : la feuille se lit sur sa page dans la classe, avec les bascules de cette classe seulement. %>

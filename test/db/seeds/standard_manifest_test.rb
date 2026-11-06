@@ -4,7 +4,7 @@ require "test_helper"
 class StandardManifestTest < ActiveSupport::TestCase
   SEEDS = Rails.root.join("db/seeds/standard")
   LESSONS = Rails.root.join("docs/contenus/lecons-traitees")
-  PRD_COUPLES = 46
+  PRD_COUPLES = 6
 
   setup do
     @manifest = YAML.load_file(SEEDS.join("jeu.yml"))
@@ -23,15 +23,14 @@ class StandardManifestTest < ActiveSupport::TestCase
     assert_empty @set.errors(repository_files).map(&:message)
   end
 
-  test "one v3 file per couple (46) and the longest lesson, the biggest v3 file of the repository" do
+  test "one v3 file per couple (6, the 3eme base) and the longest lesson, the biggest v3 file of the repository" do
     assert_equal PRD_COUPLES, @set.lessons.size
     v3 = LESSONS.glob("*/*/*.json").select { JSON.parse(it.read)["version"] == 3 }
     assert_equal v3.max_by(&:size).relative_path_from(LESSONS).to_s, @set.longest
   end
 
   test "the couples without v3 are written empty and have no v3 file" do
-    assert_equal 27, @set.without_v3.size
-    assert_equal %w[2nde 2nde-a 2nde-c 4eme 5eme 6eme], @set.without_v3.map { it.split("/").first }.uniq.sort
+    assert_empty @set.without_v3
     @set.without_v3.each { assert_not_includes @set.lessons.keys, it }
   end
 

@@ -23,11 +23,12 @@ Tu es appelé une seule fois par PR, sur son head final, après les revues et le
    Le journal complet est dans `tmp/ci.log`. Ne lis pas `bin/ci` en entier : la sortie de `bin/ci-quiet` suffit (verdict, étapes en échec, 30 dernières lignes).
 3. **Si c'est vert**, passe au verdict.
 4. **Si c'est rouge**, regarde les étapes en échec. Seul cas où tu relances : des fichiers de `test/system/` ont **expiré** (timeout) ou **planté** (navigateur, `Ferrum`/`Selenium`, `Net::ReadTimeout`, processus tué), sans assertion en échec. Alors relance **une seule fois**, **ces fichiers seulement**, par la même file : `flock <verrou> bin/rails test <fichiers>`. Tout autre échec (assertion, erreur de code, rubocop, brakeman, garde, couverture) n'est pas relancé : il est rapporté tel quel.
-5. Un test système qui échoue deux fois, ou qui échoue sur une assertion, reste **rouge**. Ne le déclare pas « instable ».
+5. **Durée enregistrée** : si `bin/ci-quiet` affiche « ⏱  Durée enregistrée » et s'arrête, il a modifié `script/ci/test_timings.yml`. Ce n'est ni vert ni rouge : rends `Verdict : À COMMITER` avec ce fichier, sans le toucher ni relancer. L'exécutant le commite avec le lot, puis on te rappelle.
+6. Un test système qui échoue deux fois, ou qui échoue sur une assertion, reste **rouge**. Ne le déclare pas « instable ».
 
 ## Ce que tu ne fais jamais
 
-- Modifier un fichier, commiter, pousser, ouvrir ou fusionner une PR, régénérer un journal de temps ou une fixture.
+- Modifier un fichier, commiter, pousser, ouvrir ou fusionner une PR, régénérer un journal de temps ou une fixture (seul `bin/ci-quiet` écrit `test_timings.yml`, et tu le rapportes).
 - Utiliser `git restore`, `git checkout --`, `git stash`, `--no-verify`.
 - Relancer plus d'une fois, ou autre chose que les fichiers système en expiration ou plantage.
 - Conclure vert sans avoir vu `bin/ci: green` (ou le code de sortie 0) de ta propre exécution.
@@ -37,7 +38,7 @@ Tu es appelé une seule fois par PR, sur son head final, après les revues et le
 Rends exactement ceci, en français, sans commentaire autour :
 
 ```
-Verdict : VERT | ROUGE
+Verdict : VERT | ROUGE | À COMMITER
 SHA vérifié : <sha complet> (arbre propre | modifications non commitées : <liste>)
 Commande : <flock … bin/ci-quiet | bin/ci-quiet>
 Niveau et preuve : <la ligne « Preuve : … » ou « already proven » de bin/ci-quiet, telle quelle>
