@@ -1,0 +1,58 @@
+# Contacts d'une école (chantier crm-ecoles, Lot B) — ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi » de la fiche établissement)
+# Fonctions : teams.crm.common.positions (Lot 0).
+fr:
+  activemodel:
+    attributes:
+      contact_form:
+        full_name: "Nom"
+        position: "Fonction"
+        phone: "Numéro de téléphone"
+        note: "Note"
+    errors:
+      models:
+        contact_form:
+          attributes:
+            full_name:
+              too_long: "est trop long (80 caractères au plus)"
+            position:
+              inclusion: "n'est pas une fonction connue"
+            phone:
+              invalid: "doit comporter 10 chiffres, par exemple 0701020304"
+            note:
+              too_long: "est trop longue (500 caractères au plus)"
+  teams:
+    crm:
+      contacts:
+        index:
+          title: "Contacts"
+          new: "Ajouter un contact"
+          empty:
+            title: "Aucun contact"
+            description: "Ajoutez la direction ou un enseignant référent."
+        contact:
+          call: "Appeler"
+          whatsapp: "WhatsApp"
+          whatsapp_label: "Écrire sur WhatsApp à %{name}"
+          more: "Autres actions"
+          remove: "Retirer"
+        new:
+          title: "Ajouter un contact"
+          cancel: "Annuler"
+          submit: "Ajouter"
+        form:
+          full_name: "Nom"
+          position: "Fonction"
+          phone: "Numéro de téléphone"
+          phone_hint: "10 chiffres, ex. 0701020304"
+          note: "Note"
+          note_hint: "%{count} caractères au plus."
+        create:
+          done: "Contact ajouté"
+        archive:
+          back: "Retour à l'établissement"
+          title: "Retirer %{name} ?"
+          warning: "Le contact ne sera plus proposé. Les échanges déjà notés avec lui gardent son nom."
+          cancel: "Annuler"
+          confirm: "Retirer"
+        destroy:
+          done: "Contact retiré"

@@ -1,12 +1,20 @@
 <%# 🌐 UI · teams/homes/show — accueil équipe (TR-09, CA-25) %>
 <%# Rôle : raccourcis, demandes de suppression (admin), directions retirées (admin, field), puis HOME_SECTIONS[:team] %>
-<%# ADR  : 0034, 0036 (amendement 2), 0038, 0041, 0077 · UDR : 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass »), 0067, 0068 (sans Référentiel), 0070 %>
+<%# ADR  : 0034, 0036 (amendement 2), 0038, 0041, 0077, XXXX (contexte crm) · UDR : XXXX (pipeline et relances), 0006, 0007, 0018, 0054 (« Accueil · Équipe · Lnclass »), 0067, 0068 (sans Référentiel), 0070 %>
 <% page_title t(".page_title") %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle") %>
 
 <%= render "shortcuts", can_invite: @can_invite, can_manage_blog: @can_manage_blog %>
 <%= render "deletion_requests", summary: @deletion_requests if @deletion_requests %>
 <%= render "archived_staff", rows: @archived_staff if @archived_staff.present? %>
+<%# UDR-XXXX (pipeline et relances) : la carte « À relancer » (Lot E), chargée à la demande ; l'Accueil ne paie pas le calcul. %>
+<% if @can_manage_crm %>
+  <div class="mb-5">
+    <%= turbo_frame_tag "team_home_follow_ups", src: teams_home_follow_up_path, loading: :lazy, target: "_top" do %>
+      <%= ui_loading_state variant: :skeleton, lines: 2 %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="grid gap-5">
   <% home_sections_for(:team).each do |key, icon| %>

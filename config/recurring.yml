@@ -43,3 +43,8 @@ production:
     class: Communication::PublishScheduledMessagesJob
     queue: default
     schedule: every 5 minutes
+  # ADR-XXXX (modèles de langage), CA-25 : a generation left « pending » (killed worker, lost job) is closed after 2 minutes, its audio purged.
+  fail_stale_crm_generations:
+    class: Crm::FailStaleGenerationsJob
+    queue: default
+    schedule: every 15 minutes

@@ -1,0 +1,39 @@
+<%# 🌐 UI · teams/crm/pedagogy_reports/show — rapport pédagogique d'une école : quatre chiffres, réussite par matière, lacunes, synthèse ; imprimable %>
+<%# Rôle : les chiffres viennent de la query, jamais du modèle (il n'écrit que la synthèse) ; actions, navigation et bandeaux en print:hidden ; sans activité, l'état vide (CA-30) %>
+<%# ADR  : XXXX (modèles de langage, contexte crm) · UDR : XXXX (assistants du suivi, « Rapport pédagogique ») · Stimulus : print %>
+<% page_title t(".page_title", school: @school.name) %>
+<% content_for :nav_key, "schools" %>
+<div class="mx-auto w-full max-w-240 space-y-8 print:max-w-none print:bg-white" data-controller="print">
+  <div class="print:hidden"><%= ui_back_link @school.name, href: school_path(@school.public_id, anchor: "school_crm") %></div>
+  <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @school.name, days: Entities::Crm::PedagogyReportPrompt::WINDOW_DAYS) do %>
+    <%= ui_button t(".print"), variant: :secondary, icon: "printer", hidden: true, class: "print:hidden", data: { print_target: "button", action: "print#print" } %>
+  <% end %>
+  <dl class="-mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-mute">
+    <div class="flex gap-1"><dt><%= t(".school") %></dt><dd class="text-ink"><%= @school.name %></dd></div>
+    <div class="flex gap-1"><dt><%= t(".drena") %></dt><dd class="text-ink"><%= @school.drena_name %></dd></div>
+    <div class="flex gap-1"><dt><%= t(".period") %></dt><dd class="text-ink"><%= t(".period_value", days: Entities::Crm::PedagogyReportPrompt::WINDOW_DAYS) %></dd></div>
+    <div class="flex gap-1"><dt><%= t(".prepared_on") %></dt><dd class="text-ink"><%= l((@generation.created_at || Time.current).to_date, format: :long) %></dd></div>
+  </dl>
+
+  <% if @report.activity? %>
+    <%= render "teams/crm/pedagogy_reports/figures", report: @report %>
+    <section aria-labelledby="report_subjects_title" class="space-y-3 print:break-inside-avoid">
+      <h2 id="report_subjects_title" class="font-display text-xl font-medium"><%= t(".subjects") %></h2>
+      <%= render "teams/crm/pedagogy_reports/subjects", subjects: @report.subjects %>
+    </section>
+    <section aria-labelledby="report_gaps_title" class="space-y-3 print:break-inside-avoid">
+      <h2 id="report_gaps_title" class="font-display text-xl font-medium"><%= t(".gaps") %></h2>
+      <%= render "teams/crm/pedagogy_reports/gaps", gaps: @report.gaps %>
+    </section>
+    <section aria-labelledby="report_synthesis_title" class="space-y-3">
+      <h2 id="report_synthesis_title" class="font-display text-xl font-medium"><%= t(".synthesis") %></h2>
+      <% if @generation.done? %>
+        <%= render "teams/crm/pedagogy_reports/synthesis", generation: @generation, school_public_id: @school_public_id %>
+      <% else %>
+        <%= render "teams/crm/generations/generation", generation: @generation, retry_href: teams_school_pedagogy_reports_path(@school_public_id), retry_method: :post %>
+      <% end %>
+    </section>
+  <% else %>
+    <%= ui_empty_state title: t("teams.crm.pedagogy_reports.no_activity.title"), description: t("teams.crm.pedagogy_reports.no_activity.description"), icon: "chart-bar" %>
+  <% end %>
+</div>

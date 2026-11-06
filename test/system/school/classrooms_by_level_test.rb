@@ -10,12 +10,16 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     @sixths = (1..4).map { create_classroom(school: @school, level: referential[:levels]["6eme"], name: "6ème #{it}") }
     sign_in_as create_team_member
     visit school_path(@school.public_id)
+    wait_for_lazy_frames
   end
 
   # Sous charge (4 navigateurs en parallèle), une réponse Turbo Stream dépasse parfois l'attente par défaut de Capybara.
   RESPONSE_WAIT = 10
 
   def sixth_row = find("#level_classrooms_6eme")
+
+  # À 390 px, Selenium amène le bouton au ras du bas de la fenêtre, sous la barre de navigation : on le centre d'abord.
+  def centered(selector) = scroll_to(find(selector), align: :center)
   def assert_toast(text) = using_wait_time(RESPONSE_WAIT) { super }
   def sixth_count(count) = "[role=group][aria-label='6ème : #{count} classes']"
 
@@ -24,10 +28,12 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
   def assert_not_reloaded = assert(page.evaluate_script("window.levelMark === true"), "la page a été rechargée")
 
   def add_sixth
+    centered("#level_classrooms_6eme")
     within("#level_classrooms_6eme") { click_on "Ajouter une classe de 6ème" }
   end
 
   def remove_sixth(confirm: "Retirer la classe")
+    centered("#level_classrooms_6eme")
     within("#level_classrooms_6eme") { click_on "Retirer une classe de 6ème" }
     within("dialog[open]") { click_on confirm }
   end
@@ -42,6 +48,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     assert_selector "#school_classrooms a", text: "6ème 5"
     assert Orm::Classroom.exists?(school: @school, name: "6ème 5")
 
+    centered("#level_classrooms_6eme")
     within("#level_classrooms_6eme") { click_on "Retirer une classe de 6ème" }
     within("dialog[open]") do
       assert_selector "h2", text: "Retirer la classe « 6ème 5 » ?"
@@ -87,6 +94,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
   # Un autre onglet a retiré la classe entre l'ouverture de la confirmation et son envoi : 404.
   def refuse_gone
     mark_page
+    centered("#level_classrooms_6eme")
     within("#level_classrooms_6eme") { click_on "Retirer une classe de 6ème" }
     Orm::Classroom.where(id: @sixths.last.id).delete_all
     within("dialog[open]") { click_on "Retirer la classe" }
@@ -143,6 +151,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
   test "les mêmes parcours sur un écran de 390 px, avec des commandes de 48 px et sans défilement horizontal" do
     with_mobile_viewport do
       visit school_path(@school.public_id)
+      wait_for_lazy_frames
 
       sizes = sixth_row.all("button", minimum: 2).map { page.evaluate_script("[arguments[0].offsetWidth, arguments[0].offsetHeight]", it) }
       assert(sizes.all? { |width, height| width >= 48 && height >= 48 }, sizes.inspect)
@@ -157,6 +166,7 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
   test "à 390 px, un 404 laisse aussi la page utilisable" do
     with_mobile_viewport do
       visit school_path(@school.public_id)
+      wait_for_lazy_frames
       refuse_gone
     end
   end

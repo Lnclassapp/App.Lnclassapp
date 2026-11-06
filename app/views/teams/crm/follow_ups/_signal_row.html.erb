@@ -1,0 +1,32 @@
+<%# 🌐 UI · teams/crm/follow_ups/_signal_row — une école à relancer, en deux dispositions (layout) %>
+<%# Rôle : :row (<tr> du bureau) et :card (carte à 390 px) ; une raison = un badge de texte, jamais la couleur seule %>
+<%# UDR  : XXXX (pipeline et relances) · locals: (row:, layout:, owner: false) %>
+<% tones = { overdue: :error, usage_lost: :warning, demo_stalled: :info, registered_idle: :brand } %>
+<% badges = capture do %>
+  <% row.reasons.each do |reason| %>
+    <%= ui_badge t("teams.crm.signals.reasons.#{reason}"), tone: tones.fetch(reason), size: :sm %>
+  <% end %>
+<% end %>
+<% school = link_to row.school_name, "#{school_path(row.school_public_id)}#school_crm", class: "font-medium text-ink underline-offset-4 hover:underline" %>
+<% owner_name = row.owner_name.presence || t("teams.crm.signals.no_owner") %>
+
+<% case layout %>
+<% when :row %>
+  <tr id="signal_row_<%= row.school_public_id %>" class="border-b border-line">
+    <td class="py-3 pr-4">
+      <%= school %>
+      <p class="text-sm text-mute"><%= row.drena_name %></p>
+    </td>
+    <% if owner %><td class="py-3 pr-4"><%= owner_name %></td><% end %>
+    <td class="py-3"><span class="flex flex-wrap items-center gap-2"><%= badges %></span></td>
+  </tr>
+<% when :card %>
+  <%= ui_card padding: :sm, id: "signal_card_#{row.school_public_id}" do %>
+    <div class="flex flex-col gap-2">
+      <p><%= school %></p>
+      <p class="text-sm text-mute"><%= row.drena_name %></p>
+      <% if owner %><p class="text-sm text-mute"><%= owner_name %></p><% end %>
+      <p class="flex flex-wrap items-center gap-2"><%= badges %></p>
+    </div>
+  <% end %>
+<% end %>

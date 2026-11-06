@@ -892,6 +892,13 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "a[href='/r']", text: "Encore"
   end
 
+  test "ui_error_state retries with the given HTTP method, GET by default" do
+    show ui_error_state(retry_href: "/r") + ui_error_state(retry_href: "/p", retry_method: :post)
+
+    assert_select "a[href='/r']:not([data-turbo-method])"
+    assert_select "a[href='/p'][data-turbo-method=post]"
+  end
+
   test "ui_loading_state as spinner or skeleton" do
     show ui_loading_state + ui_loading_state(label: "Chargement des classes", variant: "skeleton", lines: 4)
 

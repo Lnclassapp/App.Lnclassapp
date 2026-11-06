@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
+# UDR  : XXXX (pipeline et relances), 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -39,6 +39,8 @@ module NavigationHelper
     team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
             [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
+  # UDR-XXXX (pipeline et relances) : « Relances », avant « Annonces », pour `admin` et `field` seulement (ManageCrmPolicy).
+  CRM_DESTINATION = [ :follow_ups, :teams_follow_ups_path, "bell-alert" ].freeze
   # UDR enseignant §3.4 (lot P0) : le Turbo Frame du panneau « Mon compte » ; dès lg, les écrans de retrait (« Mes matières »,
   # « Mes établissements ») s'y ouvrent à la place du menu, sans quitter la page en dessous.
   ACCOUNT_PANEL_FRAME = "account_panel_screen".freeze
@@ -105,7 +107,14 @@ module NavigationHelper
 
   # Liste secondaire du rôle (UDR-0068) ; vide pour un rôle qui n'en a pas.
   def secondary_navigation_for(role)
-    SECONDARY_DESTINATIONS.fetch(role.to_sym, []).map { |key, route, icon| Destination.new(key:, route:, icon:) }
+    entries = SECONDARY_DESTINATIONS.fetch(role.to_sym, [])
+    entries = entries.dup.insert(-2, CRM_DESTINATION) if role.to_sym == :team && crm_navigation?
+    entries.map { |key, route, icon| Destination.new(key:, route:, icon:) }
+  end
+
+  # Une vue sans acteur (page publique, test de l'aide) ne montre jamais « Relances ».
+  def crm_navigation?
+    respond_to?(:current_actor) && Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
   end
 
   # Cases de la barre basse : les destinations, plus « Plus » si le rôle a une liste secondaire.

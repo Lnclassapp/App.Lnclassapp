@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/crm/assistants/_card — carte « Assistants » : trois boutons pleine largeur, ou le badge « non configuré » %>
+<%# Rôle : aucun bouton qui planterait sans clé (CA-23) ; le frame school_crm_briefing reçoit la fiche (Lot H) %>
+<%# UDR  : XXXX (assistants du suivi) %>
+<%= ui_card(title: t(".title"), icon: "sparkles", heading: :h3) do %>
+  <% if configured %>
+    <div class="flex flex-col gap-3">
+      <%= ui_button t(".briefing"), href: teams_school_briefing_path(school.public_id), method: :post, variant: :secondary, icon: "sparkles", full: true %>
+      <%= ui_button t(".dictation"), href: new_teams_school_dictation_path(school.public_id), variant: :secondary, icon: "microphone", full: true,
+                 data: { turbo_frame: "modal" } %>
+      <%= ui_button t(".pedagogy_report"), href: teams_school_pedagogy_reports_path(school.public_id), method: :post, variant: :secondary, icon: "document-chart-bar", full: true,
+                  data: { turbo_frame: "_top" } %>
+    </div>
+    <%= turbo_frame_tag "school_crm_briefing", class: "mt-4 block" %>
+  <% else %>
+    <%= ui_badge t(".not_configured"), tone: :neutral %>
+    <p class="mt-2 text-sm text-mute"><%= t(".not_configured_hint") %></p>
+  <% end %>
+<% end %>

@@ -67,7 +67,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_home team_home_path, greeting: I18n.t("teams.homes.show.greeting", name: "Awa")
     assert_navigation active: { home: team_home_path, courses: courses_path, schools: schools_path, dashboard: team_dashboard_path }
     within("nav#sidebar_secondary") do
-      assert_equal %i[referential imports announcements].map { tn(it) }, all("a").map { it.text.squish }
+      assert_equal %i[referential imports follow_ups announcements].map { tn(it) }, all("a").map { it.text.squish }
       click_link tn(:announcements)
     end
 

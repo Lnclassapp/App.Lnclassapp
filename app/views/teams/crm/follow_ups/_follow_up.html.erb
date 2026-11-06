@@ -1,0 +1,62 @@
+<%# 🌐 UI · teams/crm/follow_ups/_follow_up — une relance ouverte, en trois dispositions (layout) %>
+<%# Rôle : :school (<li> de la fiche), :row (<tr> du bureau) et :card (carte à 390 px) ; « Faite » en Turbo Stream, ⋮ « Rédiger un message » (Lot I) et « Réattribuer » en modale pour qui le peut %>
+<%# UDR  : XXXX (bloc « Suivi »), XXXX (pipeline et relances) · le badge dit « Échue » en texte, jamais la couleur seule %>
+<% today = Date.current %>
+<% due_label = if row.due_on == today then t(".today") elsif row.due_on == today + 1 then t(".tomorrow") else l(row.due_on, format: :short) end %>
+<% due = capture do %>
+  <time datetime="<%= row.due_on.iso8601 %>"><%= due_label %></time>
+  <% if row.due_on < today %><%= ui_badge t(".overdue"), tone: :error, size: :sm %><% end %>
+<% end %>
+<% assignee = capture do %>
+  <% if row.assignee_available %>
+    <%= row.assignee_name %>
+  <% else %>
+    <span class="text-warning"><%= t(".unavailable") %></span>
+  <% end %>
+<% end %>
+<% actions = capture do %>
+  <div class="flex items-center gap-2">
+    <%= form_with url: teams_follow_up_completion_path(row.public_id), method: :patch do %>
+      <%= ui_button t(".complete"), type: :submit, variant: :secondary, size: :sm %>
+    <% end %>
+    <%= ui_dropdown label: t(".more"), id: "follow-up-menu-#{layout}-#{row.public_id}", fixed: true do %>
+      <%= ui_dropdown_item t("teams.crm.whatsapp_drafts.menu_item"), href: new_teams_follow_up_whatsapp_draft_path(row.public_id), icon: "chat-bubble-left-right", frame: "modal" %>
+      <% if UseCases::Crm::ReassignFollowUp.allowed?(actor: current_actor, owner_id: row.owner_id) %>
+        <%= ui_dropdown_item t(".reassign"), href: edit_teams_follow_up_assignee_path(row.public_id), icon: "user-plus", frame: "modal" %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+<% school = link_to row.school_name, "#{school_path(row.school_public_id)}#school_crm", class: "font-medium text-ink underline-offset-4 hover:underline" %>
+
+<% case layout %>
+<% when :school %>
+  <li id="school_follow_up_<%= row.public_id %>" class="flex flex-col gap-2 py-3 first:pt-0 last:pb-0">
+    <p class="flex flex-wrap items-center gap-2 text-sm"><%= due %></p>
+    <p class="text-base text-ink"><%= row.reason %></p>
+    <p class="text-sm text-mute"><%= assignee %></p>
+    <%= actions %>
+  </li>
+<% when :row %>
+  <tr id="follow_up_row_<%= row.public_id %>" data-follow-up class="border-b border-line">
+    <td class="py-3 pr-4">
+      <%= school %>
+      <p class="text-sm text-mute"><%= row.drena_name %></p>
+    </td>
+    <td class="py-3 pr-4"><span class="flex flex-wrap items-center gap-2"><%= due %></span></td>
+    <td class="py-3 pr-4"><%= assignee %></td>
+    <td class="py-3 pr-4" data-field="reason"><%= row.reason %></td>
+    <td class="py-3"><%= actions %></td>
+  </tr>
+<% when :card %>
+  <%= ui_card padding: :sm, id: "follow_up_card_#{row.public_id}", data: { follow_up: true } do %>
+    <div class="flex flex-col gap-2">
+      <p><%= school %></p>
+      <p class="text-sm text-mute"><%= row.drena_name %></p>
+      <p class="flex flex-wrap items-center gap-2 text-sm"><%= due %></p>
+      <p class="text-base text-ink"><%= row.reason %></p>
+      <p class="text-sm text-mute"><%= assignee %></p>
+      <%= actions %>
+    </div>
+  <% end %>
+<% end %>

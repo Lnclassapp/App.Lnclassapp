@@ -1,0 +1,22 @@
+<%# 🌐 UI · teams/crm/usages/show — sous-bloc « Usage » de la fiche établissement %>
+<%# Rôle : le frame school_crm_usage : trois chiffres (comptes rattachés, élèves actifs sur 14 jours, dernière activité), zéros si rien n'est rattaché %>
+<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<% days = @usage.last_activity_on && (Date.current - @usage.last_activity_on).to_i %>
+<%= turbo_frame_tag "school_crm_usage" do %>
+  <%= ui_card title: t(".title"), heading: :h3 do |card| %>
+    <dl class="grid grid-cols-3 gap-4">
+      <div>
+        <dd class="font-display text-2xl"><%= @usage.accounts_count %></dd>
+        <dt class="text-xs text-mute"><%= t(".accounts") %></dt>
+      </div>
+      <div>
+        <dd class="font-display text-2xl"><%= @usage.active_students_count %></dd>
+        <dt class="text-xs text-mute"><%= t(".active_students") %></dt>
+      </div>
+      <div>
+        <dd class="font-display text-2xl"><%= days.nil? ? t(".never") : (days.zero? ? t(".today") : t(".days_ago", count: days)) %></dd>
+        <dt class="text-xs text-mute"><%= t(".last_activity") %></dt>
+      </div>
+    </dl>
+  <% end %>
+<% end %>

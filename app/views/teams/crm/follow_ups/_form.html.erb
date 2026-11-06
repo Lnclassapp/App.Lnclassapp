@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/crm/follow_ups/_form — créer une relance : échéance (défaut +3 jours), destinataire (défaut : le responsable, sinon moi), motif (200) %>
+<%# Rôle : formulaire de la modale « Nouvelle relance » ; erreurs sous les champs, saisie conservée %>
+<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%= form_with model: @form, scope: :follow_up, url:, method: :post, id: "follow-up-form", class: "space-y-5" do |form| %>
+  <%= ui_field form, :due_on, as: :date, required: true, label: t(".due_on") %>
+  <%= ui_field form, :assignee_public_id, as: :select, required: true, label: t(".assignee"),
+               choices: @members.map { [ (it.user_id == current_actor.user_id ? t(".me", name: it.name) : it.name), it.public_id ] } %>
+  <%= ui_field form, :reason, required: true, label: t(".reason"), maxlength: Entities::Crm::FollowUp::REASON_MAX,
+               hint: t(".reason_hint", count: Entities::Crm::FollowUp::REASON_MAX) %>
+<% end %>

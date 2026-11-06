@@ -74,6 +74,25 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on I18n.t("classroom.classroom_students.manage.issue_code")
   end
 
+  # The « Suivi » block of a school page (crm-ecoles) is made of lazy frames that load as they come into view, above the
+  # rest of the page. A frame that finishes loading after the test scrolled a button into view moves the page under it
+  # and the click lands on the bottom bar. Bring each frame into view, wait until every one is complete, then go back up.
+  def wait_for_lazy_frames(scope = "#school_crm")
+    return unless page.has_selector?(scope, wait: 0)
+
+    # The scope may itself be a lazy frame (#school_crm): its own sub-frames exist only once it has loaded.
+    if page.has_selector?("turbo-frame#{scope}[src]", visible: :all, wait: 0)
+      page.execute_script("document.querySelector(arguments[0]).scrollIntoView({ block: 'center' })", scope)
+      assert_selector "#{scope}[complete]", visible: :all, wait: 10
+    end
+    all("#{scope} turbo-frame[src]", visible: :all).map { it[:id] }.each do |id|
+      page.execute_script("document.getElementById(arguments[0]).scrollIntoView({ block: 'center' })", id)
+      assert_selector "##{id}[complete]", visible: :all, wait: 10
+    end
+    assert_no_selector "#{scope} turbo-frame[busy]", wait: 10
+    page.execute_script("window.scrollTo(0, 0)")
+  end
+
   # Trix is loaded on demand (ADR-0051, rich_text_editor_controller): <trix-editor> is in the page before its editor is
   # attached. Keys sent in between are refused (element not interactable) or typed into a bare element that Trix then
   # overwrites with its empty hidden input: the text is silently lost. Wait for the editor before touching it.

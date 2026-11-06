@@ -1,0 +1,20 @@
+<%# 🌐 UI · teams/crm/follow_ups/school — sous-bloc « Relances ouvertes » de la fiche établissement %>
+<%# Rôle : le frame school_crm_follow_ups (cible des Turbo Streams), relances par échéance, « Nouvelle relance » en modale ; vide = état vide %>
+<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%= turbo_frame_tag "school_crm_follow_ups" do %>
+  <%= ui_card title: t(".title"), heading: :h3 do |card| %>
+    <% if @follow_ups.empty? %>
+      <%= ui_empty_state title: t(".empty"), icon: "bell" %>
+    <% else %>
+      <ul role="list" class="divide-y divide-line">
+        <% @follow_ups.each do |row| %>
+          <%= render "teams/crm/follow_ups/follow_up", row:, layout: :school %>
+        <% end %>
+      </ul>
+    <% end %>
+    <% card.footer do %>
+      <%= ui_button t(".new"), href: new_teams_school_follow_up_path(@school.public_id), variant: :secondary, icon: "plus",
+                    data: { turbo_frame: "modal" } %>
+    <% end %>
+  <% end %>
+<% end %>

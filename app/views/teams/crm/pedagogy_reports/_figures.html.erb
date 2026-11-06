@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/crm/pedagogy_reports/_figures — les quatre chiffres : élèves actifs, devoirs donnés, taux de rendu, réussite moyenne %>
+<%# Rôle : deux colonnes à 390 px, quatre dès lg ; un chiffre inconnu s'écrit « — », jamais 0 % %>
+<%# UDR  : XXXX (assistants du suivi, « Rapport pédagogique ») %>
+<% figures = { active: report.active_students_count, assignments: report.assignments_count,
+               submission: (t(".percent", value: report.submission_rate) if report.submission_rate),
+               success: (t(".percent", value: report.average_percent) if report.average_percent) } %>
+<ul role="list" class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+  <% figures.each do |key, value| %>
+    <li data-testid="figure" class="min-w-0 print:break-inside-avoid">
+      <%= ui_card padding: :sm do %>
+        <div data-testid="figure-<%= key %>">
+          <p class="text-sm text-mute"><%= t(".#{key}") %></p>
+          <p class="mt-1 font-display text-3xl font-medium"><%= value || t(".unknown") %></p>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

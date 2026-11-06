@@ -1,0 +1,7 @@
+<%# 🌐 UI · teams/crm/follow_ups/_assignee_form — choisir le nouveau destinataire parmi les membres admin et field non anonymisés %>
+<%# Rôle : formulaire de la modale « Réattribuer » ; rien n'est présélectionné si le destinataire actuel est indisponible %>
+<%# UDR  : XXXX (pipeline et relances) %>
+<%= form_with model: @form, scope: :follow_up, url:, method: :patch, id: "follow-up-assignee-form", class: "space-y-5" do |form| %>
+  <%= ui_field form, :assignee_public_id, as: :select, required: true, label: t(".assignee"), prompt: t(".prompt"),
+               choices: @members.map { [ (it.user_id == current_actor.user_id ? t(".me", name: it.name) : it.name), it.public_id ] } %>
+<% end %>
