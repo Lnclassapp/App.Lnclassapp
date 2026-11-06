@@ -166,6 +166,7 @@ module LessonRendering
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
       missing_figures(lesson, seen["figures"]).each { defects << "figure « #{it} » absente de la page ou vide" }
       sheets = all(".ps-card", minimum: 0).map { it[:id] }
+      defects << "aucune feuille d'exercices sur la page, alors que la leçon a des questions" if sheets.empty? && lesson.to_json.include?('"questions"')
       defects += sheets.flat_map { |sheet| inspect_sheet(course, sheet) }
       defects.map { LessonRendering::Defect.new(file, width, it) }
     end
@@ -190,13 +191,14 @@ module LessonRendering
       end
     end
 
-    # Comme measure_page, sans fichier à comparer : la feuille est finie quand ses formules sont stables et chaque figure dessinée.
+    # Comme measure_page, sans fichier à comparer : la feuille est finie quand ses formules sont stables, les polices de KaTeX chargées (une
+    # proposition mesurée avec la police de secours ne dit rien de sa largeur) et chaque figure dessinée.
     def measure_sheet
       deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + LessonRendering::Verifier::FIGURE_WAIT
       previous = nil
       loop do
         seen = page.evaluate_script(MEASURE)
-        done = seen["bare"].zero? && seen["formulas"] == previous && seen["figures"].all? { it["shown"] }
+        done = seen["bare"].zero? && seen["formulas"] == previous && seen["fonts"] == "loaded" && seen["figures"].all? { it["shown"] }
         return seen if done || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
 
         previous = seen["formulas"]
@@ -234,7 +236,7 @@ module LessonRendering
         const cut = [...document.querySelectorAll(".ps-paper-table--mcq .ps-paper-choice")]
           .filter((choice) => getComputedStyle(choice.closest("table")).display === "table" && choice.scrollWidth > choice.clientWidth + 1)
           .map((choice) => choice.textContent.trim().slice(0, 40))
-        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare, cut,
+        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare, cut, fonts: document.fonts.status,
                  stars: at < 0 ? null : text.slice(Math.max(0, at - 30), at + 30).replace(/\\s+/g, " ") }
       })()
     JS

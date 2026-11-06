@@ -9,16 +9,22 @@ const STATEMENT_MIN_EM = 10
 export default class extends Controller {
   connect() {
     this.scheduled = false
+    this.onResize = () => this.schedule()
     if ("ResizeObserver" in window) {
-      this.observer = new ResizeObserver(() => this.schedule())
+      this.observer = new ResizeObserver(this.onResize)
       this.observer.observe(this.element)
       if (this.element.parentElement) this.observer.observe(this.element.parentElement)
+    } else {
+      window.addEventListener("resize", this.onResize)
     }
+    // Les polices de KaTeX arrivent après coup et changent la largeur des formules : une mesure de plus quand elles sont là.
+    document.fonts?.ready.then(this.onResize)
     this.fit()
   }
 
   disconnect() {
     this.observer?.disconnect()
+    window.removeEventListener("resize", this.onResize)
   }
 
   // Une mesure par image : une classe posée pendant le rappel de ResizeObserver relancerait la boucle dans la même image.

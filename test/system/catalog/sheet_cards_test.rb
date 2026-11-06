@@ -131,5 +131,42 @@ class Catalog::SheetCardsTest < ApplicationSystemTestCase
     assert_selector "table.ps-paper-table--mcq.ps-paper-table--stacked", text: "Quelle chaîne", wait: 5
     assert_equal "grid", tables.last.find("tbody tr").evaluate_script("getComputedStyle(this).display")
     assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=, page.evaluate_script("window.innerWidth")
+    # Le repli se défait : plus étroit, le tableau de mots s'empile (affirmation sous 10 em) ; rendu large, il redevient un tableau.
+    window = page.current_window
+    original = window.size
+    window.resize_to(600, 900)
+    assert_selector "table.ps-paper-table--mcq.ps-paper-table--stacked", text: "Le pentane", wait: 5
+    window.resize_to(*original)
+    assert_no_selector "table.ps-paper-table--mcq.ps-paper-table--stacked", text: "Le pentane", wait: 5
+  ensure
+    window&.resize_to(*original) if original
+  end
+
+  # feuilles-rendues : à 390 px, une équation plus longue que la ligne fait défiler sa question, jamais la page ; une fraction
+  # n'est pas rognée par ce cadre ; une formule finie par un indice dans une case de QCM n'a pas de barre de défilement.
+  test "on a 390 px screen a long equation scrolls its question, a fraction is not clipped and CO2 shows no scrollbar" do
+    subject = create_subject(course: @course, title: "Sujet 3 · Combustion")
+    exercise = create_exercise(subject:, course: @course, title: "Combustion", questions: 0, statement: "On étudie une combustion.")
+    gases = exercise.questions.create!(position: 1, content: "Quel gaz se forme ?", question_type: "single_choice")
+    [ "$\\mathrm{CO_2}$", "$\\mathrm{H_2}$", "$\\mathrm{O_2}$", "$\\mathrm{N_2}$" ].each_with_index { |c, i| gases.answers.create!(position: i + 1, content: c, correct: i.zero?) }
+    equation = "L'octane $\\mathrm{CH_3-CH_2-CH_2-CH_2-CH_2-CH_2-CH_2-CH_3}$ a ___ atomes de carbone."
+    exercise.questions.create!(position: 2, content: equation, question_type: "fill_blank").answers.create!(position: 1, content: "8", correct: true, blank: 0)
+    exercise.questions.create!(position: 3, content: "Le quotient $\\dfrac{12}{4}$ vaut ___.", question_type: "fill_blank").answers.create!(position: 1, content: "3", correct: true, blank: 0)
+
+    with_mobile_viewport do
+      visit course_sheet_path(@course.slug, "sujet-#{subject.position}")
+      assert_selector ".ps-paper-list .katex", minimum: 2, wait: 10
+      assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=, 390
+      clipped = page.evaluate_script("[...document.querySelectorAll('.ps-paper-list > li')].filter((li) => li.scrollHeight > li.clientHeight + 1).length")
+      assert_equal 0, clipped
+      assert_formulas_fit
+    end
+  end
+
+  # Chaque formule en ligne d'un tableau de sujet tient dans son cadre (KaTeX ôte 2 px après un indice, rendus par prepare_sheet.css).
+  def assert_formulas_fit
+    assert_selector ".ps-paper-table .katex", minimum: 1, wait: 10
+    over = page.evaluate_script("[...document.querySelectorAll('.ps-paper-table .katex')].filter((k) => k.scrollWidth > k.clientWidth).map((k) => k.textContent.slice(0, 20))")
+    assert_empty over
   end
 end
