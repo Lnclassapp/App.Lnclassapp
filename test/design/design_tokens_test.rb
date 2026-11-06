@@ -39,7 +39,7 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-0141-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
   # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
-  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0149 §3), `exam_sheet.css` (UDR-XXXX-sujets-cahier-noir-blanc) et le partial `catalog/revision_sheets/`, et seulement pour les règles
+  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0149 §3), `exam_sheet.css` (UDR-0157) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
   SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z)|app/assets/stylesheets/prepare_sheet\.css\z|app/assets/stylesheets/exam_sheet\.css\z)}
@@ -201,7 +201,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_not_includes STYLESHEET, "Kalam"
   end
 
-  # UDR-XXXX-sujets-cahier-noir-blanc §4 : une couleur ajoutée au @theme doit être neutralisée dans `.exam-sheet`.
+  # UDR-0157 §4 : une couleur ajoutée au @theme doit être neutralisée dans `.exam-sheet`.
   test "the exam sheet redefines every theme color, in black, white and grey only, and is not loaded by the layout" do
     css = Rails.root.join("app/assets/stylesheets/exam_sheet.css").read
     theme = STYLESHEET[/@theme \{(.*?)\n\}/m, 1]

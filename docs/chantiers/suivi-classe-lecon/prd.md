@@ -151,8 +151,8 @@ Pas de migration, pas de nouvelle table, pas de nouveau port : tout se lit par d
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-lecture-de-la-classe-par-la-direction — la direction lit la leçon d'une classe de son établissement (droit nouveau sur des données nominatives).
-- UDR-XXXX-suivi-de-la-classe-sur-une-lecon — les six surfaces modifiées.
+- ADR-0125 — la direction lit la leçon d'une classe de son établissement (droit nouveau sur des données nominatives).
+- UDR-0156 — les six surfaces modifiées.
 - Réutilisées : ADR-0041, 0043, 0079, 0101 (lacunes) ; UDR-0121 (« Fiches à revoir »), UDR-0077 §3.4 (jours de séance), UDR-0149 (feuilles).
 
 ## 7. Mesures

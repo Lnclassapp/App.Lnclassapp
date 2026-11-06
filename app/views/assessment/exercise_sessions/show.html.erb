@@ -24,7 +24,7 @@
      data-assessment--copy-counter-value="<%= t(".counter", answered: "%{answered}", total: "%{total}") %>"
      data-assessment--copy-missing-one-value="<%= t(".missing", count: 1) %>"
      data-assessment--copy-missing-other-value="<%= t(".missing", count: 2).sub("2", "%{count}") %>">
-  <%# UDR-XXXX-sujets-cahier-noir-blanc §3 : cartouche, titre à double trait, consigne ; ni durée, ni nombre de tentatives. %>
+  <%# UDR-0157 §3 : cartouche, titre à double trait, consigne ; ni durée, ni nombre de tentatives. %>
   <header id="exam-header" class="exam-header"><span><%= t(".exam_kind") %></span><span class="exam-header-brand"><%= t(".exam_brand") %></span></header>
   <h1 class="exam-title"><%= play.exercise_title %></h1>
   <p id="exam-instructions" class="exam-instructions mb-4"><%= t(".questions", count: play.questions.size) %><%= t(".scale", count: total_points, points: number_with_precision(total_points, precision: 1, strip_insignificant_zeros: true)) if weighted %></p>
