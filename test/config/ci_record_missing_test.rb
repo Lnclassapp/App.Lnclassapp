@@ -20,7 +20,7 @@ class CiRecordMissingTest < Minitest::Test
 
     assert result.recorded
     assert_equal "log of test/system/new_test.rb", seen
-    assert_match(/test_timings\.yml est modifié, à commiter/, RecordMissing.message(result))
+    assert_match(/test_timings\.yml est modifié, à commiter avec le lot, puis relancer bin\/ci-quiet/, RecordMissing.message(result))
   end
 
   def test_a_red_run_records_nothing_and_says_why

@@ -39,7 +39,8 @@ module RecordMissing
 
     list = result.files.join(", ")
     if result.recorded
-      "⏱  Durée enregistrée pour #{list} : script/ci/test_timings.yml est modifié, à commiter avec le lot."
+      "⏱  Durée enregistrée pour #{list} : script/ci/test_timings.yml est modifié, à commiter avec le lot, " \
+        "puis relancer bin/ci-quiet (rien d'autre n'a été joué)."
     else
       "⚠️  Durée non enregistrée pour #{list} (#{result.reason}) ; la garde du budget reste rouge."
     end

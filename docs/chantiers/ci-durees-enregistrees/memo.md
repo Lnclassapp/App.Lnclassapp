@@ -18,7 +18,7 @@ Origine : proposition 6 du rapport sur la méthode de travail, décision du port
 
 ## Décision
 
-`bin/ci-quiet` joue lui-même, une fois, les fichiers système sans durée (`-v`, `COVERAGE=0`), passe le journal à `script/ci/record_timings`, modifie `test_timings.yml` dans l'arbre de travail et le dit (« à commiter avec le lot »). La garde de 15 s lit ensuite la durée mesurée : un fichier au-delà du budget reste rouge. Un run rouge n'enregistre rien (ses échecs rapides sous-pèseraient le fichier) et le dit.
+`bin/ci-quiet` joue lui-même, une fois, les fichiers système sans durée (`-v`, `COVERAGE=0`), passe le journal à `script/ci/record_timings`, modifie `test_timings.yml` dans l'arbre de travail et **s'arrête là** (sortie 1) : « à commiter avec le lot, puis relancer ». Aucune preuve ne vaut pour un arbre non commité ; jouer les autres étapes ferait deux runs complets au lieu d'un. Plus largement, `bin/ci-quiet` n'écrit plus de ligne de preuve quand l'arbre diffère de HEAD (il le dit, sortie 1). La garde de 15 s lit ensuite la durée mesurée : un fichier au-delà du budget reste rouge. Un run rouge n'enregistre rien (ses échecs rapides sous-pèseraient le fichier) et le dit.
 
 ## Hors périmètre
 
@@ -38,7 +38,7 @@ Audit des dépendances (tâche programmée), découpage des tâches GitHub (`ci-
 | 2 | vert | 33 s |
 | 3 | vert | 33 s |
 
-Médiane : **vert, 33 s** (les 6 s de plus sont le jeu du fichier, qui servait de toute façon à l'étape système). Même machine, même fichier ; `test_timings.yml` remis à zéro entre les runs.
+Médiane : **vert, 33 s** (mesure du premier état du lot ; depuis l'arrêt après enregistrement, le premier run ne fait que l'enregistrement et le suivant, sur le commit, garde ses verdicts) (les 6 s de plus sont le jeu du fichier, qui servait de toute façon à l'étape système). Même machine, même fichier ; `test_timings.yml` remis à zéro entre les runs.
 
 ## Couverture
 
