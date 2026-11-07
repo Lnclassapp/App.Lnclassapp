@@ -1,0 +1,65 @@
+<%# 🌐 UI · teams/billing/cashboxes/_week — « À payer ce vendredi » et les semaines précédentes %>
+<%# Rôle : commissions des points relais de la semaine écoulée (vendredi → jeudi), 8 semaines plus anciennes dans un <details> %>
+<%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
+<% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
+<% range = lambda do |week|
+     from, to = week.starts_on, week.ends_on
+     if from.month == to.month
+       t("teams.billing.cashboxes.week.same_month", from: from.day, to: to.day, month: l(to, format: "%B"))
+     else
+       t("teams.billing.cashboxes.week.two_months", from: from.day, from_month: l(from, format: "%B"), to: to.day, to_month: l(to, format: "%B"))
+     end
+   end %>
+<% table = lambda do |week| %>
+  <div class="overflow-x-auto">
+    <table class="w-full min-w-md text-left text-sm">
+      <caption class="sr-only"><%= t("teams.billing.cashboxes.week.caption", range: range.call(week.week)) %></caption>
+      <thead class="border-b border-line text-xs text-mute">
+        <tr>
+          <th scope="col" class="px-3 py-2 font-medium"><%= t("teams.billing.cashboxes.week.columns.relay_point") %></th>
+          <th scope="col" class="px-3 py-2 text-right font-medium"><%= t("teams.billing.cashboxes.week.columns.activations") %></th>
+          <th scope="col" class="px-3 py-2 text-right font-medium"><%= t("teams.billing.cashboxes.week.columns.commission") %></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-line">
+        <% week.lines.each do |line| %>
+          <tr>
+            <td class="px-3 py-2 font-medium text-ink"><%= line.name %></td>
+            <td class="px-3 py-2 text-right tabular-nums"><%= line.activations %></td>
+            <td class="px-3 py-2 text-right whitespace-nowrap tabular-nums"><%= money.call(line.commission_xof) %></td>
+          </tr>
+        <% end %>
+        <tr class="font-semibold text-ink">
+          <td class="px-3 py-2"><%= t("teams.billing.cashboxes.week.total") %></td>
+          <td class="px-3 py-2 text-right tabular-nums"><%= week.total_activations %></td>
+          <td class="px-3 py-2 text-right whitespace-nowrap tabular-nums"><%= money.call(week.total_xof) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+<%= ui_card title: t(".title"), subtitle: range.call(cashbox.last_week.week), id: "cashbox_week" do %>
+  <% if cashbox.last_week.lines.empty? %>
+    <p class="text-sm text-mute"><%= t(".empty") %></p>
+  <% else %>
+    <% table.call(cashbox.last_week) %>
+  <% end %>
+  <p class="mt-3 text-xs text-mute"><%= t(".current", count: cashbox.current_week_activations) %></p>
+  <% if cashbox.past_weeks.any? %>
+    <details class="mt-4 border-t border-line pt-3">
+      <summary class="min-h-tap cursor-pointer py-2 text-sm font-medium text-brand-strong"><%= t(".previous") %></summary>
+      <div class="space-y-5 pt-2">
+        <% cashbox.past_weeks.each do |week| %>
+          <section>
+            <h3 class="mb-1 text-sm font-medium text-ink"><%= range.call(week.week) %></h3>
+            <% if week.lines.empty? %>
+              <p class="text-sm text-mute"><%= t(".empty") %></p>
+            <% else %>
+              <% table.call(week) %>
+            <% end %>
+          </section>
+        <% end %>
+      </div>
+    </details>
+  <% end %>
+<% end %>

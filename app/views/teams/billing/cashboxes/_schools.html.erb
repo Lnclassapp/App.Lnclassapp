@@ -1,0 +1,31 @@
+<%# 🌐 UI · teams/billing/cashboxes/_schools — commission cumulée des écoles %>
+<%# Rôle : abonnements payants par école et 1 000 F cumulés ; le versement aux écoles est fixé plus tard %>
+<%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
+<% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
+<%= ui_card title: t(".title"), subtitle: t(".note"), id: "cashbox_schools" do %>
+  <% if cashbox.schools.empty? %>
+    <p class="text-sm text-mute"><%= t(".empty") %></p>
+  <% else %>
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-md text-left text-sm">
+        <caption class="sr-only"><%= t(".caption") %></caption>
+        <thead class="border-b border-line text-xs text-mute">
+          <tr>
+            <th scope="col" class="px-3 py-2 font-medium"><%= t(".columns.school") %></th>
+            <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.subscriptions") %></th>
+            <th scope="col" class="px-3 py-2 text-right font-medium"><%= t(".columns.commission") %></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-line">
+          <% cashbox.schools.each do |line| %>
+            <tr>
+              <td class="px-3 py-2 font-medium text-ink"><%= line.name %></td>
+              <td class="px-3 py-2 text-right tabular-nums"><%= line.subscriptions %></td>
+              <td class="px-3 py-2 text-right whitespace-nowrap tabular-nums"><%= money.call(line.commission_xof) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>

@@ -23,12 +23,17 @@ Décisions réversibles prises par l'option prudente au Lot 0 (contrat de sessio
 - **Lot A, écoles à cocher sans filtre par DRENA ni recherche** (UDR §3.2) : liste des écoles actives par nom, « Nom (DRENA) », en cases à cocher. À reprendre avec un filtre quand le nombre d'écoles gêne.
 - **Lot A, planche : cartes de `w-60 h-36` (≈ 63 × 38 mm)** car `design_tokens_test` refuse les valeurs arbitraires `[…]` et l'attribut `style` ; 3 × 21 cartes tiennent sur un A4 (marges 8 mm). Vérifier à l'impression réelle.
 - **Lot A, `test/system/role_homes_test.rb` (AN-22) rouge, hérité du Lot 0** : le menu « Plus » de l'équipe montre désormais « Caisse » avant « Annonces » ; le test attend `["Référentiel", "Imports", "Annonces"]`. Fichier hors champ du lot A : à corriger par le Lot 0 (ou l'orchestrateur).
+- **Lot C : « Semaines précédentes » = les 8 semaines terminées avant la semaine « À payer ce vendredi »** (celle-ci n'est pas répétée dans le `<details>`), soit 9 semaines visibles au total. À revoir si le porteur veut 8 semaines en tout.
+- **Lot C : le choix du point relais d'un versement porte l'identifiant interne** (`relay_point_id`), pas le `public_id` : le port gelé `RemittanceRepositoryPort#record` prend un id interne et `RelayPointRepositoryPort` (Lot A) n'est pas encore là pour résoudre un `public_id`. Formulaire réservé à l'équipe ; l'existence du point relais est vérifiée par le dépôt (échec `:invalid`). À passer au `public_id` quand le Lot A est fusionné.
+- **Lot C : la caisse liste tous les points relais, actifs ou non** (un point relais désactivé peut encore devoir de l'argent) ; le choix d'un versement les propose tous aussi.
+- **Lot C : la date d'un versement est libre** (pas de refus d'une date future ni ancienne) ; seule la valeur par défaut est « maintenant ».
 
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - Lot 0 : `test/architecture/port_contracts_test.rb` (un adaptateur par port) reste rouge sur la branche tant que les Lots A (`RelayPointRepository`) et C (`RemittanceRepository`) n'ont pas livré leurs dépôts ; attendu, les ports sont gelés ici et les adaptateurs ailleurs.
+- Lot C : `bin/system-changed` sélectionne `design_system_test.rb` et `role_homes_test.rb` (fichiers communs du Lot 0), non rejouables ici : pas de `node_modules` ni de Chrome dans cet environnement, donc pas de CSS/JS construits. Les tests de contrôleur tournent avec des `app/assets/builds/application.{css,js}` vides (ignorés par git). Aucun test système ne vise les vues du Lot C.
 
 ## Ce qu'on a appris sur la codebase
 

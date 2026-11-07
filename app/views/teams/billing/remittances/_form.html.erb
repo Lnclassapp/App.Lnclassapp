@@ -1,0 +1,17 @@
+<%# 🌐 UI · teams/billing/remittances/_form — les champs d'un versement %>
+<%# Rôle : point relais (select), montant entier signé, date et heure de réception, référence Wave facultative, motif requis si négatif %>
+<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.6 %>
+<%= form_with model: form, scope: :remittance, url: teams_billing_remittances_path, method: :post, id: "remittance-form", class: "space-y-5" do |f| %>
+  <% if form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field f, :relay_point_id, as: :select, required: true, prompt: t(".relay_point_prompt"),
+                  choices: relay_points.map { [ it.name, it.id ] } %>
+  <%= ui_field f, :amount_xof, required: true, inputmode: "text", autocomplete: "off", placeholder: t(".amount_placeholder"), hint: t(".amount_hint") %>
+  <%= ui_field f, :received_at, type: "datetime-local", value: form.received_at&.strftime("%Y-%m-%dT%H:%M"), hint: t(".received_at_hint") %>
+  <%= ui_field f, :reference, maxlength: Dtos::Billing::RemittanceInput::REFERENCE_MAX, autocomplete: "off", placeholder: t(".reference_placeholder") %>
+  <%= ui_field f, :reason, as: :textarea, maxlength: Dtos::Billing::RemittanceInput::REASON_MAX, rows: 2, hint: t(".reason_hint") %>
+<% end %>

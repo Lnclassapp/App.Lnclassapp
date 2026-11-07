@@ -1,0 +1,8 @@
+<%# 🌐 UI · teams/billing/remittances/create — succès de la saisie d'un versement %>
+<%# Rôle : toast, modale refermée, blocs #cashbox_week et #cashbox_relays remplacés %>
+<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.6 %>
+<%= turbo_stream_toast t(".recorded"), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.replace "cashbox_week", partial: "teams/billing/cashboxes/week", locals: { cashbox: @cashbox } %>
+<%= turbo_stream.replace "cashbox_relays", partial: "teams/billing/cashboxes/relays", locals: { cashbox: @cashbox } %>
+<%= turbo_stream.replace "cashbox_schools", partial: "teams/billing/cashboxes/schools", locals: { cashbox: @cashbox } %>
