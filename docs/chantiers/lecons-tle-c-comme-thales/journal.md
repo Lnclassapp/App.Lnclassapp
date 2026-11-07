@@ -18,6 +18,7 @@
 - **Faux positif du contrôle de rang** : « proposition d'action » était pris pour « proposition A ». Expression corrigée.
 - **Rang non vu par le script** : « la première égalité », « la seconde », « les deux premières » échappent à l'expression ; ce sont les relecteurs qui les ont attrapés et réécrits.
 - **Rédacteurs qui génèrent par script** : plusieurs ont écrit leurs JSON avec un petit générateur au lieu de fichier par fichier. Le contrôle porte sur le JSON produit ; les générateurs restent hors dépôt.
+- **Develop a rangé la Tle C pendant le chantier** : le chantier `base-de-lecons` (2026-11-06) a déplacé les 45 fichiers vers `a-reprendre/` (36 en `sujets-manquants/`, 9 en `exercices-et-sujets-manquants/`). La fusion de Develop a suivi le déplacement sans conflit ; les 45 fichiers fusionnés étaient identiques octet pour octet aux fichiers contrôlés. Ils sont revenus dans `lecons-traitees/tle-c/` selon la règle de retour de `a-reprendre/README.md` (format complet, `valider.rb` ✓).
 - **Quota de la session** : une vingtaine d'agents (rédacteurs de physique-chimie et de SVT, relecteurs de mathématiques) se sont arrêtés en pleine tâche le 5/11 ; ils ont repris le 7/11 sans rien perdre.
 
 ## Ce qu'on a appris sur la codebase
@@ -47,6 +48,7 @@ Même fiche dans un autre dossier de Terminale ; le chantier suivant (Tle D, pui
 
 - **Lectures graphiques sans tolérance** : comme en 3ème, une valeur lue sur une construction est en `numeric` avec `tolerance` 0 quand la valeur est entière. Option prudente appliquée : laisser tel quel. Option possible : une tolérance d'une demi-unité.
 - **Valeurs illustratives** : les données chiffrées des énoncés (mesures, effectifs, prix, résultats d'expérience en SVT et physique-chimie) sont inventées et présentées comme des exemples. Un enseignant relit avant publication.
+- **Jeu standard** : la règle de retour dit d'ajouter une leçon revenue à `db/seeds/standard/jeu.yml` pour que le jeu standard la charge. Option prudente appliquée : ne pas l'ajouter ici (le chantier ne touche que du contenu et l'empreinte du jeu reste celle de Develop). Option possible : une retouche qui ajoute la Tle C à `jeu.yml`.
 - **Oral du bac (Français)** : les textes d'appui reprennent Birago Diop (1947) et Bernard Dadié, « Climbié » (1956), sur le modèle de la 3ème.
 
 ## Avancement
