@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -148,6 +148,84 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
     t.datetime "used_at"
     t.datetime "created_at", null: false
     t.index ["user_id"], name: "index_backup_codes_on_user_id", where: "(used_at IS NULL)"
+  end
+
+  create_table "billing_activation_cards", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "batch_id", null: false
+    t.bigint "relay_point_id", null: false
+    t.bigserial "serial", null: false
+    t.string "code", null: false
+    t.integer "price_xof", null: false
+    t.date "valid_until", null: false
+    t.string "state", default: "issued", null: false
+    t.bigint "student_id"
+    t.bigint "school_id"
+    t.datetime "activated_at"
+    t.datetime "cancelled_at"
+    t.bigint "cancelled_by_id"
+    t.string "cancel_reason", limit: 200
+    t.index ["batch_id"], name: "index_billing_activation_cards_on_batch_id"
+    t.index ["cancelled_by_id"], name: "index_billing_activation_cards_on_cancelled_by_id"
+    t.index ["code"], name: "index_billing_activation_cards_on_code", unique: true
+    t.index ["public_id"], name: "index_billing_activation_cards_on_public_id", unique: true
+    t.index ["relay_point_id", "state"], name: "index_billing_activation_cards_on_relay_point_id_and_state"
+    t.index ["relay_point_id"], name: "index_billing_activation_cards_on_relay_point_id"
+    t.index ["school_id"], name: "index_billing_activation_cards_on_school_id"
+    t.index ["serial"], name: "index_billing_activation_cards_on_serial", unique: true
+    t.index ["student_id", "valid_until"], name: "index_billing_activation_cards_one_subscription_per_year", unique: true, where: "((state)::text = 'activated'::text)"
+    t.index ["student_id"], name: "index_billing_activation_cards_on_student_id"
+    t.check_constraint "price_xof >= 0", name: "billing_activation_cards_price_positive"
+    t.check_constraint "state::text = ANY (ARRAY['issued'::character varying, 'activated'::character varying, 'cancelled'::character varying]::text[])", name: "billing_activation_cards_state_values"
+  end
+
+  create_table "billing_card_batches", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "relay_point_id", null: false
+    t.integer "quantity", null: false
+    t.integer "unit_price_xof", null: false
+    t.date "valid_until", null: false
+    t.bigint "created_by_id"
+    t.datetime "created_at", null: false
+    t.index ["created_by_id"], name: "index_billing_card_batches_on_created_by_id"
+    t.index ["public_id"], name: "index_billing_card_batches_on_public_id", unique: true
+    t.index ["relay_point_id"], name: "index_billing_card_batches_on_relay_point_id"
+    t.check_constraint "quantity >= 1 AND quantity <= 200", name: "billing_card_batches_quantity_range"
+    t.check_constraint "unit_price_xof >= 0", name: "billing_card_batches_price_positive"
+  end
+
+  create_table "billing_relay_point_schools", force: :cascade do |t|
+    t.bigint "relay_point_id", null: false
+    t.bigint "school_id", null: false
+    t.index ["relay_point_id", "school_id"], name: "index_billing_relay_point_schools_on_pair", unique: true
+    t.index ["school_id"], name: "index_billing_relay_point_schools_on_school_id"
+  end
+
+  create_table "billing_relay_points", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.string "name", limit: 80, null: false
+    t.string "location", limit: 120, null: false
+    t.string "phone", limit: 20, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["public_id"], name: "index_billing_relay_points_on_public_id", unique: true
+  end
+
+  create_table "billing_remittances", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "relay_point_id", null: false
+    t.integer "amount_xof", null: false
+    t.datetime "received_at", null: false
+    t.string "reference", limit: 60
+    t.string "reason", limit: 200
+    t.bigint "recorded_by_id"
+    t.datetime "created_at", null: false
+    t.index ["public_id"], name: "index_billing_remittances_on_public_id", unique: true
+    t.index ["recorded_by_id"], name: "index_billing_remittances_on_recorded_by_id"
+    t.index ["relay_point_id"], name: "index_billing_remittances_on_relay_point_id"
+    t.check_constraint "amount_xof <> 0", name: "billing_remittances_amount_not_zero"
+    t.check_constraint "amount_xof > 0 OR char_length(btrim(COALESCE(reason, ''::character varying)::text)) > 0", name: "billing_remittances_correction_has_reason"
   end
 
   create_table "classroom_assignments", force: :cascade do |t|
@@ -1068,6 +1146,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
   add_foreign_key "articles", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "audit_events", "users", column: "actor_id", on_delete: :restrict
   add_foreign_key "backup_codes", "users", on_delete: :cascade
+  add_foreign_key "billing_activation_cards", "billing_card_batches", column: "batch_id", on_delete: :restrict
+  add_foreign_key "billing_activation_cards", "billing_relay_points", column: "relay_point_id", on_delete: :restrict
+  add_foreign_key "billing_activation_cards", "schools", on_delete: :restrict
+  add_foreign_key "billing_activation_cards", "users", column: "cancelled_by_id", on_delete: :restrict
+  add_foreign_key "billing_activation_cards", "users", column: "student_id", on_delete: :restrict
+  add_foreign_key "billing_card_batches", "billing_relay_points", column: "relay_point_id", on_delete: :restrict
+  add_foreign_key "billing_card_batches", "users", column: "created_by_id", on_delete: :restrict
+  add_foreign_key "billing_relay_point_schools", "billing_relay_points", column: "relay_point_id", on_delete: :restrict
+  add_foreign_key "billing_relay_point_schools", "schools", on_delete: :restrict
+  add_foreign_key "billing_remittances", "billing_relay_points", column: "relay_point_id", on_delete: :restrict
+  add_foreign_key "billing_remittances", "users", column: "recorded_by_id", on_delete: :restrict
   add_foreign_key "classroom_assignments", "classrooms", on_delete: :restrict
   add_foreign_key "classroom_assignments", "users", column: "archived_by_id", on_delete: :restrict
   add_foreign_key "classroom_assignments", "users", column: "assigned_by_id", on_delete: :restrict

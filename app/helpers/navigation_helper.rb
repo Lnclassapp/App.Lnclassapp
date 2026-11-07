@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), caisse-equipe (§2), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -36,8 +36,9 @@ module NavigationHelper
   # Décision du porteur (chantier annonces, 2026-10-04) : « Annonces » y vient en dernier, sur « Mes annonces » ; la barre
   # basse de l'équipe garde ses 5 cases.
   SECONDARY_DESTINATIONS = {
+    # UDR caisse-equipe §2 : « Caisse » dans le menu « Plus » (la barre basse garde ses 5 cases), avant « Annonces ».
     team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
-            [ :announcements, :my_announcements_path, "megaphone" ] ]
+            [ :billing, :teams_billing_cashbox_path, "banknotes" ], [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
   # UDR enseignant §3.4 (lot P0) : le Turbo Frame du panneau « Mon compte » ; dès lg, les écrans de retrait (« Mes matières »,
   # « Mes établissements ») s'y ouvrent à la place du menu, sans quitter la page en dessous.

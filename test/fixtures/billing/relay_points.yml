@@ -1,0 +1,11 @@
+# Cartes d'activation (Lot 0) : « Boutique Awa », le point relais du scénario Caisse du PRD (§4).
+# Table billing_relay_points ; pas de classe de fixture : Rails retombe sur le nom de table billing_relay_points.
+boutique_awa:
+  id: <%= ActiveRecord::FixtureSet.identify(:boutique_awa) %>
+  public_id: BoutiqueAwa001
+  name: Boutique Awa
+  location: Près du marché
+  phone: "07 00 00 00 00"
+  active: true
+  created_at: 2026-11-09 08:00:00
+  updated_at: 2026-11-09 08:00:00

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
+# ADR  : cartes-activation, 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -100,6 +100,18 @@ namespace :teams do
   # ADR-0063 : « Croissance », indicateurs du parrainage ; liée depuis l'accueil, sans entrée de navigation (UDR-0006).
   resource :growth, only: :show, controller: "growth"
   post "members/:user_public_id/second-factor-reset", to: "second_factor_resets#create", as: :member_second_factor_reset
+
+  # ADR cartes-activation, UDR caisse-equipe §3 : points relais, lots de cartes, caisse, annulation et versements.
+  # Chemins en français sous /teams, sans le segment « billing » ; contrôleurs Teams::Billing::*, Lots A et C.
+  namespace :billing, path: "" do
+    resource :cashbox, only: :show, path: "caisse"
+    resources :relay_points, path: "points-relais", param: :public_id, only: %i[index show new create edit update] do
+      resources :card_batches, path: "lots", only: %i[new create]
+    end
+    get "lots/:public_id/planche", to: "card_batches#show", as: :card_batch_sheet
+    resource :card_cancellation, only: %i[show create], path: "cartes/annuler"
+    resources :remittances, path: "versements", only: %i[new create]
+  end
 
   # ADR-0052 : failed jobs are read and retried here, behind the team area authentication.
   mount MissionControl::Jobs::Engine, at: "/jobs"

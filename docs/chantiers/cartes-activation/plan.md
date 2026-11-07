@@ -59,6 +59,7 @@ Challenger (phase 5)               → 1 agent distinct, sur la branche de chant
                      config/routes/billing.rb
                      config/routes/teams.rb
                      app/helpers/navigation_helper.rb
+                     config/locales/teams/billing_nav.fr.yml
                      test/fixtures/billing/relay_points.yml
                      test/fixtures/billing/relay_point_schools.yml
                      test/fixtures/billing/card_batches.yml
