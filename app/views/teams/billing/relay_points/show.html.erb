@@ -7,6 +7,8 @@
                    back: { label: t(".back"), href: teams_billing_relay_points_path } do %>
   <%= ui_button t(".edit"), href: edit_teams_billing_relay_point_path(@relay_point.public_id), variant: :secondary, icon: "pencil-square",
                             data: { turbo_frame: "modal" } %>
+  <%= ui_button t(".new_remittance"), href: new_teams_billing_remittance_path(relay_point_public_id: @relay_point.public_id),
+                                      variant: :secondary, icon: "banknotes", data: { turbo_frame: "modal" } %>
   <%= ui_button t(".new_batch"), href: new_teams_billing_relay_point_card_batch_path(@relay_point.public_id), icon: "plus",
                                  data: { turbo_frame: "modal" } %>
 <% end %>
@@ -32,6 +34,53 @@
         </dd>
       </div>
     </dl>
+  <% end %>
+
+  <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
+  <%= ui_card title: t(".cashbox"), id: "relay_point_cashbox" do %>
+    <dl class="grid grid-cols-2 gap-4 text-sm sm:grid-cols-3 lg:grid-cols-6">
+      <% [ [ :issued, @cashbox_line.issued_count ], [ :activated, @cashbox_line.activated_count ], [ :cancelled, @cashbox_line.cancelled_count ],
+            [ :in_circulation, @cashbox_line.in_circulation ], [ :remitted, money.call(@cashbox_line.remitted_xof) ] ].each do |key, value| %>
+        <div>
+          <dt class="text-xs text-mute"><%= t(".figures.#{key}") %></dt>
+          <dd class="text-lg font-semibold tabular-nums text-ink"><%= value %></dd>
+        </div>
+      <% end %>
+      <div>
+        <dt class="text-xs text-mute"><%= t(".figures.due") %></dt>
+        <dd id="relay_point_due" class="<%= class_names("text-lg font-semibold tabular-nums", "text-error" => @cashbox_line.due_xof.positive?, "text-success" => !@cashbox_line.due_xof.positive?) %>"><%= money.call(@cashbox_line.due_xof) %></dd>
+      </div>
+    </dl>
+  <% end %>
+
+  <%= ui_card title: t(".remittances") do %>
+    <% if @remittances.empty? %>
+      <%= ui_empty_state title: t(".no_remittance"), icon: "banknotes" %>
+    <% else %>
+      <div class="relative overflow-x-auto">
+        <table class="w-full min-w-md text-left text-sm">
+          <caption class="sr-only"><%= t(".remittances") %></caption>
+          <thead class="border-b border-line text-xs text-mute">
+            <tr>
+              <th scope="col" class="py-3 pr-4 font-medium"><%= t(".remittance_columns.date") %></th>
+              <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".remittance_columns.amount") %></th>
+              <th scope="col" class="px-4 py-3 font-medium"><%= t(".remittance_columns.reference") %></th>
+              <th scope="col" class="px-4 py-3 font-medium"><%= t(".remittance_columns.reason") %></th>
+            </tr>
+          </thead>
+          <tbody id="relay_point_remittances" class="divide-y divide-line">
+            <% @remittances.each do |remittance| %>
+              <tr id="remittance_<%= remittance.public_id %>">
+                <td class="py-3 pr-4"><%= l(remittance.received_at.to_date, format: :long).squish %></td>
+                <td class="px-4 py-3 text-right whitespace-nowrap tabular-nums"><%= money.call(remittance.amount_xof) %></td>
+                <td class="px-4 py-3"><%= remittance.reference %></td>
+                <td class="px-4 py-3"><%= remittance.reason %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
   <% end %>
 
   <%= ui_card title: t(".batches") do %>

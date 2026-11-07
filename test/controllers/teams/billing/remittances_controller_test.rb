@@ -7,7 +7,7 @@ class Teams::Billing::RemittancesControllerTest < ActionDispatch::IntegrationTes
     @awa = Orm::Billing::RelayPoint.find_by!(name: "Boutique Awa")
   end
 
-  def params(**attributes) = { remittance: { relay_point_id: @awa.id, amount_xof: "5000", reference: "WAVE-5" }.merge(attributes) }
+  def params(**attributes) = { remittance: { relay_point_public_id: @awa.public_id, amount_xof: "5000", reference: "WAVE-5" }.merge(attributes) }
 
   test "a teacher, a student and a school admin receive 403" do
     [ create_teacher, create_student, create_user(role: "school_admin") ].each do |user|
@@ -28,12 +28,20 @@ class Teams::Billing::RemittancesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_select "turbo-frame#modal form#remittance-form" do
-      assert_select "select[name='remittance[relay_point_id]'] option", text: "Boutique Awa"
+      assert_select "select[name='remittance[relay_point_public_id]'] option[value='#{@awa.public_id}']", text: "Boutique Awa"
       assert_select "input[name='remittance[amount_xof]']"
       assert_select "input[name='remittance[received_at]'][type=datetime-local]"
       assert_select "input[name='remittance[reference]'][maxlength='60']"
       assert_select "textarea[name='remittance[reason]'], input[name='remittance[reason]']"
     end
+  end
+
+  test "the form opens with the relay point of the sheet preselected" do
+    sign_in_as @member
+
+    get new_teams_billing_remittance_path(relay_point_public_id: @awa.public_id), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "select[name='remittance[relay_point_public_id]'] option[selected][value='#{@awa.public_id}']"
   end
 
   test "a valid remittance is written, audited, and the cashbox blocks are replaced" do
@@ -84,7 +92,7 @@ class Teams::Billing::RemittancesControllerTest < ActionDispatch::IntegrationTes
   test "an unknown relay point is refused" do
     sign_in_as @member
 
-    post teams_billing_remittances_path, params: params(relay_point_id: 0)
+    post teams_billing_remittances_path, params: params(relay_point_public_id: "inconnu")
 
     assert_response :unprocessable_content
   end

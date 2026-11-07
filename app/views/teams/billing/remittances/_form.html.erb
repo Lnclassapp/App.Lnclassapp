@@ -8,8 +8,8 @@
       <p><%= form.errors[:base].to_sentence %></p>
     </div>
   <% end %>
-  <%= ui_field f, :relay_point_id, as: :select, required: true, prompt: t(".relay_point_prompt"),
-                  choices: relay_points.map { [ it.name, it.id ] } %>
+  <%= ui_field f, :relay_point_public_id, as: :select, required: true, prompt: t(".relay_point_prompt"),
+                  choices: relay_points.map { [ it.name, it.public_id ] } %>
   <%= ui_field f, :amount_xof, required: true, inputmode: "text", autocomplete: "off", placeholder: t(".amount_placeholder"), hint: t(".amount_hint") %>
   <%= ui_field f, :received_at, type: "datetime-local", value: form.received_at&.strftime("%Y-%m-%dT%H:%M"), hint: t(".received_at_hint") %>
   <%= ui_field f, :reference, maxlength: Dtos::Billing::RemittanceInput::REFERENCE_MAX, autocomplete: "off", placeholder: t(".reference_placeholder") %>

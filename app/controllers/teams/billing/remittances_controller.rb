@@ -7,7 +7,7 @@ module Teams
       before_action :load_relay_points
 
       def new
-        @form = Dtos::Billing::RemittanceInput.new(received_at: Time.current.change(sec: 0))
+        @form = Dtos::Billing::RemittanceInput.new(relay_point_public_id: params[:relay_point_public_id], received_at: Time.current.change(sec: 0))
       end
 
       def create
@@ -28,14 +28,15 @@ module Teams
       def load_relay_points = @relay_points = cashbox_query.relay_points
 
       def form_input
-        Dtos::Billing::RemittanceInput.new(params.expect(remittance: %i[relay_point_id amount_xof received_at reference reason]))
+        Dtos::Billing::RemittanceInput.new(params.expect(remittance: %i[relay_point_public_id amount_xof received_at reference reason]))
       end
 
       def cashbox_query = Queries::Billing::CashboxQuery.new
 
       def record_remittance
         UseCases::Billing::RecordRemittance.new(
-          remittances: Repositories::Billing::RemittanceRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+          remittances: Repositories::Billing::RemittanceRepository.new, relay_points: Repositories::Billing::RelayPointRepository.new,
+          audit_log: Repositories::Identity::AuditLogRepository.new,
           transaction: Repositories::Shared::Transaction.new, policy: Policies::Billing::ManageBillingPolicy.new, clock: Time.zone
         )
       end

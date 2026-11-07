@@ -23,7 +23,8 @@ elsif Rails.env.production? && staging then "staging"
 else Rails.env
 end
 SEEDS = { "identity" => :all, "contenus" => %w[production develop staging], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
-          "development" => %w[development pr], "standard" => %w[pr demo develop staging], "standard/activite" => %w[pr demo develop] }.freeze
+          "development" => %w[development pr], "standard" => %w[pr demo develop staging], "standard/abonnements" => %w[pr demo develop staging],
+          "standard/activite" => %w[pr demo develop] }.freeze
 
 SEEDS.each do |name, stages|
   next unless stages == :all || stages.include?(stage)

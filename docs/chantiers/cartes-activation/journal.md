@@ -6,7 +6,10 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-11-07 | Lot A, fiche d'un point relais : chiffres de caisse et versements branchés au Lot D (`CashboxQuery`, `RemittanceRepository#for_relay_point`), bouton « Enregistrer un versement » pré-rempli. | Intégration des lots A, B, C | Non |
+| 2026-11-07 | `test/system/role_homes_test.rb` (AN-22) attend désormais `Référentiel, Imports, Caisse, Annonces` dans « Plus » de l'équipe (corrigé au Lot D). | Intégration des lots A, B, C | Non |
+| 2026-11-07 | Lot C, versement : le formulaire envoie `relay_point_public_id`, `RecordRemittance` le résout par `RelayPointRepository#find(public_id:)` (inconnu : `:invalid`) ; plus d'identifiant interne à l'écran. | Intégration des lots A, B, C | Non |
+| 2026-11-07 | Semis : `standard/abonnements` branché dans `SEEDS` et `access:` ajouté à `StartExerciseSession` dans `db/seeds/standard/activite.rb` (Lot D). | Intégration des lots A, B, C | Non |
 
 ## À trancher
 
@@ -19,12 +22,9 @@ Décisions réversibles prises par l'option prudente au Lot 0 (contrat de sessio
 - **Lot A, vocabulaire : « Trop de tentatives » et « tes cours » au lieu de « Trop d'essais » et « tes leçons ».** `test/i18n/locale_files_test.rb` (UDR-0007/0130) interdit « essai » et « leçon » dans les locales, hors liste fermée. Le PRD §3 et l'UDR abonnement-eleve §3.3 écrivent les anciens mots : à aligner dans le PRD/UDR à la clôture, ou à ajouter à `ALLOWED` si le porteur tient au texte exact.
 - **Lot A, points relais et lots : modales avec formulaire `_top`, pas de Turbo Stream.** Le plan ne liste aucune vue `*.turbo_stream.erb` pour les points relais ; la modale s'ouvre dans le frame `modal`, le formulaire la quitte (`data-turbo-frame="_top"`) et succès = redirection vers la fiche (point relais) ou la planche (lot). Un échec de saisie se re-rend en page pleine (422) avec la modale ouverte. Passer au modèle DRENA (Turbo Stream, liste mise à jour sans recharger) demande trois vues de plus.
 - **Lot A, lectures hors port dans `RelayPointRepository`.** Les ports étant gelés, l'adaptateur porte quatre lectures publiques que les ports ne déclarent pas : `batches_of` (lots d'un point relais), `school_choices`, `school_names`, `school_id_of_student` (école de la classe principale active, pour `ActivateCard` et Mon abonnement ; `StudentSchoolQuery` ne rend pas l'identifiant). À promouvoir en port ou en query `Queries::Billing::*` si le porteur veut la forme stricte.
-- **Lot A, fiche d'un point relais sans versements ni chiffres de caisse** (UDR caisse-equipe §3.3) : ils dépendent de `RemittanceRepository` et de `CashboxQuery`, lot C ; la fiche montre l'identité, les écoles et les lots. À brancher par C ou par un petit lot de suite.
 - **Lot A, écoles à cocher sans filtre par DRENA ni recherche** (UDR §3.2) : liste des écoles actives par nom, « Nom (DRENA) », en cases à cocher. À reprendre avec un filtre quand le nombre d'écoles gêne.
 - **Lot A, planche : cartes de `w-60 h-36` (≈ 63 × 38 mm)** car `design_tokens_test` refuse les valeurs arbitraires `[…]` et l'attribut `style` ; 3 × 21 cartes tiennent sur un A4 (marges 8 mm). Vérifier à l'impression réelle.
-- **Lot A, `test/system/role_homes_test.rb` (AN-22) rouge, hérité du Lot 0** : le menu « Plus » de l'équipe montre désormais « Caisse » avant « Annonces » ; le test attend `["Référentiel", "Imports", "Annonces"]`. Fichier hors champ du lot A : à corriger par le Lot 0 (ou l'orchestrateur).
 - **Lot C : « Semaines précédentes » = les 8 semaines terminées avant la semaine « À payer ce vendredi »** (celle-ci n'est pas répétée dans le `<details>`), soit 9 semaines visibles au total. À revoir si le porteur veut 8 semaines en tout.
-- **Lot C : le choix du point relais d'un versement porte l'identifiant interne** (`relay_point_id`), pas le `public_id` : le port gelé `RemittanceRepositoryPort#record` prend un id interne et `RelayPointRepositoryPort` (Lot A) n'est pas encore là pour résoudre un `public_id`. Formulaire réservé à l'équipe ; l'existence du point relais est vérifiée par le dépôt (échec `:invalid`). À passer au `public_id` quand le Lot A est fusionné.
 - **Lot C : la caisse liste tous les points relais, actifs ou non** (un point relais désactivé peut encore devoir de l'argent) ; le choix d'un versement les propose tous aussi.
 - **Lot C : la date d'un versement est libre** (pas de refus d'une date future ni ancienne) ; seule la valeur par défaut est « maintenant ».
 
@@ -35,7 +35,6 @@ Lot B (options prudentes) :
 - **Garde de `StartExerciseSession` après la policy** (comme l'ADR §6) : un acteur non élève ou un exercice non publié garde son refus (403/404) ; la garde ne voit que des élèves.
 - **Vérification de fiche d'un élève bloqué qui a un devoir à rendre** : `CheckExerciseOnSheet` refuse d'abord `:assigned_pending` (avant d'appeler `StartExerciseSession`). Pas de blocage vers Mon abonnement dans ce cas précis, le démarrage du devoir passe par « Commencer ».
 - **Vérification d'un entraînement de notion en frame Turbo** : une redirection n'a pas le frame, la réponse est un `turbo-frame` (402) avec le lien vers Mon abonnement (`target="_top"`) ; sans frame, redirection 303.
-- **Semis `abonnements.rb` non branché** : `db/seeds.rb` (entrée `SEEDS`) et `db/seeds/standard/activite.rb` (`access:`) sont hors du champ du Lot B, à faire par l'orchestrateur.
 - **Bandeau et débord de la carte.** Pendant la période gratuite, le bandeau est le premier enfant de `#student_home` (UDR : « juste avant `next_step` ») : c'est lui qui déborde sur le bandeau bleu (`-mt-12`), pas la carte. Le test système `student_home_test` (débord de la carte) abonne donc son élève. À regarder aux captures 390 px ; si le rendu déplaît, sortir le bandeau de la grille est un changement de `show.html.erb` seul.
 - **Test `student_homes_controller_test` « no abonnement »** : l'élève y est abonné (`subscribe_student`) ; le bandeau est voulu pendant la période gratuite.
 

@@ -12,13 +12,13 @@ module Dtos
       MINUS_SIGNS = /[−–—]/
       AMOUNT_FORMAT = /\A-?\d{1,9}\z/
 
-      attribute :relay_point_id, :integer
+      attribute :relay_point_public_id, :string
       attribute :amount_xof, :string
       attribute :received_at, :datetime
       attribute :reference, :string
       attribute :reason, :string
 
-      validates :relay_point_id, presence: true
+      validates :relay_point_public_id, presence: true
       validates :amount_xof, presence: true
       validate :amount_is_a_signed_integer
       validates :reference, length: { maximum: REFERENCE_MAX }

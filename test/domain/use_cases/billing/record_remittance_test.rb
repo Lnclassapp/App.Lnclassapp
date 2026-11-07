@@ -19,6 +19,12 @@ module UseCases
         end
       end
 
+      class FakeRelayPoints
+        include Ports::Billing::RelayPointRepositoryPort
+
+        def find(public_id:) = public_id == "pt-awa" ? Entities::Billing::RelayPoint.new(id: 3, public_id:, name: "Awa") : nil
+      end
+
       class FakeAudit
         include Ports::Identity::AuditLogPort
 
@@ -31,8 +37,8 @@ module UseCases
         @remittances = FakeRemittances.new
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
-        dto = Dtos::Billing::RemittanceInput.new({ relay_point_id: 3, amount_xof: "10000", reference: "WAVE-1" }.merge(attributes))
-        RecordRemittance.new(remittances: @remittances, audit_log: @audit, transaction: @transaction,
+        dto = Dtos::Billing::RemittanceInput.new({ relay_point_public_id: "pt-awa", amount_xof: "10000", reference: "WAVE-1" }.merge(attributes))
+        RecordRemittance.new(remittances: @remittances, relay_points: FakeRelayPoints.new, audit_log: @audit, transaction: @transaction,
                              policy: Policies::Billing::ManageBillingPolicy.new, clock: Clock.new(NOW)).call(actor:, dto:)
       end
 
@@ -69,7 +75,9 @@ module UseCases
       end
 
       test "le point relais est requis et la référence limitée à 60 caractères" do
-        assert_includes record(relay_point_id: nil).errors.keys, :relay_point_id
+        assert_includes record(relay_point_public_id: nil).errors.keys, :relay_point_public_id
+        assert_includes record(relay_point_public_id: "inconnu").errors.keys, :relay_point_public_id
+        assert_nil @remittances.recorded
         assert_includes record(reference: "x" * 61).errors.keys, :reference
       end
 

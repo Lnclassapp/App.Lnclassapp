@@ -191,7 +191,7 @@ assign = UseCases::Classroom::AssignResource.new(
 start_session = UseCases::Assessment::StartExerciseSession.new(
   exercises: exercise_repository, sessions:, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
   memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-  policy: Policies::Assessment::StartSessionPolicy.new, transaction:, clock:
+  policy: Policies::Assessment::StartSessionPolicy.new, access: Queries::Billing::StudentAccessQuery.new, transaction:, clock:
 )
 submit = UseCases::Assessment::SubmitExerciseCopy.new(
   sessions:, exercises: exercise_repository, policy: Policies::Assessment::SubmitAttemptPolicy.new,

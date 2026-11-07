@@ -152,4 +152,17 @@ class Teams::Billing::RelayPointsControllerTest < ActionDispatch::IntegrationTes
     get teams_billing_relay_point_path(other.public_id)
     assert_select "p", text: "Aucun lot de cartes"
   end
+
+  test "la fiche montre les chiffres de caisse, le reste dû de la Boutique Awa et ses versements" do
+    sign_in_as @member
+
+    get teams_billing_relay_point_path(@awa.public_id)
+
+    assert_select "#relay_point_cashbox dd#relay_point_due.text-error", text: "10 000 F"
+    assert_select "#relay_point_cashbox dd", text: "20 000 F"
+    assert_select "tbody#relay_point_remittances tr", 2
+    assert_select "tbody#relay_point_remittances tr#remittance_AwaRemit000002", text: /WAVE-0002/
+    assert_select "a[data-turbo-frame=modal][href='#{new_teams_billing_remittance_path(relay_point_public_id: @awa.public_id)}']",
+                  text: "Enregistrer un versement"
+  end
 end

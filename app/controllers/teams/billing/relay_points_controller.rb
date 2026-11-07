@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Teams::Billing::RelayPointsController
-# Rôle : l'équipe liste, crée et modifie les points relais et leurs écoles (modale), lit la fiche d'un point relais et ses lots
+# Rôle : l'équipe liste, crée et modifie les points relais et leurs écoles (modale), lit la fiche d'un point relais, ses lots, ses chiffres de caisse et ses versements
 # ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.2 et §3.3
 module Teams
   module Billing
@@ -14,6 +14,8 @@ module Teams
       def show
         @batches = relay_points.batches_of(relay_point_id: @relay_point.id)
         @school_names = relay_points.school_names(school_ids: @relay_point.school_ids).values
+        @cashbox_line = cashbox_line
+        @remittances = Repositories::Billing::RemittanceRepository.new.for_relay_point(relay_point_id: @relay_point.id)
       end
 
       def new
@@ -54,6 +56,9 @@ module Teams
       def form_input
         Dtos::Billing::RelayPointInput.new(params.expect(relay_point: [ :name, :location, :phone, :active, { school_ids: [] } ]))
       end
+
+      # Les chiffres de caisse du point relais : sa ligne de la caisse de l'équipe (une requête par agrégat, pas par point relais).
+      def cashbox_line = Queries::Billing::CashboxQuery.new.call(at: Time.current).relays.find { it.id == @relay_point.id }
 
       def relay_points = @relay_points_repository ||= Repositories::Billing::RelayPointRepository.new
 
