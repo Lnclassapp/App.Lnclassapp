@@ -38,6 +38,14 @@ Lot B (options prudentes) :
 - **Bandeau et débord de la carte.** Pendant la période gratuite, le bandeau est le premier enfant de `#student_home` (UDR : « juste avant `next_step` ») : c'est lui qui déborde sur le bandeau bleu (`-mt-12`), pas la carte. Le test système `student_home_test` (débord de la carte) abonne donc son élève. À regarder aux captures 390 px ; si le rendu déplaît, sortir le bandeau de la grille est un changement de `show.html.erb` seul.
 - **Test `student_homes_controller_test` « no abonnement »** : l'élève y est abonné (`subscribe_student`) ; le bandeau est voulu pendant la période gratuite.
 
+Lot E (corrections issues des revues) :
+
+- **Droit d'imprimer la planche : toute l'équipe, pas seulement les admins** (`ManageBillingPolicy`, comme la création du lot). Décision de droits réversible, option inchangée ; chaque affichage est journalisé (`billing.card_batch_printed`, sans code), ce qui rend l'abus traçable. Restreindre aux admins = une policy de plus.
+- **Pas de garde sur la remise d'une copie déjà ouverte.** Un élève bloqué peut finir et rendre une séance ouverte avant le blocage ; seuls le démarrage et la vérification d'une fiche sont gardés.
+- **Messages d'activation : code inconnu, utilisé et annulé restent distincts.** L'énumération n'est pas exploitable (31^12 codes, 5 essais par 10 minutes et par élève) et l'élève a besoin de savoir quoi faire (« Rapporte-la au point relais »).
+- **Annuler une carte remise ne change pas le « dû » de la caisse.** La consigne du Lot E disait « dû −10 000 » ; l'ADR §4.7 définit `dû = Σ prix des cartes activées − Σ versements` : une carte remise non activée n'y entre pas, l'annuler fait seulement passer « en circulation » de 15 à 14. Le test suit l'ADR. Le PRD (« sort de la circulation et du dû ») est à relire : sa phrase vaut pour la circulation.
+- **Date de versement illisible : message ajouté à `billing_cashbox.fr.yml`** (`received_at.invalid`), fichier hors de la liste du lot mais seul endroit du texte de ce DTO.
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.

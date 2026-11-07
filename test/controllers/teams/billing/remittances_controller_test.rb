@@ -96,4 +96,15 @@ class Teams::Billing::RemittancesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :unprocessable_content
   end
+
+  test "une date illisible est refusée en 422, rien n'est écrit" do
+    sign_in_as @member
+
+    assert_no_difference -> { Orm::Billing::Remittance.count } do
+      post teams_billing_remittances_path, params: params(received_at: "31/13/2026")
+    end
+
+    assert_response :unprocessable_content
+    assert_select "#remittance_received_at_error", text: /date/i
+  end
 end

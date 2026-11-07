@@ -103,6 +103,13 @@ module UseCases
         assert_equal :forbidden, result.code
         assert_nil @cards.activated
       end
+
+      test "un abonnement antérieur plus court que la carte n'empêche pas l'activation" do
+        result = activate(CODE, subscribed_until: UNTIL - 1.year)
+
+        assert result.success?
+        assert_equal 40, @cards.activated[:card_id]
+      end
     end
   end
 end

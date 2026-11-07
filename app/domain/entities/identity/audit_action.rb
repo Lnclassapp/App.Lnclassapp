@@ -17,7 +17,7 @@ module Entities
         message.published message.withdrawn
         classroom.student_moved
         billing.relay_point_saved billing.card_batch_created billing.card_activated billing.card_cancelled
-        billing.remittance_recorded
+        billing.remittance_recorded billing.card_batch_printed
       ].freeze
 
       def self.valid?(action) = ALL.include?(action)

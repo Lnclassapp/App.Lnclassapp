@@ -79,6 +79,19 @@ module UseCases
         assert_equal :forbidden, result.code
         assert_nil @relay_points.saved
       end
+
+      test "l'audit garde les écoles rendues par le dépôt, pas la saisie" do
+        relay_points = FakeRelayPoints.new
+        relay_points.define_singleton_method(:save) do |relay_point:, school_ids:|
+          Shared::Result.success(relay_point.with(id: 3, public_id: "RelayPoint0001", school_ids: [ 4 ]))
+        end
+        audit = FakeAuditLog.new
+        SaveRelayPoint.new(relay_points:, audit_log: audit, transaction: FakeTransaction.new,
+                           policy: Policies::Billing::ManageBillingPolicy.new, clock: Clock.new(NOW))
+                      .call(actor: TEAM, dto: Dtos::Billing::RelayPointInput.new(valid_attributes))
+
+        assert_equal [ 4 ], audit.events.sole[:metadata][:school_ids]
+      end
     end
   end
 end

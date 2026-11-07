@@ -120,4 +120,17 @@ class Teams::Billing::CardCancellationsControllerTest < ActionDispatch::Integrat
     assert_select "body", text: /Une carte activée ne s'annule pas\./
     assert_equal "activated", @activated.reload.state
   end
+
+  test "annuler une carte remise sort une carte de la circulation, sans toucher à ce que le point relais doit" do
+    sign_in_as @member
+    awa = Orm::Billing::RelayPoint.find_by!(name: "Boutique Awa")
+    line = -> { Queries::Billing::CashboxQuery.new.call(at: Time.utc(2026, 11, 13, 12)).relays.find { it.id == awa.id } }
+    before = line.call
+
+    post teams_billing_card_cancellation_path, params: { serial: @issued.serial, cancellation: { reason: "perdue" } }
+
+    after = line.call
+    assert_equal [ 15, 10_000 ], [ before.in_circulation, before.due_xof ]
+    assert_equal [ 14, 10_000, 3 ], [ after.in_circulation, after.due_xof, after.cancelled_count ]
+  end
 end

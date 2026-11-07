@@ -23,7 +23,7 @@ module Billing
 
     # Le chemin rangé en session par le blocage d'un exercice (lot « période gratuite ») : relatif au site seulement.
     def redirect_after(card)
-      target = safe_return_path(session.delete(:billing_return_to)) || billing_subscription_path
+      target = safe_return_path(session.delete(RedirectsSubscriptionRequired::RETURN_KEY)) || billing_subscription_path
       redirect_to target, notice: t(".activated", date: subscription_date(card.valid_until)), status: :see_other
     end
 
@@ -33,7 +33,8 @@ module Billing
 
     def refuse(result)
       key = Array(result.errors[:base]).first || Array(result.errors[:code]).first
-      @code_error = t(".errors.#{key}", date: subscription_date(Array(result.errors[:subscribed_until]).first))
+      fallback = t("errors.codes.#{result.code}")
+      @code_error = key ? t(".errors.#{key}", date: subscription_date(Array(result.errors[:subscribed_until]).first), default: fallback) : fallback
       render_page(:unprocessable_content)
     end
 

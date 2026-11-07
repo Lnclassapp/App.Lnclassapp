@@ -38,6 +38,19 @@ module Repositories
         assert_not_includes raw, card.code
       end
 
+      test "ne réessaie que sur la collision de l'index du code, au plus 5 fois, puis lève" do
+        taken = batch(quantity: 1).cards.first.code
+        calls = 0
+        original = Entities::Billing::ActivationCode.method(:generate)
+        Entities::Billing::ActivationCode.define_singleton_method(:generate) { (calls += 1) && taken }
+        begin
+          assert_raises(ActiveRecord::RecordNotUnique) { batch(quantity: 1) }
+          assert_equal 5, calls
+        ensure
+          Entities::Billing::ActivationCode.define_singleton_method(:generate, original)
+        end
+      end
+
       test "retire un code quand il entre en collision" do
         taken = batch(quantity: 1).cards.first.code
         codes = [ taken, "ABCDEFGHJKMN" ]
@@ -125,7 +138,7 @@ module Repositories
 
         result = @repository.activate(card_id: second.id, student_id: student.id, school_id: nil, at: AT)
 
-        assert_equal [ :conflict, { base: [ :already_subscribed ] } ], [ result.code, result.errors ]
+        assert_equal [ :conflict, { base: [ :already_subscribed ], subscribed_until: [ UNTIL ] } ], [ result.code, result.errors ]
         assert_equal "issued", Orm::Billing::ActivationCard.find(second.id).state
       end
 

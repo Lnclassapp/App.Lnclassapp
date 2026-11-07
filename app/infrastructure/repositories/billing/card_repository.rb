@@ -6,6 +6,9 @@ module Repositories
     class CardRepository
       include Ports::Billing::CardRepositoryPort
 
+      CODE_ATTEMPTS = 5
+      CODE_INDEX = "index_billing_activation_cards_on_code".freeze
+
       def create_batch(relay_point_id:, quantity:, unit_price_xof:, valid_until:, created_by_id:, at:)
         Orm::Billing::CardBatch.transaction(requires_new: true) do
           batch = Orm::Billing::CardBatch.create!(relay_point_id:, quantity:, unit_price_xof:, valid_until:, created_by_id:, created_at: at)
@@ -33,7 +36,8 @@ module Repositories
         end
         ::Shared::Result.success(map_card(record))
       rescue ActiveRecord::RecordNotUnique
-        ::Shared::Result.failure(:conflict, errors: { base: [ :already_subscribed ] })
+        # L'index unique « un élève, une année » a parlé : la carte reste remise, et l'élève lit jusqu'à quand il est déjà abonné.
+        ::Shared::Result.failure(:conflict, errors: { base: [ :already_subscribed ], subscribed_until: [ subscribed_until(student_id:) ].compact })
       end
 
       def subscribed_until(student_id:)
@@ -57,16 +61,22 @@ module Repositories
       private
 
       # Un code déjà pris (index unique du chiffré) : on en retire un autre, dans un savepoint pour ne pas casser le lot.
+      # Toute autre erreur remonte ; après CODE_ATTEMPTS collisions, la dernière remonte aussi (31^12 codes : jamais en pratique).
       def issue_card(batch)
-        loop do
+        attempts = 0
+        begin
+          attempts += 1
           card = Orm::Billing::ActivationCard.new(batch:, relay_point_id: batch.relay_point_id, price_xof: batch.unit_price_xof,
                                                   valid_until: batch.valid_until, code: Entities::Billing::ActivationCode.generate)
           Orm::Billing::ActivationCard.transaction(requires_new: true) { card.save! }
-          return card
-        rescue ActiveRecord::RecordNotUnique
-          next
+          card
+        rescue ActiveRecord::RecordNotUnique => error
+          retry if code_collision?(error) && attempts < CODE_ATTEMPTS
+          raise
         end
       end
+
+      def code_collision?(error) = error.message.include?(CODE_INDEX)
 
       def activation_refusal(record)
         case record.state

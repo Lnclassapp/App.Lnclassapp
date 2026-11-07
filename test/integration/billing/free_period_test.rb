@@ -109,6 +109,29 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "bout en bout : bloqué au 8e jour, il active un code, revient à l'exercice et le démarre" do
+    student = student_created(CREATED_ON)
+    code = Orm::Billing::ActivationCard.where(state: "issued").order(:serial).first.code
+    travel_to(BLOCKED_DAY) do
+      sign_in_as student
+
+      assert_no_difference -> { Orm::ExerciseSession.count } do
+        start
+      end
+      assert_redirected_to billing_subscription_path
+      assert_equal exercise_path(@exercise.public_id), session[RedirectsSubscriptionRequired::RETURN_KEY]
+
+      post billing_activation_path, params: { code: }
+
+      assert_redirected_to exercise_path(@exercise.public_id)
+      assert_nil session[RedirectsSubscriptionRequired::RETURN_KEY]
+      assert_difference -> { Orm::ExerciseSession.count }, 1 do
+        start
+      end
+      assert_redirected_to exercise_session_path(Orm::ExerciseSession.sole.public_id)
+    end
+  end
+
   test "un élève bloqué lit ses leçons, ses exercices et son historique" do
     student = student_created(CREATED_ON)
     done = create_exercise_session(student:, exercise: @exercise, status: "completed")
@@ -117,8 +140,12 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
 
       get course_path(@course.slug)
       assert_response :success
+      assert_select "h1", text: /#{Regexp.escape(@course.name)}/
+      assert_select "#prepare-interros .ps-card-title", text: @exercise.essential.name
+      assert_select "#prepare-interros .ps-card-meta", text: "1 exercice"
       get exercise_path(@exercise.public_id)
       assert_response :success
+      assert_select "h1", text: /Méiose/
       get student_home_path
       assert_response :success
       assert_select "section[aria-label='#{I18n.t('billing.subscriptions.home_notice.label')}']", text: /#{Regexp.escape(I18n.t('billing.subscriptions.home_notice.blocked'))}/

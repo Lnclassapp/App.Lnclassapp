@@ -31,7 +31,8 @@ SEEDS.each do |name, stages|
 
   load Rails.root.join("db/seeds/#{name}.rb")
 rescue StandardError => error
-  raise unless %w[develop staging].include?(stage) && name.start_with?("standard")
+  # Les abonnements du jeu ne sont pas facultatifs : sans eux les élèves du jeu sont bloqués au 8e jour. Leur erreur remonte.
+  raise unless %w[develop staging].include?(stage) && name.start_with?("standard") && name != "standard/abonnements"
 
   site = stage.capitalize
   Rails.logger.error("[#{name}] semis impossible sur #{site} : #{error.class} : #{error.message}\n#{error.backtrace&.first(5)&.join("\n")}")

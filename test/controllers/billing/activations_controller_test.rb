@@ -119,4 +119,42 @@ class Billing::ActivationsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_equal "issued", @card.reload.state
   end
+
+  test "une carte activée entre-temps (course) rend « déjà abonné jusqu'au … » avec la date" do
+    other = Orm::Billing::ActivationCard.where(state: "issued").where.not(id: @card.id).order(:serial).first
+    Repositories::Billing::CardRepository.new.activate(card_id: other.id, student_id: @student.id, school_id: nil, at: Time.current)
+    # Le use case a lu « pas encore abonné » : le dépôt, lui, trouve l'abonnement posé entre-temps.
+    reads = 0
+    stub_any_instance(Repositories::Billing::CardRepository, :subscribed_until, ->(**) { (reads += 1) == 1 ? nil : Date.new(2027, 7, 31) }) do
+      activate(typed)
+    end
+    assert_equal 2, reads
+
+    assert_response :unprocessable_content
+    assert_select "[role=alert]", "Tu es déjà abonné jusqu'au 31 juillet 2027. Garde cette carte pour un camarade."
+    assert_equal "issued", @card.reload.state
+  end
+
+  test "un échec sans erreur nommée reçoit le message de son code" do
+    stub_any_instance(UseCases::Billing::ActivateCard, :call, ->(**) { Shared::Result.failure(:conflict) }) do
+      activate(typed)
+    end
+
+    assert_response :unprocessable_content
+    assert_select "[role=alert]", I18n.t("errors.codes.conflict")
+  end
+
+  test "le freinage d'un élève ne touche pas un autre élève" do
+    5.times { activate("zzzz zzzz zzzz") }
+    activate(typed)
+    assert_response :too_many_requests
+    sign_out
+    other = create_student
+    sign_in_as other
+
+    activate(typed)
+
+    assert_redirected_to billing_subscription_path
+    assert_equal other.id, @card.reload.student_id
+  end
 end

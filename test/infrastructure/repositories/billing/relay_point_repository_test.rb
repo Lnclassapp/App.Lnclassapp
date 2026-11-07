@@ -31,9 +31,18 @@ module Repositories
       end
 
       test "une écriture refusée par la base rend :conflict" do
-        result = @repository.save(relay_point: entity(name: "x" * 81), school_ids: [])
+        reports = []
+        subscriber = Object.new
+        subscriber.define_singleton_method(:report) { |error, handled:, context: {}, **| reports << [ error.class, handled, context ] }
+        Rails.error.subscribe(subscriber)
+        begin
+          result = @repository.save(relay_point: entity(name: "x" * 81), school_ids: [])
+        ensure
+          Rails.error.unsubscribe(subscriber)
+        end
 
         assert_equal [ :conflict, [ :write_failed ] ], [ result.code, result.errors[:base] ]
+        assert_equal [ [ ActiveRecord::ValueTooLong, true, { relay_point_public_id: nil } ] ], reports
       end
 
       test "liste par nom ; for_school ne rend que les points relais actifs de l'école" do

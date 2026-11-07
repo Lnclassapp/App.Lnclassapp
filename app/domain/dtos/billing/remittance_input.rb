@@ -21,6 +21,7 @@ module Dtos
       validates :relay_point_public_id, presence: true
       validates :amount_xof, presence: true
       validate :amount_is_a_signed_integer
+      validate :received_at_is_readable
       validates :reference, length: { maximum: REFERENCE_MAX }
       validates :reason, length: { maximum: REASON_MAX }
       validates :reason, presence: true, if: :correction?
@@ -36,6 +37,12 @@ module Dtos
       def correction? = amount&.negative? || false
 
       private
+
+      # Une date tapée mais illisible devient nil au cast : elle ne doit pas se changer en silence en « reçu maintenant ».
+      def received_at_is_readable
+        typed = @attributes["received_at"].value_before_type_cast
+        errors.add(:received_at, :invalid) if typed.present? && received_at.nil?
+      end
 
       def amount_is_a_signed_integer
         return if amount_xof.blank?

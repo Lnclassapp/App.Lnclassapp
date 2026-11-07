@@ -87,6 +87,18 @@ module UseCases
           assert_nil @remittances.recorded
         end
       end
+
+      test "une date saisie mais illisible est invalide, rien n'est écrit" do
+        result = record(received_at: "31/13/2026")
+
+        assert_equal [ :invalid, [ :received_at ] ], [ result.code, result.errors.keys ]
+        assert_nil @remittances.recorded
+        assert_nil @audit.events
+      end
+
+      test "une date absente reste permise : reçu maintenant" do
+        assert record(received_at: "").success?
+      end
     end
   end
 end

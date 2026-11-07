@@ -36,7 +36,7 @@ module UseCases
 
         @audit_log.record(action: "billing.relay_point_saved", actor_id: actor.user_id, at: @clock.now, subject_type: "RelayPoint",
                           subject_id: saved.value.id,
-                          metadata: { change: existing ? "updated" : "created", name: saved.value.name, school_ids: dto.school_ids })
+                          metadata: { change: existing ? "updated" : "created", name: saved.value.name, school_ids: saved.value.school_ids })
         saved
       end
     end

@@ -22,7 +22,8 @@ module Repositories
           replace_schools(record, school_ids)
         end
         ::Shared::Result.success(map(record.reload))
-      rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, ActiveRecord::InvalidForeignKey, ActiveRecord::ValueTooLong
+      rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, ActiveRecord::InvalidForeignKey, ActiveRecord::ValueTooLong => error
+        Rails.error.report(error, handled: true, context: { relay_point_public_id: relay_point.public_id })
         ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
       end
 

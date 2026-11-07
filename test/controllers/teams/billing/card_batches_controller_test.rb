@@ -106,4 +106,44 @@ class Teams::Billing::CardBatchesControllerTest < ActionDispatch::IntegrationTes
     get teams_billing_card_batch_sheet_path("AwaBatch000001")
     assert_select "[data-card]", 20
   end
+
+  test "la planche des codes n'entre dans aucun cache : no-store, Pragma et exemption du cache Turbo" do
+    sign_in_as @member
+
+    get teams_billing_card_batch_sheet_path("AwaBatch000001")
+
+    assert_response :success
+    assert_match(/no-store/, response.headers["Cache-Control"])
+    assert_equal "no-cache", response.headers["Pragma"]
+    assert_select "meta[name='turbo-cache-control'][content='no-cache']"
+  end
+
+  test "chaque affichage de la planche écrit un audit sans aucun code ; un lot inconnu n'en écrit pas" do
+    sign_in_as @member
+    batch = Orm::Billing::CardBatch.find_by!(public_id: "AwaBatch000001")
+
+    assert_difference -> { Orm::AuditEvent.where(action: "billing.card_batch_printed").count }, 2 do
+      2.times { get teams_billing_card_batch_sheet_path(batch.public_id) }
+    end
+    event = Orm::AuditEvent.where(action: "billing.card_batch_printed").order(:id).last
+    assert_equal @member.id, event.actor_id
+    assert_equal batch.id, event.subject_id
+    assert_equal batch.relay_point_id, event.metadata["relay_point_id"]
+    assert_equal batch.public_id, event.metadata["batch_public_id"]
+    codes = batch.cards.map(&:code)
+    assert(codes.none? { event.metadata.to_json.include?(it) })
+
+    assert_no_difference -> { Orm::AuditEvent.where(action: "billing.card_batch_printed").count } do
+      get teams_billing_card_batch_sheet_path("Inconnu")
+    end
+  end
+
+  test "un visiteur non connecté est renvoyé à la connexion" do
+    get new_teams_billing_relay_point_card_batch_path(@awa.public_id)
+    assert_redirected_to new_session_path
+    post teams_billing_relay_point_card_batches_path(@awa.public_id), params: batch_params
+    assert_redirected_to new_session_path
+    get teams_billing_card_batch_sheet_path("AwaBatch000001")
+    assert_redirected_to new_session_path
+  end
 end

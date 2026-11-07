@@ -165,4 +165,27 @@ class Teams::Billing::RelayPointsControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[data-turbo-frame=modal][href='#{new_teams_billing_remittance_path(relay_point_public_id: @awa.public_id)}']",
                   text: "Enregistrer un versement"
   end
+
+  test "l'audit garde les écoles réellement rattachées, pas la saisie : un id d'école inconnu est écarté" do
+    sign_in_as @member
+
+    post teams_billing_relay_points_path, params: params(school_ids: [ @school.id.to_s, "999999999" ])
+
+    created = Orm::Billing::RelayPoint.find_by!(name: "Boutique Kouassi")
+    assert_equal [ @school.id ], created.relay_point_schools.pluck(:school_id)
+    assert_equal [ @school.id ], Orm::AuditEvent.where(action: "billing.relay_point_saved").order(:id).last.metadata["school_ids"]
+  end
+
+  test "la fiche montre les deux lignes d'un versement négatif et le reste dû corrigé" do
+    sign_in_as @member
+    Orm::Billing::Remittance.create!(relay_point: @awa, amount_xof: -10_000, received_at: Time.utc(2026, 11, 13, 9), reference: "WAVE-0003",
+                                     reason: "saisi par erreur", recorded_by_id: @member.id)
+
+    get teams_billing_relay_point_path(@awa.public_id)
+
+    assert_select "tbody#relay_point_remittances tr", 3
+    assert_select "tbody#relay_point_remittances tr", text: /WAVE-0002/
+    assert_select "tbody#relay_point_remittances tr", text: /WAVE-0003.*saisi par erreur|saisi par erreur.*WAVE-0003/m
+    assert_select "#relay_point_cashbox dd#relay_point_due", text: "20 000 F"
+  end
 end
