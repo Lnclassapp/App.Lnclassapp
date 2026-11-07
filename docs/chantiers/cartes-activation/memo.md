@@ -60,13 +60,14 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 | Q8 — Au 8e jour sans carte, un exercice donné par l'enseignant à toute la classe est-il bloqué ? | **Oui, tout est bloqué**, exercices donnés par l'enseignant compris (porteur, 2026-11-07). | Un seul blocage, au démarrage de toute séance d'exercice, quelle que soit son origine. L'enseignant verra des élèves « non faits » : l'école a intérêt à ce que toute la classe s'abonne. |
 | Q9 — Quelle école touche les 1 000 F quand la carte est vendue près d'une autre école ? | **L'école de l'élève**, celle de son compte au moment où il saisit le code (porteur, 2026-11-07). | L'école est relevée à l'activation et figée : un changement d'école ensuite ne déplace pas la commission. Un élève sans école à l'activation ne rapporte de commission à personne. La carte n'a pas d'école, seulement un point relais. |
 | Q10 — Qui, à l'école, voit les élèves qui ont payé ? | **Personne** : ni la direction ni les enseignants (porteur, 2026-11-07). | L'abonnement reste entre l'élève, l'équipe et le point relais. Aucune vue d'établissement ne change ; les relances passent par l'équipe et les points relais. La direction et les enseignants rejoignent le hors périmètre. |
+| Q11 — Le point relais déclare des cartes perdues : les doit-il ? | **Non** : l'équipe les annule et le point relais ne les doit plus ; **la carte annulée ne passe plus** (porteur, 2026-11-07). Claude recommandait l'inverse (risque de fraude : vendre puis déclarer perdu). | Une carte peut être **annulée** par l'équipe tant qu'elle n'est pas activée ; elle sort de la dette du point relais et son code est refusé à jamais. Une carte activée ne s'annule pas. Chaque annulation garde qui, quand et pourquoi. Contre-mesure de la fraude : l'élève qui a payé une carte annulée se plaint, et l'équipe voit à quel point relais elle avait été remise. |
 
 ## Cas limites identifiés
 
 - L'élève paie mais n'active jamais sa carte : l'argent est dû par le point relais quand même (la carte est remise).
 - Deux élèves essaient le même code : le second est refusé.
 - Un élève tape un code faux plusieurs fois : il faut freiner les essais (un code devinable = un abonnement volé).
-- Le point relais perd une carte ou se la fait voler : elle doit pouvoir être annulée tant qu'elle n'est pas activée.
+- Le point relais perd une carte ou se la fait voler : l'équipe l'annule tant qu'elle n'est pas activée, la dette baisse d'autant (Q11).
 - Un élève déjà abonné saisit une seconde carte : refus, la carte reste utilisable par un autre élève.
 
 ## Questions encore ouvertes
