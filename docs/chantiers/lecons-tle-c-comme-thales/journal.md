@@ -85,3 +85,22 @@ Pas de calcul sauf comptages : questions corrigées automatiquement seulement ; 
 | **Total** | **628** | **28 340** | **43** | **30** |
 
 Défauts de fond typiques trouvés en relecture : fill_blank qui admettaient plusieurs mots (6 à l'oral), appariements ambigus (métaphore/hyperbole), corrections qui citaient une proposition absente, résumés « corrects » qui recopiaient le texte.
+
+### Philosophie — 9 leçons
+
+Uniquement les auteurs, thèses et citations de la leçon d'origine ; questions corrigées automatiquement seulement ; chaque bonne réponse justifiée par un extrait mot pour mot de la leçon (8 comptages prouvés par code). Aucune figure. Relecture indépendante de chaque leçon.
+
+| Leçon | Questions | Vérifications | Erreurs au 1er passage | Défauts de fond (relecture) |
+|---|---:|---:|---:|---:|
+| Dieu et la religion | 106 | 4 860 | 2 | 8 |
+| La connaissance de l'homme | 105 | 4 880 | 0 | 2 |
+| La connaissance scientifique | 107 | 4 778 | 1 | 0 |
+| La dissertation philosophique | 105 | 4 782 | 3 | 4 |
+| La valeur de la philosophie | 116 | 5 345 | 0 | 3 |
+| La vie en société | 104 | 4 586 | 6 | 2 |
+| Langage et vérité | 113 | 5 175 | 1 | 9 |
+| Le commentaire de texte philosophique | 107 | 5 099 | 18 | 5 |
+| Progrès et bonheur | 104 | 4 822 | 2 | 5 |
+| **Total** | **967** | **44 327** | **33** | **38** |
+
+Défauts de fond typiques : affirmation prêtée à un personnage ou à un texte qui ne la contient pas ; ordre de citation dans la leçon confondu avec l'ordre chronologique (Towa/Hountondji) ; ordering non défendable par la fiche ; matching à deux lectures.
