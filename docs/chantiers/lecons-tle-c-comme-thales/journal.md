@@ -23,6 +23,8 @@
 ## Ce qu'on a appris sur la codebase
 
 - `script/contenus/valider.rb` ne valide toujours pas `subjects` ; le script hors dépôt le relance avec chaque sujet à la place des 4 problèmes (dette déjà notée par le chantier de 3ème).
+- Le jeu standard nomme 5 leçons de Tle C, mais `standard_activity_test.rb` ne charge que 27 leçons (1ère et 3ème) : son empreinte reste `f1defa0fb0`. La plus longue leçon de Tle C fait 266 452 octets (Les alcools) : la clé `longue` de `db/seeds/standard/jeu.yml` reste `3eme/edhc/le-scrutin-electoral.json` (278 740 octets).
+- Le contrôle de rang du script ne voit pas « la première », « les deux premières », « le second » : les relecteurs en ont réécrit plus de 150 dans les 45 leçons. Une relecture indépendante trouve aussi ce que l'extrait mot pour mot ne juge pas : fill_blank à plusieurs réponses, appariements à deux lectures, affirmation prêtée à un texte qui ne la contient pas.
 
 ## Fichiers communs avec d'autres dossiers (non modifiés ici)
 
@@ -124,3 +126,36 @@ Chaque question de calcul prouvée par sympy (720), les questions de cours par u
 | **Total** | **1 094** | **41 385** | **720 (720/720)** | **134** | **23** |
 
 Les 118 erreurs du savon au 1er passage venaient d'une seule faute du générateur du rédacteur (une clé de forme répétée sur chaque question). Défauts de fond typiques : questions des alcools qui renvoyaient à « flacon 2 » sans en redonner les données ; demi-équation expliquée par un mauvais bilan d'atomes (carbonylés) ; distracteur « acide carboxylique » ambigu au test à la DNPH, remplacé par un alcool ; explication qui jugeait 13 m/s² « absurde » alors qu'une accélération vers le haut peut dépasser g.
+
+### SVT — 10 leçons
+
+Questions corrigées automatiquement seulement, sans formule ; calculs (pourcentages, différences, probabilités génétiques) prouvés par du code (280), les autres par un extrait mot pour mot de la leçon (786). 7 figures ajoutées, sortes existantes seulement : 2 au VIH, 3 à la production d'énergie, 2 aux cycles sexuels ; leurs valeurs ont été relues contre les énoncés qui les citent. Relecture indépendante de chaque leçon.
+
+| Leçon | Questions | Vérifications | Calculs prouvés (faussés détectés) | Erreurs au 1er passage | Défauts de fond (relecture) |
+|---|---:|---:|---:|---:|---:|
+| L'exploitation des gisements pétrolifères | 104 | 4 105 | 30 (30/30) | 3 | 0 |
+| L'infection de l'organisme par le VIH | 116 | 5 039 | 14 (14/14) | n. c. | 3 |
+| L'utilisation de l'énergie par la cellule musculaire | 108 | 4 236 | 38 (38/38) | 0 | 2 |
+| La communication nerveuse | 111 | 4 476 | 29 (29/29) | 0 | 0 |
+| La mise en place des gisements pétrolifères en Côte d'Ivoire | 106 | 4 375 | 34 (34/34) | 4 | 1 |
+| La production d'énergie par la cellule | 104 | 4 048 | 45 (45/45) | 8 | 0 |
+| La transmission d'un caractère héréditaire chez l'homme | 99 | 4 187 | 28 (28/28) | 0 | 0 |
+| Le système de défense de l'organisme | 110 | 4 825 | 13 (13/13) | 5 | 3 |
+| Les cycles sexuels chez la femme | 104 | 4 393 | 34 (34/34) | 1 | 2 |
+| Les drogues et le système nerveux | 104 | 4 507 | 15 (15/15) | 3 | 0 |
+| **Total** | **1 066** | **44 191** | **280 (280/280)** | **24+** | **11** |
+
+n. c. : le rédacteur du VIH, interrompu par le quota, n'a pas noté son premier passage. En transmission héréditaire, le relecteur a remplacé par un calcul trois vérités écrites à la main dans la preuve (échiquiers). Défauts de fond typiques : fill_blank qui admettait aussi « œstradiol » (cycles) ; matching où trois cellules « sans CD4 » se confondaient (VIH) ; fermentation lactique prêtée à un footing de 2 h à allure modérée (énergie musculaire).
+
+## Clôture
+
+45 leçons, 5 matières, un commit par matière. Chaque notion a deux exercices, et chaque leçon 4 sujets de 4 exercices. Le cours, les fiches et les 4 problèmes sont inchangés, octet pour octet, ce que le script contrôle. Chaque fichier commité a le sha256 du fichier vérifié, relu au moment du commit. Le test de rendu (`lesson_rendering_test.rb`) passe sur les 45 fichiers ; `standard_manifest`, `standard_activity` et `pilot_lessons` sont verts.
+
+| Matière | Questions ajoutées | Vérifications | Erreurs au 1er passage | Défauts de fond (rédaction + relecture) | Figures ajoutées | Preuve |
+|---|---:|---:|---:|---:|---:|---|
+| Mathématiques | 1 119 | 44 293 | 161 | 8 + 18 | 0 | sympy sur chaque question ; 1 119/1 119 réponses faussées détectées |
+| Français | 628 | 28 340 | 43 | 0 + 30 | 0 | extraits ; 31 comptages par code |
+| Philosophie | 967 | 44 327 | 33 | 0 + 38 | 0 | extraits ; 8 comptages par code |
+| Physique-Chimie | 1 094 | 41 385 | 134 | 0 + 23 | 0 | sympy sur 720 calculs, tous faussés détectés ; extraits pour le cours |
+| SVT | 1 066 | 44 191 | 24+ | 0 + 11 | 7 | extraits ; 280 calculs par code, tous faussés détectés |
+| **Total** | **4 874** | **202 536** | **395+** | **8 + 120** | **7** | |

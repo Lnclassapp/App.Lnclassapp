@@ -52,6 +52,90 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### Tle C au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-c-comme-thales`, #484)
+
+Depuis le 2026-11-07, les 45 leçons de Tle C au format 3 (Mathématiques 10, Français 6, Philosophie 9, Physique-Chimie 10, SVT 10) sont construites comme la leçon Thalès de 3ème. Chaque notion a deux exercices : le premier, d'origine, et un second en `fixation` de 6 questions de types mêlés, avec titre, énoncé « Dans cet exercice, tu … » et indice. Chaque leçon a 4 sujets de devoir (« Sujet 1 · … » à « Sujet 4 · … ») de 4 exercices de 5 ou 6 questions, en `evaluation`. Le cours, les fiches et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement. 4 874 questions ajoutées, 7 figures ajoutées (SVT).
+
+Un script hors dépôt a vérifié chaque leçon : sympy sur chaque question en Mathématiques et sur chaque calcul en Physique-Chimie, la bonne réponse comme chaque mauvaise proposition, avec des réponses faussées exprès toutes détectées ; ailleurs, un extrait mot pour mot de la leçon pour chaque bonne réponse. Chaque leçon a ensuite été relue par un agent qui ne l'avait pas écrite. Les tableaux des sections Tle C plus bas donnent l'état d'avant ce chantier ; ceux-ci comptent tout (exercices des notions, problèmes et exercices des sujets). Le détail est dans [le journal du chantier](../chantiers/lecons-tle-c-comme-thales/journal.md).
+
+Les leçons de même fiche en Tle D, A1 et A2 ne sont pas encore modifiées : la liste est dans le journal.
+
+**Mathématiques**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux | 5 | 30 | 168 | 121 |
+| `mathematiques/coniques.json` | Coniques | 5 | 30 | 168 | 111 |
+| `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 5 | 30 | 170 | 112 |
+| `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ | 4 | 28 | 159 | 104 |
+| `mathematiques/fonctions-exponentielles-et-fonctions-puissances.json` | Fonctions exponentielles et fonctions puissances | 5 | 30 | 156 | 110 |
+| `mathematiques/fonctions-logarithmes.json` | Fonctions logarithmes | 5 | 30 | 192 | 119 |
+| `mathematiques/geometrie-analytique-de-l-espace.json` | Géométrie analytique de l'espace | 4 | 28 | 151 | 104 |
+| `mathematiques/limites-et-continuite.json` | Limites et continuité | 5 | 30 | 166 | 114 |
+| `mathematiques/nombres-complexes.json` | Nombres complexes | 5 | 30 | 185 | 118 |
+| `mathematiques/primitives.json` | Primitives | 4 | 28 | 160 | 106 |
+| **Total** | | **47** | **294** | **1675** | **1119** |
+
+**Français**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `francais/groupement-de-textes-theatraux.json` | Groupement de textes théâtraux | 4 | 28 | 153 | 105 |
+| `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 4 | 28 | 153 | 105 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 154 | 104 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 4 | 28 | 153 | 104 |
+| `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 4 | 28 | 157 | 106 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 4 | 28 | 159 | 104 |
+| **Total** | | **24** | **168** | **929** | **628** |
+
+**Philosophie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `philosophie/dieu-et-la-religion.json` | Dieu et la religion | 4 | 28 | 159 | 106 |
+| `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 4 | 28 | 147 | 105 |
+| `philosophie/la-connaissance-scientifique.json` | La connaissance scientifique | 4 | 28 | 155 | 107 |
+| `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 4 | 28 | 154 | 105 |
+| `philosophie/la-valeur-de-la-philosophie.json` | La valeur de la philosophie | 4 | 28 | 166 | 116 |
+| `philosophie/la-vie-en-societe.json` | La vie en société | 3 | 26 | 146 | 104 |
+| `philosophie/langage-et-verite.json` | Langage et vérité | 4 | 28 | 161 | 113 |
+| `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 4 | 28 | 157 | 107 |
+| `philosophie/progres-et-bonheur.json` | Progrès et bonheur | 4 | 28 | 152 | 104 |
+| **Total** | | **35** | **250** | **1397** | **967** |
+
+**Physique-Chimie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 28 | 149 | 104 |
+| `physique-chimie/champ-magnetique.json` | Champ magnétique | 4 | 28 | 160 | 109 |
+| `physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 28 | 158 | 104 |
+| `physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 30 | 161 | 110 |
+| `physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 30 | 173 | 115 |
+| `physique-chimie/interaction-gravitationnelle.json` | Interaction gravitationnelle | 4 | 28 | 157 | 104 |
+| `physique-chimie/les-alcools.json` | Les alcools | 5 | 30 | 174 | 116 |
+| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 28 | 157 | 104 |
+| `physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs g⃗ et E⃗ uniformes | 4 | 28 | 170 | 113 |
+| `physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 30 | 167 | 115 |
+| **Total** | | **44** | **288** | **1626** | **1094** |
+
+**SVT**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `svt/l-exploitation-des-gisements-petroliferes.json` | L'exploitation des gisements pétrolifères | 4 | 28 | 157 | 104 |
+| `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 28 | 165 | 116 |
+| `svt/l-utilisation-de-l-energie-par-la-cellule-musculaire.json` | L'utilisation de l'énergie par la cellule musculaire | 4 | 28 | 160 | 108 |
+| `svt/la-communication-nerveuse.json` | La communication nerveuse | 5 | 30 | 167 | 111 |
+| `svt/la-mise-en-place-des-gisements-petroliferes-en-cote-d-ivoire.json` | La mise en place des gisements pétrolifères en Côte d'Ivoire | 4 | 28 | 157 | 106 |
+| `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 4 | 28 | 161 | 104 |
+| `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 26 | 142 | 99 |
+| `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 30 | 171 | 110 |
+| `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 156 | 104 |
+| `svt/les-drogues-et-le-systeme-nerveux.json` | Les drogues et le système nerveux | 4 | 28 | 148 | 104 |
+| **Total** | | **41** | **282** | **1584** | **1066** |
+
+
 ### Tle D — `lecons-traitees/tle-d/`
 
 > **Philosophie** : les fichiers `philosophie/` de ce dossier sont désormais au format 3 (chantier `contenus-tle-philosophie`, section « Tle, Philosophie au format 3 » plus bas).
