@@ -19,6 +19,7 @@
 - **Rang non vu par le script** : « la première égalité », « la seconde », « les deux premières » échappent à l'expression ; ce sont les relecteurs qui les ont attrapés et réécrits.
 - **Rédacteurs qui génèrent par script** : plusieurs ont écrit leurs JSON avec un petit générateur au lieu de fichier par fichier. Le contrôle porte sur le JSON produit ; les générateurs restent hors dépôt.
 - **Develop a rangé la Tle C pendant le chantier** : le chantier `base-de-lecons` (2026-11-06) a déplacé les 45 fichiers vers `a-reprendre/` (36 en `sujets-manquants/`, 9 en `exercices-et-sujets-manquants/`). La fusion de Develop a suivi le déplacement sans conflit ; les 45 fichiers fusionnés étaient identiques octet pour octet aux fichiers contrôlés. Ils sont revenus dans `lecons-traitees/tle-c/` selon la règle de retour de `a-reprendre/README.md` (format complet, `valider.rb` ✓).
+- **Deux feuilles plus larges que l'écran à 390 px** : la preuve de vague, qui contrôle maintenant les feuilles d'exercices, a trouvé deux débordements. En géométrie de l'espace (sujet 4), une étape de remise en ordre portait une équation longue : elle devient « Substituer $x$, $y$ et $z$ dans l'équation du plan $2x-2y+z-21=0$ ». En composés carbonylés (notion « nommer »), les formules semi-développées longues débordaient : le MathML caché de KaTeX garde toute sa largeur même quand la formule visible passe à la ligne. Les chaînes de CH₂ sont écrites en notation condensée, $\mathrm{(CH_2)_n}$. Une question du **premier exercice d'origine** a dû changer aussi : $\mathrm{CH_3CH_2CH_2COCH_2CH_3}$. C'est la seule entorse au « contenu d'origine inchangé ». Les deux leçons ont été recontrôlées (0 erreur) et leur affichage est vert.
 - **Quota de la session** : une vingtaine d'agents (rédacteurs de physique-chimie et de SVT, relecteurs de mathématiques) se sont arrêtés en pleine tâche le 5/11 ; ils ont repris le 7/11 sans rien perdre.
 
 ## Ce qu'on a appris sur la codebase
@@ -42,6 +43,7 @@ Même fiche dans un autre dossier de Terminale ; le chantier suivant (Tle D, pui
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
+| Le MathML caché de KaTeX déborde des feuilles à 390 px quand une formule est longue, même si la formule visible passe à la ligne | Code de `app/` (CSS), hors du chantier | À ouvrir |
 | `valider.rb` ne contrôle pas les sujets (déjà noté en 3ème) | Le chantier ne touche que du contenu | À ouvrir |
 
 ## À trancher
