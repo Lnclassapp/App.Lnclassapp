@@ -69,3 +69,19 @@ Preuve : sympy sur chaque question ; chaque réponse faussée exprès est détec
 
 Exemples de défauts de fond trouvés : 14 multiples de 7 entre 100 et 200 et non 15 (divisibilité) ; une limite fausse validée par le défaut de sympy (exponentielles) ; deux questions de logarithmes qui reprenaient l'exercice d'application de la leçon ; un encadrement « 1,4 < α < ___ » qui admettait plusieurs bornes (limites) ; une explication qui donnait $-2/x^3+3$ pour la dérivée de f (primitives). Les relecteurs ont aussi réécrit 47 corrections qui désignaient une proposition par son rang.
 
+
+### Français — 6 leçons
+
+Pas de calcul sauf comptages : questions corrigées automatiquement seulement ; chaque bonne réponse justifiée par un extrait mot pour mot de la leçon, ou par du code pour 31 questions chiffrées (oral, résumé). Aucune figure. Relecture indépendante de chaque leçon.
+
+| Leçon | Questions | Vérifications | Erreurs au 1er passage | Défauts de fond (relecture) |
+|---|---:|---:|---:|---:|
+| Groupement de textes théâtraux | 105 | 4 737 | 20 | 3 |
+| La dissertation littéraire | 105 | 4 759 | 6 | 5 |
+| Le commentaire composé | 104 | 4 914 | 5 | 1 |
+| Œuvre narrative | 104 | 4 782 | 7 | 7 |
+| Préparation à l'oral du baccalauréat | 106 | 4 595 | 1 | 11 |
+| Résumé du texte argumentatif | 104 | 4 553 | 4 | 3 |
+| **Total** | **628** | **28 340** | **43** | **30** |
+
+Défauts de fond typiques trouvés en relecture : fill_blank qui admettaient plusieurs mots (6 à l'oral), appariements ambigus (métaphore/hyperbole), corrections qui citaient une proposition absente, résumés « corrects » qui recopiaient le texte.
