@@ -21,6 +21,8 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     done = create_exercise(essential:, title: "Les gamètes")
     create_assignment(classroom: @classroom, assignable: done, assigned_at: 1.hour.ago)
     create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+    # cartes-activation : pendant la période gratuite, le bandeau des jours gratuits passe avant la carte ; l'élève abonné n'en a pas.
+    subscribe_student(@student)
     sign_in_as @student
   end
 

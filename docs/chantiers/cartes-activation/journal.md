@@ -28,6 +28,17 @@ Décisions réversibles prises par l'option prudente au Lot 0 (contrat de sessio
 - **Lot C : la caisse liste tous les points relais, actifs ou non** (un point relais désactivé peut encore devoir de l'argent) ; le choix d'un versement les propose tous aussi.
 - **Lot C : la date d'un versement est libre** (pas de refus d'une date future ni ancienne) ; seule la valeur par défaut est « maintenant ».
 
+Lot B (options prudentes) :
+
+- **Texte du bandeau des 3 derniers jours.** L'UDR dit « Plus que N jours gratuits », le PRD exige « Il te reste 1 jour gratuit » au dernier jour. Le PRD (testable) gagne : la phrase reste « Il te reste N jour(s) gratuit(s) », suivie de « Abonne-toi pour 10 000 F » en avertissement (`bg-warning-soft`) et du lien « M'abonner ». À revoir si le porteur préfère « Plus que N jours ».
+- **`CheckPractice` reçoit `access:` et `clock:`** (l'ADR ne nomme que `access:`) : le port lit l'accès « à un instant », le domaine n'a pas d'horloge propre.
+- **Garde de `StartExerciseSession` après la policy** (comme l'ADR §6) : un acteur non élève ou un exercice non publié garde son refus (403/404) ; la garde ne voit que des élèves.
+- **Vérification de fiche d'un élève bloqué qui a un devoir à rendre** : `CheckExerciseOnSheet` refuse d'abord `:assigned_pending` (avant d'appeler `StartExerciseSession`). Pas de blocage vers Mon abonnement dans ce cas précis, le démarrage du devoir passe par « Commencer ».
+- **Vérification d'un entraînement de notion en frame Turbo** : une redirection n'a pas le frame, la réponse est un `turbo-frame` (402) avec le lien vers Mon abonnement (`target="_top"`) ; sans frame, redirection 303.
+- **Semis `abonnements.rb` non branché** : `db/seeds.rb` (entrée `SEEDS`) et `db/seeds/standard/activite.rb` (`access:`) sont hors du champ du Lot B, à faire par l'orchestrateur.
+- **Bandeau et débord de la carte.** Pendant la période gratuite, le bandeau est le premier enfant de `#student_home` (UDR : « juste avant `next_step` ») : c'est lui qui déborde sur le bandeau bleu (`-mt-12`), pas la carte. Le test système `student_home_test` (débord de la carte) abonne donc son élève. À regarder aux captures 390 px ; si le rendu déplaît, sortir le bandeau de la grille est un changement de `show.html.erb` seul.
+- **Test `student_homes_controller_test` « no abonnement »** : l'élève y est abonné (`subscribe_student`) ; le bandeau est voulu pendant la période gratuite.
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.

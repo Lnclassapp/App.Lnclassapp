@@ -1,0 +1,22 @@
+<%# 🌐 UI · billing/subscriptions/_home_notice — le bandeau de l'accueil élève : jours gratuits restants, ou période terminée %>
+<%# Rôle : une ligne info (plus de 3 jours), puis avertissement (3 derniers jours, ou bloqué) ; rien pour l'abonné ni pour un non-élève %>
+<%# ADR  : cartes-activation (contexte billing, §4.5) · UDR : abonnement-eleve (§3, bandeau de l'accueil) %>
+<%# access : Entities::Billing::Access (nil si l'acteur n'est pas un élève) %>
+<% unless access.nil? || access.status == :subscribed %>
+  <% urgent = access.blocked? || access.days_left <= 3 %>
+  <section aria-label="<%= t(".label") %>">
+    <p class="<%= class_names("flex items-center gap-3 rounded-ln px-4 py-3 text-sm", "bg-info-soft text-info" => !urgent, "bg-warning-soft text-warning" => urgent) %>">
+      <%= ui_icon "gift", size: :sm %>
+      <span class="min-w-0 flex-1">
+        <% if access.blocked? %>
+          <%= t(".blocked") %>
+        <% elsif urgent %>
+          <%= t(".last_days", count: access.days_left) %>
+        <% else %>
+          <%= t(".free", count: access.days_left) %>
+        <% end %>
+      </span>
+      <%= link_to t(urgent ? ".subscribe_link" : ".free_link"), billing_subscription_path, class: "shrink-0 font-semibold underline" %>
+    </p>
+  </section>
+<% end %>

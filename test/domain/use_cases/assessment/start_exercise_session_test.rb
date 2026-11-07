@@ -55,6 +55,17 @@ module UseCases
         end
       end
 
+      # Le port d'accès : un élève gratuit, abonné ou bloqué ; compte les lectures.
+      class FakeAccess
+        include Ports::Billing::StudentAccessPort
+
+        def initialize(status = :free) = @status = status
+
+        def call(student_id:, at:)
+          Entities::Billing::Access.new(status: @status, days_left: (@status == :free ? 3 : 0), subscribed_until: nil)
+        end
+      end
+
       class FakeGaps
         include Ports::Assessment::KnowledgeGapRepositoryPort
 
@@ -119,14 +130,37 @@ module UseCases
       end
 
       def start(actor: STUDENT, public_id: "ExErCiCe000040", restart: false, exercises: [ exercise ], sessions: [], gaps: [],
-                membership: nil, assignments: [], now: NOW, attach_assignment: true)
+                membership: nil, assignments: [], now: NOW, attach_assignment: true, access: FakeAccess.new)
         @sessions = FakeSessions.new(*sessions)
         @transaction = FakeTransaction.new
         StartExerciseSession.new(
           exercises: FakeExercises.new(*exercises), sessions: @sessions, gaps: FakeGaps.new(*gaps),
           memberships: FakeMemberships.new(membership), assignments: FakeAssignments.new(*assignments),
-          policy: Policies::Assessment::StartSessionPolicy.new, transaction: @transaction, clock: Clock.new(now)
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction: @transaction, clock: Clock.new(now), access:
         ).call(actor:, exercise_public_id: public_id, restart:, attach_assignment:)
+      end
+
+      test "un élève bloqué ne démarre rien : :locked / :subscription_required, aucune session écrite" do
+        result = start(access: FakeAccess.new(:blocked))
+
+        assert result.failure?
+        assert_equal :locked, result.code
+        assert_equal [ :subscription_required ], result.errors[:base]
+        assert_empty @sessions.rows
+        assert_equal 0, @transaction.calls
+      end
+
+      test "un élève bloqué ne reprend ni ne recommence une copie ouverte" do
+        open = stored_session(id: 1)
+        result = start(access: FakeAccess.new(:blocked), sessions: [ open ], restart: true)
+
+        assert_equal :locked, result.code
+        assert_equal "started", @sessions.rows.sole.status
+      end
+
+      test "un élève gratuit ou abonné démarre" do
+        assert start(access: FakeAccess.new(:free)).success?
+        assert start(access: FakeAccess.new(:subscribed)).success?
       end
 
       test "un exercice publié non assigné se démarre : session ouverte, nombre de questions figé, rattachée à rien" do
