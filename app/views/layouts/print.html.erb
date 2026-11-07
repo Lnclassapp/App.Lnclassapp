@@ -1,0 +1,20 @@
+<%# 🌐 UI · layouts/print — page à imprimer, sans navigation (planche des cartes d'activation) %>
+<%# Rôle : document minimal en A4 : feuille de style et script uniques de l'application (contrôleur Stimulus print), aucune barre %>
+<%# ADR  : cartes-activation (contexte billing, §4.2) · UDR : caisse-equipe §3.4 et §4 %>
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <title><%= document_title %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%# Une carte coupée en deux par un saut de page serait inutilisable : A4, marges réduites. %>
+    <style nonce="<%= content_security_policy_nonce %>">@page { size: A4; margin: 8mm; }</style>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+  <body class="bg-white p-4 text-ink print:p-0">
+    <%= yield %>
+  </body>
+</html>

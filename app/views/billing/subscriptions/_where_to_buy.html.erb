@@ -1,0 +1,22 @@
+<%# 🌐 UI · billing/subscriptions/_where_to_buy — « Où acheter ta carte » : les points relais de l'école de l'élève %>
+<%# Rôle : nom, lieu, téléphone en lien tel: ; sans point relais, l'état vide renvoie vers WhatsApp (numéro de l'équipe) %>
+<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : abonnement-eleve §3.4 %>
+<%= ui_card title: t(".title") do %>
+  <% if relay_points.empty? %>
+    <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description", number: t("billing.team_whatsapp")),
+                       icon: "chat-bubble-left-right",
+                       action: { label: t(".empty.action"), href: t("billing.team_whatsapp_url"), variant: :primary } %>
+  <% else %>
+    <ul class="divide-y divide-line">
+      <% relay_points.each do |relay_point| %>
+        <li class="flex flex-col gap-1 py-3 first:pt-0 last:pb-0">
+          <span class="font-medium text-ink"><%= relay_point.name %></span>
+          <span class="text-sm text-mute"><%= relay_point.location %></span>
+          <%= link_to "tel:#{relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 text-brand" do %>
+            <%= ui_icon "phone", size: :sm %><%= relay_point.phone %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -1,0 +1,30 @@
+<%# 🌐 UI · teams/billing/card_batches/show — planche d'impression d'un lot de cartes (layout print) %>
+<%# Rôle : grille 3 × 7 cartes de 63 × 38 mm par page A4 : code XXXX-XXXX-XXXX, N° de carte, prix, fin d'abonnement ; bouton « Imprimer » masqué à l'impression %>
+<%# ADR  : cartes-activation (contexte billing, §4.2) · UDR : caisse-equipe §3.4 %>
+<% page_title t(".title") %>
+<h1 class="sr-only"><%= t(".title") %></h1>
+<div data-controller="print" class="mb-6 flex flex-wrap items-center gap-3 print:hidden">
+  <button type="button" data-action="print#print" class="inline-flex min-h-tap items-center gap-2 rounded-ln bg-brand px-5 font-medium text-white">
+    <%= ui_icon "printer", size: :sm %><%= t(".print") %>
+  </button>
+  <%= link_to t(".back"), teams_billing_relay_points_path, class: "text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+  <p class="text-sm text-mute"><%= t(".count", count: @cards.size) %></p>
+</div>
+<% @cards.each_slice(21) do |page| %>
+  <section class="mx-auto grid w-fit grid-cols-3 break-after-page last:break-after-auto">
+    <% page.each do |card| %>
+      <article data-card class="flex h-36 w-60 flex-col justify-between border border-dashed border-line-strong p-2 break-inside-avoid">
+        <header class="flex items-start justify-between gap-2">
+          <p class="font-display text-sm font-medium text-ink"><%= t(".brand") %></p>
+          <p class="text-xs font-medium text-ink"><%= card.paid? ? t(".price", amount: number_with_delimiter(card.price_xof, delimiter: " ")) : t(".offered") %></p>
+        </header>
+        <p class="text-xs leading-tight text-mute"><%= t(".valid_until", date: l(card.valid_until, format: :long).squish) %></p>
+        <p class="font-mono text-xl font-medium tracking-widest text-ink"><%= card.display_code %></p>
+        <footer>
+          <p class="text-xs text-mute"><%= t(".serial", number: card.serial_label) %></p>
+          <p class="text-xs leading-tight text-mute"><%= t(".how_to") %></p>
+        </footer>
+      </article>
+    <% end %>
+  </section>
+<% end %>
