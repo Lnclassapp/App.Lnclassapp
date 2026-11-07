@@ -1,0 +1,127 @@
+# Caisse de l'équipe, versements et annulation d'une carte (chantier cartes-activation, Lot C) — UDR caisse-equipe §3
+fr:
+  activemodel:
+    attributes:
+      dtos/billing/remittance_input:
+        relay_point_id: "Point relais"
+        amount_xof: "Montant (F)"
+        received_at: "Reçu le"
+        reference: "Référence Wave"
+        reason: "Motif"
+    errors:
+      models:
+        dtos/billing/remittance_input:
+          attributes:
+            relay_point_id:
+              blank: "Choisissez un point relais."
+            amount_xof:
+              blank: "Indiquez le montant."
+              not_an_integer: "Le montant est un nombre entier, sans virgule."
+              other_than: "Le montant ne peut pas être nul."
+            reference:
+              too_long: "La référence compte 60 caractères au plus."
+            reason:
+              blank: "Indiquez le motif d'une correction."
+              too_long: "Le motif compte 200 caractères au plus."
+  teams:
+    billing:
+      money: "%{amount} F"
+      cashboxes:
+        show:
+          page_title: "Caisse"
+          title: "Caisse"
+          remit: "Saisir un versement"
+          relay_points: "Points relais"
+          empty_title: "Aucun point relais"
+          empty_description: "Créez un premier point relais pour suivre ce qu'il doit et ce que Lnclass lui doit."
+          empty_action: "Créer un point relais"
+          cancel_title: "Annuler une carte"
+          cancel_subtitle: "Une carte perdue ou volée, jamais activée."
+          serial_label: "N° de carte"
+          serial_placeholder: "Ex. : 000021"
+          find_card: "Chercher la carte"
+        week:
+          title: "À payer ce vendredi"
+          empty: "Aucune activation cette semaine-là."
+          current:
+            zero: "Semaine en cours : aucune activation pour l'instant."
+            one: "Semaine en cours : %{count} activation."
+            other: "Semaine en cours : %{count} activations."
+          previous: "Semaines précédentes"
+          same_month: "du %{from} au %{to} %{month}"
+          two_months: "du %{from} %{from_month} au %{to} %{to_month}"
+          caption: "Commissions des points relais, %{range}"
+          total: "Total"
+          columns:
+            relay_point: "Point relais"
+            activations: "Activations"
+            commission: "Commission"
+        relays:
+          title: "Points relais"
+          caption: "Cartes et argent de chaque point relais"
+          columns:
+            name: "Point relais"
+            issued: "Remises"
+            activated: "Activées"
+            cancelled: "Annulées"
+            in_circulation: "En circulation"
+            remitted: "Versé"
+            due: "Reste dû"
+        schools:
+          title: "Écoles (commission cumulée)"
+          note: "Versement à une date fixée plus tard."
+          empty: "Aucun élève n'a encore activé une carte payante."
+          caption: "Commission cumulée de chaque école"
+          columns:
+            school: "École"
+            subscriptions: "Abonnements"
+            commission: "Commission cumulée"
+      remittances:
+        new:
+          title: "Saisir un versement"
+          submit: "Enregistrer le versement"
+          submitting: "Enregistrement…"
+          cancel: "Annuler"
+        form:
+          relay_point_prompt: "Choisir un point relais"
+          amount_placeholder: "Ex. : 10000"
+          amount_hint: "Négatif pour corriger une erreur."
+          received_at_hint: "Par défaut : maintenant."
+          reference_placeholder: "Ex. : référence de la transaction Wave"
+          reason_hint: "Obligatoire si le montant est négatif."
+        create:
+          recorded: "Versement enregistré"
+      card_cancellations:
+        errors:
+          not_found: "Aucune carte ne porte ce numéro."
+          card_activated: "Une carte activée ne s'annule pas."
+          card_cancelled: "Cette carte est déjà annulée."
+          blank: "Indiquez le motif de l'annulation."
+          too_long: "Le motif compte 200 caractères au plus."
+        create:
+          cancelled: "Carte N° %{serial} annulée."
+        show:
+          page_title: "Annuler une carte"
+          title: "Carte N° %{serial}"
+          title_blank: "Annuler une carte"
+          back: "Caisse"
+          serial_label: "N° de carte"
+          serial_placeholder: "Ex. : 000021"
+          find_card: "Chercher la carte"
+          serial_value: "N° %{serial}"
+          fields:
+            serial: "Numéro"
+            relay_point: "Point relais"
+            state: "État"
+            reason: "Motif"
+          states:
+            issued: "Remise, pas encore activée"
+            activated: "Activée"
+            cancelled: "Annulée"
+          form_title: "Annuler cette carte"
+          reason_label: "Motif"
+          reason_placeholder: "Ex. : perdue"
+          submit: "Annuler la carte"
+          submitting: "Annulation…"
+          confirm: "Le code ne passera plus jamais. Annuler la carte N° %{serial} ?"
+          activated_notice: "Une carte activée ne s'annule pas."
