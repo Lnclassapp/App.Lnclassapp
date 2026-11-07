@@ -16,7 +16,9 @@ class CiPlan
   Step = Data.define(:group, :title, :command, :inputs) do
     def initialize(group:, title:, command:, inputs: nil) = super
   end
-  Group = Data.define(:name, :db, :files)
+  Group = Data.define(:name, :db, :files, :light) do
+    def initialize(name:, db:, files:, light: []) = super
+  end
 
   ROOT = File.expand_path("../..", __dir__)
   TIMINGS = File.join(__dir__, "test_timings.yml")
@@ -38,8 +40,10 @@ class CiPlan
   end
 
   # A group whose block receives the files of its part (every file when the run is not split) and the part label.
-  def sharded(name, files:, db: true, &block)
-    add_group(Group.new(name:, db:, files: files.sort), block)
+  # light: files that weigh nothing in this group's split, whatever their recorded duration (the import performance
+  # tests skip without PERF in the unit suite; their timings are those of the perf group).
+  def sharded(name, files:, db: true, light: [], &block)
+    add_group(Group.new(name:, db:, files: files.sort, light: light & files), block)
   end
 
   def step(title, command, inputs: nil)
@@ -55,7 +59,9 @@ class CiPlan
 
   # The files of each part of a sharded group, balanced on the recorded durations.
   def split(name, parts, timings: self.class.timings)
-    files = @groups.fetch(name).files
+    group = @groups.fetch(name)
+    files = group.files
+    timings = timings.merge(group.light.to_h { [ it, 0.0 ] })
     known = files.filter_map { timings[it] }.sort
     default = known.empty? ? 1.0 : known[known.size / 2]
     buckets = Array.new(parts) { [ 0.0, [] ] }

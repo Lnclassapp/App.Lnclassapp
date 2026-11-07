@@ -22,7 +22,10 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
   def toggle_id(classroom, exercise) = "assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}"
   def no_toggle = assert_select("[id^=assignment_], form[action*=assignments]", 0)
 
-  test "the teacher sees the header and both sections, exercises grouped by sheet then the whole lesson" do
+  def sheet_href(dom_id) = classroom_course_sheet_path(@classroom.public_id, @course.slug, dom_id)
+
+  # sujet-avant-de-commencer, Lot B : la page ne porte que des cases, chacune vers la feuille dans cette classe.
+  test "the teacher sees the header and both sections, a card per sheet towards the sheet in her classroom" do
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
@@ -32,34 +35,41 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-title", text: "Prépare interros n°1"
-    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-subject", text: "La méiose"
-    assert_select "#prepare-interros .ps-sheet#notion-#{@mitose.slug} .ps-exercise", 1
-    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-title", text: /\APrépare interros n°\d+\z/
-    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-subject", text: tl("lesson_wide_title")
-    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_wide.public_id}"
-    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_meiose.public_id}"
-    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
+    assert_select "#prepare-interros a.ps-card#notion-#{@meiose.slug}[href=?]", sheet_href("notion-#{@meiose.slug}") do
+      assert_select ".ps-card-kind", text: "Prépare interros n°1"
+      assert_select ".ps-card-title", text: "La méiose"
+    end
+    assert_select "#prepare-interros a.ps-card#notion-#{@mitose.slug}[href=?]", sheet_href("notion-#{@mitose.slug}")
+    assert_select "#prepare-interros a.ps-card#toute-la-lecon[href=?]", sheet_href("toute-la-lecon") do
+      assert_select ".ps-card-title", text: tl("lesson_wide_title")
+    end
+    assert_select ".ps-sheet, turbo-frame[id^=sheet-exercise-], .ps-input, [data-ps-choice]", 0
     # CA-05 : aucun ancien intitulé.
     assert_no_match(/Révisions de la leçon|Fiche de cours/, response.body)
   end
 
-  # UDR-0139 §3.4 : « Assigner » pour cette classe seulement, jamais pour une autre classe de l'enseignant.
-  test "the toggles are those of this classroom only, the first « Assigner » being filled" do
+  # UDR-0139 §3.4 : « Assigner » pour cette classe seulement, jamais pour une autre classe de l'enseignant ; ces bascules sont sur la page de la feuille.
+  test "the toggles, on the sheet page, are those of this classroom only, the first « Assigner » being filled" do
     other = create_classroom(name: "Tle D 2", level: @course.level, series: @course.series, school: @classroom.school)
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)
     assignment = create_assignment(classroom: @classroom, assignable: @ex_mitose, by: @teacher, due_on: Date.current + 2)
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
+    no_toggle
 
+    get sheet_href("notion-#{@meiose.slug}")
     assert_select "##{toggle_id(@classroom, @ex_meiose)}", text: including(toggle("assign"))
-    assert_select "##{toggle_id(@classroom, @ex_wide)}"
+    assert_select "[id^='assignment_#{other.public_id}']", 0
+    assert_select "[id^='assignment_'] .ps-btn--primary", 1
+    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ps-btn--primary"
+
+    get sheet_href("notion-#{@mitose.slug}")
     assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
     assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
-    assert_select "[id^='assignment_#{other.public_id}']", 0
-    assert_select "#prepare-interros [id^='assignment_'] .ps-btn--primary", 1
-    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ps-btn--primary"
+
+    get sheet_href("toute-la-lecon")
+    assert_select "##{toggle_id(@classroom, @ex_wide)}"
   end
 
   # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
@@ -105,14 +115,14 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_no_match "Génétique et évolution", response.body
   end
 
-  test "the team reads the page, with the status of each exercise and without any toggle" do
+  test "the team reads the page: cards, without any toggle" do
     sign_in_as create_team_member
 
     get classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros turbo-frame[id^=sheet-exercise-]", 3
-    assert_select "#prepare-interros .ps-exercise-head .ps-status", count: 3, text: "Publié"
+    assert_select "#prepare-interros a.ps-card", 3
+    assert_select "turbo-frame[id^=sheet-exercise-]", 0
     no_toggle
   end
 
@@ -138,5 +148,45 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
       get classroom_course_path(@classroom.public_id, slug)
       assert_response :not_found
     end
+  end
+  # suivi-classe-lecon, Lot 0 (ADR lecture-de-la-classe-par-la-direction, CA-13) : la direction lit, sans agir.
+  test "the school admin of the same school reads the lesson without any toggle" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+
+    assert_response :success
+    assert_select "h1", text: "Génétique et évolution"
+    no_toggle
+    assert_no_match(/Assigner/, response.body)
+  end
+
+  test "the school admin of the same school reads a sheet, without « Choisir » nor toggle" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    get sheet_href("notion-#{@meiose.slug}")
+
+    assert_response :success
+    no_toggle
+    assert_select "[data-batch-choice], .ps-btn--choose", 0
+  end
+
+  test "the school admin of another school receives 404" do
+    sign_in_as create_school_admin(school: create_school(name: "Autre lycée"))
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_response :not_found
+    get sheet_href("notion-#{@meiose.slug}")
+    assert_response :not_found
+  end
+
+  test "the school admin cannot assign" do
+    sign_in_as create_school_admin(school: @classroom.school)
+
+    assert_no_difference -> { Orm::ClassroomAssignment.count } do
+      post classroom_assignments_path(@classroom.public_id),
+           params: { assignment: { assignable_type: "Exercise", assignable_key: @ex_meiose.public_id } }
+    end
+    assert_response :forbidden
   end
 end

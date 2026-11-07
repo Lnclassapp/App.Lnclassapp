@@ -70,16 +70,21 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     create_exercise_session(student: @student, exercise:, status: "started")
     sign_in_as @student
 
+    # sujet-avant-de-commencer, Lot B : « Ma classe » ne porte qu'une case ; la feuille est sur sa page à remplir.
     get student_classroom_path
+    assert_select "#student_classroom_assigned .ps-sheet", 0
+    assert_select "#student_classroom_assigned a.ps-card", 1
 
-    assert_select "#student_classroom_assigned .ps-sheet #sheet-exercise-#{exercise.public_id}" do
+    get fill_student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
+
+    assert_select ".ps-sheet #sheet-exercise-#{exercise.public_id}" do
       assert_select "button", text: I18n.t("catalog.courses.sheets.hand_in")
       assert_select "input[name=assignment_public_id][value=?]", Orm::ClassroomAssignment.sole.public_id
       assert_select "button", text: I18n.t("catalog.courses.sheets.check"), count: 0
       assert_select "a", text: I18n.t("catalog.courses.sheets.see_correction"), count: 0
     end
     assert_select ".ps-footer .ps-link-button", 0
-    assert_no_match "Commencer", css_select("#student_classroom_assigned").text
+    assert_no_match "Commencer", css_select(".ps-page").text
   end
 
   def sections = css_select("#student_classroom [id^=student_classroom_]:not([id$=_title])").map { it["id"] }
@@ -114,7 +119,9 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
                     student_classroom_treated], sections
     assert_select "#student_classroom_assigned + #student_classroom_gaps" do
       assert_select "h2, h3", text: tl("pending_gaps.title")
-      assert_select "a[href=?]", course_path(course.slug, anchor: "notion-#{gap.essential.slug}"), text: including("La méiose")
+      # suivi-classe-lecon CA-9 : le seul exercice publié de la fiche est celui de la copie ratée ; c'est lui qui est proposé.
+      sheet = course_sheet_path(course.slug, "notion-#{gap.essential.slug}", anchor: "sheet-exercise-#{gap.source_session.exercise.public_id}")
+      assert_select "a[href=?]", sheet, text: including("La méiose")
     end
   end
 
@@ -208,20 +215,39 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    sheets = css_select("#student_classroom_assigned .ps-sheet")
-    assert_equal [ "PRÉPARE INTERROS", "PRÉPARE DEVOIRS" ], sheets.map { it.at_css(".ps-header-title").text }
-    assert_select "#student_classroom_assigned .ps-sheet:first-child" do
-      assert_select ".ps-title", text: "Prépare interros n°1"
-      assert_select ".ps-subject", text: "La méiose"
-      assert_select ".ps-remember", text: including("Deux divisions.")
-      assert_select ".ps-exercise", two.size
+    cards = css_select("#student_classroom_assigned a.ps-card")
+    assert_equal [ "Prépare interros n°1", "Prépare devoirs n°1" ], cards.map { it.at_css(".ps-card-kind").text }
+    assert_equal [ student_assigned_sheet_path("devoir-batchtwoxxxxxx"), student_assigned_sheet_path("devoir-batchthreexxxx") ],
+                 cards.map { it["href"] }
+    assert_select "#student_classroom_assigned a.ps-card:first-child" do
+      assert_select ".ps-card-title", text: "La méiose"
+      assert_select ".ps-card-meta", text: "2 exercices"
     end
-    assert_select "#student_classroom_assigned .ps-sheet:last-child" do
-      assert_select ".ps-title", text: "Prépare devoirs n°1"
-      assert_select ".ps-subject", text: /\ADEVOIR DU /
-      assert_select ".ps-remember", text: including("Notions mobilisées :")
-      assert_select ".ps-exercise", three.size
+    assert_select "#student_classroom_assigned a.ps-card:last-child" do
+      assert_select ".ps-card-title", text: /\ADEVOIR DU /
+      assert_select ".ps-card-meta", text: "3 exercices"
+      assert_select ".ps-card-meta", text: /\A0 \/ 3 /
     end
+
+    # La lecture est une épreuve (sans « À retenir » ni « Notions mobilisées »), la feuille à remplir garde les siens.
+    get student_assigned_sheet_path("devoir-batchtwoxxxxxx")
+    assert_select ".ps-paper-name", text: "Prépare interros n°1 · La méiose"
+    assert_select ".ps-remember", 0
+    assert_select ".ps-paper-exercise", two.size
+    get fill_student_assigned_sheet_path("devoir-batchtwoxxxxxx")
+    assert_select ".ps-title", text: "Prépare interros n°1"
+    assert_select ".ps-subject", text: "La méiose"
+    assert_select ".ps-remember", text: including("Deux divisions.")
+    assert_select ".ps-exercise", two.size
+    get student_assigned_sheet_path("devoir-batchthreexxxx")
+    assert_select ".ps-paper-name", text: /\APrépare devoirs n°1 · DEVOIR DU /
+    assert_select ".ps-remember", 0
+    assert_select ".ps-paper-exercise", three.size
+    get fill_student_assigned_sheet_path("devoir-batchthreexxxx")
+    assert_select ".ps-title", text: "Prépare devoirs n°1"
+    assert_select ".ps-subject", text: /\ADEVOIR DU /
+    assert_select ".ps-remember", text: including("Notions mobilisées :")
+    assert_select ".ps-exercise", three.size
     assert_select "#student_classroom_assigned[data-controller=reveal]", 0
   end
 
@@ -235,7 +261,9 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_assigned .ps-header-title", text: "PRÉPARE INTERROS"
+    assert_select "#student_classroom_assigned .ps-card-kind", text: "Prépare interros n°1"
+    get student_assigned_sheet_path("devoir-batchmixedxxxx")
+    assert_select ".ps-header-title", text: "PRÉPARE INTERROS", match: :first
     assert_select ".ps-remember", 0
   end
 
@@ -248,7 +276,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     get student_classroom_path
 
-    assert_select "#student_classroom_assigned .ps-sheet", 0
+    assert_select "#student_classroom_assigned .ps-sheet, #student_classroom_assigned a.ps-card", 0
     assert_no_match "Secret", response.body
   end
 
@@ -311,7 +339,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     get student_classroom_path
 
     due = I18n.t("classroom.student_classrooms.assigned_sheet.due_on", date: I18n.l(Date.current + 2, format: :due_long))
-    assert_select "#student_classroom_assigned .ps-title-block", text: including(due)
+    assert_select "#student_classroom_assigned a.ps-card .ps-card-meta", text: due
+    # sujet-comme-une-epreuve : la lecture n'a pas de sous-titre ; l'échéance reste sous le titre de la feuille à remplir.
+    get fill_student_assigned_sheet_path("devoir-#{Orm::ClassroomAssignment.sole.public_id.downcase}")
+    assert_select ".ps-title-block", text: including(due)
   end
 
   test "nothing assigned, nothing treated: the empty state of each section" do

@@ -149,110 +149,227 @@
           },
           "pitfall": "Ne pas oublier le carré de la vitesse, ni la conversion en m/s. Contre-exemple : pour $m = 2\\ \\text{kg}$ et $v = 3\\ \\text{m/s}$, $E_c = \\frac{1}{2} \\times 2 \\times 3^2 = 9\\ \\text{J}$, et non $\\frac{1}{2} \\times 2 \\times 3 = 3\\ \\text{J}$. Avec la moto de l'exemple, garder $36$ au lieu de $10$ donnerait $0{,}5 \\times 150 \\times 36^2 = 97\\,200\\ \\text{J}$, près de 13 fois trop. Retiens aussi : si la vitesse double, l'énergie cinétique est multipliée par 4.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer des énergies cinétiques",
-            "statement": "Dans cet exercice, tu calcules l'énergie cinétique de corps en mouvement avec la méthode de la fiche : relever, convertir, remplacer, calculer.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle formule donne l'énergie cinétique d'un corps de masse $m$ qui se déplace à la vitesse $v$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 3 — Remplacer dans la formule : l'énergie cinétique est $E_c = \\frac{1}{2} \\times m \\times v^2$. C'est la vitesse qui est au carré, pas la masse. La proposition avec $v$ sans carré est l'oubli le plus fréquent, celui du piège de la fiche : pour $m = 2\\ \\text{kg}$ et $v = 3\\ \\text{m/s}$ elle donne 3 J au lieu de 9 J. Celle qui oublie le facteur $\\frac{1}{2}$ double le résultat.",
-                "answers": [
-                  {
-                    "content": "$E_c = \\frac{1}{2} \\times m \\times v^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$E_c = \\frac{1}{2} \\times m \\times v$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$E_c = \\frac{1}{2} \\times m^2 \\times v$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$E_c = m \\times v^2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pierre de masse $4\\ \\text{kg}$ roule à la vitesse de $5\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : $m = 4\\ \\text{kg}$ et $v = 5\\ \\text{m/s}$. Étape 2 — Convertir : rien à faire, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 4 \\times 5^2$, avec $5^2 = 25$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 4 \\times 25 = 50\\ \\text{J}$. Si tu oublies le carré, tu trouves $0{,}5 \\times 4 \\times 5 = 10\\ \\text{J}$, ce qui est faux.",
-                "answers": [
-                  {
-                    "content": "50",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un cycliste roule à $18\\ \\text{km/h}$. Sa masse, vélo compris, est de $80\\ \\text{kg}$. Quelle est son énergie cinétique ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : $m = 80\\ \\text{kg}$ et $v = 18\\ \\text{km/h}$. Étape 2 — Convertir : $v = 18 \\div 3{,}6 = 5\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 80 \\times 5^2$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 80 \\times 25 = 1\\,000\\ \\text{J}$. Garder 18 au lieu de 5 donnerait $0{,}5 \\times 80 \\times 18^2 = 12\\,960\\ \\text{J}$ : un résultat 13 fois trop grand.",
-                "answers": [
-                  {
-                    "content": "1000",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un ballon de $500\\ \\text{g}$ est lancé à $10\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : $m = 500\\ \\text{g}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $m = 500\\ \\text{g} = 0{,}5\\ \\text{kg}$ ; la vitesse est déjà en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 0{,}5 \\times 10^2$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 0{,}5 \\times 100 = 25\\ \\text{J}$. Avec $500$ au lieu de $0{,}5\\ \\text{kg}$, tu trouverais $25\\,000\\ \\text{J}$ : la masse doit toujours être en kg.",
-                "answers": [
-                  {
-                    "content": "25",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Si un cycliste double sa vitesse, son énergie cinétique double aussi.",
-                "question_type": "true_false",
-                "explanation": "Étape 3 — Remplacer : $E_c$ dépend de $v^2$. Pour un cycliste de $80\\ \\text{kg}$, à $5\\ \\text{m/s}$ on a $E_c = 0{,}5 \\times 80 \\times 25 = 1\\,000\\ \\text{J}$ ; à $10\\ \\text{m/s}$ on a $E_c = 0{,}5 \\times 80 \\times 100 = 4\\,000\\ \\text{J}$. L'énergie est multipliée par 4, pas par 2. C'est l'erreur du piège : oublier que la vitesse est au carré.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Étape 4 — Calculer : l'énergie cinétique d'un corps s'exprime en ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 4 — Calculer et écrire le résultat en joules (J). Le joule est l'unité de toute énergie, comme tu l'as vu avec le travail d'une force. Le newton (N) est l'unité d'une force, le watt (W) celle d'une puissance : ce ne sont pas des énergies.",
-                "answers": [
-                  {
-                    "content": "joule",
-                    "correct": true
-                  },
-                  {
-                    "content": "joules",
-                    "correct": true
-                  },
-                  {
-                    "content": "J",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des énergies cinétiques",
+              "statement": "Dans cet exercice, tu calcules l'énergie cinétique de corps en mouvement avec la méthode de la fiche : relever, convertir, remplacer, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle formule donne l'énergie cinétique d'un corps de masse $m$ qui se déplace à la vitesse $v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Remplacer dans la formule : l'énergie cinétique est $E_c = \\frac{1}{2} \\times m \\times v^2$. C'est la vitesse qui est au carré, pas la masse. La proposition avec $v$ sans carré est l'oubli le plus fréquent, celui du piège de la fiche : pour $m = 2\\ \\text{kg}$ et $v = 3\\ \\text{m/s}$ elle donne 3 J au lieu de 9 J. Celle qui oublie le facteur $\\frac{1}{2}$ double le résultat.",
+                  "answers": [
+                    {
+                      "content": "$E_c = \\frac{1}{2} \\times m \\times v^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E_c = \\frac{1}{2} \\times m \\times v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_c = \\frac{1}{2} \\times m^2 \\times v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_c = m \\times v^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pierre de masse $4\\ \\text{kg}$ roule à la vitesse de $5\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 4\\ \\text{kg}$ et $v = 5\\ \\text{m/s}$. Étape 2 — Convertir : rien à faire, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 4 \\times 5^2$, avec $5^2 = 25$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 4 \\times 25 = 50\\ \\text{J}$. Si tu oublies le carré, tu trouves $0{,}5 \\times 4 \\times 5 = 10\\ \\text{J}$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste roule à $18\\ \\text{km/h}$. Sa masse, vélo compris, est de $80\\ \\text{kg}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 80\\ \\text{kg}$ et $v = 18\\ \\text{km/h}$. Étape 2 — Convertir : $v = 18 \\div 3{,}6 = 5\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 80 \\times 5^2$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 80 \\times 25 = 1\\,000\\ \\text{J}$. Garder 18 au lieu de 5 donnerait $0{,}5 \\times 80 \\times 18^2 = 12\\,960\\ \\text{J}$ : un résultat 13 fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $500\\ \\text{g}$ est lancé à $10\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 500\\ \\text{g}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $m = 500\\ \\text{g} = 0{,}5\\ \\text{kg}$ ; la vitesse est déjà en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 0{,}5 \\times 10^2$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 0{,}5 \\times 100 = 25\\ \\text{J}$. Avec $500$ au lieu de $0{,}5\\ \\text{kg}$, tu trouverais $25\\,000\\ \\text{J}$ : la masse doit toujours être en kg.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un cycliste double sa vitesse, son énergie cinétique double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : $E_c$ dépend de $v^2$. Pour un cycliste de $80\\ \\text{kg}$, à $5\\ \\text{m/s}$ on a $E_c = 0{,}5 \\times 80 \\times 25 = 1\\,000\\ \\text{J}$ ; à $10\\ \\text{m/s}$ on a $E_c = 0{,}5 \\times 80 \\times 100 = 4\\,000\\ \\text{J}$. L'énergie est multipliée par 4, pas par 2. C'est l'erreur du piège : oublier que la vitesse est au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Étape 4 — Calculer : l'énergie cinétique d'un corps s'exprime en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Calculer et écrire le résultat en joules (J). Le joule est l'unité de toute énergie, comme tu l'as vu avec le travail d'une force. Le newton (N) est l'unité d'une force, le watt (W) celle d'une puissance : ce ne sont pas des énergies.",
+                  "answers": [
+                    {
+                      "content": "joule",
+                      "correct": true
+                    },
+                    {
+                      "content": "joules",
+                      "correct": true
+                    },
+                    {
+                      "content": "J",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer d'autres énergies cinétiques",
+              "statement": "Dans cet exercice, tu calcules d'autres énergies cinétiques avec la méthode de la fiche : relever, convertir, remplacer, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis d'abord la masse en kg et la vitesse en m/s, puis calcule le carré de la vitesse avant de multiplier par la masse et par un demi.",
+              "questions": [
+                {
+                  "content": "Une charrette de masse $50\\ \\text{kg}$ roule à la vitesse de $4\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 50\\ \\text{kg}$ et $v = 4\\ \\text{m/s}$. Étape 2 — Convertir : rien à convertir, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 50 \\times 4^2$, avec $4^2 = 16$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 50 \\times 16 = 400\\ \\text{J}$. Sans le carré de la vitesse, on trouve $100\\ \\text{J}$, ce qui est faux ; sans le facteur $\\frac{1}{2}$, on trouve $800\\ \\text{J}$, le double du bon résultat.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un taxi-brousse de $1\\,000\\ \\text{kg}$ roule à $72\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000\\ \\text{kg}$ et $v = 20\\ \\text{m/s}$. Étape 2 — Convertir : $72 \\div 3{,}6 = 20\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 1\\,000 \\times 20^2$, avec $20^2 = 400$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 1\\,000 \\times 400 = 200\\,000\\ \\text{J}$. La réponse $10\\,000\\ \\text{J}$ oublie le carré de la vitesse ; la réponse $2\\,592\\,000\\ \\text{J}$ garde $72$ au lieu de convertir en $20\\ \\text{m/s}$ ; la réponse $400\\,000\\ \\text{J}$ oublie le facteur $\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$200\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\,592\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\,000\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour passer d'une vitesse en km/h à une vitesse en m/s, on la divise par ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Convertir : $1\\ \\text{m/s} = 3{,}6\\ \\text{km/h}$, donc de km/h en m/s on divise par $3{,}6$ : $72\\ \\text{km/h} = 72 \\div 3{,}6 = 20\\ \\text{m/s}$. Multiplier par $3{,}6$ au lieu de diviser donnerait $72 \\times 3{,}6 = 259{,}2\\ \\text{m/s}$, une vitesse absurde pour un véhicule.",
+                  "answers": [
+                    {
+                      "content": "3,6",
+                      "correct": true
+                    },
+                    {
+                      "content": "3.6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : un scooter de $100\\ \\text{kg}$ a une énergie cinétique 4 fois plus grande à $10\\ \\text{m/s}$ qu'à $5\\ \\text{m/s}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : à $5\\ \\text{m/s}$, $E_c = 0{,}5 \\times 100 \\times 5^2 = 1\\,250\\ \\text{J}$ ; à $10\\ \\text{m/s}$, $E_c = 0{,}5 \\times 100 \\times 10^2 = 5\\,000\\ \\text{J}$. Étape 4 — Calculer : $5\\,000 \\div 1\\,250 = 4$. L'affirmation est vraie. Croire que l'énergie double parce que la vitesse double oublie que la vitesse est au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $250\\ \\text{g}$ est lancé à la vitesse de $8\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}25\\ \\text{kg}$ et $v = 8\\ \\text{m/s}$. Étape 2 — Convertir : $250\\ \\text{g} = 0{,}25\\ \\text{kg}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 0{,}25 \\times 8^2$, avec $8^2 = 64$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 0{,}25 \\times 64 = 8\\ \\text{J}$. Garder $250$ au lieu de $0{,}25$ donnerait $8\\,000\\ \\text{J}$, mille fois trop ; oublier le carré donnerait $1\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille de $4\\ \\text{kg}$ roule à la vitesse de $3\\ \\text{m/s}$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : $m = 4\\ \\text{kg}$ et $v = 3\\ \\text{m/s}$. Étape 2 — Convertir : rien à convertir, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 4 \\times 3^2$, avec $3^2 = 9$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 4 \\times 9 = 18\\ \\text{J}$. Un corps à l'arrêt a une énergie cinétique nulle. L'affirmation à $6\\ \\text{J}$ oublie le carré de la vitesse ; celle qui parle d'un doublement oublie que si la vitesse double, l'énergie est multipliée par 4 ; celle qui donne des newtons se trompe d'unité : l'énergie s'exprime en joules.",
+                  "answers": [
+                    {
+                      "content": "Son énergie cinétique vaut $18\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si la bille s'arrête, son énergie cinétique devient nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie cinétique vaut $6\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si sa vitesse double, son énergie cinétique double aussi.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie cinétique s'exprime en newtons.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu calcules l'énergie cinétique de deux scooters et d'un taxi.",
             "questions": [
@@ -328,114 +445,213 @@
           },
           "pitfall": "Ne pas oublier de convertir la masse en kg, ni de mesurer $h$ depuis la bonne référence. Contre-exemple : en gardant $200\\ \\text{g}$, on trouve $200 \\times 10 \\times 5 = 10\\,000\\ \\text{J}$, mille fois trop ; la bonne valeur est $10\\ \\text{J}$. Et si l'on prend pour référence une branche à $2\\ \\text{m}$ du sol, la mangue est à $h = 5 - 2 = 3\\ \\text{m}$ et $E_p = 0{,}2 \\times 10 \\times 3 = 6\\ \\text{J}$ : la valeur de $E_p$ dépend de la référence choisie.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer des énergies potentielles de pesanteur",
-            "statement": "Dans cet exercice, tu calcules l'énergie potentielle de pesanteur de corps placés en hauteur, avec la méthode de la fiche : choisir la référence, relever, remplacer, calculer. On prend $g = 10\\ \\text{N/kg}$.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Un seau de $3\\ \\text{kg}$ est posé sur le toit d'une case, à $4\\ \\text{m}$ du sol. Le sol est la référence et $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Choisir : la référence est le sol, donc $h = 4\\ \\text{m}$. Étape 2 — Relever : $m = 3\\ \\text{kg}$, déjà en kg ; $h$ est en mètres. Étape 3 — Remplacer : $E_p = 3 \\times 10 \\times 4$. Étape 4 — Calculer : $E_p = 120\\ \\text{J}$. Si tu oublies $g$, tu trouves $3 \\times 4 = 12$, ce qui n'est pas une énergie en joules.",
-                "answers": [
-                  {
-                    "content": "120",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une papaye de $500\\ \\text{g}$ est accrochée à $6\\ \\text{m}$ au-dessus du sol. Le sol est la référence et $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Choisir : la référence est le sol, donc $h = 6\\ \\text{m}$. Étape 2 — Relever : $m = 500\\ \\text{g} = 0{,}5\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 0{,}5 \\times 10 \\times 6$. Étape 4 — Calculer : $E_p = 30\\ \\text{J}$. Avec $500$ au lieu de $0{,}5\\ \\text{kg}$, tu trouverais $30\\,000\\ \\text{J}$ : c'est l'erreur de conversion du piège.",
-                "answers": [
-                  {
-                    "content": "30",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un bloc de $4\\ \\text{kg}$ a une énergie potentielle de pesanteur de $200\\ \\text{J}$ par rapport au sol ($g = 10\\ \\text{N/kg}$). À quelle hauteur du sol se trouve-t-il ?",
-                "question_type": "numeric",
-                "unit": "m",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Choisir : la référence est le sol, la hauteur cherchée est $h$. Étape 2 — Relever : $m = 4\\ \\text{kg}$ et $E_p = 200\\ \\text{J}$. Étape 3 — Remplacer : $200 = 4 \\times 10 \\times h$, soit $200 = 40 \\times h$. Étape 4 — Calculer : $h = 200 \\div 40 = 5\\ \\text{m}$. Diviser par $4$ seulement donnerait $50$ : on oublie $g = 10$.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un livre posé sur le sol, pris comme référence, a une énergie potentielle de pesanteur nulle.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Choisir : le sol est la référence, donc la hauteur du livre est $h = 0$. Étape 3 — Remplacer : $E_p = m \\times 10 \\times 0 = 0\\ \\text{J}$. L'énergie potentielle est nulle au niveau de la référence, quelle que soit la masse du livre.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un seau de $2\\ \\text{kg}$ est au sommet d'un mur, à $3\\ \\text{m}$ du sol. On prend pour référence le haut d'un muret situé à $1\\ \\text{m}$ du sol ($g = 10\\ \\text{N/kg}$). Quelle est son énergie potentielle de pesanteur ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir : la référence est le haut du muret, donc $h = 3 - 1 = 2\\ \\text{m}$. Étape 2 — Relever : $m = 2\\ \\text{kg}$, déjà en kg. Étape 3 — Remplacer : $E_p = 2 \\times 10 \\times 2$. Étape 4 — Calculer : $E_p = 40\\ \\text{J}$. La proposition $60\\ \\text{J}$ mesure $h$ depuis le sol ($3\\ \\text{m}$) au lieu de la référence choisie ; $20\\ \\text{J}$ ne garde que la hauteur du muret ; $4\\ \\text{J}$ oublie $g$.",
-                "answers": [
-                  {
-                    "content": "$40\\ \\text{J}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$60\\ \\text{J}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$20\\ \\text{J}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4\\ \\text{J}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque grandeur à son unité du Système international utilisée dans la formule de l'énergie potentielle de pesanteur.",
-                "question_type": "matching",
-                "explanation": "Étape 2 — Relever et convertir : pour appliquer $E_p = m \\times g \\times h$, la masse est en kilogrammes, la hauteur en mètres et $g = 10\\ \\text{N/kg}$. Le résultat est alors en joules (étape 4). Si la masse est donnée en grammes ou la hauteur en centimètres, il faut convertir avant de remplacer.",
-                "answers": [
-                  {
-                    "content": "L'énergie potentielle de pesanteur",
-                    "match": "Le joule (J)"
-                  },
-                  {
-                    "content": "La masse",
-                    "match": "Le kilogramme (kg)"
-                  },
-                  {
-                    "content": "La hauteur",
-                    "match": "Le mètre (m)"
-                  },
-                  {
-                    "content": "L'intensité de la pesanteur $g$",
-                    "match": "Le newton par kilogramme (N/kg)"
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des énergies potentielles de pesanteur",
+              "statement": "Dans cet exercice, tu calcules l'énergie potentielle de pesanteur de corps placés en hauteur, avec la méthode de la fiche : choisir la référence, relever, remplacer, calculer. On prend $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un seau de $3\\ \\text{kg}$ est posé sur le toit d'une case, à $4\\ \\text{m}$ du sol. Le sol est la référence et $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, donc $h = 4\\ \\text{m}$. Étape 2 — Relever : $m = 3\\ \\text{kg}$, déjà en kg ; $h$ est en mètres. Étape 3 — Remplacer : $E_p = 3 \\times 10 \\times 4$. Étape 4 — Calculer : $E_p = 120\\ \\text{J}$. Si tu oublies $g$, tu trouves $3 \\times 4 = 12$, ce qui n'est pas une énergie en joules.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une papaye de $500\\ \\text{g}$ est accrochée à $6\\ \\text{m}$ au-dessus du sol. Le sol est la référence et $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, donc $h = 6\\ \\text{m}$. Étape 2 — Relever : $m = 500\\ \\text{g} = 0{,}5\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 0{,}5 \\times 10 \\times 6$. Étape 4 — Calculer : $E_p = 30\\ \\text{J}$. Avec $500$ au lieu de $0{,}5\\ \\text{kg}$, tu trouverais $30\\,000\\ \\text{J}$ : c'est l'erreur de conversion du piège.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bloc de $4\\ \\text{kg}$ a une énergie potentielle de pesanteur de $200\\ \\text{J}$ par rapport au sol ($g = 10\\ \\text{N/kg}$). À quelle hauteur du sol se trouve-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, la hauteur cherchée est $h$. Étape 2 — Relever : $m = 4\\ \\text{kg}$ et $E_p = 200\\ \\text{J}$. Étape 3 — Remplacer : $200 = 4 \\times 10 \\times h$, soit $200 = 40 \\times h$. Étape 4 — Calculer : $h = 200 \\div 40 = 5\\ \\text{m}$. Diviser par $4$ seulement donnerait $50$ : on oublie $g = 10$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livre posé sur le sol, pris comme référence, a une énergie potentielle de pesanteur nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : le sol est la référence, donc la hauteur du livre est $h = 0$. Étape 3 — Remplacer : $E_p = m \\times 10 \\times 0 = 0\\ \\text{J}$. L'énergie potentielle est nulle au niveau de la référence, quelle que soit la masse du livre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seau de $2\\ \\text{kg}$ est au sommet d'un mur, à $3\\ \\text{m}$ du sol. On prend pour référence le haut d'un muret situé à $1\\ \\text{m}$ du sol ($g = 10\\ \\text{N/kg}$). Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : la référence est le haut du muret, donc $h = 3 - 1 = 2\\ \\text{m}$. Étape 2 — Relever : $m = 2\\ \\text{kg}$, déjà en kg. Étape 3 — Remplacer : $E_p = 2 \\times 10 \\times 2$. Étape 4 — Calculer : $E_p = 40\\ \\text{J}$. La proposition $60\\ \\text{J}$ mesure $h$ depuis le sol ($3\\ \\text{m}$) au lieu de la référence choisie ; $20\\ \\text{J}$ ne garde que la hauteur du muret ; $4\\ \\text{J}$ oublie $g$.",
+                  "answers": [
+                    {
+                      "content": "$40\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$60\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grandeur à son unité du Système international utilisée dans la formule de l'énergie potentielle de pesanteur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Relever et convertir : pour appliquer $E_p = m \\times g \\times h$, la masse est en kilogrammes, la hauteur en mètres et $g = 10\\ \\text{N/kg}$. Le résultat est alors en joules (étape 4). Si la masse est donnée en grammes ou la hauteur en centimètres, il faut convertir avant de remplacer.",
+                  "answers": [
+                    {
+                      "content": "L'énergie potentielle de pesanteur",
+                      "match": "Le joule (J)"
+                    },
+                    {
+                      "content": "La masse",
+                      "match": "Le kilogramme (kg)"
+                    },
+                    {
+                      "content": "La hauteur",
+                      "match": "Le mètre (m)"
+                    },
+                    {
+                      "content": "L'intensité de la pesanteur $g$",
+                      "match": "Le newton par kilogramme (N/kg)"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer d'autres énergies potentielles de pesanteur",
+              "statement": "Dans cet exercice, tu calcules d'autres énergies potentielles de pesanteur avec la méthode de la fiche : choisir la référence, relever, remplacer, calculer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence par choisir la référence et mesure la hauteur à partir d'elle ; convertis la masse en kilogrammes avant de remplacer.",
+              "questions": [
+                {
+                  "content": "Une valise de $15\\ \\text{kg}$ est posée sur une armoire, à $2\\ \\text{m}$ du sol. Le sol est la référence. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 2\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 15\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 15 \\times 10 \\times 2$. Étape 4 — Calculer : $E_p = 300\\ \\text{J}$. Oublier $g$ dans le produit donnerait $30\\ \\text{J}$ au lieu de $300\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pot de $400\\ \\text{g}$ est posé sur une étagère à $2{,}5\\ \\text{m}$ du sol. Le sol est la référence. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 2{,}5\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 0{,}4\\ \\text{kg}$ ; $400\\ \\text{g} = 0{,}4\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 0{,}4 \\times 10 \\times 2{,}5$. Étape 4 — Calculer : $E_p = 10\\ \\text{J}$. Garder $400$ au lieu de $0{,}4$ donnerait $10\\,000\\ \\text{J}$, mille fois trop.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une charge de $5\\ \\text{kg}$ a une énergie potentielle de pesanteur de $150\\ \\text{J}$ par rapport au sol. On prend $g = 10\\ \\text{N/kg}$. À quelle hauteur du sol se trouve-t-elle ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol et $h$ se mesure depuis lui. Étape 2 — Relever : $m = 5\\ \\text{kg}$ et $E_p = 150\\ \\text{J}$. Étape 3 — Remplacer : $150 = 5 \\times 10 \\times h$, soit $150 = 50 \\times h$. Étape 4 — Calculer : $h = 150 \\div 50 = 3\\ \\text{m}$. Diviser $150$ par $5$ seulement, en oubliant $g$, donnerait $30\\ \\text{m}$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un livre de $1\\ \\text{kg}$ est posé sur une étagère à $2\\ \\text{m}$ du sol. On prend pour référence le dessus d'une table situé à $0{,}8\\ \\text{m}$ du sol. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : la référence est le dessus de la table, donc $h = 2 - 0{,}8 = 1{,}2\\ \\text{m}$. Étape 2 — Relever : $m = 1\\ \\text{kg}$ ; la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 1 \\times 10 \\times 1{,}2$. Étape 4 — Calculer : $E_p = 12\\ \\text{J}$. La réponse $20\\ \\text{J}$ mesure $h$ depuis le sol au lieu de la table ; la réponse $8\\ \\text{J}$ prend la hauteur de la table comme $h$ ; la réponse $28\\ \\text{J}$ additionne $2$ et $0{,}8$ au lieu de les soustraire.",
+                  "answers": [
+                    {
+                      "content": "$12\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$28\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : une pierre de $2\\ \\text{kg}$, portée de $3\\ \\text{m}$ à $6\\ \\text{m}$ au-dessus du sol (la référence), voit son énergie potentielle de pesanteur doubler. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir : la référence est le sol. Étape 2 — Relever : $m = 2\\ \\text{kg}$, $h = 3\\ \\text{m}$ puis $h = 6\\ \\text{m}$. Étape 3 — Remplacer : $E_p = 2 \\times 10 \\times 3$ puis $E_p = 2 \\times 10 \\times 6$. Étape 4 — Calculer : $60\\ \\text{J}$ puis $120\\ \\text{J}$ : l'énergie double. L'affirmation est vraie, car $E_p$ est proportionnelle à $h$ ; la juger fausse reviendrait à croire que la hauteur n'intervient pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de $2\\ \\text{kg}$ est à $4\\ \\text{m}$ du sol (la référence). On prend $g = 10\\ \\text{N/kg}$. Son énergie potentielle de pesanteur vaut ___ joules.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 4\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 2\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 2 \\times 10 \\times 4$. Étape 4 — Calculer : $E_p = 80\\ \\text{J}$. Répondre $8$ oublie $g$ ; répondre $20$ oublie la masse.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu calcules l'énergie potentielle de pesanteur, avec $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
             "questions": [
@@ -520,147 +736,252 @@
           },
           "pitfall": "Ne pas oublier l'un des deux termes, et ne pas les multiplier. Contre-exemple : la noix de coco encore accrochée, immobile à $4\\ \\text{m}$, a $E_c = 0$ mais $E_p = 1 \\times 10 \\times 4 = 40\\ \\text{J}$, donc $E_m = 40\\ \\text{J}$ et non $0$. Au sol, c'est l'inverse : $E_p = 0$ et $E_m = E_c$. Et on additionne : $18 + 40 = 58\\ \\text{J}$, jamais $18 \\times 40$.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer des énergies mécaniques",
-            "statement": "Dans cet exercice, tu calcules l'énergie mécanique de corps en mouvement et en hauteur avec la méthode de la fiche : relever, calculer $E_c$, calculer $E_p$, additionner. On prend $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle relation donne l'énergie mécanique $E_m$ d'un corps ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 4 — Additionner : l'énergie mécanique est la somme de l'énergie cinétique et de l'énergie potentielle, $E_m = E_c + E_p$. Le produit est l'erreur signalée dans le piège de la fiche ; la différence et la moyenne n'ont pas de sens physique ici.",
-                "answers": [
-                  {
-                    "content": "$E_m = E_c + E_p$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$E_m = E_c \\times E_p$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$E_m = E_c - E_p$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$E_m = \\frac{E_c + E_p}{2}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pierre de $2\\ \\text{kg}$ lancée en l'air passe à $5\\ \\text{m}$ du sol avec une vitesse de $3\\ \\text{m/s}$ ($g = 10\\ \\text{N/kg}$, sol = référence). Quelle est son énergie mécanique ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$, $v = 3\\ \\text{m/s}$, $h = 5\\ \\text{m}$. Étape 2 — Calculer l'énergie cinétique : $E_c = \\frac{1}{2} \\times 2 \\times 3^2 = 9\\ \\text{J}$. Étape 3 — Calculer l'énergie potentielle : $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$. Étape 4 — Additionner : $E_m = 9 + 100 = 109\\ \\text{J}$. Multiplier $9 \\times 100 = 900$ serait faux : on additionne des énergies.",
-                "answers": [
-                  {
-                    "content": "109",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mangue de $0{,}2\\ \\text{kg}$ tombe d'un manguier. Elle passe à $2\\ \\text{m}$ du sol à la vitesse de $5\\ \\text{m/s}$ ($g = 10\\ \\text{N/kg}$, sol = référence). Quelle est son énergie mécanique ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : $m = 0{,}2\\ \\text{kg}$, $v = 5\\ \\text{m/s}$, $h = 2\\ \\text{m}$. Étape 2 — Calculer l'énergie cinétique : $E_c = \\frac{1}{2} \\times 0{,}2 \\times 5^2 = 0{,}1 \\times 25 = 2{,}5\\ \\text{J}$. Étape 3 — Calculer l'énergie potentielle : $E_p = 0{,}2 \\times 10 \\times 2 = 4\\ \\text{J}$. Étape 4 — Additionner : $E_m = 2{,}5 + 4 = 6{,}5\\ \\text{J}$. Oublier l'un des deux termes donne $2{,}5$ ou $4$ : les deux comptent.",
-                "answers": [
-                  {
-                    "content": "6,5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mangue immobile, accrochée à une branche à 5 m du sol, a une énergie mécanique nulle (sol = référence).",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Relever : la mangue est immobile, donc $v = 0$ ; sa hauteur est $h = 5\\ \\text{m}$. Étape 2 — Calculer : $E_c = 0$. Étape 3 — Calculer : $E_p = m \\times 10 \\times 5$ n'est pas nulle (pour $0{,}2\\ \\text{kg}$, $E_p = 10\\ \\text{J}$). Étape 4 — Additionner : $E_m = 0 + 10 = 10\\ \\text{J}$. Une vitesse nulle ne suffit pas à annuler l'énergie mécanique : c'est le piège de la fiche.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mangue de $0{,}2\\ \\text{kg}$ touche le sol (la référence) à la vitesse de $10\\ \\text{m/s}$. Quelles affirmations sont vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Relever : $m = 0{,}2\\ \\text{kg}$, $v = 10\\ \\text{m/s}$, $h = 0$. Étape 2 — Calculer : $E_c = \\frac{1}{2} \\times 0{,}2 \\times 10^2 = 10\\ \\text{J}$. Étape 3 — Calculer : $E_p = 0{,}2 \\times 10 \\times 0 = 0\\ \\text{J}$. Étape 4 — Additionner : $E_m = 10 + 0 = 10\\ \\text{J}$, donc $E_m = E_c$. Les propositions « énergie cinétique nulle » et « énergie mécanique nulle » confondent le sol avec l'arrêt ; « énergie potentielle $10\\ \\text{J}$ » reprend la valeur du haut de la chute.",
-                "answers": [
-                  {
-                    "content": "Son énergie potentielle de pesanteur est nulle.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Son énergie mécanique est égale à son énergie cinétique, soit $10\\ \\text{J}$.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Son énergie cinétique est nulle.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Son énergie mécanique est nulle.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Son énergie potentielle vaut $10\\ \\text{J}$.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de la méthode pour calculer une énergie mécanique.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Relever les données en unités SI. Étape 2 — Calculer l'énergie cinétique. Étape 3 — Calculer l'énergie potentielle. Étape 4 — Additionner les deux pour obtenir l'énergie mécanique. On ne peut pas additionner avant d'avoir calculé les deux termes, et on ne calcule rien avant d'avoir relevé et converti les données.",
-                "answers": [
-                  {
-                    "content": "Relever $m$, $v$ et $h$ en unités SI."
-                  },
-                  {
-                    "content": "Calculer $E_c = \\frac{1}{2} \\times m \\times v^2$."
-                  },
-                  {
-                    "content": "Calculer $E_p = m \\times g \\times h$."
-                  },
-                  {
-                    "content": "Additionner $E_m = E_c + E_p$ et écrire le résultat en joules."
-                  }
-                ]
-              },
-              {
-                "content": "Complète : l'énergie mécanique d'un corps est la ___ de son énergie cinétique et de son énergie potentielle de pesanteur.",
-                "question_type": "select",
-                "explanation": "Étape 4 — Additionner : $E_m = E_c + E_p$. L'énergie mécanique est donc la somme des deux énergies, pas leur différence ni leur moyenne.",
-                "answers": [
-                  {
-                    "content": "somme",
-                    "correct": true
-                  },
-                  {
-                    "content": "différence",
-                    "correct": false
-                  },
-                  {
-                    "content": "moyenne",
-                    "correct": false
-                  },
-                  {
-                    "content": "racine carrée",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des énergies mécaniques",
+              "statement": "Dans cet exercice, tu calcules l'énergie mécanique de corps en mouvement et en hauteur avec la méthode de la fiche : relever, calculer $E_c$, calculer $E_p$, additionner. On prend $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle relation donne l'énergie mécanique $E_m$ d'un corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Additionner : l'énergie mécanique est la somme de l'énergie cinétique et de l'énergie potentielle, $E_m = E_c + E_p$. Le produit est l'erreur signalée dans le piège de la fiche ; la différence et la moyenne n'ont pas de sens physique ici.",
+                  "answers": [
+                    {
+                      "content": "$E_m = E_c + E_p$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E_m = E_c \\times E_p$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_m = E_c - E_p$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_m = \\frac{E_c + E_p}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pierre de $2\\ \\text{kg}$ lancée en l'air passe à $5\\ \\text{m}$ du sol avec une vitesse de $3\\ \\text{m/s}$ ($g = 10\\ \\text{N/kg}$, sol = référence). Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$, $v = 3\\ \\text{m/s}$, $h = 5\\ \\text{m}$. Étape 2 — Calculer l'énergie cinétique : $E_c = \\frac{1}{2} \\times 2 \\times 3^2 = 9\\ \\text{J}$. Étape 3 — Calculer l'énergie potentielle : $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$. Étape 4 — Additionner : $E_m = 9 + 100 = 109\\ \\text{J}$. Multiplier $9 \\times 100 = 900$ serait faux : on additionne des énergies.",
+                  "answers": [
+                    {
+                      "content": "109",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $0{,}2\\ \\text{kg}$ tombe d'un manguier. Elle passe à $2\\ \\text{m}$ du sol à la vitesse de $5\\ \\text{m/s}$ ($g = 10\\ \\text{N/kg}$, sol = référence). Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}2\\ \\text{kg}$, $v = 5\\ \\text{m/s}$, $h = 2\\ \\text{m}$. Étape 2 — Calculer l'énergie cinétique : $E_c = \\frac{1}{2} \\times 0{,}2 \\times 5^2 = 0{,}1 \\times 25 = 2{,}5\\ \\text{J}$. Étape 3 — Calculer l'énergie potentielle : $E_p = 0{,}2 \\times 10 \\times 2 = 4\\ \\text{J}$. Étape 4 — Additionner : $E_m = 2{,}5 + 4 = 6{,}5\\ \\text{J}$. Oublier l'un des deux termes donne $2{,}5$ ou $4$ : les deux comptent.",
+                  "answers": [
+                    {
+                      "content": "6,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue immobile, accrochée à une branche à 5 m du sol, a une énergie mécanique nulle (sol = référence).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : la mangue est immobile, donc $v = 0$ ; sa hauteur est $h = 5\\ \\text{m}$. Étape 2 — Calculer : $E_c = 0$. Étape 3 — Calculer : $E_p = m \\times 10 \\times 5$ n'est pas nulle (pour $0{,}2\\ \\text{kg}$, $E_p = 10\\ \\text{J}$). Étape 4 — Additionner : $E_m = 0 + 10 = 10\\ \\text{J}$. Une vitesse nulle ne suffit pas à annuler l'énergie mécanique : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $0{,}2\\ \\text{kg}$ touche le sol (la référence) à la vitesse de $10\\ \\text{m/s}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : $m = 0{,}2\\ \\text{kg}$, $v = 10\\ \\text{m/s}$, $h = 0$. Étape 2 — Calculer : $E_c = \\frac{1}{2} \\times 0{,}2 \\times 10^2 = 10\\ \\text{J}$. Étape 3 — Calculer : $E_p = 0{,}2 \\times 10 \\times 0 = 0\\ \\text{J}$. Étape 4 — Additionner : $E_m = 10 + 0 = 10\\ \\text{J}$, donc $E_m = E_c$. Les propositions « énergie cinétique nulle » et « énergie mécanique nulle » confondent le sol avec l'arrêt ; « énergie potentielle $10\\ \\text{J}$ » reprend la valeur du haut de la chute.",
+                  "answers": [
+                    {
+                      "content": "Son énergie potentielle de pesanteur est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie mécanique est égale à son énergie cinétique, soit $10\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie cinétique est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie mécanique est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie potentielle vaut $10\\ \\text{J}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer une énergie mécanique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever les données en unités SI. Étape 2 — Calculer l'énergie cinétique. Étape 3 — Calculer l'énergie potentielle. Étape 4 — Additionner les deux pour obtenir l'énergie mécanique. On ne peut pas additionner avant d'avoir calculé les deux termes, et on ne calcule rien avant d'avoir relevé et converti les données.",
+                  "answers": [
+                    {
+                      "content": "Relever $m$, $v$ et $h$ en unités SI."
+                    },
+                    {
+                      "content": "Calculer $E_c = \\frac{1}{2} \\times m \\times v^2$."
+                    },
+                    {
+                      "content": "Calculer $E_p = m \\times g \\times h$."
+                    },
+                    {
+                      "content": "Additionner $E_m = E_c + E_p$ et écrire le résultat en joules."
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'énergie mécanique d'un corps est la ___ de son énergie cinétique et de son énergie potentielle de pesanteur.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Additionner : $E_m = E_c + E_p$. L'énergie mécanique est donc la somme des deux énergies, pas leur différence ni leur moyenne.",
+                  "answers": [
+                    {
+                      "content": "somme",
+                      "correct": true
+                    },
+                    {
+                      "content": "différence",
+                      "correct": false
+                    },
+                    {
+                      "content": "moyenne",
+                      "correct": false
+                    },
+                    {
+                      "content": "racine carrée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer d'autres énergies mécaniques",
+              "statement": "Dans cet exercice, tu calcules d'autres énergies mécaniques avec la méthode de la fiche : relever, calculer $E_c$, calculer $E_p$, additionner.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule séparément l'énergie cinétique et l'énergie potentielle de pesanteur, puis additionne-les ; ne les multiplie jamais.",
+              "questions": [
+                {
+                  "content": "Un oiseau de $0{,}5\\ \\text{kg}$ vole à $10\\ \\text{m}$ du sol avec une vitesse de $4\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}5\\ \\text{kg}$, $v = 4\\ \\text{m/s}$ et $h = 10\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 0{,}5 \\times 4^2 = 4\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 0{,}5 \\times 10 \\times 10 = 50\\ \\text{J}$. Étape 4 — Additionner : $E_m = 4 + 50 = 54\\ \\text{J}$. Oublier $E_p$ donnerait seulement $4\\ \\text{J}$ ; multiplier au lieu d'additionner donnerait $200\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $1\\ \\text{kg}$ passe à $3\\ \\text{m}$ du sol avec une vitesse de $4\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $m = 1\\ \\text{kg}$, $v = 4\\ \\text{m/s}$ et $h = 3\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 1 \\times 4^2 = 8\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 1 \\times 10 \\times 3 = 30\\ \\text{J}$. Étape 4 — Additionner : $E_m = 8 + 30 = 38\\ \\text{J}$. La réponse $240\\ \\text{J}$ multiplie $8$ par $30$ au lieu de les additionner ; la réponse $22\\ \\text{J}$ soustrait $8$ de $30$ ; la réponse $32\\ \\text{J}$ oublie le carré de la vitesse dans $E_c$ ($E_c$ vaudrait alors $2\\ \\text{J}$).",
+                  "answers": [
+                    {
+                      "content": "$38\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$240\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$22\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une noix de coco de $2\\ \\text{kg}$ est encore accrochée, immobile, à $6\\ \\text{m}$ du sol (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$, $v = 0\\ \\text{m/s}$ et $h = 6\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 2 \\times 0^2 = 0\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 2 \\times 10 \\times 6 = 120\\ \\text{J}$. Étape 4 — Additionner : $E_m = 0 + 120 = 120\\ \\text{J}$. La noix de coco est immobile : $E_c = 0$, mais $E_m$ n'est pas nulle pour autant, car $E_p = 120\\ \\text{J}$. Répondre $0$ est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caillou de $0{,}4\\ \\text{kg}$ roule sur le sol (la référence) à la vitesse de $5\\ \\text{m/s}$. On prend $g = 10\\ \\text{N/kg}$. Son énergie mécanique vaut ___ joules.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : $m = 0{,}4\\ \\text{kg}$, $v = 5\\ \\text{m/s}$ et $h = 0\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 0{,}4 \\times 5^2 = 5\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 0{,}4 \\times 10 \\times 0 = 0\\ \\text{J}$. Étape 4 — Additionner : $E_m = 5 + 0 = 5\\ \\text{J}$. Au niveau de la référence, $E_p = 0$ et $E_m = E_c$. Ajouter un $E_p$ non nul serait une erreur.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : une balle de $1\\ \\text{kg}$ posée immobile sur le sol (la référence) a une énergie mécanique nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $m = 1\\ \\text{kg}$, $v = 0$ et $h = 0$. Étape 2 — Calculer $E_c$ : $E_c = 0$, car la balle est immobile. Étape 3 — Calculer $E_p$ : $E_p = 1 \\times 10 \\times 0 = 0$, car elle est au niveau de la référence. Étape 4 — Additionner : $E_m = 0 + 0 = 0\\ \\text{J}$. L'affirmation est vraie ; la juger fausse reviendrait à croire qu'une énergie mécanique ne peut jamais être nulle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : un corps immobile a une énergie mécanique égale à son énergie ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Calculer $E_c$ : un corps immobile a $v = 0$, donc $E_c = 0$. Étape 4 — Additionner : $E_m = 0 + E_p = E_p$. L'énergie mécanique d'un corps immobile est donc son énergie potentielle de pesanteur. Choisir l'énergie cinétique confond avec un corps placé à la référence ; l'énergie thermique n'intervient pas dans $E_m = E_c + E_p$.",
+                  "answers": [
+                    {
+                      "content": "potentielle de pesanteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "cinétique",
+                      "correct": false
+                    },
+                    {
+                      "content": "thermique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu calcules l'énergie mécanique avec $g = 10\\ \\text{N/kg}$ et le sol comme référence.",
             "questions": [
@@ -728,137 +1049,250 @@
           },
           "pitfall": "Ne pas croire que $E_c$ et $E_p$ se conservent chacune : c'est leur somme. Contre-exemple : mangue de $0{,}2\\ \\text{kg}$ lâchée de $5\\ \\text{m}$ ; en haut $E_p = 10\\ \\text{J}$ et $E_c = 0$, au sol $E_p = 0$ et $E_c = 10\\ \\text{J}$. Ni $E_c$ ni $E_p$ n'a la même valeur, mais $E_m = 10\\ \\text{J}$ aux deux endroits. N'applique la conservation que si les frottements sont négligeables : un parachutiste qui descend à vitesse constante garde la même $E_c$ alors que son $E_p$ diminue, donc son $E_m$ diminue.",
           "figure": "chute-mangue",
-          "exercise": {
-            "title": "Utiliser la conservation de l'énergie mécanique",
-            "statement": "Dans cet exercice, tu utilises la conservation de l'énergie mécanique avec la méthode de la fiche : vérifier les frottements, calculer $E_m$ au départ, l'écrire à l'arrivée, résoudre, conclure. La figure montre la chute d'une mangue de $0{,}2\\ \\text{kg}$ lâchée de $5\\ \\text{m}$ ; $g = 10\\ \\text{N/kg}$.",
-            "exercise_type": "fixation",
-            "figure": "chute-mangue",
-            "questions": [
-              {
-                "content": "Dans quel cas peut-on dire que l'énergie mécanique d'un corps qui tombe se conserve ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : l'énergie mécanique ne se conserve que si les frottements (de l'air, du sol) sont négligeables. La masse ne change pas cette condition. Partir sans vitesse ne suffit pas non plus : avec de gros frottements, une partie de l'énergie devient de la chaleur et $E_m$ diminue. Dire « dans tous les cas » est l'erreur que la fiche demande d'éviter.",
-                "answers": [
-                  {
-                    "content": "Quand les frottements sont négligeables.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Quand le corps est très léger.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Quand le corps est immobile au départ, même avec de gros frottements.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Dans tous les cas, sans condition.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pierre de $1\\ \\text{kg}$ est lâchée sans vitesse du haut d'une falaise de $20\\ \\text{m}$. Les frottements sont négligeables ($g = 10\\ \\text{N/kg}$). Quelle est sa vitesse en arrivant au sol ?",
-                "question_type": "numeric",
-                "unit": "m/s",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 1 \\times 10 \\times 20 = 200\\ \\text{J}$, donc $E_m = 200\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$, donc $E_c = 200\\ \\text{J}$, soit $\\frac{1}{2} \\times 1 \\times v^2 = 200$. Étape 4 — Résoudre : $0{,}5 \\times v^2 = 200$, donc $v^2 = 400$. Étape 5 — Conclure : $v = \\sqrt{400} = 20\\ \\text{m/s}$.",
-                "answers": [
-                  {
-                    "content": "20",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un bloc de $2\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $5\\ \\text{m}$. Les frottements sont négligeables ($g = 10\\ \\text{N/kg}$). Quelle est son énergie cinétique en arrivant au sol ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$, donc $E_m = 100\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$, donc l'énergie cinétique est égale à l'énergie mécanique. Étape 4 — Résoudre : rien à résoudre, $E_c = E_m$. Étape 5 — Conclure : $E_c = 100\\ \\text{J}$.",
-                "answers": [
-                  {
-                    "content": "100",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mangue de $0{,}2\\ \\text{kg}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol (sol = référence, frottements négligeables, $g = 10\\ \\text{N/kg}$). Quelle est son énergie cinétique quand elle passe à $3\\ \\text{m}$ du sol ?",
-                "question_type": "numeric",
-                "unit": "J",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : à $3\\ \\text{m}$, $E_m = E_c + E_p = 10\\ \\text{J}$ avec $E_p = 0{,}2 \\times 10 \\times 3 = 6\\ \\text{J}$. Étape 4 — Résoudre : $E_c = 10 - 6 = 4\\ \\text{J}$. Étape 5 — Conclure : $E_c = 4\\ \\text{J}$, valeur que tu lis sur la figure pour la hauteur de $3\\ \\text{m}$.",
-                "answers": [
-                  {
-                    "content": "4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pendant la chute d'une mangue sans frottements, son énergie cinétique reste constante et son énergie potentielle aussi.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Vérifier : sans frottements, c'est la somme $E_m = E_c + E_p$ qui reste constante. Étape 2 — Calculer : pour la mangue de $0{,}2\\ \\text{kg}$ lâchée de $5\\ \\text{m}$, $E_m = 10\\ \\text{J}$ au départ. Étape 3 — Écrire : au sol, $E_p = 0$ et $E_c = 10\\ \\text{J}$. L'énergie potentielle a baissé de $10\\ \\text{J}$ et l'énergie cinétique a monté de $10\\ \\text{J}$ : chacune varie, c'est leur somme qui se conserve.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un colis de $10\\ \\text{kg}$ descend à vitesse constante, accroché à un parachute. Son énergie cinétique ne change pas, son énergie potentielle diminue. Que devient son énergie mécanique ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : ici les frottements de l'air sont importants, donc on ne peut pas dire que $E_m$ se conserve. Étape 2 — Calculer : $E_m = E_c + E_p$ avec $E_c$ constante et $E_p$ qui diminue, donc $E_m$ diminue. Étape 3 — Écrire : l'énergie perdue est transformée en chaleur par les frottements. La proposition « elle reste constante » oublie la condition de la conservation ; « elle augmente » est faux car la vitesse du colis est constante.",
-                "answers": [
-                  {
-                    "content": "Elle diminue, car les frottements de l'air transforment une partie de l'énergie en chaleur.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Elle reste constante, car l'énergie mécanique se conserve toujours.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Elle augmente, car le colis va de plus en plus vite.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Elle reste constante, car l'énergie cinétique ne change pas.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque situation sans frottements à l'énergie ou à la transformation qui lui correspond.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Vérifier : sans frottements, $E_m$ se conserve et la perte de l'une des deux énergies est le gain de l'autre. Étapes 2 et 3 — Calculer et écrire : en descendant, $E_p$ se transforme en $E_c$ ; en montant, c'est l'inverse. Immobile, $v = 0$ donc $E_c = 0$ et $E_m = E_p$ ; au sol, $h = 0$ donc $E_p = 0$ et $E_m = E_c$.",
-                "answers": [
-                  {
-                    "content": "Une mangue qui tombe de sa branche",
-                    "match": "$E_p$ diminue, $E_c$ augmente"
-                  },
-                  {
-                    "content": "Une pierre lancée vers le haut qui monte",
-                    "match": "$E_c$ diminue, $E_p$ augmente"
-                  },
-                  {
-                    "content": "Une mangue immobile sur sa branche",
-                    "match": "$E_m = E_p$"
-                  },
-                  {
-                    "content": "Une mangue qui touche le sol",
-                    "match": "$E_m = E_c$"
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Utiliser la conservation de l'énergie mécanique",
+              "statement": "Dans cet exercice, tu utilises la conservation de l'énergie mécanique avec la méthode de la fiche : vérifier les frottements, calculer $E_m$ au départ, l'écrire à l'arrivée, résoudre, conclure. La figure montre la chute d'une mangue de $0{,}2\\ \\text{kg}$ lâchée de $5\\ \\text{m}$ ; $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "fixation",
+              "figure": "chute-mangue",
+              "questions": [
+                {
+                  "content": "Dans quel cas peut-on dire que l'énergie mécanique d'un corps qui tombe se conserve ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : l'énergie mécanique ne se conserve que si les frottements (de l'air, du sol) sont négligeables. La masse ne change pas cette condition. Partir sans vitesse ne suffit pas non plus : avec de gros frottements, une partie de l'énergie devient de la chaleur et $E_m$ diminue. Dire « dans tous les cas » est l'erreur que la fiche demande d'éviter.",
+                  "answers": [
+                    {
+                      "content": "Quand les frottements sont négligeables.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quand le corps est très léger.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand le corps est immobile au départ, même avec de gros frottements.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans tous les cas, sans condition.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pierre de $1\\ \\text{kg}$ est lâchée sans vitesse du haut d'une falaise de $20\\ \\text{m}$. Les frottements sont négligeables ($g = 10\\ \\text{N/kg}$). Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 1 \\times 10 \\times 20 = 200\\ \\text{J}$, donc $E_m = 200\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$, donc $E_c = 200\\ \\text{J}$, soit $\\frac{1}{2} \\times 1 \\times v^2 = 200$. Étape 4 — Résoudre : $0{,}5 \\times v^2 = 200$, donc $v^2 = 400$. Étape 5 — Conclure : $v = \\sqrt{400} = 20\\ \\text{m/s}$.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bloc de $2\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $5\\ \\text{m}$. Les frottements sont négligeables ($g = 10\\ \\text{N/kg}$). Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$, donc $E_m = 100\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$, donc l'énergie cinétique est égale à l'énergie mécanique. Étape 4 — Résoudre : rien à résoudre, $E_c = E_m$. Étape 5 — Conclure : $E_c = 100\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $0{,}2\\ \\text{kg}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol (sol = référence, frottements négligeables, $g = 10\\ \\text{N/kg}$). Quelle est son énergie cinétique quand elle passe à $3\\ \\text{m}$ du sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer : au départ $E_c = 0$ et $E_p = 0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : à $3\\ \\text{m}$, $E_m = E_c + E_p = 10\\ \\text{J}$ avec $E_p = 0{,}2 \\times 10 \\times 3 = 6\\ \\text{J}$. Étape 4 — Résoudre : $E_c = 10 - 6 = 4\\ \\text{J}$. Étape 5 — Conclure : $E_c = 4\\ \\text{J}$, valeur que tu lis sur la figure pour la hauteur de $3\\ \\text{m}$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pendant la chute d'une mangue sans frottements, son énergie cinétique reste constante et son énergie potentielle aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, c'est la somme $E_m = E_c + E_p$ qui reste constante. Étape 2 — Calculer : pour la mangue de $0{,}2\\ \\text{kg}$ lâchée de $5\\ \\text{m}$, $E_m = 10\\ \\text{J}$ au départ. Étape 3 — Écrire : au sol, $E_p = 0$ et $E_c = 10\\ \\text{J}$. L'énergie potentielle a baissé de $10\\ \\text{J}$ et l'énergie cinétique a monté de $10\\ \\text{J}$ : chacune varie, c'est leur somme qui se conserve.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis de $10\\ \\text{kg}$ descend à vitesse constante, accroché à un parachute. Son énergie cinétique ne change pas, son énergie potentielle diminue. Que devient son énergie mécanique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : ici les frottements de l'air sont importants, donc on ne peut pas dire que $E_m$ se conserve. Étape 2 — Calculer : $E_m = E_c + E_p$ avec $E_c$ constante et $E_p$ qui diminue, donc $E_m$ diminue. Étape 3 — Écrire : l'énergie perdue est transformée en chaleur par les frottements. La proposition « elle reste constante » oublie la condition de la conservation ; « elle augmente » est faux car la vitesse du colis est constante.",
+                  "answers": [
+                    {
+                      "content": "Elle diminue, car les frottements de l'air transforment une partie de l'énergie en chaleur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste constante, car l'énergie mécanique se conserve toujours.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle augmente, car le colis va de plus en plus vite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reste constante, car l'énergie cinétique ne change pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation sans frottements à l'énergie ou à la transformation qui lui correspond.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, $E_m$ se conserve et la perte de l'une des deux énergies est le gain de l'autre. Étapes 2 et 3 — Calculer et écrire : en descendant, $E_p$ se transforme en $E_c$ ; en montant, c'est l'inverse. Immobile, $v = 0$ donc $E_c = 0$ et $E_m = E_p$ ; au sol, $h = 0$ donc $E_p = 0$ et $E_m = E_c$.",
+                  "answers": [
+                    {
+                      "content": "Une mangue qui tombe de sa branche",
+                      "match": "$E_p$ diminue, $E_c$ augmente"
+                    },
+                    {
+                      "content": "Une pierre lancée vers le haut qui monte",
+                      "match": "$E_c$ diminue, $E_p$ augmente"
+                    },
+                    {
+                      "content": "Une mangue immobile sur sa branche",
+                      "match": "$E_m = E_p$"
+                    },
+                    {
+                      "content": "Une mangue qui touche le sol",
+                      "match": "$E_m = E_c$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Utiliser la conservation de l'énergie mécanique",
+              "statement": "Dans cet exercice, tu utilises la conservation de l'énergie mécanique avec la méthode de la fiche : vérifier les frottements, calculer au départ, écrire à l'arrivée, résoudre, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule d'abord l'énergie mécanique au départ, puis écris qu'elle a la même valeur à l'arrivée, en notant ce qui y est nul.",
+              "questions": [
+                {
+                  "content": "Une pomme de $0{,}1\\ \\text{kg}$ est lâchée sans vitesse d'une hauteur de $20\\ \\text{m}$. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 0{,}1 \\times 10 \\times 20 = 20\\ \\text{J}$, donc $E_m = 20\\ \\text{J}$. Étape 3 — Écrire : au sol, $E_p = 0$ donc $E_m = E_c$. Étape 4 — Résoudre : $E_c = 20\\ \\text{J}$. Étape 5 — Conclure : l'énergie cinétique au sol est de $20\\ \\text{J}$. Répondre $0$ confond avec l'énergie potentielle, qui est nulle au sol.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pot de $3\\ \\text{kg}$ est lâché sans vitesse d'un balcon situé à $45\\ \\text{m}$ du sol. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 3 \\times 10 \\times 45 = 1\\,350\\ \\text{J}$, donc $E_m = 1\\,350\\ \\text{J}$. Étape 3 — Écrire : au sol, $E_p = 0$ donc $E_c = 1\\,350\\ \\text{J}$. Étape 4 — Résoudre : $\\frac{1}{2} \\times 3 \\times v^2 = 1\\,350$, donc $v^2 = 1\\,350 \\div 1{,}5 = 900$ et $v = 30\\ \\text{m/s}$. Étape 5 — Conclure : le pot arrive à $30\\ \\text{m/s}$. Répondre $900$ oublie de prendre la racine carrée de $v^2$.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $0{,}5\\ \\text{kg}$ est lancé du sol vers le haut à $20\\ \\text{m/s}$. Les frottements sont négligeables. On prend $g = 10\\ \\text{N/kg}$. Quelle hauteur maximale atteint-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : au sol $E_p = 0$ et $E_c = 0{,}5 \\times 0{,}5 \\times 20^2 = 100\\ \\text{J}$, donc $E_m = 100\\ \\text{J}$. Étape 3 — Écrire : au sommet le ballon s'arrête, $E_c = 0$ et $E_m = E_p = 0{,}5 \\times 10 \\times h = 5h$. Étape 4 — Résoudre : $5h = 100$, donc $h = 20\\ \\text{m}$. Étape 5 — Conclure : la hauteur maximale est de $20\\ \\text{m}$. La réponse $40\\ \\text{m}$ oublie le facteur $\\frac{1}{2}$ dans $E_c$ ; la réponse $2\\ \\text{m}$ divise la vitesse par $g$, une formule qui n'existe pas ici ; la réponse $100\\ \\text{m}$ confond l'énergie $100\\ \\text{J}$ avec une hauteur.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$40\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : une pierre de $2\\ \\text{kg}$, lâchée sans vitesse de $10\\ \\text{m}$ sans frottements, a une énergie mécanique de $200\\ \\text{J}$ au départ et de $200\\ \\text{J}$ quand elle passe à $5\\ \\text{m}$ du sol. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, l'énergie mécanique se conserve. Étape 2 — Calculer au départ : $E_c = 0$ et $E_p = 2 \\times 10 \\times 10 = 200\\ \\text{J}$, donc $E_m = 200\\ \\text{J}$. Étape 3 — Écrire : à $5\\ \\text{m}$, $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$. Étape 4 — Résoudre : $E_c = 200 - 100 = 100\\ \\text{J}$, donc $E_m = 100 + 100 = 200\\ \\text{J}$. Étape 5 — Conclure : l'affirmation est vraie. Croire que $E_m$ vaut $100\\ \\text{J}$ à mi-hauteur oublie l'énergie cinétique gagnée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parachutiste de $80\\ \\text{kg}$ descend à vitesse constante, son parachute ouvert. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : le parachute crée de forts frottements de l'air, donc la conservation ne s'applique pas. Étape 2 — Comparer : la vitesse est constante, donc $E_c$ ne change pas ; le parachutiste descend, donc $E_p$ diminue. Étape 3 — Conclure : $E_m = E_c + E_p$ diminue, une partie de l'énergie étant transformée en chaleur. Dire que l'énergie mécanique se conserve ignore les frottements ; dire qu'elle augmente est contredit par la baisse de $E_p$ à $E_c$ constante ; dire que $E_p$ reste la même oublie que la hauteur diminue.",
+                  "answers": [
+                    {
+                      "content": "Son énergie cinétique reste la même.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie potentielle de pesanteur diminue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie mécanique se conserve.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie mécanique augmente.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie potentielle de pesanteur reste la même.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand les frottements sont négligeables, l'énergie ___ d'un corps en mouvement se conserve.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : lorsque les frottements sont négligeables, c'est la somme $E_c + E_p$, c'est-à-dire l'énergie mécanique, qui garde la même valeur. Ni l'énergie cinétique seule, ni l'énergie potentielle seule ne se conservent : l'une augmente quand l'autre diminue.",
+                  "answers": [
+                    {
+                      "content": "mécanique",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Les frottements sont négligeables. Tu utilises la conservation de l'énergie mécanique ($g = 10\\ \\text{N/kg}$, sol = référence).",
             "questions": [
@@ -1346,6 +1780,1468 @@
               "explanation": "Corrigé modèle : « Au sommet, la pierre a une énergie potentielle de $100\\ \\text{J}$ et aucune énergie cinétique. Pendant la chute, son énergie potentielle diminue et se transforme en énergie cinétique, car elle va de plus en plus vite. Mais les frottements de l'air transforment une partie de l'énergie mécanique en chaleur : au pied de la cascade, l'énergie cinétique n'est que de $90{,}25\\ \\text{J}$ au lieu de $100\\ \\text{J}$, soit $9{,}75\\ \\text{J}$ perdus. » Barème : 0,5 point par critère.",
               "answers": [],
               "starter": "Au sommet, la pierre possède…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "formule de l'énergie cinétique et conversion km/h en m/s ; énergie potentielle de pesanteur et niveau de référence ; énergie mécanique $E_m = E_c + E_p$ ; conservation de l'énergie mécanique sans frottements.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au stade, on étudie l'énergie cinétique de coureurs et de véhicules. On utilise la formule de l'énergie cinétique, avec la masse en kg et la vitesse en m/s.",
+              "exercise_type": "evaluation",
+              "hint": "Convertis d'abord la vitesse en m/s, puis calcule le carré de la vitesse avant de multiplier.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces relations, laquelle donne l'énergie cinétique d'un corps de masse $m$ qui se déplace à la vitesse $v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : l'énergie cinétique d'un corps de masse $m$ et de vitesse $v$ vaut $E_c = \\frac{1}{2} \\times m \\times v^2$. La relation $m \\times g \\times h$ est celle de l'énergie potentielle de pesanteur ; celle sans carré oublie que la vitesse est au carré ; celle sans $\\frac{1}{2}$ double le résultat.",
+                  "answers": [
+                    {
+                      "content": "$E_c = \\frac{1}{2} \\times m \\times v^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E_c = m \\times g \\times h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_c = \\frac{1}{2} \\times m \\times v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E_c = m \\times v^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coureur de $60\\ \\text{kg}$ court à la vitesse de $5\\ \\text{m/s}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 60\\ \\text{kg}$ et $v = 5\\ \\text{m/s}$. Étape 2 — Convertir : rien à convertir, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 60 \\times 5^2$, avec $5^2 = 25$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 60 \\times 25 = 750\\ \\text{J}$. Sans le carré, on trouverait $150\\ \\text{J}$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "750",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un car roule à $54\\ \\text{km/h}$. Exprime sa vitesse en m/s.",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $v = 54\\ \\text{km/h}$. Étape 2 — Convertir : de km/h en m/s, on divise par $3{,}6$, donc $v = 54 \\div 3{,}6 = 15\\ \\text{m/s}$. Multiplier par $3{,}6$ donnerait $194{,}4$, une vitesse absurde.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de $800\\ \\text{kg}$ roule à $36\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 800\\ \\text{kg}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 800 \\times 10^2$, avec $10^2 = 100$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 800 \\times 100 = 40\\,000\\ \\text{J}$. Garder $36$ au lieu de $10$ donnerait $518\\,400\\ \\text{J}$, plus de 12 fois trop.",
+                  "answers": [
+                    {
+                      "content": "40000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : si la vitesse d'un corps est multipliée par 3, son énergie cinétique est multipliée par 9.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $E_c = \\frac{1}{2} \\times m \\times v^2$ dépend du carré de la vitesse. Avec $3v$, on obtient $\\frac{1}{2} \\times m \\times (3v)^2 = 9 \\times \\frac{1}{2} \\times m \\times v^2$ : l'énergie est multipliée par $9$. Croire qu'elle est multipliée par $3$ oublie le carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans la cour d'une école, on calcule l'énergie potentielle de pesanteur d'objets. Le sol est la référence, sauf indication contraire, et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Convertis la masse en kg, vérifie que la hauteur est en mètres, puis remplace dans la formule.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans la cour d'une école, un seau de $4\\ \\text{kg}$ est posé sur un mur à $2{,}5\\ \\text{m}$ du sol (référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 2{,}5\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 4\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 4 \\times 10 \\times 2{,}5$. Étape 4 — Calculer : $E_p = 100\\ \\text{J}$. Oublier $g$ donnerait $10\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de $500\\ \\text{g}$ est accroché à $8\\ \\text{m}$ du sol (référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 8\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 0{,}5\\ \\text{kg}$ ; $500\\ \\text{g} = 0{,}5\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 0{,}5 \\times 10 \\times 8$. Étape 4 — Calculer : $E_p = 40\\ \\text{J}$. Garder $500$ donnerait $40\\,000\\ \\text{J}$, mille fois trop.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de $6\\ \\text{kg}$ a une énergie potentielle de pesanteur de $180\\ \\text{J}$ par rapport au sol. On prend $g = 10\\ \\text{N/kg}$. À quelle hauteur du sol se trouve-t-il ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol. Étape 2 — Relever : $m = 6\\ \\text{kg}$ et $E_p = 180\\ \\text{J}$. Étape 3 — Remplacer : $180 = 6 \\times 10 \\times h = 60 \\times h$. Étape 4 — Calculer : $h = 180 \\div 60 = 3\\ \\text{m}$. Diviser $180$ par $6$ seul, en oubliant $g$, donnerait $30\\ \\text{m}$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la relation $E_p = m \\times g \\times h$, que représente $h$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : le niveau de référence est celui où $E_p = 0$, et on mesure $h$ à partir de lui, en mètres. La masse est $m$, en kilogrammes ; la vitesse et le temps n'interviennent pas dans l'énergie potentielle de pesanteur.",
+                  "answers": [
+                    {
+                      "content": "La hauteur du corps mesurée à partir du niveau de référence, en mètres.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse du corps, en kilogrammes.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse du corps, en mètres par seconde.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le temps de chute du corps, en secondes.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : au niveau de référence, l'énergie potentielle de pesanteur d'un corps est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : le niveau de référence est celui où $E_p = 0$ ; là, $h = 0$ et $E_p = m \\times g \\times 0 = 0$. L'affirmation est vraie ; croire que $E_p$ ne peut pas être nulle oublie que la référence se choisit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On calcule l'énergie mécanique de corps en mouvement ou immobiles, avec la méthode : relever, calculer $E_c$, calculer $E_p$, additionner. Le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Calcule $E_c$ et $E_p$ séparément, puis additionne-les. Si le corps est immobile ou au sol, l'un des deux termes est nul.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un corps de $2\\ \\text{kg}$ passe à $3\\ \\text{m}$ du sol avec une vitesse de $4\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$, $v = 4\\ \\text{m/s}$ et $h = 3\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 2 \\times 4^2 = 16\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 2 \\times 10 \\times 3 = 60\\ \\text{J}$. Étape 4 — Additionner : $E_m = 16 + 60 = 76\\ \\text{J}$. Oublier $E_p$ donnerait $16\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "76",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fruit de $3\\ \\text{kg}$ est accroché, immobile, à $5\\ \\text{m}$ du sol (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 3\\ \\text{kg}$, $v = 0\\ \\text{m/s}$ et $h = 5\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 3 \\times 0^2 = 0\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 3 \\times 10 \\times 5 = 150\\ \\text{J}$. Étape 4 — Additionner : $E_m = 0 + 150 = 150\\ \\text{J}$. Le fruit est immobile : $E_c = 0$, mais $E_m = E_p$ n'est pas nulle.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de $0{,}5\\ \\text{kg}$ roule sur le sol (la référence) à $6\\ \\text{m/s}$. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}5\\ \\text{kg}$, $v = 6\\ \\text{m/s}$ et $h = 0\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 0{,}5 \\times 6^2 = 9\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 0{,}5 \\times 10 \\times 0 = 0\\ \\text{J}$. Étape 4 — Additionner : $E_m = 9 + 0 = 9\\ \\text{J}$. Au niveau de la référence, $E_p = 0$ et $E_m = E_c$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de $1\\ \\text{kg}$ passe à $2\\ \\text{m}$ du sol avec une vitesse de $2\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : $m = 1\\ \\text{kg}$, $v = 2\\ \\text{m/s}$ et $h = 2\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 1 \\times 2^2 = 2\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 1 \\times 10 \\times 2 = 20\\ \\text{J}$. Étape 4 — Additionner : $E_m = 2 + 20 = 22\\ \\text{J}$. La réponse $40\\ \\text{J}$ multiplie $2$ par $20$ au lieu de les additionner ; la réponse $18\\ \\text{J}$ soustrait $2$ de $20$ ; la réponse $24\\ \\text{J}$ oublie le facteur $\\frac{1}{2}$ dans $E_c$.",
+                  "answers": [
+                    {
+                      "content": "$22\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$40\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps placé au niveau de la référence a une énergie potentielle de pesanteur égale à ___ joule (écris un nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : un corps placé au niveau de la référence ($h = 0$) a $E_p = m \\times g \\times 0 = 0$. Il n'a alors que de l'énergie cinétique : $E_m = E_c$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    },
+                    {
+                      "content": "zéro",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On utilise la conservation de l'énergie mécanique pour des objets lâchés ou lancés. Quand rien n'est dit, les frottements sont négligeables et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Écris que l'énergie mécanique au départ est égale à celle à l'arrivée, en notant ce qui est nul à chaque endroit.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une pierre de $2\\ \\text{kg}$ est lâchée sans vitesse d'une hauteur de $5\\ \\text{m}$. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 2 \\times 10 \\times 5 = 100\\ \\text{J}$, donc $E_m = 100\\ \\text{J}$. Étape 3 — Écrire : au sol, $E_p = 0$ donc $E_c = E_m$. Étape 4 — Résoudre : $E_c = 100\\ \\text{J}$. Étape 5 — Conclure : $100\\ \\text{J}$. Répondre $0$ confond avec $E_p$, nulle au sol.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille de $0{,}3\\ \\text{kg}$ est lâchée sans vitesse d'une hauteur de $20\\ \\text{m}$. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 0{,}3 \\times 10 \\times 20 = 60\\ \\text{J}$, donc $E_m = 60\\ \\text{J}$. Étape 3 — Écrire : au sol, $E_c = E_m = 60\\ \\text{J}$. Étape 4 — Résoudre : $\\frac{1}{2} \\times 0{,}3 \\times v^2 = 60$, donc $v^2 = 60 \\div 0{,}15 = 400$ et $v = 20\\ \\text{m/s}$. Étape 5 — Conclure : $20\\ \\text{m/s}$. Répondre $400$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle condition l'énergie mécanique d'un corps en mouvement se conserve-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : quand les frottements (de l'air, du sol) sont négligeables, l'énergie mécanique d'un corps se conserve. Ni la masse, ni la hauteur, ni la valeur de la vitesse ne remplacent cette condition.",
+                  "answers": [
+                    {
+                      "content": "Les frottements sont négligeables.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le corps est très lourd.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le corps est à plus de $10\\ \\text{m}$ du sol.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le corps a une vitesse inférieure à $1\\ \\text{m/s}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pendant la chute d'une mangue sans frottements, ce que l'énergie potentielle perd, l'énergie cinétique le gagne.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : en descendant, $E_p$ diminue et $E_c$ augmente de la même quantité ; la somme $E_m = E_c + E_p$ reste constante. L'affirmation est vraie. Dire que $E_c$ et $E_p$ se conservent chacune oublie que seule leur somme est constante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une balle de $0{,}2\\ \\text{kg}$ est lancée du sol vers le haut à $10\\ \\text{m/s}$. Les frottements sont négligeables. On prend $g = 10\\ \\text{N/kg}$. Quelle hauteur maximale atteint-elle ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer au départ : au sol $E_p = 0$ et $E_c = 0{,}5 \\times 0{,}2 \\times 10^2 = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : au sommet $E_c = 0$ et $E_p = 0{,}2 \\times 10 \\times h = 2h$. Étape 4 — Résoudre : $2h = 10$, donc $h = 5\\ \\text{m}$. Étape 5 — Conclure : $5\\ \\text{m}$. Répondre $10$ confond l'énergie en joules avec la hauteur.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Énergie dans la vie courante",
+          "notions": "calculs d'énergie potentielle, cinétique et mécanique dans des situations ivoiriennes : marché, boulevard d'Abidjan, mangues de Bouaké, cour d'école ; conversions km/h en m/s ; référence au choix.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Treichville, à Abidjan, des porteurs et des commerçants soulèvent des sacs de riz et des cartons. Le sol est la référence, sauf indication contraire, et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Mesure toujours la hauteur à partir de la référence indiquée, et vérifie que la masse est en kg.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Au marché de Treichville, un sac de riz de $50\\ \\text{kg}$ est posé sur un étal à $0{,}8\\ \\text{m}$ du sol (référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 0{,}8\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 50\\ \\text{kg}$ ; $50\\ \\text{kg}$ est déjà en kg. Étape 3 — Remplacer : $E_p = 50 \\times 10 \\times 0{,}8$. Étape 4 — Calculer : $E_p = 400\\ \\text{J}$. Oublier $g$ donnerait $40\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, un sac de riz de $50\\ \\text{kg}$ posé sur un étal à $0{,}8\\ \\text{m}$ du sol est hissé sur la plate-forme d'un camion à $1{,}6\\ \\text{m}$ du sol (référence : le sol). On prend $g = 10\\ \\text{N/kg}$. De combien de joules son énergie potentielle de pesanteur augmente-t-elle ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol. Étape 2 — Relever : $m = 50\\ \\text{kg}$, $h = 0{,}8\\ \\text{m}$ puis $h = 1{,}6\\ \\text{m}$. Étape 3 — Remplacer : $E_p = 50 \\times 10 \\times 0{,}8 = 400\\ \\text{J}$ puis $E_p = 50 \\times 10 \\times 1{,}6 = 800\\ \\text{J}$. Étape 4 — Calculer : l'augmentation est $800 - 400 = 400\\ \\text{J}$. Répondre $800\\ \\text{J}$ donne l'énergie finale, pas l'augmentation.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant place un sac de $10\\ \\text{kg}$ sur le toit d'un kiosque, à $2\\ \\text{m}$ du sol. Il prend pour référence le comptoir, situé à $1\\ \\text{m}$ du sol. On prend $g = 10\\ \\text{N/kg}$. Quelle est l'énergie potentielle de pesanteur du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : la référence est le comptoir, donc $h = 2 - 1 = 1\\ \\text{m}$. Étape 2 — Relever : $m = 10\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 10 \\times 10 \\times 1$. Étape 4 — Calculer : $E_p = 100\\ \\text{J}$. La réponse $200\\ \\text{J}$ mesure $h$ depuis le sol ; la réponse $300\\ \\text{J}$ additionne $2$ et $1$ au lieu de les soustraire ; la réponse $10\\ \\text{J}$ oublie $g$.",
+                  "answers": [
+                    {
+                      "content": "$100\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : un sac de riz de $25\\ \\text{kg}$ posé et immobile sur le sol (la référence) a une énergie mécanique nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : $m = 25\\ \\text{kg}$, $v = 0$ et $h = 0$. Étape 2 — Calculer $E_c$ : $E_c = 0$, car le sac est immobile. Étape 3 — Calculer $E_p$ : $E_p = 25 \\times 10 \\times 0 = 0$, car il est à la référence. Étape 4 — Additionner : $E_m = 0\\ \\text{J}$. L'affirmation est vraie ; la croire fausse revient à penser que la masse seule donne de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bus roule à $54\\ \\text{km/h}$, soit ___ m/s.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever : $v = 54\\ \\text{km/h}$. Étape 2 — Convertir : on divise par $3{,}6$, donc $54 \\div 3{,}6 = 15\\ \\text{m/s}$. Multiplier par $3{,}6$ donnerait $194{,}4$, une vitesse impossible pour un bus.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur un boulevard d'Abidjan, des élèves comparent l'énergie cinétique de véhicules qui roulent. Les vitesses sont données en km/h : il faut les convertir en m/s.",
+              "exercise_type": "evaluation",
+              "hint": "Convertis la vitesse en m/s en divisant par 3,6, puis mets-la au carré avant de multiplier par la masse et par un demi.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Sur un boulevard d'Abidjan, un taxi de $1\\,200\\ \\text{kg}$ roule à $54\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,200\\ \\text{kg}$ et $v = 15\\ \\text{m/s}$. Étape 2 — Convertir : $54 \\div 3{,}6 = 15\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 1\\,200 \\times 15^2$, avec $15^2 = 225$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 1\\,200 \\times 225 = 135\\,000\\ \\text{J}$. Garder $54$ au lieu de $15$ donnerait $1\\,749\\,600\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "135000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un woro-woro de $1\\,000\\ \\text{kg}$ roule à $36\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 1\\,000\\ \\text{kg}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 1\\,000 \\times 10^2$, avec $10^2 = 100$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 1\\,000 \\times 100 = 50\\,000\\ \\text{J}$. Oublier le carré donnerait $5\\,000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "50000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture passe de $45\\ \\text{km/h}$ à $90\\ \\text{km/h}$. Que devient son énergie cinétique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times m \\times v^2$ dépend du carré de la vitesse. La vitesse double ($45 \\to 90$), donc $v^2$ est multiplié par $2^2 = 4$ et l'énergie aussi. La réponse « par 2 » croit l'énergie proportionnelle à la vitesse ; « par 8 » additionne une puissance de trop ; « par 3 » n'a aucun rapport avec le doublement.",
+                  "answers": [
+                    {
+                      "content": "Elle est multipliée par 4.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est multipliée par 2.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par 8.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par 3.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une moto de $150\\ \\text{kg}$ roule à $72\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 150\\ \\text{kg}$ et $v = 20\\ \\text{m/s}$. Étape 2 — Convertir : $72 \\div 3{,}6 = 20\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 150 \\times 20^2$, avec $20^2 = 400$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 150 \\times 400 = 30\\,000\\ \\text{J}$. Garder $72$ donnerait $388\\,800\\ \\text{J}$ ; oublier le facteur $\\frac{1}{2}$ donnerait $60\\,000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "30000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bus de $2\\,000\\ \\text{kg}$ roule à $36\\ \\text{km/h}$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever : $m = 2\\,000\\ \\text{kg}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 2\\,000 \\times 10^2$, avec $10^2 = 100$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 2\\,000 \\times 100 = 100\\,000\\ \\text{J}$. La vitesse $129{,}6$ vient d'une multiplication $36 \\times 3{,}6$ au lieu d'une division ; $10\\,000\\ \\text{J}$ oublie le carré ; $1\\,296\\,000\\ \\text{J}$ garde $36$ au lieu de $10$.",
+                  "answers": [
+                    {
+                      "content": "Sa vitesse vaut $10\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son énergie cinétique vaut $100\\,000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa vitesse vaut $129{,}6\\ \\text{m/s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie cinétique vaut $10\\,000\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son énergie cinétique vaut $1\\,296\\,000\\ \\text{J}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Bouaké, des élèves étudient la chute de mangues. Quand les frottements sont négligeables, l'énergie mécanique se conserve. Le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Écris l'énergie mécanique au départ, puis dis qu'elle a la même valeur plus bas, avec $E_c = 0$ au départ et $E_p = 0$ au sol.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À Bouaké, une mangue de $0{,}25\\ \\text{kg}$ pend à une branche à $4\\ \\text{m}$ du sol (référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 4\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 0{,}25\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 0{,}25 \\times 10 \\times 4$. Étape 4 — Calculer : $E_p = 10\\ \\text{J}$. Oublier $g$ donnerait $1\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À Bouaké, une mangue de $0{,}25\\ \\text{kg}$ se détache sans vitesse d'une branche à $4\\ \\text{m}$ du sol. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 0{,}25 \\times 10 \\times 4 = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : au sol, $E_p = 0$ donc $E_c = E_m$. Étape 4 — Résoudre : $E_c = 10\\ \\text{J}$. Étape 5 — Conclure : $10\\ \\text{J}$. Répondre $0$ confond avec $E_p$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $0{,}2\\ \\text{kg}$ tombe sans vitesse initiale d'une branche à $1{,}8\\ \\text{m}$ du sol. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : $E_c = 0$ et $E_p = 0{,}2 \\times 10 \\times 1{,}8 = 3{,}6\\ \\text{J}$, donc $E_m = 3{,}6\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$ donc $E_c = 3{,}6\\ \\text{J}$. Étape 4 — Résoudre : $0{,}5 \\times 0{,}2 \\times v^2 = 3{,}6$, donc $v^2 = 36$ et $v = 6\\ \\text{m/s}$. Étape 5 — Conclure : $6\\ \\text{m/s}$. Répondre $36$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $0{,}25\\ \\text{kg}$ tombe sans vitesse initiale d'une branche à $4\\ \\text{m}$ du sol. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique quand elle passe à $1\\ \\text{m}$ du sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : $E_c = 0$ et $E_p = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : à $1\\ \\text{m}$, $E_p = 0{,}25 \\times 10 \\times 1 = 2{,}5\\ \\text{J}$ et $E_m$ garde la même valeur. Étape 4 — Résoudre : $E_c = 10 - 2{,}5 = 7{,}5\\ \\text{J}$. Étape 5 — Conclure : $7{,}5\\ \\text{J}$. Répondre $2{,}5\\ \\text{J}$ donne $E_p$ et non $E_c$.",
+                  "answers": [
+                    {
+                      "content": "7,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : une mangue de $0{,}2\\ \\text{kg}$ lâchée sans vitesse d'une branche à $1{,}8\\ \\text{m}$ du sol arrive au sol à $5\\ \\text{m/s}$. On peut en déduire que des frottements ont transformé une partie de son énergie mécanique. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, la mangue arriverait à $6\\ \\text{m/s}$ ($E_c = 3{,}6\\ \\text{J}$). Étape 2 — Calculer : à $5\\ \\text{m/s}$, $E_c = 0{,}5 \\times 0{,}2 \\times 5^2 = 2{,}5\\ \\text{J}$. Étape 3 — Écrire : $2{,}5\\ \\text{J}$ est inférieur à $3{,}6\\ \\text{J}$. Étape 4 — Résoudre : $3{,}6 - 2{,}5 = 1{,}1\\ \\text{J}$ ont disparu. Étape 5 — Conclure : l'affirmation est vraie, car $E_m$ a diminué ; une partie est devenue de la chaleur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans la cour de l'école du quartier, des élèves montent des seaux et lancent un ballon vers le haut. Le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Pour le ballon, écris que l'énergie mécanique est la même au départ et au sommet, où la vitesse est nulle.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "À l'école du quartier, un élève monte un seau de $8\\ \\text{kg}$ sur le toit d'une case, à $3\\ \\text{m}$ du sol (référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est l'énergie potentielle de pesanteur du seau ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 3\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 8\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 8 \\times 10 \\times 3$. Étape 4 — Calculer : $E_p = 240\\ \\text{J}$. Oublier $g$ donnerait $24\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "240",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $0{,}4\\ \\text{kg}$ passe à $5\\ \\text{m}$ du sol avec une vitesse de $10\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 0{,}4\\ \\text{kg}$, $v = 10\\ \\text{m/s}$ et $h = 5\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 0{,}4 \\times 10^2 = 20\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 0{,}4 \\times 10 \\times 5 = 20\\ \\text{J}$. Étape 4 — Additionner : $E_m = 20 + 20 = 40\\ \\text{J}$. Oublier $E_p$ donnerait $20\\ \\text{J}$, la moitié du résultat.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $0{,}4\\ \\text{kg}$ est lancé du sol vers le haut à $10\\ \\text{m/s}$. Les frottements sont négligeables. On prend $g = 10\\ \\text{N/kg}$. Quelle hauteur maximale atteint-il ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : au sol $E_p = 0$ et $E_c = 0{,}5 \\times 0{,}4 \\times 10^2 = 20\\ \\text{J}$, donc $E_m = 20\\ \\text{J}$. Étape 3 — Écrire : au sommet $E_c = 0$ et $E_p = 0{,}4 \\times 10 \\times h = 4h$. Étape 4 — Résoudre : $4h = 20$, donc $h = 5\\ \\text{m}$. Étape 5 — Conclure : $5\\ \\text{m}$. Répondre $20$ confond l'énergie en joules avec la hauteur.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon de $0{,}4\\ \\text{kg}$ est lancé du sol vers le haut à $10\\ \\text{m/s}$, sans frottements. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique au sommet de sa trajectoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer au départ : $E_c = 0{,}5 \\times 0{,}4 \\times 10^2 = 20\\ \\text{J}$ et $E_p = 0$, donc $E_m = 20\\ \\text{J}$. Étape 3 — Écrire : au sommet $E_m$ a la même valeur. Étape 4 — Résoudre : $E_m = 20\\ \\text{J}$ (avec $E_c = 0$ et $E_p = 20\\ \\text{J}$). Étape 5 — Conclure : $20\\ \\text{J}$. La réponse $0$ croit que $E_c = 0$ rend $E_m$ nulle ; $40\\ \\text{J}$ additionne deux fois la même énergie ; $10\\ \\text{J}$ oublie le facteur dans $E_c$ puis divise par deux.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En montant, l'énergie cinétique du ballon se transforme en énergie ___ de pesanteur.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, $E_m$ se conserve. Étape 2 — Comparer : en montant, $E_p$ augmente et $E_c$ diminue de la même quantité ; c'est l'énergie cinétique qui se transforme en énergie potentielle de pesanteur. Dire « cinétique » ou « mécanique » ne répond pas : la somme reste constante, seule la répartition change.",
+                  "answers": [
+                    {
+                      "content": "potentielle",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "ordre des étapes d'une méthode ; justification de la conversion en m/s ; repérage d'une erreur ; choix du niveau de référence ; conditions de la conservation de l'énergie mécanique ; comparaison de deux chutes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On justifie un calcul d'énergie cinétique : on remet dans l'ordre les étapes de la méthode, on explique la conversion des unités et on repère l'erreur d'un camarade.",
+              "exercise_type": "evaluation",
+              "hint": "Pense aux unités : la formule donne des joules quand la masse est en kg et la vitesse en m/s.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour calculer une énergie cinétique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever la masse $m$ et la vitesse $v$. Étape 2 — Convertir en kg et en m/s (de km/h en m/s, on divise par $3{,}6$). Étape 3 — Remplacer dans $E_c = \\frac{1}{2} \\times m \\times v^2$, en calculant d'abord $v^2$. Étape 4 — Calculer et écrire le résultat en joules. On ne peut pas remplacer avant d'avoir relevé et converti les données.",
+                  "answers": [
+                    {
+                      "content": "Relever la masse et la vitesse du corps dans l'énoncé."
+                    },
+                    {
+                      "content": "Convertir la masse en kilogrammes et la vitesse en m/s."
+                    },
+                    {
+                      "content": "Remplacer dans la formule, en calculant d'abord le carré de la vitesse."
+                    },
+                    {
+                      "content": "Calculer et écrire le résultat en joules."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi doit-on convertir $36\\ \\text{km/h}$ en m/s avant de calculer une énergie cinétique en joules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $E_c$ s'exprime en joules quand $m$ est en kilogrammes et $v$ en mètres par seconde. Une vitesse en km/h peut être mise au carré, mais le résultat ne serait pas en joules ; l'énergie ne s'exprime pas en km/h ; la masse n'a rien à voir avec les km/h.",
+                  "answers": [
+                    {
+                      "content": "Parce que le résultat est en joules seulement si la masse est en kg et la vitesse en m/s.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'une vitesse en km/h ne peut pas être mise au carré.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'énergie cinétique s'exprime en kilomètres par heure.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la masse doit être convertie en km/h.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève de $40\\ \\text{kg}$ roule à vélo à $36\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 40\\ \\text{kg}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 40 \\times 10^2$, avec $10^2 = 100$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 40 \\times 100 = 2\\,000\\ \\text{J}$. Le calcul $25\\,920\\ \\text{J}$ garde $36$ au lieu de $10$.",
+                  "answers": [
+                    {
+                      "content": "2000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève calcule l'énergie cinétique d'un cycliste de $40\\ \\text{kg}$ roulant à $36\\ \\text{km/h}$ et écrit : $E_c = 0{,}5 \\times 40 \\times 36^2 = 25\\,920\\ \\text{J}$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Convertir : $36\\ \\text{km/h} = 10\\ \\text{m/s}$. L'élève a gardé $36$ dans le calcul, ce qui donne $25\\,920\\ \\text{J}$ au lieu de $0{,}5 \\times 40 \\times 10^2 = 2\\,000\\ \\text{J}$. Le facteur $\\frac{1}{2}$ et le carré sont bien présents ; la masse est déjà en kilogrammes, la convertir en grammes serait faux.",
+                  "answers": [
+                    {
+                      "content": "Il a gardé $36$ au lieu de convertir la vitesse en $10\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a oublié le facteur $\\frac{1}{2}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié de mettre la vitesse au carré.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié de convertir la masse en grammes.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : si la masse d'un coureur passe de $60\\ \\text{kg}$ à $120\\ \\text{kg}$ sans que sa vitesse de $5\\ \\text{m/s}$ change, son énergie cinétique double.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $E_c = \\frac{1}{2} \\times m \\times v^2$ est proportionnelle à la masse. À $5\\ \\text{m/s}$, $E_c = 0{,}5 \\times 60 \\times 25 = 750\\ \\text{J}$ puis $0{,}5 \\times 120 \\times 25 = 1\\,500\\ \\text{J}$ : elle double. Confondre avec la vitesse, dont l'effet est au carré, mènerait à répondre qu'elle est multipliée par 4.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On raisonne sur le choix du niveau de référence : un même pot, posé sur un toit, n'a pas la même énergie potentielle de pesanteur selon la référence que l'on choisit.",
+              "exercise_type": "evaluation",
+              "hint": "La hauteur $h$ se mesure entre le pot et la référence choisie, jamais forcément depuis le sol.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi l'énergie potentielle de pesanteur d'un même objet peut-elle avoir plusieurs valeurs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : la valeur de $E_p$ dépend de la référence choisie, car $h$ se mesure à partir d'elle. La masse et $g = 10\\ \\text{N/kg}$ restent les mêmes ; seul $h$ change quand on change de référence.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'elle dépend du niveau de référence choisi.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la masse de l'objet change quand on déplace la référence.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $g$ change avec la référence.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle ne se calcule qu'au niveau de la mer.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pot de $3\\ \\text{kg}$ est posé sur un toit à $4\\ \\text{m}$ du sol. Le sol est la référence. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le sol, et la hauteur $h = 4\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 3\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 3 \\times 10 \\times 4$. Étape 4 — Calculer : $E_p = 120\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pot de $3\\ \\text{kg}$ est posé sur un toit à $4\\ \\text{m}$ du sol. On prend pour référence le rebord d'une fenêtre situé à $1{,}5\\ \\text{m}$ du sol. On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir : la référence est le rebord de la fenêtre, et la hauteur $h = 4 - 1{,}5 = 2{,}5\\ \\text{m}$ se mesure depuis elle. Étape 2 — Relever : $m = 3\\ \\text{kg}$ ; rien à convertir, la masse est en kg et la hauteur en mètres. Étape 3 — Remplacer : $E_p = 3 \\times 10 \\times 2{,}5$. Étape 4 — Calculer : $E_p = 75\\ \\text{J}$. Garder $h = 4$ donnerait $120\\ \\text{J}$ (mesure depuis le sol) ; garder $h = 1{,}5$ donnerait $45\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : si l'on prend le toit lui-même pour référence, l'énergie potentielle de pesanteur du pot de $3\\ \\text{kg}$ posé sur ce toit est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : le niveau de référence est celui où $E_p = 0$. Le pot est sur le toit, donc $h = 0$ et $E_p = 3 \\times 10 \\times 0 = 0\\ \\text{J}$. Croire que $E_p$ reste égale à $120\\ \\text{J}$ revient à garder le sol comme référence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pot de $3\\ \\text{kg}$ est posé sur un toit à $4\\ \\text{m}$ du sol. Relie chaque référence à l'énergie potentielle de pesanteur du pot ($g = 10\\ \\text{N/kg}$).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Choisir : pour chaque référence, $h$ est la différence entre $4\\ \\text{m}$ et la hauteur de la référence. Étape 3 — Remplacer : sol, $h = 4$ et $E_p = 3 \\times 10 \\times 4 = 120\\ \\text{J}$ ; fenêtre, $h = 2{,}5$ et $E_p = 75\\ \\text{J}$ ; terrasse, $h = 1$ et $E_p = 30\\ \\text{J}$ ; toit, $h = 0$ et $E_p = 0\\ \\text{J}$. Plus la référence est haute, plus $E_p$ est petite.",
+                  "answers": [
+                    {
+                      "content": "Référence : le sol",
+                      "match": "$120\\ \\text{J}$"
+                    },
+                    {
+                      "content": "Référence : un rebord de fenêtre à $1{,}5\\ \\text{m}$ du sol",
+                      "match": "$75\\ \\text{J}$"
+                    },
+                    {
+                      "content": "Référence : une terrasse à $3\\ \\text{m}$ du sol",
+                      "match": "$30\\ \\text{J}$"
+                    },
+                    {
+                      "content": "Référence : le toit lui-même",
+                      "match": "$0\\ \\text{J}$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On enchaîne les étapes de la conservation de l'énergie mécanique et on choisit les bons arguments. Sauf mention contraire, le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Commence par vérifier la condition de conservation, puis écris que l'énergie mécanique est la même au départ et à l'arrivée.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour utiliser la conservation de l'énergie mécanique.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier que les frottements sont négligeables. Étape 2 — Calculer $E_m = E_c + E_p$ au départ. Étape 3 — Écrire que $E_m$ garde la même valeur à l'arrivée. Étape 4 — Résoudre l'équation. Étape 5 — Conclure avec l'unité. On ne peut appliquer la conservation qu'après avoir vérifié sa condition.",
+                  "answers": [
+                    {
+                      "content": "Vérifier que les frottements sont négligeables."
+                    },
+                    {
+                      "content": "Calculer l'énergie mécanique au point de départ."
+                    },
+                    {
+                      "content": "Écrire que l'énergie mécanique a la même valeur à l'arrivée."
+                    },
+                    {
+                      "content": "Résoudre l'équation pour trouver l'inconnue."
+                    },
+                    {
+                      "content": "Conclure en donnant la valeur avec son unité."
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans laquelle de ces situations ne peut-on pas appliquer la conservation de l'énergie mécanique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : la conservation ne s'applique que si les frottements sont négligeables. Le parachute crée de forts frottements de l'air : $E_c$ reste constante alors que $E_p$ diminue, donc $E_m$ diminue. Dans les trois autres situations, la condition est donnée, la conservation s'applique.",
+                  "answers": [
+                    {
+                      "content": "Un parachutiste qui descend à vitesse constante, parachute ouvert.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pierre lâchée de $2\\ \\text{m}$ de haut, frottements négligeables.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une balle lancée vers le haut, frottements négligeables.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mangue qui tombe de sa branche, frottements négligeables.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caillou de $2\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $20\\ \\text{m}$. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 2 \\times 10 \\times 20 = 400\\ \\text{J}$, donc $E_m = 400\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$ donc $E_c = 400\\ \\text{J}$. Étape 4 — Résoudre : $\\frac{1}{2} \\times 2 \\times v^2 = 400$, donc $v^2 = 400$ et $v = 20\\ \\text{m/s}$. Étape 5 — Conclure : $20\\ \\text{m/s}$. Répondre $400$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet est lâché sans vitesse et doit arriver au sol à $10\\ \\text{m/s}$. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. De quelle hauteur doit-il être lâché ?",
+                  "question_type": "numeric",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer à l'arrivée : $E_p = 0$ et $E_c = \\frac{1}{2} \\times m \\times 10^2 = 50\\,m$, donc $E_m = 50\\,m$. Étape 3 — Écrire : au départ $E_c = 0$ et $E_m = m \\times 10 \\times h$. Étape 4 — Résoudre : $10\\,m\\,h = 50\\,m$, donc $h = 5\\ \\text{m}$, quelle que soit la masse. Étape 5 — Conclure : $5\\ \\text{m}$. Répondre $10$ confond la vitesse avec la hauteur.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un caillou est lâché sans vitesse d'une hauteur $h$, sans frottements, le sol étant la référence. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Propriété : sans frottements, seule la somme $E_c + E_p$ est constante. Au sol, $E_p = 0$, donc $E_m = E_c$. Dire que $E_c$ seule ou $E_p$ seule se conserve ignore qu'elles varient en sens contraire ; dire que $E_m$ augmente contredit la conservation.",
+                  "answers": [
+                    {
+                      "content": "Au sol, toute l'énergie mécanique est sous forme d'énergie cinétique.",
+                      "correct": true
+                    },
+                    {
+                      "content": "À chaque instant, la somme $E_c + E_p$ a la même valeur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'énergie cinétique seule reste constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'énergie potentielle de pesanteur seule reste constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'énergie mécanique augmente pendant la chute.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On compare la chute de deux billes de masses différentes. Les billes sont lâchées sans vitesse de la même hauteur de $5\\ \\text{m}$, le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Écris que $E_m$ au départ est égale à $E_c$ à l'arrivée et regarde si la masse se simplifie.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Deux billes, l'une de $0{,}2\\ \\text{kg}$ et l'autre de $0{,}8\\ \\text{kg}$, sont lâchées sans vitesse de $5\\ \\text{m}$ de haut, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est la vitesse de la bille de $0{,}8\\ \\text{kg}$ en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : $E_m = 0{,}8 \\times 10 \\times 5 = 40\\ \\text{J}$. Étape 3 — Écrire : au sol $E_c = 40\\ \\text{J}$. Étape 4 — Résoudre : $0{,}5 \\times 0{,}8 \\times v^2 = 40$, donc $v^2 = 100$ et $v = 10\\ \\text{m/s}$. Étape 5 — Conclure : $10\\ \\text{m/s}$. Répondre $100$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : deux billes de $0{,}2\\ \\text{kg}$ et $0{,}8\\ \\text{kg}$, lâchées sans vitesse de $5\\ \\text{m}$ de haut sans frottements, n'arrivent pas au sol à la même vitesse : la plus lourde va plus vite. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer : la bille de $0{,}2\\ \\text{kg}$ a $E_m = 0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$, donc $0{,}5 \\times 0{,}2 \\times v^2 = 10$ et $v = 10\\ \\text{m/s}$ ; la bille de $0{,}8\\ \\text{kg}$ arrive aussi à $10\\ \\text{m/s}$. La masse se simplifie : $m \\times g \\times h = \\frac{1}{2} \\times m \\times v^2$. L'affirmation est fausse ; croire que le plus lourd tombe plus vite est une idée reçue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille de $0{,}8\\ \\text{kg}$ est lâchée sans vitesse de $5\\ \\text{m}$ de haut, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 0{,}8 \\times 10 \\times 5 = 40\\ \\text{J}$, donc $E_m = 40\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$ donc $E_c = E_m$. Étape 4 — Résoudre : $E_c = 40\\ \\text{J}$. Étape 5 — Conclure : $40\\ \\text{J}$. Pour la bille de $0{,}2\\ \\text{kg}$, on trouverait seulement $10\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux billes de $0{,}2\\ \\text{kg}$ et $0{,}8\\ \\text{kg}$ sont lâchées de la même hauteur et arrivent à la même vitesse. Pourquoi la bille de $0{,}8\\ \\text{kg}$ a-t-elle une énergie cinétique plus grande ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $E_c = \\frac{1}{2} \\times m \\times v^2$. À vitesse égale, $E_c$ est proportionnelle à $m$ : $0{,}8 \\div 0{,}2 = 4$. Les deux billes tombent de la même hauteur et arrivent à la même vitesse ; les frottements sont négligeables.",
+                  "answers": [
+                    {
+                      "content": "Parce que, à même vitesse, l'énergie cinétique $\\frac{1}{2} \\times m \\times v^2$ est proportionnelle à la masse : elle est 4 fois plus grande.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'elle tombe de plus haut.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle va plus vite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'elle subit plus de frottements.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand les frottements ne sont pas négligeables, l'énergie mécanique d'un corps qui tombe ___.",
+                  "question_type": "select",
+                  "explanation": "Propriété : s'il y a des frottements, une partie de l'énergie mécanique est transformée en chaleur : $E_m$ diminue. « Se conserve » ne vaut que si les frottements sont négligeables ; « augmente » créerait de l'énergie.",
+                  "answers": [
+                    {
+                      "content": "diminue",
+                      "correct": true
+                    },
+                    {
+                      "content": "se conserve",
+                      "correct": false
+                    },
+                    {
+                      "content": "augmente",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "énergie cinétique et conversion de vitesse ; énergie potentielle de pesanteur ; énergie mécanique ; conservation de l'énergie mécanique ; effet des frottements ; lecture d'une figure.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un cycliste de Bouaké veut comprendre l'énergie de son vélo. On travaille avec les vitesses en km/h que lit le compteur : il faut les convertir en m/s.",
+              "exercise_type": "evaluation",
+              "hint": "Convertis la vitesse en m/s en divisant par 3,6, puis mets-la au carré.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un cycliste de $70\\ \\text{kg}$ (vélo compris) roule à $36\\ \\text{km/h}$ dans une rue de Bouaké. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 70\\ \\text{kg}$ et $v = 10\\ \\text{m/s}$. Étape 2 — Convertir : $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 70 \\times 10^2$, avec $10^2 = 100$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 70 \\times 100 = 3\\,500\\ \\text{J}$. Garder $36$ donnerait $45\\,360\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "3500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même cycliste de $70\\ \\text{kg}$ accélère et roule à $72\\ \\text{km/h}$. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 70\\ \\text{kg}$ et $v = 20\\ \\text{m/s}$. Étape 2 — Convertir : $72 \\div 3{,}6 = 20\\ \\text{m/s}$. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 70 \\times 20^2$, avec $20^2 = 400$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 70 \\times 400 = 14\\,000\\ \\text{J}$. La vitesse a doublé, l'énergie est multipliée par $4$ ; ne la croire que doublée donnerait $7\\,000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "14000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste roule à $36\\ \\text{km/h}$, soit ___ m/s.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Convertir : de km/h en m/s, on divise par $3{,}6$, donc $36 \\div 3{,}6 = 10\\ \\text{m/s}$. Multiplier par $3{,}6$ donnerait $129{,}6$, une vitesse impossible.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : un cycliste de $70\\ \\text{kg}$ arrêté à un feu rouge a une énergie cinétique nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : un corps à l'arrêt a une énergie cinétique nulle, car $E_c = \\frac{1}{2} \\times 70 \\times 0^2 = 0$. L'affirmation est vraie ; la croire fausse revient à penser que la masse seule donne de l'énergie cinétique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle unité s'exprime l'énergie cinétique d'un corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $E_c$ s'exprime en joules (J), avec $m$ en kilogrammes et $v$ en mètres par seconde. Le newton par kilogramme est l'unité de $g$ ; le mètre par seconde, celle de $v$ ; le kilogramme, celle de $m$.",
+                  "answers": [
+                    {
+                      "content": "Le joule (J).",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le newton par kilogramme (N/kg).",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mètre par seconde (m/s).",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le kilogramme (kg).",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une mangue de $200\\ \\text{g}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol. On néglige les frottements ; le sol est la référence et $g = 10\\ \\text{N/kg}$. La figure donne ses énergies à quatre hauteurs.",
+              "exercise_type": "evaluation",
+              "hint": "Lis la figure ou calcule $E_p$ à chaque hauteur : $E_c = E_m - E_p$ avec $E_m = 10\\ \\text{J}$.",
+              "figure": "chute-mangue",
+              "questions": [
+                {
+                  "content": "Une mangue de $200\\ \\text{g}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique quand elle passe à $3\\ \\text{m}$ du sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables, donc $E_m$ se conserve. Étape 2 — Calculer au départ : $E_c = 0$ et $E_p = 0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$, donc $E_m = 10\\ \\text{J}$. Étape 3 — Écrire : à $3\\ \\text{m}$, $E_p = 0{,}2 \\times 10 \\times 3 = 6\\ \\text{J}$. Étape 4 — Résoudre : $E_c = 10 - 6 = 4\\ \\text{J}$. Étape 5 — Conclure : $4\\ \\text{J}$, valeur que la figure donne pour cette hauteur. Répondre $6\\ \\text{J}$ donne $E_p$ et non $E_c$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $200\\ \\text{g}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie potentielle de pesanteur quand elle passe à $1\\ \\text{m}$ du sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir : la référence est le sol et $h = 1\\ \\text{m}$. Étape 2 — Relever : $200\\ \\text{g} = 0{,}2\\ \\text{kg}$. Étape 3 — Remplacer : $E_p = 0{,}2 \\times 10 \\times 1$. Étape 4 — Calculer : $E_p = 2\\ \\text{J}$. La réponse $8\\ \\text{J}$ est l'énergie cinétique à cette hauteur, pas l'énergie potentielle ; $10\\ \\text{J}$ est l'énergie mécanique ; $0{,}2\\ \\text{J}$ oublie $g$.",
+                  "answers": [
+                    {
+                      "content": "$2\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}2\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $200\\ \\text{g}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique quand elle passe à $1\\ \\text{m}$ du sol, avec une énergie cinétique de $8\\ \\text{J}$ ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E_c = 8\\ \\text{J}$ et $h = 1\\ \\text{m}$. Étape 2 — Calculer $E_c$ : donnée, $8\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 0{,}2 \\times 10 \\times 1 = 2\\ \\text{J}$. Étape 4 — Additionner : $E_m = 8 + 2 = 10\\ \\text{J}$. On retrouve l'énergie mécanique de départ, $0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$, ce qui confirme la conservation. Multiplier $8$ par $2$ donnerait $16\\ \\text{J}$, faux.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue de $200\\ \\text{g}$ est lâchée sans vitesse d'une branche à $5\\ \\text{m}$ du sol, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : $E_m = 0{,}2 \\times 10 \\times 5 = 10\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$ donc $E_c = 10\\ \\text{J}$. Étape 4 — Résoudre : $0{,}5 \\times 0{,}2 \\times v^2 = 10$, donc $v^2 = 100$ et $v = 10\\ \\text{m/s}$. Étape 5 — Conclure : $10\\ \\text{m/s}$. Répondre $100$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour la mangue de $200\\ \\text{g}$ lâchée sans vitesse de $5\\ \\text{m}$ sans frottements, la somme $E_c + E_p$ vaut $10\\ \\text{J}$ à $5\\ \\text{m}$, à $3\\ \\text{m}$, à $1\\ \\text{m}$ et à $0\\ \\text{m}$ du sol. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : sans frottements, $E_m$ se conserve. Étape 2 — Calculer : à $5\\ \\text{m}$, $0 + 10$ ; à $3\\ \\text{m}$, $E_p = 6$ et $E_c = 4$ ; à $1\\ \\text{m}$, $E_p = 2$ et $E_c = 8$ ; à $0\\ \\text{m}$, $E_p = 0$ et $E_c = 10$. Étape 3 — Conclure : la somme vaut $10\\ \\text{J}$ partout. L'affirmation est vraie ; seule la somme se conserve, pas chaque énergie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au laboratoire du collège, un chariot de $2\\ \\text{kg}$ roule sur une piste. La figure montre son énergie cinétique pour différentes vitesses. Le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Pour trouver une vitesse à partir de l'énergie cinétique, remplace dans la formule et cherche le nombre dont le carré donne $v^2$.",
+              "figure": "ec-fonction-vitesse",
+              "questions": [
+                {
+                  "content": "Un chariot de $2\\ \\text{kg}$ roule à $5\\ \\text{m/s}$ sur une piste horizontale. Quelle est son énergie cinétique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$ et $v = 5\\ \\text{m/s}$. Étape 2 — Convertir : rien à convertir, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 2 \\times 5^2$, avec $5^2 = 25$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 2 \\times 25 = 25\\ \\text{J}$. Oublier le carré donnerait $5\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de $2\\ \\text{kg}$ a une énergie cinétique de $64\\ \\text{J}$ sur une piste horizontale. Quelle est sa vitesse ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$ et $E_c = 64\\ \\text{J}$. Étape 2 — Convertir : rien à convertir. Étape 3 — Remplacer : $64 = \\frac{1}{2} \\times 2 \\times v^2 = v^2$. Étape 4 — Calculer : $v = \\sqrt{64} = 8\\ \\text{m/s}$. Répondre $64$ oublie la racine carrée ; répondre $32$ divise $64$ par $2$ au lieu de prendre la racine.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : un chariot de $2\\ \\text{kg}$ a, à $6\\ \\text{m/s}$, une énergie cinétique deux fois plus grande qu'à $3\\ \\text{m/s}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Remplacer : à $3\\ \\text{m/s}$, $E_c = 0{,}5 \\times 2 \\times 3^2 = 9\\ \\text{J}$ ; à $6\\ \\text{m/s}$, $E_c = 0{,}5 \\times 2 \\times 6^2 = 36\\ \\text{J}$. Étape 4 — Calculer : $36 \\div 9 = 4$, pas $2$. L'affirmation est fausse : la vitesse double, donc l'énergie est multipliée par $4$. C'est le piège de la fiche : $E_c$ n'est pas proportionnelle à $v$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de $2\\ \\text{kg}$ est sur une rampe à $1{,}5\\ \\text{m}$ du sol, avec une vitesse de $3\\ \\text{m/s}$ (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie mécanique ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 2\\ \\text{kg}$, $v = 3\\ \\text{m/s}$ et $h = 1{,}5\\ \\text{m}$. Étape 2 — Calculer $E_c$ : $E_c = \\frac{1}{2} \\times 2 \\times 3^2 = 9\\ \\text{J}$. Étape 3 — Calculer $E_p$ : $E_p = 2 \\times 10 \\times 1{,}5 = 30\\ \\text{J}$. Étape 4 — Additionner : $E_m = 9 + 30 = 39\\ \\text{J}$. Oublier $E_p$ donnerait $9\\ \\text{J}$ ; oublier $E_c$ donnerait $30\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "39",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot de $2\\ \\text{kg}$ est lâché sans vitesse du haut d'une rampe située à $1{,}5\\ \\text{m}$ du sol. Les frottements sont négligeables (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en bas de la rampe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : frottements négligeables. Étape 2 — Calculer au départ : $E_c = 0$ et $E_p = 2 \\times 10 \\times 1{,}5 = 30\\ \\text{J}$, donc $E_m = 30\\ \\text{J}$. Étape 3 — Écrire : en bas $E_p = 0$ donc $E_c = E_m$. Étape 4 — Résoudre : $E_c = 30\\ \\text{J}$. Étape 5 — Conclure : $30\\ \\text{J}$. La réponse $15\\ \\text{J}$ oublie la masse ; $3\\ \\text{J}$ oublie $g$ ; $45\\ \\text{J}$ multiplie la hauteur par $g \\times m$ avec un facteur de trop.",
+                  "answers": [
+                    {
+                      "content": "$30\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$45\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un colis de $5\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $20\\ \\text{m}$. On compare la chute sans frottements avec une mesure réelle. Le sol est la référence et $g = 10\\ \\text{N/kg}$.",
+              "exercise_type": "evaluation",
+              "hint": "Calcule d'abord ce que donnerait la conservation, puis compare avec la mesure réelle : la différence est l'énergie transformée en chaleur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un colis de $5\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $20\\ \\text{m}$, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est son énergie cinétique en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 5 \\times 10 \\times 20 = 1\\,000\\ \\text{J}$, donc $E_m = 1\\,000\\ \\text{J}$. Étape 3 — Écrire : au sol $E_p = 0$ donc $E_c = E_m$. Étape 4 — Résoudre : $E_c = 1\\,000\\ \\text{J}$. Étape 5 — Conclure : $1\\,000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis de $5\\ \\text{kg}$ est lâché sans vitesse d'une hauteur de $20\\ \\text{m}$, sans frottements (sol = référence). On prend $g = 10\\ \\text{N/kg}$. Quelle est sa vitesse en arrivant au sol ?",
+                  "question_type": "numeric",
+                  "unit": "m/s",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : les frottements sont négligeables, donc l'énergie mécanique se conserve. Étape 2 — Calculer au départ : le corps est immobile, $E_c = 0$ et $E_p = 5 \\times 10 \\times 20 = 1\\,000\\ \\text{J}$, donc $E_m = 1\\,000\\ \\text{J}$. Étape 3 — Écrire : au sol $E_c = 1\\,000\\ \\text{J}$. Étape 4 — Résoudre : $\\frac{1}{2} \\times 5 \\times v^2 = 1\\,000$, donc $v^2 = 400$ et $v = 20\\ \\text{m/s}$. Étape 5 — Conclure : $20\\ \\text{m/s}$. Répondre $400$ oublie la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En réalité, le colis de $5\\ \\text{kg}$ lâché sans vitesse de $20\\ \\text{m}$ arrive au sol à $15\\ \\text{m/s}$. Quelle est son énergie cinétique réelle ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $m = 5\\ \\text{kg}$ et $v = 15\\ \\text{m/s}$. Étape 2 — Convertir : rien à convertir, la masse est en kg et la vitesse en m/s. Étape 3 — Remplacer : $E_c = \\frac{1}{2} \\times 5 \\times 15^2$, avec $15^2 = 225$. Étape 4 — Calculer : $E_c = 0{,}5 \\times 5 \\times 225 = 562{,}5\\ \\text{J}$. Garder $v = 15$ sans carré donnerait $37{,}5\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "562,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'énergie mécanique d'un colis de $5\\ \\text{kg}$ était de $1\\,000\\ \\text{J}$ au départ. Au sol, son énergie cinétique réelle est de $562{,}5\\ \\text{J}$ (son énergie potentielle est nulle). Quelle énergie mécanique a été perdue pendant la chute ?",
+                  "question_type": "numeric",
+                  "unit": "J",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : $E_m = 1\\,000\\ \\text{J}$ au départ ; au sol $E_p = 0$ et $E_c = 562{,}5\\ \\text{J}$, donc $E_m = 562{,}5\\ \\text{J}$. Étape 2 — Comparer : l'énergie mécanique n'a pas la même valeur au départ et à l'arrivée. Étape 3 — Calculer : $1\\,000 - 562{,}5 = 437{,}5\\ \\text{J}$. Répondre $562{,}5$ donne l'énergie restante et non l'énergie perdue.",
+                  "answers": [
+                    {
+                      "content": "437,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : un colis de $5\\ \\text{kg}$ lâché sans vitesse de $20\\ \\text{m}$ arrive au sol à $15\\ \\text{m/s}$ ; son énergie mécanique a donc diminué pendant la chute. On prend $g = 10\\ \\text{N/kg}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer sans frottements : $E_m = 5 \\times 10 \\times 20 = 1\\,000\\ \\text{J}$ et la vitesse serait $20\\ \\text{m/s}$. Étape 2 — Calculer en réalité : à $15\\ \\text{m/s}$, $E_c = 0{,}5 \\times 5 \\times 15^2 = 562{,}5\\ \\text{J}$. Étape 3 — Comparer : $562{,}5 < 1\\,000$, donc $E_m$ a diminué. L'affirmation est vraie ; croire que l'énergie se conserve toujours ignore les frottements.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le colis de $5\\ \\text{kg}$ arrive au sol à $15\\ \\text{m/s}$ au lieu de $20\\ \\text{m/s}$. Où est passée l'énergie mécanique perdue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : s'il y a des frottements, une partie de l'énergie mécanique est transformée en chaleur. L'énergie ne disparaît pas ; au sol l'énergie potentielle est nulle, et l'énergie cinétique réelle est plus faible, pas plus grande.",
+                  "answers": [
+                    {
+                      "content": "Les frottements de l'air l'ont transformée en chaleur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a disparu sans laisser de trace.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est devenue de l'énergie potentielle au sol.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est restée dans le colis sous forme d'énergie cinétique.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -125,3 +125,30 @@ longue: <fichier v3 le plus long>.json
 - `test/system/catalog/lesson_rendering_test.rb` + fichiers piégés : rouge sur chaque défaut.
 - Garde de la section de preuve dans `bin/ci-quiet`.
 - `.github/workflows/ci.yml` : `timeout-minutes: 5` sur chaque part de la tâche `lecons`.
+
+## 8. Amendement du 2026-11-04 : Develop charge toutes les leçons v3 du dépôt, entières
+
+**Décision du pilote (Touré, ticket #473), coût accepté par le porteur (Kamkara, 2026-11-04).** Chantier `docs/chantiers/charger-toutes-les-lecons-develop`.
+
+**Remplace, pour Develop seulement,** la décision n° 1 (« Develop restreint au manifeste ») et le §4.5 (« ne charge plus les autres leçons v3 du programme ») :
+
+1. **Toutes les leçons au format 3 du dépôt** (`docs/contenus/lecons-traitees/*/*/*.json`), de tous les dossiers de niveau, **3ème comprise**, sans restriction au manifeste : 417 fichiers v3 au 2026-11-04. Les fichiers au format 1 restent ignorés. Le manifeste `jeu.yml` ne sert plus à choisir les leçons chargées ; il reste celui du jeu standard (établissements, classes, comptes, environnements de PR).
+2. **Chaque leçon est remplacée entière** (mode `:lesson` d'ADR-0123), **y compris celles qui portent des sujets de devoir** (Thalès) : cours, notions, fiches, exercices et sujets du fichier. `AutomaticLoadStage#mode_for` rend `:lesson` pour tout fichier v3 sur Develop, quels que soient son dossier, ses sujets et le manifeste.
+3. **Ensuite, seulement ce qui change** : l'empreinte SHA-256 d'ADR-0123 §4.3 reste ; un fichier inchangé dit `unchanged`. Un chargement entier s'enregistre sous son propre nom d'import, `chargement-automatique-entiere-<niveau>-<matière>-<fichier>` : l'empreinte d'un chargement « exercices et sujets » antérieur du même fichier (Thalès) ne compte pas, la leçon est remplacée entière une fois. Les leçons du manifeste, déjà chargées entières sous l'ancien nom, le sont aussi une fois au premier déploiement.
+4. **Rien n'est supprimé** : une leçon de Develop sans fichier, ou dont le titre diffère du fichier, reste en place ; établissements, classes et comptes du jeu standard inchangés.
+
+**Coûts consentis.** Sur Develop, les résultats d'élèves (séances, tentatives, badges, lacunes), les devoirs envoyés et les lectures attachés à une leçon remplacée sont effacés, au premier chargement puis à chaque changement de son fichier. Le premier déploiement dure plus longtemps (environ 5 minutes attendues, mesure d'ADR-0123 : 191 s pour 261 leçons) ; si Railway coupe le pré-déploiement, l'option D d'ADR-0123 (N leçons par démarrage) s'applique sans nouvelle décision.
+
+**Inchangé.** Staging (`:exercises` pour une leçon à sujets, `:create_only` pour les autres leçons des dossiers du programme), production, Demo, environnements de PR.
+
+**Comment vérifier.** `test/domain/entities/catalog/automatic_load_stage_test.rb` (tout dossier, 3ème et dossier inconnu compris, sujets ou non : `:lesson` sur Develop ; Staging inchangé) ; `test/domain/use_cases/catalog/load_repository_lessons_test.rb` (aucun manifeste, seul l'import « leçon entière » appelé sur Develop, rien supprimé) ; `test/integration/catalog/automatic_lesson_load_test.rb` (Thalès remplacée entière sujets compris, 3ème sans sujet créée, `jeu.yml` illisible sans effet). Le §7 ci-dessus, « Develop restreint au manifeste », est remplacé par ces tests.
+
+## 9. Amendement du 2026-11-05 : Staging reçoit les comptes du jeu standard
+
+**Contexte.** La recette connectée d'un train sur Staging est impossible : aucun compte de test n'y existe (étape sautée le 2026-11-05). Chantier `comptes-de-test-staging`.
+
+**Décision (porteur, 2026-11-05).** À chaque déploiement de Staging (`RAILWAY_ENVIRONMENT_NAME=Staging`), le semis ajoute les établissements, classes et comptes du jeu standard, aux mêmes règles que Develop (§4 point 5) : PIN de test public `2468` pour les élèves, enseignants et directions ; comptes équipe seulement avec `STANDARD_TEAM_PIN` **scellée** sur Staging, créés sans second facteur ; rien supprimé ni modifié ; contact pris laissé tel quel et signalé ; échec journalisé, jamais levé. Différences avec Develop : **pas d'activité simulée** (`standard/activite`), et les leçons restent au chargement `:create_only` de Staging (§4 point 5, inchangé).
+
+**Inchangé.** Production (aucun jeu), Demo, Develop, environnements de PR.
+
+**Comment vérifier.** `test/db/seeds/staging_stage_test.rb`.

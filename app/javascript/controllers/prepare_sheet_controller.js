@@ -1,6 +1,6 @@
 // ⚡ FRONT · prepare_sheet_controller — une feuille « Prépare interros » / « Prépare devoirs » : brouillon, indice, refaire, recommencer
-// Rôle : garde dans localStorage les réponses non vérifiées de chaque exercice (clé lnclass-prepare-<owner>-<exercise_public_id> : le brouillon d'un élève ne se recharge pas dans le compte d'un autre sur le même appareil), montre ou cache l'indice, remet à blanc un exercice ou toute la feuille, sans requête
-// ADR  : 0121 · UDR : 0149 §3 (Comportement) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse ne casse rien
+// Rôle : garde dans localStorage les réponses non vérifiées de chaque exercice (clé lnclass-prepare-<owner>-<exercise_public_id> : le brouillon d'un élève ne se recharge pas dans le compte d'un autre sur le même appareil), montre ou cache l'indice, remet à blanc un exercice (celui que la correction demande, à l'ouverture) ou toute la feuille, sans requête
+// ADR  : 0121 · UDR : 0149 §3 (Comportement), XXXX refaire-ou-continuer §3 (valeur redo) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse ne casse rien
 import { Controller } from "@hotwired/stimulus"
 
 const PREFIX = "lnclass-prepare-"
@@ -8,16 +8,59 @@ const PREFIX = "lnclass-prepare-"
 export default class extends Controller {
   static targets = ["exercise"]
   // owner : posé par le serveur (id de l'élève connecté, ou « visitor ») ; il entre dans la clé du brouillon.
-  static values = { owner: { type: String, default: "visitor" } }
+  // redo : l'exercice (public_id) que la correction demande de remettre à blanc (UDR refaire-ou-continuer §3), posé par le serveur
+  // seulement s'il est de la feuille ; vide sinon.
+  static values = { owner: { type: String, default: "visitor" }, redo: { type: String, default: "" } }
 
   connect() {
     // Un turbo_stream.refresh fusionne la page : le serveur rend l'état corrigé ou vierge, le navigateur remet son brouillon.
     this.restoreAll = this.restoreAll.bind(this)
     document.addEventListener("turbo:morph", this.restoreAll)
+    this.redoRequested()
+    this.alignAnchor()
+  }
+
+  // L'ancre d'un exercice (« Continuer les exercices », « Refaire l'exercice ») : le navigateur y saute avant que les formules
+  // (KaTeX, chargé à part) et les figures ne fixent la hauteur de ce qui précède, et le titre de l'exercice finit sous la barre.
+  // Pendant deux secondes, chaque changement de hauteur de la feuille ramène l'exercice en haut, sauf si l'élève a fait défiler.
+  alignAnchor() {
+    let id
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1))
+    } catch (_error) {
+      return // ancre malformée : on ne fait rien
+    }
+    const target = id && document.getElementById(id)
+    if (!target || !this.element.contains(target) || !("ResizeObserver" in window)) return
+
+    const events = ["wheel", "touchstart", "keydown", "pointerdown"]
+    const observer = new ResizeObserver(() => target.scrollIntoView({ block: "start" }))
+    const stop = () => {
+      observer.disconnect()
+      events.forEach((name) => window.removeEventListener(name, stop))
+    }
+    events.forEach((name) => window.addEventListener(name, stop, { passive: true }))
+    observer.observe(this.element)
+    setTimeout(stop, 2000)
   }
 
   disconnect() {
     document.removeEventListener("turbo:morph", this.restoreAll)
+  }
+
+  // « Refaire l'exercice » depuis la correction : une fois les brouillons restaurés, l'exercice demandé est remis à blanc comme par
+  // le bouton de la feuille, puis `redo` quitte l'adresse (l'ancre reste) et la valeur quitte l'élément, pour qu'un rechargement ou un retour
+  // arrière (le cache Turbo garde l'élément tel qu'il était) ne vide pas l'exercice et le brouillon de l'élève.
+  redoRequested() {
+    if (!this.redoValue) return
+
+    this.restoreAll()
+    const exercise = this.exerciseTargets.find((target) => target.dataset.exerciseId === this.redoValue)
+    if (exercise) this.blank(exercise)
+    const url = new URL(window.location.href)
+    url.searchParams.delete("redo")
+    history.replaceState(history.state, "", url.pathname + url.search + url.hash)
+    this.element.removeAttribute("data-prepare-sheet-redo-value")
   }
 
   // Un exercice arrive (page, ou réponse de la vérification qui remplace le frame) : on lui rend son état.

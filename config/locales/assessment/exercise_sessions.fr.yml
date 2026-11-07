@@ -31,6 +31,16 @@ fr:
       show:
         page_title: "Copie · %{title}"
         counter: "%{answered}/%{total} répondues"
+        # UDR-0157 §3 : le cartouche de la feuille et la consigne (« · barème : 7 points » si une question ne vaut pas 1 point).
+        exam_kind: "Interrogation"
+        exam_brand: "Lnclass"
+        questions:
+          zero: "Aucune question"
+          one: "1 question"
+          other: "%{count} questions"
+        scale:
+          one: " · barème : %{points} point"
+          other: " · barème : %{points} points"
         statement: "Sujet"
         review_statement: "Revoir le sujet"
         question: "Question %{number}"

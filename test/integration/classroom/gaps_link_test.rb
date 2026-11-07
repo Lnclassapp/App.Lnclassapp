@@ -10,7 +10,7 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
     @teacher = create_teacher(school: @classroom.school, classrooms: [ @classroom ], material: @maths)
     @course = create_course(name: "Géométrie", level: @level, material: @maths)
     @notion = create_essential(course: @course, name: "Théorème de Thalès")
-    create_exercise(essential: @notion, questions: 1)
+    @exercise = create_exercise(essential: @notion, questions: 1)
     @student = create_student(classroom: @classroom)
     create_gap(student: @student, essential: @notion)
   end
@@ -30,7 +30,9 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
     get student_classroom_path
 
-    assert_select "#student_classroom_gaps a[href=?]", course_path(@course.slug, anchor:), text: /Théorème de Thalès/
+    # suivi-classe-lecon CA-9 : la fiche n'a qu'un exercice publié, le raté : c'est lui qui est proposé, dans la feuille de la notion.
+    sheet = course_sheet_path(@course.slug, anchor, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_select "#student_classroom_gaps a[href=?]", sheet, text: /Théorème de Thalès/
     assert_select "#student_classroom_gaps a[href*='/essentials/']", 0
   end
 
@@ -44,13 +46,14 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_gaps a[href*='/essentials/']", 0
   end
 
-  test "the anchor exists on the lesson page, on the card of the notion's exercise" do
+  test "the anchor exists on the lesson page, on the card of the notion, which leads to its sheet" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
-    assert_select ".ps-sheet##{anchor}", 1
+    assert_select "a.ps-card##{anchor}[href=?]", course_sheet_path(@course.slug, anchor)
     exercise = Orm::Exercise.find_by!(essential: @notion)
+    get fill_course_sheet_path(@course.slug, anchor)
     assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"
   end
 end

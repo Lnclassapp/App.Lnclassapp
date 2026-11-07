@@ -11,6 +11,8 @@ module Queries
         def sheets = interros + devoirs
         def exercise(public_id) = sheets.flat_map(&:exercises).find { it.public_id == public_id }
         def sheet_of(public_id) = sheets.find { |sheet| sheet.exercises.any? { it.public_id == public_id } }
+        # La feuille que son ancre désigne (dom_id : « notion-<slug> », « toute-la-lecon », « sujet-<n> ») ; nil si elle n'existe pas ou plus.
+        def sheet(dom_id) = sheets.find { it.dom_id == dom_id }
       end
       Bare = Data.define(:essential_slug, :title)
       # kind : :notion · :lesson_wide · :subject ; dom_id : l'ancre de la feuille (« notion-<slug> », « toute-la-lecon », « sujet-<n> ») ;
@@ -19,6 +21,14 @@ module Queries
         # Le compte de « x / n exercices réussis » : l'id du repère est `sheet-progress-<dom_id>`.
         def passed = exercises.count { it.copy&.passed }
         def progress_id = "sheet-progress-#{dom_id}"
+
+        # L'exercice à continuer après `after` (public_id) : le suivant sans copie, sinon le premier sans copie, sinon nil. « Fait » = copie
+        # terminée, réussie ou non (comme la progression de la case).
+        def next_open(after:)
+          rank = exercises.index { it.public_id == after }
+          open = exercises.each_with_index.reject { |exercise, _| exercise.copy }
+          (open.find { |_, index| rank && index > rank } || open.first)&.first
+        end
       end
       # copy : la dernière copie terminée de l'élève (Copy), nil sans copie ou hors élève ; questions : [Question] ;
       # due : un élève qui doit encore rendre cet exercice à son enseignant (CA-17) : la feuille ne le vérifie pas ;
@@ -29,10 +39,10 @@ module Queries
       # passed : toutes les questions justes ; la note de la copie est celle de sa page de résultat (sur 20).
       Copy = Data.define(:session_public_id, :passed)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
-      # multiple : un QCM à 2 ou 3 réponses justes ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
+      # multiple : un QCM à 2 ou 3 réponses justes (expected : le nombre de propositions à cocher, 1 sinon) ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
       # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant ; hint : l'indice de la question (ADR-0120), nil
-      # s'il est vide, lu dans la boîte de l'indice de l'exercice.
-      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict, :hint)
+      # s'il est vide, lu dans la boîte de l'indice de l'exercice ; points : le décimal de la question (1 par défaut), additionné par la vue de l'épreuve.
+      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :expected, :choices, :play, :image, :response, :verdict, :hint, :points)
       # index : le rang dans l'ordre de la feuille (celui que la feuille poste) ; picked : l'élève l'a coché dans sa copie corrigée.
       Choice = Data.define(:index, :letter, :content, :picked)
 
@@ -44,7 +54,7 @@ module Queries
       EMPTY = Prepare.new(interros: [], devoirs: [], targets: nil, bare: [], course_name: nil, material_name: nil, level_name: nil)
 
       # → Prepare. Un cours inconnu rend des listes vides ; la lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
-      def call(course_slug:, actor:)
+      def call(course_slug:, actor:, classroom_public_id: nil)
         course = Orm::Course.joins(:material, :level).where(slug: course_slug)
                             .pick("courses.id", "courses.name", "courses.figures", "materials.name", "levels.name")
         return EMPTY if course.nil?
@@ -54,7 +64,7 @@ module Queries
         rows = exercises(course_id, team)
         built = build_exercises(rows, figures, actor)
         Prepare.new(interros: interros(course_id, rows, built), devoirs: devoirs(course_id, rows, built),
-                    targets: targets(course_slug, actor, rows), bare: bare(course_id, rows, team), course_name:, material_name:, level_name:)
+                    targets: targets(course_slug, actor, rows, classroom_public_id), bare: bare(course_id, rows, team), course_name:, material_name:, level_name:)
       end
 
       private
@@ -122,30 +132,55 @@ module Queries
         scope.order(:position, :id).pluck(:slug, :name).map { |slug, name| Bare.new(essential_slug: slug, title: name) }
       end
 
-      def targets(course_slug, actor, rows)
+      def targets(course_slug, actor, rows, classroom_public_id)
+        published = rows.select { it[3] == "published" }.map { it[1] }
+        return team_targets(course_slug, classroom_public_id, published) if actor&.team? && classroom_public_id
         return unless actor&.teacher?
 
         Queries::Classroom::CatalogAssignmentTargetsQuery.new.call(
-          teacher_id: actor.user_id, school_id: actor.school_id, course_slug:,
-          exercise_public_ids: rows.select { it[3] == "published" }.map { it[1] }
+          teacher_id: actor.user_id, school_id: actor.school_id, course_slug:, exercise_public_ids: published
+        )
+      end
+
+      # suivi-classe-lecon (UDR §3.5) : l'équipe lue depuis une classe n'a que celle-ci pour cible (niveau et série du cours, classe
+      # active) ; elle n'a pas de jours de séance, donc jamais la modale (ADR-0072 §4.3). Si la classe ne convient pas au cours :
+      # aucune classe cible (classrooms vide), la vue dit « aucune classe ».
+      def team_targets(course_slug, classroom_public_id, exercise_public_ids)
+        level_id, series_id, level_name, series_name =
+          Orm::Course.joins(:level).left_joins(:series).where(slug: course_slug).pick("courses.level_id", "courses.series_id", "levels.name", "series.name")
+        scope = Orm::Classroom.where(public_id: classroom_public_id, status: "active", level_id:)
+        scope = scope.where(series_id:) if series_id
+        classroom = scope.pick(:id, :public_id, :name)
+        scope_label = [ level_name, series_name ].compact.join(" ")
+        return Queries::Classroom::CatalogAssignmentTargetsQuery::Targets.new(scope_label:, classrooms: [], states: {}) if classroom.nil?
+
+        id, public_id, name = classroom
+        active = Orm::ClassroomAssignment.joins("INNER JOIN exercises ON exercises.id = classroom_assignments.assignable_id")
+                                         .where(classroom_id: id, status: "active", assignable_type: "Exercise", exercises: { public_id: exercise_public_ids })
+                                         .pluck("exercises.public_id", "classroom_assignments.public_id", "classroom_assignments.due_on")
+        states = active.to_h do |exercise_public_id, assignment_public_id, due_on|
+          [ [ public_id, exercise_public_id ], Queries::Classroom::CatalogAssignmentTargetsQuery::State.new(assignment_public_id:, due_on:) ]
+        end
+        Queries::Classroom::CatalogAssignmentTargetsQuery::Targets.new(
+          scope_label:, classrooms: [ Queries::Classroom::CatalogAssignmentTargetsQuery::Target.new(public_id:, name:, needs_session_days: false) ], states:
         )
       end
 
       # { exercise_id => [Row] } : questions, propositions et images en trois lectures pour toute la leçon (ni N+1, ni une par exercice).
-      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :hint, :answers, :image)
+      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :hint, :points, :answers, :image)
       AnswerRow = Data.define(:id, :content, :match_content, :correct)
 
       def questions(exercise_ids)
         rows = Orm::Question.where(exercise_id: exercise_ids).order(:exercise_id, :position, :id)
-                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter, :hint)
+                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter, :hint, :points)
         ids = rows.map { it[1] }
         answers = Orm::Answer.where(question_id: ids).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content, :correct).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: ids).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Queries::Assessment::SessionPlayQuery::Image.new(*image) ] }
         rows.group_by(&:first).transform_values do |list|
-          list.map do |_, id, type, content, unit, starter, hint|
-            QuestionRow.new(id:, type:, content:, unit:, starter:, hint:, image: images[id],
+          list.map do |_, id, type, content, unit, starter, hint, points|
+            QuestionRow.new(id:, type:, content:, unit:, starter:, hint:, points:, image: images[id],
                             answers: answers.fetch(id, []).map { AnswerRow.new(*it.drop(1)) })
           end
         end
@@ -176,11 +211,12 @@ module Queries
         correct, selected, text, unanswered = attempt
         verdict = (unanswered || (selected.blank? && text.nil?) ? :empty : (correct ? :correct : :wrong)) if corrected && auto_graded?(row)
         picked = Array(selected)
+        expected = Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1)
         Question.new(id: row.id, number:, kind:, content: row.content, unit: row.unit.presence, image: row.image,
-                     multiple: Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1) > 1,
+                     multiple: expected > 1, expected:,
                      choices: (choices(row, picked) if %i[mcq true_false].include?(kind)),
                      play: (play(row, number) if kind == :other),
-                     response: (text if corrected), verdict:, hint: row.hint.presence)
+                     response: (text if corrected), verdict:, hint: row.hint.presence, points: row.points)
       end
 
       def auto_graded?(row) = Entities::Assessment::Question.kind_for(row.type)::AUTO_GRADED

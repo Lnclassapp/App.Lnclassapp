@@ -15,6 +15,12 @@ fr:
           one: "1 question"
           other: "%{count} questions"
         actions: "Actions pour %{name}"
+        # UDR-0157 §3 : le cartouche de la feuille et la consigne (« · barème : 7 points » si une question ne vaut pas 1 point).
+        exam_kind: "Interrogation"
+        exam_brand: "Lnclass"
+        scale:
+          one: " · barème : %{points} point"
+          other: " · barème : %{points} points"
         assign_title: "Assigner à mes classes"
         assign_targets: "Assigner « %{title} » à vos classes"
         # level : « Tle D », « 3ème ».

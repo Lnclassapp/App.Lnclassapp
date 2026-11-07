@@ -18,10 +18,11 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
   end
 
   def frame(exercise) = "#sheet-exercise-#{exercise.public_id}"
+  def sheet_page = fill_course_sheet_path(@course.slug, "notion-#{@notion.slug}")
 
   # CA-1, CA-6
   test "the student reads the sheet, opens the hint and answers a question" do
-    visit course_path(@course.slug)
+    visit sheet_page
 
     within ".ps-sheet#notion-#{@notion.slug}" do
       assert_text "PRÉPARE INTERROS"
@@ -47,14 +48,14 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
 
   # CA-1 : ses réponses restent dans le navigateur
   test "the answers not yet checked survive a reload" do
-    visit course_path(@course.slug)
+    visit sheet_page
     within frame(@exercise) do
       click_button "B."
       find("input.ps-input").set("AC")
       assert_selector "input.ps-input--filled"
     end
 
-    visit course_path(@course.slug)
+    visit sheet_page
 
     within frame(@exercise) do
       assert_selector "button[role=radio][aria-checked=true]", text: "AM/MB = AN/NC"
@@ -74,7 +75,7 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
                                      response_text: ("AC" if question.question_type == "fill_blank"))
       end
     end
-    visit course_path(@course.slug)
+    visit sheet_page
 
     within frame(@exercise) do
       assert_link "Voir ma correction"
@@ -88,7 +89,7 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
     end
     assert_selector "#{frame(@second)} a", text: "Voir ma correction"
 
-    visit course_path(@course.slug)
+    visit sheet_page
     within(frame(@exercise)) { assert_button "Vérifier ma réponse" }
     assert_selector "#{frame(@second)} a", text: "Voir ma correction"
 
@@ -99,7 +100,7 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
 
   # CA-11
   test "on a 390 px screen no sheet overflows and every button is at least 44 px high" do
-    visit course_path(@course.slug)
+    visit sheet_page
 
     with_mobile_viewport do
       assert_selector ".ps-sheet"

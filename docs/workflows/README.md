@@ -105,6 +105,10 @@ Toutes les phases existent toujours. Leur poids change.
 
 Détail de chaque cycle : [`feature.md`](feature.md) · [`bugfix.md`](bugfix.md) · [`refactoring.md`](refactoring.md) · [`optimisation.md`](optimisation.md) · [`hotfix.md`](hotfix.md)
 
+### En dessous des cycles : la retouche
+
+Un petit changement **sans règle métier** (libellé, espacement, icône, faute, classe CSS ; ≤ 3 fichiers hors tests, aucun use case, policy, route, migration ni motif d'interface nouveau) prend le chemin court : [`retouche.md`](retouche.md). Pas de memo ni d'UDR, une PR directe, une ligne dans le journal du chantier parent ; la preuve (`bin/ci-quiet`, captures pour une vue) reste obligatoire.
+
 ### Au-dessus des cycles : le programme
 
 Quand l'objectif ne tient pas dans un seul graphe de lots — une refonte, un nouveau dépôt, un contexte borné construit de zéro — on ouvre un **programme** : [`programme.md`](programme.md). Il ajoute une phase 0 d'amorçage du dépôt, planifie **par vagues** et ouvre, vague par vague, des chantiers ordinaires qui suivent la table ci-dessus sans exception.
@@ -130,9 +134,10 @@ Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quan
 
 | Rôle | Modèle |
 |---|---|
-| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions | **Opus** |
+| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions qui ne sont pas de routine ; une session par vague ou par jour, état dans `etat.md` ([`orchestrateur.md`](orchestrateur.md)) | **Opus** |
 | Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
 | Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
+| Fusions de routine vers `Develop` (`fusionneur`) : conditions vérifiées une à une, aucune manquante ([`orchestrateur.md`](orchestrateur.md#3-qui-fait-quoi)) | **Sonnet** |
 | Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |
 | Recherche de code (`Explore`) : trouver un fichier, lire du code ou un journal | **Haiku** |
 | Tâches mécaniques hors lot (`chores`) : lancer une commande, lire un journal, renommer un fichier de doc ; jamais le code de `app/` | **Haiku** |
@@ -151,6 +156,7 @@ Le processus est outillé. Dans Claude Code :
 /refactor <slug>      ouvre un chantier de refactoring
 /optimize <slug>      ouvre un chantier d'optimisation
 /hotfix <slug>        ouvre un correctif d'urgence + son chantier de suivi
+/retouche <slug>      petit changement sans règle métier, PR directe
 ```
 
 Un programme n'a pas de commande : on copie `docs/chantiers/_TEMPLATE/` dans `docs/chantiers/<programme>/`, on y ajoute `feuille-de-route.md` et, pour une refonte, `inventaire/` — voir [`programme.md`](programme.md).

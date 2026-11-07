@@ -16,6 +16,8 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
     sign_in_as @teacher
   end
 
+  # sujet-avant-de-commencer : les bascules sont sur la page de lecture de la feuille, plus sur la leçon.
+  def sheet_path(exercise) = course_sheet_path(@course.slug, exercise.essential ? "notion-#{exercise.essential.slug}" : "toute-la-lecon")
   def toggle_id(classroom, exercise) = "assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}"
   def assign(exercise, classroom = @classroom, **options)
     post classroom_assignments_path(classroom.public_id),
@@ -25,7 +27,7 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
   # CA-07
   test "« Assigner » on the row of a sheet exercise creates the assignment due on the next session, and the row turns « Assignée »" do
     travel_to Time.zone.local(2026, 10, 5, 10) do
-      get course_path(@course.slug)
+      get sheet_path(@exercises[1])
       assert_select "##{toggle_id(@classroom, @exercises[1])}", text: /#{I18n.t("classroom.assignments.toggle.assign")}/
 
       assert_difference -> { Orm::ClassroomAssignment.where(status: "active").count }, 1 do
@@ -39,8 +41,9 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
         assert_select "template", text: /#{I18n.t("classroom.assignments.toggle.assigned")}/
       end
 
-      get course_path(@course.slug)
+      get sheet_path(@exercises[1])
       assert_select "##{toggle_id(@classroom, @exercises[1])}", text: /#{I18n.t("classroom.assignments.toggle.assigned")}/
+      get sheet_path(@exercises[0])
       assert_select "##{toggle_id(@classroom, @exercises[0])}", text: /#{I18n.t("classroom.assignments.toggle.assign")}/
     end
   end
@@ -51,18 +54,18 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
-    get course_path(@course.slug)
+    get sheet_path(@wide)
     assert_select "##{toggle_id(@classroom, @wide)}", text: /#{I18n.t("classroom.assignments.toggle.assigned")}/
   end
 
   test "the whole-lesson rows carry a toggle for each classroom the teacher teaches" do
-    get course_path(@course.slug)
+    get sheet_path(@wide)
 
     assert_select ".ps-sheet#toute-la-lecon ##{toggle_id(@classroom, @wide)}"
   end
 
   test "the page lists only the classrooms the teacher teaches" do
-    get course_path(@course.slug)
+    get sheet_path(@exercises[0])
 
     assert_select "[id^='assignment_#{@foreign.public_id}']", 0
     assert_select "##{toggle_id(@classroom, @exercises[0])}"

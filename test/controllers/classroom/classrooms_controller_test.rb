@@ -115,22 +115,36 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-I1 (UDR enseignant §3.5) : « Vos jours de séance » n'est plus rendu ; routes et données sont gardées.
-  test "CA-I1 : jours de séance renseignés ou non, la page n'a pas le bloc « Vos jours de séance »" do
+  # CA-15 (UDR suivi-de-la-classe-sur-une-lecon §3.4) : « Jours de séance » de retour, pour l'enseignant de la classe seul.
+  test "CA-15 : l'enseignant lit ses jours de séance juste après l'en-tête, « Modifier les jours » ouvre la fenêtre" do
     [ 4, 1 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
     assert_response :success
-    assert_select "section#classroom_session_days", 0
-    assert_no_match(/jours de séance|Renseigner/i, response.body)
+    assert_select "section#classroom_session_days", text: /lundi, jeudi/
+    assert_select "section#classroom_session_days a[href='#{edit_classroom_session_days_path(@classroom.public_id)}']"
+    assert_match(/id="classroom_header".*id="classroom_session_days".*id="assigned_exercises"/m, response.body)
+  end
 
-    Orm::ClassroomSessionDay.where(classroom: @classroom).delete_all
+  test "CA-15 : sans jour renseigné, l'enseignant voit « Renseigner »" do
+    sign_in_as @teacher
+
     get classroom_path(@classroom.public_id)
 
+    assert_select "section#classroom_session_days a[href='#{edit_classroom_session_days_path(@classroom.public_id)}'][data-turbo-frame=modal]",
+                  text: I18n.t("classroom.classrooms.session_days.fill")
+  end
+
+  test "CA-15 : l'équipe ne voit pas les jours de séance" do
+    Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: 1)
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
     assert_select "section#classroom_session_days", 0
-    assert_no_match(/jours de séance|Renseigner/i, response.body)
   end
 
   test "ADR-0088 : la page d'une classe archivée n'existe plus, pour l'enseignant comme pour l'équipe : 404" do
@@ -207,7 +221,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#assignment_#{assignment.public_id} span", text: "1 pas encore"
     assert_select "#assignment_#{on_time.public_id} span", text: "2 pas encore"
     assert_no_match(/en retard/, response.body)
-    assert_select "section#classroom_session_days", 0
   end
 
   def hand_in(assignment, score_percent, student: create_student(classroom: @classroom), **attributes)

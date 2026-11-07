@@ -12,6 +12,7 @@ problematique: Une CI complète par PR fait jouer la suite entière à chaque fu
 | **Chantier** | [`docs/chantiers/ci-par-train`](../../chantiers/ci-par-train/memo.md) |
 | **Remplace** | la règle « une CI complète par PR » (`docs/workflows/README.md` §5.3, chantier `ci-perf-a-la-demande`) |
 | **Remplacé par** | — |
+| **Amendé** | 2026-11-04 : la suite unitaire en deux parts sur GitHub, couverture fusionnée (§8, chantier `ci-unit-en-parts`) · 2026-11-05 : trois parts unitaires (§9, chantier `ci-train-rapide`) |
 
 ---
 
@@ -47,7 +48,7 @@ La CI GitHub est coupée (ADR-0069) : la preuve de chaque PR est un `bin/ci-quie
 
 Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le miroir de chaque fichier Ruby (la correspondance du pre-commit), et tout test qui nomme ce qui a changé : la constante d'un fichier Ruby, les méthodes d'une aide de `test/support/`, le jeu d'une fixture (`users(:`), le nom de tout autre fichier ou l'un de ses dossiers (`docs/contenus/lecons-traitees`).
 
-**La promotion.** La PR `Develop → Staging` est prouvée par la CI GitHub (variable `CI_ENABLED`, réactivée le 2026-10-20), qui ne tourne plus que sur les PR vers `Staging` et `main`. La suite y est découpée en tâches parallèles de **5 minutes au plus** (`timeout-minutes: 5`, garde `test/guards/ci_plan_test.rb`) : `unit` en quatre parts (la suite unitaire et sa couverture ; lint, sécurité, seeds et assets ; la perf des imports en deux parts) et `system` en six parts équilibrées (≈ 167 s de tests enregistrés chacune). Sans `ci` vert, elle ne fusionne pas. `bin/ci-quiet --full` reste possible en local, mais il n'est plus la preuve d'une promotion : sur un poste 4 cœurs, il dure 10 à 25 minutes. Un train rouge ne se rejoue pas en entier : on rejoue les seuls tests en échec sur chaque fusion du train (`git log --first-parent --merges`) jusqu'à trouver la PR fautive, qui est corrigée par une nouvelle PR.
+**La promotion.** La PR `Develop → Staging` est prouvée par la CI GitHub (variable `CI_ENABLED`, réactivée le 2026-10-20), qui ne tourne plus que sur les PR vers `Staging` et `main`. La suite y est découpée en tâches parallèles de **5 minutes au plus** (`timeout-minutes: 5`, garde `test/guards/ci_plan_test.rb`) : `unit` en cinq parts (la suite unitaire en deux parts, dont la tâche `coverage` fusionne les couvertures pour vérifier le seuil sur la suite entière ; lint, sécurité, seeds et assets ; la perf des imports en deux parts — amendement du 2026-11-04) et `system` en six parts équilibrées (≈ 167 s de tests enregistrés chacune). Sans `ci` vert, elle ne fusionne pas. `bin/ci-quiet --full` reste possible en local, mais il n'est plus la preuve d'une promotion : sur un poste 4 cœurs, il dure 10 à 25 minutes. Un train rouge ne se rejoue pas en entier : on rejoue les seuls tests en échec sur chaque fusion du train (`git log --first-parent --merges`) jusqu'à trouver la PR fautive, qui est corrigée par une nouvelle PR.
 
 ## 5. Conséquences
 
@@ -64,7 +65,7 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 - Une aide de test partagée (fabriques) sélectionne une grande partie des tests unitaires : la suite système, les seeds, la perf et le budget des assets restent au train.
 - Le train joue sur GitHub en tâches parallèles : le dépôt est public, les minutes sont gratuites. Si GitHub n'attribue plus de runner (constat du 2026-10-04, ADR-0069), la promotion attend : la suite locale ne tient pas en 5 minutes.
 - Les contrôles de clé étrangère d'un `COPY` en masse gardent le plan choisi quand la table parente était vide : sur une base neuve (GitHub), un parcours complet par ligne, coût quadratique (10 000 exercices au-delà de 5 min). `ContentTreeWriter` coupe les parcours séquentiels le temps du lot (constat du 2026-10-20, PR #271).
-- Une part qui grossit au-delà de 5 minutes rend la CI rouge : il faut alors ajouter une part (`SYSTEM_PARTS`) ou alléger les tests, jamais relever le plafond sans décision du porteur.
+- Une part qui grossit au-delà de 5 minutes rend la CI rouge : il faut alors ajouter une part (`SYSTEM_PARTS`, `UNIT_PARTS`) ou alléger les tests, jamais relever le plafond sans décision du porteur.
 - Les niveaux doc et pr ne jouent pas `bin/setup` : une machine qui n'est pas installée doit lancer `bin/setup` d'abord.
 
 ## 6. Notes d'implémentation
@@ -77,3 +78,16 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 ## 7. Comment vérifier que la décision est respectée
 
 `bin/ci-quiet --plan` sur la branche dit ce qu'elle doit. Chaque PR porte une ligne `Preuve : bin/ci-quiet niveau … vert sur <sha>`, et chaque PR vers `Staging` une ligne de niveau **train**.
+
+## 8. Amendement du 2026-11-04 — la suite unitaire passe en parts
+
+La tâche `unit unit` a dépassé 5 minutes trois fois le 2026-11-04 (316 s et 317 s, coupée par `timeout-minutes: 5`) et a bloqué le train #476. Décision du porteur, sans relever le plafond : la suite unitaire tourne sur GitHub en deux parts, et la tâche `coverage` fusionne leurs couvertures pour vérifier le seuil de 100 % / 100 % sur la suite entière (détail : [ADR-0064 §8](./0064-ci-parallele-par-groupes-de-bin-ci.md#8-amendement-du-2026-11-04--la-suite-unitaire-en-parts-la-couverture-fusionnée)). Quand une part approche à son tour 5 minutes, on relève `UNIT_PARTS` (garde, tirage de `plan`, appel de `script/ci/coverage_collate`).
+
+## 9. Amendement du 2026-11-05 — un train plus court
+
+Chantier [`ci-train-rapide`](../../chantiers/ci-train-rapide/memo.md), ouverture validée par le porteur.
+
+**Constat.** Un train dure 293 s d'horloge (médiane de 3 runs) : la part `unit:1/2` (226 s) puis `coverage` font le chemin critique.
+
+**Décision.** La suite unitaire tourne en **trois parts** sur GitHub (`UNIT_PARTS = 3`) ; `coverage` fusionne trois résultats, avec le même seuil sur la suite entière. Le plafond de 5 minutes ne change pas.
+

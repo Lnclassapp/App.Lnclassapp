@@ -1,0 +1,10 @@
+<%# 🌐 UI · classroom/student_assigned_sheets/fill — le devoir reçu à remplir (la feuille d'aujourd'hui) %>
+<%# Rôle : retour au sujet en lecture, puis la feuille : champs, « Rendre à l'enseignant » ; la page de résultat ramène ici, à l'exercice %>
+<%# ADR  : 0121, 0072 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3, XXXX refaire-ou-continuer §3 · Stimulus : prepare-sheet, math %>
+<% number = t("catalog.courses.sheets.numbered_title.#{@sheet.kind}", number: @sheet.number) %>
+<% page_title t("catalog.courses.sheets.page_title", title: number, course: @sheet.courses.join(" · ")) %>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<div data-turbo-prefetch="false"><%= ui_back_link t("catalog.courses.sheets.read_subject"), href: student_assigned_sheet_path(@sheet.dom_id) %></div>
+<div class="ps-page">
+  <%= render "classroom/student_assigned_sheets/sheet", sheet: @sheet, mode: :student, redo_exercise: @redo %>
+</div>

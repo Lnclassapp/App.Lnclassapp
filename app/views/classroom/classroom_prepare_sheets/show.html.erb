@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/classroom_prepare_sheets/show — le sujet d'une feuille de la leçon, lu par l'enseignant depuis sa classe %>
+<%# Rôle : retour à la case de la leçon dans la classe, la feuille en mode enseignant (ses bascules d'envoi pour CETTE classe, le bandeau d'envoi), sans « Commencer » %>
+<%# ADR  : 0121, 0048 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3 · Stimulus : math, assignment-batch %>
+<% course = @course.course %>
+<% targets = @prepare.targets %>
+<%# Les bascules de cette classe seulement : une autre classe se gère depuis sa propre page. %>
+<% classrooms = targets ? targets.classrooms.select { it.public_id == @classroom.public_id } : [] %>
+<% kind = @sheet.kind == :subject ? :devoirs : :interros %>
+<% page_title t("catalog.courses.sheets.page_title", title: t("catalog.courses.sheets.numbered_title.#{kind}", number: @sheet.number), course: course.name) %>
+<% content_for :nav_key, "classrooms" %>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<% @primary_assign_taken = false %>
+<div data-turbo-prefetch="false"><%= ui_back_link course.name, href: classroom_course_path(@classroom.public_id, course.slug, anchor: @sheet.dom_id) %></div>
+<% if targets && classrooms.empty? %>
+  <p id="assign_targets_none" class="mb-4 text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
+<% end %>
+<div class="ps-page">
+  <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: sheet_mode, targets:, classrooms:, heading: :h1, can_assign: @can_assign, success: @success %>
+</div>

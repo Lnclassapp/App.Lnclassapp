@@ -1,25 +1,27 @@
 <%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions %>
-<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà vérifié : son statut, « Voir ma correction » (la page de résultat, note sur 20) et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
+<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; `mode: :reading` (sujet-avant-de-commencer) : le sujet à lire, un <fieldset disabled> autour des questions, ni statut, ni marque, ni barre de boutons, ni indice ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà vérifié : son statut, « Voir ma correction » (la page de résultat, note sur 20) et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
 <%# ADR  : 0121, 0120, 0091 §4.4 (aucune correction avant la vérification) · UDR : 0149 §3 · Stimulus : prepare-sheet, math %>
-<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet") -%>
+<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet", sheet: nil, can_assign: true, success: nil) -%>
 <%# return_to : où la page de résultat ramène l'élève, "sheet" (l'exercice dans la leçon) ou "class" (« Ma classe ») ; jamais une adresse %>
+<%# sheet : l'ancre de la feuille (notion-<slug>, toute-la-lecon, sujet-<n>), postée avec la vérification et passée à la page de résultat, qui ramène à cette feuille %>
 <%# assignment_public_id : l'exercice est un devoir à rendre (« Ma classe ») ; exercise.copy y est la copie rendue, nil avant : ni statut ni correction avant le rendu %>
+<% reading = mode == :reading %>
 <% fields = %i[student visitor].include?(mode) %>
-<% copy = exercise.copy %>
+<% copy = (exercise.copy unless reading) %>
 <%# Un seul « Indice » par exercice : celui de l'exercice, puis ceux de ses questions (une ligne lettrée chacune, comme _question). %>
 <% question_hints = exercise.questions.select { it.hint.present? } %>
 <% hinted = exercise.hint.present? || question_hints.any? %>
 <% checked = !copy.nil? %>
 <%# Un devoir pas encore rendu : « Rendre à l'enseignant » et le devoir posté ; une fois rendu (ou refait), « Vérifier ma réponse », sans devoir. %>
 <% hand_in = fields && assignment_public_id.present? && !checked %>
-<% frame_data = { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id }.compact %>
+<% frame_data = (reading ? {} : { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id }.compact) %>
 <%# Le formulaire n'existe que pour qui répond : les bascules de l'enseignant sont des formulaires, qui ne s'imbriquent pas. %>
 <% body = capture do %>
   <div class="ps-exercise-top">
     <div class="ps-exercise-main">
       <div class="ps-exercise-head">
         <b><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></b>
-        <span class="ps-status" data-ps="done" <%= tag.attributes(hidden: !checked) %>><%= t("catalog.courses.sheets.#{copy.passed ? :passed : :to_review}") if checked %></span>
+        <% unless reading %><span class="ps-status" data-ps="done" <%= tag.attributes(hidden: !checked) %>><%= t("catalog.courses.sheets.#{copy.passed ? :passed : :to_review}") if checked %></span><% end %>
         <%# L'équipe lit le statut éditorial de chaque exercice (brouillon ou publié) ; les autres rôles ne le voient pas. %>
         <% if mode == :team && exercise.status.present? %><span class="ps-status"><%= t("catalog.content_status.#{exercise.status}") %></span><% end %>
       </div>
@@ -34,8 +36,12 @@
       <div class="ps-figure ps-exercise-figure [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
     <% end %>
   </div>
-  <% exercise.questions.each do |question| %>
-    <%= render "catalog/courses/sheets/question", question:, fields:, checked: %>
+  <%# Lecture : les champs se voient, désactivés et vides ; un fieldset les désactive d'un coup et reste lisible au lecteur d'écran. %>
+  <%# min-w-0 : un fieldset ne rétrécit pas sous son contenu ; sans lui, une formule longue élargit la page à 390 px. %>
+  <%= tag.fieldset disabled: reading, class: "m-0 min-w-0 border-0 p-0" do %>
+    <% exercise.questions.each do |question| %>
+      <%= render "catalog/courses/sheets/question", question:, fields: fields || reading, checked: reading ? false : checked, reading: %>
+    <% end %>
   <% end %>
   <% if fields && hinted %>
     <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" data-controller="math" hidden>
@@ -45,6 +51,7 @@
       <% end %>
     </div>
   <% end %>
+  <% unless reading %>
   <div class="ps-actions">
     <% if fields && exercise.due && assignment_public_id.blank? %>
       <%# CA-17 : un devoir à rendre ne se vérifie pas depuis la leçon ; ni « Vérifier ma réponse », ni « Indice ». %>
@@ -63,21 +70,23 @@
                         data: { ps: "blank", action: "prepare-sheet#hint", label_show: t("catalog.courses.sheets.hint"), label_hide: t("catalog.courses.sheets.hide_hint") } %>
       <% end %>
       <% if checked && mode == :student %>
-        <%= link_to t("catalog.courses.sheets.see_correction"), exercise_session_result_path(copy.session_public_id, return_to:),
+        <%= link_to t("catalog.courses.sheets.see_correction"), exercise_session_result_path(copy.session_public_id, return_to:, sheet:),
                     class: "ps-btn ps-btn--redo", data: { ps: "done", turbo_frame: "_top", turbo_prefetch: false } %>
       <% end %>
       <%= tag.button t("catalog.courses.sheets.redo"), type: :button, class: "ps-btn ps-btn--redo", hidden: !checked,
                       data: { ps: "done", action: "prepare-sheet#redo" } %>
-    <% elsif mode == :teacher %>
-      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %>
+    <% elsif %i[teacher team].include?(mode) %>
+      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms:, can_assign: can_assign && exercise.status != "draft", success: success&.dig(exercise.public_id) %>
     <% end %>
   </div>
+  <% end %>
 <% end %>
 <%= turbo_frame_tag "sheet-exercise-#{exercise.public_id}", class: "ps-exercise", data: frame_data do %>
   <% if fields %>
     <%# La copie rendue ouvre la page de résultat : le formulaire vise toute la page, pas le frame. %>
     <%= form_with url: exercise_sheet_check_path(exercise.public_id), method: :post, class: "contents", html: { novalidate: true }, data: { turbo_frame: "_top" } do %>
       <%= hidden_field_tag :return_to, return_to, id: nil if mode == :student %>
+      <%= hidden_field_tag :sheet, sheet, id: nil if mode == :student && sheet.present? %>
       <%= body %>
     <% end %>
   <% else %>

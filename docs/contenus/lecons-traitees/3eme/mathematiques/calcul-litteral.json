@@ -8,7 +8,137 @@
       "level_name": "3ème",
       "material_name": "Mathématiques",
       "theme": "blue",
-      "figures": [],
+      "figures": [
+        {
+          "key": "rectangle-etal",
+          "kind": "geometry",
+          "description": "Un rectangle ABCD qui représente l'étal d'un marché. Le côté AB est la longueur et le côté BC est la largeur. Les dimensions écrites avec la lettre x sont données dans l'énoncé de l'exercice : le dessin est un schéma, pas un plan à l'échelle.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 12,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 12,
+                "y": 7
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": 7
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carre-decoupe",
+          "kind": "geometry",
+          "description": "Un grand carré ABCD découpé en quatre morceaux par les segments EG et HF, qui se coupent en O. Le carré AEOH est le terrain d'origine de côté x. Les deux rectangles EBFO et HOGD et le petit carré OFCG sont les parties ajoutées. Schéma non à l'échelle : les côtés valent x ou 3, comme dans l'énoncé.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "E",
+                "x": 6,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 9,
+                "y": 0
+              },
+              {
+                "id": "F",
+                "x": 9,
+                "y": 6
+              },
+              {
+                "id": "C",
+                "x": 9,
+                "y": 9
+              },
+              {
+                "id": "G",
+                "x": 6,
+                "y": 9
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": 9
+              },
+              {
+                "id": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "O",
+                "x": 6,
+                "y": 6
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "D"
+              ],
+              [
+                "D",
+                "A"
+              ],
+              [
+                "E",
+                "G"
+              ],
+              [
+                "H",
+                "F"
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
       "notions": [
         {
           "name": "Développer une expression",
@@ -30,167 +160,285 @@
           },
           "pitfall": "L'erreur fréquente : oublier un produit ou se tromper de signe. Exemple : $(x-3)(x+2)$ n'est **pas** $x^2 - 6$. En remplaçant $x$ par $1$, on a $(1-3)(1+2) = -6$, alors que $1^2 - 6 = -5$. Il faut faire les **quatre** produits : $x^2 + 2x - 3x - 6 = x^2 - x - 6$. Pour l'éviter, écris les quatre produits avant de réduire.",
           "figure": null,
-          "exercise": {
-            "title": "Développer et réduire des expressions",
-            "statement": "Dans cet exercice, tu développes des expressions avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Développer $3(x+5)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le facteur $3$ multiplie la parenthèse $(x+5)$, dont les termes sont $x$ et $+5$. Étape 2 — Multiplier : $3 \\times x + 3 \\times 5$. Étape 3 — Calculer : $3x + 15$. Étape 4 — Réduire : rien à réduire. Donc $3(x+5) = 3x + 15$. L'erreur $3x + 5$ oublie de multiplier le second terme par $3$.",
-                "answers": [
-                  {
-                    "content": "$3x + 15$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$3x + 5$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x + 15$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3x + 8$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer et réduire $(x+2)(x+5)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : facteurs $(x+2)$ et $(x+5)$. Étape 2 — Multiplier : $x \\times x + x \\times 5 + 2 \\times x + 2 \\times 5$. Étape 3 — Calculer : $x^2 + 5x + 2x + 10$. Étape 4 — Réduire : $5x + 2x = 7x$, donc $x^2 + 7x + 10$. La réponse $x^2 + 10$ oublie les deux produits croisés $5x$ et $2x$.",
-                "answers": [
-                  {
-                    "content": "$x^2 + 10$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 7x + 7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 3x + 10$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 7x + 10$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Développer et réduire $(2x-1)(x+3)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : termes $2x$, $-1$ et $x$, $+3$. Étape 2 — Multiplier : $2x \\times x + 2x \\times 3 + (-1) \\times x + (-1) \\times 3$. Étape 3 — Calculer : $2x^2 + 6x - x - 3$. Étape 4 — Réduire : $6x - x = 5x$, donc $2x^2 + 5x - 3$. Le signe de $-1 \\times 3$ est $-$ : la réponse $2x^2 + 5x + 3$ est donc fausse.",
-                "answers": [
-                  {
-                    "content": "$2x^2 + 7x - 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x^2 - 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x^2 + 5x - 3$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$2x^2 + 5x + 3$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer et réduire $(x-4)(x-3)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : termes $x$, $-4$ et $x$, $-3$. Étape 2 — Multiplier : $x \\times x + x \\times (-3) + (-4) \\times x + (-4) \\times (-3)$. Étape 3 — Calculer : $x^2 - 3x - 4x + 12$ (règle des signes : $(-4) \\times (-3) = +12$). Étape 4 — Réduire : $-3x - 4x = -7x$, donc $x^2 - 7x + 12$. La réponse $x^2 - 7x - 12$ se trompe sur le signe du dernier produit.",
-                "answers": [
-                  {
-                    "content": "$x^2 - 12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 - 7x + 12$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^2 - 7x - 12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 7x + 12$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $(x-3)(x+2) = x^2 - 6$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : termes $x$, $-3$ et $x$, $+2$. Étape 2 — Multiplier : $x \\times x + x \\times 2 + (-3) \\times x + (-3) \\times 2$. Étape 3 — Calculer : $x^2 + 2x - 3x - 6$. Étape 4 — Réduire : $2x - 3x = -x$, donc $(x-3)(x+2) = x^2 - x - 6$. L'affirmation est fausse : elle oublie les produits croisés. Contrôle avec $x = 1$ : $(1-3)(1+2) = -6$ et $1^2 - 6 = -5$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Développer $-2(3x-4)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le facteur $-2$ multiplie $(3x-4)$, dont les termes sont $3x$ et $-4$. Étape 2 — Multiplier : $-2 \\times 3x + (-2) \\times (-4)$. Étape 3 — Calculer : $-6x + 8$ (car $(-2) \\times (-4) = +8$). Étape 4 — Réduire : rien à réduire. Donc $-6x + 8$. La réponse $-6x - 8$ oublie que moins par moins donne plus.",
-                "answers": [
-                  {
-                    "content": "$-6x + 8$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-6x - 8$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$6x - 8$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-6x - 4$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux expressions égales à $(x+1)(x+4)$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : facteurs $(x+1)$ et $(x+4)$. Étape 2 — Multiplier : $x \\times x + x \\times 4 + 1 \\times x + 1 \\times 4$, c'est la proposition $x^2 + 4x + x + 4$. Étape 3 — Calculer : $x^2 + 4x + x + 4$. Étape 4 — Réduire : $x^2 + 5x + 4$. Les deux bonnes propositions sont donc $x^2 + 5x + 4$ et $x^2 + 4x + x + 4$. $x^2 + 4$ oublie les produits croisés ; $x^2 + 5x + 5$ se trompe sur le dernier produit ($1 \\times 4 = 4$).",
-                "answers": [
-                  {
-                    "content": "$x^2 + 4x + x + 4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^2 + 4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 5x + 5$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 5x + 4$",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Développer et réduire des expressions",
+              "statement": "Dans cet exercice, tu développes des expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Développer $3(x+5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le facteur $3$ multiplie la parenthèse $(x+5)$, dont les termes sont $x$ et $+5$. Étape 2 — Multiplier : $3 \\times x + 3 \\times 5$. Étape 3 — Calculer : $3x + 15$. Étape 4 — Réduire : rien à réduire. Donc $3(x+5) = 3x + 15$. L'erreur $3x + 5$ oublie de multiplier le second terme par $3$.",
+                  "answers": [
+                    {
+                      "content": "$3x + 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x+2)(x+5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : facteurs $(x+2)$ et $(x+5)$. Étape 2 — Multiplier : $x \\times x + x \\times 5 + 2 \\times x + 2 \\times 5$. Étape 3 — Calculer : $x^2 + 5x + 2x + 10$. Étape 4 — Réduire : $5x + 2x = 7x$, donc $x^2 + 7x + 10$. La réponse $x^2 + 10$ oublie les deux produits croisés $5x$ et $2x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 10$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(2x-1)(x+3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : termes $2x$, $-1$ et $x$, $+3$. Étape 2 — Multiplier : $2x \\times x + 2x \\times 3 + (-1) \\times x + (-1) \\times 3$. Étape 3 — Calculer : $2x^2 + 6x - x - 3$. Étape 4 — Réduire : $6x - x = 5x$, donc $2x^2 + 5x - 3$. Le signe de $-1 \\times 3$ est $-$ : la réponse $2x^2 + 5x + 3$ est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + 7x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + 5x - 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + 5x + 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x-4)(x-3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $-4$ et $x$, $-3$. Étape 2 — Multiplier : $x \\times x + x \\times (-3) + (-4) \\times x + (-4) \\times (-3)$. Étape 3 — Calculer : $x^2 - 3x - 4x + 12$ (règle des signes : $(-4) \\times (-3) = +12$). Étape 4 — Réduire : $-3x - 4x = -7x$, donc $x^2 - 7x + 12$. La réponse $x^2 - 7x - 12$ se trompe sur le signe du dernier produit.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 7x + 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 7x - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-3)(x+2) = x^2 - 6$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $-3$ et $x$, $+2$. Étape 2 — Multiplier : $x \\times x + x \\times 2 + (-3) \\times x + (-3) \\times 2$. Étape 3 — Calculer : $x^2 + 2x - 3x - 6$. Étape 4 — Réduire : $2x - 3x = -x$, donc $(x-3)(x+2) = x^2 - x - 6$. L'affirmation est fausse : elle oublie les produits croisés. Contrôle avec $x = 1$ : $(1-3)(1+2) = -6$ et $1^2 - 6 = -5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $-2(3x-4)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le facteur $-2$ multiplie $(3x-4)$, dont les termes sont $3x$ et $-4$. Étape 2 — Multiplier : $-2 \\times 3x + (-2) \\times (-4)$. Étape 3 — Calculer : $-6x + 8$ (car $(-2) \\times (-4) = +8$). Étape 4 — Réduire : rien à réduire. Donc $-6x + 8$. La réponse $-6x - 8$ oublie que moins par moins donne plus.",
+                  "answers": [
+                    {
+                      "content": "$-6x + 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-6x - 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x - 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-6x - 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux expressions égales à $(x+1)(x+4)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : facteurs $(x+1)$ et $(x+4)$. Étape 2 — Multiplier : $x \\times x + x \\times 4 + 1 \\times x + 1 \\times 4$, c'est la proposition $x^2 + 4x + x + 4$. Étape 3 — Calculer : $x^2 + 4x + x + 4$. Étape 4 — Réduire : $x^2 + 5x + 4$. Les deux bonnes propositions sont donc $x^2 + 5x + 4$ et $x^2 + 4x + x + 4$. $x^2 + 4$ oublie les produits croisés ; $x^2 + 5x + 5$ se trompe sur le dernier produit ($1 \\times 4 = 4$).",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 4x + x + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 5x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 5x + 4$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Développer et réduire d'autres expressions",
+              "statement": "Dans cet exercice, tu développes et tu réduis d'autres expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Fais tous les produits terme par terme avant de réduire, et surveille les signes.",
+              "questions": [
+                {
+                  "content": "Développer $4(2x-3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le facteur $4$ multiplie $(2x-3)$, de termes $2x$ et $-3$. Étape 2 — Multiplier : $4 \\times 2x + 4 \\times (-3)$. Étape 3 — Calculer : $8x - 12$. Étape 4 — Réduire : rien à réduire. La réponse $8x - 3$ oublie de multiplier le second terme par $4$ ; la réponse $6x - 12$ additionne $4$ et $2$ au lieu de les multiplier ; la réponse $8x + 12$ se trompe sur le signe de $4 \\times (-3)$.",
+                  "answers": [
+                    {
+                      "content": "$8x - 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8x + 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x+3)(x+7)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : facteurs $(x+3)$ et $(x+7)$. Étape 2 — Multiplier : $x \\times x + x \\times 7 + 3 \\times x + 3 \\times 7$. Étape 3 — Calculer : $x^2 + 7x + 3x + 21$. Étape 4 — Réduire : $7x + 3x = 10x$, donc $x^2 + 10x + 21$. La réponse $x^2 + 21$ oublie les produits croisés ; $x^2 + 10x + 10$ additionne $3$ et $7$ au lieu de les multiplier ; $x^2 + 4x + 21$ soustrait les produits croisés au lieu de les ajouter.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 10x + 21$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 10x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 4x + 21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développe et réduis $(x-2)(x+5)$ sous la forme $x^2 + bx + c$. Quelle est la valeur de $b$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $-2$ et $x$, $+5$. Étape 2 — Multiplier : $x \\times x + x \\times 5 + (-2) \\times x + (-2) \\times 5$. Étape 3 — Calculer : $x^2 + 5x - 2x - 10$. Étape 4 — Réduire : $5x - 2x = 3x$, donc $x^2 + 3x - 10$ et $b = 3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-1)(x-6) = x^2 - 7x - 6$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $-1$ et $x$, $-6$. Étape 2 — Multiplier : $x \\times x + x \\times (-6) + (-1) \\times x + (-1) \\times (-6)$. Étape 3 — Calculer : $x^2 - 6x - x + 6$ (règle des signes : $(-1) \\times (-6) = +6$). Étape 4 — Réduire : $x^2 - 7x + 6$. L'affirmation est fausse : elle se trompe sur le signe du dernier produit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $(x-3)(x-5) = x^2 - 8x $ ___ $ 15$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $-3$ et $x$, $-5$. Étape 2 — Multiplier : $x \\times x + x \\times (-5) + (-3) \\times x + (-3) \\times (-5)$. Étape 3 — Calculer : $x^2 - 5x - 3x + 15$ (car $(-3) \\times (-5) = +15$). Étape 4 — Réduire : $x^2 - 8x + 15$. Le signe est $+$ : moins par moins donne plus.",
+                  "answers": [
+                    {
+                      "content": "+",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux expressions égales à $(x+2)(x-3)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : termes $x$, $+2$ et $x$, $-3$. Étape 2 — Multiplier : $x \\times x + x \\times (-3) + 2 \\times x + 2 \\times (-3)$, c'est la proposition $x^2 - 3x + 2x - 6$. Étape 3 — Calculer : $x^2 - 3x + 2x - 6$. Étape 4 — Réduire : $-3x + 2x = -x$, donc $x^2 - x - 6$. $x^2 - 6$ oublie les produits croisés ; $x^2 + x - 6$ se trompe sur le signe du terme en $x$ ($-3x + 2x = -x$).",
+                  "answers": [
+                    {
+                      "content": "$x^2 - x - 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x - 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 3x + 2x - 6$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu développes des expressions en suivant les étapes de la fiche.",
             "questions": [
@@ -284,190 +532,308 @@
           },
           "pitfall": "L'erreur fréquente : écrire $(a+b)^2 = a^2 + b^2$ et oublier le double produit $2ab$. Exemple : $(3+4)^2 = 7^2 = 49$, mais $3^2 + 4^2 = 9 + 16 = 25$. La différence, $24$, est exactement $2 \\times 3 \\times 4$. De même, $(a-b)^2$ n'est pas $a^2 - b^2$. Pour l'éviter, écris toujours les trois termes.",
           "figure": null,
-          "exercise": {
-            "title": "Développer avec les identités remarquables",
-            "statement": "Dans cet exercice, tu développes des carrés et des produits somme-différence avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Développer $(x+6)^2$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = x$ et $b = 6$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 6 + 6^2$. Étape 4 — Calculer : $x^2 + 12x + 36$. La réponse $x^2 + 36$ oublie le double produit $12x$.",
-                "answers": [
-                  {
-                    "content": "$x^2 + 6x + 36$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 12x + 12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 + 12x + 36$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^2 + 36$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer $(x-5)^2$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Appliquer : $x^2 - 2 \\times x \\times 5 + 5^2$. Étape 4 — Calculer : $x^2 - 10x + 25$. Le dernier terme est $+25$ car $5^2 > 0$ ; $x^2 - 25$ est le développement de $(x+5)(x-5)$, pas celui de $(x-5)^2$.",
-                "answers": [
-                  {
-                    "content": "$x^2 + 10x + 25$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 - 10x + 25$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^2 - 25$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 - 10x - 25$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer $(2x+3)(2x-3)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : produit de la somme par la différence $(a+b)(a-b)$. Étape 2 — Identifier : $a = 2x$ et $b = 3$. Étape 3 — Appliquer : $(2x)^2 - 3^2$. Étape 4 — Calculer : $4x^2 - 9$. La réponse $2x^2 - 9$ oublie d'élever le coefficient $2$ au carré.",
-                "answers": [
-                  {
-                    "content": "$4x^2 - 9$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$4x^2 + 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x^2 - 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4x^2 - 6x - 9$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer $(4x-1)^2$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = 4x$ et $b = 1$. Étape 3 — Appliquer : $(4x)^2 - 2 \\times 4x \\times 1 + 1^2$. Étape 4 — Calculer : $16x^2 - 8x + 1$. La réponse $16x^2 - 1$ oublie le double produit ; $4x^2 - 8x + 1$ oublie d'élever $4$ au carré.",
-                "answers": [
-                  {
-                    "content": "$16x^2 - 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4x^2 - 8x + 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$16x^2 - 4x + 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$16x^2 - 8x + 1$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $(x+7)^2 = x^2 + 49$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Reconnaître : carré d'une somme. Étape 2 — Identifier : $a = x$ et $b = 7$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 7 + 7^2$. Étape 4 — Calculer : $x^2 + 14x + 49$. L'affirmation est fausse : elle oublie le double produit $14x$. Contrôle avec $x = 1$ : $(1+7)^2 = 64$, alors que $1 + 49 = 50$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux égalités vraies pour tout nombre $x$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Reconnaître la forme de chaque expression. Étape 2 — Identifier $a = x$ et $b = 3$. Étape 3 — Appliquer les formules : $(x+3)^2 = x^2 + 6x + 9$ est vraie ; $(x+3)(x-3) = x^2 - 9$ est vraie. Étape 4 — Calculer : $(x-3)^2 = x^2 - 6x + 9$, qui n'est ni $x^2 - 9$ ni $x^2 + 6x + 9$. Les deux fausses confondent le carré d'une différence avec les autres identités.",
-                "answers": [
-                  {
-                    "content": "$(x-3)^2 = x^2 - 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x-3)^2 = x^2 + 6x + 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+3)^2 = x^2 + 6x + 9$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(x+3)(x-3) = x^2 - 9$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Calculer $101^2$ sans calculatrice en écrivant $101 = 100 + 1$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : $101^2 = (100+1)^2$, carré d'une somme. Étape 2 — Identifier : $a = 100$ et $b = 1$. Étape 3 — Appliquer : $100^2 + 2 \\times 100 \\times 1 + 1^2$. Étape 4 — Calculer : $10\\,000 + 200 + 1 = 10\\,201$. La réponse $10\\,001$ oublie le double produit $200$.",
-                "answers": [
-                  {
-                    "content": "$10\\,200$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$10\\,201$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$10\\,001$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$10\\,101$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Développer $(5-2x)^2$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = 5$ et $b = 2x$. Étape 3 — Appliquer : $5^2 - 2 \\times 5 \\times 2x + (2x)^2$. Étape 4 — Calculer : $25 - 20x + 4x^2$. La réponse $25 - 10x + 4x^2$ oublie le facteur $2$ ou le $2$ de $2x$ dans le double produit.",
-                "answers": [
-                  {
-                    "content": "$25 - 20x + 4x^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$25 - 4x^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$25 + 20x + 4x^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$25 - 10x + 4x^2$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Développer avec les identités remarquables",
+              "statement": "Dans cet exercice, tu développes des carrés et des produits somme-différence avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Développer $(x+6)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = x$ et $b = 6$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 6 + 6^2$. Étape 4 — Calculer : $x^2 + 12x + 36$. La réponse $x^2 + 36$ oublie le double produit $12x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 6x + 36$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 12x + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 12x + 36$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 36$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(x-5)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Appliquer : $x^2 - 2 \\times x \\times 5 + 5^2$. Étape 4 — Calculer : $x^2 - 10x + 25$. Le dernier terme est $+25$ car $5^2 > 0$ ; $x^2 - 25$ est le développement de $(x+5)(x-5)$, pas celui de $(x-5)^2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 10x + 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 10x + 25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 10x - 25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(2x+3)(2x-3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : produit de la somme par la différence $(a+b)(a-b)$. Étape 2 — Identifier : $a = 2x$ et $b = 3$. Étape 3 — Appliquer : $(2x)^2 - 3^2$. Étape 4 — Calculer : $4x^2 - 9$. La réponse $2x^2 - 9$ oublie d'élever le coefficient $2$ au carré.",
+                  "answers": [
+                    {
+                      "content": "$4x^2 - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x^2 + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 - 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 6x - 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(4x-1)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = 4x$ et $b = 1$. Étape 3 — Appliquer : $(4x)^2 - 2 \\times 4x \\times 1 + 1^2$. Étape 4 — Calculer : $16x^2 - 8x + 1$. La réponse $16x^2 - 1$ oublie le double produit ; $4x^2 - 8x + 1$ oublie d'élever $4$ au carré.",
+                  "answers": [
+                    {
+                      "content": "$16x^2 - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 8x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16x^2 - 4x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16x^2 - 8x + 1$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x+7)^2 = x^2 + 49$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une somme. Étape 2 — Identifier : $a = x$ et $b = 7$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 7 + 7^2$. Étape 4 — Calculer : $x^2 + 14x + 49$. L'affirmation est fausse : elle oublie le double produit $14x$. Contrôle avec $x = 1$ : $(1+7)^2 = 64$, alors que $1 + 49 = 50$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux égalités vraies pour tout nombre $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Reconnaître la forme de chaque expression. Étape 2 — Identifier $a = x$ et $b = 3$. Étape 3 — Appliquer les formules : $(x+3)^2 = x^2 + 6x + 9$ est vraie ; $(x+3)(x-3) = x^2 - 9$ est vraie. Étape 4 — Calculer : $(x-3)^2 = x^2 - 6x + 9$, qui n'est ni $x^2 - 9$ ni $x^2 + 6x + 9$. Les deux fausses confondent le carré d'une différence avec les autres identités.",
+                  "answers": [
+                    {
+                      "content": "$(x-3)^2 = x^2 - 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-3)^2 = x^2 + 6x + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+3)^2 = x^2 + 6x + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+3)(x-3) = x^2 - 9$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $101^2$ sans calculatrice en écrivant $101 = 100 + 1$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : $101^2 = (100+1)^2$, carré d'une somme. Étape 2 — Identifier : $a = 100$ et $b = 1$. Étape 3 — Appliquer : $100^2 + 2 \\times 100 \\times 1 + 1^2$. Étape 4 — Calculer : $10\\,000 + 200 + 1 = 10\\,201$. La réponse $10\\,001$ oublie le double produit $200$.",
+                  "answers": [
+                    {
+                      "content": "$10\\,200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,201$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\,001$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,101$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(5-2x)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = 5$ et $b = 2x$. Étape 3 — Appliquer : $5^2 - 2 \\times 5 \\times 2x + (2x)^2$. Étape 4 — Calculer : $25 - 20x + 4x^2$. La réponse $25 - 10x + 4x^2$ oublie le facteur $2$ ou le $2$ de $2x$ dans le double produit.",
+                  "answers": [
+                    {
+                      "content": "$25 - 20x + 4x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25 - 4x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25 + 20x + 4x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25 - 10x + 4x^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Développer avec d'autres identités remarquables",
+              "statement": "Dans cet exercice, tu développes d'autres carrés et d'autres produits somme-différence avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence par nommer l'identité, puis repère $a$ et $b$ avant d'écrire la formule.",
+              "questions": [
+                {
+                  "content": "Développer $(x+8)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = x$ et $b = 8$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 8 + 8^2$. Étape 4 — Calculer : $x^2 + 16x + 64$. La réponse $x^2 + 64$ oublie le double produit ; $x^2 + 8x + 64$ oublie le facteur $2$ du double produit ; $x^2 + 16x + 16$ calcule $8^2$ comme $8 \\times 2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 64$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 8x + 64$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 16x + 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 16x + 64$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(3x-5)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = 3x$ et $b = 5$. Étape 3 — Appliquer : $(3x)^2 - 2 \\times 3x \\times 5 + 5^2$. Étape 4 — Calculer : $9x^2 - 30x + 25$. La réponse $9x^2 + 25$ oublie le double produit ; $3x^2 - 30x + 25$ n'élève pas $3$ au carré ; $9x^2 + 30x + 25$ se trompe sur le signe du double produit.",
+                  "answers": [
+                    {
+                      "content": "$9x^2 - 30x + 25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9x^2 + 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x^2 - 30x + 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9x^2 + 30x + 25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-7)^2 = x^2 - 49$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = x$ et $b = 7$. Étape 3 — Appliquer : $x^2 - 2 \\times x \\times 7 + 7^2$. Étape 4 — Calculer : $x^2 - 14x + 49$. L'affirmation est fausse : elle oublie le double produit, et le dernier terme est $+49$, pas $-49$. Contrôle avec $x = 8$ : $(8-7)^2 = 1$ et $8^2 - 49 = 15$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $102^2$ sans calculatrice, en écrivant $102 = 100 + 2$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = 100$ et $b = 2$. Étape 3 — Appliquer : $100^2 + 2 \\times 100 \\times 2 + 2^2$. Étape 4 — Calculer : $10\\,000 + 400 + 4 = 10\\,404$. Écrire $10\\,000 + 4$ oublie le double produit $400$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10404",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $(x+9)^2 = x^2 + $ ___ $x + 81$ (écris le coefficient de $x$).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = x$ et $b = 9$. Étape 3 — Appliquer : $x^2 + 2 \\times x \\times 9 + 9^2$. Étape 4 — Calculer : le double produit vaut $2 \\times 9 = 18$, donc $x^2 + 18x + 81$. Écrire $9$ oublie le facteur $2$.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux égalités vraies pour tout nombre $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Reconnaître : $(x+3)(x-3)$ est un produit somme-différence et $(x-4)^2$ un carré d'une différence. Étape 2 — Identifier : $a = x$ avec $b = 3$, puis $b = 4$. Étape 3 — Appliquer : $x^2 - 3^2 = x^2 - 9$ et $x^2 - 2 \\times x \\times 4 + 4^2$. Étape 4 — Calculer : $x^2 - 9$ et $x^2 - 8x + 16$. $(x+5)^2 = x^2 + 25$ oublie le double produit $10x$ ; $(x-2)(x+2) = x^2 + 4$ se trompe sur le signe : c'est $x^2 - 4$.",
+                  "answers": [
+                    {
+                      "content": "$(x+5)^2 = x^2 + 25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-4)^2 = x^2 - 8x + 16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+3)(x-3) = x^2 - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-2)(x+2) = x^2 + 4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu développes avec les identités remarquables de la fiche.",
             "questions": [
@@ -574,167 +940,285 @@
           },
           "pitfall": "L'erreur fréquente : oublier le $1$ quand un terme est égal au facteur commun. Exemple : $6x + 6$ n'est **pas** $6(x)$. Avec $x = 2$ : $6x + 6 = 18$, alors que $6 \\times 2 = 12$. Le bon résultat est $6(x + 1)$, car $6 = 6 \\times 1$. Pour l'éviter, vérifie toujours en développant.",
           "figure": null,
-          "exercise": {
-            "title": "Factoriser avec un facteur commun",
-            "statement": "Dans cet exercice, tu factorises des expressions avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Factoriser $5x + 15$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $5$ et $15$ sont divisibles par $5$, le facteur commun est $5$. Étape 2 — Écrire : $5x = 5 \\times x$ et $15 = 5 \\times 3$. Étape 3 — Mettre en évidence : $5(x + 3)$. Étape 4 — Réduire et vérifier : $5(x+3) = 5x + 15$. La réponse $5(x+10)$ ne divise pas $15$ par $5$ : elle donne $5x + 50$.",
-                "answers": [
-                  {
-                    "content": "$5(x+10)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$5x(1+3)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$5(x+15)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$5(x+3)$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $7x^2 - 14x$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $7$ divise $7$ et $14$ ; $x$ est dans $x^2$ et dans $x$ : le facteur commun est $7x$. Étape 2 — Écrire : $7x^2 = 7x \\times x$ et $14x = 7x \\times 2$. Étape 3 — Mettre en évidence : $7x(x - 2)$. Étape 4 — Réduire et vérifier : $7x(x-2) = 7x^2 - 14x$. La réponse $7(x-2)$ développe en $7x - 14$, ce qui est différent.",
-                "answers": [
-                  {
-                    "content": "$7(x-2)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$14x(x-1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$7x(x-2)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$7x(x-14)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $9x^2 + 6x$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $3$ divise $9$ et $6$ ; $x$ est commun : le facteur commun est $3x$. Étape 2 — Écrire : $9x^2 = 3x \\times 3x$ et $6x = 3x \\times 2$. Étape 3 — Mettre en évidence : $3x(3x + 2)$. Étape 4 — Réduire et vérifier : $3x(3x+2) = 9x^2 + 6x$. La réponse $3x(9x+2)$ développe en $27x^2 + 6x$.",
-                "answers": [
-                  {
-                    "content": "$9x(x+6)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3x(3x+2)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$3x(9x+2)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3x(3x+6)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $4x + 4$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le facteur commun est $4$. Étape 2 — Écrire : $4x = 4 \\times x$ et $4 = 4 \\times 1$. Étape 3 — Mettre en évidence : $4(x + 1)$. Étape 4 — Réduire et vérifier : $4(x+1) = 4x + 4$. La réponse $4x$ est l'erreur du piège : elle oublie le $1$ du second terme. Avec $x = 2$, $4x + 4 = 12$ et $4x = 8$.",
-                "answers": [
-                  {
-                    "content": "$4(x+1)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$4x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4(x+4)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4(x-1)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $6x + 6 = 6 \\times x$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : le facteur commun est $6$. Étape 2 — Écrire : $6x = 6 \\times x$ et $6 = 6 \\times 1$. Étape 3 — Mettre en évidence : $6x + 6 = 6(x + 1)$. Étape 4 — Réduire et vérifier : $6(x+1) = 6x + 6$. L'affirmation est fausse : elle oublie le $1$. Contrôle avec $x = 2$ : $6 \\times 2 + 6 = 18$, alors que $6 \\times 2 = 12$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $(x+2)(3x+1) + (x+2)(x-5)$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la parenthèse $(x+2)$ est présente dans les deux termes, c'est le facteur commun. Étape 2 — Écrire : les deux termes sont déjà de la forme $(x+2) \\times (\\ldots)$. Étape 3 — Mettre en évidence : $(x+2)\\left[(3x+1) + (x-5)\\right]$. Étape 4 — Réduire : $3x + 1 + x - 5 = 4x - 4$, donc $(x+2)(4x-4)$. La réponse $(x+2)(4x+6)$ se trompe de signe en additionnant $+1$ et $-5$.",
-                "answers": [
-                  {
-                    "content": "$(x+2)(4x+6)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+2)(2x-4)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+2)^2(4x-4)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+2)(4x-4)$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux écritures égales à $12x + 18$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : $6$ divise $12$ et $18$ ; $2$ les divise aussi. Étape 2 — Écrire : $12x = 6 \\times 2x$ et $18 = 6 \\times 3$ ; ou $12x = 2 \\times 6x$ et $18 = 2 \\times 9$. Étape 3 — Mettre en évidence : $6(2x+3)$ et $2(6x+9)$. Étape 4 — Vérifier en développant : $6(2x+3) = 12x + 18$ et $2(6x+9) = 12x + 18$. En revanche $6(2x+18)$ donne $12x + 108$ et $3(4x+9)$ donne $12x + 27$.",
-                "answers": [
-                  {
-                    "content": "$6(2x+18)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3(4x+9)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$6(2x+3)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$2(6x+9)$",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Factoriser avec un facteur commun",
+              "statement": "Dans cet exercice, tu factorises des expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Factoriser $5x + 15$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $5$ et $15$ sont divisibles par $5$, le facteur commun est $5$. Étape 2 — Écrire : $5x = 5 \\times x$ et $15 = 5 \\times 3$. Étape 3 — Mettre en évidence : $5(x + 3)$. Étape 4 — Réduire et vérifier : $5(x+3) = 5x + 15$. La réponse $5(x+10)$ ne divise pas $15$ par $5$ : elle donne $5x + 50$.",
+                  "answers": [
+                    {
+                      "content": "$5(x+10)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x(1+3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5(x+15)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5(x+3)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $7x^2 - 14x$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $7$ divise $7$ et $14$ ; $x$ est dans $x^2$ et dans $x$ : le facteur commun est $7x$. Étape 2 — Écrire : $7x^2 = 7x \\times x$ et $14x = 7x \\times 2$. Étape 3 — Mettre en évidence : $7x(x - 2)$. Étape 4 — Réduire et vérifier : $7x(x-2) = 7x^2 - 14x$. La réponse $7(x-2)$ développe en $7x - 14$, ce qui est différent.",
+                  "answers": [
+                    {
+                      "content": "$7(x-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14x(x-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7x(x-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7x(x-14)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $9x^2 + 6x$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $3$ divise $9$ et $6$ ; $x$ est commun : le facteur commun est $3x$. Étape 2 — Écrire : $9x^2 = 3x \\times 3x$ et $6x = 3x \\times 2$. Étape 3 — Mettre en évidence : $3x(3x + 2)$. Étape 4 — Réduire et vérifier : $3x(3x+2) = 9x^2 + 6x$. La réponse $3x(9x+2)$ développe en $27x^2 + 6x$.",
+                  "answers": [
+                    {
+                      "content": "$9x(x+6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x(3x+2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x(9x+2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x(3x+6)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $4x + 4$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le facteur commun est $4$. Étape 2 — Écrire : $4x = 4 \\times x$ et $4 = 4 \\times 1$. Étape 3 — Mettre en évidence : $4(x + 1)$. Étape 4 — Réduire et vérifier : $4(x+1) = 4x + 4$. La réponse $4x$ est l'erreur du piège : elle oublie le $1$ du second terme. Avec $x = 2$, $4x + 4 = 12$ et $4x = 8$.",
+                  "answers": [
+                    {
+                      "content": "$4(x+1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4(x+4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4(x-1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $6x + 6 = 6 \\times x$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le facteur commun est $6$. Étape 2 — Écrire : $6x = 6 \\times x$ et $6 = 6 \\times 1$. Étape 3 — Mettre en évidence : $6x + 6 = 6(x + 1)$. Étape 4 — Réduire et vérifier : $6(x+1) = 6x + 6$. L'affirmation est fausse : elle oublie le $1$. Contrôle avec $x = 2$ : $6 \\times 2 + 6 = 18$, alors que $6 \\times 2 = 12$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $(x+2)(3x+1) + (x+2)(x-5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la parenthèse $(x+2)$ est présente dans les deux termes, c'est le facteur commun. Étape 2 — Écrire : les deux termes sont déjà de la forme $(x+2) \\times (\\ldots)$. Étape 3 — Mettre en évidence : $(x+2)\\left[(3x+1) + (x-5)\\right]$. Étape 4 — Réduire : $3x + 1 + x - 5 = 4x - 4$, donc $(x+2)(4x-4)$. La réponse $(x+2)(4x+6)$ se trompe de signe en additionnant $+1$ et $-5$.",
+                  "answers": [
+                    {
+                      "content": "$(x+2)(4x+6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+2)(2x-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+2)^2(4x-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+2)(4x-4)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux écritures égales à $12x + 18$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : $6$ divise $12$ et $18$ ; $2$ les divise aussi. Étape 2 — Écrire : $12x = 6 \\times 2x$ et $18 = 6 \\times 3$ ; ou $12x = 2 \\times 6x$ et $18 = 2 \\times 9$. Étape 3 — Mettre en évidence : $6(2x+3)$ et $2(6x+9)$. Étape 4 — Vérifier en développant : $6(2x+3) = 12x + 18$ et $2(6x+9) = 12x + 18$. En revanche $6(2x+18)$ donne $12x + 108$ et $3(4x+9)$ donne $12x + 27$.",
+                  "answers": [
+                    {
+                      "content": "$6(2x+18)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3(4x+9)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6(2x+3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2(6x+9)$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Factoriser d'autres expressions avec un facteur commun",
+              "statement": "Dans cet exercice, tu factorises d'autres expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord le plus grand nombre qui divise tous les coefficients, puis regarde si $x$ est dans tous les termes.",
+              "questions": [
+                {
+                  "content": "Factoriser $6x + 18$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : $6$ divise $6$ et $18$, c'est le plus grand facteur commun. Étape 2 — Écrire : $6x = 6 \\times x$ et $18 = 6 \\times 3$. Étape 3 — Mettre en évidence : $6(x + 3)$. Étape 4 — Réduire et vérifier : $6(x+3) = 6x + 18$. La réponse $6(x+18)$ oublie de diviser $18$ par $6$ ; $3(2x+9)$ développe en $6x + 27$ ; $6(x+12)$ soustrait au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "$6(x+18)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3(2x+9)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6(x+3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6(x+12)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $(x+1)(x-3) + (x+1)(2x+5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le facteur commun est la parenthèse $(x+1)$. Étape 2 — Écrire : chaque terme est $(x+1)$ multiplié par une autre parenthèse. Étape 3 — Mettre en évidence : $(x+1)\\big[(x-3) + (2x+5)\\big]$. Étape 4 — Réduire : $x - 3 + 2x + 5 = 3x + 2$, donc $(x+1)(3x+2)$. La réponse $(x+1)(3x-2)$ se trompe sur le signe de $-3 + 5$ ; $(x+1)(3x+8)$ oublie le signe de $-3$ ; $(x+1)(2x^2-x-15)$ multiplie les parenthèses au lieu de les additionner.",
+                  "answers": [
+                    {
+                      "content": "$(x+1)(3x-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+1)(3x+8)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+1)(2x^2-x-15)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+1)(3x+2)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $21x + 14 = 7(3x + $ ___ $)$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : $7$ divise $21$ et $14$. Étape 2 — Écrire : $21x = 7 \\times 3x$ et $14 = 7 \\times 2$. Étape 3 — Mettre en évidence : $7(3x + 2)$. Étape 4 — Vérifier : $7(3x+2) = 21x + 14$. Le nombre cherché est $2$, pas $14$ : on divise $14$ par $7$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $5x^2 + 10x = 5x(x + 10)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le facteur commun est $5x$. Étape 2 — Écrire : $5x^2 = 5x \\times x$ et $10x = 5x \\times 2$. Étape 3 — Mettre en évidence : $5x(x + 2)$. Étape 4 — Vérifier : $5x(x+2) = 5x^2 + 10x$. L'affirmation est fausse : $5x(x+10) = 5x^2 + 50x$, car on a oublié de diviser $10x$ par $5x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On factorise $12x^2 + 8x$ avec le plus grand facteur commun : $12x^2 + 8x = 4x(ax + 2)$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $4$ divise $12$ et $8$, et $x$ est dans les deux termes : le facteur commun est $4x$. Étape 2 — Écrire : $12x^2 = 4x \\times 3x$ et $8x = 4x \\times 2$. Étape 3 — Mettre en évidence : $4x(3x + 2)$. Étape 4 — Vérifier : $4x(3x+2) = 12x^2 + 8x$. Donc $a = 3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux écritures égales à $10x^2 + 15x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : $5$ divise $10$ et $15$, et $x$ est dans les deux termes. Étape 2 — Écrire : $10x^2 = 5x \\times 2x$ et $15x = 5x \\times 3$. Étape 3 — Mettre en évidence : $5x(2x + 3)$, ou $5(2x^2 + 3x)$ si on ne sort que le nombre. Étape 4 — Vérifier : les deux se développent en $10x^2 + 15x$. $5x(2x+15)$ oublie de diviser $15x$ par $5x$ ; $10x(x+15)$ développe en $10x^2 + 150x$.",
+                  "answers": [
+                    {
+                      "content": "$5x(2x+3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5x(2x+15)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10x(x+15)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5(2x^2+3x)$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu factorises des expressions en cherchant le facteur commun.",
             "questions": [
@@ -847,194 +1331,312 @@
           },
           "pitfall": "L'erreur fréquente : confondre $a^2 - b^2$ avec $(a-b)^2$. Exemple : $x^2 - 9$ n'est **pas** $(x-3)^2$. Avec $x = 5$ : $x^2 - 9 = 16$, alors que $(5-3)^2 = 4$. Le bon résultat est $x^2 - 9 = (x-3)(x+3)$, car $2 \\times 8 = 16$. Pour l'éviter, regarde s'il y a un terme du milieu : sans terme du milieu, c'est $(a+b)(a-b)$.",
           "figure": null,
-          "exercise": {
-            "title": "Factoriser avec une identité remarquable",
-            "statement": "Dans cet exercice, tu factorises des expressions avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Factoriser $x^2 - 16$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $x^2 = x^2$ et $16 = 4^2$, donc $a = x$ et $b = 4$. Étape 3 — Vérifier : il n'y a pas de terme du milieu, donc il n'y a rien à contrôler. Étape 4 — Écrire : $(x-4)(x+4)$. La réponse $(x-4)^2$ est l'erreur du piège : elle développe en $x^2 - 8x + 16$.",
-                "answers": [
-                  {
-                    "content": "$(x+4)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x-4)(x+4)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(x-4)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x-8)(x+8)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $x^2 + 10x + 25$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : trois termes dont $x^2$ et $25$ sont des carrés. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Vérifier : $2ab = 2 \\times x \\times 5 = 10x$, avec le signe $+$. Étape 4 — Écrire : $(x+5)^2$. La réponse $(x+5)(x-5)$ vaut $x^2 - 25$, et $(x+25)^2$ confond $b$ avec $b^2$.",
-                "answers": [
-                  {
-                    "content": "$(x+5)^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(x+5)(x-5)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+25)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x+10)^2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $9x^2 - 49$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins. Étape 2 — Identifier : $9x^2 = (3x)^2$ et $49 = 7^2$, donc $a = 3x$ et $b = 7$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $(3x-7)(3x+7)$. La réponse $(9x-7)(9x+7)$ oublie que $9x^2 = (3x)^2$ : elle donne $81x^2 - 49$.",
-                "answers": [
-                  {
-                    "content": "$(9x-7)(9x+7)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3x-7)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3x+7)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3x-7)(3x+7)$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $x^2 - 12x + 36$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : trois termes dont $x^2$ et $36$ sont des carrés. Étape 2 — Identifier : $a = x$ et $b = 6$. Étape 3 — Vérifier : $2ab = 2 \\times x \\times 6 = 12x$, et le signe du terme du milieu est $-$, donc la parenthèse est une différence. Étape 4 — Écrire : $(x-6)^2$. La réponse $(x+6)^2$ ignore ce signe.",
-                "answers": [
-                  {
-                    "content": "$(x-6)(x+6)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x-12)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(x-6)^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(x+6)^2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $x^2 - 25 = (x-5)^2$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $x^2 - 25 = (x-5)(x+5)$. L'affirmation est fausse : $(x-5)^2 = x^2 - 10x + 25$. Contrôle avec $x = 6$ : $6^2 - 25 = 11$, alors que $(6-5)^2 = 1$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Factoriser $25x^2 - 20x + 4$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : trois termes dont $25x^2$ et $4$ sont des carrés. Étape 2 — Identifier : $25x^2 = (5x)^2$ et $4 = 2^2$, donc $a = 5x$ et $b = 2$. Étape 3 — Vérifier : $2ab = 2 \\times 5x \\times 2 = 20x$, avec le signe $-$. Étape 4 — Écrire : $(5x-2)^2$. La réponse $(5x-4)^2$ donne $25x^2 - 40x + 16$.",
-                "answers": [
-                  {
-                    "content": "$(25x-2)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(5x-2)^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(5x+2)^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(5x-4)^2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les trois expressions de la forme $a^2 - b^2$, qu'on peut factoriser avec le produit somme-différence ?",
-                "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Reconnaître : on cherche deux carrés séparés par un signe moins. Étape 2 — Identifier : $x^2 - 4 = x^2 - 2^2$ ; $9x^2 - 1 = (3x)^2 - 1^2$ ; $16 - x^2 = 4^2 - x^2$. Étape 3 — Vérifier : aucune n'a de terme du milieu. Étape 4 — Écrire : $(x-2)(x+2)$, $(3x-1)(3x+1)$ et $(4-x)(4+x)$. $x^2 + 9$ est une somme de carrés et $x^2 - 2x$ n'a qu'un seul carré : elles ne sont pas de cette forme.",
-                "answers": [
-                  {
-                    "content": "$x^2 - 2x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^2 - 4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$9x^2 - 1$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$16 - x^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^2 + 9$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Calculer $99^2 - 1$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : $99^2 - 1^2$, deux carrés séparés par un signe moins. Étape 2 — Identifier : $a = 99$ et $b = 1$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $(99-1)(99+1) = 98 \\times 100 = 9\\,800$. Contrôle : $99^2 = 9\\,801$, donc $99^2 - 1 = 9\\,800$. La réponse $9\\,801$ oublie de retirer $1$.",
-                "answers": [
-                  {
-                    "content": "$9\\,801$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$9\\,900$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$9\\,600$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$9\\,800$",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Factoriser avec une identité remarquable",
+              "statement": "Dans cet exercice, tu factorises des expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Factoriser $x^2 - 16$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $x^2 = x^2$ et $16 = 4^2$, donc $a = x$ et $b = 4$. Étape 3 — Vérifier : il n'y a pas de terme du milieu, donc il n'y a rien à contrôler. Étape 4 — Écrire : $(x-4)(x+4)$. La réponse $(x-4)^2$ est l'erreur du piège : elle développe en $x^2 - 8x + 16$.",
+                  "answers": [
+                    {
+                      "content": "$(x+4)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-4)(x+4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-4)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-8)(x+8)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $x^2 + 10x + 25$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : trois termes dont $x^2$ et $25$ sont des carrés. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Vérifier : $2ab = 2 \\times x \\times 5 = 10x$, avec le signe $+$. Étape 4 — Écrire : $(x+5)^2$. La réponse $(x+5)(x-5)$ vaut $x^2 - 25$, et $(x+25)^2$ confond $b$ avec $b^2$.",
+                  "answers": [
+                    {
+                      "content": "$(x+5)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+5)(x-5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+25)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+10)^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $9x^2 - 49$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins. Étape 2 — Identifier : $9x^2 = (3x)^2$ et $49 = 7^2$, donc $a = 3x$ et $b = 7$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $(3x-7)(3x+7)$. La réponse $(9x-7)(9x+7)$ oublie que $9x^2 = (3x)^2$ : elle donne $81x^2 - 49$.",
+                  "answers": [
+                    {
+                      "content": "$(9x-7)(9x+7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3x-7)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3x+7)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3x-7)(3x+7)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $x^2 - 12x + 36$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : trois termes dont $x^2$ et $36$ sont des carrés. Étape 2 — Identifier : $a = x$ et $b = 6$. Étape 3 — Vérifier : $2ab = 2 \\times x \\times 6 = 12x$, et le signe du terme du milieu est $-$, donc la parenthèse est une différence. Étape 4 — Écrire : $(x-6)^2$. La réponse $(x+6)^2$ ignore ce signe.",
+                  "answers": [
+                    {
+                      "content": "$(x-6)(x+6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-12)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-6)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+6)^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x^2 - 25 = (x-5)^2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $a = x$ et $b = 5$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $x^2 - 25 = (x-5)(x+5)$. L'affirmation est fausse : $(x-5)^2 = x^2 - 10x + 25$. Contrôle avec $x = 6$ : $6^2 - 25 = 11$, alors que $(6-5)^2 = 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $25x^2 - 20x + 4$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : trois termes dont $25x^2$ et $4$ sont des carrés. Étape 2 — Identifier : $25x^2 = (5x)^2$ et $4 = 2^2$, donc $a = 5x$ et $b = 2$. Étape 3 — Vérifier : $2ab = 2 \\times 5x \\times 2 = 20x$, avec le signe $-$. Étape 4 — Écrire : $(5x-2)^2$. La réponse $(5x-4)^2$ donne $25x^2 - 40x + 16$.",
+                  "answers": [
+                    {
+                      "content": "$(25x-2)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5x-2)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(5x+2)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5x-4)^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois expressions de la forme $a^2 - b^2$, qu'on peut factoriser avec le produit somme-différence ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Reconnaître : on cherche deux carrés séparés par un signe moins. Étape 2 — Identifier : $x^2 - 4 = x^2 - 2^2$ ; $9x^2 - 1 = (3x)^2 - 1^2$ ; $16 - x^2 = 4^2 - x^2$. Étape 3 — Vérifier : aucune n'a de terme du milieu. Étape 4 — Écrire : $(x-2)(x+2)$, $(3x-1)(3x+1)$ et $(4-x)(4+x)$. $x^2 + 9$ est une somme de carrés et $x^2 - 2x$ n'a qu'un seul carré : elles ne sont pas de cette forme.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9x^2 - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16 - x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $99^2 - 1$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : $99^2 - 1^2$, deux carrés séparés par un signe moins. Étape 2 — Identifier : $a = 99$ et $b = 1$. Étape 3 — Vérifier : pas de terme du milieu. Étape 4 — Écrire : $(99-1)(99+1) = 98 \\times 100 = 9\\,800$. Contrôle : $99^2 = 9\\,801$, donc $99^2 - 1 = 9\\,800$. La réponse $9\\,801$ oublie de retirer $1$.",
+                  "answers": [
+                    {
+                      "content": "$9\\,801$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\,900$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\,600$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\,800$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Factoriser d'autres expressions avec une identité remarquable",
+              "statement": "Dans cet exercice, tu factorises d'autres expressions avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord deux carrés ; avec trois termes, vérifie que le terme du milieu vaut $2ab$.",
+              "questions": [
+                {
+                  "content": "Factoriser $x^2 - 81$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $x^2$ et $81 = 9^2$, donc $a = x$ et $b = 9$. Étape 3 — Écrire : $(a+b)(a-b) = (x+9)(x-9)$. Étape 4 — Vérifier en développant : $x^2 - 81$. Les réponses $(x-9)^2$ et $(x+9)^2$ confondent la différence de deux carrés avec un carré parfait : elles développent en trois termes.",
+                  "answers": [
+                    {
+                      "content": "$(x-9)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+9)(x-9)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+9)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-81)(x+1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $4x^2 + 20x + 25$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Reconnaître : trois termes dont deux sont des carrés, $a^2 + 2ab + b^2$. Étape 2 — Identifier : $4x^2 = (2x)^2$ et $25 = 5^2$, donc $a = 2x$ et $b = 5$. Étape 3 — Vérifier le terme du milieu : $2 \\times 2x \\times 5 = 20x$, il est positif, donc $(2x + 5)^2$. Étape 4 — Vérifier en développant. La réponse $(4x+5)^2$ oublie que $4x^2 = (2x)^2$ ; $(2x-5)^2$ se trompe de signe ; $(2x+5)(2x-5)$ développe en $4x^2 - 25$.",
+                  "answers": [
+                    {
+                      "content": "$(4x+5)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2x-5)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2x+5)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2x+5)(2x-5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $51^2 - 49^2$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Reconnaître : $51^2 - 49^2$ est de la forme $a^2 - b^2$. Étape 2 — Identifier : $a = 51$ et $b = 49$. Étape 3 — Écrire : $(a+b)(a-b) = (51+49)(51-49)$. Étape 4 — Calculer : $100 \\times 2 = 200$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x^2 + 16 = (x+4)(x-4)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Reconnaître : on teste l'identité $a^2 - b^2$. Étape 2 — Identifier : $a = x$ et $b = 4$. Étape 3 — Écrire : $(x+4)(x-4) = x^2 - 16$. Étape 4 — Comparer : $x^2 - 16 \\neq x^2 + 16$. L'affirmation est fausse : une somme de deux carrés $x^2 + 16$ ne se factorise pas avec cette identité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $x^2 + 12x + 36 = (x + $ ___ $)^2$.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Reconnaître : trois termes dont deux sont des carrés, $a^2 + 2ab + b^2$. Étape 2 — Identifier : $a = x$ et $b = 6$ car $36 = 6^2$. Étape 3 — Vérifier le terme du milieu : $2 \\times x \\times 6 = 12x$. Étape 4 — Écrire : $(x+6)^2$. Écrire $12$ confond le terme du milieu avec le nombre $b$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux expressions qui se factorisent avec une identité remarquable ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Reconnaître : $16x^2 - 1 = (4x)^2 - 1^2$ est une différence de deux carrés, et $x^2 + 6x + 9$ a deux carrés et un terme du milieu. Étape 2 — Identifier : $a = 4x$, $b = 1$ pour la première ; $a = x$, $b = 3$ pour la seconde. Étape 3 — Vérifier le terme du milieu : $2 \\times x \\times 3 = 6x$. Étape 4 — Écrire : $(4x+1)(4x-1)$ et $(x+3)^2$. $x^2 + 9$ est une somme de deux carrés : elle ne se factorise pas. Dans $x^2 + 4x + 9$, le terme du milieu devrait valoir $2 \\times x \\times 3 = 6x$, pas $4x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 6x + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16x^2 - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4x + 9$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu factorises avec les identités remarquables de la fiche.",
             "questions": [
@@ -1683,6 +2285,1751 @@
                   "correct": false
                 }
               ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Développer et réduire",
+          "notions": "distributivité simple et double, signes, réduction d'une somme de produits, valeur numérique d'une expression.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On développe des expressions avec la distributivité simple, puis on réduit.",
+              "exercise_type": "evaluation",
+              "hint": "Multiplie le facteur devant la parenthèse par chaque terme, sans oublier le signe.",
+              "questions": [
+                {
+                  "content": "Développer $5(2x+3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$5(2x+3) = 5 \\times 2x + 5 \\times 3 = 10x + 15$. La réponse $10x + 3$ oublie de multiplier $3$ par $5$ ; $7x + 8$ additionne $5$ aux termes au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "$10x + 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7x + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $-3(x-4)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$-3(x-4) = -3 \\times x + (-3) \\times (-4) = -3x + 12$. La réponse $-3x - 12$ oublie que moins par moins donne plus ; $-3x - 4$ ne multiplie pas $-4$ par $-3$.",
+                  "answers": [
+                    {
+                      "content": "$-3x - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3x + 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x - 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3x - 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On développe $2(4x-7)$ sous la forme $8x + c$. Quelle est la valeur de $c$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$2(4x-7) = 2 \\times 4x + 2 \\times (-7) = 8x - 14$, donc $c = -14$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "-14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x(x+6) = x^2 + 6$.",
+                  "question_type": "true_false",
+                  "explanation": "$x(x+6) = x \\times x + x \\times 6 = x^2 + 6x$. L'affirmation oublie de multiplier $6$ par $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $-(x+5) = -x $ ___ $ 5$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "Un signe moins devant une parenthèse change tous les signes : $-(x+5) = -x - 5$. Le signe est $-$.",
+                  "answers": [
+                    {
+                      "content": "-",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $2(x+3) + 4(x-1)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$2(x+3) + 4(x-1) = 2x + 6 + 4x - 4 = 6x + 2$. La réponse $6x + 5$ oublie de multiplier $-1$ par $4$ ; $6x + 10$ se trompe sur le signe de $4 \\times (-1)$.",
+                  "answers": [
+                    {
+                      "content": "$6x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x - 2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On développe et on réduit des produits de deux parenthèses.",
+              "exercise_type": "evaluation",
+              "hint": "Écris les quatre produits avant de réduire.",
+              "questions": [
+                {
+                  "content": "Développer et réduire $(x+5)(x+2)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+5)(x+2) = x^2 + 2x + 5x + 10 = x^2 + 7x + 10$. La réponse $x^2 + 10$ oublie les produits croisés ; $x^2 + 7x + 7$ additionne $5$ et $2$ au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 10$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x-4)(x+6)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x-4)(x+6) = x^2 + 6x - 4x - 24 = x^2 + 2x - 24$. La réponse $x^2 + 10x - 24$ additionne $6x$ et $4x$ au lieu de les soustraire ; $x^2 + 2x + 24$ se trompe sur le signe de $(-4) \\times 6$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 2x - 24$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 10x - 24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 2x + 24$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(3x+1)(2x-5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(3x+1)(2x-5) = 6x^2 - 15x + 2x - 5 = 6x^2 - 13x - 5$. La réponse $6x^2 - 17x - 5$ calcule $-15x - 2x$ ; $6x^2 - 13x + 5$ se trompe sur le signe de $1 \\times (-5)$.",
+                  "answers": [
+                    {
+                      "content": "$6x^2 - 17x - 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x^2 - 13x - 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x^2 - 13x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x^2 - 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On développe et on réduit $(x-3)(x-8)$ sous la forme $x^2 + bx + c$. Quelle est la valeur de $c$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$(x-3)(x-8) = x^2 - 8x - 3x + 24 = x^2 - 11x + 24$, donc $c = 24$ : $(-3) \\times (-8) = +24$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(2x-1)(x+3) = 2x^2 + 5x - 3$.",
+                  "question_type": "true_false",
+                  "explanation": "$(2x-1)(x+3) = 2x^2 + 6x - x - 3 = 2x^2 + 5x - 3$ : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $(x+7)(x-2) = x^2 + $ ___ $x - 14$ (écris le coefficient de $x$).",
+                  "question_type": "fill_blank",
+                  "explanation": "$(x+7)(x-2) = x^2 - 2x + 7x - 14 = x^2 + 5x - 14$. Le coefficient est $5$ : $7 - 2$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On développe des expressions où plusieurs produits s'additionnent ou se soustraient.",
+              "exercise_type": "evaluation",
+              "hint": "Un signe moins devant une parenthèse change tous les signes de ce qu'elle contient.",
+              "questions": [
+                {
+                  "content": "Développer et réduire $(x+2)(x+3) + 2x$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+2)(x+3) + 2x = x^2 + 3x + 2x + 6 + 2x = x^2 + 7x + 6$. La réponse $x^2 + 5x + 6$ oublie le terme $+2x$ ; $x^2 + 3x + 6$ le soustrait.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 5x + 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x + 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 7x + 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x+1)(x+4) - (x^2 + 3x)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+1)(x+4) - (x^2 + 3x) = x^2 + 5x + 4 - x^2 - 3x = 2x + 4$. La réponse $2x^2 + 8x + 4$ ne change aucun signe dans la parenthèse ; $8x + 4$ ne change que le signe de $x^2$.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + 8x + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8x + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 4$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On développe et on réduit $3(x+2) - 2(x-5)$ sous la forme $x + c$. Quelle est la valeur de $c$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$3(x+2) - 2(x-5) = 3x + 6 - 2x + 10 = x + 16$, donc $c = 16$ : $-2 \\times (-5) = +10$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x+3)(x-3) - x^2 = -9$ pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x+3)(x-3) - x^2 = x^2 - 3x + 3x - 9 - x^2 = -9$ : les termes en $x^2$ et en $x$ disparaissent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $2x - (x-6) = x $ ___ $ 6$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "$2x - (x-6) = 2x - x + 6 = x + 6$ : le signe moins change le signe de $-6$ en $+6$.",
+                  "answers": [
+                    {
+                      "content": "+",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x+1)(x-1) + (x-2)(x+3)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+1)(x-1) = x^2 - 1$ et $(x-2)(x+3) = x^2 + x - 6$. La somme vaut $2x^2 + x - 7$. La réponse $2x^2 + x - 5$ se trompe sur le signe de $(-2) \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + x - 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + x - 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 - x - 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + 5x - 7$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On considère $A = (x+4)(x-2)$ et $B = x^2 + 2x - 8$.",
+              "exercise_type": "evaluation",
+              "hint": "Pour comparer deux expressions, développe l'une des deux, ou remplace $x$ par un nombre.",
+              "questions": [
+                {
+                  "content": "Développer et réduire $A = (x+4)(x-2)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$A = x^2 - 2x + 4x - 8 = x^2 + 2x - 8$. La réponse $x^2 - 8$ oublie les produits croisés ; $x^2 + 6x - 8$ additionne $4x$ et $2x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 2x - 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 6x - 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 2x + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les expressions $A = (x+4)(x-2)$ et $B = x^2 + 2x - 8$ sont égales pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "$A$ se développe en $x^2 + 2x - 8$, qui est $B$ : les deux expressions sont égales pour toute valeur de $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $A$ pour $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "$A = (3+4)(3-2) = 7 \\times 1 = 7$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $B$ pour $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "$B = 3^2 + 2 \\times 3 - 8 = 9 + 6 - 8 = 7$, comme $A$ : les deux expressions sont égales.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $A$ pour $x = -4$.",
+                  "question_type": "numeric",
+                  "explanation": "$A = (-4+4)(-4-2) = 0 \\times (-6) = 0$ : un produit dont un facteur est nul vaut $0$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour $x = 1$, on a $A = 3$.",
+                  "question_type": "true_false",
+                  "explanation": "$A = (1+4)(1-2) = 5 \\times (-1) = -5$, et non $3$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Problèmes de la vie courante",
+          "notions": "aire et périmètre d'un rectangle ou d'un carré exprimés avec $x$, développer et réduire, factoriser, valeur numérique, bénéfice au marché.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché d'Adjamé, Koffi prépare un étal rectangulaire $ABCD$ : $AB = (x+5)$ m et $BC = (x+2)$ m, avec $x$ positif.",
+              "exercise_type": "evaluation",
+              "hint": "L'aire d'un rectangle est longueur $\\times$ largeur ; le périmètre est $2 \\times$ (longueur + largeur).",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire de l'étal, développée et réduite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Aire = longueur $\\times$ largeur $= (x+5)(x+2) = x^2 + 2x + 5x + 10 = x^2 + 7x + 10$ m². La réponse $x^2 + 10$ oublie les produits croisés ; $x^2 + 7x + 7$ additionne $5$ et $2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 10$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 7$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 7x + 10$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 3x + 10$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le périmètre de l'étal, réduit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Périmètre $= 2 \\times \\big[(x+5) + (x+2)\\big] = 2(2x+7) = 4x + 14$ m. La réponse $2x + 7$ oublie de doubler ; $4x + 7$ ne double que $2x$.",
+                  "answers": [
+                    {
+                      "content": "$2x + 7$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x + 7$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x + 10$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x + 14$ m",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire de l'étal pour $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "$(3+5)(3+2) = 8 \\times 5 = 40$ m². Avec la forme développée : $9 + 21 + 10 = 40$.",
+                  "unit": "m²",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le périmètre de l'étal pour $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "$4 \\times 3 + 14 = 26$ m. Vérification : $2 \\times (8 + 5) = 26$ m.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'aire $(x+5)(x+2)$ est égale à $x^2 + 7x + 10$ pour toute valeur positive de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Le développement $x^2 + 2x + 5x + 10 = x^2 + 7x + 10$ est vrai pour toute valeur de $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "figure": "rectangle-etal"
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un terrain carré $AEOH$ de côté $x$ mètres est agrandi : on ajoute $3$ m sur deux côtés. Le nouveau terrain est le carré $ABCD$ de côté $(x+3)$ m, avec $x$ positif.",
+              "exercise_type": "evaluation",
+              "hint": "Le carré de côté $(x+3)$ se développe avec l'identité $(a+b)^2$.",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire du nouveau terrain $ABCD$, développée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Carré d'une somme : $(x+3)^2 = x^2 + 2 \\times x \\times 3 + 3^2 = x^2 + 6x + 9$ m². La réponse $x^2 + 9$ oublie le double produit $6x$ ; $x^2 + 3x + 9$ oublie le facteur $2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 6x + 9$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 9$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x + 9$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 6x + 6$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "De combien l'aire augmente-t-elle, c'est-à-dire que vaut $(x+3)^2 - x^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+3)^2 - x^2 = x^2 + 6x + 9 - x^2 = 6x + 9$ m². On le lit sur la figure : deux rectangles de $3x$ et un carré de $9$. La réponse $9$ oublie les deux rectangles.",
+                  "answers": [
+                    {
+                      "content": "$6x$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 9$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x + 9$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire du nouveau terrain pour $x = 10$.",
+                  "question_type": "numeric",
+                  "explanation": "$(10+3)^2 = 13^2 = 169$ m². Avec la forme développée : $100 + 60 + 9 = 169$.",
+                  "unit": "m²",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "169",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'augmentation d'aire pour $x = 10$.",
+                  "question_type": "numeric",
+                  "explanation": "$6 \\times 10 + 9 = 69$ m². Vérification : $169 - 100 = 69$.",
+                  "unit": "m²",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "69",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'aire du nouveau terrain est $x^2 + 9$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x+3)^2 = x^2 + 6x + 9$ : l'affirmation oublie le double produit $6x$. Sur la figure, ce sont les deux rectangles de $3x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $(x+3)^2 = x^2 + $ ___ $x + 9$ (écris le coefficient de $x$).",
+                  "question_type": "fill_blank",
+                  "explanation": "Le double produit vaut $2 \\times x \\times 3 = 6x$. Le coefficient est $6$, et non $3$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": "carre-decoupe"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Awa vend des régimes de bananes plantains au marché de Yopougon. Elle en vend $x$. Sa recette, en milliers de francs CFA, est $R = 5x^2 + 10x$ et ses dépenses sont $D = 10x + 20$.",
+              "exercise_type": "evaluation",
+              "hint": "Le bénéfice est la recette moins les dépenses : mets les dépenses entre parenthèses.",
+              "questions": [
+                {
+                  "content": "Quel est son bénéfice $B = R - D$, réduit ?",
+                  "question_type": "single_choice",
+                  "explanation": "$B = (5x^2 + 10x) - (10x + 20) = 5x^2 + 10x - 10x - 20 = 5x^2 - 20$. La réponse $5x^2 + 20$ ne change pas le signe de $20$ ; $5x^2 + 20x - 20$ ne change pas le signe de $10x$.",
+                  "answers": [
+                    {
+                      "content": "$5x^2 + 20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x^2 + 20x - 20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x^2 - 20$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5x^2 - 20x - 20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la factorisation de $R = 5x^2 + 10x$ avec le plus grand facteur commun ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le facteur commun est $5x$ : $5x^2 = 5x \\times x$ et $10x = 5x \\times 2$, donc $R = 5x(x+2)$. La réponse $5x(x+10)$ oublie de diviser $10x$ par $5x$ ; $10x(x+1)$ développe en $10x^2 + 10x$.",
+                  "answers": [
+                    {
+                      "content": "$5(x^2+2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x(x+10)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10x(x+1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x(x+2)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le bénéfice pour $x = 6$ (en milliers de francs CFA).",
+                  "question_type": "numeric",
+                  "explanation": "$B = 5 \\times 6^2 - 20 = 180 - 20 = 160$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour $x = 2$, Awa ne gagne rien (son bénéfice est nul).",
+                  "question_type": "true_false",
+                  "explanation": "$B = 5 \\times 2^2 - 20 = 20 - 20 = 0$ : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $B = 5x^2 - 20 = 5(x^2 - $ ___ $)$.",
+                  "question_type": "fill_blank",
+                  "explanation": "$5x^2 = 5 \\times x^2$ et $20 = 5 \\times 4$, donc $B = 5(x^2 - 4)$. On divise $20$ par $5$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le bénéfice pour $x = 4$ (en milliers de francs CFA).",
+                  "question_type": "numeric",
+                  "explanation": "$B = 5 \\times 4^2 - 20 = 80 - 20 = 60$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un maraîcher de Bouaké dispose un potager rectangulaire de longueur $(2x+3)$ m et de largeur $(x+1)$ m, avec $x$ positif. Il veut le clôturer et le semer.",
+              "exercise_type": "evaluation",
+              "hint": "Pour l'aire, développe le produit ; pour le périmètre, additionne longueur et largeur avant de doubler.",
+              "questions": [
+                {
+                  "content": "Quelle est l'aire du potager, développée et réduite ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(2x+3)(x+1) = 2x^2 + 2x + 3x + 3 = 2x^2 + 5x + 3$ m². La réponse $2x^2 + 3$ oublie les produits croisés ; $2x^2 + 5x + 4$ additionne $3$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + 5x + 3$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + 3$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + 5x + 4$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + x + 3$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le périmètre du potager, réduit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Périmètre $= 2 \\times \\big[(2x+3) + (x+1)\\big] = 2(3x+4) = 6x + 8$ m. La réponse $3x + 4$ oublie de doubler ; $6x + 4$ ne double que $3x$.",
+                  "answers": [
+                    {
+                      "content": "$3x + 4$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 8$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x + 4$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x + 8$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire du potager pour $x = 4$.",
+                  "question_type": "numeric",
+                  "explanation": "$(2 \\times 4 + 3)(4 + 1) = 11 \\times 5 = 55$ m².",
+                  "unit": "m²",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "55",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le périmètre du potager pour $x = 4$.",
+                  "question_type": "numeric",
+                  "explanation": "$6 \\times 4 + 8 = 32$ m. Vérification : $2 \\times (11 + 5) = 32$ m.",
+                  "unit": "m",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "32",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour $x = 0$, le potager a une aire de $3$ m².",
+                  "question_type": "true_false",
+                  "explanation": "Pour $x = 0$, la longueur vaut $3$ m et la largeur $1$ m : l'aire vaut $3 \\times 1 = 3$ m². L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La clôture coûte $500$ F le mètre. Pour $x = 4$, combien coûte-t-elle, en francs ?",
+                  "question_type": "numeric",
+                  "explanation": "Le périmètre vaut $32$ m, donc la clôture coûte $32 \\times 500 = 16\\,000$ F.",
+                  "unit": "F",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et rédiger",
+          "notions": "identités remarquables dans les deux sens, factorisation, calcul mental avec $a^2$ et $a^2 - b^2$, vérifier une égalité pour tout $x$ ou la réfuter par un contre-exemple.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On reconnaît d'abord l'identité remarquable, puis on l'applique.",
+              "exercise_type": "evaluation",
+              "hint": "Un carré donne trois termes ; un produit somme-différence en donne deux.",
+              "questions": [
+                {
+                  "content": "Quelle identité remarquable permet de développer $(x+6)(x-6)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux parenthèses ont les mêmes termes, avec un $+$ dans l'une et un $-$ dans l'autre : c'est $(a+b)(a-b) = a^2 - b^2$, ici $x^2 - 36$. Les deux autres identités portent sur un carré $(\\ldots)^2$.",
+                  "answers": [
+                    {
+                      "content": "le produit de la somme par la différence $(a+b)(a-b) = a^2 - b^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "le carré d'une somme $(a+b)^2 = a^2 + 2ab + b^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "le carré d'une différence $(a-b)^2 = a^2 - 2ab + b^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(2x-7)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(2x-7)^2 = (2x)^2 - 2 \\times 2x \\times 7 + 7^2 = 4x^2 - 28x + 49$. La réponse $4x^2 + 49$ oublie le double produit ; $4x^2 - 14x + 49$ oublie le facteur $2$ ; $4x^2 - 28x - 49$ met un signe moins devant $7^2$.",
+                  "answers": [
+                    {
+                      "content": "$4x^2 + 49$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 14x + 49$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 28x - 49$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 28x + 49$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(3x+4)(3x-4)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(3x+4)(3x-4) = (3x)^2 - 4^2 = 9x^2 - 16$. La réponse $9x^2 + 16$ se trompe de signe ; $9x^2 - 24x + 16$ traite le produit comme un carré ; $6x^2 - 16$ ne met pas $3x$ au carré.",
+                  "answers": [
+                    {
+                      "content": "$9x^2 - 16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9x^2 + 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9x^2 - 24x + 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x^2 - 16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On développe $(5x+1)^2$ sous la forme $25x^2 + bx + 1$. Quelle est la valeur de $b$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$(5x+1)^2 = (5x)^2 + 2 \\times 5x \\times 1 + 1^2 = 25x^2 + 10x + 1$, donc $b = 10$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-5)^2 = x^2 - 25$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x-5)^2 = x^2 - 10x + 25$. L'affirmation oublie le double produit. Contrôle avec $x = 6$ : $(6-5)^2 = 1$ et $6^2 - 25 = 11$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $(x-3)^2 = x^2 - $ ___ $x + 9$ (écris le coefficient de $x$ sans son signe).",
+                  "question_type": "fill_blank",
+                  "explanation": "Le double produit vaut $2 \\times x \\times 3 = 6x$, avec le signe $-$ : $(x-3)^2 = x^2 - 6x + 9$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On factorise des expressions, d'abord en cherchant un facteur commun, puis une identité remarquable.",
+              "exercise_type": "evaluation",
+              "hint": "Cherche d'abord un facteur commun ; si tu n'en vois pas, cherche deux carrés.",
+              "questions": [
+                {
+                  "content": "Factoriser $14x^2 + 21x$ avec le plus grand facteur commun.",
+                  "question_type": "single_choice",
+                  "explanation": "Le facteur commun est $7x$ : $14x^2 = 7x \\times 2x$ et $21x = 7x \\times 3$, donc $7x(2x+3)$. La réponse $7x(2x+21)$ oublie de diviser $21x$ par $7x$ ; $7x(x+3)$ développe en $7x^2 + 21x$.",
+                  "answers": [
+                    {
+                      "content": "$7x(2x+21)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7x(2x+3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7(2x+3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7x(x+3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $x^2 - 100$.",
+                  "question_type": "single_choice",
+                  "explanation": "$x^2 - 100 = x^2 - 10^2 = (x+10)(x-10)$. Les réponses $(x-10)^2$ et $(x+10)^2$ donnent trois termes en se développant.",
+                  "answers": [
+                    {
+                      "content": "$(x-10)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+10)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+10)(x-10)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-50)(x+2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $16x^2 + 24x + 9$.",
+                  "question_type": "single_choice",
+                  "explanation": "$16x^2 = (4x)^2$ et $9 = 3^2$ ; le terme du milieu vaut $2 \\times 4x \\times 3 = 24x$ et il est positif : $(4x+3)^2$. La réponse $(4x-3)^2$ se trompe de signe ; $(16x+3)^2$ oublie que $16x^2 = (4x)^2$.",
+                  "answers": [
+                    {
+                      "content": "$(4x-3)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4x+3)(4x-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(16x+3)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4x+3)^2$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x^2 + 49 = (x+7)(x-7)$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x+7)(x-7) = x^2 - 49$, pas $x^2 + 49$. Une somme de deux carrés ne se factorise pas avec les identités remarquables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $25x^2 - 1 = (5x + 1)(5x $ ___ $ 1)$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "$25x^2 - 1 = (5x)^2 - 1^2 = (5x+1)(5x-1)$ : les deux parenthèses ont des signes opposés.",
+                  "answers": [
+                    {
+                      "content": "-",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On factorise $4x^2 - 20x + 25 = (2x - b)^2$. Quelle est la valeur de $b$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$4x^2 = (2x)^2$ et $25 = 5^2$ ; le terme du milieu vaut $2 \\times 2x \\times 5 = 20x$, avec le signe $-$ : $(2x-5)^2$, donc $b = 5$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On calcule sans calculatrice, avec une identité remarquable.",
+              "exercise_type": "evaluation",
+              "hint": "Écris le nombre sous la forme $100 - 1$, $100 + 1$, $50 + 1$… puis applique l'identité.",
+              "questions": [
+                {
+                  "content": "Calcule $99^2$ sans calculatrice, en écrivant $99 = 100 - 1$.",
+                  "question_type": "numeric",
+                  "explanation": "$99^2 = (100-1)^2 = 100^2 - 2 \\times 100 \\times 1 + 1^2 = 10\\,000 - 200 + 1 = 9\\,801$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9801",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $101^2$ sans calculatrice, en écrivant $101 = 100 + 1$.",
+                  "question_type": "numeric",
+                  "explanation": "$101^2 = (100+1)^2 = 10\\,000 + 200 + 1 = 10\\,201$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "10201",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $51 \\times 49$ sans calculatrice, en écrivant $51 = 50 + 1$ et $49 = 50 - 1$.",
+                  "question_type": "numeric",
+                  "explanation": "$51 \\times 49 = (50+1)(50-1) = 50^2 - 1^2 = 2\\,500 - 1 = 2\\,499$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2499",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $75^2 - 25^2$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
+                  "question_type": "numeric",
+                  "explanation": "$75^2 - 25^2 = (75+25)(75-25) = 100 \\times 50 = 5\\,000$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $98 \\times 102 = 9\\,996$.",
+                  "question_type": "true_false",
+                  "explanation": "$98 \\times 102 = (100-2)(100+2) = 100^2 - 2^2 = 10\\,000 - 4 = 9\\,996$ : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle écriture permet de calculer $998^2$ facilement ?",
+                  "question_type": "single_choice",
+                  "explanation": "$998 = 1000 - 2$, donc $998^2 = (1000-2)^2 = 1\\,000\\,000 - 4\\,000 + 4 = 996\\,004$. Les écritures $(1000+2)^2$ et $1000^2 - 2^2$ ne valent pas $998^2$ : elles oublient le signe ou le double produit.",
+                  "answers": [
+                    {
+                      "content": "$(1000 - 2)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1000 + 2)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1000^2 - 2^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1000 - 2^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Pour montrer qu'une égalité est vraie pour toutes les valeurs de $x$, on développe les deux membres ; pour montrer qu'elle est fausse, un seul contre-exemple suffit.",
+              "exercise_type": "evaluation",
+              "hint": "Développe chaque membre et compare, ou remplace $x$ par une valeur simple comme $0$ ou $1$.",
+              "questions": [
+                {
+                  "content": "Affirmation : l'égalité $(x+3)^2 = x^2 + 9$ est vraie pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x+3)^2 = x^2 + 6x + 9$. Un seul contre-exemple suffit : pour $x = 1$, $(1+3)^2 = 16$ et $1^2 + 9 = 10$. L'égalité est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $(x+3)^2$ pour $x = 1$.",
+                  "question_type": "numeric",
+                  "explanation": "$(1+3)^2 = 4^2 = 16$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'égalité $(x-2)(x+2) = x^2 - 4$ est vraie pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "On développe : $(x-2)(x+2) = x^2 + 2x - 2x - 4 = x^2 - 4$. Les deux membres sont égaux pour toute valeur de $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle égalité est vraie pour tout nombre $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seule $(x+1)^2 = x^2 + 2x + 1$ est correcte (carré d'une somme). $(x-1)^2$ vaut $x^2 - 2x + 1$ ; $(x+1)(x-1)$ vaut $x^2 - 1$ ; $(x+2)^2$ vaut $x^2 + 4x + 4$.",
+                  "answers": [
+                    {
+                      "content": "$(x-1)^2 = x^2 - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+1)^2 = x^2 + 2x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+1)(x-1) = x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+2)^2 = x^2 + 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'égalité $2(x+5) - 2x = 10$ est vraie pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "$2(x+5) - 2x = 2x + 10 - 2x = 10$ : le résultat ne dépend pas de $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $x$ l'égalité $(x+3)^2 = x^2 + 9$ est-elle vraie ?",
+                  "question_type": "numeric",
+                  "explanation": "$(x+3)^2 = x^2 + 6x + 9$. L'égalité devient $6x = 0$, donc $x = 0$ : elle n'est vraie que pour cette valeur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : développer, factoriser, résoudre un problème",
+          "notions": "développer avec la distributivité et les identités remarquables, factoriser par un facteur commun ou une identité, calcul mental, valeur numérique, problème de bénéfice.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On développe des expressions, en choisissant entre la distributivité et une identité remarquable.",
+              "exercise_type": "evaluation",
+              "hint": "Utilise la distributivité pour un facteur devant une parenthèse, une identité remarquable pour un carré.",
+              "questions": [
+                {
+                  "content": "Développer $6(x-2)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$6(x-2) = 6 \\times x + 6 \\times (-2) = 6x - 12$. La réponse $6x - 2$ oublie de multiplier $-2$ par $6$ ; $6x + 12$ se trompe sur le signe.",
+                  "answers": [
+                    {
+                      "content": "$6x - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x - 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x - 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(x+3)(x-5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+3)(x-5) = x^2 - 5x + 3x - 15 = x^2 - 2x - 15$. La réponse $x^2 - 15$ oublie les produits croisés ; $x^2 + 2x - 15$ se trompe sur le signe de $-5x + 3x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 2x - 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 2x + 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 2x - 15$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Développer $(x+9)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x+9)^2 = x^2 + 2 \\times x \\times 9 + 9^2 = x^2 + 18x + 81$. La réponse $x^2 + 81$ oublie le double produit ; $x^2 + 9x + 81$ oublie le facteur $2$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 18x + 81$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 81$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 9x + 81$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 18x + 18$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On développe $(4x-1)(4x+1)$ sous la forme $ax^2 - 1$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$(4x-1)(4x+1) = (4x)^2 - 1^2 = 16x^2 - 1$, donc $a = 16$ : on élève aussi $4$ au carré.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-6)^2 = x^2 - 12x + 36$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x-6)^2 = x^2 - 2 \\times x \\times 6 + 6^2 = x^2 - 12x + 36$ : l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $-2(x-7) = -2x $ ___ $ 14$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "$-2(x-7) = -2x + (-2) \\times (-7) = -2x + 14$ : moins par moins donne plus.",
+                  "answers": [
+                    {
+                      "content": "+",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On factorise des expressions de deux manières : par un facteur commun ou par une identité remarquable.",
+              "exercise_type": "evaluation",
+              "hint": "Cherche d'abord un facteur commun ; sinon cherche deux carrés.",
+              "questions": [
+                {
+                  "content": "Factoriser $9x + 27$ avec le plus grand facteur commun.",
+                  "question_type": "single_choice",
+                  "explanation": "$9x = 9 \\times x$ et $27 = 9 \\times 3$, donc $9(x+3)$. La réponse $9(x+27)$ oublie de diviser $27$ par $9$ ; $3(3x+27)$ développe en $9x + 81$.",
+                  "answers": [
+                    {
+                      "content": "$9(x+27)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9(x+3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9(x+18)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3(3x+27)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $x^2 - 64$.",
+                  "question_type": "single_choice",
+                  "explanation": "$x^2 - 64 = x^2 - 8^2 = (x+8)(x-8)$. Les réponses $(x-8)^2$ et $(x+8)^2$ ont trois termes en se développant.",
+                  "answers": [
+                    {
+                      "content": "$(x-8)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+8)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+8)(x-8)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-32)(x+2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factoriser $x^2 + 8x + 16$.",
+                  "question_type": "single_choice",
+                  "explanation": "$16 = 4^2$ et le terme du milieu vaut $2 \\times x \\times 4 = 8x$, donc $(x+4)^2$. La réponse $(x+8)^2$ prend le terme du milieu pour $b$ ; $(x-4)^2$ se trompe de signe.",
+                  "answers": [
+                    {
+                      "content": "$(x-4)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+4)(x-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+8)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+4)^2$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On factorise $6x^2 + 15x = 3x(2x + b)$. Quelle est la valeur de $b$ ?",
+                  "question_type": "numeric",
+                  "explanation": "$6x^2 = 3x \\times 2x$ et $15x = 3x \\times 5$, donc $3x(2x+5)$ et $b = 5$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $4x^2 - 9 = (2x-3)(2x+3)$.",
+                  "question_type": "true_false",
+                  "explanation": "$4x^2 - 9 = (2x)^2 - 3^2 = (2x+3)(2x-3)$ : l'affirmation est vraie, l'ordre des facteurs n'a pas d'importance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète le signe : $x^2 - 10x + 25 = (x $ ___ $ 5)^2$ (écris + ou -).",
+                  "question_type": "fill_blank",
+                  "explanation": "$25 = 5^2$ et le terme du milieu vaut $-10x = -2 \\times x \\times 5$ : le signe est $-$, donc $(x-5)^2$.",
+                  "answers": [
+                    {
+                      "content": "-",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On utilise les identités remarquables sans calculatrice, puis on vérifie une égalité.",
+              "exercise_type": "evaluation",
+              "hint": "Pense à $a^2 - b^2$ et à $(a+b)^2$.",
+              "questions": [
+                {
+                  "content": "Calcule $98^2$ sans calculatrice, en écrivant $98 = 100 - 2$.",
+                  "question_type": "numeric",
+                  "explanation": "$98^2 = (100-2)^2 = 10\\,000 - 400 + 4 = 9\\,604$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "9604",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $61^2 - 39^2$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
+                  "question_type": "numeric",
+                  "explanation": "$61^2 - 39^2 = (61+39)(61-39) = 100 \\times 22 = 2\\,200$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "2200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $41 \\times 39$ sans calculatrice, en écrivant $41 = 40 + 1$ et $39 = 40 - 1$.",
+                  "question_type": "numeric",
+                  "explanation": "$41 \\times 39 = (40+1)(40-1) = 40^2 - 1^2 = 1\\,600 - 1 = 1\\,599$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1599",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $(x-5)^2 - 25 = x(x-10)$ pour toute valeur de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "$(x-5)^2 - 25 = x^2 - 10x + 25 - 25 = x^2 - 10x = x(x-10)$ : les deux membres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle égalité est vraie pour tout nombre $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(2x+1)^2 = (2x)^2 + 2 \\times 2x \\times 1 + 1^2 = 4x^2 + 4x + 1$. La réponse $4x^2 + 1$ oublie le double produit ; $2x^2 + 4x + 1$ n'élève pas $2$ au carré ; $4x^2 + 2x + 1$ oublie le facteur $2$ dans le double produit.",
+                  "answers": [
+                    {
+                      "content": "$(2x+1)^2 = 4x^2 + 4x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2x+1)^2 = 4x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2x+1)^2 = 2x^2 + 4x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2x+1)^2 = 4x^2 + 2x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $(x+4)^2 - 16 = x(x + $ ___ $)$.",
+                  "question_type": "fill_blank",
+                  "explanation": "$(x+4)^2 - 16 = (x+4)^2 - 4^2 = (x+4+4)(x+4-4) = (x+8) \\times x$. Le nombre cherché est $8$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au marché de San-Pédro, un commerçant de poissons fumés a un bénéfice, en milliers de francs CFA, donné par $B = (x+3)^2 - 9$, où $x$ est le nombre de paniers vendus.",
+              "exercise_type": "evaluation",
+              "hint": "Développe le carré puis réduis ; pour factoriser, vois $9$ comme $3^2$.",
+              "questions": [
+                {
+                  "content": "Quelle est la forme développée et réduite de $B = (x+3)^2 - 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$B = x^2 + 6x + 9 - 9 = x^2 + 6x$. La réponse $x^2 + 6x + 18$ ajoute $9$ au lieu de le retrancher ; $x^2$ oublie le double produit.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 6x + 18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 6x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 3x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la factorisation de $B = x^2 + 6x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le facteur commun est $x$ : $x^2 + 6x = x(x+6)$. On obtient la même chose avec $(x+3)^2 - 3^2 = (x+3+3)(x+3-3) = (x+6)x$. La réponse $x(x+3)$ développe en $x^2 + 3x$.",
+                  "answers": [
+                    {
+                      "content": "$(x+6)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x(x+3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x(x+6)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+3)(x-3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le bénéfice $B$ pour $x = 4$ paniers (en milliers de francs CFA).",
+                  "question_type": "numeric",
+                  "explanation": "$B = 4^2 + 6 \\times 4 = 16 + 24 = 40$. Vérification : $(4+3)^2 - 9 = 49 - 9 = 40$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le bénéfice $B$ pour $x = 10$ paniers (en milliers de francs CFA).",
+                  "question_type": "numeric",
+                  "explanation": "$B = 10 \\times (10+6) = 160$. Vérification : $(10+3)^2 - 9 = 169 - 9 = 160$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : s'il ne vend aucun panier ($x = 0$), le commerçant a un bénéfice nul.",
+                  "question_type": "true_false",
+                  "explanation": "Pour $x = 0$ : $B = 0 \\times (0+6) = 0$. Vérification : $(0+3)^2 - 9 = 0$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le bénéfice $B$ pour $x = 2$ paniers (en milliers de francs CFA).",
+                  "question_type": "numeric",
+                  "explanation": "$B = 2 \\times (2+6) = 16$. Vérification : $(2+3)^2 - 9 = 25 - 9 = 16$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "figure": null
             }
           ]
         }

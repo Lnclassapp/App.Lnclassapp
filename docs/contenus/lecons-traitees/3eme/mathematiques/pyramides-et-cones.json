@@ -113,6 +113,146 @@
               "label": "Hauteur (cm)"
             }
           ]
+        },
+        {
+          "key": "tas-de-sable",
+          "kind": "solid",
+          "description": "Un tas de sable de chantier en forme de cône de révolution, de rayon 3 m et de hauteur 2 m. On voit le disque de base posé au sol, la hauteur au centre et la pente du tas. Deux curseurs modifient le rayon et la hauteur pour observer comment le volume du tas évolue.",
+          "params": {
+            "shape": "cone",
+            "radius": 3,
+            "height": 2
+          },
+          "controls": [
+            {
+              "param": "radius",
+              "min": 1,
+              "max": 5,
+              "step": 0.5,
+              "label": "Rayon (m)"
+            },
+            {
+              "param": "height",
+              "min": 1,
+              "max": 6,
+              "step": 0.5,
+              "label": "Hauteur (m)"
+            }
+          ]
+        },
+        {
+          "key": "toit-pyramidal",
+          "kind": "solid",
+          "description": "Le toit d'un kiosque, en forme de pyramide régulière à base carrée de côté 8 m et de hauteur 3 m. On voit les quatre faces triangulaires qui se rejoignent au sommet et la hauteur à angle droit avec la base. Deux curseurs modifient la hauteur du toit et le côté de la base.",
+          "params": {
+            "shape": "pyramid",
+            "base": "square",
+            "side": 8,
+            "height": 3
+          },
+          "controls": [
+            {
+              "param": "height",
+              "min": 1,
+              "max": 8,
+              "step": 1,
+              "label": "Hauteur (m)"
+            },
+            {
+              "param": "side",
+              "min": 4,
+              "max": 12,
+              "step": 1,
+              "label": "Côté de la base (m)"
+            }
+          ]
+        },
+        {
+          "key": "gobelet-conique",
+          "kind": "solid",
+          "description": "Un petit gobelet de dégustation en carton, en forme de cône de révolution de rayon 4 cm et de hauteur 3 cm, dessiné pointe en haut. On repère le disque de l'ouverture, la hauteur et le bord incliné. Deux curseurs modifient le rayon et la hauteur pour voir leur effet sur la contenance.",
+          "params": {
+            "shape": "cone",
+            "radius": 4,
+            "height": 3
+          },
+          "controls": [
+            {
+              "param": "radius",
+              "min": 2,
+              "max": 6,
+              "step": 1,
+              "label": "Rayon (cm)"
+            },
+            {
+              "param": "height",
+              "min": 2,
+              "max": 8,
+              "step": 1,
+              "label": "Hauteur (cm)"
+            }
+          ]
+        },
+        {
+          "key": "bac-pyramidal",
+          "kind": "solid",
+          "description": "Un bac à fleurs en forme de pyramide à base rectangulaire de 6 dm sur 4 dm et de hauteur 3 dm, dessiné pointe en haut. Le rectangle est l'ouverture du bac et la hauteur est la distance de la pointe à ce rectangle. Trois curseurs modifient la largeur, la profondeur et la hauteur.",
+          "params": {
+            "shape": "pyramid",
+            "base": "rectangular",
+            "width": 6,
+            "depth": 4,
+            "height": 3
+          },
+          "controls": [
+            {
+              "param": "width",
+              "min": 2,
+              "max": 9,
+              "step": 1,
+              "label": "Largeur (dm)"
+            },
+            {
+              "param": "depth",
+              "min": 2,
+              "max": 9,
+              "step": 1,
+              "label": "Profondeur (dm)"
+            },
+            {
+              "param": "height",
+              "min": 1,
+              "max": 8,
+              "step": 1,
+              "label": "Hauteur (dm)"
+            }
+          ]
+        },
+        {
+          "key": "tas-de-cacao",
+          "kind": "solid",
+          "description": "Un tas de fèves de cacao en forme de cône de révolution, de rayon 1,5 m et de hauteur 2 m. On voit le disque de base au sol, la hauteur au centre et la génératrice, côté incliné qui sert de profil à la bâche. Deux curseurs modifient le rayon et la hauteur.",
+          "params": {
+            "shape": "cone",
+            "radius": 1.5,
+            "height": 2
+          },
+          "controls": [
+            {
+              "param": "radius",
+              "min": 0.5,
+              "max": 3,
+              "step": 0.5,
+              "label": "Rayon (m)"
+            },
+            {
+              "param": "height",
+              "min": 1,
+              "max": 4,
+              "step": 0.5,
+              "label": "Hauteur (m)"
+            }
+          ]
         }
       ],
       "notions": [
@@ -136,121 +276,240 @@
           },
           "pitfall": "Ne pas oublier le facteur $\\dfrac{1}{3}$. Contre-exemple : pour $B = 36$ cm² et $h = 4$ cm, $B \\times h = 144$ cm³ est le volume d'un pavé droit de même base et de même hauteur. La pyramide qui rentre dedans en occupe le tiers : $\\dfrac{144}{3} = 48$ cm³. Pour éviter l'erreur, écris toujours la formule complète avant de calculer. Attention aussi : la hauteur est la distance à angle droit du sommet à la base, pas la hauteur d'une face latérale.",
           "figure": "pyramide-base-carree",
-          "exercise": {
-            "title": "Calculer des volumes de pyramides",
-            "exercise_type": "fixation",
-            "figure": "pyramide-base-carree",
-            "statement": "Dans cet exercice, tu calcules le volume de pyramides avec la méthode de la fiche. La figure montre une pyramide à base carrée ; les mesures à utiliser sont celles écrites dans chaque question.",
-            "questions": [
-              {
-                "content": "Une pyramide a pour base un carré de côté 3 cm et pour hauteur 5 cm. Quel est son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : la base est un carré de côté 3 cm et la hauteur est $h = 5$ cm, dans la même unité. Étape 2 — Calculer l'aire de la base : $B = 3 \\times 3 = 9$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9 \\times 5$. Étape 4 — Calculer : $V = 15$ cm³. La proposition 45 cm³ oublie le facteur $\\dfrac{1}{3}$ ; 27 cm³ prend le côté 3 cm à la place de la hauteur ; 15 cm² donne une unité d'aire alors qu'un volume s'exprime en cm³.",
-                "answers": [
-                  {
-                    "content": "45 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "27 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "15 cm³",
-                    "correct": true
-                  },
-                  {
-                    "content": "15 cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide a pour base un rectangle de 6 cm sur 4 cm et pour hauteur 9 cm. Quel est son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : la base est un rectangle de 6 cm sur 4 cm, la hauteur est $h = 9$ cm. Étape 2 — Calculer l'aire de la base : $B = 6 \\times 4 = 24$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 24 \\times 9$. Étape 4 — Calculer : $V = 8 \\times 9 = 72$ cm³. Le résultat 216 cm³ vient de l'oubli du $\\dfrac{1}{3}$ ; 108 cm³ vient d'un facteur $\\dfrac{1}{2}$ à la place de $\\dfrac{1}{3}$ ; 24 cm³ est seulement l'aire de la base.",
-                "answers": [
-                  {
-                    "content": "216 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "72 cm³",
-                    "correct": true
-                  },
-                  {
-                    "content": "24 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "108 cm³",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 1 dm. Quel est son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : le côté est 6 cm et la hauteur est 1 dm. Il faut la même unité : $1$ dm $= 10$ cm, donc $h = 10$ cm. Étape 2 — Calculer l'aire de la base : $B = 6 \\times 6 = 36$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 36 \\times 10$. Étape 4 — Calculer : $V = 12 \\times 10 = 120$ cm³. La proposition 12 cm³ garde $h = 1$ sans convertir ; 360 cm³ oublie le $\\dfrac{1}{3}$ ; 1 200 cm³ se trompe d'un facteur 10 dans la conversion.",
-                "answers": [
-                  {
-                    "content": "12 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "360 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "1 200 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "120 cm³",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide a pour volume 40 cm³ et sa base a pour aire 24 cm². Quelle est sa hauteur ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : on connaît $V = 40$ cm³ et la base d'aire $B = 24$ cm² ; on cherche la hauteur $h$ en cm. Étape 2 — Calculer l'aire de la base : elle est donnée, $B = 24$ cm². Étape 3 — Appliquer : $40 = \\dfrac{1}{3} \\times 24 \\times h$, c'est-à-dire $40 = 8h$. Étape 4 — Calculer : $h = 40 \\div 8 = 5$ cm. La proposition $\\dfrac{5}{3}$ cm vient de l'oubli de multiplier par 3 ; 120 cm oublie de diviser par l'aire de la base ; 960 cm multiplie $V$ par $B$.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac{5}{3}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "120 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "5 cm",
-                    "correct": true
-                  },
-                  {
-                    "content": "960 cm",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide a pour base un carré d'aire 36 cm² et pour hauteur 4 cm. Son volume est $36 \\times 4 = 144$ cm³.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : $B = 36$ cm² et $h = 4$ cm. Étape 2 — Calculer : la base est donnée, $B = 36$ cm². Étape 3 — Appliquer la formule : $V = \\dfrac{1}{3} \\times B \\times h = \\dfrac{1}{3} \\times 36 \\times 4$. Étape 4 — Calculer : $V = 48$ cm³. L'affirmation est donc fausse : $36 \\times 4 = 144$ cm³ est le volume du pavé droit de même base et de même hauteur, et la pyramide n'en occupe que le tiers.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des volumes de pyramides",
+              "exercise_type": "fixation",
+              "figure": "pyramide-base-carree",
+              "statement": "Dans cet exercice, tu calcules le volume de pyramides avec la méthode de la fiche. La figure montre une pyramide à base carrée ; les mesures à utiliser sont celles écrites dans chaque question.",
+              "questions": [
+                {
+                  "content": "Une pyramide a pour base un carré de côté 3 cm et pour hauteur 5 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la base est un carré de côté 3 cm et la hauteur est $h = 5$ cm, dans la même unité. Étape 2 — Calculer l'aire de la base : $B = 3 \\times 3 = 9$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9 \\times 5$. Étape 4 — Calculer : $V = 15$ cm³. La proposition 45 cm³ oublie le facteur $\\dfrac{1}{3}$ ; 27 cm³ prend le côté 3 cm à la place de la hauteur ; 15 cm² donne une unité d'aire alors qu'un volume s'exprime en cm³.",
+                  "answers": [
+                    {
+                      "content": "45 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "27 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un rectangle de 6 cm sur 4 cm et pour hauteur 9 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la base est un rectangle de 6 cm sur 4 cm, la hauteur est $h = 9$ cm. Étape 2 — Calculer l'aire de la base : $B = 6 \\times 4 = 24$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 24 \\times 9$. Étape 4 — Calculer : $V = 8 \\times 9 = 72$ cm³. Le résultat 216 cm³ vient de l'oubli du $\\dfrac{1}{3}$ ; 108 cm³ vient d'un facteur $\\dfrac{1}{2}$ à la place de $\\dfrac{1}{3}$ ; 24 cm³ est seulement l'aire de la base.",
+                  "answers": [
+                    {
+                      "content": "216 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "72 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "24 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "108 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 1 dm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le côté est 6 cm et la hauteur est 1 dm. Il faut la même unité : $1$ dm $= 10$ cm, donc $h = 10$ cm. Étape 2 — Calculer l'aire de la base : $B = 6 \\times 6 = 36$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 36 \\times 10$. Étape 4 — Calculer : $V = 12 \\times 10 = 120$ cm³. La proposition 12 cm³ garde $h = 1$ sans convertir ; 360 cm³ oublie le $\\dfrac{1}{3}$ ; 1 200 cm³ se trompe d'un facteur 10 dans la conversion.",
+                  "answers": [
+                    {
+                      "content": "12 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "360 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 200 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "120 cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour volume 40 cm³ et sa base a pour aire 24 cm². Quelle est sa hauteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on connaît $V = 40$ cm³ et la base d'aire $B = 24$ cm² ; on cherche la hauteur $h$ en cm. Étape 2 — Calculer l'aire de la base : elle est donnée, $B = 24$ cm². Étape 3 — Appliquer : $40 = \\dfrac{1}{3} \\times 24 \\times h$, c'est-à-dire $40 = 8h$. Étape 4 — Calculer : $h = 40 \\div 8 = 5$ cm. La proposition $\\dfrac{5}{3}$ cm vient de l'oubli de multiplier par 3 ; 120 cm oublie de diviser par l'aire de la base ; 960 cm multiplie $V$ par $B$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5}{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "120 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "960 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré d'aire 36 cm² et pour hauteur 4 cm. Son volume est $36 \\times 4 = 144$ cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $B = 36$ cm² et $h = 4$ cm. Étape 2 — Calculer : la base est donnée, $B = 36$ cm². Étape 3 — Appliquer la formule : $V = \\dfrac{1}{3} \\times B \\times h = \\dfrac{1}{3} \\times 36 \\times 4$. Étape 4 — Calculer : $V = 48$ cm³. L'affirmation est donc fausse : $36 \\times 4 = 144$ cm³ est le volume du pavé droit de même base et de même hauteur, et la pyramide n'en occupe que le tiers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Volumes de pyramides à bases variées",
+              "statement": "Dans cet exercice, tu calcules le volume de pyramides dont la base est un carré, un rectangle ou un triangle rectangle, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris la formule avant de calculer, mets toutes les longueurs dans la même unité et n'oublie pas le facteur un tiers.",
+              "questions": [
+                {
+                  "content": "Une pyramide a pour base un carré de côté 12 cm et pour hauteur 7 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la base est un carré de côté 12 cm et la hauteur est $h = 7$ cm, deux longueurs en cm. Étape 2 — Calculer l'aire de la base : $B = 12 \\times 12 = 144$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 144 \\times 7$. Étape 4 — Calculer : $V = 48 \\times 7 = 336$ cm³. La proposition 1 008 cm³ oublie le facteur $\\dfrac{1}{3}$ et donne le volume d'un pavé droit ; 28 cm³ prend le côté 12 cm à la place de l'aire $B$ ; 504 cm³ met un facteur $\\dfrac{1}{2}$ à la place de $\\dfrac{1}{3}$.",
+                  "answers": [
+                    {
+                      "content": "1 008 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "336 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "28 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "504 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un rectangle de 5 cm sur 12 cm et pour hauteur 8 cm. Quel est son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : la base est un rectangle de 5 cm sur 12 cm et la hauteur est $h = 8$ cm. Étape 2 — Calculer l'aire de la base : $B = 5 \\times 12 = 60$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 60 \\times 8$. Étape 4 — Calculer : $V = 20 \\times 8 = 160$ cm³. L'erreur typique est d'oublier le facteur $\\dfrac{1}{3}$ et d'écrire $60 \\times 8 = 480$ cm³, qui est le volume d'un pavé droit.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 9 cm et pour hauteur 2 dm. Son volume est ___ cm³.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le côté est 9 cm et la hauteur est 2 dm ; il faut la même unité, donc $h = 2$ dm $= 20$ cm. Étape 2 — Calculer l'aire de la base : $B = 9 \\times 9 = 81$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 81 \\times 20$. Étape 4 — Calculer : $V = 27 \\times 20 = 540$ cm³. Si on garde $h = 2$ sans convertir, on trouve 54 cm³, dix fois trop petit ; si on oublie le facteur $\\dfrac{1}{3}$, on trouve 1 620 cm³.",
+                  "answers": [
+                    {
+                      "content": "540",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour volume 50 cm³ et sa base a pour aire 30 cm². Sa hauteur est 5 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on connaît $V = 50$ cm³ et $B = 30$ cm² ; on cherche $h$. Étape 2 — Calculer l'aire de la base : elle est donnée, $B = 30$ cm². Étape 3 — Appliquer : $50 = \\dfrac{1}{3} \\times 30 \\times h$, c'est-à-dire $50 = 10h$. Étape 4 — Calculer : $h = 50 \\div 10 = 5$ cm. L'affirmation est vraie. Répondre Faux vient d'un calcul sans le facteur $\\dfrac{1}{3}$ : on écrit $50 = 30h$ et on trouve $h = \\dfrac{5}{3}$ cm.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 9 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : base carrée de côté 6 cm, hauteur $h = 9$ cm. Étape 2 — Calculer l'aire de la base : $B = 6 \\times 6 = 36$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 36 \\times 9$. Étape 4 — Calculer : $V = 12 \\times 9 = 108$ cm³. L'affirmation « 324 cm³ » oublie le facteur $\\dfrac{1}{3}$ ($36 \\times 9 = 324$) ; « 12 cm² » additionne les côtés $6 + 6$ au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "Son volume est 324 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire de sa base est 12 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son volume est 108 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire de sa base est 36 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un triangle rectangle dont les côtés de l'angle droit mesurent 6 cm et 4 cm, et pour hauteur 10 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la base est un triangle rectangle de côtés 6 cm et 4 cm autour de l'angle droit, la hauteur est $h = 10$ cm. Étape 2 — Calculer l'aire de la base : $B = \\dfrac{6 \\times 4}{2} = 12$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 12 \\times 10$. Étape 4 — Calculer : $V = 4 \\times 10 = 40$ cm³. La proposition 120 cm³ oublie le facteur $\\dfrac{1}{3}$ ; 80 cm³ prend $6 \\times 4 = 24$ cm² comme aire de base, sans diviser par 2 ; 240 cm³ cumule les deux oublis.",
+                  "answers": [
+                    {
+                      "content": "120 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "80 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "240 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 cm³",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Une pyramide a pour base un carré de côté 9 cm et pour hauteur 10 cm.",
             "questions": [
@@ -335,121 +594,229 @@
           },
           "pitfall": "Ne pas confondre rayon et diamètre. Contre-exemple : pour un cône de diamètre 6 cm et de hauteur 4 cm, le rayon est 3 cm et $V = \\dfrac{1}{3} \\times 9\\pi \\times 4 = 12\\pi$ cm³. Si on prend 6 cm comme rayon, on trouve $\\dfrac{1}{3} \\times 36\\pi \\times 4 = 48\\pi$ cm³, quatre fois trop grand, car le rayon est élevé au carré. Pour éviter l'erreur : quand l'énoncé donne le diamètre, divise-le par 2 dès l'étape 1.",
           "figure": "cone-de-revolution",
-          "exercise": {
-            "title": "Calculer des volumes de cônes",
-            "exercise_type": "fixation",
-            "figure": "cone-de-revolution",
-            "statement": "Dans cet exercice, tu calcules le volume de cônes de révolution avec la méthode de la fiche. La figure montre un cône ; les mesures à utiliser sont celles écrites dans chaque question.",
-            "questions": [
-              {
-                "content": "Un cône de révolution a pour rayon 3 cm et pour hauteur 7 cm. Quel est son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : le rayon est $r = 3$ cm et la hauteur est $h = 7$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9\\pi \\times 7$. Étape 4 — Calculer : $V = 3\\pi \\times 7 = 21\\pi$ cm³. La proposition $63\\pi$ cm³ oublie le facteur $\\dfrac{1}{3}$ ; $7\\pi$ cm³ utilise $r$ au lieu de $r^2$ ; $84\\pi$ cm³ utilise le diamètre 6 cm à la place du rayon.",
-                "answers": [
-                  {
-                    "content": "$63\\pi$ cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "$7\\pi$ cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "$21\\pi$ cm³",
-                    "correct": true
-                  },
-                  {
-                    "content": "$84\\pi$ cm³",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour diamètre de base 8 cm et pour hauteur 6 cm. Quel est son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : le diamètre est 8 cm, donc le rayon est $r = 8 \\div 2 = 4$ cm ; la hauteur est $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 4^2 = 16\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 16\\pi \\times 6$. Étape 4 — Calculer : $V = 16\\pi \\times 2 = 32\\pi$ cm³. La proposition $128\\pi$ cm³ prend 8 cm comme rayon ; $96\\pi$ cm³ oublie le $\\dfrac{1}{3}$ ; $16\\pi$ cm² n'est que l'aire de la base.",
-                "answers": [
-                  {
-                    "content": "$128\\pi$ cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "$32\\pi$ cm³",
-                    "correct": true
-                  },
-                  {
-                    "content": "$96\\pi$ cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "$16\\pi$ cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour rayon 5 cm et pour hauteur 6 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de son volume ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $r = 5$ cm et $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 25\\pi \\times 6$. Étape 4 — Calculer : $V = 50\\pi$ cm³, puis avec $\\pi \\approx 3{,}14$ : $V \\approx 50 \\times 3{,}14 = 157$ cm³. La proposition 471 cm³ oublie le $\\dfrac{1}{3}$ ; 78,5 cm³ prend la moitié ; 157 cm² donne une unité d'aire.",
-                "answers": [
-                  {
-                    "content": "471 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "157 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "78,5 cm³",
-                    "correct": false
-                  },
-                  {
-                    "content": "157 cm³",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour rayon 3 cm et pour volume $12\\pi$ cm³. Quelle est sa hauteur ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $r = 3$ cm et $V = 12\\pi$ cm³ ; on cherche $h$. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $12\\pi = \\dfrac{1}{3} \\times 9\\pi \\times h = 3\\pi \\times h$. Étape 4 — Calculer : $h = \\dfrac{12\\pi}{3\\pi} = 4$ cm. La proposition $\\dfrac{4}{3}$ cm vient de $\\dfrac{12\\pi}{9\\pi}$, sans penser au $\\dfrac{1}{3}$ ; 36 cm vient de $12 \\times 3$ sans diviser par $9\\pi$.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac{4}{3}$ cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "12 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "36 cm",
-                    "correct": false
-                  },
-                  {
-                    "content": "4 cm",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour diamètre de base 6 cm et pour hauteur 4 cm. Son volume est $48\\pi$ cm³.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : le diamètre est 6 cm, donc le rayon est $r = 3$ cm ; $h = 4$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9\\pi \\times 4$. Étape 4 — Calculer : $V = 12\\pi$ cm³. L'affirmation est fausse : $48\\pi$ cm³ s'obtient en prenant 6 cm pour le rayon ($\\dfrac{1}{3} \\times 36\\pi \\times 4 = 48\\pi$), soit quatre fois trop.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des volumes de cônes",
+              "exercise_type": "fixation",
+              "figure": "cone-de-revolution",
+              "statement": "Dans cet exercice, tu calcules le volume de cônes de révolution avec la méthode de la fiche. La figure montre un cône ; les mesures à utiliser sont celles écrites dans chaque question.",
+              "questions": [
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour hauteur 7 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le rayon est $r = 3$ cm et la hauteur est $h = 7$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9\\pi \\times 7$. Étape 4 — Calculer : $V = 3\\pi \\times 7 = 21\\pi$ cm³. La proposition $63\\pi$ cm³ oublie le facteur $\\dfrac{1}{3}$ ; $7\\pi$ cm³ utilise $r$ au lieu de $r^2$ ; $84\\pi$ cm³ utilise le diamètre 6 cm à la place du rayon.",
+                  "answers": [
+                    {
+                      "content": "$63\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$21\\pi$ cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "$84\\pi$ cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 8 cm et pour hauteur 6 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le diamètre est 8 cm, donc le rayon est $r = 8 \\div 2 = 4$ cm ; la hauteur est $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 4^2 = 16\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 16\\pi \\times 6$. Étape 4 — Calculer : $V = 16\\pi \\times 2 = 32\\pi$ cm³. La proposition $128\\pi$ cm³ prend 8 cm comme rayon ; $96\\pi$ cm³ oublie le $\\dfrac{1}{3}$ ; $16\\pi$ cm² n'est que l'aire de la base.",
+                  "answers": [
+                    {
+                      "content": "$128\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32\\pi$ cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "$96\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm et pour hauteur 6 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 5$ cm et $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 25\\pi \\times 6$. Étape 4 — Calculer : $V = 50\\pi$ cm³, puis avec $\\pi \\approx 3{,}14$ : $V \\approx 50 \\times 3{,}14 = 157$ cm³. La proposition 471 cm³ oublie le $\\dfrac{1}{3}$ ; 78,5 cm³ prend la moitié ; 157 cm² donne une unité d'aire.",
+                  "answers": [
+                    {
+                      "content": "471 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "157 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "78,5 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "157 cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour volume $12\\pi$ cm³. Quelle est sa hauteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 3$ cm et $V = 12\\pi$ cm³ ; on cherche $h$. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $12\\pi = \\dfrac{1}{3} \\times 9\\pi \\times h = 3\\pi \\times h$. Étape 4 — Calculer : $h = \\dfrac{12\\pi}{3\\pi} = 4$ cm. La proposition $\\dfrac{4}{3}$ cm vient de $\\dfrac{12\\pi}{9\\pi}$, sans penser au $\\dfrac{1}{3}$ ; 36 cm vient de $12 \\times 3$ sans diviser par $9\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "36 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 cm",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 6 cm et pour hauteur 4 cm. Son volume est $48\\pi$ cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le diamètre est 6 cm, donc le rayon est $r = 3$ cm ; $h = 4$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9\\pi \\times 4$. Étape 4 — Calculer : $V = 12\\pi$ cm³. L'affirmation est fausse : $48\\pi$ cm³ s'obtient en prenant 6 cm pour le rayon ($\\dfrac{1}{3} \\times 36\\pi \\times 4 = 48\\pi$), soit quatre fois trop.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Volumes de cônes : valeur exacte et valeur approchée",
+              "statement": "Dans cet exercice, tu calcules le volume de cônes de révolution, en valeur exacte puis en valeur approchée, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Divise le diamètre par 2 pour obtenir le rayon, élève le rayon au carré, puis prends le tiers du produit avec la hauteur.",
+              "questions": [
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 10 cm et pour hauteur 12 cm. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le diamètre est 10 cm, donc le rayon est $r = 10 \\div 2 = 5$ cm ; la hauteur est $h = 12$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 25\\pi \\times 12$. Étape 4 — Calculer : $V = 25\\pi \\times 4 = 100\\pi$ cm³. La proposition $300\\pi$ cm³ oublie le facteur $\\dfrac{1}{3}$ ; $400\\pi$ cm³ prend le diamètre 10 cm comme rayon ; $20\\pi$ cm³ utilise $r$ au lieu de $r^2$.",
+                  "answers": [
+                    {
+                      "content": "$100\\pi$ cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "$300\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\pi$ cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 6 cm et pour hauteur 5 cm. Son volume exact s'écrit $k\\pi$ cm³. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $r = 6$ cm et $h = 5$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 6^2 = 36\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 36\\pi \\times 5$. Étape 4 — Calculer : $V = 12\\pi \\times 5 = 60\\pi$ cm³, donc $k = 60$. L'erreur typique est d'oublier le facteur $\\dfrac{1}{3}$ et de trouver $k = 180$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour hauteur 10 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $r = 3$ cm et $h = 10$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 9\\pi \\times 10$. Étape 4 — Calculer : valeur exacte $V = 30\\pi$ cm³, puis valeur approchée $V \\approx 30 \\times 3{,}14 = 94{,}2$ cm³. L'erreur typique est de s'arrêter à la valeur exacte ou d'oublier le facteur $\\dfrac{1}{3}$ (on trouverait 282,6 cm³).",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "94,2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour volume $18\\pi$ cm³. Sa hauteur est ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : $r = 3$ cm et $V = 18\\pi$ cm³ ; on cherche $h$. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 3 — Appliquer : $18\\pi = \\dfrac{1}{3} \\times 9\\pi \\times h = 3\\pi h$. Étape 4 — Calculer : $h = 18\\pi \\div 3\\pi = 6$ cm. Si on oublie le facteur $\\dfrac{1}{3}$, on écrit $18\\pi = 9\\pi h$ et on trouve $h = 2$ cm.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 8 cm et pour hauteur 6 cm. Son volume est $96\\pi$ cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le diamètre est 8 cm, donc $r = 4$ cm ; la hauteur est $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 4^2 = 16\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 16\\pi \\times 6$. Étape 4 — Calculer : $V = 32\\pi$ cm³. L'affirmation est donc fausse : $96\\pi = 16\\pi \\times 6$ est le volume du cylindre de même base et de même hauteur, obtenu en oubliant le facteur $\\dfrac{1}{3}$. Répondre Vrai revient à faire cet oubli.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm et pour hauteur 6 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $r = 5$ cm et $h = 6$ cm. Étape 2 — Calculer l'aire de la base : $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 3 — Appliquer : $V = \\dfrac{1}{3} \\times 25\\pi \\times 6$. Étape 4 — Calculer : $V = 25\\pi \\times 2 = 50\\pi$ cm³. L'affirmation « $150\\pi$ cm³ » oublie le facteur $\\dfrac{1}{3}$ ; l'affirmation « $5\\pi$ cm² » utilise $r$ au lieu de $r^2$.",
+                  "answers": [
+                    {
+                      "content": "Son volume exact est $50\\pi$ cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son volume exact est $150\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire de sa base est $5\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire de sa base est $25\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un cône de révolution a pour diamètre de base 10 cm et pour hauteur 9 cm.",
             "questions": [
@@ -538,121 +905,240 @@
           },
           "pitfall": "Ne pas confondre la hauteur $h$ et la génératrice $g$ dans la formule $\\pi r g$. Contre-exemple : pour $r = 3$ cm et $h = 4$ cm, la formule donne $\\pi \\times 3 \\times 5 = 15\\pi$ cm². Avec $h$ à la place de $g$, on écrirait $\\pi \\times 3 \\times 4 = 12\\pi$ cm², qui est trop petit. La génératrice est le côté incliné, toujours plus long que la hauteur : calcule-la d'abord avec Pythagore.",
           "figure": "cone-de-revolution",
-          "exercise": {
-            "title": "Calculer des aires latérales de cônes",
-            "exercise_type": "fixation",
-            "figure": "cone-de-revolution",
-            "statement": "Dans cet exercice, tu calcules l'aire latérale de cônes de révolution avec la méthode de la fiche. La figure montre un cône avec son rayon, sa hauteur et sa génératrice ; les mesures à utiliser sont celles écrites dans chaque question.",
-            "questions": [
-              {
-                "content": "Un cône de révolution a pour rayon 9 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $r = 9$ cm et $h = 12$ cm ; la hauteur, le rayon et la génératrice forment un triangle rectangle. Étape 2 — Calculer la génératrice avec le théorème de Pythagore : $g^2 = 9^2 + 12^2 = 81 + 144 = 225$, donc $g = 15$ cm. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 9 \\times 15$. Étape 4 — Calculer : $A = 135\\pi$ cm². La proposition $108\\pi$ cm² utilise la hauteur à la place de la génératrice ; $225\\pi$ cm² est $\\pi g^2$ ; $67{,}5\\pi$ cm² prend la moitié.",
-                "answers": [
-                  {
-                    "content": "$108\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$225\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$135\\pi$ cm²",
-                    "correct": true
-                  },
-                  {
-                    "content": "$67{,}5\\pi$ cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour rayon 5 cm, pour hauteur 12 cm et pour génératrice 13 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $r = 5$ cm, $h = 12$ cm et la génératrice est $g = 13$ cm. Étape 2 — Calculer la génératrice : elle est donnée, et on vérifie avec Pythagore : $5^2 + 12^2 = 169 = 13^2$. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 5 \\times 13$. Étape 4 — Calculer : $A = 65\\pi$ cm². La proposition $60\\pi$ cm² utilise la hauteur 12 cm à la place de la génératrice ; $25\\pi$ cm² est l'aire de la base ; $130\\pi$ cm² utilise le diamètre à la place du rayon.",
-                "answers": [
-                  {
-                    "content": "$60\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$65\\pi$ cm²",
-                    "correct": true
-                  },
-                  {
-                    "content": "$25\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$130\\pi$ cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour rayon 4 cm et pour hauteur 3 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $r = 4$ cm et $h = 3$ cm. Étape 2 — Calculer la génératrice : $g^2 = 4^2 + 3^2 = 16 + 9 = 25$, donc $g = 5$ cm. Étape 3 — Appliquer : $A = \\pi \\times 4 \\times 5$. Étape 4 — Calculer : $A = 20\\pi$ cm². La proposition $12\\pi$ cm² utilise $h$ à la place de $g$ ; $28\\pi$ cm² prend $g = 4 + 3 = 7$ (on n'additionne pas les longueurs) ; $100\\pi$ cm² prend $g = 25$ en oubliant la racine carrée.",
-                "answers": [
-                  {
-                    "content": "$12\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$28\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$100\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$20\\pi$ cm²",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour diamètre de base 10 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : le diamètre est 10 cm, donc $r = 5$ cm ; $h = 12$ cm. Étape 2 — Calculer la génératrice : $g^2 = 5^2 + 12^2 = 25 + 144 = 169$, donc $g = 13$ cm. Étape 3 — Appliquer : $A = \\pi \\times 5 \\times 13$. Étape 4 — Calculer : $A = 65\\pi$ cm². La proposition $130\\pi$ cm² prend 10 cm comme rayon ; $156\\pi$ cm² est $\\pi \\times h \\times g$ ; $60\\pi$ cm² utilise $h$ à la place de $g$.",
-                "answers": [
-                  {
-                    "content": "$130\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$156\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$60\\pi$ cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$65\\pi$ cm²",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un cône de révolution a pour rayon 6 cm et pour hauteur 8 cm. Son aire latérale est $\\pi \\times 6 \\times 8 = 48\\pi$ cm².",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : $r = 6$ cm et $h = 8$ cm. Étape 2 — Calculer la génératrice : $g^2 = 6^2 + 8^2 = 36 + 64 = 100$, donc $g = 10$ cm. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 6 \\times 10$. Étape 4 — Calculer : $A = 60\\pi$ cm². L'affirmation est fausse : $48\\pi$ cm² vient de la hauteur 8 cm utilisée à la place de la génératrice 10 cm.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des aires latérales de cônes",
+              "exercise_type": "fixation",
+              "figure": "cone-de-revolution",
+              "statement": "Dans cet exercice, tu calcules l'aire latérale de cônes de révolution avec la méthode de la fiche. La figure montre un cône avec son rayon, sa hauteur et sa génératrice ; les mesures à utiliser sont celles écrites dans chaque question.",
+              "questions": [
+                {
+                  "content": "Un cône de révolution a pour rayon 9 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 9$ cm et $h = 12$ cm ; la hauteur, le rayon et la génératrice forment un triangle rectangle. Étape 2 — Calculer la génératrice avec le théorème de Pythagore : $g^2 = 9^2 + 12^2 = 81 + 144 = 225$, donc $g = 15$ cm. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 9 \\times 15$. Étape 4 — Calculer : $A = 135\\pi$ cm². La proposition $108\\pi$ cm² utilise la hauteur à la place de la génératrice ; $225\\pi$ cm² est $\\pi g^2$ ; $67{,}5\\pi$ cm² prend la moitié.",
+                  "answers": [
+                    {
+                      "content": "$108\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$225\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$135\\pi$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$67{,}5\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm, pour hauteur 12 cm et pour génératrice 13 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 5$ cm, $h = 12$ cm et la génératrice est $g = 13$ cm. Étape 2 — Calculer la génératrice : elle est donnée, et on vérifie avec Pythagore : $5^2 + 12^2 = 169 = 13^2$. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 5 \\times 13$. Étape 4 — Calculer : $A = 65\\pi$ cm². La proposition $60\\pi$ cm² utilise la hauteur 12 cm à la place de la génératrice ; $25\\pi$ cm² est l'aire de la base ; $130\\pi$ cm² utilise le diamètre à la place du rayon.",
+                  "answers": [
+                    {
+                      "content": "$60\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$65\\pi$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$130\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 4 cm et pour hauteur 3 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 4$ cm et $h = 3$ cm. Étape 2 — Calculer la génératrice : $g^2 = 4^2 + 3^2 = 16 + 9 = 25$, donc $g = 5$ cm. Étape 3 — Appliquer : $A = \\pi \\times 4 \\times 5$. Étape 4 — Calculer : $A = 20\\pi$ cm². La proposition $12\\pi$ cm² utilise $h$ à la place de $g$ ; $28\\pi$ cm² prend $g = 4 + 3 = 7$ (on n'additionne pas les longueurs) ; $100\\pi$ cm² prend $g = 25$ en oubliant la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "$12\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$28\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 10 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le diamètre est 10 cm, donc $r = 5$ cm ; $h = 12$ cm. Étape 2 — Calculer la génératrice : $g^2 = 5^2 + 12^2 = 25 + 144 = 169$, donc $g = 13$ cm. Étape 3 — Appliquer : $A = \\pi \\times 5 \\times 13$. Étape 4 — Calculer : $A = 65\\pi$ cm². La proposition $130\\pi$ cm² prend 10 cm comme rayon ; $156\\pi$ cm² est $\\pi \\times h \\times g$ ; $60\\pi$ cm² utilise $h$ à la place de $g$.",
+                  "answers": [
+                    {
+                      "content": "$130\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$156\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$65\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 6 cm et pour hauteur 8 cm. Son aire latérale est $\\pi \\times 6 \\times 8 = 48\\pi$ cm².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $r = 6$ cm et $h = 8$ cm. Étape 2 — Calculer la génératrice : $g^2 = 6^2 + 8^2 = 36 + 64 = 100$, donc $g = 10$ cm. Étape 3 — Appliquer : $A = \\pi \\times r \\times g = \\pi \\times 6 \\times 10$. Étape 4 — Calculer : $A = 60\\pi$ cm². L'affirmation est fausse : $48\\pi$ cm² vient de la hauteur 8 cm utilisée à la place de la génératrice 10 cm.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Génératrice et aire latérale d'un cône de révolution",
+              "statement": "Dans cet exercice, tu calcules la génératrice puis l'aire latérale de cônes de révolution avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Repère le triangle rectangle formé par la hauteur, le rayon et la génératrice : la génératrice est son côté le plus long, calculé avec Pythagore.",
+              "questions": [
+                {
+                  "content": "Un cône de révolution a pour rayon 7 cm et pour hauteur 24 cm. Quelle est la longueur de sa génératrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 7$ cm et $h = 24$ cm ; la génératrice $g$ est l'hypoténuse du triangle rectangle de côtés 7 cm et 24 cm. Étape 2 — Calculer la génératrice avec Pythagore : $g^2 = 7^2 + 24^2 = 49 + 576 = 625$. Étape 3 — Appliquer : on prend la racine carrée, $g = \\sqrt{625}$. Étape 4 — Calculer : $g = 25$ cm. La proposition 31 cm additionne $7 + 24$ au lieu d'utiliser Pythagore ; 17 cm soustrait $24 - 7$ ; 625 cm donne $g^2$ sans prendre la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "31 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "17 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "625 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 8 cm et pour hauteur 6 cm. Son aire latérale exacte s'écrit $k\\pi$ cm². Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : $r = 8$ cm et $h = 6$ cm. Étape 2 — Calculer la génératrice avec Pythagore : $g^2 = 8^2 + 6^2 = 64 + 36 = 100$, donc $g = 10$ cm. Étape 3 — Appliquer : $A = \\pi \\times 8 \\times 10$. Étape 4 — Calculer : $A = 80\\pi$ cm², donc $k = 80$. L'erreur typique est de prendre la hauteur à la place de la génératrice : $\\pi \\times 8 \\times 6 = 48\\pi$ cm², valeur trop petite.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "π cm²"
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 20 cm et pour génératrice 29 cm. Sa hauteur est ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : $r = 20$ cm et $g = 29$ cm ; la génératrice est l'hypoténuse et on cherche le côté $h$. Étape 2 — Calculer avec Pythagore : $g^2 = r^2 + h^2$ donne $h^2 = 29^2 - 20^2 = 841 - 400 = 441$. Étape 3 — Appliquer : $h = \\sqrt{441}$. Étape 4 — Calculer : $h = 21$ cm. L'erreur typique est d'additionner $29^2 + 20^2$ au lieu de les soustraire, alors que $g$ est le plus grand côté.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour génératrice 7 cm. Son aire latérale est $21\\pi$ cm².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $r = 3$ cm et $g = 7$ cm. Étape 2 — Calculer la génératrice : elle est donnée, $g = 7$ cm. Étape 3 — Appliquer : $A = \\pi \\times 3 \\times 7$. Étape 4 — Calculer : $A = 21\\pi$ cm². L'affirmation est vraie. Répondre Faux viendrait d'une confusion avec le volume, par exemple en ajoutant le facteur $\\dfrac{1}{3}$ ou en élevant le rayon au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 6 cm et pour hauteur 8 cm. Quelle est son aire totale, disque de base compris ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $r = 6$ cm et $h = 8$ cm. Étape 2 — Calculer la génératrice avec Pythagore : $g^2 = 6^2 + 8^2 = 100$, donc $g = 10$ cm. Étape 3 — Appliquer : $A_{lat} = \\pi \\times 6 \\times 10 = 60\\pi$ cm², puis on ajoute le disque de base $\\pi \\times 6^2 = 36\\pi$ cm². Étape 4 — Calculer : $60\\pi + 36\\pi = 96\\pi$ cm². La proposition $60\\pi$ cm² oublie le disque de base ; $84\\pi$ cm² prend la hauteur à la place de la génératrice ($48\\pi + 36\\pi$) ; $36\\pi$ cm² ne donne que le disque de base.",
+                  "answers": [
+                    {
+                      "content": "$60\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$84\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$36\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$96\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 15 cm et pour hauteur 20 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $r = 15$ cm et $h = 20$ cm. Étape 2 — Calculer la génératrice avec Pythagore : $g^2 = 15^2 + 20^2 = 225 + 400 = 625$, donc $g = 25$ cm. Étape 3 — Appliquer : $A = \\pi \\times 15 \\times 25$. Étape 4 — Calculer : $A = 375\\pi$ cm². L'affirmation « 35 cm » additionne $15 + 20$ au lieu d'utiliser Pythagore ; l'affirmation « $300\\pi$ cm² » prend la hauteur 20 cm à la place de la génératrice ($\\pi \\times 15 \\times 20$).",
+                  "answers": [
+                    {
+                      "content": "Sa génératrice mesure 25 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son aire latérale exacte est $375\\pi$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa génératrice mesure 35 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son aire latérale exacte est $300\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un cône de révolution a pour rayon 8 cm et pour hauteur 15 cm.",
             "questions": [
@@ -751,125 +1237,244 @@
           },
           "pitfall": "Ne pas prendre la hauteur $h$ de la pyramide pour l'apothème $a$. Contre-exemple : avec $c = 6$ cm et $h = 4$ cm, l'apothème est $a = 5$ cm et $A = 4 \\times 15 = 60$ cm². Avec $h = 4$ à la place de $a$, on trouverait $4 \\times \\dfrac{6 \\times 4}{2} = 48$ cm², trop petit : la hauteur de la pyramide ne touche pas le bord de la face. L'apothème, lui, est la hauteur du triangle de la face : il est toujours plus grand que $h$.",
           "figure": "pyramide-base-carree",
-          "exercise": {
-            "title": "Calculer des aires latérales de pyramides",
-            "exercise_type": "fixation",
-            "figure": "pyramide-base-carree",
-            "statement": "Dans cet exercice, tu calcules l'aire latérale de pyramides régulières avec la méthode de la fiche. La figure montre une pyramide à base carrée ; les mesures à utiliser sont celles écrites dans chaque question.",
-            "questions": [
-              {
-                "content": "Une pyramide régulière a pour base un carré de côté 10 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la base est un carré, donc il y a $n = 4$ faces latérales ; le côté est $c = 10$ cm. Étape 2 — Calculer l'apothème : $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2 = 12^2 + 5^2 = 144 + 25 = 169$, donc $a = 13$ cm. Étape 3 — Calculer l'aire d'une face latérale : $\\dfrac{10 \\times 13}{2} = 65$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 4 \\times 65 = 260$ cm². La proposition 240 cm² utilise la hauteur 12 cm à la place de l'apothème ; 130 cm² ne compte que deux faces ; 520 cm² oublie de diviser par 2 dans l'aire d'un triangle.",
-                "answers": [
-                  {
-                    "content": "240 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "260 cm²",
-                    "correct": true
-                  },
-                  {
-                    "content": "130 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "520 cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide régulière a pour base un carré de côté 8 cm et ses faces latérales ont pour hauteur (apothème) 5 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ faces ; le côté est $c = 8$ cm et l'apothème est $a = 5$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 5$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{8 \\times 5}{2} = 20$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 4 \\times 20 = 80$ cm². La proposition 160 cm² oublie de diviser par 2 ; 20 cm² ne compte qu'une face ; 40 cm² ne compte que deux faces.",
-                "answers": [
-                  {
-                    "content": "160 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "20 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "80 cm²",
-                    "correct": true
-                  },
-                  {
-                    "content": "40 cm²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide régulière a pour base un triangle équilatéral de côté 6 cm et ses faces latérales ont pour apothème 4 cm. Quelle est son aire latérale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la base est un triangle, donc $n = 3$ faces latérales ; $c = 6$ cm et $a = 4$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 4$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{6 \\times 4}{2} = 12$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 3 \\times 12 = 36$ cm². La proposition 48 cm² compte 4 faces comme pour une base carrée ; 72 cm² oublie de diviser par 2 ; 12 cm² ne compte qu'une face.",
-                "answers": [
-                  {
-                    "content": "48 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "72 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "12 cm²",
-                    "correct": false
-                  },
-                  {
-                    "content": "36 cm²",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une pyramide régulière a pour base un carré de côté 8 cm et pour hauteur 3 cm. Quelles sont les deux affirmations vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : base carrée, donc $n = 4$ faces ; $c = 8$ cm et $h = 3$ cm. Étape 2 — Calculer l'apothème : $a^2 = 3^2 + 4^2 = 9 + 16 = 25$, donc $a = 5$ cm (l'affirmation « 5 cm » est vraie ; 3 cm est la hauteur de la pyramide, et 7 cm vient d'une addition $3 + 4$). Étape 3 — Aire d'une face : $\\dfrac{8 \\times 5}{2} = 20$ cm². Étape 4 — $A = 4 \\times 20 = 80$ cm² (vraie). L'aire 48 cm² vient de l'emploi de la hauteur : $4 \\times \\dfrac{8 \\times 3}{2} = 48$.",
-                "answers": [
-                  {
-                    "content": "L'apothème d'une face latérale mesure 5 cm.",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'apothème d'une face latérale mesure 3 cm.",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'aire latérale est 80 cm².",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'aire latérale est 48 cm².",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'apothème d'une face latérale mesure 7 cm.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans une pyramide régulière à base carrée, la hauteur de la pyramide et l'apothème d'une face latérale sont toujours égaux.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : prenons une base carrée de côté $c = 6$ cm et une hauteur $h = 4$ cm. Étape 2 — Calculer l'apothème : $a^2 = 4^2 + 3^2 = 25$, donc $a = 5$ cm. On a $a = 5 \\ne h = 4$. L'affirmation est fausse : l'apothème est l'hypoténuse d'un triangle rectangle dont $h$ est un côté, donc il est toujours plus grand que la hauteur. Étape 3 et Étape 4 — Utiliser $h$ pour l'aire d'une face donnerait $\\dfrac{6 \\times 4}{2} = 12$ cm² au lieu de $\\dfrac{6 \\times 5}{2} = 15$ cm².",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des aires latérales de pyramides",
+              "exercise_type": "fixation",
+              "figure": "pyramide-base-carree",
+              "statement": "Dans cet exercice, tu calcules l'aire latérale de pyramides régulières avec la méthode de la fiche. La figure montre une pyramide à base carrée ; les mesures à utiliser sont celles écrites dans chaque question.",
+              "questions": [
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 10 cm et pour hauteur 12 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est un carré, donc il y a $n = 4$ faces latérales ; le côté est $c = 10$ cm. Étape 2 — Calculer l'apothème : $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2 = 12^2 + 5^2 = 144 + 25 = 169$, donc $a = 13$ cm. Étape 3 — Calculer l'aire d'une face latérale : $\\dfrac{10 \\times 13}{2} = 65$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 4 \\times 65 = 260$ cm². La proposition 240 cm² utilise la hauteur 12 cm à la place de l'apothème ; 130 cm² ne compte que deux faces ; 520 cm² oublie de diviser par 2 dans l'aire d'un triangle.",
+                  "answers": [
+                    {
+                      "content": "240 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "260 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "130 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "520 cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 8 cm et ses faces latérales ont pour hauteur (apothème) 5 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ faces ; le côté est $c = 8$ cm et l'apothème est $a = 5$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 5$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{8 \\times 5}{2} = 20$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 4 \\times 20 = 80$ cm². La proposition 160 cm² oublie de diviser par 2 ; 20 cm² ne compte qu'une face ; 40 cm² ne compte que deux faces.",
+                  "answers": [
+                    {
+                      "content": "160 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "80 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "40 cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un triangle équilatéral de côté 6 cm et ses faces latérales ont pour apothème 4 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est un triangle, donc $n = 3$ faces latérales ; $c = 6$ cm et $a = 4$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 4$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{6 \\times 4}{2} = 12$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 3 \\times 12 = 36$ cm². La proposition 48 cm² compte 4 faces comme pour une base carrée ; 72 cm² oublie de diviser par 2 ; 12 cm² ne compte qu'une face.",
+                  "answers": [
+                    {
+                      "content": "48 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "72 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "36 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 8 cm et pour hauteur 3 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : base carrée, donc $n = 4$ faces ; $c = 8$ cm et $h = 3$ cm. Étape 2 — Calculer l'apothème : $a^2 = 3^2 + 4^2 = 9 + 16 = 25$, donc $a = 5$ cm (l'affirmation « 5 cm » est vraie ; 3 cm est la hauteur de la pyramide, et 7 cm vient d'une addition $3 + 4$). Étape 3 — Aire d'une face : $\\dfrac{8 \\times 5}{2} = 20$ cm². Étape 4 — $A = 4 \\times 20 = 80$ cm² (vraie). L'aire 48 cm² vient de l'emploi de la hauteur : $4 \\times \\dfrac{8 \\times 3}{2} = 48$.",
+                  "answers": [
+                    {
+                      "content": "L'apothème d'une face latérale mesure 5 cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'apothème d'une face latérale mesure 3 cm.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire latérale est 80 cm².",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire latérale est 48 cm².",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'apothème d'une face latérale mesure 7 cm.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une pyramide régulière à base carrée, la hauteur de la pyramide et l'apothème d'une face latérale sont toujours égaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : prenons une base carrée de côté $c = 6$ cm et une hauteur $h = 4$ cm. Étape 2 — Calculer l'apothème : $a^2 = 4^2 + 3^2 = 25$, donc $a = 5$ cm. On a $a = 5 \\ne h = 4$. L'affirmation est fausse : l'apothème est l'hypoténuse d'un triangle rectangle dont $h$ est un côté, donc il est toujours plus grand que la hauteur. Étape 3 et Étape 4 — Utiliser $h$ pour l'aire d'une face donnerait $\\dfrac{6 \\times 4}{2} = 12$ cm² au lieu de $\\dfrac{6 \\times 5}{2} = 15$ cm².",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Apothème et aire latérale d'une pyramide régulière",
+              "statement": "Dans cet exercice, tu calcules l'apothème et l'aire latérale de pyramides régulières avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "L'apothème est la hauteur d'une face latérale, pas la hauteur de la pyramide : il est toujours plus grand que celle-ci.",
+              "questions": [
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 16 cm et pour hauteur 15 cm. Quel est l'apothème d'une face latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est un carré de côté $c = 16$ cm et la hauteur de la pyramide est $h = 15$ cm ; on cherche l'apothème $a$. Étape 2 — Calculer l'apothème : $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2 = 15^2 + 8^2 = 225 + 64 = 289$, donc $a = 17$ cm. Étape 3 — Calculer l'aire d'une face et Étape 4 — Multiplier par $n$ ne sont pas demandées ici. La proposition 15 cm prend la hauteur de la pyramide pour l'apothème ; 23 cm additionne $15 + 8$ au lieu d'utiliser Pythagore ; 7 cm soustrait $15 - 8$.",
+                  "answers": [
+                    {
+                      "content": "15 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "17 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "23 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 12 cm et ses faces latérales ont pour apothème 9 cm. Quelle est son aire latérale en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ faces ; $c = 12$ cm et $a = 9$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 9$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{12 \\times 9}{2} = 54$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 4 \\times 54 = 216$ cm². L'erreur typique est d'oublier de diviser par 2 (on trouve 432 cm²) ou de ne compter qu'une face (on trouve 54 cm²).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "216",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Dans une pyramide régulière à base carrée de côté 6 cm et d'apothème 7 cm, chaque face latérale a pour aire ___ cm².",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la base est un carré de côté $c = 6$ cm et l'apothème est $a = 7$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 7$ cm. Étape 3 — Calculer l'aire d'une face latérale : $\\dfrac{c \\times a}{2} = \\dfrac{6 \\times 7}{2} = 21$ cm². Étape 4 — Multiplier par $n$ : ce n'est utile que pour l'aire latérale entière, ici on ne demande qu'une face. L'erreur typique est d'oublier le $\\dfrac{1}{2}$ du triangle et de répondre 42.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 24 cm et pour hauteur 5 cm. Son aire latérale est 240 cm².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ ; $c = 24$ cm et $h = 5$ cm. Étape 2 — Calculer l'apothème : $a^2 = 5^2 + 12^2 = 25 + 144 = 169$, donc $a = 13$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{24 \\times 13}{2} = 156$ cm². Étape 4 — Multiplier par $n$ : $A = 4 \\times 156 = 624$ cm². L'affirmation est fausse : 240 cm² vient de $4 \\times \\dfrac{24 \\times 5}{2}$, où la hauteur de la pyramide remplace l'apothème. Répondre Vrai revient à faire cette confusion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 12 cm et pour hauteur 8 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ ; $c = 12$ cm et $h = 8$ cm. Étape 2 — Calculer l'apothème : $a^2 = 8^2 + 6^2 = 64 + 36 = 100$, donc $a = 10$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{12 \\times 10}{2} = 60$ cm². Étape 4 — Multiplier par $n$ : $A = 4 \\times 60 = 240$ cm². L'affirmation « apothème 8 cm » prend la hauteur de la pyramide pour l'apothème ; l'affirmation « 192 cm² » en découle : $4 \\times \\dfrac{12 \\times 8}{2} = 192$ cm².",
+                  "answers": [
+                    {
+                      "content": "Son apothème est 8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son aire latérale est 192 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son apothème est 10 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son aire latérale est 240 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un triangle équilatéral de côté 10 cm et ses faces latérales ont pour apothème 12 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la base est un triangle équilatéral, donc $n = 3$ faces latérales ; $c = 10$ cm et $a = 12$ cm. Étape 2 — Calculer l'apothème : il est donné, $a = 12$ cm. Étape 3 — Calculer l'aire d'une face : $\\dfrac{10 \\times 12}{2} = 60$ cm². Étape 4 — Multiplier par le nombre de faces : $A = 3 \\times 60 = 180$ cm². La proposition 60 cm² ne compte qu'une face ; 240 cm² compte 4 faces comme pour une base carrée ; 360 cm² oublie la division par 2 dans l'aire d'une face.",
+                  "answers": [
+                    {
+                      "content": "60 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "240 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "360 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "180 cm²",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Une pyramide régulière a pour base un carré de côté 16 cm et pour hauteur 15 cm.",
             "questions": [
@@ -1443,6 +2048,1761 @@
                 {
                   "content": "$\\dfrac{1}{3}$",
                   "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "volume d'une pyramide, volume d'un cône de révolution, génératrice et aire latérale d'un cône, apothème et aire latérale d'une pyramide régulière, formules du cours.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": "pyramide-base-carree",
+              "statement": "On étudie des pyramides à base carrée comme celle de la figure. Les mesures à utiliser sont écrites dans chaque question.",
+              "hint": "Écris la formule du volume avant de calculer et repère bien l'aire de la base.",
+              "questions": [
+                {
+                  "content": "Quelle formule donne le volume d'une pyramide d'aire de base $B$ et de hauteur $h$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété du cours : le volume d'une pyramide est le tiers du produit de l'aire de sa base par sa hauteur, $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : on repère $B$ et $h$. Étape 2 : on les multiplie. Étape 3 : on prend le tiers. La formule $B \\times h$ est celle du pavé droit de même base et de même hauteur ; $\\dfrac{1}{2} \\times B \\times h$ met un demi à la place du tiers ; $\\dfrac{1}{3} \\times B$ oublie la hauteur.",
+                  "answers": [
+                    {
+                      "content": "$V = \\dfrac{1}{3} \\times B \\times h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V = B \\times h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = \\dfrac{1}{2} \\times B \\times h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = \\dfrac{1}{3} \\times B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 8 cm et pour hauteur 6 cm. Quelle est l'aire $B$ de sa base en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : la base est un carré de côté 8 cm. Étape 2 : l'aire d'un carré est côté $\\times$ côté, donc $B = 8 \\times 8 = 64$ cm². La hauteur 6 cm n'intervient pas dans l'aire de la base. L'erreur typique est de calculer $2 \\times 8 = 16$ ou $4 \\times 8 = 32$, qui sont des périmètres ou des sommes, pas une aire.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 8 cm et pour hauteur 6 cm. Quel est son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 8 \\times 8 = 64$ cm² et $h = 6$ cm. Étape 2 : $V = \\dfrac{1}{3} \\times 64 \\times 6$. Étape 3 : $V = 64 \\times 2 = 128$ cm³. L'erreur typique est d'oublier le facteur $\\dfrac{1}{3}$ et de répondre $64 \\times 6 = 384$ cm³.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "128",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Une pyramide a pour base un carré d'aire 27 cm² et pour hauteur 5 cm. Son volume est 45 cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 27$ cm² et $h = 5$ cm. Étape 2 : $V = \\dfrac{1}{3} \\times 27 \\times 5 = 9 \\times 5 = 45$ cm³. L'affirmation est vraie. Répondre Faux viendrait de l'oubli du facteur $\\dfrac{1}{3}$, qui donnerait 135 cm³ : ce serait le volume d'un pavé droit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide de base d'aire 30 cm² a pour volume 80 cm³. Quelle est sa hauteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : on écrit $80 = \\dfrac{1}{3} \\times 30 \\times h$, c'est-à-dire $80 = 10h$. Étape 2 : on divise par 10, $h = 8$ cm. La réponse $\\dfrac{8}{3}$ cm oublie de multiplier $V$ par 3 ; 800 cm vient de $\\dfrac{30 \\times 80}{3}$, qui multiplie $V$ par $B$ au lieu de diviser ; 2 400 cm multiplie $V$ par $B$ sans prendre en compte le tiers.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{8}{3}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "800 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 400 cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": "cone-de-revolution",
+              "statement": "On étudie des cônes de révolution comme celui de la figure : la base est un disque et le sommet est à la verticale de son centre. Les mesures à utiliser sont écrites dans chaque question.",
+              "hint": "Le rayon est la moitié du diamètre, et il est élevé au carré dans la formule du volume.",
+              "questions": [
+                {
+                  "content": "Quelle formule donne le volume d'un cône de révolution de rayon $r$ et de hauteur $h$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété du cours : l'aire de la base est $B = \\pi r^2$ et le volume est $V = \\dfrac{1}{3} \\times B \\times h = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. La formule $\\pi r^2 \\times h$ oublie le tiers ; $\\dfrac{1}{3} \\times \\pi r \\times h$ utilise $r$ au lieu de $r^2$ ; $\\dfrac{1}{3} \\times 2\\pi r \\times h$ prend le périmètre du cercle $2\\pi r$ à la place de l'aire du disque.",
+                  "answers": [
+                    {
+                      "content": "$V = \\pi r^2 \\times h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = \\dfrac{1}{3} \\times \\pi r \\times h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V = \\dfrac{1}{3} \\times 2\\pi r \\times h$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour diamètre de base 12 cm. Quel est le rayon de sa base en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : le rayon est la moitié du diamètre. Étape 2 : $r = 12 \\div 2 = 6$ cm. L'erreur typique est de garder 12 cm comme rayon, ce qui multiplierait l'aire de la base par 4.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 4 cm et pour hauteur 9 cm. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $r = 4$ cm et $h = 9$ cm. Étape 2 : $B = \\pi \\times 4^2 = 16\\pi$ cm². Étape 3 : $V = \\dfrac{1}{3} \\times 16\\pi \\times 9 = 48\\pi$ cm³. La réponse $144\\pi$ cm³ oublie le tiers ; $12\\pi$ cm³ utilise $r$ au lieu de $r^2$ ; $192\\pi$ cm³ prend le diamètre 8 cm comme rayon.",
+                  "answers": [
+                    {
+                      "content": "$144\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$192\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$48\\pi$ cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 10 cm et pour hauteur 6 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $r = 10$ cm et $h = 6$ cm. Étape 2 : $V = \\dfrac{1}{3} \\times 100\\pi \\times 6 = 200\\pi$ cm³ (valeur exacte). Étape 3 : $V \\approx 200 \\times 3{,}14 = 628$ cm³. L'erreur typique est de s'arrêter à $200\\pi$ sans donner la valeur approchée demandée, ou d'oublier le tiers (on trouverait 1 884 cm³).",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "628",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Si on double la hauteur d'un cône de révolution sans changer son rayon, son volume est doublé.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$, où $h$ est un simple facteur. Étape 1 : avec la hauteur $2h$, $V' = \\dfrac{1}{3} \\times \\pi r^2 \\times 2h$. Étape 2 : $V' = 2V$. L'affirmation est vraie. Répondre Faux confond avec le rayon : doubler le rayon multiplierait le volume par 4, car $r$ est au carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour hauteur 5 cm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Propriété : $B = \\pi r^2$ et $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 9\\pi \\times 5 = 15\\pi$ cm³. L'affirmation « $45\\pi$ cm³ » oublie le tiers ; l'affirmation « $6\\pi$ cm² » prend $\\pi \\times 2r$, périmètre du cercle, à la place de l'aire du disque.",
+                  "answers": [
+                    {
+                      "content": "L'aire de sa base est $9\\pi$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son volume exact est $15\\pi$ cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son volume exact est $45\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire de sa base est $6\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": "cone-de-revolution",
+              "statement": "On étudie la génératrice et l'aire latérale de cônes de révolution comme celui de la figure. Les mesures à utiliser sont écrites dans chaque question.",
+              "hint": "La hauteur, le rayon et la génératrice forment un triangle rectangle dont la génératrice est l'hypoténuse.",
+              "questions": [
+                {
+                  "content": "Dans un cône de révolution, la hauteur $h$, le rayon $r$ et la génératrice $g$ forment un triangle rectangle. Quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : théorème de Pythagore. La génératrice $g$ joint le sommet au bord du disque, c'est l'hypoténuse : $g^2 = r^2 + h^2$. Les égalités $h^2 = r^2 + g^2$ et $r^2 = g^2 + h^2$ désignent un mauvais côté comme hypoténuse ; $g = r + h$ additionne les longueurs au lieu de leurs carrés.",
+                  "answers": [
+                    {
+                      "content": "$h^2 = r^2 + g^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g^2 = r^2 + h^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g = r + h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$r^2 = g^2 + h^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 6 cm et pour hauteur 8 cm. Quelle est sa génératrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 6^2 + 8^2 = 36 + 64 = 100$. Étape 2 : $g = \\sqrt{100} = 10$ cm. La réponse 14 cm additionne $6 + 8$ ; 2 cm soustrait $8 - 6$ ; 100 cm donne $g^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "14 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "100 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 7 cm et pour génératrice 12 cm. Son aire latérale exacte s'écrit $k\\pi$ cm². Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : $r = 7$ cm et $g = 12$ cm. Étape 2 : $A = \\pi \\times 7 \\times 12 = 84\\pi$ cm², donc $k = 84$. L'erreur typique est de diviser par 3 comme pour un volume ($28\\pi$) ou d'élever $r$ au carré.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "84",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "π cm²"
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm et pour hauteur 12 cm. Quelle est son aire latérale exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore puis $A = \\pi r g$. Étape 1 : $g^2 = 5^2 + 12^2 = 169$, donc $g = 13$ cm. Étape 2 : $A = \\pi \\times 5 \\times 13 = 65\\pi$ cm². La réponse $60\\pi$ cm² prend la hauteur 12 cm à la place de la génératrice ; $130\\pi$ cm² double le résultat ; $169\\pi$ cm² donne $g^2$.",
+                  "answers": [
+                    {
+                      "content": "$60\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$130\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$169\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$65\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aire totale d'un cône de révolution de rayon 4 cm et de génératrice 5 cm est $20\\pi$ cm².",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : l'aire totale est l'aire latérale plus l'aire du disque de base, $\\pi r g + \\pi r^2$. Étape 1 : $\\pi \\times 4 \\times 5 = 20\\pi$ cm². Étape 2 : $\\pi \\times 4^2 = 16\\pi$ cm². Étape 3 : $20\\pi + 16\\pi = 36\\pi$ cm². L'affirmation est fausse : $20\\pi$ cm² est seulement l'aire latérale, le disque de base est oublié.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 8 cm et pour génératrice 17 cm. Sa hauteur est ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : Pythagore, $g^2 = r^2 + h^2$. Étape 1 : $h^2 = g^2 - r^2 = 17^2 - 8^2 = 289 - 64 = 225$. Étape 2 : $h = \\sqrt{225} = 15$ cm. L'erreur typique est d'additionner $289 + 64$ au lieu de soustraire, alors que la génératrice est le plus grand côté.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": "pyramide-base-carree",
+              "statement": "On étudie des pyramides régulières à base carrée ou triangulaire comme celle de la figure. Chaque face latérale est un triangle isocèle ; son apothème est sa hauteur issue du sommet.",
+              "hint": "L'apothème est la hauteur d'une face latérale : ce n'est pas la hauteur de la pyramide.",
+              "questions": [
+                {
+                  "content": "Quelle formule donne l'aire latérale d'une pyramide régulière à $n$ faces latérales, de côté de base $c$ et d'apothème $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : une face latérale est un triangle de base $c$ et de hauteur $a$, d'aire $\\dfrac{c \\times a}{2}$ ; on multiplie par le nombre $n$ de faces. La formule $n \\times c \\times a$ oublie la division par 2 ; $\\dfrac{c \\times a}{2}$ ne compte qu'une face ; la dernière utilise la hauteur $h$ de la pyramide au lieu de l'apothème.",
+                  "answers": [
+                    {
+                      "content": "$A = n \\times \\dfrac{c \\times a}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A = n \\times c \\times a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A = \\dfrac{c \\times a}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A = n \\times \\dfrac{c \\times h}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 30 cm et pour hauteur 8 cm. Quel est l'apothème d'une face latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore, $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2$. Étape 1 : $\\dfrac{c}{2} = 15$ cm. Étape 2 : $a^2 = 8^2 + 15^2 = 64 + 225 = 289$. Étape 3 : $a = 17$ cm. La réponse 8 cm prend la hauteur de la pyramide ; 23 cm additionne $8 + 15$ ; 289 cm donne $a^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "8 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "17 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "23 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "289 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 14 cm et ses faces latérales ont pour apothème 10 cm. Quelle est l'aire d'une face latérale en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : une face latérale est un triangle d'aire $\\dfrac{c \\times a}{2}$. Étape 1 : $c = 14$ cm et $a = 10$ cm. Étape 2 : $\\dfrac{14 \\times 10}{2} = 70$ cm². L'erreur typique est d'oublier la division par 2 et de répondre 140 cm².",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "70",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 14 cm et ses faces latérales ont pour apothème 10 cm. Quelle est son aire latérale en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : la base est un carré, donc $n = 4$ faces. Étape 2 : une face a pour aire $\\dfrac{14 \\times 10}{2} = 70$ cm². Étape 3 : $A = 4 \\times 70 = 280$ cm². L'erreur typique est de ne compter qu'une face (70 cm²) ou de prendre $n = 3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "280",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un triangle équilatéral de côté 6 cm et ses faces latérales ont pour apothème 8 cm. Son aire latérale est 72 cm².",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : la base est un triangle équilatéral, donc $n = 3$ faces. Étape 2 : une face a pour aire $\\dfrac{6 \\times 8}{2} = 24$ cm². Étape 3 : $A = 3 \\times 24 = 72$ cm². L'affirmation est vraie. Répondre Faux viendrait d'un calcul avec $n = 4$ faces, qui donnerait 96 cm².",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Problèmes de la vie courante",
+          "notions": "volume d'un cône (tas de sable, gobelet), volume d'une pyramide (bac à fleurs), aire latérale d'une pyramide régulière (toit d'un kiosque), génératrice, conversions, calculs de coût et de nombre de contenants.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": "tas-de-sable",
+              "statement": "Sur un chantier de Bouaké, un tas de sable a la forme d'un cône de révolution, de rayon 3 m et de hauteur 2 m. Le maçon veut connaître son volume, puis le nombre de camions nécessaires pour l'évacuer et son prix.",
+              "hint": "Calcule d'abord le volume exact avec la formule du cône, puis passe à la valeur approchée avec $\\pi \\approx 3{,}14$.",
+              "questions": [
+                {
+                  "content": "Un tas de sable a la forme d'un cône de révolution de rayon 3 m et de hauteur 2 m. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $r = 3$ m et $h = 2$ m. Étape 2 : $B = \\pi \\times 3^2 = 9\\pi$ m². Étape 3 : $V = \\dfrac{1}{3} \\times 9\\pi \\times 2 = 6\\pi$ m³. La réponse $18\\pi$ m³ oublie le tiers ; $24\\pi$ m³ prend le diamètre 6 m comme rayon ; $2\\pi$ m³ utilise $r$ au lieu de $r^2$.",
+                  "answers": [
+                    {
+                      "content": "$18\\pi$ m³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24\\pi$ m³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\pi$ m³",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\pi$ m³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de sable a pour volume exact $6\\pi$ m³. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de ce volume en m³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on part de la valeur exacte $V = 6\\pi$ m³. Étape 2 : on remplace $\\pi$ par $3{,}14$, $V \\approx 6 \\times 3{,}14 = 18{,}84$ m³. L'erreur typique est de s'arrêter à $6\\pi$ ou de multiplier $6$ par $3{,}41$ en inversant des chiffres.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "18,84",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m³"
+                },
+                {
+                  "content": "Un camion transporte 6 m³ de sable. Le tas de sable a un volume de 18,84 m³. Combien de camions faut-il au minimum pour tout évacuer ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on divise le volume du tas par la capacité d'un camion, $18{,}84 \\div 6 = 3{,}14$. Étape 2 : 3 camions ne suffisent pas, car ils emportent $3 \\times 6 = 18$ m³ < 18,84 m³ ; il faut un 4e camion, donc 4 camions. L'erreur typique est d'arrondir à 3 camions, qui laisse 0,84 m³ de sable sur place.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "camions"
+                },
+                {
+                  "content": "Le sable se vend 12 000 F le m³. Combien coûte un tas de 18,84 m³ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le prix est proportionnel au volume, $18{,}84 \\times 12000$. Étape 2 : $18{,}84 \\times 12000 = 226080$ F. La réponse 22 608 F décale la virgule d'un rang ; 2 260 800 F la décale de l'autre côté ; 12 018,84 F additionne 18,84 et 12 000 au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "22 608 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 260 800 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 018,84 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "226 080 F",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de sable conique a pour rayon 3 m et pour hauteur 2 m. Si son rayon passe à 6 m sans changer la hauteur, son volume est multiplié par 4.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : avec $r = 3$ m, $V = 6\\pi$ m³. Étape 2 : avec $r = 6$ m, $V = \\dfrac{1}{3} \\times 36\\pi \\times 2 = 24\\pi$ m³. Étape 3 : $24\\pi = 4 \\times 6\\pi$. L'affirmation est vraie, car le rayon est au carré. Répondre Faux revient à croire que doubler le rayon double le volume.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre tas conique de hauteur 6 m a pour volume $18\\pi$ m³. Son rayon est ___ m.",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $18\\pi = \\dfrac{1}{3} \\times \\pi r^2 \\times 6 = 2\\pi r^2$. Étape 2 : $r^2 = 9$. Étape 3 : $r = 3$ m. L'erreur typique est d'oublier le tiers et de trouver $r^2 = 3$, ou de répondre 9 sans prendre la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": "toit-pyramidal",
+              "statement": "À Abidjan, un kiosque a un toit en forme de pyramide régulière à base carrée, de côté 8 m et de hauteur 3 m. Le propriétaire veut recouvrir les quatre faces du toit de tôles et connaître le volume sous le toit.",
+              "hint": "Les tôles couvrent les faces latérales : il faut l'apothème, qui n'est pas la hauteur du toit.",
+              "questions": [
+                {
+                  "content": "Le toit d'un kiosque est une pyramide régulière à base carrée de côté 8 m et de hauteur 3 m. Quel est l'apothème d'une face ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore, $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2$. Étape 1 : $\\dfrac{c}{2} = 4$ m. Étape 2 : $a^2 = 3^2 + 4^2 = 9 + 16 = 25$. Étape 3 : $a = 5$ m. La réponse 3 m prend la hauteur du toit ; 7 m additionne $3 + 4$ ; 25 m donne $a^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "5 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les faces du toit d'un kiosque ont pour apothème 5 m et la base carrée a pour côté 8 m. Quelle est l'aire d'une face en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : une face est un triangle d'aire $\\dfrac{c \\times a}{2}$. Étape 1 : $c = 8$ m et $a = 5$ m. Étape 2 : $\\dfrac{8 \\times 5}{2} = 20$ m². L'erreur typique est d'oublier la division par 2 et de répondre 40 m².",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m²"
+                },
+                {
+                  "content": "Le toit d'un kiosque est une pyramide régulière à base carrée de côté 8 m et d'apothème 5 m. Quelle est la surface totale à recouvrir de tôles en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : la base est un carré, donc $n = 4$ faces. Étape 2 : une face a pour aire $\\dfrac{8 \\times 5}{2} = 20$ m². Étape 3 : $A = 4 \\times 20 = 80$ m². L'erreur typique est de ne compter qu'une face (20 m²).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m²"
+                },
+                {
+                  "content": "Les tôles coûtent 4 500 F le m². Combien coûte la couverture de 80 m² de toit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le coût est proportionnel à la surface, $80 \\times 4500$. Étape 2 : $80 \\times 4500 = 360000$ F. La réponse 90 000 F ne couvre qu'une face de 20 m² ; 36 000 F décale la virgule d'un rang ; 4 580 F additionne 80 et 4 500 au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "90 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "360 000 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "36 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 580 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le toit d'un kiosque est une pyramide régulière à base carrée de côté 8 m et de hauteur 3 m. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Propriétés : $V = \\dfrac{1}{3} \\times B \\times h$ et $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : $B = 8 \\times 8 = 64$ m², donc $V = \\dfrac{1}{3} \\times 64 \\times 3 = 64$ m³. Étape 2 : $a = 5$ m (Pythagore), donc $A = 4 \\times \\dfrac{8 \\times 5}{2} = 80$ m². L'affirmation « 192 m³ » oublie le tiers ($64 \\times 3$) ; l'affirmation « 48 m² » utilise la hauteur 3 m à la place de l'apothème ($4 \\times \\dfrac{8 \\times 3}{2}$).",
+                  "answers": [
+                    {
+                      "content": "Le volume sous le toit est 192 m³",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire latérale du toit est 48 m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le volume sous le toit est 64 m³",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire latérale du toit est 80 m²",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": "gobelet-conique",
+              "statement": "À Cocody, une vendeuse de jus de bissap sert des échantillons dans de petits gobelets en carton en forme de cône de révolution, de rayon 4 cm et de hauteur 3 cm. Elle veut connaître la contenance d'un gobelet, le carton nécessaire et le nombre de gobelets qu'elle remplit avec une bouteille de 1,5 L.",
+              "hint": "Utilise $\\pi \\approx 3{,}14$ pour passer de la valeur exacte à la valeur approchée, et rappelle-toi que 1 L correspond à 1 000 cm³.",
+              "questions": [
+                {
+                  "content": "Un gobelet est un cône de révolution de rayon 4 cm et de hauteur 3 cm. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $r = 4$ cm et $h = 3$ cm. Étape 2 : $B = \\pi \\times 4^2 = 16\\pi$ cm². Étape 3 : $V = \\dfrac{1}{3} \\times 16\\pi \\times 3 = 16\\pi$ cm³. La réponse $48\\pi$ cm³ oublie le tiers ; $4\\pi$ cm³ utilise $r$ au lieu de $r^2$ ; $64\\pi$ cm³ prend le diamètre 8 cm comme rayon.",
+                  "answers": [
+                    {
+                      "content": "$48\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$64\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16\\pi$ cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gobelet a pour volume exact $16\\pi$ cm³. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de ce volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on part de $V = 16\\pi$ cm³. Étape 2 : $V \\approx 16 \\times 3{,}14 = 50{,}24$ cm³. L'erreur typique est de multiplier $16$ par $3{,}1$ seulement et de trouver 49,6 cm³, ou de s'arrêter à $16\\pi$.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "50,24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Une bouteille de 1,5 L contient 1 500 cm³ de jus. Un gobelet contient 50,24 cm³. Combien de gobelets pleins peut-on remplir au maximum avec une bouteille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on divise le volume de la bouteille par celui d'un gobelet, $1500 \\div 50{,}24 \\approx 29{,}86$. Étape 2 : on ne compte que les gobelets pleins, donc on arrondit à l'entier inférieur : 29. Vérification : $29 \\times 50{,}24 = 1456{,}96$ cm³ $\\le 1500$ cm³, alors que $30 \\times 50{,}24 = 1507{,}2$ cm³ $> 1500$ cm³. La réponse 30 arrondit à l'entier supérieur et demande plus de jus qu'il n'y en a ; 28 et 20 sont des erreurs de calcul.",
+                  "answers": [
+                    {
+                      "content": "29 gobelets",
+                      "correct": true
+                    },
+                    {
+                      "content": "30 gobelets",
+                      "correct": false
+                    },
+                    {
+                      "content": "28 gobelets",
+                      "correct": false
+                    },
+                    {
+                      "content": "20 gobelets",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gobelet est un cône de révolution de rayon 4 cm et de hauteur 3 cm. Quelle est la longueur de sa génératrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 4^2 + 3^2 = 16 + 9 = 25$. Étape 2 : $g = 5$ cm. La réponse 7 cm additionne $4 + 3$ ; 1 cm soustrait $4 - 3$ ; 25 cm donne $g^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "7 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gobelet est un cône de révolution de rayon 4 cm et de génératrice 5 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de l'aire de carton de sa surface latérale en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : $r = 4$ cm et $g = 5$ cm. Étape 2 : $A = \\pi \\times 4 \\times 5 = 20\\pi$ cm². Étape 3 : $A \\approx 20 \\times 3{,}14 = 62{,}8$ cm². L'erreur typique est de prendre la hauteur 3 cm à la place de la génératrice : $12\\pi \\approx 37{,}68$ cm².",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "62,8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Un gobelet conique a pour rayon 4 cm et pour hauteur 3 cm. Si on double son rayon (8 cm) sans changer sa hauteur, sa contenance est doublée.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : avec $r = 4$ cm et $h = 3$ cm, $V = 16\\pi$ cm³. Étape 2 : avec $r = 8$ cm, $V = \\dfrac{1}{3} \\times 64\\pi \\times 3 = 64\\pi$ cm³. Étape 3 : $64\\pi = 4 \\times 16\\pi$. L'affirmation est fausse : la contenance est multipliée par 4, car le rayon est au carré. Répondre Vrai revient à oublier ce carré.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": "bac-pyramidal",
+              "statement": "Dans la cour de son école à Bouaké, un élève construit un bac à fleurs en forme de pyramide renversée : l'ouverture est un rectangle de 6 dm sur 4 dm et la pointe est à 3 dm sous l'ouverture. Il veut savoir combien de terreau acheter.",
+              "hint": "La hauteur de la pyramide est 3 dm. Rappelle-toi que 1 dm³ correspond à 1 L.",
+              "questions": [
+                {
+                  "content": "Un bac à fleurs a pour ouverture un rectangle de 6 dm sur 4 dm. Quelle est l'aire de cette ouverture en dm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : l'ouverture est la base de la pyramide, un rectangle de 6 dm sur 4 dm. Étape 2 : $B = 6 \\times 4 = 24$ dm². L'erreur typique est de calculer un périmètre ($2 \\times (6 + 4) = 20$) à la place d'une aire.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "dm²"
+                },
+                {
+                  "content": "Un bac à fleurs est une pyramide dont la base rectangulaire de 6 dm sur 4 dm est l'ouverture et dont la hauteur est 3 dm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 6 \\times 4 = 24$ dm² et $h = 3$ dm. Étape 2 : $V = \\dfrac{1}{3} \\times 24 \\times 3 = 24$ dm³. La réponse 72 dm³ oublie le tiers ; 8 dm³ divise l'aire de base par 3 sans multiplier par la hauteur ; 12 dm³ utilise un demi au lieu d'un tiers et oublie la hauteur.",
+                  "answers": [
+                    {
+                      "content": "72 dm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 dm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "24 dm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "12 dm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bac à fleurs a un volume de 24 dm³. Sachant que 1 dm³ = 1 L, combien de sacs de terreau de 8 L faut-il pour le remplir ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : 24 dm³ correspondent à 24 L. Étape 2 : on divise par la contenance d'un sac, $24 \\div 8 = 3$. Il faut 3 sacs. L'erreur typique est de multiplier au lieu de diviser ($24 \\times 8 = 192$) ou de ne pas convertir les dm³ en litres.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "sacs"
+                },
+                {
+                  "content": "Un sac de terreau de 8 L coûte 1 500 F. Quel est le prix de 3 sacs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : le prix est proportionnel au nombre de sacs. Étape 2 : $3 \\times 1500 = 4500$ F. La réponse 12 000 F multiplie 1 500 par 8, la contenance d'un sac ; 1 500 F ne compte qu'un sac ; 36 000 F multiplie 1 500 par $3 \\times 8$.",
+                  "answers": [
+                    {
+                      "content": "12 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 500 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "36 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 500 F",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bac à fleurs est agrandi : sa hauteur passe de 3 dm à 6 dm, la base restant un rectangle de 6 dm sur 4 dm. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 24$ dm² ne change pas. Étape 2 : $V' = \\dfrac{1}{3} \\times 24 \\times 6 = 48$ dm³. Étape 3 : $48 = 2 \\times 24$, le volume est doublé car $h$ est un simple facteur. L'affirmation « multiplié par 4 » confond avec le rayon d'un cône, élevé au carré ; l'affirmation « 144 dm³ » oublie le tiers ($24 \\times 6$).",
+                  "answers": [
+                    {
+                      "content": "Le nouveau volume est 48 dm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le volume est doublé",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le volume est multiplié par 4",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nouveau volume est 144 dm³",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et rédiger",
+          "notions": "choisir la bonne propriété (Pythagore, formules du volume et de l'aire latérale), enchaîner les étapes d'un calcul, repérer une erreur dans un raisonnement, comparer des volumes et justifier avec des calculs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": "cone-de-revolution",
+              "statement": "Un cône de révolution a pour rayon 9 cm et pour hauteur 12 cm. Pour trouver son aire latérale, il faut enchaîner plusieurs propriétés et justifier chaque étape.",
+              "hint": "Avant l'aire latérale, il faut la génératrice : cherche le triangle rectangle formé par la hauteur, le rayon et la génératrice.",
+              "questions": [
+                {
+                  "content": "Pour calculer la génératrice $g$ d'un cône de révolution de rayon 9 cm et de hauteur 12 cm, quelle égalité de Pythagore faut-il écrire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : théorème de Pythagore dans le triangle rectangle formé par le rayon, la hauteur et la génératrice, dont l'hypoténuse est $g$ : $g^2 = r^2 + h^2 = 9^2 + 12^2$. Étape 1 : on repère l'hypoténuse. Étape 2 : on additionne les carrés des deux autres côtés. La réponse $g = 9 + 12$ additionne les longueurs ; $g^2 = 12^2 - 9^2$ soustrait, ce qui donnerait un côté de l'angle droit ; $g^2 = 9^2 \\times 12^2$ multiplie au lieu d'additionner.",
+                  "answers": [
+                    {
+                      "content": "$g = 9 + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g^2 = 9^2 + 12^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g^2 = 12^2 - 9^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g^2 = 9^2 \\times 12^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 9 cm et pour hauteur 12 cm. Quelle est la longueur de sa génératrice en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 9^2 + 12^2 = 81 + 144 = 225$. Étape 2 : $g = \\sqrt{225} = 15$ cm. L'erreur typique est de répondre 225, qui est $g^2$, sans prendre la racine carrée.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 9 cm et pour génératrice 15 cm. Quelle est son aire latérale exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : $r = 9$ cm et $g = 15$ cm. Étape 2 : $A = \\pi \\times 9 \\times 15 = 135\\pi$ cm². La réponse $108\\pi$ cm² prend la hauteur 12 cm à la place de la génératrice ; $225\\pi$ cm² donne $g^2$ ; $270\\pi$ cm² double le résultat.",
+                  "answers": [
+                    {
+                      "content": "$108\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$225\\pi$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$135\\pi$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$270\\pi$ cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures finales est correcte pour l'aire latérale d'un cône de rayon 9 cm et de génératrice 15 cm ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g = \\pi \\times 9 \\times 15 = 135\\pi$. Étape 1 : la valeur exacte garde $\\pi$. Étape 2 : une aire s'exprime en unité d'aire, ici cm². L'écriture en cm³ est une unité de volume ; l'écriture en cm est une unité de longueur ; l'écriture « 135 cm² » oublie $\\pi$, donc n'est pas la valeur exacte.",
+                  "answers": [
+                    {
+                      "content": "$135\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$135\\pi$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "135 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$135\\pi$ cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un cône de révolution, la génératrice est toujours plus longue que la hauteur et plus longue que le rayon.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $g^2 = r^2 + h^2$. Étape 1 : $g^2 - h^2 = r^2 > 0$, donc $g > h$. Étape 2 : $g^2 - r^2 = h^2 > 0$, donc $g > r$. L'affirmation est vraie : la génératrice est l'hypoténuse, le plus grand côté du triangle rectangle. Répondre Faux revient à croire qu'une génératrice peut être égale à la hauteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève calcule l'aire latérale d'un cône de rayon 9 cm et de hauteur 12 cm. Ligne 1 : $g^2 = 9^2 + 12^2 = 225$ ; Ligne 2 : $g = 15$ cm ; Ligne 3 : $A = \\pi \\times 9 \\times 12 = 108\\pi$ cm². Quelle ligne contient l'erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : la ligne 1 est correcte, $81 + 144 = 225$. Étape 2 : la ligne 2 est correcte, $\\sqrt{225} = 15$. Étape 3 : la ligne 3 remplace la génératrice $g = 15$ par la hauteur 12 ; il fallait écrire $A = \\pi \\times 9 \\times 15 = 135\\pi$ cm². Dire « aucune ligne » ou désigner la ligne 1 ou 2 revient à ne pas contrôler le calcul de $135\\pi$.",
+                  "answers": [
+                    {
+                      "content": "La ligne 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ligne 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune ligne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": "pyramide-base-carree",
+              "statement": "Une pyramide à base carrée de côté 12 cm et de hauteur 9 cm est comparée à un pavé droit de même base et de même hauteur. On veut justifier par le calcul que leurs volumes ne sont pas égaux.",
+              "hint": "Le pavé droit a pour volume l'aire de sa base fois sa hauteur ; la pyramide en occupe seulement un tiers.",
+              "questions": [
+                {
+                  "content": "Un pavé droit a pour base un carré de côté 12 cm et pour hauteur 9 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : le volume d'un pavé droit est l'aire de sa base fois sa hauteur. Étape 1 : $B = 12 \\times 12 = 144$ cm². Étape 2 : $V = 144 \\times 9 = 1296$ cm³. La réponse 432 cm³ est le volume de la pyramide de même base et de même hauteur ; 144 cm³ est seulement l'aire de la base ; 108 cm³ vient de $12 \\times 9$, qui n'utilise pas l'aire de la base.",
+                  "answers": [
+                    {
+                      "content": "432 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 296 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "144 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "108 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 12 cm et pour hauteur 9 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 12 \\times 12 = 144$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 144 \\times 9 = 48 \\times 9 = 432$ cm³. La réponse 1 296 cm³ est le volume du pavé droit ; 648 cm³ utilise un demi au lieu d'un tiers ; 36 cm³ prend le côté 12 cm à la place de l'aire de la base.",
+                  "answers": [
+                    {
+                      "content": "1 296 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "648 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "432 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "36 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le volume d'un pavé droit (1 296 cm³) vaut ___ fois celui d'une pyramide de même base et de même hauteur (432 cm³).",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : une pyramide a le tiers du volume du pavé droit de même base et de même hauteur. Étape 1 : on divise les deux volumes, $1296 \\div 432 = 3$. Étape 2 : le pavé vaut donc 3 fois la pyramide. Répondre 2 ou 4 vient d'un facteur $\\dfrac{1}{2}$ ou $\\dfrac{1}{4}$ à la place de $\\dfrac{1}{3}$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "trois",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on remplit d'eau une pyramide de base carrée de côté 12 cm et de hauteur 9 cm, puis qu'on la vide dans un pavé droit de même base et de même hauteur, il faut la verser 3 fois pour remplir le pavé.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V_{pyramide} = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $V_{pyramide} = 432$ cm³. Étape 2 : $V_{pavé} = 144 \\times 9 = 1296$ cm³. Étape 3 : $1296 \\div 432 = 3$ remplissages. L'affirmation est vraie. Répondre Faux viendrait de l'idée que les deux solides ont le même volume parce qu'ils ont la même base et la même hauteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « une pyramide a le même volume qu'un pavé droit de même base carrée de côté 12 cm et de même hauteur 9 cm ». Quelle est la bonne réponse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V_{pyramide} = \\dfrac{1}{3} \\times B \\times h$ et $V_{pavé} = B \\times h$. Étape 1 : $B = 144$ cm². Étape 2 : la pyramide vaut $\\dfrac{1}{3} \\times 144 \\times 9 = 432$ cm³ et le pavé $144 \\times 9 = 1296$ cm³. Étape 3 : $432 \\ne 1296$, l'affirmation est fausse. La réponse « Vrai » applique la formule du pavé aux deux solides ; la réponse « le double » multiplie par 2 au lieu de diviser par 3 ; la dernière prend le côté 12 cm pour l'aire de la base.",
+                  "answers": [
+                    {
+                      "content": "Vrai : $144 \\times 9 = 1296$ cm³ pour les deux solides",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : le volume de la pyramide est le double, $2 \\times 144 \\times 9 = 2592$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : $\\dfrac{1}{3} \\times 12 \\times 9 = 36$ cm³ car la base de la pyramide est le côté",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : $\\dfrac{1}{3} \\times 144 \\times 9 = 432$ cm³ alors que $144 \\times 9 = 1296$ cm³",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": "pyramide-base-carree",
+              "statement": "Une pyramide régulière a pour base un carré de côté 20 cm et pour hauteur 24 cm. Pour calculer son aire latérale, il faut enchaîner l'apothème, l'aire d'une face puis le nombre de faces.",
+              "hint": "L'apothème est l'hypoténuse d'un triangle rectangle dont les côtés sont la hauteur de la pyramide et la moitié du côté de la base.",
+              "questions": [
+                {
+                  "content": "Pour une pyramide régulière à base carrée de côté 20 cm et de hauteur 24 cm, quelle égalité permet de calculer l'apothème $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore, $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2$. Étape 1 : $\\dfrac{c}{2} = 10$ cm. Étape 2 : on additionne les carrés de $h = 24$ et de $10$. La réponse $a^2 = 24^2 + 20^2$ utilise le côté entier 20 au lieu de sa moitié ; $a = 24 + 10$ additionne les longueurs ; $a^2 = 24^2 - 10^2$ soustrait, alors que l'apothème est l'hypoténuse.",
+                  "answers": [
+                    {
+                      "content": "$a^2 = 24^2 + 10^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a^2 = 24^2 + 20^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 24 + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a^2 = 24^2 - 10^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 20 cm et pour hauteur 24 cm. Quel est son apothème en cm ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $\\dfrac{c}{2} = 10$ cm. Étape 2 : $a^2 = 24^2 + 10^2 = 576 + 100 = 676$. Étape 3 : $a = \\sqrt{676} = 26$ cm. L'erreur typique est de répondre 676, qui est $a^2$, ou 24, qui est la hauteur de la pyramide.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Une pyramide régulière a pour base un carré de côté 20 cm et ses faces latérales ont pour apothème 26 cm. Quelle est son aire latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : la base est un carré, donc $n = 4$. Étape 2 : une face a pour aire $\\dfrac{20 \\times 26}{2} = 260$ cm². Étape 3 : $A = 4 \\times 260 = 1040$ cm². La réponse 260 cm² ne compte qu'une face ; 520 cm² oublie la division par 2 pour une face ; 960 cm² utilise la hauteur 24 cm à la place de l'apothème.",
+                  "answers": [
+                    {
+                      "content": "260 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 040 cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "520 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "960 cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une pyramide régulière à base carrée, l'apothème d'une face latérale est toujours plus grand que la hauteur de la pyramide.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2$. Étape 1 : $\\left(\\dfrac{c}{2}\\right)^2 > 0$, donc $a^2 > h^2$. Étape 2 : comme $a$ et $h$ sont positifs, $a > h$. L'affirmation est vraie : l'apothème est l'hypoténuse du triangle rectangle de côtés $h$ et $\\dfrac{c}{2}$. Répondre Faux revient à confondre l'apothème avec la hauteur de la pyramide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève calcule l'aire latérale d'une pyramide régulière à base carrée de côté 20 cm et de hauteur 24 cm. Ligne 1 : $a^2 = 24^2 + 10^2 = 676$ ; Ligne 2 : $a = 26$ cm ; Ligne 3 : $A = 4 \\times \\dfrac{20 \\times 24}{2} = 960$ cm². Quelle ligne contient l'erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : la ligne 1 est correcte, $576 + 100 = 676$. Étape 2 : la ligne 2 est correcte, $\\sqrt{676} = 26$. Étape 3 : la ligne 3 utilise 24, la hauteur de la pyramide, à la place de l'apothème 26 ; il fallait écrire $A = 4 \\times \\dfrac{20 \\times 26}{2} = 1040$ cm². Dire « aucune ligne » revient à ne pas contrôler le résultat.",
+                  "answers": [
+                    {
+                      "content": "La ligne 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune ligne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "On compare un cône de révolution de rayon 3 cm et de hauteur 6 cm avec une pyramide à base carrée de côté 6 cm et de hauteur 6 cm. On utilise $\\pi \\approx 3{,}14$ pour comparer les volumes.",
+              "hint": "Calcule les deux volumes avec leurs formules, puis compare des nombres écrits de la même façon.",
+              "questions": [
+                {
+                  "content": "Un cône de révolution a pour rayon 3 cm et pour hauteur 6 cm. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $B = \\pi \\times 3^2 = 9\\pi$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 9\\pi \\times 6 = 18\\pi$ cm³. La réponse $54\\pi$ cm³ oublie le tiers ; $6\\pi$ cm³ utilise $r$ au lieu de $r^2$ ; $72\\pi$ cm³ prend le diamètre 6 cm comme rayon.",
+                  "answers": [
+                    {
+                      "content": "$54\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$72\\pi$ cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18\\pi$ cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide a pour base un carré de côté 6 cm et pour hauteur 6 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 6 \\times 6 = 36$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 36 \\times 6 = 72$ cm³. La réponse 216 cm³ oublie le tiers ; 12 cm³ prend le côté 6 cm à la place de l'aire de la base ; 108 cm³ utilise un demi au lieu d'un tiers.",
+                  "answers": [
+                    {
+                      "content": "72 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "216 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "108 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône a pour volume $18\\pi$ cm³ et une pyramide a pour volume 72 cm³. Avec $\\pi \\approx 3{,}14$, lequel a le plus grand volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : on compare des volumes écrits de la même façon. Étape 1 : $V_{cône} \\approx 18 \\times 3{,}14 = 56{,}52$ cm³. Étape 2 : $V_{pyramide} = 72$ cm³. Étape 3 : $72 > 56{,}52$, la pyramide a le plus grand volume. La réponse « le cône » repose sur une inégalité fausse ; « la pyramide car $72 < 18 \\times 3{,}14$ » a la bonne conclusion mais une inégalité fausse ; « le même volume » confond hauteur et volume : la base compte aussi.",
+                  "answers": [
+                    {
+                      "content": "Le cône, car $18 \\times 3{,}14 > 72$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pyramide, car $72 > 18 \\times 3{,}14$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pyramide, car $72 < 18 \\times 3{,}14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont le même volume, car ils ont la même hauteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on multiplie par 2 le rayon et la hauteur d'un cône de révolution, son volume est multiplié par 8.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : avec $2r$ et $2h$, $V' = \\dfrac{1}{3} \\times \\pi \\times (2r)^2 \\times 2h$. Étape 2 : $V' = \\dfrac{1}{3} \\times \\pi \\times 4r^2 \\times 2h = 8V$. L'affirmation est vraie : le rayon est au carré (facteur 4) et la hauteur est simple (facteur 2). Répondre Faux revient à oublier le carré, ce qui donnerait un facteur 4.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on multiplie par 3 la hauteur d'un cône de révolution sans changer son rayon, son volume est multiplié par ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$, où $h$ est un simple facteur. Étape 1 : avec la hauteur $3h$, $V' = \\dfrac{1}{3} \\times \\pi r^2 \\times 3h$. Étape 2 : $V' = 3V$. L'erreur typique est de répondre 9, en élevant le facteur au carré comme si c'était le rayon.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "trois",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "volume d'une pyramide, volume d'un cône, génératrice et aire latérale d'un cône, apothème et aire latérale d'une pyramide régulière, aire totale, comparaison de solides, problèmes de la vie courante.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un artisan de Grand-Bassam sculpte deux objets en bois : une pyramide à base carrée de côté 10 cm et de hauteur 15 cm, et un cône de révolution de rayon 5 cm et de hauteur 12 cm.",
+              "hint": "Calcule chaque volume avec sa formule, puis compare les nombres obtenus avec $\\pi \\approx 3{,}14$.",
+              "questions": [
+                {
+                  "content": "Une pyramide a pour base un carré de côté 10 cm et pour hauteur 15 cm. Quel est son volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 10 \\times 10 = 100$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 100 \\times 15 = 500$ cm³. La réponse 1 500 cm³ oublie le tiers ; 50 cm³ prend le côté 10 cm à la place de l'aire de la base ; 750 cm³ utilise un demi au lieu d'un tiers.",
+                  "answers": [
+                    {
+                      "content": "1 500 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "50 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "500 cm³",
+                      "correct": true
+                    },
+                    {
+                      "content": "750 cm³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm et pour hauteur 12 cm. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 25\\pi \\times 12 = 100\\pi$ cm³. Étape 3 : $V \\approx 100 \\times 3{,}14 = 314$ cm³. L'erreur typique est d'oublier le tiers et de trouver 942 cm³.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "314",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Une pyramide a un volume de 500 cm³ et un cône a un volume de 314 cm³. Lequel a le plus grand volume ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : on compare les nombres sans oublier l'unité commune, ici cm³. Étape 1 : 500 > 314. Étape 2 : la pyramide a donc le plus grand volume. La réponse « le cône car 314 est supérieur à 500 » renverse l'inégalité ; « le même volume » est faux, les nombres sont différents ; « il contient π » n'est pas un argument, $\\pi$ est un nombre fixe qui ne rend pas le volume plus grand.",
+                  "answers": [
+                    {
+                      "content": "Le cône, car 314 cm³ est supérieur à 500 cm³",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils ont le même volume, car ils ont des hauteurs proches",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cône, car il contient le nombre π",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pyramide, car 500 cm³ est supérieur à 314 cm³",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cône de révolution a pour rayon 5 cm et pour volume $50\\pi$ cm³. Sa hauteur est ___ cm.",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $50\\pi = \\dfrac{1}{3} \\times 25\\pi \\times h$. Étape 2 : on multiplie par 3, $150\\pi = 25\\pi h$. Étape 3 : $h = 150\\pi \\div 25\\pi = 6$ cm. L'erreur typique est d'oublier de multiplier par 3 et de trouver $h = 2$ cm.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pyramide de base carrée d'aire 36 cm² et de hauteur 10 cm a pour volume 120 cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 36$ cm² et $h = 10$ cm. Étape 2 : $V = \\dfrac{1}{3} \\times 36 \\times 10 = 12 \\times 10 = 120$ cm³. L'affirmation est vraie. Répondre Faux viendrait de l'oubli du tiers, qui donnerait 360 cm³.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": "cone-de-revolution",
+              "statement": "Pour la fête de l'école, des élèves de Bouaké fabriquent des chapeaux en carton en forme de cône de révolution, de rayon 10 cm et de hauteur 24 cm. Ils veulent connaître la surface de carton par chapeau et le nombre de chapeaux par feuille.",
+              "hint": "Commence par la génératrice avec Pythagore ; l'aire latérale est la surface de carton.",
+              "questions": [
+                {
+                  "content": "Un chapeau est un cône de révolution de rayon 10 cm et de hauteur 24 cm. Quelle est la longueur de sa génératrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 10^2 + 24^2 = 100 + 576 = 676$. Étape 2 : $g = \\sqrt{676} = 26$ cm. La réponse 34 cm additionne $10 + 24$ ; 14 cm soustrait $24 - 10$ ; 676 cm donne $g^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "26 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "34 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "676 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chapeau est un cône de révolution de rayon 10 cm et de génératrice 26 cm. Son aire latérale exacte s'écrit $k\\pi$ cm². Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : $r = 10$ cm et $g = 26$ cm. Étape 2 : $A = \\pi \\times 10 \\times 26 = 260\\pi$ cm², donc $k = 260$. L'erreur typique est de prendre la hauteur 24 cm à la place de la génératrice, ce qui donne $k = 240$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "260",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "π cm²"
+                },
+                {
+                  "content": "Un chapeau a pour aire latérale exacte $260\\pi$ cm². Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de cette aire en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on part de $A = 260\\pi$ cm². Étape 2 : $A \\approx 260 \\times 3{,}14 = 816{,}4$ cm². L'erreur typique est de s'arrêter à $260\\pi$ ou de remplacer $\\pi$ par 3 seulement (780 cm²).",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "816,4",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Une feuille de carton a une aire de 8 000 cm². Un chapeau demande 816,4 cm² de carton. Combien de chapeaux entiers peut-on fabriquer au maximum, sans tenir compte des chutes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 : on divise l'aire de la feuille par l'aire d'un chapeau, $8000 \\div 816{,}4 \\approx 9{,}8$. Étape 2 : on ne compte que les chapeaux entiers, donc on arrondit à l'entier inférieur : 9. Vérification : $9 \\times 816{,}4 = 7347{,}6$ cm² $\\le 8000$ cm², alors que $10 \\times 816{,}4 = 8164$ cm² $> 8000$ cm². La réponse 10 arrondit à l'entier supérieur ; 8 est trop prudente ; 98 décale la virgule.",
+                  "answers": [
+                    {
+                      "content": "10 chapeaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 chapeaux",
+                      "correct": true
+                    },
+                    {
+                      "content": "8 chapeaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "98 chapeaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chapeau de rayon 10 cm et de hauteur 24 cm a pour volume $800\\pi$ cm³.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $B = \\pi \\times 10^2 = 100\\pi$ cm². Étape 2 : $V = \\dfrac{1}{3} \\times 100\\pi \\times 24 = 800\\pi$ cm³. L'affirmation est vraie. Répondre Faux viendrait d'un oubli du tiers ($2400\\pi$ cm³) ou de l'emploi de la génératrice 26 cm à la place de la hauteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le disque d'ouverture d'un chapeau de rayon 10 cm a pour aire ___ $\\pi$ cm².",
+                  "question_type": "fill_blank",
+                  "explanation": "Propriété : l'aire d'un disque de rayon $r$ est $\\pi r^2$. Étape 1 : $r = 10$ cm. Étape 2 : $\\pi \\times 10^2 = 100\\pi$ cm². L'erreur typique est de calculer $\\pi \\times 10 = 10\\pi$ ou $2 \\times \\pi \\times 10 = 20\\pi$, qui sont une longueur ou un mauvais produit, pas une aire.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": "pyramide-base-carree",
+              "statement": "Un commerçant du marché de Treichville fabrique des boîtes cadeaux en carton en forme de pyramide régulière à base carrée, de côté 16 cm et de hauteur 6 cm. Il veut connaître la surface de carton et le volume d'une boîte.",
+              "hint": "Apothème d'abord (Pythagore), puis aire d'une face, puis nombre de faces ; l'aire totale ajoute la base.",
+              "questions": [
+                {
+                  "content": "Une boîte est une pyramide régulière à base carrée de côté 16 cm et de hauteur 6 cm. Quel est l'apothème d'une face latérale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore, $a^2 = h^2 + \\left(\\dfrac{c}{2}\\right)^2$. Étape 1 : $\\dfrac{c}{2} = 8$ cm. Étape 2 : $a^2 = 6^2 + 8^2 = 36 + 64 = 100$. Étape 3 : $a = 10$ cm. La réponse 6 cm prend la hauteur de la pyramide ; 14 cm additionne $6 + 8$ ; 100 cm donne $a^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "6 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "14 cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "100 cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte est une pyramide régulière à base carrée de côté 16 cm et d'apothème 10 cm. Quelle est son aire latérale en cm² ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $A = n \\times \\dfrac{c \\times a}{2}$. Étape 1 : $n = 4$ faces. Étape 2 : une face a pour aire $\\dfrac{16 \\times 10}{2} = 80$ cm². Étape 3 : $A = 4 \\times 80 = 320$ cm². L'erreur typique est de ne compter qu'une face (80 cm²) ou d'oublier la division par 2 (640 cm²).",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "320",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm²"
+                },
+                {
+                  "content": "Une boîte est une pyramide régulière à base carrée de côté 16 cm, d'aire latérale 320 cm². Quelle est son aire totale, base comprise ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : l'aire totale est l'aire latérale plus l'aire de la base. Étape 1 : l'aire de la base est $16 \\times 16 = 256$ cm². Étape 2 : $320 + 256 = 576$ cm². La réponse 320 cm² oublie la base ; 512 cm² est le double de l'aire de la base, ou le volume de la boîte, et ne répond pas à la question ; 1 280 cm² multiplie l'aire latérale par 4.",
+                  "answers": [
+                    {
+                      "content": "320 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "512 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 280 cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "576 cm²",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boîte est une pyramide à base carrée de côté 16 cm et de hauteur 6 cm. Quel est son volume en cm³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times B \\times h$. Étape 1 : $B = 16 \\times 16 = 256$ cm² et $h = 6$ cm. Étape 2 : $V = \\dfrac{1}{3} \\times 256 \\times 6 = 256 \\times 2 = 512$ cm³. L'erreur typique est d'oublier le tiers (1 536 cm³) ou de prendre l'apothème 10 cm à la place de la hauteur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "512",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm³"
+                },
+                {
+                  "content": "Dans une pyramide régulière à base carrée de côté 16 cm et de hauteur 6 cm, la hauteur d'une face latérale est égale à 6 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : la hauteur d'une face latérale est l'apothème, calculé avec Pythagore. Étape 1 : $a^2 = 6^2 + 8^2 = 100$. Étape 2 : $a = 10$ cm, et non 6 cm. L'affirmation est fausse : 6 cm est la hauteur de la pyramide, plus courte que l'apothème. Répondre Vrai revient à confondre les deux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": "tas-de-cacao",
+              "statement": "Dans un magasin de Daloa, un tas de fèves de cacao a la forme d'un cône de révolution, de rayon 1,5 m et de hauteur 2 m. Le commerçant le recouvre d'une bâche et veut connaître son volume.",
+              "hint": "La bâche recouvre la surface latérale : il faut la génératrice. Garde $\\pi$ dans le résultat exact avant de passer à la valeur approchée.",
+              "questions": [
+                {
+                  "content": "Un tas de fèves est un cône de révolution de rayon 1,5 m et de hauteur 2 m. Quelle est la longueur de sa génératrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 1{,}5^2 + 2^2 = 2{,}25 + 4 = 6{,}25$. Étape 2 : $g = \\sqrt{6{,}25} = 2{,}5$ m. La réponse 3,5 m additionne $1{,}5 + 2$ ; 0,5 m soustrait $2 - 1{,}5$ ; 6,25 m donne $g^2$ sans la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "2,5 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "3,5 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 m",
+                      "correct": false
+                    },
+                    {
+                      "content": "6,25 m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de fèves est un cône de révolution de rayon 1,5 m et de génératrice 2,5 m. Quelle est l'aire latérale exacte de la bâche qui le recouvre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $A = \\pi \\times r \\times g$. Étape 1 : $r = 1{,}5$ m et $g = 2{,}5$ m. Étape 2 : $A = \\pi \\times 1{,}5 \\times 2{,}5 = 3{,}75\\pi$ m². La réponse $3\\pi$ m² prend la hauteur 2 m à la place de la génératrice ; $7{,}5\\pi$ m² double le résultat ; $6{,}25\\pi$ m² donne $g^2$.",
+                  "answers": [
+                    {
+                      "content": "$3\\pi$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3{,}75\\pi$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7{,}5\\pi$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6{,}25\\pi$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bâche a pour aire exacte $3{,}75\\pi$ m². Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de cette aire en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on part de $A = 3{,}75\\pi$ m². Étape 2 : $A \\approx 3{,}75 \\times 3{,}14 = 11{,}775$ m². L'erreur typique est d'arrondir $\\pi$ à 3 (11,25 m²) ou de s'arrêter à la valeur exacte.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "11,775",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m²"
+                },
+                {
+                  "content": "Un tas de fèves est un cône de révolution de rayon 1,5 m et de hauteur 2 m. Quel est son volume exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Propriété : $V = \\dfrac{1}{3} \\times \\pi r^2 \\times h$. Étape 1 : $B = \\pi \\times 1{,}5^2 = 2{,}25\\pi$ m². Étape 2 : $V = \\dfrac{1}{3} \\times 2{,}25\\pi \\times 2 = 1{,}5\\pi$ m³. La réponse $4{,}5\\pi$ m³ oublie le tiers ; $6\\pi$ m³ prend le diamètre 3 m comme rayon ; $\\pi$ m³ utilise $r$ au lieu de $r^2$.",
+                  "answers": [
+                    {
+                      "content": "$4{,}5\\pi$ m³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\pi$ m³",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}5\\pi$ m³",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\pi$ m³",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de fèves a pour volume exact $1{,}5\\pi$ m³. Avec $\\pi \\approx 3{,}14$, quelle est la valeur approchée de ce volume en m³ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 : on part de $V = 1{,}5\\pi$ m³. Étape 2 : $V \\approx 1{,}5 \\times 3{,}14 = 4{,}71$ m³. L'erreur typique est de s'arrêter à la valeur exacte ou de se tromper d'un rang dans la multiplication (47,1 ou 0,471).",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "4,71",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m³"
+                },
+                {
+                  "content": "Un tas de fèves conique a pour rayon 1,5 m et pour hauteur 3 m. Sa génératrice mesure 3,5 m.",
+                  "question_type": "true_false",
+                  "explanation": "Propriété : Pythagore. Étape 1 : $g^2 = 1{,}5^2 + 3^2 = 2{,}25 + 9 = 11{,}25$. Étape 2 : $g = \\sqrt{11{,}25} \\approx 3{,}35$ m, et non 3,5 m. L'affirmation est fausse : 3,5 m vient de l'addition $1{,}5 + 3$ à la place du théorème de Pythagore, et $3{,}5^2 = 12{,}25 \\ne 11{,}25$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
                 }
               ]
             }

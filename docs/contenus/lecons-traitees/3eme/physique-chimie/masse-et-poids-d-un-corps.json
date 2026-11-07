@@ -87,6 +87,57 @@
             ]
           },
           "controls": []
+        },
+        {
+          "key": "masses-sacs",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des masses, en kilogrammes, de quatre sacs vendus sur un marché : le sac de riz fait 20 kg, le sac d'igname 12 kg, le sac de manioc 8 kg et le sac de sel 5 kg. La hauteur de chaque barre donne la masse du sac correspondant.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              20,
+              12,
+              8,
+              5
+            ],
+            "labels": [
+              "Riz",
+              "Igname",
+              "Manioc",
+              "Sel"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "poids-lune",
+          "kind": "coordinate_plane",
+          "description": "Un repère où la masse m en kg est en abscisse (de 0 à 10) et le poids P en N en ordonnée (de 0 à 20). La droite P = 1,6 m, valable sur la Lune, passe par l'origine. Deux points sont placés dessus : D (5 kg ; 8 N) et E (10 kg ; 16 N). Le poids est proportionnel à la masse.",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 20,
+            "lines": [
+              {
+                "a": 1.6,
+                "b": 0
+              }
+            ],
+            "points": [
+              {
+                "id": "D",
+                "x": 5,
+                "y": 8
+              },
+              {
+                "id": "E",
+                "x": 10,
+                "y": 16
+              }
+            ]
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -108,116 +159,229 @@
           },
           "pitfall": "Ne pas additionner des masses sans les avoir converties dans la même unité. Contre-exemple : pour 2 500 g d'ignames et 3 kg de riz, écrire $2\\,500 + 3 = 2\\,503$ n'a aucun sens : on mélange des grammes et des kilogrammes. Convertis d'abord : $2{,}5 + 3 = 5{,}5\\ \\text{kg}$. Vérifie aussi la vraisemblance : deux sacs de marché ne font pas 2 503 kg.",
           "figure": null,
-          "exercise": {
-            "title": "Mesurer et convertir des masses",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu repères une masse, tu la convertis en kilogrammes puis tu calcules, comme le font les vendeuses au marché avec leur balance.",
-            "questions": [
-              {
-                "content": "Quelle est l'unité de masse du Système international (SI) ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la grandeur demandée est la masse d'un corps. Étape 2 — Convertir : rien à convertir ici, l'unité du Système international est le kilogramme (kg) ; le gramme n'en est qu'un sous-multiple (1 g = 0,001 kg). Étape 3 — Écrire : l'unité SI de masse est le kilogramme. Le newton (N) est piégeux : c'est l'unité d'une force, comme le poids, pas d'une masse.",
-                "answers": [
-                  {
-                    "content": "Le kilogramme (kg)",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le newton (N)",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le gramme (g)",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le litre (L)",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour mesurer la masse de 2 kg de tomates vendues au marché, la vendeuse utilise une balance.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : on veut la masse des tomates, exprimée en kg. Étape 2 — Convertir : aucune conversion n'est nécessaire, 2 kg est déjà dans l'unité SI. Étape 3 — Écrire : la masse se mesure avec une balance (à plateaux ou électronique). L'affirmation est donc vraie. C'est le dynamomètre, et non la balance, qui sert à mesurer un poids.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une vendeuse pèse 3 400 g de piment. Exprime cette masse en kilogrammes.",
-                "question_type": "numeric",
-                "unit": "kg",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : la masse est 3 400 g. Étape 2 — Convertir : 1 g = 0,001 kg, donc 3 400 g = 3 400 × 0,001 = 3,4 kg (on divise par 1 000). Étape 3 — Écrire : la masse est 3,4 kg. Si tu trouvais 3 400 kg, tu aurais multiplié par 1 000 au lieu de diviser : un tas de piment ne pèse pas 3,4 tonnes.",
-                "answers": [
-                  {
-                    "content": "3,4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un camion transporte 4,5 t de cacao vers le marché. Cette masse vaut ___ kg (écris seulement le nombre).",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Repérer : la masse est 4,5 t. Étape 2 — Convertir : 1 t = 1 000 kg, donc 4,5 t = 4,5 × 1 000 = 4 500 kg. Étape 3 — Écrire : 4 500 kg. Pour passer des tonnes aux kilogrammes, on multiplie par 1 000 ; diviser donnerait 0,0045 kg, ce qui est absurde pour un camion.",
-                "answers": [
-                  {
-                    "content": "4500",
-                    "correct": true
-                  },
-                  {
-                    "content": "4 500",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une vendeuse place sur sa balance 750 g d'oignons, puis 1,25 kg de tomates. Quelle est la masse totale, en kilogrammes ?",
-                "question_type": "numeric",
-                "unit": "kg",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : 750 g d'oignons et 1,25 kg de tomates. Étape 2 — Convertir : 750 g = 0,75 kg. Étape 3 — Calculer avec la même unité : 0,75 + 1,25 = 2 kg. Écrire : la masse totale est 2 kg. Additionner 750 + 1,25 sans convertir donnerait 751,25, un nombre qui n'a pas de sens car les unités sont différentes.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une vendeuse place sur sa balance 1 500 g de gombo et 2 kg de tomates. Quelle est la masse totale ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : 1 500 g de gombo et 2 kg de tomates. Étape 2 — Convertir : 1 500 g = 1,5 kg. Étape 3 — Calculer avec la même unité : 1,5 + 2 = 3,5 kg. La proposition 1 502 g additionne 1 500 et 2 sans convertir (le piège de la fiche). La proposition 3 500 kg se trompe dans la conversion : 3,5 kg = 3 500 g, et non 3 500 kg. La proposition 0,5 kg soustrait au lieu d'additionner.",
-                "answers": [
-                  {
-                    "content": "3 500 kg",
-                    "correct": false
-                  },
-                  {
-                    "content": "3,5 kg",
-                    "correct": true
-                  },
-                  {
-                    "content": "1 502 g",
-                    "correct": false
-                  },
-                  {
-                    "content": "0,5 kg",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Mesurer et convertir des masses",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu repères une masse, tu la convertis en kilogrammes puis tu calcules, comme le font les vendeuses au marché avec leur balance.",
+              "questions": [
+                {
+                  "content": "Quelle est l'unité de masse du Système international (SI) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la grandeur demandée est la masse d'un corps. Étape 2 — Convertir : rien à convertir ici, l'unité du Système international est le kilogramme (kg) ; le gramme n'en est qu'un sous-multiple (1 g = 0,001 kg). Étape 3 — Écrire : l'unité SI de masse est le kilogramme. Le newton (N) est piégeux : c'est l'unité d'une force, comme le poids, pas d'une masse.",
+                  "answers": [
+                    {
+                      "content": "Le kilogramme (kg)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le newton (N)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gramme (g)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le litre (L)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer la masse de 2 kg de tomates vendues au marché, la vendeuse utilise une balance.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on veut la masse des tomates, exprimée en kg. Étape 2 — Convertir : aucune conversion n'est nécessaire, 2 kg est déjà dans l'unité SI. Étape 3 — Écrire : la masse se mesure avec une balance (à plateaux ou électronique). L'affirmation est donc vraie. C'est le dynamomètre, et non la balance, qui sert à mesurer un poids.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse pèse 3 400 g de piment. Exprime cette masse en kilogrammes.",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la masse est 3 400 g. Étape 2 — Convertir : 1 g = 0,001 kg, donc 3 400 g = 3 400 × 0,001 = 3,4 kg (on divise par 1 000). Étape 3 — Écrire : la masse est 3,4 kg. Si tu trouvais 3 400 kg, tu aurais multiplié par 1 000 au lieu de diviser : un tas de piment ne pèse pas 3,4 tonnes.",
+                  "answers": [
+                    {
+                      "content": "3,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion transporte 4,5 t de cacao vers le marché. Cette masse vaut ___ kg (écris seulement le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la masse est 4,5 t. Étape 2 — Convertir : 1 t = 1 000 kg, donc 4,5 t = 4,5 × 1 000 = 4 500 kg. Étape 3 — Écrire : 4 500 kg. Pour passer des tonnes aux kilogrammes, on multiplie par 1 000 ; diviser donnerait 0,0045 kg, ce qui est absurde pour un camion.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse place sur sa balance 750 g d'oignons, puis 1,25 kg de tomates. Quelle est la masse totale, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 750 g d'oignons et 1,25 kg de tomates. Étape 2 — Convertir : 750 g = 0,75 kg. Étape 3 — Calculer avec la même unité : 0,75 + 1,25 = 2 kg. Écrire : la masse totale est 2 kg. Additionner 750 + 1,25 sans convertir donnerait 751,25, un nombre qui n'a pas de sens car les unités sont différentes.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse place sur sa balance 1 500 g de gombo et 2 kg de tomates. Quelle est la masse totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : 1 500 g de gombo et 2 kg de tomates. Étape 2 — Convertir : 1 500 g = 1,5 kg. Étape 3 — Calculer avec la même unité : 1,5 + 2 = 3,5 kg. La proposition 1 502 g additionne 1 500 et 2 sans convertir (le piège de la fiche). La proposition 3 500 kg se trompe dans la conversion : 3,5 kg = 3 500 g, et non 3 500 kg. La proposition 0,5 kg soustrait au lieu d'additionner.",
+                  "answers": [
+                    {
+                      "content": "3 500 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "3,5 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 502 g",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,5 kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Convertir et additionner des masses de marchandises",
+              "statement": "Dans cet exercice, tu repères les masses, tu les convertis en kilogrammes puis tu calcules, comme le font les commerçants d'un marché avec leur balance.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis toujours chaque masse en kilogrammes avant d'additionner : 1 g = 0,001 kg et 1 t = 1 000 kg.",
+              "questions": [
+                {
+                  "content": "Un commerçant pèse 6 250 g de gombo. Exprime cette masse en kilogrammes.",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : la masse est 6 250 g. Étape 2 — Convertir en kilogrammes : 1 g = 0,001 kg, donc 6 250 g = 6 250 × 0,001 = 6,25 kg. Étape 3 — Calculer : il n'y a aucune autre opération, on écrit 6,25 kg avec son unité. Un résultat 6 250 oublie de convertir, et 62,5 décale la virgule d'un rang de trop.",
+                  "answers": [
+                    {
+                      "content": "6,25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une camionnette décharge 2,5 t de maïs au marché. Quelle est cette masse en kilogrammes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : la masse est 2,5 t. Étape 2 — Convertir en kilogrammes : 1 t = 1 000 kg, donc 2,5 t = 2,5 × 1 000 = 2 500 kg. Étape 3 — Calculer : aucune autre opération, on écrit 2 500 kg. La proposition 250 kg multiplie par 100 au lieu de 1 000, la proposition 25 000 kg multiplie par 10 000, et 0,0025 kg divise par 1 000 au lieu de multiplier : elle traite des tonnes comme des grammes.",
+                  "answers": [
+                    {
+                      "content": "2 500 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "250 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "25 000 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,0025 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac d'arachides a une masse de 12 000 g, soit ___ kg (écris seulement le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la masse est 12 000 g. Étape 2 — Convertir en kilogrammes : 12 000 × 0,001 = 12 kg. Étape 3 — Calculer : il suffit d'écrire 12. Répondre 12 000 oublie la conversion, et 1,2 décale la virgule d'un rang.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse additionne 800 g de piment et 2 kg d'oignons. Elle peut écrire 800 + 2 = 802 sans rien convertir.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : 800 g et 2 kg ne sont pas dans la même unité. Étape 2 — Convertir : 800 g = 0,8 kg. Étape 3 — Calculer : 0,8 + 2 = 2,8 kg. L'écriture 800 + 2 = 802 mélange des grammes et des kilogrammes : elle donne un nombre sans sens, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une balance, on pose un sac de riz de 25 kg, un sachet de sel de 500 g et un sac de sucre de 1,5 kg. Quelle masse totale la balance indique-t-elle, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : 25 kg, 500 g et 1,5 kg. Étape 2 — Convertir en kilogrammes : 500 g = 0,5 kg ; les deux autres masses sont déjà en kg. Étape 3 — Calculer : 25 + 0,5 + 1,5 = 27 kg. Additionner 25 + 500 + 1,5 sans convertir donnerait 526,5, un nombre qui mélange grammes et kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on compare des masses écrites dans des unités différentes. Étape 2 — Convertir en kilogrammes : 3 t = 3 × 1 000 = 3 000 kg et 450 g = 450 × 0,001 = 0,45 kg, donc ces deux égalités sont exactes. Étape 3 — Calculer pour contrôler les autres : 2 kg valent 2 000 g et non 20 g ; 5 000 g valent 5 kg et non 50 kg ; 1 g vaut 0,001 kg et non 0,1 kg. Ces trois erreurs décalent la virgule du mauvais nombre de rangs.",
+                  "answers": [
+                    {
+                      "content": "3 t = 3 000 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "450 g = 0,45 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 kg = 20 g",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 000 g = 50 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 g = 0,1 kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu convertis et additionne des masses, comme au marché.",
             "questions": [
@@ -293,146 +457,277 @@
           },
           "pitfall": "Ne pas exprimer un poids en kilogrammes et ne pas le tracer ailleurs que sur la verticale. Contre-exemple : sur une planche inclinée, le poids d'un sac reste vertical vers le bas ; il n'est pas perpendiculaire à la planche. Et « le panier pèse 30 kg » mélange deux grandeurs : 30 N est son poids, alors que le kilogramme est l'unité de sa masse.",
           "figure": "dynamometre-noms",
-          "exercise": {
-            "title": "Reconnaître et caractériser un poids",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Les parties d'un dynamomètre et le poids d'un corps sont au programme. À toi de retrouver le rôle de chaque partie, puis de caractériser un poids comme à la fiche de révision.",
-            "questions": [
-              {
-                "content": "Relie chaque partie d'un dynamomètre à son rôle.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Repérer : on étudie un dynamomètre qui mesure le poids d'un objet. Étape 4 — Valeur : le crochet porte l'objet ; le ressort s'allonge d'autant plus que la force est grande ; le pointeur se déplace devant la graduation ; la graduation permet de lire la valeur de la force en newtons. Retiens cette chaîne : objet accroché, ressort allongé, pointeur déplacé, valeur lue.",
-                "answers": [
-                  {
-                    "content": "Le crochet",
-                    "match": "Porte l'objet dont on veut connaître le poids"
-                  },
-                  {
-                    "content": "Le ressort",
-                    "match": "S'allonge quand on accroche un objet"
-                  },
-                  {
-                    "content": "Le pointeur",
-                    "match": "Se déplace devant la graduation"
-                  },
-                  {
-                    "content": "La graduation",
-                    "match": "Permet de lire la valeur de la force en newtons"
-                  }
-                ]
-              },
-              {
-                "content": "Quel instrument permet de mesurer le poids d'un sac de riz ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on cherche à mesurer une force, le poids du sac. Étape 4 — Valeur : la valeur d'une force se lit sur un dynamomètre, en newtons. Une balance à plateaux compare des masses : elle donne une masse en kg, pas un poids. Le thermomètre mesure une température et ne convient pas.",
-                "answers": [
-                  {
-                    "content": "Un dynamomètre",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une balance à plateaux, qui compare des masses",
-                    "correct": false
-                  },
-                  {
-                    "content": "Un thermomètre",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une éprouvette graduée",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est l'unité du poids d'un corps dans le Système international ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le poids est une force. Étape 4 — Valeur : une force s'exprime en newtons (N). Le kilogramme et le gramme sont des unités de masse : les utiliser pour un poids est l'erreur à éviter. Le litre mesure un volume.",
-                "answers": [
-                  {
-                    "content": "Le kilogramme (kg)",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le gramme (g)",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le newton (N)",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le litre (L)",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un sac de riz est posé sur l'étal d'une vendeuse. Parmi ces propositions, lesquelles décrivent correctement son poids ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : le corps est le sac et la force est son poids. Étape 2 — Point d'application : le centre de gravité du sac, pas le sol. Étape 3 — Direction et sens : le poids a pour direction la verticale du lieu et pour sens vers le bas. Les bonnes propositions sont donc la direction verticale et le sens vers le bas. La direction horizontale et le sens vers le haut sont faux ; le point de contact avec le sol n'est pas le point d'application du poids.",
-                "answers": [
-                  {
-                    "content": "Sa direction est la verticale",
-                    "correct": true
-                  },
-                  {
-                    "content": "Son sens est vers le bas",
-                    "correct": true
-                  },
-                  {
-                    "content": "Sa direction est l'horizontale",
-                    "correct": false
-                  },
-                  {
-                    "content": "Son sens est vers le haut",
-                    "correct": false
-                  },
-                  {
-                    "content": "Son point d'application est le point de contact avec le sol",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le poids d'un panier d'ignames vaut 60 N. On le représente avec l'échelle : 1 cm pour 20 N. Quelle est la longueur du vecteur poids, en centimètres ?",
-                "question_type": "numeric",
-                "unit": "cm",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : le poids du panier est 60 N et l'échelle est 1 cm pour 20 N. Étape 4 — Valeur : on cherche combien de fois 20 N tient dans 60 N, soit 60 ÷ 20 = 3. Le vecteur mesure 3 cm. Le point d'application est G, la direction la verticale et le sens vers le bas, comme pour tout poids.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un sac de manioc est posé sur une planche inclinée. Comment est son poids ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le corps est le sac et la force est son poids. Étape 3 — Direction et sens : le poids a toujours pour direction la verticale du lieu et pour sens vers le bas, même si le sac est sur une planche inclinée. Le poids n'est ni parallèle ni perpendiculaire à la planche : c'est le piège de la fiche. Un poids vers le haut est impossible car la Terre attire le sac vers elle.",
-                "answers": [
-                  {
-                    "content": "Perpendiculaire à la planche, dirigé vers le bas",
-                    "correct": false
-                  },
-                  {
-                    "content": "Parallèle à la planche, dirigé vers le bas",
-                    "correct": false
-                  },
-                  {
-                    "content": "Vertical, dirigé vers le haut",
-                    "correct": false
-                  },
-                  {
-                    "content": "Vertical, dirigé vers le bas",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître et caractériser un poids",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Les parties d'un dynamomètre et le poids d'un corps sont au programme. À toi de retrouver le rôle de chaque partie, puis de caractériser un poids comme à la fiche de révision.",
+              "questions": [
+                {
+                  "content": "Relie chaque partie d'un dynamomètre à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on étudie un dynamomètre qui mesure le poids d'un objet. Étape 4 — Valeur : le crochet porte l'objet ; le ressort s'allonge d'autant plus que la force est grande ; le pointeur se déplace devant la graduation ; la graduation permet de lire la valeur de la force en newtons. Retiens cette chaîne : objet accroché, ressort allongé, pointeur déplacé, valeur lue.",
+                  "answers": [
+                    {
+                      "content": "Le crochet",
+                      "match": "Porte l'objet dont on veut connaître le poids"
+                    },
+                    {
+                      "content": "Le ressort",
+                      "match": "S'allonge quand on accroche un objet"
+                    },
+                    {
+                      "content": "Le pointeur",
+                      "match": "Se déplace devant la graduation"
+                    },
+                    {
+                      "content": "La graduation",
+                      "match": "Permet de lire la valeur de la force en newtons"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel instrument permet de mesurer le poids d'un sac de riz ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche à mesurer une force, le poids du sac. Étape 4 — Valeur : la valeur d'une force se lit sur un dynamomètre, en newtons. Une balance à plateaux compare des masses : elle donne une masse en kg, pas un poids. Le thermomètre mesure une température et ne convient pas.",
+                  "answers": [
+                    {
+                      "content": "Un dynamomètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une balance à plateaux, qui compare des masses",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un thermomètre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une éprouvette graduée",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité du poids d'un corps dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le poids est une force. Étape 4 — Valeur : une force s'exprime en newtons (N). Le kilogramme et le gramme sont des unités de masse : les utiliser pour un poids est l'erreur à éviter. Le litre mesure un volume.",
+                  "answers": [
+                    {
+                      "content": "Le kilogramme (kg)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gramme (g)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le newton (N)",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le litre (L)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de riz est posé sur l'étal d'une vendeuse. Parmi ces propositions, lesquelles décrivent correctement son poids ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le corps est le sac et la force est son poids. Étape 2 — Point d'application : le centre de gravité du sac, pas le sol. Étape 3 — Direction et sens : le poids a pour direction la verticale du lieu et pour sens vers le bas. Les bonnes propositions sont donc la direction verticale et le sens vers le bas. La direction horizontale et le sens vers le haut sont faux ; le point de contact avec le sol n'est pas le point d'application du poids.",
+                  "answers": [
+                    {
+                      "content": "Sa direction est la verticale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son sens est vers le bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa direction est l'horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son sens est vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son point d'application est le point de contact avec le sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids d'un panier d'ignames vaut 60 N. On le représente avec l'échelle : 1 cm pour 20 N. Quelle est la longueur du vecteur poids, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le poids du panier est 60 N et l'échelle est 1 cm pour 20 N. Étape 4 — Valeur : on cherche combien de fois 20 N tient dans 60 N, soit 60 ÷ 20 = 3. Le vecteur mesure 3 cm. Le point d'application est G, la direction la verticale et le sens vers le bas, comme pour tout poids.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de manioc est posé sur une planche inclinée. Comment est son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le corps est le sac et la force est son poids. Étape 3 — Direction et sens : le poids a toujours pour direction la verticale du lieu et pour sens vers le bas, même si le sac est sur une planche inclinée. Le poids n'est ni parallèle ni perpendiculaire à la planche : c'est le piège de la fiche. Un poids vers le haut est impossible car la Terre attire le sac vers elle.",
+                  "answers": [
+                    {
+                      "content": "Perpendiculaire à la planche, dirigé vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parallèle à la planche, dirigé vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vertical, dirigé vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vertical, dirigé vers le bas",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Représenter le poids d'un objet par un vecteur",
+              "statement": "Dans cet exercice, tu lis un dynamomètre dont les parties sont nommées sur la figure, puis tu caractérises un poids : point d'application, direction, sens et valeur.",
+              "exercise_type": "fixation",
+              "figure": "dynamometre-noms",
+              "hint": "Le poids est une force : il se mesure en newtons avec un dynamomètre. Pour la longueur du vecteur, divise la valeur par l'échelle.",
+              "questions": [
+                {
+                  "content": "Un dynamomètre indique, pour un panier de mangues : 40 ___ (écris seulement l'unité).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le corps est le panier de mangues et la force est son poids. Étape 2 — Point d'application : le centre de gravité G du panier. Étape 3 — Direction et sens : la verticale du lieu, vers le bas. Étape 4 — Donner la valeur : un poids est une force, donc il s'exprime en newtons : 40 N. Écrire 40 kg ou 40 g serait une erreur, car le kilogramme et le gramme sont des unités de masse.",
+                  "answers": [
+                    {
+                      "content": "N",
+                      "correct": true
+                    },
+                    {
+                      "content": "newton",
+                      "correct": true
+                    },
+                    {
+                      "content": "newtons",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la figure, quelle partie du dynamomètre se déplace devant la graduation et indique la valeur de la force ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on cherche la partie qui permet de lire la valeur du poids. Étape 4 — Donner la valeur : c'est le pointeur qui indique la valeur sur la graduation. Le ressort s'allonge quand on accroche l'objet mais ne donne pas la lecture ; le crochet porte l'objet ; l'anneau sert à suspendre l'appareil en haut.",
+                  "answers": [
+                    {
+                      "content": "Le pointeur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le ressort",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le crochet",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'anneau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids d'un panier suspendu à un dynamomètre est représenté par un vecteur dont le point d'application est le centre de gravité G du panier.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le corps est le panier et la force est son poids. Étape 2 — Point d'application : on place l'origine du vecteur au centre de gravité G du corps. L'affirmation est donc vraie. Choisir le crochet ou le sol comme point d'application est l'erreur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac d'ignames a un poids de 150 N. On le représente avec l'échelle 1 cm pour 25 N. Quelle est la longueur du vecteur poids, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le poids est 150 N, l'échelle est 1 cm pour 25 N. Étape 2 — Point d'application : G, centre de gravité du sac. Étape 3 — Direction et sens : verticale, vers le bas. Étape 4 — Valeur et longueur : 150 ÷ 25 = 6 cm. Écrire 150 cm oublie l'échelle, et 25 × 150 la multiplie au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seau d'eau est suspendu au crochet d'un dynamomètre. Quelles sont les deux affirmations exactes sur son poids ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : le corps est le seau et la force est son poids. Étape 2 — Point d'application : le centre de gravité du seau, pas l'anneau de l'appareil. Étape 3 — Direction et sens : verticale, vers le bas, donc un sens vers le haut est faux. Étape 4 — Valeur : en newtons ; le kilogramme est l'unité de la masse, pas du poids.",
+                  "answers": [
+                    {
+                      "content": "Son point d'application est le centre de gravité du seau",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa valeur s'exprime en newtons",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa valeur s'exprime en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son point d'application est l'anneau du dynamomètre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son sens est vers le haut",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le vecteur poids d'un fagot de bois mesure 4 cm sur un dessin à l'échelle 1 cm pour 10 N. Quelle est la valeur de ce poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le vecteur mesure 4 cm et l'échelle est 1 cm pour 10 N. Étape 2 — Point d'application : G, centre de gravité du fagot. Étape 3 — Direction et sens : verticale, vers le bas. Étape 4 — Valeur : 4 × 10 = 40 N. La proposition 4 N lit la longueur comme une valeur, 2,5 N divise 10 par 4 au lieu de multiplier, et 40 kg donne à un poids l'unité d'une masse.",
+                  "answers": [
+                    {
+                      "content": "40 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,5 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "40 kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu caractérises le poids d'un corps.",
             "questions": [
@@ -547,127 +842,238 @@
           },
           "pitfall": "Ne pas oublier de convertir la masse en kilogrammes avant de multiplier par $g$. Contre-exemple : avec $m = 4\\,500\\ \\text{g}$, calculer $4\\,500 \\times 10 = 45\\,000\\ \\text{N}$ est faux : ce serait le poids d'un camion de 4,5 tonnes. Le bon calcul est $4{,}5 \\times 10 = 45\\ \\text{N}$. De même, pour une masse cherchée, divise par $g$ : $m = 45 \\div 10 = 4{,}5\\ \\text{kg}$.",
           "figure": "poids-masse",
-          "exercise": {
-            "title": "Calculer un poids ou une masse",
-            "exercise_type": "fixation",
-            "figure": "poids-masse",
-            "statement": "Dans cet exercice, tu utilises P = m × g avec g = 10 N/kg, en convertissant la masse en kilogrammes. La droite de la figure représente le poids en fonction de la masse.",
-            "questions": [
-              {
-                "content": "Une vendeuse pose sur un dynamomètre un sac de 3 kg de sucre. Avec g = 10 N/kg, quel est le poids du sac, en newtons ?",
-                "question_type": "numeric",
-                "unit": "N",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : m = 3 kg et g = 10 N/kg. Étape 2 — Convertir : la masse est déjà en kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 3 × 10 = 30 N. Le poids est 30 N. Écrire 3 N reviendrait à oublier de multiplier par g.",
-                "answers": [
-                  {
-                    "content": "30",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un paquet de café a une masse de 500 g. Avec g = 10 N/kg, quel est son poids, en newtons ?",
-                "question_type": "numeric",
-                "unit": "N",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : m = 500 g et g = 10 N/kg. Étape 2 — Convertir : 500 g = 0,5 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 0,5 × 10 = 5 N. Avec 500 directement, on trouverait 5 000 N, le poids d'une voiture : la conversion en kg est indispensable.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un sac d'arachides pèse 80 N. Avec g = 10 N/kg, quelle est sa masse, en kilogrammes ?",
-                "question_type": "numeric",
-                "unit": "kg",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : P = 80 N et g = 10 N/kg. Étape 2 — Convertir : rien à convertir, le poids est en newtons. Étape 3 — Écrire la formule adaptée : P = m × g donne m = P ÷ g. Étape 4 — Application numérique : m = 80 ÷ 10 = 8 kg. Multiplier 80 × 10 = 800 serait une erreur : on cherche la masse, pas un poids.",
-                "answers": [
-                  {
-                    "content": "8",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour calculer la masse m d'un corps à partir de son poids P et de g, on utilise la formule m = ___.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Relever : on connaît P et g, on cherche m. Étape 3 — Écrire la formule adaptée : de P = m × g, on isole m en divisant par g, donc m = P ÷ g. La proposition P × g donne un poids élevé et faux, g ÷ P est l'inverse de ce qu'il faut, et P + g n'a aucun sens physique.",
-                "answers": [
-                  {
-                    "content": "P × g",
-                    "correct": false
-                  },
-                  {
-                    "content": "P ÷ g",
-                    "correct": true
-                  },
-                  {
-                    "content": "g ÷ P",
-                    "correct": false
-                  },
-                  {
-                    "content": "P + g",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quand on trace le poids P en fonction de la masse m, on obtient une droite qui passe par l'origine du repère.",
-                "question_type": "true_false",
-                "explanation": "Étape 3 — Écrire la formule : P = 10 × m est de la forme y = a x, avec a = 10 N/kg. Étape 4 — Application : si m = 0 kg, alors P = 0 N, et le poids augmente de 10 N à chaque kilogramme ajouté. Le point (0 ; 0) est sur la droite : le poids est proportionnel à la masse. L'affirmation est vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Sur la droite P = 10 m de la figure, le point C a pour abscisse m = 5 kg. Quel est le poids correspondant, en newtons ?",
-                "question_type": "numeric",
-                "unit": "N",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : m = 5 kg et g = 10 N/kg (le coefficient directeur de la droite). Étape 2 — Convertir : la masse est déjà en kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 5 × 10 = 50 N. Le point C est donc (5 ; 50), comme on le lit sur la droite.",
-                "answers": [
-                  {
-                    "content": "50",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une vendeuse a pesé 1 500 g de riz. Avec g = 10 N/kg, quel est le poids de ce riz ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Relever : m = 1 500 g et g = 10 N/kg. Étape 2 — Convertir : 1 500 g = 1,5 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 1,5 × 10 = 15 N. La proposition 15 000 N oublie de convertir les grammes (le piège de la fiche). La proposition 150 N se trompe de facteur dans la conversion. La proposition 1,5 N oublie de multiplier par g.",
-                "answers": [
-                  {
-                    "content": "15 N",
-                    "correct": true
-                  },
-                  {
-                    "content": "15 000 N",
-                    "correct": false
-                  },
-                  {
-                    "content": "150 N",
-                    "correct": false
-                  },
-                  {
-                    "content": "1,5 N",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer un poids ou une masse",
+              "exercise_type": "fixation",
+              "figure": "poids-masse",
+              "statement": "Dans cet exercice, tu utilises P = m × g avec g = 10 N/kg, en convertissant la masse en kilogrammes. La droite de la figure représente le poids en fonction de la masse.",
+              "questions": [
+                {
+                  "content": "Une vendeuse pose sur un dynamomètre un sac de 3 kg de sucre. Avec g = 10 N/kg, quel est le poids du sac, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : m = 3 kg et g = 10 N/kg. Étape 2 — Convertir : la masse est déjà en kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 3 × 10 = 30 N. Le poids est 30 N. Écrire 3 N reviendrait à oublier de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un paquet de café a une masse de 500 g. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : m = 500 g et g = 10 N/kg. Étape 2 — Convertir : 500 g = 0,5 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 0,5 × 10 = 5 N. Avec 500 directement, on trouverait 5 000 N, le poids d'une voiture : la conversion en kg est indispensable.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac d'arachides pèse 80 N. Avec g = 10 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : P = 80 N et g = 10 N/kg. Étape 2 — Convertir : rien à convertir, le poids est en newtons. Étape 3 — Écrire la formule adaptée : P = m × g donne m = P ÷ g. Étape 4 — Application numérique : m = 80 ÷ 10 = 8 kg. Multiplier 80 × 10 = 800 serait une erreur : on cherche la masse, pas un poids.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer la masse m d'un corps à partir de son poids P et de g, on utilise la formule m = ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever : on connaît P et g, on cherche m. Étape 3 — Écrire la formule adaptée : de P = m × g, on isole m en divisant par g, donc m = P ÷ g. La proposition P × g donne un poids élevé et faux, g ÷ P est l'inverse de ce qu'il faut, et P + g n'a aucun sens physique.",
+                  "answers": [
+                    {
+                      "content": "P × g",
+                      "correct": false
+                    },
+                    {
+                      "content": "P ÷ g",
+                      "correct": true
+                    },
+                    {
+                      "content": "g ÷ P",
+                      "correct": false
+                    },
+                    {
+                      "content": "P + g",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on trace le poids P en fonction de la masse m, on obtient une droite qui passe par l'origine du repère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Écrire la formule : P = 10 × m est de la forme y = a x, avec a = 10 N/kg. Étape 4 — Application : si m = 0 kg, alors P = 0 N, et le poids augmente de 10 N à chaque kilogramme ajouté. Le point (0 ; 0) est sur la droite : le poids est proportionnel à la masse. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la droite P = 10 m de la figure, le point C a pour abscisse m = 5 kg. Quel est le poids correspondant, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : m = 5 kg et g = 10 N/kg (le coefficient directeur de la droite). Étape 2 — Convertir : la masse est déjà en kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 5 × 10 = 50 N. Le point C est donc (5 ; 50), comme on le lit sur la droite.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse a pesé 1 500 g de riz. Avec g = 10 N/kg, quel est le poids de ce riz ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : m = 1 500 g et g = 10 N/kg. Étape 2 — Convertir : 1 500 g = 1,5 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 1,5 × 10 = 15 N. La proposition 15 000 N oublie de convertir les grammes (le piège de la fiche). La proposition 150 N se trompe de facteur dans la conversion. La proposition 1,5 N oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "15 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 000 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "150 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 N",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer la relation entre poids et masse avec des conversions",
+              "statement": "Dans cet exercice, tu utilises P = m × g avec g = 10 N/kg, en relevant les données puis en convertissant la masse en kilogrammes avant le calcul.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Convertis la masse en kg, écris P = m × g (ou m = P ÷ g), puis termine avec l'unité : N pour un poids, kg pour une masse.",
+              "questions": [
+                {
+                  "content": "Un sac de ciment a une masse de 40 kg. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : m = 40 kg et g = 10 N/kg. Étape 2 — Convertir : la masse est déjà en kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 40 × 10 = 400 N. Écrire 40 N oublie de multiplier par g ; 4 N divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet de sucre a une masse de 350 g. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : m = 350 g et g = 10 N/kg. Étape 2 — Convertir : 350 g = 0,35 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 0,35 × 10 = 3,5 N. Sans conversion, on trouverait 3 500 N, le poids d'un camion et non d'un sachet.",
+                  "answers": [
+                    {
+                      "content": "3,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un fagot de bois suspendu à un dynamomètre fait indiquer 120 N. Avec g = 10 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : P = 120 N et g = 10 N/kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire la formule adaptée : m = P ÷ g. Étape 4 — Application numérique : m = 120 ÷ 10 = 12 kg. Le résultat 1 200 viendrait d'une multiplication par g à la place d'une division, et il serait faux d'écrire 12 N, car une masse se donne en kg.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité de g, l'intensité de la pesanteur ? Elle s'exprime en ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Relever : g relie un poids en N à une masse en kg, par P = m × g. Étape 3 — Écrire la formule : g = P ÷ m, donc son unité est des newtons par kilogramme, N/kg. L'unité kg/N inverse la fraction, N est l'unité d'un poids et kg celle d'une masse : aucune ne convient à g.",
+                  "answers": [
+                    {
+                      "content": "N/kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "kg/N",
+                      "correct": false
+                    },
+                    {
+                      "content": "N",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la masse d'un colis double, son poids sur Terre double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : P = m × g avec g constant sur Terre. Étape 3 — Écrire la formule : si m est remplacée par 2m, P devient 2m × g = 2 × P. Le poids est proportionnel à la masse, donc l'affirmation est vraie. Croire que le poids reste constant est l'erreur de ceux qui oublient que P dépend de m.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse pèse 2 500 g de piment. Avec g = 10 N/kg, quel est le poids du piment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : m = 2 500 g et g = 10 N/kg. Étape 2 — Convertir : 2 500 g = 2,5 kg. Étape 3 — Écrire la formule : P = m × g. Étape 4 — Application numérique : P = 2,5 × 10 = 25 N. La proposition 25 000 N oublie de convertir, 2,5 N oublie de multiplier par g, et 250 N convertit mal les grammes en prenant 25 kg.",
+                  "answers": [
+                    {
+                      "content": "25 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 000 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,5 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "250 N",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu utilises $P = m \\times g$ avec $g = 10\\ \\text{N/kg}$.",
             "questions": [
@@ -742,124 +1148,237 @@
           },
           "pitfall": "Ne pas croire que la masse change quand le poids change. Contre-exemple : sur la Lune, le sac de riz de 20 kg a un poids de $20 \\times 1{,}6 = 32\\ \\text{N}$. Écrire « il ne pèse plus que 3,2 kg » est faux : $32$ est un poids, en newtons, et la masse reste 20 kg. Pour ne pas te tromper, regarde l'unité : kg pour la masse, N pour le poids.",
           "figure": null,
-          "exercise": {
-            "title": "Comparer masse et poids sur Terre et sur la Lune",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu compares la masse et le poids d'un même objet sur la Terre (g = 10 N/kg) et sur la Lune (g = 1,6 N/kg).",
-            "questions": [
-              {
-                "content": "Un sac de riz de 20 kg est emporté sur la Lune. Sa masse y est toujours égale à 20 kg.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Relever la masse : m = 20 kg sur Terre. Étape 4 — Comparer : la masse mesure la quantité de matière du sac, qui ne change pas quand on le déplace. Sur la Lune, la masse reste 20 kg ; ce qui change, c'est le poids. L'affirmation est vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la valeur de l'intensité de la pesanteur g à la surface de la Lune ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 2 — Relever g : à la surface de la Terre, g ≈ 10 N/kg ; à la surface de la Lune, g ≈ 1,6 N/kg. La Lune attire donc moins fort que la Terre. La proposition 10 N/kg est la valeur terrestre, la proposition 16 N/kg est une erreur de virgule, et 6 N/kg n'est pas la valeur indiquée par le programme.",
-                "answers": [
-                  {
-                    "content": "10 N/kg",
-                    "correct": false
-                  },
-                  {
-                    "content": "16 N/kg",
-                    "correct": false
-                  },
-                  {
-                    "content": "1,6 N/kg",
-                    "correct": true
-                  },
-                  {
-                    "content": "6 N/kg",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un colis de 10 kg est posé sur la Lune, où g = 1,6 N/kg. Quel est son poids, en newtons ?",
-                "question_type": "numeric",
-                "unit": "N",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever la masse : m = 10 kg (la même partout). Étape 2 — Relever g : sur la Lune, g = 1,6 N/kg. Étape 3 — Calculer le poids : P = m × g = 10 × 1,6 = 16 N. Étape 4 — Comparer : sur Terre, le même colis pèserait 100 N, donc son poids est bien plus petit sur la Lune.",
-                "answers": [
-                  {
-                    "content": "16",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Sur la Lune, un objet pèse 48 N (g = 1,6 N/kg). Quelle est sa masse, en kilogrammes ?",
-                "question_type": "numeric",
-                "unit": "kg",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Relever : P = 48 N sur la Lune. Étape 2 — Relever g : g = 1,6 N/kg. Étape 3 — Calculer : m = P ÷ g = 48 ÷ 1,6 = 30 kg (car 1,6 × 30 = 48). Étape 4 — Comparer : cet objet a la même masse, 30 kg, sur Terre, où il pèserait 300 N. Diviser 48 par 10 donnerait 4,8 : ce serait oublier que g vaut 1,6 sur la Lune.",
-                "answers": [
-                  {
-                    "content": "30",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un sac d'arachides passe de la Terre à la Lune. Quelles sont les deux grandeurs qui changent ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Relever la masse : elle ne change pas, car la quantité d'arachides est la même. Étape 2 — Relever g : il passe de 10 N/kg à 1,6 N/kg, il change donc. Étape 3 — Calculer : P = m × g change aussi puisque g change. Étape 4 — Comparer : les deux grandeurs qui changent sont l'intensité de la pesanteur et le poids. La masse et la quantité de matière, elles, restent les mêmes.",
-                "answers": [
-                  {
-                    "content": "Le poids du sac",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'intensité de la pesanteur g",
-                    "correct": true
-                  },
-                  {
-                    "content": "La masse du sac",
-                    "correct": false
-                  },
-                  {
-                    "content": "La quantité de matière du sac",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un sac d'arachides de 5 kg est transporté sur la Lune (g = 1,6 N/kg). Quelle affirmation est juste ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Relever la masse : m = 5 kg partout. Étape 2 — Relever g : 1,6 N/kg sur la Lune. Étape 3 — Calculer le poids : P = 5 × 1,6 = 8 N. Étape 4 — Comparer : la masse reste 5 kg et le poids passe de 50 N à 8 N. Dire que la masse devient 8 kg ou 0,8 kg est le piège : un poids s'exprime en newtons et la masse ne dépend pas du lieu.",
-                "answers": [
-                  {
-                    "content": "Sa masse est 5 kg et son poids est 8 N",
-                    "correct": true
-                  },
-                  {
-                    "content": "Sa masse est 8 kg et son poids est 5 N",
-                    "correct": false
-                  },
-                  {
-                    "content": "Sa masse est 0,8 kg et son poids est 8 N",
-                    "correct": false
-                  },
-                  {
-                    "content": "Sa masse est 5 kg et son poids est 50 N",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Comparer masse et poids sur Terre et sur la Lune",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu compares la masse et le poids d'un même objet sur la Terre (g = 10 N/kg) et sur la Lune (g = 1,6 N/kg).",
+              "questions": [
+                {
+                  "content": "Un sac de riz de 20 kg est emporté sur la Lune. Sa masse y est toujours égale à 20 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la masse : m = 20 kg sur Terre. Étape 4 — Comparer : la masse mesure la quantité de matière du sac, qui ne change pas quand on le déplace. Sur la Lune, la masse reste 20 kg ; ce qui change, c'est le poids. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de l'intensité de la pesanteur g à la surface de la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever g : à la surface de la Terre, g ≈ 10 N/kg ; à la surface de la Lune, g ≈ 1,6 N/kg. La Lune attire donc moins fort que la Terre. La proposition 10 N/kg est la valeur terrestre, la proposition 16 N/kg est une erreur de virgule, et 6 N/kg n'est pas la valeur indiquée par le programme.",
+                  "answers": [
+                    {
+                      "content": "10 N/kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "16 N/kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,6 N/kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 N/kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis de 10 kg est posé sur la Lune, où g = 1,6 N/kg. Quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever la masse : m = 10 kg (la même partout). Étape 2 — Relever g : sur la Lune, g = 1,6 N/kg. Étape 3 — Calculer le poids : P = m × g = 10 × 1,6 = 16 N. Étape 4 — Comparer : sur Terre, le même colis pèserait 100 N, donc son poids est bien plus petit sur la Lune.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, un objet pèse 48 N (g = 1,6 N/kg). Quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever : P = 48 N sur la Lune. Étape 2 — Relever g : g = 1,6 N/kg. Étape 3 — Calculer : m = P ÷ g = 48 ÷ 1,6 = 30 kg (car 1,6 × 30 = 48). Étape 4 — Comparer : cet objet a la même masse, 30 kg, sur Terre, où il pèserait 300 N. Diviser 48 par 10 donnerait 4,8 : ce serait oublier que g vaut 1,6 sur la Lune.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac d'arachides passe de la Terre à la Lune. Quelles sont les deux grandeurs qui changent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la masse : elle ne change pas, car la quantité d'arachides est la même. Étape 2 — Relever g : il passe de 10 N/kg à 1,6 N/kg, il change donc. Étape 3 — Calculer : P = m × g change aussi puisque g change. Étape 4 — Comparer : les deux grandeurs qui changent sont l'intensité de la pesanteur et le poids. La masse et la quantité de matière, elles, restent les mêmes.",
+                  "answers": [
+                    {
+                      "content": "Le poids du sac",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité de la pesanteur g",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité de matière du sac",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac d'arachides de 5 kg est transporté sur la Lune (g = 1,6 N/kg). Quelle affirmation est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la masse : m = 5 kg partout. Étape 2 — Relever g : 1,6 N/kg sur la Lune. Étape 3 — Calculer le poids : P = 5 × 1,6 = 8 N. Étape 4 — Comparer : la masse reste 5 kg et le poids passe de 50 N à 8 N. Dire que la masse devient 8 kg ou 0,8 kg est le piège : un poids s'exprime en newtons et la masse ne dépend pas du lieu.",
+                  "answers": [
+                    {
+                      "content": "Sa masse est 5 kg et son poids est 8 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa masse est 8 kg et son poids est 5 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa masse est 0,8 kg et son poids est 8 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa masse est 5 kg et son poids est 50 N",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Comparer le poids d'un même objet sur la Terre et sur la Lune",
+              "statement": "Dans cet exercice, tu compares la masse et le poids d'un même objet en utilisant g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "La masse ne change jamais ; seul le poids change avec g. Calcule chaque poids avec P = m × g.",
+              "questions": [
+                {
+                  "content": "Un astronaute emporte sur la Lune un colis de 40 kg. Avec g = 1,6 N/kg sur la Lune, quel est le poids du colis sur la Lune, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever la masse : m = 40 kg, la même en tout lieu. Étape 2 — Relever g : 1,6 N/kg sur la Lune. Étape 3 — Calculer : P = m × g = 40 × 1,6 = 64 N. Étape 4 — Comparer : le poids est plus petit que sur Terre (400 N) mais la masse reste 40 kg. Le résultat 400 N utilise la valeur de g de la Terre, et 25 N divise 40 par 1,6.",
+                  "answers": [
+                    {
+                      "content": "64",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Terre, un objet a un poids de 90 N. Avec g = 10 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Relever la masse : elle est inconnue, mais elle est la même en tout lieu. Étape 2 — Relever g : 10 N/kg sur Terre. Étape 3 — Calculer : m = P ÷ g = 90 ÷ 10 = 9 kg. Étape 4 — Comparer : cette masse de 9 kg serait aussi la sienne sur la Lune. Le résultat 900 vient d'une multiplication par g au lieu d'une division.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La masse d'un sac de farine est la même sur la Terre et sur la Lune. Elle vaut 8 kg sur la Terre, donc ___ kg sur la Lune (écris seulement le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Relever la masse : 8 kg sur la Terre. Étape 2 — Relever g : inutile ici, car la masse ne dépend pas de g. Étape 3 — Calculer : rien à calculer, la masse ne change pas. Étape 4 — Comparer : la masse reste 8 kg. Répondre 1,28 ou 12,8 viendrait d'une multiplication de la masse par g, ce qui donnerait un poids et non une masse.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de 5 kg a un poids plus grand sur la Terre que sur la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever la masse : m = 5 kg dans les deux lieux. Étape 2 — Relever g : 10 N/kg sur Terre et 1,6 N/kg sur la Lune. Étape 3 — Calculer : P = 5 × 10 = 50 N sur Terre et P = 5 × 1,6 = 8 N sur la Lune. Étape 4 — Comparer : 50 N est plus grand que 8 N, donc l'affirmation est vraie. Penser que les poids sont égaux revient à croire que g ne change pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de masse 10 kg a un poids de 100 N sur la Terre. Quel est son poids sur la Lune, avec g = 1,6 N/kg ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la masse : m = 10 kg, la même sur la Lune. Étape 2 — Relever g : 1,6 N/kg. Étape 3 — Calculer : P = 10 × 1,6 = 16 N. Étape 4 — Comparer : 16 N est plus petit que 100 N. La proposition 100 N croit que le poids ne change pas de lieu, 160 N se trompe d'un rang de virgule, et 10 kg donne la masse à la place du poids.",
+                  "answers": [
+                    {
+                      "content": "16 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "100 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "160 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On compare un même sac de riz posé sur la Terre puis sur la Lune. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Relever la masse : une quantité de matière, en kg, mesurée avec une balance. Étape 2 — Relever g : il change d'un lieu à l'autre. Étape 3 — Calculer : le poids P = m × g est une force, en N, mesurée avec un dynamomètre. Étape 4 — Comparer : les deux unités ne se mélangent pas, donc dire que la masse est en newtons ou le poids en kilogrammes est faux, et le poids n'est pas le même dans les deux lieux puisque g change.",
+                  "answers": [
+                    {
+                      "content": "La masse du sac se mesure avec une balance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poids du sac se mesure avec un dynamomètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse du sac s'exprime en newtons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du sac s'exprime en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du sac est le même dans les deux lieux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu compares masse et poids sur la Terre ($g = 10$ N/kg) et sur la Lune ($g = 1{,}6$ N/kg).",
             "questions": [
@@ -1329,6 +1848,1587 @@
               "starter": "La masse du sac ne change pas, donc…",
               "explanation": "Corrigé modèle : Étape 1 — Relever la masse : m = 25 kg en tout lieu, car la masse est une quantité de matière. Étape 2 — Relever g : sur la Lune g = 1,6 N/kg. Étape 3 — Calculer : 40 N est le poids du sac sur la Lune (25 × 1,6 = 40). Étape 4 — Comparer : l'enfant a divisé ce poids par 10, la valeur de g sur Terre, ce qui n'a aucun sens ; De plus, diviser un poids par g donne une masse sur Terre, pas sur la Lune : le résultat 4 n'a pas de sens ici. La masse reste 25 kg. Répartition : la masse ne change pas (1 point), 40 N est un poids (1 point), l'erreur de division par 10 (1 point).",
               "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Convertir une masse en kilogrammes et additionner des masses ; reconnaître les parties d'un dynamomètre et caractériser un poids (point d'application, direction, sens, valeur, échelle) ; appliquer P = m × g et m = P ÷ g avec g = 10 N/kg ; comparer masse et poids sur la Terre et sur la Lune.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "statement": "Une vendeuse de légumes range ses produits sur sa balance, au marché. Elle note : des oignons de 3 500 g, des tomates de 2 kg et du piment de 250 g. Un camion livre aussi 1,2 t de sacs d'oignons.",
+              "hint": "Avant tout calcul, convertis chaque masse en kilogrammes : 1 g = 0,001 kg et 1 t = 1 000 kg.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une vendeuse pèse 3 500 g d'oignons. Exprime cette masse en kilogrammes.",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer la masse et son unité : 3 500 g. Étape 2 — Convertir en kilogrammes avec 1 g = 0,001 kg : 3 500 × 0,001 = 3,5 kg. Étape 3 — Écrire le résultat avec son unité. Le nombre 3 500 oublie la conversion, 35 décale la virgule d'un rang de trop.",
+                  "answers": [
+                    {
+                      "content": "3,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une vendeuse place sur sa balance 3 500 g d'oignons, 2 kg de tomates et 250 g de piment. Quelle est la masse totale, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 3 500 g, 2 kg et 250 g. Étape 2 — Convertir : 3 500 g = 3,5 kg et 250 g = 0,25 kg. Étape 3 — Calculer : 3,5 + 2 + 0,25 = 5,75 kg. Additionner 3 500 + 2 + 250 sans convertir donne 3 752, un nombre qui mélange grammes et kilogrammes et n'a donc aucun sens.",
+                  "answers": [
+                    {
+                      "content": "5,75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion livre 1,2 t d'oignons. Quelle est cette masse en kilogrammes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer : 1,2 t. Étape 2 — Convertir avec 1 t = 1 000 kg : 1,2 × 1 000 = 1 200 kg. Étape 3 — Écrire le résultat avec son unité. La proposition 1,2 kg oublie de convertir, 120 kg multiplie par 100 seulement, 12 000 kg par 10 000 : ces deux erreurs mal placent la virgule.",
+                  "answers": [
+                    {
+                      "content": "1 200 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "120 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "12 000 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,2 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La masse d'un sac d'oignons mesurée à Abidjan est différente de la masse du même sac sur la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer : on compare la masse du même sac dans deux lieux. Étape 2 — Rappeler la propriété : la masse d'un corps ne change pas quand on le déplace. Étape 3 — Conclure : elle est identique à Abidjan et sur la Lune, donc l'affirmation est fausse. C'est le poids, et non la masse, qui change avec le lieu ; les confondre est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec quel instrument la vendeuse mesure-t-elle la masse de ses oignons ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la grandeur : c'est une masse, en kg. Étape 2 — Associer l'instrument : la masse se mesure avec une balance. Étape 3 — Conclure. Le dynamomètre sert à mesurer un poids, c'est-à-dire une force en newtons, et la règle mesure une longueur : ni l'un ni l'autre ne donne une masse.",
+                  "answers": [
+                    {
+                      "content": "Une balance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un dynamomètre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une règle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "statement": "Fatou, élève de 3ème, suspend un sachet de riz au crochet du dynamomètre représenté sur la figure. Le pointeur indique 20 N sur la graduation.",
+              "hint": "Le dynamomètre mesure un poids, une force en newtons. Pour tracer le vecteur, divise la valeur par l'échelle.",
+              "figure": "dynamometre-noms",
+              "questions": [
+                {
+                  "content": "Fatou accroche un sachet au crochet d'un dynamomètre. Quelle partie de l'appareil s'allonge ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la partie cherchée sur la figure : celle qui réagit quand on accroche l'objet. Étape 2 — Raisonner : c'est le ressort qui s'allonge quand on accroche l'objet. Étape 3 — Conclure. L'anneau sert à suspendre l'appareil, le tube entoure le ressort et la graduation est seulement l'échelle sur laquelle le pointeur se déplace.",
+                  "answers": [
+                    {
+                      "content": "Le ressort",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'anneau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tube",
+                      "correct": false
+                    },
+                    {
+                      "content": "La graduation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pointeur d'un dynamomètre indique 20 N quand on y suspend un sachet de riz. Que représente cette valeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la grandeur : 20 N est exprimé en newtons. Étape 2 — Associer : un dynamomètre mesure une force, ici le poids du sachet, force d'attraction exercée par la Terre. Étape 3 — Conclure. La masse et la quantité de matière s'expriment en kilogrammes, pas en newtons, et la longueur du ressort n'est pas une force.",
+                  "answers": [
+                    {
+                      "content": "Le poids du sachet",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse du sachet",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur du ressort",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité de matière du sachet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le pointeur indique 20 N. On représente le poids du sachet avec l'échelle 1 cm pour 5 N. Quelle est la longueur du vecteur poids, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : P = 20 N, échelle 1 cm pour 5 N. Étape 2 — Donner le point d'application (G) et la direction verticale vers le bas. Étape 3 — Donner la valeur et la longueur : 20 ÷ 5 = 4 cm. La réponse 100 viendrait d'une multiplication au lieu d'une division, et 20 oublie l'échelle.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet de riz est suspendu à un dynamomètre qui indique 20 N. Quelles sont les deux caractéristiques exactes de son poids ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Repérer : le corps est le sachet, la force est son poids. Étape 2 — Point d'application : le centre de gravité G. Étape 3 — Direction verticale, sens vers le bas, valeur 20 N lue sur le dynamomètre. Un sens vers le haut ou une direction horizontale sont faux ; 20 kg donne à un poids l'unité d'une masse.",
+                  "answers": [
+                    {
+                      "content": "Son point d'application est le centre de gravité du sachet",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa valeur est 20 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son sens est vers le haut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa direction est horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa valeur est 20 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids du sachet de riz est représenté par un vecteur vertical dirigé vers le bas.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer la force : le poids. Étape 2 — Rappeler ses caractéristiques : direction verticale du lieu, sens vers le bas. Étape 3 — Conclure : l'affirmation est vraie. Même sur une planche inclinée, le poids reste vertical vers le bas et n'est pas perpendiculaire à la planche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour caractériser le poids du sachet de riz.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : Étape 1 — Repérer le corps étudié et nommer la force. Étape 2 — Donner le point d'application, le centre de gravité G. Étape 3 — Donner la direction (verticale du lieu) et le sens (vers le bas). Étape 4 — Donner la valeur en newtons, puis la longueur du vecteur avec l'échelle. On ne peut pas tracer la longueur avant d'avoir la valeur, ni la valeur avant d'avoir identifié la force.",
+                  "answers": [
+                    {
+                      "content": "Repérer le corps étudié et nommer la force : son poids."
+                    },
+                    {
+                      "content": "Donner le point d'application : le centre de gravité G du corps."
+                    },
+                    {
+                      "content": "Donner la direction (la verticale du lieu) et le sens (vers le bas)."
+                    },
+                    {
+                      "content": "Donner la valeur en newtons, puis la longueur du vecteur avec l'échelle."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "statement": "Un vendeur de matériaux de construction, à Bouaké, déplace des sacs et des sachets de masses différentes. On prend g = 10 N/kg sur Terre.",
+              "hint": "Convertis la masse en kilogrammes, puis applique P = m × g, ou m = P ÷ g quand on cherche une masse.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sac de ciment a une masse de 50 kg. Quel est son poids sur Terre, avec g = 10 N/kg, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 50 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 50 × 10 = 500 N. La réponse 50 N oublie de multiplier par g, la réponse 5 N divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sachet de poudre de cacao a une masse de 250 g. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 250 g et g = 10 N/kg. Étape 2 — Convertir : 250 g = 0,25 kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 0,25 × 10 = 2,5 N. Sans conversion on obtiendrait 2 500 N, valeur absurde pour un sachet.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de charbon a un poids de 350 N. Avec g = 10 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : P = 350 N et g = 10 N/kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire m = P ÷ g. Étape 4 — Application : m = 350 ÷ 10 = 35 kg. Multiplier 350 par 10 donne 3 500 : c'est l'erreur de celui qui garde la formule du poids.",
+                  "answers": [
+                    {
+                      "content": "35",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un corps de masse 8 kg a un poids de 80 N sur Terre, avec g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever : m = 8 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 8 × 10 = 80 N, donc l'affirmation est vraie. Un poids de 8 N supposerait qu'on a oublié de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité de g, l'intensité de la pesanteur, dans la relation P = m × g ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever les unités : P en newtons, m en kilogrammes. Étape 2 — Isoler g : g = P ÷ m. Étape 3 — Conclure : g s'exprime en newtons par kilogramme. Les unités kg/N inversent la fraction, N et kg sont celles d'un poids et d'une masse.",
+                  "answers": [
+                    {
+                      "content": "N/kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "kg/N",
+                      "correct": false
+                    },
+                    {
+                      "content": "N",
+                      "correct": false
+                    },
+                    {
+                      "content": "kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis a une masse de 4 000 g ; avant de calculer son poids, on la convertit en kilogrammes : elle vaut alors ___ kg (écris seulement le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 1 — Relever : m = 4 000 g. Étape 2 — Convertir en kilogrammes : 4 000 × 0,001 = 4 kg. Étape 3 — On pourra ensuite écrire P = m × g = 4 × 10 = 40 N. Garder 4 000 conduirait à un poids de 40 000 N, absurde pour un colis.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "statement": "Un amateur d'astronomie imagine ce que deviendrait un sac de 12 kg de maïs sur la Lune. Données : g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune.",
+              "hint": "La masse ne change pas d'un lieu à l'autre ; le poids se calcule avec la valeur de g du lieu.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sac de maïs a une masse de 12 kg. Avec g = 10 N/kg, quel est son poids sur la Terre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 12 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Calculer : P = 12 × 10 = 120 N. Le résultat 12 N oublie g.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même sac de 12 kg est emporté sur la Lune, où g = 1,6 N/kg. Quel est son poids sur la Lune, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 12 kg, la même en tout lieu. Étape 2 — Relever g : 1,6 N/kg. Étape 3 — Calculer : P = 12 × 1,6 = 19,2 N. Le poids est plus petit que sur la Terre. Le résultat 120 N reprend la valeur de g de la Terre.",
+                  "answers": [
+                    {
+                      "content": "19,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la masse du sac de 12 kg de maïs une fois posé sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 12 kg. Étape 2 — Rappeler : la masse ne dépend pas du lieu. Étape 3 — Conclure : elle reste 12 kg. La proposition 19,2 kg prend la valeur du poids pour une masse, 1,92 kg divise le poids par 10 et 120 kg reprend le poids terrestre : trois confusions entre masse et poids.",
+                  "answers": [
+                    {
+                      "content": "12 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "19,2 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,92 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "120 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids d'un même sac de maïs est plus petit sur la Lune que sur la Terre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : identique. Étape 2 — Relever g : 1,6 N/kg sur la Lune et 10 N/kg sur la Terre. Étape 3 — Comparer : 12 × 1,6 = 19,2 N est plus petit que 12 × 10 = 120 N. L'affirmation est vraie ; croire à l'égalité des poids oublie que g change.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, l'intensité de la pesanteur est g ≈ ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : Étape 1 — Relever la valeur du lieu : sur la Lune, g ≈ 1,6 N/kg. Étape 2 — Reconnaître les valeurs proches : 10 N/kg est celle de la Terre, 0,16 N/kg et 16 N/kg sont des valeurs obtenues en décalant la virgule d'un rang.",
+                  "answers": [
+                    {
+                      "content": "1,6 N/kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 N/kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "0,16 N/kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "16 N/kg",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "Convertir et additionner des masses dans des situations de marché et de transport à Abidjan et à Bouaké ; distinguer ce que mesurent la balance et le dynamomètre ; lire un diagramme en barres de masses et en déduire des poids ; comparer des poids sur la Terre et sur la Lune avec une droite du poids.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "statement": "Un commerçant d'Abidjan charge sa camionnette de 3 sacs de riz de 25 kg chacun, d'un sac de sel de 5 000 g et d'un carton de thé de 2,5 kg. On prend g = 10 N/kg.",
+              "hint": "Convertis le sac de sel en kilogrammes, additionne toutes les masses, puis passe au poids avec P = m × g.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un sac de sel a une masse de 5 000 g. Exprime cette masse en kilogrammes.",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 5 000 g. Étape 2 — Convertir : 5 000 × 0,001 = 5 kg. Étape 3 — Écrire le résultat avec son unité. La réponse 5 000 oublie de convertir ; 0,5 décale la virgule d'un rang de trop.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une camionnette porte 3 sacs de riz de 25 kg chacun, un sac de sel de 5 000 g et un carton de thé de 2,5 kg. Quelle est la masse totale du chargement, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 3 × 25 kg, 5 000 g et 2,5 kg. Étape 2 — Convertir : 5 000 g = 5 kg ; les 3 sacs de riz font 75 kg. Étape 3 — Calculer : 75 + 5 + 2,5 = 82,5 kg. Additionner 75 + 5 000 + 2,5 sans convertir donne 5 077,5, un nombre sans sens.",
+                  "answers": [
+                    {
+                      "content": "82,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chargement a une masse de 82,5 kg. Avec g = 10 N/kg, quel est son poids sur Terre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 82,5 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 82,5 × 10 = 825 N. Garder 82,5 oublierait la multiplication par g.",
+                  "answers": [
+                    {
+                      "content": "825",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le commerçant dit : « Mon chargement pèse 82,5 kg. » Quelle phrase est exacte avec le vocabulaire de la physique, pour g = 10 N/kg ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la grandeur donnée : 82,5 kg est une masse. Étape 2 — Calculer le poids : 82,5 × 10 = 825 N. Étape 3 — Écrire chaque grandeur avec son unité. La phrase qui donne un poids de 82,5 kg échange les unités, celle qui donne une masse de 825 kg transforme le poids en masse, et celle qui donne un poids de 82,5 N oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "Sa masse est 82,5 kg et son poids est 825 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son poids est 82,5 kg et sa masse est 825 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa masse est 825 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son poids est 82,5 N",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si ce chargement de 82,5 kg était emporté sur la Lune, sa masse y serait encore de 82,5 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer : on déplace le chargement. Étape 2 — Rappeler : la masse d'un corps ne change pas quand on le déplace. Étape 3 — Conclure : elle reste 82,5 kg ; seul le poids changerait (82,5 × 1,6 = 132 N). Penser que la masse diminue sur la Lune confond masse et poids.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "statement": "À Bouaké, une vendeuse d'ignames fixe son prix avec une balance. Pour une expérience avec les élèves d'une école voisine, elle suspend le même tas à un dynamomètre. Le tas a une masse de 6,5 kg. On prend g = 10 N/kg.",
+              "hint": "La balance donne une masse en kilogrammes ; le dynamomètre donne un poids en newtons.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un tas d'ignames a une masse de 6,5 kg. Avec g = 10 N/kg, quel poids indique le dynamomètre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 6,5 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 6,5 × 10 = 65 N. La valeur 6,5 oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dynamomètre indique 65 N pour le tas d'ignames. Quelle grandeur et quelle unité cette lecture donne-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer : l'appareil est un dynamomètre. Étape 2 — Associer : il mesure une force, le poids, en newtons. Étape 3 — Conclure. La masse se mesure avec une balance en kilogrammes ; mélanger la grandeur d'un système et l'unité de l'autre est l'erreur des autres propositions.",
+                  "answers": [
+                    {
+                      "content": "Le poids du tas, en newtons",
+                      "correct": true
+                    },
+                    {
+                      "content": "La masse du tas, en newtons",
+                      "correct": false
+                    },
+                    {
+                      "content": "La masse du tas, en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids du tas, en kilogrammes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vendeuse retire 1 500 g d'ignames d'un tas de 6,5 kg. Quelle est la nouvelle masse du tas, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 6,5 kg et 1 500 g. Étape 2 — Convertir : 1 500 g = 1,5 kg. Étape 3 — Calculer : 6,5 − 1,5 = 5 kg. Soustraire 6,5 − 1 500 sans convertir n'a aucun sens.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tas de 6,5 kg d'ignames a un poids de 65 N. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Repérer : une masse de 6,5 kg et un poids de 65 N. Étape 2 — Associer chaque grandeur à son instrument : balance pour la masse, dynamomètre pour le poids. Étape 3 — Comparer : 65 n'est pas égal à 6,5, et les unités kg et N sont différentes ; dire que poids et masse ont la même valeur est faux.",
+                  "answers": [
+                    {
+                      "content": "Sa masse se mesure avec une balance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son poids se mesure avec un dynamomètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son poids s'exprime en kilogrammes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa masse s'exprime en newtons",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son poids a la même valeur que sa masse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un tas de 13 kg d'ignames, le dynamomètre indiquerait 130 N, avec g = 10 N/kg.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever : m = 13 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 13 × 10 = 130 N, donc l'affirmation est vraie. Un tas deux fois plus lourd que 6,5 kg a bien un poids deux fois plus grand que 65 N.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "statement": "Le diagramme en barres donne la masse, en kilogrammes, de quatre sacs vendus sur un marché d'Abidjan : riz 20 kg, igname 12 kg, manioc 8 kg et sel 5 kg. On prend g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune.",
+              "hint": "Lis la masse de chaque barre, puis calcule le poids avec P = m × g.",
+              "figure": "masses-sacs",
+              "questions": [
+                {
+                  "content": "Un sac de riz a une masse de 20 kg. Avec g = 10 N/kg, quel est son poids sur Terre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 20 kg (barre du riz) et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 20 × 10 = 200 N. La valeur 20 N oublie g.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de manioc de 8 kg et un sac de sel de 5 kg sont suspendus ensemble à un dynamomètre. Avec g = 10 N/kg, quel poids indique-t-il, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 8 kg et 5 kg, g = 10 N/kg. Étape 2 — Additionner les masses, déjà en kg : 8 + 5 = 13 kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 13 × 10 = 130 N. Additionner les poids séparément donne le même résultat, mais il ne faut pas oublier g : 13 N serait faux.",
+                  "answers": [
+                    {
+                      "content": "130",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre sacs ont pour masses : riz 20 kg, igname 12 kg, manioc 8 kg et sel 5 kg. Lequel a le poids le plus grand sur la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever les masses : 20, 12, 8 et 5 kg. Étape 2 — Raisonner : le poids est proportionnel à la masse (P = m × g avec le même g), donc le sac le plus lourd est celui de plus grande masse. Étape 3 — Calculer : 200 N pour le riz, 120 N, 80 N et 50 N pour les autres. Les trois autres sacs ont une masse plus petite, donc un poids plus petit.",
+                  "answers": [
+                    {
+                      "content": "Le sac de riz",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sac d'igname",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sac de manioc",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sac de sel",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre sacs ont pour masses : riz 20 kg, igname 12 kg, manioc 8 kg et sel 5 kg. Quelle est leur masse totale, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 20, 12, 8 et 5, toutes en kilogrammes. Étape 2 — Convertir : rien à convertir. Étape 3 — Calculer : 20 + 12 + 8 + 5 = 45 kg. Le résultat 40 oublie un sac, et 450 décale la virgule.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, où g = 1,6 N/kg, le sac de riz de 20 kg aurait un poids de 32 N.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 20 kg, la même sur la Lune. Étape 2 — Relever g : 1,6 N/kg. Étape 3 — Calculer : P = 20 × 1,6 = 32 N, donc l'affirmation est vraie. Un poids de 200 N reprend la valeur de g de la Terre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sac de riz de 20 kg a un poids de 32 N sur la Lune. Sa masse sur la Lune vaut ___ kg (écris seulement le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Étape 1 — Repérer : 32 N est un poids, pas une masse. Étape 2 — Rappeler : la masse d'un corps ne change pas quand on le déplace. Étape 3 — Conclure : la masse reste 20 kg. Écrire 32 confond le poids avec la masse ; écrire 3,2 divise par 10 sans raison.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "statement": "Au laboratoire de l'école, des élèves comparent le poids d'un même objet sur la Terre (g = 10 N/kg) et sur la Lune (g = 1,6 N/kg). La figure représente la droite du poids en fonction de la masse sur la Lune : P = 1,6 m.",
+              "hint": "Sur la droite, le poids est proportionnel à la masse : lis ou calcule P = 1,6 × m pour la Lune.",
+              "figure": "poids-lune",
+              "questions": [
+                {
+                  "content": "Sur la Lune, un objet a une masse de 10 kg. Avec g = 1,6 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 10 kg et g = 1,6 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 10 × 1,6 = 16 N, c'est le point E de la droite. La valeur 100 N reprend la pesanteur de la Terre.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, un objet a un poids de 8 N. Avec g = 1,6 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : P = 8 N et g = 1,6 N/kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire m = P ÷ g. Étape 4 — Application : m = 8 ÷ 1,6 = 5 kg, c'est le point D de la droite. Diviser par 10 donnerait 0,8 kg : on aurait pris la pesanteur de la Terre.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet de 10 kg a un poids de 100 N sur la Terre (g = 10 N/kg) et de 16 N sur la Lune (g = 1,6 N/kg). De combien de newtons son poids diminue-t-il quand on passe de la Terre à la Lune ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : 100 N sur la Terre et 16 N sur la Lune, pour la même masse de 10 kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Calculer l'écart : 100 − 16 = 84 N. Étape 4 — Conclure : le poids diminue de 84 N alors que la masse ne change pas. La réponse 16 prend le poids lunaire pour l'écart.",
+                  "answers": [
+                    {
+                      "content": "84",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites du poids en fonction de la masse sur la Terre et sur la Lune passent toutes les deux par l'origine du repère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Rappeler : P = m × g, donc P vaut 0 N quand m vaut 0 kg, quelle que soit la valeur de g. Étape 2 — Raisonner : les deux droites passent par l'origine. Étape 3 — Conclure : l'affirmation est vraie ; seule la pente change (10 sur la Terre, 1,6 sur la Lune).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un même repère, la droite de la Terre (P = 10 m) et celle de la Lune (P = 1,6 m) sont tracées. Laquelle est la plus inclinée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever les coefficients directeurs : 10 pour la Terre et 1,6 pour la Lune, car ce sont les valeurs de g. Étape 2 — Comparer : 10 est plus grand que 1,6. Étape 3 — Conclure : la droite de la Terre monte plus vite. Dire que les inclinaisons sont égales supposerait que g est le même partout.",
+                  "answers": [
+                    {
+                      "content": "La droite de la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite de la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont aussi inclinées l'une que l'autre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Choisir le bon argument pour départager deux affirmations sur la masse et le poids ; repérer et corriger une erreur de conversion ; justifier une proportionnalité à partir d'un tableau de mesures ; associer grandeurs, unités et instruments ; enchaîner les étapes d'une méthode.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "statement": "Kouamé et Awa discutent d'un sac de riz de 10 kg qu'on emporterait sur la Lune. Kouamé dit : « Sur la Lune, le sac ne contiendrait plus que 1,6 kg de riz. » Awa répond : « Sa masse ne change pas, son poids passe à 16 N. » On prend g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune.",
+              "hint": "Avant de répondre, demande-toi : est-ce une masse (kg) ou un poids (N) ? Et que dit la leçon de leur dépendance au lieu ?",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qui a raison, Kouamé ou Awa, et pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 10 kg, la même en tout lieu. Étape 2 — Relever g sur la Lune : 1,6 N/kg. Étape 3 — Calculer : P = m × g = 10 × 1,6 = 16 N. Étape 4 — Conclure : Awa a raison. Kouamé confond la quantité de riz (la masse) avec la force d'attraction (le poids), et croire que moins d'attraction signifie moins de matière est l'erreur tentante ; les deux grandeurs sont différentes, avec des unités différentes.",
+                  "answers": [
+                    {
+                      "content": "Awa, car la masse ne dépend pas du lieu et le poids vaut 10 × 1,6 = 16 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Kouamé, car 10 × 1,6 = 16 donne la nouvelle masse du sac",
+                      "correct": false
+                    },
+                    {
+                      "content": "Kouamé, car la Lune attire moins, donc il y a moins de riz",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux, car la masse et le poids sont la même grandeur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel argument montre que la phrase de Kouamé, « le sac ne contiendrait plus que 1,6 kg de riz », est fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la grandeur en jeu : la quantité de riz, c'est-à-dire la masse. Étape 2 — Rappeler la propriété : la masse d'un corps ne change pas quand on le déplace. Étape 3 — Conclure : la phrase de Kouamé est fausse. Les autres arguments inventent des règles qui n'existent pas : l'unité kg est la même partout, la taille d'un nombre ne décide pas si c'est une masse, et g ne retire pas de matière.",
+                  "answers": [
+                    {
+                      "content": "La masse est une quantité de matière : elle ne change pas quand on déplace le sac",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le kilogramme n'existe pas sur la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,6 est trop petit pour être une masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le riz perd de la matière quand g diminue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, où g = 1,6 N/kg, quel est le poids du sac de riz de 10 kg, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 10 kg. Étape 2 — Relever g : 1,6 N/kg. Étape 3 — Calculer : P = 10 × 1,6 = 16 N. Étape 4 — Comparer avec la Terre : 100 N. Le résultat 100 N reprend g = 10 N/kg, et 1,6 N divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier la valeur de 16 N sur la Lune, Awa utiliserait un dynamomètre.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer : 16 N est un poids, une force en newtons. Étape 2 — Associer l'instrument : un poids se mesure avec un dynamomètre. Étape 3 — Conclure : l'affirmation est vraie. Une balance mesure la masse, pas une force.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour comparer le poids du sac de riz sur la Terre et sur la Lune.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : Étape 1 — Relever la masse, la même en tout lieu. Étape 2 — Relever g pour chaque lieu : 10 N/kg et 1,6 N/kg. Étape 3 — Calculer le poids avec P = m × g dans chaque lieu. Étape 4 — Comparer : la masse reste 10 kg, le poids passe de 100 N à 16 N. On ne peut pas comparer avant d'avoir calculé, ni calculer avant d'avoir relevé les données.",
+                  "answers": [
+                    {
+                      "content": "Relever la masse du corps : elle est la même en tout lieu."
+                    },
+                    {
+                      "content": "Relever l'intensité de la pesanteur g de chaque lieu."
+                    },
+                    {
+                      "content": "Calculer le poids dans chaque lieu avec P = m × g."
+                    },
+                    {
+                      "content": "Comparer : la masse ne change pas, le poids change."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "statement": "Un élève résout un exercice : « Un sac d'arachides a une masse de 2 500 g. Son poids sur Terre est P = 2 500 × 10 = 25 000 N. » Son professeur trouve ce résultat absurde pour un sac de marché. On prend g = 10 N/kg.",
+              "hint": "Cherche l'étape de la méthode que l'élève a oubliée avant d'écrire la formule.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est l'erreur de l'élève dans son calcul de P = 2 500 × 10 = 25 000 N ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever : m = 2 500 g et g = 10 N/kg. Étape 2 — Convertir : 2 500 g = 2,5 kg ; l'élève a sauté cette étape. Étape 3 — Écrire P = m × g. Étape 4 — Application : 2,5 × 10 = 25 N. La formule de l'élève est la bonne et g = 10 est la bonne valeur ; le centre de gravité concerne le vecteur, pas le calcul.",
+                  "answers": [
+                    {
+                      "content": "Il n'a pas converti 2 500 g en kilogrammes avant de multiplier par g",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a utilisé la formule m = P ÷ g à la place de P = m × g",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a pris g = 1,6 N/kg au lieu de 10 N/kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a oublié d'écrire le centre de gravité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Corrige le calcul de l'élève : quel est le poids du sac d'arachides de 2 500 g, avec g = 10 N/kg, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 2 500 g et g = 10 N/kg. Étape 2 — Convertir : 2 500 g = 2,5 kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 2,5 × 10 = 25 N. La valeur 25 000 N est celle de l'élève, qui n'a pas converti ; 2,5 N oublie de multiplier par g.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un poids de 25 000 N est vraisemblable pour un sac d'arachides de 2 500 g.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever : P = 25 000 N annoncé, g = 10 N/kg. Étape 2 — Retrouver la masse : m = P ÷ g = 25 000 ÷ 10 = 2 500 kg. Étape 3 — Comparer : 2 500 kg est la masse d'un camion chargé, pas d'un sac de 2,5 kg. L'affirmation est fausse ; vérifier la vraisemblance d'un résultat permet de repérer un oubli de conversion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle vérification permet de repérer que 25 000 N est faux pour ce sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever : P = 25 000 N et g = 10 N/kg. Étape 2 — Écrire m = P ÷ g. Étape 3 — Calculer : 25 000 ÷ 10 = 2 500 kg et comparer avec la masse réelle, 2,5 kg. Les autres propositions ne contrôlent rien : passer à la Lune change le lieu, additionner m et g n'a aucun sens physique, et une balance mesure en kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "Retrouver la masse : 25 000 ÷ 10 = 2 500 kg, très supérieure aux 2,5 kg du sac",
+                      "correct": true
+                    },
+                    {
+                      "content": "Multiplier 25 000 par 1,6 pour passer à la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter la masse et g : 2 500 + 10",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mesurer le sac avec une balance en newtons",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux étapes de la méthode qui précèdent l'écriture de la formule P = m × g ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Relever les données de l'énoncé avec leurs unités. Étape 2 — Convertir la masse en kilogrammes. Étape 3 — Écrire la formule P = m × g. Étape 4 — Faire l'application numérique. Tracer le vecteur poids vient à la fin, changer g n'a pas de sens sur la Terre et un dynamomètre mesure un poids, pas une masse.",
+                  "answers": [
+                    {
+                      "content": "Relever les données avec leurs unités",
+                      "correct": true
+                    },
+                    {
+                      "content": "Convertir la masse en kilogrammes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tracer le vecteur poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Changer la valeur de g",
+                      "correct": false
+                    },
+                    {
+                      "content": "Mesurer la masse avec un dynamomètre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "statement": "On mesure sur la Terre le poids de trois corps : un corps de 2 kg a un poids de 20 N, un corps de 5 kg a un poids de 50 N et un corps de 8 kg a un poids de 80 N.",
+              "hint": "Calcule le quotient P ÷ m pour chaque corps et compare les résultats.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un corps de 2 kg a un poids de 20 N, un corps de 5 kg un poids de 50 N et un corps de 8 kg un poids de 80 N. Quelle est la valeur du quotient P ÷ m, en N/kg ?",
+                  "question_type": "numeric",
+                  "unit": "N/kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever les données : (2 ; 20), (5 ; 50) et (8 ; 80). Étape 2 — Convertir : toutes les masses sont en kg. Étape 3 — Écrire la formule : g = P ÷ m. Étape 4 — Application : 20 ÷ 2 = 50 ÷ 5 = 80 ÷ 8 = 10 N/kg. Le quotient est le même pour les trois corps.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Comme le quotient P ÷ m est le même pour les trois corps, on peut dire que le poids est proportionnel à la masse.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever : 20 ÷ 2, 50 ÷ 5 et 80 ÷ 8 donnent tous 10. Étape 2 — Rappeler la propriété : le poids d'un corps est proportionnel à sa masse. Étape 3 — Conclure : l'affirmation est vraie. Un quotient qui varierait d'un corps à l'autre montrerait qu'il n'y a pas de proportionnalité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Terre, avec g = 10 N/kg, quel est le poids d'un corps de masse 12 kg, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 12 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 12 × 10 = 120 N. Cela confirme la proportionnalité : 12 est plus grand que 8 et 120 plus grand que 80.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces mesures pourraient-elles avoir été faites sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever le quotient : P ÷ m = 10 N/kg. Étape 2 — Comparer avec g : 10 N/kg sur la Terre et 1,6 N/kg sur la Lune. Étape 3 — Conclure : ces mesures sont terrestres. La proportionnalité est vraie sur la Lune aussi, mais elle ne suffit pas à fixer le lieu, c'est la valeur du quotient qui le fait ; la masse ne change pas sur la Lune et un dynamomètre y fonctionne.",
+                  "answers": [
+                    {
+                      "content": "Non, car le quotient P ÷ m vaut 10 N/kg, valeur de g sur la Terre et non 1,6 N/kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car le poids est proportionnel à la masse en tout lieu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car la masse change sur la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car on ne peut pas mesurer un poids sur la Lune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme qu'un corps de 3 kg a un poids de 40 N sur la Terre. Quel argument permet de le contredire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever : m = 3 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Calculer : P = 3 × 10 = 30 N. Étape 4 — Comparer : 30 N est différent de 40 N, donc l'élève se trompe. Les autres arguments sont faux : un poids et une masse n'ont pas les mêmes unités, on multiplie par g au lieu de diviser, et le poids se mesure en newtons.",
+                  "answers": [
+                    {
+                      "content": "Le poids attendu est 3 × 10 = 30 N, différent de 40 N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un poids ne peut pas dépasser la masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut diviser 3 par 10 pour obtenir le poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids se donne toujours en kilogrammes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "statement": "Pour réviser, Mariam classe les grandeurs de la leçon : la masse, le poids et l'intensité de la pesanteur g. On prend g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune.",
+              "hint": "Pour chaque grandeur, pense à l'unité du Système international et à l'instrument qui la mesure.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque grandeur à son unité du Système international.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : Étape 1 — Repérer chaque grandeur. Étape 2 — Associer l'unité : la masse est une quantité de matière, en kg ; le poids est une force, en N ; g relie les deux par P = m × g, donc s'exprime en N/kg. Étape 3 — Contrôler : le kilogramme ne peut pas être l'unité d'une force, ni le newton celle d'une quantité de matière.",
+                  "answers": [
+                    {
+                      "content": "La masse",
+                      "match": "Le kilogramme (kg)"
+                    },
+                    {
+                      "content": "Le poids",
+                      "match": "Le newton (N)"
+                    },
+                    {
+                      "content": "L'intensité de la pesanteur g",
+                      "match": "Le newton par kilogramme (N/kg)"
+                    }
+                  ]
+                },
+                {
+                  "content": "La masse se mesure avec un dynamomètre et le poids se mesure avec une balance.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer les grandeurs : la masse en kg, le poids en N. Étape 2 — Associer chaque instrument : la masse se mesure avec une balance, le poids avec un dynamomètre. Étape 3 — Conclure : l'affirmation inverse les deux instruments, elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, un objet a un poids de 16 N. Avec g = 1,6 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : P = 16 N et g = 1,6 N/kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire m = P ÷ g. Étape 4 — Application : m = 16 ÷ 1,6 = 10 kg. Diviser par 10 donnerait 1,6 kg : c'est utiliser la pesanteur de la Terre.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La relation entre le poids P, la masse m et l'intensité de la pesanteur g s'écrit P = ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : Étape 1 — Relever : P en N, m en kg, g en N/kg. Étape 2 — Raisonner avec les unités : kg × N/kg donne des newtons, donc P = m × g. Étape 3 — Contrôler : m ÷ g et g ÷ m ne donnent pas des newtons, et additionner une masse et un g n'a aucun sens physique.",
+                  "answers": [
+                    {
+                      "content": "m × g",
+                      "correct": true
+                    },
+                    {
+                      "content": "m ÷ g",
+                      "correct": false
+                    },
+                    {
+                      "content": "m + g",
+                      "correct": false
+                    },
+                    {
+                      "content": "g ÷ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un même objet passe de la Terre à la Lune. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : en tout lieu la même. Étape 2 — Relever g : 10 N/kg sur la Terre, 1,6 N/kg sur la Lune. Étape 3 — Comparer : P = m × g est donc plus petit sur la Lune. Dire que la masse diminue, que le poids est identique ou que g ne change pas contredit la leçon.",
+                  "answers": [
+                    {
+                      "content": "Sa masse reste identique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son poids est plus petit sur la Lune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa masse est plus petite sur la Lune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son poids reste identique",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur de g est la même",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Toutes les notions : conversions et additions de masses ; caractéristiques du poids et vecteur avec échelle ; relation P = m × g et lecture de la droite du poids ; comparaison de la masse et du poids sur la Terre et sur la Lune.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "statement": "Une commerçante de Bouaké prépare une livraison : un sac de manioc de 18 kg, un sac de riz de 25 kg, 750 g de piment et 1,25 kg de sel. On prend g = 10 N/kg.",
+              "hint": "Convertis les grammes en kilogrammes, additionne, puis calcule le poids avec P = m × g.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une commerçante a 750 g de piment et 1,25 kg de sel. Quelle est la masse de ces deux produits ensemble, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 750 g et 1,25 kg. Étape 2 — Convertir : 750 g = 0,75 kg. Étape 3 — Calculer : 0,75 + 1,25 = 2 kg. Additionner 750 + 1,25 = 751,25 mélange grammes et kilogrammes.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une livraison contient un sac de manioc de 18 kg, un sac de riz de 25 kg, 750 g de piment et 1,25 kg de sel. Quelle est la masse totale, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : 18 kg, 25 kg, 750 g et 1,25 kg. Étape 2 — Convertir : 750 g = 0,75 kg. Étape 3 — Calculer : 18 + 25 + 0,75 + 1,25 = 45 kg. Ignorer la conversion donnerait 794,25, nombre sans sens.",
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une livraison a une masse totale de 45 kg. Avec g = 10 N/kg, quel est son poids sur Terre, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 45 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 45 × 10 = 450 N. Le résultat 45 N oublie g.",
+                  "answers": [
+                    {
+                      "content": "450",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel instrument faut-il pour lire directement le poids de cette livraison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la grandeur : un poids, en newtons. Étape 2 — Associer : un poids se mesure avec un dynamomètre. Étape 3 — Conclure. La balance mesure une masse en kilogrammes, et le chronomètre mesure un temps.",
+                  "answers": [
+                    {
+                      "content": "Un dynamomètre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une balance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un chronomètre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on divise la masse de la livraison par deux, son poids sur Terre est aussi divisé par deux.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Relever : P = m × g avec g constant. Étape 2 — Raisonner : si m devient m ÷ 2, P devient (m ÷ 2) × g, la moitié de P. Étape 3 — Conclure : le poids est proportionnel à la masse, donc l'affirmation est vraie ; ici 22,5 kg donnent 225 N, moitié de 450 N.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "statement": "Une élève suspend à un dynamomètre un sac de 2 kg de sucre. Le pointeur indique 20 N. Elle veut représenter le poids du sac avec l'échelle 1 cm pour 5 N. On prend g = 10 N/kg.",
+              "hint": "Un poids se caractérise par quatre éléments : point d'application, direction, sens et valeur.",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelles sont les deux caractéristiques exactes du poids du sac de sucre suspendu au dynamomètre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Repérer le corps et la force : le sac et son poids. Étape 2 — Point d'application : le centre de gravité G, pas le crochet. Étape 3 — Direction et sens : verticale, vers le bas. Étape 4 — Valeur : 2 × 10 = 20 N, donc 2 N est faux.",
+                  "answers": [
+                    {
+                      "content": "Sa direction est la verticale du lieu",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son sens est vers le bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son point d'application est le crochet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa valeur est 2 N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son sens est vers le haut",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids d'un sac de sucre vaut 20 N. Avec l'échelle 1 cm pour 5 N, quelle est la longueur du vecteur poids, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Repérer : P = 20 N, échelle 1 cm pour 5 N. Étape 2 — Point d'application G, direction verticale, sens vers le bas. Étape 3 — Calculer la longueur : 20 ÷ 5 = 4 cm. Multiplier 20 par 5 donne 100 cm, résultat absurde pour un dessin.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de sucre a une masse de 2 kg. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 2 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 2 × 10 = 20 N, ce qui est bien la lecture du dynamomètre. Écrire 2 N oublie g.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le poids du sac de sucre s'exprime en kilogrammes et sa masse en newtons.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Repérer les deux grandeurs. Étape 2 — Associer les unités : le poids, force, est en newtons ; la masse, quantité de matière, est en kilogrammes. Étape 3 — Conclure : l'affirmation échange les unités, elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le dynamomètre est utilisé sur une planche inclinée avec un sac posé dessus. Comment est dirigé le poids du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Repérer la force : le poids du sac. Étape 2 — Rappeler la propriété : sur une planche inclinée, le poids d'un sac reste vertical vers le bas. Étape 3 — Conclure. Le tracer perpendiculairement ou parallèlement à la planche est l'erreur tentante : la direction du poids ne dépend pas de la position de l'objet.",
+                  "answers": [
+                    {
+                      "content": "Vertical, vers le bas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Perpendiculaire à la planche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parallèle à la planche",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "statement": "La figure représente le poids P en fonction de la masse m sur la Terre : c'est la droite P = 10 m, sur laquelle sont placés les points A (1 kg ; 10 N), B (3 kg ; 30 N) et C (5 kg ; 50 N). On prend g = 10 N/kg.",
+              "hint": "Lis la figure : l'abscisse est la masse en kg, l'ordonnée est le poids en N.",
+              "figure": "poids-masse",
+              "questions": [
+                {
+                  "content": "Sur la droite P = 10 m, le point B a pour abscisse m = 3 kg. Quel est le poids correspondant, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 3 kg, g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 3 × 10 = 30 N, ordonnée du point B. La valeur 3 N oublie g.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la droite P = 10 m, un point a pour ordonnée P = 40 N. Quelle est son abscisse, la masse en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : P = 40 N et g = 10 N/kg. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire m = P ÷ g. Étape 4 — Application : m = 40 ÷ 10 = 4 kg. Multiplier 40 par 10 donne 400 kg, qui sort de la figure.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis a une masse de 600 g. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 600 g et g = 10 N/kg. Étape 2 — Convertir : 600 g = 0,6 kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 0,6 × 10 = 6 N. Sans conversion on obtiendrait 6 000 N, une valeur absurde.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite qui représente le poids en fonction de la masse passe par l'origine du repère.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : Étape 1 — Rappeler : P = m × g. Étape 2 — Raisonner : si m = 0 kg, alors P = 0 N, donc le point (0 ; 0) est sur la droite. Étape 3 — Conclure : l'affirmation est vraie. Une droite décalée vers le haut supposerait un poids non nul pour une masse nulle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite P = 10 m passe par A (1 ; 10), B (3 ; 30) et C (5 ; 50). Quelle propriété du poids cette droite traduit-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever les points : 10, 30 et 50 N pour 1, 3 et 5 kg. Étape 2 — Calculer P ÷ m : toujours 10 N/kg. Étape 3 — Conclure : le poids est proportionnel à la masse. Un poids égal à la masse supposerait P ÷ m = 1, un poids indépendant ou décroissant donnerait une droite horizontale ou descendante.",
+                  "answers": [
+                    {
+                      "content": "Le poids est proportionnel à la masse",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poids est égal à la masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids ne dépend pas de la masse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids diminue quand la masse augmente",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "statement": "Un colis de 25 kg est envoyé de la Terre à la Lune. Données : g = 10 N/kg sur la Terre et g = 1,6 N/kg sur la Lune. La figure montre la droite du poids en fonction de la masse sur la Lune : P = 1,6 m.",
+              "hint": "La masse reste la même ; le poids se calcule avec la valeur de g du lieu.",
+              "figure": "poids-lune",
+              "questions": [
+                {
+                  "content": "Un colis de 25 kg est posé sur la Terre. Avec g = 10 N/kg, quel est son poids, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : m = 25 kg et g = 10 N/kg. Étape 2 — Convertir : déjà en kg. Étape 3 — Écrire P = m × g. Étape 4 — Application : P = 25 × 10 = 250 N.",
+                  "answers": [
+                    {
+                      "content": "250",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même colis de 25 kg est posé sur la Lune, où g = 1,6 N/kg. Quel est son poids sur la Lune, en newtons ?",
+                  "question_type": "numeric",
+                  "unit": "N",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 25 kg, la même qu'ailleurs. Étape 2 — Relever g : 1,6 N/kg. Étape 3 — Calculer : P = 25 × 1,6 = 40 N. Étape 4 — Comparer : 40 N est plus petit que 250 N. Le résultat 250 N reprend la pesanteur de la Terre.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que devient la masse du colis de 25 kg quand il est posé sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : Étape 1 — Relever la masse : 25 kg. Étape 2 — Rappeler : la masse ne dépend pas du lieu. Étape 3 — Conclure : elle reste 25 kg. Les autres propositions confondent la masse avec le poids : 40 est le poids lunaire en newtons, 250 le poids terrestre, et 4 résulte d'une division sans sens.",
+                  "answers": [
+                    {
+                      "content": "Elle reste 25 kg",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle devient 40 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient 4 kg",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle devient 250 kg",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, un objet a un poids de 24 N. Avec g = 1,6 N/kg, quelle est sa masse, en kilogrammes ?",
+                  "question_type": "numeric",
+                  "unit": "kg",
+                  "tolerance": 0,
+                  "explanation": "Méthode : Étape 1 — Relever : P = 24 N et g = 1,6 N/kg. Étape 2 — Convertir : rien. Étape 3 — Écrire m = P ÷ g. Étape 4 — Application : m = 24 ÷ 1,6 = 15 kg. Diviser par 10 donne 2,4 kg : c'est utiliser la pesanteur de la Terre.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur la droite P = 1,6 m de la Lune ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : Étape 1 — Relever le coefficient directeur : 1,6 pour la Lune. Étape 2 — Comparer avec 10 pour la Terre : 1,6 est plus petit, donc la droite est moins inclinée. Étape 3 — Conclure : les deux droites passent par l'origine car P = 0 N pour m = 0 kg. Elles ne sont pas parallèles (pentes différentes), ni horizontales (le poids augmente avec la masse).",
+                  "answers": [
+                    {
+                      "content": "Elle passe par l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est moins inclinée que la droite P = 10 m de la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est parallèle à la droite de la Terre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est plus inclinée que la droite de la Terre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

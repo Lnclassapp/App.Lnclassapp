@@ -259,7 +259,7 @@ class Classroom::AssignmentBatchesControllerTest < ActionDispatch::IntegrationTe
   # La page du cours : « Choisir » et le bandeau sont à l'enseignant ; la route le refuse de toute façon aux autres.
   test "the lesson sheet offers « Choisir » and the bar to the teacher of the classroom, not to a student nor to the team" do
     sign_in_as @teacher
-    get course_path(@thales.slug)
+    get course_sheet_path(@thales.slug, "notion-#{@exercises[0].essential.slug}")
     assert_select "button[role=checkbox][data-batch-choice='#{@exercises[0].public_id}']", text: tl("batch.choose")
     assert_select "#sheet-batch-bar", count: 1
     assert_select "#sheet-batch-bar button", text: tl("batch.submit", classroom: "3e 1")
@@ -267,7 +267,7 @@ class Classroom::AssignmentBatchesControllerTest < ActionDispatch::IntegrationTe
 
     [ create_student(classroom: @classroom), create_team_member ].each do |user|
       sign_in_as user
-      get course_path(@thales.slug)
+      get course_sheet_path(@thales.slug, "notion-#{@exercises[0].essential.slug}")
 
       assert_response :success, user.role
       assert_select "[role=checkbox][data-batch-choice]", count: 0

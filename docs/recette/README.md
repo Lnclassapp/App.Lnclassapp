@@ -21,6 +21,8 @@ bin/dev                    # puis http://localhost:3000/login
 
 Ou `bin/tester-pr <PR> --demo` : même jeu. Les comptes équipe demandent aussi le code à six chiffres (TOTP) : `bin/jeu-standard` affiche le secret de développement et le code actuel ; la variable `STANDARD_TEAM_PIN` change le PIN équipe.
 
+**Sur Staging** (recette connectée d'un train, ADR-0124 §9) : les mêmes comptes élève, enseignant et direction existent au PIN `2468`, sans activité simulée (le trimestre ci-dessous n'y est pas) ni leçons du manifeste. Les comptes équipe n'y existent que si `STANDARD_TEAM_PIN` est posée sur Staging ; ils n'ont pas de second facteur confirmé (chacun enrôle le sien).
+
 Le trimestre d'activité (séances, notes, lacunes, devoirs rendus et en retard) existe dans le lycée (Tle D, 1ère A1) et dans le grand établissement (Tle D 1, 1ère A1 1). Les chiffres exacts changent avec la date de chargement ; ce qui se vérifie, c'est qu'il y en a et que l'écran les montre sans erreur.
 
 ## Comment jouer un parcours

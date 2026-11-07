@@ -6,8 +6,11 @@ class Classroom::AssignmentBatchTest < ApplicationSystemTestCase
   setup do
     @thales = create_course(name: "Thalès")
     @pythagore = create_course(name: "Pythagore", level: @thales.level, material: @thales.material)
-    @thales_exercises = Array.new(3) { |n| create_exercise(essential: create_essential(course: @thales), title: "Thalès #{n + 1}") }
-    @pythagore_exercises = Array.new(3) { |n| create_exercise(essential: create_essential(course: @pythagore), title: "Pythagore #{n + 1}") }
+    # sujet-avant-de-commencer : les exercices d'une leçon sont sur la page de leur feuille ; une seule notion par leçon ici.
+    @thales_notion = create_essential(course: @thales)
+    @pythagore_notion = create_essential(course: @pythagore)
+    @thales_exercises = Array.new(3) { |n| create_exercise(essential: @thales_notion, title: "Thalès #{n + 1}") }
+    @pythagore_exercises = Array.new(3) { |n| create_exercise(essential: @pythagore_notion, title: "Pythagore #{n + 1}") }
     @classroom = create_classroom(name: "3e 1", level: @thales.level)
     @teacher = create_teacher(classrooms: [ @classroom ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
@@ -26,7 +29,7 @@ class Classroom::AssignmentBatchTest < ApplicationSystemTestCase
     already = @pythagore_exercises.last
     create_assignment(classroom: @classroom, assignable: already, by: @teacher)
     sign_in_as @teacher
-    visit course_path(@thales.slug)
+    visit course_sheet_path(@thales.slug, "notion-#{@thales_notion.slug}")
     assert_no_selector "#sheet-batch-bar", visible: :visible
 
     choose(*@thales_exercises.first(2))
@@ -37,7 +40,7 @@ class Classroom::AssignmentBatchTest < ApplicationSystemTestCase
       assert_button "Envoyer à 3e 1"
     end
 
-    visit course_path(@pythagore.slug)
+    visit course_sheet_path(@pythagore.slug, "notion-#{@pythagore_notion.slug}")
     assert_selector "#sheet-batch-bar", text: "2 exercices choisis"
     assert_selector "[role=checkbox][aria-checked=true]", count: 0
     choose(*@pythagore_exercises.first(2), already)

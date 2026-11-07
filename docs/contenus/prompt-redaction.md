@@ -11,8 +11,9 @@ Tu rédiges **une leçon** de Lnclass, dans la matière donnée par l'ENTRÉE, u
 Une leçon est faite de :
 
 - **des notions** (1 à 12, en général 2 à 5), chacune avec sa **fiche de révision au gabarit fixe en 4 blocs** : À retenir · La méthode · Un exemple corrigé · Le piège à éviter ;
-- **un ou deux exercices d'application par notion** (un seul par défaut ; un second, aux types de questions mélangés, quand la notion le mérite) ;
+- **deux exercices d'application par notion** : le premier suit la notion pas à pas, le second (« fixation ») mélange 6 questions de types différents ;
 - **4 problèmes** de synthèse, type interrogation, devoir et BEPC ;
+- **4 sujets de devoir** (« Sujet 1 · … » à « Sujet 4 · … »), de 4 exercices chacun ;
 - **des figures paramétrées** (0 à 12) que les notions et les exercices citent par leur clé ;
 - des questions **corrigées automatiquement** (au moins la moitié de la leçon) et, quand la matière le demande, des questions **rédigées** avec leur corrigé modèle et leur barème.
 
@@ -61,7 +62,7 @@ Ici, chaque étape de l'exemple commence par le verbe de l'étape de la méthode
 
 ## Selon la matière
 
-Le gabarit est le même partout : 4 blocs par notion, un ou deux exercices par notion, 4 problèmes. Ce qui change, c'est ce qu'on met dedans.
+Le gabarit est le même partout : 4 blocs par notion, deux exercices par notion, 4 problèmes, 4 sujets de devoir. Ce qui change, c'est ce qu'on met dedans.
 
 | Matière | À retenir | La méthode | Un exemple corrigé | Le piège | Les 4 problèmes (interrogation, interrogation, devoir, BEPC) |
 |---|---|---|---|---|---|
@@ -121,13 +122,19 @@ Dans toutes les matières, la méthode commence par un **verbe d'action à l'inf
 
 ## Les exercices
 
-### Un exercice d'application par notion (`notions[i].exercise`)
+### Deux exercices d'application par notion (`notions[i].exercise`)
 
-**Exactement un** par notion, de **5 questions au moins** (30 au plus), du plus simple au plus fin : reconnaître la notion, appliquer la méthode dans des cas variés (un savoir-faire par question), puis une question qui piège sur l'erreur de `pitfall`. `exercise_type` : `fixation`.
+**Exactement deux** par notion (une liste de 2), de **5 questions au moins** (30 au plus) chacun. Le premier va du plus simple au plus fin : reconnaître la notion, appliquer la méthode dans des cas variés (un savoir-faire par question), puis une question qui piège sur l'erreur de `pitfall`. Le second a **6 questions** d'au moins 4 types différents, au même niveau, un titre descriptif, un énoncé « Dans cet exercice, tu … » et un indice (`hint`). Chaque correction refait la méthode de la fiche en citant ses étapes, puis nomme l'erreur derrière chaque mauvaise proposition. `exercise_type` : `fixation` pour les deux.
 
 ### Quatre problèmes de synthèse (`exercises`)
 
 **Exactement quatre**, de **5 questions au moins** chacun, au style d'une interrogation, d'un devoir ou d'un examen (BEPC en 3ème) : un énoncé de situation (ou un texte, un document, selon la matière), des questions qui s'enchaînent et combinent plusieurs notions de la leçon. Les deux premiers sont de niveau interrogation, le troisième de niveau devoir, le quatrième de niveau BEPC (ou bac au 2nd cycle). `exercise_type` : `fixation` pour les deux premiers, `evaluation` pour les deux derniers.
+
+### Quatre sujets de devoir (`subjects`)
+
+**Exactement quatre**, chacun `{ "title": "Sujet k · <thème>", "notions": "<ce qui est évalué, 600 caractères au plus>", "exercises": [ 4 exercices ] }` (titre de 200 caractères au plus). Les exercices s'intitulent « Exercice 1 » à « Exercice 4 », sont en `evaluation`, ont un énoncé (la situation, le texte ou le document), un indice (`hint`, 400 caractères au plus), une figure ou `null`, et **5 ou 6 questions**. Sujet 1 : les savoirs de base. Sujet 2 : la vie courante en contexte ivoirien. Sujet 3 : raisonner et justifier. Sujet 4 : bilan de toutes les notions. Les corrections donnent la méthode détaillée, en étapes numérotées, et disent pourquoi l'erreur tentante est fausse.
+
+Hors Mathématiques et Physique-Chimie, les sujets n'ont **que des questions corrigées automatiquement** (aucune `written`) : une réponse à saisir est un mot ou un nombre court ; une phrase complète se choisit dans un QCM. Une figure de géométrie affiche ses propres longueurs : une dimension écrite avec une lettre (« $x + 5$ ») va dans l'énoncé, pas sur la figure. Un `select` à un seul trou ne porte pas de clé `blank`, et aucune question ne porte d'indice propre.
 
 ### Forme d'un exercice
 
@@ -300,7 +307,8 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
                     "questions": [ { "content": "…", "question_type": "single_choice", "explanation": "…",
                                      "answers": [ { "content": "…", "correct": true }, { "content": "…", "correct": false }, { "content": "…", "correct": false } ] } ] }
     } ],
-    "exercises": [ "… exactement 4 problèmes, même forme que « exercise » …" ]
+    "exercises": [ "… exactement 4 problèmes, même forme que « exercise » …" ],
+    "subjects": [ { "title": "Sujet 1 · …", "notions": "…", "exercises": [ "… 4 exercices « Exercice 1 » à « Exercice 4 » …" ] } ]
   }] }
 ```
 
@@ -313,7 +321,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 ## Contrôle final (avant de rendre)
 
 - [ ] Chaque notion a ses 4 blocs ; `method` a 2 à 8 étapes ; `example.steps` a **autant d'étapes** que `method`, et l'étape *n* applique l'étape *n*.
-- [ ] 1 ou 2 exercices par notion (3 sont refusés) et exactement 4 problèmes, de 5 questions au moins chacun.
+- [ ] 2 exercices par notion (3 sont refusés), le second de 6 questions de 4 types au moins ; exactement 4 problèmes, de 5 questions au moins chacun ; 4 sujets de 4 exercices de 5 ou 6 questions.
 - [ ] Chaque question a une correction de 20 à 2 000 caractères ; dans l'exercice d'une notion, elle reprend les étapes et les mots de La méthode ; dans un problème, elle donne la méthode détaillée, réutilisable en interrogation.
 - [ ] Chaque question respecte la règle de son type (propositions, bonnes propositions, `___`, paires, étapes) ; chaque proposition fausse est plausible.
 - [ ] Au moins la moitié des questions de la leçon sont corrigées automatiquement ; chaque question `written` a `answers: []`, un corrigé modèle, un barème `points` et 2 à 8 `criteria`.

@@ -2,12 +2,12 @@
 <!-- index
 titre: La CI GitHub joue les groupes de `bin/ci` en parallèle, une seule liste d'étapes
 statut: Accepté *(2026-09-28)*
-problematique: `config/ci.rb` range ses étapes en groupes ; chaque job lance `CI_GROUP=<groupe>` ou une part (`system:k/n`) ; job final `ci` ; tests unitaires jamais découpés (ADR-0024).
+problematique: `config/ci.rb` range ses étapes en groupes ; chaque job lance `CI_GROUP=<groupe>` ou une part (`system:k/n`) ; job final `ci` ; tests unitaires découpés sur GitHub depuis le 2026-11-04, couverture fusionnée et seuil vérifié sur la suite entière (ADR-0024).
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* — *amendé par l'[ADR-0069](./0069-ci-en-un-job-sur-les-pr-et-promotions-par-preuve.md) (accepté le 2026-10-02) : un seul job sur les PR prêtes, promotions par preuve d'arbre* |
+| **Statut** | Accepté *(par le porteur le 2026-09-28, défauts compris)* — *amendé par l'[ADR-0069](./0069-ci-en-un-job-sur-les-pr-et-promotions-par-preuve.md) (accepté le 2026-10-02) : un seul job sur les PR prêtes, promotions par preuve d'arbre* — *§4.1 amendé le 2026-11-04 (chantier `ci-unit-en-parts`) : la suite unitaire en deux parts sur GitHub, couvertures fusionnées* |
 | **Date** | 2026-09-28 |
 | **Chantier** | `docs/chantiers/ci-rapide` |
 | **Remplace** | — |
@@ -43,7 +43,7 @@ Le 2026-09-28, un run durait 9 min 28 (médiane de 5 runs, [memo du chantier](..
 
 Précisions qui font partie de la décision :
 
-1. **Les tests unitaires ne sont jamais découpés** : le seuil de couverture de l'ADR-0024 s'applique à la suite complète, dans un seul processus parent qui fusionne ses workers.
+1. ~~**Les tests unitaires ne sont jamais découpés**~~ *(amendé le 2026-11-04, voir §8)* : le seuil de couverture de l'ADR-0024 s'applique à la suite complète. En local, elle tourne en un seul processus parent qui fusionne ses workers ; sur GitHub, elle tourne en parts dont les couvertures sont fusionnées avant le seuil.
 2. **Le découpage est déterministe** : les fichiers sont répartis par durée décroissante dans la part la plus légère, à partir de `script/ci/test_timings.yml` (versionné, régénéré par `script/ci/record_timings` depuis la sortie `-v` d'un run). Un fichier absent de la liste pèse la médiane : il tourne quand même.
 3. **La garde `test/guards/ci_plan_test.rb`** lit le workflow et vérifie que ses jobs jouent chaque groupe une fois, chaque part une fois, et chaque fichier de test dans exactement une part. Elle tourne dans le groupe `lint`.
 4. **Un `CI_GROUP` inconnu fait échouer `bin/ci`** : une faute de frappe ne donne jamais un job vert qui n'a rien lancé.
@@ -71,3 +71,20 @@ Précisions qui font partie de la décision :
 - Une part système lance `bin/rails test:prepare` (la compilation des assets, que `bin/rails test <fichiers>` saute) et fixe `PARALLEL_WORKERS` au nombre de CPU (sous 50 tests, Rails resterait sur un seul processus).
 - `.github/actions/setup` prépare Ruby, Node et Yarn pour tous les jobs ; `libpq-dev` n'est installé que s'il manque à l'image.
 - `bin/setup --skip-db` sert aux groupes sans base (`lint`, `security`, `assets`).
+
+## 8. Amendement du 2026-11-04 — la suite unitaire en parts, la couverture fusionnée
+
+Décision du porteur, chantier [`ci-unit-en-parts`](../../chantiers/ci-unit-en-parts/memo.md).
+
+**Constat.** La tâche `unit unit` (8 127 tests, seuil 100 % / 100 %) a dépassé le plafond de 5 minutes de l'ADR-0107 : trois coupures le 2026-11-04 (trains #468 et #476), 316 s et 317 s de tâche, dont 253 s et 295 s de `bin/ci`. Le train #476 n'était bloqué que par elle.
+
+**Décision.**
+
+1. Sur GitHub, la suite unitaire tourne en **deux parts** (`unit:1/2`, `unit:2/2`) — **trois** depuis le 2026-11-05 ([ADR-0107 §9](./0107-la-preuve-d-une-pr-suit-ce-qu-elle-touche.md#9-amendement-du-2026-11-05--un-train-plus-court)) —, découpées comme `system` : chaque fichier dans une part et une seule, équilibrées sur `script/ci/test_timings.yml`. Aucun test n'est sauté.
+2. Une part mesure sa couverture sous son propre nom (`COVERAGE_PART=k/n`, `command_name "unit k/n"`) **sans seuil**, et garde son `.resultset.json`.
+3. La tâche **`coverage`** télécharge les résultats des parts, exige exactement autant de résultats que de parts, les fusionne (`script/ci/coverage_collate`, `SimpleCov.collate`) et applique **le même seuil, 100 % lignes et branches, sur la suite entière**. Le verdict `ci` l'attend.
+4. Le réglage de SimpleCov vit dans un seul profil (`test/coverage_profile.rb`), lu par le test et par la fusion : le seuil ne peut pas diverger entre les deux.
+5. En local, `bin/ci` et `bin/ci-quiet` gardent la suite entière en un seul passage, seuil compris.
+
+**Garde.** `test/guards/ci_plan_test.rb` vérifie que les parts jouent exactement les fichiers de la suite entière, que chaque part mesure sans seuil, que `coverage` fusionne `UNIT_PARTS` résultats avec le seuil, et que `ci` l'attend.
+

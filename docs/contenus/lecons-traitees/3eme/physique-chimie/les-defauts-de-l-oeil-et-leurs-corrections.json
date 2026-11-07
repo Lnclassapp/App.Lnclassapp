@@ -60,6 +60,17 @@
             "correction": "convergent"
           },
           "controls": []
+        },
+        {
+          "key": "oeil-myope-mauvais-verre",
+          "kind": "optics",
+          "description": "Schéma de l'œil réduit d'un œil myope avec un mauvais verre. Une lentille convergente est placée devant l'œil. Elle rapproche encore les rayons parallèles venant d'un objet très éloigné : ils se croisent encore plus loin avant la rétine. Sur la rétine, la tache est plus étalée et l'image est encore plus floue. Le texte sous le dessin le précise.",
+          "params": {
+            "mode": "eye",
+            "defect": "myopia",
+            "correction": "convergent"
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -83,132 +94,257 @@
           },
           "pitfall": "Ne pas confondre le rôle de l'iris et celui du cristallin. Contre-exemple : la pupille mesure environ 2 mm en plein soleil et environ 7 mm dans la pénombre. Pourtant l'image se forme toujours au même endroit, car seule la quantité de lumière change. C'est le cristallin, lentille convergente, qui fait converger les rayons et place l'image. Pour éviter l'erreur, demande-toi : qui forme l'image (cristallin) et qui règle la lumière (iris) ?",
           "figure": "oeil-normal",
-          "exercise": {
-            "title": "Décrire l'œil réduit et l'œil normal",
-            "statement": "Dans cet exercice, tu utilises le modèle de l'œil réduit et la méthode de la fiche pour décrire un œil normal.",
-            "exercise_type": "fixation",
-            "figure": "oeil-normal",
-            "questions": [
-              {
-                "content": "Dans le modèle de l'œil réduit, relie chaque partie de l'œil à l'élément qui la représente.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Identifier le rôle de chaque partie. Le cristallin fait converger la lumière et forme l'image : c'est une lentille convergente. La rétine, au fond de l'œil, reçoit l'image : c'est l'écran. L'iris, percé de la pupille, règle la quantité de lumière qui entre : c'est le diaphragme. Les trois rôles sont différents : le diaphragme ne forme pas l'image.",
-                "answers": [
-                  {
-                    "content": "Le cristallin",
-                    "match": "Une lentille convergente"
-                  },
-                  {
-                    "content": "La rétine",
-                    "match": "Un écran"
-                  },
-                  {
-                    "content": "L'iris, percé de la pupille",
-                    "match": "Un diaphragme"
-                  }
-                ]
-              },
-              {
-                "content": "Un élève à la vue normale regarde un arbre très éloigné. Les rayons qui arrivent à son œil sont presque parallèles. Où le cristallin forme-t-il l'image de l'arbre ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : le cristallin est une lentille convergente, la rétine est l'écran. Étape 2 — Repérer : les rayons parallèles convergent en un point après le cristallin. Étape 3 — Comparer : dans un œil normal, ce point est exactement sur la rétine. Étape 4 — Conclure : l'image est nette. Les propositions « avant » et « après » la rétine décrivent des yeux qui ont un défaut, pas un œil normal.",
-                "answers": [
-                  {
-                    "content": "Avant la rétine",
-                    "correct": false
-                  },
-                  {
-                    "content": "Après la rétine",
-                    "correct": false
-                  },
-                  {
-                    "content": "Sur la rétine",
-                    "correct": true
-                  },
-                  {
-                    "content": "Sur l'iris",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans le modèle de l'œil réduit, le cristallin joue le rôle d'une lentille divergente.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier le rôle du cristallin : il fait converger les rayons lumineux pour former une image sur la rétine. C'est donc une lentille convergente, pas divergente. Une lentille divergente écarterait les rayons et ne pourrait pas former d'image sur un écran.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour regarder un objet proche, le cristallin devient ___ convergent : c'est l'accommodation.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : un objet proche donne une image qui se formerait plus loin que la rétine si le cristallin ne changeait pas. Étape 3 — Comparer : pour garder l'image sur la rétine, le cristallin se bombe et devient plus convergent. Étape 4 — Conclure : il devient plus convergent. Devenir moins convergent éloignerait encore l'image de la rétine.",
-                "answers": [
-                  {
-                    "content": "plus",
-                    "correct": true
-                  },
-                  {
-                    "content": "moins",
-                    "correct": false
-                  },
-                  {
-                    "content": "aussi",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour savoir si un œil voit net un objet.",
-                "question_type": "ordering",
-                "explanation": "On suit la méthode de la fiche. Étape 1 — Identifier : on nomme le cristallin, la rétine et l'iris dans le modèle. Étape 2 — Repérer : on cherche où se forme l'image. Étape 3 — Comparer : on regarde si ce point est sur la rétine. Étape 4 — Conclure sur la netteté. Conclure avant d'avoir comparé donne une réponse sans justification.",
-                "answers": [
-                  {
-                    "content": "Identifier le rôle de chaque partie de l'œil dans le modèle de l'œil réduit."
-                  },
-                  {
-                    "content": "Repérer où le cristallin forme l'image de l'objet regardé."
-                  },
-                  {
-                    "content": "Comparer la position de cette image à celle de la rétine."
-                  },
-                  {
-                    "content": "Conclure : l'image est nette si elle se forme sur la rétine, floue sinon."
-                  }
-                ]
-              },
-              {
-                "content": "Quelle partie de l'œil règle la quantité de lumière qui entre dans l'œil ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier le rôle de chaque partie. L'iris, percé de la pupille, est le diaphragme : il s'ouvre dans la pénombre et se ferme au soleil. Le cristallin forme l'image et la rétine la reçoit. Erreur tentante : croire que la pupille fait l'image. Elle change seulement la quantité de lumière ; la position de l'image dépend du cristallin.",
-                "answers": [
-                  {
-                    "content": "L'iris, percé de la pupille",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le cristallin",
-                    "correct": false
-                  },
-                  {
-                    "content": "La rétine",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le cristallin et la rétine ensemble",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Décrire l'œil réduit et l'œil normal",
+              "statement": "Dans cet exercice, tu utilises le modèle de l'œil réduit et la méthode de la fiche pour décrire un œil normal.",
+              "exercise_type": "fixation",
+              "figure": "oeil-normal",
+              "questions": [
+                {
+                  "content": "Dans le modèle de l'œil réduit, relie chaque partie de l'œil à l'élément qui la représente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie. Le cristallin fait converger la lumière et forme l'image : c'est une lentille convergente. La rétine, au fond de l'œil, reçoit l'image : c'est l'écran. L'iris, percé de la pupille, règle la quantité de lumière qui entre : c'est le diaphragme. Les trois rôles sont différents : le diaphragme ne forme pas l'image.",
+                  "answers": [
+                    {
+                      "content": "Le cristallin",
+                      "match": "Une lentille convergente"
+                    },
+                    {
+                      "content": "La rétine",
+                      "match": "Un écran"
+                    },
+                    {
+                      "content": "L'iris, percé de la pupille",
+                      "match": "Un diaphragme"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève à la vue normale regarde un arbre très éloigné. Les rayons qui arrivent à son œil sont presque parallèles. Où le cristallin forme-t-il l'image de l'arbre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cristallin est une lentille convergente, la rétine est l'écran. Étape 2 — Repérer : les rayons parallèles convergent en un point après le cristallin. Étape 3 — Comparer : dans un œil normal, ce point est exactement sur la rétine. Étape 4 — Conclure : l'image est nette. Les propositions « avant » et « après » la rétine décrivent des yeux qui ont un défaut, pas un œil normal.",
+                  "answers": [
+                    {
+                      "content": "Avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur l'iris",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le modèle de l'œil réduit, le cristallin joue le rôle d'une lentille divergente.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le rôle du cristallin : il fait converger les rayons lumineux pour former une image sur la rétine. C'est donc une lentille convergente, pas divergente. Une lentille divergente écarterait les rayons et ne pourrait pas former d'image sur un écran.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour regarder un objet proche, le cristallin devient ___ convergent : c'est l'accommodation.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : un objet proche donne une image qui se formerait plus loin que la rétine si le cristallin ne changeait pas. Étape 3 — Comparer : pour garder l'image sur la rétine, le cristallin se bombe et devient plus convergent. Étape 4 — Conclure : il devient plus convergent. Devenir moins convergent éloignerait encore l'image de la rétine.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": true
+                    },
+                    {
+                      "content": "moins",
+                      "correct": false
+                    },
+                    {
+                      "content": "aussi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour savoir si un œil voit net un objet.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche. Étape 1 — Identifier : on nomme le cristallin, la rétine et l'iris dans le modèle. Étape 2 — Repérer : on cherche où se forme l'image. Étape 3 — Comparer : on regarde si ce point est sur la rétine. Étape 4 — Conclure sur la netteté. Conclure avant d'avoir comparé donne une réponse sans justification.",
+                  "answers": [
+                    {
+                      "content": "Identifier le rôle de chaque partie de l'œil dans le modèle de l'œil réduit."
+                    },
+                    {
+                      "content": "Repérer où le cristallin forme l'image de l'objet regardé."
+                    },
+                    {
+                      "content": "Comparer la position de cette image à celle de la rétine."
+                    },
+                    {
+                      "content": "Conclure : l'image est nette si elle se forme sur la rétine, floue sinon."
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle partie de l'œil règle la quantité de lumière qui entre dans l'œil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie. L'iris, percé de la pupille, est le diaphragme : il s'ouvre dans la pénombre et se ferme au soleil. Le cristallin forme l'image et la rétine la reçoit. Erreur tentante : croire que la pupille fait l'image. Elle change seulement la quantité de lumière ; la position de l'image dépend du cristallin.",
+                  "answers": [
+                    {
+                      "content": "L'iris, percé de la pupille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cristallin",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cristallin et la rétine ensemble",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Utiliser le modèle de l'œil réduit dans d'autres situations",
+              "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour décrire d'autres situations avec le modèle de l'œil réduit.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi toujours : qui forme l'image (le cristallin) et qui règle la lumière (l'iris) ?",
+              "questions": [
+                {
+                  "content": "Dans le modèle de l'œil réduit, quelle partie joue le rôle d'un écran sur lequel l'image se forme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie : la rétine, au fond de l'œil, reçoit l'image, c'est donc l'écran. Le cristallin n'est pas l'écran : c'est la lentille convergente qui forme l'image. L'iris est le diaphragme qui règle la lumière. La pupille est l'ouverture percée dans l'iris : elle laisse passer la lumière mais ne reçoit aucune image.",
+                  "answers": [
+                    {
+                      "content": "Le cristallin",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'iris",
+                      "correct": false
+                    },
+                    {
+                      "content": "La rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "La pupille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cristallin règle la quantité de lumière qui entre dans l'œil.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie : c'est l'iris, percé de la pupille, qui joue le rôle de diaphragme et règle la lumière. Le cristallin, lui, est la lentille convergente qui place l'image. Répondre « Vrai » confond le cristallin avec l'iris.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour voir de près, le cristallin se bombe : ce phénomène s'appelle l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : pour un objet proche, il se bombe et devient plus convergent. Étape 3 — Comparer : l'image reste sur la rétine. Étape 4 — Conclure : ce fonctionnement normal s'appelle l'accommodation. Il ne faut pas le confondre avec la myopie ou l'hypermétropie, qui sont des défauts de vision.",
+                  "answers": [
+                    {
+                      "content": "accommodation",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève à la vue normale regarde un arbre très éloigné. Choisis les deux affirmations vraies sur son œil.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : le cristallin est une lentille convergente. Étape 2 — Repérer : il fait converger les rayons presque parallèles de l'arbre. Étape 3 — Comparer : dans un œil normal, le point de convergence est sur la rétine. Étape 4 — Conclure : l'image est nette. L'affirmation « l'image se forme avant la rétine » décrit un œil myope, pas un œil normal. L'affirmation « l'iris fait converger les rayons » confond l'iris, qui est un diaphragme, avec le cristallin.",
+                  "answers": [
+                    {
+                      "content": "Le cristallin joue le rôle d'une lentille convergente.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image se forme avant la rétine.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image se forme exactement sur la rétine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'iris fait converger les rayons.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un œil normal est aussi appelé un œil ___ : l'image d'un objet lointain se forme sur sa rétine.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer la position de l'image à celle de la rétine : dans un œil normal, l'image est sur la rétine. Étape 4 — Conclure : on dit alors que l'œil est emmétrope. Un œil myope forme l'image avant la rétine, et un œil hypermétrope forme l'image après la rétine : ce sont deux défauts, pas la vue normale.",
+                  "answers": [
+                    {
+                      "content": "myope",
+                      "correct": false
+                    },
+                    {
+                      "content": "emmétrope",
+                      "correct": true
+                    },
+                    {
+                      "content": "hypermétrope",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En plein soleil, la pupille mesure environ 2 mm ; dans la pénombre, elle mesure environ 7 mm. Où se forme l'image d'un arbre lointain dans un œil normal dans ces deux cas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'iris règle la lumière, le cristallin place l'image. Étape 2 — Repérer : le cristallin fait converger les rayons, quelle que soit la taille de la pupille. Étape 3 — Comparer : dans un œil normal, ce point est toujours sur la rétine. Étape 4 — Conclure : l'image est nette dans les deux cas, seule la quantité de lumière change. Penser que l'image se déplace quand la pupille change, c'est la confusion entre l'iris et le cristallin ; et l'image ne se forme jamais sur l'iris, qui n'est pas un écran.",
+                  "answers": [
+                    {
+                      "content": "Sur la rétine dans les deux cas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus près du cristallin en plein soleil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus loin de la rétine dans la pénombre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur l'iris quand la pupille est grande",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu utilises le modèle de l'œil réduit pour une personne qui regarde un arbre lointain.",
             "questions": [
@@ -288,128 +424,253 @@
           },
           "pitfall": "Ne pas dire qu'un myope voit mal de près. Contre-exemple : un élève myope ne lit pas le tableau placé à 8 m, mais il lit très bien son cahier à 30 cm. C'est l'hypermétrope qui voit mal de près. Pour éviter la confusion, pense à la position de l'image : avant la rétine (trop convergent) pour la myopie, après la rétine (pas assez convergent) pour l'hypermétropie.",
           "figure": "oeil-myope",
-          "exercise": {
-            "title": "Reconnaître la myopie et l'hypermétropie",
-            "statement": "Dans cet exercice, tu reconnais un défaut de vision avec la méthode de la fiche : ce que la personne voit mal, la position de l'image, le nom du défaut et la convergence de l'œil.",
-            "exercise_type": "fixation",
-            "figure": "oeil-hypermetrope",
-            "questions": [
-              {
-                "content": "Awa voit très bien son cahier à 30 cm, mais elle ne lit pas ce qui est écrit au tableau, à 8 m. Quel est son défaut de vision ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : Awa voit bien de près et mal de loin. Étape 2 — Repérer la position de l'image : un œil qui voit mal de loin forme l'image d'un objet lointain avant la rétine. Étape 3 — Nommer le défaut : c'est la myopie. Étape 4 — Expliquer : son œil est trop convergent. L'hypermétropie est l'erreur tentante : l'hypermétrope voit mal de près, ce qui n'est pas le cas d'Awa.",
-                "answers": [
-                  {
-                    "content": "La myopie",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'hypermétropie",
-                    "correct": false
-                  },
-                  {
-                    "content": "Aucun défaut : sa vue est normale",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'accommodation",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans un œil hypermétrope, l'image d'un objet lointain se forme avant la rétine.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : l'hypermétrope voit mal de près. Étape 2 — Repérer la position de l'image : elle se forme après la rétine, et non avant. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. L'image avant la rétine est celle de la myopie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque œil à la position de l'image d'un objet lointain.",
-                "question_type": "matching",
-                "explanation": "Étape 2 — Repérer où l'image se forme, puis Étape 3 — Nommer le défaut. Œil normal : l'image est sur la rétine et elle est nette. Œil myope : trop convergent, l'image se forme avant la rétine. Œil hypermétrope : pas assez convergent, l'image se forme après la rétine. Il suffit de retenir que « trop convergent » rapproche l'image du cristallin.",
-                "answers": [
-                  {
-                    "content": "Œil normal",
-                    "match": "Sur la rétine"
-                  },
-                  {
-                    "content": "Œil myope",
-                    "match": "Avant la rétine"
-                  },
-                  {
-                    "content": "Œil hypermétrope",
-                    "match": "Après la rétine"
-                  }
-                ]
-              },
-              {
-                "content": "Un œil myope est trop ___ : il fait converger les rayons avant la rétine.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 4 — Expliquer par la convergence de l'œil. L'image se forme avant la rétine : le cristallin rapproche trop l'image de lui. L'œil est donc trop convergent. Un œil pas assez convergent formerait l'image après la rétine : ce serait l'hypermétropie.",
-                "answers": [
-                  {
-                    "content": "convergent",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Choisis les deux affirmations vraies sur un œil hypermétrope.",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 2 — Repérer la position de l'image : après la rétine. Étape 4 — Expliquer par la convergence : l'œil n'est pas assez convergent. Les deux autres affirmations décrivent la myopie : voir mal de loin et bien de près, et être trop convergent.",
-                "answers": [
-                  {
-                    "content": "Il n'est pas assez convergent.",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'image d'un objet lointain se forme après la rétine.",
-                    "correct": true
-                  },
-                  {
-                    "content": "Il voit mal de loin et bien de près.",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il est trop convergent.",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une dame lit son journal avec difficulté à 30 cm, mais elle y arrive en le tenant à bout de bras. Elle reconnaît bien les personnes dans la rue. Son défaut est :",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : elle voit mal de près (le journal à 30 cm) et bien de loin (les personnes dans la rue). Étape 2 — Repérer l'image : l'image d'un objet proche se forme après la rétine. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. Éloigner le journal ne prouve pas la myopie : le myope, lui, rapproche ce qu'il regarde.",
-                "answers": [
-                  {
-                    "content": "L'hypermétropie",
-                    "correct": true
-                  },
-                  {
-                    "content": "La myopie",
-                    "correct": false
-                  },
-                  {
-                    "content": "La myopie, car elle tient le journal loin",
-                    "correct": false
-                  },
-                  {
-                    "content": "Aucun défaut",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Reconnaître la myopie et l'hypermétropie",
+              "statement": "Dans cet exercice, tu reconnais un défaut de vision avec la méthode de la fiche : ce que la personne voit mal, la position de l'image, le nom du défaut et la convergence de l'œil.",
+              "exercise_type": "fixation",
+              "figure": "oeil-hypermetrope",
+              "questions": [
+                {
+                  "content": "Awa voit très bien son cahier à 30 cm, mais elle ne lit pas ce qui est écrit au tableau, à 8 m. Quel est son défaut de vision ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Awa voit bien de près et mal de loin. Étape 2 — Repérer la position de l'image : un œil qui voit mal de loin forme l'image d'un objet lointain avant la rétine. Étape 3 — Nommer le défaut : c'est la myopie. Étape 4 — Expliquer : son œil est trop convergent. L'hypermétropie est l'erreur tentante : l'hypermétrope voit mal de près, ce qui n'est pas le cas d'Awa.",
+                  "answers": [
+                    {
+                      "content": "La myopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hypermétropie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun défaut : sa vue est normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accommodation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un œil hypermétrope, l'image d'un objet lointain se forme avant la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'hypermétrope voit mal de près. Étape 2 — Repérer la position de l'image : elle se forme après la rétine, et non avant. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. L'image avant la rétine est celle de la myopie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque œil à la position de l'image d'un objet lointain.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer où l'image se forme, puis Étape 3 — Nommer le défaut. Œil normal : l'image est sur la rétine et elle est nette. Œil myope : trop convergent, l'image se forme avant la rétine. Œil hypermétrope : pas assez convergent, l'image se forme après la rétine. Il suffit de retenir que « trop convergent » rapproche l'image du cristallin.",
+                  "answers": [
+                    {
+                      "content": "Œil normal",
+                      "match": "Sur la rétine"
+                    },
+                    {
+                      "content": "Œil myope",
+                      "match": "Avant la rétine"
+                    },
+                    {
+                      "content": "Œil hypermétrope",
+                      "match": "Après la rétine"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un œil myope est trop ___ : il fait converger les rayons avant la rétine.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Expliquer par la convergence de l'œil. L'image se forme avant la rétine : le cristallin rapproche trop l'image de lui. L'œil est donc trop convergent. Un œil pas assez convergent formerait l'image après la rétine : ce serait l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "convergent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations vraies sur un œil hypermétrope.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer la position de l'image : après la rétine. Étape 4 — Expliquer par la convergence : l'œil n'est pas assez convergent. Les deux autres affirmations décrivent la myopie : voir mal de loin et bien de près, et être trop convergent.",
+                  "answers": [
+                    {
+                      "content": "Il n'est pas assez convergent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme après la rétine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il voit mal de loin et bien de près.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est trop convergent.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une dame lit son journal avec difficulté à 30 cm, mais elle y arrive en le tenant à bout de bras. Elle reconnaît bien les personnes dans la rue. Son défaut est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : elle voit mal de près (le journal à 30 cm) et bien de loin (les personnes dans la rue). Étape 2 — Repérer l'image : l'image d'un objet proche se forme après la rétine. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. Éloigner le journal ne prouve pas la myopie : le myope, lui, rapproche ce qu'il regarde.",
+                  "answers": [
+                    {
+                      "content": "L'hypermétropie",
+                      "correct": true
+                    },
+                    {
+                      "content": "La myopie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La myopie, car elle tient le journal loin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun défaut",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Reconnaître un défaut de vision à partir d'un témoignage",
+              "statement": "Dans cet exercice, tu reconnais un défaut de vision avec la méthode de la fiche, à partir de ce que chaque personne dit voir.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence par ce que la personne voit mal, puis place l'image avant ou après la rétine.",
+              "questions": [
+                {
+                  "content": "Koffi lit sans peine un livre posé à 25 cm, mais il ne reconnaît pas son ami de l'autre côté de la cour. Quel est son défaut de vision ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Koffi voit bien de près et mal de loin. Étape 2 — Repérer la position de l'image : l'image d'un objet lointain se forme avant sa rétine. Étape 3 — Nommer le défaut : c'est la myopie. Étape 4 — Expliquer : son œil est trop convergent. L'hypermétropie est l'erreur tentante : l'hypermétrope voit mal de près, ce qui n'est pas le cas de Koffi. Sa vue n'est pas normale puisqu'il ne reconnaît pas son ami. L'accommodation n'est pas un défaut, c'est le bombement du cristallin.",
+                  "answers": [
+                    {
+                      "content": "L'hypermétropie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La myopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun défaut : sa vue est normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accommodation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un œil myope, l'image d'un objet lointain se forme après la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer où l'image d'un objet lointain se forme : dans un œil myope, elle se forme avant la rétine. Étape 3 — Nommer : c'est la myopie. Étape 4 — Expliquer : l'œil est trop convergent. Répondre « Vrai » confond la myopie avec l'hypermétropie, où l'image se forme après la rétine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un œil hypermétrope n'est pas assez ___ : l'image d'un objet lointain se forme après la rétine.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer : l'image se forme après la rétine. Étape 4 — Expliquer par la convergence de l'œil : le cristallin ne rapproche pas assez l'image de lui, donc l'œil n'est pas assez convergent. Un œil trop convergent formerait l'image avant la rétine : ce serait la myopie.",
+                  "answers": [
+                    {
+                      "content": "convergent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grand-mère éloigne son journal à bout de bras pour le lire, mais elle reconnaît bien les voisins dans la rue. Son petit-fils dit : « Elle tient le journal loin, donc elle est myope. » A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : elle voit mal de près (le journal) et bien de loin (les voisins). Étape 2 — Repérer l'image : un objet proche donne une image après la rétine. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : son œil n'est pas assez convergent. L'erreur du petit-fils est de croire que celui qui éloigne ce qu'il regarde est myope : le myope, lui, voit bien de près. Dire qu'elle voit mal de loin est faux, puisqu'elle reconnaît les voisins. Elle a bien un défaut, puisqu'elle ne lit pas à distance normale.",
+                  "answers": [
+                    {
+                      "content": "Oui : elle tient le journal loin, donc elle est myope",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : elle est hypermétrope, car elle voit mal de loin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : elle voit mal de près, elle est hypermétrope",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non : elle n'a aucun défaut de vision",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations vraies sur un œil myope non corrigé.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer la position de l'image : dans un œil myope, l'image d'un objet lointain se forme avant la rétine. Étape 1 — Repérer ce qui est mal vu : le myope voit bien de près et mal de loin. L'affirmation « il n'est pas assez convergent » décrit l'hypermétrope, car le myope est trop convergent. L'affirmation « il voit mal de près » confond aussi la myopie avec l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "Il voit bien de près.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'est pas assez convergent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il voit mal de près.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme avant la rétine.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation au défaut de vision qu'elle indique.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer ce que la personne voit mal. Étape 3 — Nommer le défaut. Celui qui voit mal de loin est myope (image avant la rétine) ; celui qui voit mal de près est hypermétrope (image après la rétine) ; celui qui voit net partout a l'œil normal, avec l'image sur la rétine. Il ne faut pas inverser les deux défauts.",
+                  "answers": [
+                    {
+                      "content": "Voit net son cahier mais pas le tableau",
+                      "match": "Myopie"
+                    },
+                    {
+                      "content": "Voit net le tableau mais pas son cahier",
+                      "match": "Hypermétropie"
+                    },
+                    {
+                      "content": "Voit net de près comme de loin",
+                      "match": "Œil normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu reconnais un défaut de vision à partir de ce que la personne voit mal.",
             "questions": [
@@ -512,126 +773,251 @@
           },
           "pitfall": "Ne pas inverser les deux lentilles. Contre-exemple : si l'image est déjà avant la rétine (par exemple à 2 mm), une lentille convergente l'avance encore (par exemple à 3 mm). L'image est alors plus floue. Pour éviter l'erreur, demande-toi toujours : faut-il reculer l'image (divergente) ou l'avancer (convergente) ? Vérifie ensuite sur le schéma.",
           "figure": "oeil-myope-corrige",
-          "exercise": {
-            "title": "Choisir la lentille qui corrige un défaut",
-            "statement": "Dans cet exercice, tu choisis la lentille correctrice avec la méthode de la fiche : nommer le défaut, situer l'image, choisir la lentille, puis vérifier.",
-            "exercise_type": "fixation",
-            "figure": "oeil-hypermetrope-corrige",
-            "questions": [
-              {
-                "content": "Une élève myope veut corriger sa vue avec des lunettes. Quelle lentille doivent contenir ses verres ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Nommer : la myopie. Étape 2 — Situer : sans correction, l'image est avant la rétine. Étape 3 — Choisir : il faut reculer l'image vers la rétine, donc rendre l'œil moins convergent : une lentille divergente. Étape 4 — Vérifier : avec le verre divergent, l'image se forme sur la rétine. Une lentille convergente avancerait encore l'image.",
-                "answers": [
-                  {
-                    "content": "Une lentille divergente",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une lentille convergente",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une lentille qui ne dévie pas la lumière",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une lentille convergente, mais très fine",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un homme hypermétrope veut corriger sa vue. Quelle lentille doit contenir ses verres ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Nommer : l'hypermétropie. Étape 2 — Situer : sans correction, l'image est après la rétine. Étape 3 — Choisir : il faut avancer l'image vers la rétine, donc rendre l'œil plus convergent : une lentille convergente. Étape 4 — Vérifier : avec ce verre, l'image se forme sur la rétine. Une lentille divergente la reculerait encore.",
-                "answers": [
-                  {
-                    "content": "Une lentille divergente",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une lentille convergente",
-                    "correct": true
-                  },
-                  {
-                    "content": "Aucune lentille : ce défaut ne se corrige pas",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une lentille divergente, mais très épaisse",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "On peut corriger la myopie en plaçant devant l'œil une lentille convergente.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Nommer : myopie. Étape 2 — Situer : l'image est déjà avant la rétine. Étape 3 — Choisir : une lentille convergente rend l'œil encore plus convergent et avance encore l'image, qui s'éloigne de la rétine. Il faut au contraire une lentille divergente. Étape 4 — Vérifier : seule la divergente ramène l'image sur la rétine.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un verre qui recule l'image vers la rétine est une lentille ___.",
-                "question_type": "select",
-                "explanation": "Étape 3 — Choisir la lentille selon le déplacement voulu. Reculer l'image, c'est rendre l'œil moins convergent : on utilise une lentille divergente. Elle corrige la myopie, où l'image est avant la rétine. Pour avancer l'image, on utiliserait une lentille convergente.",
-                "answers": [
-                  {
-                    "content": "divergente",
-                    "correct": true
-                  },
-                  {
-                    "content": "convergente",
-                    "correct": false
-                  },
-                  {
-                    "content": "sans effet",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque personne au verre correcteur qui convient.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Nommer le défaut, puis Étape 3 — Choisir la lentille. Myopie : l'image est avant la rétine, il faut la reculer, donc une lentille divergente. Hypermétropie : l'image est après la rétine, il faut l'avancer, donc une lentille convergente. Une personne à la vue normale a déjà l'image sur la rétine : elle n'a pas besoin de verre correcteur.",
-                "answers": [
-                  {
-                    "content": "Une personne myope",
-                    "match": "Une lentille divergente"
-                  },
-                  {
-                    "content": "Une personne hypermétrope",
-                    "match": "Une lentille convergente"
-                  },
-                  {
-                    "content": "Une personne à la vue normale",
-                    "match": "Aucun verre correcteur"
-                  }
-                ]
-              },
-              {
-                "content": "Un élève myope essaie les lunettes de sa grand-mère, qui est hypermétrope. Il voit encore plus flou. Explique pourquoi.",
-                "question_type": "written",
-                "points": 2,
-                "criteria": [
-                  "Les verres de la grand-mère sont des lentilles convergentes",
-                  "L'image du myope est déjà avant la rétine",
-                  "La lentille convergente avance encore l'image, qui s'éloigne de la rétine"
-                ],
-                "explanation": "Corrigé modèle : étape 1, l'élève est myope, donc l'image d'un objet lointain se forme avant la rétine (étape 2). Les lunettes de la grand-mère, hypermétrope, ont des verres convergents. Étape 3 : une lentille convergente avance l'image, donc elle s'éloigne encore de la rétine ; il aurait fallu une lentille divergente pour la reculer. Étape 4 : l'image est encore plus floue. Points : 0,5 pour chaque critère nommé, 0,5 pour la conclusion.",
-                "answers": [],
-                "starter": "Le myope a l'image…"
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Choisir la lentille qui corrige un défaut",
+              "statement": "Dans cet exercice, tu choisis la lentille correctrice avec la méthode de la fiche : nommer le défaut, situer l'image, choisir la lentille, puis vérifier.",
+              "exercise_type": "fixation",
+              "figure": "oeil-hypermetrope-corrige",
+              "questions": [
+                {
+                  "content": "Une élève myope veut corriger sa vue avec des lunettes. Quelle lentille doivent contenir ses verres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : la myopie. Étape 2 — Situer : sans correction, l'image est avant la rétine. Étape 3 — Choisir : il faut reculer l'image vers la rétine, donc rendre l'œil moins convergent : une lentille divergente. Étape 4 — Vérifier : avec le verre divergent, l'image se forme sur la rétine. Une lentille convergente avancerait encore l'image.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille qui ne dévie pas la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente, mais très fine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme hypermétrope veut corriger sa vue. Quelle lentille doit contenir ses verres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : l'hypermétropie. Étape 2 — Situer : sans correction, l'image est après la rétine. Étape 3 — Choisir : il faut avancer l'image vers la rétine, donc rendre l'œil plus convergent : une lentille convergente. Étape 4 — Vérifier : avec ce verre, l'image se forme sur la rétine. Une lentille divergente la reculerait encore.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune lentille : ce défaut ne se corrige pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente, mais très épaisse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut corriger la myopie en plaçant devant l'œil une lentille convergente.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : myopie. Étape 2 — Situer : l'image est déjà avant la rétine. Étape 3 — Choisir : une lentille convergente rend l'œil encore plus convergent et avance encore l'image, qui s'éloigne de la rétine. Il faut au contraire une lentille divergente. Étape 4 — Vérifier : seule la divergente ramène l'image sur la rétine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre qui recule l'image vers la rétine est une lentille ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Choisir la lentille selon le déplacement voulu. Reculer l'image, c'est rendre l'œil moins convergent : on utilise une lentille divergente. Elle corrige la myopie, où l'image est avant la rétine. Pour avancer l'image, on utiliserait une lentille convergente.",
+                  "answers": [
+                    {
+                      "content": "divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans effet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque personne au verre correcteur qui convient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Nommer le défaut, puis Étape 3 — Choisir la lentille. Myopie : l'image est avant la rétine, il faut la reculer, donc une lentille divergente. Hypermétropie : l'image est après la rétine, il faut l'avancer, donc une lentille convergente. Une personne à la vue normale a déjà l'image sur la rétine : elle n'a pas besoin de verre correcteur.",
+                  "answers": [
+                    {
+                      "content": "Une personne myope",
+                      "match": "Une lentille divergente"
+                    },
+                    {
+                      "content": "Une personne hypermétrope",
+                      "match": "Une lentille convergente"
+                    },
+                    {
+                      "content": "Une personne à la vue normale",
+                      "match": "Aucun verre correcteur"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève myope essaie les lunettes de sa grand-mère, qui est hypermétrope. Il voit encore plus flou. Explique pourquoi.",
+                  "question_type": "written",
+                  "points": 2,
+                  "criteria": [
+                    "Les verres de la grand-mère sont des lentilles convergentes",
+                    "L'image du myope est déjà avant la rétine",
+                    "La lentille convergente avance encore l'image, qui s'éloigne de la rétine"
+                  ],
+                  "explanation": "Corrigé modèle : étape 1, l'élève est myope, donc l'image d'un objet lointain se forme avant la rétine (étape 2). Les lunettes de la grand-mère, hypermétrope, ont des verres convergents. Étape 3 : une lentille convergente avance l'image, donc elle s'éloigne encore de la rétine ; il aurait fallu une lentille divergente pour la reculer. Étape 4 : l'image est encore plus floue. Points : 0,5 pour chaque critère nommé, 0,5 pour la conclusion.",
+                  "answers": [],
+                  "starter": "Le myope a l'image…"
+                }
+              ]
+            },
+            {
+              "title": "Choisir le verre qui corrige un défaut de vision",
+              "statement": "Dans cet exercice, tu choisis la lentille correctrice avec la méthode de la fiche : nommer, situer l'image, choisir, vérifier.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Demande-toi : faut-il reculer l'image (lentille divergente) ou l'avancer (lentille convergente) ?",
+              "questions": [
+                {
+                  "content": "Fatou ne voit pas le tableau. L'ophtalmologiste constate que l'image d'un objet lointain se forme avant sa rétine. Quelle lentille doivent contenir ses lunettes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le défaut : l'image avant la rétine est la myopie. Étape 2 — Situer l'image : avant la rétine. Étape 3 — Choisir la lentille : il faut reculer l'image, donc rendre l'œil moins convergent, avec une lentille divergente. Étape 4 — Vérifier : avec ce verre, l'image se forme sur la rétine. Une lentille convergente avancerait encore l'image et la rendrait plus floue ; dire que l'œil se corrige seul est faux, puisque l'image est floue ; l'image est trop proche du cristallin, pas trop loin.",
+                  "answers": [
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune lentille : l'œil se corrige seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente, car l'image est trop loin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour corriger l'hypermétropie, on utilise une lentille convergente qui avance l'image vers la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Nommer : l'hypermétropie. Étape 2 — Situer : sans correction, l'image est après la rétine. Étape 3 — Choisir : il faut l'avancer, donc rendre l'œil plus convergent, avec une lentille convergente. Étape 4 — Vérifier : l'image se forme alors sur la rétine. L'affirmation est donc vraie ; répondre « Faux » reviendrait à inverser les deux lentilles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un œil trop convergent est corrigé par une lentille ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : un œil trop convergent est un œil myope. Étape 2 — Situer : son image se forme avant la rétine. Étape 3 — Choisir : il faut la reculer, donc rendre l'œil moins convergent, avec une lentille divergente. Une lentille convergente rendrait l'œil encore plus convergent.",
+                  "answers": [
+                    {
+                      "content": "divergente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations vraies sur la correction de la myopie.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Situer : dans la myopie, l'image est avant la rétine. Étape 3 — Choisir : il faut la reculer, donc rendre l'œil moins convergent, avec une lentille divergente. Étape 4 — Vérifier : l'image se forme alors sur la rétine. « Avancer l'image » et « placer une lentille convergente » sont les gestes de l'hypermétropie : ils rendraient l'image plus floue chez un myope.",
+                  "answers": [
+                    {
+                      "content": "Il faut avancer l'image vers le cristallin.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut reculer l'image pour qu'elle se forme sur la rétine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "On rend l'œil moins convergent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "On place devant l'œil une lentille convergente.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour choisir le verre d'une personne hypermétrope.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche. Étape 1 — Nommer le défaut. Étape 2 — Situer l'image par rapport à la rétine. Étape 3 — Choisir la lentille qui déplace l'image vers la rétine. Étape 4 — Vérifier que l'image est sur la rétine. Choisir la lentille avant d'avoir situé l'image mène à l'erreur d'inverser les deux lentilles.",
+                  "answers": [
+                    {
+                      "content": "Nommer le défaut : l'hypermétropie."
+                    },
+                    {
+                      "content": "Situer l'image : après la rétine, sans correction."
+                    },
+                    {
+                      "content": "Choisir la lentille convergente, qui avance l'image vers la rétine."
+                    },
+                    {
+                      "content": "Vérifier que, avec ce verre, l'image se forme sur la rétine."
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa est hypermétrope. Il essaie par erreur les lunettes divergentes de son frère myope. Que devient l'image d'un objet lointain dans son œil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : Moussa est hypermétrope. Étape 2 — Situer : son image est déjà après la rétine. Étape 3 — Choisir : il faudrait l'avancer, avec une lentille convergente ; le verre divergent fait l'inverse et la recule encore. Étape 4 — Vérifier : l'image est encore plus loin de la rétine, donc plus floue. Croire que l'image devient nette, c'est inverser les deux lentilles ; croire qu'elle passe avant la rétine en restant nette est faux, car elle recule ; et dire que rien ne change est faux, puisque c'est justement le rôle d'un verre de déplacer l'image.",
+                  "answers": [
+                    {
+                      "content": "Elle se forme sur la rétine : sa vue devient nette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle se forme encore plus loin derrière la rétine : sa vue est plus floue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle se forme avant la rétine mais reste nette",
+                      "correct": false
+                    },
+                    {
+                      "content": "Rien ne change, car un verre ne déplace pas l'image",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu choisis la lentille qui corrige un défaut de vision.",
             "questions": [
@@ -729,112 +1115,229 @@
           },
           "pitfall": "Ne pas oublier de convertir la distance focale en mètres. Contre-exemple : pour $f = 25$ cm, écrire $C = \\dfrac{1}{25} = 0{,}04$ δ est faux. Avec $f = 0{,}25$ m, on trouve $C = 4$ δ, soit cent fois plus. Pense aussi au signe : une lentille divergente a une vergence négative. Pour éviter les erreurs, écris d'abord $f$ en mètres, puis le signe.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer la vergence d'un verre correcteur",
-            "statement": "Dans cet exercice, tu calcules des vergences et des distances focales avec la méthode de la fiche : signe, conversion en mètres, formule, résultat avec unité.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Un verre de lunettes est une lentille convergente de distance focale $f = 0{,}5$ m. Quelle est sa vergence $C$, en dioptries ?",
-                "question_type": "numeric",
-                "unit": "δ",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $f = 0{,}5$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{f} = \\dfrac{1}{0{,}5} = 2$. Étape 4 — Écrire : $C = +2$ δ.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une lentille convergente a pour distance focale $f = 20$ cm. Quelle est sa vergence $C$, en dioptries ?",
-                "question_type": "numeric",
-                "unit": "δ",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : lentille convergente, donc $C > 0$. Étape 2 — Convertir : $20$ cm $= 0{,}2$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}2} = 5$. Étape 4 — Écrire : $C = +5$ δ. Sans conversion, on trouverait $\\dfrac{1}{20} = 0{,}05$ δ, cent fois trop petit.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une lentille divergente a pour distance focale $25$ cm. Quelle est sa vergence $C$, en dioptries (avec son signe) ?",
-                "question_type": "numeric",
-                "unit": "δ",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $25$ cm $= 0{,}25$ m. Étape 3 — Appliquer : $\\dfrac{1}{0{,}25} = 4$. Étape 4 — Écrire avec le signe : $C = -4$ δ. Écrire $+4$ δ serait la vergence d'une lentille convergente.",
-                "answers": [
-                  {
-                    "content": "-4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "L'ordonnance d'un opticien indique un verre de vergence $-2{,}5$ δ. De quelle nature est la lentille ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier la nature de la lentille et le signe de la vergence : une vergence négative correspond à une lentille divergente. Les étapes 2 à 4 servent à calculer la distance focale, qui n'est pas demandée ici. Une lentille convergente aurait une vergence positive, comme $+2{,}5$ δ.",
-                "answers": [
-                  {
-                    "content": "Divergente",
-                    "correct": true
-                  },
-                  {
-                    "content": "Convergente",
-                    "correct": false
-                  },
-                  {
-                    "content": "On ne peut pas savoir",
-                    "correct": false
-                  },
-                  {
-                    "content": "Ni convergente ni divergente",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un verre convergent a pour vergence $C = 4$ δ. Quelle est sa distance focale, en centimètres ?",
-                "question_type": "numeric",
-                "unit": "cm",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $C = 4$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres, on convertira à la fin. Étape 3 — Appliquer : $f = \\dfrac{1}{C} = \\dfrac{1}{4} = 0{,}25$ m. Étape 4 — Écrire : $0{,}25$ m $= 25$ cm.",
-                "answers": [
-                  {
-                    "content": "25",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une lentille convergente a pour distance focale $40$ cm. Quelle est sa vergence ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : convergente, donc $C > 0$. Étape 2 — Convertir : $40$ cm $= 0{,}4$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}4} = 2{,}5$. Étape 4 — Écrire : $C = +2{,}5$ δ. La proposition $0{,}025$ δ vient de $\\dfrac{1}{40}$ sans conversion ; $40$ δ prend la distance focale pour la vergence ; $-2{,}5$ δ se trompe de signe.",
-                "answers": [
-                  {
-                    "content": "$2{,}5$ δ",
-                    "correct": true
-                  },
-                  {
-                    "content": "$0{,}025$ δ",
-                    "correct": false
-                  },
-                  {
-                    "content": "$40$ δ",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-2{,}5$ δ",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer la vergence d'un verre correcteur",
+              "statement": "Dans cet exercice, tu calcules des vergences et des distances focales avec la méthode de la fiche : signe, conversion en mètres, formule, résultat avec unité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un verre de lunettes est une lentille convergente de distance focale $f = 0{,}5$ m. Quelle est sa vergence $C$, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $f = 0{,}5$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{f} = \\dfrac{1}{0{,}5} = 2$. Étape 4 — Écrire : $C = +2$ δ.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille convergente a pour distance focale $f = 20$ cm. Quelle est sa vergence $C$, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C > 0$. Étape 2 — Convertir : $20$ cm $= 0{,}2$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}2} = 5$. Étape 4 — Écrire : $C = +5$ δ. Sans conversion, on trouverait $\\dfrac{1}{20} = 0{,}05$ δ, cent fois trop petit.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille divergente a pour distance focale $25$ cm. Quelle est sa vergence $C$, en dioptries (avec son signe) ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $25$ cm $= 0{,}25$ m. Étape 3 — Appliquer : $\\dfrac{1}{0{,}25} = 4$. Étape 4 — Écrire avec le signe : $C = -4$ δ. Écrire $+4$ δ serait la vergence d'une lentille convergente.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ordonnance d'un opticien indique un verre de vergence $-2{,}5$ δ. De quelle nature est la lentille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la nature de la lentille et le signe de la vergence : une vergence négative correspond à une lentille divergente. Les étapes 2 à 4 servent à calculer la distance focale, qui n'est pas demandée ici. Une lentille convergente aurait une vergence positive, comme $+2{,}5$ δ.",
+                  "answers": [
+                    {
+                      "content": "Divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ni convergente ni divergente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre convergent a pour vergence $C = 4$ δ. Quelle est sa distance focale, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = 4$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres, on convertira à la fin. Étape 3 — Appliquer : $f = \\dfrac{1}{C} = \\dfrac{1}{4} = 0{,}25$ m. Étape 4 — Écrire : $0{,}25$ m $= 25$ cm.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille convergente a pour distance focale $40$ cm. Quelle est sa vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : convergente, donc $C > 0$. Étape 2 — Convertir : $40$ cm $= 0{,}4$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}4} = 2{,}5$. Étape 4 — Écrire : $C = +2{,}5$ δ. La proposition $0{,}025$ δ vient de $\\dfrac{1}{40}$ sans conversion ; $40$ δ prend la distance focale pour la vergence ; $-2{,}5$ δ se trompe de signe.",
+                  "answers": [
+                    {
+                      "content": "$2{,}5$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}025$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2{,}5$ δ",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer la vergence et la distance focale d'autres verres",
+              "statement": "Dans cet exercice, tu calcules la vergence de verres correcteurs avec la méthode de la fiche : nature, conversion en mètres, formule, résultat avec signe et unité.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord la distance focale en mètres, puis le signe donné par la nature de la lentille.",
+              "questions": [
+                {
+                  "content": "Un verre de lunettes est une lentille convergente de distance focale $f = 0{,}125$ m. Quelle est sa vergence $C$, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $f = 0{,}125$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{f} = \\dfrac{1}{0{,}125} = 8$. Étape 4 — Écrire : $C = +8$ δ. Une erreur fréquente est de lire $0{,}125$ comme $\\dfrac{1}{8}$ de dioptrie, en inversant la formule.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille divergente a pour distance focale $f = 10$ cm. Quelle est sa vergence $C$, en dioptries (avec son signe) ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $10$ cm $= 0{,}1$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}1} = 10$ en valeur absolue. Étape 4 — Écrire : $C = -10$ δ. Deux erreurs tentent ici : oublier de convertir, qui donne $\\dfrac{1}{10} = 0{,}1$ δ au lieu de $10$ δ, et oublier le signe négatif d'une lentille divergente.",
+                  "answers": [
+                    {
+                      "content": "-10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille convergente a pour distance focale $80$ cm. Quelle est sa vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $80$ cm $= 0{,}8$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}8} = 1{,}25$. Étape 4 — Écrire : $C = +1{,}25$ δ. La valeur $0{,}0125$ δ vient de $\\dfrac{1}{80}$, sans conversion en mètres. La valeur $80$ δ recopie la distance focale au lieu de calculer son inverse. La valeur $-1{,}25$ δ oublie qu'une lentille convergente a une vergence positive.",
+                  "answers": [
+                    {
+                      "content": "$0{,}0125$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$80$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}25$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1{,}25$ δ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille de vergence $+5$ δ a une distance focale de $0{,}2$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $C = +5$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{C} = \\dfrac{1}{5} = 0{,}2$ m. Étape 4 — Écrire : $0{,}2$ m $= 20$ cm, et non $0{,}2$ cm. L'affirmation oublie que le résultat est en mètres : elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La vergence d'un verre correcteur s'exprime en ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Écrire le résultat avec son signe et son unité : la vergence s'exprime en dioptries, de symbole δ. Il ne faut pas l'écrire en mètres, unité de la distance focale, ni en centimètres.",
+                  "answers": [
+                    {
+                      "content": "dioptries",
+                      "correct": true
+                    },
+                    {
+                      "content": "dioptrie",
+                      "correct": true
+                    },
+                    {
+                      "content": "δ",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux verres dont la vergence est négative.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier la nature de la lentille et en déduire le signe de la vergence. Une lentille divergente a une vergence négative : c'est le cas du verre divergent de $20$ cm, et du verre d'une personne myope, qui est divergent. Une lentille convergente a une vergence positive : le verre convergent de $20$ cm et celui de la personne hypermétrope ne conviennent donc pas. La distance focale ne change pas le signe.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente de distance focale $20$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille convergente de distance focale $20$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre d'une personne myope, de distance focale $40$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre d'une personne hypermétrope, de distance focale $40$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu calcules des vergences avec $C = \\dfrac{1}{f}$, la distance focale $f$ étant en mètres.",
             "questions": [
@@ -1365,6 +1868,1911 @@
                 {
                   "content": "0,4 cm",
                   "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur l'œil et ses corrections",
+          "notions": "le modèle de l'œil réduit et ses éléments, l'œil normal, la myopie et l'hypermétropie, le choix du verre correcteur, la vergence et la distance focale d'un verre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie l'œil réduit d'un élève à la vue normale qui regarde un arbre très éloigné. Le schéma montre où se forme l'image.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-normal",
+              "hint": "Pour chaque partie de l'œil, demande-toi si elle forme l'image, la reçoit ou règle la lumière.",
+              "questions": [
+                {
+                  "content": "Dans le modèle de l'œil réduit, quelle partie de l'œil est représentée par une lentille convergente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie. Le cristallin fait converger la lumière et forme l'image : c'est la lentille convergente. La rétine est l'écran qui reçoit l'image. L'iris est le diaphragme et la pupille son ouverture : ils règlent la quantité de lumière sans former l'image.",
+                  "answers": [
+                    {
+                      "content": "La rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cristallin",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'iris",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pupille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un œil normal, l'image d'un objet lointain se forme exactement sur la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le cristallin est une lentille convergente et la rétine un écran. Étape 2 — Repérer : le cristallin fait converger les rayons parallèles d'un objet lointain. Étape 3 — Comparer : dans un œil normal, le point de convergence est sur la rétine. Étape 4 — Conclure : l'image est nette. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'iris est percé d'une ouverture qui laisse passer la lumière : c'est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie : l'iris, percé de la pupille, joue le rôle d'un diaphragme. La pupille est donc l'ouverture de l'iris. Elle ne forme pas l'image : le cristallin ne doit pas être confondu avec elle.",
+                  "answers": [
+                    {
+                      "content": "pupille",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève à la vue normale passe du tableau à son cahier posé sur la table. Que fait son cristallin pour voir net de près ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : pour un objet proche, il se bombe et devient plus convergent. Étape 3 — Comparer : l'image reste sur la rétine. Étape 4 — Conclure : c'est l'accommodation. S'aplatir rendrait le cristallin moins convergent et l'image sortirait de la rétine. Une lentille divergente ne forme pas d'image sur un écran. La pupille ne déplace pas l'image : elle règle seulement la lumière.",
+                  "answers": [
+                    {
+                      "content": "Il se bombe et devient plus convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il s'aplatit et devient moins convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il devient une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne change pas : c'est la pupille qui déplace l'image",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux phrases vraies sur le modèle de l'œil réduit.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie : la rétine est l'écran et l'iris le diaphragme. La phrase « le cristallin joue le rôle d'un diaphragme » est fausse : il est la lentille convergente. La phrase « l'iris forme l'image » est fausse : l'iris règle seulement la lumière, c'est le cristallin qui place l'image.",
+                  "answers": [
+                    {
+                      "content": "La rétine joue le rôle d'un écran.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cristallin joue le rôle d'un diaphragme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'iris joue le rôle d'un diaphragme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'iris forme l'image sur la rétine.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En plein soleil, la pupille mesure environ 2 mm ; dans la pénombre, environ 7 mm. Qu'est-ce que ce changement de diamètre modifie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la pupille est l'ouverture de l'iris, le diaphragme. Étape 2 — Repérer : son diamètre change la quantité de lumière qui entre. Étape 3 — Comparer : l'image se forme toujours au même endroit. Étape 4 — Conclure : seule la quantité de lumière change. Dire que la position de l'image ou la convergence changent attribue au diaphragme le travail du cristallin ; un défaut de vision ne dépend pas de la pupille.",
+                  "answers": [
+                    {
+                      "content": "La position de l'image dans l'œil",
+                      "correct": false
+                    },
+                    {
+                      "content": "La quantité de lumière qui entre dans l'œil",
+                      "correct": true
+                    },
+                    {
+                      "content": "La convergence du cristallin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le défaut de vision de la personne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Yao, élève de 3ème à Bouaké, lit très bien son cahier mais ne lit pas le tableau. Le schéma montre son œil réduit sans correction.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-myope",
+              "hint": "Commence par ce que la personne voit mal, puis place l'image avant ou après la rétine.",
+              "questions": [
+                {
+                  "content": "Yao lit très bien son cahier à 30 cm mais ne lit pas le tableau placé à 8 m. Où se forme l'image du tableau dans son œil, sans correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Yao voit bien de près et mal de loin. Étape 2 — Repérer la position de l'image : l'image d'un objet lointain se forme avant la rétine. Étape 3 — Nommer : c'est la myopie. Étape 4 — Expliquer : son œil est trop convergent. « Sur la rétine » décrit un œil normal ; « après la rétine » décrit l'hypermétropie ; l'iris n'est pas un écran.",
+                  "answers": [
+                    {
+                      "content": "Sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avant la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur l'iris",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Yao voit bien son cahier et mal le tableau. Quel est son défaut de vision ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il voit mal de loin. Étape 2 — Repérer l'image : elle est avant la rétine. Étape 3 — Nommer le défaut : la myopie. Étape 4 — Expliquer : son œil est trop convergent. L'hypermétropie est l'erreur tentante : elle fait voir mal de près. L'accommodation est un fonctionnement normal du cristallin, pas un défaut, et Yao a un défaut puisque le tableau est flou.",
+                  "answers": [
+                    {
+                      "content": "La myopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hypermétropie",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accommodation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun défaut",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'œil de Yao est trop ___ : le cristallin place l'image avant la rétine.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Expliquer par la convergence de l'œil : l'image se forme avant la rétine, donc l'œil est trop convergent. Un œil pas assez convergent formerait l'image après la rétine, ce qui est l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "convergent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un œil myope voit bien de près et mal de loin.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer ce que la personne voit mal : le myope voit mal de loin. Étape 2 — Repérer l'image : elle est avant la rétine pour un objet lointain. Étape 3 — Nommer : myopie. Étape 4 — Expliquer : l'œil est trop convergent. Il voit bien de près : l'affirmation est vraie. Répondre « Faux » reviendrait à confondre la myopie avec l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha tient son journal à bout de bras pour le lire et reconnaît bien ses amies de loin. Quel est son défaut de vision ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Aïcha voit mal de près et bien de loin. Étape 2 — Repérer l'image : elle se forme après la rétine. Étape 3 — Nommer : c'est l'hypermétropie. Étape 4 — Expliquer : son œil n'est pas assez convergent. La myopie, même avec l'argument « elle tient le journal loin », est l'erreur classique : le myope voit bien de près. Aïcha a un défaut puisqu'elle ne lit pas à distance normale.",
+                  "answers": [
+                    {
+                      "content": "La myopie",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hypermétropie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucun défaut",
+                      "correct": false
+                    },
+                    {
+                      "content": "La myopie, car elle tient le journal loin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque défaut de vision à ce que la personne voit mal.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer ce que la personne voit mal. La personne myope voit mal de loin, l'hypermétrope voit mal de près, et celui qui a l'œil normal voit net. Il ne faut pas inverser la myopie et l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "Myopie",
+                      "match": "Les objets lointains"
+                    },
+                    {
+                      "content": "Hypermétropie",
+                      "match": "Les objets proches"
+                    },
+                    {
+                      "content": "Œil normal",
+                      "match": "Aucun objet : la vue est nette"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Yao est myope. L'opticien lui propose des lunettes. Le schéma montre son œil réduit avec le verre qui convient.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-myope-corrige",
+              "hint": "Demande-toi : faut-il reculer l'image (lentille divergente) ou l'avancer (lentille convergente) ?",
+              "questions": [
+                {
+                  "content": "Yao est myope. Quelle lentille doivent contenir ses lunettes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer le défaut : la myopie. Étape 2 — Situer l'image : avant la rétine. Étape 3 — Choisir : il faut la reculer, donc rendre l'œil moins convergent, avec une lentille divergente. Étape 4 — Vérifier : l'image se forme alors sur la rétine. La lentille convergente est celle de l'hypermétrope. Un verre qui ne dévie pas la lumière ne change rien ; et la myopie se corrige, comme le montre le schéma.",
+                  "answers": [
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille qui ne dévie pas la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune lentille : la myopie ne se corrige pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha est hypermétrope. Que doit faire son verre à l'image d'un objet lointain ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : l'hypermétropie. Étape 2 — Situer : l'image est après la rétine. Étape 3 — Choisir : il faut l'avancer, donc rendre l'œil plus convergent. Étape 4 — Vérifier : elle se forme sur la rétine. La reculer est ce que fait le verre du myope. La laisser à sa place garde la vue floue. La faire passer encore plus loin est l'effet d'un mauvais verre.",
+                  "answers": [
+                    {
+                      "content": "La reculer vers la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'avancer vers la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "La laisser à sa place",
+                      "correct": false
+                    },
+                    {
+                      "content": "La faire passer encore plus loin derrière la rétine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec le bon verre, l'image d'un objet lointain se forme sur la rétine d'un œil myope.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : le verre divergent recule l'image. Étape 4 — Vérifier que, avec cette lentille, l'image se forme sur la rétine. C'est le but de la correction : l'affirmation est vraie. Répondre « Faux » reviendrait à croire que le verre ne corrige pas l'image.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille ___ rend l'œil plus convergent : elle corrige l'hypermétropie.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Nommer : l'hypermétropie. Étape 2 — Situer : image après la rétine. Étape 3 — Choisir : il faut l'avancer, donc rendre l'œil plus convergent, avec une lentille convergente. Une lentille divergente rendrait l'œil moins convergent, c'est le verre du myope.",
+                  "answers": [
+                    {
+                      "content": "convergente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre divergent rend l'œil ___ convergent.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Choisir : la lentille divergente recule l'image, donc rend l'œil moins convergent. Elle corrige ainsi la myopie. « Plus convergent » est l'effet de la lentille convergente. « Aussi convergent » signifierait que le verre ne change rien.",
+                  "answers": [
+                    {
+                      "content": "plus",
+                      "correct": false
+                    },
+                    {
+                      "content": "moins",
+                      "correct": true
+                    },
+                    {
+                      "content": "aussi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque position de l'image, sans correction, à la lentille qui convient.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Situer l'image par rapport à la rétine, puis Étape 3 — Choisir la lentille. Avant la rétine : il faut reculer l'image, lentille divergente. Après la rétine : il faut l'avancer, lentille convergente. Sur la rétine : l'œil est normal, aucun verre n'est utile.",
+                  "answers": [
+                    {
+                      "content": "Image avant la rétine",
+                      "match": "Lentille divergente"
+                    },
+                    {
+                      "content": "Image après la rétine",
+                      "match": "Lentille convergente"
+                    },
+                    {
+                      "content": "Image sur la rétine",
+                      "match": "Pas de verre correcteur"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "L'ophtalmologiste de Yao et de sa famille écrit des ordonnances. Tu lis la vergence des verres et tu passes de la vergence à la distance focale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis la distance focale en mètres avant d'appliquer la formule, puis ajoute le signe.",
+              "questions": [
+                {
+                  "content": "Un verre convergent a pour distance focale $f = 0{,}25$ m. Quelle est sa vergence, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $f = 0{,}25$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{f} = \\dfrac{1}{0{,}25} = 4$. Étape 4 — Écrire : $C = +4$ δ.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre divergent a pour distance focale $40$ cm. Quelle est sa vergence, en dioptries (avec son signe) ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $40$ cm $= 0{,}4$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}4} = 2{,}5$ en valeur absolue. Étape 4 — Écrire : $C = -2{,}5$ δ. Sans conversion on trouverait $\\dfrac{1}{40} = 0{,}025$ δ, et sans le signe on oublierait que le verre est divergent.",
+                  "answers": [
+                    {
+                      "content": "-2,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre a pour vergence $C = +5$ δ. Quelle est sa distance focale, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = +5$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{C} = \\dfrac{1}{5} = 0{,}2$ m. Étape 4 — Écrire : $0{,}2$ m $= 20$ cm. L'erreur tentante est de laisser $0{,}2$ en oubliant de convertir en centimètres.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ordonnance de la grand-mère de Yao indique $-4$ δ. Quelle affirmation décrit son verre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $C = -4$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{4} = 0{,}25$ m en valeur absolue. Étape 4 — Écrire : $25$ cm. Les deux propositions convergentes oublient que le signe moins indique une lentille divergente. Les deux propositions de $4$ cm lisent $4$ comme une distance focale en centimètres au lieu de calculer l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente de distance focale $25$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille convergente de distance focale $25$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente de distance focale $4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente de distance focale $4$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus la distance focale d'un verre est petite, plus sa vergence est grande en valeur absolue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Appliquer la formule $C = \\dfrac{1}{f}$ : quand $f$ diminue, son inverse augmente. Par exemple, $f = 0{,}1$ m donne $10$ δ, alors que $f = 0{,}5$ m donne $2$ δ. L'affirmation est vraie ; répondre « Faux » suppose, à tort, que $C$ augmente avec $f$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre divergent a une distance focale de $20$ cm. Quelle est sa vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $20$ cm $= 0{,}2$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}2} = 5$ en valeur absolue. Étape 4 — Écrire : $C = -5$ δ. La valeur $5$ δ oublie le signe négatif d'une lentille divergente. La valeur $-0{,}05$ δ vient de $\\dfrac{1}{20}$, sans conversion en mètres. La valeur $-20$ δ recopie la distance focale au lieu de calculer son inverse.",
+                  "answers": [
+                    {
+                      "content": "$5$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}05$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-20$ δ",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vue au quotidien à Abidjan et à Bouaké",
+          "notions": "reconnaître la myopie et l'hypermétropie à partir de situations de la vie courante, choisir le verre correcteur, lire une ordonnance d'opticien, calculer une vergence ou une distance focale, rôle de la pupille.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À l'école de Bouaké, l'infirmière scolaire fait passer un test de vue aux élèves de 3ème. Elle compare ce que chaque élève lit sur son cahier, à 30 cm, et au tableau, à 8 m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque élève, relève ce qu'il voit mal : le tableau (loin) ou le cahier (près).",
+              "questions": [
+                {
+                  "content": "Ibrahim lit son cahier à 30 cm mais ne lit pas le tableau à 8 m. Où se forme l'image du tableau dans son œil, sans correction ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Ibrahim voit mal de loin et bien de près. Étape 2 — Repérer la position de l'image : l'image d'un objet lointain se forme avant la rétine. Étape 3 — Nommer : c'est la myopie. Étape 4 — Expliquer : son œil est trop convergent. « Après la rétine » est l'image d'un hypermétrope ; « sur la rétine » est celle d'un œil normal ; le cristallin est la lentille, pas l'écran.",
+                  "answers": [
+                    {
+                      "content": "Avant la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur le cristallin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fanta lit le tableau à 8 m sans peine, mais elle tient son cahier à bout de bras pour le lire. Quel verre l'infirmière lui conseillera-t-elle de faire prescrire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : Fanta voit mal de près, elle est hypermétrope. Étape 2 — Situer : son image se forme après la rétine. Étape 3 — Choisir : il faut l'avancer, donc rendre l'œil plus convergent, avec une lentille convergente. Étape 4 — Vérifier : l'image est alors sur la rétine. La lentille divergente, même pour « elle voit mal », est celle du myope. Sa vue n'est pas normale, puisqu'elle doit éloigner son cahier.",
+                  "answers": [
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun verre : sa vue est normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente, car elle voit mal",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ibrahim est myope : il est gêné pour lire son cahier à 30 cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le myope voit bien de près et mal de loin. Étape 2 — Repérer la position de l'image : avant la rétine pour un objet lointain. Étape 3 — Nommer : myopie. Le cahier à 30 cm est un objet proche : Ibrahim le lit sans gêne. Répondre « Vrai » confond la myopie avec l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le défaut de vision d'Ibrahim, qui ne lit pas le tableau mais lit son cahier, s'appelle la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : il voit mal de loin. Étape 2 — Repérer l'image : elle est avant la rétine. Étape 3 — Nommer le défaut : la myopie. L'hypermétropie est l'autre défaut : elle fait voir mal de près.",
+                  "answers": [
+                    {
+                      "content": "myopie",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'infirmière examine quatre élèves. Choisis les deux élèves qui voient mal de près.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer ce que chaque élève voit mal. Kader et Sali voient mal de près et bien de loin : ils sont hypermétropes. Ama voit bien son cahier et mal le tableau : elle est myope, donc elle voit bien de près. Mariam voit net de près comme de loin : son œil est normal.",
+                  "answers": [
+                    {
+                      "content": "Ama, qui lit son cahier mais pas le tableau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Kader, qui tient son livre à bout de bras et reconnaît bien les gens de loin",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sali, qui reconnaît un ami à 50 m mais ne lit pas le texte de son livre à 30 cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Mariam, qui lit sans effort de près comme de loin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'infirmière note : « Awa lit le tableau mais pas son cahier ». Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Awa voit mal de près. Étape 2 — Repérer l'image : elle se forme après la rétine. Étape 3 — Nommer : hypermétropie. Étape 4 — Expliquer : son œil n'est pas assez convergent. Dire myope est l'erreur de confusion des deux défauts ; dire hypermétrope mais trop convergent mélange le nom du défaut et l'explication de l'autre ; dire vue normale oublie que son cahier est flou.",
+                  "answers": [
+                    {
+                      "content": "Awa est myope : son œil est trop convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa est hypermétrope : son œil n'est pas assez convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Awa est hypermétrope : son œil est trop convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa a la vue normale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un opticien d'Abidjan reçoit plusieurs clients avec leurs ordonnances. Il doit retrouver la nature de chaque verre, sa vergence et sa distance focale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis toujours la distance focale en mètres avant d'appliquer la formule.",
+              "questions": [
+                {
+                  "content": "L'opticien monte un verre convergent de distance focale $f = 50$ cm dans la monture de Mme Koné. Quelle est sa vergence, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $50$ cm $= 0{,}5$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}5} = 2$. Étape 4 — Écrire : $C = +2$ δ. Sans conversion, on obtiendrait $\\dfrac{1}{50} = 0{,}02$ δ, cent fois trop petit.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un client myope a une ordonnance de $-2{,}5$ δ. Quelle est la distance focale de son verre, en centimètres (valeur positive) ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = -2{,}5$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{2{,}5} = 0{,}4$ m en valeur absolue. Étape 4 — Écrire : $0{,}4$ m $= 40$ cm. Laisser $0{,}4$ oublie la conversion en centimètres.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'opticien a trois verres convergents, de distance focale $10$ cm, $20$ cm et $40$ cm. Lequel a la plus grande vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Convertir : $0{,}1$ m, $0{,}2$ m et $0{,}4$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{f}$ donne $10$ δ, $5$ δ et $2{,}5$ δ. Étape 4 — Écrire : le verre de $10$ cm a la plus grande vergence. Choisir $40$ cm ou $20$ cm, c'est croire que la plus grande distance focale donne la plus grande vergence, alors que plus la distance focale est petite, plus la vergence est grande. Les trois valeurs sont différentes.",
+                  "answers": [
+                    {
+                      "content": "Celui de $40$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de $20$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de $10$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils ont tous la même vergence",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un client dit : « Je ne vois pas bien de près, et mon ordonnance indique $+3$ δ. » Quelle affirmation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $C = +3$ δ est positive, la lentille est convergente. Il voit mal de près : il est hypermétrope, et la lentille convergente avance l'image sur la rétine. Les trois autres propositions associent un mauvais défaut ou une mauvaise lentille : le myope voit mal de loin et porte un verre divergent de vergence négative.",
+                  "answers": [
+                    {
+                      "content": "Il est myope et son verre est divergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est hypermétrope et son verre est divergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est myope et son verre est convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est hypermétrope et son verre est convergent",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre de vergence $-4$ δ a une distance focale de $4$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $C = -4$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{4} = 0{,}25$ m en valeur absolue. Étape 4 — Écrire : $25$ cm, et non $4$ cm. L'affirmation recopie la vergence comme distance focale en centimètres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'opticien a un verre divergent de distance focale $f = 2$ m. Quelle est sa vergence, en dioptries (avec son signe) ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $f = 2$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{2} = 0{,}5$ en valeur absolue. Étape 4 — Écrire : $C = -0{,}5$ δ. L'erreur tentante est d'écrire $+0{,}5$ δ en oubliant le signe d'une lentille divergente.",
+                  "answers": [
+                    {
+                      "content": "-0,5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Cocody, M. Koffi, père de famille, est hypermétrope. Le schéma montre son œil réduit avec son verre correcteur. Son ordonnance indique $+2$ δ.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Appuie-toi sur la position de l'image avant et après le verre.",
+              "questions": [
+                {
+                  "content": "M. Koffi est hypermétrope. Sans lunettes, où se forme l'image d'un objet lointain dans son œil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il voit mal de près. Étape 2 — Repérer l'image : dans un œil hypermétrope, elle se forme après la rétine. Étape 3 — Nommer : hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. « Avant la rétine » est l'image du myope ; « sur la rétine » celle d'un œil normal.",
+                  "answers": [
+                    {
+                      "content": "Avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur l'iris",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'œil de M. Koffi est :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Expliquer par la convergence de l'œil : l'image se forme après la rétine, donc l'œil n'est pas assez convergent. « Trop convergent » est l'explication de la myopie. Un œil qui serait aussi convergent qu'un œil normal formerait l'image sur la rétine. Sans cristallin, l'œil ne formerait aucune image.",
+                  "answers": [
+                    {
+                      "content": "trop convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "pas assez convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "toujours aussi convergent qu'un œil normal",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans cristallin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle lentille doit contenir le verre de M. Koffi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : hypermétropie. Étape 2 — Situer : image après la rétine. Étape 3 — Choisir : il faut l'avancer, donc une lentille convergente. Étape 4 — Vérifier : avec ce verre, l'image se forme sur la rétine. Une lentille divergente, même épaisse, recule l'image et aggrave le défaut.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille qui ne dévie pas la lumière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente très épaisse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ordonnance de M. Koffi indique $+2$ δ. Quelle est la distance focale de son verre, en centimètres ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = +2$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{2} = 0{,}5$ m. Étape 4 — Écrire : $0{,}5$ m $= 50$ cm. Laisser $0{,}5$ oublie la conversion en centimètres.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec son verre convergent, M. Koffi voit net : l'image d'un objet lointain se forme sur sa rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : le verre convergent avance l'image. Étape 4 — Vérifier : avec cette lentille, l'image se forme sur la rétine, donc la vue est nette. L'affirmation est vraie. Répondre « Faux » reviendrait à croire que le verre ne corrige pas le défaut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par erreur, M. Koffi essaie les lunettes de $-2$ δ de son fils myope. Que se passe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $C = -2$ δ est négative, le verre est divergent. Étape 3 — Choisir : un hypermétrope a besoin d'avancer l'image, pas de la reculer. Étape 4 — Vérifier : le verre divergent éloigne encore l'image de la rétine, la vue est plus floue. Dire que le verre est convergent ou que l'image se forme sur la rétine ignore le signe négatif de la vergence.",
+                  "answers": [
+                    {
+                      "content": "Le verre est divergent : il recule encore l'image, qui est plus floue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le verre est convergent : l'image se forme sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre est divergent : l'image se forme sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre est convergent : l'image se forme plus loin que la rétine",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une journée dans une école d'Abidjan : dans la cour ensoleillée, dans la salle de classe, devant le tableau puis devant le cahier, et chez l'opticien du quartier.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque question, demande-toi quelle partie de l'œil agit : l'iris, le cristallin ou le verre correcteur.",
+              "questions": [
+                {
+                  "content": "Dans la cour, en plein soleil, la pupille d'une élève à la vue normale mesure environ $2$ mm. Que peux-tu dire de sa pupille dans la salle de classe sombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'iris, percé de la pupille, règle la quantité de lumière. Étape 2 — Repérer : en plein soleil la pupille mesure environ $2$ mm, dans la pénombre environ $7$ mm. Étape 3 — Comparer : la pupille est plus grande dans la pénombre. Elle ne devient pas plus petite : il y a moins de lumière à régler. Elle change de taille, et elle ne déplace pas l'image, qui reste sur la rétine.",
+                  "answers": [
+                    {
+                      "content": "Elle est plus grande, environ $7$ mm dans la pénombre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est plus petite encore",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne change pas de taille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle déplace l'image devant la rétine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'élève entre dans la salle sombre, l'image d'un objet lointain ne change pas de place dans un œil normal.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'iris règle la lumière, le cristallin place l'image. Étape 2 — Repérer : la pupille s'agrandit dans la pénombre. Étape 3 — Comparer : l'image se forme toujours au même endroit. Étape 4 — Conclure : seule la quantité de lumière change. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève à la vue normale regarde le tableau, puis son cahier. Que fait son cristallin pour passer du tableau au cahier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : pour un objet proche, il se bombe et devient plus convergent. Étape 3 — Comparer : l'image reste sur la rétine. Étape 4 — Conclure : c'est l'accommodation. S'aplatir ou devenir divergent éloignerait l'image de la rétine. L'iris règle la lumière, il ne place pas l'image.",
+                  "answers": [
+                    {
+                      "content": "Il se bombe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il s'aplatit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se transforme en lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne change pas, c'est l'iris qui fait la mise au point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève myope porte des lunettes de vergence $-1{,}25$ δ. Quelle est la distance focale de ses verres, en centimètres (valeur positive) ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = -1{,}25$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{1{,}25} = 0{,}8$ m en valeur absolue. Étape 4 — Écrire : $0{,}8$ m $= 80$ cm. Laisser $0{,}8$ oublie la conversion en centimètres.",
+                  "answers": [
+                    {
+                      "content": "80",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un client de l'opticien veut une loupe convergente de distance focale $10$ cm. Quelle est sa vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $10$ cm $= 0{,}1$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}1} = 10$. Étape 4 — Écrire : $C = +10$ δ. La valeur $0{,}1$ δ vient de $\\dfrac{1}{10}$ sans conversion. La valeur $-10$ δ oublie qu'une lentille convergente a une vergence positive. La valeur $100$ δ multiplie par $10$ au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "$0{,}1$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-10$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100$ δ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève myope porte ses lunettes. Choisis les deux affirmations vraies.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Nommer : la myopie. Étape 3 — Choisir : une lentille divergente, de vergence négative, recule l'image. Étape 4 — Vérifier : avec ce verre, l'image se forme sur la rétine. « Lentille convergente » est le verre de l'hypermétrope, et « avant la rétine » est la situation sans lunettes.",
+                  "answers": [
+                    {
+                      "content": "Son verre est une lentille convergente.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son verre est une lentille divergente, de vergence négative.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme sur la rétine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme avant la rétine.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Justifier, enchaîner, choisir le bon argument",
+          "notions": "justifier un défaut de vision par la position de l'image et la convergence de l'œil, justifier le choix d'un verre, repérer une erreur de raisonnement, lire le signe d'une vergence, enchaîner de l'ordonnance à la position de l'image.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mariam ne lit pas le tableau mais lit très bien son cahier. Un élève affirme qu'elle est myope et doit le justifier. Le schéma montre un œil myope sans correction.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-myope",
+              "hint": "Une bonne justification relie ce que la personne voit mal, la position de l'image et la convergence de l'œil.",
+              "questions": [
+                {
+                  "content": "Mariam ne lit pas le tableau mais lit son cahier. Quel argument justifie le mieux qu'elle est myope ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Mariam voit mal de loin. Étape 2 — Repérer l'image : un objet lointain donne une image avant la rétine. Étape 3 — Nommer : myopie. Étape 4 — Expliquer : l'œil est trop convergent. Le deuxième argument donne la bonne observation mais la mauvaise explication (« pas assez convergent » est l'hypermétropie). Le troisième place l'image après la rétine alors que Mariam est myope. Le quatrième parle de l'iris, qui règle la lumière et n'explique pas le flou.",
+                  "answers": [
+                    {
+                      "content": "Elle voit mal de loin : l'image d'un objet lointain se forme avant sa rétine, son œil est trop convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle voit mal de loin : son œil n'est pas assez convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle lit son cahier : l'image se forme après sa rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son iris est trop petit : il laisse passer trop peu de lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui justifie que Mariam est myope.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche. Étape 1 — Repérer ce que la personne voit mal : le tableau, objet lointain. Étape 2 — Repérer la position de l'image : avant la rétine. Étape 3 — Nommer le défaut : la myopie. Étape 4 — Expliquer par la convergence : l'œil est trop convergent. Nommer le défaut avant d'avoir situé l'image donne une conclusion sans preuve.",
+                  "answers": [
+                    {
+                      "content": "Mariam voit mal le tableau, qui est un objet lointain."
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme avant sa rétine."
+                    },
+                    {
+                      "content": "Son défaut s'appelle donc la myopie."
+                    },
+                    {
+                      "content": "Son œil est trop convergent."
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour justifier un défaut de vision, il suffit de dire que la personne voit flou, sans parler de la position de l'image.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer où l'image se forme est la clé de la justification. La myopie et l'hypermétropie donnent toutes deux une image floue : seule la position de l'image (avant ou après la rétine) permet de les distinguer. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camarade dit : « Mariam lit très bien son cahier de près, donc elle est hypermétrope. » Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer ce que la personne voit mal : Mariam voit mal de loin. Étape 2 — Repérer l'image : avant la rétine. Étape 3 — Nommer : myopie. L'argument du camarade inverse les deux défauts : voir bien de près ne prouve pas l'hypermétropie, car le myope voit bien de près. Le cristallin est bien une lentille convergente, et la rétine n'est pas en cause dans ce raisonnement. Le camarade se trompe donc bien.",
+                  "answers": [
+                    {
+                      "content": "Lire bien de près est normal pour un myope : c'est l'hypermétrope qui voit mal de près",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il oublie que le cristallin est une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il confond la rétine avec l'iris",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas d'erreur : elle est bien hypermétrope",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux arguments corrects pour expliquer pourquoi l'image est floue dans l'œil de Mariam, sans lunettes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Repérer où l'image se forme : dans un œil myope, les rayons se croisent avant la rétine, puis s'écartent de nouveau. Étape 4 — Expliquer : la tache reçue par la rétine est étalée, donc l'image est floue. « L'iris est trop ouvert » confond le diaphragme avec le cristallin. « Après la rétine » est la situation de l'hypermétrope.",
+                  "answers": [
+                    {
+                      "content": "Les rayons se croisent avant la rétine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'iris est trop ouvert.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les rayons se croisent après la rétine.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tache lumineuse reçue par la rétine est étalée.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Kofi est hypermétrope. Le schéma montre son œil réduit avec le verre qui convient. Tu justifies le choix du verre et tu vérifies qu'il convient.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-hypermetrope-corrige",
+              "hint": "Pour justifier un verre, dis où est l'image sans verre, ce qu'il faut faire à l'image, puis la lentille.",
+              "questions": [
+                {
+                  "content": "Kofi est hypermétrope. Quel argument justifie le choix d'un verre convergent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : hypermétropie. Étape 2 — Situer : l'image est après la rétine. Étape 3 — Choisir : il faut l'avancer, donc rendre l'œil plus convergent, avec une lentille convergente. Le deuxième argument décrit la myopie. Le troisième met la bonne position de l'image mais le mauvais geste : reculer l'image l'éloignerait encore de la rétine. Le quatrième attribue au verre le rôle de l'iris.",
+                  "answers": [
+                    {
+                      "content": "L'image est après la rétine : il faut l'avancer, donc rendre l'œil plus convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image est avant la rétine : il faut la reculer, donc rendre l'œil moins convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image est après la rétine : il faut la reculer, donc rendre l'œil moins convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre convergent règle la quantité de lumière",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi une lentille divergente ne convient-elle pas à Kofi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Choisir : l'image de Kofi est déjà après la rétine, il faut l'avancer. Une lentille divergente la recule encore. Étape 4 — Vérifier : l'image se formerait plus loin derrière la rétine, la vue resterait floue. Dire qu'elle avance l'image inverse son effet. Le rôle de la pupille n'a rien à voir. L'épaisseur n'est pas l'argument de physique attendu.",
+                  "answers": [
+                    {
+                      "content": "Elle avance trop l'image, qui passe avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle recule encore l'image, qui se forme plus loin derrière la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle règle la quantité de lumière à la place de la pupille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est trop épaisse pour tenir dans la monture",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui mène au verre de Kofi.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche. Étape 1 — Nommer le défaut à partir de ce que Kofi voit mal. Étape 2 — Situer l'image par rapport à la rétine. Étape 3 — Choisir la lentille qui déplace l'image vers la rétine, ici en l'avançant. Étape 4 — Conclure sur la nature du verre. Choisir la lentille sans situer l'image est la cause de l'inversion des deux lentilles.",
+                  "answers": [
+                    {
+                      "content": "Kofi voit mal de près."
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme après sa rétine."
+                    },
+                    {
+                      "content": "Il faut avancer l'image, donc rendre l'œil plus convergent."
+                    },
+                    {
+                      "content": "Son verre est une lentille convergente."
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre divergent rend l'œil plus convergent.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : la lentille divergente recule l'image, donc elle rend l'œil moins convergent. C'est le verre du myope. L'affirmation inverse les effets des deux lentilles : elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un hypermétrope, le verre convergent ___ l'image vers la rétine.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Choisir : pour l'hypermétropie, l'image est après la rétine, il faut l'avancer. Le verre convergent avance l'image. « Reculer » est l'effet de la lentille divergente. « Supprimer » l'image n'a pas de sens : un verre déplace l'image, il ne la supprime pas.",
+                  "answers": [
+                    {
+                      "content": "recule",
+                      "correct": false
+                    },
+                    {
+                      "content": "avance",
+                      "correct": true
+                    },
+                    {
+                      "content": "supprime",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Kofi essaie son verre. Que doit-il contrôler pour être sûr que le verre convient ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier que, avec cette lentille, l'image se forme sur la rétine : c'est le critère de la bonne correction. La taille de la pupille ne dépend que de la lumière. Une image avant la rétine serait celle d'un œil trop convergent, donc pas corrigé pour un hypermétrope. L'épaisseur du verre n'est pas un critère de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Qu'avec ce verre l'image d'un objet lointain se forme sur la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Que la pupille mesure $7$ mm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que l'image se forme avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Que le verre est le plus épais possible",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Léa, Marc et Sali révisent la vergence. Chacun propose un raisonnement. Tu repères ce qui est correct et ce qui contient une erreur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Avant d'appliquer la formule, convertis la distance focale en mètres, puis lis le signe pour connaître la nature de la lentille.",
+              "questions": [
+                {
+                  "content": "Léa calcule pour une lentille convergente de distance focale $25$ cm : $C = \\dfrac{1}{25} = 0{,}04$ δ. Pourquoi est-ce faux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Convertir : $25$ cm $= 0{,}25$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}25} = 4$ δ, soit cent fois plus que $0{,}04$ δ. Multiplier $25$ par $0{,}04$ ne donne pas la formule. La vergence d'une lentille convergente est positive, pas négative. Diviser par $100$ le résultat reproduit l'erreur de Léa au lieu de la corriger.",
+                  "answers": [
+                    {
+                      "content": "Il faut convertir $25$ cm en $0{,}25$ m : on trouve $C = 4$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il faut multiplier $25$ par $0{,}04$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente a une vergence négative",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut diviser par $100$ le résultat",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre de lunettes a pour vergence $-5$ δ. Quelle est sa distance focale, en centimètres (valeur positive) ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = -5$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{5} = 0{,}2$ m en valeur absolue. Étape 4 — Écrire : $0{,}2$ m $= 20$ cm. L'erreur tentante est de répondre $5$ cm ou $0{,}2$ cm, en oubliant la conversion.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Marc dit : « Une lentille de vergence $-4$ δ est convergente, car $4$ est positif. » Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la nature de la lentille et en déduire le signe de la vergence : une vergence négative indique une lentille divergente, et le nombre $4$ ne donne que la valeur absolue. La vergence se mesure en dioptries, pas en mètres. Une lentille convergente a une vergence positive, non nulle. Marc se trompe donc bien.",
+                  "answers": [
+                    {
+                      "content": "Le signe moins indique une lentille divergente : $4$ est seulement la valeur absolue",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vergence se mesure en mètres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente a une vergence nulle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas d'erreur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lentille de distance focale $10$ cm a une vergence plus grande, en valeur absolue, qu'une lentille de distance focale $20$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Convertir : $0{,}1$ m et $0{,}2$ m. Étape 3 — Appliquer : $\\dfrac{1}{0{,}1} = 10$ δ et $\\dfrac{1}{0{,}2} = 5$ δ. Le verre de $10$ cm a la plus grande valeur absolue : l'affirmation est vraie. Répondre « Faux » suppose, à tort, que la plus grande distance focale donne la plus grande vergence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre convergent a pour distance focale $f = 12{,}5$ cm. Quelle est sa vergence, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $12{,}5$ cm $= 0{,}125$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}125} = 8$. Étape 4 — Écrire : $C = +8$ δ. Sans conversion on trouverait $\\dfrac{1}{12{,}5} = 0{,}08$ δ.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sali compare deux ordonnances : $+4$ δ pour son frère et $-4$ δ pour sa sœur. Quelle affirmation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $+4$ δ est convergente, $-4$ δ est divergente. Étape 2 — Convertir et Étape 3 — Appliquer : $\\dfrac{1}{4} = 0{,}25$ m, soit $25$ cm pour chacun. Les deux verres ont la même distance focale et des natures contraires. Dire qu'ils sont tous deux convergents oublie le signe moins. Dire que la distance focale est de $4$ cm confond la vergence avec la distance focale. La réponse avec $-25$ cm donne une distance focale négative, alors que la distance focale se donne en valeur positive, la nature étant donnée par le signe de la vergence.",
+                  "answers": [
+                    {
+                      "content": "Les deux verres ont la même distance focale, $25$ cm, mais des natures contraires",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux verres sont convergents, de distance focale $25$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux verres ont une distance focale de $4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le verre de $+4$ δ a une distance focale de $25$ cm et celui de $-4$ δ de $-25$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève myope essaie par erreur un verre convergent. Le schéma montre son œil réduit avec ce mauvais verre. Tu enchaînes les arguments, de l'ordonnance à la position de l'image.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-myope-mauvais-verre",
+              "hint": "Raisonne dans l'ordre : défaut, position de l'image, lentille, vérification.",
+              "questions": [
+                {
+                  "content": "Un élève myope essaie un verre convergent. Où se forme l'image d'un objet lointain ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : myopie. Étape 2 — Situer : sans correction, l'image est avant la rétine. Étape 3 — Choisir : la lentille convergente avance l'image, ce qui est l'inverse de ce qu'il faut. Étape 4 — Vérifier : l'image est encore plus avant la rétine. Elle ne se forme pas sur la rétine, et ne passe pas après elle : une lentille convergente avance l'image. Un verre n'est pas un écran.",
+                  "answers": [
+                    {
+                      "content": "Sur la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Encore plus avant la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur le verre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la vue de l'élève myope est-elle encore plus floue avec le verre convergent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Choisir : le myope a besoin de reculer l'image. La lentille convergente l'avance, donc l'écart avec la rétine augmente et la tache est plus étalée. Dire qu'elle recule l'image inverse son effet. Le verre ne rétrécit pas la pupille. Il ne supprime pas l'accommodation : c'est le cristallin qui s'en charge.",
+                  "answers": [
+                    {
+                      "content": "Parce que la lentille convergente avance encore une image déjà avant la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la lentille convergente recule l'image au-delà de la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le verre rétrécit la pupille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la lentille convergente supprime l'accommodation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour corriger ce myope, il faut un verre de vergence positive.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : une vergence positive est celle d'une lentille convergente. Étape 3 — Choisir : le myope a besoin d'une lentille divergente, de vergence négative. L'affirmation est fausse : un verre de vergence positive aggrave sa myopie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel verre l'opticien doit-il proposer à cet élève myope ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : myopie. Étape 2 — Situer : image avant la rétine. Étape 3 — Choisir : il faut la reculer, donc une lentille divergente, dont la vergence est négative. Les deux dernières propositions associent un signe contraire à la nature de la lentille. La première est le mauvais verre déjà essayé.",
+                  "answers": [
+                    {
+                      "content": "Une lentille convergente, de vergence positive",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente, de vergence négative",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille divergente, de vergence positive",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente, de vergence négative",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ordonnance de cet élève indique $C = -1{,}6$ δ. Quelle est la distance focale de son verre, en centimètres (valeur positive) ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = -1{,}6$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{1{,}6} = 0{,}625$ m en valeur absolue. Étape 4 — Écrire : $0{,}625$ m $= 62{,}5$ cm. Laisser $0{,}625$ oublie la conversion en centimètres.",
+                  "answers": [
+                    {
+                      "content": "62,5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : de l'œil réduit à la vergence des verres",
+          "notions": "toute la leçon : l'œil réduit et l'œil normal, la myopie et l'hypermétropie, la correction par une lentille, la vergence et la distance focale d'un verre.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Bilan sur l'œil réduit : tu retrouves le rôle de chaque partie de l'œil et la position de l'image dans un œil normal.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-normal",
+              "hint": "Pour chaque question, reviens au rôle de la partie de l'œil : former l'image, la recevoir ou régler la lumière.",
+              "questions": [
+                {
+                  "content": "Relie chaque partie de l'œil à ce qu'elle fait.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie dans le modèle de l'œil réduit : le cristallin, lentille convergente, forme l'image ; la rétine, écran, la reçoit ; l'iris, diaphragme, règle la lumière. Il ne faut pas confondre le rôle de l'iris et celui du cristallin.",
+                  "answers": [
+                    {
+                      "content": "Le cristallin",
+                      "match": "Il forme l'image"
+                    },
+                    {
+                      "content": "La rétine",
+                      "match": "Elle reçoit l'image"
+                    },
+                    {
+                      "content": "L'iris",
+                      "match": "Il règle la quantité de lumière"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève à la vue normale regarde un arbre très éloigné. Où le cristallin forme-t-il l'image ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : le cristallin est une lentille convergente. Étape 2 — Repérer : il fait converger les rayons parallèles. Étape 3 — Comparer : dans un œil normal, ce point est sur la rétine. Étape 4 — Conclure : l'image est nette. « Avant » et « après » la rétine décrivent la myopie et l'hypermétropie ; la pupille est une ouverture, pas un écran.",
+                  "answers": [
+                    {
+                      "content": "Avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la rétine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Après la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur la pupille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour voir de près, le cristallin devient plus convergent : l'image reste sur la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le cristallin est la lentille convergente de l'œil. Étape 2 — Repérer : pour un objet proche, il se bombe. Étape 3 — Comparer : il devient plus convergent et l'image reste sur la rétine. Étape 4 — Conclure : c'est l'accommodation. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le modèle de l'œil réduit, le cristallin joue le rôle d'une lentille ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier le rôle de chaque partie : le cristallin fait converger les rayons lumineux pour former l'image sur la rétine. C'est donc une lentille convergente. Une lentille divergente écarterait les rayons.",
+                  "answers": [
+                    {
+                      "content": "convergente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pupille d'un élève mesure environ $7$ mm dans la pénombre. Que permet cette taille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : la pupille est l'ouverture de l'iris, le diaphragme. Étape 2 — Repérer : dans la pénombre, elle mesure environ $7$ mm, contre environ $2$ mm en plein soleil. Étape 3 — Comparer : une grande pupille laisse entrer plus de lumière. Étape 4 — Conclure : elle règle seulement la quantité de lumière. Elle ne déplace pas l'image, ne corrige aucun défaut et ne fait pas converger les rayons, ce qui est le rôle du cristallin.",
+                  "answers": [
+                    {
+                      "content": "Faire entrer plus de lumière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avancer l'image vers le cristallin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Corriger la myopie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faire converger les rayons",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Bilan sur les défauts de vision : Adjoua, hypermétrope, et son petit-fils Ismaël, myope, sont chez l'ophtalmologiste. Le schéma montre l'œil réduit d'Adjoua sans correction.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-hypermetrope",
+              "hint": "Pour chaque personne, repère ce qu'elle voit mal, puis la position de l'image et la convergence de l'œil.",
+              "questions": [
+                {
+                  "content": "Dans l'œil d'Adjoua, l'image d'un objet lointain se forme après la rétine. Quelle phrase décrit son défaut ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer : l'image est après la rétine. Étape 3 — Nommer : hypermétropie. Étape 4 — Expliquer : l'œil n'est pas assez convergent. La deuxième phrase décrit la myopie. La troisième associe le bon nom à une explication fausse. La quatrième donne le mauvais nom et la mauvaise observation : le myope voit mal de loin, mais l'image d'Adjoua est après la rétine.",
+                  "answers": [
+                    {
+                      "content": "Elle est hypermétrope : son œil n'est pas assez convergent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est myope : son œil est trop convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est hypermétrope : son œil est trop convergent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est myope : elle voit mal de loin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations exactes à propos d'un œil hypermétrope non corrigé.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : l'hypermétrope voit mal de près. Étape 2 — Repérer la position de l'image : après la rétine. « Il voit mal de loin et bien de près » et « il est trop convergent » sont les caractéristiques du myope.",
+                  "answers": [
+                    {
+                      "content": "Il voit mal de près.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il voit mal de loin et bien de près.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est trop convergent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image d'un objet lointain se forme après la rétine.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'œil d'Ismaël, qui est myope, l'image d'un objet lointain se forme après la rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Repérer : dans un œil myope, l'image d'un objet lointain se forme avant la rétine. Étape 3 — Nommer : myopie. Étape 4 — Expliquer : l'œil est trop convergent. Répondre « Vrai » place l'image comme pour l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ismaël est myope : il voit mal les objets ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer ce que la personne voit mal : le myope voit mal de loin et bien de près. Ismaël voit donc mal les objets lointains. Dire qu'il voit mal les objets proches reviendrait à confondre la myopie avec l'hypermétropie.",
+                  "answers": [
+                    {
+                      "content": "lointains",
+                      "correct": true
+                    },
+                    {
+                      "content": "éloignés",
+                      "correct": true
+                    },
+                    {
+                      "content": "loin",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ismaël ne lit pas le tableau à 8 m, mais lit sans effort son cahier. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il voit mal de loin. Étape 2 — Repérer l'image : avant la rétine. Étape 3 — Nommer : myopie. Étape 4 — Expliquer : l'œil est trop convergent. L'hypermétropie fait voir mal de près, ce qui n'est pas le cas. Il a bien un défaut puisque le tableau est flou. L'iris règle la lumière, il n'explique pas le flou des objets lointains.",
+                  "answers": [
+                    {
+                      "content": "Son défaut est la myopie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son défaut est l'hypermétropie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a aucun défaut",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son iris est mal réglé",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque œil à la position de l'image d'un objet lointain, sans correction.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Repérer où l'image se forme : l'œil myope est trop convergent, l'image est avant la rétine ; l'œil hypermétrope n'est pas assez convergent, l'image est après la rétine ; l'œil normal forme l'image sur la rétine.",
+                  "answers": [
+                    {
+                      "content": "Œil myope",
+                      "match": "Avant la rétine"
+                    },
+                    {
+                      "content": "Œil hypermétrope",
+                      "match": "Après la rétine"
+                    },
+                    {
+                      "content": "Œil normal",
+                      "match": "Sur la rétine"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Bilan sur la correction : Adjoua, hypermétrope, et Ismaël, myope, reçoivent chacun une paire de lunettes. Le schéma montre l'œil réduit d'Ismaël corrigé.",
+              "exercise_type": "evaluation",
+              "figure": "oeil-myope-corrige",
+              "hint": "Pour choisir un verre, situe d'abord l'image, puis demande-toi s'il faut la reculer ou l'avancer.",
+              "questions": [
+                {
+                  "content": "Quelle lentille faut-il pour les lunettes d'Adjoua, hypermétrope ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : hypermétropie. Étape 2 — Situer : image après la rétine. Étape 3 — Choisir : il faut l'avancer, donc une lentille convergente. Étape 4 — Vérifier : l'image est alors sur la rétine. Une lentille divergente, même mince, recule l'image. Un verre sans effet ne déplace pas l'image.",
+                  "answers": [
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une lentille sans effet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente très mince",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle lentille faut-il pour les lunettes d'Ismaël, myope ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Nommer : myopie. Étape 2 — Situer : image avant la rétine. Étape 3 — Choisir : il faut la reculer, donc une lentille divergente. La lentille convergente, même avec l'argument de la position de l'image, avancerait encore l'image. La myopie se corrige par un verre.",
+                  "answers": [
+                    {
+                      "content": "Une lentille convergente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille convergente, car l'image est avant la rétine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une lentille divergente",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune lentille : la myopie ne se corrige pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec ses lunettes divergentes, Ismaël voit net : l'image d'un objet lointain se forme sur sa rétine.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Choisir : le verre divergent recule l'image. Étape 4 — Vérifier : avec cette lentille, l'image se forme sur la rétine. L'affirmation est vraie ; répondre « Faux » suppose que le verre ne corrige pas le défaut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Choisis les deux affirmations vraies sur l'œil d'Ismaël avec ses lunettes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Choisir : le verre divergent recule l'image, donc rend l'œil moins convergent. Étape 4 — Vérifier : l'image se forme alors sur la rétine. « Rend l'œil plus convergent » est l'effet du verre convergent. « L'image se forme avant la rétine » est la situation sans lunettes.",
+                  "answers": [
+                    {
+                      "content": "Son verre est une lentille divergente.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son verre rend l'œil plus convergent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son verre rend l'œil moins convergent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image se forme avant la rétine.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes du choix du verre d'Ismaël, myope.",
+                  "question_type": "ordering",
+                  "explanation": "On suit la méthode de la fiche. Étape 1 — Nommer le défaut. Étape 2 — Situer l'image par rapport à la rétine. Étape 3 — Choisir la lentille qui déplace l'image vers la rétine. Étape 4 — Vérifier que l'image est sur la rétine. Choisir le verre avant de situer l'image conduit à inverser les deux lentilles.",
+                  "answers": [
+                    {
+                      "content": "Nommer le défaut : la myopie."
+                    },
+                    {
+                      "content": "Situer l'image : avant la rétine, sans correction."
+                    },
+                    {
+                      "content": "Choisir la lentille divergente, qui recule l'image vers la rétine."
+                    },
+                    {
+                      "content": "Vérifier que, avec ce verre, l'image se forme sur la rétine."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan sur la vergence : l'ophtalmologiste écrit les ordonnances d'Adjoua (verre convergent de distance focale $40$ cm) et d'Ismaël (verres de $-2{,}5$ δ). Tu passes de la distance focale à la vergence et inversement.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Convertis la distance focale en mètres, applique la formule, puis écris le signe et l'unité.",
+              "questions": [
+                {
+                  "content": "Le verre d'Adjoua est une lentille convergente de distance focale $40$ cm. Quelle est sa vergence, en dioptries ?",
+                  "question_type": "numeric",
+                  "unit": "δ",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : lentille convergente, donc $C$ est positive. Étape 2 — Convertir : $40$ cm $= 0{,}4$ m. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}4} = 2{,}5$. Étape 4 — Écrire : $C = +2{,}5$ δ. Sans conversion, on trouverait $\\dfrac{1}{40} = 0{,}025$ δ.",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les verres d'Ismaël ont une vergence de $-2{,}5$ δ. Quelle est leur distance focale, en centimètres (valeur positive) ?",
+                  "question_type": "numeric",
+                  "unit": "cm",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $C = -2{,}5$ δ est négative, la lentille est divergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{2{,}5} = 0{,}4$ m. Étape 4 — Écrire : $0{,}4$ m $= 40$ cm. Laisser $0{,}4$ oublie la conversion en centimètres.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le frère d'Ismaël porte un verre divergent de distance focale $0{,}2$ m. Quelle est sa vergence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : lentille divergente, donc $C$ est négative. Étape 2 — Convertir : $f = 0{,}2$ m, déjà en mètres. Étape 3 — Appliquer : $C = \\dfrac{1}{0{,}2} = 5$ en valeur absolue. Étape 4 — Écrire : $C = -5$ δ. La valeur $5$ δ oublie le signe négatif. La valeur $-0{,}2$ δ recopie la distance focale au lieu de calculer son inverse. La valeur $-20$ δ vient d'une conversion fausse en centimètres.",
+                  "answers": [
+                    {
+                      "content": "$5$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-0{,}2$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-20$ δ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un verre de vergence $+2$ δ est une lentille convergente de distance focale $50$ cm.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : $C = +2$ δ est positive, la lentille est convergente. Étape 2 — Convertir : la formule donne $f$ en mètres. Étape 3 — Appliquer : $f = \\dfrac{1}{2} = 0{,}5$ m. Étape 4 — Écrire : $0{,}5$ m $= 50$ cm. L'affirmation est vraie ; répondre « Faux » suppose une erreur de signe ou de conversion.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux verres divergents ont pour distance focale $25$ cm et $50$ cm. Lequel a la vergence la plus forte en valeur absolue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Convertir : $0{,}25$ m et $0{,}5$ m. Étape 3 — Appliquer : $\\dfrac{1}{0{,}25} = 4$ et $\\dfrac{1}{0{,}5} = 2$. Étape 4 — Écrire : $-4$ δ et $-2$ δ. Le verre de $25$ cm est donc le plus fort. Choisir celui de $50$ cm croit que la plus grande distance focale donne la plus grande vergence. La valeur $-0{,}04$ δ oublie la conversion en mètres. Les deux valeurs absolues sont différentes.",
+                  "answers": [
+                    {
+                      "content": "Celui de $25$ cm, de vergence $-4$ δ",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celui de $50$ cm, de vergence $-2$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "Celui de $25$ cm, de vergence $-0{,}04$ δ",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux ont la même valeur absolue",
+                      "correct": false
+                    }
+                  ]
                 }
               ]
             }

@@ -165,7 +165,45 @@ module LessonRendering
       defects << "page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
       defects << "** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
       missing_figures(lesson, seen["figures"]).each { defects << "figure « #{it} » absente de la page ou vide" }
+      sheets = all(".ps-card", minimum: 0).map { it[:id] }
+      defects << "aucune feuille d'exercices sur la page, alors que la leçon a des questions" if sheets.empty? && lesson.to_json.include?('"questions"')
+      defects += sheets.flat_map { |sheet| inspect_sheet(course, sheet) }
       defects.map { LessonRendering::Defect.new(file, width, it) }
+    end
+
+    # Une feuille (UDR-0149, feuilles-en-cases-lues-avant-de-commencer) : son sujet en lecture, puis la feuille à remplir de l'élève.
+    # Les exercices ne sont que là depuis #464 : même largeur que l'écran, pas de « ** », pas de « $…$ » resté brut, chaque
+    # figure dessinée, et aucune proposition de QCM coupée dans sa colonne quand le QCM est en tableau (UDR-0152 §3, amendement du 2026-11-06).
+    def inspect_sheet(course, sheet)
+      [ course_sheet_path(course.slug, sheet), fill_course_sheet_path(course.slug, sheet) ].flat_map do |path|
+        visit path
+        assert_selector ".ps-page", wait: 20
+        seen = measure_sheet
+        where = "feuille #{sheet} (#{path.end_with?('/remplir') ? 'à remplir' : 'lecture'})"
+        found = []
+        found << "#{where} : page plus large que l'écran : scrollWidth #{seen['scroll']} > innerWidth #{seen['inner']}" if seen["scroll"] > seen["inner"]
+        found << "#{where} : ** dans le texte rendu : « #{seen['stars']} »" if seen["stars"]
+        found << "#{where} : #{seen['bare']} formule(s) $…$ restée(s) en texte brut" if seen["bare"].positive?
+        seen["cut"].each { found << "#{where} : proposition de QCM coupée dans sa colonne : « #{it} »" }
+        blank = seen["figures"].count { !it["shown"] }
+        found << "#{where} : #{blank} figure(s) vide(s)" if blank.positive?
+        found
+      end
+    end
+
+    # Comme measure_page, sans fichier à comparer : la feuille est finie quand ses formules sont stables, les polices de KaTeX chargées (une
+    # proposition mesurée avec la police de secours ne dit rien de sa largeur) et chaque figure dessinée.
+    def measure_sheet
+      deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + LessonRendering::Verifier::FIGURE_WAIT
+      previous = nil
+      loop do
+        seen = page.evaluate_script(MEASURE)
+        done = seen["bare"].zero? && seen["formulas"] == previous && seen["fonts"] == "loaded" && seen["figures"].all? { it["shown"] }
+        return seen if done || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
+
+        previous = seen["formulas"]
+        sleep 0.25
+      end
     end
 
     # La fiche de révision est coupée après 50 mots : « Voir plus » montre les notions suivantes, et leurs figures.
@@ -195,7 +233,10 @@ module LessonRendering
           if (parent.closest(".katex-html")) formulas += 1
           else if (!parent.closest(".katex, option, textarea, pre, code") && parent.closest("[data-controller~=math]") && /\\$[^$\\n]+\\$/.test(node.textContent)) bare += 1
         }
-        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare,
+        const cut = [...document.querySelectorAll(".ps-paper-table--mcq .ps-paper-choice")]
+          .filter((choice) => getComputedStyle(choice.closest("table")).display === "table" && choice.scrollWidth > choice.clientWidth + 1)
+          .map((choice) => choice.textContent.trim().slice(0, 40))
+        return { scroll: document.documentElement.scrollWidth, inner: window.innerWidth, figures, formulas, bare, cut, fonts: document.fonts.status,
                  stars: at < 0 ? null : text.slice(Math.max(0, at - 30), at + 30).replace(/\\s+/g, " ") }
       })()
     JS
@@ -218,10 +259,34 @@ module LessonRendering
       end
     end
 
-    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres.
+    # Les clés des figures du fichier dont aucun exemplaire dessiné n'a les mêmes paramètres. Une figure citée par les seuls
+    # exercices n'est pas attendue : depuis sujet-avant-de-commencer (#464), les exercices sont sur la page de la feuille, pas
+    # sur celle de la leçon.
     def missing_figures(lesson, rendered)
       drawn = rendered.select { it["shown"] }.map { JSON.parse(it["params"].to_s) }
-      lesson.fetch("figures", []).reject { |figure| drawn.include?(figure["params"]) }.map { it["key"] }
+      only_in_exercises = exercise_only_figure_keys(lesson)
+      lesson.fetch("figures", []).reject { |figure| only_in_exercises.include?(figure["key"]) || drawn.include?(figure["params"]) }
+            .map { it["key"] }
+    end
+
+    # Les clés de figure citées par un exercice (de la leçon ou d'une notion) et par rien d'autre dans la leçon. Une citation est
+    # un champ dont la valeur est exactement la clé (« figure », ou un bloc de contenu), jamais un mot du texte.
+    EXERCISE_KEYS = %w[exercise exercises].freeze
+
+    def exercise_only_figure_keys(lesson)
+      keys = lesson.fetch("figures", []).map { it["key"] }
+      in_exercises = []
+      elsewhere = []
+      collect_citations(lesson.except("figures"), keys, in_exercises, elsewhere, inside: false)
+      in_exercises.uniq - elsewhere
+    end
+
+    def collect_citations(node, keys, in_exercises, elsewhere, inside:)
+      case node
+      when Hash then node.each { |key, value| collect_citations(value, keys, in_exercises, elsewhere, inside: inside || EXERCISE_KEYS.include?(key)) }
+      when Array then node.each { collect_citations(it, keys, in_exercises, elsewhere, inside:) }
+      when String then (inside ? in_exercises : elsewhere) << node if keys.include?(node)
+      end
     end
   end
 end
