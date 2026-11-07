@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Billing::StudentAccessPort
 # Rôle : contrat de lecture de l'accès d'un élève, reçu par les use cases qui démarrent un exercice ou vérifient une fiche
-# ADR  : cartes-activation (contexte billing, §4.6)
+# ADR  : 0126 (contexte billing, §4.6)
 module Ports
   module Billing
     module StudentAccessPort

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Billing::ActivationCard
 # Rôle : table billing_activation_cards, code chiffré de façon déterministe (ADR-0031) : recherche par égalité, jamais lisible en base
-# ADR  : cartes-activation (contexte billing, §4.1 et §4.2), 0031
+# ADR  : 0126 (contexte billing, §4.1 et §4.2), 0031
 module Orm
   module Billing
     class ActivationCard < ApplicationRecord

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::CardBatch
 # Rôle : un lot de cartes créé pour un point relais, à un prix figé (0 = offert)
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Entities
   module Billing
     CardBatch = Data.define(:id, :public_id, :relay_point_id, :quantity, :unit_price_xof, :valid_until, :created_by_id, :created_at,

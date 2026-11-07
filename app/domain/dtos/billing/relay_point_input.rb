@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Billing::RelayPointInput
 # Rôle : forme d'un point relais saisi à l'écran : nom (80), lieu (120), téléphone de dix chiffres, écoles, actif
-# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.2
+# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2
 module Dtos
   module Billing
     class RelayPointInput

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/cashboxes/_week — « À payer ce vendredi » et les semaines précédentes %>
 <%# Rôle : commissions des points relais de la semaine écoulée (vendredi → jeudi), 8 semaines plus anciennes dans un <details> %>
-<%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
+<%# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1 %>
 <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
 <% range = ->(week) { billing_week_range(week) } %>
 <% table = lambda do |week| %>

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::SaveRelayPoint
 # Rôle : l'équipe crée ou modifie un point relais et remplace les écoles qu'il dessert ; le journal d'audit garde l'écriture
-# ADR  : cartes-activation (contexte billing, §4.1 et §4.10)
+# ADR  : 0126 (contexte billing, §4.1 et §4.10)
 module UseCases
   module Billing
     class SaveRelayPoint

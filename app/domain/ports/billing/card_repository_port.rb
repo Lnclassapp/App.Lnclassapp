@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Billing::CardRepositoryPort
 # Rôle : contrat des lots et des cartes d'activation ; l'activation et l'annulation vérifient l'état de la carte
-# ADR  : cartes-activation (contexte billing, §4.3)
+# ADR  : 0126 (contexte billing, §4.3)
 module Ports
   module Billing
     module CardRepositoryPort

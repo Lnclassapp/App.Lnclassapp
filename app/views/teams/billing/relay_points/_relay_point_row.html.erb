@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/relay_points/_relay_point_row — une ligne du tableau des points relais (Entities::Billing::RelayPoint) %>
 <%# Rôle : nom (lien vers la fiche), lieu, téléphone, nombre d'écoles, état ; menu ⋮ : fiche, modifier (modale), nouveau lot (modale) %>
-<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.2 · modèle : teams/drenas/_drena_row %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 · modèle : teams/drenas/_drena_row %>
 <tr id="relay_point_<%= relay_point.public_id %>" class="align-middle">
   <td class="px-4 py-3 font-medium text-ink">
     <%= link_to relay_point.name, teams_billing_relay_point_path(relay_point.public_id), class: "text-brand-strong underline-offset-4 hover:underline" %>

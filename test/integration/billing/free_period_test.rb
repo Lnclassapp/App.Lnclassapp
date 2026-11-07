@@ -1,6 +1,6 @@
 require "test_helper"
 
-# cartes-activation, Lot B (PRD §4 « Période gratuite et blocage », ADR contexte billing §4.5 et §4.6, UDR abonnement-eleve §3) :
+# cartes-activation, Lot B (PRD §4 « Période gratuite et blocage », ADR contexte billing §4.5 et §4.6, UDR-0158 §3) :
 # 7 jours gratuits à partir du 2026-11-09, puis « Commencer » et la vérification d'une fiche mènent à Mon abonnement sans rien écrire ;
 # leçons, exercices et historique restent lisibles ; un enseignant n'est jamais bloqué.
 class BillingFreePeriodTest < ActionDispatch::IntegrationTest

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Billing::RemittanceRepository
 # Rôle : traduit Orm::Billing::Remittance en entité ; ajout seul, un versement ne se modifie ni ne se supprime
-# ADR  : cartes-activation (contexte billing, §4.1 et §4.7)
+# ADR  : 0126 (contexte billing, §4.1 et §4.7)
 module Repositories
   module Billing
     class RemittanceRepository

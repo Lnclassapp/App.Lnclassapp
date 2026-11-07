@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR cartes-activation §4.7, UDR caisse-equipe §3.1 : la caisse de l'équipe, calculée à la lecture.
+# ADR 0126 §4.7, UDR-0159 §3.1 : la caisse de l'équipe, calculée à la lecture.
 class Teams::Billing::CashboxesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member

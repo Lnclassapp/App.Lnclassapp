@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/cashboxes/_schools — commission cumulée des écoles %>
 <%# Rôle : abonnements payants par école et 1 000 F cumulés ; le versement aux écoles est fixé plus tard %>
-<%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
+<%# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1 %>
 <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
 <%= ui_card title: t(".title"), subtitle: t(".note"), id: "cashbox_schools" do %>
   <% if cashbox.schools.empty? %>

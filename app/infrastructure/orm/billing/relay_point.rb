@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Billing::RelayPoint
 # Rôle : table billing_relay_points, les points relais qui vendent les cartes d'activation en espèces
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Orm
   module Billing
     class RelayPoint < ApplicationRecord

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · RedirectsSubscriptionRequired — le refus « période gratuite finie » mène à Mon abonnement
 # Rôle : sur :subscription_required, range le chemin de retour en session (relu par l'activation) puis redirige vers Mon abonnement
-# ADR  : cartes-activation (contexte billing, §4.6) · UDR : abonnement-eleve (§3, « Redirection de blocage »)
+# ADR  : 0126 (contexte billing, §4.6) · UDR : 0158 (§3, « Redirection de blocage »)
 module RedirectsSubscriptionRequired
   extend ActiveSupport::Concern
 

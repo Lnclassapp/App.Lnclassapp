@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/remittances/new — saisir un versement, servi dans le frame « modal » (page pleine sans frame) %>
 <%# Rôle : point relais, montant signé, date, référence Wave, motif ; échec re-rendu en 422 dans la modale %>
-<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.6 %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.6 %>
 <% content_for :nav_key, "billing" %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), document_title: page_title(t(".title")), id: "remittance-modal", open: true do |modal| %>

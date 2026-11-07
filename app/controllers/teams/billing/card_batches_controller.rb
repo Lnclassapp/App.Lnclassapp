@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::Billing::CardBatchesController
 # Rôle : l'équipe crée un lot de cartes pour un point relais (modale) et imprime sa planche, journalisée et jamais en cache (layout print, sans navigation)
-# ADR  : cartes-activation (contexte billing, §4.1, §4.2 et §4.10), 0031 · UDR : caisse-equipe §3.3 et §3.4
+# ADR  : 0126 (contexte billing, §4.1, §4.2 et §4.10), 0031 · UDR : 0159 §3.3 et §3.4
 module Teams
   module Billing
     class CardBatchesController < BaseController
@@ -19,7 +19,7 @@ module Teams
       end
 
       # Les cartes du lot, par numéro ; un lot sans carte n'existe pas (404). Prix et validité sont figés sur chaque carte.
-      # Chaque affichage est journalisé (jamais un code), ADR cartes-activation §4.10.
+      # Chaque affichage est journalisé (jamais un code), ADR 0126 §4.10.
       def show
         result = print_card_batch.call(actor: current_actor, batch_public_id: params[:public_id])
         return render_result(result, success: nil) if result.failure?

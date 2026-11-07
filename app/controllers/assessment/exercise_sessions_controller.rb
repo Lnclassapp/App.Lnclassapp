@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
 # Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis remplit sa copie ; terminée → résultat
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115, cartes-activation (contexte billing, §4.6) · UDR : 0022, 0138 §3.2
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115, 0126 (contexte billing, §4.6) · UDR : 0022, 0138 §3.2
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
     include ReadsOwnLevel

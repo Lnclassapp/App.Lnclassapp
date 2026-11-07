@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Billing
-    # ADR cartes-activation §4.2 : 12 signes tirés sur 31, saisie normalisée, affichage XXXX-XXXX-XXXX.
+    # ADR 0126 §4.2 : 12 signes tirés sur 31, saisie normalisée, affichage XXXX-XXXX-XXXX.
     class ActivationCodeTest < ActiveSupport::TestCase
       test "l'alphabet compte 31 signes sans 0, O, 1, I ni L" do
         assert_equal 31, ActivationCode::ALPHABET.length

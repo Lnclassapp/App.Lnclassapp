@@ -1,6 +1,6 @@
 <%# 🌐 UI · billing/subscriptions/_home_notice — le bandeau de l'accueil élève : jours gratuits restants, ou période terminée %>
 <%# Rôle : une ligne info (plus de 3 jours), puis avertissement (3 derniers jours, ou bloqué) ; rien pour l'abonné ni pour un non-élève %>
-<%# ADR  : cartes-activation (contexte billing, §4.5) · UDR : abonnement-eleve (§3, bandeau de l'accueil) %>
+<%# ADR  : 0126 (contexte billing, §4.5) · UDR : 0158 (§3, bandeau de l'accueil) %>
 <%# access : Entities::Billing::Access (nil si l'acteur n'est pas un élève) %>
 <% unless access.nil? || access.status == :subscribed %>
   <% urgent = access.blocked? || access.days_left <= 3 %>

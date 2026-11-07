@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::PrintCardBatch
 # Rôle : l'équipe affiche la planche d'un lot ; chaque affichage est journalisé (qui, quel lot, quel point relais), jamais un code
-# ADR  : cartes-activation (contexte billing, §4.2 et §4.10), 0031
+# ADR  : 0126 (contexte billing, §4.2 et §4.10), 0031
 module UseCases
   module Billing
     class PrintCardBatch

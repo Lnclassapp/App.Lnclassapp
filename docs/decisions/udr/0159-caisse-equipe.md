@@ -1,4 +1,4 @@
-# UDR-XXXX : Écrans de l'équipe pour les points relais, les cartes et la caisse
+# UDR-0159 : Écrans de l'équipe pour les points relais, les cartes et la caisse
 <!-- index
 titre: Points relais, cartes et caisse
 statut: Proposé
@@ -11,7 +11,7 @@ problematique: Permettre à l'équipe de créer et imprimer les cartes, de suivr
 | **Statut** | Proposé |
 | **Date** | 2026-11-07 |
 | **Chantier** | `docs/chantiers/cartes-activation` |
-| **ADR lié** | ADR-XXXX-contexte-billing-cartes-activation |
+| **ADR lié** | ADR-0126 |
 | **Remplacé par** | — |
 
 ---

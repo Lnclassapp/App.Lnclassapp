@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Billing::CashboxQuery
 # Rôle : la caisse de l'équipe, lue à la demande (CQRS) : par point relais, commissions de la semaine, cumul par école ; requêtes agrégées
-# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1
+# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1
 module Queries
   module Billing
     class CashboxQuery

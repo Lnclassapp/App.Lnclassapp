@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Billing::Remittance
 # Rôle : table billing_remittances, les versements d'un point relais ; jamais modifiés ni supprimés
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Orm
   module Billing
     class Remittance < ApplicationRecord

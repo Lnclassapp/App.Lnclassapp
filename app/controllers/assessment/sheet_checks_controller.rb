@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::SheetChecksController
 # Rôle : « Vérifier ma réponse » sur la feuille de la leçon : une copie rendue, puis la page de résultat de la copie (return_to : le retour vers la feuille ou « Ma classe ») ; refus dans l'exercice en Turbo Stream, réponses gardées ; sans JS, retour à la leçon
-# ADR  : 0121 (§4), 0054, 0091 (§4.4), 0115, cartes-activation (contexte billing, §4.6) · UDR : 0149 §3 · sécurité : copy[answers][<id>] lu champ par champ ; refus : une ligne par question (UDR qcm-plusieurs-reponses)
+# ADR  : 0121 (§4), 0054, 0091 (§4.4), 0115, 0126 (contexte billing, §4.6) · UDR : 0149 §3 · sécurité : copy[answers][<id>] lu champ par champ ; refus : une ligne par question (UDR qcm-plusieurs-reponses)
 module Assessment
   class SheetChecksController < AuthenticatedController
     include ReadsOwnLevel

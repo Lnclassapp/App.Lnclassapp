@@ -1,4 +1,4 @@
-# ADR-XXXX : L'abonnement passe par des cartes à code dans un contexte borné `billing`
+# ADR-0126 : L'abonnement passe par des cartes à code dans un contexte borné `billing`
 <!-- index
 titre: Contexte billing et cartes d'activation
 statut: Proposé

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/card_cancellations/show — retrouver une carte par son numéro et l'annuler %>
 <%# Rôle : fiche courte (numéro, point relais, état) ; formulaire de motif si la carte est remise ; texte seul si elle est activée %>
-<%# ADR  : cartes-activation (contexte billing, §4.3) · UDR : caisse-equipe §3.5 %>
+<%# ADR  : 0126 (contexte billing, §4.3) · UDR : 0159 §3.5 %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "billing" %>
 <% number = @card ? @card.serial_label : nil %>

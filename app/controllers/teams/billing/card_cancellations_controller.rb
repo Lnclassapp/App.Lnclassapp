@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::Billing::CardCancellationsController
 # Rôle : l'équipe retrouve une carte par son numéro et l'annule avec un motif ; une carte activée ne s'annule pas
-# ADR  : cartes-activation (contexte billing, §4.3) · UDR : caisse-equipe §3.5
+# ADR  : 0126 (contexte billing, §4.3) · UDR : 0159 §3.5
 module Teams
   module Billing
     class CardCancellationsController < Teams::BaseController

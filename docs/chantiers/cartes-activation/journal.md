@@ -85,7 +85,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-11-07 (branche ; production visée : saisie du code le 11/11, caisse le 13/11, blocage le 16/11) |
+| **PR** | #504 |
+| **ADR produits** | ADR-0126 |
+| **UDR produits** | UDR-0158, UDR-0159 |

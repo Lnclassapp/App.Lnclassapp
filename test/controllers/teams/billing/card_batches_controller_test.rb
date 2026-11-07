@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR caisse-equipe §3.3 et §3.4, PRD §4 « Points relais et lots » : un lot de cartes et sa planche d'impression.
+# UDR-0159 §3.3 et §3.4, PRD §4 « Points relais et lots » : un lot de cartes et sa planche d'impression.
 class Teams::Billing::CardBatchesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member

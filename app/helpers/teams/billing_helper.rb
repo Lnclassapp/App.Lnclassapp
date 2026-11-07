@@ -1,6 +1,6 @@
 # 🌐 UI · Teams::BillingHelper — la plage d'une semaine de la caisse, écrite à la française
 # Rôle : `billing_week_range` rend « du 6 au 12 novembre », « du 30 octobre au 1er novembre » ; le premier du mois prend son « er »
-# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1
+# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1
 module Teams
   module BillingHelper
     def billing_week_range(week)

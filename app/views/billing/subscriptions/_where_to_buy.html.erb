@@ -1,6 +1,6 @@
 <%# 🌐 UI · billing/subscriptions/_where_to_buy — « Où acheter ta carte » : les points relais de l'école de l'élève %>
 <%# Rôle : nom, lieu, téléphone en lien tel: ; sans point relais, l'état vide renvoie vers WhatsApp (numéro de l'équipe) %>
-<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : abonnement-eleve §3.4 %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0158 §3.4 %>
 <%= ui_card title: t(".title") do %>
   <% if relay_points.empty? %>
     <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description", number: t("billing.team_whatsapp").gsub(/[[:space:]]/, "\u00A0")),

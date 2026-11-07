@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Entrées : [memo](memo.md) (grill Q1 à Q13), [PRD](prd.md), ADR-XXXX-contexte-billing-cartes-activation, UDR-XXXX-abonnement-eleve, UDR-XXXX-caisse-equipe.
+> Entrées : [memo](memo.md) (grill Q1 à Q13), [PRD](prd.md), ADR-0126, UDR-0158, UDR-0159.
 
 ## Graphe
 
@@ -207,7 +207,7 @@ Challenger (phase 5)               → 1 agent distinct, sur la branche de chant
 
 ## Décisions ouvertes
 
-- [ ] **Numéro WhatsApp de l'équipe** affiché quand l'école de l'élève n'a pas de point relais (UDR-XXXX-abonnement-eleve §3.4). Recommandation : le numéro professionnel du porteur.
+- [x] **Numéro WhatsApp de l'équipe** — tranché par le porteur : 05 84 25 80 85 (`wa.me/2250584258085`) ; affiché quand l'école de l'élève n'a pas de point relais (UDR-0158 §3.4). Recommandation : le numéro professionnel du porteur.
 
 ## Portes de sortie
 

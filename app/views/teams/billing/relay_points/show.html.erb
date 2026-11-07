@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/relay_points/show — fiche d'un point relais %>
 <%# Rôle : nom, lieu, téléphone, écoles en pastilles, lots (date, quantité, prix, « Imprimer ») et « Nouveau lot de cartes » (modale) %>
-<%# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.3 %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.3 %>
 <% page_title @relay_point.name %>
 <% content_for :nav_key, "billing" %>
 <%= ui_page_header title: @relay_point.name, subtitle: @relay_point.location,

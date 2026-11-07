@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::Billing::RemittancesController
 # Rôle : l'équipe saisit le versement d'un point relais dans la modale ; la caisse se recharge en Turbo Stream
-# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.6
+# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.6
 module Teams
   module Billing
     class RemittancesController < Teams::BaseController

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Billing::RemittanceRepositoryPort
 # Rôle : contrat des versements des points relais, écrits une fois, jamais modifiés ni supprimés
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Ports
   module Billing
     module RemittanceRepositoryPort

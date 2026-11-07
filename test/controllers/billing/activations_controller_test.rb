@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR cartes-activation §4.3 et §4.4, PRD §4 « Activation » : le code est normalisé, la carte verrouillée, les essais freinés.
+# ADR 0126 §4.3 et §4.4, PRD §4 « Activation » : le code est normalisé, la carte verrouillée, les essais freinés.
 class Billing::ActivationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     travel_to Time.utc(2026, 11, 9, 8)

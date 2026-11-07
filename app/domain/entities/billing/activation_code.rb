@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::ActivationCode
 # Rôle : le code d'une carte, 12 signes tirés sur 31 (sans 0, O, 1, I, L), saisie normalisée, affichage XXXX-XXXX-XXXX
-# ADR  : cartes-activation (contexte billing, §4.2)
+# ADR  : 0126 (contexte billing, §4.2)
 module Entities
   module Billing
     module ActivationCode

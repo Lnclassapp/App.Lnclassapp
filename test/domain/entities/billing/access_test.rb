@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Billing
-    # ADR cartes-activation §4.5 : gratuit 7 jours à partir du plus tard du compte et de la mise en ligne, puis bloqué.
+    # ADR 0126 §4.5 : gratuit 7 jours à partir du plus tard du compte et de la mise en ligne, puis bloqué.
     class AccessTest < ActiveSupport::TestCase
       def access(created:, today:, until_date: nil)
         Access.for(account_created_on: Date.parse(created), today: Date.parse(today), subscribed_until: until_date && Date.parse(until_date))

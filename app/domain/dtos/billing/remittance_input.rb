@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Billing::RemittanceInput
 # Rôle : forme d'un versement saisi à l'écran : montant entier signé non nul, motif requis s'il est négatif, référence de 60 caractères au plus
-# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.6
+# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.6
 module Dtos
   module Billing
     class RemittanceInput

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Billing::ActivationsController
 # Rôle : l'élève saisit le code de sa carte ; succès → Mon abonnement (ou l'exercice qui l'avait bloqué), échec → la page en 422, 5 essais par 10 minutes
-# ADR  : cartes-activation (contexte billing, §4.3 et §4.4), 0050 · UDR : abonnement-eleve
+# ADR  : 0126 (contexte billing, §4.3 et §4.4), 0050 · UDR : 0158
 module Billing
   # Hérite de la page pour la re-rendre en échec (mêmes données, mêmes vues) ; seule l'action `create` est routée.
   class ActivationsController < SubscriptionsController

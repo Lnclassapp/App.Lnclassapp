@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::CreateCardBatch
 # Rôle : l'équipe crée un lot de cartes pour un point relais actif, au prix de l'offre ou offert, valable jusqu'à la fin de l'offre
-# ADR  : cartes-activation (contexte billing, §4.1, §4.8 et §4.10)
+# ADR  : 0126 (contexte billing, §4.1, §4.8 et §4.10)
 module UseCases
   module Billing
     class CreateCardBatch

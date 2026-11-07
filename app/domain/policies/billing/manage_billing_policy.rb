@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Billing::ManageBillingPolicy
 # Rôle : gérer points relais, lots, annulations, versements et caisse : l'équipe, quel que soit son sous-rôle
-# ADR  : cartes-activation (contexte billing, PRD §2)
+# ADR  : 0126 (contexte billing, PRD §2)
 module Policies
   module Billing
     class ManageBillingPolicy

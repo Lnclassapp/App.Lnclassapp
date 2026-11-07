@@ -76,7 +76,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`canal-whatsapp`](canal-whatsapp/memo.md) | cadrage | feature | 2026-09-28 · cadrage repris le 2026-10-16 | Canal WhatsApp pour joindre les utilisateurs hors de l'application |
 | [`carrousel-classes-enseignant`](carrousel-classes-enseignant/memo.md) | livré | bugfix | 2026-10-30 | Carrousel des classes de l'enseignant : revenir vers la gauche sur ordinateur |
 | [`carte-profil-eleve`](carte-profil-eleve/memo.md) | livré | feature | 2026-10-30 | Carte de profil de l'élève dans la barre latérale |
-| [`cartes-activation`](cartes-activation/memo.md) | planifié | feature | 2026-11-07 | Cartes d'activation vendues au point relais |
+| [`cartes-activation`](cartes-activation/memo.md) | livré | feature | 2026-11-07 | Cartes d'activation vendues au point relais |
 | [`catalog-lecture-ecriture-incompatibles`](catalog-lecture-ecriture-incompatibles/memo.md) | abandonné | bugfix | 2026-09-18 | Catalogue : entités de lecture et d'écriture incompatibles |
 | [`catalogue-complet`](catalogue-complet/memo.md) | livré | feature | 2026-10-16 | Catalogue complet : pages publiques Niveau, Matière et Série |
 | [`catalogue-niveau-eleve`](catalogue-niveau-eleve/memo.md) | livré | bugfix | — | Le catalogue de l'élève limité à son niveau |

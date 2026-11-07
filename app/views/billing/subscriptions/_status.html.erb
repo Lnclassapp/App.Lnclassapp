@@ -1,6 +1,6 @@
 <%# 🌐 UI · billing/subscriptions/_status — carte d'état de l'accès : gratuit, bloqué ou abonné %>
 <%# Rôle : titre en h2, texte et icône décorative selon Entities::Billing::Access ; les montants et dates viennent de l'offre %>
-<%# ADR  : cartes-activation (contexte billing, §4.5 et §4.8) · UDR : abonnement-eleve §3.3 %>
+<%# ADR  : 0126 (contexte billing, §4.5 et §4.8) · UDR : 0158 §3.3 %>
 <% offer_text = { price: t("billing.price"), date: subscription_date(Entities::Billing::Offer::VALID_UNTIL) } %>
 <% icon, tone, title, text = case access.status
    when :free then [ "gift", "bg-info-soft text-info", t(".free.title", count: access.days_left), t(".free.text", **offer_text) ]

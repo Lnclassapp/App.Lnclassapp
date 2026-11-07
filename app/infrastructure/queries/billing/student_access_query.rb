@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Billing::StudentAccessQuery
 # Rôle : l'accès d'un élève (gratuit, abonné, bloqué) lu sur la création de son compte et ses cartes activées ; jamais bloqué hors élève
-# ADR  : cartes-activation (contexte billing, §4.5 et §4.6)
+# ADR  : 0126 (contexte billing, §4.5 et §4.6)
 module Queries
   module Billing
     class StudentAccessQuery

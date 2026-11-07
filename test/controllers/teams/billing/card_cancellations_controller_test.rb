@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR caisse-equipe §3.5 : annuler une carte remise par son numéro ; une carte activée ne s'annule pas.
+# UDR-0159 §3.5 : annuler une carte remise par son numéro ; une carte activée ne s'annule pas.
 class Teams::Billing::CardCancellationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member

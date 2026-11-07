@@ -1,4 +1,4 @@
-# UDR-XXXX : Mon abonnement et bandeau des jours gratuits de l'élève
+# UDR-0158 : Mon abonnement et bandeau des jours gratuits de l'élève
 <!-- index
 titre: Abonnement de l'élève
 statut: Proposé
@@ -11,7 +11,7 @@ problematique: Dire à l'élève combien de jours gratuits il lui reste, où ach
 | **Statut** | Proposé |
 | **Date** | 2026-11-07 |
 | **Chantier** | `docs/chantiers/cartes-activation` |
-| **ADR lié** | ADR-XXXX-contexte-billing-cartes-activation |
+| **ADR lié** | ADR-0126 |
 | **Remplacé par** | — |
 
 ---

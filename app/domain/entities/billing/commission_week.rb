@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::CommissionWeek
 # Rôle : une semaine de commission, du vendredi 00:00 au jeudi 23:59 (Africa/Abidjan = UTC) ; 200 F par activation payante
-# ADR  : cartes-activation (contexte billing, §4.7)
+# ADR  : 0126 (contexte billing, §4.7)
 module Entities
   module Billing
     CommissionWeek = Data.define(:starts_on) do

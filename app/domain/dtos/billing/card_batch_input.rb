@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Billing::CardBatchInput
 # Rôle : forme d'un lot de cartes saisi à l'écran : quantité de 1 à 200, prix de l'offre ou offert (0 F)
-# ADR  : cartes-activation (contexte billing, §4.1 et §4.8) · UDR : caisse-equipe §3.3
+# ADR  : 0126 (contexte billing, §4.1 et §4.8) · UDR : 0159 §3.3
 module Dtos
   module Billing
     class CardBatchInput

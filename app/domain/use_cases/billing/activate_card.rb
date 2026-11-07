@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::ActivateCard
 # Rôle : un élève active une carte avec son code ; la carte est verrouillée le temps de la décision, l'école est celle de sa classe
-# ADR  : cartes-activation (contexte billing, §4.2, §4.3 et §4.10)
+# ADR  : 0126 (contexte billing, §4.2, §4.3 et §4.10)
 module UseCases
   module Billing
     class ActivateCard

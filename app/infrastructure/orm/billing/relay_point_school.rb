@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Billing::RelayPointSchool
 # Rôle : table billing_relay_point_schools, les écoles qu'un point relais dessert (une paire, une fois)
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Orm
   module Billing
     class RelayPointSchool < ApplicationRecord

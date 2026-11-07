@@ -179,16 +179,16 @@ Et les deux lignes restent visibles
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | Contexte borné **`billing`** (nouveau, ADR-XXXX-contexte-billing-cartes-activation). Entités : `Offer` (prix, fin d'abonnement, mise en ligne, jours gratuits, commissions), `Access` (gratuit · abonné · bloqué, jours restants), `ActivationCode` (génération, normalisation, format), `ActivationCard`, `CardBatch`, `RelayPoint`, `Remittance`, `CommissionWeek`. Ports : `RelayPointRepositoryPort`, `CardRepositoryPort`, `RemittanceRepositoryPort`, `StudentAccessPort`. Use cases : `SaveRelayPoint`, `CreateCardBatch`, `ActivateCard`, `CancelCard`, `RecordRemittance`. Policies : `ManageBillingPolicy`, `ActivateCardPolicy`. Garde ajoutée à `UseCases::Assessment::StartExerciseSession` et `UseCases::Catalog::CheckPractice` (dépendance `access:`). |
+| Domaine | Contexte borné **`billing`** (nouveau, ADR-0126). Entités : `Offer` (prix, fin d'abonnement, mise en ligne, jours gratuits, commissions), `Access` (gratuit · abonné · bloqué, jours restants), `ActivationCode` (génération, normalisation, format), `ActivationCard`, `CardBatch`, `RelayPoint`, `Remittance`, `CommissionWeek`. Ports : `RelayPointRepositoryPort`, `CardRepositoryPort`, `RemittanceRepositoryPort`, `StudentAccessPort`. Use cases : `SaveRelayPoint`, `CreateCardBatch`, `ActivateCard`, `CancelCard`, `RecordRemittance`. Policies : `ManageBillingPolicy`, `ActivateCardPolicy`. Garde ajoutée à `UseCases::Assessment::StartExerciseSession` et `UseCases::Catalog::CheckPractice` (dépendance `access:`). |
 | Infrastructure | Migrations : `billing_relay_points`, `billing_relay_point_schools`, `billing_card_batches`, `billing_activation_cards` (code chiffré déterministe), `billing_remittances`. ORM `Orm::Billing::*`, repositories, queries `Queries::Billing::StudentAccessQuery`, `CashboxQuery`, `RelayPointsForSchoolQuery`. |
 | Delivery | Élève : `Billing::SubscriptionsController#show`, `Billing::ActivationsController#create` (`rate_limit`). Équipe : `Teams::Billing::RelayPointsController`, `CardBatchesController` (dont `show` imprimable), `CardCancellationsController`, `RemittancesController`, `CashboxesController#show`. Redirection « abonnement requis » dans `Assessment::ExerciseSessionsController`, `Assessment::SheetChecksController`, `Catalog::PracticeChecksController`. |
-| UI | Élève : page Mon abonnement, bandeau de l'accueil élève. Équipe : points relais, lots et planche d'impression, caisse, versements, annulation. UDR-XXXX-abonnement-eleve, UDR-XXXX-caisse-equipe. |
+| UI | Élève : page Mon abonnement, bandeau de l'accueil élève. Équipe : points relais, lots et planche d'impression, caisse, versements, annulation. UDR-0158, UDR-0159. |
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-contexte-billing-cartes-activation — nouveau contexte `billing`, cinq tables, code chiffré déterministe, garde d'accès par port, freinage des essais.
-- UDR-XXXX-abonnement-eleve — page Mon abonnement et bandeau des jours gratuits.
-- UDR-XXXX-caisse-equipe — écrans de l'équipe : points relais, lots, planche, caisse, versements, annulation.
+- ADR-0126 — nouveau contexte `billing`, cinq tables, code chiffré déterministe, garde d'accès par port, freinage des essais.
+- UDR-0158 — page Mon abonnement et bandeau des jours gratuits.
+- UDR-0159 — écrans de l'équipe : points relais, lots, planche, caisse, versements, annulation.
 
 ## 7. Mesures
 

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Billing::RelayPointRepository
 # Rôle : traduit Orm::Billing::RelayPoint (et ses écoles) en entités ; lectures de l'écran : écoles à cocher, lots, école d'un élève
-# ADR  : cartes-activation (contexte billing, §4.1), 0029
+# ADR  : 0126 (contexte billing, §4.1), 0029
 module Repositories
   module Billing
     class RelayPointRepository

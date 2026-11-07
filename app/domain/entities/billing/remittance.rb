@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::Remittance
 # Rôle : un versement d'un point relais, entier signé, jamais modifié ni supprimé ; une erreur se corrige par un versement négatif
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Entities
   module Billing
     Remittance = Data.define(:id, :public_id, :relay_point_id, :amount_xof, :received_at, :reference, :reason, :recorded_by_id,

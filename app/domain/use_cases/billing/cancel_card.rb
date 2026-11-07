@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::CancelCard
 # Rôle : l'équipe annule une carte remise et non activée, avec un motif ; l'auteur, la date et le motif restent dans l'audit
-# ADR  : cartes-activation (contexte billing, §4.3 et §4.7)
+# ADR  : 0126 (contexte billing, §4.3 et §4.7)
 module UseCases
   module Billing
     class CancelCard

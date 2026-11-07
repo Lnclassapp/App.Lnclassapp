@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR caisse-equipe §3.2 et §3.3, PRD §4 « Points relais et lots » : l'équipe crée et modifie les points relais et leurs écoles.
+# UDR-0159 §3.2 et §3.3, PRD §4 « Points relais et lots » : l'équipe crée et modifie les points relais et leurs écoles.
 class Teams::Billing::RelayPointsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member

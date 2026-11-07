@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::Access
 # Rôle : l'accès d'un élève, gratuit (jours restants), abonné ou bloqué ; calculé, jamais stocké
-# ADR  : cartes-activation (contexte billing, §4.5 et §6)
+# ADR  : 0126 (contexte billing, §4.5 et §6)
 module Entities
   module Billing
     Access = Data.define(:status, :days_left, :subscribed_until) do

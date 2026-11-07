@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR caisse-equipe §3.6 : saisir un versement dans la modale, caisse rechargée en Turbo Stream.
+# UDR-0159 §3.6 : saisir un versement dans la modale, caisse rechargée en Turbo Stream.
 class Teams::Billing::RemittancesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member

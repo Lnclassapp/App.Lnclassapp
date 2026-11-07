@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/card_batches/show — planche d'impression d'un lot de cartes (layout print) %>
 <%# Rôle : grille 3 × 7 cartes de 63 × 38 mm par page A4 : code XXXX-XXXX-XXXX, N° de carte, prix, fin d'abonnement ; bouton « Imprimer » masqué à l'impression %>
-<%# ADR  : cartes-activation (contexte billing, §4.2) · UDR : caisse-equipe §3.4 %>
+<%# ADR  : 0126 (contexte billing, §4.2) · UDR : 0159 §3.4 %>
 <% page_title t(".title") %>
 <h1 class="sr-only"><%= t(".title") %></h1>
 <div data-controller="print" class="mb-6 flex flex-wrap items-center gap-3 print:hidden">

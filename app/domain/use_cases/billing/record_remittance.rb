@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Billing::RecordRemittance
 # Rôle : l'équipe saisit le versement d'un point relais ; une erreur se corrige par un versement négatif avec motif, jamais par une modification
-# ADR  : cartes-activation (contexte billing, §4.1 et §4.7)
+# ADR  : 0126 (contexte billing, §4.1 et §4.7)
 module UseCases
   module Billing
     class RecordRemittance

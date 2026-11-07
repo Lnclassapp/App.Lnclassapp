@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Billing::RelayPointRepositoryPort
 # Rôle : contrat des points relais et de leurs écoles
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Ports
   module Billing
     module RelayPointRepositoryPort

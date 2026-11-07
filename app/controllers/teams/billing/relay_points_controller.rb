@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::Billing::RelayPointsController
 # Rôle : l'équipe liste, crée et modifie les points relais et leurs écoles (modale), lit la fiche d'un point relais, ses lots, ses chiffres de caisse et ses versements
-# ADR  : cartes-activation (contexte billing, §4.1) · UDR : caisse-equipe §3.2 et §3.3
+# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 et §3.3
 module Teams
   module Billing
     class RelayPointsController < BaseController

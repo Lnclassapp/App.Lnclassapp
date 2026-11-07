@@ -1,6 +1,6 @@
 <%# 🌐 UI · billing/subscriptions/_activation_form — « J'ai ma carte » : saisie du code de 12 caractères %>
 <%# Rôle : champ 48 px relié à son aide et à son erreur (role=alert, aria-invalid), la saisie reste en échec ; bouton plein largeur %>
-<%# ADR  : cartes-activation (contexte billing, §4.2 et §4.4) · UDR : abonnement-eleve §3.5 %>
+<%# ADR  : 0126 (contexte billing, §4.2 et §4.4) · UDR : 0158 §3.5 %>
 <%= ui_card title: t(".title") do %>
   <%= form_with url: billing_activation_path, id: "activation-form", class: "space-y-4" do |f| %>
     <div class="space-y-1.5">

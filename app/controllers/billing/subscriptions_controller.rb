@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Billing::SubscriptionsController
 # Rôle : Mon abonnement, réservé à l'élève : état de l'accès, points relais de son école, saisie du code ; zéro logique métier
-# ADR  : cartes-activation (contexte billing, §4.5) · UDR : abonnement-eleve
+# ADR  : 0126 (contexte billing, §4.5) · UDR : 0158
 module Billing
   class SubscriptionsController < AuthenticatedController
     allow_roles :student

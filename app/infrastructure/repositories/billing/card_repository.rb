@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Billing::CardRepository
 # Rôle : traduit Orm::Billing::ActivationCard et CardBatch en entités ; tire les codes, verrouille la carte à activer ou annuler
-# ADR  : cartes-activation (contexte billing, §4.2 et §4.3), 0029
+# ADR  : 0126 (contexte billing, §4.2 et §4.3), 0029
 module Repositories
   module Billing
     class CardRepository

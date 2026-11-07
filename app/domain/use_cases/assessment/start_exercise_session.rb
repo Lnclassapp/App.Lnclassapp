@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::StartExerciseSession
 # Rôle : l'élève démarre ou reprend un exercice publié ; « Recommencer » abandonne la session ouverte et en ouvre une autre
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0115, 0121 (attach_assignment), cartes-activation (contexte billing, §4.6 : garde d'accès)
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0115, 0121 (attach_assignment), 0126 (contexte billing, §4.6 : garde d'accès)
 module UseCases
   module Assessment
     class StartExerciseSession

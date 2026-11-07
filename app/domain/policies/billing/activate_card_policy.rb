@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Billing::ActivateCardPolicy
 # Rôle : activer une carte et lire Mon abonnement : l'élève seul
-# ADR  : cartes-activation (contexte billing, PRD §2)
+# ADR  : 0126 (contexte billing, PRD §2)
 module Policies
   module Billing
     class ActivateCardPolicy

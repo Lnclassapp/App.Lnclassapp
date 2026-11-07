@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::Offer
 # Rôle : l'offre de lancement, prix d'une carte, fin d'abonnement, mise en ligne, jours gratuits et commissions
-# ADR  : cartes-activation (contexte billing, §4.8)
+# ADR  : 0126 (contexte billing, §4.8)
 module Entities
   module Billing
     module Offer

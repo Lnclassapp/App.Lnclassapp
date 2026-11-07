@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Billing::ActivationCard
 # Rôle : une carte d'activation, remise, activée ou annulée ; activée, elle est l'abonnement de l'élève
-# ADR  : cartes-activation (contexte billing, §4)
+# ADR  : 0126 (contexte billing, §4)
 module Entities
   module Billing
     ActivationCard = Data.define(:id, :public_id, :batch_id, :relay_point_id, :serial, :code, :price_xof, :valid_until, :state,

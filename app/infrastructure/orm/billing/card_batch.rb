@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Billing::CardBatch
 # Rôle : table billing_card_batches, un lot de cartes créé pour un point relais à un prix figé (0 = offert)
-# ADR  : cartes-activation (contexte billing, §4.1)
+# ADR  : 0126 (contexte billing, §4.1)
 module Orm
   module Billing
     class CardBatch < ApplicationRecord

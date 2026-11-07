@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/billing/cashboxes/_relays — les points relais et ce qu'ils doivent %>
 <%# Rôle : cartes remises, activées, annulées, en circulation, versé, reste dû (rouge s'il est > 0, vert sinon), trié par reste dû décroissant %>
-<%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
+<%# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1 %>
 <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
 <%= ui_card title: t(".title"), id: "cashbox_relays" do %>
   <div>
