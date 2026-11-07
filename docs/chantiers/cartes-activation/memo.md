@@ -38,7 +38,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 - **Le versement automatique des commissions** : l'application calcule, le porteur paie lui-même par Wave.
 - **Le rapprochement automatique avec le relevé Wave** : l'équipe saisit les versements à la main.
 - **Le prix normal à 16 500 F et le paiement par trimestre à 5 500 F** : une seule offre, 10 000 F, jusqu'au 1er décembre 2026.
-- **Les enseignants et le personnel de l'établissement** : ils ne paient pas et ne sont jamais bloqués.
+- **Les enseignants et le personnel de l'établissement** : ils ne paient pas, ne sont jamais bloqués, et **ne voient pas** qui a payé (Q10).
 - **Le calendrier de versement des 1 000 F aux écoles** : l'application cumule ce qui est dû, la date se décide plus tard.
 - **Le remboursement dans l'application** : géré hors application par le porteur (CGV : 7 jours).
 - **L'import et la publication des leçons de 3e, 1re et Tle** : confiés à un autre agent.
@@ -59,6 +59,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 
 | Q8 — Au 8e jour sans carte, un exercice donné par l'enseignant à toute la classe est-il bloqué ? | **Oui, tout est bloqué**, exercices donnés par l'enseignant compris (porteur, 2026-11-07). | Un seul blocage, au démarrage de toute séance d'exercice, quelle que soit son origine. L'enseignant verra des élèves « non faits » : l'école a intérêt à ce que toute la classe s'abonne. |
 | Q9 — Quelle école touche les 1 000 F quand la carte est vendue près d'une autre école ? | **L'école de l'élève**, celle de son compte au moment où il saisit le code (porteur, 2026-11-07). | L'école est relevée à l'activation et figée : un changement d'école ensuite ne déplace pas la commission. Un élève sans école à l'activation ne rapporte de commission à personne. La carte n'a pas d'école, seulement un point relais. |
+| Q10 — Qui, à l'école, voit les élèves qui ont payé ? | **Personne** : ni la direction ni les enseignants (porteur, 2026-11-07). | L'abonnement reste entre l'élève, l'équipe et le point relais. Aucune vue d'établissement ne change ; les relances passent par l'équipe et les points relais. La direction et les enseignants rejoignent le hors périmètre. |
 
 ## Cas limites identifiés
 
