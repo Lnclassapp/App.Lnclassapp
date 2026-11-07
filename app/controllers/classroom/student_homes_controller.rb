@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte du prochain exercice, la grille, le carrousel d'annonces, l'historique différé ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), XXXX accueil élève (§3.3)
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), cartes-activation (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), XXXX accueil élève (§3.3), abonnement-eleve (§3 bandeau)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -18,6 +18,7 @@ module Classroom
     def show
       return render_history if turbo_frame_request_id == RECENT_ACTIVITY_FRAME
 
+      @access = Queries::Billing::StudentAccessQuery.new.call(student_id: current_actor.user_id, at: Time.current)
       @home = query.call(student_id: current_actor.user_id)
       return no_classroom if @home.nil?
 

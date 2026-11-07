@@ -47,6 +47,18 @@ module UseCases
 
       def blanks(*texts) = { "blanks" => texts.each_with_index.to_h { |text, index| [ index.to_s, text ] } }
 
+      test "un élève bloqué est refusé : :locked / :subscription_required, avant de lire la notion" do
+        blocked = Class.new { include Ports::Billing::StudentAccessPort; def call(student_id:, at:) = Entities::Billing::Access.new(status: :blocked, days_left: 0, subscribed_until: nil) }.new
+        notions = FakeNotions.new(nil)
+        use_case = check_practice_with(notions, access: blocked)
+
+        result = check(use_case, {}, digest: "x")
+
+        assert_equal :locked, result.code
+        assert_equal [ :subscription_required ], result.errors[:base]
+        assert_nil notions.asked
+      end
+
       test "un chiffré à une case : juste, à revoir ou à compléter selon la saisie, unité comprise" do
         use_case = build(numeric_question)
 
@@ -163,7 +175,7 @@ module UseCases
 
         assert result.success?, result.errors.inspect
         assert_equal before, counts.call
-        assert_equal %i[notions policy level_policy], CheckPractice.instance_method(:initialize).parameters.map(&:last), "aucun port d'écriture injecté"
+        assert_equal %i[notions policy level_policy access clock], CheckPractice.instance_method(:initialize).parameters.map(&:last), "aucun port d'écriture injecté (access est une lecture)"
       end
 
       test "plusieurs cases : un verdict par case" do

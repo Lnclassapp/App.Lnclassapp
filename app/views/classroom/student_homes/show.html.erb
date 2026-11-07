@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève : bandeau, carte du prochain exercice, grille des matières, annonces, historique %>
 <%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (912 px au plus dès lg) : la carte, 7 cases, le carrousel, l'historique différé ; sans classe, la seule carte « Choisis ta classe » %>
-<%# ADR  : 0033, 0043, 0078, 0085, 0089 · UDR : 0071 §3.5, 0081 §3.5, XXXX accueil élève (§3.1 structure, §3.3 états) · titre « Accueil · Élève · Lnclass » %>
+<%# ADR  : 0033, 0043, 0078, 0085, 0089, cartes-activation (contexte billing, §4.5) · UDR : 0071 §3.5, 0081 §3.5, XXXX accueil élève (§3.1 structure, §3.3 états), abonnement-eleve (§3 bandeau) · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
 <h1 class="sr-only"><%= t(".page_title") %></h1>
@@ -13,6 +13,7 @@
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue ne peut plus élargir la colonne, ni la page. -mt-12 : la carte déborde sur le
     bandeau (le shell garde 24 px de marge haute ; sans bandeau, dans la coque Android, elle reste à sa place) ; data-bleed-keep : les cartes restent dans la marge, arrondies, sous 640 px. %>
 <div id="student_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-228", "-mt-12 lg:mt-0" => !lnclass_app?) %>">
+  <%= render "billing/subscriptions/home_notice", access: @access %>
   <%= render "next_step", home: @home, daily: @daily, form: @form, archived: @archived, invite_href: %>
   <% if @home %>
     <%# UDR accueil élève §3.3 : sans classe, la grille, les annonces et l'historique sont masqués. %>

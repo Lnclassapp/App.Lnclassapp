@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Assessment::StartExerciseSession
 # Rôle : l'élève démarre ou reprend un exercice publié ; « Recommencer » abandonne la session ouverte et en ouvre une autre
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0115, 0121 (attach_assignment)
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0115, 0121 (attach_assignment), cartes-activation (contexte billing, §4.6 : garde d'accès)
 module UseCases
   module Assessment
     class StartExerciseSession
-      def initialize(exercises:, sessions:, gaps:, memberships:, assignments:, policy:, transaction:, clock:)
+      def initialize(exercises:, sessions:, gaps:, memberships:, assignments:, policy:, transaction:, clock:, access:)
         @exercises = exercises
         @sessions = sessions
         @gaps = gaps
@@ -13,10 +13,12 @@ module UseCases
         @policy = policy
         @transaction = transaction
         @clock = clock
+        @access = access
       end
 
       # → Result(ExerciseSession) | :not_found (exercice absent, ou non publié : le brouillon n'existe pas pour l'élève)
       #   | :forbidden | :conflict (en pause après 3 copies d'affilée, ADR-0115 : errors base [:paused] et resume_at, l'heure de reprise)
+      #   | :locked (élève dont la période gratuite est finie et sans abonnement : errors base [:subscription_required], rien n'est écrit)
       #   attach_assignment: false → la session n'est rattachée à aucune assignation (copie d'entraînement refaite après le rendu d'un devoir)
       def call(actor:, exercise_public_id:, restart: false, attach_assignment: true)
         exercise = @exercises.find_by_public_id(public_id: exercise_public_id)
@@ -25,6 +27,7 @@ module UseCases
         allowed = @policy.call(actor:, exercise:)
         return Shared::Result.failure(:not_found) if allowed.errors.fetch(:base, []).include?(:not_published)
         return allowed if allowed.failure?
+        return Shared::Result.failure(:locked, errors: { base: [ :subscription_required ] }) if @access.call(student_id: actor.user_id, at: @clock.now).blocked?
 
         @transaction.call { open_session(actor, exercise, restart, attach_assignment) }
       end
