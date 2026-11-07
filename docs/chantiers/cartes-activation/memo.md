@@ -20,7 +20,7 @@ Les élèves de la DRENA de Tiassalé paient en espèces. Le porteur a des parte
 
 - **Élève** : utilise l'application gratuitement 7 jours, puis achète une carte au point relais et saisit son code pour continuer jusqu'en juillet 2027.
 - **Point relais** (partenaire, pas un utilisateur de l'application) : remet les cartes contre 10 000 F, verse l'argent au porteur à 12 h et 18 h, touche 200 F par abonnement chaque vendredi.
-- **École** (l'établissement de l'élève) : touche 1 000 F par abonnement chaque vendredi.
+- **École** (l'établissement de l'élève) : a droit à 1 000 F par abonnement, versés à une date lointaine fixée plus tard.
 - **Équipe** (le porteur) : crée les cartes, les remet aux points relais, saisit les versements reçus, voit ce que chacun doit et ce qu'il faut payer le vendredi.
 
 ## Pourquoi maintenant
@@ -39,6 +39,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 - **Le rapprochement automatique avec le relevé Wave** : l'équipe saisit les versements à la main.
 - **Le prix normal à 16 500 F et le paiement par trimestre à 5 500 F** : une seule offre, 10 000 F, jusqu'au 1er décembre 2026.
 - **Les enseignants et le personnel de l'établissement** : ils ne paient pas et ne sont jamais bloqués.
+- **Le calendrier de versement des 1 000 F aux écoles** : l'application cumule ce qui est dû, la date se décide plus tard.
 - **Le remboursement dans l'application** : géré hors application par le porteur (CGV : 7 jours).
 - **L'import et la publication des leçons de 3e, 1re et Tle** : confiés à un autre agent.
 
@@ -52,9 +53,9 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 | Q2 — Combien, pour combien de temps ? | **10 000 F**, offre de lancement en paiement unique jusqu'au **1er décembre 2026** ; valable jusqu'en **juillet 2027**. | Un abonnement a une date de fin fixe (fin de l'année scolaire 2026-2027), pas une durée glissante. Le prix est porté par la carte, pas par l'élève. |
 | Q3 — Que voit un élève qui n'a pas payé ? | Tout est ouvert **7 jours** depuis la création du compte, puis on l'invite à payer (le porteur préfère l'accès ouvert à l'accès fermé d'emblée). | La période gratuite passe de 30 jours (grill de `abonnement-mobile-money`, Q7) à **7 jours**. Au 8e jour, l'élève voit tout mais ne peut plus démarrer d'exercice ; l'historique reste. |
 | Q4 — Comment savoir qui a payé sur un Wave personnel ? | Par le **code d'activation** remis au point relais et saisi par l'élève. | Un code n'active qu'un seul compte, une seule fois. |
-| Q5 — Combien gagnent les intermédiaires ? | **200 F au point relais** et **1 000 F à l'école** par abonnement, chaque vendredi. Plus de commission aux enseignants ni à la DRENA. | Deux commissions calculées par semaine. Il reste 8 800 F au porteur par abonnement. |
+| Q5 — Combien gagnent les intermédiaires ? | **200 F au point relais** et **1 000 F à l'école** par abonnement, chaque vendredi. Plus de commission aux enseignants ni à la DRENA. | Deux commissions calculées : celle du point relais par semaine, celle de l'école en cumul (voir Q7). Il reste 8 800 F au porteur par abonnement, 9 800 F en trésorerie tant que l'école n'est pas payée. |
 | Q6 — Comment savoir ce qu'un point relais doit ? | Proposé par Claude, accepté : compter les **cartes remises** au point relais, pas les codes saisis. | Une carte a un **lot**, un **point relais** et un **état** (au stock, remise, activée). Ce que doit un point relais = cartes remises × 10 000 F − versements saisis. |
-| Q7 — Quand payer les commissions ? | **Chaque vendredi.** | Une vue « à payer ce vendredi » : commissions dues sur la semaine écoulée, par point relais et par école. |
+| Q7 — Quand payer les commissions ? | **Chaque vendredi** pour le point relais. Les **1 000 F de l'école** sont versés **à une date lointaine**, pour que Lnclass se renforce d'abord (porteur, 2026-11-07). | Une vue « à payer ce vendredi » : commissions des points relais sur la semaine écoulée. Pour les écoles, un **cumul dû** par établissement, sans échéance ; la date de versement se décidera plus tard (hors périmètre). |
 
 ## Cas limites identifiés
 
