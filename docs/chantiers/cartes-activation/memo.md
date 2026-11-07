@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill en cours (2026-11-07) |
+| **Statut** | décision — grill clos (Q1 à Q13, 2026-11-07) |
 | **Ouvert le** | 2026-11-07 |
 | **Branche** | `ccr-5a226b75-gfu543` *(branche de session imposée ; une branche `feature/cartes-activation` au premier code si le porteur le veut)* |
 | **Programme** | — *(né du plan de lancement dans la DRENA de Tiassalé, 2026-11-07)* |
@@ -41,6 +41,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 - **Les enseignants et le personnel de l'établissement** : ils ne paient pas, ne sont jamais bloqués, et **ne voient pas** qui a payé (Q10).
 - **Le calendrier de versement des 1 000 F aux écoles** : l'application cumule ce qui est dû, la date se décide plus tard.
 - **Le remboursement dans l'application** : géré hors application par le porteur (CGV : 7 jours).
+- **Le parent** : pas sur l'application au lancement (Q13).
 - **L'import et la publication des leçons de 3e, 1re et Tle** : confiés à un autre agent.
 
 ## Ce que le grill a révélé
@@ -61,6 +62,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 | Q10 — Qui, à l'école, voit les élèves qui ont payé ? | **Personne** : ni la direction ni les enseignants (porteur, 2026-11-07). | L'abonnement reste entre l'élève, l'équipe et le point relais. Aucune vue d'établissement ne change ; les relances passent par l'équipe et les points relais. La direction et les enseignants rejoignent le hors périmètre. |
 | Q11 — Le point relais déclare des cartes perdues : les doit-il ? | **Non** : l'équipe les annule et le point relais ne les doit plus ; **la carte annulée ne passe plus** (porteur, 2026-11-07). Claude recommandait l'inverse (risque de fraude : vendre puis déclarer perdu). | Une carte peut être **annulée** par l'équipe tant qu'elle n'est pas activée ; elle sort de la dette du point relais et son code est refusé à jamais. Une carte activée ne s'annule pas. Chaque annulation garde qui, quand et pourquoi. Contre-mesure de la fraude : l'élève qui a payé une carte annulée se plaint, et l'équipe voit à quel point relais elle avait été remise. |
 | Q12 — Que voit l'élève bloqué au 8e jour ? | **Où acheter** : « Achète ta carte à 10 000 F chez *<point relais>*, à côté de ton école, puis entre ton code ici » (porteur, 2026-11-07). | Un point relais est **rattaché à une ou plusieurs écoles** (nom, lieu, téléphone). L'invitation nomme les points relais de l'école de l'élève ; sans école ou sans point relais rattaché, un message général avec le numéro WhatsApp de l'équipe. |
+| Q13 — Comptes créés avant la mise en ligne, et parents ? | **D'accord** : les 7 jours d'un compte plus ancien partent de la mise en ligne. **Les parents ne sont pas sur l'application au lancement** : seuls les établissements, les enseignants et les élèves (porteur, 2026-11-07). | Le début de la période gratuite est le plus tardif de la création du compte et de la date de mise en ligne. Le parent rejoint le hors périmètre. |
 
 ## Cas limites identifiés
 
@@ -70,7 +72,8 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 - Le point relais perd une carte ou se la fait voler : l'équipe l'annule tant qu'elle n'est pas activée, la dette baisse d'autant (Q11).
 - Un élève déjà abonné saisit une seconde carte : refus, la carte reste utilisable par un autre élève.
 
+- Un compte créé avant la mise en ligne : ses 7 jours partent de la mise en ligne (Q13).
+
 ## Questions encore ouvertes
 
-- Les élèves déjà inscrits depuis plus de 7 jours avant le lancement : bloqués dès la mise en ligne ?
-- Le parent : voit-il quelque chose ?
+- Aucune question métier. Les choix techniques (forme du code, freinage des essais, contexte borné) se tranchent dans l'ADR.
