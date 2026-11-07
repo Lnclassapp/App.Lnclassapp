@@ -3,30 +3,30 @@
 <%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
 <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
 <%= ui_card title: t(".title"), id: "cashbox_relays" do %>
-  <div class="overflow-x-auto">
-    <table class="w-full min-w-3xl text-left text-sm">
+  <div>
+    <table class="w-full text-left text-sm">
       <caption class="sr-only"><%= t(".caption") %></caption>
       <thead class="border-b border-line text-xs text-mute">
         <tr>
-          <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.name") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.issued") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.activated") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.cancelled") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.in_circulation") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.remitted") %></th>
-          <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.due") %></th>
+          <th scope="col" class="px-2 py-3 font-medium md:px-4"><%= t(".columns.name") %></th>
+          <th scope="col" class="hidden px-4 py-3 text-right font-medium md:table-cell"><%= t(".columns.issued") %></th>
+          <th scope="col" class="hidden px-4 py-3 text-right font-medium md:table-cell"><%= t(".columns.activated") %></th>
+          <th scope="col" class="hidden px-4 py-3 text-right font-medium md:table-cell"><%= t(".columns.cancelled") %></th>
+          <th scope="col" class="hidden px-4 py-3 text-right font-medium md:table-cell"><%= t(".columns.in_circulation") %></th>
+          <th scope="col" class="px-2 py-3 text-right font-medium md:px-4"><%= t(".columns.remitted") %></th>
+          <th scope="col" class="px-2 py-3 text-right font-medium md:px-4"><%= t(".columns.due") %></th>
         </tr>
       </thead>
       <tbody class="divide-y divide-line">
         <% cashbox.relays.each do |line| %>
           <tr>
-            <td class="px-4 py-3 font-medium"><%= link_to line.name, teams_billing_relay_point_path(line.public_id), class: "text-brand-strong underline-offset-2 hover:underline focus-visible:underline" %></td>
-            <td class="px-4 py-3 text-right tabular-nums"><%= line.issued_count %></td>
-            <td class="px-4 py-3 text-right tabular-nums"><%= line.activated_count %></td>
-            <td class="px-4 py-3 text-right tabular-nums"><%= line.cancelled_count %></td>
-            <td class="px-4 py-3 text-right tabular-nums"><%= line.in_circulation %></td>
-            <td class="px-4 py-3 text-right whitespace-nowrap tabular-nums"><%= money.call(line.remitted_xof) %></td>
-            <td class="<%= class_names("px-4 py-3 text-right font-semibold whitespace-nowrap tabular-nums", "text-error" => line.due_xof.positive?, "text-success" => !line.due_xof.positive?) %>"><%= money.call(line.due_xof) %></td>
+            <td class="px-2 py-3 font-medium md:px-4"><%= link_to line.name, teams_billing_relay_point_path(line.public_id), class: "text-brand-strong underline-offset-2 hover:underline focus-visible:underline" %></td>
+            <td class="hidden px-4 py-3 text-right tabular-nums md:table-cell"><%= line.issued_count %></td>
+            <td class="hidden px-4 py-3 text-right tabular-nums md:table-cell"><%= line.activated_count %></td>
+            <td class="hidden px-4 py-3 text-right tabular-nums md:table-cell"><%= line.cancelled_count %></td>
+            <td class="hidden px-4 py-3 text-right tabular-nums md:table-cell"><%= line.in_circulation %></td>
+            <td class="px-2 py-3 text-right whitespace-nowrap tabular-nums md:px-4"><%= money.call(line.remitted_xof) %></td>
+            <td class="<%= class_names("px-2 py-3 text-right font-medium whitespace-nowrap tabular-nums md:px-4", "text-error" => line.due_xof.positive?, "text-success" => !line.due_xof.positive?) %>"><%= money.call(line.due_xof) %></td>
           </tr>
         <% end %>
       </tbody>

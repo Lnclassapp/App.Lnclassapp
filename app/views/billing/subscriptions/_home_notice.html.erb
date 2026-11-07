@@ -16,7 +16,7 @@
           <%= t(".free", count: access.days_left) %>
         <% end %>
       </span>
-      <%= link_to t(urgent ? ".subscribe_link" : ".free_link"), billing_subscription_path, class: "shrink-0 font-semibold underline" %>
+      <%= link_to t(urgent ? ".subscribe_link" : ".free_link"), billing_subscription_path, class: "shrink-0 font-medium underline" %>
     </p>
   </section>
 <% end %>

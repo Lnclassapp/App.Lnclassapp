@@ -11,6 +11,8 @@ module Dtos
       REASON_MAX = 200
       MINUS_SIGNS = /[−–—]/
       AMOUNT_FORMAT = /\A-?\d{1,9}\z/
+      DIGITS_ONLY = /\A-?\d+\z/
+      FUTURE_TOLERANCE = 1.day
 
       attribute :relay_point_public_id, :string
       attribute :amount_xof, :string
@@ -42,12 +44,15 @@ module Dtos
       def received_at_is_readable
         typed = @attributes["received_at"].value_before_type_cast
         errors.add(:received_at, :invalid) if typed.present? && received_at.nil?
+        errors.add(:received_at, :in_the_future) if received_at && received_at > Time.current + FUTURE_TOLERANCE
       end
+
+      def amount_xof_digits_only? = amount_xof.to_s.gsub(MINUS_SIGNS, "-").gsub(/[[:space:]]/, "").match?(DIGITS_ONLY)
 
       def amount_is_a_signed_integer
         return if amount_xof.blank?
 
-        errors.add(:amount_xof, :not_an_integer) if amount.nil?
+        errors.add(:amount_xof, amount_xof_digits_only? ? :too_large : :not_an_integer) if amount.nil?
         errors.add(:amount_xof, :other_than, count: 0) if amount&.zero?
       end
     end

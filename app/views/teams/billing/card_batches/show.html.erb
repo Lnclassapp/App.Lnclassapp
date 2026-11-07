@@ -11,7 +11,7 @@
   <p class="text-sm text-mute"><%= t(".count", count: @cards.size) %></p>
 </div>
 <% @cards.each_slice(21) do |page| %>
-  <section class="mx-auto grid w-fit grid-cols-3 break-after-page last:break-after-auto">
+  <section class="mx-auto grid w-fit grid-cols-1 gap-3 break-after-page sm:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-0 last:break-after-auto">
     <% page.each do |card| %>
       <article data-card class="flex h-36 w-60 flex-col justify-between border border-dashed border-line-strong p-2 break-inside-avoid">
         <header class="flex items-start justify-between gap-2">

@@ -18,7 +18,7 @@
     <dl class="grid gap-4 text-sm sm:grid-cols-3">
       <div>
         <dt class="text-xs text-mute"><%= t(".phone") %></dt>
-        <dd><%= link_to "tel:#{@relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 text-brand" do %><%= ui_icon "phone", size: :sm %><%= @relay_point.phone %><% end %></dd>
+        <dd><%= link_to "tel:#{@relay_point.phone}", class: "inline-flex min-h-tap items-center gap-2 whitespace-nowrap text-brand" do %><%= ui_icon "phone", size: :sm %><%= @relay_point.phone %><% end %></dd>
       </div>
       <div>
         <dt class="text-xs text-mute"><%= t(".state") %></dt>
@@ -43,12 +43,12 @@
             [ :in_circulation, @cashbox_line.in_circulation ], [ :remitted, money.call(@cashbox_line.remitted_xof) ] ].each do |key, value| %>
         <div>
           <dt class="text-xs text-mute"><%= t(".figures.#{key}") %></dt>
-          <dd class="text-lg font-semibold tabular-nums text-ink"><%= value %></dd>
+          <dd class="text-lg font-medium tabular-nums text-ink"><%= value %></dd>
         </div>
       <% end %>
       <div>
         <dt class="text-xs text-mute"><%= t(".figures.due") %></dt>
-        <dd id="relay_point_due" class="<%= class_names("text-lg font-semibold tabular-nums", "text-error" => @cashbox_line.due_xof.positive?, "text-success" => !@cashbox_line.due_xof.positive?) %>"><%= money.call(@cashbox_line.due_xof) %></dd>
+        <dd id="relay_point_due" class="<%= class_names("text-lg font-medium tabular-nums", "text-error" => @cashbox_line.due_xof.positive?, "text-success" => !@cashbox_line.due_xof.positive?) %>"><%= money.call(@cashbox_line.due_xof) %></dd>
       </div>
     </dl>
   <% end %>
@@ -57,24 +57,30 @@
     <% if @remittances.empty? %>
       <%= ui_empty_state title: t(".no_remittance"), icon: "banknotes" %>
     <% else %>
-      <div class="relative overflow-x-auto">
-        <table class="w-full min-w-md text-left text-sm">
+      <div class="relative">
+        <table class="w-full text-left text-sm">
           <caption class="sr-only"><%= t(".remittances") %></caption>
           <thead class="border-b border-line text-xs text-mute">
             <tr>
               <th scope="col" class="py-3 pr-4 font-medium"><%= t(".remittance_columns.date") %></th>
               <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".remittance_columns.amount") %></th>
-              <th scope="col" class="px-4 py-3 font-medium"><%= t(".remittance_columns.reference") %></th>
-              <th scope="col" class="px-4 py-3 font-medium"><%= t(".remittance_columns.reason") %></th>
+              <th scope="col" class="hidden px-4 py-3 font-medium md:table-cell"><%= t(".remittance_columns.reference") %></th>
+              <th scope="col" class="hidden px-4 py-3 font-medium md:table-cell"><%= t(".remittance_columns.reason") %></th>
             </tr>
           </thead>
           <tbody id="relay_point_remittances" class="divide-y divide-line">
             <% @remittances.each do |remittance| %>
               <tr id="remittance_<%= remittance.public_id %>">
-                <td class="py-3 pr-4"><%= l(remittance.received_at.to_date, format: :long).squish %></td>
-                <td class="px-4 py-3 text-right whitespace-nowrap tabular-nums"><%= money.call(remittance.amount_xof) %></td>
-                <td class="px-4 py-3"><%= remittance.reference %></td>
-                <td class="px-4 py-3"><%= remittance.reason %></td>
+                <td class="py-3 pr-2 md:pr-4">
+                  <%= l(remittance.received_at.to_date, format: :long).squish %>
+                  <%# Au téléphone, la référence et le motif passent sous la date (les colonnes ne tiennent pas) %>
+                  <% if remittance.reference.present? || remittance.reason.present? %>
+                    <span class="mt-1 block text-xs text-mute md:hidden"><%= [ remittance.reference, remittance.reason ].compact_blank.join(" · ") %></span>
+                  <% end %>
+                </td>
+                <td class="px-2 py-3 text-right whitespace-nowrap tabular-nums md:px-4"><%= money.call(remittance.amount_xof) %></td>
+                <td class="hidden px-4 py-3 md:table-cell"><%= remittance.reference %></td>
+                <td class="hidden px-4 py-3 md:table-cell"><%= remittance.reason %></td>
               </tr>
             <% end %>
           </tbody>
@@ -87,24 +93,24 @@
     <% if @batches.empty? %>
       <%= ui_empty_state title: t(".no_batch"), icon: "banknotes" %>
     <% else %>
-      <div class="relative overflow-x-auto">
-        <table class="w-full min-w-md text-left text-sm">
+      <div class="relative">
+        <table class="w-full text-left text-sm">
           <caption class="sr-only"><%= t(".batches") %></caption>
           <thead class="border-b border-line text-xs text-mute">
             <tr>
               <th scope="col" class="py-3 pr-4 font-medium"><%= t(".columns.date") %></th>
-              <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.quantity") %></th>
-              <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.price") %></th>
-              <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+              <th scope="col" class="px-2 py-3 text-right font-medium md:px-4"><%= t(".columns.quantity") %></th>
+              <th scope="col" class="px-2 py-3 text-right font-medium md:px-4"><%= t(".columns.price") %></th>
+              <th scope="col" class="px-2 py-3 md:px-4"><span class="sr-only"><%= t(".columns.actions") %></span></th>
             </tr>
           </thead>
           <tbody id="card_batches" class="divide-y divide-line">
             <% @batches.each do |batch| %>
               <tr id="card_batch_<%= batch.public_id %>">
-                <td class="py-3 pr-4"><%= l(batch.created_at.to_date, format: :long).squish %></td>
-                <td class="px-4 py-3 text-right tabular-nums"><%= batch.quantity %></td>
-                <td class="px-4 py-3 text-right tabular-nums"><%= batch.unit_price_xof.zero? ? t(".offered") : t(".price", amount: number_with_delimiter(batch.unit_price_xof, delimiter: " ")) %></td>
-                <td class="sticky-actions px-4 py-3 text-right">
+                <td class="py-3 pr-2 md:pr-4"><%= l(batch.created_at.to_date, format: :long).squish %></td>
+                <td class="px-2 py-3 text-right tabular-nums md:px-4"><%= batch.quantity %></td>
+                <td class="px-2 py-3 text-right whitespace-nowrap tabular-nums md:px-4"><%= batch.unit_price_xof.zero? ? t(".offered") : t(".price", amount: number_with_delimiter(batch.unit_price_xof, delimiter: " ")) %></td>
+                <td class="px-2 py-3 text-right md:px-4">
                   <%= link_to teams_billing_card_batch_sheet_path(batch.public_id), class: "inline-flex min-h-tap items-center gap-2 text-brand-strong" do %>
                     <%= ui_icon "printer", size: :sm %><%= t(".print") %><% end %>
                 </td>

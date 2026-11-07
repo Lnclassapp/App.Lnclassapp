@@ -61,6 +61,15 @@ class Teams::Billing::CardBatchesControllerTest < ActionDispatch::IntegrationTes
     assert_select "nav", 0
   end
 
+  test "la planche tient au téléphone (1 colonne) et s'imprime toujours 3 par rangée" do
+    sign_in_as @member
+
+    post teams_billing_relay_point_card_batches_path(@awa.public_id), params: batch_params(quantity: "3", price: "0")
+    follow_redirect!
+
+    assert_select "section.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.print\\:grid-cols-3"
+  end
+
   test "un lot offert s'imprime « Offerte »" do
     sign_in_as @member
 

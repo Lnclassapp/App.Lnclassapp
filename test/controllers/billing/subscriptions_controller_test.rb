@@ -67,7 +67,8 @@ class Billing::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "li", text: /Boutique Awa/, count: 0
     assert_select "p", "Écris-nous pour trouver un point relais"
     assert_select "a[href='https://wa.me/2250584258085']", text: /Écrire sur WhatsApp/
-    assert_select "body", text: /05 84 25 80 85/
+    assert_select "body", text: /05[[:space:]]84[[:space:]]25[[:space:]]80[[:space:]]85/
+    assert_includes response.body, "05\u00A084\u00A025\u00A080\u00A085"
 
     serve
     @relay_point.update!(active: false)

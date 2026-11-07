@@ -17,9 +17,11 @@ fr:
             amount_xof:
               blank: "Indiquez le montant."
               not_an_integer: "Le montant est un nombre entier, sans virgule."
+              too_large: "Ce montant est trop grand. Vérifiez-le (999 999 999 F au plus)."
               other_than: "Le montant ne peut pas être nul."
             received_at:
               invalid: "La date n'est pas lisible. Choisissez-la dans le sélecteur."
+              in_the_future: "La date de réception ne peut pas être dans le futur."
             reference:
               too_long: "La référence compte 60 caractères au plus."
             reason:
@@ -50,6 +52,7 @@ fr:
             one: "Semaine en cours : %{count} activation."
             other: "Semaine en cours : %{count} activations."
           previous: "Semaines précédentes"
+          first_day: "1er"
           same_month: "du %{from} au %{to} %{month}"
           two_months: "du %{from} %{from_month} au %{to} %{to_month}"
           caption: "Commissions des points relais, %{range}"

@@ -19,7 +19,7 @@ module RedirectsSubscriptionRequired
                                            id: request.headers["Turbo-Frame"], target: "_top"),
              layout: false, status: :payment_required
     else
-      redirect_to billing_subscription_path, alert: t("billing.subscription_required"), status: :see_other
+      redirect_to billing_subscription_path, flash: { info: t("billing.subscription_required") }, status: :see_other
     end
   end
 end

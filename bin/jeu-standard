@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Charge le jeu de test standard en une commande (chantier standard-de-test, ADR standard-de-test §4) : référentiel,
-# établissements, classes, comptes, leçons publiées, puis un trimestre d'activité déterministe (db/seeds/standard/activite.rb :
+# établissements, classes, comptes, abonnements des élèves (standard/abonnements), leçons publiées, puis un trimestre d'activité déterministe (db/seeds/standard/activite.rb :
 # séances, notes, lacunes, devoirs rendus et en retard, par les use cases ; l'empreinte des totaux s'affiche à la fin).
 # Le grand établissement est toujours chargé (décision du porteur).
 #
@@ -52,5 +52,8 @@ else
   bin/rails db:seed
 fi
 bin/rails runner db/seeds/standard.rb
+# Les élèves du jeu sont abonnés (carte d'un lot offert, jusqu'au 31 juillet 2027) : sans cela, ils sont bloqués après la période gratuite.
+# Avant l'activité, qui démarre des séances par les use cases. Le script refuse de jouer hors développement, test, PR, Demo, Develop, Staging.
+bin/rails runner db/seeds/standard/abonnements.rb
 bin/rails runner db/seeds/standard/activite.rb
 echo "bin/jeu-standard : $((SECONDS - start)) s au total."

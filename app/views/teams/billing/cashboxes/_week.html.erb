@@ -2,17 +2,10 @@
 <%# Rôle : commissions des points relais de la semaine écoulée (vendredi → jeudi), 8 semaines plus anciennes dans un <details> %>
 <%# ADR  : cartes-activation (contexte billing, §4.7) · UDR : caisse-equipe §3.1 %>
 <% money = ->(amount) { t("teams.billing.money", amount: number_with_delimiter(amount, delimiter: " ")) } %>
-<% range = lambda do |week|
-     from, to = week.starts_on, week.ends_on
-     if from.month == to.month
-       t("teams.billing.cashboxes.week.same_month", from: from.day, to: to.day, month: l(to, format: "%B"))
-     else
-       t("teams.billing.cashboxes.week.two_months", from: from.day, from_month: l(from, format: "%B"), to: to.day, to_month: l(to, format: "%B"))
-     end
-   end %>
+<% range = ->(week) { billing_week_range(week) } %>
 <% table = lambda do |week| %>
-  <div class="overflow-x-auto">
-    <table class="w-full min-w-md text-left text-sm">
+  <div>
+    <table class="w-full text-left text-sm">
       <caption class="sr-only"><%= t("teams.billing.cashboxes.week.caption", range: range.call(week.week)) %></caption>
       <thead class="border-b border-line text-xs text-mute">
         <tr>
@@ -29,7 +22,7 @@
             <td class="px-3 py-2 text-right whitespace-nowrap tabular-nums"><%= money.call(line.commission_xof) %></td>
           </tr>
         <% end %>
-        <tr class="font-semibold text-ink">
+        <tr class="font-medium text-ink">
           <td class="px-3 py-2"><%= t("teams.billing.cashboxes.week.total") %></td>
           <td class="px-3 py-2 text-right tabular-nums"><%= week.total_activations %></td>
           <td class="px-3 py-2 text-right whitespace-nowrap tabular-nums"><%= money.call(week.total_xof) %></td>

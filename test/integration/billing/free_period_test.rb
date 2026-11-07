@@ -45,7 +45,8 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to billing_subscription_path
-      assert_equal I18n.t("billing.subscription_required"), flash[:alert]
+      assert_equal I18n.t("billing.subscription_required"), flash[:info]
+      assert_nil flash[:alert]
       assert_equal exercise_path(@exercise.public_id), session[:billing_return_to]
     end
   end

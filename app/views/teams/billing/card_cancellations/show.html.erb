@@ -19,7 +19,7 @@
       <%= form_with url: teams_billing_card_cancellation_path, method: :get, class: "flex flex-wrap items-end gap-3" do %>
         <div class="min-w-48 flex-1">
           <label for="lookup_serial" class="mb-1 block text-sm font-medium text-ink"><%= t(".serial_label") %></label>
-          <%= text_field_tag :serial, nil, id: "lookup_serial", inputmode: "numeric", autocomplete: "off", autofocus: true, placeholder: t(".serial_placeholder"),
+          <%= text_field_tag :serial, nil, id: "lookup_serial", inputmode: "numeric", autocomplete: "off", placeholder: t(".serial_placeholder"),
                                            class: "block min-h-tap w-full rounded-ln border border-line-strong bg-white px-4 text-base text-ink focus:outline-none focus:ring-4" %>
         </div>
         <%= ui_button t(".find_card"), type: :submit, icon: "magnifying-glass" %>
@@ -27,16 +27,16 @@
     <% end %>
   <% else %>
     <%= ui_card do %>
-      <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
+      <dl class="grid grid-cols-3 gap-x-6 gap-y-2 text-sm">
         <dt class="text-mute"><%= t(".fields.serial") %></dt>
-        <dd class="font-medium tabular-nums"><%= t(".serial_value", serial: number) %></dd>
+        <dd class="col-span-2 font-medium tabular-nums"><%= t(".serial_value", serial: number) %></dd>
         <dt class="text-mute"><%= t(".fields.relay_point") %></dt>
-        <dd class="font-medium"><%= @relay_point&.name %></dd>
+        <dd class="col-span-2 font-medium"><%= @relay_point&.name %></dd>
         <dt class="text-mute"><%= t(".fields.state") %></dt>
-        <dd class="font-medium"><%= t(".states.#{@card.state}") %></dd>
+        <dd class="col-span-2 font-medium"><%= t(".states.#{@card.state}") %></dd>
         <% if @card.cancelled? %>
           <dt class="text-mute"><%= t(".fields.reason") %></dt>
-          <dd><%= @card.cancel_reason %></dd>
+          <dd class="col-span-2"><%= @card.cancel_reason %></dd>
         <% end %>
       </dl>
     <% end %>

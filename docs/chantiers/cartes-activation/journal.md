@@ -62,6 +62,17 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Les fixtures namespacées `test/fixtures/billing/*.yml` n'ont pas de classe : Rails retombe sur le nom de table, sans horodatage ni `id` automatiques (donnés explicitement) ni chiffrement (le code est chiffré par ERB avec le type de l'attribut ORM).
 - `db/schema.rb` est écrit à la main dans l'ordre des colonnes de la migration : le dumper de cet environnement trie les colonnes par ordre alphabétique et réécrit tout le fichier.
 
+## Lot F — défauts de la recette réelle
+
+- Le refus « période gratuite finie » arrive en toast `info` (flash `info`), plus en `alert` rouge « Une erreur est survenue ».
+- Caisse et fiche point relais à 390 px : plus de défilement horizontal ; « Reste dû » et « Versé » restent visibles, les colonnes de comptage ne s'affichent qu'à partir de `md:` (la fiche les donne) ; référence et motif d'un versement passent sous la date au téléphone.
+- Planche : 1 colonne au téléphone, 2 dès `sm:`, 3 dès `lg:`, toujours 3 × 7 à l'impression (`print:grid-cols-3`).
+- Versement : date de réception au-delà de maintenant + 1 jour refusée (`:in_the_future`) ; montant de plus de 9 chiffres a son message (`:too_large`).
+- « 1er » pour le premier du mois dans les semaines de la caisse (`Teams::BillingHelper`) ; numéro WhatsApp et téléphone du point relais insécables.
+- `bin/jeu-standard` charge `standard/abonnements` (avant l'activité) ; le script refuse la production.
+- PRD et UDR alignés sur « Trop de tentatives » et « tes cours » ; une carte annulée « sort de la circulation » (jamais dans le dû).
+- Corrigés en passant, hérités des lots précédents : `font-semibold` (interdit au-delà de `font-medium`), `grid-cols-[…]` et `autofocus` de la page d'annulation d'une carte.
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.

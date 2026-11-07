@@ -34,6 +34,15 @@ class Teams::Billing::CashboxesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{teams_billing_relay_point_path(@awa.public_id)}']", text: "Boutique Awa"
   end
 
+  test "au téléphone, le reste dû se lit sans défilement : aucun conteneur à défilement, colonnes secondaires masquées" do
+    sign_in_as @member
+    get teams_billing_cashbox_path
+
+    assert_select "#cashbox_relays .overflow-x-auto, #cashbox_week .overflow-x-auto, #cashbox_schools .overflow-x-auto", count: 0
+    assert_select "#cashbox_relays th.hidden.md\\:table-cell", 4
+    assert_select "#cashbox_relays th:not(.hidden)", 3
+  end
+
   test "the Friday block names the week and the commission due" do
     travel_to Time.utc(2026, 11, 13, 12) do
       sign_in_as @member

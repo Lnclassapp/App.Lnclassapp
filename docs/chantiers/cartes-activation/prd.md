@@ -37,7 +37,7 @@ Règles d'autorisation : `Policies::Billing::ManageBillingPolicy` (rôle `team`,
 | Code d'une carte déjà activée (par lui ou un autre) | « Cette carte a déjà été utilisée. » |
 | Code d'une carte annulée | « Cette carte n'est plus valable. Rapporte-la au point relais. » |
 | Élève déjà abonné pour l'année qui saisit une 2e carte | « Tu es déjà abonné jusqu'au 31 juillet 2027. Garde cette carte pour un camarade. » ; la carte reste disponible |
-| Plus de 5 essais de code en 10 minutes | « Trop d'essais. Réessaie dans quelques minutes. » ; la saisie est refusée sans être évaluée |
+| Plus de 5 essais de code en 10 minutes | « Trop de tentatives. Réessaie dans quelques minutes. » ; la saisie est refusée sans être évaluée |
 | Élève sans école, ou école sans point relais | Mon abonnement affiche « Écris-nous sur WhatsApp au <numéro équipe> pour trouver un point relais » |
 | Élève bloqué qui ouvre une leçon ou la liste des exercices | Il voit tout ; seuls « Commencer », « Recommencer » et la vérification d'une fiche mènent à Mon abonnement |
 | Compte créé avant la mise en ligne (9 novembre 2026) | Ses 7 jours partent du 9 novembre |
@@ -109,7 +109,7 @@ Et la 2e carte reste remise, activable par un autre élève
 
 Étant donné un élève qui a saisi 5 codes faux en 10 minutes
 Quand il saisit un 6e code, même juste
-Alors la saisie est refusée avec « Trop d'essais »
+Alors la saisie est refusée avec « Trop de tentatives »
 
 Étant donné un élève rattaché à aucun établissement
 Quand il active une carte
@@ -152,7 +152,8 @@ Et 15 cartes sont en circulation
 
 Étant donné une carte remise et non activée
 Quand l'équipe l'annule avec le motif « perdue »
-Alors la carte est annulée, sort de la circulation et du dû
+Alors la carte est annulée et sort de la circulation
+Et le dû de la Boutique Awa ne change pas : il ne compte que les cartes activées, une carte annulée n'y a jamais été
 Et le journal d'audit garde l'auteur, la date et le motif
 
 Étant donné une carte activée
