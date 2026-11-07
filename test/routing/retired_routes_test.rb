@@ -18,8 +18,8 @@ class RetiredRoutesTest < ActionDispatch::IntegrationTest
     assert_nil first_match("/teams/essential-images", method: "POST")
   end
 
-  test "l'envoi d'une image de question reste" do
-    assert_equal "teams/question_images", first_match("/teams/question-images", method: "POST")[:controller]
+  test "l'envoi d'une image de question par l'équipe ne mène plus nulle part" do
+    assert_nil first_match("/teams/question-images", method: "POST")
   end
 
   test "courses/:course_slug/fiche est servie par le contrôleur de la leçon, en lecture seule" do

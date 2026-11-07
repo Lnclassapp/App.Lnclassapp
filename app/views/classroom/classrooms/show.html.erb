@@ -1,11 +1,16 @@
 <%# 🌐 UI · classroom/classrooms/show — page d'une classe (CL-10), enseignant qui y enseigne et équipe %>
 <%# Rôle : en-tête (retour selon le rôle, titre, « sigle · année »), lien d'inscription, exercices assignés, fiches à revoir, élèves filtrés par badge ; ≥ lg : deux colonnes égales de 57 rem au plus, le lien, les exercices et les fiches à gauche, les élèves à droite %>
-<%# ADR  : 0026, 0028, 0072, 0101 · UDR : enseignant §3.5, 0006, 0027, 0054, 0062 (§3.4), 0077 (§3.4 : l'ordre), 0121 · « Vos jours de séance » n'est plus rendu (§3.5, §3.13) : routes et données gardées ; plus de bande « Fiches de cours » : les cours s'ouvrent depuis l'accueil et l'onglet Cours %>
+<%# ADR  : 0026, 0028, 0072, 0101 · UDR : enseignant §3.5, 0006, 0027, 0054, 0062 (§3.4), 0077 (§3.4 : l'ordre), 0121 · « Vos jours de séance » de retour pour l'enseignant seul (suivi-de-la-classe-sur-une-lecon §3.4) ; plus de bande « Fiches de cours » : les cours s'ouvrent depuis l'accueil et l'onglet Cours %>
 <% page_title @header.name %>
 <% content_for :nav_key, "classrooms" %>
 <% link_shown = @header.link_shown_to?(current_actor) %>
 <div class="lg:mx-auto lg:max-w-228">
   <%= render "header", classroom: @header, school_sigle: @overview.school_sigle %>
+
+  <%# UDR suivi-de-la-classe-sur-une-lecon §3.4 : les jours de séance, pour l'enseignant de la classe seul (nil pour l'équipe). %>
+  <% if @overview.session_days %>
+    <div class="mt-4"><%= render "session_days", classroom: @header, weekdays: @overview.session_days %></div>
+  <% end %>
 
   <%# Sans lien, les blocs suivent le titre à 32 px comme avant ; avec lui, c'est le lien qui suit le titre à 16 px. %>
   <div class="<%= class_names("space-y-10 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 lg:space-y-0", "mt-8": !link_shown) %>">

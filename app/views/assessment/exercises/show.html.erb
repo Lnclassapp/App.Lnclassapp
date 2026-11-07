@@ -9,7 +9,7 @@
 <% page_title t(".page_title", title: exercise.title) %>
 <% content_for :nav_key, "courses" %>
 <% content_for :head do %><%= stylesheet_link_tag "exam_sheet" %><% end %>
-<%# UDR-XXXX-sujets-cahier-noir-blanc §3 : « barème » seulement si une question ne vaut pas 1 point. %>
+<%# UDR-0157 §3 : « barème » seulement si une question ne vaut pas 1 point. %>
 <% total_points = @detail.questions.sum(&:points) %>
 <% weighted = @detail.questions.any? { it.points != 1 } %>
 <div class="exam-sheet">

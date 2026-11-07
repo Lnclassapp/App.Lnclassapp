@@ -14,8 +14,10 @@
 > Décisions laissées ouvertes ou tranchées par défaut par un agent, en attente du porteur. Relevées chaque jour à 12 h par la boîte de décisions (`docs/workflows/contrat-de-session.md`). Le porteur coche `[x]` et écrit sa réponse à la suite.
 > Format d'une entrée : `- [ ] AAAA-MM-JJ · <slug ou PR> · <question> — appliqué : <option> ; autres : <options> ; recommandé : <option>`.
 
-- [ ] 2026-11-05 · sujets-cahier-noir-blanc · La demande de confirmation quand des questions sont vides (UDR-0087 §3.2) reste-t-elle ? — appliqué : oui, ce n'est pas une seconde confirmation systématique ; autres : la retirer ; recommandé : la garder
-- [ ] 2026-11-05 · sujets-cahier-noir-blanc · Matière et classe dans le cartouche (« MATHÉMATIQUES », « Classe de 3e ») ? — appliqué : non, la copie ne lit pas ces données ; autres : les ajouter à la lecture de la copie ; recommandé : un petit chantier de suivi
+- [x] 2026-11-05 · sujets-cahier-noir-blanc · La demande de confirmation quand des questions sont vides (UDR-0087 §3.2) reste-t-elle ? — appliqué : oui, ce n'est pas une seconde confirmation systématique ; autres : la retirer ; recommandé : la garder
+  - Porteur, 2026-11-06 : on la garde (option recommandée).
+- [x] 2026-11-05 · sujets-cahier-noir-blanc · Matière et classe dans le cartouche (« MATHÉMATIQUES », « Classe de 3e ») ? — appliqué : non, la copie ne lit pas ces données ; autres : les ajouter à la lecture de la copie ; recommandé : un petit chantier de suivi
+  - Porteur, 2026-11-06 : un petit chantier de suivi (option recommandée), à ouvrir par `/feature` ; rien n'est fait ici.
 
 ## Ce qui a dérapé
 

@@ -69,11 +69,6 @@ scope "teams/blog", as: :teams do
   end
 end
 
-# ADR-0105 §4.7, UDR-0129 §3.0 : envoi d'une image de question (les images de notions sont retirées, ADR-0116 §4.5).
-scope "teams", as: :teams do
-  post "question-images", to: "teams/question_images#create", as: :question_images
-end
-
 namespace :teams do
   resources :courses, only: %i[new create edit update], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }

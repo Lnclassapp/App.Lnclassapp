@@ -8,6 +8,8 @@
 /feature <slug>    /bugfix <slug>    /refactor <slug>    /optimize <slug>    /hotfix <slug>
 ```
 
+Un petit changement sans règle métier n'ouvre pas de chantier : `/retouche <slug>` ([`retouche.md`](../workflows/retouche.md)), une ligne dans le journal du chantier parent.
+
 Sans Claude Code : `cp -r docs/chantiers/_TEMPLATE docs/chantiers/<slug>`
 
 Le `<slug>` est en kebab-case, court, sans type ni numéro : `messagerie-classe`, pas `feature-5-messagerie`.
@@ -64,6 +66,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`audit-yarn-braces`](audit-yarn-braces/memo.md) | livré en PR | bugfix | 2026-10-03 | L'audit Yarn bloque toute la CI sur une faille de braces sans correctif |
 | [`badge-liste-moyenne`](badge-liste-moyenne/memo.md) | livré | bugfix | 2026-10-29 | Liste de la classe : le badge dit qu'il vient de la moyenne |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | feature | 2026-09-28 | Barème des classes modifiable par l'équipe |
+| [`base-de-lecons`](base-de-lecons/memo.md) | en cours | refactoring | 2026-11-06 | Base de leçons : seules les leçons au format complet actuel |
 | [`blog`](blog/memo.md) | planifié | feature | 2026-10-02 | Blog de Lnclass |
 | [`blog-toast-instable`](blog-toast-instable/memo.md) | preuve | bugfix | 2026-10-27 | Le toast « Article créé » arrive parfois après la fin de l'attente du test |
 | [`boucle-pedagogique`](boucle-pedagogique/memo.md) | livré | feature | 2026-09-25 | Boucle pédagogique (V1) |
@@ -82,6 +85,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`choix-classe-eleve`](choix-classe-eleve/memo.md) | lots A et B livrés sur feature/choix-cla… | feature | 2026-10-15 | « Choisis ta classe » aux couleurs Wave et Djamo |
 | [`ci-audit-yarn-local`](ci-audit-yarn-local/memo.md) | livré | optimisation | 2026-09-25 | L'audit Yarn ralentit chaque `bin/ci` local |
 | [`ci-cloud-claude`](ci-cloud-claude/memo.md) | en cours | feature | 2026-10-05 | La CI rejouée dans le cloud Claude |
+| [`ci-durees-enregistrees`](ci-durees-enregistrees/memo.md) | livré | optimisation | 2026-11-06 | Durées système enregistrées par la CI |
 | [`ci-gardes-en-double`](ci-gardes-en-double/memo.md) | livré | optimisation | 2026-09-26 | Les gardes tournent deux fois dans `bin/ci` |
 | [`ci-par-train`](ci-par-train/memo.md) | livré | optimisation | 2026-10-20 | Une CI complète par train, plus par PR |
 | [`ci-perf-a-la-demande`](ci-perf-a-la-demande/memo.md) | livré | optimisation | 2026-10-19 | La perf des imports et les CI répétées ralentissent chaque PR |
@@ -148,9 +152,11 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`exercice-eleve`](exercice-eleve/memo.md) | livré | feature | 2026-10-15 | Parcours d'exercice de l'élève aux couleurs Wave et Djamo |
 | [`exercices-en-cartes`](exercices-en-cartes/memo.md) | livré | feature | 2026-10-30 | Les exercices en cartes |
 | [`feuille-pleine-largeur`](feuille-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La feuille remplit l'écran du téléphone |
+| [`feuilles-rendues`](feuilles-rendues/memo.md) | livré | bugfix | 2026-11-06 | Les feuilles d'exercices vérifiées et lisibles sur chaque leçon |
 | [`fiche-revision-coupe-50-mots`](fiche-revision-coupe-50-mots/memo.md) | livré | feature | 2026-10-31 | La fiche de révision coupée à 50 mots |
 | [`finitions-generation-menu`](finitions-generation-menu/memo.md) | livré | bugfix | 2026-09-28 | Finitions de la génération des classes et du menu ⋮ au téléphone |
 | [`finitions-ux`](finitions-ux/memo.md) | livré | feature | 2026-09-29 | Finitions UX |
+| [`flux-allege`](flux-allege/memo.md) | livré | refactoring | 2026-11-06 | Un flux allégé : petites branches, retouches, messages, mesure mensuelle |
 | [`fonctions-espace-eleve`](fonctions-espace-eleve/memo.md) | planifié | feature | 2026-10-02 | Fonctions de l'espace élève |
 | [`generer-classes`](generer-classes/memo.md) | livré | feature | 2026-09-28 | Générer les classes manquantes des établissements |
 | [`gestion-etablissement-direction`](gestion-etablissement-direction/memo.md) | planifié | feature | 2026-10-01 | La direction gère son établissement |
@@ -217,6 +223,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`renommage-fiche-revision`](renommage-fiche-revision/memo.md) | planifié | feature | 2026-10-12 | « Fiche de cours » et « Fiche de révision » à l'écran |
 | [`reorganisation-equipe-enseignant`](reorganisation-equipe-enseignant/memo.md) | livré | feature | 2026-10-03 | Réorganisation des espaces Équipe et Enseignant |
 | [`retention-ip-audit`](retention-ip-audit/memo.md) | livré | feature | 2026-10-05 | Rétention de l'adresse IP du journal d'audit |
+| [`retouches`](retouches/memo.md) | permanent | retouche | 2026-11-06 | Retouches sans chantier parent |
 | [`retrait-debugbar`](retrait-debugbar/memo.md) | livré | bugfix | 2026-10-03 | Retrait de debugbar |
 | [`revision-eleve`](revision-eleve/memo.md) | en pause | feature | 2026-10-15 | Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo |
 | [`routage-modeles`](routage-modeles/memo.md) | livré | refactoring | 2026-10-19 | Routage des modèles par rôle |
@@ -227,9 +234,10 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |
 | [`suites-inscription-direction`](suites-inscription-direction/memo.md) | livré | bugfix | 2026-10-04 | Suites de l'inscription de la direction |
+| [`suivi-classe-lecon`](suivi-classe-lecon/memo.md) | livré | feature | 2026-11-05 | Suivi de la classe sur une leçon : lacunes, réussite par exercice, remédiation |
 | [`sujet-avant-de-commencer`](sujet-avant-de-commencer/memo.md) | livré | feature | 2026-10-31 | Chaque feuille dans une case, lue avant de commencer |
 | [`sujet-comme-une-epreuve`](sujet-comme-une-epreuve/memo.md) | livré | feature | 2026-11-04 | Le sujet se lit comme une vraie épreuve |
-| [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | planifié | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
+| [`sujets-cahier-noir-blanc`](sujets-cahier-noir-blanc/memo.md) | livré | feature | 2026-11-05 | Les sujets d'interrogation en cahier noir et blanc |
 | [`sujets-thales-feuilles`](sujets-thales-feuilles/memo.md) | livré | feature | 2026-10-31 | Sujets de devoir Thalès, titres numérotés des feuilles, correction en bloc |
 | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré | bugfix | 2026-09-23 | Le tableau de bord Team plante en 500 |
 | [`test-date-figee`](test-date-figee/memo.md) | livré | bugfix | 2026-10-30 | Un test de suivi d'exercice rouge depuis le 30 octobre 2026 |

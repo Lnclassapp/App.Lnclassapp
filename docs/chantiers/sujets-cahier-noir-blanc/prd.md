@@ -67,7 +67,7 @@ partiels. C'est le mécanisme déjà utilisé par les thèmes d'annonce.
 ## 6. Décisions rattachées
 
 - ADR : aucun — ni port, ni table, ni contrat ; une feuille de style chargée par trois vues.
-- UDR : `UDR-XXXX-sujets-cahier-noir-blanc`.
+- UDR : `UDR-0157`.
 - S'appuie sur UDR-0149 (feuilles noir et blanc), UDR-0140 (correction comme en classe), UDR-0154 (pleine largeur sur téléphone).
 
 ## 7. Mesures

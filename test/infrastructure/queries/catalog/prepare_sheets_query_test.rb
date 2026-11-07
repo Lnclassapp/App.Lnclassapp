@@ -25,6 +25,40 @@ module Queries
       def team_actor = Actor.new(user_id: create_team_member.id, role: :team, team_role: "admin")
       def titles(sheet) = sheet.exercises.map(&:title)
 
+      test "pour l'équipe, la classe courante donne la seule cible, sans jour à saisir ; sans classe, pas de cible" do
+        classroom = create_classroom(name: "3e 2", level: @course.level, series: @course.series)
+        create_classroom(name: "3e 3", level: @course.level, series: @course.series, school: classroom.school)
+        team = team_actor
+
+        targets = PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: team, classroom_public_id: classroom.public_id).targets
+
+        assert_equal [ [ classroom.public_id, "3e 2", false ] ], targets.classrooms.map { [ it.public_id, it.name, it.needs_session_days ] }
+        assert_empty targets.states
+        assert_nil PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: team).targets
+        assert_nil PrepareSheetsQuery.new.call(course_slug: @course.slug, actor: student_actor(create_student), classroom_public_id: classroom.public_id).targets
+      end
+
+      test "pour l'équipe, une classe d'une autre série ou d'un autre niveau n'est pas une cible ; l'assignation active est portée" do
+        series = create_series
+        course = create_course(series:)
+        exercise = create_exercise(essential: create_essential(course:), title: "Ex S")
+        classroom = create_classroom(name: "Tle S", level: course.level, series:)
+        other_series = create_classroom(level: course.level, series: create_series, school: classroom.school)
+        other_level = create_classroom(series:, school: classroom.school)
+        assignment = create_assignment(classroom:, assignable: exercise)
+        team = team_actor
+        targets_of = ->(room) { PrepareSheetsQuery.new.call(course_slug: course.slug, actor: team, classroom_public_id: room.public_id).targets }
+
+        targets = targets_of.(classroom)
+
+        assert_equal [ classroom.public_id ], targets.classrooms.map(&:public_id)
+        assert_equal assignment.public_id, targets.states.fetch([ classroom.public_id, exercise.public_id ]).assignment_public_id
+        [ other_series, other_level ].each do |room|
+          assert_empty targets_of.(room).classrooms, "#{room.name} ne convient pas au cours"
+          assert_empty targets_of.(room).states
+        end
+      end
+
       test "le contrat porte les feuilles de Prépare interros et de Prépare devoirs, les cibles, les notions vides et l'en-tête du cours" do
         assert_equal %i[interros devoirs targets bare course_name material_name level_name], PrepareSheetsQuery::Prepare.members
         prepare = call(nil)

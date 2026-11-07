@@ -97,15 +97,6 @@ module Queries
         Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
       end
 
-      # ADR-0101 §4.4 : le cours est-il l'un de ceux que la page de la classe affiche pour cet acteur (niveau, série, et matière
-      # de l'enseignant ; toute matière pour l'équipe) ? Une seule requête. → true | false
-      def shown_course?(public_id:, course_slug:, teacher_id: nil)
-        level_id, series_id, school_id = Orm::Classroom.where(public_id:).pick(:level_id, :series_id, :school_id)
-        return false if level_id.nil?
-
-        course_scope(level_id, series_id, teacher_material_ids(teacher_id, school_id)).where(slug: course_slug).exists?
-      end
-
       private
 
       # UDR enseignant §3.5 : le filtre de badge et la recherche se combinent. Le rang de chaque élève (note, badge, faits) se lit
