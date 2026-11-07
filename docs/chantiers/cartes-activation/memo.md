@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — grill clos (Q1 à Q13, 2026-11-07) |
+| **Statut** | planifié — PRD, ADR, 2 UDR, plan (2026-11-07) |
 | **Ouvert le** | 2026-11-07 |
 | **Branche** | `ccr-5a226b75-gfu543` *(branche de session imposée ; une branche `feature/cartes-activation` au premier code si le porteur le veut)* |
 | **Programme** | — *(né du plan de lancement dans la DRENA de Tiassalé, 2026-11-07)* |
