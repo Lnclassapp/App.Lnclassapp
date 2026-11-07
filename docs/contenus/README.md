@@ -8,8 +8,8 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
-| [`a-reprendre/`](a-reprendre/) | Les 438 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) et les 45 de Tle C (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`a-reprendre/`](a-reprendre/) | Les 393 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
 
@@ -28,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seul `3eme/` y est resté.
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/` et `tle-c/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -52,6 +52,90 @@ Un import ne met jamais à jour l'existant : une fiche de cours déjà présente
 Si la progression a déjà été importée, la fiche de cours de la leçon existe vide, et l'import de la fiche de cours complète sera ignoré. Une fiche de cours ne se supprime pas, et une fiche de cours archivée compte encore comme doublon. Il faut donc **renommer** la fiche de cours vide dans l'écran des fiches de cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer la fiche de cours complète.
 
 ## Leçons traitées
+
+### Tle C au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-c-comme-thales`, #484)
+
+Depuis le 2026-11-07, les 45 leçons de Tle C au format 3 (Mathématiques 10, Français 6, Philosophie 9, Physique-Chimie 10, SVT 10) sont construites comme la leçon Thalès de 3ème. Chaque notion a deux exercices : le premier, d'origine, et un second en `fixation` de 6 questions de types mêlés, avec titre, énoncé « Dans cet exercice, tu … » et indice. Chaque leçon a 4 sujets de devoir (« Sujet 1 · … » à « Sujet 4 · … ») de 4 exercices de 5 ou 6 questions, en `evaluation`. Le cours, les fiches et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement. 4 874 questions ajoutées, 7 figures ajoutées (SVT).
+
+Un script hors dépôt a vérifié chaque leçon : sympy sur chaque question en Mathématiques et sur chaque calcul en Physique-Chimie, la bonne réponse comme chaque mauvaise proposition, avec des réponses faussées exprès toutes détectées ; ailleurs, un extrait mot pour mot de la leçon pour chaque bonne réponse. Chaque leçon a ensuite été relue par un agent qui ne l'avait pas écrite. Les tableaux des sections Tle C plus bas donnent l'état d'avant ce chantier ; ceux-ci comptent tout (exercices des notions, problèmes et exercices des sujets). Le détail est dans [le journal du chantier](../chantiers/lecons-tle-c-comme-thales/journal.md).
+
+Les leçons de même fiche en Tle D, A1 et A2 ne sont pas encore modifiées : la liste est dans le journal.
+
+**Mathématiques**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux | 5 | 30 | 168 | 121 |
+| `mathematiques/coniques.json` | Coniques | 5 | 30 | 168 | 111 |
+| `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 5 | 30 | 170 | 112 |
+| `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ | 4 | 28 | 159 | 104 |
+| `mathematiques/fonctions-exponentielles-et-fonctions-puissances.json` | Fonctions exponentielles et fonctions puissances | 5 | 30 | 156 | 110 |
+| `mathematiques/fonctions-logarithmes.json` | Fonctions logarithmes | 5 | 30 | 192 | 119 |
+| `mathematiques/geometrie-analytique-de-l-espace.json` | Géométrie analytique de l'espace | 4 | 28 | 151 | 104 |
+| `mathematiques/limites-et-continuite.json` | Limites et continuité | 5 | 30 | 166 | 114 |
+| `mathematiques/nombres-complexes.json` | Nombres complexes | 5 | 30 | 185 | 118 |
+| `mathematiques/primitives.json` | Primitives | 4 | 28 | 160 | 106 |
+| **Total** | | **47** | **294** | **1675** | **1119** |
+
+**Français**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `francais/groupement-de-textes-theatraux.json` | Groupement de textes théâtraux | 4 | 28 | 153 | 105 |
+| `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 4 | 28 | 153 | 105 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 154 | 104 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 4 | 28 | 153 | 104 |
+| `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 4 | 28 | 157 | 106 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 4 | 28 | 159 | 104 |
+| **Total** | | **24** | **168** | **929** | **628** |
+
+**Philosophie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `philosophie/dieu-et-la-religion.json` | Dieu et la religion | 4 | 28 | 159 | 106 |
+| `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 4 | 28 | 147 | 105 |
+| `philosophie/la-connaissance-scientifique.json` | La connaissance scientifique | 4 | 28 | 155 | 107 |
+| `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 4 | 28 | 154 | 105 |
+| `philosophie/la-valeur-de-la-philosophie.json` | La valeur de la philosophie | 4 | 28 | 166 | 116 |
+| `philosophie/la-vie-en-societe.json` | La vie en société | 3 | 26 | 146 | 104 |
+| `philosophie/langage-et-verite.json` | Langage et vérité | 4 | 28 | 161 | 113 |
+| `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 4 | 28 | 157 | 107 |
+| `philosophie/progres-et-bonheur.json` | Progrès et bonheur | 4 | 28 | 152 | 104 |
+| **Total** | | **35** | **250** | **1397** | **967** |
+
+**Physique-Chimie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 28 | 149 | 104 |
+| `physique-chimie/champ-magnetique.json` | Champ magnétique | 4 | 28 | 160 | 109 |
+| `physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 28 | 158 | 104 |
+| `physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 30 | 161 | 110 |
+| `physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 30 | 173 | 115 |
+| `physique-chimie/interaction-gravitationnelle.json` | Interaction gravitationnelle | 4 | 28 | 157 | 104 |
+| `physique-chimie/les-alcools.json` | Les alcools | 5 | 30 | 174 | 116 |
+| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 28 | 157 | 104 |
+| `physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs g⃗ et E⃗ uniformes | 4 | 28 | 170 | 113 |
+| `physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 30 | 167 | 115 |
+| **Total** | | **44** | **288** | **1626** | **1094** |
+
+**SVT**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `svt/l-exploitation-des-gisements-petroliferes.json` | L'exploitation des gisements pétrolifères | 4 | 28 | 157 | 104 |
+| `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 28 | 165 | 116 |
+| `svt/l-utilisation-de-l-energie-par-la-cellule-musculaire.json` | L'utilisation de l'énergie par la cellule musculaire | 4 | 28 | 160 | 108 |
+| `svt/la-communication-nerveuse.json` | La communication nerveuse | 5 | 30 | 167 | 111 |
+| `svt/la-mise-en-place-des-gisements-petroliferes-en-cote-d-ivoire.json` | La mise en place des gisements pétrolifères en Côte d'Ivoire | 4 | 28 | 157 | 106 |
+| `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 4 | 28 | 161 | 104 |
+| `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 26 | 142 | 99 |
+| `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 30 | 171 | 110 |
+| `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 156 | 104 |
+| `svt/les-drogues-et-le-systeme-nerveux.json` | Les drogues et le système nerveux | 4 | 28 | 148 | 104 |
+| **Total** | | **41** | **282** | **1584** | **1066** |
+
 
 ### Tle D — `lecons-traitees/tle-d/`
 
