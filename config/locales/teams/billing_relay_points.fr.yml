@@ -1,0 +1,128 @@
+# Points relais et lots de cartes (équipe) : cartes-activation, lot A — ADR contexte billing, UDR caisse-equipe §3.2 à §3.4
+fr:
+  activemodel:
+    attributes:
+      dtos/billing/relay_point_input:
+        name: "Nom"
+        location: "Lieu"
+        phone: "Téléphone"
+        active: "Point relais actif"
+      dtos/billing/card_batch_input:
+        quantity: "Nombre de cartes"
+        unit_price_xof: "Prix"
+    errors:
+      models:
+        dtos/billing/relay_point_input:
+          attributes:
+            name:
+              blank: "Indiquez le nom du point relais."
+              too_long: "Le nom compte %{count} caractères au plus."
+            location:
+              blank: "Indiquez le lieu (quartier, repère)."
+              too_long: "Le lieu compte %{count} caractères au plus."
+            phone:
+              blank: "Indiquez le téléphone du point relais."
+              invalid: "Le téléphone doit avoir dix chiffres, par exemple 07 00 00 00 00."
+        dtos/billing/card_batch_input:
+          attributes:
+            quantity:
+              not_a_number: "Indiquez un nombre de cartes."
+              not_an_integer: "Indiquez un nombre entier de cartes."
+              greater_than_or_equal_to: "Un lot compte au moins une carte."
+              less_than_or_equal_to: "Un lot compte %{count} cartes au plus."
+            unit_price_xof:
+              inclusion: "Choisissez 10 000 F ou offert."
+            base:
+              inactive: "Ce point relais est désactivé : réactivez-le avant de créer un lot."
+  teams:
+    billing:
+      relay_points:
+        index:
+          page_title: "Points relais"
+          title: "Points relais"
+          back: "Caisse"
+          new: "Nouveau point relais"
+          empty_title: "Aucun point relais"
+          empty_description: "Un point relais vend les cartes d'activation en espèces aux élèves des écoles qu'il dessert."
+          empty_action: "Créer un point relais"
+          columns:
+            name: "Nom"
+            location: "Lieu"
+            phone: "Téléphone"
+            schools: "Écoles"
+            state: "État"
+            actions: "Actions"
+        relay_point_row:
+          active: "Actif"
+          inactive: "Désactivé"
+          actions: "Actions pour %{name}"
+          show: "Voir la fiche"
+          edit: "Modifier"
+          new_batch: "Nouveau lot de cartes"
+        new:
+          title: "Nouveau point relais"
+          submit: "Créer le point relais"
+          submitting: "Création…"
+          cancel: "Annuler"
+        edit:
+          title: "Modifier le point relais"
+          submit: "Enregistrer"
+          submitting: "Enregistrement…"
+          cancel: "Annuler"
+        form:
+          name_placeholder: "Ex. : Boutique Awa"
+          location_placeholder: "Ex. : Près du marché"
+          schools: "Écoles desservies"
+          schools_hint: "Les élèves de ces écoles voient ce point relais dans Mon abonnement."
+          active: "Point relais actif (décocher pour le désactiver ; on ne supprime pas)"
+        create:
+          created: "Point relais « %{name} » créé."
+        update:
+          updated: "Point relais « %{name} » modifié."
+        show:
+          back: "Points relais"
+          edit: "Modifier"
+          new_batch: "Nouveau lot de cartes"
+          phone: "Téléphone"
+          state: "État"
+          active: "Actif"
+          inactive: "Désactivé"
+          schools: "Écoles desservies"
+          no_school: "Aucune école rattachée"
+          batches: "Lots de cartes"
+          no_batch: "Aucun lot de cartes"
+          offered: "Offert"
+          price: "%{amount} F"
+          print: "Imprimer"
+          columns:
+            date: "Créé le"
+            quantity: "Cartes"
+            price: "Prix"
+            actions: "Actions"
+      card_batches:
+        new:
+          title: "Nouveau lot de cartes — %{name}"
+          submit: "Créer le lot"
+          submitting: "Création…"
+          cancel: "Annuler"
+          quantity_hint: "De 1 à %{max} cartes."
+          price: "Prix d'une carte"
+          price_offer: "10 000 F"
+          price_free: "Offert (0 F)"
+        create:
+          created:
+            one: "Lot de %{count} carte créé."
+            other: "Lot de %{count} cartes créé."
+        show:
+          title: "Planche des cartes d'activation"
+          print: "Imprimer"
+          back: "Points relais"
+          count:
+            one: "%{count} carte sur cette planche."
+            other: "%{count} cartes sur cette planche."
+          brand: "Lnclass"
+          price: "%{amount} F"
+          offered: "Offerte"
+          valid_until: "Abonnement jusqu'au %{date}"
+          serial: "N° %{number}"
+          how_to: "Entre ce code dans Lnclass › Mon abonnement"
