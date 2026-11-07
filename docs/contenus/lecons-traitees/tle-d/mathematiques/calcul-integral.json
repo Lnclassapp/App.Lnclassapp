@@ -2431,7 +2431,7 @@
             },
             {
               "title": "Exercice 3",
-              "statement": "On calcule des intégrales de produits par intégration par parties : $\\int_a^b u'(x)\\,v(x)\\,dx = \\left[u(x)\\,v(x)\\right]_a^b - \\int_a^b u(x)\\,v'(x)\\,dx$.",
+              "statement": "On calcule des intégrales de produits par intégration par parties : $\\int_a^b u'v\\,dx = \\left[uv\\right]_a^b - \\int_a^b uv'\\,dx$, où $u$ et $v$ sont des fonctions de $x$.",
               "exercise_type": "evaluation",
               "figure": null,
               "hint": "Choisis pour $v$ le facteur qui se simplifie en dérivant. N'oublie ni le crochet, ni le signe moins devant l'intégrale qui reste.",
@@ -2472,7 +2472,7 @@
                   ]
                 },
                 {
-                  "content": "On a $\\int_1^e x \\ln x\\,dx = \\left[\\dfrac{x^2}{2}\\ln x\\right]_1^e = \\dfrac{e^2}{2}$.",
+                  "content": "L'intégrale $\\int_1^e x \\ln x\\,dx$ est égale au seul crochet $\\left[\\dfrac{x^2}{2}\\ln x\\right]_1^e$, soit $\\dfrac{e^2}{2}$.",
                   "question_type": "true_false",
                   "explanation": "1) Choisir : $v(x) = \\ln x$ et $u'(x) = x$, donc $u(x) = \\dfrac{x^2}{2}$ et $v'(x) = \\dfrac{1}{x}$. 2) Appliquer la formule : le crochet vaut bien $\\dfrac{e^2}{2}$, mais il faut retrancher $\\int_1^e \\dfrac{x}{2}\\,dx = \\dfrac{e^2 - 1}{4}$. 3) Conclure : le résultat est $\\dfrac{e^2}{2} - \\dfrac{e^2 - 1}{4} = \\dfrac{e^2 + 1}{4}$. L'affirmation oublie l'intégrale qui reste.",
                   "answers": [
@@ -2495,7 +2495,7 @@
                       "content": "Poser $v(x) = x + 2$ et $u'(x) = e^x$ ; alors $u(x) = e^x$ et $v'(x) = 1$."
                     },
                     {
-                      "content": "Écrire la formule : $\\int_0^1 (x + 2)\\,e^x\\,dx = \\left[(x + 2)\\,e^x\\right]_0^1 - \\int_0^1 e^x\\,dx$."
+                      "content": "Écrire la formule : l'intégrale vaut $\\left[(x + 2)\\,e^x\\right]_0^1 - \\int_0^1 e^x\\,dx$."
                     },
                     {
                       "content": "Calculer le crochet : $\\left[(x + 2)\\,e^x\\right]_0^1 = 3e - 2$."

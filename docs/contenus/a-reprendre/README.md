@@ -1,13 +1,13 @@
 # Leçons à reprendre
 
-Les 393 leçons encore hors de `../lecons-traitees/`, sur les 438 sorties de `../lecons-traitees/` par le chantier [`base-de-lecons`](../../chantiers/base-de-lecons/memo.md) (2026-11-06). Les 45 leçons de Tle C y sont revenues au format complet (chantier [`lecons-tle-c-comme-thales`](../../chantiers/lecons-tle-c-comme-thales/memo.md), #484). Ici, rien n'est chargé par Develop, Staging ni le jeu standard.
+Les 348 leçons encore hors de `../lecons-traitees/`, sur les 438 sorties de `../lecons-traitees/` par le chantier [`base-de-lecons`](../../chantiers/base-de-lecons/memo.md) (2026-11-06). Les 45 leçons de Tle C et les 45 de Tle D y sont revenues au format complet (chantiers [`lecons-tle-c-comme-thales`](../../chantiers/lecons-tle-c-comme-thales/memo.md) et [`lecons-tle-d-comme-thales`](../../chantiers/lecons-tle-d-comme-thales/memo.md), #484). Ici, rien n'est chargé par Develop, Staging ni le jeu standard.
 
 Chaque fichier garde son chemin `<catégorie>/<niveau-série>/<matière>/<leçon>.json`. Le classement fichier par fichier est dans [`classement.tsv`](../../chantiers/base-de-lecons/classement.tsv).
 
 | Catégorie | Fichiers | Ce qui manque |
 |---|---:|---|
-| [`sujets-manquants/`](sujets-manquants/) | 241 | v3 valide, mais pas les 4 sujets de devoir de 4 exercices chacun |
-| [`exercices-et-sujets-manquants/`](exercices-et-sujets-manquants/) | 71 | v3 valide, mais un seul exercice par notion (il faut `exercise` et `practice`) et pas de sujets de devoir |
+| [`sujets-manquants/`](sujets-manquants/) | 205 | v3 valide, mais pas les 4 sujets de devoir de 4 exercices chacun |
+| [`exercices-et-sujets-manquants/`](exercices-et-sujets-manquants/) | 62 | v3 valide, mais un seul exercice par notion (il faut `exercise` et `practice`) et pas de sujets de devoir |
 | [`format-v1/`](format-v1/) | 81 | tout : le format 1 est refusé à l'import (`format_retired`), la leçon est à réécrire en v3 |
 
 ## Règle de retour
