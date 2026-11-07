@@ -58,6 +58,7 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 | Q7 — Quand payer les commissions ? | **Chaque vendredi** pour le point relais. Les **1 000 F de l'école** sont versés **à une date lointaine**, pour que Lnclass se renforce d'abord (porteur, 2026-11-07). | Une vue « à payer ce vendredi » : commissions des points relais sur la semaine écoulée. Pour les écoles, un **cumul dû** par établissement, sans échéance ; la date de versement se décidera plus tard (hors périmètre). |
 
 | Q8 — Au 8e jour sans carte, un exercice donné par l'enseignant à toute la classe est-il bloqué ? | **Oui, tout est bloqué**, exercices donnés par l'enseignant compris (porteur, 2026-11-07). | Un seul blocage, au démarrage de toute séance d'exercice, quelle que soit son origine. L'enseignant verra des élèves « non faits » : l'école a intérêt à ce que toute la classe s'abonne. |
+| Q9 — Quelle école touche les 1 000 F quand la carte est vendue près d'une autre école ? | **L'école de l'élève**, celle de son compte au moment où il saisit le code (porteur, 2026-11-07). | L'école est relevée à l'activation et figée : un changement d'école ensuite ne déplace pas la commission. Un élève sans école à l'activation ne rapporte de commission à personne. La carte n'a pas d'école, seulement un point relais. |
 
 ## Cas limites identifiés
 
@@ -70,5 +71,4 @@ Le terrain commence le **lundi 9 novembre 2026** dans 4 établissements privés 
 ## Questions encore ouvertes
 
 - Les élèves déjà inscrits depuis plus de 7 jours avant le lancement : bloqués dès la mise en ligne ?
-- L'école qui touche 1 000 F : celle de l'élève, ou celle écrite sur la carte ?
 - Le parent : voit-il quelque chose ?
