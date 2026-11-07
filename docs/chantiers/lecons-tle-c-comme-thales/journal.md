@@ -104,3 +104,23 @@ Uniquement les auteurs, thèses et citations de la leçon d'origine ; questions 
 | **Total** | **967** | **44 327** | **33** | **38** |
 
 Défauts de fond typiques : affirmation prêtée à un personnage ou à un texte qui ne la contient pas ; ordre de citation dans la leçon confondu avec l'ordre chronologique (Towa/Hountondji) ; ordering non défendable par la fiche ; matching à deux lectures.
+
+### Physique-chimie — 10 leçons
+
+Chaque question de calcul prouvée par sympy (720), les questions de cours par un extrait mot pour mot de la leçon (374) ; chaque réponse chiffrée faussée exprès est détectée. Aucune figure ajoutée ; quelques exercices citent une figure existante de la leçon qui montre exactement leur situation. Relecture indépendante de chaque leçon.
+
+| Leçon | Questions | Vérifications | Calculs prouvés (faussés détectés) | Erreurs au 1er passage | Défauts de fond (relecture) |
+|---|---:|---:|---:|---:|---:|
+| Acides carboxyliques et dérivés | 104 | 3 951 | 80 (80/80) | 3 | 1 |
+| Champ magnétique | 109 | 4 259 | 65 (65/65) | 2 | 0 |
+| Cinématique du point | 104 | 3 661 | 89 (89/89) | 0 | 0 |
+| Composés carbonylés | 110 | 4 568 | 34 (34/34) | 4 | 5 |
+| Fabrication d'un savon | 115 | 4 268 | 67 (67/67) | 118 | 0 |
+| Interaction gravitationnelle | 104 | 3 799 | 83 (83/83) | 2 | 2 |
+| Les alcools | 116 | 4 695 | 41 (41/41) | 4 | 8 |
+| Mouvement du centre d'inertie | 104 | 3 725 | 82 (82/82) | 0 | 4 |
+| Mouvements dans les champs g et E | 113 | 4 116 | 89 (89/89) | 1 | 0 |
+| Oscillations mécaniques libres | 115 | 4 343 | 90 (90/90) | 0 | 3 |
+| **Total** | **1 094** | **41 385** | **720 (720/720)** | **134** | **23** |
+
+Les 118 erreurs du savon au 1er passage venaient d'une seule faute du générateur du rédacteur (une clé de forme répétée sur chaque question). Défauts de fond typiques : questions des alcools qui renvoyaient à « flacon 2 » sans en redonner les données ; demi-équation expliquée par un mauvais bilan d'atomes (carbonylés) ; distracteur « acide carboxylique » ambigu au test à la DNPH, remplacé par un alcool ; explication qui jugeait 13 m/s² « absurde » alors qu'une accélération vers le haut peut dépasser g.
