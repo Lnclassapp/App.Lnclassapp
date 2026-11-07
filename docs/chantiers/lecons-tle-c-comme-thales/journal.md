@@ -1,0 +1,71 @@
+# Journal — Les leçons de Terminale C préparées comme Thalès
+
+> Rempli **pendant** le chantier, pas reconstitué à la fin.
+
+## Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-11-05 | Même méthode que la 3ème : un rédacteur par leçon écrit ses ajouts hors dépôt, un script les fusionne dans la version de `Develop` et contrôle tout | Le cours, les fiches et les 4 problèmes restent identiques octet pour octet | Non |
+| 2026-11-05 | En mathématiques, chaque question est prouvée par sympy ; aucune preuve par extrait | Toutes les réponses sont des calculs | Non |
+| 2026-11-05 | Une relecture indépendante de chaque leçon, par un agent qui ne l'a pas écrite, avant son commit | Les trois premières relectures (commentaire de texte, « Dieu et la religion », dissertation littéraire) ont chacune trouvé des défauts que le script ne voit pas | Non |
+| 2026-11-05 | Une leçon de Tle C dont la même fiche existe dans un autre dossier de Terminale n'est modifiée qu'ici | Décision 6 de #484 : le chantier suivant reprend les ajouts depuis le fichier de Tle C | Non |
+
+## Ce qui a dérapé
+
+- **sympy 1.14 se trompe sur les limites de puissances à base numérique** : `limit(3**x, x, -oo)` rend `oo`, `limit((1/2)**x, x, -oo)` rend `0`. Une preuve a donc validé une limite fausse aux exponentielles. Correctif dans l'outil de preuve : toute limite passe par `a**u = exp(u ln a)`. Les 10 leçons de mathématiques ont été recontrôlées après ce correctif.
+- **Réponse faussée qui retombe sur la bonne valeur** : pour −1, la valeur faussée `2v + 1` redonnait −1. Le script décale maintenant la valeur quand c'est le cas.
+- **Faux positif du contrôle de rang** : « proposition d'action » était pris pour « proposition A ». Expression corrigée.
+- **Rang non vu par le script** : « la première égalité », « la seconde », « les deux premières » échappent à l'expression ; ce sont les relecteurs qui les ont attrapés et réécrits.
+- **Rédacteurs qui génèrent par script** : plusieurs ont écrit leurs JSON avec un petit générateur au lieu de fichier par fichier. Le contrôle porte sur le JSON produit ; les générateurs restent hors dépôt.
+- **Quota de la session** : une vingtaine d'agents (rédacteurs de physique-chimie et de SVT, relecteurs de mathématiques) se sont arrêtés en pleine tâche le 5/11 ; ils ont repris le 7/11 sans rien perdre.
+
+## Ce qu'on a appris sur la codebase
+
+- `script/contenus/valider.rb` ne valide toujours pas `subjects` ; le script hors dépôt le relance avec chaque sujet à la place des 4 problèmes (dette déjà notée par le chantier de 3ème).
+
+## Fichiers communs avec d'autres dossiers (non modifiés ici)
+
+Même fiche dans un autre dossier de Terminale ; le chantier suivant (Tle D, puis Tle A1 et A2) reprend les mêmes ajouts — 2e exercice et sujets — depuis le fichier de Tle C (décision 6 de #484).
+
+- **Français** (6) : les 6 leçons, même fiche en `tle-a1`, `tle-a2` et `tle-d`.
+- **Philosophie** (9) : les 9 leçons, même fiche en `tle-a1`, `tle-a2` et `tle-d`.
+- **Mathématiques** (5) : dérivabilité et étude de fonctions, fonctions logarithmes, limites et continuité, nombres complexes, primitives — même fiche en `tle-d`.
+- **Physique-chimie** (8) : acides carboxyliques, cinématique du point, composés carbonylés, fabrication d'un savon, les alcools, mouvement du centre d'inertie, mouvements dans les champs g et E, oscillations mécaniques libres — même fiche en `tle-d`.
+- **SVT** (3) : l'infection par le VIH, la transmission d'un caractère héréditaire, le système de défense — même fiche en `tle-d`.
+- Homonymes qui sont d'autres leçons (rien à reprendre) : dérivabilité (1ère A1, A2), limites (1ère C, D), production d'énergie et cycles sexuels (1ère A1, A2), commentaire composé et résumé (1ère) ; œuvre narrative et résumé ont des copies v1 en 2nde.
+
+## Dette laissée derrière
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| `valider.rb` ne contrôle pas les sujets (déjà noté en 3ème) | Le chantier ne touche que du contenu | À ouvrir |
+
+## À trancher
+
+- **Lectures graphiques sans tolérance** : comme en 3ème, une valeur lue sur une construction est en `numeric` avec `tolerance` 0 quand la valeur est entière. Option prudente appliquée : laisser tel quel. Option possible : une tolérance d'une demi-unité.
+- **Valeurs illustratives** : les données chiffrées des énoncés (mesures, effectifs, prix, résultats d'expérience en SVT et physique-chimie) sont inventées et présentées comme des exemples. Un enseignant relit avant publication.
+- **Oral du bac (Français)** : les textes d'appui reprennent Birago Diop (1947) et Bernard Dadié, « Climbié » (1956), sur le modèle de la 3ème.
+
+## Avancement
+
+### Mathématiques — 10 leçons
+
+Preuve : sympy sur chaque question ; chaque réponse faussée exprès est détectée. Aucune figure ajoutée. Relecture indépendante de chaque leçon.
+
+| Leçon | Questions | Vérifications | Réponses faussées détectées | Défauts de fond corrigés (rédaction + relecture) |
+|---|---:|---:|---:|---:|
+| Barycentre et lignes de niveaux | 121 | 4 665 | 121/121 | 3 + 0 |
+| Coniques | 111 | 4 238 | 111/111 | 0 + 0 |
+| Dérivabilité et étude de fonctions | 112 | 4 391 | 112/112 | 2 + 0 |
+| Divisibilité dans ℤ | 104 | 3 970 | 104/104 | 1 + 3 |
+| Fonctions exponentielles et puissances | 110 | 4 573 | 110/110 | 2 + 0 |
+| Fonctions logarithmes | 119 | 4 723 | 119/119 | 0 + 2 |
+| Géométrie analytique de l'espace | 104 | 4 065 | 104/104 | 0 + 3 |
+| Limites et continuité | 114 | 4 539 | 114/114 | 0 + 2 |
+| Nombres complexes | 118 | 4 769 | 118/118 | 0 + 3 |
+| Primitives | 106 | 4 360 | 106/106 | 0 + 5 |
+| **Total** | **1 119** | **44 293** | **1 119/1 119** | **8 + 18** |
+
+Exemples de défauts de fond trouvés : 14 multiples de 7 entre 100 et 200 et non 15 (divisibilité) ; une limite fausse validée par le défaut de sympy (exponentielles) ; deux questions de logarithmes qui reprenaient l'exercice d'application de la leçon ; un encadrement « 1,4 < α < ___ » qui admettait plusieurs bornes (limites) ; une explication qui donnait $-2/x^3+3$ pour la dérivée de f (primitives). Les relecteurs ont aussi réécrit 47 corrections qui désignaient une proposition par son rang.
+

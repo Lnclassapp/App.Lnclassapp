@@ -31,111 +31,223 @@
           },
           "pitfall": "Le produit scalaire est un **nombre**, pas un vecteur : on additionne les trois produits au lieu de les garder séparés. Et « orthogonaux » se lit sur le produit scalaire, pas sur les coordonnées. Contre-exemple : $\\vec u(4\\,;1\\,;-2)$ et $\\vec v(1\\,;-2\\,;1)$ n'ont aucune coordonnée nulle, pourtant $4-2-2=0$ : ils sont orthogonaux. À l'inverse, $\\vec u(1\\,;0\\,;0)$ et $\\vec w(1\\,;5\\,;0)$ ont des coordonnées nulles, mais $1\\times1+0+0=1\\neq0$ : ils ne sont pas orthogonaux.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer des produits scalaires et des distances",
-            "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu calcules des produits scalaires, des distances et tu testes l'orthogonalité avec la méthode de la fiche : écrire, multiplier, additionner, conclure.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Dans un repère orthonormé d'unité 1 m, une poutre va du point $A(1\\,;2\\,;3)$ au point $B(3\\,;4\\,;4)$. Quelle est la longueur $AB$ de la poutre, en mètres ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB}(3-1\\,;4-2\\,;4-3)=(2\\,;2\\,;1)$. Étape 2 — Multiplier : $2\\times2=4$, $2\\times2=4$, $1\\times1=1$. Étape 3 — Additionner : $\\overrightarrow{AB}\\cdot\\overrightarrow{AB}=4+4+1=9$. Étape 4 — Conclure : $AB=\\sqrt9=3$ m. Oublier la racine carrée donnerait 9, qui est le carré de la longueur.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 0,
-                "unit": "m"
-              },
-              {
-                "content": "On donne $\\vec u(2\\,;-1\\,;3)$ et $\\vec v(1\\,;4\\,;2)$. Quel est le produit scalaire $\\vec u\\cdot\\vec v$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : les coordonnées sont déjà données, $\\vec u(2\\,;-1\\,;3)$ et $\\vec v(1\\,;4\\,;2)$. Étape 2 — Multiplier : $2\\times1=2$, $(-1)\\times4=-4$, $3\\times2=6$. Étape 3 — Additionner : $2-4+6=4$. Étape 4 — Conclure : $\\vec u\\cdot\\vec v=4$, nombre non nul, donc les vecteurs ne sont pas orthogonaux. La proposition $12$ oublie les signes (elle calcule $2+4+6$), et $(2\\,;-4\\,;6)$ est une liste de trois produits : le produit scalaire est un seul nombre.",
-                "answers": [
-                  {
-                    "content": "$4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(2\\,;-4\\,;6)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de la méthode pour savoir si deux vecteurs de l'espace sont orthogonaux.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Écrire les coordonnées des deux vecteurs. Étape 2 — Multiplier les coordonnées de même rang. Étape 3 — Additionner les trois produits. Étape 4 — Conclure : produit nul, vecteurs orthogonaux. On ne conclut jamais avant d'avoir additionné les trois produits.",
-                "answers": [
-                  {
-                    "content": "Écrire les coordonnées des deux vecteurs."
-                  },
-                  {
-                    "content": "Multiplier les coordonnées de même rang."
-                  },
-                  {
-                    "content": "Additionner les trois produits."
-                  },
-                  {
-                    "content": "Conclure : produit nul, vecteurs orthogonaux."
-                  }
-                ]
-              },
-              {
-                "content": "On donne $\\vec u(1\\,;2\\,;-1)$. Quels sont les deux vecteurs orthogonaux à $\\vec u$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Écrire : $\\vec u(1\\,;2\\,;-1)$ et chaque vecteur proposé. Étape 2 — Multiplier et Étape 3 — Additionner : $\\vec u\\cdot(1\\,;0\\,;1)=1+0-1=0$ ; $\\vec u\\cdot(2\\,;-1\\,;0)=2-2+0=0$ ; $\\vec u\\cdot(1\\,;1\\,;1)=1+2-1=2$ ; $\\vec u\\cdot(-1\\,;-2\\,;1)=-1-4-1=-6$ ; $\\vec u\\cdot(0\\,;1\\,;1)=0+2-1=1$. Étape 4 — Conclure : seuls les deux premiers donnent 0. Le vecteur $(-1\\,;-2\\,;1)$ est l'opposé de $\\vec u$ : il lui est colinéaire, pas orthogonal.",
-                "answers": [
-                  {
-                    "content": "$(1\\,;0\\,;1)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(2\\,;-1\\,;0)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(1\\,;1\\,;1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(-1\\,;-2\\,;1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(0\\,;1\\,;1)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Les vecteurs $\\vec u(4\\,;1\\,;-2)$ et $\\vec v(1\\,;-2\\,;1)$ ne sont pas orthogonaux, car aucune de leurs coordonnées n'est nulle.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $\\vec u(4\\,;1\\,;-2)$ et $\\vec v(1\\,;-2\\,;1)$. Étape 2 — Multiplier : $4\\times1=4$, $1\\times(-2)=-2$, $(-2)\\times1=-2$. Étape 3 — Additionner : $4-2-2=0$. Étape 4 — Conclure : le produit scalaire est nul, donc les vecteurs sont orthogonaux. L'affirmation est fausse : l'orthogonalité se lit sur le produit scalaire, pas sur la présence de coordonnées nulles.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des produits scalaires et des distances",
+              "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu calcules des produits scalaires, des distances et tu testes l'orthogonalité avec la méthode de la fiche : écrire, multiplier, additionner, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans un repère orthonormé d'unité 1 m, une poutre va du point $A(1\\,;2\\,;3)$ au point $B(3\\,;4\\,;4)$. Quelle est la longueur $AB$ de la poutre, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB}(3-1\\,;4-2\\,;4-3)=(2\\,;2\\,;1)$. Étape 2 — Multiplier : $2\\times2=4$, $2\\times2=4$, $1\\times1=1$. Étape 3 — Additionner : $\\overrightarrow{AB}\\cdot\\overrightarrow{AB}=4+4+1=9$. Étape 4 — Conclure : $AB=\\sqrt9=3$ m. Oublier la racine carrée donnerait 9, qui est le carré de la longueur.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "On donne $\\vec u(2\\,;-1\\,;3)$ et $\\vec v(1\\,;4\\,;2)$. Quel est le produit scalaire $\\vec u\\cdot\\vec v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : les coordonnées sont déjà données, $\\vec u(2\\,;-1\\,;3)$ et $\\vec v(1\\,;4\\,;2)$. Étape 2 — Multiplier : $2\\times1=2$, $(-1)\\times4=-4$, $3\\times2=6$. Étape 3 — Additionner : $2-4+6=4$. Étape 4 — Conclure : $\\vec u\\cdot\\vec v=4$, nombre non nul, donc les vecteurs ne sont pas orthogonaux. La proposition $12$ oublie les signes (elle calcule $2+4+6$), et $(2\\,;-4\\,;6)$ est une liste de trois produits : le produit scalaire est un seul nombre.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;-4\\,;6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour savoir si deux vecteurs de l'espace sont orthogonaux.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire les coordonnées des deux vecteurs. Étape 2 — Multiplier les coordonnées de même rang. Étape 3 — Additionner les trois produits. Étape 4 — Conclure : produit nul, vecteurs orthogonaux. On ne conclut jamais avant d'avoir additionné les trois produits.",
+                  "answers": [
+                    {
+                      "content": "Écrire les coordonnées des deux vecteurs."
+                    },
+                    {
+                      "content": "Multiplier les coordonnées de même rang."
+                    },
+                    {
+                      "content": "Additionner les trois produits."
+                    },
+                    {
+                      "content": "Conclure : produit nul, vecteurs orthogonaux."
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $\\vec u(1\\,;2\\,;-1)$. Quels sont les deux vecteurs orthogonaux à $\\vec u$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(1\\,;2\\,;-1)$ et chaque vecteur proposé. Étape 2 — Multiplier et Étape 3 — Additionner : $\\vec u\\cdot(1\\,;0\\,;1)=1+0-1=0$ ; $\\vec u\\cdot(2\\,;-1\\,;0)=2-2+0=0$ ; $\\vec u\\cdot(1\\,;1\\,;1)=1+2-1=2$ ; $\\vec u\\cdot(-1\\,;-2\\,;1)=-1-4-1=-6$ ; $\\vec u\\cdot(0\\,;1\\,;1)=0+2-1=1$. Étape 4 — Conclure : seuls les deux premiers donnent 0. Le vecteur $(-1\\,;-2\\,;1)$ est l'opposé de $\\vec u$ : il lui est colinéaire, pas orthogonal.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;0\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;-1\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-1\\,;-2\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;1\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\vec u(4\\,;1\\,;-2)$ et $\\vec v(1\\,;-2\\,;1)$ ne sont pas orthogonaux, car aucune de leurs coordonnées n'est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(4\\,;1\\,;-2)$ et $\\vec v(1\\,;-2\\,;1)$. Étape 2 — Multiplier : $4\\times1=4$, $1\\times(-2)=-2$, $(-2)\\times1=-2$. Étape 3 — Additionner : $4-2-2=0$. Étape 4 — Conclure : le produit scalaire est nul, donc les vecteurs sont orthogonaux. L'affirmation est fausse : l'orthogonalité se lit sur le produit scalaire, pas sur la présence de coordonnées nulles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Longueurs et orthogonalité de vecteurs",
+              "statement": "Dans cet exercice, tu travailles dans l'espace muni d'un repère orthonormé : tu calcules une longueur, des produits scalaires et des orthogonalités avec la méthode de la fiche : écrire, multiplier, additionner, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord les coordonnées du vecteur (extrémité moins origine), multiplie les coordonnées de même rang, additionne les trois produits, puis conclus : produit nul, vecteurs orthogonaux.",
+              "questions": [
+                {
+                  "content": "Dans un repère orthonormé d'unité 1 m, un câble tendu relie le point $P(1\\,;-2\\,;3)$ au point $R(5\\,;1\\,;15)$. Quelle est la longueur $PR$ du câble, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $\\overrightarrow{PR}(5-1\\,;1-(-2)\\,;15-3)=(4\\,;3\\,;12)$. Étape 2 — Multiplier : $4\\times4=16$, $3\\times3=9$, $12\\times12=144$. Étape 3 — Additionner : $\\overrightarrow{PR}\\cdot\\overrightarrow{PR}=16+9+144=169$. Étape 4 — Conclure : $PR=\\sqrt{169}=13$ m. Oublier la racine carrée donnerait 169, qui est le carré de la longueur ; oublier que $1-(-2)=3$ donnerait $(4\\,;-1\\,;12)$ et une longueur fausse.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "On donne $\\vec u(3\\,;-2\\,;1)$ et $\\vec v(2\\,;4\\,;-5)$. Quel est le produit scalaire $\\vec u\\cdot\\vec v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(3\\,;-2\\,;1)$ et $\\vec v(2\\,;4\\,;-5)$ sont déjà donnés. Étape 2 — Multiplier : $3\\times2=6$, $(-2)\\times4=-8$, $1\\times(-5)=-5$. Étape 3 — Additionner : $6-8-5=-7$. Étape 4 — Conclure : $\\vec u\\cdot\\vec v=-7$, nombre non nul, donc les vecteurs ne sont pas orthogonaux. La proposition $9$ traite $-8$ comme $+8$ (erreur de signe), $19$ additionne les valeurs absolues $6+8+5$, et $(6\\,;-8\\,;-5)$ est la liste des trois produits : le produit scalaire est un seul nombre.",
+                  "answers": [
+                    {
+                      "content": "$-7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;-8\\,;-5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\vec u(2\\,;3\\,;-1)$ et $\\vec v(2\\,;-1\\,;1)$ sont orthogonaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(2\\,;3\\,;-1)$ et $\\vec v(2\\,;-1\\,;1)$. Étape 2 — Multiplier : $2\\times2=4$, $3\\times(-1)=-3$, $(-1)\\times1=-1$. Étape 3 — Additionner : $4-3-1=0$. Étape 4 — Conclure : le produit scalaire est nul, donc les vecteurs sont orthogonaux et l'affirmation est vraie. Répondre « faux » parce qu'aucun produit n'est nul confond l'orthogonalité avec des coordonnées nulles : seule la somme compte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le vecteur $\\vec u(2\\,;-2\\,;1)$ a pour norme ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(2\\,;-2\\,;1)$. Étape 2 — Multiplier : $\\vec u\\cdot\\vec u$ demande $2\\times2=4$, $(-2)\\times(-2)=4$ et $1\\times1=1$. Étape 3 — Additionner : $4+4+1=9$. Étape 4 — Conclure : $\\|\\vec u\\|=\\sqrt9=3$. Écrire 9 oublie la racine carrée, et écrire 1 additionne $2-2+1$ sans élever au carré : les carrés sont toujours positifs.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère orthonormé, on donne $A(1\\,;1\\,;1)$ et $B(2\\,;3\\,;2)$. Quels sont les deux points $M$ tels que $\\overrightarrow{AB}\\cdot\\overrightarrow{AM}=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB}(1\\,;2\\,;1)$ et, pour chaque point, $\\overrightarrow{AM}$. Étapes 2 et 3 — Multiplier puis additionner : $C$ donne $\\overrightarrow{AC}(2\\,;-1\\,;0)$ et $2-2+0=0$ ; $D$ donne $\\overrightarrow{AD}(1\\,;0\\,;-1)$ et $1+0-1=0$ ; $E$ donne $(0\\,;1\\,;1)$ et $0+2+1=3$ ; $F$ donne $(2\\,;1\\,;1)$ et $2+2+1=5$ ; $G$ donne $(-1\\,;-2\\,;-1)$ et $-1-4-1=-6$. Étape 4 — Conclure : seuls $C$ et $D$ donnent 0. Le point $G$ est tel que $\\overrightarrow{AG}=-\\overrightarrow{AB}$ : il est aligné avec $A$ et $B$, pas orthogonal.",
+                  "answers": [
+                    {
+                      "content": "$C(3\\,;0\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D(2\\,;1\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(1\\,;2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(3\\,;2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G(0\\,;-1\\,;0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère orthonormé, les vecteurs $\\vec u(k\\,;2\\,;-1)$ et $\\vec v(2\\,;3\\,;2)$ sont orthogonaux. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $\\vec u(k\\,;2\\,;-1)$ et $\\vec v(2\\,;3\\,;2)$. Étape 2 — Multiplier : $k\\times2=2k$, $2\\times3=6$, $(-1)\\times2=-2$. Étape 3 — Additionner : $\\vec u\\cdot\\vec v=2k+6-2=2k+4$. Étape 4 — Conclure : les vecteurs sont orthogonaux si et seulement si $2k+4=0$, donc $k=-2$. Trouver $k=2$ vient d'une erreur de signe en passant $4$ de l'autre côté de l'égalité.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Dans un bâtiment en construction, on place un repère orthonormé d'unité 1 m dont l'origine est un coin du sol. Trois points de la charpente sont $A(1\\,;1\\,;3)$, $B(3\\,;3\\,;4)$ et $C(2\\,;0\\,;1)$.",
             "questions": [
@@ -213,114 +325,236 @@
           },
           "pitfall": "Les nombres $a$, $b$, $c$ de l'équation sont les coordonnées du **vecteur normal**, pas celles d'un point du plan. Contre-exemple : le plan $2x-y+z-4=0$ a pour vecteur normal $(2\\,;-1\\,;1)$, mais le point $(2\\,;-1\\,;1)$ n'est pas dans ce plan : $4+1+1-4=2\\neq0$. Pour savoir si un point est dans un plan, remplace $x$, $y$, $z$ par ses coordonnées et regarde si tu obtiens 0.",
           "figure": null,
-          "exercise": {
-            "title": "Écrire et utiliser une équation de plan",
-            "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu écris l'équation d'un plan à partir d'un point et d'un vecteur normal, puis tu l'utilises, avec la méthode de la fiche : identifier, écrire la condition, développer, réduire.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est une équation cartésienne du plan passant par $A(2\\,;0\\,;1)$ et de vecteur normal $\\vec n(1\\,;3\\,;-2)$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $A(2\\,;0\\,;1)$ et $\\vec n(1\\,;3\\,;-2)$. Étape 2 — Écrire : $\\overrightarrow{AM}(x-2\\,;y\\,;z-1)$ et $\\vec n\\cdot\\overrightarrow{AM}=0$. Étape 3 — Développer : $(x-2)+3y-2(z-1)=0$. Étape 4 — Réduire : $x-2+3y-2z+2=x+3y-2z=0$. Vérification avec $A$ : $2+0-2=0$. La proposition $2x+z=0$ prend les coordonnées de $A$ pour un vecteur normal, et $x+3y-2z-4=0$ ne passe pas par $A$ : $2+0-2-4=-4\\neq0$.",
-                "answers": [
-                  {
-                    "content": "$x+3y-2z=0$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$2x+z=0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x+3y-2z-4=0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x+3y-2z+2=0$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le point $B(1\\,;2\\,;k)$ appartient au plan d'équation $2x-y+z-5=0$. Quelle est la valeur de $k$ ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Identifier : l'équation est $2x-y+z-5=0$ et le point est $B(1\\,;2\\,;k)$. Étape 4 — Vérifier avec le point : on remplace $x$, $y$, $z$ par $1$, $2$, $k$, ce qui donne $2\\times1-2+k-5=0$, soit $k-5=0$. Donc $k=5$.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 0
-              },
-              {
-                "content": "Quel est un vecteur normal au plan d'équation $3x-2y+z+7=0$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : dans $ax+by+cz+d=0$, un vecteur normal est $(a\\,;b\\,;c)$, donc ici $(3\\,;-2\\,;1)$. La proposition $(3\\,;-2\\,;7)$ prend le terme constant $d=7$ pour la troisième coordonnée, $(3\\,;2\\,;1)$ change le signe de $b$, et $(7\\,;3\\,;-2)$ place le terme constant $d=7$ en premier au lieu de lire $a$, $b$, $c$ dans l'ordre.",
-                "answers": [
-                  {
-                    "content": "$(3\\,;-2\\,;1)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(3\\,;-2\\,;7)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3\\,;2\\,;1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(7\\,;3\\,;-2)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quels sont les deux points qui appartiennent au plan d'équation $2x-y+3z-4=0$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Identifier : l'équation est $2x-y+3z-4=0$. Étape 4 — Vérifier chaque point : $(1\\,;1\\,;1)$ donne $2-1+3-4=0$ ; $(2\\,;0\\,;0)$ donne $4-4=0$ ; $(0\\,;0\\,;1)$ donne $3-4=-1$ ; $(2\\,;1\\,;1)$ donne $4-1+3-4=2$ ; $(0\\,;1\\,;1)$ donne $-1+3-4=-2$. Seuls les deux premiers points donnent 0.",
-                "answers": [
-                  {
-                    "content": "$(1\\,;1\\,;1)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(2\\,;0\\,;0)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(0\\,;0\\,;1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(2\\,;1\\,;1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(0\\,;1\\,;1)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le plan d'équation $x+3y-z-5=0$ contient le point $(1\\,;3\\,;-1)$, parce que $(1\\,;3\\,;-1)$ est son vecteur normal.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : le vecteur normal est $(1\\,;3\\,;-1)$. Étape 4 — Vérifier avec le point $(1\\,;3\\,;-1)$ : $1+9+1-5=6\\neq0$. Le point n'est pas dans le plan. Les nombres $a$, $b$, $c$ sont les coordonnées d'un vecteur normal, pas celles d'un point du plan : l'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Écrire et utiliser une équation de plan",
+              "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu écris l'équation d'un plan à partir d'un point et d'un vecteur normal, puis tu l'utilises, avec la méthode de la fiche : identifier, écrire la condition, développer, réduire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est une équation cartésienne du plan passant par $A(2\\,;0\\,;1)$ et de vecteur normal $\\vec n(1\\,;3\\,;-2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $A(2\\,;0\\,;1)$ et $\\vec n(1\\,;3\\,;-2)$. Étape 2 — Écrire : $\\overrightarrow{AM}(x-2\\,;y\\,;z-1)$ et $\\vec n\\cdot\\overrightarrow{AM}=0$. Étape 3 — Développer : $(x-2)+3y-2(z-1)=0$. Étape 4 — Réduire : $x-2+3y-2z+2=x+3y-2z=0$. Vérification avec $A$ : $2+0-2=0$. La proposition $2x+z=0$ prend les coordonnées de $A$ pour un vecteur normal, et $x+3y-2z-4=0$ ne passe pas par $A$ : $2+0-2-4=-4\\neq0$.",
+                  "answers": [
+                    {
+                      "content": "$x+3y-2z=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x+z=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+3y-2z-4=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+3y-2z+2=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $B(1\\,;2\\,;k)$ appartient au plan d'équation $2x-y+z-5=0$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : l'équation est $2x-y+z-5=0$ et le point est $B(1\\,;2\\,;k)$. Étape 4 — Vérifier avec le point : on remplace $x$, $y$, $z$ par $1$, $2$, $k$, ce qui donne $2\\times1-2+k-5=0$, soit $k-5=0$. Donc $k=5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel est un vecteur normal au plan d'équation $3x-2y+z+7=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : dans $ax+by+cz+d=0$, un vecteur normal est $(a\\,;b\\,;c)$, donc ici $(3\\,;-2\\,;1)$. La proposition $(3\\,;-2\\,;7)$ prend le terme constant $d=7$ pour la troisième coordonnée, $(3\\,;2\\,;1)$ change le signe de $b$, et $(7\\,;3\\,;-2)$ place le terme constant $d=7$ en premier au lieu de lire $a$, $b$, $c$ dans l'ordre.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;-2\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;-2\\,;7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;2\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(7\\,;3\\,;-2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux points qui appartiennent au plan d'équation $2x-y+3z-4=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : l'équation est $2x-y+3z-4=0$. Étape 4 — Vérifier chaque point : $(1\\,;1\\,;1)$ donne $2-1+3-4=0$ ; $(2\\,;0\\,;0)$ donne $4-4=0$ ; $(0\\,;0\\,;1)$ donne $3-4=-1$ ; $(2\\,;1\\,;1)$ donne $4-1+3-4=2$ ; $(0\\,;1\\,;1)$ donne $-1+3-4=-2$. Seuls les deux premiers points donnent 0.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;0\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0\\,;0\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;1\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan d'équation $x+3y-z-5=0$ contient le point $(1\\,;3\\,;-1)$, parce que $(1\\,;3\\,;-1)$ est son vecteur normal.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le vecteur normal est $(1\\,;3\\,;-1)$. Étape 4 — Vérifier avec le point $(1\\,;3\\,;-1)$ : $1+9+1-5=6\\neq0$. Le point n'est pas dans le plan. Les nombres $a$, $b$, $c$ sont les coordonnées d'un vecteur normal, pas celles d'un point du plan : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Plans passant par des points donnés",
+              "statement": "Dans cet exercice, tu travailles dans l'espace muni d'un repère orthonormé : tu écris des équations de plans, tu lis un vecteur normal et tu compares des plans avec la méthode de la fiche : identifier, écrire la condition, développer, réduire.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Un plan est donné par un point $A$ et un vecteur normal $\\vec n$ : écris $\\vec n\\cdot\\overrightarrow{AM}=0$, développe, réduis, puis vérifie avec les coordonnées de $A$.",
+              "questions": [
+                {
+                  "content": "Quelle est une équation cartésienne du plan passant par $A(1\\,;-1\\,;2)$ et de vecteur normal $\\vec n(2\\,;1\\,;-3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $A(1\\,;-1\\,;2)$ et $\\vec n(2\\,;1\\,;-3)$. Étape 2 — Écrire la condition : $\\overrightarrow{AM}(x-1\\,;y+1\\,;z-2)$ et $\\vec n\\cdot\\overrightarrow{AM}=0$. Étape 3 — Développer : $2(x-1)+(y+1)-3(z-2)=0$, soit $2x-2+y+1-3z+6=0$. Étape 4 — Réduire : $2x+y-3z+5=0$. Vérification avec $A$ : $2-1-6+5=0$. La proposition avec $-5$ se trompe de signe sur le terme constant ; $x-y+2z-5=0$ prend les coordonnées de $A$ pour un vecteur normal ; la proposition avec $-7$ oublie que $-3\\times(-2)=+6$ en développant.",
+                  "answers": [
+                    {
+                      "content": "$2x+y-3z+5=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x+y-3z-5=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x-y+2z-5=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x+y-3z-7=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $C(2\\,;k\\,;1)$ appartient au plan d'équation $3x-y+2z-6=0$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : le plan a pour équation $3x-y+2z-6=0$ et le point est $C(2\\,;k\\,;1)$. Étape 4 — Vérifier avec le point : on remplace $x$, $y$, $z$ par $2$, $k$, $1$, ce qui donne $6-k+2-6=0$, soit $2-k=0$. Donc $k=2$. Trouver $k=-2$ vient d'une erreur de signe en isolant $k$ : l'équation $2-k=0$ donne $k=2$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les plans d'équations $2x-4y+6z+1=0$ et $x-2y+3z-5=0$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : les vecteurs normaux se lisent sur les coefficients, $\\vec n_1(2\\,;-4\\,;6)$ et $\\vec n_2(1\\,;-2\\,;3)$. Étape 2 — Écrire la condition : deux plans sont parallèles si leurs vecteurs normaux sont colinéaires. Étape 3 — Développer le test : $\\vec n_1=2\\vec n_2$. Étape 4 — Conclure : les vecteurs normaux sont colinéaires, donc les plans sont parallèles. Les termes constants $+1$ et $-5$ n'interviennent pas dans le parallélisme : ils disent seulement que les plans sont distincts.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un plan $\\mathcal P$ a pour équation $2x+y-z+3=0$. Deux plans sont orthogonaux si le produit scalaire de leurs vecteurs normaux est nul. Quels sont les deux plans orthogonaux à $\\mathcal P$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $\\vec n(2\\,;1\\,;-1)$ est normal à $\\mathcal P$. Étapes 2 et 3 — Écrire la condition et la développer par un produit scalaire : $(1\\,;-1\\,;1)$ donne $2-1-1=0$ ; $(1\\,;1\\,;3)$ donne $2+1-3=0$ ; $(2\\,;1\\,;1)$ donne $4+1-1=4$ ; $(1\\,;2\\,;1)$ donne $2+2-1=3$. Étape 4 — Conclure : seuls les plans $x-y+z=0$ et $x+y+3z-2=0$ conviennent. Le plan $4x+2y-2z+1=0$ a pour vecteur normal $(4\\,;2\\,;-2)=2\\vec n$ : il est parallèle à $\\mathcal P$, pas orthogonal.",
+                  "answers": [
+                    {
+                      "content": "$x-y+z=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x+y+3z-2=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x+y+z-5=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x+2y-2z+1=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+2y+z-1=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plan d'équation $2x-y+3z+d=0$ passe par $A(1\\,;1\\,;0)$. Alors la valeur de $d$ est ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : le plan a pour équation $2x-y+3z+d=0$ et passe par $A(1\\,;1\\,;0)$. Étape 4 — Réduire et vérifier avec $A$ : on remplace $x$, $y$, $z$ par $1$, $1$, $0$, ce qui donne $2-1+0+d=0$, soit $1+d=0$. Donc $d=-1$. Répondre $1$ oublie de faire passer le nombre de l'autre côté de l'égalité avec son signe.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une équation cartésienne du plan $(ABC)$, avec $A(1\\,;0\\,;0)$, $B(0\\,;2\\,;0)$ et $C(0\\,;0\\,;3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $\\overrightarrow{AB}(-1\\,;2\\,;0)$ et $\\overrightarrow{AC}(-1\\,;0\\,;3)$ ; on cherche $\\vec n(a\\,;b\\,;c)$ avec $-a+2b=0$ et $-a+3c=0$ ; pour $a=6$ on trouve $\\vec n(6\\,;3\\,;2)$. Étape 2 — Écrire la condition : $\\vec n\\cdot\\overrightarrow{AM}=0$ avec $\\overrightarrow{AM}(x-1\\,;y\\,;z)$. Étape 3 — Développer : $6(x-1)+3y+2z=0$. Étape 4 — Réduire : $6x+3y+2z-6=0$. Vérification : $B$ donne $6-6=0$ et $C$ donne $6-6=0$. La proposition $x+2y+3z-1=0$ prend des coordonnées des points pour un vecteur normal et ne passe pas par $B$ ($4-1\\neq0$) ; $6x+3y+2z+6=0$ se trompe de signe sur le terme constant et ne passe pas par $A$ ; $x+y+z-1=0$ ne passe que par $A$ : $B$ donne $2-1=1$.",
+                  "answers": [
+                    {
+                      "content": "$6x+3y+2z-6=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x+2y+3z-1=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x+3y+2z+6=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+y+z-1=0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un poseur de plaques de plâtre décrit un panneau plan dans un repère orthonormé d'unité 1 m. Le panneau passe par le point $A(3\\,;1\\,;0)$ et a pour vecteur normal $\\vec n(1\\,;2\\,;2)$.",
             "questions": [
@@ -400,110 +634,232 @@
           },
           "pitfall": "Ne conclus pas « aucun point commun » dès que le coefficient de $t$ est nul : regarde aussi le terme constant. Contre-exemple : $0t+0=0$ est vrai pour tout $t$, donc la droite est contenue dans le plan ; $0t+3=0$ n'est vrai pour aucun $t$, donc la droite est strictement parallèle au plan. Une droite a un vecteur directeur, pas un vecteur normal : ne mélange pas les deux.",
           "figure": null,
-          "exercise": {
-            "title": "Droites et plans de l'espace",
-            "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu écris des représentations paramétriques et tu étudies la position d'une droite par rapport à un plan avec la méthode de la fiche : écrire, substituer, résoudre, conclure, lire le point.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est une représentation paramétrique de la droite passant par $A(2\\,;-1\\,;3)$ de vecteur directeur $\\vec u(1\\,;4\\,;-2)$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $x=x_A+at$, $y=y_A+bt$, $z=z_A+ct$ avec $A(2\\,;-1\\,;3)$ et $\\vec u(1\\,;4\\,;-2)$, ce qui donne $x=2+t$, $y=-1+4t$, $z=3-2t$. La proposition qui commence par $x=1+2t$ échange le point et le vecteur directeur, et celles avec $z=3+2t$ ou $y=1+4t$ se trompent d'un signe.",
-                "answers": [
-                  {
-                    "content": "$x=2+t,\\ y=-1+4t,\\ z=3-2t$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x=1+2t,\\ y=4-t,\\ z=-2+3t$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x=2+t,\\ y=-1+4t,\\ z=3+2t$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x=2+t,\\ y=1+4t,\\ z=3-2t$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "La droite $\\mathcal D$ a pour représentation paramétrique $x=1+2t$, $y=-t$, $z=3+t$. Pour quelle valeur de $t$ obtient-on le point $M(5\\,;-2\\,;5)$ ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Écrire : $x=1+2t$, $y=-t$, $z=3+t$. Étape 3 — Résoudre : l'abscisse donne $1+2t=5$, donc $t=2$. Étape 5 — Lire le point : pour $t=2$, on obtient $y=-2$ et $z=5$, ce qui est bien $M(5\\,;-2\\,;5)$. La valeur est donc $t=2$.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 0
-              },
-              {
-                "content": "La droite $\\mathcal D$ de représentation $x=t$, $y=1+t$, $z=2-t$ et le plan d'équation $2x-y+z-5=0$ n'ont aucun point commun.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $x=t$, $y=1+t$, $z=2-t$. Étape 2 — Substituer : $2t-(1+t)+(2-t)-5=0$. Étape 3 — Résoudre : $2t-1-t+2-t-5=-4$, donc l'équation devient $0t-4=0$. Étape 4 — Conclure : $m=0$ et $k=-4\\neq0$, il n'y a aucune solution : la droite est strictement parallèle au plan. L'affirmation est vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "La droite passant par $A(1\\,;2\\,;0)$ de vecteur directeur $\\vec u(1\\,;-1\\,;2)$ coupe le plan d'équation $x-y+z-3=0$. Quelles sont les coordonnées du point d'intersection ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $x=1+t$, $y=2-t$, $z=2t$. Étape 2 — Substituer : $(1+t)-(2-t)+2t-3=0$. Étape 3 — Résoudre : $4t-4=0$, donc $t=1$. Étape 4 — Conclure : $m=4\\neq0$, un seul point commun. Étape 5 — Lire le point : pour $t=1$, $x=2$, $y=1$, $z=2$, soit $(2\\,;1\\,;2)$. Vérification : $2-1+2-3=0$. Le point $(1\\,;2\\,;0)$ correspond à $t=0$ : c'est $A$, qui n'est pas dans le plan.",
-                "answers": [
-                  {
-                    "content": "$(2\\,;1\\,;2)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(1\\,;2\\,;0)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3\\,;0\\,;4)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(0\\,;3\\,;-2)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "La droite $\\mathcal D$ de représentation $x=t$, $y=1+t$, $z=2-t$ et le plan d'équation $2x-y+z-1=0$ : quelle est leur position ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $x=t$, $y=1+t$, $z=2-t$. Étape 2 — Substituer : $2t-(1+t)+(2-t)-1=0$. Étape 3 — Résoudre : $2t-1-t+2-t-1=0$, soit $0t+0=0$. Étape 4 — Conclure : $m=0$ et $k=0$, l'équation est vraie pour tout $t$ : la droite est contenue dans le plan. Dire « parallèles sans point commun » oublie de regarder le terme constant $k$.",
-                "answers": [
-                  {
-                    "content": "La droite est contenue dans le plan",
-                    "correct": true
-                  },
-                  {
-                    "content": "La droite coupe le plan en un seul point",
-                    "correct": false
-                  },
-                  {
-                    "content": "La droite est strictement parallèle au plan",
-                    "correct": false
-                  },
-                  {
-                    "content": "La droite est orthogonale au plan",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Droites et plans de l'espace",
+              "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu écris des représentations paramétriques et tu étudies la position d'une droite par rapport à un plan avec la méthode de la fiche : écrire, substituer, résoudre, conclure, lire le point.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $A(2\\,;-1\\,;3)$ de vecteur directeur $\\vec u(1\\,;4\\,;-2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $x=x_A+at$, $y=y_A+bt$, $z=z_A+ct$ avec $A(2\\,;-1\\,;3)$ et $\\vec u(1\\,;4\\,;-2)$, ce qui donne $x=2+t$, $y=-1+4t$, $z=3-2t$. La proposition qui commence par $x=1+2t$ échange le point et le vecteur directeur, et celles avec $z=3+2t$ ou $y=1+4t$ se trompent d'un signe.",
+                  "answers": [
+                    {
+                      "content": "$x=2+t,\\ y=-1+4t,\\ z=3-2t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=1+2t,\\ y=4-t,\\ z=-2+3t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=2+t,\\ y=-1+4t,\\ z=3+2t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=2+t,\\ y=1+4t,\\ z=3-2t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ a pour représentation paramétrique $x=1+2t$, $y=-t$, $z=3+t$. Pour quelle valeur de $t$ obtient-on le point $M(5\\,;-2\\,;5)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $x=1+2t$, $y=-t$, $z=3+t$. Étape 3 — Résoudre : l'abscisse donne $1+2t=5$, donc $t=2$. Étape 5 — Lire le point : pour $t=2$, on obtient $y=-2$ et $z=5$, ce qui est bien $M(5\\,;-2\\,;5)$. La valeur est donc $t=2$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite $\\mathcal D$ de représentation $x=t$, $y=1+t$, $z=2-t$ et le plan d'équation $2x-y+z-5=0$ n'ont aucun point commun.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $x=t$, $y=1+t$, $z=2-t$. Étape 2 — Substituer : $2t-(1+t)+(2-t)-5=0$. Étape 3 — Résoudre : $2t-1-t+2-t-5=-4$, donc l'équation devient $0t-4=0$. Étape 4 — Conclure : $m=0$ et $k=-4\\neq0$, il n'y a aucune solution : la droite est strictement parallèle au plan. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite passant par $A(1\\,;2\\,;0)$ de vecteur directeur $\\vec u(1\\,;-1\\,;2)$ coupe le plan d'équation $x-y+z-3=0$. Quelles sont les coordonnées du point d'intersection ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $x=1+t$, $y=2-t$, $z=2t$. Étape 2 — Substituer : $(1+t)-(2-t)+2t-3=0$. Étape 3 — Résoudre : $4t-4=0$, donc $t=1$. Étape 4 — Conclure : $m=4\\neq0$, un seul point commun. Étape 5 — Lire le point : pour $t=1$, $x=2$, $y=1$, $z=2$, soit $(2\\,;1\\,;2)$. Vérification : $2-1+2-3=0$. Le point $(1\\,;2\\,;0)$ correspond à $t=0$ : c'est $A$, qui n'est pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;1\\,;2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;2\\,;0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;0\\,;4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;3\\,;-2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ de représentation $x=t$, $y=1+t$, $z=2-t$ et le plan d'équation $2x-y+z-1=0$ : quelle est leur position ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $x=t$, $y=1+t$, $z=2-t$. Étape 2 — Substituer : $2t-(1+t)+(2-t)-1=0$. Étape 3 — Résoudre : $2t-1-t+2-t-1=0$, soit $0t+0=0$. Étape 4 — Conclure : $m=0$ et $k=0$, l'équation est vraie pour tout $t$ : la droite est contenue dans le plan. Dire « parallèles sans point commun » oublie de regarder le terme constant $k$.",
+                  "answers": [
+                    {
+                      "content": "La droite est contenue dans le plan",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite coupe le plan en un seul point",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite est strictement parallèle au plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite est orthogonale au plan",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Points d'une droite et position par rapport à un plan",
+              "statement": "Dans cet exercice, tu travailles dans l'espace muni d'un repère orthonormé : tu écris des représentations paramétriques, tu retrouves des points d'une droite et tu étudies son intersection avec un plan avec la méthode de la fiche : écrire, substituer, résoudre, conclure, lire le point.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris $x$, $y$, $z$ en fonction de $t$ avec un point et le vecteur directeur, remplace-les dans l'équation du plan, résous en $t$, puis regarde le coefficient de $t$ et le terme constant.",
+              "questions": [
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $A(-1\\,;3\\,;0)$ de vecteur directeur $\\vec u(2\\,;-1\\,;5)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $x=x_A+at$, $y=y_A+bt$, $z=z_A+ct$ avec $A(-1\\,;3\\,;0)$ et $\\vec u(2\\,;-1\\,;5)$, ce qui donne $x=-1+2t$, $y=3-t$, $z=0+5t=5t$. La proposition qui commence par $x=2-t$ échange le point et le vecteur directeur ; $y=3+t$ change le signe de $b$ ; $x=1+2t$ change le signe de $x_A=-1$.",
+                  "answers": [
+                    {
+                      "content": "$x=-1+2t,\\ y=3-t,\\ z=5t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=2-t,\\ y=-1+3t,\\ z=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=-1+2t,\\ y=3+t,\\ z=5t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+2t,\\ y=3-t,\\ z=5t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ a pour représentation paramétrique $x=2-t$, $y=1+3t$, $z=-1+2t$. Pour quelle valeur de $t$ obtient-on le point $M(-1\\,;10\\,;5)$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $x=2-t$, $y=1+3t$, $z=-1+2t$. Étape 3 — Résoudre : l'abscisse donne $2-t=-1$, donc $t=3$. Étape 5 — Lire le point : pour $t=3$, on obtient $y=1+9=10$ et $z=-1+6=5$, ce qui est bien $M(-1\\,;10\\,;5)$. La valeur est $t=3$ ; trouver $t=-3$ vient d'une erreur de signe sur le coefficient $-1$ de $t$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite de vecteur directeur $\\vec u(2\\,;-4\\,;6)$ est orthogonale au plan d'équation $x-2y+3z+1=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : un vecteur normal au plan se lit sur l'équation, $\\vec n(1\\,;-2\\,;3)$. Étape 4 — Conclure : une droite est orthogonale à un plan si son vecteur directeur est colinéaire à un vecteur normal du plan. Ici $\\vec u(2\\,;-4\\,;6)=2\\vec n$ : les deux vecteurs sont colinéaires, donc l'affirmation est vraie. Il ne faut pas calculer un produit scalaire nul, qui signifierait au contraire que la droite est parallèle au plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite passant par $A(0\\,;1\\,;2)$ de vecteur directeur $\\vec u(1\\,;2\\,;-1)$ coupe le plan d'équation $2x+y+z-9=0$. Quelles sont les coordonnées du point d'intersection ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $x=t$, $y=1+2t$, $z=2-t$. Étape 2 — Substituer : $2t+(1+2t)+(2-t)-9=0$. Étape 3 — Résoudre : $3t-6=0$, donc $t=2$. Étape 4 — Conclure : $m=3\\neq0$, un seul point commun. Étape 5 — Lire le point : pour $t=2$, $x=2$, $y=5$, $z=0$, soit $(2\\,;5\\,;0)$. Vérification : $4+5+0-9=0$. Le point $(0\\,;1\\,;2)$ est $A$ ($t=0$) et donne $3-9\\neq0$ ; $(1\\,;3\\,;1)$ correspond à $t=1$ et $(4\\,;9\\,;-2)$ à $t=4$ : ils sont sur la droite mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;5\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0\\,;1\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;3\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;9\\,;-2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ a pour représentation paramétrique $x=1+t$, $y=2t$, $z=-t$. Quels sont les deux plans qui ne coupent pas $\\mathcal D$ en un seul point ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $x=1+t$, $y=2t$, $z=-t$. Étape 2 — Substituer dans chaque plan. Étape 3 — Résoudre : $x+y+3z-1$ donne $0t+0=0$ ; $x+y+3z-4$ donne $0t-3=0$ ; $x+y+z-3$ donne $2t-2=0$ ; $2x-y+z-2$ donne $-t=0$ ; $x+2y+z-1$ donne $4t=0$. Étape 4 — Conclure : les plans $x+y+z-3=0$, $2x-y+z-2=0$ et $x+2y+z-1=0$ ont $m\\neq0$ (un seul point). Les plans $x+y+3z-1=0$ et $x+y+3z-4=0$ ont $m=0$ : $x+y+3z-1=0$ contient la droite ($k=0$), $x+y+3z-4=0$ est strictement parallèle à elle ($k=-3$) ; aucun des deux ne la coupe en un seul point.",
+                  "answers": [
+                    {
+                      "content": "$x+y+3z-1=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x+y+3z-4=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x+y+z-3=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x-y+z-2=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+2y+z-1=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ de représentation $x=1+2t$, $y=-t$, $z=3+t$ coupe le plan d'équation $x+y+z-8=0$ pour $t=$ ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $x=1+2t$, $y=-t$, $z=3+t$. Étape 2 — Substituer : $(1+2t)+(-t)+(3+t)-8=0$. Étape 3 — Résoudre : $2t-4=0$, donc $t=2$. Étape 4 — Conclure : $m=2\\neq0$, un seul point commun. Répondre $t=-2$ oublie de changer le signe du terme constant en le passant de l'autre côté de l'égalité.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Dans un repère orthonormé d'unité 1 m, un câble tendu suit la droite $\\mathcal D$ passant par $A(2\\,;1\\,;0)$ de vecteur directeur $\\vec u(1\\,;1\\,;2)$. Un mur plan $\\mathcal P$ a pour équation $x+y+z-11=0$.",
             "questions": [
@@ -589,96 +945,208 @@
           },
           "pitfall": "Ne pas oublier la **valeur absolue** au numérateur, ni la **racine carrée** au dénominateur. Contre-exemple : pour $M(0\\,;0\\,;0)$ et le plan $x+2y+2z+6=0$, le numérateur vaut $|6|=6$ et le dénominateur $\\sqrt{1+4+4}=3$ ; la distance est $2$. Si tu oublies la racine, tu trouves $\\dfrac69=\\dfrac23$ ; si tu oublies la valeur absolue avec un plan écrit $x+2y+2z-6=0$, tu trouves $-2$, ce qui est impossible pour une distance.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer des distances à un plan",
-            "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu calcules la distance d'un point à un plan avec la méthode de la fiche : lire les coefficients, calculer le numérateur, calculer le dénominateur, diviser.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est la distance du point $M(1\\,;1\\,;1)$ au plan d'équation $2x+3y+6z-18=0$ ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Écrire : $a=2$, $b=3$, $c=6$, $d=-18$. Étape 2 — Numérateur : $|2\\times1+3\\times1+6\\times1-18|=|-7|=7$. Étape 3 — Dénominateur : $\\sqrt{2^2+3^2+6^2}=\\sqrt{49}=7$. Étape 4 — Diviser : $\\dfrac77=1$. La distance est 1.",
-                "answers": [
-                  {
-                    "content": "1",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 0
-              },
-              {
-                "content": "Quelle est la distance du point $M(2\\,;-1\\,;3)$ au plan d'équation $x-2y+2z-4=0$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $a=1$, $b=-2$, $c=2$, $d=-4$. Étape 2 — Numérateur : $|2+2+6-4|=6$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — Diviser : $\\dfrac63=2$. La proposition $6$ oublie le dénominateur, $\\dfrac23$ oublie la racine carrée ($\\dfrac69$ au lieu de $\\dfrac63$) et $\\dfrac{10}{3}$ oublie le terme $d$.",
-                "answers": [
-                  {
-                    "content": "$2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac23$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac{10}{3}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la distance, en mètres, de l'origine $O$ au plan d'équation $2x+y-2z+9=0$ ?",
-                "question_type": "numeric",
-                "explanation": "Étape 1 — Écrire : $a=2$, $b=1$, $c=-2$, $d=9$. Étape 2 — Numérateur : avec $O(0\\,;0\\,;0)$, $|0+0+0+9|=9$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac93=3$. La distance est 3 m.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ],
-                "tolerance": 0,
-                "unit": "m"
-              },
-              {
-                "content": "Pour le plan d'équation $2x-3y+6z+1=0$, le dénominateur $\\sqrt{a^2+b^2+c^2}$ de la formule de distance vaut ___ .",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Écrire : $a=2$, $b=-3$, $c=6$. Étape 3 — Dénominateur : $\\sqrt{2^2+(-3)^2+6^2}=\\sqrt{4+9+36}=\\sqrt{49}=7$. Le signe de $b$ disparaît dans le carré : $(-3)^2=9$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la distance du point $M(0\\,;0\\,;1)$ au plan d'équation $x-2y+2z-7=0$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $a=1$, $b=-2$, $c=2$, $d=-7$. Étape 2 — Numérateur : $|0-0+2-7|=|-5|=5$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — Diviser : $\\dfrac53$. Une distance est positive : la proposition $-\\dfrac53$ oublie la valeur absolue. La proposition $\\dfrac59$ oublie la racine carrée. La proposition $\\dfrac73$ oublie la coordonnée $z=1$ de $M$ : le numérateur devient $|0+0+0-7|=7$ au lieu de $5$.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac53$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-\\dfrac53$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac59$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac73$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des distances à un plan",
+              "statement": "Dans cet exercice, l'espace est muni d'un repère orthonormé. Tu calcules la distance d'un point à un plan avec la méthode de la fiche : lire les coefficients, calculer le numérateur, calculer le dénominateur, diviser.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la distance du point $M(1\\,;1\\,;1)$ au plan d'équation $2x+3y+6z-18=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $a=2$, $b=3$, $c=6$, $d=-18$. Étape 2 — Numérateur : $|2\\times1+3\\times1+6\\times1-18|=|-7|=7$. Étape 3 — Dénominateur : $\\sqrt{2^2+3^2+6^2}=\\sqrt{49}=7$. Étape 4 — Diviser : $\\dfrac77=1$. La distance est 1.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la distance du point $M(2\\,;-1\\,;3)$ au plan d'équation $x-2y+2z-4=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a=1$, $b=-2$, $c=2$, $d=-4$. Étape 2 — Numérateur : $|2+2+6-4|=6$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — Diviser : $\\dfrac63=2$. La proposition $6$ oublie le dénominateur, $\\dfrac23$ oublie la racine carrée ($\\dfrac69$ au lieu de $\\dfrac63$) et $\\dfrac{10}{3}$ oublie le terme $d$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{10}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la distance, en mètres, de l'origine $O$ au plan d'équation $2x+y-2z+9=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $a=2$, $b=1$, $c=-2$, $d=9$. Étape 2 — Numérateur : avec $O(0\\,;0\\,;0)$, $|0+0+0+9|=9$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac93=3$. La distance est 3 m.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Pour le plan d'équation $2x-3y+6z+1=0$, le dénominateur $\\sqrt{a^2+b^2+c^2}$ de la formule de distance vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $a=2$, $b=-3$, $c=6$. Étape 3 — Dénominateur : $\\sqrt{2^2+(-3)^2+6^2}=\\sqrt{4+9+36}=\\sqrt{49}=7$. Le signe de $b$ disparaît dans le carré : $(-3)^2=9$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la distance du point $M(0\\,;0\\,;1)$ au plan d'équation $x-2y+2z-7=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a=1$, $b=-2$, $c=2$, $d=-7$. Étape 2 — Numérateur : $|0-0+2-7|=|-5|=5$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — Diviser : $\\dfrac53$. Une distance est positive : la proposition $-\\dfrac53$ oublie la valeur absolue. La proposition $\\dfrac59$ oublie la racine carrée. La proposition $\\dfrac73$ oublie la coordonnée $z=1$ de $M$ : le numérateur devient $|0+0+0-7|=7$ au lieu de $5$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac53$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac53$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac59$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac73$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Distances et plans parallèles",
+              "statement": "Dans cet exercice, tu travailles dans l'espace muni d'un repère orthonormé : tu calcules des distances d'un point à un plan et entre deux plans parallèles avec la méthode de la fiche : lire les coefficients, calculer le numérateur, calculer le dénominateur, diviser.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Lis $a$, $b$, $c$, $d$ sur l'équation, remplace les coordonnées du point dans le numérateur avec sa valeur absolue, calcule la racine au dénominateur, puis divise.",
+              "questions": [
+                {
+                  "content": "Quelle est la distance du point $M(1\\,;0\\,;2)$ au plan d'équation $3x+4y+12z-1=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $a=3$, $b=4$, $c=12$, $d=-1$. Étape 2 — Numérateur : $|3\\times1+4\\times0+12\\times2-1|=|3+0+24-1|=26$. Étape 3 — Dénominateur : $\\sqrt{3^2+4^2+12^2}=\\sqrt{169}=13$. Étape 4 — Diviser : $\\dfrac{26}{13}=2$. La distance est 2. Oublier la racine donnerait $\\dfrac{26}{169}=\\dfrac{2}{13}$, et oublier le dénominateur donnerait 26.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est la distance du point $M(1\\,;-1\\,;2)$ au plan d'équation $2x-y+2z-3=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $a=2$, $b=-1$, $c=2$, $d=-3$. Étape 2 — Numérateur : $|2+1+4-3|=4$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac43$. La proposition $4$ oublie le dénominateur, $\\dfrac49$ oublie la racine carrée ($\\dfrac49$ au lieu de $\\dfrac43$) et $\\dfrac{10}{3}$ change le signe de $d$ dans le numérateur ($2+1+4+3=10$).",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac43$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac49$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{10}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La distance de l'origine $O$ au plan d'équation $2x-y+2z+6=0$ est égale à 6.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : $a=2$, $b=-1$, $c=2$, $d=6$. Étape 2 — Numérateur : avec $O(0\\,;0\\,;0)$, $|6|=6$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac63=2$. La distance vaut 2, pas 6 : l'affirmation est fausse. Répondre 6 revient à oublier de diviser par $\\sqrt{a^2+b^2+c^2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans $\\mathcal P : 2x+y+2z-3=0$ et $\\mathcal Q : 2x+y+2z+9=0$ sont parallèles, et le point $A(0\\,;1\\,;1)$ appartient à $\\mathcal P$. Quelle est la distance entre ces deux plans, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire : $\\mathcal Q$ a pour coefficients $a=2$, $b=1$, $c=2$, $d=9$ ; on mesure la distance de $A$ à $\\mathcal Q$. Étape 2 — Numérateur : $|0+1+2+9|=12$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac{12}{3}=4$ m. Oublier le dénominateur donnerait 12, et se tromper de signe sur $d$ (numérateur $|0+1+2-9|=6$) donnerait 2.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Quels sont les deux points situés à la distance 2 du plan d'équation $x+2y+2z-3=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : $a=1$, $b=2$, $c=2$, $d=-3$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$ ; une distance de 2 demande donc un numérateur égal à $2\\times3=6$. Étape 2 — Numérateur pour chaque point : $(3\\,;3\\,;0)$ donne $|3+6-3|=6$ ; $(1\\,;0\\,;4)$ donne $|1+8-3|=6$ ; $(2\\,;2\\,;1)$ donne $|2+4+2-3|=5$ ; $(1\\,;1\\,;1)$ donne $|1+2+2-3|=2$ ; $(0\\,;0\\,;0)$ donne $|-3|=3$. Étape 4 — Diviser par 3 : seuls $(3\\,;3\\,;0)$ et $(1\\,;0\\,;4)$ sont à la distance 2. Les autres donnent $\\dfrac53$, $\\dfrac23$ et 1.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;3\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;0\\,;4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;2\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;0\\,;0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère orthonormé, le plan a pour équation $2x+y-2z+3=0$ et le point est $M(1\\,;1\\,;3)$ : la distance de $M$ au plan est ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : $a=2$, $b=1$, $c=-2$, $d=3$. Étape 2 — Numérateur : $|2\\times1+1-2\\times3+3|=|2+1-6+3|=0$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — Diviser : $\\dfrac03=0$. La distance est nulle : le point appartient au plan. Une distance n'est jamais négative, mais elle peut être nulle quand le point est dans le plan.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un charpentier fixe un tirant au point $M(2\\,;3\\,;1)$ d'un repère orthonormé d'unité 1 m. Un panneau incliné est le plan $\\mathcal P$ d'équation $2x+y-2z+1=0$.",
             "questions": [
@@ -1229,6 +1697,1558 @@
                 "Les vecteurs normaux sont identifiés et reconnus colinéaires",
                 "Un point de $\\mathcal P$ est testé dans l'équation de $\\mathcal Q$ et ne la vérifie pas",
                 "La conclusion est formulée : plans strictement parallèles, aucun point commun"
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base de la géométrie de l'espace",
+          "notions": "produit scalaire, norme, orthogonalité de vecteurs et angle ; équation cartésienne d'un plan et vecteur normal ; représentation paramétrique d'une droite et intersection avec un plan ; distance d'un point à un plan et entre deux plans parallèles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un repère orthonormé de l'espace, on considère les points $A(2\\,;1\\,;-1)$, $B(4\\,;2\\,;1)$ et $C(3\\,;3\\,;-2)$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Commence par écrire $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ : extrémité moins origine. Tout le reste en découle.",
+              "questions": [
+                {
+                  "content": "Avec $A(2\\,;1\\,;-1)$ et $B(4\\,;2\\,;1)$ dans un repère orthonormé, quelle est la longueur $AB$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(4-2\\,;2-1\\,;1-(-1))=(2\\,;1\\,;2)$. Étape 2 — On applique la formule de la norme : $AB=\\sqrt{2^2+1^2+2^2}=\\sqrt{4+1+4}=\\sqrt9=3$. Oublier la racine donnerait 9 ; oublier que $1-(-1)=2$ donnerait $(2\\,;1\\,;0)$ et $\\sqrt5$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $A(2\\,;1\\,;-1)$, $B(4\\,;2\\,;1)$ et $C(3\\,;3\\,;-2)$ dans un repère orthonormé, quel est le produit scalaire $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(2\\,;1\\,;2)$ et $\\overrightarrow{AC}(3-2\\,;3-1\\,;-2-(-1))=(1\\,;2\\,;-1)$. Étape 2 — Produit scalaire : $2\\times1+1\\times2+2\\times(-1)=2+2-2=2$. Le résultat est un nombre, pas un vecteur ; oublier le signe de $-1$ donnerait $2+2+2=6$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $A(2\\,;1\\,;-1)$, $B(4\\,;2\\,;1)$ et $C(3\\,;3\\,;-2)$ dans un repère orthonormé, le triangle $ABC$ est rectangle en $A$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Un triangle est rectangle en $A$ si et seulement si $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=0$ (critère d'orthogonalité). Étape 2 — On calcule $\\overrightarrow{AB}(2\\,;1\\,;2)$, $\\overrightarrow{AC}(1\\,;2\\,;-1)$ et $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=2+2-2=2$. Ce nombre n'est pas nul : le triangle n'est pas rectangle en $A$. Une valeur proche de zéro ne suffit pas, il faut exactement 0.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $A(2\\,;1\\,;-1)$, $B(4\\,;2\\,;1)$ et $C(3\\,;3\\,;-2)$ dans un repère orthonormé, quelle est la valeur de $\\cos\\widehat{BAC}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On utilise $\\cos\\theta=\\dfrac{\\vec u\\cdot\\vec v}{\\|\\vec u\\|\\,\\|\\vec v\\|}$. Étape 2 — $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=2$, $\\|\\overrightarrow{AB}\\|=3$ et $\\|\\overrightarrow{AC}\\|=\\sqrt{1+4+1}=\\sqrt6$. Étape 3 — $\\cos\\widehat{BAC}=\\dfrac{2}{3\\sqrt6}=\\dfrac{2\\sqrt6}{18}=\\dfrac{\\sqrt6}{9}$. La proposition $\\dfrac23$ oublie la norme de $\\overrightarrow{AC}$, $\\dfrac19$ prend $\\|\\overrightarrow{AC}\\|=6$ au lieu de $\\sqrt6$, et $2$ est le produit scalaire seul, qui ne peut pas être un cosinus.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\sqrt6}{9}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac19$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère orthonormé, on donne $\\overrightarrow{AB}(2\\,;1\\,;2)$. Quels sont les deux vecteurs orthogonaux à $\\overrightarrow{AB}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Deux vecteurs sont orthogonaux si et seulement si leur produit scalaire est nul. Étape 2 — On calcule : $(1\\,;0\\,;-1)$ donne $2+0-2=0$ ; $(1\\,;-2\\,;0)$ donne $2-2+0=0$ ; $(1\\,;1\\,;1)$ donne $2+1+2=5$ ; $(2\\,;-1\\,;1)$ donne $4-1+2=5$ ; $(-2\\,;-1\\,;-2)$ donne $-4-1-4=-9$. Seuls $(1\\,;0\\,;-1)$ et $(1\\,;-2\\,;0)$ conviennent. Le vecteur $(-2\\,;-1\\,;-2)$ est l'opposé de $\\overrightarrow{AB}$ : il lui est colinéaire, pas orthogonal.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;0\\,;-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;-2\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;-1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;-1\\,;-2)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une toiture plane passe par les points $A(1\\,;0\\,;2)$, $B(3\\,;1\\,;2)$ et $C(1\\,;2\\,;3)$ d'un repère orthonormé (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un vecteur normal est orthogonal à $\\overrightarrow{AB}$ et à $\\overrightarrow{AC}$. Pour l'équation, utilise $\\vec n\\cdot\\overrightarrow{AM}=0$ puis vérifie avec les trois points.",
+              "questions": [
+                {
+                  "content": "Avec $A(1\\,;0\\,;2)$, $B(3\\,;1\\,;2)$ et $C(1\\,;2\\,;3)$, le vecteur $\\vec n(1\\,;-2\\,;4)$ est normal au plan $(ABC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Un vecteur est normal à un plan s'il est orthogonal à deux vecteurs non colinéaires du plan. Étape 2 — $\\overrightarrow{AB}(2\\,;1\\,;0)$ et $\\overrightarrow{AC}(0\\,;2\\,;1)$ ne sont pas colinéaires. Étape 3 — $\\vec n\\cdot\\overrightarrow{AB}=2-2+0=0$ et $\\vec n\\cdot\\overrightarrow{AC}=0-4+4=0$. Le vecteur est donc normal au plan : l'affirmation est vraie. Un seul produit nul ne suffirait pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une équation cartésienne du plan $(ABC)$, avec $A(1\\,;0\\,;2)$, $B(3\\,;1\\,;2)$ et $C(1\\,;2\\,;3)$, sachant que $\\vec n(1\\,;-2\\,;4)$ lui est normal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On écrit $\\vec n\\cdot\\overrightarrow{AM}=0$ avec $\\overrightarrow{AM}(x-1\\,;y\\,;z-2)$. Étape 2 — $(x-1)-2y+4(z-2)=0$, soit $x-2y+4z-9=0$. Étape 3 — Vérification : $B$ donne $3-2+8-9=0$ et $C$ donne $1-4+12-9=0$. La proposition avec $+9$ se trompe de signe sur le terme constant ; celle avec $-1$ oublie le terme $4z_A=8$ dans le calcul de $d$ ; $2x+y+z-4=0$ ne passe que par $A$ ($B$ donne $6+1+2-4=5$).",
+                  "answers": [
+                    {
+                      "content": "$x-2y+4z-9=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x-2y+4z+9=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x-2y+4z-1=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x+y+z-4=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $D(5\\,;k\\,;2)$ appartient au plan d'équation $x-2y+4z-9=0$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Un point appartient à un plan si ses coordonnées vérifient l'équation. Étape 2 — On remplace : $5-2k+8-9=0$, soit $4-2k=0$. Étape 3 — Donc $k=2$. Trouver $k=-2$ vient d'une erreur de signe en isolant $k$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les plans $x-2y+4z-9=0$ et $2x-4y+8z+5=0$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Deux plans sont parallèles si leurs vecteurs normaux sont colinéaires. Étape 2 — Les vecteurs normaux se lisent sur les coefficients : $(1\\,;-2\\,;4)$ et $(2\\,;-4\\,;8)$. Étape 3 — $(2\\,;-4\\,;8)=2\\times(1\\,;-2\\,;4)$ : ils sont colinéaires, donc les plans sont parallèles (et distincts, car les termes constants ne sont pas proportionnels). Les termes constants ne servent pas à tester le parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux points qui appartiennent au plan d'équation $x-2y+4z-9=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — On remplace $x$, $y$, $z$ par les coordonnées de chaque point. Étape 2 — $(9\\,;0\\,;0)$ donne $9-9=0$ ; $(1\\,;-4\\,;0)$ donne $1+8-9=0$ ; $(0\\,;0\\,;2)$ donne $8-9=-1$ ; $(1\\,;1\\,;1)$ donne $1-2+4-9=-6$ ; $(3\\,;0\\,;1)$ donne $3+4-9=-2$. Seuls $(9\\,;0\\,;0)$ et $(1\\,;-4\\,;0)$ donnent 0. Un résultat proche de 0, comme $-1$, ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "$(9\\,;0\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;-4\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0\\,;0\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;0\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un fil tendu suit la droite $\\mathcal D$ passant par $A(1\\,;2\\,;-1)$ de vecteur directeur $\\vec u(2\\,;1\\,;-2)$ dans un repère orthonormé. Un panneau plan $\\mathcal P$ a pour équation $x+y+z-4=0$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris $x$, $y$, $z$ en fonction de $t$, remplace-les dans l'équation du plan, résous en $t$, puis reviens aux coordonnées.",
+              "questions": [
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $A(1\\,;2\\,;-1)$ de vecteur directeur $\\vec u(2\\,;1\\,;-2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La représentation paramétrique est $x=x_A+at$, $y=y_A+bt$, $z=z_A+ct$. Étape 2 — Avec $A(1\\,;2\\,;-1)$ et $\\vec u(2\\,;1\\,;-2)$ : $x=1+2t$, $y=2+t$, $z=-1-2t$. La proposition qui commence par $x=2+t$ échange le point et le vecteur directeur ; celle avec $z=-1+2t$ change le signe de $c$ ; celle avec $x=-1+2t$ change les signes des coordonnées de $A$.",
+                  "answers": [
+                    {
+                      "content": "$x=1+2t,\\ y=2+t,\\ z=-1-2t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=2+t,\\ y=1+2t,\\ z=-2-t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+2t,\\ y=2+t,\\ z=-1+2t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=-1+2t,\\ y=-2+t,\\ z=1-2t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ de représentation $x=1+2t$, $y=2+t$, $z=-1-2t$ coupe le plan d'équation $x+y+z-4=0$. Pour quelle valeur de $t$ le point de $\\mathcal D$ est-il dans le plan ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $(1+2t)+(2+t)+(-1-2t)-4=0$. Étape 2 — On réduit : $t-2=0$. Étape 3 — Donc $t=2$. Le coefficient de $t$ vaut 1, non nul : un seul point commun. Trouver $t=-2$ vient d'un oubli de changer le signe du terme constant.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite $\\mathcal D$ de représentation $x=1+2t$, $y=2+t$, $z=-1-2t$ coupe le plan d'équation $x+y+z-4=0$ en un seul point. Quelles sont ses coordonnées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La substitution $(1+2t)+(2+t)+(-1-2t)-4=0$ donne $t=2$. Étape 2 — Pour $t=2$ : $x=5$, $y=4$, $z=-5$. Étape 3 — Vérification : $5+4-5-4=0$. Le point $(1\\,;2\\,;-1)$ est $A$ ($t=0$) et donne $2-4\\neq0$ ; $(3\\,;3\\,;-3)$ correspond à $t=1$ et donne $-1$ ; $(7\\,;5\\,;-7)$ correspond à $t=3$ et donne $1$ : ils sont sur la droite mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(5\\,;4\\,;-5)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;2\\,;-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;3\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(7\\,;5\\,;-7)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite de vecteur directeur $\\vec u(2\\,;1\\,;-2)$ est orthogonale au plan d'équation $x+y+z-4=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une droite est orthogonale à un plan si son vecteur directeur est colinéaire à un vecteur normal du plan. Étape 2 — Le vecteur normal du plan est $\\vec n(1\\,;1\\,;1)$. Étape 3 — $(2\\,;1\\,;-2)$ n'est pas proportionnel à $(1\\,;1\\,;1)$ : les deux vecteurs ne sont pas colinéaires, donc la droite n'est pas orthogonale au plan. Elle le coupe pourtant en un point : sécante ne veut pas dire orthogonale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $\\mathcal D$ passe par $A(1\\,;2\\,;-1)$ et a pour vecteur directeur $\\vec u(2\\,;1\\,;-2)$. Quels sont les deux points qui appartiennent à $\\mathcal D$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Un point $M$ est sur la droite s'il existe $t$ avec $\\overrightarrow{AM}=t\\vec u$. Étape 2 — $(3\\,;3\\,;-3)$ donne $\\overrightarrow{AM}(2\\,;1\\,;-2)=1\\times\\vec u$ ; $(-1\\,;1\\,;1)$ donne $\\overrightarrow{AM}(-2\\,;-1\\,;2)=-\\vec u$ ; $(3\\,;3\\,;-1)$ donne $(2\\,;1\\,;0)$, non proportionnel à $\\vec u$ ; $(1\\,;3\\,;-1)$ donne $(0\\,;1\\,;0)$, non proportionnel non plus. Le point $(2\\,;1\\,;-2)$ a les coordonnées de $\\vec u$ : un vecteur directeur n'est pas un point de la droite.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;3\\,;-3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-1\\,;1\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;3\\,;-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;3\\,;-1)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un repère orthonormé d'unité 1 m, un plan incliné $\\mathcal P$ a pour équation $4x-4y+7z+11=0$ et une lampe est fixée au point $M(1\\,;1\\,;1)$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis $a$, $b$, $c$, $d$ sur l'équation, calcule le numérateur avec valeur absolue, puis le dénominateur $\\sqrt{a^2+b^2+c^2}$, puis divise.",
+              "questions": [
+                {
+                  "content": "Quelle est la distance, en mètres, du point $M(1\\,;1\\,;1)$ au plan d'équation $4x-4y+7z+11=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On applique $d(M,\\mathcal P)=\\dfrac{|ax_0+by_0+cz_0+d|}{\\sqrt{a^2+b^2+c^2}}$ avec $a=4$, $b=-4$, $c=7$, $d=11$. Étape 2 — Numérateur : $|4-4+7+11|=18$. Étape 3 — Dénominateur : $\\sqrt{16+16+49}=\\sqrt{81}=9$. Étape 4 — $\\dfrac{18}{9}=2$ m. Oublier la racine donnerait $\\dfrac{18}{81}=\\dfrac29$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Pour le plan d'équation $4x-4y+7z+11=0$, que vaut le dénominateur $\\sqrt{a^2+b^2+c^2}$ de la formule de distance ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On lit $a=4$, $b=-4$, $c=7$. Étape 2 — On élève chaque coefficient au carré : $16+16+49=81$. Étape 3 — On prend la racine : $\\sqrt{81}=9$. La proposition $81$ oublie la racine carrée, $7$ ne garde que $c$, et $15$ additionne les coefficients $4+4+7$ sans les élever au carré (le signe de $b$ disparaît dans le carré).",
+                  "answers": [
+                    {
+                      "content": "$9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$81$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans d'équations $x+2y+2z-1=0$ et $x+2y+2z+8=0$ sont parallèles, et le point $A(1\\,;0\\,;0)$ appartient au plan $x+2y+2z-1=0$. Quelle est la distance entre les deux plans ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — La distance entre deux plans parallèles est la distance d'un point de l'un à l'autre plan. Étape 2 — Numérateur, avec $A(1\\,;0\\,;0)$ et le plan $x+2y+2z+8=0$ : $|1+0+0+8|=9$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — $\\dfrac93=3$. Utiliser $|8-1|=7$ au numérateur oublie d'évaluer le plan au point choisi.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Le point $M(2\\,;1\\,;3)$ est à la distance 0 du plan d'équation $x+y+z-6=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — On remplace dans le numérateur : $|2+1+3-6|=0$. Étape 2 — Le dénominateur vaut $\\sqrt3$, non nul. Étape 3 — Donc la distance est $\\dfrac{0}{\\sqrt3}=0$ : le point appartient au plan et l'affirmation est vraie. Une distance nulle n'est pas une impossibilité : elle signifie que le point est dans le plan.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la distance de l'origine $O$ au plan d'équation $3x+4y-12z-52=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On lit $a=3$, $b=4$, $c=-12$, $d=-52$. Étape 2 — Numérateur : avec $O(0\\,;0\\,;0)$, $|-52|=52$. Étape 3 — Dénominateur : $\\sqrt{9+16+144}=\\sqrt{169}=13$. Étape 4 — $\\dfrac{52}{13}=4$. La proposition $52$ oublie de diviser, $\\dfrac4{13}$ oublie la racine carrée ($\\dfrac{52}{169}$), et $-4$ oublie la valeur absolue : une distance est positive.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$52$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4}{13}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La géométrie de l'espace dans la vie courante",
+          "notions": "situations de la vie courante en Côte d'Ivoire (pylône à Korhogo, séchoir à cacao à Soubré, port d'Abidjan, lycée de Daloa) : norme et produit scalaire, vecteur normal et équation d'un plan, intersection d'une droite et d'un plan, distances.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Korhogo, Kouadio, technicien, installe un pylône vertical de 12 m. Dans un repère orthonormé d'unité 1 m, le pied du pylône est $O(0\\,;0\\,;0)$ et son sommet est $S(0\\,;0\\,;12)$. Deux haubans (câbles) relient $S$ à deux ancrages au sol : $A(9\\,;0\\,;0)$ et $B(0\\,;5\\,;0)$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris $\\overrightarrow{SA}$ et $\\overrightarrow{SB}$ (extrémité moins origine), puis utilise la norme et le produit scalaire.",
+              "questions": [
+                {
+                  "content": "Avec $S(0\\,;0\\,;12)$ et $A(9\\,;0\\,;0)$ dans un repère orthonormé d'unité 1 m, quelle est la longueur du hauban $SA$, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{SA}(9-0\\,;0-0\\,;0-12)=(9\\,;0\\,;-12)$. Étape 2 — Norme : $SA=\\sqrt{9^2+0^2+(-12)^2}=\\sqrt{81+144}=\\sqrt{225}=15$ m. Oublier la racine carrée donnerait 225 ; oublier le signe de $-12$ n'a pas d'effet car il est élevé au carré.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Avec $S(0\\,;0\\,;12)$ et $B(0\\,;5\\,;0)$ dans un repère orthonormé d'unité 1 m, quelle est la longueur du hauban $SB$, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{SB}(0\\,;5\\,;-12)$. Étape 2 — Norme : $SB=\\sqrt{0^2+5^2+(-12)^2}=\\sqrt{25+144}=\\sqrt{169}=13$ m. Ajouter les nombres $5+12=17$ au lieu de passer par les carrés est l'erreur typique : la norme n'est pas la somme des coordonnées.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Avec $S(0\\,;0\\,;12)$, $A(9\\,;0\\,;0)$ et $B(0\\,;5\\,;0)$ dans un repère orthonormé, quel est le produit scalaire $\\overrightarrow{SA}\\cdot\\overrightarrow{SB}$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{SA}(9\\,;0\\,;-12)$ et $\\overrightarrow{SB}(0\\,;5\\,;-12)$. Étape 2 — On multiplie les coordonnées de même rang : $9\\times0=0$, $0\\times5=0$, $(-12)\\times(-12)=144$. Étape 3 — On additionne : $0+0+144=144$. Le produit de deux nombres négatifs est positif : ne pas écrire $-144$.",
+                  "answers": [
+                    {
+                      "content": "144",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $S(0\\,;0\\,;12)$, $A(9\\,;0\\,;0)$ et $B(0\\,;5\\,;0)$ dans un repère orthonormé, les haubans $[SA]$ et $[SB]$ sont orthogonaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Deux vecteurs sont orthogonaux si et seulement si leur produit scalaire est nul. Étape 2 — On a calculé $\\overrightarrow{SA}\\cdot\\overrightarrow{SB}=0+0+144=144$. Ce nombre n'est pas nul : les haubans ne sont pas orthogonaux. Deux coordonnées nulles dans les produits ne suffisent pas : tout dépend de la somme des trois produits.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $\\overrightarrow{SA}\\cdot\\overrightarrow{SB}=144$, $SA=15$ et $SB=13$, quelle est la valeur de $\\cos\\widehat{ASB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On utilise $\\cos\\theta=\\dfrac{\\vec u\\cdot\\vec v}{\\|\\vec u\\|\\,\\|\\vec v\\|}$. Étape 2 — $\\cos\\widehat{ASB}=\\dfrac{144}{15\\times13}=\\dfrac{144}{195}=\\dfrac{48}{65}$. La proposition $144$ est le produit scalaire sans division ; $\\dfrac{36}{7}$ divise par la somme $15+13$ au lieu du produit ; $\\dfrac{144}{13}$ oublie une norme. Un cosinus est toujours compris entre $-1$ et $1$ : ces trois valeurs sont impossibles.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{48}{65}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$144$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{36}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{144}{13}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Soubré, la coopérative de Mme Aminata construit un séchoir à cacao dont la toiture est plane. Dans un repère orthonormé d'unité 1 m, la toiture passe par $A(6\\,;0\\,;0)$, $B(0\\,;9\\,;0)$ et $C(0\\,;0\\,;3)$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un vecteur normal est orthogonal à $\\overrightarrow{AB}$ et à $\\overrightarrow{AC}$. Ensuite $\\vec n\\cdot\\overrightarrow{AM}=0$ donne l'équation, que tu vérifies avec les trois points.",
+              "questions": [
+                {
+                  "content": "Quel vecteur est normal au plan $(ABC)$, avec $A(6\\,;0\\,;0)$, $B(0\\,;9\\,;0)$ et $C(0\\,;0\\,;3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(-6\\,;9\\,;0)$ et $\\overrightarrow{AC}(-6\\,;0\\,;3)$. Étape 2 — Pour $\\vec n(3\\,;2\\,;6)$ : $\\vec n\\cdot\\overrightarrow{AB}=-18+18+0=0$ et $\\vec n\\cdot\\overrightarrow{AC}=-18+0+18=0$. Le vecteur est orthogonal aux deux vecteurs non colinéaires du plan : il est normal. $(3\\,;2\\,;-6)$ donne $-18+0-18=-36$ avec $\\overrightarrow{AC}$ ; $(6\\,;9\\,;3)$ prend les coordonnées des points ; $(1\\,;1\\,;1)$ donne $-6+9=3$ avec $\\overrightarrow{AB}$.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;2\\,;6)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;2\\,;-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;9\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une équation cartésienne du plan $(ABC)$, avec $A(6\\,;0\\,;0)$, $B(0\\,;9\\,;0)$, $C(0\\,;0\\,;3)$ et le vecteur normal $\\vec n(3\\,;2\\,;6)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On écrit $\\vec n\\cdot\\overrightarrow{AM}=0$ avec $\\overrightarrow{AM}(x-6\\,;y\\,;z)$. Étape 2 — $3(x-6)+2y+6z=0$, soit $3x+2y+6z-18=0$. Étape 3 — Vérification : $A$ donne $18-18=0$, $B$ donne $18-18=0$, $C$ donne $18-18=0$. La proposition avec $+18$ se trompe de signe ; $6x+9y+3z-18=0$ prend les coordonnées des points pour un vecteur normal ; celle avec $-6$ oublie de multiplier $3\\times6=18$.",
+                  "answers": [
+                    {
+                      "content": "$3x+2y+6z-18=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x+2y+6z+18=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x+9y+3z-18=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x+2y+6z-6=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un poteau vertical part du point $M(2\\,;3\\,;0)$ du sol et touche la toiture plane d'équation $3x+2y+6z-18=0$. Quelle est la hauteur du poteau, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Le poteau est vertical : le point de la toiture a les coordonnées $(2\\,;3\\,;z)$. Étape 2 — Il vérifie l'équation du plan : $3\\times2+2\\times3+6z-18=0$, soit $6z-6=0$. Étape 3 — Donc $z=1$ et le poteau mesure 1 m. Trouver 6 vient d'un oubli : on a donné $6z$ au lieu de diviser par le coefficient 6 de $z$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Un capteur est fixé au point $D(3\\,;2\\,;2)$. Quelle est sa distance, en mètres, à la toiture plane d'équation $3x+2y+6z-18=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit $a=3$, $b=2$, $c=6$, $d=-18$. Étape 2 — Numérateur : $|9+4+12-18|=7$. Étape 3 — Dénominateur : $\\sqrt{9+4+36}=\\sqrt{49}=7$. Étape 4 — $\\dfrac77=1$ m. Oublier la racine donnerait $\\dfrac{7}{49}=\\dfrac17$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies sur le plan $\\mathcal P$ d'équation $3x+2y+6z-18=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — $(6\\,;0\\,;0)$ donne $18-18=0$ : le point est dans le plan. Étape 2 — $(6\\,;4\\,;12)=2\\times(3\\,;2\\,;6)$ : les vecteurs normaux sont colinéaires, donc les plans sont parallèles. Étape 3 — Orthogonalité avec $x+y+z-1=0$ : $3+2+6=11\\neq0$, faux. L'origine donne $-18\\neq0$ : faux. Le vecteur $(3\\,;2\\,;-6)$ change le signe de $c$ : faux, le vecteur normal est $(3\\,;2\\,;6)$.",
+                  "answers": [
+                    {
+                      "content": "Il contient le point $(6\\,;0\\,;0)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est parallèle au plan d'équation $6x+4y+12z+5=0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est orthogonal au plan d'équation $x+y+z-1=0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il contient l'origine $O$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a pour vecteur normal $(3\\,;2\\,;-6)$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au port d'Abidjan, une grue déplace un conteneur le long d'un câble rectiligne. Dans un repère orthonormé d'unité 1 m, le câble est porté par la droite $\\mathcal D$ passant par $A(2\\,;1\\,;12)$ de vecteur directeur $\\vec u(2\\,;3\\,;-6)$. Une rampe plane de chargement $\\mathcal P$ a pour équation $x+y+z-13=0$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris $x$, $y$, $z$ en fonction de $t$, remplace-les dans l'équation de la rampe, résous en $t$, puis lis les coordonnées du point.",
+              "questions": [
+                {
+                  "content": "La droite $\\mathcal D$ a pour représentation paramétrique $x=2+2t$, $y=1+3t$, $z=12-6t$. Pour quelle valeur de $t$ le point de $\\mathcal D$ est-il dans le plan d'équation $x+y+z-13=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $(2+2t)+(1+3t)+(12-6t)-13=0$. Étape 2 — On réduit : $-t+2=0$. Étape 3 — Donc $t=2$. Le coefficient de $t$ vaut $-1$, non nul : un seul point commun. Trouver $t=-2$ vient d'une erreur de signe en passant $2$ de l'autre côté.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite de représentation $x=2+2t$, $y=1+3t$, $z=12-6t$ coupe le plan d'équation $x+y+z-13=0$ pour $t=2$. Quelles sont les coordonnées du point d'intersection ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On remplace $t$ par 2 : $x=2+4=6$, $y=1+6=7$, $z=12-12=0$. Étape 2 — Vérification : $6+7+0-13=0$. Le point $(2\\,;1\\,;12)$ est $A$ ($t=0$) et donne $15-13=2$ ; $(4\\,;4\\,;6)$ correspond à $t=1$ et donne $1$ ; $(8\\,;10\\,;-6)$ correspond à $t=3$ et donne $-1$ : ils sont sur la droite mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(6\\,;7\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;12)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;4\\,;6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(8\\,;10\\,;-6)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite de vecteur directeur $\\vec u(2\\,;3\\,;-6)$ est orthogonale au plan d'équation $x+y+z-13=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une droite est orthogonale à un plan si son vecteur directeur est colinéaire à un vecteur normal du plan. Étape 2 — Le vecteur normal de la rampe est $\\vec n(1\\,;1\\,;1)$. Étape 3 — $(2\\,;3\\,;-6)$ n'est pas proportionnel à $(1\\,;1\\,;1)$ : la droite n'est pas orthogonale à la rampe, même si elle la coupe. Un câble peut percer une rampe sans lui être perpendiculaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le câble perce la rampe au point $I(6\\,;7\\,;0)$ et part de $A(2\\,;1\\,;12)$. Quelle est la longueur $AI$, en mètres ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{AI}(6-2\\,;7-1\\,;0-12)=(4\\,;6\\,;-12)$. Étape 2 — Norme : $AI=\\sqrt{16+36+144}=\\sqrt{196}=14$ m. On peut aussi remarquer que $\\overrightarrow{AI}=2\\vec u$ et que $\\|\\vec u\\|=7$, ce qui redonne $2\\times7=14$. Oublier la racine donnerait 196.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Le produit scalaire de $\\vec u(2\\,;3\\,;-6)$ et du vecteur normal $\\vec n(1\\,;1\\,;1)$ vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — On multiplie les coordonnées de même rang : $2\\times1=2$, $3\\times1=3$, $(-6)\\times1=-6$. Étape 2 — On additionne : $2+3-6=-1$. Ce nombre n'est pas nul : la droite n'est pas parallèle à la rampe, elle la coupe en un seul point. Répondre 11 revient à oublier le signe de $-6$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Daloa, deux toitures planes d'un lycée sont modélisées, dans un repère orthonormé d'unité 1 m, par les plans $\\mathcal P : 2x-y+2z-6=0$ et $\\mathcal Q : 2x-y+2z+15=0$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare d'abord les vecteurs normaux. Pour une distance entre plans parallèles, prends un point de l'un et calcule sa distance à l'autre.",
+              "questions": [
+                {
+                  "content": "Le point $A(3\\,;0\\,;0)$ appartient au plan $\\mathcal P : 2x-y+2z-6=0$. Quelle est sa distance, en mètres, au plan $\\mathcal Q : 2x-y+2z+15=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit pour $\\mathcal Q$ : $a=2$, $b=-1$, $c=2$, $d=15$. Étape 2 — Numérateur : $|6-0+0+15|=21$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — $\\dfrac{21}{3}=7$ m. C'est aussi la distance entre les deux plans parallèles. Oublier la racine donnerait $\\dfrac{21}{9}=\\dfrac73$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Les plans $\\mathcal P : 2x-y+2z-6=0$ et $\\mathcal Q : 2x-y+2z+15=0$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Deux plans sont parallèles si leurs vecteurs normaux sont colinéaires. Étape 2 — Les deux plans ont le même vecteur normal $(2\\,;-1\\,;2)$. Étape 3 — Les vecteurs sont colinéaires, donc les plans sont parallèles ; ils sont distincts car les termes constants $-6$ et $15$ diffèrent. Les termes constants ne servent pas à tester le parallélisme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux points qui appartiennent au plan $\\mathcal P$ d'équation $2x-y+2z-6=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — On remplace $x$, $y$, $z$ par les coordonnées de chaque point. Étape 2 — $(1\\,;2\\,;3)$ donne $2-2+6-6=0$ ; $(0\\,;0\\,;3)$ donne $6-6=0$ ; $(1\\,;1\\,;1)$ donne $2-1+2-6=-3$ ; $(3\\,;1\\,;1)$ donne $6-1+2-6=1$ ; $(0\\,;6\\,;0)$ donne $-6-6=-12$. Seuls $(1\\,;2\\,;3)$ et $(0\\,;0\\,;3)$ donnent 0.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;2\\,;3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0\\,;0\\,;3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;6\\,;0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un projecteur est fixé au point $R(3\\,;0\\,;3)$. Quelle est sa distance, en mètres, à la toiture $\\mathcal P : 2x-y+2z-6=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit $a=2$, $b=-1$, $c=2$, $d=-6$. Étape 2 — Numérateur : $|6-0+6-6|=6$. Étape 3 — Dénominateur : $\\sqrt{4+1+4}=3$. Étape 4 — $\\dfrac63=2$ m. Oublier le dénominateur donnerait 6 ; oublier la racine donnerait $\\dfrac69=\\dfrac23$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Combien de points communs ont les plans parallèles distincts $\\mathcal P : 2x-y+2z-6=0$ et $\\mathcal Q : 2x-y+2z+15=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Un point commun vérifierait les deux équations à la fois. Étape 2 — Cela donnerait $2x-y+2z=6$ et $2x-y+2z=-15$ en même temps, ce qui est impossible. Étape 3 — Les deux plans n'ont donc aucun point commun : deux plans parallèles distincts ne se coupent jamais. Ne pas confondre avec des plans confondus, qui ont tous leurs points en commun.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier en géométrie de l'espace",
+          "notions": "justifier la nature d'un triangle par des normes et des produits scalaires ; projeté orthogonal d'un point sur un plan ; discussion sur un paramètre de la position d'une droite et d'un plan ; plans parallèles et orthogonaux par leurs vecteurs normaux, équation d'un plan parallèle à un plan donné.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un repère orthonormé de l'espace, on considère les points $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$. On veut déterminer la nature du triangle $ABC$ et justifier chaque conclusion par un calcul.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule $\\overrightarrow{AB}$, $\\overrightarrow{AC}$ et $\\overrightarrow{BC}$, puis compare les longueurs et cherche un produit scalaire nul.",
+              "questions": [
+                {
+                  "content": "Avec $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$ dans un repère orthonormé, quel est le produit scalaire $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(2\\,;2\\,;1)$ et $\\overrightarrow{AC}(1-0\\,;-1-1\\,;3-1)=(1\\,;-2\\,;2)$. Étape 2 — On multiplie les coordonnées de même rang : $2\\times1=2$, $2\\times(-2)=-4$, $1\\times2=2$. Étape 3 — On additionne : $2-4+2=0$. Le produit scalaire est nul : $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont orthogonaux.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$ dans un repère orthonormé, le triangle $ABC$ est équilatéral.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Un triangle équilatéral a ses trois côtés égaux. Étape 2 — $AB=\\sqrt{4+4+1}=3$ et $AC=\\sqrt{1+4+4}=3$, mais $\\overrightarrow{BC}(-1\\,;-4\\,;1)$ donne $BC=\\sqrt{1+16+1}=\\sqrt{18}$, soit environ $4{,}24$. Les côtés ne sont pas tous égaux : le triangle n'est pas équilatéral. Deux côtés égaux donnent un triangle isocèle, pas équilatéral.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$ dans un repère orthonormé, quelle est la nature du triangle $ABC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — $AB=3$ et $AC=3$ : le triangle est isocèle en $A$. Étape 2 — $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=0$ : il est rectangle en $A$ (critère d'orthogonalité). Étape 3 — Conclusion : rectangle et isocèle en $A$. Il n'est pas rectangle en $B$ : $\\overrightarrow{BA}(-2\\,;-2\\,;-1)\\cdot\\overrightarrow{BC}(-1\\,;-4\\,;1)=2+8-1=9\\neq0$. Il n'est pas équilatéral car $BC=\\sqrt{18}\\neq3$, ni seulement isocèle puisque l'angle en $A$ est droit.",
+                  "answers": [
+                    {
+                      "content": "Rectangle et isocèle en $A$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Rectangle en $B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Équilatéral",
+                      "correct": false
+                    },
+                    {
+                      "content": "Isocèle en $A$ mais non rectangle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$ dans un repère orthonormé, quelle est la valeur de $BC^2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{BC}(1-2\\,;-1-3\\,;3-2)=(-1\\,;-4\\,;1)$. Étape 2 — $BC^2=\\overrightarrow{BC}\\cdot\\overrightarrow{BC}=1+16+1=18$. On retrouve le théorème de Pythagore : $AB^2+AC^2=9+9=18=BC^2$, ce qui confirme l'angle droit en $A$. Écrire $BC=18$ oublie que 18 est le carré de la longueur.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Avec $A(0\\,;1\\,;1)$, $B(2\\,;3\\,;2)$ et $C(1\\,;-1\\,;3)$ dans un repère orthonormé, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(2\\,;2\\,;1)$, $\\overrightarrow{AC}(1\\,;-2\\,;2)$, $\\overrightarrow{BC}(-1\\,;-4\\,;1)$. Étape 2 — $\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=0$ et $AB=AC=3$ : deux affirmations vraies. Étape 3 — $\\overrightarrow{AB}\\cdot\\overrightarrow{BC}=-2-8+1=-9$, $\\overrightarrow{AC}\\cdot\\overrightarrow{BC}=-1+8+2=9$ : non nuls. $BC=\\sqrt{18}\\neq3=AB$. Les produits scalaires faisant intervenir $\\overrightarrow{BC}$ ne testent pas l'angle en $A$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$AB=AC$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}\\cdot\\overrightarrow{BC}=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$AB=BC$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}\\cdot\\overrightarrow{BC}=0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un repère orthonormé, on considère le plan $\\mathcal P$ d'équation $x+2y+2z-20=0$ et le point $M(1\\,;2\\,;3)$. On note $H$ le projeté orthogonal de $M$ sur $\\mathcal P$ : c'est le point d'intersection de $\\mathcal P$ et de la droite passant par $M$ perpendiculaire à $\\mathcal P$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La perpendiculaire à $\\mathcal P$ a pour vecteur directeur un vecteur normal de $\\mathcal P$. Ensuite, substitue dans l'équation du plan et résous en $t$.",
+              "questions": [
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $M(1\\,;2\\,;3)$ perpendiculaire au plan d'équation $x+2y+2z-20=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Une droite perpendiculaire à un plan a pour vecteur directeur un vecteur normal du plan : ici $\\vec n(1\\,;2\\,;2)$. Étape 2 — Elle passe par $M(1\\,;2\\,;3)$, d'où $x=1+t$, $y=2+2t$, $z=3+2t$. La proposition avec $z=3+3t$ prend les coordonnées de $M$ comme direction ; celle avec $z=3-2t$ change le signe de $c$ ; celle avec $y=2+t$ et $z=3+t$ prend $(1\\,;1\\,;1)$, qui n'est pas normal au plan.",
+                  "answers": [
+                    {
+                      "content": "$x=1+t,\\ y=2+2t,\\ z=3+2t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=2+2t,\\ z=3+3t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=2+2t,\\ z=3-2t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=2+t,\\ z=3+t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point de la droite $x=1+t$, $y=2+2t$, $z=3+2t$ appartient au plan d'équation $x+2y+2z-20=0$. Pour quelle valeur de $t$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $(1+t)+2(2+2t)+2(3+2t)-20=0$. Étape 2 — On développe : $1+t+4+4t+6+4t-20=9t-9$. Étape 3 — Donc $9t-9=0$ et $t=1$. Trouver $t=-1$ vient d'une erreur de signe en passant $9$ de l'autre côté de l'égalité.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite $x=1+t$, $y=2+2t$, $z=3+2t$ coupe le plan d'équation $x+2y+2z-20=0$ pour $t=1$. Quelles sont les coordonnées du projeté $H$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On remplace $t$ par $1$ : $x=2$, $y=4$, $z=5$. Étape 2 — Vérification : $2+8+10-20=0$. Le point $(1\\,;2\\,;3)$ est $M$ ($t=0$) et donne $-9\\neq0$ ; $(3\\,;6\\,;7)$ correspond à $t=2$ et donne $9$ ; $(0\\,;0\\,;1)$ correspond à $t=-1$ et donne $-18$ : ils sont sur la droite, mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;4\\,;5)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;2\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;6\\,;7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;0\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $M(1\\,;2\\,;3)$ et $H(2\\,;4\\,;5)$ dans un repère orthonormé, quelle est la longueur $MH$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{MH}(2-1\\,;4-2\\,;5-3)=(1\\,;2\\,;2)$. Étape 2 — $MH=\\sqrt{1+4+4}=\\sqrt9=3$. Oublier la racine donnerait 9, qui est le carré de la longueur.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La formule de distance donne $\\dfrac{|1+4+6-20|}{\\sqrt{1+4+4}}=3$, ce qui confirme que la distance de $M(1\\,;2\\,;3)$ au plan $x+2y+2z-20=0$ est égale à $MH=3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — La distance d'un point à un plan est la longueur $MH$ jusqu'au pied de la perpendiculaire. Étape 2 — Numérateur : $|1\\times1+2\\times2+2\\times3-20|=9$ ; dénominateur : $\\sqrt{1+4+4}=3$ ; donc $\\dfrac93=3$. Étape 3 — Le calcul direct de $MH$ donne aussi 3 : les deux méthodes s'accordent et l'affirmation est vraie. Cette concordance est un contrôle utile du résultat.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Pour tout réel $k$, on note $\\mathcal P_k$ le plan d'équation $x+y+kz-5=0$. On note $\\mathcal D$ la droite de représentation paramétrique $x=2+t$, $y=1-t$, $z=t$. On étudie l'intersection de $\\mathcal D$ et de $\\mathcal P_k$ selon la valeur de $k$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Substitue $x$, $y$, $z$ dans l'équation de $\\mathcal P_k$ : tu obtiens une équation en $t$ de la forme $mt+p=0$ où $m$ dépend de $k$. Discute selon $m$.",
+              "questions": [
+                {
+                  "content": "La droite $\\mathcal D$ a pour vecteur directeur $\\vec u(1\\,;-1\\,;1)$ et le plan $\\mathcal P_k$ a pour vecteur normal $\\vec n(1\\,;1\\,;k)$. Pour quelle valeur de $k$ la droite $\\mathcal D$ est-elle parallèle au plan $\\mathcal P_k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — La droite est parallèle au plan si et seulement si $\\vec u\\cdot\\vec n=0$. Étape 2 — $\\vec u\\cdot\\vec n=1\\times1+(-1)\\times1+1\\times k=k$. Étape 3 — Ce produit est nul pour $k=0$. Pour $k\\neq0$, le produit n'est pas nul et la droite coupe le plan.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $k=0$, le plan $\\mathcal P_0$ a pour équation $x+y-5=0$ et la droite $\\mathcal D$ a pour représentation $x=2+t$, $y=1-t$, $z=t$. Quelle est leur position relative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On substitue : $(2+t)+(1-t)-5=0$. Étape 2 — On réduit : $0t-2=0$. Étape 3 — Le coefficient de $t$ est nul et le terme constant $-2$ ne l'est pas : l'équation n'a aucune solution, donc aucun point commun. La droite est strictement parallèle au plan. Elle ne serait contenue dans le plan que pour $0t+0=0$ ; elle n'est pas orthogonale car $\\vec u(1\\,;-1\\,;1)$ n'est pas colinéaire à $\\vec n(1\\,;1\\,;0)$.",
+                  "answers": [
+                    {
+                      "content": "La droite est strictement parallèle au plan, sans point commun",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite est contenue dans le plan",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite coupe le plan en un seul point",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite est orthogonale au plan",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $k=2$, le plan $\\mathcal P_2$ a pour équation $x+y+2z-5=0$ et la droite $\\mathcal D$ a pour représentation $x=2+t$, $y=1-t$, $z=t$. Pour quelle valeur de $t$ le point de $\\mathcal D$ est-il dans $\\mathcal P_2$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $(2+t)+(1-t)+2t-5=0$. Étape 2 — On réduit : $2t-2=0$. Étape 3 — Donc $t=1$. Le coefficient de $t$ vaut $2$, non nul : un seul point commun. Trouver $t=-1$ vient d'une erreur de signe sur le terme constant.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $k=2$, la droite $x=2+t$, $y=1-t$, $z=t$ coupe le plan d'équation $x+y+2z-5=0$ pour $t=1$. Quelles sont les coordonnées du point commun ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On remplace $t$ par 1 : $x=3$, $y=0$, $z=1$. Étape 2 — Vérification : $3+0+2-5=0$. Le point $(2\\,;1\\,;0)$ correspond à $t=0$ et donne $-2$ ; $(4\\,;-1\\,;2)$ correspond à $t=2$ et donne $2$ ; $(1\\,;2\\,;-1)$ correspond à $t=-1$ et donne $-4$ : ils sont sur la droite mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;0\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;-1\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;2\\,;-1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $k$ non nul, la droite $x=2+t$, $y=1-t$, $z=t$ coupe le plan d'équation $x+y+kz-5=0$ en un seul point.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — On substitue : $(2+t)+(1-t)+kt-5=0$, soit $kt-2=0$. Étape 2 — Si $k\\neq0$, l'équation a une unique solution $t=\\dfrac2k$. Étape 3 — Il y a donc exactement un point commun pour tout $k$ non nul, et l'affirmation est vraie. Seul le cas $k=0$ est particulier : alors il n'y a aucun point commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un repère orthonormé, on considère les plans $\\mathcal P : 2x+y-2z+3=0$, $\\mathcal Q : 2x-2y+z-4=0$ et $\\mathcal R : 4x+2y-4z+18=0$, ainsi que le point $A(1\\,;1\\,;1)$. On étudie leurs positions relatives en justifiant par les vecteurs normaux.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Lis les vecteurs normaux sur les coefficients. Orthogonaux : produit scalaire nul. Parallèles : colinéaires. Pour une distance, prends un point de l'un des plans.",
+              "questions": [
+                {
+                  "content": "Les plans $\\mathcal P : 2x+y-2z+3=0$ et $\\mathcal Q : 2x-2y+z-4=0$ ont pour vecteurs normaux $\\vec n_P(2\\,;1\\,;-2)$ et $\\vec n_Q(2\\,;-2\\,;1)$. Quel est le produit scalaire $\\vec n_P\\cdot\\vec n_Q$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On multiplie les coordonnées de même rang : $2\\times2=4$, $1\\times(-2)=-2$, $(-2)\\times1=-2$. Étape 2 — On additionne : $4-2-2=0$. Le produit scalaire est nul : les vecteurs normaux sont orthogonaux.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Les plans $\\mathcal P : 2x+y-2z+3=0$ et $\\mathcal Q : 2x-2y+z-4=0$ sont orthogonaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Deux plans sont orthogonaux si leurs vecteurs normaux sont orthogonaux. Étape 2 — $\\vec n_P(2\\,;1\\,;-2)$ et $\\vec n_Q(2\\,;-2\\,;1)$ ont un produit scalaire $4-2-2=0$. Étape 3 — Les plans sont donc orthogonaux et l'affirmation est vraie. Il ne faut pas chercher la colinéarité des vecteurs normaux : elle caractérise le parallélisme, pas l'orthogonalité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plans $\\mathcal P : 2x+y-2z+3=0$ et $\\mathcal R : 4x+2y-4z+18=0$ sont parallèles et distincts.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — $\\vec n_R(4\\,;2\\,;-4)=2\\times\\vec n_P(2\\,;1\\,;-2)$ : les vecteurs normaux sont colinéaires, donc les plans sont parallèles. Étape 2 — En divisant l'équation de $\\mathcal R$ par 2, on obtient $2x+y-2z+9=0$, qui n'est pas celle de $\\mathcal P$ ($+3$) : les plans sont distincts. L'affirmation est vraie. Deux plans de même direction ne sont confondus que si leurs équations sont proportionnelles, termes constants compris.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $B(0\\,;-3\\,;0)$ appartient au plan $\\mathcal P : 2x+y-2z+3=0$. Quelle est sa distance au plan $\\mathcal R : 4x+2y-4z+18=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit pour $\\mathcal R$ : $a=4$, $b=2$, $c=-4$, $d=18$. Étape 2 — Numérateur : $|0-6-0+18|=12$. Étape 3 — Dénominateur : $\\sqrt{16+4+16}=6$. Étape 4 — $\\dfrac{12}{6}=2$. C'est la distance entre les deux plans parallèles. Prendre pour dénominateur $\\sqrt{4+1+4}=3$, celui de $\\mathcal P$, donnerait 4 à tort.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quelle est une équation cartésienne du plan passant par $A(1\\,;1\\,;1)$ et parallèle au plan $\\mathcal P : 2x+y-2z+3=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Un plan parallèle à $\\mathcal P$ a le même vecteur normal $(2\\,;1\\,;-2)$, donc une équation $2x+y-2z+d=0$. Étape 2 — Il passe par $A(1\\,;1\\,;1)$ : $2+1-2+d=0$, donc $d=-1$. Étape 3 — Équation : $2x+y-2z-1=0$. La proposition avec $+3$ est $\\mathcal P$ elle-même, qui ne passe pas par $A$ ($1+3=4\\neq0$) ; celle avec $+1$ ne passe pas par $A$ non plus ($2\\neq0$) ; $2x+y+2z-5=0$ passe par $A$ mais son vecteur normal $(2\\,;1\\,;2)$ n'est pas colinéaire à $(2\\,;1\\,;-2)$ : elle n'est pas parallèle.",
+                  "answers": [
+                    {
+                      "content": "$2x+y-2z-1=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x+y-2z+3=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x+y-2z+1=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x+y+2z-5=0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de géométrie analytique de l'espace",
+          "notions": "bilan des quatre notions : produit scalaire, norme et orthogonalité ; vecteur normal et équation cartésienne d'un plan ; représentation paramétrique d'une droite et intersection avec un plan ; distance d'un point à un plan et projeté orthogonal.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le toit d'un hangar est modélisé par une pyramide $OABS$ dans un repère orthonormé d'unité 1 m, avec $O(0\\,;0\\,;0)$, $A(6\\,;0\\,;0)$, $B(0\\,;3\\,;0)$ et $S(0\\,;0\\,;3)$ (situation d'exemple). On s'intéresse à la face $ABS$, qui est plane.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour la face $ABS$, cherche un vecteur normal orthogonal à $\\overrightarrow{AB}$ et $\\overrightarrow{AS}$, puis écris l'équation du plan et calcule la distance de $O$.",
+              "questions": [
+                {
+                  "content": "Avec $A(6\\,;0\\,;0)$, $B(0\\,;3\\,;0)$ et $S(0\\,;0\\,;3)$ dans un repère orthonormé, quel est le produit scalaire $\\overrightarrow{AB}\\cdot\\overrightarrow{AS}$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — $\\overrightarrow{AB}(-6\\,;3\\,;0)$ et $\\overrightarrow{AS}(-6\\,;0\\,;3)$. Étape 2 — On multiplie : $(-6)\\times(-6)=36$, $3\\times0=0$, $0\\times3=0$. Étape 3 — On additionne : $36$. Le produit de deux nombres négatifs est positif : ne pas écrire $-36$.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Quel vecteur est normal au plan $(ABS)$, avec $A(6\\,;0\\,;0)$, $B(0\\,;3\\,;0)$ et $S(0\\,;0\\,;3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On cherche $\\vec n$ orthogonal à $\\overrightarrow{AB}(-6\\,;3\\,;0)$ et à $\\overrightarrow{AS}(-6\\,;0\\,;3)$. Étape 2 — Pour $(1\\,;2\\,;2)$ : $-6+6+0=0$ et $-6+0+6=0$. Le vecteur est normal. $(6\\,;3\\,;3)$ prend les coordonnées des points : $-36+9=-27$ avec $\\overrightarrow{AB}$ ; $(1\\,;1\\,;1)$ donne $-6+3=-3$ ; $(2\\,;1\\,;1)$ donne $-12+3=-9$.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;2\\,;2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(6\\,;3\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une équation cartésienne du plan $(ABS)$, avec $A(6\\,;0\\,;0)$, $B(0\\,;3\\,;0)$, $S(0\\,;0\\,;3)$ et le vecteur normal $\\vec n(1\\,;2\\,;2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On écrit $\\vec n\\cdot\\overrightarrow{AM}=0$ avec $\\overrightarrow{AM}(x-6\\,;y\\,;z)$ : $(x-6)+2y+2z=0$. Étape 2 — On réduit : $x+2y+2z-6=0$. Étape 3 — Vérification : $A$ donne $6-6=0$, $B$ donne $6-6=0$, $S$ donne $6-6=0$. La proposition avec $+6$ se trompe de signe ; $6x+3y+3z-6=0$ prend les coordonnées des points comme vecteur normal ; celle avec $-3$ ne passe pas par $A$ ($6-3=3\\neq0$).",
+                  "answers": [
+                    {
+                      "content": "$x+2y+2z-6=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x+2y+2z+6=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x+3y+3z-6=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x+2y+2z-3=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la distance, en mètres, de l'origine $O$ au plan $(ABS)$ d'équation $x+2y+2z-6=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit $a=1$, $b=2$, $c=2$, $d=-6$. Étape 2 — Numérateur : avec $O(0\\,;0\\,;0)$, $|-6|=6$. Étape 3 — Dénominateur : $\\sqrt{1+4+4}=3$. Étape 4 — $\\dfrac63=2$ m. Oublier la racine ou la division donnerait $\\dfrac69$ ou 6.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Le pied $H$ de la perpendiculaire au plan $x+2y+2z-6=0$ menée de $O$ a pour coordonnées $\\left(\\dfrac23\\,;\\dfrac43\\,;\\dfrac43\\right)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — La perpendiculaire passe par $O$ avec le vecteur normal $(1\\,;2\\,;2)$ : $x=t$, $y=2t$, $z=2t$. Étape 2 — On substitue : $t+4t+4t-6=0$, soit $9t=6$ et $t=\\dfrac23$. Étape 3 — On lit $H\\left(\\dfrac23\\,;\\dfrac43\\,;\\dfrac43\\right)$. Vérification : $\\dfrac23+\\dfrac83+\\dfrac83-6=0$. L'affirmation est vraie. On a aussi $OH=\\dfrac23\\times3=2$, ce qui redonne la distance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un laser de chantier part du point $L(1\\,;0\\,;4)$ avec la direction du vecteur $\\vec u(1\\,;1\\,;-2)$ dans un repère orthonormé d'unité 1 m. Une dalle plane $\\mathcal P$ a pour équation $2x-y+z-4=0$ (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris la droite du laser avec $t$, substitue dans l'équation de la dalle, résous en $t$, puis reviens aux coordonnées et compare $\\vec u$ au vecteur normal.",
+              "questions": [
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $L(1\\,;0\\,;4)$ de vecteur directeur $\\vec u(1\\,;1\\,;-2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — La représentation est $x=x_L+at$, $y=y_L+bt$, $z=z_L+ct$. Étape 2 — Avec $L(1\\,;0\\,;4)$ et $\\vec u(1\\,;1\\,;-2)$ : $x=1+t$, $y=0+t=t$, $z=4-2t$. La proposition avec $z=4+2t$ change le signe de $c$ ; celle avec $y=-t$ change le signe de $b$ ; celle avec $y=1+t$ et $z=-2+4t$ mélange le point et le vecteur directeur.",
+                  "answers": [
+                    {
+                      "content": "$x=1+t,\\ y=t,\\ z=4-2t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=t,\\ z=4+2t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=1+t,\\ z=-2+4t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=1+t,\\ y=-t,\\ z=4-2t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point de la droite $x=1+t$, $y=t$, $z=4-2t$ est dans le plan d'équation $2x-y+z-4=0$. Pour quelle valeur de $t$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $2(1+t)-t+(4-2t)-4=0$. Étape 2 — On développe : $2+2t-t+4-2t-4=2-t$. Étape 3 — Donc $2-t=0$ et $t=2$. Le coefficient de $t$ vaut $-1$, non nul : un seul point commun. Trouver $t=-2$ vient d'une erreur de signe en résolvant $2-t=0$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite $x=1+t$, $y=t$, $z=4-2t$ coupe le plan d'équation $2x-y+z-4=0$ pour $t=2$. Quelles sont les coordonnées du point d'impact $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On remplace $t$ par 2 : $x=3$, $y=2$, $z=0$. Étape 2 — Vérification : $6-2+0-4=0$. Le point $(1\\,;0\\,;4)$ est $L$ ($t=0$) et donne $2$ ; $(2\\,;1\\,;2)$ correspond à $t=1$ et donne $1$ ; $(5\\,;4\\,;-4)$ correspond à $t=4$ et donne $-2$ : ils sont sur la droite mais pas dans le plan.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;2\\,;0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(1\\,;0\\,;4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;1\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5\\,;4\\,;-4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite de vecteur directeur $\\vec u(1\\,;1\\,;-2)$ est parallèle au plan d'équation $2x-y+z-4=0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Une droite est parallèle à un plan si et seulement si $\\vec u\\cdot\\vec n=0$, où $\\vec n(2\\,;-1\\,;1)$ est un vecteur normal du plan. Étape 2 — $\\vec u\\cdot\\vec n=2-1-2=-1$. Ce nombre n'est pas nul : la droite n'est pas parallèle au plan, elle le coupe en un seul point. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un laser part de $L(1\\,;0\\,;4)$ dans la direction $\\vec u(1\\,;1\\,;-2)$ et rencontre le plan $\\mathcal P : 2x-y+z-4=0$ au point $I(3\\,;2\\,;0)$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — $\\vec u\\cdot\\vec n=2-1-2=-1$ : vrai. Étape 2 — $I$ donne $6-2+0-4=0$ : vrai, $I$ est dans le plan. Étape 3 — $L$ donne $2-0+4-4=2\\neq0$ : faux. Étape 4 — $\\vec u(1\\,;1\\,;-2)$ et $\\vec n(2\\,;-1\\,;1)$ ne sont pas proportionnels : faux. Étape 5 — La droite et le plan ont le point $I$ en commun : faux. Un produit scalaire non nul entraîne un point commun unique.",
+                  "answers": [
+                    {
+                      "content": "$\\vec u\\cdot\\vec n=-1$ avec $\\vec n(2\\,;-1\\,;1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $I(3\\,;2\\,;0)$ appartient à $\\mathcal P$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $L(1\\,;0\\,;4)$ appartient à $\\mathcal P$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vecteur $\\vec u$ est colinéaire à $\\vec n(2\\,;-1\\,;1)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite et le plan n'ont aucun point commun.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un atelier de Yopougon, deux barres métalliques ont pour directions les vecteurs $\\vec u(m\\,;1\\,;2)$ et $\\vec v(2\\,;m\\,;-3)$ dans un repère orthonormé, où $m$ est un réel (situation d'exemple). On étudie leur orthogonalité en fonction de $m$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule le produit scalaire $\\vec u\\cdot\\vec v$ en fonction de $m$ : coordonnées de même rang multipliées, puis additionnées.",
+              "questions": [
+                {
+                  "content": "Pour quelle valeur de $m$ les vecteurs $\\vec u(m\\,;1\\,;2)$ et $\\vec v(2\\,;m\\,;-3)$ sont-ils orthogonaux ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On multiplie les coordonnées de même rang : $m\\times2=2m$, $1\\times m=m$, $2\\times(-3)=-6$. Étape 2 — On additionne : $\\vec u\\cdot\\vec v=3m-6$. Étape 3 — Les vecteurs sont orthogonaux si et seulement si $3m-6=0$, donc $m=2$. Trouver $m=-2$ vient d'une erreur de signe en passant $6$ de l'autre côté.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $m=2$, le vecteur $\\vec u$ a pour coordonnées $(2\\,;1\\,;2)$ dans un repère orthonormé. Quelle est sa norme $\\|\\vec u\\|$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On applique $\\|\\vec u\\|=\\sqrt{x^2+y^2+z^2}$. Étape 2 — On élève chaque coordonnée au carré : $2^2=4$, $1^2=1$, $2^2=4$. Étape 3 — On additionne : $4+1+4=9$. Étape 4 — $\\|\\vec u\\|=\\sqrt9=3$. Oublier la racine carrée donnerait 9, qui est le carré de la norme, et additionner les coordonnées $2+1+2=5$ sans les élever au carré serait une autre erreur fréquente.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $m=1$, on a $\\vec u(1\\,;1\\,;2)$ et $\\vec v(2\\,;1\\,;-3)$. Quel est le produit scalaire $\\vec u\\cdot\\vec v$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On multiplie les coordonnées de même rang : $1\\times2=2$, $1\\times1=1$, $2\\times(-3)=-6$. Étape 2 — On additionne : $2+1-6=-3$. On retrouve la formule $3m-6$ avec $m=1$, qui vaut $-3$. Le résultat est un nombre non nul : les vecteurs ne sont pas orthogonaux.",
+                  "answers": [
+                    {
+                      "content": "-3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "Pour $m=0$, les vecteurs $\\vec u(0\\,;1\\,;2)$ et $\\vec v(2\\,;0\\,;-3)$ sont orthogonaux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — On multiplie : $0\\times2=0$, $1\\times0=0$, $2\\times(-3)=-6$. Étape 2 — On additionne : $0+0-6=-6$. Étape 3 — Le produit scalaire n'est pas nul, donc les vecteurs ne sont pas orthogonaux. Deux coordonnées nulles ne suffisent pas : l'orthogonalité se lit sur la somme des trois produits.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ le produit scalaire $\\vec u\\cdot\\vec v=3m-6$ est-il strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On résout l'inéquation $3m-6>0$. Étape 2 — $3m>6$, donc $m>2$ (on divise par 3, positif, le sens ne change pas). Étape 3 — Conclusion : $\\vec u\\cdot\\vec v>0$ si et seulement si $m>2$. La proposition $m<2$ inverse le sens ; $m>-2$ se trompe de signe en passant 6 de l'autre côté ; $m>6$ oublie de diviser par 3.",
+                  "answers": [
+                    {
+                      "content": "$m>2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m<2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m>-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m>6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un repère orthonormé d'unité 1 m, un plan incliné $\\mathcal P$ a pour équation $2x-2y+z-21=0$. Un drone est immobile au point $M(3\\,;-1\\,;4)$ (situation d'exemple). On cherche le point $H$ du plan le plus proche du drone.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La droite $(MH)$ est perpendiculaire à $\\mathcal P$ : son vecteur directeur est un vecteur normal du plan. Substitue dans l'équation du plan et résous en $t$.",
+              "questions": [
+                {
+                  "content": "Quelle est la distance, en mètres, du point $M(3\\,;-1\\,;4)$ au plan d'équation $2x-2y+z-21=0$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On lit $a=2$, $b=-2$, $c=1$, $d=-21$. Étape 2 — Numérateur : $|6+2+4-21|=9$. Étape 3 — Dénominateur : $\\sqrt{4+4+1}=3$. Étape 4 — $\\dfrac93=3$ m. Oublier le dénominateur donnerait 9 ; oublier la racine donnerait 1.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "m"
+                },
+                {
+                  "content": "Quelle est une représentation paramétrique de la droite passant par $M(3\\,;-1\\,;4)$ perpendiculaire au plan d'équation $2x-2y+z-21=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Une droite perpendiculaire à un plan a pour vecteur directeur un vecteur normal du plan : ici $\\vec n(2\\,;-2\\,;1)$. Étape 2 — Elle passe par $M(3\\,;-1\\,;4)$ : $x=3+2t$, $y=-1-2t$, $z=4+t$. La proposition avec $y=-1+2t$ change le signe de $b$ ; celle qui commence par $x=2+3t$ échange le point et le vecteur ; celle avec $z=4-t$ change le signe de $c$.",
+                  "answers": [
+                    {
+                      "content": "$x=3+2t,\\ y=-1-2t,\\ z=4+t$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=3+2t,\\ y=-1+2t,\\ z=4+t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=2+3t,\\ y=-2-t,\\ z=1+4t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=3+2t,\\ y=-1-2t,\\ z=4-t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point de la droite $x=3+2t$, $y=-1-2t$, $z=4+t$ appartient au plan d'équation $2x-2y+z-21=0$. Pour quelle valeur de $t$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — On substitue : $2(3+2t)-2(-1-2t)+(4+t)-21=0$. Étape 2 — On développe : $6+4t+2+4t+4+t-21=9t-9$. Étape 3 — Donc $9t-9=0$ et $t=1$. Le coefficient $9$ est non nul : un seul point commun. Une erreur fréquente est $-2\\times(-1-2t)=-2-4t$ : il faut au contraire $+2+4t$. Trouver $t=-1$ vient d'une erreur de signe en résolvant $9t-9=0$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0
+                },
+                {
+                  "content": "La droite $x=3+2t$, $y=-1-2t$, $z=4+t$ coupe le plan d'équation $2x-2y+z-21=0$ pour $t=1$. Quelles sont les coordonnées du point $H$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — On remplace $t$ par $1$ : $x=5$, $y=-3$, $z=5$. Étape 2 — Vérification : $10+6+5-21=0$. Le point $(3\\,;-1\\,;4)$ est $M$ ($t=0$) et donne $-9$ ; $(1\\,;1\\,;3)$ correspond à $t=-1$ et donne $-18$ ; $(7\\,;-5\\,;6)$ correspond à $t=2$ et donne $9$ : ils sont sur la droite, pas dans le plan. On a aussi $MH=\\sqrt{4+4+1}=3$, ce qui redonne la distance.",
+                  "answers": [
+                    {
+                      "content": "$(5\\,;-3\\,;5)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;-1\\,;4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;1\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(7\\,;-5\\,;6)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes qui donnent le pied $H$ de la perpendiculaire au plan $2x-2y+z-21=0$ menée de $M(3\\,;-1\\,;4)$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire : on part de la droite passant par $M$ de vecteur directeur $\\vec n(2\\,;-2\\,;1)$. Étape 2 — Substituer : on remplace $x$, $y$, $z$ dans l'équation du plan. Étape 3 — Résoudre : l'équation $9t-9=0$ donne $t=1$. Étape 4 — Lire le point : on remplace $t$ par $1$ pour obtenir $H(5\\,;-3\\,;5)$. On ne peut pas lire les coordonnées avant d'avoir trouvé $t$, ni résoudre avant d'avoir substitué.",
+                  "answers": [
+                    {
+                      "content": "Écrire la droite perpendiculaire : $x=3+2t$, $y=-1-2t$, $z=4+t$."
+                    },
+                    {
+                      "content": "Substituer dans l'équation du plan : $2(3+2t)-2(-1-2t)+(4+t)-21=0$."
+                    },
+                    {
+                      "content": "Résoudre : $9t-9=0$, donc $t=1$."
+                    },
+                    {
+                      "content": "Lire le point : $H(5\\,;-3\\,;5)$."
+                    }
+                  ]
+                }
               ]
             }
           ]

@@ -145,129 +145,243 @@
           },
           "pitfall": "Ne pas accepter un reste négatif. Contre-exemple : $-47 = 6 \\times (-7) + (-5)$ est vrai, mais ce n'est pas la division euclidienne, car $-5$ n'est pas dans $0 \\leq r < 6$. On descend d'un cran : $q = -8$ et $r = 1$. Avec un dividende négatif, le quotient est plus petit que celui qu'on devine en arrondissant vers zéro. Vérifie toujours $0 \\leq r < b$.",
           "figure": null,
-          "exercise": {
-            "title": "Poser des divisions euclidiennes",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu poses des divisions euclidiennes dans les entiers relatifs et tu reconnais des diviseurs, avec la méthode de la fiche : écrire, trouver le multiple, calculer le reste, conclure.",
-            "questions": [
-              {
-                "content": "Un grossiste range 250 sachets de sel dans des cartons de 12 sachets. Quel est le quotient $q$ et le reste $r$ de la division euclidienne de $250$ par $12$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $a = 250$ et $b = 12$, le dividende est positif. Étape 2 — Trouver le multiple : $12 \\times 20 = 240 \\leq 250 < 252 = 12 \\times 21$, donc $q = 20$. Étape 3 — Calculer le reste : $r = 250 - 240 = 10$, et $0 \\leq 10 < 12$. Étape 4 — Conclure : $250 = 12 \\times 20 + 10$. La proposition $q = 21$, $r = -2$ a un reste négatif ; $q = 19$, $r = 22$ a un reste plus grand que le diviseur : aucune n'est une division euclidienne.",
-                "answers": [
-                  {
-                    "content": "$q = 20$ et $r = 10$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$q = 21$ et $r = -2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$q = 19$ et $r = 22$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$q = 10$ et $r = 20$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le reste de la division euclidienne de $-59$ par $8$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : $a = -59$ et $b = 8$, le dividende est négatif. Étape 2 — Trouver le multiple : $8 \\times (-8) = -64 \\leq -59 < -56 = 8 \\times (-7)$, donc $q = -8$. Étape 3 — Calculer le reste : $r = -59 - (-64) = 5$, et $0 \\leq 5 < 8$. Étape 4 — Conclure : $-59 = 8 \\times (-8) + 5$. Le reste $-3$, obtenu avec $q = -7$, est faux : un reste est toujours positif.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Le quotient de la division euclidienne de $-31$ par $7$ est $-4$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $a = -31$ et $b = 7$, le dividende est négatif. Étape 2 — Trouver le multiple : $7 \\times (-5) = -35 \\leq -31 < -28 = 7 \\times (-4)$, donc $q = -5$ et non $-4$. Étape 3 — Calculer le reste : $r = -31 - (-35) = 4$. Étape 4 — Conclure : $-31 = 7 \\times (-5) + 4$. Le quotient $-4$ donnerait le reste $-31 + 28 = -3$, qui est négatif : l'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Parmi ces nombres, quels sont les deux diviseurs de $91$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Écrire : $a = 91$ et le diviseur $b$ à tester. Étape 2 — Trouver le multiple : $7 \\times 13 = 91$ exactement ; en revanche $9 \\times 10 = 90$, $14 \\times 6 = 84$ et $21 \\times 4 = 84$. Étape 3 — Calculer le reste : il vaut $0$ pour $7$ et $13$, et $1$, $7$, $7$ pour $9$, $14$, $21$. Étape 4 — Conclure : $b$ divise $91$ seulement si le reste est nul, donc les diviseurs sont $7$ et $13$.",
-                "answers": [
-                  {
-                    "content": "$7$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$13$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$14$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$21$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Laquelle de ces écritures est la division euclidienne de $-23$ par $5$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $a = -23$ et $b = 5$. Étape 2 — Trouver le multiple : $5 \\times (-5) = -25 \\leq -23 < -20$, donc $q = -5$. Étape 3 — Calculer le reste : $r = -23 - (-25) = 2$, et $0 \\leq 2 < 5$. Étape 4 — Conclure : $-23 = 5 \\times (-5) + 2$. Les autres écritures sont exactes comme égalités, mais leur reste ($-3$, $7$ ou $-43$) n'est pas dans $0 \\leq r < 5$ : ce sont les erreurs du piège.",
-                "answers": [
-                  {
-                    "content": "$-23 = 5 \\times (-4) + (-3)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-23 = 5 \\times (-5) + 2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-23 = 5 \\times (-6) + 7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-23 = 5 \\times 4 + (-43)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Si $6$ divise $a$ et $6$ divise $b$, alors $6$ divise $5a - 2b$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $6 \\mid a$ et $6 \\mid b$ signifient $a = 6k$ et $b = 6m$ avec $k$ et $m$ entiers. Étape 2 — Trouver le multiple : $5a - 2b = 30k - 12m = 6(5k - 2m)$. Étape 3 — Calculer le reste : $5k - 2m$ est un entier, donc le reste de la division de $5a - 2b$ par $6$ est $0$. Étape 4 — Conclure : $6$ divise $5a - 2b$ ; c'est la propriété « $a$ divise $bu + cv$ ».",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Poser des divisions euclidiennes",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu poses des divisions euclidiennes dans les entiers relatifs et tu reconnais des diviseurs, avec la méthode de la fiche : écrire, trouver le multiple, calculer le reste, conclure.",
+              "questions": [
+                {
+                  "content": "Un grossiste range 250 sachets de sel dans des cartons de 12 sachets. Quel est le quotient $q$ et le reste $r$ de la division euclidienne de $250$ par $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = 250$ et $b = 12$, le dividende est positif. Étape 2 — Trouver le multiple : $12 \\times 20 = 240 \\leq 250 < 252 = 12 \\times 21$, donc $q = 20$. Étape 3 — Calculer le reste : $r = 250 - 240 = 10$, et $0 \\leq 10 < 12$. Étape 4 — Conclure : $250 = 12 \\times 20 + 10$. La proposition $q = 21$, $r = -2$ a un reste négatif ; $q = 19$, $r = 22$ a un reste plus grand que le diviseur : aucune n'est une division euclidienne.",
+                  "answers": [
+                    {
+                      "content": "$q = 20$ et $r = 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$q = 21$ et $r = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = 19$ et $r = 22$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = 10$ et $r = 20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $-59$ par $8$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = -59$ et $b = 8$, le dividende est négatif. Étape 2 — Trouver le multiple : $8 \\times (-8) = -64 \\leq -59 < -56 = 8 \\times (-7)$, donc $q = -8$. Étape 3 — Calculer le reste : $r = -59 - (-64) = 5$, et $0 \\leq 5 < 8$. Étape 4 — Conclure : $-59 = 8 \\times (-8) + 5$. Le reste $-3$, obtenu avec $q = -7$, est faux : un reste est toujours positif.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le quotient de la division euclidienne de $-31$ par $7$ est $-4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a = -31$ et $b = 7$, le dividende est négatif. Étape 2 — Trouver le multiple : $7 \\times (-5) = -35 \\leq -31 < -28 = 7 \\times (-4)$, donc $q = -5$ et non $-4$. Étape 3 — Calculer le reste : $r = -31 - (-35) = 4$. Étape 4 — Conclure : $-31 = 7 \\times (-5) + 4$. Le quotient $-4$ donnerait le reste $-31 + 28 = -3$, qui est négatif : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, quels sont les deux diviseurs de $91$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $a = 91$ et le diviseur $b$ à tester. Étape 2 — Trouver le multiple : $7 \\times 13 = 91$ exactement ; en revanche $9 \\times 10 = 90$, $14 \\times 6 = 84$ et $21 \\times 4 = 84$. Étape 3 — Calculer le reste : il vaut $0$ pour $7$ et $13$, et $1$, $7$, $7$ pour $9$, $14$, $21$. Étape 4 — Conclure : $b$ divise $91$ seulement si le reste est nul, donc les diviseurs sont $7$ et $13$.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures est la division euclidienne de $-23$ par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = -23$ et $b = 5$. Étape 2 — Trouver le multiple : $5 \\times (-5) = -25 \\leq -23 < -20$, donc $q = -5$. Étape 3 — Calculer le reste : $r = -23 - (-25) = 2$, et $0 \\leq 2 < 5$. Étape 4 — Conclure : $-23 = 5 \\times (-5) + 2$. Les autres écritures sont exactes comme égalités, mais leur reste ($-3$, $7$ ou $-43$) n'est pas dans $0 \\leq r < 5$ : ce sont les erreurs du piège.",
+                  "answers": [
+                    {
+                      "content": "$-23 = 5 \\times (-4) + (-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-23 = 5 \\times (-5) + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-23 = 5 \\times (-6) + 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-23 = 5 \\times 4 + (-43)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $6$ divise $a$ et $6$ divise $b$, alors $6$ divise $5a - 2b$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $6 \\mid a$ et $6 \\mid b$ signifient $a = 6k$ et $b = 6m$ avec $k$ et $m$ entiers. Étape 2 — Trouver le multiple : $5a - 2b = 30k - 12m = 6(5k - 2m)$. Étape 3 — Calculer le reste : $5k - 2m$ est un entier, donc le reste de la division de $5a - 2b$ par $6$ est $0$. Étape 4 — Conclure : $6$ divise $5a - 2b$ ; c'est la propriété « $a$ divise $bu + cv$ ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Divisions euclidiennes et diviseurs en situation",
+              "statement": "Dans cet exercice, tu effectues des divisions euclidiennes, avec un dividende positif ou négatif, et tu utilises les propriétés des diviseurs, avec la méthode de la fiche : écrire, trouver le multiple, calculer le reste, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche le plus grand multiple du diviseur qui ne dépasse pas le dividende. Avec un dividende négatif, ce multiple est plus petit que celui qu'on devine en arrondissant vers zéro. Vérifie toujours $0 \\leq r < b$.",
+              "questions": [
+                {
+                  "content": "Un transporteur charge $407$ cageots de tomates dans des camions de $15$ cageots chacun. Quel est le reste de la division euclidienne de $407$ par $15$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 407$ et $b = 15$, le dividende est positif. Étape 2 — Trouver le multiple : $15 \\times 27 = 405 \\leq 407 < 420 = 15 \\times 28$, donc $q = 27$. Étape 3 — Calculer le reste : $r = 407 - 405 = 2$, et $0 \\leq 2 < 15$. Étape 4 — Conclure : $407 = 15 \\times 27 + 2$, le reste est $2$ et $15$ ne divise pas $407$. Un quotient $28$ serait trop grand : il donnerait le reste négatif $407 - 420 = -13$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures est la division euclidienne de $-38$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = -38$ et $b = 9$, le dividende est négatif. Étape 2 — Trouver le multiple : $9 \\times (-5) = -45 \\leq -38 < -36 = 9 \\times (-4)$, donc $q = -5$. Étape 3 — Calculer le reste : $r = -38 - (-45) = 7$, et $0 \\leq 7 < 9$. Étape 4 — Conclure : $-38 = 9 \\times (-5) + 7$. L'écriture $q = -4$ et $r = -2$ est une égalité vraie ($-36 - 2 = -38$) mais son reste est négatif : c'est l'arrondi vers zéro du piège. Avec $q = -3$ et $r = -11$, le reste est négatif aussi. Avec $q = 5$ et $r = 7$, on oublie le signe : $45 + 7 = 52 \\neq -38$.",
+                  "answers": [
+                    {
+                      "content": "$q = -5$ et $r = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$q = -4$ et $r = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = -3$ et $r = -11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = 5$ et $r = 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs. Si $4$ divise $a + b$ et si $4$ divise $a$, alors $4$ divise $b$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a + b = 4k$ et $a = 4m$, avec $k$ et $m$ entiers. Étape 2 — Trouver le multiple : on isole $b = (a + b) - a$. Étape 3 — Calculer : $b = 4k - 4m = 4(k - m)$. Étape 4 — Conclure : $b$ est un multiple de $4$, donc $4$ divise $b$ ; c'est la propriété « si $a$ divise $x$ et $y$, alors $a$ divise $xu + yv$ » avec $u = 1$ et $v = -1$. L'affirmation est vraie : croire qu'on ne peut qu'additionner des multiples est une erreur, la différence marche aussi.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un employé range $-100$ objets selon la division euclidienne par $12$. Le reste de la division euclidienne de $-100$ par $12$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $a = -100$ et $b = 12$, le dividende est négatif. Étape 2 — Trouver le multiple : $12 \\times (-9) = -108 \\leq -100 < -96 = 12 \\times (-8)$, donc $q = -9$. Étape 3 — Calculer le reste : $r = -100 - (-108) = 8$, et $0 \\leq 8 < 12$. Étape 4 — Conclure : $-100 = 12 \\times (-9) + 8$, le reste est $8$. Le reste $-4$, obtenu avec $q = -8$, est faux : un reste est toujours positif.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres de la liste qui sont divisibles par $13$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : on divise chaque nombre par $b = 13$. Étape 2 — Trouver le multiple : $13 \\times 11 = 143$ et $13 \\times 13 = 169$ ; mais $13 \\times 11 = 143 \\leq 155 < 156 = 13 \\times 12$ et $13 \\times 13 = 169 \\leq 181 < 182 = 13 \\times 14$. Étape 3 — Calculer le reste : $155 - 143 = 12$ et $181 - 169 = 12$. Étape 4 — Conclure : seuls $143$ et $169$ ont un reste nul. Les nombres $155$ et $181$ sont à une unité d'un multiple de $13$ : une lecture rapide les prend pour des multiples, mais leur reste est $12$.",
+                  "answers": [
+                    {
+                      "content": "$143$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$169$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$155$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$181$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour effectuer la division euclidienne de $-58$ par $7$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire : on pose $a = -58$ et $b = 7$ et on repère le signe du dividende. Étape 2 — Trouver le multiple : $7 \\times (-9) = -63 \\leq -58 < -56 = 7 \\times (-8)$, donc $q = -9$. Étape 3 — Calculer le reste : $r = -58 - (-63) = 5$. Étape 4 — Conclure : $-58 = 7 \\times (-9) + 5$. Calculer le reste avant d'avoir trouvé le quotient est impossible, car $r$ dépend de $q$ ; conclure avant d'avoir vérifié $0 \\leq r < b$ expose au piège du reste négatif.",
+                  "answers": [
+                    {
+                      "content": "Écrire $a = -58$ et $b = 7$, et noter que le dividende est négatif."
+                    },
+                    {
+                      "content": "Trouver le plus grand multiple de $7$ qui ne dépasse pas $-58$ : $7 \\times (-9) = -63$, donc $q = -9$."
+                    },
+                    {
+                      "content": "Calculer le reste : $r = -58 - (-63) = 5$, avec $0 \\leq 5 < 7$."
+                    },
+                    {
+                      "content": "Conclure : $-58 = 7 \\times (-9) + 5$, et $7$ ne divise pas $-58$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un grossiste classe ses marchandises par lots. On donne $a = 135$, $b = 8$, $c = -20$ et $d = 7$.",
             "questions": [
@@ -343,130 +457,248 @@
           },
           "pitfall": "Ne pas réduire l'exposant modulo $n$ : on le réduit avec la **période**. Contre-exemple : $5 \\equiv 1\\ [4]$, mais $2^5 = 32 \\equiv 0\\ [4]$ alors que $2^1 = 2$. Les congruences passent aux puissances sur la **base**, pas sur l'exposant. Cherche d'abord la période, puis divise l'exposant par elle.",
           "figure": "jours-modulo-7",
-          "exercise": {
-            "title": "Calculer des restes de puissances",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu calcules des restes avec les congruences et la période d'une puissance, avec la méthode de la fiche : réduire, chercher la période, écrire l'exposant, appliquer, conclure.",
-            "questions": [
-              {
-                "content": "Quel est le reste de la division euclidienne de $2^{50}$ par $7$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Réduire : la base $2$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 \\equiv 1\\ [7]$, la période est $3$. Étape 3 — Écrire l'exposant : $50 = 3 \\times 16 + 2$. Étape 4 — Appliquer : $2^{50} = (2^3)^{16} \\times 2^2 \\equiv 1 \\times 4\\ [7]$. Étape 5 — Conclure : le reste est $4$. Le reste $1$ viendrait d'un exposant multiple de $3$ ; le reste $2$ vient d'un exposant $s = 1$.",
-                "answers": [
-                  {
-                    "content": "$1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le reste de la division euclidienne de $7^{2025}$ par $10$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Réduire : la base $7$ est déjà un reste modulo $10$. Étape 2 — Chercher la période : $7^1 \\equiv 7$, $7^2 = 49 \\equiv 9$, $7^3 \\equiv 63 \\equiv 3$, $7^4 \\equiv 21 \\equiv 1\\ [10]$ : la période est $4$. Étape 3 — Écrire l'exposant : $2025 = 4 \\times 506 + 1$. Étape 4 — Appliquer : $7^{2025} \\equiv (7^4)^{506} \\times 7^1 \\equiv 7\\ [10]$. Étape 5 — Conclure : le reste est $7$, c'est aussi le chiffre des unités de $7^{2025}$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Le reste de la division euclidienne de $5^{2025}$ par $3$ est $1$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Réduire : $5 \\equiv 2 \\equiv -1\\ [3]$. Étape 2 — Chercher la période : $(-1)^1 \\equiv -1$ et $(-1)^2 \\equiv 1$ : la période est $2$. Étape 3 — Écrire l'exposant : $2025 = 2 \\times 1012 + 1$. Étape 4 — Appliquer : $5^{2025} \\equiv (-1)^{2025} \\equiv -1\\ [3]$. Étape 5 — Conclure : $-1 \\equiv 2\\ [3]$, le reste est $2$ et non $1$. Le reste $1$ viendrait d'un exposant pair.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux congruences vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Réduire : on remplace chaque nombre par son reste modulo $7$ : $100 = 7 \\times 14 + 2$, $45 = 7 \\times 6 + 3$, $-3 = 7 \\times (-1) + 4$, $60 = 7 \\times 8 + 4$, $29 = 7 \\times 4 + 1$. Étape 2 — Comparer : deux nombres sont congrus modulo $7$ s'ils ont le même reste, ou si leur différence est un multiple de $7$. Étape 3 — Conclure : $100 \\equiv 2$ et $-3 \\equiv 4$ sont vraies ; $45 \\equiv 3$, $60 \\equiv 4$ et $29 \\equiv 1$ rendent les trois autres fausses (leurs restes ne sont pas $4$, $3$ et $2$).",
-                "answers": [
-                  {
-                    "content": "$100 \\equiv 2\\ [7]$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$45 \\equiv 4\\ [7]$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-3 \\equiv 4\\ [7]$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$60 \\equiv 3\\ [7]$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$29 \\equiv 2\\ [7]$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Aujourd'hui est un jeudi. On numérote les jours : lundi $0$, mardi $1$, mercredi $2$, jeudi $3$, vendredi $4$, samedi $5$, dimanche $6$. Quel est le numéro du jour de la semaine dans $2^{40}$ jours ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Réduire : les jours se répètent tous les $7$ jours, on travaille modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 \\equiv 1\\ [7]$, la période est $3$. Étape 3 — Écrire l'exposant : $40 = 3 \\times 13 + 1$. Étape 4 — Appliquer : $2^{40} \\equiv 2\\ [7]$. Étape 5 — Conclure : on avance de $2$ jours depuis le jeudi ($3$), donc $3 + 2 = 5$ : ce sera un samedi.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Puisque $9 \\equiv 2\\ [7]$, on a $3^{9} \\equiv 3^{2}\\ [7]$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Réduire : la base $3$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $3^6 \\equiv 1\\ [7]$, la période est $6$. Étape 3 — Écrire l'exposant : $9 = 6 \\times 1 + 3$. Étape 4 — Appliquer : $3^9 \\equiv 3^3 \\equiv 27 \\equiv 6\\ [7]$, alors que $3^2 = 9 \\equiv 2\\ [7]$. Étape 5 — Conclure : $6 \\neq 2$, l'affirmation est fausse. L'exposant se réduit avec la période $6$, pas avec le module $7$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quel chiffre $c$ faut-il écrire pour que le numéro $34c8$ d'un lot soit divisible par $9$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Réduire : un entier est congru à la somme de ses chiffres modulo $9$, donc $34c8 \\equiv 3 + 4 + c + 8 = 15 + c\\ [9]$. Étape 2 — Comparer : le numéro est divisible par $9$ si $15 + c \\equiv 0\\ [9]$, c'est-à-dire si $15 + c$ est un multiple de $9$. Étape 3 — Conclure : avec $0 \\leq c \\leq 9$, le seul multiple de $9$ possible est $18$, donc $c = 3$. Vérification : $3438 = 9 \\times 382$. Le chiffre $c = 12$ n'existe pas, et $c = 3$ est le seul.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des restes de puissances",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu calcules des restes avec les congruences et la période d'une puissance, avec la méthode de la fiche : réduire, chercher la période, écrire l'exposant, appliquer, conclure.",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $2^{50}$ par $7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : la base $2$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 \\equiv 1\\ [7]$, la période est $3$. Étape 3 — Écrire l'exposant : $50 = 3 \\times 16 + 2$. Étape 4 — Appliquer : $2^{50} = (2^3)^{16} \\times 2^2 \\equiv 1 \\times 4\\ [7]$. Étape 5 — Conclure : le reste est $4$. Le reste $1$ viendrait d'un exposant multiple de $3$ ; le reste $2$ vient d'un exposant $s = 1$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $7^{2025}$ par $10$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : la base $7$ est déjà un reste modulo $10$. Étape 2 — Chercher la période : $7^1 \\equiv 7$, $7^2 = 49 \\equiv 9$, $7^3 \\equiv 63 \\equiv 3$, $7^4 \\equiv 21 \\equiv 1\\ [10]$ : la période est $4$. Étape 3 — Écrire l'exposant : $2025 = 4 \\times 506 + 1$. Étape 4 — Appliquer : $7^{2025} \\equiv (7^4)^{506} \\times 7^1 \\equiv 7\\ [10]$. Étape 5 — Conclure : le reste est $7$, c'est aussi le chiffre des unités de $7^{2025}$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le reste de la division euclidienne de $5^{2025}$ par $3$ est $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : $5 \\equiv 2 \\equiv -1\\ [3]$. Étape 2 — Chercher la période : $(-1)^1 \\equiv -1$ et $(-1)^2 \\equiv 1$ : la période est $2$. Étape 3 — Écrire l'exposant : $2025 = 2 \\times 1012 + 1$. Étape 4 — Appliquer : $5^{2025} \\equiv (-1)^{2025} \\equiv -1\\ [3]$. Étape 5 — Conclure : $-1 \\equiv 2\\ [3]$, le reste est $2$ et non $1$. Le reste $1$ viendrait d'un exposant pair.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux congruences vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Réduire : on remplace chaque nombre par son reste modulo $7$ : $100 = 7 \\times 14 + 2$, $45 = 7 \\times 6 + 3$, $-3 = 7 \\times (-1) + 4$, $60 = 7 \\times 8 + 4$, $29 = 7 \\times 4 + 1$. Étape 2 — Comparer : deux nombres sont congrus modulo $7$ s'ils ont le même reste, ou si leur différence est un multiple de $7$. Étape 3 — Conclure : $100 \\equiv 2$ et $-3 \\equiv 4$ sont vraies ; $45 \\equiv 3$, $60 \\equiv 4$ et $29 \\equiv 1$ rendent les trois autres fausses (leurs restes ne sont pas $4$, $3$ et $2$).",
+                  "answers": [
+                    {
+                      "content": "$100 \\equiv 2\\ [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$45 \\equiv 4\\ [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3 \\equiv 4\\ [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$60 \\equiv 3\\ [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$29 \\equiv 2\\ [7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aujourd'hui est un jeudi. On numérote les jours : lundi $0$, mardi $1$, mercredi $2$, jeudi $3$, vendredi $4$, samedi $5$, dimanche $6$. Quel est le numéro du jour de la semaine dans $2^{40}$ jours ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : les jours se répètent tous les $7$ jours, on travaille modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 \\equiv 1\\ [7]$, la période est $3$. Étape 3 — Écrire l'exposant : $40 = 3 \\times 13 + 1$. Étape 4 — Appliquer : $2^{40} \\equiv 2\\ [7]$. Étape 5 — Conclure : on avance de $2$ jours depuis le jeudi ($3$), donc $3 + 2 = 5$ : ce sera un samedi.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Puisque $9 \\equiv 2\\ [7]$, on a $3^{9} \\equiv 3^{2}\\ [7]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : la base $3$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $3^6 \\equiv 1\\ [7]$, la période est $6$. Étape 3 — Écrire l'exposant : $9 = 6 \\times 1 + 3$. Étape 4 — Appliquer : $3^9 \\equiv 3^3 \\equiv 27 \\equiv 6\\ [7]$, alors que $3^2 = 9 \\equiv 2\\ [7]$. Étape 5 — Conclure : $6 \\neq 2$, l'affirmation est fausse. L'exposant se réduit avec la période $6$, pas avec le module $7$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel chiffre $c$ faut-il écrire pour que le numéro $34c8$ d'un lot soit divisible par $9$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : un entier est congru à la somme de ses chiffres modulo $9$, donc $34c8 \\equiv 3 + 4 + c + 8 = 15 + c\\ [9]$. Étape 2 — Comparer : le numéro est divisible par $9$ si $15 + c \\equiv 0\\ [9]$, c'est-à-dire si $15 + c$ est un multiple de $9$. Étape 3 — Conclure : avec $0 \\leq c \\leq 9$, le seul multiple de $9$ possible est $18$, donc $c = 3$. Vérification : $3438 = 9 \\times 382$. Le chiffre $c = 12$ n'existe pas, et $c = 3$ est le seul.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Puissances, périodes et jours de la semaine",
+              "statement": "Dans cet exercice, tu calcules des restes de puissances et des jours de la semaine avec les congruences, avec la méthode de la fiche : réduire, chercher la période, écrire l'exposant, appliquer, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Réduis d'abord la base, puis cherche la période : la première puissance qui donne le reste $1$. Divise ensuite l'exposant par cette période et garde seulement le reste de cette division.",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $3^{2026}$ par $5$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : la base $3$ est déjà un reste modulo $5$. Étape 2 — Chercher la période : $3^1 \\equiv 3$, $3^2 \\equiv 4$, $3^3 \\equiv 2$, $3^4 \\equiv 1\\ [5]$ : la période est $4$. Étape 3 — Écrire l'exposant : $2026 = 4 \\times 506 + 2$. Étape 4 — Appliquer : $3^{2026} = (3^4)^{506} \\times 3^2 \\equiv 1 \\times 9 \\equiv 4\\ [5]$. Étape 5 — Conclure : le reste est $4$. Réduire l'exposant modulo $5$ ($2026 \\equiv 1$) donnerait le faux reste $3$ : l'exposant se réduit avec la période, pas avec le module.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $4^{35}$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : la base $4$ est déjà un reste modulo $9$. Étape 2 — Chercher la période : $4^1 \\equiv 4$, $4^2 = 16 \\equiv 7$, $4^3 = 64 \\equiv 1\\ [9]$ : la période est $3$. Étape 3 — Écrire l'exposant : $35 = 3 \\times 11 + 2$. Étape 4 — Appliquer : $4^{35} = (4^3)^{11} \\times 4^2 \\equiv 1 \\times 16 \\equiv 7\\ [9]$. Étape 5 — Conclure : le reste est $7$. Le reste $1$ correspond à un exposant multiple de $3$, le reste $4$ à un exposant qui vaut $1$ modulo $3$, et $16$ n'est pas un reste modulo $9$ : on a oublié de réduire $4^2$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le reste de la division euclidienne de $6^{2027}$ par $5$ est $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : $6 \\equiv 1\\ [5]$, la base se réduit à $1$. Étape 2 — Chercher la période : $1^p \\equiv 1$ pour tout $p$, la période est $1$. Étape 3 — Écrire l'exposant : $2027 = 1 \\times 2027 + 0$. Étape 4 — Appliquer : $6^{2027} \\equiv 1^{2027} \\equiv 1\\ [5]$. Étape 5 — Conclure : le reste est $1$, l'affirmation est vraie. Réduire l'exposant modulo $5$ ($2027 \\equiv 2$) serait l'erreur du piège, même si elle donne ici aussi $6^2 = 36 \\equiv 1$ : seule la base se réduit modulo $5$, et l'exposant se traite avec la période.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $2^4 \\equiv 1\\ [5]$. Le reste de la division euclidienne de $2^{103}$ par $5$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Réduire : la base $2$ est déjà un reste modulo $5$. Étape 2 — Chercher la période : l'énoncé donne $2^4 \\equiv 1\\ [5]$, la période est $4$. Étape 3 — Écrire l'exposant : $103 = 4 \\times 25 + 3$. Étape 4 — Appliquer : $2^{103} = (2^4)^{25} \\times 2^3 \\equiv 1 \\times 8 \\equiv 3\\ [5]$. Étape 5 — Conclure : le reste est $3$ et non $8$, car un reste modulo $5$ est compris entre $0$ et $4$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aujourd'hui est un vendredi (numéro $4$ ; lundi est $0$ et dimanche est $6$). Dans $365$ jours, ce sera un ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Réduire : les jours se répètent tous les $7$ jours, donc on travaille modulo $7$. Étape 2 — Chercher la période : la période est $7$. Étape 3 — Écrire l'exposant : ici le nombre de jours est $365 = 7 \\times 52 + 1$. Étape 4 — Appliquer : $365 \\equiv 1\\ [7]$, on avance d'un seul jour. Étape 5 — Conclure : $4 + 1 = 5$, le numéro $5$ est un samedi. Répondre vendredi revient à croire que $365$ est un multiple de $7$ ; dimanche est la réponse de ceux qui avancent de $2$ jours.",
+                  "answers": [
+                    {
+                      "content": "samedi",
+                      "correct": true
+                    },
+                    {
+                      "content": "vendredi",
+                      "correct": false
+                    },
+                    {
+                      "content": "dimanche",
+                      "correct": false
+                    },
+                    {
+                      "content": "jeudi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces congruences modulo $8$, lesquelles sont vraies ? Choisis-en deux.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Réduire : on compare chaque nombre à son reste modulo $8$. Étape 2 — Chercher la période : ici le calcul se fait par différence, $a \\equiv b\\ [8]$ quand $a - b$ est un multiple de $8$. Étape 3 — Écrire : $37 - 5 = 32 = 8 \\times 4$ et $-3 - 5 = -8 = 8 \\times (-1)$. Étape 4 — Appliquer : $50 - 4 = 46$ n'est pas un multiple de $8$ (en fait $50 \\equiv 2$), et $19 - 1 = 18$ non plus (en fait $19 \\equiv 3$). Étape 5 — Conclure : les deux congruences vraies sont $37 \\equiv 5$ et $-3 \\equiv 5\\ [8]$.",
+                  "answers": [
+                    {
+                      "content": "$37 \\equiv 5\\ [8]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3 \\equiv 5\\ [8]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50 \\equiv 4\\ [8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19 \\equiv 1\\ [8]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Les jours de la semaine reviennent tous les $7$ jours : on travaille modulo $7$. On numérote lundi $0$, mardi $1$, mercredi $2$, jeudi $3$, vendredi $4$, samedi $5$, dimanche $6$.",
             "questions": [
@@ -550,131 +782,239 @@
           },
           "pitfall": "Ne pas lire le dernier reste (qui est $0$) ni le premier reste, mais le **dernier reste non nul**. Pour $84$ et $60$ : les restes sont $24$, $12$, $0$ ; le PGCD est $12$, pas $0$ ni $24$. Autre erreur : prendre le produit $84 \\times 60 = 5040$ pour le PPCM. C'est un multiple commun, mais pas le plus petit : le PPCM vaut $5040 \\div 12 = 420$.",
           "figure": "euclide-84-60",
-          "exercise": {
-            "title": "Calculer des PGCD et des PPCM",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu calcules des PGCD et des PPCM par l'algorithme d'Euclide, avec la méthode de la fiche : ordonner, diviser, recommencer, lire le PGCD, calculer le PPCM.",
-            "questions": [
-              {
-                "content": "Quel est le PGCD de $252$ et $180$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Ordonner : $252 \\geq 180 > 0$. Étape 2 — Diviser : $252 = 180 \\times 1 + 72$. Étape 3 — Recommencer : $180 = 72 \\times 2 + 36$, puis $72 = 36 \\times 2 + 0$. Étape 4 — Lire : le dernier reste non nul est $36$, donc $\\text{PGCD}(252, 180) = 36$. Le premier reste $72$ et le dernier reste $0$ sont les erreurs du piège ; $18$ est un diviseur commun, mais pas le plus grand.",
-                "answers": [
-                  {
-                    "content": "$72$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$36$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$18$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le PGCD de $455$ et $130$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Ordonner : $455 \\geq 130 > 0$. Étape 2 — Diviser : $455 = 130 \\times 3 + 65$. Étape 3 — Recommencer : $130 = 65 \\times 2 + 0$, le reste est nul. Étape 4 — Lire : le dernier reste non nul est $65$, donc $\\text{PGCD}(455, 130) = 65$.",
-                "answers": [
-                  {
-                    "content": "65",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le PPCM de $48$ et $36$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Ordonner : $48 \\geq 36 > 0$. Étape 2 — Diviser : $48 = 36 \\times 1 + 12$. Étape 3 — Recommencer : $36 = 12 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(48, 36) = 12$. Étape 5 — Calculer : $\\text{PPCM}(48, 36) = \\dfrac{48 \\times 36}{12} = \\dfrac{1728}{12} = 144$.",
-                "answers": [
-                  {
-                    "content": "144",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une commerçante a $126$ oranges et $84$ mangues. Elle veut faire le plus grand nombre de paquets identiques, avec tous ses fruits. Combien de paquets fait-elle ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Ordonner : $126 \\geq 84 > 0$. Étape 2 — Diviser : $126 = 84 \\times 1 + 42$. Étape 3 — Recommencer : $84 = 42 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(126, 84) = 42$, c'est le plus grand nombre de paquets ; chaque paquet contient $3$ oranges et $2$ mangues. Le nombre $252$ est le PPCM, qui ne répond pas à la question ; $21$ est un diviseur commun, mais pas le plus grand.",
-                "answers": [
-                  {
-                    "content": "$21$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$252$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$42$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le PPCM de $18$ et $30$ est $540$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Ordonner : $30 \\geq 18 > 0$. Étape 2 — Diviser : $30 = 18 \\times 1 + 12$. Étape 3 — Recommencer : $18 = 12 \\times 1 + 6$, puis $12 = 6 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(18, 30) = 6$. Étape 5 — Calculer : $\\text{PPCM}(18, 30) = \\dfrac{540}{6} = 90$. Le produit $540$ est un multiple commun, mais pas le plus petit : l'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un camion passe au marché tous les $15$ jours et un autre tous les $20$ jours. Ils sont là ensemble aujourd'hui. Dans combien de jours seront-ils de nouveau ensemble ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Ordonner : $20 \\geq 15 > 0$. Étape 2 — Diviser : $20 = 15 \\times 1 + 5$. Étape 3 — Recommencer : $15 = 5 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(20, 15) = 5$. Étape 5 — Calculer : $\\text{PPCM}(15, 20) = \\dfrac{300}{5} = 60$. Ils se retrouvent dans $60$ jours. Le produit $300$ est un jour de rencontre, mais pas le premier.",
-                "answers": [
-                  {
-                    "content": "60",
-                    "correct": true
-                  }
-                ],
-                "unit": "jours"
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de l'algorithme d'Euclide pour calculer un PGCD.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Ordonner les deux nombres pour diviser le plus grand par le plus petit. Étape 2 — Diviser et noter le reste. Étape 3 — Recommencer avec le diviseur et le reste, car $\\text{PGCD}(a,b) = \\text{PGCD}(b,r)$. Étape 4 — Lire le dernier reste non nul : le PGCD n'est pas le reste nul qui arrête l'algorithme.",
-                "answers": [
-                  {
-                    "content": "Ordonner les deux nombres."
-                  },
-                  {
-                    "content": "Diviser le plus grand par le plus petit et noter le reste."
-                  },
-                  {
-                    "content": "Recommencer avec le diviseur et le reste, jusqu'à un reste nul."
-                  },
-                  {
-                    "content": "Lire le dernier reste non nul."
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer des PGCD et des PPCM",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu calcules des PGCD et des PPCM par l'algorithme d'Euclide, avec la méthode de la fiche : ordonner, diviser, recommencer, lire le PGCD, calculer le PPCM.",
+              "questions": [
+                {
+                  "content": "Quel est le PGCD de $252$ et $180$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Ordonner : $252 \\geq 180 > 0$. Étape 2 — Diviser : $252 = 180 \\times 1 + 72$. Étape 3 — Recommencer : $180 = 72 \\times 2 + 36$, puis $72 = 36 \\times 2 + 0$. Étape 4 — Lire : le dernier reste non nul est $36$, donc $\\text{PGCD}(252, 180) = 36$. Le premier reste $72$ et le dernier reste $0$ sont les erreurs du piège ; $18$ est un diviseur commun, mais pas le plus grand.",
+                  "answers": [
+                    {
+                      "content": "$72$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$36$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PGCD de $455$ et $130$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $455 \\geq 130 > 0$. Étape 2 — Diviser : $455 = 130 \\times 3 + 65$. Étape 3 — Recommencer : $130 = 65 \\times 2 + 0$, le reste est nul. Étape 4 — Lire : le dernier reste non nul est $65$, donc $\\text{PGCD}(455, 130) = 65$.",
+                  "answers": [
+                    {
+                      "content": "65",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PPCM de $48$ et $36$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $48 \\geq 36 > 0$. Étape 2 — Diviser : $48 = 36 \\times 1 + 12$. Étape 3 — Recommencer : $36 = 12 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(48, 36) = 12$. Étape 5 — Calculer : $\\text{PPCM}(48, 36) = \\dfrac{48 \\times 36}{12} = \\dfrac{1728}{12} = 144$.",
+                  "answers": [
+                    {
+                      "content": "144",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commerçante a $126$ oranges et $84$ mangues. Elle veut faire le plus grand nombre de paquets identiques, avec tous ses fruits. Combien de paquets fait-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Ordonner : $126 \\geq 84 > 0$. Étape 2 — Diviser : $126 = 84 \\times 1 + 42$. Étape 3 — Recommencer : $84 = 42 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(126, 84) = 42$, c'est le plus grand nombre de paquets ; chaque paquet contient $3$ oranges et $2$ mangues. Le nombre $252$ est le PPCM, qui ne répond pas à la question ; $21$ est un diviseur commun, mais pas le plus grand.",
+                  "answers": [
+                    {
+                      "content": "$21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$252$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$42$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le PPCM de $18$ et $30$ est $540$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Ordonner : $30 \\geq 18 > 0$. Étape 2 — Diviser : $30 = 18 \\times 1 + 12$. Étape 3 — Recommencer : $18 = 12 \\times 1 + 6$, puis $12 = 6 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(18, 30) = 6$. Étape 5 — Calculer : $\\text{PPCM}(18, 30) = \\dfrac{540}{6} = 90$. Le produit $540$ est un multiple commun, mais pas le plus petit : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion passe au marché tous les $15$ jours et un autre tous les $20$ jours. Ils sont là ensemble aujourd'hui. Dans combien de jours seront-ils de nouveau ensemble ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $20 \\geq 15 > 0$. Étape 2 — Diviser : $20 = 15 \\times 1 + 5$. Étape 3 — Recommencer : $15 = 5 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(20, 15) = 5$. Étape 5 — Calculer : $\\text{PPCM}(15, 20) = \\dfrac{300}{5} = 60$. Ils se retrouvent dans $60$ jours. Le produit $300$ est un jour de rencontre, mais pas le premier.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "jours"
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de l'algorithme d'Euclide pour calculer un PGCD.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Ordonner les deux nombres pour diviser le plus grand par le plus petit. Étape 2 — Diviser et noter le reste. Étape 3 — Recommencer avec le diviseur et le reste, car $\\text{PGCD}(a,b) = \\text{PGCD}(b,r)$. Étape 4 — Lire le dernier reste non nul : le PGCD n'est pas le reste nul qui arrête l'algorithme.",
+                  "answers": [
+                    {
+                      "content": "Ordonner les deux nombres."
+                    },
+                    {
+                      "content": "Diviser le plus grand par le plus petit et noter le reste."
+                    },
+                    {
+                      "content": "Recommencer avec le diviseur et le reste, jusqu'à un reste nul."
+                    },
+                    {
+                      "content": "Lire le dernier reste non nul."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "PGCD, PPCM et lots identiques",
+              "statement": "Dans cet exercice, tu calcules des PGCD et des PPCM avec l'algorithme d'Euclide et tu les utilises dans des situations de partage, avec la méthode de la fiche : ordonner, diviser, recommencer, lire le PGCD, calculer le PPCM.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Divise toujours le plus grand nombre par le plus petit, puis recommence avec le diviseur et le reste. Le PGCD est le dernier reste non nul ; le PPCM s'obtient avec $\\text{PGCD}(a,b) \\times \\text{PPCM}(a,b) = a \\times b$.",
+              "questions": [
+                {
+                  "content": "Quel est le PGCD de $540$ et $210$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $540 \\geq 210 > 0$. Étape 2 — Diviser : $540 = 210 \\times 2 + 120$. Étape 3 — Recommencer : $210 = 120 \\times 1 + 90$, puis $120 = 90 \\times 1 + 30$, puis $90 = 30 \\times 3 + 0$. Étape 4 — Lire : le dernier reste non nul est $30$, donc $\\text{PGCD}(540, 210) = 30$. Le reste $120$ est celui de la division de départ, et le dernier reste, $0$, n'est pas lu : c'est la confusion du piège.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PPCM de $24$ et $40$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Ordonner : $40 \\geq 24 > 0$. Étape 2 — Diviser : $40 = 24 \\times 1 + 16$. Étape 3 — Recommencer : $24 = 16 \\times 1 + 8$, puis $16 = 8 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(40, 24) = 8$. Étape 5 — Calculer : $\\text{PPCM}(24, 40) = \\dfrac{24 \\times 40}{8} = \\dfrac{960}{8} = 120$. Le nombre $960$ est le produit : un multiple commun, mais pas le plus petit. Le nombre $8$ est le PGCD, qu'on confond avec le PPCM. Le nombre $240$ est un multiple commun, mais le double du plus petit.",
+                  "answers": [
+                    {
+                      "content": "$960$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$240$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le PGCD de $221$ et $143$ est $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Ordonner : $221 \\geq 143 > 0$. Étape 2 — Diviser : $221 = 143 \\times 1 + 78$. Étape 3 — Recommencer : $143 = 78 \\times 1 + 65$, puis $78 = 65 \\times 1 + 13$, puis $65 = 13 \\times 5 + 0$. Étape 4 — Lire : le dernier reste non nul est $13$, donc $\\text{PGCD}(221, 143) = 13$ et non $1$. En effet $221 = 13 \\times 17$ et $143 = 13 \\times 11$ partagent le facteur $13$. Croire que deux nombres impairs sans diviseur évident sont premiers entre eux est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maraîcher a $152$ aubergines et $114$ piments. Il fait le plus grand nombre possible de paquets identiques avec tous ses légumes. Chaque paquet contient ___ aubergines.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Ordonner : $152 \\geq 114 > 0$. Étape 2 — Diviser : $152 = 114 \\times 1 + 38$. Étape 3 — Recommencer : $114 = 38 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(152, 114) = 38$, c'est le plus grand nombre de paquets. Étape 5 — Calculer : chaque paquet contient $152 \\div 38 = 4$ aubergines (et $114 \\div 38 = 3$ piments). Le nombre $38$ est le nombre de paquets, pas le contenu d'un paquet : il faut encore diviser.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple de nombres à son PGCD.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Ordonner : on place le plus grand nombre en premier dans chaque couple. Étape 2 — Diviser : $35 = 14 \\times 2 + 7$ ; $48 = 36 \\times 1 + 12$ ; $50 = 30 \\times 1 + 20$ ; $45 = 28 \\times 1 + 17$. Étape 3 — Recommencer : $14 = 7 \\times 2 + 0$ ; $36 = 12 \\times 3 + 0$ ; $30 = 20 \\times 1 + 10$ puis $20 = 10 \\times 2 + 0$ ; pour $45$ et $28$ on arrive au reste $1$. Étape 4 — Lire : les PGCD sont $7$, $12$, $10$ et $1$. Pour $50$ et $30$, le nombre $5$ est un diviseur commun mais pas le plus grand.",
+                  "answers": [
+                    {
+                      "content": "$35$ et $14$",
+                      "match": "$7$"
+                    },
+                    {
+                      "content": "$45$ et $28$",
+                      "match": "$1$"
+                    },
+                    {
+                      "content": "$48$ et $36$",
+                      "match": "$12$"
+                    },
+                    {
+                      "content": "$50$ et $30$",
+                      "match": "$10$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux lignes de bus partent ensemble de la gare de Bouaké à $6$ h. L'une repart toutes les $12$ minutes, l'autre toutes les $18$ minutes. Dans combien de minutes partent-elles de nouveau ensemble ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $18 \\geq 12 > 0$. Étape 2 — Diviser : $18 = 12 \\times 1 + 6$. Étape 3 — Recommencer : $12 = 6 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(18, 12) = 6$. Étape 5 — Calculer : $\\text{PPCM}(12, 18) = \\dfrac{12 \\times 18}{6} = \\dfrac{216}{6} = 36$. Les bus repartent ensemble dans $36$ minutes. La réponse $216$ est le produit, qui n'est pas le plus petit multiple commun, et $6$ est le PGCD, qui ne répond pas à la question.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un grossiste a $168$ sacs de riz et $120$ sacs de mil. Il veut les répartir en lots identiques, sans rien laisser.",
             "questions": [
@@ -751,152 +1091,274 @@
           },
           "pitfall": "Ne pas appliquer Gauss sans vérifier que les deux nombres sont premiers entre eux. Contre-exemple : $6$ divise $4 \\times 3 = 12$, mais $6$ ne divise ni $4$ ni $3$. Ici $\\text{PGCD}(6,4) = 2 \\neq 1$ : Gauss ne s'applique pas. Autre erreur : inverser les rôles dans les solutions. Le coefficient de $y$ (ici $b$) s'ajoute à $x$, et le coefficient de $x$ (ici $a$) se retranche de $y$.",
           "figure": "droite-3x-5y",
-          "exercise": {
-            "title": "Utiliser Bézout et Gauss",
-            "exercise_type": "fixation",
-            "figure": null,
-            "statement": "Dans cet exercice, tu reconnais des nombres premiers entre eux, tu appliques Gauss et tu résous des équations $ax + by = c$, avec la méthode de la fiche : vérifier, trouver une solution, soustraire, appliquer Gauss, en déduire $y$, conclure.",
-            "questions": [
-              {
-                "content": "Parmi ces couples, lequel est formé de deux nombres premiers entre eux ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier le PGCD de chaque couple par l'algorithme d'Euclide : $\\text{PGCD}(36,48) = 12$ ; $\\text{PGCD}(35,49) = 7$ ; $\\text{PGCD}(51,34) = 17$ car $51 = 17 \\times 3$ et $34 = 17 \\times 2$. Pour $(35\\,;\\,48)$ : $48 = 35 \\times 1 + 13$, $35 = 13 \\times 2 + 9$, $13 = 9 \\times 1 + 4$, $9 = 4 \\times 2 + 1$ : le dernier reste non nul est $1$. Étape 7 — Conclure : seul $(35\\,;\\,48)$ est premier entre eux.",
-                "answers": [
-                  {
-                    "content": "$(36\\,;\\,48)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(35\\,;\\,49)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(51\\,;\\,34)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(35\\,;\\,48)$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Si $9$ divise $4n$, où $n$ est un entier, alors $9$ divise $n$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(9,4) = 1$, donc $9$ et $4$ sont premiers entre eux. Étape 5 — Appliquer Gauss : $9$ divise $4 \\times n$ et est premier avec $4$, donc $9$ divise $n$. L'affirmation est vraie. Elle serait fausse si $9$ et $4$ avaient un diviseur commun.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un commerçant paie $19$ F avec $x$ pièces de $5$ F et $y$ pièces de $3$ F (des entiers relatifs : un négatif est une monnaie rendue). Quel couple $(x\\,;\\,y)$ est solution de $5x + 3y = 19$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(5,3) = 1$ divise $19$. Étape 3 — Trouver une solution particulière : on teste, $5 \\times (-4) + 3 \\times 13 = -20 + 39 = 19$, donc $(-4\\,;\\,13)$ convient. Les autres couples donnent $17$, $21$ et $1$, pas $19$. Étape 7 — Conclure : la solution est $(-4\\,;\\,13)$ ; c'est aussi $(2 + 3k\\,;\\,3 - 5k)$ avec $k = -2$.",
-                "answers": [
-                  {
-                    "content": "$(4\\,;\\,-1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(3\\,;\\,2)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(-4\\,;\\,13)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$(2\\,;\\,-3)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un marchand livre exactement $50$ kg de riz avec $x$ sacs de $4$ kg et $y$ sacs de $7$ kg ($x$ et $y$ entiers naturels). Combien de couples $(x\\,;\\,y)$ conviennent pour $4x + 7y = 50$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(4,7) = 1$ divise $50$. Étape 3 — Trouver une solution particulière : $4 \\times 2 + 7 \\times 6 = 8 + 42 = 50$, donc $(2\\,;\\,6)$. Étapes 4 à 6 — Soustraire et appliquer Gauss : $x = 2 + 7k$ et $y = 6 - 4k$. Étape 7 — Conclure : $x \\geq 0$ donne $k \\geq 0$ et $y \\geq 0$ donne $k \\leq 1$ ; $k = 0$ donne $(2\\,;\\,6)$ et $k = 1$ donne $(9\\,;\\,2)$, et $36 + 14 = 50$. Il y a $2$ couples.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ de $4x + 7y = 50$, sachant que $(2\\,;\\,6)$ est une solution ? ($k \\in \\mathbb{Z}$)",
-                "question_type": "single_choice",
-                "explanation": "Étape 3 — La solution particulière est $(2\\,;\\,6)$. Étape 4 — Soustraire : $4(x - 2) = 7(6 - y)$. Étape 5 — Appliquer Gauss : $7$ divise $4(x - 2)$ et est premier avec $4$, donc $x = 2 + 7k$. Étape 6 — En déduire $y$ : $4 \\times 7k = 7(6 - y)$ donne $y = 6 - 4k$. Étape 7 — Conclure : $(2 + 7k\\,;\\,6 - 4k)$. Les autres propositions, une à une. $(2 + 4k\\,;\\,6 - 7k)$ inverse les rôles : $4(2 + 4k) + 7(6 - 7k) = 50 - 33k$, qui ne vaut $50$ que pour $k = 0$. $(2 + 7k\\,;\\,6 + 4k)$ se trompe de signe : $4(2 + 7k) + 7(6 + 4k) = 50 + 56k$, qui ne vaut $50$ que pour $k = 0$. $(7k\\,;\\,-4k)$ oublie la solution particulière : $28k - 28k = 0$, jamais $50$.",
-                "answers": [
-                  {
-                    "content": "$(2 + 4k\\,;\\,6 - 7k)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(2 + 7k\\,;\\,6 + 4k)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(7k\\,;\\,-4k)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$(2 + 7k\\,;\\,6 - 4k)$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Si $6$ divise $4n$, où $n$ est un entier, alors $6$ divise $n$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(6,4) = 2 \\neq 1$, donc $6$ et $4$ ne sont pas premiers entre eux. Étape 5 — Gauss ne s'applique pas. Contre-exemple : pour $n = 3$, $4n = 12$ est divisible par $6$, mais $6$ ne divise pas $3$. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour quelles deux équations existe-t-il des solutions dans $\\mathbb{Z}^2$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Vérifier que $\\text{PGCD}(a,b)$ divise $c$. $\\text{PGCD}(6,9) = 3$ divise $15$ mais pas $10$. $\\text{PGCD}(10,15) = 5$ divise $35$. $\\text{PGCD}(4,6) = 2$ ne divise pas $7$. $\\text{PGCD}(14,21) = 7$ ne divise pas $20$. Étape 7 — Conclure : seules $6x + 9y = 15$ et $10x + 15y = 35$ ont des solutions ; pour les autres, un entier divisible par $d$ ne peut pas valoir $c$.",
-                "answers": [
-                  {
-                    "content": "$6x + 9y = 15$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6x + 9y = 10$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$10x + 15y = 35$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$4x + 6y = 7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$14x + 21y = 20$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Utiliser Bézout et Gauss",
+              "exercise_type": "fixation",
+              "figure": null,
+              "statement": "Dans cet exercice, tu reconnais des nombres premiers entre eux, tu appliques Gauss et tu résous des équations $ax + by = c$, avec la méthode de la fiche : vérifier, trouver une solution, soustraire, appliquer Gauss, en déduire $y$, conclure.",
+              "questions": [
+                {
+                  "content": "Parmi ces couples, lequel est formé de deux nombres premiers entre eux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier le PGCD de chaque couple par l'algorithme d'Euclide : $\\text{PGCD}(36,48) = 12$ ; $\\text{PGCD}(35,49) = 7$ ; $\\text{PGCD}(51,34) = 17$ car $51 = 17 \\times 3$ et $34 = 17 \\times 2$. Pour $(35\\,;\\,48)$ : $48 = 35 \\times 1 + 13$, $35 = 13 \\times 2 + 9$, $13 = 9 \\times 1 + 4$, $9 = 4 \\times 2 + 1$ : le dernier reste non nul est $1$. Étape 7 — Conclure : seul $(35\\,;\\,48)$ est premier entre eux.",
+                  "answers": [
+                    {
+                      "content": "$(36\\,;\\,48)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(35\\,;\\,49)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(51\\,;\\,34)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(35\\,;\\,48)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $9$ divise $4n$, où $n$ est un entier, alors $9$ divise $n$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(9,4) = 1$, donc $9$ et $4$ sont premiers entre eux. Étape 5 — Appliquer Gauss : $9$ divise $4 \\times n$ et est premier avec $4$, donc $9$ divise $n$. L'affirmation est vraie. Elle serait fausse si $9$ et $4$ avaient un diviseur commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant paie $19$ F avec $x$ pièces de $5$ F et $y$ pièces de $3$ F (des entiers relatifs : un négatif est une monnaie rendue). Quel couple $(x\\,;\\,y)$ est solution de $5x + 3y = 19$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(5,3) = 1$ divise $19$. Étape 3 — Trouver une solution particulière : on teste, $5 \\times (-4) + 3 \\times 13 = -20 + 39 = 19$, donc $(-4\\,;\\,13)$ convient. Les autres couples donnent $17$, $21$ et $1$, pas $19$. Étape 7 — Conclure : la solution est $(-4\\,;\\,13)$ ; c'est aussi $(2 + 3k\\,;\\,3 - 5k)$ avec $k = -2$.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;\\,-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;\\,2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;\\,13)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;\\,-3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marchand livre exactement $50$ kg de riz avec $x$ sacs de $4$ kg et $y$ sacs de $7$ kg ($x$ et $y$ entiers naturels). Combien de couples $(x\\,;\\,y)$ conviennent pour $4x + 7y = 50$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(4,7) = 1$ divise $50$. Étape 3 — Trouver une solution particulière : $4 \\times 2 + 7 \\times 6 = 8 + 42 = 50$, donc $(2\\,;\\,6)$. Étapes 4 à 6 — Soustraire et appliquer Gauss : $x = 2 + 7k$ et $y = 6 - 4k$. Étape 7 — Conclure : $x \\geq 0$ donne $k \\geq 0$ et $y \\geq 0$ donne $k \\leq 1$ ; $k = 0$ donne $(2\\,;\\,6)$ et $k = 1$ donne $(9\\,;\\,2)$, et $36 + 14 = 50$. Il y a $2$ couples.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ de $4x + 7y = 50$, sachant que $(2\\,;\\,6)$ est une solution ? ($k \\in \\mathbb{Z}$)",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — La solution particulière est $(2\\,;\\,6)$. Étape 4 — Soustraire : $4(x - 2) = 7(6 - y)$. Étape 5 — Appliquer Gauss : $7$ divise $4(x - 2)$ et est premier avec $4$, donc $x = 2 + 7k$. Étape 6 — En déduire $y$ : $4 \\times 7k = 7(6 - y)$ donne $y = 6 - 4k$. Étape 7 — Conclure : $(2 + 7k\\,;\\,6 - 4k)$. Les autres propositions, une à une. $(2 + 4k\\,;\\,6 - 7k)$ inverse les rôles : $4(2 + 4k) + 7(6 - 7k) = 50 - 33k$, qui ne vaut $50$ que pour $k = 0$. $(2 + 7k\\,;\\,6 + 4k)$ se trompe de signe : $4(2 + 7k) + 7(6 + 4k) = 50 + 56k$, qui ne vaut $50$ que pour $k = 0$. $(7k\\,;\\,-4k)$ oublie la solution particulière : $28k - 28k = 0$, jamais $50$.",
+                  "answers": [
+                    {
+                      "content": "$(2 + 4k\\,;\\,6 - 7k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 + 7k\\,;\\,6 + 4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(7k\\,;\\,-4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 + 7k\\,;\\,6 - 4k)$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $6$ divise $4n$, où $n$ est un entier, alors $6$ divise $n$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(6,4) = 2 \\neq 1$, donc $6$ et $4$ ne sont pas premiers entre eux. Étape 5 — Gauss ne s'applique pas. Contre-exemple : pour $n = 3$, $4n = 12$ est divisible par $6$, mais $6$ ne divise pas $3$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles deux équations existe-t-il des solutions dans $\\mathbb{Z}^2$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier que $\\text{PGCD}(a,b)$ divise $c$. $\\text{PGCD}(6,9) = 3$ divise $15$ mais pas $10$. $\\text{PGCD}(10,15) = 5$ divise $35$. $\\text{PGCD}(4,6) = 2$ ne divise pas $7$. $\\text{PGCD}(14,21) = 7$ ne divise pas $20$. Étape 7 — Conclure : seules $6x + 9y = 15$ et $10x + 15y = 35$ ont des solutions ; pour les autres, un entier divisible par $d$ ne peut pas valoir $c$.",
+                  "answers": [
+                    {
+                      "content": "$6x + 9y = 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x + 9y = 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10x + 15y = 35$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x + 6y = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14x + 21y = 20$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Équations de la forme ax + by = c",
+              "statement": "Dans cet exercice, tu reconnais les équations qui ont des solutions et tu décris l'ensemble des solutions dans les entiers relatifs, avec la méthode de la fiche : vérifier, trouver une solution, soustraire, appliquer Gauss, en déduire $y$, conclure.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Compare d'abord le PGCD des coefficients à $c$. Ensuite, le coefficient de $y$ s'ajoute à $x$ et le coefficient de $x$ se retranche de $y$ : vérifie ton ensemble de solutions avec deux valeurs de $k$.",
+              "questions": [
+                {
+                  "content": "Laquelle de ces équations n'a aucune solution dans $\\mathbb{Z}^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : une équation $ax + by = c$ a des solutions si et seulement si $\\text{PGCD}(a,b)$ divise $c$. $\\text{PGCD}(4,10) = 2$ ne divise pas $15$, qui est impair : pas de solution. Étape 2 — Diviser : pour les autres, $\\text{PGCD}(6,9) = 3$ divise $15$, $\\text{PGCD}(7,5) = 1$ divise $3$ et $\\text{PGCD}(12,18) = 6$ divise $30$ : on peut donc diviser et chercher une solution. Étape 7 — Conclure : seule $4x + 10y = 15$ n'a pas de solution. Croire qu'un PGCD différent de $1$ interdit les solutions est l'erreur qui fait choisir $6x + 9y = 15$ ou $12x + 18y = 30$.",
+                  "answers": [
+                    {
+                      "content": "$6x + 9y = 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x + 10y = 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7x + 5y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12x + 18y = 30$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(2\\,;\\,1)$ est solution de $5x + 7y = 17$. Toutes les solutions dans $\\mathbb{Z}^2$ sont $(2 + 7k\\,;\\,1 - 5k)$ avec $k \\in \\mathbb{Z}$. Quelle est la valeur de $x$ pour $k = -3$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $5 \\times 2 + 7 \\times 1 = 17$, et $\\text{PGCD}(5,7) = 1$. Étape 5 — Appliquer Gauss : le coefficient de $y$ s'ajoute à $x$, donc $x = 2 + 7k$. Étape 6 — En déduire $y$ : $y = 1 - 5k$. Étape 7 — Conclure : pour $k = -3$, $x = 2 + 7 \\times (-3) = -19$ et $y = 1 + 15 = 16$. Vérification : $5 \\times (-19) + 7 \\times 16 = -95 + 112 = 17$. Si on inverse les rôles et qu'on écrit $x = 2 - 5k$, on trouve $17$ au lieu de $-19$.",
+                  "answers": [
+                    {
+                      "content": "-19",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $n$ un entier relatif. Si $14$ divise $6n$, alors $14$ divise $n$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : le théorème de Gauss exige que $14$ et $6$ soient premiers entre eux. Or $\\text{PGCD}(14,6) = 2$, donc Gauss ne s'applique pas. Étape 5 — Contre-exemple : pour $n = 7$, $6 \\times 7 = 42 = 14 \\times 3$, donc $14$ divise $6n$ ; pourtant $14$ ne divise pas $7$. L'affirmation est fausse. On aurait pu seulement conclure que $7$ divise $n$, en divisant par $2$ d'abord. Appliquer Gauss sans vérifier le PGCD est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(1\\,;\\,y)$ est solution de $7x + 3y = 1$. La valeur de $y$ est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(7,3) = 1$ divise $1$. Étape 3 — Trouver une solution particulière : on remplace $x = 1$, ce qui donne $7 + 3y = 1$, donc $3y = -6$ et $y = -2$. Étape 7 — Conclure : $7 \\times 1 + 3 \\times (-2) = 7 - 6 = 1$. Cette égalité prouve aussi, par le théorème de Bézout, que $7$ et $3$ sont premiers entre eux. La valeur $y = 2$ vient d'un oubli de signe : $7 + 6 = 13 \\neq 1$.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux couples solutions de l'équation $3x + 7y = 5$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(3,7) = 1$ divise $5$, des solutions existent. Étape 3 — Trouver une solution particulière : on remplace dans chaque couple. $3 \\times 4 + 7 \\times (-1) = 5$ et $3 \\times (-3) + 7 \\times 2 = 5$ conviennent. Les autres donnent $3 \\times 5 - 7 = 8$, $3 \\times 2 = 6$ et $3 + 7 = 10$. Étape 7 — Conclure : les deux couples solutions sont $(4\\,;\\,-1)$ et $(-3\\,;\\,2)$ ; ils se déduisent l'un de l'autre avec $k = -1$ dans $(4 + 7k\\,;\\,-1 - 3k)$.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;\\,-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-3\\,;\\,2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(5\\,;\\,-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;\\,0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sachant que $(2\\,;\\,-1)$ est solution de $3x + 4y = 2$, quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ ? ($k \\in \\mathbb{Z}$)",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Trouver une solution particulière : $3 \\times 2 + 4 \\times (-1) = 2$. Étape 4 — Soustraire : $3(x - 2) = 4(-1 - y)$. Étape 5 — Appliquer Gauss : $4$ divise $3(x - 2)$ et est premier avec $3$, donc $x = 2 + 4k$. Étape 6 — En déduire $y$ : $y = -1 - 3k$. Étape 7 — Conclure : $(2 + 4k\\,;\\,-1 - 3k)$. Avec $(2 + 3k\\,;\\,-1 - 4k)$, les rôles sont inversés : $3(2 + 3k) + 4(-1 - 4k) = 2 - 7k$. Avec $(2 + 4k\\,;\\,-1 + 3k)$, le signe est faux : on trouve $2 + 24k$. Avec $(-1 + 4k\\,;\\,2 - 3k)$, le point de départ est faux : on trouve $5$.",
+                  "answers": [
+                    {
+                      "content": "$(2 + 4k\\,;\\,-1 - 3k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2 + 3k\\,;\\,-1 - 4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 + 4k\\,;\\,-1 + 3k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-1 + 4k\\,;\\,2 - 3k)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un forain vend des bonbons par sachets de $3$ et de $8$. On étudie l'équation $3x + 8y = 25$ dans $\\mathbb{Z}^2$. Le couple $(3\\,;\\,2)$ est une solution particulière.",
             "questions": [
@@ -1505,6 +1967,1506 @@
               ],
               "explanation": "Corrigé modèle : on écrit $n^2 + n + 2 = n(n+1) + 2$. Si $n$ est pair, alors $n(n+1)$ est pair. Si $n$ est impair, alors $n + 1$ est pair et $n(n+1)$ est pair. Dans les deux cas $n(n+1)$ est pair, et un nombre pair plus $2$ est pair. Donc $n^2 + n + 2$ est pair pour tout entier $n$. Barème : factorisation (0,5 point), distinction des cas (1 point), conclusion (0,5 point).",
               "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Division euclidienne dans les entiers relatifs, diviseurs et multiples, congruences et critères de divisibilité, PGCD et PPCM par l'algorithme d'Euclide, nombres premiers entre eux, théorèmes de Bézout et de Gauss, équations de la forme ax + by = c.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Une coopérative de Daloa conditionne ses sacs par lots (situation d'exemple). On rappelle que la division euclidienne de $a$ par $b$ s'écrit $a = bq + r$ avec $0 \\leq r < b$.",
+              "hint": "Pour un dividende négatif, le reste reste positif : cherche le multiple de $b$ juste en dessous du dividende. Un multiple de $7$ s'écrit $7k$ avec $k$ entier.",
+              "questions": [
+                {
+                  "content": "Quel est le quotient de la division euclidienne de $1\\,234$ par $17$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 1\\,234$ et $b = 17$. Étape 2 — Trouver le multiple : $17 \\times 72 = 1\\,224 \\leq 1\\,234 < 1\\,241 = 17 \\times 73$, donc $q = 72$. Étape 3 — Calculer le reste : $r = 1\\,234 - 1\\,224 = 10$, et $0 \\leq 10 < 17$. Étape 4 — Conclure : $1\\,234 = 17 \\times 72 + 10$. Le quotient est $72$ ; la valeur $10$ est le reste, pas le quotient.",
+                  "answers": [
+                    {
+                      "content": "72",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $-83$ par $11$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = -83$ et $b = 11$, le dividende est négatif. Étape 2 — Trouver le multiple : $11 \\times (-8) = -88 \\leq -83 < -77 = 11 \\times (-7)$, donc $q = -8$. Étape 3 — Calculer le reste : $r = -83 - (-88) = 5$, et $0 \\leq 5 < 11$. Étape 4 — Conclure : $-83 = 11 \\times (-8) + 5$. Le reste $-6$, obtenu avec $q = -7$, est faux : un reste d'une division euclidienne n'est jamais négatif.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $0$ est un multiple de tout entier non nul.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la définition : $b$ est un multiple de $a$ s'il existe un entier $k$ tel que $b = ak$. Étape 2 — Appliquer : pour tout entier $a \\neq 0$, on a $0 = a \\times 0$, avec $k = 0$ entier. Étape 3 — Conclure : $0$ est un multiple de $a$, l'affirmation est vraie. Croire que $0$ n'est multiple de rien est l'erreur tentante ; en revanche, $0$ ne divise aucun entier non nul : la définition de « $a$ divise $b$ » exige $a \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de multiples de $7$ compris entre $100$ et $200$, bornes comprises ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : on cherche les entiers $k$ tels que $100 \\leq 7k \\leq 200$. Étape 2 — Encadrer : $7 \\times 14 = 98 < 100$, donc $k$ commence à $15$ avec $7 \\times 15 = 105$ ; et $7 \\times 28 = 196 \\leq 200 < 203 = 7 \\times 29$, donc $k$ s'arrête à $28$. Étape 3 — Compter : $k$ prend les valeurs de $15$ à $28$, soit $28 - 15 + 1 = 14$ valeurs. Étape 4 — Conclure : il y a $14$ multiples de $7$, de $105$ à $196$. Le calcul $28 - 15 = 13$ oublie un des deux bouts : il faut ajouter $1$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres de la liste qui divisent $77$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : on cherche les diviseurs de $77$. Étape 2 — Décomposer : $77 = 7 \\times 11$, donc $7$ et $11$ divisent $77$. Étape 3 — Tester les autres : $77 = 14 \\times 5 + 7$, le reste n'est pas nul ; $77 = 17 \\times 4 + 9$, le reste n'est pas nul non plus. Étape 4 — Conclure : $7$ et $11$ sont les deux diviseurs. Le nombre $14$ est un multiple de $7$, mais ce n'est pas un diviseur de $77$ : $77$ n'est pas un multiple de $14$.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$17$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "On travaille avec des congruences. On rappelle que $a \\equiv b\\ [n]$ signifie que $a - b$ est un multiple de $n$, c'est-à-dire que $a$ et $b$ ont le même reste dans la division par $n$.",
+              "hint": "Pour une puissance, cherche la période : la première puissance qui donne le reste $1$. Pour les jours, on travaille modulo $7$. Pour la somme des chiffres, on travaille modulo $9$.",
+              "questions": [
+                {
+                  "content": "Laquelle de ces congruences modulo $6$ est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : on remplace chaque nombre par son reste modulo $6$. Étape 2 — Comparer : $25 = 6 \\times 4 + 1$, donc $25 \\equiv 1$ ; la différence $25 - 5 = 20$ n'est pas un multiple de $6$. Pour $-5$, on a $-5 - 5 = -10$, qui n'est pas un multiple de $6$ : en fait $-5 = 6 \\times (-1) + 1 \\equiv 1$. Pour $14$, on a $14 - 4 = 10$, non multiple de $6$ : $14 \\equiv 2$. Étape 3 — Conclure : seule $25 \\equiv 1\\ [6]$ est vraie.",
+                  "answers": [
+                    {
+                      "content": "$25 \\equiv 1\\ [6]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25 \\equiv 5\\ [6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5 \\equiv 5\\ [6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14 \\equiv 4\\ [6]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $2^{2025}$ par $7$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : la base $2$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 = 8 \\equiv 1\\ [7]$ : la période est $3$. Étape 3 — Écrire l'exposant : $2025 = 3 \\times 675 + 0$. Étape 4 — Appliquer : $2^{2025} = (2^3)^{675} \\equiv 1^{675} \\equiv 1\\ [7]$. Étape 5 — Conclure : le reste est $1$. Réduire l'exposant modulo $7$ ($2025 \\equiv 2$) donnerait le faux reste $4$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $123\\,457$ par $9$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : un entier est congru à la somme de ses chiffres modulo $9$. Étape 2 — Calculer la somme : $1 + 2 + 3 + 4 + 5 + 7 = 22$. Étape 3 — Réduire encore : $22 = 9 \\times 2 + 4$, donc $22 \\equiv 4\\ [9]$. Étape 4 — Conclure : le reste de $123\\,457$ par $9$ est $4$. Le nombre $22$ n'est pas un reste, car il dépasse $9$ : on doit encore le réduire.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $2\\,736$ est divisible par $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Choisir le critère : un entier est divisible par $4$ si ses deux derniers chiffres forment un multiple de $4$. Étape 2 — Lire : les deux derniers chiffres de $2\\,736$ forment $36$. Étape 3 — Calculer : $36 = 4 \\times 9$, donc $4$ divise $36$. Étape 4 — Conclure : $2\\,736 = 4 \\times 684$, l'affirmation est vraie. Regarder le seul dernier chiffre $6$, qui est pair, ne suffit pas : $2\\,746$ se termine aussi par un chiffre pair, mais $46$ n'est pas un multiple de $4$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aujourd'hui est un mercredi. Quel jour de la semaine sera-t-on dans $1\\,000$ jours ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : on numérote lundi $0$, mardi $1$, mercredi $2$, … dimanche $6$ et on travaille modulo $7$. Étape 2 — Calculer : $1\\,000 = 7 \\times 142 + 6$, donc $1\\,000 \\equiv 6\\ [7]$ : on avance de $6$ jours. Étape 3 — Appliquer : $2 + 6 = 8 \\equiv 1\\ [7]$. Étape 4 — Conclure : le numéro $1$ est un mardi. La réponse mercredi supposerait que $1\\,000$ est un multiple de $7$ ; jeudi viendrait d'une avance de $1$ jour, et dimanche d'une avance de $4$ jours.",
+                  "answers": [
+                    {
+                      "content": "mardi",
+                      "correct": true
+                    },
+                    {
+                      "content": "mercredi",
+                      "correct": false
+                    },
+                    {
+                      "content": "jeudi",
+                      "correct": false
+                    },
+                    {
+                      "content": "dimanche",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un grossiste de Man dispose de $264$ sacs de riz et de $198$ sacs de mil (situation d'exemple). Il veut les répartir en lots identiques, sans rien laisser. On utilise l'algorithme d'Euclide, le PGCD et le PPCM.",
+              "hint": "Calcule d'abord le PGCD de $264$ et $198$ par l'algorithme d'Euclide. Le plus grand nombre de lots identiques est ce PGCD. Pour le PPCM, utilise $\\text{PGCD}(a,b) \\times \\text{PPCM}(a,b) = a \\times b$.",
+              "questions": [
+                {
+                  "content": "Quel est le PGCD de $264$ et $198$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $264 \\geq 198 > 0$. Étape 2 — Diviser : $264 = 198 \\times 1 + 66$. Étape 3 — Recommencer : $198 = 66 \\times 3 + 0$, le reste est nul. Étape 4 — Lire : le dernier reste non nul est $66$, donc $\\text{PGCD}(264, 198) = 66$. Le nombre $0$ est le dernier reste, pas le dernier reste non nul ; et $198$ est un des deux nombres de départ.",
+                  "answers": [
+                    {
+                      "content": "66",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PPCM de $264$ et $198$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $264 \\geq 198 > 0$. Étape 2 — Diviser : $264 = 198 \\times 1 + 66$. Étape 3 — Recommencer : $198 = 66 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(264, 198) = 66$. Étape 5 — Calculer : $\\text{PPCM}(264, 198) = \\dfrac{264 \\times 198}{66} = \\dfrac{52\\,272}{66} = 792$. Le produit $52\\,272$ est un multiple commun mais pas le plus petit, et $66$ est le PGCD, pas le PPCM.",
+                  "answers": [
+                    {
+                      "content": "792",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grossiste a $264$ sacs de riz et $198$ sacs de mil. Il forme le plus grand nombre possible de lots identiques avec tous ses sacs. Combien de sacs de riz y a-t-il dans chaque lot ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $264 \\geq 198 > 0$. Étape 2 — Diviser : $264 = 198 \\times 1 + 66$. Étape 3 — Recommencer : $198 = 66 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(264, 198) = 66$, c'est le plus grand nombre de lots. Étape 5 — Calculer : chaque lot contient $264 \\div 66 = 4$ sacs de riz (et $198 \\div 66 = 3$ sacs de mil). Le nombre $66$ est le nombre de lots, pas le contenu d'un lot.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux entiers naturels $a$ et $b$ vérifient $\\text{PGCD}(a,b) = 6$ et $\\text{PPCM}(a,b) = 180$. Alors $a \\times b = 1\\,080$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la relation : $\\text{PGCD}(a,b) \\times \\text{PPCM}(a,b) = a \\times b$ pour deux entiers naturels non nuls. Étape 2 — Remplacer : $a \\times b = 6 \\times 180$. Étape 3 — Calculer : $6 \\times 180 = 1\\,080$. Étape 4 — Conclure : l'affirmation est vraie. Additionner au lieu de multiplier ($6 + 180 = 186$) ou diviser ($180 \\div 6 = 30$) sont les erreurs tentantes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel couple est formé de deux entiers premiers entre eux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Ordonner et diviser : pour $(120\\,;\\,91)$, $120 = 91 \\times 1 + 29$. Étape 2 — Recommencer : $91 = 29 \\times 3 + 4$, puis $29 = 4 \\times 7 + 1$. Étape 3 — Lire : le dernier reste non nul est $1$, donc $\\text{PGCD}(91,120) = 1$. Les autres couples ont un PGCD supérieur à $1$ : $\\text{PGCD}(84,126) = 42$, $\\text{PGCD}(65,104) = 13$ et $\\text{PGCD}(57,95) = 19$, car $57 = 3 \\times 19$ et $95 = 5 \\times 19$.",
+                  "answers": [
+                    {
+                      "content": "$(91\\,;\\,120)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(84\\,;\\,126)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(65\\,;\\,104)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(57\\,;\\,95)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "On étudie des équations de la forme $ax + by = c$ dans $\\mathbb{Z}^2$, avec les théorèmes de Bézout et de Gauss. Dans chaque question, $k$ désigne un entier relatif.",
+              "hint": "Une équation $ax + by = c$ a des solutions si et seulement si le PGCD de $a$ et $b$ divise $c$. Le coefficient de $y$ s'ajoute à $x$, le coefficient de $x$ se retranche de $y$.",
+              "questions": [
+                {
+                  "content": "L'équation $6x + 10y = 7$ n'a aucune solution dans $\\mathbb{Z}^2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on calcule $\\text{PGCD}(6,10)$ : $10 = 6 \\times 1 + 4$, $6 = 4 \\times 1 + 2$, $4 = 2 \\times 2 + 0$, donc le PGCD est $2$. Étape 2 — Comparer : $2$ ne divise pas $7$, qui est impair. Étape 3 — Conclure : pour tous entiers $x$ et $y$, le nombre $6x + 10y$ est pair, donc il ne peut pas valoir $7$ ; l'affirmation est vraie. Se contenter de voir que $6$ et $10$ ne sont pas premiers entre eux ne prouve rien : c'est la divisibilité de $7$ par le PGCD qui décide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel couple est solution de l'équation $4x + 5y = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(4,5) = 1$ divise $3$, des solutions existent. Étape 2 — Remplacer dans chaque couple : $4 \\times 2 + 5 \\times (-1) = 8 - 5 = 3$, ce couple convient. Les autres donnent $4 \\times 3 - 5 = 7$, $4 \\times (-2) + 5 \\times 3 = 7$ et $4 + 5 = 9$. Étape 3 — Conclure : seul $(2\\,;\\,-1)$ est solution. Les couples $(3\\,;\\,-1)$ et $(-2\\,;\\,3)$ donnent $7$ : une erreur de signe sur un des deux termes.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;\\,-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sachant que $(2\\,;\\,-1)$ est solution de $4x + 5y = 3$, quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $4 \\times 2 + 5 \\times (-1) = 3$. Étape 2 — Soustraire : $4(x - 2) = 5(-1 - y)$. Étape 3 — Appliquer Gauss : $5$ divise $4(x - 2)$ et est premier avec $4$, donc $x = 2 + 5k$. Étape 4 — En déduire $y$ : $y = -1 - 4k$. Étape 5 — Conclure : $(2 + 5k\\,;\\,-1 - 4k)$. Dans $(2 + 4k\\,;\\,-1 - 5k)$, les rôles sont inversés : $4(2 + 4k) + 5(-1 - 5k) = 3 - 9k$. Dans $(2 + 5k\\,;\\,-1 + 4k)$, le signe est faux : on trouve $3 + 40k$. Dans $(-1 + 5k\\,;\\,2 - 4k)$, le départ est faux : on trouve $6$.",
+                  "answers": [
+                    {
+                      "content": "$(2 + 5k\\,;\\,-1 - 4k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2 + 4k\\,;\\,-1 - 5k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 + 5k\\,;\\,-1 + 4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-1 + 5k\\,;\\,2 - 4k)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les solutions de $4x + 5y = 3$ dans $\\mathbb{Z}^2$ sont les couples $(2 + 5k\\,;\\,-1 - 4k)$ avec $k \\in \\mathbb{Z}$. Combien de ces couples vérifient $0 \\leq x \\leq 20$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : on veut $0 \\leq 2 + 5k \\leq 20$. Étape 2 — Résoudre : $-2 \\leq 5k \\leq 18$, donc $-0{,}4 \\leq k \\leq 3{,}6$. Étape 3 — Compter : les entiers $k$ possibles sont $0$, $1$, $2$ et $3$, qui donnent $x = 2$, $7$, $12$ et $17$. Étape 4 — Conclure : il y a $4$ couples. La valeur $k = -1$ donnerait $x = -3$, hors de l'intervalle, et $k = 4$ donnerait $x = 22$, trop grand.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le PGCD de $35$ et $48$ est ___ : ces deux nombres sont premiers entre eux.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Ordonner : $48 \\geq 35 > 0$. Étape 2 — Diviser : $48 = 35 \\times 1 + 13$. Étape 3 — Recommencer : $35 = 13 \\times 2 + 9$, puis $13 = 9 \\times 1 + 4$, puis $9 = 4 \\times 2 + 1$, puis $4 = 1 \\times 4 + 0$. Étape 4 — Lire : le dernier reste non nul est $1$. Deux nombres premiers entre eux ont un PGCD égal à $1$ ; le résultat $0$ serait le dernier reste, pas le dernier reste non nul.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "Situations de la vie courante en Côte d'Ivoire : partage en lots identiques et PGCD (cacao de Soubré), calendrier des marchés de Bouaké et congruences modulo 7, équation ax + by = c avec des entiers naturels (arachides de Korhogo), clé de contrôle des numéros de factures d'Abidjan et critères de divisibilité.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Une coopérative de Soubré doit livrer $450$ sacs de cacao de la région A et $330$ sacs de cacao de la région B (situation d'exemple). Elle remplit des camions identiques : chaque camion reçoit le même nombre de sacs de chaque région, et aucun sac ne reste.",
+              "hint": "Le nombre de camions identiques doit diviser $450$ et $330$ : c'est un diviseur commun. Le plus grand est le PGCD. Pour une rencontre périodique, on cherche le PPCM.",
+              "questions": [
+                {
+                  "content": "Une coopérative a $450$ sacs de cacao de la région A et $330$ sacs de la région B. Elle remplit le plus grand nombre possible de camions identiques, sans rien laisser. Combien de camions remplit-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $450 \\geq 330 > 0$. Étape 2 — Diviser : $450 = 330 \\times 1 + 120$. Étape 3 — Recommencer : $330 = 120 \\times 2 + 90$, puis $120 = 90 \\times 1 + 30$, puis $90 = 30 \\times 3 + 0$. Étape 4 — Lire : le dernier reste non nul est $30$, donc le PGCD est $30$ : c'est le plus grand nombre de camions identiques. Le nombre $120$ est le premier reste, et $0$ le dernier reste : aucun des deux n'est le PGCD.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une coopérative a $450$ sacs de la région A et $330$ sacs de la région B. Elle remplit $30$ camions identiques avec tous ses sacs. Combien de sacs de la région A y a-t-il dans chaque camion ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $30$ camions identiques se partagent les $450$ sacs de la région A. Étape 2 — Diviser : $450 \\div 30 = 15$, car $30 \\times 15 = 450$. Étape 3 — Contrôler : pour la région B, $330 \\div 30 = 11$, et chaque camion contient donc $15 + 11 = 26$ sacs. Étape 4 — Conclure : chaque camion contient $15$ sacs de la région A. La valeur $11$ est celle de la région B ; $30$ est le nombre de camions.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une coopérative a $450$ sacs de la région A et $330$ sacs de la région B. Elle peut remplir exactement $20$ camions identiques avec tous ses sacs.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : pour $20$ camions identiques, il faut que $20$ divise $450$ et $330$. Étape 2 — Diviser : $450 = 20 \\times 22 + 10$, le reste n'est pas nul. Étape 3 — Contrôler : les diviseurs communs de $450$ et $330$ sont exactement les diviseurs de leur PGCD $30$, et $20$ ne divise pas $30$. Étape 4 — Conclure : l'affirmation est fausse. Penser que $20$ convient parce que $20 < 30$ est l'erreur tentante : un nombre plus petit que le PGCD n'en est pas forcément un diviseur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une coopérative a $450$ sacs de la région A et $330$ sacs de la région B. Quels sont les deux nombres de camions identiques possibles, avec tous les sacs et sans reste ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : le nombre de camions doit diviser $450$ et $330$, donc diviser leur PGCD. Étape 2 — Calculer : $\\text{PGCD}(450,330) = 30$ ; ses diviseurs sont $1, 2, 3, 5, 6, 10, 15$ et $30$. Étape 3 — Comparer : $6$ et $15$ divisent $30$. Étape 4 — Conclure : $12$, $20$ et $25$ ne divisent pas $30$. Le nombre $12$ ne divise pas $450$, car $450 = 12 \\times 37 + 6$. Le nombre $25$ divise $450$ mais pas $330$, car $330 = 25 \\times 13 + 5$.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux coopératives envoient chacune un camion à Soubré : la première tous les $9$ jours, la seconde tous les $12$ jours. Les deux camions arrivent ensemble aujourd'hui. Dans combien de jours arrivent-ils de nouveau ensemble ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $12 \\geq 9 > 0$. Étape 2 — Diviser : $12 = 9 \\times 1 + 3$. Étape 3 — Recommencer : $9 = 3 \\times 3 + 0$. Étape 4 — Lire : $\\text{PGCD}(12, 9) = 3$. Étape 5 — Calculer : $\\text{PPCM}(9, 12) = \\dfrac{9 \\times 12}{3} = 36$. Les camions se retrouvent dans $36$ jours. Le produit $108$ est un multiple commun mais pas le plus petit ; $3$ est le PGCD.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Dans le centre de la Côte d'Ivoire, un marché a lieu tous les $5$ jours à Bouaké et un autre tous les $4$ jours à Katiola (situation d'exemple). On numérote les jours de la semaine : lundi $0$, mardi $1$, mercredi $2$, jeudi $3$, vendredi $4$, samedi $5$, dimanche $6$. Les jours se répètent tous les $7$ jours : on travaille modulo $7$.",
+              "hint": "Pour un jour de la semaine, on calcule le reste de la division du nombre de jours par $7$ et on l'ajoute au numéro du jour de départ. Pour des événements qui reviennent ensemble, on utilise le PPCM.",
+              "questions": [
+                {
+                  "content": "Le premier marché de Bouaké a lieu un lundi (numéro $0$). Quel est le numéro du jour de la semaine du marché qui a lieu $95$ jours plus tard ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : les jours se répètent tous les $7$ jours, on travaille modulo $7$. Étape 2 — Calculer : $95 = 7 \\times 13 + 4$, donc $95 \\equiv 4\\ [7]$. Étape 3 — Appliquer : $0 + 4 = 4$. Étape 4 — Conclure : le numéro est $4$, c'est un vendredi. Le quotient $13$ est le nombre de semaines complètes, qui ne change pas le jour ; seul le reste compte.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marché a lieu tous les $4$ jours et un autre tous les $5$ jours. Ils ont lieu le même jour aujourd'hui. Dans combien de jours ont-ils de nouveau lieu le même jour ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $5 \\geq 4 > 0$. Étape 2 — Diviser : $5 = 4 \\times 1 + 1$. Étape 3 — Recommencer : $4 = 1 \\times 4 + 0$. Étape 4 — Lire : $\\text{PGCD}(5, 4) = 1$, les deux nombres sont premiers entre eux. Étape 5 — Calculer : $\\text{PPCM}(4, 5) = \\dfrac{4 \\times 5}{1} = 20$. Les deux marchés tombent le même jour tous les $20$ jours. La somme $9$ n'a aucun rapport avec une rencontre.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux marchés ont lieu le même jour un lundi, puis de nouveau ensemble tous les $20$ jours. Quel jour de la semaine ont-ils lieu ensemble $80$ jours après ce lundi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : on travaille modulo $7$, avec lundi $= 0$. Étape 2 — Calculer : $80 = 7 \\times 11 + 3$, donc $80 \\equiv 3\\ [7]$. Étape 3 — Appliquer : $0 + 3 = 3$. Étape 4 — Conclure : le numéro $3$ est un jeudi. Le lundi reviendrait seulement si $80$ était un multiple de $7$ ; mercredi vient de $80 \\equiv 2$, et vendredi de $80 \\equiv 4$, deux erreurs de division.",
+                  "answers": [
+                    {
+                      "content": "jeudi",
+                      "correct": true
+                    },
+                    {
+                      "content": "mercredi",
+                      "correct": false
+                    },
+                    {
+                      "content": "vendredi",
+                      "correct": false
+                    },
+                    {
+                      "content": "lundi",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un événement a lieu un certain jour. Il a de nouveau lieu le même jour de la semaine $98$ jours plus tard.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : les jours se répètent tous les $7$ jours, on travaille modulo $7$. Étape 2 — Calculer : $98 = 7 \\times 14 + 0$, donc $98 \\equiv 0\\ [7]$. Étape 3 — Appliquer : avec un reste $0$, on avance de $0$ jour dans la semaine. Étape 4 — Conclure : l'événement retombe le même jour de la semaine, l'affirmation est vraie. Le nombre $14$ est le nombre de semaines complètes, pas un décalage.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aujourd'hui est un samedi (numéro $5$). Un compte à rebours dure $2^{30}$ jours. Quel jour de la semaine sera-t-on à la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : on travaille modulo $7$. Étape 2 — Chercher la période : $2^1 \\equiv 2$, $2^2 \\equiv 4$, $2^3 = 8 \\equiv 1\\ [7]$ : la période est $3$. Étape 3 — Écrire l'exposant : $30 = 3 \\times 10 + 0$. Étape 4 — Appliquer : $2^{30} = (2^3)^{10} \\equiv 1\\ [7]$, on avance d'un jour. Étape 5 — Conclure : $5 + 1 = 6$, c'est un dimanche. Samedi supposerait un décalage $0$ ; mercredi vient d'un exposant réduit modulo $7$ ($30 \\equiv 2$, donc $2^2 = 4$ et $5 + 4 = 9 \\equiv 2$).",
+                  "answers": [
+                    {
+                      "content": "dimanche",
+                      "correct": true
+                    },
+                    {
+                      "content": "samedi",
+                      "correct": false
+                    },
+                    {
+                      "content": "mercredi",
+                      "correct": false
+                    },
+                    {
+                      "content": "lundi",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un marchand de Korhogo remplit exactement $44$ kg d'arachides avec $x$ sacs de $3$ kg et $y$ sacs de $5$ kg (situation d'exemple). On étudie l'équation $3x + 5y = 44$. Dans les premières questions, $x$ et $y$ sont des entiers relatifs ; à la fin, ce sont des entiers naturels.",
+              "hint": "Une équation $ax + by = c$ a des solutions dans $\\mathbb{Z}^2$ quand le PGCD de $a$ et $b$ divise $c$. Pour des entiers naturels, on impose ensuite $x \\geq 0$ et $y \\geq 0$ dans l'expression des solutions.",
+              "questions": [
+                {
+                  "content": "L'équation $3x + 5y = 44$ admet au moins une solution dans $\\mathbb{Z}^2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on calcule $\\text{PGCD}(3,5)$ : $5 = 3 \\times 1 + 2$, $3 = 2 \\times 1 + 1$, $2 = 1 \\times 2 + 0$, donc le PGCD est $1$. Étape 2 — Comparer : $1$ divise $44$. Étape 3 — Conclure : d'après la condition de la fiche, l'équation a des solutions, par exemple $(13\\,;\\,1)$ car $39 + 5 = 44$. Croire que $44$ doit être un multiple de $3$ ou de $5$ est l'erreur tentante : seul le PGCD des coefficients compte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel couple est solution de l'équation $3x + 5y = 44$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(3,5) = 1$ divise $44$. Étape 2 — Remplacer dans chaque couple : $3 \\times 13 + 5 \\times 1 = 39 + 5 = 44$, ce couple convient. Les autres donnent $3 \\times 12 + 5 \\times 2 = 46$, $3 \\times 10 + 5 \\times 3 = 45$ et $3 \\times 14 + 5 \\times 1 = 47$. Étape 3 — Conclure : seul $(13\\,;\\,1)$ est solution. Les trois autres sont proches de $44$ : ils viennent d'un calcul de tête approximatif.",
+                  "answers": [
+                    {
+                      "content": "$(13\\,;\\,1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(12\\,;\\,2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(10\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(14\\,;\\,1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sachant que $(13\\,;\\,1)$ est solution de $3x + 5y = 44$, quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ ? ($k \\in \\mathbb{Z}$)",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $3 \\times 13 + 5 \\times 1 = 44$. Étape 2 — Soustraire : $3(x - 13) = 5(1 - y)$. Étape 3 — Appliquer Gauss : $5$ divise $3(x - 13)$ et est premier avec $3$, donc $x = 13 + 5k$. Étape 4 — En déduire $y$ : $y = 1 - 3k$. Étape 5 — Conclure : $(13 + 5k\\,;\\,1 - 3k)$. Dans $(13 + 3k\\,;\\,1 - 5k)$, les rôles sont inversés : $3(13 + 3k) + 5(1 - 5k) = 44 - 16k$. Dans $(13 + 5k\\,;\\,1 + 3k)$, le signe est faux : on trouve $44 + 30k$. Dans $(1 + 5k\\,;\\,13 - 3k)$, le départ est faux : on trouve $68$.",
+                  "answers": [
+                    {
+                      "content": "$(13 + 5k\\,;\\,1 - 3k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(13 + 3k\\,;\\,1 - 5k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(13 + 5k\\,;\\,1 + 3k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1 + 5k\\,;\\,13 - 3k)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marchand remplit $44$ kg avec $x$ sacs de $3$ kg et $y$ sacs de $5$ kg, où $x$ et $y$ sont des entiers naturels. Les solutions entières de $3x + 5y = 44$ sont $(13 + 5k\\,;\\,1 - 3k)$ avec $k \\in \\mathbb{Z}$. Combien de couples d'entiers naturels $(x\\,;\\,y)$ conviennent ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : on veut $13 + 5k \\geq 0$ et $1 - 3k \\geq 0$. Étape 2 — Résoudre : $k \\geq -2{,}6$ et $k \\leq 0{,}33$, donc $k \\in \\{-2, -1, 0\\}$. Étape 3 — Calculer : $k = -2$ donne $(3\\,;\\,7)$, $k = -1$ donne $(8\\,;\\,4)$, $k = 0$ donne $(13\\,;\\,1)$. Étape 4 — Conclure : il y a $3$ couples ; le contrôle $3 \\times 3 + 5 \\times 7 = 44$ le confirme. La valeur $k = -3$ donnerait $x = -2$, négatif, et $k = 1$ donnerait $y = -2$, négatif.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marchand remplit $44$ kg avec $x$ sacs de $3$ kg et $y$ sacs de $5$ kg, où $x$ et $y$ sont des entiers naturels. Il veut utiliser le plus de sacs de $5$ kg possible. Combien de sacs de $3$ kg utilise-t-il alors ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les solutions entières sont $(13 + 5k\\,;\\,1 - 3k)$ ; pour des entiers naturels, $k \\in \\{-2, -1, 0\\}$. Étape 2 — Comparer : $y = 1 - 3k$ vaut $7$, $4$ ou $1$ ; le plus grand est $y = 7$, pour $k = -2$. Étape 3 — Calculer : $x = 13 + 5 \\times (-2) = 3$. Étape 4 — Conclure : $3 \\times 3 + 5 \\times 7 = 9 + 35 = 44$, il utilise $3$ sacs de $3$ kg. La valeur $7$ est le nombre de sacs de $5$ kg, pas de $3$ kg.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Une entreprise d'Abidjan numérote ses factures par des entiers naturels (situation d'exemple). Pour contrôler une saisie, on calcule des restes : la clé de contrôle modulo $9$ d'un numéro est le reste de sa division par $9$, et on utilise aussi la divisibilité par $11$. On rappelle que $10 \\equiv 1\\ [9]$.",
+              "hint": "Modulo $9$, un entier est congru à la somme de ses chiffres. Pour la divisibilité par $11$, on fait la somme alternée des chiffres en partant de la droite et on regarde si elle est un multiple de $11$.",
+              "questions": [
+                {
+                  "content": "La clé de contrôle d'un numéro est le reste de sa division par $9$. Quelle est la clé du numéro de facture $58\\,314$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : un entier est congru à la somme de ses chiffres modulo $9$. Étape 2 — Calculer la somme : $5 + 8 + 3 + 1 + 4 = 21$. Étape 3 — Réduire encore : $21 = 9 \\times 2 + 3$, donc $21 \\equiv 3\\ [9]$. Étape 4 — Conclure : la clé est $3$. La somme $21$ n'est pas une clé valable, car elle dépasse $8$ : il faut la réduire.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un numéro de facture s'écrit $47c2$, où $c$ est un chiffre. Pour quelle valeur de $c$ ce numéro est-il divisible par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : un entier est divisible par $9$ si la somme de ses chiffres l'est. Étape 2 — Calculer : $4 + 7 + c + 2 = 13 + c$. Étape 3 — Chercher : on veut $13 + c$ multiple de $9$ avec $0 \\leq c \\leq 9$ ; le seul multiple possible est $18$, pour $c = 5$. Étape 4 — Conclure : $4\\,752 = 9 \\times 528$. Les valeurs $3$, $6$ et $9$ donnent $16$, $19$ et $22$, qui ne sont pas des multiples de $9$ ; $c = 9$ est le piège de ceux qui pensent qu'il faut un chiffre $9$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $10^{50} - 1$ est divisible par $9$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : $10 \\equiv 1\\ [9]$. Étape 2 — Chercher la période : $1^p \\equiv 1$ pour tout $p$, donc la période est $1$. Étape 3 — Appliquer : $10^{50} \\equiv 1^{50} \\equiv 1\\ [9]$. Étape 4 — Conclure : $10^{50} - 1 \\equiv 1 - 1 \\equiv 0\\ [9]$, donc $9$ divise $10^{50} - 1$ ; l'affirmation est vraie. On peut le lire aussi sur le nombre : $10^{50} - 1$ s'écrit avec cinquante chiffres $9$, dont la somme est $450$, un multiple de $9$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $10^{30} + 5$ par $9$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : $10 \\equiv 1\\ [9]$. Étape 2 — Chercher la période : $1^p \\equiv 1$, la période est $1$. Étape 3 — Appliquer : $10^{30} \\equiv 1^{30} \\equiv 1\\ [9]$, donc $10^{30} + 5 \\equiv 1 + 5 \\equiv 6\\ [9]$. Étape 4 — Conclure : le reste est $6$, compris entre $0$ et $8$. On le vérifie sur l'écriture : $10^{30} + 5$ s'écrit $1$, vingt-neuf fois $0$, puis $5$ ; la somme de ses chiffres est $1 + 5 = 6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres de la liste qui sont divisibles par $11$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir le critère : un entier est divisible par $11$ si la somme alternée de ses chiffres, en partant de la droite, l'est. Étape 2 — Calculer : pour $2\\,728$, $8 - 2 + 7 - 2 = 11$ ; pour $5\\,929$, $9 - 2 + 9 - 5 = 11$ ; pour $4\\,321$, $1 - 2 + 3 - 4 = -2$ ; pour $7\\,314$, $4 - 1 + 3 - 7 = -1$. Étape 3 — Conclure : seuls $2\\,728 = 11 \\times 248$ et $5\\,929 = 11 \\times 539$ conviennent. Faire la somme simple des chiffres, au lieu de la somme alternée, donne le critère de $9$ et pas celui de $11$.",
+                  "answers": [
+                    {
+                      "content": "$2\\,728$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\,929$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4\\,321$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7\\,314$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Raisonnement par disjonction des cas sur les restes, divisibilité et congruences pour un entier quelconque, équations de congruence, puissances et chiffre des unités, nombres premiers entre eux, théorème de Gauss et corollaire, équation ax + by = c avec contraintes de signe.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Dans cet exercice, $n$ désigne un entier relatif quelconque. On démontre des propriétés vraies pour tout $n$ en distinguant les cas selon le reste de $n$ dans une division euclidienne : un exemple isolé ne démontre rien, mais l'étude de tous les restes possibles démontre tout.",
+              "hint": "Écris $n$ sous la forme $n = bq + r$ et regarde chaque reste $r$ possible. Pour $n^2$ modulo $4$, étudie $n \\equiv 0$, $1$, $2$ et $3\\ [4]$. Pour une divisibilité du type $n - 1 \\mid n + 5$, pense à la somme $(n - 1) + 6$.",
+              "questions": [
+                {
+                  "content": "Pour tout entier relatif $n$, le nombre $n(n+1)$ est pair.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Distinguer les cas : on étudie le reste de $n$ modulo $2$. Étape 2 — Premier cas : si $n \\equiv 0\\ [2]$, le facteur $n$ est pair, donc le produit $n(n+1)$ est pair. Étape 3 — Second cas : si $n \\equiv 1\\ [2]$, alors $n + 1 \\equiv 0\\ [2]$, le facteur $n + 1$ est pair, donc le produit est pair. Étape 4 — Conclure : dans les deux cas, $n(n+1)$ est pair ; l'affirmation est vraie. Tester seulement $n = 1$, $2$ et $3$ ne suffirait pas : les deux cas de reste couvrent tous les entiers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les restes possibles de la division euclidienne de $n^2$ par $4$, quand $n$ décrit les entiers relatifs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Distinguer les cas : on étudie $n$ modulo $4$. Étape 2 — Calculer : si $n \\equiv 0$, $n^2 \\equiv 0$ ; si $n \\equiv 1$, $n^2 \\equiv 1$ ; si $n \\equiv 2$, $n^2 \\equiv 4 \\equiv 0$ ; si $n \\equiv 3$, $n^2 \\equiv 9 \\equiv 1\\ [4]$. Étape 3 — Conclure : les restes possibles sont seulement $0$ et $1$. Les restes $2$ et $3$ n'apparaissent jamais : croire que les quatre restes possibles de $n$ donnent quatre restes de $n^2$ oublie que les carrés se répètent.",
+                  "answers": [
+                    {
+                      "content": "$0$ et $1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$, $1$ et $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$, $1$, $2$ et $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il existe un entier relatif $n$ tel que $n^2 + 1$ soit divisible par $4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Distinguer les cas : on étudie $n$ modulo $4$. Étape 2 — Calculer : $n^2 \\equiv 0$ ou $1\\ [4]$, comme le montrent les cas $n \\equiv 0, 1, 2, 3$. Étape 3 — Appliquer : donc $n^2 + 1 \\equiv 1$ ou $2\\ [4]$, jamais $0$. Étape 4 — Conclure : aucun entier $n$ ne rend $n^2 + 1$ divisible par $4$ ; l'affirmation est fausse. Chercher un exemple qui marche, sans étudier tous les restes, ne peut pas aboutir : le raisonnement par les restes prouve qu'il n'en existe aucun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quels deux entiers naturels $n$ de la liste le nombre $n - 1$ divise-t-il $n + 5$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $n + 5 = (n - 1) + 6$. Étape 2 — Appliquer : $n - 1$ divise $n - 1$, donc $n - 1$ divise $n + 5$ si et seulement si $n - 1$ divise $6$. Étape 3 — Chercher : les diviseurs de $6$ sont $1, 2, 3, 6$, donc $n \\in \\{2, 3, 4, 7\\}$. Étape 4 — Conclure : dans la liste, ce sont $n = 3$ ($2$ divise $8$) et $n = 7$ ($6$ divise $12$). Pour $n = 5$, $4$ ne divise pas $10$ ; pour $n = 6$, $5$ ne divise pas $11$ ; pour $n = 9$, $8$ ne divise pas $14$.",
+                  "answers": [
+                    {
+                      "content": "$n = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $n$ un entier relatif non divisible par $3$. Quel est le reste de la division euclidienne de $n^2$ par $3$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Distinguer les cas : $n$ n'est pas divisible par $3$, donc $n \\equiv 1$ ou $n \\equiv 2\\ [3]$. Étape 2 — Calculer : si $n \\equiv 1$, $n^2 \\equiv 1$ ; si $n \\equiv 2$, $n^2 \\equiv 4 \\equiv 1\\ [3]$. Étape 3 — Conclure : dans les deux cas le reste est $1$. Le reste $2$ ne se produit jamais pour un carré modulo $3$ : on le trouve en écrivant $n^2 \\equiv n$ au lieu de calculer.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "On étudie des puissances et des équations de congruence. Pour chaque résultat, on justifie par les propriétés des congruences : une congruence passe à la somme, au produit et aux puissances de la base, mais pas à l'exposant.",
+              "hint": "Réduis la base avant de chercher la période, puis divise l'exposant par la période. Pour résoudre $ax \\equiv b\\ [n]$, teste les restes possibles de $x$ modulo $n$ ou multiplie par un inverse de $a$.",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $13^{2024}$ par $4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : $13 = 4 \\times 3 + 1$, donc $13 \\equiv 1\\ [4]$. Étape 2 — Chercher la période : $1^p \\equiv 1$, la période est $1$. Étape 3 — Appliquer : $13^{2024} \\equiv 1^{2024} \\equiv 1\\ [4]$. Étape 4 — Conclure : le reste est $1$. Le reste $3$ viendrait d'une réduction fausse de $13$ en $-1$ avec un exposant impair ; ici l'exposant est pair, et surtout $13 \\equiv 1$, pas $-1$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $2^{2024} + 3^{2024}$ par $5$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : $2$ et $3$ sont déjà des restes modulo $5$. Étape 2 — Chercher la période : $2^4 = 16 \\equiv 1\\ [5]$ et $3^4 = 81 \\equiv 1\\ [5]$, la période est $4$ pour les deux. Étape 3 — Écrire l'exposant : $2024 = 4 \\times 506$. Étape 4 — Appliquer : $2^{2024} \\equiv 1$ et $3^{2024} \\equiv 1\\ [5]$, donc la somme est congrue à $1 + 1 = 2$. Étape 5 — Conclure : le reste est $2$. Une congruence passe aux sommes : on additionne les restes, puis on réduit.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions entières de l'équation de congruence $3x \\equiv 2\\ [7]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : les restes possibles de $x$ modulo $7$ sont $0, 1, \\dots, 6$. Étape 2 — Chercher : on calcule $3x$ modulo $7$ : $3 \\times 3 = 9 \\equiv 2$, tandis que $3 \\times 2 = 6$, $3 \\times 5 = 15 \\equiv 1$ et $3 \\times 4 = 12 \\equiv 5$. Étape 3 — Appliquer : un seul reste convient, $x \\equiv 3$, car $3$ et $7$ sont premiers entre eux (par Bézout, $3 \\times 5 - 7 \\times 2 = 1$, donc $3$ a un inverse modulo $7$). Étape 4 — Conclure : les solutions sont les $x \\equiv 3\\ [7]$. La réponse $x \\equiv 2$ vient d'un oubli de multiplier par $3$.",
+                  "answers": [
+                    {
+                      "content": "$x \\equiv 3\\ [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\equiv 2\\ [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\equiv 5\\ [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\equiv 4\\ [7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers. Si $a^2 \\equiv b^2\\ [6]$, alors $a \\equiv b\\ [6]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : cherchons un contre-exemple parmi les restes modulo $6$. Étape 2 — Calculer : pour $a = 1$ et $b = 5$, $a^2 = 1$ et $b^2 = 25 = 6 \\times 4 + 1$, donc $a^2 \\equiv b^2\\ [6]$. Étape 3 — Comparer : $a - b = -4$ n'est pas un multiple de $6$, donc $a \\not\\equiv b\\ [6]$. Étape 4 — Conclure : l'affirmation est fausse. Les congruences passent aux puissances sur la base, mais la réciproque est fausse : deux carrés congrus ne donnent pas deux nombres congrus.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le chiffre des unités de $9^{2025}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : le chiffre des unités est le reste de la division par $10$, et $9$ est déjà un reste modulo $10$ (on peut aussi écrire $9 \\equiv -1$). Étape 2 — Chercher la période : $9^1 \\equiv 9$ et $9^2 = 81 \\equiv 1\\ [10]$ : la période est $2$. Étape 3 — Écrire l'exposant : $2025 = 2 \\times 1012 + 1$. Étape 4 — Appliquer : $9^{2025} = (9^2)^{1012} \\times 9 \\equiv 1 \\times 9 \\equiv 9\\ [10]$. Étape 5 — Conclure : le chiffre des unités est $9$. Le chiffre $1$ viendrait d'un exposant pair.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "On justifie des résultats sur les nombres premiers entre eux. On rappelle le théorème de Gauss : si $a$ divise $bc$ et si $a$ et $b$ sont premiers entre eux, alors $a$ divise $c$. Son corollaire : si $a$ et $b$ sont premiers entre eux et divisent tous deux $N$, alors $ab$ divise $N$.",
+              "hint": "Pour montrer que deux nombres sont premiers entre eux, cherche une égalité de Bézout ou calcule leur PGCD. Avant d'appliquer Gauss, vérifie toujours que les deux nombres sont premiers entre eux.",
+              "questions": [
+                {
+                  "content": "Pour tout entier naturel $n \\geq 1$, les entiers $n$ et $n + 1$ sont premiers entre eux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : soit $d$ un diviseur commun de $n$ et $n + 1$. Étape 2 — Appliquer la propriété : $d$ divise la différence $(n + 1) - n = 1$. Étape 3 — Conclure : $d = 1$ ou $d = -1$, donc $\\text{PGCD}(n, n + 1) = 1$ et l'affirmation est vraie. On le retrouve par Bézout : $(n + 1) \\times 1 + n \\times (-1) = 1$. Penser que deux entiers consécutifs sont pairs et impairs, donc sans lien, n'est pas une preuve : la différence $1$ l'est.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout entier naturel $n \\geq 1$, quelle est la valeur de $\\text{PGCD}(n\\,;\\,2n + 1)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $2n + 1 = n \\times 2 + 1$, c'est une division euclidienne avec $0 \\leq 1 < n$ quand $n \\geq 2$. Étape 2 — Appliquer le principe d'Euclide : $\\text{PGCD}(2n + 1, n) = \\text{PGCD}(n, 1)$. Étape 3 — Calculer : $\\text{PGCD}(n, 1) = 1$. Étape 4 — Conclure : la valeur est $1$ ; par Bézout, $(2n + 1) \\times 1 + n \\times (-2) = 1$. La valeur $n$ serait le PGCD si $2n + 1$ était un multiple de $n$, ce qui n'est pas le cas : le reste est $1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entier $a \\geq 1$ vérifie : $a$ divise $5c$, où $c$ est un entier, et $a$ est premier avec $5$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $a$ et $5$ sont premiers entre eux, donc le théorème de Gauss s'applique. Étape 2 — Appliquer : $a$ divise $5 \\times c$ et est premier avec $5$, donc $a$ divise $c$. Étape 3 — Contrôler les autres propositions avec $a = 3$ et $c = 3$ : $3$ divise $15$ et est premier avec $5$, mais $3$ ne divise pas $5$, ne divise pas $3 + 5 = 8$, et $a \\neq 1$. Étape 4 — Conclure : seule la proposition « $a$ divise $c$ » est toujours vraie.",
+                  "answers": [
+                    {
+                      "content": "$a$ divise $c$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a$ divise $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ divise $c + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entier $N$ est divisible par $9$ et par $10$. D'après le corollaire de Gauss, quel entier, produit de ces deux nombres, divise alors certainement $N$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(9, 10) = 1$ car $10 = 9 \\times 1 + 1$, donc $9$ et $10$ sont premiers entre eux. Étape 2 — Appliquer le corollaire de Gauss : comme $9$ et $10$ divisent $N$ et sont premiers entre eux, leur produit $9 \\times 10 = 90$ divise $N$. Étape 3 — Conclure : $90$ est aussi le PPCM de $9$ et $10$, car $\\dfrac{9 \\times 10}{1} = 90$. Le nombre $19$ (la somme) ou $10$ ne conviennent pas : un multiple de $10$ n'est pas forcément un multiple de $9$.",
+                  "answers": [
+                    {
+                      "content": "90",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres de la liste qui sont divisibles par $12$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : $12 = 3 \\times 4$ avec $3$ et $4$ premiers entre eux. Étape 2 — Appliquer le corollaire de Gauss : un nombre est divisible par $12$ s'il est divisible par $3$ et par $4$. Étape 3 — Tester : $252$ a pour somme de chiffres $9$ et finit par $52 = 4 \\times 13$ ; $324$ a pour somme $9$ et finit par $24 = 4 \\times 6$ ; $138$ finit par $38$, pas un multiple de $4$ ; $214$ a pour somme $7$, pas un multiple de $3$ ; $306$ a pour somme $9$ mais finit par $06$, pas un multiple de $4$. Étape 4 — Conclure : $252 = 12 \\times 21$ et $324 = 12 \\times 27$.",
+                  "answers": [
+                    {
+                      "content": "$252$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$324$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$138$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$214$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$306$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un artisan de Grand-Bassam règle $60$ unités de matière avec $x$ pièces de $7$ unités et $y$ pièces de $4$ unités (situation d'exemple). On étudie l'équation $7x + 4y = 60$, d'abord dans $\\mathbb{Z}^2$, puis avec des contraintes de signe. On donne la solution particulière $(4\\,;\\,8)$.",
+              "hint": "Les solutions dans $\\mathbb{Z}^2$ s'écrivent $(x_0 + bk\\,;\\,y_0 - ak)$ avec $k \\in \\mathbb{Z}$. Pour des entiers naturels, on impose $x \\geq 0$ et $y \\geq 0$ et on cherche les valeurs de $k$ possibles.",
+              "questions": [
+                {
+                  "content": "Sachant que $(4\\,;\\,8)$ est solution de $7x + 4y = 60$, quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ ? ($k \\in \\mathbb{Z}$)",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $7 \\times 4 + 4 \\times 8 = 28 + 32 = 60$ et $\\text{PGCD}(7,4) = 1$. Étape 2 — Soustraire : $7(x - 4) = 4(8 - y)$. Étape 3 — Appliquer Gauss : $4$ divise $7(x - 4)$ et est premier avec $7$, donc $x = 4 + 4k$. Étape 4 — En déduire $y$ : $y = 8 - 7k$. Étape 5 — Conclure : $(4 + 4k\\,;\\,8 - 7k)$. Dans $(4 + 7k\\,;\\,8 - 4k)$, les rôles sont inversés : $7(4 + 7k) + 4(8 - 4k) = 60 + 33k$. Dans $(4 + 4k\\,;\\,8 + 7k)$, le signe est faux : on trouve $60 + 56k$. Dans $(8 + 4k\\,;\\,4 - 7k)$, le départ est faux : on trouve $72$.",
+                  "answers": [
+                    {
+                      "content": "$(4 + 4k\\,;\\,8 - 7k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(4 + 7k\\,;\\,8 - 4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4 + 4k\\,;\\,8 + 7k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(8 + 4k\\,;\\,4 - 7k)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un artisan règle $60$ unités avec $x$ pièces de $7$ unités et $y$ pièces de $4$ unités, où $x$ et $y$ sont des entiers naturels. Combien de couples $(x\\,;\\,y)$ vérifient $7x + 4y = 60$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les solutions entières sont $(4 + 4k\\,;\\,8 - 7k)$ ; on veut $x \\geq 0$ et $y \\geq 0$. Étape 2 — Résoudre : $4 + 4k \\geq 0$ donne $k \\geq -1$ ; $8 - 7k \\geq 0$ donne $k \\leq 1{,}14$, donc $k \\leq 1$. Étape 3 — Calculer : $k = -1$ donne $(0\\,;\\,15)$, $k = 0$ donne $(4\\,;\\,8)$, $k = 1$ donne $(8\\,;\\,1)$. Étape 4 — Conclure : il y a $3$ couples. La valeur $k = 2$ donnerait $y = -6$, négatif, et $k = -2$ donnerait $x = -4$, négatif.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $7x + 4y = 60$ admet une solution $(x\\,;\\,y)$ dans $\\mathbb{Z}^2$ avec $x < 0$ et $y < 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : si $x < 0$ et $y < 0$, alors $7x < 0$ et $4y < 0$. Étape 2 — Appliquer : la somme de deux nombres strictement négatifs est strictement négative, donc $7x + 4y < 0$. Étape 3 — Comparer : $60 > 0$, l'égalité $7x + 4y = 60$ est impossible. Étape 4 — Conclure : l'affirmation est fausse. On peut le vérifier avec la forme générale : $x = 4 + 4k < 0$ impose $k \\leq -2$, mais alors $y = 8 - 7k \\geq 22 > 0$. L'existence de solutions dans $\\mathbb{Z}^2$ ne donne pas de solutions de tout signe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les solutions entières de $7x + 4y = 60$, celle qui a pour abscisse $x = 12$ a pour ordonnée $y =$ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : les solutions sont $(4 + 4k\\,;\\,8 - 7k)$. Étape 2 — Résoudre : $4 + 4k = 12$ donne $k = 2$. Étape 3 — Calculer : $y = 8 - 7 \\times 2 = -6$. Étape 4 — Conclure : le couple est $(12\\,;\\,-6)$ ; vérification : $7 \\times 12 + 4 \\times (-6) = 84 - 24 = 60$. La valeur $y = 6$ vient d'un oubli de signe, qui donnerait $84 + 24 = 108$.",
+                  "answers": [
+                    {
+                      "content": "-6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un artisan règle $60$ unités avec $x$ pièces de $7$ unités et $y$ pièces de $4$ unités, où $x$ et $y$ sont des entiers naturels. Quel est le plus grand nombre possible de pièces de $4$ unités ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les solutions en entiers naturels sont $(0\\,;\\,15)$, $(4\\,;\\,8)$ et $(8\\,;\\,1)$, obtenues pour $k = -1, 0, 1$ dans $(4 + 4k\\,;\\,8 - 7k)$. Étape 2 — Comparer : les valeurs de $y$ sont $15$, $8$ et $1$. Étape 3 — Conclure : le plus grand nombre de pièces de $4$ unités est $15$, pour $x = 0$ ; vérification : $4 \\times 15 = 60$. La valeur $8$ est celle de la solution particulière donnée, pas la plus grande.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan : division euclidienne et diviseurs, congruences et restes de puissances, PGCD, PPCM et algorithme d'Euclide, nombres premiers entre eux et égalité de Bézout, équation ax + by = c avec solutions entières et naturelles.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un fournisseur de Yamoussoukro numérote ses lots par des entiers relatifs (situation d'exemple). On rappelle que la division euclidienne de $a$ par $b > 0$ s'écrit $a = bq + r$ avec $0 \\leq r < b$.",
+              "hint": "Pour un dividende négatif, le reste est toujours positif : cherche le multiple du diviseur juste en dessous du dividende. Un entier relatif a des diviseurs positifs et négatifs.",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $-205$ par $16$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = -205$ et $b = 16$, le dividende est négatif. Étape 2 — Trouver le multiple : $16 \\times (-13) = -208 \\leq -205 < -192 = 16 \\times (-12)$, donc $q = -13$. Étape 3 — Calculer le reste : $r = -205 - (-208) = 3$, et $0 \\leq 3 < 16$. Étape 4 — Conclure : $-205 = 16 \\times (-13) + 3$, le reste est $3$. Le reste $-13$, obtenu avec $q = -12$, est faux : un reste d'une division euclidienne est positif.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures est la division euclidienne de $-77$ par $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = -77$ et $b = 12$, le dividende est négatif. Étape 2 — Trouver le multiple : $12 \\times (-7) = -84 \\leq -77 < -72 = 12 \\times (-6)$, donc $q = -7$. Étape 3 — Calculer le reste : $r = -77 - (-84) = 7$, et $0 \\leq 7 < 12$. Étape 4 — Conclure : $-77 = 12 \\times (-7) + 7$. L'écriture $q = -6$ et $r = -5$ est une égalité vraie ($-72 - 5 = -77$) mais son reste est négatif. L'écriture $q = -8$ et $r = 19$ est vraie aussi ($-96 + 19 = -77$), mais $19 \\geq 12$. L'écriture $q = 7$ et $r = 7$ oublie le signe : $84 + 7 = 91$.",
+                  "answers": [
+                    {
+                      "content": "$q = -7$ et $r = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$q = -6$ et $r = -5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = -8$ et $r = 19$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$q = 7$ et $r = 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres de la liste qui divisent à la fois $36$ et $60$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : un diviseur commun divise $36$ et $60$. Étape 2 — Calculer : $\\text{PGCD}(60, 36)$ : $60 = 36 \\times 1 + 24$, $36 = 24 \\times 1 + 12$, $24 = 12 \\times 2 + 0$, donc le PGCD est $12$. Étape 3 — Appliquer : les diviseurs communs sont les diviseurs de $12$, parmi lesquels $12$ et $6$. Étape 4 — Conclure : $8$ ne divise pas $36$, $9$ ne divise pas $60$ et $15$ ne divise pas $36$. Le nombre $15$ divise $60$ mais pas $36$ : un diviseur commun doit diviser les deux nombres.",
+                  "answers": [
+                    {
+                      "content": "$12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$, $b$ et $c$ trois entiers non nuls. Si $a$ divise $b$ et si $b$ divise $c$, alors $a$ divise $c$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a \\mid b$ donne $b = ak$ et $b \\mid c$ donne $c = bm$, avec $k$ et $m$ entiers. Étape 2 — Remplacer : $c = bm = (ak)m$. Étape 3 — Calculer : $c = a(km)$, avec $km$ entier. Étape 4 — Conclure : $a$ divise $c$ ; c'est la transitivité de la divisibilité, l'affirmation est vraie. Elle s'applique dans ce sens : de $a \\mid b$ et $c \\mid b$, on ne peut rien conclure sur $a$ et $c$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs $n$ (positifs et négatifs) divisent $12$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : on cherche les entiers $n$ tels que $12 = nk$ avec $k$ entier. Étape 2 — Chercher les diviseurs positifs : $1, 2, 3, 4, 6, 12$, soit $6$ diviseurs, car $12 = 1 \\times 12 = 2 \\times 6 = 3 \\times 4$. Étape 3 — Ajouter les opposés : si $n$ divise $12$, alors $-n$ aussi, ce qui donne $6$ diviseurs négatifs. Étape 4 — Conclure : $6 + 6 = 12$ diviseurs. La réponse $6$ oublie les diviseurs négatifs.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un service informatique d'Abidjan utilise des puissances pour fabriquer des codes (situation d'exemple). On cherche les restes de ces puissances dans des divisions euclidiennes, avec les congruences.",
+              "hint": "Réduis d'abord la base. Cherche ensuite la période : la première puissance qui donne le reste $1$. Divise l'exposant par la période et applique la propriété $a^{pq + s} \\equiv a^s$. Une base congrue à $-1$ donne $1$ ou $-1$ selon la parité de l'exposant.",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $6^{2025}$ par $7$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : $6 \\equiv -1\\ [7]$. Étape 2 — Chercher la période : $(-1)^1 \\equiv -1$ et $(-1)^2 \\equiv 1$, la période est $2$. Étape 3 — Écrire l'exposant : $2025 = 2 \\times 1012 + 1$. Étape 4 — Appliquer : $6^{2025} \\equiv (-1)^{2025} \\equiv -1\\ [7]$. Étape 5 — Conclure : $-1 \\equiv 6\\ [7]$, le reste est $6$ et non $-1$, car un reste est compris entre $0$ et $6$. Le reste $1$ viendrait d'un exposant pair.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $3^{50}$ par $8$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Réduire : la base $3$ est déjà un reste modulo $8$. Étape 2 — Chercher la période : $3^1 \\equiv 3$ et $3^2 = 9 \\equiv 1\\ [8]$ : la période est $2$. Étape 3 — Écrire l'exposant : $50 = 2 \\times 25 + 0$. Étape 4 — Appliquer : $3^{50} = (3^2)^{25} \\equiv 1^{25} \\equiv 1\\ [8]$. Étape 5 — Conclure : le reste est $1$. Le reste $3$ serait celui d'un exposant impair.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $4^{100} + 1$ par $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Réduire : $4 \\equiv 1\\ [3]$. Étape 2 — Chercher la période : $1^p \\equiv 1$, la période est $1$. Étape 3 — Appliquer : $4^{100} \\equiv 1^{100} \\equiv 1\\ [3]$, donc $4^{100} + 1 \\equiv 1 + 1 \\equiv 2\\ [3]$. Étape 4 — Conclure : le reste est $2$. Le reste $1$ oublie d'ajouter le $+ 1$ ; le reste $0$ viendrait de $4^{100} \\equiv 2$ ; et $3$ n'est pas un reste modulo $3$, car il dépasse $2$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $2^{12} - 1$ est divisible par $7$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Réduire : la base $2$ est déjà un reste modulo $7$. Étape 2 — Chercher la période : $2^3 = 8 \\equiv 1\\ [7]$, la période est $3$. Étape 3 — Écrire l'exposant : $12 = 3 \\times 4 + 0$. Étape 4 — Appliquer : $2^{12} = (2^3)^4 \\equiv 1\\ [7]$, donc $2^{12} - 1 \\equiv 0\\ [7]$. Étape 5 — Conclure : $7$ divise $2^{12} - 1 = 4\\,095 = 7 \\times 585$, l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quels deux entiers naturels $n$ de la liste a-t-on $n^2 \\equiv 1\\ [8]$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Réduire : chaque $n$ de la liste est déjà un reste modulo $8$. Étape 2 — Calculer : $3^2 = 9 \\equiv 1$ et $5^2 = 25 = 8 \\times 3 + 1 \\equiv 1\\ [8]$ ; mais $2^2 = 4$, $4^2 = 16 \\equiv 0$ et $6^2 = 36 \\equiv 4\\ [8]$. Étape 3 — Conclure : seuls $n = 3$ et $n = 5$ conviennent. Les entiers pairs ne donnent jamais un carré congru à $1$ modulo $8$, car un carré pair est pair.",
+                  "answers": [
+                    {
+                      "content": "$n = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n = 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Une couturière de Ferkessédougou dispose de deux rouleaux de tissu de $182$ cm et de $130$ cm (situation d'exemple). Elle découpe chaque rouleau en morceaux de même longueur, la plus grande possible, sans aucune chute. On utilise le PGCD, le PPCM et l'égalité de Bézout.",
+              "hint": "La longueur d'un morceau divise $182$ et $130$ : le plus grand est leur PGCD, qu'on trouve par l'algorithme d'Euclide. Le nombre de morceaux de chaque rouleau est la longueur du rouleau divisée par celle d'un morceau.",
+              "questions": [
+                {
+                  "content": "Une couturière a deux rouleaux de $182$ cm et $130$ cm. Elle les découpe en morceaux de même longueur, la plus grande possible, sans chute. Quelle est la longueur d'un morceau, en centimètres ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $182 \\geq 130 > 0$. Étape 2 — Diviser : $182 = 130 \\times 1 + 52$. Étape 3 — Recommencer : $130 = 52 \\times 2 + 26$, puis $52 = 26 \\times 2 + 0$. Étape 4 — Lire : le dernier reste non nul est $26$, donc $\\text{PGCD}(182, 130) = 26$ : un morceau mesure $26$ cm. Le reste $52$ n'est qu'un reste intermédiaire : il ne divise ni $182$ ni $130$ ; le reste $0$ n'est pas le dernier reste non nul.",
+                  "answers": [
+                    {
+                      "content": "26",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une couturière a deux rouleaux de $182$ cm et $130$ cm. Elle les découpe en morceaux de $26$ cm, sans chute. Combien de morceaux obtient-elle au total ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : le premier rouleau donne $182 \\div 26$ morceaux et le second $130 \\div 26$. Étape 2 — Calculer : $182 = 26 \\times 7$ et $130 = 26 \\times 5$. Étape 3 — Additionner : $7 + 5 = 12$. Étape 4 — Conclure : elle obtient $12$ morceaux. Le nombre $26$ est la longueur d'un morceau, pas le nombre de morceaux ; et $7 \\times 5 = 35$ multiplie au lieu d'additionner.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PPCM de $182$ et $130$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Ordonner : $182 \\geq 130 > 0$. Étape 2 — Diviser : $182 = 130 \\times 1 + 52$. Étape 3 — Recommencer : $130 = 52 \\times 2 + 26$, puis $52 = 26 \\times 2 + 0$. Étape 4 — Lire : $\\text{PGCD}(182, 130) = 26$. Étape 5 — Calculer : $\\text{PPCM}(182, 130) = \\dfrac{182 \\times 130}{26} = \\dfrac{23\\,660}{26} = 910$. Le produit $23\\,660$ est un multiple commun, mais pas le plus petit ; $26$ est le PGCD.",
+                  "answers": [
+                    {
+                      "content": "910",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle égalité prouve, grâce au théorème de Bézout, que $15$ et $22$ sont premiers entre eux ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : le théorème de Bézout dit que $a$ et $b$ sont premiers entre eux si et seulement s'il existe des entiers $u$ et $v$ avec $au + bv = 1$. Étape 2 — Calculer chaque membre gauche : $15 \\times 3 + 22 \\times (-2) = 45 - 44 = 1$ : l'égalité est vraie. Les autres sont fausses : $15 \\times 3 + 22 \\times 2 = 89$, $15 \\times 7 + 22 \\times (-5) = 105 - 110 = -5$ et $15 \\times 3 - 22 \\times 1 = 23$. Étape 3 — Conclure : seule une égalité vraie prouve quelque chose ; ici $u = 3$ et $v = -2$ conviennent.",
+                  "answers": [
+                    {
+                      "content": "$15 \\times 3 + 22 \\times (-2) = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15 \\times 3 + 22 \\times 2 = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15 \\times 7 + 22 \\times (-5) = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15 \\times 3 - 22 \\times 1 = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $182x + 130y = 50$ admet au moins une solution dans $\\mathbb{Z}^2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : une équation $ax + by = c$ a des solutions si et seulement si $\\text{PGCD}(a,b)$ divise $c$. Étape 2 — Calculer : $\\text{PGCD}(182, 130) = 26$. Étape 3 — Comparer : $50 = 26 \\times 1 + 24$, donc $26$ ne divise pas $50$. Étape 4 — Conclure : l'équation n'a aucune solution, l'affirmation est fausse. Le fait que $50 < 182$ ou que $50$ soit pair ne change rien : seul le PGCD des coefficients décide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "statement": "Un grossiste d'Abidjan reçoit du poisson en caisses de $4$ kg et en caisses de $9$ kg, pour un total de $100$ kg (situation d'exemple). Il note $x$ le nombre de caisses de $4$ kg et $y$ le nombre de caisses de $9$ kg. On étudie l'équation $4x + 9y = 100$ ; le couple $(16\\,;\\,4)$ en est une solution.",
+              "hint": "Vérifie que le PGCD de $4$ et $9$ divise $100$. Les solutions dans $\\mathbb{Z}^2$ sont $(x_0 + bk\\,;\\,y_0 - ak)$ avec $k \\in \\mathbb{Z}$. Pour des entiers naturels, impose $x \\geq 0$ et $y \\geq 0$.",
+              "questions": [
+                {
+                  "content": "L'équation $4x + 9y = 100$ admet au moins une solution dans $\\mathbb{Z}^2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(4,9)$ : $9 = 4 \\times 2 + 1$, $4 = 1 \\times 4 + 0$, donc le PGCD est $1$. Étape 2 — Comparer : $1$ divise $100$. Étape 3 — Conclure : l'équation a des solutions, par exemple $(16\\,;\\,4)$ car $64 + 36 = 100$. Penser qu'il faut que $9$ divise $100$ est l'erreur tentante : seul le PGCD des deux coefficients doit diviser le second membre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sachant que $(16\\,;\\,4)$ est solution de $4x + 9y = 100$, quel est l'ensemble des solutions dans $\\mathbb{Z}^2$ ? ($k \\in \\mathbb{Z}$)",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $4 \\times 16 + 9 \\times 4 = 64 + 36 = 100$. Étape 2 — Soustraire : $4(x - 16) = 9(4 - y)$. Étape 3 — Appliquer Gauss : $9$ divise $4(x - 16)$ et est premier avec $4$, donc $x = 16 + 9k$. Étape 4 — En déduire $y$ : $y = 4 - 4k$. Étape 5 — Conclure : $(16 + 9k\\,;\\,4 - 4k)$. Dans $(16 + 4k\\,;\\,4 - 9k)$, les rôles sont inversés : $4(16 + 4k) + 9(4 - 9k) = 100 - 65k$. Dans $(16 + 9k\\,;\\,4 + 4k)$, le signe est faux : on trouve $100 + 72k$. Dans $(4 + 9k\\,;\\,16 - 4k)$, le départ est faux : on trouve $160$.",
+                  "answers": [
+                    {
+                      "content": "$(16 + 9k\\,;\\,4 - 4k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(16 + 4k\\,;\\,4 - 9k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(16 + 9k\\,;\\,4 + 4k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4 + 9k\\,;\\,16 - 4k)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grossiste a $100$ kg de poisson en $x$ caisses de $4$ kg et $y$ caisses de $9$ kg, où $x$ et $y$ sont des entiers naturels. Combien de couples $(x\\,;\\,y)$ vérifient $4x + 9y = 100$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les solutions entières sont $(16 + 9k\\,;\\,4 - 4k)$ ; on veut $x \\geq 0$ et $y \\geq 0$. Étape 2 — Résoudre : $16 + 9k \\geq 0$ donne $k \\geq -1{,}77$, donc $k \\geq -1$ ; $4 - 4k \\geq 0$ donne $k \\leq 1$. Étape 3 — Calculer : $k = -1$ donne $(7\\,;\\,8)$, $k = 0$ donne $(16\\,;\\,4)$, $k = 1$ donne $(25\\,;\\,0)$. Étape 4 — Conclure : il y a $3$ couples. La valeur $k = -2$ donnerait $x = -2$, négatif, et $k = 2$ donnerait $y = -4$, négatif.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grossiste a $100$ kg de poisson en $x$ caisses de $4$ kg et $y$ caisses de $9$ kg, où $x$ et $y$ sont des entiers naturels. Quel est le plus grand nombre possible de caisses de $4$ kg ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les solutions en entiers naturels sont $(7\\,;\\,8)$, $(16\\,;\\,4)$ et $(25\\,;\\,0)$, obtenues pour $k = -1, 0, 1$ dans $(16 + 9k\\,;\\,4 - 4k)$. Étape 2 — Comparer : les valeurs de $x$ sont $7$, $16$ et $25$. Étape 3 — Conclure : le plus grand nombre de caisses de $4$ kg est $25$, quand il n'y a aucune caisse de $9$ kg ; vérification : $4 \\times 25 = 100$. La valeur $16$ est celle de la solution donnée, pas la plus grande.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux couples d'entiers naturels solutions de $4x + 9y = 100$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : $\\text{PGCD}(4,9) = 1$ divise $100$, des solutions existent. Étape 2 — Remplacer dans chaque couple : $4 \\times 7 + 9 \\times 8 = 28 + 72 = 100$ et $4 \\times 25 + 9 \\times 0 = 100$ conviennent. Les autres donnent $4 \\times 10 + 9 \\times 6 = 94$, $4 \\times 12 + 9 \\times 5 = 93$ et $4 \\times 16 + 9 \\times 3 = 91$. Étape 3 — Conclure : les couples $(7\\,;\\,8)$ et $(25\\,;\\,0)$ sont solutions, avec $k = -1$ et $k = 1$ dans $(16 + 9k\\,;\\,4 - 4k)$. Le couple $(16\\,;\\,3)$ ressemble à la solution donnée $(16\\,;\\,4)$ mais ne la vérifie pas.",
+                  "answers": [
+                    {
+                      "content": "$(7\\,;\\,8)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(25\\,;\\,0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(10\\,;\\,6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(12\\,;\\,5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(16\\,;\\,3)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
