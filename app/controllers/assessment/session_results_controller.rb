@@ -26,7 +26,12 @@ module Assessment
       # l'enseignant et l'équipe, si.
       return if refuse_out_of_level(exercise_id: session.exercise_id)
 
-      return redirect_to exercise_session_path(session.public_id) unless session.completed?
+      unless session.completed?
+        # La page de la session est celle de l'élève (l'enseignant et l'équipe y reçoivent 403) : pour eux, pas de résultat encore.
+        return render_not_found unless session.student_id == current_actor.user_id
+
+        return redirect_to exercise_session_path(session.public_id)
+      end
 
       exercise = Repositories::Assessment::ExerciseRepository.new.find(id: session.exercise_id)
       # ADR-0115 (amende la décision du porteur 881a623) : l'élève lit la correction de sa copie vérifiée, jamais avant ;

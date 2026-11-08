@@ -13,7 +13,7 @@ module Teams
       decision = params[:decision].to_s
       result = review.call(actor: current_actor, public_id: params[:public_id], decision:)
       back = school_path(params[:school_public_id])
-      return redirect_to(back, alert: t(".already_decided"), status: :see_other) if result.code == :conflict
+      return redirect_to(back, alert: conflict_message(result), status: :see_other) if result.code == :conflict
       return head(:unprocessable_entity) if result.code == :invalid
 
       render_result result, success: lambda { |request|
@@ -22,6 +22,9 @@ module Teams
     end
 
     private
+
+    # Un enseignant déjà rattaché entre-temps garde sa demande en attente : le dire, au lieu de « déjà traitée ».
+    def conflict_message(result) = result.errors.fetch(:base, []).include?(:already_attached) ? t(".already_attached") : t(".already_decided")
 
     def review
       UseCases::School::ReviewJoinRequest.new(

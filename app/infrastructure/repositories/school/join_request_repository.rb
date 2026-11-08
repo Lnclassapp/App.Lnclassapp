@@ -8,6 +8,7 @@ module Repositories
 
       PENDING = "pending".freeze
       ALREADY_DECIDED = { base: [ :already_decided ] }.freeze
+      ALREADY_ATTACHED = { base: [ :already_attached ] }.freeze
       TOO_MANY = { base: [ :too_many_pending ] }.freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
       COLUMNS = [ "school_join_requests.id", "school_join_requests.public_id", "school_join_requests.teacher_id",
@@ -51,7 +52,8 @@ module Repositories
         end
         approved ? ::Shared::Result.success : ::Shared::Result.failure(:conflict, errors: ALREADY_DECIDED)
       rescue ActiveRecord::RecordNotUnique
-        ::Shared::Result.failure(:conflict)
+        # La demande reste en attente (savepoint annulé) : ce n'est pas « déjà traitée » mais « déjà rattaché » (B-014).
+        ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED)
       end
 
       def reject(id:, decided_by_id:, at:)
