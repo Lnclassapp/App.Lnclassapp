@@ -66,6 +66,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`audit-code-mort`](audit-code-mort/memo.md) | livré | refactoring | 2026-11-08 | Audit code mort (M-001 à M-004) |
 | [`audit-gems-loofah`](audit-gems-loofah/memo.md) | livré | bugfix | 2026-11-02 | Avis de sécurité loofah, nokogiri, rails-html-sanitizer |
 | [`audit-jobs-echecs-muets`](audit-jobs-echecs-muets/memo.md) | livré | bugfix | 2026-11-08 | Jobs : échecs muets (audit 2026-11-08) |
+| [`audit-perf-rapide`](audit-perf-rapide/memo.md) | livré | optimisation | 2026-11-08 | Audit perf rapide |
 | [`audit-ux-roles`](audit-ux-roles/) | pas de memo | — | — | — |
 | [`audit-yarn-braces`](audit-yarn-braces/memo.md) | livré en PR | bugfix | 2026-10-03 | L'audit Yarn bloque toute la CI sur une faille de braces sans correctif |
 | [`b001-privileges-equipe`](b001-privileges-equipe/memo.md) | livré | bugfix | 2026-11-08 | B-001 : privilèges entre sous-rôles de l'équipe |

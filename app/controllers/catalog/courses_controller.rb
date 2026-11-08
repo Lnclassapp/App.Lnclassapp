@@ -23,10 +23,12 @@ module Catalog
       # UDR enseignant §3.7 : une matière à la fois, la puce active (par défaut la première) ; la page suivante la reprend.
       @filters[:material] = teacher_material&.slug if teacher_scope
       # La série ne fait que restreindre : l'élève garde la règle de son niveau (audience).
+      shared = lessons_share_phone_page?
       @page = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, page: params[:page], level: @filters[:level],
                                                             series: @filters[:series], material: @filters[:material],
                                                             search: @filters[:q], audience: own_audience,
-                                                            material_ids: teacher_scope&.material_ids)
+                                                            material_ids: teacher_scope&.material_ids, with_essentials: shared)
+      split_shared_page if shared
       render partial: "page_frame", locals: { page: @page } if page_frame_request?
     end
 
@@ -168,6 +170,23 @@ module Catalog
         session[LESSON_MATERIAL_KEY] = requested.slug if requested
         requested || lesson_materials.find { it.slug == session[LESSON_MATERIAL_KEY] } || lesson_materials.first
       end
+    end
+
+    # Audit O-C01 : la vue d'une matière de l'élève (?material=) lit deux fois la même page, pour le téléphone (cartes sans
+    # fiches) et pour l'ordinateur (leçons avec leurs fiches). Quand les deux visent les mêmes cours (même matière, même
+    # recherche, ni niveau ni série, première page), la requête est lue une fois, avec les fiches. Hors cadre Turbo : un
+    # cadre (recherche, page suivante) ne rend pas le bloc des leçons.
+    def lessons_share_phone_page?
+      return false unless current_actor.student? && turbo_frame_request_id.blank?
+      return false if @filters.values_at(:level, :series).any?(&:present?) || params[:page].to_s.to_i > 1
+
+      @filters[:material].present? && lesson_material&.slug == @filters[:material]
+    end
+
+    # Les leçons gardent la page avec ses fiches ; le téléphone reçoit les mêmes cartes, sans fiches comme avant.
+    def split_shared_page
+      @lessons_page = @page
+      @page = @page.with(rows: @page.rows.map { it.with(essentials: []) })
     end
 
     # CA-E14 : les leçons de cette matière avec leurs fiches, sur la recherche ; nil sans matière (élève sans classe).
