@@ -110,6 +110,24 @@ class BillingFreePeriodTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "au-delà de 30 vérifications par minute, une fiche bloquée mène encore à Mon abonnement, jamais au verdict" do
+    Rails.cache.clear
+    course = create_course(name: "Racines carrées", content: "")
+    notion = create_practice_notion(course:, questions: [ numeric_question ])
+    student = travel_to(CREATED_ON) { create_student_for(course) }
+    digest = Entities::Catalog::NotionPractice.from_raw(raw_practice(numeric_question)).digest
+    travel_to(BLOCKED_DAY) do
+      sign_in_as student
+      check = -> { post practice_check_path(course_slug: course.slug, slug: notion.slug), params: { digest:, answers: {} } }
+      30.times { check.call }
+
+      check.call
+
+      assert_redirected_to billing_subscription_path
+      assert_equal course_path(course.slug), session[RedirectsSubscriptionRequired::RETURN_KEY]
+    end
+  end
+
   test "bout en bout : bloqué au 8e jour, il active un code, revient à l'exercice et le démarre" do
     student = student_created(CREATED_ON)
     code = Orm::Billing::ActivationCard.where(state: "issued").order(:serial).first.code

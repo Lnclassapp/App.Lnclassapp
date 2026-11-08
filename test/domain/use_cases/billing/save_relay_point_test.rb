@@ -92,6 +92,18 @@ module UseCases
 
         assert_equal [ 4 ], audit.events.sole[:metadata][:school_ids]
       end
+
+      test "un échec du dépôt est rendu tel quel, sans audit" do
+        relay_points = FakeRelayPoints.new
+        relay_points.define_singleton_method(:save) { |**| Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] }) }
+        audit = FakeAuditLog.new
+        result = SaveRelayPoint.new(relay_points:, audit_log: audit, transaction: FakeTransaction.new,
+                                    policy: Policies::Billing::ManageBillingPolicy.new, clock: Clock.new(NOW))
+                               .call(actor: TEAM, dto: Dtos::Billing::RelayPointInput.new(valid_attributes))
+
+        assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
+        assert_empty audit.events
+      end
     end
   end
 end
