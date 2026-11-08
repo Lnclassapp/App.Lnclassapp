@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/classroom_students/_self_practice — « Fait seul · 30 derniers jours » sur la fiche d'un élève %>
 <%# Rôle : les exercices faits sans assignation, du plus récent au plus ancien (20 au plus, et le total) : titre, matière, date, score, résultat %>
 <%# ADR  : 0089 (§4.2), 0097 (§4.4) · UDR : 0107 (§3.5) · un seul lien par ligne %>
-<%# locals: (rows:, total:) -%>
+<%# locals: (rows:, total:, linked: true) -%>
 <% days = Queries::Classroom::StudentFileQuery::SELF_PRACTICE_DAYS %>
 <section id="student_file_self_practice" aria-labelledby="student_file_self_practice_title" class="lg:col-start-2 lg:row-start-3">
   <h2 id="student_file_self_practice_title" class="mb-2 font-display text-xl font-medium"><%= t(".title", days:) %></h2>
@@ -24,8 +24,10 @@
           </div>
           <div class="shrink-0 text-right">
             <p class="font-medium tabular-nums"><%= number_to_percentage(row.score_percent, precision: 0, format: "%n %") %></p>
-            <%= link_to t(".see_result"), exercise_session_result_path(row.session_public_id),
-                        class: "inline-flex min-h-tap items-center text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+            <% if linked %>
+              <%= link_to t(".see_result"), exercise_session_result_path(row.session_public_id),
+                          class: "inline-flex min-h-tap items-center text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+            <% end %>
           </div>
         </li>
       <% end %>

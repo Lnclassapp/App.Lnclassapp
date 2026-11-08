@@ -12,7 +12,7 @@ class Classroom::AssignmentBatchTest < ApplicationSystemTestCase
     @thales_exercises = Array.new(3) { |n| create_exercise(essential: @thales_notion, title: "Thalès #{n + 1}") }
     @pythagore_exercises = Array.new(3) { |n| create_exercise(essential: @pythagore_notion, title: "Pythagore #{n + 1}") }
     @classroom = create_classroom(name: "3e 1", level: @thales.level)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @thales.material, classrooms: [ @classroom ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
                                                                 at: Time.current)
   end
@@ -71,7 +71,7 @@ class Classroom::AssignmentBatchTest < ApplicationSystemTestCase
     assert_selector "#sheet-batch-bar", text: "10 exercices choisis"
     box(@pythagore_exercises[1]).click
     assert_equal "false", box(@pythagore_exercises[1])["aria-checked"]
-    assert_selector "#sheet-batch-bar [role=status]", text: "Choisis entre 1 et 10 exercices."
+    assert_selector "#sheet-batch-bar [role=status]", text: "Choisissez entre 1 et 10 exercices."
     box(@pythagore_exercises[0]).click
     assert_selector "#sheet-batch-bar", text: "9 exercices choisis"
     within(bar) { click_button "Vider" }

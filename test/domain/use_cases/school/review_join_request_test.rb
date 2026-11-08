@@ -8,7 +8,23 @@ module UseCases
       Clock = Data.define(:now)
       Request = Entities::School::JoinRequest
 
+      class FakeSchools
+        include Ports::School::SchoolRepositoryPort
+
+        def initialize(*schools) = @schools = schools
+        def find_by_id(id:) = @schools.find { it.id == id }
+      end
+
+      class FakeDepartures
+        include Ports::School::TeacherDepartureRepositoryPort
+
+        def initialize(*departures) = @departures = departures
+        def open_for(teacher_id:, school_id:) = @departures.find { it.teacher_id == teacher_id && it.school_id == school_id }
+      end
+
       setup do
+        @schools = FakeSchools.new(Entities::School::School.new(id: 31, status: "active"))
+        @departures = FakeDepartures.new
         @requests = FakeJoinRequests.new(Request.new(id: 5, public_id: "req-5", teacher_id: 41, school_id: 31, status: "pending", teacher_name: "Awa Koné"),
                                          Request.new(id: 6, public_id: "req-6", teacher_id: 42, school_id: 31, status: "rejected", teacher_name: "Yao"))
         @audit = FakeAuditLog.new
@@ -19,7 +35,8 @@ module UseCases
 
       def review(public_id: "req-5", decision: "approve", actor: @team)
         ReviewJoinRequest.new(join_requests: @requests, audit_log: @audit, policy: Policies::School::ManageSchoolPolicy.new,
-                              transaction: @transaction, clock: Clock.new(NOW), teacher_materials: @materials)
+                              transaction: @transaction, clock: Clock.new(NOW), teacher_materials: @materials,
+                              schools: @schools, departures: @departures)
                          .call(actor:, public_id:, decision:)
       end
 
@@ -35,6 +52,33 @@ module UseCases
         assert_equal [ audited("join_request_approved") ], @audit.events
         assert_equal [ [ :inherit, 41, 31, nil, NOW ] ], @materials.calls
         assert_equal 1, @transaction.calls
+      end
+
+      # Audit B-015: approving attaches, so it needs an active school and no open departure (as VouchPolicy and JoinSchoolWithCode).
+      test "approve: an inactive or missing school is a conflict, nothing is written" do
+        [ FakeSchools.new(Entities::School::School.new(id: 31, status: "inactive")), FakeSchools.new ].each do |schools|
+          @schools = schools
+
+          assert_equal [ :conflict, { base: [ :school_inactive ] } ], review.then { [ it.code, it.errors ] }
+        end
+        assert_empty @requests.writes
+        assert_empty @audit.events
+        assert_empty @materials.calls
+      end
+
+      test "approve: an open departure of the teacher from this school is a conflict, nothing is written" do
+        @departures = FakeDepartures.new(Struct.new(:teacher_id, :school_id).new(41, 31))
+
+        assert_equal [ :conflict, { base: [ :departure_open ] } ], review.then { [ it.code, it.errors ] }
+        assert_empty @requests.writes
+        assert_empty @audit.events
+      end
+
+      test "reject stays possible on an inactive school or with an open departure" do
+        @schools = FakeSchools.new
+        @departures = FakeDepartures.new(Struct.new(:teacher_id, :school_id).new(41, 31))
+
+        assert review(decision: "reject").success?
       end
 
       test "reject: refused and audited" do

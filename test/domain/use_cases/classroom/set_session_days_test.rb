@@ -80,12 +80,13 @@ module UseCases
         assert_equal %i[classrooms session_days policy clock], keywords
       end
 
-      test "tout décocher vaut « non renseigné » : aucun jour" do
+      test "tout décocher est refusé : :invalid (:blank), les jours déjà donnés restent (B-012)" do
+        @session_days.stored[[ 7, 3 ]] = [ 1, 4 ]
         result = set([ "" ])
 
-        assert result.success?
-        assert result.value.session_days.none?
-        assert_equal [], @session_days.stored[[ 7, 3 ]]
+        assert_equal :invalid, result.code
+        assert_equal 1, result.errors[:weekdays].size
+        assert_equal [ 1, 4 ], @session_days.stored[[ 7, 3 ]]
       end
 
       test "un jour hors de lundi … samedi : :invalid, rien n'est écrit" do

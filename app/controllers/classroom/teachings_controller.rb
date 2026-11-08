@@ -32,7 +32,8 @@ module Classroom
       UseCases::Classroom::DeclareTeaching.new(**dependencies, clock: Time.zone)
     end
 
-    def withdraw = UseCases::Classroom::WithdrawTeaching.new(**dependencies)
+    # Audit B-013 : se retirer reste permis sur une classe archivée, que se déclarer refuse.
+    def withdraw = UseCases::Classroom::WithdrawTeaching.new(**dependencies, policy: Policies::Classroom::WithdrawTeachingPolicy.new)
 
     def dependencies
       { classrooms: Repositories::Classroom::ClassroomRepository.new, teachings: Repositories::Classroom::TeachingRepository.new,
