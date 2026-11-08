@@ -7,6 +7,9 @@ module Queries
       ACCENTED = "àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ".freeze
       PLAIN = "aaaceeeeiioouuuyaaaceeeeiioouuuy".freeze
 
+      # « œ » et « æ » ne sont pas des lettres accentuées : le SQL les déplie comme `transliterate` côté Ruby.
+      LIGATURES = ->(sql) { "replace(replace(#{sql}, 'œ', 'oe'), 'æ', 'ae')" }
+
       module_function
 
       # → la portée filtrée sur `columns` (expressions SQL écrites par le code, jamais par l'utilisateur), ou la même
@@ -15,7 +18,7 @@ module Queries
         term = normalize(term)
         return scope if term.empty?
 
-        condition = columns.map { "translate(lower(#{it}), '#{ACCENTED}', '#{PLAIN}') LIKE :pattern" }.join(" OR ")
+        condition = columns.map { "translate(#{LIGATURES.call("lower(#{it})")}, '#{ACCENTED}', '#{PLAIN}') LIKE :pattern" }.join(" OR ")
         scope.where(condition, pattern: "%#{ActiveRecord::Base.sanitize_sql_like(term)}%")
       end
 
