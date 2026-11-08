@@ -1,0 +1,7 @@
+<%# 🌐 UI · catalog/courses/_lessons_page_frame — réponse du frame différé « lessons_page_<n> » : la page n des leçons, sans layout %>
+<%# Rôle : les cartes de la page demandée et le frame de la suivante, dans le frame qui les a demandées (audit O-C02) %>
+<%# ADR  : 0076 · UDR : 0013 (amendement du 2026-10-05) %>
+<%# locals: (page:, material:) -%>
+<%= turbo_frame_tag turbo_frame_request_id, target: "_top" do %>
+  <%= render "catalog/courses/lesson_cards", page:, material:, nested: true %>
+<% end %>
