@@ -464,12 +464,12 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   test "B-039 : l'enseignant de la classe et l'équipe n'ont pas de résultat pour une copie en cours : 404, sans redirection" do
     started = create_exercise_session(student: @student, exercise: @exercise)
 
-    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+    { "enseignant" => create_teacher(classrooms: [ @classroom ]), "équipe" => create_team_member }.each do |label, reader|
       sign_in_as reader
 
       show started
 
-      assert_response :not_found, reader.class.name
+      assert_response :not_found, label
     end
   end
 
@@ -715,7 +715,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     gap, remediation = failed_then_remediated(80)
     gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
 
-    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+    { "enseignant" => create_teacher(classrooms: [ @classroom ]), "équipe" => create_team_member }.each do |label, reader|
       sign_in_as reader
 
       show remediation

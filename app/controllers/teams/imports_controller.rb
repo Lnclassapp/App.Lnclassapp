@@ -49,7 +49,10 @@ module Teams
     end
 
     # Le type vient de l'adresse (new) ou du formulaire (create) ; une valeur forgée qui n'est pas un texte est inconnue.
-    def kind_param = params[:kind].presence || nested_param(:import, :kind)
+    def kind_param
+      kind = params[:kind].presence || nested_param(:import, :kind)
+      kind if kind.is_a?(String)
+    end
 
     # import[files][] : 1 à N fichiers ; tout ce qui n'est pas un fichier téléversé est ignoré.
     def form_input

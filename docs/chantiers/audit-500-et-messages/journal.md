@@ -24,6 +24,8 @@ Cause commune des « 500 » : un `rescue` trop large ou absent à la frontière 
 
 Suite : le garant (`join_request_vouches`) affiche encore « déjà traitée » pour un enseignant déjà rattaché (même cause que B-014) ; `Identity::SecondFactorsController#form_input` garde un `params.dig` (même cause que B-008).
 
+Suite aussi : `RemoveOwnPhoto` écrit la trace avant `remove` ; si une requête concurrente retire la photo entre-temps, la trace survit à un retrait qui n'a pas eu lieu (rare, hors lot).
+
 ## À trancher
 
 - **B-029** : un brouillon d'un autre auteur doit-il rester retirable par l'équipe / la direction ? Option prudente appliquée : rien ne change.

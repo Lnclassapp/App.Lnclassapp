@@ -586,5 +586,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
     post teams_imports_path, params: { kind: "schools", import: "forged" }
     assert_response :unprocessable_entity
+    post teams_imports_path, params: { kind: { x: "1" } }
+    assert_response :not_found
   end
 end
