@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::Classroom::SetSessionDays
-# Rôle : l'enseignant de la classe renseigne, modifie ou efface ses jours de séance ; aucune assignation n'est touchée
+# Rôle : l'enseignant de la classe renseigne ou modifie ses jours de séance (au moins un) ; aucune assignation n'est touchée
 # ADR  : 0026, 0028, 0072
 module UseCases
   module Classroom
@@ -13,7 +13,7 @@ module UseCases
         @clock = clock
       end
 
-      # dto : Dtos::Classroom::SessionDaysInput ; aucun jour = « non renseigné », la question reviendra à l'assignation.
+      # dto : Dtos::Classroom::SessionDaysInput ; au moins un jour (audit B-012).
       # → Result(Saved) | :not_found | :forbidden (y compris base: classroom_archived) | :invalid
       def call(actor:, dto:)
         classroom = @classrooms.find_by_public_id(public_id: dto.classroom_public_id)

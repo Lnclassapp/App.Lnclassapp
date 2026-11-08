@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::SessionDaysController
 # Rôle : l'enseignant de la classe modifie ses jours de séance dans la modale ouverte depuis la page de la classe ; succès :
-#        toast et page rafraîchie par morphing ; tout décocher vaut « non renseigné » ; les échéances données ne bougent pas
+#        toast et page rafraîchie par morphing ; tout décocher est refusé (« Cochez au moins un jour ») ; les échéances données ne bougent pas
 # ADR  : 0026, 0028, 0072, 0088 · UDR : 0006, 0062 (§3.4)
 module Classroom
   class SessionDaysController < AuthenticatedController

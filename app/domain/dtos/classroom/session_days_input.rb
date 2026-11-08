@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Dtos::Classroom::SessionDaysInput
-# Rôle : jours de séance cochés par l'enseignant pour une classe (1 = lundi … 6 = samedi) ; aucun = non renseigné
+# Rôle : jours de séance cochés par l'enseignant pour une classe (1 = lundi … 6 = samedi) ; au moins un (audit B-012)
 # ADR  : 0026, 0072 · UDR : 0062
 module Dtos
   module Classroom
@@ -11,6 +11,7 @@ module Dtos
 
       validates :classroom_public_id, presence: true
       validate :weekdays_in_range
+      validate :weekdays_given
 
       # Cases à cocher (…[weekdays][], champ caché vide compris) → [Integer] triés et dédoublonnés ; nil si une valeur
       # n'est pas un jour de 1 (lundi) à 6 (samedi). Partagé avec AssignmentInput.
@@ -24,13 +25,18 @@ module Dtos
         @weekdays_invalid = @weekdays.nil?
       end
 
-      # → [Integer] ; [] = non renseigné.
+      # → [Integer] ; [] seulement avant validation : une liste vide est refusée (:blank).
       def weekdays = @weekdays || []
 
       private
 
       def weekdays_in_range
         errors.add(:weekdays, :inclusion) if @weekdays_invalid
+      end
+
+      # Audit B-012 : tout décocher n'efface plus les jours en annonçant « enregistrés », comme l'assignation (:blank).
+      def weekdays_given
+        errors.add(:weekdays, :blank) if !@weekdays_invalid && weekdays.empty?
       end
     end
   end

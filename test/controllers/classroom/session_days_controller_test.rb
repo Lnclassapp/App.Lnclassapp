@@ -55,14 +55,15 @@ class Classroom::SessionDaysControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]"
   end
 
-  test "unchecking every day means « not answered »: no day left" do
+  test "B-012: unchecking every day is refused with « Cochez au moins un jour »: 422, the days stay" do
     set_days([ 1, 4 ])
     sign_in_as @teacher
 
     update([], as: :turbo_stream)
 
-    assert_response :success
-    assert_empty session_days
+    assert_response :unprocessable_entity
+    assert_select "#session_days_weekdays_error", text: /Cochez au moins un jour/
+    assert_equal [ 1, 4 ], session_days
   end
 
   test "a day out of Monday … Saturday: 422, the modal again, nothing written" do
