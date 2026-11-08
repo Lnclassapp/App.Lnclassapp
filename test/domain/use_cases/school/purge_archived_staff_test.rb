@@ -156,7 +156,7 @@ module UseCases
       test "un compte en échec n'arrête pas les suivants : il est rendu dans failed, les autres sont supprimés" do
         result = purge(staffs: [ staff(11, AT - 60), staff(12, AT - 120) ], failing_photo: 11)
 
-        assert_equal PurgeArchivedStaff::Purged.new(deleted: 1, failed: [ 11 ]), result.value
+        assert_equal PurgeArchivedStaff::Purged.new(deleted: 1, failed: [ PurgeArchivedStaff::Failure.new(user_id: 11, error: "IOError") ]), result.value
         assert_equal erasure_of(12), @journal.calls
       end
 

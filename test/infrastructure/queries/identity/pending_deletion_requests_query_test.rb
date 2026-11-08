@@ -22,8 +22,9 @@ class Queries::Identity::PendingDeletionRequestsQueryTest < ActiveSupport::TestC
   end
 
   test "the pending requests, nearest due date first, with the account to open" do
-    awa = create_student(first_name: "Awa", last_name: "Koné", contact: "0100000001")
-    yao = create_student(first_name: "Yao", last_name: "Brou", contact: "0100000002")
+    # Numbers from the factory: one written by hand would collide with the factory's own sequence (« 01 » + counter).
+    awa = create_student(first_name: "Awa", last_name: "Koné")
+    yao = create_student(first_name: "Yao", last_name: "Brou")
     request_for(awa, Date.new(2026, 9, 20))
     request_for(yao, Date.new(2026, 9, 3))
     request_for(create_student, Date.new(2026, 8, 1), status: "cancelled")
@@ -31,9 +32,9 @@ class Queries::Identity::PendingDeletionRequestsQueryTest < ActiveSupport::TestC
     rows = @query.call
 
     assert_equal [ Queries::Identity::PendingDeletionRequestsQuery::Row.new(public_id: yao.public_id, display_name: "Yao Brou",
-                                                                           contact: "0100000002", requested_on: Date.new(2026, 9, 3)),
+                                                                           contact: yao.contact, requested_on: Date.new(2026, 9, 3)),
                    Queries::Identity::PendingDeletionRequestsQuery::Row.new(public_id: awa.public_id, display_name: "Awa Koné",
-                                                                           contact: "0100000001", requested_on: Date.new(2026, 9, 20)) ], rows
+                                                                           contact: awa.contact, requested_on: Date.new(2026, 9, 20)) ], rows
     assert_equal [ Date.new(2026, 10, 3), Date.new(2026, 10, 20) ], rows.map(&:due_on)
     assert_equal %i[soon on_time], rows.map { it.stage(Date.new(2026, 9, 30)) }
   end

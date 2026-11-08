@@ -9,11 +9,12 @@ module School
     discard_on ActiveJob::DeserializationError
 
     def perform(report_id)
-      UseCases::School::RegenerateSchoolCodes.new(
+      result = UseCases::School::RegenerateSchoolCodes.new(
         schools: Repositories::School::SchoolRepository.new, reports: Repositories::Catalog::ImportReportRepository.new,
         users: Repositories::Identity::UserRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         transaction: Repositories::Shared::Transaction.new, policy: Policies::School::RegenerateCodesInBulkPolicy.new, clock: Time.zone
       ).call(report_id:)
+      log_failure(result, report_id:)
     end
   end
 end
