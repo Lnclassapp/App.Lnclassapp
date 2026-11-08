@@ -99,6 +99,18 @@ module UseCases
       test "une date absente reste permise : reçu maintenant" do
         assert record(received_at: "").success?
       end
+
+      test "un échec du dépôt est rendu tel quel, sans audit" do
+        remittances = FakeRemittances.new
+        remittances.define_singleton_method(:record) { |**| Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] }) }
+        audit = FakeAudit.new
+        dto = Dtos::Billing::RemittanceInput.new(relay_point_public_id: "pt-awa", amount_xof: "10000", reference: "WAVE-1")
+        result = RecordRemittance.new(remittances:, relay_points: FakeRelayPoints.new, audit_log: audit, transaction: FakeTransaction.new,
+                                      policy: Policies::Billing::ManageBillingPolicy.new, clock: Clock.new(NOW)).call(actor: TEAM, dto:)
+
+        assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
+        assert_nil audit.events
+      end
     end
   end
 end

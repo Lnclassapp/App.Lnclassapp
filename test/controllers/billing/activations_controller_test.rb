@@ -144,6 +144,15 @@ class Billing::ActivationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=alert]", I18n.t("errors.codes.conflict")
   end
 
+  test "un refus de la policy du use case rend 403, sans rien activer" do
+    stub_any_instance(UseCases::Billing::ActivateCard, :call, ->(**) { Shared::Result.failure(:forbidden) }) do
+      activate(typed)
+    end
+
+    assert_response :forbidden
+    assert_equal "issued", @card.reload.state
+  end
+
   test "le freinage d'un élève ne touche pas un autre élève" do
     5.times { activate("zzzz zzzz zzzz") }
     activate(typed)
