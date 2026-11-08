@@ -162,7 +162,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{CARD}[data-state=review]" do
       assert_select "#student_next_step_title", text: "Ancienne fiche"
       assert_select "span", text: tl("next_step.review.badge")
-      assert_select "p", text: tl("next_step.review.note", grade: "8/20")
+      assert_select "p", text: tl("next_step.review.note", medal: "Bronze")
       assert_select "a.ui-button-primary[href=?][data-turbo-prefetch=false]", course_path(@course.slug, anchor: "notion-#{Orm::Essential.find_by!(name: "Ancienne fiche").slug}"),
                     text: tl("next_step.review.open")
     end
@@ -426,7 +426,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "h3", text: tl("history.today")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}']", text: including("Méiose")
       assert_select "a[href='#{exercise_session_result_path(session.public_id)}'] img[src*='subjects/svt'][alt='']", 1
-      assert_select "*", text: including(I18n.t("assessment.badges.grade", grade: 18))
+      assert_select "[data-medal]", text: including("Or")
+      assert_select "*", text: %r{\d+\s*/\s*20|%}, count: 0
       assert_select "a", text: tl("history.more"), count: 0
     end
   end
@@ -448,7 +449,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "a grade of 14/20 or more is green, a lower one in ink, never red; under 10/20, « Refaire » starts the exercise again" do
+  test "the history shows a medal per line, never a grade or red; under Argent, « Refaire » starts the exercise again" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
     [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
@@ -456,12 +457,12 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
 
-    grades = css_select("turbo-frame#student_home_recent_activity li [data-grade]")
-    assert_equal [ "14/20", "13/20", "4/20" ], grades.map { it.text.squish }
-    assert_equal [ true, false, false ], grades.map { it["class"].split.include?("text-success") }
-    assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=warning]", 0
+    medals = css_select("turbo-frame#student_home_recent_activity li [data-medal]")
+    assert_equal [ "Argent Médaille Argent", "Bronze Médaille Bronze", "Bronze Médaille Bronze" ], medals.map { it.text.squish }
+    assert_select "turbo-frame#student_home_recent_activity", text: %r{\d+\s*/\s*20|%}, count: 0
+    assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
-                  text: tl("history.redo"), count: 1
+                  text: tl("history.redo"), count: 2
   end
 
   test "pause: 3 copies rendered within 30 minutes hide « Refaire » for that exercise only, and it returns once the pause is over" do

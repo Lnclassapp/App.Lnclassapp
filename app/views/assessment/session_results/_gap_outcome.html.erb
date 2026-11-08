@@ -4,12 +4,11 @@
 <%# suivi-classe-lecon §3.3 : `proposal` (Proposal | nil) ajoute « Refais un exercice sur cette notion » quand la fiche a un exercice à proposer %>
 <%# locals: (outcome:, essential:, href: nil, proposal: nil) -%>
 <% lifted = outcome == :lifted %>
-<% grade = Entities::Assessment::Grading.grade_on_20(Entities::Assessment::Grading::REMEDIATION_THRESHOLD) %>
 <div id="session_gap_outcome" class="flex items-start gap-3 rounded-card px-4 py-4 text-sm text-ink <%= lifted ? "bg-success-soft" : "bg-warning-soft" %>">
   <%= ui_icon lifted ? "check-badge" : "light-bulb", variant: :mini, size: :sm, class: "mt-0.5 #{lifted ? "text-success" : "text-warning"}" %>
   <div class="min-w-0 space-y-1">
     <p class="font-medium"><%= t(".#{outcome}.message") %></p>
-    <p><%= t(".#{outcome}.hint", essential: essential.name, grade:) %></p>
+    <p><%= t(".#{outcome}.hint", essential: essential.name) %></p>
         <% if !lifted && proposal&.exercise_public_id %>
       <%= ui_button t(".redo_proposal"), variant: :primary, icon_end: "arrow-right", data: { turbo_prefetch: false },
                     href: course_sheet_path(proposal.course_slug, "notion-#{proposal.essential_slug}", anchor: "sheet-exercise-#{proposal.exercise_public_id}") %>

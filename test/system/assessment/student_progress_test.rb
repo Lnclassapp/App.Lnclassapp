@@ -27,19 +27,19 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
     visit exercise_path(@exercise.public_id)
     click_on I18n.t("assessment.exercises.show.start")
     play(correct: 1)
-    assert_text "7/20"
+    assert_selector "#session_badge[aria-label='Médaille Bronze']"
     assert_no_progress_sentence
 
     within("#restart-exercise-form") { click_on I18n.t("assessment.exercises.show.redo") }
     second = play(correct: 3)
-    assert_text "20/20"
-    assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: 7, current: 20)
+    assert_selector "#session_badge[aria-label='Médaille Diamant']"
+    assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: "Bronze", current: "Diamant")
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: second).kind
     assert_readable_in_dark_mode
     assert_fits_a_phone
 
     visit exercise_session_result_path(completed(@exercise, 25).public_id)
-    assert_progress_sentence I18n.t("#{RESULTS}.progress.decline", best: 20)
+    assert_progress_sentence I18n.t("#{RESULTS}.progress.decline", best: "Diamant")
   end
 
   private
@@ -57,7 +57,7 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
   end
 
   def assert_no_progress_sentence
-    assert_selector "#session_result dl"
+    assert_selector "#session_badge"
     assert_no_selector "#session_progress"
     SENTENCES.each { assert_no_text I18n.t("#{RESULTS}.progress.#{it}").split("%{").first }
     assert_no_forbidden_words

@@ -52,7 +52,7 @@ module Queries
         result = detail
 
         assert_equal [ 6, 7, :acquired, true, nil ], result.to_h.values_at(:done, :present, :category, :readable, :selected)
-        assert_equal({ none: 2, bronze: 1, silver: 1, gold: 2, diamond: 0 }, result.badge_counts)
+        assert_equal({ none: 0, bronze: 3, silver: 1, gold: 2, diamond: 0 }, result.badge_counts)
         assert_equal 6, result.students.size
         assert_equal({ progress: 1, flat: 2, decline: 1 }, result.trend_counts)
       end
@@ -122,10 +122,10 @@ module Queries
         student("Ali", "Pas-Encore", scores: [ 30 ])
 
         assert_equal :bronze, detail(badge: :bronze).selected
-        assert_equal [ "Awa Bronze" ], detail(badge: :bronze).students.map(&:display_name)
         assert_equal [ "Yao Diamant" ], detail(badge: :diamond).students.map(&:display_name)
         assert_equal [ "Zoé Argent" ], detail(badge: :silver).students.map(&:display_name)
-        assert_equal [ "Ali Pas-Encore" ], detail(badge: :none).students.map(&:display_name)
+        assert_equal [ "Awa Bronze", "Ali Pas-Encore" ], detail(badge: :bronze).students.map(&:display_name)
+        assert_empty detail(badge: :none).students
         assert_equal 2, detail(badge: :gold).students.size
         assert_equal [ nil, 6 ], [ detail(badge: :unknown).selected, detail(badge: :unknown).students.size ]
         assert_equal [ nil, 6 ], [ detail(badge: "bronze").selected, detail(badge: "bronze").students.size ]
@@ -133,10 +133,10 @@ module Queries
         assert_equal detail.badge_counts, detail(badge: :bronze).badge_counts
       end
 
-      test "the rank of a score is the palier of Grading: 47 is « Pas encore », 49 and 50 Bronze (ADR-0106, read on 20), 70 Argent, 80 Or, 100 Diamant, 98 only Or" do
+      test "the rank of a score is the palier of Grading: 47 is Bronze too (any exercise done), 49 and 50 Bronze (ADR-0106, read on 20), 70 Argent, 80 Or, 100 Diamant, 98 only Or" do
         [ 47, 49, 50, 70, 80, 98, 100 ].each { student(scores: [ it ]) }
 
-        assert_equal({ none: 1, bronze: 2, silver: 1, gold: 2, diamond: 1 }, detail.badge_counts)
+        assert_equal({ none: 0, bronze: 3, silver: 1, gold: 2, diamond: 1 }, detail.badge_counts)
       end
 
       test "the rate of a question on the best sessions never exceeds 100 %, « — » without attempt, numbered in the exercise order" do
@@ -192,9 +192,9 @@ module Queries
 
         assert_equal [ [ "Marc Haut", 100, 20, :diamond ], [ "Koffi Progres", 67, 13, :bronze ], [ "Jean Baisse", 65, 13, :bronze ],
                        [ "Yao Achi", 58, 12, :bronze ], [ "Zoé Achi", 58, 12, :bronze ], [ "Awa Seule", 55, 11, :bronze ],
-                       [ "Ali Pas-Encore", 42, 8, :none ] ],
+                       [ "Ali Pas-Encore", 42, 8, :bronze ] ],
                      detail.students.map { [ it.display_name, it.best, it.grade, it.badge ] }
-        assert_equal [ "Koffi Progres", "Jean Baisse", "Yao Achi", "Zoé Achi", "Awa Seule" ],
+        assert_equal [ "Koffi Progres", "Jean Baisse", "Yao Achi", "Zoé Achi", "Awa Seule", "Ali Pas-Encore" ],
                      detail(badge: :bronze).students.map(&:display_name)
       end
 

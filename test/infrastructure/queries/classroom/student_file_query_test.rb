@@ -65,7 +65,7 @@ module Queries
         assert_equal [ 16, :gold ], file.to_h.values_at(:class_grade, :class_badge)
       end
 
-      test "the class badge is Diamond when every exercise done is a perfect score, Bronze at 55 %, none under Bronze" do
+      test "the class badge is Diamond when every exercise done is a perfect score, Bronze at 55 %, still Bronze at 30 %" do
         one = assign("Un")
         hand_in(one, 100, at: Time.zone.local(2026, 10, 7, 9))
         assert_equal [ 20, :diamond ], file.to_h.values_at(:class_grade, :class_badge)
@@ -76,7 +76,7 @@ module Queries
 
         weak = create_student(classroom: @classroom, first_name: "Yao")
         hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9), student: weak)
-        assert_equal [ 6, nil ], file(weak).to_h.values_at(:class_grade, :class_badge)
+        assert_equal [ 6, :bronze ], file(weak).to_h.values_at(:class_grade, :class_badge)
       end
 
       test "the header: name, masked number, arrival and its channel; the full number never leaves the query" do
@@ -183,7 +183,7 @@ module Queries
         end
         create_badge(student: @awa, exercise: create_exercise(essential: @essential), level: "diamond")
 
-        assert_equal({ bronze: 0, silver: 1, gold: 1, diamond: 1 }, file.badge_counts)
+        assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 1 }, file.badge_counts)
       end
 
       test "without an assignment: zero everywhere, the four tiers at zero" do

@@ -56,7 +56,13 @@
         </div>
       </div>
 
-      <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
+      <%# UDR médailles : l'élève lit sa médaille et la prochaine à viser, ni note, ni score, ni maîtrise ; l'enseignant et l'équipe gardent les 4 termes (chantiers suivants). %>
+      <% if @owner %>
+        <% upcoming = next_medal(result.badge_level) %>
+        <% if upcoming %>
+          <p id="session_next_medal" class="mt-4 text-sm text-mute"><%= t(".next_medal", medal: badge_label(upcoming)) %></p>
+        <% end %>
+      <% else %>
       <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:max-lg:grid-cols-4" unless @owner %>">
         <div class="<%= tile %>">
           <dt class="<%= label %>"><%= t(".grade") %></dt>
@@ -83,12 +89,13 @@
           </div>
         <% end %>
       </dl>
+      <% end %>
       <%# UDR-0140 §3 : les points, seulement quand l'exercice n'est pas tout à 1 point ; les réponses rédigées et le cahier, à comparer. %>
       <% points = result.points %>
       <% fmt = ->(value) { number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
-      <% if points.weighted || points.manual.positive? %>
+      <% if (points.weighted && !@owner) || points.manual.positive? %>
         <div id="session_points" class="mt-4 space-y-1 text-sm text-mute">
-          <% if points.weighted %>
+          <% if points.weighted && !@owner %>
             <p><%= t(".points_graded", count: points.earned, points: fmt.(points.earned), total: fmt.(points.graded)) %></p>
           <% end %>
           <% if points.manual.positive? %>
