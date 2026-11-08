@@ -38,6 +38,7 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 
 ## Hors périmètre
 
+- Aucun seuil de rendu : un élève peut toujours rendre sa copie comme aujourd'hui.
 - Aucune vue ni libellé ne change (c'est le rôle des chantiers d'écrans).
 - Pas de migration ni de rattrapage : seules les nouvelles clôtures donnent Bronze sous 48 % (porteur).
 - Seuil de remédiation (75 %) inchangé.
@@ -48,7 +49,7 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 |---|---|---|
 | Les sessions déjà clôturées sous 48 % reçoivent-elles Bronze ? | Non : seulement les nouvelles clôtures (porteur) | Aucune migration ni rattrapage ; les écrans gèrent l'absence de médaille ancienne par « Pas encore » |
 | Une copie à 0 % ou vide donne-t-elle Bronze ? | Bronze seulement si au moins une réponse donnée ; copie vide = « Pas encore » (porteur) | La règle lit les réponses, pas seulement le score |
-| Peut-on rendre une copie presque vide ? | Non : au moins 70 % des questions répondues, sinon le bouton « Rendre » reste grisé (porteur) | Le chantier grandit : règle de rendu + écran de la copie en cours (UDR) ; remplace la confirmation des questions vides |
+| Faut-il exiger un minimum de réponses pour rendre ? | Non, on simplifie : pas de seuil de rendu (porteur) | Aucun changement de l'écran de la copie en cours ; seule la règle de médaille change |
 
 ## Cas limites identifiés
 
@@ -57,4 +58,4 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 
 ## Questions encore ouvertes
 
-1. Les 70 % : de quelles questions (corrigées automatiquement seulement, ou aussi rédigées et cahier) ? Et compte-t-on une réponse fausse ?
+1. Médaille d'un élève dans une classe (moyenne) : Bronze dès qu'un exercice a une réponse, même sous 48 % de moyenne ?
