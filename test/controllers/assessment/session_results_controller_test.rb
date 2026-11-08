@@ -459,6 +459,20 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  # B-039 (audit 2026-11-08): the teacher or the team has no « session » page to be sent to (it answers 403): a copy still in progress
+  # is not found for them, and they are not redirected.
+  test "B-039 : l'enseignant de la classe et l'équipe n'ont pas de résultat pour une copie en cours : 404, sans redirection" do
+    started = create_exercise_session(student: @student, exercise: @exercise)
+
+    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+      sign_in_as reader
+
+      show started
+
+      assert_response :not_found, reader.class.name
+    end
+  end
+
   test "session non terminée : retour à la session" do
     started = create_exercise_session(student: @student, exercise: @exercise)
     sign_in_as @student

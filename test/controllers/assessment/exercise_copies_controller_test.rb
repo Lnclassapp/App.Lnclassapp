@@ -175,6 +175,24 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
+  # B-038 (audit 2026-11-08): a double submit (the other request won the race) is not « session replaced »: the copy is in, go to its result.
+  test "double envoi : la copie est déjà rendue, retour au résultat sans l'alerte « session remplacée »" do
+    sign_in_as @student
+    repository = Repositories::Assessment::ExerciseSessionRepository
+    repository.alias_method(:original_record_copy, :record_copy)
+    repository.define_method(:record_copy) { |**| :duplicate }
+
+    begin
+      copy pick(@first, right(@first))
+    ensure
+      repository.alias_method(:record_copy, :original_record_copy)
+      repository.remove_method(:original_record_copy)
+    end
+
+    assert_redirected_to exercise_session_result_path(@session.public_id)
+    assert_nil flash[:alert]
+  end
+
   test "copie abandonnée (Recommencer dans un autre onglet) : retour à l'exercice avec l'alerte" do
     @session.update!(status: "abandoned")
     sign_in_as @student

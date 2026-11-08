@@ -19,16 +19,18 @@ module Identity
 
     def destroy
       result = remove.call(actor: current_actor, user: own_user, ip: request.remote_ip)
-      render_result result, success: ->(_) { saved(tone_t(".removed")) }
+      render_result result, success: lambda { |removed|
+        removed ? saved(tone_t(".removed")) : saved(t(".nothing_to_remove"), type: :info)
+      }
     end
 
     private
 
     # Le rafraîchissement (morphing) met à jour d'un coup la carte, l'en-tête et la barre latérale ; le toast est permanent.
-    def saved(message)
+    def saved(message, type: :success)
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: [ helpers.turbo_stream_toast(message, type: :success), turbo_stream.update("modal", ""),
+          render turbo_stream: [ helpers.turbo_stream_toast(message, type:), turbo_stream.update("modal", ""),
                                  turbo_stream.refresh(request_id: nil) ]
         end
         format.html { redirect_to profile_path, notice: message, status: :see_other }

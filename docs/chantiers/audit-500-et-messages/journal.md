@@ -12,6 +12,18 @@ Cause commune des « 500 » : un `rescue` trop large ou absent à la frontière 
 | B-022 | tout `RecordNotUnique` devenait `already_assigned` | seul l'index « une active » le devient | `assignment_repository_test` |
 | B-040 | **Reporté** : `ExerciseRepository#update` n'a aucun appelant dans `app/` (code mort), la course est inatteignable | — | — |
 
+### Lot « messages trompeurs »
+
+| Constat | Cause | Correction | Test |
+|---|---|---|---|
+| B-010 | `RemoveOwnPhoto` rend `success(false)` sans photo, valeur ignorée | le contrôleur teste la valeur ; toast d'information « Tu n'as pas de photo à retirer. » | `profile_photos_controller_test` |
+| B-014 | `RecordNotUnique` à l'approbation → `:conflict` sans motif → « déjà traitée » | motif `already_attached` + message dédié (fiche de l'équipe) | repository + contrôleur |
+| B-038 | tout `:conflict` hors `exercise_archived` → « session remplacée » | `already_answered` (double envoi) renvoie au résultat | `exercise_copies_controller_test` |
+| B-039 | résultat d'une copie en cours : redirection vers la page de session, 403 pour l'enseignant/l'équipe | 404 pour qui n'est pas l'élève | `session_results_controller_test` |
+| B-029 | **Reporté** : le test existant (AN-16) dit que le brouillon peut être retiré ; changer cela est une décision de droit | — | — |
+
+Suite : le garant (`join_request_vouches`) affiche encore « déjà traitée » pour un enseignant déjà rattaché (même cause que B-014) ; `Identity::SecondFactorsController#form_input` garde un `params.dig` (même cause que B-008).
+
 ## À trancher
 
-— (rien d'ouvert)
+- **B-029** : un brouillon d'un autre auteur doit-il rester retirable par l'équipe / la direction ? Option prudente appliquée : rien ne change.

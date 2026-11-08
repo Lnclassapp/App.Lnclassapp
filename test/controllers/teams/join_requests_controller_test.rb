@@ -65,6 +65,18 @@ class Teams::JoinRequestsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::TeacherSchool.where(teacher: @teacher).count
   end
 
+  # B-014 (audit 2026-11-08): the teacher got a primary school meanwhile — the request stays pending, so « déjà traitée » is false.
+  test "B-014: un enseignant déjà rattaché entre-temps : message dédié, la demande reste en attente" do
+    sign_in_as @member
+    Orm::TeacherSchool.create!(teacher: @teacher, school: create_school, primary: true)
+
+    decide("approve")
+
+    assert_redirected_to school_path(@school.public_id)
+    assert_equal I18n.t("#{SCOPE}.update.already_attached"), flash[:alert]
+    assert_equal "pending", @join_request.reload.status
+  end
+
   test "an unknown request is not found; an unknown decision is refused" do
     sign_in_as @member
 

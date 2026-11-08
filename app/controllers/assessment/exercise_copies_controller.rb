@@ -57,9 +57,12 @@ module Assessment
     end
 
     # Exercice archivé : retour à la leçon. Copie abandonnée (« Recommencer » dans un autre onglet) : retour à l'exercice.
+    # Double envoi (l'autre requête a rendu la copie la première, B-038) : la copie est rendue, on va à son résultat.
     def leave_copy(result)
+      reasons = result.errors.fetch(:base, [])
+      return redirect_to exercise_session_result_path(params[:public_id]), status: :see_other if reasons.include?(:already_answered)
       return redirect_to exercise_path(exercise_public_id), alert: t("assessment.exercise_sessions.show.abandoned"), status: :see_other unless
-        result.errors.fetch(:base, []).include?(:exercise_archived)
+        reasons.include?(:exercise_archived)
 
       detail = Queries::Assessment::ExerciseDetailQuery.new.call(public_id: exercise_public_id, reveal: false)
       anchor = detail.essential ? "notion-#{detail.essential.slug}" : "toute-la-lecon"

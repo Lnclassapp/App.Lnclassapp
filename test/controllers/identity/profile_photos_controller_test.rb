@@ -143,6 +143,18 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, Orm::AuditEvent.where(action: "profile.photo_removed").count
   end
 
+  # B-010 (audit 2026-11-08): nothing to remove must not announce « photo retirée ».
+  test "removing without a photo says there is none, and audits nothing" do
+    sign_in_as @student
+
+    delete profile_photo_path, headers: TURBO_STREAM
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]", text: /Tu n'as pas de photo à retirer\./
+    assert_select "turbo-stream[action=append][target=toasts]", text: /retirée/, count: 0
+    assert_not Orm::AuditEvent.exists?(action: "profile.photo_removed")
+  end
+
   test "the actions take no identifier: always the account of the session" do
     other = create_student
     attach_photo(other)
