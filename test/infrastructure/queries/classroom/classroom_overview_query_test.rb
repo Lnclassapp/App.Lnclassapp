@@ -444,6 +444,19 @@ module Queries
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
       end
 
+      test "médailles : 30 % de moyenne avec une médaille enregistrée est Bronze, sans médaille « Pas encore »" do
+        @assignments = []
+        medal = graded([ 30 ], first_name: "Médaille")
+        none = graded([ 30 ], first_name: "Sans")
+        create_badge(student: medal, exercise: Orm::Exercise.find(@assignments[0].assignable_id), level: "bronze")
+        create_badge(student: none, exercise: create_exercise, level: "bronze") # exercice hors classe : ne compte pas
+
+        rows = overview.students.index_by(&:public_id)
+
+        assert_equal [ :bronze, nil ], [ rows.fetch(medal.public_id).badge, rows.fetch(none.public_id).badge ]
+        assert_equal [ medal.public_id ], overview(badge: "bronze").students.map(&:public_id)
+      end
+
       test "CA-I2 : un sans-faute partout est Diamant ; un seul exercice sans faute sur deux, jamais" do
         @assignments = []
         perfect = graded([ 100 ], first_name: "Parfait")

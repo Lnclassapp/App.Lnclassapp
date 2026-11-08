@@ -67,6 +67,22 @@ module Queries
         assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
       end
 
+      test "badge counts: a 30 % student with a recorded Bronze medal counts Bronze, without one not at all" do
+        assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))),
+                                       by: @teacher)
+        exercise = Orm::Exercise.find(assignment.assignable_id)
+        medal = create_student(classroom: @classroom)
+        none = create_student(classroom: @classroom)
+        [ medal, none ].each do |student|
+          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 30)
+        end
+        assert_equal({ bronze: 0, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
+
+        create_badge(student: medal, exercise:, level: "bronze")
+
+        assert_equal({ bronze: 1, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
+      end
+
       test "badge counts: a student of two classrooms counts once in each, with the assignments of that classroom only" do
         other = create_classroom(school: @school, level: @tle, name: "Tle D 2")
         Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours de ses matières, élèves filtrés par badge de classe puis par trente, au numéro masqué (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7), 0103 · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7), 0103, médailles lues à la clôture · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -128,13 +128,21 @@ module Queries
         scores = Queries::Assessment::AssignmentScores.for(classroom_id:, assignment_ids: due_dates.keys)
         bests = Hash.new { |hash, key| hash[key] = {} }
         scores.each { |assignment_id, rows| rows.each { bests[it.student_id][assignment_id] = it.scores.max } }
-        [ bests.transform_values { standing(it, overdue) }, Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
+        medals = medal_holders(classroom_id, due_dates.keys)
+        [ bests.to_h { |student_id, scores| [ student_id, standing(scores, overdue, medals.include?(student_id)) ] }, Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
       end
 
-      def standing(bests, overdue)
+      # Les élèves qui détiennent une médaille enregistrée (exercise_badges) sur un exercice des assignations données.
+      def medal_holders(classroom_id, assignment_ids)
+        Orm::ClassroomAssignment.where(id: assignment_ids, classroom_id:, assignable_type: "Exercise")
+                                .joins("JOIN exercise_badges ON exercise_badges.exercise_id = classroom_assignments.assignable_id")
+                                .distinct.pluck("exercise_badges.student_id").to_set
+      end
+
+      def standing(bests, overdue, has_medal)
         scores = bests.values
         Standing.new(grade: RosterGrade.grade_for(scores.sum.fdiv(scores.size)), done: scores.size, late: (overdue - bests.keys).size,
-                     badge: Grading.class_badge_for(scores:, all_perfect: scores.all? { Grading.perfect?(it) }))
+                     badge: Grading.class_badge_for(scores:, all_perfect: scores.all? { Grading.perfect?(it) }, has_medal:))
       end
 
       # Ses matières dans l'établissement de la classe, dans l'ordre d'ajout (ADR-0103 §4.5) ; nil pour l'équipe.
