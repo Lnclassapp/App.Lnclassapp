@@ -17,7 +17,7 @@ L'interface mélange « badge », note sur 20, pourcentage et moyenne. Le porteu
 - Médailles = seule mesure lue ; les chiffres restent en base.
 - Mot officiel : « Médaille ». Nouvelle UDR qui amende UDR-0007.
 - Classe : médaille **par exercice** ; répartition, jamais moyenne ni classement.
-- Sous Bronze : « Pas encore », avec encouragement et possibilité de refaire.
+- Tout exercice traité donne au moins Bronze ; « Pas encore » = aucun exercice fait. Pas de médaille de participation.
 - Remédiation : sous Bronze (aujourd'hui 15/20) ; doc seulement.
 
 ## Hors périmètre

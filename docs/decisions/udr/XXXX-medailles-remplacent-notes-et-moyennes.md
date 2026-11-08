@@ -27,15 +27,15 @@ L'élève et l'enseignant lisent aujourd'hui quatre mesures concurrentes : la no
 2. **Quatre médailles** : Bronze, Argent, Or, Diamant. Seuils réels, lus sur la note affichée (ADR-0106) : Bronze dès 48 %, Argent dès 68 %, Or dès 78 %, Diamant = sans-faute. Ils s'écrivent 48/68/78 % dans la doc ; à l'écran jamais en chiffre (10, 14, 16 sur 20 compris).
 3. **La médaille remplace** note sur 20, pourcentage, moyenne et score affichés. Les chiffres restent en base ; aucune migration.
 4. **Côté classe, la médaille se lit par exercice.** La classe affiche une **répartition** de médailles (« 8 Bronze · 6 Argent · 3 Or »). Jamais de moyenne, jamais de classement d'élèves.
-5. **Sous Bronze : « Pas encore »**, libellé unique (remplace « Non acquis », « Pas encore de badge », « En difficulté » pour cet état). Il s'écrit avec un encouragement et la possibilité de refaire ; il n'est jamais présenté comme un échec (ni rouge, ni « raté », ni cadenas).
-6. **Remédiation** : elle se lit sous Bronze. Le code ne change pas dans ce chantier ; seule la doc s'adapte (le seuil interne de résolution, `REMEDIATION_THRESHOLD`, reste 75 %, soit 15/20, tant qu'une décision ne le change pas).
+5. **Tout exercice traité donne au moins Bronze** (décision du porteur, pas de médaille de participation distincte) : Bronze couvre tout score sous Argent, y compris sous 48 %. **« Pas encore »** ne subsiste que pour « aucun exercice fait / rien à afficher » ; libellé unique (remplace « Non acquis », « Pas encore de badge »). Il n'est jamais présenté comme un échec (ni rouge, ni « raté », ni cadenas). Aujourd'hui `Grading.badge_for` et `class_badge_for` renvoient `nil` sous `PASS_THRESHOLD` : l'écart est à corriger par un chantier de code, pas ici.
+6. **Remédiation** : elle se lit en médailles (Bronze en dessous duquel on revoit). Le code ne change pas dans ce chantier ; seule la doc s'adapte (le seuil interne de résolution, `REMEDIATION_THRESHOLD`, reste 75 %, soit 15/20, tant qu'une décision ne le change pas).
 
 ## 3. Consigne d'exécution
 
 | Surface | Texte |
 |---|---|
 | Nom de l'objet | « Médaille », pluriel « Médailles » ; « Nouvelle médaille ! » ; « Médaille Or » (aria-label) |
-| Absence de médaille | « Pas encore » |
+| Rien à afficher (aucun exercice fait) | « Pas encore » |
 | Répartition de classe | « 8 Bronze · 6 Argent · 3 Or », « Élèves par médaille » |
 | Interdits à l'écran | « badge », « note sur 20 », « moyenne », « % » comme mesure d'un élève ou d'une classe |
 

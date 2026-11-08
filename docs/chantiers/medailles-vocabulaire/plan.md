@@ -13,6 +13,10 @@ UDR médailles, UDR-0007, glossaire, remédiation dans la doc, regex `FORBIDDEN`
 
 Chaque chantier : captures à 390 px et sur ordinateur, UDR propre, test d'absence de note/% dans ses vues.
 
+## Écart code à traiter
+
+Décision du porteur : tout exercice traité donne au moins Bronze. Aujourd'hui `Grading.badge_for` et `Grading.class_badge_for` renvoient `nil` sous `PASS_THRESHOLD` (et la clôture n'écrit pas de médaille). Un chantier de code précède `medailles-eleve` : Bronze pour tout exercice traité, « Pas encore » seulement sans exercice fait.
+
 ## Décisions ouvertes
 
 Voir `journal.md` § À trancher.
