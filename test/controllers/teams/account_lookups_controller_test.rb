@@ -75,6 +75,25 @@ class Teams::AccountLookupsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#account-lookup-result form", 0
   end
 
+  # B-001, ADR-0038: the gestures follow the sub-role: field issues a code outside the team, content issues none.
+  test "a field member has the code for a student only; a content member has no gesture on either" do
+    member = create_team_member(contact: "0700000077")
+
+    sign_in_as create_team_member(team_role: "field")
+    get teams_account_lookup_path(contact: @student.contact)
+    assert_select "form#pin-recovery-code-form"
+    get teams_account_lookup_path(contact: member.contact)
+    assert_select "#account-lookup-result form", 0
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    [ @student, member ].each do |account|
+      get teams_account_lookup_path(contact: account.contact)
+      assert_select "#account-lookup-result p", text: account.first_name + " " + account.last_name
+      assert_select "#account-lookup-result form", 0
+    end
+  end
+
   test "an unknown or partial number finds nothing" do
     sign_in_as @actor
 

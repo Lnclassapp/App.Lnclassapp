@@ -64,6 +64,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`audit-gems-loofah`](audit-gems-loofah/memo.md) | livré | bugfix | 2026-11-02 | Avis de sécurité loofah, nokogiri, rails-html-sanitizer |
 | [`audit-ux-roles`](audit-ux-roles/) | pas de memo | — | — | — |
 | [`audit-yarn-braces`](audit-yarn-braces/memo.md) | livré en PR | bugfix | 2026-10-03 | L'audit Yarn bloque toute la CI sur une faille de braces sans correctif |
+| [`b001-privileges-equipe`](b001-privileges-equipe/memo.md) | livré | bugfix | 2026-11-08 | B-001 : privilèges entre sous-rôles de l'équipe |
 | [`badge-liste-moyenne`](badge-liste-moyenne/memo.md) | livré | bugfix | 2026-10-29 | Liste de la classe : le badge dit qu'il vient de la moyenne |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | feature | 2026-09-28 | Barème des classes modifiable par l'équipe |
 | [`base-de-lecons`](base-de-lecons/memo.md) | en cours | refactoring | 2026-11-06 | Base de leçons : seules les leçons au format complet actuel |
