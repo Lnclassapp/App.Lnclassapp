@@ -76,6 +76,6 @@ class Classroom::GenerateMissingClassroomsJobTest < ActiveJob::TestCase
 
     log = capture_log { Classroom::GenerateMissingClassroomsJob.perform_now(report.id) }
 
-    assert_includes log, "[Classroom::GenerateMissingClassroomsJob] use case failed: report_id=#{report.id} code="
+    assert_includes log, "[Classroom::GenerateMissingClassroomsJob] use case failed: report_id=#{report.id} code=conflict"
   end
 end

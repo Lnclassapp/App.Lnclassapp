@@ -124,7 +124,8 @@ module UseCases
         teacher, classroom, message = TeacherAnnouncement.build(self)
         Orm::TeacherClassroom.where(teacher:, classroom:).delete_all
 
-        assert_equal 1, publish.value
+        log = capture_log { assert_equal 1, publish.value }
+        assert_includes log, "author no longer allowed: message_id=#{message.id}"
         assert_equal "archived", message.reload.status
         assert_not Orm::AuditEvent.exists?(action: "message.published", subject_id: message.id)
       end

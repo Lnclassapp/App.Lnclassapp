@@ -60,6 +60,7 @@ module UseCases
 
           unless author_allowed?(message)
             @messages.update(message: message.with(status: "archived"))
+            Rails.logger.warn("[#{self.class.name}] scheduled message archived, author no longer allowed: message_id=#{message.id}")
             next false
           end
 
