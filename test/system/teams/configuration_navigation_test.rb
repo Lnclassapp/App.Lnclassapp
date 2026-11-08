@@ -32,7 +32,7 @@ class Teams::ConfigurationNavigationTest < ApplicationSystemTestCase
     end
     # Shown in capitals by CSS: the title is read as written, the name of the second navigation.
     assert_equal tn("sidebar.secondary_label.team"), evaluate_script("document.getElementById('sidebar_secondary_title').textContent").squish
-    assert_equal [ tn(:referential), tn(:imports), tn(:announcements) ], labels("nav#sidebar_secondary", "a")
+    assert_equal [ tn(:referential), tn(:imports), tn(:billing), tn(:announcements) ], labels("nav#sidebar_secondary", "a")
 
     within("nav#sidebar_secondary") { click_link tn(:referential) }
 
@@ -61,7 +61,7 @@ class Teams::ConfigurationNavigationTest < ApplicationSystemTestCase
       # Opened, the menu holds the focus on its first entry (dropdown controller, UDR-0068 « États obligatoires »).
       assert_equal tn(:referential), evaluate_script("document.activeElement.textContent").squish
       within("#bottom_bar_more_menu[role=menu]") do
-        assert_equal [ tn(:referential), tn(:imports), tn(:announcements) ], all("a[role=menuitem]").map { it.text.squish }
+        assert_equal [ tn(:referential), tn(:imports), tn(:billing), tn(:announcements) ], all("a[role=menuitem]").map { it.text.squish }
         click_link tn(:imports)
       end
 
