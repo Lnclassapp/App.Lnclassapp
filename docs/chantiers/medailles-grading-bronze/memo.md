@@ -50,6 +50,7 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 | Les sessions déjà clôturées sous 48 % reçoivent-elles Bronze ? | Non : seulement les nouvelles clôtures (porteur) | Aucune migration ni rattrapage ; les écrans gèrent l'absence de médaille ancienne par « Pas encore » |
 | Une copie à 0 % ou vide donne-t-elle Bronze ? | Bronze seulement si au moins une réponse donnée ; copie vide = « Pas encore » (porteur) | La règle lit les réponses, pas seulement le score |
 | Faut-il exiger un minimum de réponses pour rendre ? | Non, on simplifie : pas de seuil de rendu (porteur) | Aucun changement de l'écran de la copie en cours ; seule la règle de médaille change |
+| Médaille d'un élève dans une classe sous 48 % de moyenne ? | Bronze dès qu'un exercice a une réponse (porteur) | La règle de classe suit la règle par exercice, la moyenne ne bloque plus Bronze |
 
 ## Cas limites identifiés
 
@@ -58,4 +59,4 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 
 ## Questions encore ouvertes
 
-1. Médaille d'un élève dans une classe (moyenne) : Bronze dès qu'un exercice a une réponse, même sous 48 % de moyenne ?
+1. Une copie fausse de bout en bout (0 bonne réponse) qui gagne Bronze affiche « Nouvelle médaille ! » : on le garde tel quel ?
