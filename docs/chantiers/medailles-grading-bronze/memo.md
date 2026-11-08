@@ -39,21 +39,20 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 ## Hors périmètre
 
 - Aucune vue ni libellé ne change (c'est le rôle des chantiers d'écrans).
-- Pas de migration de données : les médailles déjà décernées ne changent pas.
+- Pas de migration ni de rattrapage : seules les nouvelles clôtures donnent Bronze sous 48 % (porteur).
 - Seuil de remédiation (75 %) inchangé.
 
 ## Ce que le grill a révélé
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| | | |
+| Les sessions déjà clôturées sous 48 % reçoivent-elles Bronze ? | Non : seulement les nouvelles clôtures (porteur) | Aucune migration ni rattrapage ; les écrans gèrent l'absence de médaille ancienne par « Pas encore » |
 
 ## Cas limites identifiés
 
 - Exercice commencé mais abandonné, ou rendu à 0 % : traité ou non ?
 - Moyenne de classe côté élève (`class_badge_for`) sous 48 %.
-- Élèves qui ont déjà un exercice terminé sous 48 % : rétroactif ou non ?
 
 ## Questions encore ouvertes
 
-1. Rétroactivité : les sessions déjà clôturées sous 48 % reçoivent-elles Bronze (rattrapage en base) ou seulement les nouvelles ?
+1. Une copie clôturée à 0 % ou laissée vide donne-t-elle Bronze ?
