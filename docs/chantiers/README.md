@@ -61,6 +61,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`annuaire-equipe`](annuaire-equipe/memo.md) | décision | feature | 2026-09-28 | Annuaire de l'équipe (« Comptes ») |
 | [`app-android`](app-android/memo.md) | app élèves exécutée | feature | 2026-09-30 | App Android pour élèves et enseignants |
 | [`archivage-classes`](archivage-classes/memo.md) | livré | feature | 2026-10-09 | Archiver une classe |
+| [`audit-bugs-p2`](audit-bugs-p2/memo.md) | exécution | bugfix | 2026-11-08 | audit-bugs-p2 — B-003, B-004, B-005 |
 | [`audit-gems-loofah`](audit-gems-loofah/memo.md) | livré | bugfix | 2026-11-02 | Avis de sécurité loofah, nokogiri, rails-html-sanitizer |
 | [`audit-ux-roles`](audit-ux-roles/) | pas de memo | — | — | — |
 | [`audit-yarn-braces`](audit-yarn-braces/memo.md) | livré en PR | bugfix | 2026-10-03 | L'audit Yarn bloque toute la CI sur une faille de braces sans correctif |

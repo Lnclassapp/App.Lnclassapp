@@ -16,12 +16,14 @@
 <% else %>
   <%= turbo_stream.update "classroom_headcount",
                           t("classroom.classrooms.header.headcount", count: @header.active_students_count, max: @header.max_students) %>
-  <% if @overview.students.empty? %>
+  <% if @overview.students_total.zero? %>
     <%# Plus personne à montrer (classe vide, ou recherche sans résultat) : l'état vide existant de la section. %>
     <%= turbo_stream.replace "classroom_roster", partial: "classroom/classrooms/roster", locals: roster %>
   <% else %>
     <%= turbo_stream.remove "student_#{@student.public_id}" %>
-    <%= turbo_stream.update "classroom_roster_count", t("classroom.classrooms.roster.count", count: @overview.students.size) %>
+    <%= turbo_stream.update "classroom_roster_count", (@overview.students.size < @overview.students_total ?
+         t("classroom.classrooms.roster.count_partial", shown: @overview.students.size, total: @overview.students_total) :
+         t("classroom.classrooms.roster.count", count: @overview.students.size)) %>
     <%= turbo_stream.replace "classroom_roster_title", title %>
   <% end %>
 <% end %>
