@@ -72,6 +72,28 @@ class Identity::PinRecoveryCodesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ @teacher.id ], Orm::PinRecoveryCode.pluck(:user_id)
   end
 
+  # B-001, ADR-0038: the code of a team member (an admin) would let its holder set the PIN, then reset the second factor.
+  test "a field member issues for a teacher but never for a team member; a content member issues for nobody" do
+    admin = create_team_member
+    field = create_team_member(team_role: "field")
+
+    sign_in_as field
+    issue_code @teacher, as: :turbo_stream
+    assert_response :success
+    issue_code admin, as: :turbo_stream
+    assert_response :forbidden
+    sign_out
+
+    sign_in_as create_team_member(team_role: "content")
+    [ admin, @student ].each do |target|
+      issue_code target, as: :turbo_stream
+      assert_response :forbidden
+    end
+
+    assert_equal [ @teacher.id ], Orm::PinRecoveryCode.pluck(:user_id)
+    assert_not Orm::AuditEvent.exists?(action: "pin.recovery_code_issued", subject_id: admin.id)
+  end
+
   test "an unknown account gives 404 and a visitor is sent to the sign-in" do
     post account_pin_recovery_codes_path("inconnu")
     assert_redirected_to new_session_path

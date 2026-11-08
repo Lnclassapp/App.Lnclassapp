@@ -10,9 +10,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
     "fr.catalog.courses.show.essentials_title" => "Révisions de la leçon",
     "fr.classroom.classroom_courses.show.essentials_title" => "Révisions de la leçon",
     # UDR page de la leçon (refonte-page-lecon) §3.9 : « leçon » y désigne la fiche de cours.
-    "fr.catalog.courses.show.prepare_intro" => "Un exercice par notion, puis quatre sur toute la leçon.",
     "fr.catalog.courses.show.lesson_wide_title" => "Toute la leçon",
-    "fr.classroom.classroom_courses.show.prepare_intro" => "Un exercice par notion, puis quatre sur toute la leçon.",
     "fr.classroom.classroom_courses.show.lesson_wide_title" => "Toute la leçon",
     "fr.assessment.exercises.show.lesson_wide" => "Toute la leçon",
     "fr.assessment.session_results.show.back_to_lesson" => "Retour à la leçon",
@@ -74,7 +72,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
 
   test "the UDR-0130 exceptions are the listed values alone, with their exact wording" do
     assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
-    assert_equal [ "Révisions de la leçon", "Un exercice par notion, puis quatre sur toute la leçon.", "Toute la leçon",
+    assert_equal [ "Révisions de la leçon", "Toute la leçon",
                    "Retour à la leçon", "À revoir dans la leçon : %{questions}" ], ALLOWED.values.uniq
     ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end

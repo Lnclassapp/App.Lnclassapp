@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/account_lookups/_result — le compte trouvé (Queries::Identity::AccountLookupQuery::Row) et ses actions %>
 <%# Rôle : identité, rôle, classe ; code de récupération, second facteur d'un membre ; demande de suppression d'un élève (frame) et suppression %>
-<%# ADR  : 0031, 0032, 0036 (amendement 2), 0060 · UDR : 0006, 0020, 0047 · remplacé par teams/second_factor_resets et account_deletions/create %>
+<%# ADR  : 0031, 0032, 0036 (amendement 2), 0038, 0060 · UDR : 0006, 0020, 0047 · remplacé par teams/second_factor_resets et account_deletions/create %>
 <%= ui_card id: "account-lookup-result", "aria-live": "polite" do %>
   <div class="flex items-center gap-4">
     <%= ui_avatar account.display_name, src: account_photo_src(account.public_id, account.photo_version), size: :lg %>
@@ -54,11 +54,18 @@
         <% end %>
       </div>
     <% end %>
+    <%# ADR-0038 : les gestes suivent le sous-rôle ; content n'en a aucun, field aucun sur un membre de l'équipe (B-001). %>
+    <% can_issue = can_issue_pin_recovery_code?(account) %>
+    <% can_reset = account.role == :team && can_reset_second_factor?(account) %>
+    <% can_delete = account.role == :student && local_assigns[:can_delete] %>
+    <% if can_issue || can_reset || can_delete %>
     <div class="mt-5 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:flex-wrap">
-      <%= form_with url: account_pin_recovery_codes_path(account.public_id), id: "pin-recovery-code-form" do %>
-        <%= ui_button t(".issue_code"), type: :submit, icon: "key", full: true %>
+      <% if can_issue %>
+        <%= form_with url: account_pin_recovery_codes_path(account.public_id), id: "pin-recovery-code-form" do %>
+          <%= ui_button t(".issue_code"), type: :submit, icon: "key", full: true %>
+        <% end %>
       <% end %>
-      <% if account.role == :team %>
+      <% if can_reset %>
         <%= ui_modal title: t(".reset_title", name: account.display_name), id: "reset-second-factor-modal", size: :sm,
                      trigger: t(".reset_second_factor"), trigger_icon: "arrow-path" do |modal| %>
           <% modal.footer do %>
@@ -72,10 +79,11 @@
       <% end %>
       <%# ADR-0036 §4 : sur demande de l'élève ou de son parent au support ; la modale demande la date de la demande. %>
       <%# ADR-0038 : l'équipe `admin` seule anonymise. %>
-      <% if account.role == :student && local_assigns[:can_delete] %>
+      <% if can_delete %>
         <%= ui_button t(".delete_account"), href: new_teams_account_deletion_path(account.public_id), variant: :secondary,
                       icon: "trash", data: { turbo_frame: "modal" } %>
       <% end %>
     </div>
+    <% end %>
   <% end %>
 <% end %>

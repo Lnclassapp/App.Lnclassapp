@@ -186,10 +186,12 @@ module Repositories
         Entities::School::RegenerationCandidate.new(id:, public_id:, label: name, school_id: id, rotated_at:)
       end
 
-      # Une demande d'enseignant (même décidée) ou un parrainage le référencent aussi (ADR-0063) : l'historique reste.
+      # Une demande d'enseignant (même décidée) ou un parrainage le référencent aussi (ADR-0063) : l'historique reste. Comme le
+      # personnel de direction (même archivé), les départs d'enseignants et les annonces : leurs clés étrangères sont en restrict.
       def referenced?(school_id, classroom_ids)
         Orm::TeacherSchool.exists?(school_id:) || Orm::Invitation.exists?(school_id:) ||
           Orm::SchoolJoinRequest.exists?(school_id:) || Orm::Referral.exists?(school_id:) ||
+          Orm::SchoolStaff.exists?(school_id:) || Orm::TeacherSchoolDeparture.exists?(school_id:) || Orm::Message.exists?(school_id:) ||
           Orm::ClassroomStudent.exists?(classroom_id: classroom_ids) ||
           Orm::TeacherClassroom.exists?(classroom_id: classroom_ids) ||
           Orm::ClassroomAssignment.exists?(classroom_id: classroom_ids)

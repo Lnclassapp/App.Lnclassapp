@@ -7,10 +7,25 @@ module Policies
         def team? = role == "team"
       end
 
-      def actor(role, user_id: 1) = Entities::Identity::Actor.new(user_id:, role:, team_role: role == :team ? "admin" : nil)
+      def actor(role, user_id: 1, team_role: role == :team ? "admin" : nil)
+        Entities::Identity::Actor.new(user_id:, role:, team_role:)
+      end
 
-      test "un membre de l'équipe réinitialise un autre membre" do
+      test "un membre admin de l'équipe réinitialise un autre membre, quel que soit son sous-rôle" do
         assert ResetSecondFactorPolicy.new.call(actor: actor(:team), target: Target.new(2, "team")).success?
+      end
+
+      test "sans cible, même l'admin est refusé" do
+        assert_equal :forbidden, ResetSecondFactorPolicy.new.call(actor: actor(:team), target: nil).code
+      end
+
+      # B-001 : un membre content ou field ne réinitialise pas le second facteur d'un admin (prise de compte).
+      test "refuse les sous-rôles content et field, même pour viser un admin" do
+        policy = ResetSecondFactorPolicy.new
+
+        %w[content field].each do |team_role|
+          assert_equal :forbidden, policy.call(actor: actor(:team, team_role:), target: Target.new(2, "team")).code
+        end
       end
 
       test "refuse soi-même, une cible hors équipe, les autres rôles et l'anonyme" do

@@ -133,6 +133,14 @@ class School::RegenerateSchoolCodesJobTest < ActiveJob::TestCase
     assert_equal "failed", report.reload.status
   end
 
+  test "a report already claimed leaves a trace in the log: its id and the code (B-043)" do
+    report = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "completed")
+
+    log = capture_log { School::RegenerateSchoolCodesJob.perform_now(report.id) }
+
+    assert_includes log, "[School::RegenerateSchoolCodesJob] use case failed: report_id=#{report.id} code=conflict"
+  end
+
   test "the lock of the job falls after the limit of a report without sign of life, so that a killed job blocks no one" do
     assert_equal UseCases::Catalog::StartImport::STALE_AFTER.seconds, School::RegenerateSchoolCodesJob.concurrency_duration
     assert_equal 1, School::RegenerateSchoolCodesJob.concurrency_limit
