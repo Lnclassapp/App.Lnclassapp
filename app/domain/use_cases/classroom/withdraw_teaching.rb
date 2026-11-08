@@ -10,7 +10,7 @@ module UseCases
         @policy = policy
       end
 
-      # → Result(Entities::Classroom::Classroom) | :not_found | :forbidden (autre école, classe archivée)
+      # → Result(Entities::Classroom::Classroom) | :not_found | :forbidden (autre école ; une classe archivée se quitte, audit B-013)
       def call(actor:, classroom_public_id:)
         classroom = @classrooms.find_by_public_id(public_id: classroom_public_id)
         return Shared::Result.failure(:not_found) if classroom.nil?

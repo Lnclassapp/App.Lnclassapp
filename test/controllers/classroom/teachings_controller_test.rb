@@ -78,7 +78,7 @@ class Classroom::TeachingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # UDR-0098 §3.5: the refusal of another school says what to do, without naming any school.
-  test "a classroom of another school or an archived one: 403 with a toast, nothing changes" do
+  test "a classroom of another school, or declaring an archived one: 403 with a toast, nothing changes" do
     elsewhere = create_classroom(level: @level, name: "6ème 1")
     archived = create_classroom(school: @school, level: @level, name: "6ème 9", status: "archived")
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom: archived)
@@ -92,10 +92,20 @@ class Classroom::TeachingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal I18n.t("errors.codes.other_school"), flash[:alert]
     post classroom_teaching_path(archived.public_id), as: :turbo_stream
     assert_response :forbidden
-    delete classroom_teaching_path(archived.public_id), as: :turbo_stream
-    assert_response :forbidden
 
     assert_equal [ archived.id ], declared_ids
+  end
+
+  # Audit B-013: a teacher can leave an archived classroom (withdrawing is not declaring).
+  test "withdrawing from an archived classroom of the own school works" do
+    archived = create_classroom(school: @school, level: @level, name: "6ème 9", status: "archived")
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom: archived)
+    sign_in_as @teacher
+
+    delete classroom_teaching_path(archived.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_empty declared_ids
   end
 
   test "an unknown classroom: 404" do
