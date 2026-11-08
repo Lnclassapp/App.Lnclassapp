@@ -70,10 +70,10 @@ class NavigationHelperTest < ActionView::TestCase
   test "the team has its daily destinations and a secondary list for configuration" do
     assert_equal %i[home courses schools dashboard], navigation_for(:team).map(&:key)
     assert_equal [ [ :referential, "/teams/referential", "squares-2x2" ], [ :imports, teams_imports_path, "arrow-up-tray" ],
-                   [ :announcements, "/announcements/mine", "megaphone" ] ],
+                   [ :billing, "/teams/caisse", "banknotes" ], [ :announcements, "/announcements/mine", "megaphone" ] ],
                  secondary_navigation_for(:team).map { [ it.key, nav_path(it), it.icon ] }
     assert_equal 5, bottom_bar_size(:team)
-    assert_equal [ "Référentiel", "Imports", "Annonces" ], secondary_navigation_for(:team).map { I18n.t("shared.navigation.#{it.key}") }
+    assert_equal [ "Référentiel", "Imports", "Caisse", "Annonces" ], secondary_navigation_for(:team).map { I18n.t("shared.navigation.#{it.key}") }
     assert_equal "Configuration", I18n.t("shared.navigation.sidebar.secondary_label.team")
   end
 

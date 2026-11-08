@@ -23,14 +23,16 @@ elsif Rails.env.production? && staging then "staging"
 else Rails.env
 end
 SEEDS = { "identity" => :all, "contenus" => %w[production develop staging], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
-          "development" => %w[development pr], "standard" => %w[pr demo develop staging], "standard/activite" => %w[pr demo develop] }.freeze
+          "development" => %w[development pr], "standard" => %w[pr demo develop staging], "standard/abonnements" => %w[pr demo develop staging],
+          "standard/activite" => %w[pr demo develop] }.freeze
 
 SEEDS.each do |name, stages|
   next unless stages == :all || stages.include?(stage)
 
   load Rails.root.join("db/seeds/#{name}.rb")
 rescue StandardError => error
-  raise unless %w[develop staging].include?(stage) && name.start_with?("standard")
+  # Les abonnements du jeu ne sont pas facultatifs : sans eux les élèves du jeu sont bloqués au 8e jour. Leur erreur remonte.
+  raise unless %w[develop staging].include?(stage) && name.start_with?("standard") && name != "standard/abonnements"
 
   site = stage.capitalize
   Rails.logger.error("[#{name}] semis impossible sur #{site} : #{error.class} : #{error.message}\n#{error.backtrace&.first(5)&.join("\n")}")

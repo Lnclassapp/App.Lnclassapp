@@ -4,14 +4,15 @@
 module School
   class PurgeArchivedStaffJob < ApplicationJob
     # Le nombre supprimé est journalisé, zéro compris : une purge muette ne se distingue pas d'une purge qui ne tourne pas.
-    # Un compte en échec est signalé par son id seul (aucune donnée personnelle), et repasse la nuit suivante.
+    # Un compte en échec est signalé par son id et la classe de son exception (aucune donnée personnelle), et repasse la nuit suivante.
     def perform
       at = Time.current - Entities::School::Staff::RETENTION_DAYS.days
       purged = use_case.call(at:).value
       Rails.logger.info("[#{self.class.name}] #{purged.deleted} archived school staff account(s) deleted")
-      if purged.failed.any?
-        Rails.logger.error("[#{self.class.name}] #{purged.failed.size} account(s) not deleted, user ids: #{purged.failed.join(', ')}")
+      purged.failed.each do |failure|
+        Rails.logger.error("[#{self.class.name}] account not deleted: user_id=#{failure.user_id} error=#{failure.error}")
       end
+      Rails.logger.error("[#{self.class.name}] #{purged.failed.size} account(s) not deleted") if purged.failed.any?
       purged.deleted
     end
 

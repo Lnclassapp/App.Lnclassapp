@@ -6,7 +6,7 @@ module RendersResult
   extend ActiveSupport::Concern
 
   FORM_STATUSES = { invalid: :unprocessable_entity, conflict: :unprocessable_entity, expired: :unprocessable_entity,
-                    locked: :too_many_requests }.freeze
+                    locked: :too_many_requests, unavailable: :service_unavailable }.freeze
   ERROR_PAGES = { forbidden: "errors/forbidden", not_found: "errors/not_found" }.freeze
   MODAL_FRAME = "modal"
   # ADR-0094 §4.3 : le refus d'une classe hors de l'établissement courant (ReadClassroomPolicy, TeachPolicy,

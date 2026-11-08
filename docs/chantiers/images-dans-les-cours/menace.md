@@ -55,3 +55,5 @@
 ## Tests de référence
 
 `test/domain/entities/shared/image_header_test.rb`, `test/domain/dtos/shared/content_image_input_test.rb`, `test/controllers/teams/essential_images_controller_test.rb`, `test/controllers/teams/question_images_controller_test.rb`, `test/controllers/catalog/essential_images_controller_test.rb`, `test/controllers/assessment/question_images_controller_test.rb`, `test/controllers/teams/essentials_controller_test.rb` (31 images refusées), `test/controllers/teams/publish_essential_with_images_test.rb` (fiche publiée, n° 15), `test/domain/entities/catalog/image_slot_test.rb` (regex).
+
+> Note 2026-11-08 (audit-code-mort) : `ManageContentImagesPolicy` et `UploadQuestionImage`, cités ci-dessous, ont été supprimés (jamais appelés).

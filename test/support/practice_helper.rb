@@ -60,8 +60,16 @@ module PracticeHelper
     create_essential(course:, name: notion["name"], sheet:, **attributes)
   end
 
-  def check_practice_with(notions)
-    UseCases::Catalog::CheckPractice.new(notions:, policy: Policies::Catalog::ReadPublishedPolicy.new, level_policy: Policies::Catalog::ReadOwnLevelPolicy.new)
+  # Le port d'accès (cartes d'activation) : un élève gratuit par défaut ; un test passe `access:` pour un élève bloqué.
+  class PracticeFreeAccess
+    include Ports::Billing::StudentAccessPort
+
+    def call(student_id:, at:) = Entities::Billing::Access.new(status: :free, days_left: 7, subscribed_until: nil)
+  end
+
+  def check_practice_with(notions, access: PracticeFreeAccess.new)
+    UseCases::Catalog::CheckPractice.new(notions:, policy: Policies::Catalog::ReadPublishedPolicy.new, level_policy: Policies::Catalog::ReadOwnLevelPolicy.new,
+                                         access:, clock: Time.zone)
   end
 
   def raw_practice(*questions) = { "statement" => "Dans le triangle ABC, la droite (MN) est parallèle à (BC).", "questions" => questions }
