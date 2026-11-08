@@ -1,9 +1,9 @@
 require "test_helper"
 
 # CA-12, ADR-0091 §4.3 : tout juste ou faux par question, la note ne change pas. Cinq questions de types mélangés, dont
-# quatre justes, donnent 80 % et 16/20, comme avec le calcul d'avant.
+# quatre justes, donnent 80 %, médaille Or, comme avec le calcul d'avant.
 class Assessment::MixedKindsGradingTest < ActionDispatch::IntegrationTest
-  test "cinq questions de types mélangés, quatre justes : 80 % et 16/20" do
+  test "cinq questions de types mélangés, quatre justes : 80 %, médaille Or" do
     exercise = create_exercise(title: "Mélange", questions: 1)
     choice = exercise.questions.sole
     blank = create_kind_question(exercise:, question_type: "fill_blank", answers: %w[Abidjan], content: "Capitale : ___ .")
@@ -34,6 +34,7 @@ class Assessment::MixedKindsGradingTest < ActionDispatch::IntegrationTest
     assert_equal [ true, true, true, true, false ], Orm::QuestionAttempt.joins(:question).order("questions.position").pluck(:correct)
     assert_equal [ "completed", 80, 4 ], session.reload.values_at(:status, :score_percent, :correct_count)
     get exercise_session_result_path(session.public_id)
-    assert_select "#session_grade", text: "16/20"
+    assert_select "#session_badge[aria-label='Médaille Or']"
+    assert_select "#session_grade", 0
   end
 end
