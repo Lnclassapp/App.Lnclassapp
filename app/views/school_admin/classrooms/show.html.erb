@@ -95,7 +95,8 @@
                     <%# UDR-0081 §3.7, amendée le 2026-10-08 : sous sm, la pastille passe sous le nom, sur la ligne de la voie
                         d'arrivée ; à partir de sm, elle reste à côté du nom. Rien pour la voie du code. %>
                     <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-                      <p class="w-full sm:w-auto"><%= student.display_name %></p>
+                      <%# Audit B-011 : le nom ouvre la fiche de l'élève, en lecture seule pour la direction. %>
+                      <p class="w-full sm:w-auto"><%= link_to student.display_name, classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" }, class: "underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %></p>
                       <% if student.newcomer %><span class="shrink-0"><%= ui_badge t("#{roster}.new"), tone: :brand, size: :sm %></span><% end %>
                       <% via = { "standard" => t("#{roster}.via.standard"), "link" => t("#{roster}.via.link") }[student.joined_via] %>
                       <% if via %><p class="text-xs font-normal text-mute sm:w-full"><%= via %></p><% end %>

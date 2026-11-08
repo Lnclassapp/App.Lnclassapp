@@ -391,9 +391,9 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_manage a", text: ft("manage.remove")
   end
 
-  test "refus : un élève de la classe, un enseignant d'une autre classe, la direction reçoivent 403 ; le nom ne sort pas" do
+  test "refus : un élève de la classe, un enseignant d'une autre classe, la direction d'une autre école reçoivent 403 ; le nom ne sort pas" do
     other_teacher = create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ])
-    [ @awa, other_teacher, create_school_admin(school: @school) ].each do |user|
+    [ @awa, other_teacher, create_school_admin(school: create_school) ].each do |user|
       sign_in_as user
       show_file
 
@@ -401,6 +401,22 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
       assert_no_match(/Koffi/, response.body)
       sign_out
     end
+  end
+
+  # Audit B-011 : la direction de l'école lit la fiche en lecture seule : retour vers sa page de classe, pas de « Gérer »,
+  # pas de lien vers les pages de l'enseignant (assignation, résultat de séance).
+  test "B-011 : la direction de l'école ouvre la fiche en lecture seule" do
+    create_assignment(classroom: @classroom, by: @teacher)
+    sign_in_as create_school_admin(school: @school)
+
+    show_file
+
+    assert_response :success
+    assert_select "h1", text: "Koffi Yao"
+    assert_select "a[href=?]", school_admin_classroom_path(@classroom.public_id)
+    assert_select "li[id^=assignment_]", count: 1
+    assert_select "#student_file_manage", count: 0
+    assert_select "a[href^=?]", "/classrooms/#{@classroom.public_id}/assignments", count: 0
   end
 
   # ADR-0097 §4.2 : la policy passe avant toute lecture de l'élève ; un élève parti ou inconnu donne le même 403.
