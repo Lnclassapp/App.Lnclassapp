@@ -56,6 +56,16 @@ class DevelopStageTest < ActiveSupport::TestCase
     assert_includes output, "[contenus] stub"
   end
 
+  # cartes-activation, revues du Lot E : une erreur des abonnements du jeu remonte au lieu d'être avalée avec celles du jeu standard,
+  # sinon Develop démarrerait avec des élèves qu'aucune carte n'abonne, bloqués au 8e jour.
+  test "an error in the standard subscriptions is raised, not swallowed" do
+    error = assert_raises(RuntimeError) do
+      stub_any_instance(Repositories::Billing::CardRepository, :create_batch, ->(**) { raise "carte impossible" }) { seed }
+    end
+
+    assert_equal "carte impossible", error.message
+  end
+
   # L'activité (Lot B) s'ajoute aux seuls comptes du jeu : un vrai élève qui a rejoint une classe du jeu, un vrai enseignant
   # rattaché à un établissement du jeu (contacts triés avant ceux du jeu) ne sont ni rejoués ni redatés.
   test "on Develop the activity plays only the accounts of the set and touches nothing that was there" do

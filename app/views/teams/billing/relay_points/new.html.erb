@@ -1,0 +1,14 @@
+<%# 🌐 UI · teams/billing/relay_points/new — création d'un point relais, servie dans le frame « modal » %>
+<%# Rôle : modale ouverte avec le formulaire ; ouverte sur le shell sans frame (échec en 422 après _top) %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 · modèle : teams/drenas/new %>
+<% page_title t(".title") %>
+<% content_for :nav_key, "billing" %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), document_title: page_title(t(".title")), id: "relay-point-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "relay-point-form", icon: "plus", data: { turbo_submits_with: t(".submitting") } %>
+    <% end %>
+    <%= render "form", form: @form, url: teams_billing_relay_points_path, method: :post, school_choices: @school_choices %>
+  <% end %>
+<% end %>

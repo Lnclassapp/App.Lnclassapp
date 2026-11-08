@@ -1,0 +1,26 @@
+<%# 🌐 UI · teams/billing/card_batches/new — « Nouveau lot de cartes » d'un point relais, servi dans le frame « modal » %>
+<%# Rôle : quantité de 1 à 200 et prix (10 000 F ou offert) ; après succès, la planche d'impression s'ouvre (formulaire _top) %>
+<%# ADR  : 0126 (contexte billing, §4.1 et §4.8) · UDR : 0159 §3.3 %>
+<% page_title t(".title") %>
+<% content_for :nav_key, "billing" %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title", name: @relay_point.name), document_title: page_title(t(".title", name: @relay_point.name)), id: "card-batch-modal", open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "card-batch-form", icon: "plus", data: { turbo_submits_with: t(".submitting") } %>
+    <% end %>
+    <%= form_with model: @form, scope: :card_batch, url: teams_billing_relay_point_card_batches_path(@relay_point.public_id), id: "card-batch-form",
+                  class: "space-y-5", data: { turbo_frame: "_top" } do |f| %>
+      <% if @form.errors[:base].any? %>
+        <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+          <p><%= @form.errors[:base].to_sentence %></p>
+        </div>
+      <% end %>
+      <%= ui_field f, :quantity, as: :number, required: true, min: 1, max: Entities::Billing::CardBatch::MAX_QUANTITY, inputmode: "numeric",
+                                 autofocus: true, hint: t(".quantity_hint", max: Entities::Billing::CardBatch::MAX_QUANTITY) %>
+      <%= ui_radio_group f, :unit_price_xof, choices: [ [ t(".price_offer"), Entities::Billing::Offer::PRICE_XOF ], [ t(".price_free"), 0 ] ],
+                                             label: t(".price"), required: true, columns: 1 %>
+    <% end %>
+  <% end %>
+<% end %>

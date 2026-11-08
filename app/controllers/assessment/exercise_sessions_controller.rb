@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
 # Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis remplit sa copie ; terminée → résultat
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115 · UDR : 0022, 0138 §3.2
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115, 0126 (contexte billing, §4.6) · UDR : 0022, 0138 §3.2
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
     include ReadsOwnLevel
+    include RedirectsSubscriptionRequired
 
     allow_roles :student
 
@@ -14,6 +15,7 @@ module Assessment
       result = start_session.call(actor: current_actor, exercise_public_id: params[:exercise_public_id],
                                   restart: params[:restart] == "true")
       return redirect_paused if paused?(result)
+      return redirect_subscription_required(return_to: exercise_path(params[:exercise_public_id])) if subscription_required?(result)
 
       render_result result, success: ->(session) { redirect_to exercise_session_path(session.public_id), status: :see_other }
     end
@@ -45,7 +47,8 @@ module Assessment
         exercises: Repositories::Assessment::ExerciseRepository.new, sessions: Repositories::Assessment::ExerciseSessionRepository.new,
         gaps: Repositories::Assessment::KnowledgeGapRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
         assignments: Repositories::Classroom::AssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new,
-        transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+        access: Queries::Billing::StudentAccessQuery.new
       )
     end
   end

@@ -18,7 +18,7 @@ class StandardActivityTest < ActiveSupport::TestCase
     %w[catalog school].each { load SEEDS.join("#{it}.rb").to_s, true }
     @previous = ENV.values_at(*KEYS)
     ENV.update("STANDARD_LESSONS_LIMIT" => LESSONS.to_s, "STANDARD_ACTIVITY_SIZE" => "reduite", "STANDARD_QUIET" => "1")
-    capture_io { load SEEDS.join("standard.rb").to_s, true }
+    capture_io { %w[standard standard/abonnements].each { load SEEDS.join("#{it}.rb").to_s, true } }
   end
 
   teardown { KEYS.zip(@previous) { |key, value| ENV[key] = value } }

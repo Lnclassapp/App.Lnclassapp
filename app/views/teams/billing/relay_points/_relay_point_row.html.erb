@@ -1,0 +1,25 @@
+<%# 🌐 UI · teams/billing/relay_points/_relay_point_row — une ligne du tableau des points relais (Entities::Billing::RelayPoint) %>
+<%# Rôle : nom (lien vers la fiche), lieu, téléphone, nombre d'écoles, état ; menu ⋮ : fiche, modifier (modale), nouveau lot (modale) %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 · modèle : teams/drenas/_drena_row %>
+<tr id="relay_point_<%= relay_point.public_id %>" class="align-middle">
+  <td class="px-4 py-3 font-medium text-ink">
+    <%= link_to relay_point.name, teams_billing_relay_point_path(relay_point.public_id), class: "text-brand-strong underline-offset-4 hover:underline" %>
+  </td>
+  <td class="px-4 py-3"><%= relay_point.location %></td>
+  <td class="px-4 py-3 tabular-nums"><%= relay_point.phone %></td>
+  <td class="px-4 py-3 text-right tabular-nums"><%= relay_point.school_ids.size %></td>
+  <td class="px-4 py-3">
+    <span class="<%= class_names("rounded-full px-2 py-0.5 text-xs font-medium", relay_point.active ? "bg-success-soft text-success" : "bg-mist text-mute") %>">
+      <%= relay_point.active ? t(".active") : t(".inactive") %>
+    </span>
+  </td>
+  <td class="sticky-actions px-4 py-3">
+    <div class="flex justify-end">
+      <%= ui_dropdown label: t(".actions", name: relay_point.name), id: "relay-point-actions-#{relay_point.public_id}", fixed: true do %>
+        <%= ui_dropdown_item t(".show"), href: teams_billing_relay_point_path(relay_point.public_id), icon: "building-storefront" %>
+        <%= ui_dropdown_item t(".edit"), href: edit_teams_billing_relay_point_path(relay_point.public_id), icon: "pencil-square", frame: "modal" %>
+        <%= ui_dropdown_item t(".new_batch"), href: new_teams_billing_relay_point_card_batch_path(relay_point.public_id), icon: "plus", frame: "modal" %>
+      <% end %>
+    </div>
+  </td>
+</tr>
