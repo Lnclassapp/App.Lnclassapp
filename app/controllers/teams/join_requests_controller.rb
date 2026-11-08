@@ -24,13 +24,18 @@ module Teams
     private
 
     # Un enseignant déjà rattaché entre-temps garde sa demande en attente : le dire, au lieu de « déjà traitée ».
-    def conflict_message(result) = result.errors.fetch(:base, []).include?(:already_attached) ? t(".already_attached") : t(".already_decided")
+    # Audit B-015 : école inactive ou départ ouvert disent pourquoi la demande n'est pas validée.
+    def conflict_message(result)
+      reason = (result.errors.fetch(:base, []) & %i[already_attached school_inactive departure_open]).first || :already_decided
+      t(".#{reason}")
+    end
 
     def review
       UseCases::School::ReviewJoinRequest.new(
         join_requests: Repositories::School::JoinRequestRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         policy: Policies::School::ManageSchoolPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
-        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new,
+        schools: Repositories::School::SchoolRepository.new, departures: Repositories::School::TeacherDepartureRepository.new
       )
     end
   end
