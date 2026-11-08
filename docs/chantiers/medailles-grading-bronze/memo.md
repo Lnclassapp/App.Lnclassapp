@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-11-08 |
 | **Branche** | `feature/medailles-grading-bronze` |
 | **Programme** | — (précède `medailles-eleve`, voir `medailles-vocabulaire/plan.md`) |
@@ -51,6 +51,8 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 | Une copie à 0 % ou vide donne-t-elle Bronze ? | Bronze seulement si au moins une réponse donnée ; copie vide = « Pas encore » (porteur) | La règle lit les réponses, pas seulement le score |
 | Faut-il exiger un minimum de réponses pour rendre ? | Non, on simplifie : pas de seuil de rendu (porteur) | Aucun changement de l'écran de la copie en cours ; seule la règle de médaille change |
 | Médaille d'un élève dans une classe sous 48 % de moyenne ? | Bronze dès qu'un exercice a une réponse (porteur) | La règle de classe suit la règle par exercice, la moyenne ne bloque plus Bronze |
+| Bronze sous 48 % affiche-t-il « Nouvelle médaille ! » et les confettis ? | Non : médaille décernée et affichée, sans fête sous 48 % (porteur) | Une petite UDR sur l'écran de résultat |
+| Parent, direction, équipe, multi-classes ? | Aucun écran de médaille pour le parent ; la médaille appartient à l'élève et à l'exercice, pas à la classe : un élève dans deux classes garde une seule médaille par exercice (constat) | Aucun cas de doublon ; les lectures de classe suivent la règle de classe |
 
 ## Cas limites identifiés
 
@@ -59,4 +61,4 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 
 ## Questions encore ouvertes
 
-1. Une copie fausse de bout en bout (0 bonne réponse) qui gagne Bronze affiche « Nouvelle médaille ! » : on le garde tel quel ?
+1. Conception : les écrans recalculent la médaille depuis le score, qui ignore si l'élève a répondu. La médaille de l'exercice se lit-elle dans la médaille enregistrée à la clôture (recommandé) ou se recalcule-t-elle depuis le score + le nombre de réponses ?
