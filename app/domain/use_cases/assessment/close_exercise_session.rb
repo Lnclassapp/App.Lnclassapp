@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Assessment::CloseExerciseSession
 # Rôle : seul point qui termine une session : score recalculé des tentatives, badge monté, lacune ouverte ou résolue
-# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points), 0120-questions-a-plusieurs-cases-et-indice (§6 : score en fractions de points)
+# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points), médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§6 : score en fractions de points)
 module UseCases
   module Assessment
     class CloseExerciseSession
-      # badge_level : palier atteint par cette session (nil sous le seuil) ; earned_now : le badge de l'élève vient de monter.
+      # badge_level : médaille enregistrée par cette session (Bronze dès une réponse, nil pour une copie vide) ; earned_now : le badge de l'élève vient de monter.
       Row = Data.define(:score_percent, :badge_level, :earned_now)
 
       def initialize(sessions:, exercises:, badges:, gaps:, policy:, transaction:, clock:)
@@ -32,10 +32,17 @@ module UseCases
       def close(session, essential_id, now)
         score_percent = Entities::Assessment::Grading.points_percent(graded(session))
         @sessions.complete(id: session.id, score_percent:, at: now)
-        badge_level = Entities::Assessment::Grading.badge_for(score_percent)
+        badge_level = recorded_level(session, score_percent)
         earned_now = award(session, badge_level, now)
         settle_gap(session, essential_id, score_percent, now)
         Row.new(score_percent:, badge_level:, earned_now:)
+      end
+
+      # ADR médailles lues à la clôture : le palier du score, ou Bronze sous 48 % si au moins une réponse a été donnée (tentative non
+      # unanswered) ; nil pour une copie sans aucune réponse. Cette médaille est celle que les écrans lisent.
+      def recorded_level(session, score_percent)
+        Entities::Assessment::Grading.badge_for(score_percent) ||
+          (:bronze if @sessions.attempts(session_id: session.id).any? { !it.unanswered })
       end
 
       # [[points, part juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte
