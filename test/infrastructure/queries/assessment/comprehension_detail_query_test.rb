@@ -27,8 +27,19 @@ module Queries
         @clock += 1.hour
         create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, classroom_assignment: assignment,
                                 completed_at: @clock, **attributes).tap do |session|
+          record_medal(student, session)
           answers.each { |position, correct| create_attempt(session:, question: @questions[position - 1], correct:) }
         end
+      end
+
+      # The medal is the one written at closing (ADR medailles-lues-a-la-cloture): the best level reached, here from the scores.
+      def record_medal(student, session)
+        level = Entities::Assessment::Grading.badge_for(Orm::ExerciseSession.where(student:, exercise: @exercise, status: "completed")
+                                                                            .maximum(:score_percent).to_i.then { [ it, session.score_percent ].max })
+        return unless level
+
+        Orm::ExerciseBadge.find_or_initialize_by(student:, exercise: @exercise)
+                          .update!(exercise_session: session, level: level.to_s, awarded_at: Time.current)
       end
 
       def student(first_name = "Élève", last_name = "N#{factory_sequence}", scores: [], answers: [])
@@ -133,6 +144,21 @@ module Queries
         assert_equal detail.badge_counts, detail(badge: :bronze).badge_counts
       end
 
+      test "20 % with a recorded Bronze medal is in the Bronze box, never « Pas encore »; a score without a medal stays « Pas encore »" do
+        low = create_student(classroom: @classroom, first_name: "Awa", last_name: "Vingt")
+        create_exercise_session(student: low, exercise: @exercise, status: "completed", score_percent: 20, classroom_assignment: @assignment,
+                                completed_at: @clock).then { create_badge(student: low, exercise: @exercise, level: "bronze", session: it) }
+        unmedaled = create_student(classroom: @classroom, first_name: "Ali", last_name: "Sans")
+        create_exercise_session(student: unmedaled, exercise: @exercise, status: "completed", score_percent: 90,
+                                classroom_assignment: @assignment, completed_at: @clock)
+
+        result = detail
+
+        assert_equal({ none: 1, bronze: 1, silver: 0, gold: 0, diamond: 0 }, result.badge_counts)
+        assert_equal [ [ "Ali Sans", :none ], [ "Awa Vingt", :bronze ] ], result.students.map { [ it.display_name, it.badge ] }.sort
+        assert_equal [ "Awa Vingt" ], detail(badge: :bronze).students.map(&:display_name)
+      end
+
       test "the rank of a score is the palier of Grading: 47 is « Pas encore », 49 and 50 Bronze (ADR-0106, read on 20), 70 Argent, 80 Or, 100 Diamant, 98 only Or" do
         [ 47, 49, 50, 70, 80, 98, 100 ].each { student(scores: [ it ]) }
 
@@ -225,9 +251,10 @@ module Queries
         other = create_assignment(classroom: other_classroom, assignable: @exercise)
         hand_in(twice, 100, answers: { 1 => true, 2 => true }, assignment: other)
 
-        result = detail(badge: :bronze)
+        result = detail(badge: :diamond)
 
-        assert_equal [ 1, 1, { none: 0, bronze: 1, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
+        # The medal belongs to the student and the exercise, not to the classroom: the diamond won elsewhere is read here too.
+        assert_equal [ 1, 1, { none: 0, bronze: 0, silver: 0, gold: 0, diamond: 1 } ], [ result.done, result.present, result.badge_counts ]
         assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
         assert_equal [ 60 ], result.students.map(&:best)
         assert_equal [ [ 0, 1 ], [ 0, 1 ], [ 0, 0 ] ], counts(result)
@@ -249,7 +276,7 @@ module Queries
         6.times { |index| student(scores: [ 50 + index, 95 ], answers: [ { 1 => true, 2 => false }, { 1 => true, 3 => true } ]) }
         2.times { student }
 
-        assert_equal 7, few
+        assert_equal 8, few
         assert_equal few, count_queries { detail }
         assert_equal 7, detail.students.size
       end
