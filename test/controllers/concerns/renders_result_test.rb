@@ -12,7 +12,8 @@ class RendersResultTest < ActionDispatch::IntegrationTest
     "conflict" => Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] }),
     "locked" => Shared::Result.failure(:locked, errors: { retry_after: 15.minutes }),
     "locked_until_recovery" => Shared::Result.failure(:locked, errors: { retry_after: :until_recovery }),
-    "expired" => Shared::Result.failure(:expired)
+    "expired" => Shared::Result.failure(:expired),
+    "unavailable" => Shared::Result.failure(:unavailable)
   }.freeze
 
   class ProbeController < ApplicationController
@@ -89,6 +90,17 @@ class RendersResultTest < ActionDispatch::IntegrationTest
     probe "conflict", form: true
 
     assert_response :unprocessable_entity
+  end
+
+  test "every error code of a Result has a form status" do
+    assert_empty Shared::Result::ERROR_CODES - RendersResult::FORM_STATUSES.keys - RendersResult::ERROR_PAGES.keys - [ :expired ]
+  end
+
+  test "unavailable renders the form in 503 with its message" do
+    probe "unavailable", form: true
+
+    assert_response :service_unavailable
+    assert_select "[role=alert]", text: "Service momentanément indisponible. Réessayez dans un instant."
   end
 
   test "locked renders the form in 429 with the unlock time" do

@@ -8,6 +8,8 @@ module UseCases
     # lock and in its transaction, until he has 3 live.
     class PublishScheduledMessagesTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 1, 10, 5)
+      DEPS = { users: Repositories::Identity::UserRepository.new, teachings: Repositories::Classroom::TeachingRepository.new,
+               policy: Policies::Communication::PublishPolicy.new, teacher_flag: -> { true } }.freeze
       Clock = Data.define(:now)
 
       # The list of due announcements, read before one of them changed (archived by its author meanwhile).
@@ -50,13 +52,17 @@ module UseCases
       end
 
       setup do
-        @kamate = create_school_admin(last_name: "Kamaté")
+        @school = create_school
+        @kamate = create_school_admin(school: @school, last_name: "Kamaté")
         @morning = create_message(author: @kamate, title: "Réunion de 10 h", status: "scheduled", published_at: Time.zone.local(2026, 10, 1, 10))
         @evening = create_message(author: @kamate, title: "Réunion de 18 h", status: "scheduled", published_at: Time.zone.local(2026, 10, 1, 18))
       end
 
+      # The direction writes for its own school (B-007: the rights are checked again at the time of the publication).
+      def create_message(author:, **) = super(author:, school: (@school if author == @kamate), **)
+
       def publish(messages = Repositories::Communication::MessageRepository.new, transaction: Repositories::Shared::Transaction.new)
-        PublishScheduledMessages.new(messages:, audit_log: Repositories::Identity::AuditLogRepository.new, transaction:,
+        PublishScheduledMessages.new(messages:, **DEPS, audit_log: Repositories::Identity::AuditLogRepository.new, transaction:,
                                      clock: Clock.new(NOW)).call
       end
 
@@ -66,6 +72,89 @@ module UseCases
       end
 
       def statuses(records) = records.map { it.reload.status }
+
+      # B-030: any exception other than Frozen on one announcement must not stop the following ones.
+      class FailingFirst < SimpleDelegator
+        def initialize(repository, public_id) = super(repository).tap { @failing = public_id }
+
+        def find_by_public_id(public_id:)
+          raise IOError, "disque plein" if public_id == @failing
+
+          __getobj__.find_by_public_id(public_id:)
+        end
+      end
+
+      test "B-030 — an unexpected failure on one announcement is reported by its id and the following ones are still published" do
+        reported = []
+        subscriber = Object.new.tap { |o| o.define_singleton_method(:report) { |error, **opts| reported << [ error.class, opts[:context] ] } }
+        Rails.error.subscribe(subscriber)
+        messages = FailingFirst.new(Repositories::Communication::MessageRepository.new, @morning.public_id)
+        later = create_message(author: @kamate, title: "Réunion de 10 h 02", status: "scheduled", published_at: Time.zone.local(2026, 10, 1, 10, 2))
+
+        assert_equal 1, publish(messages).value
+        assert_equal "scheduled", @morning.reload.status
+        assert_equal "published", later.reload.status
+        assert_equal [ [ IOError, { message_id: @morning.id } ] ], reported
+      ensure
+        Rails.error.unsubscribe(subscriber)
+      end
+
+      # B-007: the rights of the author are checked again at the time of the publication.
+      class TeacherAnnouncement
+        def self.build(test, **)
+          school = create_school_for(test)
+          classroom = test.create_classroom(school:)
+          teacher = test.create_teacher(school:, classrooms: [ classroom ])
+          message = test.create_message(author: teacher, audience: "classrooms", classrooms: [ classroom ], status: "scheduled",
+                                        published_at: Time.zone.local(2026, 10, 1, 9), **)
+          [ teacher, classroom, message ]
+        end
+
+        def self.create_school_for(test) = test.create_school
+      end
+
+      test "B-007 — a teacher who still teaches the classroom sees the announcement published" do
+        _teacher, _classroom, message = TeacherAnnouncement.build(self)
+
+        assert_equal 2, publish.value
+        assert_equal "published", message.reload.status
+      end
+
+      test "B-007 — a teacher who no longer teaches the classroom: the announcement is archived, not published, not journaled" do
+        teacher, classroom, message = TeacherAnnouncement.build(self)
+        Orm::TeacherClassroom.where(teacher:, classroom:).delete_all
+
+        assert_equal 1, publish.value
+        assert_equal "archived", message.reload.status
+        assert_not Orm::AuditEvent.exists?(action: "message.published", subject_id: message.id)
+      end
+
+      test "B-007 — a teacher detached from the school: the announcement is archived" do
+        teacher, _classroom, message = TeacherAnnouncement.build(self)
+        Orm::TeacherSchool.where(teacher:).delete_all
+
+        assert_equal 1, publish.value
+        assert_equal "archived", message.reload.status
+      end
+
+      test "B-007 — an anonymized author: the announcement is archived" do
+        teacher, _classroom, message = TeacherAnnouncement.build(self)
+        teacher.update!(anonymized_at: Time.current)
+
+        assert_equal 1, publish.value
+        assert_equal "archived", message.reload.status
+      end
+
+      test "B-007 — the pilot flag of the teachers switched off: the announcement of a teacher is archived" do
+        _teacher, _classroom, message = TeacherAnnouncement.build(self)
+        use_case = PublishScheduledMessages.new(messages: Repositories::Communication::MessageRepository.new,
+                                                **DEPS, teacher_flag: -> { false },
+                                                audit_log: Repositories::Identity::AuditLogRepository.new,
+                                                transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW))
+
+        assert_equal 1, use_case.call.value
+        assert_equal "archived", message.reload.status
+      end
 
       test "AN-07 — at 10:05, the announcement of 10:00 is published and journaled; the one of 18:00 stays scheduled" do
         result = publish
@@ -202,7 +291,7 @@ module UseCases
           Orm::Message.where(id: @due.id).update_all(status: "archived")
         end
 
-        published = PublishScheduledMessages.new(messages: racing, audit_log: Repositories::Identity::AuditLogRepository.new,
+        published = PublishScheduledMessages.new(messages: racing, **PublishScheduledMessagesTest::DEPS, audit_log: Repositories::Identity::AuditLogRepository.new,
                                                  transaction: Repositories::Shared::Transaction.new,
                                                  clock: Data.define(:now).new(@now)).call.value
 
