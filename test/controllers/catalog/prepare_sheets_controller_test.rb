@@ -181,6 +181,15 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "button.ps-btn--primary", text: "Vérifier ma réponse", count: 0
   end
 
+  # Audit B-046 : la feuille suit la matière de l'enseignant comme la leçon.
+  test "B-046: a teacher of another subject gets 404 on the sheet" do
+    sign_in_as create_teacher(material: create_material(name: "Matière étrangère"), classrooms: [ @classroom ])
+
+    get course_sheet_path(@course.slug, @devoir_sheet)
+
+    assert_response :not_found
+  end
+
   test "a teacher without any classroom of this level is told so on the reading page" do
     sign_in_as create_teacher(material: @course.material, classrooms: [ create_classroom(name: "6ème 1") ])
 

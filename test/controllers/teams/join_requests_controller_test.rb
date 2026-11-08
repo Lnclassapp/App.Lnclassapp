@@ -96,8 +96,10 @@ class Teams::JoinRequestsControllerTest < ActionDispatch::IntegrationTest
 
     decide("approve")
 
+    assert_redirected_to school_path(@school.public_id)
     assert_equal I18n.t("#{SCOPE}.update.departure_open"), flash[:alert]
     assert_equal "pending", @join_request.reload.status
+    assert_equal 0, Orm::TeacherSchool.where(teacher: @teacher).count
   end
 
   test "an unknown request is not found; an unknown decision is refused" do

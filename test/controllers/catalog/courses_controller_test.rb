@@ -923,6 +923,16 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
     sign_out
 
+    # Sans matière dans l'établissement courant : 404 aussi.
+    no_subject = create_teacher(material: @course.material)
+    Orm::TeacherSchoolMaterial.where(teacher_id: no_subject.id).delete_all
+    sign_in_as no_subject
+    [ course_path(@course.slug) ].each do |path|
+      get path
+      assert_response :not_found, path
+    end
+    sign_out
+
     sign_in_as create_teacher(material: @course.material)
     get course_path(@course.slug)
     assert_response :success

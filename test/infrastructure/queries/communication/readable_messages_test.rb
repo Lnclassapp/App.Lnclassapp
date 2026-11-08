@@ -49,6 +49,15 @@ module Queries
         assert_equal Reader.new(user_id: never.id, role: :student, school_id: nil, classroom_id: nil), reader(never)
       end
 
+      test "B-035 — the school kept is the one of the most recent enrolment" do
+        student = create_student(classroom: @troisieme_b)
+        Orm::ClassroomStudent.where(student:).update_all(left_at: 2.days.ago, joined_at: 1.year.ago)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(school: @bouake), student:, primary: true,
+                                      joined_at: 1.month.ago, left_at: 1.day.ago)
+
+        assert_equal @bouake.id, reader(student).school_id
+      end
+
       test "B-035 — a student who left their classroom still reads their school's announcements, not another school's nor a classroom's" do
         left = create_student(classroom: @troisieme_b)
         Orm::ClassroomStudent.where(student: left).update_all(left_at: Time.current)
