@@ -9,11 +9,12 @@ module Classroom
     discard_on ActiveJob::DeserializationError
 
     def perform(report_id)
-      UseCases::Classroom::RegenerateClassroomLinks.new(
+      result = UseCases::Classroom::RegenerateClassroomLinks.new(
         classrooms: Repositories::Classroom::ClassroomRepository.new, reports: Repositories::Catalog::ImportReportRepository.new,
         users: Repositories::Identity::UserRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         transaction: Repositories::Shared::Transaction.new, policy: Policies::School::RegenerateCodesInBulkPolicy.new, clock: Time.zone
       ).call(report_id:)
+      log_failure(result, report_id:)
     end
   end
 end
