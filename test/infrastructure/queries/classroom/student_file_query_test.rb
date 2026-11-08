@@ -79,6 +79,15 @@ module Queries
         assert_equal [ 6, nil ], file(weak).to_h.values_at(:class_grade, :class_badge)
       end
 
+      test "a Bronze medal on an assigned exercise makes a 30 % average Bronze; without one, none" do
+        one = assign("Un")
+        hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9))
+        assert_equal [ 6, nil ], file.to_h.values_at(:class_grade, :class_badge)
+
+        create_badge(student: @awa, exercise: Orm::Exercise.find(one.assignable_id), level: "bronze")
+        assert_equal [ 6, :bronze ], file.to_h.values_at(:class_grade, :class_badge)
+      end
+
       test "the header: name, masked number, arrival and its channel; the full number never leaves the query" do
         student = file.student
 
@@ -176,14 +185,15 @@ module Queries
         assert_equal [ 65, :fragile, :progress ], row.to_h.values_at(:best, :category, :trend)
       end
 
-      test "badges of the classroom: by tier of the best score on each assignment, never from exercise_badges" do
-        [ [ 100 ], [ 60, 85 ], [ 72 ], [ 40 ] ].each_with_index do |scores, index|
-          assignment = assign("Exercice #{index}")
-          scores.each_with_index { |score, rank| hand_in(assignment, score, at: Time.zone.local(2026, 10, 1 + rank, 10 + index)) }
+      test "badges of the classroom: the medals recorded on the assigned exercises, by tier, not the score" do
+        exercises = %w[Un Deux Trois Quatre].map { |title| assign(title) }
+        exercises.each_with_index { |assignment, index| hand_in(assignment, 100 - index, at: Time.zone.local(2026, 10, 1 + index, 10)) }
+        { 0 => "diamond", 1 => "bronze", 2 => "bronze" }.each do |index, level|
+          create_badge(student: @awa, exercise: Orm::Exercise.find(exercises[index].assignable_id), level:)
         end
-        create_badge(student: @awa, exercise: create_exercise(essential: @essential), level: "diamond")
+        create_badge(student: @awa, exercise: create_exercise(essential: @essential), level: "gold")
 
-        assert_equal({ bronze: 0, silver: 1, gold: 1, diamond: 1 }, file.badge_counts)
+        assert_equal({ bronze: 2, silver: 0, gold: 0, diamond: 1 }, file.badge_counts)
       end
 
       test "without an assignment: zero everywhere, the four tiers at zero" do

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentFileQuery
 # Rôle : fiche d'un élève présent dans sa classe (CL-13, AS-24) : en-tête, chiffres et badges de la classe, exercices assignés, « fait seul »
-# ADR  : 0026, 0072, 0079, 0083 (§4.4 bis), 0089 (§4.2), 0097 · UDR : enseignant §3.2, 0107 · après ReadClassroomPolicy (show_roster) seulement
+# ADR  : 0026, 0072, 0079, 0083 (§4.4 bis), 0089 (§4.2), 0097, médailles lues à la clôture · UDR : enseignant §3.2, 0107 · après ReadClassroomPolicy (show_roster) seulement
 module Queries
   module Classroom
     class StudentFileQuery
@@ -48,23 +48,25 @@ module Queries
 
       def build(classroom_id, (id, public_id, first_name, last_name, contact, joined_at, joined_via), today)
         assignments = assignments(classroom_id, id, today)
+        medals = medals(classroom_id, id)
         practice = self_practice(id, today)
         File.new(student: Student.new(public_id:, display_name: "#{first_name} #{last_name}", contact: Entities::Identity::Contact.mask(contact),
                                       photo_version: Queries::Identity::PhotoVersions.for(user_ids: [ id ])[id], joined_at:,
                                       joined_via:, newcomer: joined_at > Time.current - ClassroomOverviewQuery::NEW_FOR),
-                 counts: counts(assignments), badge_counts: badge_counts(assignments), assignments:,
+                 counts: counts(assignments), badge_counts: badge_counts(medals), assignments:,
                  self_practice: practice.order(completed_at: :desc, id: :desc).limit(SELF_PRACTICE_LIMIT)
                                         .pluck(*SELF_PRACTICE_COLUMNS).map { SelfPracticeRow.new(*it) },
-                 self_practice_total: practice.count, **standing(assignments))
+                 self_practice_total: practice.count, **standing(assignments, medals))
       end
 
       # UDR enseignant §3.2 : la moyenne des meilleurs scores sur 20 et le badge de classe qu'elle donne.
-      def standing(assignments)
+      # La médaille enregistrée plancher à Bronze (ADR médailles lues à la clôture).
+      def standing(assignments, medals)
         bests = assignments.filter_map(&:best)
         return { class_grade: nil, class_badge: nil } if bests.empty?
 
         { class_grade: Entities::Classroom::RosterGrade.grade_for(bests.sum.fdiv(bests.size)),
-          class_badge: Grading.class_badge_for(scores: bests, all_perfect: bests.all? { Grading.perfect?(it) }) }
+          class_badge: Grading.class_badge_for(scores: bests, all_perfect: bests.all? { Grading.perfect?(it) }, has_medal: medals.any?) }
       end
 
       # ADR-0097 §4.3 : les assignations actives, dans l'ordre de la page de la classe (UDR-0062 §3.4) ; les scores et la
@@ -102,9 +104,18 @@ module Queries
         Counts.new(done:, late: statuses.fetch(:late, 0), pending: assignments.size - done, assigned: assignments.size)
       end
 
-      # ADR-0097 §4.5 : un palier par exercice fait, d'après son meilleur score ici ; exercise_badges n'est pas lue.
-      def badge_counts(assignments)
-        Grading::BADGE_ORDER.index_with { 0 }.merge(assignments.filter_map { Grading.badge_for(it.best) if it.best }.tally)
+      # Les médailles enregistrées (exercise_badges) de l'élève sur les exercices des assignations actives de la classe :
+      # une requête. → [niveau, ...] (une par exercice).
+      def medals(classroom_id, student_id)
+        Orm::ClassroomAssignment.where(classroom_id:, status: "active", assignable_type: "Exercise")
+                                .joins("JOIN exercise_badges ON exercise_badges.exercise_id = classroom_assignments.assignable_id")
+                                .where(exercise_badges: { student_id: })
+                                .distinct.pluck("exercise_badges.exercise_id", "exercise_badges.level").map(&:last)
+      end
+
+      # ADR médailles lues à la clôture : un palier par médaille enregistrée sur un exercice assigné, plus d'après le score.
+      def badge_counts(medals)
+        Grading::BADGE_ORDER.index_with { 0 }.merge(medals.map(&:to_sym).tally)
       end
 
       # ADR-0089 §4.2 sur SELF_PRACTICE_DAYS jours : la définition de la liste des élèves, une seule fois.
