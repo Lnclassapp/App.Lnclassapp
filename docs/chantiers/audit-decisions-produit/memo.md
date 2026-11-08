@@ -1,45 +1,50 @@
-# Memo — [Titre du chantier]
+# Memo — Décisions produit de l'audit du 8 novembre 2026
 
 | | |
 |---|---|
-| **Type de cycle** | feature · bugfix · refactoring · optimisation · hotfix |
-| **Statut** | cadrage · décision · planifié · en cours · livré · abandonné |
-| **Ouvert le** | AAAA-MM-JJ |
-| **Branche** | `<type>/<slug>` |
-| **Programme** | — *(ou `<programme>` si le chantier est une vague d'un programme — voir `docs/workflows/programme.md`)* |
+| **Type de cycle** | bugfix |
+| **Statut** | en cours |
+| **Ouvert le** | 2026-11-08 |
+| **Branche** | `fix/audit-decisions-produit` |
+| **Programme** | — |
 
 ---
 
 ## Le problème
 
-Qu'est-ce qui ne va pas aujourd'hui ? Décrire la situation, pas la solution.
+L'audit du 8/11 (`docs/audits/2026-11-08-bugs-code-mort.md`, `…-optimisations-ux-wording.md`) a laissé onze points « à confirmer ». Le porteur a tranché ; ce chantier applique ses réponses.
 
 ## Pour qui
 
-Quel acteur (Student, Teacher, Team, Parent, SchoolStaff) et à quel moment de son parcours.
+Direction d'école, enseignant, équipe, élève (annonces, catalogue, classes).
 
-## Pourquoi maintenant
+## Décisions du porteur et ce qui change
 
-Qu'est-ce qui rend ce chantier urgent ou prioritaire ? Si la réponse est « ce serait bien », le chantier attend.
+| Réf. | Décision | Application |
+|---|---|---|
+| B-011 | La direction lit, en lecture seule, la fiche d'un élève d'une classe de SON école | `ReadClassroomPolicy` : branche direction (même `school_id`) ; lien du nom depuis sa page de classe ; sur la fiche : retour vers sa page, ni « Gérer », ni liens vers les pages de l'enseignant |
+| B-012 | Une liste vide de jours de séance est refusée | `SessionDaysInput` : `:blank` ; message « Cochez au moins un jour. » |
+| B-013 | Un enseignant se retire d'une classe archivée | `WithdrawTeachingPolicy` (se déclarer garde `DeclareTeachingPolicy`) |
+| B-015 | Valider une demande d'adhésion exige école active et départ fermé | `ReviewJoinRequest` (valider seulement ; refuser reste permis) : conflit `school_inactive` / `departure_open`, messages dédiés |
+| B-023 | **Aucun changement** : bascule stricte au 1er septembre (ADR-0041) | Noté ici ; rien dans le code |
+| B-029 | Retirer une annonce exige programmée ou publiée | `WithdrawPolicy` : un brouillon répond `:conflict` (404 côté écran) |
+| B-032 | Les fichiers d'une annonce suivent les droits de l'annonce | `ReadFilePolicy` : l'équipe passe par `moderatable_by?` et ne lit que programmée/publiée d'un autre auteur |
+| B-035 | Un élève sans classe active voit les annonces de son école d'inscription | `ReadableMessages#reader_for` : repli sur l'école de sa dernière inscription (annonces par rôle, pas celles d'une classe) |
+| B-046 | La leçon par son adresse se limite aux matières de l'enseignant | `ReadOwnMaterialPolicy` sur la leçon, son ancienne fiche, la feuille et l'ancienne adresse d'une notion ; direction, équipe, élève inchangés. Amende UDR-0077 §4 (UDR « audit-decisions-produit ») |
+| O-X04 | **Pas de cache** 7/30 jours du Pilotage (ADR-0062 : données fraîches) | Rien à retirer : le code ne mettait déjà en cache que `year` (5 min). Pas d'optimisation de requête sans mesure : voir le journal |
+| O-C02 | « Voir plus » des longues listes du catalogue | Leçons de la vue matière (ordinateur, élève) : page suivante au défilement ou lien « Afficher plus de fiches de cours » ; le catalogue et la vue téléphone paginaient déjà |
 
 ## Hors périmètre
 
-Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler.
-
-- …
-
-## Ce que le grill a révélé
-
-> Rempli après la session de questions adverses. Un memo qui sort du grill inchangé signifie que le grill a été mal fait.
-
-| Question posée | Réponse | Conséquence sur le chantier |
-|---|---|---|
-| | | |
+- Index d'`exercise_sessions` / requêtes du Pilotage (O-X04 sans cache), à ouvrir en `/optimize` avec une mesure.
+- Les exercices et sessions lus par un enseignant hors de ses matières (`assessment/*`) : seules les leçons (cours, fiche, feuille, notion) sont limitées.
 
 ## Cas limites identifiés
 
-- …
+- Un enseignant sans matière dans l'établissement courant : 404 sur toute leçon (comme le catalogue vide).
+- Direction d'une autre école ou sans école : 403 sur la fiche élève.
+- Un brouillon d'annonce : plus retirable ; son auteur le supprime ou le publie comme avant.
 
 ## Questions encore ouvertes
 
-- …
+Aucune ; voir `journal.md` (`## À trancher`).
