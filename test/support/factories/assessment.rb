@@ -63,6 +63,19 @@ module Factories
                                    score_percent:, completed_at: (Time.current if completed), **attributes)
     end
 
+    # The medal written when a session is closed: the best level reached by the student on this exercise, Bronze at least
+    # once an answer was given (ADR medals read at closing). Only for tests that read medals; create_exercise_session writes none.
+    def record_medal(session)
+      best = Orm::ExerciseSession.where(student_id: session.student_id, exercise_id: session.exercise_id, status: "completed")
+                                 .maximum(:score_percent)
+      level = Entities::Assessment::Grading.badge_for(best) || (:bronze if best.to_i.positive?)
+      return session unless level
+
+      badge = Orm::ExerciseBadge.find_or_initialize_by(student_id: session.student_id, exercise_id: session.exercise_id)
+      badge.update!(exercise_session: session, level: level.to_s, awarded_at: Time.current)
+      session
+    end
+
     def create_attempt(session: create_exercise_session, question: session.exercise.questions.first, correct: true)
       answers = question.answers.to_a
       selected = correct ? answers.select(&:correct) : [ answers.reject(&:correct).first ]

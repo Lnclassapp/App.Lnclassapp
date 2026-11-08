@@ -256,7 +256,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     svt = create_material(name: "SVT", category: "science")
     exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
     assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment)
+    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment).tap { record_medal(it) }
     create_assignment(classroom: @classroom, assignable: create_exercise(title: "Les volcans"), by: @teacher)
     alone = create_exercise_session(student: @koffi, exercise: create_exercise(title: "Les fractions"), status: "completed",
                                     score_percent: 75)
@@ -307,7 +307,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     scores.each_with_index do |score, index|
       exercise = create_exercise(title: "Exercice #{index}")
       assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment)
+      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment).tap { record_medal(it) }
     end
     sign_in_as @teacher
 
@@ -332,7 +332,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     late = assign.("La méiose")
     overdue = assign.("Les volcans")
     create_exercise_session(student: @koffi, exercise: Orm::Exercise.find(late.assignable_id), status: "completed", score_percent: 60,
-                            classroom_assignment: late, completed_at: 1.day.ago)
+                            classroom_assignment: late, completed_at: 1.day.ago).tap { record_medal(it) }
     sign_in_as @teacher
 
     show_file

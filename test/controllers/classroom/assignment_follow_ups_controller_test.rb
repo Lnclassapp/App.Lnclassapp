@@ -37,7 +37,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
   def hand_in(student, at, assignment: @assignment, score_percent: 100)
     create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent:,
-                            classroom_assignment: assignment, completed_at: at)
+                            classroom_assignment: assignment, completed_at: at).tap { record_medal(it) }
   end
 
   test "the classroom's teacher reads the header, the progress and one list: who did it, best first, then who did not (late after the due date)" do
@@ -205,6 +205,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       sessions.each_with_index do |(score_percent, answers), index|
         session = create_exercise_session(student:, exercise: @quiz_exercise, status: "completed", score_percent:, classroom_assignment: @quiz,
                                           completed_at: Time.zone.local(2026, 10, 3 + index, 8 + rank))
+        record_medal(session)
         answers.each { |position, correct| create_attempt(session:, question: @questions[position - 1], correct:) }
       end
     end
@@ -226,7 +227,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       assert_select "#follow_up_progress span", text: /en retard/, count: 0
       assert_select "#comprehension_next_step", text: /Prochain geste\s+La classe a atteint l'Argent ou mieux\. Un élève est en baisse/
       assert_select "nav[aria-label='Élèves par médaille'] a", 5
-      { none: [ "Pas encore", 2 ], bronze: [ "Bronze", 1 ], silver: [ "Argent", 1 ], gold: [ "Or", 2 ], diamond: [ "Diamant", 0 ] }.each do |badge, (label, count)|
+      { none: [ "Pas encore", 0 ], bronze: [ "Bronze", 3 ], silver: [ "Argent", 1 ], gold: [ "Or", 2 ], diamond: [ "Diamant", 0 ] }.each do |badge, (label, count)|
         assert_select "nav a[href='#{classroom_assignment_path(@classroom.public_id, @quiz.public_id, badge:)}']", text: /#{count}\s*#{label}/
       end
       assert_select "nav a[aria-current=true]", 0
@@ -239,6 +240,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     build_quiz
     sign_in_as @teacher
     Orm::ExerciseSession.where(classroom_assignment: @quiz).update_all(score_percent: 30)
+    Orm::ExerciseBadge.where(exercise_id: @quiz_exercise.id).delete_all # copies without answer: no medal
 
     get follow_up_path(@quiz)
 
@@ -326,9 +328,10 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_panel", text: /%|session|baisse|progrès|Pas encore fait/, count: 0
   end
 
-  test "the whole list: best score first, a student without badge has his grade and no trophy, then the ones not done yet, by name" do
+  test "the whole list: best score first, a student without medal has his grade and no trophy, then the ones not done yet, by name" do
     build_quiz
     sign_in_as @teacher
+    Orm::ExerciseBadge.where(student: Orm::User.where(first_name: "Inès", last_name: "Difficile")).delete_all
 
     get follow_up_path(@quiz)
 
@@ -348,15 +351,16 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     get follow_up_path(@quiz), params: { badge: "bronze" }
 
-    assert_select "nav a[aria-current=true][href='#{follow_up_path(@quiz)}']", text: /1\s*Bronze/
-    assert_select "#comprehension_panel ul li", 1 do
-      assert_select "a[data-turbo-frame=_top]", text: "Fanta Fragile"
-      assert_select "span", text: "13/20"
+    assert_select "nav a[aria-current=true][href='#{follow_up_path(@quiz)}']", text: /3\s*Bronze/
+    assert_select "#comprehension_panel ul li", 3 do |items|
+      assert_equal [ "Fanta Fragile", "Inès Difficile", "Omar Difficile" ], items.map { it.at_css("a").text }
+      assert_select items.first, "span", text: "13/20"
+      assert_select items.last, "span", text: "6/20"
     end
     assert_select "#comprehension_panel", text: /Pas encore fait|En retard/, count: 0
     assert_select "#comprehension_questions ol li:first-child", text: /1\.\s*Question 1\s*1 \/ 1 juste/
     assert_select "#follow_up_progress span", text: "6 / 10 faits"
-    assert_select "nav a", text: /2\s*Pas encore/
+    assert_select "nav a", text: /0\s*Pas encore/
   end
 
   test "an unknown badge, the old ?category= or an array is ignored: the whole list, no box active" do
@@ -385,7 +389,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "body", text: /Pas encore fait/, count: 0
     assert_select "#comprehension_questions", 0
     assert_select "nav a[aria-current=true]", text: /0\s*Diamant/
-    assert_select "nav a", text: /2\s*Pas encore/
+    assert_select "nav a", text: /3\s*Bronze/
   end
 
   test "under 5 done: no circle, the next step says the bound, and the detail still shown, the one not done yet closing the list" do
