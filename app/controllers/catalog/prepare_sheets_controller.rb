@@ -28,7 +28,7 @@ module Catalog
     def open_sheet(&)
       @detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
       return render_not_found if @detail.nil?
-      return if refuse_out_of_level(course_slug: params[:course_slug])
+      return if refuse_out_of_level(course_slug: params[:course_slug]) || refuse_out_of_material(course_slug: params[:course_slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
                     success: ->(_) { load_sheet(&) }

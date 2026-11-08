@@ -35,7 +35,7 @@ module Catalog
     def show
       @detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:slug], actor: current_actor)
       return render_not_found if @detail.nil?
-      return if refuse_out_of_level(course_slug: params[:slug])
+      return if refuse_out_of_level(course_slug: params[:slug]) || refuse_out_of_material(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
                     success: ->(_) { load_status_record; load_lesson_sections; load_next_exercise; load_remediation_proposals; record_reads }
@@ -46,7 +46,7 @@ module Catalog
     def fiche
       detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
       return render_not_found if detail.nil?
-      return if refuse_out_of_level(course_slug: params[:course_slug])
+      return if refuse_out_of_level(course_slug: params[:course_slug]) || refuse_out_of_material(course_slug: params[:course_slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: detail.course),
                     success: ->(_) { redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :moved_permanently }

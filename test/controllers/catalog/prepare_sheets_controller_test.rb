@@ -11,7 +11,7 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
     @devoirs = Array.new(2) { |index| create_exercise(subject: @subject, course: @course, title: "Devoir #{index + 1}", position: 40 + index) }
     @classroom = create_classroom(level: @course.level, series: @course.series)
     @student = create_student(classroom: @classroom)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @course.material, classrooms: [ @classroom ])
     @notion_sheet = "notion-#{@notion.slug}"
     @devoir_sheet = "sujet-#{@subject.position}"
   end
@@ -182,7 +182,7 @@ class Catalog::PrepareSheetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "a teacher without any classroom of this level is told so on the reading page" do
-    sign_in_as create_teacher(classrooms: [ create_classroom(name: "6ème 1") ])
+    sign_in_as create_teacher(material: @course.material, classrooms: [ create_classroom(name: "6ème 1") ])
 
     get course_sheet_path(@course.slug, @devoir_sheet)
 

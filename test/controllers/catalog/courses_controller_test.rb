@@ -878,8 +878,35 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
+  # Audit B-046 (décision du porteur) : comme le catalogue, la leçon par son adresse se limite aux matières de l'enseignant.
+  test "B-046: a teacher gets 404 on the lesson, its old sheet address, and its notion of another subject; direction, team and student unchanged" do
+    notion = create_essential(course: @course)
+    other_subject_teacher = create_teacher(material: create_material(name: "Matière étrangère"))
+    sign_in_as other_subject_teacher
+
+    [ course_path(@course.slug), course_fiche_path(@course.slug), course_essential_path(@course.slug, notion.slug) ].each do |path|
+      get path
+      assert_response :not_found, path
+    end
+    sign_out
+
+    sign_in_as create_teacher(material: @course.material)
+    get course_path(@course.slug)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_school_admin
+    get course_path(@course.slug)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_team_member
+    get course_path(@course.slug)
+    assert_response :success
+  end
+
   test "the teacher reads the course without any action: no « Assigner à mes classes », no team action (ADR-0072)" do
-    sign_in_as create_teacher
+    sign_in_as create_teacher(material: @course.material)
 
     get course_path(@course.slug)
 
