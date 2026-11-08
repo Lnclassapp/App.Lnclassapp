@@ -20,11 +20,14 @@ Vague 1 : Lot 0 (1 agent). Vague 2 : Lots A, B, C (3 agents, worktrees isolés).
 
 - **Couche**       : domaine
 - **Fichiers**     : `app/domain/entities/assessment/grading.rb`
+                     `app/domain/entities/assessment/question_attempt.rb`
+                     `app/infrastructure/repositories/assessment/exercise_session_repository.rb`
                      `app/domain/use_cases/assessment/close_exercise_session.rb`
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/assessment/grading_test.rb`
                      `test/domain/use_cases/assessment/close_exercise_session_test.rb`
-- **Done quand**   : une copie à 20 % avec au moins une réponse enregistre Bronze ; une copie sans réponse n'enregistre rien ; la médaille de classe d'un élève ayant une médaille vaut au moins Bronze ; les paliers au-dessus de Bronze sont inchangés
+                     `test/infrastructure/repositories/assessment/exercise_session_repository_test.rb`
+- **Done quand**   : l'entité de la tentative porte `unanswered` (défaut faux) et le repository le remonte ; une copie à 20 % avec au moins une réponse enregistre Bronze ; une copie sans réponse n'enregistre rien ; la médaille de classe d'un élève ayant une médaille vaut au moins Bronze ; les paliers au-dessus de Bronze sont inchangés
 
 ## Lot A — Résultat de session
 
@@ -70,6 +73,8 @@ Aucune : toutes tranchées au grill (voir `memo.md`). Réversible, appliqué : l
 | Fichier | Lot propriétaire |
 |---|---|
 | `app/domain/entities/assessment/grading.rb` | Lot 0 |
+| `app/domain/entities/assessment/question_attempt.rb` | Lot 0 |
+| `app/infrastructure/repositories/assessment/exercise_session_repository.rb` | Lot 0 |
 | `app/domain/use_cases/assessment/close_exercise_session.rb` | Lot 0 |
 | `app/infrastructure/queries/assessment/session_result_query.rb` | Lot A |
 | `app/views/assessment/session_results/_badge.html.erb` | Lot A |
