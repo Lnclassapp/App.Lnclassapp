@@ -16,7 +16,7 @@ module Entities
         def practice_for(**) = @notion
       end
 
-      Student = Data.define(:role) do
+      Student = Data.define(:role, :user_id) do
         def student? = true
         def team? = false
       end
@@ -31,7 +31,7 @@ module Entities
       def practice_verdict(raw_question, text)
         practice = Catalog::NotionPractice.from_raw(raw_practice(raw_question))
         result = check_practice_with(Notions.new(practice))
-                                                 .call(actor: Student.new(role: "student"), audience: Catalog::LevelAudience.new(pairs: [ [ 1, nil ] ]),
+                                                 .call(actor: Student.new(role: "student", user_id: 1), audience: Catalog::LevelAudience.new(pairs: [ [ 1, nil ] ]),
                                                        course_slug: "c", notion_slug: "n", digest: practice.digest,
                                                        responses: { "0" => { "blanks" => { "0" => text } } })
         result.value.questions.first.verdicts.first
@@ -71,7 +71,7 @@ module Entities
 
         [ [ "4,8", "3" ], [ "4,8 cm", "2" ], [ "x", "3 cm" ] ].each do |texts|
           result = check_practice_with(Notions.new(practice))
-                                                   .call(actor: Student.new(role: "student"), audience: Catalog::LevelAudience.new(pairs: [ [ 1, nil ] ]),
+                                                   .call(actor: Student.new(role: "student", user_id: 1), audience: Catalog::LevelAudience.new(pairs: [ [ 1, nil ] ]),
                                                          course_slug: "c", notion_slug: "n", digest: practice.digest,
                                                          responses: { "0" => { "blanks" => { "0" => texts[0], "1" => texts[1] } } })
           expected = question.blank_results(texts).map { it ? :correct : :wrong }

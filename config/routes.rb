@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   draw :catalog
   draw :assessment
   draw :communication
+  draw :billing
   draw :teams
   draw :school_admin
 end

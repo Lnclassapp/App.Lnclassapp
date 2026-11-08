@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::CheckPractice
 # Rôle : juge l'exercice d'entraînement d'une notion (« Je m'entraîne » de la fiche) case par case et rend le corrigé ; n'écrit rien
-# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0120-questions-a-plusieurs-cases-et-indice, 0028, 0035 · UDR : 0147-je-m-entraine-dans-la-fiche (§3.4)
+# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0120-questions-a-plusieurs-cases-et-indice, 0028, 0035, 0126 (contexte billing, §4.6 : garde d'accès) · UDR : 0147-je-m-entraine-dans-la-fiche (§3.4)
 module UseCases
   module Catalog
     # Aucun port d'écriture : l'absence de trace tient à la construction. Les réponses sont celles de la fiche, par question (clé = position
@@ -54,14 +54,20 @@ module UseCases
       end
 
       # policy : Policies::Catalog::ReadPublishedPolicy ; level_policy : Policies::Catalog::ReadOwnLevelPolicy.
-      def initialize(notions:, policy:, level_policy:)
+      # access : Ports::Billing::StudentAccessPort ; clock : répond à #now.
+      def initialize(notions:, policy:, level_policy:, access:, clock:)
         @notions = notions
+        @access = access
+        @clock = clock
         @policy = policy
         @level_policy = level_policy
       end
 
       # audience : Entities::Catalog::LevelAudience de l'élève (nil pour un autre rôle). → Shared::Result de Check
+      #   | :locked (élève bloqué : errors base [:subscription_required]) | :not_found | :conflict
       def call(actor:, audience:, course_slug:, notion_slug:, digest:, responses:)
+        return Shared::Result.failure(:locked, errors: { base: [ :subscription_required ] }) if @access.call(student_id: actor.user_id, at: @clock.now).blocked?
+
         notion = @notions.practice_for(course_slug:, notion_slug:, statuses: actor.team? ? %w[draft published] : %w[published])
         return Shared::Result.failure(:not_found) if notion.nil? || refused?(actor, audience, notion)
         return Shared::Result.failure(:conflict, errors: { base: [ :changed ] }) unless notion.practice.digest == digest

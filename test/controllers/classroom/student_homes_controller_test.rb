@@ -272,10 +272,11 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{CARD} a[href*='/essentials/']", 0
   end
 
-  test "CA-D1, CA-K3: six subjects at most then « Inviter » (a seventh is left out); no « Paiement », no « abonnement »" do
+  test "CA-D1, CA-K3: six subjects at most then « Inviter » (a seventh is left out); no « Paiement » ; no « abonnement » once subscribed (cartes-activation: the notice is for the free period)" do
     %w[Mathématiques Physique-Chimie Français Histoire-Géographie Philosophie EDHC].each do |name|
       create_course(material: create_material(name:, category: "literature"), level: @classroom.level)
     end
+    subscribe_student(@student)
     sign_in_as @student
 
     get student_home_path

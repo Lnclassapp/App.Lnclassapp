@@ -1,0 +1,36 @@
+<%# 🌐 UI · teams/billing/relay_points/index — points relais de l'équipe %>
+<%# Rôle : tableau #relay_points par nom (lieu, téléphone, écoles, état), « Nouveau point relais » ouvre la modale ; sans point relais, état vide %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 · modèle : teams/drenas/index %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "billing" %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: teams_billing_cashbox_path } do %>
+  <%= ui_button t(".new"), href: new_teams_billing_relay_point_path, icon: "plus", data: { turbo_frame: "modal" } %>
+<% end %>
+
+<%= ui_icon_sprite do %>
+  <% if @relay_points.empty? %>
+    <div class="rounded-card border border-line bg-white p-6 shadow-card">
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "building-storefront",
+                         action: { label: t(".empty_action"), href: new_teams_billing_relay_point_path, icon: "plus" } %>
+    </div>
+  <% else %>
+    <div class="relative overflow-x-auto rounded-card border border-line bg-white shadow-card">
+      <table class="w-full min-w-2xl text-left text-sm">
+        <caption class="sr-only"><%= t(".title") %></caption>
+        <thead class="border-b border-line text-xs text-mute">
+          <tr>
+            <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.name") %></th>
+            <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.location") %></th>
+            <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.phone") %></th>
+            <th scope="col" class="px-4 py-3 text-right font-medium"><%= t(".columns.schools") %></th>
+            <th scope="col" class="px-4 py-3 font-medium"><%= t(".columns.state") %></th>
+            <th scope="col" class="sticky-actions px-4 py-3"><span class="sr-only"><%= t(".columns.actions") %></span></th>
+          </tr>
+        </thead>
+        <tbody id="relay_points" class="divide-y divide-line">
+          <%= render partial: "relay_point_row", collection: @relay_points, as: :relay_point %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>

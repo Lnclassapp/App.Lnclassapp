@@ -1,10 +1,10 @@
 require "test_helper"
 
-# F-07, ADR-0031, UDR-0020: a team member resets the second factor of another member, who is signed out everywhere
-# and must enrol again; nobody resets their own.
+# F-07, ADR-0031, ADR-0038, UDR-0020: an admin of the team resets the second factor of another member, who is signed
+# out everywhere and must enrol again; nobody resets their own, and the content and field sub-roles never do (B-001).
 class Teams::SecondFactorResetsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @actor = create_team_member(team_role: "field")
+    @actor = create_team_member(team_role: "admin")
     @member = create_team_member(team_role: "content", first_name: "Yao", last_name: "Kouassi")
     create_backup_code(user: @member)
     create_login_session(user: @member)
@@ -38,6 +38,21 @@ class Teams::SecondFactorResetsControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
 
     assert Orm::TotpCredential.exists?(user_id: @actor.id)
+    assert_not Orm::AuditEvent.exists?(action: "totp.reset")
+  end
+
+  # B-001: a content or field member who resets an admin's second factor could then take the admin's account.
+  test "a content or field member is refused in 403, even against an admin, without change" do
+    admin = create_team_member(team_role: "admin", first_name: "Ama", last_name: "Diallo")
+
+    %w[content field].each do |team_role|
+      sign_in_as create_team_member(team_role:)
+      reset admin, as: :turbo_stream
+      assert_response :forbidden
+      sign_out
+    end
+
+    assert Orm::TotpCredential.exists?(user_id: admin.id)
     assert_not Orm::AuditEvent.exists?(action: "totp.reset")
   end
 

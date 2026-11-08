@@ -55,7 +55,9 @@ module Classroom
     def read_roster(public_id)
       @search = params[:q].to_s
       @header = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id:)
-      @overview = Queries::Classroom::ClassroomOverviewQuery.new.call(public_id:, show_roster: true, search: @search)
+      @page = Integer(params[:page].to_s, 10, exception: false).then { it&.positive? ? it : 1 }
+      @overview = Queries::Classroom::ClassroomOverviewQuery.new.call(public_id:, show_roster: true, search: @search, page: @page,
+                                                                      badge: params[:badge].to_s)
     end
 
     # La direction a sa propre page de classe (ADR-0065) ; l'enseignant et l'équipe, celle-ci.
