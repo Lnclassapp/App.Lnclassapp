@@ -33,14 +33,19 @@ module Entities
         GRADED_LEVELS.find { |level| reaches?(score_percent, BADGE_THRESHOLDS[level]) } || :bronze
       end
 
+      # ADR médailles lues à la clôture : la médaille que donne une session terminée, celle que la clôture enregistre si elle monte.
+      # treated : au moins une réponse donnée (ou une question du cahier) ; une copie vide n'en donne aucune (nil).
+      def self.session_medal(score_percent, treated:) = (badge_for(score_percent) if treated)
+
       # UDR enseignant §3.2 : le badge qui range un élève dans une classe, une seule règle. `scores` : les notes retenues (sur 100)
       # de ses exercices assignés faits ; `all_perfect` : chacun est un sans-faute. Diamant : au moins un exercice fait et tous
       # sans faute ; sinon Or, Argent, Bronze selon la moyenne, lue sur la note sur 20 ; nil (« Pas encore ») sans exercice
       # fait ; sous la moyenne d'Argent, Bronze. Jamais un exercice par élève en requête : l'appelant lit tout en une fois.
-      # ADR médailles lues à la clôture : `has_medal` (l'élève détient au moins une médaille d'exercice) donne Bronze même sans note
-      # retenue. Défaut false : les appelants qui ne le passent pas gardent la règle sans médaille enregistrée.
-      def self.class_badge_for(scores:, all_perfect:, has_medal: false)
-        return (has_medal ? :bronze : nil) if scores.empty?
+      # ADR médailles lues à la clôture, PRD §3 : sans médaille enregistrée dans la classe (`has_medal` faux : copies vides seulement),
+      # « Pas encore » (nil), quelles que soient les notes ; avec une médaille et sans note retenue, Bronze.
+      def self.class_badge_for(scores:, all_perfect:, has_medal:)
+        return nil unless has_medal
+        return :bronze if scores.empty?
         return :diamond if all_perfect
 
         average = scores.sum.fdiv(scores.size)

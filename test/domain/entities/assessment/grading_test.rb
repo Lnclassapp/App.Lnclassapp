@@ -38,33 +38,38 @@ module Entities
 
       # UDR enseignant §3.2 (CA-G3) : le badge d'un élève dans une classe, sur ses exercices faits (notes retenues, sur 100).
       test "class_badge_for: Diamant seulement si au moins un exercice est fait et tous sans faute" do
-        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true)
-        assert_equal :diamond, Grading.class_badge_for(scores: [ 100, 100, 100 ], all_perfect: true)
-        assert_equal :gold, Grading.class_badge_for(scores: [ 100, 98 ], all_perfect: false)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100, 100, 100 ], all_perfect: true, has_medal: true)
+        assert_equal :gold, Grading.class_badge_for(scores: [ 100, 98 ], all_perfect: false, has_medal: true)
       end
 
       test "class_badge_for: Or, Argent, Bronze selon la moyenne, lue sur la note sur 20" do
         { [ 78 ] => :gold, [ 90, 70 ] => :gold, [ 77 ] => :silver, [ 68 ] => :silver, [ 67 ] => :bronze, [ 48 ] => :bronze,
           [ 60, 40 ] => :bronze }.each do |scores, badge|
-          assert_equal badge, Grading.class_badge_for(scores:, all_perfect: false), scores.inspect
+          assert_equal badge, Grading.class_badge_for(scores:, all_perfect: false, has_medal: true), scores.inspect
         end
       end
 
-      test "class_badge_for: nil (« Pas encore ») sans exercice fait seulement ; sous Bronze, Bronze" do
-        assert_nil Grading.class_badge_for(scores: [], all_perfect: false)
-        assert_nil Grading.class_badge_for(scores: [], all_perfect: true)
-        assert_equal :bronze, Grading.class_badge_for(scores: [ 47 ], all_perfect: false)
-        assert_equal :bronze, Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
-      end
-
-      test "class_badge_for: une médaille détenue donne Bronze même sans note ; avec une note, Bronze au moins avec ou sans médaille" do
+      # PRD §3 : aucun exercice médaillé (copies vides seulement) → « Pas encore », quelles que soient les notes.
+      test "class_badge_for: nil (« Pas encore ») sans médaille, même avec des notes ; avec une médaille, Bronze au moins" do
+        assert_nil Grading.class_badge_for(scores: [], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 0 ], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [], all_perfect: false, has_medal: true)
         assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: true)
         assert_equal :bronze, Grading.class_badge_for(scores: [ 0, 40 ], all_perfect: false, has_medal: true)
-        assert_equal :bronze, Grading.class_badge_for(scores: [], all_perfect: false, has_medal: true)
-        assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: false)
-        assert_nil Grading.class_badge_for(scores: [], all_perfect: false, has_medal: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 47 ], all_perfect: false, has_medal: true)
         assert_equal :silver, Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: true)
         assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
+      end
+
+      test "session_medal : le palier du score si la copie est traitée, rien pour une copie vide" do
+        assert_nil Grading.session_medal(0, treated: false)
+        assert_nil Grading.session_medal(100, treated: false)
+        assert_equal :bronze, Grading.session_medal(0, treated: true)
+        assert_equal :bronze, Grading.session_medal(47, treated: true)
+        assert_equal :gold, Grading.session_medal(80, treated: true)
       end
 
       test "le score est une division entière, arrondie vers le bas" do

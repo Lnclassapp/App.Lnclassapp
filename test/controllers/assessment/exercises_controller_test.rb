@@ -66,8 +66,8 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "l'élève qui a déjà rendu une copie voit « Refaire l'exercice » et sa meilleure médaille, sans note" do
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85))
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40))
     sign_in_as @student
 
     get exercise_path(@exercise.public_id)
@@ -93,13 +93,18 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='/teams/exercises/#{@exercise.public_id}/edit']", 0
   end
 
-  test "la meilleure médaille suit la note affichée : 67 % Bronze, 68 % Argent, 40 % Bronze (tout exercice traité)" do
+  # ADR médailles lues à la clôture : la médaille enregistrée, jamais recalculée du score ; une copie vide n'en enregistre aucune.
+  test "la meilleure médaille est celle enregistrée : copie vide « Pas encore », 40 % répondu Bronze, puis 68 % Argent" do
     sign_in_as @student
-    session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0)
+    get exercise_path(@exercise.public_id)
+    assert_select "#exercise_best", text: /Ta médaille :\s*Pas encore/
+
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40))
     get exercise_path(@exercise.public_id)
     assert_select "#exercise_best", text: /Ta médaille :\s*Bronze/
 
-    session.update!(score_percent: 68)
+    record_medal(create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 68))
     get exercise_path(@exercise.public_id)
     assert_select "#exercise_best", text: /Ta médaille :\s*Argent/
   end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionDetailQuery
 # Rôle : section « Compréhension » du suivi : cases par badge, justes par question et élèves d'un badge, du meilleur score au plus faible (UDR enseignant §3.8)
-# ADR  : 0026, 0072, 0079, 0097 (§4.9), XXXX-medailles-lues-a-la-cloture · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
+# ADR  : 0026, 0072, 0079, 0097 (§4.5, §4.9), XXXX-medailles-lues-a-la-cloture · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
 module Queries
   module Assessment
     class ComprehensionDetailQuery
@@ -40,8 +40,8 @@ module Queries
         return if id.nil?
 
         scores = AssignmentScores.for(classroom_id:, assignment_ids: [ id ]).fetch(id, [])
-        medals = Orm::ExerciseBadge.where(exercise_id:, student_id: scores.map(&:student_id)).pluck(:student_id, :level)
-                                   .to_h { |student_id, level| [ student_id, level.to_sym ] }
+        # ADR-0097 §4.5 : la médaille gagnée par une session de cette assignation ; une médaille d'une autre classe n'existe pas ici.
+        medals = Medals.by_assignment(assignment_ids: [ id ], student_ids: scores.map(&:student_id)).fetch(id, {})
         detail(scores, Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).count, exercise_id, badge,
                medals, classroom_id:, id:)
       end

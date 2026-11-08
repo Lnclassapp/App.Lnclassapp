@@ -11,7 +11,7 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     course = create_course(material: create_material(name: "Mathématiques"))
     @exercise = create_exercise(essential: create_essential(course:), title: "Fractions")
     create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 75,
-                            completed_at: Time.zone.local(2026, 3, 12, 10))
+                            completed_at: Time.zone.local(2026, 3, 12, 10)).tap { create_attempt(session: it) }
   end
 
   # IL-14 (ADR-0085 §4.3): the home of a student without a classroom carries the archive, as the exit screen did.
@@ -89,18 +89,21 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_archive_results li img[alt='']", 3
   end
 
-  # UDR médailles : la ligne montre la médaille de la session (au moins Bronze), jamais une note ; aucune ligne n'est un lien (UDR-0013).
+  # UDR médailles : la ligne montre la médaille de la session (Bronze dès une réponse, « Pas encore » pour une copie vide), jamais
+  # une note ; aucune ligne n'est un lien (UDR-0013).
   test "a row shows its medal, never a grade, never red, and no row is a link" do
     { 70 => 14, 60 => 13, 68 => 11, 100 => 10, 30 => 9 }.each do |score, day|
       create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: score,
-                              completed_at: Time.zone.local(2026, 3, day, 9))
+                              completed_at: Time.zone.local(2026, 3, day, 9)).tap { create_attempt(session: it) }
     end
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0,
+                            completed_at: Time.zone.local(2026, 3, 8, 9))
     sign_in_as @student
 
     get student_archive_path
 
     medals = css_select("#student_archive_results [data-medal]").map { it.text.squish }
-    assert_equal({ "Argent Médaille Argent" => 3, "Diamant Médaille Diamant" => 1, "Bronze Médaille Bronze" => 2 }, medals.tally)
+    assert_equal({ "Argent Médaille Argent" => 3, "Diamant Médaille Diamant" => 1, "Bronze Médaille Bronze" => 2, "Pas encore" => 1 }, medals.tally)
     assert_select "#student_archive_results", text: %r{\d+\s*/\s*20|%|sur 20}, count: 0
     assert_select "#student_archive_results [class*=error], #student_archive_results [class*=danger]", 0
     assert_select "#student_archive_results a", 0

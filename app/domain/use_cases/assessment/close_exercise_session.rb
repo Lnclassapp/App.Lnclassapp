@@ -30,29 +30,30 @@ module UseCases
       private
 
       def close(session, essential_id, now)
-        score_percent = Entities::Assessment::Grading.points_percent(graded(session))
+        questions = @exercises.find(id: session.exercise_id).questions
+        attempts = @sessions.attempts(session_id: session.id)
+        score_percent = Entities::Assessment::Grading.points_percent(graded(questions, attempts))
         @sessions.complete(id: session.id, score_percent:, at: now)
-        badge_level = recorded_level(session, score_percent)
+        badge_level = Entities::Assessment::Grading.session_medal(score_percent, treated: treated?(questions, attempts))
         earned_now = award(session, badge_level, now)
         settle_gap(session, essential_id, score_percent, now)
         Row.new(score_percent:, badge_level:, earned_now:)
       end
 
-      # ADR médailles lues à la clôture : le palier du score (Bronze au moins, Grading.badge_for) si au moins une réponse a été donnée
-      # (tentative non unanswered) ; nil pour une copie sans aucune réponse. Cette médaille est celle que les écrans lisent.
-      def recorded_level(session, score_percent)
-        return unless @sessions.attempts(session_id: session.id).any? { !it.unanswered }
-
-        Entities::Assessment::Grading.badge_for(score_percent)
+      # ADR médailles lues à la clôture : la copie est traitée si au moins une réponse a été donnée (tentative non unanswered) ;
+      # une question du cahier, qui n'a aucun champ, la rend traitée aussi (journal du chantier, À trancher). La même règle que
+      # Queries::Assessment::Medals::TREATED_SQL, qui la relit pour les écrans.
+      def treated?(questions, attempts)
+        attempts.any? { !it.unanswered } || questions.any? { it.kind::INPUT == :none }
       end
 
       # [[points, part juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte
       # jamais, une question sans tentative est fausse, une tentative d'une autre question est ignorée (menace I11). La part juste
       # est 1 ou 0 pour une case, cases justes / cases sinon (Grading.share).
-      def graded(session)
-        attempts = @sessions.attempts(session_id: session.id).to_h { [ it.question_id, it ] }
-        @exercises.find(id: session.exercise_id).questions.select(&:auto_graded?)
-                  .map { |question| [ question.points, Entities::Assessment::Grading.share(question, attempts[question.id]) ] }
+      def graded(questions, attempts)
+        attempts = attempts.to_h { [ it.question_id, it ] }
+        questions.select(&:auto_graded?)
+                 .map { |question| [ question.points, Entities::Assessment::Grading.share(question, attempts[question.id]) ] }
       end
 
       # Un badge ne monte que vers un palier strictement supérieur (ADR-0033).

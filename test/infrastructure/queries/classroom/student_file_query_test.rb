@@ -2,8 +2,8 @@ require "test_helper"
 
 # Lot A of rapports-de-classe (CL-13, AS-24 ; ADR-0097 §4.1 to §4.5, §4.8): the file of a student present in his
 # classroom. The assigned exercises of the classroom with the follow-up's rules (done, late, remediation included, the
-# sessions of the assignment only), the badges of his best scores there (never exercise_badges), and what he did alone
-# over 30 days. Read, never written; a fixed number of queries.
+# sessions of the assignment only), the medals recorded by a session of an assignment of the classroom (ADR-0097 §4.5:
+# never one won in another classroom), and what he did alone over 30 days. Read, never written; a fixed number of queries.
 module Queries
   module Classroom
     class StudentFileQueryTest < ActiveSupport::TestCase
@@ -28,10 +28,11 @@ module Queries
                           assigned_at: due_on ? (due_on - 1).in_time_zone.change(hour: 8) : Time.current)
       end
 
-      def hand_in(assignment, score, at:, student: @awa, **attributes)
+      # blank: a copy without any answer, for which closing records no medal.
+      def hand_in(assignment, score, at:, student: @awa, blank: false, **attributes)
         create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
                                 score_percent: score, classroom_assignment: assignment, started_at: at - 10.minutes,
-                                completed_at: at, **attributes)
+                                completed_at: at, **attributes).tap { record_medal(it) unless blank }
       end
 
       def alone(score, started_at:, student: @awa, **attributes)
@@ -79,13 +80,17 @@ module Queries
         assert_equal [ 6, :bronze ], file(weak).to_h.values_at(:class_grade, :class_badge)
       end
 
-      test "a Bronze medal on an assigned exercise or none leaves a 30 % average Bronze (no grade, no class medal)" do
+      # PRD §3: no medalled exercise (blank copies only) → « Pas encore », whatever the grade; one answer given → Bronze.
+      test "blank copies only: a grade but no class badge; one copy with an answer gives Bronze" do
         one = assign("Un")
-        hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9))
-        assert_equal [ 6, :bronze ], file.to_h.values_at(:class_grade, :class_badge)
+        hand_in(one, 0, at: Time.zone.local(2026, 10, 7, 9), blank: true)
+        assert_equal [ 0, nil ], file.to_h.values_at(:class_grade, :class_badge)
+        assert_nil file.assignments.sole.medal
+        assert_equal({ bronze: 0, silver: 0, gold: 0, diamond: 0 }, file.badge_counts)
 
-        create_badge(student: @awa, exercise: Orm::Exercise.find(one.assignable_id), level: "bronze")
+        hand_in(one, 30, at: Time.zone.local(2026, 10, 8, 9))
         assert_equal [ 6, :bronze ], file.to_h.values_at(:class_grade, :class_badge)
+        assert_equal :bronze, file.assignments.sole.medal
       end
 
       test "the header: name, masked number, arrival and its channel; the full number never leaves the query" do
@@ -185,15 +190,34 @@ module Queries
         assert_equal [ 65, :fragile, :progress ], row.to_h.values_at(:best, :category, :trend)
       end
 
-      test "badges of the classroom: the medals recorded on the assigned exercises, by tier, not the score" do
+      test "badges of the classroom: the medals recorded by its sessions, by tier; a blank copy or a medal elsewhere counts nothing" do
         exercises = %w[Un Deux Trois Quatre].map { |title| assign(title) }
-        exercises.each_with_index { |assignment, index| hand_in(assignment, 100 - index, at: Time.zone.local(2026, 10, 1 + index, 10)) }
-        { 0 => "diamond", 1 => "bronze", 2 => "bronze" }.each do |index, level|
-          create_badge(student: @awa, exercise: Orm::Exercise.find(exercises[index].assignable_id), level:)
-        end
+        [ 100, 50, 30 ].each_with_index { |score, index| hand_in(exercises[index], score, at: Time.zone.local(2026, 10, 1 + index, 10)) }
+        hand_in(exercises[3], 0, at: Time.zone.local(2026, 10, 5, 10), blank: true)
         create_badge(student: @awa, exercise: create_exercise(essential: @essential), level: "gold")
 
         assert_equal({ bronze: 2, silver: 0, gold: 0, diamond: 1 }, file.badge_counts)
+        assert_equal [ nil, :bronze, :bronze, :diamond ], file.assignments.map(&:medal) # the newest assignment first
+      end
+
+      # ADR-0097 §4.5 (reproduction): a student of A and B wins Or on an exercise through B; the exercise is assigned to A too:
+      # the teacher of A reads no Or, neither in the tiers, nor on the line, nor in the class badge.
+      test "a student of two classrooms: Or won through the other classroom is never read here" do
+        other_classroom = create_classroom(school: @school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other_classroom, student: @awa, primary: false, joined_at: Time.current)
+        here = assign("Commun")
+        there = create_assignment(classroom: other_classroom, assignable: Orm::Exercise.find(here.assignable_id))
+        hand_in(there, 85, at: Time.zone.local(2026, 10, 6, 10))
+
+        assert_equal({ bronze: 0, silver: 0, gold: 0, diamond: 0 }, file.badge_counts)
+        assert_nil file.class_badge
+
+        hand_in(here, 40, at: Time.zone.local(2026, 10, 7, 10))
+        result = file
+
+        assert_equal({ bronze: 0, silver: 0, gold: 0, diamond: 0 }, result.badge_counts)
+        assert_equal [ 8, nil, nil ], [ result.class_grade, result.class_badge, result.assignments.sole.medal ]
+        assert_equal({ bronze: 0, silver: 0, gold: 1, diamond: 0 }, file(classroom: other_classroom).badge_counts)
       end
 
       test "without an assignment: zero everywhere, the four tiers at zero" do

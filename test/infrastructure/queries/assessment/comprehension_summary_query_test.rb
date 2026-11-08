@@ -18,16 +18,7 @@ module Queries
       def hand_in(student, score_percent, assignment: @assignment, **attributes)
         exercise = Orm::Exercise.find(assignment.assignable_id)
         create_exercise_session(student:, exercise:, status: "completed", score_percent:, classroom_assignment: assignment,
-                                **attributes).tap { record_medal(student, exercise, it) }
-      end
-
-      # The medal is the one written at closing: the best level reached, here from the scores.
-      def record_medal(student, exercise, session)
-        best = Orm::ExerciseSession.where(student:, exercise:, status: "completed").maximum(:score_percent)
-        level = Entities::Assessment::Grading.badge_for(best)
-        return unless level
-
-        Orm::ExerciseBadge.find_or_initialize_by(student:, exercise:).update!(exercise_session: session, level: level.to_s, awarded_at: Time.current)
+                                **attributes).tap { record_medal(it) }
       end
 
       def summaries(assignment_ids = [ @assignment.id ])
@@ -121,7 +112,9 @@ module Queries
         hand_in(twice, 55)
         hand_in(twice, 100, assignment: other)
 
-        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(gold: 4, diamond: 1)), summary
+        # ADR-0097 §4.5: the diamond recorded by the session of the other classroom is not read here; the Bronze of 55 % was taken
+        # over by it (one medal per student and exercise), so nothing is counted for him here (journal, À trancher).
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(gold: 4)), summary
         assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(diamond: 1)),
                      ComprehensionSummaryQuery.for(classroom_id: other_classroom.id, assignment_ids: [ other.id ]).fetch(other.id)
       end

@@ -47,8 +47,7 @@ module Queries
         assert_nil SessionResultQuery.new.call(public_id: "inconnue", reveal: true)
       end
 
-      test "en-tête : exercice, fiche de révision, élève, score, note, maîtrise et palier enregistré" do
-        create_badge(student: @student, exercise: @exercise, level: "bronze", session: @session)
+      test "en-tête : exercice, fiche de révision, élève, score, note, maîtrise et médaille de la session" do
         row = result
 
         assert_equal [ @exercise.public_id, "Méiose" ], [ row.exercise.public_id, row.exercise.title ]
@@ -59,22 +58,57 @@ module Queries
                      [ row.score_percent, row.grade_on_20, row.correct_count, row.question_count, row.mastery, row.badge_level ]
       end
 
-      test "palier : la médaille enregistrée de l'élève pour l'exercice ; sans médaille, aucun palier" do
-        gold = Entities::Assessment::Grading::GOLD_THRESHOLD + 10
-        @session.update!(score_percent: gold)
-        assert_nil result.badge_level
+      # Journal, À trancher : le résultat montre la médaille de CETTE session (Grading.session_medal), jamais celle que l'élève
+      # détient sur l'exercice ; un Or qui refait à 20 % lit Bronze, et « Prochaine médaille » part de là.
+      test "palier : la médaille de cette session, pas celle détenue sur l'exercice" do
+        @session.update!(score_percent: 90)
+        assert_equal [ :gold, :acquired, 18 ], [ result.badge_level, result.mastery, result.grade_on_20 ]
 
         create_badge(student: @student, exercise: @exercise, level: "gold", session: @session)
-        assert_equal [ :gold, :acquired, 18 ], [ result.badge_level, result.mastery, result.grade_on_20 ]
+        again = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 20)
+        create_attempt(session: again, question: @first, correct: false)
+
+        assert_equal [ :bronze, false ], [ result(session: again).badge_level, result(session: again).earned_now ]
       end
 
-      test "Bronze sous 48 % : la médaille est lue, sans « nouvelle » ; à 50 %, elle est nouvelle" do
+      test "copie vide : aucune médaille ; sans aucune tentative non plus ; une réponse parmi des vides donne Bronze" do
+        blank = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0)
+        [ @first, @second ].each do |question|
+          Orm::QuestionAttempt.create!(exercise_session: blank, question:, selected_answer_ids: [], correct: false, unanswered: true,
+                                       answered_at: Time.current)
+        end
+        assert_equal [ nil, false ], [ result(session: blank).badge_level, result(session: blank).earned_now ]
+
+        empty = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0)
+        assert_nil result(session: empty).badge_level
+
+        Orm::QuestionAttempt.where(exercise_session: blank, question: @first).delete_all
+        create_attempt(session: blank, question: @first, correct: false)
+        assert_equal :bronze, result(session: blank).badge_level
+      end
+
+      # Option prudente (journal, À trancher) : le cahier n'a aucun champ ; un exercice qui en a une question compte comme traité.
+      test "un exercice avec une question du cahier : la copie sans autre réponse est traitée, Bronze" do
+        exercise = create_exercise(questions: 0)
+        notebook = create_kind_question(exercise:, question_type: "notebook", answers: [])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: notebook, selected_answer_ids: [], correct: false, unanswered: true,
+                                     answered_at: Time.current)
+
+        assert_equal :bronze, result(session:).badge_level
+      end
+
+      # UDR Bronze sans fête sous 48 % : « Nouvelle médaille ! » dès 10/20 ; 47 % s'affiche 9/20, 48 % 10/20.
+      test "Bronze sous 48 % : la médaille est lue, sans « nouvelle » ; bornes 47 % non, 48 % oui" do
         @session.update!(score_percent: 20)
         create_badge(student: @student, exercise: @exercise, level: "bronze", session: @session)
         assert_equal [ :bronze, false ], [ result.badge_level, result.earned_now ]
 
-        @session.update!(score_percent: 50)
-        assert_equal [ :bronze, true ], [ result.badge_level, result.earned_now ]
+        @session.update!(score_percent: 47)
+        assert_equal [ 9, :bronze, false ], [ result.grade_on_20, result.badge_level, result.earned_now ]
+
+        @session.update!(score_percent: 48)
+        assert_equal [ 10, :bronze, true ], [ result.grade_on_20, result.badge_level, result.earned_now ]
       end
 
       test "« Nouveau badge ! » seulement si le badge de l'élève a été gagné par cette session" do
@@ -284,6 +318,19 @@ module Queries
         progress = progress_of(current)
         assert_instance_of SessionResultQuery::Progress, progress
         assert_equal [ :progress, 6, 18, 18 ], grades(progress)
+      end
+
+      # La médaille de chaque session, comme le palier : une copie vide (history ne crée aucune tentative) n'en a aucune.
+      test "progrès : la médaille de chaque session ; une copie vide n'en a pas" do
+        @session.update!(score_percent: 30)
+        blank = history(90).last
+
+        progress = progress_of(blank)
+        assert_equal [ :bronze, :bronze, nil ], [ progress.first_medal, progress.best_medal, progress.current_medal ]
+
+        create_attempt(session: blank, question: @first)
+        progress = progress_of(blank)
+        assert_equal [ :bronze, :gold, :gold ], [ progress.first_medal, progress.best_medal, progress.current_medal ]
       end
 
       test "progrès : sans écart de 10 points, :stagnant sous la maîtrise et :stable au-dessus" do

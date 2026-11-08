@@ -29,8 +29,8 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
     done "Ange", "Kouadio", [ 80 ], [ 90 ], [ 81 ]
     done "Salif", "Traoré", [ 75 ]
     done "Rokia", "Cissé", [ 85 ]
-    # Pas encore (sous 50).
-    done "Yves", "Gnagne", [ 40 ]
+    # Pas encore : une copie rendue vide (aucune réponse) ne donne aucune médaille.
+    done "Yves", "Gnagne", [ 40, :blank ]
     # Pas encore faits : deux élèves sans session, un élève à session seulement commencée.
     create_student(classroom: @classroom, first_name: "Zoé", last_name: "Abo")
     create_student(classroom: @classroom, first_name: "Marc", last_name: "Touré")
@@ -107,7 +107,10 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       @clock += 1.minute
       session = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:,
                                         classroom_assignment: @assignment, completed_at: @clock)
+      next if answers == :blank # a blank copy: no answer, no medal
+
       Array(answers).each_with_index { |correct, index| create_attempt(session:, question: @questions[index], correct:) }
+      record_medal(session) # the medal closing records: Bronze at least once the copy is treated
     end
   end
 

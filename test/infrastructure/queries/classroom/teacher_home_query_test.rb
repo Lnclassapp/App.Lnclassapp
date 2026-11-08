@@ -49,7 +49,7 @@ module Queries
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
         score = lambda do |student, assignment, percent|
           create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
-                                  classroom_assignment: assignment, score_percent: percent)
+                                  classroom_assignment: assignment, score_percent: percent).tap { record_medal(it) }
         end
         # diamant : sans faute partout ; or : 90 et 80 ; argent : 70 (la meilleure session de l'exercice compte) ; bronze : 55 et 30 (tout exercice traité donne Bronze) ;
         # pas encore : un élève sans rien ; un élève parti, une assignation archivée et une session non terminée ne comptent pas.
@@ -67,20 +67,25 @@ module Queries
         assert_equal({ bronze: 2, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
       end
 
-      test "badge counts: a 30 % student counts Bronze, with or without a recorded medal" do
+      # PRD §3 : une copie vide ne médaille pas ; une médaille gagnée par une session d'une autre classe ne compte pas ici
+      # (ADR-0097 §4.5) ; la carte compte les badges de la liste de la classe, élève par élève.
+      test "badge counts: blank copies or a medal won elsewhere count nothing; 30 % answered is Bronze; the classroom list agrees" do
         assignment = create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course: create_course(material: @svt))),
                                        by: @teacher)
         exercise = Orm::Exercise.find(assignment.assignable_id)
-        medal = create_student(classroom: @classroom)
-        none = create_student(classroom: @classroom)
-        [ medal, none ].each do |student|
-          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 30)
+        answered, blank, elsewhere = Array.new(3) { create_student(classroom: @classroom) }
+        record_medal(create_exercise_session(student: answered, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 30))
+        [ blank, elsewhere ].each do |student|
+          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent: 0)
         end
-        assert_equal({ bronze: 2, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
+        other = create_classroom(school: @school, level: @tle, name: "Tle D 2")
+        Orm::ClassroomStudent.create!(classroom: other, student: elsewhere, primary: false, joined_at: Time.current, joined_via: "standard")
+        record_medal(create_exercise_session(student: elsewhere, exercise:, status: "completed", score_percent: 90,
+                                             classroom_assignment: create_assignment(classroom: other, assignable: exercise)))
 
-        create_badge(student: medal, exercise:, level: "bronze")
-
-        assert_equal({ bronze: 2, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
+        assert_equal({ bronze: 1, silver: 0, gold: 0, diamond: 0 }, card.badge_counts)
+        list = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster: true).students.filter_map(&:badge).tally
+        assert_equal card.badge_counts.reject { |_, count| count.zero? }, list
       end
 
       test "badge counts: a student of two classrooms counts once in each, with the assignments of that classroom only" do
@@ -91,7 +96,7 @@ module Queries
         exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
         mine = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
         create_assignment(classroom: other, assignable: exercise, by: @teacher)
-        create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: mine, score_percent: 85)
+        record_medal(create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: mine, score_percent: 85))
 
         counts = home.classrooms.to_h { [ it.name, it.badge_counts.values.sum ] }
 

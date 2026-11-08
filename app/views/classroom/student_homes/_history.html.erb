@@ -28,7 +28,7 @@
                   <span class="block text-meta text-mute"><%= session.material_name %></span>
                 </span>
                 <%# Vert dès « 14/20 » affiché (MASTERY_THRESHOLD, UDR-0090 §4), à l'encre dessous ; jamais en rouge ni en ambre. %>
-                <span data-medal class="shrink-0 text-sm"><%= medal_tag(session.score_percent) %></span>
+                <span data-medal class="shrink-0 text-sm"><%= medal_tag(session.medal) %></span>
               <% end %>
               <%# Pendant la pause de « Recommencer » (ADR-0115), pas de bouton : la ligne mène au résultat, la page de l'exercice dit l'heure de reprise. %>
               <% if !grading.reaches?(session.score_percent, grading::MASTERY_THRESHOLD) && paused_exercise_ids.exclude?(session.exercise_id) %>

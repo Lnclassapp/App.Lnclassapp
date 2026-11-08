@@ -59,8 +59,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     end
   end
 
-  def complete(exercise, score, at:)
-    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score).tap { it.update!(completed_at: at) }
+  # The medal that closing records for a copy with an answer (record_medal); blank: a copy without any answer, which has none.
+  def complete(exercise, score, at:, blank: false)
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+      .tap { it.update!(completed_at: at) }.tap { record_medal(it) unless blank }
   end
 
   # CA-13, CA-16 (prepare-interros-cahier, Lot F) : un exercice assigné se lit sur une feuille, avec « Rendre à l'enseignant » ;
@@ -306,7 +308,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_no_match "Autre élève", response.body
   end
 
-  # CA-6 (UDR-0086 §3.4, amendé par l'UDR médailles) : une médaille par exercice traité, au moins Bronze, jamais de note ni de rouge.
+  # CA-6 (UDR-0086 §3.4, amendé par l'UDR médailles) : la médaille enregistrée de chaque exercice traité, Bronze dès une réponse,
+  # « Pas encore » pour des copies vides seulement, jamais de note ni de rouge.
   test "each treated exercise shows its medal, Bronze at least, never a grade or red" do
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
@@ -314,6 +317,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     # UDR-0090 §4 : la règle se lit sur la note affichée : 68 % s'affiche 14/20 (Argent), 66 % 13/20 (Bronze).
     complete(create_exercise(essential: create_essential(course: genetics), title: "Juste"), 68, at: 3.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "Presque"), 66, at: 4.hours.ago)
+    complete(create_exercise(essential: create_essential(course: genetics), title: "Vide"), 0, at: 5.hours.ago, blank: true)
     sign_in_as @student
 
     get student_classroom_path
@@ -322,6 +326,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "li:nth-child(1)", text: including("Bronze Médaille Bronze")
       assert_select "li", text: including("Argent Médaille Argent"), count: 2
       assert_select "li", text: including("Bronze Médaille Bronze"), count: 2
+      # Une copie vide n'a pas de médaille : « Pas encore », comme son résultat.
+      assert_select "li", text: including("Pas encore"), count: 1
       assert_select "li", text: %r{\d+\s*/\s*20|%|Acquis|Fragile|difficulté}, count: 0
     end
     assert_select "#student_classroom_treated [class*=red], #student_classroom_treated [class*=error], #student_classroom_treated [class*=danger]", 0

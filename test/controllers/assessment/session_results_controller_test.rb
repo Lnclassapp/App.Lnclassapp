@@ -511,6 +511,35 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
   end
 
+  # UDR Bronze sans fête sous 48 % : la première Bronze, enregistrée par cette session, est fêtée dès 10/20 (48 %), jamais à 9/20 (47 %).
+  test "première Bronze à 48 % : « Nouvelle médaille ! » ; à 47 %, la même médaille sans fête" do
+    first = complete(score_percent: 48, student: create_student_for(@exercise.essential.course))
+    sign_in_as Orm::User.find(first.student_id)
+
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
+
+    first.update!(score_percent: 47)
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  # Journal, À trancher : le résultat lit la médaille de CETTE session ; un Or qui refait à 20 % lit Bronze, et la prochaine est l'Argent.
+  test "un élève Or qui refait à 20 % lit Bronze et « Prochaine médaille : Argent », pas Or ni Diamant" do
+    @session.update!(score_percent: 80)
+    record_medal(@session)
+    low = complete(score_percent: 20, first_correct: false)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_next_medal", text: "Prochaine médaille : Argent"
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
   test "sans faute : Diamant, « Nouvelle médaille ! », et plus de « Recommencer »" do
     perfect = complete(score_percent: GRADING::PERFECT_THRESHOLD)
     sign_in_as @student

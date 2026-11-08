@@ -34,7 +34,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
   test "l'élève lit la feuille sans marque, puis « Refaire l'exercice » l'amène à sa copie" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
     student = create_student_for(@course)
-    create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 50)
+    record_medal(create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 50))
     sign_in_as student
 
     visit exercise_path(@exercise.public_id)

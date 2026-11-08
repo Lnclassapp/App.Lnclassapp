@@ -208,6 +208,34 @@ module UseCases
         assert_empty @badges.upserts
       end
 
+      test "copie partiellement vide : une réponse donnée parmi des questions laissées vides donne Bronze" do
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [ 1 ], correct: false, answered_at: NOW) ] +
+                Array.new(2) { |index| Attempt.new(session_id: 5, question_id: index + 1, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) }
+
+        row = close(correct: 0, total: 3, attempts: given).value
+
+        assert_equal [ 0, :bronze, true ], [ row.score_percent, row.badge_level, row.earned_now ]
+        assert_equal [ :bronze ], @badges.upserts.map(&:level)
+      end
+
+      # Une session sans aucune tentative n'a rien répondu : aucune médaille (une règle « toutes répondues » sur une liste vide en donnerait une).
+      test "session sans aucune tentative : aucune médaille" do
+        row = close(correct: 0, total: 3, attempts: []).value
+
+        assert_equal [ 0, nil, false ], [ row.score_percent, row.badge_level, row.earned_now ]
+        assert_empty @badges.upserts
+      end
+
+      # Option prudente (journal, À trancher) : le cahier n'a aucun champ, sa tentative est unanswered ; il compte comme traité.
+      test "exercice du cahier seul : la copie compte comme traitée, Bronze" do
+        questions = [ question(0, type: "notebook") ]
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) ]
+
+        row = close(correct: 0, total: 1, questions:, attempts: given).value
+
+        assert_equal [ 0, :bronze ], [ row.score_percent, row.badge_level ]
+      end
+
       test "Bronze sous 48 % ne remplace pas une médaille déjà détenue" do
         row = close(correct: 20, current_badge: badge(:silver)).value
 

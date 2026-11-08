@@ -323,6 +323,21 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_summary", text: /en retard/, count: 0
   end
 
+  # ADR médailles lues à la clôture : une copie vide ne médaille pas ; sa ligne garde la note, sans trophée, et la fiche dit « Pas encore ».
+  test "une copie vide : la ligne du devoir sans trophée, aucun badge compté" do
+    exercise = create_exercise(title: "Vide")
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 0, classroom_assignment: assignment)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge", text: /0\/20/
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge svg", 0
+    assert_select "#student_file_summary ul[aria-label] li", 1
+    assert_select "#student_file_average", text: /Pas encore/
+  end
+
   # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;
   # « en retard » = pas fait et échu (comme le rapport) : la pastille « 1 en retard » de l'en-tête.
   test "CL-13 : rendu en retard et échéance passée : la date du rendu, « En retard » sur l'exercice échu, « 1 en retard » en tête" do

@@ -188,7 +188,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     [ *@late, @on_time, @pending ].each { assert_no_match(/#{it.public_id}/, response.body) }
   end
 
-  # A readable classroom on a new assignment of three questions: best scores 90, 72, 90, 65, 40, 30: 2 Or, 1 Argent, 1 Bronze, 2 Pas encore.
+  # A readable classroom on a new assignment of three questions: best scores 90, 72, 90, 65, 40, 30, each copy with answers and its
+  # recorded medal: 2 Or, 1 Argent, 3 Bronze (Bronze from one answer given, ADR medals read at closing).
   def build_quiz
     @quiz_exercise = create_exercise(essential: @exercise.essential, questions: 3)
     @quiz = create_assignment(classroom: @classroom, assignable: @quiz_exercise, by: @teacher)
@@ -240,7 +241,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     build_quiz
     sign_in_as @teacher
     Orm::ExerciseSession.where(classroom_assignment: @quiz).update_all(score_percent: 30)
-    Orm::ExerciseBadge.where(exercise_id: @quiz_exercise.id).delete_all # copies without answer: no medal
+    # The copies keep their answers: at 30 %, the medal closing records is Bronze (ADR medals read at closing).
+    Orm::ExerciseBadge.where(exercise_id: @quiz_exercise.id).update_all(level: "bronze")
 
     get follow_up_path(@quiz)
 

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours de ses matières, élèves filtrés par badge de classe puis par trente, au numéro masqué (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7), 0103, médailles lues à la clôture · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.5, §4.7), 0103, médailles lues à la clôture · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -128,15 +128,14 @@ module Queries
         scores = Queries::Assessment::AssignmentScores.for(classroom_id:, assignment_ids: due_dates.keys)
         bests = Hash.new { |hash, key| hash[key] = {} }
         scores.each { |assignment_id, rows| rows.each { bests[it.student_id][assignment_id] = it.scores.max } }
-        medals = medal_holders(classroom_id, due_dates.keys)
-        [ bests.to_h { |student_id, scores| [ student_id, standing(scores, overdue, medals.include?(student_id)) ] }, Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
+        medals = medal_holders(due_dates.keys)
+        [ bests.to_h { |student_id, scores| [ student_id, standing(scores, overdue, medals.include?(student_id)) ] },
+          Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
       end
 
-      # Les élèves qui détiennent une médaille enregistrée (exercise_badges) sur un exercice des assignations données.
-      def medal_holders(classroom_id, assignment_ids)
-        Orm::ClassroomAssignment.where(id: assignment_ids, classroom_id:, assignable_type: "Exercise")
-                                .joins("JOIN exercise_badges ON exercise_badges.exercise_id = classroom_assignments.assignable_id")
-                                .distinct.pluck("exercise_badges.student_id").to_set
+      # Les élèves qui détiennent une médaille gagnée par une session de ces assignations (ADR-0097 §4.5, Assessment::Medals).
+      def medal_holders(assignment_ids)
+        Queries::Assessment::Medals.by_assignment(assignment_ids:).values.flat_map(&:keys).to_set
       end
 
       def standing(bests, overdue, has_medal)

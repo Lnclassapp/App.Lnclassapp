@@ -12,5 +12,5 @@
     <p class="line-clamp-2 font-medium break-words text-ink"><%= result.exercise_title %></p>
     <p class="mt-0.5 text-sm text-mute"><%= t(".detail", material: result.material_name, date: l(result.completed_at.to_date, format: t(".date_format"))) %></p>
   </div>
-  <span data-medal class="shrink-0 rounded-full border border-line bg-mist px-3 py-1.5 text-sm"><%= medal_tag(result.score_percent) %></span>
+  <span data-medal class="shrink-0 rounded-full border border-line bg-mist px-3 py-1.5 text-sm"><%= medal_tag(result.medal) %></span>
 <% end %>

@@ -37,7 +37,12 @@ Le porteur décide : tout exercice traité donne au moins Bronze, une copie vide
 
 > **Nous écrivons la médaille à la clôture : le palier du score, ou Bronze si le score est sous 48 % et qu'au moins une réponse a été donnée (une tentative non `unanswered`). Les écrans lisent la médaille enregistrée, jamais le score.**
 
-Le palier du meilleur résultat reste la règle « ne monte que vers un palier supérieur » (ADR-0033). `Grading.badge_for(score)` reste le palier du score seul. La médaille de classe d'un élève (`class_badge_for`) est Bronze au minimum dès qu'il détient une médaille.
+Le palier du meilleur résultat reste la règle « ne monte que vers un palier supérieur » (ADR-0033). `Grading.badge_for(score)` reste le palier du score seul ; `Grading.session_medal(score, treated:)` est la médaille d'une session (rien pour une copie vide), la même règle à la clôture et à l'écran (`Queries::Assessment::Medals::TREATED_SQL`).
+
+- **Copie traitée** : au moins une tentative non `unanswered`. Une question du cahier (aucun champ) rend la copie traitée (journal, À trancher). Une question « remettre dans l'ordre » laissée telle quelle envoie un ordre : elle compte comme une réponse (UDR-0138), donc Bronze.
+- **Médaille de classe** (`class_badge_for`) : « Pas encore » sans médaille lisible dans la classe, même avec des notes (copies vides seulement, PRD §3) ; avec une médaille, Bronze au minimum, sinon la règle de la moyenne.
+- **Lecture par classe** (ADR-0097 §4.5) : une médaille ne se lit dans une classe que si la session qui l'a enregistrée appartient à une de ses assignations (`Queries::Assessment::Medals.by_assignment`). Une médaille gagnée ailleurs n'existe pas ici (journal, À trancher).
+- **Écrans élève** : la médaille d'un exercice est la médaille enregistrée ; celle d'une session (résultat, historique, archive, progrès) est `session_medal`.
 
 ## 5. Conséquences
 
@@ -58,4 +63,4 @@ Aucune table, aucun port nouveau : l'ADR change la source de lecture d'un contra
 
 ## 7. Comment vérifier
 
-Tests de clôture (copie à 20 % avec réponses, copie vide) ; un test par requête de lecture avec un score de 20 % et une médaille enregistrée Bronze.
+Tests de clôture (copie à 20 % avec réponses, copie vide, copie partiellement vide, session sans tentative, cahier seul) ; un test par requête de lecture avec une copie vide (« Pas encore ») et une médaille gagnée dans une autre classe (jamais lue) ; trajet complet copie vide → résultat « Pas encore », aucune ligne `exercise_badges`.

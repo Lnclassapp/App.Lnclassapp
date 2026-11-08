@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::TeacherHomeQuery
 # Rôle : accueil enseignant (TR-05) : établissement courant et son sigle, ses matières, classes déclarées de l'année (code, badges), niveaux enseignés
-# ADR  : 0026, 0041, 0048, 0094, 0103, médailles lues à la clôture · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.2 badges, §3.3 carte de classe)
+# ADR  : 0026, 0041, 0048, 0094, 0097 (§4.5), 0103, médailles lues à la clôture · UDR : 0026, 0069, 0098, 0126 (§3.2 à §3.4), écrans enseignant (§3.2 badges, §3.3 carte de classe)
 module Queries
   module Classroom
     class TeacherHomeQuery
@@ -84,13 +84,12 @@ module Queries
         counts
       end
 
-      # Les médailles enregistrées (exercise_badges) sur les exercices des assignations actives de la classe : une requête.
-      # → Set de [classroom_id, student_id]
+      # Les médailles gagnées par une session d'une assignation active de la classe (ADR-0097 §4.5, Assessment::Medals) : la
+      # règle de la liste de la classe, deux requêtes. → Set de [classroom_id, student_id]
       def medal_holders(members)
-        Orm::ClassroomAssignment.where(classroom_id: members.map(&:first).uniq, status: "active", assignable_type: "Exercise")
-                                .joins("JOIN exercise_badges ON exercise_badges.exercise_id = classroom_assignments.assignable_id")
-                                .where(exercise_badges: { student_id: members.map(&:last).uniq })
-                                .distinct.pluck("classroom_assignments.classroom_id", "exercise_badges.student_id").to_set
+        classrooms = Orm::ClassroomAssignment.where(classroom_id: members.map(&:first).uniq, status: "active").pluck(:id, :classroom_id).to_h
+        Queries::Assessment::Medals.by_assignment(assignment_ids: classrooms.keys, student_ids: members.map(&:last).uniq)
+                                   .flat_map { |id, students| students.keys.map { [ classrooms.fetch(id), it ] } }.to_set
       end
 
       # « 6ème 2 » avant « 6ème 10 », comme la déclaration des classes (TeachingSelectionQuery).

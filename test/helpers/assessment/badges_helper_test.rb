@@ -12,16 +12,17 @@ module Assessment
       assert_equal [ :warning, :neutral, :gold, :info, :neutral ], [ :bronze, :silver, :gold, "diamond", nil ].map { badge_tone(it) }
     end
 
+    # ADR médailles lues à la clôture : medal_tag rend la médaille que la query a lue, jamais recalculée d'un score.
     test "medal_tag : trophée, nom du palier et « Médaille Or » pour les lecteurs d'écran, jamais un chiffre" do
-      html = medal_tag(80)
+      html = medal_tag(:gold)
 
       assert_equal "Or Médaille Or", Nokogiri::HTML.fragment(html).text.squish
       assert_includes html, "text-gold"
-      assert_equal "Bronze Médaille Bronze", Nokogiri::HTML.fragment(medal_tag(10)).text.squish
-      assert_no_match(%r{\d+\s*/\s*20|%}, Nokogiri::HTML.fragment(medal_tag(80)).text)
+      assert_equal "Bronze Médaille Bronze", Nokogiri::HTML.fragment(medal_tag("bronze")).text.squish
+      assert_no_match(%r{\d+\s*/\s*20|%}, Nokogiri::HTML.fragment(medal_tag(:gold)).text)
     end
 
-    test "medal_tag sans exercice fait : « Pas encore », sans trophée" do
+    test "medal_tag sans médaille (copie vide ou rien de fait) : « Pas encore », sans trophée" do
       assert_equal "Pas encore", Nokogiri::HTML.fragment(medal_tag(nil)).text.squish
       assert_no_match(/<svg/, medal_tag(nil))
     end
