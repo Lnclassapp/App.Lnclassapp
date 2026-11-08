@@ -29,7 +29,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     end
   end
 
-  test "10/10 : Diamant, « Nouveau badge ! », confettis pendant 3 secondes, et plus de « Refaire l'exercice »" do
+  test "10/10 : Diamant, « Nouvelle médaille ! », confettis pendant 3 secondes, et plus de « Refaire l'exercice »" do
     session = completed_session(correct: 10)
 
     visit exercise_session_result_path(session.public_id)
@@ -104,7 +104,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_no_button I18n.t("components.reveal.more")
   end
 
-  test "sous le seuil : « À retravailler », « Pas encore de badge », aucun confetti" do
+  test "sous le seuil : « À retravailler », « Pas encore », aucun confetti" do
     session = completed_session(correct: 4)
 
     visit exercise_session_result_path(session.public_id)
