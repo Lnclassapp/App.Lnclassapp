@@ -55,4 +55,4 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 
 ## Questions encore ouvertes
 
-1. Une copie clôturée à 0 % ou laissée vide donne-t-elle Bronze ?
+1. Les 70 % : de quelles questions (corrigées automatiquement seulement, ou aussi rédigées et cahier) ? Et compte-t-on une réponse fausse ?
