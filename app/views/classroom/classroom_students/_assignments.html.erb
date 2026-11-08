@@ -51,7 +51,7 @@
               <p class="flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
                 <span class="text-mute tabular-nums"><%= t(".sessions", count: assignment.sessions_count) %></span>
                 <%= link_to t(".best_session"), exercise_session_result_path(assignment.best_session_public_id),
-                            class: "py-1 text-xs font-medium text-brand-strong #{link}" %>
+                            class: "inline-flex min-h-tap items-center text-xs font-medium text-brand-strong #{link}" %>
               </p>
             </div>
           <% end %>
