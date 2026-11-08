@@ -47,6 +47,8 @@ Prérequis des chantiers d'écrans (`medailles-eleve` en premier) : sans cette r
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Les sessions déjà clôturées sous 48 % reçoivent-elles Bronze ? | Non : seulement les nouvelles clôtures (porteur) | Aucune migration ni rattrapage ; les écrans gèrent l'absence de médaille ancienne par « Pas encore » |
+| Une copie à 0 % ou vide donne-t-elle Bronze ? | Bronze seulement si au moins une réponse donnée ; copie vide = « Pas encore » (porteur) | La règle lit les réponses, pas seulement le score |
+| Peut-on rendre une copie presque vide ? | Non : au moins 70 % des questions répondues, sinon le bouton « Rendre » reste grisé (porteur) | Le chantier grandit : règle de rendu + écran de la copie en cours (UDR) ; remplace la confirmation des questions vides |
 
 ## Cas limites identifiés
 
