@@ -276,7 +276,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     # « 1 fait sur 2 », « Moyenne 18/20 · Or » (90 % : Or), puis les badges obtenus, nommés et comptés, zéro caché.
     assert_select "#student_file_summary" do
       assert_select "#student_file_counts", text: ft("summary.done_of", count: 1, assigned: 2)
-      assert_select "#student_file_average", text: ft("summary.average", grade: 18, badge: "Or")
+      assert_select "#student_file_average", text: ft("summary.average", grade: 18, medal: "Or")
       assert_select "ul[aria-label=?]", ft("summary.badges_label") do
         assert_select "li", 2
         assert_select "li", text: /Or\s+1/
@@ -317,7 +317,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_summary ul[aria-label] li", text: /Bronze\s+2/
     assert_select "#student_file_summary ul[aria-label] li", text: /Argent\s+1/
     # (55 + 60 + 75) / 3 = 63 % : 13 sur 20, Bronze.
-    assert_select "#student_file_average", text: ft("summary.average", grade: 13, badge: "Bronze")
+    assert_select "#student_file_average", text: ft("summary.average", grade: 13, medal: "Bronze")
     assert_select "#student_file_counts", text: ft("summary.done_of", count: 3, assigned: 3)
     assert_select "#student_file_summary .ui-badge", text: /en retard/, count: 0
     assert_select "#student_file_summary", text: /en retard/, count: 0

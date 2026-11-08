@@ -8,14 +8,14 @@ module Assessment
     test "les quatre paliers de Grading, dès 48, 68, 78 et 100 %, ont leur libellé et leur teinte" do
       labels = [ 47, 48, 68, 78, 99, 100 ].map { badge_label(Grading.badge_for(it)) }
 
-      assert_equal [ "Non acquis", "Bronze", "Argent", "Or", "Or", "Diamant" ], labels
+      assert_equal [ "Pas encore", "Bronze", "Argent", "Or", "Or", "Diamant" ], labels
       assert_equal [ :warning, :neutral, :gold, :info, :neutral ], [ :bronze, :silver, :gold, "diamond", nil ].map { badge_tone(it) }
     end
 
     test "aucun libellé de badge ne reprend un terme retiré" do
       labels = I18n.t("assessment.badges.levels").values.join(" ")
 
-      [ "Platine", "Médaille", "Trophée" ].each { assert_no_match(/#{it}/i, labels) }
+      [ "Platine", "Badge", "Trophée" ].each { assert_no_match(/#{it}/i, labels) }
     end
 
     test "la maîtrise et la note sur 20 suivent Grading" do

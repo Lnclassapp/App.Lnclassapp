@@ -225,7 +225,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       assert_select "#follow_up_progress span", text: "6 / 10 faits"
       assert_select "#follow_up_progress span", text: /en retard/, count: 0
       assert_select "#comprehension_next_step", text: /Prochain geste\s+La classe a atteint l'Argent ou mieux\. Un élève est en baisse/
-      assert_select "nav[aria-label='Élèves par badge'] a", 5
+      assert_select "nav[aria-label='Élèves par médaille'] a", 5
       { none: [ "Pas encore", 2 ], bronze: [ "Bronze", 1 ], silver: [ "Argent", 1 ], gold: [ "Or", 2 ], diamond: [ "Diamant", 0 ] }.each do |badge, (label, count)|
         assert_select "nav a[href='#{classroom_assignment_path(@classroom.public_id, @quiz.public_id, badge:)}']", text: /#{count}\s*#{label}/
       end
@@ -242,7 +242,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     get follow_up_path(@quiz)
 
-    assert_select "#comprehension_next_step", text: /6 élèves n'ont pas encore de badge\. Reprenez la question 1 en classe, puis relancez-les\./
+    assert_select "#comprehension_next_step", text: /6 élèves n'ont pas encore de médaille\. Reprenez la question 1 en classe, puis relancez-les\./
     assert_select "#comprehension_next_step", text: /difficulté|Fragile|Acquis/, count: 0
     assert_select "#comprehension nav, #comprehension_questions", text: /En difficulté|Fragile|Acquis/, count: 0
   end
@@ -396,7 +396,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_frame" do
       assert_select "span.size-14", 0
       assert_select "span", text: "3 / 4 faits"
-      assert_select "#comprehension_next_step", text: /Relancez l'élève qui ne l'a pas encore fait : les badges de la classe se liront à partir de 5 élèves\./
+      assert_select "#comprehension_next_step", text: /Relancez l'élève qui ne l'a pas encore fait : les médailles de la classe se liront à partir de 5 élèves\./
       assert_select "#comprehension_trends", 0
       assert_select "nav a", 5
       assert_select "#comprehension_panel ul li", 4

@@ -482,7 +482,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_session_path(started.public_id)
   end
 
-  test "sous le seuil de réussite : « À retravailler », « En difficulté », « Pas encore de badge », aucun confetti, « Refaire l'exercice »" do
+  test "sous le seuil de réussite : « À retravailler », « En difficulté », « Pas encore », aucun confetti, « Refaire l'exercice »" do
     failed = complete(score_percent: GRADING::PASS_THRESHOLD - 10, first_correct: false)
     sign_in_as @student
 
@@ -492,7 +492,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller='assessment--confetti']", 0
     assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.struggling")}/
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.none")}/
-    assert_select "#session_badge", text: /#{I18n.t("assessment.badges.levels.none")}/, count: 0
+    assert_select "#session_result", text: /Non acquis/, count: 0
     assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
 

@@ -80,7 +80,7 @@ module Assessment
       render partial: "assessment/comprehension/badge_boxes",
              locals: { counts:, selected: :gold, classroom:, assignment_public_id: "asg-1" }
 
-      assert_dom "nav[aria-label='Élèves par badge'] a", count: 5
+      assert_dom "nav[aria-label='Élèves par médaille'] a", count: 5
       assert_equal [ "Pas encore", "Bronze", "Argent", "Or", "Diamant" ], css_select("nav a span.text-xs").map { it.text.strip }
       assert_equal %w[4 6 1 3 0], css_select("nav a span.font-display").map { it.text.strip }
       assert_dom "nav a[href='/classrooms/cls-1/assignments/asg-1?badge=bronze']"
@@ -127,9 +127,9 @@ module Assessment
     test "the next step: nothing when nobody did it; the counts and the bound interpolated" do
       assert_nil comprehension_next_step(detail(done: 0, present: 25))
       assert_equal [ :remind, { count: 22, min: 5 } ], comprehension_next_step(detail(done: 3, present: 25))
-      assert_equal "Relancez les 22 élèves qui ne l'ont pas encore fait : les badges de la classe se liront à partir de 5 élèves.",
+      assert_equal "Relancez les 22 élèves qui ne l'ont pas encore fait : les médailles de la classe se liront à partir de 5 élèves.",
                    next_step_sentence(detail(done: 3, present: 25))
-      assert_equal "Relancez l'élève qui ne l'a pas encore fait : les badges de la classe se liront à partir de 5 élèves.",
+      assert_equal "Relancez l'élève qui ne l'a pas encore fait : les médailles de la classe se liront à partir de 5 élèves.",
                    next_step_sentence(detail(done: 4, present: 5))
       assert_equal [ :look_at_each, {} ], comprehension_next_step(detail(done: 4, present: 4))
       assert_equal [ :revisit_notion, { count: 4, target: "la question 3" } ],
@@ -140,11 +140,11 @@ module Assessment
                    comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile, weakest: 2))
       assert_equal [ :revisit_questions, { target: "les questions les moins réussies" } ],
                    comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
-      assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour comparer les badges : regardez chaque élève.",
+      assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour comparer les médailles : regardez chaque élève.",
                    next_step_sentence(detail(done: 4, present: 4))
-      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la question 3 en classe, puis relancez-les.",
+      assert_equal "4 élèves n'ont pas encore de médaille. Reprenez la question 3 en classe, puis relancez-les.",
                    next_step_sentence(detail(done: 6, present: 6, dominant: :struggling, weakest: 3))
-      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la notion en classe, puis relancez-les.",
+      assert_equal "4 élèves n'ont pas encore de médaille. Reprenez la notion en classe, puis relancez-les.",
                    next_step_sentence(detail(done: 6, present: 6, dominant: :struggling))
       assert_equal "La plupart des élèves en sont au Bronze : reprenez en classe la question 2, puis avancez.",
                    next_step_sentence(detail(done: 6, present: 9, dominant: :fragile, weakest: 2))

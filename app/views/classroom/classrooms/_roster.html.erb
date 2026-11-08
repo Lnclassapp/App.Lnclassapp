@@ -101,10 +101,10 @@
                   <% if student.badge %>
                     <p id="badge_<%= student.public_id %>" class="<%= Assessment::BadgesHelper::BADGE_PILL %> shrink-0">
                       <%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %>
-                      <%= t(".badge_grade", badge: badge_label(student.badge), grade: student.grade) %>
+                      <%= t(".badge_grade", medal: badge_label(student.badge), grade: student.grade) %>
                     </p>
                   <% else %>
-                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= student.grade ? t(".average_none", grade: student.grade, badge: comprehension_box_label(:none)) : comprehension_box_label(:none) %></p>
+                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= student.grade ? t(".average_none", grade: student.grade, medal: comprehension_box_label(:none)) : comprehension_box_label(:none) %></p>
                   <% end %>
                 </div>
                 <%# ≥ lg : la colonne est étroite (UDR enseignant §3.5), « Fait seul » et le dernier score passent sur une seconde ligne, sous le nom ;

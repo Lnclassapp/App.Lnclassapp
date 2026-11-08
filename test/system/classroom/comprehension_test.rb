@@ -112,7 +112,7 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
   end
 
   def assert_box(label, count)
-    assert_selector "nav[aria-label='Élèves par badge'] a", text: /\A#{count}\s+#{label}\s/
+    assert_selector "nav[aria-label='Élèves par médaille'] a", text: /\A#{count}\s+#{label}\s/
   end
 
   def assert_bronze_panel

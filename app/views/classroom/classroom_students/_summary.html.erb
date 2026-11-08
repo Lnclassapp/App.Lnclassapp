@@ -13,7 +13,7 @@
     <ul aria-label="<%= t(".badges_label") %>" class="flex flex-wrap items-center gap-2">
       <% if file.class_grade %>
         <li id="student_file_average"><span class="ui-badge ui-badge-md bg-brand-soft text-brand-strong">
-          <%= t(".average", grade: file.class_grade, badge: comprehension_box_label(file.class_badge || :none)) %>
+          <%= t(".average", grade: file.class_grade, medal: comprehension_box_label(file.class_badge || :none)) %>
         </span></li>
       <% end %>
       <% Entities::Assessment::Grading::BADGE_ORDER.each do |level| %>
