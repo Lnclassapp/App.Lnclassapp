@@ -1,0 +1,24 @@
+# Cartes d'activation (Lot 0) : scénario Caisse du PRD, 20 cartes à 10 000 F dont 3 activées (2 le jeudi 2026-11-12, 1 le
+# vendredi 2026-11-13), 2 annulées et 15 remises. Le numéro (serial) vient de la séquence. Les élèves ne sont pas en fixture :
+# les cartes activées n'ont pas d'élève ; un test qui abonne un élève active une carte remise par Repositories::Billing::CardRepository.
+# Le code est chiffré ici comme l'ORM le chiffre (type de l'attribut), avec les clés de test (ADR-0031).
+<% code_type = Orm::Billing::ActivationCard.type_for_attribute(:code) %>
+<% alphabet = Entities::Billing::ActivationCode::ALPHABET %>
+<% (1..20).each do |n| %>
+<%   state = n <= 3 ? "activated" : (n <= 5 ? "cancelled" : "issued") %>
+awa_<%= format("%02d", n) %>:
+  id: <%= ActiveRecord::FixtureSet.identify("awa_#{format('%02d', n)}") %>
+  public_id: <%= format("AwaCard%07d", n) %>
+  batch_id: <%= ActiveRecord::FixtureSet.identify(:awa_batch) %>
+  relay_point_id: <%= ActiveRecord::FixtureSet.identify(:boutique_awa) %>
+  code: <%= code_type.serialize("K7QHM3XP9T#{alphabet[n]}A").to_json %>
+  price_xof: 10000
+  valid_until: 2027-07-31
+  state: <%= state %>
+<%   if state == "activated" %>
+  activated_at: <%= n < 3 ? "2026-11-12 14:00:00" : "2026-11-13 09:00:00" %>
+<%   elsif state == "cancelled" %>
+  cancelled_at: 2026-11-12 16:00:00
+  cancel_reason: perdue
+<%   end %>
+<% end %>

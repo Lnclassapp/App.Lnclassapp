@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/billing/relay_points/_form — nom, lieu, téléphone, écoles desservies et état d'un point relais %>
+<%# Rôle : formulaire de la modale de création ou d'édition ; il quitte le frame « modal » (_top) pour afficher la fiche après succès %>
+<%# ADR  : 0126 (contexte billing, §4.1) · UDR : 0159 §3.2 · modèle : teams/drenas/_form %>
+<%= form_with model: form, scope: :relay_point, url:, method:, id: "relay-point-form", class: "space-y-5", data: { turbo_frame: "_top" } do |f| %>
+  <% if form.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= form.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%= ui_field f, :name, required: true, maxlength: Dtos::Billing::RelayPointInput::NAME_MAX, autofocus: true, autocomplete: "off",
+                         placeholder: t(".name_placeholder") %>
+  <%= ui_field f, :location, required: true, maxlength: Dtos::Billing::RelayPointInput::LOCATION_MAX, autocomplete: "off",
+                             placeholder: t(".location_placeholder") %>
+  <%= ui_field f, :phone, as: :tel, required: true, maxlength: 20, autocomplete: "off", inputmode: "tel", placeholder: "07 00 00 00 00" %>
+  <%= ui_checkbox_group f, :school_ids, choices: school_choices, label: t(".schools"), hint: t(".schools_hint"), columns: 1 %>
+  <%= ui_field f, :active, as: :checkbox, label: t(".active") %>
+<% end %>

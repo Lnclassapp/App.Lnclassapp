@@ -1,0 +1,18 @@
+<%# 🌐 UI · billing/subscriptions/show — Mon abonnement (élève) %>
+<%# Rôle : une seule page : état de l'accès, où acheter la carte, saisie du code ; abonné : le reçu seul, sans formulaire %>
+<%# ADR  : 0126 (contexte billing, §4.5) · UDR : 0158 §3 %>
+<% page_title t(".title") %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
+<div class="mx-auto w-full max-w-180 space-y-6">
+  <%= render "billing/subscriptions/status", access: @access %>
+  <%# Déjà abonné qui saisit une 2e carte : pas de formulaire, mais le refus est dit. %>
+  <% if @access.status == :subscribed && @code_error %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5" %><p><%= @code_error %></p>
+    </div>
+  <% end %>
+  <% unless @access.status == :subscribed %>
+    <%= render "billing/subscriptions/where_to_buy", relay_points: @relay_points %>
+    <%= render "billing/subscriptions/activation_form", code: @code, error: @code_error %>
+  <% end %>
+</div>

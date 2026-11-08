@@ -8,7 +8,8 @@ class SecretResponseTest < ActionDispatch::IntegrationTest
     "Identity::SecondFactorEnrollmentsController" => %w[create new], # clé TOTP, QR code, codes de secours
     "Identity::PinRecoveryCodesController" => %w[create],            # code de récupération du PIN
     "Teams::InvitationsController" => %w[create],                    # lien d'invitation de l'équipe
-    "Teams::StaffInvitationsController" => %w[create]                # lien d'invitation de la direction
+    "Teams::StaffInvitationsController" => %w[create],               # lien d'invitation de la direction
+    "Teams::Billing::CardBatchesController" => %w[show]              # planche des codes d'activation (cartes-activation)
   }.freeze
 
   test "the one-time secret screens, and only they, are marked secret" do
