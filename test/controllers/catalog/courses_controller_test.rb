@@ -1254,6 +1254,19 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, reads.size, reads.inspect
   end
 
+  # Audit O-C01 : la vue d'une matière lit la page du catalogue une fois, pour le téléphone et pour l'ordinateur.
+  test "the subject view reads the catalog page once, and the phone cards keep no revision sheets" do
+    with_exercises
+    reads = []
+    counter = ->(*, payload) { reads << payload[:sql] if payload[:sql].include?(%("courses"."id")) && payload[:sql].include?("LIMIT") }
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get courses_path(material: @svt.slug) }
+
+    assert_equal 1, reads.size, reads.inspect
+    assert_select "#student_lessons li[id^=lesson_]", minimum: 1
+    assert_select "#courses_list li[id^=lesson_essential_], .lg\\:hidden li[id^=lesson_essential_]", 0
+  end
+
   test "CA-4: with nothing to propose, no card is rendered" do
     with_exercises
     [ @first, @second ].each { create_exercise_session(student: @student, exercise: it, status: "completed") }
