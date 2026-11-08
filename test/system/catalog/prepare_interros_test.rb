@@ -9,7 +9,7 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     @exercise = create_exercise(essential: @notion, title: "Calculer une longueur")
     @wide = create_lesson_wide_exercise(course: @course, title: "Bilan de la leçon")
     @classroom = create_classroom(name: "3e 1", level: @course.level, series: @course.series)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @course.material, classrooms: [ @classroom ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
                                                                 at: Time.current)
   end
