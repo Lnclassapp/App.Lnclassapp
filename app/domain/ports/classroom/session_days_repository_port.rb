@@ -10,7 +10,8 @@ module Ports
       end
 
       # Remplace tous les jours de l'enseignant dans la classe, en une transaction ; [] revient à « non renseigné ».
-      # Ne touche à aucune assignation. Un jour hors de 1..6 lève ArgumentError, rien n'est écrit. → true
+      # Ne touche à aucune assignation. Un jour hors de 1..6 lève ArgumentError, rien n'est écrit.
+      # → true | false (l'enseignant ne déclare plus la classe : rien n'est écrit, la transaction de l'appelant reste saine)
       def replace(teacher_id:, classroom_id:, weekdays:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #replace"
       end

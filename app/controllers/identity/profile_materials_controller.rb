@@ -17,7 +17,7 @@ module Identity
     end
 
     def update
-      @form = Dtos::Identity::TeacherMaterialsInput.new(material_slugs: params.dig(:profile_materials, :material_slugs))
+      @form = Dtos::Identity::TeacherMaterialsInput.new(material_slugs: nested_param(:profile_materials, :material_slugs))
       result = update_teacher_materials.call(actor: current_actor, dto: @form, ip: request.remote_ip)
       render_result result, form: (removal? ? :show : :edit), success: lambda { |_|
         next redirect_to(profile_materials_path, notice: t(".removed"), status: :see_other) if removal?
@@ -32,7 +32,7 @@ module Identity
     private
 
     # Le formulaire de l'écran de retrait le dit : un refus se lit sous sa liste, pas dans la modale.
-    def removal? = params.dig(:profile_materials, :screen) == "removal"
+    def removal? = nested_param(:profile_materials, :screen) == "removal"
 
     def policy = Policies::Identity::ManageOwnMaterialsPolicy.new
     def profile = (@profile ||= Queries::Identity::ProfileQuery.new.call(user_id: current_actor.user_id, current_school_id: current_actor.school_id))

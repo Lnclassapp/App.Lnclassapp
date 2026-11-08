@@ -22,6 +22,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Comme params.dig, mais un nœud qui n'est pas un hash (requête forgée : `x=texte`) vaut nil au lieu de lever TypeError (500).
+  def nested_param(*keys)
+    keys.reduce(params) do |node, key|
+      return nil unless node.is_a?(ActionController::Parameters)
+
+      node[key]
+    end
+  end
+
   def lnclass_app
     return unless hotwire_native_app?
 

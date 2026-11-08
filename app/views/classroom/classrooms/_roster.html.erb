@@ -124,7 +124,7 @@
                       <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
                       <%# Décision du porteur (2026-09-27) : le score mène au résultat détaillé (note, revue, propositions correctes) %>
                       <%= link_to t(".see_result"), exercise_session_result_path(student.last_session_public_id), data: { turbo_frame: "_top" },
-                                  class: "block text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                                  class: "inline-flex min-h-tap items-center text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
                     <% else %>
                       <span class="text-mute"><%= t(".no_score") %></span>
                     <% end %>

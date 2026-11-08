@@ -20,6 +20,16 @@ module Queries
         assert_equal [ "École 100%" ], names("ecole")
       end
 
+      test "B-005 : « oeuf » et « œuf » trouvent « cellule-œuf » (la requête SQL, pas seulement le côté Ruby)" do
+        create_school(drena: Orm::Drena.first, name: "Cellule-œuf")
+        create_school(drena: Orm::Drena.first, name: "Cœur vaillant")
+
+        assert_equal [ "Cellule-œuf" ], names("oeuf")
+        assert_equal [ "Cellule-œuf" ], names("œuf")
+        assert_equal [ "Cellule-œuf" ], names("ŒUF")
+        assert_equal [ "Cœur vaillant" ], names("coeur")
+      end
+
       test "a blank term leaves the scope untouched" do
         scope = Orm::School.all
 

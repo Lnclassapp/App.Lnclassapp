@@ -24,7 +24,9 @@ module UseCases
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
         # Les échéances déjà données ne changent pas (ADR-0072 §4.3) : seules les assignations suivantes liront ces jours.
-        @session_days.replace(teacher_id: actor.user_id, classroom_id: classroom.id, weekdays: dto.weekdays, at: @clock.now)
+        written = @session_days.replace(teacher_id: actor.user_id, classroom_id: classroom.id, weekdays: dto.weekdays, at: @clock.now)
+        return Shared::Result.failure(:forbidden) unless written
+
         Shared::Result.success(Saved.new(classroom:, session_days: Entities::Classroom::SessionDays.new(weekdays: dto.weekdays)))
       end
     end

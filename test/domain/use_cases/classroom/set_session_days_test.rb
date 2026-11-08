@@ -22,14 +22,18 @@ module UseCases
         include Ports::Classroom::SessionDaysRepositoryPort
 
         attr_reader :stored
+        attr_writer :accepts
 
         def initialize(stored = {})
           @stored = stored
+          @accepts = true
         end
 
         def for(teacher_id:, classroom_id:) = Entities::Classroom::SessionDays.new(weekdays: @stored.fetch([ teacher_id, classroom_id ], []))
 
         def replace(teacher_id:, classroom_id:, weekdays:, at:)
+          return false unless @accepts
+
           @stored[[ teacher_id, classroom_id ]] = weekdays
           true
         end
@@ -48,6 +52,16 @@ module UseCases
         dto = Dtos::Classroom::SessionDaysInput.new(classroom_public_id: classroom, weekdays:)
         SetSessionDays.new(classrooms: @classrooms, session_days: @session_days, policy: Policies::Classroom::SetSessionDaysPolicy.new,
                            clock: Clock.new(NOW)).call(actor:, dto:)
+      end
+
+      # B-021 (audit 2026-11-08): the teacher stopped teaching the class since the policy read it — :forbidden, not a 500.
+      test "B-021: des jours que la base refuse (enseignement retiré entre-temps) : :forbidden, rien n'est enregistré" do
+        @session_days.accepts = false
+
+        result = set(%w[2 5])
+
+        assert_equal :forbidden, result.code
+        assert_equal [ 1, 4 ], @session_days.stored[[ 7, 3 ]]
       end
 
       test "remplace les jours de l'enseignant et rend la classe avec ses nouveaux jours" do

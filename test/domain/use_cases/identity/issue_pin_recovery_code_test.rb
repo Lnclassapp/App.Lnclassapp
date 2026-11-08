@@ -9,7 +9,7 @@ module UseCases
       KEY = "k" * 32
       Clock = Data.define(:now)
       TEACHER = Entities::Identity::Actor.new(user_id: 5, role: :teacher, school_id: 1)
-      TEAM = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
+      TEAM = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
       STUDENT = Entities::Identity::User.new(id: 20, public_id: "stu20", role: "student", first_name: "Awa", last_name: "Koné")
       COLLEAGUE = Entities::Identity::User.new(id: 21, public_id: "tea21", role: "teacher", first_name: "Yao", last_name: "N'Guessan")
       MEMBER = Entities::Identity::User.new(id: 7, public_id: "team7", role: "team", team_role: "content")
