@@ -43,7 +43,7 @@
                            hint: t(".pin_info_message") %>
               <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
             </div>
-            <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
+            <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true, data: { turbo_submits_with: t(".submitting") } %>
             <p class="text-center text-sm">
               <%= link_to t(".forgot_pin"), new_identity_pin_reset_path,
                           class: "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>

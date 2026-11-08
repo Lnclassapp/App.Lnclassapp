@@ -25,7 +25,7 @@
           <div class="shrink-0 text-right">
             <p class="font-medium tabular-nums"><%= number_to_percentage(row.score_percent, precision: 0, format: "%n %") %></p>
             <%= link_to t(".see_result"), exercise_session_result_path(row.session_public_id),
-                        class: "block py-1 text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                        class: "inline-flex min-h-tap items-center text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
           </div>
         </li>
       <% end %>
