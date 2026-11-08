@@ -30,6 +30,22 @@ class Communication::PublishScheduledMessagesJobTest < ActiveJob::TestCase
     assert_includes log, "[Communication::PublishScheduledMessagesJob] 0 scheduled announcement(s) published"
   end
 
+  test "a teacher's scheduled announcement is published while teachers may write, and archived once the flag is off (B-043)" do
+    classroom = create_classroom(school: @school)
+    teacher = create_teacher(school: @school, classrooms: [ classroom ])
+    first, second = [ 10, 11 ].map do |hour|
+      create_message(author: teacher, audience: "classrooms", classrooms: [ classroom ], status: "scheduled",
+                     published_at: Time.zone.local(2026, 10, 1, hour))
+    end
+
+    pilot_flags!(teacher_announcements_enabled: true)
+    travel_to(Time.zone.local(2026, 10, 1, 10, 5)) { Communication::PublishScheduledMessagesJob.perform_now }
+    pilot_flags!(teacher_announcements_enabled: false)
+    travel_to(Time.zone.local(2026, 10, 1, 11, 5)) { Communication::PublishScheduledMessagesJob.perform_now }
+
+    assert_equal %w[published archived], [ first.reload.status, second.reload.status ]
+  end
+
   test "the job runs every 5 minutes in production, on the default queue" do
     task = Rails.application.config_for(:recurring, env: "production").fetch(:publish_scheduled_messages)
 
