@@ -223,9 +223,11 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/en retard/, response.body)
   end
 
-  def hand_in(assignment, score_percent, student: create_student(classroom: @classroom), **attributes)
+  # A completed copy with an answer gets the medal closing records (record_medal); blank: a copy without any answer, none.
+  def hand_in(assignment, score_percent, student: create_student(classroom: @classroom), blank: false, **attributes)
     create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
                             score_percent:, classroom_assignment: assignment, **attributes)
+      .tap { record_medal(it) if !blank && it.status == "completed" }
   end
 
   # ADR-0079 §4.1 : une remédiation sur l'exercice assigné, c'est faire cet exercice ; hors de l'assignation, elle ne compte pas.
@@ -658,12 +660,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ gold, silver, waiting ].map { "student_#{it.public_id}" }.sort, roster_students.sort
   end
 
-  test "CA-I2 : le filtre « Or » ne montre que les élèves Or ; « Pas encore », ceux sans exercice fait ; un filtre vide le dit" do
+  test "CA-I2 : le filtre « Or » ne montre que les élèves Or ; « Pas encore », ceux sans médaille (rien fait ou copies vides) ; un filtre vide le dit" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
     gold = hand_in(assignment, 95).student
     hand_in(assignment, 75)
     low = hand_in(assignment, 30).student
     waiting = create_student(classroom: @classroom)
+    blank = hand_in(assignment, 0, blank: true).student
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id, badge: "gold")
@@ -675,11 +678,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id, badge: "none")
 
-    assert_equal [ waiting ].map { "student_#{it.public_id}" }, roster_students
+    # PRD §3 : des copies vides seulement, c'est « Pas encore » aussi, note comprise.
+    assert_equal [ waiting, blank ].map { "student_#{it.public_id}" }.sort, roster_students.sort
+    assert_select "#badge_#{blank.public_id}.text-mute", text: /Pas encore/
 
     get classroom_path(@classroom.public_id, badge: "bronze")
 
     assert_includes roster_students, "student_#{low.public_id}"
+    assert_not_includes roster_students, "student_#{blank.public_id}"
 
     get classroom_path(@classroom.public_id, badge: "diamond")
 
@@ -688,7 +694,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id, badge: "platine")
 
-    assert_equal 4, roster_students.size
+    assert_equal 5, roster_students.size
     assert_select "a#classroom_roster_badge_all[aria-current=true]"
   end
 

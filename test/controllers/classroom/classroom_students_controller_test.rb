@@ -256,7 +256,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     svt = create_material(name: "SVT", category: "science")
     exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
     assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment)
+    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment).tap { record_medal(it) }
     create_assignment(classroom: @classroom, assignable: create_exercise(title: "Les volcans"), by: @teacher)
     alone = create_exercise_session(student: @koffi, exercise: create_exercise(title: "Les fractions"), status: "completed",
                                     score_percent: 75)
@@ -307,7 +307,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     scores.each_with_index do |score, index|
       exercise = create_exercise(title: "Exercice #{index}")
       assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
-      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment)
+      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment).tap { record_medal(it) }
     end
     sign_in_as @teacher
 
@@ -323,6 +323,21 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_summary", text: /en retard/, count: 0
   end
 
+  # ADR médailles lues à la clôture : une copie vide ne médaille pas ; sa ligne garde la note, sans trophée, et la fiche dit « Pas encore ».
+  test "une copie vide : la ligne du devoir sans trophée, aucun badge compté" do
+    exercise = create_exercise(title: "Vide")
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 0, classroom_assignment: assignment)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge", text: /0\/20/
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge svg", 0
+    assert_select "#student_file_summary ul[aria-label] li", 1
+    assert_select "#student_file_average", text: /Pas encore/
+  end
+
   # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;
   # « en retard » = pas fait et échu (comme le rapport) : la pastille « 1 en retard » de l'en-tête.
   test "CL-13 : rendu en retard et échéance passée : la date du rendu, « En retard » sur l'exercice échu, « 1 en retard » en tête" do
@@ -332,7 +347,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     late = assign.("La méiose")
     overdue = assign.("Les volcans")
     create_exercise_session(student: @koffi, exercise: Orm::Exercise.find(late.assignable_id), status: "completed", score_percent: 60,
-                            classroom_assignment: late, completed_at: 1.day.ago)
+                            classroom_assignment: late, completed_at: 1.day.ago).tap { record_medal(it) }
     sign_in_as @teacher
 
     show_file

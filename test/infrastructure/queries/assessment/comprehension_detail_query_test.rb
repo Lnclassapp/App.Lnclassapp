@@ -27,6 +27,7 @@ module Queries
         @clock += 1.hour
         create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, classroom_assignment: assignment,
                                 completed_at: @clock, **attributes).tap do |session|
+          record_medal(session)
           answers.each { |position, correct| create_attempt(session:, question: @questions[position - 1], correct:) }
         end
       end
@@ -133,6 +134,21 @@ module Queries
         assert_equal detail.badge_counts, detail(badge: :bronze).badge_counts
       end
 
+      test "20 % with a recorded Bronze medal is in the Bronze box, never « Pas encore »; a score without a medal stays « Pas encore »" do
+        low = create_student(classroom: @classroom, first_name: "Awa", last_name: "Vingt")
+        create_exercise_session(student: low, exercise: @exercise, status: "completed", score_percent: 20, classroom_assignment: @assignment,
+                                completed_at: @clock).then { create_badge(student: low, exercise: @exercise, level: "bronze", session: it) }
+        unmedaled = create_student(classroom: @classroom, first_name: "Ali", last_name: "Sans")
+        create_exercise_session(student: unmedaled, exercise: @exercise, status: "completed", score_percent: 90,
+                                classroom_assignment: @assignment, completed_at: @clock)
+
+        result = detail
+
+        assert_equal({ none: 1, bronze: 1, silver: 0, gold: 0, diamond: 0 }, result.badge_counts)
+        assert_equal [ [ "Ali Sans", :none ], [ "Awa Vingt", :bronze ] ], result.students.map { [ it.display_name, it.badge ] }.sort
+        assert_equal [ "Awa Vingt" ], detail(badge: :bronze).students.map(&:display_name)
+      end
+
       test "the rank of a score is the palier of Grading: 47 is Bronze too (any exercise done), 49 and 50 Bronze (ADR-0106, read on 20), 70 Argent, 80 Or, 100 Diamant, 98 only Or" do
         [ 47, 49, 50, 70, 80, 98, 100 ].each { student(scores: [ it ]) }
 
@@ -225,13 +241,31 @@ module Queries
         other = create_assignment(classroom: other_classroom, assignable: @exercise)
         hand_in(twice, 100, answers: { 1 => true, 2 => true }, assignment: other)
 
-        result = detail(badge: :bronze)
+        result = detail(badge: :none)
 
-        assert_equal [ 1, 1, { none: 0, bronze: 1, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
+        # ADR-0097 §4.5: a medal is read in a classroom only when a session of its assignment recorded it. The diamond won in the
+        # other classroom took the medal over: here, nothing (journal, À trancher).
+        assert_equal [ 1, 1, { none: 1, bronze: 0, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
+        assert_empty detail(badge: :diamond).students
         assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
         assert_equal [ 60 ], result.students.map(&:best)
         assert_equal [ [ 0, 1 ], [ 0, 1 ], [ 0, 0 ] ], counts(result)
         assert_equal [ 100 ], detail(badge: :diamond, assignment: other, classroom_public_id: other_classroom.public_id).students.map(&:best)
+      end
+
+      # ADR-0097 §4.5 (reproduction): Or won on the exercise through classroom B; the same exercise assigned to A, done in A without
+      # an answer (no medal recorded there): the teacher of A reads no Or.
+      test "a medal won through another classroom is never read here" do
+        twice = student(scores: [])
+        other_classroom = create_classroom(school: @school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other_classroom, student: twice, primary: false, joined_at: Time.current)
+        hand_in(twice, 85, assignment: create_assignment(classroom: other_classroom, assignable: @exercise))
+        @clock += 1.hour
+        create_exercise_session(student: twice, exercise: @exercise, status: "completed", score_percent: 0, classroom_assignment: @assignment,
+                                completed_at: @clock)
+
+        assert_equal({ none: 1, bronze: 0, silver: 0, gold: 0, diamond: 0 }, detail.badge_counts)
+        assert_equal [ :none ], detail.students.map(&:badge)
       end
 
       test "an archived assignment, one of another classroom or an unknown one has no detail" do
@@ -249,7 +283,7 @@ module Queries
         6.times { |index| student(scores: [ 50 + index, 95 ], answers: [ { 1 => true, 2 => false }, { 1 => true, 3 => true } ]) }
         2.times { student }
 
-        assert_equal 7, few
+        assert_equal 8, few
         assert_equal few, count_queries { detail }
         assert_equal 7, detail.students.size
       end

@@ -16,8 +16,9 @@ module Queries
       end
 
       def hand_in(student, score_percent, assignment: @assignment, **attributes)
-        create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
-                                score_percent:, classroom_assignment: assignment, **attributes)
+        exercise = Orm::Exercise.find(assignment.assignable_id)
+        create_exercise_session(student:, exercise:, status: "completed", score_percent:, classroom_assignment: assignment,
+                                **attributes).tap { record_medal(it) }
       end
 
       def summaries(assignment_ids = [ @assignment.id ])
@@ -38,6 +39,17 @@ module Queries
 
         assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired,
                                                             badge_counts: { bronze: 3, silver: 1, gold: 1, diamond: 1 }), summary
+      end
+
+      test "a 20 % student with a recorded Bronze medal counts in Bronze; a 90 % student without a medal counts nowhere" do
+        low = create_student(classroom: @classroom)
+        create_badge(student: low, exercise: @exercise, level: "bronze", session: create_exercise_session(
+          student: low, exercise: @exercise, status: "completed", score_percent: 20, classroom_assignment: @assignment
+        ))
+        create_exercise_session(student: create_student(classroom: @classroom), exercise: @exercise, status: "completed", score_percent: 90,
+                                classroom_assignment: @assignment)
+
+        assert_equal NO_BADGE.merge(bronze: 1), summary.badge_counts
       end
 
       test "under 5 students the circle is not readable yet, the badges are still counted" do
@@ -100,7 +112,9 @@ module Queries
         hand_in(twice, 55)
         hand_in(twice, 100, assignment: other)
 
-        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(bronze: 1, gold: 4)), summary
+        # ADR-0097 §4.5: the diamond recorded by the session of the other classroom is not read here; the Bronze of 55 % was taken
+        # over by it (one medal per student and exercise), so nothing is counted for him here (journal, À trancher).
+        assert_equal ComprehensionSummaryQuery::Summary.new(category: :acquired, badge_counts: NO_BADGE.merge(gold: 4)), summary
         assert_equal ComprehensionSummaryQuery::Summary.new(category: nil, badge_counts: NO_BADGE.merge(diamond: 1)),
                      ComprehensionSummaryQuery.for(classroom_id: other_classroom.id, assignment_ids: [ other.id ]).fetch(other.id)
       end
@@ -111,7 +125,7 @@ module Queries
         others = Array.new(3) { create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential)) }
         others.each { hand_in(create_student(classroom: @classroom), 80, assignment: it) }
 
-        assert_equal 1, one
+        assert_equal 2, one
         assert_equal one, count_queries { summaries([ @assignment.id, *others.map(&:id) ]) }
       end
 

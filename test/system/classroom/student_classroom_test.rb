@@ -21,7 +21,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
                         assigned_at: rank.hours.ago)
     end
     done = create_exercise(essential: @essential, title: "Méiose, le bilan")
-    create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+    record_medal(create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80))
   end
 
   def tn(key) = I18n.t("shared.navigation.#{key}")

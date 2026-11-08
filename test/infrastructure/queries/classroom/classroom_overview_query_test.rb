@@ -94,7 +94,7 @@ module Queries
         assignment = create_assignment(classroom: @classroom, assignable: exercise)
         [ 100, 85, 72, 65, 40, 30 ].each do |score_percent|
           create_exercise_session(student: create_student(classroom: @classroom), exercise:, status: "completed",
-                                  score_percent:, classroom_assignment: assignment)
+                                  score_percent:, classroom_assignment: assignment).tap { record_medal(it) }
         end
 
         done, nobody = overview(show_follow_up: true).assignments
@@ -388,13 +388,14 @@ module Queries
 
       # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
       # scores aux exercices assignés à la classe ; trente par trente dans un groupe.
-      def graded(scores, first_name: "Élève")
+      # blank: copies without any answer, for which closing records no medal.
+      def graded(scores, first_name: "Élève", blank: false)
         create_student(classroom: @classroom, first_name:, last_name: "N#{factory_sequence}", joined_at: 1.month.ago).tap do |student|
           scores.each_with_index do |score, index|
             @assignments[index] ||= create_assignment(classroom: @classroom, assignable: create_exercise)
             exercise = Orm::Exercise.find(@assignments[index].assignable_id)
             create_exercise_session(student:, exercise:, status: "completed", score_percent: score,
-                                    classroom_assignment: @assignments[index])
+                                    classroom_assignment: @assignments[index]).tap { record_medal(it) unless blank }
           end
         end
       end
@@ -442,6 +443,27 @@ module Queries
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).badge }
         assert_equal [ [ 2, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 0, 2 ] ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
+      end
+
+      # PRD §3 : sans exercice médaillé (copies vides seulement), « Pas encore », note comprise ; une médaille gagnée dans une autre
+      # classe ne compte pas ici (ADR-0097 §4.5) ; une réponse donnée, Bronze même à 30 %.
+      test "médailles : copies vides seulement → « Pas encore » et filtre none ; médaille d'ailleurs ignorée ; 30 % répondu → Bronze" do
+        @assignments = []
+        answered = graded([ 30 ], first_name: "Répondu")
+        blank = graded([ 0 ], first_name: "Vide", blank: true)
+        elsewhere = graded([ 0 ], first_name: "Ailleurs", blank: true)
+        other = create_classroom(school: Orm::Classroom.find(@classroom.id).school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other, student: elsewhere, primary: false, joined_at: Time.current)
+        exercise = Orm::Exercise.find(@assignments[0].assignable_id)
+        record_medal(create_exercise_session(student: elsewhere, exercise:, status: "completed", score_percent: 85,
+                                             classroom_assignment: create_assignment(classroom: other, assignable: exercise)))
+
+        rows = overview.students.index_by(&:public_id)
+
+        assert_equal [ :bronze, nil, nil ], [ answered, blank, elsewhere ].map { rows.fetch(it.public_id).badge }
+        assert_equal [ 6, 0, 0 ], [ answered, blank, elsewhere ].map { rows.fetch(it.public_id).grade }
+        assert_equal [ answered.public_id ], overview(badge: "bronze").students.map(&:public_id)
+        assert_equal [ blank.public_id, elsewhere.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
       end
 
       test "CA-I2 : un sans-faute partout est Diamant ; un seul exercice sans faute sur deux, jamais" do

@@ -17,7 +17,7 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
     4.times { |rank| question.answers.create!(position: rank + 1, content: "Choix #{rank + 1}", correct: rank < 3) }
     create_assignment(classroom: @classroom, assignable: @todo)
     done = create_exercise(essential:, title: "Le bilan")
-    @copy = create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+    @copy = record_medal(create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80))
     sign_in_as @student
   end
 

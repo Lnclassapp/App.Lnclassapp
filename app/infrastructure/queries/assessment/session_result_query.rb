@@ -1,11 +1,12 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
 # Rôle : résultat d'une session terminée (score, note, appréciation, points, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
-      # badge_level : palier du score de cette session (Grading), nil sous le seuil ; earned_now : le badge de l'élève
-      # sur l'exercice vient de cette session. progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
+      # badge_level : la médaille de CETTE session (Grading.session_medal : le palier de son score si la copie est traitée, nil pour
+      # une copie vide), jamais celle que l'élève détient sur l'exercice : un Or qui refait à 20 % lit Bronze, pas Or (journal, À trancher).
+      # earned_now : cette session a enregistré la médaille et son score atteint 10/20 (UDR Bronze sans fête sous 48 %). progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
       # gap_outcome : GapOutcome de cette session sur sa fiche (:opened, :lifted, :still_pending) ou nil (UDR-0120).
       # essential : nil pour un exercice de toute la leçon ; course_slug : le cours, toujours là (le retour à la leçon).
       Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :course_slug, :score_percent, :grade_on_20,
@@ -64,18 +65,18 @@ module Queries
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
           exercise_public_id, title, statement_blocks, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id,
-          hinted_question_ids =
+          hinted_question_ids, treated =
           Orm::ExerciseSession.joins(:student, exercise: :course)
                               .joins("LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id")
-                              .where(public_id:).pick(*SESSION_COLUMNS)
+                              .where(public_id:).pick(*SESSION_COLUMNS, Arel.sql(Medals::TREATED_SQL))
         return if id.nil?
 
         review = review(id, exercise_id, reveal, hinted_question_ids)
         Row.new(session_public_id: public_id, student_id:, student_name: "#{first_name} #{last_name}",
                 exercise: ExerciseRow.new(public_id: exercise_public_id, title:, statement_blocks:),
                 essential: (EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:) if essential_slug), course_slug:,
-                correct_count:, question_count:, **grading(score_percent),
-                earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
+                correct_count:, question_count:, **grading(score_percent, Entities::Assessment::Grading.session_medal(score_percent, treated:)),
+                earned_now: earned_now?(id, score_percent),
                 progress: progress(id, student_id, exercise_id, completed_at), review:,
                 gap_outcome: gap_outcome(id, kind, knowledge_gap_id),
                 appreciation: appreciation(score_percent, review, essential_name), points: points(review))
@@ -92,10 +93,15 @@ module Queries
 
       private
 
-      def grading(score_percent)
+      def grading(score_percent, badge_level)
         grading = Entities::Assessment::Grading
-        { score_percent:, grade_on_20: grading.grade_on_20(score_percent), mastery: grading.mastery_for(score_percent),
-          badge_level: grading.badge_for(score_percent) }
+        { score_percent:, grade_on_20: grading.grade_on_20(score_percent), mastery: grading.mastery_for(score_percent), badge_level: }
+      end
+
+      # UDR « Bronze sans fête sous 48 % » : décernée par cette session et score au seuil de réussite.
+      def earned_now?(session_id, score_percent)
+        grading = Entities::Assessment::Grading
+        grading.reaches?(score_percent, grading::PASS_THRESHOLD) && Orm::ExerciseBadge.exists?(exercise_session_id: session_id)
       end
 
       # ADR-0115 : « à revoir » = question corrigée automatiquement, fausse ou sans réponse. Elle se lit sur la note affichée.
@@ -118,14 +124,17 @@ module Queries
       def progress(session_id, student_id, exercise_id, completed_at)
         scores = Orm::ExerciseSession.where(student_id:, exercise_id:, status: "completed")
                                      .where("(exercise_sessions.completed_at, exercise_sessions.id) <= (?, ?)", completed_at, session_id)
-                                     .order(:completed_at, :id).pluck(:score_percent)
+                                     .order(:completed_at, :id).pluck(:score_percent, Arel.sql(Medals::TREATED_SQL))
         return if scores.size < 2
 
-        grade = Entities::Assessment::Grading.method(:grade_on_20)
-        badge = Entities::Assessment::Grading.method(:badge_for)
+        grading = Entities::Assessment::Grading
+        grade = grading.method(:grade_on_20)
+        # La médaille de chaque session, comme badge_level : une copie vide n'en a aucune.
+        medals = scores.map { |score, treated| grading.session_medal(score, treated:) }
+        scores = scores.map(&:first)
         Progress.new(trend: Entities::Assessment::Comprehension.trend_for(scores), first_grade: grade.(scores.first),
-                     best_grade: grade.(scores.max), current_grade: grade.(scores.last),
-                     first_medal: badge.(scores.first), best_medal: badge.(scores.max), current_medal: badge.(scores.last))
+                     best_grade: grade.(scores.max), current_grade: grade.(scores.last), first_medal: medals.first,
+                     best_medal: medals.compact.max_by { grading::BADGE_ORDER.index(it) }, current_medal: medals.last)
       end
 
       # Une requête : la lacune que la session a ouverte, sinon levée, sinon ciblée (ADR-0101 §6). Le résultat suit

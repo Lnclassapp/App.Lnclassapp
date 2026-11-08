@@ -9,8 +9,9 @@ module Assessment
     Overview = Queries::Classroom::ClassroomOverviewQuery
     Counts = Queries::Classroom::AssignmentFollowUpQuery::Counts
 
-    def treated(score)
-      Treated.new("ex2", "Les fonctions", "Maths", "maths", "science", score, "sess9", Time.current, "evaluation")
+    # level : la médaille enregistrée de l'élève sur l'exercice (nil : copies vides seulement).
+    def treated(score, level)
+      Treated.new("ex2", "Les fonctions", "Maths", "maths", "science", score, "sess9", Time.current, "evaluation", level)
     end
 
     def assignment(counts: nil, due_on: nil)
@@ -21,7 +22,7 @@ module Assessment
     def text(html) = Nokogiri::HTML.fragment(html.to_s).text.squish
 
     test "traité : la médaille de la meilleure copie, sans note ni maîtrise ; Voir ma copie vers le résultat (CA-3)" do
-      card = exercise_card_for_treated(treated(80))
+      card = exercise_card_for_treated(treated(80, :gold))
 
       assert_nil card.dom_id
       assert_equal exercise_session_result_path("sess9"), card.href
@@ -30,9 +31,10 @@ module Assessment
       assert_equal [ "Maths", "maths", "Évaluation" ], [ card.material_name, card.material_slug, card.type_label ]
     end
 
-    test "traité sous 10/20 : Bronze, jamais « Pas encore » ni un chiffre" do
-      assert_equal "Bronze Médaille Bronze", text(exercise_card_for_treated(treated(20)).status)
-      assert_equal "Argent Médaille Argent", text(exercise_card_for_treated(treated(70)).status)
+    test "traité sous 10/20 : la médaille enregistrée, Bronze, jamais un chiffre ; copies vides seulement : « Pas encore »" do
+      assert_equal "Bronze Médaille Bronze", text(exercise_card_for_treated(treated(20, :bronze)).status)
+      assert_equal "Argent Médaille Argent", text(exercise_card_for_treated(treated(70, :silver)).status)
+      assert_equal "Pas encore", text(exercise_card_for_treated(treated(0, nil)).status)
     end
 
     test "assignation suivie, en retard : date absolue, N en retard, progression, Voir le suivi (CA-6)" do
@@ -72,7 +74,7 @@ module Assessment
     end
 
     test "une carte montre toujours une illustration, de repli sans matière connue" do
-      card = exercise_card_for_treated(treated(70).with(material_slug: nil))
+      card = exercise_card_for_treated(treated(70, :silver).with(material_slug: nil))
 
       html = Nokogiri::HTML.fragment(render(partial: "assessment/exercises/card", locals: { card: })).css("span[aria-hidden] img")
 

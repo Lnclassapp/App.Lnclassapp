@@ -14,7 +14,7 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     @assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
     @awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_at: 1.month.ago)
     @koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_at: 1.month.ago)
-    create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 80, classroom_assignment: @assignment)
+    record_medal(create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 80, classroom_assignment: @assignment))
     [ 3, 1 ].each do |days|
       create_exercise_session(student: @awa, status: "completed", score_percent: 70, started_at: days.days.ago,
                               completed_at: days.days.ago)

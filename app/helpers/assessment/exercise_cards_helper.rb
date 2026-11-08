@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::ExerciseCardsHelper — traduit chaque ligne de lecture d'un exercice en une même `Card`
 # Rôle : seul endroit où un exercice listé devient titre, matière, type, état et verbe d'action ; le partial assessment/exercises/_card la rend
-# ADR  : 0072, 0113 · UDR : 0145 (§3.1) · le domaine ne connaît pas la carte : elle ne lit que des lignes de queries
+# ADR  : 0072, 0113, médailles lues à la clôture · UDR : 0145 (§3.1) · le domaine ne connaît pas la carte : elle ne lit que des lignes de queries
 module Assessment
   module ExerciseCardsHelper
     # dom_id : l'id du <li> (ou nil) · href : la destination (nil : carte sans lien ni action) · material_name : nil si la page le dit déjà
@@ -12,7 +12,7 @@ module Assessment
 
     # « Ma classe », traités : StudentClassroomQuery::TreatedRow. La couleur de la note ne porte jamais seule le sens : le texte reste.
     def exercise_card_for_treated(row)
-      status = medal_tag(row.best_score_percent)
+      status = medal_tag(row.badge_level)
       Card.new(dom_id: nil, href: exercise_session_result_path(row.last_session_public_id), title: row.title,
                material_name: row.material_name, material_slug: row.material_slug, type_label: exercise_type_label(row.exercise_type),
                meta: nil, status:, action: card_t(:view_copy), progress: nil)

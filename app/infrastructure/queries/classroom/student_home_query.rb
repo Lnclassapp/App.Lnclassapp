@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes, l'état de la carte du prochain exercice ; l'historique, à part (cadre différé) ; sans classe, la dernière et un retrait récent
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8), XXXX accueil élève (§3.3 : les états de la carte)
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090, médailles lues à la clôture · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8), XXXX accueil élève (§3.3 : les états de la carte)
 module Queries
   module Classroom
     class StudentHomeQuery
@@ -21,8 +21,9 @@ module Queries
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée ; exercise_type : « fixation » ou « evaluation » (carte d'exercice).
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type)
+      # medal : la médaille de la session (Grading.session_medal), nil pour une copie vide.
       SessionRow = Data.define(:public_id, :exercise_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
-                               :completed_at)
+                               :completed_at, :medal)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
       SubjectRow = Data.define(:slug, :name)
       # L'élève sans classe active (UDR-0081 §3.5) : la DRENA et l'établissement de sa dernière classe principale, qui
@@ -84,8 +85,8 @@ module Queries
                             .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
                             .pluck(:public_id, :exercise_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
-                                   :completed_at)
-                            .map { |values| SessionRow.new(*values) }
+                                   :completed_at, Arel.sql(Queries::Assessment::Medals::TREATED_SQL))
+                            .map { |*values, treated| SessionRow.new(*values, Entities::Assessment::Grading.session_medal(values[6], treated:)) }
       end
 
       private

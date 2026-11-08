@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classroom_students/_assignments — « Exercices de la classe » sur la fiche d'un élève %>
 <%# Rôle : une ligne par assignation active, dans l'ordre de la page de la classe (3 puis « Voir plus ») : titre (vers le suivi), matière, échéance ; à droite la note en pastille avec son trophée, « En retard » ou « Pas encore fait » ; signe, sessions et meilleure session si fait %>
-<%# ADR  : 0072 (§4.4), 0079, 0097 (§4.3) · UDR : enseignant §3.6, 0062, 0072, 0107 (§3.4) · couleur jamais seule : note, signe et échéance sont écrits ; ni « Fragile » ni « Acquis » %>
+<%# ADR  : 0072 (§4.4), 0079, 0097 (§4.3, §4.5), médailles lues à la clôture · UDR : enseignant §3.6, 0062, 0072, 0107 (§3.4) · couleur jamais seule : note, signe et échéance sont écrits ; ni « Fragile » ni « Acquis » %>
 <%# locals: (classroom:, assignments:, linked: true) -%>
 <% link = "underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
 <%= tag.section id: "student_file_assignments", "aria-labelledby": "student_file_assignments_title",
@@ -25,8 +25,8 @@
             <div class="shrink-0 text-right">
               <% case assignment.status %>
               <% when :done, :late %>
-                <%# UDR enseignant §3.6 : la note sur 20 en pastille neutre, avec le trophée du palier atteint (aucun sous Bronze). %>
-                <% level = Entities::Assessment::Grading.badge_for(assignment.best) %>
+                <%# UDR enseignant §3.6 : la note sur 20 en pastille neutre, avec le trophée de la médaille gagnée dans la classe (aucun pour une copie vide). %>
+                <% level = assignment.medal %>
                 <p class="<%= Assessment::BadgesHelper::BADGE_PILL %>">
                   <% if level %><%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(level)) %><% end %>
                   <%= grade_label(assignment.best) %>

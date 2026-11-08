@@ -34,7 +34,11 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     exercise
   end
 
-  def complete(exercise, score: 80) = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+  # One answer given (the copy is treated, it has a medal); blank: a copy without any answer, which has none.
+  def complete(exercise, score: 80, blank: false)
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score)
+      .tap { create_attempt(session: it) unless blank }
+  end
 
   def card_buttons = css_select("#{CARD} .ui-button-primary, #{CARD} .ui-button-secondary")
 
@@ -463,6 +467,16 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=bg-warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
                   text: tl("history.redo"), count: 2
+  end
+
+  # ADR médailles lues à la clôture : une copie vide n'a pas de médaille ; l'historique le dit, « Pas encore », comme le résultat.
+  test "the history: a blank copy shows « Pas encore », never Bronze" do
+    complete(create_exercise(essential: @essential, title: "Méiose"), score: 0, blank: true)
+    sign_in_as @student
+
+    get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
+
+    assert_equal [ "Pas encore" ], css_select("turbo-frame#student_home_recent_activity li [data-medal]").map { it.text.squish }
   end
 
   test "pause: 3 copies rendered within 30 minutes hide « Refaire » for that exercise only, and it returns once the pause is over" do

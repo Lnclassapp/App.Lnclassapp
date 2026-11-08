@@ -30,6 +30,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:, gap:).tap do |session|
       create_attempt(session:, question: @first, correct: first_correct)
       create_attempt(session:, question: @second, correct: true)
+      record_medal(session)
     end
   end
 
@@ -50,6 +51,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   # UDR médailles : l'élève lit sa médaille et la prochaine à viser ; ni note, ni score, ni maîtrise. UDR-0140 : le titre reste l'appréciation.
   test "l'élève voit sa médaille Bronze à 10/20, « Assez bien », la prochaine à viser, sans note ni score ni maîtrise" do
+    # La médaille vient d'une copie plus ancienne : celle-ci ne la décerne pas (pas de « Nouvelle médaille ! »).
+    earlier = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: GRADING::PASS_THRESHOLD)
+    Orm::ExerciseBadge.find_by!(student: @student, exercise: @exercise).update!(exercise_session: earlier)
     sign_in_as @student
 
     show
@@ -290,6 +294,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   # CA-08 : « Très bien », les confettis (dès l'Argent) et la médaille Or ; plus de note verte.
   test "à 16/20, « Très bien », la médaille Or et les confettis" do
     @session.update!(score_percent: 80)
+    record_medal(@session)
     sign_in_as @student
 
     show
@@ -307,6 +312,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     { 70 => [ "Argent", 1 ], 68 => [ "Argent", 1 ], 67 => [ "Bronze", 0 ] }.each do |score, (medal, confetti)|
       @session.update!(score_percent: score)
+      record_medal(@session)
       show
       assert_select "h1", text: I18n.t("#{scope}.show.headline.good")
       assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: medal)
@@ -495,9 +501,47 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
 
+  test "20 % avec réponses : Bronze sans « Nouvelle médaille ! »" do
+    low = complete(score_percent: 20, first_correct: false)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  # UDR Bronze sans fête sous 48 % : la première Bronze, enregistrée par cette session, est fêtée dès 10/20 (48 %), jamais à 9/20 (47 %).
+  test "première Bronze à 48 % : « Nouvelle médaille ! » ; à 47 %, la même médaille sans fête" do
+    first = complete(score_percent: 48, student: create_student_for(@exercise.essential.course))
+    sign_in_as Orm::User.find(first.student_id)
+
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
+
+    first.update!(score_percent: 47)
+    show first
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
+  # Journal, À trancher : le résultat lit la médaille de CETTE session ; un Or qui refait à 20 % lit Bronze, et la prochaine est l'Argent.
+  test "un élève Or qui refait à 20 % lit Bronze et « Prochaine médaille : Argent », pas Or ni Diamant" do
+    @session.update!(score_percent: 80)
+    record_medal(@session)
+    low = complete(score_percent: 20, first_correct: false)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_next_medal", text: "Prochaine médaille : Argent"
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+  end
+
   test "sans faute : Diamant, « Nouvelle médaille ! », et plus de « Recommencer »" do
     perfect = complete(score_percent: GRADING::PERFECT_THRESHOLD)
-    create_badge(student: @student, exercise: @exercise, level: "diamond", session: perfect)
     sign_in_as @student
 
     show perfect
@@ -512,7 +556,6 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   # ADR-0106 §4.3 : le Diamant est le sans-faute, pas une note. 98 % s'affiche 20/20 mais reste Or et garde « Recommencer ».
   test "98 % : Or, pas Diamant, et « Recommencer » reste" do
     almost = complete(score_percent: 98)
-    create_badge(student: @student, exercise: @exercise, level: "gold", session: almost)
     sign_in_as @student
 
     show almost
@@ -799,6 +842,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     create_attempt(session:, question: @second, correct: true)
     add_question(session:, points: 5, correct: false)
     add_question(session:, type: "written", points: 4, explanation: "Corrigé type.")
+    record_medal(session)
     sign_in_as @student
 
     show session

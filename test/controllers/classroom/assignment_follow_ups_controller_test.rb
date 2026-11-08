@@ -37,7 +37,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
   def hand_in(student, at, assignment: @assignment, score_percent: 100)
     create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent:,
-                            classroom_assignment: assignment, completed_at: at)
+                            classroom_assignment: assignment, completed_at: at).tap { record_medal(it) }
   end
 
   test "the classroom's teacher reads the header, the progress and one list: who did it, best first, then who did not (late after the due date)" do
@@ -188,7 +188,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     [ *@late, @on_time, @pending ].each { assert_no_match(/#{it.public_id}/, response.body) }
   end
 
-  # A readable classroom on a new assignment of three questions: best scores 90, 72, 90, 65, 40, 30: 2 Or, 1 Argent, 1 Bronze, 2 Pas encore.
+  # A readable classroom on a new assignment of three questions: best scores 90, 72, 90, 65, 40, 30, each copy with answers and its
+  # recorded medal: 2 Or, 1 Argent, 3 Bronze (Bronze from one answer given, ADR medals read at closing).
   def build_quiz
     @quiz_exercise = create_exercise(essential: @exercise.essential, questions: 3)
     @quiz = create_assignment(classroom: @classroom, assignable: @quiz_exercise, by: @teacher)
@@ -205,6 +206,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       sessions.each_with_index do |(score_percent, answers), index|
         session = create_exercise_session(student:, exercise: @quiz_exercise, status: "completed", score_percent:, classroom_assignment: @quiz,
                                           completed_at: Time.zone.local(2026, 10, 3 + index, 8 + rank))
+        record_medal(session)
         answers.each { |position, correct| create_attempt(session:, question: @questions[position - 1], correct:) }
       end
     end
@@ -239,6 +241,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     build_quiz
     sign_in_as @teacher
     Orm::ExerciseSession.where(classroom_assignment: @quiz).update_all(score_percent: 30)
+    # The copies keep their answers: at 30 %, the medal closing records is Bronze (ADR medals read at closing).
+    Orm::ExerciseBadge.where(exercise_id: @quiz_exercise.id).update_all(level: "bronze")
 
     get follow_up_path(@quiz)
 
@@ -385,7 +389,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "body", text: /Pas encore fait/, count: 0
     assert_select "#comprehension_questions", 0
     assert_select "nav a[aria-current=true]", text: /0\s*Diamant/
-    assert_select "nav a", text: /0\s*Pas encore/
+    assert_select "nav a", text: /3\s*Bronze/
   end
 
   test "under 5 done: no circle, the next step says the bound, and the detail still shown, the one not done yet closing the list" do

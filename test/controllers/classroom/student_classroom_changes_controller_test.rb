@@ -424,7 +424,8 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     exercise = create_exercise(title: "Fractions")
     assignment_a = create_assignment(classroom: @a, assignable: exercise, by: teacher_a)
     assignment_c = create_assignment(classroom: @c, assignable: exercise, by: teacher_c)
-    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 75, classroom_assignment: assignment_a)
+    record_medal(create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 75, classroom_assignment: assignment_a)
+                   .tap { create_attempt(session: it) })
     sign_in_as @student
 
     send_change
