@@ -50,6 +50,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0087 §3.6 : la note verte et les confettis à partir de 14/20 ; UDR-0140 : le titre est l'appréciation, 10/20 lit « Assez bien ».
   test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Assez bien » à 10/20, sans score redit" do
+    create_badge(student: @student, exercise: @exercise, level: "bronze", session: @session)
     sign_in_as @student
 
     show
@@ -68,7 +69,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_result dt", text: I18n.t("#{scope}.show.correct"), count: 0
     assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.fragile")}/
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
-    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/
     assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']", text: I18n.t("#{scope}.show.back_to_lesson")
     assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']" do
       assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
@@ -494,6 +495,17 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.none")}/
     assert_select "#session_result", text: /Non acquis/, count: 0
     assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
+  end
+
+  test "20 % avec réponses : Bronze sans « Nouvelle médaille ! »" do
+    low = complete(score_percent: 20, first_correct: false)
+    create_badge(student: @student, exercise: @exercise, level: "bronze", session: low)
+    sign_in_as @student
+
+    show low
+
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
+    assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
   end
 
   test "sans faute : Diamant, « Nouveau badge ! », et plus de « Recommencer »" do

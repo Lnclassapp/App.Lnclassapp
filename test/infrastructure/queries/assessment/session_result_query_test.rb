@@ -47,7 +47,8 @@ module Queries
         assert_nil SessionResultQuery.new.call(public_id: "inconnue", reveal: true)
       end
 
-      test "en-tête : exercice, fiche de révision, élève, score, note, maîtrise et palier tirés de Grading" do
+      test "en-tête : exercice, fiche de révision, élève, score, note, maîtrise et palier enregistré" do
+        create_badge(student: @student, exercise: @exercise, level: "bronze", session: @session)
         row = result
 
         assert_equal [ @exercise.public_id, "Méiose" ], [ row.exercise.public_id, row.exercise.title ]
@@ -58,14 +59,22 @@ module Queries
                      [ row.score_percent, row.grade_on_20, row.correct_count, row.question_count, row.mastery, row.badge_level ]
       end
 
-      test "palier du score de la session : 9 bonnes réponses sur 10 donnent Or, jamais Diamant ; sous le seuil, aucun" do
+      test "palier : la médaille enregistrée de l'élève pour l'exercice ; sans médaille, aucun palier" do
         gold = Entities::Assessment::Grading::GOLD_THRESHOLD + 10
-        failed = Entities::Assessment::Grading::PASS_THRESHOLD - 10
         @session.update!(score_percent: gold)
-        assert_equal [ :gold, :acquired, 18 ], [ result.badge_level, result.mastery, result.grade_on_20 ]
+        assert_nil result.badge_level
 
-        @session.update!(score_percent: failed)
-        assert_equal [ nil, :struggling ], [ result.badge_level, result.mastery ]
+        create_badge(student: @student, exercise: @exercise, level: "gold", session: @session)
+        assert_equal [ :gold, :acquired, 18 ], [ result.badge_level, result.mastery, result.grade_on_20 ]
+      end
+
+      test "Bronze sous 48 % : la médaille est lue, sans « nouvelle » ; à 50 %, elle est nouvelle" do
+        @session.update!(score_percent: 20)
+        create_badge(student: @student, exercise: @exercise, level: "bronze", session: @session)
+        assert_equal [ :bronze, false ], [ result.badge_level, result.earned_now ]
+
+        @session.update!(score_percent: 50)
+        assert_equal [ :bronze, true ], [ result.badge_level, result.earned_now ]
       end
 
       test "« Nouveau badge ! » seulement si le badge de l'élève a été gagné par cette session" do

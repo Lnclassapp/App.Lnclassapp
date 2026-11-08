@@ -4,8 +4,8 @@
 module Queries
   module Assessment
     class SessionResultQuery
-      # badge_level : palier du score de cette session (Grading), nil sous le seuil ; earned_now : le badge de l'élève
-      # sur l'exercice vient de cette session. progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
+      # badge_level : médaille enregistrée de l'élève pour l'exercice, nil sans médaille ; earned_now : elle vient de cette session
+      # et le score atteint Bronze (note 10/20, UDR Bronze sans fête sous 48 %). progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
       # gap_outcome : GapOutcome de cette session sur sa fiche (:opened, :lifted, :still_pending) ou nil (UDR-0120).
       # essential : nil pour un exercice de toute la leçon ; course_slug : le cours, toujours là (le retour à la leçon).
       Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :course_slug, :score_percent, :grade_on_20,
@@ -74,8 +74,8 @@ module Queries
         Row.new(session_public_id: public_id, student_id:, student_name: "#{first_name} #{last_name}",
                 exercise: ExerciseRow.new(public_id: exercise_public_id, title:, statement_blocks:),
                 essential: (EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:) if essential_slug), course_slug:,
-                correct_count:, question_count:, **grading(score_percent),
-                earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
+                correct_count:, question_count:, **grading(score_percent, medal_level(student_id, exercise_id)),
+                earned_now: earned_now?(id, score_percent),
                 progress: progress(id, student_id, exercise_id, completed_at), review:,
                 gap_outcome: gap_outcome(id, kind, knowledge_gap_id),
                 appreciation: appreciation(score_percent, review, essential_name), points: points(review))
@@ -92,10 +92,20 @@ module Queries
 
       private
 
-      def grading(score_percent)
+      def grading(score_percent, badge_level)
         grading = Entities::Assessment::Grading
-        { score_percent:, grade_on_20: grading.grade_on_20(score_percent), mastery: grading.mastery_for(score_percent),
-          badge_level: grading.badge_for(score_percent) }
+        { score_percent:, grade_on_20: grading.grade_on_20(score_percent), mastery: grading.mastery_for(score_percent), badge_level: }
+      end
+
+      # La médaille enregistrée de l'élève pour l'exercice (lue à la clôture), nil sans médaille.
+      def medal_level(student_id, exercise_id)
+        Orm::ExerciseBadge.where(student_id:, exercise_id:).pick(:level)&.to_sym
+      end
+
+      # UDR « Bronze sans fête sous 48 % » : décernée par cette session et score au seuil de réussite.
+      def earned_now?(session_id, score_percent)
+        grading = Entities::Assessment::Grading
+        grading.reaches?(score_percent, grading::PASS_THRESHOLD) && Orm::ExerciseBadge.exists?(exercise_session_id: session_id)
       end
 
       # ADR-0115 : « à revoir » = question corrigée automatiquement, fausse ou sans réponse. Elle se lit sur la note affichée.
