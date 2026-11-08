@@ -150,8 +150,8 @@ module UseCases
       end
 
       # ADR-0106 : le palier se lit sur la note affichée (10, 14 et 16/20), le Diamant reste le sans-faute.
-      test "bornes du barème : 47 rien, 48 Bronze, 67 Bronze, 68 Argent, 77 Argent, 78 Or, 99 Or, 100 Diamant" do
-        { 47 => nil, 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 99 => :gold, 100 => :diamond }
+      test "bornes du barème : 47 Bronze (tout exercice traité), 48 Bronze, 67 Bronze, 68 Argent, 77 Argent, 78 Or, 99 Or, 100 Diamant" do
+        { 47 => :bronze, 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 99 => :gold, 100 => :diamond }
           .each do |score, level|
             row = close(correct: score).value
 
@@ -184,11 +184,11 @@ module UseCases
         assert_empty @badges.upserts
       end
 
-      test "sous le seuil, aucun badge n'est écrit" do
+      test "sous 48 %, la médaille Bronze est quand même écrite : tout exercice traité donne au moins Bronze" do
         row = close(correct: 40).value
 
-        assert_equal [ nil, false ], [ row.badge_level, row.earned_now ]
-        assert_empty @badges.upserts
+        assert_equal [ :bronze, true ], [ row.badge_level, row.earned_now ]
+        assert_equal [ :bronze ], @badges.upserts.map(&:level)
       end
 
       test "échec sans lacune en attente : une lacune est ouverte sur la fiche" do
@@ -246,7 +246,7 @@ module UseCases
       test "CA-22 : un exercice de toute la leçon raté ouvre aucune lacune, mais note et badge restent" do
         row = close(correct: 40, essential_id: nil).value
 
-        assert_equal [ 40, nil ], [ row.score_percent, row.badge_level ]
+        assert_equal [ 40, :bronze ], [ row.score_percent, row.badge_level ]
         assert_empty @gaps.calls
         assert_equal [ [ 5, 40, NOW ] ], @sessions.completed
       end

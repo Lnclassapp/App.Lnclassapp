@@ -62,7 +62,8 @@ class Assessment::ExamSheetTest < ApplicationSystemTestCase
     session = create_exercise_session(student: @student, exercise: @exercise)
     visit exercise_session_path(session.public_id)
 
-    assert_selector "#exam-instructions", text: "2 questions · barème : 3 points"
+    assert_selector "#exam-instructions", text: "2 questions"
+    assert_no_selector "#exam-instructions", text: "barème"
   end
 
   test "le résultat : « Juste » et « Faux » en texte, aucune couleur" do

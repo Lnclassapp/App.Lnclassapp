@@ -58,14 +58,14 @@ module Queries
                      [ row.score_percent, row.grade_on_20, row.correct_count, row.question_count, row.mastery, row.badge_level ]
       end
 
-      test "palier du score de la session : 9 bonnes réponses sur 10 donnent Or, jamais Diamant ; sous le seuil, aucun" do
+      test "palier du score de la session : 9 bonnes réponses sur 10 donnent Or, jamais Diamant ; sous le seuil, Bronze" do
         gold = Entities::Assessment::Grading::GOLD_THRESHOLD + 10
         failed = Entities::Assessment::Grading::PASS_THRESHOLD - 10
         @session.update!(score_percent: gold)
         assert_equal [ :gold, :acquired, 18 ], [ result.badge_level, result.mastery, result.grade_on_20 ]
 
         @session.update!(score_percent: failed)
-        assert_equal [ nil, :struggling ], [ result.badge_level, result.mastery ]
+        assert_equal [ :bronze, :struggling ], [ result.badge_level, result.mastery ]
       end
 
       test "« Nouveau badge ! » seulement si le badge de l'élève a été gagné par cette session" do

@@ -50,7 +50,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     @school.update!(sigle: "CSMT")
     exercises = Array.new(2) { create_exercise(essential: create_essential(course: create_course(material: @svt))) }
     assignments = exercises.map { create_assignment(classroom: @classroom, assignable: it, by: @teacher) }
-    # 6 Bronze, 5 Argent, 3 Or, 1 Diamant, 5 Pas encore
+    # 6 Bronze (55 %), 5 Argent, 3 Or, 1 Diamant, 5 Bronze (20 % : tout exercice traité donne Bronze) = 11 Bronze, aucun « Pas encore »
     { 55 => 6, 70 => 5, 85 => 3, 100 => 1, 20 => 5 }.each do |percent, count|
       count.times do
         student = create_student(classroom: @classroom)
@@ -69,11 +69,11 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: including(tl("classroom_card.students", count: 20))
       assert_select "*", text: including(tl("classroom_card.assignments", count: 2))
       assert_select "ul[aria-label] > li", 4
-      assert_select "li", text: /Bronze\s*6/
+      assert_select "li", text: /Bronze\s*11/
       assert_select "li", text: /Argent\s*5/
       assert_select "li", text: /Or\s*3/
       assert_select "li", text: /Diamant\s*1/
-      assert_select "li .sr-only", text: I18n.t("assessment.comprehension.badge_box", count: 6, level: "Bronze")
+      assert_select "li .sr-only", text: I18n.t("assessment.comprehension.badge_box", count: 11, level: "Bronze")
       assert_select "*", text: including("Pas encore"), count: 0
       assert_select "#classroom_code_#{@classroom.public_id}", text: including(Entities::Classroom::JoinCode.display(code))
       assert_select "[data-controller=clipboard][data-clipboard-text-value='#{Entities::Classroom::JoinCode.display(code)}']"

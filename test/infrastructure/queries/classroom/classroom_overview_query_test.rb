@@ -101,7 +101,7 @@ module Queries
         summary = Queries::Assessment::ComprehensionSummaryQuery::Summary
 
         assert_equal assignment.public_id, done.public_id
-        assert_equal summary.new(category: :acquired, badge_counts: { bronze: 1, silver: 1, gold: 1, diamond: 1 }), done.comprehension
+        assert_equal summary.new(category: :acquired, badge_counts: { bronze: 3, silver: 1, gold: 1, diamond: 1 }), done.comprehension
         assert_equal summary.new(category: nil, badge_counts: { bronze: 0, silver: 0, gold: 0, diamond: 0 }), nobody.comprehension
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 6, late: 0, pending: 0), done.counts
         assert_equal [ nil, nil ], overview.assignments.map(&:comprehension)
@@ -438,7 +438,7 @@ module Queries
 
         rows = overview.students.index_by(&:public_id)
 
-        assert_equal [ :diamond, :gold, :silver, :bronze, nil, nil ],
+        assert_equal [ :diamond, :gold, :silver, :bronze, :bronze, nil ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).badge }
         assert_equal [ [ 2, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 0, 2 ] ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
@@ -478,7 +478,7 @@ module Queries
                      [ busy, idle ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.late_count, row.assigned_count ] } }
       end
 
-      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans badge, sans exercice fait ou sous Bronze" do
+      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans exercice fait ; sous 48 %, Bronze" do
         @assignments = []
         gold = graded([ 90 ], first_name: "Or")
         graded([ 60 ], first_name: "Bronze")
@@ -487,7 +487,8 @@ module Queries
 
         assert_equal [ gold.public_id ], overview(badge: "gold").students.map(&:public_id)
         assert_equal [ 1, "gold" ], overview(badge: "gold").then { [ it.students_total, it.badge_filter ] }
-        assert_equal [ low.public_id, nothing.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
+        assert_equal [ nothing.public_id ], overview(badge: "none").students.map(&:public_id)
+        assert_equal 2, overview(badge: "bronze").students.size
         assert_equal [], overview(badge: "diamond").students
         assert_equal 4, overview.students_total
       end

@@ -36,7 +36,8 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.very_good")
     assert_selector "#session_badge[aria-label='#{badge('Diamant')}']", text: I18n.t("#{SCOPE}.badge.new")
-    assert_text "20/20"
+    assert_no_text "20/20"
+    assert_no_selector "#session_next_medal"
     assert_selector "#confetti span", visible: :all
     assert_no_selector "#confetti", visible: :all, wait: 8
     assert_no_button I18n.t("assessment.exercises.show.redo")
@@ -64,12 +65,10 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit exercise_session_result_path(session.public_id)
 
-      within "#session_result dl" do
-        assert_selector "dt", count: 2
-        assert_text "18/20"
-        assert_no_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
-        assert_no_text I18n.t("#{SCOPE}.show.correct")
-      end
+      assert_no_selector "#session_result dl"
+      assert_selector "#session_next_medal", text: "Diamant"
+      assert_no_text "18/20"
+      assert_no_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
       assert_no_text I18n.t("#{SCOPE}.show.review_hint_student")
       assert_single_primary_action
       assert_blocks_above_fold "#main .max-w-2xl > *"
@@ -110,8 +109,8 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     visit exercise_session_result_path(session.public_id)
 
     assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.needs_work")
-    assert_selector "#session_badge[aria-label='#{I18n.t("#{SCOPE}.badge.none")}']"
-    assert_text I18n.t("assessment.badges.mastery.struggling")
+    assert_selector "#session_badge[aria-label='#{badge('Bronze')}']"
+    assert_no_text I18n.t("assessment.badges.mastery.struggling")
     assert_no_selector "#confetti", visible: :all
     assert_button I18n.t("assessment.exercises.show.redo")
   end
@@ -163,7 +162,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
       assert_operator side, :>=, bar, "le haut de la colonne de la note passe sous la barre du haut"
       assert_operator button["top"], :>=, bar, "« Refaire l'exercice » est sorti par le haut"
       assert_operator button["bottom"], :<=, 900, "« Refaire l'exercice » est sorti de l'écran"
-      assert_selector "#session_grade", text: "12/20"
+      assert_selector "#session_badge"
     end
   end
 
@@ -186,7 +185,8 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
 
     assert_selector "#session_badge[aria-label='#{badge('Or')}']"
     assert_no_selector "#session_badge[aria-label='#{badge('Diamant')}']"
-    assert_text "18/20"
+    assert_selector "#session_next_medal", text: "Diamant"
+    assert_no_text "18/20"
     assert_selector "#session_review li[id^=question_review_]", count: 3
 
     click_on I18n.t("assessment.exercises.show.redo")

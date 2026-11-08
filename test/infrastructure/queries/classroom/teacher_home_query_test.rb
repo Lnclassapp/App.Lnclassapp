@@ -51,8 +51,8 @@ module Queries
           create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
                                   classroom_assignment: assignment, score_percent: percent)
         end
-        # diamant : sans faute partout ; or : 90 et 80 ; argent : 70 (la meilleure session de l'exercice compte) ; bronze : 55 ;
-        # pas encore : 30, et un élève sans rien ; un élève parti, une assignation archivée et une session non terminée ne comptent pas.
+        # diamant : sans faute partout ; or : 90 et 80 ; argent : 70 (la meilleure session de l'exercice compte) ; bronze : 55 et 30 (tout exercice traité donne Bronze) ;
+        # pas encore : un élève sans rien ; un élève parti, une assignation archivée et une session non terminée ne comptent pas.
         [ 100, 100 ].each_with_index { |percent, index| score.call(students[0], assignments[index], percent) }
         [ 90, 80 ].each_with_index { |percent, index| score.call(students[1], assignments[index], percent) }
         score.call(students[2], assignments[0], 40)
@@ -64,7 +64,7 @@ module Queries
         score.call(gone, assignments[0], 100)
         score.call(students[6], elsewhere, 100)
 
-        assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
+        assert_equal({ bronze: 2, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
       end
 
       test "badge counts: a student of two classrooms counts once in each, with the assignments of that classroom only" do

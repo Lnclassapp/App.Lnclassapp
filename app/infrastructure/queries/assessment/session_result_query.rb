@@ -15,7 +15,7 @@ module Queries
       # réponses rédigées et du cahier, à comparer au corrigé ; weighted : au moins une question n'est pas à 1 point.
       Points = Data.define(:earned, :graded, :manual, :weighted)
       # trend : Comprehension.trend_for ; les trois notes sur 20, du premier, du meilleur et du dernier score (cette session).
-      Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)
+      Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade, :first_medal, :best_medal, :current_medal)
       # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs.
       ExerciseRow = Data.define(:public_id, :title, :statement_blocks)
       GapFacts = Data.define(:id, :status, :source_session_id, :resolved_by_session_id)
@@ -122,8 +122,10 @@ module Queries
         return if scores.size < 2
 
         grade = Entities::Assessment::Grading.method(:grade_on_20)
+        badge = Entities::Assessment::Grading.method(:badge_for)
         Progress.new(trend: Entities::Assessment::Comprehension.trend_for(scores), first_grade: grade.(scores.first),
-                     best_grade: grade.(scores.max), current_grade: grade.(scores.last))
+                     best_grade: grade.(scores.max), current_grade: grade.(scores.last),
+                     first_medal: badge.(scores.first), best_medal: badge.(scores.max), current_medal: badge.(scores.last))
       end
 
       # Une requête : la lacune que la session a ouverte, sinon levée, sinon ciblée (ADR-0101 §6). Le résultat suit
