@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::TeacherAudienceQuery
 # Rôle : la portée du catalogue d'un enseignant : ses matières et les (niveau, série) de ses classes actives de l'année, dans l'établissement courant
-# ADR  : 0035, 0041, 0094, 0103 · UDR : 0077 §3.2, 0126 §3.1 · une lecture, pas une règle d'accès : un cours hors portée reste ouvert par son adresse
+# ADR  : 0035, 0041, 0094, 0103 · UDR : 0077 §3.2, 0126 §3.1 · le catalogue est une lecture ; la leçon par son adresse suit les matières de l'enseignant (ReadOwnMaterialPolicy, audit B-046)
 module Queries
   module Catalog
     class TeacherAudienceQuery

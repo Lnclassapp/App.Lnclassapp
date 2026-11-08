@@ -8,7 +8,7 @@ class Classroom::AssignmentBatchesControllerTest < ActionDispatch::IntegrationTe
     @thales = create_course(name: "Thalès")
     @pythagore = create_course(name: "Pythagore", level: @thales.level, material: @thales.material)
     @classroom = create_classroom(name: "3e 1", level: @thales.level)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @thales.material, classrooms: [ @classroom ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
                                                                 at: Time.current)
     @exercises = [ @thales, @thales, @pythagore, @pythagore ].each_with_index.map do |course, index|

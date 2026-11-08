@@ -64,8 +64,9 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
 
         assert_text "Fractions"
         assert_selector "h3", text: /février 2026/i
-        assert_selector "li", text: "12/20", count: 4
-        assert_selector "li", text: "16/20", count: 1
+        assert_selector "li", text: "Médaille Bronze", count: 4
+        assert_selector "li", text: "Médaille Or", count: 1
+        assert_no_text "/20"
       end
       assert_no_horizontal_scroll
     end

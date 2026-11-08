@@ -38,11 +38,12 @@ module UseCases
         Row.new(score_percent:, badge_level:, earned_now:)
       end
 
-      # ADR médailles lues à la clôture : le palier du score, ou Bronze sous 48 % si au moins une réponse a été donnée (tentative non
-      # unanswered) ; nil pour une copie sans aucune réponse. Cette médaille est celle que les écrans lisent.
+      # ADR médailles lues à la clôture : le palier du score (Bronze au moins, Grading.badge_for) si au moins une réponse a été donnée
+      # (tentative non unanswered) ; nil pour une copie sans aucune réponse. Cette médaille est celle que les écrans lisent.
       def recorded_level(session, score_percent)
-        Entities::Assessment::Grading.badge_for(score_percent) ||
-          (:bronze if @sessions.attempts(session_id: session.id).any? { !it.unanswered })
+        return unless @sessions.attempts(session_id: session.id).any? { !it.unanswered }
+
+        Entities::Assessment::Grading.badge_for(score_percent)
       end
 
       # [[points, part juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte

@@ -12,7 +12,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     @wide = Array.new(2) { |index| create_lesson_wide_exercise(course: @course, title: "Toute la leçon #{index + 1}") }
     @classroom = create_classroom(level: @course.level, series: @course.series)
     @student = create_student(classroom: @classroom)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @course.material, classrooms: [ @classroom ])
   end
 
   # sujet-avant-de-commencer : la leçon ne porte que des cases ; la feuille à remplir (ou à lire) a sa page.
@@ -316,7 +316,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
   end
 
   test "a lesson without exercise says so, for a teacher too, and offers no sheet nor assignment" do
-    course = create_course
+    course = create_course(material: @course.material)
     sign_in_as @teacher
 
     get course_path(course.slug)

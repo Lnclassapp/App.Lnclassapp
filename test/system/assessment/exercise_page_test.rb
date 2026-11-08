@@ -44,7 +44,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
       assert_text I18n.t("#{scope}.show.questions", count: 2)
     end
     assert_selector "#exercise-sheet", text: "Deux divisions successives."
-    assert_selector "#exercise_best", text: "10/20"
+    assert_selector "#exercise_best", text: /Ta médaille\s*:\s*Bronze/
+    assert_no_selector "#exercise_best", text: "/20"
     assert_selector "#exercise_questions li.question", count: 2
     assert_no_selector "#exercise_questions [data-correct]"
     assert_no_selector "#exercise_questions input"

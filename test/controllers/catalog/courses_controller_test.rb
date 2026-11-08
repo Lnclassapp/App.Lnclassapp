@@ -456,6 +456,39 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # Audit O-C02 : la vue « leçons » de l'ordinateur ne tronque plus en silence à 24 : « Voir plus » charge la suite.
+  test "O-C02: a subject of 30 lessons shows 24 in the desktop block, then the 6 others in the next lessons frame" do
+    maths = create_material(name: "Mathématiques")
+    30.times { |index| create_course(name: format("Algèbre %02d", index), level: @tle, material: maths) }
+    sign_in_as create_student_for(@course)
+    next_path = courses_path(material: "mathematiques", page: 2)
+
+    get courses_path(material: "mathematiques")
+
+    assert_select "#lessons_total", text: including(tl("index.total", count: 30))
+    assert_select "#lessons_list li", 24
+    assert_select "turbo-frame#lessons_page_2[loading=lazy][src='#{next_path}']" do
+      assert_select "a[href='#{next_path}'][data-turbo-frame=lessons_page_2]", text: tl("page.more")
+    end
+
+    get next_path, headers: { "Turbo-Frame" => "lessons_page_2" }
+
+    assert_response :success
+    assert_match(/\A\s*<turbo-frame id="lessons_page_2" target="_top">/, response.body)
+    assert_select "#lessons_list_page_2 li", 6
+    assert_select "turbo-frame#lessons_page_3", 0
+  end
+
+  test "O-C02: the next lessons frame never reads a subject outside the student's own" do
+    sign_in_as create_student_for(@course)
+
+    get courses_path(material: "matiere-inconnue", page: 2), headers: { "Turbo-Frame" => "lessons_page_2" }
+
+    assert_response :success
+    # Le slug inconnu retombe sur la première matière de l'élève ; la page demandée est ramenée à la dernière existante.
+    assert_select "#lessons_list_page_1 li", 1
+  end
+
   # CA-15 (UDR-0085 §3.2) : 24 cartes ; la page suivante reçoit la matière de la dernière carte et ne répète pas son titre.
   test "CA-15: the next page carries after_material and does not repeat the title of the open group" do
     maths = create_material(name: "Mathématiques")
@@ -878,8 +911,45 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
+  # Audit B-046 (décision du porteur) : comme le catalogue, la leçon par son adresse se limite aux matières de l'enseignant.
+  test "B-046: a teacher gets 404 on the lesson, its old sheet address, and its notion of another subject; direction, team and student unchanged" do
+    notion = create_essential(course: @course)
+    other_subject_teacher = create_teacher(material: create_material(name: "Matière étrangère"))
+    sign_in_as other_subject_teacher
+
+    [ course_path(@course.slug), course_fiche_path(@course.slug), course_essential_path(@course.slug, notion.slug) ].each do |path|
+      get path
+      assert_response :not_found, path
+    end
+    sign_out
+
+    # Sans matière dans l'établissement courant : 404 aussi.
+    no_subject = create_teacher(material: @course.material)
+    Orm::TeacherSchoolMaterial.where(teacher_id: no_subject.id).delete_all
+    sign_in_as no_subject
+    [ course_path(@course.slug) ].each do |path|
+      get path
+      assert_response :not_found, path
+    end
+    sign_out
+
+    sign_in_as create_teacher(material: @course.material)
+    get course_path(@course.slug)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_school_admin
+    get course_path(@course.slug)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_team_member
+    get course_path(@course.slug)
+    assert_response :success
+  end
+
   test "the teacher reads the course without any action: no « Assigner à mes classes », no team action (ADR-0072)" do
-    sign_in_as create_teacher
+    sign_in_as create_teacher(material: @course.material)
 
     get course_path(@course.slug)
 

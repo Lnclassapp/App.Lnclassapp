@@ -25,7 +25,9 @@ module Queries
                                    id: Orm::MessageClassroom.where(classroom_id: reader.classroom_id).select(:message_id)))
       end
 
-      # Classe principale active (ADR-0040) et son établissement : une requête, pour l'élève seulement.
+      # Classe principale active (ADR-0040) et son établissement : une requête, pour l'élève seulement. Sans classe active
+      # (départ, classe archivée, année nouvelle), repli sur l'école de sa dernière inscription (audit B-035) : il lit
+      # les annonces de cette école, par rôle, mais plus celles d'une classe.
       def reader_for(actor:)
         return Entities::Communication::Reader.new(user_id: actor.user_id, role: actor.role, school_id: actor.school_id, classroom_id: nil) unless actor.student?
 
@@ -33,8 +35,14 @@ module Queries
                                                        .where(student_id: actor.user_id, primary: true, left_at: nil,
                                                               classrooms: { status: "active" })
                                                        .pick("classrooms.id", "classrooms.school_id")
+        school_id ||= last_enrolled_school_id(actor.user_id)
         Entities::Communication::Reader.new(user_id: actor.user_id, role: :student, school_id:, classroom_id:)
       end
+
+      def last_enrolled_school_id(student_id)
+        Orm::ClassroomStudent.joins(:classroom).where(student_id:).order(joined_at: :desc, id: :desc).pick("classrooms.school_id")
+      end
+      private :last_enrolled_school_id
 
       def readable?(reader:, public_id:, now:) = scope(reader:, now:).exists?(public_id:)
     end

@@ -64,6 +64,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`audit-500-et-messages`](audit-500-et-messages/memo.md) | en cours | bugfix | 2026-11-08 | Audit : 500 évitables et messages trompeurs |
 | [`audit-bugs-p2`](audit-bugs-p2/memo.md) | exécution | bugfix | 2026-11-08 | audit-bugs-p2 — B-003, B-004, B-005 |
 | [`audit-code-mort`](audit-code-mort/memo.md) | livré | refactoring | 2026-11-08 | Audit code mort (M-001 à M-004) |
+| [`audit-decisions-produit`](audit-decisions-produit/memo.md) | en cours | bugfix | 2026-11-08 | Décisions produit de l'audit du 8 novembre 2026 |
 | [`audit-gems-loofah`](audit-gems-loofah/memo.md) | livré | bugfix | 2026-11-02 | Avis de sécurité loofah, nokogiri, rails-html-sanitizer |
 | [`audit-jobs-echecs-muets`](audit-jobs-echecs-muets/memo.md) | livré | bugfix | 2026-11-08 | Jobs : échecs muets (audit 2026-11-08) |
 | [`audit-perf-rapide`](audit-perf-rapide/memo.md) | livré | optimisation | 2026-11-08 | Audit perf rapide |
@@ -193,6 +194,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-tle-d-comme-thales`](lecons-tle-d-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale D préparées comme Thalès |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
+| [`medailles-eleve`](medailles-eleve/memo.md) | en cours | feature | 2026-11-08 | Médailles : écrans de l'élève |
 | [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
 | [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |
 | [`menu-enseignants-masque`](menu-enseignants-masque/memo.md) | livré | bugfix | 2026-10-04 | Menu ⋮ des enseignants masqué par la ligne suivante |

@@ -2,7 +2,7 @@ require "test_helper"
 
 module Dtos
   module Classroom
-    # UDR-0062 §3.4 : les six cases « Lun. » à « Sam. » (valeurs 1 à 6). Tout décocher est permis et vaut « non renseigné ».
+    # UDR-0062 §3.4 : les six cases « Lun. » à « Sam. » (valeurs 1 à 6). Tout décocher est refusé (audit B-012).
     class SessionDaysInputTest < ActiveSupport::TestCase
       test "lit les cases cochées, champ caché vide compris, en jours triés et dédoublonnés" do
         input = SessionDaysInput.new(classroom_public_id: "cls123", weekdays: [ "", "4", "1", "4" ])
@@ -11,12 +11,12 @@ module Dtos
         assert_equal [ 1, 4 ], input.weekdays
       end
 
-      test "aucune case cochée est valide : non renseigné" do
+      test "aucune case cochée est refusée (:blank), comme à l'assignation" do
         [ nil, [], [ "" ] ].each do |weekdays|
           input = SessionDaysInput.new(classroom_public_id: "cls123", weekdays:)
 
-          assert input.valid?, weekdays.inspect
-          assert_equal [], input.weekdays
+          assert_not input.valid?, weekdays.inspect
+          assert input.errors.of_kind?(:weekdays, :blank), weekdays.inspect
         end
       end
 

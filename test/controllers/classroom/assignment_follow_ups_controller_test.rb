@@ -244,7 +244,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     get follow_up_path(@quiz)
 
-    assert_select "#comprehension_next_step", text: /6 élèves n'ont pas encore de médaille\. Reprenez la question 1 en classe, puis relancez-les\./
+    assert_select "#comprehension_next_step", text: /Reprenez la question 1 en classe/
     assert_select "#comprehension_next_step", text: /difficulté|Fragile|Acquis/, count: 0
     assert_select "#comprehension nav, #comprehension_questions", text: /En difficulté|Fragile|Acquis/, count: 0
   end
@@ -328,18 +328,17 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_panel", text: /%|session|baisse|progrès|Pas encore fait/, count: 0
   end
 
-  test "the whole list: best score first, a student without medal has his grade and no trophy, then the ones not done yet, by name" do
+  test "the whole list: best score first, a student under 48 % has the Bronze trophy and his grade, then the ones not done yet, by name" do
     build_quiz
     sign_in_as @teacher
-    Orm::ExerciseBadge.where(student: Orm::User.where(first_name: "Inès", last_name: "Difficile")).delete_all
 
     get follow_up_path(@quiz)
 
     assert_select "#comprehension_panel ul li", 10 do |items|
       assert_equal [ "Marc Baisse", "Ali Progres", "Léa Stable", "Fanta Fragile", "Inès Difficile", "Omar Difficile",
                      "Awa Bamba", "Jean Kouassi", "Zoé Pas-Encore", "Koffi Yao" ], items.map { it.at_css("a").text }
-      assert_match(%r{Inès Difficile\s*Fait le 3 oct\.\s*8/20\s*\z}, items[4].text)
-      assert_select items[4], "svg", 0
+      assert_match(%r{Inès Difficile\s*Fait le 3 oct\.\s*Bronze 8/20\s*\z}, items[4].text)
+      assert_select items[4], "svg.text-warning"
       assert_select items[3], "svg.text-warning"
       items.to_a.last(4).each { assert_match(/Pas encore fait\s*\z/, it.text) } # the quiz has no due date: nobody late
     end
@@ -353,9 +352,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     assert_select "nav a[aria-current=true][href='#{follow_up_path(@quiz)}']", text: /3\s*Bronze/
     assert_select "#comprehension_panel ul li", 3 do |items|
-      assert_equal [ "Fanta Fragile", "Inès Difficile", "Omar Difficile" ], items.map { it.at_css("a").text }
+      assert_equal [ "Fanta Fragile", "Inès Difficile", "Omar Difficile" ], items.map { it.at_css("a[data-turbo-frame=_top]").text }
       assert_select items.first, "span", text: "13/20"
-      assert_select items.last, "span", text: "6/20"
     end
     assert_select "#comprehension_panel", text: /Pas encore fait|En retard/, count: 0
     assert_select "#comprehension_questions ol li:first-child", text: /1\.\s*Question 1\s*1 \/ 1 juste/

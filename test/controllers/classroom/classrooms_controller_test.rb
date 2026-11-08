@@ -607,7 +607,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   # CA-I2 (UDR enseignant §3.2, §3.5) : « Tous · Bronze · Argent · Or · Diamant · Pas encore », paramètre `badge=`.
   def roster_students(selector = "#classroom_roster_list li[id^=student_]") = css_select(selector).map { it["id"] }
 
-  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et son badge « Moyenne 17/20 · Or » ; sous le seuil « Moyenne x/20 · Pas encore » ; sans exercice fait, « Pas encore »" do
+  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et son badge « Moyenne 17/20 · Or » ; sous le seuil, Bronze (tout exercice traité) ; sans exercice fait, « Pas encore »" do
     due = Date.new(2026, 10, 8)
     exercises = Array.new(3) do |index|
       travel_to(Time.zone.local(2026, 10, 5, 9)) do
@@ -627,7 +627,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#progress_#{gold.public_id}", text: "2 faits sur 3 · 1 en retard"
     assert_select "#progress_#{gold.public_id} .text-warning", text: /1 en retard/
     assert_select "#badge_#{gold.public_id}", text: "Moyenne 17/20 · Or"
-    assert_select "#badge_#{below.public_id}.text-mute", text: /\AMoyenne \d+\/20 · Pas encore\z/
+    assert_select "#badge_#{below.public_id}", text: /\AMoyenne \d+\/20 · Bronze\z/
+    assert_select "#badge_#{below.public_id}.text-mute", 0
     # Sans rien de fait, les trois exercices échus sont en retard.
     assert_select "#progress_#{waiting.public_id}", text: "0 fait sur 3 · 3 en retard"
     assert_select "#badge_#{waiting.public_id}.text-mute", text: "Pas encore"
@@ -657,7 +658,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ gold, silver, waiting ].map { "student_#{it.public_id}" }.sort, roster_students.sort
   end
 
-  test "CA-I2 : le filtre « Or » ne montre que les élèves Or ; « Pas encore », ceux sans badge ; un filtre vide le dit" do
+  test "CA-I2 : le filtre « Or » ne montre que les élèves Or ; « Pas encore », ceux sans exercice fait ; un filtre vide le dit" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
     gold = hand_in(assignment, 95).student
     hand_in(assignment, 75)
@@ -674,7 +675,11 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id, badge: "none")
 
-    assert_equal [ low, waiting ].map { "student_#{it.public_id}" }.sort, roster_students.sort
+    assert_equal [ waiting ].map { "student_#{it.public_id}" }, roster_students
+
+    get classroom_path(@classroom.public_id, badge: "bronze")
+
+    assert_includes roster_students, "student_#{low.public_id}"
 
     get classroom_path(@classroom.public_id, badge: "diamond")
 

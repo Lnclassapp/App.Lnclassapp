@@ -3,7 +3,7 @@ require "test_helper"
 # UDR-0145 §3.1 : une `Card` par source de lecture, construite par un seul helper.
 module Assessment
   class ExerciseCardsHelperTest < ActionView::TestCase
-    helper ComponentsHelper, DueDateHelper, BadgesHelper, Catalog::ContentStatusHelper
+    helper ComponentsHelper, DueDateHelper, BadgesHelper, ComprehensionHelper, Catalog::ContentStatusHelper
 
     Treated = Queries::Classroom::StudentClassroomQuery::TreatedRow
     Overview = Queries::Classroom::ClassroomOverviewQuery
@@ -20,25 +20,19 @@ module Assessment
 
     def text(html) = Nokogiri::HTML.fragment(html.to_s).text.squish
 
-    test "traité à 16/20 : note verte, Acquis, Voir ma copie vers le résultat (CA-3)" do
+    test "traité : la médaille de la meilleure copie, sans note ni maîtrise ; Voir ma copie vers le résultat (CA-3)" do
       card = exercise_card_for_treated(treated(80))
 
       assert_nil card.dom_id
       assert_equal exercise_session_result_path("sess9"), card.href
       assert_equal "Voir ma copie", card.action
-      assert_equal "16/20 · Acquis", text(card.status)
-      assert_includes card.status, "text-success"
+      assert_equal "Or Médaille Or", text(card.status)
       assert_equal [ "Maths", "maths", "Évaluation" ], [ card.material_name, card.material_slug, card.type_label ]
     end
 
-    test "traité à 13/20 : note en encre, jamais verte ; en difficulté sous 10/20" do
-      assert_includes exercise_card_for_treated(treated(67)).status, "text-ink"
-      assert_not_includes exercise_card_for_treated(treated(67)).status, "text-success"
-      assert_equal "4/20 · En difficulté", text(exercise_card_for_treated(treated(20)).status)
-    end
-
-    test "traité à 70 % : 14/20 en vert" do
-      assert_includes exercise_card_for_treated(treated(70)).status, "text-success"
+    test "traité sous 10/20 : Bronze, jamais « Pas encore » ni un chiffre" do
+      assert_equal "Bronze Médaille Bronze", text(exercise_card_for_treated(treated(20)).status)
+      assert_equal "Argent Médaille Argent", text(exercise_card_for_treated(treated(70)).status)
     end
 
     test "assignation suivie, en retard : date absolue, N en retard, progression, Voir le suivi (CA-6)" do

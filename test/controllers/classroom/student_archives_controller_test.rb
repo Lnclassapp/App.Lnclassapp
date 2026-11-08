@@ -40,7 +40,8 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_archive_results li", 1 do
       assert_select "p", "Fractions"
       assert_select "p", "Mathématiques · 12 mars"
-      assert_select "[data-grade]", text: /15\/20/
+      assert_select "[data-medal]", text: /Argent/
+      assert_select "[data-medal]", text: %r{/20|%}, count: 0
     end
     assert_select "#student_archive_results a", 0
   end
@@ -88,27 +89,19 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_archive_results li img[alt='']", 3
   end
 
-  # CA-4 and CA-5: green from 14/20 (70 %), at the ink below; never red; no row is a link (UDR-0013).
-  test "a grade is green from 14/20, at the ink below, never red, read out « sur 20 », and no row is a link" do
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 70,
-                            completed_at: Time.zone.local(2026, 3, 14, 9))
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60,
-                            completed_at: Time.zone.local(2026, 3, 13, 9))
-    # 68 % shows « 14/20 » (rounded): the colour follows the grade read, not the raw percentage; 67 % shows 13/20.
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 68,
-                            completed_at: Time.zone.local(2026, 3, 11, 9))
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67,
-                            completed_at: Time.zone.local(2026, 3, 10, 9))
+  # UDR médailles : la ligne montre la médaille de la session (au moins Bronze), jamais une note ; aucune ligne n'est un lien (UDR-0013).
+  test "a row shows its medal, never a grade, never red, and no row is a link" do
+    { 70 => 14, 60 => 13, 68 => 11, 100 => 10, 30 => 9 }.each do |score, day|
+      create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: score,
+                              completed_at: Time.zone.local(2026, 3, day, 9))
+    end
     sign_in_as @student
 
     get student_archive_path
 
-    assert_select "#student_archive_results [data-grade].bg-success-soft", 3
-    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /14\/20/, count: 2
-    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /15\/20/
-    assert_select "#student_archive_results [data-grade].bg-mist", text: /12\/20/
-    assert_select "#student_archive_results [data-grade].bg-mist", text: /13\/20/
-    assert_select "#student_archive_results [data-grade] .sr-only", text: "12 sur 20"
+    medals = css_select("#student_archive_results [data-medal]").map { it.text.squish }
+    assert_equal({ "Argent Médaille Argent" => 3, "Diamant Médaille Diamant" => 1, "Bronze Médaille Bronze" => 2 }, medals.tally)
+    assert_select "#student_archive_results", text: %r{\d+\s*/\s*20|%|sur 20}, count: 0
     assert_select "#student_archive_results [class*=error], #student_archive_results [class*=danger]", 0
     assert_select "#student_archive_results a", 0
   end

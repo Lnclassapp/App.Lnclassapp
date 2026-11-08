@@ -5,7 +5,9 @@ module Entities
     class GradingTest < ActiveSupport::TestCase
       # ADR-0106 : la note affichée sur 20 décide. Bronze dès 10/20 (48 %), Argent dès 14/20 (68 %), Or dès 16/20 (78 %).
       test "badge aux bornes des paliers, lus sur la note sur 20" do
-        assert_nil Grading.badge_for(47)
+        # Décision du porteur (2026-11-08) : tout exercice traité donne au moins Bronze, même à 0 %.
+        assert_equal :bronze, Grading.badge_for(47)
+        assert_equal :bronze, Grading.badge_for(0)
         { 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 97 => :gold, 99 => :gold,
           100 => :diamond }.each { |score, badge| assert_equal badge, Grading.badge_for(score), score.to_s }
       end
@@ -48,18 +50,19 @@ module Entities
         end
       end
 
-      test "class_badge_for: nil, « Pas encore », sans exercice fait ou sous la moyenne de Bronze" do
+      test "class_badge_for: nil (« Pas encore ») sans exercice fait seulement ; sous Bronze, Bronze" do
         assert_nil Grading.class_badge_for(scores: [], all_perfect: false)
         assert_nil Grading.class_badge_for(scores: [], all_perfect: true)
-        assert_nil Grading.class_badge_for(scores: [ 47 ], all_perfect: false)
-        assert_nil Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 47 ], all_perfect: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
       end
 
-      test "class_badge_for: une médaille détenue plancher à Bronze, rien ne change au-dessus ni sans médaille" do
+      test "class_badge_for: une médaille détenue donne Bronze même sans note ; avec une note, Bronze au moins avec ou sans médaille" do
         assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: true)
         assert_equal :bronze, Grading.class_badge_for(scores: [ 0, 40 ], all_perfect: false, has_medal: true)
         assert_equal :bronze, Grading.class_badge_for(scores: [], all_perfect: false, has_medal: true)
-        assert_nil Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [], all_perfect: false, has_medal: false)
         assert_equal :silver, Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: true)
         assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
       end

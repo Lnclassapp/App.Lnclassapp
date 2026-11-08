@@ -438,13 +438,13 @@ module Queries
 
         rows = overview.students.index_by(&:public_id)
 
-        assert_equal [ :diamond, :gold, :silver, :bronze, nil, nil ],
+        assert_equal [ :diamond, :gold, :silver, :bronze, :bronze, nil ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).badge }
         assert_equal [ [ 2, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 0, 2 ] ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
       end
 
-      test "médailles : 30 % de moyenne avec une médaille enregistrée est Bronze, sans médaille « Pas encore »" do
+      test "médailles : 30 % de moyenne est Bronze avec ou sans médaille enregistrée ; « Pas encore » seulement sans note" do
         @assignments = []
         medal = graded([ 30 ], first_name: "Médaille")
         none = graded([ 30 ], first_name: "Sans")
@@ -453,8 +453,8 @@ module Queries
 
         rows = overview.students.index_by(&:public_id)
 
-        assert_equal [ :bronze, nil ], [ rows.fetch(medal.public_id).badge, rows.fetch(none.public_id).badge ]
-        assert_equal [ medal.public_id ], overview(badge: "bronze").students.map(&:public_id)
+        assert_equal [ :bronze, :bronze ], [ rows.fetch(medal.public_id).badge, rows.fetch(none.public_id).badge ]
+        assert_equal [ medal.public_id, none.public_id ].sort, overview(badge: "bronze").students.map(&:public_id).sort
       end
 
       test "CA-I2 : un sans-faute partout est Diamant ; un seul exercice sans faute sur deux, jamais" do
@@ -491,7 +491,7 @@ module Queries
                      [ busy, idle ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.late_count, row.assigned_count ] } }
       end
 
-      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans badge, sans exercice fait ou sous Bronze" do
+      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans exercice fait ; sous 48 %, Bronze" do
         @assignments = []
         gold = graded([ 90 ], first_name: "Or")
         graded([ 60 ], first_name: "Bronze")
@@ -500,7 +500,8 @@ module Queries
 
         assert_equal [ gold.public_id ], overview(badge: "gold").students.map(&:public_id)
         assert_equal [ 1, "gold" ], overview(badge: "gold").then { [ it.students_total, it.badge_filter ] }
-        assert_equal [ low.public_id, nothing.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
+        assert_equal [ nothing.public_id ], overview(badge: "none").students.map(&:public_id)
+        assert_equal 2, overview(badge: "bronze").students.size
         assert_equal [], overview(badge: "diamond").students
         assert_equal 4, overview.students_total
       end

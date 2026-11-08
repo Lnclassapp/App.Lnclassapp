@@ -432,7 +432,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
 
     assert_select "#student_archive_results li", 1 do
       assert_select "p", "Fractions"
-      assert_select "[data-grade]", text: %r{15/20}
+      assert_select "[data-medal]", text: /Argent/
     end
     rows = css_select("#student_archive_classrooms li")
     assert_select rows.first, "p", "2nde C"

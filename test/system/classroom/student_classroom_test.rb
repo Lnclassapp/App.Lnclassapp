@@ -57,7 +57,8 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       within("#student_classroom_courses") { assert_link "Génétique et évolution", href: course_path(@course.slug) }
       within "#student_classroom_treated" do
         assert_link "Méiose, le bilan"
-        assert_text "16/20"
+        assert_text "Médaille Or"
+        assert_no_text "16/20"
       end
       assert_single_primary_action
       assert_list_capped "#student_classroom_treated ul"

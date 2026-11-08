@@ -31,6 +31,7 @@ fr:
             - "Garde le cap, l'effort finit toujours par payer ! ⚓"
         student: "Session de %{name}"
         exercise: "Exercice : %{title}"
+        next_medal: "Prochaine médaille : %{medal}"
         grade: "Note"
         score: "Score"
         score_value: "%{score} %"
@@ -91,9 +92,9 @@ fr:
         blank_points: "%{earned} / %{total} pt"
         hint_opened: "Indice ouvert"
       progress:
-        progress: "Tu progresses : %{first}/20 à ta première session, %{current}/20 aujourd'hui."
-        stable: "Tu confirmes ta maîtrise : %{current}/20."
-        decline: "Ton meilleur résultat reste %{best}/20. Relis la correction, tu peux le retrouver."
+        progress: "Tu passes de %{first} à %{current}. Bravo !"
+        stable: "Tu confirmes ta médaille %{current}."
+        decline: "Ta meilleure médaille reste %{best}. Relis la correction, tu peux la retrouver."
       badge:
         label: "Médaille %{level}"
         new: "Nouvelle médaille !"
@@ -104,10 +105,10 @@ fr:
       gap_outcome:
         opened:
           message: "Cette notion passe à revoir."
-          hint: "Refais l'exercice de « %{essential} » et vise au moins %{grade}/20."
+          hint: "Refais l'exercice de « %{essential} » et vise l'Or."
         still_pending:
           message: "Encore à revoir."
-          hint: "Pour lever « %{essential} », vise au moins %{grade}/20."
+          hint: "Pour lever « %{essential} », vise l'Or."
         lifted:
           message: "Notion levée !"
           hint: "« %{essential} » n'est plus à revoir."

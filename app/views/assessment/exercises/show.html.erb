@@ -117,8 +117,8 @@
           <% end %>
         <% end %>
         <% if @progress.best_score_percent %>
-          <p id="exercise_best" class="text-center text-sm <%= grading.reaches?(@progress.best_score_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-mute" %>">
-            <%= t(".best", grade: grading.grade_on_20(@progress.best_score_percent)) %>
+          <p id="exercise_best" class="text-center text-sm text-mute">
+            <%= t(".best") %> <%= medal_tag(@progress.best_score_percent, size: "size-4") %>
           </p>
         <% end %>
       <% end %>

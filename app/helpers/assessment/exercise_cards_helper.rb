@@ -12,8 +12,7 @@ module Assessment
 
     # « Ma classe », traités : StudentClassroomQuery::TreatedRow. La couleur de la note ne porte jamais seule le sens : le texte reste.
     def exercise_card_for_treated(row)
-      status = safe_join([ grade_tag(row.best_score_percent),
-                           tag.span(card_t(:separator) + mastery_label(row.best_score_percent), class: "text-sm text-mute") ])
+      status = medal_tag(row.best_score_percent)
       Card.new(dom_id: nil, href: exercise_session_result_path(row.last_session_public_id), title: row.title,
                material_name: row.material_name, material_slug: row.material_slug, type_label: exercise_type_label(row.exercise_type),
                meta: nil, status:, action: card_t(:view_copy), progress: nil)
@@ -38,8 +37,6 @@ module Assessment
 
       t("assessment.exercises.show.exercise_types.#{type}")
     end
-
-    def grade_tag(score) = tag.span(grade_label(score), class: class_names("font-display font-medium tabular-nums", grade_class(score)))
 
     def assignment_status(row)
       pending = row.counts&.pending.to_i

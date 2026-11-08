@@ -65,7 +65,7 @@ module Queries
         assert_equal [ 16, :gold ], file.to_h.values_at(:class_grade, :class_badge)
       end
 
-      test "the class badge is Diamond when every exercise done is a perfect score, Bronze at 55 %, none under Bronze" do
+      test "the class badge is Diamond when every exercise done is a perfect score, Bronze at 55 %, still Bronze at 30 %" do
         one = assign("Un")
         hand_in(one, 100, at: Time.zone.local(2026, 10, 7, 9))
         assert_equal [ 20, :diamond ], file.to_h.values_at(:class_grade, :class_badge)
@@ -76,13 +76,13 @@ module Queries
 
         weak = create_student(classroom: @classroom, first_name: "Yao")
         hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9), student: weak)
-        assert_equal [ 6, nil ], file(weak).to_h.values_at(:class_grade, :class_badge)
+        assert_equal [ 6, :bronze ], file(weak).to_h.values_at(:class_grade, :class_badge)
       end
 
-      test "a Bronze medal on an assigned exercise makes a 30 % average Bronze; without one, none" do
+      test "a Bronze medal on an assigned exercise or none leaves a 30 % average Bronze (no grade, no class medal)" do
         one = assign("Un")
         hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9))
-        assert_equal [ 6, nil ], file.to_h.values_at(:class_grade, :class_badge)
+        assert_equal [ 6, :bronze ], file.to_h.values_at(:class_grade, :class_badge)
 
         create_badge(student: @awa, exercise: Orm::Exercise.find(one.assignable_id), level: "bronze")
         assert_equal [ 6, :bronze ], file.to_h.values_at(:class_grade, :class_badge)

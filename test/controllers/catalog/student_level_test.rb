@@ -57,7 +57,7 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
 
   # UDR-0077 §3.2 : le catalogue de l'enseignant se réduit à sa matière et à ses niveaux ; la page d'un cours, elle,
   # reste ouverte à tout niveau (une lecture du catalogue, pas une règle d'accès).
-  test "a student without a class of the year is told to join one; a teacher still opens every level's course" do
+  test "a student without a class of the year is told to join one; a teacher still opens every level's course of their subject" do
     sign_in_as create_student
 
     get courses_path
@@ -66,6 +66,7 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     sign_out
 
     sign_in_as create_teacher(material: @own.material, classrooms: [ create_classroom(level: @own.level, series: @own.series) ])
+    @other.update!(material: @own.material)
     get course_path(@other.slug)
     assert_response :success
     get courses_path
