@@ -42,11 +42,15 @@ module Repositories
 
       # ADR-0109 §4.3 : un seul UPDATE pose le jeton (tiré par la base) et le code (tiré par le domaine, libre au moment du tirage ;
       # l'index unique tranche une course). Sous le verrou de la classe que l'appelant a pris.
+      # Une collision du code (anniversaires) est retentée avec un nouveau tirage, comme à la création (B-020).
       def regenerate_link_and_code(id:)
         now = Time.current
-        code = Entities::Classroom::JoinCode.generate_free { Orm::Classroom.exists?(join_code: it) }
-        Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, link_token_rotated_at = ?, join_code = ?, updated_at = ?",
-                                               now, code, now ])
+        code = nil
+        retrying_join_code_collision do
+          code = Entities::Classroom::JoinCode.generate_free { Orm::Classroom.exists?(join_code: it) }
+          Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, link_token_rotated_at = ?, join_code = ?, updated_at = ?",
+                                                 now, code, now ])
+        end
         Ports::Classroom::ClassroomRepositoryPort::LinkAndCode.new(link_token: Orm::Classroom.where(id:).pick(:link_token), join_code: code)
       end
 

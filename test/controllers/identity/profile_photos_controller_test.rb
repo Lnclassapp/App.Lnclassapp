@@ -188,4 +188,13 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     get school_admin_classrooms_path
     assert_select "header img[src^='#{account_photo_path(admin.public_id)}?v=']"
   end
+
+  # B-008 (audit 2026-11-08): a forged `profile_photo=text` is a missing file (422), not a 500.
+  test "a photo parameter that is a string is refused in 422, not a server error" do
+    sign_in_as @student
+
+    patch profile_photo_path, params: { profile_photo: "forged" }, headers: TURBO_STREAM
+
+    assert_response :unprocessable_entity
+  end
 end

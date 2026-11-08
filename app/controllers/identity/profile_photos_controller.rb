@@ -37,7 +37,7 @@ module Identity
 
     # Seul un vrai fichier téléversé compte ; une chaîne dans le paramètre vaut une absence de fichier.
     def uploaded_photo
-      photo = params.dig(:profile_photo, :photo)
+      photo = nested_param(:profile_photo, :photo)
       photo if photo.is_a?(ActionDispatch::Http::UploadedFile)
     end
 

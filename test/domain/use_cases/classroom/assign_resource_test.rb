@@ -62,15 +62,19 @@ module UseCases
         include Ports::Classroom::SessionDaysRepositoryPort
 
         attr_reader :writes
+        attr_writer :accepts
 
         def initialize(stored = {})
           @stored = stored
+          @accepts = true
           @writes = []
         end
 
         def for(teacher_id:, classroom_id:) = Entities::Classroom::SessionDays.new(weekdays: @stored.fetch([ teacher_id, classroom_id ], []))
 
         def replace(teacher_id:, classroom_id:, weekdays:, at:)
+          return false unless @accepts
+
           @writes << [ teacher_id, classroom_id, weekdays, at ]
           @stored[[ teacher_id, classroom_id ]] = weekdays
           true
@@ -144,6 +148,16 @@ module UseCases
 
         assert_equal :forbidden, result.code
         assert_empty @session_days.writes
+        assert_empty @assignments.rows
+      end
+
+      # B-021 (audit 2026-11-08): the teacher stopped teaching the class since the policy read it — :forbidden, nothing assigned.
+      test "B-021: des jours que la base refuse (enseignement retiré entre-temps) : :forbidden, rien n'est assigné" do
+        @session_days.accepts = false
+
+        result = assign("ex-meiose", at: MONDAY, weekdays: %w[1 4])
+
+        assert_equal :forbidden, result.code
         assert_empty @assignments.rows
       end
 

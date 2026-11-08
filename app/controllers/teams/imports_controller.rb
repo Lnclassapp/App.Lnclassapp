@@ -45,14 +45,17 @@ module Teams
     private
 
     def require_known_kind
-      render_not_found unless Entities::Catalog::ImportKind.valid?(params[:kind] || params.dig(:import, :kind))
+      render_not_found unless Entities::Catalog::ImportKind.valid?(kind_param)
     end
+
+    # Le type vient de l'adresse (new) ou du formulaire (create) ; une valeur forgée qui n'est pas un texte est inconnue.
+    def kind_param = params[:kind].presence || nested_param(:import, :kind)
 
     # import[files][] : 1 à N fichiers ; tout ce qui n'est pas un fichier téléversé est ignoré.
     def form_input
-      uploads = Array.wrap(params.dig(:import, :files)).grep(ActionDispatch::Http::UploadedFile)
+      uploads = Array.wrap(nested_param(:import, :files)).grep(ActionDispatch::Http::UploadedFile)
       Dtos::Catalog::ImportUploadInput.new(
-        kind: params.dig(:import, :kind),
+        kind: kind_param,
         files: uploads.map { Dtos::Catalog::ImportUploadInput::Upload.new(io: it, filename: it.original_filename) }
       )
     end
