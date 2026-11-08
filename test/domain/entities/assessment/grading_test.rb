@@ -55,6 +55,15 @@ module Entities
         assert_nil Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
       end
 
+      test "class_badge_for: une médaille détenue plancher à Bronze, rien ne change au-dessus ni sans médaille" do
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: true)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 0, 40 ], all_perfect: false, has_medal: true)
+        assert_equal :bronze, Grading.class_badge_for(scores: [], all_perfect: false, has_medal: true)
+        assert_nil Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: false)
+        assert_equal :silver, Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: true)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
+      end
+
       test "le score est une division entière, arrondie vers le bas" do
         assert_equal 66, Grading.score_percent(correct: 2, total: 3)
         assert_equal 0, Grading.score_percent(correct: 0, total: 0)
