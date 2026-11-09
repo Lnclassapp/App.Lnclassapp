@@ -1,4 +1,4 @@
-# Barème des classes générées, écran de l'équipe (chantier bareme-classes) — ADR-0058, UDR-0045
+# Plan des classes générées, écran de l'équipe (chantier bareme-classes) — ADR-0058, UDR-0045
 fr:
   activemodel:
     attributes:
@@ -8,13 +8,13 @@ fr:
   teams:
     classroom_plans:
       show:
-        page_title: "Barème des classes"
-        title: "Barème des classes"
+        page_title: "Plan des classes"
+        title: "Plan des classes"
         back: "Référentiel"
         subtitle: "Le nombre de classes créées pour chaque établissement importé, ou doté par la génération des classes manquantes, selon son type."
-        notice: "Le barème s'applique aux prochains imports d'établissements et aux prochaines générations de classes. Les classes déjà créées ne changent pas. 0 : aucune classe pour cette ligne."
+        notice: "Le plan s'applique aux prochains imports d'établissements et aux prochaines générations de classes. Les classes déjà créées ne changent pas. 0 : aucune classe pour cette ligne."
         empty_title: "Aucun niveau pour l'instant"
-        empty_description: "Créez d'abord les niveaux et les séries : le barème en découle, une ligne par niveau du premier cycle et par couple niveau × série du second."
+        empty_description: "Créez d'abord les niveaux et les séries : le plan en découle, une ligne par niveau du premier cycle et par couple niveau × série du second."
         empty_action: "Ouvrir les niveaux"
         columns:
           level: "Niveau"
@@ -44,10 +44,10 @@ fr:
         actions: "Actions pour %{name}"
         edit: "Modifier"
       edit:
-        title: "Barème de « %{name} »"
+        title: "Plan de « %{name} »"
         hint: "De 0 à 30. 0 : aucune classe."
         untouched: "S'applique aux prochains imports et générations. Les classes déjà créées ne changent pas."
         submit: "Enregistrer"
         cancel: "Annuler"
       update:
-        updated: "Barème de « %{name} » enregistré."
+        updated: "Plan de « %{name} » enregistré."

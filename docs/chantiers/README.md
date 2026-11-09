@@ -197,6 +197,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`medailles-direction`](medailles-direction/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de la direction |
 | [`medailles-eleve`](medailles-eleve/memo.md) | en cours | feature | 2026-11-08 | Médailles : écrans de l'élève |
 | [`medailles-enseignant`](medailles-enseignant/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'enseignant |
+| [`medailles-equipe`](medailles-equipe/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'équipe |
 | [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
 | [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |
 | [`menu-enseignants-masque`](menu-enseignants-masque/memo.md) | livré | bugfix | 2026-10-04 | Menu ⋮ des enseignants masqué par la ligne suivante |
