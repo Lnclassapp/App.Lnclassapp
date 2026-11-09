@@ -39,6 +39,35 @@ module Queries
                           .group("exercise_sessions.classroom_assignment_id", "exercise_badges.level").count
                           .each_with_object({}) { |((id, level), count), by_id| (by_id[id] ||= {})[level.to_sym] = count }
       end
+
+      # Lecture de la direction (UDR médailles §2.4) : des médailles gagnées par une session d'une assignation de la classe, par
+      # exercice, jamais une moyenne ni un classement. Les élèves présents seuls (adhésion non quittée, compte non anonymisé,
+      # ADR-0065 §4). Une requête, quel que soit le nombre de classes. → { classroom_id => { student_id => { :bronze => 2 … } } }
+      def self.by_classroom(classroom_ids:)
+        return {} if classroom_ids.empty?
+
+        present = "JOIN classroom_students ON classroom_students.classroom_id = classroom_assignments.classroom_id " \
+                  "AND classroom_students.student_id = exercise_badges.student_id AND classroom_students.left_at IS NULL " \
+                  "JOIN users ON users.id = classroom_students.student_id AND users.anonymized_at IS NULL"
+        Orm::ExerciseBadge.joins("JOIN exercise_sessions ON exercise_sessions.id = exercise_badges.exercise_session_id " \
+                                 "JOIN classroom_assignments ON classroom_assignments.id = exercise_sessions.classroom_assignment_id")
+                          .joins(present).where(classroom_assignments: { classroom_id: classroom_ids })
+                          .group("classroom_assignments.classroom_id", "exercise_badges.student_id", "exercise_badges.level").count
+                          .each_with_object({}) { |((classroom_id, student_id, level), n), by_id| ((by_id[classroom_id] ||= {})[student_id] ||= {})[level.to_sym] = n }
+      end
+
+      # Les médailles gagnées dans les classes d'un établissement (anciens élèves : plus présents nulle part, d'où aucun filtre de
+      # présence). → { student_id => { :bronze => 2 … } }
+      def self.by_student_in_school(school_id:, student_ids:)
+        return {} if student_ids.empty?
+
+        Orm::ExerciseBadge.joins("JOIN exercise_sessions ON exercise_sessions.id = exercise_badges.exercise_session_id " \
+                                 "JOIN classroom_assignments ON classroom_assignments.id = exercise_sessions.classroom_assignment_id " \
+                                 "JOIN classrooms ON classrooms.id = classroom_assignments.classroom_id")
+                          .where(classrooms: { school_id: }, exercise_badges: { student_id: student_ids })
+                          .group("exercise_badges.student_id", "exercise_badges.level").count
+                          .each_with_object({}) { |((student_id, level), n), by_id| (by_id[student_id] ||= {})[level.to_sym] = n }
+      end
     end
   end
 end

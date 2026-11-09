@@ -4,15 +4,15 @@
 module Queries
   module School
     class StudentWorkQuery
-      MIN_STUDENTS_FOR_AVERAGE = 5
-      # submission_rate, average_percent : nil → « — » ; submitted_count : devoirs rendus (élève, devoir) distincts, la
+      # submission_rate : nil → « — » ; medals : { :bronze => n … } des médailles gagnées par exercice (UDR médailles §2.4), vide
+      # sans médaille, jamais une moyenne ; submitted_count : devoirs rendus (élève, devoir) distincts, la
       # somme qui fait le taux d'un niveau (UDR-0074 §3.2). teachers_count : enseignants rattachés à la classe (la confirmation
       # d'archivage, UDR-0083) ; archived_at : nil pour une classe active, la date pour une archivée de la page d'un niveau.
       ClassroomRow = Data.define(:public_id, :name, :level_name, :level_slug, :students_count, :assignments_count,
-                                 :submitted_count, :submission_rate, :average_percent, :teachers_count, :archived_at) do
+                                 :submitted_count, :submission_rate, :medals, :teachers_count, :archived_at) do
         def archived? = !archived_at.nil?
       end
-      StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
+      StudentRow = Data.define(:display_name, :submitted_count, :medals)
       # students_count : élèves présents distincts de l'établissement ; un élève de deux classes compte une fois (UDR-0074).
       Overview = Data.define(:school_name, :school_year, :students_count, :classrooms)
       # Une ligne de la page d'une classe : le travail de l'élève (work), et ce qui sert à la gérer (UDR-0081 §3.7) : son
@@ -49,23 +49,19 @@ module Queries
       HANDED_IN = "JOIN exercise_sessions ON exercise_sessions.classroom_assignment_id = classroom_assignments.id " \
                   "AND exercise_sessions.status = 'completed'"
       HANDED_IN_COLUMNS = [ "classroom_assignments.classroom_id", "exercise_sessions.student_id",
-                            "COUNT(DISTINCT exercise_sessions.classroom_assignment_id) AS submitted",
-                            "SUM(exercise_sessions.score_percent) AS score_sum", "COUNT(*) AS sessions" ].freeze
-      # Par clé (classe ou élève) : devoirs rendus distincts, élèves ayant rendu, somme et nombre des scores. Une seule
-      # adhésion par (classe, élève) (index unique) et une ligne handed par adhésion : COUNT(*) compte les élèves ayant rendu.
-      TOTALS = [ "SUM(handed.submitted)::bigint", "COUNT(*)", "SUM(handed.score_sum)::bigint", "SUM(handed.sessions)::bigint" ].freeze
-      Totals = Data.define(:submitted, :students, :score_sum, :sessions) do
-        def self.none = new(submitted: 0, students: 0, score_sum: 0, sessions: 0)
-
-        def average
-          (score_sum.to_f / sessions).round unless sessions.zero?
-        end
+                            "COUNT(DISTINCT exercise_sessions.classroom_assignment_id) AS submitted" ].freeze
+      # Par clé (classe ou élève) : devoirs rendus distincts et élèves ayant rendu. Une seule adhésion par (classe, élève)
+      # (index unique) et une ligne handed par adhésion : COUNT(*) compte les élèves ayant rendu.
+      TOTALS = [ "SUM(handed.submitted)::bigint", "COUNT(*)" ].freeze
+      Totals = Data.define(:submitted, :students) do
+        def self.none = new(submitted: 0, students: 0)
       end
 
       # → Overview
-      def classrooms(school_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
+      # medals: false : l'accueil ne lit que les rendus (une requête de moins, budget de l'ADR-0067) ; les médailles restent vides.
+      def classrooms(school_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current), medals: true)
         rows = active_classrooms(school_id, school_year).order("levels.position", "classrooms.name").pluck(*CLASSROOM_COLUMNS)
-        students_count, _, classrooms = classroom_rows(rows)
+        students_count, _, classrooms = classroom_rows(rows, medals:)
 
         Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), school_year:, students_count:, classrooms:)
       end
@@ -101,24 +97,27 @@ module Queries
                                    .order(newcomers_first, :last_name, :first_name, :id).pluck(*MEMBER_COLUMNS)
         assignments_count = Orm::ClassroomAssignment.where(classroom_id: row.first).count
         totals = totals_by("classroom_students.student_id", row.first)
+        medals = Queries::Assessment::Medals.by_classroom(classroom_ids: [ row.first ]).fetch(row.first, {})
 
         teachers = teacher_counts([ row.first ])
-        Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }, teachers),
-                   link: Link.new(public_id: row[1], name: row[2], link_token: row[-2], join_code: row[-1]), members: members(students, totals))
+        Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }, teachers,
+                                                  medals: { row.first => sum_medals(medals.values) }),
+                   link: Link.new(public_id: row[1], name: row[2], link_token: row[-2], join_code: row[-1]), members: members(students, totals, medals))
       end
 
       private
 
       # Les lignes de classes lues, avec leurs effectifs, devoirs et totaux, et le nombre d'élèves distincts de ces classes :
       # quatre requêtes, quel que soit le nombre. → [élèves distincts, enseignants distincts, [ClassroomRow]]
-      def classroom_rows(rows)
+      def classroom_rows(rows, medals: true)
         ids = rows.map(&:first)
         students = present_counts(ids)
         assignments = Orm::ClassroomAssignment.where(classroom_id: ids).group(:classroom_id).count
         totals = totals_by("classroom_students.classroom_id", ids)
         teachers = teacher_counts(ids)
+        medals = medals ? Queries::Assessment::Medals.by_classroom(classroom_ids: ids).transform_values { sum_medals(it.values) } : nil
         [ students.fetch(nil, 0), teachers.fetch(nil, 0),
-          rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals, teachers) } ]
+          rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals, teachers, medals:) } ]
       end
 
       # Les classes archivées affichées : leur seul effectif et leurs enseignants, pour la confirmation de restauration et la carte
@@ -168,27 +167,35 @@ module Queries
 
       def sum(totals) = Totals.new(**Totals.members.to_h { |member| [ member, totals.sum(&member) ] })
 
-      def classroom_row(row, students_count, assignments_count, totals, teachers, archived_at: nil)
+      # Les médailles de plusieurs élèves, additionnées par palier : { :bronze => 8, :silver => 6 }, dans l'ordre des paliers.
+      def sum_medals(counts)
+        Entities::Assessment::Grading::BADGE_ORDER.filter_map do |level|
+          total = counts.sum { it.fetch(level, 0) }
+          [ level, total ] if total.positive?
+        end.to_h
+      end
+
+      def classroom_row(row, students_count, assignments_count, totals, teachers, archived_at: nil, medals: nil)
         id, public_id, name, level_name, level_slug = row
         total = totals.fetch(id, Totals.none)
         given = students_count * assignments_count
         ClassroomRow.new(public_id:, name:, level_name:, level_slug:, students_count:, assignments_count:, submitted_count: total.submitted,
                          submission_rate: ((total.submitted * 100.0 / given).round unless given.zero?),
-                         average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE),
+                         medals: medals&.fetch(id, {}),
                          teachers_count: teachers.fetch(id, 0), archived_at:)
       end
 
       # ADR-0085 §4.4 : « nouveau » pendant ClassroomOverviewQuery::NEW_FOR, la règle de la page de l'enseignant.
-      def members(students, totals)
+      def members(students, totals, medals)
         since = Time.current - Queries::Classroom::ClassroomOverviewQuery::NEW_FOR
         students.map do |id, public_id, first_name, last_name, joined_via, joined_at|
           Member.new(public_id:, joined_via:, newcomer: joined_at > since,
-                     work: student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none)))
+                     work: student_row("#{first_name} #{last_name}", totals.fetch(id, Totals.none), sum_medals([ medals.fetch(id, {}) ])))
         end
       end
 
-      def student_row(display_name, total)
-        StudentRow.new(display_name:, submitted_count: total.submitted, average_percent: total.average)
+      def student_row(display_name, total, medals)
+        StudentRow.new(display_name:, submitted_count: total.submitted, medals:)
       end
     end
   end

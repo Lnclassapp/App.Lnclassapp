@@ -12,7 +12,8 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
     @awa = create_student(classroom: @last_year, first_name: "Awa", last_name: "Koné")
     exercise = create_exercise
     assignment = create_assignment(classroom: @last_year, assignable: exercise, by: create_teacher(school: @school))
-    create_exercise_session(student: @awa, exercise:, status: "completed", score_percent: 72, classroom_assignment_id: assignment.id)
+    session = create_exercise_session(student: @awa, exercise:, status: "completed", score_percent: 72, classroom_assignment_id: assignment.id)
+    create_badge(student: @awa, exercise:, level: "silver", session:)
   end
 
   test "the direction reads its former students, their last classroom and the results obtained in its school" do
@@ -32,8 +33,9 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
       assert_select "td", text: /3ème 4/
       assert_select "td span", "3ème · 2025-2026"
       assert_select "td", "1"
-      assert_select "td", "72 %"
+      assert_select "td", text: /1 Argent/
     end
+    assert_no_match(/72|%|moyenne|score/i, css_select("#departed_students").text)
     assert_select "main", text: /Ailleurs/, count: 0
     assert_no_match @awa.public_id, response.body
     assert_no_match @awa.contact, response.body
@@ -64,7 +66,7 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
   end
 
   # Characterization (chantier ecrans-direction-lents): the page keeps its rows, their order, its count and its « — ».
-  test "the most recent departures first, then by name; the count; a student without results reads « — »" do
+  test "the most recent departures first, then by name; the count; a student without results reads « Pas encore »" do
     older = create_classroom(school: @school, name: "4ème 1", level: create_level(name: "4ème"), status: "archived", school_year: "2024-2025")
     create_student(classroom: older, first_name: "Aya", last_name: "Bamba")
     create_student(classroom: @last_year, first_name: "Zoé", last_name: "Yao")
@@ -77,7 +79,7 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
     assert_select "tr#departed_student_2" do
       assert_select "td span", "4ème · 2024-2025"
       assert_select "td", "0"
-      assert_select "td span[aria-hidden=true]", "—"
+      assert_select "td", "Pas encore"
     end
   end
 

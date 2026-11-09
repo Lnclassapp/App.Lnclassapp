@@ -43,14 +43,14 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     [ klass, a, b ]
   end
 
-  test "DS-07: the classroom row counts students, assignments, the submission rate, and hides the average under 5" do
+  test "DS-07: the classroom row counts students, assignments, the submission rate, and no medal" do
     klass, = seconde_c1
 
     row = row_of(klass)
 
     assert_equal Query::ClassroomRow.new(public_id: klass.public_id, name: "2nde C 1", level_name: "2nde", level_slug: "2nde",
                                          students_count: 4, assignments_count: 2, submitted_count: 3, submission_rate: 38,
-                                         average_percent: nil, teachers_count: 0, archived_at: nil), row
+                                         medals: {}, teachers_count: 0, archived_at: nil), row
   end
 
   test "CA-B7: the detail link carries the link token and the join code the link block shows" do
@@ -99,7 +99,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal [ "2nde A 1", "2nde C 2", "Tle D 2" ], overview.classrooms.map(&:name)
   end
 
-  test "an empty school has no classroom; a classroom without student or assignment has no rate and no average" do
+  test "an empty school has no classroom; a classroom without student or assignment has no rate and no medal" do
     assert_empty overview.classrooms
 
     empty = classroom
@@ -108,8 +108,8 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     unfollowed = classroom(name: "2nde C 3")
     assignment(unfollowed)
 
-    assert_equal [ 0, 0, 0, nil, nil ],
-                 row_of(empty).to_h.values_at(:students_count, :assignments_count, :submitted_count, :submission_rate, :average_percent)
+    assert_equal [ 0, 0, 0, nil, {} ],
+                 row_of(empty).to_h.values_at(:students_count, :assignments_count, :submitted_count, :submission_rate, :medals)
     assert_equal [ 1, 0, nil ], row_of(lonely).to_h.values_at(:students_count, :assignments_count, :submission_rate)
     assert_equal [ 0, 1, nil ], row_of(unfollowed).to_h.values_at(:students_count, :assignments_count, :submission_rate)
   end
@@ -146,12 +146,12 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     submit(student, assignment(classroom(name: "2nde C 2")), 90)
 
     assert_equal 0, row_of(klass).submission_rate
-    assert_equal [ 0, nil ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
+    assert_equal [ 0, {} ], detail(klass).students.map { [ it.submitted_count, it.medals ] }.first
   end
 
   # Memo of remediation-comptee-faite: X failed at 25 % opens a pending gap on the fiche (ADR-0043), so Y is done in a
   # remediation session tied to its assignment (StartExerciseSession#new_session). Y is handed in, and its 80 % counts.
-  test "an exercise done in remediation is handed in, and its score counts in the student's and the classroom's averages" do
+  test "an exercise done in remediation is handed in, and counts for the rate" do
     klass = classroom(name: "3ème B")
     essential = create_essential
     x, y = Array.new(2) { create_exercise(essential:) }
@@ -162,8 +162,8 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
                             gap: create_gap(student: aya, essential:, source_session: failed))
     4.times { |index| submit(create_student(classroom: klass, last_name: "Zz#{index}", joined_at: 30.days.ago), given_x, 50) }
 
-    assert_equal [ 60, 51 ], row_of(klass).to_h.values_at(:submission_rate, :average_percent), "6 of 10; (25 + 80 + 4 × 50) / 6"
-    assert_equal Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, average_percent: 53), detail(klass).students.first
+    assert_equal 60, row_of(klass).submission_rate, "6 of 10"
+    assert_equal Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, medals: {}), detail(klass).students.first
   end
 
   test "a student whose only session on the assignment is a remediation has handed it in" do
@@ -173,10 +173,10 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     submit(student, given, 90, gap: create_gap(student:))
 
     assert_equal 100, row_of(klass).submission_rate
-    assert_equal [ 1, 90 ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
+    assert_equal 1, detail(klass).students.first.submitted_count
   end
 
-  test "an assignment handed in twice counts once in the rate, but both sessions count in the averages" do
+  test "an assignment handed in twice counts once in the rate" do
     klass = classroom
     given = assignment(klass)
     student = create_student(classroom: klass)
@@ -184,7 +184,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     submit(student, given, 70)
 
     assert_equal 100, row_of(klass).submission_rate
-    assert_equal [ 1, 55 ], detail(klass).students.map { [ it.submitted_count, it.average_percent ] }.first
+    assert_equal 1, detail(klass).students.first.submitted_count
   end
 
   # Non-regression of the definitions (chantier cache-ecrans-lourds, lot 1): a student in two classrooms hands in each
@@ -204,35 +204,56 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     assert_equal [ 2, 1, 100 ], row_of(first).to_h.values_at(:students_count, :assignments_count, :submission_rate)
     assert_equal [ 1, 1, 100 ], row_of(second).to_h.values_at(:students_count, :assignments_count, :submission_rate)
-    assert_equal [ [ "Awa Koné", 1, 40 ], [ "Yao Kouassi", 1, 20 ] ],
-                 detail(first).students.map { [ it.display_name, it.submitted_count, it.average_percent ] }
-    assert_equal [ [ "Awa Koné", 1, 70 ] ], detail(second).students.map { [ it.display_name, it.submitted_count, it.average_percent ] }
+    assert_equal [ [ "Awa Koné", 1 ], [ "Yao Kouassi", 1 ] ], detail(first).students.map { [ it.display_name, it.submitted_count ] }
+    assert_equal [ [ "Awa Koné", 1 ] ], detail(second).students.map { [ it.display_name, it.submitted_count ] }
   end
 
-  test "DS-08: the classroom average shows from 5 students having handed in, over all their sessions" do
+  # UDR médailles §2.4 : la classe se lit par exercice, en répartition de médailles, jamais en moyenne.
+  def award(student, assignment, level)
+    exercise = create_exercise
+    session = create_exercise_session(student:, exercise:, status: "completed", classroom_assignment_id: assignment.id)
+    create_badge(student:, exercise:, level:, session:)
+  end
+
+  test "DS-08: the classroom reads its medals per exercise as a distribution, from the present students only" do
     klass = classroom
-    given = assignment(klass)
-    students = [ 50, 60, 70, 80 ].map { |score| create_student(classroom: klass).tap { submit(it, given, score) } }
-    submit(students.first, assignment(klass), 50)
+    first, second = assignment(klass), assignment(klass)
+    aya = create_student(classroom: klass, first_name: "Aya", last_name: "Bamba")
+    moussa = create_student(classroom: klass, first_name: "Moussa", last_name: "Coulibaly")
+    create_student(classroom: klass, first_name: "Fanta", last_name: "Diabaté")
+    gone = create_student(classroom: klass)
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    award(aya, first, "gold")
+    award(aya, second, "bronze")
+    award(moussa, first, "bronze")
+    award(gone, first, "diamond")
 
-    assert_nil row_of(klass).average_percent, "4 students having handed in: « — »"
-
-    submit(create_student(classroom: klass), given, 90)
-
-    assert_equal Query::MIN_STUDENTS_FOR_AVERAGE, 5
-    assert_equal 67, row_of(klass).average_percent, "(50 + 50 + 60 + 70 + 80 + 90) / 6, rounded"
-    assert_equal 67, detail(klass).classroom.average_percent
+    assert_equal({ bronze: 2, gold: 1 }, row_of(klass).medals, "the leaver's Diamant is not read")
+    assert_equal row_of(klass).medals, detail(klass).classroom.medals
+    assert_equal({ "Aya Bamba" => { bronze: 1, gold: 1 }, "Moussa Coulibaly" => { bronze: 1 }, "Fanta Diabaté" => {} },
+                 detail(klass).students.reject { it.display_name.start_with?(gone.first_name) }.to_h { [ it.display_name, it.medals ] })
   end
 
-  test "DS-08: 5 students at 50, 60, 70, 80 and 90 % average 70 %" do
+  test "the medals of an anonymized account still enrolled are not read" do
     klass = classroom
-    given = assignment(klass)
-    [ 50, 60, 70, 80, 90 ].each { |score| submit(create_student(classroom: klass), given, score) }
+    ghost = create_student(classroom: klass, anonymized_at: Time.current)
+    award(ghost, assignment(klass), "diamond")
 
-    assert_equal 70, row_of(klass).average_percent
+    assert_empty row_of(klass).medals
+    assert_empty detail(klass).classroom.medals
   end
 
-  test "DS-09: the classroom detail lists each present student, handed in over given, and their rounded average" do
+  test "a medal won in another classroom of the student is not read here" do
+    klass, other = classroom, classroom(name: "2nde C 2")
+    student = create_student(classroom: klass)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other, student:, primary: false, joined_at: Time.current)
+    award(student, assignment(other), "gold")
+
+    assert_empty row_of(klass).medals
+    assert_equal({ gold: 1 }, row_of(other).medals)
+  end
+
+  test "DS-09: the classroom detail lists each present student, handed in over given, and their medals" do
     klass, = seconde_c1
     gone = create_student(classroom: klass, first_name: "Awa", last_name: "Adou")
     Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
@@ -241,10 +262,10 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     found = detail(klass)
 
     assert_equal row_of(klass), found.classroom
-    assert_equal [ Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, average_percent: 70),
-                   Query::StudentRow.new(display_name: "Moussa Coulibaly", submitted_count: 1, average_percent: 85),
-                   Query::StudentRow.new(display_name: "Fanta Diabaté", submitted_count: 0, average_percent: nil),
-                   Query::StudentRow.new(display_name: "Koffi Diallo", submitted_count: 0, average_percent: nil) ], found.students
+    assert_equal [ Query::StudentRow.new(display_name: "Aya Bamba", submitted_count: 2, medals: {}),
+                   Query::StudentRow.new(display_name: "Moussa Coulibaly", submitted_count: 1, medals: {}),
+                   Query::StudentRow.new(display_name: "Fanta Diabaté", submitted_count: 0, medals: {}),
+                   Query::StudentRow.new(display_name: "Koffi Diallo", submitted_count: 0, medals: {}) ], found.students
   end
 
   # Challenger de la phase 5 (E3), UDR-0081 §3.7 : la règle de la page de l'enseignant ; les nouveaux d'abord, du plus
@@ -259,14 +280,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal [ true, true, false, false ], detail(klass).members.map(&:newcomer)
   end
 
-  test "a student's average is rounded, a classroom without student lists nobody" do
-    klass = classroom
-    given = assignment(klass)
-    student = create_student(classroom: klass)
-    submit(student, given, 66)
-    submit(student, assignment(klass), 67)
-
-    assert_equal 67, detail(klass).students.first.average_percent
+  test "a classroom without student lists nobody" do
     assert_empty detail(classroom(name: "2nde C 2")).students
   end
 

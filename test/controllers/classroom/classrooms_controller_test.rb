@@ -778,7 +778,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "les fiches à revoir se disent en médailles, sans « /20 »" do
-    assert_equal "Des élèves n'ont pas encore de médaille Bronze sur ces fiches de révision.", I18n.t("#{scope}.gaps.subtitle")
+    assert_no_match(%r{/20|\d+ ?%}, I18n.t("#{scope}.gaps.subtitle"))
   end
 
   # AS-17, UDR-0121 §3.1, ADR-0101 §4.4 : le bloc « Fiches à revoir » de la page de classe.

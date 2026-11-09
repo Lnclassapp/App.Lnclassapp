@@ -5,15 +5,10 @@
 fr:
   school_admin:
     classrooms:
-      percent: "%{value} %"
       not_computed: "non calculé"
       tips:
-        submission_rate: "Part des devoirs rendus : devoirs rendus par les élèves ÷ (élèves × devoirs donnés). Un devoir est rendu quand l'élève a terminé au moins un exercice de ce devoir."
-        average: "Moyenne des scores des exercices rendus par les élèves de la classe. Elle s'affiche à partir de 5 élèves ayant rendu un devoir."
-        student_average: "Moyenne des scores de l'élève sur les exercices qu'il a rendus dans cette classe."
-        missing: "— : pas encore de chiffre (aucun élève, aucun devoir, ou moins de 5 élèves pour une moyenne)."
-      legend:
-        label: "Chiffre non calculé"
+        submission_rate: "Les devoirs rendus : un devoir est rendu quand l'élève a terminé au moins un exercice de ce devoir. Le total est celui des élèves × devoirs donnés."
+        medals: "Les médailles gagnées par exercice dans la classe : Bronze, Argent, Or, Diamant. « Pas encore » : aucun exercice traité."
       # Accueil de la direction (chantier accueil-direction, Lot A) — UDR-0074 §3.2, §3.11
       index:
         page_title: "Accueil"
@@ -51,8 +46,8 @@ fr:
             one: "1 classe sans élève : %{names}"
             other: "%{count} classes sans élève : %{names}"
           red_signal:
-            one: "1 classe rend moins de 40 % des devoirs : %{names}"
-            other: "%{count} classes rendent moins de 40 % des devoirs : %{names}"
+            one: "1 classe avec peu d'activité : %{names}"
+            other: "%{count} classes avec peu d'activité : %{names}"
           teachers_without_classroom:
             one: "1 enseignant n'a déclaré aucune classe"
             other: "%{count} enseignants n'ont déclaré aucune classe"
@@ -76,7 +71,6 @@ fr:
         sr_level:
           one: ", 1 classe"
           other: ", %{count} classes"
-        sr_rate: ", taux de rendu %{rate} %"
         # UDR-0084 §3.7 (accueil-eleve, ADR-0089 §4.2) : sessions terminées sans avoir été données, 7 derniers jours.
         self_practice:
           name: "Faits seul"
@@ -87,13 +81,14 @@ fr:
           other: "%{level} · %{count} élèves"
         figures:
           assignments: "Devoirs donnés"
-          submission_rate: "Taux de rendu"
-          average: "Moyenne"
+          submitted: "Devoirs rendus"
+          submitted_of: "%{count} sur %{total}"
+          medals: "Médailles"
         caption: "Élèves de %{classroom}"
         columns:
           student: "Élève"
           submitted: "Devoirs rendus"
-          average: "Score moyen"
+          medals: "Médailles"
           # UDR-0081 §3.7 (inscription-eleve-sans-code, Lot E) : la colonne du menu ⋮ de la ligne, nommée pour le lecteur d'écran.
           actions: "Actions"
         submitted: "%{count} / %{total}"
