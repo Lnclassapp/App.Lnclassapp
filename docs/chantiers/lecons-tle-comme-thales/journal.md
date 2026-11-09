@@ -47,3 +47,7 @@ Preuve : extraits de la leçon pour chaque question non calculée, `proof.py` po
 | Histoire — L'accession de l'Algérie à l'indépendance | 113 | 5 099 | — | 1 + 17 |
 | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 110 | 4 647 | 8/8 | 0 + 14 |
 | Histoire — De la fin de la guerre froide vers un monde multipolaire | 117 | 5 300 | 6/6 | 1 + 6 |
+| Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 110 | 4 866 | 11/11 | 0 + 5 |
+| Géographie — Les fondements de l'économie de la France | 125 | 5 374 | 17/17 | 0 + 11 |
+| Géographie — Les fondements du développement économique de la Côte d'Ivoire | 110 | 4 775 | 18/18 | 0 + 4 |
+| Géographie — Les problèmes de développement économique de la Côte d'Ivoire | 118 | 4 966 | 21/21 | 0 + 3 |
