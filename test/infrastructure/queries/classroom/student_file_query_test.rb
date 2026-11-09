@@ -249,6 +249,17 @@ module Queries
         assert_match(/\ASeul /, row.exercise_title)
       end
 
+      test "alone: each row carries the medal of its session (Grading.session_medal), nothing for an empty copy" do
+        silver = alone(75, started_at: 1.day.ago)
+        empty = alone(0, started_at: 2.days.ago)
+        create_attempt(session: silver)
+
+        medals = file.self_practice.to_h { [ it.session_public_id, it.medal ] }
+
+        assert_equal :silver, medals.fetch(silver.public_id)
+        assert_nil medals.fetch(empty.public_id)
+      end
+
       test "alone: twenty rows at most, and the total" do
         21.times { alone(70, started_at: Time.zone.local(2026, 10, 1, 8) + it.hours) }
 

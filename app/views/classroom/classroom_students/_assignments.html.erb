@@ -25,12 +25,8 @@
             <div class="shrink-0 text-right">
               <% case assignment.status %>
               <% when :done, :late %>
-                <%# UDR enseignant §3.6 : la note sur 20 en pastille neutre, avec le trophée de la médaille gagnée dans la classe (aucun pour une copie vide). %>
-                <% level = assignment.medal %>
-                <p class="<%= Assessment::BadgesHelper::BADGE_PILL %>">
-                  <% if level %><%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(level)) %><% end %>
-                  <%= grade_label(assignment.best) %>
-                </p>
+                <%# UDR médailles : la médaille gagnée dans la classe (trophée et nom du palier), « Pas encore » pour une copie vide ; jamais la note. %>
+                <p class="<%= Assessment::BadgesHelper::BADGE_PILL %>"><%= medal_tag(assignment.medal, size: "size-4") %></p>
                 <p class="mt-1 text-xs text-mute"><%= t(assignment.status == :late ? ".late_on" : ".done_on", date: l(assignment.done_on, format: :due_short)) %></p>
               <% when :overdue %>
                 <%= ui_badge t(".overdue"), tone: :warning, dot: true %>

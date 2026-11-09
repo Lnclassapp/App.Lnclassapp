@@ -69,7 +69,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[aria-live=polite]", text: I18n.t("#{scope}.roster.count", count: 2)
       assert_select "li", 2
     end
-    assert_select "#classroom_roster details", text: /#{I18n.t("#{scope}.roster.last_score_tip")}/
     assert_select "#classroom_roster li", 2
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
     # IE-22, maquette 10 : la ligne n'a plus de numéro (il est sur la fiche) ; le numéro complet n'est nulle part.
@@ -77,9 +76,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id} p[aria-label], #student_#{awa.public_id} [title]", 0
     assert_no_match(/0102030405|01 02 03 04 05/, response.body)
     assert_select "#classroom_roster a[href^='tel:'], #classroom_roster [data-controller~=clipboard]", 0
-    assert_select "#student_#{awa.public_id}", text: /85 %/
-    assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
-                  text: I18n.t("#{scope}.roster.see_result")
+    assert_select "#student_#{awa.public_id}", text: /85 %/, count: 0
+    assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']", 0
     # rapports-de-classe (UDR-0108 §3.2, memo Q4) : la photo et le nom mènent à la fiche ; plus de menu ⋮ ni de fenêtre de
     # retrait sur la ligne : le code de récupération et le retrait sont sur la fiche.
     assert_select "#student_#{awa.public_id} a[href='#{classroom_student_path(@classroom.public_id, awa.public_id)}']" \
@@ -88,8 +86,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster a[href='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster form[action='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster_more", 0
-    assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
-    assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
   test "IE-22 : quelle que soit la voie de l'enseignant, et pour l'équipe, la liste n'a aucun numéro d'élève" do
@@ -609,7 +605,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   # CA-I2 (UDR enseignant §3.2, §3.5) : « Tous · Bronze · Argent · Or · Diamant · Pas encore », paramètre `badge=`.
   def roster_students(selector = "#classroom_roster_list li[id^=student_]") = css_select(selector).map { it["id"] }
 
-  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et son badge « Moyenne 17/20 · Or » ; sous le seuil, Bronze (tout exercice traité) ; sans exercice fait, « Pas encore »" do
+  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et sa médaille « Or » seule ; sous le seuil, Bronze (tout exercice traité) ; sans exercice fait, « Pas encore »" do
     due = Date.new(2026, 10, 8)
     exercises = Array.new(3) do |index|
       travel_to(Time.zone.local(2026, 10, 5, 9)) do
@@ -628,8 +624,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#progress_#{gold.public_id}", text: "2 faits sur 3 · 1 en retard"
     assert_select "#progress_#{gold.public_id} .text-warning", text: /1 en retard/
-    assert_select "#badge_#{gold.public_id}", text: "Moyenne 17/20 · Or"
-    assert_select "#badge_#{below.public_id}", text: /\AMoyenne \d+\/20 · Bronze\z/
+    assert_select "#badge_#{gold.public_id}", text: "Or"
+    assert_select "#badge_#{below.public_id}", text: "Bronze"
     assert_select "#badge_#{below.public_id}.text-mute", 0
     # Sans rien de fait, les trois exercices échus sont en retard.
     assert_select "#progress_#{waiting.public_id}", text: "0 fait sur 3 · 3 en retard"
@@ -765,24 +761,20 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
-  # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : la colonne « Fait seul (7 j) » ; 0 s'écrit « — », en text-mute ;
-  # au téléphone, la ligne sous le nom. Les comptes de l'exercice donné ne bougent pas.
-  test "CA-16 : « Fait seul (7 j) » vaut 1 pour l'élève qui a fini un exercice non donné il y a 3 jours, « — » pour l'autre" do
+  # UDR médailles, E-002 : la ligne d'élève ne porte ni « Fait seul », ni « Dernier score », ni lien « Voir le résultat » (ils sont sur la fiche).
+  test "la ligne d'élève n'a plus « Fait seul (7 j) », « Dernier score » ni note : « faits sur » et la médaille" do
     exercise = create_exercise
     assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
-    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
-    create_exercise_session(student: koffi, exercise:, status: "completed", classroom_assignment: assignment)
     create_exercise_session(student: awa, status: "completed", started_at: 3.days.ago, completed_at: 3.days.ago)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id, q: "a")
 
-    assert_select "#classroom_roster div#self_practice_heading.hidden.sm\\:flex", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}/
-    assert_select "#self_practice_#{awa.public_id}.hidden.sm\\:block", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}\s+1/
-    assert_select "#self_practice_#{koffi.public_id} span.text-mute", text: "—"
-    assert_select "#classroom_roster_list", text: /Fait seul :/, count: 0
-    assert_progress assignment, 1, 2
+    assert_select "#student_#{awa.public_id}"
+    assert_select "#self_practice_heading, #self_practice_#{awa.public_id}", 0
+    assert_select "#classroom_roster_list", text: /Fait seul|Dernier score|Voir le résultat|Moyenne|\d+\/20|\d+ %/, count: 0
+    assert_progress assignment, 0, 1
   end
 
   # AS-17, UDR-0121 §3.1, ADR-0101 §4.4 : le bloc « Fiches à revoir » de la page de classe.
