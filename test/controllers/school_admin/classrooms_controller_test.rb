@@ -358,7 +358,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "td", text: "1 / 2"
       assert_select "td", text: /1 Argent/
     end
-    assert_no_match(/72|moyenne|score moyen/i, css_select("main").text)
+    assert_no_match(/72|%|moyenne|score moyen|taux de rendu/i, css_select("main").text)
     assert_select "tr#student_#{koffi.public_id}" do
       assert_select "th[scope=row] p", text: "Koffi Diallo"
       assert_select "td", text: "0 / 2"

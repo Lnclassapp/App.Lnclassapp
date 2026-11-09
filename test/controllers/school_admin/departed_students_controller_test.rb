@@ -35,7 +35,7 @@ class SchoolAdmin::DepartedStudentsControllerTest < ActionDispatch::IntegrationT
       assert_select "td", "1"
       assert_select "td", text: /1 Argent/
     end
-    assert_no_match(/72|moyenne|score/i, css_select("#departed_students").text)
+    assert_no_match(/72|%|moyenne|score/i, css_select("#departed_students").text)
     assert_select "main", text: /Ailleurs/, count: 0
     assert_no_match @awa.public_id, response.body
     assert_no_match @awa.contact, response.body

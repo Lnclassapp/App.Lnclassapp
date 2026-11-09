@@ -60,6 +60,9 @@ module Queries
         create_exercise_session(student: yao, exercise: @exercise, status: "completed", score_percent: 0)
         create_exercise_session(student: yao, exercise: @exercise, status: "completed", score_percent: 0, gap: create_gap(student: yao))
 
+        free = create_exercise_session(student: yao, exercise: create_exercise, status: "completed", score_percent: 100)
+        create_badge(student: yao, exercise: free.exercise, level: "gold", session: free)
+
         row = overview.students.sole
         assert_equal [ "Yao Brou", "2nde C 1", 1, { silver: 1 } ], [ row.display_name, row.classroom_name, row.submitted_count, row.medals ]
       end
