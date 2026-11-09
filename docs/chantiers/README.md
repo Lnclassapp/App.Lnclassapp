@@ -184,6 +184,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |
 | [`lecons-tle-a2-comme-thales`](lecons-tle-a2-comme-thales/memo.md) | en cours | feature | 2026-11-08 | Les leçons de Terminale A2 préparées comme Thalès |
 | [`lecons-tle-c-comme-thales`](lecons-tle-c-comme-thales/memo.md) | en cours | feature | 2026-11-05 | Les leçons de Terminale C préparées comme Thalès |
+| [`lecons-tle-comme-thales`](lecons-tle-comme-thales/memo.md) | en cours | feature | 2026-11-08 | Les leçons de Terminale (Histoire-Géographie) préparées comme Thalès |
 | [`lecons-tle-d-comme-thales`](lecons-tle-d-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale D préparées comme Thalès |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
