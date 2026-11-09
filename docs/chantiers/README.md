@@ -194,6 +194,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-tle-d-comme-thales`](lecons-tle-d-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale D préparées comme Thalès |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
+| [`medailles-direction`](medailles-direction/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de la direction |
 | [`medailles-eleve`](medailles-eleve/memo.md) | en cours | feature | 2026-11-08 | Médailles : écrans de l'élève |
 | [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
 | [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |

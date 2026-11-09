@@ -31,7 +31,7 @@ module Queries
       private
 
       def read(school_id, school_year, today)
-        overview = StudentWorkQuery.new.classrooms(school_id:, school_year:)
+        overview = StudentWorkQuery.new.classrooms(school_id:, school_year:, medals: false)
         teachers = SchoolTeachersQuery.new.call(school_id:, school_year:).teachers
         public_ids = overview.classrooms.map(&:public_id)
         school_type, status = Orm::School.where(id: school_id).pick(:school_type, :status)
