@@ -150,3 +150,24 @@ Le tableau « À la clôture » du §4 devient :
 - Ouverture inchangée (sous la réussite, 10/20). « Pas encore » n'entre pas en remédiation.
 - **Pas de réouverture rétroactive** : une lacune levée entre 73 et 77 % avant le changement reste levée ; aucune migration. Une lacune en attente demande désormais l'Or.
 - Mesure sur le jeu standard : aucune session entre 73 et 77 %, donc aucun écart ; 37 lacunes en attente, aucune levée.
+
+## Amendement du 2026-11-09 (2) — la lacune s'ouvre sous l'Or
+
+*Décision du porteur, définitive : « quand la médaille est Argent, l'élève est dans la remédiation. Seules les médailles Or et Diamant ne sont pas dans la remédiation. » Ce qui précède reste tel qu'accepté ; en cas d'écart, cette section fait foi (chantier `ouverture-remediation`).*
+
+Le tableau « À la clôture » devient, lu sur la note affichée sur 20 (`Grading.reaches?`, ADR-0106) :
+
+| Cas | Effet |
+|---|---|
+| Copie sans aucune réponse (aucune médaille) | aucun effet : n'ouvre rien, ne compte rien |
+| Sous l'Or (Bronze, Argent), aucune lacune en attente | création d'une lacune `pending` |
+| Sous l'Or, une lacune en attente | `failed_sessions_count + 1` (un exercice sous l'Or ne lève pas) |
+| Or ou Diamant, lacune en attente, session `remediation` | `remediated` |
+| Or ou Diamant, lacune en attente, session `standard` | `self_corrected` |
+| Or ou Diamant, aucune lacune | aucun effet |
+
+- `PASS_THRESHOLD` n'ouvre plus rien : la décision de clôture (`GapDecision`) ne lit plus que `GOLD_THRESHOLD` et le fait qu'une copie soit traitée.
+- `failed_sessions_count` compte désormais les exercices sous l'Or, pas seulement ceux sous 10/20.
+- « Pas encore » (aucun exercice fait) reste hors remédiation.
+- **Pas de réouverture rétroactive** : les sessions passées n'ouvrent rien après coup ; aucune migration. Une lacune s'ouvre à la prochaine clôture sous l'Or.
+- Mesure sur le jeu standard : lacunes en attente 136 avec l'ouverture à 10/20, 264 avec l'ouverture sous l'Or (voir le memo du chantier).

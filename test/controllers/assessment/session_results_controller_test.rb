@@ -714,8 +714,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   # Décision du porteur (2026-11-09) : l'Argent ne lève pas la fiche ; la médaille et l'effet sur la fiche s'accordent.
   test "fiche : une remédiation à 74 % est Argent et « Encore à revoir » : la médaille et l'effet sur la fiche s'accordent" do
-    gap, remediation = failed_then_remediated(74)
-    assert_equal :none, Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
+    _, remediation = failed_then_remediated(74)
     sign_in_as @student
 
     show remediation
