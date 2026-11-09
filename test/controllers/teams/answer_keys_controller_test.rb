@@ -29,6 +29,15 @@ class Teams::AnswerKeysControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{course_path(@course.slug)}']"
   end
 
+  test "UDR médailles: the answer key shows no points, no mark and no « noté »" do
+    sign_in_as create_team_member
+
+    get answer_key_teams_course_path(@course.slug)
+
+    assert_select "section#exercise-#{@ex.public_id} ol li p span.tabular-nums", text: /\A\s*Question \d+\s*\z/
+    assert_select "section[id^=exercise-]", text: %r{·\s*\d+([.,]\d+)?\s*pt\b|/\s*20|non noté}i, count: 0
+  end
+
   test "an empty lesson shows the empty state" do
     sign_in_as create_team_member
 

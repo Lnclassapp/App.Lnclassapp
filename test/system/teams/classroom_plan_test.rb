@@ -21,21 +21,21 @@ class Teams::ClassroomPlanTest < ApplicationSystemTestCase
 
   test "change a count from the menu of its line, then generate: the school without classrooms gets the new count" do
     visit teams_referential_path
-    within("#team_referential") { click_on "Barème des classes" }
+    within("#team_referential") { click_on "Plan des classes" }
 
-    assert_selector "h1", text: "Barème des classes"
+    assert_selector "h1", text: "Plan des classes"
     assert_text "Les classes déjà créées ne changent pas"
     within("#classroom_plan_total_public_both") { assert_text "77" }
 
     assert_no_page_reload do
       click_menu_action "#classroom_plan_line_6eme", "Modifier"
       within "dialog#classroom-plan-line-modal[open]" do
-        assert_selector "h2", text: "Barème de « 6ème »"
+        assert_selector "h2", text: "Plan de « 6ème »"
         fill_in "Public", with: "6"
         click_on "Enregistrer"
       end
 
-      assert_toast "Barème de « 6ème » enregistré."
+      assert_toast "Plan de « 6ème » enregistré."
       assert_no_selector "dialog#classroom-plan-line-modal[open]"
       within("#classroom_plan_line_6eme") { assert_text "6" }
       within("#classroom_plan_total_public_both") { assert_text "79" }
@@ -60,9 +60,9 @@ class Teams::ClassroomPlanTest < ApplicationSystemTestCase
   test "the « Classes » menu of the schools screen leads to the barème" do
     visit schools_path
     find("button[aria-controls=schools-classrooms-menu]").click
-    within("#schools-classrooms-menu") { click_on "Barème des classes" }
+    within("#schools-classrooms-menu") { click_on "Plan des classes" }
 
-    assert_selector "h1", text: "Barème des classes"
+    assert_selector "h1", text: "Plan des classes"
   end
 
   test "D1: link a series in the matrix, and the barème shows 6 and 3 for it without any entry by hand" do
@@ -99,7 +99,7 @@ class Teams::ClassroomPlanTest < ApplicationSystemTestCase
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
       click_menu_action "#classroom_plan_line_1ere_d", "Modifier"
-      assert_selector "dialog#classroom-plan-line-modal[open]", text: "Barème de « 1ère D »"
+      assert_selector "dialog#classroom-plan-line-modal[open]", text: "Plan de « 1ère D »"
     end
   end
 end
