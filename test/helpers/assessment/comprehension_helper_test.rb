@@ -105,7 +105,7 @@ module Assessment
     def detail(done:, present:, dominant: nil, decline: 0, weakest: nil)
       Queries::Assessment::ComprehensionDetailQuery::Detail.new(
         done:, present:, category: dominant, readable: Entities::Assessment::Comprehension.readable?(done),
-        badge_counts: { none: 4, bronze: 0, silver: 0, gold: 0, diamond: 0 }, trend_counts: { progress: 0, flat: 0, decline: }, selected: nil, questions: [], students: [],
+        badge_counts: { none: 1, bronze: 3, silver: 0, gold: 0, diamond: 0 }, trend_counts: { progress: 0, flat: 0, decline: }, selected: nil, questions: [], students: [],
         weakest_question: weakest
       )
     end

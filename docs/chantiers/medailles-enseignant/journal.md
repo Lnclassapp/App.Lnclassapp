@@ -15,6 +15,9 @@
 - [ ] 2026-11-09 · medailles-enseignant · Points pondérés (« 6 points sur 11 ») sur la page de résultat vue par l'enseignant — appliqué : gardés (compte de points, hors des écrans listés) ; autres : les retirer comme pour l'élève ; recommandé : les retirer
 - [ ] 2026-11-09 · medailles-enseignant · « Fait seul (7 j) » quitte la liste de classe (E-002) mais reste sur la fiche élève — appliqué : retiré de la liste ; autres : le garder en compteur discret ; recommandé : appliqué
 
+- [ ] 2026-11-09 · medailles-enseignant · Une médaille montée hors du devoir (fait seul, autre classe) rend « Pas encore » à la liste, à la fiche et à la répartition (réécriture de `exercise_session_id`) ; la note qui trahissait l'écart a disparu des vues — appliqué : inchangé, comme `medailles-grading-bronze` ; autres : calculer la médaille du devoir depuis la meilleure session de l'assignation (`Grading.session_medal`) ; recommandé : cette option, dans un chantier code (reprend l'entrée #526 de `medailles-grading-bronze`)
+- [ ] 2026-11-09 · medailles-enseignant · Historique d'accueil : une copie vide rendue ne montre aucune pastille (« 3 / 3 faits » sans médaille) — appliqué : rien ; autres : « Pas encore ×N » ; recommandé : appliqué
+
 ## Retouches
 
 - …

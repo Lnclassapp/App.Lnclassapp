@@ -294,6 +294,8 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     end
     assert_select "section#student_file_self_practice h2", text: ft("self_practice.title", days: 30)
     assert_select "section#student_file_self_practice a[href='#{exercise_session_result_path(alone.public_id)}']"
+    assert_select "section#student_file_self_practice li", text: %r{\d+ ?%}, count: 0
+    assert_select "section#student_file_self_practice li", text: /Pas encore|Bronze|Argent|Or|Diamant/
     assert_select "section#student_file_manage" do
       assert_select "form[action='#{account_pin_recovery_codes_path(@koffi.public_id)}'][method=post][data-turbo-frame=_top] button",
                     text: ft("manage.issue_code")

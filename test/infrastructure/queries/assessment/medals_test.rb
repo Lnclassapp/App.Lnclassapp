@@ -41,6 +41,9 @@ module Queries
 
         assert_equal({ @assignment_a.id => { gold: 1, bronze: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
         assert_equal({}, Medals.distribution_by_assignment(assignment_ids: [ @assignment_b.id ]))
+        elsewhere = create_exercise_session(student: other, exercise: create_exercise, status: "completed", classroom_assignment: @assignment_b)
+        create_badge(student: other, exercise: elsewhere.exercise, level: "diamond", session: elsewhere)
+        assert_equal({ @assignment_a.id => { gold: 1, bronze: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
         assert_equal({}, Medals.distribution_by_assignment(assignment_ids: []))
       end
     end

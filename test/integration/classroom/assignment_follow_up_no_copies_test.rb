@@ -12,7 +12,7 @@ class Classroom::AssignmentFollowUpNoCopiesTest < ActionDispatch::IntegrationTes
   end
 
   test "no « Copies rendues » section, no grade on 20 or percentage: the medal alone, students in alphabetical order" do
-    [ [ "Zoé", "Achi", 95 ], [ "Awa", "Bamba", 40 ] ].each do |first, last, score|
+    [ [ "Zoé", "Achi", 40 ], [ "Awa", "Bamba", 95 ] ].each do |first, last, score|
       student = create_student(classroom: @classroom, first_name: first, last_name: last)
       create_exercise_session(student: student, exercise: @exercise, status: "completed", score_percent: score,
                               completed_at: 1.day.ago, classroom_assignment: @assignment)
