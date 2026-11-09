@@ -78,14 +78,14 @@ class FinitionsTeamAccountsTest < ApplicationSystemTestCase
     sign_in_as @member
     visit team_dashboard_path
 
-    labels = [ "Réussite moyenne", "Élèves actifs", "Établissements actifs", "Ouvert depuis l'app installée" ]
+    labels = [ "Médailles décernées", "Élèves actifs", "Établissements actifs", "Ouvert depuis l'app installée" ]
     labels.each { |label| assert_selector "details summary .sr-only", text: "Aide : #{label}", visible: :all }
 
     summary = find("#figure_completed_sessions summary")
     assert_equal "false", summary.evaluate_script("String(this.parentElement.open)")
     summary.click
     assert_selector "#figure_completed_sessions details[open]",
-                    text: "Moyenne des scores des exercices terminés sur la période. — : aucun exercice terminé."
+                    text: "Médailles gagnées sur la période, une par élève et par exercice, au palier atteint. Aucune médaille décernée : aucun exercice traité."
 
     with_mobile_viewport do
       execute_script("document.querySelectorAll('main details').forEach((details) => { details.open = true })")

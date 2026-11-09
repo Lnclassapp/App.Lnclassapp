@@ -1,9 +1,8 @@
 <%# 🌐 UI · teams/dashboards/_key_figures — chiffres « Sur la période » (flux) puis « En ce moment » (stocks) %>
-<%# Rôle : inscrits, élèves actifs, exercices terminés et réussite, assignations ; comptes, classes, couverture des établissements %>
-<%# ADR  : 0062, 0082, 0084, 0086 · UDR : 0049, 0054 (infobulle de « Réussite moyenne », panneau dans le flux de la tuile), 0078 (§3.3) %>
+<%# Rôle : inscrits, élèves actifs, exercices terminés et médailles décernées, assignations ; comptes, classes, couverture des établissements %>
+<%# ADR  : 0062, 0082, 0084, 0086 · UDR : 0049, 0054 (infobulle des médailles, panneau dans le flux de la tuile), 0078 (§3.3), médailles (répartition, jamais de moyenne) %>
 <%# locals: (dashboard:, period_scope:) -%>
 <% tile = ->(key, count, hint = nil) { render "figure", key:, count:, hint:, label: t(".#{key}", count: count || 0) } %>
-<% rate = dashboard.average_score ? t(".success_rate", rate: dashboard.average_score) : t(".no_success_rate") %>
 <%= ui_card title: t(".period_title"), subtitle: t(".period_subtitle", period: period_scope), icon: "bolt", id: "team_dashboard_period" do %>
   <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
     <%= tile.call(:signups, dashboard.signups_count) %>
@@ -11,10 +10,19 @@
     <li id="figure_completed_sessions" class="rounded-ln bg-mist px-3 py-4">
       <span class="block font-display text-3xl font-medium tabular-nums text-ink"><%= dashboard.completed_sessions_count %></span>
       <span class="text-sm text-mute"><%= t(".completed_sessions", count: dashboard.completed_sessions_count) %></span>
-      <div class="mt-1 text-xs text-mute">
-        <%= rate %>
-        <%= ui_info_tip t(".success_rate_tip"), label: t(".success_rate_label") %>
+      <div class="mt-2 text-xs text-mute">
+        <%= t(".medals_title") %>
+        <%= ui_info_tip t(".medals_tip"), label: t(".medals_title") %>
       </div>
+      <% if dashboard.medals.values.sum.zero? %>
+        <p id="team_dashboard_medals" class="mt-1 text-sm text-mute"><%= t(".no_medals") %></p>
+      <% else %>
+        <ul id="team_dashboard_medals" aria-label="<%= t(".medals_title") %>" class="mt-1 flex flex-wrap gap-1.5">
+          <% dashboard.medals.each do |level, count| %>
+            <li><%= badge_pill(level, count:) %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </li>
     <%= tile.call(:assignments, dashboard.assignments_count, t(".assignments_hint")) %>
     <%# UDR-0078 §3.3 : ouvertures depuis l'app installée, par rôle ; un zéro s'affiche, il dit que l'installation ne prend pas.

@@ -24,7 +24,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     board = dashboard
 
     assert_equal [ 0, 0, 0, 0 ], board.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :assignments_count)
-    assert_nil board.average_score
+    assert_equal({ bronze: 0, silver: 0, gold: 0, diamond: 0 }, board.medals)
     assert_equal Query::Accounts.new(students: 0, teachers: 0, team: 0), board.accounts
     assert_equal Query::AppOpeners.new(students: 0, teachers: 0, android_students: 0, android_teachers: 0), board.app_openers
     assert_equal Query::Coverage.new(active: 0, with_classroom: 0, with_teacher: 0, with_student: 0), board.schools
@@ -69,13 +69,25 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     week = dashboard(period: "7d")
 
-    assert_equal [ 1, 1, 2, 71, 1 ],
-                 week.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :average_score, :assignments_count)
+    assert_equal [ 1, 1, 2, 1 ],
+                 week.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :assignments_count)
 
     month = dashboard(period: "30d")
 
-    assert_equal [ 2, 2, 3, 50, 2 ],
-                 month.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :average_score, :assignments_count)
+    assert_equal [ 2, 2, 3, 2 ],
+                 month.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :assignments_count)
+  end
+
+  test "the medals awarded follow the period, one per student and exercise, and leave anonymized students out" do
+    classroom = create_classroom
+    student = placed_student(classroom)
+    create_badge(student:, level: "gold").update!(awarded_at: 2.days.ago)
+    create_badge(student:, level: "silver").update!(awarded_at: 20.days.ago)
+    create_badge(student: placed_student(classroom), level: "bronze").update!(awarded_at: 1.day.ago)
+    create_badge(student: create_student(anonymized_at: Time.current), level: "diamond").update!(awarded_at: 1.day.ago)
+
+    assert_equal({ bronze: 1, silver: 0, gold: 1, diamond: 0 }, dashboard(period: "7d").medals)
+    assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 0 }, dashboard(period: "30d").medals)
   end
 
   test "a session started on the first day of the period, at midnight, is in; the day before is out" do
@@ -200,8 +212,8 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
     assert_equal Query::Filter.new(public_id: here.public_id, name: "Abidjan 1"), board.drena
     assert_equal Query::Accounts.new(students: 1, teachers: 1, team: nil), board.accounts
-    assert_equal [ 2, 1, 1, 90, 1 ],
-                 board.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :average_score, :assignments_count)
+    assert_equal [ 2, 1, 1, 1 ],
+                 board.to_h.values_at(:signups_count, :active_students_count, :completed_sessions_count, :assignments_count)
     assert_equal Query::Coverage.new(active: 1, with_classroom: 1, with_teacher: 1, with_student: 1), board.schools
     assert_equal 1, board.classrooms_count
     assert_equal 1, board.levels.find { it.slug == "tle" }.students_count
@@ -364,8 +376,12 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
   # ADR-0062, amendement du 2026-09-29 (cache de la vue « année ») : the school-year figures are kept 5 minutes, per
   # school year, start of period and DRENA; the latest signups stay live; 7 days and 30 days are never cached.
-  def a_year_session(student, score) = create_exercise_session(student:, exercise: an_exercise, status: "completed",
-                                                                score_percent: score, completed_at: 1.hour.ago)
+  # Une session terminée et la médaille qu'elle donne (palier : bronze, silver, gold, diamond).
+  def a_year_session(student, level)
+    exercise = an_exercise
+    session = create_exercise_session(student:, exercise:, status: "completed", score_percent: 80, completed_at: 1.hour.ago)
+    create_badge(student:, exercise:, session:, level: level.to_s)
+  end
 
   def sql_during(&)
     statements = []
@@ -376,7 +392,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
   test "the year view gives the same figures with and without the cache, from a cold or a warm entry" do
     travel_to Time.zone.local(2026, 10, 15, 12) do
-      a_year_session(placed_student(create_classroom), 80)
+      a_year_session(placed_student(create_classroom), :gold)
       live = dashboard(period: "year", cache: ActiveSupport::Cache::NullStore.new)
 
       assert_equal live, dashboard(period: "year"), "cold"
@@ -387,7 +403,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
 
   test "a second year read within 5 minutes runs none of the figure queries, only the latest signups" do
     travel_to Time.zone.local(2026, 10, 15, 12) do
-      a_year_session(placed_student(create_classroom), 80)
+      a_year_session(placed_student(create_classroom), :gold)
       cold = sql_during { dashboard(period: "year") }
       warm = sql_during { dashboard(period: "year") }
 
@@ -400,43 +416,44 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
   test "the year figures are at most 5 minutes late, and the latest signups are never late" do
     travel_to Time.zone.local(2026, 10, 15, 12) do
       student = placed_student(create_classroom)
-      a_year_session(student, 80)
+      a_year_session(student, :gold)
       dashboard(period: "year")
-      a_year_session(student, 40)
+      a_year_session(student, :bronze)
       newcomer = create_student(first_name: "Awa", last_name: "Koné")
 
       travel 5.minutes - 1.second
       board = dashboard(period: "year")
 
-      assert_equal [ 1, 80 ], board.to_h.values_at(:completed_sessions_count, :average_score)
+      assert_equal [ 1, 1, 0 ], [ board.completed_sessions_count, board.medals[:gold], board.medals[:bronze] ]
       assert_equal "Awa Koné", board.recent_signups.first.display_name
       assert_equal newcomer.public_id, board.recent_signups.first.public_id
 
       travel 2.seconds
 
-      assert_equal [ 2, 60 ], dashboard(period: "year").to_h.values_at(:completed_sessions_count, :average_score)
+      assert_equal [ 2, 1, 1 ], dashboard(period: "year").then { [ it.completed_sessions_count, it.medals[:gold], it.medals[:bronze] ] }
     end
   end
 
   test "two DRENA filters, or a filter and the national view, never share a year entry" do
     travel_to Time.zone.local(2026, 10, 15, 12) do
       here, there = create_drena(name: "Abidjan 1"), create_drena(name: "Bouaké")
-      2.times { a_year_session(placed_student(create_classroom(school: create_school(drena: here))), 90) }
-      a_year_session(placed_student(create_classroom(school: create_school(drena: there))), 30)
+      2.times { a_year_session(placed_student(create_classroom(school: create_school(drena: here))), :silver) }
+      a_year_session(placed_student(create_classroom(school: create_school(drena: there))), :diamond)
 
       national = dashboard(period: "year")
       filtered_here = dashboard(period: "year", drena: here.public_id)
       filtered_there = dashboard(period: "year", drena: there.public_id)
 
       assert_equal [ 3, 2, 1 ], [ national, filtered_here, filtered_there ].map(&:completed_sessions_count)
-      assert_equal [ 70, 90, 30 ], [ national, filtered_here, filtered_there ].map(&:average_score)
+      assert_equal [ [ 0, 2, 0, 1 ], [ 0, 2, 0, 0 ], [ 0, 0, 0, 1 ] ],
+                   [ national, filtered_here, filtered_there ].map { [ it.medals[:bronze], it.medals[:silver], it.medals[:gold], it.medals[:diamond] ] }
       assert_equal [ nil, "Abidjan 1", "Bouaké" ], [ national, filtered_here, filtered_there ].map { it.drena&.name }
       assert_equal national, dashboard(period: "year", drena: "inconnue").with(drena: nil), "an unknown DRENA reads the national entry"
     end
   end
 
   test "7 days and 30 days are read live, every time" do
-    a_year_session(placed_student(create_classroom), 80)
+    a_year_session(placed_student(create_classroom), :gold)
     %w[7d 30d].each do |period|
       dashboard(period:)
 
@@ -454,7 +471,7 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal filtered_small, count_queries { dashboard(drena: Orm::Drena.first.public_id) }
     # ADR-0082 §4.4: one grouped query more for the app openers (16 and 19 before); ADR-0084 §4.6, ADR-0086 §4.6: the
     # Android parts of the students and of the teachers are read by that same query.
-    assert_equal [ 17, 20 ], [ small, filtered_small ], "national, then under a DRENA filter with its school rows (ADR-0062)"
+    assert_equal [ 18, 21 ], [ small, filtered_small ], "national, then under a DRENA filter with its school rows (ADR-0062)"
   end
 
   private
