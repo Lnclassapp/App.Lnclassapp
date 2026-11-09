@@ -264,26 +264,27 @@ module UseCases
         assert_empty @gaps.calls
       end
 
-      test "74 % s'affiche 15/20 : la lacune est remédiée" do
+      # Décision du porteur (2026-11-09) : Bronze et Argent restent en remédiation, la lacune se lève à l'Or.
+      test "74 % s'affiche 15/20 (Argent) : la lacune reste en attente, sans nouvel échec" do
         close(correct: 74, pending_gap: gap, kind: "remediation")
 
-        assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
+        assert_empty @gaps.calls
       end
 
-      test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
+      test "réussite sous l'Or : la lacune reste en attente, sans nouvel échec" do
         close(correct: 72, pending_gap: gap, kind: "remediation")
 
         assert_empty @gaps.calls
       end
 
-      test "réussite d'une remédiation à 75 % : la lacune est remédiée" do
-        close(correct: 75, pending_gap: gap, kind: "remediation")
+      test "réussite d'une remédiation à l'Or (78 %) : la lacune est remédiée" do
+        close(correct: 78, pending_gap: gap, kind: "remediation")
 
         assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
       end
 
-      test "réussite d'une session standard à 75 % : la lacune est auto-corrigée" do
-        close(correct: 75, pending_gap: gap)
+      test "réussite d'une session standard à l'Or (78 %) : la lacune est auto-corrigée" do
+        close(correct: 78, pending_gap: gap)
 
         assert_equal [ [ :resolve, { id: 70, status: "self_corrected", session_id: 5, at: NOW } ] ], @gaps.calls
       end

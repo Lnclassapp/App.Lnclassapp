@@ -247,6 +247,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré | bugfix | 2026-09-29 | Secrets à usage unique hors de tout cache |
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
+| [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |
 | [`sobriete-tokens`](sobriete-tokens/memo.md) | en cours | refactoring | 2026-10-09 | Sobriété de tokens |
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |
