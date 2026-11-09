@@ -11,7 +11,7 @@
 
 ## À trancher
 
-- [ ] 2026-11-08 · medailles-vocabulaire · Remédiation « sous Bronze » : le code résout une lacune dès 75 % (`REMEDIATION_THRESHOLD`, 15/20) — appliqué : doc seulement, code inchangé ; autres : aligner le seuil sur Bronze dans un chantier code ; recommandé : décider au chantier élève
+- [x] 2026-11-08 · medailles-vocabulaire · Remédiation « sous Bronze » : le code résout une lacune dès 75 % (`REMEDIATION_THRESHOLD`, 15/20) — appliqué : doc seulement, code inchangé ; autres : aligner le seuil sur Bronze dans un chantier code ; recommandé : décider au chantier élève — réponse du porteur (2026-11-09) : Bronze et Argent sont en remédiation, levée à l'Or ; fait dans `seuil-remediation`
 
 ## Ce qui a dérapé
 

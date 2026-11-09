@@ -10,7 +10,7 @@
 
 ## À trancher
 
-- [ ] 2026-11-08 · medailles-eleve · Remédiation : le code lève une lacune dès 75 % (15/20). Consigne élève « vise l'Or » — appliqué : seuil du code inchangé, consigne qui reste vraie ; autres : aligner le seuil sur le Bronze (la fiche serait levée dès le premier exercice traité, ce qui la vide de sens), ou sur l'Argent (68 %) ; recommandé : Argent, dans un chantier code
+- [x] 2026-11-08 · medailles-eleve · Remédiation : le code lève une lacune dès 75 % (15/20). Consigne élève « vise l'Or » — appliqué : seuil du code inchangé, consigne qui reste vraie ; autres : aligner le seuil sur le Bronze (la fiche serait levée dès le premier exercice traité, ce qui la vide de sens), ou sur l'Argent (68 %) ; recommandé : Argent, dans un chantier code — réponse du porteur (2026-11-09) : Bronze et Argent sont en remédiation, levée à l'Or ; fait dans `seuil-remediation`
 - [ ] 2026-11-08 · medailles-eleve · Statut « Réussi / À revoir » des questions d'une feuille du catalogue (vérification en direct, JavaScript) — appliqué : inchangé, ce n'est pas une note ; autres : le remplacer par la médaille de la copie ; recommandé : inchangé
 - [ ] 2026-11-08 · medailles-eleve · Page d'un exercice : le barème (« · barème : N points ») reste sur la feuille de sujet, vue aussi par l'enseignant — appliqué : inchangé ; autres : le retirer pour l'élève ; recommandé : le retirer au chantier enseignant
 

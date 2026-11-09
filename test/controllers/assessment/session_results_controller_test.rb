@@ -712,19 +712,16 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
                   text: "Refaire l'exercice"
   end
 
-  # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
-  test "fiche : une remédiation à 74 % est Argent et « Notion levée ! » : la médaille et l'effet sur la fiche s'accordent" do
+  # Décision du porteur (2026-11-09) : l'Argent ne lève pas la fiche ; la médaille et l'effet sur la fiche s'accordent.
+  test "fiche : une remédiation à 74 % est Argent et « Encore à revoir » : la médaille et l'effet sur la fiche s'accordent" do
     gap, remediation = failed_then_remediated(74)
-    decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
-    assert_equal :remediated, decision
-    gap.update!(status: decision.to_s, resolved_at: Time.current, resolved_by_session: remediation)
+    assert_equal :none, Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
     sign_in_as @student
 
     show remediation
 
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Argent")
-    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Notion levée !"
-    assert_select "#session_gap_outcome a", 0
+    assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
   end
 
   test "fiche : la remédiation qui lève la fiche lit « Notion levée ! », sans lien, après la phrase de progrès" do
