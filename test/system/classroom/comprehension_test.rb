@@ -29,8 +29,8 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
     done "Ange", "Kouadio", [ 80 ], [ 90 ], [ 81 ]
     done "Salif", "Traoré", [ 75 ]
     done "Rokia", "Cissé", [ 85 ]
-    # Pas encore (sous 50).
-    done "Yves", "Gnagne", [ 40 ]
+    # Pas encore : une copie rendue vide (aucune réponse) ne donne aucune médaille.
+    done "Yves", "Gnagne", [ 40, :blank ]
     # Pas encore faits : deux élèves sans session, un élève à session seulement commencée.
     create_student(classroom: @classroom, first_name: "Zoé", last_name: "Abo")
     create_student(classroom: @classroom, first_name: "Marc", last_name: "Touré")
@@ -107,12 +107,15 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       @clock += 1.minute
       session = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent:,
                                         classroom_assignment: @assignment, completed_at: @clock)
+      next if answers == :blank # a blank copy: no answer, no medal
+
       Array(answers).each_with_index { |correct, index| create_attempt(session:, question: @questions[index], correct:) }
+      record_medal(session) # the medal closing records: Bronze at least once the copy is treated
     end
   end
 
   def assert_box(label, count)
-    assert_selector "nav[aria-label='Élèves par badge'] a", text: /\A#{count}\s+#{label}\s/
+    assert_selector "nav[aria-label='Élèves par médaille'] a", text: /\A#{count}\s+#{label}\s/
   end
 
   def assert_bronze_panel
@@ -125,10 +128,10 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       assert_no_text(/%|1re session|reprendre/)
     end
     within "#comprehension_panel" do
-      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève ; du meilleur score au plus faible.
-      assert_equal [ "Aya Konan", "Paul Zadi", "Bakary Adou", "Fanta Sylla" ], all("ul li").map { it.find("a").text }
-      assert_selector "ul li", text: /Aya Konan\s+Fait le \d+ \w+\.\s+.*13\/20/m
-      assert_selector "ul li", text: /Paul Zadi.*13\/20/m
+      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève ; ordre alphabétique, jamais un classement par score.
+      assert_equal [ "Bakary Adou", "Aya Konan", "Fanta Sylla", "Paul Zadi" ], all("ul li").map { it.find("a").text }
+      assert_selector "ul li", text: /Aya Konan\s+Fait le \d+ \w+\.\s+.*Bronze/m
+      assert_no_text(%r{/20})
       assert_no_text(/En baisse|1 session|%|Pas encore fait/)
     end
   end

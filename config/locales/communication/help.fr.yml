@@ -21,26 +21,26 @@ fr:
             answer: "Sur l'accueil de Lnclass, touche « Je suis élève », puis « Rejoindre ma classe » : choisis ta DRENA, ton établissement, ton niveau, puis ta classe. Si ton enseignant t'a envoyé le lien de la classe, ouvre-le : ta classe est déjà choisie."
           change_classroom:
             question: "Si je change de classe, est-ce que je perds mes résultats ?"
-            answer: "Non. En rejoignant une nouvelle classe avec son code, tu gardes ton compte, tes sessions et tes badges."
+            answer: "Non. En rejoignant une nouvelle classe avec son code, tu gardes ton compte, tes sessions et tes médailles."
           late:
             question: "Que veut dire « En retard » ?"
             answer: "La date limite donnée par ton enseignant est passée et tu n'as pas encore terminé l'exercice. Il reste ouvert : tu peux toujours le faire. Une fois terminé, il n'est plus marqué « En retard », mais ton enseignant voit qu'il a été rendu après la date."
           grade:
-            question: "Comment ma note sur 20 est-elle calculée ?"
-            answer: "Elle vient de la part de bonnes réponses : 8 bonnes réponses sur 10, c'est 80 %, soit %{example_grade}/20. Sur la page d'un exercice, « Meilleure note » garde ton meilleur résultat."
+            question: "Comment ma médaille est-elle décidée ?"
+            answer: "Elle vient de la part de bonnes réponses à l'exercice : plus tu réponds juste, plus ta médaille est haute. Sur la page d'un exercice, « Ta médaille » garde la meilleure que tu as obtenue."
           badges:
-            question: "Comment gagner un badge ?"
-            answer: "En réussissant un exercice : Bronze dès %{pass_grade}/20, Argent dès %{mastery_grade}/20, Or dès %{gold_grade}/20, Diamant quand toutes les réponses sont justes. Tu as un seul badge par exercice, et il ne peut que monter."
+            question: "Comment gagner une médaille ?"
+            answer: "En terminant un exercice : tu as au moins le Bronze. Argent quand tu réponds juste à environ deux questions sur trois, Or quand tu réponds juste à plus de trois questions sur quatre, Diamant quand toutes les réponses sont justes. Tu as une seule médaille par exercice, et elle ne peut que monter."
           mastery:
             question: "Que veut dire « Maîtrise » ?"
-            answer: "Elle dit où tu en es sur un exercice : Acquis dès %{mastery_grade}/20, Fragile dès %{pass_grade}/20, En difficulté sous %{pass_grade}/20."
+            answer: "Elle dit où tu en es sur un exercice : Acquis dès l'Argent, Fragile au Bronze quand plus de la moitié est juste, En difficulté quand moins de la moitié est juste."
           gaps:
             question: "Pourquoi une fiche de révision est-elle « à revoir » ?"
-            # UDR-0119 : sur 20, comme toutes les notes de l'élève.
-            answer: "Quand tu obtiens moins de %{pass_grade}/20 à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis obtiens au moins %{remediation_grade}/20 à l'un de ses exercices : elle ne sera plus à revoir."
+            # UDR médailles : le seuil se dit en médaille (le code garde 15/20, voir le journal du chantier medailles-eleve).
+            answer: "Quand tu as moins de la moitié de bonnes réponses à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis vise l'Or à l'un de ses exercices : elle ne sera plus à revoir."
           retry:
             question: "Puis-je refaire un exercice ?"
-            answer: "Oui, autant de fois que tu veux. Ta meilleure note et ton badge restent acquis. « Recommencer » abandonne la session en cours et repart de la première question."
+            answer: "Oui, autant de fois que tu veux. Ta meilleure médaille reste acquise. « Recommencer » abandonne la session en cours et repart de la première question."
           profile:
             question: "Comment changer mon numéro, mon nom ou mon code secret ?"
             answer: "Ouvre le menu de ton compte, en haut de l'écran, puis « Mon profil ». Tu peux y changer ton nom, ton numéro et ton code secret."

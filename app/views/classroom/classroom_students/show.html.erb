@@ -4,8 +4,11 @@
 <% file = @file %>
 <% page_title t(".title", name: file.student.display_name, classroom: @header.name) %>
 <% content_for :nav_key, "classrooms" %>
+<%# Audit B-011 : la direction de l'école lit la fiche en lecture seule : retour vers sa page de classe, ni liens vers les pages
+    de l'enseignant, ni « Gérer ». %>
+<% reading_only = current_actor.school_admin? %>
 <div class="lg:mx-auto lg:max-w-228">
-  <%= ui_back_link @header.name, href: classroom_path(@header.public_id) %>
+  <%= ui_back_link @header.name, href: (reading_only ? school_admin_classroom_path(@header.public_id) : classroom_path(@header.public_id)) %>
 
   <div class="space-y-8">
     <%= render "identity", student: file.student %>
@@ -13,9 +16,9 @@
         trois rangées, la deuxième prend le reste, pour que la gestion suive le résumé). Au téléphone, l'ordre du fichier. %>
     <div class="space-y-8 lg:grid lg:grid-cols-2 lg:grid-rows-fit-fill-fit lg:items-start lg:gap-x-8 lg:space-y-0">
       <%= render "summary", file: %>
-      <%= render "assignments", classroom: @header, assignments: file.assignments %>
-      <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total %>
-      <%= render "manage", classroom: @header, student: file.student, can_remove: @can_remove %>
+      <%= render "assignments", classroom: @header, assignments: file.assignments, linked: !reading_only %>
+      <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total, linked: !reading_only %>
+      <%= render "manage", classroom: @header, student: file.student, can_remove: @can_remove unless reading_only %>
     </div>
   </div>
 </div>

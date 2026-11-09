@@ -24,7 +24,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
   test "a teacher and the team are redirected the same way, the team even for a draft notion" do
     draft = create_essential(course: @course, name: "Brouillon", status: "draft")
 
-    sign_in_as create_teacher
+    sign_in_as create_teacher(material: @course.material)
     get old_path
     assert_redirected_to course_path(@course.slug, anchor: "notion-#{@essential.slug}")
     assert_response :moved_permanently

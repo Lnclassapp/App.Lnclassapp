@@ -314,144 +314,258 @@
           },
           "pitfall": "Ne crois pas que le sexe dépend de la mère, ni qu'après plusieurs enfants du même sexe le suivant a plus de chances d'être de l'autre sexe. Contre-exemple : un couple a déjà 3 filles. Pour le quatrième enfant, l'échiquier est le même : $\\frac{1}{2}$ pour une fille, $\\frac{1}{2}$ pour un garçon. L'ovule porte toujours X, donc c'est le spermatozoïde (X ou Y) qui décide, et la fécondation ne garde aucun souvenir des naissances précédentes.",
           "figure": "sexe-fecondation",
-          "exercise": {
-            "title": "Le sexe de l'enfant : lire, croiser, conclure",
-            "statement": "Dans cet exercice, tu détermines le sexe d'un enfant et sa probabilité avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": "sexe-fecondation",
-            "questions": [
-              {
-                "content": "Le caryotype d'une cellule du corps d'une personne montre 46 chromosomes, dont la 23e paire est formée de deux chromosomes X. De quel sexe est cette personne ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Lire le caryotype : 46 chromosomes, donc 23 paires, et la paire sexuelle est XX. Étape 4 — Conclure : la paire XX est celle d'une femme. Le nombre 46 est le même chez l'homme, il ne renseigne donc pas sur le sexe : c'est la paire sexuelle qu'il faut lire.",
-                "answers": [
-                  {
-                    "content": "C'est un homme (un garçon)",
-                    "correct": false
-                  },
-                  {
-                    "content": "C'est une femme (une fille)",
-                    "correct": true
-                  },
-                  {
-                    "content": "On ne peut pas savoir, car le nombre 46 est celui des deux sexes",
-                    "correct": false
-                  },
-                  {
-                    "content": "C'est un homme, car il y a 46 chromosomes",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Tous les ovules d'une femme portent un chromosome X.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Lire : la femme a la paire sexuelle $X//X$. Étape 2 — Écrire les gamètes : chaque ovule reçoit un seul chromosome de la paire, donc un X, toujours. L'affirmation est vraie. C'est pour cela que le sexe de l'enfant ne dépend pas de l'ovule.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un spermatozoïde porte soit le chromosome X, soit le chromosome ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Lire : l'homme a la paire sexuelle $X//Y$. Étape 2 — Écrire les gamètes : un spermatozoïde reçoit un seul chromosome de la paire, soit X, soit Y. La réponse est Y.",
-                "answers": [
-                  {
-                    "content": "Y",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mère $X//X$ et un père $X//Y$ ont un enfant. Dans l'échiquier de croisement de leurs gamètes, il y a 4 cases. Combien de ces cases correspondent à une fille ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Lire : mère $X//X$, père $X//Y$. Étape 2 — Écrire les gamètes : ovules $X$ et $X$ ; spermatozoïdes $X$ et $Y$. Étape 3 — Construire l'échiquier : $X//X$, $X//Y$, $X//X$, $X//Y$. Étape 4 — Conclure : 2 cases sur 4 sont $X//X$, donc la probabilité d'une fille est $\\frac{2}{4} = \\frac{1}{2}$. Réponse : 2.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un couple a déjà deux garçons et attend son troisième enfant. Quelle est la probabilité que ce soit une fille ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 2 — Écrire les gamètes : l'ovule porte X, le spermatozoïde porte X ou Y. Étape 3 — Construire l'échiquier : 2 cases sur 4 donnent une fille. Étape 4 — Conclure : la probabilité est $\\frac{1}{2}$, comme à chaque naissance. Dire que la fille est plus probable après deux garçons est l'erreur tentante : la fécondation ne garde pas la mémoire des naissances précédentes.",
-                "answers": [
-                  {
-                    "content": "$\\frac{1}{2}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\frac{3}{4}$, car il faut rétablir l'équilibre",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\frac{1}{4}$, car il y a déjà deux garçons",
-                    "correct": false
-                  },
-                  {
-                    "content": "1, car le couple n'a pas encore de fille",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Parmi ces affirmations sur la détermination du sexe, lesquelles sont exactes ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 2 — Écrire les gamètes : l'ovule porte toujours X, le spermatozoïde porte X ou Y. Étape 4 — Conclure : le sexe est fixé à la fécondation, selon le chromosome apporté par le spermatozoïde. Les affirmations fausses placent la décision chez la mère, à la naissance, ou sur l'ovule, alors que l'ovule porte toujours X.",
-                "answers": [
-                  {
-                    "content": "Le sexe de l'enfant est fixé au moment de la fécondation",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le spermatozoïde apporte X ou Y : c'est le père qui détermine le sexe",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'ovule porte X ou Y selon la mère",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le sexe de l'enfant dépend de la mère",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le sexe se décide à la naissance",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de la méthode pour déterminer le sexe d'un enfant.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Lire le caryotype et repérer la paire sexuelle. Étape 2 — Écrire les gamètes de chaque parent. Étape 3 — Construire l'échiquier de croisement. Étape 4 — Conclure en donnant le sexe ou la probabilité en fraction. On ne peut pas construire l'échiquier avant d'avoir écrit les gamètes.",
-                "answers": [
-                  {
-                    "content": "Lire le caryotype et repérer la paire de chromosomes sexuels"
-                  },
-                  {
-                    "content": "Écrire les gamètes de chaque parent"
-                  },
-                  {
-                    "content": "Construire l'échiquier de croisement"
-                  },
-                  {
-                    "content": "Conclure en donnant le sexe ou la probabilité en fraction"
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Le sexe de l'enfant : lire, croiser, conclure",
+              "statement": "Dans cet exercice, tu détermines le sexe d'un enfant et sa probabilité avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "sexe-fecondation",
+              "questions": [
+                {
+                  "content": "Le caryotype d'une cellule du corps d'une personne montre 46 chromosomes, dont la 23e paire est formée de deux chromosomes X. De quel sexe est cette personne ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : 46 chromosomes, donc 23 paires, et la paire sexuelle est XX. Étape 4 — Conclure : la paire XX est celle d'une femme. Le nombre 46 est le même chez l'homme, il ne renseigne donc pas sur le sexe : c'est la paire sexuelle qu'il faut lire.",
+                  "answers": [
+                    {
+                      "content": "C'est un homme (un garçon)",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est une femme (une fille)",
+                      "correct": true
+                    },
+                    {
+                      "content": "On ne peut pas savoir, car le nombre 46 est celui des deux sexes",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un homme, car il y a 46 chromosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tous les ovules d'une femme portent un chromosome X.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : la femme a la paire sexuelle $X//X$. Étape 2 — Écrire les gamètes : chaque ovule reçoit un seul chromosome de la paire, donc un X, toujours. L'affirmation est vraie. C'est pour cela que le sexe de l'enfant ne dépend pas de l'ovule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un spermatozoïde porte soit le chromosome X, soit le chromosome ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : l'homme a la paire sexuelle $X//Y$. Étape 2 — Écrire les gamètes : un spermatozoïde reçoit un seul chromosome de la paire, soit X, soit Y. La réponse est Y.",
+                  "answers": [
+                    {
+                      "content": "Y",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère $X//X$ et un père $X//Y$ ont un enfant. Dans l'échiquier de croisement de leurs gamètes, il y a 4 cases. Combien de ces cases correspondent à une fille ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : mère $X//X$, père $X//Y$. Étape 2 — Écrire les gamètes : ovules $X$ et $X$ ; spermatozoïdes $X$ et $Y$. Étape 3 — Construire l'échiquier : $X//X$, $X//Y$, $X//X$, $X//Y$. Étape 4 — Conclure : 2 cases sur 4 sont $X//X$, donc la probabilité d'une fille est $\\frac{2}{4} = \\frac{1}{2}$. Réponse : 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple a déjà deux garçons et attend son troisième enfant. Quelle est la probabilité que ce soit une fille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire les gamètes : l'ovule porte X, le spermatozoïde porte X ou Y. Étape 3 — Construire l'échiquier : 2 cases sur 4 donnent une fille. Étape 4 — Conclure : la probabilité est $\\frac{1}{2}$, comme à chaque naissance. Dire que la fille est plus probable après deux garçons est l'erreur tentante : la fécondation ne garde pas la mémoire des naissances précédentes.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$, car il faut rétablir l'équilibre",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$, car il y a déjà deux garçons",
+                      "correct": false
+                    },
+                    {
+                      "content": "1, car le couple n'a pas encore de fille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur la détermination du sexe, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Écrire les gamètes : l'ovule porte toujours X, le spermatozoïde porte X ou Y. Étape 4 — Conclure : le sexe est fixé à la fécondation, selon le chromosome apporté par le spermatozoïde. Les affirmations fausses placent la décision chez la mère, à la naissance, ou sur l'ovule, alors que l'ovule porte toujours X.",
+                  "answers": [
+                    {
+                      "content": "Le sexe de l'enfant est fixé au moment de la fécondation",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le spermatozoïde apporte X ou Y : c'est le père qui détermine le sexe",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ovule porte X ou Y selon la mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sexe de l'enfant dépend de la mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sexe se décide à la naissance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour déterminer le sexe d'un enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le caryotype et repérer la paire sexuelle. Étape 2 — Écrire les gamètes de chaque parent. Étape 3 — Construire l'échiquier de croisement. Étape 4 — Conclure en donnant le sexe ou la probabilité en fraction. On ne peut pas construire l'échiquier avant d'avoir écrit les gamètes.",
+                  "answers": [
+                    {
+                      "content": "Lire le caryotype et repérer la paire de chromosomes sexuels"
+                    },
+                    {
+                      "content": "Écrire les gamètes de chaque parent"
+                    },
+                    {
+                      "content": "Construire l'échiquier de croisement"
+                    },
+                    {
+                      "content": "Conclure en donnant le sexe ou la probabilité en fraction"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire des caryotypes et prévoir le sexe des enfants d'un couple de Bouaké",
+              "statement": "Dans cet exercice, tu lis des caryotypes et tu prévois le sexe d'un enfant avec la méthode de la fiche. Les familles de l'exercice sont des situations d'exemple.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : une cellule du corps a 23 paires de chromosomes ; un gamète n'en garde qu'un de chaque paire ; l'ovule porte toujours X.",
+              "questions": [
+                {
+                  "content": "Dans une cellule du corps d'un garçon, il y a 22 paires d'autosomes et 1 paire de chromosomes sexuels. Combien d'autosomes cette cellule contient-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire le caryotype : une cellule du corps compte 22 paires d'autosomes, et chaque paire compte 2 chromosomes. On calcule 22 × 2 = 44 autosomes ; les 2 chromosomes sexuels (X et Y) viennent en plus, ce qui fait 46 chromosomes au total. Répondre 46 compte les chromosomes sexuels parmi les autosomes ; répondre 22 compte les paires au lieu des chromosomes.",
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père de paire sexuelle X//Y produit des spermatozoïdes. Lesquels ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire les gamètes : le père X//Y donne des spermatozoïdes qui portent soit X, soit Y, car un gamète ne garde qu'un chromosome de chaque paire. Dire « seulement Y » ou « seulement X » oublie l'autre moitié des spermatozoïdes ; dire « X//Y » oublie qu'un gamète n'a que 23 chromosomes, un de chaque paire.",
+                  "answers": [
+                    {
+                      "content": "Des spermatozoïdes X et des spermatozoïdes Y",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement des spermatozoïdes Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement des spermatozoïdes X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des spermatozoïdes X//Y, qui portent les deux chromosomes sexuels",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple a déjà eu quatre garçons. Pour le cinquième enfant, la probabilité d'avoir une fille est plus grande que 1/2.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Construire l'échiquier : mère X//X, père X//Y, les quatre cases sont X//X, X//Y, X//X et X//Y. Étape 4 — Conclure : 2 cases sur 4 donnent une fille, soit 1/2, comme à chaque naissance. L'affirmation est fausse : croire qu'une fille devient plus probable après quatre garçons suppose que la fécondation garde le souvenir des naissances précédentes, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez l'Homme, c'est le ___ qui détermine le sexe de l'enfant.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Écrire les gamètes : tous les ovules de la mère portent X, alors que les spermatozoïdes du père portent X ou Y. Étape 4 — Conclure : le sexe dépend du spermatozoïde qui féconde l'ovule, donc c'est le père qui détermine le sexe. Répondre « la mère » oublie que son ovule porte toujours X.",
+                  "answers": [
+                    {
+                      "content": "père",
+                      "correct": true
+                    },
+                    {
+                      "content": "le père",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour prévoir le sexe d'un enfant.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le caryotype : on repère d'abord la paire de chromosomes sexuels. Étape 2 — Écrire les gamètes : on note ce que chaque parent peut donner. Étape 3 — Construire l'échiquier : on associe chaque gamète de la mère à chaque gamète du père. Étape 4 — Conclure : on donne le sexe ou la probabilité. Construire l'échiquier avant d'avoir écrit les gamètes est impossible : les cases viennent des gamètes.",
+                  "answers": [
+                    {
+                      "content": "Lire le caryotype et repérer la paire de chromosomes sexuels"
+                    },
+                    {
+                      "content": "Écrire les gamètes de chaque parent"
+                    },
+                    {
+                      "content": "Construire l'échiquier de croisement case par case"
+                    },
+                    {
+                      "content": "Conclure en donnant le sexe ou la probabilité de chaque sexe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cellule humaine à ce qui la décrit.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire le caryotype : une cellule du corps a 46 chromosomes, soit 23 paires. Étape 2 — Écrire les gamètes : un gamète n'a qu'un chromosome sexuel ; l'ovule porte toujours X, le spermatozoïde porte X ou Y. Si tu relies l'ovule à « X ou Y », tu oublies que la mère n'a que des X ; si tu relies la cellule du corps à un seul chromosome sexuel, tu la confonds avec un gamète.",
+                  "answers": [
+                    {
+                      "content": "Un ovule",
+                      "match": "Son chromosome sexuel est toujours X"
+                    },
+                    {
+                      "content": "Un spermatozoïde",
+                      "match": "Son chromosome sexuel est X ou Y"
+                    },
+                    {
+                      "content": "Une cellule du corps",
+                      "match": "46 chromosomes, soit 23 paires"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à lire un caryotype et à prévoir le sexe d'un enfant, avec la méthode de la fiche.",
             "questions": [
@@ -557,159 +671,292 @@
           },
           "pitfall": "Ne confonds pas un allèle présent et un allèle exprimé. Le génotype $A//O$ donne le groupe A, pas le groupe AB ni le groupe O : l'allèle $O$ est caché par $A$. Contre-exemple : deux personnes de groupe A, l'une $A//A$ et l'autre $A//O$, ont le même groupe mais pas les mêmes gamètes. Et ne note pas [Rh+] toujours $R//R$ : $R//r$ est aussi Rh+.",
           "figure": "abo-groupes-genotypes",
-          "exercise": {
-            "title": "Des groupes sanguins aux génotypes",
-            "statement": "Dans cet exercice, tu écris les génotypes possibles de groupes sanguins ABO et Rhésus avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": "abo-groupes-genotypes",
-            "questions": [
-              {
-                "content": "Quel génotype correspond au groupe sanguin O ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Lire le phénotype : le groupe est [O]. Étape 2 — Rappeler la dominance : $O$ est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Écrire : le seul génotype est $O//O$. Le génotype $A//O$ est l'erreur tentante : l'allèle $A$ s'exprime, donc la personne est de groupe A.",
-                "answers": [
-                  {
-                    "content": "$O//O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$A//O$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$B//O$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$A//B$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque génotype au groupe sanguin qu'il donne.",
-                "question_type": "matching",
-                "explanation": "Étape 1 — Lire le génotype. Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants, $O$ est récessif. Étape 3 — Écrire le groupe : $A//B$ donne AB (les deux s'expriment) ; $O//O$ donne O ; $B//O$ donne B (le $O$ est caché) ; $A//A$ donne A.",
-                "answers": [
-                  {
-                    "content": "$A//B$",
-                    "match": "Groupe AB"
-                  },
-                  {
-                    "content": "$O//O$",
-                    "match": "Groupe O"
-                  },
-                  {
-                    "content": "$B//O$",
-                    "match": "Groupe B"
-                  },
-                  {
-                    "content": "$A//A$",
-                    "match": "Groupe A"
-                  }
-                ]
-              },
-              {
-                "content": "Une personne est de groupe B. Quels sont ses génotypes possibles ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Lire le phénotype : le groupe est [B]. Étape 2 — Rappeler la dominance : $B$ s'exprime seul ou avec un $O$ caché, car $O$ est récessif. Étape 3 — Écrire : $B//B$ ou $B//O$. $A//B$ donnerait le groupe AB et $O//O$ le groupe O.",
-                "answers": [
-                  {
-                    "content": "$B//B$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$B//O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$A//B$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$O//O$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$A//O$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une personne de groupe Rh+ a forcément le génotype $R//R$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Lire le phénotype : [Rh+]. Étape 2 — Rappeler la dominance : $R$ est dominant sur $r$, il s'exprime même en un seul exemplaire. Étape 3 — Écrire : $R//R$ ou $R//r$. L'affirmation est fausse : seul [Rh-] donne un génotype certain, $r//r$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une personne de génotype $A//B$ est de groupe ___.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Lire le génotype : $A//B$. Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants. Étape 3 — Écrire le groupe : les deux allèles s'expriment, donc le groupe est AB, pas A ni B.",
-                "answers": [
-                  {
-                    "content": "A",
-                    "correct": false
-                  },
-                  {
-                    "content": "B",
-                    "correct": false
-                  },
-                  {
-                    "content": "AB",
-                    "correct": true
-                  },
-                  {
-                    "content": "O",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans le système ABO, l'allèle ___ est le seul allèle récessif.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants, tandis que $O$ est récessif, car il ne s'exprime qu'en double exemplaire ($O//O$). La réponse est O.",
-                "answers": [
-                  {
-                    "content": "O",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une personne a le génotype $A//O$. Quel est son groupe sanguin ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Lire le génotype : $A//O$. Étape 2 — Rappeler la dominance : $O$ est récessif, il est caché par $A$. Étape 3 — Écrire le groupe : A. Le groupe AB exigerait $A//B$ et le groupe O exigerait $O//O$.",
-                "answers": [
-                  {
-                    "content": "Le groupe A",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le groupe AB",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le groupe O",
-                    "correct": false
-                  },
-                  {
-                    "content": "Aucun groupe, car les allèles sont différents",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Des groupes sanguins aux génotypes",
+              "statement": "Dans cet exercice, tu écris les génotypes possibles de groupes sanguins ABO et Rhésus avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": "abo-groupes-genotypes",
+              "questions": [
+                {
+                  "content": "Quel génotype correspond au groupe sanguin O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le phénotype : le groupe est [O]. Étape 2 — Rappeler la dominance : $O$ est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Écrire : le seul génotype est $O//O$. Le génotype $A//O$ est l'erreur tentante : l'allèle $A$ s'exprime, donc la personne est de groupe A.",
+                  "answers": [
+                    {
+                      "content": "$O//O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A//O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B//O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A//B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype au groupe sanguin qu'il donne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire le génotype. Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants, $O$ est récessif. Étape 3 — Écrire le groupe : $A//B$ donne AB (les deux s'expriment) ; $O//O$ donne O ; $B//O$ donne B (le $O$ est caché) ; $A//A$ donne A.",
+                  "answers": [
+                    {
+                      "content": "$A//B$",
+                      "match": "Groupe AB"
+                    },
+                    {
+                      "content": "$O//O$",
+                      "match": "Groupe O"
+                    },
+                    {
+                      "content": "$B//O$",
+                      "match": "Groupe B"
+                    },
+                    {
+                      "content": "$A//A$",
+                      "match": "Groupe A"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne est de groupe B. Quels sont ses génotypes possibles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire le phénotype : le groupe est [B]. Étape 2 — Rappeler la dominance : $B$ s'exprime seul ou avec un $O$ caché, car $O$ est récessif. Étape 3 — Écrire : $B//B$ ou $B//O$. $A//B$ donnerait le groupe AB et $O//O$ le groupe O.",
+                  "answers": [
+                    {
+                      "content": "$B//B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B//O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A//B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$O//O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A//O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de groupe Rh+ a forcément le génotype $R//R$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire le phénotype : [Rh+]. Étape 2 — Rappeler la dominance : $R$ est dominant sur $r$, il s'exprime même en un seul exemplaire. Étape 3 — Écrire : $R//R$ ou $R//r$. L'affirmation est fausse : seul [Rh-] donne un génotype certain, $r//r$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de génotype $A//B$ est de groupe ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire le génotype : $A//B$. Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants. Étape 3 — Écrire le groupe : les deux allèles s'expriment, donc le groupe est AB, pas A ni B.",
+                  "answers": [
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "B",
+                      "correct": false
+                    },
+                    {
+                      "content": "AB",
+                      "correct": true
+                    },
+                    {
+                      "content": "O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le système ABO, l'allèle ___ est le seul allèle récessif.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Rappeler la dominance : $A$ et $B$ sont codominants, tandis que $O$ est récessif, car il ne s'exprime qu'en double exemplaire ($O//O$). La réponse est O.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne a le génotype $A//O$. Quel est son groupe sanguin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le génotype : $A//O$. Étape 2 — Rappeler la dominance : $O$ est récessif, il est caché par $A$. Étape 3 — Écrire le groupe : A. Le groupe AB exigerait $A//B$ et le groupe O exigerait $O//O$.",
+                  "answers": [
+                    {
+                      "content": "Le groupe A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le groupe AB",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le groupe O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun groupe, car les allèles sont différents",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Passer d'un groupe sanguin à ses génotypes possibles chez des élèves de Daloa",
+              "statement": "Dans cet exercice, tu passes d'un groupe sanguin à ses génotypes possibles avec la méthode de la fiche. Les élèves de l'exercice sont des situations d'exemple.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pense à la dominance : A et B sont codominants, O est récessif, R est dominant sur r. Un groupe AB, O ou Rh- n'a qu'un génotype.",
+              "questions": [
+                {
+                  "content": "Une élève de Daloa est de groupe B. Quels sont ses génotypes possibles pour le système ABO ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le phénotype : [B]. Étape 2 — Rappeler la dominance : B s'exprime seul ou avec un O caché, car O est récessif. Étape 3 — Écrire les génotypes possibles : B//B ou B//O, donc deux génotypes. Dire « B//B seulement » ou « B//O seulement » en oublie un ; ajouter O//O est une erreur, car O//O donne le groupe O.",
+                  "answers": [
+                    {
+                      "content": "B//B ou B//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "B//B seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "B//O seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "B//B, B//O ou O//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le phénotype se note entre ___, par exemple [A] ou [Rh+].",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire le phénotype : le groupe de la personne s'écrit entre crochets, [A] ou [Rh+], alors que le génotype s'écrit avec les allèles et les barres, comme A//O. Le mot attendu est crochets.",
+                  "answers": [
+                    {
+                      "content": "crochets",
+                      "correct": true
+                    },
+                    {
+                      "content": "des crochets",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le groupe sanguin, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Rappeler la dominance : A et B sont codominants et O est récessif. Étape 3 — Écrire les génotypes possibles : seul O//O donne le groupe O, et A//B donne le groupe AB. Le groupe A a deux génotypes, A//A et A//O, donc « seulement A//A » est faux ; O est récessif, pas dominant ; A//O donne le groupe A, pas AB.",
+                  "answers": [
+                    {
+                      "content": "Le groupe O correspond seulement au génotype O//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les allèles A et B sont codominants",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le groupe A correspond seulement au génotype A//A",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle O est dominant sur l'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le groupe AB correspond aux génotypes A//B ou A//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de génotype A//O porte l'allèle O, donc son groupe est O.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Rappeler la dominance : O est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Écrire les génotypes possibles : le groupe O demande O//O. Avec A//O, l'allèle A s'exprime et le groupe est A. L'erreur est de confondre un allèle présent et un allèle exprimé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype au phénotype qu'il donne.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Rappeler la dominance : B s'exprime avec un O caché ; A et B réunis s'expriment tous les deux ; r ne s'exprime qu'en double exemplaire. Étape 3 — Écrire : B//O donne le groupe B, O//O le groupe O, A//B le groupe AB, r//r le Rh-. Relier B//O au groupe O oublie que O est récessif ; relier A//B au groupe A oublie la codominance.",
+                  "answers": [
+                    {
+                      "content": "B//O",
+                      "match": "Groupe B"
+                    },
+                    {
+                      "content": "O//O",
+                      "match": "Groupe O"
+                    },
+                    {
+                      "content": "A//B",
+                      "match": "Groupe AB"
+                    },
+                    {
+                      "content": "r//r",
+                      "match": "Rhésus négatif (Rh-)"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le Rhésus, l'allèle r est ___ : il ne s'exprime qu'en double exemplaire.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Rappeler la dominance : R est dominant sur r. L'allèle r est donc récessif : seul r//r donne le Rh-. Dire dominant inverse les rôles ; dire codominant confond le Rhésus avec les allèles A et B du système ABO.",
+                  "answers": [
+                    {
+                      "content": "récessif",
+                      "correct": true
+                    },
+                    {
+                      "content": "dominant",
+                      "correct": false
+                    },
+                    {
+                      "content": "codominant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à passer d'un groupe sanguin à ses génotypes possibles, avec la méthode de la fiche.",
             "questions": [
@@ -830,144 +1077,262 @@
           },
           "pitfall": "Ne crois pas qu'un enfant a forcément le groupe d'un de ses parents, et n'oublie pas de compter les cases identiques. Contre-exemple : deux parents $A//O$ donnent 4 cases, $A//A$, $A//O$, $O//A$, $O//O$. Le génotype $A//O$ apparaît deux fois : le groupe A a la probabilité $\\frac{3}{4}$ (3 cases sur 4), le groupe O la probabilité $\\frac{1}{4}$. Deux parents de groupe A peuvent donc avoir un enfant de groupe O.",
           "figure": null,
-          "exercise": {
-            "title": "Prévoir les groupes sanguins des enfants",
-            "statement": "Dans cet exercice, tu prévois les groupes sanguins des enfants d'un couple avec un échiquier de croisement, en suivant la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Un homme a le génotype $A//O$. Quels gamètes produit-il, et avec quelles probabilités ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire le génotype : $A//O$. Étape 2 — Former les gamètes : chaque gamète reçoit un seul allèle de la paire, donc $A$ ou $O$, avec $\\frac{1}{2}$ chacun. Un gamète $A//O$ n'existe pas : il porte un seul allèle.",
-                "answers": [
-                  {
-                    "content": "$A$ avec $\\frac{1}{2}$ et $O$ avec $\\frac{1}{2}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$A//O$ avec la probabilité 1",
-                    "correct": false
-                  },
-                  {
-                    "content": "$A$ avec la probabilité 1",
-                    "correct": false
-                  },
-                  {
-                    "content": "$A$, $O$ et $A//O$ avec $\\frac{1}{3}$ chacun",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un couple formé d'une mère $A//O$ et d'un père $O//O$ a un enfant. Dans l'échiquier de croisement de leurs gamètes, il y a 4 cases. Combien de cases correspondent au génotype $O//O$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire les génotypes : $A//O$ et $O//O$. Étape 2 — Former les gamètes : la mère donne $A$ ou $O$, le père toujours $O$. Étape 3 — Construire l'échiquier : $A//O$, $A//O$, $O//O$, $O//O$. Étape 4 — Conclure : 2 cases sur 4 sont $O//O$, donc la probabilité du groupe O est $\\frac{1}{2}$. Réponse : 2.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mère de génotype $A//A$ et un père de génotype $O//O$ ont des enfants. Quels groupes sanguins les enfants peuvent-ils avoir ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire les génotypes : $A//A$ et $O//O$. Étape 2 — Former les gamètes : la mère donne toujours $A$, le père toujours $O$. Étape 3 — Construire l'échiquier : 4 cases, toutes $A//O$. Étape 4 — Conclure : tous les enfants sont de groupe A, avec la probabilité 1.",
-                "answers": [
-                  {
-                    "content": "La moitié de groupe A, la moitié de groupe O",
-                    "correct": false
-                  },
-                  {
-                    "content": "Tous de groupe O",
-                    "correct": false
-                  },
-                  {
-                    "content": "Tous de groupe A",
-                    "correct": true
-                  },
-                  {
-                    "content": "Tous de groupe AB",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une mère $A//B$ et un père $A//B$ ont un enfant. Quels sont les groupes possibles et leurs probabilités ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire les génotypes : $A//B$ et $A//B$. Étape 2 — Former les gamètes : $A$ ou $B$, $\\frac{1}{2}$ chacun. Étape 3 — Construire l'échiquier : $A//A$, $A//B$, $B//A$, $B//B$. Étape 4 — Conclure : A $\\frac{1}{4}$, AB $\\frac{2}{4} = \\frac{1}{2}$, B $\\frac{1}{4}$. Le groupe O est impossible : il n'y a aucun allèle $O$.",
-                "answers": [
-                  {
-                    "content": "AB, A, B et O avec $\\frac{1}{4}$ chacun",
-                    "correct": false
-                  },
-                  {
-                    "content": "AB avec $\\frac{1}{2}$, A avec $\\frac{1}{4}$, B avec $\\frac{1}{4}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "Tous de groupe AB",
-                    "correct": false
-                  },
-                  {
-                    "content": "A avec $\\frac{1}{2}$ et B avec $\\frac{1}{2}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Deux parents de groupe A, de génotype $A//O$ chacun, ne peuvent pas avoir un enfant de groupe O.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire les génotypes : $A//O$ et $A//O$. Étape 2 — Former les gamètes : $A$ ou $O$. Étape 3 — Construire l'échiquier : $A//A$, $A//O$, $O//A$, $O//O$. Étape 4 — Conclure : la case $O//O$ existe, avec la probabilité $\\frac{1}{4}$. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une mère $R//r$ et un père $R//r$ (tous deux Rh+) ont un enfant. Quelle est la probabilité que l'enfant soit Rh- ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire les génotypes : $R//r$ et $R//r$. Étape 2 — Former les gamètes : $R$ ou $r$, $\\frac{1}{2}$ chacun. Étape 3 — Construire l'échiquier : $R//R$, $R//r$, $r//R$, $r//r$. Étape 4 — Conclure : seule la case $r//r$ est Rh-, soit $\\frac{1}{4}$. Rh+ a la probabilité $\\frac{3}{4}$.",
-                "answers": [
-                  {
-                    "content": "$\\frac{1}{4}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\frac{1}{2}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\frac{3}{4}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "0, car les parents sont Rh+",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une mère $A//B$ et un père $O//O$ ont des enfants de groupe A ou de groupe ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Écrire les génotypes : $A//B$ et $O//O$. Étape 2 — Former les gamètes : la mère donne $A$ ou $B$, le père toujours $O$. Étape 3 — Construire l'échiquier : $A//O$, $B//O$, $A//O$, $B//O$. Étape 4 — Conclure : groupe A ou groupe B, $\\frac{1}{2}$ chacun. La réponse est B.",
-                "answers": [
-                  {
-                    "content": "B",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Prévoir les groupes sanguins des enfants",
+              "statement": "Dans cet exercice, tu prévois les groupes sanguins des enfants d'un couple avec un échiquier de croisement, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un homme a le génotype $A//O$. Quels gamètes produit-il, et avec quelles probabilités ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire le génotype : $A//O$. Étape 2 — Former les gamètes : chaque gamète reçoit un seul allèle de la paire, donc $A$ ou $O$, avec $\\frac{1}{2}$ chacun. Un gamète $A//O$ n'existe pas : il porte un seul allèle.",
+                  "answers": [
+                    {
+                      "content": "$A$ avec $\\frac{1}{2}$ et $O$ avec $\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A//O$ avec la probabilité 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$ avec la probabilité 1",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$, $O$ et $A//O$ avec $\\frac{1}{3}$ chacun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple formé d'une mère $A//O$ et d'un père $O//O$ a un enfant. Dans l'échiquier de croisement de leurs gamètes, il y a 4 cases. Combien de cases correspondent au génotype $O//O$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : $A//O$ et $O//O$. Étape 2 — Former les gamètes : la mère donne $A$ ou $O$, le père toujours $O$. Étape 3 — Construire l'échiquier : $A//O$, $A//O$, $O//O$, $O//O$. Étape 4 — Conclure : 2 cases sur 4 sont $O//O$, donc la probabilité du groupe O est $\\frac{1}{2}$. Réponse : 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère de génotype $A//A$ et un père de génotype $O//O$ ont des enfants. Quels groupes sanguins les enfants peuvent-ils avoir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : $A//A$ et $O//O$. Étape 2 — Former les gamètes : la mère donne toujours $A$, le père toujours $O$. Étape 3 — Construire l'échiquier : 4 cases, toutes $A//O$. Étape 4 — Conclure : tous les enfants sont de groupe A, avec la probabilité 1.",
+                  "answers": [
+                    {
+                      "content": "La moitié de groupe A, la moitié de groupe O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous de groupe O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous de groupe A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous de groupe AB",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère $A//B$ et un père $A//B$ ont un enfant. Quels sont les groupes possibles et leurs probabilités ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : $A//B$ et $A//B$. Étape 2 — Former les gamètes : $A$ ou $B$, $\\frac{1}{2}$ chacun. Étape 3 — Construire l'échiquier : $A//A$, $A//B$, $B//A$, $B//B$. Étape 4 — Conclure : A $\\frac{1}{4}$, AB $\\frac{2}{4} = \\frac{1}{2}$, B $\\frac{1}{4}$. Le groupe O est impossible : il n'y a aucun allèle $O$.",
+                  "answers": [
+                    {
+                      "content": "AB, A, B et O avec $\\frac{1}{4}$ chacun",
+                      "correct": false
+                    },
+                    {
+                      "content": "AB avec $\\frac{1}{2}$, A avec $\\frac{1}{4}$, B avec $\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous de groupe AB",
+                      "correct": false
+                    },
+                    {
+                      "content": "A avec $\\frac{1}{2}$ et B avec $\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents de groupe A, de génotype $A//O$ chacun, ne peuvent pas avoir un enfant de groupe O.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : $A//O$ et $A//O$. Étape 2 — Former les gamètes : $A$ ou $O$. Étape 3 — Construire l'échiquier : $A//A$, $A//O$, $O//A$, $O//O$. Étape 4 — Conclure : la case $O//O$ existe, avec la probabilité $\\frac{1}{4}$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère $R//r$ et un père $R//r$ (tous deux Rh+) ont un enfant. Quelle est la probabilité que l'enfant soit Rh- ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : $R//r$ et $R//r$. Étape 2 — Former les gamètes : $R$ ou $r$, $\\frac{1}{2}$ chacun. Étape 3 — Construire l'échiquier : $R//R$, $R//r$, $r//R$, $r//r$. Étape 4 — Conclure : seule la case $r//r$ est Rh-, soit $\\frac{1}{4}$. Rh+ a la probabilité $\\frac{3}{4}$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "0, car les parents sont Rh+",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère $A//B$ et un père $O//O$ ont des enfants de groupe A ou de groupe ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire les génotypes : $A//B$ et $O//O$. Étape 2 — Former les gamètes : la mère donne $A$ ou $B$, le père toujours $O$. Étape 3 — Construire l'échiquier : $A//O$, $B//O$, $A//O$, $B//O$. Étape 4 — Conclure : groupe A ou groupe B, $\\frac{1}{2}$ chacun. La réponse est B.",
+                  "answers": [
+                    {
+                      "content": "B",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Prévoir les groupes sanguins des enfants d'un couple de Korhogo",
+              "statement": "Dans cet exercice, tu écris les gamètes et tu lis un échiquier de croisement pour prévoir les groupes des enfants, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris les gamètes de chaque parent, associe-les case par case, puis compte les cases : toutes ont la même probabilité.",
+              "questions": [
+                {
+                  "content": "Une mère A//O et un père A//B ont un enfant. Dans leur échiquier de croisement de 4 cases, combien de cases donnent un enfant de groupe A ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : A//O et A//B. Étape 2 — Former les gamètes : la mère donne A ou O, le père donne A ou B. Étape 3 — Construire l'échiquier : A//A, A//B, O//A et O//B. Étape 4 — Conclure : A//A et O//A donnent le groupe A, soit 2 cases. A//B donne AB et O//B donne B. Répondre 1 oublie que O//A est aussi du groupe A ; répondre 3 compte A//B comme groupe A.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère r//r et un père R//r attendent un enfant. Quelle est la probabilité que l'enfant soit Rhésus négatif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : r//r et R//r. Étape 2 — Former les gamètes : la mère donne toujours r, le père donne R ou r. Étape 3 — Construire l'échiquier : R//r, r//r, R//r et r//r. Étape 4 — Conclure : 2 cases sur 4 sont r//r, soit 1/2. Répondre 0 croit qu'un parent Rh+ donne toujours un enfant Rh+ ; 1/4 ne compte qu'une case.",
+                  "answers": [
+                    {
+                      "content": "1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "3/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère A//O a donné l'allèle A à son premier enfant. Pour son deuxième enfant, la probabilité qu'elle lui donne l'allèle A vaut encore 1/2.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Former les gamètes : la mère A//O produit des gamètes A et des gamètes O, chacun avec la probabilité 1/2. Étape 3 — Construire l'échiquier : le calcul est le même à chaque naissance. L'affirmation est vraie. Penser qu'elle devrait donner O cette fois-ci oublie que les naissances précédentes ne changent rien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère A//B et un père O//O ont un enfant. Quels groupes ABO l'enfant peut-il avoir ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire les génotypes : A//B et O//O. Étape 2 — Former les gamètes : la mère donne A ou B, le père donne toujours O. Étape 3 — Construire l'échiquier : A//O, A//O, B//O et B//O. Étape 4 — Conclure : groupe A et groupe B, 1/2 chacun. Le groupe AB demande un A et un B, or le père ne donne que O ; le groupe O demande O//O, or la mère n'a pas d'allèle O.",
+                  "answers": [
+                    {
+                      "content": "Groupe A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Groupe B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Groupe AB",
+                      "correct": false
+                    },
+                    {
+                      "content": "Groupe O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple à la probabilité que leur enfant soit de groupe O.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire les génotypes de chaque couple. Étape 2 — Former les gamètes. Étape 3 — Construire l'échiquier et compter les cases O//O : toutes pour O//O et O//O ; 1 sur 4 pour A//O et B//O ; aucune pour A//A et O//O, car la mère donne toujours A ; 2 sur 4 pour A//O et O//O. Étape 4 — Conclure : 1, 1/4, 0 et 1/2. Confondre 1/4 et 1/2 vient d'un mauvais comptage des cases.",
+                  "answers": [
+                    {
+                      "content": "Mère O//O et père O//O",
+                      "match": "1"
+                    },
+                    {
+                      "content": "Mère A//O et père B//O",
+                      "match": "1/4"
+                    },
+                    {
+                      "content": "Mère A//A et père O//O",
+                      "match": "0"
+                    },
+                    {
+                      "content": "Mère A//O et père O//O",
+                      "match": "1/2"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un parent qui porte deux allèles différents, comme A//O, est dit ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Former les gamètes : un parent A//O porte deux allèles différents et produit deux types de gamètes, A et O. On le dit hétérozygote. Un parent A//A, qui ne produit qu'un type de gamète, est homozygote : le mot homozygote serait donc faux ici.",
+                  "answers": [
+                    {
+                      "content": "hétérozygote",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à former des gamètes et à lire un échiquier de croisement, avec la méthode de la fiche.",
             "questions": [
@@ -1088,140 +1453,258 @@
           },
           "pitfall": "Ne conclus jamais qu'un homme est le père parce qu'il a le même groupe que l'enfant ou parce qu'il peut donner l'allèle. Contre-exemple : même enfant de groupe B, même mère O//O, mais un homme de groupe B. Il peut donner $B$ : il n'est pas exclu. Pourtant beaucoup d'autres hommes de groupe B pourraient aussi l'être. Exclure n'est pas prouver.",
           "figure": "exclusion-paternite",
-          "exercise": {
-            "title": "Exclure ou non une paternité",
-            "statement": "Dans cet exercice, tu raisonnes sur des groupes sanguins pour exclure ou non une paternité, avec la méthode de la fiche. Ce sont des raisonnements scolaires, sans valeur juridique.",
-            "exercise_type": "fixation",
-            "figure": "exclusion-paternite",
-            "questions": [
-              {
-                "content": "Si un homme peut donner l'allèle venu du père, on peut affirmer qu'il est le père de l'enfant.",
-                "question_type": "true_false",
-                "explanation": "Étape 3 — Comparer avec l'homme : il peut donner l'allèle. Étape 4 — Conclure : il n'est pas exclu, mais beaucoup d'autres hommes peuvent donner le même allèle. Les groupes sanguins servent à exclure, jamais à prouver. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un enfant est de groupe O, sa mère est de groupe A. Un homme de groupe AB est présenté comme le père. Que peut-on conclure ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : l'enfant de groupe O est $O//O$ (génotype certain). Étape 2 — Déduire : il a reçu un $O$ de chaque parent, donc le père a donné $O$. Étape 3 — Comparer : un homme AB est $A//B$ et ne peut donner que $A$ ou $B$. Étape 4 — Conclure : l'homme est exclu. La mère $A//O$ a bien donné un $O$, mais l'enfant $O//O$ a besoin d'un $O$ de chaque parent : « la mère peut donner O » ne sauve pas l'homme.",
-                "answers": [
-                  {
-                    "content": "L'homme est exclu : il est $A//B$ et ne peut pas donner l'allèle $O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'homme n'est pas exclu : un enfant peut avoir un groupe différent de celui de son père",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il n'est pas exclu, car la mère peut donner O",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'homme est le père, car le groupe O existe dans la famille",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un enfant de groupe AB a une mère $A//A$. Quel allèle l'enfant a-t-il reçu de son père ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : l'enfant est $A//B$ (génotype certain) et la mère $A//A$. Étape 2 — Déduire : la mère ne peut donner que $A$, donc l'allèle $B$ de l'enfant vient du père. Étape 3 — Comparer : un père possible doit pouvoir donner $B$. L'allèle $A$ est celui de la mère.",
-                "answers": [
-                  {
-                    "content": "L'allèle $A$",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'allèle $B$",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'allèle $O$",
-                    "correct": false
-                  },
-                  {
-                    "content": "On ne peut pas savoir, car $A$ ou $B$ sont possibles",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un homme de génotype $O//O$ ne peut donner à son enfant que l'allèle ___.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 3 — Comparer avec l'homme : $O//O$ n'a que des allèles $O$, tous ses gamètes portent $O$. Il ne peut donc donner ni $A$ ni $B$. La réponse est O.",
-                "answers": [
-                  {
-                    "content": "O",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un enfant de groupe O a une mère de groupe O. On connaît le génotype de six hommes. Lesquels ne sont pas exclus ?",
-                "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Écrire : l'enfant et la mère sont $O//O$. Étape 2 — Déduire : le père a donné $O$. Étape 3 — Comparer : $O//O$, $A//O$ et $B//O$ peuvent donner $O$. Étape 4 — Conclure : ces trois hommes ne sont pas exclus. $A//A$, $B//B$ et $A//B$ n'ont aucun allèle $O$ : ils sont exclus.",
-                "answers": [
-                  {
-                    "content": "$O//O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$A//O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$B//O$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$A//A$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$B//B$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$A//B$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un enfant est de groupe A, sa mère est $B//O$ ; un homme $A//B$ est présenté comme le père. Que peut-on dire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : la mère $B//O$ n'a pas d'allèle $A$ ; l'enfant, de groupe A, a au moins un allèle $A$. Étape 2 — Déduire : l'allèle $A$ vient du père. Étape 3 — Comparer : l'homme $A//B$ peut donner $A$. Étape 4 — Conclure : il n'est pas exclu, mais ce n'est pas une preuve. Penser « il peut donner A, donc il est le père » est l'erreur tentante.",
-                "answers": [
-                  {
-                    "content": "Il est le père, car il peut donner l'allèle $A$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il est exclu, car il possède aussi un allèle $B$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il n'est pas exclu, mais ce n'est pas une preuve de paternité",
-                    "correct": true
-                  },
-                  {
-                    "content": "Il est exclu, car la mère est de groupe B",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Exclure ou non une paternité",
+              "statement": "Dans cet exercice, tu raisonnes sur des groupes sanguins pour exclure ou non une paternité, avec la méthode de la fiche. Ce sont des raisonnements scolaires, sans valeur juridique.",
+              "exercise_type": "fixation",
+              "figure": "exclusion-paternite",
+              "questions": [
+                {
+                  "content": "Si un homme peut donner l'allèle venu du père, on peut affirmer qu'il est le père de l'enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer avec l'homme : il peut donner l'allèle. Étape 4 — Conclure : il n'est pas exclu, mais beaucoup d'autres hommes peuvent donner le même allèle. Les groupes sanguins servent à exclure, jamais à prouver. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est de groupe O, sa mère est de groupe A. Un homme de groupe AB est présenté comme le père. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'enfant de groupe O est $O//O$ (génotype certain). Étape 2 — Déduire : il a reçu un $O$ de chaque parent, donc le père a donné $O$. Étape 3 — Comparer : un homme AB est $A//B$ et ne peut donner que $A$ ou $B$. Étape 4 — Conclure : l'homme est exclu. La mère $A//O$ a bien donné un $O$, mais l'enfant $O//O$ a besoin d'un $O$ de chaque parent : « la mère peut donner O » ne sauve pas l'homme.",
+                  "answers": [
+                    {
+                      "content": "L'homme est exclu : il est $A//B$ et ne peut pas donner l'allèle $O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'homme n'est pas exclu : un enfant peut avoir un groupe différent de celui de son père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est pas exclu, car la mère peut donner O",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'homme est le père, car le groupe O existe dans la famille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant de groupe AB a une mère $A//A$. Quel allèle l'enfant a-t-il reçu de son père ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'enfant est $A//B$ (génotype certain) et la mère $A//A$. Étape 2 — Déduire : la mère ne peut donner que $A$, donc l'allèle $B$ de l'enfant vient du père. Étape 3 — Comparer : un père possible doit pouvoir donner $B$. L'allèle $A$ est celui de la mère.",
+                  "answers": [
+                    {
+                      "content": "L'allèle $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle $B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle $O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir, car $A$ ou $B$ sont possibles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme de génotype $O//O$ ne peut donner à son enfant que l'allèle ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer avec l'homme : $O//O$ n'a que des allèles $O$, tous ses gamètes portent $O$. Il ne peut donc donner ni $A$ ni $B$. La réponse est O.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant de groupe O a une mère de groupe O. On connaît le génotype de six hommes. Lesquels ne sont pas exclus ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Écrire : l'enfant et la mère sont $O//O$. Étape 2 — Déduire : le père a donné $O$. Étape 3 — Comparer : $O//O$, $A//O$ et $B//O$ peuvent donner $O$. Étape 4 — Conclure : ces trois hommes ne sont pas exclus. $A//A$, $B//B$ et $A//B$ n'ont aucun allèle $O$ : ils sont exclus.",
+                  "answers": [
+                    {
+                      "content": "$O//O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A//O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B//O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A//A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B//B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A//B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est de groupe A, sa mère est $B//O$ ; un homme $A//B$ est présenté comme le père. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : la mère $B//O$ n'a pas d'allèle $A$ ; l'enfant, de groupe A, a au moins un allèle $A$. Étape 2 — Déduire : l'allèle $A$ vient du père. Étape 3 — Comparer : l'homme $A//B$ peut donner $A$. Étape 4 — Conclure : il n'est pas exclu, mais ce n'est pas une preuve. Penser « il peut donner A, donc il est le père » est l'erreur tentante.",
+                  "answers": [
+                    {
+                      "content": "Il est le père, car il peut donner l'allèle $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est exclu, car il possède aussi un allèle $B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est pas exclu, mais ce n'est pas une preuve de paternité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est exclu, car la mère est de groupe B",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exclure ou non une paternité à partir des groupes sanguins",
+              "statement": "Dans cet exercice, tu déduis l'allèle donné par le père et tu exclus ou non un homme, avec la méthode de la fiche. Raisonnement scolaire, sans valeur juridique.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "L'enfant a un allèle de chaque parent : cherche celui que la mère n'a pas pu donner, puis regarde si l'homme peut le donner.",
+              "questions": [
+                {
+                  "content": "Un enfant est de groupe O. Un homme de groupe AB est présenté comme son père. Raisonnement scolaire, sans valeur juridique : que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire le génotype de l'enfant : groupe O, donc O//O. Étape 2 — Déduire l'allèle du père : l'enfant a reçu un O de chacun de ses parents, donc le père a donné O. Étape 3 — Comparer : un homme de groupe AB est A//B et ne peut pas donner O. Étape 4 — Conclure : il est exclu, sans avoir besoin du groupe de la mère. Dire qu'il peut donner A oublie que l'allèle cherché est O.",
+                  "answers": [
+                    {
+                      "content": "L'homme est exclu : il ne peut donner que l'allèle A ou l'allèle B, jamais O",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'homme n'est pas exclu : il peut donner l'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'homme est le père, car son groupe est différent de celui de la mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure, car le groupe de la mère n'est pas connu",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme de groupe B peut donner l'allèle B à un enfant de groupe B : il est donc le père de cet enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe B peut donner l'allèle B, donc il n'est pas exclu. Étape 4 — Conclure : être non exclu n'est pas une preuve, car beaucoup d'hommes ont le même groupe. L'affirmation est fausse : les groupes sanguins servent à exclure, jamais à prouver.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est B//O et sa mère est O//O : l'allèle B vient donc du père. Cinq hommes sont cités, de groupes A, B, AB, O et B. Combien d'entre eux sont exclus ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Déduire l'allèle du père : c'est B. Étape 3 — Comparer : un homme de groupe B (B//B ou B//O) peut donner B ; un homme de groupe AB (A//B) aussi ; un homme de groupe A (A//A ou A//O) ne peut donner que A ou O ; un homme de groupe O ne peut donner que O. Étape 4 — Conclure : les hommes de groupes A et O sont exclus, soit 2 hommes. Compter 3 serait exclure aussi un homme de groupe B.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est A//O et sa mère est A//B. L'allèle que le père a forcément donné à l'enfant est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : enfant A//O, mère A//B. Étape 2 — Déduire l'allèle du père : la mère n'a pas d'allèle O, donc l'allèle O de l'enfant vient du père ; l'allèle A peut venir de la mère. Choisir A confond un allèle que la mère possède avec l'allèle qui ne vient pas d'elle ; B est absent de l'enfant.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme qui ne peut pas donner l'allèle du père est ___ de la paternité.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer avec l'homme : s'il ne peut pas donner l'allèle du père, Étape 4 — Conclure : il est exclu. S'il peut le donner, il n'est pas exclu, ce qui ne prouve rien. Le mot attendu est exclu.",
+                  "answers": [
+                    {
+                      "content": "exclu",
+                      "correct": true
+                    },
+                    {
+                      "content": "exclue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant est de groupe AB et sa mère est de groupe A (A//A). L'allèle du père est donc B. Quels hommes ne sont pas exclus ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : enfant A//B, mère A//A. Étape 2 — Déduire : la mère ne donne que A, donc B vient du père. Étape 3 — Comparer : un homme de groupe B (B//B ou B//O) et un homme de groupe AB (A//B) peuvent donner B. Un homme de groupe A ne peut donner que A ou O, un homme de groupe O que O. Étape 4 — Conclure : les groupes B et AB ne sont pas exclus, sans que ce soit une preuve.",
+                  "answers": [
+                    {
+                      "content": "Un homme de groupe B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un homme de groupe AB",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un homme de groupe A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un homme de groupe O",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à exclure ou non une paternité à partir des groupes sanguins, avec la méthode de la fiche.",
             "questions": [
@@ -1827,6 +2310,1690 @@
               "starter": "L'allèle B de l'enfant vient…",
               "explanation": "Corrigé modèle : L'enfant est $A//B$ et la mère, de groupe A, ne peut pas donner $B$ : l'allèle $B$ vient du père. L'homme 1, $O//O$, ne peut donner que $O$ : il est exclu. L'homme 2, de groupe B, peut donner $B$ : il n'est pas exclu, mais ce n'est pas une preuve, car d'autres hommes de groupe B pourraient aussi être le père. Les groupes sanguins permettent seulement d'exclure. Barème : allèle $B$ venu du père (1 point) ; homme 1 exclu avec la raison (1 point) ; homme 2 non exclu (1 point) ; exclure n'est pas prouver (1 point).",
               "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "le caryotype humain (46 chromosomes, 22 paires d'autosomes, paire sexuelle XX ou XY), les gamètes et le rôle du père dans le sexe de l'enfant, les génotypes possibles des groupes ABO et Rhésus (codominance, allèle récessif), la prévision par l'échiquier de croisement, l'exclusion d'une paternité par les groupes sanguins.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT présente le caryotype d'une cellule du corps d'une personne. Les chromosomes sont rangés par paires, et l'on repère la paire de chromosomes sexuels. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une cellule du corps a 23 paires de chromosomes dont 22 paires d'autosomes ; un gamète a 23 chromosomes.",
+              "questions": [
+                {
+                  "content": "Une cellule du corps humain a 23 paires de chromosomes. Combien de chromosomes comporte-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : le caryotype montre 23 paires. Étape 2 — Calculer : chaque paire compte 2 chromosomes, donc 23 × 2 = 46 chromosomes. Règle de la leçon : une cellule du corps humain a 46 chromosomes, soit 23 paires. Répondre 23 revient à compter les paires au lieu des chromosomes ; répondre 22 oublie la paire de chromosomes sexuels.",
+                  "answers": [
+                    {
+                      "content": "46",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les chromosomes des 22 premières paires, identiques chez la fille et le garçon, s'appellent des ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Observer : sur les 23 paires du caryotype humain, 22 paires sont identiques chez la fille et le garçon. Étape 2 — Nommer : ce sont les autosomes. La 23e paire, différente selon le sexe, est formée des chromosomes sexuels : ce n'est donc pas elle qu'on nomme ici.",
+                  "answers": [
+                    {
+                      "content": "autosomes",
+                      "correct": true
+                    },
+                    {
+                      "content": "autosome",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la paire de chromosomes sexuels d'une femme ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : la femme a deux chromosomes X, l'homme un X et un Y. Étape 2 — Conclure : la paire sexuelle d'une femme est XX. La réponse « un X et un Y » est celle d'un homme ; « deux Y » n'existe pas chez l'Homme ; « un seul X » oublie que les chromosomes sexuels vont par paires.",
+                  "answers": [
+                    {
+                      "content": "Deux chromosomes X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un chromosome X et un chromosome Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux chromosomes Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul chromosome X",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un spermatozoïde humain contient 46 chromosomes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : une cellule du corps a 46 chromosomes. Étape 2 — Appliquer aux gamètes : un gamète (ovule ou spermatozoïde) ne garde qu'un chromosome de chaque paire, donc 23 chromosomes. L'affirmation est fausse. Répondre « Vrai » confond une cellule du corps et un gamète.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler le vocabulaire : le caryotype est la photographie des chromosomes rangés par paires ; les autosomes sont les chromosomes identiques chez la fille et le garçon ; un gamète a 23 chromosomes, un de chaque paire. Étape 2 — Relier. Relier gamète à 46 chromosomes confond le gamète avec une cellule du corps.",
+                  "answers": [
+                    {
+                      "content": "Caryotype",
+                      "match": "Photographie des chromosomes d'une cellule, rangés par paires"
+                    },
+                    {
+                      "content": "Autosomes",
+                      "match": "Chromosomes identiques chez la fille et le garçon"
+                    },
+                    {
+                      "content": "Gamète",
+                      "match": "Ovule ou spermatozoïde, à 23 chromosomes"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une infirmière d'un dispensaire de village, en Côte d'Ivoire, présente le système ABO et le système Rhésus à des élèves. Les gènes du groupe sanguin sont portés par des autosomes. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque personne a deux allèles de chaque gène, un reçu de chaque parent. A et B sont codominants, O est récessif, R domine r.",
+              "questions": [
+                {
+                  "content": "Combien d'allèles du système ABO chaque personne possède-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : le gène ABO a trois allèles possibles, A, B et O. Étape 2 — Appliquer : chaque personne en a seulement deux, un reçu de chaque parent. Dire « trois » confond les allèles qui existent dans la population avec ceux d'une personne ; dire « un seul » oublie le parent qui manque ; dire « quatre » compte deux allèles par parent.",
+                  "answers": [
+                    {
+                      "content": "Deux, un reçu de chaque parent",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un seul, reçu de la mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois, A, B et O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre, deux de chaque parent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de groupe O a pour génotype ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : O est récessif, il ne s'exprime qu'en double exemplaire. Étape 2 — Conclure : le groupe O correspond seulement à O//O. Avec A//O ou B//O, l'allèle A ou B s'exprime et cache O ; A//B donne le groupe AB.",
+                  "answers": [
+                    {
+                      "content": "O//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "B//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont exactes pour le système Rhésus ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Rappeler : le Rhésus est commandé par un gène à deux allèles, R (Rh+, dominant) et r (Rh-, récessif). Étape 2 — Appliquer : R//R et R//r donnent Rh+, seul r//r donne Rh-. Dire qu'une personne R//r est Rh- oublie que R est dominant ; dire que le Rhésus négatif domine inverse la dominance de R sur r.",
+                  "answers": [
+                    {
+                      "content": "L'allèle R est dominant sur l'allèle r",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une personne r//r est Rhésus négatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une personne qui a un allèle R et un allèle r est Rhésus négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le Rhésus négatif domine le Rhésus positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une personne qui a deux allèles R est Rhésus négatif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de groupe AB possède un allèle A et un allèle B.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : A et B sont codominants, c'est-à-dire qu'ils s'expriment tous les deux. Étape 2 — Conclure : le groupe AB correspond au génotype A//B, donc à un allèle A et un allèle B. L'affirmation est vraie. Répondre « Faux » ferait croire qu'un des deux allèles cache l'autre, ce qui n'arrive que pour O.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de génotypes différents sont possibles pour une personne de groupe A ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Rappeler : A est présent, O est récessif. Étape 2 — Lister : A//A et A//O donnent le groupe A ; A//B donne AB et O//O donne O. Étape 3 — Compter : 2 génotypes. Répondre 1 oublie A//O ; répondre 3 compte A//B, qui donne le groupe AB.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une famille de Yamoussoukro (situation d'exemple), la mère a pour paire sexuelle XX et le père XY. On étudie le sexe du prochain enfant du couple. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": "sexe-fecondation",
+              "hint": "L'ovule porte toujours X ; le spermatozoïde porte X ou Y ; chaque case de l'échiquier a la même probabilité.",
+              "questions": [
+                {
+                  "content": "Quels gamètes la mère de paire sexuelle XX produit-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la paire sexuelle de la mère est XX. Étape 2 — Écrire les gamètes : l'ovule ne garde qu'un chromosome de la paire, donc il porte toujours X. Dire « X et Y » donne à la mère le chromosome du père ; dire « XX » oublie que le gamète n'a qu'un chromosome par paire.",
+                  "answers": [
+                    {
+                      "content": "Uniquement des ovules portant X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des ovules portant X et des ovules portant Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des ovules portant XX",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des ovules portant Y",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'échiquier de croisement du couple (mère XX, père XY), il y a 4 cases. Combien de ces cases donnent un garçon ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : mère XX, père XY. Étape 2 — Écrire les gamètes : ovule X ; spermatozoïde X ou Y. Étape 3 — Construire l'échiquier : X//X, X//Y, X//X et X//Y. Étape 4 — Conclure : les cases X//Y sont des garçons, soit 2 cases. Répondre 1 ne compte qu'un type de spermatozoïde pour l'ovule ; répondre 4 suppose que tous les enfants seraient des garçons.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la probabilité que le prochain enfant du couple soit une fille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : mère XX, père XY. Étape 2 — Écrire les gamètes. Étape 3 — Construire l'échiquier : 4 cases, dont 2 sont X//X. Étape 4 — Conclure : 2 cases sur 4, soit 1/2. Répondre 1/4 ne compte qu'une case ; répondre 1/3 vient d'un comptage des types d'enfants au lieu des cases ; répondre 1 oublie les spermatozoïdes Y.",
+                  "answers": [
+                    {
+                      "content": "1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "1/3",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le chromosome Y que porte un garçon vient de son père.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : la mère XX ne porte aucun Y. Étape 2 — Écrire les gamètes : seul le père XY produit des spermatozoïdes Y. Étape 3 — Conclure : à la fécondation, un spermatozoïde Y donne un garçon, donc son Y vient du père. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sexe de l'enfant dépend du chromosome sexuel du ___ qui féconde l'ovule.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : l'ovule porte toujours X. Étape 2 — Conclure : c'est donc le gamète du père, le spermatozoïde, qui décide, selon qu'il porte X ou Y. Répondre « ovule » oublie que l'ovule est toujours le même.",
+                  "answers": [
+                    {
+                      "content": "spermatozoïde",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Raisonnement scolaire, sans valeur juridique. Dans une maternité, un enfant est de groupe A et sa mère est de groupe O. Un homme de groupe B est présenté comme le père. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le groupe O n'a qu'un génotype ; l'enfant reçoit un allèle de chaque parent ; l'allèle qui ne vient pas de la mère vient du père.",
+              "questions": [
+                {
+                  "content": "Quel est le génotype de la mère de groupe O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire le génotype de la mère : O est récessif, il ne s'exprime qu'en double exemplaire. Le groupe O correspond seulement à O//O, donc le génotype de la mère est certain. A//O et B//O donneraient les groupes A et B ; A//B donnerait AB.",
+                  "answers": [
+                    {
+                      "content": "O//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "B//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'enfant est de groupe A et sa mère est O//O. Quel allèle l'enfant a-t-il forcément reçu de son père ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : mère O//O, donc elle ne donne que O. Étape 2 — Déduire l'allèle du père : l'enfant est de groupe A, il a un allèle A ; la mère n'en a pas, donc il vient du père. L'allèle O vient de la mère. Répondre O confond l'allèle de la mère avec celui du père.",
+                  "answers": [
+                    {
+                      "content": "L'allèle A",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle B",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun allèle, tout vient de la mère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'homme de groupe B est présenté comme le père. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer avec l'homme : un homme de groupe B est B//B ou B//O, il ne peut donner que B ou O. Étape 4 — Conclure : l'allèle A du père est impossible pour lui, donc il est exclu. Dire « pas exclu » ou « le père » oublie de comparer l'allèle cherché avec ce que son groupe permet de donner.",
+                  "answers": [
+                    {
+                      "content": "Il est exclu : il ne peut donner que l'allèle B ou l'allèle O, jamais A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est le père, car B et O sont dans l'échiquier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est pas exclu, mais ce n'est pas une preuve",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le père, car la mère de groupe O ne s'y oppose pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'homme avait été de groupe A, les groupes sanguins prouveraient qu'il est le père.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe A peut donner l'allèle A, il ne serait pas exclu. Étape 4 — Conclure : être non exclu ne prouve rien, car beaucoup d'hommes ont le même groupe. L'affirmation est fausse : les groupes sanguins servent seulement à exclure.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement pour exclure ou non une paternité.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire les génotypes de l'enfant et de la mère. Étape 2 — Déduire l'allèle donné par le père : celui que la mère n'a pas pu donner. Étape 3 — Comparer avec l'homme. Étape 4 — Conclure. On ne peut pas comparer avant d'avoir déduit l'allèle du père, ni conclure avant de comparer.",
+                  "answers": [
+                    {
+                      "content": "Écrire le génotype de l'enfant et celui de la mère"
+                    },
+                    {
+                      "content": "Déduire l'allèle donné par le père"
+                    },
+                    {
+                      "content": "Comparer avec les allèles que l'homme peut donner"
+                    },
+                    {
+                      "content": "Conclure : l'homme est exclu ou non exclu"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante en Côte d'Ivoire",
+          "notions": "des situations d'exemple en Côte d'Ivoire : un don du sang à Bouaké (effectifs, pourcentage, allèles), une famille d'Abidjan (gamètes, groupes et sexe de l'enfant), un suivi Rhésus à Man (échiquier, fractions), un raisonnement scolaire sur une paternité à Abengourou.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Lors d'une journée de don du sang au centre hospitalier de Bouaké, un agent relève les groupes de 50 donneurs. Résultats simplifiés, situation d'exemple : 22 donneurs de groupe O, 18 de groupe A, 7 de groupe B et 3 de groupe AB.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un donneur de groupe AB est A//B, un donneur de groupe O est O//O. Un pourcentage se calcule en divisant l'effectif par 50 puis en multipliant par 100.",
+              "questions": [
+                {
+                  "content": "Sur 50 donneurs, 18 sont de groupe A et 3 de groupe AB. Combien de donneurs ont un allèle A dans leur génotype ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : groupe A = 18 donneurs, groupe AB = 3 donneurs. Étape 2 — Raisonner : une personne de groupe A est A//A ou A//O, une personne de groupe AB est A//B : toutes ont au moins un allèle A. Étape 3 — Additionner : 18 + 3 = 21. Répondre 18 oublie les donneurs AB, qui ont aussi un allèle A.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 50 donneurs, 22 sont de groupe O. Quel est le pourcentage de donneurs de groupe O ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : 22 donneurs de groupe O sur 50. Étape 2 — Calculer la proportion : 22 / 50 = 0,44. Étape 3 — Convertir en pourcentage : 0,44 × 100 = 44 %. Répondre 22 donne l'effectif et non le pourcentage ; répondre 22 / 100 oublie que le total est 50.",
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Un donneur de groupe A peut avoir transmis l'allèle O à son enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : le groupe A correspond à A//A ou A//O. Étape 2 — Appliquer : un donneur A//O porte l'allèle O, caché par A, et peut le transmettre dans un gamète. L'affirmation est vraie. Répondre « Faux » confond un allèle caché et un allèle absent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un donneur de groupe O ne possède que des allèles ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : le groupe O correspond seulement à O//O. Étape 2 — Conclure : ses deux allèles sont O. Un allèle A ou B s'exprimerait et donnerait un autre groupe, car O est récessif.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A",
+                      "correct": false
+                    },
+                    {
+                      "content": "B",
+                      "correct": false
+                    },
+                    {
+                      "content": "A ou B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "D'où viennent les deux allèles de groupe sanguin d'un enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : chaque personne a deux allèles, un reçu de chaque parent. Étape 2 — Conclure : l'enfant reçoit un allèle de sa mère et un de son père. Dire « les deux de la mère » ou « les deux du père » oublie un parent ; dire « quatre » fait oublier que chaque parent ne donne qu'un seul allèle.",
+                  "answers": [
+                    {
+                      "content": "Un de sa mère et un de son père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux de sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux de son père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les allèles de ses parents, soit quatre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Abidjan, Aya, de groupe O, et Yao, de groupe AB, attendent un enfant. Le couple est une situation d'exemple. Aya et Yao ont déjà un garçon. Tu étudies le groupe ABO et le sexe du prochain enfant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Aya est O//O et Yao est A//B : écris leurs gamètes puis construis l'échiquier de 4 cases. Les naissances précédentes ne changent pas les probabilités.",
+              "questions": [
+                {
+                  "content": "Quels gamètes ABO Yao, de groupe AB, produit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire le génotype : Yao est de groupe AB, donc A//B. Étape 2 — Former les gamètes : un gamète ne porte qu'un allèle, A ou B, chacun avec la probabilité 1/2. Dire « seulement A » oublie B ; dire « A, B et O » invente un allèle absent de son génotype ; dire « A et B ensemble » donne à un gamète deux allèles.",
+                  "answers": [
+                    {
+                      "content": "A ou B, chacun avec la probabilité 1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement A",
+                      "correct": false
+                    },
+                    {
+                      "content": "A, B et O, chacun avec la probabilité 1/3",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et B ensemble dans chaque gamète",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya est O//O et Yao est A//B. Quelle est la probabilité, en pourcentage, que leur enfant soit de groupe A ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : O//O et A//B. Étape 2 — Former les gamètes : Aya donne toujours O ; Yao donne A ou B. Étape 3 — Construire l'échiquier : A//O, B//O, A//O et B//O. Étape 4 — Conclure : 2 cases sur 4 sont de groupe A, soit 1/2, donc 50 %. Répondre 25 compte une seule case.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Aya, de groupe O, et Yao, de groupe AB, peuvent avoir un enfant de groupe AB.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : Aya est O//O, elle ne donne que O. Étape 2 — Chaque parent donne un seul allèle : un enfant AB devrait recevoir A et B, or Aya ne peut donner ni A ni B. L'affirmation est fausse. Penser que Yao suffit à donner AB oublie que l'enfant n'a reçu de lui qu'un seul allèle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Aya et Yao ont déjà un garçon. Quelle est la probabilité que leur deuxième enfant soit une fille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la mère est XX, le père XY. Étape 2 — Construire l'échiquier : 2 cases sur 4 sont X//X. Étape 3 — Conclure : 1/2, quels que soient les enfants déjà nés. Répondre 2/3 ou 1 croit que la fécondation compense le sexe du premier enfant ; elle n'a aucun souvenir.",
+                  "answers": [
+                    {
+                      "content": "1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/3",
+                      "correct": false
+                    },
+                    {
+                      "content": "2/3",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour prévoir le groupe de l'enfant d'Aya et de Yao.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire les génotypes : Aya O//O, Yao A//B. Étape 2 — Former les gamètes. Étape 3 — Construire l'échiquier case par case. Étape 4 — Conclure : lire les génotypes des enfants, nommer leurs groupes, donner les fractions. On ne peut pas construire l'échiquier sans les gamètes.",
+                  "answers": [
+                    {
+                      "content": "Écrire les génotypes des parents"
+                    },
+                    {
+                      "content": "Former les gamètes de chaque parent"
+                    },
+                    {
+                      "content": "Construire l'échiquier de croisement"
+                    },
+                    {
+                      "content": "Conclure : nommer les groupes et donner chaque probabilité"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une sage-femme du centre de santé de Man suit un couple dont les deux parents sont Rhésus positif, tous deux de génotype R//r pour le Rhésus. Situation d'exemple. On étudie le Rhésus du prochain enfant du couple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque parent donne R ou r avec la probabilité 1/2 : l'échiquier a 4 cases. R est dominant sur r, donc seul r//r donne le Rh-.",
+              "questions": [
+                {
+                  "content": "Le père et la mère sont R//r. Quels gamètes chacun produit-il pour le Rhésus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : les deux parents sont R//r. Étape 2 — Former les gamètes : un gamète porte un allèle, R ou r, chacun avec la probabilité 1/2. Dire « seulement R » confond le phénotype Rh+ avec le génotype ; dire « R//r » oublie que le gamète n'a qu'un allèle.",
+                  "answers": [
+                    {
+                      "content": "R ou r, chacun avec la probabilité 1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement R, car ils sont Rh+",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement r",
+                      "correct": false
+                    },
+                    {
+                      "content": "R//r, avec les deux allèles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'échiquier de croisement de ce couple (4 cases), combien de cases donnent un enfant Rhésus positif ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : R//r et R//r. Étape 2 — Former les gamètes : R ou r pour chacun. Étape 3 — Construire l'échiquier : R//R, R//r, r//R et r//r. Étape 4 — Conclure : R//R, R//r et r//R sont Rh+, seule r//r est Rh-, soit 3 cases Rh+. Répondre 2 compte R//r et r//R comme un seul cas.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents Rhésus positif ne peuvent jamais avoir un enfant Rhésus négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : Rh+ est R//R ou R//r, Rh- est r//r. Étape 2 — Appliquer : deux parents R//r peuvent chacun donner r, et l'enfant r//r est alors Rh-. L'affirmation est fausse. Répondre « Vrai » confond un parent Rh+ avec un parent R//R.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la probabilité que l'enfant du couple soit de génotype R//R ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Construire l'échiquier : R//R, R//r, r//R, r//r. Étape 4 — Conclure : 1 case sur 4 est R//R, soit 1/4. Répondre 1/2 compte aussi les R//r ; répondre 3/4 est la probabilité d'être Rh+, pas d'être R//R ; répondre 0 croit que l'enfant ne peut pas recevoir R des deux parents.",
+                  "answers": [
+                    {
+                      "content": "1/4",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la probabilité, en pourcentage, que l'enfant du couple soit Rhésus négatif ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Construire l'échiquier : R//R, R//r, r//R et r//r. Étape 4 — Conclure : 1 case sur 4 donne r//r, soit 1/4 = 25 %. Répondre 75 donne la probabilité d'être Rh+ ; répondre 50 suppose que chaque parent donne r avec certitude.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Raisonnement scolaire, sans valeur juridique. À Abengourou, un enfant est de groupe AB. Sa mère est de groupe B. Deux hommes sont cités : l'homme 1 est de groupe O, l'homme 2 est de groupe A. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'enfant AB est A//B. La mère de groupe B n'a pas d'allèle A. Un homme est exclu s'il ne peut pas donner l'allèle du père.",
+              "questions": [
+                {
+                  "content": "Quel allèle de l'enfant de groupe AB vient forcément du père ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'enfant AB est A//B ; la mère de groupe B est B//B ou B//O. Étape 2 — Déduire l'allèle du père : la mère n'a pas d'allèle A, donc l'allèle A vient du père. Choisir B confond l'allèle que la mère possède avec celui qui ne vient pas d'elle.",
+                  "answers": [
+                    {
+                      "content": "L'allèle A",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle B",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, les deux viennent de la mère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'homme 1, de groupe O, est exclu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe O est O//O, il ne peut donner que O. Étape 4 — Conclure : il ne peut pas donner l'allèle A du père, donc il est exclu. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire de l'homme 2, de groupe A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe A (A//A ou A//O) peut donner l'allèle A. Étape 4 — Conclure : il n'est pas exclu, mais beaucoup d'hommes ont le même groupe, donc ce n'est pas une preuve. Le dire exclu parce que son groupe diffère de celui de l'enfant est une erreur : l'enfant AB a un A et un B venus de deux parents.",
+                  "answers": [
+                    {
+                      "content": "Il n'est pas exclu, mais ce n'est pas une preuve qu'il est le père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est exclu, car son groupe est différent de celui de l'enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le père, car il peut donner l'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est exclu, car la mère est de groupe B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un homme de groupe A ne peut donner que l'allèle A ou l'allèle ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Comparer avec l'homme : un homme de groupe A est A//A ou A//O. Il ne peut donc donner que A ou O. Le mot attendu est O ; B est impossible, car B n'est pas dans ses génotypes.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur ce raisonnement sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure : la leçon dit que les groupes sanguins servent seulement à exclure, jamais à prouver, et que le raisonnement est scolaire, sans valeur juridique. Affirmer qu'un homme non exclu est le père oublie que beaucoup d'hommes ont le même groupe ; le lien entre groupes et fraternité n'existe pas dans la leçon.",
+                  "answers": [
+                    {
+                      "content": "Il sert à exclure un homme, jamais à prouver qu'il est le père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est scolaire et n'a pas de valeur juridique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un homme non exclu est forcément le père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux hommes de même groupe sont forcément frères",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "réfuter une idée fausse sur le sexe de l'enfant (rôle du père, naissances indépendantes), expliquer par les génotypes un enfant de groupe O né de parents de groupe A, combiner groupe ABO et Rhésus par deux échiquiers séparés, raisonner sur une paternité (allèle du père, exclusion, limite du raisonnement).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un élève affirme : « Ma mère a eu quatre filles, donc le prochain enfant sera sûrement un garçon, et c'est la mère qui décide du sexe. » Le professeur demande de répondre avec les chromosomes sexuels : la mère a la paire XX et le père la paire XY.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris les gamètes de la mère et du père, construis l'échiquier, puis compare avec ce que dit l'élève. Les naissances précédentes ne comptent pas.",
+              "questions": [
+                {
+                  "content": "Quelles phrases corrigent l'affirmation de l'élève ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire les gamètes : tous les ovules portent X, les spermatozoïdes portent X ou Y. Étape 2 — Raisonner : le sexe dépend du spermatozoïde, donc du père, et chaque naissance a la probabilité 1/2 pour chaque sexe. Dire qu'un garçon est plus probable suppose une mémoire de la fécondation ; dire que tous les spermatozoïdes portent X contredit l'existence des garçons ; dire que la mère produit Y est faux, car elle n'a pas de chromosome Y.",
+                  "answers": [
+                    {
+                      "content": "L'ovule porte toujours le chromosome X, donc la mère ne décide pas du sexe",
+                      "correct": true
+                    },
+                    {
+                      "content": "À chaque naissance, la probabilité d'avoir une fille est 1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "Après quatre filles, un garçon est plus probable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les spermatozoïdes portent le chromosome X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule la mère produit des gamètes qui portent Y",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La mère a eu quatre filles. Pour le cinquième enfant, dans l'échiquier du couple (mère XX, père XY) de 4 cases, combien de cases donnent un garçon ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les gamètes : ovule X ; spermatozoïde X ou Y. Étape 2 — Construire l'échiquier : X//X, X//Y, X//X et X//Y. Étape 3 — Compter : 2 cases X//Y, donc 2 cases garçon sur 4, autant que de cases fille. Les quatre filles déjà nées ne changent pas l'échiquier. Répondre 4 ou 3 suppose que le garçon est favorisé.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la mère ne peut-elle pas décider du sexe de l'enfant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : la paire sexuelle de la mère est XX. Étape 2 — Raisonner : un ovule ne garde qu'un chromosome de la paire, donc il porte toujours X, et c'est le spermatozoïde qui décide. Le nombre de chromosomes de la mère n'explique rien ; ses ovules ne portent jamais Y ; elle produit bien des gamètes, les ovules.",
+                  "answers": [
+                    {
+                      "content": "Tous ses ovules portent le chromosome X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle n'a que 23 chromosomes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ses ovules portent X ou Y selon son âge",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne produit pas de gamètes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui réfute l'élève.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire les gamètes. Étape 2 — Construire l'échiquier en associant chaque gamète de la mère à chaque gamète du père. Étape 3 — Compter les cases : 2 filles, 2 garçons. Étape 4 — Conclure : 1/2 pour chaque sexe, à chaque naissance. La conclusion ne vient qu'après le comptage des cases.",
+                  "answers": [
+                    {
+                      "content": "Écrire les gamètes : l'ovule porte X, le spermatozoïde porte X ou Y"
+                    },
+                    {
+                      "content": "Associer l'ovule à chaque type de spermatozoïde dans l'échiquier"
+                    },
+                    {
+                      "content": "Constater que 2 cases donnent une fille et 2 cases un garçon"
+                    },
+                    {
+                      "content": "Conclure : probabilité 1/2 pour chaque sexe, quels que soient les enfants déjà nés"
+                    }
+                  ]
+                },
+                {
+                  "content": "La fécondation garde en mémoire le sexe des enfants déjà nés et le corrige à la naissance suivante.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : à chaque naissance, un spermatozoïde X ou Y féconde l'ovule, avec la probabilité 1/2. Étape 2 — Raisonner : la fécondation ne garde aucun souvenir des naissances précédentes. L'affirmation est fausse. Répondre « Vrai » donnerait raison à l'élève qui attend un garçon après quatre filles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Daloa, un couple dont le père et la mère sont tous deux de groupe A a un enfant de groupe O. La famille s'étonne. Une infirmière explique avec les génotypes. Situation d'exemple. Tu raisonnes avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le groupe O n'a qu'un génotype. Chaque parent a donné un allèle à l'enfant. Cherche quel génotype un parent de groupe A doit avoir.",
+              "questions": [
+                {
+                  "content": "Quel est le génotype de l'enfant de groupe O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : O est récessif, il ne s'exprime qu'en double exemplaire. Étape 2 — Conclure : le groupe O correspond seulement à O//O. Avec A//O l'enfant serait de groupe A ; avec A//A, de groupe A ; avec A//B, de groupe AB.",
+                  "answers": [
+                    {
+                      "content": "O//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//A",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel allèle chacun des deux parents a-t-il donné à l'enfant O//O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : l'enfant reçoit un allèle de sa mère et un allèle de son père. Étape 2 — Raisonner : son génotype est O//O, donc il a reçu O de chacun. Dire A pour l'un des parents donnerait un enfant A//O de groupe A.",
+                  "answers": [
+                    {
+                      "content": "L'allèle O",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un allèle différent chacun, A pour l'un et O pour l'autre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux parents sont de groupe A et ont donné chacun un allèle O. Quel est leur génotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : groupe A, donc A//A ou A//O. Étape 2 — Raisonner : un parent qui a donné O porte un allèle O ; A//A n'en a pas. Étape 3 — Conclure : les deux sont A//O. Dire O//O ferait des parents de groupe O ; garder un parent A//A l'empêche de donner O.",
+                  "answers": [
+                    {
+                      "content": "A//O pour les deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//A pour les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//A pour l'un et A//O pour l'autre",
+                      "correct": false
+                    },
+                    {
+                      "content": "O//O pour les deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux parents sont A//O. Quelle est la probabilité, en pourcentage, que leur enfant soit de groupe O ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : A//O et A//O. Étape 2 — Former les gamètes : A ou O pour chacun. Étape 3 — Construire l'échiquier : A//A, A//O, O//A et O//O. Étape 4 — Conclure : 1 case sur 4 est O//O, soit 1/4 = 25 %. Répondre 50 oublie que le groupe A occupe 3 cases sur 4 ; répondre 75 donne la probabilité du groupe A.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Les parents de groupe A avaient chacun un allèle O : cet allèle était ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : le génotype A//O donne le groupe A, car l'allèle O est caché par A. Étape 2 — Conclure : l'allèle O est présent mais non exprimé. Dire « absent » oublie qu'il a été transmis ; dire dominant ou codominant inverse la règle, car O est récessif.",
+                  "answers": [
+                    {
+                      "content": "présent mais caché par l'allèle A",
+                      "correct": true
+                    },
+                    {
+                      "content": "absent de leur génotype",
+                      "correct": false
+                    },
+                    {
+                      "content": "dominant sur l'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "codominant avec l'allèle A",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un village près de Korhogo, un agent de santé étudie un couple (situation d'exemple). Le père est de groupe A, de génotype A//O, et Rhésus positif, de génotype R//r. La mère est de groupe B, de génotype B//O, et Rhésus négatif, de génotype r//r. Les gènes ABO et Rhésus sont étudiés séparément.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Fais un échiquier pour le système ABO et un autre pour le Rhésus. Pour chaque probabilité, compte les cases sur 4.",
+              "questions": [
+                {
+                  "content": "Quelles affirmations sont exactes pour ce couple ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire les génotypes. Étape 2 — Former les gamètes : le père R//r donne R ou r ; la mère r//r ne donne que r ; le père A//O donne A ou O. Le calcul se fait séparément pour le système ABO et pour le Rhésus. Dire que la mère donne R oublie son génotype r//r ; dire que le père ne donne que A oublie son allèle O caché ; un gamète n'a qu'un allèle, pas A//O.",
+                  "answers": [
+                    {
+                      "content": "Les gènes ABO et Rhésus se traitent séparément",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le père peut donner l'allèle R ou l'allèle r",
+                      "correct": true
+                    },
+                    {
+                      "content": "La mère r//r peut donner l'allèle R",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le père A//O ne peut donner que l'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le père produit des gamètes A//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le Rhésus, quelle est la probabilité, en pourcentage, que l'enfant du couple soit Rhésus négatif ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : père R//r, mère r//r. Étape 2 — Former les gamètes : le père donne R ou r, la mère donne toujours r. Étape 3 — Construire l'échiquier : R//r, r//r, R//r et r//r. Étape 4 — Conclure : 2 cases sur 4 sont r//r, soit 1/2 = 50 %. Répondre 0 croit qu'un père Rh+ donne toujours R ; répondre 25 ne compte qu'une case.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Pour le système ABO, quelle est la probabilité, en pourcentage, que l'enfant du couple soit de groupe O ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : père A//O, mère B//O. Étape 2 — Former les gamètes : A ou O pour le père, B ou O pour la mère. Étape 3 — Construire l'échiquier : A//B, A//O, O//B et O//O. Étape 4 — Conclure : 1 case sur 4 est O//O, soit 25 %. Répondre 50 suppose que le père donne O avec certitude.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quels groupes ABO l'enfant de ce couple peut-il avoir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : A//O et B//O. Étape 2 — Former les gamètes. Étape 3 — Construire l'échiquier : A//B donne AB, A//O donne A, O//B donne B, O//O donne O. Étape 4 — Conclure : les quatre groupes sont possibles, avec 1/4 chacun. Dire « seulement A ou B » oublie que les allèles O cachés peuvent se retrouver ; dire « seulement AB » ou « seulement O » ne retient qu'une case.",
+                  "answers": [
+                    {
+                      "content": "A, B, AB ou O",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement A ou B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement AB",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple peut avoir un enfant de groupe O et Rhésus négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes. Étape 2 — Traiter séparément : pour le système ABO, la case O//O existe (probabilité 1/4) ; pour le Rhésus, la case r//r existe (probabilité 1/2). Étape 3 — Conclure : les deux événements sont possibles pour le même enfant. L'affirmation est vraie. Répondre « Faux » croirait qu'un père de groupe A ne peut pas avoir d'enfant O.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Raisonnement scolaire, sans valeur juridique. Dans une maternité, un enfant est de groupe B et sa mère est de groupe O. Deux hommes sont cités : l'homme 1 est de groupe A, l'homme 2 est de groupe AB. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La mère de groupe O est O//O. L'allèle qui ne vient pas de la mère vient du père. Compare-le avec ce que chaque homme peut donner.",
+              "questions": [
+                {
+                  "content": "Quel est le génotype de l'enfant de groupe B dont la mère est O//O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : la mère est O//O et ne donne que O ; l'enfant de groupe B a reçu un O de sa mère, donc il est B//O. B//B demanderait un B de la mère ; A//B serait de groupe AB ; O//O serait de groupe O.",
+                  "answers": [
+                    {
+                      "content": "B//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "B//B",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    },
+                    {
+                      "content": "O//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel allèle de l'enfant B//O vient forcément du père ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Déduire l'allèle du père : la mère O//O n'a pas d'allèle B, donc l'allèle B vient du père. L'allèle O peut venir de la mère. Choisir O confond l'allèle que la mère possède avec celui qui ne vient pas d'elle.",
+                  "answers": [
+                    {
+                      "content": "L'allèle B",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle A",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, tout vient de la mère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'homme 1, de groupe A, est exclu.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe A est A//A ou A//O, il ne peut donner que A ou O. Étape 4 — Conclure : il ne peut pas donner l'allèle B du père, donc il est exclu. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire de l'homme 2, de groupe AB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe AB est A//B, il peut donner B. Étape 4 — Conclure : il n'est pas exclu, mais beaucoup d'hommes ont le même groupe, donc ce n'est pas une preuve. Le dire exclu parce que son groupe diffère de celui de l'enfant est une erreur : on compare l'allèle du père, pas les groupes.",
+                  "answers": [
+                    {
+                      "content": "Il n'est pas exclu, mais ce n'est pas une preuve qu'il est le père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est exclu, car son groupe n'est pas celui de l'enfant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est le père, car il peut donner B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est exclu, car la mère est de groupe O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces phrases sur les groupes sanguins et la paternité, lesquelles sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Conclure : les groupes sanguins servent seulement à exclure, jamais à prouver ; ce raisonnement est scolaire, sans valeur juridique. Dire qu'un homme non exclu est le père, ou qu'avoir le même groupe suffit, oublie que beaucoup d'hommes ont le même groupe.",
+                  "answers": [
+                    {
+                      "content": "Un homme non exclu n'est pas forcément le père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les groupes sanguins servent à exclure une paternité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un homme non exclu est le père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il suffit d'avoir le même groupe que l'enfant pour être le père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce raisonnement a une valeur juridique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "le caryotype et le sexe d'un nouveau-né, les génotypes possibles d'une carte de donneuse (ABO et Rhésus), les groupes des enfants d'un couple par l'échiquier de croisement, l'exclusion d'une paternité à partir des groupes sanguins.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le caryotype d'un nouveau-né, à la maternité de Divo, montre 23 paires de chromosomes dont une paire sexuelle XY. Sa mère a la paire sexuelle XX. Situation d'exemple. On étudie le sexe du nouveau-né et celui du prochain enfant du couple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un gamète a la moitié des chromosomes d'une cellule du corps. Le sexe dépend du spermatozoïde du père.",
+              "questions": [
+                {
+                  "content": "Le père de ce nouveau-né a 46 chromosomes dans une cellule du corps. Combien de chromosomes porte un de ses spermatozoïdes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : le père a 46 chromosomes, soit 23 paires. Étape 2 — Écrire les gamètes : un spermatozoïde ne garde qu'un chromosome de chaque paire, donc 46 / 2 = 23 chromosomes. Répondre 46 confond une cellule du corps et un gamète ; répondre 22 ne compte que les autosomes.",
+                  "answers": [
+                    {
+                      "content": "23",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sexe de ce nouveau-né ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le caryotype : la paire sexuelle est X//Y, celle d'un garçon. Dire « une fille » parce qu'il a un X oublie qu'une fille a deux X ; le groupe sanguin est porté par des autosomes et n'a aucun lien avec le sexe.",
+                  "answers": [
+                    {
+                      "content": "Un garçon, car sa paire sexuelle est X//Y",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une fille, car il a un chromosome X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une fille, car sa mère est X//X",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans connaître son groupe sanguin",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel chromosome sexuel ce nouveau-né a-t-il reçu de son père et de sa mère ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Écrire les gamètes : la mère X//X ne donne que X. Le garçon X//Y a donc reçu son Y de son père, par un spermatozoïde Y. Dire que la mère donne Y est impossible, puisqu'elle n'en a pas ; dire X des deux donnerait une fille.",
+                  "answers": [
+                    {
+                      "content": "Y de son père, X de sa mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "X de son père, Y de sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Y de son père et de sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "X de son père et de sa mère",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le sexe de ce nouveau-né a été déterminé par l'ovule de sa mère.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Écrire les gamètes : l'ovule de la mère porte toujours X. Étape 4 — Conclure : c'est le spermatozoïde, ici porteur de Y, qui a déterminé le sexe. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le prochain enfant du couple, la probabilité d'avoir une fille est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Construire l'échiquier : mère X//X, père X//Y, quatre cases, dont 2 sont X//X. Étape 4 — Conclure : 2 cases sur 4, soit 1/2, à chaque naissance. 1/4 ne compte qu'une case ; 1/3 et 2/3 favorisent un sexe sans raison.",
+                  "answers": [
+                    {
+                      "content": "1/2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "1/3",
+                      "correct": false
+                    },
+                    {
+                      "content": "2/3",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une donneuse de sang reçoit une carte indiquant « groupe B, Rhésus positif ». Situation d'exemple. Elle veut savoir ce que son groupe permet de dire sur ses génotypes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour le système ABO, B s'exprime avec un O caché. Pour le Rhésus, R domine r : Rh+ a deux génotypes.",
+              "questions": [
+                {
+                  "content": "Quels sont les génotypes possibles de la donneuse pour le Rhésus ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le phénotype : [Rh+]. Étape 2 — Rappeler la dominance : R est dominant sur r. Étape 3 — Écrire : R//R ou R//r. Dire « R//R seulement » oublie R//r ; r//r est le génotype d'une personne Rh- ; le groupe ABO n'a aucun lien avec le Rhésus, qui dépend d'un autre gène.",
+                  "answers": [
+                    {
+                      "content": "R//R ou R//r",
+                      "correct": true
+                    },
+                    {
+                      "content": "R//R seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "r//r",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un génotype qui dépend du groupe ABO",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les génotypes possibles de la donneuse pour le système ABO ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire le phénotype : [B]. Étape 2 — Rappeler la dominance : B s'exprime seul ou avec un O caché. Étape 3 — Écrire : B//B ou B//O. A//B donnerait AB, O//O donnerait O, A//O donnerait A.",
+                  "answers": [
+                    {
+                      "content": "B//B",
+                      "correct": true
+                    },
+                    {
+                      "content": "B//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    },
+                    {
+                      "content": "O//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La donneuse peut transmettre l'allèle O à son enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Rappeler la dominance : le groupe B correspond à B//B ou B//O. Étape 3 — Écrire : si elle est B//O, elle porte l'allèle O, caché par B, et peut le transmettre. L'affirmation est vraie, car on ne sait pas si elle est B//B ou B//O.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le Rhésus, l'allèle R est ___ sur l'allèle r.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Rappeler la dominance : R (Rh+) est dominant sur r (Rh-), qui est récessif. C'est pourquoi R//r donne Rh+. Le mot attendu est dominant. Écrire récessif serait inverser les rôles : r est l'allèle récessif, qui ne s'exprime qu'en double exemplaire.",
+                  "answers": [
+                    {
+                      "content": "dominant",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire les génotypes possibles à partir de la carte.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le phénotype : B et Rh+. Étape 2 — Rappeler la dominance : B avec O caché, R dominant sur r. Étape 3 — Écrire : un seul génotype pour AB, O ou Rh-, deux sinon. On ne peut pas écrire les génotypes avant de connaître la dominance.",
+                  "answers": [
+                    {
+                      "content": "Lire le groupe ABO et le Rhésus de la personne"
+                    },
+                    {
+                      "content": "Rappeler la dominance entre les allèles"
+                    },
+                    {
+                      "content": "Écrire les génotypes possibles, un ou deux"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Gagnoa, un couple (situation d'exemple) attend un enfant. La mère est de groupe AB, de génotype A//B. Le père est de groupe A, de génotype A//O. On étudie le groupe ABO de l'enfant.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris les gamètes : A ou B pour la mère, A ou O pour le père. Construis l'échiquier de 4 cases et compte.",
+              "questions": [
+                {
+                  "content": "Parmi les groupes ABO, lesquels sont possibles pour l'enfant de la femme A//B et de l'homme A//O ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : mère A//B, père A//O. Étape 2 — Former les gamètes : A ou B ; A ou O. Étape 3 — Construire l'échiquier : A//A et A//O donnent A, B//A donne AB, B//O donne B. Étape 4 — Conclure : A, AB ou B. Le groupe O demande O//O, or la mère n'a pas d'allèle O.",
+                  "answers": [
+                    {
+                      "content": "A, AB ou B",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, B, AB ou O",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement AB",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'échiquier de croisement de ce couple (4 cases), combien de cases donnent un enfant de groupe A ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Construire l'échiquier : A//A, A//O, B//A et B//O. Étape 4 — Conclure : A//A et A//O donnent le groupe A, soit 2 cases. B//A donne AB et B//O donne B. Répondre 1 oublie A//O ; répondre 3 compte B//A comme groupe A.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la probabilité que l'enfant de ce couple soit de groupe AB ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Construire l'échiquier : A//A, A//O, B//A et B//O. Étape 4 — Conclure : seule la case B//A donne AB, soit 1/4. Répondre 1/2 est la probabilité du groupe A ; répondre 0 oublie que la mère donne B et le père A.",
+                  "answers": [
+                    {
+                      "content": "1/4",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce couple peut avoir un enfant de groupe O.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Former les gamètes : la mère A//B ne donne ni O ni autre allèle que A ou B. Étape 4 — Conclure : un enfant O//O devrait recevoir un O de sa mère, ce qui est impossible. L'affirmation est fausse, même si le père porte un allèle O.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces groupes, lesquels ont la probabilité 1/4 pour l'enfant de ce couple ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Construire l'échiquier : A//A, A//O, B//A, B//O. Étape 4 — Conclure : AB (B//A) et B (B//O) occupent chacun 1 case sur 4. Le groupe A occupe 2 cases sur 4, soit 1/2 ; le groupe O n'occupe aucune case, soit 0.",
+                  "answers": [
+                    {
+                      "content": "Groupe AB",
+                      "correct": true
+                    },
+                    {
+                      "content": "Groupe B",
+                      "correct": true
+                    },
+                    {
+                      "content": "Groupe A",
+                      "correct": false
+                    },
+                    {
+                      "content": "Groupe O",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Raisonnement scolaire, sans valeur juridique. Dans une maternité, un enfant est de groupe A et sa mère est de groupe B. Trois hommes sont cités : de groupe B, de groupe AB et de groupe O. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La mère de groupe B n'a pas d'allèle A. L'enfant de groupe A n'a pas d'allèle B : il a reçu O de sa mère.",
+              "questions": [
+                {
+                  "content": "Quel est le génotype de l'enfant de groupe A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : la mère de groupe B n'a pas d'allèle A, donc l'allèle A vient du père. Si l'enfant avait reçu B de sa mère, il serait de groupe AB ; il a donc reçu O de sa mère et il est A//O. A//A demanderait un A de la mère ; O//O serait de groupe O.",
+                  "answers": [
+                    {
+                      "content": "A//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "A//A",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    },
+                    {
+                      "content": "O//O",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le génotype de la mère de groupe B ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : l'enfant A//O a reçu O de sa mère, qui possède donc un allèle O. Étape 2 — Raisonner : de groupe B avec un allèle O, la mère est B//O. B//B n'a pas d'allèle O à donner ; O//O serait de groupe O ; A//B serait de groupe AB.",
+                  "answers": [
+                    {
+                      "content": "B//O",
+                      "correct": true
+                    },
+                    {
+                      "content": "B//B",
+                      "correct": false
+                    },
+                    {
+                      "content": "O//O",
+                      "correct": false
+                    },
+                    {
+                      "content": "A//B",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'allèle du père est A. Parmi les trois hommes (groupes B, AB et O), combien sont exclus ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Déduire l'allèle du père : c'est A. Étape 3 — Comparer : un homme de groupe B ne donne que B ou O ; un homme de groupe O ne donne que O ; un homme de groupe AB (A//B) peut donner A. Étape 4 — Conclure : 2 hommes sont exclus, ceux de groupes B et O. Répondre 3 exclurait aussi l'homme de groupe AB, qui peut donner A.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'homme de groupe AB est le père de l'enfant.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Comparer : un homme de groupe AB peut donner l'allèle A, il n'est pas exclu. Étape 4 — Conclure : être non exclu ne prouve rien, car beaucoup d'hommes ont le même groupe. L'affirmation est fausse : les groupes sanguins servent à exclure, jamais à prouver.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'homme de groupe AB, le raisonnement conclut qu'il est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Comparer : il peut donner A. Étape 4 — Conclure : non exclu, mais ce n'est pas une preuve. Le dire exclu parce que son groupe diffère de celui de l'enfant est une erreur : on compare l'allèle du père, pas les groupes ; le dire père est une preuve que les groupes ne donnent jamais.",
+                  "answers": [
+                    {
+                      "content": "non exclu, sans que ce soit une preuve",
+                      "correct": true
+                    },
+                    {
+                      "content": "exclu",
+                      "correct": false
+                    },
+                    {
+                      "content": "le père",
+                      "correct": false
+                    },
+                    {
+                      "content": "exclu, car son groupe est différent de celui de l'enfant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

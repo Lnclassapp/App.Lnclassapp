@@ -80,7 +80,7 @@ Décision du porteur, chantier [`ci-unit-en-parts`](../../chantiers/ci-unit-en-p
 
 **Décision.**
 
-1. Sur GitHub, la suite unitaire tourne en **deux parts** (`unit:1/2`, `unit:2/2`), découpées comme `system` : chaque fichier dans une part et une seule, équilibrées sur `script/ci/test_timings.yml`. Aucun test n'est sauté.
+1. Sur GitHub, la suite unitaire tourne en **deux parts** (`unit:1/2`, `unit:2/2`) — **trois** depuis le 2026-11-05 ([ADR-0107 §9](./0107-la-preuve-d-une-pr-suit-ce-qu-elle-touche.md#9-amendement-du-2026-11-05--un-train-plus-court)) —, découpées comme `system` : chaque fichier dans une part et une seule, équilibrées sur `script/ci/test_timings.yml`. Aucun test n'est sauté.
 2. Une part mesure sa couverture sous son propre nom (`COVERAGE_PART=k/n`, `command_name "unit k/n"`) **sans seuil**, et garde son `.resultset.json`.
 3. La tâche **`coverage`** télécharge les résultats des parts, exige exactement autant de résultats que de parts, les fusionne (`script/ci/coverage_collate`, `SimpleCov.collate`) et applique **le même seuil, 100 % lignes et branches, sur la suite entière**. Le verdict `ci` l'attend.
 4. Le réglage de SimpleCov vit dans un seul profil (`test/coverage_profile.rb`), lu par le test et par la fusion : le seuil ne peut pas diverger entre les deux.

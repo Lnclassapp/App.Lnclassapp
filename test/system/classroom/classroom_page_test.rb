@@ -44,7 +44,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_no_text "Génétique et évolution"
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
-    assert_selector "#student_#{@awa.public_id}", text: "100 %"
+    assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
+    assert_no_text "100 %"
     assert_no_page_reload do
       # La barre latérale a son propre « Copier le lien » (parrainage, UDR-0069 §3.6) : on vise celui du bloc de la classe.
       copy = within("#classroom_link") { find_button(I18n.t("#{scope}.link.copy")) }
@@ -116,8 +117,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
     visit classroom_path(@classroom.public_id)
 
-    # UDR enseignant §3.5 : « Vos jours de séance » n'est plus sur la page, même renseigné.
-    assert_no_selector "#classroom_session_days"
+    # UDR suivi-de-la-classe-sur-une-lecon §3.4 : « Vos jours de séance » est de retour sur la page, renseigné.
+    assert_selector "#classroom_session_days", text: "lundi, jeudi"
     within "#assignment_#{assignment.public_id}" do
       assert_text "Pour jeu. 8 oct."
       assert_text "1 / 2 fait"
@@ -149,7 +150,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)
 
-      assert_no_selector "#classroom_session_days"
+      assert_selector "#classroom_session_days"
       assert_selector "#assignment_#{assignment.public_id}", text: "0 / 2 fait"
       # UDR enseignant §3.5 : le badge de l'élève sur la ligne de son nom.
       assert_no_selector "#classroom_courses"

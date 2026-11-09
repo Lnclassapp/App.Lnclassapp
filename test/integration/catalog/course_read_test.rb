@@ -36,7 +36,7 @@ class Catalog::CourseReadTest < ActionDispatch::IntegrationTest
   end
 
   test "a teacher and the team leave no reading" do
-    [ create_teacher, create_team_member ].each do |user|
+    [ create_teacher(material: @course.material), create_team_member ].each do |user|
       sign_in_as user
       get course_path(@course.slug)
       assert_response :success

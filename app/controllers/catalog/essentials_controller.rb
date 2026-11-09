@@ -8,7 +8,7 @@ module Catalog
     def show
       essential = Repositories::Catalog::EssentialRepository.new.find_by_slug(slug: params[:slug])
       return render_not_found unless essential && in_course?(essential)
-      return if refuse_out_of_level(course_id: essential.course_id)
+      return if refuse_out_of_level(course_id: essential.course_id) || refuse_out_of_material(course_id: essential.course_id)
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: essential),
                     success: ->(_) {

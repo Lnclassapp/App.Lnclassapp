@@ -72,7 +72,9 @@ module Repositories
       end
 
       def run_job(messages)
-        UseCases::Communication::PublishScheduledMessages.new(messages:, audit_log: Repositories::Identity::AuditLogRepository.new,
+        UseCases::Communication::PublishScheduledMessages.new(messages:, users: Repositories::Identity::UserRepository.new,
+                                                              teachings: Repositories::Classroom::TeachingRepository.new,
+                                                              policy: Policies::Communication::PublishPolicy.new, teacher_flag: -> { true }, audit_log: Repositories::Identity::AuditLogRepository.new,
                                                               transaction: Repositories::Shared::Transaction.new, clock:).call
       end
 

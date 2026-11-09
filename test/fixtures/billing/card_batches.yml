@@ -1,0 +1,10 @@
+# Cartes d'activation (Lot 0) : le lot de 20 cartes à 10 000 F de la Boutique Awa. created_by_id reste nul : aucun compte
+# d'équipe en fixture.
+awa_batch:
+  id: <%= ActiveRecord::FixtureSet.identify(:awa_batch) %>
+  public_id: AwaBatch000001
+  relay_point_id: <%= ActiveRecord::FixtureSet.identify(:boutique_awa) %>
+  quantity: 20
+  unit_price_xof: 10000
+  valid_until: 2027-07-31
+  created_at: 2026-11-09 08:00:00

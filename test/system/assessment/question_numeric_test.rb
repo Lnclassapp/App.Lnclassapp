@@ -23,7 +23,8 @@ class Assessment::QuestionNumericTest < ApplicationSystemTestCase
       assert_selector "#copy-counter", text: "1/1"
       click_on I18n.t("#{SCOPE}.show.submit")
 
-      assert_selector "#session_grade", text: "20/20"
+      assert_selector "#session_badge[aria-label='Médaille Diamant']"
+      assert_no_text "20/20"
     end
   end
 end

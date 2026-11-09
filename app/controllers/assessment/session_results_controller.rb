@@ -26,7 +26,12 @@ module Assessment
       # l'enseignant et l'équipe, si.
       return if refuse_out_of_level(exercise_id: session.exercise_id)
 
-      return redirect_to exercise_session_path(session.public_id) unless session.completed?
+      unless session.completed?
+        # La page de la session est celle de l'élève (l'enseignant et l'équipe y reçoivent 403) : pour eux, pas de résultat encore.
+        return render_not_found unless session.student_id == current_actor.user_id
+
+        return redirect_to exercise_session_path(session.public_id)
+      end
 
       exercise = Repositories::Assessment::ExerciseRepository.new.find(id: session.exercise_id)
       # ADR-0115 (amende la décision du porteur 881a623) : l'élève lit la correction de sa copie vérifiée, jamais avant ;
@@ -37,6 +42,7 @@ module Assessment
       @return_to = params[:return_to] if @owner && RETURN_TARGETS.include?(params[:return_to])
       @sheet = params[:sheet] if RETURN_TARGETS.include?(@return_to) && params[:sheet].is_a?(String) && params[:sheet].match?(SHEET_ANCHOR)
       load_sheet(session) if @sheet
+      load_remediation_proposal if @owner
       @resume_at = restart_resume_at(session) if @owner
       @can_restart = @resume_at.nil? && Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
     end
@@ -52,6 +58,15 @@ module Assessment
       # Une feuille ne compte que si elle contient l'exercice de la copie (l'ancre d'une autre feuille : repli d'avant).
       @sheet_found = !sheet.nil? && sheet.exercises.any? { |entry| entry.public_id == @result.exercise.public_id }
       @next_exercise = (sheet.next_open(after: @result.exercise.public_id)&.public_id if @sheet_found)
+    end
+
+    # suivi-classe-lecon §3.3 : la copie qui a ouvert ou laissé en attente une lacune propose l'exercice de la fiche (@remediation_proposal) ;
+    # une lacune levée ou une copie sans fiche n'en propose pas.
+    def load_remediation_proposal
+      return unless @result.essential && %i[opened still_pending].include?(@result.gap_outcome)
+
+      @remediation_proposal = Queries::Assessment::RemediationProposalsQuery.new
+                                                                            .call(student_id: current_actor.user_id, essential_slugs: [ @result.essential.slug ])[@result.essential.slug]
     end
 
     # L'heure de reprise si l'élève est en pause sur cet exercice (RestartPause), nil sinon. Le refus d'une nouvelle copie

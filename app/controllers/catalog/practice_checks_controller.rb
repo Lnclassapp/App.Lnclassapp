@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Catalog::PracticeChecksController
 # Rôle : « Vérifier » dans « Je m'entraîne » : le serveur juge les réponses de la notion case par case et rend le verdict puis le corrigé, sans rien écrire ; un frame par notion, une page pleine sans JavaScript
-# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0026, 0028, 0035 · UDR : 0147-je-m-entraine-dans-la-fiche §3.4, §3.5, §3.6
+# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0026, 0028, 0035, 0126 (contexte billing, §4.6) · UDR : 0147-je-m-entraine-dans-la-fiche §3.4, §3.5, §3.6
 module Catalog
   class PracticeChecksController < AuthenticatedController
     include ReadsOwnLevel
+    include RedirectsSubscriptionRequired
 
     # Par compte, pas par adresse (ADR entraînement corrigé sans trace §4) : 30 vérifications par minute (CA-8).
     rate_limit to: 30, within: 1.minute, by: -> { current_actor.user_id }, with: -> { refuse_too_many }
@@ -15,6 +16,7 @@ module Catalog
     def create
       result = judge
       return present(nil, :changed, :conflict) if result.code == :conflict
+      return redirect_subscription_required(return_to: course_path(params[:course_slug])) if subscription_required?(result)
 
       render_result result, success: ->(check) { present(check, :checked, :ok) }
     end
@@ -23,7 +25,7 @@ module Catalog
 
     def use_case
       UseCases::Catalog::CheckPractice.new(notions: Repositories::Catalog::EssentialRepository.new, policy: Policies::Catalog::ReadPublishedPolicy.new,
-                                           level_policy: Policies::Catalog::ReadOwnLevelPolicy.new)
+                                           level_policy: Policies::Catalog::ReadOwnLevelPolicy.new, access: Queries::Billing::StudentAccessQuery.new, clock: Time.zone)
     end
 
     def judge
@@ -37,6 +39,7 @@ module Catalog
     def refuse_too_many
       result = judge
       return present(nil, :changed, :conflict) if result.code == :conflict
+      return redirect_subscription_required(return_to: course_path(params[:course_slug])) if subscription_required?(result)
 
       render_result result, success: ->(check) { present(check, :rate_limited, :too_many_requests) }
     end

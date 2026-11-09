@@ -153,148 +153,270 @@
               }
             ]
           },
-          "exercise": {
-            "title": "Vérifier des primitives",
-            "statement": "Dans cet exercice, tu vérifies si une fonction $F$ est une primitive d'une fonction $f$, en suivant la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Parmi ces fonctions, laquelle est une primitive de $f(x) = 4x + 3$ sur $\\mathbb{R}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $f(x) = 4x + 3$ ; on teste chaque $F$ proposée. Étape 2 — Dériver : pour $F(x) = 2x^2 + 3x$, $F'(x) = 2 \\times 2x + 3 = 4x + 3$. Étape 3 — Comparer : $F'(x) = 4x + 3 = f(x)$. Étape 4 — Conclure : $F(x) = 2x^2 + 3x$ est une primitive de $f$. Les leurres : $4x^2 + 3x$ a pour dérivée $8x + 3$ (le coefficient 4 n'a pas été divisé par 2) ; $4$ est la dérivée de $f$, pas une primitive (on a dérivé $f$ au lieu de $F$) ; $2x^2 + 3$ a pour dérivée $4x$ : le terme $3x$ est devenu $3$.",
-                "answers": [
-                  {
-                    "content": "$F(x) = 4x^2 + 3x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = 2x^2 + 3x$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$F(x) = 4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = 2x^2 + 3$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "On sait que $F(x) = x^3 + ax^2 + 5x$ est une primitive de $f(x) = 3x^2 + 8x + 5$ sur $\\mathbb{R}$. Quelle est la valeur de $a$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : $F(x) = x^3 + ax^2 + 5x$ et $f(x) = 3x^2 + 8x + 5$. Étape 2 — Dériver : $F'(x) = 3x^2 + 2ax + 5$. Étape 3 — Comparer : pour que $F'(x) = f(x)$, il faut $2a = 8$. Étape 4 — Conclure : $a = 4$.",
-                "answers": [
-                  {
-                    "content": "4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux primitives de $f(x) = 6x^2 + 2$ sur $\\mathbb{R}$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Écrire : $f(x) = 6x^2 + 2$. Étape 2 — Dériver chaque proposition. Étape 3 — Comparer avec $f(x)$. Étape 4 — Conclure. $2x^3 + 2x$ a pour dérivée $6x^2 + 2$ : c'est une primitive. $2x^3 + 2x - 9$ a la même dérivée, car la dérivée d'une constante est $0$ : c'est aussi une primitive. Les leurres : $6x^3 + 2x$ a pour dérivée $18x^2 + 2$ ; $12x$ est la dérivée de $f$, pas une primitive ; $2x^3 + 2$ a pour dérivée $6x^2$, il manque le terme $2x$.",
-                "answers": [
-                  {
-                    "content": "$2x^3 + 2x$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6x^3 + 2x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$12x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x^3 + 2x - 9$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$2x^3 + 2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour vérifier qu'une fonction $F$ est une primitive de $f$, on calcule ___.",
-                "question_type": "select",
-                "explanation": "Étape 2 — Dériver : on dérive $F$ terme à terme, puis, Étape 3 — Comparer : on compare $F'(x)$ avec $f(x)$. Les autres propositions sont fausses : dériver $f$ est l'erreur du piège ; un produit ou une différence de $F$ et $f$ ne donne aucun renseignement sur la dérivée de $F$.",
-                "answers": [
-                  {
-                    "content": "la dérivée de la primitive proposée, comparée à $f(x)$",
-                    "correct": true
-                  },
-                  {
-                    "content": "la dérivée de $f$, comparée à la primitive proposée",
-                    "correct": false
-                  },
-                  {
-                    "content": "le produit de $F(x)$ et de $f(x)$, comparé à $1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "la différence de $F(x)$ et de $f(x)$, comparée à $0$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour vérifier que $F(x) = x^2$ est une primitive de $f(x) = 2x$, on dérive $f$ : on trouve $f'(x) = 2$, qui n'est pas égal à $x^2$. Donc $F$ n'est pas une primitive de $f$.",
-                "question_type": "true_false",
-                "explanation": "Étape 2 — Dériver : c'est $F$ qu'on dérive, pas $f$. $F'(x) = (x^2)' = 2x$. Étape 3 — Comparer : $F'(x) = 2x = f(x)$. Étape 4 — Conclure : $F$ est bien une primitive de $f$. Le raisonnement de l'énoncé dérive $f$ : c'est l'erreur du piège.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour vérifier qu'une fonction $F$ est une primitive de $f$.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Écrire : on commence par poser $F$ et $f$. Étape 2 — Dériver : on calcule $F'$. Étape 3 — Comparer : $F'(x)$ avec $f(x)$. Étape 4 — Conclure : on ne conclut qu'après la comparaison. Conclure avant de dériver reviendrait à deviner.",
-                "answers": [
-                  {
-                    "content": "Écrire la fonction $F$ proposée et la fonction $f$ de l'énoncé."
-                  },
-                  {
-                    "content": "Dériver $F$ terme à terme."
-                  },
-                  {
-                    "content": "Comparer $F'(x)$ avec $f(x)$."
-                  },
-                  {
-                    "content": "Conclure : si $F'(x) = f(x)$, $F$ est une primitive de $f$."
-                  }
-                ]
-              },
-              {
-                "content": "La fonction $F(x) = x^3 - x + 2$ est une primitive de $f(x) = 3x^2 - 1$ sur $\\mathbb{R}$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $F(x) = x^3 - x + 2$ et $f(x) = 3x^2 - 1$. Étape 2 — Dériver : $F'(x) = 3x^2 - 1 + 0$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : c'est vrai. La constante $+2$ disparaît à la dérivation : elle ne change pas le résultat.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          }
+          "exercise": [
+            {
+              "title": "Vérifier des primitives",
+              "statement": "Dans cet exercice, tu vérifies si une fonction $F$ est une primitive d'une fonction $f$, en suivant la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Parmi ces fonctions, laquelle est une primitive de $f(x) = 4x + 3$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 4x + 3$ ; on teste chaque $F$ proposée. Étape 2 — Dériver : pour $F(x) = 2x^2 + 3x$, $F'(x) = 2 \\times 2x + 3 = 4x + 3$. Étape 3 — Comparer : $F'(x) = 4x + 3 = f(x)$. Étape 4 — Conclure : $F(x) = 2x^2 + 3x$ est une primitive de $f$. Les leurres : $4x^2 + 3x$ a pour dérivée $8x + 3$ (le coefficient 4 n'a pas été divisé par 2) ; $4$ est la dérivée de $f$, pas une primitive (on a dérivé $f$ au lieu de $F$) ; $2x^2 + 3$ a pour dérivée $4x$ : le terme $3x$ est devenu $3$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 4x^2 + 3x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 + 3x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 + 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $F(x) = x^3 + ax^2 + 5x$ est une primitive de $f(x) = 3x^2 + 8x + 5$ sur $\\mathbb{R}$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 + ax^2 + 5x$ et $f(x) = 3x^2 + 8x + 5$. Étape 2 — Dériver : $F'(x) = 3x^2 + 2ax + 5$. Étape 3 — Comparer : pour que $F'(x) = f(x)$, il faut $2a = 8$. Étape 4 — Conclure : $a = 4$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux primitives de $f(x) = 6x^2 + 2$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 6x^2 + 2$. Étape 2 — Dériver chaque proposition. Étape 3 — Comparer avec $f(x)$. Étape 4 — Conclure. $2x^3 + 2x$ a pour dérivée $6x^2 + 2$ : c'est une primitive. $2x^3 + 2x - 9$ a la même dérivée, car la dérivée d'une constante est $0$ : c'est aussi une primitive. Les leurres : $6x^3 + 2x$ a pour dérivée $18x^2 + 2$ ; $12x$ est la dérivée de $f$, pas une primitive ; $2x^3 + 2$ a pour dérivée $6x^2$, il manque le terme $2x$.",
+                  "answers": [
+                    {
+                      "content": "$2x^3 + 2x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x^3 + 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^3 + 2x - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^3 + 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier qu'une fonction $F$ est une primitive de $f$, on calcule ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Dériver : on dérive $F$ terme à terme, puis, Étape 3 — Comparer : on compare $F'(x)$ avec $f(x)$. Les autres propositions sont fausses : dériver $f$ est l'erreur du piège ; un produit ou une différence de $F$ et $f$ ne donne aucun renseignement sur la dérivée de $F$.",
+                  "answers": [
+                    {
+                      "content": "la dérivée de la primitive proposée, comparée à $f(x)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la dérivée de $f$, comparée à la primitive proposée",
+                      "correct": false
+                    },
+                    {
+                      "content": "le produit de $F(x)$ et de $f(x)$, comparé à $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la différence de $F(x)$ et de $f(x)$, comparée à $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier que $F(x) = x^2$ est une primitive de $f(x) = 2x$, on dérive $f$ : on trouve $f'(x) = 2$, qui n'est pas égal à $x^2$. Donc $F$ n'est pas une primitive de $f$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Dériver : c'est $F$ qu'on dérive, pas $f$. $F'(x) = (x^2)' = 2x$. Étape 3 — Comparer : $F'(x) = 2x = f(x)$. Étape 4 — Conclure : $F$ est bien une primitive de $f$. Le raisonnement de l'énoncé dérive $f$ : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour vérifier qu'une fonction $F$ est une primitive de $f$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire : on commence par poser $F$ et $f$. Étape 2 — Dériver : on calcule $F'$. Étape 3 — Comparer : $F'(x)$ avec $f(x)$. Étape 4 — Conclure : on ne conclut qu'après la comparaison. Conclure avant de dériver reviendrait à deviner.",
+                  "answers": [
+                    {
+                      "content": "Écrire la fonction $F$ proposée et la fonction $f$ de l'énoncé."
+                    },
+                    {
+                      "content": "Dériver $F$ terme à terme."
+                    },
+                    {
+                      "content": "Comparer $F'(x)$ avec $f(x)$."
+                    },
+                    {
+                      "content": "Conclure : si $F'(x) = f(x)$, $F$ est une primitive de $f$."
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $F(x) = x^3 - x + 2$ est une primitive de $f(x) = 3x^2 - 1$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 - x + 2$ et $f(x) = 3x^2 - 1$. Étape 2 — Dériver : $F'(x) = 3x^2 - 1 + 0$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : c'est vrai. La constante $+2$ disparaît à la dérivation : elle ne change pas le résultat.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Tester si des fonctions sont des primitives",
+              "statement": "Dans cet exercice, tu testes si une fonction $F$ est une primitive d'une fonction $f$, en dérivant $F$ comme dans la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Dérive toujours la fonction proposée $F$, terme à terme, puis compare le résultat avec $f(x)$. La dérivée d'une constante est $0$.",
+              "questions": [
+                {
+                  "content": "Laquelle de ces fonctions est une primitive de $f(x) = 6x^2 - 2x$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 6x^2 - 2x$ et quatre fonctions $F$ à tester. Étape 2 — Dériver : $(2x^3 - x^2)' = 6x^2 - 2x$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : $F(x) = 2x^3 - x^2$ est une primitive de $f$. Les leurres : $6x^3 - 2x^2$ a pour dérivée $18x^2 - 4x$ (on a oublié de diviser par l'exposant augmenté de $1$) ; $3x^3 - x^2$ a pour dérivée $9x^2 - 2x$ (le terme en $x^3$ est mal divisé) ; $12x - 2$ est la dérivée de $f$ : c'est $F$ qu'on dérive, jamais $f$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 6x^3 - 2x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^3 - x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 3x^3 - x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 12x - 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $F(x) = x^3 + 5x - 4$ est une primitive de $f(x) = 3x^2 + 5$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 + 5x - 4$ et $f(x) = 3x^2 + 5$. Étape 2 — Dériver : $F'(x) = 3x^2 + 5 - 0$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : $F$ est une primitive de $f$, l'affirmation est vraie. La constante $-4$ ne gêne pas : sa dérivée est $0$, et deux primitives d'une même fonction diffèrent d'une constante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $F(x) = 2x^3 + ax^2 + 7x$ est une primitive de $f(x) = 6x^2 + 10x + 7$ sur $\\mathbb{R}$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $F(x) = 2x^3 + ax^2 + 7x$ et $f(x) = 6x^2 + 10x + 7$. Étape 2 — Dériver : $F'(x) = 6x^2 + 2ax + 7$. Étape 3 — Comparer avec $f(x)$ : le terme en $x$ donne $2a = 10$. Étape 4 — Conclure : $a = 5$. Contrôle : pour $a = 5$, $F'(x) = 6x^2 + 10x + 7 = f(x)$. Répondre $a = 10$ oublie le facteur $2$ qui vient de la dérivée de $x^2$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que $F(x) = x^3 + 4x$ soit une primitive de $f$ sur $\\mathbb{R}$, il faut que $f(x) = 3x^2 + $ ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 + 4x$. Étape 2 — Dériver terme à terme : $(x^3)' = 3x^2$ et $(4x)' = 4$. Étape 3 — Comparer : $f(x)$ doit être égal à $F'(x) = 3x^2 + 4$. Étape 4 — Conclure : le nombre à écrire est $4$. Écrire $4x$ serait une erreur : la dérivée de $4x$ est le nombre $4$, sans $x$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions qui sont des primitives de $f(x) = 4x + 1$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 4x + 1$. Étape 2 — Dériver chaque proposition : $(2x^2 + x)' = 4x + 1$ et $(2x^2 + x + 8)' = 4x + 1$. Étape 3 — Comparer : ces deux dérivées sont égales à $f(x)$. Étape 4 — Conclure : ce sont deux primitives, la constante $8$ ne change pas la dérivée. Écartées : $4x^2 + x$ a pour dérivée $8x + 1$ ; $2x^2 + 1$ a pour dérivée $4x$ ; $4$ est la dérivée de $f$, pas une primitive.",
+                  "answers": [
+                    {
+                      "content": "$4x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 + x + 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction $F$ à la fonction $f$ dont elle est une primitive.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire chaque fonction $F$ proposée. Étape 2 — Dériver terme à terme : $(x^3 + 2x)' = 3x^2 + 2$ ; $(x^2 - 5x)' = 2x - 5$ ; $(4x^3)' = 12x^2$ ; $(3x + 9)' = 3 + 0 = 3$. Étape 3 — Comparer avec les fonctions $f$ proposées. Étape 4 — Conclure : chaque $F$ va avec la fonction $f$ égale à sa dérivée. Erreur à éviter : dériver $f$ au lieu de $F$. La constante $9$ disparaît à la dérivation, donc elle ne figure pas dans $f$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = x^3 + 2x$",
+                      "match": "$f(x) = 3x^2 + 2$"
+                    },
+                    {
+                      "content": "$F(x) = x^2 - 5x$",
+                      "match": "$f(x) = 2x - 5$"
+                    },
+                    {
+                      "content": "$F(x) = 4x^3$",
+                      "match": "$f(x) = 12x^2$"
+                    },
+                    {
+                      "content": "$F(x) = 3x + 9$",
+                      "match": "$f(x) = 3$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Déterminer les primitives d'un polynôme",
@@ -374,145 +496,252 @@
               }
             ]
           },
-          "exercise": {
-            "title": "Primitiver des polynômes",
-            "statement": "Dans cet exercice, tu détermines des primitives de polynômes en appliquant les quatre étapes de la méthode.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Une primitive de $f(x) = 6x$ sur $\\mathbb{R}$ s'écrit $F(x) = ax^2$. Quelle est la valeur de $a$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $f(x) = 6x$ n'a qu'un terme, $6x$. Étape 2 — Primitiver : $x$ devient $\\dfrac{x^2}{2}$, donc $6x$ devient $6 \\times \\dfrac{x^2}{2} = 3x^2$. Étape 3 — Assembler : $F(x) = 3x^2$ (on peut ajouter une constante). Étape 4 — Vérifier : $F'(x) = 6x = f(x)$. Donc $a = 3$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est une primitive de $f(x) = x^2 + 4$ sur $\\mathbb{R}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : deux termes, $x^2$ et $4$. Étape 2 — Primitiver : $x^2$ devient $\\dfrac{x^3}{3}$ et la constante $4$ devient $4x$. Étape 3 — Assembler : $F(x) = \\dfrac{x^3}{3} + 4x$. Étape 4 — Vérifier : $F'(x) = x^2 + 4$. Les leurres : $x^3 + 4x$ oublie de diviser par $3$ (sa dérivée est $3x^2 + 4$) ; $2x$ est la dérivée de $x^2$ ; $\\dfrac{x^3}{3} + 4$ garde $4$ au lieu de $4x$ (sa dérivée est $x^2$).",
-                "answers": [
-                  {
-                    "content": "$F(x) = x^3 + 4x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = 2x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = \\dfrac{x^3}{3} + 4x$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$F(x) = \\dfrac{x^3}{3} + 4$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Complète une primitive de $f(x) = 3x^2 + 2x + 1$ sur $\\mathbb{R}$ : $F(x) = x^3 + x^2 + $ ___ .",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Identifier : trois termes $3x^2$, $2x$ et $1$. Étape 2 — Primitiver : $3x^2 \\to 3 \\times \\dfrac{x^3}{3} = x^3$ ; $2x \\to 2 \\times \\dfrac{x^2}{2} = x^2$ ; la constante $1 \\to 1x = x$. Étape 3 — Assembler : $F(x) = x^3 + x^2 + x$. Étape 4 — Vérifier : $F'(x) = 3x^2 + 2x + 1$. La réponse est $x$ : écrire $1$ seul serait oublier la variable.",
-                "answers": [
-                  {
-                    "content": "x",
-                    "correct": true
-                  },
-                  {
-                    "content": "1x",
-                    "correct": true
-                  },
-                  {
-                    "content": "+x",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On choisit la primitive de $f(x) = 9x^2 - 4x + 3$ dont la constante est $k = 0$. Calcule sa valeur en $x = 2$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : trois termes, $9x^2$, $-4x$ et $3$. Étape 2 — Primitiver : $9x^2 \\to 3x^3$ ; $-4x \\to -2x^2$ ; $3 \\to 3x$. Étape 3 — Assembler : $F(x) = 3x^3 - 2x^2 + 3x$. Étape 4 — Vérifier : $F'(x) = 9x^2 - 4x + 3$. Puis $F(2) = 3 \\times 8 - 2 \\times 4 + 3 \\times 2 = 24 - 8 + 6 = 22$.",
-                "answers": [
-                  {
-                    "content": "22",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux primitives de $f(x) = 4x^3 + 2x$ sur $\\mathbb{R}$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Identifier : $4x^3$ et $2x$. Étape 2 — Primitiver : $4x^3 \\to 4 \\times \\dfrac{x^4}{4} = x^4$ et $2x \\to x^2$. Étape 3 — Assembler : $F(x) = x^4 + x^2 + k$. Étape 4 — Vérifier : on retrouve $4x^3 + 2x$. Donc $x^4 + x^2$ et $x^4 + x^2 + 10$ conviennent. Les leurres : $12x^2 + 2$ est la dérivée de $f$ ; $x^4 + 2x^2$ n'a pas divisé $2x$ par $2$ ; $\\dfrac{x^4}{4} + x^2$ a divisé $4x^3$ par $4$ sans multiplier par le coefficient $4$.",
-                "answers": [
-                  {
-                    "content": "$x^4 + x^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$12x^2 + 2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^4 + 2x^2$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x^4 + x^2 + 10$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\dfrac{x^4}{4} + x^2$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Relie chaque fonction $f$ à une de ses primitives.",
-                "question_type": "matching",
-                "explanation": "Étape 2 — Primitiver chaque terme : $2x \\to x^2$ ; $3x^2 \\to x^3$ ; $6x \\to 6 \\times \\dfrac{x^2}{2} = 3x^2$ ; la constante $4 \\to 4x$. Étape 4 — Vérifier : on dérive chaque $F$ et on retrouve $f$. Attention à $6x$ : sa primitive $3x^2$ a un coefficient divisé par $2$, pas $6x^2$.",
-                "answers": [
-                  {
-                    "content": "$f(x) = 2x$",
-                    "match": "$F(x) = x^2$"
-                  },
-                  {
-                    "content": "$f(x) = 3x^2$",
-                    "match": "$F(x) = x^3$"
-                  },
-                  {
-                    "content": "$f(x) = 6x$",
-                    "match": "$F(x) = 3x^2$"
-                  },
-                  {
-                    "content": "$f(x) = 4$",
-                    "match": "$F(x) = 4x$"
-                  }
-                ]
-              },
-              {
-                "content": "Une primitive de $f(x) = 3x^2$ sur $\\mathbb{R}$ est $F(x) = 3x^3$.",
-                "question_type": "true_false",
-                "explanation": "Étape 2 — Primitiver : $x^2$ devient $\\dfrac{x^3}{3}$, donc $3x^2$ devient $3 \\times \\dfrac{x^3}{3} = x^3$. Étape 4 — Vérifier : $(3x^3)' = 9x^2 \\neq 3x^2$, alors que $(x^3)' = 3x^2$. L'erreur du piège est d'oublier de diviser par $n+1$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          }
+          "exercise": [
+            {
+              "title": "Primitiver des polynômes",
+              "statement": "Dans cet exercice, tu détermines des primitives de polynômes en appliquant les quatre étapes de la méthode.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une primitive de $f(x) = 6x$ sur $\\mathbb{R}$ s'écrit $F(x) = ax^2$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $f(x) = 6x$ n'a qu'un terme, $6x$. Étape 2 — Primitiver : $x$ devient $\\dfrac{x^2}{2}$, donc $6x$ devient $6 \\times \\dfrac{x^2}{2} = 3x^2$. Étape 3 — Assembler : $F(x) = 3x^2$ (on peut ajouter une constante). Étape 4 — Vérifier : $F'(x) = 6x = f(x)$. Donc $a = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une primitive de $f(x) = x^2 + 4$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : deux termes, $x^2$ et $4$. Étape 2 — Primitiver : $x^2$ devient $\\dfrac{x^3}{3}$ et la constante $4$ devient $4x$. Étape 3 — Assembler : $F(x) = \\dfrac{x^3}{3} + 4x$. Étape 4 — Vérifier : $F'(x) = x^2 + 4$. Les leurres : $x^3 + 4x$ oublie de diviser par $3$ (sa dérivée est $3x^2 + 4$) ; $2x$ est la dérivée de $x^2$ ; $\\dfrac{x^3}{3} + 4$ garde $4$ au lieu de $4x$ (sa dérivée est $x^2$).",
+                  "answers": [
+                    {
+                      "content": "$F(x) = x^3 + 4x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = \\dfrac{x^3}{3} + 4x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = \\dfrac{x^3}{3} + 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète une primitive de $f(x) = 3x^2 + 2x + 1$ sur $\\mathbb{R}$ : $F(x) = x^3 + x^2 + $ ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : trois termes $3x^2$, $2x$ et $1$. Étape 2 — Primitiver : $3x^2 \\to 3 \\times \\dfrac{x^3}{3} = x^3$ ; $2x \\to 2 \\times \\dfrac{x^2}{2} = x^2$ ; la constante $1 \\to 1x = x$. Étape 3 — Assembler : $F(x) = x^3 + x^2 + x$. Étape 4 — Vérifier : $F'(x) = 3x^2 + 2x + 1$. La réponse est $x$ : écrire $1$ seul serait oublier la variable.",
+                  "answers": [
+                    {
+                      "content": "x",
+                      "correct": true
+                    },
+                    {
+                      "content": "1x",
+                      "correct": true
+                    },
+                    {
+                      "content": "+x",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On choisit la primitive de $f(x) = 9x^2 - 4x + 3$ dont la constante est $k = 0$. Calcule sa valeur en $x = 2$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : trois termes, $9x^2$, $-4x$ et $3$. Étape 2 — Primitiver : $9x^2 \\to 3x^3$ ; $-4x \\to -2x^2$ ; $3 \\to 3x$. Étape 3 — Assembler : $F(x) = 3x^3 - 2x^2 + 3x$. Étape 4 — Vérifier : $F'(x) = 9x^2 - 4x + 3$. Puis $F(2) = 3 \\times 8 - 2 \\times 4 + 3 \\times 2 = 24 - 8 + 6 = 22$.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux primitives de $f(x) = 4x^3 + 2x$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : $4x^3$ et $2x$. Étape 2 — Primitiver : $4x^3 \\to 4 \\times \\dfrac{x^4}{4} = x^4$ et $2x \\to x^2$. Étape 3 — Assembler : $F(x) = x^4 + x^2 + k$. Étape 4 — Vérifier : on retrouve $4x^3 + 2x$. Donc $x^4 + x^2$ et $x^4 + x^2 + 10$ conviennent. Les leurres : $12x^2 + 2$ est la dérivée de $f$ ; $x^4 + 2x^2$ n'a pas divisé $2x$ par $2$ ; $\\dfrac{x^4}{4} + x^2$ a divisé $4x^3$ par $4$ sans multiplier par le coefficient $4$.",
+                  "answers": [
+                    {
+                      "content": "$x^4 + x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12x^2 + 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^4 + 2x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^4 + x^2 + 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{x^4}{4} + x^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction $f$ à une de ses primitives.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Primitiver chaque terme : $2x \\to x^2$ ; $3x^2 \\to x^3$ ; $6x \\to 6 \\times \\dfrac{x^2}{2} = 3x^2$ ; la constante $4 \\to 4x$. Étape 4 — Vérifier : on dérive chaque $F$ et on retrouve $f$. Attention à $6x$ : sa primitive $3x^2$ a un coefficient divisé par $2$, pas $6x^2$.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = 2x$",
+                      "match": "$F(x) = x^2$"
+                    },
+                    {
+                      "content": "$f(x) = 3x^2$",
+                      "match": "$F(x) = x^3$"
+                    },
+                    {
+                      "content": "$f(x) = 6x$",
+                      "match": "$F(x) = 3x^2$"
+                    },
+                    {
+                      "content": "$f(x) = 4$",
+                      "match": "$F(x) = 4x$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une primitive de $f(x) = 3x^2$ sur $\\mathbb{R}$ est $F(x) = 3x^3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Primitiver : $x^2$ devient $\\dfrac{x^3}{3}$, donc $3x^2$ devient $3 \\times \\dfrac{x^3}{3} = x^3$. Étape 4 — Vérifier : $(3x^3)' = 9x^2 \\neq 3x^2$, alors que $(x^3)' = 3x^2$. L'erreur du piège est d'oublier de diviser par $n+1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Primitiver des sommes de puissances",
+              "statement": "Dans cet exercice, tu primitives des polynômes terme à terme, avec les quatre étapes de la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Primitive chaque terme séparément : $x^n$ devient $\\dfrac{x^{n+1}}{n+1}$ et une constante $a$ devient $ax$. Vérifie en dérivant le résultat.",
+              "questions": [
+                {
+                  "content": "Quelles sont toutes les primitives de $f(x) = 8x^3 - 6x + 1$ sur $\\mathbb{R}$, avec $k$ un nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : $f(x)$ a trois termes, $8x^3$, $-6x$ et la constante $1$. Étape 2 — Primitiver : $8x^3 \\to 8 \\times \\dfrac{x^4}{4} = 2x^4$ ; $-6x \\to -6 \\times \\dfrac{x^2}{2} = -3x^2$ ; $1 \\to x$. Étape 3 — Assembler : $F(x) = 2x^4 - 3x^2 + x + k$. Étape 4 — Vérifier : $F'(x) = 8x^3 - 6x + 1$. Les leurres : $8x^4 - 6x^2 + x + k$ n'a pas divisé par $n + 1$ ; $24x^2 - 6 + k$ est la dérivée de $f$ (on a dérivé au lieu de primitiver) ; $2x^4 - 3x^2 + 1 + k$ a laissé la constante $1$ telle quelle au lieu de la primitiver en $x$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 8x^4 - 6x^2 + x + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 24x^2 - 6 + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^4 - 3x^2 + x + k$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 2x^4 - 3x^2 + 1 + k$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une primitive de $f(x) = 12x^2 + 6x$ sur $\\mathbb{R}$ s'écrit $F(x) = ax^3 + 3x^2$. Quelle est la valeur de $a$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les termes sont $12x^2$ et $6x$. Étape 2 — Primitiver : $12x^2 \\to 12 \\times \\dfrac{x^3}{3} = 4x^3$ et $6x \\to 6 \\times \\dfrac{x^2}{2} = 3x^2$. Étape 3 — Assembler : $F(x) = 4x^3 + 3x^2$, donc $a = 4$. Étape 4 — Vérifier : $F'(x) = 12x^2 + 6x$. Trouver $a = 12$ reviendrait à ne pas diviser par $3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une primitive de $f(x) = 10x^4$ sur $\\mathbb{R}$ s'écrit $F(x) = ax^5$. Le nombre $a$ vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : un seul terme, $10x^4$. Étape 2 — Primitiver : $x^4 \\to \\dfrac{x^5}{5}$, donc $10x^4 \\to 10 \\times \\dfrac{x^5}{5} = 2x^5$. Étape 3 — Assembler : $F(x) = 2x^5$, plus une constante $k$ si on veut toutes les primitives. Étape 4 — Vérifier : $(2x^5)' = 10x^4$. Écrire $10$ oublierait de diviser par $5$ : la dérivée serait $50x^4$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 6x^2 + 4x + 3$, on choisit la primitive $F$ dont la constante est $k = 0$. Calcule $F(2)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier : les termes sont $6x^2$, $4x$ et $3$. Étape 2 — Primitiver : $6x^2 \\to 2x^3$ ; $4x \\to 2x^2$ ; $3 \\to 3x$. Étape 3 — Assembler : $F(x) = 2x^3 + 2x^2 + 3x$, donc $F(2) = 16 + 8 + 6 = 30$. Étape 4 — Vérifier : $F'(x) = 6x^2 + 4x + 3$. Calculer $f(2) = 24 + 8 + 3 = 35$ serait une erreur : on évalue $F$, pas $f$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Associe chaque fonction $f$ à l'une de ses primitives $F$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : une constante, puis des puissances de $x$. Étape 2 — Primitiver : $5 \\to 5x$ ; $4x \\to 4 \\times \\dfrac{x^2}{2} = 2x^2$ ; $9x^2 \\to 9 \\times \\dfrac{x^3}{3} = 3x^3$ ; $x^3 \\to \\dfrac{x^4}{4}$. Étape 3 — Assembler : chaque $f$ est reliée au résultat obtenu. Étape 4 — Vérifier en dérivant : $(5x)' = 5$, $(2x^2)' = 4x$, $(3x^3)' = 9x^2$ et $\\left(\\dfrac{x^4}{4}\\right)' = x^3$. Piège : écrire $x^4$ sans diviser par $4$ donnerait une dérivée $4x^3$.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = 5$",
+                      "match": "$F(x) = 5x$"
+                    },
+                    {
+                      "content": "$f(x) = 4x$",
+                      "match": "$F(x) = 2x^2$"
+                    },
+                    {
+                      "content": "$f(x) = 9x^2$",
+                      "match": "$F(x) = 3x^3$"
+                    },
+                    {
+                      "content": "$f(x) = x^3$",
+                      "match": "$F(x) = \\dfrac{x^4}{4}$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une primitive de $f(x) = 5x^2$ sur $\\mathbb{R}$ est $F(x) = \\dfrac{5x^3}{3}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : un seul terme, $5x^2$. Étape 2 — Primitiver : $x^2 \\to \\dfrac{x^3}{3}$, donc $5x^2 \\to 5 \\times \\dfrac{x^3}{3} = \\dfrac{5x^3}{3}$. Étape 3 — Assembler : $F(x) = \\dfrac{5x^3}{3}$ (plus $k$). Étape 4 — Vérifier : $F'(x) = \\dfrac{5 \\times 3x^2}{3} = 5x^2$. L'affirmation est vraie. On ne divise pas le coefficient $5$ : on divise seulement par l'exposant augmenté de $1$, soit $3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Trouver la primitive qui prend une valeur donnée",
@@ -592,119 +821,227 @@
               }
             ]
           },
-          "exercise": {
-            "title": "Primitive prenant une valeur donnée",
-            "statement": "Dans cet exercice, tu détermines la primitive d'une fonction qui prend une valeur donnée en un point, avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Soit $F$ la primitive de $f(x) = 4x + 1$ telle que $F(1) = 10$. On écrit $F(x) = 2x^2 + x + k$. Quelle est la valeur de $k$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 + x + k$ (donné). Étape 2 — Remplacer $x$ par $1$ : $F(1) = 2 + 1 + k = 3 + k$, et la condition dit $F(1) = 10$. Étape 3 — Résoudre : $3 + k = 10$, donc $k = 7$. Étape 4 — Écrire : $F(x) = 2x^2 + x + 7$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la primitive $F$ de $f(x) = 3x^2 - 2$ telle que $F(2) = 9$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Primitiver : $F(x) = x^3 - 2x + k$. Étape 2 — Remplacer : $F(2) = 8 - 4 + k = 4 + k = 9$. Étape 3 — Résoudre : $k = 9 - 4 = 5$. Étape 4 — Écrire : $F(x) = x^3 - 2x + 5$. Les leurres : $+9$ recopie la valeur donnée au lieu de la chercher ; $+1$ oublie le terme $-2x$ dans le calcul ($9 - 8 = 1$) ; $-5$ se trompe de sens dans l'équation ($4 - 9$ au lieu de $9 - 4$).",
-                "answers": [
-                  {
-                    "content": "$F(x) = x^3 - 2x + 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = x^3 - 2x + 5$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$F(x) = x^3 - 2x + 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$F(x) = x^3 - 2x - 5$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Soit $F$ la primitive de $f(x) = 2x + 6$ telle que $F(-3) = 4$. On écrit $F(x) = x^2 + 6x + k$. Quelle est la valeur de $k$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Primitiver : $F(x) = x^2 + 6x + k$. Étape 2 — Remplacer $x$ par $-3$ : $F(-3) = 9 - 18 + k = -9 + k$, et $F(-3) = 4$. Étape 3 — Résoudre : $-9 + k = 4$, donc $k = 13$. Étape 4 — Écrire : $F(x) = x^2 + 6x + 13$.",
-                "answers": [
-                  {
-                    "content": "13",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "La primitive $F$ de $f(x) = 6x^2 + 2$ telle que $F(0) = 3$ est $F(x) = 2x^3 + 2x + $ ___ .",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Primitiver : $F(x) = 2x^3 + 2x + k$. Étape 2 — Remplacer $x$ par $0$ : $F(0) = k$, et $F(0) = 3$. Étape 3 — Résoudre : $k = 3$. Étape 4 — Écrire : $F(x) = 2x^3 + 2x + 3$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "La hauteur $h(t)$ d'un plant de maïs, en cm, a pour vitesse de croissance $h'(t) = 2t + 4$ (en cm par semaine, $t$ en semaines). À $t = 1$, le plant mesure $9$ cm. Quelle est sa hauteur à $t = 3$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Primitiver : $h(t) = t^2 + 4t + k$. Étape 2 — Remplacer $t$ par $1$ : $h(1) = 1 + 4 + k = 5 + k = 9$. Étape 3 — Résoudre : $k = 4$. Étape 4 — Écrire : $h(t) = t^2 + 4t + 4$. Hauteur à $t = 3$ : $h(3) = 9 + 12 + 4 = 25$ cm.",
-                "answers": [
-                  {
-                    "content": "25",
-                    "correct": true
-                  }
-                ],
-                "unit": "cm"
-              },
-              {
-                "content": "Pour trouver la constante $k$ de la primitive $F$ de $f(x) = 2x$ telle que $F(3) = 10$, on calcule $f(3) = 6$ puis on résout $6 + k = 10$.",
-                "question_type": "true_false",
-                "explanation": "La condition porte sur $F$, pas sur $f$. Étape 1 — Primitiver : $F(x) = x^2 + k$. Étape 2 — Remplacer $x$ par $3$ dans $F$ : $F(3) = 9 + k$. Étape 3 — Résoudre : $9 + k = 10$, donc $k = 1$. Étape 4 — Écrire : $F(x) = x^2 + 1$. Avec $f(3) = 6$ on trouverait $k = 4$, ce qui est faux.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour trouver la primitive de $f$ qui vaut $y_0$ en $x_0$.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Primitiver : on écrit $F$ avec $k$. Étape 2 — Remplacer : on traduit la condition $F(x_0) = y_0$. Étape 3 — Résoudre : on isole $k$. Étape 4 — Écrire : on remplace $k$ dans $F$. On ne peut pas résoudre avant d'avoir posé l'équation.",
-                "answers": [
-                  {
-                    "content": "Primitiver $f$ : écrire $F(x)$ avec la constante $k$."
-                  },
-                  {
-                    "content": "Remplacer $x$ par $x_0$ dans $F(x)$ et écrire $F(x_0) = y_0$."
-                  },
-                  {
-                    "content": "Résoudre l'équation pour trouver $k$."
-                  },
-                  {
-                    "content": "Écrire la primitive $F(x)$ avec la valeur de $k$ trouvée."
-                  }
-                ]
-              }
-            ]
-          }
+          "exercise": [
+            {
+              "title": "Primitive prenant une valeur donnée",
+              "statement": "Dans cet exercice, tu détermines la primitive d'une fonction qui prend une valeur donnée en un point, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 4x + 1$ telle que $F(1) = 10$. On écrit $F(x) = 2x^2 + x + k$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 + x + k$ (donné). Étape 2 — Remplacer $x$ par $1$ : $F(1) = 2 + 1 + k = 3 + k$, et la condition dit $F(1) = 10$. Étape 3 — Résoudre : $3 + k = 10$, donc $k = 7$. Étape 4 — Écrire : $F(x) = 2x^2 + x + 7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la primitive $F$ de $f(x) = 3x^2 - 2$ telle que $F(2) = 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = x^3 - 2x + k$. Étape 2 — Remplacer : $F(2) = 8 - 4 + k = 4 + k = 9$. Étape 3 — Résoudre : $k = 9 - 4 = 5$. Étape 4 — Écrire : $F(x) = x^3 - 2x + 5$. Les leurres : $+9$ recopie la valeur donnée au lieu de la chercher ; $+1$ oublie le terme $-2x$ dans le calcul ($9 - 8 = 1$) ; $-5$ se trompe de sens dans l'équation ($4 - 9$ au lieu de $9 - 4$).",
+                  "answers": [
+                    {
+                      "content": "$F(x) = x^3 - 2x + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^3 - 2x + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = x^3 - 2x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^3 - 2x - 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 2x + 6$ telle que $F(-3) = 4$. On écrit $F(x) = x^2 + 6x + k$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Primitiver : $F(x) = x^2 + 6x + k$. Étape 2 — Remplacer $x$ par $-3$ : $F(-3) = 9 - 18 + k = -9 + k$, et $F(-3) = 4$. Étape 3 — Résoudre : $-9 + k = 4$, donc $k = 13$. Étape 4 — Écrire : $F(x) = x^2 + 6x + 13$.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La primitive $F$ de $f(x) = 6x^2 + 2$ telle que $F(0) = 3$ est $F(x) = 2x^3 + 2x + $ ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^3 + 2x + k$. Étape 2 — Remplacer $x$ par $0$ : $F(0) = k$, et $F(0) = 3$. Étape 3 — Résoudre : $k = 3$. Étape 4 — Écrire : $F(x) = 2x^3 + 2x + 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La hauteur $h(t)$ d'un plant de maïs, en cm, a pour vitesse de croissance $h'(t) = 2t + 4$ (en cm par semaine, $t$ en semaines). À $t = 1$, le plant mesure $9$ cm. Quelle est sa hauteur à $t = 3$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Primitiver : $h(t) = t^2 + 4t + k$. Étape 2 — Remplacer $t$ par $1$ : $h(1) = 1 + 4 + k = 5 + k = 9$. Étape 3 — Résoudre : $k = 4$. Étape 4 — Écrire : $h(t) = t^2 + 4t + 4$. Hauteur à $t = 3$ : $h(3) = 9 + 12 + 4 = 25$ cm.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                },
+                {
+                  "content": "Pour trouver la constante $k$ de la primitive $F$ de $f(x) = 2x$ telle que $F(3) = 10$, on calcule $f(3) = 6$ puis on résout $6 + k = 10$.",
+                  "question_type": "true_false",
+                  "explanation": "La condition porte sur $F$, pas sur $f$. Étape 1 — Primitiver : $F(x) = x^2 + k$. Étape 2 — Remplacer $x$ par $3$ dans $F$ : $F(3) = 9 + k$. Étape 3 — Résoudre : $9 + k = 10$, donc $k = 1$. Étape 4 — Écrire : $F(x) = x^2 + 1$. Avec $f(3) = 6$ on trouverait $k = 4$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la primitive de $f$ qui vaut $y_0$ en $x_0$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Primitiver : on écrit $F$ avec $k$. Étape 2 — Remplacer : on traduit la condition $F(x_0) = y_0$. Étape 3 — Résoudre : on isole $k$. Étape 4 — Écrire : on remplace $k$ dans $F$. On ne peut pas résoudre avant d'avoir posé l'équation.",
+                  "answers": [
+                    {
+                      "content": "Primitiver $f$ : écrire $F(x)$ avec la constante $k$."
+                    },
+                    {
+                      "content": "Remplacer $x$ par $x_0$ dans $F(x)$ et écrire $F(x_0) = y_0$."
+                    },
+                    {
+                      "content": "Résoudre l'équation pour trouver $k$."
+                    },
+                    {
+                      "content": "Écrire la primitive $F(x)$ avec la valeur de $k$ trouvée."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Fixer la constante avec une condition",
+              "statement": "Dans cet exercice, tu fixes la constante $k$ d'une primitive grâce à une condition $F(x_0) = y_0$, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord $F(x)$ avec $k$, puis remplace $x$ par $x_0$ dans $F$ (jamais dans $f$) et résous l'équation en $k$. Recalcule $F(x_0)$ pour contrôler.",
+              "questions": [
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 6x^2 + 2x$ telle que $F(2) = 25$. On écrit $F(x) = 2x^3 + x^2 + k$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^3 + x^2 + k$. Étape 2 — Remplacer $x$ par $2$ : $F(2) = 16 + 4 + k = 20 + k$, et la condition donne $20 + k = 25$. Étape 3 — Résoudre : $k = 5$. Étape 4 — Écrire : $F(x) = 2x^3 + x^2 + 5$. Contrôle : $F(2) = 16 + 4 + 5 = 25$. Prendre $k = 25$ confondrait la valeur de la condition avec la constante.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la primitive $F$ de $f(x) = 4x - 1$ sur $\\mathbb{R}$ telle que $F(3) = 14$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 - x + k$. Étape 2 — Remplacer $x$ par $3$ : $F(3) = 18 - 3 + k = 15 + k$, et $15 + k = 14$. Étape 3 — Résoudre : $k = 14 - 15 = -1$. Étape 4 — Écrire : $F(x) = 2x^2 - x - 1$. Contrôle : $F(3) = 18 - 3 - 1 = 14$. Les leurres : le terme en $+1$ vient d'une erreur de signe sur $k$ ; le terme en $+14$ prend $k = F(3)$ ; le terme en $+3$ calcule $f(3) = 11$ au lieu de $F(3)$, puis résout $11 + k = 14$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 2x^2 - x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 - x + 14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 - x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 - x - 1$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La primitive $F$ de $f(x) = 3x^2 + 4$ sur $\\mathbb{R}$ telle que $F(0) = -2$ s'écrit $F(x) = x^3 + 4x$ ___ (écris le dernier terme avec son signe, par exemple « +5 »).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = x^3 + 4x + k$. Étape 2 — Remplacer $x$ par $0$ : $F(0) = 0 + 0 + k = k$, et la condition donne $k = -2$. Étape 3 — Résoudre : l'équation est déjà résolue, $k = -2$. Étape 4 — Écrire : $F(x) = x^3 + 4x - 2$, donc le terme à écrire est $-2$. Contrôle : $F(0) = -2$.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un réservoir d'eau de village se remplit (situation d'exemple). Son volume $V(t)$, en litres, a pour vitesse de remplissage $V'(t) = 4t + 6$ (en litres par heure, $t$ en heures). À $t = 0$, le réservoir contient $50$ litres. Quel volume contient-il à $t = 5$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $V(t) = 2t^2 + 6t + k$. Étape 2 — Remplacer $t$ par $0$ : $V(0) = k$, et la condition donne $k = 50$. Étape 3 — Résoudre : $k = 50$, donc $V(t) = 2t^2 + 6t + 50$. Étape 4 — Écrire puis calculer : $V(5) = 50 + 30 + 50 = 130$ litres. Calculer $V'(5) = 26$ répondrait à la vitesse de remplissage, pas au volume.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "130",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "La primitive $F$ de $f(x) = 2x + 1$ sur $\\mathbb{R}$ telle que $F(1) = 4$ est $F(x) = x^2 + x + 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = x^2 + x + k$. Étape 2 — Remplacer $x$ par $1$ : $F(1) = 1 + 1 + k = 2 + k$, et $2 + k = 4$. Étape 3 — Résoudre : $k = 2$. Étape 4 — Écrire : $F(x) = x^2 + x + 2$. L'affirmation est fausse : elle prend $k = 4$, c'est-à-dire la valeur $y_0$ de la condition, alors que $4$ est la valeur de $F(1)$ et non la constante. Contrôle de la proposition : $1 + 1 + 4 = 6$, différent de $4$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour trouver la constante $k$ d'une primitive, on remplace $x$ par $x_0$ dans ___ , puis on résout l'équation obtenue.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Primitiver : on écrit $F(x)$ avec la constante $k$. Étape 2 — Remplacer : la condition $F(x_0) = y_0$ porte sur $F$, c'est donc $F$ qu'on évalue en $x_0$. Étape 3 — Résoudre : on obtient une équation d'inconnue $k$. Étape 4 — Écrire la primitive. Évaluer $f$ ou la dérivée de $f$ donne un nombre sans $k$ : aucune équation à résoudre, c'est le piège de la fiche. Quant à $y_0$, il est déjà connu : on n'y remplace rien.",
+                  "answers": [
+                    {
+                      "content": "la fonction $f(x)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la primitive $F(x)$ écrite avec $k$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la dérivée de $f$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la valeur $y_0$ de la condition",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Calculer une intégrale et utiliser ses propriétés",
@@ -778,127 +1115,238 @@
               }
             ]
           },
-          "exercise": {
-            "title": "Calculer des intégrales",
-            "statement": "Dans cet exercice, tu calcules des intégrales avec une primitive, puis tu utilises la linéarité et la relation de Chasles.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Calcule $\\int_{1}^{2} 6x^2\\,dx$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Trouver une primitive : $F(x) = 6 \\times \\dfrac{x^3}{3} = 2x^3$. Étape 2 — Évaluer : $F(2) = 2 \\times 8 = 16$ et $F(1) = 2 \\times 1 = 2$. Étape 3 — Soustraire : $F(2) - F(1) = 16 - 2 = 14$. Étape 4 — Conclure : $\\int_{1}^{2} 6x^2\\,dx$ $= 14$.",
-                "answers": [
-                  {
-                    "content": "14",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Calcule $\\int_{0}^{3} (2x + 4)\\,dx$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^2 + 4x$. Étape 2 — Évaluer : $F(3) = 9 + 12 = 21$ et $F(0) = 0$. Étape 3 — Soustraire : $21 - 0 = 21$. Étape 4 — Conclure : $\\int_{0}^{3} (2x + 4)\\,dx$ $= 21$.",
-                "answers": [
-                  {
-                    "content": "21",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Calcule $\\int_{-1}^{2} (3x^2 + 2)\\,dx$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^3 + 2x$. Étape 2 — Évaluer : $F(2) = 8 + 4 = 12$ et $F(-1) = -1 - 2 = -3$. Étape 3 — Soustraire : $F(2) - F(-1) = 12 - (-3) = 15$. Étape 4 — Conclure : la valeur est $15$. Les leurres : $9$ vient d'un signe oublié ($12 - 3$) ; $-15$ inverse l'ordre ($F(-1) - F(2)$) ; $12$ oublie de soustraire $F(-1)$.",
-                "answers": [
-                  {
-                    "content": "$9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-15$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$15$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$12$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une fonction $f$ est continue sur $[0 ; 6]$. On sait que $\\int_{0}^{2} f(x)\\,dx$ $= 5$ et que $\\int_{2}^{6} f(x)\\,dx$ $= 7$. Calcule $\\int_{0}^{6} f(x)\\,dx$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Ici les deux intégrales sont données : pas besoin de primitive (Étape 1). On applique la relation de Chasles : $\\int_{0}^{6} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{6} f(x)\\,dx$. On additionne les deux morceaux : $5 + 7 = 12$. Étape 4 — Conclure : la valeur est $12$.",
-                "answers": [
-                  {
-                    "content": "12",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une fonction $f$ est continue sur $[0 ; 3]$ et $\\int_{0}^{3} f(x)\\,dx$ $= 4$. Calcule $\\int_{0}^{3} (2f(x) + 1)\\,dx$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Linéarité : $\\int_{0}^{3} (2f(x) + 1)\\,dx$ $= 2 \\times$ $\\int_{0}^{3} f(x)\\,dx$ $+$ $\\int_{0}^{3} 1\\,dx$. Étape 1 — Trouver une primitive de $1$ : $F(x) = x$. Étape 2 — Évaluer : $F(3) = 3$ et $F(0) = 0$. Étape 3 — Soustraire : $3 - 0 = 3$, donc $\\int_{0}^{3} 1\\,dx$ $= 3$. Étape 4 — Conclure : $2 \\times 4 + 3 = 11$.",
-                "answers": [
-                  {
-                    "content": "11",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour calculer $\\int_{0}^{2} 3x^2\\,dx$, on peut calculer $3 \\times 2^2 - 3 \\times 0^2 = 12$.",
-                "question_type": "true_false",
-                "explanation": "On ne calcule pas $f(2) - f(0)$ : c'est la primitive qu'on évalue. Étape 1 — Trouver une primitive : $F(x) = x^3$. Étape 2 — Évaluer : $F(2) = 8$, $F(0) = 0$. Étape 3 — Soustraire : $8 - 0 = 8$. Étape 4 — Conclure : la valeur est $8$, et non $12$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une fonction $f$ est continue sur $[0 ; 5]$. Quelles sont les deux affirmations vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Chasles : $\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{5} f(x)\\,dx$ : vraie. Et $\\int_{0}^{0} f(x)\\,dx$ $= F(0) - F(0) = 0$ (Étapes 2 et 3) : vraie. Étape 4 — Conclure : ce sont ces deux affirmations. Fausses : l'intégrale sur $[0 ; 5]$ est une somme, pas un produit ; $\\int_{0}^{5} 2f(x)\\,dx$ $= 2 \\times$ $\\int_{0}^{5} f(x)\\,dx$ (on ne l'augmente pas de $2$) ; échanger les bornes change le signe : $\\int_{2}^{5} f(x)\\,dx$ $= -$ $\\int_{5}^{2} f(x)\\,dx$.",
-                "answers": [
-                  {
-                    "content": "$\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{5} f(x)\\,dx$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $\\times$ $\\int_{2}^{5} f(x)\\,dx$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\int_{0}^{0} f(x)\\,dx$ $= 0$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\int_{0}^{5} 2f(x)\\,dx$ $= 2 + $ $\\int_{0}^{5} f(x)\\,dx$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\int_{2}^{5} f(x)\\,dx$ $= $ $\\int_{5}^{2} f(x)\\,dx$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          }
+          "exercise": [
+            {
+              "title": "Calculer des intégrales",
+              "statement": "Dans cet exercice, tu calcules des intégrales avec une primitive, puis tu utilises la linéarité et la relation de Chasles.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule $\\int_{1}^{2} 6x^2\\,dx$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = 6 \\times \\dfrac{x^3}{3} = 2x^3$. Étape 2 — Évaluer : $F(2) = 2 \\times 8 = 16$ et $F(1) = 2 \\times 1 = 2$. Étape 3 — Soustraire : $F(2) - F(1) = 16 - 2 = 14$. Étape 4 — Conclure : $\\int_{1}^{2} 6x^2\\,dx$ $= 14$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{0}^{3} (2x + 4)\\,dx$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^2 + 4x$. Étape 2 — Évaluer : $F(3) = 9 + 12 = 21$ et $F(0) = 0$. Étape 3 — Soustraire : $21 - 0 = 21$. Étape 4 — Conclure : $\\int_{0}^{3} (2x + 4)\\,dx$ $= 21$.",
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{-1}^{2} (3x^2 + 2)\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^3 + 2x$. Étape 2 — Évaluer : $F(2) = 8 + 4 = 12$ et $F(-1) = -1 - 2 = -3$. Étape 3 — Soustraire : $F(2) - F(-1) = 12 - (-3) = 15$. Étape 4 — Conclure : la valeur est $15$. Les leurres : $9$ vient d'un signe oublié ($12 - 3$) ; $-15$ inverse l'ordre ($F(-1) - F(2)$) ; $12$ oublie de soustraire $F(-1)$.",
+                  "answers": [
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$. On sait que $\\int_{0}^{2} f(x)\\,dx$ $= 5$ et que $\\int_{2}^{6} f(x)\\,dx$ $= 7$. Calcule $\\int_{0}^{6} f(x)\\,dx$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Ici les deux intégrales sont données : pas besoin de primitive (Étape 1). On applique la relation de Chasles : $\\int_{0}^{6} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{6} f(x)\\,dx$. On additionne les deux morceaux : $5 + 7 = 12$. Étape 4 — Conclure : la valeur est $12$.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 3]$ et $\\int_{0}^{3} f(x)\\,dx$ $= 4$. Calcule $\\int_{0}^{3} (2f(x) + 1)\\,dx$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Linéarité : $\\int_{0}^{3} (2f(x) + 1)\\,dx$ $= 2 \\times$ $\\int_{0}^{3} f(x)\\,dx$ $+$ $\\int_{0}^{3} 1\\,dx$. Étape 1 — Trouver une primitive de $1$ : $F(x) = x$. Étape 2 — Évaluer : $F(3) = 3$ et $F(0) = 0$. Étape 3 — Soustraire : $3 - 0 = 3$, donc $\\int_{0}^{3} 1\\,dx$ $= 3$. Étape 4 — Conclure : $2 \\times 4 + 3 = 11$.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer $\\int_{0}^{2} 3x^2\\,dx$, on peut calculer $3 \\times 2^2 - 3 \\times 0^2 = 12$.",
+                  "question_type": "true_false",
+                  "explanation": "On ne calcule pas $f(2) - f(0)$ : c'est la primitive qu'on évalue. Étape 1 — Trouver une primitive : $F(x) = x^3$. Étape 2 — Évaluer : $F(2) = 8$, $F(0) = 0$. Étape 3 — Soustraire : $8 - 0 = 8$. Étape 4 — Conclure : la valeur est $8$, et non $12$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 5]$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Chasles : $\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{5} f(x)\\,dx$ : vraie. Et $\\int_{0}^{0} f(x)\\,dx$ $= F(0) - F(0) = 0$ (Étapes 2 et 3) : vraie. Étape 4 — Conclure : ce sont ces deux affirmations. Fausses : l'intégrale sur $[0 ; 5]$ est une somme, pas un produit ; $\\int_{0}^{5} 2f(x)\\,dx$ $= 2 \\times$ $\\int_{0}^{5} f(x)\\,dx$ (on ne l'augmente pas de $2$) ; échanger les bornes change le signe : $\\int_{2}^{5} f(x)\\,dx$ $= -$ $\\int_{5}^{2} f(x)\\,dx$.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $+$ $\\int_{2}^{5} f(x)\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{0}^{5} f(x)\\,dx$ $= $ $\\int_{0}^{2} f(x)\\,dx$ $\\times$ $\\int_{2}^{5} f(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{0}^{0} f(x)\\,dx$ $= 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{0}^{5} 2f(x)\\,dx$ $= 2 + $ $\\int_{0}^{5} f(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{2}^{5} f(x)\\,dx$ $= $ $\\int_{5}^{2} f(x)\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer des intégrales avec une primitive",
+              "statement": "Dans cet exercice, tu calcules des intégrales avec $F(b) - F(a)$, puis tu utilises la linéarité, la relation de Chasles et l'échange des bornes.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Trouve une primitive $F$ sans constante, calcule $F(b) - F(a)$ dans cet ordre, et n'évalue jamais $f$ elle-même. Pour les propriétés, relis la linéarité et Chasles.",
+              "questions": [
+                {
+                  "content": "Calcule $\\int_{0}^{2} (3x^2 + 4x)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^3 + 2x^2$. Étape 2 — Évaluer : $F(2) = 8 + 8 = 16$ et $F(0) = 0$. Étape 3 — Soustraire : $F(2) - F(0) = 16 - 0 = 16$. Étape 4 — Conclure : l'intégrale vaut $16$. Calculer $f(2) - f(0) = 20 - 0 = 20$ est faux : on évalue la primitive $F$, jamais $f$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{1}^{3} (2x + 3)\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^2 + 3x$. Étape 2 — Évaluer : $F(3) = 9 + 9 = 18$ et $F(1) = 1 + 3 = 4$. Étape 3 — Soustraire : $F(3) - F(1) = 18 - 4 = 14$. Étape 4 — Conclure : $14$. Les leurres : $-14$ soustrait dans le mauvais ordre, $F(1) - F(3)$ ; $22$ additionne $F(3) + F(1)$ ; $4$ calcule $f(3) - f(1) = 9 - 5$ avec $f$ au lieu de $F$.",
+                  "answers": [
+                    {
+                      "content": "$-14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$22$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 8]$. On sait que $\\int_{0}^{8} f(x)\\,dx$ $= 19$ et que $\\int_{5}^{8} f(x)\\,dx$ $= 6$. Calcule $\\int_{0}^{5} f(x)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la relation de Chasles découpe $[0 ; 8]$ en $[0 ; 5]$ et $[5 ; 8]$. Étape 2 — Écrire : $19 = I + 6$, où $I$ désigne $\\int_{0}^{5} f(x)\\,dx$. Étape 3 — Soustraire : $I = 19 - 6 = 13$. Étape 4 — Conclure : l'intégrale cherchée vaut $13$. Additionner $19 + 6 = 25$ serait une erreur : $19$ contient déjà la part de $[5 ; 8]$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[2 ; 5]$ et $\\int_{2}^{5} f(x)\\,dx$ $= 9$. Alors $\\int_{5}^{2} f(x)\\,dx$ $= 9$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les bornes sont échangées, de $5$ vers $2$. Étape 2 — Écrire la règle : $\\int_{b}^{a} f(x)\\,dx$ $= -$ $\\int_{a}^{b} f(x)\\,dx$. Étape 3 — Soustraire dans l'ordre : avec une primitive $F$, $F(2) - F(5) = -(F(5) - F(2)) = -9$. Étape 4 — Conclure : la valeur est $-9$, donc l'affirmation est fausse. Garder $9$ oublie que l'échange des bornes change le signe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 4]$ et $\\int_{0}^{4} f(x)\\,dx$ $= 3$. Alors $\\int_{0}^{4} 5f(x)\\,dx$ vaut ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on multiplie $f$ par la constante $5$. Étape 2 — Écrire la linéarité : $\\int_{0}^{4} 5f(x)\\,dx$ $= 5 \\times$ $\\int_{0}^{4} f(x)\\,dx$. Étape 3 — Calculer : $5 \\times 3 = 15$. Étape 4 — Conclure : $15$. Écrire $5 + 3 = 8$ confond la multiplication par une constante avec une addition.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux fonctions $f$ et $g$ sont continues sur $[0 ; 3]$, avec $\\int_{0}^{3} f(x)\\,dx$ $= 4$ et $\\int_{0}^{3} g(x)\\,dx$ $= 2$. Quelles sont les deux affirmations toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : trois règles servent ici, la somme, le facteur constant et l'échange des bornes. Étape 2 — Appliquer la linéarité : la somme donne $4 + 2 = 6$ et $3 \\times 2 = 6$. Étape 3 — Écarter les autres : $\\int_{0}^{3} 2f(x)\\,dx$ vaut $2 \\times 4 = 8$, pas $6$ ; échanger les bornes change le signe, donc $\\int_{3}^{0} f(x)\\,dx$ vaut $-4$ ; l'intégrale d'un produit n'est pas le produit des intégrales, donc $4 \\times 2 = 8$ n'est pas une règle. Étape 4 — Conclure : les deux affirmations vraies sont celle de la somme et celle du facteur $3$ appliqué à $g$.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{3} f(x)g(x)\\,dx$ $= 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{0}^{3} (f(x) + g(x))\\,dx$ $= 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{3}^{0} f(x)\\,dx$ $= 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{0}^{3} 3g(x)\\,dx$ $= 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{0}^{3} 2f(x)\\,dx$ $= 6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "Calculer l'aire sous une courbe",
@@ -973,124 +1421,232 @@
               }
             ]
           },
-          "exercise": {
-            "title": "Calculer des aires de parcelles",
-            "statement": "Dans cet exercice, tu calcules l'aire de parcelles délimitées par une courbe, l'axe des abscisses et deux droites verticales. Pour les deux premières questions, appuie-toi sur la figure : la parcelle ABCD est limitée par la droite $y = 2x + 1$.",
-            "exercise_type": "fixation",
-            "figure": "domaine-droite",
-            "questions": [
-              {
-                "content": "Une parcelle est limitée par la droite d'équation $y = 2x + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$. Son aire en unités d'aire s'écrit :",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $2x + 1 \\geq 3 > 0$ sur $[1 ; 3]$, les bornes sont $a = 1$ et $b = 3$. Étape 2 — Écrire : $A = $ $\\int_{1}^{3} (2x + 1)\\,dx$. Les leurres : bornes $0$ et $3$ (la parcelle commence à $x = 1$) ; $\\int_{1}^{3} (x^2 + x)\\,dx$ intègre une primitive au lieu de $f$ ; $f(3) - f(1)$ est la différence des hauteurs, pas une aire.",
-                "answers": [
-                  {
-                    "content": "$\\int_{0}^{3} (2x + 1)\\,dx$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\int_{1}^{3} (x^2 + x)\\,dx$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f(3) - f(1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\int_{1}^{3} (2x + 1)\\,dx$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une parcelle est limitée par la droite d'équation $y = 2x + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$. Calcule son aire, en unités d'aire.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $2x + 1 > 0$ sur $[1 ; 3]$. Étape 2 — Écrire : $A = $ $\\int_{1}^{3} (2x + 1)\\,dx$. Étape 3 — Calculer : $F(x) = x^2 + x$, $F(3) - F(1) = 12 - 2 = 10$ u.a. On peut contrôler avec le trapèze : hauteurs $3$ et $7$, largeur $2$, aire $\\dfrac{(3 + 7) \\times 2}{2} = 10$.",
-                "answers": [
-                  {
-                    "content": "10",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Même parcelle (droite $y = 2x + 1$, axe des abscisses, $x = 1$ et $x = 3$). Sur chaque axe, une unité représente $10$ m, donc une unité d'aire vaut $100$ m². Sachant que l'aire est de $10$ unités d'aire, quelle est l'aire de la parcelle en m² ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 3 — Calculer : l'aire vaut $10$ u.a. Étape 4 — Convertir : une unité d'aire vaut $10 \\text{ m} \\times 10 \\text{ m} = 100$ m², donc $10 \\times 100 = 1\\,000$ m². Conclusion : la parcelle mesure $1\\,000$ m². Donner $10$ m² serait oublier la conversion.",
-                "answers": [
-                  {
-                    "content": "1000",
-                    "correct": true
-                  }
-                ],
-                "unit": "m²"
-              },
-              {
-                "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = 3x^2$, l'axe des abscisses et les droites $x = 0$ et $x = 2$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $3x^2 \\geq 0$ sur $[0 ; 2]$. Étape 2 — Écrire : $A = $ $\\int_{0}^{2} 3x^2\\,dx$. Étape 3 — Calculer : $F(x) = x^3$, $F(2) - F(0) = 8 - 0 = 8$ u.a. Étape 4 — Conclure : l'aire est $8$ unités d'aire.",
-                "answers": [
-                  {
-                    "content": "8",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Si $f(x) \\geq 0$ sur $[a ; b]$ avec $a < b$, alors $\\int_{a}^{b} f(x)\\,dx$ $\\geq 0$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Vérifier le signe : c'est la propriété de positivité. Quand $f$ est positive sur $[a ; b]$, l'intégrale est l'aire du domaine sous la courbe, et une aire n'est jamais négative.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un domaine a une aire de $15$ unités d'aire, et une unité d'aire représente $4$ m². Quelle est son aire en m² ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 3 — Calculer : l'aire est $15$ u.a. Étape 4 — Convertir : $15 \\times 4 = 60$ m². Les leurres : $15$ m² oublie la conversion (confusion entre unités d'aire et m²) ; $19$ additionne au lieu de multiplier ; $3{,}75$ divise au lieu de multiplier.",
-                "answers": [
-                  {
-                    "content": "$15$ m²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$19$ m²",
-                    "correct": false
-                  },
-                  {
-                    "content": "$60$ m²",
-                    "correct": true
-                  },
-                  {
-                    "content": "$3{,}75$ m²",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = x^2 + 1$, l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $x^2 + 1 \\geq 1 > 0$ sur $[0 ; 3]$. Étape 2 — Écrire : $A = $ $\\int_{0}^{3} (x^2 + 1)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^3}{3} + x$, $F(3) = 9 + 3 = 12$, $F(0) = 0$, donc $A = 12$ u.a. Étape 4 — Conclure : l'aire est $12$ unités d'aire.",
-                "answers": [
-                  {
-                    "content": "12",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          }
+          "exercise": [
+            {
+              "title": "Calculer des aires de parcelles",
+              "statement": "Dans cet exercice, tu calcules l'aire de parcelles délimitées par une courbe, l'axe des abscisses et deux droites verticales. Pour les deux premières questions, appuie-toi sur la figure : la parcelle ABCD est limitée par la droite $y = 2x + 1$.",
+              "exercise_type": "fixation",
+              "figure": "domaine-droite",
+              "questions": [
+                {
+                  "content": "Une parcelle est limitée par la droite d'équation $y = 2x + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$. Son aire en unités d'aire s'écrit :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $2x + 1 \\geq 3 > 0$ sur $[1 ; 3]$, les bornes sont $a = 1$ et $b = 3$. Étape 2 — Écrire : $A = $ $\\int_{1}^{3} (2x + 1)\\,dx$. Les leurres : bornes $0$ et $3$ (la parcelle commence à $x = 1$) ; $\\int_{1}^{3} (x^2 + x)\\,dx$ intègre une primitive au lieu de $f$ ; $f(3) - f(1)$ est la différence des hauteurs, pas une aire.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{3} (2x + 1)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{1}^{3} (x^2 + x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(3) - f(1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{1}^{3} (2x + 1)\\,dx$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une parcelle est limitée par la droite d'équation $y = 2x + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$. Calcule son aire, en unités d'aire.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $2x + 1 > 0$ sur $[1 ; 3]$. Étape 2 — Écrire : $A = $ $\\int_{1}^{3} (2x + 1)\\,dx$. Étape 3 — Calculer : $F(x) = x^2 + x$, $F(3) - F(1) = 12 - 2 = 10$ u.a. On peut contrôler avec le trapèze : hauteurs $3$ et $7$, largeur $2$, aire $\\dfrac{(3 + 7) \\times 2}{2} = 10$.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Même parcelle (droite $y = 2x + 1$, axe des abscisses, $x = 1$ et $x = 3$). Sur chaque axe, une unité représente $10$ m, donc une unité d'aire vaut $100$ m². Sachant que l'aire est de $10$ unités d'aire, quelle est l'aire de la parcelle en m² ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Calculer : l'aire vaut $10$ u.a. Étape 4 — Convertir : une unité d'aire vaut $10 \\text{ m} \\times 10 \\text{ m} = 100$ m², donc $10 \\times 100 = 1\\,000$ m². Conclusion : la parcelle mesure $1\\,000$ m². Donner $10$ m² serait oublier la conversion.",
+                  "answers": [
+                    {
+                      "content": "1000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "m²"
+                },
+                {
+                  "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = 3x^2$, l'axe des abscisses et les droites $x = 0$ et $x = 2$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $3x^2 \\geq 0$ sur $[0 ; 2]$. Étape 2 — Écrire : $A = $ $\\int_{0}^{2} 3x^2\\,dx$. Étape 3 — Calculer : $F(x) = x^3$, $F(2) - F(0) = 8 - 0 = 8$ u.a. Étape 4 — Conclure : l'aire est $8$ unités d'aire.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $f(x) \\geq 0$ sur $[a ; b]$ avec $a < b$, alors $\\int_{a}^{b} f(x)\\,dx$ $\\geq 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier le signe : c'est la propriété de positivité. Quand $f$ est positive sur $[a ; b]$, l'intégrale est l'aire du domaine sous la courbe, et une aire n'est jamais négative.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un domaine a une aire de $15$ unités d'aire, et une unité d'aire représente $4$ m². Quelle est son aire en m² ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Calculer : l'aire est $15$ u.a. Étape 4 — Convertir : $15 \\times 4 = 60$ m². Les leurres : $15$ m² oublie la conversion (confusion entre unités d'aire et m²) ; $19$ additionne au lieu de multiplier ; $3{,}75$ divise au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$15$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3{,}75$ m²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = x^2 + 1$, l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Vérifier : $x^2 + 1 \\geq 1 > 0$ sur $[0 ; 3]$. Étape 2 — Écrire : $A = $ $\\int_{0}^{3} (x^2 + 1)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^3}{3} + x$, $F(3) = 9 + 3 = 12$, $F(0) = 0$, donc $A = 12$ u.a. Étape 4 — Conclure : l'aire est $12$ unités d'aire.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Passer d'une intégrale à une aire en m²",
+              "statement": "Dans cet exercice, tu calcules des aires sous une courbe avec une intégrale, puis tu convertis les unités d'aire en m².",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Vérifie d'abord que $f$ est positive sur $[a ; b]$, écris $A = \\int_{a}^{b} f(x)\\,dx$, calcule avec $F(b) - F(a)$, puis multiplie par l'aire en m² d'une unité d'aire.",
+              "questions": [
+                {
+                  "content": "Un domaine est limité par la courbe de $f(x) = x + 2$, l'axe des abscisses et les droites $x = 1$ et $x = 4$. Son aire en unités d'aire est égale à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $x + 2 \\geq 3 > 0$ sur $[1 ; 4]$ ; les bornes sont $a = 1$ et $b = 4$. Étape 2 — Écrire : $A = \\int_{1}^{4} (x + 2)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^2}{2} + 2x$, puis $F(4) - F(1) = 16 - 2{,}5 = 13{,}5$ u.a. Étape 4 — Pas de conversion demandée. Les leurres : la borne $0$ au lieu de $1$ donnerait $16$ ; $x^2 + 2x$ n'est pas la fonction $f$ ; $f(4) - f(1) = 3$ évalue $f$ au lieu d'intégrer.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{4} (x + 2)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{1}^{4} (x^2 + 2x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(4) - f(1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{1}^{4} (x + 2)\\,dx$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = x^2 + 2x + 1$, l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $x^2 + 2x + 1 = (x + 1)^2 \\geq 0$ ; les bornes sont $0$ et $3$. Étape 2 — Écrire : $A = \\int_{0}^{3} (x^2 + 2x + 1)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^3}{3} + x^2 + x$ ; $F(3) = 9 + 9 + 3 = 21$ et $F(0) = 0$, donc $A = 21$ u.a. Étape 4 — Convertir : aucune conversion n'est demandée, la réponse est en unités d'aire. Évaluer $f(3) = 16$ donnerait une ordonnée, pas une aire.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un domaine a une aire de $12$ unités d'aire. Sur chaque axe, une unité représente $5$ m. Quelle est son aire en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : l'aire en unités d'aire est donnée, $A = 12$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $5$ m sur $5$ m. Étape 3 — Calculer : $5 \\times 5 = 25$ m² par unité d'aire. Étape 4 — Convertir : $12 \\times 25 = 300$ m². Multiplier par $5$ seulement donnerait $60$, ce qui oublie que l'aire fait intervenir les deux axes.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain est limité par la courbe de $f(x) = 3x^2 + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$. Sur chaque axe, une unité représente $2$ m. Quelle est l'aire du terrain en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $3x^2 + 1 \\geq 1 > 0$ sur $[1 ; 3]$ ; les bornes sont $1$ et $3$. Étape 2 — Écrire : $A = \\int_{1}^{3} (3x^2 + 1)\\,dx$. Étape 3 — Calculer : $F(x) = x^3 + x$ ; $F(3) = 30$ et $F(1) = 2$, donc $A = 28$ u.a. Étape 4 — Convertir : une unité d'aire vaut $2 \\times 2 = 4$ m², donc $28 \\times 4 = 112$ m². Répondre $28$ m² oublierait la conversion.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "112",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On calcule $\\int_{0}^{3} (x^2 - 4)\\,dx$ $= -3$. Donc l'aire du domaine limité par la courbe de $f(x) = x^2 - 4$, l'axe des abscisses et les droites $x = 0$ et $x = 3$ vaut $-3$ unités d'aire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : la méthode demande $f \\geq 0$ sur $[0 ; 3]$. Or $f(1) = 1 - 4 = -3 < 0$ : la condition n'est pas remplie. Étape 2 — Écrire : l'intégrale ne mesure donc pas une aire ici. Étape 3 — Calculer : avec $F(x) = \\dfrac{x^3}{3} - 4x$, $F(3) - F(0) = (9 - 12) - 0 = -3$, ce qui confirme la valeur donnée mais pas son interprétation. Étape 4 — Conclure : une aire n'est jamais négative, l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur l'axe des abscisses, une unité représente $10$ m ; sur l'axe des ordonnées, une unité représente $5$ m. Une unité d'aire vaut alors ___ .",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : les deux axes n'ont pas la même échelle. Étape 2 — Écrire : une unité d'aire est un rectangle de $10$ m sur $5$ m. Étape 3 — Calculer : $10 \\times 5 = 50$ m². Étape 4 — Convertir : chaque unité d'aire vaut $50$ m². Les leurres : $15$ m² additionne les longueurs au lieu de les multiplier ; $100$ m² suppose $10$ m sur chaque axe ; $25$ m² suppose $5$ m sur chaque axe.",
+                  "answers": [
+                    {
+                      "content": "$50$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25$ m²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "exercises": [
@@ -1500,6 +2056,1467 @@
               "explanation": "Corrigé modèle : Étape 1 — Vérifier : pour $f(x) = 3x^2 - 6x + 4$, $\\Delta = 36 - 48 = -12 < 0$ et $a = 3 > 0$, donc $f(x) > 0$ pour tout réel $x$ ; les bornes sont $0$ et $3$. Étape 2 — Écrire : $A = $ $\\int_{0}^{3} (3x^2 - 6x + 4)\\,dx$. Étape 3 — Calculer : $F(3) - F(0) = 12 - 0 = 12$ u.a. Étape 4 — Convertir : $1$ u.a. $= 20 \\times 10 = 200$ m², donc $A = 12 \\times 200 = 2\\,400$ m². Barème (4 points) : 0,5 pour la justification du signe, 0,5 pour l'intégrale, 1 pour le calcul, 1 pour la conversion, 1 pour la conclusion avec l'unité.",
               "answers": [],
               "starter": "Comme $\\Delta < 0$ et $a > 0$, $f$ est positive, donc l'aire vaut…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Vérifier qu'une fonction est une primitive, primitiver un polynôme terme à terme, fixer la constante avec une condition F(x0) = y0, calculer une intégrale avec F(b) - F(a), utiliser la linéarité, la relation de Chasles et l'échange des bornes, passer d'une intégrale à une aire en m².",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On considère les fonctions $f$ et $F$ définies sur $\\mathbb{R}$ par $f(x) = 8x^3 + 3x^2 - 2$ et $F(x) = 2x^4 + x^3 - 2x + 5$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour tester une primitive, on dérive $F$ terme à terme et on compare avec $f$. La dérivée d'une constante est $0$.",
+              "questions": [
+                {
+                  "content": "On considère $F(x) = 2x^4 + x^3 - 2x + 5$ sur $\\mathbb{R}$. Que vaut $F'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $F(x) = 2x^4 + x^3 - 2x + 5$. Étape 2 — Dériver terme à terme avec $(x^n)' = nx^{n-1}$ : $(2x^4)' = 8x^3$, $(x^3)' = 3x^2$, $(-2x)' = -2$ et $(5)' = 0$. Étape 3 — Assembler : $F'(x) = 8x^3 + 3x^2 - 2$. Les erreurs tentantes : ajouter $5$ revient à croire que la dérivée d'une constante est la constante elle-même ; oublier $-2$ revient à perdre la dérivée de $-2x$ ; recopier $2x^4 + x^3 - 2x$ revient à ne pas dériver du tout.",
+                  "answers": [
+                    {
+                      "content": "$F'(x) = 8x^3 + 3x^2 - 2 + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F'(x) = 8x^3 + 3x^2 - 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F'(x) = 8x^3 + 3x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F'(x) = 2x^4 + x^3 - 2x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $f(x) = 8x^3 + 3x^2 - 2$ et $F(x) = 2x^4 + x^3 - 2x + 5$, la fonction $F$ est une primitive de $f$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 8x^3 + 3x^2 - 2$ et $F(x) = 2x^4 + x^3 - 2x + 5$. Étape 2 — Dériver $F$ : $F'(x) = 8x^3 + 3x^2 - 2 + 0$. Étape 3 — Comparer : $F'(x) = f(x)$ pour tout réel $x$. Étape 4 — Conclure : par définition, $F$ est une primitive de $f$ sur $\\mathbb{R}$. La constante $5$ n'empêche rien : sa dérivée est nulle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $F(x) = 2x^4 + x^3 - 2x + 5$, calcule $F(1)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $F(x) = 2x^4 + x^3 - 2x + 5$. Étape 2 — Remplacer $x$ par $1$ : $F(1) = 2 \\times 1 + 1 - 2 + 5$. Étape 3 — Calculer : $2 + 1 - 2 + 5 = 6$. Étape 4 — Conclure : $F(1) = 6$. On évalue $F$ : calculer $f(1) = 8 + 3 - 2 = 9$ répondrait à une autre question.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux autres primitives de $f(x) = 8x^3 + 3x^2 - 2$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 8x^3 + 3x^2 - 2$. Étape 2 — Primitiver terme à terme : $8x^3 \\to 2x^4$, $3x^2 \\to x^3$ et $-2 \\to -2x$, donc les primitives sont de la forme $2x^4 + x^3 - 2x + k$. Étape 3 — Choisir $k = 0$ ou $k = -10$ : les deux fonctions $2x^4 + x^3 - 2x$ et $2x^4 + x^3 - 2x - 10$ conviennent. Étape 4 — Vérifier : elles ont la même dérivée que $F$. Écartées : $8x^4 + 3x^3 - 2x$ n'a pas divisé par $n + 1$ ; $2x^4 + x^3 - 2$ a mal primitivé $-2$ ; $24x^2 + 6x$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$8x^4 + 3x^3 - 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^4 + x^3 - 2x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^4 + x^3 - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^4 + x^3 - 2x - 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24x^2 + 6x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $F$ est une primitive de $f$, alors $G(x) = F(x) + 3$ en est une aussi, car la dérivée du nombre $3$ est ___ .",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $G(x) = F(x) + 3$. Étape 2 — Dériver : $G'(x) = F'(x) + (3)'$. Étape 3 — Calculer : la dérivée d'une constante est $0$, donc $G'(x) = F'(x) = f(x)$. Étape 4 — Conclure : $G$ est aussi une primitive de $f$, et une fonction a une infinité de primitives qui diffèrent d'une constante. Répondre $3$ confond la constante avec sa dérivée.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 9x^2 - 8x + 4$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Primitive chaque terme séparément et divise par l'exposant augmenté de $1$. Pense à la constante $k$ pour toutes les primitives.",
+              "questions": [
+                {
+                  "content": "Quelles sont toutes les primitives de $f(x) = 9x^2 - 8x + 4$ sur $\\mathbb{R}$, avec $k$ un nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les termes sont $9x^2$, $-8x$ et $4$. Étape 2 — Primitiver : $9x^2 \\to 9 \\times \\dfrac{x^3}{3} = 3x^3$ ; $-8x \\to -8 \\times \\dfrac{x^2}{2} = -4x^2$ ; $4 \\to 4x$. Étape 3 — Assembler : $F(x) = 3x^3 - 4x^2 + 4x + k$. Étape 4 — Vérifier : $F'(x) = 9x^2 - 8x + 4$. Les leurres : $9x^3 - 8x^2 + 4x + k$ n'a pas divisé ; $18x - 8 + k$ est la dérivée de $f$ ; $3x^3 - 4x^2 + 4 + k$ n'a pas primitivé la constante $4$ en $4x$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 3x^3 - 4x^2 + 4x + k$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 9x^3 - 8x^2 + 4x + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 18x - 8 + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 3x^3 - 4x^2 + 4 + k$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 9x^2 - 8x + 4$, on choisit la primitive $F$ dont la constante est $k = 0$. Calcule $F(2)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Identifier les termes de $f$. Étape 2 — Primitiver : $F(x) = 3x^3 - 4x^2 + 4x$. Étape 3 — Remplacer $x$ par $2$ : $F(2) = 3 \\times 8 - 4 \\times 4 + 4 \\times 2 = 24 - 16 + 8 = 16$. Étape 4 — Vérifier : $F'(x) = 9x^2 - 8x + 4$. Calculer $f(2) = 36 - 16 + 4 = 24$ serait une erreur : on évalue $F$, pas $f$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme de $f(x) = 9x^2 - 8x + 4$ à sa primitive (avec $k = 0$).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier les trois termes de $f$. Étape 2 — Primitiver chacun : $9x^2 \\to 9 \\times \\dfrac{x^3}{3} = 3x^3$ ; $-8x \\to -8 \\times \\dfrac{x^2}{2} = -4x^2$ ; $4 \\to 4x$. Étape 3 — Assembler : on relie chaque terme au résultat obtenu. Étape 4 — Vérifier en dérivant : $(3x^3)' = 9x^2$, $(-4x^2)' = -8x$ et $(4x)' = 4$. Piège : primitiver $-8x$ en $-8x^2$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "$9x^2$",
+                      "match": "$3x^3$"
+                    },
+                    {
+                      "content": "$-8x$",
+                      "match": "$-4x^2$"
+                    },
+                    {
+                      "content": "$4$",
+                      "match": "$4x$"
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $F(x) = 9x^3 - 8x^2 + 4x$ est une primitive de $f(x) = 9x^2 - 8x + 4$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $F(x) = 9x^3 - 8x^2 + 4x$ et $f(x) = 9x^2 - 8x + 4$. Étape 2 — Dériver : $F'(x) = 27x^2 - 16x + 4$. Étape 3 — Comparer : $27x^2 - 16x + 4$ est différent de $f(x)$. Étape 4 — Conclure : $F$ n'est pas une primitive, l'affirmation est fausse. L'erreur est d'avoir conservé les coefficients de $f$ sans diviser par $3$ et par $2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $F(x) = 3x^3 - 4x^2 + 4x + k$, primitive de $f(x) = 9x^2 - 8x + 4$. Pour que $F(1) = 10$, quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 3x^3 - 4x^2 + 4x + k$ est donné. Étape 2 — Remplacer $x$ par $1$ : $F(1) = 3 - 4 + 4 + k = 3 + k$, et la condition donne $3 + k = 10$. Étape 3 — Résoudre : $k = 7$. Étape 4 — Écrire : $F(x) = 3x^3 - 4x^2 + 4x + 7$. Contrôle : $F(1) = 3 - 4 + 4 + 7 = 10$. Prendre $k = 10$ confond la valeur de la condition avec la constante.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 4x + 6$, et la primitive $F$ de $f$ telle que $F(-1) = 3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris $F(x)$ avec la constante $k$, remplace $x$ par $-1$ dans $F$, puis résous l'équation en $k$.",
+              "questions": [
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 4x + 6$ telle que $F(-1) = 3$. On écrit $F(x) = 2x^2 + 6x + k$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 + 6x + k$. Étape 2 — Remplacer $x$ par $-1$ : $F(-1) = 2 - 6 + k = -4 + k$, et la condition donne $-4 + k = 3$. Étape 3 — Résoudre : $k = 3 + 4 = 7$. Étape 4 — Écrire : $F(x) = 2x^2 + 6x + 7$. Contrôle : $F(-1) = 2 - 6 + 7 = 3$. Trouver $k = -7$ vient d'une erreur de signe en passant $-4$ de l'autre côté.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la primitive $F$ de $f(x) = 4x + 6$ sur $\\mathbb{R}$ telle que $F(-1) = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 + 6x + k$. Étape 2 — Remplacer $x$ par $-1$ : $F(-1) = -4 + k = 3$. Étape 3 — Résoudre : $k = 7$. Étape 4 — Écrire : $F(x) = 2x^2 + 6x + 7$. Les leurres : le terme $+3$ prend $k = F(-1)$ ; le terme $-7$ se trompe de signe ; le terme $+1$ calcule $f(-1) = 2$ au lieu de $F(-1)$, puis résout $2 + k = 3$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 2x^2 + 6x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 + 6x - 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 + 6x + 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 2x^2 + 6x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 4x + 6$ telle que $F(-1) = 3$, soit $F(x) = 2x^2 + 6x + 7$. Calcule $F(2)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 2x^2 + 6x + 7$ est déjà trouvée avec sa constante. Étape 2 — Remplacer $x$ par $2$ : $F(2) = 2 \\times 4 + 6 \\times 2 + 7$. Étape 3 — Calculer : $8 + 12 + 7 = 27$. Étape 4 — Conclure : $F(2) = 27$. Calculer $f(2) = 14$ répondrait à une autre question : on évalue $F$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Il existe plusieurs primitives de $f(x) = 4x + 6$ sur $\\mathbb{R}$ qui valent $3$ en $x = -1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Primitiver : toutes les primitives s'écrivent $F(x) = 2x^2 + 6x + k$. Étape 2 — Remplacer $x$ par $-1$ : $F(-1) = -4 + k$, et la condition donne $-4 + k = 3$. Étape 3 — Résoudre : cette équation a une seule solution, $k = 7$. Étape 4 — Conclure : il n'existe qu'une seule primitive vérifiant la condition. L'affirmation est fausse : une infinité de primitives existent, mais la condition en choisit une seule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la primitive $F$ de $f(x) = 4x + 6$ telle que $F(-1) = 3$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Primitiver $f$ : on écrit $F(x)$ avec la constante $k$. Étape 2 — Remplacer $x$ par $-1$ dans $F$ pour obtenir $F(-1)$ avec $k$. Étape 3 — Écrire l'équation avec la condition $F(-1) = 3$. Étape 4 — Résoudre pour trouver $k = 7$. Étape 5 — Écrire la primitive avec cette valeur. L'ordre est imposé : on ne peut pas résoudre avant d'avoir remplacé $x$ ni remplacer avant d'avoir primitivé.",
+                  "answers": [
+                    {
+                      "content": "On primitive : $F(x) = 2x^2 + 6x + k$."
+                    },
+                    {
+                      "content": "On remplace $x$ par $-1$ : $F(-1) = -4 + k$."
+                    },
+                    {
+                      "content": "On écrit la condition : $-4 + k = 3$."
+                    },
+                    {
+                      "content": "On résout : $k = 7$."
+                    },
+                    {
+                      "content": "On écrit : $F(x) = 2x^2 + 6x + 7$."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Soit $f$ la fonction définie sur $[0 ; 2]$ par $f(x) = 6x^2 - 2x + 3$. On admet que $f$ est positive sur $[0 ; 2]$. Dans un repère, une unité représente $10$ m sur chaque axe.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Trouve une primitive de $f$, évalue-la en $2$ puis en $0$, soustrais dans cet ordre. Une unité d'aire vaut $10 \\times 10$ m².",
+              "questions": [
+                {
+                  "content": "Quelle est une primitive de $f(x) = 6x^2 - 2x + 3$ sur $[0 ; 2]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les termes sont $6x^2$, $-2x$ et $3$. Étape 2 — Primitiver : $6x^2 \\to 2x^3$ ; $-2x \\to -x^2$ ; $3 \\to 3x$. Étape 3 — Assembler : $F(x) = 2x^3 - x^2 + 3x$. Étape 4 — Vérifier : $F'(x) = 6x^2 - 2x + 3$. Les leurres : $6x^3 - 2x^2 + 3x$ n'a pas divisé par $n + 1$ ; $12x - 2$ est la dérivée de $f$ ; $2x^3 - x^2 + 3$ n'a pas primitivé la constante $3$ en $3x$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 6x^3 - 2x^2 + 3x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 12x - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^3 - x^2 + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x^3 - x^2 + 3x$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{0}^{2} (6x^2 - 2x + 3)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = 2x^3 - x^2 + 3x$. Étape 2 — Évaluer : $F(2) = 16 - 4 + 6 = 18$ et $F(0) = 0$. Étape 3 — Soustraire : $F(2) - F(0) = 18$. Étape 4 — Conclure : l'intégrale vaut $18$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 6x^2 - 2x + 3$, on obtient $\\int_{0}^{2} f(x)\\,dx$ en calculant $f(2) - f(0) = 23 - 3 = 20$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = 2x^3 - x^2 + 3x$. Étape 2 — Évaluer la primitive, pas $f$ : $F(2) = 18$ et $F(0) = 0$. Étape 3 — Soustraire : $F(2) - F(0) = 18$. Étape 4 — Conclure : l'intégrale vaut $18$, pas $20$. Le calcul $f(2) - f(0) = 20$ est exact en soi, mais il évalue $f$ au lieu de $F$ : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $g$ est continue sur $[0 ; 5]$. On sait que $\\int_{0}^{5} g(x)\\,dx$ $= 58$ et que $\\int_{0}^{2} g(x)\\,dx$ $= 18$. Calcule $\\int_{2}^{5} g(x)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la relation de Chasles découpe $[0 ; 5]$ en $[0 ; 2]$ et $[2 ; 5]$. Étape 2 — Écrire : $58 = 18 + I$, où $I$ désigne $\\int_{2}^{5} g(x)\\,dx$. Étape 3 — Soustraire : $I = 58 - 18 = 40$. Étape 4 — Conclure : $40$. Calculer $58 + 18 = 76$ serait une erreur : $58$ contient déjà la part de $[0 ; 2]$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $h$ est continue sur $[1 ; 4]$. Quelles sont les deux affirmations toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : ces affirmations portent sur la valeur de l'intégrale quand les bornes sont égales, échangées, ou quand on ajoute une constante. Étape 2 — Vérifier : $\\int_{1}^{1} h(x)\\,dx = F(1) - F(1) = 0$ ; et $F(1) - F(4) = -(F(4) - F(1))$, donc échanger les bornes change le signe. Étape 3 — Écarter : l'intégrale de $1$ à $4$ et celle de $4$ à $1$ sont opposées, pas égales ; ajouter $3$ à $h$ ajoute $3 \\times 3 = 9$ à l'intégrale, pas $3$ ; multiplier $h$ par $2$ multiplie l'intégrale par $2$, il ne s'y ajoute pas. Étape 4 — Conclure : les deux affirmations vraies sont celle de l'intégrale entre deux bornes égales et celle de l'échange des bornes.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{1}^{4} h(x)\\,dx$ $= \\int_{4}^{1} h(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{1}^{1} h(x)\\,dx$ $= 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{1}^{4} (h(x) + 3)\\,dx$ $= \\int_{1}^{4} h(x)\\,dx$ $+ 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{4}^{1} h(x)\\,dx$ $= -$ $\\int_{1}^{4} h(x)\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\int_{1}^{4} 2h(x)\\,dx$ $= 2 +$ $\\int_{1}^{4} h(x)\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = 6x^2 - 2x + 3$ sur $[0 ; 2]$, l'aire sous la courbe vaut $18$ unités d'aire. Sur chaque axe, une unité représente $10$ m. Quelle est l'aire du domaine en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $f$ est positive sur $[0 ; 2]$, donc l'aire est l'intégrale, soit $18$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $10$ m sur $10$ m. Étape 3 — Calculer : $10 \\times 10 = 100$ m² par unité d'aire. Étape 4 — Convertir : $18 \\times 100 = 1\\,800$ m². Répondre $180$ m² multiplie seulement par $10$, ce qui oublie le second axe.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "1800",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante en Côte d'Ivoire",
+          "notions": "Primitive d'une vitesse ou d'un débit dans une situation ivoirienne (récolte de cajou à Korhogo, réservoir à Bouaké), constante fixée par une condition, quantité entre deux instants par une intégrale, aire d'un terrain à Treichville et conversion en m² et en prix, relation de Chasles et linéarité sur des ventes à Yopougon.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Mme Awa Ouattara, de Korhogo, récolte des noix de cajou (situation d'exemple). Le jour $t$, la vitesse de récolte est $q(t) = 6t + 4$ (en kg par jour). La quantité $Q(t)$ récoltée depuis le début, en kg, est une primitive de $q$ : on sait que $Q(0) = 20$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La quantité récoltée est une primitive de la vitesse. La condition $Q(0) = 20$ fixe la constante, et la récolte entre deux jours est une intégrale.",
+              "questions": [
+                {
+                  "content": "Avec $q(t) = 6t + 4$ et $Q(0) = 20$, la fonction $Q(t) = 3t^2 + 4t + 20$ est une primitive de $q$ qui vérifie la condition.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $q(t) = 6t + 4$ et $Q(t) = 3t^2 + 4t + 20$. Étape 2 — Dériver : $Q'(t) = 6t + 4 + 0 = q(t)$. Étape 3 — Vérifier la condition : $Q(0) = 0 + 0 + 20 = 20$. Étape 4 — Conclure : $Q$ est bien une primitive de $q$ et elle vaut $20$ en $t = 0$ ; l'affirmation est vraie. La constante $20$ ne change pas la dérivée, elle fixe seulement le stock de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vitesse de récolte est $q(t) = 6t + 4$ (kg par jour) et la quantité récoltée est $Q(t) = 3t^2 + 4t + 20$ (kg, $t$ en jours). Quelle quantité a été récoltée à $t = 5$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $Q(t) = 3t^2 + 4t + 20$. Étape 2 — Remplacer $t$ par $5$ : $Q(5) = 3 \\times 25 + 4 \\times 5 + 20$. Étape 3 — Calculer : $75 + 20 + 20 = 115$. Étape 4 — Conclure : $115$ kg. Calculer $q(5) = 34$ donnerait la vitesse de récolte au jour $5$, pas la quantité.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "115",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "La vitesse de récolte est $q(t) = 6t + 4$ (kg par jour). Calcule la quantité récoltée entre le jour $1$ et le jour $4$, soit $\\int_{1}^{4} (6t + 4)\\,dt$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(t) = 3t^2 + 4t$. Étape 2 — Évaluer : $F(4) = 48 + 16 = 64$ et $F(1) = 3 + 4 = 7$. Étape 3 — Soustraire : $F(4) - F(1) = 64 - 7 = 57$. Étape 4 — Conclure : $57$ kg. Le stock de départ de $20$ kg n'intervient pas : la constante s'annule dans $F(4) - F(1)$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "57",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "La vitesse de récolte est $q(t) = 6t + 4$ (kg par jour). Quelle expression donne la quantité récoltée entre le jour $2$ et le jour $6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : une quantité entre deux jours est l'intégrale de la vitesse sur cet intervalle. Étape 2 — Écrire : $\\int_{2}^{6} (6t + 4)\\,dt$. Étape 3 — Calculer : $F(t) = 3t^2 + 4t$, donc $F(6) - F(2) = 132 - 20 = 112$ kg. Étape 4 — Conclure. Les leurres : la borne $0$ donnerait $132$ kg ; $q(6) - q(2) = 24$ évalue la vitesse au lieu d'intégrer ; intégrer $3t^2 + 4t$ intègre une primitive de $q$ au lieu de $q$.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{6} (6t + 4)\\,dt$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{2}^{6} (6t + 4)\\,dt$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$q(6) - q(2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\int_{2}^{6} (3t^2 + 4t)\\,dt$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La récolte de Mme Ouattara entre le jour $1$ et le jour $4$ a été de $57$ kg. Elle la vend à $600$ FCFA le kg. Quelle est sa recette ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la quantité vendue est $57$ kg, le prix est $600$ FCFA par kg. Étape 2 — Écrire : recette = quantité $\\times$ prix. Étape 3 — Calculer : $57 \\times 600 = 34\\,200$. Étape 4 — Conclure : $34\\,200$ FCFA. Additionner $57 + 600$ confond un produit avec une somme.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "34200",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Bouaké, un réservoir d'eau de quartier se remplit (situation d'exemple). À l'instant $t$ (en heures), le débit est $v(t) = 2t + 3$ (en m³ par heure). Le volume $V(t)$, en m³, est une primitive de $v$ : le réservoir contient $40$ m³ à $t = 0$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le volume est la primitive du débit qui vaut $40$ en $t = 0$. L'apport entre deux instants est une intégrale, ou une différence $V(b) - V(a)$.",
+              "questions": [
+                {
+                  "content": "Le débit est $v(t) = 2t + 3$ et le volume est $V(t) = t^2 + 3t + 40$ (en m³, $t$ en heures). Quel est le volume à $t = 4$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $V(t) = t^2 + 3t + 40$. Étape 2 — Remplacer $t$ par $4$ : $V(4) = 16 + 12 + 40$. Étape 3 — Calculer : $16 + 12 + 40 = 68$. Étape 4 — Conclure : le réservoir contient $68$ m³. Calculer $v(4) = 11$ donnerait le débit, pas le volume.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "68",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le débit est $v(t) = 2t + 3$ (m³ par heure) et le réservoir contient $40$ m³ à $t = 0$. Quelle est l'expression du volume $V(t)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Primitiver : $V(t) = t^2 + 3t + k$. Étape 2 — Remplacer $t$ par $0$ : $V(0) = k$, et la condition donne $k = 40$. Étape 3 — Résoudre : $k = 40$. Étape 4 — Écrire : $V(t) = t^2 + 3t + 40$. Les leurres : sans le terme $40$, la condition est oubliée ; $2t^2 + 3t + 40$ n'a pas divisé $2t$ par $2$ (la dérivée serait $4t + 3$) ; le terme $68$ prend $V(4)$ pour la constante.",
+                  "answers": [
+                    {
+                      "content": "$V(t) = t^2 + 3t + 40$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V(t) = t^2 + 3t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V(t) = 2t^2 + 3t + 40$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V(t) = t^2 + 3t + 68$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le débit d'un réservoir est $v(t) = 2t + 3$ (m³ par heure). Calcule le volume d'eau apporté entre $t = 2$ et $t = 6$, soit $\\int_{2}^{6} (2t + 3)\\,dt$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(t) = t^2 + 3t$. Étape 2 — Évaluer : $F(6) = 36 + 18 = 54$ et $F(2) = 4 + 6 = 10$. Étape 3 — Soustraire : $54 - 10 = 44$. Étape 4 — Conclure : $44$ m³. Évaluer $v(6) - v(2) = 15 - 7 = 8$ serait une erreur : on évalue la primitive.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le débit est $v(t) = 2t + 3$ et le volume est $V(t) = t^2 + 3t + 40$. Le volume apporté entre $t = 2$ et $t = 6$ est égal à $V(6) - V(2)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $V$ est une primitive de $v$, donc $\\int_{2}^{6} v(t)\\,dt = V(6) - V(2)$. Étape 2 — Évaluer : $V(6) = 36 + 18 + 40 = 94$ et $V(2) = 4 + 6 + 40 = 50$. Étape 3 — Soustraire : $94 - 50 = 44$. Étape 4 — Conclure : on retrouve $44$ m³, la même valeur qu'avec $F(t) = t^2 + 3t$ ; l'affirmation est vraie. La constante $40$ s'annule dans la différence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le débit $v(t) = 2t + 3$ (avec $F(t) = t^2 + 3t$), relie chaque intégrale à sa valeur.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(t) = t^2 + 3t$. Étape 2 — Évaluer : $F(0) = 0$, $F(3) = 18$ et $F(6) = 54$. Étape 3 — Soustraire : $\\int_{0}^{3} = 18 - 0 = 18$ ; $\\int_{3}^{6} = 54 - 18 = 36$ ; $\\int_{0}^{6} = 54$ ; $\\int_{6}^{3} = 18 - 54 = -36$. Étape 4 — Conclure en reliant chaque intégrale à son résultat. Piège : échanger les bornes change le signe, donc l'intégrale de $6$ à $3$ vaut $-36$ et non $36$.",
+                  "answers": [
+                    {
+                      "content": "$\\int_{0}^{3} (2t + 3)\\,dt$",
+                      "match": "$18$"
+                    },
+                    {
+                      "content": "$\\int_{3}^{6} (2t + 3)\\,dt$",
+                      "match": "$36$"
+                    },
+                    {
+                      "content": "$\\int_{0}^{6} (2t + 3)\\,dt$",
+                      "match": "$54$"
+                    },
+                    {
+                      "content": "$\\int_{6}^{3} (2t + 3)\\,dt$",
+                      "match": "$-36$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "M. Konan achète un terrain à Treichville (situation d'exemple). Dans un repère, le terrain est limité par la courbe de $f(x) = x^2 + 4$, l'axe des abscisses et les droites $x = 0$ et $x = 3$. Sur chaque axe, une unité représente $5$ m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie que $f$ est positive sur $[0 ; 3]$, calcule l'intégrale avec une primitive, puis convertis : une unité d'aire vaut $5 \\times 5$ m².",
+              "questions": [
+                {
+                  "content": "Quelle est la plus petite valeur de $f(x) = x^2 + 4$ sur $[0 ; 3]$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : on cherche le signe de $f$ sur $[0 ; 3]$. Étape 2 — Raisonner : $x^2 \\geq 0$, donc $x^2 + 4 \\geq 4$, avec égalité en $x = 0$. Étape 3 — Conclure : la plus petite valeur est $4$. Comme $4 > 0$, $f$ est positive sur $[0 ; 3]$ et l'intégrale mesure bien l'aire. Étape 4 — Pas de conversion ici. Répondre $13$ prendrait $f(3)$, qui est la plus grande valeur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le terrain est limité par la courbe de $f(x) = x^2 + 4$, l'axe des abscisses et les droites $x = 0$ et $x = 3$. Calcule son aire en unités d'aire.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $x^2 + 4 \\geq 4 > 0$ sur $[0 ; 3]$ ; bornes $0$ et $3$. Étape 2 — Écrire : $A = \\int_{0}^{3} (x^2 + 4)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^3}{3} + 4x$ ; $F(3) = 9 + 12 = 21$ et $F(0) = 0$, donc $A = 21$ u.a. Étape 4 — Pas de conversion demandée. Évaluer $f(3) - f(0) = 13 - 4 = 9$ serait une erreur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "21",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'aire d'un terrain est de $21$ unités d'aire. Sur chaque axe, une unité représente $5$ m. Quelle est l'aire du terrain en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : l'aire est $A = 21$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $5$ m sur $5$ m. Étape 3 — Calculer : $5 \\times 5 = 25$ m² par unité d'aire. Étape 4 — Convertir : $21 \\times 25 = 525$ m². Répondre $21$ m² oublierait la conversion.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "525",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain a une aire de $21$ unités d'aire et, sur chaque axe, une unité représente $5$ m. Son aire est donc $21 \\times 5 = 105$ m².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $A = 21$ u.a. et l'échelle est $5$ m sur chaque axe. Étape 2 — Écrire : une unité d'aire est un carré de $5$ m de côté. Étape 3 — Calculer : une unité d'aire vaut $5 \\times 5 = 25$ m², donc $21 \\times 25 = 525$ m². Étape 4 — Conclure : $105$ m² est faux, car il ne multiplie que par $5$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le terrain de M. Konan mesure $525$ m². La terre se vend $800$ FCFA le m². Quel est le prix du terrain ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : surface $525$ m², prix $800$ FCFA par m². Étape 2 — Écrire : prix = surface $\\times$ prix du m². Étape 3 — Calculer : $525 \\times 800 = 420\\,000$. Étape 4 — Conclure : $420\\,000$ FCFA. Ne confonds pas les unités d'aire avec les m² : c'est bien $525$ m² qui sert ici, pas $21$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "420000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Adjoua vend de l'attiéké au marché de Yopougon (situation d'exemple). La vitesse de vente $v(t)$, en sachets par heure, est une fonction continue sur $[0 ; 8]$, où $t$ est le nombre d'heures depuis l'ouverture. On relève : $\\int_{0}^{2} v(t)\\,dt$ $= 36$, $\\int_{2}^{6} v(t)\\,dt$ $= 90$ et $\\int_{6}^{8} v(t)\\,dt$ $= 24$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque intégrale est un nombre de sachets vendus sur un intervalle. Utilise la relation de Chasles pour assembler, et le changement de signe si les bornes sont échangées.",
+              "questions": [
+                {
+                  "content": "Une fonction $v$ est continue sur $[0 ; 8]$, avec $\\int_{0}^{2} v(t)\\,dt$ $= 36$, $\\int_{2}^{6} v(t)\\,dt$ $= 90$ et $\\int_{6}^{8} v(t)\\,dt$ $= 24$. Calcule $\\int_{0}^{8} v(t)\\,dt$, le nombre total de sachets vendus.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $[0 ; 8]$ se découpe en trois intervalles. Étape 2 — Appliquer la relation de Chasles deux fois : $\\int_{0}^{8} v(t)\\,dt = 36 + 90 + 24$. Étape 3 — Additionner : $36 + 90 = 126$, puis $126 + 24 = 150$. Étape 4 — Conclure : $150$ sachets. Multiplier les trois nombres serait une erreur : Chasles additionne.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $v$ est continue sur $[0 ; 8]$, avec $\\int_{0}^{2} v(t)\\,dt$ $= 36$ et $\\int_{2}^{6} v(t)\\,dt$ $= 90$. Calcule $\\int_{0}^{6} v(t)\\,dt$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $[0 ; 6]$ se découpe en $[0 ; 2]$ et $[2 ; 6]$. Étape 2 — Écrire Chasles : $\\int_{0}^{6} v(t)\\,dt = \\int_{0}^{2} v(t)\\,dt + \\int_{2}^{6} v(t)\\,dt$. Étape 3 — Calculer : $36 + 90 = 126$. Étape 4 — Conclure : $126$ sachets vendus en six heures.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "126",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $v$ est continue sur $[0 ; 8]$ et $\\int_{2}^{6} v(t)\\,dt$ $= 90$. Que vaut $\\int_{6}^{2} v(t)\\,dt$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les bornes sont échangées. Étape 2 — Écrire la règle : $\\int_{b}^{a} v(t)\\,dt = -\\int_{a}^{b} v(t)\\,dt$. Étape 3 — Calculer : $-90$. Étape 4 — Conclure : $-90$. Les leurres : $90$ oublie le changement de signe ; $54$ soustrait $90 - 36$ ; $-126$ mélange avec l'intégrale de $0$ à $6$.",
+                  "answers": [
+                    {
+                      "content": "$90$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$54$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-90$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-126$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Adjoua a vendu $150$ sachets d'attiéké sur la journée. Chaque sachet coûte $250$ FCFA. Quelle est sa recette totale ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $150$ sachets à $250$ FCFA l'unité. Étape 2 — Écrire : recette = nombre de sachets $\\times$ prix. Étape 3 — Calculer : $150 \\times 250 = 37\\,500$. Étape 4 — Conclure : $37\\,500$ FCFA. Le nombre de sachets est l'intégrale de la vitesse de vente sur $[0 ; 8]$, soit $150$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "37500",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Une fonction $v$ est continue sur $[0 ; 8]$ et $\\int_{0}^{8} v(t)\\,dt$ $= 150$. Alors $\\int_{0}^{8} 2v(t)\\,dt$ $= 300$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on multiplie $v$ par la constante $2$. Étape 2 — Écrire la linéarité : $\\int_{0}^{8} 2v(t)\\,dt = 2 \\times \\int_{0}^{8} v(t)\\,dt$. Étape 3 — Calculer : $2 \\times 150 = 300$. Étape 4 — Conclure : l'affirmation est vraie. Le piège serait d'écrire $2 + 150 = 152$, qui confond le produit avec une somme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Comparer des raisonnements pour vérifier une primitive, constante fixée par une condition, justifier qu'une fonction est positive, distinguer l'aire exacte sous une parabole d'un trapèze, utiliser Chasles, l'échange des bornes et la linéarité sans connaître la fonction, enchaîner primitive, aire et conversion en m².",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois élèves, Awa, Koffi et Mariam, étudient la fonction $f(x) = 3x^2 - 6x + 2$ et la fonction $F(x) = x^3 - 3x^2 + 2x$ sur $\\mathbb{R}$. Awa dérive $F$ et compare avec $f$. Koffi dérive $f$ et compare avec $F$. Mariam ajoute $7$ à $F$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "On dérive la fonction proposée comme primitive, jamais la fonction donnée. Deux primitives de $f$ diffèrent d'une constante, et on peut factoriser $F$ pour trouver ses valeurs.",
+              "questions": [
+                {
+                  "content": "On veut savoir si $F(x) = x^3 - 3x^2 + 2x$ est une primitive de $f(x) = 3x^2 - 6x + 2$ sur $\\mathbb{R}$. Parmi ces raisonnements, lequel est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 - 3x^2 + 2x$ et $f(x) = 3x^2 - 6x + 2$. Étape 2 — Dériver $F$ (et non $f$) : $F'(x) = 3x^2 - 6x + 2$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : $F$ est une primitive de $f$, ce que dit le raisonnement d'Awa. Koffi dérive $f$, ce qui donne $6x - 6$ : sa comparaison avec $F$ n'a aucun sens, donc sa conclusion est fausse. Comparer seulement les valeurs en $x = 1$ ne prouve rien : ici $F(1) = 0$ et $f(1) = -1$, mais $F$ n'a pas à être égale à $f$, c'est sa dérivée qui doit l'être.",
+                  "answers": [
+                    {
+                      "content": "Awa : $F'(x) = 3x^2 - 6x + 2 = f(x)$, donc $F$ est une primitive de $f$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Koffi : $f'(x) = 6x - 6$ est différent de $F(x)$, donc $F$ n'est pas une primitive de $f$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Comparaison en un point : $F(1) = 0$ et $f(1) = -1$ sont différents, donc $F$ n'est pas une primitive de $f$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $f(x) = 3x^2 - 6x + 2$ et $F(x) = x^3 - 3x^2 + 2x$, la fonction $G(x) = x^3 - 3x^2 + 2x + 7$ est aussi une primitive de $f$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $G(x) = F(x) + 7$. Étape 2 — Dériver : $G'(x) = F'(x) + 0 = 3x^2 - 6x + 2$. Étape 3 — Comparer : $G'(x) = f(x)$. Étape 4 — Conclure : $G$ est une primitive de $f$ ; l'affirmation est vraie. Ajouter une constante à une primitive donne une autre primitive, car la dérivée d'une constante est $0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam pose $G(x) = x^3 - 3x^2 + 2x + 7$, primitive de $f(x) = 3x^2 - 6x + 2$. Calcule $G(3)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $G(x) = x^3 - 3x^2 + 2x + 7$. Étape 2 — Remplacer $x$ par $3$ : $G(3) = 27 - 27 + 6 + 7$. Étape 3 — Calculer : $0 + 6 + 7 = 13$. Étape 4 — Conclure : $G(3) = 13$. Calculer $f(3) = 11$ répondrait à une autre question.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mariam pose $G(x) = x^3 - 3x^2 + 2x + 7$. Parmi ces valeurs, quelles sont les deux pour lesquelles $G(x) = 7$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $G(x) = 7$ revient à $F(x) + 7 = 7$, soit $F(x) = 0$. Étape 2 — Factoriser : $F(x) = x(x - 1)(x - 2)$, donc $F$ s'annule en $0$, en $1$ et en $2$. Étape 3 — Tester les valeurs proposées : $F(1) = 0$ et $F(2) = 0$, alors que $F(3) = 6$, $F(4) = 24$ et $F(5) = 60$. Étape 4 — Conclure : parmi les valeurs proposées, ce sont $x = 1$ et $x = 2$ ($x = 0$ conviendrait aussi, mais il n'est pas proposé). Les valeurs $3$, $4$ et $5$ donnent $G(x)$ égal à $13$, $31$ et $67$, jamais $7$.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $H$ la primitive de $f(x) = 3x^2 - 6x + 2$ telle que $H(3) = 10$. On écrit $H(x) = x^3 - 3x^2 + 2x + c$. Quelle est la valeur de $c$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $H(x) = x^3 - 3x^2 + 2x + c$. Étape 2 — Remplacer $x$ par $3$ : $H(3) = 27 - 27 + 6 + c = 6 + c$, et la condition donne $6 + c = 10$. Étape 3 — Résoudre : $c = 4$. Étape 4 — Écrire : $H(x) = x^3 - 3x^2 + 2x + 4$. Contrôle : $H(3) = 6 + 4 = 10$. Prendre $c = 10$ confondrait la valeur de $H(3)$ avec la constante.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On considère la fonction $f(x) = x^2 - 2x + 2$. Dans un repère, on étudie le domaine limité par la courbe de $f$, l'axe des abscisses et les droites $x = 0$ et $x = 3$. Une unité représente $2$ m sur l'axe des abscisses et $3$ m sur l'axe des ordonnées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris $f(x) = (x - 1)^2 + 1$ pour étudier son signe. Une aire se calcule avec une primitive, pas avec les valeurs de $f$ aux bornes. Une unité d'aire vaut $2 \\times 3$ m².",
+              "questions": [
+                {
+                  "content": "Quelle est la plus petite valeur de $f(x) = x^2 - 2x + 2$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $f(x) = x^2 - 2x + 2$. Étape 2 — Transformer : $f(x) = (x - 1)^2 + 1$. Étape 3 — Raisonner : un carré est toujours positif ou nul, donc $f(x) \\geq 1$, avec égalité en $x = 1$. Étape 4 — Conclure : la plus petite valeur est $1$ ; $f$ est strictement positive, donc l'intégrale est bien une aire. Le leurre $2$ est la valeur $f(0)$ et non le minimum ; $0$ et $-1$ sont impossibles puisque $f(x) \\geq 1$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = x^2 - 2x + 2$, l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $f(x) = (x - 1)^2 + 1 \\geq 1 > 0$ sur $[0 ; 3]$. Étape 2 — Écrire : $A = \\int_{0}^{3} (x^2 - 2x + 2)\\,dx$. Étape 3 — Calculer : $F(x) = \\dfrac{x^3}{3} - x^2 + 2x$ ; $F(3) = 9 - 9 + 6 = 6$ et $F(0) = 0$, donc $A = 6$ u.a. Étape 4 — Pas de conversion demandée.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe de $f(x) = x^2 - 2x + 2$ passe par le point de coordonnées $(0 ; 2)$ et par $(3 ; 5)$. L'aire sous la courbe entre $x = 0$ et $x = 3$ est donc celle d'un trapèze : $\\dfrac{2 + 5}{2} \\times 3 = 10{,}5$ unités d'aire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $f(0) = 2$ et $f(3) = 9 - 6 + 2 = 5$, mais la courbe est une parabole et non un segment de droite. Étape 2 — Écrire : l'aire exacte est $A = \\int_{0}^{3} (x^2 - 2x + 2)\\,dx$. Étape 3 — Calculer : $F(3) - F(0) = 6 - 0 = 6$ u.a. Étape 4 — Conclure : le trapèze donne $10{,}5$, mais ce n'est pas l'aire sous la parabole : $6 \\neq 10{,}5$. L'affirmation est fausse. Le trapèze ne convient que pour une droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le domaine limité par la courbe de $f(x) = x^2 - 2x + 2$, l'axe des abscisses, $x = 0$ et $x = 3$ a pour aire $6$ unités d'aire. Une unité représente $2$ m sur l'axe des abscisses et $3$ m sur l'axe des ordonnées. Quelle est l'aire du domaine en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $A = 6$ u.a. Étape 2 — Écrire : une unité d'aire est un rectangle de $2$ m sur $3$ m. Étape 3 — Calculer : $2 \\times 3 = 6$ m² par unité d'aire. Étape 4 — Convertir : $6 \\times 6 = 36$ m². Utiliser $2 \\times 2 = 4$ ou $3 \\times 3 = 9$ reviendrait à ignorer qu'un axe a une échelle différente de l'autre.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 2x + 2$ et $F(x) = \\dfrac{x^3}{3} - x^2 + 2x$. L'aire sous la courbe de $f$ entre $x = 0$ et $x = 3$ vaut $6$ unités d'aire. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : $f \\geq 1 > 0$ sur $[0 ; 3]$, donc l'aire est $\\int_{0}^{3} f(x)\\,dx$. Étape 2 — Calculer : $F(3) - F(0) = 6 - 0 = 6$, donc l'aire est comprise entre $3$ et $9$, et elle vaut bien $F(3) - F(0)$. Étape 3 — Écarter : $f(3) - f(0) = 5 - 2 = 3$ évalue $f$ au lieu de $F$ ; $F(0) - F(3) = -6$ inverse l'ordre de la soustraction ; $6$ n'est pas inférieur à $3$. Étape 4 — Conclure : les deux affirmations vraies sont l'encadrement entre $3$ et $9$ et la formule $F(3) - F(0)$.",
+                  "answers": [
+                    {
+                      "content": "L'aire est la différence des ordonnées aux bornes, $f(3) - f(0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire est comprise entre $3$ et $9$ unités d'aire",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire vaut $F(0) - F(3)$, avec la même fonction $F$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire vaut $F(3) - F(0)$, avec $F(x) = \\dfrac{x^3}{3} - x^2 + 2x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire est inférieure à $3$ unités d'aire",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une fonction $f$ est continue sur $[0 ; 6]$. On sait que $\\int_{0}^{4} f(x)\\,dx$ $= 12$ et que $\\int_{2}^{4} f(x)\\,dx$ $= 5$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "N'utilise que les propriétés de l'intégrale : Chasles, échange des bornes et linéarité. On ne connaît pas $f$, donc on ne cherche pas de primitive.",
+              "questions": [
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$, avec $\\int_{0}^{4} f(x)\\,dx$ $= 12$ et $\\int_{2}^{4} f(x)\\,dx$ $= 5$. Calcule $\\int_{0}^{2} f(x)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : la relation de Chasles découpe $[0 ; 4]$ en $[0 ; 2]$ et $[2 ; 4]$. Étape 2 — Écrire : $12 = \\int_{0}^{2} f(x)\\,dx + 5$. Étape 3 — Soustraire : $\\int_{0}^{2} f(x)\\,dx = 12 - 5 = 7$. Étape 4 — Conclure : $7$. Additionner $12 + 5 = 17$ serait une erreur, car $12$ contient déjà la part de $[2 ; 4]$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$ et $\\int_{2}^{4} f(x)\\,dx$ $= 5$. Calcule $\\int_{4}^{2} f(x)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : les bornes sont échangées. Étape 2 — Écrire la règle : $\\int_{4}^{2} f(x)\\,dx = -\\int_{2}^{4} f(x)\\,dx$. Étape 3 — Calculer : $-5$. Étape 4 — Conclure : $-5$. Répondre $5$ oublie que l'échange des bornes change le signe.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$ et $\\int_{0}^{4} f(x)\\,dx$ $= 12$. Calcule $\\int_{0}^{4} (3f(x) + 2)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : une somme avec un facteur constant, donc la linéarité. Étape 2 — Écrire : $\\int_{0}^{4} (3f(x) + 2)\\,dx = 3 \\times \\int_{0}^{4} f(x)\\,dx + \\int_{0}^{4} 2\\,dx$. Étape 3 — Calculer : la primitive de $2$ est $2x$, donc $\\int_{0}^{4} 2\\,dx = 8$ et le total est $3 \\times 12 + 8 = 44$. Étape 4 — Conclure : $44$. Le piège est d'écrire $3 \\times 12 + 2 = 38$ : la constante $2$ est intégrée sur une longueur de $4$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "44",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$ et $\\int_{0}^{4} f(x)\\,dx$ $= 12$. On peut affirmer que $\\int_{0}^{4} (f(x))^2\\,dx$ $= 144$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : l'énoncé demande l'intégrale du carré de $f$. Étape 2 — Raisonner : l'intégrale d'un carré n'est pas le carré de l'intégrale ; il n'existe pas de règle de ce type. Étape 3 — Contre-exemple : si $f$ est la fonction constante $3$ sur $[0 ; 6]$, alors $\\int_{0}^{4} f(x)\\,dx = 12$ mais $\\int_{0}^{4} (f(x))^2\\,dx = 9 \\times 4 = 36$, et non $144$. Étape 4 — Conclure : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ est continue sur $[0 ; 6]$ et $\\int_{2}^{4} f(x)\\,dx$ $= 5$. Que vaut $\\int_{2}^{4} (2f(x) - 1)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : linéarité, avec un facteur $2$ et une constante $-1$. Étape 2 — Écrire : $\\int_{2}^{4} (2f(x) - 1)\\,dx = 2 \\times 5 - \\int_{2}^{4} 1\\,dx$. Étape 3 — Calculer : $\\int_{2}^{4} 1\\,dx = 4 - 2 = 2$, donc le total est $10 - 2 = 8$. Étape 4 — Conclure : $8$. Les leurres : $9$ retire $1$ au lieu de $2$ ; $10$ oublie la constante ; $12$ ajoute $2$ au lieu de le retrancher.",
+                  "answers": [
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Mme Bamba cultive du maïs sur une parcelle près de Bouaflé (situation d'exemple). Dans un repère, la parcelle est limitée par la courbe de $f(x) = 6x^2 + 2$, l'axe des abscisses et les droites $x = 0$ et $x = 2$. Sur chaque axe, une unité représente $4$ m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Commence par vérifier que $f$ est positive sur $[0 ; 2]$, puis calcule l'intégrale avec une primitive. Une unité d'aire vaut $4 \\times 4$ m².",
+              "questions": [
+                {
+                  "content": "La fonction $F(x) = 2x^3 + 2x$ est une primitive de $f(x) = 6x^2 + 2$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $F(x) = 2x^3 + 2x$ et $f(x) = 6x^2 + 2$. Étape 2 — Dériver : $F'(x) = 6x^2 + 2$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : $F$ est une primitive de $f$ ; l'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la plus petite valeur de $f(x) = 6x^2 + 2$ sur $[0 ; 2]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : on cherche le signe de $f$ sur $[0 ; 2]$. Étape 2 — Raisonner : $6x^2 \\geq 0$, donc $f(x) \\geq 2$, avec égalité en $x = 0$. Étape 3 — Conclure : la plus petite valeur est $2$, donc $f$ est positive et l'intégrale mesure l'aire. Les leurres : $0$ suppose que le carré s'annule sans le terme $+2$ ; $8$ est $f(1)$ ; $26$ est $f(2)$, la plus grande valeur.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$26$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La parcelle est limitée par la courbe de $f(x) = 6x^2 + 2$, l'axe des abscisses et les droites $x = 0$ et $x = 2$. Calcule son aire en unités d'aire.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $6x^2 + 2 \\geq 2 > 0$ sur $[0 ; 2]$. Étape 2 — Écrire : $A = \\int_{0}^{2} (6x^2 + 2)\\,dx$. Étape 3 — Calculer : $F(x) = 2x^3 + 2x$ ; $F(2) = 16 + 4 = 20$ et $F(0) = 0$, donc $A = 20$ u.a. Étape 4 — Pas de conversion demandée. Évaluer $f(2) - f(0) = 26 - 2 = 24$ serait une erreur : on évalue la primitive.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La parcelle de Mme Bamba a une aire de $20$ unités d'aire. Sur chaque axe, une unité représente $4$ m. Quelle est son aire en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $A = 20$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $4$ m sur $4$ m. Étape 3 — Calculer : $4 \\times 4 = 16$ m² par unité d'aire. Étape 4 — Convertir : $20 \\times 16 = 320$ m². Répondre $80$ m² multiplie seulement par $4$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "320",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La parcelle de Mme Bamba mesure $320$ m² et produit $0{,}5$ kg de maïs par m². Quelle est la production totale, en kg ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : surface $320$ m², rendement $0{,}5$ kg par m². Étape 2 — Écrire : production = surface $\\times$ rendement. Étape 3 — Calculer : $320 \\times 0{,}5 = 160$. Étape 4 — Conclure : $160$ kg. Le calcul utilise l'aire en m², pas l'aire en unités d'aire.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "160",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des cinq notions : vérifier une primitive, primitiver un polynôme, fixer la constante, calculer une intégrale et utiliser ses propriétés, calculer une aire sous une courbe positive et la convertir en m² ou en prix.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = 3x^2 - 4x + 1$. On admet que $f$ est positive sur $[1 ; 3]$, car $f(x) = (3x - 1)(x - 1)$. Un domaine est limité par la courbe de $f$, l'axe des abscisses et les droites $x = 1$ et $x = 3$ ; sur chaque axe, une unité représente $3$ m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Vérifie les primitives en dérivant, fixe la constante en remplaçant $x$ dans $F$, calcule l'intégrale avec $F(b) - F(a)$ puis convertis l'aire en m².",
+              "questions": [
+                {
+                  "content": "La fonction $F(x) = x^3 - 2x^2 + x + 3$ est une primitive de $f(x) = 3x^2 - 4x + 1$ sur $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $F(x) = x^3 - 2x^2 + x + 3$ et $f(x) = 3x^2 - 4x + 1$. Étape 2 — Dériver : $F'(x) = 3x^2 - 4x + 1 + 0$. Étape 3 — Comparer : $F'(x) = f(x)$. Étape 4 — Conclure : $F$ est une primitive de $f$ ; l'affirmation est vraie, la constante $3$ ne change pas la dérivée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont toutes les primitives de $f(x) = 3x^2 - 4x + 1$ sur $\\mathbb{R}$, avec $k$ un nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : les termes sont $3x^2$, $-4x$ et $1$. Étape 2 — Primitiver : $3x^2 \\to x^3$ ; $-4x \\to -2x^2$ ; $1 \\to x$. Étape 3 — Assembler : $F(x) = x^3 - 2x^2 + x + k$. Étape 4 — Vérifier : $F'(x) = 3x^2 - 4x + 1$. Les leurres : $3x^3 - 4x^2 + x + k$ n'a pas divisé ; $x^3 - 2x^2 + 1 + k$ n'a pas primitivé la constante $1$ ; $6x - 4 + k$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 3x^3 - 4x^2 + x + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^3 - 2x^2 + 1 + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 6x - 4 + k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^3 - 2x^2 + x + k$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 3x^2 - 4x + 1$ telle que $F(2) = 5$. On écrit $F(x) = x^3 - 2x^2 + x + k$. Quelle est la valeur de $k$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = x^3 - 2x^2 + x + k$. Étape 2 — Remplacer $x$ par $2$ : $F(2) = 8 - 8 + 2 + k = 2 + k$, et la condition donne $2 + k = 5$. Étape 3 — Résoudre : $k = 3$. Étape 4 — Écrire : $F(x) = x^3 - 2x^2 + x + 3$. Contrôle : $F(2) = 2 + 3 = 5$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{1}^{3} (3x^2 - 4x + 1)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = x^3 - 2x^2 + x$. Étape 2 — Évaluer : $F(3) = 27 - 18 + 3 = 12$ et $F(1) = 1 - 2 + 1 = 0$. Étape 3 — Soustraire : $F(3) - F(1) = 12 - 0 = 12$. Étape 4 — Conclure : $12$. Évaluer $f(3) - f(1) = 16 - 0 = 16$ serait une erreur : on évalue la primitive.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un domaine est limité par la courbe de $f(x) = 3x^2 - 4x + 1$, l'axe des abscisses et les droites $x = 1$ et $x = 3$ ; son aire est de $12$ unités d'aire. Sur chaque axe, une unité représente $3$ m. Quelle est son aire en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $f(x) = (3x - 1)(x - 1) \\geq 0$ sur $[1 ; 3]$, donc l'aire est l'intégrale, soit $12$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $3$ m sur $3$ m. Étape 3 — Calculer : $3 \\times 3 = 9$ m² par unité d'aire. Étape 4 — Convertir : $12 \\times 9 = 108$ m². Répondre $36$ m² multiplie seulement par $3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "108",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un planteur d'hévéa de San-Pédro suit le latex collecté (situation d'exemple). Le débit de collecte est $g(t) = 4t + 2$ (en litres par jour, $t$ en jours). La quantité cumulée $G(t)$, en litres, est une primitive de $g$, et $G(0) = 10$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La quantité cumulée est la primitive du débit qui vaut $10$ en $t = 0$. La quantité collectée entre deux jours est une intégrale, ou une différence $G(b) - G(a)$.",
+              "questions": [
+                {
+                  "content": "Le débit de collecte est $g(t) = 4t + 2$ (litres par jour) et $G(0) = 10$. Quelle est l'expression de $G(t)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Primitiver : $G(t) = 2t^2 + 2t + k$. Étape 2 — Remplacer $t$ par $0$ : $G(0) = k$, et la condition donne $k = 10$. Étape 3 — Résoudre : $k = 10$. Étape 4 — Écrire : $G(t) = 2t^2 + 2t + 10$. Les leurres : sans le terme $10$, la condition est oubliée ; $4t^2 + 2t + 10$ n'a pas divisé $4t$ par $2$ ; le terme $34$ prend la valeur $G(3)$ pour la constante.",
+                  "answers": [
+                    {
+                      "content": "$G(t) = 2t^2 + 2t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G(t) = 4t^2 + 2t + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G(t) = 2t^2 + 2t + 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G(t) = 2t^2 + 2t + 34$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le débit est $g(t) = 4t + 2$ (litres par jour) et la quantité cumulée est $G(t) = 2t^2 + 2t + 10$ (litres). Quelle quantité a été collectée à $t = 3$ ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Écrire : $G(t) = 2t^2 + 2t + 10$. Étape 2 — Remplacer $t$ par $3$ : $G(3) = 2 \\times 9 + 2 \\times 3 + 10$. Étape 3 — Calculer : $18 + 6 + 10 = 34$. Étape 4 — Conclure : $34$ litres. Calculer $g(3) = 14$ donnerait le débit, pas la quantité.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "34",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Le débit de collecte est $g(t) = 4t + 2$ (litres par jour). Calcule la quantité collectée entre le jour $1$ et le jour $3$, soit $\\int_{1}^{3} (4t + 2)\\,dt$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(t) = 2t^2 + 2t$. Étape 2 — Évaluer : $F(3) = 18 + 6 = 24$ et $F(1) = 2 + 2 = 4$. Étape 3 — Soustraire : $24 - 4 = 20$. Étape 4 — Conclure : $20$ litres. Évaluer $g(3) - g(1) = 14 - 6 = 8$ serait une erreur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "L"
+                },
+                {
+                  "content": "Le débit est $g(t) = 4t + 2$ et la quantité cumulée est $G(t) = 2t^2 + 2t + 10$. La quantité collectée entre $t = 1$ et $t = 3$ est égale à $G(3) - G(1)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $G$ est une primitive de $g$, donc $\\int_{1}^{3} g(t)\\,dt = G(3) - G(1)$. Étape 2 — Évaluer : $G(3) = 34$ et $G(1) = 2 + 2 + 10 = 14$. Étape 3 — Soustraire : $34 - 14 = 20$. Étape 4 — Conclure : on retrouve $20$ litres, la même valeur qu'avec $F(t) = 2t^2 + 2t$ ; l'affirmation est vraie, la constante $10$ s'annule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un planteur collecte $20$ litres de latex entre deux dates. Le latex est vendu $700$ FCFA le litre. Quelle est la recette ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Repérer : $20$ litres à $700$ FCFA le litre. Étape 2 — Écrire : recette = quantité $\\times$ prix. Étape 3 — Calculer : $20 \\times 700 = 14\\,000$. Étape 4 — Conclure : $14\\,000$ FCFA. La quantité collectée est l'intégrale du débit entre les deux dates.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "14000",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "M. Yao possède un champ à Man (situation d'exemple). Dans un repère, il est limité par la droite d'équation $y = 2x + 4$, l'axe des abscisses et les droites $x = 1$ et $x = 4$. Sur chaque axe, une unité représente $3$ m.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour une droite, l'aire est aussi celle d'un trapèze, mais on applique ici la méthode de l'intégrale : positivité, primitive, $F(b) - F(a)$, conversion.",
+              "questions": [
+                {
+                  "content": "La fonction $f(x) = 2x + 4$ est positive sur $[1 ; 4]$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : on étudie le signe de $f(x) = 2x + 4$ sur $[1 ; 4]$. Étape 2 — Raisonner : $f$ est croissante, donc sa plus petite valeur est $f(1) = 6$. Étape 3 — Comparer : $f(x) \\geq 6 > 0$ sur $[1 ; 4]$. Étape 4 — Conclure : $f$ est positive, l'affirmation est vraie, et l'intégrale mesure bien l'aire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions qui sont des primitives de $f(x) = 2x + 4$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $f(x) = 2x + 4$. Étape 2 — Dériver : $(x^2 + 4x)' = 2x + 4$ et $(x^2 + 4x - 12)' = 2x + 4$. Étape 3 — Comparer : ces deux dérivées sont égales à $f(x)$. Étape 4 — Conclure : ce sont deux primitives. Écartées : $2x^2 + 4x$ a pour dérivée $4x + 4$ ; $x^2 + 4$ a pour dérivée $2x$ ; $2$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$2x^2 + 4x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 4x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 4x - 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le champ est limité par la droite d'équation $y = 2x + 4$, l'axe des abscisses et les droites $x = 1$ et $x = 4$. Calcule son aire en unités d'aire.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $2x + 4 \\geq 6 > 0$ sur $[1 ; 4]$. Étape 2 — Écrire : $A = \\int_{1}^{4} (2x + 4)\\,dx$. Étape 3 — Calculer : $F(x) = x^2 + 4x$ ; $F(4) = 16 + 16 = 32$ et $F(1) = 1 + 4 = 5$, donc $A = 32 - 5 = 27$ u.a. Étape 4 — Pas de conversion demandée. Évaluer $f(4) - f(1) = 12 - 6 = 6$ serait une erreur.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le champ de M. Yao a une aire de $27$ unités d'aire. Sur chaque axe, une unité représente $3$ m. Quelle est son aire en m² ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $A = 27$ u.a. Étape 2 — Écrire : une unité d'aire est un carré de $3$ m sur $3$ m. Étape 3 — Calculer : $3 \\times 3 = 9$ m² par unité d'aire. Étape 4 — Convertir : $27 \\times 9 = 243$ m². Répondre $81$ m² multiplie seulement par $3$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "243",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le champ est limité par la droite d'équation $y = 2x + 4$, l'axe des abscisses et les droites $x = 2$ et $x = 4$. Calcule son aire en unités d'aire.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Vérifier : $2x + 4 \\geq 8 > 0$ sur $[2 ; 4]$. Étape 2 — Écrire : $A = \\int_{2}^{4} (2x + 4)\\,dx$. Étape 3 — Calculer : $F(x) = x^2 + 4x$ ; $F(4) = 32$ et $F(2) = 4 + 8 = 12$, donc $A = 20$ u.a. Étape 4 — Pas de conversion demandée. On retrouve la cohérence avec Chasles : $7 + 20 = 27$, où $7$ est l'aire sur $[1 ; 2]$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Cet exercice rassemble les notions de la leçon : primitives, constante, intégrales et aires.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans chaque question, relis les données : on dérive pour vérifier une primitive, on remplace $x$ dans $F$ pour fixer $k$, on soustrait $F(b) - F(a)$ pour une intégrale, et on convertit les unités d'aire.",
+              "questions": [
+                {
+                  "content": "Pour chaque fonction $f$, relie $f$ à la valeur de $\\int_{0}^{1} f(x)\\,dx$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Trouver une primitive de chaque fonction : $4x^3$ pour $12x^2$ ; $3x^2$ pour $6x$ ; $x^4$ pour $4x^3$ ; $2x^5$ pour $10x^4$. Étape 2 — Évaluer en $1$ puis en $0$ : les primitives valent $4$, $3$, $1$ et $2$ en $1$, et $0$ en $0$. Étape 3 — Soustraire : les intégrales valent $4$, $3$, $1$ et $2$. Étape 4 — Relier chaque fonction à sa valeur. Piège : on évalue la primitive en $1$, pas la fonction $f$ elle-même.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = 12x^2$",
+                      "match": "$4$"
+                    },
+                    {
+                      "content": "$f(x) = 6x$",
+                      "match": "$3$"
+                    },
+                    {
+                      "content": "$f(x) = 4x^3$",
+                      "match": "$1$"
+                    },
+                    {
+                      "content": "$f(x) = 10x^4$",
+                      "match": "$2$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour calculer l'aire sous la courbe de $f(x) = x^2 + 1$ sur $[0 ; 3]$, une unité représentant $2$ m sur chaque axe.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier le signe : $f$ doit être positive sur $[0 ; 3]$. Étape 2 — Écrire l'aire sous forme d'intégrale. Étape 3 — Primitiver $f$. Étape 4 — Calculer $F(3) - F(0) = 12$ u.a. Étape 5 — Convertir en m² avec une unité d'aire de $2 \\times 2 = 4$ m², soit $12 \\times 4 = 48$ m². L'ordre est imposé : la conversion vient en dernier, car elle s'applique à un résultat en unités d'aire.",
+                  "answers": [
+                    {
+                      "content": "On vérifie : $x^2 + 1 \\geq 1 > 0$ sur $[0 ; 3]$."
+                    },
+                    {
+                      "content": "On écrit : $A = \\int_{0}^{3} (x^2 + 1)\\,dx$."
+                    },
+                    {
+                      "content": "On primitive : $F(x) = \\dfrac{x^3}{3} + x$."
+                    },
+                    {
+                      "content": "On calcule : $F(3) - F(0) = 12 - 0 = 12$ u.a."
+                    },
+                    {
+                      "content": "On convertit : $12 \\times 4 = 48$ m²."
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $F$ la primitive de $f(x) = 12x^2 + 2x + 1$ telle que $F(0) = 2$. Calcule $F(1)$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Primitiver : $F(x) = 4x^3 + x^2 + x + k$. Étape 2 — Remplacer $x$ par $0$ : $F(0) = k$, et la condition donne $k = 2$. Étape 3 — Résoudre : $F(x) = 4x^3 + x^2 + x + 2$. Étape 4 — Calculer : $F(1) = 4 + 1 + 1 + 2 = 8$. Calculer $f(1) = 15$ serait une erreur : on évalue $F$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\int_{0}^{1} (12x^2 + 2x + 1)\\,dx$.",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Trouver une primitive : $F(x) = 4x^3 + x^2 + x$. Étape 2 — Évaluer : $F(1) = 4 + 1 + 1 = 6$ et $F(0) = 0$. Étape 3 — Soustraire : $6 - 0 = 6$. Étape 4 — Conclure : $6$.",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = 12x^2 + 2x + 1$ est positive sur $[0 ; 1]$ et $\\int_{0}^{1} f(x)\\,dx$ $= 6$. Si une unité représente $10$ m sur chaque axe, l'aire du domaine sous la courbe vaut $60$ m².",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : sur $[0 ; 1]$, $12x^2 \\geq 0$, $2x \\geq 0$ et $1 > 0$, donc $f > 0$. Étape 2 — Écrire : $A = \\int_{0}^{1} f(x)\\,dx = 6$ u.a. Étape 3 — Calculer : une unité d'aire vaut $10 \\times 10 = 100$ m². Étape 4 — Convertir : $6 \\times 100 = 600$ m², pas $60$ m². L'affirmation est fausse : elle ne multiplie que par $10$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

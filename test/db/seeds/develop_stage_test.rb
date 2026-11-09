@@ -56,6 +56,16 @@ class DevelopStageTest < ActiveSupport::TestCase
     assert_includes output, "[contenus] stub"
   end
 
+  # cartes-activation, revues du Lot E : une erreur des abonnements du jeu remonte au lieu d'être avalée avec celles du jeu standard,
+  # sinon Develop démarrerait avec des élèves qu'aucune carte n'abonne, bloqués au 8e jour.
+  test "an error in the standard subscriptions is raised, not swallowed" do
+    error = assert_raises(RuntimeError) do
+      stub_any_instance(Repositories::Billing::CardRepository, :create_batch, ->(**) { raise "carte impossible" }) { seed }
+    end
+
+    assert_equal "carte impossible", error.message
+  end
+
   # L'activité (Lot B) s'ajoute aux seuls comptes du jeu : un vrai élève qui a rejoint une classe du jeu, un vrai enseignant
   # rattaché à un établissement du jeu (contacts triés avant ceux du jeu) ne sont ni rejoués ni redatés.
   test "on Develop the activity plays only the accounts of the set and touches nothing that was there" do
@@ -143,8 +153,8 @@ class DevelopStageTest < ActiveSupport::TestCase
     ENV.delete("RAILWAY_ENVIRONMENT_NAME")
   end
 
-  test "the standard seed refuses Staging and production by itself" do
-    [ "Staging", "production" ].each do |name|
+  test "the standard seed refuses production by itself" do
+    [ "production" ].each do |name|
       ENV["RAILWAY_ENVIRONMENT_NAME"] = name
       error = assert_raises(RuntimeError) { as_production { capture_io { load Rails.root.join("db/seeds/standard.rb").to_s, true } } }
       assert_match "est réservé", error.message
@@ -168,8 +178,8 @@ class DevelopStageTest < ActiveSupport::TestCase
     assert_equal 0, Orm::TotpCredential.where(user_id: team_users.select(:id)).where.not(confirmed_at: nil).count
   end
 
-  test "Staging and production receive nothing of the set" do
-    [ "Staging", "production" ].each { seed(name: it) }
+  test "production receives nothing of the set (Staging has its own stage: staging_stage_test)" do
+    seed(name: "production")
 
     assert_equal 0, jeu_schools.count
     assert_equal 0, Orm::User.where(contact: @identity.contact(role: :teacher, index: 10)).count

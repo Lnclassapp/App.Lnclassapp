@@ -31,8 +31,8 @@ module Queries
       def hand_in(assignment, *students, score_percent: 100)
         exercise = Orm::Exercise.find(assignment.assignable_id)
         students.each do |student|
-          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent:,
-                                  completed_at: @today.to_time)
+          record_medal(create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent:,
+                                               completed_at: @today.to_time))
         end
       end
 
@@ -45,7 +45,7 @@ module Queries
 
         assert_equal [ "Respiration", "Photosynthèse" ], rows.map(&:exercise_title)
         assert_equal({ public_id: late.public_id, exercise_title: "Respiration", classroom_public_id: @classroom.public_id,
-                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3, done: 0, average_percent: nil,
+                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3, done: 0, medals: {},
                        material_name: "SVT", material_slug: @svt.slug, material_category: "science" }, rows.first.to_h)
         assert_equal [ 2, 3 ], rows.last.to_h.values_at(:pending, :present)
       end
@@ -107,7 +107,7 @@ module Queries
         assert_equal [ 2, 3, 1 ], follow_ups.sole.to_h.values_at(:done, :present, :pending)
       end
 
-      test "CA-G7: done by all and due, or late by more than 14 days: the history, never also in the week; the class average" do
+      test "CA-G7: done by all and due, or late by more than 14 days: the history, never also in the week; the medals of the class, never an average" do
         both = assign("Fait par tous", due_on: @today - 1)
         hand_in(both, @students[0], score_percent: 90)
         hand_in(both, @students[1], score_percent: 60)
@@ -124,7 +124,8 @@ module Queries
         rows = history
 
         assert_equal [ "Aujourd'hui", "Fait par tous", "Il y a vingt jours" ], rows.map(&:exercise_title), "the latest due date first"
-        assert_equal [ [ 100, 3, 3 ], [ 70, 3, 3 ], [ 50, 1, 3 ] ], rows.map { [ it.average_percent, it.done, it.present ] }
+        assert_equal [ [ { diamond: 3 }, 3, 3 ], [ { gold: 1, bronze: 2 }, 3, 3 ], [ { bronze: 1 }, 1, 3 ] ],
+                     rows.map { [ it.medals, it.done, it.present ] }
         assert_equal [ "Il y a quatorze jours", "Pas encore échu" ], follow_ups.map(&:exercise_title), "not yet due: the week, whoever did it"
         assert_empty(history.map(&:public_id) & follow_ups.map(&:public_id))
       end

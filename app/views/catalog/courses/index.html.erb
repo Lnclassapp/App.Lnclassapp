@@ -230,12 +230,8 @@
           <% end %>
         </div>
         <%# Une carte par leçon, deux colonnes, chacune à sa hauteur (items-start) ; les icônes dessinées une fois. %>
-        <%= ui_icon_sprite(prefix: "lessons-") do %>
-          <ul id="lessons_list" class="grid items-start gap-5 lg:grid-cols-2">
-            <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course,
-                       locals: { show_status: false, student: true, lesson_card: true } %>
-          </ul>
-        <% end %>
+        <%# Audit O-C02 : au-delà de 24 leçons, « Voir plus » (page suivante au défilement, ou lien sans JavaScript). %>
+        <%= render "catalog/courses/lesson_cards", page:, material: current.slug, nested: false %>
       <% else %>
         <div id="lessons_empty">
           <%# Sans classe, pas de matière courante : l'état « sans classe » passe avant la recherche (current est nil). %>

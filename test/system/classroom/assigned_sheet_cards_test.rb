@@ -45,7 +45,7 @@ class Classroom::AssignedSheetCardsTest < ApplicationSystemTestCase
       click_button "Rendre à l'enseignant"
     end
 
-    assert_selector "#session_grade", text: "20/20"
+    assert_selector "#session_badge"
     click_link "Reprendre le devoir"
     assert_current_path fill_student_assigned_sheet_path(@sheet)
     within(frame(first)) { assert_selector ".ps-status", text: "Réussi" }

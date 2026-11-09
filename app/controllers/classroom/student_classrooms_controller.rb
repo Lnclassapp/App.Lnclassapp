@@ -19,6 +19,8 @@ module Classroom
     # Les devoirs reçus (un envoi, une feuille) ne se lisent qu'une fois la lecture de la classe accordée : jamais ceux d'une autre classe.
     def render_show
       @assigned_sheets = Queries::Classroom::StudentAssignedSheetsQuery.new.call(actor: current_actor)
+      # suivi-classe-lecon §3.3 : le même exercice que sur la page de résultat et dans la leçon, pour chaque fiche à revoir.
+      @remediation_proposals = Queries::Assessment::RemediationProposalsQuery.new.call(student_id: current_actor.user_id)
       render :show
     end
   end

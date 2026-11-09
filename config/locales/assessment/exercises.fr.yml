@@ -15,6 +15,12 @@ fr:
           one: "1 question"
           other: "%{count} questions"
         actions: "Actions pour %{name}"
+        # UDR-0157 §3 : le cartouche de la feuille et la consigne (« · barème : 7 points » si une question ne vaut pas 1 point).
+        exam_kind: "Interrogation"
+        exam_brand: "Lnclass"
+        scale:
+          one: " · barème : %{points} point"
+          other: " · barème : %{points} points"
         assign_title: "Assigner à mes classes"
         assign_targets: "Assigner « %{title} » à vos classes"
         # level : « Tle D », « 3ème ».
@@ -27,7 +33,7 @@ fr:
         redo: "Refaire l'exercice"
         # ADR-0115 : pause après 3 copies vérifiées d'affilée ; time : « 10 h 50 ».
         paused: "Tu pourras recommencer à %{time}."
-        best: "Meilleure note : %{grade}/20"
+        best: "Ta médaille :"
         lesson_wide: "Toute la leçon"
         no_questions: "Cet exercice n'a pas encore de questions."
       solution:

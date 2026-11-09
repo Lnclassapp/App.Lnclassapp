@@ -31,7 +31,7 @@ class Classroom::StudentFileTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Awa Bamba", wait: SIGN_IN_WAIT
     assert_selector "#student_file_counts", text: /1 fait sur 2/
-    assert_selector "#student_file_assignments li", text: %r{17/20.*En progrès.*2 sessions}m
+    assert_selector "#student_file_assignments li", text: %r{En progrès.*2 sessions}m
     assert_selector "#student_file_self_practice li", text: "Les fractions"
     growth_shot("rapports-de-classe-fiche-1280")
 

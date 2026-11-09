@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# Lists the open decisions of every chantier: the unchecked entries (`- [ ] …`) of the `## À trancher` section of
+# docs/chantiers/*/journal.md and of the `## Décisions ouvertes` section of docs/chantiers/*/plan.md (chantier
+# contrat-de-session, docs/workflows/contrat-de-session.md). Read by the daily decision box; writes nothing.
+#
+#   script/docs/a_trancher           # one line per open entry: <chantier> · <file>:<line> · <entry>, oldest chantier first
+#   script/docs/a_trancher --count   # the number of open entries only
+SECTIONS = { "journal.md" => "## À trancher", "plan.md" => "## Décisions ouvertes" }.freeze
+ROOT = File.expand_path("../../docs/chantiers", __dir__)
+
+def open_entries(path, heading)
+  inside = false
+  File.readlines(path, chomp: true).each_with_index.filter_map do |line, index|
+    inside = line.strip == heading if line.start_with?("## ")
+    [ index + 1, line.strip.delete_prefix("- [ ] ") ] if inside && line.lstrip.start_with?("- [ ] ")
+  end
+end
+
+entries = Dir.glob(File.join(ROOT, "*")).reject { File.basename(it).start_with?("_") }.sort.flat_map do |dir|
+  SECTIONS.flat_map do |file, heading|
+    path = File.join(dir, file)
+    next [] unless File.file?(path)
+
+    open_entries(path, heading).map { |line, text| "#{File.basename(dir)} · #{file}:#{line} · #{text}" }
+  end
+end
+
+if ARGV.include?("--count")
+  puts entries.size
+else
+  puts(entries.empty? ? "Aucune décision ouverte." : entries)
+end

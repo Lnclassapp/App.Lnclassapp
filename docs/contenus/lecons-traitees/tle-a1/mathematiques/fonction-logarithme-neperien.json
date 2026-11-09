@@ -49,137 +49,259 @@
           },
           "pitfall": "Ne pas écrire $\\ln(a + b) = \\ln a + \\ln b$. Le logarithme transforme un **produit** en somme, jamais une somme. Contre-exemple : $\\ln(1 + 1) = \\ln 2 \\approx 0{,}7$, mais $\\ln 1 + \\ln 1 = 0 + 0 = 0$. De même $\\ln(ab)$ n'est pas $\\ln a \\times \\ln b$.",
           "figure": null,
-          "exercise": {
-            "title": "Utiliser les propriétés de ln",
-            "statement": "Dans cet exercice, tu appliques les propriétés du logarithme népérien avec la méthode de la fiche. Quand c'est utile, on prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Affirmation : $\\ln 1 = 0$ et $\\ln e = 1$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Décomposer : il n'y a rien à décomposer, ce sont les deux valeurs de référence. Étape 2 — Appliquer : ln est la primitive de $1/x$ qui s'annule en 1, donc $\\ln 1 = 0$ ; et le nombre $e$ est justement celui dont le logarithme vaut 1. Étape 3 — Calculer : les deux égalités sont vraies. L'affirmation est donc Vraie. Erreur fréquente : croire que $\\ln 1 = 1$, en confondant avec la valeur de $\\ln e$.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $a > 0$ et $b > 0$, quelle égalité est vraie ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $ab$ est un produit. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, $\\ln(ab) = \\ln a + \\ln b$. Les autres propositions sont fausses : $\\ln a \\times \\ln b$ multiplie au lieu d'additionner ; $\\ln(a+b)$ porte sur une somme, et on ne peut pas la séparer ; $a\\ln b$ mélange le nombre $a$ et son logarithme. Étape 3 — Calculer : rien à calculer ici, seule la bonne propriété compte.",
-                "answers": [
-                  {
-                    "content": "$\\ln(ab) = \\ln a \\times \\ln b$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln(ab) = \\ln a + \\ln b$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\ln(a + b) = \\ln a + \\ln b$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln(ab) = a\\ln b$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle écriture est égale à $\\ln 18$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $18 = 2 \\times 3^2$. Étape 2 — Appliquer : $\\ln 18 = \\ln 2 + \\ln(3^2) = \\ln 2 + 2\\ln 3$. Étape 3 — Calculer : on garde cette écriture. Les leurres : $2\\ln 2 + \\ln 3$ vaut $\\ln 12$ (on a échangé les exposants) ; $2\\ln 2 + 2\\ln 3$ vaut $\\ln 36$ ; un produit de logarithmes n'est jamais le logarithme d'un produit.",
-                "answers": [
-                  {
-                    "content": "$2\\ln 2 + \\ln 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2\\ln 2 + 2\\ln 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln 2 + 2\\ln 3$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$2\\ln 2 \\times \\ln 3$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un opérateur propose un forfait à $8$ Go. Calcule $\\ln 8$ en prenant $\\ln 2 \\approx 0{,}7$ (résultat arrondi à $0{,}1$ près).",
-                "question_type": "numeric",
-                "tolerance": 0.05,
-                "explanation": "Étape 1 — Décomposer : $8 = 2^3$. Étape 2 — Appliquer : $\\ln 8 = \\ln(2^3) = 3\\ln 2$. Étape 3 — Calculer : $3 \\times 0{,}7 = 2{,}1$. Erreur à éviter : écrire $\\ln 8 = 8 \\times 0{,}7$ ou $\\ln 8 = 3 + 0{,}7$.",
-                "answers": [
-                  {
-                    "content": "2,1",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Complète : $\\ln(e^2) = $ ___",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Décomposer : $e^2$ est une puissance de $e$, d'exposant 2. Étape 2 — Appliquer : $\\ln(e^2) = 2\\ln e$. Étape 3 — Calculer : $\\ln e = 1$, donc $\\ln(e^2) = 2 \\times 1 = 2$. Réponse : 2.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $\\ln\\dfrac{3}{2}$, arrondie à $0{,}1$ près.",
-                "question_type": "numeric",
-                "tolerance": 0.05,
-                "explanation": "Étape 1 — Décomposer : $\\frac{3}{2}$ est un quotient de deux nombres dont on connaît le logarithme. Étape 2 — Appliquer : $\\ln\\frac{3}{2} = \\ln 3 - \\ln 2$. Étape 3 — Calculer : $1{,}1 - 0{,}7 = 0{,}4$. Erreur à éviter : diviser $1{,}1$ par $0{,}7$ au lieu de soustraire.",
-                "answers": [
-                  {
-                    "content": "0,4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour $a > 0$ et $b > 0$, quelles sont les deux égalités vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Décomposer : on repère un quotient, une puissance, une somme, un produit $2 \\times a$. Étape 2 — Appliquer : $\\ln\\frac{a}{b} = \\ln a - \\ln b$ et $\\ln(a^3) = 3\\ln a$ sont vraies. Étape 3 — Calculer : on vérifie les leurres. $\\ln(a+b)$ ne se sépare pas (piège de la fiche). $\\ln(2a) = \\ln 2 + \\ln a$, pas $2\\ln a$ (qui est $\\ln(a^2)$). $\\ln\\frac{a}{b}$ est une différence de logarithmes, pas un quotient.",
-                "answers": [
-                  {
-                    "content": "$\\ln\\dfrac{a}{b} = \\ln a - \\ln b$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\ln(a^3) = 3\\ln a$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\ln(a + b) = \\ln a + \\ln b$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln(2a) = 2\\ln a$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln\\dfrac{a}{b} = \\dfrac{\\ln a}{\\ln b}$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Utiliser les propriétés de ln",
+              "statement": "Dans cet exercice, tu appliques les propriétés du logarithme népérien avec la méthode de la fiche. Quand c'est utile, on prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Affirmation : $\\ln 1 = 0$ et $\\ln e = 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : il n'y a rien à décomposer, ce sont les deux valeurs de référence. Étape 2 — Appliquer : ln est la primitive de $1/x$ qui s'annule en 1, donc $\\ln 1 = 0$ ; et le nombre $e$ est justement celui dont le logarithme vaut 1. Étape 3 — Calculer : les deux égalités sont vraies. L'affirmation est donc Vraie. Erreur fréquente : croire que $\\ln 1 = 1$, en confondant avec la valeur de $\\ln e$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a > 0$ et $b > 0$, quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $ab$ est un produit. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, $\\ln(ab) = \\ln a + \\ln b$. Les autres propositions sont fausses : $\\ln a \\times \\ln b$ multiplie au lieu d'additionner ; $\\ln(a+b)$ porte sur une somme, et on ne peut pas la séparer ; $a\\ln b$ mélange le nombre $a$ et son logarithme. Étape 3 — Calculer : rien à calculer ici, seule la bonne propriété compte.",
+                  "answers": [
+                    {
+                      "content": "$\\ln(ab) = \\ln a \\times \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(ab) = \\ln a + \\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a + b) = \\ln a + \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(ab) = a\\ln b$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle écriture est égale à $\\ln 18$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $18 = 2 \\times 3^2$. Étape 2 — Appliquer : $\\ln 18 = \\ln 2 + \\ln(3^2) = \\ln 2 + 2\\ln 3$. Étape 3 — Calculer : on garde cette écriture. Les leurres : $2\\ln 2 + \\ln 3$ vaut $\\ln 12$ (on a échangé les exposants) ; $2\\ln 2 + 2\\ln 3$ vaut $\\ln 36$ ; un produit de logarithmes n'est jamais le logarithme d'un produit.",
+                  "answers": [
+                    {
+                      "content": "$2\\ln 2 + \\ln 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ln 2 + 2\\ln 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 2 + 2\\ln 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\ln 2 \\times \\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un opérateur propose un forfait à $8$ Go. Calcule $\\ln 8$ en prenant $\\ln 2 \\approx 0{,}7$ (résultat arrondi à $0{,}1$ près).",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $8 = 2^3$. Étape 2 — Appliquer : $\\ln 8 = \\ln(2^3) = 3\\ln 2$. Étape 3 — Calculer : $3 \\times 0{,}7 = 2{,}1$. Erreur à éviter : écrire $\\ln 8 = 8 \\times 0{,}7$ ou $\\ln 8 = 3 + 0{,}7$.",
+                  "answers": [
+                    {
+                      "content": "2,1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $\\ln(e^2) = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $e^2$ est une puissance de $e$, d'exposant 2. Étape 2 — Appliquer : $\\ln(e^2) = 2\\ln e$. Étape 3 — Calculer : $\\ln e = 1$, donc $\\ln(e^2) = 2 \\times 1 = 2$. Réponse : 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $\\ln\\dfrac{3}{2}$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $\\frac{3}{2}$ est un quotient de deux nombres dont on connaît le logarithme. Étape 2 — Appliquer : $\\ln\\frac{3}{2} = \\ln 3 - \\ln 2$. Étape 3 — Calculer : $1{,}1 - 0{,}7 = 0{,}4$. Erreur à éviter : diviser $1{,}1$ par $0{,}7$ au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a > 0$ et $b > 0$, quelles sont les deux égalités vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Décomposer : on repère un quotient, une puissance, une somme, un produit $2 \\times a$. Étape 2 — Appliquer : $\\ln\\frac{a}{b} = \\ln a - \\ln b$ et $\\ln(a^3) = 3\\ln a$ sont vraies. Étape 3 — Calculer : on vérifie les leurres. $\\ln(a+b)$ ne se sépare pas (piège de la fiche). $\\ln(2a) = \\ln 2 + \\ln a$, pas $2\\ln a$ (qui est $\\ln(a^2)$). $\\ln\\frac{a}{b}$ est une différence de logarithmes, pas un quotient.",
+                  "answers": [
+                    {
+                      "content": "$\\ln\\dfrac{a}{b} = \\ln a - \\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a^3) = 3\\ln a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a + b) = \\ln a + \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(2a) = 2\\ln a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{a}{b} = \\dfrac{\\ln a}{\\ln b}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer des logarithmes à partir de valeurs données",
+              "statement": "Dans cet exercice, tu appliques les propriétés du logarithme népérien avec la méthode de la fiche, sur des nombres choisis pour un calcul à la main. Quand c'est utile, on prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$ (valeurs approchées).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Décompose d'abord le nombre en produit, quotient ou puissance de nombres dont tu connais le logarithme (2, 3, e, 1). Applique ensuite la propriété qui correspond : somme, différence ou facteur devant le logarithme.",
+              "questions": [
+                {
+                  "content": "Affirmation : $\\ln\\dfrac{1}{e} = -1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : $\\frac{1}{e}$ est l'inverse de $e$. Étape 2 — Appliquer : $\\ln\\frac{1}{b} = -\\ln b$, donc $\\ln\\frac{1}{e} = -\\ln e$. Étape 3 — Calculer : $\\ln e = 1$, donc $\\ln\\frac{1}{e} = -1$. L'affirmation est Vraie. Erreur fréquente : croire que $\\ln\\frac{1}{e}$ vaut $1$ en oubliant le signe moins, ou l'écrire $\\frac{1}{\\ln e}$ en inversant le logarithme au lieu du nombre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle écriture est égale à $\\ln 24$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $24 = 2^3 \\times 3$. Étape 2 — Appliquer : $\\ln 24 = \\ln(2^3) + \\ln 3 = 3\\ln 2 + \\ln 3$. Étape 3 — Calculer : on garde cette écriture. Les leurres : $2\\ln 2 + 3\\ln 3$ vaut $\\ln 108$ (exposants échangés) ; $\\ln 2 + 3\\ln 3$ vaut $\\ln 54$ ; un produit de logarithmes n'est jamais le logarithme d'un produit.",
+                  "answers": [
+                    {
+                      "content": "$3\\ln 2 + \\ln 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\ln 2 + 3\\ln 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 2 + 3\\ln 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\ln 2 \\times \\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $\\ln 9$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $9 = 3^2$. Étape 2 — Appliquer : $\\ln 9 = \\ln(3^2) = 2\\ln 3$. Étape 3 — Calculer : $2 \\times 1{,}1 = 2{,}2$. Erreur à éviter : écrire $\\ln 9 = 9 \\times 1{,}1$ ou $\\ln 9 = 2 + 1{,}1$, qui traitent l'exposant comme un nombre à multiplier ou à ajouter au mauvais endroit.",
+                  "answers": [
+                    {
+                      "content": "2,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $\\ln\\dfrac{1}{e^3} = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $\\frac{1}{e^3}$ est l'inverse de la puissance $e^3$. Étape 2 — Appliquer : $\\ln\\frac{1}{e^3} = -\\ln(e^3) = -3\\ln e$. Étape 3 — Calculer : $\\ln e = 1$, donc le résultat est $-3$. Erreur à éviter : oublier le signe moins de l'inverse et répondre $3$.",
+                  "answers": [
+                    {
+                      "content": "-3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Relie chaque logarithme à sa valeur approchée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Décomposer : $6 = 2 \\times 3$, $4 = 2^2$, $\\frac{3}{2}$ est un quotient, $18 = 2 \\times 3^2$. Étape 2 — Appliquer : $\\ln 6 = \\ln 2 + \\ln 3$, $\\ln 4 = 2\\ln 2$, $\\ln\\frac{3}{2} = \\ln 3 - \\ln 2$, $\\ln 18 = \\ln 2 + 2\\ln 3$. Étape 3 — Calculer : $0{,}7 + 1{,}1 = 1{,}8$ ; $2 \\times 0{,}7 = 1{,}4$ ; $1{,}1 - 0{,}7 = 0{,}4$ ; $0{,}7 + 2{,}2 = 2{,}9$. Confondre la somme et la différence échange $1{,}8$ et $0{,}4$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 6$",
+                      "match": "$1{,}8$"
+                    },
+                    {
+                      "content": "$\\ln 4$",
+                      "match": "$1{,}4$"
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{3}{2}$",
+                      "match": "$0{,}4$"
+                    },
+                    {
+                      "content": "$\\ln 18$",
+                      "match": "$2{,}9$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont vraies pour tous les nombres $a > 0$ et $b > 0$ ? Choisis-en deux.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Décomposer : on repère un inverse, une puissance, un produit, une différence. Étape 2 — Appliquer : $\\ln\\frac{1}{b} = -\\ln b$ et $\\ln(a^2) = 2\\ln a$ sont deux propriétés de la fiche. Étape 3 — Calculer : on teste les leurres. Avec $a = b = 2$, $\\ln(ab) = \\ln 4 \\approx 1{,}4$ alors que $\\ln a \\times \\ln b \\approx 0{,}5$. $\\ln(a-b)$ ne se sépare pas : c'est $\\ln\\frac{a}{b}$ qui vaut $\\ln a - \\ln b$. Enfin $(\\ln a)^2$ n'est pas $2\\ln a$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln\\dfrac{1}{b} = -\\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a^2) = 2\\ln a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(ab) = \\ln a \\times \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(a - b) = \\ln a - \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(a^2) = (\\ln a)^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$.",
             "questions": [
@@ -258,163 +380,296 @@
           },
           "pitfall": "Ne pas croire que « $\\ln x < 0$ » veut dire « $x < 0$ ». Contre-exemple : $\\ln 0{,}5 < 0$, pourtant $0{,}5$ est positif ; et $\\ln(-2)$ n'existe pas. Un logarithme négatif signale un nombre **entre 0 et 1**, jamais un nombre négatif.",
           "figure": null,
-          "exercise": {
-            "title": "Signe et variation de ln",
-            "statement": "Dans cet exercice, tu étudies le signe de ln et tu compares des logarithmes avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Affirmation : le nombre $\\ln(-3)$ existe et il est négatif.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Vérifier : le nombre écrit dans $\\ln$ doit être strictement positif ; or $-3 < 0$. Étape 2 — Comparer : il n'y a rien à comparer, le logarithme n'existe pas. Étape 3 — Conclure : l'affirmation est Fausse. L'erreur tentante est de dire « $-3$ est négatif, donc $\\ln(-3)$ est négatif » : on confond le signe du nombre et le signe de son logarithme.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le signe de $\\ln 0{,}3$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $0{,}3 > 0$, donc $\\ln 0{,}3$ existe. Étape 2 — Comparer : $0{,}3 < 1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln 0{,}3 < 0$. La proposition « n'existe pas » confond $0{,}3$ avec un nombre négatif ; « positif » oublie que $0{,}3$ est inférieur à 1.",
-                "answers": [
-                  {
-                    "content": "Positif",
-                    "correct": false
-                  },
-                  {
-                    "content": "Négatif",
-                    "correct": true
-                  },
-                  {
-                    "content": "Nul",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le logarithme n'existe pas",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Range du plus petit au plus grand : $\\ln 5$, $\\ln 0{,}5$, $\\ln 2$, $\\ln 1$.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Vérifier : $5$, $0{,}5$, $2$ et $1$ sont strictement positifs. Étape 2 — Comparer les nombres : $0{,}5 < 1 < 2 < 5$. Étape 3 — Conclure : $\\ln$ est croissante, elle conserve l'ordre, donc $\\ln 0{,}5 < \\ln 1 < \\ln 2 < \\ln 5$ (soit un nombre négatif, puis $0$, puis deux nombres positifs).",
-                "answers": [
-                  {
-                    "content": "$\\ln 0{,}5$"
-                  },
-                  {
-                    "content": "$\\ln 1$"
-                  },
-                  {
-                    "content": "$\\ln 2$"
-                  },
-                  {
-                    "content": "$\\ln 5$"
-                  }
-                ]
-              },
-              {
-                "content": "Compare : $\\ln 9$ ___ $\\ln 4$",
-                "question_type": "select",
-                "explanation": "Étape 1 — Vérifier : $9$ et $4$ sont strictement positifs. Étape 2 — Comparer : $9 > 4$. Étape 3 — Conclure : $\\ln$ est croissante, donc $\\ln 9 > \\ln 4$. Le signe $<$ inverserait l'ordre, ce qui arrive quand on pense que ln décroît ; le signe $=$ n'est vrai que si les deux nombres sont égaux.",
-                "answers": [
-                  {
-                    "content": "$>$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$<$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$=$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quels sont les deux nombres négatifs parmi $\\ln 0{,}2$, $\\ln 1$, $\\ln 3$, $\\ln 0{,}9$, $\\ln 1{,}5$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Vérifier : tous les nombres écrits dans $\\ln$ sont strictement positifs. Étape 2 — Comparer à 1 : $0{,}2 < 1$ et $0{,}9 < 1$ ; $3 > 1$ et $1{,}5 > 1$ ; $1 = 1$. Étape 3 — Conclure : $\\ln$ est négative seulement entre 0 et 1, donc $\\ln 0{,}2$ et $\\ln 0{,}9$. $\\ln 1 = 0$ n'est ni positif ni négatif.",
-                "answers": [
-                  {
-                    "content": "$\\ln 0{,}2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\ln 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln 0{,}9$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\ln 1{,}5$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quand $x$ se rapproche de $0$ par valeurs positives (par exemple $x = 0{,}001$), vers quoi tend $\\ln x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $x > 0$, donc $\\ln x$ existe. Étape 2 — Comparer : $x$ proche de 0 est inférieur à 1, donc $\\ln x < 0$ ; et plus $x$ est petit, plus $\\ln x$ est petit puisque $\\ln$ est croissante. Étape 3 — Conclure : $\\ln x$ tend vers $-\\infty$. La proposition « vers 0 » confond avec le comportement en $x = 1$.",
-                "answers": [
-                  {
-                    "content": "Vers $+\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Vers $0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Vers $-\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "Vers $1$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "On sait que $\\ln x < 0$. Que peut-on dire de $x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : pour que $\\ln x$ existe, il faut $x > 0$. Étape 2 — Comparer : $\\ln x < 0 = \\ln 1$. Étape 3 — Conclure : $\\ln$ est croissante, donc $x < 1$, et avec $x > 0$ on obtient $0 < x < 1$. $x < 0$ rend $\\ln x$ impossible ; $x < 1$ oublie $x > 0$ : c'est le piège de la fiche ; $x > 1$ donnerait $\\ln x > 0$.",
-                "answers": [
-                  {
-                    "content": "$x < 0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x < 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0 < x < 1$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x > 1$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Signe et variation de ln",
+              "statement": "Dans cet exercice, tu étudies le signe de ln et tu compares des logarithmes avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Affirmation : le nombre $\\ln(-3)$ existe et il est négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : le nombre écrit dans $\\ln$ doit être strictement positif ; or $-3 < 0$. Étape 2 — Comparer : il n'y a rien à comparer, le logarithme n'existe pas. Étape 3 — Conclure : l'affirmation est Fausse. L'erreur tentante est de dire « $-3$ est négatif, donc $\\ln(-3)$ est négatif » : on confond le signe du nombre et le signe de son logarithme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le signe de $\\ln 0{,}3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $0{,}3 > 0$, donc $\\ln 0{,}3$ existe. Étape 2 — Comparer : $0{,}3 < 1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln 0{,}3 < 0$. La proposition « n'existe pas » confond $0{,}3$ avec un nombre négatif ; « positif » oublie que $0{,}3$ est inférieur à 1.",
+                  "answers": [
+                    {
+                      "content": "Positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Négatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le logarithme n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand : $\\ln 5$, $\\ln 0{,}5$, $\\ln 2$, $\\ln 1$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier : $5$, $0{,}5$, $2$ et $1$ sont strictement positifs. Étape 2 — Comparer les nombres : $0{,}5 < 1 < 2 < 5$. Étape 3 — Conclure : $\\ln$ est croissante, elle conserve l'ordre, donc $\\ln 0{,}5 < \\ln 1 < \\ln 2 < \\ln 5$ (soit un nombre négatif, puis $0$, puis deux nombres positifs).",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}5$"
+                    },
+                    {
+                      "content": "$\\ln 1$"
+                    },
+                    {
+                      "content": "$\\ln 2$"
+                    },
+                    {
+                      "content": "$\\ln 5$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Compare : $\\ln 9$ ___ $\\ln 4$",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : $9$ et $4$ sont strictement positifs. Étape 2 — Comparer : $9 > 4$. Étape 3 — Conclure : $\\ln$ est croissante, donc $\\ln 9 > \\ln 4$. Le signe $<$ inverserait l'ordre, ce qui arrive quand on pense que ln décroît ; le signe $=$ n'est vrai que si les deux nombres sont égaux.",
+                  "answers": [
+                    {
+                      "content": "$>$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$<$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$=$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres négatifs parmi $\\ln 0{,}2$, $\\ln 1$, $\\ln 3$, $\\ln 0{,}9$, $\\ln 1{,}5$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : tous les nombres écrits dans $\\ln$ sont strictement positifs. Étape 2 — Comparer à 1 : $0{,}2 < 1$ et $0{,}9 < 1$ ; $3 > 1$ et $1{,}5 > 1$ ; $1 = 1$. Étape 3 — Conclure : $\\ln$ est négative seulement entre 0 et 1, donc $\\ln 0{,}2$ et $\\ln 0{,}9$. $\\ln 1 = 0$ n'est ni positif ni négatif.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 0{,}9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 1{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand $x$ se rapproche de $0$ par valeurs positives (par exemple $x = 0{,}001$), vers quoi tend $\\ln x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $x > 0$, donc $\\ln x$ existe. Étape 2 — Comparer : $x$ proche de 0 est inférieur à 1, donc $\\ln x < 0$ ; et plus $x$ est petit, plus $\\ln x$ est petit puisque $\\ln$ est croissante. Étape 3 — Conclure : $\\ln x$ tend vers $-\\infty$. La proposition « vers 0 » confond avec le comportement en $x = 1$.",
+                  "answers": [
+                    {
+                      "content": "Vers $+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vers $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vers $1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\ln x < 0$. Que peut-on dire de $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : pour que $\\ln x$ existe, il faut $x > 0$. Étape 2 — Comparer : $\\ln x < 0 = \\ln 1$. Étape 3 — Conclure : $\\ln$ est croissante, donc $x < 1$, et avec $x > 0$ on obtient $0 < x < 1$. $x < 0$ rend $\\ln x$ impossible ; $x < 1$ oublie $x > 0$ : c'est le piège de la fiche ; $x > 1$ donnerait $\\ln x > 0$.",
+                  "answers": [
+                    {
+                      "content": "$x < 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x < 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x < 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x > 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Signe de ln et comparaison de logarithmes",
+              "statement": "Dans cet exercice, tu donnes le signe de logarithmes et tu les compares sans calculatrice, avec la méthode de la fiche : vérifier que le nombre est positif, le comparer à $1$, puis conclure avec la croissance de $\\ln$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Commence toujours par vérifier que le nombre écrit dans $\\ln$ est strictement positif. Compare-le ensuite à $1$ : en dessous de $1$ le logarithme est négatif, au-dessus de $1$ il est positif.",
+              "questions": [
+                {
+                  "content": "Affirmation : $\\ln 0{,}8$ est un nombre positif, car $0{,}8$ est positif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $0{,}8 > 0$, donc $\\ln 0{,}8$ existe. Étape 2 — Comparer : $0{,}8 < 1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln 0{,}8 < 0$. L'affirmation est Fausse. Erreur fréquente : confondre le signe du nombre ($0{,}8$ est positif) et le signe de son logarithme (négatif, car $0{,}8$ est entre $0$ et $1$).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces logarithmes est strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $0{,}4$, $1$, $2{,}5$ et $0{,}99$ sont strictement positifs, les quatre logarithmes existent. Étape 2 — Comparer à $1$ : seul $2{,}5$ est supérieur à $1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln 2{,}5 > 0$. $\\ln 0{,}4$ et $\\ln 0{,}99$ sont négatifs (nombres entre $0$ et $1$) ; $\\ln 1$ est nul, ni positif ni négatif.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 2{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 0{,}99$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Compare : $\\ln\\dfrac{1}{3}$ ___ $\\ln\\dfrac{1}{2}$",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : $\\frac{1}{3}$ et $\\frac{1}{2}$ sont strictement positifs. Étape 2 — Comparer : $\\frac{1}{3} < \\frac{1}{2}$ (le plus grand dénominateur donne le plus petit nombre). Étape 3 — Conclure : $\\ln$ est croissante et conserve l'ordre, donc $\\ln\\frac{1}{3} < \\ln\\frac{1}{2}$. Le signe $>$ vient de celui qui compare $3$ et $2$ au lieu de comparer $\\frac{1}{3}$ et $\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$<$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$>$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$=$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand : $\\ln 4$, $\\ln 0{,}1$, $\\ln 1{,}2$, $\\ln 0{,}7$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier : $4$, $0{,}1$, $1{,}2$ et $0{,}7$ sont strictement positifs. Étape 2 — Comparer les nombres : $0{,}1 < 0{,}7 < 1{,}2 < 4$. Étape 3 — Conclure : $\\ln$ est croissante, elle conserve l'ordre, donc $\\ln 0{,}1 < \\ln 0{,}7 < \\ln 1{,}2 < \\ln 4$ (deux logarithmes négatifs, puis deux positifs).",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}1$"
+                    },
+                    {
+                      "content": "$\\ln 0{,}7$"
+                    },
+                    {
+                      "content": "$\\ln 1{,}2$"
+                    },
+                    {
+                      "content": "$\\ln 4$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un nombre $x > 0$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : on suppose $x > 0$, donc $\\ln x$ existe. Étape 2 — Comparer à $1$ : $\\ln$ est croissante et $\\ln 1 = 0$, donc $x > 1$ donne $\\ln x > 0$ et $0 < x < 1$ donne $\\ln x < 0$. Étape 3 — Conclure : ce sont les deux affirmations vraies. « Si $\\ln x < 0$, alors $x < 0$ » est le piège de la fiche : $x = 0{,}5$ est positif et $\\ln 0{,}5 < 0$. « Si $\\ln x = 0$, alors $x = 0$ » est fausse : $\\ln 1 = 0$. Enfin $\\ln x$ existe pour tout $x > 0$.",
+                  "answers": [
+                    {
+                      "content": "Si $x > 1$, alors $\\ln x > 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $0 < x < 1$, alors $\\ln x < 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $\\ln x < 0$, alors $x < 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $\\ln x = 0$, alors $x = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $x < 1$, alors $\\ln x$ n'existe pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque condition sur $\\ln x$ (avec $x > 0$) à la condition sur $x$ qui lui est équivalente.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Vérifier : on suppose $x > 0$. Étape 2 — Comparer à $1$ : comme $\\ln 1 = 0$ et que $\\ln$ est croissante, $\\ln x < \\ln 1$ équivaut à $x < 1$, donc à $0 < x < 1$ ; $\\ln x = \\ln 1$ équivaut à $x = 1$ ; $\\ln x > \\ln 1$ équivaut à $x > 1$. Étape 3 — Conclure : on relie les trois lignes. Écrire $x < 0$ pour $\\ln x < 0$ est l'erreur de la fiche : un logarithme négatif signale un nombre entre $0$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln x < 0$",
+                      "match": "$0 < x < 1$"
+                    },
+                    {
+                      "content": "$\\ln x = 0$",
+                      "match": "$x = 1$"
+                    },
+                    {
+                      "content": "$\\ln x > 0$",
+                      "match": "$x > 1$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Sans calculatrice, tu donnes le signe de logarithmes.",
             "questions": [
@@ -507,141 +762,244 @@
           },
           "pitfall": "Ne pas oublier la condition d'existence. Pour $\\ln x \\leq \\ln 5$, la solution n'est pas « $x \\leq 5$ » mais $0 < x \\leq 5$. Contre-exemple : $x = -1$ vérifie $-1 \\leq 5$, pourtant $\\ln(-1)$ n'existe pas, donc $-1$ n'est pas solution. Autre erreur : pour $3^n \\geq 100$, ne pas écrire $n \\geq \\frac{100}{3}$ ; $3^n$ n'est pas $3 \\times n$.",
           "figure": null,
-          "exercise": {
-            "title": "Équations et inéquations avec ln",
-            "statement": "Dans cet exercice, tu résous des équations et des inéquations avec la méthode de la fiche. Quand c'est utile, on prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Résous $\\ln x = \\ln 7$. Donne la valeur de $x$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Poser : il faut $x > 0$. Étape 2 — Transformer : l'équation est déjà de la forme $\\ln x = \\ln 7$. Étape 3 — Résoudre : deux nombres positifs ont le même logarithme s'ils sont égaux, donc $x = 7$. Étape 4 — Conclure : $7 > 0$, la condition est respectée, la solution est $7$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\ln(x + 2) = \\ln 5$.",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : il faut $x + 2 > 0$, soit $x > -2$. Étape 2 — Transformer : l'équation est déjà de la forme $\\ln(x+2) = \\ln 5$. Étape 3 — Résoudre : $x + 2 = 5$, donc $x = 3$. Étape 4 — Conclure : $3 > -2$, la solution est $3$. Le leurre $7$ vient d'une addition au lieu d'une soustraction ; $5$ oublie le $+2$ ; $-3$ ne respecte pas $x > -2$.",
-                "answers": [
-                  {
-                    "content": "$x = 7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x = 3$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x = 5$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x = -3$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est l'ensemble des solutions de $\\ln(x - 1) \\leq \\ln 3$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : il faut $x - 1 > 0$, soit $x > 1$. Étape 2 — Transformer : l'inéquation est déjà de la forme $\\ln(x-1) \\leq \\ln 3$. Étape 3 — Résoudre : $\\ln$ est croissante, donc $x - 1 \\leq 3$, soit $x \\leq 4$. Étape 4 — Conclure : avec $x > 1$, on obtient $]1\\,;4]$. Le leurre $]-\\infty\\,;4]$ oublie la condition d'existence ; $[4\\,;+\\infty[$ inverse le sens ; $]1\\,;3]$ oublie d'ajouter 1.",
-                "answers": [
-                  {
-                    "content": "$]-\\infty\\,;4]$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$]1\\,;4]$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$[4\\,;+\\infty[$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$]1\\,;3]$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $x > 0$, l'inéquation $\\ln x \\leq 1$ équivaut à :",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : $x > 0$. Étape 2 — Transformer : $1 = \\ln e$, donc $\\ln x \\leq \\ln e$. Étape 3 — Résoudre : $\\ln$ est croissante, donc $x \\leq e$. Étape 4 — Conclure : $0 < x \\leq e$ (environ $0 < x \\leq 2{,}7$). Le leurre $x \\leq 1$ confond le nombre $1$ avec le nombre $e$ ; $x \\geq e$ inverse le sens ; $0 < x \\leq 1$ correspond à $\\ln x \\leq 0$ (on a pris $1$ pour $\\ln 1$).",
-                "answers": [
-                  {
-                    "content": "$x \\leq 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0 < x \\leq e$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x \\geq e$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0 < x \\leq 1$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le nombre d'abonnés d'un forfait double chaque mois : après $n$ mois, il y en a $1\\,000 \\times 2^n$. On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$. Quel est le plus petit entier $n$ pour atteindre au moins $100\\,000$ abonnés ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Poser : on cherche $1\\,000 \\times 2^n \\geq 100\\,000$, soit $2^n \\geq 100$. Étape 2 — Transformer : on prend le logarithme des deux côtés, $n\\ln 2 \\geq \\ln 100 = 2\\ln 10$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$ : $n \\geq \\frac{2 \\times 2{,}3}{0{,}7} = \\frac{4{,}6}{0{,}7} \\approx 6{,}6$. Étape 4 — Conclure : le plus petit entier est $n = 7$. Vérification : $2^6 = 64 < 100$ et $2^7 = 128 \\geq 100$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $-1$ est solution de $\\ln x \\leq \\ln 5$, car $-1 \\leq 5$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Poser : pour que $\\ln x$ existe, il faut $x > 0$. Étape 2 — Transformer : l'inéquation est déjà de la forme $\\ln x \\leq \\ln 5$. Étape 3 — Résoudre : on obtient $x \\leq 5$. Étape 4 — Conclure : avec la condition $x > 0$, les solutions sont $]0\\,;5]$. Le nombre $-1$ vérifie $-1 \\leq 5$ mais $\\ln(-1)$ n'existe pas : l'affirmation est Fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes pour trouver le plus petit entier $n$ tel que $3^n \\geq 100$.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Poser l'inéquation $3^n \\geq 100$. Étape 2 — Transformer en prenant le logarithme des deux côtés : $n\\ln 3 \\geq \\ln 100$. Étape 3 — Résoudre en divisant par $\\ln 3$, positif, donc sans changer le sens. Étape 4 — Conclure en prenant le plus petit entier qui convient. On ne peut pas diviser avant d'avoir pris le logarithme : $3^n$ n'est pas $3 \\times n$.",
-                "answers": [
-                  {
-                    "content": "Écrire l'inéquation $3^n \\geq 100$."
-                  },
-                  {
-                    "content": "Prendre le logarithme des deux côtés : $n\\ln 3 \\geq \\ln 100$."
-                  },
-                  {
-                    "content": "Diviser par $\\ln 3$, positif : $n \\geq \\frac{\\ln 100}{\\ln 3}$."
-                  },
-                  {
-                    "content": "Prendre le plus petit entier qui convient."
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Équations et inéquations avec ln",
+              "statement": "Dans cet exercice, tu résous des équations et des inéquations avec la méthode de la fiche. Quand c'est utile, on prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Résous $\\ln x = \\ln 7$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Poser : il faut $x > 0$. Étape 2 — Transformer : l'équation est déjà de la forme $\\ln x = \\ln 7$. Étape 3 — Résoudre : deux nombres positifs ont le même logarithme s'ils sont égaux, donc $x = 7$. Étape 4 — Conclure : $7 > 0$, la condition est respectée, la solution est $7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\ln(x + 2) = \\ln 5$.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : il faut $x + 2 > 0$, soit $x > -2$. Étape 2 — Transformer : l'équation est déjà de la forme $\\ln(x+2) = \\ln 5$. Étape 3 — Résoudre : $x + 2 = 5$, donc $x = 3$. Étape 4 — Conclure : $3 > -2$, la solution est $3$. Le leurre $7$ vient d'une addition au lieu d'une soustraction ; $5$ oublie le $+2$ ; $-3$ ne respecte pas $x > -2$.",
+                  "answers": [
+                    {
+                      "content": "$x = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln(x - 1) \\leq \\ln 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : il faut $x - 1 > 0$, soit $x > 1$. Étape 2 — Transformer : l'inéquation est déjà de la forme $\\ln(x-1) \\leq \\ln 3$. Étape 3 — Résoudre : $\\ln$ est croissante, donc $x - 1 \\leq 3$, soit $x \\leq 4$. Étape 4 — Conclure : avec $x > 1$, on obtient $]1\\,;4]$. Le leurre $]-\\infty\\,;4]$ oublie la condition d'existence ; $[4\\,;+\\infty[$ inverse le sens ; $]1\\,;3]$ oublie d'ajouter 1.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;4]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[4\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;3]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, l'inéquation $\\ln x \\leq 1$ équivaut à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : $x > 0$. Étape 2 — Transformer : $1 = \\ln e$, donc $\\ln x \\leq \\ln e$. Étape 3 — Résoudre : $\\ln$ est croissante, donc $x \\leq e$. Étape 4 — Conclure : $0 < x \\leq e$ (environ $0 < x \\leq 2{,}7$). Le leurre $x \\leq 1$ confond le nombre $1$ avec le nombre $e$ ; $x \\geq e$ inverse le sens ; $0 < x \\leq 1$ correspond à $\\ln x \\leq 0$ (on a pris $1$ pour $\\ln 1$).",
+                  "answers": [
+                    {
+                      "content": "$x \\leq 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x \\leq e$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\geq e$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x \\leq 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre d'abonnés d'un forfait double chaque mois : après $n$ mois, il y en a $1\\,000 \\times 2^n$. On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$. Quel est le plus petit entier $n$ pour atteindre au moins $100\\,000$ abonnés ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Poser : on cherche $1\\,000 \\times 2^n \\geq 100\\,000$, soit $2^n \\geq 100$. Étape 2 — Transformer : on prend le logarithme des deux côtés, $n\\ln 2 \\geq \\ln 100 = 2\\ln 10$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$ : $n \\geq \\frac{2 \\times 2{,}3}{0{,}7} = \\frac{4{,}6}{0{,}7} \\approx 6{,}6$. Étape 4 — Conclure : le plus petit entier est $n = 7$. Vérification : $2^6 = 64 < 100$ et $2^7 = 128 \\geq 100$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $-1$ est solution de $\\ln x \\leq \\ln 5$, car $-1 \\leq 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : pour que $\\ln x$ existe, il faut $x > 0$. Étape 2 — Transformer : l'inéquation est déjà de la forme $\\ln x \\leq \\ln 5$. Étape 3 — Résoudre : on obtient $x \\leq 5$. Étape 4 — Conclure : avec la condition $x > 0$, les solutions sont $]0\\,;5]$. Le nombre $-1$ vérifie $-1 \\leq 5$ mais $\\ln(-1)$ n'existe pas : l'affirmation est Fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver le plus petit entier $n$ tel que $3^n \\geq 100$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Poser l'inéquation $3^n \\geq 100$. Étape 2 — Transformer en prenant le logarithme des deux côtés : $n\\ln 3 \\geq \\ln 100$. Étape 3 — Résoudre en divisant par $\\ln 3$, positif, donc sans changer le sens. Étape 4 — Conclure en prenant le plus petit entier qui convient. On ne peut pas diviser avant d'avoir pris le logarithme : $3^n$ n'est pas $3 \\times n$.",
+                  "answers": [
+                    {
+                      "content": "Écrire l'inéquation $3^n \\geq 100$."
+                    },
+                    {
+                      "content": "Prendre le logarithme des deux côtés : $n\\ln 3 \\geq \\ln 100$."
+                    },
+                    {
+                      "content": "Diviser par $\\ln 3$, positif : $n \\geq \\frac{\\ln 100}{\\ln 3}$."
+                    },
+                    {
+                      "content": "Prendre le plus petit entier qui convient."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Résoudre des équations et des inéquations avec ln",
+              "statement": "Dans cet exercice, tu résous des équations et des inéquations avec ln en suivant la méthode de la fiche : condition d'existence, transformation en $\\ln(\\ldots)$, résolution, puis conclusion.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Pose d'abord la condition d'existence : tout nombre écrit dans un $\\ln$ doit être strictement positif. Écris ensuite chaque membre sous la forme $\\ln(\\ldots)$ et compare ce qu'il y a dans les $\\ln$ : le sens de l'inégalité est conservé.",
+              "questions": [
+                {
+                  "content": "Résous $\\ln(2x) = \\ln 12$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Poser la condition : il faut $2x > 0$, donc $x > 0$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $2x = 12$ et $x = 6$. Étape 4 — Conclure : $6 > 0$ respecte la condition. Erreur à éviter : répondre $x = 12$ en oubliant le facteur $2$ dans $\\ln(2x)$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln(x + 3) \\leq \\ln 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser la condition : il faut $x + 3 > 0$, donc $x > -3$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln$ est croissante, le sens est conservé, donc $x + 3 \\leq 5$, soit $x \\leq 2$. Étape 4 — Conclure : avec $x > -3$, l'ensemble des solutions est $]-3\\,;2]$. La proposition $]-\\infty\\,;2]$ oublie la condition d'existence ; $]-3\\,;8]$ ajoute $3$ au lieu de le retrancher ; $[2\\,;+\\infty[$ inverse le sens de l'inégalité.",
+                  "answers": [
+                    {
+                      "content": "$]-3\\,;2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-3\\,;8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'équation $\\ln x = \\ln(x - 2)$ n'a aucune solution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser la condition : il faut $x > 0$ et $x - 2 > 0$, donc $x > 2$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x = x - 2$, soit $0 = -2$, ce qui est impossible. Étape 4 — Conclure : aucune valeur de $x$ ne convient. L'affirmation est Vraie. Erreur fréquente : penser qu'une équation avec ln a toujours une solution.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre d'inscrits à un cours en ligne vaut $3^n$ après $n$ semaines (situation d'exemple). On prend $\\ln 3 \\approx 1{,}1$ et $\\ln 50 \\approx 3{,}9$. Quel est le plus petit entier $n$ tel que $3^n \\geq 50$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Poser la condition : $3^n$ et $50$ sont strictement positifs, on peut prendre le logarithme. Étape 2 — Transformer : $3^n \\geq 50$ donne $n\\ln 3 \\geq \\ln 50$. Étape 3 — Résoudre : on divise par $\\ln 3 > 0$, le sens est conservé, donc $n \\geq \\frac{3{,}9}{1{,}1} \\approx 3{,}5$. Étape 4 — Conclure : le plus petit entier qui convient est $n = 4$ (vérification : $3^3 = 27 < 50$ et $3^4 = 81 \\geq 50$). Erreur à éviter : écrire $n \\geq \\frac{50}{3}$, comme si $3^n$ valait $3 \\times n$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour résoudre $\\ln(x - 2) \\leq \\ln 6$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Poser la condition : $x - 2 > 0$, donc $x > 2$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln$ est croissante, le sens est conservé, donc $x - 2 \\leq 6$, soit $x \\leq 8$. Étape 4 — Conclure : on garde ce qui respecte $x > 2$, d'où $]2\\,;8]$. Conclure avant d'avoir posé la condition expose à garder des valeurs comme $x = 0$, pour lesquelles $\\ln(x - 2)$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Poser la condition d'existence : $x - 2 > 0$, donc $x > 2$."
+                    },
+                    {
+                      "content": "Constater que les deux membres sont déjà de la forme $\\ln(\\ldots)$."
+                    },
+                    {
+                      "content": "Comparer ce qui est dans les $\\ln$ en gardant le sens : $x - 2 \\leq 6$, donc $x \\leq 8$."
+                    },
+                    {
+                      "content": "Conclure avec la condition : l'ensemble des solutions est $]2\\,;8]$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'équation $\\ln x = 2\\ln 3$ a pour solution $x = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Poser la condition : il faut $x > 0$. Étape 2 — Transformer : $2\\ln 3 = \\ln(3^2) = \\ln 9$, donc l'équation devient $\\ln x = \\ln 9$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x = 9$. Étape 4 — Conclure : $9 > 0$ convient. Erreur à éviter : répondre $x = 6$ en calculant $2 \\times 3$, comme si le facteur $2$ passait devant le nombre au lieu de devenir un exposant.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu résous des équations et des inéquations avec ln.",
             "questions": [
@@ -718,133 +1076,263 @@
           },
           "pitfall": "Ne pas oublier $u'$ : $(\\ln u)' = \\frac{u'}{u}$, et non $\\frac{1}{u}$. Contre-exemple : $f(x) = \\ln(3x)= \\ln 3 + \\ln x$ a pour dérivée $\\frac{1}{x}$. La formule juste donne $\\frac{3}{3x} = \\frac{1}{x}$ ; la formule fausse $\\frac{1}{3x}$ donnerait un autre résultat.",
           "figure": null,
-          "exercise": {
-            "title": "Dériver ln u et étudier une fonction",
-            "statement": "Dans cet exercice, tu dérives des fonctions de la forme ln u et tu étudies leurs variations avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est la dérivée de $f(x) = \\ln(3x + 1)$ sur $]-\\frac{1}{3}\\,;+\\infty[$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Déterminer : $3x + 1 > 0$ équivaut à $x > -\\frac{1}{3}$. Étape 2 — Calculer : $u(x) = 3x+1$ et $u'(x) = 3$, donc $f'(x) = \\frac{u'(x)}{u(x)} = \\frac{3}{3x+1}$. Le leurre $\\frac{1}{3x+1}$ oublie $u'$ (piège de la fiche) ; $3\\ln(3x+1)$ n'est pas une dérivée de ce type ; $\\frac{3x}{3x+1}$ remplace $u'$ par $3x$.",
-                "answers": [
-                  {
-                    "content": "$f'(x) = \\dfrac{1}{3x+1}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f'(x) = \\dfrac{3}{3x+1}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$f'(x) = 3\\ln(3x+1)$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f'(x) = \\dfrac{3x}{3x+1}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est l'ensemble de définition de $f(x) = \\ln(x - 5)$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Déterminer : $f$ est définie quand $x - 5 > 0$, soit $x > 5$. L'ensemble de définition est $]5\\,;+\\infty[$. Étape 2 — Calculer : cela ne demande pas encore de dérivée. Les leurres : $[5\\,;+\\infty[$ accepte $x = 5$ alors que $\\ln 0$ n'existe pas ; $]-\\infty\\,;5[$ inverse l'inégalité ; $\\mathbb{R}$ oublie la condition.",
-                "answers": [
-                  {
-                    "content": "$]-\\infty\\,;5[$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$]5\\,;+\\infty[$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$[5\\,;+\\infty[$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\mathbb{R}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la dérivée de $f(x) = \\ln(x^2 + 4)$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Déterminer : $x^2 + 4 > 0$ pour tout $x$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2+4$ et $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+4}$. Le leurre $\\frac{1}{x^2+4}$ oublie $u'$ ; $\\frac{2x}{x^2}$ a perdu le $+4$ ; $\\ln(2x)$ prend le logarithme de $u'$ au lieu de diviser par $u$.",
-                "answers": [
-                  {
-                    "content": "$f'(x) = \\dfrac{1}{x^2+4}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f'(x) = \\dfrac{2x}{x^2+4}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$f'(x) = \\dfrac{2x}{x^2}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f'(x) = \\ln(2x)$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Soit $f(x) = \\ln(x^2 + 3)$. Calcule $f'(1)$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Déterminer : $x^2 + 3 > 0$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2+3$, $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+3}$ et $f'(1) = \\frac{2}{1+3} = \\frac{2}{4} = 0{,}5$. Étape 3 — Étudier : $f'(1) > 0$, la fonction croît en $x = 1$.",
-                "answers": [
-                  {
-                    "content": "0,5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Affirmation : $f(x) = \\ln(2x - 6)$ est croissante sur $]3\\,;+\\infty[$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Déterminer : $2x - 6 > 0$ équivaut à $x > 3$, donc $f$ est définie sur $]3\\,;+\\infty[$. Étape 2 — Calculer : $u'(x) = 2$, donc $f'(x) = \\frac{2}{2x-6}$. Étape 3 — Étudier : sur $]3\\,;+\\infty[$, $2x - 6 > 0$ donc $f'(x) > 0$. Étape 4 — Dresser : $f$ est strictement croissante. L'affirmation est Vraie.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la dérivée de $f(x) = \\ln(5x)$ sur $]0\\,;+\\infty[$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Déterminer : $5x > 0$ équivaut à $x > 0$. Étape 2 — Calculer : $u(x) = 5x$, $u'(x) = 5$, donc $f'(x) = \\frac{5}{5x} = \\frac{1}{x}$. Le leurre $\\frac{1}{5x}$ oublie $u'$ (piège de la fiche) ; $\\frac{5}{x}$ oublie de diviser par $u = 5x$ (on divise par $x$ seulement) ; $\\ln 5$ est une constante, sa dérivée n'a rien à voir.",
-                "answers": [
-                  {
-                    "content": "$\\dfrac{1}{x}$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$\\dfrac{1}{5x}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\dfrac{5}{x}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$\\ln 5$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Dériver ln u et étudier une fonction",
+              "statement": "Dans cet exercice, tu dérives des fonctions de la forme ln u et tu étudies leurs variations avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(3x + 1)$ sur $]-\\frac{1}{3}\\,;+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $3x + 1 > 0$ équivaut à $x > -\\frac{1}{3}$. Étape 2 — Calculer : $u(x) = 3x+1$ et $u'(x) = 3$, donc $f'(x) = \\frac{u'(x)}{u(x)} = \\frac{3}{3x+1}$. Le leurre $\\frac{1}{3x+1}$ oublie $u'$ (piège de la fiche) ; $3\\ln(3x+1)$ n'est pas une dérivée de ce type ; $\\frac{3x}{3x+1}$ remplace $u'$ par $3x$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\dfrac{1}{3x+1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\dfrac{3}{3x+1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = 3\\ln(3x+1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\dfrac{3x}{3x+1}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de $f(x) = \\ln(x - 5)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie quand $x - 5 > 0$, soit $x > 5$. L'ensemble de définition est $]5\\,;+\\infty[$. Étape 2 — Calculer : cela ne demande pas encore de dérivée. Les leurres : $[5\\,;+\\infty[$ accepte $x = 5$ alors que $\\ln 0$ n'existe pas ; $]-\\infty\\,;5[$ inverse l'inégalité ; $\\mathbb{R}$ oublie la condition.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]5\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[5\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x^2 + 4)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $x^2 + 4 > 0$ pour tout $x$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2+4$ et $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+4}$. Le leurre $\\frac{1}{x^2+4}$ oublie $u'$ ; $\\frac{2x}{x^2}$ a perdu le $+4$ ; $\\ln(2x)$ prend le logarithme de $u'$ au lieu de diviser par $u$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\dfrac{1}{x^2+4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\dfrac{2x}{x^2+4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\dfrac{2x}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\ln(2x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(x^2 + 3)$. Calcule $f'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Déterminer : $x^2 + 3 > 0$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2+3$, $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+3}$ et $f'(1) = \\frac{2}{1+3} = \\frac{2}{4} = 0{,}5$. Étape 3 — Étudier : $f'(1) > 0$, la fonction croît en $x = 1$.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $f(x) = \\ln(2x - 6)$ est croissante sur $]3\\,;+\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : $2x - 6 > 0$ équivaut à $x > 3$, donc $f$ est définie sur $]3\\,;+\\infty[$. Étape 2 — Calculer : $u'(x) = 2$, donc $f'(x) = \\frac{2}{2x-6}$. Étape 3 — Étudier : sur $]3\\,;+\\infty[$, $2x - 6 > 0$ donc $f'(x) > 0$. Étape 4 — Dresser : $f$ est strictement croissante. L'affirmation est Vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(5x)$ sur $]0\\,;+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $5x > 0$ équivaut à $x > 0$. Étape 2 — Calculer : $u(x) = 5x$, $u'(x) = 5$, donc $f'(x) = \\frac{5}{5x} = \\frac{1}{x}$. Le leurre $\\frac{1}{5x}$ oublie $u'$ (piège de la fiche) ; $\\frac{5}{x}$ oublie de diviser par $u = 5x$ (on divise par $x$ seulement) ; $\\ln 5$ est une constante, sa dérivée n'a rien à voir.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{5x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Dériver une fonction ln u et étudier ses variations",
+              "statement": "Dans cet exercice, tu dérives des fonctions de la forme $\\ln u$ et tu étudies leurs variations avec la méthode de la fiche : ensemble de définition, calcul de $f'$, signe de $f'$, puis conclusion.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Retiens $(\\ln u)' = \\dfrac{u'}{u}$ : le numérateur est la dérivée de $u$, pas $1$. Pour l'ensemble de définition, cherche où $u(x) > 0$ ; le signe de $f'$ donne ensuite le sens de variation.",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(2x^2 + 1)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $2x^2 + 1 > 0$ pour tout $x$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = 2x^2 + 1$ et $u'(x) = 4x$, donc $f'(x) = \\frac{4x}{2x^2+1}$. Les leurres : $\\frac{1}{2x^2+1}$ oublie $u'$ (piège de la fiche) ; $\\frac{2x}{2x^2+1}$ dérive $2x^2$ en $2x$ au lieu de $4x$ ; $4x$ oublie de diviser par $u$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4x}{2x^2+1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2x^2+1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2x}{2x^2+1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble de définition de $f(x) = \\ln(4 - x)$ est ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie là où $u(x) = 4 - x > 0$, donc pour $x < 4$. Étape 2 — Calculer : ici on s'arrête à l'ensemble de définition, sans dériver. Conclusion : l'ensemble de définition est $]-\\infty\\,;4[$. La proposition $]4\\,;+\\infty[$ résout $x - 4 > 0$ en oubliant que $4 - x$ change de signe ; $\\mathbb{R}$ oublie que $\\ln$ n'existe que pour un nombre strictement positif ; $[0\\,;+\\infty[$ confond avec le domaine de $\\ln x$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]4\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(2x + 3)$ sur $]-\\frac{3}{2}\\,;+\\infty[$. Calcule $f'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0.01,
+                  "explanation": "Étape 1 — Déterminer : $2x + 3 > 0$ équivaut à $x > -\\frac{3}{2}$, et $1$ appartient à cet intervalle. Étape 2 — Calculer : $u(x) = 2x + 3$ et $u'(x) = 2$, donc $f'(x) = \\frac{2}{2x+3}$. En $x = 1$ : $f'(1) = \\frac{2}{5} = 0{,}4$. Erreur à éviter : oublier $u'$ et répondre $\\frac{1}{5} = 0{,}2$.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la fonction $f(x) = \\ln(5 - 2x)$ est décroissante sur son ensemble de définition.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : $5 - 2x > 0$ équivaut à $x < \\frac{5}{2}$. Étape 2 — Calculer : $u'(x) = -2$, donc $f'(x) = \\frac{-2}{5-2x}$. Étape 3 — Étudier le signe : sur le domaine, $5 - 2x > 0$ et $-2 < 0$, donc $f'(x) < 0$. Étape 4 — Conclure : $f$ est décroissante. L'affirmation est Vraie. Erreur fréquente : croire que $f$ est croissante parce que la fonction $\\ln$ est croissante, alors que $u'$ est négative.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x - 2\\ln x$ sur $]0\\,;+\\infty[$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie sur $]0\\,;+\\infty[$. Étape 2 — Calculer : $f'(x) = 1 - 2 \\times \\frac{1}{x} = 1 - \\frac{2}{x} = \\frac{x-2}{x}$. Étape 3 — Étudier le signe : pour $x > 0$, $f'(x)$ a le signe de $x - 2$ : négatif sur $]0\\,;2[$, positif après $2$. Étape 4 — Conclure : $f$ est décroissante sur $]0\\,;2]$. Les leurres : $1 - 2\\ln x$ dérive $2\\ln x$ en $2\\ln x$ au lieu de $\\frac{2}{x}$ ; $\\frac{1}{x} - 2$ échange les deux termes ; croissante sur $]0\\,;2]$ inverse le signe de $f'$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = 1 - \\dfrac{2}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $]0\\,;2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = 1 - 2\\ln x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $]0\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\dfrac{1}{x} - 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour étudier les variations de $f(x) = \\ln(x - 3)$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Déterminer : $x - 3 > 0$ équivaut à $x > 3$, donc $f$ est définie sur $]3\\,;+\\infty[$. Étape 2 — Calculer : $u'(x) = 1$, donc $f'(x) = \\frac{1}{x-3}$. Étape 3 — Étudier le signe : sur $]3\\,;+\\infty[$, $x - 3 > 0$, donc $f'(x) > 0$. Étape 4 — Conclure : $f$ est strictement croissante sur $]3\\,;+\\infty[$. Étudier le signe avant de connaître $f'$ est impossible, et conclure avant d'avoir le signe ne prouve rien.",
+                  "answers": [
+                    {
+                      "content": "Chercher où $x - 3 > 0$ : $f$ est définie sur $]3\\,;+\\infty[$."
+                    },
+                    {
+                      "content": "Calculer $u'(x) = 1$, donc $f'(x) = \\dfrac{1}{x-3}$."
+                    },
+                    {
+                      "content": "Étudier le signe : sur $]3\\,;+\\infty[$, $x - 3 > 0$ donc $f'(x) > 0$."
+                    },
+                    {
+                      "content": "Conclure : $f$ est strictement croissante sur $]3\\,;+\\infty[$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu dérives des fonctions de la forme ln u.",
             "questions": [
@@ -1362,6 +1850,1737 @@
               "starter": "La dérivée de $f$ est…",
               "explanation": "Corrigé modèle : Étape 1 — Déterminer : $f$ est définie sur $]0\\,;+\\infty[$. Étape 2 — Calculer : $f'(x) = 1 - \\frac{1}{x} = \\frac{x-1}{x}$. Étape 3 — Étudier : comme $x > 0$, $f'(x)$ a le signe de $x - 1$ : $f'(x) < 0$ sur $]0\\,;1[$, $f'(1) = 0$, $f'(x) > 0$ sur $]1\\,;+\\infty[$. Étape 4 — Dresser : $f$ est décroissante sur $]0\\,;1]$ et croissante sur $[1\\,;+\\infty[$ ; son minimum est $f(1) = 1 - \\ln 1 = 1$. Conclusion : le coût moyen est minimal pour $x = 1$ (100 lots) et vaut $1$ millier de FCFA. Barème : 1 point pour la dérivée, 1 point pour le signe, 1 point pour les variations, 1 point pour le minimum et la conclusion.",
               "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base sur ln",
+          "notions": "propriétés algébriques de ln (produit, quotient, puissance, valeurs de référence), signe et sens de variation de ln, équations et inéquations avec ln (condition d'existence), dérivée de ln u.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On utilise les propriétés du logarithme népérien. Tous les nombres écrits dans un $\\ln$ sont strictement positifs. On donne les valeurs approchées $\\ln 2 \\approx 0{,}7$, $\\ln 3 \\approx 1{,}1$ et $\\ln 5 \\approx 1{,}6$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Décompose chaque nombre en produit, quotient ou puissance de 2, 3 et 5, puis applique la propriété de ln qui correspond.",
+              "questions": [
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 5 \\approx 1{,}6$. Calcule une valeur approchée de $\\ln 10$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $10 = 2 \\times 5$, un produit de deux nombres dont on connaît le logarithme. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, $\\ln 10 = \\ln 2 + \\ln 5$. Étape 3 — Calculer : $0{,}7 + 1{,}6 = 2{,}3$. L'erreur tentante est de multiplier les logarithmes ($0{,}7 \\times 1{,}6 \\approx 1{,}1$) : ln transforme un produit en somme, pas en produit.",
+                  "answers": [
+                    {
+                      "content": "2,3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 5 \\approx 1{,}6$. Calcule une valeur approchée de $\\ln 25$.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $25 = 5^2$, une puissance de $5$. Étape 2 — Appliquer : $\\ln(a^n) = n\\ln a$, donc $\\ln 25 = 2\\ln 5$. Étape 3 — Calculer : $2 \\times 1{,}6 = 3{,}2$. Répondre $25 \\times 1{,}6$ ou $2 + 1{,}6$ revient à ne pas appliquer la propriété de la puissance : l'exposant devient un facteur devant $\\ln 5$.",
+                  "answers": [
+                    {
+                      "content": "3,2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 3 \\approx 1{,}1$ et $\\ln 5 \\approx 1{,}6$. Calcule une valeur approchée de $\\ln\\dfrac{5}{3}$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $\\frac{5}{3}$ est un quotient de deux nombres dont on connaît le logarithme. Étape 2 — Appliquer : $\\ln\\frac{a}{b} = \\ln a - \\ln b$, donc $\\ln\\frac{5}{3} = \\ln 5 - \\ln 3$. Étape 3 — Calculer : $1{,}6 - 1{,}1 = 0{,}5$. L'erreur tentante est de diviser $1{,}6$ par $1{,}1$ : le logarithme d'un quotient est une différence, jamais un quotient.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle écriture est égale à $\\ln 45$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Décomposer : $45 = 3^2 \\times 5$. Étape 2 — Appliquer : $\\ln 45 = \\ln(3^2) + \\ln 5 = 2\\ln 3 + \\ln 5$. Étape 3 — Conclure : on garde cette écriture. Les leurres : $\\ln 3 + 2\\ln 5$ vaut $\\ln 75$ (exposant placé sur le mauvais facteur) ; $3\\ln 3 + \\ln 5$ vaut $\\ln 135$ ; un produit $2\\ln 3 \\times \\ln 5$ n'est jamais le logarithme d'un produit.",
+                  "answers": [
+                    {
+                      "content": "$2\\ln 3 + \\ln 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 3 + 2\\ln 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\ln 3 + \\ln 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ln 3 \\times \\ln 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $\\ln 6 = \\ln 2 \\times \\ln 3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : $6 = 2 \\times 3$. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, donc $\\ln 6 = \\ln 2 + \\ln 3 \\approx 0{,}7 + 1{,}1 = 1{,}8$. Étape 3 — Conclure : le produit $\\ln 2 \\times \\ln 3$ vaut environ $0{,}8$, ce qui est différent. L'affirmation est Fausse : elle confond « ln transforme un produit en somme » avec « ln multiplie les logarithmes ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : $3\\ln e + \\ln 1 = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer les valeurs de référence : $\\ln e = 1$ et $\\ln 1 = 0$. Étape 2 — Remplacer : $3 \\times 1 + 0$. Étape 3 — Calculer : le résultat est $3$. L'erreur tentante est de croire que $\\ln 1 = 1$, ce qui donnerait $4$ : c'est $\\ln e$ qui vaut $1$, et $\\ln 1$ vaut $0$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie le signe de logarithmes et on les compare sans calculatrice. On utilise que $\\ln$ est strictement croissante sur $]0\\,;+\\infty[$ et que $\\ln 1 = 0$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare le nombre écrit dans $\\ln$ à $1$, ou compare directement les deux nombres : $\\ln$ conserve l'ordre.",
+              "questions": [
+                {
+                  "content": "Quel est le signe de $\\ln 0{,}75$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $0{,}75 > 0$, donc $\\ln 0{,}75$ existe. Étape 2 — Comparer à $1$ : $0{,}75 < 1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln 0{,}75 < 0$ : il est négatif. « Positif » oublie que $0{,}75$ est inférieur à $1$ ; « n'existe pas » confond un nombre entre $0$ et $1$ avec un nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "Négatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le logarithme n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $\\ln 7 > \\ln 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $7$ et $4$ sont strictement positifs. Étape 2 — Comparer : $7 > 4$. Étape 3 — Conclure : $\\ln$ est strictement croissante, donc elle conserve l'ordre et $\\ln 7 > \\ln 4$. L'affirmation est Vraie. Dire qu'elle est fausse revient à croire que ln inverse l'ordre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un nombre $x > 0$, on a $\\ln x > 0$ si et seulement si ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Vérifier : on suppose $x > 0$. Étape 2 — Comparer : $\\ln x > 0$ s'écrit $\\ln x > \\ln 1$. Étape 3 — Conclure : $\\ln$ est croissante, donc $x > 1$. La condition $x > 0$ est seulement l'existence de $\\ln x$ ; $0 < x < 1$ donne au contraire $\\ln x < 0$ ; $x < 1$ oublie $x > 0$ et donne le signe contraire.",
+                  "answers": [
+                    {
+                      "content": "$x > 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x < 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x < 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux nombres $a > 0$ et $b > 0$, on sait que $\\ln a < \\ln b$. Que peut-on en conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $a$ et $b$ sont strictement positifs. Étape 2 — Comparer : $\\ln a < \\ln b$. Étape 3 — Conclure : $\\ln$ est strictement croissante, donc $\\ln a < \\ln b$ équivaut à $a < b$. La proposition $a > b$ inverse l'ordre ; $a = b$ donnerait des logarithmes égaux ; « $a < 0$ » est impossible puisque $\\ln a$ existe.",
+                  "answers": [
+                    {
+                      "content": "$a < b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a > b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a < 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi $\\ln 0{,}5$, $\\ln 1$, $\\ln 4$, $\\ln 0{,}1$ et $\\ln 2{,}5$, quels sont les deux nombres strictement positifs ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Vérifier : tous les nombres écrits dans $\\ln$ sont strictement positifs. Étape 2 — Comparer à $1$ : $4 > 1$ et $2{,}5 > 1$ ; $0{,}5 < 1$ et $0{,}1 < 1$ ; $1 = 1$. Étape 3 — Conclure : $\\ln$ est positive seulement au-delà de $1$, donc $\\ln 4$ et $\\ln 2{,}5$. $\\ln 0{,}5$ et $\\ln 0{,}1$ sont négatifs ; $\\ln 1 = 0$ n'est ni positif ni négatif.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 2{,}5$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand : $\\ln 3$, $\\ln 0{,}4$, $\\ln 1$, $\\ln 0{,}9$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier : $3$, $0{,}4$, $1$ et $0{,}9$ sont strictement positifs. Étape 2 — Comparer les nombres : $0{,}4 < 0{,}9 < 1 < 3$. Étape 3 — Conclure : $\\ln$ est croissante, donc $\\ln 0{,}4 < \\ln 0{,}9 < \\ln 1 < \\ln 3$ : deux logarithmes négatifs, puis $0$, puis un logarithme positif. Placer $\\ln 0{,}9$ avant $\\ln 0{,}4$ revient à croire que ln inverse l'ordre.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}4$"
+                    },
+                    {
+                      "content": "$\\ln 0{,}9$"
+                    },
+                    {
+                      "content": "$\\ln 1$"
+                    },
+                    {
+                      "content": "$\\ln 3$"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On résout des équations et des inéquations avec le logarithme népérien. Pour chacune, on commence par la condition d'existence : tout nombre écrit dans un $\\ln$ doit être strictement positif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pose la condition d'existence, écris chaque membre sous la forme $\\ln(\\ldots)$, compare ce qu'il y a dans les $\\ln$ en gardant le sens, puis garde les solutions qui respectent la condition.",
+              "questions": [
+                {
+                  "content": "Résous $\\ln(x + 1) = \\ln 6$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $x + 1 > 0$, donc $x > -1$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x + 1 = 6$ et $x = 5$. Étape 4 — Conclure : $5 > -1$ respecte la condition. L'erreur tentante est de répondre $x = 6$ en oubliant le $+1$ dans le $\\ln$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln x \\leq \\ln 8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Condition : $x > 0$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln$ est croissante, le sens est conservé, donc $x \\leq 8$. Étape 4 — Conclure : avec $x > 0$, on obtient $]0\\,;8]$. La proposition $]-\\infty\\,;8]$ oublie la condition d'existence ; $]0\\,;8[$ exclut $8$ alors que l'inégalité est large ; $[8\\,;+\\infty[$ inverse le sens.",
+                  "answers": [
+                    {
+                      "content": "$]0\\,;8]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;8]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;8[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[8\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $-2$ est solution de l'inéquation $\\ln x \\leq \\ln 3$, car $-2 \\leq 3$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Condition : il faut $x > 0$. Étape 2 — Vérifier : $-2 < 0$, donc $\\ln(-2)$ n'existe pas. Étape 3 — Conclure : $-2$ n'est pas solution, même si $-2 \\leq 3$. L'affirmation est Fausse. Elle oublie la condition d'existence : l'ensemble des solutions est $]0\\,;3]$, pas $]-\\infty\\,;3]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'équation $\\ln x = 1$ a pour solution $x = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Condition : $x > 0$. Étape 2 — Transformer : $1 = \\ln e$, donc l'équation devient $\\ln x = \\ln e$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x = e$. Étape 4 — Conclure : $e \\approx 2{,}718 > 0$ convient. Répondre $x = 1$ confond avec l'équation $\\ln x = 0$.",
+                  "answers": [
+                    {
+                      "content": "e",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln(x - 2) > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Condition : $x - 2 > 0$, donc $x > 2$. Étape 2 — Transformer : $0 = \\ln 1$, donc l'inéquation devient $\\ln(x - 2) > \\ln 1$. Étape 3 — Résoudre : $\\ln$ est croissante, donc $x - 2 > 1$, soit $x > 3$. Étape 4 — Conclure : $x > 3$ respecte $x > 2$, d'où $]3\\,;+\\infty[$. La proposition $]2\\,;+\\infty[$ s'arrête à la condition d'existence ; $]1\\,;+\\infty[$ oublie de décaler de $2$ ; $]2\\,;3[$ confond les deux bornes.",
+                  "answers": [
+                    {
+                      "content": "$]3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]2\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]2\\,;3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre d'abonnés d'un service vaut $2^n$ après $n$ jours (situation d'exemple). On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 100 \\approx 4{,}6$. Quel est le plus petit entier $n$ tel que $2^n \\geq 100$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $2^n$ et $100$ sont strictement positifs, on peut prendre ln. Étape 2 — Transformer : $2^n \\geq 100$ donne $n\\ln 2 \\geq \\ln 100$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$, le sens est conservé, donc $n \\geq \\frac{4{,}6}{0{,}7} \\approx 6{,}6$. Étape 4 — Conclure : le plus petit entier est $7$ ($2^6 = 64 < 100$ et $2^7 = 128 \\geq 100$). Écrire $n \\geq \\frac{100}{2} = 50$ confond $2^n$ avec $2 \\times n$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On dérive des fonctions de la forme $\\ln u$ avec la formule $(\\ln u)' = \\dfrac{u'}{u}$, valable quand $u$ est dérivable et strictement positive.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche d'abord où $u(x) > 0$ pour l'ensemble de définition, puis calcule $u'(x)$ : le numérateur de la dérivée est $u'$, pas $1$.",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x + 4)$ sur $]-4\\,;+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $x + 4 > 0$ équivaut à $x > -4$, ce qui donne bien l'intervalle de l'énoncé. Étape 2 — Calculer : $u(x) = x + 4$ et $u'(x) = 1$, donc $f'(x) = \\frac{1}{x+4}$. Les leurres : $\\ln(x+4)$ n'est pas une dérivée ; $\\frac{x}{x+4}$ prend $x$ pour $u'$ ; $\\frac{4}{x+4}$ prend $4$ pour $u'$ alors que la dérivée de $x + 4$ est $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{x+4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{x}{x+4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4}{x+4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(x+4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x^2 + 5)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $x^2 + 5 > 0$ pour tout $x$, donc $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2 + 5$ et $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+5}$. Le leurre $\\frac{1}{x^2+5}$ oublie $u'$ (piège de la fiche) ; $\\frac{2x}{x^2}$ oublie le $+5$ au dénominateur ; $\\frac{x}{x^2+5}$ dérive $x^2$ en $x$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2x}{x^2+5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{x^2+5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2x}{x^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{x}{x^2+5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(3x + 1)$ sur $]-\\frac{1}{3}\\,;+\\infty[$. Calcule $f'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0.01,
+                  "explanation": "Étape 1 — Déterminer : $3x + 1 > 0$ équivaut à $x > -\\frac{1}{3}$, et $1$ est dans cet intervalle. Étape 2 — Calculer : $u'(x) = 3$, donc $f'(x) = \\frac{3}{3x+1}$. Étape 3 — Remplacer : $f'(1) = \\frac{3}{4} = 0{,}75$. L'erreur tentante est d'oublier $u'$ et de répondre $\\frac{1}{4} = 0{,}25$.",
+                  "answers": [
+                    {
+                      "content": "0,75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble de définition de $f(x) = \\ln(x + 7)$ est ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie quand $u(x) = x + 7 > 0$, donc pour $x > -7$. Étape 2 — Conclure : l'ensemble de définition est $]-7\\,;+\\infty[$. La proposition $]7\\,;+\\infty[$ oublie le changement de signe en déplaçant le $7$ ; $]0\\,;+\\infty[$ est le domaine de $\\ln x$, pas de $\\ln(x+7)$ ; $\\mathbb{R}$ oublie que ln n'existe que pour un nombre strictement positif.",
+                  "answers": [
+                    {
+                      "content": "$]-7\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]7\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : sur $]0\\,;+\\infty[$, la dérivée de $f(x) = \\ln(2x)$ est $\\dfrac{1}{x}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Déterminer : $2x > 0$ équivaut à $x > 0$. Étape 2 — Calculer : $u(x) = 2x$ et $u'(x) = 2$, donc $f'(x) = \\frac{2}{2x} = \\frac{1}{x}$. Étape 3 — Vérifier autrement : $\\ln(2x) = \\ln 2 + \\ln x$, et $\\ln 2$ est une constante de dérivée nulle, donc on retrouve $\\frac{1}{x}$. L'affirmation est Vraie. Dire que la dérivée est $\\frac{1}{2x}$ oublie $u'$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · ln dans la vie courante en Côte d'Ivoire",
+          "notions": "croissance géométrique et logarithme (plus petit entier tel que q^n dépasse un seuil), modèle logarithmique d'une audience, propriétés de ln appliquées à des situations d'exemple, dérivée et variations d'un coût moyen.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Une boutique de transfert d'argent de Korhogo voit son nombre de clients doubler chaque mois : après $n$ mois, elle compte $200 \\times 2^n$ clients (situation d'exemple). On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour trouver le premier mois où le seuil est atteint, ramène l'inéquation à $2^n \\geq k$, prends le logarithme des deux côtés, puis divise par $\\ln 2$ qui est positif.",
+              "questions": [
+                {
+                  "content": "Une boutique compte $200 \\times 2^n$ clients après $n$ mois (situation d'exemple). Combien de clients a-t-elle après $4$ mois ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Remplacer : on met $n = 4$ dans $200 \\times 2^n$. Étape 2 — Calculer la puissance : $2^4 = 16$. Étape 3 — Multiplier : $200 \\times 16 = 3\\,200$ clients. L'erreur tentante est de calculer $(200 \\times 2)^4$, qui multiplie aussi les $200$ clients de départ à chaque mois.",
+                  "answers": [
+                    {
+                      "content": "3200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$. Calcule une valeur approchée de $\\ln 32$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $32 = 2^5$, une puissance de $2$. Étape 2 — Appliquer : $\\ln(a^n) = n\\ln a$, donc $\\ln 32 = 5\\ln 2$. Étape 3 — Calculer : $5 \\times 0{,}7 = 3{,}5$. Répondre $32 \\times 0{,}7$ ou $5 + 0{,}7$ revient à ne pas utiliser la propriété de la puissance.",
+                  "answers": [
+                    {
+                      "content": "3,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une boutique compte $200 \\times 2^n$ clients après $n$ mois. L'inéquation $200 \\times 2^n \\geq 2\\,000$ équivaut à :",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler la puissance : on divise les deux membres par $200$, qui est positif, donc le sens ne change pas. Étape 2 — Calculer : $\\frac{2\\,000}{200} = 10$, d'où $2^n \\geq 10$. Les leurres : $2^n \\geq 1\\,800$ soustrait $200$ au lieu de diviser ; $n \\geq 10$ oublie que $n$ est un exposant ; $2n \\geq 10$ confond $2^n$ et $2 \\times n$.",
+                  "answers": [
+                    {
+                      "content": "$2^n \\geq 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^n \\geq 1\\,800$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\geq 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2n \\geq 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 10 \\approx 2{,}3$. Quel est le plus petit entier $n$ tel que $2^n \\geq 10$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $2^n$ et $10$ sont strictement positifs, on peut prendre ln. Étape 2 — Transformer : $n\\ln 2 \\geq \\ln 10$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$, le sens est conservé, donc $n \\geq \\frac{2{,}3}{0{,}7} \\approx 3{,}3$. Étape 4 — Conclure : le plus petit entier est $4$ ($2^3 = 8 < 10$ et $2^4 = 16 \\geq 10$).",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'inéquation $2^n \\geq 10$ équivaut à $n \\geq \\dfrac{10}{2}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tester : pour $n = 4$, on a $2^4 = 16 \\geq 10$, mais $4 \\geq 5$ est faux. Les deux inégalités ne sont donc pas équivalentes. Étape 2 — Comprendre : $2^n$ n'est pas $2 \\times n$ ; la bonne méthode prend le logarithme des deux côtés, $n \\geq \\frac{\\ln 10}{\\ln 2}$. L'affirmation est Fausse : diviser $10$ par $2$ traite l'exposant comme un facteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour résoudre $n\\ln 2 \\geq \\ln 10$, on divise par $\\ln 2$ sans changer le sens de l'inégalité. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappel : on ne change le sens d'une inégalité que si l'on divise par un nombre négatif. Étape 2 — Vérifier : $2 > 1$, donc $\\ln 2 > \\ln 1 = 0$ : $\\ln 2$ est strictement positif (environ $0{,}7$). Étape 3 — Conclure : le sens est conservé. Les autres raisons sont fausses : $\\ln 2$ n'est ni négatif, ni égal à $1$ (c'est $\\ln e$ qui vaut $1$), et $2$ est plus petit que $e$.",
+                  "answers": [
+                    {
+                      "content": "Parce que $\\ln 2 > 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $\\ln 2 < 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $\\ln 2 = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $2 > e$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "L'audience d'un site de vente de pagnes basé à Bouaflé est modélisée (situation d'exemple), $x$ semaines après son lancement, par $g(x) = 4\\ln(x + 1)$ centaines de visiteurs, pour $x \\geq 0$. On prend $\\ln 2 \\approx 0{,}7$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplace $x$ par la valeur demandée, utilise $\\ln 1 = 0$ et les propriétés de ln. Pour le sens de variation, dérive avec $(\\ln u)' = \\frac{u'}{u}$ et étudie le signe.",
+              "questions": [
+                {
+                  "content": "Soit $g(x) = 4\\ln(x + 1)$ pour $x \\geq 0$. Calcule $g(0)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Remplacer : $g(0) = 4\\ln(0 + 1) = 4\\ln 1$. Étape 2 — Utiliser la valeur de référence : $\\ln 1 = 0$. Étape 3 — Calculer : $g(0) = 4 \\times 0 = 0$. Le site n'a aucun visiteur à son lancement. L'erreur tentante est de croire que $\\ln 1 = 1$ et de répondre $4$.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $g(x) = 4\\ln(x + 1)$ pour $x \\geq 0$, avec $\\ln 2 \\approx 0{,}7$. Calcule une valeur approchée de $g(1)$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Remplacer : $g(1) = 4\\ln(1 + 1) = 4\\ln 2$. Étape 2 — Utiliser la donnée : $\\ln 2 \\approx 0{,}7$. Étape 3 — Calculer : $4 \\times 0{,}7 = 2{,}8$ centaines de visiteurs. L'erreur tentante est d'écrire $\\ln 1 + \\ln 1 = 0$ en séparant la somme $1 + 1$ : ln ne transforme pas une somme.",
+                  "answers": [
+                    {
+                      "content": "2,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $g(x) = 4\\ln(x + 1)$ sur $[0\\,;+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $x + 1 > 0$ pour $x \\geq 0$. Étape 2 — Calculer : $u(x) = x + 1$ et $u'(x) = 1$, donc $(\\ln(x+1))' = \\frac{1}{x+1}$ et $g'(x) = 4 \\times \\frac{1}{x+1} = \\frac{4}{x+1}$. Les leurres : $\\frac{1}{x+1}$ oublie le facteur $4$ ; $\\frac{4x}{x+1}$ prend $x$ pour $u'$ ; $4(x+1)$ ne contient plus de quotient.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{4}{x+1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{x+1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4x}{x+1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4(x+1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la fonction $g(x) = 4\\ln(x + 1)$ est croissante sur $[0\\,;+\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $g'(x) = \\frac{4}{x+1}$. Étape 2 — Étudier le signe : pour $x \\geq 0$, $x + 1 > 0$ et $4 > 0$, donc $g'(x) > 0$. Étape 3 — Conclure : $g$ est croissante. L'affirmation est Vraie : l'audience augmente chaque semaine, même si elle augmente de plus en plus lentement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $g(x) = 4\\ln(x + 1)$ pour $x \\geq 0$. Pour quelle valeur de $x$ a-t-on $g(x) = 4\\ln 3$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $x + 1 > 0$, vrai pour $x \\geq 0$. Étape 2 — Transformer : on divise par $4$, ce qui donne $\\ln(x+1) = \\ln 3$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x + 1 = 3$ et $x = 2$. Étape 4 — Conclure : $2 \\geq 0$ convient. L'erreur tentante est de répondre $x = 3$ en oubliant le $+1$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x \\geq 0$, on a bien $4\\ln(x + 1) \\geq 0$. Quelle justification est correcte ? Attention : une phrase peut annoncer un résultat vrai avec une règle fausse.",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Comparer : si $x \\geq 0$, alors $x + 1 \\geq 1$. Étape 2 — Appliquer la croissance : $\\ln$ est croissante, donc $\\ln(x+1) \\geq \\ln 1 = 0$. Étape 3 — Conclure : multiplié par $4 > 0$, le signe est conservé. Dire qu'un logarithme est positif dès que son nombre l'est est une règle fausse : $0{,}5$ est positif et $\\ln 0{,}5$ est négatif ; ici le résultat est vrai parce que $x + 1 \\geq 1$, pas pour cette raison. Dire que ln est décroissante est faux. Dire que $\\ln(x+1)$ est strictement positif est faux : en $x = 0$ il vaut $0$.",
+                  "answers": [
+                    {
+                      "content": "Parce que $x + 1 \\geq 1$, donc $\\ln(x+1) \\geq \\ln 1 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $x + 1$ est positif, et un logarithme est toujours positif quand son nombre l'est",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $\\ln$ est décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $4 > 0$, donc $\\ln(x+1)$ est strictement positif",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Le chiffre d'affaires d'une boutique de Man est multiplié par $3$ chaque trimestre : après $n$ trimestres, il vaut $500 \\times 3^n$ milliers de FCFA (situation d'exemple). On prend $\\ln 2 \\approx 0{,}7$, $\\ln 3 \\approx 1{,}1$ et $\\ln 20 \\approx 3{,}0$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ramène l'inéquation du chiffre d'affaires à $3^n \\geq k$, puis prends le logarithme des deux côtés. Pour les valeurs de ln, décompose en produits et puissances de 2 et de 3.",
+              "questions": [
+                {
+                  "content": "Le chiffre d'affaires vaut $500 \\times 3^n$ milliers de FCFA après $n$ trimestres (situation d'exemple). Quelle est sa valeur après $2$ trimestres, en milliers de FCFA ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Remplacer : on met $n = 2$ dans $500 \\times 3^n$. Étape 2 — Calculer la puissance : $3^2 = 9$. Étape 3 — Multiplier : $500 \\times 9 = 4\\,500$ milliers de FCFA. L'erreur tentante est de calculer $500 \\times 3 \\times 2 = 3\\,000$, en traitant l'exposant comme un facteur.",
+                  "answers": [
+                    {
+                      "content": "4500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'inéquation $500 \\times 3^n \\geq 10\\,000$ équivaut à $3^n \\geq 20$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Isoler la puissance : on divise les deux membres par $500$, qui est positif, donc le sens ne change pas. Étape 2 — Calculer : $\\frac{10\\,000}{500} = 20$, d'où $3^n \\geq 20$. L'affirmation est Vraie. Elle est utile parce qu'elle ramène le problème à la forme $q^n \\geq k$ de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 3 \\approx 1{,}1$ et $\\ln 20 \\approx 3{,}0$. Quel est le plus petit entier $n$ tel que $3^n \\geq 20$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $3^n$ et $20$ sont strictement positifs. Étape 2 — Transformer : $n\\ln 3 \\geq \\ln 20$. Étape 3 — Résoudre : on divise par $\\ln 3 > 0$, le sens est conservé, donc $n \\geq \\frac{3{,}0}{1{,}1} \\approx 2{,}7$. Étape 4 — Conclure : le plus petit entier est $3$ ($3^2 = 9 < 20$ et $3^3 = 27 \\geq 20$). Arrondir $2{,}7$ à $2$ serait une erreur : il faut atteindre le seuil.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$, associe chaque logarithme de la liste à sa valeur approchée.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Décomposer : $9 = 3^2$, $\\frac{1}{3}$ est l'inverse de $3$, $\\frac{2}{3}$ est un quotient, $8 = 2^3$. Étape 2 — Appliquer : $\\ln 9 = 2\\ln 3$, $\\ln\\frac{1}{3} = -\\ln 3$, $\\ln\\frac{2}{3} = \\ln 2 - \\ln 3$, $\\ln 8 = 3\\ln 2$. Étape 3 — Calculer : $2{,}2$ ; $-1{,}1$ ; $0{,}7 - 1{,}1 = -0{,}4$ ; $3 \\times 0{,}7 = 2{,}1$. Inverser le quotient $\\frac{2}{3}$ en $\\frac{3}{2}$ donnerait $0{,}4$ au lieu de $-0{,}4$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 9$",
+                      "match": "$2{,}2$"
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{1}{3}$",
+                      "match": "$-1{,}1$"
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{2}{3}$",
+                      "match": "$-0{,}4$"
+                    },
+                    {
+                      "content": "$\\ln 8$",
+                      "match": "$2{,}1$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entier $k$ vérifie $\\ln\\dfrac{1}{27} = -k\\ln 3$. Complète : $k = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Décomposer : $27 = 3^3$, donc $\\frac{1}{27} = \\frac{1}{3^3}$. Étape 2 — Appliquer : $\\ln\\frac{1}{b} = -\\ln b$ et $\\ln(a^n) = n\\ln a$, donc $\\ln\\frac{1}{27} = -\\ln(3^3) = -3\\ln 3$. Étape 3 — Conclure : $k = 3$. Répondre $27$ ou $9$ revient à confondre l'exposant de la puissance avec le nombre lui-même.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un fabricant de savon de Daloa modélise (situation d'exemple) son coût moyen, en centaines de FCFA par savon, par $C(x) = 2x - \\ln x$, où $x > 0$ est la production en milliers de savons. On prend $\\ln 2 \\approx 0{,}7$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dérive terme à terme : la dérivée de $\\ln x$ est $\\frac{1}{x}$. Écris $C'(x)$ sous la forme d'un seul quotient pour étudier son signe sur $]0\\,;+\\infty[$.",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble de définition de $C(x) = 2x - \\ln x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : le terme $2x$ existe pour tout réel, mais $\\ln x$ n'existe que si $x > 0$. Étape 2 — Conclure : $C$ est définie sur $]0\\,;+\\infty[$. La proposition $\\mathbb{R}$ oublie la condition de $\\ln x$ ; $[0\\,;+\\infty[$ inclut $0$, pour lequel $\\ln 0$ n'existe pas ; $]-\\infty\\,;0[$ est l'ensemble où $\\ln x$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "$]0\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;0[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $C(x) = 2x - \\ln x$ sur $]0\\,;+\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : on travaille sur $]0\\,;+\\infty[$. Étape 2 — Calculer : une somme se dérive terme à terme ; $(2x)' = 2$ et $(\\ln x)' = \\frac{1}{x}$, donc $C'(x) = 2 - \\frac{1}{x}$. Les leurres : $2 - \\ln x$ ne dérive pas le logarithme ; $2 + \\frac{1}{x}$ oublie le signe moins ; $\\frac{2}{x}$ mélange les deux termes.",
+                  "answers": [
+                    {
+                      "content": "$2 - \\dfrac{1}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 - \\ln x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 + \\dfrac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $C(x) = 2x - \\ln x$ avec $C'(x) = \\dfrac{2x - 1}{x}$ sur $]0\\,;+\\infty[$, l'inégalité $C'(x) > 0$ équivaut à $x >$ ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Étudier le signe : sur $]0\\,;+\\infty[$, le dénominateur $x$ est positif, donc $C'(x)$ a le signe de $2x - 1$. Étape 2 — Résoudre : $2x - 1 > 0$ équivaut à $2x > 1$, soit $x > \\frac{1}{2}$. Les leurres : $2$ vient de $x > 2$ en oubliant de diviser ; $1$ vient de $\\ln 1 = 0$ confondu avec le zéro de $C'$ ; $0$ ne tient pas compte de $2x - 1$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(x) = 2x - \\ln x$, avec $\\ln 2 \\approx 0{,}7$. Calcule une valeur approchée de $C\\left(\\dfrac{1}{2}\\right)$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Remplacer : $C\\left(\\frac{1}{2}\\right) = 2 \\times \\frac{1}{2} - \\ln\\frac{1}{2} = 1 - \\ln\\frac{1}{2}$. Étape 2 — Appliquer : $\\ln\\frac{1}{2} = -\\ln 2$, donc $C\\left(\\frac{1}{2}\\right) = 1 + \\ln 2$. Étape 3 — Calculer : $1 + 0{,}7 = 1{,}7$ centaine de FCFA. L'erreur tentante est d'oublier le signe de $\\ln\\frac{1}{2}$ et de trouver $1 - 0{,}7 = 0{,}3$.",
+                  "answers": [
+                    {
+                      "content": "1,7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $C(x) = 2x - \\ln x$ sur $]0\\,;+\\infty[$, avec $C'(x) = \\dfrac{2x - 1}{x}$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Étudier le signe : $C'(x)$ a le signe de $2x - 1$, négatif pour $x < \\frac{1}{2}$ et positif pour $x > \\frac{1}{2}$. Étape 2 — Conclure : $C$ est décroissante sur $]0\\,;\\frac{1}{2}]$ puis croissante sur $[\\frac{1}{2}\\,;+\\infty[$. Elle atteint donc son minimum en $x = \\frac{1}{2}$. Les affirmations inverses sont fausses ; $C'(x) = 0$ pour $x = 2$ est faux, car $2 \\times 2 - 1 = 3$ n'est pas nul.",
+                  "answers": [
+                    {
+                      "content": "$C$ est décroissante sur $\\left]0\\,;\\dfrac{1}{2}\\right]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est croissante sur $\\left[\\dfrac{1}{2}\\,;+\\infty\\right[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est croissante sur $\\left]0\\,;\\dfrac{1}{2}\\right]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ est décroissante sur $\\left[\\dfrac{1}{2}\\,;+\\infty\\right[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C'(x) = 0$ pour $x = 2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier avec ln",
+          "notions": "contre-exemples sur les propriétés de ln, justification par la croissance stricte de ln, rédaction d'une inéquation avec condition d'existence, variations de ln u justifiées par le signe de la dérivée, comparaison de deux croissances.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Pour chaque affirmation sur le logarithme népérien, on décide si elle est vraie pour tous les nombres strictement positifs concernés. Une affirmation fausse se réfute par un seul contre-exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour réfuter une égalité, cherche des valeurs simples ($1$, $2$, $e$) qui la rendent fausse. Pour justifier une propriété, appuie-toi sur le cours : $\\ln(ab)$, $\\ln\\frac{a}{b}$, $\\ln(a^n)$ et la croissance stricte de $\\ln$.",
+              "questions": [
+                {
+                  "content": "Affirmation : pour tous les nombres $a > 0$ et $b > 0$, on a $\\ln(a + b) = \\ln a + \\ln b$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Chercher un contre-exemple : on prend $a = b = 1$. Étape 2 — Calculer chaque membre : $\\ln(1 + 1) = \\ln 2 \\approx 0{,}7$, alors que $\\ln 1 + \\ln 1 = 0 + 0 = 0$. Étape 3 — Conclure : les deux membres diffèrent, l'égalité est fausse. Le logarithme transforme un produit en somme, jamais une somme : $\\ln a + \\ln b = \\ln(ab)$, pas $\\ln(a+b)$. L'affirmation est Fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut réfuter l'égalité $\\ln(a + b) = \\ln a + \\ln b$ pour des nombres strictement positifs. Quel couple $(a\\,;b)$ est un contre-exemple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tester chaque couple : il faut un couple pour lequel les deux membres diffèrent. Étape 2 — Calculer : pour $(1\\,;1)$, $\\ln 2 \\neq 0$ ; pour $(2\\,;2)$, $\\ln 4 = 2\\ln 2$ : l'égalité est vraie ; pour $(3\\,;1{,}5)$, $\\ln 4{,}5 = \\ln 3 + \\ln 1{,}5$ car $3 + 1{,}5 = 3 \\times 1{,}5$ : l'égalité est vraie. Étape 3 — Conclure : seul $(1\\,;1)$ réfute l'égalité. Un exemple où elle marche, comme $(2\\,;2)$, ne prouve rien : c'est une coïncidence ($a + b = ab$).",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;1{,}5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a > 0$ et $b > 0$, quelles sont les deux égalités vraies pour tous ces nombres ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Décomposer : on repère un produit avec un carré, un quotient avec un carré, une somme de carrés. Étape 2 — Appliquer : $\\ln(a^2b) = \\ln(a^2) + \\ln b = 2\\ln a + \\ln b$ et $\\ln\\frac{a}{b^2} = \\ln a - \\ln(b^2) = \\ln a - 2\\ln b$. Étape 3 — Réfuter les leurres : $\\ln(a^2 + b^2)$ porte sur une somme et ne se sépare pas ; $\\ln\\frac{a}{b}$ est une différence, pas le quotient $\\frac{\\ln a}{\\ln b}$ ; $\\ln(ab^3) = \\ln a + 3\\ln b$, qui n'est pas $3\\ln(ab) = 3\\ln a + 3\\ln b$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln(a^2b) = 2\\ln a + \\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{a}{b^2} = \\ln a - 2\\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a^2 + b^2) = 2\\ln a + 2\\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{a}{b} = \\dfrac{\\ln a}{\\ln b}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(ab^3) = 3\\ln(ab)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour deux nombres $a > 0$ et $b > 0$, si $\\ln a = \\ln b$, alors $a = b$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler : sur $]0\\,;+\\infty[$, la dérivée de $\\ln$ est $\\frac{1}{x}$, qui est strictement positive, donc $\\ln$ est strictement croissante. Étape 2 — Raisonner : si $a < b$, alors $\\ln a < \\ln b$ ; si $a > b$, alors $\\ln a > \\ln b$. Dans les deux cas les logarithmes diffèrent. Étape 3 — Conclure : si $\\ln a = \\ln b$, ni l'un ni l'autre n'est possible, donc $a = b$. L'affirmation est Vraie : c'est l'équivalence $\\ln a = \\ln b \\iff a = b$ du cours.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour justifier que, pour $x > 0$, l'inégalité $\\ln x < \\ln 3$ équivaut à $x < 3$, quelle propriété de $\\ln$ utilise-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le besoin : on passe d'une comparaison de logarithmes à une comparaison de nombres, sans changer le sens. Étape 2 — Nommer la propriété : $\\ln$ est strictement croissante sur $]0\\,;+\\infty[$, car sa dérivée $\\frac{1}{x}$ est positive. Étape 3 — Écarter les leurres : $\\ln$ n'est pas positive partout (par exemple $\\ln 0{,}5 < 0$) ; elle n'est pas décroissante ; et $\\ln 3$ ne vaut pas $1$ (c'est $\\ln e$ qui vaut $1$).",
+                  "answers": [
+                    {
+                      "content": "$\\ln$ est strictement croissante sur $]0\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln$ est positive sur $]0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln$ est décroissante sur $]0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 3 = 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Léa doit résoudre l'inéquation $\\ln(x - 4) \\leq \\ln 2$. Elle veut rédiger une solution rigoureuse, avec la condition d'existence et chaque justification.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Commence par la condition d'existence, puis compare ce qui est dans les $\\ln$ en gardant le sens (car $\\ln$ est croissante), et termine en gardant seulement les valeurs qui respectent la condition.",
+              "questions": [
+                {
+                  "content": "Pour résoudre $\\ln(x - 4) \\leq \\ln 2$, quelle est la condition d'existence ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le nombre écrit dans le $\\ln$ de gauche est $x - 4$, et il doit être strictement positif. Étape 2 — Résoudre : $x - 4 > 0$ équivaut à $x > 4$ (l'inégalité est stricte). Les leurres : $x > 2$ lit le $2$ du membre de droite ; $x \\geq 4$ autorise $x = 4$, pour lequel $\\ln 0$ n'existe pas ; $x > 0$ est la condition de $\\ln x$, pas de $\\ln(x - 4)$.",
+                  "answers": [
+                    {
+                      "content": "$x > 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x > 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\geq 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x > 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln(x - 4) \\leq \\ln 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Condition : $x > 4$. Étape 2 — Comparer : $\\ln$ est croissante, le sens est conservé, donc $x - 4 \\leq 2$, soit $x \\leq 6$. Étape 3 — Conclure : on garde $4 < x \\leq 6$, c'est-à-dire $]4\\,;6]$. La proposition $]-\\infty\\,;6]$ oublie la condition d'existence ; $[4\\,;6]$ inclut $4$, où $\\ln 0$ n'existe pas ; $]0\\,;6]$ utilise la condition de $\\ln x$.",
+                  "answers": [
+                    {
+                      "content": "$]4\\,;6]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[4\\,;6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;6]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x = 3$ est solution de l'inéquation $\\ln(x - 4) \\leq \\ln 2$, car $3 - 4 = -1 \\leq 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Condition : il faut $x - 4 > 0$. Étape 2 — Vérifier : pour $x = 3$, $x - 4 = -1 < 0$, donc $\\ln(-1)$ n'existe pas. Étape 3 — Conclure : $3$ n'est pas solution. L'affirmation est Fausse. Elle compare $-1$ et $2$ sans vérifier que $\\ln(-1)$ existe : c'est l'oubli de la condition d'existence.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x = 6$ est solution de l'inéquation $\\ln(x - 4) \\leq \\ln 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Condition : $6 - 4 = 2 > 0$, donc $\\ln(6 - 4)$ existe. Étape 2 — Calculer : pour $x = 6$, le membre de gauche vaut $\\ln 2$. Étape 3 — Conclure : $\\ln 2 \\leq \\ln 2$ est vrai, car l'inégalité est large. L'affirmation est Vraie. Exclure $6$ serait confondre l'inégalité large $\\leq$ avec une inégalité stricte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la rédaction pour résoudre $\\ln(x - 4) \\leq \\ln 2$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Condition : $x - 4 > 0$, donc $x > 4$. Étape 2 — Comparer : la croissance stricte de $\\ln$ permet de passer à $x - 4 \\leq 2$. Étape 3 — Résoudre : on obtient $x \\leq 6$. Étape 4 — Conclure : on garde les valeurs qui respectent la condition, soit $]4\\,;6]$. Conclure avant d'avoir posé la condition conduit à garder $x = 0$ ou $x = 3$, pour lesquels le $\\ln$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Condition d'existence : $x - 4 > 0$, donc $x > 4$."
+                    },
+                    {
+                      "content": "Comme $\\ln$ est strictement croissante, $\\ln(x-4) \\leq \\ln 2$ équivaut à $x - 4 \\leq 2$."
+                    },
+                    {
+                      "content": "On résout : $x \\leq 6$."
+                    },
+                    {
+                      "content": "On garde ce qui respecte la condition : $S = ]4\\,;6]$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, quels sont les deux solutions de $\\ln(x - 4) \\leq \\ln 2$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Condition : une solution vérifie $x > 4$. Étape 2 — Comparer : elle vérifie aussi $x \\leq 6$. Étape 3 — Conclure : les solutions sont dans $]4\\,;6]$, donc $4{,}5$ et $5$. Le nombre $3$ est écarté par la condition d'existence ($3 - 4 < 0$) ; $7$ et $10$ vérifient la condition mais dépassent $6$ : $\\ln 3 > \\ln 2$ et $\\ln 6 > \\ln 2$.",
+                  "answers": [
+                    {
+                      "content": "$4{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la fonction $f(x) = \\ln(x^2 + 4)$ et on justifie chaque affirmation avec le cours. On prend $\\ln 2 \\approx 0{,}7$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Détermine d'abord l'ensemble de définition en cherchant où $x^2 + 4 > 0$, puis dérive avec $(\\ln u)' = \\frac{u'}{u}$. Le signe de $f'$ est celui de son numérateur quand le dénominateur est positif.",
+              "questions": [
+                {
+                  "content": "Pourquoi la fonction $f(x) = \\ln(x^2 + 4)$ est-elle définie sur $\\mathbb{R}$ tout entier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : $\\ln u$ existe là où $u(x) > 0$. Étape 2 — Étudier $u$ : $x^2 \\geq 0$ pour tout réel, donc $x^2 + 4 \\geq 4 > 0$. Étape 3 — Conclure : $x^2 + 4$ est strictement positif pour tout $x$, donc $f$ est définie sur $\\mathbb{R}$. Dire qu'il faut $x > 0$ confond avec le domaine de $\\ln x$ ; dire que $\\ln$ est définie sur $\\mathbb{R}$ est faux : $\\ln$ n'existe que sur $]0\\,;+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "Parce que $x^2 + 4 > 0$ pour tout nombre réel $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $x^2 + 4 > 0$ seulement si $x > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $\\ln$ est définie sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x^2 + 4)$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie sur $\\mathbb{R}$. Étape 2 — Calculer : $u(x) = x^2 + 4$ et $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2+4}$. Les leurres : $\\frac{1}{x^2+4}$ oublie $u'$ ; $\\frac{x}{x^2+4}$ dérive $x^2$ en $x$ ; $2x$ oublie de diviser par $u$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2x}{x^2+4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{x^2+4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{x}{x^2+4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour $f(x) = \\ln(x^2 + 4)$ avec $f'(x) = \\dfrac{2x}{x^2+4}$, le signe de $f'(x)$ est celui de $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : $f'(x)$ est un quotient d'un numérateur $2x$ par un dénominateur $x^2 + 4$. Étape 2 — Étudier le signe : le dénominateur est strictement positif pour tout $x$, donc $f'(x)$ a le signe de $2x$, c'est-à-dire celui de $x$. Étape 3 — Conclure : négatif si $x < 0$, nul si $x = 0$, positif si $x > 0$. L'affirmation est Vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\ln(x^2 + 4)$ avec $f'(x) = \\dfrac{2x}{x^2+4}$ sur $\\mathbb{R}$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Étudier le signe : $f'(x)$ a le signe de $x$. Étape 2 — Conclure : $f'(x) \\leq 0$ pour $x \\leq 0$ donc $f$ est décroissante sur $]-\\infty\\,;0]$ ; $f'(x) \\geq 0$ pour $x \\geq 0$ donc $f$ est croissante sur $[0\\,;+\\infty[$. Les leurres : croissante sur $\\mathbb{R}$ ou décroissante sur $[0\\,;+\\infty[$ contredisent le signe de $f'$ ; $f'(x) > 0$ pour tout $x$ est faux, car $f'(0) = 0$ et $f'(-1) < 0$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;0]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $[0\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) > 0$ pour tout réel $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(x^2 + 4)$, avec $\\ln 2 \\approx 0{,}7$. Calcule une valeur approchée du minimum de $f$, c'est-à-dire de $f(0)$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Repérer : $f$ décroît puis croît, avec un changement en $x = 0$, donc son minimum est $f(0)$. Étape 2 — Remplacer : $f(0) = \\ln 4$. Étape 3 — Appliquer : $4 = 2^2$, donc $\\ln 4 = 2\\ln 2$. Étape 4 — Calculer : $2 \\times 0{,}7 = 1{,}4$. L'erreur tentante est de croire que $\\ln 4 = 4 \\times 0{,}7$ ou que le minimum est $0$ parce que $\\ln 1 = 0$.",
+                  "answers": [
+                    {
+                      "content": "1,4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour tout réel $x$, on a $\\ln(x^2 + 4) \\geq \\ln 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Comparer les nombres : $x^2 \\geq 0$, donc $x^2 + 4 \\geq 4$ pour tout réel $x$. Étape 2 — Appliquer la croissance : $\\ln$ est croissante, elle conserve l'ordre, donc $\\ln(x^2 + 4) \\geq \\ln 4$. Étape 3 — Conclure : l'affirmation est Vraie, et l'égalité n'a lieu qu'en $x = 0$. On retrouve que $f(0) = \\ln 4$ est le minimum.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un opérateur compare deux offres. Le nombre d'abonnés de l'offre A vaut $500 \\times 2^n$ et celui de l'offre B vaut $100 \\times 3^n$ après $n$ mois (situation d'exemple). On prend $\\ln 2 \\approx 0{,}7$, $\\ln 3 \\approx 1{,}1$ et $\\ln 5 \\approx 1{,}6$. On cherche à partir de quand chaque offre atteint $2\\,500$ abonnés.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Ramène chaque condition à $q^n \\geq k$, prends le logarithme des deux côtés et divise par $\\ln q > 0$. Pour $\\ln 25$, utilise $25 = 5^2$.",
+              "questions": [
+                {
+                  "content": "L'offre A compte $500 \\times 2^n$ abonnés après $n$ mois. On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 5 \\approx 1{,}6$. Quel est le plus petit entier $n$ tel que $500 \\times 2^n \\geq 2\\,500$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : on divise par $500 > 0$, donc $2^n \\geq 5$. Étape 2 — Transformer : $n\\ln 2 \\geq \\ln 5$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$, le sens est conservé, donc $n \\geq \\frac{1{,}6}{0{,}7} \\approx 2{,}3$. Étape 4 — Conclure : le plus petit entier est $3$ ($2^2 = 4 < 5$ et $2^3 = 8 \\geq 5$).",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'offre B compte $100 \\times 3^n$ abonnés après $n$ mois. On prend $\\ln 3 \\approx 1{,}1$ et $\\ln 5 \\approx 1{,}6$. Quel est le plus petit entier $n$ tel que $100 \\times 3^n \\geq 2\\,500$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : on divise par $100 > 0$, donc $3^n \\geq 25$. Étape 2 — Transformer : $n\\ln 3 \\geq \\ln 25$, avec $\\ln 25 = 2\\ln 5 \\approx 3{,}2$. Étape 3 — Résoudre : on divise par $\\ln 3 > 0$, donc $n \\geq \\frac{3{,}2}{1{,}1} \\approx 2{,}9$. Étape 4 — Conclure : le plus petit entier est $3$ ($3^2 = 9 < 25$ et $3^3 = 27 \\geq 25$).",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'inéquation $500 \\times 2^n \\geq 2\\,500$ équivaut à $2^n \\geq 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Isoler la puissance : on divise les deux membres par $500$, qui est strictement positif, donc le sens est conservé. Étape 2 — Calculer : $\\frac{2\\,500}{500} = 5$. Étape 3 — Conclure : on obtient $2^n \\geq 5$. L'affirmation est Vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : l'inéquation $100 \\times 3^n \\geq 2\\,500$ équivaut à $n \\geq \\dfrac{25}{3}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Isoler : $100 \\times 3^n \\geq 2\\,500$ donne $3^n \\geq 25$. Étape 2 — Tester : pour $n = 3$, $3^3 = 27 \\geq 25$ est vrai, mais $3 \\geq \\frac{25}{3} \\approx 8{,}3$ est faux. Les deux inégalités ne sont donc pas équivalentes. Étape 3 — Conclure : l'affirmation est Fausse. Elle traite $3^n$ comme $3 \\times n$ ; la bonne méthode prend le logarithme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'offre A compte $500 \\times 2^n$ abonnés et l'offre B compte $100 \\times 3^n$ abonnés après $n$ mois. Après $3$ mois, quelle offre compte le plus d'abonnés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Remplacer : on met $n = 3$ dans chaque formule. Étape 2 — Calculer : offre A, $500 \\times 2^3 = 500 \\times 8 = 4\\,000$ ; offre B, $100 \\times 3^3 = 100 \\times 27 = 2\\,700$. Étape 3 — Comparer : $4\\,000 > 2\\,700$, donc l'offre A est devant. La réponse « offre B » vient de la base $3$ plus grande que la base $2$, alors que le départ de A est cinq fois plus haut ; « égalité » est faux puisque les nombres diffèrent.",
+                  "answers": [
+                    {
+                      "content": "L'offre A",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'offre B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles en comptent autant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 3 \\approx 1{,}1$ et $\\ln 5 \\approx 1{,}6$. Calcule une valeur approchée de $\\ln 15$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $15 = 3 \\times 5$, un produit de deux nombres dont on connaît le logarithme. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, $\\ln 15 = \\ln 3 + \\ln 5$. Étape 3 — Calculer : $1{,}1 + 1{,}6 = 2{,}7$. Multiplier les logarithmes ($1{,}1 \\times 1{,}6$) est l'erreur classique : ln transforme un produit en somme.",
+                  "answers": [
+                    {
+                      "content": "2,7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan sur la fonction logarithme népérien",
+          "notions": "bilan des quatre notions : propriétés algébriques de ln, signe et comparaison de logarithmes, équations et inéquations (condition d'existence, plus petit entier tel que q^n dépasse un seuil), dérivée de ln u, ensemble de définition, variations et limite.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On calcule et on compare des logarithmes. Tous les nombres écrits dans un $\\ln$ sont strictement positifs. On donne les valeurs approchées $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Décompose chaque nombre en produit, quotient ou puissance de 2 et de 3. Pour comparer ou ranger, compare simplement les nombres écrits dans les $\\ln$ : $\\ln$ conserve l'ordre.",
+              "questions": [
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $\\ln 36$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $36 = 2^2 \\times 3^2$. Étape 2 — Appliquer : $\\ln 36 = \\ln(2^2) + \\ln(3^2) = 2\\ln 2 + 2\\ln 3$. Étape 3 — Calculer : $2 \\times 0{,}7 + 2 \\times 1{,}1 = 1{,}4 + 2{,}2 = 3{,}6$. L'erreur classique est d'écrire $\\ln 36 = 36 \\times 0{,}7$ ou d'oublier un exposant : chaque exposant devient un facteur devant le logarithme de sa base.",
+                  "answers": [
+                    {
+                      "content": "3,6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $\\ln\\dfrac{2}{9}$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $\\frac{2}{9}$ est un quotient avec $9 = 3^2$. Étape 2 — Appliquer : $\\ln\\frac{2}{9} = \\ln 2 - \\ln(3^2) = \\ln 2 - 2\\ln 3$. Étape 3 — Calculer : $0{,}7 - 2 \\times 1{,}1 = 0{,}7 - 2{,}2 = -1{,}5$. Le résultat est négatif, ce qui est cohérent : $\\frac{2}{9}$ est entre $0$ et $1$. Répondre $1{,}5$ oublie le signe.",
+                  "answers": [
+                    {
+                      "content": "-1,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le signe de $\\ln\\dfrac{9}{4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Vérifier : $\\frac{9}{4}$ est strictement positif, donc $\\ln\\frac{9}{4}$ existe. Étape 2 — Comparer à $1$ : $\\frac{9}{4} = 2{,}25 > 1$. Étape 3 — Conclure : $\\ln$ est croissante et $\\ln 1 = 0$, donc $\\ln\\frac{9}{4} > 0$ : il est positif. « Négatif » oublie que $\\frac{9}{4}$ dépasse $1$ ; « nul » ne vaut que pour le nombre $1$ ; « n'existe pas » suppose à tort que le nombre est négatif.",
+                  "answers": [
+                    {
+                      "content": "Positif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le logarithme n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range du plus petit au plus grand : $\\ln 36$, $\\ln\\dfrac{1}{2}$, $\\ln 1$, $\\ln\\dfrac{3}{2}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Vérifier : les quatre nombres sont strictement positifs. Étape 2 — Comparer les nombres : $\\frac{1}{2} < 1 < \\frac{3}{2} < 36$. Étape 3 — Conclure : $\\ln$ est croissante, elle conserve l'ordre, donc $\\ln\\frac{1}{2} < \\ln 1 < \\ln\\frac{3}{2} < \\ln 36$ : un logarithme négatif, puis $0$, puis deux logarithmes positifs. Placer $\\ln\\frac{1}{2}$ à la fin vient de la confusion entre le signe moins du résultat et la taille du nombre.",
+                  "answers": [
+                    {
+                      "content": "$\\ln\\dfrac{1}{2}$"
+                    },
+                    {
+                      "content": "$\\ln 1$"
+                    },
+                    {
+                      "content": "$\\ln\\dfrac{3}{2}$"
+                    },
+                    {
+                      "content": "$\\ln 36$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $\\ln\\dfrac{2}{9} < \\ln\\dfrac{1}{4}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Vérifier : $\\frac{2}{9}$ et $\\frac{1}{4}$ sont strictement positifs. Étape 2 — Comparer : $\\frac{2}{9} \\approx 0{,}22$ et $\\frac{1}{4} = 0{,}25$, donc $\\frac{2}{9} < \\frac{1}{4}$ (car $8 < 9$ en réduisant au dénominateur $36$). Étape 3 — Conclure : $\\ln$ est strictement croissante, donc $\\ln\\frac{2}{9} < \\ln\\frac{1}{4}$. L'affirmation est Vraie. Dire qu'elle est fausse revient à comparer les dénominateurs $9$ et $4$ à l'envers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On résout des équations et des inéquations avec le logarithme népérien. On commence toujours par la condition d'existence : tout nombre écrit dans un $\\ln$ doit être strictement positif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque question : condition d'existence, mise sous la forme $\\ln(\\ldots)$, comparaison en gardant le sens (car $\\ln$ est croissante), puis conclusion. Pour un exposant inconnu, prends le logarithme des deux côtés.",
+              "questions": [
+                {
+                  "content": "Résous $\\ln(3x - 1) = \\ln 8$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $3x - 1 > 0$, donc $x > \\frac{1}{3}$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $3x - 1 = 8$, soit $3x = 9$ et $x = 3$. Étape 4 — Conclure : $3 > \\frac{1}{3}$ respecte la condition. Répondre $x = 8$ oublie les opérations autour de $x$ dans le $\\ln$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\ln(2x) \\leq \\ln 10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Condition : $2x > 0$, donc $x > 0$. Étape 2 — Transformer : les deux membres sont déjà de la forme $\\ln(\\ldots)$. Étape 3 — Résoudre : $\\ln$ est croissante, le sens est conservé, donc $2x \\leq 10$, soit $x \\leq 5$. Étape 4 — Conclure : avec $x > 0$, on obtient $]0\\,;5]$. La proposition $]-\\infty\\,;5]$ oublie la condition ; $]0\\,;10]$ oublie de diviser par $2$ ; $[5\\,;+\\infty[$ inverse le sens.",
+                  "answers": [
+                    {
+                      "content": "$]0\\,;5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;10]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[5\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x = 0$ est solution de l'équation $\\ln(2x + 1) = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Condition : pour $x = 0$, $2x + 1 = 1 > 0$, donc $\\ln(2x+1)$ existe. Étape 2 — Calculer : $\\ln(1) = 0$. Étape 3 — Conclure : l'égalité est vérifiée, $0$ est solution. L'affirmation est Vraie. Dire qu'elle est fausse vient de la confusion entre $x = 0$ (la valeur de $x$) et $2x + 1 = 0$ (la valeur du nombre dans le $\\ln$).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : l'équation $\\ln x = 3\\ln 2$ a pour solution $x = $ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Condition : $x > 0$. Étape 2 — Transformer : $3\\ln 2 = \\ln(2^3) = \\ln 8$, donc l'équation devient $\\ln x = \\ln 8$. Étape 3 — Résoudre : $\\ln u = \\ln v$ équivaut à $u = v$, donc $x = 8$. Étape 4 — Conclure : $8 > 0$ convient. Répondre $6$ revient à calculer $3 \\times 2$ au lieu de $2^3$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre de visiteurs d'un site vaut $5^n$ après $n$ jours (situation d'exemple). On prend $\\ln 5 \\approx 1{,}6$ et $\\ln 200 \\approx 5{,}3$. Quel est le plus petit entier $n$ tel que $5^n \\geq 200$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Condition : $5^n$ et $200$ sont strictement positifs. Étape 2 — Transformer : $n\\ln 5 \\geq \\ln 200$. Étape 3 — Résoudre : on divise par $\\ln 5 > 0$, le sens est conservé, donc $n \\geq \\frac{5{,}3}{1{,}6} \\approx 3{,}3$. Étape 4 — Conclure : le plus petit entier est $4$ ($5^3 = 125 < 200$ et $5^4 = 625 \\geq 200$). Écrire $n \\geq \\frac{200}{5} = 40$ traite $5^n$ comme $5 \\times n$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : $x = 1$ est solution de l'inéquation $\\ln(x - 3) \\leq \\ln 2$, car $1 - 3 = -2 \\leq 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Condition : il faut $x - 3 > 0$, donc $x > 3$. Étape 2 — Vérifier : pour $x = 1$, $x - 3 = -2 < 0$, donc $\\ln(-2)$ n'existe pas. Étape 3 — Conclure : $1$ n'est pas solution. L'affirmation est Fausse : elle compare $-2$ et $2$ sans vérifier la condition d'existence. L'ensemble des solutions est $]3\\,;5]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la fonction $f(x) = \\ln(6 - 2x)$ : ensemble de définition, dérivée, variations et comportement au bord. On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Cherche d'abord où $6 - 2x > 0$. Pour la dérivée, $u'(x) = -2$ : n'oublie pas le signe. Au bord $x = 3$, le nombre $6 - 2x$ se rapproche de $0$ par valeurs positives.",
+              "questions": [
+                {
+                  "content": "L'ensemble de définition de $f(x) = \\ln(6 - 2x)$ est ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie là où $u(x) = 6 - 2x > 0$. Étape 2 — Résoudre : $6 > 2x$, donc $x < 3$ (on divise par $2$, positif, le sens est conservé). Étape 3 — Conclure : l'ensemble de définition est $]-\\infty\\,;3[$. La proposition $]3\\,;+\\infty[$ inverse le sens ; $]-\\infty\\,;6[$ oublie de diviser par $2$ ; $\\mathbb{R}$ oublie que ln n'existe que pour un nombre strictement positif.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;6[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(6 - 2x)$ sur $]-\\infty\\,;3[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Déterminer : $f$ est définie sur $]-\\infty\\,;3[$. Étape 2 — Calculer : $u(x) = 6 - 2x$ et $u'(x) = -2$, donc $f'(x) = \\frac{-2}{6-2x}$. Les leurres : $\\frac{2}{6-2x}$ oublie le signe de $u'$ ; $\\frac{1}{6-2x}$ oublie $u'$ (piège de la fiche) ; $\\frac{-2x}{6-2x}$ prend $-2x$ pour $u'$ au lieu de la dérivée de $6 - 2x$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{-2}{6-2x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{6-2x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{6-2x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{-2x}{6-2x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : la fonction $f(x) = \\ln(6 - 2x)$ est décroissante sur $]-\\infty\\,;3[$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = \\frac{-2}{6-2x}$. Étape 2 — Étudier le signe : sur $]-\\infty\\,;3[$, $6 - 2x > 0$ et $-2 < 0$, donc $f'(x) < 0$. Étape 3 — Conclure : $f$ est strictement décroissante. L'affirmation est Vraie. Croire que $f$ croît parce que $\\ln$ croît est le piège : $6 - 2x$ diminue quand $x$ augmente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(6 - 2x)$, avec $\\ln 2 \\approx 0{,}7$ et $\\ln 3 \\approx 1{,}1$. Calcule une valeur approchée de $f(0)$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Remplacer : $f(0) = \\ln(6 - 0) = \\ln 6$. Étape 2 — Décomposer : $6 = 2 \\times 3$. Étape 3 — Appliquer : $\\ln 6 = \\ln 2 + \\ln 3$. Étape 4 — Calculer : $0{,}7 + 1{,}1 = 1{,}8$. Multiplier les logarithmes ($0{,}7 \\times 1{,}1$) est l'erreur classique : ln transforme un produit en somme.",
+                  "answers": [
+                    {
+                      "content": "1,8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(6 - 2x)$ sur $]-\\infty\\,;3[$. Calcule $f'(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0.01,
+                  "explanation": "Étape 1 — Déterminer : $1 < 3$, donc $1$ est dans l'ensemble de définition. Étape 2 — Calculer : $f'(x) = \\frac{-2}{6-2x}$. Étape 3 — Remplacer : $6 - 2 \\times 1 = 4$, donc $f'(1) = \\frac{-2}{4} = -0{,}5$. Répondre $0{,}5$ oublie le signe de $u'$ ; répondre $-\\frac{2}{6} \\approx -0{,}33$ oublie de remplacer $x$ dans le dénominateur.",
+                  "answers": [
+                    {
+                      "content": "-0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand $x$ se rapproche de $3$ par valeurs inférieures à $3$, vers quoi tend $f(x) = \\ln(6 - 2x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Étudier le nombre : quand $x$ tend vers $3$ par valeurs inférieures, $6 - 2x$ se rapproche de $0$ par valeurs strictement positives. Étape 2 — Appliquer la limite du cours : quand un nombre se rapproche de $0$ par valeurs positives, son logarithme tend vers $-\\infty$. Étape 3 — Conclure : $f(x)$ tend vers $-\\infty$. Répondre $0$ confond avec $\\ln 1 = 0$ ; répondre $+\\infty$ confond avec le comportement en $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un club de lecture d'Abidjan compte $40 \\times 2^n$ membres après $n$ mois (situation d'exemple). On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 20 \\approx 3{,}0$. On mêle calcul, propriétés de ln, résolution et variations.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour un seuil, ramène l'inéquation à $2^n \\geq k$, prends le logarithme des deux côtés et divise par $\\ln 2 > 0$. Pour $\\ln(40 \\times 2^n)$, sépare le produit en somme, puis utilise la puissance.",
+              "questions": [
+                {
+                  "content": "Un club compte $40 \\times 2^n$ membres après $n$ mois (situation d'exemple). Combien de membres compte-t-il après $5$ mois ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Remplacer : on met $n = 5$ dans $40 \\times 2^n$. Étape 2 — Calculer la puissance : $2^5 = 32$. Étape 3 — Multiplier : $40 \\times 32 = 1\\,280$ membres. L'erreur tentante est de calculer $40 \\times 2 \\times 5 = 400$, en traitant l'exposant comme un facteur.",
+                  "answers": [
+                    {
+                      "content": "1280",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend $\\ln 2 \\approx 0{,}7$. Calcule une valeur approchée de $\\ln 8$, arrondie à $0{,}1$ près.",
+                  "question_type": "numeric",
+                  "tolerance": 0.05,
+                  "explanation": "Étape 1 — Décomposer : $8 = 2^3$. Étape 2 — Appliquer : $\\ln(2^3) = 3\\ln 2$. Étape 3 — Calculer : $3 \\times 0{,}7 = 2{,}1$. Répondre $8 \\times 0{,}7$ ou $3 + 0{,}7$ revient à ne pas utiliser la propriété de la puissance.",
+                  "answers": [
+                    {
+                      "content": "2,1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un club compte $40 \\times 2^n$ membres après $n$ mois. On prend $\\ln 2 \\approx 0{,}7$ et $\\ln 20 \\approx 3{,}0$. Quel est le plus petit entier $n$ tel que $40 \\times 2^n \\geq 800$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : on divise par $40 > 0$, donc $2^n \\geq 20$. Étape 2 — Transformer : $n\\ln 2 \\geq \\ln 20$. Étape 3 — Résoudre : on divise par $\\ln 2 > 0$, le sens est conservé, donc $n \\geq \\frac{3{,}0}{0{,}7} \\approx 4{,}3$. Étape 4 — Conclure : le plus petit entier est $5$ ($2^4 = 16 < 20$ et $2^5 = 32 \\geq 20$). Arrondir $4{,}3$ à $4$ ne suffit pas : il faut atteindre le seuil.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Affirmation : pour tout entier $n$, on a $\\ln(40 \\times 2^n) = \\ln 40 + n\\ln 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Décomposer : $40 \\times 2^n$ est un produit. Étape 2 — Appliquer : le logarithme d'un produit est la somme des logarithmes, $\\ln(40 \\times 2^n) = \\ln 40 + \\ln(2^n)$. Étape 3 — Appliquer la puissance : $\\ln(2^n) = n\\ln 2$. Étape 4 — Conclure : l'affirmation est Vraie. Dire qu'elle est fausse vient de la confusion entre un produit et une somme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $h(n) = \\ln 40 + n\\ln 2$ pour $n \\geq 0$. Quelle affirmation sur son sens de variation est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $\\ln 40$ est une constante, de dérivée nulle, et la dérivée de $n\\ln 2$ est $\\ln 2$, donc $h'(n) = \\ln 2$. Étape 2 — Étudier le signe : $2 > 1$, donc $\\ln 2 > \\ln 1 = 0$. Étape 3 — Conclure : $h' > 0$, donc $h$ est croissante. Les leurres : « décroissante car $\\ln 2 < 0$ » est faux ; « constante » oublie que $n\\ln 2$ dépend de $n$ ; « dérivée $\\frac{1}{n}$ » confond avec la dérivée de $\\ln n$.",
+                  "answers": [
+                    {
+                      "content": "Croissante, car sa dérivée vaut $\\ln 2$, qui est positif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Décroissante, car sa dérivée vaut $\\ln 2$, qui est négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Constante, car la dérivée de $\\ln 40$ est nulle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante, car sa dérivée vaut $\\dfrac{1}{n}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un club compte $40 \\times 2^n$ membres après $n$ mois. Complète : le club passe de $40$ à $640$ membres en ___ mois.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Poser l'équation : $40 \\times 2^n = 640$. Étape 2 — Isoler : on divise par $40$, donc $2^n = 16$. Étape 3 — Résoudre : $16 = 2^4$, donc $n = 4$ (avec les logarithmes : $n\\ln 2 = \\ln 16 = 4\\ln 2$, d'où $n = 4$). Étape 4 — Conclure : $4$ mois. Répondre $16$ ou $8$ confond l'exposant avec le résultat de la puissance.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

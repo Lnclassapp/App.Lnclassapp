@@ -155,10 +155,16 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
       sign_in_as user
       get classroom_assignment_path(@classroom.public_id, @assignment.public_id)
       assert_response :forbidden
-      get classroom_course_path(@classroom.public_id, @course.slug)
-      assert_response :forbidden
       sign_out
     end
+    # suivi-classe-lecon, Lot 0 : la leçon dans la classe est ouverte à la direction (lecture) ; archivée, elle n'a plus de page (404).
+    sign_in_as @student
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_response :forbidden
+    sign_out
+    sign_in_as create_school_admin(school: @school)
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_response :not_found
   end
 
   test "the direction keeps its restore gesture: its page of the archived classroom is 404, then readable once restored" do

@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Assessment::SheetChecksController
 # Rôle : « Vérifier ma réponse » sur la feuille de la leçon : une copie rendue, puis la page de résultat de la copie (return_to : le retour vers la feuille ou « Ma classe ») ; refus dans l'exercice en Turbo Stream, réponses gardées ; sans JS, retour à la leçon
-# ADR  : 0121 (§4), 0054, 0091 (§4.4), 0115 · UDR : 0149 §3 · sécurité : copy[answers][<id>] lu champ par champ ; refus : une ligne par question (UDR qcm-plusieurs-reponses)
+# ADR  : 0121 (§4), 0054, 0091 (§4.4), 0115, 0126 (contexte billing, §4.6) · UDR : 0149 §3 · sécurité : copy[answers][<id>] lu champ par champ ; refus : une ligne par question (UDR qcm-plusieurs-reponses)
 module Assessment
   class SheetChecksController < AuthenticatedController
     include ReadsOwnLevel
+    include RedirectsSubscriptionRequired
 
     allow_roles :student
 
@@ -14,6 +15,7 @@ module Assessment
 
       result = check_exercise.call(actor: current_actor, exercise_public_id:, answers: posted_answers, assignment_public_id:)
       return render_forbidden if result.code == :forbidden
+      return redirect_subscription_required(return_to: exercise_path(exercise_public_id)) if subscription_required?(result)
 
       result.success? ? show_result(result.value) : refused(error_code(result), result.errors[:resume_at], question_lines(result))
     rescue ActiveRecord::ActiveRecordError => error
@@ -126,7 +128,8 @@ module Assessment
         start: UseCases::Assessment::StartExerciseSession.new(
           exercises:, sessions:, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-          policy: Policies::Assessment::StartSessionPolicy.new, transaction:, clock: Time.zone
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction:, clock: Time.zone,
+          access: Queries::Billing::StudentAccessQuery.new
         ),
         submit: UseCases::Assessment::SubmitExerciseCopy.new(
           sessions:, exercises:, policy:, transaction:, clock: Time.zone,

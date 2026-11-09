@@ -14,13 +14,21 @@ fr:
         revision_shown: "Fiche de révision affichée en entier"
         revision_empty: "La fiche de révision arrive bientôt."
         prepare_title: "Prépare interros"
-        prepare_intro: "Un exercice par notion, puis quatre sur toute la leçon."
         lesson_wide_title: "Toute la leçon"
         exercises_empty: "Les exercices arrivent bientôt."
         question_count:
           one: "%{count} question"
           other: "%{count} questions"
         due: "À rendre %{day}"
-        due_today: "À rendre aujourd'hui"
         to_review: "À revoir"
         assign_targets_none: "Aucune de vos classes n'est en %{level}."
+      # UDR suivi-de-la-classe-sur-une-lecon §3.1 : l'encadré « Dans votre classe », sous une notion (Lot A).
+      notion_gaps:
+        title: "Dans votre classe"
+        pending_title: "À revoir (%{count})"
+        lifted_title: "Lacune levée (%{count})"
+        pending_since: "depuis le %{date} · %{failed}"
+        failed_copies:
+          one: "%{count} copie ratée"
+          other: "%{count} copies ratées"
+        lifted_on: "levée le %{date}"

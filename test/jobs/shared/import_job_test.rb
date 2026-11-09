@@ -55,6 +55,18 @@ class Shared::ImportJobTest < ActiveJob::TestCase
     assert_equal Rails.root.join("config/schemas"), validator.root
   end
 
+  test "the lock of the job falls after the limit of a report without sign of life (B-006)" do
+    assert_equal UseCases::Catalog::StartImport::STALE_AFTER.seconds, FakeImportJob.concurrency_duration
+  end
+
+  test "a report already claimed leaves a trace in the log: its id and the code, nothing else (B-043)" do
+    report = create_import_report(kind: "schools", status: "completed")
+
+    log = capture_log { FakeImportJob.perform_now(report.id) }
+
+    assert_includes log, "[FakeImportJob] use case failed: report_id=#{report.id} code=conflict"
+  end
+
   test "one import of a kind runs at a time, whatever the report" do
     assert_equal 1, FakeImportJob.concurrency_limit
     assert_equal FakeImportJob.new(1).concurrency_key, FakeImportJob.new(2).concurrency_key

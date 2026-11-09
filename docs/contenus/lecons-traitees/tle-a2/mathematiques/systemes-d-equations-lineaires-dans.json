@@ -61,110 +61,224 @@
           },
           "pitfall": "Ne substitue jamais dans l'équation qui a servi à isoler. Contre-exemple : avec $y = 700 - x$ remplacé dans $x + y = 700$, on obtient $x + 700 - x = 700$, soit $700 = 700$ : c'est toujours vrai et on n'apprend rien. Substitue dans **l'autre** équation, et garde les parenthèses : $2(700 - x)$ vaut $1400 - 2x$, pas $1400 - x$.",
           "figure": null,
-          "exercise": {
-            "title": "Résoudre par substitution",
-            "statement": "Dans cet exercice, tu résous des systèmes par substitution avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Dans le système $\\begin{cases} x + y = 10 \\\\ 2x + y = 16 \\end{cases}$, on isole $y$ dans la première équation. Quelle expression obtient-on ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Isoler : dans $x + y = 10$, on retire $x$ aux deux membres, donc $y = 10 - x$. Les étapes suivantes (Substituer, Résoudre, Calculer) utiliseront cette expression. La proposition $y = x - 10$ oublie que $x$ change de signe en passant de l'autre côté ; $y = 10 + x$ ajoute $x$ au lieu de le retirer ; $y = \\dfrac{10}{x}$ divise alors qu'il faut soustraire.",
-                "answers": [
-                  {
-                    "content": "$y = 10 - x$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$y = x - 10$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = 10 + x$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = \\dfrac{10}{x}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\begin{cases} x + y = 10 \\\\ 2x + y = 16 \\end{cases}$. Donne la valeur de $x$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Isoler : $y = 10 - x$. Étape 2 — Substituer dans la deuxième équation : $2x + (10 - x) = 16$. Étape 3 — Résoudre : $x + 10 = 16$, donc $x = 6$. Étape 4 — Calculer : $y = 10 - 6 = 4$ ; vérification : $6 + 4 = 10$ et $2 \\times 6 + 4 = 16$. Donc $x = 6$.",
-                "answers": [
-                  {
-                    "content": "6",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\begin{cases} x - y = 3 \\\\ 2x + 3y = 16 \\end{cases}$. Donne la valeur de $y$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Isoler : dans $x - y = 3$, on obtient $x = y + 3$. Étape 2 — Substituer : $2(y + 3) + 3y = 16$. Étape 3 — Résoudre : $2y + 6 + 3y = 16$, donc $5y = 10$, donc $y = 2$. Étape 4 — Calculer : $x = 2 + 3 = 5$ ; vérification : $5 - 2 = 3$ et $2 \\times 5 + 3 \\times 2 = 16$. Donc $y = 2$.",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un ticket adulte coûte $a$ FCFA et un ticket enfant $e$ FCFA, avec $a + e = 800$ et $a = e + 200$. Le prix d'un ticket enfant est ___ FCFA.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Isoler : c'est déjà fait, $a = e + 200$. Étape 2 — Substituer dans $a + e = 800$ : $(e + 200) + e = 800$. Étape 3 — Résoudre : $2e + 200 = 800$, donc $2e = 600$, donc $e = 300$. Étape 4 — Calculer : $a = 300 + 200 = 500$ ; vérification : $500 + 300 = 800$. Le ticket enfant coûte 300 FCFA.",
-                "answers": [
-                  {
-                    "content": "300",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Le couple $(2\\,;\\,3)$ est la solution de $\\begin{cases} x + y = 5 \\\\ 2x - y = 4 \\end{cases}$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Isoler : $y = 5 - x$. Étape 2 — Substituer : $2x - (5 - x) = 4$. Étape 3 — Résoudre : $3x - 5 = 4$, donc $x = 3$. Étape 4 — Calculer : $y = 5 - 3 = 2$. La solution est $(3\\,;\\,2)$. Le couple $(2\\,;\\,3)$ a les nombres dans le mauvais ordre : il vérifie $x + y = 5$ mais pas $2x - y = 4$, car $2 \\times 2 - 3 = 1$. Un couple est solution seulement s'il vérifie les deux équations.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On a isolé $y = 8 - x$ grâce à $x + y = 8$. On veut résoudre $\\begin{cases} x + y = 8 \\\\ 3x + 2y = 21 \\end{cases}$. Quelle équation obtient-on à l'étape de substitution ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Isoler : $y = 8 - x$. Étape 2 — Substituer dans l'autre équation, avec parenthèses : $3x + 2(8 - x) = 21$. Étape 3 — Résoudre : $3x + 16 - 2x = 21$, donc $x = 5$. Étape 4 — Calculer : $y = 8 - 5 = 3$. La première proposition oublie les parenthèses ($2 \\times 8 - x$ au lieu de $2 \\times 8 - 2x$) ; la troisième substitue dans l'équation qui a servi à isoler, ce qui donne $8 = 8$ ; la dernière change le signe de $x$.",
-                "answers": [
-                  {
-                    "content": "$3x + 2 \\times 8 - x = 21$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3x + 2(8 - x) = 21$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x + (8 - x) = 8$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$3x + 2(8 + x) = 21$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Résoudre par substitution",
+              "statement": "Dans cet exercice, tu résous des systèmes par substitution avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Dans le système $\\begin{cases} x + y = 10 \\\\ 2x + y = 16 \\end{cases}$, on isole $y$ dans la première équation. Quelle expression obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler : dans $x + y = 10$, on retire $x$ aux deux membres, donc $y = 10 - x$. Les étapes suivantes (Substituer, Résoudre, Calculer) utiliseront cette expression. La proposition $y = x - 10$ oublie que $x$ change de signe en passant de l'autre côté ; $y = 10 + x$ ajoute $x$ au lieu de le retirer ; $y = \\dfrac{10}{x}$ divise alors qu'il faut soustraire.",
+                  "answers": [
+                    {
+                      "content": "$y = 10 - x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = x - 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 10 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = \\dfrac{10}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\begin{cases} x + y = 10 \\\\ 2x + y = 16 \\end{cases}$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : $y = 10 - x$. Étape 2 — Substituer dans la deuxième équation : $2x + (10 - x) = 16$. Étape 3 — Résoudre : $x + 10 = 16$, donc $x = 6$. Étape 4 — Calculer : $y = 10 - 6 = 4$ ; vérification : $6 + 4 = 10$ et $2 \\times 6 + 4 = 16$. Donc $x = 6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\begin{cases} x - y = 3 \\\\ 2x + 3y = 16 \\end{cases}$. Donne la valeur de $y$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : dans $x - y = 3$, on obtient $x = y + 3$. Étape 2 — Substituer : $2(y + 3) + 3y = 16$. Étape 3 — Résoudre : $2y + 6 + 3y = 16$, donc $5y = 10$, donc $y = 2$. Étape 4 — Calculer : $x = 2 + 3 = 5$ ; vérification : $5 - 2 = 3$ et $2 \\times 5 + 3 \\times 2 = 16$. Donc $y = 2$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ticket adulte coûte $a$ FCFA et un ticket enfant $e$ FCFA, avec $a + e = 800$ et $a = e + 200$. Le prix d'un ticket enfant est ___ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Isoler : c'est déjà fait, $a = e + 200$. Étape 2 — Substituer dans $a + e = 800$ : $(e + 200) + e = 800$. Étape 3 — Résoudre : $2e + 200 = 800$, donc $2e = 600$, donc $e = 300$. Étape 4 — Calculer : $a = 300 + 200 = 500$ ; vérification : $500 + 300 = 800$. Le ticket enfant coûte 300 FCFA.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(2\\,;\\,3)$ est la solution de $\\begin{cases} x + y = 5 \\\\ 2x - y = 4 \\end{cases}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Isoler : $y = 5 - x$. Étape 2 — Substituer : $2x - (5 - x) = 4$. Étape 3 — Résoudre : $3x - 5 = 4$, donc $x = 3$. Étape 4 — Calculer : $y = 5 - 3 = 2$. La solution est $(3\\,;\\,2)$. Le couple $(2\\,;\\,3)$ a les nombres dans le mauvais ordre : il vérifie $x + y = 5$ mais pas $2x - y = 4$, car $2 \\times 2 - 3 = 1$. Un couple est solution seulement s'il vérifie les deux équations.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On a isolé $y = 8 - x$ grâce à $x + y = 8$. On veut résoudre $\\begin{cases} x + y = 8 \\\\ 3x + 2y = 21 \\end{cases}$. Quelle équation obtient-on à l'étape de substitution ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler : $y = 8 - x$. Étape 2 — Substituer dans l'autre équation, avec parenthèses : $3x + 2(8 - x) = 21$. Étape 3 — Résoudre : $3x + 16 - 2x = 21$, donc $x = 5$. Étape 4 — Calculer : $y = 8 - 5 = 3$. La première proposition oublie les parenthèses ($2 \\times 8 - x$ au lieu de $2 \\times 8 - 2x$) ; la troisième substitue dans l'équation qui a servi à isoler, ce qui donne $8 = 8$ ; la dernière change le signe de $x$.",
+                  "answers": [
+                    {
+                      "content": "$3x + 2 \\times 8 - x = 21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x + 2(8 - x) = 21$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + (8 - x) = 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x + 2(8 + x) = 21$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Substituer pour trouver deux inconnues",
+              "statement": "Dans cet exercice, tu isoles une inconnue, tu la remplaces dans l'autre équation, puis tu vérifies le couple, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Isole l'inconnue dont le coefficient vaut 1 ou -1, remplace-la entre parenthèses dans l'autre équation, puis vérifie le couple trouvé dans les deux équations.",
+              "questions": [
+                {
+                  "content": "Dans le système $2x + y = 13$ et $x - y = 2$, on isole $x$ dans la seconde équation. Quelle expression obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler : on ajoute $y$ aux deux membres de $x - y = 2$, donc $x = y + 2$. Étape 2 — Substituer : dans $2x + y = 13$ on écrit $2(y + 2) + y = 13$. Étape 3 — Résoudre : $3y + 4 = 13$, donc $y = 3$. Étape 4 — Calculer : $x = 3 + 2 = 5$ ; vérification : $10 + 3 = 13$ et $5 - 3 = 2$. L'expression $x = y - 2$ oublie que $-y$ change de signe en passant de l'autre côté. L'expression $x = 2 - y$ est celle de $x + y = 2$. L'expression $x = 13 - 2y$ vient de l'autre équation, mal résolue : $2x + y = 13$ donne $x = \\dfrac{13 - y}{2}$, et non $13 - 2y$.",
+                  "answers": [
+                    {
+                      "content": "$x = y + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = y - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 2 - y$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 13 - 2y$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par substitution le système $y = 2x - 1$ et $3x + 2y = 12$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : $y = 2x - 1$ est déjà isolé. Étape 2 — Substituer dans l'autre équation, avec des parenthèses : $3x + 2(2x - 1) = 12$. Étape 3 — Résoudre : $3x + 4x - 2 = 12$, donc $7x = 14$ et $x = 2$. Étape 4 — Calculer : $y = 2 \\times 2 - 1 = 3$ ; vérification : $3 \\times 2 + 2 \\times 3 = 12$. Sans parenthèses, on écrirait $2 \\times 2x - 1$ et on trouverait $4x - 1$ au lieu de $4x - 2$ : le facteur 2 s'applique à toute l'expression.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une cour, il y a des poules et des chèvres : 20 animaux et 56 pattes en tout (situation d'exemple). On note $x$ le nombre de poules et $y$ le nombre de chèvres, ce qui donne $x + y = 20$ et $2x + 4y = 56$. Il y a ___ chèvres.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Isoler : dans $x + y = 20$, le coefficient de $x$ vaut 1, donc $x = 20 - y$. Étape 2 — Substituer : $2(20 - y) + 4y = 56$. Étape 3 — Résoudre : $40 - 2y + 4y = 56$, donc $2y = 16$ et $y = 8$. Étape 4 — Calculer : $x = 20 - 8 = 12$ ; vérification : $12 + 8 = 20$ et $24 + 32 = 56$. Il y a 8 chèvres. La valeur 12 est celle des poules : elle répond à l'autre inconnue.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(5\\,;\\,2)$ est la solution du système $x + y = 7$ et $2x - y = 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Calculer et vérifier : il faut tester le couple dans les deux équations. Dans $x + y = 7$ : $5 + 2 = 7$, c'est juste. Dans $2x - y = 5$ : $10 - 2 = 8$, pas 5. Le couple ne vérifie qu'une équation, ce n'est pas une solution du système. Pour trouver la vraie solution : $y = 7 - x$, puis $2x - (7 - x) = 5$, donc $3x = 12$, $x = 4$ et $y = 3$. Conclure « Vrai » après avoir testé une seule équation est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout par substitution le système $x + y = 8$ et $4x - y = 7$. Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Isoler : $y = 8 - x$. Étape 2 — Substituer dans l'autre équation : $4x - (8 - x) = 7$. Étape 3 — Résoudre : $4x - 8 + x = 7$, donc $5x = 15$ et $x = 3$. Étape 4 — Calculer : $y = 8 - 3 = 5$ ; vérification : $3 + 5 = 8$ et $12 - 5 = 7$. Les affirmations $x = 5$ et $y = 3$ échangent les deux inconnues. Si on remplaçait $y$ dans $x + y = 8$, qui a servi à isoler, on obtiendrait $8 = 8$ et on n'apprendrait rien.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la substitution pour le système $x + y = 6$ et $2x + y = 10$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Isoler : on écrit $y = 6 - x$ à partir de $x + y = 6$. Étape 2 — Substituer : on remplace $y$ dans l'autre équation, en gardant les parenthèses. Étape 3 — Résoudre : $x + 6 = 10$ donne $x = 4$. Étape 4 — Calculer : $y = 2$, et on vérifie $4 + 2 = 6$ et $8 + 2 = 10$. Cet ordre ne peut pas changer : on ne peut pas substituer avant d'avoir isolé, ni calculer $y$ avant d'avoir trouvé $x$. Substituer dans la même équation que celle de l'isolement donnerait $6 = 6$, vrai mais sans intérêt.",
+                  "answers": [
+                    {
+                      "content": "Isoler $y$ dans la première équation : $y = 6 - x$."
+                    },
+                    {
+                      "content": "Substituer dans la seconde équation : $2x + (6 - x) = 10$."
+                    },
+                    {
+                      "content": "Résoudre l'équation obtenue : $x + 6 = 10$, donc $x = 4$."
+                    },
+                    {
+                      "content": "Calculer $y = 6 - 4 = 2$, puis vérifier le couple dans les deux équations."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie le système $\\begin{cases} x + y = 9 \\\\ 2x - y = 3 \\end{cases}$.",
             "questions": [
@@ -242,118 +356,221 @@
           },
           "pitfall": "Quand tu multiplies une équation, multiplie **ses deux membres**. Contre-exemple : $x + y = 5$ est vérifiée par $(2\\,;\\,3)$. En la multipliant par 2, on doit obtenir $2x + 2y = 10$. Si tu écris $2x + 2y = 5$, le couple $(2\\,;\\,3)$ ne la vérifie plus ($4 + 6 = 10$) : tu as changé le système. Pense aussi aux signes : multiplier par $-2$ change tous les signes.",
           "figure": null,
-          "exercise": {
-            "title": "Résoudre par combinaison",
-            "statement": "Dans cet exercice, tu résous des systèmes par combinaison avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Pour éliminer $y$ dans $\\begin{cases} x + 2y = 8 \\\\ 3x - 2y = 8 \\end{cases}$, quelle opération faut-il faire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Égaliser : les coefficients de $y$ valent déjà $2$ et $-2$ : ils sont opposés, il n'y a rien à multiplier. Étape 2 — Additionner : $4x = 16$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $4 + 2y = 8$, donc $y = 2$. Soustraire donnerait $-2x + 4y = 0$ : $y$ ne disparaîtrait pas. Multiplier par 3 donnerait $3x + 6y = 24$ : les coefficients de $y$ ne seraient plus opposés.",
-                "answers": [
-                  {
-                    "content": "Soustraire les deux équations membre à membre",
-                    "correct": false
-                  },
-                  {
-                    "content": "Additionner les deux équations membre à membre",
-                    "correct": true
-                  },
-                  {
-                    "content": "Multiplier la première équation par 3, puis additionner",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il est impossible d'éliminer $y$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\begin{cases} 3x + y = 11 \\\\ x - y = 1 \\end{cases}$. Donne la valeur de $x$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont $1$ et $-1$, déjà opposés. Étape 2 — Additionner : $4x = 12$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $9 + y = 11$, donc $y = 2$ ; vérification : $3 - 2 = 1$. Donc $x = 3$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\begin{cases} 2x + y = 11 \\\\ x + 3y = 13 \\end{cases}$. Donne la valeur de $y$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Égaliser : on multiplie la première équation par $-3$ pour que les coefficients de $y$ soient opposés ($-3y$ et $3y$) : $-6x - 3y = -33$ et $x + 3y = 13$. Étape 2 — Additionner : $-5x = -20$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $8 + y = 11$, donc $y = 3$ ; vérification : $4 + 3 \\times 3 = 13$. Donc $y = 3$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour éliminer $y$ par addition dans $\\begin{cases} 2x + 3y = 12 \\\\ 5x - 2y = 11 \\end{cases}$, par quels nombres faut-il multiplier la première puis la deuxième équation ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont $3$ et $-2$. Le plus petit multiple commun est 6 : on multiplie la première par 2 ($6y$) et la deuxième par 3 ($-6y$), ce qui donne $4x + 6y = 24$ et $15x - 6y = 33$. Étape 2 — Additionner : $19x = 57$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $6 + 3y = 12$, donc $y = 2$. Avec 3 et 2, on obtient $9y$ et $-4y$ ; avec $-2$ et 3, on obtient $-6y$ et $-6y$ (même signe) ; avec 2 et $-3$, on obtient $6y$ et $6y$ : dans les trois cas $y$ ne disparaît pas.",
-                "answers": [
-                  {
-                    "content": "3 et 2",
-                    "correct": false
-                  },
-                  {
-                    "content": "2 et 3",
-                    "correct": true
-                  },
-                  {
-                    "content": "-2 et 3",
-                    "correct": false
-                  },
-                  {
-                    "content": "2 et -3",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Résous $\\begin{cases} 4x + y = 14 \\\\ 2x - 3y = 0 \\end{cases}$. On trouve $x =$ ___",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Égaliser : on multiplie la première équation par 3 : $12x + 3y = 42$, et la deuxième reste $2x - 3y = 0$ ; les coefficients de $y$ sont opposés. Étape 2 — Additionner : $14x = 42$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $12 + y = 14$, donc $y = 2$ ; vérification : $2 \\times 3 - 3 \\times 2 = 0$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On multiplie par 3 les deux membres de l'équation $2x - y = 4$. Quelle équation obtient-on ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Égaliser : multiplier par 3 signifie multiplier chaque terme, y compris le second membre : $3 \\times 2x = 6x$, $3 \\times (-y) = -3y$, $3 \\times 4 = 12$. On obtient $6x - 3y = 12$. Les autres propositions oublient de multiplier un terme : $6x - y = 12$ oublie $y$ ; $6x - 3y = 4$ oublie le second membre ; $6x - 3y = 7$ ajoute 3 au lieu de multiplier.",
-                "answers": [
-                  {
-                    "content": "$6x - y = 12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$6x - 3y = 4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$6x - 3y = 12$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$6x - 3y = 7$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Résoudre par combinaison",
+              "statement": "Dans cet exercice, tu résous des systèmes par combinaison avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour éliminer $y$ dans $\\begin{cases} x + 2y = 8 \\\\ 3x - 2y = 8 \\end{cases}$, quelle opération faut-il faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ valent déjà $2$ et $-2$ : ils sont opposés, il n'y a rien à multiplier. Étape 2 — Additionner : $4x = 16$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $4 + 2y = 8$, donc $y = 2$. Soustraire donnerait $-2x + 4y = 0$ : $y$ ne disparaîtrait pas. Multiplier par 3 donnerait $3x + 6y = 24$ : les coefficients de $y$ ne seraient plus opposés.",
+                  "answers": [
+                    {
+                      "content": "Soustraire les deux équations membre à membre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Additionner les deux équations membre à membre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Multiplier la première équation par 3, puis additionner",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est impossible d'éliminer $y$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\begin{cases} 3x + y = 11 \\\\ x - y = 1 \\end{cases}$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont $1$ et $-1$, déjà opposés. Étape 2 — Additionner : $4x = 12$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $9 + y = 11$, donc $y = 2$ ; vérification : $3 - 2 = 1$. Donc $x = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\begin{cases} 2x + y = 11 \\\\ x + 3y = 13 \\end{cases}$. Donne la valeur de $y$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : on multiplie la première équation par $-3$ pour que les coefficients de $y$ soient opposés ($-3y$ et $3y$) : $-6x - 3y = -33$ et $x + 3y = 13$. Étape 2 — Additionner : $-5x = -20$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $8 + y = 11$, donc $y = 3$ ; vérification : $4 + 3 \\times 3 = 13$. Donc $y = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour éliminer $y$ par addition dans $\\begin{cases} 2x + 3y = 12 \\\\ 5x - 2y = 11 \\end{cases}$, par quels nombres faut-il multiplier la première puis la deuxième équation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont $3$ et $-2$. Le plus petit multiple commun est 6 : on multiplie la première par 2 ($6y$) et la deuxième par 3 ($-6y$), ce qui donne $4x + 6y = 24$ et $15x - 6y = 33$. Étape 2 — Additionner : $19x = 57$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $6 + 3y = 12$, donc $y = 2$. Avec 3 et 2, on obtient $9y$ et $-4y$ ; avec $-2$ et 3, on obtient $-6y$ et $-6y$ (même signe) ; avec 2 et $-3$, on obtient $6y$ et $6y$ : dans les trois cas $y$ ne disparaît pas.",
+                  "answers": [
+                    {
+                      "content": "3 et 2",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 et 3",
+                      "correct": true
+                    },
+                    {
+                      "content": "-2 et 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 et -3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $\\begin{cases} 4x + y = 14 \\\\ 2x - 3y = 0 \\end{cases}$. On trouve $x =$ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Égaliser : on multiplie la première équation par 3 : $12x + 3y = 42$, et la deuxième reste $2x - 3y = 0$ ; les coefficients de $y$ sont opposés. Étape 2 — Additionner : $14x = 42$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : $12 + y = 14$, donc $y = 2$ ; vérification : $2 \\times 3 - 3 \\times 2 = 0$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On multiplie par 3 les deux membres de l'équation $2x - y = 4$. Quelle équation obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : multiplier par 3 signifie multiplier chaque terme, y compris le second membre : $3 \\times 2x = 6x$, $3 \\times (-y) = -3y$, $3 \\times 4 = 12$. On obtient $6x - 3y = 12$. Les autres propositions oublient de multiplier un terme : $6x - y = 12$ oublie $y$ ; $6x - 3y = 4$ oublie le second membre ; $6x - 3y = 7$ ajoute 3 au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$6x - y = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x - 3y = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x - 3y = 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x - 3y = 7$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Éliminer une inconnue par combinaison",
+              "statement": "Dans cet exercice, tu multiplies, tu additionnes membre à membre et tu résous des systèmes par combinaison, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche l'inconnue dont les coefficients sont opposés, ou deviennent opposés quand on multiplie les deux membres d'une équation, puis additionne membre à membre.",
+              "questions": [
+                {
+                  "content": "Pour éliminer $x$ par addition dans le système $2x + 3y = 7$ et $4x - y = 7$, par quel nombre faut-il multiplier la première équation, sans toucher à la seconde ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $x$ sont $2$ et $4$ ; en multipliant la première équation par $-2$ on obtient $-4x - 6y = -14$, et $-4x$ est l'opposé de $4x$. Étape 2 — Additionner : $-7y = -7$. Étape 3 — Résoudre : $y = 1$. Étape 4 — Calculer : $2x + 3 = 7$, donc $x = 2$ ; vérification : $8 - 1 = 7$. Multiplier par $2$ donne $4x$ : on additionnerait deux $4x$ et $x$ ne disparaîtrait pas. Multiplier par $-4$ donne $-8x$, et par $4$ donne $8x$ : dans les deux cas $x$ reste présent.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par combinaison le système $3x + 2y = 16$ et $5x - 2y = 16$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ valent $2$ et $-2$, ils sont déjà opposés. Étape 2 — Additionner membre à membre : $8x = 32$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer $y$ avec une équation de départ : $12 + 2y = 16$, donc $y = 2$ ; vérification : $20 - 4 = 16$. La valeur 4 est celle de $x$ : l'addition a éliminé $y$, il faut donc revenir à une équation pour le trouver.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout par combinaison le système $3x + 4y = 18$ et $2x + 5y = 19$. On trouve $x$ égal à ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Égaliser : pour éliminer $x$, on multiplie la première équation par $2$ et la seconde par $-3$ : $6x + 8y = 36$ et $-6x - 15y = -57$. Étape 2 — Additionner : $-7y = -21$. Étape 3 — Résoudre : $y = 3$. Étape 4 — Calculer : $3x + 12 = 18$, donc $x = 2$ ; vérification : $4 + 15 = 19$. Si on oubliait de multiplier le second membre par $-3$, on écrirait $-6x - 15y = 19$ et le système serait changé.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En multipliant par 3 les deux membres de l'équation $x - 2y = 4$, on obtient $3x - 6y = 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Égaliser : multiplier une équation par 3, c'est multiplier tous ses termes, y compris le second membre. On obtient $3x - 6y = 12$. L'équation $3x - 6y = 4$ a changé le système : le couple $(4\\,;\\,0)$ vérifie $x - 2y = 4$, mais $3 \\times 4 - 0 = 12$ et non 4. Pour multiplier une équation sans changer ses solutions, il faut donc multiplier chacun de ses deux membres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque système à l'inconnue qui disparaît quand on additionne directement les deux équations membre à membre.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Additionner : pour le système $x + y = 6$ et $x - y = 2$, on obtient $2x = 8$, donc $y$ a disparu. Pour $2x + 3y = 5$ et $-2x + y = 1$, on obtient $4y = 6$, donc $x$ a disparu. Pour $x + y = 7$ et $2x + y = 11$, on obtient $3x + 2y = 18$ : ni $x$ ni $y$ ne disparaît, car aucun coefficient n'a son opposé. Il faudrait d'abord multiplier une équation (Étape 1 — Égaliser), par exemple la première par $-1$.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 6$ et $x - y = 2$",
+                      "match": "$y$ disparaît"
+                    },
+                    {
+                      "content": "$2x + 3y = 5$ et $-2x + y = 1$",
+                      "match": "$x$ disparaît"
+                    },
+                    {
+                      "content": "$x + y = 7$ et $2x + y = 11$",
+                      "match": "Aucune des deux ne disparaît"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le système $4x + 2y = 14$ et $3x - y = 3$, on multiplie la seconde équation par 2, puis on additionne membre à membre. Quelle valeur de $x$ obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : $2 \\times (3x - y) = 2 \\times 3$ donne $6x - 2y = 6$ ; les coefficients de $y$ sont maintenant $2$ et $-2$. Étape 2 — Additionner : $4x + 6x = 14 + 6$, soit $10x = 20$. Étape 3 — Résoudre : $x = 2$. Étape 4 — Calculer : $8 + 2y = 14$, donc $y = 3$ ; vérification : $6 - 3 = 3$. Si on oubliait de multiplier le second membre par 2, on écrirait $6x - 2y = 3$, puis $10x = 17$ : le résultat serait faux.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie le système $\\begin{cases} x + y = 11 \\\\ x - y = 3 \\end{cases}$.",
             "questions": [
@@ -439,114 +656,221 @@
           },
           "pitfall": "Le déterminant est $ab' - a'b$ : c'est une **différence** de deux produits en croix. Contre-exemple : pour $x + y = 5$ et $x - y = 1$, on a $D = 1 \\times (-1) - 1 \\times 1 = -2$. Si tu écris $ab' + a'b$, tu trouves $-1 + 1 = 0$ et tu crois à tort que la méthode ne marche pas, alors que la solution est $(3\\,;\\,2)$. Attention aussi aux signes quand $b'$ ou $c'$ est négatif.",
           "figure": null,
-          "exercise": {
-            "title": "Utiliser la méthode de Cramer",
-            "statement": "Dans cet exercice, tu calcules des déterminants et tu résous des systèmes par la méthode de Cramer.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Calcule le déterminant $D$ du système $\\begin{cases} 2x + 5y = 9 \\\\ 3x + 4y = 10 \\end{cases}$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : $a = 2$, $b = 5$, $c = 9$, $a' = 3$, $b' = 4$, $c' = 10$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 2 \\times 4 - 3 \\times 5 = 8 - 15 = -7$. Comme $D \\neq 0$, on pourrait continuer : Étape 3, $D_x = 9 \\times 4 - 10 \\times 5 = -14$ et $D_y = 2 \\times 10 - 3 \\times 9 = -7$ ; Étape 4, $x = 2$ et $y = 1$.",
-                "answers": [
-                  {
-                    "content": "-7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Résous par la méthode de Cramer $\\begin{cases} x + 2y = 7 \\\\ 3x - y = 7 \\end{cases}$. Donne la valeur de $x$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $c = 7$, $a' = 3$, $b' = -1$, $c' = 7$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 3 \\times 2 = -1 - 6 = -7$. Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 7 \\times (-1) - 7 \\times 2 = -21$ et $D_y = 1 \\times 7 - 3 \\times 7 = -14$. Étape 4 — Conclure : $x = \\dfrac{-21}{-7} = 3$ et $y = \\dfrac{-14}{-7} = 2$ ; vérification : $3 + 4 = 7$ et $9 - 2 = 7$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Résous par la méthode de Cramer $\\begin{cases} x + y = 12 \\\\ 2x - y = 3 \\end{cases}$. On trouve $y =$ ___",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Écrire : $a = 1$, $b = 1$, $c = 12$, $a' = 2$, $b' = -1$, $c' = 3$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 2 \\times 1 = -3$. Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 12 \\times (-1) - 3 \\times 1 = -15$ et $D_y = 1 \\times 3 - 2 \\times 12 = -21$. Étape 4 — Conclure : $x = 5$ et $y = \\dfrac{-21}{-3} = 7$ ; vérification : $5 + 7 = 12$ et $10 - 7 = 3$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On peut résoudre $\\begin{cases} 2x + 4y = 6 \\\\ x + 2y = 5 \\end{cases}$ par la méthode de Cramer.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Écrire : $a = 2$, $b = 4$, $a' = 1$, $b' = 2$. Étape 2 — Calculer le déterminant : $D = 2 \\times 2 - 1 \\times 4 = 0$. Quand $D = 0$, la méthode s'arrête : il n'y a pas de solution unique. Ici, la première équation équivaut à $x + 2y = 3$, qui contredit $x + 2y = 5$ : le système n'a aucune solution.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "On résout $\\begin{cases} 2x + y = 7 \\\\ x + 3y = 11 \\end{cases}$ par la méthode de Cramer. Quelles valeurs sont correctes ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Écrire : $a = 2$, $b = 1$, $c = 7$, $a' = 1$, $b' = 3$, $c' = 11$. Étape 2 — Calculer le déterminant : $D = 2 \\times 3 - 1 \\times 1 = 5$ (et non 7 : on soustrait les produits, on ne les additionne pas). Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 7 \\times 3 - 11 \\times 1 = 10$ et $D_y = 2 \\times 11 - 1 \\times 7 = 15$. Les valeurs 32 et 29 viennent d'une addition ($21 + 11$ et $22 + 7$) au lieu d'une soustraction. Étape 4 — Conclure : $x = 2$ et $y = 3$.",
-                "answers": [
-                  {
-                    "content": "$D_x = 10$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$D = 7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$D_y = 15$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$D_x = 32$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$D_y = 29$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour le système $\\begin{cases} x + y = 5 \\\\ x - y = 1 \\end{cases}$, que vaut le déterminant $D = ab' - a'b$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $a = 1$, $b = 1$, $a' = 1$, $b' = -1$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 1 \\times 1 = -1 - 1 = -2$. La valeur 0 vient de $ab' + a'b$ (une somme au lieu d'une différence) ; 2 est l'opposé, obtenu en calculant $a'b - ab'$ ; $-1$ oublie le second produit.",
-                "answers": [
-                  {
-                    "content": "0",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "2",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-1$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Utiliser la méthode de Cramer",
+              "statement": "Dans cet exercice, tu calcules des déterminants et tu résous des systèmes par la méthode de Cramer.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule le déterminant $D$ du système $\\begin{cases} 2x + 5y = 9 \\\\ 3x + 4y = 10 \\end{cases}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = 5$, $c = 9$, $a' = 3$, $b' = 4$, $c' = 10$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 2 \\times 4 - 3 \\times 5 = 8 - 15 = -7$. Comme $D \\neq 0$, on pourrait continuer : Étape 3, $D_x = 9 \\times 4 - 10 \\times 5 = -14$ et $D_y = 2 \\times 10 - 3 \\times 9 = -7$ ; Étape 4, $x = 2$ et $y = 1$.",
+                  "answers": [
+                    {
+                      "content": "-7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par la méthode de Cramer $\\begin{cases} x + 2y = 7 \\\\ 3x - y = 7 \\end{cases}$. Donne la valeur de $x$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $c = 7$, $a' = 3$, $b' = -1$, $c' = 7$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 3 \\times 2 = -1 - 6 = -7$. Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 7 \\times (-1) - 7 \\times 2 = -21$ et $D_y = 1 \\times 7 - 3 \\times 7 = -14$. Étape 4 — Conclure : $x = \\dfrac{-21}{-7} = 3$ et $y = \\dfrac{-14}{-7} = 2$ ; vérification : $3 + 4 = 7$ et $9 - 2 = 7$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par la méthode de Cramer $\\begin{cases} x + y = 12 \\\\ 2x - y = 3 \\end{cases}$. On trouve $y =$ ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 1$, $c = 12$, $a' = 2$, $b' = -1$, $c' = 3$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 2 \\times 1 = -3$. Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 12 \\times (-1) - 3 \\times 1 = -15$ et $D_y = 1 \\times 3 - 2 \\times 12 = -21$. Étape 4 — Conclure : $x = 5$ et $y = \\dfrac{-21}{-3} = 7$ ; vérification : $5 + 7 = 12$ et $10 - 7 = 3$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On peut résoudre $\\begin{cases} 2x + 4y = 6 \\\\ x + 2y = 5 \\end{cases}$ par la méthode de Cramer.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = 4$, $a' = 1$, $b' = 2$. Étape 2 — Calculer le déterminant : $D = 2 \\times 2 - 1 \\times 4 = 0$. Quand $D = 0$, la méthode s'arrête : il n'y a pas de solution unique. Ici, la première équation équivaut à $x + 2y = 3$, qui contredit $x + 2y = 5$ : le système n'a aucune solution.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout $\\begin{cases} 2x + y = 7 \\\\ x + 3y = 11 \\end{cases}$ par la méthode de Cramer. Quelles valeurs sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = 1$, $c = 7$, $a' = 1$, $b' = 3$, $c' = 11$. Étape 2 — Calculer le déterminant : $D = 2 \\times 3 - 1 \\times 1 = 5$ (et non 7 : on soustrait les produits, on ne les additionne pas). Étape 3 — Calculer $D_x$ et $D_y$ : $D_x = 7 \\times 3 - 11 \\times 1 = 10$ et $D_y = 2 \\times 11 - 1 \\times 7 = 15$. Les valeurs 32 et 29 viennent d'une addition ($21 + 11$ et $22 + 7$) au lieu d'une soustraction. Étape 4 — Conclure : $x = 2$ et $y = 3$.",
+                  "answers": [
+                    {
+                      "content": "$D_x = 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D_y = 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D_x = 32$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D_y = 29$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le système $\\begin{cases} x + y = 5 \\\\ x - y = 1 \\end{cases}$, que vaut le déterminant $D = ab' - a'b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 1$, $a' = 1$, $b' = -1$. Étape 2 — Calculer le déterminant : $D = 1 \\times (-1) - 1 \\times 1 = -1 - 1 = -2$. La valeur 0 vient de $ab' + a'b$ (une somme au lieu d'une différence) ; 2 est l'opposé, obtenu en calculant $a'b - ab'$ ; $-1$ oublie le second produit.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Calculer D, Dx et Dy",
+              "statement": "Dans cet exercice, tu calcules des déterminants et tu appliques la méthode de Cramer, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Relève $a$, $b$, $c$, $a'$, $b'$, $c'$, puis calcule $D = ab' - a'b$ en surveillant les signes. Si $D$ est nul, la méthode de Cramer ne s'applique pas.",
+              "questions": [
+                {
+                  "content": "Calcule le déterminant $D$ du système $3x + 4y = 10$ et $2x + 5y = 9$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 3$, $b = 4$, $c = 10$, $a' = 2$, $b' = 5$, $c' = 9$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 3 \\times 5 - 2 \\times 4 = 15 - 8 = 7$. Comme $D \\neq 0$, on pourrait continuer : Étape 3, $D_x = 10 \\times 5 - 9 \\times 4 = 14$ et $D_y = 3 \\times 9 - 2 \\times 10 = 7$ ; Étape 4, $x = 2$ et $y = 1$. Écrire $ab' + a'b = 23$ ou $a'b - ab' = -7$ est une erreur : le déterminant est la différence $ab' - a'b$, dans cet ordre.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut le déterminant $D = ab' - a'b$ du système $2x - 3y = 4$ et $x + 5y = 11$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = -3$, $c = 4$, $a' = 1$, $b' = 5$, $c' = 11$. Étape 2 — Calculer le déterminant : $D = 2 \\times 5 - 1 \\times (-3) = 10 + 3 = 13$. Le résultat $7$ vient d'un signe oublié : on a pris $b = 3$ au lieu de $b = -3$. Le résultat $-13$ inverse les deux produits ($a'b - ab'$). Le résultat $-7$ cumule les deux erreurs.",
+                  "answers": [
+                    {
+                      "content": "$13$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le système $x + 3y = 11$ et $2x - y = 1$, on a $D = -7$. Alors $D_x = cb' - c'b$ vaut ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 3$, $c = 11$, $a' = 2$, $b' = -1$, $c' = 1$. Étape 2 — Le déterminant est $D = 1 \\times (-1) - 2 \\times 3 = -7$. Étape 3 — Calculer $D_x = cb' - c'b = 11 \\times (-1) - 1 \\times 3 = -11 - 3 = -14$. Étape 4 — Conclure : $x = \\dfrac{-14}{-7} = 2$, puis $y = 3$ ; vérification : $2 + 9 = 11$ et $4 - 3 = 1$. Oublier le signe de $b'$ donnerait $11 - 3 = 8$, qui est faux.",
+                  "answers": [
+                    {
+                      "content": "-14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le système $2x + 3y = 5$ et $4x + 6y = 7$ a un déterminant nul : la méthode de Cramer ne s'applique pas.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = 3$, $a' = 4$, $b' = 6$. Étape 2 — Calculer le déterminant : $D = 2 \\times 6 - 4 \\times 3 = 12 - 12 = 0$. Comme $D = 0$, on arrête : Cramer ne s'applique pas, et le système a soit aucune solution, soit une infinité. Ici les deux équations donnent $2x + 3y = 5$ et $2x + 3y = 3{,}5$, donc aucune solution. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par la méthode de Cramer le système $2x + 3y = 12$ et $x + 4y = 11$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 2$, $b = 3$, $c = 12$, $a' = 1$, $b' = 4$, $c' = 11$. Étape 2 — Calculer le déterminant : $D = 2 \\times 4 - 1 \\times 3 = 5$. Étape 3 — Calculer $D_x = 12 \\times 4 - 11 \\times 3 = 15$ et $D_y = 2 \\times 11 - 1 \\times 12 = 10$. Étape 4 — Conclure : $x = \\dfrac{15}{5} = 3$ et $y = \\dfrac{10}{5} = 2$ ; vérification : $6 + 6 = 12$ et $3 + 8 = 11$. La valeur 3 est celle de $x$ : on a divisé $D_x$ au lieu de $D_y$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout par la méthode de Cramer le système $x + 2y = 1$ et $3x + y = 8$. Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $c = 1$, $a' = 3$, $b' = 1$, $c' = 8$. Étape 2 — Calculer le déterminant : $D = 1 \\times 1 - 3 \\times 2 = -5$. Étape 3 — Calculer $D_x = 1 \\times 1 - 8 \\times 2 = -15$ et $D_y = 1 \\times 8 - 3 \\times 1 = 5$. Étape 4 — Conclure : $x = \\dfrac{-15}{-5} = 3$ et $y = \\dfrac{5}{-5} = -1$ ; vérification : $3 - 2 = 1$ et $9 - 1 = 8$. L'affirmation $D = 5$ inverse l'ordre des produits. L'affirmation $y = 1$ oublie que $D$ est négatif : le quotient $\\dfrac{5}{-5}$ vaut $-1$.",
+                  "answers": [
+                    {
+                      "content": "$D = -5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie le système $\\begin{cases} x + 2y = 8 \\\\ 3x + y = 9 \\end{cases}$.",
             "questions": [
@@ -624,126 +948,233 @@
           },
           "pitfall": "Ne conclus pas « pas de solution » dès que les droites ont la même pente. Contre-exemple : $x + y = 2$ et $2x + 2y = 4$ ont toutes deux pour droite $y = -x + 2$ : elles sont **confondues**, donc il y a une **infinité** de solutions. Alors que $x + y = 2$ et $x + y = 5$ (droites $y = -x + 2$ et $y = -x + 5$) sont parallèles distinctes : aucune solution. Il faut toujours comparer $p$ et $p'$.",
           "figure": "droites-secantes",
-          "exercise": {
-            "title": "Compter les solutions d'un système",
-            "statement": "Dans cet exercice, tu mets les équations sous la forme $y = mx + p$ pour compter les solutions d'un système.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Combien de solutions a le système $\\begin{cases} y = 2x + 1 \\\\ y = -x + 4 \\end{cases}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = 2$, $p = 1$ et $m' = -1$, $p' = 4$. Étape 2 — Comparer les coefficients directeurs : $2 \\neq -1$. Étape 3 — Comparer les ordonnées à l'origine : inutile. Étape 4 — Conclure : les droites sont sécantes, donc une seule solution ($2x + 1 = -x + 4$ donne $x = 1$, puis $y = 3$). Ni « aucune » ni « une infinité » : cela exigerait la même pente.",
-                "answers": [
-                  {
-                    "content": "Une seule",
-                    "correct": true
-                  },
-                  {
-                    "content": "Aucune",
-                    "correct": false
-                  },
-                  {
-                    "content": "Une infinité",
-                    "correct": false
-                  },
-                  {
-                    "content": "Deux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Combien de solutions a le système $\\begin{cases} 2x + y = 3 \\\\ 4x + 2y = 9 \\end{cases}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $y = -2x + 3$ et $2y = -4x + 9$, donc $y = -2x + 4{,}5$. Étape 2 — Comparer les coefficients directeurs : $m = m' = -2$. Étape 3 — Comparer les ordonnées à l'origine : $3 \\neq 4{,}5$. Étape 4 — Conclure : droites parallèles distinctes, aucune solution. Ce n'est pas « une infinité » : il faudrait $p = p'$.",
-                "answers": [
-                  {
-                    "content": "Une seule",
-                    "correct": false
-                  },
-                  {
-                    "content": "Aucune",
-                    "correct": true
-                  },
-                  {
-                    "content": "Une infinité",
-                    "correct": false
-                  },
-                  {
-                    "content": "Deux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Le système $\\begin{cases} x - y = 2 \\\\ 3x - 3y = 6 \\end{cases}$ a une infinité de solutions.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $y = x - 2$ et $-3y = -3x + 6$, donc $y = x - 2$. Étape 2 — Comparer les coefficients directeurs : $m = m' = 1$. Étape 3 — Comparer les ordonnées à l'origine : $p = p' = -2$. Étape 4 — Conclure : les droites sont confondues, donc une infinité de solutions. Une seule équation suffit : la seconde est la première multipliée par 3.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le coefficient directeur $m$ de la droite d'équation $2x + 4y = 8$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $4y = -2x + 8$, donc $y = -0{,}5x + 2$, et lire le coefficient directeur : $m = -0{,}5$. L'erreur classique est de répondre $2$ (le coefficient de $x$ dans l'équation de départ) sans avoir isolé $y$.",
-                "answers": [
-                  {
-                    "content": "-0,5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Les droites $y = 2x + 1$ et $y = -x + 7$ se coupent en un point. Quelle est son abscisse ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait. Étape 2 — Comparer les coefficients directeurs : $2 \\neq -1$. Étape 3 — Comparer les ordonnées à l'origine : inutile. Étape 4 — Conclure : les droites sont sécantes. On résout $2x + 1 = -x + 7$, donc $3x = 6$ et $x = 2$ (puis $y = 5$).",
-                "answers": [
-                  {
-                    "content": "2",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quels systèmes ont une infinité de solutions ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ chaque système. Étape 2 — Comparer $m$. Étape 3 — Comparer $p$. Étape 4 — Conclure. Premier : $y = -x + 2$ deux fois, confondues. Troisième : $y = x - 1$ deux fois, confondues. Deuxième : $y = -x + 2$ et $y = -x + 5$, parallèles distinctes (aucune solution). Quatrième : $m = -1$ et $m' = 1$, sécantes (une solution). Cinquième : $y = -2x + 1$ et $y = -2x + 1{,}5$, parallèles distinctes (aucune solution).",
-                "answers": [
-                  {
-                    "content": "$x + y = 2$ et $2x + 2y = 4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x + y = 2$ et $x + y = 5$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x - y = 1$ et $3x - 3y = 3$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x + y = 3$ et $x - y = 3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x + y = 1$ et $4x + 2y = 3$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Compter les solutions d'un système",
+              "statement": "Dans cet exercice, tu mets les équations sous la forme $y = mx + p$ pour compter les solutions d'un système.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Combien de solutions a le système $\\begin{cases} y = 2x + 1 \\\\ y = -x + 4 \\end{cases}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = 2$, $p = 1$ et $m' = -1$, $p' = 4$. Étape 2 — Comparer les coefficients directeurs : $2 \\neq -1$. Étape 3 — Comparer les ordonnées à l'origine : inutile. Étape 4 — Conclure : les droites sont sécantes, donc une seule solution ($2x + 1 = -x + 4$ donne $x = 1$, puis $y = 3$). Ni « aucune » ni « une infinité » : cela exigerait la même pente.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions a le système $\\begin{cases} 2x + y = 3 \\\\ 4x + 2y = 9 \\end{cases}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $y = -2x + 3$ et $2y = -4x + 9$, donc $y = -2x + 4{,}5$. Étape 2 — Comparer les coefficients directeurs : $m = m' = -2$. Étape 3 — Comparer les ordonnées à l'origine : $3 \\neq 4{,}5$. Étape 4 — Conclure : droites parallèles distinctes, aucune solution. Ce n'est pas « une infinité » : il faudrait $p = p'$.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le système $\\begin{cases} x - y = 2 \\\\ 3x - 3y = 6 \\end{cases}$ a une infinité de solutions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $y = x - 2$ et $-3y = -3x + 6$, donc $y = x - 2$. Étape 2 — Comparer les coefficients directeurs : $m = m' = 1$. Étape 3 — Comparer les ordonnées à l'origine : $p = p' = -2$. Étape 4 — Conclure : les droites sont confondues, donc une infinité de solutions. Une seule équation suffit : la seconde est la première multipliée par 3.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le coefficient directeur $m$ de la droite d'équation $2x + 4y = 8$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $4y = -2x + 8$, donc $y = -0{,}5x + 2$, et lire le coefficient directeur : $m = -0{,}5$. L'erreur classique est de répondre $2$ (le coefficient de $x$ dans l'équation de départ) sans avoir isolé $y$.",
+                  "answers": [
+                    {
+                      "content": "-0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $y = 2x + 1$ et $y = -x + 7$ se coupent en un point. Quelle est son abscisse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait. Étape 2 — Comparer les coefficients directeurs : $2 \\neq -1$. Étape 3 — Comparer les ordonnées à l'origine : inutile. Étape 4 — Conclure : les droites sont sécantes. On résout $2x + 1 = -x + 7$, donc $3x = 6$ et $x = 2$ (puis $y = 5$).",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels systèmes ont une infinité de solutions ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ chaque système. Étape 2 — Comparer $m$. Étape 3 — Comparer $p$. Étape 4 — Conclure. Premier : $y = -x + 2$ deux fois, confondues. Troisième : $y = x - 1$ deux fois, confondues. Deuxième : $y = -x + 2$ et $y = -x + 5$, parallèles distinctes (aucune solution). Quatrième : $m = -1$ et $m' = 1$, sécantes (une solution). Cinquième : $y = -2x + 1$ et $y = -2x + 1{,}5$, parallèles distinctes (aucune solution).",
+                  "answers": [
+                    {
+                      "content": "$x + y = 2$ et $2x + 2y = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 2$ et $x + y = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x - y = 1$ et $3x - 3y = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 3$ et $x - y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + y = 1$ et $4x + 2y = 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Compter les solutions avec deux droites",
+              "statement": "Dans cet exercice, tu écris chaque équation sous la forme $y = mx + p$ pour savoir si deux droites sont sécantes, parallèles ou confondues.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Mets chaque équation sous la forme $y = mx + p$, compare les coefficients directeurs, puis les ordonnées à l'origine seulement si les pentes sont égales.",
+              "questions": [
+                {
+                  "content": "Combien de solutions a le système $y = 3x - 2$ et $y = 3x + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = 3$, $p = -2$ et $m' = 3$, $p' = 5$. Étape 2 — Comparer les coefficients directeurs : $3 = 3$, les pentes sont égales. Étape 3 — Comparer les ordonnées à l'origine : $-2 \\neq 5$. Étape 4 — Conclure : les droites sont parallèles distinctes, donc aucune solution. « Une seule » serait vrai pour des pentes différentes ; « une infinité » exigerait $p = p'$ ; « deux » est impossible pour deux droites.",
+                  "answers": [
+                    {
+                      "content": "Aucune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le coefficient directeur $m$ de la droite d'équation $6x + 2y = 10$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : on retire $6x$ aux deux membres, $2y = -6x + 10$, puis on divise tout par 2 : $y = -3x + 5$. Le coefficient directeur est donc $m = -3$ et l'ordonnée à l'origine $p = 5$. La valeur $3$ oublie le changement de signe quand $6x$ passe de l'autre côté ; la valeur $-6$ oublie de diviser par le coefficient de $y$.",
+                  "answers": [
+                    {
+                      "content": "-3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $y = 2x + 3$ et $4x - 2y = -6$ sont ___ (écris un mot : sécantes, parallèles ou confondues).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $4x - 2y = -6$ donne $-2y = -4x - 6$, puis $y = 2x + 3$. Étape 2 — Comparer les coefficients directeurs : $2 = 2$. Étape 3 — Comparer les ordonnées à l'origine : $3 = 3$. Étape 4 — Conclure : les deux équations décrivent la même droite, les droites sont confondues. Dire « parallèles » parce que les pentes sont égales oublie de comparer les ordonnées à l'origine.",
+                  "answers": [
+                    {
+                      "content": "confondues",
+                      "correct": true
+                    },
+                    {
+                      "content": "confondue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le système $x + 2y = 4$ et $3x + 6y = 9$ a une infinité de solutions.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $x + 2y = 4$ donne $y = -0{,}5x + 2$ ; $3x + 6y = 9$ donne $y = -0{,}5x + 1{,}5$. Étape 2 — Comparer les coefficients directeurs : $-0{,}5 = -0{,}5$. Étape 3 — Comparer les ordonnées à l'origine : $2 \\neq 1{,}5$. Étape 4 — Conclure : droites parallèles distinctes, donc aucune solution. L'affirmation est fausse : avoir la même pente ne suffit pas pour être confondues.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $y = x + 1$ et $y = -2x + 7$ se coupent en un point. Quelle est l'ordonnée de ce point ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait. Étape 2 — Comparer les coefficients directeurs : $1 \\neq -2$, les droites sont sécantes. Étape 4 — Conclure et calculer le point : $x + 1 = -2x + 7$ donne $3x = 6$, donc $x = 2$ ; puis $y = 2 + 1 = 3$. Vérification : $-2 \\times 2 + 7 = 3$. La valeur 2 est l'abscisse du point : l'énoncé demande l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque système au nombre de solutions qu'il a.",
+                  "question_type": "matching",
+                  "explanation": "Pour $y = 2x + 1$ et $y = 2x - 4$ : Étape 2, les pentes sont égales ($2$) ; Étape 3, les ordonnées à l'origine diffèrent ($1 \\neq -4$) : parallèles distinctes, aucune solution. Pour $y = x + 3$ et $2y = 2x + 6$ : l'équation $2y = 2x + 6$ donne $y = x + 3$, les deux droites sont confondues, donc une infinité de solutions. Pour $y = 4x - 1$ et $y = -x + 4$ : les pentes $4$ et $-1$ sont différentes, les droites sont sécantes, donc une seule solution (le point $(1\\,;\\,3)$).",
+                  "answers": [
+                    {
+                      "content": "$y = 2x + 1$ et $y = 2x - 4$",
+                      "match": "Aucune solution"
+                    },
+                    {
+                      "content": "$y = x + 3$ et $2y = 2x + 6$",
+                      "match": "Une infinité de solutions"
+                    },
+                    {
+                      "content": "$y = 4x - 1$ et $y = -x + 4$",
+                      "match": "Une seule solution"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie des droites dans un repère.",
             "questions": [
@@ -830,110 +1261,227 @@
           },
           "pitfall": "Ne mélange pas les nombres de personnes et les sommes d'argent. Contre-exemple : écrire « $x + y = 13\\,800$ » est faux, car $x$ et $y$ comptent des personnes (avec 24 adultes et 6 enfants, $x + y = 30$). La recette s'écrit avec les prix : $500x + 300y = 13\\,800$. Chaque inconnue se multiplie par **son** prix, sans les échanger.",
           "figure": null,
-          "exercise": {
-            "title": "Mettre en équations des problèmes",
-            "statement": "Dans cet exercice, tu mets en équations des situations de marché et de gbaka, puis tu résous.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Un marchand vend des mangues à 100 FCFA et des oranges à 50 FCFA. Un client achète 12 fruits pour 800 FCFA. On note $x$ le nombre de mangues et $y$ le nombre d'oranges. Quel système traduit la situation ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir les inconnues : $x$ mangues et $y$ oranges. Étape 2 — Traduire : « 12 fruits » donne $x + y = 12$ ; « 800 FCFA » donne $100x + 50y = 800$ (prix × nombre). La première proposition échange les nombres et les sommes d'argent ; la deuxième oublie de multiplier par $x$ et $y$ ; la dernière échange les prix : elle donnerait 100 FCFA par orange. Étape 3 — Résoudre : $100x + 50(12 - x) = 800$, soit $50x + 600 = 800$, donc $x = 4$ et $y = 8$.",
-                "answers": [
-                  {
-                    "content": "$x + y = 800$ et $100x + 50y = 12$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x + y = 12$ et $100 + 50 = 800$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$x + y = 12$ et $100x + 50y = 800$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x + y = 12$ et $50x + 100y = 800$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un marchand vend des mangues à 100 FCFA et des oranges à 50 FCFA. Un client achète 12 fruits pour 800 FCFA. Combien de mangues achète-t-il ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Choisir les inconnues : $x$ mangues, $y$ oranges. Étape 2 — Traduire : $x + y = 12$ et $100x + 50y = 800$. Étape 3 — Résoudre : $y = 12 - x$, donc $100x + 50(12 - x) = 800$, soit $50x + 600 = 800$, donc $x = 4$. Étape 4 — Vérifier : $y = 8$, $4 + 8 = 12$ et $400 + 400 = 800$. Étape 5 — Répondre : il achète 4 mangues.",
-                "answers": [
-                  {
-                    "content": "4",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Dans un gbaka, 20 passagers paient en tout 6 400 FCFA. Un adulte paie 400 FCFA et un enfant 200 FCFA. Combien y a-t-il d'enfants ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Choisir les inconnues : $x$ adultes, $y$ enfants. Étape 2 — Traduire : $x + y = 20$ et $400x + 200y = 6400$. Étape 3 — Résoudre : $y = 20 - x$, donc $400x + 200(20 - x) = 6400$, soit $200x + 4000 = 6400$, donc $x = 12$ et $y = 8$. Étape 4 — Vérifier : $12 + 8 = 20$ et $4800 + 1600 = 6400$. Étape 5 — Répondre : il y a 8 enfants.",
-                "answers": [
-                  {
-                    "content": "8",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Une tirelire contient 15 pièces, de 100 FCFA et de 50 FCFA, pour un total de 1 000 FCFA. Elle contient ___ pièces de 100 FCFA.",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Choisir les inconnues : $x$ pièces de 100 FCFA, $y$ pièces de 50 FCFA. Étape 2 — Traduire : $x + y = 15$ et $100x + 50y = 1000$. Étape 3 — Résoudre : $y = 15 - x$, donc $100x + 50(15 - x) = 1000$, soit $50x + 750 = 1000$, donc $x = 5$. Étape 4 — Vérifier : $y = 10$, $500 + 500 = 1000$. Étape 5 — Répondre : 5 pièces de 100 FCFA.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un problème sur des passagers de gbaka donne comme solution $x = -3$ adultes et $y = 33$ enfants. On peut garder cette solution.",
-                "question_type": "true_false",
-                "explanation": "Étape 4 — Vérifier que la solution a du sens : un nombre de personnes est un entier positif ou nul. Ici $x = -3$ est négatif, donc la solution est impossible, même si les calculs sont justes. Il faut revenir à l'Étape 2 — Traduire, et chercher l'erreur dans la mise en équation ou dans les données.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Dans un gbaka, 20 passagers paient en tout 9 000 FCFA. Un adulte paie 500 FCFA et un enfant 300 FCFA. On note $x$ le nombre d'adultes et $y$ le nombre d'enfants. Quelle équation traduit la recette ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 2 — Traduire : la recette est la somme des prix payés, soit prix × nombre pour chaque catégorie : $500x + 300y = 9000$. Étape 3 — Résoudre avec $x + y = 20$ : $500x + 300(20 - x) = 9000$, donc $200x = 3000$, $x = 15$ et $y = 5$. Étape 4 — Vérifier : $7500 + 1500 = 9000$. Les autres propositions sont le piège de la fiche : $x + y = 9000$ mélange personnes et argent ; $500 + 300 = 9000$ oublie les nombres ; $500y + 300x$ échange les prix.",
-                "answers": [
-                  {
-                    "content": "$x + y = 9000$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$500 + 300 = 9000$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$500y + 300x = 9000$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$500x + 300y = 9000$",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Mettre en équations des problèmes",
+              "statement": "Dans cet exercice, tu mets en équations des situations de marché et de gbaka, puis tu résous.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un marchand vend des mangues à 100 FCFA et des oranges à 50 FCFA. Un client achète 12 fruits pour 800 FCFA. On note $x$ le nombre de mangues et $y$ le nombre d'oranges. Quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ mangues et $y$ oranges. Étape 2 — Traduire : « 12 fruits » donne $x + y = 12$ ; « 800 FCFA » donne $100x + 50y = 800$ (prix × nombre). La première proposition échange les nombres et les sommes d'argent ; la deuxième oublie de multiplier par $x$ et $y$ ; la dernière échange les prix : elle donnerait 100 FCFA par orange. Étape 3 — Résoudre : $100x + 50(12 - x) = 800$, soit $50x + 600 = 800$, donc $x = 4$ et $y = 8$.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 800$ et $100x + 50y = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 12$ et $100 + 50 = 800$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 12$ et $100x + 50y = 800$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 12$ et $50x + 100y = 800$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marchand vend des mangues à 100 FCFA et des oranges à 50 FCFA. Un client achète 12 fruits pour 800 FCFA. Combien de mangues achète-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ mangues, $y$ oranges. Étape 2 — Traduire : $x + y = 12$ et $100x + 50y = 800$. Étape 3 — Résoudre : $y = 12 - x$, donc $100x + 50(12 - x) = 800$, soit $50x + 600 = 800$, donc $x = 4$. Étape 4 — Vérifier : $y = 8$, $4 + 8 = 12$ et $400 + 400 = 800$. Étape 5 — Répondre : il achète 4 mangues.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un gbaka, 20 passagers paient en tout 6 400 FCFA. Un adulte paie 400 FCFA et un enfant 200 FCFA. Combien y a-t-il d'enfants ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ adultes, $y$ enfants. Étape 2 — Traduire : $x + y = 20$ et $400x + 200y = 6400$. Étape 3 — Résoudre : $y = 20 - x$, donc $400x + 200(20 - x) = 6400$, soit $200x + 4000 = 6400$, donc $x = 12$ et $y = 8$. Étape 4 — Vérifier : $12 + 8 = 20$ et $4800 + 1600 = 6400$. Étape 5 — Répondre : il y a 8 enfants.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tirelire contient 15 pièces, de 100 FCFA et de 50 FCFA, pour un total de 1 000 FCFA. Elle contient ___ pièces de 100 FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ pièces de 100 FCFA, $y$ pièces de 50 FCFA. Étape 2 — Traduire : $x + y = 15$ et $100x + 50y = 1000$. Étape 3 — Résoudre : $y = 15 - x$, donc $100x + 50(15 - x) = 1000$, soit $50x + 750 = 1000$, donc $x = 5$. Étape 4 — Vérifier : $y = 10$, $500 + 500 = 1000$. Étape 5 — Répondre : 5 pièces de 100 FCFA.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un problème sur des passagers de gbaka donne comme solution $x = -3$ adultes et $y = 33$ enfants. On peut garder cette solution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier que la solution a du sens : un nombre de personnes est un entier positif ou nul. Ici $x = -3$ est négatif, donc la solution est impossible, même si les calculs sont justes. Il faut revenir à l'Étape 2 — Traduire, et chercher l'erreur dans la mise en équation ou dans les données.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un gbaka, 20 passagers paient en tout 9 000 FCFA. Un adulte paie 500 FCFA et un enfant 300 FCFA. On note $x$ le nombre d'adultes et $y$ le nombre d'enfants. Quelle équation traduit la recette ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Traduire : la recette est la somme des prix payés, soit prix × nombre pour chaque catégorie : $500x + 300y = 9000$. Étape 3 — Résoudre avec $x + y = 20$ : $500x + 300(20 - x) = 9000$, donc $200x = 3000$, $x = 15$ et $y = 5$. Étape 4 — Vérifier : $7500 + 1500 = 9000$. Les autres propositions sont le piège de la fiche : $x + y = 9000$ mélange personnes et argent ; $500 + 300 = 9000$ oublie les nombres ; $500y + 300x$ échange les prix.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 9000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500 + 300 = 9000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500y + 300x = 9000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x + 300y = 9000$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Traduire une situation en système",
+              "statement": "Dans cet exercice, tu choisis les inconnues, tu traduis des situations de marché et de classe en équations, puis tu résous, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord ce que représentent $x$ et $y$. Une phrase sur des nombres d'objets donne une équation, une phrase sur de l'argent donne une autre équation : prix × nombre.",
+              "questions": [
+                {
+                  "content": "Au marché de Gagnoa, un vendeur propose des petits sachets d'attiéké à 200 FCFA et des grands sachets à 500 FCFA. Un client achète 9 sachets pour 3 300 FCFA. On note $x$ le nombre de petits sachets et $y$ le nombre de grands sachets. Quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ petits sachets et $y$ grands sachets. Étape 2 — Traduire : « 9 sachets » donne $x + y = 9$ ; « 3 300 FCFA » donne $200x + 500y = 3300$ (prix × nombre). Le système avec $x + y = 3300$ mélange les nombres de sachets et les sommes d'argent. Celui avec $500x + 200y$ échange les prix. Celui avec $4500$ est la recette si les 9 sachets étaient tous grands, ce qui ne correspond pas à l'énoncé. Étape 3 — Résoudre : $200x + 500(9 - x) = 3300$ donne $x = 4$ et $y = 5$.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 9$ et $200x + 500y = 3300$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 3300$ et $200x + 500y = 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 9$ et $500x + 200y = 3300$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 9$ et $200x + 500y = 4500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un client achète 9 sachets d'attiéké pour 3 300 FCFA : des petits sachets à 200 FCFA et des grands sachets à 500 FCFA. Combien de grands sachets achète-t-il ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ petits sachets et $y$ grands sachets. Étape 2 — Traduire : $x + y = 9$ et $200x + 500y = 3300$. Étape 3 — Résoudre : $x = 9 - y$, donc $200(9 - y) + 500y = 3300$, soit $1800 + 300y = 3300$ et $y = 5$. Étape 4 — Vérifier : $x = 4$, ce sont des entiers positifs, et $800 + 2500 = 3300$. Étape 5 — Répondre : il achète 5 grands sachets. La valeur 4 est le nombre de petits sachets.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une classe de 40 élèves cotise pour une sortie (situation d'exemple) : chaque garçon donne 100 FCFA, chaque fille 150 FCFA, soit 5 200 FCFA en tout. Il y a ___ filles dans la classe.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ garçons et $y$ filles. Étape 2 — Traduire : $x + y = 40$ et $100x + 150y = 5200$. Étape 3 — Résoudre : $x = 40 - y$, donc $100(40 - y) + 150y = 5200$, soit $4000 + 50y = 5200$ et $y = 24$. Étape 4 — Vérifier : $x = 16$, entiers positifs, et $1600 + 3600 = 5200$. Étape 5 — Répondre : il y a 24 filles. La valeur 16 est le nombre de garçons.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une cour, on compte 5 animaux (poules et chèvres) et 15 pattes. On note $x$ le nombre de poules et $y$ le nombre de chèvres, donc $x + y = 5$ et $2x + 4y = 15$. On trouve $x = 2{,}5$ et $y = 2{,}5$. On peut garder cette solution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Résoudre : $x = 5 - y$, donc $2(5 - y) + 4y = 15$, soit $10 + 2y = 15$ et $y = 2{,}5$ ; ainsi $x = 2{,}5$. Les calculs sont justes. Étape 4 — Vérifier que la solution a du sens : un nombre d'animaux est un entier, et 2,5 poules n'existent pas. Il faut donc rejeter cette solution : l'énoncé est incohérent (avec des poules et des chèvres, le nombre de pattes est toujours pair). L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un maquis, un plat coûte 1 500 FCFA et une boisson 500 FCFA. Une table commande 6 articles (plats et boissons) pour 5 000 FCFA. On note $x$ le nombre de plats et $y$ le nombre de boissons. Quelles sont les deux équations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ plats et $y$ boissons. Étape 2 — Traduire : « 6 articles » donne $x + y = 6$ ; « 5 000 FCFA » donne $1500x + 500y = 5000$ (prix × nombre). L'équation $x + y = 5000$ mélange nombre d'articles et somme d'argent. L'équation $500x + 1500y = 5000$ échange les prix. Étape 3 — Résoudre : $x = 2$ et $y = 4$, car $3000 + 2000 = 5000$.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1500x + 500y = 5000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 5000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x + 1500y = 5000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour la table du maquis (plats à 1 500 FCFA, boissons à 500 FCFA, 6 articles pour 5 000 FCFA), remets dans l'ordre les étapes de la résolution du problème.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Choisir les inconnues, avec ce qu'elles représentent. Étape 2 — Traduire chaque phrase en équation. Étape 3 — Résoudre le système : $1500x + 500(6 - x) = 5000$ donne $1000x = 2000$, donc $x = 2$ et $y = 4$. Étape 4 — Vérifier que la solution a du sens et respecte l'énoncé. Étape 5 — Répondre par une phrase. L'ordre est imposé : on ne traduit pas avant d'avoir nommé les inconnues, et on ne répond qu'après avoir vérifié.",
+                  "answers": [
+                    {
+                      "content": "Choisir les inconnues : $x$ est le nombre de plats et $y$ le nombre de boissons."
+                    },
+                    {
+                      "content": "Traduire : $x + y = 6$ et $1500x + 500y = 5000$."
+                    },
+                    {
+                      "content": "Résoudre le système : $x = 2$ et $y = 4$."
+                    },
+                    {
+                      "content": "Vérifier : 2 et 4 sont des entiers positifs et $3000 + 2000 = 5000$."
+                    },
+                    {
+                      "content": "Répondre : la table a commandé 2 plats et 4 boissons."
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Une cliente achète 10 fruits pour 700 FCFA : des mangues à 100 FCFA pièce (nombre $x$) et des oranges à 50 FCFA pièce (nombre $y$).",
             "questions": [
@@ -1438,6 +1986,1457 @@
                 {
                   "content": "$x = \\ln 1$ et $y = \\ln 2$",
                   "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Résoudre un système de deux équations par substitution et par combinaison, calculer un déterminant et appliquer la méthode de Cramer, compter les solutions d'un système avec deux droites (sécantes, parallèles, confondues).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans cet exercice, on résout des systèmes de deux équations à deux inconnues par la méthode de substitution.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Isole l'inconnue dont le coefficient vaut 1 ou -1, remplace-la entre parenthèses dans l'autre équation, puis vérifie le couple trouvé dans les deux équations.",
+              "questions": [
+                {
+                  "content": "Dans le système $x + y = 11$ et $2x - y = 4$, on isole $y$ dans la première équation. Quelle expression obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler : on retire $x$ aux deux membres de $x + y = 11$, donc $y = 11 - x$. Cette expression sert ensuite à substituer dans l'autre équation : $2x - (11 - x) = 4$, soit $3x = 15$, donc $x = 5$ et $y = 6$. L'expression $y = x - 11$ oublie que $x$ change de signe en passant de l'autre côté. L'expression $y = 11 + x$ ajoute $x$ au lieu de le retirer. L'expression $y = 4 - 2x$ vient de l'autre équation avec un signe faux : $2x - y = 4$ donne $y = 2x - 4$.",
+                  "answers": [
+                    {
+                      "content": "$y = 11 - x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = x - 11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 11 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 4 - 2x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par substitution le système $x + y = 11$ et $2x - y = 4$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Isoler : $y = 11 - x$. Étape 2 — Substituer dans l'autre équation, avec des parenthèses : $2x - (11 - x) = 4$. Étape 3 — Résoudre : $2x - 11 + x = 4$, donc $3x = 15$ et $x = 5$. Étape 4 — Calculer : $y = 11 - 5 = 6$ ; vérification : $5 + 6 = 11$ et $10 - 6 = 4$. Sans parenthèses, on écrirait $2x - 11 - x$ et on trouverait $x = 15$ : le signe moins s'applique à toute l'expression $11 - x$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par substitution le système $y = 3x - 2$ et $2x + y = 8$. On trouve $y$ égal à ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Isoler : $y = 3x - 2$ est déjà isolé. Étape 2 — Substituer dans l'autre équation : $2x + (3x - 2) = 8$. Étape 3 — Résoudre : $5x - 2 = 8$, donc $x = 2$. Étape 4 — Calculer : $y = 3 \\times 2 - 2 = 4$ ; vérification : $4 + 4 = 8$. La valeur 2 est celle de $x$ : l'énoncé demande $y$. Substituer dans $y = 3x - 2$ elle-même ne mènerait à rien.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(4\\,;\\,7)$ est la solution du système $x + y = 11$ et $2x - y = 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier le couple dans les deux équations. Dans $x + y = 11$ : $4 + 7 = 11$, c'est juste. Dans $2x - y = 4$ : $8 - 7 = 1$, pas 4. Le couple ne vérifie qu'une équation, ce n'est donc pas la solution. La solution du système est $(5\\,;\\,6)$ : $5 + 6 = 11$ et $10 - 6 = 4$. Ne tester qu'une équation conduit à conclure « Vrai » à tort.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On résout $x - y = 1$ et $3x + 2y = 18$. On isole $x = y + 1$, puis on substitue dans l'autre équation : ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Isoler : $x = y + 1$. Étape 2 — Substituer dans $3x + 2y = 18$ en gardant les parenthèses : $3(y + 1) + 2y = 18$. Étape 3 — Résoudre : $5y + 3 = 18$, donc $y = 3$, puis $x = 4$. L'équation $3y + 1 + 2y = 18$ oublie les parenthèses : le facteur 3 ne multiplie que $y$. L'équation avec le second membre 1 garde le second membre de l'équation qui a servi à isoler. L'équation $(y + 1) - y = 1$ substitue dans la même équation et donne $1 = 1$ : elle n'apprend rien.",
+                  "answers": [
+                    {
+                      "content": "$3(y + 1) + 2y = 18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3y + 1 + 2y = 18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3(y + 1) + 2y = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(y + 1) - y = 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans cet exercice, on résout des systèmes par la méthode de combinaison : on égalise, on additionne, puis on calcule.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Repère l'inconnue dont les coefficients sont opposés, ou rends-les opposés en multipliant les deux membres d'une équation, puis additionne membre à membre.",
+              "questions": [
+                {
+                  "content": "On additionne membre à membre les équations $3x + 2y = 14$ et $x - 2y = 2$. Quelle valeur de $x$ obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ valent $2$ et $-2$, ils sont opposés, il n'y a rien à multiplier. Étape 2 — Additionner : $(3x + x) + (2y - 2y) = 14 + 2$, soit $4x = 16$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $12 + 2y = 14$, donc $y = 1$ ; vérification : $4 - 2 = 2$. La valeur 16 est le second membre de $4x = 16$ : il faut encore diviser par 4.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour éliminer $x$ par addition dans le système $2x + 3y = 13$ et $3x - y = 3$, par quels nombres multiplie-t-on la première puis la seconde équation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : en multipliant la première équation par $3$ et la seconde par $-2$, on obtient $6x + 9y = 39$ et $-6x + 2y = -6$ ; les coefficients de $x$ sont opposés. Étape 2 — Additionner : $11y = 33$. Étape 3 — Résoudre : $y = 3$. Étape 4 — Calculer : $2x + 9 = 13$, donc $x = 2$ ; vérification : $6 - 3 = 3$. Avec $2$ et $3$, on obtient $4x$ et $9x$ : pas d'opposés. Avec $3$ et $2$, on obtient $6x$ et $6x$ : ils sont égaux, pas opposés, et l'addition les double. Avec $-2$ et $-3$, on obtient $-4x$ et $-9x$.",
+                  "answers": [
+                    {
+                      "content": "$3$ et $-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ et $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$ et $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$ et $-3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par combinaison le système $2x + 3y = 13$ et $3x - y = 3$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : on multiplie la première équation par $3$ et la seconde par $-2$ : $6x + 9y = 39$ et $-6x + 2y = -6$. Étape 2 — Additionner : $11y = 33$. Étape 3 — Résoudre : $y = 3$. Étape 4 — Calculer : $2x + 9 = 13$, donc $x = 2$ ; vérification : $3 \\times 2 - 3 = 3$. La valeur 2 est celle de $x$. Une autre voie est aussi correcte : multiplier la seconde équation par 3 élimine $y$ en additionnant, et donne $11x = 22$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par combinaison le système $5x + 3y = 21$ et $2x - y = 4$. On trouve $x$ égal à ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Égaliser : on multiplie la seconde équation par 3 : $6x - 3y = 12$ ; les coefficients de $y$ sont $3$ et $-3$. Étape 2 — Additionner : $11x = 33$. Étape 3 — Résoudre : $x = 3$. Étape 4 — Calculer : dans $2x - y = 4$, on a $6 - y = 4$, donc $y = 2$. Vérification : $15 + 6 = 21$. Si on oubliait de multiplier le second membre par 3, on écrirait $6x - 3y = 4$ et on trouverait un résultat faux.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "En multipliant par $-2$ les deux membres de l'équation $3x - y = 5$, on obtient $-6x + 2y = -10$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Égaliser : multiplier par $-2$ change le signe de chaque terme et double sa valeur : $3x$ devient $-6x$, $-y$ devient $+2y$ et $5$ devient $-10$. L'équation obtenue est $-6x + 2y = -10$. Ses solutions sont celles de $3x - y = 5$ : le couple $(2\\,;\\,1)$ vérifie les deux équations ($-12 + 2 = -10$). L'erreur courante serait de ne changer que le signe du premier terme ou de laisser le second membre sans le multiplier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans cet exercice, on résout le système $4x + 3y = 17$ et $2x + 5y = 19$ par la méthode de Cramer, étape par étape.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Relève $a$, $b$, $c$, $a'$, $b'$, $c'$, puis calcule $D = ab' - a'b$, $D_x = cb' - c'b$ et $D_y = ac' - a'c$. Divise ensuite par $D$.",
+              "questions": [
+                {
+                  "content": "Calcule le déterminant $D$ du système $4x + 3y = 17$ et $2x + 5y = 19$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 4$, $b = 3$, $c = 17$, $a' = 2$, $b' = 5$, $c' = 19$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 4 \\times 5 - 2 \\times 3 = 20 - 6 = 14$. Comme $D \\neq 0$, le système a une seule solution. Écrire $20 + 6 = 26$ est une erreur : le déterminant est une différence de produits en croix.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $D_x = cb' - c'b$ pour le système $4x + 3y = 17$ et $2x + 5y = 19$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $c = 17$, $b = 3$, $c' = 19$, $b' = 5$. Étape 3 — Calculer $D_x = cb' - c'b = 17 \\times 5 - 19 \\times 3 = 85 - 57 = 28$. On en déduit $x = \\dfrac{D_x}{D} = \\dfrac{28}{14} = 2$. Intervertir les deux produits donnerait $-28$, donc $x = -2$ : avec $y = 3$, on aurait $-8 + 9 = 1$ et non 17, le couple serait faux.",
+                  "answers": [
+                    {
+                      "content": "28",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le système $4x + 3y = 17$ et $2x + 5y = 19$, on a $D = 14$ et $D_y = 42$. Alors $y$ égal à ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — On vérifie $D_y = ac' - a'c = 4 \\times 19 - 2 \\times 17 = 76 - 34 = 42$. Étape 4 — Conclure : $y = \\dfrac{D_y}{D} = \\dfrac{42}{14} = 3$. Vérification dans les deux équations : $4 \\times 2 + 3 \\times 3 = 17$ et $2 \\times 2 + 5 \\times 3 = 19$ (avec $x = \\dfrac{28}{14} = 2$). Diviser $D_y$ par $D_x$ au lieu de $D$ est une erreur.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le système $3x - 6y = 2$ et $x - 2y = 5$ a un déterminant non nul.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : $a = 3$, $b = -6$, $a' = 1$, $b' = -2$. Étape 2 — Calculer le déterminant : $D = 3 \\times (-2) - 1 \\times (-6) = -6 + 6 = 0$. Le déterminant est nul : Cramer ne s'applique pas. Ici, $3x - 6y = 2$ donne $x - 2y = \\dfrac{2}{3}$, alors que l'autre équation donne $x - 2y = 5$ : aucune solution. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on affirmer d'un système de deux équations à deux inconnues dont le déterminant $D$ vaut 0 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Calculer le déterminant : si $D = 0$, on arrête, car on ne peut pas diviser par $D$. Le système n'a alors soit aucune solution, soit une infinité, selon que les droites sont parallèles distinctes ou confondues. Exemples : $x + y = 1$ et $2x + 2y = 3$ ont $D = 0$ et aucune solution ; $x + y = 1$ et $2x + 2y = 2$ ont $D = 0$ et une infinité de solutions. « Toujours une infinité » et « jamais de solution » sont donc faux, et « une seule solution » exige $D \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "La méthode de Cramer ne s'applique pas : aucune solution ou une infinité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a toujours une infinité de solutions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a toujours une seule solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a jamais de solution",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans cet exercice, on compare des droites d'équations $y = mx + p$ pour compter les solutions d'un système.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare d'abord les coefficients directeurs $m$ et $m'$ : s'ils sont différents, les droites sont sécantes ; s'ils sont égaux, compare les ordonnées à l'origine.",
+              "questions": [
+                {
+                  "content": "Quel est le coefficient directeur de la droite d'équation $x - 2y = 6$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : on retire $x$ aux deux membres, $-2y = -x + 6$, puis on divise par $-2$ : $y = 0{,}5x - 3$. Le coefficient directeur est $m = 0{,}5$ et l'ordonnée à l'origine $p = -3$. La valeur $-0{,}5$ oublie que la division par $-2$ change aussi le signe de $x$. La valeur $1$ lit le coefficient de $x$ sans isoler $y$.",
+                  "answers": [
+                    {
+                      "content": "0,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions a le système $y = -x + 3$ et $y = 2x + 6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = -1$ et $m' = 2$. Étape 2 — Comparer les coefficients directeurs : $-1 \\neq 2$. Étape 4 — Conclure : les droites sont sécantes, donc une seule solution. « Aucune » ou « une infinité » exigeraient des pentes égales.",
+                  "answers": [
+                    {
+                      "content": "Une seule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $y = 2x - 1$ et $2y = 4x - 2$ sont ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $2y = 4x - 2$ donne $y = 2x - 1$. Étape 2 — Comparer les coefficients directeurs : $2 = 2$. Étape 3 — Comparer les ordonnées à l'origine : $-1 = -1$. Étape 4 — Conclure : les deux équations décrivent la même droite, elles sont confondues. « Parallèles distinctes » exigerait des ordonnées à l'origine différentes ; « sécantes » exigerait des pentes différentes.",
+                  "answers": [
+                    {
+                      "content": "confondues",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles distinctes",
+                      "correct": false
+                    },
+                    {
+                      "content": "sécantes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $y = -x + 3$ et $y = 2x + 6$ se coupent en un point. Quelle est l'abscisse de ce point ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Les pentes $-1$ et $2$ sont différentes : les droites sont sécantes. Étape 4 — Conclure et calculer : au point commun, $-x + 3 = 2x + 6$, donc $-3 = 3x$ et $x = -1$. L'ordonnée vaut $y = -(-1) + 3 = 4$ ; vérification : $2 \\times (-1) + 6 = 4$. La valeur $4$ est l'ordonnée du point, pas son abscisse.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $x + y = 4$ et $x + y = 9$ sont parallèles et distinctes : le système n'a aucune solution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $y = -x + 4$ et $y = -x + 9$. Étape 2 — Comparer les coefficients directeurs : $-1 = -1$. Étape 3 — Comparer les ordonnées à l'origine : $4 \\neq 9$. Étape 4 — Conclure : droites parallèles distinctes, aucune solution. On peut aussi le voir directement : $x + y$ ne peut pas valoir à la fois 4 et 9. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La vie courante en Côte d'Ivoire",
+          "notions": "Mettre en équations des situations de marché, de transport (gbaka), de coopérative de cacao et de commerce de pagnes en Côte d'Ivoire, puis résoudre par substitution, combinaison ou méthode de Cramer ; vérifier que la solution a du sens.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Bouaké, un tas d'ignames coûte $x$ FCFA et un régime de bananes plantain $y$ FCFA (prix d'exemple). Yao paie 3 200 FCFA pour 2 tas d'ignames et 3 régimes. Awa paie 2 700 FCFA pour 3 tas d'ignames et 1 régime.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Chaque phrase de l'énoncé donne une équation : nombre de tas × prix d'un tas + nombre de régimes × prix d'un régime = somme payée.",
+              "questions": [
+                {
+                  "content": "Au marché de Bouaké, un tas d'ignames coûte $x$ FCFA et un régime de bananes plantain $y$ FCFA. Yao paie 3 200 FCFA pour 2 tas et 3 régimes ; Awa paie 2 700 FCFA pour 3 tas et 1 régime. Quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ est le prix d'un tas, $y$ le prix d'un régime, en FCFA. Étape 2 — Traduire : 2 tas et 3 régimes pour 3 200 FCFA donnent $2x + 3y = 3200$ ; 3 tas et 1 régime pour 2 700 FCFA donnent $3x + y = 2700$. Le système avec les totaux échangés attribue à Yao la somme d'Awa. Celui avec $3x + 2y$ échange les nombres de tas et de régimes. Celui avec $x + y$ oublie les quantités : deux paiements différents ne peuvent pas correspondre à la même somme $x + y$.",
+                  "answers": [
+                    {
+                      "content": "$2x + 3y = 3200$ et $3x + y = 2700$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 3y = 2700$ et $3x + y = 3200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x + 2y = 3200$ et $x + 3y = 2700$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 3200$ et $x + y = 2700$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché de Bouaké, 2 tas d'ignames et 3 régimes de bananes plantain coûtent 3 200 FCFA, et 3 tas d'ignames et 1 régime coûtent 2 700 FCFA. Quel est le prix d'un tas d'ignames ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ le prix d'un tas, $y$ celui d'un régime. Étape 2 — Traduire : $2x + 3y = 3200$ et $3x + y = 2700$. Étape 3 — Résoudre : $y = 2700 - 3x$, donc $2x + 3(2700 - 3x) = 3200$, soit $-7x + 8100 = 3200$ et $x = 700$. Étape 4 — Vérifier : $y = 600$, et $1400 + 1800 = 3200$. Étape 5 — Répondre : un tas d'ignames coûte 700 FCFA. La valeur 600 est le prix d'un régime.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Au marché de Bouaké, 2 tas d'ignames et 3 régimes de bananes plantain coûtent 3 200 FCFA, et 3 tas d'ignames et 1 régime coûtent 2 700 FCFA. Quel est le prix d'un régime de bananes plantain ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ le prix d'un tas, $y$ celui d'un régime. Étape 2 — Équations : $2x + 3y = 3200$ et $3x + y = 2700$. Étape 3 — Résolution par combinaison : on multiplie la seconde équation par $-2$ et la première par $3$ pour éliminer $x$ : $6x + 9y = 9600$ et $-6x - 2y = -5400$, d'où $7y = 4200$ et $y = 600$. Étape 4 — Vérifier : $x = 700$ et $2100 + 600 = 2700$. Un régime coûte 600 FCFA. Dans la combinaison, il faut multiplier aussi les seconds membres.",
+                  "answers": [
+                    {
+                      "content": "600",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans ce marché, un tas d'ignames et un régime de bananes plantain ont des prix tels que 2 tas et 3 régimes coûtent 3 200 FCFA, et 3 tas et 1 régime coûtent 2 700 FCFA. Combien paie Fanta pour 4 tas d'ignames et 5 régimes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ et $y$, les prix d'un tas et d'un régime. Étape 2 — Équations : $2x + 3y = 3200$ et $3x + y = 2700$. Étape 3 — Résolution : $x = 700$ et $y = 600$. Étape 4 — Calculer ce qui est demandé : $4x + 5y = 2800 + 3000 = 5800$. Étape 5 — Répondre : Fanta paie 5 800 FCFA. Additionner les deux paiements, 3 200 et 2 700, ne donne pas la réponse, car les quantités ne sont pas les mêmes.",
+                  "answers": [
+                    {
+                      "content": "5800",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Au marché de Bouaké, 2 tas d'ignames et 3 régimes de bananes plantain coûtent 3 200 FCFA, et 3 tas et 1 régime coûtent 2 700 FCFA. Un régime de bananes plantain coûte plus cher qu'un tas d'ignames.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Résoudre : on trouve $x = 700$ FCFA pour un tas d'ignames et $y = 600$ FCFA pour un régime de bananes plantain. Étape 4 — Comparer : $600 < 700$, donc un régime coûte moins cher qu'un tas. L'affirmation est fausse. On ne peut pas conclure à partir des paiements seuls, car Yao paie plus qu'Awa en achetant plus d'objets, pas parce qu'un régime serait plus cher.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un gbaka de la ligne Abobo–Plateau transporte 36 passagers : $x$ adultes qui paient 400 FCFA chacun et $y$ élèves qui paient 250 FCFA chacun. La recette est de 12 000 FCFA (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une équation compte les personnes, l'autre compte l'argent : chaque nombre de personnes se multiplie par son prix.",
+              "questions": [
+                {
+                  "content": "Un gbaka transporte 36 passagers : $x$ adultes à 400 FCFA et $y$ élèves à 250 FCFA, pour une recette de 12 000 FCFA. Quelles sont les deux équations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ adultes et $y$ élèves. Étape 2 — Traduire : « 36 passagers » donne $x + y = 36$ ; « recette de 12 000 FCFA » donne $400x + 250y = 12000$ (prix × nombre). L'équation $x + y = 12000$ mélange personnes et argent. L'équation $250x + 400y = 12000$ échange les prix : chaque inconnue se multiplie par son propre prix.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 36$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$400x + 250y = 12000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 12000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$250x + 400y = 12000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka transporte 36 passagers : des adultes à 400 FCFA et des élèves à 250 FCFA. La recette est de 12 000 FCFA. Combien y a-t-il d'adultes ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ adultes, $y$ élèves. Étape 2 — Équations : $x + y = 36$ et $400x + 250y = 12000$. Étape 3 — Résoudre : $y = 36 - x$, donc $400x + 250(36 - x) = 12000$, soit $150x + 9000 = 12000$ et $x = 20$. Étape 4 — Vérifier : $y = 16$ et $8000 + 4000 = 12000$. Étape 5 — Répondre : il y a 20 adultes. La valeur 16 est le nombre d'élèves.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "adultes"
+                },
+                {
+                  "content": "Un gbaka transporte 36 passagers : des adultes à 400 FCFA et des élèves à 250 FCFA. La recette est de 12 000 FCFA. Combien y a-t-il d'élèves ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ adultes, $y$ élèves. Étape 2 — Équations : $x + y = 36$ et $400x + 250y = 12000$. Étape 3 — Résolution par combinaison : on multiplie la première équation par $-400$ : $-400x - 400y = -14400$ ; en additionnant avec la seconde, $-150y = -2400$, donc $y = 16$. Étape 4 — Vérifier : $x = 20$ et $400 \\times 20 + 250 \\times 16 = 12000$. Il y a 16 élèves.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Dans un gbaka de 36 passagers (20 adultes à 400 FCFA, 16 élèves à 250 FCFA), la somme payée par les adultes est supérieure à celle payée par les élèves.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer chaque somme : les adultes paient $400 \\times 20 = 8000$ FCFA, les élèves $250 \\times 16 = 4000$ FCFA. Étape 4 — Comparer : $8000 > 4000$. L'affirmation est vraie. Comparer seulement les prix par personne ($400 > 250$) ne suffirait pas : il faut aussi tenir compte du nombre de personnes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un gbaka de 36 passagers (adultes à 400 FCFA, élèves à 250 FCFA, recette de 12 000 FCFA), les adultes paient en tout ___ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Inconnues : $x$ adultes, $y$ élèves. Étape 2 — Équations : $x + y = 36$ et $400x + 250y = 12000$. Étape 3 — Résoudre : $x = 20$ et $y = 16$. Étape 4 — Calculer ce qui est demandé : la somme payée par les adultes est $400 \\times 20 = 8000$ FCFA. La valeur 12 000 est la recette totale, qui comprend aussi les élèves.",
+                  "answers": [
+                    {
+                      "content": "8000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une coopérative de Daloa expédie 20 sacs de cacao : $x$ sacs de 60 kg et $y$ sacs de 30 kg, soit 1 050 kg au total (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une équation compte les sacs, l'autre compte les kilogrammes. Tu peux résoudre par substitution ou par combinaison.",
+              "questions": [
+                {
+                  "content": "Remets dans l'ordre les étapes de la résolution par substitution pour 20 sacs de cacao de 60 kg ou de 30 kg, pesant 1 050 kg au total.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Traduire : 20 sacs donnent $x + y = 20$ ; 1 050 kg donnent $60x + 30y = 1050$. Étape 2 — Isoler puis substituer : $y = 20 - x$ remplacé dans la seconde équation, avec des parenthèses. Étape 3 — Résoudre : $60x + 600 - 30x = 1050$, donc $30x = 450$ et $x = 15$. Étape 4 — Calculer et vérifier : $y = 5$, $900 + 150 = 1050$. Étape 5 — Répondre par une phrase. Cet ordre ne peut pas changer : on ne substitue qu'après avoir isolé, et on ne répond qu'après avoir vérifié.",
+                  "answers": [
+                    {
+                      "content": "Traduire : $x + y = 20$ et $60x + 30y = 1050$."
+                    },
+                    {
+                      "content": "Isoler $y = 20 - x$ et substituer : $60x + 30(20 - x) = 1050$."
+                    },
+                    {
+                      "content": "Résoudre : $30x + 600 = 1050$, donc $x = 15$."
+                    },
+                    {
+                      "content": "Calculer $y = 20 - 15 = 5$ et vérifier : $900 + 150 = 1050$."
+                    },
+                    {
+                      "content": "Répondre : 15 sacs de 60 kg et 5 sacs de 30 kg."
+                    }
+                  ]
+                },
+                {
+                  "content": "Une coopérative expédie 20 sacs de cacao, de 60 kg ou de 30 kg, pour 1 050 kg au total. Combien y a-t-il de sacs de 60 kg ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ sacs de 60 kg, $y$ sacs de 30 kg. Étape 2 — Équations : $x + y = 20$ et $60x + 30y = 1050$. Étape 3 — Résoudre : $y = 20 - x$, donc $60x + 30(20 - x) = 1050$, soit $30x = 450$ et $x = 15$. Étape 4 — Vérifier : $y = 5$ et $900 + 150 = 1050$. Il y a 15 sacs de 60 kg. La valeur 5 est le nombre de sacs de 30 kg.",
+                  "answers": [
+                    {
+                      "content": "15",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "sacs"
+                },
+                {
+                  "content": "Une coopérative expédie 20 sacs de cacao, de 60 kg ou de 30 kg, pour 1 050 kg au total. Quelle est la masse totale des sacs de 30 kg ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ sacs de 60 kg, $y$ sacs de 30 kg. Étape 2 — Équations : $x + y = 20$ et $60x + 30y = 1050$. Étape 3 — Résoudre : $x = 15$ et $y = 5$. Étape 4 — Calculer ce qui est demandé : la masse des sacs de 30 kg est $30 \\times 5 = 150$ kg. Le nombre 5 est un nombre de sacs, pas une masse : il faut le multiplier par 30.",
+                  "answers": [
+                    {
+                      "content": "150",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "kg"
+                },
+                {
+                  "content": "Pour 20 sacs de cacao de 60 kg ou de 30 kg pesant 1 050 kg au total, le couple $(10\\,;\\,10)$ (10 sacs de chaque sorte) convient.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Vérifier le couple dans les deux équations. Dans $x + y = 20$ : $10 + 10 = 20$, c'est juste. Dans $60x + 30y = 1050$ : $600 + 300 = 900$, pas 1 050. Le couple ne vérifie qu'une équation, il ne convient pas. La solution est $(15\\,;\\,5)$. Un couple solution doit vérifier les deux équations à la fois.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour résoudre $x + y = 20$ et $60x + 30y = 1050$ par combinaison en éliminant $y$, on multiplie la première équation par ___ puis on additionne.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Égaliser : le coefficient de $y$ vaut $1$ dans la première équation et $30$ dans la seconde ; en multipliant la première par $-30$, on obtient $-30x - 30y = -600$. Étape 2 — Additionner : $30x = 450$. Étape 3 — Résoudre : $x = 15$. Étape 4 — Calculer : $y = 20 - 15 = 5$. Multiplier par $30$ donne $+30y$ : on aurait $60y$ après addition, $y$ ne disparaîtrait pas. Multiplier par $2$ ou par $-2$ ne rend pas les coefficients opposés à $30$.",
+                  "answers": [
+                    {
+                      "content": "$-30$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À Korhogo, un mètre de pagne coûte $x$ FCFA et une bobine de fil $y$ FCFA (prix d'exemple). Mme Fatou paie 5 500 FCFA pour 3 mètres de pagne et 2 bobines ; sa voisine paie 3 500 FCFA pour 1 mètre et 4 bobines.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris le système, puis calcule $D$, $D_x$ et $D_y$ avec les formules de la fiche. Vérifie que $D$ n'est pas nul avant de diviser.",
+              "questions": [
+                {
+                  "content": "À Korhogo, un mètre de pagne coûte $x$ FCFA et une bobine de fil $y$ FCFA. Mme Fatou paie 5 500 FCFA pour 3 mètres et 2 bobines ; sa voisine paie 3 500 FCFA pour 1 mètre et 4 bobines. Quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ le prix d'un mètre de pagne, $y$ celui d'une bobine. Étape 2 — Traduire : 3 mètres et 2 bobines pour 5 500 FCFA donnent $3x + 2y = 5500$ ; 1 mètre et 4 bobines pour 3 500 FCFA donnent $x + 4y = 3500$. Avec les totaux échangés, on attribue à chaque cliente le paiement de l'autre. Avec $2x + 3y$ et $4x + y$, on échange les quantités de mètres et de bobines. Avec $x + y$ des deux côtés, on oublie les quantités.",
+                  "answers": [
+                    {
+                      "content": "$3x + 2y = 5500$ et $x + 4y = 3500$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 2y = 3500$ et $x + 4y = 5500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 3y = 5500$ et $4x + y = 3500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + y = 5500$ et $x + y = 3500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le déterminant $D$ du système $3x + 2y = 5500$ et $x + 4y = 3500$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 3$, $b = 2$, $c = 5500$, $a' = 1$, $b' = 4$, $c' = 3500$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 3 \\times 4 - 1 \\times 2 = 12 - 2 = 10$. Comme $D \\neq 0$, le système a une seule solution et la méthode de Cramer s'applique. Calculer $12 + 2 = 14$ est une erreur : c'est une différence de produits en croix.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $D_x = cb' - c'b$ pour le système $3x + 2y = 5500$ et $x + 4y = 3500$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $c = 5500$, $b = 2$, $c' = 3500$, $b' = 4$. Étape 3 — Calculer $D_x = cb' - c'b = 5500 \\times 4 - 3500 \\times 2 = 22000 - 7000 = 15000$. Étape 4 — On en déduit $x = \\dfrac{15000}{10} = 1500$ : un mètre de pagne coûte 1 500 FCFA. Intervertir les deux produits donnerait $-15000$, donc un prix négatif, ce qui n'a aucun sens.",
+                  "answers": [
+                    {
+                      "content": "15000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le système $3x + 2y = 5500$ et $x + 4y = 3500$, on a $D = 10$, $D_x = 15000$ et $D_y = 5000$. Le prix d'une bobine de fil est ___ FCFA.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — On vérifie $D_y = ac' - a'c = 3 \\times 3500 - 1 \\times 5500 = 10500 - 5500 = 5000$. Étape 4 — Conclure : $y = \\dfrac{D_y}{D} = \\dfrac{5000}{10} = 500$. Vérification : $3 \\times 1500 + 2 \\times 500 = 5500$ et $1500 + 4 \\times 500 = 3500$. La valeur 1 500 est le prix du mètre de pagne ($x = \\dfrac{D_x}{D}$), pas celui de la bobine.",
+                  "answers": [
+                    {
+                      "content": "500",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $3x + 2y = 5500$ et $x + 4y = 3500$ sont sécantes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $3x + 2y = 5500$ donne $y = -1{,}5x + 2750$ ; $x + 4y = 3500$ donne $y = -0{,}25x + 875$. Étape 2 — Comparer les coefficients directeurs : $-1{,}5 \\neq -0{,}25$. Étape 4 — Conclure : les droites sont sécantes, donc le système a une seule solution, ce qui correspond à $D = 10 \\neq 0$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Vérifier qu'un couple est solution d'un système, justifier le choix d'une méthode de combinaison, discuter le nombre de solutions selon le déterminant et les équations, interpréter graphiquement un système avec deux droites sécantes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On considère le système $2x + 3y = 12$ et $x - y = 1$. Dans cet exercice, on vérifie des couples sans résoudre le système.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour qu'un couple soit solution d'un système, il doit vérifier les deux équations : remplace $x$ et $y$ dans chacune d'elles.",
+              "questions": [
+                {
+                  "content": "Le couple $(3\\,;\\,2)$ est solution du système $2x + 3y = 12$ et $x - y = 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tester la première équation : $2 \\times 3 + 3 \\times 2 = 6 + 6 = 12$, c'est juste. Étape 2 — Tester la seconde équation : $3 - 2 = 1$, c'est juste. Le couple vérifie les deux équations, c'est donc une solution du système. La vérification dans les deux équations est la seule preuve valable.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(6\\,;\\,0)$ est solution du système $2x + 3y = 12$ et $x - y = 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tester la première équation : $2 \\times 6 + 3 \\times 0 = 12$, c'est juste. Étape 2 — Tester la seconde équation : $6 - 0 = 6$, pas 1. Le couple ne vérifie qu'une équation sur deux, ce n'est pas une solution du système. S'arrêter à la première équation conduirait à tort à répondre « Vrai ».",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple $(6\\,;\\,0)$ vérifie $2x + 3y = 12$, mais il n'est pas solution du système $2x + 3y = 12$ et $x - y = 1$. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Tester $(6\\,;\\,0)$ dans $2x + 3y = 12$ : $12 = 12$, elle est vérifiée. Étape 2 — Tester dans $x - y = 1$ : $6 - 0 = 6 \\neq 1$, elle n'est pas vérifiée. C'est donc cette équation qui élimine le couple. Dire qu'il ne vérifie pas $2x + 3y = 12$ est faux, comme dire qu'il vérifie les deux : un couple solution doit vérifier toutes les équations.",
+                  "answers": [
+                    {
+                      "content": "Il ne vérifie pas l'équation $x - y = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ne vérifie pas l'équation $2x + 3y = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il vérifie les deux équations",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $k$ le couple $(3\\,;\\,2)$ vérifie-t-il l'équation $kx + y = 11$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Remplacer $x$ et $y$ par les valeurs du couple : $k \\times 3 + 2 = 11$. Étape 2 — Résoudre l'équation en $k$ : $3k = 9$, donc $k = 3$. Étape 3 — Vérifier : $3 \\times 3 + 2 = 11$. La valeur 9 est le résultat de $3k$, pas de $k$ : il faut encore diviser par 3. La valeur 11 est le second membre.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux couples qui vérifient l'équation $x - y = 1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Tester chaque couple dans $x - y = 1$. Pour $(5\\,;\\,4)$ : $5 - 4 = 1$, c'est juste. Pour $(3\\,;\\,2)$ : $3 - 2 = 1$, c'est juste. Pour $(2\\,;\\,3)$ : $2 - 3 = -1$, les deux nombres sont échangés. Pour $(1\\,;\\,2)$ : $1 - 2 = -1$, même erreur. Une équation à deux inconnues a une infinité de solutions ; c'est la seconde équation du système qui en retient une seule.",
+                  "answers": [
+                    {
+                      "content": "$(5\\,;\\,4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,2)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On résout le système $2x + 5y = 18$ et $3x - 5y = 2$ par la méthode de combinaison, en justifiant chaque choix.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Regarde les coefficients de chaque inconnue : cherche une inconnue dont les coefficients sont opposés avant de multiplier quoi que ce soit.",
+              "questions": [
+                {
+                  "content": "On résout $2x + 5y = 18$ et $3x - 5y = 2$ par combinaison. Pourquoi peut-on additionner directement les deux équations ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Égaliser : on compare les coefficients. Pour $x$ : $2$ et $3$, ni opposés ni égaux. Pour $y$ : $5$ et $-5$, opposés. Étape 2 — Additionner : $y$ disparaît, il reste $5x = 20$. Les seconds membres $18$ et $2$ ne sont pas égaux, et de toute façon leur égalité n'aiderait pas à éliminer une inconnue. Dire que les coefficients de $x$ sont opposés ou égaux est faux : $2$ et $3$ ne sont ni l'un ni l'autre.",
+                  "answers": [
+                    {
+                      "content": "Les coefficients de $y$ sont opposés : $5$ et $-5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les coefficients de $x$ sont opposés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les seconds membres sont égaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les coefficients de $x$ sont égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par combinaison $2x + 5y = 18$ et $3x - 5y = 2$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont déjà opposés. Étape 2 — Additionner : $5x = 20$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer : $8 + 5y = 18$, donc $y = 2$ ; vérification : $12 - 10 = 2$. La valeur 20 est le second membre de $5x = 20$ : il faut encore diviser par 5.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous par combinaison $2x + 5y = 18$ et $3x - 5y = 2$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : rien à multiplier. Étape 2 — Additionner : $5x = 20$. Étape 3 — Résoudre : $x = 4$. Étape 4 — Calculer $y$ en remplaçant dans une équation de départ : $2 \\times 4 + 5y = 18$ donne $5y = 10$, donc $y = 2$ ; vérification : $3 \\times 4 - 5 \\times 2 = 2$. La valeur 4 est celle de $x$. Il ne faut pas s'arrêter après l'addition : elle n'a donné que $x$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le système $2x + 5y = 18$ et $3x - 5y = 2$, soustraire les deux équations membre à membre élimine l'inconnue $y$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ sont $5$ et $-5$. Étape 2 — En soustrayant, on calcule $5y - (-5y) = 10y$ : $y$ reste présent, avec un coefficient doublé. C'est l'addition qui élimine $y$, car $5y + (-5y) = 0$. Soustraire fait disparaître une inconnue seulement quand ses deux coefficients sont égaux. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la résolution par combinaison de $2x + 5y = 18$ et $3x - 5y = 2$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Égaliser : on repère (ou on crée) des coefficients opposés. Étape 2 — Additionner membre à membre : $y$ disparaît et il reste $5x = 20$. Étape 3 — Résoudre l'équation à une inconnue : $x = 4$. Étape 4 — Calculer l'autre inconnue : $8 + 5y = 18$ donne $y = 2$. Étape 5 — Vérifier : $8 + 10 = 18$ et $12 - 10 = 2$. On ne peut pas remplacer $x$ avant de l'avoir trouvé, ni conclure avant d'avoir vérifié.",
+                  "answers": [
+                    {
+                      "content": "Repérer que les coefficients de $y$ sont opposés : $5$ et $-5$."
+                    },
+                    {
+                      "content": "Additionner membre à membre : $5x = 20$."
+                    },
+                    {
+                      "content": "Résoudre : $x = 4$."
+                    },
+                    {
+                      "content": "Remplacer $x$ dans $2x + 5y = 18$ : $8 + 5y = 18$, donc $y = 2$."
+                    },
+                    {
+                      "content": "Vérifier le couple $(4\\,;\\,2)$ dans les deux équations."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie le système $x + 2y = 3$ et $2x + ky = m$, où $k$ et $m$ sont des nombres donnés. On discute le nombre de solutions selon ces nombres.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour ce système, $D = k - 4$. Quand $D$ vaut 0, regarde si la seconde équation est proportionnelle à la première, second membre compris.",
+              "questions": [
+                {
+                  "content": "Pour le système $x + 2y = 3$ et $2x + ky = 8$, quelle valeur de $k$ rend le déterminant $D$ nul ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $a' = 2$, $b' = k$. Étape 2 — Calculer le déterminant : $D = 1 \\times k - 2 \\times 2 = k - 4$. Étape 3 — Résoudre $D = 0$ : $k = 4$. Pour $k = 4$ la méthode de Cramer ne s'applique pas. La valeur 8 est le second membre de l'énoncé : il n'intervient pas dans le déterminant.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions a le système $x + 2y = 3$ et $2x + 4y = 6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $a' = 2$, $b' = 4$. Étape 2 — Calculer le déterminant : $D = 4 - 4 = 0$, donc ni une seule solution ni Cramer. Étape 3 — Comparer les équations : $2x + 4y = 6$ est la première multipliée par 2, second membre compris ; elles décrivent la même droite. Étape 4 — Conclure : droites confondues, donc une infinité de solutions. « Aucune » serait vrai si le second membre n'était pas proportionnel.",
+                  "answers": [
+                    {
+                      "content": "Une infinité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions a le système $x + 2y = 3$ et $2x + 4y = 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $a' = 2$, $b' = 4$. Étape 2 — Calculer le déterminant : $D = 0$. Étape 3 — Comparer : en multipliant la première équation par 2, on obtient $2x + 4y = 6$, alors que la seconde dit $2x + 4y = 7$ : $6 \\neq 7$. Étape 4 — Conclure : droites parallèles distinctes, donc aucune solution. Ne pas confondre avec le cas précédent : ici le second membre n'est pas proportionnel.",
+                  "answers": [
+                    {
+                      "content": "Aucune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $x + 2y = 3$ et $2x + 5y = 8$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 2$, $c = 3$, $a' = 2$, $b' = 5$, $c' = 8$. Étape 2 — Calculer le déterminant : $D = 5 - 4 = 1 \\neq 0$. Étape 3 — Calculer $D_x = 3 \\times 5 - 8 \\times 2 = -1$ et $D_y = 1 \\times 8 - 2 \\times 3 = 2$. Étape 4 — Conclure : $x = \\dfrac{-1}{1} = -1$ et $y = 2$ ; vérification : $-1 + 4 = 3$ et $-2 + 10 = 8$. La valeur 2 est celle de $y$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si le déterminant d'un système de deux équations à deux inconnues vaut 0, alors ce système n'a jamais de solution.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 2 — Calculer le déterminant : un déterminant nul empêche d'appliquer Cramer, mais ne dit pas qu'il n'y a pas de solution. Contre-exemple : $x + 2y = 3$ et $2x + 4y = 6$ ont $D = 1 \\times 4 - 2 \\times 2 = 0$, et pourtant le couple $(1\\,;\\,1)$ est solution, comme tous les couples de la droite $x + 2y = 3$. Si $D = 0$, il y a soit aucune solution, soit une infinité. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un repère, on trace les droites d'équations $x + y = 5$ et $2x - y = 1$, qui se coupent en un point (situation d'exemple de la fiche sur les droites).",
+              "exercise_type": "evaluation",
+              "figure": "droites-secantes",
+              "hint": "Mets chaque équation sous la forme $y = mx + p$, compare les coefficients directeurs, puis calcule le point d'intersection.",
+              "questions": [
+                {
+                  "content": "Les droites d'équations $y = -x + 5$ et $y = 2x - 1$ sont ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = -1$ et $m' = 2$. Étape 2 — Comparer les coefficients directeurs : $-1 \\neq 2$. Étape 4 — Conclure : les droites sont sécantes. « Parallèles » et « confondues » exigeraient des pentes égales, ce qui n'est pas le cas.",
+                  "answers": [
+                    {
+                      "content": "sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles distinctes",
+                      "correct": false
+                    },
+                    {
+                      "content": "confondues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $y = -x + 5$ et $y = 2x - 1$ se coupent en un point. Quelle est son abscisse ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 2 — Les pentes $-1$ et $2$ sont différentes : les droites se coupent. Étape 4 — Calculer le point : $-x + 5 = 2x - 1$ donne $6 = 3x$, donc $x = 2$. Vérification : $-2 + 5 = 3$ et $2 \\times 2 - 1 = 3$. La valeur 3 est l'ordonnée du point, pas son abscisse.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $y = -x + 5$ et $y = 2x - 1$ se coupent en un point. Son ordonnée est ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 4 — Calculer le point : $-x + 5 = 2x - 1$ donne $x = 2$. Puis $y = -2 + 5 = 3$ ; on vérifie avec l'autre droite : $2 \\times 2 - 1 = 3$. L'ordonnée est 3. La valeur 2 est l'abscisse. Substituer dans les deux droites et trouver le même résultat est la bonne façon de contrôler le calcul.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $(3\\,;\\,2)$ appartient aux deux droites d'équations $y = -x + 5$ et $y = 2x - 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Tester la droite $y = -x + 5$ : $-3 + 5 = 2$, le point est sur cette droite. Étape 2 — Tester la droite $y = 2x - 1$ : $2 \\times 3 - 1 = 5$, et non 2 : le point n'est pas sur cette droite. Comme deux droites sécantes n'ont qu'un seul point commun, $(2\\,;\\,3)$, le point $(3\\,;\\,2)$ qui échange les coordonnées est faux. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la solution du système $x + y = 5$ et $2x - y = 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Vérifier chaque couple dans les deux équations. Pour $(2\\,;\\,3)$ : $2 + 3 = 5$ et $4 - 3 = 1$, c'est juste. Pour $(3\\,;\\,2)$ : $3 + 2 = 5$ mais $6 - 2 = 4 \\neq 1$. Pour $(1\\,;\\,4)$ : $1 + 4 = 5$ mais $2 - 4 = -2 \\neq 1$. Pour $(2\\,;\\,1)$ : $2 + 1 = 3 \\neq 5$. Trois couples vérifient une seule équation ou aucune : seul $(2\\,;\\,3)$ vérifie les deux.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;\\,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;\\,1)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des cinq notions : mettre un problème en équations, résoudre par substitution, par combinaison et par la méthode de Cramer, interpréter un système avec deux droites (sécantes, parallèles, confondues) et discuter le nombre de solutions.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Man, Mme Sylla vend des mangues à $x$ FCFA pièce et des ananas à $y$ FCFA pièce (prix d'exemple). Un client paie 1 100 FCFA pour 5 mangues et 2 ananas ; un autre paie 1 500 FCFA pour 3 mangues et 4 ananas.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Mets la situation en équations, puis utilise la méthode demandée à chaque question : combinaison, déterminant, Cramer ou lecture des droites.",
+              "questions": [
+                {
+                  "content": "À Man, une mangue coûte $x$ FCFA et un ananas $y$ FCFA. Un client paie 1 100 FCFA pour 5 mangues et 2 ananas ; un autre paie 1 500 FCFA pour 3 mangues et 4 ananas. Quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ le prix d'une mangue, $y$ celui d'un ananas. Étape 2 — Traduire : 5 mangues et 2 ananas pour 1 100 FCFA donnent $5x + 2y = 1100$ ; 3 mangues et 4 ananas pour 1 500 FCFA donnent $3x + 4y = 1500$. Les totaux échangés attribuent à chaque client le paiement de l'autre. Avec $2x + 5y$ et $4x + 3y$, on échange mangues et ananas. Avec $5x + 3y$ et $2x + 4y$, on lit les coefficients par colonne au lieu de par client.",
+                  "answers": [
+                    {
+                      "content": "$5x + 2y = 1100$ et $3x + 4y = 1500$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5x + 2y = 1500$ et $3x + 4y = 1100$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 5y = 1100$ et $4x + 3y = 1500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x + 3y = 1100$ et $2x + 4y = 1500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans $5x + 2y = 1100$ et $3x + 4y = 1500$, on multiplie la première équation par $-2$, puis on additionne avec la seconde. Quelle valeur de $x$ obtient-on ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : $-2 \\times (5x + 2y) = -2 \\times 1100$ donne $-10x - 4y = -2200$ ; les coefficients de $y$ sont $-4$ et $4$. Étape 2 — Additionner avec la seconde équation : $-7x = -700$. Étape 3 — Résoudre : $x = 100$. Étape 4 — Calculer : $500 + 2y = 1100$, donc $y = 300$ ; vérification : $300 + 1200 = 1500$. Si on oubliait de multiplier le second membre par $-2$, on trouverait $-7x = 2600$, faux.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le déterminant $D$ du système $5x + 2y = 1100$ et $3x + 4y = 1500$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 5$, $b = 2$, $c = 1100$, $a' = 3$, $b' = 4$, $c' = 1500$. Étape 2 — Calculer le déterminant : $D = ab' - a'b = 5 \\times 4 - 3 \\times 2 = 20 - 6 = 14$. Comme $D \\neq 0$, le système a une seule solution. La valeur 26 vient d'une somme $20 + 6$ au lieu d'une différence.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Par la méthode de Cramer, résous $5x + 2y = 1100$ et $3x + 4y = 1500$. Quelle est la valeur de $y$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : $a = 5$, $b = 2$, $c = 1100$, $a' = 3$, $b' = 4$, $c' = 1500$. Étape 2 — Calculer le déterminant : $D = 20 - 6 = 14$. Étape 3 — Calculer $D_y = ac' - a'c = 5 \\times 1500 - 3 \\times 1100 = 7500 - 3300 = 4200$. Étape 4 — Conclure : $y = \\dfrac{4200}{14} = 300$ ; vérification : $5 \\times 100 + 2 \\times 300 = 1100$. Un ananas coûte 300 FCFA. La valeur 100 est le prix d'une mangue.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Les droites d'équations $5x + 2y = 1100$ et $3x + 4y = 1500$ sont sécantes.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : $5x + 2y = 1100$ donne $y = -2{,}5x + 550$ ; $3x + 4y = 1500$ donne $y = -0{,}75x + 375$. Étape 2 — Comparer les coefficients directeurs : $-2{,}5 \\neq -0{,}75$. Étape 4 — Conclure : droites sécantes, une seule solution, ce qui correspond à $D = 14 \\neq 0$. Le point d'intersection est $(100\\,;\\,300)$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une école de Yopougon organise une sortie pour 52 personnes : $x$ élèves qui paient 1 000 FCFA chacun et $y$ accompagnateurs qui paient 2 500 FCFA chacun. La recette est de 70 000 FCFA (situation d'exemple).",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une équation compte les personnes, l'autre compte l'argent. Après la résolution, vérifie que les nombres de personnes sont des entiers positifs.",
+              "questions": [
+                {
+                  "content": "Une sortie réunit 52 personnes : $x$ élèves à 1 000 FCFA et $y$ accompagnateurs à 2 500 FCFA, pour une recette de 70 000 FCFA. Quelles sont les deux équations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ élèves et $y$ accompagnateurs. Étape 2 — Traduire : « 52 personnes » donne $x + y = 52$ ; « recette de 70 000 FCFA » donne $1000x + 2500y = 70000$ (prix × nombre). L'équation $x + y = 70000$ mélange personnes et argent. L'équation $2500x + 1000y = 70000$ échange les prix.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 52$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1000x + 2500y = 70000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x + y = 70000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2500x + 1000y = 70000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une sortie réunit 52 personnes : des élèves à 1 000 FCFA et des accompagnateurs à 2 500 FCFA. La recette est de 70 000 FCFA. Combien y a-t-il d'élèves ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Inconnues : $x$ élèves et $y$ accompagnateurs. Étape 2 — Équations : $x + y = 52$ et $1000x + 2500y = 70000$. Étape 3 — Résoudre : $x = 52 - y$, donc $1000(52 - y) + 2500y = 70000$, soit $52000 + 1500y = 70000$, donc $y = 12$. Étape 4 — Vérifier : $x = 40$ et $40000 + 30000 = 70000$. Il y a 40 élèves. La valeur 12 est le nombre d'accompagnateurs.",
+                  "answers": [
+                    {
+                      "content": "40",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "élèves"
+                },
+                {
+                  "content": "Une sortie réunit 52 personnes : des élèves à 1 000 FCFA et des accompagnateurs à 2 500 FCFA, pour une recette de 70 000 FCFA. Il y a ___ accompagnateurs.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Inconnues : $x$ élèves et $y$ accompagnateurs. Étape 2 — Équations : $x + y = 52$ et $1000x + 2500y = 70000$. Étape 3 — Résolution par combinaison : on multiplie la première équation par $-1000$ : $-1000x - 1000y = -52000$ ; en additionnant, $1500y = 18000$, donc $y = 12$. Étape 4 — Vérifier : $x = 40$, entiers positifs, et $40000 + 30000 = 70000$. Il y a 12 accompagnateurs.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une sortie de 40 élèves à 1 000 FCFA et 12 accompagnateurs à 2 500 FCFA, les accompagnateurs paient en tout 30 000 FCFA.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer la somme payée par les accompagnateurs : $12 \\times 2500 = 30000$ FCFA. Étape 4 — Contrôler : les élèves paient $40 \\times 1000 = 40000$ FCFA, et $40000 + 30000 = 70000$, la recette annoncée. L'affirmation est vraie. Il ne faut pas confondre ce total avec le prix d'un accompagnateur, 2 500 FCFA.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le déterminant du système $x + y = 52$ et $1000x + 2500y = 70000$ est non nul. Ce système a donc ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Écrire : $a = 1$, $b = 1$, $a' = 1000$, $b' = 2500$. Étape 2 — Calculer le déterminant : $D = 1 \\times 2500 - 1000 \\times 1 = 1500$. Comme $D \\neq 0$, le système a une seule solution : $x = 40$ et $y = 12$. « Aucune » ou « une infinité » exigeraient $D = 0$, c'est-à-dire des droites parallèles ou confondues.",
+                  "answers": [
+                    {
+                      "content": "une seule solution",
+                      "correct": true
+                    },
+                    {
+                      "content": "aucune solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "une infinité de solutions",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans une boutique de Korhogo, deux offres d'appel sont proposées (tarifs d'exemple). Offre A : 500 FCFA d'abonnement, puis 20 FCFA la minute. Offre B : 200 FCFA d'abonnement, puis 50 FCFA la minute. On note $x$ le nombre de minutes et $y$ le coût en FCFA.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le coût est égal à l'abonnement plus le prix de la minute multiplié par le nombre de minutes : chaque offre est une droite $y = mx + p$.",
+              "questions": [
+                {
+                  "content": "Offre A : 500 FCFA d'abonnement puis 20 FCFA la minute. Offre B : 200 FCFA d'abonnement puis 50 FCFA la minute. Avec $x$ minutes et un coût $y$ en FCFA, quel système traduit la situation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Choisir les inconnues : $x$ le nombre de minutes, $y$ le coût en FCFA. Étape 2 — Traduire : coût = abonnement + prix de la minute × nombre de minutes, donc $y = 20x + 500$ pour l'offre A et $y = 50x + 200$ pour l'offre B. Le système avec $500x + 20$ échange l'abonnement et le prix de la minute. Celui avec $20x + 200$ échange les abonnements des deux offres. Celui avec $-500$ soustrait l'abonnement au lieu de l'ajouter.",
+                  "answers": [
+                    {
+                      "content": "$y = 20x + 500$ et $y = 50x + 200$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 500x + 20$ et $y = 200x + 50$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 20x + 200$ et $y = 50x + 500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 20x - 500$ et $y = 50x - 200$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Offre A : $y = 20x + 500$. Offre B : $y = 50x + 200$ ($x$ minutes, $y$ en FCFA). Pour combien de minutes les deux offres coûtent-elles le même prix ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait, $m = 20$ et $m' = 50$. Étape 2 — Comparer les coefficients directeurs : $20 \\neq 50$, les droites sont sécantes. Étape 4 — Conclure : les coûts sont égaux si $20x + 500 = 50x + 200$, donc $300 = 30x$ et $x = 10$. Les deux offres coûtent le même prix pour 10 minutes. La valeur 700 est ce prix commun, pas la durée.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "min"
+                },
+                {
+                  "content": "Offre A : $y = 20x + 500$. Offre B : $y = 50x + 200$ ($x$ minutes, $y$ en FCFA). Les deux offres coûtent le même prix pour 10 minutes. Quel est ce prix ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 3 — Substituer $x = 10$ dans l'offre A : $y = 20 \\times 10 + 500 = 700$. Étape 4 — Vérifier avec l'offre B : $y = 50 \\times 10 + 200 = 700$. Les deux résultats sont égaux, ce qui confirme le point d'intersection $(10\\,;\\,700)$. Le prix commun est 700 FCFA. La valeur 10 est la durée, pas le prix.",
+                  "answers": [
+                    {
+                      "content": "700",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "FCFA"
+                },
+                {
+                  "content": "Offre A : $y = 20x + 500$. Offre B : $y = 50x + 200$ ($x$ minutes, $y$ en FCFA). Pour 15 minutes d'appel, l'offre B coûte plus cher que l'offre A.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Calculer pour $x = 15$. Offre A : $y = 20 \\times 15 + 500 = 800$ FCFA. Offre B : $y = 50 \\times 15 + 200 = 950$ FCFA. Étape 4 — Comparer : $950 > 800$, donc l'offre B est plus chère. L'affirmation est vraie. Au-delà de 10 minutes, la pente plus forte de B (50 contre 20) l'emporte sur son abonnement plus faible.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites d'équations $y = 20x + 500$ et $y = 50x + 200$ sont ___",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Mettre sous la forme $y = mx + p$ : c'est déjà fait. Étape 2 — Comparer les coefficients directeurs : $20 \\neq 50$. Étape 4 — Conclure : les droites sont sécantes, donc le système a une seule solution, le point $(10\\,;\\,700)$. Les deux autres cas exigeraient des pentes égales.",
+                  "answers": [
+                    {
+                      "content": "sécantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "parallèles distinctes",
+                      "correct": false
+                    },
+                    {
+                      "content": "confondues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans cet exercice, on utilise les quatre outils de la leçon (substitution, combinaison, déterminant et droites) pour raisonner sur des systèmes de deux équations.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Choisis l'outil le plus rapide pour chaque système : coefficients opposés pour la combinaison, coefficient égal à 1 pour la substitution, déterminant pour décider du nombre de solutions.",
+              "questions": [
+                {
+                  "content": "Relie chaque système au nombre de solutions qu'il admet.",
+                  "question_type": "matching",
+                  "explanation": "Pour $x + y = 3$ et $x - y = 1$ : le déterminant $D = 1 \\times (-1) - 1 \\times 1 = -2 \\neq 0$, donc une seule solution, $(2\\,;\\,1)$. Pour $x + y = 3$ et $2x + 2y = 6$ : $D = 0$ et la seconde équation est la première multipliée par 2, second membre compris : droites confondues, une infinité de solutions. Pour $x + y = 3$ et $x + y = 5$ : $D = 0$ et $3 \\neq 5$ : droites parallèles distinctes, aucune solution.",
+                  "answers": [
+                    {
+                      "content": "$x + y = 3$ et $x - y = 1$",
+                      "match": "Une seule solution"
+                    },
+                    {
+                      "content": "$x + y = 3$ et $2x + 2y = 6$",
+                      "match": "Une infinité de solutions"
+                    },
+                    {
+                      "content": "$x + y = 3$ et $x + y = 5$",
+                      "match": "Aucune solution"
+                    }
+                  ]
+                },
+                {
+                  "content": "Résous $x + y = 3$ et $x - y = 1$. Quelle est la valeur de $x$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Égaliser : les coefficients de $y$ valent $1$ et $-1$, ils sont opposés. Étape 2 — Additionner : $2x = 4$. Étape 3 — Résoudre : $x = 2$. Étape 4 — Calculer : $2 + y = 3$, donc $y = 1$ ; vérification : $2 - 1 = 1$. La valeur 4 est le second membre de $2x = 4$ : il faut diviser par 2.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Par la méthode de Cramer, on résout $3x + y = 10$ et $x + 2y = 5$. On trouve $y$ égal à ___",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Écrire : $a = 3$, $b = 1$, $c = 10$, $a' = 1$, $b' = 2$, $c' = 5$. Étape 2 — Calculer le déterminant : $D = 3 \\times 2 - 1 \\times 1 = 5 \\neq 0$. Étape 3 — Calculer $D_y = ac' - a'c = 3 \\times 5 - 1 \\times 10 = 5$. Étape 4 — Conclure : $y = \\dfrac{5}{5} = 1$ ; avec $x = \\dfrac{D_x}{D} = \\dfrac{15}{5} = 3$, on vérifie $9 + 1 = 10$ et $3 + 2 = 5$. La valeur 3 est celle de $x$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut résoudre par substitution $x + y = 500$ et $4x + 2y = 1600$. On isole $y = 500 - x$ dans $x + y = 500$, puis on remplace $y$ dans cette même équation et on obtient $500 = 500$. Quelle est l'erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Isoler : $y = 500 - x$ est correct. Étape 2 — Substituer : il faut remplacer $y$ dans l'autre équation, $4x + 2y = 1600$, ce qui donne $4x + 2(500 - x) = 1600$, soit $2x + 1000 = 1600$. Étape 3 — Résoudre : $x = 300$. Étape 4 — Calculer : $y = 200$ ; vérification : $1200 + 400 = 1600$. Substituer dans la même équation donne toujours une égalité vraie, sans information. Isoler $x$ aurait marché aussi. L'équation $x + y = 500$ est juste, et le système a une solution, $(300\\,;\\,200)$.",
+                  "answers": [
+                    {
+                      "content": "On a substitué dans l'équation qui a servi à isoler ; il fallait substituer dans l'autre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il fallait isoler $x$ et non $y$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'équation $x + y = 500$ est fausse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le système n'a pas de solution",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies pour le système $4x + 2y = 10$ et $2x + y = 3$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire : $a = 4$, $b = 2$, $a' = 2$, $b' = 1$. Étape 2 — Calculer le déterminant : $D = 4 \\times 1 - 2 \\times 2 = 0$. Étape 3 — Comparer : $4x + 2y = 10$ équivaut à $2x + y = 5$, alors que l'autre équation dit $2x + y = 3$ : $5 \\neq 3$. Étape 4 — Conclure : droites parallèles distinctes, aucune solution. Dire « une infinité » oublie de comparer les seconds membres ; dire « une seule » exige $D \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Son déterminant est nul",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a aucune solution",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a une infinité de solutions",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a une seule solution",
+                      "correct": false
+                    }
+                  ]
                 }
               ]
             }

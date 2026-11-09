@@ -39,10 +39,10 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-0141-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
   # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
-  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0149 §3) et le partial `catalog/revision_sheets/`, et seulement pour les règles
+  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0149 §3), `exam_sheet.css` (UDR-0157) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
-  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z)|app/assets/stylesheets/prepare_sheet\.css\z)}
+  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z)|app/assets/stylesheets/prepare_sheet\.css\z|app/assets/stylesheets/exam_sheet\.css\z)}
   SHEET_FONTS = /Kalam|Source Serif/i
 
   def self.sheet_exception?(relative_path) = SHEET_EXCEPTION.match?(relative_path.to_s)
@@ -141,12 +141,13 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   test "the sheet exception covers the sheet stylesheet and the revision sheet partial, and nothing else" do
     %w[app/views/catalog/revision_sheets/_sheet.html.erb app/assets/stylesheets/course_sheet.css
-       app/assets/stylesheets/course_sheet/reading.css app/assets/stylesheets/prepare_sheet.css].each { assert self.class.sheet_exception?(it), it }
+       app/assets/stylesheets/course_sheet/reading.css app/assets/stylesheets/prepare_sheet.css
+       app/assets/stylesheets/exam_sheet.css].each { assert self.class.sheet_exception?(it), it }
 
     %w[app/views/catalog/courses/show.html.erb app/views/catalog/revision_sheets_extra/show.html.erb
        app/views/catalog/essentials/show.html.erb app/views/homepage/index.html.erb app/helpers/catalog/sheet_text_helper.rb
        app/javascript/controllers/glossary_controller.js
-       app/assets/stylesheets/course_sheet_other.css app/assets/stylesheets/prepare_sheet_other.css app/assets/stylesheets/application.tailwind.css
+       app/assets/stylesheets/course_sheet_other.css app/assets/stylesheets/prepare_sheet_other.css app/assets/stylesheets/exam_sheet_other.css app/assets/stylesheets/application.tailwind.css
        app/views/layouts/application.html.erb].each { assert_not self.class.sheet_exception?(it), it }
   end
 
@@ -198,6 +199,39 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert Rails.application.assets.load_path.find("course_sheet.css")
     assert_not_includes Rails.root.join("app/views/layouts/application.html.erb").read, "course_sheet"
     assert_not_includes STYLESHEET, "Kalam"
+  end
+
+  # UDR-0157 §4 : une couleur ajoutée au @theme doit être neutralisée dans `.exam-sheet`.
+  test "the exam sheet redefines every theme color, in black, white and grey only, and is not loaded by the layout" do
+    css = Rails.root.join("app/assets/stylesheets/exam_sheet.css").read
+    theme = STYLESHEET[/@theme \{(.*?)\n\}/m, 1]
+    tokens = theme.scan(/^\s*--color-([\w-]+):/).flatten - [ "*" ]
+    block = css[/^\.exam-sheet \{(.*?)^\}/m, 1]
+
+    assert_operator tokens.size, :>, 30
+    tokens.each { assert_match(/^\s*--color-#{Regexp.escape(it)}:/, block, "--color-#{it} n'est pas redéfinie dans exam_sheet.css") }
+    block.scan(/^\s*--color-[\w-]+: (#\h{6}|rgba\(0, 0, 0, [\d.]+\));/).flatten.each do |value|
+      next if value.start_with?("rgba") || value == "#fbf6e9" # le papier cahier, seule teinte chaude de la feuille
+
+      red, green, blue = value.delete("#").scan(/../).map { it.hex }
+      assert_equal [ red, red ], [ green, blue ], "#{value} n'est pas un gris"
+    end
+    assert Rails.application.assets.load_path.find("exam_sheet.css")
+    assert_not_includes Rails.root.join("app/views/layouts/application.html.erb").read, "exam_sheet"
+    assert_not_includes STYLESHEET, "exam-sheet"
+    assert_no_match %r{https?://|googleapis|gstatic}, css, "ADR-0049 : aucune ressource tierce"
+  end
+
+  test "the cahier paper is shared: exam_sheet defines it and prepare_sheet imports it" do
+    exam = Rails.root.join("app/assets/stylesheets/exam_sheet.css").read
+    prepare = Rails.root.join("app/assets/stylesheets/prepare_sheet.css").read
+
+    %w[--sheet-paper:\ #fbf6e9 --sheet-ink:\ #1a1a1a --sheet-rule:\ rgba(0,\ 0,\ 0,\ 0.13) --sheet-rule-fine:\ rgba(0,\ 0,\ 0,\ 0.05)
+       --sheet-margin:\ rgba(0,\ 0,\ 0,\ 0.28) --sheet-field:\ #b5b5b5].each { assert_includes exam, "#{it};" }
+    assert_includes exam, "transparent 1px 32px"
+    assert_includes exam, "clamp(18px, 7.4vw, 74px)"
+    assert_includes prepare, '@import url("./exam_sheet.css");'
+    assert_no_match(/\.ps-sheet \{[^}]*background: #fff/m, prepare)
   end
 
   test "the sheet imports its reading rules and nothing else" do

@@ -49,8 +49,37 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # AD-02 to AD-08, AD-20, AD-22 (UDR-0074 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
-  # school card, the level bubbles and the deferred activity, in this order.
+  # CA-12 (entrée), UDR suivi-de-la-classe-sur-une-lecon §3.6 : « Fiches à revoir » sur la page d'une classe de la direction.
+  test "CA-12 : la direction voit les fiches à revoir de sa classe, chaque ligne ouvre la leçon dans la classe" do
+    course = create_course(level: @level, name: "Géométrie")
+    thales = create_essential(course:, name: "Théorème de Thalès")
+    [ "Awa", "Bintou" ].each do |name|
+      student = create_student(classroom: @classroom, first_name: name, last_name: "Test")
+      source = create_exercise_session(student:, exercise: create_exercise(essential: thales, questions: 1), status: "completed",
+                                       score_percent: 30)
+      create_gap(student:, essential: thales, source_session: source)
+    end
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps h2", text: I18n.t("classroom.classrooms.gaps.title")
+    assert_select "#classroom_gaps li a[href='#{classroom_course_path(@classroom.public_id, course.slug, anchor: "notion-#{thales.slug}")}']",
+                  text: "Théorème de Thalès"
+    assert_select "#classroom_gaps li", text: /#{I18n.t("classroom.classrooms.gaps.students", count: 2)}/
+  end
+
+  test "CA-12 : sans fiche à revoir, la direction n'a pas d'encadré, ni de jours de séance" do
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps", 0
+    assert_select "#classroom_session_days", 0
+  end
+
   def card(key, **) = tc("school_card.#{key}", **)
   def levels_t(key, **) = tc("levels.#{key}", **)
   def signal(color, key) = I18n.t("school_admin.signals.#{color}.#{key}")
@@ -64,6 +93,8 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # AD-02 to AD-08, AD-20, AD-22 (UDR-0074 §3.2 to §3.4, §3.11): the home of the direction, greeting by first name, then the
+  # school card, the level bubbles and the deferred activity, in this order.
   test "AD-02, AD-20, AD-22: the home greets by first name, under « Accueil », with one h1 and the four sections in order" do
     sign_in_as @admin
 
@@ -132,7 +163,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "li > span.bg-warning-soft.text-warning svg[aria-hidden=true]", count: 4
       assert_select "#direction_home_all_clear", count: 0
     end
-    assert_equal "1 classe rend moins de 40 % des devoirs : 2nde C 3", card("alerts.red_signal", count: 1, names: "2nde C 3")
+    assert_equal "1 classe avec peu d'activité : 2nde C 3", card("alerts.red_signal", count: 1, names: "2nde C 3")
   end
 
   test "AD-03: an alert names three classrooms at most, by name, then « et N autres »; two or three names read as a sentence" do
@@ -228,10 +259,9 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a#level_3eme" do
       assert_select "span.relative > span.bg-signal-yellow[aria-hidden=true]", count: 1
-      assert_select "span.sr-only", text: "#{levels_t('sr_level', count: 2)}#{levels_t('sr_rate', rate: 55)}#{signal(:yellow, :sr)}"
+      assert_select "span.sr-only", text: "#{levels_t('sr_level', count: 2)}#{signal(:yellow, :sr)}"
     end
-    assert_equal ", 2 classes, taux de rendu 55 %, signal jaune",
-                 "#{levels_t('sr_level', count: 2)}#{levels_t('sr_rate', rate: 55)}#{signal(:yellow, :sr)}"
+    assert_equal ", 2 classes, participation à encourager", "#{levels_t('sr_level', count: 2)}#{signal(:yellow, :sr)}"
     assert_select "a#level_2nde [class*=bg-signal]", count: 0
     assert_select "a#level_2nde span.sr-only", text: levels_t("sr_level", count: 1)
     assert_select "#direction_home_levels #signal_legend" do
@@ -298,13 +328,14 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "DS-09: the classroom page shows its figures, then each student handed in over given and their average" do
+  test "DS-09: the classroom page shows its figures, then each student handed in over given and their medals" do
     teacher = create_teacher(school: @school)
     given = create_assignment(classroom: @classroom, by: teacher)
     create_assignment(classroom: @classroom, by: teacher)
     aya = create_student(classroom: @classroom, first_name: "Aya", last_name: "Bamba")
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Diallo")
-    handed_in(aya, given, 72)
+    session = handed_in(aya, given, 72)
+    create_badge(student: aya, exercise: session.exercise, level: "silver", session:)
     sign_in_as @admin
 
     get school_admin_classroom_path(@classroom.public_id)
@@ -317,19 +348,21 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.home")
     assert_select "ul#classroom_figures li", count: 3
     assert_select "ul#classroom_figures li", text: /2\s+#{tc('show.figures.assignments')}/
-    assert_select "ul#classroom_figures li", text: /25 %\s+#{tc('show.figures.submission_rate')}/
+    assert_select "ul#classroom_figures li", text: /1 sur 4\s+#{tc('show.figures.submitted')}/
+    assert_select "ul#classroom_figures li", text: /1 Argent\s+#{tc('show.figures.medals')}/
     assert_select "#classroom_students caption.sr-only", text: tc("show.caption", classroom: "2nde C 1")
     assert_select "#classroom_students th[scope=col]", count: 4
     assert_select "#classroom_students tbody tr", count: 2
     assert_select "tr#student_#{aya.public_id}" do
       assert_select "th[scope=row] p", text: "Aya Bamba"
       assert_select "td", text: "1 / 2"
-      assert_select "td", text: "72 %"
+      assert_select "td", text: /1 Argent/
     end
+    assert_no_match(/72|%|moyenne|score moyen|taux de rendu/i, css_select("main").text)
     assert_select "tr#student_#{koffi.public_id}" do
       assert_select "th[scope=row] p", text: "Koffi Diallo"
       assert_select "td", text: "0 / 2"
-      assert_select "td span[aria-hidden=true]", text: "—"
+      assert_select "td", text: "Pas encore"
     end
     assert_no_match(/#{aya.contact}/, response.body)
     assert_select "main form#student-work-search input[name=q]", count: 1
@@ -352,15 +385,15 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     get school_admin_level_path(@level.slug)
 
-    assert_select "li#classroom_#{@classroom.public_id} li", text: /#{I18n.t('school_admin.levels.classroom_card.submission_rate_html', rate: '\s*100 %')}/
+    assert_select "li#classroom_#{@classroom.public_id} li", text: /#{I18n.t('school_admin.levels.classroom_card.submitted', count: 2, total: 2)}/
 
     get school_admin_classroom_path(@classroom.public_id)
 
-    assert_select "ul#classroom_figures li", text: /100 %\s+#{tc('show.figures.submission_rate')}/
+    assert_select "ul#classroom_figures li", text: /2 sur 2\s+#{tc('show.figures.submitted')}/
     assert_select "tr#student_#{aya.public_id}" do
       assert_select "th[scope=row] p", text: "Aya Bamba"
       assert_select "td", text: "2 / 2"
-      assert_select "td", text: "53 %"
+      assert_select "td", text: "Pas encore"
     end
   end
 
@@ -399,19 +432,18 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "2nde C 1 · Direction · Lnclass"
   end
 
-  test "FU-21: the classroom page explains its figures, the student average and « — »" do
+  test "FU-21: the classroom page explains its figures and the medals" do
     create_student(classroom: @classroom, first_name: "Aya", last_name: "Bamba")
     sign_in_as @admin
 
     get school_admin_classroom_path(@classroom.public_id)
 
     assert_select "ul#classroom_figures details div", text: tc("tips.submission_rate")
-    assert_select "ul#classroom_figures details div", text: tc("tips.average")
-    assert_select "#classroom_students th[scope=col]", text: /#{tc('show.columns.average')}/ do
-      assert_select "details summary span.sr-only", text: "Aide : #{tc('show.columns.average')}"
-      assert_select "details div", text: tc("tips.student_average")
+    assert_select "ul#classroom_figures details div", text: I18n.t("shared.info_tips.badges")
+    assert_select "#classroom_students th[scope=col]", text: /#{tc('show.columns.medals')}/ do
+      assert_select "details summary span.sr-only", text: "Aide : #{tc('show.columns.medals')}"
+      assert_select "details div", text: I18n.t("shared.info_tips.badges")
     end
-    assert_select "#classroom_students details div", text: tc("tips.missing")
   end
 
   test "FU-49: the search lists only the matching students of this classroom, without case nor accents" do
@@ -438,7 +470,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "tbody th[scope=row] p", text: "Fanta Diabaté"
     end
     assert_select "p", text: tc("show.subtitle", level: "2nde", count: 3)
-    assert_select "ul#classroom_figures li", text: /33 %\s+#{tc('show.figures.submission_rate')}/
+    assert_select "ul#classroom_figures li", text: /1 sur 3\s+#{tc('show.figures.submitted')}/
     assert_no_match(/Aya Bamba|Koffi Diallo|Intrus/, response.body)
   end
 

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours de ses matières, élèves filtrés par badge de classe puis par trente, au numéro masqué (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7), 0103 · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.5, §4.7), 0103, médailles lues à la clôture · UDR : enseignant §3.2 et §3.5, 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108, 0127 (§3.1)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -97,15 +97,6 @@ module Queries
         Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
       end
 
-      # ADR-0101 §4.4 : le cours est-il l'un de ceux que la page de la classe affiche pour cet acteur (niveau, série, et matière
-      # de l'enseignant ; toute matière pour l'équipe) ? Une seule requête. → true | false
-      def shown_course?(public_id:, course_slug:, teacher_id: nil)
-        level_id, series_id, school_id = Orm::Classroom.where(public_id:).pick(:level_id, :series_id, :school_id)
-        return false if level_id.nil?
-
-        course_scope(level_id, series_id, teacher_material_ids(teacher_id, school_id)).where(slug: course_slug).exists?
-      end
-
       private
 
       # UDR enseignant §3.5 : le filtre de badge et la recherche se combinent. Le rang de chaque élève (note, badge, faits) se lit
@@ -137,13 +128,20 @@ module Queries
         scores = Queries::Assessment::AssignmentScores.for(classroom_id:, assignment_ids: due_dates.keys)
         bests = Hash.new { |hash, key| hash[key] = {} }
         scores.each { |assignment_id, rows| rows.each { bests[it.student_id][assignment_id] = it.scores.max } }
-        [ bests.transform_values { standing(it, overdue) }, Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
+        medals = medal_holders(due_dates.keys)
+        [ bests.to_h { |student_id, scores| [ student_id, standing(scores, overdue, medals.include?(student_id)) ] },
+          Totals.new(assigned: due_dates.size, overdue: overdue.size) ]
       end
 
-      def standing(bests, overdue)
+      # Les élèves qui détiennent une médaille gagnée par une session de ces assignations (ADR-0097 §4.5, Assessment::Medals).
+      def medal_holders(assignment_ids)
+        Queries::Assessment::Medals.by_assignment(assignment_ids:).values.flat_map(&:keys).to_set
+      end
+
+      def standing(bests, overdue, has_medal)
         scores = bests.values
         Standing.new(grade: RosterGrade.grade_for(scores.sum.fdiv(scores.size)), done: scores.size, late: (overdue - bests.keys).size,
-                     badge: Grading.class_badge_for(scores:, all_perfect: scores.all? { Grading.perfect?(it) }))
+                     badge: Grading.class_badge_for(scores:, all_perfect: scores.all? { Grading.perfect?(it) }, has_medal:))
       end
 
       # Ses matières dans l'établissement de la classe, dans l'ordre d'ajout (ADR-0103 §4.5) ; nil pour l'équipe.

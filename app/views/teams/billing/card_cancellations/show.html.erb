@@ -1,0 +1,62 @@
+<%# 🌐 UI · teams/billing/card_cancellations/show — retrouver une carte par son numéro et l'annuler %>
+<%# Rôle : fiche courte (numéro, point relais, état) ; formulaire de motif si la carte est remise ; texte seul si elle est activée %>
+<%# ADR  : 0126 (contexte billing, §4.3) · UDR : 0159 §3.5 %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "billing" %>
+<% number = @card ? @card.serial_label : nil %>
+<%= ui_page_header title: (@card ? t(".title", serial: number) : t(".title_blank")), back: { label: t(".back"), href: teams_billing_cashbox_path } %>
+
+<div class="max-w-xl space-y-6">
+  <% if @error %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= @error %></p>
+    </div>
+  <% end %>
+
+  <% if @card.nil? %>
+    <%= ui_card do %>
+      <%= form_with url: teams_billing_card_cancellation_path, method: :get, class: "flex flex-wrap items-end gap-3" do %>
+        <div class="min-w-48 flex-1">
+          <label for="lookup_serial" class="mb-1 block text-sm font-medium text-ink"><%= t(".serial_label") %></label>
+          <%= text_field_tag :serial, nil, id: "lookup_serial", inputmode: "numeric", autocomplete: "off", placeholder: t(".serial_placeholder"),
+                                           class: "block min-h-tap w-full rounded-ln border border-line-strong bg-white px-4 text-base text-ink focus:outline-none focus:ring-4" %>
+        </div>
+        <%= ui_button t(".find_card"), type: :submit, icon: "magnifying-glass" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= ui_card do %>
+      <dl class="grid grid-cols-3 gap-x-6 gap-y-2 text-sm">
+        <dt class="text-mute"><%= t(".fields.serial") %></dt>
+        <dd class="col-span-2 font-medium tabular-nums"><%= t(".serial_value", serial: number) %></dd>
+        <dt class="text-mute"><%= t(".fields.relay_point") %></dt>
+        <dd class="col-span-2 font-medium"><%= @relay_point&.name %></dd>
+        <dt class="text-mute"><%= t(".fields.state") %></dt>
+        <dd class="col-span-2 font-medium"><%= t(".states.#{@card.state}") %></dd>
+        <% if @card.cancelled? %>
+          <dt class="text-mute"><%= t(".fields.reason") %></dt>
+          <dd class="col-span-2"><%= @card.cancel_reason %></dd>
+        <% end %>
+      </dl>
+    <% end %>
+
+    <% if @card.issued? %>
+      <%= ui_card title: t(".form_title") do %>
+        <%= form_with scope: :cancellation, url: teams_billing_card_cancellation_path, method: :post, class: "space-y-5",
+                      data: { turbo_confirm: t(".confirm", serial: number) } do |f| %>
+          <%= hidden_field_tag :serial, @card.serial %>
+          <div>
+            <%= f.label :reason, t(".reason_label"), class: "mb-1 block text-sm font-medium text-ink" %>
+            <%= f.text_field :reason, required: true, maxlength: UseCases::Billing::CancelCard::REASON_MAX, autocomplete: "off",
+                                      placeholder: t(".reason_placeholder"),
+                                      class: "block min-h-tap w-full rounded-ln border border-line-strong bg-white px-4 text-base text-ink focus:outline-none focus:ring-4" %>
+          </div>
+          <%= ui_button t(".submit"), type: :submit, variant: :danger, icon: "x-circle", data: { turbo_submits_with: t(".submitting") } %>
+        <% end %>
+      <% end %>
+    <% elsif @card.activated? %>
+      <p class="text-sm font-medium text-ink"><%= t(".activated_notice") %></p>
+    <% end %>
+  <% end %>
+</div>

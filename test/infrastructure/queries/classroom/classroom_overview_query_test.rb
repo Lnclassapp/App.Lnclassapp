@@ -94,14 +94,14 @@ module Queries
         assignment = create_assignment(classroom: @classroom, assignable: exercise)
         [ 100, 85, 72, 65, 40, 30 ].each do |score_percent|
           create_exercise_session(student: create_student(classroom: @classroom), exercise:, status: "completed",
-                                  score_percent:, classroom_assignment: assignment)
+                                  score_percent:, classroom_assignment: assignment).tap { record_medal(it) }
         end
 
         done, nobody = overview(show_follow_up: true).assignments
         summary = Queries::Assessment::ComprehensionSummaryQuery::Summary
 
         assert_equal assignment.public_id, done.public_id
-        assert_equal summary.new(category: :acquired, badge_counts: { bronze: 1, silver: 1, gold: 1, diamond: 1 }), done.comprehension
+        assert_equal summary.new(category: :acquired, badge_counts: { bronze: 3, silver: 1, gold: 1, diamond: 1 }), done.comprehension
         assert_equal summary.new(category: nil, badge_counts: { bronze: 0, silver: 0, gold: 0, diamond: 0 }), nobody.comprehension
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 6, late: 0, pending: 0), done.counts
         assert_equal [ nil, nil ], overview.assignments.map(&:comprehension)
@@ -287,38 +287,6 @@ module Queries
         assert_nil ClassroomOverviewQuery.new.call(public_id: "inconnue", show_roster: true)
       end
 
-      # ADR-0101 §8 : « Revoir la fiche » ne lit les lacunes que d'un cours que la page de la classe montre.
-      test "shown_course? : un cours publié du niveau de la classe, dans les matières de l'enseignant ; rien d'autre" do
-        material = create_material
-        teacher = create_teacher(material:, classrooms: [ @classroom ])
-        shown = create_course(level: @classroom.level, material:)
-        other_material = create_course(level: @classroom.level)
-        other_level = create_course
-        draft = create_course(level: @classroom.level, material:, status: "draft")
-        query = ClassroomOverviewQuery.new
-        shown_for = ->(course, **options) { query.shown_course?(public_id: @classroom.public_id, course_slug: course.slug, **options) }
-
-        assert shown_for.call(shown, teacher_id: teacher.id)
-        assert_not shown_for.call(other_material, teacher_id: teacher.id)
-        assert shown_for.call(other_material)
-        assert_not shown_for.call(other_level)
-        assert_not shown_for.call(draft)
-        assert_not query.shown_course?(public_id: "inconnue", course_slug: shown.slug)
-      end
-
-      # ADR-0103 §4.5 : les matières de l'enseignant sont celles de l'établissement de la classe, pas celles d'un autre.
-      test "shown_course? : seules comptent ses matières dans l'établissement de la classe" do
-        here, elsewhere = create_material(name: "SVT"), create_material(name: "Histoire")
-        teacher = create_teacher(material: here, classrooms: [ @classroom ])
-        add_teacher_school(teacher, create_school, materials: [ elsewhere ])
-        mine = create_course(level: @classroom.level, material: here)
-        theirs = create_course(level: @classroom.level, material: elsewhere)
-        query = ClassroomOverviewQuery.new
-
-        assert query.shown_course?(public_id: @classroom.public_id, course_slug: mine.slug, teacher_id: teacher.id)
-        assert_not query.shown_course?(public_id: @classroom.public_id, course_slug: theirs.slug, teacher_id: teacher.id)
-      end
-
       # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Fait seul (7 j) » compte les sessions terminées, standard,
       # sans assignation, commencées dans les 7 derniers jours d'Abidjan, aujourd'hui compris.
       def practise(student, days_ago, hour: 10, **)
@@ -420,13 +388,14 @@ module Queries
 
       # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
       # scores aux exercices assignés à la classe ; trente par trente dans un groupe.
-      def graded(scores, first_name: "Élève")
+      # blank: copies without any answer, for which closing records no medal.
+      def graded(scores, first_name: "Élève", blank: false)
         create_student(classroom: @classroom, first_name:, last_name: "N#{factory_sequence}", joined_at: 1.month.ago).tap do |student|
           scores.each_with_index do |score, index|
             @assignments[index] ||= create_assignment(classroom: @classroom, assignable: create_exercise)
             exercise = Orm::Exercise.find(@assignments[index].assignable_id)
             create_exercise_session(student:, exercise:, status: "completed", score_percent: score,
-                                    classroom_assignment: @assignments[index])
+                                    classroom_assignment: @assignments[index]).tap { record_medal(it) unless blank }
           end
         end
       end
@@ -470,10 +439,31 @@ module Queries
 
         rows = overview.students.index_by(&:public_id)
 
-        assert_equal [ :diamond, :gold, :silver, :bronze, nil, nil ],
+        assert_equal [ :diamond, :gold, :silver, :bronze, :bronze, nil ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).badge }
         assert_equal [ [ 2, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 0, 2 ] ],
                      [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
+      end
+
+      # PRD §3 : sans exercice médaillé (copies vides seulement), « Pas encore », note comprise ; une médaille gagnée dans une autre
+      # classe ne compte pas ici (ADR-0097 §4.5) ; une réponse donnée, Bronze même à 30 %.
+      test "médailles : copies vides seulement → « Pas encore » et filtre none ; médaille d'ailleurs ignorée ; 30 % répondu → Bronze" do
+        @assignments = []
+        answered = graded([ 30 ], first_name: "Répondu")
+        blank = graded([ 0 ], first_name: "Vide", blank: true)
+        elsewhere = graded([ 0 ], first_name: "Ailleurs", blank: true)
+        other = create_classroom(school: Orm::Classroom.find(@classroom.id).school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other, student: elsewhere, primary: false, joined_at: Time.current)
+        exercise = Orm::Exercise.find(@assignments[0].assignable_id)
+        record_medal(create_exercise_session(student: elsewhere, exercise:, status: "completed", score_percent: 85,
+                                             classroom_assignment: create_assignment(classroom: other, assignable: exercise)))
+
+        rows = overview.students.index_by(&:public_id)
+
+        assert_equal [ :bronze, nil, nil ], [ answered, blank, elsewhere ].map { rows.fetch(it.public_id).badge }
+        assert_equal [ 6, 0, 0 ], [ answered, blank, elsewhere ].map { rows.fetch(it.public_id).grade }
+        assert_equal [ answered.public_id ], overview(badge: "bronze").students.map(&:public_id)
+        assert_equal [ blank.public_id, elsewhere.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
       end
 
       test "CA-I2 : un sans-faute partout est Diamant ; un seul exercice sans faute sur deux, jamais" do
@@ -510,7 +500,7 @@ module Queries
                      [ busy, idle ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.late_count, row.assigned_count ] } }
       end
 
-      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans badge, sans exercice fait ou sous Bronze" do
+      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans exercice fait ; sous 48 %, Bronze" do
         @assignments = []
         gold = graded([ 90 ], first_name: "Or")
         graded([ 60 ], first_name: "Bronze")
@@ -519,7 +509,8 @@ module Queries
 
         assert_equal [ gold.public_id ], overview(badge: "gold").students.map(&:public_id)
         assert_equal [ 1, "gold" ], overview(badge: "gold").then { [ it.students_total, it.badge_filter ] }
-        assert_equal [ low.public_id, nothing.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
+        assert_equal [ nothing.public_id ], overview(badge: "none").students.map(&:public_id)
+        assert_equal 2, overview(badge: "bronze").students.size
         assert_equal [], overview(badge: "diamond").students
         assert_equal 4, overview.students_total
       end

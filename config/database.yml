@@ -17,7 +17,12 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Audit O-X01. Solid Queue tourne dans un process à part (plugin Puma en mode fork, ses workers sont eux-mêmes forkés) :
+  # chaque process a son pool. Web : RAILS_MAX_THREADS (3 par défaut, config/puma.rb). Worker de jobs : 3 threads
+  # (config/queue.yml) + 1 interrogation + 1 battement de cœur. Le pool couvre le plus gros des deux, plus 2, sans jamais
+  # tomber sous 5 : avant, RAILS_MAX_THREADS=3 laissait 3 connexions à un worker qui en veut 5. Le total reste de l'ordre
+  # de 11 connexions pour une réplique, très en deçà des 100 par défaut de PostgreSQL ; les pools se remplissent à la demande.
+  max_connections: <%= [ ENV.fetch("RAILS_MAX_THREADS", 3).to_i, 3 ].max + 2 %>
 
 # Chaque worktree git a ses propres bases, pour que des agents en parallèle
 # ne partagent jamais une base de test. Dépôt principal : suffixe vide.

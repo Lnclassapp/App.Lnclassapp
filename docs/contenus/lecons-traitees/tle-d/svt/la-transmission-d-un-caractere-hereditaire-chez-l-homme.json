@@ -149,140 +149,273 @@
           },
           "pitfall": "Ne conclus pas qu'un allèle est dominant parce que le caractère est fréquent, ni récessif parce qu'il est rare. Ne conclus pas non plus quand aucun enfant ne diffère de ses parents. Contre-exemple : deux parents au caractère [S] ont 3 enfants, tous de phénotype [S]. Le caractère peut être récessif (parents homozygotes) ou dominant : le document ne permet pas de trancher. Il faut un enfant qui diffère de ses deux parents.",
           "figure": null,
-          "exercise": {
-            "title": "Dominant ou récessif ? Les premiers arbres",
-            "statement": "Dans cet exercice, tu détermines si un allèle est dominant ou récessif et tu écris les génotypes, avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Une personne drépanocytaire a le phénotype récessif. Avec $N$ l'allèle normal et $d$ l'allèle de la maladie, quel est son génotype ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le phénotype « drépanocytaire » est récessif. Étape 2 — Comparer : un allèle récessif ne s'exprime qu'en double exemplaire. Étape 3 — Déduire : la personne a deux allèles $d$. Étape 4 — Conclure : son génotype certain est $d//d$. Écrire $N//d$ est l'erreur tentante : une personne $N//d$ est hétérozygote, non malade, car $N$ domine.",
-                "answers": [
-                  {
-                    "content": "$d//d$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$N//d$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$N//N$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$N//d$ ou $d//d$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une personne de phénotype dominant est forcément homozygote.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : le phénotype est dominant. Étape 2 — Comparer : l'allèle dominant s'exprime en un seul exemplaire. Étape 3 — Déduire : la personne peut être $A//A$ ou $A//a$. Étape 4 — Conclure : l'affirmation est fausse, le génotype d'un phénotype dominant est incertain. Seul un phénotype récessif donne un génotype certain.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Deux parents sans albinisme ont un enfant albinos (sans pigment dans la peau) ; le gène est autosomique. Le caractère « albinos » est ___ (dominant ou récessif).",
-                "question_type": "fill_blank",
-                "explanation": "Étape 1 — Repérer : le couple a le même phénotype (non albinos) et un enfant au phénotype différent (albinos). Étape 2 — Comparer : « albinos » est absent chez les parents, pourtant l'enfant l'a reçu d'eux. Étape 3 — Déduire : « albinos » est récessif et « non albinos » dominant. Étape 4 — Conclure : les parents sont hétérozygotes.",
-                "answers": [
-                  {
-                    "content": "récessif",
-                    "correct": true
-                  },
-                  {
-                    "content": "récessive",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un couple sans albinisme a un enfant albinos (gène autosomique). Quelles sont les deux conclusions exactes ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : couple sans albinisme, enfant albinos. Étape 2 — Comparer : l'enfant a un caractère absent de ses parents. Étape 3 — Déduire : « albinos » est récessif ; les parents, qui portent cet allèle sans l'exprimer, sont hétérozygotes. Étape 4 — Conclure : l'enfant est $a//a$, avec un $a$ de chaque parent. Des parents $A//A$ ne pourraient pas avoir d'enfant albinos.",
-                "answers": [
-                  {
-                    "content": "Les deux parents sont hétérozygotes",
-                    "correct": true
-                  },
-                  {
-                    "content": "L'enfant est homozygote pour l'allèle récessif",
-                    "correct": true
-                  },
-                  {
-                    "content": "Le caractère « non albinos » est récessif",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'enfant a reçu ses deux allèles de sa mère",
-                    "correct": false
-                  },
-                  {
-                    "content": "Les deux parents sont homozygotes dominants",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un couple sans albinisme a un enfant albinos (gène autosomique). Avec $A$ (pigment, dominant) et $a$ (albinisme), quel est le génotype de chacun des parents ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : couple sans albinisme, enfant albinos. Étape 2 — Comparer : l'enfant $a//a$ a reçu un $a$ de chaque parent. Étape 3 — Déduire : chaque parent porte $a$ mais n'est pas albinos, donc $A$ domine. Étape 4 — Conclure : les deux parents sont $A//a$. Un parent $A//A$ n'aurait aucun $a$ à donner.",
-                "answers": [
-                  {
-                    "content": "Les deux sont $A//a$",
-                    "correct": true
-                  },
-                  {
-                    "content": "Les deux sont $A//A$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Les deux sont $a//a$",
-                    "correct": false
-                  },
-                  {
-                    "content": "L'un est $A//A$, l'autre $A//a$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Deux parents de phénotype [S] ont quatre enfants, tous de phénotype [S]. Peut-on affirmer que [S] est dominant ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : il faut un enfant au phénotype différent de celui de ses deux parents. Étape 2 — Comparer : ici les enfants sont tous comme leurs parents. Étape 3 — Déduire : on ne peut pas conclure à la dominance. Étape 4 — Conclure : [S] peut être dominant ou récessif. La fréquence ne prouve pas la dominance : c'est l'erreur du piège.",
-                "answers": [
-                  {
-                    "content": "Non : aucun enfant ne diffère de ses parents, les deux hypothèses restent possibles",
-                    "correct": true
-                  },
-                  {
-                    "content": "Oui : tous les enfants ressemblent à leurs parents",
-                    "correct": false
-                  },
-                  {
-                    "content": "Oui : [S] est le phénotype le plus fréquent de la famille",
-                    "correct": false
-                  },
-                  {
-                    "content": "Non : [S] est forcément récessif",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Dominant ou récessif ? Les premiers arbres",
+              "statement": "Dans cet exercice, tu détermines si un allèle est dominant ou récessif et tu écris les génotypes, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une personne drépanocytaire a le phénotype récessif. Avec $N$ l'allèle normal et $d$ l'allèle de la maladie, quel est son génotype ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le phénotype « drépanocytaire » est récessif. Étape 2 — Comparer : un allèle récessif ne s'exprime qu'en double exemplaire. Étape 3 — Déduire : la personne a deux allèles $d$. Étape 4 — Conclure : son génotype certain est $d//d$. Écrire $N//d$ est l'erreur tentante : une personne $N//d$ est hétérozygote, non malade, car $N$ domine.",
+                  "answers": [
+                    {
+                      "content": "$d//d$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$N//d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N//N$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N//d$ ou $d//d$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de phénotype dominant est forcément homozygote.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le phénotype est dominant. Étape 2 — Comparer : l'allèle dominant s'exprime en un seul exemplaire. Étape 3 — Déduire : la personne peut être $A//A$ ou $A//a$. Étape 4 — Conclure : l'affirmation est fausse, le génotype d'un phénotype dominant est incertain. Seul un phénotype récessif donne un génotype certain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents sans albinisme ont un enfant albinos (sans pigment dans la peau) ; le gène est autosomique. Le caractère « albinos » est ___ (dominant ou récessif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le couple a le même phénotype (non albinos) et un enfant au phénotype différent (albinos). Étape 2 — Comparer : « albinos » est absent chez les parents, pourtant l'enfant l'a reçu d'eux. Étape 3 — Déduire : « albinos » est récessif et « non albinos » dominant. Étape 4 — Conclure : les parents sont hétérozygotes.",
+                  "answers": [
+                    {
+                      "content": "récessif",
+                      "correct": true
+                    },
+                    {
+                      "content": "récessive",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple sans albinisme a un enfant albinos (gène autosomique). Quelles sont les deux conclusions exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : couple sans albinisme, enfant albinos. Étape 2 — Comparer : l'enfant a un caractère absent de ses parents. Étape 3 — Déduire : « albinos » est récessif ; les parents, qui portent cet allèle sans l'exprimer, sont hétérozygotes. Étape 4 — Conclure : l'enfant est $a//a$, avec un $a$ de chaque parent. Des parents $A//A$ ne pourraient pas avoir d'enfant albinos.",
+                  "answers": [
+                    {
+                      "content": "Les deux parents sont hétérozygotes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'enfant est homozygote pour l'allèle récessif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le caractère « non albinos » est récessif",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'enfant a reçu ses deux allèles de sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux parents sont homozygotes dominants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple sans albinisme a un enfant albinos (gène autosomique). Avec $A$ (pigment, dominant) et $a$ (albinisme), quel est le génotype de chacun des parents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : couple sans albinisme, enfant albinos. Étape 2 — Comparer : l'enfant $a//a$ a reçu un $a$ de chaque parent. Étape 3 — Déduire : chaque parent porte $a$ mais n'est pas albinos, donc $A$ domine. Étape 4 — Conclure : les deux parents sont $A//a$. Un parent $A//A$ n'aurait aucun $a$ à donner.",
+                  "answers": [
+                    {
+                      "content": "Les deux sont $A//a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux sont $A//A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont $a//a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'un est $A//A$, l'autre $A//a$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents de phénotype [S] ont quatre enfants, tous de phénotype [S]. Peut-on affirmer que [S] est dominant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : il faut un enfant au phénotype différent de celui de ses deux parents. Étape 2 — Comparer : ici les enfants sont tous comme leurs parents. Étape 3 — Déduire : on ne peut pas conclure à la dominance. Étape 4 — Conclure : [S] peut être dominant ou récessif. La fréquence ne prouve pas la dominance : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non : aucun enfant ne diffère de ses parents, les deux hypothèses restent possibles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : tous les enfants ressemblent à leurs parents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : [S] est le phénotype le plus fréquent de la famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : [S] est forcément récessif",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Dominance et génotypes : de nouvelles familles",
+              "statement": "Dans cet exercice, tu déduis la dominance d'un allèle à partir de familles nouvelles et tu écris les génotypes certains, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche d'abord l'enfant dont le phénotype est absent chez ses deux parents : c'est lui qui révèle l'allèle récessif. Rappelle-toi qu'un phénotype récessif donne un génotype certain, alors qu'un phénotype dominant laisse un doute.",
+              "questions": [
+                {
+                  "content": "Un père et une mère aux cheveux bouclés ont une fille aux cheveux raides (gène autosomique ; situation d'exemple). Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les parents ont le même phénotype (cheveux bouclés) et leur fille a un phénotype différent (cheveux raides). Étape 2 — Comparer : « raides » est absent chez les deux parents, pourtant la fille l'a reçu d'eux. Étape 3 — Déduire : « bouclés » est dominant, « raides » est récessif, et le gène étant autosomique les deux parents sont hétérozygotes. Étape 4 — Conclure : la fille a reçu un allèle « raides » de chaque parent. Dire que les parents sont homozygotes est faux : ils n'auraient aucun allèle « raides » à donner. Inverser la dominance est l'erreur de celui qui prend le caractère de l'enfant pour le dominant. Un seul enfant qui diffère suffit pour conclure.",
+                  "answers": [
+                    {
+                      "content": "Bouclés est dominant, raides est récessif, et les deux parents sont hétérozygotes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Raides est dominant, bouclés est récessif, et les deux parents sont hétérozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Bouclés est dominant, et les deux parents sont homozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien déduire avec une seule fille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne au phénotype récessif peut être hétérozygote.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le phénotype est récessif. Étape 2 — Comparer : un allèle récessif ne s'exprime qu'en double exemplaire ; avec un allèle dominant à côté, il resterait caché. Étape 3 — Déduire : la personne a deux allèles récessifs. Étape 4 — Conclure : elle est homozygote récessive, son génotype est certain ; l'affirmation est fausse. Le doute sur le génotype existe pour un phénotype dominant (homozygote ou hétérozygote), pas pour un phénotype récessif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne qui possède deux allèles identiques pour un gène est dite ___ (homozygote ou hétérozygote).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la personne a deux allèles pour le gène, un sur chaque chromosome de la paire. Étape 2 — Comparer : ils sont identiques. Étape 3 — Déduire : une personne aux deux allèles identiques est homozygote ; elle serait hétérozygote si les deux allèles étaient différents. Étape 4 — Conclure : le mot attendu est homozygote.",
+                  "answers": [
+                    {
+                      "content": "homozygote",
+                      "correct": true
+                    },
+                    {
+                      "content": "homozygotes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents atteints d'une même maladie ont une fille saine (gène autosomique). Quelles sont les deux conclusions exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les parents ont le même phénotype (malades) et leur fille un phénotype différent (saine). Étape 2 — Comparer : « sain » est absent chez les parents, pourtant la fille l'a reçu d'eux. Étape 3 — Déduire : « malade » est dominant, « sain » est récessif, et les parents sont hétérozygotes. Étape 4 — Conclure : la fille saine a le phénotype récessif, donc deux allèles récessifs ; elle est homozygote, pas hétérozygote. Des parents homozygotes récessifs seraient sains, et dire que la maladie est récessive revient à inverser la règle.",
+                  "answers": [
+                    {
+                      "content": "La maladie est due à un allèle dominant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux parents sont hétérozygotes",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fille saine est hétérozygote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux parents sont homozygotes récessifs",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle de la maladie est récessif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype à son nom (P est un allèle dominant, a un allèle récessif).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : on regarde les deux allèles de chaque génotype. Étape 2 — Comparer : P//P a deux allèles identiques dominants, a//a deux allèles identiques récessifs, P//a deux allèles différents. Étape 3 — Déduire : deux allèles identiques donnent un homozygote, deux allèles différents un hétérozygote. Étape 4 — Conclure : P//P est homozygote dominant, P//a hétérozygote, a//a homozygote récessif. Appeler P//a « homozygote » est l'erreur de celui qui regarde la lettre P sans voir le a.",
+                  "answers": [
+                    {
+                      "content": "P//P",
+                      "match": "Homozygote dominant"
+                    },
+                    {
+                      "content": "P//a",
+                      "match": "Hétérozygote"
+                    },
+                    {
+                      "content": "a//a",
+                      "match": "Homozygote récessif"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un village, 9 personnes sur 10 ont le caractère [F]. Peut-on en déduire que [F] est dominant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on ne connaît aucun couple de même phénotype avec un enfant de phénotype différent. Étape 2 — Comparer : il n'y a donc rien à comparer entre parents et enfant. Étape 3 — Déduire : la fréquence d'un caractère dans un village ne dit rien de la dominance ; un allèle récessif peut être fréquent et un allèle dominant rare. Étape 4 — Conclure : on ne peut pas conclure. Dire « fréquent donc dominant » ou « fréquent donc récessif » est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Non : la fréquence d'un caractère ne renseigne pas sur la dominance de son allèle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : un caractère très fréquent est forcément dominant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il est récessif parce qu'il est fréquent",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, mais seulement si le gène est lié à X",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à repérer un enfant qui diffère de ses parents, à en déduire la dominance et à écrire les génotypes, avec la méthode de la fiche.",
             "questions": [
@@ -392,148 +525,281 @@
           },
           "pitfall": "Ne conclus pas « lié à X » parce que seul un garçon est atteint. Contre-exemple : deux parents sains $N//d$ (gène autosomique) ont 4 enfants dont 1 garçon atteint $d//d$ : cette famille est tout à fait possible sans lien avec X, car un enfant sur quatre est atteint en moyenne, garçon ou fille. Un garçon atteint de parents sains est compatible avec les deux hypothèses. Il faut une donnée décisive, par exemple : une fille atteinte de père sain, ou une mère atteinte qui a un fils sain (autosomique) ; un fils atteint de père sans l'allèle (lié à X).",
           "figure": "decision-localisation",
-          "exercise": {
-            "title": "Autosomique ou lié à X : les premiers arbres",
-            "statement": "Dans cet exercice, tu distingues un gène autosomique d'un gène lié au chromosome X, avec la méthode de la fiche. Le daltonisme est dû à un allèle récessif $d$ porté par X.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quels sont les deux gonosomes d'un garçon ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : on s'intéresse aux chromosomes sexuels. Étape 2 — Écrire : la fille est $XX$, le garçon $XY$. Étape 3 — Confronter : un garçon reçoit son Y de son père et son X de sa mère. Étape 4 — Conclure : les gonosomes du garçon sont X et Y. $XX$ est le piège : c'est le couple de la fille.",
-                "answers": [
-                  {
-                    "content": "X et Y",
-                    "correct": true
-                  },
-                  {
-                    "content": "X et X",
-                    "correct": false
-                  },
-                  {
-                    "content": "Y et Y",
-                    "correct": false
-                  },
-                  {
-                    "content": "Deux autosomes",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Un père daltonien transmet l'allèle du daltonisme à son fils.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Poser : le gène est porté par X. Étape 2 — Écrire : le père daltonien est $X^{d}Y$. Étape 3 — Confronter : il donne à son fils le chromosome $Y$, non son X. Étape 4 — Conclure : l'affirmation est fausse. Le garçon reçoit son X, donc son allèle, de sa mère.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quel est le génotype d'un garçon daltonien, sachant que le daltonisme est récessif et lié à X ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : le gène est sur X et l'allèle $d$ est récessif. Étape 2 — Écrire : le garçon n'a qu'un X, donc un seul allèle. Étape 3 — Confronter : il est daltonien, donc son unique allèle est $d$. Étape 4 — Conclure : son génotype est $X^{d}Y$. $X^{d}X^{d}$ est celui d'une fille daltonienne.",
-                "answers": [
-                  {
-                    "content": "$X^{d}Y$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$X^{d}X^{d}$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$X^{D}Y$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$X^{D}X^{d}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une fille est daltonienne (maladie récessive liée à X). Que peut-on dire de son père ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : le gène est sur X, allèle récessif. Étape 2 — Écrire : la fille daltonienne est $X^{d}X^{d}$. Étape 3 — Confronter : elle a reçu un $X^{d}$ de chaque parent ; le père lui a donné son seul X, donc son X est $X^{d}$. Étape 4 — Conclure : le père est $X^{d}Y$, il est daltonien. Un père non daltonien est $X^{D}Y$ et ne peut pas donner $X^{d}$.",
-                "answers": [
-                  {
-                    "content": "Il est daltonien",
-                    "correct": true
-                  },
-                  {
-                    "content": "Il n'est pas daltonien",
-                    "correct": false
-                  },
-                  {
-                    "content": "Il est porteur sain",
-                    "correct": false
-                  },
-                  {
-                    "content": "On ne peut rien dire",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une mère non daltonienne $X^{D}X^{d}$ et un père non daltonien $X^{D}Y$ ont des enfants. Quelles sont les deux affirmations exactes ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Poser : gène lié à X, allèle $d$ récessif. Étape 2 — Écrire : la mère donne $X^{D}$ ou $X^{d}$, le père donne $X^{D}$ aux filles et $Y$ aux fils. Étape 3 — Confronter : toute fille reçoit $X^{D}$ du père, donc n'est jamais daltonienne ; un fils reçoit $X^{D}$ ou $X^{d}$ de sa mère, avec une chance sur deux. Étape 4 — Conclure : les propositions « aucune fille daltonienne » et « une chance sur deux pour un garçon » sont exactes.",
-                "answers": [
-                  {
-                    "content": "Aucune de leurs filles n'est daltonienne",
-                    "correct": true
-                  },
-                  {
-                    "content": "Chaque garçon a une chance sur deux d'être daltonien",
-                    "correct": true
-                  },
-                  {
-                    "content": "Tous les garçons sont daltoniens",
-                    "correct": false
-                  },
-                  {
-                    "content": "Chaque fille a une chance sur deux d'être daltonienne",
-                    "correct": false
-                  },
-                  {
-                    "content": "Le père donne l'allèle $d$ à ses fils",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Dans une famille, un garçon est atteint d'une maladie récessive ; ses parents ne sont pas atteints. Peut-on affirmer que le gène est lié à X ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Poser : deux hypothèses, autosomique ou lié à X. Étape 2 — Écrire : autosomique, le garçon est $d//d$ et ses parents $N//d$ ; lié à X, il est $X^{d}Y$ et sa mère $X^{D}X^{d}$. Étape 3 — Confronter : aucune de ces écritures ne contredit le document. Étape 4 — Conclure : on ne peut pas trancher. Dire « lié à X » parce que c'est un garçon est l'erreur du piège.",
-                "answers": [
-                  {
-                    "content": "Non : l'hypothèse autosomique (parents $N//d$) donne aussi cette famille",
-                    "correct": true
-                  },
-                  {
-                    "content": "Oui : seul un garçon est atteint",
-                    "correct": false
-                  },
-                  {
-                    "content": "Oui : les parents sont sains",
-                    "correct": false
-                  },
-                  {
-                    "content": "Non : le gène est forcément autosomique",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Autosomique ou lié à X : les premiers arbres",
+              "statement": "Dans cet exercice, tu distingues un gène autosomique d'un gène lié au chromosome X, avec la méthode de la fiche. Le daltonisme est dû à un allèle récessif $d$ porté par X.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quels sont les deux gonosomes d'un garçon ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : on s'intéresse aux chromosomes sexuels. Étape 2 — Écrire : la fille est $XX$, le garçon $XY$. Étape 3 — Confronter : un garçon reçoit son Y de son père et son X de sa mère. Étape 4 — Conclure : les gonosomes du garçon sont X et Y. $XX$ est le piège : c'est le couple de la fille.",
+                  "answers": [
+                    {
+                      "content": "X et Y",
+                      "correct": true
+                    },
+                    {
+                      "content": "X et X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Y et Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux autosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père daltonien transmet l'allèle du daltonisme à son fils.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X. Étape 2 — Écrire : le père daltonien est $X^{d}Y$. Étape 3 — Confronter : il donne à son fils le chromosome $Y$, non son X. Étape 4 — Conclure : l'affirmation est fausse. Le garçon reçoit son X, donc son allèle, de sa mère.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le génotype d'un garçon daltonien, sachant que le daltonisme est récessif et lié à X ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est sur X et l'allèle $d$ est récessif. Étape 2 — Écrire : le garçon n'a qu'un X, donc un seul allèle. Étape 3 — Confronter : il est daltonien, donc son unique allèle est $d$. Étape 4 — Conclure : son génotype est $X^{d}Y$. $X^{d}X^{d}$ est celui d'une fille daltonienne.",
+                  "answers": [
+                    {
+                      "content": "$X^{d}Y$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$X^{d}X^{d}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$X^{D}Y$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$X^{D}X^{d}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille est daltonienne (maladie récessive liée à X). Que peut-on dire de son père ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est sur X, allèle récessif. Étape 2 — Écrire : la fille daltonienne est $X^{d}X^{d}$. Étape 3 — Confronter : elle a reçu un $X^{d}$ de chaque parent ; le père lui a donné son seul X, donc son X est $X^{d}$. Étape 4 — Conclure : le père est $X^{d}Y$, il est daltonien. Un père non daltonien est $X^{D}Y$ et ne peut pas donner $X^{d}$.",
+                  "answers": [
+                    {
+                      "content": "Il est daltonien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'est pas daltonien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est porteur sain",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère non daltonienne $X^{D}X^{d}$ et un père non daltonien $X^{D}Y$ ont des enfants. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Poser : gène lié à X, allèle $d$ récessif. Étape 2 — Écrire : la mère donne $X^{D}$ ou $X^{d}$, le père donne $X^{D}$ aux filles et $Y$ aux fils. Étape 3 — Confronter : toute fille reçoit $X^{D}$ du père, donc n'est jamais daltonienne ; un fils reçoit $X^{D}$ ou $X^{d}$ de sa mère, avec une chance sur deux. Étape 4 — Conclure : les propositions « aucune fille daltonienne » et « une chance sur deux pour un garçon » sont exactes.",
+                  "answers": [
+                    {
+                      "content": "Aucune de leurs filles n'est daltonienne",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque garçon a une chance sur deux d'être daltonien",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les garçons sont daltoniens",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque fille a une chance sur deux d'être daltonienne",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le père donne l'allèle $d$ à ses fils",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une famille, un garçon est atteint d'une maladie récessive ; ses parents ne sont pas atteints. Peut-on affirmer que le gène est lié à X ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : deux hypothèses, autosomique ou lié à X. Étape 2 — Écrire : autosomique, le garçon est $d//d$ et ses parents $N//d$ ; lié à X, il est $X^{d}Y$ et sa mère $X^{D}X^{d}$. Étape 3 — Confronter : aucune de ces écritures ne contredit le document. Étape 4 — Conclure : on ne peut pas trancher. Dire « lié à X » parce que c'est un garçon est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non : l'hypothèse autosomique (parents $N//d$) donne aussi cette famille",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : seul un garçon est atteint",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : les parents sont sains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le gène est forcément autosomique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Autosomique ou lié à X : de nouvelles familles",
+              "statement": "Dans cet exercice, tu suis l'origine des chromosomes X et Y et tu distingues un gène autosomique d'un gène lié au chromosome X, avec la méthode de la fiche. L'hémophilie est due à un allèle récessif h porté par X ; on écrit XNY, XhY, XNXN, XNXh et XhXh pour les génotypes (N est l'allèle normal).",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Rappelle-toi : le garçon reçoit son X de sa mère et son Y de son père ; la fille reçoit un X de chacun de ses parents. Pour trancher, cherche une situation que l'une des deux hypothèses rend impossible.",
+              "questions": [
+                {
+                  "content": "Une fille hémophile a pour génotype XhXh (gène lié à X). D'où viennent ses deux chromosomes X ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X. Étape 2 — Écrire : la fille est XhXh, elle a deux X. Étape 3 — Confronter : une fille reçoit un X de chacun de ses parents. Étape 4 — Conclure : un X vient de sa mère, l'autre de son père, dont le seul X est donc Xh. Dire que le père lui a donné un Y, c'est confondre la fille avec le garçon ; dire que les deux X viennent d'un seul parent oublie que la fécondation réunit un gamète de chaque parent.",
+                  "answers": [
+                    {
+                      "content": "Un de sa mère et un de son père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux de sa mère",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux de son père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un de sa mère ; de son père, elle a reçu un Y",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère porteuse XNXh (non hémophile) transmet forcément l'allèle h à son fils.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X, l'allèle h est récessif. Étape 2 — Écrire : la mère est XNXh ; elle donne XN ou Xh à chacun de ses enfants. Étape 3 — Confronter : un garçon reçoit son X de sa mère, donc l'un ou l'autre de ces deux chromosomes. Étape 4 — Conclure : il reçoit Xh dans un cas sur deux seulement ; l'affirmation est fausse. Elle serait vraie pour une mère atteinte XhXh, qui n'a que des Xh à donner.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un gène lié à X, un garçon n'a qu'un exemplaire du gène, alors qu'une fille en a ___ exemplaires (écris le nombre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Poser : le gène est sur la partie du X que le Y n'a pas. Étape 2 — Écrire : le garçon est XY, il n'a qu'un X ; la fille est XX, elle a deux X. Étape 3 — Confronter : un exemplaire du gène par chromosome X, donc un pour le garçon, deux pour la fille. Étape 4 — Conclure : la fille en a deux exemplaires. Pour un gène autosomique, tout le monde en a deux : c'est ce qui distingue les deux cas.",
+                  "answers": [
+                    {
+                      "content": "deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille qui porte un allèle récessif lié à X sans être atteinte est dite ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X, l'allèle h est récessif. Étape 2 — Écrire : la fille XNXh a un allèle normal et un allèle h. Étape 3 — Confronter : l'allèle normal domine, donc elle n'est pas atteinte, mais elle peut transmettre h. Étape 4 — Conclure : elle est dite porteuse. « Atteinte » serait XhXh ; « homozygote récessive » décrit aussi XhXh, qui exprime la maladie.",
+                  "answers": [
+                    {
+                      "content": "porteuse",
+                      "correct": true
+                    },
+                    {
+                      "content": "atteinte",
+                      "correct": false
+                    },
+                    {
+                      "content": "homozygote récessive",
+                      "correct": false
+                    },
+                    {
+                      "content": "dominante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère est atteinte d'une maladie récessive ; son fils n'est pas atteint. Que peut-on conclure sur le gène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : deux hypothèses, gène autosomique ou gène lié à X. Étape 2 — Écrire : si le gène était lié à X, la mère atteinte serait XhXh et ne pourrait donner que Xh. Étape 3 — Confronter : son fils aurait reçu Xh et serait atteint, ce qui contredit l'énoncé. Étape 4 — Conclure : l'hypothèse liée à X est contredite, le gène est autosomique. Dire « on ne peut pas trancher » oublie que cette situation est décisive.",
+                  "answers": [
+                    {
+                      "content": "Il est autosomique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est lié à X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est porté par Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas trancher",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype à la personne qu'il décrit (gène de l'hémophilie lié à X).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X, l'allèle h est récessif. Étape 2 — Écrire : le garçon n'a qu'un X, la fille en a deux. Étape 3 — Confronter : un garçon qui porte h est atteint, une fille n'est atteinte que si elle porte h deux fois. Étape 4 — Conclure : XhY est un garçon hémophile, XhXh une fille hémophile, XNXh une fille porteuse non hémophile, XNY un garçon non hémophile. Écrire XNXh pour un garçon est impossible : un garçon n'a qu'un seul X.",
+                  "answers": [
+                    {
+                      "content": "XhY",
+                      "match": "Garçon hémophile"
+                    },
+                    {
+                      "content": "XhXh",
+                      "match": "Fille hémophile"
+                    },
+                    {
+                      "content": "XNXh",
+                      "match": "Fille porteuse non hémophile"
+                    },
+                    {
+                      "content": "XNY",
+                      "match": "Garçon non hémophile"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à écrire les génotypes selon que le gène est autosomique ou lié à X et à suivre l'origine des chromosomes, avec la méthode de la fiche.",
             "questions": [
@@ -641,122 +907,245 @@
           },
           "pitfall": "Ne crois pas que « 1 risque sur 4 » veut dire qu'une famille de quatre enfants aura exactement un enfant malade, ni qu'après un enfant malade les suivants seront sains. Contre-exemple : le couple $N//d$ × $N//d$ a déjà un enfant drépanocytaire ; pour le deuxième enfant, le risque reste 1/4. Les gamètes ne gardent aucune mémoire. Avoir deux enfants malades de suite a pour probabilité $1/4 \\times 1/4 = 1/16$.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer le risque d'un couple",
-            "statement": "Dans cet exercice, tu calcules le risque d'un couple à l'aide d'un échiquier de croisement, avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Un parent de génotype $N//d$ forme des gamètes. Lesquels ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire les génotypes : le parent est $N//d$. Étape 2 — Écrire les gamètes : la méiose sépare les deux chromosomes de la paire, chaque gamète ne reçoit qu'un allèle. Le parent produit donc $N$ (1/2) et $d$ (1/2). Un gamète $N//d$ serait une erreur : il aurait deux allèles, comme une cellule du corps.",
-                "answers": [
-                  {
-                    "content": "$N$ et $d$, chacun avec une chance sur deux",
-                    "correct": true
-                  },
-                  {
-                    "content": "Uniquement $N//d$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Uniquement $N$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$N//N$ et $d//d$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Deux parents de génotype $N//d$ attendent un enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire $d//d$ ?",
-                "question_type": "numeric",
-                "unit": "%",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : les deux parents sont $N//d$. Étape 2 — Écrire les gamètes : $N$ (1/2) et $d$ (1/2) pour chacun. Étape 3 — Construire l'échiquier : $N//N$, $N//d$, $N//d$, $d//d$. Étape 4 — Lire : une seule case $d//d$ sur quatre. Étape 5 — Calculer : 1/4, soit 25 %. Dire 50 % est l'erreur de celui qui compte tous les hétérozygotes comme malades.",
-                "answers": [
-                  {
-                    "content": "25",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un père $N//d$ et une mère drépanocytaire $d//d$ attendent un enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire ?",
-                "question_type": "numeric",
-                "unit": "%",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : le père est $N//d$, la mère $d//d$. Étape 2 — Écrire les gamètes : le père donne $N$ (1/2) ou $d$ (1/2), la mère donne toujours $d$. Étape 3 — Construire : $N//d$ et $d//d$. Étape 4 — Lire : une case malade ($d//d$) sur deux. Étape 5 — Calculer : 1/2, soit 50 %.",
-                "answers": [
-                  {
-                    "content": "50",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un père $N//N$ et une mère drépanocytaire $d//d$ attendent un enfant. Quel est le génotype de leurs enfants ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : père $N//N$, mère $d//d$. Étape 2 — Écrire les gamètes : le père donne toujours $N$, la mère toujours $d$. Étape 3 — Construire : une seule case, $N//d$. Étape 4 — Lire : tous les enfants sont $N//d$, non malades, porteurs. Étape 5 — Calculer : le risque de maladie est de 0 sur 1. Le quart est le résultat de deux parents hétérozygotes, pas de ce couple.",
-                "answers": [
-                  {
-                    "content": "Tous $N//d$ : aucun enfant n'est malade",
-                    "correct": true
-                  },
-                  {
-                    "content": "La moitié $N//N$, la moitié $d//d$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Tous $d//d$",
-                    "correct": false
-                  },
-                  {
-                    "content": "Un quart $d//d$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Une mère non daltonienne $X^{D}X^{d}$ et un père non daltonien $X^{D}Y$ attendent un enfant. Quelle est la probabilité, en pourcentage, que cet enfant soit un garçon daltonien ?",
-                "question_type": "numeric",
-                "unit": "%",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Écrire : mère $X^{D}X^{d}$, père $X^{D}Y$. Étape 2 — Écrire les gamètes : la mère donne $X^{D}$ ou $X^{d}$ (1/2 chacun), le père donne $X^{D}$ ou $Y$ (1/2 chacun). Étape 3 — Construire : $X^{D}X^{D}$, $X^{D}Y$, $X^{D}X^{d}$, $X^{d}Y$. Étape 4 — Lire : un seul garçon daltonien, $X^{d}Y$. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Les deux garçons de l'échiquier ne sont pas tous daltoniens : un seul l'est.",
-                "answers": [
-                  {
-                    "content": "25",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Un couple $N//d$ × $N//d$ a déjà eu trois enfants non malades. Quel est le risque que le quatrième enfant soit drépanocytaire ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : le couple est toujours $N//d$ × $N//d$. Étape 2 — Écrire les gamètes : inchangés, $N$ (1/2) et $d$ (1/2). Étape 3 — Construire : le même échiquier de 4 cases. Étape 4 — Lire : une case $d//d$. Étape 5 — Calculer : 1/4, car chaque naissance est indépendante. Croire que le quatrième doit être malade est l'erreur du piège.",
-                "answers": [
-                  {
-                    "content": "1/4, comme pour chaque naissance",
-                    "correct": true
-                  },
-                  {
-                    "content": "1/2, car les trois premiers sont sains",
-                    "correct": false
-                  },
-                  {
-                    "content": "0, car le couple a déjà eu des enfants sains",
-                    "correct": false
-                  },
-                  {
-                    "content": "1, car il doit bien y avoir un malade sur quatre",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer le risque d'un couple",
+              "statement": "Dans cet exercice, tu calcules le risque d'un couple à l'aide d'un échiquier de croisement, avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un parent de génotype $N//d$ forme des gamètes. Lesquels ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : le parent est $N//d$. Étape 2 — Écrire les gamètes : la méiose sépare les deux chromosomes de la paire, chaque gamète ne reçoit qu'un allèle. Le parent produit donc $N$ (1/2) et $d$ (1/2). Un gamète $N//d$ serait une erreur : il aurait deux allèles, comme une cellule du corps.",
+                  "answers": [
+                    {
+                      "content": "$N$ et $d$, chacun avec une chance sur deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Uniquement $N//d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement $N$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N//N$ et $d//d$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux parents de génotype $N//d$ attendent un enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire $d//d$ ?",
+                  "question_type": "numeric",
+                  "unit": "%",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : les deux parents sont $N//d$. Étape 2 — Écrire les gamètes : $N$ (1/2) et $d$ (1/2) pour chacun. Étape 3 — Construire l'échiquier : $N//N$, $N//d$, $N//d$, $d//d$. Étape 4 — Lire : une seule case $d//d$ sur quatre. Étape 5 — Calculer : 1/4, soit 25 %. Dire 50 % est l'erreur de celui qui compte tous les hétérozygotes comme malades.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père $N//d$ et une mère drépanocytaire $d//d$ attendent un enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire ?",
+                  "question_type": "numeric",
+                  "unit": "%",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : le père est $N//d$, la mère $d//d$. Étape 2 — Écrire les gamètes : le père donne $N$ (1/2) ou $d$ (1/2), la mère donne toujours $d$. Étape 3 — Construire : $N//d$ et $d//d$. Étape 4 — Lire : une case malade ($d//d$) sur deux. Étape 5 — Calculer : 1/2, soit 50 %.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père $N//N$ et une mère drépanocytaire $d//d$ attendent un enfant. Quel est le génotype de leurs enfants ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : père $N//N$, mère $d//d$. Étape 2 — Écrire les gamètes : le père donne toujours $N$, la mère toujours $d$. Étape 3 — Construire : une seule case, $N//d$. Étape 4 — Lire : tous les enfants sont $N//d$, non malades, porteurs. Étape 5 — Calculer : le risque de maladie est de 0 sur 1. Le quart est le résultat de deux parents hétérozygotes, pas de ce couple.",
+                  "answers": [
+                    {
+                      "content": "Tous $N//d$ : aucun enfant n'est malade",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moitié $N//N$, la moitié $d//d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous $d//d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un quart $d//d$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mère non daltonienne $X^{D}X^{d}$ et un père non daltonien $X^{D}Y$ attendent un enfant. Quelle est la probabilité, en pourcentage, que cet enfant soit un garçon daltonien ?",
+                  "question_type": "numeric",
+                  "unit": "%",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire : mère $X^{D}X^{d}$, père $X^{D}Y$. Étape 2 — Écrire les gamètes : la mère donne $X^{D}$ ou $X^{d}$ (1/2 chacun), le père donne $X^{D}$ ou $Y$ (1/2 chacun). Étape 3 — Construire : $X^{D}X^{D}$, $X^{D}Y$, $X^{D}X^{d}$, $X^{d}Y$. Étape 4 — Lire : un seul garçon daltonien, $X^{d}Y$. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Les deux garçons de l'échiquier ne sont pas tous daltoniens : un seul l'est.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple $N//d$ × $N//d$ a déjà eu trois enfants non malades. Quel est le risque que le quatrième enfant soit drépanocytaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire : le couple est toujours $N//d$ × $N//d$. Étape 2 — Écrire les gamètes : inchangés, $N$ (1/2) et $d$ (1/2). Étape 3 — Construire : le même échiquier de 4 cases. Étape 4 — Lire : une case $d//d$. Étape 5 — Calculer : 1/4, car chaque naissance est indépendante. Croire que le quatrième doit être malade est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "1/4, comme pour chaque naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/2, car les trois premiers sont sains",
+                      "correct": false
+                    },
+                    {
+                      "content": "0, car le couple a déjà eu des enfants sains",
+                      "correct": false
+                    },
+                    {
+                      "content": "1, car il doit bien y avoir un malade sur quatre",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Gamètes, échiquier et risque : de nouveaux couples",
+              "statement": "Dans cet exercice, tu écris les gamètes, tu construis l'échiquier de croisement et tu calcules un risque, avec la méthode de la fiche. L'albinisme est dû à un allèle récessif a ; P est l'allèle du pigment, dominant.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Écris d'abord les gamètes de chaque parent, puis remplis l'échiquier : une case par couple de gamètes. Le risque est le nombre de cases favorables divisé par le nombre total de cases.",
+              "questions": [
+                {
+                  "content": "Un père albinos a pour génotype a//a. Quels gamètes forme-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : le père est a//a. Étape 2 — Écrire les gamètes : la méiose sépare les deux chromosomes de la paire, chaque gamète ne reçoit qu'un seul allèle. Le père n'a que l'allèle a, donc tous ses gamètes sont a. Un gamète a//a aurait deux allèles, comme une cellule du corps ; deux sortes de gamètes P et a demandent un parent P//a.",
+                  "answers": [
+                    {
+                      "content": "Tous ses gamètes portent l'allèle a",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous ses gamètes sont a//a",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moitié P, la moitié a",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun gamète, car il est albinos",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père P//a et une mère P//a, tous deux non albinos, attendent un enfant. Quelle est la probabilité, en pourcentage, que l'enfant ne soit pas albinos ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont P//a. Étape 2 — Écrire les gamètes : P (1/2) et a (1/2) pour chacun. Étape 3 — Construire l'échiquier : P//P, P//a, P//a, a//a. Étape 4 — Lire : seule la case a//a est albinos, les trois autres sont non albinos (P est dominant). Étape 5 — Calculer : 3 cases favorables sur 4, soit 75 %. Répondre 25 % est l'erreur de celui qui donne le risque de la case a//a au lieu de celui des trois autres cases.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Un couple P//a × P//a veut deux enfants. La probabilité que les deux soient albinos est de 1/16.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont P//a. Étape 2 — Écrire les gamètes : P (1/2) et a (1/2). Étape 3 — Construire l'échiquier : une case a//a sur quatre, donc un risque de 1/4 pour chaque enfant. Étape 5 — Calculer : les naissances étant indépendantes, la probabilité que les deux enfants soient albinos est 1/4 × 1/4 = 1/16. L'affirmation est vraie. Répondre 1/4 oublie qu'il faut deux enfants albinos et non un seul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un échiquier de croisement, toutes les cases ont la ___ chance (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Construire l'échiquier : on place les gamètes d'un parent en lignes et ceux de l'autre en colonnes, et chaque case est un génotype d'enfant possible. Étape 4 — Lire : la fécondation réunit au hasard un gamète de chaque parent, donc toutes les cases ont la même chance. Étape 5 — Calculer : c'est pourquoi le risque se calcule en divisant les cases favorables par les cases totales.",
+                  "answers": [
+                    {
+                      "content": "même",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un père P//a et une mère P//P attendent un enfant. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Écrire les génotypes : père P//a, mère P//P. Étape 2 — Écrire les gamètes : le père donne P ou a (1/2 chacun), la mère donne toujours P. Étape 3 — Construire l'échiquier : P//P et P//a. Étape 4 — Lire : aucune case a//a, donc aucun enfant albinos ; une case sur deux est P//a. Étape 5 — Calculer : le risque d'albinisme est 0 sur 2. Dire un quart confond ce couple avec deux parents hétérozygotes ; la mère P//P ne forme qu'une sorte de gamètes.",
+                  "answers": [
+                    {
+                      "content": "Aucun enfant ne sera albinos",
+                      "correct": true
+                    },
+                    {
+                      "content": "La moitié des enfants possibles sont hétérozygotes P//a",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant sur quatre est albinos",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les enfants sont P//P",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mère forme deux sortes de gamètes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque couple au risque que son enfant soit albinos a//a.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Écrire les génotypes de chaque couple. Étape 2 — Écrire les gamètes : un parent P//a donne P ou a, un parent P//P ne donne que P, un parent a//a ne donne que a. Étape 3 — Construire l'échiquier de chaque couple. Étape 4 — Lire les cases a//a : une sur quatre pour P//a × P//a, une sur deux pour P//a × a//a, aucune pour P//P × a//a, toutes pour a//a × a//a. Étape 5 — Calculer : 1/4, 1/2, 0 et 1. Mélanger 1 sur 4 et 1 sur 2 vient d'un échiquier mal construit.",
+                  "answers": [
+                    {
+                      "content": "P//a × P//a",
+                      "match": "1 sur 4"
+                    },
+                    {
+                      "content": "P//a × a//a",
+                      "match": "1 sur 2"
+                    },
+                    {
+                      "content": "P//P × a//a",
+                      "match": "Aucun risque"
+                    },
+                    {
+                      "content": "a//a × a//a",
+                      "match": "Certain : tous les enfants"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Tu t'entraînes à écrire les gamètes, à remplir un échiquier de croisement et à calculer un risque, avec la méthode de la fiche.",
             "questions": [
@@ -1348,6 +1737,1678 @@
               ],
               "explanation": "Corrigé modèle : Deux parents $A//a$ donnent un échiquier de 4 cases dont une seule $a//a$ : le risque est 1/4, soit 25 %. Le pourcentage observé, 24 %, est très proche. Il n'est pas exactement égal parce que la fécondation réunit les gamètes au hasard : sur un nombre fini d'enfants, la fréquence s'écarte un peu de la probabilité, et elle s'en approche d'autant plus que le nombre d'enfants est grand (ici 200). Le risque de 1/4 est une probabilité pour chaque naissance, indépendante des précédentes : une famille de quatre enfants peut avoir aucun, un ou plusieurs enfants albinos. Barème : risque théorique 1 ; comparaison 0,5 ; explication par le hasard 1 ; effet du nombre d'enfants 1 ; indépendance des naissances 0,5.",
               "answers": []
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "le vocabulaire de la génétique (gène, allèle, génotype, phénotype, homozygote, hétérozygote, dominant, récessif), les autosomes et les gonosomes, la déduction de la dominance à partir d'un arbre généalogique, les gamètes, l'échiquier de croisement et le calcul d'un risque pour un couple.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Le professeur de SVT rappelle le vocabulaire de la génétique à partir de la drépanocytose, maladie du sang due à un gène autosomique. On note N l'allèle normal et d l'allèle de la maladie, qui est récessif. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un gène est une portion d'ADN qui commande un caractère ; ses versions sont les allèles. Le génotype est fait d'allèles, le phénotype s'observe. Un allèle récessif ne s'exprime qu'en double exemplaire.",
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Définir le gène : c'est une portion d'ADN, à une place précise d'un chromosome, qui commande un caractère. Étape 2 — Définir l'allèle : ce sont les versions différentes d'un même gène. Étape 3 — Distinguer génotype et phénotype : le génotype est l'ensemble des allèles, le phénotype est le caractère observable. Confondre génotype et phénotype est l'erreur la plus courante : N//d est un génotype, « non drépanocytaire » est un phénotype.",
+                  "answers": [
+                    {
+                      "content": "Gène",
+                      "match": "Portion d'ADN, à une place précise d'un chromosome, qui commande un caractère"
+                    },
+                    {
+                      "content": "Allèle",
+                      "match": "Version différente d'un même gène"
+                    },
+                    {
+                      "content": "Génotype",
+                      "match": "Ensemble des allèles d'un individu pour un gène"
+                    },
+                    {
+                      "content": "Phénotype",
+                      "match": "Caractère observable"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne a pour génotype N//d. Quel mot la décrit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le génotype : N//d porte deux allèles, N et d. Étape 2 — Appliquer la définition : un individu est hétérozygote s'il a deux allèles différents, homozygote s'il a deux allèles identiques. Étape 3 — Conclure : N//d est hétérozygote. Elle n'est pas drépanocytaire car l'allèle d est récessif et ne s'exprime pas à côté de N ; dire « homozygote » oublie que ses deux allèles diffèrent.",
+                  "answers": [
+                    {
+                      "content": "Hétérozygote",
+                      "correct": true
+                    },
+                    {
+                      "content": "Homozygote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Homozygote récessive",
+                      "correct": false
+                    },
+                    {
+                      "content": "Drépanocytaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un allèle qui ne s'exprime qu'en double exemplaire est dit ___ (dominant ou récessif).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Rappeler les deux définitions : un allèle dominant s'exprime même en un seul exemplaire ; un allèle récessif ne s'exprime qu'en double exemplaire. Étape 2 — Appliquer : l'énoncé décrit un allèle qui exige deux exemplaires pour s'exprimer. Étape 3 — Conclure : il est récessif. Dominant serait l'erreur de celui qui inverse les deux définitions.",
+                  "answers": [
+                    {
+                      "content": "récessif",
+                      "correct": true
+                    },
+                    {
+                      "content": "récessive",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une personne de génotype N//d est drépanocytaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire le génotype : N//d, un allèle normal et un allèle de la maladie. Étape 2 — Rappeler la règle : l'allèle d est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Conclure : à côté de N, l'allèle d reste caché ; la personne est non drépanocytaire, hétérozygote, et elle peut transmettre d. Seule la personne d//d est drépanocytaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux phrases exactes sur une personne de génotype d//d ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire le génotype : d//d, deux allèles identiques. Étape 2 — Nommer : deux allèles identiques font un homozygote. Étape 3 — Conclure sur le phénotype : l'allèle d est récessif et il est en double exemplaire, donc il s'exprime et la personne est drépanocytaire. Elle n'est pas hétérozygote, et l'allèle N, qu'elle ne possède pas, ne peut pas la protéger.",
+                  "answers": [
+                    {
+                      "content": "Elle est homozygote",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est drépanocytaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est hétérozygote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est non malade, car N est dominant",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une classe étudie les chromosomes humains à partir d'un schéma d'une cellule du corps d'un garçon et d'une fille, avec leurs 23 paires de chromosomes. Tu réponds avec la leçon.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans une cellule du corps, il y a 22 paires d'autosomes et une paire de gonosomes. La fille est XX, le garçon XY. Un garçon n'a qu'un exemplaire d'un gène lié à X.",
+              "questions": [
+                {
+                  "content": "Combien de paires d'autosomes une cellule du corps humain possède-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Rappeler : une cellule du corps a 23 paires de chromosomes. Étape 2 — Distinguer : une de ces paires est la paire de gonosomes, les chromosomes sexuels ; les autres sont des autosomes. Étape 3 — Calculer : 23 − 1 = 22 paires d'autosomes. Répondre 23 oublie de retirer la paire de gonosomes.",
+                  "answers": [
+                    {
+                      "content": "22",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "paires"
+                },
+                {
+                  "content": "Les gonosomes d'une fille sont ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Rappeler : les gonosomes sont les chromosomes sexuels. Étape 2 — Distinguer : la fille a deux chromosomes X, le garçon un X et un Y. Étape 3 — Conclure : les gonosomes de la fille sont XX. XY est le couple du garçon ; YY n'existe pas dans la leçon, et les autosomes sont les 22 autres paires.",
+                  "answers": [
+                    {
+                      "content": "XX",
+                      "correct": true
+                    },
+                    {
+                      "content": "XY",
+                      "correct": false
+                    },
+                    {
+                      "content": "YY",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux autosomes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gène est lié au chromosome X. Combien d'exemplaires de ce gène un garçon possède-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Rappeler : un gène lié à X est sur la partie du X que le Y n'a pas. Étape 2 — Compter : le garçon est XY, il n'a qu'un seul X. Étape 3 — Conclure : il n'a qu'un exemplaire du gène. La fille, qui est XX, en a deux. Dire « deux » confond le garçon avec la fille ou avec un gène autosomique.",
+                  "answers": [
+                    {
+                      "content": "Un seul",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun, car il a un Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gène autosomique est situé sur un autosome : chaque personne en possède deux exemplaires.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Rappeler la définition : un gène autosomique est sur un autosome. Étape 2 — Compter : les autosomes vont par paires, donc la personne a deux exemplaires du gène, un sur chaque chromosome de la paire. Étape 3 — Conclure : l'affirmation est vraie, pour une fille comme pour un garçon. C'est ce qui distingue ce cas du gène lié à X, où le garçon n'en a qu'un.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque personne à l'origine de ses chromosomes sexuels.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Rappeler : le garçon reçoit son X de sa mère et son Y de son père ; la fille reçoit un X de chacun de ses parents. Étape 2 — Appliquer au père : un fils est XY et a reçu son X de sa mère, donc son Y de son père ; tous les fils d'un père reçoivent son Y. Étape 3 — Conclure : les trois liens sont ceux de la colonne de droite. Dire qu'un garçon reçoit son X de son père est l'erreur typique.",
+                  "answers": [
+                    {
+                      "content": "Un garçon",
+                      "match": "Il reçoit son X de sa mère et son Y de son père"
+                    },
+                    {
+                      "content": "Une fille",
+                      "match": "Elle reçoit un X de chacun de ses parents"
+                    },
+                    {
+                      "content": "Un père",
+                      "match": "Il donne son chromosome Y à tous ses fils"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Bouaké, une famille consulte pour la drépanocytose, maladie du sang due à un gène autosomique. Le père et la mère ne sont pas drépanocytaires. Ils ont quatre enfants : un fils et une fille drépanocytaires, un fils et une fille qui ne le sont pas. On note N l'allèle normal et d l'allèle de la maladie. Les données sont une situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Repère l'enfant dont le phénotype est absent chez ses deux parents : il montre l'allèle récessif. Les deux parents sont alors hétérozygotes. Pour le risque, écris les gamètes puis l'échiquier.",
+              "questions": [
+                {
+                  "content": "Les parents ne sont pas drépanocytaires mais deux de leurs enfants le sont. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : un couple de même phénotype (non drépanocytaire) a des enfants de phénotype différent (drépanocytaires). Étape 2 — Comparer : « drépanocytaire » est absent chez les parents, pourtant les enfants l'ont reçu d'eux. Étape 3 — Déduire la règle : le phénotype des parents est dominant, celui des enfants récessif, et le gène étant autosomique les parents sont hétérozygotes. Étape 4 — Conclure : ils sont N//d, chacun a donné d à ses enfants malades. Des parents homozygotes N//N n'auraient aucun allèle d à transmettre.",
+                  "answers": [
+                    {
+                      "content": "L'allèle de la maladie est récessif et les deux parents sont hétérozygotes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle de la maladie est dominant et les deux parents sont hétérozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle de la maladie est récessif et les deux parents sont homozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien déduire sans connaître les grands-parents",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fille drépanocytaire a reçu de chacun de ses parents l'allèle ___ (écris la lettre de l'allèle).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : la fille est drépanocytaire, c'est le phénotype récessif. Étape 2 — Déduire le génotype : un phénotype récessif donne un génotype certain, d//d. Étape 3 — Suivre l'origine : un allèle de chaque chromosome de la paire vient de chaque parent. Étape 4 — Conclure : elle a reçu l'allèle d de sa mère et l'allèle d de son père. L'allèle N est celui des enfants non malades.",
+                  "answers": [
+                    {
+                      "content": "d",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fille non drépanocytaire de cette famille (parents N//d). Quelles sont les deux affirmations exactes sur son génotype ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : la fille a le phénotype dominant (non drépanocytaire), ses parents sont N//d. Étape 2 — Écrire les possibles : elle peut avoir reçu N ou d de chaque parent, mais pas d//d puisqu'elle n'est pas malade. Étape 3 — Conclure : son génotype est N//N ou N//d, il est incertain. Un phénotype récessif donne un génotype certain, un phénotype dominant non. Dire N//N oublie qu'elle peut être porteuse.",
+                  "answers": [
+                    {
+                      "content": "Son génotype est N//N ou N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son génotype est incertain, car son phénotype est dominant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son génotype est certain : N//N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est forcément d//d",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne peut pas avoir reçu l'allèle d",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux parents sont N//d. Quel est le risque, en pourcentage, que leur cinquième enfant soit drépanocytaire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont N//d. Étape 2 — Écrire les gamètes : N (1/2) et d (1/2) pour chacun. Étape 3 — Construire l'échiquier : N//N, N//d, N//d, d//d. Étape 4 — Lire : une seule case d//d. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Le risque est le même pour le cinquième enfant que pour le premier : 2 enfants malades sur 4 n'y changent rien.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Comme deux de leurs quatre enfants sont drépanocytaires, le risque pour le cinquième enfant est de 50 %.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont toujours N//d. Étape 2 — Écrire les gamètes : les proportions de gamètes ne changent pas. Étape 3 — Construire : c'est le même échiquier, avec une case d//d sur quatre. Étape 5 — Calculer : le risque est 1/4, soit 25 %, car chaque naissance est indépendante des précédentes. Les 2 enfants malades sur 4 sont un résultat du hasard, pas une nouvelle probabilité : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un couple consulte pour l'albinisme. Le père est albinos et la mère, non albinos, a un parent albinos. L'analyse montre que le père est a//a et que la mère est P//a (P : allèle du pigment, dominant ; a : allèle de l'albinisme, récessif). On cherche les enfants possibles. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le père a//a ne forme qu'une sorte de gamète ; la mère P//a en forme deux. L'échiquier compte une case par couple de gamètes. Un enfant P//a n'est pas albinos : P est dominant.",
+              "questions": [
+                {
+                  "content": "Classe dans l'ordre les cinq étapes pour calculer le risque d'albinisme de ce couple.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Écrire les génotypes : sans eux, on ne sait pas quels gamètes sont possibles. Étape 2 — Écrire les gamètes de chaque parent. Étape 3 — Construire l'échiquier avec ces gamètes. Étape 4 — Lire les enfants possibles dans les cases. Étape 5 — Calculer en divisant les cases favorables par les cases totales. On ne peut pas calculer le risque avant de lire l'échiquier : les cases favorables ne sont pas encore repérées.",
+                  "answers": [
+                    {
+                      "content": "Écrire les génotypes du père et de la mère"
+                    },
+                    {
+                      "content": "Écrire les gamètes que chaque parent produit"
+                    },
+                    {
+                      "content": "Construire l'échiquier de croisement"
+                    },
+                    {
+                      "content": "Lire le génotype et le phénotype de chaque enfant possible"
+                    },
+                    {
+                      "content": "Calculer le risque : cases favorables ÷ cases totales"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels gamètes la mère P//a forme-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire le génotype : la mère est P//a. Étape 2 — Écrire les gamètes : la méiose sépare les deux chromosomes de la paire, chaque gamète ne reçoit qu'un allèle, P ou a, en proportions égales (1/2 et 1/2). Un gamète P//a aurait deux allèles comme une cellule du corps ; une seule sorte de gamètes serait celle d'une mère homozygote.",
+                  "answers": [
+                    {
+                      "content": "P pour la moitié de ses gamètes, a pour l'autre moitié",
+                      "correct": true
+                    },
+                    {
+                      "content": "Uniquement des gamètes P//a",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement des gamètes P",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement des gamètes a",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le père est a//a et la mère P//a. Combien de cases contient l'échiquier de ce croisement, en comptant une case par couple de gamètes différents ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : père a//a, mère P//a. Étape 2 — Écrire les gamètes : le père ne forme qu'une sorte de gamètes, a ; la mère en forme deux, P et a. Étape 3 — Construire l'échiquier : une colonne pour le père, deux lignes pour la mère, donc 1 × 2 = 2 cases, P//a et a//a. Répondre 4 serait compter deux sortes de gamètes pour le père, qui n'en forme qu'une.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cases"
+                },
+                {
+                  "content": "Le père est a//a et la mère P//a. Quel est le risque, en pourcentage, que leur enfant soit albinos ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : père a//a, mère P//a. Étape 2 — Écrire les gamètes : le père donne a ; la mère donne P ou a, 1/2 chacun. Étape 3 — Construire l'échiquier : P//a et a//a. Étape 4 — Lire : une case albinos (a//a) sur deux. Étape 5 — Calculer : 1/2, soit 50 %. Répondre 25 % serait appliquer le résultat de deux parents hétérozygotes.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Les enfants P//a de ce couple ne sont pas albinos, parce que l'allèle P est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Lire l'échiquier : la case P//a porte un allèle P et un allèle a. Étape 5 — Conclure sur le phénotype : l'allèle P est dominant, il s'exprime même en un seul exemplaire, donc l'enfant est pigmenté. Dire que P est récessif contredit le fait que P//a n'est pas albinos ; dire qu'il est absent oublie qu'il figure dans le génotype.",
+                  "answers": [
+                    {
+                      "content": "dominant",
+                      "correct": true
+                    },
+                    {
+                      "content": "récessif",
+                      "correct": false
+                    },
+                    {
+                      "content": "absent",
+                      "correct": false
+                    },
+                    {
+                      "content": "lié à X",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · La génétique dans la vie courante en Côte d'Ivoire",
+          "notions": "des situations tirées de consultations de génétique en Côte d'Ivoire (Bouaké, Yamoussoukro, Korhogo, San-Pédro) : déduire la dominance et les génotypes des parents, suivre l'origine des chromosomes X et Y pour le daltonisme, calculer un risque avec un échiquier, comparer un effectif observé au risque attendu.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au CHU de Bouaké, Mme Aminata Coulibaly consulte avec son mari, M. Seydou Coulibaly : leur premier enfant, Moussa, est drépanocytaire alors qu'aucun des deux parents ne l'est. La drépanocytose est due à un gène autosomique ; on note N l'allèle normal et d l'allèle de la maladie. Les données sont une situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un enfant malade de deux parents sains montre que l'allèle de la maladie est récessif et que les parents sont hétérozygotes. Pour le risque, écris les gamètes puis l'échiquier.",
+              "questions": [
+                {
+                  "content": "Que peut-on déduire des génotypes de M. et Mme Coulibaly, qui ne sont pas drépanocytaires mais dont l'enfant Moussa l'est ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les parents ont le même phénotype (non drépanocytaire) et leur enfant Moussa un phénotype différent. Étape 2 — Comparer : « drépanocytaire » est absent chez eux, pourtant Moussa l'a reçu d'eux. Étape 3 — Déduire : l'allèle d est récessif et le gène est autosomique, donc les deux parents sont hétérozygotes. Étape 4 — Conclure : ils sont N//d. Des parents N//N n'auraient aucun d à donner, et des parents d//d seraient malades.",
+                  "answers": [
+                    {
+                      "content": "Les deux sont hétérozygotes N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux sont homozygotes N//N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont drépanocytaires d//d",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire de leurs génotypes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moussa a pour génotype ___ (écris le génotype avec N et d).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : Moussa est drépanocytaire. Étape 2 — Comparer : l'allèle d est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Déduire : un phénotype récessif donne un génotype certain. Étape 4 — Conclure : son génotype est d//d. Écrire N//d serait décrire une personne non malade, car N domine.",
+                  "answers": [
+                    {
+                      "content": "d//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "dd",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Coulibaly attend un deuxième enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : le père et la mère sont N//d. Étape 2 — Écrire les gamètes : N (1/2) et d (1/2) pour chacun. Étape 3 — Construire l'échiquier : N//N, N//d, N//d, d//d. Étape 4 — Lire : une seule case d//d. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Moussa étant déjà malade ne change pas ce risque.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Une voisine dit à Mme Coulibaly : « Puisque Moussa est malade, ton prochain enfant sera forcément en bonne santé. » Cette affirmation est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont toujours N//d. Étape 2 — Écrire les gamètes : leurs proportions n'ont pas changé. Étape 3 — Construire : c'est le même échiquier. Étape 5 — Calculer : le risque reste de 1/4 pour chaque enfant, car chaque naissance est indépendante des précédentes. La voisine croit que les gamètes gardent la mémoire de la naissance précédente ; or ils n'en gardent aucune.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa, la sœur de Moussa, n'est pas drépanocytaire. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : Awa a le phénotype dominant, ses parents sont N//d. Étape 2 — Écrire les possibles : N//N, N//d (le cas d//d est exclu car elle n'est pas malade). Étape 3 — Conclure : son génotype est N//N ou N//d, donc elle a au moins un N. Un phénotype dominant ne donne pas un génotype certain : dire N//N ou dire hétérozygote forcé est une erreur, et si elle est N//d elle peut transmettre d.",
+                  "answers": [
+                    {
+                      "content": "Son génotype est N//N ou N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a reçu au moins un allèle N",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son génotype est certain : N//N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est forcément hétérozygote",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle ne peut pas transmettre l'allèle d",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Lors d'une campagne de dépistage dans un collège de Yamoussoukro, l'infirmière découvre que Koffi, un garçon de 14 ans, est daltonien alors que ses parents, M. Yao et Mme Affoué, ne le sont pas. Le daltonisme est dû à un allèle récessif d porté par X ; N est l'allèle normal. On écrit XNY, XdY, XNXN, XNXd et XdXd pour les génotypes. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le garçon reçoit son X de sa mère et son Y de son père ; la fille reçoit un X de chacun de ses parents. Un père non daltonien est XNY. Pour le risque, écris les gamètes de la mère et du père.",
+              "questions": [
+                {
+                  "content": "Koffi est daltonien et son père M. Yao n'est pas daltonien. Quel est le génotype de M. Yao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X. Étape 2 — Écrire : un homme n'a qu'un X, donc un seul allèle pour ce gène ; M. Yao n'est pas daltonien, son X porte l'allèle normal. Étape 3 — Confronter : un génotype à deux X (XNXd ou XNXN) est celui d'une femme. Étape 4 — Conclure : M. Yao est XNY. XdY serait un homme daltonien.",
+                  "answers": [
+                    {
+                      "content": "XNY",
+                      "correct": true
+                    },
+                    {
+                      "content": "XdY",
+                      "correct": false
+                    },
+                    {
+                      "content": "XNXd",
+                      "correct": false
+                    },
+                    {
+                      "content": "XNXN",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Koffi, garçon daltonien, a pu recevoir son allèle d de son père.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X, l'allèle d est récessif. Étape 2 — Écrire : Koffi est XdY. Étape 3 — Confronter : un garçon reçoit son X de sa mère et son Y de son père ; son père lui a donné son Y, qui ne porte pas le gène. Étape 4 — Conclure : l'allèle d vient de sa mère, Mme Affoué (XNXd, porteuse). L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Affoué (XNXd) et M. Yao (XNY) attendent un troisième enfant. Quelle est la probabilité, en pourcentage, que cet enfant soit une fille daltonienne ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : la mère donne XN ou Xd, le père donne XN à ses filles et Y à ses fils. Étape 3 — Confronter : une fille reçoit XN de son père ; elle ne peut donc pas être XdXd. Étape 4 — Conclure : la probabilité d'une fille daltonienne est 0 %. Les filles peuvent être XNXN ou XNXd, c'est-à-dire non daltoniennes ou porteuses.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "M. Yao, de génotype XNY, donne à toutes ses filles son chromosome ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Poser : M. Yao est XY. Étape 2 — Écrire : un père donne à ses filles son X et à ses fils son Y. Étape 3 — Confronter : une fille reçoit un X de chacun de ses parents. Étape 4 — Conclure : il donne son X à toutes ses filles. Le chromosome Y va à ses fils : le répondre serait confondre filles et fils.",
+                  "answers": [
+                    {
+                      "content": "X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Y",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adjoua, sœur de Koffi, n'est pas daltonienne. Les parents sont XNXd (mère) et XNY (père). Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : le père donne XN à toute fille, la mère donne XN ou Xd. Étape 3 — Confronter : Adjoua est donc XNXN ou XNXd ; XdXd est impossible puisque son père ne peut pas lui donner Xd. Étape 4 — Conclure : les deux affirmations exactes sont qu'elle a reçu XN de son père et qu'elle est XNXN ou XNXd. Elle n'est pas forcément XNXN : elle peut être porteuse.",
+                  "answers": [
+                    {
+                      "content": "Elle a reçu XN de son père",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est XNXN ou XNXd",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est forcément XNXN",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a reçu l'allèle d de son père",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est XdXd",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "À Korhogo, Mme Fatoumata et M. Brahima, tous deux non albinos, attendent leur deuxième enfant ; leur premier enfant, Ibrahim, est albinos. L'albinisme est dû à un allèle récessif a d'un gène autosomique ; P est l'allèle du pigment, dominant. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Un enfant albinos de deux parents non albinos montre qu'ils sont hétérozygotes P//a. Écris ensuite les gamètes, l'échiquier et les cases favorables. Chaque naissance est indépendante des précédentes.",
+              "questions": [
+                {
+                  "content": "Quels sont les génotypes de Mme Fatoumata et de M. Brahima ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : deux parents non albinos ont un enfant albinos, de phénotype différent. Étape 2 — Comparer : « albinos » est absent chez eux, pourtant Ibrahim l'a reçu d'eux. Étape 3 — Déduire : « non albinos » est dominant, le gène étant autosomique les parents sont hétérozygotes. Étape 4 — Conclure : ils sont P//a et Ibrahim est a//a. Des parents P//P ne pourraient pas donner a, et des parents a//a seraient albinos.",
+                  "answers": [
+                    {
+                      "content": "Les deux sont P//a",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux sont P//P",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont a//a",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'un est P//P et l'autre a//a",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la probabilité, en pourcentage, que le deuxième enfant de ce couple ne soit pas albinos ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont P//a. Étape 2 — Écrire les gamètes : P (1/2) et a (1/2) pour chacun. Étape 3 — Construire l'échiquier : P//P, P//a, P//a, a//a. Étape 4 — Lire : les trois cases P//P, P//a, P//a donnent un enfant non albinos, car P est dominant. Étape 5 — Calculer : 3 cases sur 4, soit 75 %. Répondre 25 % donne le risque d'albinisme et non la probabilité demandée.",
+                  "answers": [
+                    {
+                      "content": "75",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelle est la probabilité, en pourcentage, que le deuxième enfant soit non albinos et porte l'allèle a (génotype P//a) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : P//a pour les deux parents. Étape 2 — Écrire les gamètes : P (1/2) et a (1/2). Étape 3 — Construire l'échiquier : P//P, P//a, P//a, a//a. Étape 4 — Lire : deux cases sur quatre sont P//a. Étape 5 — Calculer : 2 cases sur 4, soit 50 %. Répondre 75 % compte aussi la case P//P, qui ne porte pas l'allèle a.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Un voisin dit : « Puisque leur premier enfant est albinos, leur deuxième enfant ne sera pas albinos pour compenser. » Cette affirmation est exacte.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont toujours P//a. Étape 2 — Écrire les gamètes : les proportions n'ont pas changé. Étape 3 — Construire : c'est le même échiquier. Étape 5 — Calculer : le risque d'albinisme reste de 1/4 pour le deuxième enfant, car chaque naissance est indépendante des précédentes. Il n'existe aucune compensation : l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype d'enfant possible à son phénotype.",
+                  "question_type": "matching",
+                  "explanation": "Étape 4 — Lire l'échiquier : on lit le génotype de chaque enfant possible, puis son phénotype. Étape 5 — Conclure : P//P a deux allèles du pigment, il n'est pas albinos ; P//a a un P dominant, il n'est pas albinos non plus mais il est hétérozygote ; a//a n'a aucun P, l'allèle récessif s'exprime en double exemplaire, il est albinos. Dire que P//a est albinos oublie que P est dominant.",
+                  "answers": [
+                    {
+                      "content": "P//P",
+                      "match": "Non albinos, homozygote dominant"
+                    },
+                    {
+                      "content": "P//a",
+                      "match": "Non albinos, hétérozygote"
+                    },
+                    {
+                      "content": "a//a",
+                      "match": "Albinos, homozygote récessif"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un registre d'exemple d'un centre de santé de San-Pédro note 120 enfants nés de couples où les deux parents sont hétérozygotes N//d pour la drépanocytose ; 33 de ces enfants sont drépanocytaires. Ces valeurs sont une situation d'exemple, pas des statistiques réelles. Le gène est autosomique ; d est l'allèle de la maladie, récessif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour un couple N//d × N//d, le risque est de 1 sur 4 à chaque naissance. Sur un nombre fini d'enfants, la fréquence observée s'écarte un peu de la probabilité à cause du hasard de la fécondation.",
+              "questions": [
+                {
+                  "content": "Quel est le pourcentage d'enfants drépanocytaires observé dans ce registre (33 enfants sur 120) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire les données : 33 enfants drépanocytaires sur 120 enfants. Étape 2 — Calculer : 33 ÷ 120 = 0,275. Étape 3 — Exprimer en pourcentage : 0,275 × 100 = 27,5 %. Répondre 33 % serait prendre l'effectif pour un pourcentage sans le rapporter au total.",
+                  "answers": [
+                    {
+                      "content": "27,5",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Pour 120 enfants de couples N//d × N//d, combien d'enfants drépanocytaires attend-on d'après le risque de 1/4 ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont N//d. Étape 2 — Écrire les gamètes : N et d, 1/2 chacun. Étape 3 — Construire l'échiquier : une case d//d sur quatre. Étape 4 — Lire : le risque est 1/4. Étape 5 — Calculer : 120 × 1/4 = 30 enfants attendus. Répondre 90 donne le nombre d'enfants non malades.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "enfants"
+                },
+                {
+                  "content": "L'écart entre les 33 enfants observés et les 30 enfants attendus prouve que le risque de 1/4 est faux.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Comparer : 33 observés pour 30 attendus, l'écart est faible. Étape 2 — Expliquer : la fécondation réunit les gamètes au hasard, donc sur un nombre fini d'enfants la fréquence observée s'écarte un peu de la probabilité. Étape 3 — Conclure : cet écart ne remet pas en cause le risque de 1/4, qui est une probabilité pour chaque naissance. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels génotypes ont les enfants non drépanocytaires de ces couples N//d × N//d ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont N//d. Étape 2 — Écrire les gamètes : N et d. Étape 3 — Construire l'échiquier : N//N, N//d, N//d, d//d. Étape 4 — Lire : les enfants non drépanocytaires sont les trois cases où N est présent, N//N et N//d. Un phénotype dominant ne donne pas un génotype certain. Seul d//d est drépanocytaire.",
+                  "answers": [
+                    {
+                      "content": "N//N ou N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Uniquement N//N",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement N//d",
+                      "correct": false
+                    },
+                    {
+                      "content": "d//d",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Chaque naissance est ___ des précédentes.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Lire : l'échiquier ne dépend pas des enfants déjà nés. Étape 5 — Calculer : le risque est identique à chaque enfant, parce que chaque naissance est indépendante des précédentes. Un couple qui a déjà eu des enfants malades ou sains garde le même risque pour le suivant ; « dépendante » ou « compensée » est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "indépendante",
+                      "correct": true
+                    },
+                    {
+                      "content": "dépendante",
+                      "correct": false
+                    },
+                    {
+                      "content": "compensée",
+                      "correct": false
+                    },
+                    {
+                      "content": "liée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "justifier une conclusion à partir d'un arbre généalogique : ce que l'on peut affirmer et ce que l'on ne peut pas affirmer, les contre-exemples sur la dominance, le choix entre gène autosomique et gène lié à X avec l'arbre de décision, l'indépendance des naissances et la lecture des cases d'un échiquier.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Lors d'un travail de groupe, des élèves de Terminale C annoncent des conclusions sur des familles décrites par le professeur. Tu juges chaque conclusion avec la méthode de la leçon. Les situations sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Une conclusion sur la dominance exige un couple de même phénotype dont un enfant diffère. La rareté ou la fréquence d'un caractère ne prouve rien, ni l'absence d'enfant différent.",
+              "questions": [
+                {
+                  "content": "Konan affirme : « La drépanocytose est rare dans notre région, donc son allèle est récessif. » Que répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : Konan ne donne aucun couple de même phénotype avec un enfant de phénotype différent. Étape 2 — Comparer : il n'a donc rien à comparer entre parents et enfants. Étape 3 — Déduire : la fréquence d'un caractère dans une région ne renseigne pas sur la dominance de son allèle. Étape 4 — Conclure : son raisonnement n'est pas valable. Il faudrait un enfant qui diffère de ses deux parents pour conclure.",
+                  "answers": [
+                    {
+                      "content": "La rareté d'un caractère ne prouve pas que son allèle est récessif : il faut un enfant qui diffère de ses deux parents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Konan a raison : un caractère rare est toujours récessif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Konan a tort : un caractère rare est toujours dominant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Konan a raison, mais seulement si le gène est autosomique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple sain a cinq enfants tous sains. On peut en conclure que l'allèle de la maladie est récessif.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : aucun enfant ne diffère de ses parents. Étape 2 — Comparer : tous les enfants ont le même phénotype que leurs parents. Étape 3 — Déduire : cette situation est compatible avec un caractère dominant comme avec un caractère récessif. Étape 4 — Conclure : on ne peut pas trancher. Il faut un enfant dont le phénotype est absent chez ses deux parents pour conclure ; cinq enfants identiques n'y suffisent pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces observations, lesquelles permettent de conclure à la dominance d'un allèle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on cherche un couple de même phénotype avec un enfant de phénotype différent. Étape 2 — Comparer : c'est le cas du couple sain avec un enfant malade et du couple malade avec un enfant sain. Étape 3 — Déduire : le phénotype des parents est dominant, celui de l'enfant est récessif. Étape 4 — Conclure : ces deux observations permettent de conclure. Des enfants identiques à leurs parents, la rareté ou la fréquence du caractère ne le permettent pas.",
+                  "answers": [
+                    {
+                      "content": "Deux parents sans la maladie ont un enfant malade",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux parents malades ont un enfant sans la maladie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les enfants d'une famille ressemblent à leurs parents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caractère est rare dans la population",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caractère est fréquent dans la population",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour conclure à la dominance, il faut un enfant dont le phénotype diffère de celui de ses ___ parents (écris le nombre en lettres).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on cherche un enfant qui diffère de ses parents. Étape 2 — Comparer : le phénotype de l'enfant doit être absent chez ses deux parents, qui ont eux-mêmes le même phénotype. Étape 3 — Déduire : alors seulement le caractère de l'enfant a pu rester caché chez eux. Étape 4 — Conclure : il faut un enfant qui diffère de ses deux parents. Un enfant qui diffère d'un seul parent ne donne pas cette information.",
+                  "answers": [
+                    {
+                      "content": "deux",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque observation à ce qu'on peut en conclure.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : dans chaque cas, on regarde si un enfant diffère de ses deux parents de même phénotype. Étape 2 — Comparer : parents sains et enfant malade, « malade » est absent chez les parents ; parents malades et enfant sain, « sain » est absent chez les parents. Étape 3 — Déduire : le phénotype des parents est dominant, celui de l'enfant récessif. Étape 4 — Conclure : récessif pour la maladie avec des parents sains et un enfant malade, dominant avec des parents malades et un enfant sain ; si tout le monde a le même phénotype, aucune conclusion.",
+                  "answers": [
+                    {
+                      "content": "Parents sains et enfant malade",
+                      "match": "L'allèle de la maladie est récessif"
+                    },
+                    {
+                      "content": "Parents malades et enfant sain",
+                      "match": "L'allèle de la maladie est dominant"
+                    },
+                    {
+                      "content": "Parents et enfants au même phénotype",
+                      "match": "On ne peut pas conclure"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un arbre de décision aide à localiser un gène à allèle récessif : on pose d'abord deux hypothèses, gène autosomique ou gène lié à X, puis on cherche une situation décisive dans la famille. Tu l'utilises pour trancher dans plusieurs familles d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": "decision-localisation",
+              "hint": "Pose les deux hypothèses. Une fille atteinte dont le père n'est pas atteint, ou une mère atteinte qui a un fils sain, conduit à un gène autosomique. Un fils atteint dont le père n'a pas l'allèle conduit à un gène lié à X. Sinon, on ne peut pas trancher.",
+              "questions": [
+                {
+                  "content": "Dans la famille de M. Diallo, sa fille Mariam est atteinte d'une maladie récessive alors que lui n'est pas atteint. Que peut-on conclure sur le gène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : deux hypothèses, gène autosomique ou gène lié à X. Étape 2 — Écrire : si le gène était lié à X, Mariam serait XdXd et aurait reçu un Xd de son père. Étape 3 — Confronter : M. Diallo n'est pas atteint, son X ne porte pas l'allèle de la maladie ; l'hypothèse liée à X est contredite. Étape 4 — Conclure : le gène est autosomique. Une fille atteinte de père sain est une situation décisive.",
+                  "answers": [
+                    {
+                      "content": "Il est autosomique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est lié à X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est porté par Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas trancher",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une autre famille, un fils est atteint et l'analyse montre que son père n'a pas l'allèle de la maladie : le gène est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Poser : deux hypothèses. Étape 2 — Écrire : si le gène était autosomique, le fils aurait reçu un allèle de la maladie de chacun de ses parents. Étape 3 — Confronter : son père n'a pas l'allèle, il n'a pas pu le donner ; l'hypothèse autosomique est contredite. Étape 4 — Conclure : le gène est lié à X, le fils a reçu son X porteur de l'allèle de sa mère.",
+                  "answers": [
+                    {
+                      "content": "lié à X",
+                      "correct": true
+                    },
+                    {
+                      "content": "autosomique",
+                      "correct": false
+                    },
+                    {
+                      "content": "porté par Y",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une famille, un garçon est atteint, ses parents ne le sont pas et aucune analyse n'est disponible : on peut affirmer que le gène est lié à X.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : deux hypothèses. Étape 2 — Écrire : si le gène est autosomique, des parents sains hétérozygotes peuvent avoir un garçon atteint ; si le gène est lié à X, une mère porteuse peut avoir un garçon atteint. Étape 3 — Confronter : aucune donnée décisive n'exclut l'une des deux hypothèses. Étape 4 — Conclure : on ne peut pas trancher ; affirmer « lié à X » parce qu'un garçon est atteint est l'erreur du piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces observations, lesquelles permettent de dire que le gène est autosomique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Poser : deux hypothèses. Étape 2 — Écrire : un gène lié à X impose qu'une fille atteinte ait un père atteint, et qu'une mère atteinte ait tous ses fils atteints. Étape 3 — Confronter : une fille atteinte de père sain, ou une mère atteinte avec un fils sain, contredisent l'hypothèse liée à X. Étape 4 — Conclure : ces deux observations montrent un gène autosomique. Un fils atteint de père sans l'allèle indique au contraire un gène lié à X ; un garçon atteint de parents sains et la rareté ne tranchent pas.",
+                  "answers": [
+                    {
+                      "content": "Une fille est atteinte et son père n'est pas atteint",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une mère est atteinte et son fils n'est pas atteint",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un garçon est atteint et ses parents sont sains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fils est atteint et son père n'a pas l'allèle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le caractère est rare dans la région",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la première étape pour localiser un gène à allèle récessif dans une famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : on commence par poser les deux hypothèses, le gène est autosomique ou il est porté par le chromosome X. Étape 2 — Écrire les génotypes que chaque hypothèse impose. Étape 3 — Confronter ces génotypes aux phénotypes du document. Étape 4 — Conclure par l'hypothèse qu'aucun individu ne contredit. Conclure d'emblée ou calculer un risque saute la comparaison des deux hypothèses.",
+                  "answers": [
+                    {
+                      "content": "Poser deux hypothèses : gène autosomique ou gène lié à X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Conclure directement que le gène est lié à X",
+                      "correct": false
+                    },
+                    {
+                      "content": "Calculer le risque du couple avec un échiquier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Compter le nombre d'enfants de la famille",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Kouadio et Mariam calculent le risque d'un couple dont les deux membres sont hétérozygotes N//d pour la drépanocytose (d est l'allèle de la maladie, récessif). Leur échiquier de croisement comporte quatre cases : N//N, N//d, N//d et d//d. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans l'échiquier, toutes les cases ont la même chance. Le risque se lit en comptant les cases favorables sur les 4 cases. Pour deux enfants, on multiplie les risques, car les naissances sont indépendantes.",
+              "questions": [
+                {
+                  "content": "Dans l'échiquier du croisement N//d × N//d, combien de cases donnent un enfant N//d, non malade mais porteur de l'allèle d ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont N//d. Étape 2 — Écrire les gamètes : N et d, 1/2 chacun. Étape 3 — Construire l'échiquier : N//N, N//d, N//d, d//d. Étape 4 — Lire : la ligne N donne N//N et N//d, la ligne d donne N//d et d//d, donc deux cases N//d. Répondre 1 oublie que l'allèle d peut venir du père ou de la mère, ce qui donne deux cases.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cases"
+                },
+                {
+                  "content": "Dans ce couple, le risque d'avoir un enfant N//N est le même que celui d'avoir un enfant d//d.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire les génotypes : N//d pour les deux. Étape 2 — Écrire les gamètes : N et d, 1/2 chacun. Étape 3 — Construire l'échiquier : une case N//N et une case d//d sur quatre. Étape 4 — Lire : les deux génotypes occupent chacun une case sur quatre. Étape 5 — Calculer : 1/4 pour N//N et 1/4 pour d//d. L'affirmation est vraie : toutes les cases ont la même chance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le couple N//d × N//d veut deux enfants. Quelle est la probabilité, en pourcentage, que les deux soient drépanocytaires ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : N//d pour les deux. Étape 3 — Construire l'échiquier : une case d//d sur quatre, donc un risque de 1/4 pour chaque enfant. Étape 5 — Calculer : les naissances étant indépendantes, la probabilité que les deux enfants soient drépanocytaires est 1/4 × 1/4 = 1/16, soit 6,25 %. Répondre 25 % donne le risque pour un seul enfant ; additionner 25 % et 25 % est une erreur, car il faut multiplier.",
+                  "answers": [
+                    {
+                      "content": "6,25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Mariam dit : « Ce couple a eu trois enfants non malades, donc le quatrième sera forcément malade pour équilibrer. » Quelle réponse est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : les parents sont toujours N//d. Étape 2 — Écrire les gamètes : leurs proportions n'ont pas changé. Étape 3 — Construire : c'est le même échiquier. Étape 5 — Calculer : le risque reste 1/4 pour le quatrième enfant, car chaque naissance est indépendante des précédentes. Les gamètes ne gardent aucune mémoire : l'échiquier ne compense rien, et trois enfants sains ne rendent pas le suivant plus malade ni moins malade.",
+                  "answers": [
+                    {
+                      "content": "Non : le risque reste 1/4 à chaque naissance, car les naissances sont indépendantes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : l'échiquier compense les naissances précédentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le risque devient 0 car trois enfants sont déjà sains",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le risque passe à 1/2 pour le quatrième",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions exactes tirées de l'échiquier du croisement N//d × N//d ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Construire : l'échiquier compte quatre cases, N//N, N//d, N//d et d//d, toutes de même chance. Étape 4 — Lire : seul d//d est drépanocytaire, car d est récessif ; les trois autres cases donnent un enfant non malade, dont deux hétérozygotes N//d. Étape 5 — Calculer : 3 cases sur 4 non malades, 2 cases sur 4 hétérozygotes, 1 case sur 4 malade. Dire qu'une case sur deux est malade se trompe de dénombrement (une seule case d//d sur quatre) ; dire que N//d est malade oublie la dominance de N.",
+                  "answers": [
+                    {
+                      "content": "Trois cases sur quatre donnent un enfant non drépanocytaire",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux cases sur quatre donnent un enfant hétérozygote N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une case sur deux donne un enfant drépanocytaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les quatre cases n'ont pas la même chance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les enfants N//d sont drépanocytaires",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans une famille de San-Pédro, un garçon, Gnahoré, est hémophile (son sang coagule mal) ; ses parents, M. Paul et Mme Rose, ne le sont pas. Une analyse montre que M. Paul n'a pas l'allèle h de l'hémophilie, récessif. On teste deux hypothèses : gène autosomique ou gène lié à X. On écrit XNY, XhY, XNXN, XNXh et XhXh pour les génotypes d'un gène lié à X (N est l'allèle normal). Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Écris les génotypes que chaque hypothèse impose à Gnahoré et à ses parents, puis confronte-les à l'analyse de M. Paul. Une hypothèse contredite par un individu est éliminée.",
+              "questions": [
+                {
+                  "content": "Si le gène était autosomique, Gnahoré (génotype h//h) aurait reçu un allèle h de chacun de ses deux parents.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : première hypothèse, le gène est autosomique. Étape 2 — Écrire : Gnahoré est hémophile, donc il a le phénotype récessif, génotype h//h. Étape 3 — Confronter : un enfant reçoit un allèle de chacun de ses deux parents, donc un h de son père et un h de sa mère. Étape 4 — Conclure : l'affirmation est vraie, c'est ce que l'hypothèse autosomique exige.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'hypothèse autosomique est-elle contredite pour cette famille ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : deux hypothèses. Étape 2 — Écrire : si le gène était autosomique, Gnahoré h//h aurait reçu un h de chaque parent. Étape 3 — Confronter : l'analyse montre que M. Paul n'a pas l'allèle h : il n'a pas pu en donner un. Étape 4 — Conclure : l'hypothèse autosomique est éliminée. Le sexe de l'enfant ou la santé de la mère ne contredisent rien, et un allèle récessif existe aussi dans un gène autosomique.",
+                  "answers": [
+                    {
+                      "content": "Parce que M. Paul n'a pas l'allèle h et n'a donc pas pu en donner un à son fils",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que Gnahoré est un garçon",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que Mme Rose n'est pas hémophile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que l'allèle h est récessif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'hypothèse liée à X, Gnahoré (XhY) a reçu son chromosome X de sa ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Poser : le gène est porté par X. Étape 2 — Écrire : Gnahoré est XhY, son X porte l'allèle h. Étape 3 — Confronter : un garçon reçoit son X de sa mère et son Y de son père. Étape 4 — Conclure : l'allèle h vient de sa mère, Mme Rose. Le père lui a donné son Y, qui ne porte pas le gène.",
+                  "answers": [
+                    {
+                      "content": "mère",
+                      "correct": true
+                    },
+                    {
+                      "content": "maman",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le raisonnement qui permet de localiser le gène de l'hémophilie chez Gnahoré.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Poser les deux hypothèses. Étape 2 — Écrire les génotypes que chacune impose. Étape 3 — Confronter ces génotypes à l'analyse de M. Paul, qui contredit l'hypothèse autosomique. Étape 4 — Conclure par l'hypothèse qu'aucun individu ne contredit. On ne peut pas conclure avant d'avoir confronté les hypothèses au document, car la conclusion en dépend.",
+                  "answers": [
+                    {
+                      "content": "Poser deux hypothèses : gène autosomique ou gène lié à X"
+                    },
+                    {
+                      "content": "Écrire les génotypes que chaque hypothèse impose à Gnahoré et à ses parents"
+                    },
+                    {
+                      "content": "Confronter ces génotypes à l'analyse : M. Paul n'a pas l'allèle h"
+                    },
+                    {
+                      "content": "Conclure : le gène est lié à X et Mme Rose est porteuse"
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'hypothèse liée à X, quel est le génotype de Mme Rose, qui n'est pas hémophile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : Gnahoré est XhY et a reçu son Xh de sa mère. Étape 3 — Confronter : Mme Rose a donc un allèle h, mais elle n'est pas hémophile, donc son autre X porte l'allèle normal. Étape 4 — Conclure : elle est XNXh, porteuse. XNXN n'aurait aucun h à donner ; XhXh serait hémophile ; XNY est un génotype d'homme.",
+                  "answers": [
+                    {
+                      "content": "XNXh",
+                      "correct": true
+                    },
+                    {
+                      "content": "XNXN",
+                      "correct": false
+                    },
+                    {
+                      "content": "XhXh",
+                      "correct": false
+                    },
+                    {
+                      "content": "XNY",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "bilan des trois notions : déduire la dominance et écrire les génotypes à partir d'un arbre généalogique, distinguer un gène autosomique d'un gène lié à X, suivre l'origine des chromosomes, construire un échiquier de croisement et calculer un risque, à partir de situations d'exemple de drépanocytose, d'hémophilie, d'albinisme et de daltonisme.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "À Abidjan, la consultation de génétique suit une famille. Génération I : M. Kouamé et Mme Adjoua ne sont pas drépanocytaires. Génération II : leur fils Éric est drépanocytaire ; leur fille Nadège ne l'est pas ; une analyse montre que Nadège est N//d. Nadège épouse Hervé, non drépanocytaire, dont le père est drépanocytaire. Le gène est autosomique ; N est l'allèle normal, d l'allèle de la maladie. Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Déduis d'abord la dominance, puis les génotypes certains. Hervé a reçu un allèle d de son père d//d. Pour le risque du couple Nadège × Hervé, écris les gamètes puis l'échiquier.",
+              "questions": [
+                {
+                  "content": "M. Kouamé et Mme Adjoua ne sont pas drépanocytaires, leur fils Éric l'est. Que peut-on déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le couple de même phénotype (non drépanocytaire) a un fils de phénotype différent. Étape 2 — Comparer : « drépanocytaire » est absent chez les parents, pourtant Éric l'a reçu d'eux. Étape 3 — Déduire : le phénotype des parents est dominant, celui d'Éric récessif, et le gène étant autosomique les parents sont hétérozygotes. Étape 4 — Conclure : ils sont N//d, Éric est d//d. Un seul enfant qui diffère suffit pour conclure.",
+                  "answers": [
+                    {
+                      "content": "L'allèle de la maladie est récessif et les deux parents sont hétérozygotes",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'allèle de la maladie est dominant et les deux parents sont hétérozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'allèle de la maladie est récessif et les deux parents sont homozygotes",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure avec un seul enfant malade",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Hervé n'est pas drépanocytaire mais son père l'est : Hervé a reçu de son père l'allèle ___ (écris la lettre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : le père d'Hervé est drépanocytaire, c'est le phénotype récessif. Étape 2 — Déduire : un phénotype récessif donne un génotype certain, d//d, donc tous ses gamètes portent d. Étape 3 — Conclure : Hervé a reçu l'allèle d de son père. Comme il n'est pas malade, il a reçu l'allèle N de sa mère : il est N//d. Un allèle N venant du père d//d est impossible.",
+                  "answers": [
+                    {
+                      "content": "d",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Nadège (N//d) et Hervé (N//d) attendent un enfant. Quel est le risque, en pourcentage, qu'il soit drépanocytaire ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : Nadège et Hervé sont N//d. Étape 2 — Écrire les gamètes : N (1/2) et d (1/2) pour chacun. Étape 3 — Construire l'échiquier : N//N, N//d, N//d, d//d. Étape 4 — Lire : une seule case d//d. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Répondre 50 % compterait les deux cases N//d, qui sont des enfants non malades.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes pour les enfants de Nadège et Hervé ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Construire l'échiquier de N//d × N//d : N//N, N//d, N//d, d//d. Étape 4 — Lire : deux cases sur quatre sont N//d, soit un enfant possible sur deux, et une seule est d//d. Étape 5 — Calculer : le risque de 1/4 vaut pour chaque naissance, car les naissances sont indépendantes ; il ne baisse pas après un enfant malade. Dire un enfant sur deux malade confond N//d et d//d ; dire que tous sont N//d oublie les cases N//N et d//d.",
+                  "answers": [
+                    {
+                      "content": "Le risque est le même pour chaque enfant du couple",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant possible sur deux est hétérozygote N//d",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant sur deux est drépanocytaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le risque diminue si le premier enfant est malade",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les enfants sont N//d",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant N//d de Nadège et Hervé n'est pas drépanocytaire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire le génotype : N//d, un allèle normal et un allèle de la maladie. Étape 2 — Rappeler : l'allèle d est récessif, il ne s'exprime qu'en double exemplaire. Étape 3 — Conclure : à côté de N, l'allèle d reste caché ; l'enfant n'est pas drépanocytaire, il est hétérozygote et peut transmettre d. L'affirmation est vraie ; seul d//d est drépanocytaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "À Daloa, un garçon, Ali, est hémophile (son sang coagule mal). Ses parents, M. Salif et Mme Bintou, ne le sont pas, et l'analyse montre que M. Salif n'a pas l'allèle h de l'hémophilie, récessif. Le couple a aussi une fille, Kady. On écrit XNY, XhY, XNXN, XNXh et XhXh pour les génotypes d'un gène lié à X (N est l'allèle normal). Situation d'exemple.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Localise d'abord le gène avec l'analyse du père, puis écris les génotypes. Pour le risque, écris les gamètes : la mère donne XN ou Xh, le père donne XN ou Y.",
+              "questions": [
+                {
+                  "content": "Ali est hémophile, ses parents ne le sont pas et M. Salif n'a pas l'allèle h. Que peut-on conclure sur la localisation du gène ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : deux hypothèses, gène autosomique ou lié à X. Étape 2 — Écrire : si le gène était autosomique, Ali h//h aurait reçu un h de son père. Étape 3 — Confronter : M. Salif n'a pas l'allèle h, l'hypothèse autosomique est contredite. Étape 4 — Conclure : le gène est lié à X ; Ali a reçu son Xh de sa mère. Dire « on ne peut pas trancher » oublie l'analyse du père.",
+                  "answers": [
+                    {
+                      "content": "Le gène est lié à X",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gène est autosomique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gène est porté par Y",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas trancher",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le génotype de Mme Bintou, qui n'est pas hémophile ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : Ali est XhY et a reçu son Xh de sa mère. Étape 3 — Confronter : Mme Bintou a un allèle h mais n'est pas atteinte, donc son autre X porte l'allèle normal. Étape 4 — Conclure : elle est XNXh, porteuse. XNXN n'a aucun h à donner ; XhXh serait hémophile.",
+                  "answers": [
+                    {
+                      "content": "XNXh",
+                      "correct": true
+                    },
+                    {
+                      "content": "XNXN",
+                      "correct": false
+                    },
+                    {
+                      "content": "XhXh",
+                      "correct": false
+                    },
+                    {
+                      "content": "XNY",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Mme Bintou (XNXh) et M. Salif (XNY) attendent un enfant. Quelle est la probabilité, en pourcentage, que ce soit un garçon hémophile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : mère XNXh, père XNY. Étape 2 — Écrire les gamètes : la mère donne XN ou Xh, le père donne XN ou Y, 1/2 chacun. Étape 3 — Construire l'échiquier : XNXN, XNY, XNXh, XhY. Étape 4 — Lire : un seul garçon hémophile, XhY. Étape 5 — Calculer : 1 case sur 4, soit 25 %. Répondre 50 % suppose que l'on sait déjà que l'enfant est un garçon.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "On sait que le prochain enfant de Mme Bintou (XNXh) et M. Salif (XNY) est un garçon. Quelle est la probabilité, en pourcentage, qu'il soit hémophile ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : mère XNXh, père XNY. Étape 2 — Écrire les gamètes : le père donne Y à un garçon, la mère donne XN ou Xh. Étape 3 — Construire l'échiquier : on ne garde que les cases garçons, XNY et XhY. Étape 4 — Lire : une case hémophile sur les deux cases garçons. Étape 5 — Calculer : 1/2, soit 50 %. Répondre 25 % oublie qu'on sait déjà que l'enfant est un garçon.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Kady, la fille de M. Salif et de Mme Bintou, peut être hémophile.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X, l'allèle h est récessif. Étape 2 — Écrire : une fille hémophile serait XhXh. Étape 3 — Confronter : elle aurait reçu un Xh de son père ; or M. Salif est XNY, il donne XN à toutes ses filles. Étape 4 — Conclure : Kady ne peut pas être hémophile ; elle est XNXN ou XNXh. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque personne à son génotype (gène de l'hémophilie lié à X).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : un garçon n'a qu'un X, une fille en a deux. Étape 3 — Confronter : Ali hémophile porte h sur son unique X ; Mme Bintou est porteuse, non atteinte ; M. Salif non hémophile a un X normal ; une fille qui ne porte pas h a deux X normaux. Étape 4 — Conclure : XhY, XNXh, XNY et XNXN. Attribuer XhXh à Mme Bintou ferait d'elle une femme hémophile.",
+                  "answers": [
+                    {
+                      "content": "Ali, garçon hémophile",
+                      "match": "XhY"
+                    },
+                    {
+                      "content": "Mme Bintou, mère porteuse",
+                      "match": "XNXh"
+                    },
+                    {
+                      "content": "M. Salif, père non hémophile",
+                      "match": "XNY"
+                    },
+                    {
+                      "content": "Une fille du couple qui ne porte pas h",
+                      "match": "XNXN"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un registre d'exemple d'un centre de santé de Man, on étudie l'albinisme (P : allèle du pigment, dominant ; a : allèle de l'albinisme, récessif ; gène autosomique). Le registre compte 160 enfants nés de couples dont les deux parents sont non albinos et hétérozygotes P//a : 40 de ces enfants sont albinos. Ces valeurs sont une situation d'exemple, pas des statistiques réelles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour deux parents P//a, l'échiquier compte quatre cases dont une seule a//a. Le pourcentage observé se calcule sur le total des enfants ; le nombre attendu se calcule avec la probabilité.",
+              "questions": [
+                {
+                  "content": "Quel est le pourcentage d'enfants albinos observé dans ce registre (40 enfants sur 160) ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire les données : 40 enfants albinos sur 160 enfants. Étape 2 — Calculer : 40 ÷ 160 = 0,25. Étape 3 — Exprimer en pourcentage : 0,25 × 100 = 25 %. Répondre 40 % prendrait l'effectif pour un pourcentage.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Quel est le risque, d'après l'échiquier de croisement, qu'un enfant de deux parents P//a soit albinos ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Écrire les génotypes : les deux parents sont P//a. Étape 2 — Écrire les gamètes : P (1/2) et a (1/2). Étape 3 — Construire l'échiquier : P//P, P//a, P//a, a//a. Étape 4 — Lire : une seule case a//a. Étape 5 — Calculer : 1 case sur 4, soit 1/4. 1/2 compterait les deux cases P//a, 3/4 donne le risque d'être non albinos.",
+                  "answers": [
+                    {
+                      "content": "1/4",
+                      "correct": true
+                    },
+                    {
+                      "content": "1/2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3/4",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur 160 enfants de couples P//a × P//a, combien d'enfants non albinos attend-on d'après le risque calculé ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : P//a pour les deux parents. Étape 2 — Construire l'échiquier : trois cases non albinos (P//P, P//a, P//a) sur quatre. Étape 3 — Calculer : la probabilité d'un enfant non albinos est 3/4. Étape 4 — Appliquer : 160 × 3/4 = 120 enfants. Répondre 40 donne le nombre d'albinos observé, pas le nombre de non albinos attendu.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "enfants"
+                },
+                {
+                  "content": "Pour tout registre de 160 enfants de couples P//a × P//a, on trouvera exactement 40 enfants albinos.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Écrire : le risque calculé avec l'échiquier est 1/4 pour chaque enfant, soit 40 enfants sur 160 en moyenne. Étape 2 — Expliquer : la fécondation réunit les gamètes au hasard, donc sur un nombre fini d'enfants la fréquence observée s'écarte un peu de la probabilité. Étape 3 — Conclure : on trouvera un nombre proche de 40, pas forcément exactement 40. L'affirmation est fausse : le risque est une probabilité, pas une certitude sur un effectif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes pour un couple P//a × P//a ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 3 — Construire l'échiquier : P//P, P//a, P//a, a//a. Étape 4 — Lire : P est dominant, donc P//P et P//a sont non albinos, ils ont le même phénotype ; seul a//a est albinos. Étape 5 — Calculer : le risque de 1/4 est identique à chaque naissance, car les naissances sont indépendantes. Les parents sont non albinos puisqu'ils sont P//a, et un enfant P//a n'est pas albinos.",
+                  "answers": [
+                    {
+                      "content": "Les enfants P//P et P//a ont le même phénotype",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le risque d'albinisme est le même à chaque naissance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un enfant P//a est albinos",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le risque d'albinisme baisse après un enfant albinos",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux parents sont albinos",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Au collège de Daloa, le professeur de SVT propose des situations sur le daltonisme, dû à un allèle récessif d porté par X ; N est l'allèle normal. On écrit XNY, XdY, XNXN, XNXd et XdXd pour les génotypes. Les situations sont des exemples.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le garçon reçoit son X de sa mère et son Y de son père ; la fille reçoit un X de chacun de ses parents. Pour un risque, écris les gamètes de la mère et du père, puis l'échiquier.",
+              "questions": [
+                {
+                  "content": "Un garçon daltonien a toujours un père daltonien.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X, l'allèle d est récessif. Étape 2 — Écrire : le garçon daltonien est XdY. Étape 3 — Confronter : un garçon reçoit son X de sa mère et son Y de son père ; l'allèle d vient donc de sa mère, pas de son père. Étape 4 — Conclure : son père peut être non daltonien (XNY), la mère étant porteuse XNXd. L'affirmation est fausse ; c'est une fille daltonienne qui a toujours un père daltonien.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une femme daltonienne (XdXd) épouse un homme non daltonien (XNY). Quels enfants peuvent-ils avoir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X. Étape 2 — Écrire : la mère XdXd ne donne que Xd ; le père donne XN à ses filles et Y à ses fils. Étape 3 — Confronter : les filles sont XNXd, non daltoniennes mais porteuses ; les fils sont XdY, donc daltoniens. Étape 4 — Conclure : toutes les filles sont porteuses et tous les garçons daltoniens. Dire « aucun enfant daltonien » oublie que les fils reçoivent leur seul X de leur mère.",
+                  "answers": [
+                    {
+                      "content": "Toutes les filles non daltoniennes (porteuses) et tous les garçons daltoniens",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les enfants daltoniens",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moitié des garçons daltoniens et toutes les filles non daltoniennes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun enfant daltonien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une femme daltonienne (XdXd) et un homme non daltonien (XNY) attendent un enfant. Quelle est la probabilité, en pourcentage, que ce soit un garçon daltonien ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Écrire les génotypes : mère XdXd, père XNY. Étape 2 — Écrire les gamètes : la mère donne toujours Xd, le père donne XN ou Y, 1/2 chacun. Étape 3 — Construire l'échiquier : XNXd et XdY. Étape 4 — Lire : une case garçon daltonien, XdY, sur deux. Étape 5 — Calculer : 1/2, soit 50 %. Répondre 100 % suppose que l'on sait déjà que l'enfant est un garçon.",
+                  "answers": [
+                    {
+                      "content": "50",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "%"
+                },
+                {
+                  "content": "Un garçon reçoit son chromosome Y de son ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Poser : on suit l'origine des chromosomes sexuels. Étape 2 — Écrire : le garçon est XY. Étape 3 — Confronter : il reçoit son X de sa mère et son Y de son père, car seul le père possède un Y. Étape 4 — Conclure : le mot attendu est père. Mère est l'origine de son X, pas de son Y.",
+                  "answers": [
+                    {
+                      "content": "père",
+                      "correct": true
+                    },
+                    {
+                      "content": "papa",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque génotype à la personne qu'il décrit (daltonisme lié à X).",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Poser : le gène est lié à X, l'allèle d est récessif. Étape 2 — Écrire : le garçon n'a qu'un X, la fille en a deux. Étape 3 — Confronter : un garçon qui porte d est daltonien, une fille ne l'est que si elle porte d deux fois, et une fille avec un seul d est porteuse. Étape 4 — Conclure : XdY garçon daltonien, XdXd fille daltonienne, XNXd fille porteuse non daltonienne, XNY garçon non daltonien.",
+                  "answers": [
+                    {
+                      "content": "XdY",
+                      "match": "Garçon daltonien"
+                    },
+                    {
+                      "content": "XdXd",
+                      "match": "Fille daltonienne"
+                    },
+                    {
+                      "content": "XNXd",
+                      "match": "Fille non daltonienne, porteuse"
+                    },
+                    {
+                      "content": "XNY",
+                      "match": "Garçon non daltonien"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -164,6 +164,10 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0153](./0153-refaire-ou-continuer.md) | Refaire ou continuer depuis la correction | Accepté | 2026-11-04 | — | Sur la correction d'une copie vérifiée depuis une feuille, « Refaire » ouvre l'ancien lecteur et « Retour à la leçon » ramène à l'exercice déjà fait. |
 | [0154](./0154-feuille-pleine-largeur-sur-telephone.md) | Feuille pleine largeur sur téléphone | Accepté | 2026-11-04 | — | Sur téléphone, la feuille (épreuve à lire ou feuille à remplir) perd 36 à 51 px de chaque côté en marges empilées : le texte et les champs sont serrés. |
 | [0155](./0155-fiche-de-cours-pleine-largeur-sur-telephone.md) | Fiche de cours pleine largeur sur téléphone | Accepté | 2026-11-04 | — | Sur téléphone, la fiche de révision dans la page d'une fiche de cours perd 66 à 88 px de chaque côté en marges empilées : les lignes sont courtes et la fiche est longue. |
+| [0156](./0156-suivi-de-la-classe-sur-une-lecon.md) | Suivi de la classe sur une leçon | Accepté | 2026-11-05 | XXXX (lecture-de-la-classe-par-la-direction) | Où l'enseignant lit les lacunes et la réussite de sa classe, et où l'élève trouve l'exercice qui lève sa lacune, depuis que les pages de notion n'existent plus ? |
+| [0157](./0157-sujets-cahier-noir-blanc.md) | Sujet, copie et résultat en noir et blanc | Accepté | 2026-11-05 | — | Le sujet, la copie et le résultat d'un exercice gardaient le bleu, le vert et le rouge alors que les feuilles de la leçon sont en noir et blanc. |
+| [0158](./0158-abonnement-eleve.md) | Abonnement de l'élève | Proposé | 2026-11-07 | XXXX-contexte-billing-cartes-activation | Dire à l'élève combien de jours gratuits il lui reste, où acheter sa carte quand il est bloqué, et lui faire saisir son code sans friction sur téléphone. |
+| [0159](./0159-caisse-equipe.md) | Points relais, cartes et caisse | Proposé | 2026-11-07 | XXXX-contexte-billing-cartes-activation | Permettre à l'équipe de créer et imprimer les cartes, de suivre ce que chaque point relais doit et de savoir quoi payer le vendredi, depuis un téléphone sur le terrain. |
 <!-- index:end -->
 
 ---

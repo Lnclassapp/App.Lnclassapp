@@ -21,22 +21,15 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     assert_select "#help_questions details > summary", text: "J'ai oublié mon code secret, que faire ?"
   end
 
-  test "the answers quote the thresholds of the domain, not copies of them" do
+  test "the answers speak in medals, never in grades or percentages" do
     get help_path
 
-    # UDR-0131 : les paliers et la maîtrise se lisent sur 20, comme les notes de l'élève.
-    assert_select "#help_question_badges", text: /Bronze dès #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
-    assert_select "#help_question_badges", text: /Argent dès #{GRADING.grade_on_20(GRADING::MASTERY_THRESHOLD)}\/20/
-    assert_select "#help_question_badges", text: /Or dès #{GRADING.grade_on_20(GRADING::GOLD_THRESHOLD)}\/20/
-    assert_select "#help_question_mastery", text: /Acquis dès #{GRADING.grade_on_20(GRADING::MASTERY_THRESHOLD)}\/20/
-    assert_select "#help_question_mastery", text: /Fragile dès #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
-    assert_select "#help_question_badges, #help_question_mastery", text: /%/, count: 0
-    # UDR-0119 : la règle de la fiche à revoir se lit sur 20, calculée depuis les seuils.
-    assert_select "#help_question_gaps", text: /moins de #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
-    assert_select "#help_question_gaps", text: /au moins #{GRADING.grade_on_20(GRADING::REMEDIATION_THRESHOLD)}\/20/
-    assert_select "#help_question_gaps", text: /10\/20.*15\/20/m
-    assert_select "#help_question_gaps", text: /%/, count: 0
-    assert_select "#help_question_grade", text: /16\/20/
+    # UDR médailles : la FAQ dit les médailles en mots, sans note sur 20 ni pourcentage.
+    assert_select "#help_question_badges", text: /au moins le Bronze.*Argent.*Or.*Diamant/
+    assert_select "#help_question_mastery", text: /Acquis dès l'Argent/
+    assert_select "#help_questions", text: %r{\d+\s*/\s*20|%}, count: 0
+    assert_select "#help_question_gaps", text: /moins de la moitié.*vise l'Or/
+    assert_select "#help_question_grade", text: /médaille.*bonnes réponses/
   end
 
   # UDR-0061 §4, UDR-0062 §4: the due dates lot adds « Que veut dire « En retard » ? » (PRD « FAQ »).

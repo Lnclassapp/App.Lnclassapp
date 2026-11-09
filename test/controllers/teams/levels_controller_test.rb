@@ -76,7 +76,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#levels-generation-help", text: including(tl("index.generation_help"))
     assert_select "#levels-generation-help a[href='#{classroom_plan_path}']", text: tl("index.classroom_plan_link")
-    # UDR-0054 §3.4 (FU-22): the badge is followed by an info tip « Aide : Hors barème », and nothing carries a title.
+    # UDR-0054 §3.4 (FU-22): the badge is followed by an info tip « Aide : Hors plan », and nothing carries a title.
     assert_select "#level_sixieme-bis [data-generation=outside]", text: including(tl("level_row.outside_generation")) do
       assert_select "details summary .sr-only", text: "Aide : #{tl("level_row.outside_generation")}"
       assert_select "details div", text: tl("level_row.outside_generation_tip")
@@ -127,7 +127,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=replace][target=levels] tr:first-child#level_6eme"
     assert_equal [ "taxonomy.changed", @member.id, "Level", level.id ],
                  Orm::AuditEvent.where(action: "taxonomy.changed").pluck(:action, :actor_id, :subject_type, :subject_id).sole
-    # D1 (owner, 2026-09-28): 6ème gets its barème defaults, and the row no longer says « Hors barème ».
+    # D1 (owner, 2026-09-28): 6ème gets its barème defaults, and the row no longer says « Hors plan ».
     assert_equal({ "private" => 2, "public" => 4 }, Orm::ClassroomPlanEntry.where(level:).pluck(:school_type, :count).to_h)
     assert_select "turbo-stream[action=replace][target=levels] #level_6eme [data-generation]", 0
   end

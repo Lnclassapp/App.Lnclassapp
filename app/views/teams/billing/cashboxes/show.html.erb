@@ -1,0 +1,32 @@
+<%# 🌐 UI · teams/billing/cashboxes/show — la caisse de l'équipe %>
+<%# Rôle : à payer ce vendredi, dû par point relais, commissions cumulées des écoles, recherche d'une carte à annuler %>
+<%# ADR  : 0126 (contexte billing, §4.7) · UDR : 0159 §3.1 %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "billing" %>
+<%= ui_page_header title: t(".title") do %>
+  <div class="flex flex-wrap items-center gap-3 sm:shrink-0">
+    <%= ui_button t(".remit"), href: new_teams_billing_remittance_path, icon: "banknotes", data: { turbo_frame: "modal" } %>
+    <%= ui_button t(".relay_points"), href: teams_billing_relay_points_path, variant: :secondary %>
+  </div>
+<% end %>
+
+<% if @cashbox.relays.empty? %>
+  <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "banknotes",
+                     action: { label: t(".empty_action"), href: new_teams_billing_relay_point_path, icon: "plus" } %>
+<% else %>
+  <div class="space-y-6">
+    <%= render "week", cashbox: @cashbox %>
+    <%= render "relays", cashbox: @cashbox %>
+    <%= render "schools", cashbox: @cashbox %>
+    <%= ui_card title: t(".cancel_title"), subtitle: t(".cancel_subtitle") do %>
+      <%= form_with url: teams_billing_card_cancellation_path, method: :get, class: "flex flex-wrap items-end gap-3" do %>
+        <div class="min-w-48 flex-1">
+          <label for="cancel_serial" class="mb-1 block text-sm font-medium text-ink"><%= t(".serial_label") %></label>
+          <%= text_field_tag :serial, nil, id: "cancel_serial", inputmode: "numeric", autocomplete: "off", placeholder: t(".serial_placeholder"),
+                                           class: "block min-h-tap w-full rounded-ln border border-line-strong bg-white px-4 text-base text-ink focus:outline-none focus:ring-4" %>
+        </div>
+        <%= ui_button t(".find_card"), type: :submit, variant: :secondary, icon: "magnifying-glass" %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

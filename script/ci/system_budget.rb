@@ -98,7 +98,7 @@ class SystemBudget
 
   def within_budget? = growth <= budget
 
-  def record_command(files) = "bin/rails test #{files.join(' ')} -v 2>&1 | script/ci/record_timings"
+  def record_command(files) = "env COVERAGE=0 bin/rails test #{files.join(' ')} -v 2>&1 | script/ci/record_timings"
 
   # Reads the repository: the base is origin/Develop, fetched when the checkout does not have it (GitHub checks
   # out one commit). The change compared is the work tree, so an uncommitted test counts before its commit.

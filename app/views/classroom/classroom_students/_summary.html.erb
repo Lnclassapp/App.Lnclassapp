@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/classroom_students/_summary — chiffres et badges de l'élève sur les exercices de la classe %>
-<%# Rôle : « 9 faits sur 18 » + pastille « 1 en retard » (pas fait et échu) ; « Moyenne 14/20 · Or » (le badge qui range l'élève) ; les badges obtenus par exercice, nommés et comptés, zéro caché ; rien sans exercice assigné %>
+<%# Rôle : « 9 faits sur 18 » + pastille « 1 en retard » (pas fait et échu) ; les médailles obtenues par exercice, nommés et comptés, zéro caché ; rien sans exercice assigné %>
 <%# ADR  : 0072 (§4.4), 0079 (§4.2), 0097 (§4.3, §4.5) · UDR : enseignant §3.2 et §3.6, 0062 (§3.5), 0107 (§3.3) · jamais un badge d'une autre classe ; ni « Fragile » ni « Acquis » %>
 <%# locals: (file:) -%>
 <% counts = file.counts %>
@@ -11,11 +11,6 @@
       <% if overdue.positive? %><%= ui_badge t(".late", count: overdue), tone: :warning, dot: true %><% end %>
     </p>
     <ul aria-label="<%= t(".badges_label") %>" class="flex flex-wrap items-center gap-2">
-      <% if file.class_grade %>
-        <li id="student_file_average"><span class="ui-badge ui-badge-md bg-brand-soft text-brand-strong">
-          <%= t(".average", grade: file.class_grade, badge: comprehension_box_label(file.class_badge || :none)) %>
-        </span></li>
-      <% end %>
       <% Entities::Assessment::Grading::BADGE_ORDER.each do |level| %>
         <% pill = badge_pill(level, count: file.badge_counts.fetch(level)) %>
         <% if pill %><li><%= pill %></li><% end %>

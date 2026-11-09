@@ -135,121 +135,239 @@
           },
           "pitfall": "Ne pas additionner les limites terme par terme. Contre-exemple : pour $f(x) = x^2 - x$, $x^2$ tend vers $+\\infty$ et $-x$ vers $-\\infty$ : on croirait à « $+\\infty - \\infty = 0$ ». Pourtant, pour $x = 1000$, $f(x) = 1\\,000\\,000 - 1000 = 999\\,000$, et la limite est $+\\infty$. Seul le terme de plus haut degré compte. En $-\\infty$, fais aussi attention à la puissance : $x^3$ y tend vers $-\\infty$, mais $x^2$ vers $+\\infty$.",
           "figure": null,
-          "exercise": {
-            "title": "Calculer la limite d'un polynôme",
-            "statement": "Dans cet exercice, tu calcules des limites de polynômes en $+\\infty$ et en $-\\infty$ avec la méthode de la fiche.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est la limite en $+\\infty$ de $f(x) = 3x^2 - 5x + 1$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $3x^2$. Étape 2 — Remplacer : en $+\\infty$, $f(x)$ a la même limite que $3x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et $3$ est positif, donc $3x^2$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le leurre $-\\infty$ vient du terme $-5x$, qui ne compte pas ; $3$ est le coefficient, pas la limite ; $1$ est le terme constant, qui ne commande jamais.",
-                "answers": [
-                  {
-                    "content": "$-\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$+\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$1$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "La limite en $-\\infty$ de $g(x) = -2x^3 + x^2 + 4$ est ___.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $-2x^3$. Étape 2 — Remplacer : en $-\\infty$, $g(x)$ a la même limite que $-2x^3$. Étape 3 — Déterminer : $x^3$ tend vers $-\\infty$ (puissance impaire), puis on multiplie par $-2$ : un négatif fois un négatif donne un positif, donc $-2x^3$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} g(x) = +\\infty$. Le leurre $-\\infty$ oublie le signe de $-2$ ; $0$ et $4$ ne sont pas des limites d'un polynôme de degré 3.",
-                "answers": [
-                  {
-                    "content": "$+\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$4$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $h(x) = 5x^2 - 100x$, la limite en $+\\infty$ est $-\\infty$, parce que $-100x$ est très grand en valeur absolue.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $5x^2$ (et pas $-100x$). Étape 2 — Remplacer : en $+\\infty$, $h(x)$ a la même limite que $5x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et $5$ est positif, donc $5x^2$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} h(x) = +\\infty$. Vérification : pour $x = 1000$, $h(x) = 5\\,000\\,000 - 100\\,000 = 4\\,900\\,000$, un très grand nombre positif. L'affirmation est donc fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelles sont les deux fonctions dont la limite en $+\\infty$ est $-\\infty$ ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : les termes de plus haut degré sont $-x^2$, $x^3$, $-4x^3$ et $2x^2$. Étape 2 — Remplacer : chaque fonction se comporte comme son terme de plus haut degré. Étape 3 — Déterminer : en $+\\infty$, $-x^2$ tend vers $-\\infty$ et $-4x^3$ aussi (coefficient négatif), alors que $x^3$ et $2x^2$ tendent vers $+\\infty$. Étape 4 — Conclure : les bonnes fonctions sont $-x^2 + 3x$ et $-4x^3 + x^2$. Les leurres $x^3 - 4$ et $2x^2 - x$ ont un coefficient positif en haut degré : leur limite est $+\\infty$.",
-                "answers": [
-                  {
-                    "content": "$-x^2 + 3x$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-4x^3 + x^2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x^3 - 4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2x^2 - x$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la limite en $+\\infty$ de $f(x) = x^2 - 50x$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $x^2$. Étape 2 — Remplacer : en $+\\infty$, $f(x)$ a la même limite que $x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et le coefficient $1$ est positif. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le piège est « $+\\infty - \\infty = 0$ » : on ne soustrait pas les limites. Pour $x = 1000$, $f(x) = 1\\,000\\,000 - 50\\,000 = 950\\,000$, très grand. $-\\infty$ viendrait de $-50x$ seul, et $-50$ est un coefficient, pas une limite.",
-                "answers": [
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$+\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-50$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Calculer la limite d'un polynôme",
+              "statement": "Dans cet exercice, tu calcules des limites de polynômes en $+\\infty$ et en $-\\infty$ avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = 3x^2 - 5x + 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $3x^2$. Étape 2 — Remplacer : en $+\\infty$, $f(x)$ a la même limite que $3x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et $3$ est positif, donc $3x^2$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le leurre $-\\infty$ vient du terme $-5x$, qui ne compte pas ; $3$ est le coefficient, pas la limite ; $1$ est le terme constant, qui ne commande jamais.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $g(x) = -2x^3 + x^2 + 4$ est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $-2x^3$. Étape 2 — Remplacer : en $-\\infty$, $g(x)$ a la même limite que $-2x^3$. Étape 3 — Déterminer : $x^3$ tend vers $-\\infty$ (puissance impaire), puis on multiplie par $-2$ : un négatif fois un négatif donne un positif, donc $-2x^3$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} g(x) = +\\infty$. Le leurre $-\\infty$ oublie le signe de $-2$ ; $0$ et $4$ ne sont pas des limites d'un polynôme de degré 3.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = 5x^2 - 100x$, la limite en $+\\infty$ est $-\\infty$, parce que $-100x$ est très grand en valeur absolue.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $5x^2$ (et pas $-100x$). Étape 2 — Remplacer : en $+\\infty$, $h(x)$ a la même limite que $5x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et $5$ est positif, donc $5x^2$ tend vers $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} h(x) = +\\infty$. Vérification : pour $x = 1000$, $h(x) = 5\\,000\\,000 - 100\\,000 = 4\\,900\\,000$, un très grand nombre positif. L'affirmation est donc fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $+\\infty$ est $-\\infty$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les termes de plus haut degré sont $-x^2$, $x^3$, $-4x^3$ et $2x^2$. Étape 2 — Remplacer : chaque fonction se comporte comme son terme de plus haut degré. Étape 3 — Déterminer : en $+\\infty$, $-x^2$ tend vers $-\\infty$ et $-4x^3$ aussi (coefficient négatif), alors que $x^3$ et $2x^2$ tendent vers $+\\infty$. Étape 4 — Conclure : les bonnes fonctions sont $-x^2 + 3x$ et $-4x^3 + x^2$. Les leurres $x^3 - 4$ et $2x^2 - x$ ont un coefficient positif en haut degré : leur limite est $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$-x^2 + 3x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-4x^3 + x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^3 - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2 - x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = x^2 - 50x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $x^2$. Étape 2 — Remplacer : en $+\\infty$, $f(x)$ a la même limite que $x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$ et le coefficient $1$ est positif. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le piège est « $+\\infty - \\infty = 0$ » : on ne soustrait pas les limites. Pour $x = 1000$, $f(x) = 1\\,000\\,000 - 50\\,000 = 950\\,000$, très grand. $-\\infty$ viendrait de $-50x$ seul, et $-50$ est un coefficient, pas une limite.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-50$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Lire la limite d'un polynôme aux deux infinis",
+              "statement": "Dans cet exercice, tu repères le terme de plus haut degré d'un polynôme, puis tu en déduis sa limite en $+\\infty$ et en $-\\infty$ avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Cherche l'exposant le plus grand de $x$, puis regarde sa parité (pair ou impair) et le signe de son coefficient. Les autres termes ne comptent pas.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = -3x^2 + 10x - 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $-3x^2$. Étape 2 — Remplacer : en $+\\infty$, $f(x)$ a la même limite que $-3x^2$. Étape 3 — Déterminer : $x^2$ tend vers $+\\infty$, puis on multiplie par $-3$ (négatif), donc $-3x^2$ tend vers $-\\infty$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = -\\infty$. Le leurre $+\\infty$ oublie le signe du coefficient ; $-4$ est le terme constant, qui ne commande rien ; $0$ vient de « $-\\infty + \\infty = 0$ », alors qu'on ne combine pas les termes un à un.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = 4x^5 - 3x^2 + 7$, l'exposant du terme de plus haut degré est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les exposants de $x$ sont $5$, $2$ et $0$ (le terme $7$ est un nombre seul) ; le plus grand est $5$, donc le terme de plus haut degré est $4x^5$. Étape 2 — Remplacer : c'est ce terme seul qui commande la limite de $g$. Étape 3 — Déterminer : l'exposant $5$ est impair, donc $x^5$ change de signe avec $x$. Étape 4 — Conclure : on lit $5$, et non $2$ (exposant du terme du milieu) ni $4$ (coefficient du terme de plus haut degré).",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = -x^3 + 6x^2$, la limite de $h$ en $-\\infty$ est $+\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $-x^3$. Étape 2 — Remplacer : en $-\\infty$, $h(x)$ a la même limite que $-x^3$. Étape 3 — Déterminer : l'exposant $3$ est impair, donc $x^3$ tend vers $-\\infty$ ; on multiplie par $-1$ et on obtient $+\\infty$. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} h(x) = +\\infty$, l'affirmation est vraie. L'erreur tentante est de croire que $x^3$ tend vers $+\\infty$ en $-\\infty$, ou de retenir $-\\infty$ parce que le coefficient est négatif sans tenir compte de la parité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $k(x) = 2x^4 - 5x^3$ est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré est $2x^4$. Étape 2 — Remplacer : en $-\\infty$, $k(x)$ a la même limite que $2x^4$. Étape 3 — Déterminer : l'exposant $4$ est pair, donc $x^4$ tend vers $+\\infty$ aux deux infinis ; $2$ est positif. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} k(x) = +\\infty$. Le leurre $-\\infty$ confond « $x$ tend vers $-\\infty$ » et « $x^4$ tend vers $-\\infty$ » ; $0$ vient de « $+\\infty - \\infty$ » ; $2$ est le coefficient.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $-\\infty$ est $+\\infty$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : les termes de plus haut degré sont $x^2$, $-x^3$, $-x^2$ et $2x^3$. Étape 2 — Remplacer : chaque fonction a la limite de ce terme. Étape 3 — Déterminer en $-\\infty$ : $x^2$ tend vers $+\\infty$ (puissance paire) ; $x^3$ tend vers $-\\infty$, donc $-x^3$ tend vers $+\\infty$ ; $-x^2$ tend vers $-\\infty$ ; $2x^3$ tend vers $-\\infty$. Étape 4 — Conclure : $x^2 - 30x$ et $-x^3 + 2$ conviennent. Les fonctions $5x - x^2$ et $2x^3 - 100x^2$ ont pour limite $-\\infty$ : l'erreur serait d'oublier la parité de l'exposant ou le signe du coefficient.",
+                  "answers": [
+                    {
+                      "content": "$a(x) = x^2 - 30x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b(x) = -x^3 + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$c(x) = 5x - x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$d(x) = 2x^3 - 100x^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $p(x) = x^2 - 20x$, calcule $p(1000)$. Ce nombre montre vers quoi tend $p$ en $+\\infty$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le terme de plus haut degré de $p(x)$ est $x^2$. Étape 2 — Remplacer : on calcule $p(1000) = 1000^2 - 20 \\times 1000 = 1\\,000\\,000 - 20\\,000 = 980\\,000$. Étape 3 — Déterminer : ce nombre est énorme et positif, car $x^2$ l'emporte sur $-20x$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} p(x) = +\\infty$, et non $0$ comme le suggérerait « $+\\infty - \\infty = 0$ » (le piège de la fiche).",
+                  "answers": [
+                    {
+                      "content": "980000",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie la fonction $f(x) = 2x^3 - 7x^2 + 1$ sur $\\mathbb{R}$, pour calculer ses limites en $+\\infty$ et en $-\\infty$.",
             "questions": [
@@ -349,118 +467,232 @@
           },
           "pitfall": "Ne pas diviser les nombres seuls : la limite est $\\dfrac{a}{c}$, pas $\\dfrac{b}{d}$. Contre-exemple : pour $f(x) = \\dfrac{3x+1}{x-2}$, on aurait $\\dfrac{b}{d} = \\dfrac{1}{-2} = -0{,}5$. Or pour $x = 1000$, $f(x) = \\dfrac{3001}{998} \\approx 3{,}007$ : on est près de $3$, loin de $-0{,}5$. N'écris pas non plus « $\\dfrac{\\infty}{\\infty} = 1$ » : cela ne veut rien dire, on simplifie par $x$.",
           "figure": null,
-          "exercise": {
-            "title": "Trouver l'asymptote horizontale",
-            "statement": "Dans cet exercice, tu calcules des limites en l'infini de fonctions du type $\\dfrac{ax+b}{cx+d}$ et tu en déduis l'asymptote horizontale.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Calcule la limite en $+\\infty$ de $f(x) = \\dfrac{5x+2}{x+1}$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : au numérateur le terme en $x$ est $5x$, au dénominateur c'est $x$. Étape 2 — Former : le quotient est $\\dfrac{5x}{x}$. Étape 3 — Simplifier : $\\dfrac{5x}{x} = 5$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = 5$, et la droite $y = 5$ est asymptote horizontale.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Calcule la limite en $-\\infty$ de $g(x) = \\dfrac{6x-1}{2x+3}$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : les termes en $x$ sont $6x$ (numérateur) et $2x$ (dénominateur). Étape 2 — Former : le quotient est $\\dfrac{6x}{2x}$. Étape 3 — Simplifier : $\\dfrac{6x}{2x} = 3$. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} g(x) = 3$, et $y = 3$ est asymptote horizontale. Attention : la limite est la même en $-\\infty$ qu'en $+\\infty$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est l'asymptote horizontale de la courbe de $f(x) = \\dfrac{-4x+7}{2x-1}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : les termes en $x$ sont $-4x$ et $2x$. Étape 2 — Former : $\\dfrac{-4x}{2x}$. Étape 3 — Simplifier : $\\dfrac{-4x}{2x} = -2$. Étape 4 — Conclure : la limite est $-2$ en $+\\infty$ et en $-\\infty$, donc l'asymptote horizontale est $y = -2$. Le leurre $y = -4$ oublie de diviser par $2$ ; $y = -7$ vient de $\\dfrac{7}{-1}$, le quotient des nombres seuls (le piège) ; $x = \\dfrac{1}{2}$ est la valeur interdite, une droite verticale.",
-                "answers": [
-                  {
-                    "content": "$y = -4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = -7$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = -2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$x = \\dfrac{1}{2}$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $f(x) = \\dfrac{2x+5}{x-3}$, la droite d'équation $y = 2$ est asymptote horizontale à la courbe.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Repérer : les termes en $x$ sont $2x$ et $x$. Étape 2 — Former : $\\dfrac{2x}{x}$. Étape 3 — Simplifier : $\\dfrac{2x}{x} = 2$. Étape 4 — Conclure : $\\lim_{x \\to \\pm\\infty} f(x) = 2$, donc $y = 2$ est bien asymptote horizontale. L'affirmation est vraie ; la valeur $\\dfrac{5}{-3}$ du piège ne joue aucun rôle.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est la limite en $+\\infty$ de $f(x) = \\dfrac{4x+8}{2x+1}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : les termes en $x$ sont $4x$ et $2x$. Étape 2 — Former : $\\dfrac{4x}{2x}$. Étape 3 — Simplifier : $\\dfrac{4x}{2x} = 2$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = 2$. Vérification : pour $x = 1000$, $f(x) = \\dfrac{4008}{2001} \\approx 2{,}003$. Le leurre $8$ est $\\dfrac{8}{1}$, le quotient des nombres seuls (le piège) ; $1$ vient de « $\\dfrac{\\infty}{\\infty} = 1$ » ; $+\\infty$ oublie que numérateur et dénominateur grandissent ensemble.",
-                "answers": [
-                  {
-                    "content": "$8$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$2$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$+\\infty$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Remets dans l'ordre les étapes de la méthode pour trouver l'asymptote horizontale de $f(x) = \\dfrac{ax+b}{cx+d}$.",
-                "question_type": "ordering",
-                "explanation": "Étape 1 — Repérer les termes en $x$. Étape 2 — Former leur quotient $\\dfrac{ax}{cx}$. Étape 3 — Simplifier par $x$ pour obtenir $\\dfrac{a}{c}$. Étape 4 — Conclure par la limite et l'équation $y = \\dfrac{a}{c}$. On ne peut pas conclure avant d'avoir simplifié, ni simplifier avant d'avoir formé le quotient.",
-                "answers": [
-                  {
-                    "content": "Repérer le terme en $x$ du numérateur et celui du dénominateur."
-                  },
-                  {
-                    "content": "Former le quotient de ces deux termes."
-                  },
-                  {
-                    "content": "Simplifier le quotient en barrant $x$."
-                  },
-                  {
-                    "content": "Conclure : donner la limite et l'équation de l'asymptote horizontale."
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Trouver l'asymptote horizontale",
+              "statement": "Dans cet exercice, tu calcules des limites en l'infini de fonctions du type $\\dfrac{ax+b}{cx+d}$ et tu en déduis l'asymptote horizontale.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $f(x) = \\dfrac{5x+2}{x+1}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : au numérateur le terme en $x$ est $5x$, au dénominateur c'est $x$. Étape 2 — Former : le quotient est $\\dfrac{5x}{x}$. Étape 3 — Simplifier : $\\dfrac{5x}{x} = 5$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = 5$, et la droite $y = 5$ est asymptote horizontale.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la limite en $-\\infty$ de $g(x) = \\dfrac{6x-1}{2x+3}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $6x$ (numérateur) et $2x$ (dénominateur). Étape 2 — Former : le quotient est $\\dfrac{6x}{2x}$. Étape 3 — Simplifier : $\\dfrac{6x}{2x} = 3$. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} g(x) = 3$, et $y = 3$ est asymptote horizontale. Attention : la limite est la même en $-\\infty$ qu'en $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'asymptote horizontale de la courbe de $f(x) = \\dfrac{-4x+7}{2x-1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $-4x$ et $2x$. Étape 2 — Former : $\\dfrac{-4x}{2x}$. Étape 3 — Simplifier : $\\dfrac{-4x}{2x} = -2$. Étape 4 — Conclure : la limite est $-2$ en $+\\infty$ et en $-\\infty$, donc l'asymptote horizontale est $y = -2$. Le leurre $y = -4$ oublie de diviser par $2$ ; $y = -7$ vient de $\\dfrac{7}{-1}$, le quotient des nombres seuls (le piège) ; $x = \\dfrac{1}{2}$ est la valeur interdite, une droite verticale.",
+                  "answers": [
+                    {
+                      "content": "$y = -4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = \\dfrac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{2x+5}{x-3}$, la droite d'équation $y = 2$ est asymptote horizontale à la courbe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $2x$ et $x$. Étape 2 — Former : $\\dfrac{2x}{x}$. Étape 3 — Simplifier : $\\dfrac{2x}{x} = 2$. Étape 4 — Conclure : $\\lim_{x \\to \\pm\\infty} f(x) = 2$, donc $y = 2$ est bien asymptote horizontale. L'affirmation est vraie ; la valeur $\\dfrac{5}{-3}$ du piège ne joue aucun rôle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = \\dfrac{4x+8}{2x+1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $4x$ et $2x$. Étape 2 — Former : $\\dfrac{4x}{2x}$. Étape 3 — Simplifier : $\\dfrac{4x}{2x} = 2$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = 2$. Vérification : pour $x = 1000$, $f(x) = \\dfrac{4008}{2001} \\approx 2{,}003$. Le leurre $8$ est $\\dfrac{8}{1}$, le quotient des nombres seuls (le piège) ; $1$ vient de « $\\dfrac{\\infty}{\\infty} = 1$ » ; $+\\infty$ oublie que numérateur et dénominateur grandissent ensemble.",
+                  "answers": [
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de la méthode pour trouver l'asymptote horizontale de $f(x) = \\dfrac{ax+b}{cx+d}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer les termes en $x$. Étape 2 — Former leur quotient $\\dfrac{ax}{cx}$. Étape 3 — Simplifier par $x$ pour obtenir $\\dfrac{a}{c}$. Étape 4 — Conclure par la limite et l'équation $y = \\dfrac{a}{c}$. On ne peut pas conclure avant d'avoir simplifié, ni simplifier avant d'avoir formé le quotient.",
+                  "answers": [
+                    {
+                      "content": "Repérer le terme en $x$ du numérateur et celui du dénominateur."
+                    },
+                    {
+                      "content": "Former le quotient de ces deux termes."
+                    },
+                    {
+                      "content": "Simplifier le quotient en barrant $x$."
+                    },
+                    {
+                      "content": "Conclure : donner la limite et l'équation de l'asymptote horizontale."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Former le quotient des termes en x pour trouver une asymptote horizontale",
+              "statement": "Dans cet exercice, tu formes le quotient des termes en $x$ de fonctions du type $\\dfrac{ax+b}{cx+d}$ pour trouver leur limite en l'infini, puis l'équation de leur asymptote horizontale.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Ne garde que les termes qui contiennent $x$, au numérateur et au dénominateur. Le quotient de leurs coefficients donne la limite ; les nombres seuls ne servent pas.",
+              "questions": [
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $f(x) = \\dfrac{10x-7}{4x+1}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : au numérateur le terme en $x$ est $10x$, au dénominateur c'est $4x$ (on laisse de côté $-7$ et $1$). Étape 2 — Former : le quotient est $\\dfrac{10x}{4x}$. Étape 3 — Simplifier : en barrant $x$, $\\dfrac{10x}{4x} = \\dfrac{10}{4} = 2{,}5$. Étape 4 — Conclure : $\\lim_{x \\to +\\infty} f(x) = 2{,}5$. L'erreur tentante est de diviser les nombres seuls, $\\dfrac{-7}{1} = -7$, ou de soustraire les coefficients ($10 - 4 = 6$).",
+                  "answers": [
+                    {
+                      "content": "2,5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'asymptote horizontale de la courbe de $g(x) = \\dfrac{-6x+1}{3x+7}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $-6x$ et $3x$ (on laisse de côté $1$ et $7$). Étape 2 — Former : $\\dfrac{-6x}{3x}$. Étape 3 — Simplifier : $\\dfrac{-6x}{3x} = -2$. Étape 4 — Conclure : la limite en $\\pm\\infty$ est $-2$, l'asymptote horizontale est $y = -2$. Le leurre $y = 2$ oublie le signe de $-6$ ; $y = \\dfrac{1}{7}$ est le quotient des nombres seuls ; $x = -\\dfrac{7}{3}$ est une droite verticale (valeur interdite), pas une asymptote horizontale.",
+                  "answers": [
+                    {
+                      "content": "$y = -2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = \\dfrac{1}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -\\dfrac{7}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = \\dfrac{3x+8}{6x-1}$, la limite de $h$ en $-\\infty$ est $\\dfrac{1}{2}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $3x$ et $6x$ (on laisse de côté $8$ et $-1$). Étape 2 — Former : $\\dfrac{3x}{6x}$. Étape 3 — Simplifier : $\\dfrac{3}{6} = \\dfrac{1}{2}$. Étape 4 — Conclure : la limite est la même en $+\\infty$ et en $-\\infty$, soit $\\dfrac{1}{2}$ ; l'affirmation est vraie. Il ne faut pas penser que la limite en $-\\infty$ change de signe : le quotient de deux termes en $x$ se simplifie de la même façon aux deux infinis.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe de $k(x) = \\dfrac{12x+5}{4x-9}$ admet pour asymptote horizontale la droite d'équation $y = $ ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les termes en $x$ sont $12x$ et $4x$ (on laisse de côté $5$ et $-9$). Étape 2 — Former : $\\dfrac{12x}{4x}$. Étape 3 — Simplifier : $\\dfrac{12x}{4x} = 3$. Étape 4 — Conclure : l'asymptote horizontale est $y = 3$. Le leurre $12$ oublie de diviser par $4$ ; le leurre $-\\dfrac{5}{9}$ est le quotient des nombres seuls.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque fonction à l'équation de son asymptote horizontale.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer les termes en $x$, puis Étape 2 — Former leur quotient, Étape 3 — Simplifier, Étape 4 — Conclure. Pour $\\dfrac{2x+1}{x+5}$ : $\\dfrac{2x}{x} = 2$. Pour $\\dfrac{x+4}{2x-1}$ : $\\dfrac{x}{2x} = \\dfrac{1}{2}$. Pour $\\dfrac{-3x+2}{x-6}$ : $\\dfrac{-3x}{x} = -3$. Pour $\\dfrac{4x-1}{-2x+3}$ : $\\dfrac{4x}{-2x} = -2$. L'erreur typique est de diviser les nombres seuls ($\\dfrac{-1}{3}$ pour $\\dfrac{4x-1}{-2x+3}$) ou de perdre un signe.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = \\dfrac{2x+1}{x+5}$",
+                      "match": "$y = 2$"
+                    },
+                    {
+                      "content": "$g(x) = \\dfrac{x+4}{2x-1}$",
+                      "match": "$y = \\dfrac{1}{2}$"
+                    },
+                    {
+                      "content": "$h(x) = \\dfrac{-3x+2}{x-6}$",
+                      "match": "$y = -3$"
+                    },
+                    {
+                      "content": "$k(x) = \\dfrac{4x-1}{-2x+3}$",
+                      "match": "$y = -2$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver la limite en $+\\infty$ de $f(x) = \\dfrac{8x+3}{2x-5}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on isole les termes en $x$, $8x$ et $2x$, et on laisse de côté $3$ et $-5$. Étape 2 — Former : on écrit le quotient $\\dfrac{8x}{2x}$. Étape 3 — Simplifier : en barrant $x$, on obtient $4$. Étape 4 — Conclure : la limite vaut $4$ et la droite $y = 4$ est asymptote horizontale. On ne peut pas conclure avant d'avoir simplifié, ni simplifier avant d'avoir formé le quotient.",
+                  "answers": [
+                    {
+                      "content": "Repérer : $8x$ au numérateur et $2x$ au dénominateur"
+                    },
+                    {
+                      "content": "Former : le quotient $\\dfrac{8x}{2x}$"
+                    },
+                    {
+                      "content": "Simplifier : en barrant $x$, on obtient $4$"
+                    },
+                    {
+                      "content": "Conclure : la limite vaut $4$ et $y = 4$ est asymptote horizontale"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Un atelier étudie $f(x) = \\dfrac{4x+3}{2x+1}$ pour savoir vers quelle valeur se stabilise un prix quand $x$ devient très grand.",
             "questions": [
@@ -542,110 +774,228 @@
           },
           "pitfall": "Ne pas oublier le signe du dénominateur : un nombre divisé par un dénominateur qui tend vers $0$ ne tend pas toujours vers $+\\infty$. Contre-exemple : pour $f(x) = \\dfrac{3x+1}{x-2}$ et $x = 1{,}99$ (juste avant $2$), $f(x) = \\dfrac{6{,}97}{-0{,}01} = -697$ : c'est très négatif, donc la limite à gauche est $-\\infty$. Il faut étudier le signe de chaque côté de la valeur interdite.",
           "figure": "asymptotes-exemple",
-          "exercise": {
-            "title": "Étudier la limite en la valeur interdite",
-            "statement": "Dans cet exercice, tu cherches la valeur interdite de fonctions du type $\\dfrac{ax+b}{cx+d}$, tu calcules des limites à gauche et à droite, et tu en déduis l'asymptote verticale.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Quelle est la valeur interdite de $f(x) = \\dfrac{2x+3}{x-5}$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Trouver : la valeur interdite annule le dénominateur, donc on résout $x - 5 = 0$, ce qui donne $x_0 = 5$. Étape 2 — Calculer : le numérateur en $5$ vaut $2 \\times 5 + 3 = 13$, il ne s'annule pas, donc la droite $x = 5$ est bien une asymptote verticale. Étapes 3 et 4 : il resterait à étudier le signe de $x - 5$ de chaque côté de $5$.",
-                "answers": [
-                  {
-                    "content": "5",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Que vaut la limite de $f(x) = \\dfrac{2x+3}{x-5}$ quand $x$ tend vers $5$ par valeurs supérieures ($x > 5$) ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Trouver : $x - 5 = 0$ donne $x_0 = 5$. Étape 2 — Calculer : le numérateur vaut $2 \\times 5 + 3 = 13$, positif. Étape 3 — Étudier : pour $x > 5$, $x - 5$ est positif et tend vers $0$ ($0^+$). Étape 4 — Appliquer : $\\dfrac{13}{0^+} = +\\infty$. Le leurre $-\\infty$ viendrait de $0^-$, c'est-à-dire de la gauche ; $13$ est la valeur du numérateur, pas la limite ; $0$ est faux car on divise par un nombre qui tend vers $0$.",
-                "answers": [
-                  {
-                    "content": "$+\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$13$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $h(x) = \\dfrac{1-2x}{x-3}$, la limite quand $x$ tend vers $3$ par valeurs inférieures ($x < 3$) est ___.",
-                "question_type": "select",
-                "explanation": "Étape 1 — Trouver : $x - 3 = 0$ donne $x_0 = 3$. Étape 2 — Calculer : le numérateur vaut $1 - 2 \\times 3 = -5$, négatif. Étape 3 — Étudier : pour $x < 3$, $x - 3$ est négatif ($0^-$). Étape 4 — Appliquer : $\\dfrac{-5}{0^-}$, un négatif divisé par un négatif, donne $+\\infty$. Le leurre $-\\infty$ ne regarde que le signe du numérateur ; $-5$ est la valeur du numérateur ; $0$ est faux car le dénominateur tend vers $0$.",
-                "answers": [
-                  {
-                    "content": "$+\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$-\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-5$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $f(x) = \\dfrac{5x+1}{2x+6}$, la droite d'équation $x = 3$ est asymptote verticale.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Trouver : la valeur interdite vient de $2x + 6 = 0$, donc $2x = -6$ et $x_0 = -3$ (et pas $3$ : erreur de signe). Étape 2 — Calculer : le numérateur en $-3$ vaut $5 \\times (-3) + 1 = -14$, non nul. Étapes 3 et 4 : la limite est infinie de chaque côté de $-3$, donc l'asymptote verticale est $x = -3$. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Que vaut la limite de $f(x) = \\dfrac{4x+1}{x-1}$ quand $x$ tend vers $1$ par valeurs inférieures ($x < 1$) ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Trouver : $x - 1 = 0$ donne $x_0 = 1$. Étape 2 — Calculer : le numérateur vaut $4 \\times 1 + 1 = 5$, positif. Étape 3 — Étudier : pour $x < 1$, $x - 1$ est négatif ($0^-$). Étape 4 — Appliquer : $\\dfrac{5}{0^-} = -\\infty$. Le leurre $+\\infty$ est le piège : on oublie le signe du dénominateur. Vérification : pour $x = 0{,}99$, $f(x) = \\dfrac{4{,}96}{-0{,}01} = -496$.",
-                "answers": [
-                  {
-                    "content": "$+\\infty$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$-\\infty$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$0$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$5$",
-                    "correct": false
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Étudier la limite en la valeur interdite",
+              "statement": "Dans cet exercice, tu cherches la valeur interdite de fonctions du type $\\dfrac{ax+b}{cx+d}$, tu calcules des limites à gauche et à droite, et tu en déduis l'asymptote verticale.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Quelle est la valeur interdite de $f(x) = \\dfrac{2x+3}{x-5}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Trouver : la valeur interdite annule le dénominateur, donc on résout $x - 5 = 0$, ce qui donne $x_0 = 5$. Étape 2 — Calculer : le numérateur en $5$ vaut $2 \\times 5 + 3 = 13$, il ne s'annule pas, donc la droite $x = 5$ est bien une asymptote verticale. Étapes 3 et 4 : il resterait à étudier le signe de $x - 5$ de chaque côté de $5$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $f(x) = \\dfrac{2x+3}{x-5}$ quand $x$ tend vers $5$ par valeurs supérieures ($x > 5$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Trouver : $x - 5 = 0$ donne $x_0 = 5$. Étape 2 — Calculer : le numérateur vaut $2 \\times 5 + 3 = 13$, positif. Étape 3 — Étudier : pour $x > 5$, $x - 5$ est positif et tend vers $0$ ($0^+$). Étape 4 — Appliquer : $\\dfrac{13}{0^+} = +\\infty$. Le leurre $-\\infty$ viendrait de $0^-$, c'est-à-dire de la gauche ; $13$ est la valeur du numérateur, pas la limite ; $0$ est faux car on divise par un nombre qui tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = \\dfrac{1-2x}{x-3}$, la limite quand $x$ tend vers $3$ par valeurs inférieures ($x < 3$) est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Trouver : $x - 3 = 0$ donne $x_0 = 3$. Étape 2 — Calculer : le numérateur vaut $1 - 2 \\times 3 = -5$, négatif. Étape 3 — Étudier : pour $x < 3$, $x - 3$ est négatif ($0^-$). Étape 4 — Appliquer : $\\dfrac{-5}{0^-}$, un négatif divisé par un négatif, donne $+\\infty$. Le leurre $-\\infty$ ne regarde que le signe du numérateur ; $-5$ est la valeur du numérateur ; $0$ est faux car le dénominateur tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{5x+1}{2x+6}$, la droite d'équation $x = 3$ est asymptote verticale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Trouver : la valeur interdite vient de $2x + 6 = 0$, donc $2x = -6$ et $x_0 = -3$ (et pas $3$ : erreur de signe). Étape 2 — Calculer : le numérateur en $-3$ vaut $5 \\times (-3) + 1 = -14$, non nul. Étapes 3 et 4 : la limite est infinie de chaque côté de $-3$, donc l'asymptote verticale est $x = -3$. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $f(x) = \\dfrac{4x+1}{x-1}$ quand $x$ tend vers $1$ par valeurs inférieures ($x < 1$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Trouver : $x - 1 = 0$ donne $x_0 = 1$. Étape 2 — Calculer : le numérateur vaut $4 \\times 1 + 1 = 5$, positif. Étape 3 — Étudier : pour $x < 1$, $x - 1$ est négatif ($0^-$). Étape 4 — Appliquer : $\\dfrac{5}{0^-} = -\\infty$. Le leurre $+\\infty$ est le piège : on oublie le signe du dénominateur. Vérification : pour $x = 0{,}99$, $f(x) = \\dfrac{4{,}96}{-0{,}01} = -496$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Étudier une fonction aux abords de sa valeur interdite",
+              "statement": "Dans cet exercice, tu cherches la valeur interdite de fonctions du type $\\dfrac{ax+b}{cx+d}$, tu étudies le signe du dénominateur de chaque côté, puis tu en déduis les limites et l'asymptote verticale.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Résous d'abord « dénominateur égal à zéro ». Calcule ensuite le numérateur en cette valeur, puis regarde si le dénominateur est positif ou négatif juste à gauche et juste à droite.",
+              "questions": [
+                {
+                  "content": "La valeur interdite de $f(x) = \\dfrac{x+9}{2x-8}$ est $x_0 = $ ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Trouver : la valeur interdite annule le dénominateur, donc $2x - 8 = 0$, soit $2x = 8$ et $x_0 = 4$. Étape 2 — Calculer : en $x_0 = 4$ le numérateur vaut $4 + 9 = 13$, un nombre positif non nul, donc la droite $x = 4$ est bien asymptote verticale. Le leurre $-9$ vient d'avoir annulé le numérateur ; le leurre $8$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $f(x) = \\dfrac{3x-2}{x-4}$ quand $x$ tend vers $4$ par valeurs supérieures ($x > 4$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Trouver : $x - 4 = 0$ donne $x_0 = 4$. Étape 2 — Calculer : en $4$, le numérateur vaut $3 \\times 4 - 2 = 10$, positif. Étape 3 — Étudier : pour $x > 4$, $x - 4$ est positif et proche de $0$ ($0^+$). Étape 4 — Appliquer : $\\dfrac{10}{0^+} = +\\infty$. Le leurre $-\\infty$ confond les deux côtés de $4$ ; le leurre $10$ vient d'avoir remplacé $x$ au numérateur sans regarder le dénominateur ; le leurre $0$ croit qu'un dénominateur proche de $0$ donne $0$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = \\dfrac{5-x}{x+2}$, la limite quand $x$ tend vers $-2$ par valeurs inférieures ($x < -2$) est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Trouver : $x + 2 = 0$ donne $x_0 = -2$. Étape 2 — Calculer : en $-2$, le numérateur vaut $5 - (-2) = 7$, positif. Étape 3 — Étudier : pour $x < -2$, $x + 2$ est négatif et proche de $0$ ($0^-$). Étape 4 — Appliquer : $\\dfrac{7}{0^-} = -\\infty$. Le leurre $+\\infty$ oublie que le dénominateur est négatif à gauche ; $7$ est la valeur du numérateur ; $0$ est une fausse idée du dénominateur proche de zéro.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = \\dfrac{2x+3}{x+1}$, la limite de $h$ quand $x$ tend vers $-1$ par valeurs inférieures ($x < -1$) est $+\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Trouver : $x + 1 = 0$ donne $x_0 = -1$. Étape 2 — Calculer : en $-1$, le numérateur vaut $2 \\times (-1) + 3 = 1$, positif. Étape 3 — Étudier : pour $x < -1$, $x + 1$ est négatif ($0^-$). Étape 4 — Appliquer : $\\dfrac{1}{0^-} = -\\infty$. L'affirmation est donc fausse : elle oublie le signe négatif du dénominateur à gauche de la valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{x-1}{x-3}$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Trouver : $x - 3 = 0$ donne $x_0 = 3$. Étape 2 — Calculer : le numérateur vaut $3 - 1 = 2$, positif. Étape 3 — Étudier : à gauche de $3$, $x - 3$ est négatif ; à droite, il est positif. Étape 4 — Appliquer : $\\dfrac{2}{0^-} = -\\infty$ à gauche et $\\dfrac{2}{0^+} = +\\infty$ à droite ; la droite $x = 3$ est asymptote verticale. Sont donc vraies : la valeur interdite est $3$ et $x = 3$ est asymptote verticale. Les deux affirmations sur les limites inversent les signes des deux côtés.",
+                  "answers": [
+                    {
+                      "content": "La valeur interdite est $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x = 3$ est asymptote verticale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite quand $x$ tend vers $3$ par valeurs inférieures est $+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite quand $x$ tend vers $3$ par valeurs supérieures est $-\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{x+4}{x-3}$, calcule $f(2{,}99)$. Ce nombre montre le comportement de $f$ juste avant la valeur interdite.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Trouver : la valeur interdite est $x_0 = 3$ et $2{,}99$ est juste à gauche. Étape 2 — Calculer : le numérateur vaut $2{,}99 + 4 = 6{,}99$. Étape 3 — Étudier : le dénominateur vaut $2{,}99 - 3 = -0{,}01$, un petit nombre négatif. Étape 4 — Appliquer : $f(2{,}99) = \\dfrac{6{,}99}{-0{,}01} = -699$. Cette valeur très négative illustre la limite $-\\infty$ à gauche de $3$ ; un résultat positif signalerait un oubli du signe du dénominateur.",
+                  "answers": [
+                    {
+                      "content": "-699",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Une marchande étudie $f(x) = \\dfrac{x+6}{x-1}$ pour comprendre ce qui se passe quand $x$ s'approche de la valeur interdite.",
             "questions": [
@@ -746,126 +1096,249 @@
           },
           "pitfall": "Ne pas croire que $f'(x_0) = 0$ suffit pour avoir un extremum : il faut que $f'$ **change de signe**. Contre-exemple : pour $f(x) = x^3$, $f'(x) = 3x^2$ et $f'(0) = 0$, mais $f'$ reste positive des deux côtés. En effet $f(-1) = -1$, $f(0) = 0$, $f(1) = 1$ : la fonction monte toujours, il n'y a aucun extremum en $0$. Ne confonds pas non plus le signe de $f'$ (qui donne le sens de variation) avec le signe de $f$.",
           "figure": null,
-          "exercise": {
-            "title": "Étudier les variations d'une fonction",
-            "statement": "Dans cet exercice, tu calcules des dérivées, tu étudies leur signe, et tu en déduis les variations et les extremums de polynômes et de fonctions du type $\\dfrac{ax+b}{cx+d}$.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Pour $f(x) = x^2 - 6x + 5$, pour quelle valeur de $x$ la dérivée $f'(x)$ s'annule-t-elle ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 6$. Étape 2 — Chercher : $2x - 6 = 0$ donne $x = 3$. Étape 3 — Étudier : $f'(x)$ est négatif pour $x < 3$ et positif pour $x > 3$. Étape 4 — Dresser : $f$ décroît puis croît, avec $f(3) = 9 - 18 + 5 = -4$. Étape 5 — Lire : minimum $-4$ en $x = 3$. La réponse demandée est $x = 3$.",
-                "answers": [
-                  {
-                    "content": "3",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour $g(x) = -x^2 + 8x - 3$, quel est l'extremum de $g$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $g'(x) = -2x + 8$. Étape 2 — Chercher : $-2x + 8 = 0$ donne $x = 4$. Étape 3 — Étudier : $-2x + 8$ est positif pour $x < 4$ et négatif pour $x > 4$ (le coefficient $-2$ est négatif). Étape 4 — Dresser : $g$ croît puis décroît, avec $g(4) = -16 + 32 - 3 = 13$. Étape 5 — Lire : $g$ monte puis descend, c'est un maximum égal à $13$ en $x = 4$. Le leurre « minimum » oublie le signe de $-2$ ; « maximum $4$ en $x = 13$ » échange la valeur de $x$ et celle de $g$ ; $-3$ est $g(0)$, pas un extremum.",
-                "answers": [
-                  {
-                    "content": "un maximum égal à $13$, atteint en $x = 4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "un minimum égal à $13$, atteint en $x = 4$",
-                    "correct": false
-                  },
-                  {
-                    "content": "un maximum égal à $4$, atteint en $x = 13$",
-                    "correct": false
-                  },
-                  {
-                    "content": "un minimum égal à $-3$, atteint en $x = 0$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Soit $h(x) = x^3 - 3x$. Quelles sont les deux affirmations vraies ?",
-                "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Calculer : $h'(x) = 3x^2 - 3$ (et pas $3x - 3$, leurre qui oublie le carré). Étape 2 — Chercher : $3x^2 - 3 = 0$ donne $x = -1$ ou $x = 1$. Étape 3 — Étudier : $h'(x) = 3(x-1)(x+1)$ est positif pour $x < -1$, négatif entre $-1$ et $1$, positif pour $x > 1$. Étape 4 — Dresser : $h$ croît jusqu'à $h(-1) = 2$, décroît jusqu'à $h(1) = -2$, puis croît. Étape 5 — Lire : $h$ est croissante sur $]-\\infty\\,;\\,-1[$ (la version « décroissante » est fausse) et admet un minimum local $-2$ en $x = 1$ (pas un maximum : $h$ descend puis monte).",
-                "answers": [
-                  {
-                    "content": "$h$ est croissante sur $]-\\infty\\,;\\,-1[$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$h$ admet un minimum local égal à $-2$ en $x = 1$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$h$ est décroissante sur $]-\\infty\\,;\\,-1[$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$h$ admet un maximum local égal à $-2$ en $x = 1$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$h'(x) = 3x - 3$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Que peut-on dire des variations de $f(x) = \\dfrac{2x+1}{x+3}$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : avec $a = 2$, $b = 1$, $c = 1$, $d = 3$, $f'(x) = \\dfrac{ad - bc}{(cx+d)^2} = \\dfrac{2 \\times 3 - 1 \\times 1}{(x+3)^2} = \\dfrac{5}{(x+3)^2}$. Étape 2 — Chercher : $f'(x)$ ne s'annule jamais (le numérateur est $5$) ; la valeur interdite est $x = -3$. Étape 3 — Étudier : $f'(x) > 0$ partout où $f$ est définie. Étape 4 — Dresser : $f$ croît sur chacun des deux intervalles. Étape 5 — Lire : pas d'extremum. Le leurre « décroissante » vient d'un signe mal calculé ; « sur $\\mathbb{R}$ tout entier » oublie que $f$ n'existe pas en $-3$ ; il n'y a pas de maximum en $-3$.",
-                "answers": [
-                  {
-                    "content": "$f$ est décroissante sur $]-\\infty\\,;\\,-3[$ et sur $]-3\\,;\\,+\\infty[$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f$ est croissante sur $\\mathbb{R}$ tout entier",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f$ admet un maximum en $x = -3$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$f$ est croissante sur $]-\\infty\\,;\\,-3[$ et sur $]-3\\,;\\,+\\infty[$",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour $f(x) = x^3 + 2$, comme $f'(0) = 0$, la fonction $f$ admet un extremum en $x = 0$.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Calculer : $f'(x) = 3x^2$. Étape 2 — Chercher : $3x^2 = 0$ donne $x = 0$. Étape 3 — Étudier : $3x^2$ est positif pour $x < 0$ et aussi pour $x > 0$ : $f'$ ne change pas de signe. Étape 4 — Dresser : $f$ est croissante sur $\\mathbb{R}$ ; $f(-1) = 1$, $f(0) = 2$, $f(1) = 3$. Étape 5 — Lire : pas d'extremum en $0$, car $f'$ s'annule sans changer de signe. L'affirmation est fausse.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": false
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Pour $p(x) = 2x^2 - 8x + 3$, calcule la valeur du minimum de $p$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $p'(x) = 4x - 8$. Étape 2 — Chercher : $4x - 8 = 0$ donne $x = 2$. Étape 3 — Étudier : $4x - 8$ est négatif pour $x < 2$ et positif pour $x > 2$. Étape 4 — Dresser : $p$ décroît puis croît, avec $p(2) = 2 \\times 4 - 16 + 3 = -5$. Étape 5 — Lire : le minimum de $p$ est $-5$, atteint en $x = 2$.",
-                "answers": [
-                  {
-                    "content": "-5",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Étudier les variations d'une fonction",
+              "statement": "Dans cet exercice, tu calcules des dérivées, tu étudies leur signe, et tu en déduis les variations et les extremums de polynômes et de fonctions du type $\\dfrac{ax+b}{cx+d}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 6x + 5$, pour quelle valeur de $x$ la dérivée $f'(x)$ s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 2x - 6$. Étape 2 — Chercher : $2x - 6 = 0$ donne $x = 3$. Étape 3 — Étudier : $f'(x)$ est négatif pour $x < 3$ et positif pour $x > 3$. Étape 4 — Dresser : $f$ décroît puis croît, avec $f(3) = 9 - 18 + 5 = -4$. Étape 5 — Lire : minimum $-4$ en $x = 3$. La réponse demandée est $x = 3$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = -x^2 + 8x - 3$, quel est l'extremum de $g$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $g'(x) = -2x + 8$. Étape 2 — Chercher : $-2x + 8 = 0$ donne $x = 4$. Étape 3 — Étudier : $-2x + 8$ est positif pour $x < 4$ et négatif pour $x > 4$ (le coefficient $-2$ est négatif). Étape 4 — Dresser : $g$ croît puis décroît, avec $g(4) = -16 + 32 - 3 = 13$. Étape 5 — Lire : $g$ monte puis descend, c'est un maximum égal à $13$ en $x = 4$. Le leurre « minimum » oublie le signe de $-2$ ; « maximum $4$ en $x = 13$ » échange la valeur de $x$ et celle de $g$ ; $-3$ est $g(0)$, pas un extremum.",
+                  "answers": [
+                    {
+                      "content": "un maximum égal à $13$, atteint en $x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "un minimum égal à $13$, atteint en $x = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "un maximum égal à $4$, atteint en $x = 13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "un minimum égal à $-3$, atteint en $x = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $h(x) = x^3 - 3x$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Calculer : $h'(x) = 3x^2 - 3$ (et pas $3x - 3$, leurre qui oublie le carré). Étape 2 — Chercher : $3x^2 - 3 = 0$ donne $x = -1$ ou $x = 1$. Étape 3 — Étudier : $h'(x) = 3(x-1)(x+1)$ est positif pour $x < -1$, négatif entre $-1$ et $1$, positif pour $x > 1$. Étape 4 — Dresser : $h$ croît jusqu'à $h(-1) = 2$, décroît jusqu'à $h(1) = -2$, puis croît. Étape 5 — Lire : $h$ est croissante sur $]-\\infty\\,;\\,-1[$ (la version « décroissante » est fausse) et admet un minimum local $-2$ en $x = 1$ (pas un maximum : $h$ descend puis monte).",
+                  "answers": [
+                    {
+                      "content": "$h$ est croissante sur $]-\\infty\\,;\\,-1[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ admet un minimum local égal à $-2$ en $x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ est décroissante sur $]-\\infty\\,;\\,-1[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h$ admet un maximum local égal à $-2$ en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h'(x) = 3x - 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire des variations de $f(x) = \\dfrac{2x+1}{x+3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : avec $a = 2$, $b = 1$, $c = 1$, $d = 3$, $f'(x) = \\dfrac{ad - bc}{(cx+d)^2} = \\dfrac{2 \\times 3 - 1 \\times 1}{(x+3)^2} = \\dfrac{5}{(x+3)^2}$. Étape 2 — Chercher : $f'(x)$ ne s'annule jamais (le numérateur est $5$) ; la valeur interdite est $x = -3$. Étape 3 — Étudier : $f'(x) > 0$ partout où $f$ est définie. Étape 4 — Dresser : $f$ croît sur chacun des deux intervalles. Étape 5 — Lire : pas d'extremum. Le leurre « décroissante » vient d'un signe mal calculé ; « sur $\\mathbb{R}$ tout entier » oublie que $f$ n'existe pas en $-3$ ; il n'y a pas de maximum en $-3$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;\\,-3[$ et sur $]-3\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$ tout entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ admet un maximum en $x = -3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty\\,;\\,-3[$ et sur $]-3\\,;\\,+\\infty[$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 + 2$, comme $f'(0) = 0$, la fonction $f$ admet un extremum en $x = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 3x^2$. Étape 2 — Chercher : $3x^2 = 0$ donne $x = 0$. Étape 3 — Étudier : $3x^2$ est positif pour $x < 0$ et aussi pour $x > 0$ : $f'$ ne change pas de signe. Étape 4 — Dresser : $f$ est croissante sur $\\mathbb{R}$ ; $f(-1) = 1$, $f(0) = 2$, $f(1) = 3$. Étape 5 — Lire : pas d'extremum en $0$, car $f'$ s'annule sans changer de signe. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $p(x) = 2x^2 - 8x + 3$, calcule la valeur du minimum de $p$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $p'(x) = 4x - 8$. Étape 2 — Chercher : $4x - 8 = 0$ donne $x = 2$. Étape 3 — Étudier : $4x - 8$ est négatif pour $x < 2$ et positif pour $x > 2$. Étape 4 — Dresser : $p$ décroît puis croît, avec $p(2) = 2 \\times 4 - 16 + 3 = -5$. Étape 5 — Lire : le minimum de $p$ est $-5$, atteint en $x = 2$.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Dresser les variations et lire les extremums",
+              "statement": "Dans cet exercice, tu dérives des fonctions, tu étudies le signe de la dérivée, puis tu lis les variations et les extremums de polynômes et de fonctions du type $\\dfrac{ax+b}{cx+d}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "Calcule la dérivée, cherche où elle s'annule, puis regarde si son signe change de part et d'autre. Pour une fraction, le signe de $ad - bc$ suffit.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = 3x^2 - 18x + 5$, pour quelle valeur de $x$ la dérivée $f'(x)$ s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 6x - 18$. Étape 2 — Chercher : $6x - 18 = 0$ donne $6x = 18$, donc $x = 3$. Étape 3 — Étudier : $6x - 18$ est négatif pour $x < 3$ et positif pour $x > 3$, le signe change : il y a un extremum en $3$. Le leurre $-3$ vient d'une erreur de signe ; le leurre $6$ oublie de diviser $18$ par $6$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = x^3 - 12x$, on a $g'(x) = 3x^2 - 12 = 3(x-2)(x+2)$. Quel est le signe de $g'(x)$ pour $x$ compris entre $-2$ et $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $g'(x) = 3(x-2)(x+2)$. Étape 2 — Chercher : $g'(x) = 0$ pour $x = -2$ et $x = 2$. Étape 3 — Étudier : pour $x$ entre $-2$ et $2$, $x - 2$ est négatif, $x + 2$ est positif et $3$ est positif, donc le produit est négatif. C'est la règle du trinôme : signe opposé à celui de $3$ entre les racines. Étape 4 — Dresser : $g$ descend entre $-2$ et $2$. Étape 5 — Lire : $g$ est décroissante sur $[-2\\,;\\,2]$. Le leurre « positif » est le signe à l'extérieur des racines ; « nul » est la valeur aux racines seulement ; « change de signe en $0$ » confond $0$ avec une racine.",
+                  "answers": [
+                    {
+                      "content": "$g'(x)$ est négatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g'(x)$ est positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g'(x)$ est nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g'(x)$ change de signe en $0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $h(x) = x^3 - 6x^2$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Calculer : $h'(x) = 3x^2 - 12x = 3x(x - 4)$. Étape 2 — Chercher : $h'(x) = 0$ pour $x = 0$ et $x = 4$. Étape 3 — Étudier : $h'$ est positif pour $x < 0$, négatif entre $0$ et $4$, positif pour $x > 4$. Étape 4 — Dresser : $h$ monte jusqu'à $h(0) = 0$, descend jusqu'à $h(4) = 64 - 96 = -32$, puis remonte. Étape 5 — Lire : maximum local en $x = 0$ et minimum local $-32$ en $x = 4$. Les autres propositions inversent maximum et minimum, ou prétendent que $h$ monte entre $0$ et $4$ alors qu'elle y descend.",
+                  "answers": [
+                    {
+                      "content": "$h$ admet un maximum local en $x = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ admet un minimum local égal à $-32$ en $x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ est croissante sur $[0\\,;\\,4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h$ admet un minimum local en $x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h$ admet un maximum local égal à $-32$ en $x = 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire des variations de $f(x) = \\dfrac{5x-2}{x+1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $a = 5$, $b = -2$, $c = 1$, $d = 1$, donc $ad - bc = 5 \\times 1 - (-2) \\times 1 = 7$ et $f'(x) = \\dfrac{7}{(x+1)^2}$. Étape 2 — Chercher : $f'$ ne s'annule jamais ; la valeur interdite est $-1$. Étape 3 — Étudier : $f'(x) > 0$ partout où $f$ est définie. Étape 4 — Dresser : $f$ monte sur chacun des deux intervalles. Étape 5 — Lire : $f$ est croissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$. Elle n'est pas croissante sur $\\mathbb{R}$ tout entier, car elle n'existe pas en $-1$ ; le leurre « décroissante » vient d'une erreur de signe dans $ad - bc$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$ tout entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est décroissante puis croissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x^2 + 3x - 1$, on a $f'(x) = 3(x-1)^2$. Comme $f'(1) = 0$, la fonction $f$ admet un extremum en $x = 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f'(x) = 3(x-1)^2$. Étape 2 — Chercher : $f'(1) = 0$. Étape 3 — Étudier : un carré est toujours positif ou nul, donc $f'(x) \\geq 0$ de chaque côté de $1$ : le signe ne change pas. Étape 4 — Dresser : $f$ est croissante sur $\\mathbb{R}$. Étape 5 — Lire : il n'y a aucun extremum en $1$. L'affirmation est fausse : $f'(x_0) = 0$ ne suffit pas, il faut que $f'$ change de signe (le piège de la fiche).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $q(x) = -x^2 + 6x - 2$, calcule la valeur du maximum de $q$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $q'(x) = -2x + 6$. Étape 2 — Chercher : $-2x + 6 = 0$ donne $x = 3$. Étape 3 — Étudier : $q'(x)$ est positif pour $x < 3$ et négatif pour $x > 3$. Étape 4 — Dresser : $q$ monte puis descend. Étape 5 — Lire : le maximum est $q(3) = -9 + 18 - 2 = 7$. Attention : $3$ est l'endroit où le maximum est atteint, et $7$ sa valeur ; on demande la valeur.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "Une couturière étudie la fonction $f(x) = x^2 - 4x + 1$ pour trouver son minimum.",
             "questions": [
@@ -954,111 +1427,225 @@
           },
           "pitfall": "Ne pas oublier $f(a)$, ni écrire $y = f'(a)\\,x + f(a)$. Contre-exemple : pour $f(x) = 2x^2 - 3x + 1$ en $a = 2$, la droite fausse $y = 5x + 3$ passerait, en $x = 2$, par $y = 5 \\times 2 + 3 = 13$, alors que le point de contact est $(2\\,;\\,3)$ car $f(2) = 3$. La bonne tangente est $y = 5x - 7$ : en $x = 2$, elle donne $10 - 7 = 3$.",
           "figure": "tangente-exemple",
-          "exercise": {
-            "title": "Écrire l'équation d'une tangente",
-            "statement": "Dans cet exercice, tu calcules des nombres dérivés et tu écris des équations de tangentes à des courbes de polynômes et de fonctions du type $\\dfrac{ax+b}{cx+d}$.",
-            "exercise_type": "fixation",
-            "figure": null,
-            "questions": [
-              {
-                "content": "Pour $f(x) = x^2 + 3x - 1$, calcule le coefficient directeur de la tangente au point d'abscisse $a = 2$.",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $f(2) = 4 + 6 - 1 = 9$ (point de contact $(2\\,;\\,9)$). Étape 2 — Dériver : $f'(x) = 2x + 3$, donc $f'(2) = 2 \\times 2 + 3 = 7$. Le coefficient directeur de la tangente est le nombre dérivé $f'(2) = 7$. Étapes 3 et 4 : on écrirait ensuite $y = 7\\,(x - 2) + 9$.",
-                "answers": [
-                  {
-                    "content": "7",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est l'équation de la tangente à la courbe de $f(x) = x^2 + 3x - 1$ au point d'abscisse $a = 2$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $f(2) = 4 + 6 - 1 = 9$. Étape 2 — Dériver : $f'(x) = 2x + 3$, donc $f'(2) = 7$. Étape 3 — Remplacer : $y = 7\\,(x - 2) + 9$. Étape 4 — Développer : $y = 7x - 14 + 9 = 7x - 5$. Le leurre $y = 7x + 9$ est le piège ($y = f'(a)\\,x + f(a)$) ; $y = 9x - 11$ échange $f(a)$ et $f'(a)$ ; $y = 7x - 14$ oublie d'ajouter $f(a)$.",
-                "answers": [
-                  {
-                    "content": "$y = 7x + 9$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = 9x - 11$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = 7x - 5$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$y = 7x - 14$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $g(x) = -x^2 + 4x$, quelle est l'ordonnée à l'origine de la tangente au point d'abscisse $a = 1$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $g(1) = -1 + 4 = 3$. Étape 2 — Dériver : $g'(x) = -2x + 4$, donc $g'(1) = 2$. Étape 3 — Remplacer : $y = 2\\,(x - 1) + 3$. Étape 4 — Développer : $y = 2x - 2 + 3 = 2x + 1$. L'ordonnée à l'origine est le nombre seul : $1$.",
-                "answers": [
-                  {
-                    "content": "1",
-                    "correct": true
-                  }
-                ]
-              },
-              {
-                "content": "La tangente à la courbe de $f(x) = x^2 - 6x + 4$ au point d'abscisse $3$ est horizontale.",
-                "question_type": "true_false",
-                "explanation": "Étape 1 — Calculer : $f(3) = 9 - 18 + 4 = -5$. Étape 2 — Dériver : $f'(x) = 2x - 6$, donc $f'(3) = 0$. Étape 3 — Remplacer : $y = 0 \\times (x - 3) + (-5)$. Étape 4 — Développer : $y = -5$, une droite horizontale. L'affirmation est vraie : quand le nombre dérivé est nul, la tangente est horizontale.",
-                "answers": [
-                  {
-                    "content": "Vrai",
-                    "correct": true
-                  },
-                  {
-                    "content": "Faux",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Quelle est l'équation de la tangente à la courbe de $f(x) = x^2 - 2x + 5$ au point d'abscisse $a = 3$ ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $f(3) = 9 - 6 + 5 = 8$. Étape 2 — Dériver : $f'(x) = 2x - 2$, donc $f'(3) = 4$. Étape 3 — Remplacer : $y = 4\\,(x - 3) + 8$. Étape 4 — Développer : $y = 4x - 12 + 8 = 4x - 4$. Le leurre $y = 4x + 8$ est le piège (on écrit $f'(a)\\,x + f(a)$) ; $y = 8x - 20$ échange $f(a)$ et $f'(a)$ ; $y = 4x - 12$ oublie d'ajouter $f(a)$.",
-                "answers": [
-                  {
-                    "content": "$y = 4x - 4$",
-                    "correct": true
-                  },
-                  {
-                    "content": "$y = 4x + 8$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = 8x - 20$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$y = 4x - 12$",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "content": "Pour $f(x) = \\dfrac{3x+1}{x-2}$, quelle est l'ordonnée à l'origine de la tangente au point d'abscisse $a = 3$ ?",
-                "question_type": "numeric",
-                "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $f(3) = \\dfrac{3 \\times 3 + 1}{3 - 2} = \\dfrac{10}{1} = 10$. Étape 2 — Dériver : $f'(x) = \\dfrac{3 \\times (-2) - 1 \\times 1}{(x-2)^2} = \\dfrac{-7}{(x-2)^2}$, donc $f'(3) = \\dfrac{-7}{1} = -7$. Étape 3 — Remplacer : $y = -7\\,(x - 3) + 10$. Étape 4 — Développer : $y = -7x + 21 + 10 = -7x + 31$. L'ordonnée à l'origine est $31$.",
-                "answers": [
-                  {
-                    "content": "31",
-                    "correct": true
-                  }
-                ]
-              }
-            ]
-          },
+          "exercise": [
+            {
+              "title": "Écrire l'équation d'une tangente",
+              "statement": "Dans cet exercice, tu calcules des nombres dérivés et tu écris des équations de tangentes à des courbes de polynômes et de fonctions du type $\\dfrac{ax+b}{cx+d}$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 + 3x - 1$, calcule le coefficient directeur de la tangente au point d'abscisse $a = 2$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f(2) = 4 + 6 - 1 = 9$ (point de contact $(2\\,;\\,9)$). Étape 2 — Dériver : $f'(x) = 2x + 3$, donc $f'(2) = 2 \\times 2 + 3 = 7$. Le coefficient directeur de la tangente est le nombre dérivé $f'(2) = 7$. Étapes 3 et 4 : on écrirait ensuite $y = 7\\,(x - 2) + 9$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $f(x) = x^2 + 3x - 1$ au point d'abscisse $a = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f(2) = 4 + 6 - 1 = 9$. Étape 2 — Dériver : $f'(x) = 2x + 3$, donc $f'(2) = 7$. Étape 3 — Remplacer : $y = 7\\,(x - 2) + 9$. Étape 4 — Développer : $y = 7x - 14 + 9 = 7x - 5$. Le leurre $y = 7x + 9$ est le piège ($y = f'(a)\\,x + f(a)$) ; $y = 9x - 11$ échange $f(a)$ et $f'(a)$ ; $y = 7x - 14$ oublie d'ajouter $f(a)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 7x + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 9x - 11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 7x - 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 7x - 14$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = -x^2 + 4x$, quelle est l'ordonnée à l'origine de la tangente au point d'abscisse $a = 1$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $g(1) = -1 + 4 = 3$. Étape 2 — Dériver : $g'(x) = -2x + 4$, donc $g'(1) = 2$. Étape 3 — Remplacer : $y = 2\\,(x - 1) + 3$. Étape 4 — Développer : $y = 2x - 2 + 3 = 2x + 1$. L'ordonnée à l'origine est le nombre seul : $1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La tangente à la courbe de $f(x) = x^2 - 6x + 4$ au point d'abscisse $3$ est horizontale.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f(3) = 9 - 18 + 4 = -5$. Étape 2 — Dériver : $f'(x) = 2x - 6$, donc $f'(3) = 0$. Étape 3 — Remplacer : $y = 0 \\times (x - 3) + (-5)$. Étape 4 — Développer : $y = -5$, une droite horizontale. L'affirmation est vraie : quand le nombre dérivé est nul, la tangente est horizontale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $f(x) = x^2 - 2x + 5$ au point d'abscisse $a = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $f(3) = 9 - 6 + 5 = 8$. Étape 2 — Dériver : $f'(x) = 2x - 2$, donc $f'(3) = 4$. Étape 3 — Remplacer : $y = 4\\,(x - 3) + 8$. Étape 4 — Développer : $y = 4x - 12 + 8 = 4x - 4$. Le leurre $y = 4x + 8$ est le piège (on écrit $f'(a)\\,x + f(a)$) ; $y = 8x - 20$ échange $f(a)$ et $f'(a)$ ; $y = 4x - 12$ oublie d'ajouter $f(a)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 4x - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 4x + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 8x - 20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 4x - 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{3x+1}{x-2}$, quelle est l'ordonnée à l'origine de la tangente au point d'abscisse $a = 3$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $f(3) = \\dfrac{3 \\times 3 + 1}{3 - 2} = \\dfrac{10}{1} = 10$. Étape 2 — Dériver : $f'(x) = \\dfrac{3 \\times (-2) - 1 \\times 1}{(x-2)^2} = \\dfrac{-7}{(x-2)^2}$, donc $f'(3) = \\dfrac{-7}{1} = -7$. Étape 3 — Remplacer : $y = -7\\,(x - 3) + 10$. Étape 4 — Développer : $y = -7x + 21 + 10 = -7x + 31$. L'ordonnée à l'origine est $31$.",
+                  "answers": [
+                    {
+                      "content": "31",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Construire l'équation d'une tangente pas à pas",
+              "statement": "Dans cet exercice, tu calcules l'ordonnée $f(a)$ et le nombre dérivé $f'(a)$, puis tu écris l'équation d'une tangente sous la forme $y = mx + p$.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "hint": "La tangente en $a$ a pour équation $y = f'(a)\\,(x - a) + f(a)$. Calcule d'abord $f(a)$ et $f'(a)$, puis développe sans oublier le $-a$.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 5x + 2$ et $a = 3$, le nombre dérivé $f'(3)$ vaut ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Calculer : $f(3) = 9 - 15 + 2 = -4$, ce qui donne l'ordonnée du point de contact. Étape 2 — Dériver : $f'(x) = 2x - 5$, donc $f'(3) = 2 \\times 3 - 5 = 1$. Il ne faut pas confondre : $-4$ est $f(3)$, le nombre dérivé $f'(3)$ est le coefficient directeur de la tangente, ici $1$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $g(x) = 2x^2 - 4x + 3$ au point d'abscisse $a = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Calculer : $g(2) = 8 - 8 + 3 = 3$. Étape 2 — Dériver : $g'(x) = 4x - 4$, donc $g'(2) = 4$. Étape 3 — Remplacer : $y = 4\\,(x - 2) + 3$. Étape 4 — Développer : $y = 4x - 8 + 3$, soit $y = 4x - 5$. Le leurre $y = 4x + 3$ écrit $f'(a)\\,x + f(a)$ sans le $-a$ ; $y = 4x - 11$ vient d'une erreur de signe sur $g(2)$ ; $y = 3x - 2$ échange $g(2)$ et $g'(2)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 4x - 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 4x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 4x - 11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3x - 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = -x^2 + 6x$ et $a = 2$, la tangente a pour équation $y = mx + p$. Quelle est la valeur de $p$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Calculer : $h(2) = -4 + 12 = 8$. Étape 2 — Dériver : $h'(x) = -2x + 6$, donc $h'(2) = 2$. Étape 3 — Remplacer : $y = 2\\,(x - 2) + 8$. Étape 4 — Développer : $y = 2x - 4 + 8$, soit $y = 2x + 4$. Donc $p = 4$. Le leurre $8$ serait la valeur de $h(2)$, et $12$ viendrait de $2 \\times 2 + 8$ : on oublie que $-a$ se multiplie par $f'(a)$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La tangente à la courbe de $f(x) = x^2 - 8x + 3$ au point d'abscisse $4$ est la droite d'équation $y = -13$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Calculer : $f(4) = 16 - 32 + 3 = -13$. Étape 2 — Dériver : $f'(x) = 2x - 8$, donc $f'(4) = 0$. Étape 3 — Remplacer : $y = 0 \\times (x - 4) + (-13)$. Étape 4 — Développer : $y = -13$. La tangente est horizontale, l'affirmation est vraie. Si on oubliait $f(4)$, on écrirait $y = 0$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 + 4x$ et $a = 1$, l'équation de la tangente est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Calculer : $f(1) = 1 + 4 = 5$. Étape 2 — Dériver : $f'(x) = 2x + 4$, donc $f'(1) = 6$. Étape 3 — Remplacer : $y = 6\\,(x - 1) + 5$. Étape 4 — Développer : $y = 6x - 6 + 5$, soit $y = 6x - 1$. Le leurre $y = 6x + 5$ écrit $f'(a)\\,x + f(a)$ ; $y = 6x - 6$ oublie $f(a)$ ; $y = 5x + 1$ échange $f(1)$ et $f'(1)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 6x - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 6x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 6x - 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 5x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour écrire la tangente à la courbe de $f(x) = x^2 - 3x$ au point d'abscisse $a = 4$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Calculer : $f(4) = 16 - 12 = 4$, c'est l'ordonnée du point de contact. Étape 2 — Dériver : $f'(x) = 2x - 3$, donc $f'(4) = 5$. Étape 3 — Remplacer : on met $f(4)$ et $f'(4)$ dans la formule, soit $y = 5\\,(x - 4) + 4$. Étape 4 — Développer : $y = 5x - 20 + 4 = 5x - 16$. Remplacer vient avant développer, et il faut connaître $f(4)$ et $f'(4)$ avant de remplacer.",
+                  "answers": [
+                    {
+                      "content": "Calculer : $f(4) = 16 - 12 = 4$"
+                    },
+                    {
+                      "content": "Dériver : $f'(x) = 2x - 3$, donc $f'(4) = 5$"
+                    },
+                    {
+                      "content": "Remplacer : $y = 5\\,(x - 4) + 4$"
+                    },
+                    {
+                      "content": "Développer : $y = 5x - 20 + 4$, soit $y = 5x - 16$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
           "practice": {
             "statement": "On étudie la courbe de $f(x) = x^2 + 2x - 3$ et sa tangente au point d'abscisse $a = 1$.",
             "questions": [
@@ -1629,6 +2216,1543 @@
               "explanation": "Corrigé modèle : « Quand le nombre de semaines $x$ devient très grand, $f(x)$ se rapproche de $4$ : le bénéfice moyen hebdomadaire se stabilise près de $4$ dizaines de milliers de FCFA, soit $40\\,000$ FCFA. Comme $f(x) = 4 - \\dfrac{1}{x+1}$ et que $\\dfrac{1}{x+1} > 0$ pour $x \\geq 0$, il reste toujours inférieur à $4$ : l'atelier ne dépassera jamais $40\\,000$ FCFA de bénéfice moyen par semaine. » Barème : 1 point pour « se rapproche de $4$ », 1 point pour la valeur $40\\,000$ FCFA, 1 point pour « reste inférieur à $4$ » avec la justification.",
               "answers": [],
               "starter": "Quand x devient très grand, f(x)…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base",
+          "notions": "Limite d'un polynôme en l'infini (terme de plus haut degré), limite en l'infini de $\\dfrac{ax+b}{cx+d}$ et asymptote horizontale, valeur interdite et asymptote verticale, dérivée, variations, extremums et équation d'une tangente.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie trois polynômes aux deux infinis : $f(x) = 4x^3 - 9x + 2$, $g(x) = -5x^2 + 7x$ et $h(x) = x^4 - 2x^3$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Repère le terme de plus haut degré, puis regarde la parité de son exposant et le signe de son coefficient.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = 4x^3 - 9x + 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $4x^3$. 2. Remplacer : en $+\\infty$, $f(x)$ a la même limite que $4x^3$. 3. Déterminer : $x^3$ tend vers $+\\infty$ et $4$ est positif, donc $4x^3$ tend vers $+\\infty$. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le leurre $0$ vient de « $+\\infty - \\infty = 0$ » : on ne combine jamais les termes un à un, seul le terme de plus haut degré compte ; $4$ est le coefficient, pas la limite.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $-\\infty$ de $f(x) = 4x^3 - 9x + 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : $4x^3$. 2. Remplacer : en $-\\infty$, $f(x)$ se comporte comme $4x^3$. 3. Déterminer : l'exposant $3$ est impair, donc $x^3$ tend vers $-\\infty$ en $-\\infty$ ; avec le coefficient positif $4$, $4x^3$ tend vers $-\\infty$. 4. Conclure : $\\lim_{x \\to -\\infty} f(x) = -\\infty$. Le leurre $+\\infty$ recopie la limite en $+\\infty$ sans tenir compte de la puissance impaire ; $2$ est le terme constant.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $g(x) = -5x^2 + 7x$ est $-\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $-5x^2$. 2. Remplacer : en $-\\infty$, $g(x)$ se comporte comme $-5x^2$. 3. Déterminer : l'exposant $2$ est pair, donc $x^2$ tend vers $+\\infty$ ; on multiplie par $-5$ et on obtient $-\\infty$. 4. Conclure : $\\lim_{x \\to -\\infty} g(x) = -\\infty$, l'affirmation est vraie. L'erreur tentante serait de répondre $+\\infty$ en pensant que « $x$ tend vers $-\\infty$ » rend tout positif : ici la puissance paire est positive et seul le coefficient $-5$ fixe le signe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $h(x) = x^4 - 2x^3$ est ___.",
+                  "question_type": "select",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^4$. 2. Remplacer : en $-\\infty$, $h(x)$ se comporte comme $x^4$. 3. Déterminer : l'exposant $4$ est pair, donc $x^4$ tend vers $+\\infty$ aux deux infinis, et le coefficient $1$ est positif. 4. Conclure : $\\lim_{x \\to -\\infty} h(x) = +\\infty$. Le leurre $-\\infty$ confond « $x$ tend vers $-\\infty$ » et « $x^4$ tend vers $-\\infty$ » ; $0$ vient du piège « $+\\infty - \\infty$ » ; $1$ est le coefficient.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux fonctions dont la limite en $+\\infty$ est $+\\infty$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Repérer les termes de plus haut degré : $4x^3$, $-5x^2$, $x^4$ et $-x^3$. 2. Remplacer : chaque fonction a la limite de son terme dominant. 3. Déterminer en $+\\infty$ : $4x^3$ tend vers $+\\infty$ ; $-5x^2$ tend vers $-\\infty$ (coefficient négatif) ; $x^4$ tend vers $+\\infty$ ; $-x^3$ tend vers $-\\infty$. 4. Conclure : seules $f$ et $h$ conviennent. Les fonctions $g$ et $k$ ont un coefficient dominant négatif, et c'est lui qui change le signe de la limite.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = 4x^3 - 9x + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g(x) = -5x^2 + 7x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h(x) = x^4 - 2x^3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k(x) = -x^3 + 8$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie trois fonctions : $f(x) = \\dfrac{6x+1}{2x-4}$, $g(x) = \\dfrac{-4x+5}{8x+1}$ et $h(x) = \\dfrac{9x-2}{-3x+1}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour la limite en l'infini, forme le quotient des termes en $x$. Pour la valeur interdite, annule le dénominateur.",
+              "questions": [
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $f(x) = \\dfrac{6x+1}{2x-4}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $6x$ au numérateur et $2x$ au dénominateur ; on laisse de côté $1$ et $-4$. 2. Former : $\\dfrac{6x}{2x}$. 3. Simplifier : en barrant $x$, on obtient $3$. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = 3$. Diviser les nombres seuls donnerait $\\dfrac{1}{-4}$, ce qui est faux : la limite est le quotient $\\dfrac{a}{c}$ des coefficients de $x$.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'asymptote horizontale de la courbe de $g(x) = \\dfrac{-4x+5}{8x+1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : les termes en $x$ sont $-4x$ et $8x$. 2. Former : $\\dfrac{-4x}{8x}$. 3. Simplifier : $\\dfrac{-4}{8} = -\\dfrac{1}{2}$. 4. Conclure : l'asymptote horizontale est $y = -\\dfrac{1}{2}$. Le leurre $y = \\dfrac{1}{2}$ perd le signe ; $y = 5$ est le quotient des nombres seuls $\\dfrac{5}{1}$ ; $x = -\\dfrac{1}{8}$ est la valeur interdite, une droite verticale.",
+                  "answers": [
+                    {
+                      "content": "$y = -\\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = \\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -\\dfrac{1}{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $f(x) = \\dfrac{6x+1}{2x-4}$ est $3$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : $6x$ et $2x$. 2. Former : $\\dfrac{6x}{2x}$. 3. Simplifier : $3$. 4. Conclure : la limite est la même en $+\\infty$ et en $-\\infty$, soit $3$, et la droite $y = 3$ est asymptote horizontale aux deux infinis. L'affirmation est vraie ; il serait faux de penser que le signe de $x$ change le quotient, puisque $x$ se simplifie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La valeur interdite de $f(x) = \\dfrac{6x+1}{2x-4}$ est $x_0 = $ ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "1. Trouver : la valeur interdite annule le dénominateur : $2x - 4 = 0$ donne $2x = 4$, donc $x_0 = 2$. 2. Vérifier : en $2$, le numérateur vaut $6 \\times 2 + 1 = 13$, non nul, donc $x = 2$ est asymptote verticale. Le leurre $-4$ est le terme constant ; le leurre $-\\dfrac{1}{6}$ vient d'avoir annulé le numérateur au lieu du dénominateur.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation de l'asymptote horizontale de la courbe de $h(x) = \\dfrac{9x-2}{-3x+1}$ est ___.",
+                  "question_type": "select",
+                  "explanation": "1. Repérer : les termes en $x$ sont $9x$ et $-3x$. 2. Former : $\\dfrac{9x}{-3x}$. 3. Simplifier : $\\dfrac{9}{-3} = -3$. 4. Conclure : l'asymptote horizontale est $y = -3$. Le leurre $y = 3$ perd le signe du dénominateur ; $y = -2$ est le quotient des nombres seuls $\\dfrac{-2}{1}$ ; $y = 9$ oublie de diviser par $-3$.",
+                  "answers": [
+                    {
+                      "content": "$y = -3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 9$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la fonction $f(x) = \\dfrac{5x-1}{x+2}$ aux abords de sa valeur interdite.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le signe du numérateur en la valeur interdite compte autant que le signe du dénominateur de chaque côté.",
+              "questions": [
+                {
+                  "content": "Quelle est la valeur interdite de $f(x) = \\dfrac{5x-1}{x+2}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Trouver : la valeur interdite annule le dénominateur : $x + 2 = 0$ donne $x_0 = -2$. Le leurre $2$ oublie le signe ; le leurre $\\dfrac{1}{5}$ vient d'avoir annulé le numérateur $5x - 1$. Cette valeur sert ensuite à calculer le numérateur et à étudier le signe du dénominateur de chaque côté.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{5x-1}{x+2}$, calcule la valeur du numérateur $5x - 1$ en $x = -2$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Trouver : la valeur interdite est $x_0 = -2$. 2. Calculer : $5 \\times (-2) - 1 = -10 - 1 = -11$. Le numérateur est négatif, ce qui inverse les signes des limites par rapport à un numérateur positif. Le leurre $-9$ vient de $-10 + 1$ ; le leurre $9$ oublie les deux signes.",
+                  "answers": [
+                    {
+                      "content": "-11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $f(x) = \\dfrac{5x-1}{x+2}$ quand $x$ tend vers $-2$ par valeurs inférieures ($x < -2$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Trouver : $x_0 = -2$. 2. Calculer : le numérateur vaut $-11$, négatif. 3. Étudier : pour $x < -2$, $x + 2$ est négatif et proche de $0$ ($0^-$). 4. Appliquer : la règle des signes donne $\\dfrac{-11}{0^-} = +\\infty$, car un négatif divisé par un négatif est positif. Le leurre $-\\infty$ oublie le signe du numérateur ; $-11$ est la valeur du numérateur ; $0$ est une fausse idée d'un dénominateur proche de zéro.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{5x-1}{x+2}$, la limite quand $x$ tend vers $-2$ par valeurs supérieures ($x > -2$) est ___.",
+                  "question_type": "select",
+                  "explanation": "1. Trouver : $x_0 = -2$. 2. Calculer : le numérateur vaut $-11$, négatif. 3. Étudier : pour $x > -2$, $x + 2$ est positif et proche de $0$ ($0^+$). 4. Appliquer : $\\dfrac{-11}{0^+} = -\\infty$. Le leurre $+\\infty$ vient d'un numérateur pris positif ; $-11$ est la valeur du numérateur ; $0$ confond dénominateur petit et quotient petit.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite d'équation $x = -2$ est asymptote verticale à la courbe de $f(x) = \\dfrac{5x-1}{x+2}$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Trouver : $x_0 = -2$. 2. Calculer : le numérateur vaut $-11$, non nul. 3. Étudier : le dénominateur tend vers $0^-$ à gauche et vers $0^+$ à droite. 4. Appliquer : les limites sont $+\\infty$ à gauche et $-\\infty$ à droite, donc la droite $x = -2$ est asymptote verticale. L'affirmation est vraie ; le fait que le numérateur soit négatif change les signes des limites, pas l'existence de l'asymptote.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On étudie la fonction $f(x) = x^2 - 10x + 7$ définie sur $\\mathbb{R}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dérive $f$, cherche où $f'$ s'annule, étudie son signe, puis utilise $y = f'(a)\\,(x - a) + f(a)$ pour la tangente.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 7$, pour quelle valeur de $x$ la dérivée $f'(x)$ s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f'(x) = 2x - 10$. 2. Chercher : $2x - 10 = 0$ donne $2x = 10$, donc $x = 5$. 3. Étudier : $2x - 10$ est négatif pour $x < 5$ et positif pour $x > 5$, le signe change donc il y a un extremum en $5$. Le leurre $10$ oublie de diviser par $2$ ; le leurre $-5$ vient d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $f(x) = x^2 - 10x + 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $f'(x) = 2x - 10$. 2. Chercher : $f'(x) = 0$ pour $x = 5$. 3. Étudier : $f'(x) < 0$ pour $x < 5$ et $f'(x) > 0$ pour $x > 5$. 4. Dresser : $f$ descend jusqu'à $x = 5$ puis remonte. Le leurre « croissante puis décroissante » inverse les signes de $f'$ ; « croissante sur $\\mathbb{R}$ » ignore que $f'$ est négative avant $5$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;\\,5]$ puis croissante sur $[5\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty\\,;\\,5]$ puis décroissante sur $[5\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la valeur du minimum de $f(x) = x^2 - 10x + 7$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f'(x) = 2x - 10$. 2. Chercher : $f'(x) = 0$ pour $x = 5$. 3. Étudier : $f$ descend puis monte, donc $x = 5$ donne un minimum. 4. Dresser et lire : $f(5) = 25 - 50 + 7 = -18$. Le minimum vaut $-18$, atteint en $x = 5$. Le leurre $5$ est l'endroit du minimum, pas sa valeur.",
+                  "answers": [
+                    {
+                      "content": "-18",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^2 - 10x + 7$, la tangente au point d'abscisse $a = 1$ a pour équation $y = mx + p$. Quelle est la valeur de $p$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f(1) = 1 - 10 + 7 = -2$. 2. Dériver : $f'(x) = 2x - 10$, donc $f'(1) = -8$. 3. Remplacer : $y = -8\\,(x - 1) + (-2)$. 4. Développer : $y = -8x + 8 - 2$, soit $y = -8x + 6$. Donc $p = 6$. Le leurre $-2$ est $f(1)$ ; l'équation fausse $y = -8x - 2$ oublie le $-a$ dans $f'(a)\\,(x - a)$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La tangente à la courbe de $f(x) = x^2 - 10x + 7$ au point d'abscisse $5$ est la droite d'équation $y = -18$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Calculer : $f(5) = 25 - 50 + 7 = -18$. 2. Dériver : $f'(x) = 2x - 10$, donc $f'(5) = 0$. 3. Remplacer : $y = 0 \\times (x - 5) + (-18)$. 4. Développer : $y = -18$. La tangente est horizontale au point où la dérivée s'annule : l'affirmation est vraie. Écrire $y = 0$ serait oublier $f(5)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Situations de la vie courante",
+          "notions": "Fonctions rationnelles et polynômes dans des situations ivoiriennes (marché de Treichville, pêche à San-Pédro, anacarde de Bondoukou, révisions à Gagnoa) : limites en l'infini, asymptotes horizontale et verticale, valeur interdite, dérivée, variations, extremums, tangente.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Salimata vend de l'attiéké au marché de Treichville, à Abidjan. Dans cette situation d'exemple, le prix moyen d'un sachet, en FCFA, quand elle en prépare $x$ dizaines ($x \\geq 0$), est modélisé par $P(x) = \\dfrac{200x + 300}{x + 1}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les valeurs demandées en remplaçant $x$. Pour le sens de variation, regarde le signe de $ad - bc$ ; pour la limite, forme le quotient des termes en $x$.",
+              "questions": [
+                {
+                  "content": "Le prix moyen d'un sachet est $P(x) = \\dfrac{200x + 300}{x + 1}$ FCFA pour $x$ dizaines de sachets. Calcule $P(0)$.",
+                  "question_type": "numeric",
+                  "unit": "FCFA",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $P(0) = \\dfrac{200 \\times 0 + 300}{0 + 1}$. 2. Calculer : le numérateur vaut $300$ et le dénominateur vaut $1$. 3. Conclure : $P(0) = 300$ FCFA. Pour $x = 0$, les termes en $x$ disparaissent : il ne reste que les nombres seuls $\\dfrac{b}{d}$, valeur à ne pas confondre avec la limite en l'infini, qui est $\\dfrac{a}{c}$.",
+                  "answers": [
+                    {
+                      "content": "300",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le prix moyen d'un sachet est $P(x) = \\dfrac{200x + 300}{x + 1}$ FCFA pour $x$ dizaines de sachets. Calcule $P(4)$.",
+                  "question_type": "numeric",
+                  "unit": "FCFA",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $P(4) = \\dfrac{200 \\times 4 + 300}{4 + 1}$. 2. Calculer : le numérateur vaut $800 + 300 = 1100$ et le dénominateur vaut $5$. 3. Conclure : $P(4) = \\dfrac{1100}{5} = 220$ FCFA. Le leurre $275$ vient de $\\dfrac{1100}{4}$ : le dénominateur est $x + 1 = 5$, pas $x$.",
+                  "answers": [
+                    {
+                      "content": "220",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $P(x) = \\dfrac{200x + 300}{x + 1}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $200x$ au numérateur et $x$ au dénominateur. 2. Former : $\\dfrac{200x}{x}$. 3. Simplifier : en barrant $x$, on obtient $200$. 4. Conclure : $\\lim_{x \\to +\\infty} P(x) = 200$ ; la droite $y = 200$ est asymptote horizontale. Le leurre $300$ est le quotient des nombres seuls $\\dfrac{300}{1}$, c'est-à-dire $P(0)$, et non la limite.",
+                  "answers": [
+                    {
+                      "content": "200",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $P(x) = \\dfrac{200x + 300}{x + 1}$ avec $x \\geq 0$, quel est le sens de variation de $P$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $a = 200$, $b = 300$, $c = 1$, $d = 1$, donc $ad - bc = 200 - 300 = -100$ et $P'(x) = \\dfrac{-100}{(x+1)^2}$. 2. Chercher : $P'$ ne s'annule jamais. 3. Étudier : le numérateur $-100$ est négatif et le carré est positif, donc $P'(x) < 0$ sur $[0\\,;\\,+\\infty[$. 4. Lire : $P$ est décroissante. Le leurre « croissante » vient d'un signe de $ad - bc$ pris positif ; le prix moyen baisse de $300$ vers $200$ FCFA quand elle prépare plus de sachets.",
+                  "answers": [
+                    {
+                      "content": "$P$ est décroissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P$ est croissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P$ est croissante puis décroissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $P(x) = \\dfrac{200x + 300}{x + 1}$ pour $x \\geq 0$, le prix moyen d'un sachet peut-il descendre jusqu'à $200$ FCFA ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : $P(x) = 200 + \\dfrac{100}{x+1}$, car $\\dfrac{200x + 300}{x+1} = 200 + \\dfrac{100}{x+1}$. 2. Étudier : $\\dfrac{100}{x+1}$ est strictement positif pour $x \\geq 0$, donc $P(x) > 200$ toujours. 3. Conclure : le prix se rapproche de $200$ sans jamais l'atteindre. Dire « oui, car la limite vaut $200$ » confond limite et valeur atteinte ; et $P(100) = \\dfrac{20\\,300}{101}$ n'est pas $200$.",
+                  "answers": [
+                    {
+                      "content": "Non : le prix se rapproche de $200$ FCFA sans jamais l'atteindre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la limite vaut $200$, donc le prix finit par valoir $200$ FCFA",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : le prix vaut $200$ FCFA pour $x = 100$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un pêcheur de San-Pédro vend des caisses de poisson. Dans cette situation d'exemple, son bénéfice, en milliers de FCFA, pour $x$ caisses vendues ($0 \\leq x \\leq 14$), est modélisé par $B(x) = -x^2 + 14x - 24$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dérive $B$, cherche où $B'$ s'annule, étudie son signe pour trouver le maximum. Pour la tangente, utilise $y = B'(a)\\,(x - a) + B(a)$.",
+              "questions": [
+                {
+                  "content": "Le bénéfice d'un pêcheur est $B(x) = -x^2 + 14x - 24$ (en milliers de FCFA) pour $x$ caisses vendues. Calcule $B(3)$.",
+                  "question_type": "numeric",
+                  "unit": "milliers",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $B(3) = -3^2 + 14 \\times 3 - 24$. 2. Calculer : $-9 + 42 - 24$. 3. Conclure : $B(3) = 9$ milliers de FCFA. L'erreur typique est d'écrire $(-3)^2 = 9$ au lieu de $-3^2 = -9$ : le signe moins devant $x^2$ s'applique au carré, ce qui donnerait $9 + 42 - 24 = 27$.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $B(x) = -x^2 + 14x - 24$, pour quelle valeur de $x$ la dérivée $B'(x)$ s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $B'(x) = -2x + 14$. 2. Chercher : $-2x + 14 = 0$ donne $2x = 14$, donc $x = 7$. 3. Étudier : $B'(x)$ est positif pour $x < 7$ et négatif pour $x > 7$ : le signe change, il y a un extremum en $7$. Le leurre $14$ oublie de diviser par $2$ ; le leurre $-7$ vient d'une erreur de signe.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $B(x) = -x^2 + 14x - 24$ avec $0 \\leq x \\leq 14$, quel est le sens de variation de $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $B'(x) = -2x + 14$. 2. Chercher : $B'(x) = 0$ pour $x = 7$. 3. Étudier : $B'(x) > 0$ pour $x < 7$ et $B'(x) < 0$ pour $x > 7$. 4. Dresser : $B$ monte jusqu'à $x = 7$ puis descend. Le leurre « décroissante puis croissante » inverse les signes ; « croissante sur tout l'intervalle » ignore que le bénéfice baisse au-delà de $7$ caisses.",
+                  "answers": [
+                    {
+                      "content": "$B$ est croissante sur $[0\\,;\\,7]$ puis décroissante sur $[7\\,;\\,14]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$ est décroissante sur $[0\\,;\\,7]$ puis croissante sur $[7\\,;\\,14]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$ est croissante sur $[0\\,;\\,14]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice d'un pêcheur est $B(x) = -x^2 + 14x - 24$ milliers de FCFA pour $x$ caisses, avec $0 \\leq x \\leq 14$. Calcule le bénéfice maximal, en FCFA.",
+                  "question_type": "numeric",
+                  "unit": "FCFA",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $B'(x) = -2x + 14$. 2. Chercher : $B'(x) = 0$ pour $x = 7$. 3. Étudier : $B$ monte puis descend, donc $x = 7$ donne un maximum. 4. Lire : $B(7) = -49 + 98 - 24 = 25$ milliers de FCFA, soit $25\\,000$ FCFA. L'erreur typique est de répondre $25$ sans convertir les milliers en FCFA, ou de répondre $7$, qui est le nombre de caisses et non le bénéfice.",
+                  "answers": [
+                    {
+                      "content": "25000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $B(x) = -x^2 + 14x - 24$ au point d'abscisse $a = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $B(3) = -9 + 42 - 24 = 9$. 2. Dériver : $B'(x) = -2x + 14$, donc $B'(3) = 8$. 3. Remplacer : $y = 8\\,(x - 3) + 9$. 4. Développer : $y = 8x - 24 + 9$, soit $y = 8x - 15$. Le leurre $y = 8x + 9$ écrit $B'(a)\\,x + B(a)$ sans le $-a$ ; $y = 8x - 33$ vient d'une erreur de signe sur $B(3)$ ; $y = 9x - 19$ échange $B(3)$ et $B'(3)$.",
+                  "answers": [
+                    {
+                      "content": "$y = 8x - 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 8x + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 8x - 33$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 9x - 19$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une coopérative d'anacarde de Bondoukou traite $x$ tonnes de noix par jour ($0 \\leq x < 8$), car sa machine ne peut pas en traiter plus de 8. Dans cette situation d'exemple, le coût moyen, en milliers de FCFA par tonne, est modélisé par $C(x) = \\dfrac{20x + 40}{8 - x}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La valeur interdite annule le dénominateur $8 - x$. Pour le signe de la limite, regarde le numérateur en cette valeur et le signe de $8 - x$ quand $x < 8$.",
+              "questions": [
+                {
+                  "content": "Quelle est la valeur interdite de $C(x) = \\dfrac{20x + 40}{8 - x}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Trouver : la valeur interdite annule le dénominateur : $8 - x = 0$ donne $x_0 = 8$. 2. Vérifier : en $8$, le numérateur vaut $20 \\times 8 + 40 = 200$, non nul. Le leurre $-2$ vient d'avoir annulé le numérateur ; le leurre $-8$ vient d'un signe perdu en résolvant $8 - x = 0$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût moyen est $C(x) = \\dfrac{20x + 40}{8 - x}$ milliers de FCFA par tonne. Calcule $C(4)$.",
+                  "question_type": "numeric",
+                  "unit": "milliers",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $C(4) = \\dfrac{20 \\times 4 + 40}{8 - 4}$. 2. Calculer : le numérateur vaut $80 + 40 = 120$ et le dénominateur vaut $4$. 3. Conclure : $C(4) = \\dfrac{120}{4} = 30$ milliers de FCFA par tonne. L'erreur typique est d'écrire $8 + 4$ au dénominateur, ce qui donnerait $10$.",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $C(x) = \\dfrac{20x + 40}{8 - x}$ quand $x$ tend vers $8$ par valeurs inférieures ($x < 8$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Trouver : $x_0 = 8$. 2. Calculer : le numérateur vaut $200$, positif. 3. Étudier : pour $x < 8$, $8 - x$ est positif et proche de $0$ ($0^+$). 4. Appliquer : $\\dfrac{200}{0^+} = +\\infty$. Le leurre $-\\infty$ prendrait $8 - x$ négatif, ce qui arrive seulement pour $x > 8$, hors du domaine ; $200$ est la valeur du numérateur ; $0$ est une fausse idée d'un dénominateur proche de zéro.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite d'équation $x = 8$ est asymptote verticale à la courbe de $C(x) = \\dfrac{20x + 40}{8 - x}$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Trouver : $x_0 = 8$. 2. Calculer : le numérateur vaut $200$, non nul. 3. Étudier : $8 - x$ tend vers $0^+$ quand $x < 8$. 4. Appliquer : la limite en $8^-$ est $+\\infty$, donc $x = 8$ est asymptote verticale. L'affirmation est vraie : plus la coopérative s'approche de la capacité de sa machine, plus le coût moyen devient immense.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $C(x) = \\dfrac{20x + 40}{8 - x}$ sur $[0\\,;\\,8[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $a = 20$, $b = 40$, $c = -1$, $d = 8$, donc $ad - bc = 160 - (40)(-1) = 160 + 40 = 200$ et $C'(x) = \\dfrac{200}{(8-x)^2}$. 2. Chercher : $C'$ ne s'annule jamais. 3. Étudier : $C'(x) > 0$ sur $[0\\,;\\,8[$. 4. Lire : $C$ est croissante. Le leurre « décroissante » vient d'un signe perdu dans $-bc$ : avec $c = -1$, le terme $-bc$ vaut $+40$ et non $-40$.",
+                  "answers": [
+                    {
+                      "content": "$C$ est croissante sur $[0\\,;\\,8[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est décroissante sur $[0\\,;\\,8[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ est décroissante puis croissante sur $[0\\,;\\,8[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Kouassi, élève de Terminale A1 à Gagnoa, prépare le baccalauréat. Dans cette situation d'exemple, la note sur 20 qu'il peut espérer à un devoir après $x$ semaines de révision ($x \\geq 0$) est modélisée par $N(x) = \\dfrac{16x + 8}{x + 2}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplace $x$ pour les valeurs. La limite en l'infini est le quotient des termes en $x$. Pour la tangente, calcule $N(2)$ et $N'(2)$ avec $N'(x) = \\dfrac{ad - bc}{(cx+d)^2}$.",
+              "questions": [
+                {
+                  "content": "La note espérée est $N(x) = \\dfrac{16x + 8}{x + 2}$ après $x$ semaines de révision. Calcule $N(0)$.",
+                  "question_type": "numeric",
+                  "unit": "points",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $N(0) = \\dfrac{16 \\times 0 + 8}{0 + 2}$. 2. Calculer : le numérateur vaut $8$ et le dénominateur vaut $2$. 3. Conclure : $N(0) = \\dfrac{8}{2} = 4$. Avant toute révision, la note espérée est $4$ sur $20$. Le leurre $8$ oublie de diviser par le dénominateur ; le leurre $16$ est la limite en l'infini, pas la valeur en $0$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La note espérée après $x$ semaines est $N(x) = \\dfrac{16x + 8}{x + 2}$. La note espérée au bout de $6$ semaines est $13$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Remplacer : $N(6) = \\dfrac{16 \\times 6 + 8}{6 + 2}$. 2. Calculer : le numérateur vaut $96 + 8 = 104$ et le dénominateur vaut $8$. 3. Conclure : $N(6) = \\dfrac{104}{8} = 13$. L'affirmation est vraie. Une erreur fréquente est d'oublier d'ajouter $8$ au numérateur et d'obtenir $\\dfrac{96}{8} = 12$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $N(x) = \\dfrac{16x + 8}{x + 2}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $16x$ et $x$ ; on laisse de côté $8$ et $2$. 2. Former : $\\dfrac{16x}{x}$. 3. Simplifier : $16$. 4. Conclure : $\\lim_{x \\to +\\infty} N(x) = 16$ ; la note espérée ne dépasse jamais $16$ sur $20$ avec ce modèle. Le leurre $4$ est le quotient des nombres seuls $\\dfrac{8}{2}$, c'est-à-dire $N(0)$.",
+                  "answers": [
+                    {
+                      "content": "16",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $N(x) = \\dfrac{16x + 8}{x + 2}$ avec $x \\geq 0$, quel est le sens de variation de $N$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $a = 16$, $b = 8$, $c = 1$, $d = 2$, donc $ad - bc = 32 - 8 = 24$ et $N'(x) = \\dfrac{24}{(x+2)^2}$. 2. Chercher : $N'$ ne s'annule jamais. 3. Étudier : $N'(x) > 0$ pour tout $x \\geq 0$. 4. Lire : $N$ est croissante : plus Kouassi révise, plus sa note espérée augmente. Le leurre « décroissante » vient d'un signe de $ad - bc$ inversé.",
+                  "answers": [
+                    {
+                      "content": "$N$ est croissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$N$ est décroissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N$ est constante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $N(x) = \\dfrac{16x + 8}{x + 2}$ au point d'abscisse $a = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $N(2) = \\dfrac{40}{4} = 10$. 2. Dériver : $N'(x) = \\dfrac{24}{(x+2)^2}$, donc $N'(2) = \\dfrac{24}{16} = \\dfrac{3}{2}$. 3. Remplacer : $y = \\dfrac{3}{2}\\,(x - 2) + 10$. 4. Développer : $y = \\dfrac{3}{2}x - 3 + 10$, soit $y = \\dfrac{3}{2}x + 7$. Le leurre $y = \\dfrac{3}{2}x + 10$ écrit $N'(a)\\,x + N(a)$ sans le $-a$ ; $y = \\dfrac{3}{2}x + 13$ vient de $x + 2$ au lieu de $x - 2$ ; $y = 6x - 2$ utilise $N'(0)$ au lieu de $N'(2)$.",
+                  "answers": [
+                    {
+                      "content": "$y = \\dfrac{3}{2}x + 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = \\dfrac{3}{2}x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = \\dfrac{3}{2}x + 13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 6x - 2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier",
+          "notions": "Justifier une limite de polynôme (terme de plus haut degré, parité), une asymptote horizontale, une limite à gauche ou à droite de la valeur interdite, un extremum et une équation de tangente ; repérer l'erreur dans un raisonnement d'élève.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On justifie des limites de polynômes en l'infini. Dans chaque question, appuie-toi sur la règle de la leçon : un polynôme a la même limite que son terme de plus haut degré.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque polynôme, repère le terme de plus haut degré, puis regarde la parité de son exposant et le signe de son coefficient avant de conclure.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = x^2 - 4x$, la limite en $+\\infty$ est $0$, car $x^2$ tend vers $+\\infty$ et $-4x$ vers $-\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^2$. 2. Remplacer : en $+\\infty$, $f(x)$ a la même limite que $x^2$. 3. Déterminer : $x^2$ tend vers $+\\infty$. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$, l'affirmation est fausse. Le raisonnement « $+\\infty - \\infty = 0$ » est le piège de la leçon : pour $x = 1000$, $f(x) = 1\\,000\\,000 - 4000 = 996\\,000$, très loin de $0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = x^2 - 4x$, et quelle est la bonne justification ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^2$. 2. Remplacer : $f(x)$ a la même limite que $x^2$ en $+\\infty$. 3. Déterminer : $x^2$ tend vers $+\\infty$. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$, car seul le terme dominant compte. La justification « somme des limites » donne $0$, ce qui est faux ; et $-4x$ tend vers $-\\infty$ en $+\\infty$, non vers $+\\infty$ : l'énoncé « $-4x$ tend vers $+\\infty$ » est faux.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$, car $f(x)$ a la même limite que son terme de plus haut degré $x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$, car on additionne les limites $+\\infty$ et $-\\infty$ des deux termes",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$, car $-4x$ tend aussi vers $+\\infty$ en $+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $g(x) = -2x^3 + 5x$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $-2x^3$. 2. Remplacer : $g(x)$ a la même limite que $-2x^3$ aux deux infinis. 3. Déterminer : en $+\\infty$, $x^3$ tend vers $+\\infty$ et le coefficient $-2$ donne $-\\infty$ ; en $-\\infty$, $x^3$ tend vers $-\\infty$ et le coefficient $-2$ donne $+\\infty$. 4. Conclure : sont vraies la limite $-\\infty$ en $+\\infty$ et la limite $+\\infty$ en $-\\infty$. Les deux autres limites oublient la puissance impaire ou le signe du coefficient ; $5$ est le coefficient du terme secondaire.",
+                  "answers": [
+                    {
+                      "content": "La limite de $g$ en $+\\infty$ est $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite de $g$ en $-\\infty$ est $+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite de $g$ en $+\\infty$ est $+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite de $g$ en $-\\infty$ est $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite de $g$ en $+\\infty$ est $5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le polynôme $p(x) = 3x^4 - x^3$ a pour limite $+\\infty$ en $+\\infty$ et aussi en $-\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $3x^4$. 2. Remplacer : $p(x)$ a la même limite que $3x^4$. 3. Déterminer : l'exposant $4$ est pair, donc $x^4$ tend vers $+\\infty$ aux deux infinis, et $3$ est positif. 4. Conclure : la limite est $+\\infty$ en $+\\infty$ comme en $-\\infty$, l'affirmation est vraie. Le terme $-x^3$ change de signe selon l'infini, mais il ne commande pas la limite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme que la limite en $-\\infty$ de $q(x) = x^3 - 5x^2$ est $+\\infty$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^3$. 2. Remplacer : en $-\\infty$, $q(x)$ a la même limite que $x^3$. 3. Déterminer : l'exposant $3$ est impair, donc $x^3$ tend vers $-\\infty$ en $-\\infty$. 4. Conclure : $\\lim_{x \\to -\\infty} q(x) = -\\infty$. L'élève a oublié la parité : son résultat est faux, ce n'est pas $0$ non plus, car $-5x^2$ ne commande pas la limite.",
+                  "answers": [
+                    {
+                      "content": "Il a oublié que $x^3$ tend vers $-\\infty$ en $-\\infty$ : la limite de $q$ est $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'a pas d'erreur : la limite de $q$ en $-\\infty$ est bien $+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il s'est trompé de terme : la limite de $q$ en $-\\infty$ est $0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On justifie des asymptotes horizontales de fonctions du type $\\dfrac{ax+b}{cx+d}$. Rappel : la limite en l'infini est le quotient des termes en $x$, jamais celui des nombres seuls.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Forme toujours le quotient des termes en $x$ avant de conclure. Si une valeur est inconnue, écris l'égalité qui la relie à la limite, puis résous-la.",
+              "questions": [
+                {
+                  "content": "La courbe de $f(x) = \\dfrac{3x+6}{x+1}$ a pour asymptote horizontale $y = 6$, car $\\dfrac{b}{d} = \\dfrac{6}{1} = 6$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : les termes en $x$ sont $3x$ et $x$. 2. Former : $\\dfrac{3x}{x}$. 3. Simplifier : $3$. 4. Conclure : l'asymptote horizontale est $y = 3$. L'affirmation est fausse : $\\dfrac{b}{d}$ est le quotient des nombres seuls, c'est la valeur de $f(0)$, pas la limite en l'infini. Pour $x = 1000$, $f(x) = \\dfrac{3006}{1001} \\approx 3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'asymptote horizontale de $f(x) = \\dfrac{3x+6}{x+1}$, et quelle est la bonne justification ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : $3x$ et $x$. 2. Former : le quotient $\\dfrac{3x}{x}$. 3. Simplifier : $3$. 4. Conclure : $y = 3$ est asymptote horizontale. La justification « $\\dfrac{6}{1} = 6$ » utilise les nombres seuls, ce qui est le piège de la leçon ; la somme $3 + 6 = 9$ ne correspond à aucune règle.",
+                  "answers": [
+                    {
+                      "content": "$y = 3$ : on forme le quotient $\\dfrac{3x}{x} = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 6$ : on forme le quotient $\\dfrac{6}{1} = 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 9$ : on additionne les coefficients $3$ et $6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $a$ la courbe de $g(x) = \\dfrac{ax+1}{2x-5}$ a-t-elle pour asymptote horizontale la droite $y = 4$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $ax$ et $2x$. 2. Former : le quotient $\\dfrac{ax}{2x}$. 3. Simplifier : $\\dfrac{a}{2}$. 4. Conclure : l'asymptote est $y = \\dfrac{a}{2}$, et on veut $\\dfrac{a}{2} = 4$, donc $a = 8$. Le leurre $2$ vient de $\\dfrac{4}{2}$ : on a divisé au lieu de multiplier par $2$ ; le leurre $4$ confond $a$ et la valeur de l'asymptote.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si une fonction $\\dfrac{ax+b}{cx+d}$ (avec $c \\neq 0$) a pour limite $2$ en $+\\infty$, elle a aussi pour limite $2$ en $-\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : les termes en $x$ sont $ax$ et $cx$. 2. Former : $\\dfrac{ax}{cx}$. 3. Simplifier : en barrant $x$, on obtient $\\dfrac{a}{c}$, un nombre qui ne dépend plus de $x$. 4. Conclure : la limite est $\\dfrac{a}{c}$ aux deux infinis, donc ici $2$ en $+\\infty$ comme en $-\\infty$. L'affirmation est vraie. Contrairement à un polynôme, une fraction de ce type n'a pas de limite différente selon le signe de $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = \\dfrac{10x-3}{5x+4}$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Repérer : les termes en $x$ sont $10x$ et $5x$. 2. Former : $\\dfrac{10x}{5x}$. 3. Simplifier : $2$. 4. Conclure : la limite est $2$ en $+\\infty$ et en $-\\infty$. Sont donc vraies les affirmations sur les limites $2$. La limite « $-2$ » perd un signe, « $10$ » oublie de diviser par $5$, et « $-\\dfrac{3}{4}$ » est le quotient des nombres seuls.",
+                  "answers": [
+                    {
+                      "content": "La limite de $h$ en $+\\infty$ est $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite de $h$ en $-\\infty$ est $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite de $h$ en $-\\infty$ est $-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite de $h$ en $+\\infty$ est $10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite de $h$ en $+\\infty$ est $-\\dfrac{3}{4}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On justifie des limites à gauche et à droite d'une valeur interdite. Rappel : pour une fraction $\\dfrac{ax+b}{cx+d}$, on regarde le signe du numérateur en la valeur interdite et le signe du dénominateur de chaque côté.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Trouve la valeur interdite, calcule le numérateur en cette valeur, puis applique la règle des signes avec $0^-$ à gauche et $0^+$ à droite si le dénominateur est croissant.",
+              "questions": [
+                {
+                  "content": "Pour $f(x) = \\dfrac{4x-3}{x-2}$, la limite quand $x$ tend vers $2$ par valeurs inférieures est $+\\infty$, car $4x - 3$ est positif.",
+                  "question_type": "true_false",
+                  "explanation": "1. Trouver : $x - 2 = 0$ donne $x_0 = 2$. 2. Calculer : le numérateur vaut $4 \\times 2 - 3 = 5$, positif. 3. Étudier : pour $x < 2$, $x - 2$ est négatif ($0^-$). 4. Appliquer : $\\dfrac{5}{0^-} = -\\infty$. L'affirmation est fausse : le signe du numérateur ne suffit pas, il faut aussi celui du dénominateur, négatif à gauche de $2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x) = \\dfrac{4x-3}{x-2}$ quand $x$ tend vers $2$ par valeurs inférieures, et quelle est la bonne justification ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Trouver : $x_0 = 2$. 2. Calculer : le numérateur vaut $5$, positif. 3. Étudier : pour $x < 2$, $x - 2$ tend vers $0^-$. 4. Appliquer : $\\dfrac{5}{0^-} = -\\infty$. La justification « $0^+$ » prend le mauvais côté ; la réponse « $5$ » remplace $x$ dans le numérateur seulement et oublie que le dénominateur tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$ : le numérateur vaut $5$ et $x - 2$ tend vers $0^-$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$ : le numérateur vaut $5$ et $x - 2$ tend vers $0^+$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ : on remplace $x$ par $2$ au numérateur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $m$ la fonction $g(x) = \\dfrac{x+3}{2x-m}$ a-t-elle pour valeur interdite $4$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Trouver : la valeur interdite annule le dénominateur, donc $2x - m = 0$ pour $x = 4$. 2. Calculer : $2 \\times 4 - m = 0$ donne $m = 8$. 3. Vérifier : en $4$, le numérateur vaut $7$, non nul, donc $x = 4$ est bien asymptote verticale. Le leurre $2$ vient de $\\dfrac{4}{2}$ ; le leurre $4$ confond $m$ et la valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La courbe de $k(x) = \\dfrac{2x+5}{x+3}$ admet pour asymptote verticale la droite d'équation $x = 3$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Trouver : $x + 3 = 0$ donne $x_0 = -3$, et non $3$. 2. Calculer : en $-3$, le numérateur vaut $2 \\times (-3) + 5 = -1$, non nul. 3. Conclure : la droite $x = -3$ est asymptote verticale. L'affirmation est fausse : on a oublié le signe en résolvant $x + 3 = 0$. En $x = 3$, le dénominateur vaut $6$, il ne s'annule pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{6-x}{x-1}$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Trouver : $x - 1 = 0$ donne $x_0 = 1$. 2. Calculer : le numérateur vaut $6 - 1 = 5$, positif. 3. Étudier : à gauche de $1$, $x - 1$ est négatif ; à droite, il est positif. 4. Appliquer : $\\dfrac{5}{0^-} = -\\infty$ à gauche et $\\dfrac{5}{0^+} = +\\infty$ à droite. Sont vraies la limite $-\\infty$ à gauche et la limite $+\\infty$ à droite. Les deux autres limites inversent les côtés, et la valeur interdite $-1$ vient d'un signe perdu.",
+                  "answers": [
+                    {
+                      "content": "La limite à gauche de $1$ est $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite à droite de $1$ est $+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite à gauche de $1$ est $+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite à droite de $1$ est $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur interdite est $-1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On justifie des variations, des extremums et des tangentes. Rappel : un extremum apparaît là où $f'$ s'annule en changeant de signe, et la tangente en $a$ est $y = f'(a)\\,(x - a) + f(a)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule la dérivée, étudie son signe de part et d'autre de chaque valeur où elle s'annule, et n'oublie pas $f(a)$ dans l'équation d'une tangente.",
+              "questions": [
+                {
+                  "content": "Pour $k(x) = -x^3 + 4$, on a $k'(x) = -3x^2$. Comme $k'(0) = 0$, la fonction $k$ admet un extremum en $x = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Calculer : $k'(x) = -3x^2$. 2. Chercher : $k'(0) = 0$. 3. Étudier : $-3x^2$ est négatif ou nul de chaque côté de $0$ : le signe ne change pas. 4. Dresser : $k$ est décroissante sur $\\mathbb{R}$. 5. Lire : aucun extremum en $0$. L'affirmation est fausse : une dérivée nulle ne suffit pas, il faut un changement de signe (le piège de la leçon).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire des variations de $f(x) = \\dfrac{7x+2}{x-3}$, et quelle est la bonne justification ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $a = 7$, $b = 2$, $c = 1$, $d = -3$, donc $ad - bc = 7 \\times (-3) - 2 \\times 1 = -23$ et $f'(x) = \\dfrac{-23}{(x-3)^2}$. 2. Étudier : $f'(x) < 0$ partout où $f$ est définie. 3. Lire : $f$ est décroissante sur $]-\\infty\\,;\\,3[$ et sur $]3\\,;\\,+\\infty[$, mais pas sur $\\mathbb{R}$ entier, car $f(2) = -16$ et $f(4) = 30$. Le leurre « $ad - bc = 23$ » oublie le signe de $d$.",
+                  "answers": [
+                    {
+                      "content": "Décroissante sur chaque intervalle, car $ad - bc = -23 < 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croissante sur chaque intervalle, car $ad - bc = 23 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante sur $\\mathbb{R}$ tout entier, car $ad - bc < 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $k$ la fonction $f(x) = x^2 - 8x + k$ a-t-elle pour minimum $-5$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f'(x) = 2x - 8$. 2. Chercher : $2x - 8 = 0$ donne $x = 4$. 3. Étudier : $f$ descend puis monte, donc $x = 4$ donne le minimum. 4. Lire : $f(4) = 16 - 32 + k = k - 16$. On veut $k - 16 = -5$, donc $k = 11$. Le leurre $-21$ vient de $-5 - 16$ : on a soustrait au lieu d'ajouter $16$ ; le leurre $4$ confond $k$ et l'endroit du minimum.",
+                  "answers": [
+                    {
+                      "content": "11",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $h(x) = x^3 - 27x$, quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Calculer : $h'(x) = 3x^2 - 27 = 3(x-3)(x+3)$. 2. Chercher : $h'(x) = 0$ pour $x = -3$ et $x = 3$. 3. Étudier : $h'$ est positif pour $x < -3$, négatif entre $-3$ et $3$, positif pour $x > 3$. 4. Dresser : $h$ monte jusqu'à $h(-3) = -27 + 81 = 54$, descend jusqu'à $h(3) = 27 - 81 = -54$, puis remonte. 5. Lire : maximum local $54$ en $-3$ et minimum local $-54$ en $3$. Les autres propositions inversent maximum et minimum, ou prétendent que $h'$ ne s'annule jamais.",
+                  "answers": [
+                    {
+                      "content": "$h$ admet un maximum local égal à $54$ en $x = -3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ admet un minimum local égal à $-54$ en $x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h$ est décroissante sur $]-\\infty\\,;\\,-3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h$ admet un maximum local en $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h'$ ne s'annule jamais",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit que la tangente à la courbe de $f(x) = x^2 - 4x + 5$ au point d'abscisse $3$ est $y = 2x + 2$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $f(3) = 9 - 12 + 5 = 2$. 2. Dériver : $f'(x) = 2x - 4$, donc $f'(3) = 2$. 3. Remplacer : $y = 2\\,(x - 3) + 2$. 4. Développer : $y = 2x - 6 + 2$, soit $y = 2x - 4$. L'élève a écrit $f'(a)\\,x + f(a)$ sans le $-a$. Sa droite donne $8$ en $x = 3$ alors que le point de contact est $(3\\,;\\,2)$ ; son nombre dérivé $2$ est correct, donc l'erreur n'est pas là.",
+                  "answers": [
+                    {
+                      "content": "Il a oublié le $-a$ : la bonne équation est $y = 2\\,(x - 3) + 2$, soit $y = 2x - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son équation est juste : la tangente est bien $y = 2x + 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a mal calculé $f'(3)$, qui vaut $4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de la leçon",
+          "notions": "Bilan des cinq notions : limite d'un polynôme, limite en l'infini de $\\dfrac{ax+b}{cx+d}$ et asymptote horizontale, valeur interdite et asymptote verticale, dérivée, variations et extremums, équation d'une tangente. Étude complète d'un polynôme et d'une fonction rationnelle, puis deux applications dans des situations ivoiriennes.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie la fonction polynôme $f(x) = x^3 - 3x^2 - 9x + 5$ définie sur $\\mathbb{R}$. On donne sa dérivée : $f'(x) = 3x^2 - 6x - 9 = 3(x-3)(x+1)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour les limites, ne garde que le terme de plus haut degré. Pour les variations, étudie le signe de $f'$ de part et d'autre de ses racines.",
+              "questions": [
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = x^3 - 3x^2 - 9x + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^3$. 2. Remplacer : en $+\\infty$, $f(x)$ a la même limite que $x^3$. 3. Déterminer : $x^3$ tend vers $+\\infty$ et le coefficient $1$ est positif. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Le leurre $-\\infty$ se laisse guider par le terme $-3x^2$, qui ne commande pas ; $5$ est le terme constant ; $0$ vient du piège « $+\\infty - \\infty$ ».",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite en $-\\infty$ de $f(x) = x^3 - 3x^2 - 9x + 5$ est $+\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^3$. 2. Remplacer : en $-\\infty$, $f(x)$ a la même limite que $x^3$. 3. Déterminer : l'exposant $3$ est impair, donc $x^3$ tend vers $-\\infty$ en $-\\infty$. 4. Conclure : $\\lim_{x \\to -\\infty} f(x) = -\\infty$, l'affirmation est fausse. Elle recopie la limite en $+\\infty$ sans tenir compte de la puissance impaire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = x^3 - 3x^2 - 9x + 5$, avec $f'(x) = 3(x-3)(x+1)$, les valeurs de $x$ où $f'(x)$ s'annule sont ___.",
+                  "question_type": "select",
+                  "explanation": "1. Calculer : $f'(x) = 3(x-3)(x+1)$. 2. Chercher : un produit est nul si un facteur est nul : $x - 3 = 0$ donne $x = 3$ et $x + 1 = 0$ donne $x = -1$. Les valeurs sont donc $-1$ et $3$. Le leurre « $1$ et $-3$ » perd les signes en résolvant ; « $0$ et $2$ » vient de $3x^2 - 6x$ sans le terme $-9$ ; « $-3$ et $3$ » vient de $x^2 = 9$.",
+                  "answers": [
+                    {
+                      "content": "$-1$ et $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ et $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$ et $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la valeur du minimum local de $f(x) = x^3 - 3x^2 - 9x + 5$, sachant que $f'(x) = 3(x-3)(x+1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f'(x) = 3(x-3)(x+1)$. 2. Chercher : $f'$ s'annule en $-1$ et en $3$. 3. Étudier : $f'$ est positif pour $x < -1$, négatif entre $-1$ et $3$, positif pour $x > 3$. 4. Dresser : $f$ monte, descend, puis remonte ; le minimum local est donc en $x = 3$. 5. Lire : $f(3) = 27 - 27 - 27 + 5 = -22$. Le leurre $10$ est $f(-1)$, le maximum local ; le leurre $3$ est l'endroit du minimum, non sa valeur.",
+                  "answers": [
+                    {
+                      "content": "-22",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $f(x) = x^3 - 3x^2 - 9x + 5$ au point d'abscisse $a = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $f(0) = 5$. 2. Dériver : $f'(0) = 3 \\times (0 - 3) \\times (0 + 1) = -9$. 3. Remplacer : $y = -9\\,(x - 0) + 5$. 4. Développer : $y = -9x + 5$. Le leurre $y = -9x$ oublie $f(0)$ ; $y = 9x + 5$ perd le signe de $f'(0)$ ; $y = 5x - 9$ échange l'ordonnée et le nombre dérivé.",
+                  "answers": [
+                    {
+                      "content": "$y = -9x + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = -9x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 9x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 5x - 9$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie la fonction $f(x) = \\dfrac{2x-6}{x+1}$ définie pour $x \\neq -1$. Sa dérivée est $f'(x) = \\dfrac{ad - bc}{(x+1)^2}$ avec $a = 2$, $b = -6$, $c = 1$ et $d = 1$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "La limite en l'infini est le quotient des termes en $x$ ; la valeur interdite annule le dénominateur ; le signe de $f'$ est celui de $ad - bc$.",
+              "questions": [
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $f(x) = \\dfrac{2x-6}{x+1}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $2x$ et $x$ ; on laisse de côté $-6$ et $1$. 2. Former : $\\dfrac{2x}{x}$. 3. Simplifier : $2$. 4. Conclure : $\\lim_{x \\to +\\infty} f(x) = 2$ ; la droite $y = 2$ est asymptote horizontale. Le leurre $-6$ est le quotient des nombres seuls $\\dfrac{-6}{1}$, c'est-à-dire $f(0)$.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur interdite de $f(x) = \\dfrac{2x-6}{x+1}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Trouver : la valeur interdite annule le dénominateur : $x + 1 = 0$ donne $x_0 = -1$. 2. Vérifier : en $-1$, le numérateur vaut $2 \\times (-1) - 6 = -8$, non nul. Le leurre $3$ vient d'avoir annulé le numérateur $2x - 6$ ; le leurre $1$ oublie le signe.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut la limite de $f(x) = \\dfrac{2x-6}{x+1}$ quand $x$ tend vers $-1$ par valeurs supérieures ($x > -1$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Trouver : $x_0 = -1$. 2. Calculer : le numérateur vaut $-8$, négatif. 3. Étudier : pour $x > -1$, $x + 1$ est positif et proche de $0$ ($0^+$). 4. Appliquer : $\\dfrac{-8}{0^+} = -\\infty$. Le leurre $+\\infty$ oublie le signe négatif du numérateur ; $-8$ est la valeur du numérateur ; $2$ est la limite en l'infini, pas en la valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on dire des variations de $f(x) = \\dfrac{2x-6}{x+1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $ad - bc = 2 \\times 1 - (-6) \\times 1 = 2 + 6 = 8$, donc $f'(x) = \\dfrac{8}{(x+1)^2}$. 2. Chercher : $f'$ ne s'annule jamais ; la valeur interdite est $-1$. 3. Étudier : $f'(x) > 0$ partout où $f$ est définie. 4. Lire : $f$ est croissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$. Le leurre « décroissante » vient de $ad - bc = 2 - 6 = -4$, où le signe de $b$ est perdu.",
+                  "answers": [
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $]-\\infty\\,;\\,-1[$ et sur $]-1\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $\\mathbb{R}$ tout entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{2x-6}{x+1}$, la tangente au point d'abscisse $a = 1$ a pour équation $y = mx + p$. Quelle est la valeur de $p$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $f(1) = \\dfrac{2 - 6}{2} = -2$. 2. Dériver : $f'(1) = \\dfrac{8}{(1+1)^2} = \\dfrac{8}{4} = 2$. 3. Remplacer : $y = 2\\,(x - 1) + (-2)$. 4. Développer : $y = 2x - 2 - 2$, soit $y = 2x - 4$. Donc $p = -4$. Le leurre $-2$ est $f(1)$ ; le leurre $-6$ est $f(0)$, la valeur en $0$.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $f(x) = \\dfrac{2x-6}{x+1}$, quelles sont les deux droites qui sont des asymptotes à la courbe ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1. Asymptote horizontale : le quotient des termes en $x$ est $\\dfrac{2x}{x} = 2$, donc $y = 2$. 2. Asymptote verticale : la valeur interdite est $-1$ et le numérateur vaut $-8$ en $-1$ (non nul), donc la limite est infinie et $x = -1$ est asymptote verticale. Les droites $y = -6$ (nombres seuls), $x = 3$ (numérateur annulé) et $y = -1$ (valeur interdite prise pour une horizontale) ne sont pas des asymptotes.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $y = -6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y = -1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un atelier de poterie de Katiola fabrique des jarres. Dans cette situation d'exemple, le coût moyen d'une jarre, en centaines de FCFA, quand l'atelier en fabrique $x$ dizaines ($x \\geq 0$), est modélisé par $C(x) = x^2 - 8x + 20$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dérive $C$, cherche où $C'$ s'annule et étudie son signe. Attention à l'unité : le coût est en centaines de FCFA.",
+              "questions": [
+                {
+                  "content": "Le coût moyen d'une jarre est $C(x) = x^2 - 8x + 20$ (en centaines de FCFA) pour $x$ dizaines de jarres. Pour quelle valeur de $x$ la dérivée $C'(x)$ s'annule-t-elle ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $C'(x) = 2x - 8$. 2. Chercher : $2x - 8 = 0$ donne $2x = 8$, donc $x = 4$. 3. Étudier : $2x - 8$ est négatif pour $x < 4$ et positif pour $x > 4$ : le signe change, il y a un extremum en $4$. Le leurre $8$ oublie de diviser par $2$ ; le leurre $20$ est le terme constant.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $C(x) = x^2 - 8x + 20$ pour $x \\geq 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $C'(x) = 2x - 8$. 2. Chercher : $C'(x) = 0$ pour $x = 4$. 3. Étudier : $C'(x) < 0$ pour $x < 4$ et $C'(x) > 0$ pour $x > 4$. 4. Dresser : $C$ descend jusqu'à $x = 4$ puis remonte. Le leurre « croissante puis décroissante » inverse les signes de $C'$ ; « décroissante sur tout l'intervalle » oublie que $C'$ devient positive après $4$.",
+                  "answers": [
+                    {
+                      "content": "$C$ est décroissante sur $[0\\,;\\,4]$ puis croissante sur $[4\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est croissante sur $[0\\,;\\,4]$ puis décroissante sur $[4\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ est décroissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût moyen d'une jarre est $C(x) = x^2 - 8x + 20$ centaines de FCFA pour $x$ dizaines de jarres. Calcule le coût moyen minimal, en FCFA.",
+                  "question_type": "numeric",
+                  "unit": "FCFA",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $C'(x) = 2x - 8$. 2. Chercher : $C'(x) = 0$ pour $x = 4$. 3. Étudier : $C$ descend puis monte, donc $x = 4$ donne un minimum. 4. Lire : $C(4) = 16 - 32 + 20 = 4$ centaines de FCFA, soit $400$ FCFA. L'erreur typique est de répondre $4$ sans convertir les centaines en FCFA, ou $4$ dizaines de jarres, qui est l'endroit du minimum.",
+                  "answers": [
+                    {
+                      "content": "400",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $C(x) = x^2 - 8x + 20$, quand le nombre de dizaines de jarres $x$ tend vers $+\\infty$, le coût moyen tend vers $+\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : le terme de plus haut degré est $x^2$. 2. Remplacer : en $+\\infty$, $C(x)$ a la même limite que $x^2$. 3. Déterminer : $x^2$ tend vers $+\\infty$ et le coefficient $1$ est positif. 4. Conclure : $\\lim_{x \\to +\\infty} C(x) = +\\infty$, l'affirmation est vraie. Le terme $-8x$ ne l'emporte pas : pour $x = 100$, $C(x) = 10\\,000 - 800 + 20 = 9220$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $C(x) = x^2 - 8x + 20$, la tangente au point d'abscisse $a = 1$ a pour équation $y = mx + p$. Quelle est la valeur de $p$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $C(1) = 1 - 8 + 20 = 13$. 2. Dériver : $C'(x) = 2x - 8$, donc $C'(1) = -6$. 3. Remplacer : $y = -6\\,(x - 1) + 13$. 4. Développer : $y = -6x + 6 + 13$, soit $y = -6x + 19$. Donc $p = 19$. Le leurre $13$ est $C(1)$ ; le leurre $7$ vient de $-6 + 13$ : on a oublié que $-a = -1$ se multiplie par $-6$.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un commerçant de Korhogo ouvre une boutique. Dans cette situation d'exemple, sa recette moyenne journalière, en dizaines de milliers de FCFA, $x$ mois après l'ouverture ($x \\geq 0$), est modélisée par $R(x) = \\dfrac{7x + 3}{x + 1}$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Remplace $x$ pour les valeurs, forme le quotient des termes en $x$ pour la limite, et calcule $R'(x) = \\dfrac{ad - bc}{(x+1)^2}$ pour les variations et la tangente.",
+              "questions": [
+                {
+                  "content": "La recette moyenne est $R(x) = \\dfrac{7x + 3}{x + 1}$ (en dizaines de milliers de FCFA) $x$ mois après l'ouverture. Calcule $R(1)$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Remplacer : $R(1) = \\dfrac{7 \\times 1 + 3}{1 + 1}$. 2. Calculer : le numérateur vaut $10$ et le dénominateur vaut $2$. 3. Conclure : $R(1) = \\dfrac{10}{2} = 5$ dizaines de milliers de FCFA. Le leurre $10$ oublie de diviser par le dénominateur ; le leurre $7$ est la limite en l'infini, pas la valeur en $1$.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la limite en $+\\infty$ de $R(x) = \\dfrac{7x + 3}{x + 1}$.",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Repérer : les termes en $x$ sont $7x$ et $x$ ; on laisse de côté $3$ et $1$. 2. Former : $\\dfrac{7x}{x}$. 3. Simplifier : $7$. 4. Conclure : $\\lim_{x \\to +\\infty} R(x) = 7$ ; la droite $y = 7$ est asymptote horizontale. Le leurre $3$ est le quotient des nombres seuls $\\dfrac{3}{1}$, c'est-à-dire $R(0)$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le sens de variation de $R(x) = \\dfrac{7x + 3}{x + 1}$ pour $x \\geq 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "1. Calculer : $a = 7$, $b = 3$, $c = 1$, $d = 1$, donc $ad - bc = 7 - 3 = 4$ et $R'(x) = \\dfrac{4}{(x+1)^2}$. 2. Chercher : $R'$ ne s'annule jamais. 3. Étudier : $R'(x) > 0$ sur $[0\\,;\\,+\\infty[$. 4. Lire : $R$ est croissante : la recette moyenne augmente avec les mois. Le leurre « décroissante » vient d'un signe de $ad - bc$ inversé.",
+                  "answers": [
+                    {
+                      "content": "$R$ est croissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R$ est décroissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R$ est décroissante puis croissante sur $[0\\,;\\,+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $R(x) = \\dfrac{7x + 3}{x + 1}$, la tangente au point d'abscisse $a = 1$ a pour équation $y = mx + p$. Quelle est la valeur de $p$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "1. Calculer : $R(1) = 5$. 2. Dériver : $R'(x) = \\dfrac{4}{(x+1)^2}$, donc $R'(1) = \\dfrac{4}{4} = 1$. 3. Remplacer : $y = 1\\,(x - 1) + 5$. 4. Développer : $y = x - 1 + 5$, soit $y = x + 4$. Donc $p = 4$. Le leurre $5$ est $R(1)$, valeur oubliée de $-a$ ; le leurre $6$ vient de $x + 1 + 5$ avec un signe faux sur $a$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec $R(x) = \\dfrac{7x + 3}{x + 1}$, la recette moyenne finit par dépasser $7$ dizaines de milliers de FCFA.",
+                  "question_type": "true_false",
+                  "explanation": "1. Repérer : $R(x) = 7 - \\dfrac{4}{x+1}$, car $\\dfrac{7x+3}{x+1} = 7 - \\dfrac{4}{x+1}$. 2. Étudier : pour $x \\geq 0$, $\\dfrac{4}{x+1}$ est strictement positif, donc $R(x) < 7$ toujours. 3. Conclure : la recette se rapproche de $7$ sans jamais le dépasser ; la droite $y = 7$ est asymptote horizontale. L'affirmation est fausse : une limite de $7$ ne signifie pas que l'on dépasse $7$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

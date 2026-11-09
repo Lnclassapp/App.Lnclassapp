@@ -15,5 +15,5 @@
   <p id="assign_targets_none" class="mb-4 text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
 <% end %>
 <div class="ps-page">
-  <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: sheet_mode, targets:, classrooms:, heading: :h1 %>
+  <%= render "catalog/prepare_sheets/sheet", prepare: @prepare, sheet: @sheet, mode: sheet_mode, targets:, classrooms:, heading: :h1, can_assign: @can_assign, success: @success %>
 </div>

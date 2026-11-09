@@ -6,7 +6,7 @@ require "test_helper"
 # jeu ne double rien ; l'élève sans activité et la classe vide restent à zéro ; le trimestre se termine la veille.
 # La valeur attendue change à chaque évolution légitime d'un calcul (notes, lacunes, badges, devoirs) : on la met à jour sciemment.
 class StandardActivityTest < ActiveSupport::TestCase
-  EXPECTED_FINGERPRINT = "41688b73c9".freeze
+  EXPECTED_FINGERPRINT = "2065b80f33".freeze
   # 27 leçons : toute la 1ère et la 3ème du manifeste, de quoi activer des classes du lycée et du collège.
   LESSONS = 27
   SEEDS = Rails.root.join("db/seeds")
@@ -18,7 +18,7 @@ class StandardActivityTest < ActiveSupport::TestCase
     %w[catalog school].each { load SEEDS.join("#{it}.rb").to_s, true }
     @previous = ENV.values_at(*KEYS)
     ENV.update("STANDARD_LESSONS_LIMIT" => LESSONS.to_s, "STANDARD_ACTIVITY_SIZE" => "reduite", "STANDARD_QUIET" => "1")
-    capture_io { load SEEDS.join("standard.rb").to_s, true }
+    capture_io { %w[standard standard/abonnements].each { load SEEDS.join("#{it}.rb").to_s, true } }
   end
 
   teardown { KEYS.zip(@previous) { |key, value| ENV[key] = value } }

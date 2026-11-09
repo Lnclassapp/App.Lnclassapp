@@ -14,6 +14,9 @@
   sur un champ rempli. Réponse fausse : .ps-verdict--wrong (italique).
 */
 
+/* Le papier cahier (variables --sheet-*, lignes Seyès, marge) est le gabarit commun de exam_sheet.css : .ps-sheet le reprend. */
+@import url("./exam_sheet.css");
+
 /* ---- Police hébergée par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ------------------- */
 
 @font-face {
@@ -71,9 +74,11 @@
   width: 100%;
   max-width: 880px;
   box-sizing: border-box;
-  background: #fff;
+  position: relative;
+  isolation: isolate;
+  background: var(--sheet-paper);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
-  padding: clamp(20px, 4vw, 44px) clamp(16px, 5vw, 52px) 48px;
+  padding: clamp(20px, 4vw, 44px) var(--sheet-pad-x) 48px calc(var(--sheet-margin-x) + var(--sheet-pad-x));
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -162,6 +167,10 @@
   justify-content: space-between;
   gap: 10px;
   font-weight: 700;
+}
+
+.ps-success {
+  font-size: 14px;
 }
 
 .ps-status {
@@ -677,10 +686,13 @@
   display: block;
 }
 
-/* Une formule en ligne (une proposition « DE = 37,5 » dans une colonne de lettre) : un bloc en ligne, seul moyen de la borner à sa cellule. */
+/* Une formule en ligne (une proposition « DE = 37,5 » dans une colonne de lettre) : un bloc en ligne, seul moyen de la borner à sa cellule.
+   KaTeX ôte 2 px après un indice (`.vlist-t2`, marge négative) : sans ces 2 px rendus, « CO₂ » déborde de son cadre et montre une barre de
+   défilement (mesure du 2026-11-06 : chaque formule finie par un indice, sw = cw + 2). */
 .ps-paper-table .katex {
   display: inline-block;
   vertical-align: middle;
+  padding-inline-end: 2px;
 }
 
 .ps-paper-list {
@@ -689,9 +701,13 @@
   list-style: none;
 }
 
+/* Une formule en ligne ne se coupe pas (`.katex`, application.tailwind.css) : plus longue que la ligne (« 2 C₄H₁₀ + 13 O₂ → … » à 390 px),
+   elle fait défiler la question, jamais la page ; une formule courte reste dans le fil du texte. */
 .ps-paper-list > li {
   margin: 6px 0;
   overflow-wrap: anywhere;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .ps-paper-items {
@@ -790,6 +806,101 @@
   .ps-paper-table--mcq .ps-paper-choice {
     min-width: 0;
   }
+}
+
+/* UDR-0152 §3, amendement du 2026-11-06 (porteur) : sur ordinateur, les colonnes de lettres prennent la taille de leurs propositions
+   (au moins 3 em de texte, jamais moins que le mot ou la formule la plus longue) et l'affirmation le reste ; une proposition ne défile
+   plus dans sa case (« CH₃ − » coupé, « L'hexan »). Un tableau qui ne tient pas ainsi s'empile (`ps-paper-table--stacked`, posé par
+   catalog--paper-table), comme sous 480 px. */
+@media (min-width: 480px) {
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) {
+    table-layout: auto;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) thead th:nth-child(n + 3) {
+    width: auto;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) tbody td:nth-child(n + 3) {
+    hyphens: manual;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) .ps-paper-choice {
+    min-width: 3em;
+    overflow: visible;
+  }
+
+  .ps-paper-table--mcq:not(.ps-paper-table--stacked) .ps-paper-choice .katex {
+    max-width: none;
+    overflow: visible;
+  }
+}
+
+/* Le même empilement que sous 480 px, pour un tableau trop large à toute largeur d'écran (catalog--paper-table). */
+.ps-paper-table--mcq.ps-paper-table--stacked,
+.ps-paper-table--mcq.ps-paper-table--stacked thead,
+.ps-paper-table--mcq.ps-paper-table--stacked tbody {
+  display: block;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked {
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr {
+  display: grid;
+  grid-template-columns: 2.5em repeat(2, minmax(0, 1fr));
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked th,
+.ps-paper-table--mcq.ps-paper-table--stacked td {
+  min-width: 0;
+  border: 0;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked thead th,
+.ps-paper-table--mcq.ps-paper-table--stacked tbody th {
+  width: auto;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr > :first-child {
+  grid-row: span 4;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tr > :nth-child(2) {
+  grid-column: 2 / -1;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked thead th:nth-child(n + 3) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:nth-child(n + 3) {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  text-align: left;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:nth-child(n + 3)::before {
+  content: attr(data-letter) ".";
+  font-weight: 700;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked tbody td:empty {
+  display: none;
+}
+
+.ps-paper-table--mcq.ps-paper-table--stacked .ps-paper-choice {
+  min-width: 0;
 }
 
 /* ---- Les feuilles en cases (sujet-avant-de-commencer) : mêmes valeurs que la feuille, hors .ps-page --------------------- */
@@ -893,7 +1004,7 @@
   }
 
   .ps-sheet {
-    padding: 16px 12px 32px;
+    padding: 16px 12px 32px calc(var(--sheet-margin-x) + 12px);
     box-shadow: none;
   }
 
@@ -901,9 +1012,10 @@
     padding: 10px 8px;
   }
 
+  /* Aligné sur le texte de la feuille, qui commence après la marge Seyès (UDR-0157). */
   .ps-page .ps-start {
     align-self: stretch;
     width: auto;
-    margin-inline: 12px;
+    margin-inline: calc(var(--sheet-margin-x) + 12px) 12px;
   }
 }

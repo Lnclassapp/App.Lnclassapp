@@ -67,6 +67,15 @@ class Classroom::GenerateMissingClassroomsJobTest < ActiveJob::TestCase
   test "it is the job of the generation kind, one at a time" do
     assert_equal "Classroom::GenerateMissingClassroomsJob",
                  Rails.configuration.x.import_jobs.fetch(Entities::Catalog::ImportKind::CLASSROOM_GENERATION)
+    assert_equal UseCases::Catalog::StartImport::STALE_AFTER.seconds, Classroom::GenerateMissingClassroomsJob.concurrency_duration
     assert_equal 1, Classroom::GenerateMissingClassroomsJob.concurrency_limit
+  end
+
+  test "a report already claimed leaves a trace in the log: its id and the code (B-043)" do
+    report = create_import_report(kind: "classrooms", checksum_sha256: nil, imported_by: @author, status: "completed")
+
+    log = capture_log { Classroom::GenerateMissingClassroomsJob.perform_now(report.id) }
+
+    assert_includes log, "[Classroom::GenerateMissingClassroomsJob] use case failed: report_id=#{report.id} code=conflict"
   end
 end

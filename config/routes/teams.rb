@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096, XXXX (contexte crm), XXXX (modèles de langage) · UDR : 0067, 0068, 0070, 0075, 0092, 0104, XXXX (bloc « Suivi »), XXXX (pipeline et relances)
+# ADR  : 0126, 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096, XXXX (contexte crm), XXXX (modèles de langage) · UDR : 0067, 0068, 0070, 0075, 0092, 0104, XXXX (bloc « Suivi »), XXXX (pipeline et relances)
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -69,11 +69,6 @@ scope "teams/blog", as: :teams do
   end
 end
 
-# ADR-0105 §4.7, UDR-0129 §3.0 : envoi d'une image de question (les images de notions sont retirées, ADR-0116 §4.5).
-scope "teams", as: :teams do
-  post "question-images", to: "teams/question_images#create", as: :question_images
-end
-
 namespace :teams do
   resources :courses, only: %i[new create edit update], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
@@ -136,6 +131,17 @@ namespace :teams do
   # ADR-XXXX (modèles de langage) : l'état d'une génération (sondage toutes les 2 s) et le rapport pédagogique imprimable.
   resources :generations, only: :show, param: :public_id, controller: "crm/generations"
   resources :pedagogy_reports, only: :show, path: "pedagogy-reports", param: :public_id, controller: "crm/pedagogy_reports"
+  # ADR 0126, UDR-0159 §3 : points relais, lots de cartes, caisse, annulation et versements.
+  # Chemins en français sous /teams, sans le segment « billing » ; contrôleurs Teams::Billing::*, Lots A et C.
+  namespace :billing, path: "" do
+    resource :cashbox, only: :show, path: "caisse"
+    resources :relay_points, path: "points-relais", param: :public_id, only: %i[index show new create edit update] do
+      resources :card_batches, path: "lots", only: %i[new create]
+    end
+    get "lots/:public_id/planche", to: "card_batches#show", as: :card_batch_sheet
+    resource :card_cancellation, only: %i[show create], path: "cartes/annuler"
+    resources :remittances, path: "versements", only: %i[new create]
+  end
 
   # ADR-0052 : failed jobs are read and retried here, behind the team area authentication.
   mount MissionControl::Jobs::Engine, at: "/jobs"

@@ -92,7 +92,8 @@ module Repositories
           Entities::Assessment::QuestionAttempt.new(session_id: record.exercise_session_id, question_id: record.question_id,
                                                     selected_answer_ids: record.selected_answer_ids, correct: record.correct,
                                                     answered_at: record.answered_at, response_text: record.response_text,
-                                                    blank_responses: record.blank_responses, blank_results: record.blank_results)
+                                                    blank_responses: record.blank_responses, blank_results: record.blank_results,
+                                                    unanswered: record.unanswered)
         end
       end
 

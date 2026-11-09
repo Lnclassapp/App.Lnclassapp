@@ -1,6 +1,7 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, appréciation (« Très bien » à « À retravailler »), note (verte dès 14/20), points, « À revoir », maîtrise, progrès, effet sur la fiche, « Refaire l'exercice » (caché au sans-faute, Grading.perfect?) ou l'heure de reprise, correction complète %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX refaire-ou-continuer §3, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : XXXX-sujets-cahier-noir-blanc (§3 : enveloppe noir et blanc), 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX refaire-ou-continuer §3, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<% content_for :head do %><%= stylesheet_link_tag "exam_sheet" %><% end %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -34,8 +35,9 @@
                            end %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px. UDR écrans élève §3.6 bis (CA-E13) : dès 1 024 px, la note et « Recommencer »
     dans une colonne de 340 px collante à gauche, la correction à droite. %>
+<div class="exam-sheet">
 <div id="session_result_layout"
-     class="mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-none lg:grid-cols-side-main lg:items-start">
+     class="sheet-cahier mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-none lg:grid-cols-side-main lg:items-start">
   <div id="session_result_side" class="grid grid-cols-1 gap-4 lg:sticky lg:top-sticky-below-bar <%= "lg:row-span-2" if result.exercise.statement_blocks.present? %>">
     <section id="session_result" aria-labelledby="session_result_title"
              class="rounded-card border border-line bg-white p-5 text-center shadow-card sm:p-6"
@@ -54,39 +56,29 @@
         </div>
       </div>
 
-      <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
-      <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:max-lg:grid-cols-4" unless @owner %>">
-        <div class="<%= tile %>">
-          <dt class="<%= label %>"><%= t(".grade") %></dt>
-          <dd id="session_grade" class="mt-1 whitespace-nowrap font-display text-3xl font-medium tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
-        </div>
-        <% unless @owner %>
-          <div class="<%= tile %>">
-            <dt class="<%= label %>"><%= t(".score") %></dt>
-            <dd class="mt-1 whitespace-nowrap font-display text-2xl font-medium tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
-          </div>
+      <%# UDR médailles : l'élève lit sa médaille et la prochaine à viser, ni note, ni score, ni maîtrise ; l'enseignant et l'équipe gardent les 4 termes (chantiers suivants). %>
+      <% if @owner %>
+        <% upcoming = next_medal(result.badge_level) %>
+        <% if upcoming %>
+          <p id="session_next_medal" class="mt-4 text-sm text-mute"><%= t(".next_medal", medal: badge_label(upcoming)) %></p>
         <% end %>
-        <div class="<%= tile %>">
-          <dt class="flex items-center justify-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip mastery_tip, label: t(".mastery") %></dt>
-          <% mastery = Entities::Assessment::Grading.mastery_for(result.score_percent) %>
-          <dd class="mt-2 whitespace-nowrap"><%= ui_badge mastery_label(result.score_percent), size: :sm,
-                                        tone: { acquired: :success, fragile: :gold, struggling: :neutral }.fetch(mastery) %></dd>
-        </div>
-        <% unless @owner %>
+      <% else %>
+        <%# medailles-enseignant : l'enseignant et l'équipe lisent aussi la médaille de la copie (ci-dessus), plus la note, le score ni la maîtrise ; reste « x sur y justes », un compte de réponses. %>
+        <dl class="mt-6 grid grid-cols-1 gap-3">
           <div class="<%= tile %>">
             <dt class="<%= label %>"><%= t(".correct") %></dt>
             <dd class="mt-1 whitespace-nowrap font-medium tabular-nums">
               <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
             </dd>
           </div>
-        <% end %>
-      </dl>
+        </dl>
+      <% end %>
       <%# UDR-0140 §3 : les points, seulement quand l'exercice n'est pas tout à 1 point ; les réponses rédigées et le cahier, à comparer. %>
       <% points = result.points %>
       <% fmt = ->(value) { number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
-      <% if points.weighted || points.manual.positive? %>
+      <% if (points.weighted && !@owner) || points.manual.positive? %>
         <div id="session_points" class="mt-4 space-y-1 text-sm text-mute">
-          <% if points.weighted %>
+          <% if points.weighted && !@owner %>
             <p><%= t(".points_graded", count: points.earned, points: fmt.(points.earned), total: fmt.(points.graded)) %></p>
           <% end %>
           <% if points.manual.positive? %>
@@ -120,7 +112,7 @@
     <% end %>
     <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
     <% if @owner && result.gap_outcome && result.essential %>
-      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential, href: (redo_href if !@resume_at && @can_restart) %>
+      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential, href: (redo_href if !@resume_at && @can_restart), proposal: @remediation_proposal %>
     <% end %>
 
     <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis le second bouton (XXXX refaire-ou-continuer §3). UDR-0140 : pendant la pause, l'heure de reprise à sa place. %>
@@ -175,4 +167,5 @@
       </div>
     <% end %>
   <% end %>
+</div>
 </div>

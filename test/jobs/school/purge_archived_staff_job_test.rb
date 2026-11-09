@@ -51,7 +51,8 @@ class School::PurgeArchivedStaffJobTest < ActiveJob::TestCase
 
     log = capture_log { job.define_singleton_method(:use_case) { use_case }; assert_equal 1, job.perform_now }
 
-    assert_includes log, "[School::PurgeArchivedStaffJob] 1 account(s) not deleted, user ids: #{failing.id}"
+    assert_includes log, "[School::PurgeArchivedStaffJob] account not deleted: user_id=#{failing.id} error=IOError"
+    assert_not_includes log, "stockage indisponible"
     assert_not_includes log, "Aya"
     assert_equal "Aya", failing.reload.first_name
     assert Orm::SchoolStaff.exists?(user_id: failing.id)

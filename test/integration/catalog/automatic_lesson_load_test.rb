@@ -10,7 +10,8 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
   WHOLE_IMPORT_NAME = "chargement-automatique-entiere-3eme-mathematiques-proprietes-de-thales-dans-un-triangle.json"
   LOCK = "SELECT %s(hashtext('contenus:charger'))"
   # ADR-0123 : une leçon v3 du programme, sans sujet (Tle C).
-  PROGRAMME_FILE = Rails.root.join("docs/contenus/lecons-traitees/tle-c/mathematiques/barycentre-et-lignes-de-niveaux.json")
+  # Copie figée : la leçon d'origine est à reprendre sous docs/contenus/a-reprendre/ et sera retravaillée.
+  PROGRAMME_FILE = Rails.root.join("test/fixtures/files/lecons_v3/barycentre-et-lignes-de-niveaux.json")
   PROGRAMME_IMPORT_NAME = "chargement-automatique-tle-c-mathematiques-barycentre-et-lignes-de-niveaux.json"
 
   setup do

@@ -11,18 +11,30 @@
 # never the repository lessons, the development accounts or the former demo files; its activity is simulated (standard/activite).
 # Develop (Lot I of standard-de-test, ADR §4 point 5) also receives the schools, classrooms and accounts of the standard set and their
 # activity, nothing deleted or changed; its lessons stay with contenus:charger. A failure of the set there is printed and logged, never raised.
-develop = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?).whole_lessons?
-stage = if DemoEnvironment.active? then "demo" elsif PrEnvironment.active? then "pr" elsif develop && Rails.env.production? then "develop" else Rails.env end
-SEEDS = { "identity" => :all, "contenus" => %w[production develop], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
-          "development" => %w[development pr], "standard" => %w[pr demo develop], "standard/activite" => %w[pr demo develop] }.freeze
+# Staging (chantier comptes-de-test-staging, ADR-0124 §9) receives the same set without its activity (standard/activite) nor lessons: it keeps
+# its :create_only loading (contenus:charger); a failure of the set there is printed and logged too.
+load_stage = Entities::Catalog::AutomaticLoadStage.for(name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?)
+develop = load_stage.whole_lessons?
+staging = load_stage.create_missing?
+stage = if DemoEnvironment.active? then "demo"
+elsif PrEnvironment.active? then "pr"
+elsif Rails.env.production? && develop then "develop"
+elsif Rails.env.production? && staging then "staging"
+else Rails.env
+end
+SEEDS = { "identity" => :all, "contenus" => %w[production develop staging], "catalog" => %w[development test pr demo], "school" => %w[development test pr demo],
+          "development" => %w[development pr], "standard" => %w[pr demo develop staging], "standard/abonnements" => %w[pr demo develop staging],
+          "standard/activite" => %w[pr demo develop] }.freeze
 
 SEEDS.each do |name, stages|
   next unless stages == :all || stages.include?(stage)
 
   load Rails.root.join("db/seeds/#{name}.rb")
 rescue StandardError => error
-  raise unless stage == "develop" && name.start_with?("standard")
+  # Les abonnements du jeu ne sont pas facultatifs : sans eux les élèves du jeu sont bloqués au 8e jour. Leur erreur remonte.
+  raise unless %w[develop staging].include?(stage) && name.start_with?("standard") && name != "standard/abonnements"
 
-  Rails.logger.error("[#{name}] semis impossible sur Develop : #{error.class} : #{error.message}\n#{error.backtrace&.first(5)&.join("\n")}")
-  puts "[#{name}] semis impossible sur Develop : #{error.class} : #{error.message}"
+  site = stage.capitalize
+  Rails.logger.error("[#{name}] semis impossible sur #{site} : #{error.class} : #{error.message}\n#{error.backtrace&.first(5)&.join("\n")}")
+  puts "[#{name}] semis impossible sur #{site} : #{error.class} : #{error.message}"
 end

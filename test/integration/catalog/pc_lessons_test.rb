@@ -8,15 +8,15 @@ class Catalog::PcLessonsTest < ActiveSupport::TestCase
   PROGRESSION = Rails.root.join("docs/contenus/progressions-2026-2027/progressions-2026-2027-physique-chimie.json")
   # Dans l'ordre de la progression : [fichier, nombre de figures]. L'intitulé vient du JSON de progression (3ème, Physique-Chimie).
   LESSONS = [
-    [ "masse-et-poids-d-un-corps", 2 ],
+    [ "masse-et-poids-d-un-corps", 4 ],
     [ "les-forces", 5 ],
-    [ "equilibre-d-un-solide-soumis-a-deux-forces", 5 ],
+    [ "equilibre-d-un-solide-soumis-a-deux-forces", 6 ],
     [ "travail-et-puissance-mecaniques", 4 ],
     [ "energie-mecanique", 3 ],
     [ "electrolyse-et-synthese-de-l-eau", 6 ],
-    [ "les-alcanes", 5 ],
-    [ "les-lentilles", 3 ],
-    [ "les-defauts-de-l-oeil-et-leurs-corrections", 5 ],
+    [ "les-alcanes", 7 ],
+    [ "les-lentilles", 8 ],
+    [ "les-defauts-de-l-oeil-et-leurs-corrections", 6 ],
     [ "oxydation-des-corps-purs-simples", 4 ]
   ].freeze
   TITLES = JSON.parse(PROGRESSION.read)["courses"].select { it["level_name"] == "3ème" }.map { it["name"] }.freeze

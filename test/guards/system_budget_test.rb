@@ -39,7 +39,7 @@ class SystemBudgetTest < Minitest::Test
 
     assert_equal %w[new], subject.missing
     assert_equal 0.0, subject.growth
-    assert_equal "bin/rails test new -v 2>&1 | script/ci/record_timings", subject.record_command(subject.missing)
+    assert_equal "env COVERAGE=0 bin/rails test new -v 2>&1 | script/ci/record_timings", subject.record_command(subject.missing)
   end
   # Amendement du 2026-10-03 : le porteur accorde 20 s au blog ; ses deux fichiers seuls ont ce budget, pas un chantier qui
   # les touche avec d'autres.

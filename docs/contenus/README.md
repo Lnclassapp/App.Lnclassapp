@@ -8,7 +8,8 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français ; les 10 leçons de Maths de Tle C et de Tle D au format 3) et `3eme/` (60 leçons au format 3, les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) |
+| [`lecons-traitees/`](lecons-traitees/) | **La base** : les 60 leçons de 3ème (les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) les 45 de Tle C, les 45 de Tle D, les 32 de Tle A1 et les 31 de Tle A2 (#484), seules à avoir le format complet actuel de `prompt-redaction.md` (4 blocs et 2 exercices par notion, 4 problèmes, 4 sujets de devoir) et à passer `valider.rb`. Develop, Staging et le jeu standard chargent ce dossier, rien d'autre |
+| [`a-reprendre/`](a-reprendre/) | Les 285 autres leçons, mises de côté avec leur arborescence : v3 sans les 4 sujets de devoir, v3 à un seul exercice par notion, ou format 1. Rien ne les charge. Détail et règle de retour : [`a-reprendre/README.md`](a-reprendre/README.md) |
 
 ## Le principe
 
@@ -27,7 +28,7 @@ L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il 
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Les leçons déjà rangées dans `lecons-traitees/` au format v1 (Tle D, 3ème, etc.) ne sont plus importables : elles seront réécrites en v3, mathématiques d'abord (chantier `refonte-contenus-maths`).
+Les leçons au format v1 et celles du format v3 incomplet ne sont plus dans `lecons-traitees/` : elles attendent dans `a-reprendre/` (chantier `base-de-lecons`). Elles reviennent quand elles ont le format complet et passent `valider.rb`. Les sections par niveau plus bas décrivent l'ancien contenu de `lecons-traitees/` : seuls `3eme/`, `tle-c/`, `tle-d/`, `tle-a1/` et `tle-a2/` y sont.
 
 ## Boucle courte : corriger une leçon
 
@@ -52,6 +53,102 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ## Leçons traitées
 
+### Tle C au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-c-comme-thales`, #484)
+
+Depuis le 2026-11-07, les 45 leçons de Tle C au format 3 (Mathématiques 10, Français 6, Philosophie 9, Physique-Chimie 10, SVT 10) sont construites comme la leçon Thalès de 3ème. Chaque notion a deux exercices : le premier, d'origine, et un second en `fixation` de 6 questions de types mêlés, avec titre, énoncé « Dans cet exercice, tu … » et indice. Chaque leçon a 4 sujets de devoir (« Sujet 1 · … » à « Sujet 4 · … ») de 4 exercices de 5 ou 6 questions, en `evaluation`. Le cours, les fiches et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement. 4 874 questions ajoutées, 7 figures ajoutées (SVT).
+
+Un script hors dépôt a vérifié chaque leçon : sympy sur chaque question en Mathématiques et sur chaque calcul en Physique-Chimie, la bonne réponse comme chaque mauvaise proposition, avec des réponses faussées exprès toutes détectées ; ailleurs, un extrait mot pour mot de la leçon pour chaque bonne réponse. Chaque leçon a ensuite été relue par un agent qui ne l'avait pas écrite. Les tableaux des sections Tle C plus bas donnent l'état d'avant ce chantier ; ceux-ci comptent tout (exercices des notions, problèmes et exercices des sujets). Le détail est dans [le journal du chantier](../chantiers/lecons-tle-c-comme-thales/journal.md).
+
+Les leçons de même fiche en Tle D, A1 et A2 ne sont pas encore modifiées : la liste est dans le journal.
+
+**Mathématiques**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux | 5 | 30 | 168 | 121 |
+| `mathematiques/coniques.json` | Coniques | 5 | 30 | 168 | 111 |
+| `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 5 | 30 | 170 | 112 |
+| `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ | 4 | 28 | 159 | 104 |
+| `mathematiques/fonctions-exponentielles-et-fonctions-puissances.json` | Fonctions exponentielles et fonctions puissances | 5 | 30 | 156 | 110 |
+| `mathematiques/fonctions-logarithmes.json` | Fonctions logarithmes | 5 | 30 | 192 | 119 |
+| `mathematiques/geometrie-analytique-de-l-espace.json` | Géométrie analytique de l'espace | 4 | 28 | 151 | 104 |
+| `mathematiques/limites-et-continuite.json` | Limites et continuité | 5 | 30 | 166 | 114 |
+| `mathematiques/nombres-complexes.json` | Nombres complexes | 5 | 30 | 185 | 118 |
+| `mathematiques/primitives.json` | Primitives | 4 | 28 | 160 | 106 |
+| **Total** | | **47** | **294** | **1675** | **1119** |
+
+**Français**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `francais/groupement-de-textes-theatraux.json` | Groupement de textes théâtraux | 4 | 28 | 153 | 105 |
+| `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 4 | 28 | 153 | 105 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 28 | 154 | 104 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 4 | 28 | 153 | 104 |
+| `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 4 | 28 | 157 | 106 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 4 | 28 | 159 | 104 |
+| **Total** | | **24** | **168** | **929** | **628** |
+
+**Philosophie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `philosophie/dieu-et-la-religion.json` | Dieu et la religion | 4 | 28 | 159 | 106 |
+| `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 4 | 28 | 147 | 105 |
+| `philosophie/la-connaissance-scientifique.json` | La connaissance scientifique | 4 | 28 | 155 | 107 |
+| `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 4 | 28 | 154 | 105 |
+| `philosophie/la-valeur-de-la-philosophie.json` | La valeur de la philosophie | 4 | 28 | 166 | 116 |
+| `philosophie/la-vie-en-societe.json` | La vie en société | 3 | 26 | 146 | 104 |
+| `philosophie/langage-et-verite.json` | Langage et vérité | 4 | 28 | 161 | 113 |
+| `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 4 | 28 | 157 | 107 |
+| `philosophie/progres-et-bonheur.json` | Progrès et bonheur | 4 | 28 | 152 | 104 |
+| **Total** | | **35** | **250** | **1397** | **967** |
+
+**Physique-Chimie**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 28 | 149 | 104 |
+| `physique-chimie/champ-magnetique.json` | Champ magnétique | 4 | 28 | 160 | 109 |
+| `physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 28 | 158 | 104 |
+| `physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 30 | 161 | 110 |
+| `physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 30 | 173 | 115 |
+| `physique-chimie/interaction-gravitationnelle.json` | Interaction gravitationnelle | 4 | 28 | 157 | 104 |
+| `physique-chimie/les-alcools.json` | Les alcools | 5 | 30 | 174 | 116 |
+| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 28 | 157 | 104 |
+| `physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs g⃗ et E⃗ uniformes | 4 | 28 | 170 | 113 |
+| `physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 30 | 167 | 115 |
+| **Total** | | **44** | **288** | **1626** | **1094** |
+
+**SVT**
+
+| Fichier | Titre | Notions | Exercices | Questions | dont ajoutées |
+|---|---|---:|---:|---:|---:|
+| `svt/l-exploitation-des-gisements-petroliferes.json` | L'exploitation des gisements pétrolifères | 4 | 28 | 157 | 104 |
+| `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 28 | 165 | 116 |
+| `svt/l-utilisation-de-l-energie-par-la-cellule-musculaire.json` | L'utilisation de l'énergie par la cellule musculaire | 4 | 28 | 160 | 108 |
+| `svt/la-communication-nerveuse.json` | La communication nerveuse | 5 | 30 | 167 | 111 |
+| `svt/la-mise-en-place-des-gisements-petroliferes-en-cote-d-ivoire.json` | La mise en place des gisements pétrolifères en Côte d'Ivoire | 4 | 28 | 157 | 106 |
+| `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 4 | 28 | 161 | 104 |
+| `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 26 | 142 | 99 |
+| `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 30 | 171 | 110 |
+| `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 28 | 156 | 104 |
+| `svt/les-drogues-et-le-systeme-nerveux.json` | Les drogues et le système nerveux | 4 | 28 | 148 | 104 |
+| **Total** | | **41** | **282** | **1584** | **1066** |
+
+
+
+### Tle A2 au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-a2-comme-thales`, #484)
+
+Depuis le 2026-11-08, les 31 leçons de Tle A2 au format 3 (Français 7, Philosophie 10, Mathématiques 7, SVT 7) sont construites comme celles de Tle A1. 30 leçons ont la même fiche qu'en Tle A1 (exponentielle et logarithme à une définition près, sans primitive en A2) : leurs ajouts sont repris de Tle A1 et recontrôlés par le script ; exponentielle et logarithme ont été relus pour le programme de A2. « Probabilité », propre à la Tle A2, a été rédigée, prouvée par énumération et relue : 110 questions ajoutées, aucune figure. Le détail est dans [le journal du chantier](../chantiers/lecons-tle-a2-comme-thales/journal.md).
+
+### Tle A1 au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-a1-comme-thales`, #484)
+
+Depuis le 2026-11-08, les 32 leçons de Tle A1 au format 3 (Français 7, Philosophie 10, Mathématiques 8, SVT 7) sont construites comme celles de Tle C et de Tle D : un second exercice `fixation` de 6 questions par notion et 4 sujets de devoir. 15 leçons ont la même fiche qu'en Tle C et D : leurs ajouts sont repris tels quels (Français 6, Philosophie 9). Les 17 leçons propres à la Tle A1 (Français 1, Philosophie 1, Mathématiques 8, SVT 7) ont été rédigées, contrôlées par le même script hors dépôt (sympy en Mathématiques, extraits ailleurs, réponses faussées toutes détectées) et relues chacune par un agent qui ne l'avait pas écrite : 1 908 questions ajoutées, aucune figure. Le détail est dans [le journal du chantier](../chantiers/lecons-tle-a1-comme-thales/journal.md).
+
+### Tle D au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-tle-d-comme-thales`, #484)
+
+Depuis le 2026-11-07, les 45 leçons de Tle D au format 3 (Mathématiques 10, Français 6, Philosophie 9, Physique-Chimie 10, SVT 10) sont construites comme celles de Tle C : un second exercice `fixation` de 6 questions par notion et 4 sujets de devoir. 31 leçons ont la même fiche qu'en Tle C : leurs ajouts sont repris tels quels de Tle C (Français 6, Philosophie 9, Mathématiques 5, Physique-Chimie 8, SVT 3). Les 14 leçons propres à la Tle D (Mathématiques 5, Physique-Chimie 2, SVT 7) ont été rédigées, contrôlées par le même script hors dépôt (sympy en Mathématiques et pour les calculs de Physique-Chimie, extraits ailleurs, réponses faussées toutes détectées) et relues chacune par un agent qui ne l'avait pas écrite : 1 548 questions ajoutées, aucune figure. Le détail est dans [le journal du chantier](../chantiers/lecons-tle-d-comme-thales/journal.md).
 ### Tle D — `lecons-traitees/tle-d/`
 
 > **Philosophie** : les fichiers `philosophie/` de ce dossier sont désormais au format 3 (chantier `contenus-tle-philosophie`, section « Tle, Philosophie au format 3 » plus bas).
@@ -240,6 +337,12 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
 
+### 3ème au format 3 : deux exercices par notion et quatre sujets (chantier `lecons-3eme-comme-thales`, #484)
+
+Depuis le 2026-11-05, les 60 leçons de 3ème au format 3 (6 matières × 10) sont toutes construites comme la leçon Thalès. Chaque notion a deux exercices : le premier, d'origine, et un second en `fixation` de 6 questions de types mêlés, avec titre, énoncé « Dans cet exercice, tu … » et indice. Chaque leçon a 4 sujets de devoir (« Sujet 1 · … » à « Sujet 4 · … ») de 4 exercices de 5 ou 6 questions, en `evaluation`. Le cours, les fiches et les 4 problèmes sont inchangés. Hors Mathématiques et Physique-Chimie, les questions ajoutées sont toutes corrigées automatiquement. Les tableaux ci-dessous comptent tout : exercices des notions, problèmes et exercices des sujets.
+
+Un script hors dépôt a vérifié chaque leçon. Il refait les calculs avec sympy en Mathématiques et en Physique-Chimie, la bonne réponse comme chaque mauvaise proposition. Dans les autres matières, chaque question est justifiée par un extrait mot pour mot de sa leçon. Le script contrôle aussi le format, les doublons, le fichier inchangé hors ajouts (octet pour octet) et `valider.rb` sur la leçon et sur chaque sujet. Le détail est dans [le journal du chantier](../chantiers/lecons-3eme-comme-thales/journal.md).
+
 ### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
 
 Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un ou deux exercices (les leçons Thalès, depuis le 2026-10-31, et Calcul littéral, depuis le 2026-11-05, en ont deux par notion, aux types de questions mélangés). La leçon a en plus 4 problèmes de 5 questions ou plus. La leçon Thalès a aussi 4 sujets de devoir de 4 exercices chacun (16 exercices, 95 questions), comptés dans le tableau, avec trois figures de plus (triangle ABC avec M et N, papillon, triangle ABC avec D et E) que ses exercices citent : un schéma fixe, car la figure interactive affiche ses propres longueurs, qui contrediraient l'énoncé. La leçon Calcul littéral a elle aussi 4 sujets de devoir de 4 exercices (16 exercices, 95 questions) et deux figures de plus (rectangle d'un étal, carré découpé en quatre morceaux), sans longueurs écrites : une étiquette de la figure interactive affiche en plus la longueur calculée du segment, qui contredirait une dimension écrite avec $x$, donc les dimensions sont dans les énoncés. Les calculs (bonnes et mauvaises réponses) sont vérifiés par un script sympy hors dépôt.
@@ -247,17 +350,17 @@ Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le
 | # | Fichier | Cours | Notions | Figures | Exercices | Questions |
 |---:|---|---|---:|---:|---:|---:|
 | 1 | `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 2 | 28 | 173 |
-| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 4 | 26 | 153 |
-| 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 10 | 52 |
-| 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 8 | 46 |
-| 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 8 | 41 |
-| 6 | `mathematiques/angles-inscrits.json` | Angles inscrits | 4 | 6 | 8 | 48 |
-| 7 | `mathematiques/vecteurs.json` | Vecteurs | 4 | 7 | 8 | 40 |
-| 8 | `mathematiques/equations-et-inequations-dans-r.json` | Équations et inéquations dans ℝ | 4 | 3 | 8 | 45 |
-| 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 4 | 8 | 40 |
-| 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
+| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 5 | 26 | 153 |
+| 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 32 | 170 |
+| 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 28 | 150 |
+| 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 28 | 146 |
+| 6 | `mathematiques/angles-inscrits.json` | Angles inscrits | 4 | 9 | 28 | 159 |
+| 7 | `mathematiques/vecteurs.json` | Vecteurs | 4 | 10 | 28 | 149 |
+| 8 | `mathematiques/equations-et-inequations-dans-r.json` | Équations et inéquations dans ℝ | 4 | 5 | 28 | 151 |
+| 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 9 | 28 | 151 |
+| 10 | `mathematiques/statistique.json` | Statistique | 5 | 9 | 30 | 173 |
 
-Au total : 42 notions, 38 figures, 121 exercices et 687 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
+Au total : 42 notions, 57 figures, 284 exercices et 1 575 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
 
 ### 3ème, Français au format 3 (chantier `contenus-3e-francais`)
 
@@ -265,18 +368,18 @@ Les 10 premières leçons de Français de la progression DPFC 2026-2027, rédig�
 
 | # | Fichier | Cours | Notions | Exercices | Questions | Auto |
 |---:|---|---|---:|---:|---:|---:|
-| 1 | `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 8 | 54 | 81 % |
-| 2 | `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 8 | 51 | 80 % |
-| 3 | `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 8 | 52 | 81 % |
-| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 8 | 53 | 81 % |
-| 5 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 3 | 7 | 51 | 80 % |
-| 6 | `francais/la-coordination.json` | La coordination | 4 | 8 | 51 | 80 % |
-| 7 | `francais/le-resume-du-texte-argumentatif.json` | Le résumé du texte argumentatif | 4 | 8 | 50 | 80 % |
-| 8 | `francais/le-groupe-nominal-la-pronominalisation.json` | Le groupe nominal : la pronominalisation | 4 | 8 | 52 | 79 % |
-| 9 | `francais/le-verbe-l-infinitif-et-le-participe.json` | Le verbe : l'infinitif et le participe | 3 | 7 | 47 | 79 % |
-| 10 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 8 | 52 | 77 % |
+| 1 | `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 28 | 162 | 94 % |
+| 2 | `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 28 | 166 | 94 % |
+| 3 | `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 28 | 161 | 94 % |
+| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 28 | 169 | 94 % |
+| 5 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 3 | 26 | 150 | 93 % |
+| 6 | `francais/la-coordination.json` | La coordination | 4 | 28 | 164 | 94 % |
+| 7 | `francais/le-resume-du-texte-argumentatif.json` | Le résumé du texte argumentatif | 4 | 28 | 161 | 94 % |
+| 8 | `francais/le-groupe-nominal-la-pronominalisation.json` | Le groupe nominal : la pronominalisation | 4 | 28 | 172 | 94 % |
+| 9 | `francais/le-verbe-l-infinitif-et-le-participe.json` | Le verbe : l'infinitif et le participe | 3 | 26 | 149 | 93 % |
+| 10 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 28 | 160 | 92 % |
 
-Au total : 38 notions, 78 exercices et 513 questions. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second rédacteur, et les défauts trouvés ont été corrigés : règles de grammaire fausses, faits d'œuvre inexacts, fautes de langue, réponses justes refusées.
+Au total : 38 notions, 276 exercices et 1 614 questions. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second rédacteur, et les défauts trouvés ont été corrigés : règles de grammaire fausses, faits d'œuvre inexacts, fautes de langue, réponses justes refusées.
 
 À faire valider par un enseignant :
 
@@ -291,18 +394,18 @@ Les 10 premières leçons d'Histoire-Géographie de la progression DPFC 2026-202
 
 | # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
 |---:|---|---|---:|---:|---:|---:|---:|---|
-| 1 | `histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json` | Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire | 5 | 9 | 53 | 81 % | 3 | `map africa`, `map cote_d_ivoire`, `timeline` |
-| 2 | `histoire-geographie/geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les atouts du développement économique de la Côte d'Ivoire | 5 | 9 | 50 | 88 % | 2 | `map cote_d_ivoire`, `stat_chart line` |
-| 3 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 5 | 9 | 46 | 89 % | 2 | `timeline`, `diagram` |
-| 4 | `histoire-geographie/geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire.json` | Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 4 | 8 | 48 | 88 % | 3 | `map cote_d_ivoire`, `stat_chart pie` |
-| 5 | `histoire-geographie/histoire-causes-et-caracteres-des-crises-sociopolitiques-de-l-afrique-independante.json` | Histoire — Causes et caractères des crises sociopolitiques de l'Afrique indépendante | 4 | 8 | 45 | 91 % | 2 | `map africa`, `timeline` |
-| 6 | `histoire-geographie/histoire-la-crise-rwandaise-de-la-guerre-au-genocide-des-tutsi-1990-1994.json` | Histoire — La crise rwandaise : de la guerre au génocide des tutsi (1990-1994) | 4 | 8 | 40 | 90 % | 2 | `map africa`, `timeline` |
-| 7 | `histoire-geographie/geographie-les-problemes-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les problèmes du développement économique de la Côte d'Ivoire | 5 | 9 | 47 | 83 % | 2 | `stat_chart line`, `diagram` |
-| 8 | `histoire-geographie/histoire-les-causes-les-caracteres-et-les-consequences-de-la-deuxieme-guerre-mondiale.json` | Histoire — Les causes, les caractères et les conséquences de la deuxième guerre mondiale | 4 | 8 | 49 | 86 % | 2 | `timeline`, `map world` |
-| 9 | `histoire-geographie/geographie-etude-economique-de-l-afrique.json` | Géographie — Etude Economique de l'Afrique | 4 | 8 | 42 | 88 % | 4 | `map africa`, `diagram`, `timeline` |
-| 10 | `histoire-geographie/histoire-l-organisation-des-nations-unies-onu.json` | Histoire — L'Organisation des Nations Unies (ONU) | 4 | 8 | 49 | 84 % | 3 | `timeline`, `diagram`, `map world` |
+| 1 | `histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json` | Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire | 5 | 30 | 164 | 94 % | 4 | `map africa`, `map cote_d_ivoire`, `timeline`, `diagram` |
+| 2 | `histoire-geographie/geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les atouts du développement économique de la Côte d'Ivoire | 5 | 30 | 160 | 96 % | 3 | `map cote_d_ivoire`, `stat_chart line`, `diagram` |
+| 3 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 5 | 30 | 161 | 97 % | 2 | `timeline`, `diagram` |
+| 4 | `histoire-geographie/geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire.json` | Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 4 | 28 | 153 | 96 % | 4 | `map cote_d_ivoire`, `stat_chart pie`, `diagram` |
+| 5 | `histoire-geographie/histoire-causes-et-caracteres-des-crises-sociopolitiques-de-l-afrique-independante.json` | Histoire — Causes et caractères des crises sociopolitiques de l'Afrique indépendante | 4 | 28 | 152 | 97 % | 3 | `map africa`, `timeline`, `diagram` |
+| 6 | `histoire-geographie/histoire-la-crise-rwandaise-de-la-guerre-au-genocide-des-tutsi-1990-1994.json` | Histoire — La crise rwandaise : de la guerre au génocide des tutsi (1990-1994) | 4 | 28 | 144 | 97 % | 2 | `map africa`, `timeline` |
+| 7 | `histoire-geographie/geographie-les-problemes-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les problèmes du développement économique de la Côte d'Ivoire | 5 | 30 | 158 | 95 % | 2 | `stat_chart line`, `diagram` |
+| 8 | `histoire-geographie/histoire-les-causes-les-caracteres-et-les-consequences-de-la-deuxieme-guerre-mondiale.json` | Histoire — Les causes, les caractères et les conséquences de la deuxième guerre mondiale | 4 | 28 | 154 | 95 % | 2 | `timeline`, `map world` |
+| 9 | `histoire-geographie/geographie-etude-economique-de-l-afrique.json` | Géographie — Etude Economique de l'Afrique | 4 | 28 | 146 | 97 % | 4 | `map africa`, `diagram`, `timeline` |
+| 10 | `histoire-geographie/histoire-l-organisation-des-nations-unies-onu.json` | Histoire — L'Organisation des Nations Unies (ONU) | 4 | 28 | 157 | 95 % | 3 | `timeline`, `diagram`, `map world` |
 
-Au total : 44 notions, 84 exercices, 469 questions et 25 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. À faire relire par un enseignant d'Histoire-Géographie avant publication : dates et chiffres, et le contenu des cartes.
+Au total : 44 notions, 288 exercices, 1 549 questions et 29 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. À faire relire par un enseignant d'Histoire-Géographie avant publication : dates et chiffres, et le contenu des cartes.
 
 ### 3ème, SVT au format 3 (chantier `contenus-3e-svt`)
 
@@ -310,18 +413,18 @@ Les 10 premières leçons de SVT de la progression DPFC 2026-2027, rédigées le
 
 | # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
 |---:|---|---|---:|---:|---:|---:|---:|---|
-| 1 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 8 | 53 | 91 % | 3 | `diagram`, `stat_chart pie` |
-| 2 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 8 | 60 | 92 % | 3 | `plate digestive_system`, `diagram` |
-| 3 | `svt/le-sang.json` | Le sang | 4 | 8 | 53 | 91 % | 7 | `plate blood_smear`, `stat_chart pie`, `diagram`, `stat_chart line` |
-| 4 | `svt/la-transfusion-sanguine.json` | La transfusion sanguine | 3 | 7 | 47 | 89 % | 3 | `diagram` |
-| 5 | `svt/la-circulation-sanguine.json` | La circulation sanguine | 4 | 8 | 51 | 92 % | 6 | `plate heart`, `plate double_circulation`, `diagram`, `stat_chart line` |
-| 6 | `svt/les-grossesses-precoces-et-les-moyens-de-prevention.json` | Les grossesses précoces et les moyens de prévention | 4 | 8 | 50 | 86 % | 5 | `timeline`, `plate female_reproductive_system`, `diagram` |
-| 7 | `svt/l-infection-au-vih.json` | L'infection au VIH | 3 | 7 | 45 | 91 % | 5 | `plate hiv_virus`, `stat_chart line`, `diagram` |
-| 8 | `svt/les-caracteristiques-d-un-sol.json` | Les caractéristiques d'un sol | 4 | 8 | 53 | 92 % | 5 | `plate soil_profile`, `stat_chart bars` |
-| 9 | `svt/les-relations-sols-plantes.json` | Les relations sols-plantes | 4 | 8 | 52 | 92 % | 9 | `plate root_hairs`, `diagram`, `stat_chart bars`, `plate soil_profile` |
-| 10 | `svt/la-degradation-des-sols.json` | La dégradation des sols | 4 | 8 | 49 | 90 % | 5 | `diagram`, `plate soil_profile`, `stat_chart line` |
+| 1 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 28 | 157 | 97 % | 3 | `diagram`, `stat_chart pie` |
+| 2 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 28 | 168 | 97 % | 3 | `plate digestive_system`, `diagram` |
+| 3 | `svt/le-sang.json` | Le sang | 4 | 28 | 157 | 97 % | 7 | `plate blood_smear`, `stat_chart pie`, `diagram`, `stat_chart line` |
+| 4 | `svt/la-transfusion-sanguine.json` | La transfusion sanguine | 3 | 26 | 145 | 97 % | 3 | `diagram` |
+| 5 | `svt/la-circulation-sanguine.json` | La circulation sanguine | 4 | 28 | 161 | 98 % | 6 | `plate heart`, `plate double_circulation`, `diagram`, `stat_chart line` |
+| 6 | `svt/les-grossesses-precoces-et-les-moyens-de-prevention.json` | Les grossesses précoces et les moyens de prévention | 4 | 28 | 154 | 95 % | 5 | `timeline`, `plate female_reproductive_system`, `diagram` |
+| 7 | `svt/l-infection-au-vih.json` | L'infection au VIH | 3 | 26 | 145 | 97 % | 5 | `plate hiv_virus`, `stat_chart line`, `diagram` |
+| 8 | `svt/les-caracteristiques-d-un-sol.json` | Les caractéristiques d'un sol | 4 | 28 | 161 | 98 % | 5 | `plate soil_profile`, `stat_chart bars` |
+| 9 | `svt/les-relations-sols-plantes.json` | Les relations sols-plantes | 4 | 28 | 156 | 97 % | 9 | `plate root_hairs`, `diagram`, `stat_chart bars`, `plate soil_profile` |
+| 10 | `svt/la-degradation-des-sols.json` | La dégradation des sols | 4 | 28 | 153 | 97 % | 5 | `diagram`, `plate soil_profile`, `stat_chart line` |
 
-Au total : 38 notions, 78 exercices, 513 questions et 51 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
+Au total : 38 notions, 276 exercices, 1 557 questions et 51 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
 
 À faire valider par un enseignant de SVT avant publication : les 8 planches (captures envoyées au porteur), le vocabulaire du programme et les valeurs données à titre d'exemple dans les leçons.
 
@@ -331,18 +434,18 @@ Les 10 premières leçons de Physique-Chimie de la progression DPFC 2026-2027, r
 
 | # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
 |---:|---|---|---:|---:|---:|---:|---:|---|
-| 1 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 8 | 49 | 94 % | 2 | `plate dynamometer`, `coordinate_plane` |
-| 2 | `physique-chimie/les-forces.json` | Les forces | 4 | 8 | 59 | 93 % | 5 | `coordinate_plane`, `plate dynamometer` |
-| 3 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 8 | 43 | 91 % | 5 | `coordinate_plane` |
-| 4 | `physique-chimie/travail-et-puissance-mecaniques.json` | Travail et puissance mécaniques | 4 | 8 | 61 | 95 % | 4 | `coordinate_plane`, `stat_chart bars` |
-| 5 | `physique-chimie/energie-mecanique.json` | Énergie mécanique | 4 | 8 | 53 | 91 % | 3 | `stat_chart bars`, `coordinate_plane` |
-| 6 | `physique-chimie/electrolyse-et-synthese-de-l-eau.json` | Électrolyse et synthèse de l'eau | 4 | 8 | 56 | 95 % | 6 | `plate electrolyser`, `plate eudiometer`, `molecule` |
-| 7 | `physique-chimie/les-alcanes.json` | Les alcanes | 4 | 8 | 54 | 91 % | 5 | `molecule` |
-| 8 | `physique-chimie/les-lentilles.json` | Les lentilles | 5 | 9 | 63 | 94 % | 3 | `optics` |
-| 9 | `physique-chimie/les-defauts-de-l-oeil-et-leurs-corrections.json` | Les défauts de l'œil et leurs corrections | 4 | 8 | 48 | 94 % | 5 | `optics` |
-| 10 | `physique-chimie/oxydation-des-corps-purs-simples.json` | Oxydation des corps purs simples | 4 | 8 | 54 | 93 % | 4 | `molecule`, `diagram` |
+| 1 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 28 | 156 | 98 % | 4 | `plate dynamometer`, `coordinate_plane`, `stat_chart bars` |
+| 2 | `physique-chimie/les-forces.json` | Les forces | 4 | 28 | 175 | 98 % | 5 | `coordinate_plane`, `plate dynamometer` |
+| 3 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 28 | 151 | 97 % | 6 | `coordinate_plane`, `plate dynamometer` |
+| 4 | `physique-chimie/travail-et-puissance-mecaniques.json` | Travail et puissance mécaniques | 4 | 28 | 168 | 98 % | 4 | `coordinate_plane`, `stat_chart bars` |
+| 5 | `physique-chimie/energie-mecanique.json` | Énergie mécanique | 4 | 28 | 158 | 97 % | 3 | `stat_chart bars`, `coordinate_plane` |
+| 6 | `physique-chimie/electrolyse-et-synthese-de-l-eau.json` | Électrolyse et synthèse de l'eau | 4 | 28 | 160 | 98 % | 6 | `plate electrolyser`, `plate eudiometer`, `molecule` |
+| 7 | `physique-chimie/les-alcanes.json` | Les alcanes | 4 | 28 | 167 | 97 % | 7 | `molecule`, `stat_chart line`, `diagram` |
+| 8 | `physique-chimie/les-lentilles.json` | Les lentilles | 5 | 30 | 179 | 98 % | 8 | `optics` |
+| 9 | `physique-chimie/les-defauts-de-l-oeil-et-leurs-corrections.json` | Les défauts de l'œil et leurs corrections | 4 | 28 | 163 | 98 % | 6 | `optics` |
+| 10 | `physique-chimie/oxydation-des-corps-purs-simples.json` | Oxydation des corps purs simples | 4 | 28 | 161 | 98 % | 4 | `molecule`, `diagram` |
 
-Au total : 41 notions, 81 exercices, 540 questions et 42 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
+Au total : 41 notions, 282 exercices, 1 638 questions et 53 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
 
 À faire valider par un enseignant de Physique-Chimie avant publication : les 3 planches, et les chiffres des exercices.
 
@@ -352,18 +455,18 @@ Les 10 premières leçons d'EDHC de la progression DPFC 2026-2027, rédigées le
 
 | # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures |
 |---:|---|---|---:|---:|---:|---:|---|
-| 1 | `edhc/les-devoirs-des-parents.json` | Les devoirs des parents | 4 | 8 | 49 | 82 % | `diagram` |
-| 2 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 8 | 51 | 86 % | `diagram` |
-| 3 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 8 | 49 | 92 % | `diagram`, `stat_chart bars` |
-| 4 | `edhc/les-partis-politiques.json` | Les partis politiques | 4 | 8 | 44 | 89 % | `diagram` |
-| 5 | `edhc/les-institutions-juridictionnelles.json` | Les institutions juridictionnelles | 4 | 8 | 41 | 88 % | `diagram` |
-| 6 | `edhc/le-scrutin-electoral.json` | Le scrutin électoral | 5 | 9 | 51 | 92 % | `diagram`, `stat_chart bars`, `stat_chart pie` |
-| 7 | `edhc/le-civisme-fiscal.json` | Le civisme fiscal | 4 | 8 | 44 | 89 % | `diagram`, `stat_chart pie` |
-| 8 | `edhc/la-gestion-des-biens-publics.json` | La gestion des biens publics | 4 | 8 | 45 | 89 % | `diagram`, `stat_chart bars` |
-| 9 | `edhc/le-projet-d-entreprise.json` | Le projet d'entreprise | 5 | 9 | 47 | 91 % | `diagram`, `stat_chart line` |
-| 10 | `edhc/les-alliances-interethniques-les-mande-et-les-gour.json` | Les alliances interethniques : les Mandé et les Gour | 4 | 8 | 42 | 88 % | `diagram`, `map` |
+| 1 | `edhc/les-devoirs-des-parents.json` | Les devoirs des parents | 4 | 28 | 153 | 94 % | `diagram` |
+| 2 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 28 | 159 | 96 % | `diagram` |
+| 3 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 28 | 155 | 97 % | `diagram`, `stat_chart bars` |
+| 4 | `edhc/les-partis-politiques.json` | Les partis politiques | 4 | 28 | 152 | 97 % | `diagram` |
+| 5 | `edhc/les-institutions-juridictionnelles.json` | Les institutions juridictionnelles | 4 | 28 | 145 | 97 % | `diagram` |
+| 6 | `edhc/le-scrutin-electoral.json` | Le scrutin électoral | 5 | 30 | 170 | 98 % | `diagram`, `stat_chart bars`, `stat_chart pie` |
+| 7 | `edhc/le-civisme-fiscal.json` | Le civisme fiscal | 4 | 28 | 150 | 97 % | `diagram`, `stat_chart pie` |
+| 8 | `edhc/la-gestion-des-biens-publics.json` | La gestion des biens publics | 4 | 28 | 153 | 97 % | `diagram`, `stat_chart bars` |
+| 9 | `edhc/le-projet-d-entreprise.json` | Le projet d'entreprise | 5 | 30 | 168 | 98 % | `diagram`, `stat_chart line` |
+| 10 | `edhc/les-alliances-interethniques-les-mande-et-les-gour.json` | Les alliances interethniques : les Mandé et les Gour | 4 | 28 | 151 | 97 % | `diagram`, `map` |
 
-Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second modèle (Opus) qui n'en était pas l'auteur, et les défauts trouvés ont été corrigés : questions à deux bonnes réponses, faits inexacts (CEDEF, Croix-Rouge), noms à connotation régionale ou ethnique, district oublié sur la carte, corrections qui désignaient une proposition par sa position.
+Au total : 42 notions, 284 exercices, 1 556 questions et 24 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second modèle (Opus) qui n'en était pas l'auteur, et les défauts trouvés ont été corrigés : questions à deux bonnes réponses, faits inexacts (CEDEF, Croix-Rouge), noms à connotation régionale ou ethnique, district oublié sur la carte, corrections qui désignaient une proposition par sa position.
 
 À faire valider par un enseignant :
 

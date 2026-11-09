@@ -3,16 +3,14 @@ require "test_helper"
 # Every French locale file lives under `fr:`, defines each key once, and speaks the UDR-0007 and UDR-0130 vocabulary.
 class LocaleFilesTest < ActiveSupport::TestCase
   FILES = Rails.root.glob("config/locales/**/*.fr.yml").freeze
-  FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|médaille|trophée|essentielle)/i
+  FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|trophée|badges?|essentielle)/i
   # UDR-0130 : le titre de la liste des fiches de révision d'une fiche de cours, décidé par le porteur. « leçon » y
   # désigne la fiche de cours parente ; seule cette valeur exacte, sous ces clés, est admise.
   ALLOWED = {
     "fr.catalog.courses.show.essentials_title" => "Révisions de la leçon",
     "fr.classroom.classroom_courses.show.essentials_title" => "Révisions de la leçon",
     # UDR page de la leçon (refonte-page-lecon) §3.9 : « leçon » y désigne la fiche de cours.
-    "fr.catalog.courses.show.prepare_intro" => "Un exercice par notion, puis quatre sur toute la leçon.",
     "fr.catalog.courses.show.lesson_wide_title" => "Toute la leçon",
-    "fr.classroom.classroom_courses.show.prepare_intro" => "Un exercice par notion, puis quatre sur toute la leçon.",
     "fr.classroom.classroom_courses.show.lesson_wide_title" => "Toute la leçon",
     "fr.assessment.exercises.show.lesson_wide" => "Toute la leçon",
     "fr.assessment.session_results.show.back_to_lesson" => "Retour à la leçon",
@@ -63,18 +61,18 @@ class LocaleFilesTest < ActiveSupport::TestCase
   end
 
   test "the vocabulary pattern catches what it must" do
-    [ "Habileté", "Notion clé", "notions clés", "Leçon", "Quiz", "Essai", "Platine", "Médaille", "Trophée",
+    [ "Habileté", "Notion clé", "notions clés", "Leçon", "Quiz", "Essai", "Platine", "Badge", "Badges", "Trophée",
       "Fiche essentielle", "fiches essentielles" ].each do |term|
       assert_match FORBIDDEN, term
     end
-    [ "Fiche de révision", "Fiche de cours", "Révise l'essentiel du cours" ].each do |term|
+    [ "Fiche de révision", "Fiche de cours", "Révise l'essentiel du cours", "Médaille Or", "Pas encore" ].each do |term|
       assert_no_match FORBIDDEN, term
     end
   end
 
   test "the UDR-0130 exceptions are the listed values alone, with their exact wording" do
     assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
-    assert_equal [ "Révisions de la leçon", "Un exercice par notion, puis quatre sur toute la leçon.", "Toute la leçon",
+    assert_equal [ "Révisions de la leçon", "Toute la leçon",
                    "Retour à la leçon", "À revoir dans la leçon : %{questions}" ], ALLOWED.values.uniq
     ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end
