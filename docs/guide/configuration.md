@@ -148,7 +148,7 @@ Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure 
 | Variable | Rôle |
 |---|---|
 | `WEB_CONCURRENCY` | Nombre de processus Puma |
-| `RAILS_MAX_THREADS` | Threads par processus |
+| `RAILS_MAX_THREADS` | Threads web par processus (3 par défaut) ; le pool de connexions vaut le plus grand de ce nombre et de 3 (threads des jobs), plus 2 |
 | `JOB_CONCURRENCY` | Concurrence des jobs Solid Queue |
 | `PORT` | Port d'écoute — Railway le fournit |
 | `RAILS_LOG_LEVEL` | `info` par défaut |

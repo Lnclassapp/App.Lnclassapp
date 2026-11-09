@@ -6,7 +6,7 @@
 <%# UDR-0131 : les seuils se lisent sur 20, comme les notes de l'élève. %>
 <% thresholds = { pass_grade: grading.grade_on_20(grading::PASS_THRESHOLD), mastery_grade: grading.grade_on_20(grading::MASTERY_THRESHOLD),
                   gold_grade: grading.grade_on_20(grading::GOLD_THRESHOLD),
-                  remediation_grade: grading.grade_on_20(grading::REMEDIATION_THRESHOLD), example_grade: grading.grade_on_20(80) } %>
+                  example_grade: grading.grade_on_20(80) } %>
 <% if in_shell? %>
   <div class="max-w-2xl">
     <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: home_path_for(current_actor.role) } %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -291,6 +291,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_090000) do
     t.bigint "removed_by_id"
     t.index ["classroom_id", "student_id"], name: "index_classroom_students_on_classroom_id_and_student_id", unique: true
     t.index ["removed_by_id"], name: "index_classroom_students_on_removed_by_id", where: "(removed_by_id IS NOT NULL)"
+    t.index ["student_id"], name: "index_classroom_students_on_student_id"
     t.index ["student_id"], name: "index_classroom_students_one_active_primary", unique: true, where: "(\"primary\" AND (left_at IS NULL))"
     t.check_constraint "(removed_at IS NULL) = (removed_by_id IS NULL)", name: "classroom_students_removed_by_iff_removed"
     t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'link'::character varying, 'code'::character varying]::text[])", name: "classroom_students_joined_via_values"

@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052, UDR-0074): on a classroom's page, the school management opens the help of « Taux
-# de rendu » with one touch; from its home it opens a level, then a classroom, searches a student while typing, then comes
+# FU-10, FU-21, FU-49 (UDR-0054, UDR-0052, UDR-0074): on a classroom's page, the school management opens the help of « Devoirs
+# rendus » with one touch; from its home it opens a level, then a classroom, searches a student while typing, then comes
 # back to the level by the common back link.
 module Finitions
   class SchoolAdminTest < ApplicationSystemTestCase
@@ -19,7 +19,7 @@ module Finitions
 
     def tc(key, **) = I18n.t("school_admin.classrooms.#{key}", **)
 
-    test "FU-21: the help of « Taux de rendu » opens with one touch under its figure, on a 390 px phone" do
+    test "FU-21: the help of « Devoirs rendus » opens with one touch under its figure, on a 390 px phone" do
       with_mobile_viewport do
         sign_in_as @admin
         assert_selector "#direction_home_school", wait: SIGN_IN_WAIT
@@ -27,7 +27,7 @@ module Finitions
         assert_title "2nde C 1 · Direction · Lnclass"
         assert_no_text tc("tips.submission_rate")
 
-        summary = find("#classroom_figures summary", text: "Aide : #{tc('show.figures.submission_rate')}", visible: :all)
+        summary = find("#classroom_figures summary", text: "Aide : #{tc('show.figures.submitted')}", visible: :all)
         summary.click
 
         assert_text tc("tips.submission_rate")

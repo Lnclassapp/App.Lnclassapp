@@ -210,6 +210,14 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     travel_to(Time.zone.local(2026, 10, 22, 12)) { assert_equal [ 0, 0 ], home.levels.map(&:self_practice_count) }
   end
 
+  test "the home does not read the medals" do
+    queries = []
+    callback = ->(*, payload) { queries << payload[:sql] }
+    ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { Queries::School::DirectionHomeQuery.new(cache: ActiveSupport::Cache::NullStore.new).call(school_id: @school.id) }
+
+    assert queries.none? { it.include?("exercise_badges") }
+  end
+
   test "the number of queries does not follow the number of classrooms, and stays within 12" do
     build = lambda do |count|
       count.times do |index|

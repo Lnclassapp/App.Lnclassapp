@@ -1,13 +1,11 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0106, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
+# ADR  : 0033, 0043 (amendé le 2026-11-09 : la lacune se résout à l'Or), 0106, 0115, médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
 module Entities
   module Assessment
     module Grading
       PASS_THRESHOLD = 50
       MASTERY_THRESHOLD = 70
-      # ADR-0043, amendement du 2026-09-27 : une lacune n'est résolue qu'à partir de ce score (décision du porteur).
-      REMEDIATION_THRESHOLD = 75
       GOLD_THRESHOLD = 80
       PERFECT_THRESHOLD = 100
       BADGE_THRESHOLDS = { bronze: PASS_THRESHOLD, silver: MASTERY_THRESHOLD,
@@ -25,23 +23,31 @@ module Entities
       # réponses sont justes. 98 % s'affiche 20/20 mais n'est pas un sans-faute.
       def self.perfect?(score_percent) = score_percent >= PERFECT_THRESHOLD
 
-      # Palier le plus haut atteint, ou nil sous la note de PASS_THRESHOLD.
+      # Palier le plus haut atteint. Tout exercice traité donne au moins Bronze (UDR médailles, décision du porteur du 2026-11-08) :
+      # le seul « Pas encore » est l'absence d'exercice fait, que l'appelant porte en ne l'appelant pas.
       def self.badge_for(score_percent)
         return :diamond if perfect?(score_percent)
 
-        GRADED_LEVELS.find { |level| reaches?(score_percent, BADGE_THRESHOLDS[level]) }
+        GRADED_LEVELS.find { |level| reaches?(score_percent, BADGE_THRESHOLDS[level]) } || :bronze
       end
+
+      # ADR médailles lues à la clôture : la médaille que donne une session terminée, celle que la clôture enregistre si elle monte.
+      # treated : au moins une réponse donnée (ou une question du cahier) ; une copie vide n'en donne aucune (nil).
+      def self.session_medal(score_percent, treated:) = (badge_for(score_percent) if treated)
 
       # UDR enseignant §3.2 : le badge qui range un élève dans une classe, une seule règle. `scores` : les notes retenues (sur 100)
       # de ses exercices assignés faits ; `all_perfect` : chacun est un sans-faute. Diamant : au moins un exercice fait et tous
       # sans faute ; sinon Or, Argent, Bronze selon la moyenne, lue sur la note sur 20 ; nil (« Pas encore ») sans exercice
-      # fait ou sous la moyenne de Bronze. Jamais un exercice par élève en requête : l'appelant lit tout en une fois.
-      def self.class_badge_for(scores:, all_perfect:)
-        return nil if scores.empty?
+      # fait ; sous la moyenne d'Argent, Bronze. Jamais un exercice par élève en requête : l'appelant lit tout en une fois.
+      # ADR médailles lues à la clôture, PRD §3 : sans médaille enregistrée dans la classe (`has_medal` faux : copies vides seulement),
+      # « Pas encore » (nil), quelles que soient les notes ; avec une médaille et sans note retenue, Bronze.
+      def self.class_badge_for(scores:, all_perfect:, has_medal:)
+        return nil unless has_medal
+        return :bronze if scores.empty?
         return :diamond if all_perfect
 
         average = scores.sum.fdiv(scores.size)
-        GRADED_LEVELS.find { |level| reaches?(average, BADGE_THRESHOLDS[level]) }
+        GRADED_LEVELS.find { |level| reaches?(average, BADGE_THRESHOLDS[level]) } || :bronze
       end
 
       # Un badge ne monte que vers un palier strictement supérieur.

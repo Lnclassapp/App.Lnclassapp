@@ -140,3 +140,13 @@ Le tableau « À la clôture » du §4 devient :
 - Précisé le 2026-10-19 (ADR-0101 §4.5) : les seuils 50 et 75 s'appliquent à la note affichée sur 20 (10/20 et 15/20), pas au pourcentage brut.
 - L'encart de la fiche essentielle annonce ce seuil à l'élève (« obtiens au moins 75 % à l'un de ses exercices »).
 - Le PRD (AS-11, qui disait 70 %) est aligné sur ce seuil.
+
+## Amendement du 2026-11-09 — une lacune n'est levée qu'à l'Or
+
+*Décision du porteur, définitive : « tous les élèves ayant la médaille Bronze ou Argent sont dans la remédiation ». Ce qui précède reste tel qu'accepté ; en cas d'écart, cette section fait foi (chantier `seuil-remediation`).*
+
+- Le seuil de levée du tableau ci-dessus (`REMEDIATION_THRESHOLD`, 75) est remplacé par le seuil de l'Or (`Grading::GOLD_THRESHOLD`). `REMEDIATION_THRESHOLD` est supprimé, sans alias : une seule échelle, la médaille.
+- Lu sur la note affichée sur 20 (`Grading.reaches?`, ADR-0106) : 78 % s'affiche 16/20 et lève ; 77 % s'affiche 15/20 et ne lève pas. Or et Diamant lèvent ; Bronze et Argent restent à revoir, sans échec de plus.
+- Ouverture inchangée (sous la réussite, 10/20). « Pas encore » n'entre pas en remédiation.
+- **Pas de réouverture rétroactive** : une lacune levée entre 73 et 77 % avant le changement reste levée ; aucune migration. Une lacune en attente demande désormais l'Or.
+- Mesure sur le jeu standard : aucune session entre 73 et 77 %, donc aucun écart ; 37 lacunes en attente, aucune levée.

@@ -166,7 +166,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Cet exercice n'existe plus.", flash[:alert]
   end
 
-  test "la page de résultat garde son contenu (note sur 20) et offre le retour à l'exercice de la feuille, ancre comprise" do
+  test "la page de résultat montre la médaille de la copie et offre le retour à l'exercice de la feuille, ancre comprise" do
     sign_in_as @student
     check(right: 4)
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
@@ -174,7 +174,8 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     get exercise_session_result_path(session.public_id, return_to: "sheet")
 
     assert_response :success
-    assert_select "#session_grade", text: "16/20"
+    assert_select "#session_badge", text: /Or/
+    assert_select "#session_grade", 0
     back = "#{course_path(@course.slug)}#sheet-exercise-#{@exercise.public_id}"
     assert_select "a[href=?]", back, text: "Retour à la leçon"
   end

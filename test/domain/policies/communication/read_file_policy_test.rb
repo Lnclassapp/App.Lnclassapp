@@ -26,10 +26,20 @@ module Policies
         assert call(actor(:teacher), readable: true, author_role: :team).success?
       end
 
-      test "AN-09, AN-19 — its author receives them in any state, the team for any message" do
+      test "AN-09, AN-19 — its author receives them in any state" do
         assert call(actor(:teacher, user_id: 99), announcement(status: "draft")).success?
         assert call(actor(:teacher, user_id: 99), announcement(status: "archived")).success?
-        assert call(actor(:team, school_id: nil), announcement(status: "withdrawn"), author_role: :school_admin).success?
+        assert call(actor(:team, user_id: 99, school_id: nil), announcement(status: "withdrawn"), author_role: :team).success?
+      end
+
+      # Audit B-032: the files follow the rights on the message (moderatable_by?), live messages only.
+      test "B-032 — the team receives the files of a live message of another author, not a draft, archived or withdrawn one" do
+        %w[scheduled published].each do |status|
+          assert call(actor(:team, school_id: nil), announcement(status:), author_role: :school_admin).success?, status
+        end
+        %w[draft archived withdrawn].each do |status|
+          assert_equal :not_found, call(actor(:team, school_id: nil), announcement(status:), author_role: :school_admin).code, status
+        end
       end
 
       test "the direction receives the files of a teacher of its school, the one it may withdraw" do

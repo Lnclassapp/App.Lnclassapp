@@ -162,6 +162,21 @@ module Repositories
         end
       end
 
+      test "B-003 : refuse de supprimer un établissement que seul du personnel, un départ ou une annonce référence" do
+        staffed = create_school_admin(school: create_school(drena: @drena), archived_at: 1.day.ago).then { |admin| Orm::SchoolStaff.find_by(user: admin).school }
+        departed = create_school(drena: @drena)
+        create_teacher_departure(teacher: create_teacher(school: nil), school: departed, detached_by: create_team_member(second_factor: false))
+        announced = create_school(drena: @drena)
+        create_message(author: create_team_member(second_factor: false), audience: "classrooms", classrooms: [ create_classroom(school: announced) ])
+
+        [ staffed, departed, announced ].each do |record|
+          result = @repository.delete_if_unreferenced(id: record.id)
+
+          assert_equal({ base: [ :referenced ] }, result.errors)
+          assert Orm::School.exists?(record.id)
+        end
+      end
+
       test "B1 : refuse de supprimer un établissement visé par une demande d'enseignant (même refusée) ou un parrainage (ADR-0063)" do
         requested = create_join_request(status: "rejected").school
         sponsored = create_school

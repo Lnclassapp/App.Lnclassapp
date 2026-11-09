@@ -95,7 +95,7 @@
               <% end %>
             </p>
 
-            <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+            <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, data: { turbo_submits_with: t(".submitting") } %>
           <% end %>
         <% end %>
       <% end %>

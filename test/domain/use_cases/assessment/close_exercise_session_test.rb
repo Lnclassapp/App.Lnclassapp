@@ -150,8 +150,8 @@ module UseCases
       end
 
       # ADR-0106 : le palier se lit sur la note affichée (10, 14 et 16/20), le Diamant reste le sans-faute.
-      test "bornes du barème : 47 rien, 48 Bronze, 67 Bronze, 68 Argent, 77 Argent, 78 Or, 99 Or, 100 Diamant" do
-        { 47 => nil, 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 99 => :gold, 100 => :diamond }
+      test "bornes du barème : 47 Bronze (réponse donnée), 48 Bronze, 67 Bronze, 68 Argent, 77 Argent, 78 Or, 99 Or, 100 Diamant" do
+        { 47 => :bronze, 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 99 => :gold, 100 => :diamond }
           .each do |score, level|
             row = close(correct: score).value
 
@@ -184,10 +184,62 @@ module UseCases
         assert_empty @badges.upserts
       end
 
-      test "sous le seuil, aucun badge n'est écrit" do
+      test "sous le seuil avec réponses, Bronze est écrit" do
         row = close(correct: 40).value
 
+        assert_equal [ :bronze, true ], [ row.badge_level, row.earned_now ]
+      end
+
+      # ADR médailles lues à la clôture : Bronze dès une réponse donnée, même sous 48 % ; une copie vide ne donne rien.
+      test "20 % avec au moins une réponse donnée : Bronze enregistré, badge monté" do
+        row = close(correct: 20).value
+
+        assert_equal [ 20, :bronze, true ], [ row.score_percent, row.badge_level, row.earned_now ]
+        assert_equal [ :bronze ], @badges.upserts.map(&:level)
+      end
+
+      test "0 % avec des réponses fausses : Bronze ; copie sans aucune réponse : rien" do
+        assert_equal :bronze, close(correct: 0, total: 3).value.badge_level
+
+        blank = Array.new(3) { |index| Attempt.new(session_id: 5, question_id: index, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) }
+        row = close(correct: 0, total: 3, attempts: blank).value
+
         assert_equal [ nil, false ], [ row.badge_level, row.earned_now ]
+        assert_empty @badges.upserts
+      end
+
+      test "copie partiellement vide : une réponse donnée parmi des questions laissées vides donne Bronze" do
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [ 1 ], correct: false, answered_at: NOW) ] +
+                Array.new(2) { |index| Attempt.new(session_id: 5, question_id: index + 1, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) }
+
+        row = close(correct: 0, total: 3, attempts: given).value
+
+        assert_equal [ 0, :bronze, true ], [ row.score_percent, row.badge_level, row.earned_now ]
+        assert_equal [ :bronze ], @badges.upserts.map(&:level)
+      end
+
+      # Une session sans aucune tentative n'a rien répondu : aucune médaille (une règle « toutes répondues » sur une liste vide en donnerait une).
+      test "session sans aucune tentative : aucune médaille" do
+        row = close(correct: 0, total: 3, attempts: []).value
+
+        assert_equal [ 0, nil, false ], [ row.score_percent, row.badge_level, row.earned_now ]
+        assert_empty @badges.upserts
+      end
+
+      # Option prudente (journal, À trancher) : le cahier n'a aucun champ, sa tentative est unanswered ; il compte comme traité.
+      test "exercice du cahier seul : la copie compte comme traitée, Bronze" do
+        questions = [ question(0, type: "notebook") ]
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) ]
+
+        row = close(correct: 0, total: 1, questions:, attempts: given).value
+
+        assert_equal [ 0, :bronze ], [ row.score_percent, row.badge_level ]
+      end
+
+      test "Bronze sous 48 % ne remplace pas une médaille déjà détenue" do
+        row = close(correct: 20, current_badge: badge(:silver)).value
+
+        assert_equal [ :bronze, false ], [ row.badge_level, row.earned_now ]
         assert_empty @badges.upserts
       end
 
@@ -212,26 +264,27 @@ module UseCases
         assert_empty @gaps.calls
       end
 
-      test "74 % s'affiche 15/20 : la lacune est remédiée" do
+      # Décision du porteur (2026-11-09) : Bronze et Argent restent en remédiation, la lacune se lève à l'Or.
+      test "74 % s'affiche 15/20 (Argent) : la lacune reste en attente, sans nouvel échec" do
         close(correct: 74, pending_gap: gap, kind: "remediation")
 
-        assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
+        assert_empty @gaps.calls
       end
 
-      test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
+      test "réussite sous l'Or : la lacune reste en attente, sans nouvel échec" do
         close(correct: 72, pending_gap: gap, kind: "remediation")
 
         assert_empty @gaps.calls
       end
 
-      test "réussite d'une remédiation à 75 % : la lacune est remédiée" do
-        close(correct: 75, pending_gap: gap, kind: "remediation")
+      test "réussite d'une remédiation à l'Or (78 %) : la lacune est remédiée" do
+        close(correct: 78, pending_gap: gap, kind: "remediation")
 
         assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
       end
 
-      test "réussite d'une session standard à 75 % : la lacune est auto-corrigée" do
-        close(correct: 75, pending_gap: gap)
+      test "réussite d'une session standard à l'Or (78 %) : la lacune est auto-corrigée" do
+        close(correct: 78, pending_gap: gap)
 
         assert_equal [ [ :resolve, { id: 70, status: "self_corrected", session_id: 5, at: NOW } ] ], @gaps.calls
       end
@@ -246,7 +299,7 @@ module UseCases
       test "CA-22 : un exercice de toute la leçon raté ouvre aucune lacune, mais note et badge restent" do
         row = close(correct: 40, essential_id: nil).value
 
-        assert_equal [ 40, nil ], [ row.score_percent, row.badge_level ]
+        assert_equal [ 40, :bronze ], [ row.score_percent, row.badge_level ]
         assert_empty @gaps.calls
         assert_equal [ [ 5, 40, NOW ] ], @sessions.completed
       end

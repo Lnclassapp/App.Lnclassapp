@@ -91,17 +91,31 @@ module Communication
       end
     end
 
-    test "AN-09, AN-19 — M. Kouassi and the team receive the files, even of an archived message" do
+    test "AN-09, AN-19 — M. Kouassi receives the files, even of an archived message; the team does not (B-032)" do
       archived = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @troisieme_b ], status: "archived")
       attach(archived, :audio, AUDIO, "audio/mpeg")
 
-      [ @kouassi, create_team_member ].each do |user|
-        sign_in_as user
-        get file_path("audio", archived)
+      sign_in_as @kouassi
+      get file_path("audio", archived)
+      assert_equal [ 200, AUDIO ], [ response.status, response.body.b ]
+      sign_out
 
-        assert_equal [ 200, AUDIO ], [ response.status, response.body.b ], user.role
-        sign_out
-      end
+      sign_in_as create_team_member
+      get file_path("audio", archived)
+      assert_response :not_found
+    end
+
+    test "B-032 — the team receives the files of a live message of another author, not of a draft" do
+      draft = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @troisieme_b ], status: "draft")
+      attach(draft, :audio, AUDIO, "audio/mpeg")
+      sign_in_as create_team_member
+
+      get file_path("audio", draft)
+      assert_response :not_found
+
+      draft.update!(status: "published", published_at: 1.hour.ago, ends_at: 1.day.from_now)
+      get file_path("audio", draft)
+      assert_equal [ 200, AUDIO ], [ response.status, response.body.b ]
     end
 
     test "the direction of the school receives the files of its teacher's message; another direction does not" do

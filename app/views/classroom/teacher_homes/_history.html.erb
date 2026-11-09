@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/_history — « Historique » de l'accueil enseignant : les assignations échues, sans recouvrir « Cette semaine » %>
-<%# Rôle : groupées par jour d'échéance, une ligne par assignation (rond de matière, titre vers son suivi, « Tle D 1 · 27 / 27 faits », moyenne de la classe) ; 3 lignes puis « Voir plus » ; absente sans ligne %>
-<%# ADR  : 0072 · UDR : 0057 (R3), 0090 §4 (verte dès 14/20, jamais rouge), écrans enseignant §3.3 · locals: (history: [TeacherFollowUpsQuery::Row], badges: false) -%>
+<%# Rôle : groupées par jour d'échéance, une ligne par assignation (rond de matière, titre vers son suivi, « Tle D 1 · 27 / 27 faits », médailles du devoir) ; 3 lignes puis « Voir plus » ; absente sans ligne %>
+<%# ADR  : 0072 · UDR : 0057 (R3), écrans enseignant §3.3 · locals: (history: [TeacherFollowUpsQuery::Row], badges: false) -%>
 <% if history.any? %>
   <% grading = Entities::Assessment::Grading %>
   <% today = Time.zone.today %>
@@ -30,12 +30,14 @@
                 <span><%= t(".line", classroom: row.classroom_name, done: t("classroom.teacher_homes.follow_ups.done", done: row.done, count: row.present)) %></span>
               </p>
             </div>
-            <%# Verte dès « 14/20 » affiché (MASTERY_THRESHOLD), à l'encre dessous ; jamais en rouge. %>
-            <% if row.average_percent %>
-              <% grade = number_with_precision(row.average_percent / 5.0, precision: 1, strip_insignificant_zeros: true) %>
-              <span aria-label="<%= t(".average_label", grade:) %>"
-                    class="<%= class_names("shrink-0 font-display text-base font-medium tabular-nums",
-                                           grading.reaches?(row.average_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= t(".average", grade:) %></span>
+            <%# UDR médailles : la répartition de médailles du devoir (« 8 Bronze · 6 Argent · 3 Or »), jamais une moyenne ; rien sans médaille. %>
+            <% if row.medals.any? %>
+              <ul aria-label="<%= t(".medals_label") %>" class="flex shrink-0 flex-wrap items-center justify-end gap-1">
+                <% grading::BADGE_ORDER.each do |level| %>
+                  <% pill = badge_pill(level, count: row.medals.fetch(level, 0)) %>
+                  <% if pill %><li><%= pill %></li><% end %>
+                <% end %>
+              </ul>
             <% end %>
           </div>
         <% end %>

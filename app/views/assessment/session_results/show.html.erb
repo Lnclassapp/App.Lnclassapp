@@ -56,39 +56,29 @@
         </div>
       </div>
 
-      <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
-      <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:max-lg:grid-cols-4" unless @owner %>">
-        <div class="<%= tile %>">
-          <dt class="<%= label %>"><%= t(".grade") %></dt>
-          <dd id="session_grade" class="mt-1 whitespace-nowrap font-display text-3xl font-medium tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
-        </div>
-        <% unless @owner %>
-          <div class="<%= tile %>">
-            <dt class="<%= label %>"><%= t(".score") %></dt>
-            <dd class="mt-1 whitespace-nowrap font-display text-2xl font-medium tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
-          </div>
+      <%# UDR médailles : l'élève lit sa médaille et la prochaine à viser, ni note, ni score, ni maîtrise ; l'enseignant et l'équipe gardent les 4 termes (chantiers suivants). %>
+      <% if @owner %>
+        <% upcoming = next_medal(result.badge_level) %>
+        <% if upcoming %>
+          <p id="session_next_medal" class="mt-4 text-sm text-mute"><%= t(".next_medal", medal: badge_label(upcoming)) %></p>
         <% end %>
-        <div class="<%= tile %>">
-          <dt class="flex items-center justify-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip mastery_tip, label: t(".mastery") %></dt>
-          <% mastery = Entities::Assessment::Grading.mastery_for(result.score_percent) %>
-          <dd class="mt-2 whitespace-nowrap"><%= ui_badge mastery_label(result.score_percent), size: :sm,
-                                        tone: { acquired: :success, fragile: :gold, struggling: :neutral }.fetch(mastery) %></dd>
-        </div>
-        <% unless @owner %>
+      <% else %>
+        <%# medailles-enseignant : l'enseignant et l'équipe lisent aussi la médaille de la copie (ci-dessus), plus la note, le score ni la maîtrise ; reste « x sur y justes », un compte de réponses. %>
+        <dl class="mt-6 grid grid-cols-1 gap-3">
           <div class="<%= tile %>">
             <dt class="<%= label %>"><%= t(".correct") %></dt>
             <dd class="mt-1 whitespace-nowrap font-medium tabular-nums">
               <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
             </dd>
           </div>
-        <% end %>
-      </dl>
+        </dl>
+      <% end %>
       <%# UDR-0140 §3 : les points, seulement quand l'exercice n'est pas tout à 1 point ; les réponses rédigées et le cahier, à comparer. %>
       <% points = result.points %>
       <% fmt = ->(value) { number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
-      <% if points.weighted || points.manual.positive? %>
+      <% if (points.weighted && !@owner) || points.manual.positive? %>
         <div id="session_points" class="mt-4 space-y-1 text-sm text-mute">
-          <% if points.weighted %>
+          <% if points.weighted && !@owner %>
             <p><%= t(".points_graded", count: points.earned, points: fmt.(points.earned), total: fmt.(points.graded)) %></p>
           <% end %>
           <% if points.manual.positive? %>

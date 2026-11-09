@@ -47,7 +47,7 @@ class Catalog::PracticeInSheetTest < ActionDispatch::IntegrationTest
   test "CA-3: neither a student, a teacher nor the team gets the expected value, the right proposition or the explanation" do
     create_practice_notion(course: @course, questions: [ numeric_question, choice_question ])
     classroom = Orm::Classroom.find_by!(level: @course.level)
-    teacher = create_teacher(classrooms: [ classroom ])
+    teacher = create_teacher(material: @course.material, classrooms: [ classroom ])
 
     [ @student, teacher, create_team_member ].each do |user|
       open_course(user)

@@ -63,6 +63,18 @@ module Factories
                                    score_percent:, completed_at: (Time.current if completed), **attributes)
     end
 
+    # The medal that closing writes for a session with at least one answer (ADR medals read at closing): the level of its score,
+    # Bronze at least (Grading.badge_for), kept on this session only when it is strictly higher than the one already held
+    # (ADR-0033). A blank copy is a create_exercise_session without record_medal: closing writes nothing for it.
+    def record_medal(session)
+      level = Entities::Assessment::Grading.badge_for(session.score_percent)
+      badge = Orm::ExerciseBadge.find_or_initialize_by(student_id: session.student_id, exercise_id: session.exercise_id)
+      return session unless Entities::Assessment::Grading.upgrade?(badge.level, level)
+
+      badge.update!(exercise_session: session, level: level.to_s, awarded_at: Time.current)
+      session
+    end
+
     def create_attempt(session: create_exercise_session, question: session.exercise.questions.first, correct: true)
       answers = question.answers.to_a
       selected = correct ? answers.select(&:correct) : [ answers.reject(&:correct).first ]

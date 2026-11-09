@@ -577,4 +577,16 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  # B-008 (audit 2026-11-08): a forged `import=text` is an unknown kind (404) or a refused form, never a 500.
+  test "an import parameter that is a string does not raise a server error" do
+    sign_in_as @member
+
+    post teams_imports_path, params: { import: "forged" }
+    assert_response :not_found
+    post teams_imports_path, params: { kind: "schools", import: "forged" }
+    assert_response :unprocessable_entity
+    post teams_imports_path, params: { kind: { x: "1" } }
+    assert_response :not_found
+  end
 end

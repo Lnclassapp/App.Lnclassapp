@@ -1,13 +1,16 @@
 # 🧠 DOMAINE · UseCases::School::ReviewJoinRequest
 # Rôle : l'équipe valide (rattache) ou refuse un enseignant inscrit sans code, depuis la fiche ; chaque décision est auditée
-# ADR  : 0026, 0028, 0063, 0103 · UDR : 0050
+# ADR  : 0026, 0028, 0063, 0103 · UDR : 0050 · audit B-015
 module UseCases
   module School
     class ReviewJoinRequest
       DECISIONS = %w[approve reject].freeze
 
       # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort ; le rattaché reçoit sa dernière liste (ADR-0103 §4.4).
-      def initialize(join_requests:, audit_log:, policy:, transaction:, clock:, teacher_materials:)
+      # schools, departures : validation seulement, comme VouchPolicy et JoinSchoolWithCode (audit B-015).
+      def initialize(join_requests:, audit_log:, policy:, transaction:, clock:, teacher_materials:, schools:, departures:)
+        @schools = schools
+        @departures = departures
         @join_requests = join_requests
         @teacher_materials = teacher_materials
         @audit_log = audit_log
@@ -17,7 +20,8 @@ module UseCases
       end
 
       # decision : "approve" | "reject".
-      # → Result(JoinRequest) | :forbidden | :invalid | :not_found | :conflict (déjà traitée)
+      # → Result(JoinRequest) | :forbidden | :invalid | :not_found | :conflict (déjà traitée ; validation : école inactive
+      #   [base school_inactive] ou départ ouvert [base departure_open])
       def call(actor:, public_id:, decision:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -26,6 +30,9 @@ module UseCases
         request = @join_requests.find_by_public_id(public_id:)
         return Shared::Result.failure(:not_found) if request.nil?
         return Shared::Result.failure(:conflict, errors: { base: [ :already_decided ] }) unless request.pending?
+
+        unavailable = unavailable_for_approval(request, decision)
+        return unavailable if unavailable
 
         now = @clock.now
         @transaction.call do
@@ -38,6 +45,15 @@ module UseCases
       end
 
       private
+
+      # Valider rattache : l'école doit être active et l'enseignant sans départ ouvert (refuser reste toujours possible).
+      def unavailable_for_approval(request, decision)
+        return unless decision == "approve"
+        return Shared::Result.failure(:conflict, errors: { base: [ :school_inactive ] }) unless @schools.find_by_id(id: request.school_id)&.active?
+        return unless @departures.open_for(teacher_id: request.teacher_id, school_id: request.school_id)
+
+        Shared::Result.failure(:conflict, errors: { base: [ :departure_open ] })
+      end
 
       def decide(request, decision, actor, now)
         return @join_requests.reject(id: request.id, decided_by_id: actor.user_id, at: now) if decision == "reject"

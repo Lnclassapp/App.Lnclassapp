@@ -10,7 +10,7 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
     @wide = create_lesson_wide_exercise(course: @course)
     @classroom = create_classroom(name: "3ème 1", level: @course.level, series: @course.series)
     @foreign = create_classroom(name: "3ème 2", level: @course.level, series: @course.series, school: @classroom.school)
-    @teacher = create_teacher(classrooms: [ @classroom ])
+    @teacher = create_teacher(material: @course.material, classrooms: [ @classroom ])
     Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: @teacher.id, classroom_id: @classroom.id, weekdays: [ 1, 4 ],
                                                                 at: Time.current)
     sign_in_as @teacher

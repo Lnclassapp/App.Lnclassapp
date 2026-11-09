@@ -22,14 +22,13 @@ fr:
           other: "%{done} / %{count} faits"
         pending: "%{count} pas encore"
         late: "%{count} en retard"
-      # UDR enseignant §3.3 : « Historique », absent sans ligne ; moyenne de la classe à droite.
+      # UDR enseignant §3.3 : « Historique », absent sans ligne ; répartition des médailles à droite.
       history:
         title: "Historique"
         today: "Aujourd'hui"
         yesterday: "Hier"
         line: "%{classroom} · %{done}"
-        average: "%{grade}/20"
-        average_label: "Moyenne de la classe : %{grade} sur 20"
+        medals_label: "Médailles de la classe pour ce devoir"
       choose_materials:
         title: "Choisissez vos matières"
         description: "Vos cours et vos exercices à suivre dépendent des matières que vous enseignez dans cet établissement."
@@ -55,7 +54,7 @@ fr:
           one: "1 exercice en cours"
           other: "%{count} exercices en cours"
         empty_hint: "Donnez-leur le code, ou partagez le lien sur WhatsApp."
-        badges_label: "Élèves par badge"
+        badges_label: "Élèves par médaille"
         code_label: "Code de la classe"
         copy: "Copier"
         copy_label: "Copier le code de la classe %{classroom}"

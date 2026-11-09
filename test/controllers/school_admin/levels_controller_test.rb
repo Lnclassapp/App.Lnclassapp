@@ -13,18 +13,18 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
 
   def tl(key, **) = I18n.t("school_admin.levels.#{key}", **)
   def signal_text(signal, key) = I18n.t("school_admin.signals.#{signal}.#{key}")
-  def not_computed = I18n.t("school_admin.classrooms.not_computed")
   def card(classroom) = "li#classroom_#{classroom.public_id}"
 
   def classroom(name, school: @school, level: @level, **) = create_classroom(school:, level:, name:, **)
 
   # `students` present students and `assignments` given; the first students hand in the first assignment, one per score.
-  def classroom_with(name, students:, assignments: 0, scores: [], **)
+  def classroom_with(name, students:, assignments: 0, scores: [], medals: [], **)
     klass = classroom(name, **)
     given = Array.new(assignments) { create_assignment(classroom: klass, by: @teacher) }
     pupils = Array.new(students) { create_student(classroom: klass) }
     scores.each_with_index do |score, index|
-      create_exercise_session(student: pupils[index], status: "completed", score_percent: score, classroom_assignment_id: given.first.id)
+      session = create_exercise_session(student: pupils[index], status: "completed", score_percent: score, classroom_assignment_id: given.first.id)
+      create_badge(student: pupils[index], exercise: session.exercise, level: medals.fetch(index).to_s, session:) if medals[index]
     end
     klass
   end
@@ -62,8 +62,8 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
 
   test "AD-09: one card per classroom, sorted by name, each with the level drawing, its dot, its figures and its link" do
     third = classroom_with("3ème 3", students: 2)
-    first = classroom_with("3ème 1", students: 6, assignments: 1, scores: [ 60, 70, 80, 90, 100 ]) # 5 / 6 → 83 %, average 80 %
-    second = classroom_with("3ème 2", students: 3, assignments: 2, scores: [ 40, 50 ])              # 2 / 6 → 33 %, no average
+    first = classroom_with("3ème 1", students: 6, assignments: 1, scores: [ 60, 70, 80, 90, 100 ], medals: %i[bronze bronze silver gold gold]) # 5 / 6 rendus
+    second = classroom_with("3ème 2", students: 3, assignments: 2, scores: [ 40, 50 ], medals: %i[bronze])  # 2 / 6 rendus
     sign_in_as @admin
 
     get school_admin_level_path("3eme")
@@ -89,33 +89,29 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_select "span.sr-only", text: signal_text(:green, :label)
       assert_select "li", text: "6 élèves"
       assert_select "li", text: "1 devoir donné"
-      assert_select "li", text: "Taux de rendu : 83 %"
-      assert_select "li span.font-medium.text-ink", text: "83 %"
-      assert_select "li", text: "Moyenne : 80 %"
-      assert_select "span[aria-hidden=true]", text: "—", count: 0
+      assert_select "li", text: "5 devoirs rendus sur 6"
+      assert_select "li", text: /2 Bronze\s*1 Argent\s*2 Or/
     end
     assert_select card(second) do
       assert_select "span.bg-signal-red[aria-hidden=true]", count: 1
       assert_select "span.sr-only", text: signal_text(:red, :label)
       assert_select "li", text: "3 élèves"
       assert_select "li", text: "2 devoirs donnés"
-      assert_select "li", text: "Taux de rendu : 33 %"
-      assert_select "li", text: "Moyenne : —#{not_computed}" do
-        assert_select "span[aria-hidden=true]", text: "—"
-        assert_select "span.sr-only", text: not_computed
-      end
+      assert_select "li", text: "2 devoirs rendus sur 6"
+      assert_select "li", text: /1 Bronze/
     end
     assert_select card(third) do
       assert_select "span[class*=bg-signal]", count: 0
       assert_select "span.sr-only", text: /Signal/, count: 0
       assert_select "li", text: "2 élèves"
       assert_select "li", text: "Aucun devoir donné"
-      assert_select "li", text: "Taux de rendu : —#{not_computed}"
-      assert_select "li", text: "Moyenne : —#{not_computed}"
+      assert_select "li", text: "Pas encore"
+      assert_select "li", text: /rendus sur/, count: 0
     end
     assert_select "#signal_legend", count: 1 do
       %i[green yellow red].each { |signal| assert_select "span", text: signal_text(signal, :legend) }
     end
+    assert_no_match(/%|moyenne|taux de rendu/i, css_select("ul#level_classrooms, #signal_legend").text, "UDR médailles : ni % ni moyenne")
   end
 
   test "AD-09, AD-20: the page names its tab, marks « Accueil » and returns to the home page" do
@@ -157,7 +153,7 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select card(yellow) do
       assert_select "span.bg-signal-yellow[aria-hidden=true]", count: 1
       assert_select "span.sr-only", text: signal_text(:yellow, :label)
-      assert_select "li", text: "Taux de rendu : 50 %"
+      assert_select "li", text: "1 devoir rendu sur 2"
     end
     assert_select "#signal_legend", count: 1
   end

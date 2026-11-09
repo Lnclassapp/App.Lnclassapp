@@ -7,9 +7,9 @@ module UseCases
     class ResetSecondFactorTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 9, 26, 10)
       Clock = Data.define(:now)
-      ACTOR = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
+      ACTOR = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "admin")
       MEMBER = Entities::Identity::User.new(id: 8, public_id: "team8", role: "team", team_role: "content", contact: "0700000008")
-      SELF = Entities::Identity::User.new(id: 7, public_id: "team7", role: "team", team_role: "field")
+      SELF = Entities::Identity::User.new(id: 7, public_id: "team7", role: "team", team_role: "admin")
       TEACHER = Entities::Identity::User.new(id: 9, public_id: "tea9", role: "teacher")
 
       class FakeUsers

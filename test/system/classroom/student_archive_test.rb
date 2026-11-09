@@ -20,10 +20,11 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
     [ "Fractions", "Équations", "Statistiques — Lire et interpréter un diagramme en boîte sur deux séries", "Géométrie" ]
       .each_with_index do |title, index|
       create_exercise_session(student: @student, exercise: create_exercise(essential:, title:), status: "completed",
-                              score_percent: 60, completed_at: Time.zone.local(2026, 3, 10 + index, 10))
+                              score_percent: 60, completed_at: Time.zone.local(2026, 3, 10 + index, 10)).tap { create_attempt(session: it) }
     end
+    # Une réponse donnée par copie : la médaille de la session (une copie vide n'en a pas).
     create_exercise_session(student: @student, exercise: create_exercise(essential:, title: "Proportionnalité"),
-                            status: "completed", score_percent: 80, completed_at: Time.zone.local(2026, 2, 20, 10))
+                            status: "completed", score_percent: 80, completed_at: Time.zone.local(2026, 2, 20, 10)).tap { create_attempt(session: it) }
   end
 
   def assert_no_horizontal_scroll
@@ -64,8 +65,9 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
 
         assert_text "Fractions"
         assert_selector "h3", text: /février 2026/i
-        assert_selector "li", text: "12/20", count: 4
-        assert_selector "li", text: "16/20", count: 1
+        assert_selector "li", text: "Médaille Bronze", count: 4
+        assert_selector "li", text: "Médaille Or", count: 1
+        assert_no_text "/20"
       end
       assert_no_horizontal_scroll
     end

@@ -33,7 +33,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
 
     within(frame(@exercise)) { click_button "Vérifier ma réponse" }
 
-    assert_selector "#session_grade", text: "16/20"
+    assert_selector "#session_badge"
     assert_current_path(%r{\A/sessions/[^/]+/result\?return_to=sheet&sheet=notion-[a-z0-9-]+\z})
     assert_equal 1, Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").count
     # Des exercices restent à faire : le second bouton est « Continuer les exercices » (refaire-ou-continuer), vers la même feuille.
@@ -51,7 +51,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
 
     answer(@short, [ true ])
     within(frame(@short)) { click_button "Vérifier ma réponse" }
-    assert_selector "#session_grade"
+    assert_selector "#session_badge"
     click_link "Continuer les exercices"
 
     within(frame(@short)) { assert_selector ".ps-status", text: "Réussi" }
@@ -64,12 +64,12 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     visit sheet_page
     answer(@short, [ true ])
     within(frame(@short)) { click_button "Vérifier ma réponse" }
-    assert_selector "#session_grade", text: "20/20"
+    assert_selector "#session_badge"
     click_link "Continuer les exercices"
 
     answer(@exercise, [ false, false, false, false, false ])
     within(frame(@exercise)) { click_button "Vérifier ma réponse" }
-    assert_selector "#session_grade", text: "0/20"
+    assert_selector "#session_badge"
     find("#restart-exercise-link", text: "Refaire l'exercice").click
 
     assert_current_path sheet_page
@@ -103,7 +103,7 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     visit sheet_page
     answer(@exercise, [ true, true, true, true, false ])
     within(frame(@exercise)) { click_button "Vérifier ma réponse" }
-    assert_selector "#session_grade"
+    assert_selector "#session_badge"
     click_link "Continuer les exercices"
     assert_current_path(/#sheet-exercise-/, url: true)
     # Une figure ou une formule chargée après le saut allonge ce qui précède : le titre doit rester sous la barre.

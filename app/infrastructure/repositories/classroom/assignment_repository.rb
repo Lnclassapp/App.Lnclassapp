@@ -11,6 +11,8 @@ module Repositories
         "Exercise" => [ "Orm::Exercise", :public_id, :title ]
       }.freeze
 
+      ONE_ACTIVE_INDEX = "index_classroom_assignments_one_active".freeze
+
       def active_for(classroom_id:, assignable:)
         record = Orm::ClassroomAssignment.find_by(classroom_id:, assignable_type: assignable.type,
                                                   assignable_id: assignable.id, status: "active")
@@ -32,7 +34,10 @@ module Repositories
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ClassroomAssignment.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record, assignment.assignable))
-      rescue ActiveRecord::RecordNotUnique
+      rescue ActiveRecord::RecordNotUnique => e
+        # Seul l'index « une assignation active » dit « déjà assigné » ; une collision de public_id monte, bruyante (B-022).
+        raise unless e.message.include?(ONE_ACTIVE_INDEX)
+
         ::Shared::Result.failure(:conflict, errors: { base: [ :already_assigned ] })
       end
 

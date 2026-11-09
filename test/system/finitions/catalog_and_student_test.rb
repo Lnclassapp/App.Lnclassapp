@@ -151,7 +151,6 @@ module Finitions
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
       assert_link t("assessment.session_results.show.back_to_lesson"), href: course_path(@course.slug, anchor: "notion-#{@essential.slug}")
-      assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
       within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)

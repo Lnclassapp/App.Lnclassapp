@@ -48,7 +48,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
 
       assert_toast tl("update.updated", name: "Sixième")
       assert_no_selector "dialog[open]"
-      # D1 (owner, 2026-09-28): a 6ème created on screen gets its barème defaults, so no « Hors barème » badge.
+      # D1 (owner, 2026-09-28): a 6ème created on screen gets its barème defaults, so no « Hors plan » badge.
       assert_selector "#level_6eme", text: /Sixième\s+6eme/
       assert_no_selector "#level_6eme [data-generation]"
 

@@ -61,9 +61,16 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`annuaire-equipe`](annuaire-equipe/memo.md) | décision | feature | 2026-09-28 | Annuaire de l'équipe (« Comptes ») |
 | [`app-android`](app-android/memo.md) | app élèves exécutée | feature | 2026-09-30 | App Android pour élèves et enseignants |
 | [`archivage-classes`](archivage-classes/memo.md) | livré | feature | 2026-10-09 | Archiver une classe |
+| [`audit-500-et-messages`](audit-500-et-messages/memo.md) | en cours | bugfix | 2026-11-08 | Audit : 500 évitables et messages trompeurs |
+| [`audit-bugs-p2`](audit-bugs-p2/memo.md) | exécution | bugfix | 2026-11-08 | audit-bugs-p2 — B-003, B-004, B-005 |
+| [`audit-code-mort`](audit-code-mort/memo.md) | livré | refactoring | 2026-11-08 | Audit code mort (M-001 à M-004) |
+| [`audit-decisions-produit`](audit-decisions-produit/memo.md) | en cours | bugfix | 2026-11-08 | Décisions produit de l'audit du 8 novembre 2026 |
 | [`audit-gems-loofah`](audit-gems-loofah/memo.md) | livré | bugfix | 2026-11-02 | Avis de sécurité loofah, nokogiri, rails-html-sanitizer |
+| [`audit-jobs-echecs-muets`](audit-jobs-echecs-muets/memo.md) | livré | bugfix | 2026-11-08 | Jobs : échecs muets (audit 2026-11-08) |
+| [`audit-perf-rapide`](audit-perf-rapide/memo.md) | livré | optimisation | 2026-11-08 | Audit perf rapide |
 | [`audit-ux-roles`](audit-ux-roles/) | pas de memo | — | — | — |
 | [`audit-yarn-braces`](audit-yarn-braces/memo.md) | livré en PR | bugfix | 2026-10-03 | L'audit Yarn bloque toute la CI sur une faille de braces sans correctif |
+| [`b001-privileges-equipe`](b001-privileges-equipe/memo.md) | livré | bugfix | 2026-11-08 | B-001 : privilèges entre sous-rôles de l'équipe |
 | [`badge-liste-moyenne`](badge-liste-moyenne/memo.md) | livré | bugfix | 2026-10-29 | Liste de la classe : le badge dit qu'il vient de la moyenne |
 | [`bareme-classes`](bareme-classes/memo.md) | livré | feature | 2026-09-28 | Barème des classes modifiable par l'équipe |
 | [`base-de-lecons`](base-de-lecons/memo.md) | en cours | refactoring | 2026-11-06 | Base de leçons : seules les leçons au format complet actuel |
@@ -188,6 +195,12 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-tle-d-comme-thales`](lecons-tle-d-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale D préparées comme Thalès |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
+| [`medailles-direction`](medailles-direction/memo.md) | terminé | feature | 2026-11-09 | Médailles : écrans de la direction |
+| [`medailles-eleve`](medailles-eleve/memo.md) | en cours | feature | 2026-11-08 | Médailles : écrans de l'élève |
+| [`medailles-enseignant`](medailles-enseignant/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'enseignant |
+| [`medailles-equipe`](medailles-equipe/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'équipe |
+| [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
+| [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |
 | [`menu-enseignants-masque`](menu-enseignants-masque/memo.md) | livré | bugfix | 2026-10-04 | Menu ⋮ des enseignants masqué par la ligne suivante |
 | [`message-repository-fuite-activerecord`](message-repository-fuite-activerecord/memo.md) | abandonné | refactoring | 2026-09-18 | Fuite d'objets ActiveRecord dans `Entities::Message` |
 | [`mise-a-jour-en-direct`](mise-a-jour-en-direct/memo.md) | cadrage | feature | 2026-09-30 | Mise à jour en direct |
@@ -235,6 +248,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré | bugfix | 2026-09-29 | Secrets à usage unique hors de tout cache |
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
+| [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |
 | [`sobriete-tokens`](sobriete-tokens/memo.md) | en cours | refactoring | 2026-10-09 | Sobriété de tokens |
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |

@@ -54,7 +54,7 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
   end
 
   # Le bouton « Modifier » est sur la page de la classe (Lot E) : la modale s'ouvre ici dans le frame, comme lui.
-  test "unchecking every session day brings the days modal back on « Assigner »" do
+  test "unchecking every session day is refused (B-012): « Cochez au moins un jour », the saved day stays" do
     visit sheet_path
 
     assert_no_page_reload do
@@ -63,15 +63,10 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
         assert_text "Les dates déjà données ne changent pas."
         find("label", text: "Mar.").click
         click_on "Enregistrer"
+        assert_text "Cochez au moins un jour."
       end
-      assert_toast "Jours de séance enregistrés."
-      assert_no_selector "turbo-frame#modal dialog[open]"
-
-      # Le refresh par morphing remplace le bouton par le lien de la modale : cliquer avant, c'est assigner sans date.
-      within(toggle) { find_link("Assigner").click }
-      assert_selector "turbo-frame#modal dialog[open]", text: "Quels jours voyez-vous la 6ème 1 ?"
     end
-    assert_equal 0, Orm::ClassroomSessionDay.count
+    assert_equal 1, Orm::ClassroomSessionDay.count
     assert_equal 0, Orm::ClassroomAssignment.count
   end
 end

@@ -5,14 +5,16 @@ module Entities
     class GradingTest < ActiveSupport::TestCase
       # ADR-0106 : la note affichée sur 20 décide. Bronze dès 10/20 (48 %), Argent dès 14/20 (68 %), Or dès 16/20 (78 %).
       test "badge aux bornes des paliers, lus sur la note sur 20" do
-        assert_nil Grading.badge_for(47)
+        # Décision du porteur (2026-11-08) : tout exercice traité donne au moins Bronze, même à 0 %.
+        assert_equal :bronze, Grading.badge_for(47)
+        assert_equal :bronze, Grading.badge_for(0)
         { 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 97 => :gold, 99 => :gold,
           100 => :diamond }.each { |score, badge| assert_equal badge, Grading.badge_for(score), score.to_s }
       end
 
       test "reaches? compare les notes sur 20 : chaque seuil est atteint à sa borne, pas un point avant" do
         { Grading::PASS_THRESHOLD => [ 47, 48 ], Grading::MASTERY_THRESHOLD => [ 67, 68 ],
-          Grading::REMEDIATION_THRESHOLD => [ 72, 73 ], Grading::GOLD_THRESHOLD => [ 77, 78 ] }.each do |threshold, (below, at)|
+          Grading::GOLD_THRESHOLD => [ 77, 78 ] }.each do |threshold, (below, at)|
           assert_not Grading.reaches?(below, threshold), "#{below} sous #{threshold}"
           assert Grading.reaches?(at, threshold), "#{at} sur #{threshold}"
           assert_equal Grading.grade_on_20(at), Grading.grade_on_20(threshold)
@@ -36,23 +38,38 @@ module Entities
 
       # UDR enseignant §3.2 (CA-G3) : le badge d'un élève dans une classe, sur ses exercices faits (notes retenues, sur 100).
       test "class_badge_for: Diamant seulement si au moins un exercice est fait et tous sans faute" do
-        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true)
-        assert_equal :diamond, Grading.class_badge_for(scores: [ 100, 100, 100 ], all_perfect: true)
-        assert_equal :gold, Grading.class_badge_for(scores: [ 100, 98 ], all_perfect: false)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100, 100, 100 ], all_perfect: true, has_medal: true)
+        assert_equal :gold, Grading.class_badge_for(scores: [ 100, 98 ], all_perfect: false, has_medal: true)
       end
 
       test "class_badge_for: Or, Argent, Bronze selon la moyenne, lue sur la note sur 20" do
         { [ 78 ] => :gold, [ 90, 70 ] => :gold, [ 77 ] => :silver, [ 68 ] => :silver, [ 67 ] => :bronze, [ 48 ] => :bronze,
           [ 60, 40 ] => :bronze }.each do |scores, badge|
-          assert_equal badge, Grading.class_badge_for(scores:, all_perfect: false), scores.inspect
+          assert_equal badge, Grading.class_badge_for(scores:, all_perfect: false, has_medal: true), scores.inspect
         end
       end
 
-      test "class_badge_for: nil, « Pas encore », sans exercice fait ou sous la moyenne de Bronze" do
-        assert_nil Grading.class_badge_for(scores: [], all_perfect: false)
-        assert_nil Grading.class_badge_for(scores: [], all_perfect: true)
-        assert_nil Grading.class_badge_for(scores: [ 47 ], all_perfect: false)
-        assert_nil Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
+      # PRD §3 : aucun exercice médaillé (copies vides seulement) → « Pas encore », quelles que soient les notes.
+      test "class_badge_for: nil (« Pas encore ») sans médaille, même avec des notes ; avec une médaille, Bronze au moins" do
+        assert_nil Grading.class_badge_for(scores: [], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 0 ], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: false)
+        assert_nil Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: false)
+        assert_equal :bronze, Grading.class_badge_for(scores: [], all_perfect: false, has_medal: true)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 30 ], all_perfect: false, has_medal: true)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 0, 40 ], all_perfect: false, has_medal: true)
+        assert_equal :bronze, Grading.class_badge_for(scores: [ 47 ], all_perfect: false, has_medal: true)
+        assert_equal :silver, Grading.class_badge_for(scores: [ 70 ], all_perfect: false, has_medal: true)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true, has_medal: true)
+      end
+
+      test "session_medal : le palier du score si la copie est traitée, rien pour une copie vide" do
+        assert_nil Grading.session_medal(0, treated: false)
+        assert_nil Grading.session_medal(100, treated: false)
+        assert_equal :bronze, Grading.session_medal(0, treated: true)
+        assert_equal :bronze, Grading.session_medal(47, treated: true)
+        assert_equal :gold, Grading.session_medal(80, treated: true)
       end
 
       test "le score est une division entière, arrondie vers le bas" do
