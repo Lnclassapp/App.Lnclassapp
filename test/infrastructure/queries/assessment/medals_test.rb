@@ -78,6 +78,44 @@ module Queries
         assert_equal({ @student.id => { gold: 1 } }, Medals.by_classroom(classroom_ids: [ @class_a.id ])[@class_a.id])
         assert_equal({ @assignment_a.id => { gold: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
       end
+
+      test "the stored medal counts when it is higher than the copy, the copy when it is higher than the stored medal" do
+        copy = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 72, classroom_assignment: @assignment_a)
+        create_attempt(session: copy)
+        create_badge(student: @student, exercise: @exercise, level: "gold", session: copy)
+        assert_equal :gold, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]).dig(@assignment_a.id, @student.id)
+
+        Orm::ExerciseBadge.update_all(level: "bronze")
+        assert_equal :silver, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]).dig(@assignment_a.id, @student.id)
+        assert_nil Medals.by_classroom(classroom_ids: [ @class_a.id ]).dig(@class_a.id, @student.id, :gold)
+      end
+
+      test "an empty copy with a score, a copy not completed and one answered alone give no medal on the four reads" do
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 90, classroom_assignment: @assignment_a)
+        started = create_exercise_session(student: @student, exercise: @exercise, status: "started", classroom_assignment: @assignment_a)
+        create_attempt(session: started)
+        solo = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 100, classroom_assignment: nil)
+        create_attempt(session: solo)
+
+        assert_equal({}, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]))
+        assert_equal({}, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
+        assert_equal({}, Medals.by_classroom(classroom_ids: [ @class_a.id ]))
+        assert_equal({}, Medals.by_student_in_school(school_id: @school.id, student_ids: [ @student.id ]))
+      end
+
+      test "an exercise assigned twice to the class gives one medal in the class, each assignment its own" do
+        @assignment_a.update_columns(status: "archived", archived_at: Time.current)
+        again = create_assignment(classroom: @class_a, assignable: @exercise)
+        [ [ @assignment_a, 90 ], [ again, 60 ] ].each do |assignment, score|
+          session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: score, classroom_assignment: assignment)
+          create_attempt(session:)
+        end
+
+        by_assignment = Medals.by_assignment(assignment_ids: [ @assignment_a.id, again.id ])
+        assert_equal [ :gold, :bronze ], [ by_assignment.dig(@assignment_a.id, @student.id), by_assignment.dig(again.id, @student.id) ]
+        assert_equal({ @student.id => { gold: 1 } }, Medals.by_classroom(classroom_ids: [ @class_a.id ])[@class_a.id])
+        assert_equal({ @student.id => { gold: 1 } }, Medals.by_student_in_school(school_id: @school.id, student_ids: [ @student.id ]))
+      end
     end
   end
 end

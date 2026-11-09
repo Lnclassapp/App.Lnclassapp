@@ -9,4 +9,5 @@
 
 ## À trancher
 
-Rien d'ouvert.
+- [ ] 2026-11-09 · medailles-par-sessions · Textes élève « vise l'Or… elle ne sera plus à revoir » (aide, résultat) : la fiche se lève maintenant dès l'Argent — appliqué : textes inchangés (l'Or reste un but, et lève aussi) ; autres : réécrire en « vise l'Argent » ; recommandé : décider après relecture du porteur
+- [ ] 2026-11-09 · medailles-par-sessions · Écran « liste » de classe (`teacher_home_query#medal_holders`) : le scénario médaille montée hors du devoir est testé au niveau des requêtes de médailles, pas de bout en bout — appliqué : tests de requête ; recommandé : suffisant

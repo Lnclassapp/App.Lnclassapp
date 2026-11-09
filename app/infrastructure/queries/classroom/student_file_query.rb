@@ -108,7 +108,7 @@ module Queries
       end
 
       # ADR-0097 §4.5, ADR médailles lues à la clôture : un palier par médaille gagnée par une session d'une assignation active de
-      # la classe, jamais d'après le score ni d'une autre classe.
+      # la classe, d'après la meilleure copie traitée de la classe (medailles-par-sessions), jamais d'une autre classe.
       def badge_counts(medals)
         Grading::BADGE_ORDER.index_with { 0 }.merge(medals.tally)
       end

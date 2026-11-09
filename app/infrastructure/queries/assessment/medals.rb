@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::Medals
 # Rôle : lectures partagées des médailles : celles d'une classe (gagnées par une session de ses assignations) et la copie traitée d'une session
-# ADR  : 0097 (§4.5 : rien d'une autre classe), médailles lues à la clôture · une requête par appel, quel que soit le nombre d'élèves
+# ADR  : 0097 (§4.5 : rien d'une autre classe), médailles lues à la clôture · quelques requêtes par appel, quel que soit le nombre d'élèves
 module Queries
   module Assessment
     module Medals
@@ -89,7 +89,7 @@ module Queries
       # médaille). Les copies vides n'en donnent aucune. → { clé de groupe => :bronze … }
       def self.best_levels(sessions, *group)
         sessions.where(status: "completed").where(TREATED_SQL).group(*group).maximum("exercise_sessions.score_percent")
-                .transform_values { |score| Entities::Assessment::Grading.badge_for(score.to_i) }
+                .transform_values { |score| Entities::Assessment::Grading.badge_for(score) }
       end
 
       def self.raise_level(levels, key, level)
@@ -108,8 +108,9 @@ module Queries
       def self.tally(levels)
         levels.each_with_object({}) do |(key, level), by_id|
           classroom_id, student_id, level = yield(key, level)
-          ((by_id[classroom_id] ||= {})[student_id] ||= Hash.new(0))[level] += 1
-        end.transform_values { |students| students.transform_values(&:to_h) }
+          by_level = ((by_id[classroom_id] ||= {})[student_id] ||= {})
+          by_level[level] = by_level.fetch(level, 0) + 1
+        end
       end
       private_class_method :best_levels, :raise_level, :present_pairs, :tally
     end
