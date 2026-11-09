@@ -64,6 +64,20 @@ module Queries
 
         assert_equal({}, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]))
       end
+
+      test "a departed or anonymized student's treated copy is read from no classroom distribution" do
+        gone = create_student(classroom: @class_a)
+        anonymous = create_student(classroom: @class_a)
+        [ @student, gone, anonymous ].each do |student|
+          session = create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 90, classroom_assignment: @assignment_a)
+          create_attempt(session:)
+        end
+        Orm::ClassroomStudent.where(student_id: gone.id).update_all(left_at: 1.minute.ago)
+        Orm::User.where(id: anonymous.id).update_all(anonymized_at: Time.current)
+
+        assert_equal({ @student.id => { gold: 1 } }, Medals.by_classroom(classroom_ids: [ @class_a.id ])[@class_a.id])
+        assert_equal({ @assignment_a.id => { gold: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
+      end
     end
   end
 end
