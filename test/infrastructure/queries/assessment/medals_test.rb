@@ -46,6 +46,24 @@ module Queries
         assert_equal({ @assignment_a.id => { gold: 1, bronze: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
         assert_equal({}, Medals.distribution_by_assignment(assignment_ids: []))
       end
+
+      test "a medal raised outside the assignment does not hide the one its own treated copy earned" do
+        session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 72, classroom_assignment: @assignment_a)
+        create_attempt(session:)
+        solo = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 100, classroom_assignment: nil)
+        create_badge(student: @student, exercise: @exercise, level: "diamond", session: solo)
+
+        assert_equal({ @assignment_a.id => { @student.id => :silver } }, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]))
+        assert_equal({ @assignment_a.id => { silver: 1 } }, Medals.distribution_by_assignment(assignment_ids: [ @assignment_a.id ]))
+        assert_equal({ @class_a.id => { @student.id => { silver: 1 } } }, Medals.by_classroom(classroom_ids: [ @class_a.id ]))
+        assert_equal({ @student.id => { silver: 1 } }, Medals.by_student_in_school(school_id: @school.id, student_ids: [ @student.id ]))
+      end
+
+      test "an empty copy gives no medal" do
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 0, classroom_assignment: @assignment_a)
+
+        assert_equal({}, Medals.by_assignment(assignment_ids: [ @assignment_a.id ]))
+      end
     end
   end
 end

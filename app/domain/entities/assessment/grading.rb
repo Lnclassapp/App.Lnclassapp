@@ -6,8 +6,8 @@ module Entities
     module Grading
       PASS_THRESHOLD = 50
       MASTERY_THRESHOLD = 70
-      # ADR-0043, amendement du 2026-09-27 : une lacune n'est résolue qu'à partir de ce score (décision du porteur).
-      REMEDIATION_THRESHOLD = 75
+      # ADR-0043 : une lacune n'est résolue qu'à partir de l'Argent (70, soit 14/20 affiché) ; amendé par medailles-par-sessions (le « viser l'Or » de la consigne reste un but).
+      REMEDIATION_THRESHOLD = MASTERY_THRESHOLD
       GOLD_THRESHOLD = 80
       PERFECT_THRESHOLD = 100
       BADGE_THRESHOLDS = { bronze: PASS_THRESHOLD, silver: MASTERY_THRESHOLD,

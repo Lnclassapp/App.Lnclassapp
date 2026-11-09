@@ -199,6 +199,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`medailles-enseignant`](medailles-enseignant/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'enseignant |
 | [`medailles-equipe`](medailles-equipe/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'équipe |
 | [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
+| [`medailles-par-sessions`](medailles-par-sessions/memo.md) | en cours | feature | 2026-11-09 | Médailles lues par sessions, remédiation à l'Argent |
 | [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |
 | [`menu-enseignants-masque`](menu-enseignants-masque/memo.md) | livré | bugfix | 2026-10-04 | Menu ⋮ des enseignants masqué par la ligne suivante |
 | [`message-repository-fuite-activerecord`](message-repository-fuite-activerecord/memo.md) | abandonné | refactoring | 2026-09-18 | Fuite d'objets ActiveRecord dans `Entities::Message` |

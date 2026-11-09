@@ -14,11 +14,12 @@ module Entities
 
       test "reaches? compare les notes sur 20 : chaque seuil est atteint à sa borne, pas un point avant" do
         { Grading::PASS_THRESHOLD => [ 47, 48 ], Grading::MASTERY_THRESHOLD => [ 67, 68 ],
-          Grading::REMEDIATION_THRESHOLD => [ 72, 73 ], Grading::GOLD_THRESHOLD => [ 77, 78 ] }.each do |threshold, (below, at)|
+          Grading::GOLD_THRESHOLD => [ 77, 78 ] }.each do |threshold, (below, at)|
           assert_not Grading.reaches?(below, threshold), "#{below} sous #{threshold}"
           assert Grading.reaches?(at, threshold), "#{at} sur #{threshold}"
           assert_equal Grading.grade_on_20(at), Grading.grade_on_20(threshold)
         end
+        assert_equal Grading::MASTERY_THRESHOLD, Grading::REMEDIATION_THRESHOLD
         assert Grading.reaches?(100, Grading::PERFECT_THRESHOLD)
         assert_not Grading.reaches?(0, Grading::PASS_THRESHOLD)
       end

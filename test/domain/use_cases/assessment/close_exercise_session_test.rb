@@ -271,19 +271,19 @@ module UseCases
       end
 
       test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
-        close(correct: 72, pending_gap: gap, kind: "remediation")
+        close(correct: 67, pending_gap: gap, kind: "remediation")
 
         assert_empty @gaps.calls
       end
 
-      test "réussite d'une remédiation à 75 % : la lacune est remédiée" do
-        close(correct: 75, pending_gap: gap, kind: "remediation")
+      test "réussite d'une remédiation à 70 % : la lacune est remédiée" do
+        close(correct: 70, pending_gap: gap, kind: "remediation")
 
         assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
       end
 
-      test "réussite d'une session standard à 75 % : la lacune est auto-corrigée" do
-        close(correct: 75, pending_gap: gap)
+      test "réussite d'une session standard à 70 % : la lacune est auto-corrigée" do
+        close(correct: 70, pending_gap: gap)
 
         assert_equal [ [ :resolve, { id: 70, status: "self_corrected", session_id: 5, at: NOW } ] ], @gaps.calls
       end
