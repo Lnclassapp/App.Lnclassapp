@@ -1,12 +1,8 @@
 <%# 🌐 UI · school_admin/levels/_classroom_card — une classe sur la page de son niveau (AD-09, AD-22) %>
-<%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe, sauf l'archivée (badge, effectif grisé, sans page) ; menu ⋮ au-dessus du lien %>
+<%# Rôle : illustration du niveau et pastille de participation, effectif, devoirs, devoirs rendus et médailles ; toute la carte mène à la classe, sauf l'archivée (badge, effectif grisé, sans page) ; menu ⋮ au-dessus du lien %>
 <%# ADR  : 0065, 0088, 0098 · UDR : 0074 (§3.5, §3.8), 0083, 0111 · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
 <%# locals: (classroom:, illustration:, signal:, manageable:) -%>
-<% figure = lambda do |value|
-     next tag.span(t("school_admin.classrooms.percent", value:), class: "font-medium text-ink") unless value.nil?
-
-     safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
-   end %>
+<% given = classroom.students_count * classroom.assignments_count %>
 <% card_class = "group flex h-full flex-col gap-4 rounded-ln border border-line bg-white p-4 transition focus-visible:outline-2 focus-visible:outline-brand" %>
 <% content = capture do %>
   <div class="flex items-center gap-3 pr-12">
@@ -33,11 +29,14 @@
       <li class="inline-flex w-full items-center gap-1.5">
         <%= ui_icon "clipboard-document-list", variant: :mini, size: :sm %><%= t(".assignments", count: classroom.assignments_count) %>
       </li>
-      <li class="inline-flex w-full items-center gap-1.5">
-        <%= ui_icon "chart-bar", variant: :mini, size: :sm %><%= t(".submission_rate_html", rate: figure.call(classroom.submission_rate)) %>
-      </li>
-      <li class="inline-flex w-full items-center gap-1.5">
-        <%= ui_icon "academic-cap", variant: :mini, size: :sm %><%= t(".average_html", value: figure.call(classroom.average_percent)) %>
+      <% unless given.zero? %>
+        <li class="inline-flex w-full items-center gap-1.5">
+          <%= ui_icon "chart-bar", variant: :mini, size: :sm %><%= t(".submitted", count: classroom.submitted_count, total: given) %>
+        </li>
+      <% end %>
+      <%# UDR médailles §2.4 : la répartition des médailles de la classe, par exercice ; jamais une moyenne. %>
+      <li class="flex w-full items-start gap-1.5">
+        <%= ui_icon "academic-cap", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %><%= medal_counts(classroom.medals) %>
       </li>
     </ul>
     <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
