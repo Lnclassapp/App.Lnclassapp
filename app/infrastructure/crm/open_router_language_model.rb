@@ -1,5 +1,5 @@
 # 🔌 INFRA · Crm::OpenRouterLanguageModel
-# Rôle : adaptateur de Ports::Crm::LanguageModelPort sur l'API de chat compatible OpenAI d'OpenRouter (Net::HTTP, 5 s / 30 s, sans nouvelle tentative)
+# Rôle : adaptateur de Ports::Crm::LanguageModelPort sur l'API de chat compatible OpenAI d'OpenRouter (Net::HTTP, 5 s / 30 s, 90 s avec audio, sans nouvelle tentative)
 # ADR  : XXXX (modèles de langage)
 module Crm
   class OpenRouterLanguageModel
@@ -9,15 +9,17 @@ module Crm
     PATH = "/api/v1/chat/completions".freeze
     OPEN_TIMEOUT = 5
     READ_TIMEOUT = 30
+    # Une dictée dure jusqu'à 3 min : son traitement dépasse 30 s (mesuré le 2026-11-09 avec google/gemini-2.5-flash, échec à 31,7 s).
+    # 90 s reste sous la péremption d'une génération en attente (2 min) et sous l'attente de la page pour une dictée (120 s).
+    AUDIO_READ_TIMEOUT = 90
     # Une réponse de chat tient en quelques Ko : au-delà de 256 Ko, la réponse est refusée sans être lue en entier.
     MAX_BODY_BYTES = 256 * 1024
     Reply = Data.define(:code, :body)
     NETWORK_ERRORS = [ SocketError, SystemCallError, IOError, OpenSSL::SSL::SSLError, Net::ProtocolError ].freeze
 
-    # À VÉRIFIER dans la documentation OpenRouter (réseau bloqué au Lot G) : réglage de routage qui n'envoie les requêtes
-    # qu'aux fournisseurs ne conservant pas les données (`provider.data_collection: "deny"`).
+    # Routage OpenRouter : seulement les fournisseurs qui ne conservent pas les données (`provider.data_collection: "deny"`).
     PROVIDER_PREFERENCES = { data_collection: "deny" }.freeze
-    # À VÉRIFIER dans la documentation OpenRouter (réseau bloqué au Lot G) : demande d'une réponse JSON (`response_format`).
+    # Demande d'une réponse JSON (`response_format`, documentation OpenRouter).
     JSON_RESPONSE_FORMAT = { type: "json_object" }.freeze
     # À VÉRIFIER dans la documentation OpenRouter (réseau bloqué au Lot G) : forme d'une pièce audio dans un message
     # (`{ type: "input_audio", input_audio: { data: <base64>, format: } }`).
@@ -35,7 +37,7 @@ module Crm
       end
 
       started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      response = post(payload(messages:, model:, max_tokens:, json:, audio:))
+      response = post(payload(messages:, model:, max_tokens:, json:, audio:), read_timeout: audio ? AUDIO_READ_TIMEOUT : READ_TIMEOUT)
       unless response.code.start_with?("2")
         # Ni le corps, ni la clé, ni les messages : seulement le statut et le modèle.
         Rails.logger.warn("[crm.openrouter] status=#{response.code} model=#{model}")
@@ -47,9 +49,11 @@ module Crm
       end
 
       parse(response.body, model:, duration_ms: ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - started) * 1000).round)
-    rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error, Errno::ETIMEDOUT
+    rescue Net::OpenTimeout, Net::ReadTimeout, Timeout::Error, Errno::ETIMEDOUT => error
+      Rails.logger.warn("[crm.openrouter] timeout #{error.class} model=#{model}")
       failure(:timeout)
-    rescue *NETWORK_ERRORS
+    rescue *NETWORK_ERRORS => error
+      Rails.logger.warn("[crm.openrouter] network #{error.class} model=#{model}")
       failure(:provider_error)
     end
 
@@ -57,13 +61,13 @@ module Crm
 
     def failure(reason) = Shared::Result.failure(:unavailable, errors: { reason: })
 
-    def post(body)
+    def post(body, read_timeout:)
       request = Net::HTTP::Post.new(PATH)
       request["Authorization"] = "Bearer #{@api_key}"
       request["Content-Type"] = "application/json"
       request.body = body.to_json
       reply = nil
-      @http.start(HOST, 443, use_ssl: true, open_timeout: OPEN_TIMEOUT, read_timeout: READ_TIMEOUT) do |connection|
+      @http.start(HOST, 443, use_ssl: true, open_timeout: OPEN_TIMEOUT, read_timeout:) do |connection|
         connection.request(request) { |response| reply = Reply.new(code: response.code.to_s, body: read_capped(response)) }
       end
       reply

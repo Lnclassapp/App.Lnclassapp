@@ -62,11 +62,11 @@ Le compte rendu dicté lit un **fichier envoyé par un utilisateur** (enregistre
 | `OPENROUTER_MODEL_TEXT` | Briefing, brouillon, rapport | `deepseek/deepseek-chat` |
 | `OPENROUTER_MODEL_AUDIO` | Compte rendu dicté | `google/gemini-2.5-flash` |
 
-Délai : 5 s pour ouvrir la connexion, 30 s pour la réponse, aucune nouvelle tentative automatique (l'utilisateur réessaie).
+Délai : 5 s pour ouvrir la connexion, 30 s pour la réponse (90 s pour une requête avec audio), aucune nouvelle tentative automatique (l'utilisateur réessaie). Les 90 s viennent de l'essai réel du 2026-11-09 : une dictée a échoué à 31,7 s avec `google/gemini-2.5-flash`, alors qu'une dictée peut durer 3 min.
 
 **Table `crm_generations`** : `public_id`, `school_id`, `kind` ∈ {`briefing`, `dictation`, `whatsapp_draft`, `pedagogy_report`}, `status` ∈ {`pending`, `done`, `failed`}, `requested_by_id`, `follow_up_id` (nul), `input_fingerprint` (SHA-256 des entrées), `content` (texte ou JSON), `error_code`, `model`, `input_tokens`, `output_tokens`, `duration_ms`. Le port `GenerationRepositoryPort` marque l'échec par `mark_failed(public_id:, error_code:, duration_ms:)` (et non `fail`, qui masquerait `Kernel#fail`). Index unique partiel `(school_id, kind) WHERE status = 'pending'` : une seule génération en cours par école et par type. Un briefing dont l'empreinte des entrées est inchangée réutilise le dernier `done`.
 
-**Sondage** : l'état `pending` rend un frame Turbo que le contrôleur Stimulus `generation-poll` recharge toutes les 2 s, 45 s au plus, puis affiche l'état d'erreur.
+**Sondage** : l'état `pending` rend un frame Turbo que le contrôleur Stimulus `generation-poll` recharge toutes les 2 s, 45 s au plus (120 s pour une dictée), puis affiche l'état d'erreur.
 
 **Menace écrite d'abord — enregistrement vocal**
 

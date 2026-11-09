@@ -38,6 +38,14 @@ class Teams::Crm::GenerationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[role=status]", text: /Préparation de la fiche/
   end
 
+  test "a pending dictation waits 120 s in the page, longer than the 90 s the audio model is given" do
+    show pending(kind: "dictation")
+
+    assert_select "[data-generation-poll-timeout-value=120000]"
+    assert_operator 120, :>, Crm::OpenRouterLanguageModel::AUDIO_READ_TIMEOUT + Crm::OpenRouterLanguageModel::OPEN_TIMEOUT
+    assert_operator UseCases::Crm::SubmitDictation::STALE_AFTER, :>, (Crm::OpenRouterLanguageModel::AUDIO_READ_TIMEOUT + Crm::OpenRouterLanguageModel::OPEN_TIMEOUT).seconds
+  end
+
   test "the waiting label follows the kind" do
     { "dictation" => "Écoute du compte rendu", "whatsapp_draft" => "Rédaction du message", "pedagogy_report" => "Rédaction de la synthèse" }.each do |kind, label|
       show pending(kind:)

@@ -43,7 +43,7 @@ Règle : une nouvelle policy du contexte `crm` qui autorise `team` avec `team_ro
 | Terminer une relance déjà faite | Sans effet, pas d'erreur |
 | École désactivée | Suivi lisible et modifiable, jamais dans « À relancer » |
 | Service de modèles non configuré | Les boutons des assistants sont remplacés par « Assistant non configuré » ; le reste du suivi fonctionne |
-| Service de modèles en erreur ou trop lent (> 30 s) | « L'assistant n'a pas répondu. Réessayer » ; aucune donnée du suivi n'est modifiée |
+| Service de modèles en erreur ou trop lent (> 30 s, > 90 s pour une dictée) | « L'assistant n'a pas répondu. Réessayer » ; aucune donnée du suivi n'est modifiée |
 | Une génération du même type déjà en cours pour l'école | Pas de second appel ; l'écran montre la génération en cours |
 | Briefing demandé sans changement depuis le dernier | Le dernier briefing est réaffiché, sans appel au modèle |
 | Enregistrement vocal > 3 min, > 10 Mo ou format hors `audio/webm`, `audio/ogg`, `audio/mp4` | Refusé avant envoi au modèle, message clair |

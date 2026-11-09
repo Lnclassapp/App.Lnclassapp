@@ -103,6 +103,16 @@ module Crm
       assert_equal({ "data" => Base64.strict_encode64("OCTETS"), "format" => "webm" }, parts.last["input_audio"])
     end
 
+    # Mesure du 2026-11-09 : une dictée réelle a dépassé 30 s (google/gemini-2.5-flash, échec à 31,7 s).
+    test "a request with audio waits 90 s for the reply, a text request 30 s" do
+      http = FakeHttp.new(response: Response.new("200", BODY))
+
+      call(http, audio: { data: "OCTETS".b, format: "webm" })
+
+      assert_equal 90, http.started_with[:read_timeout]
+      assert_equal 5, http.started_with[:open_timeout]
+    end
+
     test "without a key it is not configured and never calls out" do
       http = FakeHttp.new(response: Response.new("200", BODY))
 
@@ -121,9 +131,25 @@ module Crm
       assert_reason :timeout, call(FakeHttp.new(error: Net::OpenTimeout.new))
     end
 
+    test "a timeout is logged with its class and the model, without the key or the messages" do
+      logged = capture_log { call(FakeHttp.new(error: Net::ReadTimeout.new)) }
+
+      assert_includes logged, "[crm.openrouter] timeout Net::ReadTimeout model=deepseek/deepseek-chat"
+      assert_not_includes logged, "sk-test"
+      assert_not_includes logged, "Bonjour"
+    end
+
     test "a network error is a provider error" do
       assert_reason :provider_error, call(FakeHttp.new(error: SocketError.new("dns")))
       assert_reason :provider_error, call(FakeHttp.new(error: Errno::ECONNRESET.new))
+    end
+
+    test "a network error is logged with its class and the model, without the key or the messages" do
+      logged = capture_log { call(FakeHttp.new(error: SocketError.new("dns sk-test Bonjour"))) }
+
+      assert_includes logged, "[crm.openrouter] network SocketError model=deepseek/deepseek-chat"
+      assert_not_includes logged, "sk-test"
+      assert_not_includes logged, "Bonjour"
     end
 
     test "an unreadable body is an invalid response" do
