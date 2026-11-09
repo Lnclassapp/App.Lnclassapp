@@ -489,6 +489,25 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lessons_list_page_1 li", 1
   end
 
+  # Couverture (develop-rouge-medailles) : un élève sans classe n'a aucune matière de leçons ; le cadre « page suivante » des
+  # leçons répond 404 et la vue d'une matière demandée par l'adresse s'affiche sans le bloc des leçons.
+  test "O-C02: a student without a classroom gets a 404 for the next lessons frame" do
+    sign_in_as create_student
+
+    get courses_path(material: "mathematiques", page: 2), headers: { "Turbo-Frame" => "lessons_page_2" }
+
+    assert_response :not_found
+  end
+
+  test "CA-E14: a student without a classroom asking a subject by address gets the page, without the lessons block" do
+    sign_in_as create_student
+
+    get courses_path(material: "mathematiques")
+
+    assert_response :success
+    assert_select "#lessons_list", 0
+  end
+
   # CA-15 (UDR-0085 §3.2) : 24 cartes ; la page suivante reçoit la matière de la dernière carte et ne répète pas son titre.
   test "CA-15: the next page carries after_material and does not repeat the title of the open group" do
     maths = create_material(name: "Mathématiques")
