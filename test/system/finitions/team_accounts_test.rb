@@ -85,7 +85,7 @@ class FinitionsTeamAccountsTest < ApplicationSystemTestCase
     assert_equal "false", summary.evaluate_script("String(this.parentElement.open)")
     summary.click
     assert_selector "#figure_completed_sessions details[open]",
-                    text: "Médailles gagnées sur la période, une par élève et par exercice, au palier atteint. Aucune médaille décernée : aucun exercice traité."
+                    text: "Médailles gagnées sur la période, une par élève et par exercice, au palier atteint. Une médaille compte quand elle est gagnée ou monte d'un palier : refaire un exercice sans monter n'en décerne pas."
 
     with_mobile_viewport do
       execute_script("document.querySelectorAll('main details').forEach((details) => { details.open = true })")

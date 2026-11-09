@@ -72,6 +72,7 @@ class Teams::DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#team_dashboard_period" do
       assert_select "#figure_active_students", text: figure("active_students", 1)
       assert_select "#figure_completed_sessions", text: figure("completed_sessions", 1)
+      assert_select "#team_dashboard_medals li", 1
       assert_select "#team_dashboard_medals li", text: /Or\s+1/
       assert_select "#team_dashboard_period", text: %r{\d\s*%|moyenne|Réussite}i, count: 0
     end

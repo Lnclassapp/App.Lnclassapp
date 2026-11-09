@@ -90,6 +90,15 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 0 }, dashboard(period: "30d").medals)
   end
 
+  test "a medal raised on the same exercise counts once, at its current level" do
+    student = placed_student(create_classroom)
+    exercise = an_exercise
+    badge = create_badge(student:, exercise:, level: "silver")
+    badge.update!(level: "gold", awarded_at: 1.day.ago)
+
+    assert_equal({ bronze: 0, silver: 0, gold: 1, diamond: 0 }, dashboard(period: "7d").medals)
+  end
+
   test "a session started on the first day of the period, at midnight, is in; the day before is out" do
     student = create_student
     since = Period.parse("7d", today: Date.current).since.in_time_zone

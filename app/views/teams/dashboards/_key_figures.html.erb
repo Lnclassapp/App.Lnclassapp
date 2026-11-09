@@ -18,7 +18,7 @@
         <p id="team_dashboard_medals" class="mt-1 text-sm text-mute"><%= t(".no_medals") %></p>
       <% else %>
         <ul id="team_dashboard_medals" aria-label="<%= t(".medals_title") %>" class="mt-1 flex flex-wrap gap-1.5">
-          <% dashboard.medals.each do |level, count| %>
+          <% dashboard.medals.reject { |_, count| count.zero? }.each do |level, count| %>
             <li><%= badge_pill(level, count:) %></li>
           <% end %>
         </ul>
