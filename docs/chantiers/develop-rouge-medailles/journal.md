@@ -15,6 +15,7 @@
 
 ## Ce qui a dérapé
 
+- Le premier `bin/ci-quiet --full` a trouvé deux échecs absents du diagnostic de #465, venus de #534 (67de4fb, la fiche s'ouvre sous l'Or) : la FAQ dit « Bronze ou Argent » (`help_controller_test.rb:31`) et l'empreinte du jeu standard compte plus de lacunes (`standard_activity_test.rb:54`, vérifiée : verte sur 248cc37, `be0ef46649` sur 2d7a555). Les deux tests suivent la décision. Un troisième (`announcements_journey_test.rb:105`, toast) passe seul : lenteur sous charge, pas de correctif.
 - Le test `.ps-sheet` n'était pas lié aux médailles : B-046 (5d9641d) refuse à l'enseignant les leçons hors de ses matières, et ce test système créait un enseignant sans matière.
 
 ## Ce qu'on a appris sur la codebase
