@@ -115,7 +115,7 @@ module Queries
         assignments = Orm::ClassroomAssignment.where(classroom_id: ids).group(:classroom_id).count
         totals = totals_by("classroom_students.classroom_id", ids)
         teachers = teacher_counts(ids)
-        medals = medals ? Queries::Assessment::Medals.by_classroom(classroom_ids: ids).transform_values { sum_medals(it.values) } : {}
+        medals = medals ? Queries::Assessment::Medals.by_classroom(classroom_ids: ids).transform_values { sum_medals(it.values) } : nil
         [ students.fetch(nil, 0), teachers.fetch(nil, 0),
           rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals, teachers, medals:) } ]
       end
@@ -175,13 +175,13 @@ module Queries
         end.to_h
       end
 
-      def classroom_row(row, students_count, assignments_count, totals, teachers, archived_at: nil, medals: {})
+      def classroom_row(row, students_count, assignments_count, totals, teachers, archived_at: nil, medals: nil)
         id, public_id, name, level_name, level_slug = row
         total = totals.fetch(id, Totals.none)
         given = students_count * assignments_count
         ClassroomRow.new(public_id:, name:, level_name:, level_slug:, students_count:, assignments_count:, submitted_count: total.submitted,
                          submission_rate: ((total.submitted * 100.0 / given).round unless given.zero?),
-                         medals: medals.fetch(id, {}),
+                         medals: medals&.fetch(id, {}),
                          teachers_count: teachers.fetch(id, 0), archived_at:)
       end
 
