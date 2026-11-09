@@ -99,8 +99,9 @@ module Queries
       def self.present_pairs(assignment_ids, student_ids)
         Orm::ClassroomAssignment.where(id: assignment_ids)
                                 .joins("JOIN classroom_students ON classroom_students.classroom_id = classroom_assignments.classroom_id " \
-                                       "AND classroom_students.left_at IS NULL AND classroom_students.student_id IN (#{student_ids.map(&:to_i).join(',')}) " \
+                                       "AND classroom_students.left_at IS NULL " \
                                        "JOIN users ON users.id = classroom_students.student_id AND users.anonymized_at IS NULL")
+                                .where(classroom_students: { student_id: student_ids })
                                 .pluck("classroom_assignments.id", "classroom_students.student_id").to_set
       end
 
