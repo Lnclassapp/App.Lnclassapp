@@ -415,9 +415,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#session_result", text: /Mariam Traoré/
-    # Décision du porteur (2026-10-02) : l'enseignant garde le résultat inchangé — note, score, maîtrise, questions justes.
-    assert_select "#session_result dl dt", 4
-    assert_select "#session_result dd", text: "#{GRADING::PASS_THRESHOLD} %"
+    # medailles-enseignant : l'enseignant lit la médaille de la copie et « x sur y justes » ; ni note, ni score, ni maîtrise.
+    assert_select "#session_result dl dt", 1
+    assert_select "#session_result", text: %r{/20|\d+ ?%|Maîtrise|Acquis|Fragile}, count: 0
     assert_select "#session_result", text: /#{I18n.t("#{scope}.show.correct_value", count: 1, total: 2)}/
     assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_reveal")
     assert_select "#session_review [data-reveal-target]", 0
@@ -428,9 +428,8 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     # retouche : les étiquettes passent à la ligne sous le texte, jamais de troncature
     assert_select "#question_review_#{@first.id} li[data-correct].flex-wrap > [data-answer-labels].flex-wrap", 1
     assert_select "#question_review_#{@first.id} li .truncate", 0
-    # retouche : les valeurs des tuiles ne se coupent pas (2×2 dans la colonne de 340 px) ; la tuile elle-même ne bloque
-    # pas le retour à la ligne, sinon l'infobulle de la maîtrise, ouverte, déborde à 390 px.
-    assert_select "#session_result dl:not([class~='sm:grid-cols-4']) > div > dd.whitespace-nowrap", 4
+    # retouche : la valeur de la tuile ne se coupe pas ; la tuile elle-même ne bloque pas le retour à la ligne.
+    assert_select "#session_result dl > div > dd.whitespace-nowrap", 1
     assert_select "#session_result dl > div.whitespace-nowrap", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
@@ -855,7 +854,8 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as create_teacher(classrooms: [ @classroom ])
     show session
     assert_select "#session_points", text: /6 points sur 11 corrigés automatiquement/
-    assert_select "#session_grade", text: "14/20"
+    assert_select "#session_grade", 0
+    assert_select "#session_result", text: %r{/20}, count: 0
   end
 
   test "CA-16 : un exercice tout à 1 point n'affiche aucun point" do

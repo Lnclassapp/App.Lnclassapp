@@ -23,6 +23,22 @@ module Queries
         scope.pluck("exercise_sessions.classroom_assignment_id", "exercise_badges.student_id", "exercise_badges.level")
              .each_with_object({}) { |(id, student_id, level), by_id| (by_id[id] ||= {})[student_id] = level.to_sym }
       end
+
+      # UDR médailles : la répartition d'un devoir (« 8 Bronze · 6 Argent · 3 Or »), jamais une moyenne. Même lecture par classe
+      # (ADR-0097 §4.5), pour les seuls élèves présents (adhésion non quittée, compte non anonymisé, comme le suivi).
+      # → { assignment_id => { bronze: 8, silver: 6 … } } ; les paliers à zéro et les devoirs sans médaille sont absents.
+      def self.distribution_by_assignment(assignment_ids:)
+        return {} if assignment_ids.empty?
+
+        Orm::ExerciseBadge.joins("JOIN exercise_sessions ON exercise_sessions.id = exercise_badges.exercise_session_id")
+                          .joins("JOIN classroom_assignments ON classroom_assignments.id = exercise_sessions.classroom_assignment_id")
+                          .joins("JOIN classroom_students ON classroom_students.classroom_id = classroom_assignments.classroom_id " \
+                                 "AND classroom_students.student_id = exercise_badges.student_id AND classroom_students.left_at IS NULL")
+                          .joins("JOIN users ON users.id = exercise_badges.student_id AND users.anonymized_at IS NULL")
+                          .where(exercise_sessions: { classroom_assignment_id: assignment_ids })
+                          .group("exercise_sessions.classroom_assignment_id", "exercise_badges.level").count
+                          .each_with_object({}) { |((id, level), count), by_id| (by_id[id] ||= {})[level.to_sym] = count }
+      end
     end
   end
 end

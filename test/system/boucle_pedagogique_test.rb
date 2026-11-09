@@ -316,9 +316,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     within("[id='student_#{student.public_id}']") do
       assert_text "Aya Kouassi"
-      # Maquette 10 : la ligne dit ses exercices faits et le badge de classe de l'élève (un 100 % sans faute : Diamant, 20/20).
+      # Maquette 10 : la ligne dit ses exercices faits et la médaille de l'élève dans la classe (un 100 % sans faute : Diamant).
       assert_text "1 fait sur 1"
-      assert_text "Moyenne 20/20 · Diamant"
+      assert_text "Diamant"
+      assert_no_text "Moyenne"
     end
     assert_no_page_reload do
       issue_recovery_code_from_roster("[id='student_#{student.public_id}']")
@@ -337,13 +338,14 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     # best session (the roster row no longer carries a score at 390 px, maquette 10).
     assert_selector "#student_file_summary", text: "Diamant"
     within("#student_file_assignments li", text: EXERCISE) do
-      assert_text "20/20"
+      assert_text "Diamant"
       click_on t("classroom.classroom_students.assignments.best_session")
     end
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")
-    assert_text "20/20"
-    assert_text "100 %"
+    assert_text(/diamant/i)
+    assert_text "5 sur 5"
+    assert_no_text "20/20"
     assert_text t("assessment.session_results.show.review_hint_reveal")
     assert_selector "#session_review li[id^=question_review_]", count: QUESTIONS.size
     assert_selector "#session_review [data-correct]", count: QUESTIONS.size

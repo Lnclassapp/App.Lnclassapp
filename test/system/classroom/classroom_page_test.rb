@@ -44,7 +44,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_no_text "Génétique et évolution"
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
-    assert_selector "#student_#{@awa.public_id}", text: "100 %"
+    assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
+    assert_no_text "100 %"
     assert_no_page_reload do
       # La barre latérale a son propre « Copier le lien » (parrainage, UDR-0069 §3.6) : on vise celui du bloc de la classe.
       copy = within("#classroom_link") { find_button(I18n.t("#{scope}.link.copy")) }

@@ -253,7 +253,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     student = create_student(classroom: @classroom)
     exercise = create_exercise(title: "Respiration", essential: create_essential(course: create_course(material: @svt)))
     done = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, **due(-1))
-    create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: done, score_percent: 90)
+    record_medal(create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: done, score_percent: 90))
     old = create_assignment(classroom: @classroom, assignable: create_exercise(title: "Ancien", essential: create_essential(course: create_course(material: @svt))),
                             by: @teacher, **due(-20))
     sign_in_as @teacher
@@ -264,7 +264,8 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{classroom_assignment_path(@classroom.public_id, done.public_id)}']", text: "Respiration"
       assert_select "*", text: including(tl("history.yesterday"))
       assert_select "*", text: including(tl("follow_ups.done", done: 1, count: 1))
-      assert_select ".text-success", text: tl("history.average", grade: "18")
+      assert_select "ul[aria-label=?]", tl("history.medals_label"), text: /Or\s+1/
+      assert_select "*", text: %r{/20|Moyenne}, count: 0
     end
     assert_select "#teacher_home_history li#history_#{old.public_id}"
     assert_select "#teacher_home_week li#follow_up_#{old.public_id}", 0
