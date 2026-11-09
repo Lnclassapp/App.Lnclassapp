@@ -21,25 +21,35 @@ module Entities
         assert_equal :increment, decide(47, :gap)
       end
 
-      test "la note affichée décide : 74 % s'affiche 15/20 et lève, 72 % s'affiche 14/20 et ne lève pas" do
-        assert_equal [ 15, 14 ], [ 74, 72 ].map { Grading.grade_on_20(it) }
-        assert_equal :remediated, decide(74, :gap, :remediation)
-        assert_equal :self_corrected, decide(74, :gap, "standard")
-        assert_equal :none, decide(72, :gap, :remediation)
-        assert_equal :remediated, decide(73, :gap, :remediation)
+      test "la note affichée décide : 78 % s'affiche 16/20 et lève, 77 % s'affiche 15/20 et ne lève pas" do
+        assert_equal [ 16, 15 ], [ 78, 77 ].map { Grading.grade_on_20(it) }
+        assert_equal :remediated, decide(78, :gap, :remediation)
+        assert_equal :self_corrected, decide(78, :gap, "standard")
+        assert_equal :none, decide(77, :gap, :remediation)
       end
 
-      test "entre la réussite et le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
-        assert_equal :none, decide(50, nil)
-        assert_equal :none, decide(50, :gap, :remediation)
-        assert_equal :none, decide(72, :gap, "standard")
+      test "Bronze et Argent restent en remédiation : la lacune en attente n'est pas levée, sans nouvel échec" do
+        [ 48, 50, 67, 68, 74, 75, 77 ].each do |score|
+          assert_includes %i[bronze silver], Grading.badge_for(score)
+          assert_equal :none, decide(score, :gap, :remediation), score.to_s
+          assert_equal :none, decide(score, :gap, "standard"), score.to_s
+          assert_equal :none, decide(score, nil, :remediation), score.to_s
+        end
       end
 
-      test "au seuil de remédiation (75 %) : résout la lacune en attente selon le type de session" do
-        assert_equal 75, Grading::REMEDIATION_THRESHOLD
-        assert_equal :remediated, decide(75, :gap, :remediation)
-        assert_equal :none, decide(75, nil, :remediation)
+      test "à l'Or et au Diamant : résout la lacune en attente selon le type de session" do
+        assert_equal :gold, Grading.badge_for(78)
+        assert_equal :remediated, decide(78, :gap, :remediation)
+        assert_equal :remediated, decide(100, :gap, :remediation)
+        assert_equal :none, decide(80, nil, :remediation)
         assert_equal :self_corrected, decide(100, :gap, "standard")
+      end
+
+      test "une lacune ne dépend que de la médaille : elle se lève exactement quand la médaille est Or ou Diamant" do
+        (0..100).each do |score|
+          lifts = %i[gold diamond].include?(Grading.badge_for(score)) && score >= 50
+          assert_equal lifts, %i[remediated self_corrected].include?(decide(score, :gap, :remediation)), score.to_s
+        end
       end
     end
   end

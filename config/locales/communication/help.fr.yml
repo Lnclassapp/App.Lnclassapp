@@ -1,6 +1,6 @@
 # Questions fréquentes (/aide) — UDR-0061, construite directement à la demande du porteur (2026-10-02) ;
 # « En retard » ajoutée par le lot des échéances (UDR-0062 §4, ADR-0072 §4.4 : rien ne se ferme après la date).
-# Les seuils lus sur 20 (%{pass_grade}, %{mastery_grade}, %{gold_grade}, %{remediation_grade}, UDR-0119, UDR-0131) et
+# Les seuils lus sur 20 (%{pass_grade}, %{mastery_grade}, %{gold_grade}, UDR-0119, UDR-0131) et
 # l'exemple de note viennent de
 # Entities::Assessment::Grading : la FAQ ne recopie aucun chiffre du barème.
 fr:
@@ -36,7 +36,7 @@ fr:
             answer: "Elle dit où tu en es sur un exercice : Acquis dès l'Argent, Fragile au Bronze quand plus de la moitié est juste, En difficulté quand moins de la moitié est juste."
           gaps:
             question: "Pourquoi une fiche de révision est-elle « à revoir » ?"
-            # UDR médailles : le seuil se dit en médaille (le code garde 15/20, voir le journal du chantier medailles-eleve).
+            # UDR médailles : le seuil se dit en médaille ; la lacune se lève à l'Or (seuil-remediation).
             answer: "Quand tu as moins de la moitié de bonnes réponses à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis vise l'Or à l'un de ses exercices : elle ne sera plus à revoir."
           retry:
             question: "Puis-je refaire un exercice ?"

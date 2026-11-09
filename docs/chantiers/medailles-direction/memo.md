@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | terminé |
 | **Ouvert le** | 2026-11-09 |
 | **Branche** | `feature/medailles-direction` |
 | **Programme** | — (suite de `medailles-vocabulaire`, voir son `plan.md`) |

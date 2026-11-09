@@ -10,7 +10,7 @@
 
 ## À trancher
 
-- [ ] 2026-11-09 · medailles-enseignant · Remédiation : seuil du code (75 %) inchangé, comme `medailles-eleve` — appliqué : inchangé ; autres : l'aligner sur l'Argent (68 %) ; recommandé : Argent, dans un chantier code (voir `medailles-eleve`)
+- [x] 2026-11-09 · medailles-enseignant · Remédiation : seuil du code (75 %) inchangé, comme `medailles-eleve` — appliqué : inchangé ; autres : l'aligner sur l'Argent (68 %) ; recommandé : Argent, dans un chantier code (voir `medailles-eleve`) — réponse du porteur (2026-11-09) : Bronze et Argent sont en remédiation, levée à l'Or ; fait dans `seuil-remediation`
 - [ ] 2026-11-09 · medailles-enseignant · Barème « N points » sur la feuille de sujet vue par l'enseignant — appliqué : inchangé (hors écrans listés) ; autres : le retirer ; recommandé : le retirer dans le chantier qui touche la feuille
 - [ ] 2026-11-09 · medailles-enseignant · Points pondérés (« 6 points sur 11 ») sur la page de résultat vue par l'enseignant — appliqué : gardés (compte de points, hors des écrans listés) ; autres : les retirer comme pour l'élève ; recommandé : les retirer
 - [ ] 2026-11-09 · medailles-enseignant · « Fait seul (7 j) » quitte la liste de classe (E-002) mais reste sur la fiche élève — appliqué : retiré de la liste ; autres : le garder en compteur discret ; recommandé : appliqué

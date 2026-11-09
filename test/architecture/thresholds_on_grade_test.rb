@@ -18,7 +18,7 @@ class ThresholdsOnGradeTest < ActiveSupport::TestCase
 
   test "the pattern catches raw comparisons and lets reaches? through" do
     [ "score >= Grading::MASTERY_THRESHOLD", "rate < PASS_THRESHOLD", "Entities::Assessment::Grading::GOLD_THRESHOLD <= best",
-      "score_percent > REMEDIATION_THRESHOLD" ].each { assert_equal 1, raw_comparisons(it).size, it }
+      "score_percent > GOLD_THRESHOLD" ].each { assert_equal 1, raw_comparisons(it).size, it }
     assert_empty raw_comparisons("Grading.reaches?(score, Grading::MASTERY_THRESHOLD)")
     assert_empty raw_comparisons("BADGE_THRESHOLDS = { bronze: PASS_THRESHOLD }")
   end
