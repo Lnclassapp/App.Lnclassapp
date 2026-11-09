@@ -212,6 +212,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`orchestrateur-court-et-index`](orchestrateur-court-et-index/memo.md) | livré | refactoring | 2026-11-05 | Orchestrateurs courts et index des chantiers généré |
 | [`ordre-lecons-progression`](ordre-lecons-progression/memo.md) | livré | bugfix | 2026-10-29 | Les leçons dans l'ordre de la progression |
 | [`outils-ci-budgets`](outils-ci-budgets/memo.md) | livré | correction | 2026-10-28 | Deux outils de CI en retard sur leurs règles |
+| [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |

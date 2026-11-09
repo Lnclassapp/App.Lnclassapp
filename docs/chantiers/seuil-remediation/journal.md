@@ -10,3 +10,4 @@
 ## À trancher
 
 - [ ] 2026-11-09 · seuil-remediation · Ouvrir aussi la fiche quand la médaille est Argent (aujourd'hui elle s'ouvre sous 10/20) — appliqué : ouverture inchangée ; autres : ouvrir à l'Argent (beaucoup plus de fiches) ; recommandé : appliqué
+  - [x] Tranché par le porteur (2026-11-09) : oui, l'Argent ouvre la fiche (chantier `ouverture-remediation`).
