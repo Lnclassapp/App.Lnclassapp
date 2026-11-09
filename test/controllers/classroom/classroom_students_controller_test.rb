@@ -276,15 +276,16 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     # « 1 fait sur 2 », « Moyenne 18/20 · Or » (90 % : Or), puis les badges obtenus, nommés et comptés, zéro caché.
     assert_select "#student_file_summary" do
       assert_select "#student_file_counts", text: ft("summary.done_of", count: 1, assigned: 2)
-      assert_select "#student_file_average", text: ft("summary.average", grade: 18, medal: "Or")
+      assert_select "#student_file_average", 0
       assert_select "ul[aria-label=?]", ft("summary.badges_label") do
-        assert_select "li", 2
+        assert_select "li", 1
         assert_select "li", text: /Or\s+1/
       end
     end
     assert_no_match(/Fragile|Acquis|En progrès|Pas encore lisible/, response.body)
     assert_select "section#student_file_assignments[aria-labelledby=student_file_assignments_title]" do
-      assert_select "li#assignment_#{assignment.public_id}", text: /18\/20/
+      assert_select "li#assignment_#{assignment.public_id}", text: /Or/
+      assert_select "li#assignment_#{assignment.public_id}", text: /18\/20/, count: 0
       assert_select "li#assignment_#{assignment.public_id} a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']",
                     text: "La méiose"
       assert_select "li#assignment_#{assignment.public_id} a[href='#{exercise_session_result_path(best.public_id)}']",
@@ -293,6 +294,8 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     end
     assert_select "section#student_file_self_practice h2", text: ft("self_practice.title", days: 30)
     assert_select "section#student_file_self_practice a[href='#{exercise_session_result_path(alone.public_id)}']"
+    assert_select "section#student_file_self_practice li", text: %r{\d+ ?%}, count: 0
+    assert_select "section#student_file_self_practice li", text: /Pas encore|Bronze|Argent|Or|Diamant/
     assert_select "section#student_file_manage" do
       assert_select "form[action='#{account_pin_recovery_codes_path(@koffi.public_id)}'][method=post][data-turbo-frame=_top] button",
                     text: ft("manage.issue_code")
@@ -313,11 +316,10 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
 
     show_file
 
-    assert_select "#student_file_summary ul[aria-label] li", 3
+    assert_select "#student_file_summary ul[aria-label] li", 2
     assert_select "#student_file_summary ul[aria-label] li", text: /Bronze\s+2/
     assert_select "#student_file_summary ul[aria-label] li", text: /Argent\s+1/
-    # (55 + 60 + 75) / 3 = 63 % : 13 sur 20, Bronze.
-    assert_select "#student_file_average", text: ft("summary.average", grade: 13, medal: "Bronze")
+    assert_select "#student_file_summary", text: %r{Moyenne|/20}, count: 0
     assert_select "#student_file_counts", text: ft("summary.done_of", count: 3, assigned: 3)
     assert_select "#student_file_summary .ui-badge", text: /en retard/, count: 0
     assert_select "#student_file_summary", text: /en retard/, count: 0
@@ -332,10 +334,10 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
 
     show_file
 
-    assert_select "#assignment_#{assignment.public_id} p.ui-badge", text: /0\/20/
+    assert_select "#assignment_#{assignment.public_id} p.ui-badge", text: /Pas encore/
+    assert_select "#assignment_#{assignment.public_id}", text: %r{/20}, count: 0
     assert_select "#assignment_#{assignment.public_id} p.ui-badge svg", 0
-    assert_select "#student_file_summary ul[aria-label] li", 1
-    assert_select "#student_file_average", text: /Pas encore/
+    assert_select "#student_file_summary ul[aria-label] li", 0
   end
 
   # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;

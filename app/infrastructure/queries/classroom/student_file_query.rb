@@ -22,7 +22,7 @@ module Queries
       AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :status,
                                   :done_on, :best, :category, :trend, :sessions_count, :best_session_public_id, :medal)
       SelfPracticeRow = Data.define(:session_public_id, :exercise_title, :material_name, :material_category,
-                                    :score_percent, :completed_at)
+                                    :score_percent, :completed_at, :medal)
 
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact classroom_students.joined_at
                            classroom_students.joined_via].freeze
@@ -56,7 +56,8 @@ module Queries
                                       joined_via:, newcomer: joined_at > Time.current - ClassroomOverviewQuery::NEW_FOR),
                  counts: counts(assignments), badge_counts: badge_counts(medals), assignments:,
                  self_practice: practice.order(completed_at: :desc, id: :desc).limit(SELF_PRACTICE_LIMIT)
-                                        .pluck(*SELF_PRACTICE_COLUMNS).map { SelfPracticeRow.new(*it) },
+                                        .pluck(*SELF_PRACTICE_COLUMNS, Arel.sql(Queries::Assessment::Medals::TREATED_SQL))
+                                        .map { self_practice_row(*it) },
                  self_practice_total: practice.count, **standing(assignments, medals))
       end
 
@@ -110,6 +111,11 @@ module Queries
       # la classe, jamais d'après le score ni d'une autre classe.
       def badge_counts(medals)
         Grading::BADGE_ORDER.index_with { 0 }.merge(medals.tally)
+      end
+
+      # UDR médailles : la médaille de la session (palier de son score si elle est traitée, rien pour une copie vide), jamais le score.
+      def self_practice_row(*columns, treated)
+        SelfPracticeRow.new(*columns, Grading.session_medal(columns[4], treated:))
       end
 
       # ADR-0089 §4.2 sur SELF_PRACTICE_DAYS jours : la définition de la liste des élèves, une seule fois.

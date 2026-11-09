@@ -197,7 +197,7 @@ module Queries
         assert_equal [ [ 1, 1 ], [ 0, 1 ], [ 0, 0 ] ], counts(detail)
       end
 
-      test "the students, best score first, then by last name and first name, each with his grade on 20 and his badge" do
+      test "the students, alphabetical (never ranked by score), each with his badge; the grade stays in the DTO" do
         student("Koffi", "Progres", scores: [ 50, 67 ])
         student("Awa", "Seule", scores: [ 55 ])
         student("Jean", "Baisse", scores: [ 65, 50 ])
@@ -206,11 +206,11 @@ module Queries
         student("Marc", "Haut", scores: [ 90, 100 ])
         student("Ali", "Pas-Encore", scores: [ 42 ])
 
-        assert_equal [ [ "Marc Haut", 100, 20, :diamond ], [ "Koffi Progres", 67, 13, :bronze ], [ "Jean Baisse", 65, 13, :bronze ],
-                       [ "Yao Achi", 58, 12, :bronze ], [ "Zoé Achi", 58, 12, :bronze ], [ "Awa Seule", 55, 11, :bronze ],
-                       [ "Ali Pas-Encore", 42, 8, :bronze ] ],
+        assert_equal [ [ "Yao Achi", 58, 12, :bronze ], [ "Zoé Achi", 58, 12, :bronze ], [ "Jean Baisse", 65, 13, :bronze ],
+                       [ "Marc Haut", 100, 20, :diamond ], [ "Ali Pas-Encore", 42, 8, :bronze ], [ "Koffi Progres", 67, 13, :bronze ],
+                       [ "Awa Seule", 55, 11, :bronze ] ],
                      detail.students.map { [ it.display_name, it.best, it.grade, it.badge ] }
-        assert_equal [ "Koffi Progres", "Jean Baisse", "Yao Achi", "Zoé Achi", "Awa Seule", "Ali Pas-Encore" ],
+        assert_equal [ "Yao Achi", "Zoé Achi", "Jean Baisse", "Ali Pas-Encore", "Koffi Progres", "Awa Seule" ],
                      detail(badge: :bronze).students.map(&:display_name)
       end
 
@@ -223,7 +223,7 @@ module Queries
         @clock = Time.zone.local(2026, 10, 12, 8)
         hand_in(late, 60)
 
-        assert_equal [ [ "Awa Tôt", Date.new(2026, 10, 5) ], [ "Koffi Tard", Date.new(2026, 10, 12) ] ],
+        assert_equal [ [ "Koffi Tard", Date.new(2026, 10, 12) ], [ "Awa Tôt", Date.new(2026, 10, 5) ] ],
                      detail.students.map { [ it.display_name, it.done_on ] }
       end
 

@@ -128,10 +128,10 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       assert_no_text(/%|1re session|reprendre/)
     end
     within "#comprehension_panel" do
-      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève ; du meilleur score au plus faible.
-      assert_equal [ "Aya Konan", "Paul Zadi", "Bakary Adou", "Fanta Sylla" ], all("ul li").map { it.find("a").text }
-      assert_selector "ul li", text: /Aya Konan\s+Fait le \d+ \w+\.\s+.*13\/20/m
-      assert_selector "ul li", text: /Paul Zadi.*13\/20/m
+      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève ; ordre alphabétique, jamais un classement par score.
+      assert_equal [ "Bakary Adou", "Aya Konan", "Fanta Sylla", "Paul Zadi" ], all("ul li").map { it.find("a").text }
+      assert_selector "ul li", text: /Aya Konan\s+Fait le \d+ \w+\.\s+.*Bronze/m
+      assert_no_text(%r{/20})
       assert_no_text(/En baisse|1 session|%|Pas encore fait/)
     end
   end

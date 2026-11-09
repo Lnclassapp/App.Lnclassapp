@@ -22,20 +22,18 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     create_exercise_session(student: @awa, status: "completed", started_at: 8.days.ago, completed_at: 8.days.ago)
   end
 
-  test "CA-16 : la colonne « Fait seul (7 j) » à l'ordinateur, rien de tel à 390 px" do
+  test "E-002 : la ligne d'élève n'a plus « Fait seul (7 j) » ni note, à l'ordinateur comme à 390 px" do
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id, q: "a")
 
-    assert_selector "#self_practice_heading", text: "Fait seul (7 j)", wait: SIGN_IN_WAIT
-    assert_selector "#self_practice_#{@awa.public_id}", text: /Fait seul \(7 j\)\s+2/
-    assert_selector "#self_practice_#{@koffi.public_id} span.text-mute", text: "—"
+    assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba", wait: SIGN_IN_WAIT
+    assert_no_selector "#self_practice_heading"
+    assert_no_selector "#self_practice_#{@awa.public_id}"
+    assert_no_text(%r{Fait seul|Dernier score|Moyenne|/20})
     assert_selector "#assignment_#{@assignment.public_id}", text: "1 / 2 fait"
     growth_shot("lot-d-classroom-roster-1280", scroll_to: "#classroom_roster")
 
     with_mobile_viewport do
-      assert_no_text "Fait seul :"
-      assert_no_selector "#self_practice_#{@awa.public_id}"
-      assert_no_selector "#self_practice_heading"
       assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,
                       page.evaluate_script("document.documentElement.clientWidth")
       growth_shot("lot-d-classroom-roster-390", scroll_to: "#classroom_roster", desktop: false)
@@ -55,7 +53,7 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     assert_no_page_reload do
       click_on "classroom_roster_badge_gold"
       assert_selector "#classroom_roster_list li[id^=student_]", count: 1
-      assert_selector "#student_#{@koffi.public_id}", text: "Moyenne 16/20 · Or"
+      assert_selector "#student_#{@koffi.public_id}", text: "Or"
       click_on "classroom_roster_badge_none"
       assert_selector "#classroom_roster_count", text: "30 sur 65"
       click_on I18n.t("classroom.classrooms.roster.more", count: 30)

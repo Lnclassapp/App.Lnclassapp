@@ -46,20 +46,11 @@ fr:
           one: "%{count} fait sur %{assigned}"
           other: "%{count} faits sur %{assigned}"
         late: "%{count} en retard"
-        badge_grade: "Moyenne %{grade}/20 · %{medal}"
-        average_none: "Moyenne %{grade}/20 · %{medal}"
         more:
           one: "Voir le dernier"
           other: "Voir les %{count} suivants"
         no_match: "Aucun élève ne correspond"
         clear_search: "Effacer la recherche"
-        last_score: "Dernier score"
-        last_score_tip: "Score de la dernière session d'exercice terminée par l'élève, en pourcentage de bonnes réponses."
-        no_score: "Aucune session terminée"
-        see_result: "Voir le résultat"
-        # UDR-0084 §3.7 (accueil-eleve, ADR-0089 §4.2) : les exercices terminés par l'élève sans qu'ils aient été donnés.
-        self_practice: "Fait seul (7 j)"
-        self_practice_tip: "Exercices terminés par l'élève sans qu'ils aient été donnés, sur les 7 derniers jours, aujourd'hui compris."
         # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de
         # l'enseignant n'a plus de menu ⋮ (UDR-0108) ; le menu et la confirmation restent lus par la page de la classe de la
         # direction (school_admin/classrooms/show).
@@ -94,7 +85,7 @@ fr:
         empty_description: "Ouvrez une fiche de cours dans « Cours » pour assigner un exercice à cette classe."
         empty_action: "Voir les cours"
         pending: "%{count} pas encore"
-      # UDR-0121 §3.1, ADR-0101 §4.4 : les fiches à revoir de la classe (AS-17) ; « 10/20 » = Grading.grade_on_20(PASS_THRESHOLD).
+      # UDR-0121 §3.1, ADR-0101 §4.4 : les fiches à revoir de la classe (AS-17) ; UDR médailles : dit en médailles.
       gaps:
         title: "Fiches à revoir"
         subtitle: "Des élèves n'ont pas encore levé ces fiches de révision : un nouvel exercice les aidera à viser l'Or."
