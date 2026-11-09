@@ -47,7 +47,7 @@ module Assessment
       when nil then nil
       when :remind then [ step, { count: pending, min: Entities::Assessment::Comprehension::MIN_DONE_FOR_READING } ]
       when :watch_decline then [ step, { count: decline } ]
-      when :revisit_notion then [ step, { count: comprehension.badge_counts.fetch(:none), target: revisit_target(comprehension, :notion) } ]
+      when :revisit_notion then [ step, { count: comprehension.badge_counts.fetch(:none) + comprehension.badge_counts.fetch(:bronze), target: revisit_target(comprehension, :notion) } ]
       when :revisit_questions then [ step, { target: revisit_target(comprehension, :questions) } ]
       else [ step, {} ]
       end
@@ -78,13 +78,11 @@ module Assessment
       badge == :none ? t("assessment.comprehension.badge_none") : badge_label(badge)
     end
 
-    # UDR enseignant §3.8 : la pastille d'un élève qui a fait l'exercice, « 🏆 16/20 » : le trophée de son badge (aucun sous le
-    # Bronze, « Pas encore ») et sa note sur 20. student : répond à badge (:none ou un palier) et grade.
+    # UDR médailles : la pastille d'un élève qui a fait l'exercice, sa médaille seule (trophée du palier + nom, « Pas encore » sans
+    # médaille dans la classe) ; jamais la note sur 20. student : répond à badge (:none ou un palier).
     def comprehension_grade_badge(student)
       level = student.badge unless student.badge == :none
-      parts = [ (comprehension_trophy(comprehension_badge_class(level, 1)) if level),
-                (tag.span(badge_label(level), class: "sr-only") if level),
-                tag.span(t("assessment.badges.grade", grade: student.grade), class: "text-ink tabular-nums") ]
+      parts = [ (comprehension_trophy(comprehension_badge_class(level, 1)) if level), tag.span(comprehension_box_label(student.badge), class: "text-ink") ]
       ui_badge safe_join(parts.compact, " "), tone: :neutral
     end
 

@@ -66,11 +66,11 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "h2", text: "Compréhension", count: 0
     assert_select "#comprehension_panel h3#comprehension_students_title", text: "Élèves"
     assert_select "#comprehension_panel li", 4 do |(best, good, passed, pending)|
-      assert_match(%r{\A\s*JK\s*Jean Kouassi\s*Fait le 8 oct\.\s*.*20/20\s*\z}m, best.text)
-      assert_select best, "svg.text-info"
-      assert_match(%r{Awa Bamba\s*Fait le 9 oct\.\s*.*18/20}m, good.text)
-      assert_select good, "svg.text-gold"
-      assert_match(%r{Koffi Yao\s*Fait le 9 oct\.\s*.*12/20}m, passed.text)
+      assert_match(%r{\A\s*AB\s*Awa Bamba\s*Fait le 9 oct\.\s*Or\s*\z}m, best.text)
+      assert_select best, "svg.text-gold"
+      assert_match(%r{Jean Kouassi\s*Fait le 8 oct\.\s*.*Diamant}m, good.text)
+      assert_select good, "svg.text-info"
+      assert_match(%r{Koffi Yao\s*Fait le 9 oct\.\s*.*Bronze}m, passed.text)
       assert_select passed, "svg.text-warning"
       assert_match(/\A\s*ZP\s*Zoé Pas-Encore\s*Pas encore fait\s*En retard\s*\z/, pending.text)
       assert_select pending, "svg", 0
@@ -312,7 +312,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_questions ol li:first-child p", text: 'Calculer $\lim_{x \to 0} \frac{\sin x}{x}$.'
   end
 
-  test "the students of the list: initials, name, « Fait le … », the trophy of the badge and the grade on 20; best first, then by name" do
+  test "the students of the list: initials, name, « Fait le … », the trophy of the badge and the grade on 20; alphabetical" do
     build_quiz
     sign_in_as @teacher
 
@@ -321,7 +321,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_panel h3#comprehension_students_title", text: "Élèves"
     assert_select "#comprehension_panel ul li", 2 do |items|
       [ [ "MB", "Marc Baisse" ], [ "AP", "Ali Progres" ] ].zip(items).each do |(initials, name), item|
-        assert_match(%r{\A\s*#{initials}\s*#{name}\s*Fait le 3 oct\.\s*.*18/20\s*\z}m, item.text)
+        assert_match(%r{\A\s*#{initials}\s*#{name}\s*Fait le 3 oct\.\s*Or\s*\z}m, item.text)
         assert_select item, "svg.text-gold"
       end
     end
@@ -330,17 +330,17 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_panel", text: /%|session|baisse|progrès|Pas encore fait/, count: 0
   end
 
-  test "the whole list: best score first, a student under 48 % has the Bronze trophy and his grade, then the ones not done yet, by name" do
+  test "the whole list: alphabetical, never ranked; a student under 48 % has the Bronze trophy, then the ones not done yet, by name" do
     build_quiz
     sign_in_as @teacher
 
     get follow_up_path(@quiz)
 
     assert_select "#comprehension_panel ul li", 10 do |items|
-      assert_equal [ "Marc Baisse", "Ali Progres", "Léa Stable", "Fanta Fragile", "Inès Difficile", "Omar Difficile",
+      assert_equal [ "Marc Baisse", "Inès Difficile", "Omar Difficile", "Fanta Fragile", "Ali Progres", "Léa Stable",
                      "Awa Bamba", "Jean Kouassi", "Zoé Pas-Encore", "Koffi Yao" ], items.map { it.at_css("a").text }
-      assert_match(%r{Inès Difficile\s*Fait le 3 oct\.\s*Bronze 8/20\s*\z}, items[4].text)
-      assert_select items[4], "svg.text-warning"
+      assert_match(%r{Inès Difficile\s*Fait le 3 oct\.\s*Bronze\s*\z}, items[1].text)
+      assert_select items[1], "svg.text-warning"
       assert_select items[3], "svg.text-warning"
       items.to_a.last(4).each { assert_match(/Pas encore fait\s*\z/, it.text) } # the quiz has no due date: nobody late
     end
@@ -354,8 +354,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     assert_select "nav a[aria-current=true][href='#{follow_up_path(@quiz)}']", text: /3\s*Bronze/
     assert_select "#comprehension_panel ul li", 3 do |items|
-      assert_equal [ "Fanta Fragile", "Inès Difficile", "Omar Difficile" ], items.map { it.at_css("a[data-turbo-frame=_top]").text }
-      assert_select items.first, "span", text: "13/20"
+      assert_equal [ "Inès Difficile", "Omar Difficile", "Fanta Fragile" ], items.map { it.at_css("a[data-turbo-frame=_top]").text }
+      assert_select items.first, "span", text: %r{/20}, count: 0
     end
     assert_select "#comprehension_panel", text: /Pas encore fait|En retard/, count: 0
     assert_select "#comprehension_questions ol li:first-child", text: /1\.\s*Question 1\s*1 \/ 1 juste/

@@ -82,7 +82,7 @@ module Queries
         end
       end
 
-      # Du meilleur score au plus faible, puis par nom (« Fait le … » : la première session faite, quel que soit son kind).
+      # UDR médailles : ordre alphabétique, jamais un classement par score (« Fait le … » : la première session faite, quel que soit son kind).
       def students(members, medals, classroom_id, id)
         by_student = members.index_by(&:student_id)
         done_on = Queries::Classroom::AssignmentFollowUpQuery.first_done(classroom_id, [ id ]).to_h { [ it.student_id, it.done_on ] }
@@ -92,7 +92,6 @@ module Queries
                    StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", best:, grade: Grading.grade_on_20(best),
                                   badge: medals.fetch(student_id, :none), done_on: done_on.fetch(student_id))
                  end
-                 .each_with_index.sort_by { |row, rank| [ -row.best, rank ] }.map(&:first)
       end
     end
   end
