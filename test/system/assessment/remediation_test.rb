@@ -46,6 +46,30 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     assert_no_selector "#student_next_step[data-state=review]"
   end
 
+  # Décision du porteur (2026-11-09, ouverture-remediation) : Bronze est en remédiation. 1 réponse juste sur 2 = 50 % (10/20, Bronze),
+  # qui n'ouvrait rien avant ; la remédiation au Bronze compte un échec de plus et dit « Encore à revoir. ».
+  test "un Bronze ouvre la fiche, et une remédiation au Bronze la garde à revoir avec un échec de plus" do
+    course = create_course(material: create_material(name: "Mathématiques"), name: "Géométrie")
+    student = create_student(classroom: create_classroom(level: course.level, series: course.series))
+    essential = create_essential(course:, name: "Théorème de Thalès")
+    first = create_exercise(essential:, title: "Thalès 1", exercise_type: "evaluation", questions: QUESTIONS, position: 1)
+    second = create_exercise(essential:, title: "Thalès 2", exercise_type: "fixation", questions: QUESTIONS, position: 2)
+    sign_in_as student
+
+    visit exercise_path(first.public_id)
+    click_on I18n.t("assessment.exercises.show.start")
+    play(correct: 1)
+    assert_selector "#session_gap_outcome", text: "Cette notion passe à revoir."
+    gap = Orm::KnowledgeGap.find_by!(student_id: student.id, essential_id: essential.id)
+    assert_equal [ "pending", 1 ], [ gap.status, gap.failed_sessions_count ]
+
+    visit exercise_path(second.public_id)
+    click_on I18n.t("assessment.exercises.show.start")
+    play(correct: 1)
+    assert_selector "#session_gap_outcome", text: "Encore à revoir."
+    assert_equal [ "pending", 2 ], gap.reload.then { [ it.status, it.failed_sessions_count ] }
+  end
+
   private
 
   # Remplit et rend la copie de la session ouverte : les `correct` premières questions justes (la proposition 1 est la
