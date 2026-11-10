@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | terminé |
 | **Ouvert le** | 2026-11-09 |
 | **Branche** | `feature/medailles-par-sessions` |
 | **Programme** | — (suite de code des chantiers `medailles-*`) |
