@@ -110,7 +110,7 @@ module Queries
       test "a fixed number of queries, whatever the volume" do
         3.times { |index| create_student.tap { member(it, @last_year); hand_in(it, @last_year, 50 + index) } }
 
-        assert_queries_count(4) { overview }
+        assert_queries_count(5) { overview }
       end
 
       # Characterization (chantier ecrans-direction-lents): what the page shows must not move while its query is rewritten.

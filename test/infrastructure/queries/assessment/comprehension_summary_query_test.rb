@@ -125,7 +125,7 @@ module Queries
         others = Array.new(3) { create_assignment(classroom: @classroom, assignable: create_exercise(essential: @exercise.essential)) }
         others.each { hand_in(create_student(classroom: @classroom), 80, assignment: it) }
 
-        assert_equal 2, one
+        assert_equal 3, one
         assert_equal one, count_queries { summaries([ @assignment.id, *others.map(&:id) ]) }
       end
 

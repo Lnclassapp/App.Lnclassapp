@@ -241,11 +241,11 @@ module Queries
         other = create_assignment(classroom: other_classroom, assignable: @exercise)
         hand_in(twice, 100, answers: { 1 => true, 2 => true }, assignment: other)
 
-        result = detail(badge: :none)
+        result = detail(badge: :bronze)
 
-        # ADR-0097 §4.5: a medal is read in a classroom only when a session of its assignment recorded it. The diamond won in the
-        # other classroom took the medal over: here, nothing (journal, À trancher).
-        assert_equal [ 1, 1, { none: 1, bronze: 0, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
+        # ADR-0097 §4.5 + medailles-par-sessions: a medal is read in a classroom from the best treated copy of its own assignment.
+        # The diamond won in the other classroom took the stored medal over, but this classroom's copy still gives its Bronze.
+        assert_equal [ 1, 1, { none: 0, bronze: 1, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
         assert_empty detail(badge: :diamond).students
         assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
         assert_equal [ 60 ], result.students.map(&:best)
@@ -283,7 +283,7 @@ module Queries
         6.times { |index| student(scores: [ 50 + index, 95 ], answers: [ { 1 => true, 2 => false }, { 1 => true, 3 => true } ]) }
         2.times { student }
 
-        assert_equal 8, few
+        assert_equal 9, few
         assert_equal few, count_queries { detail }
         assert_equal 7, detail.students.size
       end
