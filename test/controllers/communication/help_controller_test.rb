@@ -28,7 +28,8 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     assert_select "#help_question_badges", text: /au moins le Bronze.*Argent.*Or.*Diamant/
     assert_select "#help_question_mastery", text: /Acquis dès l'Argent/
     assert_select "#help_questions", text: %r{\d+\s*/\s*20|%}, count: 0
-    assert_select "#help_question_gaps", text: /moins de la moitié.*vise l'Or/
+    # #534 (ouverture-remediation) : la fiche passe « à revoir » sous l'Or, Bronze et Argent compris.
+    assert_select "#help_question_gaps", text: /Bronze ou Argent.*vise l'Or/
     assert_select "#help_question_grade", text: /médaille.*bonnes réponses/
   end
 

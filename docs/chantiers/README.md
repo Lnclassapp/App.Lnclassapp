@@ -148,6 +148,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | bugfix | 2026-09-29 | Seeds joués deux fois au déploiement, `image_processing` réclamé au démarrage |
 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | abandonné | refactoring | 2026-09-18 | Contrats de ports et injection de dépendances non respectés |
 | [`dettes-reorganisation`](dettes-reorganisation/memo.md) | livré | bugfix | 2026-10-04 | Dettes du chantier « réorganisation équipe / enseignant » |
+| [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
