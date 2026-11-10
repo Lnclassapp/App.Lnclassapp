@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# Draws script/ci/system_map.yml, the map bin/system-changed reads (chantier ci-scope-tests-systeme, ADR-0107 amended):
+# for each application file, the system test files that ran it. Redrawn at each promotion, like test_timings.yml.
+#
+#   script/ci/record_system_map                   plays the whole system suite with the recorder, then writes the map
+#   script/ci/record_system_map tmp/system_map    writes the map from a recording already made (one JSON per process)
+#
+# The suite plays with CI=true (every file loaded before the first test: a file counts for a test only when the test
+# runs its lines) and line coverage started before the application (script/ci/system_map_start.rb). A failed test still
+# draws what it ran. A map older than the code only misses the newest files, which keep the former rules.
+require "json"
+require "yaml"
+require "fileutils"
+
+root = File.expand_path("../..", __dir__)
+Dir.chdir(root)
+dir = ARGV.first
+
+unless dir
+  dir = "tmp/system_map"
+  FileUtils.rm_rf(dir)
+  env = { "CI" => "true", "COVERAGE" => "0", "SYSTEM_MAP" => dir, "RUBYOPT" => "-r#{root}/script/ci/system_map_start.rb #{ENV['RUBYOPT']}".strip,
+          "PARALLEL_WORKERS" => ENV.fetch("PARALLEL_WORKERS", "4") }
+  system(env, "bin/rails", "test", "test/system") || warn("⚠️  Des tests système ont échoué : la carte garde ce qu'ils ont exécuté.")
+end
+
+recorded = Dir[File.join(dir, "*.json")].map { JSON.parse(File.read(it)) }
+abort "Aucun enregistrement dans #{dir} : lancez script/ci/record_system_map sans argument." if recorded.empty?
+
+files = Hash.new { |hash, key| hash[key] = [] }
+recorded.each { |by_test| by_test.each { |test, ran| ran.each { files[it] << test } } }
+tests = recorded.flat_map(&:keys).uniq.sort
+index = tests.each_with_index.to_h
+commit = `git rev-parse --short=8 HEAD`.strip
+header = <<~TEXT
+  # Application file → the system test files that ran it (Ruby lines run, templates and partials rendered), as their
+  # positions in `tests`, so that a redraw changes a line per file, not a line per pair.
+  # Written by script/ci/record_system_map, read by bin/system-changed (script/ci/system_scope.rb). Redrawn at each
+  # promotion: a file missing here keeps the former rules (route of its resource, COMMON), never fewer tests.
+TEXT
+body = { "commit" => commit, "tests" => tests, "files" => files.sort.to_h { |file, by| [ file, by.uniq.map { index[it] }.sort.join(" ") ] } }
+File.write("script/ci/system_map.yml", header + body.to_yaml(line_width: -1).delete_prefix("---\n"))
+puts "🗺️  script/ci/system_map.yml : #{files.size} fichiers, #{tests.size} fichiers de tests système (#{commit})."

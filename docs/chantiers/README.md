@@ -100,6 +100,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`ci-quota`](ci-quota/memo.md) | en cours | optimisation | 2026-09-29 | La CI épuise le quota de minutes GitHub Actions |
 | [`ci-rapide`](ci-rapide/memo.md) | en cours | optimisation | 2026-09-28 | La CI GitHub dure près de 10 minutes |
 | [`ci-rejeu-cible`](ci-rejeu-cible/memo.md) | livré | optimisation | 2026-10-27 | Rejouer seulement ce qu'un changement peut casser |
+| [`ci-scope-tests-systeme`](ci-scope-tests-systeme/memo.md) | en cours | bugfix | 2026-11-10 | Le niveau pr joue les tests système qui exécutent le code touché |
 | [`ci-train-rapide`](ci-train-rapide/memo.md) | en cours | optimisation | 2026-11-05 | Un train plus rapide sur GitHub |
 | [`ci-unit-en-parts`](ci-unit-en-parts/memo.md) | livré | optimisation | 2026-11-04 | La suite unitaire en parts sur GitHub, couverture fusionnée |
 | [`classe-vide-lien-cours`](classe-vide-lien-cours/memo.md) | livré | bugfix | 2026-10-29 | Classe sans exercice : « ci-dessous » ne montre rien |
