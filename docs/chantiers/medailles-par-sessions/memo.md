@@ -36,7 +36,7 @@ Les écrans ont perdu la note qui trahissait l'écart : l'erreur est devenue inv
 
 ## Cas limites identifiés
 
-Copie sans note (nil) lue comme 0 ; élève parti de la classe : exclu des répartitions, gardé pour les anciens élèves .
+élève parti de la classe : exclu des répartitions, gardé pour les anciens élèves .
 
 ## Questions encore ouvertes
 
