@@ -136,6 +136,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0124](./0124-standard-de-test.md) | Standard de test : jeu standard, activité déterministe, rôle des environnements, rendu des leçons | Accepté | 2026-11-02 | Chaque environnement teste sur des données différentes, sans activité, et l'affichage des leçons n'est vérifié qu'à la main. |
 | [0125](./0125-lecture-de-la-classe-par-la-direction.md) | Lecture de la leçon en classe par la direction | Accepté | 2026-11-05 | Qui peut lire les lacunes nominatives et la réussite par exercice d'une classe, et la direction peut-elle agir sur la classe ? |
 | [0126](./0126-contexte-billing-cartes-activation.md) | Contexte billing et cartes d'activation | Proposé | 2026-11-07 | Réserver l'usage aux élèves qui ont payé en espèces chez un point relais, sans paiement en ligne, et tenir les comptes des points relais. |
+| [0127](./0127-carte-des-tests-systeme.md) | Carte des tests système au niveau pr | Accepté | 2026-11-10 | Le niveau pr de `bin/ci-quiet` (ADR-0107) ne jouait que les tests système modifiés ou nommés d'après la route d'une vue changée : les PR médailles et la feuille de style de #492 ont cassé six tests système sans les jouer. La sélection suit désormais une carte fichier → tests tracée par la couverture, une feuille de style par ses classes, une locale par son dossier, dans un budget de 240 s. |
 <!-- index:end -->
 
 ---

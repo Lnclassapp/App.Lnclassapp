@@ -144,7 +144,7 @@ bin/rails test:system           # Capybara + Selenium, lent
 bin/system-changed              # seulement les tests système que ta branche touche (--list pour voir, --all pour tout)
 ```
 
-**Tests système en local : ne lance pas toute la suite.** Elle tourne en CI, en trois parts. Sur un poste de 4 cœurs, elle met 15 à 25 min : chaque processus y lance son Chrome, son serveur et ses requêtes, la machine sature et des tests dépassent leurs délais (faux échecs). `bin/system-changed` joue les seuls tests liés à tes fichiers, sur 2 processus au lieu d'un par cœur (`PARALLEL_WORKERS`), trouve Chromium en snap tout seul, et prévient si la machine est déjà chargée. Pendant qu'il tourne, **ferme VS Code et arrête `bin/dev`** : ils prennent à eux seuls un cœur.
+**Tests système en local : ne lance pas toute la suite.** Elle tourne en CI, en trois parts. Sur un poste de 4 cœurs, elle met 15 à 25 min : chaque processus y lance son Chrome, son serveur et ses requêtes, la machine sature et des tests dépassent leurs délais (faux échecs). `bin/system-changed` joue les seuls tests liés à tes fichiers — ceux qui les exécutent d'après la carte `script/ci/system_map.yml`, dans 240 s de durée enregistrée —, sur 2 processus au lieu d'un par cœur (`PARALLEL_WORKERS`), trouve Chromium en snap tout seul, et prévient si la machine est déjà chargée. Pendant qu'il tourne, **ferme VS Code et arrête `bin/dev`** : ils prennent à eux seuls un cœur.
 
 > ⚠️ **La suite de tests était cassée et elle est en cours de réparation au moment où ce guide est écrit.** Ne pars pas du principe qu'un `bin/rails test` vert est l'état normal, et n'attribue pas automatiquement un échec à ton propre travail.
 >

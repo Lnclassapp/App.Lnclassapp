@@ -12,7 +12,7 @@ problematique: Une CI complète par PR fait jouer la suite entière à chaque fu
 | **Chantier** | [`docs/chantiers/ci-par-train`](../../chantiers/ci-par-train/memo.md) |
 | **Remplace** | la règle « une CI complète par PR » (`docs/workflows/README.md` §5.3, chantier `ci-perf-a-la-demande`) |
 | **Remplacé par** | — |
-| **Amendé** | 2026-11-04 : la suite unitaire en deux parts sur GitHub, couverture fusionnée (§8, chantier `ci-unit-en-parts`) · 2026-11-05 : trois parts unitaires (§9, chantier `ci-train-rapide`) |
+| **Amendé** | 2026-11-04 : la suite unitaire en deux parts sur GitHub, couverture fusionnée (§8, chantier `ci-unit-en-parts`) · 2026-11-05 : trois parts unitaires (§9, chantier `ci-train-rapide`) · 2026-11-10 : les tests système du niveau pr par la carte de ce qu'ils exécutent ([ADR-0127](./0127-carte-des-tests-systeme.md)) |
 
 ---
 
