@@ -1,5 +1,5 @@
 # ADR-0034: fictitious accounts and content for local development, PIN 2468 everywhere — a team member with a
-# second factor, an onboarded SVT teacher of « Tle D 1 », a student of that classroom, and a published course
+# second factor (plus a field and a content member, chantier crm-ecoles), an onboarded SVT teacher of « Tle D 1 », a student of that classroom, and a published course
 # with one essential and one exercise of 2 questions. Idempotent by contact and by name. Also played in a PR
 # environment, which runs in production (ADR-0108).
 raise "db/seeds/development.rb est réservé au développement et aux environnements de PR" unless Rails.env.development? || PrEnvironment.active?
@@ -15,6 +15,16 @@ unless Orm::TotpCredential.exists?(user: member)
 end
 secret = Orm::TotpCredential.find_by!(user: member).secret
 puts "Équipe : 0700000000, PIN #{pin}, secret TOTP de développement #{secret} (code actuel : #{ROTP::TOTP.new(secret).now})"
+
+# Chantier crm-ecoles : un membre Terrain (voit le bloc « Suivi ») et un membre Contenu (ne le voit pas), même PIN, même second facteur.
+{ "0700000001" => [ "field", "Traoré", "Moussa" ], "0700000002" => [ "content", "Bamba", "Fanta" ] }.each do |contact, (team_role, last_name, first_name)|
+  teammate = account.call(contact, role: "team", team_role:, last_name:, first_name:)
+  unless Orm::TotpCredential.exists?(user: teammate)
+    Orm::TotpCredential.create!(user: teammate, secret: ROTP::Base32.random, confirmed_at: Time.current)
+  end
+  teammate_secret = Orm::TotpCredential.find_by!(user: teammate).secret
+  puts "Équipe #{team_role} : #{contact}, PIN #{pin}, secret TOTP de développement #{teammate_secret} (code actuel : #{ROTP::TOTP.new(teammate_secret).now})"
+end
 
 svt = Orm::Material.find_by!(slug: "svt")
 tle = Orm::Level.find_by!(slug: "tle")

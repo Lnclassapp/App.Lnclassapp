@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/crm/briefings/create — remplit le frame school_crm_briefing de la carte « Assistants » %>
+<%# Rôle : fiche prête (partial _briefing) ou cycle de génération (attente, échec avec « Réessayer » vers cette même route POST) %>
+<%# UDR  : XXXX (assistants du suivi) %>
+<% if @generation.done? %>
+  <%= turbo_stream.update "school_crm_briefing", partial: "teams/crm/briefings/briefing", locals: { generation: @generation, school_public_id: @school_public_id } %>
+<% else %>
+  <%= turbo_stream.update "school_crm_briefing", partial: "teams/crm/generations/generation",
+                                                 locals: { generation: @generation, retry_href: teams_school_briefing_path(@school_public_id) } %>
+<% end %>

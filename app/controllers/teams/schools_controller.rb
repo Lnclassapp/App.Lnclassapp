@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
 # Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, confirmations lues à la demande, désactivation
-# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077, 0088 · UDR : 0006, 0036, 0046, 0050, 0070, 0083 · aucune création : un établissement n'entre que par l'import
+# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077, 0088, XXXX (contexte crm) · UDR : 0006, 0036, 0046, 0050, 0070, 0083, XXXX (bloc « Suivi », pipeline et relances) · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     include SchoolStaffBlock
@@ -9,11 +9,15 @@ module Teams
     FILTERS = %i[drena school_type cycle status search].freeze
     STATUS_TONES = { "active" => :success, "draft" => :warning, "inactive" => :neutral }.freeze
 
-    helper_method :list_frame_request?, :school_status_tone, :drena_options
+    helper_method :list_frame_request?, :school_status_tone, :drena_options, :crm_owner_options
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
-      @page = schools_query.call(**@filters, page: params[:page])
+      # UDR-XXXX (pipeline et relances) : étape et responsable sont réservés à admin/field ; `content` voit la liste d'avant (CA-01).
+      @can_manage_crm = Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
+      @crm_filters = @can_manage_crm ? params.permit(:stage, :owner).to_h.symbolize_keys : {}
+      @page = schools_query.call(**@filters, **pipeline_filters, with_crm: @can_manage_crm, page: params[:page])
+      @crm_cells = @page.crm
     end
 
     # « /teams/schools/new » n'a pas de route : il arrive ici comme un public_id inconnu, donc 404.
@@ -21,6 +25,8 @@ module Teams
       @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id], archives: params[:archives] == "1")
       return render_not_found if @school.nil?
 
+      # UDR-XXXX (bloc « Suivi ») : `content` ne voit pas le bloc (CA-01).
+      @can_manage_crm = Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       @join_requests = Queries::School::JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
       load_school_staff(Repositories::School::SchoolRepository.new.find_by_public_id(public_id: @school.public_id))
@@ -71,6 +77,7 @@ module Teams
     # Sur la fiche, le bloc « Classes par niveau » suit le statut (« + » réservé à un établissement actif, UDR-0046).
     def respond_with_school(notice:)
       @school = schools_query.find(public_id: params[:public_id])
+      @crm_cells = row_crm_cells(@school)
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])
       redirect_or_stream(notice:)
     end
@@ -84,6 +91,7 @@ module Teams
 
     def refuse_destroy
       @kept_school = schools_query.find(public_id: params[:public_id])
+      @crm_cells = row_crm_cells(@kept_school)
       respond_to do |format|
         format.turbo_stream { render :destroy, status: :unprocessable_entity }
         format.html { redirect_to schools_path, alert: t(".referenced"), status: :see_other }
@@ -94,6 +102,19 @@ module Teams
       Dtos::School::SchoolInput.new(**params.expect(school: %i[drena_public_id name sigle school_type status cycle national_code]).to_h.symbolize_keys)
     end
 
+    # Une ligne re-rendue par Turbo Stream garde les colonnes du suivi de la liste, pour admin/field.
+    def row_crm_cells(school)
+      @can_manage_crm = Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
+      @can_manage_crm && school ? schools_query.crm_for([ school ]) : {}
+    end
+
+    # « me » est le membre connecté ; l'adresse garde « me », la requête reçoit son public_id.
+    def pipeline_filters
+      owner = @crm_filters[:owner] == "me" ? Orm::User.where(id: current_actor.user_id).pick(:public_id) : @crm_filters[:owner]
+      { stage: @crm_filters[:stage], owner: }
+    end
+
+    def crm_owner_options = @crm_owner_options ||= Queries::Crm::AssignableMembersQuery.new.call.map { [ it.name, it.public_id ] }
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME
     def school_status_tone(status) = STATUS_TONES.fetch(status)
     def drena_options = @drena_options ||= Queries::School::SchoolOptionsQuery.new.drenas

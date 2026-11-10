@@ -1,0 +1,31 @@
+<%# 🌐 UI · teams/crm/contacts/_contact — un contact : nom, fonction, numéro, « Appeler », WhatsApp, note, ⋮ « Retirer » %>
+<%# Rôle : liens sortants tel: et https://wa.me/225<numéro> (nouvel onglet, noopener) ; sans numéro, aucun lien ; le retrait passe par une confirmation en GET %>
+<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) §Contacts %>
+<% link = "inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<li id="school_contact_<%= contact.public_id %>" class="flex items-start justify-between gap-3 py-3 first:pt-0 last:pb-0">
+  <div class="min-w-0 space-y-1">
+    <p class="flex flex-wrap items-center gap-2">
+      <span class="font-medium break-words text-ink"><%= contact.full_name %></span>
+      <%= ui_badge t("teams.crm.common.positions.#{contact.position}"), tone: :neutral, size: :sm %>
+    </p>
+    <% if contact.phone %>
+      <p class="text-sm text-mute"><%= contact.phone.scan(/../).join(" ") %></p>
+      <p class="flex flex-wrap items-center gap-x-4">
+        <%= link_to "tel:#{contact.phone}", class: link do %>
+          <%= ui_icon "phone", variant: :mini, size: :sm %><%= t(".call") %>
+        <% end %>
+        <%= link_to "https://wa.me/225#{contact.phone}", class: link, target: "_blank", rel: "noopener",
+                    "aria-label": t(".whatsapp_label", name: contact.full_name) do %>
+          <%= ui_icon "chat-bubble-left-right", variant: :mini, size: :sm %><%= t(".whatsapp") %>
+        <% end %>
+      </p>
+    <% end %>
+    <% if contact.note %>
+      <p class="text-sm break-words whitespace-pre-line text-mute"><%= contact.note %></p>
+    <% end %>
+  </div>
+  <%= ui_dropdown label: t(".more"), id: "contact-menu-#{contact.public_id}", fixed: true do %>
+    <%= ui_dropdown_item t(".remove"), href: archive_teams_school_contact_path(@school.public_id, contact.public_id), icon: "trash",
+                                       frame: "modal", tone: :danger %>
+  <% end %>
+</li>

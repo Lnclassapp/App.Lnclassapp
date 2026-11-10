@@ -1,0 +1,76 @@
+# Suivi des écoles (chantier crm-ecoles, Lot D) — ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi »), UDR-XXXX (pipeline et relances)
+# Relances : sous-bloc de la fiche, page « Relances », création, « Faite » et réattribution.
+fr:
+  activemodel:
+    attributes:
+      follow_up_form:
+        due_on: "Échéance"
+        assignee_public_id: "Destinataire"
+        reason: "Motif"
+      follow_up_assignee_form:
+        assignee_public_id: "Destinataire"
+    errors:
+      models:
+        follow_up_form:
+          attributes:
+            reason:
+              too_long: "est trop long (200 caractères au plus)"
+  teams:
+    crm:
+      follow_ups:
+        school:
+          title: "Relances ouvertes"
+          empty: "Aucune relance prévue"
+          new: "Nouvelle relance"
+        index:
+          back: "Accueil"
+          tabs_label: "Relances"
+          tabs:
+            mine: "Mes relances"
+            orphans: "Sans destinataire"
+          columns:
+            school: "École"
+            due: "Échéance"
+            assignee: "Destinataire"
+            reason: "Motif"
+            actions: "Actions"
+          empty_mine: "Aucune relance ouverte"
+          empty_orphans: "Rien d'orphelin"
+        follow_up:
+          today: "Aujourd'hui"
+          tomorrow: "Demain"
+          overdue: "Échue"
+          unavailable: "destinataire indisponible"
+          complete: "Faite"
+          more: "Autres actions"
+          reassign: "Réattribuer"
+        new:
+          title: "Nouvelle relance"
+          cancel: "Annuler"
+          submit: "Créer la relance"
+        form:
+          due_on: "Échéance"
+          assignee: "Destinataire"
+          me: "%{name} (moi)"
+          reason: "Motif"
+          reason_hint: "%{count} caractères au plus, par exemple « Rappeler la direction »."
+        edit:
+          title: "Réattribuer la relance"
+          cancel: "Annuler"
+          submit: "Réattribuer"
+        assignee_form:
+          assignee: "Nouveau destinataire"
+          prompt: "Choisir un membre"
+          me: "%{name} (moi)"
+        create:
+          done: "Relance créée"
+        complete:
+          done: "Relance marquée faite"
+        reassign:
+          done: "Relance réattribuée à %{name}"
+      follow_up_completions:
+        update:
+          done: "Relance marquée faite"
+      follow_up_assignees:
+        update:
+          done: "Relance réattribuée à %{name}"

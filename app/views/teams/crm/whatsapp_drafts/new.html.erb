@@ -1,0 +1,22 @@
+<%# 🌐 UI · teams/crm/whatsapp_drafts/new — « Message de relance », servie dans le frame « modal » %>
+<%# Rôle : un bouton demande le brouillon (POST) sans fermer la modale (data-modal-keep-open), le frame whatsapp_draft reçoit l'attente puis le brouillon ; sans clé, le badge « non configuré » et la relance reste utilisable %>
+<%# UDR  : XXXX (assistants du suivi, « Brouillon WhatsApp ») %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "whatsapp-draft-modal", size: :md, open: true, document_title: page_title(t(".title")) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".close"), variant: :secondary, data: { action: "modal#close" } %>
+    <% end %>
+    <%= turbo_frame_tag "whatsapp_draft", class: "block space-y-4", data: { modal_keep_open: true } do %>
+      <p class="text-sm text-mute"><%= t(".reason", reason: @follow_up.reason) %></p>
+      <% if @configured %>
+        <p class="text-sm text-mute"><%= t(".intro") %></p>
+        <%= form_with url: teams_follow_up_whatsapp_draft_path(@follow_up.public_id), method: :post do %>
+          <%= ui_button t(".submit"), type: :submit, icon: "sparkles", full: true %>
+        <% end %>
+      <% else %>
+        <%= ui_badge t(".not_configured"), tone: :neutral %>
+        <p class="text-sm text-mute"><%= t(".not_configured_hint") %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

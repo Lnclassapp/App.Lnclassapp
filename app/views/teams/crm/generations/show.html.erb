@@ -1,0 +1,9 @@
+<%# 🌐 UI · teams/crm/generations/show — l'état d'une génération, rendu dans son frame (cible du sondage) %>
+<%# Rôle : prête, le partial propre à son type s'il existe (table du contrôleur), sinon le rendu générique ; en cours et en échec, toujours le partial commun %>
+<%# UDR  : XXXX (assistants du suivi) %>
+<% ready_partial = @assistant[:ready] if @generation.done? %>
+<% if ready_partial %>
+  <%= render ready_partial, generation: @generation, school_public_id: @school_public_id %>
+<% else %>
+  <%= render "teams/crm/generations/generation", generation: @generation, retry_href: @retry_href, retry_method: :post %>
+<% end %>

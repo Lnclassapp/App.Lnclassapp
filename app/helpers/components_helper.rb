@@ -444,8 +444,9 @@ module ComponentsHelper
     render "components/empty_state", title:, description:, icon:, actions:, heading:
   end
 
-  def ui_error_state(title: nil, message: nil, retry_href: nil, retry_label: nil)
-    render "components/error_state", title:, message:, retry_href:, retry_label:
+  # retry_method : verbe de « Réessayer » (GET par défaut) ; :post pour une action qui change l'état (data-turbo-method).
+  def ui_error_state(title: nil, message: nil, retry_href: nil, retry_label: nil, retry_method: nil)
+    render "components/error_state", title:, message:, retry_href:, retry_label:, retry_method:
   end
 
   def ui_loading_state(label: nil, variant: :spinner, lines: 3)

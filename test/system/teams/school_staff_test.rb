@@ -19,6 +19,7 @@ class Teams::SchoolStaffTest < ApplicationSystemTestCase
     sign_in_as @field
     assert_selector "main#main", wait: SIGN_IN_WAIT
     visit school_path(@school.public_id)
+    wait_for_lazy_frames # the Suivi block loads late and moves the Direction block under the cursor
 
     assert_no_page_reload do
       click_menu_action("#school_staff_#{@kofi.public_id}", ts("remove"))

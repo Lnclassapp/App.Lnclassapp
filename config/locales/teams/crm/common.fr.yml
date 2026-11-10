@@ -1,0 +1,56 @@
+# Suivi des écoles (chantier crm-ecoles, Lot 0) — ADR-XXXX (contexte crm), UDR-XXXX (bloc « Suivi » de la fiche établissement)
+# Libellés communs à tous les lots du suivi : étapes, motifs de perte, raisons « À relancer », types et résultats d'échange, fonctions.
+fr:
+  teams:
+    crm:
+      accounts:
+        show:
+          title: "Suivi"
+      follow_ups:
+        index:
+          title: "Relances"
+      common:
+        stages:
+          prospect: "Prospect"
+          demo_done: "Démo faite"
+          registered: "Inscrite"
+          active: "Active"
+          subscribed: "Abonnée"
+          lost: "Perdue"
+        stage_tones:
+          prospect: "neutral"
+          demo_done: "info"
+          registered: "brand"
+          active: "success"
+          subscribed: "gold"
+          lost: "error"
+        lost_reasons:
+          price: "Prix"
+          equipment: "Équipement"
+          network: "Réseau"
+          calendar: "Calendrier"
+          competitor: "Concurrent"
+          no_interest: "Pas d'intérêt"
+          other: "Autre"
+        signal_reasons:
+          overdue: "Relance échue"
+          usage_drop: "Perte d'usage"
+          demo_stalled: "Démo sans suite"
+          registered_idle: "Inscrite sans démarrage"
+        interaction_kinds:
+          call: "Appel"
+          whatsapp: "WhatsApp"
+          visit: "Visite"
+          demo: "Démo"
+          other: "Autre"
+        outcomes:
+          positive: "Positif"
+          neutral: "Neutre"
+          negative: "Négatif"
+        positions:
+          director: "Direction"
+          censor: "Censeur"
+          educator: "Éducateur"
+          teacher: "Enseignant"
+          founder: "Fondateur"
+          other: "Autre"

@@ -292,9 +292,9 @@ Le use case existe parce qu'il y a une règle (« pas de profil élève → redi
 
 ---
 
-## 5. Les six contextes bornés
+## 5. Les sept contextes bornés
 
-Chaque couche est namespacée par contexte. Les six, et rien d'autre. Le découpage fait autorité depuis l'[ADR-0027](../decisions/adr/0027-contextes-bornes-et-arborescence.md) (2026-09-25), qui fixe aussi la table → contexte :
+Chaque couche est namespacée par contexte. Les sept, et rien d'autre. Le découpage fait autorité depuis l'[ADR-0027](../decisions/adr/0027-contextes-bornes-et-arborescence.md) (2026-09-25), qui fixe aussi la table → contexte :
 
 | Contexte | Ce qu'il possède | Points d'entrée dans l'ancien dépôt |
 |---|---|---|
@@ -302,6 +302,7 @@ Chaque couche est namespacée par contexte. Les six, et rien d'autre. Le découp
 | **catalog** | Niveaux, séries, `level_series`, matières, fiches de cours, fiches de révision, rapports d'import | `app/controllers/catalog/`, `app/domain/use_cases/catalog/` |
 | **classroom** | Classes, adhésions, enseignement (`teacher_classrooms`), assignations polymorphes | `app/controllers/classroom/`, `app/domain/use_cases/classroom/` |
 | **communication** | Annonces diffusées par audience, rejets | `app/controllers/messages_controller.rb`, `app/domain/use_cases/communication/` |
+| **crm** | Suivi commercial des écoles par l'équipe `admin` et `field` : étape, responsable, contacts, journal des échanges, relances, générations des modèles de langage (ADR-XXXX contexte crm) | `app/controllers/teams/crm/`, `app/domain/use_cases/crm/` |
 | **identity** | Comptes, profils, authentification, sessions, invitations, journal d'audit | `app/controllers/identity/`, `app/domain/use_cases/identity/` |
 | **school** | **DRENA**, établissements, personnel de direction, rattachement des enseignants (`teacher_schools`) | `app/domain/use_cases/school/`, `app/domain/dtos/school/` |
 

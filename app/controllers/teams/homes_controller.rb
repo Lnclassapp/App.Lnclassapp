@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::HomesController
 # Rôle : accueil équipe (TR-09, CA-25) : compteurs, référentiel, raccourcis, suppressions, directions retirées ; contenu récent différé
-# ADR  : 0026, 0028, 0036 (amendement 2), 0038, 0074, 0077 · UDR : 0006, 0018, 0067, 0070
+# ADR  : 0026, 0028, 0036 (amendement 2), 0038, 0074, 0077, XXXX (contexte crm) · UDR : 0006, 0018, 0067, 0070, XXXX (pipeline et relances)
 module Teams
   class HomesController < BaseController
     RECENT_CONTENT_FRAME = "team_home_recent_content".freeze
@@ -17,6 +17,8 @@ module Teams
       @can_invite = Policies::Identity::InviteTeamPolicy.new.call(actor: current_actor).success?
       # UDR-0067 §3.1 : « Blog » pour qui gère le blog (admin, content) ; la vue reçoit le booléen, jamais le rôle.
       @can_manage_blog = Policies::Communication::ManageArticlesPolicy.new.call(actor: current_actor).success?
+      # UDR-XXXX (pipeline et relances) : la carte « À relancer » n'existe que pour `admin` et `field`.
+      @can_manage_crm = Policies::Crm::ManageCrmPolicy.new.call(actor: current_actor).success?
       # ADR-0036, amendement 2 : le rappel des demandes de suppression, lu à l'affichage, pour qui peut les traiter (admin).
       @deletion_requests = deletion_requests_query.summary if Policies::Identity::DeleteUserPolicy.new.call(actor: current_actor).success?
       # UDR-0070 §3.5 : les directions retirées, pour qui peut les restaurer (admin, field).

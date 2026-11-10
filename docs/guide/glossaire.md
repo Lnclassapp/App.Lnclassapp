@@ -2,7 +2,7 @@
 
 > Un concept = **un seul mot**, dans le code, dans la base, dans l'UI, dans les chantiers et dans les ADR.
 > Ce fichier remplace `CONTEXT.md` et [`../archives/STANDARD/glossary.md`](../archives/STANDARD/glossary.md) (v1, gelée et partiellement fausse).
-> Le découpage en contextes bornés est dans [`architecture.md` §5](architecture.md#5-les-six-contextes-bornés), les règles de nommage dans [`conventions.md`](conventions.md).
+> Le découpage en contextes bornés est dans [`architecture.md` §5](architecture.md#5-les-sept-contextes-bornés), les règles de nommage dans [`conventions.md`](conventions.md).
 
 ---
 
@@ -119,6 +119,24 @@ Une seule table `classroom_assignments` remplace les anciennes `classroom_course
 | **Article** | Texte public du **blog** (`/blog`), écrit par l'équipe Administration et Contenu, lisible sans compte, partageable et indexé. Texte riche illustré, adressé par un **slug figé** (`/blog/:slug`) ; cycle des contenus `draft` → `published` → `archived` → `published` (`ContentStatus`), « remettre en ligne » garde la date d'origine ; un archivé répond 410 ; jamais supprimé. Signé « L'équipe Lnclass » ou du nom de son auteur. Compteur de lectures brut, sans dédoublonnage, vu de l'équipe seule ([ADR-0074](../decisions/adr/0074-blog-public-articles-images-et-referencement.md)). `Entities::Communication::Article` |
 | **Image d'article** | Couverture ou image du texte d'un article : JPEG, PNG ou WebP fixe, 1 Mo et 1600 px de côté au plus, sans métadonnées, 10 dans le texte au plus. Son **texte de remplacement** (jamais « alt » à l'écran) est exigé pour publier. Servie par Lnclass à `/blog/images/:public_id`. `Entities::Communication::ArticleImage` |
 | ❌ **Article ≠ annonce** | Un **article** est public, sans audience ni établissement, ni programmation, adressé par slug. Une **annonce** (`Message`) est connectée, ciblée par audience et établissement, en texte simple, programmable, adressée par `public_id`. Deux tables, deux jeux de use cases ; aucun ne lit l'autre. À l'écran, jamais « post » ni « billet ». |
+
+---
+
+## 6 bis. Suivi des écoles (contexte `crm`, septième contexte)
+
+Le suivi commercial des établissements par l'équipe `admin` et `field` (`Policies::Crm::ManageCrmPolicy`) ; `content` ne le voit pas. Le contexte `school` reste le référentiel : il n'apprend rien du vocabulaire commercial (ADR-XXXX contexte crm).
+
+| Terme | Définition | Où c'est dans le code |
+|---|---|---|
+| **Suivi** (`Account`) | Une ligne par école, créée à la première écriture : **étape saisie**, **responsable**, **motif de perte**. Son absence vaut « Prospect » sans responsable. | `Entities::Crm::Account`, table `crm_accounts` |
+| **Étape** | L'**étape saisie** (Prospect, Démo faite, Abonnée, Perdue) est un jugement de l'équipe. L'**étape affichée** est calculée à la lecture et croise la saisie et l'usage : Abonnée, Active (activité dans les 14 derniers jours), Perdue, Inscrite (un compte rattaché), Démo faite, Prospect. « Inscrite » et « Active » ne se saisissent jamais. | `Entities::Crm::Stage` |
+| **Responsable** | Le membre `admin` ou `field`, non anonymisé, qui s'occupe d'une école. Anonymisé ou devenu `content` : « Responsable indisponible ». | `crm_accounts.owner_id` |
+| **Contact** | Personne à appeler dans une école (nom, fonction, numéro `0[157]` + 8 chiffres). Se retire par archivage, jamais par suppression. | `Entities::Crm::Contact` |
+| **Échange** (`Interaction`) | Un appel, un message WhatsApp, une visite ou une démo noté dans le **journal** de l'école ; ajout seul, aucune modification ni suppression. | `Entities::Crm::Interaction` |
+| **Relance** (`FollowUp`) | Rappel daté, confié à un membre, ouvert puis fait. Terminer une relance faite est sans effet. | `Entities::Crm::FollowUp` |
+| **À relancer** | Liste calculée (jamais saisie) des écoles à rappeler, chacune avec sa raison : relance échue, perte d'usage, démo sans suite, inscrite sans démarrage. | Lot E du chantier `crm-ecoles` |
+| **Usage** | Comptes rattachés, élèves actifs sur 14 jours, dernière activité, premier rattachement d'une école ; mêmes définitions que le pilotage. | `Entities::Crm::SchoolUsage` |
+| **Assistant** | Fonction qui appelle un modèle de langage par le port `Ports::Crm::LanguageModelPort` (briefing, compte rendu dicté, brouillon WhatsApp, rapport pédagogique). Chaque appel est une **génération**, asynchrone et tracée. | `Entities::Crm::Generation`, table `crm_generations` |
 
 ---
 

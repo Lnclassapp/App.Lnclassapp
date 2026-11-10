@@ -51,7 +51,7 @@ docs/chantiers/<slug>/
 | Queries (lecture) | `app/infrastructure/queries/` | `Queries::ClassroomReportQuery` |
 | Modèles ActiveRecord | `app/infrastructure/orm/` | `Orm::Course` |
 
-**Contextes bornés** : `assessment`, `catalog`, `classroom`, `communication`, `identity`, `school`.
+**Contextes bornés** : `assessment`, `catalog`, `classroom`, `communication`, `crm`, `identity`, `school`.
 
 Deux règles :
 - **Tout est namespacé par contexte borné.** Un fichier à la racine de `entities/` ou `repositories/` est du **legacy à migrer**, pas un modèle à suivre.

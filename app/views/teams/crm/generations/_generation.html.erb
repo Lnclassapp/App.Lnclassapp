@@ -1,0 +1,24 @@
+<%# 🌐 UI · teams/crm/generations/_generation — turbo-frame generation_<public_id> : en cours (sondage), prête (texte échappé), en échec %>
+<%# Rôle : `retry_href` (facultatif) fait venir « Réessayer », en POST par défaut (les routes des assistants n'acceptent que POST) ; le contrôleur generation-poll est sur un div intérieur, car un frame garde ses attributs au rechargement %>
+<%# UDR  : XXXX (assistants du suivi, « Cycle d'une génération ») %>
+<% retry_href = local_assigns[:retry_href] %>
+<% retry_method = local_assigns.fetch(:retry_method, :post) %>
+<%# La dictée attend plus longtemps : l'adaptateur laisse 90 s au modèle audio (Crm::OpenRouterLanguageModel::AUDIO_READ_TIMEOUT). %>
+<% poll_timeout = generation.kind == "dictation" ? 120_000 : 45_000 %>
+<%= turbo_frame_tag "generation_#{generation.public_id}", "aria-live": "polite", "aria-busy": (generation.pending? ? "true" : nil) do %>
+  <% if generation.pending? %>
+    <div data-controller="generation-poll"
+         data-generation-poll-url-value="<%= teams_generation_path(generation.public_id) %>"
+         data-generation-poll-interval-value="2000"
+         data-generation-poll-timeout-value="<%= poll_timeout %>">
+      <div data-generation-poll-target="waiting"><%= ui_loading_state label: t(".waiting.#{generation.kind}"), variant: :spinner %></div>
+      <div data-generation-poll-target="timedOut" hidden>
+        <%= ui_error_state title: t(".timed_out_title"), message: t(".timed_out_message"), retry_href:, retry_method:, retry_label: t(".retry") %>
+      </div>
+    </div>
+  <% elsif generation.failed? %>
+    <%= ui_error_state title: t(".failed_title"), message: t(".failed_messages.#{generation.error_code}", default: t(".failed_messages.provider_error")), retry_href:, retry_method:, retry_label: t(".retry") %>
+  <% else %>
+    <p class="whitespace-pre-line text-sm"><%= generation.content %></p>
+  <% end %>
+<% end %>

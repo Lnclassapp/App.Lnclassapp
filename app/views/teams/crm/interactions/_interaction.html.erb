@@ -1,0 +1,32 @@
+<%# 🌐 UI · teams/crm/interactions/_interaction — une entrée du journal : type, auteur, date, résultat, interlocuteur, suite, note %>
+<%# Rôle : lecture seule, aucune action ; la note est toujours échappée (whitespace-pre-line) ; « Dicté » si elle vient d'un compte rendu dicté %>
+<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) §Journal %>
+<% icons = { "call" => "phone", "whatsapp" => "chat-bubble-left-right", "visit" => "map-pin", "demo" => "presentation-chart-bar",
+             "other" => "ellipsis-horizontal" } %>
+<% tones = { "positive" => :success, "neutral" => :neutral, "negative" => :error } %>
+<li class="py-4">
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+    <span class="inline-flex items-center gap-1.5 font-medium text-ink">
+      <%= ui_icon icons.fetch(interaction.kind), variant: :mini, size: :sm %>
+      <%= t("teams.crm.common.interaction_kinds.#{interaction.kind}") %>
+    </span>
+    <%= ui_badge t("teams.crm.common.outcomes.#{interaction.outcome}"), tone: tones.fetch(interaction.outcome), size: :sm %>
+    <% if interaction.source == "dictation" %>
+      <%= ui_badge t(".dictated"), tone: :team, size: :sm %>
+    <% end %>
+    <span class="text-mute">
+      <%= @author_names.fetch(interaction.author_id) { t(".former_member") } %> ·
+      <%= time_tag interaction.occurred_at, t(".ago", time: time_ago_in_words(interaction.occurred_at)),
+                   title: l(interaction.occurred_at, format: :long) %>
+    </span>
+  </div>
+  <% if interaction.contact_name %>
+    <p class="mt-1 text-sm text-mute"><%= t(".with", name: interaction.contact_name) %></p>
+  <% end %>
+  <% if interaction.next_step %>
+    <p class="mt-1 text-sm font-medium text-ink"><%= interaction.next_step %></p>
+  <% end %>
+  <% if interaction.note %>
+    <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= interaction.note %></p>
+  <% end %>
+</li>

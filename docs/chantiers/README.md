@@ -142,7 +142,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`cours-pleine-largeur`](cours-pleine-largeur/memo.md) | livré | feature | 2026-11-04 | La fiche de cours remplit l'écran du téléphone |
 | [`couverture-catalogue`](couverture-catalogue/memo.md) | livré | bugfix | 2026-10-30 | Couverture à 100 % perdue par la refonte des maths |
 | [`couverture-train`](couverture-train/memo.md) | livré | bugfix | 2026-10-31 | Couverture du train #417 |
-| [`crm-ecoles`](crm-ecoles/memo.md) | cadrage | feature | 2026-11-04 | CRM des écoles |
+| [`crm-ecoles`](crm-ecoles/memo.md) | planifié | feature | 2026-11-04 | CRM des écoles |
 | [`croissance-parrainage`](croissance-parrainage/memo.md) | livré | feature | 2026-09-28 | Croissance par parrainage entre enseignants, démarrage à froid et mesure du k-factor |
 | [`cycles-en-radio`](cycles-en-radio/memo.md) | livré | feature | 2026-09-28 | Cycles en boutons radio |
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | bugfix | 2026-09-29 | Seeds joués deux fois au déploiement, `image_processing` réclamé au démarrage |

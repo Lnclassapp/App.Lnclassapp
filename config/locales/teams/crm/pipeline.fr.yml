@@ -1,0 +1,18 @@
+# Pipeline sur « Établissements » (chantier crm-ecoles, Lot F) — ADR-XXXX (contexte crm), UDR-XXXX (pipeline et relances)
+# Étape et responsable : filtres et colonnes de la liste, réservés à admin et field.
+fr:
+  teams:
+    schools:
+      filters:
+        stage: "Étape"
+        owner: "Responsable"
+        all_stage: "Toutes les étapes"
+        all_owner: "Tous les responsables"
+        owner_me: "Moi"
+        owner_none: "Sans responsable"
+      index:
+        columns:
+          stage: "Étape"
+          owner: "Responsable"
+      school_row:
+        no_owner: "—"

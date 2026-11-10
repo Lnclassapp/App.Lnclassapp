@@ -1,0 +1,25 @@
+<%# 🌐 UI · teams/crm/interactions/_form — type, date, interlocuteur, résultat, suite, note et relance proposée %>
+<%# Rôle : formulaire unique du journal (réutilisé tel quel par le compte rendu dicté du Lot K, qui le pré-remplit et fixe `source`) %>
+<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) §Journal %>
+<% entity = Entities::Crm::Interaction %>
+<%= form_with model: input, scope: :interaction, url: teams_school_interactions_path(@school.public_id), method: :post,
+              id: "interaction-form", class: "space-y-5" do |form| %>
+  <%= form.hidden_field :source %>
+  <%= ui_radio_group form, :kind, label: t(".kind"), required: true, columns: 3,
+                     choices: entity::KINDS.map { [ t("teams.crm.common.interaction_kinds.#{it}"), it ] } %>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <%= ui_field form, :occurred_at, label: t(".occurred_at"), required: true, type: "datetime-local" %>
+    <%= ui_field form, :contact_public_id, as: :select, label: t(".contact"), choices: contact_choices, prompt: t(".contact_other") %>
+  </div>
+  <%= ui_field form, :contact_name, label: t(".contact_name"), maxlength: Entities::Crm::Contact::NAME_MAX, autocomplete: "off",
+               hint: t(".contact_name_hint") %>
+  <%= ui_radio_group form, :outcome, label: t(".outcome"), required: true, columns: 3,
+                     choices: entity::OUTCOMES.map { [ t("teams.crm.common.outcomes.#{it}"), it ] } %>
+  <%= ui_field form, :next_step, label: t(".next_step"), maxlength: entity::NEXT_STEP_MAX, autocomplete: "off" %>
+  <%= ui_field form, :note, as: :textarea, label: t(".note"), rows: 4, maxlength: entity::NOTE_MAX,
+               hint: "#{t(".note_hint", count: entity::NOTE_MAX)} #{t(".note_pupil_hint")}" %>
+  <div class="space-y-3 rounded-ln bg-mist p-4">
+    <%= ui_field form, :create_follow_up, as: :checkbox, label: t(".create_follow_up") %>
+    <%= ui_field form, :follow_up_due_on, as: :date, label: t(".follow_up_due_on") %>
+  </div>
+<% end %>

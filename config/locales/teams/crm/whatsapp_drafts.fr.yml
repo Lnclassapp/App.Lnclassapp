@@ -1,0 +1,25 @@
+# Brouillon de relance WhatsApp (chantier crm-ecoles, Lot I) — ADR-XXXX (modèles de langage), UDR-XXXX (assistants du suivi)
+fr:
+  teams:
+    crm:
+      whatsapp_drafts:
+        menu_item: "Rédiger un message"
+        new:
+          title: "Message de relance"
+          close: "Fermer"
+          reason: "Relance : %{reason}"
+          intro: "L'assistant rédige un message court d'après la relance et les derniers échanges. Vous le relisez, le corrigez, puis vous l'envoyez vous-même."
+          submit: "Rédiger le message"
+          not_configured: "Assistant non configuré"
+          not_configured_hint: "Demandez à un admin d'ajouter la clé OpenRouter. La relance reste utilisable."
+        create:
+          busy: "Un message est déjà en cours de rédaction pour une autre relance de cet établissement. Réessayez dans un instant."
+          unavailable: "L'assistant est indisponible pour le moment. Réessayez dans un instant."
+        draft:
+          label: "Message"
+          counter: "%{count} / %{max} caractères"
+          recipient: "Destinataire"
+          no_phone: "Ajoutez un contact avec un numéro pour ouvrir WhatsApp."
+          copy: "Copier"
+          copied: "Message copié"
+          open: "Ouvrir dans WhatsApp"

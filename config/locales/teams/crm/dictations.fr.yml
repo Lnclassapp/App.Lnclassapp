@@ -1,0 +1,30 @@
+# Compte rendu dicté (chantier crm-ecoles, Lot K) — ADR-XXXX (modèles de langage), UDR-XXXX (assistants du suivi)
+fr:
+  teams:
+    crm:
+      dictations:
+        recorder:
+          title: "Dicter un compte rendu"
+          hint: "Parlez librement : qui, quoi, la suite, la date de relance."
+          start: "Commencer"
+          stop: "Arrêter"
+          max: "(%{max} au plus)"
+          send: "Envoyer"
+          sending: "Envoi…"
+          retry: "Recommencer"
+          fallback: "Importez un enregistrement"
+          denied: "Autorisez le micro dans votre navigateur, ou importez un enregistrement."
+          manual: "Saisir à la main"
+          errors:
+            too_large: "Enregistrement trop long ou format non pris en charge (3 min, 10 Mo, webm/ogg/mp4)."
+            unsupported_type: "Enregistrement trop long ou format non pris en charge (3 min, 10 Mo, webm/ogg/mp4)."
+            empty: "Aucun enregistrement reçu. Enregistrez ou importez un fichier audio."
+            running: "Une dictée est déjà en cours pour cette école. Réessayez dans un instant."
+            unavailable: "L'assistant est indisponible pour le moment. Réessayez dans un instant."
+        ready:
+          loading: "Ouverture du compte rendu…"
+        prefilled:
+          prefilled: "Pré-rempli par l'assistant : vérifiez avant d'enregistrer."
+          fallback: "L'assistant n'a pas su structurer : la transcription est dans la note."
+          cancel: "Annuler"
+          submit: "Noter l'échange"
