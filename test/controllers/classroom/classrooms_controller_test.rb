@@ -226,6 +226,22 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       .tap { record_medal(it) if !blank && it.status == "completed" }
   end
 
+  # medailles-par-sessions : une médaille montée hors du devoir (fait seul) réécrit sa session ; la liste lit la copie du devoir.
+  test "la liste de classe lit la médaille de la copie du devoir quand l'élève a monté sa médaille en faisant l'exercice seul" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Kone")
+    copy = hand_in(assignment, 72, student:)
+    create_attempt(session: copy)
+    solo = create_exercise_session(student:, exercise: copy.exercise, status: "completed", score_percent: 100, classroom_assignment: nil)
+    Orm::ExerciseBadge.where(student_id: student.id, exercise_id: copy.exercise_id).update_all(exercise_session_id: solo.id, level: "diamond")
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#badge_#{student.public_id}", text: "Argent"
+    assert_select "#badge_#{student.public_id}.text-mute", 0
+  end
+
   # ADR-0079 §4.1 : une remédiation sur l'exercice assigné, c'est faire cet exercice ; hors de l'assignation, elle ne compte pas.
   test "PRD : une remédiation sur l'assignation compte ; une autre classe, une remédiation hors de l'assignation, une session commencée, un élève parti ou anonymisé ne comptent pas" do
     exercise = create_exercise
