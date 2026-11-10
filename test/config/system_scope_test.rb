@@ -148,6 +148,18 @@ class SystemScopeTest < ActiveSupport::TestCase
     assert_equal [ "test/system/school_admin/departed_students_test.rb" ], selection.tests
   end
 
+  test "a system test written after the map was drawn is chosen by the former rule, even for a mapped file" do
+    texts = { "test/system/homepage_test.rb" => "visit foo_bars_path" }
+    map = { "app/controllers/foo_bars_controller.rb" => [ "test/system/catalog/sheet_cards_test.rb" ] }
+
+    known = SystemScope.new(changed: map.keys, test_files: TESTS, map:, mapped_tests: TESTS, read: ->(path) { texts[path] }).select
+    fresh = SystemScope.new(changed: map.keys, test_files: TESTS, map:, mapped_tests: TESTS - [ "test/system/homepage_test.rb" ],
+                            read: ->(path) { texts[path] }).select
+
+    assert_equal [ "test/system/catalog/sheet_cards_test.rb" ], known.tests, "a test the map knows is trusted to the map"
+    assert_equal %w[test/system/catalog/sheet_cards_test.rb test/system/homepage_test.rb], fresh.tests
+  end
+
   test "a file nothing reaches selects nothing and is named" do
     selection = select([ "app/domain/entities/school/new_thing.rb" ])
 
@@ -170,7 +182,9 @@ class SystemScopeTest < ActiveSupport::TestCase
       File.write(path, { "commit" => "x", "tests" => %w[test/system/a_test.rb test/system/b_test.rb], "files" => { "app/x.rb" => "1 0", "app/y.rb" => "1" } }.to_yaml)
 
       assert_equal({ "app/x.rb" => %w[test/system/b_test.rb test/system/a_test.rb], "app/y.rb" => %w[test/system/b_test.rb] }, SystemScope.load_map(path))
+      assert_equal %w[test/system/a_test.rb test/system/b_test.rb], SystemScope.load_mapped_tests(path)
       assert_equal({}, SystemScope.load_map(File.join(dir, "missing.yml")), "no map: every file keeps the former rules")
+      assert_nil SystemScope.load_mapped_tests(File.join(dir, "missing.yml"))
     end
   end
 

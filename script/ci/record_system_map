@@ -29,8 +29,13 @@ abort "Aucun enregistrement dans #{dir} : lancez script/ci/record_system_map san
 
 files = Hash.new { |hash, key| hash[key] = [] }
 recorded.each { |by_test| by_test.each { |test, ran| ran.each { files[it] << test } } }
-tests = recorded.flat_map(&:keys).uniq.sort
+# Every system file present counts as known, even one that ran nothing (lesson_capture_test.rb plays only in its own
+# job): a file missing from `tests` is taken for one written after the map and chosen by the former rule.
+ran = recorded.flat_map(&:keys).uniq
+tests = (ran | Dir["test/system/**/*_test.rb"]).sort
 index = tests.each_with_index.to_h
+missing = Dir["test/system/**/*_test.rb"].sort - ran
+warn "⚠️  #{missing.size} fichier(s) de tests système sans rien d'exécuté (process mort, test sauté ?) : #{missing.join(', ')}" if missing.any?
 commit = `git rev-parse --short=8 HEAD`.strip
 header = <<~TEXT
   # Application file → the system test files that ran it (Ruby lines run, templates and partials rendered), as their

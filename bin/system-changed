@@ -26,12 +26,21 @@ list = ARGV.include?("--list")
 
 def git(*args) = Open3.capture2("git", *args, err: File::NULL).first
 
+# The list of changed files: an empty answer from a failed git would play nothing, so a failure stops the run.
+def git!(*args)
+  out, status = Open3.capture2("git", *args)
+  abort "❌ git #{args.first} a échoué : la sélection serait vide." unless status.success?
+
+  out
+end
+
 def changed_files(base, head)
   merge_base, status = Open3.capture2("git", "merge-base", base, head)
   abort "❌ Impossible de comparer à #{base} (git fetch ?)" unless status.success?
 
-  committed = git("diff", "--name-only", merge_base.strip, head).lines
-  pending = head == "HEAD" ? git("diff", "--name-only", "HEAD").lines + git("ls-files", "--others", "--exclude-standard").lines : []
+  # --no-renames: a renamed partial keeps the tests of its former path.
+  committed = git!("diff", "--name-only", "--no-renames", merge_base.strip, head).lines
+  pending = head == "HEAD" ? git!("diff", "--name-only", "--no-renames", "HEAD").lines + git!("ls-files", "--others", "--exclude-standard").lines : []
   [ merge_base.strip, (committed + pending).map(&:strip).uniq ]
 end
 
@@ -42,7 +51,8 @@ tests =
     merge_base, files = changed_files(base, head)
     at_head = head == "HEAD" ? ->(path) { File.read(path) if File.exist?(path) } : ->(path) { git("show", "#{head}:#{path}") }
     selection = SystemScope.new(
-      changed: files, test_files: Dir["test/system/**/*_test.rb"], map: SystemScope.load_map, timings: SystemScope.load_timings,
+      changed: files, test_files: Dir["test/system/**/*_test.rb"], map: SystemScope.load_map,
+      mapped_tests: SystemScope.load_mapped_tests, timings: SystemScope.load_timings,
       read: at_head, read_base: ->(path) { git("show", "#{merge_base}:#{path}") },
       diff: ->(path) { git("diff", "-U0", merge_base, *([ head ] unless head == "HEAD"), "--", path) }
     ).then { ENV["SYSTEM_SCOPE"] == "former" ? it.former : it.select }
@@ -50,7 +60,8 @@ tests =
       puts "⏭️  #{selection.deferred.size} test(s) système touché(s) de loin, laissé(s) au train (budget #{SystemScope::BUDGET.round} s) :"
       selection.deferred.each { puts "   #{it}" }
     end
-    puts "ℹ️  Hors carte (règles d'avant seulement) : #{selection.unmapped.join(', ')}" if list && selection.unmapped.any?
+    warn "⚠️  script/ci/system_map.yml absent : seule la règle d'avant choisit (script/ci/record_system_map)." if SystemScope.load_mapped_tests.nil?
+    puts "ℹ️  Hors carte (règles d'avant seulement) : #{selection.unmapped.join(', ')}" if selection.unmapped.any?
     selection.tests
   end
 

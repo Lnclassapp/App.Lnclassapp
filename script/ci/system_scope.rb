@@ -38,6 +38,11 @@ class SystemScope
     data.fetch("files", {}).transform_values { |positions| positions.to_s.split.map { tests.fetch(Integer(it)) } }
   end
 
+  # The system test files the map was drawn from: a test written since then is unknown to it.
+  def self.load_mapped_tests(path = File.expand_path("system_map.yml", __dir__))
+    File.exist?(path) ? (YAML.safe_load_file(path) || {}).fetch("tests", []) : nil
+  end
+
   def self.load_timings(path = File.expand_path("test_timings.yml", __dir__))
     File.exist?(path) ? YAML.safe_load_file(path) || {} : {}
   end
@@ -45,10 +50,12 @@ class SystemScope
   # changed: the paths the branch changed. test_files: the system tests that exist. map: application file → system
   # test files. read, read_base: a path's text now and at the base (nil when absent). diff: its diff against the base (-U0).
   # writers: the files that write classes and identifiers, with their text.
-  def initialize(changed:, test_files:, map:, timings: {}, budget: BUDGET, read: nil, read_base: nil, diff: nil, writers: nil)
+  def initialize(changed:, test_files:, map:, mapped_tests: nil, timings: {}, budget: BUDGET, read: nil, read_base: nil, diff: nil, writers: nil)
     @changed = changed
     @test_files = test_files
     @map = map
+    # A test the map was not drawn from is chosen by the former rule, at full weight: the map cannot know what it runs.
+    @unmapped_tests = mapped_tests ? test_files - mapped_tests : []
     @timings = timings
     @budget = budget
     @read = read || ->(path) { File.read(path) if File.exist?(path) }
@@ -70,6 +77,7 @@ class SystemScope
         share = spread([ former_of(path) ]) || {}
       end
       share.each { |test, weight| weights[test] += weight }
+      (former_of(path) & @unmapped_tests).each { weights[it] += 1.0 } if @unmapped_tests.any?
       COMMON.each { weights[it] += 1.0 } if path.match?(SHARED_PATHS)
     end
     named = @changed.flat_map { names_of(it) }.uniq
