@@ -78,7 +78,7 @@ En une phrase sans le symptôme : la sélection devinait l'usage d'un fichier pa
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
+| **Livré le** | 2026-11-10 |
+| **PR** | #536 |
 | **ADR produits** | ADR-0127 |
 | **UDR produits** | — |

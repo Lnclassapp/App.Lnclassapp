@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-11-10 |
 | **Branche** | `fix/ci-scope-tests-systeme` |
 | **Programme** | — |
