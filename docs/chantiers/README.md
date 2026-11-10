@@ -148,6 +148,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`deploiement-seeds-variantes`](deploiement-seeds-variantes/memo.md) | livré | bugfix | 2026-09-29 | Seeds joués deux fois au déploiement, `image_processing` réclamé au démarrage |
 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | abandonné | refactoring | 2026-09-18 | Contrats de ports et injection de dépendances non respectés |
 | [`dettes-reorganisation`](dettes-reorganisation/memo.md) | livré | bugfix | 2026-10-04 | Dettes du chantier « réorganisation équipe / enseignant » |
+| [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
@@ -191,6 +192,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`lecons-tle-a1-comme-thales`](lecons-tle-a1-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale A1 préparées comme Thalès |
 | [`lecons-tle-a2-comme-thales`](lecons-tle-a2-comme-thales/memo.md) | en cours | feature | 2026-11-08 | Les leçons de Terminale A2 préparées comme Thalès |
 | [`lecons-tle-c-comme-thales`](lecons-tle-c-comme-thales/memo.md) | en cours | feature | 2026-11-05 | Les leçons de Terminale C préparées comme Thalès |
+| [`lecons-tle-comme-thales`](lecons-tle-comme-thales/memo.md) | en cours | feature | 2026-11-08 | Les leçons de Terminale (Histoire-Géographie) préparées comme Thalès |
 | [`lecons-tle-d-comme-thales`](lecons-tle-d-comme-thales/memo.md) | en cours | feature | 2026-11-07 | Les leçons de Terminale D préparées comme Thalès |
 | [`libelles-courts-matieres`](libelles-courts-matieres/memo.md) | livré | feature | 2026-10-30 | Les libellés courts des matières |
 | [`ma-classe-eleve`](ma-classe-eleve/memo.md) | livré | feature | 2026-10-15 | Page Ma classe de l'élève aux couleurs Wave et Djamo |
@@ -199,7 +201,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`medailles-enseignant`](medailles-enseignant/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'enseignant |
 | [`medailles-equipe`](medailles-equipe/memo.md) | en cours | feature | 2026-11-09 | Médailles : écrans de l'équipe |
 | [`medailles-grading-bronze`](medailles-grading-bronze/memo.md) | décision | feature | 2026-11-08 | Bronze pour tout exercice traité |
-| [`medailles-par-sessions`](medailles-par-sessions/memo.md) | en cours | feature | 2026-11-09 | Médailles lues par sessions, remédiation à l'Argent |
+| [`medailles-par-sessions`](medailles-par-sessions/memo.md) | en cours | feature | 2026-11-09 | Médailles de classe lues par sessions |
 | [`medailles-vocabulaire`](medailles-vocabulaire/memo.md) | en cours | refactoring | 2026-11-08 | Médailles : vocabulaire et garde-fous |
 | [`menu-enseignants-masque`](menu-enseignants-masque/memo.md) | livré | bugfix | 2026-10-04 | Menu ⋮ des enseignants masqué par la ligne suivante |
 | [`message-repository-fuite-activerecord`](message-repository-fuite-activerecord/memo.md) | abandonné | refactoring | 2026-09-18 | Fuite d'objets ActiveRecord dans `Entities::Message` |
@@ -212,6 +214,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`orchestrateur-court-et-index`](orchestrateur-court-et-index/memo.md) | livré | refactoring | 2026-11-05 | Orchestrateurs courts et index des chantiers généré |
 | [`ordre-lecons-progression`](ordre-lecons-progression/memo.md) | livré | bugfix | 2026-10-29 | Les leçons dans l'ordre de la progression |
 | [`outils-ci-budgets`](outils-ci-budgets/memo.md) | livré | correction | 2026-10-28 | Deux outils de CI en retard sur leurs règles |
+| [`ouverture-remediation`](ouverture-remediation/memo.md) | livré | feature | 2026-11-09 | La fiche s'ouvre sous l'Or |
 | [`page-d-accueil-photo`](page-d-accueil-photo/memo.md) | cadrage | feature | 2026-10-14 | Page d'accueil publique en photo plein écran |
 | [`parcours-matiere-exercice`](parcours-matiere-exercice/memo.md) | livré | optimisation | 2026-10-30 | Parcours matière → exercice |
 | [`pentest-develop`](pentest-develop/) | pas de memo | — | — | — |
@@ -248,6 +251,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`secrets-hors-cache`](secrets-hors-cache/memo.md) | livré | bugfix | 2026-09-29 | Secrets à usage unique hors de tout cache |
 | [`seeds-premiere-serie-a`](seeds-premiere-serie-a/memo.md) | abandonné | feature | 2026-10-11 | Référentiel de développement : séries de la 1ère (abandonné, hypothèse « A, C et D » réfutée) |
 | [`selection-par-carte-de-couverture`](selection-par-carte-de-couverture/memo.md) | cadrage | optimisation | 2026-10-03 | Ne jouer que les tests système que les fichiers touchés concernent (carte de couverture) |
+| [`seuil-remediation`](seuil-remediation/memo.md) | livré | feature | 2026-11-09 | Une seule échelle : la remédiation suit la médaille |
 | [`sobriete-tokens`](sobriete-tokens/memo.md) | en cours | refactoring | 2026-10-09 | Sobriété de tokens |
 | [`sous-roles-equipe`](sous-roles-equipe/memo.md) | cadrage | feature | 2026-10-16 | Sous-rôles de l'équipe appliqués (admin, contenu, terrain) |
 | [`standard-de-test`](standard-de-test/memo.md) | livré | feature | 2026-11-02 | Un standard de test pour Lnclass |

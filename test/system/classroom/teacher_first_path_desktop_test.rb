@@ -34,7 +34,8 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     essential = create_essential(course:, name: "Méiose")
     exercise = create_exercise(essential:, title: "Les phases")
     classroom = create_classroom(school:, level: tle, series: course.series, name: "Tle D 1")
-    teacher = create_teacher(school:, classrooms: [ classroom ])
+    # B-046 (5d9641d) : un enseignant ne lit par son adresse que les leçons de ses matières.
+    teacher = create_teacher(school:, material: course.material, classrooms: [ classroom ])
     sign_in_as teacher
 
     visit course_sheet_path(course.slug, "notion-#{essential.slug}")

@@ -36,7 +36,7 @@ module UseCases
         @sessions.complete(id: session.id, score_percent:, at: now)
         badge_level = Entities::Assessment::Grading.session_medal(score_percent, treated: treated?(questions, attempts))
         earned_now = award(session, badge_level, now)
-        settle_gap(session, essential_id, score_percent, now)
+        settle_gap(session, essential_id, score_percent, now, treated: treated?(questions, attempts))
         Row.new(score_percent:, badge_level:, earned_now:)
       end
 
@@ -70,12 +70,12 @@ module UseCases
         badge.level if badge
       end
 
-      # ADR-0043 : ouverte sous le seuil, comptée à chaque nouvel échec, résolue par une réussite.
-      def settle_gap(session, essential_id, score_percent, now)
+      # ADR-0043 (amendement ouverture-remediation) : ouverte ou comptée sous l'Or (Bronze, Argent), résolue à l'Or ; une copie vide ne fait rien.
+      def settle_gap(session, essential_id, score_percent, now, treated:)
         return if essential_id.nil?
 
         pending = @gaps.pending_for(student_id: session.student_id, essential_id:)
-        decision = Entities::Assessment::GapDecision.call(score_percent:, pending_gap: pending, session_kind: session.kind)
+        decision = Entities::Assessment::GapDecision.call(score_percent:, pending_gap: pending, session_kind: session.kind, treated:)
         return if decision == :none
         return @gaps.open(student_id: session.student_id, essential_id:, source_session_id: session.id, at: now) if decision == :open
         return @gaps.increment(id: pending.id) if decision == :increment

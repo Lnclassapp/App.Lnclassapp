@@ -255,35 +255,44 @@ module UseCases
         assert_equal [ [ :increment, { id: 70 } ] ], @gaps.calls
       end
 
-      # Décision du porteur (2026-10-19, ADR-0101 §4.5) : la note affichée sur 20 décide, pas le pourcentage brut.
-      test "49 % s'affiche 10/20 : ni ouverture, ni échec de plus" do
+      # Décision du porteur (2026-11-09) : Bronze et Argent sont en remédiation ; la note affichée sur 20 décide.
+      test "49 % s'affiche 10/20 (Bronze) : une lacune est ouverte, ou compte un échec de plus" do
         close(correct: 49)
-        assert_empty @gaps.calls
+        assert_equal %i[open], @gaps.calls.map(&:first)
 
         close(correct: 49, pending_gap: gap)
+        assert_equal %i[increment], @gaps.calls.map(&:first)
+      end
+
+      test "74 % s'affiche 15/20 (Argent) : une lacune est ouverte" do
+        close(correct: 74)
+
+        assert_equal [ [ :open, { student_id: 7, essential_id: 9, source_session_id: 5, at: NOW } ] ], @gaps.calls
+      end
+
+      test "77 % (Argent) en remédiation : la lacune en attente compte un échec de plus, elle n'est pas levée" do
+        close(correct: 77, pending_gap: gap, kind: "remediation")
+
+        assert_equal [ [ :increment, { id: 70 } ] ], @gaps.calls
+      end
+
+      test "copie sans aucune réponse : aucune médaille, aucune lacune ouverte ni comptée" do
+        blank = Array.new(3) { |index| Attempt.new(session_id: 5, question_id: index, selected_answer_ids: [], correct: false, answered_at: NOW, unanswered: true) }
+        close(correct: 0, total: 3, attempts: blank)
+        assert_empty @gaps.calls
+
+        close(correct: 0, total: 3, attempts: blank, pending_gap: gap)
         assert_empty @gaps.calls
       end
 
-      test "74 % s'affiche 15/20 : la lacune est remédiée" do
-        close(correct: 74, pending_gap: gap, kind: "remediation")
+      test "réussite d'une remédiation à l'Or (78 %) : la lacune est remédiée" do
+        close(correct: 78, pending_gap: gap, kind: "remediation")
 
         assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
       end
 
-      test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
-        close(correct: 67, pending_gap: gap, kind: "remediation")
-
-        assert_empty @gaps.calls
-      end
-
-      test "réussite d'une remédiation à 70 % : la lacune est remédiée" do
-        close(correct: 70, pending_gap: gap, kind: "remediation")
-
-        assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
-      end
-
-      test "réussite d'une session standard à 70 % : la lacune est auto-corrigée" do
-        close(correct: 70, pending_gap: gap)
+      test "réussite d'une session standard à l'Or (78 %) : la lacune est auto-corrigée" do
+        close(correct: 78, pending_gap: gap)
 
         assert_equal [ [ :resolve, { id: 70, status: "self_corrected", session_id: 5, at: NOW } ] ], @gaps.calls
       end

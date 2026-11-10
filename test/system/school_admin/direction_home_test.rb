@@ -17,12 +17,14 @@ class SchoolAdmin::DirectionHomeTest < ApplicationSystemTestCase
     create_classroom(school:, level: sixth, name: "6ème 1")
     teacher = create_teacher(school:, classrooms: [ @good, @red ], gender: "male", last_name: "Kouassi")
     exercise = create_exercise(title: "Les fractions")
-    # 3ème 1: 2 students, both hand in (100 %, green) ; 3ème 2: 3 students, one hands in (33 %, red) ; 3ème: 3 / 5 = 60 %.
+    # 3ème 1: 2 students, both hand in (green) ; 3ème 2: 3 students, one hands in (1 on 3, red) ; 3ème: 3 / 5.
+    # ADR médailles lues à la clôture : 70 % gives Argent, written at closing and read by the screens.
     { @good => 2, @red => 1 }.each do |classroom, handing_in|
       assignment = create_assignment(classroom:, assignable: exercise, by: teacher)
       students = Array.new(classroom == @good ? 2 : 3) { create_student(classroom:) }
       students.first(handing_in).each do |student|
-        create_exercise_session(student:, exercise:, status: "completed", score_percent: 70, classroom_assignment_id: assignment.id)
+        record_medal(create_exercise_session(student:, exercise:, status: "completed", score_percent: 70,
+                                             classroom_assignment_id: assignment.id))
       end
     end
   end
@@ -90,7 +92,10 @@ class SchoolAdmin::DirectionHomeTest < ApplicationSystemTestCase
     assert_selector "#classroom_#{@good.public_id} span.bg-signal-green"
     within("#classroom_#{@red.public_id}") do
       assert_selector "span.bg-signal-red"
-      assert_text "33 %"
+      # UDR médailles direction : « 1 devoir rendu sur 3 » and the medals of the classroom, never a rate nor an average.
+      assert_text I18n.t("school_admin.levels.classroom_card.submitted", count: 1, total: 3)
+      assert_text "1 Argent"
+      assert_no_text "%"
     end
     assert_selector "#signal_legend"
     assert_no_horizontal_scroll

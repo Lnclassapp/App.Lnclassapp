@@ -1,13 +1,11 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0106, 0115, médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
+# ADR  : 0033, 0043 (amendé le 2026-11-09 : la lacune se résout à l'Or), 0106, 0115, médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
 module Entities
   module Assessment
     module Grading
       PASS_THRESHOLD = 50
       MASTERY_THRESHOLD = 70
-      # ADR-0043 : une lacune n'est résolue qu'à partir de l'Argent (70, soit 14/20 affiché) ; amendé par medailles-par-sessions (le « viser l'Or » de la consigne reste un but).
-      REMEDIATION_THRESHOLD = MASTERY_THRESHOLD
       GOLD_THRESHOLD = 80
       PERFECT_THRESHOLD = 100
       BADGE_THRESHOLDS = { bronze: PASS_THRESHOLD, silver: MASTERY_THRESHOLD,

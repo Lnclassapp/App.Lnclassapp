@@ -3,7 +3,7 @@ require "test_helper"
 # Chantier contenus-tle-histoire-geographie : chaque notion des 10 leçons d'histoire-géographie de Tle (progression commune, sans série) porte son entraînement (`practice`), distinct de son exercice noté.
 module Contenus
   class TleHistoireGeographieJeMEntraineTest < ActiveSupport::TestCase
-    ROOT = Rails.root.join("docs/contenus/a-reprendre/sujets-manquants/tle/histoire-geographie")
+    ROOT = Rails.root.join("docs/contenus/lecons-traitees/tle/histoire-geographie")
     LESSONS = Dir[ROOT.join("*.json")].map { File.basename(it, ".json") }.sort.freeze
     SCHEMA = JSONSchemer.schema(Rails.root.join("config/schemas/lnclass.course-tree.v3.json").read)
 

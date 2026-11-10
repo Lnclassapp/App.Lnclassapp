@@ -19,7 +19,6 @@ module Entities
           assert Grading.reaches?(at, threshold), "#{at} sur #{threshold}"
           assert_equal Grading.grade_on_20(at), Grading.grade_on_20(threshold)
         end
-        assert_equal Grading::MASTERY_THRESHOLD, Grading::REMEDIATION_THRESHOLD
         assert Grading.reaches?(100, Grading::PERFECT_THRESHOLD)
         assert_not Grading.reaches?(0, Grading::PASS_THRESHOLD)
       end

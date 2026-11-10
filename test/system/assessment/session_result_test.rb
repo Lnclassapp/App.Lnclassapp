@@ -85,18 +85,23 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     end
   end
 
-  test "l'équipe voit le résultat inchangé : score, questions justes, aide et toutes les cartes" do
+  # UDR médailles enseignant (résultat d'une copie, enseignant et équipe) : la médaille et « x sur y justes », plus de note, de
+  # score ni de maîtrise.
+  test "l'équipe voit la médaille et les questions justes, l'aide et toutes les cartes, sans note ni score" do
     session = completed_session(correct: 9)
     sign_out
     sign_in_as create_team_member
 
     visit exercise_session_result_path(session.public_id)
 
+    assert_selector "#session_badge[aria-label='#{badge('Or')}']"
     within "#session_result dl" do
-      assert_selector "dt", count: 4
-      assert_text "18/20"
-      assert_text "#{GRADING.score_percent(correct: 9, total: 10)} %"
+      assert_selector "dt", count: 1
       assert_text I18n.t("#{SCOPE}.show.correct_value", count: 9, total: 10)
+    end
+    within("#session_result") do
+      assert_no_text "18/20"
+      assert_no_text "%"
     end
     assert_text I18n.t("#{SCOPE}.show.review_hint_reveal")
     assert_selector "#session_review li[id^=question_review_]", count: 10
