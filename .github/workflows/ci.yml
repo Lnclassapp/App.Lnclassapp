@@ -138,7 +138,7 @@ jobs:
           else
             count=$(echo "$lecons_files" | tr ',' '\n' | wc -l)
           fi
-          parts=$(( (count + 9) / 10 ))
+          parts=$(( (count + 7) / 8 ))
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
           echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
           echo "lecons_files=$lecons_files" | tee -a "$GITHUB_OUTPUT"
@@ -282,11 +282,11 @@ jobs:
 
   # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : une leçon v3 est importée dans la base de test, publiée et lue
   # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb).
-  # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR, 10 au plus par part
-  # (≈ 20 s par leçon + ≈ 50 s d'installation, sous les 5 minutes), soit ⌈N/10⌉ parts calculées par « plan ». Sans leçon changée
+  # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR, 8 au plus par part
+  # (≈ 20 s par leçon + ≈ 50 s d'installation, sous les 5 minutes), soit ⌈N/8⌉ parts calculées par « plan ». Sans leçon changée
   # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt, en 1 part. Exception (lot B) :
   # quand la PR touche aux écrans (expression « screens » de l'étape changes), « plan » passe LECONS=tout et rend toutes les
-  # leçons, ⌈nombre/10⌉ parts. Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout.
+  # leçons, ⌈nombre/8⌉ parts. Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout.
   # Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
     name: lecons ${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}

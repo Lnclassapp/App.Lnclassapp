@@ -30,15 +30,15 @@ Rendre plus vite chaque leçon : gardé pour la suite. Rendu complet de nuit : �
 
 ## 4. Décision
 
-> **Au train vers Staging, la tâche `lecons` rend seulement les leçons v3 nouvelles ou modifiées de la PR (⌈N/10⌉ parts calculées par le job `plan`) ; s'il n'y en a aucune, ou si le diff est illisible (avec `::warning::`), 2 leçons témoins de `script/ci/lecons_temoins.txt`, en 1 part. `LECONS=tout` reste disponible à la main.**
+> **Au train vers Staging, la tâche `lecons` rend seulement les leçons v3 nouvelles ou modifiées de la PR (⌈N/8⌉ parts calculées par le job `plan`) ; s'il n'y en a aucune, ou si le diff est illisible (avec `::warning::`), 2 leçons témoins de `script/ci/lecons_temoins.txt`, en 1 part. `LECONS=tout` reste disponible à la main.**
 >
-> **Exception (lot B) : si la PR touche aux écrans (vues, JavaScript, assets, aides, catalogue qui les lit, dépendances front, test de rendu), `plan` passe `LECONS=tout` et la tâche rend toutes les leçons, ⌈nombre/10⌉ parts. Pas de rendu hebdomadaire.**
+> **Exception (lot B) : si la PR touche aux écrans (vues, JavaScript, assets, aides, catalogue qui les lit, dépendances front, test de rendu), `plan` passe `LECONS=tout` et la tâche rend toutes les leçons, ⌈nombre/8⌉ parts. Pas de rendu hebdomadaire.**
 
 ## 5. Conséquences
 
 ### 🟢 Positives
 
-- Un train sans leçon changée coûte 1 part au lieu de 32 ; un train avec N leçons en coûte ⌈N/10⌉.
+- Un train sans leçon changée coûte 1 part au lieu de 32 ; un train avec N leçons en coûte ⌈N/8⌉.
 
 ### 🔴 Coûts consentis
 
@@ -51,3 +51,7 @@ Rendre plus vite chaque leçon : gardé pour la suite. Rendu complet de nuit : �
 ## 7. Comment vérifier que la décision est respectée
 
 `test/guards/ci_plan_test.rb` (matrice issue de `plan`, 5 min, un processus, expression des écrans et branche `lecons_files=tout`) et `Catalog::LessonSelectionTest` (découpage d'une liste nommée, témoins existants et v3).
+
+## Amendement du 2026-11-12 — 8 leçons par part
+
+Train #545 (`bd1d61bd`), rendu complet en 23 parts de 10 leçons : part la plus longue 283 s, médiane 239 s, pour un plafond de 300 s. Décision du porteur : 8 leçons au plus par part, ⌈N/8⌉ parts (≈ 230 s au pire).
