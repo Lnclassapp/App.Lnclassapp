@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte du prochain exercice, la grille, le carrousel d'annonces, l'historique différé ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), XXXX accueil élève (§3.3), 0158 (§3 bandeau)
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte du prochain exercice, la grille, le carrousel d'annonces, l'historique différé ; sans classe principale active, « Choisis ta classe », les matières et l'exercice du jour du dernier niveau et, une fois, le retrait
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), 0132 accueil élève (§3.3, amendement eleve-sans-prof), 0158 (§3 bandeau)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -49,9 +49,13 @@ module Classroom
 
     # IL-14 : sans classe, la carte propose d'en choisir une (next_step/_no_classroom), et l'historique s'il y en a un (lot R,
     # ADR-0036) ; un retrait récent (StudentHomeQuery) se dit dans le bandeau, une fois par retrait et par session.
+    # Chantier eleve-sans-prof : les matières et l'exercice du jour de son dernier niveau connu, s'il en a un.
     def no_classroom
       @form = Dtos::Classroom::StudentRegistrationInput.new
       @archived = Queries::Classroom::StudentArchiveQuery.new.any?(student_id: current_actor.user_id)
+      @subjects = query.level_subjects(student_id: current_actor.user_id)
+      @daily = daily_exercise if @subjects.any?
+      @announcements = announcements
       removed_at = query.last_classroom(student_id: current_actor.user_id).recent_removal_at&.to_i
       return if removed_at.nil? || session[REMOVAL_NOTICE] == removed_at
 

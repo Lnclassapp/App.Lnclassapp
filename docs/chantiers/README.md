@@ -46,6 +46,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 |---|---|---|---|---|
 | [`abonnement-mobile-money`](abonnement-mobile-money/memo.md) | cadrage | feature | 2026-10-02 | Abonnement payé par Mobile Money (Wave) |
 | [`acceleration-du-flux`](acceleration-du-flux/memo.md) | livré | refactoring | 2026-10-20 | Accélération du flux : numéros de décision posés à la fusion, migrations en deux temps, retour arrière |
+| [`acces-beta`](acces-beta/memo.md) | livré | feature | 2026-11-12 | Accès complet gratuit pendant la bêta |
 | [`accueil-direction`](accueil-direction/memo.md) | livré | feature | 2026-10-04 | Accueil de la direction : établissement, niveaux, annonces, activité |
 | [`accueil-eleve`](accueil-eleve/memo.md) | planification | feature | 2026-10-15 | Accueil élève aux couleurs Wave et Djamo |
 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné | bugfix | 2026-09-18 | `Parent` et `ExamSubject` : déclarés partout, persistés nulle part |
@@ -154,6 +155,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`develop-rouge-medailles`](develop-rouge-medailles/memo.md) | livré | bugfix | 2026-11-09 | Develop rouge après les médailles |
 | [`dockerfile-docker-hub-429`](dockerfile-docker-hub-429/memo.md) | en cours | bugfix | 2026-10-09 | Dockerfile et limite de Docker Hub (429) |
 | [`ecrans-direction-lents`](ecrans-direction-lents/memo.md) | livré | optimisation | 2026-10-04 | Écrans de la direction dans leur budget |
+| [`eleve-sans-prof`](eleve-sans-prof/memo.md) | livré | feature | 2026-11-12 | L'élève sans enseignant a quelque chose à faire dès l'accueil |
 | [`enrolement-secret-stable`](enrolement-secret-stable/memo.md) | livré | bugfix | 2026-09-30 | Le QR code d'enrôlement reste valable quand la page est rouverte |
 | [`enseignant-plusieurs-matieres`](enseignant-plusieurs-matieres/memo.md) | exécution | feature | 2026-10-16 | Un enseignant qui enseigne plusieurs matières |
 | [`environnements-de-pr`](environnements-de-pr/memo.md) | livré | feature | 2026-10-21 | Environnements de PR sur Railway |

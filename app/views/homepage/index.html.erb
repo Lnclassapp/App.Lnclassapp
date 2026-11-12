@@ -1,5 +1,5 @@
 <%# 🌐 UI · homepage/index — page d'accueil publique : une photo, une feuille, deux entrées, sur un seul écran %>
-<%# Rôle : sur téléphone la feuille monte sur la photo des deux élèves ; sur ordinateur, texte à gauche, photo à droite ; un macaron étoilé ; ni en-tête ni pied %>
+<%# Rôle : sur téléphone la feuille monte sur la photo des deux élèves ; sur ordinateur, texte à gauche, photo à droite, à bord droit ; un macaron étoilé ; ni en-tête ni pied %>
 <%# UDR  : 0059, 0012 (§2), 0113 (§3.9), palette froide (exception : titre gras et vague jaune de cette page) · ADR : 0049, 0051 · Drapeau : school_space_enabled %>
 <% page_title t(".page_title") %>
 <%# Tant qu'aucun cours n'est publié, les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3),
@@ -11,9 +11,9 @@
 
 <main class="relative flex min-h-dvh flex-col bg-paper lg:flex-row">
   <%# La photo des deux élèves (celle de la maquette, recadrée sans le filigrane et éclaircie) : sur téléphone au-dessus de la
-      feuille, cadrée par le bas pour que les deux téléphones restent au-dessus d'elle ; sur ordinateur à droite, sous le bord
-      arrondi de la feuille, sans passer sous elle. Le fond `ink` reste si elle ne charge pas, sans rien décaler (UDR-0059). %>
-  <div class="relative min-h-48 flex-1 overflow-hidden bg-ink lg:order-2 lg:-ml-24 lg:min-h-0">
+      feuille, cadrée par le bas pour que les deux téléphones restent au-dessus d'elle ; sur ordinateur à droite, à bord droit,
+      sans passer sous la feuille. Le fond `ink` reste si elle ne charge pas, sans rien décaler (UDR-0059). %>
+  <div class="relative min-h-48 flex-1 overflow-hidden bg-ink lg:order-2 lg:min-h-0">
     <%= image_tag "homepage/students.webp", alt: t(".photo_alt"), width: 795, height: 1006, decoding: "async",
           fetchpriority: "high", class: "absolute inset-0 object-cover home-photo" %>
     <%# Le macaron étoilé, en haut à droite de la photo (UDR-0059 §3, 2.) : lu une fois par son aria-label. %>
@@ -33,7 +33,7 @@
   </div>
 
   <div id="home-sheet"
-       class="z-10 -mt-8 flex flex-col items-center rounded-t-sheet bg-paper px-6 pt-6 pb-safe text-center lg:order-1 lg:mt-0 lg:w-7/12 lg:shrink-0 lg:items-start lg:justify-center lg:rounded-t-none lg:rounded-r-sheet lg:py-16 lg:pr-16 lg:pl-16 lg:text-left xl:pl-28">
+       class="z-10 -mt-8 flex flex-col items-center rounded-t-sheet bg-paper px-6 pt-6 pb-safe text-center lg:order-1 lg:mt-0 lg:w-1/2 lg:shrink-0 lg:items-start lg:justify-center lg:rounded-none lg:py-16 lg:pr-16 lg:pl-16 lg:text-left xl:pl-28">
     <h1 class="font-display leading-display font-extrabold tracking-tight text-ink">
       <span class="block text-3xl lg:inline lg:text-5xl xl:text-6xl">
         <span class="lg:hidden"><%= t(".title.phone") %></span><span class="hidden lg:inline"><%= t(".title.computer") %></span>

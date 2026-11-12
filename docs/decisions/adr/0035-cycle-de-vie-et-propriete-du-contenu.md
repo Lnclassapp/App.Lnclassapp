@@ -157,3 +157,13 @@ Le refus répond `:not_found`, pas `:forbidden` : on ne confirme pas l'existence
   - `CourseCatalogQuery(audience:)` applique la même règle en SQL : `level_id = niveau AND series_id IN (NULL, série)`, en OU entre les classes, et aucun cours sans classe.
 - **Delivery** : le concern `ReadsOwnLevel` (`refuse_out_of_level`) garde la page cours, la page fiche, la page exercice et `POST …/sessions`, après la recherche du contenu.
 - **Hors périmètre** : un contenu d'un autre niveau assigné par un enseignant à la classe de l'élève reste illisible. L'enseignant assigne le catalogue de la classe ; un cas réel ouvrira un chantier.
+
+## Amendement du 2026-11-12 — sans classe de l'année, le dernier niveau connu
+
+*Décision du porteur du 2026-11-12, chantier [`eleve-sans-prof`](../../chantiers/eleve-sans-prof/memo.md) : « Sans classe active, prends le dernier niveau connu. »*
+
+- **Règle** : un élève sans classe active de l'année (retiré, classe archivée, ou classe d'une année passée) a pour niveau celui de sa **dernière classe principale** : celle encore ouverte d'abord, puis la plus récemment quittée. Un élève qui n'a jamais eu de classe n'a toujours aucun niveau.
+- **Infrastructure** : `Queries::Catalog::StudentAudienceQuery` porte le repli ; `ReadOwnLevelPolicy`, `CourseCatalogQuery`, l'accueil et l'exercice du jour le reçoivent sans changer. `Queries::Assessment::DailyExerciseQuery` lit désormais le niveau par cette query, au lieu de sa copie en SQL corrélé : deux requêtes au lieu d'une, toujours un nombre fixe.
+- **Remplace** : « Élève sans classe de l'année : catalogue vide » (chantier `catalogue-niveau-eleve`).
+- **Coût consenti** : un élève retiré de sa classe garde la lecture du catalogue publié de son ancien niveau. Il ne voit ni la classe, ni ses camarades, ni ses devoirs.
+- **Comment vérifier** : `test/infrastructure/queries/catalog/student_audience_query_test.rb` et le test « eleve-sans-prof CA-2 » de `test/controllers/classroom/student_homes_controller_test.rb` (un autre niveau reste introuvable).

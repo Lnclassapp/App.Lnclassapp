@@ -1,0 +1,35 @@
+<%# 🌐 UI · classroom/student_homes/_to_do — « À faire » de l'accueil élève : les exercices assignés non terminés, après celui de la carte %>
+<%# Rôle : 3 lignes au plus, triées par échéance (l'ordre de la query) ; rond de la matière, titre, matière, puis l'échéance dessous ; « Tout voir » vers Ma classe ; vide, une phrase %>
+<%# UDR  : 0132 accueil élève, amendement eleve-sans-prof (§3.5 bis) · 0062 §3.1 (échéance) · charte §11 (listes) %>
+<%# locals: (exercises:, card_exercise:) -%>
+<% open = exercises.select { it.completed_count.zero? }.reject { card_exercise && it.public_id == card_exercise.public_id } %>
+<section id="student_to_do" aria-labelledby="student_to_do_title"
+         class="space-y-3 lg:rounded-card lg:border lg:border-line lg:bg-paper lg:p-6 lg:shadow-card">
+  <div class="flex items-center justify-between gap-3">
+    <h2 id="student_to_do_title" class="font-display text-base font-medium text-ink"><%= t(".title") %></h2>
+    <% if open.size > 3 %>
+      <%= link_to t(".all"), student_classroom_path, id: "student_to_do_all",
+                  class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% end %>
+  </div>
+  <% if open.empty? %>
+    <p class="text-meta text-mute"><%= t(".empty") %></p>
+  <% else %>
+    <ul class="divide-y divide-line">
+      <% open.first(3).each do |exercise| %>
+        <li class="relative flex min-h-tap items-center gap-3 py-3 active:bg-mist">
+          <span class="grid size-11 shrink-0 place-items-center rounded-full bg-brand-soft" aria-hidden="true">
+            <%= image_tag subject_illustration(exercise.material_slug).path, alt: "", class: "size-7", loading: "lazy" %>
+          </span>
+          <span class="min-w-0 flex-1">
+            <%= link_to exercise.title, exercise_path(exercise.public_id),
+                        class: "block truncate text-sm font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+            <span class="block text-meta text-mute"><%= exercise.material_name %></span>
+            <% if exercise.due_on %><span class="mt-1 block"><%= due_badge(exercise.due_on) %></span><% end %>
+          </span>
+          <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "shrink-0 text-mute" %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

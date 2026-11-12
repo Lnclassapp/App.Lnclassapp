@@ -141,6 +141,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0129](./0129-medailles-lues-a-la-cloture.md) | Médaille d'exercice lue à la clôture, Bronze dès une réponse | Accepté | 2026-11-08 | Plusieurs écrans recalculent la médaille depuis le score, qui ne dit pas si l'élève a répondu ; « Bronze dès une réponse » exige un fait que le score ne porte pas. |
 | [0130](./0130-modeles-de-langage-par-openrouter.md) | Modèles de langage par OpenRouter | Accepté | 2026-11-04 | Comment appeler des modèles de langage (Kimi, DeepSeek, Gemini) depuis l'application sans s'y lier, ni bloquer une requête, ni dépendre d'une gemme |
 | [0131](./0131-ci-lecons-rendu-cible.md) | Rendu ciblé des leçons au train | Accepté | 2026-11-12 | Rendre toutes les leçons v3 à chaque train coûte 98,7 min de machine et grandit avec chaque vague de leçons. |
+| [0132](./0132-acces-beta-reglage-unique.md) | Accès bêta, réglage unique | Accepté | 2026-11-12 | rendre l'accès élève gratuit et sans blocage pendant la bêta, réversible en un seul point, sans bloquer d'un coup les inscrits de la bêta |
 <!-- index:end -->
 
 ---

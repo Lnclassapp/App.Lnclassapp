@@ -83,8 +83,9 @@ class HomepageTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-A3 : sur ordinateur, texte à gauche, photo à droite, un seul écran, la feuille mord sur la photo.
-  test "CA-A3: on a computer, the text is on the left, the photo on the right, on one screen, the sheet biting on the photo" do
+  # CA-A3 : sur ordinateur, texte à gauche, photo à droite, un seul écran ; la feuille, à bord droit, ne cache rien de la photo
+  # (retouche du porteur, 2026-11-12 : l'élève de gauche doit être entier).
+  test "CA-A3: on a computer, the text is on the left, the photo on the right, on one screen, the sheet hiding nothing of the photo" do
     with_mobile_viewport([ 1440, 900 ]) do
       visit root_path
 
@@ -92,7 +93,8 @@ class HomepageTest < ApplicationSystemTestCase
         (() => {
           const box = (selector) => document.querySelector(selector).getBoundingClientRect()
           return {
-            sheetRight: box("#home-sheet").right, photoLeft: box("main img").left, photoRight: box("main img").right,
+            sheetRight: box("#home-sheet").right, sheetRadius: getComputedStyle(document.querySelector("#home-sheet")).borderTopRightRadius,
+            photoLeft: box("main img").left, photoRight: box("main img").right,
             titleRight: box("h1").right, scrollHeight: document.documentElement.scrollHeight, height: window.innerHeight,
             width: window.innerWidth
           }
@@ -101,7 +103,8 @@ class HomepageTest < ApplicationSystemTestCase
 
       assert_operator layout["titleRight"], :<=, layout["sheetRight"], "le titre n'est pas dans la feuille de gauche"
       assert_operator layout["sheetRight"], :<=, layout["width"] / 2 + 150, "la feuille n'est pas à gauche"
-      assert_operator layout["sheetRight"], :>, layout["photoLeft"], "la feuille ne mord pas sur la photo"
+      assert_operator layout["sheetRight"], :<=, layout["photoLeft"] + 1, "la feuille cache le bord gauche de la photo"
+      assert_equal "0px", layout["sheetRadius"], "la feuille garde un bord arrondi sur ordinateur"
       assert_operator layout["photoRight"], :>=, layout["width"] - 1, "la photo n'atteint pas le bord droit"
       assert_operator layout["scrollHeight"], :<=, layout["height"], "la page défile sur ordinateur"
       assert_selector "#matieres", visible: :visible

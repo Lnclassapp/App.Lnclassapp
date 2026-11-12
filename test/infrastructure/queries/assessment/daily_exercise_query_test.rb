@@ -63,7 +63,8 @@ module Queries
       end
 
       # Revue sécurité de la PR : la portée n'est garantie que par la query, chaque refus a son test.
-      test "never proposes an exercise of another level or series, nor after leaving or archiving the classroom" do
+      # Chantier eleve-sans-prof : sans classe active, le dernier niveau connu (sa dernière classe principale) reste le sien.
+      test "never proposes an exercise of another level or series; after leaving or archiving the classroom, still its level only" do
         Orm::Exercise.update_all(status: "draft")
         level = create_level(name: "2nde")
         series = create_series(name: "C")
@@ -80,11 +81,15 @@ module Queries
         assert_equal own.public_id, travel_to(at(TUESDAY, 8)) { daily(student:) }.exercise_public_id
 
         Orm::ClassroomStudent.where(student:).update_all(left_at: Time.current)
-        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student:) }.state
+        assert_equal own.public_id, travel_to(at(TUESDAY, 8)) { daily(student:) }.exercise_public_id
 
         Orm::ClassroomStudent.where(student:).update_all(left_at: nil)
         Orm::Classroom.where(id: classroom.id).update_all(status: "archived", archived_at: Time.current)
-        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student:) }.state
+        assert_equal own.public_id, travel_to(at(TUESDAY, 8)) { daily(student:) }.exercise_public_id
+      end
+
+      test "eleve-sans-prof: a student who never had a classroom is proposed nothing" do
+        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student: create_student) }.state
       end
 
       test "the subject of tomorrow skips a subject left without candidates once today's exercise is done" do
@@ -200,7 +205,8 @@ module Queries
         assert_equal @fractions.public_id, row.exercise_public_id
       end
 
-      test "a single query, whatever the number of subjects and exercises; a subject outside the chart comes last" do
+      # Chantier eleve-sans-prof : le niveau se lit d'abord (StudentAudienceQuery), puis les candidats ; un nombre fixe de requêtes.
+      test "two queries (the level, then the candidates), whatever the number of subjects and exercises; a subject outside the chart comes last" do
         create_exercise(essential: create_essential(course: create_course(material: create_material(name: "Anglais"),
                                                                                 level: @classroom.level)))
         complete(@fractions, started_at: at(TUESDAY, 9))
@@ -208,7 +214,7 @@ module Queries
         row = nil
         queries = travel_to(at(TUESDAY, 18)) { count_queries { row = daily } }
 
-        assert_equal 1, queries
+        assert_equal 2, queries
         # [mathematiques, svt, anglais] : 292 % 3 = 1 ; Anglais, par son nom, serait passé devant.
         assert_equal [ :proposed, @cell.public_id ], row.to_h.values_at(:state, :exercise_public_id)
       end

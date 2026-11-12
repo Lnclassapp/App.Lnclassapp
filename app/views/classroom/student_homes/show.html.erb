@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève : bandeau, carte du prochain exercice, grille des matières, annonces, historique %>
-<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (912 px au plus dès lg) : la carte, 7 cases, le carrousel, l'historique différé ; sans classe, la seule carte « Choisis ta classe » %>
-<%# ADR  : 0033, 0043, 0078, 0085, 0089, 0126 (contexte billing, §4.5) · UDR : 0071 §3.5, 0081 §3.5, 0132 accueil élève (§3.1 structure, §3.3 états), 0158 (§3 bandeau) · titre « Accueil · Élève · Lnclass » %>
+<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (912 px au plus dès lg) : la carte, 7 cases, le carrousel, « À faire », l'historique différé ; sans classe, « Choisis ta classe », la grille de son dernier niveau et les annonces %>
+<%# ADR  : 0033, 0043, 0078, 0085, 0089, 0126 (contexte billing, §4.5) · UDR : 0071 §3.5, 0081 §3.5, 0132 accueil élève (§3.1 structure, §3.3 états, amendement eleve-sans-prof), 0158 (§3 bandeau, masqué en bêta : UDR acces-beta) · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
 <h1 class="sr-only"><%= t(".page_title") %></h1>
@@ -15,14 +15,20 @@
 <div id="student_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-228", "-mt-12 lg:mt-0" => !lnclass_app?) %>">
   <%= render "billing/subscriptions/home_notice", access: @access %>
   <%= render "next_step", home: @home, daily: @daily, form: @form, archived: @archived, invite_href: %>
+  <%# UDR-0132, amendement eleve-sans-prof : « Mes matières » (sans classe, celles du dernier niveau, sans « Inviter »), les
+      annonces, puis « À faire » pour l'élève qui a une classe. Sans classe ni niveau connu, la grille n'est pas rendue. %>
   <% if @home %>
-    <%# UDR accueil élève §3.3 : sans classe, la grille, les annonces et l'historique sont masqués. %>
     <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, invite_href: %>
-    <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
-        section est rendue cachée (cible d'« Annuler »). %>
-    <% if @announcements.any_readable? %>
-      <%= render "communication/messages/carousel", carousel: @announcements, student: true %>
-    <% end %>
+  <% elsif @subjects.present? %>
+    <%= render "subjects", subjects: @subjects, late_slugs: [], invite_href: nil %>
+  <% end %>
+  <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
+      section est rendue cachée (cible d'« Annuler »). %>
+  <% if @announcements&.any_readable? %>
+    <%= render "communication/messages/carousel", carousel: @announcements, student: true %>
+  <% end %>
+  <% if @home %>
+    <%= render "to_do", exercises: @home.assigned_exercises, card_exercise: @home.next_step.exercise %>
     <%# CA-D10 : dès lg, une carte blanche sur le fond mist. %>
     <section id="student_history" aria-labelledby="student_history_title"
              class="space-y-3 lg:rounded-card lg:border lg:border-line lg:bg-paper lg:p-6 lg:shadow-card">

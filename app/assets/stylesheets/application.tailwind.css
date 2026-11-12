@@ -281,16 +281,11 @@
 }
 
 /* Page d'accueil publique (UDR-0059 §3) — la photo des deux élèves : cadrée par le bas et un peu à droite pour garder les
-   deux visages et les deux téléphones au-dessus de la feuille ; sur ordinateur, elle commence au bord arrondi de la feuille
-   (4 rem après le début de sa colonne, qui passe 6 rem sous la feuille) pour que l'élève de gauche ne soit pas caché. */
+   deux visages et les deux téléphones au-dessus de la feuille ; sur ordinateur, elle occupe sa moitié d'écran à bord droit. */
 @utility home-photo {
   width: 100%;
   height: 100%;
   object-position: 60% 100%;
-  @media (width >= 64rem) {
-    left: 4rem;
-    width: calc(100% - 4rem);
-  }
 }
 
 /* Le macaron étoilé : 136 px sous 341 px, 146 px jusqu'à 380 px, 160 px au-delà (UDR-0059 §3, 2.) ; texte de 12 à 14 px,
