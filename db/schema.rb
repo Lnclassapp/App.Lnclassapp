@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_12_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -540,6 +540,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "hinted_question_ids", default: [], null: false, array: true
+    t.uuid "client_copy_id"
+    t.datetime "received_at"
     t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "((status)::text = 'completed'::text)", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
     t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
@@ -547,6 +549,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_100000) do
     t.index ["knowledge_gap_id"], name: "index_exercise_sessions_on_knowledge_gap_id"
     t.index ["public_id"], name: "index_exercise_sessions_on_public_id", unique: true
     t.index ["started_at", "student_id"], name: "index_exercise_sessions_on_started_at_and_student_id"
+    t.index ["student_id", "client_copy_id"], name: "index_exercise_sessions_on_student_and_client_copy", unique: true
     t.index ["student_id", "completed_at"], name: "index_exercise_sessions_on_student_id_and_completed_at"
     t.index ["student_id", "exercise_id"], name: "index_exercise_sessions_one_started", unique: true, where: "((status)::text = 'started'::text)"
     t.check_constraint "(kind::text = 'remediation'::text) = (knowledge_gap_id IS NOT NULL)", name: "exercise_sessions_remediation_iff_gap"
