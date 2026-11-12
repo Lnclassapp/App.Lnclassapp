@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/owners/_form — choisir le responsable parmi les membres admin et field non anonymisés, « Moi » en premier, puis « Aucun » %>
 <%# Rôle : formulaire de la modale « Changer le responsable » ; erreur sous le champ %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
 <% members = panel.members.partition { it.user_id == current_actor.user_id }.flatten %>
 <%= form_with model: owner_form, scope: :owner, url: teams_school_owner_path(@school.public_id), method: :patch, id: "crm-owner-form", class: "space-y-5" do |form| %>
   <% if owner_form.errors[:base].any? %>

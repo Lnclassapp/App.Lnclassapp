@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/generations/_generation — turbo-frame generation_<public_id> : en cours (sondage), prête (texte échappé), en échec %>
 <%# Rôle : `retry_href` (facultatif) fait venir « Réessayer », en POST par défaut (les routes des assistants n'acceptent que POST) ; le contrôleur generation-poll est sur un div intérieur, car un frame garde ses attributs au rechargement %>
-<%# UDR  : XXXX (assistants du suivi, « Cycle d'une génération ») %>
+<%# UDR  : 0160 (assistants du suivi, « Cycle d'une génération ») %>
 <% retry_href = local_assigns[:retry_href] %>
 <% retry_method = local_assigns.fetch(:retry_method, :post) %>
 <%# La dictée attend plus longtemps : l'adaptateur laisse 90 s au modèle audio (Crm::OpenRouterLanguageModel::AUDIO_READ_TIMEOUT). %>

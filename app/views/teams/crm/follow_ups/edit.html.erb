@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/follow_ups/edit — « Réattribuer », servie dans le frame « modal » par FollowUpAssigneesController#edit %>
 <%# Rôle : hors frame, la même modale s'ouvre sur le shell ; échec re-rendu en 422 avec l'erreur %>
-<%# UDR  : XXXX (pipeline et relances) %>
+<%# UDR  : 0168 (pipeline et relances) %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), id: "follow-up-assignee-modal", size: :sm, open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>

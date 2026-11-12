@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/interactions/index — sous-bloc « Journal » de la fiche (frame school_crm_journal) et ses pages plus anciennes %>
 <%# Rôle : 20 échanges par page, du plus récent au plus ancien ; la suite se charge au clic, dans son propre frame ; aucune modification ni suppression (CA-12) %>
-<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) %>
 <% older = capture do %>
   <% if @has_older %>
     <%= turbo_frame_tag "school_crm_journal_page_#{@page + 1}" do %>

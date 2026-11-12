@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/briefings/_briefing — la fiche de briefing prête : 5 lignes au plus, texte échappé %>
 <%# Rôle : une ligne par ligne du modèle (jamais de HTML), puis « Régénérer » (un clic sans changement réaffiche la même fiche, CA-22) %>
-<%# UDR  : XXXX (assistants du suivi, « Fiche de briefing ») %>
+<%# UDR  : 0160 (assistants du suivi, « Fiche de briefing ») %>
 <%= turbo_frame_tag "generation_#{generation.public_id}" do %>
   <ul role="list" class="space-y-2 text-sm">
     <% generation.content.to_s.lines.map(&:strip).reject(&:empty?).first(5).each do |line| %>

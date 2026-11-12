@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/dictations/_recorder — modale « Dicter un compte rendu » : enregistreur, refus du serveur, ou attente de l'assistant %>
 <%# Rôle : le contrôleur voice-recorder porte les états (prêt, enregistrement, enregistré) ; avec `generation`, l'attente (ou la dictée déjà finie) remplace l'enregistreur ; « Saisir à la main » ouvre le formulaire vide %>
-<%# UDR  : XXXX (assistants du suivi, « Compte rendu dicté ») · CA-26 : refus en 422, 3 min, 10 Mo, webm/ogg/mp4 %>
+<%# UDR  : 0160 (assistants du suivi, « Compte rendu dicté ») · CA-26 : refus en 422, 3 min, 10 Mo, webm/ogg/mp4 %>
 <%= ui_modal title: t(".title"), id: "dictation-modal", size: :md, open: true, document_title: page_title(t(".title")) do |modal| %>
   <div class="ui-dictation space-y-4">
     <% if generation&.done? %>

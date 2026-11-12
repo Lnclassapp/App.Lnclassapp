@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/interactions/_form — type, date, interlocuteur, résultat, suite, note et relance proposée %>
 <%# Rôle : formulaire unique du journal (réutilisé tel quel par le compte rendu dicté du Lot K, qui le pré-remplit et fixe `source`) %>
-<%# ADR  : XXXX (contexte crm) · UDR : XXXX (bloc « Suivi » de la fiche établissement) §Journal %>
+<%# ADR  : 0128 (contexte crm) · UDR : 0162 (bloc « Suivi » de la fiche établissement) §Journal %>
 <% entity = Entities::Crm::Interaction %>
 <%= form_with model: input, scope: :interaction, url: teams_school_interactions_path(@school.public_id), method: :post,
               id: "interaction-form", class: "space-y-5" do |form| %>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/whatsapp_drafts/_draft — le brouillon prêt : texte modifiable (600 caractères), « Copier », « Ouvrir dans WhatsApp » vers le contact choisi %>
 <%# Rôle : l'application n'envoie rien ; le contrôleur whatsapp-link recalcule le lien wa.me et le texte à copier à chaque modification ; le texte du modèle est échappé %>
-<%# UDR  : XXXX (assistants du suivi, « Brouillon WhatsApp ») · local : generation (+ school_public_id, inutilisé ici) %>
+<%# UDR  : 0160 (assistants du suivi, « Brouillon WhatsApp ») · local : generation (+ school_public_id, inutilisé ici) %>
 <% text = generation.content.to_s %>
 <% max = Entities::Crm::WhatsappDraftPrompt::MAX %>
 <% field_id = "whatsapp-draft-text-#{generation.public_id}" %>

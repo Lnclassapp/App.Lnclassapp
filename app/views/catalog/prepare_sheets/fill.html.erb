@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/prepare_sheets/fill — la feuille à remplir d'une feuille de la leçon (la feuille d'aujourd'hui) %>
 <%# Rôle : retour au sujet en lecture, puis la feuille : champs, « Vérifier ma réponse », indice, « Recommencer », l'exercice à refaire quand la correction y ramène ; l'élève et le visiteur seulement %>
-<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3, XXXX refaire-ou-continuer §3 · Stimulus : prepare-sheet, math %>
+<%# ADR  : 0121 · UDR : feuilles-en-cases-lues-avant-de-commencer §3, 0149 §3, 0153 refaire-ou-continuer §3 · Stimulus : prepare-sheet, math %>
 <% course = @detail.course %>
 <% kind = @sheet.kind == :subject ? :devoirs : :interros %>
 <% page_title t("catalog.courses.sheets.page_title", title: t("catalog.courses.sheets.numbered_title.#{kind}", number: @sheet.number), course: course.name) %>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/pedagogy_reports/no_activity — CA-30 : l'école n'a pas assez d'activité, le message prend la place du résultat dans la carte « Assistants » %>
 <%# Rôle : aucune génération n'existe, aucun appel au modèle n'a eu lieu %>
-<%# UDR  : XXXX (assistants du suivi, « Rapport pédagogique ») %>
+<%# UDR  : 0160 (assistants du suivi, « Rapport pédagogique ») %>
 <%= turbo_stream.update "school_crm_briefing" do %>
   <%= ui_empty_state title: t(".title"), description: t(".description"), icon: "chart-bar" %>
 <% end %>

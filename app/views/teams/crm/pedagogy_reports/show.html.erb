@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/pedagogy_reports/show — rapport pédagogique d'une école : quatre chiffres, réussite par matière, lacunes, synthèse ; imprimable %>
 <%# Rôle : les chiffres viennent de la query, jamais du modèle (il n'écrit que la synthèse) ; actions, navigation et bandeaux en print:hidden ; sans activité, l'état vide (CA-30) %>
-<%# ADR  : XXXX (modèles de langage, contexte crm) · UDR : XXXX (assistants du suivi, « Rapport pédagogique ») · Stimulus : print %>
+<%# ADR  : 0130 (modèles de langage), 0128 (contexte crm) · UDR : 0160 (assistants du suivi, « Rapport pédagogique ») · Stimulus : print %>
 <% page_title t(".page_title", school: @school.name) %>
 <% content_for :nav_key, "schools" %>
 <div class="mx-auto w-full max-w-240 space-y-8 print:max-w-none print:bg-white" data-controller="print">

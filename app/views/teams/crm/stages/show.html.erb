@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/stages/show — sous-bloc « Étape et responsable » de la fiche établissement %>
 <%# Rôle : le frame school_crm_stage (cible des Turbo Streams) ; une erreur de saisie le re-rend en 422 avec la modale concernée ouverte %>
-<%# UDR  : XXXX (bloc « Suivi » de la fiche établissement) %>
+<%# UDR  : 0162 (bloc « Suivi » de la fiche établissement) %>
 <%= turbo_frame_tag "school_crm_stage" do %>
   <%= render "teams/crm/stages/stage", panel: @panel, stage_form: @stage_form, owner_form: @owner_form, open: @open %>
 <% end %>

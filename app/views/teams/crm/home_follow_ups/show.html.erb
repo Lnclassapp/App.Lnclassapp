@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/crm/home_follow_ups/show — carte « À relancer » de l'Accueil équipe %>
 <%# Rôle : le frame team_home_follow_ups : le nombre de mes écoles à relancer, les trois premières avec leur première raison, un lien unique %>
-<%# UDR  : XXXX (pipeline et relances) · vide : « Rien à relancer aujourd'hui » %>
+<%# UDR  : 0168 (pipeline et relances) · vide : « Rien à relancer aujourd'hui » %>
 <%= turbo_frame_tag "team_home_follow_ups" do %>
   <% if @count.zero? %>
     <%= ui_card title: t(".title"), icon: "bell-alert", class: "mb-5" do %>
