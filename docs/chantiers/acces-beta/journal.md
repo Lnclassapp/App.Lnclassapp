@@ -12,7 +12,7 @@
 ## À trancher
 
 - [x] 2026-11-12 · acces-beta · À la fin de la bêta, les élèves inscrits pendant la bêta sont bloqués aussitôt (leurs 7 jours sont écoulés) : leur redonner 7 jours à partir de la fin de bêta ? — appliqué : rien (règle d'origine) ; autres : déplacer `Offer::LAUNCH_ON` à la date de fin de bêta en même temps que `BETA_OPEN_ACCESS = false` ; recommandé : déplacer `LAUNCH_ON` — **porteur : déplacer `LAUNCH_ON` à la fin de la bêta.** Fait : `Offer::BETA_ENDS_ON` porte la date de fin, les 7 jours partent d'elle.
-- [ ] 2026-11-12 · acces-beta · Mon abonnement reste joignable à la main pendant la bêta, avec points relais et saisie de code — appliqué : garder (une carte achetée s'active) ; autres : masquer la vente en bêta ; recommandé : garder
+- [x] 2026-11-12 · acces-beta · Mon abonnement reste joignable à la main pendant la bêta, avec points relais et saisie de code — appliqué : garder (une carte achetée s'active) ; autres : masquer la vente en bêta ; recommandé : garder — **porteur : garder les points relais et la saisie de code.**
 
 ## Retouches
 
