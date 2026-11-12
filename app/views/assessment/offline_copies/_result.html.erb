@@ -3,10 +3,10 @@
 <%# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : hors-connexion §3.5 · Stimulus : offline-copy (clone ce modèle) · locals: (exercise_public_id:) %>
 <section id="offline_result" aria-labelledby="offline_result_title">
   <div class="flex items-center gap-2">
-    <h1 id="offline_result_title" tabindex="-1" class="font-display text-2xl font-extrabold text-ink focus:outline-none"><%= t("offline.result.title") %></h1>
-    <span class="rounded-full bg-warning-soft px-2 py-0.5 text-xs font-bold text-warning"><%= t("offline.result.provisional") %></span>
+    <h1 id="offline_result_title" tabindex="-1" class="font-display text-2xl font-medium text-ink focus:outline-none"><%= t("offline.result.title") %></h1>
+    <span class="rounded-full bg-warning-soft px-2 py-0.5 text-xs font-medium text-warning"><%= t("offline.result.provisional") %></span>
   </div>
-  <p class="mt-1 font-display text-4xl font-extrabold tabular-nums" data-percent><%= t("offline.result.percent", percent: "%{percent}") %></p>
+  <p class="mt-1 font-display text-4xl font-medium tabular-nums" data-percent><%= t("offline.result.percent", percent: "%{percent}") %></p>
   <p class="mt-2 text-sm text-mute"><%= t("offline.result.explain") %></p>
   <ol class="mt-6 grid list-none gap-4" data-questions></ol>
   <div class="mt-6">
