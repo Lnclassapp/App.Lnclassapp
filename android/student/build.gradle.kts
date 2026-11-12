@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 // Clé d'envoi hors dépôt (ADR-0084 §4.8) : variables d'environnement, ou local.properties sur le poste.
@@ -20,18 +19,19 @@ val keystorePath = signingValue("LNCLASS_KEYSTORE_PATH", "lnclass.keystore.path"
 
 android {
     namespace = "com.lnclass.student"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.lnclass.student"
         minSdk = 28 // Android 9, plancher de Hotwire Native Android (ADR-0070 amendé)
         targetSdk = 36 // Android 16 : le Play Store relève chaque fin août l'API cible exigée
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
     }
 
     buildFeatures {
         buildConfig = true
+        resValues = true // désactivé par défaut depuis AGP 9 ; les variantes posent app_name
     }
 
     signingConfigs {
