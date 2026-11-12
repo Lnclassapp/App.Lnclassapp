@@ -34,3 +34,33 @@ test("stays open after a failed submit", () => {
   controller.submitEnd(submitted({ success: false }))
   assert.equal(dialog.closes, 0)
 })
+
+// assignation-catalogue-modale-jours : l'événement `close` arrive une tâche après dialog.close(). Si une autre modale a
+// commencé à se charger dans le frame entre les deux (frame `busy`), closed() ne doit ni retirer `src` (Turbo annulerait
+// la requête) ni vider le frame : la nouvelle modale n'arriverait jamais.
+function buildInFrame({ busy }) {
+  const frame = {
+    removed: [], cleared: 0,
+    hasAttribute: (name) => name === "busy" && busy,
+    removeAttribute(name) { this.removed.push(name) },
+    replaceChildren() { this.cleared++ },
+  }
+  const { controller, dialog } = build()
+  dialog.open = false
+  Object.defineProperty(controller, "element", { value: { closest: (selector) => (selector === "turbo-frame#modal" ? frame : null) } })
+  return { controller, frame }
+}
+
+test("closed() frees the modal frame when nothing else is loading in it", () => {
+  const { controller, frame } = buildInFrame({ busy: false })
+  controller.closed()
+  assert.deepEqual(frame.removed, [ "src" ])
+  assert.equal(frame.cleared, 1)
+})
+
+test("closed() leaves the modal frame alone while the next modal is loading in it", () => {
+  const { controller, frame } = buildInFrame({ busy: true })
+  controller.closed()
+  assert.deepEqual(frame.removed, [])
+  assert.equal(frame.cleared, 0)
+})
