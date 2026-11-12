@@ -38,5 +38,5 @@
 |---|---|
 | **Livré le** | 2026-11-12 |
 | **PR** | (voir PR `feature/acces-beta`) |
-| **ADR produits** | ADR-XXXX-acces-beta-reglage-unique |
-| **UDR produits** | UDR-XXXX-acces-beta-sans-abonnement |
+| **ADR produits** | ADR-0132 |
+| **UDR produits** | UDR-0169 |

@@ -1,4 +1,4 @@
-# UDR-XXXX : Pendant la bêta, l'élève ne voit aucune invitation à s'abonner
+# UDR-0169 : Pendant la bêta, l'élève ne voit aucune invitation à s'abonner
 
 <!-- index
 titre: Bêta sans invitation à s'abonner
@@ -12,7 +12,7 @@ problematique: un bêta-testeur ne doit voir ni compte à rebours ni appel à l'
 | **Statut** | Accepté |
 | **Date** | 2026-11-12 |
 | **Chantier** | `docs/chantiers/acces-beta` |
-| **ADR lié** | ADR-XXXX-acces-beta-reglage-unique · amende UDR-0158 §3 tant que la bêta est ouverte |
+| **ADR lié** | ADR-0132 · amende UDR-0158 §3 tant que la bêta est ouverte |
 | **Remplacé par** | — |
 
 ---

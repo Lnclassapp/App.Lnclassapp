@@ -1,4 +1,4 @@
-# ADR-XXXX : Une date de fin de bêta, seul réglage de l'offre, ouvre l'accès gratuit et redonne 7 jours à la fermeture
+# ADR-0132 : Une date de fin de bêta, seul réglage de l'offre, ouvre l'accès gratuit et redonne 7 jours à la fermeture
 
 <!-- index
 titre: Accès bêta, réglage unique

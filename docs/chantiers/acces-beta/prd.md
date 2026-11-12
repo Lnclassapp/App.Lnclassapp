@@ -70,5 +70,5 @@ Alors rien n'est créé et il est redirigé vers Mon abonnement
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-acces-beta-reglage-unique — le réglage unique de la bêta
-- UDR-XXXX-acces-beta-sans-abonnement — l'élève ne voit aucune invitation à s'abonner pendant la bêta
+- ADR-0132 — le réglage unique de la bêta
+- UDR-0169 — l'élève ne voit aucune invitation à s'abonner pendant la bêta
