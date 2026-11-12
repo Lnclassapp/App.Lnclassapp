@@ -21,7 +21,7 @@ class Assessment::OfflinePacksControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, body["questions"].size
     assert_equal [ true, false, false, false ], body["questions"].first["answers"].pluck("correct")
     assert_match(/\A\h{16}\z/, body["digest"])
-    verified = Repositories::Assessment::OfflinePackSigner.new.verify(body["token"])
+    verified = Repositories::Assessment::OfflinePackSigner.new.verify(token: body["token"])
     assert_equal({ student_id: @student.id, exercise_id: @exercise.id, digest: body["digest"] }, verified.slice(:student_id, :exercise_id, :digest))
     assert_in_delta Time.current, verified[:issued_at], 5.seconds
     assert_equal verified[:issued_at].iso8601, body["issued_at"]

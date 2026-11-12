@@ -11,14 +11,14 @@ module Repositories
       def token = @signer.sign(student_id: 7, exercise_id: 42, digest: "abcdef0123456789", issued_at: ISSUED)
 
       test "un jeton signé se vérifie et rend ses quatre champs" do
-        assert_equal({ student_id: 7, exercise_id: 42, digest: "abcdef0123456789", issued_at: ISSUED }, @signer.verify(token))
+        assert_equal({ student_id: 7, exercise_id: 42, digest: "abcdef0123456789", issued_at: ISSUED }, @signer.verify(token: token))
       end
 
       test "un jeton modifié, vide ou qui n'est pas un texte rend nil" do
-        assert_nil @signer.verify("#{token}x")
-        assert_nil @signer.verify("")
-        assert_nil @signer.verify(nil)
-        assert_nil @signer.verify({ student_id: 7 })
+        assert_nil @signer.verify(token: "#{token}x")
+        assert_nil @signer.verify(token: "")
+        assert_nil @signer.verify(token: nil)
+        assert_nil @signer.verify(token: { student_id: 7 })
       end
 
       test "le jeton est chiffré : ni l'identifiant de l'élève ni celui de l'exercice ne s'y lisent (ADR-0029, revue sécurité du Lot 0)" do
@@ -31,33 +31,33 @@ module Repositories
       test "un jeton d'un autre but est refusé" do
         foreign = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "autre")
 
-        assert_nil @signer.verify(foreign)
+        assert_nil @signer.verify(token: foreign)
       end
 
       test "un jeton expire après 30 jours" do
         signed = token
 
-        travel_to(ISSUED + 29.days) { assert_not_nil @signer.verify(signed) }
-        travel_to(ISSUED + 31.days) { assert_nil @signer.verify(signed) }
+        travel_to(ISSUED + 29.days) { assert_not_nil @signer.verify(token: signed) }
+        travel_to(ISSUED + 31.days) { assert_nil @signer.verify(token: signed) }
       end
 
       test "F4 : expired? dit « expiré » d'un jeton authentique de plus de 30 jours, jamais d'un jeton altéré, étranger ou valable" do
         signed = travel_to(ISSUED) { token }
         foreign = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "autre")
 
-        travel_to(ISSUED + 29.days) { assert_not @signer.expired?(signed) }
+        travel_to(ISSUED + 29.days) { assert_not @signer.expired?(token: signed) }
         travel_to(ISSUED + 31.days) do
-          assert @signer.expired?(signed)
-          assert_not @signer.expired?(foreign)
-          assert_not @signer.expired?("#{signed}x")
-          assert_not @signer.expired?(nil)
+          assert @signer.expired?(token: signed)
+          assert_not @signer.expired?(token: foreign)
+          assert_not @signer.expired?(token: "#{signed}x")
+          assert_not @signer.expired?(token: nil)
         end
       end
 
       test "un jeton dont la charge est incomplète rend nil" do
         partial = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "offline_pack")
 
-        assert_nil @signer.verify(partial)
+        assert_nil @signer.verify(token: partial)
       end
     end
   end
