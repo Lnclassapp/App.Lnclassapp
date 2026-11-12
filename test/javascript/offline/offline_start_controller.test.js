@@ -39,21 +39,87 @@ test("en ligne : le paquet est rangé dans la base de la clé, puis la copie est
   await settle()
 
   assert.deepEqual((await store.getPack(KEY, "EX1")).token, "jeton")
-  assert.deepEqual(fetched.map((call) => call.url), [ "/exercises/EX1/offline_pack", "/exercises/EX1/offline_copy" ])
-  assert.equal(fetched[0].options.credentials, "same-origin")
-  assert.equal(fetched[1].options.headers.Accept, "text/html")
+  assert.deepEqual(fetched.map((call) => call.url), [ "/exercises/EX1/offline_copy", "/exercises/EX1/offline_pack" ])
+  assert.equal(fetched[1].options.credentials, "same-origin")
+  assert.equal(fetched[0].options.headers.Accept, "text/html")
   assert.equal(button.disabled, false)
   assert.equal(message.hidden, true)
 })
 
 test("en ligne, un refus du serveur (accès, limite) ne range rien et ne gêne pas le démarrage", async () => {
-  packResponse = { ok: false, json: async () => ({}) }
-  controller.connect()
-  await settle()
+  packResponse = { ok: false, status: 429, json: async () => ({}) }
+  const original = console.warn
+  console.warn = () => {}
+  try {
+    controller.connect()
+    await settle()
+  } finally { console.warn = original }
 
   assert.equal(await store.getPack(KEY, "EX1"), null)
-  assert.deepEqual(fetched.map((call) => call.url), [ "/exercises/EX1/offline_pack" ])
   assert.equal(button.disabled, false)
+})
+
+test("la page de la copie est demandée d'abord ; si elle ne répond pas ok, aucun paquet n'est rangé (console.warn), hors ligne le bouton est désactivé", async () => {
+  globalThis.fetch = async (url, options) => { fetched.push({ url, options }); return url.includes("pack") ? { ok: true, json: async () => PACK } : { ok: false, status: 500 } }
+  const warnings = []
+  const original = console.warn
+  console.warn = (...args) => warnings.push(args)
+  try {
+    controller.connect()
+    await settle()
+  } finally { console.warn = original }
+
+  assert.equal(fetched[0].url, "/exercises/EX1/offline_copy")
+  assert.equal(await store.getPack(KEY, "EX1"), null)
+  assert.equal(warnings.length, 1)
+  navigator.onLine = false
+  await listeners.offline()
+  assert.equal(button.disabled, true)
+  assert.equal(message.hidden, false)
+})
+
+for (const status of [ 402, 403, 404 ]) {
+  test(`refus ${status} du serveur : le paquet déjà rangé est supprimé, hors ligne le bouton est désactivé`, async () => {
+    await store.putPack(KEY, PACK)
+    packResponse = { ok: false, status, json: async () => ({}) }
+    const original = console.warn
+    console.warn = () => {}
+    try {
+      controller.connect()
+      await settle()
+    } finally { console.warn = original }
+
+    assert.equal(await store.getPack(KEY, "EX1"), null)
+    navigator.onLine = false
+    await listeners.offline()
+    assert.equal(button.disabled, true)
+  })
+}
+
+test("429 ou 5xx : le paquet déjà rangé est gardé (console.warn)", async () => {
+  await store.putPack(KEY, PACK)
+  packResponse = { ok: false, status: 503, json: async () => ({}) }
+  const warnings = []
+  const original = console.warn
+  console.warn = (...args) => warnings.push(args)
+  try {
+    controller.connect()
+    await settle()
+  } finally { console.warn = original }
+
+  assert.equal((await store.getPack(KEY, "EX1")).token, "jeton")
+  assert.equal(warnings.length, 1)
+})
+
+test("le clic attend la vérification en cours avant de décider", async () => {
+  await store.putPack(KEY, PACK)
+  navigator.onLine = false
+  controller.connect()
+  const going = controller.go({ preventDefault() {} })
+  assert.deepEqual(visits, [])
+  await going
+
+  assert.deepEqual(visits, [ "/exercises/EX1/offline_copy" ])
 })
 
 test("en ligne, un réseau qui échoue ou un stockage plein est dit en console, jamais en exception", async () => {
@@ -76,7 +142,7 @@ test("hors ligne, paquet rangé : le bouton reste actif et le clic mène à la c
   controller.connect()
   await settle()
   let prevented = false
-  controller.go({ preventDefault: () => { prevented = true } })
+  await controller.go({ preventDefault: () => { prevented = true } })
 
   assert.equal(button.disabled, false)
   assert.equal(message.hidden, true)
@@ -90,7 +156,7 @@ test("hors ligne, paquet absent : bouton désactivé (aria-disabled) et message 
   controller.connect()
   await settle()
   let prevented = false
-  controller.go({ preventDefault: () => { prevented = true } })
+  await controller.go({ preventDefault: () => { prevented = true } })
 
   assert.equal(button.disabled, true)
   assert.equal(button.attrs["aria-disabled"], "true")
@@ -126,7 +192,7 @@ test("sans Turbo, la copie s'ouvre par une navigation ordinaire", async () => {
   navigator.onLine = false
   controller.connect()
   await settle()
-  controller.go({ preventDefault() {} })
+  await controller.go({ preventDefault() {} })
 
   assert.deepEqual(visits, [ "/exercises/EX1/offline_copy" ])
 })

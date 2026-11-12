@@ -2,7 +2,9 @@
 // Rôle : en ligne, GET du paquet (même origine) rangé dans la base locale de la clé, puis la copie hors ligne est demandée une fois pour que le programme d'arrière-plan la garde ; hors ligne, paquet présent → visite de la copie, absent → bouton désactivé et message
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4) · UDR : hors-connexion §3.3 · contrat store.js gelé · sans JavaScript ou en ligne, le formulaire part tel quel
 import { Controller } from "@hotwired/stimulus"
-import { currentKey, getPack, putPack } from "../offline/store.js"
+import { currentKey, deletePack, getPack, putPack } from "../offline/store.js"
+
+const REFUSALS = [ 402, 403, 404 ]
 
 export default class extends Controller {
   static targets = [ "button", "unavailable" ]
@@ -20,7 +22,12 @@ export default class extends Controller {
     window.removeEventListener("offline", this.refresh)
   }
 
-  async refresh() {
+  refresh() {
+    this.refreshing = this.check()
+    return this.refreshing
+  }
+
+  async check() {
     if (navigator.onLine === false) {
       this.packed = await this.hasPack()
       this.available(this.packed)
@@ -32,10 +39,11 @@ export default class extends Controller {
   }
 
   // Hors ligne seulement : mène à la copie sans réseau, quand le paquet est là ; sinon rien ne part.
-  go(event) {
+  async go(event) {
     if (navigator.onLine !== false) return
 
     event.preventDefault()
+    await this.refreshing
     if (!this.packed) return
 
     if (globalThis.Turbo) globalThis.Turbo.visit(this.copyUrlValue)
@@ -52,18 +60,22 @@ export default class extends Controller {
     }
   }
 
-  // En ligne : le paquet (questions, corrigé, jeton) puis la copie hors ligne, que le programme d'arrière-plan garde au passage.
-  // Un refus (accès, limite, réseau) ne gêne pas le démarrage : l'exercice se fait en ligne comme avant.
+  // En ligne : d'abord la copie hors ligne (que le programme d'arrière-plan garde au passage), puis le paquet (questions, corrigé, jeton),
+  // rangé seulement si la copie est là : un paquet sans copie mènerait hors ligne à une page vide.
+  // Un refus d'accès (402, 403, 404) retire le paquet déjà rangé ; limite, panne ou réseau le gardent. Rien ne gêne le démarrage : l'exercice se fait en ligne.
   async keepPack() {
     try {
       const key = currentKey()
       if (!key) return
 
-      const response = await fetch(this.packUrlValue, { credentials: "same-origin", headers: { Accept: "application/json" } })
-      if (!response.ok) return
+      const copy = await fetch(this.copyUrlValue, { credentials: "same-origin", headers: { Accept: "text/html" } })
+      if (!copy.ok) return console.warn(`exercice hors ligne : copie non gardée (${copy.status})`)
 
-      await putPack(key, await response.json())
-      await fetch(this.copyUrlValue, { credentials: "same-origin", headers: { Accept: "text/html" } })
+      const response = await fetch(this.packUrlValue, { credentials: "same-origin", headers: { Accept: "application/json" } })
+      if (response.ok) return await putPack(key, await response.json())
+
+      if (REFUSALS.includes(response.status)) await deletePack(key, this.exerciseValue)
+      else console.warn(`exercice hors ligne : paquet non rangé (${response.status})`)
     } catch (error) {
       console.warn("exercice hors ligne : paquet non rangé", error)
     }

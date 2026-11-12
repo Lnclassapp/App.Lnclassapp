@@ -73,7 +73,9 @@
     <%# Collé en bas, au-dessus de la zone sûre (UDR-0087 §3.2). %>
     <div data-pausable class="sticky bottom-0 z-10 -mx-gutter mt-6 bg-paper px-gutter pt-4 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
       <p class="mb-3 text-sm text-mute"><%= t("offline.copy.footer") %></p>
-      <%= ui_button t("#{shown}.submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+      <%= ui_button t("#{shown}.submit"), type: :submit, variant: :brand, size: :lg, full: true, data: { offline_copy_target: "submitButton" } %>
+      <p id="offline-copy-result-failed" role="status" hidden data-offline-copy-target="resultFailed"
+         class="mt-3 rounded-card bg-warning-soft px-4 py-3 text-sm font-medium text-warning"><%= t("offline.copy.result_failed") %></p>
     </div>
 
     <%# Remplacent la feuille quand il y a lieu : la note (UDR §3.5) et la pause de « Recommencer » (3 copies d'affilée, ADR-0115). %>

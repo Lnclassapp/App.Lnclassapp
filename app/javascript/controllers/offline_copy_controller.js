@@ -61,7 +61,7 @@ export function resultRows(pack, graded) {
 }
 
 export default class extends Controller {
-  static targets = [ "counter", "question", "notSaved", "result", "paused" ]
+  static targets = [ "counter", "question", "notSaved", "result", "paused", "resultFailed", "submitButton" ]
   static values = { exercise: String, total: Number, counter: String, timeFormat: String }
 
   async connect() {
@@ -83,8 +83,25 @@ export default class extends Controller {
 
   async submit(event) {
     event.preventDefault()
+    if (this.storing) return
+
+    this.storing = true
+    if (this.hasSubmitButtonTarget) this.submitButtonTarget.disabled = true
     const stored = await this.store()
-    if (stored) this.showResult(stored.pack, stored.graded)
+    if (!stored) {
+      this.storing = false
+      if (this.hasSubmitButtonTarget) this.submitButtonTarget.disabled = false
+      return
+    }
+
+    try {
+      this.showResult(stored.pack, stored.graded)
+    } catch (error) {
+      // La copie est gardée : seule la note ne s'affiche pas.
+      console.error("copie hors ligne : note non affichée", error)
+      if (this.hasResultFailedTarget) this.resultFailedTarget.hidden = false
+      if (this.hasSubmitButtonTarget) this.submitButtonTarget.hidden = true
+    }
   }
 
   // Corrige et range la copie. → { pack, graded } ou null : UDR §3.4, la copie n'est pas rangée, l'élève le sait (message, jamais avalé)
