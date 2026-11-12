@@ -1,0 +1,3095 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transmission d'un message hormonal",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "A",
+      "material_name": "SVT",
+      "figures": [
+        {
+          "key": "trajet-hormonal",
+          "kind": "diagram",
+          "description": "Schéma fléché du trajet d'une hormone : la glande endocrine fabrique l'hormone et la déverse dans le sang ; le sang la transporte vers toutes les cellules ; les cellules cibles, qui possèdent le récepteur de l'hormone, réagissent, alors que les cellules sans récepteur ne réagissent pas.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "g",
+                "label": "Glande endocrine : fabrique l'hormone",
+                "category": 1
+              },
+              {
+                "id": "s",
+                "label": "Sang : transporte l'hormone",
+                "category": 2
+              },
+              {
+                "id": "c",
+                "label": "Cellule cible : possède le récepteur",
+                "category": 3
+              },
+              {
+                "id": "r",
+                "label": "Réponse de la cellule cible",
+                "category": 3
+              },
+              {
+                "id": "n",
+                "label": "Cellule sans récepteur : ne réagit pas",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "s",
+                "label": "déverse"
+              },
+              {
+                "from": "s",
+                "to": "c",
+                "label": "atteint"
+              },
+              {
+                "from": "c",
+                "to": "r"
+              },
+              {
+                "from": "s",
+                "to": "n",
+                "label": "atteint aussi"
+              }
+            ],
+            "legend": [
+              "Glande",
+              "Sang",
+              "Cellules"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "glycemie-chien",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la glycémie d'un chien, en grammes par litre : 1,0 pour un chien normal à jeun, 2,6 pour un chien dont le pancréas a été enlevé, 1,2 pour ce même chien après l'injection d'un extrait de pancréas.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              1.0,
+              2.6,
+              1.2
+            ],
+            "labels": [
+              "Chien normal",
+              "Sans pancréas",
+              "Sans pancréas + extrait"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "glycemie-repas",
+          "kind": "stat_chart",
+          "description": "Courbe de la glycémie d'une personne, en grammes par litre, après un repas riche en glucides : 1,0 à jeun, 1,5 après 30 minutes, 1,4 après 1 heure, 1,1 après 2 heures, 1,0 après 3 heures. La glycémie monte puis revient à sa valeur de départ.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1.0,
+              1.5,
+              1.4,
+              1.1,
+              1.0
+            ],
+            "labels": [
+              "À jeun",
+              "30 min",
+              "1 h",
+              "2 h",
+              "3 h"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La glande endocrine et l'hormone",
+          "remember": "Une **glande endocrine** fabrique une substance et la déverse **directement dans le sang**, sans canal vers l'extérieur. Cette substance est une **hormone** : une molécule chimique qui agit **à distance**, loin de la glande qui l'a fabriquée. Le **sang** transporte l'hormone dans tout l'organisme. Le message hormonal est donc **chimique** et il circule dans le sang, pas dans les neurones. Une **glande exocrine**, comme une glande salivaire, verse son produit dans un canal. Exemple : des cellules du pancréas fabriquent l'**insuline** et la déversent dans le sang ; elle fait baisser la **glycémie**, le taux de sucre (glucose) dans le sang. On met en évidence le rôle d'une glande par l'**ablation** (on l'enlève) puis par l'**injection** d'un extrait de cette glande.",
+          "method": [
+            "Repérer la glande et son mode de déversement : dans le sang (glande endocrine) ou dans un canal vers l'extérieur.",
+            "Identifier l'hormone : la molécule chimique fabriquée par la glande endocrine.",
+            "Suivre son trajet : glande, puis sang, puis organes éloignés.",
+            "Conclure à partir de l'expérience : si l'ablation de la glande supprime l'effet et si l'injection d'un extrait le rétablit, la glande agit par une hormone transportée par le sang."
+          ],
+          "example": {
+            "statement": "Chez un chien dont on enlève le pancréas, la glycémie monte ; une injection d'extrait de pancréas la fait baisser. Que peut-on en conclure sur le rôle du pancréas ?",
+            "steps": [
+              "Repérer : les cellules du pancréas concernées déversent leur produit directement dans le sang, ce sont des cellules endocrines.",
+              "Identifier : la substance fabriquée est une hormone, l'insuline.",
+              "Suivre : l'insuline passe de la glande dans le sang, qui la transporte jusqu'aux organes éloignés.",
+              "Conclure : l'ablation fait monter la glycémie et l'injection de l'extrait la fait baisser, donc le pancréas agit par une hormone transportée par le sang."
+            ]
+          },
+          "pitfall": "Ne pas confondre une glande endocrine et une glande qui verse son produit dans un canal. Contre-exemple : une glande salivaire verse la salive dans la bouche par un canal, ce n'est pas une glande endocrine ; une glande endocrine n'a pas de canal, son produit passe dans le sang. Ne confonds pas non plus l'hormone, qui circule dans le sang, avec un message nerveux, qui circule dans des neurones.",
+          "figure": "trajet-hormonal",
+          "exercise": [
+            {
+              "title": "Glande endocrine et hormone",
+              "statement": "Dans cet exercice, tu reconnais une glande endocrine et tu suis le trajet d'une hormone avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'une glande endocrine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mode de déversement : une glande endocrine verse son produit directement dans le sang, sans canal. Une glande qui verse dans un canal est exocrine. Une cellule nerveuse n'est pas une glande.",
+                  "answers": [
+                    {
+                      "content": "Une glande qui déverse son produit directement dans le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une glande qui verse son produit dans un canal vers l'extérieur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une cellule nerveuse qui produit un message électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un vaisseau qui transporte le sang",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les glandes salivaires versent la salive dans la bouche par un canal. Sont-elles des glandes endocrines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer le mode de déversement : la salive passe par un canal, pas dans le sang. Ce n'est donc pas une glande endocrine. Fabriquer une substance ne suffit pas : c'est la voie de déversement qui compte.",
+                  "answers": [
+                    {
+                      "content": "Non : leur produit passe par un canal et pas par le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : elles fabriquent une substance",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : elles sont dans le corps",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : elles ne fabriquent rien",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet d'une hormone dans l'organisme.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 2 — Identifier l'hormone fabriquée par la glande. Étape 3 — Suivre son trajet : glande, sang, organes éloignés. Étape 4 — Conclure : l'organe éloigné réagit, ce qui montre une action à distance.",
+                  "answers": [
+                    {
+                      "content": "La glande endocrine fabrique l'hormone"
+                    },
+                    {
+                      "content": "L'hormone est déversée dans le sang"
+                    },
+                    {
+                      "content": "Le sang transporte l'hormone vers des organes éloignés"
+                    },
+                    {
+                      "content": "Les cellules d'un organe éloigné réagissent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Chez un chien dont on enlève le pancréas, la glycémie augmente ; l'injection d'un extrait de pancréas la fait baisser. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Conclure à partir de l'expérience : l'ablation fait monter la glycémie et l'injection de l'extrait la fait baisser, donc le pancréas fabrique une substance qui agit sur elle. Dire que le pancréas est inutile contredit l'expérience.",
+                  "answers": [
+                    {
+                      "content": "Le pancréas fabrique une substance qui agit sur la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pancréas ne sert à rien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pancréas est un nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "La glycémie ne dépend d'aucun organe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une glande endocrine envoie son produit par un canal jusqu'à l'organe cible.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : une glande endocrine n'a pas de canal. Étape 3 — Son produit, l'hormone, passe dans le sang qui le transporte. L'affirmation est l'erreur du piège : elle est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Hormone, sang et glycémie : fixation",
+              "statement": "Dans cet exercice, tu retrouves le vocabulaire de la glande endocrine et de l'hormone dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer la glande endocrine : elle déverse dans le sang. Étape 2 — Identifier l'hormone : molécule chimique qui agit à distance. La glycémie est le taux de glucose du sang ; l'ablation consiste à enlever la glande.",
+                  "answers": [
+                    {
+                      "content": "Glande endocrine",
+                      "match": "Déverse son produit dans le sang"
+                    },
+                    {
+                      "content": "Hormone",
+                      "match": "Molécule chimique qui agit à distance"
+                    },
+                    {
+                      "content": "Glycémie",
+                      "match": "Taux de glucose dans le sang"
+                    },
+                    {
+                      "content": "Ablation",
+                      "match": "On enlève la glande étudiée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone est transportée dans tout l'organisme par le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Suivre le trajet : l'hormone passe de la glande dans le sang, qui la transporte dans tout l'organisme.",
+                  "answers": [
+                    {
+                      "content": "sang",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur l'insuline ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — Identifier l'hormone : l'insuline est fabriquée par des cellules du pancréas et fait baisser la glycémie. Étape 3 — Elle circule dans le sang, pas dans des neurones, et pas par un canal.",
+                  "answers": [
+                    {
+                      "content": "Elle est fabriquée par des cellules du pancréas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle fait baisser la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est un neurotransmetteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle circule dans les neurones",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est transportée par un canal vers la bouche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone agit ___ de la glande qui l'a fabriquée.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Suivre le trajet : l'hormone est emportée par le sang vers des organes éloignés de la glande. Elle agit donc à distance.",
+                  "answers": [
+                    {
+                      "content": "à distance",
+                      "correct": true
+                    },
+                    {
+                      "content": "uniquement à l'intérieur",
+                      "correct": false
+                    },
+                    {
+                      "content": "uniquement sur la glande elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "au contact direct",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après l'ablation du pancréas d'un chien, l'injection d'un extrait de cet organe fait baisser sa glycémie élevée.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'extrait de pancréas rétablit l'effet perdu à l'ablation, ce qui montre que le pancréas agit par une substance qu'il fabrique. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie d'un chien normal est de 1,0 g/L. Après l'ablation de son pancréas, elle atteint 2,6 g/L. De combien a-t-elle augmenté ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 4 — Conclure à partir de l'expérience : on compare avant et après l'ablation. On calcule 2,6 - 1,0 = 1,6 g/L d'augmentation, ce qui montre le rôle du pancréas.",
+                  "answers": [
+                    {
+                      "content": "1,6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                }
+              ],
+              "hint": "Retiens : glande endocrine = pas de canal, produit dans le sang. L'hormone est une molécule chimique qui agit à distance."
+            }
+          ]
+        },
+        {
+          "name": "La cellule cible et le récepteur",
+          "remember": "Une hormone circule dans le sang et atteint **toutes** les cellules, mais elle n'agit que sur certaines. Une **cellule cible** est une cellule qui possède le **récepteur** correspondant à cette hormone. Un **récepteur** est une structure de la cellule qui fixe une hormone précise, et seulement celle-là. Quand l'hormone se fixe sur le récepteur, la cellule cible réagit. Une cellule sans récepteur ne réagit pas. Un **organe cible** est un organe formé de cellules cibles. Une même hormone peut agir sur plusieurs types de cellules si elles ont le même récepteur. Exemple : l'insuline agit sur les cellules cibles du foie et des muscles.",
+          "method": [
+            "Identifier l'hormone présente dans le sang et rappeler qu'elle atteint toutes les cellules.",
+            "Chercher le récepteur correspondant à cette hormone sur chaque type de cellule.",
+            "Distinguer les cellules cibles (récepteur présent) des autres cellules (récepteur absent).",
+            "Conclure : seules les cellules cibles réagissent à l'hormone."
+          ],
+          "example": {
+            "statement": "Une hormone H circule dans le sang. Les cellules du foie ont le récepteur de H, les cellules de l'estomac n'en ont pas. Quelles cellules réagissent ?",
+            "steps": [
+              "Identifier : l'hormone H est dans le sang, donc elle atteint les cellules du foie comme celles de l'estomac.",
+              "Chercher : le récepteur de H est présent sur les cellules du foie, absent sur celles de l'estomac.",
+              "Distinguer : les cellules du foie sont des cellules cibles ; celles de l'estomac n'en sont pas.",
+              "Conclure : seules les cellules du foie réagissent à l'hormone H."
+            ]
+          },
+          "pitfall": "Ne pas croire que le sang livre l'hormone seulement à ses cellules cibles. Contre-exemple : une hormone H est injectée dans le sang d'un rat ; elle atteint les cellules de l'estomac comme celles du foie, mais seules les cellules du foie réagissent, car elles ont le récepteur de H. L'hormone va partout où va le sang ; c'est le récepteur qui décide de la réaction.",
+          "figure": "trajet-hormonal",
+          "exercise": [
+            {
+              "title": "Cellule cible et récepteur",
+              "statement": "Dans cet exercice, tu prévois quelles cellules réagissent à une hormone avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un récepteur d'hormone ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Chercher le récepteur : c'est une structure de la cellule qui fixe une hormone précise, et seulement celle-là. Ce n'est ni un vaisseau, ni une glande, ni un neurone.",
+                  "answers": [
+                    {
+                      "content": "Une structure de la cellule qui fixe une hormone précise",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un vaisseau qui transporte l'hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "La glande qui fabrique l'hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurone qui conduit l'hormone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone H est dans le sang. Les cellules A ont le récepteur de H, les cellules B n'en ont pas. Quelles cellules réagissent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : H atteint A et B. Étape 2 — Chercher le récepteur : A en a un, B non. Étape 3 — Distinguer : A est cellule cible. Étape 4 — Conclure : seules les cellules A réagissent.",
+                  "answers": [
+                    {
+                      "content": "Seulement les cellules A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement les cellules B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cellules A et B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes de l'action d'une hormone sur une cellule cible.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Identifier l'hormone dans le sang qui atteint toutes les cellules. Étape 2 — Chercher le récepteur. Étape 3 — Distinguer les cellules cibles. Étape 4 — Conclure : elles réagissent.",
+                  "answers": [
+                    {
+                      "content": "L'hormone est dans le sang"
+                    },
+                    {
+                      "content": "Elle atteint toutes les cellules"
+                    },
+                    {
+                      "content": "Elle se fixe sur les cellules qui ont le récepteur"
+                    },
+                    {
+                      "content": "Les cellules cibles réagissent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone H fait réagir les cellules du foie mais pas celles de la peau. Que peut-on en déduire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Distinguer : la réaction dépend du récepteur. Étape 4 — Conclure : le foie a le récepteur de H, la peau non. H atteint pourtant la peau puisque le sang y circule : c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Les cellules du foie ont le récepteur de H, celles de la peau n'en ont pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "H n'atteint pas la peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cellules de la peau sont mortes",
+                      "correct": false
+                    },
+                    {
+                      "content": "H est un neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone n'est transportée par le sang que jusqu'à ses cellules cibles.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'hormone circule dans tout l'organisme avec le sang. Étape 4 — Conclure : toutes les cellules la reçoivent, seules les cellules cibles réagissent. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Récepteurs et cellules cibles : fixation",
+              "statement": "Dans cet exercice, tu retrouves le rôle du récepteur et de la cellule cible dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque cellule à sa réaction face à une hormone H.",
+                  "question_type": "matching",
+                  "explanation": "Étape 2 — Chercher le récepteur de H sur chaque cellule. Étape 3 — Distinguer : seule la cellule avec le récepteur de H est une cellule cible et réagit. Un récepteur fixe une hormone précise.",
+                  "answers": [
+                    {
+                      "content": "Cellule avec le récepteur de H",
+                      "match": "Réagit à H"
+                    },
+                    {
+                      "content": "Cellule sans le récepteur de H",
+                      "match": "Ne réagit pas à H, qui passe sans se fixer"
+                    },
+                    {
+                      "content": "Cellule avec le récepteur d'une autre hormone",
+                      "match": "Ne réagit pas à H, mais peut réagir à l'autre hormone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Seules les cellules qui possèdent le ___ de l'hormone réagissent à cette hormone.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Chercher le récepteur : la cellule réagit si elle possède le récepteur de l'hormone. Étape 4 — Conclure : sans récepteur, elle ne réagit pas.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations exactes sur une cellule cible ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : l'hormone atteint toutes les cellules. Étape 2 — Chercher le récepteur. Étape 4 — Conclure : la cellule cible a le récepteur et réagit. Elle n'est pas seule à recevoir l'hormone et ne la fabrique pas.",
+                  "answers": [
+                    {
+                      "content": "Elle possède le récepteur de l'hormone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle réagit quand l'hormone se fixe",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est atteinte par l'hormone comme les autres cellules",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est la seule à recevoir l'hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fabrique l'hormone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une même hormone peut agir sur plusieurs types de cellules si elles possèdent ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 3 — Distinguer : ce n'est pas la forme de la cellule qui compte, mais la présence du récepteur de l'hormone. Deux types de cellules avec le même récepteur sont cibles de la même hormone.",
+                  "answers": [
+                    {
+                      "content": "le même récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "le même noyau",
+                      "correct": false
+                    },
+                    {
+                      "content": "la même forme",
+                      "correct": false
+                    },
+                    {
+                      "content": "la même couleur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cellules du foie et des muscles sont des cellules cibles de l'insuline.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Distinguer : l'insuline agit sur le foie et sur les muscles, qui possèdent son récepteur. Étape 4 — Conclure : ce sont des cellules cibles. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hormone H est injectée dans le sang. Pourquoi un seul type de cellules réagit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : H atteint toutes les cellules. Étape 2 — Chercher le récepteur : un seul type en possède. Étape 4 — Conclure : seul ce type réagit. L'idée d'une livraison ciblée est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Seul ce type de cellules possède le récepteur de H",
+                      "correct": true
+                    },
+                    {
+                      "content": "H n'atteint que ce type de cellules",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les autres cellules sont vides",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sang envoie H à une seule cellule",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "L'hormone va partout où va le sang. C'est le récepteur qui décide de la réaction."
+            }
+          ]
+        },
+        {
+          "name": "Message nerveux et message hormonal",
+          "remember": "Le **message nerveux** est un signal **électrique** qui circule dans les **neurones**, selon un trajet précis ; à la synapse, il est relayé par un neurotransmetteur. Il est **rapide** et son effet est **bref**. Le **message hormonal** est **chimique** : une hormone est transportée par le **sang** jusqu'aux cellules cibles. Il est plus **lent** et son effet est plus **durable**. Les deux messages agissent souvent **ensemble**. Exemple : après un repas, la glycémie monte, le pancréas libère de l'insuline, et la glycémie redescend vers 1 g/L environ : c'est une régulation par un message hormonal.",
+          "method": [
+            "Identifier la nature du message : électrique dans des neurones, ou chimique transporté par le sang.",
+            "Repérer son trajet : précis le long des nerfs, ou diffusé par le sang dans tout l'organisme.",
+            "Comparer la vitesse et la durée de l'effet : rapide et bref, ou plus lent et durable.",
+            "Conclure en nommant le message et en justifiant par son trajet."
+          ],
+          "example": {
+            "statement": "Comparer le message qui fait retirer la main d'une casserole brûlante et celui de l'insuline qui fait baisser la glycémie après un repas.",
+            "steps": [
+              "Identifier : le retrait de la main est un message électrique dans des neurones ; l'insuline est une hormone, donc un message chimique.",
+              "Repérer : le premier suit les neurones d'un arc réflexe ; le second est transporté par le sang jusqu'au foie et aux muscles.",
+              "Comparer : le retrait est très rapide et bref ; la baisse de la glycémie est plus lente et se prolonge.",
+              "Conclure : le retrait est un message nerveux, la baisse de la glycémie un message hormonal ; le trajet (neurones ou sang) les distingue."
+            ]
+          },
+          "pitfall": "Ne pas dire qu'un message est hormonal parce qu'il est chimique. Contre-exemple : à la synapse, le neurotransmetteur est une substance chimique, mais le message reste nerveux, car il circule dans des neurones. Le critère est le trajet : neurones pour le message nerveux, sang pour le message hormonal.",
+          "figure": "trajet-hormonal",
+          "exercise": [
+            {
+              "title": "Reconnaître un message nerveux ou hormonal",
+              "statement": "Dans cet exercice, tu reconnais la nature d'un message avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un message circule dans le sang, atteint de nombreux organes et agit lentement, de façon durable. De quel message s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la nature du message : il circule dans le sang, donc il est chimique. Étape 2 — Repérer le trajet : diffusé dans tout l'organisme. Étape 3 — Lent et durable : c'est un message hormonal.",
+                  "answers": [
+                    {
+                      "content": "Un message hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un réflexe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message électrique circule dans des neurones, selon un trajet précis, et son effet est très bref. De quel message s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier la nature du message : électrique, dans des neurones. Étape 2 — Repérer le trajet : précis, le long des neurones. Étape 3 — Rapide et bref : c'est un message nerveux.",
+                  "answers": [
+                    {
+                      "content": "Un message nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message hormonal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une glycémie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel message a l'effet le plus durable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Comparer la durée de l'effet : le message nerveux est rapide et bref, le message hormonal est plus lent et plus durable.",
+                  "answers": [
+                    {
+                      "content": "Le message hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux ont exactement la même durée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À une synapse, le neurotransmetteur est une substance chimique. Le message y est-il hormonal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Repérer le trajet : le neurotransmetteur est libéré entre deux neurones, pas dans le sang. Étape 4 — Conclure : le message est nerveux. Le critère est le trajet, pas la nature chimique : c'est le piège de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Non : il reste nerveux car il circule dans des neurones, pas dans le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : il est chimique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : il passe par une glande",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il disparaît dans la fente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message est hormonal dès qu'il est de nature chimique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : le neurotransmetteur est chimique mais le message reste nerveux. Étape 4 — Conclure : on reconnaît un message hormonal à son trajet par le sang. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Nerveux ou hormonal : fixation",
+              "statement": "Dans cet exercice, tu compares les deux messages dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à son caractère.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier la nature du message. Étape 2 — Repérer le trajet. Étape 3 — Comparer la durée : le message nerveux est bref, le message hormonal durable.",
+                  "answers": [
+                    {
+                      "content": "Message nerveux",
+                      "match": "Électrique dans des neurones, effet bref"
+                    },
+                    {
+                      "content": "Message hormonal",
+                      "match": "Transporté par le sang, effet durable"
+                    },
+                    {
+                      "content": "Synapse",
+                      "match": "Relais chimique entre deux neurones"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message hormonal est transporté par le ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Repérer le trajet du message hormonal : l'hormone est déversée dans le sang, qui la transporte vers les cellules cibles.",
+                  "answers": [
+                    {
+                      "content": "sang",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois caractères du message nerveux ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : électrique dans les neurones. Étape 2 — Trajet précis le long des nerfs. Étape 3 — Rapide. Le transport par le sang et l'effet durable sont des caractères du message hormonal.",
+                  "answers": [
+                    {
+                      "content": "Il est électrique dans les neurones",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il suit un trajet précis",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est transporté par le sang",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son effet est toujours très durable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message qui fait baisser la glycémie après un repas est un message ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'insuline est une hormone. Étape 2 — Elle circule dans le sang. Étape 4 — Conclure : c'est un message hormonal.",
+                  "answers": [
+                    {
+                      "content": "hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "réflexe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux types de messages peuvent agir ensemble dans l'organisme.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : l'organisme utilise souvent les deux messages à la fois, le nerveux pour la rapidité, l'hormonal pour la durée. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel message permet de retirer vite la main d'un objet brûlant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier le besoin : une réponse très rapide. Étape 3 — Comparer : seul le message nerveux est assez rapide. Le message hormonal est plus lent.",
+                  "answers": [
+                    {
+                      "content": "Un message nerveux, car il est rapide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message hormonal, car il est durable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un message hormonal, car il passe par le sang",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun message",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le critère décisif est le trajet : neurones pour le nerveux, sang pour l'hormonal."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "L'ablation du pancréas chez le chien",
+          "statement": "Un chercheur mesure la glycémie d'un chien, en g/L : chien normal à jeun, 1,0 ; chien dont le pancréas a été enlevé, 2,6 ; même chien après l'injection d'un extrait de pancréas, 1,2.",
+          "exercise_type": "fixation",
+          "figure": "glycemie-chien",
+          "questions": [
+            {
+              "content": "Un chien normal a une glycémie de 1,0 g/L, et 2,6 g/L après l'ablation de son pancréas. Que montre cette comparaison ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer les valeurs : 1,0 g/L avant, 2,6 g/L après l'ablation. 2. Constater que la glycémie augmente quand le pancréas est enlevé. 3. Conclure que cet organe intervient dans le maintien de la glycémie. Dire qu'il n'a aucun rôle contredit les mesures.",
+              "answers": [
+                {
+                  "content": "Le pancréas intervient dans le maintien de la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "Le pancréas n'a aucun rôle",
+                  "correct": false
+                },
+                {
+                  "content": "La glycémie ne dépend d'aucun organe",
+                  "correct": false
+                },
+                {
+                  "content": "Le pancréas est un nerf",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un chien sans pancréas a une glycémie de 2,6 g/L, qui passe à 1,2 g/L après l'injection d'un extrait de pancréas. Que montre ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer 2,6 g/L avant l'injection et 1,2 g/L après. 2. La glycémie baisse. 3. Conclure : l'extrait contient la substance, une hormone, dont l'absence faisait monter la glycémie.",
+              "answers": [
+                {
+                  "content": "L'extrait contient une substance qui fait baisser la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "L'extrait est un message nerveux",
+                  "correct": false
+                },
+                {
+                  "content": "L'extrait fait monter la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "L'injection n'a aucun effet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La glycémie d'un chien sans pancréas est de 2,6 g/L. Après l'injection d'un extrait de pancréas, elle est de 1,2 g/L. De combien a-t-elle baissé ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les valeurs : 2,6 puis 1,2. 2. Calculer la différence : 2,6 - 1,2 = 1,4 g/L. 3. Donner l'unité : g/L.",
+              "answers": [
+                {
+                  "content": "1,4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0.05,
+              "unit": "g/L"
+            },
+            {
+              "content": "Une hormone injectée dans le sang d'un chien agit seulement dans la glande qui la fabrique.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Rappeler : une hormone agit à distance. 2. Le sang la transporte vers ses cellules cibles, qui sont dans d'autres organes. 3. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'hormone fabriquée par des cellules du pancréas, qui fait baisser la glycémie, s'appelle l'___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Les cellules endocrines du pancréas déversent une hormone dans le sang. 2. Cette hormone fait baisser la glycémie. 3. Elle s'appelle l'insuline.",
+              "answers": [
+                {
+                  "content": "insuline",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Compare toujours le chien opéré au chien normal, puis le chien opéré avant et après l'injection."
+        },
+        {
+          "title": "Deux glandes, deux voies de déversement",
+          "statement": "On compare deux glandes. Une glande salivaire fabrique la salive et la verse dans la bouche par un canal. Des cellules du pancréas fabriquent l'insuline et la déversent directement dans le sang.",
+          "exercise_type": "fixation",
+          "figure": "trajet-hormonal",
+          "questions": [
+            {
+              "content": "Relie chaque élément à sa voie ou à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Repérer le mode de déversement. 2. La glande salivaire verse la salive par un canal : elle est exocrine. 3. Les cellules endocrines du pancréas versent l'insuline dans le sang, qui la transporte vers les organes éloignés.",
+              "answers": [
+                {
+                  "content": "Glande salivaire",
+                  "match": "Verse son produit par un canal, dans la bouche"
+                },
+                {
+                  "content": "Cellules endocrines du pancréas",
+                  "match": "Versent l'insuline directement dans le sang"
+                },
+                {
+                  "content": "Sang",
+                  "match": "Transporte l'hormone vers les organes éloignés"
+                }
+              ]
+            },
+            {
+              "content": "Une glande salivaire verse la salive par un canal ; des cellules du pancréas déversent l'insuline dans le sang. Laquelle est une glande endocrine ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Repérer : la glande endocrine déverse son produit dans le sang. 2. L'insuline passe dans le sang. 3. La salive passe par un canal : la glande salivaire n'est pas endocrine.",
+              "answers": [
+                {
+                  "content": "Les cellules du pancréas qui fabriquent l'insuline",
+                  "correct": true
+                },
+                {
+                  "content": "La glande salivaire",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des deux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet de l'insuline dans l'organisme.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. La glande fabrique l'hormone. 2. Elle la déverse dans le sang. 3. Le sang la transporte. 4. Les cellules cibles, qui ont le récepteur, réagissent.",
+              "answers": [
+                {
+                  "content": "Les cellules du pancréas fabriquent l'insuline"
+                },
+                {
+                  "content": "L'insuline est déversée dans le sang"
+                },
+                {
+                  "content": "Le sang transporte l'insuline"
+                },
+                {
+                  "content": "Les cellules cibles réagissent"
+                }
+              ]
+            },
+            {
+              "content": "L'insuline agit à distance des cellules du pancréas qui la fabriquent.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. L'insuline passe dans le sang. 2. Le sang la transporte jusqu'aux cellules cibles du foie et des muscles. 3. Elle agit donc à distance.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi l'insuline fabriquée dans le pancréas peut-elle atteindre le foie et les muscles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. L'hormone est déversée dans le sang. 2. Le sang circule dans tout l'organisme. 3. L'insuline atteint donc le foie et les muscles. Elle ne suit ni un canal, ni un neurone.",
+              "answers": [
+                {
+                  "content": "Parce que le sang la transporte dans tout l'organisme",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'un canal la conduit jusqu'au foie",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'un neurone la conduit jusqu'aux muscles",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le foie fabrique la même insuline",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Une glande endocrine n'a pas de canal : son produit passe dans le sang."
+        },
+        {
+          "title": "Les cellules cibles d'une hormone fictive H",
+          "statement": "On ajoute une hormone fictive H à trois cultures de cellules : les cellules du foie réagissent, les cellules des muscles réagissent, les cellules de la peau ne réagissent pas. On bloque ensuite les récepteurs de H sur les cellules du foie avec une substance : elles ne réagissent plus à H.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On ajoute une hormone H à des cellules de la peau, qui ne réagissent pas. Que peut-on en déduire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. H est ajoutée aux cellules : elle les atteint. 2. Elles ne réagissent pas. 3. Conclure : elles n'ont pas le récepteur de H. Dire que H ne les a pas atteintes contredit l'énoncé.",
+              "answers": [
+                {
+                  "content": "Les cellules de la peau n'ont pas le récepteur de H",
+                  "correct": true
+                },
+                {
+                  "content": "H ne les a pas atteintes",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules de la peau sont mortes",
+                  "correct": false
+                },
+                {
+                  "content": "H est un neurotransmetteur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les cellules du foie et des muscles réagissent à l'hormone H ; celles de la peau ne réagissent pas. Quelles cellules sont des cellules cibles de H ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier les cellules qui réagissent : foie et muscles. 2. Une cellule cible possède le récepteur et réagit. 3. Foie et muscles sont donc cibles ; la peau ne l'est pas.",
+              "answers": [
+                {
+                  "content": "Celles du foie et des muscles",
+                  "correct": true
+                },
+                {
+                  "content": "Seulement celles de la peau",
+                  "correct": false
+                },
+                {
+                  "content": "Seulement celles du foie",
+                  "correct": false
+                },
+                {
+                  "content": "Toutes les trois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les récepteurs de H des cellules du foie sont bloqués : elles ne réagissent plus à H. Que montre cette expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer avant et après le blocage. 2. H est toujours présente. 3. Conclure : sans récepteur utilisable, la cellule ne réagit pas, donc le récepteur est nécessaire.",
+              "answers": [
+                {
+                  "content": "Le récepteur est nécessaire à la réaction de la cellule",
+                  "correct": true
+                },
+                {
+                  "content": "Le foie ne fabrique plus H",
+                  "correct": false
+                },
+                {
+                  "content": "H se fixe sans récepteur",
+                  "correct": false
+                },
+                {
+                  "content": "H ne circule plus dans le sang",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux conclusions exactes de l'ensemble de ces expériences ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Foie et muscles réagissent : une hormone agit sur plusieurs types de cellules. 2. La peau ne réagit pas et le foie bloqué non plus : la réaction dépend du récepteur. 3. Les autres propositions contredisent les résultats.",
+              "answers": [
+                {
+                  "content": "Une même hormone peut agir sur plusieurs types de cellules",
+                  "correct": true
+                },
+                {
+                  "content": "La réaction d'une cellule dépend de son récepteur",
+                  "correct": true
+                },
+                {
+                  "content": "La peau fabrique l'hormone H",
+                  "correct": false
+                },
+                {
+                  "content": "H n'agit que sur le foie",
+                  "correct": false
+                },
+                {
+                  "content": "Le sang ne transporte pas H",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les cellules de la peau reçoivent l'hormone H dans la culture mais ne possèdent pas son récepteur.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. H est ajoutée à toutes les cultures. 2. Elle atteint donc les cellules de la peau. 3. Elles ne réagissent pas car elles n'ont pas le récepteur. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de l'action de l'hormone H sur les cellules du foie.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. L'hormone est présente. 2. Elle atteint les cellules. 3. Elle se fixe sur le récepteur. 4. La cellule cible réagit.",
+              "answers": [
+                {
+                  "content": "H est présente dans le milieu"
+                },
+                {
+                  "content": "H atteint les cellules du foie"
+                },
+                {
+                  "content": "H se fixe sur leurs récepteurs"
+                },
+                {
+                  "content": "Les cellules du foie réagissent"
+                }
+              ]
+            }
+          ],
+          "hint": "Distingue ce que l'hormone atteint de ce à quoi la cellule réagit."
+        },
+        {
+          "title": "La glycémie après un repas",
+          "statement": "Après un repas riche en glucides, on mesure la glycémie d'une personne, en g/L : à jeun, 1,0 ; après 30 minutes, 1,5 ; après 1 heure, 1,4 ; après 2 heures, 1,1 ; après 3 heures, 1,0. Le taux d'insuline dans son sang augmente pendant la première heure, puis diminue.",
+          "exercise_type": "evaluation",
+          "figure": "glycemie-repas",
+          "questions": [
+            {
+              "content": "Après un repas, la glycémie d'une personne passe de 1,0 g/L à jeun à 1,5 g/L après 30 minutes. De combien a-t-elle augmenté ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les deux valeurs : 1,0 et 1,5. 2. Calculer 1,5 - 1,0 = 0,5 g/L. 3. Donner l'unité.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0.05,
+              "unit": "g/L"
+            },
+            {
+              "content": "La glycémie d'une personne vaut 1,0 à jeun, 1,5 après 30 minutes, 1,4 après 1 heure, 1,1 après 2 heures, 1,0 après 3 heures (g/L). Comment évolue-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lire la courbe : 1,0 puis 1,5. 2. Elle redescend ensuite : 1,1, puis 1,0. 3. Conclure : elle monte puis retrouve sa valeur de départ.",
+              "answers": [
+                {
+                  "content": "Elle monte après le repas puis revient vers sa valeur de départ",
+                  "correct": true
+                },
+                {
+                  "content": "Elle baisse puis reste basse",
+                  "correct": false
+                },
+                {
+                  "content": "Elle reste constante",
+                  "correct": false
+                },
+                {
+                  "content": "Elle monte sans jamais redescendre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après un repas, la glycémie monte à 1,5 g/L puis redescend à 1,0 g/L pendant que l'insuline augmente dans le sang. Comment expliquer la baisse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Relier les deux variations : l'insuline augmente quand la glycémie monte. 2. L'insuline est une hormone qui fait baisser la glycémie. 3. Conclure : la baisse est due à l'insuline.",
+              "answers": [
+                {
+                  "content": "L'insuline, libérée par le pancréas, fait baisser la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "Un message nerveux élimine le glucose",
+                  "correct": false
+                },
+                {
+                  "content": "Le glucose disparaît tout seul",
+                  "correct": false
+                },
+                {
+                  "content": "Le pancréas absorbe tout le glucose du repas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'insuline fait baisser la glycémie après un repas. Quelles sont les deux caractéristiques de ce message ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Identifier la nature du message : l'insuline est une hormone, donc chimique. 2. Repérer son trajet : le sang. 3. Les propositions électrique, neurones ou très bref décrivent un message nerveux.",
+              "answers": [
+                {
+                  "content": "Il est chimique",
+                  "correct": true
+                },
+                {
+                  "content": "Il est transporté par le sang",
+                  "correct": true
+                },
+                {
+                  "content": "Il circule dans les neurones",
+                  "correct": false
+                },
+                {
+                  "content": "Il est électrique",
+                  "correct": false
+                },
+                {
+                  "content": "Il est limité à une fraction de seconde",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La glycémie met environ 3 heures à retrouver sa valeur de départ (1,0 g/L) après un repas. Que montre cette durée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Comparer la durée : plusieurs heures. 2. Un message nerveux est rapide et bref. 3. Un message hormonal est plus lent et durable : la durée observée est celle d'un message hormonal.",
+              "answers": [
+                {
+                  "content": "L'effet du message hormonal est plus lent et plus durable que celui d'un message nerveux",
+                  "correct": true
+                },
+                {
+                  "content": "Le message hormonal est très bref",
+                  "correct": false
+                },
+                {
+                  "content": "Le message est nerveux",
+                  "correct": false
+                },
+                {
+                  "content": "L'insuline agit en une fraction de seconde",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La régulation de la glycémie après un repas est assurée par un message nerveux très rapide.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. La glycémie met plusieurs heures à se rétablir. 2. Le message est une hormone, l'insuline, transportée par le sang. 3. C'est donc un message hormonal. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Lis la courbe valeur par valeur, puis relie la montée et la descente de la glycémie à l'insuline."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base du message hormonal",
+          "notions": "Glande endocrine, hormone et sang, glycémie, cellule cible et récepteur, comparaison des messages nerveux et hormonal.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma fléché montre une glande endocrine qui fabrique une hormone, la déverse dans le sang, et le sang qui l'amène à des cellules.",
+              "exercise_type": "evaluation",
+              "figure": "trajet-hormonal",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'une hormone ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. L'hormone est fabriquée par une glande endocrine. 2. C'est une molécule chimique transportée par le sang. 3. Elle agit à distance.",
+                  "answers": [
+                    {
+                      "content": "Une molécule chimique qui agit à distance de la glande qui l'a fabriquée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un signal électrique qui circule dans un neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un vaisseau sanguin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un canal de la glande",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet d'une hormone.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : fabrication, déversement dans le sang, transport, réaction des cellules cibles.",
+                  "answers": [
+                    {
+                      "content": "La glande endocrine fabrique l'hormone"
+                    },
+                    {
+                      "content": "L'hormone passe dans le sang"
+                    },
+                    {
+                      "content": "Le sang la transporte"
+                    },
+                    {
+                      "content": "Les cellules cibles réagissent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la glande endocrine déverse dans le sang, l'hormone est la molécule, le sang la transporte.",
+                  "answers": [
+                    {
+                      "content": "Glande endocrine",
+                      "match": "Déverse son produit dans le sang"
+                    },
+                    {
+                      "content": "Hormone",
+                      "match": "Molécule chimique qui agit à distance"
+                    },
+                    {
+                      "content": "Sang",
+                      "match": "Transporte l'hormone"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une glande qui déverse son produit directement dans le sang est une glande ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : sans canal vers l'extérieur, une glande qui déverse dans le sang est endocrine.",
+                  "answers": [
+                    {
+                      "content": "endocrine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une glande endocrine possède un canal qui conduit son produit jusqu'à l'organe cible.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : une glande endocrine n'a pas de canal ; c'est le sang qui transporte l'hormone. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Glande, puis sang, puis cellules."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La glycémie est le taux de glucose dans le sang. Chez une personne en bonne santé, elle est d'environ 1 g/L.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'appelle-t-on glycémie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la glycémie est le taux de glucose, c'est-à-dire de sucre, dans le sang.",
+                  "answers": [
+                    {
+                      "content": "Le taux de glucose dans le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de globules du sang",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse du sang",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une hormone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie d'une personne passe de 1,0 g/L à 1,4 g/L après un repas. De combien a-t-elle augmenté ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Relever 1,0 et 1,4. 2. Calculer 1,4 - 1,0 = 0,4 g/L.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                },
+                {
+                  "content": "L'insuline est une hormone qui fait baisser la glycémie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'insuline, fabriquée par des cellules du pancréas, est déversée dans le sang et fait baisser la glycémie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'insuline est fabriquée par des cellules du ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : des cellules du pancréas fabriquent l'insuline et la déversent dans le sang.",
+                  "answers": [
+                    {
+                      "content": "pancréas",
+                      "correct": true
+                    },
+                    {
+                      "content": "foie",
+                      "correct": false
+                    },
+                    {
+                      "content": "cerveau",
+                      "correct": false
+                    },
+                    {
+                      "content": "cœur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur l'insuline ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : l'insuline est une hormone transportée par le sang et elle fait baisser la glycémie.",
+                  "answers": [
+                    {
+                      "content": "C'est une hormone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est transportée par le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un neurotransmetteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle circule dans les neurones",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle fait monter la glycémie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une hormone H est présente dans le sang. Les cellules A possèdent son récepteur, les cellules B n'en possèdent pas.",
+              "exercise_type": "evaluation",
+              "figure": "trajet-hormonal",
+              "questions": [
+                {
+                  "content": "Une hormone H circule dans le sang. Les cellules A ont son récepteur, les cellules B non. Quelles cellules sont des cellules cibles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. H atteint A et B. 2. Seules les cellules A ont le récepteur : ce sont les cellules cibles.",
+                  "answers": [
+                    {
+                      "content": "Les cellules A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les cellules B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les cellules A et B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hormone H n'atteint que les cellules qui possèdent son récepteur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : H est dans le sang, qui circule partout : elle atteint toutes les cellules. Seules les cellules cibles réagissent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une structure de la cellule qui fixe une hormone précise s'appelle un ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la structure qui fixe une hormone précise est le récepteur.",
+                  "answers": [
+                    {
+                      "content": "récepteur",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque cellule à sa réaction face à l'hormone H.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : sans récepteur utilisable, la cellule ne réagit pas à H.",
+                  "answers": [
+                    {
+                      "content": "Cellule avec le récepteur de H",
+                      "match": "Réagit à H"
+                    },
+                    {
+                      "content": "Cellule sans le récepteur de H",
+                      "match": "Ne réagit pas à H"
+                    },
+                    {
+                      "content": "Cellule dont le récepteur de H est bloqué",
+                      "match": "Ne réagit plus à H"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une même hormone peut-elle agir sur plusieurs types de cellules ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la réaction dépend uniquement de la présence du récepteur.",
+                  "answers": [
+                    {
+                      "content": "Oui, si elles ont le même récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, même sans récepteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement dans le foie",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On compare deux messages : un message nerveux et un message hormonal.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à son caractère.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : nature et trajet du message, puis vitesse et durée de l'effet.",
+                  "answers": [
+                    {
+                      "content": "Message nerveux",
+                      "match": "Électrique dans des neurones, effet bref"
+                    },
+                    {
+                      "content": "Message hormonal",
+                      "match": "Transporté par le sang, effet durable"
+                    },
+                    {
+                      "content": "Synapse",
+                      "match": "Relais chimique entre deux neurones"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel message est transporté par le sang ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le message hormonal est une hormone transportée par le sang.",
+                  "answers": [
+                    {
+                      "content": "Le message hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois caractères du message hormonal ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : le message hormonal est chimique, transporté par le sang, plus lent et plus durable.",
+                  "answers": [
+                    {
+                      "content": "Chimique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Transporté par le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Effet plus durable",
+                      "correct": true
+                    },
+                    {
+                      "content": "Électrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Très rapide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message qui commande un réflexe est un message ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un réflexe suit des neurones, rapide et bref : message nerveux.",
+                  "answers": [
+                    {
+                      "content": "nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "hormonal",
+                      "correct": false
+                    },
+                    {
+                      "content": "sanguin",
+                      "correct": false
+                    },
+                    {
+                      "content": "chimique seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les deux types de messages peuvent agir ensemble dans l'organisme.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'organisme utilise souvent les deux messages à la fois.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Neurones : message nerveux. Sang : message hormonal."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les hormones dans la vie courante",
+          "notions": "Glycémie après un repas, peur et adrénaline, diabète et insuline, glandes salivaires et glande endocrine.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Awa mange du riz et de la sauce à midi. Sa glycémie, en g/L, est de 1,0 à jeun, 1,5 après 30 minutes, 1,4 après 1 heure, 1,1 après 2 heures et 1,0 après 3 heures.",
+              "exercise_type": "evaluation",
+              "figure": "glycemie-repas",
+              "questions": [
+                {
+                  "content": "Awa a mangé du riz. Sa glycémie passe de 1,0 g/L à jeun à 1,5 g/L après 30 minutes. Que s'est-il passé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : en lisant les valeurs, 1,5 est supérieure à 1,0 : la glycémie a augmenté après le repas.",
+                  "answers": [
+                    {
+                      "content": "La glycémie a augmenté après le repas",
+                      "correct": true
+                    },
+                    {
+                      "content": "La glycémie a baissé",
+                      "correct": false
+                    },
+                    {
+                      "content": "La glycémie est restée constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Awa a perdu du sang",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après un repas, la glycémie d'Awa passe de 1,5 g/L (30 min) à 1,1 g/L (2 h). De combien a-t-elle diminué ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 1. Relever 1,5 et 1,1. 2. Calculer 1,5 - 1,1 = 0,4 g/L.",
+                  "answers": [
+                    {
+                      "content": "0,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                },
+                {
+                  "content": "La glycémie d'Awa redescend vers 1,0 g/L trois heures après le repas. Quelle hormone est libérée par le pancréas pour cela ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le pancréas libère l'insuline, qui fait baisser la glycémie.",
+                  "answers": [
+                    {
+                      "content": "L'insuline",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'adrénaline",
+                      "correct": false
+                    },
+                    {
+                      "content": "La salive",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La baisse de la glycémie d'Awa est due à une hormone transportée par le sang.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'insuline est une hormone déversée dans le sang, qui la transporte jusqu'aux cellules cibles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie d'Awa revient à sa valeur de départ de ___ g/L trois heures après le repas.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : sur la courbe, la valeur à 3 heures est de 1,0 g/L, comme à jeun.",
+                  "answers": [
+                    {
+                      "content": "1,0",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Lis les valeurs une à une."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Un élève est surpris par un chien. Son cœur bat vite. Les glandes surrénales libèrent dans le sang une hormone, l'adrénaline, qui accélère le rythme du cœur. Son effet se prolonge après que le chien est parti.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un élève surpris par un chien a un cœur qui bat vite à cause de l'adrénaline. Cette hormone est libérée dans :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : les glandes surrénales sont endocrines : elles déversent l'adrénaline dans le sang.",
+                  "answers": [
+                    {
+                      "content": "Le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un canal vers la bouche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le noyau d'une cellule",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'adrénaline agit à distance des glandes surrénales qui la fabriquent.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le sang la transporte jusqu'au cœur, éloigné des glandes. Elle agit donc à distance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'adrénaline accélère le rythme du cœur d'un élève et son effet se prolonge après la frayeur. Cet effet prolongé est caractéristique d'un message :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'effet durable est une caractéristique du message hormonal.",
+                  "answers": [
+                    {
+                      "content": "Hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Réflexe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Électrique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément de la situation à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la glande fabrique, l'hormone agit, le cœur est l'organe cible.",
+                  "answers": [
+                    {
+                      "content": "Glandes surrénales",
+                      "match": "Fabriquent et déversent l'adrénaline dans le sang"
+                    },
+                    {
+                      "content": "Adrénaline",
+                      "match": "Hormone qui accélère le rythme du cœur"
+                    },
+                    {
+                      "content": "Cœur",
+                      "match": "Organe cible"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hormone libérée lors d'une frayeur, qui accélère le cœur, s'appelle l'___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'adrénaline est libérée par les glandes surrénales.",
+                  "answers": [
+                    {
+                      "content": "adrénaline",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un patient fictif a une glycémie élevée, même à jeun : 2,2 g/L. Son pancréas fabrique trop peu d'insuline. Un médecin lui prescrit des injections d'insuline.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La glycémie à jeun d'un patient fictif est de 2,2 g/L alors que sa valeur normale est d'environ 1 g/L. Son pancréas fabrique trop peu d'insuline. Quel est le lien ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'insuline fait baisser la glycémie. Si elle manque, la glycémie reste élevée.",
+                  "answers": [
+                    {
+                      "content": "Sans assez d'insuline, la glycémie reste élevée",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'insuline fait monter la glycémie",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'insuline n'a aucun effet sur la glycémie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pancréas fabrique de la salive",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les injections d'insuline peuvent agir parce que l'insuline est une hormone transportée par le sang.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : injectée dans l'organisme, l'insuline est transportée par le sang jusqu'aux cellules cibles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie à jeun d'un patient est de 2,2 g/L, alors que la valeur normale est de 1,0 g/L environ. De combien dépasse-t-elle la valeur normale ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2,2 - 1,0 = 1,2 g/L.",
+                  "answers": [
+                    {
+                      "content": "1,2",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                },
+                {
+                  "content": "Une injection d'insuline fait baisser la glycémie d'un patient fictif de 2,2 g/L à 1,2 g/L. Cette expérience est comparable à celle du chien :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : dans les deux cas, apporter l'hormone qui manque fait baisser la glycémie.",
+                  "answers": [
+                    {
+                      "content": "Sans pancréas puis injecté d'extrait de pancréas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dont on a détruit la moelle épinière",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dont on a sectionné un nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Qui retire sa patte",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur ce patient fictif ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : les données de l'énoncé indiquent une glycémie élevée et un manque d'insuline.",
+                  "answers": [
+                    {
+                      "content": "Sa glycémie à jeun est supérieure à la valeur normale",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son pancréas fabrique trop peu d'insuline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son pancréas fabrique trop d'insuline",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa glycémie est inférieure à la normale",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son cerveau fabrique l'insuline",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "À l'heure du goûter, Koffi mange une banane. Ses glandes salivaires versent de la salive dans sa bouche par un canal. Les cellules endocrines de son pancréas déversent de l'insuline dans son sang.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Lors d'un goûter, des glandes salivaires versent la salive par un canal. Laquelle de ces glandes est endocrine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une glande endocrine déverse dans le sang, sans canal.",
+                  "answers": [
+                    {
+                      "content": "Les cellules du pancréas qui déversent l'insuline dans le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les glandes salivaires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La salive est une hormone.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la salive est versée par un canal dans la bouche. Une hormone passe dans le sang.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à sa voie ou à son rôle.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la salive passe par un canal ; l'insuline passe dans le sang, qui la transporte.",
+                  "answers": [
+                    {
+                      "content": "Salive",
+                      "match": "Versée par un canal dans la bouche"
+                    },
+                    {
+                      "content": "Insuline",
+                      "match": "Déversée directement dans le sang"
+                    },
+                    {
+                      "content": "Sang",
+                      "match": "Transporte l'insuline"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une glande qui verse son produit dans un canal n'est pas une glande ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : une glande endocrine déverse son produit dans le sang, sans canal.",
+                  "answers": [
+                    {
+                      "content": "endocrine",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'insuline déversée dans le sang de Koffi agit sur ses cellules ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : l'insuline agit sur les cellules cibles qui possèdent son récepteur.",
+                  "answers": [
+                    {
+                      "content": "cibles",
+                      "correct": true
+                    },
+                    {
+                      "content": "mortes",
+                      "correct": false
+                    },
+                    {
+                      "content": "salivaires uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "nerveuses uniquement",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier à partir d'expériences",
+          "notions": "Ablation de glande et injection d'extrait, transfert de sang, cellules cibles et récepteurs, comparaison de deux messages.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un chercheur mesure la glycémie d'un chien (g/L) : chien normal, 1,0 ; chien dont le pancréas est enlevé, 2,6 ; même chien après injection d'un extrait de pancréas, 1,2.",
+              "exercise_type": "evaluation",
+              "figure": "glycemie-chien",
+              "questions": [
+                {
+                  "content": "Un chien sans pancréas a une glycémie de 2,6 g/L au lieu de 1,0 g/L. Que montre l'ablation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'ablation d'un organe qui entraîne un changement montre que cet organe y joue un rôle.",
+                  "answers": [
+                    {
+                      "content": "Le pancréas est nécessaire au maintien de la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pancréas n'a aucun rôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pancréas fait monter la glycémie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sang ne transporte plus le glucose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'injection d'un extrait de pancréas fait passer la glycémie d'un chien de 2,6 g/L à 1,2 g/L. Que montre ce résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'effet de l'ablation est corrigé par l'extrait : il contient la substance manquante.",
+                  "answers": [
+                    {
+                      "content": "L'extrait contient la substance dont l'absence faisait monter la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'extrait est un message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'injection a détruit le pancréas",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'extrait est du glucose",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si l'on injectait l'extrait à un chien normal de glycémie 1,0 g/L, on s'attendrait à une hausse de sa glycémie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'extrait contient l'hormone qui fait baisser la glycémie ; on s'attendrait à une baisse, pas à une hausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie d'un chien est de 2,6 g/L sans pancréas et de 1,2 g/L après injection. Quelle est la baisse ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2,6 - 1,2 = 1,4 g/L.",
+                  "answers": [
+                    {
+                      "content": "1,4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                },
+                {
+                  "content": "L'extrait de pancréas injecté dans le sang du chien contient l'hormone appelée ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : l'hormone du pancréas qui fait baisser la glycémie est l'insuline.",
+                  "answers": [
+                    {
+                      "content": "insuline",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Compare toujours avec le chien normal."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On prélève du sang d'un chien normal et on l'injecte à un chien sans pancréas : sa glycémie passe de 2,6 g/L à 1,5 g/L. On injecte à ce chien du sang d'un autre chien sans pancréas : sa glycémie reste à 2,6 g/L.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Du sang de chien normal injecté à un chien sans pancréas fait passer sa glycémie de 2,6 g/L à 1,5 g/L. Que contient ce sang ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le sang d'un chien normal corrige la glycémie, il transporte donc une substance issue du pancréas.",
+                  "answers": [
+                    {
+                      "content": "Une substance qui fait baisser la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une substance qui la fait monter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement de l'eau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Du sang d'un chien sans pancréas, injecté à un autre chien sans pancréas, laisse sa glycémie à 2,6 g/L. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : ce sang vient d'un chien sans pancréas, qui ne fabrique pas l'hormone.",
+                  "answers": [
+                    {
+                      "content": "Ce sang ne contient pas l'hormone du pancréas",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sang n'agit jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sang est trop chaud",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux chiens sont morts",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ces expériences montrent que l'hormone du pancréas est transportée par le sang.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le sang d'un chien normal suffit à corriger la glycémie d'un autre chien : il transporte l'hormone.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque injection à son résultat sur la glycémie d'un chien sans pancréas.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : seuls le sang d'un chien normal et l'extrait de pancréas contiennent l'hormone.",
+                  "answers": [
+                    {
+                      "content": "Sang de chien normal",
+                      "match": "La glycémie baisse : le sang transporte l'hormone"
+                    },
+                    {
+                      "content": "Sang de chien sans pancréas",
+                      "match": "La glycémie reste élevée"
+                    },
+                    {
+                      "content": "Extrait de pancréas",
+                      "match": "La glycémie baisse : l'hormone est injectée"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions exactes de ces expériences ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : un sang prélevé ailleurs suffit à corriger la glycémie : l'hormone circule dans le sang et agit à distance.",
+                  "answers": [
+                    {
+                      "content": "Le sang transporte l'hormone du pancréas",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'hormone agit à distance de la glande",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pancréas agit par un canal vers le foie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le message est nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'hormone agit seulement dans le pancréas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Quel sang contient l'hormone ?"
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une hormone fictive H est ajoutée à des cellules du foie, des muscles et de la peau. Les cellules du foie et des muscles réagissent. Les cellules de la peau ne réagissent pas. Après blocage de leurs récepteurs de H, les cellules du foie ne réagissent plus.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une hormone H est ajoutée à des cellules de la peau qui ne réagissent pas. Quelle est la cause la plus probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : sans récepteur, pas de réaction, même si l'hormone est présente.",
+                  "answers": [
+                    {
+                      "content": "Elles n'ont pas le récepteur de H",
+                      "correct": true
+                    },
+                    {
+                      "content": "H ne les atteint pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles fabriquent H",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont des neurones",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Des cellules du foie, dont les récepteurs de H sont bloqués, ne réagissent plus à H. Que montre ce résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : H est toujours présente mais elle ne peut plus se fixer.",
+                  "answers": [
+                    {
+                      "content": "La réaction exige un récepteur utilisable",
+                      "correct": true
+                    },
+                    {
+                      "content": "H n'est plus produite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le foie est détruit",
+                      "correct": false
+                    },
+                    {
+                      "content": "H est devenue un message nerveux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cellules du foie et des muscles sont des cellules cibles de l'hormone H.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : elles réagissent à H, donc elles possèdent son récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations exactes à propos de H ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : H est ajoutée à toutes les cultures et ne fait réagir que le foie et les muscles.",
+                  "answers": [
+                    {
+                      "content": "Elle atteint les trois types de cellules",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle agit sur le foie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle agit sur les muscles",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle agit sur la peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fabriquée par les muscles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cellules qui réagissent à une hormone sont des cellules ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : une cellule qui possède le récepteur et réagit est une cellule cible.",
+                  "answers": [
+                    {
+                      "content": "cibles",
+                      "correct": true
+                    },
+                    {
+                      "content": "cible",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "La réaction dépend du récepteur, pas du passage de l'hormone."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Deux messages sont observés. Le message A produit son effet en une fraction de seconde, qui dure moins d'une seconde, le long de neurones. Le message B produit son effet après plusieurs minutes, qui dure plusieurs heures, et il est transporté par le sang.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Un message produit son effet en une fraction de seconde, le long de neurones. De quel message s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : trajet par les neurones, rapide et bref : message nerveux.",
+                  "answers": [
+                    {
+                      "content": "Un message nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message hormonal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une glycémie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message transporté par le sang produit un effet après plusieurs minutes, durant plusieurs heures. De quel message s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : trajet par le sang, plus lent et durable : message hormonal.",
+                  "answers": [
+                    {
+                      "content": "Un message hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un réflexe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message A est plus rapide que le message B.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : A agit en une fraction de seconde, B après plusieurs minutes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation au message correspondant.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : le retrait est un réflexe nerveux ; la baisse de glycémie et l'effet prolongé de l'adrénaline sont hormonaux.",
+                  "answers": [
+                    {
+                      "content": "Retirer la main d'une casserole brûlante",
+                      "match": "Message nerveux"
+                    },
+                    {
+                      "content": "Faire baisser la glycémie après un repas",
+                      "match": "Message hormonal : l'insuline"
+                    },
+                    {
+                      "content": "Accélérer le cœur lors d'une frayeur, effet qui dure",
+                      "match": "Message hormonal : l'adrénaline"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message B est transporté par ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un message transporté par le sang est hormonal.",
+                  "answers": [
+                    {
+                      "content": "le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "les neurones",
+                      "correct": false
+                    },
+                    {
+                      "content": "un canal",
+                      "correct": false
+                    },
+                    {
+                      "content": "la gaine de myéline",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Neurones ou sang ?"
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan du message hormonal",
+          "notions": "Toutes les notions : glande endocrine et hormone, cellule cible et récepteur, comparaison des messages, glycémie et insuline.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Des cellules du pancréas déversent l'insuline dans le sang. La glycémie d'un chien, en g/L : normal 1,0 ; sans pancréas 2,6 ; sans pancréas après extrait 1,2.",
+              "exercise_type": "evaluation",
+              "figure": "glycemie-chien",
+              "questions": [
+                {
+                  "content": "Des cellules du pancréas déversent l'insuline dans le sang. Ces cellules forment :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : elles déversent leur produit dans le sang.",
+                  "answers": [
+                    {
+                      "content": "Une glande endocrine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une glande exocrine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un nerf",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurone",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chien sans pancréas a une glycémie de 2,6 g/L, qui passe à 1,2 g/L avec un extrait de pancréas. Que conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'ablation augmente la glycémie et l'extrait la fait baisser.",
+                  "answers": [
+                    {
+                      "content": "Le pancréas agit par une substance qui fait baisser la glycémie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pancréas fait monter la glycémie",
+                      "correct": false
+                    },
+                    {
+                      "content": "La glycémie ne dépend d'aucun organe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le pancréas est un muscle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet de l'insuline.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : fabrication, déversement, transport, réaction.",
+                  "answers": [
+                    {
+                      "content": "Les cellules du pancréas fabriquent l'insuline"
+                    },
+                    {
+                      "content": "Elle est déversée dans le sang"
+                    },
+                    {
+                      "content": "Le sang la transporte"
+                    },
+                    {
+                      "content": "Les cellules cibles réagissent"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chien sans pancréas a une glycémie de 2,6 g/L, contre 1,0 g/L pour un chien normal. Quelle est la différence ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2,6 - 1,0 = 1,6 g/L.",
+                  "answers": [
+                    {
+                      "content": "1,6",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0.05,
+                  "unit": "g/L"
+                },
+                {
+                  "content": "L'insuline est un neurotransmetteur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'insuline est une hormone transportée par le sang, alors qu'un neurotransmetteur est libéré dans la fente d'une synapse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une hormone fictive H circule dans le sang d'un animal. Les cellules du foie ont son récepteur, celles de la peau non.",
+              "exercise_type": "evaluation",
+              "figure": "trajet-hormonal",
+              "questions": [
+                {
+                  "content": "Une hormone H circule dans le sang d'un animal. Les cellules du foie ont son récepteur, celles de la peau non. Quelles cellules réagissent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : seules les cellules cibles, qui ont le récepteur, réagissent.",
+                  "answers": [
+                    {
+                      "content": "Celles du foie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Celles de la peau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'hormone H n'est pas transportée jusqu'à la peau.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le sang circule partout : H atteint la peau, qui ne réagit pas faute de récepteur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les cellules du foie sont des cellules ___ de l'hormone H.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : elles possèdent le récepteur et réagissent.",
+                  "answers": [
+                    {
+                      "content": "cibles",
+                      "correct": true
+                    },
+                    {
+                      "content": "cible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le foie a le récepteur et réagit ; la réaction dépend du récepteur.",
+                  "answers": [
+                    {
+                      "content": "Les cellules du foie ont le récepteur de H",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction dépend du récepteur",
+                      "correct": true
+                    },
+                    {
+                      "content": "La peau est la cible de H",
+                      "correct": false
+                    },
+                    {
+                      "content": "H n'atteint que le foie",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sang ne transporte pas H",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la cellule cible a le récepteur, le récepteur fixe l'hormone, l'hormone est transportée par le sang.",
+                  "answers": [
+                    {
+                      "content": "Cellule cible",
+                      "match": "Possède le récepteur de l'hormone"
+                    },
+                    {
+                      "content": "Récepteur",
+                      "match": "Structure qui fixe une hormone précise"
+                    },
+                    {
+                      "content": "Hormone",
+                      "match": "Molécule chimique transportée par le sang"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Un élève retire sa main d'une casserole brûlante, puis mange et voit sa glycémie monter puis redescendre : 1,0 ; 1,5 ; 1,4 ; 1,1 ; 1,0 g/L.",
+              "exercise_type": "evaluation",
+              "figure": "glycemie-repas",
+              "questions": [
+                {
+                  "content": "Un élève retire sa main d'une casserole brûlante. De quel message s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : un réflexe est un message nerveux, rapide et bref.",
+                  "answers": [
+                    {
+                      "content": "Un message nerveux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message hormonal",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une hormone",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une glycémie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La glycémie d'un élève, après un repas, vaut 1,0 ; 1,5 ; 1,4 ; 1,1 ; 1,0 g/L en trois heures. Quel message explique son retour à 1,0 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : l'insuline fait baisser la glycémie, lentement, par le sang.",
+                  "answers": [
+                    {
+                      "content": "Un message hormonal : l'insuline",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un message nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un réflexe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un neurotransmetteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le message qui commande un réflexe est plus rapide que celui qui régule la glycémie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le message nerveux est rapide, le message hormonal plus lent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque situation à son trajet.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : le retrait suit des neurones, la baisse de glycémie suit le sang, et le passage entre deux neurones se fait dans la fente synaptique.",
+                  "answers": [
+                    {
+                      "content": "Retrait de la main",
+                      "match": "Neurones"
+                    },
+                    {
+                      "content": "Baisse de la glycémie",
+                      "match": "Sang"
+                    },
+                    {
+                      "content": "Passage d'un neurone à un autre",
+                      "match": "Fente synaptique"
+                    }
+                  ]
+                },
+                {
+                  "content": "Un message dont l'effet dure plusieurs heures est plutôt un message ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : l'effet durable caractérise le message hormonal.",
+                  "answers": [
+                    {
+                      "content": "hormonal",
+                      "correct": true
+                    },
+                    {
+                      "content": "nerveux",
+                      "correct": false
+                    },
+                    {
+                      "content": "réflexe",
+                      "correct": false
+                    },
+                    {
+                      "content": "électrique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Une glande salivaire verse la salive par un canal ; une glande surrénale déverse l'adrénaline dans le sang et accélère le rythme du cœur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une glande salivaire verse la salive par un canal. Une glande surrénale déverse l'adrénaline dans le sang. Laquelle est endocrine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une glande endocrine déverse son produit dans le sang.",
+                  "answers": [
+                    {
+                      "content": "La glande surrénale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La glande salivaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'adrénaline est une hormone qui accélère le rythme du cœur.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : l'adrénaline, libérée dans le sang, accélère le rythme du cœur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cœur est l'organe ___ de l'adrénaline.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le cœur possède les récepteurs de l'adrénaline.",
+                  "answers": [
+                    {
+                      "content": "cible",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois caractéristiques de l'adrénaline ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Méthode : hormone, sang, action à distance.",
+                  "answers": [
+                    {
+                      "content": "C'est une hormone",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est transportée par le sang",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle agit à distance",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle circule dans les neurones",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est versée dans la bouche",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre le trajet de l'adrénaline.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : fabrication, déversement, transport, réaction.",
+                  "answers": [
+                    {
+                      "content": "La glande surrénale la fabrique"
+                    },
+                    {
+                      "content": "Elle est déversée dans le sang"
+                    },
+                    {
+                      "content": "Le sang la transporte"
+                    },
+                    {
+                      "content": "Le cœur réagit"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère la glande, le trajet de l'hormone, puis les cellules qui possèdent le récepteur."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

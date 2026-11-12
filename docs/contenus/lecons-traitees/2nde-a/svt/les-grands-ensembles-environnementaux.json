@@ -1,0 +1,3064 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les grands ensembles environnementaux",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "A",
+      "material_name": "SVT",
+      "figures": [
+        {
+          "key": "chaine-ensemble",
+          "kind": "diagram",
+          "description": "Schéma fléché de la démarche pour identifier un grand ensemble environnemental : le climat (chaud, très pluvieux) détermine la végétation dominante (forêt dense), qui abrite une faune particulière ; l'ensemble de ces caractères permet de nommer le grand ensemble : la forêt dense humide.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c",
+                "label": "Climat : chaud, très pluvieux"
+              },
+              {
+                "id": "v",
+                "label": "Végétation dominante : forêt dense"
+              },
+              {
+                "id": "f",
+                "label": "Faune : animaux de la forêt"
+              },
+              {
+                "id": "e",
+                "label": "Grand ensemble : forêt dense humide"
+              }
+            ],
+            "edges": [
+              {
+                "from": "c",
+                "to": "v",
+                "label": "détermine"
+              },
+              {
+                "from": "v",
+                "to": "f",
+                "label": "abrite"
+              },
+              {
+                "from": "f",
+                "to": "e",
+                "label": "caractérise"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pluies-trois-stations",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des pluies annuelles, en millimètres, de trois stations chaudes aux valeurs fictives : 2 000 mm pour la station A, 1 200 mm pour la station B (avec une saison sèche de plusieurs mois), 100 mm pour la station C. La station A est la plus arrosée, la station C la moins arrosée.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              2000,
+              1200,
+              100
+            ],
+            "labels": [
+              "Station A",
+              "Station B",
+              "Station C"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pluies-nord",
+          "kind": "stat_chart",
+          "description": "Courbe des pluies mensuelles, en millimètres, d'une station fictive du nord d'un pays chaud : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Quatre mois reçoivent moins de 40 mm : ce sont les mois de la saison sèche.",
+          "params": {
+            "chart": "line",
+            "series": [
+              5,
+              10,
+              60,
+              110,
+              140,
+              160,
+              100,
+              120,
+              180,
+              130,
+              30,
+              10
+            ],
+            "labels": [
+              "Jan",
+              "Fév",
+              "Mar",
+              "Avr",
+              "Mai",
+              "Juin",
+              "Juil",
+              "Août",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Déc"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-ensembles-ci",
+          "kind": "map",
+          "description": "Carte schématique de la Côte d'Ivoire : la forêt dense humide occupe le sud, la savane occupe le nord, et une bande côtière longe le littoral et les lagunes. Trois villes repères sont placées : Abidjan sur le littoral, Daloa dans la zone de forêt, Korhogo dans la zone de savane. Les contours des zones sont schématiques.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "dense_forest",
+                "category": 1
+              },
+              {
+                "id": "savanna",
+                "category": 2
+              },
+              {
+                "id": "coastal_strip",
+                "category": 3
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan"
+              },
+              {
+                "id": "daloa"
+              },
+              {
+                "id": "korhogo"
+              }
+            ],
+            "legend": [
+              "Forêt dense humide",
+              "Savane",
+              "Bande côtière (lagunes, mangrove)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le grand ensemble environnemental",
+          "remember": "Un **grand ensemble environnemental** est une vaste région de la surface de la Terre où le **climat**, la **végétation dominante** et la **faune** présentent des caractères communs. Le **climat** (la température et les précipitations, c'est-à-dire les pluies) est le facteur qui détermine le plus la végétation. La **végétation dominante** est la plus étendue et la plus visible : forêt, savane… La **faune** est l'ensemble des animaux qui vivent naturellement dans l'ensemble. Un champ ou une plantation est un **milieu aménagé** par l'homme : il n'est pas un grand ensemble naturel.",
+          "method": [
+            "Lire le climat de la région : la température, la quantité de pluie et la durée de la saison sèche.",
+            "Relier ce climat à la végétation dominante qu'il permet.",
+            "Ajouter la faune qui vit naturellement dans cette végétation.",
+            "Nommer le grand ensemble qui correspond à l'ensemble de ces caractères."
+          ],
+          "example": {
+            "statement": "Une région est chaude et reçoit beaucoup de pluie toute l'année. Quel grand ensemble y trouve-t-on ?",
+            "steps": [
+              "Lire : le climat est chaud, avec beaucoup de pluie toute l'année et pas de vraie saison sèche.",
+              "Relier : un tel climat permet à de grands arbres serrés de se développer ; la végétation dominante est la forêt.",
+              "Ajouter : la faune est celle qui vit naturellement dans la forêt, à l'abri des arbres.",
+              "Nommer : le grand ensemble est la forêt dense humide."
+            ]
+          },
+          "pitfall": "Ne pas confondre un grand ensemble naturel et un milieu aménagé. Contre-exemple : une plantation de cacaoyers est une surface plantée par l'homme, avec une seule espèce d'arbre : ce n'est pas un grand ensemble environnemental. Ce qui définit l'ensemble, c'est la végétation naturelle de toute la région, déterminée par son climat.",
+          "figure": "chaine-ensemble",
+          "exercise": [
+            {
+              "title": "Définir un grand ensemble environnemental",
+              "statement": "Dans cet exercice, tu définis un grand ensemble environnemental à partir d'un climat avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un grand ensemble environnemental ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Nommer : un grand ensemble est une vaste région aux caractères communs de climat, de végétation dominante et de faune. Un champ, une ville ou un arbre sont des espaces trop petits ou aménagés par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Une vaste région où le climat, la végétation dominante et la faune présentent des caractères communs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un champ cultivé par un agriculteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une ville et ses quartiers",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul arbre et les animaux qui s'y abritent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces facteurs, lequel détermine le plus la végétation d'un grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le climat : température et précipitations. Étape 2 — Relier le climat à la végétation : c'est le climat qui décide quelle végétation dominante peut se développer. Les autres propositions sont humaines ou économiques.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "La taille des villes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix des récoltes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'habitants",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région est chaude et reçoit beaucoup de pluie toute l'année. Quelle végétation dominante y attend-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire le climat : chaud et très pluvieux. Étape 2 — Relier : de grands arbres serrés peuvent pousser, donc la forêt domine. Les herbes rares ou l'absence de végétation correspondent à des climats secs.",
+                  "answers": [
+                    {
+                      "content": "La forêt dense, aux grands arbres serrés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une steppe d'herbes rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une végétation presque absente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une prairie d'herbes sans arbres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour identifier un grand ensemble environnemental.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire le climat. Étape 2 — Relier à la végétation dominante. Étape 3 — Ajouter la faune. Étape 4 — Nommer le grand ensemble. L'ordre va du climat, qui commande, vers le nom de l'ensemble.",
+                  "answers": [
+                    {
+                      "content": "Lire le climat de la région"
+                    },
+                    {
+                      "content": "Relier le climat à la végétation dominante"
+                    },
+                    {
+                      "content": "Ajouter la faune qui y vit"
+                    },
+                    {
+                      "content": "Nommer le grand ensemble"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plantation de cacaoyers couvre une grande surface au sud d'un pays. Est-elle un grand ensemble environnemental ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relier à la végétation dominante : la végétation d'un grand ensemble est la végétation naturelle. Étape 4 — Nommer : une plantation est un milieu aménagé, c'est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Non : c'est un milieu aménagé par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : les cacaoyers sont des arbres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : la plantation est étendue",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : la plantation a un climat",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Climat, végétation et faune : fixation",
+              "statement": "Dans cet exercice, tu retrouves les caractères d'un grand ensemble dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire le climat : température et précipitations. Étape 2 — La végétation dominante est la plus étendue. Étape 3 — La faune rassemble les animaux de l'ensemble. Un milieu aménagé est transformé par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Climat",
+                      "match": "Température et précipitations d'une région"
+                    },
+                    {
+                      "content": "Végétation dominante",
+                      "match": "Végétation la plus étendue d'un ensemble"
+                    },
+                    {
+                      "content": "Faune",
+                      "match": "Animaux qui vivent naturellement dans l'ensemble"
+                    },
+                    {
+                      "content": "Milieu aménagé",
+                      "match": "Espace transformé par l'homme, comme une plantation"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le ___ est le facteur qui détermine le plus la végétation d'un grand ensemble.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relier le climat à la végétation : la température et les pluies décident de la végétation qui peut se développer.",
+                  "answers": [
+                    {
+                      "content": "climat",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux caractères qui, avec le climat, définissent un grand ensemble environnemental ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 2 — La végétation dominante et Étape 3 — la faune complètent le climat. Les caractères humains ou économiques ne définissent pas un ensemble naturel.",
+                  "answers": [
+                    {
+                      "content": "La végétation dominante",
+                      "correct": true
+                    },
+                    {
+                      "content": "La faune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille des routes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix des produits agricoles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un grand ensemble environnemental est une ___ région.",
+                  "question_type": "select",
+                  "explanation": "Étape 4 — Nommer : un grand ensemble couvre une vaste région aux caractères communs.",
+                  "answers": [
+                    {
+                      "content": "vaste",
+                      "correct": true
+                    },
+                    {
+                      "content": "minuscule",
+                      "correct": false
+                    },
+                    {
+                      "content": "isolée de tout climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "toujours désertique",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La faune d'un grand ensemble est l'ensemble des animaux qui y vivent naturellement.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Ajouter la faune : elle comprend les animaux qui vivent naturellement dans l'ensemble. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une station météorologique relève 12 mois d'observation, dont 4 mois de saison sèche (valeurs fictives). Combien de mois de pluie compte l'année ?",
+                  "question_type": "numeric",
+                  "explanation": "Étape 1 — Lire le climat : 12 mois en tout, dont 4 secs. On calcule 12 - 4 = 8 mois de pluie.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mois"
+                }
+              ],
+              "hint": "Un grand ensemble est une vaste région naturelle : pense au climat d'abord, puis à la végétation et à la faune."
+            }
+          ]
+        },
+        {
+          "name": "Forêt dense humide, savane et désert",
+          "remember": "La **forêt dense humide** se trouve dans les régions chaudes et **très pluvieuses** presque toute l'année : elle est formée de grands arbres serrés. La **savane** se trouve dans les régions chaudes à **saison sèche marquée** : elle est couverte d'herbes, avec des arbres dispersés. Le **désert** reçoit **très peu de pluie** : sa végétation est rare et adaptée à la sécheresse. Ce qui distingue ces ensembles n'est pas la chaleur, mais la **quantité de pluie** et la **durée de la saison sèche**. Le passage d'un ensemble à l'autre est progressif.",
+          "method": [
+            "Relever la quantité de pluie et la durée de la saison sèche de la région.",
+            "Rapprocher ces données des trois climats : très pluvieux, à saison sèche marquée, presque sans pluie.",
+            "Décrire la végétation attendue : grands arbres serrés, herbes et arbres dispersés, ou végétation rare.",
+            "Conclure en nommant le grand ensemble : forêt dense humide, savane ou désert."
+          ],
+          "example": {
+            "statement": "Une région est chaude, avec une saison de pluies suivie de plusieurs mois secs. Quel grand ensemble y attend-on ?",
+            "steps": [
+              "Relever : la région a une saison des pluies, puis plusieurs mois secs.",
+              "Rapprocher : cela correspond au climat à saison sèche marquée, ni très pluvieux toute l'année, ni presque sans pluie.",
+              "Décrire : la végétation attendue est une couverture d'herbes avec des arbres dispersés.",
+              "Conclure : le grand ensemble est la savane."
+            ]
+          },
+          "pitfall": "Ne pas croire que la température suffit à distinguer la forêt dense humide de la savane. Contre-exemple : ces deux ensembles sont chauds ; ce qui les sépare, c'est la pluie. Une région chaude avec de la pluie toute l'année porte la forêt dense, une région chaude avec plusieurs mois secs porte la savane.",
+          "figure": "pluies-trois-stations",
+          "exercise": [
+            {
+              "title": "Reconnaître un grand ensemble par son climat",
+              "statement": "Dans cet exercice, tu nommes l'ensemble qui correspond à un climat avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Une région chaude est très pluvieuse presque toute l'année. Quel grand ensemble y trouve-t-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : très pluvieux presque toute l'année. Étape 2 — Rapprocher : c'est le climat de la forêt. Étape 3 — Décrire : grands arbres serrés. Étape 4 — Conclure : forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une steppe sans arbres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région chaude a une longue saison sèche, des herbes et des arbres dispersés. Quel grand ensemble est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la saison sèche marquée. Étape 3 — Décrire : herbes avec arbres dispersés. Étape 4 — Conclure : savane. La forêt dense humide n'a pas de longue saison sèche.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une plantation",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région reçoit très peu de pluie et sa végétation est rare. Quel grand ensemble est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever : presque pas de pluie. Étape 2 — Rapprocher : c'est le climat du désert. Étape 4 — Conclure : désert.",
+                  "answers": [
+                    {
+                      "content": "Le désert",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois régions chaudes reçoivent des pluies annuelles très différentes (valeurs fictives) : la région A en reçoit le plus, la région C en reçoit le moins, la région B une quantité intermédiaire avec une saison sèche marquée. Quelle région correspond à la forêt dense humide ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Relever la quantité de pluie de chaque région. Étape 2 — Rapprocher : la plus arrosée, sans longue saison sèche, correspond à la forêt dense humide ; B à la savane, C au désert.",
+                  "answers": [
+                    {
+                      "content": "La région A, la plus arrosée",
+                      "correct": true
+                    },
+                    {
+                      "content": "La région B, intermédiaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "La région C, la moins arrosée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune des trois",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La forêt dense humide et la savane se distinguent surtout par leur température.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Relever : la forêt et la savane sont toutes deux chaudes. Étape 2 — Rapprocher : ce sont la quantité de pluie et la saison sèche qui les distinguent. L'affirmation est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Forêt, savane et désert : fixation",
+              "statement": "Dans cet exercice, tu retrouves les caractères des trois ensembles dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque grand ensemble à sa végétation.",
+                  "question_type": "matching",
+                  "explanation": "Étape 3 — Décrire la végétation attendue : forêt dense, grands arbres serrés ; savane, herbes avec arbres dispersés ; désert, végétation rare. Étape 4 — Conclure par l'ensemble.",
+                  "answers": [
+                    {
+                      "content": "Forêt dense humide",
+                      "match": "Grands arbres serrés"
+                    },
+                    {
+                      "content": "Savane",
+                      "match": "Herbes et arbres dispersés"
+                    },
+                    {
+                      "content": "Désert",
+                      "match": "Végétation rare adaptée à la sécheresse"
+                    }
+                  ]
+                },
+                {
+                  "content": "La savane est couverte d'___ avec des arbres dispersés.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 3 — Décrire : la végétation dominante de la savane est l'herbe, avec des arbres dispersés.",
+                  "answers": [
+                    {
+                      "content": "herbes",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les trois caractères de la forêt dense humide ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Relever : très pluvieux. Étape 3 — Décrire : grands arbres serrés. La longue saison sèche caractérise la savane, et le manque de pluie le désert.",
+                  "answers": [
+                    {
+                      "content": "Elle est chaude",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est très pluvieuse presque toute l'année",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est formée de grands arbres serrés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a une très longue saison sèche",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle reçoit très peu de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce qui distingue surtout la forêt dense humide de la savane, c'est ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Rapprocher : les deux ensembles sont chauds ; seuls la pluie et la saison sèche changent.",
+                  "answers": [
+                    {
+                      "content": "la quantité de pluie et la durée de la saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "la température seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nombre de villes",
+                      "correct": false
+                    },
+                    {
+                      "content": "le prix des récoltes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le passage de la forêt à la savane se fait de manière progressive.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 4 — Conclure : le climat change progressivement, donc la végétation change aussi progressivement. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Range ces ensembles du plus arrosé au moins arrosé.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Relever la quantité de pluie. Étape 2 — Rapprocher : la forêt dense humide est très pluvieuse, la savane l'est moins avec une saison sèche, le désert reçoit très peu de pluie.",
+                  "answers": [
+                    {
+                      "content": "Forêt dense humide"
+                    },
+                    {
+                      "content": "Savane"
+                    },
+                    {
+                      "content": "Désert"
+                    }
+                  ]
+                }
+              ],
+              "hint": "Les trois ensembles sont chauds : compare la pluie et la durée de la saison sèche."
+            }
+          ]
+        },
+        {
+          "name": "Les grands ensembles de la Côte d'Ivoire",
+          "remember": "En Côte d'Ivoire, la **forêt dense humide** occupe le **sud** du pays, où il pleut beaucoup et longtemps. La **savane** occupe le **nord**, où la saison sèche est plus longue. Entre les deux, une **zone de transition** mêle arbres et herbes : le climat change **progressivement**, sans frontière nette. Le long du littoral et des lagunes, on trouve la **mangrove**, formation de palétuviers dont les racines baignent dans une eau salée ou saumâtre. Les **plantations** (cacao, café…) et les champs sont des **milieux aménagés** par l'homme : ils remplacent en partie la forêt naturelle. Les **défrichements** font reculer la forêt.",
+          "method": [
+            "Situer la région sur le territoire : sud, centre ou nord, littoral.",
+            "Relever le climat de la région : la quantité de pluie et la durée de la saison sèche.",
+            "Déduire le grand ensemble : forêt dense humide au sud, savane au nord, transition entre les deux, mangrove sur le littoral.",
+            "Distinguer le milieu naturel des milieux aménagés, comme les plantations, et noter l'effet des défrichements."
+          ],
+          "example": {
+            "statement": "Un voyageur va du nord vers le sud de la Côte d'Ivoire. Quels ensembles traverse-t-il, et comment l'expliquer ?",
+            "steps": [
+              "Situer : il part du nord et descend vers le sud, jusqu'au littoral.",
+              "Relever : au nord la saison sèche est plus longue, au sud il pleut beaucoup et longtemps.",
+              "Déduire : il rencontre d'abord la savane, puis la zone de transition, puis la forêt dense humide, et la mangrove près des lagunes.",
+              "Distinguer : au sud, les plantations de cacao qu'il traverse sont des milieux aménagés qui ont remplacé une partie de la forêt naturelle."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une ligne nette sépare la forêt de la savane, ni qu'une plantation est de la forêt naturelle. Contre-exemple : en allant du nord au sud, les arbres s'espacent puis se serrent petit à petit, sans frontière visible ; et une plantation de cacaoyers, plantée par l'homme, n'est pas la forêt dense humide naturelle.",
+          "figure": "carte-ensembles-ci",
+          "exercise": [
+            {
+              "title": "Situer les grands ensembles de la Côte d'Ivoire",
+              "statement": "Dans cet exercice, tu situes les grands ensembles du pays et tu expliques leur répartition avec la méthode de la fiche.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Où se trouve la forêt dense humide en Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : la forêt dense humide occupe le sud. Étape 2 — Relever : c'est là qu'il pleut beaucoup et longtemps. Le nord, avec sa saison sèche plus longue, porte la savane.",
+                  "answers": [
+                    {
+                      "content": "Dans le sud du pays",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans le nord du pays",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniquement au centre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle part",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel grand ensemble occupe le nord de la Côte d'Ivoire, où la saison sèche est plus longue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 2 — Relever : la saison sèche est plus longue au nord. Étape 3 — Déduire : la savane, avec ses herbes et ses arbres dispersés, occupe le nord.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre la forêt du sud et la savane du nord, comment appelle-t-on la zone où arbres et herbes se mêlent ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 3 — Déduire : le climat change progressivement du sud au nord, donc la végétation aussi. La zone intermédiaire est une zone de transition.",
+                  "answers": [
+                    {
+                      "content": "Une zone de transition",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une plantation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le sud de la Côte d'Ivoire, de vastes plantations de cacaoyers ont remplacé en partie la forêt. Que sont-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 4 — Distinguer le milieu naturel des milieux aménagés : une plantation est plantée par l'homme, ce n'est pas la forêt dense humide naturelle.",
+                  "answers": [
+                    {
+                      "content": "Des milieux aménagés par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des grands ensembles naturels",
+                      "correct": false
+                    },
+                    {
+                      "content": "La forêt dense humide naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des zones de transition",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une frontière nette sépare la forêt dense humide de la savane en Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 3 — Déduire : le climat change progressivement du sud au nord, donc il y a une zone de transition, et non une frontière nette. L'affirmation est l'erreur du piège.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Forêt, savane, transition et mangrove : fixation",
+              "statement": "Dans cet exercice, tu retrouves la répartition des ensembles et le rôle de l'homme dans six questions de types variés.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque région de la Côte d'Ivoire à l'ensemble qui y domine.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Situer la région. Étape 2 — Relever son climat. Étape 3 — Déduire l'ensemble : forêt au sud, savane au nord, transition au milieu, mangrove le long des lagunes.",
+                  "answers": [
+                    {
+                      "content": "Le sud, très arrosé",
+                      "match": "Forêt dense humide"
+                    },
+                    {
+                      "content": "Le nord, à saison sèche plus longue",
+                      "match": "Savane"
+                    },
+                    {
+                      "content": "Entre le sud et le nord",
+                      "match": "Zone de transition"
+                    },
+                    {
+                      "content": "Les rives des lagunes",
+                      "match": "Mangrove"
+                    }
+                  ]
+                },
+                {
+                  "content": "Au nord de la Côte d'Ivoire, le grand ensemble qui domine est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 2 — Relever : la saison sèche est plus longue au nord. Étape 3 — Déduire : la savane domine.",
+                  "answers": [
+                    {
+                      "content": "savane",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences des défrichements dans le sud du pays ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 4 — Distinguer : les défrichements font reculer la forêt naturelle, remplacée en partie par des plantations, milieux aménagés. Les autres propositions ne sont pas des conséquences directes.",
+                  "answers": [
+                    {
+                      "content": "La forêt naturelle recule",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des plantations remplacent une partie de la forêt",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt devient un désert aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La savane disparaît du nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove devient une savane",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En allant du nord vers le sud de la Côte d'Ivoire, les arbres deviennent ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 2 — Relever : plus on descend, plus il pleut. Étape 3 — Déduire : la forêt dense humide au sud est formée de grands arbres serrés.",
+                  "answers": [
+                    {
+                      "content": "plus hauts et plus serrés",
+                      "correct": true
+                    },
+                    {
+                      "content": "plus rares",
+                      "correct": false
+                    },
+                    {
+                      "content": "inexistants",
+                      "correct": false
+                    },
+                    {
+                      "content": "tous de la même espèce",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La ville de Korhogo, au nord du pays, se trouve dans la zone de la savane.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Situer : Korhogo est au nord de la Côte d'Ivoire. Étape 3 — Déduire : le nord est dominé par la savane. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le long des lagunes de la côte ivoirienne, on trouve des palétuviers dont les racines baignent dans une eau saumâtre. Comment s'appelle cette formation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Situer : le littoral et les lagunes. Étape 3 — Déduire : les palétuviers dans l'eau salée ou saumâtre forment la mangrove.",
+                  "answers": [
+                    {
+                      "content": "La mangrove",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La forêt dense de montagne",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Le sud est très arrosé et le nord a une saison sèche plus longue : le reste en découle."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Lire le climat de trois régions chaudes",
+          "statement": "On compare trois stations chaudes de régions différentes (valeurs fictives). Pluies annuelles : station A, 2 000 mm toute l'année ; station B, 1 200 mm avec une saison sèche de plusieurs mois ; station C, 100 mm seulement.",
+          "exercise_type": "fixation",
+          "figure": "pluies-trois-stations",
+          "questions": [
+            {
+              "content": "La station A reçoit 2 000 mm de pluie par an et la station C 100 mm (valeurs fictives). Quelle est la différence entre les deux ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les deux valeurs : 2 000 et 100. 2. Soustraire : 2 000 - 100 = 1 900. 3. Donner l'unité : mm.",
+              "answers": [
+                {
+                  "content": "1900",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mm"
+            },
+            {
+              "content": "Parmi trois stations chaudes qui reçoivent 2 000 mm, 1 200 mm avec saison sèche, et 100 mm de pluie par an, laquelle est dans la forêt dense humide ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Relever la quantité de pluie de chaque station. 2. Rapprocher des climats : très pluvieux, sans longue saison sèche : forêt dense humide. 3. Avec saison sèche marquée : savane ; presque sans pluie : désert. 4. Conclure : la station la plus arrosée est en forêt dense humide.",
+              "answers": [
+                {
+                  "content": "Celle qui reçoit 2 000 mm : la plus arrosée",
+                  "correct": true
+                },
+                {
+                  "content": "Celle qui reçoit 1 200 mm avec saison sèche",
+                  "correct": false
+                },
+                {
+                  "content": "Celle qui reçoit 100 mm",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une station chaude reçoit seulement 100 mm de pluie par an (valeur fictive). Quel est le grand ensemble ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Relever : très peu de pluie. 2. Rapprocher : c'est le climat du désert. 3. Décrire la végétation : rare, adaptée à la sécheresse. 4. Conclure : désert.",
+              "answers": [
+                {
+                  "content": "Le désert",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt dense humide",
+                  "correct": false
+                },
+                {
+                  "content": "La savane",
+                  "correct": false
+                },
+                {
+                  "content": "La mangrove",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une station chaude reçoit 1 200 mm de pluie par an avec une saison sèche de plusieurs mois. Quelles sont les deux caractéristiques attendues de son grand ensemble ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Relever : pluie modérée et saison sèche marquée. 2. Rapprocher : climat de la savane. 3. Décrire : herbes avec arbres dispersés. 4. Les grands arbres serrés sont ceux de la forêt, la végétation absente celle du désert.",
+              "answers": [
+                {
+                  "content": "Une saison sèche marquée",
+                  "correct": true
+                },
+                {
+                  "content": "Des herbes avec des arbres dispersés",
+                  "correct": true
+                },
+                {
+                  "content": "Des grands arbres serrés sans saison sèche",
+                  "correct": false
+                },
+                {
+                  "content": "Une végétation presque absente",
+                  "correct": false
+                },
+                {
+                  "content": "Une pluie toute l'année",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Trois stations chaudes ont forcément la même végétation, puisque la chaleur décide de tout.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. La chaleur est commune aux trois stations. 2. Ce sont la pluie et la saison sèche qui les différencient. 3. Leur végétation est donc différente. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Compare les quantités de pluie : plus il pleut, plus la forêt est dense."
+        },
+        {
+          "title": "Du nord au sud de la Côte d'Ivoire",
+          "statement": "La carte schématique de la Côte d'Ivoire montre la forêt dense humide au sud, la savane au nord, une bande côtière avec des lagunes, et trois villes repères : Korhogo, Daloa et Abidjan.",
+          "exercise_type": "fixation",
+          "figure": "carte-ensembles-ci",
+          "questions": [
+            {
+              "content": "Un voyageur traverse la Côte d'Ivoire du nord vers le sud. Remets dans l'ordre les ensembles qu'il rencontre.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Situer : il part du nord. 2. Relever le climat : la saison sèche, longue au nord, se raccourcit vers le sud. 3. Déduire : savane, puis zone de transition, puis forêt dense humide. 4. Le littoral, au bout du trajet, porte les lagunes et la mangrove.",
+              "answers": [
+                {
+                  "content": "La savane"
+                },
+                {
+                  "content": "La zone de transition"
+                },
+                {
+                  "content": "La forêt dense humide"
+                },
+                {
+                  "content": "Le littoral avec ses lagunes et sa mangrove"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ville à l'ensemble de sa région.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Situer chaque ville sur la carte. 2. Korhogo est au nord, dans la savane. 3. Daloa est dans la zone de forêt. 4. Abidjan est sur le littoral, au bord de lagunes.",
+              "answers": [
+                {
+                  "content": "Korhogo",
+                  "match": "Savane du nord"
+                },
+                {
+                  "content": "Daloa",
+                  "match": "Forêt dense humide"
+                },
+                {
+                  "content": "Abidjan",
+                  "match": "Littoral et lagunes"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la forêt dense humide occupe-t-elle le sud de la Côte d'Ivoire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Situer : le sud. 2. Relever le climat : beaucoup de pluie, longtemps. 3. Déduire : ce climat permet à de grands arbres serrés de se développer. Les plantations sont humaines mais ne sont pas la cause de la forêt naturelle.",
+              "answers": [
+                {
+                  "content": "Parce qu'il y pleut beaucoup et longtemps",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que les habitants l'ont plantée",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'il n'y a pas de saison des pluies",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le sud est plus froid",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une ligne nette sépare la forêt dense humide de la savane en Côte d'Ivoire.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Le climat change progressivement du sud au nord. 2. La végétation change donc progressivement. 3. Il existe une zone de transition, pas de frontière nette.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le nord de la Côte d'Ivoire, la saison sèche est plus ___ qu'au sud.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Situer le nord. 2. Relever le climat : la saison sèche y dure plus longtemps qu'au sud. 3. Déduire : la savane domine.",
+              "answers": [
+                {
+                  "content": "longue",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "hint": "Le climat change progressivement du sud au nord."
+        },
+        {
+          "title": "Les pluies d'une station du nord",
+          "statement": "Une station fictive du nord d'un pays chaud relève les pluies mensuelles, en millimètres : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. On appelle mois sec un mois qui reçoit moins de 40 mm.",
+          "exercise_type": "evaluation",
+          "figure": "pluies-nord",
+          "questions": [
+            {
+              "content": "Les pluies mensuelles d'une station (mm) sont : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Un mois sec reçoit moins de 40 mm. Combien de mois secs compte l'année ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les mois à moins de 40 mm : janvier (5), février (10), novembre (30), décembre (10). 2. Les compter : 4. 3. Donner l'unité : mois.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mois"
+            },
+            {
+              "content": "Les pluies mensuelles d'une station (mm) sont : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Quelle quantité de pluie tombe pendant le mois le plus pluvieux ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Lire toutes les valeurs. 2. La plus grande est celle de septembre : 180. 3. Donner l'unité : mm.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mm"
+            },
+            {
+              "content": "Les pluies mensuelles d'une station (mm) sont : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Quelle quantité de pluie tombe sur l'année entière ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Additionner les douze valeurs : 5 + 10 + 60 + 110 + 140 + 160 + 100 + 120 + 180 + 130 + 30 + 10. 2. Résultat : 1 055. 3. Donner l'unité : mm.",
+              "answers": [
+                {
+                  "content": "1055",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mm"
+            },
+            {
+              "content": "Une station chaude a 4 mois secs et reçoit 1 055 mm de pluie par an, surtout entre mars et octobre. Quel grand ensemble y attend-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Relever : une saison sèche marquée de quatre mois. 2. Rapprocher : ni pluie toute l'année (forêt), ni presque aucune pluie (désert). 3. Conclure : c'est le climat de la savane.",
+              "answers": [
+                {
+                  "content": "La savane",
+                  "correct": true
+                },
+                {
+                  "content": "La forêt dense humide",
+                  "correct": false
+                },
+                {
+                  "content": "Le désert",
+                  "correct": false
+                },
+                {
+                  "content": "La mangrove",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cette station, qui a 4 mois secs, est dans la forêt dense humide.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. La forêt dense humide reçoit de la pluie presque toute l'année. 2. Une saison sèche de quatre mois est la marque de la savane. 3. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une station du nord a une saison sèche de quatre mois. Quelle végétation dominante y attend-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Relever la saison sèche marquée. 2. Rapprocher du climat de la savane. 3. Décrire la végétation : herbes avec arbres dispersés.",
+              "answers": [
+                {
+                  "content": "Des herbes avec des arbres dispersés",
+                  "correct": true
+                },
+                {
+                  "content": "De grands arbres serrés",
+                  "correct": false
+                },
+                {
+                  "content": "Une végétation presque absente",
+                  "correct": false
+                },
+                {
+                  "content": "Des palétuviers dans l'eau salée",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Un mois sec reçoit moins de 40 mm. Additionne avec soin."
+        },
+        {
+          "title": "Le recul de la forêt autour d'un village",
+          "statement": "Dans un canton du sud d'un pays chaud et très pluvieux, la forêt dense humide couvrait 80 km² il y a vingt ans. Elle n'en couvre plus que 50 km² (valeurs fictives). Le reste est occupé par des plantations de cacao et des champs.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Il y a vingt ans, la forêt d'un canton couvrait 80 km² ; elle en couvre 50 km² aujourd'hui (valeurs fictives). Quelle surface a-t-elle perdue ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Relever les valeurs : 80 puis 50. 2. Soustraire : 80 - 50 = 30. 3. Donner l'unité : km².",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km²"
+            },
+            {
+              "content": "Il y a vingt ans, la forêt d'un canton couvrait 80 km² ; elle en a perdu 30 (valeurs fictives). Quel pourcentage de sa surface a-t-elle perdu ?",
+              "question_type": "numeric",
+              "explanation": "Méthode détaillée. 1. Rapporter la perte à la surface de départ : 30 / 80. 2. Calculer : 30 / 80 = 0,375. 3. Convertir : 0,375 = 37,5 %.",
+              "answers": [
+                {
+                  "content": "37,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0.1,
+              "unit": "%"
+            },
+            {
+              "content": "Dans un canton du sud, des plantations de cacao ont remplacé une partie de la forêt. Pourquoi ne peut-on pas dire qu'elles forment le même grand ensemble que la forêt dense humide ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Rappeler la définition : un grand ensemble est défini par sa végétation naturelle. 2. Une plantation est plantée et entretenue par l'homme. 3. C'est un milieu aménagé. Les cacaoyers sont bien des arbres, et le climat n'a pas disparu.",
+              "answers": [
+                {
+                  "content": "Ce sont des milieux aménagés par l'homme, pas la végétation naturelle",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que les cacaoyers ne sont pas des arbres",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'elles sont trop petites pour avoir un climat",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le climat y a disparu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le défrichement d'une partie de la forêt d'un canton a deux conséquences directes. Lesquelles ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Relever l'action : on défriche, donc on retire des arbres. 2. Déduire : la végétation naturelle est remplacée par des cultures, et les animaux de la forêt perdent une partie de leur habitat. 3. Les changements de climat ou de désert immédiat ne sont pas des conséquences directes.",
+              "answers": [
+                {
+                  "content": "La végétation naturelle recule, remplacée par des cultures",
+                  "correct": true
+                },
+                {
+                  "content": "La faune perd une partie de son habitat",
+                  "correct": true
+                },
+                {
+                  "content": "Le canton devient immédiatement un désert",
+                  "correct": false
+                },
+                {
+                  "content": "La savane du nord s'étend aussitôt",
+                  "correct": false
+                },
+                {
+                  "content": "Le climat du pays change du jour au lendemain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un canton du sud est chaud et très pluvieux toute l'année. Quel est son grand ensemble naturel d'origine ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Lire le climat : chaud et très pluvieux. 2. Relier à la végétation : grands arbres serrés. 3. Nommer l'ensemble : forêt dense humide.",
+              "answers": [
+                {
+                  "content": "La forêt dense humide",
+                  "correct": true
+                },
+                {
+                  "content": "La savane",
+                  "correct": false
+                },
+                {
+                  "content": "Le désert",
+                  "correct": false
+                },
+                {
+                  "content": "La mangrove",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les défrichements modifient d'abord la végétation d'un canton.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Défricher, c'est retirer les arbres. 2. La première conséquence est donc un changement de la végétation. 3. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "hint": "Pour un pourcentage, rapporte la perte à la surface de départ."
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Les savoirs de base des grands ensembles",
+          "notions": "Définition d'un grand ensemble, forêt dense humide, savane et désert, grands ensembles de la Côte d'Ivoire, vocabulaire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Un schéma fléché montre la démarche pour identifier un grand ensemble : le climat détermine la végétation dominante, qui abrite une faune, et l'ensemble est nommé.",
+              "exercise_type": "evaluation",
+              "figure": "chaine-ensemble",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un grand ensemble environnemental ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : 1. Lire le climat. 2. Relier à la végétation dominante. 3. Ajouter la faune. 4. Nommer. Un grand ensemble est vaste et naturel.",
+                  "answers": [
+                    {
+                      "content": "Une vaste région où le climat, la végétation dominante et la faune ont des caractères communs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un champ cultivé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une ville",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un seul arbre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel facteur détermine le plus la végétation d'un grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le climat, c'est-à-dire la température et les pluies, décide de la végétation qui peut se développer.",
+                  "answers": [
+                    {
+                      "content": "Le climat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre d'habitants",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix des récoltes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille des routes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour nommer un grand ensemble.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : on part du climat, qui commande, jusqu'au nom de l'ensemble.",
+                  "answers": [
+                    {
+                      "content": "Lire le climat"
+                    },
+                    {
+                      "content": "Relier à la végétation dominante"
+                    },
+                    {
+                      "content": "Ajouter la faune"
+                    },
+                    {
+                      "content": "Nommer le grand ensemble"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des animaux qui vivent naturellement dans un grand ensemble est la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : la faune est l'ensemble des animaux d'un ensemble, comme la flore est l'ensemble de ses plantes.",
+                  "answers": [
+                    {
+                      "content": "faune",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plantation de cacaoyers est un grand ensemble environnemental naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : une plantation est un milieu aménagé par l'homme, pas un grand ensemble naturel.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Trois stations chaudes ont des pluies annuelles fictives : station A, 2 000 mm ; station B, 1 200 mm avec saison sèche marquée ; station C, 100 mm.",
+              "exercise_type": "evaluation",
+              "figure": "pluies-trois-stations",
+              "questions": [
+                {
+                  "content": "Une région chaude est très pluvieuse presque toute l'année. Quel est son grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : très pluvieux presque toute l'année, grands arbres serrés : forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La steppe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une région chaude a une saison sèche marquée et des herbes avec des arbres dispersés. Quel est son grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : saison sèche marquée, herbes et arbres dispersés : savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque grand ensemble à son climat.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : la pluie et la saison sèche distinguent les trois ensembles.",
+                  "answers": [
+                    {
+                      "content": "Forêt dense humide",
+                      "match": "Très pluvieux presque toute l'année"
+                    },
+                    {
+                      "content": "Savane",
+                      "match": "Saison sèche marquée"
+                    },
+                    {
+                      "content": "Désert",
+                      "match": "Très peu de pluie"
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre la station A (2 000 mm) et la station B (1 200 mm), de combien la station A est-elle plus arrosée ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2 000 - 1 200 = 800 mm.",
+                  "answers": [
+                    {
+                      "content": "800",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mm"
+                },
+                {
+                  "content": "La forêt dense humide et la savane se distinguent surtout par la température.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : les deux sont chaudes ; ce sont la pluie et la saison sèche qui les distinguent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "La carte schématique de la Côte d'Ivoire montre la forêt dense humide au sud, la savane au nord et une bande côtière avec des lagunes.",
+              "exercise_type": "evaluation",
+              "figure": "carte-ensembles-ci",
+              "questions": [
+                {
+                  "content": "Quel grand ensemble domine le sud de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le sud est très arrosé, donc la forêt dense humide domine.",
+                  "answers": [
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La steppe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel grand ensemble domine le nord de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche plus longue du nord correspond à la savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque région à l'ensemble qui y domine.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : situer la région, relever le climat, déduire l'ensemble.",
+                  "answers": [
+                    {
+                      "content": "Le sud, très arrosé",
+                      "match": "Forêt dense humide"
+                    },
+                    {
+                      "content": "Le nord, à saison sèche plus longue",
+                      "match": "Savane"
+                    },
+                    {
+                      "content": "Entre le sud et le nord",
+                      "match": "Zone de transition"
+                    },
+                    {
+                      "content": "Les rives des lagunes",
+                      "match": "Mangrove"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une frontière nette sépare la forêt et la savane.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le climat change progressivement : il y a une zone de transition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les plantations sont des milieux ___ par l'homme.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : une plantation est un milieu aménagé par l'homme.",
+                  "answers": [
+                    {
+                      "content": "aménagés",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Voici du vocabulaire à maîtriser pour les grands ensembles.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque terme à sa définition.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : chaque terme a une définition précise du cours.",
+                  "answers": [
+                    {
+                      "content": "Climat",
+                      "match": "Température et précipitations"
+                    },
+                    {
+                      "content": "Végétation dominante",
+                      "match": "Végétation la plus étendue"
+                    },
+                    {
+                      "content": "Faune",
+                      "match": "Animaux de l'ensemble"
+                    },
+                    {
+                      "content": "Mangrove",
+                      "match": "Formation de palétuviers dans une eau salée ou saumâtre"
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux éléments, avec le climat, qui définissent un grand ensemble ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : un grand ensemble se définit par son climat, sa végétation dominante et sa faune.",
+                  "answers": [
+                    {
+                      "content": "La végétation dominante",
+                      "correct": true
+                    },
+                    {
+                      "content": "La faune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de villes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prix des produits",
+                      "correct": false
+                    },
+                    {
+                      "content": "La taille des champs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un champ cultivé est un milieu ___ par l'homme.",
+                  "question_type": "select",
+                  "explanation": "Méthode : un champ ou une plantation est un milieu aménagé.",
+                  "answers": [
+                    {
+                      "content": "aménagé",
+                      "correct": true
+                    },
+                    {
+                      "content": "naturel",
+                      "correct": false
+                    },
+                    {
+                      "content": "désertique",
+                      "correct": false
+                    },
+                    {
+                      "content": "forestier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que désigne-t-on par « précipitations » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : les précipitations sont les pluies, avec la température elles forment le climat.",
+                  "answers": [
+                    {
+                      "content": "Les pluies",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les vents",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les températures",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les animaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le désert reçoit très peu de pluie.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : c'est la marque du climat désertique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Les grands ensembles dans la vie courante",
+          "notions": "Voyage du nord au sud, planteur de cacao, cultures selon les régions, lecture des pluies d'un village.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Adama voyage en car d'Abidjan, sur le littoral, jusqu'à Korhogo, dans le nord. Il remarque que le paysage change petit à petit.",
+              "exercise_type": "evaluation",
+              "figure": "carte-ensembles-ci",
+              "questions": [
+                {
+                  "content": "En voyageant d'Abidjan vers Korhogo, que remarque-t-on sur les arbres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche s'allonge vers le nord, donc la forêt cède la place à la savane.",
+                  "answers": [
+                    {
+                      "content": "Ils deviennent plus espacés, avec de l'herbe entre eux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils deviennent plus serrés",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils disparaissent aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils restent identiques",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Adama voyage du littoral vers le nord. Remets dans l'ordre les ensembles qu'il rencontre.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : littoral, forêt, transition, savane, du sud vers le nord.",
+                  "answers": [
+                    {
+                      "content": "Le littoral avec ses lagunes"
+                    },
+                    {
+                      "content": "La forêt dense humide"
+                    },
+                    {
+                      "content": "La zone de transition"
+                    },
+                    {
+                      "content": "La savane"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le paysage change brutalement, sans zone intermédiaire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le climat change progressivement, il existe une zone de transition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Korhogo se trouve dans le ___ de la Côte d'Ivoire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : Korhogo est une ville du nord, où domine la savane.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la savane domine-t-elle au nord de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche plus longue du nord correspond à la savane.",
+                  "answers": [
+                    {
+                      "content": "La saison sèche y est plus longue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il pleut toute l'année",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas d'arbres du tout",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les habitants l'ont plantée",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Kouamé est planteur de cacao dans le sud du pays. Ses cacaoyers sont plantés à la place de la forêt qui couvrait autrefois son terrain.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La plantation de cacao de Kouamé est :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une plantation est plantée et entretenue par l'homme.",
+                  "answers": [
+                    {
+                      "content": "Un milieu aménagé par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un grand ensemble naturel",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une savane",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le cacaoyer pousse bien dans le sud du pays. Pourquoi ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le climat chaud et très pluvieux du sud convient au cacaoyer et à la forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "Parce qu'il y fait chaud et qu'il pleut beaucoup",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'il y fait froid",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'il n'y pleut jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le sol est du sable",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le défrichement réalisé par Kouamé a fait reculer la forêt naturelle sur son terrain.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : défricher, c'est enlever les arbres naturels pour planter.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences du défrichement de la forêt de Kouamé ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le défrichement change d'abord la végétation, puis l'habitat des animaux.",
+                  "answers": [
+                    {
+                      "content": "La végétation naturelle est remplacée par des cacaoyers",
+                      "correct": true
+                    },
+                    {
+                      "content": "La faune de la forêt perd une partie de son habitat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le climat du pays devient désertique aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La savane apparaît aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove s'étend aussitôt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain planté de cacaoyers est un milieu ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : planté par l'homme, il est aménagé.",
+                  "answers": [
+                    {
+                      "content": "aménagé",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Au marché d'Abidjan, une vendeuse explique que le cacao vient du sud du pays et que le coton vient du nord. Elle dit que les deux régions n'ont pas le même climat.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Pourquoi le coton est-il plutôt cultivé au nord et le cacao au sud ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le climat décide de ce qui pousse bien : plus de pluie au sud, saison sèche plus longue au nord.",
+                  "answers": [
+                    {
+                      "content": "Parce que les climats du nord et du sud sont différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que les deux régions ont le même climat",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le nord est un désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le sud n'a pas de pluie",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le climat joue un rôle dans le choix des cultures d'une région.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : le climat, pluie et chaleur, détermine ce qui peut pousser.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque élément à sa région.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : le cacao est plutôt cultivé au sud, le coton au nord, et les palétuviers poussent sur les rives des lagunes.",
+                  "answers": [
+                    {
+                      "content": "Cacao",
+                      "match": "Sud, forêt dense humide"
+                    },
+                    {
+                      "content": "Coton",
+                      "match": "Nord, savane"
+                    },
+                    {
+                      "content": "Palétuviers",
+                      "match": "Rives des lagunes"
+                    }
+                  ]
+                },
+                {
+                  "content": "La région qui reçoit le plus de pluie en Côte d'Ivoire est le ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : le sud reçoit beaucoup de pluie et longtemps.",
+                  "answers": [
+                    {
+                      "content": "sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "centre sec",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cliente dit : « Le nord est aussi pluvieux que le sud. » Que lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche plus longue du nord le distingue du sud.",
+                  "answers": [
+                    {
+                      "content": "Non : la saison sèche y est plus longue",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, exactement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : il n'y pleut jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : la forêt y est plus dense",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un village du nord, un instituteur relève les pluies de chaque mois. Les mois de janvier, février, novembre et décembre reçoivent très peu de pluie (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": "pluies-nord",
+              "questions": [
+                {
+                  "content": "Dans un village du nord, 4 mois de l'année reçoivent très peu de pluie. Combien de mois de pluie reste-t-il dans l'année ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 12 - 4 = 8 mois.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mois"
+                },
+                {
+                  "content": "Un village a quatre mois très secs et huit mois de pluie. Quel est son grand ensemble probable ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une saison sèche marquée est la marque de la savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce village a de la pluie toute l'année.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : quatre mois sont très secs : il n'y a pas de pluie toute l'année.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une longue saison sèche est caractéristique de la ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : savane, herbes et arbres dispersés, longue saison sèche.",
+                  "answers": [
+                    {
+                      "content": "savane",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes sur ce village ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : une saison sèche marquée correspond à la savane.",
+                  "answers": [
+                    {
+                      "content": "Il a une saison sèche marquée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa végétation dominante est faite d'herbes avec des arbres dispersés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est dans la forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est dans un désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il pleut toute l'année",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Raisonner et justifier à partir de données",
+          "notions": "Comparaison de trois stations, lecture des pluies mensuelles, effets d'un défrichement, justification d'un ensemble.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois stations chaudes ont des pluies annuelles fictives : station A, 2 000 mm ; station B, 1 200 mm ; station C, 100 mm. La station B a une saison sèche de plusieurs mois.",
+              "exercise_type": "evaluation",
+              "figure": "pluies-trois-stations",
+              "questions": [
+                {
+                  "content": "Les stations A, B et C reçoivent 2 000, 1 200 et 100 mm de pluie par an. Laquelle est dans le désert ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le désert reçoit très peu de pluie : 100 mm est la plus faible valeur.",
+                  "answers": [
+                    {
+                      "content": "La station C",
+                      "correct": true
+                    },
+                    {
+                      "content": "La station A",
+                      "correct": false
+                    },
+                    {
+                      "content": "La station B",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi trois stations chaudes, la station B reçoit 1 200 mm avec une saison sèche de plusieurs mois. Quel est son ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : pluie intermédiaire et saison sèche marquée : savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La station A reçoit 2 000 mm, la station B 1 200 mm et la station C 100 mm. Quelle est la quantité totale de pluie reçue par les trois stations ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2 000 + 1 200 + 100 = 3 300 mm.",
+                  "answers": [
+                    {
+                      "content": "3300",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mm"
+                },
+                {
+                  "content": "La station A est dans la savane parce qu'elle est la plus chaude.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la température ne distingue pas les trois stations ; la plus arrosée est en forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conclusions exactes de la comparaison ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : trois quantités de pluie différentes donnent trois ensembles différents.",
+                  "answers": [
+                    {
+                      "content": "La végétation dépend de la pluie",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois stations ont des ensembles différents",
+                      "correct": true
+                    },
+                    {
+                      "content": "La végétation dépend uniquement de la couleur du sol",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois stations ont le même ensemble",
+                      "correct": false
+                    },
+                    {
+                      "content": "La station C est la forêt",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Une station fictive du nord relève les pluies mensuelles, en millimètres : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Un mois sec reçoit moins de 40 mm.",
+              "exercise_type": "evaluation",
+              "figure": "pluies-nord",
+              "questions": [
+                {
+                  "content": "Les pluies mensuelles d'une station (mm) sont : janvier 5, février 10, mars 60, avril 110, mai 140, juin 160, juillet 100, août 120, septembre 180, octobre 130, novembre 30, décembre 10. Combien de mois reçoivent moins de 40 mm ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : janvier, février, novembre et décembre : 4 mois.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mois"
+                },
+                {
+                  "content": "Une station a quatre mois secs de novembre à février et des pluies de mars à octobre. Quel est son grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche marquée correspond à la savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En juin, une station reçoit 160 mm de pluie ; en janvier, 5 mm. De combien juin est-il plus pluvieux que janvier ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 160 - 5 = 155 mm.",
+                  "answers": [
+                    {
+                      "content": "155",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mm"
+                },
+                {
+                  "content": "Cette station a de la pluie tous les mois en grande quantité.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : en janvier, février, novembre et décembre, les pluies sont très faibles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le mois le plus pluvieux de cette station est ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : septembre, avec 180 mm, est le mois le plus arrosé.",
+                  "answers": [
+                    {
+                      "content": "septembre",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un canton du sud, la forêt dense humide couvrait 80 km² il y a vingt ans ; elle couvre aujourd'hui 50 km² (valeurs fictives). Le reste est occupé par des plantations.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La forêt d'un canton passe de 80 km² à 50 km² (valeurs fictives). Quelle surface a-t-elle perdue ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 80 - 50 = 30 km².",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km²"
+                },
+                {
+                  "content": "Dans un canton du sud, la forêt dense a reculé au profit de plantations. Que sont ces plantations ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une plantation est un milieu aménagé.",
+                  "answers": [
+                    {
+                      "content": "Des milieux aménagés par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des grands ensembles naturels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des déserts",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des savanes naturelles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le canton, chaud et très pluvieux, était à l'origine dans la forêt dense humide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : un climat chaud et très pluvieux correspond à la forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences du recul de la forêt ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le défrichement change la végétation, donc l'habitat des animaux.",
+                  "answers": [
+                    {
+                      "content": "La végétation naturelle recule",
+                      "correct": true
+                    },
+                    {
+                      "content": "La faune perd une partie de son habitat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le climat de tout le pays change aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le canton devient une savane aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove disparaît aussitôt",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le recul de la forêt est dû ici aux ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : les défrichements retirent les arbres naturels.",
+                  "answers": [
+                    {
+                      "content": "défrichements",
+                      "correct": true
+                    },
+                    {
+                      "content": "pluies trop fortes",
+                      "correct": false
+                    },
+                    {
+                      "content": "vents du nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "lagunes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un élève affirme : « Il fait chaud en Côte d'Ivoire, donc tout le pays est en forêt dense humide. » Pour vérifier, on compare la forêt dense du sud et la savane du nord.",
+              "exercise_type": "evaluation",
+              "figure": "carte-ensembles-ci",
+              "questions": [
+                {
+                  "content": "Un élève dit que toute la Côte d'Ivoire est en forêt dense humide parce qu'elle est chaude. A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la chaleur est commune ; ce sont la pluie et la saison sèche qui distinguent forêt et savane.",
+                  "answers": [
+                    {
+                      "content": "Non : la quantité de pluie varie, et le nord porte la savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la chaleur suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : il pleut partout toute l'année",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : le pays est un désert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La savane est présente en Côte d'Ivoire.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la savane occupe le nord du pays.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque région du pays à son ensemble.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : sud, forêt ; nord, savane ; entre les deux, transition.",
+                  "answers": [
+                    {
+                      "content": "Sud",
+                      "match": "Forêt dense humide"
+                    },
+                    {
+                      "content": "Nord",
+                      "match": "Savane"
+                    },
+                    {
+                      "content": "Entre les deux",
+                      "match": "Zone de transition"
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre la forêt du sud et la savane du nord se trouve une zone de ___.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le climat change progressivement : c'est la zone de transition.",
+                  "answers": [
+                    {
+                      "content": "transition",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour répondre à l'élève, quel critère faut-il utiliser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : ces deux critères distinguent forêt dense humide et savane.",
+                  "answers": [
+                    {
+                      "content": "La quantité de pluie et la durée de la saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement la température",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement le nom des villes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement la couleur du sol",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan des grands ensembles environnementaux",
+          "notions": "Toutes les notions : définition d'un grand ensemble, forêt dense humide, savane et désert, ensembles de la Côte d'Ivoire.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Trois stations chaudes reçoivent 2 000 mm, 1 200 mm avec saison sèche, et 100 mm de pluie par an (valeurs fictives).",
+              "exercise_type": "evaluation",
+              "figure": "pluies-trois-stations",
+              "questions": [
+                {
+                  "content": "Une région chaude est très pluvieuse toute l'année. Quel est son grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : très pluvieux, grands arbres serrés : forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La savane",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La steppe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une station reçoit 2 000 mm de pluie par an et une autre 100 mm. Quelle est la différence ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 2 000 - 100 = 1 900 mm.",
+                  "answers": [
+                    {
+                      "content": "1900",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mm"
+                },
+                {
+                  "content": "Relie chaque ensemble à sa végétation.",
+                  "question_type": "matching",
+                  "explanation": "Méthode : chaque ensemble a sa végétation dominante.",
+                  "answers": [
+                    {
+                      "content": "Forêt dense humide",
+                      "match": "Grands arbres serrés"
+                    },
+                    {
+                      "content": "Savane",
+                      "match": "Herbes et arbres dispersés"
+                    },
+                    {
+                      "content": "Désert",
+                      "match": "Végétation rare"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plantation est un grand ensemble naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : une plantation est un milieu aménagé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ce qui distingue surtout forêt et savane, c'est ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : les deux sont chauds ; la pluie et la saison sèche les distinguent.",
+                  "answers": [
+                    {
+                      "content": "la pluie et la saison sèche",
+                      "correct": true
+                    },
+                    {
+                      "content": "la température seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "le nombre d'animaux",
+                      "correct": false
+                    },
+                    {
+                      "content": "la taille des villes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "La carte schématique de la Côte d'Ivoire montre la forêt dense humide au sud, la savane au nord, et une bande côtière avec des lagunes.",
+              "exercise_type": "evaluation",
+              "figure": "carte-ensembles-ci",
+              "questions": [
+                {
+                  "content": "Où se situe la forêt dense humide en Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : le sud est très arrosé.",
+                  "answers": [
+                    {
+                      "content": "Dans le sud",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans le nord",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au centre uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle part",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel ensemble domine le nord de la Côte d'Ivoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : la saison sèche y est plus longue.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les ensembles, du nord vers le sud.",
+                  "question_type": "ordering",
+                  "explanation": "Méthode : savane, puis transition, puis forêt dense humide.",
+                  "answers": [
+                    {
+                      "content": "Savane"
+                    },
+                    {
+                      "content": "Zone de transition"
+                    },
+                    {
+                      "content": "Forêt dense humide"
+                    }
+                  ]
+                },
+                {
+                  "content": "La mangrove se trouve le long des lagunes et du littoral.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : les palétuviers poussent dans l'eau salée ou saumâtre du littoral.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le sud, des ___ de cacao ont remplacé une partie de la forêt.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : les plantations sont des milieux aménagés.",
+                  "answers": [
+                    {
+                      "content": "plantations",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Une station fictive du nord relève 4 mois secs et 8 mois de pluie sur l'année. Ses pluies annuelles sont de 1 055 mm.",
+              "exercise_type": "evaluation",
+              "figure": "pluies-nord",
+              "questions": [
+                {
+                  "content": "Une station a 4 mois secs. Combien de mois de pluie compte l'année ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 12 - 4 = 8 mois.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "mois"
+                },
+                {
+                  "content": "Une station chaude a 4 mois secs et 8 mois de pluie. Quel est son grand ensemble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une saison sèche marquée correspond à la savane.",
+                  "answers": [
+                    {
+                      "content": "La savane",
+                      "correct": true
+                    },
+                    {
+                      "content": "La forêt dense humide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le désert",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette station est dans la forêt dense humide.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : la forêt dense humide n'a pas de longue saison sèche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux caractéristiques de cette station ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : la savane a une saison sèche marquée et des herbes avec des arbres dispersés.",
+                  "answers": [
+                    {
+                      "content": "Une saison sèche marquée",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des herbes avec des arbres dispersés",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pluie toute l'année",
+                      "correct": false
+                    },
+                    {
+                      "content": "Végétation absente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cette station est située dans le ___ de la Côte d'Ivoire.",
+                  "question_type": "fill_blank",
+                  "explanation": "Méthode : le nord a une saison sèche plus longue.",
+                  "answers": [
+                    {
+                      "content": "nord",
+                      "correct": true
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un canton du sud, la forêt couvrait 80 km² ; elle couvre 50 km² aujourd'hui (valeurs fictives). Le reste est planté de cacaoyers.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "La forêt d'un canton couvrait 80 km², elle en couvre 50 km² aujourd'hui. Quelle surface a-t-elle perdue ?",
+                  "question_type": "numeric",
+                  "explanation": "Méthode : 80 - 50 = 30 km².",
+                  "answers": [
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ],
+                  "tolerance": 0,
+                  "unit": "km²"
+                },
+                {
+                  "content": "Les plantations de cacaoyers du canton sont :",
+                  "question_type": "single_choice",
+                  "explanation": "Méthode : une plantation est un milieu aménagé.",
+                  "answers": [
+                    {
+                      "content": "Des milieux aménagés par l'homme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des grands ensembles naturels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une savane naturelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une mangrove",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les défrichements modifient d'abord la végétation d'un canton.",
+                  "question_type": "true_false",
+                  "explanation": "Méthode : défricher, c'est retirer les arbres naturels.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conséquences du défrichement ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Méthode : le défrichement change la végétation et l'habitat.",
+                  "answers": [
+                    {
+                      "content": "La végétation naturelle recule",
+                      "correct": true
+                    },
+                    {
+                      "content": "La faune perd une partie de son habitat",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le désert apparaît aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mangrove s'étend aussitôt",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le climat du pays disparaît",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le climat d'origine du canton est chaud et ___.",
+                  "question_type": "select",
+                  "explanation": "Méthode : la forêt dense humide existe dans un climat chaud et très pluvieux.",
+                  "answers": [
+                    {
+                      "content": "très pluvieux",
+                      "correct": true
+                    },
+                    {
+                      "content": "très sec",
+                      "correct": false
+                    },
+                    {
+                      "content": "froid",
+                      "correct": false
+                    },
+                    {
+                      "content": "sans saison des pluies",
+                      "correct": false
+                    }
+                  ]
+                }
+              ],
+              "hint": "Relis la situation : repère le climat (pluie, saison sèche), puis la végétation qu'il permet."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
