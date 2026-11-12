@@ -51,7 +51,7 @@ module Assessment
       Repositories::Assessment::OfflinePackDeliveryRepository.new.record(student_id: current_actor.user_id, exercise_id:, at:)
       true
     rescue ActiveRecord::ActiveRecordError => e
-      Rails.error.report(e, handled: true, context: { exercise_id: })
+      Rails.error.report(e, handled: true, context: { exercise_id:, student_id: current_actor.user_id })
       false
     end
   end

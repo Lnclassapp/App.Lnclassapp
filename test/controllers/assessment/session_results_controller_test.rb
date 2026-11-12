@@ -1106,7 +1106,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   # hors-connexion, Lot B2 (UDR-0170 §3.8) : « Corrigé reçu sur le téléphone le … » pour l'enseignant, jamais pour l'élève propriétaire.
   def deliver_pack_before_session(delivered_at: Time.zone.local(2026, 11, 10, 9))
     assignment = create_assignment(classroom: @classroom, assignable: @exercise)
-    @session.update_columns(classroom_assignment_id: assignment.id, started_at: delivered_at + 2.hours)
+    @session.update_columns(classroom_assignment_id: assignment.id, completed_at: delivered_at + 2.hours)
     Orm::OfflinePackDelivery.create!(student: @student, exercise: @exercise, first_delivered_at: delivered_at, last_delivered_at: delivered_at)
     delivered_at
   end

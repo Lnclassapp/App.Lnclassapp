@@ -93,7 +93,7 @@ Sur le résultat de copie, sous l'en-tête existant, si `received_at` : `p.text-
 
 ### 3.8 Corrigé reçu avant une copie de devoir (Lot B2, amendement du 2026-11-12)
 
-Pour l'enseignant et l'équipe seulement (jamais l'élève propriétaire), quand une copie rattachée à un devoir a commencé après la première remise du corrigé sur le téléphone :
+Pour l'enseignant et l'équipe seulement (jamais l'élève propriétaire), quand une copie rattachée à un devoir a été faite hors ligne, ou rendue en ligne à la première remise du corrigé sur le téléphone ou après :
 - **Résultat de copie** : sous la mention §3.7 (ou à sa place si la copie a été rendue en ligne), `p#session_offline_pack_marker.flex.items-center.justify-center.gap-2.text-sm.text-warning` + `ui_icon "exclamation-triangle", size: :sm` → `offline.teacher.pack_before` (« Corrigé reçu sur le téléphone le %{delivered}, avant cette copie »).
 - **Suivi du devoir** (liste des élèves d'une assignation) : sur la ligne de l'élève, après son statut, `span.text-xs.text-warning` avec `ui_icon "exclamation-triangle", size: :sm` (la plus petite taille de `ui_icon`) et le texte court `offline.teacher.pack_before_short` (« Corrigé reçu avant ») ; `title` et `aria-label` = le texte long.
 - Aucune marque : rien n'est rendu (pas d'espace réservé).

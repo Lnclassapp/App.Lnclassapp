@@ -296,21 +296,24 @@ module Queries
       end
 
       # hors-connexion Lot B2 (UDR-0170 §3.8) : la marque « corrigé reçu avant », par élève, sans requête par élève.
-      test "pack_delivered_at : l'élève dont une copie du devoir a commencé après la première remise du corrigé, lui seul" do
+      test "pack_delivered_at : copie rendue après la première remise ou faite hors ligne, rien d'autre" do
         delivered = Time.zone.local(2026, 10, 5, 7)
         marked = student("Awa", "Zongo")
         before = student("Ben", "Yao")
         plain = student("Cyr", "Xia")
-        [ marked, before ].each { Orm::OfflinePackDelivery.create!(student: it, exercise: @exercise, first_delivered_at: delivered, last_delivered_at: delivered) }
-        hand_in(marked, 60, started_at: delivered + 30.minutes)
-        hand_in(before, 60, started_at: delivered - 30.minutes)
+        offline = student("Dia", "Wane")
+        [ marked, before, offline ].each { Orm::OfflinePackDelivery.create!(student: it, exercise: @exercise, first_delivered_at: delivered, last_delivered_at: delivered) }
+        hand_in(marked, 60, started_at: delivered - 1.hour, completed_at: delivered)
+        hand_in(before, 60, completed_at: delivered - 1.second)
         hand_in(plain, 60)
+        hand_in(offline, 60, started_at: delivered - 2.hours, completed_at: delivered - 1.hour, client_copy_id: SecureRandom.uuid, received_at: delivered + 1.day)
 
         rows = detail.students.index_by(&:display_name)
 
         assert_equal delivered, rows["Awa Zongo"].pack_delivered_at
         assert_nil rows["Ben Yao"].pack_delivered_at
         assert_nil rows["Cyr Xia"].pack_delivered_at
+        assert_equal delivered, rows["Dia Wane"].pack_delivered_at
       end
 
       def count_queries(&)
@@ -326,7 +329,7 @@ module Queries
           count.times do
             pupil = student
             Orm::OfflinePackDelivery.create!(student: pupil, exercise: @exercise, first_delivered_at: delivered, last_delivered_at: delivered)
-            hand_in(pupil, 60, started_at: delivered + 1.hour)
+            hand_in(pupil, 60, completed_at: delivered + 1.hour)
           end
         end
         build.(1)
