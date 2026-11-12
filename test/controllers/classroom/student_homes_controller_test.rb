@@ -52,7 +52,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1.sr-only", text: tl("show.page_title")
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
+    assert_equal %w[offline_queue student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     # The band is the shell's, above the column, and the page title is not repeated.
     assert_select "main > div.lg\\:hidden > header.student-band.bg-brand.text-band-ink"
@@ -637,7 +637,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_equal %w[student_next_step student_subjects student_home_announcements], css_select("#student_home > [id]").map { it["id"] }
+    assert_equal %w[offline_queue student_next_step student_subjects student_home_announcements], css_select("#student_home > [id]").map { it["id"] }
   end
 
   test "eleve-sans-prof CA-3: never had a classroom: « Choisis ta classe » alone, no grid, no exercise of the day" do
@@ -764,7 +764,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_equal %w[student_next_step student_subjects student_home_announcements student_to_do student_history],
+    assert_equal %w[offline_queue student_next_step student_subjects student_home_announcements student_to_do student_history],
                  css_select("#student_home > [id]").map { it["id"] }
     assert_equal [ "Devoirs communs", "Fiches 3", "Fiches 2", "Fiches 1", "Rentrée numérique" ], announcement_titles
   end

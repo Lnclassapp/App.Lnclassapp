@@ -1070,4 +1070,36 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#restart_pause", 0
   end
+
+  # hors-connexion, Lot C (CA-16, UDR §3.7) : l'enseignant de l'élève lit « Rendue hors ligne le … · reçue le … » sous l'en-tête.
+  def offline_mention(session) = I18n.t("offline.teacher.received", completed: I18n.l(session.completed_at, format: :short), received: I18n.l(session.received_at, format: :short))
+
+  test "CA-16 : l'enseignant de l'élève lit « Rendue hors ligne le … · reçue le … » quand la copie vient d'un envoi différé" do
+    @session.update_columns(completed_at: Time.zone.local(2026, 11, 10, 18, 5), received_at: Time.zone.local(2026, 11, 12, 8, 30))
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_response :success
+    assert_select "#session_offline_received", text: offline_mention(@session.reload)
+    assert_select "#session_offline_received svg"
+    assert_select "#session_offline_received.text-sm.text-mute"
+  end
+
+  test "CA-16 : une copie rendue en ligne n'a pas la mention" do
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_select "#session_offline_received", 0
+  end
+
+  test "CA-16 : l'élève qui a rendu la copie ne lit pas la mention de l'enseignant" do
+    @session.update_columns(received_at: Time.current)
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_offline_received", 0
+  end
 end
