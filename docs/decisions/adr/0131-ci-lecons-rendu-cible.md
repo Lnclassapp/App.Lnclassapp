@@ -30,15 +30,15 @@ Rendre plus vite chaque leçon : gardé pour la suite. Rendu complet de nuit : �
 
 ## 4. Décision
 
-> **Au train vers Staging, la tâche `lecons` rend seulement les leçons v3 nouvelles ou modifiées de la PR (⌈N/8⌉ parts calculées par le job `plan`) ; s'il n'y en a aucune, ou si le diff est illisible (avec `::warning::`), 2 leçons témoins de `script/ci/lecons_temoins.txt`, en 1 part. `LECONS=tout` reste disponible à la main.**
+> **Au train vers Staging, la tâche `lecons` rend seulement les leçons v3 nouvelles ou modifiées de la PR (5 au plus, tirées au hasard par le job `plan`, en 1 part — amendement ci-dessous) ; s'il n'y en a aucune, ou si le diff est illisible (avec `::warning::`), 2 leçons témoins de `script/ci/lecons_temoins.txt`, en 1 part. `LECONS=tout` reste disponible à la main.**
 >
-> **Exception (lot B) : si la PR touche aux écrans (vues, JavaScript, assets, aides, catalogue qui les lit, dépendances front, test de rendu), `plan` passe `LECONS=tout` et la tâche rend toutes les leçons, ⌈nombre/8⌉ parts. Pas de rendu hebdomadaire.**
+> **Exception (lot B) : si la PR touche aux écrans (vues, JavaScript, assets, aides, catalogue qui les lit, dépendances front, test de rendu), `plan` passe `LECONS=tout` et la tâche tire ses 5 leçons parmi toutes. Pas de rendu hebdomadaire.**
 
 ## 5. Conséquences
 
 ### 🟢 Positives
 
-- Un train sans leçon changée coûte 1 part au lieu de 32 ; un train avec N leçons en coûte ⌈N/8⌉.
+- Un train sans leçon changée coûte 1 part au lieu de 32 ; un train avec N leçons en coûte 1 aussi (amendement « 5 leçons au plus »).
 
 ### 🔴 Coûts consentis
 
@@ -55,3 +55,9 @@ Rendre plus vite chaque leçon : gardé pour la suite. Rendu complet de nuit : �
 ## Amendement du 2026-11-12 — 8 leçons par part
 
 Train #545 (`bd1d61bd`), rendu complet en 23 parts de 10 leçons : part la plus longue 283 s, médiane 239 s, pour un plafond de 300 s. Décision du porteur : 8 leçons au plus par part, ⌈N/8⌉ parts (≈ 230 s au pire).
+
+## Amendement du 2026-11-12 — 5 leçons au plus, tirées au hasard
+
+Train #553 (`e6bb8e4b`), rendu complet en 28 parts de 8 leçons : 3 parts au-delà de 280 s (285, 285, 288 s), médiane 214 s, 102,4 min de machine. Plutôt que de découper davantage, décision du porteur : **la tâche `lecons` rend 5 leçons au plus, tirées au hasard parmi les candidates (leçons changées, sinon témoins, ou toutes quand la PR touche aux écrans), en une seule part.** `plan` fait le tirage (`shuf -n 5`) et l'écrit dans son journal ; le test applique le même plafond hors CI (`LECONS_SEED` rejoue un tirage).
+
+Conséquence acceptée : un train qui touche aux écrans ne vérifie plus que 5 leçons sur 223 ; une régression d'affichage propre à une leçon peut passer un train et être vue à un train suivant. Une PR qui change plus de 5 leçons n'en rend que 5.
