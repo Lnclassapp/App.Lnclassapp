@@ -10,11 +10,11 @@
 
 ## À trancher
 
-- [ ] 2026-11-12 · eleve-sans-prof · Un élève qui n'a jamais eu de classe (compte importé) : que lui montrer ? — appliqué : rien de plus que « Choisis ta classe » ; autres : les matières de tous les niveaux, lui demander son niveau ; recommandé : rien de plus (l'inscription met toujours l'élève dans une classe)
-- [ ] 2026-11-12 · eleve-sans-prof · Un niveau sans leçon publiée (6e, 5e, 4e, 2nde ; 1ère hors production) : que proposer ? — appliqué : la phrase « Les cours de ton niveau arrivent bientôt. » ; autres : proposer les leçons du niveau voisin qui en a (ouvre la lecture hors niveau : décision de droits), masquer la grille ; recommandé : la phrase, et prioriser les contenus de ces niveaux
-- [ ] 2026-11-12 · eleve-sans-prof · Sans classe, l'exercice du jour est un bloc secondaire sous « Rejoindre » — appliqué : « Rejoindre » reste le bouton principal ; autres : l'exercice du jour en bouton principal et le code en dessous ; recommandé : appliqué (rejoindre sa classe reste la tâche de l'écran)
-- [ ] 2026-11-12 · eleve-sans-prof · « À faire » reprend-il l'exercice déjà montré dans la carte ? — appliqué : non, il commence au suivant (charte : dire chaque chose une fois) ; autres : la liste complète ; recommandé : appliqué
-- [ ] 2026-11-12 · eleve-sans-prof · « Mes matières » sur téléphone : titre visible — appliqué : oui, à toutes les tailles ; autres : titre seulement sur ordinateur (avant) ; recommandé : appliqué
+- [x] 2026-11-12 · eleve-sans-prof · Un élève qui n'a jamais eu de classe (compte importé) : que lui montrer ? — appliqué : rien de plus que « Choisis ta classe » ; autres : les matières de tous les niveaux, lui demander son niveau ; recommandé : rien de plus (l'inscription met toujours l'élève dans une classe) → **tranché le 2026-11-12 : option appliquée conservée**
+- [x] 2026-11-12 · eleve-sans-prof · Un niveau sans leçon publiée (6e, 5e, 4e, 2nde ; 1ère hors production) : que proposer ? — appliqué : la phrase « Les cours de ton niveau arrivent bientôt. » ; autres : proposer les leçons du niveau voisin qui en a (ouvre la lecture hors niveau : décision de droits), masquer la grille ; recommandé : la phrase, et prioriser les contenus de ces niveaux → **tranché le 2026-11-12 : option appliquée conservée**
+- [x] 2026-11-12 · eleve-sans-prof · Sans classe, l'exercice du jour est un bloc secondaire sous « Rejoindre » — appliqué : « Rejoindre » reste le bouton principal ; autres : l'exercice du jour en bouton principal et le code en dessous ; recommandé : appliqué (rejoindre sa classe reste la tâche de l'écran) → **tranché le 2026-11-12 : option appliquée conservée**
+- [x] 2026-11-12 · eleve-sans-prof · « À faire » reprend-il l'exercice déjà montré dans la carte ? — appliqué : non, il commence au suivant (charte : dire chaque chose une fois) ; autres : la liste complète ; recommandé : appliqué → **tranché le 2026-11-12 : option appliquée conservée**
+- [x] 2026-11-12 · eleve-sans-prof · « Mes matières » sur téléphone : titre visible — appliqué : oui, à toutes les tailles ; autres : titre seulement sur ordinateur (avant) ; recommandé : appliqué → **tranché le 2026-11-12 : option appliquée conservée**
 
 ## Ce qui a dérapé
 
@@ -35,7 +35,7 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-11-12 (PR ouverte, fusion par l'orchestrateur) |
-| **PR** | voir `etat` de l'orchestrateur |
+| **Livré le** | 2026-11-12, en production le jour même (train #553, promotion #554) |
+| **PR** | #552 |
 | **ADR produits** | ADR-0035, amendement du 2026-11-12 |
 | **UDR produits** | UDR-0132, amendement du 2026-11-12 |

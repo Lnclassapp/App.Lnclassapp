@@ -66,7 +66,7 @@ class CiPlanTest < Minitest::Test
     assert_equal "${{ fromJSON(needs.plan.outputs.lecons_parts) }}", lecons.dig("strategy", "matrix", "part")
     assert_equal false, lecons.dig("strategy", "fail-fast")
     assert_includes jobs.dig("plan", "outputs", "lecons_parts"), "steps.changes.outputs.lecons_parts"
-    assert_includes steps("plan").map { it["run"].to_s }.join("\n"), "parts=$(( (count + 7) / 8 ))", "8 leçons au plus par part"
+    assert_includes steps("plan").map { it["run"].to_s }.join("\n"), "parts=1", "une seule part"
     run = steps("lecons").map { it["run"].to_s }.join("\n")
     assert_includes run, "PARALLEL_WORKERS=1 bin/rails test test/system/catalog/lesson_rendering_test.rb"
     env = steps("lecons").find { it.dig("env", "LECONS_PART") }["env"]
@@ -74,20 +74,22 @@ class CiPlanTest < Minitest::Test
     assert_equal "${{ needs.plan.outputs.lecons_files }}", env["LECONS"], "la liste vient de « plan », jamais « tout »"
   end
 
-  # Chantier ci-lecons-rendu, lot B (décision du porteur du 2026-11-12) : un train qui touche aux écrans rend les leçons
-  # toutes (« tout », ⌈nombre/8⌉ parts) ; sinon la règle du lot A (leçons changées, sinon témoins) reste inchangée.
+  # Chantier ci-lecons-rendu, lot B (décision du porteur du 2026-11-12) : un train qui touche aux écrans prend toutes les
+  # leçons pour candidates ; sinon la règle du lot A (leçons changées, sinon témoins). Puis 5 au plus, au hasard, en 1 part.
   SCREENS = "^(app/(views|javascript|assets|helpers)/|app/controllers/catalog/|app/infrastructure/(queries|repositories)/catalog/|" \
             'app/domain/(entities|use_cases|dtos)/catalog/|package\.json$|yarn\.lock$|test/system/catalog/lesson_rendering_test\.rb$)'
 
-  def test_a_train_that_touches_the_screens_renders_every_lesson
+  def test_a_train_renders_five_lessons_at_most_drawn_at_random
     changes = steps("plan").find { it["id"] == "changes" }["run"]
 
     assert_includes changes, "screens='#{SCREENS}'", "l'expression des écrans, nommée"
-    assert_includes changes, "lecons_files=tout"
     assert_includes changes, 'grep -m1 -E "$screens"'
-    assert_includes changes, "docs/contenus/lecons-traitees/*/*/*.json"
-    assert_includes changes, "parts=$(( (count + 7) / 8 ))"
-    assert_operator changes.index("lecons_files=tout"), :<, changes.index('echo "lecons_files=$lecons_files"')
+    assert_includes changes, "lecons_files=$(ls docs/contenus/lecons-traitees/*/*/*.json | paste -sd, -)"
+    draw = "shuf -n 5"
+    assert_includes changes, draw, "5 leçons au plus, au hasard"
+    assert_includes changes, "parts=1"
+    assert_operator changes.index(draw), :<, changes.index('echo "lecons_files=$lecons_files"')
+    assert_operator changes.index("$screens"), :<, changes.index(draw), "le tirage vient après le choix des candidates"
   end
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,

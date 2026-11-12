@@ -7,6 +7,8 @@ class OfflineKeepableTest < ActiveSupport::TestCase
   end
 
   class Host
+    def self.after_action(*) = nil # le contrôleur réel l'enregistre ; ici on appelle les méthodes à la main
+
     include OfflineKeepable
 
     attr_reader :response
@@ -20,6 +22,7 @@ class OfflineKeepableTest < ActiveSupport::TestCase
     def authenticated? = @connected
     def secret_response? = @secret
     def mark = mark_offline_keepable
+    def forget = mark_offline_forget
   end
 
   def headers_after(connected: true, status: 200, media_type: "text/html", secret: false, headers: {})
@@ -47,5 +50,21 @@ class OfflineKeepableTest < ActiveSupport::TestCase
     controller = Class.new(ApplicationController) { keep_offline only: :show }
 
     assert_includes controller._process_action_callbacks.map(&:filter), :mark_offline_keepable
+  end
+
+  def forget_headers(connected:, status: 200, media_type: "text/html")
+    response = Response.new(status, media_type, {})
+    Host.new(connected:, response:).forget
+    response.headers
+  end
+
+  test "un visiteur non connecté reçoit forget sur toute réponse HTML" do
+    assert_equal({ "Lnclass-Offline" => "forget" }, forget_headers(connected: false))
+    assert_equal({ "Lnclass-Offline" => "forget" }, forget_headers(connected: false, status: 302))
+  end
+
+  test "forget n'est ni posé pour un compte connecté ni hors HTML" do
+    assert_empty forget_headers(connected: true)
+    assert_empty forget_headers(connected: false, media_type: "application/json")
   end
 end
