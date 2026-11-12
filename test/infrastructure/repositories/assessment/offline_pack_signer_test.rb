@@ -21,6 +21,14 @@ module Repositories
         assert_nil @signer.verify(token: { student_id: 7 })
       end
 
+      test "un jeton authentique aux heures illisibles rend nil à verify et faux à expired? (jamais une exception)" do
+        payload = { "student_id" => 7, "exercise_id" => 42, "digest" => "abcdef0123456789", "issued_at" => "pas une heure", "expires_at" => "jamais" }
+        forged = OfflinePackSigner.default_verifier.encrypt_and_sign(payload, purpose: OfflinePackSigner::PURPOSE)
+
+        assert_nil @signer.verify(token: forged)
+        assert_not @signer.expired?(token: forged)
+      end
+
       test "le jeton est chiffré : ni l'identifiant de l'élève ni celui de l'exercice ne s'y lisent (ADR-0029, revue sécurité du Lot 0)" do
         signed = @signer.sign(student_id: 734_211, exercise_id: 998_877, digest: "abcdef0123456789", issued_at: ISSUED)
         readable = signed.split("--").map { Base64.decode64(it) rescue "" }.join + signed

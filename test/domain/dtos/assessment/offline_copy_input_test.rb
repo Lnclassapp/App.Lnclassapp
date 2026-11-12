@@ -36,6 +36,7 @@ module Dtos
 
       test "exercice et jeton sont exigés" do
         assert_not_predicate input(exercise_public_id: ""), :valid?
+        assert_not_predicate input(exercise_public_id: 42), :valid?
         assert_not_predicate input(pack_token: nil), :valid?
       end
 
