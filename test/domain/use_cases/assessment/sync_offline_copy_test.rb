@@ -63,7 +63,7 @@ module UseCases
           signer: @signer, exercises: Repositories::Assessment::ExerciseRepository.new, sessions:,
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-          pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new,
           clock: Clock.new(NOW), access: FakeAccess.new(blocked),
           current_digest: ->(exercise) { Queries::Assessment::OfflinePackQuery.new.call(public_id: exercise.public_id).digest }
         )
@@ -300,7 +300,7 @@ module UseCases
           signer: @signer, exercises: Repositories::Assessment::ExerciseRepository.new, sessions:,
           gaps: Repositories::Assessment::KnowledgeGapRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
           memberships: Repositories::Classroom::MembershipRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
-          pending: Repositories::Assessment::PendingAssignmentRepository.new, policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Clock.new(NOW),
           access: FakeAccess.new(false), current_digest: ->(_exercise) { "ailleurs" }
         )
 
@@ -323,18 +323,16 @@ module UseCases
         assert_equal [ false, true ], [ attempt.correct, attempt.unanswered ]
       end
 
-      test "S1 : un exercice devenu devoir en attente depuis l'émission du jeton : la copie est rangée sans rattachement, le devoir reste à rendre" do
+      test "un devoir à rendre assigné depuis l'émission du jeton : la copie est rattachée au devoir (la marque se lit côté enseignant)" do
         classroom = Orm::ClassroomStudent.find_by!(student_id: @student.id).classroom
-        create_assignment(classroom:, assignable: @exercise)
+        assignment = create_assignment(classroom:, assignable: @exercise)
         attrs = payload(pack_token: token(issued_at: NOW - 2.days))
 
         result = sync(attrs)
 
         assert_predicate result, :success?
         assert_not result.value.already_synced
-        assert_nil Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
-        pending = Repositories::Assessment::PendingAssignmentRepository.new
-        assert_includes pending.pending_exercise_public_ids(student_id: @student.id, exercise_public_ids: [ @exercise.public_id ]), @exercise.public_id
+        assert_equal assignment.id, Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
       end
 
       test "S2 : la pause est relue sous le verrou de l'élève et de l'exercice, dans la transaction de l'écriture" do

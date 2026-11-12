@@ -27,7 +27,7 @@ class Assessment::OfflinePacksControllerTest < ActionDispatch::IntegrationTest
     assert_equal verified[:issued_at].iso8601, body["issued_at"]
   end
 
-  test "exercice assigné en devoir en attente : 404, rien n'est écrit (menace C1, décision du porteur en attente)" do
+  test "exercice assigné en devoir en attente : le paquet est servi et la remise est enregistrée (menace C1, décision du porteur)" do
     create_assignment(classroom: Orm::ClassroomStudent.find_by(student: @student, primary: true).classroom, assignable: @exercise)
     sign_in_as @student
 
@@ -35,8 +35,48 @@ class Assessment::OfflinePacksControllerTest < ActionDispatch::IntegrationTest
       get offline_pack_exercise_path(@exercise.public_id)
     end
 
-    assert_response :not_found
+    assert_response :success
+    assert_equal 2, response.parsed_body["questions"].size
+    delivery = Orm::OfflinePackDelivery.find_by!(student_id: @student.id, exercise_id: @exercise.id)
+    assert_in_delta Time.current, delivery.first_delivered_at, 5.seconds
+  end
+
+  test "un second appel avance la dernière remise et garde la première" do
+    sign_in_as @student
+    travel_to Time.utc(2026, 11, 12, 8, 0, 0) do
+      get offline_pack_exercise_path(@exercise.public_id)
+    end
+    travel_to Time.utc(2026, 11, 13, 8, 0, 0) do
+      get offline_pack_exercise_path(@exercise.public_id)
+    end
+
+    delivery = Orm::OfflinePackDelivery.find_by!(student_id: @student.id, exercise_id: @exercise.id)
+    assert_equal [ Time.utc(2026, 11, 12, 8), Time.utc(2026, 11, 13, 8) ], [ delivery.first_delivered_at, delivery.last_delivered_at ]
+  end
+
+  test "un refus n'enregistre aucune remise" do
+    sign_in_as create_teacher
+    get offline_pack_exercise_path(@exercise.public_id)
+
+    assert_response :forbidden
+    assert_equal 0, Orm::OfflinePackDelivery.count
+  end
+
+  test "remise impossible à écrire : 503, le corrigé n'est pas servi sans trace, l'erreur est signalée" do
+    sign_in_as @student
+    reported = []
+    subscriber = Class.new { define_method(:report) { |error, **| reported << error } }.new
+    Rails.error.subscribe(subscriber)
+    failing = ->(**) { raise ActiveRecord::StatementInvalid, "boom" }
+    stub_any_instance(Repositories::Assessment::OfflinePackDeliveryRepository, :record, failing) do
+      get offline_pack_exercise_path(@exercise.public_id)
+    end
+
+    assert_response :service_unavailable
     assert_no_match(/"answers"/, response.body)
+    assert_equal 1, reported.size
+  ensure
+    Rails.error.unsubscribe(subscriber) if subscriber
   end
 
   test "le devoir une fois rendu, le paquet est servi" do

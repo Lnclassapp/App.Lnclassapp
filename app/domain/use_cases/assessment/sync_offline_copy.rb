@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SyncOfflineCopy
 # Rôle : le serveur reçoit une copie rendue hors ligne, la vérifie (jeton, version, droits, pause), la recorrige seul et la range terminée ; une copie refusée n'écrit rien
-# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.5 ; menace P4, R1 à R6), 0026, 0033, 0043, 0054, 0115, 0120-questions-a-plusieurs-cases-et-indice (cases), 0121 (assignation en attente : copie rangée sans rattachement), 0126 (garde d'accès)
+# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.5 ; menace P4, R1 à R6), 0026, 0033, 0043, 0054, 0115, 0120-questions-a-plusieurs-cases-et-indice (cases), 0121 (§4 ; amendé : la copie d'un devoir est rattachée au devoir), 0126 (garde d'accès)
 module UseCases
   module Assessment
     class SyncOfflineCopy
@@ -15,7 +15,7 @@ module UseCases
       BLANK_SEPARATOR = " ; ".freeze
       INVALID_PICK = :invalid_pick
 
-      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, pending:, policy:, transaction:, clock:, access:, current_digest:)
+      def initialize(signer:, exercises:, sessions:, gaps:, badges:, memberships:, assignments:, policy:, transaction:, clock:, access:, current_digest:)
         @current_digest = current_digest
         @signer = signer
         @exercises = exercises
@@ -24,7 +24,6 @@ module UseCases
         @badges = badges
         @memberships = memberships
         @assignments = assignments
-        @pending = pending
         @policy = policy
         @transaction = transaction
         @clock = clock
@@ -131,12 +130,9 @@ module UseCases
         Entities::Assessment::Grading.points_percent(graded)
       end
 
-      # Rattachée à l'assignation active de l'exercice dans la classe principale de l'élève (ADR-0048), comme au démarrage en ligne,
-      # sauf si c'est un devoir encore à rendre : le corrigé était en main (le paquet est refusé pour un devoir en attente, l'assignation
-      # est venue après), la copie est rangée comme un entraînement, sans rattachement (menace C1).
+      # Rattachée à l'assignation active de l'exercice dans la classe principale de l'élève (ADR-0048), comme au démarrage en ligne, y
+      # compris un devoir encore à rendre (décision du porteur, 2026-11-12) : la marque « corrigé reçu » se lit alors côté enseignant.
       def assignment_id(actor, exercise)
-        return if @pending.pending_exercise_public_ids(student_id: actor.user_id, exercise_public_ids: [ exercise.public_id ]).include?(exercise.public_id)
-
         membership = @memberships.primary_for(student_id: actor.user_id)
         return unless membership && membership.classroom_active?
 

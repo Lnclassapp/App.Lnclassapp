@@ -97,6 +97,10 @@ Contrats JavaScript gelés au Lot 0 (les lots les utilisent, ne les changent pas
 
 ---
 
+## Lot B2 — Corrigé des devoirs servi, marque pour l'enseignant
+
+Décision du porteur (2026-11-12). Branche `feature/hors-connexion-devoirs` depuis Develop. Migration `offline_pack_deliveries` + port et repository ; `OfflinePacksController` sert le devoir et enregistre la remise ; `SyncOfflineCopy` rattache de nouveau la copie au devoir ; marque calculée dans `session_result_query` et dans la requête du suivi d'assignation ; vues résultat et suivi (UDR-0170 §3.8) ; locales `offline.teacher.pack_before(_short)`. Revue `security-reviewer` et `silent-failure-hunter`.
+
 ## Lot D — Enseignant hors ligne (lecture seule)
 
 - **Couche**       : delivery

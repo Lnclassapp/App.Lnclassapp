@@ -1102,4 +1102,41 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#session_offline_received", 0
   end
+
+  # hors-connexion, Lot B2 (UDR-0170 §3.8) : « Corrigé reçu sur le téléphone le … » pour l'enseignant, jamais pour l'élève propriétaire.
+  def deliver_pack_before_session(delivered_at: Time.zone.local(2026, 11, 10, 9))
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise)
+    @session.update_columns(classroom_assignment_id: assignment.id, completed_at: delivered_at + 2.hours)
+    Orm::OfflinePackDelivery.create!(student: @student, exercise: @exercise, first_delivered_at: delivered_at, last_delivered_at: delivered_at)
+    delivered_at
+  end
+
+  test "B2 : l'enseignant lit « Corrigé reçu sur le téléphone le … » sur une copie de devoir commencée après la remise du corrigé" do
+    delivered = deliver_pack_before_session
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_response :success
+    assert_select "#session_offline_pack_marker", text: I18n.t("offline.teacher.pack_before", delivered: I18n.l(delivered, format: :short))
+    assert_select "#session_offline_pack_marker svg"
+    assert_select "#session_offline_pack_marker.text-sm.text-warning"
+  end
+
+  test "B2 : l'élève propriétaire ne lit jamais la marque" do
+    deliver_pack_before_session
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_offline_pack_marker", 0
+  end
+
+  test "B2 : sans remise du corrigé avant la copie, l'enseignant ne lit pas la marque" do
+    sign_in_as create_teacher(classrooms: [ @classroom ])
+
+    show
+
+    assert_select "#session_offline_pack_marker", 0
+  end
 end

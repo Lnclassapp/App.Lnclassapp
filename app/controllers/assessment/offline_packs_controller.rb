@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::OfflinePacksController
-# Rôle : sert à l'élève autorisé le paquet de corrigé d'un exercice (JSON, no-store) pour le faire hors ligne ; n'écrit rien
-# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4, §4.7) · menace C1, C2 (même autorisation que StartExerciseSession), C3 (jeton signé)
+# Rôle : sert à l'élève autorisé le paquet de corrigé d'un exercice (JSON, no-store) pour le faire hors ligne, devoir à rendre compris ; trace chaque remise, sans trace pas de corrigé
+# ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4 et amendement « Devoir à rendre », §4.7) · menace C1 (remise tracée, marque pour l'enseignant), C2 (même autorisation que StartExerciseSession), C3 (jeton signé)
 module Assessment
   class OfflinePacksController < AuthenticatedController
     include ReadsOwnLevel
@@ -31,24 +31,28 @@ module Assessment
 
       return :payment_required if Queries::Billing::StudentAccessQuery.new.call(student_id: current_actor.user_id, at: Time.zone.now).blocked?
 
-      :not_found if pending_assignment?(exercise)
-    end
-
-    # Menace C1 : un devoir à rendre n'a pas de corrigé hors ligne (l'élève rendrait en ligne une copie notée, corrigé en main).
-    # Option prudente en attendant le porteur (journal, À trancher) : le paquet est refusé tant que le devoir n'est pas rendu.
-    def pending_assignment?(exercise)
-      Repositories::Assessment::PendingAssignmentRepository.new
-                                                           .pending_exercise_public_ids(student_id: current_actor.user_id, exercise_public_ids: [ exercise.public_id ])
-                                                           .include?(exercise.public_id)
+      nil
     end
 
     def render_pack(pack)
       issued_at = Time.zone.now.utc.change(usec: 0)
+      return head(:service_unavailable) unless record_delivery(pack.exercise_id, issued_at)
+
       token = Repositories::Assessment::OfflinePackSigner.new.sign(student_id: current_actor.user_id, exercise_id: pack.exercise_id,
                                                                   digest: pack.digest, issued_at:)
       response.headers["Cache-Control"] = "no-store"
       render json: { exercise_public_id: pack.exercise_public_id, title: pack.title, digest: pack.digest, issued_at: issued_at.iso8601, token:,
                      questions: pack.questions }
+    end
+
+    # Menace C1 : chaque remise du corrigé est tracée (la marque de l'enseignant en dépend). Option prudente (journal, À trancher) : si la
+    # trace ne s'écrit pas, le corrigé n'est pas servi (503, l'appareil réessaiera) et l'erreur est signalée. → true | false
+    def record_delivery(exercise_id, at)
+      Repositories::Assessment::OfflinePackDeliveryRepository.new.record(student_id: current_actor.user_id, exercise_id:, at:)
+      true
+    rescue ActiveRecord::ActiveRecordError => e
+      Rails.error.report(e, handled: true, context: { exercise_id:, student_id: current_actor.user_id })
+      false
     end
   end
 end

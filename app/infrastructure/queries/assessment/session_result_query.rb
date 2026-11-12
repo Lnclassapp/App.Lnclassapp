@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
 # Rôle : résultat d'une session terminée (score, note, appréciation, points, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, hors-connexion (§4.5 : received_at), médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, hors-connexion (§4.5 : received_at, §4.4 : pack_delivered_at), médailles-lues-a-la-cloture, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
@@ -9,10 +9,11 @@ module Queries
       # earned_now : cette session a enregistré la médaille et son score atteint 10/20 (UDR Bronze sans fête sous 48 %). progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
       # gap_outcome : GapOutcome de cette session sur sa fiche (:opened, :lifted, :still_pending) ou nil (UDR-0120).
       # received_at : l'heure de réception d'une copie rendue hors ligne, nil pour une copie rendue en ligne (hors-connexion §4.5, UDR §3.7).
+      # pack_delivered_at : la première remise du corrigé hors ligne quand cette copie d'un devoir l'a suivie, nil sinon (UDR-0170 §3.8).
       # essential : nil pour un exercice de toute la leçon ; course_slug : le cours, toujours là (le retour à la leçon).
       Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :course_slug, :score_percent, :grade_on_20,
                         :correct_count, :question_count, :mastery, :badge_level, :earned_now, :progress, :review, :gap_outcome,
-                        :appreciation, :points, :completed_at, :received_at)
+                        :appreciation, :points, :completed_at, :received_at, :pack_delivered_at)
       # Les points du résultat (ADR-0115) : earned et graded, des seules questions corrigées automatiquement ; manual, des
       # réponses rédigées et du cahier, à comparer au corrigé ; weighted : au moins une question n'est pas à 1 point.
       Points = Data.define(:earned, :graded, :manual, :weighted)
@@ -66,10 +67,10 @@ module Queries
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
           exercise_public_id, title, statement_blocks, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id,
-          hinted_question_ids, received_at, treated =
+          hinted_question_ids, received_at, treated, pack_delivered_at =
           Orm::ExerciseSession.joins(:student, exercise: :course)
                               .joins("LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id")
-                              .where(public_id:).pick(*SESSION_COLUMNS, Arel.sql(Medals::TREATED_SQL))
+                              .where(public_id:).pick(*SESSION_COLUMNS, Arel.sql(Medals::TREATED_SQL), Arel.sql(OfflinePackMark::SESSION_COLUMN))
         return if id.nil?
 
         review = review(id, exercise_id, reveal, hinted_question_ids)
@@ -80,7 +81,7 @@ module Queries
                 earned_now: earned_now?(id, score_percent),
                 progress: progress(id, student_id, exercise_id, completed_at), review:,
                 gap_outcome: gap_outcome(id, kind, knowledge_gap_id),
-                appreciation: appreciation(score_percent, review, essential_name), points: points(review), completed_at:, received_at:)
+                appreciation: appreciation(score_percent, review, essential_name), points: points(review), completed_at:, received_at:, pack_delivered_at:)
       end
 
       # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant, de
