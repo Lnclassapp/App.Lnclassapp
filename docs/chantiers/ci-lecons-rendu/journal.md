@@ -7,7 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-11-12 | Levier « attente par leçon » non joué | Le porteur a choisi le rendu ciblé, qui ramène le coût d'un train sans leçon changée de 98,7 à environ 3 min : l'attente devient marginale. | non |
-| 2026-11-12 | Train : leçons changées seulement, sinon 2 témoins | Décision du porteur, coût en minutes de machine | oui, ADR-XXXX-ci-lecons-rendu-cible |
+| 2026-11-12 | Train : leçons changées seulement, sinon 2 témoins | Décision du porteur, coût en minutes de machine | oui, ADR-0131 |
 
 ## À trancher
 

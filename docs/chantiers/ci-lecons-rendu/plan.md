@@ -43,7 +43,7 @@ Décision du porteur (2026-11-12) : le train rend les 223 leçons **seulement qu
 - [x] `memo.md` : métrique nommée, valeur avant chiffrée, volume précisé, cible chiffrée
 - [x] Protocole de mesure écrit et reproductible par quelqu'un d'autre
 - [x] Où part le temps : ≈ 20 s par leçon × 223, ≈ 49 s d'installation × 32 parts
-- [ ] ADR écrit si un contrat change : ce que prouve un train change (ADR-0107 amendé) → `ADR-XXXX-ci-lecons-rendu-cible`
+- [ ] ADR écrit si un contrat change : ce que prouve un train change (ADR-0107 amendé) → `ADR-0131`
 - [ ] Bench versionné, produisant la valeur avant (commande `gh api` du memo)
 - [ ] Tests de non-régression fonctionnelle verts avant le levier
 - [ ] Un lot = un levier = un chiffre

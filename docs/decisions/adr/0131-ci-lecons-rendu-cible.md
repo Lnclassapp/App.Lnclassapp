@@ -1,4 +1,4 @@
-# ADR-XXXX : Le train rend les leçons changées, plus les 223
+# ADR-0131 : Le train rend les leçons changées, plus les 223
 <!-- index
 titre: Rendu ciblé des leçons au train
 statut: Accepté
