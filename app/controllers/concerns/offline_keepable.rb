@@ -14,6 +14,8 @@ module OfflineKeepable
 
   def mark_offline_keepable
     return unless authenticated? && response.status == 200 && response.media_type == "text/html"
+    # Menace P6 : un écran secret ou une réponse no-store n'est jamais gardable, quel que soit le `only:` déclaré.
+    return if (respond_to?(:secret_response?, true) && secret_response?) || response.headers["Cache-Control"].to_s.include?("no-store")
 
     response.set_header(HEADER, "keep")
   end

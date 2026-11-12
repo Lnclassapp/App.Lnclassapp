@@ -11,19 +11,21 @@ class OfflineKeepableTest < ActiveSupport::TestCase
 
     attr_reader :response
 
-    def initialize(connected:, response:)
+    def initialize(connected:, response:, secret: false)
       @connected = connected
       @response = response
+      @secret = secret
     end
 
     def authenticated? = @connected
+    def secret_response? = @secret
     def mark = mark_offline_keepable
   end
 
-  def headers_after(connected: true, status: 200, media_type: "text/html")
-    response = Response.new(status, media_type, {})
-    Host.new(connected:, response:).mark
-    response.headers
+  def headers_after(connected: true, status: 200, media_type: "text/html", secret: false, headers: {})
+    response = Response.new(status, media_type, headers.dup)
+    Host.new(connected:, response:, secret:).mark
+    response.headers.except(*headers.keys)
   end
 
   test "un 200 HTML d'un compte connecté est marqué gardable" do
@@ -34,6 +36,11 @@ class OfflineKeepableTest < ActiveSupport::TestCase
     assert_empty headers_after(connected: false)
     assert_empty headers_after(status: 302)
     assert_empty headers_after(media_type: "application/json")
+  end
+
+  test "une action secret_response ou une réponse no-store n'est jamais marquée (menace P6, revue sécurité du Lot 0)" do
+    assert_empty headers_after(secret: true)
+    assert_empty headers_after(headers: { "Cache-Control" => "private, no-store" })
   end
 
   test "keep_offline pose le rappel sur les actions demandées" do
