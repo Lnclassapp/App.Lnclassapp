@@ -130,15 +130,15 @@ jobs:
             lecons_files=$(grep -vE '^[[:space:]]*(#|$)' script/ci/lecons_temoins.txt | paste -sd, -)
             [ -n "$lecons_files" ] || { echo "::error::script/ci/lecons_temoins.txt ne liste aucune leçon témoin"; exit 1; }
           fi
-          # chantier ci-lecons-rendu, lot B : un train qui touche aux écrans rend les leçons toutes ; le premier fichier trouvé est cité.
+          # chantier ci-lecons-rendu, lot B : un train qui touche aux écrans prend toutes les leçons pour candidates ; le premier fichier trouvé est cité.
           if [ -n "$files" ] && screen=$(echo "$files" | grep -m1 -E "$screens"); then
-            echo "Rendu complet des leçons : la PR touche aux écrans (premier fichier : $screen)."
-            lecons_files=tout
-            count=$(ls docs/contenus/lecons-traitees/*/*/*.json | wc -l)
-          else
-            count=$(echo "$lecons_files" | tr ',' '\n' | wc -l)
+            echo "Toutes les leçons candidates : la PR touche aux écrans (premier fichier : $screen)."
+            lecons_files=$(ls docs/contenus/lecons-traitees/*/*/*.json | paste -sd, -)
           fi
-          parts=$(( (count + 7) / 8 ))
+          # Décision du porteur du 2026-11-12 : 5 leçons au plus, tirées au hasard parmi les choisies, en une seule part.
+          lecons_files=$(echo "$lecons_files" | tr ',' '\n' | shuf -n 5 | sort | paste -sd, -)
+          echo "Leçons rendues (5 au plus, au hasard) : $lecons_files"
+          parts=1
           echo "code=$code" | tee -a "$GITHUB_OUTPUT"
           echo "lessons=$lessons" | tee -a "$GITHUB_OUTPUT"
           echo "lecons_files=$lecons_files" | tee -a "$GITHUB_OUTPUT"
@@ -282,11 +282,11 @@ jobs:
 
   # standard-de-test, Lot D (ADR standard-de-test §4 point 4) : une leçon v3 est importée dans la base de test, publiée et lue
   # par un élève à 390 px puis sur ordinateur, avec chacune de ses feuilles (test/system/catalog/lesson_rendering_test.rb).
-  # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR, 8 au plus par part
-  # (≈ 20 s par leçon + ≈ 50 s d'installation, sous les 5 minutes), soit ⌈N/8⌉ parts calculées par « plan ». Sans leçon changée
-  # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt, en 1 part. Exception (lot B) :
-  # quand la PR touche aux écrans (expression « screens » de l'étape changes), « plan » passe LECONS=tout et rend toutes les
-  # leçons, ⌈nombre/8⌉ parts. Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout.
+  # Règle (chantier ci-lecons-rendu) : le train ne rend que les leçons v3 nouvelles ou modifiées de la PR. Sans leçon changée
+  # (ou diff illisible, avec un avertissement), les 2 leçons témoins de script/ci/lecons_temoins.txt. Quand la PR touche aux
+  # écrans (expression « screens » de l'étape changes), toutes les leçons sont candidates. Dans tous les cas, « plan » en tire
+  # 5 au plus au hasard (décision du porteur du 2026-11-12), en 1 part (≈ 20 s par leçon + ≈ 50 s d'installation).
+  # Avant : les 223 leçons en 32 parts, 98,7 min de machine par train (#541). À la main : LECONS=tout (5 au hasard aussi).
   # Rien n'est publié hors de la base de test. Une part rouge n'annule pas les autres.
   lecons:
     name: lecons ${{ matrix.part }}/${{ needs.plan.outputs.lecons_n }}

@@ -9,6 +9,7 @@ require "tmpdir"
 #
 # Quels fichiers : LECONS=<chemins séparés par des virgules> (LECONS_PART=i/n les découpe, comme au train) ; sinon LECONS=tout (LECONS_PART=i/n pour découper, tâche `lecons`
 # du train) ; sinon les fichiers v3 de docs/contenus/lecons-traitees changés depuis origin/Develop (hors CI, où le train a sa tâche).
+# Puis 5 fichiers au plus, tirés au hasard (décision du porteur du 2026-11-12) ; LECONS_SEED=<graine> rejoue un tirage.
 # Aucun fichier : aucun test de leçon, et pas d'échec. Dérogation au budget système : script/ci/system_budget.rb.
 module LessonRendering
   DIRECTORY = "docs/contenus/lecons-traitees".freeze
@@ -22,7 +23,19 @@ module LessonRendering
 
   # Le choix des fichiers, sans navigateur ni base.
   module Selection
+    MAX = 5
+
     module_function
+
+    # 5 fichiers au plus, tirés au hasard ; la graine est écrite pour rejouer le même tirage.
+    def drawn(files, env = ENV)
+      return files if files.size <= MAX
+
+      seed = Integer(env.fetch("LECONS_SEED", Random.new_seed))
+      chosen = files.sample(MAX, random: Random.new(seed)).sort
+      warn "LECONS : #{MAX} leçons sur #{files.size}, au hasard (LECONS_SEED=#{seed}) : #{chosen.join(', ')}"
+      chosen
+    end
 
     # Un fichier illisible compte : il est choisi, et la vérification le signale comme un import refusé (jamais écarté en silence).
     def v3?(path)
@@ -82,10 +95,10 @@ module LessonRendering
 
     def call(env = ENV)
       chosen = env["LECONS"].to_s.strip
-      return part(all, env["LECONS_PART"]) if chosen == "tout"
-      return part(named(chosen), env["LECONS_PART"]) unless chosen.empty?
+      return part(drawn(all, env), env["LECONS_PART"]) if chosen == "tout"
+      return part(drawn(named(chosen), env), env["LECONS_PART"]) unless chosen.empty?
 
-      env["CI"].present? ? [] : changed
+      env["CI"].present? ? [] : drawn(changed, env)
     end
   end
 
@@ -391,6 +404,26 @@ class Catalog::LessonSelectionTest < ActiveSupport::TestCase
 
     assert_equal names.sort, parts.flatten.sort
     assert(parts.all? { it.size == 1 })
+  end
+
+  test "5 leçons au plus, tirées au hasard, et la même graine rejoue le même tirage" do
+    files = (1..12).map { "l#{it}.json" }
+    draw = ->(seed) { capture_io { @chosen = LessonRendering::Selection.drawn(files, "LECONS_SEED" => seed.to_s) } && @chosen }
+
+    first = draw.(42)
+    assert_equal 5, first.size
+    assert_empty first - files
+    assert_equal first, draw.(42)
+    refute_equal first, draw.(7)
+    assert_equal files.first(3), LessonRendering::Selection.drawn(files.first(3), {})
+  end
+
+  test "LECONS=tout ne rend que 5 leçons, et le tirage est écrit" do
+    result = nil
+    _, error = capture_io { result = LessonRendering::Selection.call("LECONS" => "tout", "LECONS_SEED" => "1") }
+
+    assert_equal 5, result.size
+    assert_match(/LECONS : 5 leçons sur \d+, au hasard \(LECONS_SEED=1\)/, error)
   end
 
   test "les leçons témoins du train existent et sont au format v3" do
