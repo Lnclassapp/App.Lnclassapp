@@ -107,6 +107,25 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | La direction voit-elle l'usage des apps ? | **Reporté** à un petit chantier séparé | Seul le pilotage de l'équipe compte les apps |
 | Distribution | **Comme l'app élèves** : APK par WhatsApp à 5 à 10 enseignants, puis test fermé de 14 jours avec 12 testeurs, compte personnel | Un second test fermé sur le Play Store |
 
+### Mise à jour du 2026-11-12 — app élèves 1.1 (versionCode 2)
+
+> Demande du porteur : rouvrir l'app élèves et la passer aux dernières versions stables. L'app enseignants reste compilable, sans autre changement que ceux qu'impose AGP 9. Notes de version lues le 2026-11-12, sources ci-dessous.
+
+| Composant | Avant | Après | Changements cassants qui touchent l'app |
+|---|---|---|---|
+| Android Gradle Plugin | 8.13.2 | **9.5.1** | Saut majeur. Kotlin intégré à AGP : le greffon `org.jetbrains.kotlin.android` est refusé, retiré des trois modules ; la version de Kotlin se fixe par `buildscript { classpath(kotlin-gradle-plugin) }`. `resValues` est désactivé par défaut : réactivé dans `student` et `teacher`, qui posent `app_name` par variante. Gradle 9.6 au moins, JDK 17, build-tools 36. compileSdk 37 au plus ([notes 9.0](https://developer.android.com/build/releases/agp-9-0-0-release-notes) à [9.5](https://developer.android.com/build/releases/agp-9-5-0-release-notes), [Kotlin intégré](https://developer.android.com/build/migrate-to-built-in-kotlin)) |
+| Gradle | 8.14.3 | **9.9.1** | Saut majeur. Daemon sur JVM 17 au moins ; `jcenter()` et l'API Convention retirés, non utilisés ici ([mise à niveau 9](https://docs.gradle.org/current/userguide/upgrading_major_version_9.html)) |
+| Kotlin | 2.3.21 | **2.4.21** | Aucun relevé à la compilation |
+| Hotwire Native Android | 1.3.1 | **1.4.1** | La page de la bibliothèque annonce 1.4.0 le 2026-11-03 ; ses notes de version (GitHub) n'étaient pas lisibles depuis la session. Lu dans sa doc : la confiance d'origine — le pont natif (`account`) ne répond qu'aux pages de l'origine des onglets, ce qui est le cas (une seule `BASE_URL`). minSdk 28, compileSdk 35 : inchangés pour nous. Aucune API utilisée retirée (compilation verte) |
+| Material | 1.12.0 | **1.14.0** | Son `R` ne réexporte plus l'attribut `toolbarStyle` d'AppCompat : `PageToolbar` lit `androidx.appcompat.R.attr.toolbarStyle`. Exige compileSdk 36 ou plus |
+| core-splashscreen | 1.0.1 | **1.2.0** | Aucun relevé |
+| compileSdk élèves | 36 | **37** (Android 17) | Le socle `shell` reste à 36 : à 37, il imposerait 37 à l'app enseignants |
+| targetSdk | 36 | **36** | Exigence de Google Play depuis le 31 août 2026 pour toute nouvelle app et mise à jour ([exigence](https://developer.android.com/google/play/requirements/target-sdk)). Lint suggère 37 : non exigé |
+| minSdk | 28 | 28 | Plancher de Hotwire Native |
+| Version | 1 / 1.0 | **2 / 1.1** | L'app enseignants reste en 1 / 1.0 |
+
+Configuration des chemins : relue contre les routes élève du jour (accueil `/students` et matières du niveau, `/matieres/:slug`, `/courses/...`, devoirs, accès bêta ADR-0132). Aucune règle cassée ni chemin renommé ; l'accès bêta n'a ni route ni écran propre. Le fichier embarqué et celui servi par le site (`public/android/v1/`) restent identiques, sans changement. Le hors connexion n'est pas traité ici (chantier `hors-connexion`).
+
 ## Cas limites identifiés
 
 - Un enseignant ou un élève qui se connecte dans l'app de l'autre rôle : refusé **après** un PIN correct, jamais avant, pour ne pas révéler le rôle d'un numéro.

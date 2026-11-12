@@ -1,4 +1,4 @@
-# ADR-XXXX : Lnclass garde hors ligne les pages déjà ouvertes et synchronise les copies rendues sans réseau
+# ADR-0133 : Lnclass garde hors ligne les pages déjà ouvertes et synchronise les copies rendues sans réseau
 <!-- index
 titre: Hors connexion : pages ouvertes gardées, copies synchronisées
 statut: Accepté

@@ -1,8 +1,8 @@
-# UDR-XXXX : Hors connexion — bandeau, copie hors ligne, note provisoire, copies à envoyer
+# UDR-0170 : Hors connexion — bandeau, copie hors ligne, note provisoire, copies à envoyer
 <!-- index
 titre: Hors connexion : bandeau, note provisoire et copies à envoyer
 statut: Accepté
-adr-lie: XXXX-hors-connexion-pages-ouvertes-et-copies-synchronisees
+adr-lie: 0133-hors-connexion-pages-ouvertes-et-copies-synchronisees
 problematique: Hors ligne, l'élève doit savoir ce qu'il lit (une page gardée), que sa note est provisoire et où en sont ses copies, sans écran nouveau à apprendre.
 -->
 
@@ -11,7 +11,7 @@ problematique: Hors ligne, l'élève doit savoir ce qu'il lit (une page gardée)
 | **Statut** | Accepté |
 | **Date** | 2026-11-12 |
 | **Chantier** | `docs/chantiers/hors-connexion` |
-| **ADR lié** | ADR-XXXX-hors-connexion-pages-ouvertes-et-copies-synchronisees ; amende UDR-0078 §3.2 (page « Pas de connexion ») |
+| **ADR lié** | ADR-0133 ; amende UDR-0078 §3.2 (page « Pas de connexion ») |
 | **Remplacé par** | — |
 
 ---

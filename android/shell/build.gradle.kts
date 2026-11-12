@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -30,8 +29,8 @@ kotlin {
 
 // Exposées aux apps : leurs activités, leurs thèmes et leurs mises en page s'appuient dessus.
 dependencies {
-    api("dev.hotwire:core:1.3.1")
-    api("dev.hotwire:navigation-fragments:1.3.1")
-    api("androidx.core:core-splashscreen:1.0.1")
-    api("com.google.android.material:material:1.12.0")
+    api("dev.hotwire:core:1.4.1")
+    api("dev.hotwire:navigation-fragments:1.4.1")
+    api("androidx.core:core-splashscreen:1.2.0")
+    api("com.google.android.material:material:1.14.0")
 }
