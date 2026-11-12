@@ -171,6 +171,65 @@ module UseCases
         assert_nothing_written { assert_refused sync(actor: teacher), :forbidden }
       end
 
+      # Couverture (ADR-0024) : chaque chemin du use case a sa preuve.
+      test "sans compte, la copie est refusée forbidden" do
+        assert_nothing_written { assert_refused sync(actor: nil), :forbidden }
+      end
+
+      test "un exercice qui n'existe plus refuse la copie not_found" do
+        assert_nothing_written { assert_refused sync(payload(exercise_public_id: "absent0000000x")), :not_found }
+      end
+
+      test "une copie annoncée en double mais introuvable ensuite est refusée conflict" do
+        sessions = VanishingSessions.new(Repositories::Assessment::ExerciseSessionRepository.new)
+
+        assert_refused sync(sessions:), :conflict
+      end
+
+      test "une classe principale archivée : la copie est rangée sans rattachement" do
+        classroom = Orm::ClassroomStudent.find_by!(student_id: @student.id).classroom
+        create_assignment(classroom:, assignable: @exercise)
+        classroom.update_columns(status: "archived", archived_at: NOW)
+
+        assert_predicate sync, :success?
+        assert_nil Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
+      end
+
+      test "un devoir déjà rendu en ligne : la copie hors ligne est rattachée à son assignation" do
+        classroom = Orm::ClassroomStudent.find_by!(student_id: @student.id).classroom
+        assignment = create_assignment(classroom:, assignable: @exercise)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 50, classroom_assignment: assignment,
+                                completed_at: NOW - 3.hours)
+
+        assert_predicate sync, :success?
+        assert_equal assignment.id, Orm::ExerciseSession.find_by!(client_copy_id: UUID).classroom_assignment_id
+      end
+
+      test "une lacune en attente est levée par une copie à l'Or, comme à la clôture en ligne" do
+        gap = create_gap(student: @student, essential: @exercise.essential)
+        answers = { @first.id.to_s => pick(@first, right(@first)), @second.id.to_s => pick(@second, right(@second)) }
+
+        assert_predicate sync(payload(answers:)), :success?
+        assert_equal "remediated", gap.reload.status
+        assert_equal Orm::ExerciseSession.find_by!(client_copy_id: UUID).id, gap.resolved_by_session_id
+      end
+
+      test "une réponse au texte illisible compte non répondue, la copie est rangée" do
+        answers = { @first.id.to_s => { response_text: "\xFF".dup.force_encoding("UTF-8") }, @second.id.to_s => pick(@second, right(@second)) }
+
+        assert_predicate sync(payload(answers:)), :success?
+        first = Orm::QuestionAttempt.joins(:exercise_session).find_by!(exercise_sessions: { client_copy_id: UUID }, question_id: @first.id)
+        assert first.unanswered
+      end
+
+      test "un exercice de toute la leçon, sans notion : la copie est rangée sans toucher aux lacunes" do
+        @exercise = create_exercise(lesson_wide: true, course: @exercise.course)
+        @first, @second = @exercise.questions.order(:position).to_a
+
+        assert_predicate sync, :success?
+        assert_equal 0, Orm::KnowledgeGap.where(student_id: @student.id).count
+      end
+
       test "CA-12 : une heure d'origine dans le futur est ramenée à la réception" do
         sync(payload(started_at: (NOW + 3600).iso8601, submitted_at: (NOW + 7200).iso8601))
 

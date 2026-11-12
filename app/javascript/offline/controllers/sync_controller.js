@@ -1,9 +1,9 @@
 // ⚡ FRONT · offline-sync — envoie la file des copies rendues hors ligne : à l'ouverture de la page, au retour du réseau, avant la déconnexion
 // Rôle : porté par le layout sur chaque page ; ne fait rien sans clé d'appareil (déconnecté) ; un échec est écrit dans la console, jamais avalé
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, §4.5) · menace P4 (seule la file de la clé de la page part)
-import { Controller } from "@hotwired/stimulus"
-import { registerBeforePurge } from "../offline/store.js"
-import { flush } from "../offline/sync.js"
+import { Controller } from "../controller_base.js"
+import { registerBeforePurge } from "../store.js"
+import { flush } from "../sync.js"
 
 export default class extends Controller {
   connect() {

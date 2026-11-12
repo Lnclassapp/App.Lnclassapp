@@ -45,7 +45,7 @@ div#offline_status.mb-4.flex.items-center.gap-2.rounded-card.bg-mist.px-4.py-2.t
   span[data-offline-status-target="text"]
 ```
 
-- Contrôleur `app/javascript/controllers/offline_status_controller.js` : au `connect`, et sur `online` / `offline` de `window`. Si `navigator.onLine === false` → visible, texte `offline.banner.<role>.offline` (« Hors ligne. Tu lis une page gardée sur ton téléphone. » / « Hors ligne. Vous lisez une page gardée sur votre téléphone. »). Si la meta `lnclass-offline-served` (posée par le programme d'arrière-plan dans la page servie depuis le cache) porte une date → ajoute `offline.banner.saved_on` (« Gardée le %{date} »), date au format court `jj/mm à hh:mm`. Retour en ligne → caché.
+- Contrôleur `app/javascript/offline/controllers/status_controller.js` : au `connect`, et sur `online` / `offline` de `window`. Si `navigator.onLine === false` → visible, texte `offline.banner.<role>.offline` (« Hors ligne. Tu lis une page gardée sur ton téléphone. » / « Hors ligne. Vous lisez une page gardée sur votre téléphone. »). Si la meta `lnclass-offline-served` (posée par le programme d'arrière-plan dans la page servie depuis le cache) porte une date → ajoute `offline.banner.saved_on` (« Gardée le %{date} »), date au format court `jj/mm à hh:mm`. Retour en ligne → caché.
 - Pas de bouton. Contraste ink sur mist (≥ 4,5:1).
 
 ### 3.2 Page « Pas de connexion » — `public/offline.html` (Lot A, amende UDR-0078 §3.2)

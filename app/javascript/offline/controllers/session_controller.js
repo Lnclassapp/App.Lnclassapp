@@ -1,8 +1,8 @@
 // ⚡ FRONT · offline-session — donne la clé d'appareil au programme d'arrière-plan, purge l'ancienne clé, vide tout à la déconnexion
 // Rôle : clé → postMessage ; clé changée → purge de l'ancienne (file non envoyée gardée) ; formulaire DELETE /session → runBeforePurge puis purgeKey, puis `lnclass:forget` au programme (même si la purge échoue), puis la requête part
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.2, menace P1, P2, P4) · contrat du plan « Contrats JavaScript gelés »
-import { Controller } from "@hotwired/stimulus"
-import { currentKey, rememberKey, purgeKey, runBeforePurge } from "../offline/store.js"
+import { Controller } from "../controller_base.js"
+import { currentKey, rememberKey, purgeKey, runBeforePurge } from "../store.js"
 
 const LOGOUT_PATH = "/session"
 // L'envoi de la file ne retient jamais la déconnexion plus longtemps.

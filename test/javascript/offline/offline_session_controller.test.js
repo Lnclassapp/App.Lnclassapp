@@ -1,11 +1,12 @@
 // hors-connexion, Lot A, CA-4 (ADR §4.2, menace P1, P2) : la clé part au programme d'arrière-plan, l'ancienne clé est purgée
 // (file gardée), et la déconnexion joue runBeforePurge puis purgeKey avant de laisser partir la requête.
 // Lancer : node --test test/javascript/offline/offline_session_controller.test.js (store.js réel sur IndexedDB, caches et DOM simulés).
+import "./stimulus_base.js"
 import { test, beforeEach } from "node:test"
 import assert from "node:assert/strict"
 import { createFakeIndexedDB } from "./fake_indexeddb.js"
 import * as store from "../../../app/javascript/offline/store.js"
-import OfflineSessionController from "../../../app/javascript/controllers/offline_session_controller.js"
+import OfflineSessionController from "../../../app/javascript/offline/controllers/session_controller.js"
 
 const KEY = "0123456789abcdef"
 const OTHER = "fedcba9876543210"
