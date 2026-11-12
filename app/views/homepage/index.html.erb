@@ -1,5 +1,5 @@
 <%# 🌐 UI · homepage/index — page d'accueil publique : une photo, une feuille, deux entrées, sur un seul écran %>
-<%# Rôle : sur téléphone la feuille monte sur la photo ; sur ordinateur, texte à gauche, photo à droite, la feuille mord sur elle ; ni en-tête ni pied %>
+<%# Rôle : sur téléphone la feuille monte sur la photo des deux élèves ; sur ordinateur, texte à gauche, photo à droite ; un macaron étoilé ; ni en-tête ni pied %>
 <%# UDR  : 0059, 0012 (§2), 0113 (§3.9), palette froide (exception : titre gras et vague jaune de cette page) · ADR : 0049, 0051 · Drapeau : school_space_enabled %>
 <% page_title t(".page_title") %>
 <%# Tant qu'aucun cours n'est publié, les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3),
@@ -10,21 +10,31 @@
 <% school_space = Rails.configuration.x.pilot_flags[:school_space_enabled] %>
 
 <main class="relative flex min-h-dvh flex-col bg-paper lg:flex-row">
-  <%# La photo : sur téléphone au-dessus de la feuille ; sur ordinateur à droite, sous le bord arrondi de la feuille. Le fond
-      `ink` reste si elle ne charge pas, sans rien décaler (UDR-0059). %>
-  <div class="relative min-h-48 flex-1 bg-ink lg:order-2 lg:-ml-24 lg:min-h-0">
-    <%= image_tag "homepage/student-portrait.webp", alt: t(".photo_alt"), width: 505, height: 640, decoding: "async",
-          fetchpriority: "high", class: "absolute inset-0 size-full object-cover" %>
+  <%# La photo des deux élèves (celle de la maquette, recadrée sans le filigrane et éclaircie) : sur téléphone au-dessus de la
+      feuille, cadrée par le bas pour que les deux téléphones restent au-dessus d'elle ; sur ordinateur à droite, sous le bord
+      arrondi de la feuille, sans passer sous elle. Le fond `ink` reste si elle ne charge pas, sans rien décaler (UDR-0059). %>
+  <div class="relative min-h-48 flex-1 overflow-hidden bg-ink lg:order-2 lg:-ml-24 lg:min-h-0">
+    <%= image_tag "homepage/students.webp", alt: t(".photo_alt"), width: 795, height: 1006, decoding: "async",
+          fetchpriority: "high", class: "absolute inset-0 object-cover home-photo" %>
+    <%# Le macaron étoilé, en haut à droite de la photo (UDR-0059 §3, 2.) : lu une fois par son aria-label. %>
+    <p role="note" aria-label="<%= t(".badge.label") %>"
+       class="home-badge absolute top-3 right-1 z-10 grid rotate-8 place-items-center text-center lg:top-8 lg:right-8">
+      <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false" class="absolute inset-0 size-full fill-current text-brand drop-shadow-lg">
+        <path d="M185.5 100.0 L185.1 102.2 L183.8 104.4 L181.9 106.4 L179.6 108.4 L177.2 110.2 L175.2 111.9 L173.7 113.7 L172.9 115.5 L172.8 117.5 L173.5 119.7 L174.7 122.1 L176.1 124.7 L177.4 127.4 L178.3 130.1 L178.6 132.6 L178.1 134.8 L176.8 136.6 L174.7 138.1 L172.2 139.2 L169.3 140.0 L166.4 140.7 L163.8 141.5 L161.7 142.4 L160.3 143.8 L159.4 145.6 L159.1 147.9 L159.2 150.6 L159.5 153.5 L159.6 156.5 L159.3 159.3 L158.6 161.7 L157.2 163.5 L155.3 164.7 L152.8 165.2 L150.0 165.1 L147.0 164.7 L144.1 164.2 L141.5 163.8 L139.1 163.9 L137.2 164.5 L135.7 165.8 L134.6 167.8 L133.5 170.3 L132.5 173.1 L131.4 175.9 L130.1 178.3 L128.4 180.2 L126.4 181.3 L124.2 181.6 L121.7 181.0 L119.2 179.8 L116.6 178.3 L114.2 176.6 L111.9 175.2 L109.8 174.3 L107.8 174.1 L105.9 174.7 L104.0 176.0 L102.0 177.9 L100.0 180.0 L97.9 182.1 L95.6 183.8 L93.3 184.8 L91.1 185.0 L88.9 184.4 L86.9 182.9 L85.0 180.7 L83.4 178.3 L81.8 175.7 L80.3 173.5 L78.7 171.8 L77.0 170.9 L75.0 170.6 L72.7 171.1 L70.2 172.0 L67.5 173.1 L64.7 174.1 L61.9 174.7 L59.4 174.8 L57.3 174.0 L55.5 172.5 L54.3 170.4 L53.5 167.7 L53.0 164.7 L52.6 161.8 L52.1 159.1 L51.3 157.0 L50.1 155.4 L48.4 154.3 L46.2 153.8 L43.5 153.6 L40.5 153.5 L37.6 153.3 L34.8 152.8 L32.5 151.8 L30.8 150.3 L29.9 148.2 L29.6 145.7 L30.0 142.9 L30.7 140.0 L31.5 137.2 L32.2 134.6 L32.4 132.3 L31.9 130.3 L30.8 128.7 L28.9 127.3 L26.6 126.0 L23.9 124.7 L21.3 123.3 L19.0 121.7 L17.3 119.9 L16.4 117.8 L16.3 115.5 L17.1 113.1 L18.6 110.7 L20.4 108.4 L22.3 106.1 L24.0 104.0 L25.1 102.0 L25.5 100.0 L25.1 98.0 L24.0 96.0 L22.3 93.9 L20.4 91.6 L18.6 89.3 L17.1 86.9 L16.3 84.5 L16.4 82.2 L17.3 80.1 L19.0 78.3 L21.3 76.7 L23.9 75.3 L26.6 74.0 L28.9 72.7 L30.8 71.3 L31.9 69.7 L32.4 67.7 L32.2 65.4 L31.5 62.8 L30.7 60.0 L30.0 57.1 L29.6 54.3 L29.9 51.8 L30.8 49.7 L32.5 48.2 L34.8 47.2 L37.6 46.7 L40.5 46.5 L43.5 46.4 L46.2 46.2 L48.4 45.7 L50.1 44.6 L51.3 43.0 L52.1 40.9 L52.6 38.2 L53.0 35.3 L53.5 32.3 L54.3 29.6 L55.5 27.5 L57.2 26.0 L59.4 25.2 L61.9 25.3 L64.7 25.9 L67.5 26.9 L70.2 28.0 L72.7 28.9 L75.0 29.4 L77.0 29.1 L78.7 28.2 L80.3 26.5 L81.8 24.3 L83.4 21.7 L85.0 19.3 L86.9 17.1 L88.9 15.6 L91.1 15.0 L93.3 15.2 L95.6 16.2 L97.9 17.9 L100.0 20.0 L102.0 22.1 L104.0 24.0 L105.9 25.3 L107.8 25.9 L109.8 25.7 L111.9 24.8 L114.2 23.4 L116.6 21.7 L119.2 20.2 L121.7 19.0 L124.2 18.4 L126.4 18.7 L128.4 19.8 L130.1 21.7 L131.4 24.1 L132.5 26.9 L133.5 29.7 L134.6 32.2 L135.7 34.2 L137.2 35.5 L139.1 36.1 L141.5 36.2 L144.1 35.8 L147.0 35.3 L150.0 34.9 L152.8 34.8 L155.3 35.3 L157.2 36.5 L158.6 38.3 L159.3 40.7 L159.6 43.5 L159.5 46.5 L159.2 49.4 L159.1 52.1 L159.4 54.4 L160.3 56.2 L161.7 57.6 L163.8 58.5 L166.4 59.3 L169.3 60.0 L172.2 60.8 L174.7 61.9 L176.8 63.4 L178.1 65.2 L178.6 67.4 L178.3 69.9 L177.4 72.6 L176.1 75.3 L174.7 77.9 L173.5 80.3 L172.8 82.5 L172.9 84.5 L173.7 86.3 L175.2 88.1 L177.2 89.8 L179.6 91.6 L181.9 93.6 L183.8 95.6 L185.1 97.8Z"/>
+      </svg>
+      <span aria-hidden="true" class="relative grid leading-tight font-bold whitespace-nowrap text-white">
+        <span><%= t(".badge.from") %></span>
+        <span class="home-badge-grade font-display leading-none font-extrabold text-ink"><%= t(".badge.grade") %></span>
+        <span><%= t(".badge.to") %></span>
+        <span><%= t(".badge.offline_1") %></span>
+        <span><%= t(".badge.offline_2") %></span>
+      </span>
+    </p>
   </div>
 
   <div id="home-sheet"
-       class="z-10 -mt-8 flex flex-col items-center rounded-t-sheet bg-paper px-6 pt-6 pb-6 text-center lg:order-1 lg:mt-0 lg:w-7/12 lg:shrink-0 lg:items-start lg:justify-center lg:rounded-t-none lg:rounded-r-sheet lg:py-16 lg:pr-16 lg:pl-16 lg:text-left xl:pl-28">
-    <%# Sur téléphone, la pastille est posée sur la photo ; sur ordinateur, elle ouvre la feuille. %>
-    <p role="note" class="absolute top-4 left-4 inline-flex rounded-full bg-brand-soft px-3 py-1 text-meta font-medium text-brand-strong lg:static">
-      <%= t(".pill") %>
-    </p>
-
-    <h1 class="font-display leading-display font-extrabold tracking-tight text-ink lg:mt-5">
+       class="z-10 -mt-8 flex flex-col items-center rounded-t-sheet bg-paper px-6 pt-6 pb-safe text-center lg:order-1 lg:mt-0 lg:w-7/12 lg:shrink-0 lg:items-start lg:justify-center lg:rounded-t-none lg:rounded-r-sheet lg:py-16 lg:pr-16 lg:pl-16 lg:text-left xl:pl-28">
+    <h1 class="font-display leading-display font-extrabold tracking-tight text-ink">
       <span class="block text-3xl lg:inline lg:text-5xl xl:text-6xl">
         <span class="lg:hidden"><%= t(".title.phone") %></span><span class="hidden lg:inline"><%= t(".title.computer") %></span>
       </span>

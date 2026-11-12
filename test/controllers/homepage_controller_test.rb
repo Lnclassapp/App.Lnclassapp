@@ -1,7 +1,7 @@
 require "test_helper"
 
 # Chantier mvp-teacher-student, lot F (chantier page-d-accueil-photo, UDR-0059) : la page d'accueil publique est une photo,
-# une feuille qui porte « Tu comprends chap chap », la pastille « Même sans internet » et deux entrées de rôle (modales,
+# une feuille qui porte « Tu comprends chap chap », le macaron « De la 6ème à la Terminale, même sans internet » et deux entrées de rôle (modales,
 # UDR-0012 §2) ; ni en-tête, ni pied de page, ni section qui oblige à défiler (CA-A1, CA-A3).
 # CA-A2 : « Espace établissement » (lien et fenêtre) n'existe que drapeau `school_space_enabled` allumé.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
@@ -22,16 +22,19 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # CA-A1 : la photo, « Tu comprends chap chap » en gras, la vague jaune, la pastille et les deux entrées.
-  test "CA-A1: the photo, the bold slogan underlined by the yellow wave, the pill and the two entries" do
+  # CA-A1 : la photo des deux élèves, « Tu comprends chap chap » en gras, la vague jaune, le macaron et les deux entrées.
+  test "CA-A1: the photo, the bold slogan underlined by the yellow wave, the star badge and the two entries" do
     get root_url
 
     assert_select "h1", 1
     assert_select "h1.font-extrabold", text: /Tu comprends/
     assert_select "h1", text: /chap chap/
     assert_select "h1 svg[aria-hidden='true'].text-gold path"
-    assert_select "main img[src*='student-portrait']", 1
-    assert_select "main [role='note']", text: "Même sans internet"
+    assert_select "main img[src*='students']", 1
+    assert_select "main [role='note'][aria-label='De la 6ème à la Terminale, même sans internet']", 1 do
+      assert_select "svg[aria-hidden='true'] path", 1
+      assert_select "span[aria-hidden='true']", text: /6ème/
+    end
     assert_select "main button[aria-haspopup='dialog']", text: "Je suis élève"
     assert_select "main button[aria-haspopup='dialog']", text: "Enseignant(e)"
     assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", 2
@@ -95,15 +98,16 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/essentielle/i, response.body)
   end
 
-  test "RH-04: the photo is the current one, cropped in portrait: a WebP under 100 Ko with its dimensions and its alternative text" do
+  test "RH-04: the photo of the two students, cropped in portrait: a WebP under 100 Ko with its dimensions and its alternative text" do
     get root_url
 
-    assert_select "main img[src$='.webp'][width='505'][height='640'][alt=?]", I18n.t("homepage.index.photo_alt"), 1
+    assert_select "main img[src$='.webp'][width='795'][height='1006'][alt=?]", I18n.t("homepage.index.photo_alt"), 1
     assert_select "img:not([width]), img:not([height])", 0
 
+    photo = Rails.root.join("app/assets/images/homepage/students.webp")
+    assert_operator photo.size, :<=, 100.kilobytes, "la photo pèse #{photo.size / 1024} Ko"
     %w[student student-portrait].each do |name|
-      photo = Rails.root.join("app/assets/images/homepage/#{name}.webp")
-      assert_operator photo.size, :<=, 100.kilobytes, "la photo #{name} pèse #{photo.size / 1024} Ko"
+      assert_not Rails.root.join("app/assets/images/homepage/#{name}.webp").exist?, "une seule photo : #{name}.webp doit disparaître"
     end
     assert_not Rails.root.join("app/assets/images/homepage/student.png").exist?, "le PNG de 1,3 Mo doit disparaître"
   end
