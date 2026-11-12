@@ -145,8 +145,8 @@ Et aucune page d'enseignant qui écrit (formulaires d'assignation, d'annonce, de
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-hors-connexion-pages-ouvertes-et-copies-synchronisees — amende ADR-0082 §4.2 et ADR-0119 §4
-- UDR-XXXX-hors-connexion-bandeau-copie-provisoire-et-file — amende UDR-0078 §3.2
+- ADR-0133 — amende ADR-0082 §4.2 et ADR-0119 §4
+- UDR-0170 — amende UDR-0078 §3.2
 
 ## 7. Mesures
 

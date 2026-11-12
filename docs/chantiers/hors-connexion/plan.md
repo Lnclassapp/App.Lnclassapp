@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Références : [PRD](prd.md) · [menace](menace.md) · ADR-XXXX-hors-connexion-pages-ouvertes-et-copies-synchronisees · UDR-XXXX-hors-connexion-bandeau-copie-provisoire-et-file.
+> Références : [PRD](prd.md) · [menace](menace.md) · ADR-0133 · UDR-0170.
 
 ## Graphe
 
