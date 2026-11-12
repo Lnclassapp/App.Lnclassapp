@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes, l'état de la carte du prochain exercice ; l'historique, à part (cadre différé) ; sans classe, la dernière et un retrait récent
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes, l'état de la carte du prochain exercice ; l'historique, à part (cadre différé) ; sans classe, la dernière, un retrait récent et les matières du dernier niveau
 # ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090, médailles lues à la clôture · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8), XXXX accueil élève (§3.3 : les états de la carte)
 module Queries
   module Classroom
@@ -78,6 +78,10 @@ module Queries
         LastClassroom.new(drena_public_id:, school_public_id:,
                           recent_removal_at: (removed_at if removed_at && removed_at >= now - RECENT_REMOVAL))
       end
+
+      # Les matières de son niveau, pour l'élève sans classe active (chantier eleve-sans-prof) : son dernier niveau connu
+      # (StudentAudienceQuery). → [SubjectRow], vide s'il n'en a aucun.
+      def level_subjects(student_id:) = subjects(student_id)
 
       # Lue seule par le frame différé de l'activité récente. → [SessionRow]
       def recent_sessions(student_id:)

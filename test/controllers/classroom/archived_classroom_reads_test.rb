@@ -30,7 +30,9 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
   def restore!(classroom = @classroom) = repository.restore(id: classroom.id, at: Time.current)
   def tl(key, **) = I18n.t("classroom.#{key}", **)
 
-  test "the student whose only classroom is archived sees « Choisis ta classe », no exercise and no classroom name" do
+  # Chantier eleve-sans-prof : la grille et l'exercice du jour de son dernier niveau restent ; le devoir de la classe archivée
+  # n'est plus un travail assigné, il peut revenir comme exercice du jour (ADR-0089 §4.1, CA-15).
+  test "the student whose only classroom is archived sees « Choisis ta classe », no assigned work and no classroom name" do
     sign_in_as @student
     get student_home_path
     assert_select "#student_next_step[data-state=due]", text: /Tle D 1/
@@ -41,9 +43,10 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#student_next_step[data-state=no_classroom]", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
-    assert_select "#student_subjects, #student_history", 0
+    assert_select "#student_history", 0
+    assert_select "#student_subjects"
     assert_no_match "Tle D 1", response.body
-    assert_no_match "Méiose, les étapes", response.body
+    assert_select "#student_next_step_title", text: tl("student_homes.no_classroom.title")
     assert_equal [ true, nil ], [ Orm::ClassroomStudent.exists?(student: @student, left_at: nil), Queries::Classroom::StudentClassroomQuery.new.call(student_id: @student.id) ]
   end
 

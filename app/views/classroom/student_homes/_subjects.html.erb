@@ -1,13 +1,13 @@
 <%# 🌐 UI · classroom/student_homes/_subjects — la grille de l'accueil élève : 6 matières et « Inviter », 4 colonnes (7 dès lg) %>
-<%# Rôle : un rond bg-brand-soft par matière de son niveau, vers le catalogue filtré, nom entier ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; « Inviter » partage Lnclass %>
+<%# Rôle : un rond bg-brand-soft par matière de son niveau, vers le catalogue filtré, nom entier ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; « Inviter » partage Lnclass ; sans classe (invite_href nil), pas d'« Inviter » %>
 <%# UDR  : 0132 accueil élève §3.4, §3.8 (nav nommée) · 0062 §3.3 · charte §9 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
 <%# locals: (subjects:, late_slugs:, invite_href:) -%>
 <%# PRD CA-D1 : 7 cases, 6 matières au plus puis « Inviter » ; une 7e matière n'est pas affichée. %>
 <% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
 <% disc = "relative grid size-14 place-items-center rounded-full bg-brand-soft transition group-active:scale-95" %>
 <nav id="student_subjects" aria-label="<%= t("classroom.student_homes.subjects.label") %>">
-  <%# CA-D10 : le titre n'est visible que dès lg, où la grille tient sur une ligne de 7 ; sous lg, rien ne change. %>
-  <h2 class="mb-3 hidden font-display text-base font-medium text-ink lg:block"><%= t(".label") %></h2>
+  <%# Amendement eleve-sans-prof (porteur, 2026-11-12 : « affiche la section Mes matières ») : le titre, à toutes les tailles. %>
+  <h2 class="mb-3 font-display text-base font-medium text-ink"><%= t(".label") %></h2>
   <ul class="grid grid-cols-4 gap-y-4 lg:grid-cols-7 lg:gap-x-2">
     <% subjects.first(Classroom::StudentHomesController::MAX_SUBJECTS).each do |subject| %>
       <% late = late_slugs.include?(subject.slug) %>
@@ -23,16 +23,18 @@
         <% end %>
       </li>
     <% end %>
-    <li>
-      <%# La 7e case : le même partage WhatsApp que « Ton enseignant n'est pas sur Lnclass ? » (ADR-0089 §4.3), dans un nouvel onglet. %>
-      <%= link_to invite_href, id: "subject_invite", target: "_blank", rel: "noopener", class: tile,
-                  "aria-label": t("classroom.student_homes.invite_teacher.action_label") do %>
-        <span class="<%= disc %>">
-          <%= image_tag subject_illustration(:invite).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
-        </span>
-        <span aria-hidden="true"><%= t("classroom.student_homes.subjects.invite") %></span>
-      <% end %>
-    </li>
+    <% if invite_href %>
+      <li>
+        <%# La 7e case : le même partage WhatsApp que « Ton enseignant n'est pas sur Lnclass ? » (ADR-0089 §4.3), dans un nouvel onglet. %>
+        <%= link_to invite_href, id: "subject_invite", target: "_blank", rel: "noopener", class: tile,
+                    "aria-label": t("classroom.student_homes.invite_teacher.action_label") do %>
+          <span class="<%= disc %>">
+            <%= image_tag subject_illustration(:invite).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
+          </span>
+          <span aria-hidden="true"><%= t("classroom.student_homes.subjects.invite") %></span>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
   <% if subjects.empty? %><p class="mt-3 text-center text-meta text-mute"><%= t("classroom.student_homes.subjects.empty") %></p><% end %>
 </nav>

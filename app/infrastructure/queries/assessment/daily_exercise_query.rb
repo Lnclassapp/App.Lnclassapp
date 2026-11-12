@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::DailyExerciseQuery
-# Rôle : exercice du jour d'un élève sans travail donné, calculé à la lecture (état, exercice, matière, matière de demain), en une requête
-# ADR  : 0035, 0089 (§4.1), 0090 (§4.2 : rang des matières) · contrat gelé au Lot 0 du chantier accueil-eleve, implémenté au Lot C
+# Rôle : exercice du jour d'un élève sans travail donné, calculé à la lecture (état, exercice, matière, matière de demain), en deux requêtes (niveau, candidats)
+# ADR  : 0035 (niveau : StudentAudienceQuery, chantier eleve-sans-prof), 0089 (§4.1), 0090 (§4.2 : rang des matières) · contrat gelé au Lot 0 du chantier accueil-eleve, implémenté au Lot C
 module Queries
   module Assessment
     class DailyExerciseQuery
@@ -63,7 +63,7 @@ module Queries
         Orm::Exercise.joins(course: %i[material level]).left_joins(:essential)
                      .where(status: "published", courses: { status: "published" })
                      .where("essentials.id IS NULL OR essentials.status = 'published'")
-                     .where(exists(audience(student_id, today))).order(*CATALOG_ORDER)
+                     .merge(audience(student_id, today)).order(*CATALOG_ORDER)
                      .pluck("exercises.public_id", "exercises.title", "materials.slug", "materials.name", "materials.category",
                             "materials.position", Arel.sql("(#{first_done.to_sql})"), exists(assigned(student_id)), exists(done_today))
                      .map { Candidate.new(*it) }
@@ -76,12 +76,10 @@ module Queries
         Orm::ClassroomStudent.joins(:classroom).where(student_id:, left_at: nil, classrooms: { status: "active" })
       end
 
-      # La règle d'AudienceFilter (StudentAudienceQuery), corrélée au cours : une classe de l'année de son niveau, et la série
-      # du cours vide ou celle de la classe.
+      # Le niveau de l'élève (StudentAudienceQuery, AudienceFilter) : ses classes de l'année ou, sans aucune, sa dernière classe
+      # principale (chantier eleve-sans-prof) ; un cours sans série vaut pour toutes.
       def audience(student_id, today)
-        own_classrooms(student_id).where(classrooms: { school_year: Entities::Classroom::SchoolYear.current(today) })
-                                  .where("classrooms.level_id = courses.level_id")
-                                  .where("courses.series_id IS NULL OR courses.series_id = classrooms.series_id")
+        Queries::Catalog::AudienceFilter.courses(Queries::Catalog::StudentAudienceQuery.new.call(student_id:, today:))
       end
 
       # §4.1 étape 2 : un exercice donné dans une de ses classes est le travail de l'enseignant, jamais l'exercice du jour.
