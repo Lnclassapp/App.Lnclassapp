@@ -61,6 +61,7 @@ Tableau **généré** depuis l'en-tête du `memo.md` de chaque dossier (titre, *
 | [`annuaire-equipe`](annuaire-equipe/memo.md) | décision | feature | 2026-09-28 | Annuaire de l'équipe (« Comptes ») |
 | [`app-android`](app-android/memo.md) | app élèves exécutée | feature | 2026-09-30 | App Android pour élèves et enseignants |
 | [`archivage-classes`](archivage-classes/memo.md) | livré | feature | 2026-10-09 | Archiver une classe |
+| [`assignation-catalogue-modale-jours`](assignation-catalogue-modale-jours/memo.md) | livré | bugfix | 2026-11-12 | Une modale chargée juste après la fermeture d'une autre n'arrive jamais |
 | [`audit-500-et-messages`](audit-500-et-messages/memo.md) | en cours | bugfix | 2026-11-08 | Audit : 500 évitables et messages trompeurs |
 | [`audit-bugs-p2`](audit-bugs-p2/memo.md) | exécution | bugfix | 2026-11-08 | audit-bugs-p2 — B-003, B-004, B-005 |
 | [`audit-code-mort`](audit-code-mort/memo.md) | livré | refactoring | 2026-11-08 | Audit code mort (M-001 à M-004) |
