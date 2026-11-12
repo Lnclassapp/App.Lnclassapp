@@ -31,10 +31,19 @@ class Queries::Assessment::OfflinePackQueryTest < ActiveSupport::TestCase
     pack = @query.call(public_id: @exercise.public_id)
 
     choice, _numeric, ordering = pack.questions
-    assert_equal Entities::Assessment::AnswerShuffle.for(session_id: @exercise.id, question_id: choice[:id], ids: choice[:answers].pluck(:id)), choice[:display]
-    solution = ordering[:answers].pluck(:id)
-    assert_equal solution.sort, ordering[:display].sort
+    ids = @exercise.questions.find(choice[:id]).answers.order(:position, :id).pluck(:id)
+    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @exercise.id, question_id: choice[:id], ids:)
+    assert_equal shuffled.map { ids.index(it) }, choice[:display]
+    solution = ordering[:answers].each_index.to_a
+    assert_equal solution, ordering[:display].sort
     assert_not_equal solution, ordering[:display]
+  end
+
+  test "le paquet ne porte aucun identifiant de proposition : des rangs locaux" do
+    pack = @query.call(public_id: @exercise.public_id)
+
+    assert(pack.questions.all? { |question| question[:answers].none? { it.key?(:id) } })
+    assert(pack.questions.all? { |question| question[:display].nil? || question[:display].all? { it.between?(0, question[:answers].size - 1) } })
   end
 
   test "l'empreinte tient en 16 hexadécimaux, ne change pas d'un appel à l'autre et change quand une question change" do
@@ -84,8 +93,7 @@ class Queries::Assessment::OfflinePackQueryTest < ActiveSupport::TestCase
     by_id = sheet.questions.index_by(&:id)
     ordering = by_id.fetch(@exercise.questions.find_by(question_type: "ordering").id)
     ordering_pack = pack.questions.find { it[:kind] == "ordering" }
-    texts = ordering_pack[:answers].to_h { [ it[:id], it[:content] ] }
-    assert_equal ordering_pack[:display].map { texts[it] }, ordering.items.map(&:content)
+    assert_equal ordering_pack[:display].map { ordering_pack[:answers][it][:content] }, ordering.items.map(&:content)
     relier = by_id.fetch(matching.id)
     assert_equal %w[G1 G2 G3], relier.prompts
     assert_equal %w[D1 D2 D3], relier.items.map(&:content).sort

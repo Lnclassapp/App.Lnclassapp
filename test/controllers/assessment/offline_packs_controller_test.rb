@@ -27,6 +27,39 @@ class Assessment::OfflinePacksControllerTest < ActionDispatch::IntegrationTest
     assert_equal verified[:issued_at].iso8601, body["issued_at"]
   end
 
+  test "exercice assigné en devoir en attente : 404, rien n'est écrit (menace C1, décision du porteur en attente)" do
+    create_assignment(classroom: Orm::ClassroomStudent.find_by(student: @student, primary: true).classroom, assignable: @exercise)
+    sign_in_as @student
+
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      get offline_pack_exercise_path(@exercise.public_id)
+    end
+
+    assert_response :not_found
+    assert_no_match(/"answers"/, response.body)
+  end
+
+  test "le devoir une fois rendu, le paquet est servi" do
+    classroom = Orm::ClassroomStudent.find_by(student: @student, primary: true).classroom
+    assignment = create_assignment(classroom:, assignable: @exercise)
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", classroom_assignment_id: assignment.id)
+    sign_in_as @student
+
+    get offline_pack_exercise_path(@exercise.public_id)
+
+    assert_response :success
+  end
+
+  test "aucun Orm::Answer.id dans le JSON : des rangs locaux" do
+    sign_in_as @student
+
+    get offline_pack_exercise_path(@exercise.public_id)
+
+    body = response.parsed_body
+    assert(body["questions"].all? { |question| question["answers"].none? { it.key?("id") } })
+    assert_equal [ 0, 1, 2, 3 ].sort, body["questions"].first["display"].sort
+  end
+
   test "servir le paquet n'écrit rien" do
     sign_in_as @student
 

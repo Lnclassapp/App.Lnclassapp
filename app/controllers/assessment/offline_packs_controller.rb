@@ -29,7 +29,17 @@ module Assessment
       # allow_roles écarte déjà qui n'est pas élève : le seul refus restant est l'exercice non publié, qui n'existe pas pour l'élève.
       return :not_found if allowed.failure?
 
-      :payment_required if Queries::Billing::StudentAccessQuery.new.call(student_id: current_actor.user_id, at: Time.zone.now).blocked?
+      return :payment_required if Queries::Billing::StudentAccessQuery.new.call(student_id: current_actor.user_id, at: Time.zone.now).blocked?
+
+      :not_found if pending_assignment?(exercise)
+    end
+
+    # Menace C1 : un devoir à rendre n'a pas de corrigé hors ligne (l'élève rendrait en ligne une copie notée, corrigé en main).
+    # Option prudente en attendant le porteur (journal, À trancher) : le paquet est refusé tant que le devoir n'est pas rendu.
+    def pending_assignment?(exercise)
+      Repositories::Assessment::PendingAssignmentRepository.new
+                                                           .pending_exercise_public_ids(student_id: current_actor.user_id, exercise_public_ids: [ exercise.public_id ])
+                                                           .include?(exercise.public_id)
     end
 
     def render_pack(pack)

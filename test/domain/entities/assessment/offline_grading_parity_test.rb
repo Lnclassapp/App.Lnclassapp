@@ -36,8 +36,9 @@ class Entities::Assessment::OfflineGradingParityTest < ActiveSupport::TestCase
   private
 
   def entity(raw)
-    answers = raw["answers"].map do |answer|
-      Entities::Assessment::Answer.new(id: answer["id"], position: answer["position"], content: answer["content"], correct: answer["correct"],
+    # Le paquet ne porte pas d'identifiant : le rang (indice dans answers) en tient lieu, comme dans display.
+    answers = raw["answers"].each_with_index.map do |answer, rank|
+      Entities::Assessment::Answer.new(id: rank, position: answer["position"], content: answer["content"], correct: answer["correct"],
                                        match_content: answer["match_content"], blank: answer["blank"])
     end
     Entities::Assessment::Question.new(id: raw["id"], position: 1, content: raw["content"], explanation: nil, question_type: raw["question_type"], answers:,

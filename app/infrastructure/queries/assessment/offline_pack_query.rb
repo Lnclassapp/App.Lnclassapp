@@ -23,7 +23,7 @@ module Queries
       end
 
       # → Pack | nil. Le mélange d'affichage a pour graine l'identifiant de l'exercice (la copie hors ligne n'a pas de session) :
-      # display, par question à éléments mélangés, est la liste des identifiants dans l'ordre où la feuille les montre.
+      # display, par question à éléments mélangés, est la liste des rangs (indices dans answers) dans l'ordre où la feuille les montre ; aucun identifiant de proposition n'en sort.
       def call(public_id:)
         exercise = Orm::Exercise.find_by(public_id:)
         return if exercise.nil?
@@ -67,9 +67,16 @@ module Queries
         kind = kind_name(question.question_type)
         base = { id: question.id, kind:, question_type: question.question_type, content: question.content, explanation: question.explanation,
                  points: question.points.to_s("F"), unit: question.unit, numeric_tolerance: question.numeric_tolerance&.to_s("F"),
-                 answers: answers.map { { id: it.id, position: it.position, content: it.content, match_content: it.match_content, correct: it.correct, blank: it.blank } } }
-        base[:display] = shuffled(exercise, question.id, answers.map(&:id), kind) if SHUFFLED_KINDS.include?(kind)
+                 answers: answers.map { { position: it.position, content: it.content, match_content: it.match_content, correct: it.correct, blank: it.blank } } }
+        base[:display] = display_ranks(exercise, question.id, answers, kind) if SHUFFLED_KINDS.include?(kind)
         base
+      end
+
+      # Le mélange se tire sur les identifiants (même graine que la feuille), mais le paquet ne dit que des rangs : le rang d'une proposition
+      # est sa place dans answers (ordre position, id). Le serveur retrouve l'identifiant avec le même ordre.
+      def display_ranks(exercise, question_id, answers, kind)
+        ids = answers.map(&:id)
+        shuffled(exercise, question_id, ids, kind).map { ids.index(it) }
       end
 
       def shuffled(exercise, question_id, ids, kind)

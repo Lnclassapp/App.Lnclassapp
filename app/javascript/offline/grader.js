@@ -1,7 +1,7 @@
 // ⚡ FRONT · offline/grader — corrige une copie hors ligne exactement comme le domaine Ruby (note PROVISOIRE, le serveur recorrige à l'envoi)
 // Rôle : rejoue Question#correct? des types notés et Grading.points_percent ; written et notebook ne sont jamais notés ; une réponse vide ou mal formée vaut 0
 // ADR  : hors-connexion pages ouvertes et copies synchronisées (§4.4, menace R1) · table de cas partagée avec Ruby : test/fixtures/files/offline/grading_cases.json
-// Contrat de la réponse postée : { display_order: ["2", …], response_text: "…", blanks: { "0": "…" } } (les champs de la copie en ligne), indices d'affichage lus dans question.display.
+// Contrat de la réponse postée : { display_order: ["2", …], response_text: "…", blanks: { "0": "…" } } (les champs de la copie en ligne), indices d'affichage lus dans question.display (liste de rangs : un rang est l'indice d'une proposition dans question.answers, le paquet ne porte aucun identifiant de proposition).
 
 const WHITESPACE = "\\t-\\r \\u0085\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000" // [[:space:]] de Ruby
 const EDGE_SPACES = new RegExp(`^[${WHITESPACE}]+|[${WHITESPACE}]+$`, "gu")
@@ -62,7 +62,8 @@ function withinTolerance(value, wanted, tolerance) {
 
 const blanksOf = (question) => Math.max(0, ...question.answers.map((answer) => answer.blank ?? 0)) + 1
 // Blanks.cases : les réponses rangées par case.
-const casesOf = (question) => Array.from({ length: blanksOf(question) }, (_, blank) => question.answers.filter((answer) => (answer.blank ?? 0) === blank))
+const ranked = (question) => question.answers.map((answer, rank) => ({ ...answer, rank }))
+const casesOf = (question) => Array.from({ length: blanksOf(question) }, (_, blank) => ranked(question).filter((answer) => (answer.blank ?? 0) === blank))
 const isMultiBlank = (question) => blanksOf(question) > 1 && [ "numeric", "fill_blank", "select" ].includes(question.kind)
 
 // Ce que dit la copie postée pour une question : AttemptInput + CopyInput (question vide, indices illisibles = -1).
@@ -88,13 +89,13 @@ function readBlanks(raw) {
   return { list: Array.from(list, (entry) => entry ?? ""), unreadable }
 }
 
-// AnswerShuffle.pick et .select : les indices d'affichage rendus en identifiants, dans l'ordre posté ; mal formés → [].
+// AnswerShuffle.pick et .select : les indices d'affichage rendus en rangs, dans l'ordre posté ; mal formés → [].
 const pick = (display, indices) => (JSON.stringify([ ...indices ].sort((a, b) => a - b)) === JSON.stringify(display.map((_, index) => index)) ? indices.map((index) => display[index]) : [])
 const choose = (display, indices) => (new Set(indices).size === indices.length && indices.every((index) => index >= 0 && index < display.length) ? indices.map((index) => display[index]) : [])
 
 const sameIds = (left, right) => left.length === right.length && left.every((id, index) => id === right[index])
-const byPosition = (question) => [ ...question.answers ].sort((a, b) => a.position - b.position).map((answer) => answer.id)
-const correctIds = (question) => question.answers.filter((answer) => answer.correct).map((answer) => answer.id)
+const byPosition = (question) => ranked(question).sort((a, b) => a.position - b.position).map((answer) => answer.rank)
+const correctIds = (question) => ranked(question).filter((answer) => answer.correct).map((answer) => answer.rank)
 const sorted = (ids) => [ ...ids ].sort((a, b) => a - b)
 
 // → { well_formed, blank_results } ou null (réponse mal formée). Chaque type rejoue ses règles Ruby.
@@ -139,10 +140,10 @@ function judgeSelectCases(question, attempt, display) {
     if (rubyStrip(index) === "") return null
     return /^\d+$/.test(index) && Number(index) < display.length ? display[Number(index)] : MALFORMED
   })
-  const placed = ids.length === cases.length && ids.every((id, rank) => id === null || cases[rank].some((answer) => answer.id === id))
+  const placed = ids.length === cases.length && ids.every((id, rank) => id === null || cases[rank].some((answer) => answer.rank === id))
   if (!placed) return null
 
-  return { blank_results: ids.map((id, rank) => id !== null && cases[rank].find((answer) => answer.correct)?.id === id) }
+  return { blank_results: ids.map((id, rank) => id !== null && cases[rank].find((answer) => answer.correct)?.rank === id) }
 }
 
 // Texte à trous et nombre : un texte (une case) ou un texte par case, les cases vides admises quand il y en a plusieurs.

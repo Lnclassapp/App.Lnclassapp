@@ -10,12 +10,12 @@ const KEY = "0123456789abcdef"
 const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/
 const MINUTE = 60_000
 
-const answer = (id, content, extra = {}) => ({ id, position: id, content, match_content: null, correct: false, blank: 0, ...extra })
+const answer = (position, content, extra = {}) => ({ position, content, match_content: null, correct: false, blank: 0, ...extra })
 const PACK = {
   exercise_public_id: "EX1", token: "jeton-signé", digest: "0123456789abcdef", issued_at: "2026-11-12T09:00:00Z",
   questions: [
     { id: 11, kind: "choice", question_type: "single_choice", content: "Capitale ?", explanation: "Abidjan est la capitale économique.", points: "1.0", unit: null, numeric_tolerance: null,
-      answers: [ answer(1, "Abidjan", { correct: true }), answer(2, "Dakar") ], display: [ 2, 1 ] },
+      answers: [ answer(1, "Abidjan", { correct: true }), answer(2, "Dakar") ], display: [ 1, 0 ] },
     { id: 12, kind: "written", question_type: "written", content: "Explique", explanation: "Corrigé type", points: "1.0", unit: null, numeric_tolerance: null, answers: [] }
   ]
 }
