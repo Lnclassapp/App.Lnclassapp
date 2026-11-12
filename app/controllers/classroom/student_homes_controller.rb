@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte du prochain exercice, la grille, le carrousel d'annonces, l'historique différé ; sans classe principale active, « Choisis ta classe », les matières et l'exercice du jour du dernier niveau et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), 0132 accueil élève (§3.3, amendement eleve-sans-prof), 0158 (§3 bandeau)
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1), hors-connexion (§4.1), 0126 (contexte billing, §4.5) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), 0132 accueil élève (§3.3, amendement eleve-sans-prof), 0158 (§3 bandeau)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -8,6 +8,7 @@ module Classroom
     REMOVAL_NOTICE = :removal_noticed_at
 
     allow_roles :student
+    keep_offline only: :show # hors-connexion §4.1 : l'accueil déjà ouvert reste lisible sans réseau
 
     # PRD CA-D1 : la grille a 7 cases, 6 matières au plus puis « Inviter ».
     MAX_SUBJECTS = 6

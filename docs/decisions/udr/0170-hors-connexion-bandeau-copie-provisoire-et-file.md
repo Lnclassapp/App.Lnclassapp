@@ -2,7 +2,7 @@
 <!-- index
 titre: Hors connexion : bandeau, note provisoire et copies à envoyer
 statut: Accepté
-adr-lie: XXXX-hors-connexion-pages-ouvertes-et-copies-synchronisees
+adr-lie: 0133-hors-connexion-pages-ouvertes-et-copies-synchronisees
 problematique: Hors ligne, l'élève doit savoir ce qu'il lit (une page gardée), que sa note est provisoire et où en sont ses copies, sans écran nouveau à apprendre.
 -->
 
