@@ -21,9 +21,15 @@ module Repositories
         assert_nil @signer.verify({ student_id: 7 })
       end
 
+      test "le jeton est chiffré : ni l'identifiant de l'élève ni celui de l'exercice ne s'y lisent (ADR-0029, revue sécurité du Lot 0)" do
+        signed = @signer.sign(student_id: 734_211, exercise_id: 998_877, digest: "abcdef0123456789", issued_at: ISSUED)
+        readable = signed.split("--").map { Base64.decode64(it) rescue "" }.join + signed
+
+        assert_no_match(/734211|998877|abcdef0123456789/, readable)
+      end
+
       test "un jeton d'un autre but est refusé" do
-        other = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("offline_pack"), digest: "SHA256", serializer: JSON)
-        foreign = other.generate({ "student_id" => 7 }, purpose: "autre")
+        foreign = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "autre")
 
         assert_nil @signer.verify(foreign)
       end
@@ -36,8 +42,7 @@ module Repositories
       end
 
       test "un jeton dont la charge est incomplète rend nil" do
-        verifier = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("offline_pack"), digest: "SHA256", serializer: JSON)
-        partial = verifier.generate({ "student_id" => 7 }, purpose: "offline_pack")
+        partial = OfflinePackSigner.default_verifier.encrypt_and_sign({ "student_id" => 7 }, purpose: "offline_pack")
 
         assert_nil @signer.verify(partial)
       end
