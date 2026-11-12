@@ -26,7 +26,7 @@ Règle : `Entities::Billing::Access` (statut calculé) lue par les use cases qui
 |---|---|
 | L'élève ouvre Mon abonnement à la main | Carte « Accès complet gratuit pendant la bêta », sans compte à rebours ; la saisie d'un code reste possible |
 | L'élève a une carte activée | Il reste abonné, avec sa date |
-| Le réglage est refermé après la bêta | Retour exact à la règle d'avant : 7 jours gratuits, bandeau, blocage |
+| La date de fin de bêta est posée et atteinte | Chaque élève non abonné a 7 jours gratuits à partir de cette date (bandeau compris), puis il est bloqué ; un compte créé après la fin compte depuis sa création |
 
 ## 4. Critères d'acceptation
 
@@ -50,8 +50,13 @@ Alors son accès reste « abonné » avec sa date
 Quand l'élève ouvre Mon abonnement
 Alors il lit « Accès complet gratuit pendant la bêta » et aucun compte à rebours
 
-Étant donné le réglage refermé
-Alors l'élève dont les 7 jours sont passés est de nouveau bloqué et redirigé vers Mon abonnement
+Étant donné une fin de bêta posée au 10 janvier et un élève inscrit en novembre
+Quand il ouvre l'accueil le 9 janvier
+Alors il ne voit aucun bandeau
+Quand il démarre un exercice le 16 janvier
+Alors la séance est créée et l'accueil dit « Il te reste 1 jour gratuit »
+Quand il démarre un exercice le 17 janvier
+Alors rien n'est créé et il est redirigé vers Mon abonnement
 ```
 
 ## 5. Modélisation préliminaire

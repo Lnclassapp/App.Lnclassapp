@@ -3,7 +3,7 @@ require "test_helper"
 # cartes-activation, Lot B (PRD §4 « Période gratuite et blocage », ADR contexte billing §4.5 et §4.6, UDR-0158 §3) :
 # 7 jours gratuits à partir du 2026-11-09, puis « Commencer » et la vérification d'une fiche mènent à Mon abonnement sans rien écrire ;
 # leçons, exercices et historique restent lisibles ; un enseignant n'est jamais bloqué.
-# acces-beta : cette règle est celle d'après la bêta ; ces tests ferment le réglage Offer::BETA_OPEN_ACCESS (BillingBetaHelper).
+# acces-beta : cette règle est celle d'après la bêta ; ces tests ferment la bêta au jour de la mise en ligne (BillingBetaHelper).
 class BillingFreePeriodTest < ActionDispatch::IntegrationTest
   CREATED_ON = Time.zone.local(2026, 11, 9, 10)
   LAST_FREE_DAY = Time.zone.local(2026, 11, 15, 12)
@@ -230,8 +230,8 @@ class BillingBetaAccessTest < ActionDispatch::IntegrationTest
 
   def notice = "section[aria-label='#{I18n.t('billing.subscriptions.home_notice.label')}']"
 
-  test "le réglage livré est ouvert" do
-    assert Entities::Billing::Offer::BETA_OPEN_ACCESS
+  test "le réglage livré est ouvert : aucune date de fin de bêta" do
+    assert_nil Entities::Billing::Offer::BETA_ENDS_ON
   end
 
   test "deux mois après la création du compte : aucun bandeau ni lien vers Mon abonnement sur l'accueil" do
@@ -284,6 +284,27 @@ class BillingBetaAccessTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "h2", text: I18n.t("billing.subscriptions.status.beta.title")
       assert_no_match(/période gratuite est terminée|jours? gratuits?/, response.body)
+    end
+  end
+
+  test "fin de bêta posée : le même élève compte ses 7 jours gratuits à partir de la fin de bêta, puis il est bloqué" do
+    close_beta_for_this_test(on: Date.new(2027, 1, 10))
+
+    travel_to(Time.zone.local(2027, 1, 9, 12)) do
+      sign_in_as @student
+      get student_home_path
+      assert_select notice, count: 0
+    end
+    travel_to(Time.zone.local(2027, 1, 16, 12)) do
+      sign_in_as @student
+      get student_home_path
+      assert_select notice, text: /Il te reste 1 jour gratuit/
+      assert_difference(-> { Orm::ExerciseSession.count }, 1) { post exercise_sessions_path(@exercise.public_id) }
+    end
+    travel_to(Time.zone.local(2027, 1, 17, 12)) do
+      sign_in_as @student
+      assert_no_difference(-> { Orm::ExerciseSession.count }) { post exercise_sessions_path(@exercise.public_id) }
+      assert_redirected_to billing_subscription_path
     end
   end
 
