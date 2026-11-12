@@ -1,0 +1,2707 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Utilisation des symétries et translations",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "series_name": "C",
+      "material_name": "Mathématiques",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "symetrie-centrale-pagne",
+          "kind": "coordinate_plane",
+          "description": "Un repère de 0 à 7 en abscisse et de 0 à 5 en ordonnée. Trois points sont alignés : M(1 ; 1), I(3 ; 2) et M'(5 ; 3). Le segment [MM'] est tracé. Le point I est le milieu de [MM'] : il est le centre de la symétrie, et M' est le symétrique de M par rapport à I.",
+          "params": {
+            "xmin": 0,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "M",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "I",
+                "x": 3,
+                "y": 2
+              },
+              {
+                "id": "M'",
+                "x": 5,
+                "y": 3
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "symetrie-axiale-pli",
+          "kind": "coordinate_plane",
+          "description": "Un repère de −5 à 5 en abscisse et de 0 à 5 en ordonnée. Quatre points sont placés : A(3 ; 2), A'(−3 ; 2), B(1 ; 4) et B'(−1 ; 4). Les segments [AA'] et [BB'] sont horizontaux. L'axe des ordonnées les coupe en leur milieu : A' est le symétrique de A, et B' celui de B, par rapport à l'axe des ordonnées.",
+          "params": {
+            "xmin": -5,
+            "xmax": 5,
+            "ymin": 0,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": 3,
+                "y": 2
+              },
+              {
+                "id": "A'",
+                "x": -3,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 4
+              },
+              {
+                "id": "B'",
+                "x": -1,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 3,
+                "y1": 2,
+                "x2": -3,
+                "y2": 2
+              },
+              {
+                "x1": 1,
+                "y1": 4,
+                "x2": -1,
+                "y2": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "translation-motif",
+          "kind": "coordinate_plane",
+          "description": "Un repère de 0 à 8 en abscisse et de 0 à 5 en ordonnée. Le segment [AB] relie A(1 ; 3) à B(2 ; 4). Il est décalé en [A'B'] avec A'(4 ; 2) et B'(5 ; 3). Deux flèches parallèles AA' et BB' ont pour coordonnées (3 ; −1) : c'est le vecteur de la translation.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 3
+              },
+              {
+                "id": "B",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "A'",
+                "x": 4,
+                "y": 2
+              },
+              {
+                "id": "B'",
+                "x": 5,
+                "y": 3
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AA'",
+                "dx": 3,
+                "dy": -1,
+                "ox": 1,
+                "oy": 3
+              },
+              {
+                "label": "BB'",
+                "dx": 3,
+                "dy": -1,
+                "ox": 2,
+                "oy": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 3,
+                "x2": 2,
+                "y2": 4
+              },
+              {
+                "x1": 4,
+                "y1": 2,
+                "x2": 5,
+                "y2": 3
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La symétrie centrale",
+          "remember": "La **symétrie centrale** de centre $I$ envoie un point $M$ sur le point $M'$ tel que $I$ est le milieu de $[MM']$, c'est-à-dire $\\overrightarrow{IM'} = -\\overrightarrow{IM}$. Le centre $I$ est son propre symétrique. Dans un repère, si $I(a\\,;\\,b)$ et $M(x\\,;\\,y)$, alors $M'(2a - x\\,;\\,2b - y)$. Une symétrie centrale conserve les longueurs, les milieux et l'alignement, et transforme une droite en une droite parallèle. Si $A'$ et $B'$ sont les symétriques de $A$ et $B$ par rapport à $I$, et si $A$, $B$, $I$ ne sont pas alignés, alors $ABA'B'$ est un parallélogramme : ses diagonales $[AA']$ et $[BB']$ ont le même milieu $I$.",
+          "method": [
+            "Repérer le centre $I$ et le point $M$ dont on cherche le symétrique.",
+            "Traduire : $I$ est le milieu de $[MM']$, donc $x_I = \\frac{x + x'}{2}$ et $y_I = \\frac{y + y'}{2}$.",
+            "Calculer : $x' = 2x_I - x$ et $y' = 2y_I - y$.",
+            "Vérifier que le milieu de $[MM']$ est bien $I$, puis conclure."
+          ],
+          "example": {
+            "statement": "Dans un repère, $I(1\\,;\\,3)$ et $A(2\\,;\\,-1)$. Trouver le symétrique $A'$ de $A$ par rapport à $I$.",
+            "steps": [
+              "Repérer : le centre est $I(1\\,;\\,3)$ et le point est $A(2\\,;\\,-1)$.",
+              "Traduire : $I$ est le milieu de $[AA']$, donc $1 = \\frac{2 + x'}{2}$ et $3 = \\frac{-1 + y'}{2}$.",
+              "Calculer : $x' = 2 \\times 1 - 2 = 0$ et $y' = 2 \\times 3 - (-1) = 7$.",
+              "Vérifier : le milieu de $[AA']$ est $\\left(\\frac{2 + 0}{2}\\,;\\,\\frac{-1 + 7}{2}\\right) = (1\\,;\\,3)$, c'est bien $I$ ; donc $A'(0\\,;\\,7)$."
+            ]
+          },
+          "pitfall": "Ne pas placer le symétrique « à vue d'œil » ni oublier de doubler les coordonnées du centre. Avec $I(1\\,;\\,3)$ et $A(2\\,;\\,-1)$, le point $(-1\\,;\\,4)$ (qui vaut $I - A$) n'a pas $I$ pour milieu : son milieu avec $A$ est $(0,5\\,;\\,1,5)$. Ne pas confondre non plus avec la symétrie axiale : une symétrie centrale n'a pas d'axe et change les deux coordonnées. Vérifie toujours que le centre est le milieu de $[MM']$.",
+          "figure": "symetrie-centrale-pagne",
+          "exercise": [
+            {
+              "title": "Trouver le symétrique par rapport à un point",
+              "statement": "Dans cet exercice, tu cherches des symétriques par rapport à un point avec la méthode de la fiche : repérer, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": "symetrie-centrale-pagne",
+              "questions": [
+                {
+                  "content": "Soit $M(1 ; 1)$ et le centre $I(3 ; 2)$. Quel est le symétrique $M'$ de $M$ par rapport à $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(3 ; 2)$ et le point est $M(1 ; 1)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$, donc $3 = \\frac{1 + x'}{2}$ et $2 = \\frac{1 + y'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 3 - 1 = 5$ et $y' = 2 \\times 2 - 1 = 3$. Étape 4 — Vérifier : le milieu de $[MM']$ est $\\left(\\frac{1 + 5}{2}\\,;\\,\\frac{1 + 3}{2}\\right) = (3\\,;\\,2)$, c'est bien $I$ ; donc $M'(5 ; 3)$. La proposition $M'(2 ; 1)$ oublie de doubler les coordonnées du centre : le milieu de $[MM']$ ne serait pas le centre. La proposition $M'(-1 ; -1)$ prend l'origine pour centre de symétrie. La proposition $M'(5 ; 1)$ ne change que l'abscisse, ce qui est une symétrie axiale et non centrale.",
+                  "answers": [
+                    {
+                      "content": "$M'(5 ; 3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M'(2 ; 1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(-1 ; -1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(5 ; 1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(-2 ; 4)$ et le centre $I(1 ; 3)$. Quelle est l'abscisse du symétrique $A'$ de $A$ par rapport à $I$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(1 ; 3)$ et le point est $A(-2 ; 4)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$, donc $1 = \\frac{-2 + x'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 1 - (-2) = 4$. Étape 4 — Vérifier : la demi-somme $-2$ et $4 donne $\\frac{-2 + 4}{2} = 1$, c'est bien celle du centre ; la valeur est $4$. Si tu trouves $3$, tu as oublié de doubler la coordonnée du centre.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique d'un point $M$ par rapport à un point $I$ est le point $M'$ tel que $I$ est le milieu de $[MM']$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on lit la définition : un point $M$, un centre $I$ et le point $M'$. Étape 2 — Traduire : la définition dit que $M'$ est placé de l'autre côté de $I$, à la même distance. Étape 3 — Calculer : cela revient à $\\overrightarrow{IM'} = -\\overrightarrow{IM}$ : $I$ est au milieu du trajet de $M$ à $M'$. Étape 4 — Vérifier : c'est exactement la phrase de l'énoncé. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $B'(5 ; -2)$ est le symétrique de $B$ par rapport à $I(2 ; 1)$. Quelle est l'ordonnée de $B$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(2 ; 1)$ et le symétrique est $B'(5 ; -2)$. Étape 2 — Traduire : $I$ est le milieu de $[BB']$, donc $1 = \\frac{y + (-2)}{2}$. Étape 3 — Calculer : $y = 2 \\times 1 - (-2) = 4$. Étape 4 — Vérifier : le milieu de $[BB']$ a pour l'ordonnée $\\frac{4 + (-2)}{2} = 1$, c'est bien le centre ; l'ordonnée de $B$ est $4$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique de $M(1 ; 1)$ par rapport à un point $I$ est $M'(-3 ; 5)$. Quelles sont les coordonnées de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $M(1 ; 1)$ et son symétrique $M'(-3 ; 5)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$. Étape 3 — Calculer : $x_{I} = \\frac{1 + (-3)}{2} = -1$ et $y_{I} = \\frac{1 + 5}{2} = 3$. Étape 4 — Vérifier : avec $I(-1 ; 3)$, on retrouve $2 \\times (-1) - 1 = -3$ et $2 \\times 3 - 1 = 5$. La proposition $(-2\\,;\\,6)$ additionne les coordonnées sans diviser par 2. La proposition $(-4\\,;\\,4)$ est le vecteur $\\overrightarrow{MM'}$, pas le milieu. La proposition $(-2\\,;\\,2)$ est la moitié du vecteur, pas le milieu.",
+                  "answers": [
+                    {
+                      "content": "$(-1\\,;\\,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;\\,6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;\\,4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;\\,2)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Propriétés de la symétrie centrale",
+              "statement": "Dans cet exercice, tu utilises la symétrie centrale et ses propriétés avec la méthode de la fiche : repérer, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque point à son symétrique par rapport à l'origine $O(0 ; 0)$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Repérer : le centre est $O(0 ; 0)$ et on lit les quatre points. Étape 2 — Traduire : $O$ est le milieu de chaque segment $[MM']$, donc $x' = 2 \\times 0 - x = -x$ et $y' = -y$. Étape 3 — Calculer : on change le signe des deux coordonnées : $(2\\,;\\,3) \\to (-2\\,;\\,-3)$, $(-4\\,;\\,1) \\to (4\\,;\\,-1)$, $(5\\,;\\,-2) \\to (-5\\,;\\,2)$, $(-1\\,;\\,-6) \\to (1\\,;\\,6)$. Étape 4 — Vérifier : dans chaque paire, le milieu des deux points est $O(0 ; 0)$.",
+                  "answers": [
+                    {
+                      "content": "$A(2 ; 3)$",
+                      "match": "$A'(-2 ; -3)$"
+                    },
+                    {
+                      "content": "$B(-4 ; 1)$",
+                      "match": "$B'(4 ; -1)$"
+                    },
+                    {
+                      "content": "$C(5 ; -2)$",
+                      "match": "$C'(-5 ; 2)$"
+                    },
+                    {
+                      "content": "$D(-1 ; -6)$",
+                      "match": "$D'(1 ; 6)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre de la symétrie est le ___ du segment $[MM']$ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on lit la définition de la symétrie centrale. Étape 2 — Traduire : le point $M'$ est le symétrique de $M$ par rapport à $I$ si $I$ est au milieu du trajet. Étape 3 — Calculer : cela donne $\\overrightarrow{IM'} = -\\overrightarrow{IM}$. Étape 4 — Vérifier : le mot attendu est « milieu ». Le mot « centre » est celui du point $I$, pas la propriété du segment.",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux propriétés conservées par une symétrie centrale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on regarde ce qui change et ce qui reste quand on retourne une figure autour de $I$. Étape 2 — Traduire : la figure est retournée d'un demi-tour : elle n'est ni agrandie ni déformée. Étape 3 — Calculer : on retrouve par le calcul que $A'B' = AB$ et que trois points alignés restent alignés. Étape 4 — Vérifier : les longueurs et l'alignement sont conservés. Les coordonnées changent ($x' = 2x_I - x$), et chaque point change de place, sauf le centre.",
+                  "answers": [
+                    {
+                      "content": "les longueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'alignement des points",
+                      "correct": true
+                    },
+                    {
+                      "content": "les coordonnées des points",
+                      "correct": false
+                    },
+                    {
+                      "content": "la position de chaque point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(0 ; 1)$ et $B(3 ; 5)$. On note $A'$ et $B'$ leurs symétriques par rapport au point $I(2 ; 2)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on connaît $A(0 ; 1)$ et $B(3 ; 5)$ ; la transformation est donnée par rapport au point $I(2 ; 2)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(4 ; 3)$ et $B'(1 ; -1)$ ; $A'B' = \\sqrt{(1 - 4)^2 + (-1 - 3)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $AB = \\sqrt{(3 - 0)^2 + (5 - 1)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver le symétrique $M'$ de $M$ par rapport à $I$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on lit le centre et le point. Étape 2 — Traduire : on écrit que $I$ est le milieu de $[MM']$. Étape 3 — Calculer : on en déduit les coordonnées de $M'$. Étape 4 — Vérifier : on contrôle avec le milieu avant de conclure. L'ordre des quatre étapes est celui de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Repérer le centre $I$ et le point $M$."
+                    },
+                    {
+                      "content": "Traduire : $I$ est le milieu de $[MM']$."
+                    },
+                    {
+                      "content": "Calculer $x' = 2x_I - x$ et $y' = 2y_I - y$."
+                    },
+                    {
+                      "content": "Vérifier que le milieu de $[MM']$ est bien $I$."
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(4 ; -3)$. Le symétrique $M'$ de $M$ par rapport au point $I(1 ; 2)$ est $M'(-3 ; 5)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(1 ; 2)$ et le point est $M(4 ; -3)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$, donc $x' = 2 \\times 1 - 4$ et $y' = 2 \\times 2 - (-3)$. Étape 3 — Calculer : $x' = -2$ et $y' = 7$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(1\\,;\\,2)$, c'est bien $I$. Donc $M'(-2 ; 7)$. Le bon point est $M'(-2 ; 7)$, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La symétrie axiale",
+          "remember": "La **symétrie axiale** d'axe $d$ envoie un point $M$ non situé sur $d$ sur le point $M'$ tel que $d$ est la médiatrice de $[MM']$. Si $M$ est sur $d$, alors $M' = M$ : les points de l'axe sont fixes. Dans un repère, par rapport à l'axe des abscisses, $M(x\\,;\\,y)$ a pour symétrique $M'(x\\,;\\,-y)$ ; par rapport à l'axe des ordonnées, $M'(-x\\,;\\,y)$. Une symétrie axiale conserve les longueurs, les milieux, l'alignement et les angles, et transforme une droite en une droite.",
+          "method": [
+            "Identifier l'axe de symétrie : l'axe des abscisses ou l'axe des ordonnées.",
+            "Traduire : l'axe est la médiatrice de $[MM']$, donc la coordonnée mesurée le long de l'axe est conservée.",
+            "Calculer : changer le signe de l'autre coordonnée.",
+            "Vérifier que le milieu de $[MM']$ est sur l'axe et que $(MM')$ est perpendiculaire à l'axe, puis conclure."
+          ],
+          "example": {
+            "statement": "Dans un repère, trouver le symétrique $A'$ de $A(3\\,;\\,1)$ par rapport à l'axe des ordonnées.",
+            "steps": [
+              "Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $A(3\\,;\\,1)$.",
+              "Traduire : $(Oy)$ est la médiatrice de $[AA']$, donc l'ordonnée est conservée : $y' = 1$.",
+              "Calculer : l'abscisse change de signe, $x' = -3$.",
+              "Vérifier : le milieu de $[AA']$ est $(0\\,;\\,1)$, il est sur $(Oy)$, et $(AA')$ est horizontale donc perpendiculaire à $(Oy)$ ; donc $A'(-3\\,;\\,1)$."
+            ]
+          },
+          "pitfall": "Ne pas confondre les deux axes : par rapport à l'axe des ordonnées, c'est l'abscisse qui change de signe, pas l'ordonnée. Ne pas changer le signe des deux coordonnées non plus : $(x\\,;\\,y) \\to (-x\\,;\\,-y)$ est la symétrie centrale de centre $O$. Pour $A(3\\,;\\,1)$, on obtient $(-3\\,;\\,1)$ et non $(-3\\,;\\,-1)$ ni $(3\\,;\\,-1)$.",
+          "figure": "symetrie-axiale-pli",
+          "exercise": [
+            {
+              "title": "Trouver le symétrique par rapport à un axe",
+              "statement": "Dans cet exercice, tu cherches des symétriques par rapport à l'axe des abscisses ou des ordonnées avec la méthode de la fiche : identifier, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": "symetrie-axiale-pli",
+              "questions": [
+                {
+                  "content": "Soit $A(3 ; 2)$. Quel est le symétrique $A'$ de $A$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $A(3 ; 2)$. Étape 2 — Traduire : l'axe est la médiatrice de $[AA']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -3 = -3$ et $y' = 2$. Étape 4 — Vérifier : le milieu de $[AA']$ est $(0\\,;\\,2)$, il est sur l'axe, et $(AA')$ est perpendiculaire à l'axe ; donc $A'(-3 ; 2)$. La proposition $A'(-3 ; -2)$ change le signe des deux coordonnées, ce qui est une symétrie centrale par rapport à l'origine. La proposition $A'(3 ; -2)$ change le signe de l'ordonnée seulement, ce qui est la symétrie par rapport à l'axe des abscisses. La proposition $A'(2 ; 3)$ échange les deux coordonnées.",
+                  "answers": [
+                    {
+                      "content": "$A'(-3 ; 2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(-3 ; -2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(2 ; 3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $B(-2 ; 5)$. Quelle est l'ordonnée du symétrique $B'$ de $B$ par rapport à l'axe des abscisses $(Ox)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $B(-2 ; 5)$. Étape 2 — Traduire : l'axe est la médiatrice de $[BB']$. Étape 3 — Calculer : $y' = -5 = -5$. Étape 4 — Vérifier : le milieu de $[BB']$ est sur l'axe et $(BB')$ est perpendiculaire à l'axe ; l'ordonnée de $B'$ est $-5$.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point situé sur l'axe de symétrie est son propre symétrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on lit la propriété : un point $M$ situé sur l'axe $d$. Étape 2 — Traduire : $d$ est la médiatrice de $[MM']$ : $M'$ est à la même distance de $d$ que $M$, de l'autre côté. Étape 3 — Calculer : si $M$ est sur $d$, sa distance à $d$ est nulle, donc $M'$ est au même endroit que $M$. Étape 4 — Vérifier : $M' = M$ : les points de l'axe sont fixes. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M(4 ; -3)$ a pour image $M'(4 ; 3)$. Quelle transformation envoie $M$ sur $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on compare $M(4 ; -3)$ et $M'(4 ; 3)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(4 ; 3)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(-4 ; -3)$, la symétrie de centre l'origine $O$ donne $M'(-4 ; 3)$. Étape 4 — Vérifier : seule la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(4 ; 3)$.",
+                  "answers": [
+                    {
+                      "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie de centre l'origine $O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(-3 ; 6)$. Le symétrique $M'$ de $M$ par rapport à l'axe des ordonnées $(Oy)$ est $M'(3 ; -6)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $M(-3 ; 6)$. Étape 2 — Traduire : $(Oy)$ est la médiatrice de $[MM']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -(-3) = 3$ et $y' = 6$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(0\\,;\\,6)$, sur $(Oy)$, et $(MM')$ est horizontale donc perpendiculaire à $(Oy)$. Donc $M'(3 ; 6)$. Le bon point est $M'(3 ; 6)$, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Propriétés de la symétrie axiale",
+              "statement": "Dans cet exercice, tu utilises la symétrie axiale et ses propriétés avec la méthode de la fiche : identifier, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque point à son symétrique par rapport à l'axe des abscisses $(Ox)$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et on lit les quatre points. Étape 2 — Traduire : $(Ox)$ est la médiatrice de chaque segment $[MM']$ : l'abscisse est conservée, l'ordonnée change de signe. Étape 3 — Calculer : $(2\\,;\\,5) \\to (2\\,;\\,-5)$, $(-3\\,;\\,1) \\to (-3\\,;\\,-1)$, $(4\\,;\\,-2) \\to (4\\,;\\,2)$, $(-1\\,;\\,-6) \\to (-1\\,;\\,6)$. Étape 4 — Vérifier : dans chaque paire, le milieu des deux points est sur $(Ox)$ (ordonnée nulle).",
+                  "answers": [
+                    {
+                      "content": "$A(2 ; 5)$",
+                      "match": "$A'(2 ; -5)$"
+                    },
+                    {
+                      "content": "$B(-3 ; 1)$",
+                      "match": "$B'(-3 ; -1)$"
+                    },
+                    {
+                      "content": "$C(4 ; -2)$",
+                      "match": "$C'(4 ; 2)$"
+                    },
+                    {
+                      "content": "$D(-1 ; -6)$",
+                      "match": "$D'(-1 ; 6)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'axe de symétrie est la ___ du segment $[MM']$ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on lit la définition de la symétrie axiale. Étape 2 — Traduire : l'axe $d$ coupe $[MM']$ en son milieu et lui est perpendiculaire. Étape 3 — Calculer : une droite qui coupe un segment en son milieu, à angle droit, est sa médiatrice. Étape 4 — Vérifier : le mot attendu est « médiatrice ». Le mot « médiane » désigne un autre segment, dans un triangle.",
+                  "answers": [
+                    {
+                      "content": "médiatrice",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux points qui sont leur propre symétrique par rapport à l'axe des abscisses ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Identifier : l'axe est $(Ox)$, formé des points d'ordonnée nulle. Étape 2 — Traduire : un point est son propre symétrique s'il est sur l'axe. Étape 3 — Calculer : $P(5\\,;\\,0)$ donne $(5\\,;\\,-0) = (5\\,;\\,0)$ et $Q(-2\\,;\\,0)$ donne $(-2\\,;\\,0)$ ; $R(0\\,;\\,3)$ donne $(0\\,;\\,-3)$ et $T(3\\,;\\,3)$ donne $(3\\,;\\,-3)$. Étape 4 — Vérifier : seuls $P$ et $Q$ sont inchangés. $R$ est sur l'axe des ordonnées, pas sur $(Ox)$.",
+                  "answers": [
+                    {
+                      "content": "$P(5 ; 0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$Q(-2 ; 0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R(0 ; 3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$T(3 ; 3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(1 ; 2)$ et $B(5 ; 5)$. On note $A'$ et $B'$ leurs symétriques par rapport à l'axe des abscisses $(Ox)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $A(1 ; 2)$ et $B(5 ; 5)$ ; la transformation est donnée par rapport à l'axe des abscisses $(Ox)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(1 ; -2)$ et $B'(5 ; -5)$ ; $A'B' = \\sqrt{(5 - 1)^2 + (-5 - (-2))^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $AB = \\sqrt{(5 - 1)^2 + (5 - 2)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Par rapport à l'axe des ordonnées, le point $M(x ; y)$ a pour symétrique ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$, formé des points d'abscisse nulle. Étape 2 — Traduire : $(Oy)$ est la médiatrice de $[MM']$ : l'ordonnée est conservée. Étape 3 — Calculer : l'abscisse change de signe, donc $M'(-x\\,;\\,y)$. Étape 4 — Vérifier : vérification avec $M(2\\,;\\,3)$ : $M'(-2\\,;\\,3)$ a pour milieu avec $M$ le point $(0\\,;\\,3)$, sur $(Oy)$. La proposition $(x\\,;\\,-y)$ est la symétrie par rapport à $(Ox)$, et $(-x\\,;\\,-y)$ est la symétrie de centre $O$.",
+                  "answers": [
+                    {
+                      "content": "$M'(-x ; y)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M'(x ; -y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(-x ; -y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(y ; x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(-6 ; -4)$. Quelle est l'abscisse du symétrique $C'$ de $C$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $C(-6 ; -4)$. Étape 2 — Traduire : l'axe est la médiatrice de $[CC']$. Étape 3 — Calculer : $x' = -(-6) = 6$. Étape 4 — Vérifier : le milieu de $[CC']$ est sur l'axe et $(CC')$ est perpendiculaire à l'axe ; l'abscisse de $C'$ est $6$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La translation",
+          "remember": "La **translation** de vecteur $\\overrightarrow{u}$ envoie un point $M$ sur le point $M'$ tel que $\\overrightarrow{MM'} = \\overrightarrow{u}$. Dans un repère, si $\\overrightarrow{u}(a\\,;\\,b)$ et $M(x\\,;\\,y)$, alors $M'(x + a\\,;\\,y + b)$. Une translation conserve les longueurs, les milieux, l'alignement et les directions : elle transforme une droite en une droite parallèle. Si $\\overrightarrow{u} \\neq \\overrightarrow{0}$, aucun point n'est fixe. Si $A$, $B$, $C$, $D$ ne sont pas alignés, $ABCD$ est un parallélogramme si et seulement si la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+          "method": [
+            "Lire les coordonnées du point $M$ et celles du vecteur $\\overrightarrow{u}$.",
+            "Traduire : $M'$ est l'image de $M$ si $\\overrightarrow{MM'} = \\overrightarrow{u}$.",
+            "Calculer : $x' = x + a$ et $y' = y + b$.",
+            "Vérifier que les coordonnées de $\\overrightarrow{MM'}$ sont celles de $\\overrightarrow{u}$, puis conclure."
+          ],
+          "example": {
+            "statement": "Dans un repère, $\\overrightarrow{u}(2\\,;\\,-1)$ et $A(0\\,;\\,3)$. Trouver l'image $A'$ de $A$ par la translation de vecteur $\\overrightarrow{u}$.",
+            "steps": [
+              "Lire : le point est $A(0\\,;\\,3)$ et le vecteur est $\\overrightarrow{u}(2\\,;\\,-1)$.",
+              "Traduire : $A'$ est l'image de $A$ si $\\overrightarrow{AA'} = \\overrightarrow{u}$, donc $x' = 0 + 2$ et $y' = 3 + (-1)$.",
+              "Calculer : $x' = 0 + 2 = 2$ et $y' = 3 - 1 = 2$.",
+              "Vérifier : $\\overrightarrow{AA'}(2 - 0\\,;\\,2 - 3) = (2\\,;\\,-1)$, c'est bien $\\overrightarrow{u}$ ; donc $A'(2\\,;\\,2)$."
+            ]
+          },
+          "pitfall": "Ne pas inverser le sens du décalage : l'image vérifie $\\overrightarrow{MM'} = \\overrightarrow{u}$, on part de $M$ et on avance de $\\overrightarrow{u}$. Écrire $x' = x - a$ revient à utiliser $-\\overrightarrow{u}$. Avec $\\overrightarrow{u}(2\\,;\\,-1)$ et $A(0\\,;\\,3)$, le point $(-2\\,;\\,4)$ est l'image par la translation de vecteur $-\\overrightarrow{u}$, et non $A'$. Ne confonds pas non plus le vecteur $\\overrightarrow{u}$ avec le point image : ses coordonnées sont un déplacement.",
+          "figure": "translation-motif",
+          "exercise": [
+            {
+              "title": "Trouver l'image par une translation",
+              "statement": "Dans cet exercice, tu cherches des images par une translation avec la méthode de la fiche : lire, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": "translation-motif",
+              "questions": [
+                {
+                  "content": "Soit $A(1 ; 3)$ et $\\overrightarrow{u}(3\\,;\\,-1)$. Quelle est l'image $A'$ de $A$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $A(1 ; 3)$ et $\\overrightarrow{u}(3\\,;\\,-1)$. Étape 2 — Traduire : $\\overrightarrow{AA'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = 1 + 3 = 4$ et $y' = 3 + (-1) = 2$. Étape 4 — Vérifier : $\\overrightarrow{AA'}(4 - 1\\,;\\,2 - 3) = (3\\,;\\,-1)$, c'est bien $\\overrightarrow{u}$ ; donc $A'(4 ; 2)$. La proposition $A'(-2 ; 4)$ soustrait le vecteur au lieu de l'ajouter : c'est l'image par la translation de vecteur $-\\overrightarrow{u}$. La proposition $A'(3 ; -1)$ donne les coordonnées du vecteur au lieu de celles de l'image. La proposition $A'(4 ; 4)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$A'(4 ; 2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(-2 ; 4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(4 ; 4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $B(-2 ; 4)$ et $\\overrightarrow{u}(5\\,;\\,-3)$. Quelle est l'ordonnée de l'image $B'$ de $B$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $B(-2 ; 4)$ et $\\overrightarrow{u}(5\\,;\\,-3)$. Étape 2 — Traduire : $\\overrightarrow{BB'} = \\overrightarrow{u}$. Étape 3 — Calculer : $y' = 4 + (-3) = 1$. Étape 4 — Vérifier : $1 - 4 = -3$, c'est bien la coordonnée correspondante de $\\overrightarrow{u}$ ; l'ordonnée de $B'$ est $1$. Si tu trouves $7$, tu as soustrait le vecteur.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $C'(6 ; -1)$ est l'image de $C$ par la translation de vecteur $\\overrightarrow{u}(-2\\,;\\,3)$. Quelle est l'abscisse de $C$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $C'(6 ; -1)$ et $\\overrightarrow{u}(-2\\,;\\,3)$. Étape 2 — Traduire : $\\overrightarrow{CC'} = \\overrightarrow{u}$, donc $x' = x + -2$. Étape 3 — Calculer : $x = x' - (-2) = 6 - (-2) = 8$. Étape 4 — Vérifier : $8 + (-2) = 6$, c'est bien l'abscisse de $C'$ ; l'abscisse de $C$ est $8$. Si tu trouves $4$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation envoie $D(2 ; -1)$ sur $D'(-3 ; 4)$. Quelles sont les coordonnées de son vecteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $D(2 ; -1)$ et $D'(-3 ; 4)$. Étape 2 — Traduire : le vecteur de la translation est $\\overrightarrow{DD'}$. Étape 3 — Calculer : $-3 - 2 = -5$ et $4 - (-1) = 5$. Étape 4 — Vérifier : $D$ plus ce vecteur redonne bien $D'$ ; le vecteur est $\\overrightarrow{DD'}(-5\\,;\\,5)$. La proposition $(5\\,;\\,-5)$ est le vecteur de la translation inverse, $\\overrightarrow{D'D}$. La proposition $(-1\\,;\\,3)$ additionne les coordonnées au lieu de soustraire. La proposition $(-5\\,;\\,-5)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(-5\\,;\\,5)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(5\\,;\\,-5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-1\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-5\\,;\\,-5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M'$ est l'image de $M$ par la translation de vecteur $\\overrightarrow{u}$, alors $\\overrightarrow{MM'} = \\overrightarrow{u}$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit la définition de la translation de vecteur $\\overrightarrow{u}$. Étape 2 — Traduire : l'image de $M$ est le point $M'$ obtenu en partant de $M$ et en avançant de $\\overrightarrow{u}$. Étape 3 — Calculer : cela s'écrit $\\overrightarrow{MM'} = \\overrightarrow{u}$ : l'origine est $M$, l'extrémité est $M'$. Étape 4 — Vérifier : c'est la définition. L'affirmation est vraie ; l'égalité $\\overrightarrow{M'M} = \\overrightarrow{u}$ serait fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Propriétés de la translation",
+              "statement": "Dans cet exercice, tu utilises la translation et ses propriétés avec la méthode de la fiche : lire, traduire, calculer, vérifier.",
+              "hint": "Relis la méthode de la fiche et applique ses 4 étapes dans l'ordre avant de répondre.",
+              "exercise_type": "fixation",
+              "figure": null,
+              "questions": [
+                {
+                  "content": "Relie chaque point à son image par la translation de vecteur $\\overrightarrow{u}(2 ; -3)$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : le vecteur est $\\overrightarrow{u}(2\\,;\\,-3)$ et on lit les quatre points. Étape 2 — Traduire : chaque image vérifie $x' = x + 2$ et $y' = y - 3$. Étape 3 — Calculer : $(0\\,;\\,0) \\to (2\\,;\\,-3)$, $(1\\,;\\,4) \\to (3\\,;\\,1)$, $(-2\\,;\\,1) \\to (0\\,;\\,-2)$, $(5\\,;\\,-1) \\to (7\\,;\\,-4)$. Étape 4 — Vérifier : dans chaque paire, la différence entre l'image et le point est bien $(2\\,;\\,-3)$.",
+                  "answers": [
+                    {
+                      "content": "$A(0 ; 0)$",
+                      "match": "$A'(2 ; -3)$"
+                    },
+                    {
+                      "content": "$B(1 ; 4)$",
+                      "match": "$B'(3 ; 1)$"
+                    },
+                    {
+                      "content": "$C(-2 ; 1)$",
+                      "match": "$C'(0 ; -2)$"
+                    },
+                    {
+                      "content": "$D(5 ; -1)$",
+                      "match": "$D'(7 ; -4)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation transforme une droite en une droite ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on considère une droite $d$ et son image $d'$ par la translation de vecteur $\\overrightarrow{u}$. Étape 2 — Traduire : tous les points de $d$ sont décalés du même vecteur, donc la direction ne change pas. Étape 3 — Calculer : si $A'$ et $B'$ sont les images de $A$ et $B$, alors $\\overrightarrow{A'B'} = \\overrightarrow{AB}$. Étape 4 — Vérifier : la droite image a la même direction que la droite de départ : elle lui est parallèle (ou confondue).",
+                  "answers": [
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux propriétés conservées par une translation ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Lire : on regarde ce qui change et ce qui reste quand on décale une figure du vecteur $\\overrightarrow{u}$. Étape 2 — Traduire : tous les points sont décalés du même vecteur : la figure glisse sans tourner ni se déformer. Étape 3 — Calculer : on retrouve par le calcul que $\\overrightarrow{A'B'} = \\overrightarrow{AB}$, donc $A'B' = AB$ et la direction de $(A'B')$ est celle de $(AB)$. Étape 4 — Vérifier : les longueurs et les directions sont conservées. Les coordonnées et la position de chaque point changent (sauf si $\\overrightarrow{u}$ est nul).",
+                  "answers": [
+                    {
+                      "content": "les longueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "les directions des droites",
+                      "correct": true
+                    },
+                    {
+                      "content": "les coordonnées des points",
+                      "correct": false
+                    },
+                    {
+                      "content": "la position de chaque point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(0 ; 0)$ et $B(6 ; 8)$. On note $A'$ et $B'$ leurs images par la translation de vecteur $\\overrightarrow{u}(3\\,;\\,-2)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on connaît $A(0 ; 0)$ et $B(6 ; 8)$ ; la transformation est donnée par la translation de vecteur $\\overrightarrow{u}(3\\,;\\,-2)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(3 ; -2)$ et $B'(9 ; 6)$ ; $A'B' = \\sqrt{(9 - 3)^2 + (6 - (-2))^2} = \\sqrt{100} = 10$. Étape 4 — Vérifier : $AB = \\sqrt{(6 - 0)^2 + (8 - 0)^2} = 10$ aussi, car la transformation conserve les longueurs ; la longueur est 10.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $A(0 ; 0)$, $B(4 ; 1)$, $C(6 ; 4)$ et $D(2 ; 3)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les quatre points ; le vecteur de la translation est $\\overrightarrow{AB}$. Étape 2 — Traduire : l'image de $D$ est le point $D'$ tel que $\\overrightarrow{DD'} = \\overrightarrow{AB}$. Étape 3 — Calculer : $\\overrightarrow{AB}(4\\,;\\,1)$, donc $D'(6\\,;\\,4)$. Étape 4 — Vérifier : $D'$ a les coordonnées de $C$ : l'affirmation est vraie, et $ABCD$ est un parallélogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme si et seulement si la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Lire : on lit le quadrilatère $ABCD$ et le vecteur $\\overrightarrow{AB}$. Étape 2 — Traduire : l'image de $D$ est $D'$ tel que $\\overrightarrow{DD'} = \\overrightarrow{AB}$. Étape 3 — Calculer : $ABCD$ est un parallélogramme si et seulement si $\\overrightarrow{AB} = \\overrightarrow{DC}$, c'est-à-dire si $D'$ est le point $C$. Étape 4 — Vérifier : vérification avec $A(0\\,;\\,0)$, $B(4\\,;\\,1)$, $D(2\\,;\\,3)$ : $D' = (6\\,;\\,4)$, qui est $C$. La translation envoie $A$ sur $B$, pas $D$ ; elle ne laisse pas $D$ fixe.",
+                  "answers": [
+                    {
+                      "content": "$C$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le pagne de Korhogo",
+          "statement": "Sur un pagne tissé à Korhogo, les motifs sont repérés dans un repère quadrillé (1 carreau = 1 cm). Le bouton central est le point $I(4 ; 3)$. Un motif est en $A(1 ; 2)$ et un autre en $B(5 ; 5)$. Le tisserand fait pivoter le pagne d'un demi-tour autour de $I$ : c'est la symétrie de centre $I$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Soit $A(1 ; 2)$ et le centre $I(4 ; 3)$. Quel est le symétrique $A'$ de $A$ par rapport à $I$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le centre est $I(4 ; 3)$ et le point est $A(1 ; 2)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$, donc $4 = \\frac{1 + x'}{2}$ et $3 = \\frac{2 + y'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 4 - 1 = 7$ et $y' = 2 \\times 3 - 2 = 4$. Étape 4 — Vérifier : le milieu de $[AA']$ est $\\left(\\frac{1 + 7}{2}\\,;\\,\\frac{2 + 4}{2}\\right) = (4\\,;\\,3)$, c'est bien $I$ ; donc $A'(7 ; 4)$. La proposition $A'(3 ; 1)$ oublie de doubler les coordonnées du centre : le milieu de $[MM']$ ne serait pas le centre. La proposition $A'(-1 ; -2)$ prend l'origine pour centre de symétrie. La proposition $A'(7 ; 2)$ ne change que l'abscisse, ce qui est une symétrie axiale et non centrale.",
+              "answers": [
+                {
+                  "content": "$A'(7 ; 4)$",
+                  "correct": true
+                },
+                {
+                  "content": "$A'(3 ; 1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$A'(-1 ; -2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$A'(7 ; 2)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $B(5 ; 5)$ et le centre $I(4 ; 3)$. Quelle est l'ordonnée du symétrique $B'$ de $B$ par rapport à $I$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le centre est $I(4 ; 3)$ et le point est $B(5 ; 5)$. Étape 2 — Traduire : $I$ est le milieu de $[BB']$, donc $3 = \\frac{5 + y'}{2}$. Étape 3 — Calculer : $y' = 2 \\times 3 - 5 = 1$. Étape 4 — Vérifier : la demi-somme $5$ et $1 donne $\\frac{5 + 1}{2} = 3$, c'est bien celle du centre ; la valeur est $1$. Si tu trouves $-2$, tu as oublié de doubler la coordonnée du centre.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $A(1 ; 2)$ et $B(5 ; 5)$. On note $A'$ et $B'$ leurs symétriques par rapport au point $I(4 ; 3)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on connaît $A(1 ; 2)$ et $B(5 ; 5)$ ; la transformation est donnée par rapport au point $I(4 ; 3)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(7 ; 4)$ et $B'(3 ; 1)$ ; $A'B' = \\sqrt{(3 - 7)^2 + (1 - 4)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $AB = \\sqrt{(5 - 1)^2 + (5 - 2)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bouton $I$ est le seul motif qui reste à sa place après le demi-tour.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le centre est $I(4 ; 3)$ ; on cherche les points fixes. Étape 2 — Traduire : un point $M$ reste à sa place si $M' = M$, c'est-à-dire si $I$ est le milieu de $[MM]$. Étape 3 — Calculer : cela donne $x = 2 \\times 4 - x$ et $y = 2 \\times 3 - y$, soit $x = 4$ et $y = 3$. Étape 4 — Vérifier : seul $I(4\\,;\\,3)$ vérifie ces équations. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On note $A'$ et $B'$ les symétriques de $A$ et $B$ par rapport à $I$. Quelle est la nature du quadrilatère $ABA'B'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $A(1\\,;\\,2)$, $B(5\\,;\\,5)$, $I(4\\,;\\,3)$ donnent $A'(7\\,;\\,4)$ et $B'(3\\,;\\,1)$. Étape 2 — Traduire : $I$ est le milieu des diagonales $[AA']$ et $[BB']$, donc $ABA'B'$ est un parallélogramme. Étape 3 — Calculer : $\\overrightarrow{AB}(4\\,;\\,3)$ et $\\overrightarrow{B'A'}(4\\,;\\,3)$ sont égaux ; $\\overrightarrow{AB} \\cdot \\overrightarrow{BA'}$ avec $\\overrightarrow{BA'}(2\\,;\\,-1)$ vaut $4 \\times 2 + 3 \\times (-1) = 5 \\neq 0$, et $AB = 5 \\neq BA' = \\sqrt{5}$. Étape 4 — Vérifier : l'angle en $B$ n'est pas droit et deux côtés consécutifs n'ont pas la même longueur : ce n'est ni un rectangle, ni un losange, ni un carré. C'est un parallélogramme.",
+              "answers": [
+                {
+                  "content": "un parallélogramme",
+                  "correct": true
+                },
+                {
+                  "content": "un rectangle",
+                  "correct": false
+                },
+                {
+                  "content": "un losange",
+                  "correct": false
+                },
+                {
+                  "content": "un carré",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le motif en miroir et le motif décalé",
+          "statement": "Un artisan d'Abidjan dessine un motif dans un repère quadrillé (1 carreau = 1 cm). Il place le point $P(2 ; 3)$. Il dessine ensuite un motif en miroir par rapport à un axe, puis un motif décalé par une translation.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le miroir est l'axe des ordonnées. Soit $P(2 ; 3)$. Quel est le symétrique $P'$ de $P$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $P(2 ; 3)$. Étape 2 — Traduire : l'axe est la médiatrice de $[PP']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -2 = -2$ et $y' = 3$. Étape 4 — Vérifier : le milieu de $[PP']$ est $(0\\,;\\,3)$, il est sur l'axe, et $(PP')$ est perpendiculaire à l'axe ; donc $P'(-2 ; 3)$. La proposition $P'(-2 ; -3)$ change le signe des deux coordonnées, ce qui est une symétrie centrale par rapport à l'origine. La proposition $P'(2 ; -3)$ change le signe de l'ordonnée seulement, ce qui est la symétrie par rapport à l'axe des abscisses. La proposition $P'(3 ; 2)$ échange les deux coordonnées.",
+              "answers": [
+                {
+                  "content": "$P'(-2 ; 3)$",
+                  "correct": true
+                },
+                {
+                  "content": "$P'(-2 ; -3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P'(2 ; -3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P'(3 ; 2)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un autre miroir est l'axe des abscisses. Soit $P(2 ; 3)$. Quelle est l'ordonnée du symétrique $P'$ de $P$ par rapport à l'axe des abscisses $(Ox)$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $P(2 ; 3)$. Étape 2 — Traduire : l'axe est la médiatrice de $[PP']$. Étape 3 — Calculer : $y' = -3 = -3$. Étape 4 — Vérifier : le milieu de $[PP']$ est sur l'axe et $(PP')$ est perpendiculaire à l'axe ; l'ordonnée de $P'$ est $-3$.",
+              "answers": [
+                {
+                  "content": "-3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $P(2 ; 3)$ et $\\overrightarrow{u}(4\\,;\\,-1)$. Quelle est l'image $P'$ de $P$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $P(2 ; 3)$ et $\\overrightarrow{u}(4\\,;\\,-1)$. Étape 2 — Traduire : $\\overrightarrow{PP'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = 2 + 4 = 6$ et $y' = 3 + (-1) = 2$. Étape 4 — Vérifier : $\\overrightarrow{PP'}(6 - 2\\,;\\,2 - 3) = (4\\,;\\,-1)$, c'est bien $\\overrightarrow{u}$ ; donc $P'(6 ; 2)$. La proposition $P'(-2 ; 4)$ soustrait le vecteur au lieu de l'ajouter : c'est l'image par la translation de vecteur $-\\overrightarrow{u}$. La proposition $P'(4 ; -1)$ donne les coordonnées du vecteur au lieu de celles de l'image. La proposition $P'(6 ; 4)$ se trompe de signe pour l'ordonnée.",
+              "answers": [
+                {
+                  "content": "$P'(6 ; 2)$",
+                  "correct": true
+                },
+                {
+                  "content": "$P'(-2 ; 4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P'(4 ; -1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$P'(6 ; 4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un second motif est décalé de la même façon. Le point $Q'(3 ; 5)$ est l'image de $Q$ par la translation de vecteur $\\overrightarrow{u}(4\\,;\\,-1)$. Quelle est l'ordonnée de $Q$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $Q'(3 ; 5)$ et $\\overrightarrow{u}(4\\,;\\,-1)$. Étape 2 — Traduire : $\\overrightarrow{QQ'} = \\overrightarrow{u}$, donc $y' = y + -1$. Étape 3 — Calculer : $y = y' - (-1) = 5 - (-1) = 6$. Étape 4 — Vérifier : $6 + (-1) = 5$, c'est bien l'ordonnée de $Q'$ ; l'ordonnée de $Q$ est $6$. Si tu trouves $4$, tu as ajouté le vecteur au lieu de le retirer.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un troisième motif est en miroir. Le point $M(3 ; -2)$ a pour image $M'(3 ; 2)$. Quelle transformation envoie $M$ sur $M'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : on compare $M(3 ; -2)$ et $M'(3 ; 2)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(3 ; 2)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(-3 ; -2)$, la symétrie de centre l'origine $O$ donne $M'(-3 ; 2)$. Étape 4 — Vérifier : seule la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(3 ; 2)$.",
+              "answers": [
+                {
+                  "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                  "correct": true
+                },
+                {
+                  "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                  "correct": false
+                },
+                {
+                  "content": "la symétrie de centre l'origine $O$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un logo à Cocody",
+          "statement": "Le logo d'une coopérative de Cocody est dessiné dans un repère (1 carreau = 1 cm) avec les points $A(1 ; 1)$ et $B(4 ; 5)$. Le centre du logo est le point $I(3 ; 2)$. On note $A'$ et $B'$ les symétriques de $A$ et $B$ par rapport à $I$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Soit $A(1 ; 1)$ et le centre $I(3 ; 2)$. Quel est le symétrique $A'$ de $A$ par rapport à $I$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le centre est $I(3 ; 2)$ et le point est $A(1 ; 1)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$, donc $3 = \\frac{1 + x'}{2}$ et $2 = \\frac{1 + y'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 3 - 1 = 5$ et $y' = 2 \\times 2 - 1 = 3$. Étape 4 — Vérifier : le milieu de $[AA']$ est $\\left(\\frac{1 + 5}{2}\\,;\\,\\frac{1 + 3}{2}\\right) = (3\\,;\\,2)$, c'est bien $I$ ; donc $A'(5 ; 3)$. La proposition $A'(2 ; 1)$ oublie de doubler les coordonnées du centre : le milieu de $[MM']$ ne serait pas le centre. La proposition $A'(-1 ; -1)$ prend l'origine pour centre de symétrie. La proposition $A'(5 ; 1)$ ne change que l'abscisse, ce qui est une symétrie axiale et non centrale.",
+              "answers": [
+                {
+                  "content": "$A'(5 ; 3)$",
+                  "correct": true
+                },
+                {
+                  "content": "$A'(2 ; 1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$A'(-1 ; -1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$A'(5 ; 1)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $B(4 ; 5)$ et le centre $I(3 ; 2)$. Quelle est l'ordonnée du symétrique $B'$ de $B$ par rapport à $I$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le centre est $I(3 ; 2)$ et le point est $B(4 ; 5)$. Étape 2 — Traduire : $I$ est le milieu de $[BB']$, donc $2 = \\frac{5 + y'}{2}$. Étape 3 — Calculer : $y' = 2 \\times 2 - 5 = -1$. Étape 4 — Vérifier : la demi-somme $5$ et $-1 donne $\\frac{5 + (-1)}{2} = 2$, c'est bien celle du centre ; la valeur est $-1$. Si tu trouves $-3$, tu as oublié de doubler la coordonnée du centre.",
+              "answers": [
+                {
+                  "content": "-1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $A(1 ; 1)$ et $B(4 ; 5)$. On note $A'$ et $B'$ leurs symétriques par rapport au point $I(3 ; 2)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on connaît $A(1 ; 1)$ et $B(4 ; 5)$ ; la transformation est donnée par rapport au point $I(3 ; 2)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(5 ; 3)$ et $B'(2 ; -1)$ ; $A'B' = \\sqrt{(2 - 5)^2 + (-1 - 3)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $AB = \\sqrt{(4 - 1)^2 + (5 - 1)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $A(1 ; 1)$, $B(4 ; 5)$ et $I(3 ; 2)$. On note $A'$ et $B'$ les symétriques de $A$ et $B$ par rapport à $I$. Le quadrilatère $ABA'B'$ est un vrai parallélogramme (non aplati).",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : $A(1 ; 1)$, $B(4 ; 5)$ et le centre $I(3 ; 2)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$ et de $[BB']$ : les diagonales ont le même milieu. Étape 3 — Calculer : $A'(5\\,;\\,3)$ et $B'(2\\,;\\,-1)$ ; $\\overrightarrow{IA}(-2\\,;\\,-1)$ et $\\overrightarrow{IB}(1\\,;\\,3)$. Étape 4 — Vérifier : les points ne sont pas alignés avec le centre (les deux vecteurs ne sont pas colinéaires), donc le quadrilatère n'est pas aplati : c'est un parallélogramme. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Démontre que le quadrilatère $ABA'B'$ est un parallélogramme. Rédige comme dans un devoir : calcule les coordonnées de $A'$ et $B'$, puis compare deux vecteurs.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Coordonnées de $A'$ correctes",
+                "Coordonnées de $B'$ correctes",
+                "Égalité $\\overrightarrow{AB} = \\overrightarrow{B'A'}$ établie par les coordonnées",
+                "Conclusion rédigée (parallélogramme, points non alignés)"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Repérer : $A(1\\,;\\,1)$, $B(4\\,;\\,5)$ et le centre $I(3\\,;\\,2)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$ et de $[BB']$, donc $x' = 2x_I - x$ et $y' = 2y_I - y$. Étape 3 — Calculer : $A'(2 \\times 3 - 1\\,;\\,2 \\times 2 - 1) = (5\\,;\\,3)$ et $B'(2 \\times 3 - 4\\,;\\,2 \\times 2 - 5) = (2\\,;\\,-1)$. Alors $\\overrightarrow{AB}(3\\,;\\,4)$ et $\\overrightarrow{B'A'}(5 - 2\\,;\\,3 - (-1)) = (3\\,;\\,4)$. Étape 4 — Vérifier et conclure : le milieu de $[AA']$ est $(3\\,;\\,2)$ et celui de $[BB']$ aussi ; $\\overrightarrow{AB} = \\overrightarrow{B'A'}$, et les points ne sont pas alignés car $\\overrightarrow{IA}(-2\\,;\\,-1)$ et $\\overrightarrow{IB}(1\\,;\\,3)$ ne sont pas colinéaires ($-2 \\times 3 - (-1) \\times 1 = -5 \\neq 0$). Donc $ABA'B'$ est un parallélogramme. Barème sur 4 : coordonnées de $A'$ (1 point), coordonnées de $B'$ (1 point), égalité $\\overrightarrow{AB} = \\overrightarrow{B'A'}$ (1 point), conclusion avec la remarque sur les points non alignés (1 point).",
+              "answers": [],
+              "starter": "Je calcule les coordonnées de $A'$ puis de $B'$…"
+            }
+          ]
+        },
+        {
+          "title": "Le carrelage d'une cour à Yamoussoukro",
+          "statement": "Pour carreler une cour, un maçon travaille dans un repère (1 carreau = 1 m). Un carreau a pour sommets $A(0 ; 0)$, $B(3 ; 1)$, $C(4 ; 3)$ et $D(1 ; 2)$. Il pose les carreaux suivants en décalant le premier du vecteur $\\overrightarrow{u}(5 ; -2)$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Soit $C(4 ; 3)$ et $\\overrightarrow{u}(5\\,;\\,-2)$. Quelle est l'image $C'$ de $C$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $C(4 ; 3)$ et $\\overrightarrow{u}(5\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{CC'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = 4 + 5 = 9$ et $y' = 3 + (-2) = 1$. Étape 4 — Vérifier : $\\overrightarrow{CC'}(9 - 4\\,;\\,1 - 3) = (5\\,;\\,-2)$, c'est bien $\\overrightarrow{u}$ ; donc $C'(9 ; 1)$. La proposition $C'(-1 ; 5)$ soustrait le vecteur au lieu de l'ajouter : c'est l'image par la translation de vecteur $-\\overrightarrow{u}$. La proposition $C'(5 ; -2)$ donne les coordonnées du vecteur au lieu de celles de l'image. La proposition $C'(9 ; 5)$ se trompe de signe pour l'ordonnée.",
+              "answers": [
+                {
+                  "content": "$C'(9 ; 1)$",
+                  "correct": true
+                },
+                {
+                  "content": "$C'(-1 ; 5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$C'(5 ; -2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$C'(9 ; 5)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $D(1 ; 2)$ et $\\overrightarrow{u}(5\\,;\\,-2)$. Quelle est l'ordonnée de l'image $D'$ de $D$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $D(1 ; 2)$ et $\\overrightarrow{u}(5\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{DD'} = \\overrightarrow{u}$. Étape 3 — Calculer : $y' = 2 + (-2) = 0$. Étape 4 — Vérifier : $0 - 2 = -2$, c'est bien la coordonnée correspondante de $\\overrightarrow{u}$ ; l'ordonnée de $D'$ est $0$. Si tu trouves $4$, tu as soustrait le vecteur.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le point $B'(8 ; -1)$ est l'image de $B$ par la translation de vecteur $\\overrightarrow{u}(5\\,;\\,-2)$. Quelle est l'abscisse de $B$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $B'(8 ; -1)$ et $\\overrightarrow{u}(5\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{BB'} = \\overrightarrow{u}$, donc $x' = x + 5$. Étape 3 — Calculer : $x = x' - 5 = 8 - 5 = 3$. Étape 4 — Vérifier : $3 + 5 = 8$, c'est bien l'abscisse de $B'$ ; l'abscisse de $B$ est $3$. Si tu trouves $13$, tu as ajouté le vecteur au lieu de le retirer.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On donne $A(0 ; 0)$, $B(3 ; 1)$, $C(4 ; 3)$ et $D(1 ; 2)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : on lit les quatre points ; le vecteur de la translation est $\\overrightarrow{AB}$. Étape 2 — Traduire : l'image de $D$ est le point $D'$ tel que $\\overrightarrow{DD'} = \\overrightarrow{AB}$. Étape 3 — Calculer : $\\overrightarrow{AB}(3\\,;\\,1)$, donc $D'(4\\,;\\,3)$. Étape 4 — Vérifier : $D'$ a les coordonnées de $C$ : l'affirmation est vraie, et $ABCD$ est un parallélogramme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Montre que le carreau $ABCD$ est un parallélogramme en utilisant la translation de vecteur $\\overrightarrow{AB}$. Rédige comme dans un devoir.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Coordonnées de $\\overrightarrow{AB}$ correctes",
+                "Image de $D$ calculée par la translation",
+                "Conclusion rédigée (parallélogramme, points non alignés)"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : $A(0\\,;\\,0)$, $B(3\\,;\\,1)$, $C(4\\,;\\,3)$ et $D(1\\,;\\,2)$. Étape 2 — Traduire : $ABCD$ est un parallélogramme si et seulement si la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$. Étape 3 — Calculer : $\\overrightarrow{AB}(3 - 0\\,;\\,1 - 0) = (3\\,;\\,1)$, et l'image de $D$ a pour coordonnées $(1 + 3\\,;\\,2 + 1) = (4\\,;\\,3)$. Étape 4 — Vérifier et conclure : ce sont les coordonnées de $C$ ; de plus $A$, $B$, $D$ ne sont pas alignés ($\\overrightarrow{AB}(3\\,;\\,1)$ et $\\overrightarrow{AD}(1\\,;\\,2)$ donnent $3 \\times 2 - 1 \\times 1 = 5 \\neq 0$). Donc $ABCD$ est un parallélogramme. Barème sur 3 : coordonnées de $\\overrightarrow{AB}$ (1 point), image de $D$ calculée (1 point), conclusion avec la remarque sur les points non alignés (1 point).",
+              "answers": [],
+              "starter": "Je calcule $\\overrightarrow{AB}$ puis l'image de $D$…"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "title": "Sujet 1 · Savoirs de base",
+          "notions": "Définitions et propriétés de la symétrie centrale, de la symétrie axiale et de la translation ; comparaison des trois transformations et lien avec le parallélogramme.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "On étudie la symétrie centrale de centre $I$ : sa définition et ses propriétés.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à la définition : le centre est le milieu de $[MM']$.",
+              "questions": [
+                {
+                  "content": "Le centre $I$ est le seul point qui est son propre symétrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le centre est $I$ ; on cherche les points $M$ tels que $M' = M$. Étape 2 — Traduire : $M' = M$ signifie que $I$ est le milieu de $[MM]$, donc que $M = I$. Étape 3 — Calculer : dans un repère, $x = 2x_I - x$ et $y = 2y_I - y$ donnent $x = x_I$ et $y = y_I$. Étape 4 — Vérifier : seul $I$ vérifie cette condition. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M'$ est le symétrique de $M$ par rapport à $I$, quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on relit la définition : $I$ est le milieu de $[MM']$. Étape 2 — Traduire : le milieu donne $\\overrightarrow{MI} = \\overrightarrow{IM'}$, donc $\\overrightarrow{IM'} = -\\overrightarrow{IM}$. Étape 3 — Calculer : avec les coordonnées, $\\overrightarrow{IM'} = (x_I - x\\,;\\,y_I - y)$ et $\\overrightarrow{IM} = (x - x_I\\,;\\,y - y_I)$ : ils sont opposés. Étape 4 — Vérifier : la bonne égalité est $\\overrightarrow{IM'} = -\\overrightarrow{IM}$. Les autres propositions sont fausses : $\\overrightarrow{IM'} = \\overrightarrow{IM}$ donnerait $M' = M$ ; $\\overrightarrow{MM'}$ vaut $-2\\overrightarrow{IM}$ ; $\\overrightarrow{IM'} = 2\\overrightarrow{IM}$ placerait $M'$ du même côté de $I$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{IM'} = -\\overrightarrow{IM}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{IM'} = \\overrightarrow{IM}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MM'} = \\overrightarrow{IM}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{IM'} = 2\\overrightarrow{IM}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une symétrie centrale transforme une droite en une droite ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : on considère une droite $d$ et son image $d'$. Étape 2 — Traduire : si $A'$ et $B'$ sont les symétriques de $A$ et $B$, alors $\\overrightarrow{A'B'} = -\\overrightarrow{AB}$. Étape 3 — Calculer : les vecteurs $\\overrightarrow{A'B'}$ et $\\overrightarrow{AB}$ sont colinéaires, donc les droites ont la même direction. Étape 4 — Vérifier : le mot attendu est « parallèle » (les droites sont parallèles ou confondues).",
+                  "answers": [
+                    {
+                      "content": "parallèle",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux propriétés conservées par une symétrie centrale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on regarde ce qui change et ce qui reste dans un demi-tour autour de $I$. Étape 2 — Traduire : la figure n'est ni agrandie ni déformée. Étape 3 — Calculer : si $K$ est le milieu de $[AB]$, son symétrique $K'$ est le milieu de $[A'B']$, et $A'B' = AB$. Étape 4 — Vérifier : les milieux et les longueurs sont conservés. Les abscisses et les ordonnées changent ($x' = 2x_I - x$ et $y' = 2y_I - y$).",
+                  "answers": [
+                    {
+                      "content": "les milieux",
+                      "correct": true
+                    },
+                    {
+                      "content": "les longueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "les abscisses des points",
+                      "correct": false
+                    },
+                    {
+                      "content": "les ordonnées des points",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le segment $[AB]$ mesure 7 cm. Quelle est la longueur de son symétrique $[A'B']$ par rapport à $I$, en centimètres ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : $AB = 7$ cm. Étape 2 — Traduire : une symétrie centrale conserve les longueurs. Étape 3 — Calculer : $A'B' = AB = 7$ cm. Étape 4 — Vérifier : on retrouve $\\overrightarrow{A'B'} = -\\overrightarrow{AB}$, de même norme. La valeur 14 est l'erreur de qui double la longueur.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "On étudie la symétrie axiale : sa définition, ses points fixes et ses propriétés.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "L'axe est la médiatrice de $[MM']$ : il coupe le segment en son milieu, à angle droit.",
+              "questions": [
+                {
+                  "content": "Un point de l'axe de symétrie n'a pas de symétrique.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : on regarde un point $M$ situé sur l'axe $d$. Étape 2 — Traduire : l'axe est la médiatrice de $[MM']$ : $M'$ est à la même distance de $d$ que $M$. Étape 3 — Calculer : la distance de $M$ à $d$ est nulle, donc $M'$ est confondu avec $M$. Étape 4 — Vérifier : $M$ a un symétrique : lui-même. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M$ n'est pas sur l'axe $d$ et si $M'$ est son symétrique, que représente $d$ pour le segment $[MM']$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on relit la définition de la symétrie axiale. Étape 2 — Traduire : l'axe coupe $[MM']$ en son milieu et lui est perpendiculaire. Étape 3 — Calculer : une telle droite est la médiatrice du segment. Étape 4 — Vérifier : la bonne réponse est « sa médiatrice ». L'axe n'est pas parallèle à $(MM')$ (il lui est perpendiculaire), il ne la contient pas, et il passe par le milieu de $[MM']$.",
+                  "answers": [
+                    {
+                      "content": "sa médiatrice",
+                      "correct": true
+                    },
+                    {
+                      "content": "une droite parallèle à $(MM')$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la droite $(MM')$ elle-même",
+                      "correct": false
+                    },
+                    {
+                      "content": "une droite qui passe par $M$ mais pas par $M'$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par rapport à l'axe des abscisses, le point $M(x ; y)$ a pour symétrique ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$, formé des points d'ordonnée nulle. Étape 2 — Traduire : $(Ox)$ est la médiatrice de $[MM']$ : l'abscisse est conservée. Étape 3 — Calculer : l'ordonnée change de signe, donc $M'(x\\,;\\,-y)$. Étape 4 — Vérifier : avec $M(2\\,;\\,3)$, $M'(2\\,;\\,-3)$ a pour milieu avec $M$ le point $(2\\,;\\,0)$, sur $(Ox)$. La proposition $(-x\\,;\\,y)$ est la symétrie par rapport à $(Oy)$ et $(-x\\,;\\,-y)$ est la symétrie de centre $O$.",
+                  "answers": [
+                    {
+                      "content": "$M'(x ; -y)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M'(-x ; y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(-x ; -y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(y ; x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois propriétés conservées par une symétrie axiale ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Étape 1 — Identifier : on regarde ce qui change et ce qui reste quand on plie la figure le long de l'axe. Étape 2 — Traduire : le pliage ne déforme pas la figure : elle est seulement retournée. Étape 3 — Calculer : les distances, les angles et les alignements se retrouvent après le pliage. Étape 4 — Vérifier : les longueurs, les angles et l'alignement sont conservés. Les coordonnées changent, et les points hors de l'axe changent de place.",
+                  "answers": [
+                    {
+                      "content": "les longueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "les angles",
+                      "correct": true
+                    },
+                    {
+                      "content": "l'alignement des points",
+                      "correct": true
+                    },
+                    {
+                      "content": "les coordonnées des points",
+                      "correct": false
+                    },
+                    {
+                      "content": "la position des points hors de l'axe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $M$ est à 4 cm de l'axe $d$ (il n'est pas sur $d$). Quelle est la longueur $MM'$, en centimètres ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : $M$ est à 4 cm de $d$ ; $M'$ est son symétrique. Étape 2 — Traduire : $d$ est la médiatrice de $[MM']$ : $M'$ est aussi à 4 cm de $d$, de l'autre côté. Étape 3 — Calculer : $MM' = 4 + 4 = 8$ cm. Étape 4 — Vérifier : le milieu de $[MM']$ est sur $d$, à 4 cm de chaque extrémité. La valeur 4 est la distance à l'axe, pas la longueur $MM'$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "On étudie la translation de vecteur $\\overrightarrow{u}$ : sa définition et ses propriétés.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour une translation, tous les points sont décalés du même vecteur.",
+              "questions": [
+                {
+                  "content": "Une translation de vecteur non nul laisse au moins un point fixe.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on cherche un point $M$ tel que $M' = M$. Étape 2 — Traduire : $M' = M$ s'écrit $\\overrightarrow{MM} = \\overrightarrow{u}$. Étape 3 — Calculer : $\\overrightarrow{MM} = \\overrightarrow{0}$, donc il faudrait $\\overrightarrow{u} = \\overrightarrow{0}$. Étape 4 — Vérifier : le vecteur est non nul : aucun point n'est fixe. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle égalité caractérise l'image $M'$ de $M$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on relit la définition de la translation. Étape 2 — Traduire : on part de $M$ et on avance de $\\overrightarrow{u}$ pour arriver en $M'$. Étape 3 — Calculer : cela s'écrit $\\overrightarrow{MM'} = \\overrightarrow{u}$ : origine $M$, extrémité $M'$. Étape 4 — Vérifier : la bonne égalité est $\\overrightarrow{MM'} = \\overrightarrow{u}$. $\\overrightarrow{M'M} = \\overrightarrow{u}$ et $\\overrightarrow{MM'} = -\\overrightarrow{u}$ inversent le sens ; $\\overrightarrow{OM'} = \\overrightarrow{u}$ n'est vraie que si $M = O$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{MM'} = \\overrightarrow{u}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{M'M} = \\overrightarrow{u}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{OM'} = \\overrightarrow{u}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MM'} = -\\overrightarrow{u}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $\\overrightarrow{u}(a ; b)$, l'image de $M(x ; y)$ est $M'(x + a ; y + ___)$ (écris une lettre).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Lire : on lit le vecteur $\\overrightarrow{u}(a\\,;\\,b)$ et le point $M(x\\,;\\,y)$. Étape 2 — Traduire : $\\overrightarrow{MM'} = \\overrightarrow{u}$ donne $x' - x = a$ et $y' - y = b$. Étape 3 — Calculer : $x' = x + a$ et $y' = y + b$. Étape 4 — Vérifier : la lettre attendue est $b$, l'ordonnée du vecteur. La lettre $a$ est son abscisse.",
+                  "answers": [
+                    {
+                      "content": "b",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Relie chaque transformation à sa propriété sur les points fixes.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Lire : on revoit les trois transformations de la leçon. Étape 2 — Traduire : un point est fixe si $M' = M$. Étape 3 — Calculer : pour la symétrie centrale, seul $I$ vérifie $M' = M$ ; pour la symétrie axiale, tous les points de l'axe ; pour la translation non nulle, aucun. Étape 4 — Vérifier : les trois paires sont donc celles de l'énoncé.",
+                  "answers": [
+                    {
+                      "content": "la symétrie centrale",
+                      "match": "un seul point fixe : le centre"
+                    },
+                    {
+                      "content": "la symétrie axiale",
+                      "match": "tous les points de l'axe sont fixes"
+                    },
+                    {
+                      "content": "la translation de vecteur non nul",
+                      "match": "aucun point fixe"
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation envoie $A$ sur $A'$ avec $AA' = 6$ cm. Pour un autre point $B$ et son image $B'$, quelle est la longueur $BB'$, en centimètres ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $\\overrightarrow{AA'} = \\overrightarrow{u}$ avec $AA' = 6$ cm. Étape 2 — Traduire : pour tout point $M$, $\\overrightarrow{MM'} = \\overrightarrow{u}$. Étape 3 — Calculer : $BB' = \\|\\overrightarrow{u}\\| = AA' = 6$ cm. Étape 4 — Vérifier : tous les points sont décalés du même vecteur. La valeur 12 est l'erreur de qui double le décalage.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ],
+                  "unit": "cm"
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On compare les trois transformations de la leçon : symétrie centrale, symétrie axiale et translation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Dans un parallélogramme, le centre est le milieu des deux diagonales.",
+              "questions": [
+                {
+                  "content": "Quelle transformation n'a aucun point fixe lorsque son vecteur est non nul ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : on cherche pour chaque transformation les points tels que $M' = M$. Étape 2 — Traduire : pour la translation, $M' = M$ impose $\\overrightarrow{u} = \\overrightarrow{0}$. Étape 3 — Calculer : la symétrie centrale a un point fixe (le centre) et la symétrie axiale en a une infinité (l'axe). Étape 4 — Vérifier : seule la translation de vecteur non nul n'a aucun point fixe.",
+                  "answers": [
+                    {
+                      "content": "la translation",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie centrale",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie axiale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La symétrie de centre $O$ et la symétrie par rapport à l'axe $(Ox)$ envoient le point $M(2 ; 3)$ sur le même point.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : on calcule l'image de $M(2\\,;\\,3)$ par chaque transformation. Étape 2 — Traduire : pour la symétrie de centre $O$, on change le signe des deux coordonnées ; pour $(Ox)$, seulement celui de l'ordonnée. Étape 3 — Calculer : la symétrie de centre $O$ donne $(-2\\,;\\,-3)$ et la symétrie par rapport à $(Ox)$ donne $(2\\,;\\,-3)$. Étape 4 — Vérifier : les deux points sont différents. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un parallélogramme, les diagonales se coupent en leur ___ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Repérer : les diagonales sont $[AC]$ et $[BD]$, qui se coupent en $O$. Étape 2 — Traduire : $O$ est le centre du parallélogramme. Étape 3 — Calculer : $O$ est le milieu de $[AC]$ et de $[BD]$. Étape 4 — Vérifier : le mot attendu est « milieu » : $C$ est le symétrique de $A$ par rapport à $O$.",
+                  "answers": [
+                    {
+                      "content": "milieu",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le centre $O$ d'un parallélogramme $ABCD$ est le centre de la symétrie qui envoie $A$ sur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : on lit le parallélogramme $ABCD$ et son centre $O$. Étape 2 — Traduire : $O$ est le milieu de $[AC]$. Étape 3 — Calculer : le symétrique de $A$ par rapport à $O$ est donc le point $C$. Étape 4 — Vérifier : avec $A(0\\,;\\,1)$, $B(5\\,;\\,2)$, $C(6\\,;\\,5)$, $D(1\\,;\\,4)$ et $O(3\\,;\\,3)$, on trouve $2 \\times 3 - 0 = 6$ et $2 \\times 3 - 1 = 5$ : c'est $C$, ni $B$ ni $D$.",
+                  "answers": [
+                    {
+                      "content": "$C$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme de centre $O$. Soit $A(0 ; 1)$ et le centre $O(2 ; 3)$. Quelle est l'abscisse du symétrique $C$ de $A$ par rapport à $O$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $O(2 ; 3)$ et le point est $A(0 ; 1)$. Étape 2 — Traduire : $O$ est le milieu de $[AC]$, donc $2 = \\frac{0 + x'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 2 - 0 = 4$. Étape 4 — Vérifier : la demi-somme $0$ et $4 donne $\\frac{0 + 4}{2} = 2$, c'est bien celle du centre ; la valeur est $4$. Si tu trouves $2$, tu as oublié de doubler la coordonnée du centre.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 2 · Calculs de coordonnées",
+          "notions": "Coordonnées du symétrique par rapport à un point, à l'axe des abscisses et à l'axe des ordonnées, coordonnées de l'image par une translation, conservation des longueurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un repère, on cherche des symétriques par rapport à un point.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le centre est le milieu de $[MM']$ : $x' = 2x_I - x$ et $y' = 2y_I - y$.",
+              "questions": [
+                {
+                  "content": "Soit $A(-3 ; 2)$ et le centre $I(1 ; -1)$. Quel est le symétrique $A'$ de $A$ par rapport à $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(1 ; -1)$ et le point est $A(-3 ; 2)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$, donc $1 = \\frac{-3 + x'}{2}$ et $-1 = \\frac{2 + y'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 1 - (-3) = 5$ et $y' = 2 \\times (-1) - 2 = -4$. Étape 4 — Vérifier : le milieu de $[AA']$ est $\\left(\\frac{-3 + 5}{2}\\,;\\,\\frac{2 + (-4)}{2}\\right) = (1\\,;\\,-1)$, c'est bien $I$ ; donc $A'(5 ; -4)$. La proposition $A'(4 ; -3)$ oublie de doubler les coordonnées du centre : le milieu de $[MM']$ ne serait pas le centre. La proposition $A'(3 ; -2)$ prend l'origine pour centre de symétrie. La proposition $A'(5 ; 2)$ ne change que l'abscisse, ce qui est une symétrie axiale et non centrale.",
+                  "answers": [
+                    {
+                      "content": "$A'(5 ; -4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(4 ; -3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(5 ; 2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $B(4 ; -1)$ et le centre $I(2 ; 2)$. Quelle est l'abscisse du symétrique $B'$ de $B$ par rapport à $I$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(2 ; 2)$ et le point est $B(4 ; -1)$. Étape 2 — Traduire : $I$ est le milieu de $[BB']$, donc $2 = \\frac{4 + x'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 2 - 4 = 0$. Étape 4 — Vérifier : la demi-somme $4$ et $0 donne $\\frac{4 + 0}{2} = 2$, c'est bien celle du centre ; la valeur est $0$. Si tu trouves $-2$, tu as oublié de doubler la coordonnée du centre.",
+                  "answers": [
+                    {
+                      "content": "0",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(-2 ; -3)$ et le centre $I(1 ; 1)$. Quelle est l'ordonnée du symétrique $C'$ de $C$ par rapport à $I$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(1 ; 1)$ et le point est $C(-2 ; -3)$. Étape 2 — Traduire : $I$ est le milieu de $[CC']$, donc $1 = \\frac{-3 + y'}{2}$. Étape 3 — Calculer : $y' = 2 \\times 1 - (-3) = 5$. Étape 4 — Vérifier : la demi-somme $-3$ et $5 donne $\\frac{-3 + 5}{2} = 1$, c'est bien celle du centre ; la valeur est $5$. Si tu trouves $4$, tu as oublié de doubler la coordonnée du centre.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $D'(7 ; 0)$ est le symétrique de $D$ par rapport à $I(3 ; -2)$. Quelle est l'abscisse de $D$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(3 ; -2)$ et le symétrique est $D'(7 ; 0)$. Étape 2 — Traduire : $I$ est le milieu de $[DD']$, donc $3 = \\frac{x + 7}{2}$. Étape 3 — Calculer : $x = 2 \\times 3 - 7 = -1$. Étape 4 — Vérifier : le milieu de $[DD']$ a pour l'abscisse $\\frac{-1 + 7}{2} = 3$, c'est bien le centre ; l'abscisse de $D$ est $-1$.",
+                  "answers": [
+                    {
+                      "content": "-1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique de $E(-4 ; 6)$ par rapport à un point $I$ est $E'(2 ; 0)$. Quelles sont les coordonnées de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $E(-4 ; 6)$ et son symétrique $E'(2 ; 0)$. Étape 2 — Traduire : $I$ est le milieu de $[EE']$. Étape 3 — Calculer : $x_{I} = \\frac{-4 + 2}{2} = -1$ et $y_{I} = \\frac{6 + 0}{2} = 3$. Étape 4 — Vérifier : avec $I(-1 ; 3)$, on retrouve $2 \\times (-1) - (-4) = 2$ et $2 \\times 3 - 6 = 0$. La proposition $(-2\\,;\\,6)$ additionne les coordonnées sans diviser par 2. La proposition $(6\\,;\\,-6)$ est le vecteur $\\overrightarrow{EE'}$, pas le milieu. La proposition $(3\\,;\\,-3)$ est la moitié du vecteur, pas le milieu.",
+                  "answers": [
+                    {
+                      "content": "$(-1\\,;\\,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;\\,6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;\\,-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;\\,-3)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un repère, on cherche des symétriques par rapport à l'axe des abscisses ou à l'axe des ordonnées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Par rapport à $(Ox)$, l'ordonnée change de signe ; par rapport à $(Oy)$, c'est l'abscisse.",
+              "questions": [
+                {
+                  "content": "Soit $A(-4 ; 3)$. Quel est le symétrique $A'$ de $A$ par rapport à l'axe des abscisses $(Ox)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $A(-4 ; 3)$. Étape 2 — Traduire : l'axe est la médiatrice de $[AA']$ : l'abscisse est conservée et l'ordonnée change de signe. Étape 3 — Calculer : $x' = -4$ et $y' = -3 = -3$. Étape 4 — Vérifier : le milieu de $[AA']$ est $(-4\\,;\\,0)$, il est sur l'axe, et $(AA')$ est perpendiculaire à l'axe ; donc $A'(-4 ; -3)$. La proposition $A'(4 ; -3)$ change le signe des deux coordonnées, ce qui est une symétrie centrale par rapport à l'origine. La proposition $A'(4 ; 3)$ change le signe de l'abscisse seulement, ce qui est la symétrie par rapport à l'axe des ordonnées. La proposition $A'(3 ; -4)$ échange les deux coordonnées.",
+                  "answers": [
+                    {
+                      "content": "$A'(-4 ; -3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(4 ; -3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(4 ; 3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $B(5 ; -2)$. Quel est le symétrique $B'$ de $B$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $B(5 ; -2)$. Étape 2 — Traduire : l'axe est la médiatrice de $[BB']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -5 = -5$ et $y' = -2$. Étape 4 — Vérifier : le milieu de $[BB']$ est $(0\\,;\\,-2)$, il est sur l'axe, et $(BB')$ est perpendiculaire à l'axe ; donc $B'(-5 ; -2)$. La proposition $B'(-5 ; 2)$ change le signe des deux coordonnées, ce qui est une symétrie centrale par rapport à l'origine. La proposition $B'(5 ; 2)$ change le signe de l'ordonnée seulement, ce qui est la symétrie par rapport à l'axe des abscisses. La proposition $B'(-2 ; 5)$ échange les deux coordonnées.",
+                  "answers": [
+                    {
+                      "content": "$B'(-5 ; -2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B'(-5 ; 2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B'(5 ; 2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B'(-2 ; 5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(-3 ; -7)$. Quelle est l'ordonnée du symétrique $C'$ de $C$ par rapport à l'axe des abscisses $(Ox)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $C(-3 ; -7)$. Étape 2 — Traduire : l'axe est la médiatrice de $[CC']$. Étape 3 — Calculer : $y' = -(-7) = 7$. Étape 4 — Vérifier : le milieu de $[CC']$ est sur l'axe et $(CC')$ est perpendiculaire à l'axe ; l'ordonnée de $C'$ est $7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $D(6 ; 4)$. Quelle est l'abscisse du symétrique $D'$ de $D$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $D(6 ; 4)$. Étape 2 — Traduire : l'axe est la médiatrice de $[DD']$. Étape 3 — Calculer : $x' = -6 = -6$. Étape 4 — Vérifier : le milieu de $[DD']$ est sur l'axe et $(DD')$ est perpendiculaire à l'axe ; l'abscisse de $D'$ est $-6$.",
+                  "answers": [
+                    {
+                      "content": "-6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(2 ; -5)$. Le symétrique $M'$ de $M$ par rapport à l'axe des abscisses $(Ox)$ est $M'(-2 ; -5)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $M(2 ; -5)$. Étape 2 — Traduire : $(Ox)$ est la médiatrice de $[MM']$ : l'abscisse est conservée et l'ordonnée change de signe. Étape 3 — Calculer : $x' = 2$ et $y' = -(-5) = 5$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(2\\,;\\,0)$, sur $(Ox)$, et $(MM')$ est verticale donc perpendiculaire à $(Ox)$. Donc $M'(2 ; 5)$. Le bon point est $M'(2 ; 5)$, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un repère, on cherche des images par une translation.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour une translation de vecteur $\\overrightarrow{u}(a ; b)$, on ajoute $a$ à l'abscisse et $b$ à l'ordonnée.",
+              "questions": [
+                {
+                  "content": "Soit $A(-1 ; -2)$ et $\\overrightarrow{u}(4\\,;\\,3)$. Quelle est l'image $A'$ de $A$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $A(-1 ; -2)$ et $\\overrightarrow{u}(4\\,;\\,3)$. Étape 2 — Traduire : $\\overrightarrow{AA'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = -1 + 4 = 3$ et $y' = -2 + 3 = 1$. Étape 4 — Vérifier : $\\overrightarrow{AA'}(3 - (-1)\\,;\\,1 - (-2)) = (4\\,;\\,3)$, c'est bien $\\overrightarrow{u}$ ; donc $A'(3 ; 1)$. La proposition $A'(-5 ; -5)$ soustrait le vecteur au lieu de l'ajouter : c'est l'image par la translation de vecteur $-\\overrightarrow{u}$. La proposition $A'(4 ; 3)$ donne les coordonnées du vecteur au lieu de celles de l'image. La proposition $A'(3 ; -5)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$A'(3 ; 1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(-5 ; -5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(4 ; 3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $B(3 ; -5)$ et $\\overrightarrow{u}(-2\\,;\\,6)$. Quelle est l'abscisse de l'image $B'$ de $B$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $B(3 ; -5)$ et $\\overrightarrow{u}(-2\\,;\\,6)$. Étape 2 — Traduire : $\\overrightarrow{BB'} = \\overrightarrow{u}$. Étape 3 — Calculer : $x' = 3 + (-2) = 1$. Étape 4 — Vérifier : $1 - 3 = -2$, c'est bien la coordonnée correspondante de $\\overrightarrow{u}$ ; l'abscisse de $B'$ est $1$. Si tu trouves $5$, tu as soustrait le vecteur.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(0 ; 4)$ et $\\overrightarrow{u}(7\\,;\\,-9)$. Quelle est l'ordonnée de l'image $C'$ de $C$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $C(0 ; 4)$ et $\\overrightarrow{u}(7\\,;\\,-9)$. Étape 2 — Traduire : $\\overrightarrow{CC'} = \\overrightarrow{u}$. Étape 3 — Calculer : $y' = 4 + (-9) = -5$. Étape 4 — Vérifier : $-5 - 4 = -9$, c'est bien la coordonnée correspondante de $\\overrightarrow{u}$ ; l'ordonnée de $C'$ est $-5$. Si tu trouves $13$, tu as soustrait le vecteur.",
+                  "answers": [
+                    {
+                      "content": "-5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $D'(2 ; -3)$ est l'image de $D$ par la translation de vecteur $\\overrightarrow{u}(5\\,;\\,-4)$. Quelle est l'ordonnée de $D$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $D'(2 ; -3)$ et $\\overrightarrow{u}(5\\,;\\,-4)$. Étape 2 — Traduire : $\\overrightarrow{DD'} = \\overrightarrow{u}$, donc $y' = y + -4$. Étape 3 — Calculer : $y = y' - (-4) = -3 - (-4) = 1$. Étape 4 — Vérifier : $1 + (-4) = -3$, c'est bien l'ordonnée de $D'$ ; l'ordonnée de $D$ est $1$. Si tu trouves $-7$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation envoie $E(3 ; 3)$ sur $E'(-1 ; 5)$. Quelles sont les coordonnées de son vecteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $E(3 ; 3)$ et $E'(-1 ; 5)$. Étape 2 — Traduire : le vecteur de la translation est $\\overrightarrow{EE'}$. Étape 3 — Calculer : $-1 - 3 = -4$ et $5 - 3 = 2$. Étape 4 — Vérifier : $E$ plus ce vecteur redonne bien $E'$ ; le vecteur est $\\overrightarrow{EE'}(-4\\,;\\,2)$. La proposition $(4\\,;\\,-2)$ est le vecteur de la translation inverse, $\\overrightarrow{E'E}$. La proposition $(2\\,;\\,8)$ additionne les coordonnées au lieu de soustraire. La proposition $(-4\\,;\\,-2)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(-4\\,;\\,2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(4\\,;\\,-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;\\,8)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;\\,-2)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "On mélange les trois transformations dans un repère.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule d'abord les images, puis compare ou mesure ; une transformation du chapitre conserve les longueurs.",
+              "questions": [
+                {
+                  "content": "Soit $M(3 ; 2)$. Le symétrique $M'$ de $M$ par rapport au point $I(-1 ; 4)$ est $M'(-5 ; 6)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(-1 ; 4)$ et le point est $M(3 ; 2)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$, donc $x' = 2 \\times (-1) - 3$ et $y' = 2 \\times 4 - 2$. Étape 3 — Calculer : $x' = -5$ et $y' = 6$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(-1\\,;\\,4)$, c'est bien $I$. Donc $M'(-5 ; 6)$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(5 ; -3)$. L'image $M'$ de $M$ par la translation de vecteur $\\overrightarrow{v}(-4\\,;\\,2)$ est $M'(9 ; -5)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : le point est $M(5 ; -3)$ et le vecteur est $\\overrightarrow{v}(-4\\,;\\,2)$. Étape 2 — Traduire : $\\overrightarrow{MM'} = \\overrightarrow{v}$, donc $x' = x + (-4)$ et $y' = y + 2$. Étape 3 — Calculer : $x' = 5 + (-4) = 1$ et $y' = -3 + 2 = -1$. Étape 4 — Vérifier : $\\overrightarrow{MM'}(1 - 5\\,;\\,-1 - (-3)) = (-4\\,;\\,2)$, c'est bien $\\overrightarrow{v}$. Donc $M'(1 ; -1)$. Le bon point est $M'(1 ; -1)$, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(-2 ; 1)$ et $B(1 ; 5)$. On note $A'$ et $B'$ leurs symétriques par rapport à l'axe des abscisses $(Ox)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $A(-2 ; 1)$ et $B(1 ; 5)$ ; la transformation est donnée par rapport à l'axe des abscisses $(Ox)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(-2 ; -1)$ et $B'(1 ; -5)$ ; $A'B' = \\sqrt{(1 - (-2))^2 + (-5 - (-1))^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $AB = \\sqrt{(1 - (-2))^2 + (5 - 1)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(0 ; 0)$ et $D(5 ; 12)$. On note $C'$ et $D'$ leurs symétriques par rapport à l'axe des ordonnées $(Oy)$. Quelle est la longueur $C'D'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $C(0 ; 0)$ et $D(5 ; 12)$ ; la transformation est donnée par rapport à l'axe des ordonnées $(Oy)$. Étape 2 — Traduire : on calcule d'abord les images $C'$ et $D'$, puis la distance $C'D'$. Étape 3 — Calculer : $C'(0 ; 0)$ et $D'(-5 ; 12)$ ; $C'D' = \\sqrt{(-5 - 0)^2 + (12 - 0)^2} = \\sqrt{169} = 13$. Étape 4 — Vérifier : $CD = \\sqrt{(5 - 0)^2 + (12 - 0)^2} = 13$ aussi, car la transformation conserve les longueurs ; la longueur est 13.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver l'image $M'$ de $M$ par une translation de vecteur $\\overrightarrow{u}$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Lire : on lit le point et le vecteur. Étape 2 — Traduire : on écrit l'égalité qui définit l'image. Étape 3 — Calculer : on en déduit les coordonnées de $M'$. Étape 4 — Vérifier : on contrôle avant de conclure. C'est l'ordre des quatre étapes de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Lire les coordonnées de $M$ et de $\\overrightarrow{u}$."
+                    },
+                    {
+                      "content": "Traduire : $\\overrightarrow{MM'} = \\overrightarrow{u}$."
+                    },
+                    {
+                      "content": "Calculer $x' = x + a$ et $y' = y + b$."
+                    },
+                    {
+                      "content": "Vérifier que $\\overrightarrow{MM'}$ a les coordonnées de $\\overrightarrow{u}$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 3 · Reconnaître et démontrer",
+          "notions": "Reconnaissance d'une transformation, recherche d'un centre ou d'un vecteur, parallélogrammes par translation et par symétrie centrale, conservation des longueurs.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Dans un repère, on reconnaît la transformation qui envoie un point sur un autre, et on retrouve un centre ou un vecteur.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Compare les coordonnées de $M$ et de $M'$ : quelles sont celles qui ont changé de signe ?",
+              "questions": [
+                {
+                  "content": "Le point $M(5 ; 2)$ a pour image $M'(5 ; -2)$. Quelle transformation envoie $M$ sur $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on compare $M(5 ; 2)$ et $M'(5 ; -2)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(5 ; -2)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(-5 ; 2)$, la symétrie de centre l'origine $O$ donne $M'(-5 ; -2)$. Étape 4 — Vérifier : seule la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(5 ; -2)$.",
+                  "answers": [
+                    {
+                      "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie de centre l'origine $O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M(-3 ; 4)$ a pour image $M'(3 ; 4)$. Quelle transformation envoie $M$ sur $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on compare $M(-3 ; 4)$ et $M'(3 ; 4)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(-3 ; -4)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(3 ; 4)$, la symétrie de centre l'origine $O$ donne $M'(3 ; -4)$. Étape 4 — Vérifier : seule la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(3 ; 4)$.",
+                  "answers": [
+                    {
+                      "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie de centre l'origine $O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M(6 ; -1)$ a pour image $M'(-6 ; 1)$. Quelle transformation envoie $M$ sur $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on compare $M(6 ; -1)$ et $M'(-6 ; 1)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(6 ; 1)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(-6 ; -1)$, la symétrie de centre l'origine $O$ donne $M'(-6 ; 1)$. Étape 4 — Vérifier : seule la symétrie de centre l'origine $O$ donne $M'(-6 ; 1)$.",
+                  "answers": [
+                    {
+                      "content": "la symétrie de centre l'origine $O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique de $F(2 ; -3)$ par rapport à un point $I$ est $F'(8 ; 1)$. Quelles sont les coordonnées de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $F(2 ; -3)$ et son symétrique $F'(8 ; 1)$. Étape 2 — Traduire : $I$ est le milieu de $[FF']$. Étape 3 — Calculer : $x_{I} = \\frac{2 + 8}{2} = 5$ et $y_{I} = \\frac{-3 + 1}{2} = -1$. Étape 4 — Vérifier : avec $I(5 ; -1)$, on retrouve $2 \\times 5 - 2 = 8$ et $2 \\times (-1) - (-3) = 1$. La proposition $(10\\,;\\,-2)$ additionne les coordonnées sans diviser par 2. La proposition $(6\\,;\\,4)$ est le vecteur $\\overrightarrow{FF'}$, pas le milieu. La proposition $(3\\,;\\,2)$ est la moitié du vecteur, pas le milieu.",
+                  "answers": [
+                    {
+                      "content": "$(5\\,;\\,-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(10\\,;\\,-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;\\,4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;\\,2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation envoie $G(-2 ; 5)$ sur $G'(3 ; 1)$. Quelles sont les coordonnées de son vecteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $G(-2 ; 5)$ et $G'(3 ; 1)$. Étape 2 — Traduire : le vecteur de la translation est $\\overrightarrow{GG'}$. Étape 3 — Calculer : $3 - (-2) = 5$ et $1 - 5 = -4$. Étape 4 — Vérifier : $G$ plus ce vecteur redonne bien $G'$ ; le vecteur est $\\overrightarrow{GG'}(5\\,;\\,-4)$. La proposition $(-5\\,;\\,4)$ est le vecteur de la translation inverse, $\\overrightarrow{G'G}$. La proposition $(1\\,;\\,6)$ additionne les coordonnées au lieu de soustraire. La proposition $(5\\,;\\,4)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(5\\,;\\,-4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-5\\,;\\,4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5\\,;\\,4)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Dans un repère, on utilise la translation de vecteur $\\overrightarrow{AB}$ et la symétrie centrale pour étudier des parallélogrammes.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "$ABCD$ est un parallélogramme si et seulement si $\\overrightarrow{AB} = \\overrightarrow{DC}$, c'est-à-dire si la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+              "questions": [
+                {
+                  "content": "On donne $A(0 ; 0)$, $B(5 ; 2)$, $C(7 ; 6)$ et $D(2 ; 4)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les quatre points ; le vecteur de la translation est $\\overrightarrow{AB}$. Étape 2 — Traduire : l'image de $D$ est le point $D'$ tel que $\\overrightarrow{DD'} = \\overrightarrow{AB}$. Étape 3 — Calculer : $\\overrightarrow{AB}(5\\,;\\,2)$, donc $D'(7\\,;\\,6)$. Étape 4 — Vérifier : $D'$ a les coordonnées de $C$ : l'affirmation est vraie, et $ABCD$ est un parallélogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $E(1 ; 1)$, $F(4 ; 2)$, $G(6 ; 5)$ et $H(2 ; 3)$. La translation de vecteur $\\overrightarrow{EF}$ envoie $H$ sur $G$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les quatre points ; le vecteur de la translation est $\\overrightarrow{EF}$. Étape 2 — Traduire : l'image de $H$ est le point $H'$ tel que $\\overrightarrow{HH'} = \\overrightarrow{EF}$. Étape 3 — Calculer : $\\overrightarrow{EF}(3\\,;\\,1)$, donc $H'(5\\,;\\,4)$. Étape 4 — Vérifier : $H'$ n'a pas les coordonnées de $G$ $(6\\,;\\,5)$ : l'affirmation est fausse, et $EFGH$ n'est pas un parallélogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $A(1 ; 0)$, $B(4 ; 2)$ et $C(6 ; 5)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$. Quelle est l'abscisse de $D$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $A(1 ; 0)$, $B(4 ; 2)$ et $C(6 ; 5)$ sont connus ; on cherche $D$. Étape 2 — Traduire : $\\overrightarrow{DC} = \\overrightarrow{AB}$, donc $x_{C} = x_{D} + x_{AB}$ où $\\overrightarrow{AB}(3\\,;\\,2)$. Étape 3 — Calculer : $x_{D} = 6 - 3 = 3$. Étape 4 — Vérifier : $3 + 3 = 6$, c'est bien l'abscisse de $C$ ; donc $D(3 ; 3)$. Si tu trouves $9$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $A(-1 ; 2)$, $B(3 ; 3)$ et $C(5 ; -1)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$. Quelle est l'ordonnée de $D$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $A(-1 ; 2)$, $B(3 ; 3)$ et $C(5 ; -1)$ sont connus ; on cherche $D$. Étape 2 — Traduire : $\\overrightarrow{DC} = \\overrightarrow{AB}$, donc $y_{C} = y_{D} + y_{AB}$ où $\\overrightarrow{AB}(4\\,;\\,1)$. Étape 3 — Calculer : $y_{D} = -1 - 1 = -2$. Étape 4 — Vérifier : $-2 + 1 = -1$, c'est bien l'ordonnée de $C$ ; donc $D(1 ; -2)$. Si tu trouves $0$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "-2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(1 ; 2)$, $B(4 ; 3)$ et $I(2 ; 1)$. On note $A'$ et $B'$ les symétriques de $A$ et $B$ par rapport à $I$. Le quadrilatère $ABA'B'$ est un vrai parallélogramme (non aplati).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $A(1 ; 2)$, $B(4 ; 3)$ et le centre $I(2 ; 1)$. Étape 2 — Traduire : $I$ est le milieu de $[AA']$ et de $[BB']$ : les diagonales ont le même milieu. Étape 3 — Calculer : $A'(3\\,;\\,0)$ et $B'(0\\,;\\,-1)$ ; $\\overrightarrow{IA}(-1\\,;\\,1)$ et $\\overrightarrow{IB}(2\\,;\\,2)$. Étape 4 — Vérifier : les points ne sont pas alignés avec le centre (les deux vecteurs ne sont pas colinéaires), donc le quadrilatère n'est pas aplati : c'est un parallélogramme. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Chaque transformation conserve les longueurs : on le vérifie dans un repère.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Calcule les images des deux points, puis la distance entre elles : elle doit être égale à la distance de départ.",
+              "questions": [
+                {
+                  "content": "Soit $A(0 ; 0)$ et $B(5 ; 12)$. On note $A'$ et $B'$ leurs symétriques par rapport au point $I(1 ; 1)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on connaît $A(0 ; 0)$ et $B(5 ; 12)$ ; la transformation est donnée par rapport au point $I(1 ; 1)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(2 ; 2)$ et $B'(-3 ; -10)$ ; $A'B' = \\sqrt{(-3 - 2)^2 + (-10 - 2)^2} = \\sqrt{169} = 13$. Étape 4 — Vérifier : $AB = \\sqrt{(5 - 0)^2 + (12 - 0)^2} = 13$ aussi, car la transformation conserve les longueurs ; la longueur est 13.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $C(2 ; -1)$ et $D(8 ; 7)$. On note $C'$ et $D'$ leurs symétriques par rapport à l'axe des abscisses $(Ox)$. Quelle est la longueur $C'D'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $C(2 ; -1)$ et $D(8 ; 7)$ ; la transformation est donnée par rapport à l'axe des abscisses $(Ox)$. Étape 2 — Traduire : on calcule d'abord les images $C'$ et $D'$, puis la distance $C'D'$. Étape 3 — Calculer : $C'(2 ; 1)$ et $D'(8 ; -7)$ ; $C'D' = \\sqrt{(8 - 2)^2 + (-7 - 1)^2} = \\sqrt{100} = 10$. Étape 4 — Vérifier : $CD = \\sqrt{(8 - 2)^2 + (7 - (-1))^2} = 10$ aussi, car la transformation conserve les longueurs ; la longueur est 10.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $E(-3 ; 2)$ et $F(1 ; 5)$. On note $E'$ et $F'$ leurs symétriques par rapport à l'axe des ordonnées $(Oy)$. Quelle est la longueur $E'F'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $E(-3 ; 2)$ et $F(1 ; 5)$ ; la transformation est donnée par rapport à l'axe des ordonnées $(Oy)$. Étape 2 — Traduire : on calcule d'abord les images $E'$ et $F'$, puis la distance $E'F'$. Étape 3 — Calculer : $E'(3 ; 2)$ et $F'(-1 ; 5)$ ; $E'F' = \\sqrt{(-1 - 3)^2 + (5 - 2)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $EF = \\sqrt{(1 - (-3))^2 + (5 - 2)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G(1 ; 1)$ et $H(9 ; 16)$. On note $G'$ et $H'$ leurs images par la translation de vecteur $\\overrightarrow{w}(-3\\,;\\,5)$. Quelle est la longueur $G'H'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on connaît $G(1 ; 1)$ et $H(9 ; 16)$ ; la transformation est donnée par la translation de vecteur $\\overrightarrow{w}(-3\\,;\\,5)$. Étape 2 — Traduire : on calcule d'abord les images $G'$ et $H'$, puis la distance $G'H'$. Étape 3 — Calculer : $G'(-2 ; 6)$ et $H'(6 ; 21)$ ; $G'H' = \\sqrt{(6 - (-2))^2 + (21 - 6)^2} = \\sqrt{289} = 17$. Étape 4 — Vérifier : $GH = \\sqrt{(9 - 1)^2 + (16 - 1)^2} = 17$ aussi, car la transformation conserve les longueurs ; la longueur est 17.",
+                  "answers": [
+                    {
+                      "content": "17",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation peut augmenter la longueur d'un segment.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on considère un segment $[AB]$ et son image $[A'B']$. Étape 2 — Traduire : $\\overrightarrow{AA'} = \\overrightarrow{BB'} = \\overrightarrow{u}$, donc $\\overrightarrow{A'B'} = \\overrightarrow{AB}$. Étape 3 — Calculer : les deux vecteurs étant égaux, $A'B' = AB$. Étape 4 — Vérifier : la longueur ne change pas. L'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Dans un repère (1 carreau = 1 m), un jardinier de Man plante un piquet en $P(2 ; 5)$ et un autre en $Q(6 ; 2)$. Le point $I(4 ; 3)$ est le centre d'un massif.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le symétrique d'un point par rapport à $I$ s'obtient par $x' = 2x_I - x$ et $y' = 2y_I - y$.",
+              "questions": [
+                {
+                  "content": "Soit $P(2 ; 5)$ et le centre $I(4 ; 3)$. Quel est le symétrique $P'$ de $P$ par rapport à $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(4 ; 3)$ et le point est $P(2 ; 5)$. Étape 2 — Traduire : $I$ est le milieu de $[PP']$, donc $4 = \\frac{2 + x'}{2}$ et $3 = \\frac{5 + y'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 4 - 2 = 6$ et $y' = 2 \\times 3 - 5 = 1$. Étape 4 — Vérifier : le milieu de $[PP']$ est $\\left(\\frac{2 + 6}{2}\\,;\\,\\frac{5 + 1}{2}\\right) = (4\\,;\\,3)$, c'est bien $I$ ; donc $P'(6 ; 1)$. La proposition $P'(2 ; -2)$ oublie de doubler les coordonnées du centre : le milieu de $[MM']$ ne serait pas le centre. La proposition $P'(-2 ; -5)$ prend l'origine pour centre de symétrie. La proposition $P'(6 ; 5)$ ne change que l'abscisse, ce qui est une symétrie axiale et non centrale.",
+                  "answers": [
+                    {
+                      "content": "$P'(6 ; 1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P'(2 ; -2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P'(-2 ; -5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P'(6 ; 5)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $Q(6 ; 2)$ et le centre $I(4 ; 3)$. Quelle est l'abscisse du symétrique $Q'$ de $Q$ par rapport à $I$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : le centre est $I(4 ; 3)$ et le point est $Q(6 ; 2)$. Étape 2 — Traduire : $I$ est le milieu de $[QQ']$, donc $4 = \\frac{6 + x'}{2}$. Étape 3 — Calculer : $x' = 2 \\times 4 - 6 = 2$. Étape 4 — Vérifier : la demi-somme $6$ et $2 donne $\\frac{6 + 2}{2} = 4$, c'est bien celle du centre ; la valeur est $2$. Si tu trouves $-2$, tu as oublié de doubler la coordonnée du centre.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $P(2 ; 5)$, $Q(6 ; 2)$ et $I(4 ; 3)$. On note $P'$ et $Q'$ les symétriques de $P$ et $Q$ par rapport à $I$. Le quadrilatère $PQP'Q'$ est un vrai parallélogramme (non aplati).",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : $P(2 ; 5)$, $Q(6 ; 2)$ et le centre $I(4 ; 3)$. Étape 2 — Traduire : $I$ est le milieu de $[PP']$ et de $[QQ']$ : les diagonales ont le même milieu. Étape 3 — Calculer : $P'(6\\,;\\,1)$ et $Q'(2\\,;\\,4)$ ; $\\overrightarrow{IP}(-2\\,;\\,2)$ et $\\overrightarrow{IQ}(2\\,;\\,-1)$. Étape 4 — Vérifier : les points ne sont pas alignés avec le centre (les deux vecteurs ne sont pas colinéaires), donc le quadrilatère n'est pas aplati : c'est un parallélogramme. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $P(2 ; 5)$ et $Q(6 ; 2)$. On note $P'$ et $Q'$ leurs symétriques par rapport au point $I(4 ; 3)$. Quelle est la longueur $P'Q'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Repérer : on connaît $P(2 ; 5)$ et $Q(6 ; 2)$ ; la transformation est donnée par rapport au point $I(4 ; 3)$. Étape 2 — Traduire : on calcule d'abord les images $P'$ et $Q'$, puis la distance $P'Q'$. Étape 3 — Calculer : $P'(6 ; 1)$ et $Q'(2 ; 4)$ ; $P'Q' = \\sqrt{(2 - 6)^2 + (4 - 1)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $PQ = \\sqrt{(6 - 2)^2 + (2 - 5)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(2 ; 5)$. Le symétrique $M'$ de $M$ par rapport à l'axe des abscisses $(Ox)$ est $M'(2 ; -5)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $M(2 ; 5)$. Étape 2 — Traduire : $(Ox)$ est la médiatrice de $[MM']$ : l'abscisse est conservée et l'ordonnée change de signe. Étape 3 — Calculer : $x' = 2$ et $y' = -5 = -5$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(2\\,;\\,0)$, sur $(Ox)$, et $(MM')$ est verticale donc perpendiculaire à $(Ox)$. Donc $M'(2 ; -5)$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan de toutes les notions",
+          "notions": "Bilan : symétrie centrale, symétrie axiale par rapport aux axes de coordonnées, translation, conservation des longueurs et lien avec le parallélogramme.",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "Au marché de Bouaké, dans un repère (1 carreau = 10 m), l'étal d'une vendeuse est en $E(2 ; 4)$. L'axe des ordonnées est la rue d'entrée et l'axe des abscisses est la rue principale.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pense à l'axe : l'axe des ordonnées change le signe de l'abscisse, l'axe des abscisses change le signe de l'ordonnée.",
+              "questions": [
+                {
+                  "content": "Un étal est installé de l'autre côté de la rue d'entrée. Soit $E(2 ; 4)$. Quel est le symétrique $E'$ de $E$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $E(2 ; 4)$. Étape 2 — Traduire : l'axe est la médiatrice de $[EE']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -2 = -2$ et $y' = 4$. Étape 4 — Vérifier : le milieu de $[EE']$ est $(0\\,;\\,4)$, il est sur l'axe, et $(EE')$ est perpendiculaire à l'axe ; donc $E'(-2 ; 4)$. La proposition $E'(-2 ; -4)$ change le signe des deux coordonnées, ce qui est une symétrie centrale par rapport à l'origine. La proposition $E'(2 ; -4)$ change le signe de l'ordonnée seulement, ce qui est la symétrie par rapport à l'axe des abscisses. La proposition $E'(4 ; 2)$ échange les deux coordonnées.",
+                  "answers": [
+                    {
+                      "content": "$E'(-2 ; 4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E'(-2 ; -4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E'(2 ; -4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E'(4 ; 2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un autre étal est de l'autre côté de la rue principale. Soit $E(2 ; 4)$. Quelle est l'ordonnée du symétrique $E'$ de $E$ par rapport à l'axe des abscisses $(Ox)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des abscisses $(Ox)$ et le point est $E(2 ; 4)$. Étape 2 — Traduire : l'axe est la médiatrice de $[EE']$. Étape 3 — Calculer : $y' = -4 = -4$. Étape 4 — Vérifier : le milieu de $[EE']$ est sur l'axe et $(EE')$ est perpendiculaire à l'axe ; l'ordonnée de $E'$ est $-4$.",
+                  "answers": [
+                    {
+                      "content": "-4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $M(2 ; 4)$ a pour image $M'(-2 ; -4)$. Quelle transformation envoie $M$ sur $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Identifier : on compare $M(2 ; 4)$ et $M'(-2 ; -4)$. Étape 2 — Traduire : on regarde quelles coordonnées ont changé de signe ou de valeur. Étape 3 — Calculer : on calcule l'image de $M$ par chaque transformation : la symétrie par rapport à l'axe des abscisses $(Ox)$ donne $M'(2 ; -4)$, la symétrie par rapport à l'axe des ordonnées $(Oy)$ donne $M'(-2 ; 4)$, la symétrie de centre l'origine $O$ donne $M'(-2 ; -4)$. Étape 4 — Vérifier : seule la symétrie de centre l'origine $O$ donne $M'(-2 ; -4)$.",
+                  "answers": [
+                    {
+                      "content": "la symétrie de centre l'origine $O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des abscisses $(Ox)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la symétrie par rapport à l'axe des ordonnées $(Oy)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $M(2 ; 4)$. Le symétrique $M'$ de $M$ par rapport à l'axe des ordonnées $(Oy)$ est $M'(2 ; -4)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $M(2 ; 4)$. Étape 2 — Traduire : $(Oy)$ est la médiatrice de $[MM']$ : l'ordonnée est conservée et l'abscisse change de signe. Étape 3 — Calculer : $x' = -2 = -2$ et $y' = 4$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(0\\,;\\,4)$, sur $(Oy)$, et $(MM')$ est horizontale donc perpendiculaire à $(Oy)$. Donc $M'(-2 ; 4)$. Le bon point est $M'(-2 ; 4)$, donc l'affirmation est fausse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $E(2 ; 4)$ et $F(5 ; 8)$. On note $E'$ et $F'$ leurs symétriques par rapport à l'axe des ordonnées $(Oy)$. Quelle est la longueur $E'F'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : on connaît $E(2 ; 4)$ et $F(5 ; 8)$ ; la transformation est donnée par rapport à l'axe des ordonnées $(Oy)$. Étape 2 — Traduire : on calcule d'abord les images $E'$ et $F'$, puis la distance $E'F'$. Étape 3 — Calculer : $E'(-2 ; 4)$ et $F'(-5 ; 8)$ ; $E'F' = \\sqrt{(-5 - (-2))^2 + (8 - 4)^2} = \\sqrt{25} = 5$. Étape 4 — Vérifier : $EF = \\sqrt{(5 - 2)^2 + (8 - 4)^2} = 5$ aussi, car la transformation conserve les longueurs ; la longueur est 5.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "Sur la lagune Ébrié, dans un repère (1 carreau = 100 m), trois pirogues sont en $A(1 ; 2)$, $B(4 ; 3)$ et $C(5 ; 6)$. Le courant les déplace du vecteur $\\overrightarrow{w}(3 ; -2)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Le courant ajoute $3$ à l'abscisse et retire $2$ à l'ordonnée de chaque pirogue.",
+              "questions": [
+                {
+                  "content": "Le courant déplace la pirogue $A$. Soit $A(1 ; 2)$ et $\\overrightarrow{w}(3\\,;\\,-2)$. Quelle est l'image $A'$ de $A$ par la translation de vecteur $\\overrightarrow{w}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $A(1 ; 2)$ et $\\overrightarrow{w}(3\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{AA'} = \\overrightarrow{w}$. Étape 3 — Calculer : $x' = 1 + 3 = 4$ et $y' = 2 + (-2) = 0$. Étape 4 — Vérifier : $\\overrightarrow{AA'}(4 - 1\\,;\\,0 - 2) = (3\\,;\\,-2)$, c'est bien $\\overrightarrow{w}$ ; donc $A'(4 ; 0)$. La proposition $A'(-2 ; 4)$ soustrait le vecteur au lieu de l'ajouter : c'est l'image par la translation de vecteur $-\\overrightarrow{w}$. La proposition $A'(3 ; -2)$ donne les coordonnées du vecteur au lieu de celles de l'image. La proposition $A'(4 ; 4)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$A'(4 ; 0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'(-2 ; 4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(3 ; -2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'(4 ; 4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le courant déplace la pirogue $B$. Soit $B(4 ; 3)$ et $\\overrightarrow{w}(3\\,;\\,-2)$. Quelle est l'ordonnée de l'image $B'$ de $B$ par la translation de vecteur $\\overrightarrow{w}$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $B(4 ; 3)$ et $\\overrightarrow{w}(3\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{BB'} = \\overrightarrow{w}$. Étape 3 — Calculer : $y' = 3 + (-2) = 1$. Étape 4 — Vérifier : $1 - 3 = -2$, c'est bien la coordonnée correspondante de $\\overrightarrow{w}$ ; l'ordonnée de $B'$ est $1$. Si tu trouves $5$, tu as soustrait le vecteur.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La pirogue $C$ a été déplacée de la même façon. Le point $C'(8 ; 4)$ est l'image de $C$ par la translation de vecteur $\\overrightarrow{w}(3\\,;\\,-2)$. Quelle est l'ordonnée de $C$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $C'(8 ; 4)$ et $\\overrightarrow{w}(3\\,;\\,-2)$. Étape 2 — Traduire : $\\overrightarrow{CC'} = \\overrightarrow{w}$, donc $y' = y + -2$. Étape 3 — Calculer : $y = y' - (-2) = 4 - (-2) = 6$. Étape 4 — Vérifier : $6 + (-2) = 4$, c'est bien l'ordonnée de $C'$ ; l'ordonnée de $C$ est $6$. Si tu trouves $2$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $A(1 ; 2)$, $B(4 ; 3)$ et $C(5 ; 6)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$. Quelle est l'abscisse de $D$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : $A(1 ; 2)$, $B(4 ; 3)$ et $C(5 ; 6)$ sont connus ; on cherche $D$. Étape 2 — Traduire : $\\overrightarrow{DC} = \\overrightarrow{AB}$, donc $x_{C} = x_{D} + x_{AB}$ où $\\overrightarrow{AB}(3\\,;\\,1)$. Étape 3 — Calculer : $x_{D} = 5 - 3 = 2$. Étape 4 — Vérifier : $2 + 3 = 5$, c'est bien l'abscisse de $C$ ; donc $D(2 ; 5)$. Si tu trouves $8$, tu as ajouté le vecteur au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $A(1 ; 2)$, $B(4 ; 3)$, $C(5 ; 6)$ et $D(2 ; 6)$. La translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Lire : on lit les quatre points ; le vecteur de la translation est $\\overrightarrow{AB}$. Étape 2 — Traduire : l'image de $D$ est le point $D'$ tel que $\\overrightarrow{DD'} = \\overrightarrow{AB}$. Étape 3 — Calculer : $\\overrightarrow{AB}(3\\,;\\,1)$, donc $D'(5\\,;\\,7)$. Étape 4 — Vérifier : $D'$ n'a pas les coordonnées de $C$ $(5\\,;\\,6)$ : l'affirmation est fausse, et $ABCD$ n'est pas un parallélogramme.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "Dans un repère, on compare les transformations de la leçon à partir du point $M(3 ; 2)$.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Applique la règle de chaque transformation à $M(3 ; 2)$, une par une.",
+              "questions": [
+                {
+                  "content": "Relie chaque transformation à l'image de $M(3 ; 2)$.",
+                  "question_type": "matching",
+                  "explanation": "Étape 1 — Identifier : on part de $M(3\\,;\\,2)$. Étape 2 — Traduire : on applique chaque transformation avec sa règle. Étape 3 — Calculer : $(Ox)$ donne $(3\\,;\\,-2)$, $(Oy)$ donne $(-3\\,;\\,2)$, le centre $O$ donne $(-3\\,;\\,-2)$ et $\\overrightarrow{u}$ donne $(3 + 1\\,;\\,2 + 4) = (4\\,;\\,6)$. Étape 4 — Vérifier : les quatre images sont différentes ; les paires sont celles de l'énoncé.",
+                  "answers": [
+                    {
+                      "content": "symétrie par rapport à $(Ox)$",
+                      "match": "$(3 ; -2)$"
+                    },
+                    {
+                      "content": "symétrie par rapport à $(Oy)$",
+                      "match": "$(-3 ; 2)$"
+                    },
+                    {
+                      "content": "symétrie de centre $O$",
+                      "match": "$(-3 ; -2)$"
+                    },
+                    {
+                      "content": "translation de vecteur $\\overrightarrow{u}(1 ; 4)$",
+                      "match": "$(4 ; 6)$"
+                    }
+                  ]
+                },
+                {
+                  "content": "L'image de $M$ par une symétrie axiale est le point $M'$ tel que l'axe est la ___ de $[MM']$ (écris un mot).",
+                  "question_type": "fill_blank",
+                  "explanation": "Étape 1 — Identifier : on relit la définition de la symétrie axiale. Étape 2 — Traduire : l'axe coupe $[MM']$ en son milieu, à angle droit. Étape 3 — Calculer : c'est la définition d'une médiatrice. Étape 4 — Vérifier : le mot attendu est « médiatrice ».",
+                  "answers": [
+                    {
+                      "content": "médiatrice",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Étape 1 — Repérer : on examine chaque affirmation. Étape 2 — Traduire : le centre est le milieu de $[II]$, donc $I' = I$ ; une translation non nulle vérifie $\\overrightarrow{MM'} = \\overrightarrow{u} \\neq \\overrightarrow{0}$. Étape 3 — Calculer : la symétrie par rapport à $(Ox)$ envoie $(3\\,;\\,2)$ sur $(3\\,;\\,-2)$, pas sur $(-3\\,;\\,2)$ ; une translation conserve les longueurs. Étape 4 — Vérifier : les deux premières affirmations sont vraies, les deux dernières sont fausses.",
+                  "answers": [
+                    {
+                      "content": "La symétrie de centre $I$ envoie $I$ sur $I$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une translation de vecteur non nul n'a aucun point fixe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La symétrie par rapport à $(Ox)$ envoie $(3 ; 2)$ sur $(-3 ; 2)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une translation change la longueur d'un segment.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A(0 ; 0)$ et $B(5 ; 12)$. On note $A'$ et $B'$ leurs images par la translation de vecteur $\\overrightarrow{u}(2\\,;\\,2)$. Quelle est la longueur $A'B'$, en unités du repère ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Lire : on connaît $A(0 ; 0)$ et $B(5 ; 12)$ ; la transformation est donnée par la translation de vecteur $\\overrightarrow{u}(2\\,;\\,2)$. Étape 2 — Traduire : on calcule d'abord les images $A'$ et $B'$, puis la distance $A'B'$. Étape 3 — Calculer : $A'(2 ; 2)$ et $B'(7 ; 14)$ ; $A'B' = \\sqrt{(7 - 2)^2 + (14 - 2)^2} = \\sqrt{169} = 13$. Étape 4 — Vérifier : $AB = \\sqrt{(5 - 0)^2 + (12 - 0)^2} = 13$ aussi, car la transformation conserve les longueurs ; la longueur est 13.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La symétrie de centre $O$ envoie le point $M(x ; y)$ sur ___.",
+                  "question_type": "select",
+                  "explanation": "Étape 1 — Repérer : le centre est l'origine $O(0 ; 0)$. Étape 2 — Traduire : $O$ est le milieu de $[MM']$, donc $x' = 2 \\times 0 - x$ et $y' = 2 \\times 0 - y$. Étape 3 — Calculer : $x' = -x$ et $y' = -y$. Étape 4 — Vérifier : avec $M(3\\,;\\,2)$, $M'(-3\\,;\\,-2)$ a pour milieu avec $M$ le point $(0\\,;\\,0)$. $(x\\,;\\,-y)$ est la symétrie par rapport à $(Ox)$ et $(-x\\,;\\,y)$ celle par rapport à $(Oy)$.",
+                  "answers": [
+                    {
+                      "content": "$M'(-x ; -y)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M'(x ; -y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(-x ; y)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'(y ; x)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Bilan sur les trois transformations avec des coordonnées.",
+              "exercise_type": "evaluation",
+              "figure": null,
+              "hint": "Pour chaque question, repère la transformation avant de calculer.",
+              "questions": [
+                {
+                  "content": "Soit $M(6 ; -2)$. Le symétrique $M'$ de $M$ par rapport au point $I(3 ; 1)$ est $M'(0 ; 4)$.",
+                  "question_type": "true_false",
+                  "explanation": "Étape 1 — Repérer : le centre est $I(3 ; 1)$ et le point est $M(6 ; -2)$. Étape 2 — Traduire : $I$ est le milieu de $[MM']$, donc $x' = 2 \\times 3 - 6$ et $y' = 2 \\times 1 - (-2)$. Étape 3 — Calculer : $x' = 0$ et $y' = 4$. Étape 4 — Vérifier : le milieu de $[MM']$ est $(3\\,;\\,1)$, c'est bien $I$. Donc $M'(0 ; 4)$. L'affirmation est vraie.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique de $H(-1 ; 2)$ par rapport à un point $I$ est $H'(5 ; -4)$. Quelles sont les coordonnées de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Repérer : on connaît $H(-1 ; 2)$ et son symétrique $H'(5 ; -4)$. Étape 2 — Traduire : $I$ est le milieu de $[HH']$. Étape 3 — Calculer : $x_{I} = \\frac{-1 + 5}{2} = 2$ et $y_{I} = \\frac{2 + (-4)}{2} = -1$. Étape 4 — Vérifier : avec $I(2 ; -1)$, on retrouve $2 \\times 2 - (-1) = 5$ et $2 \\times (-1) - 2 = -4$. La proposition $(4\\,;\\,-2)$ additionne les coordonnées sans diviser par 2. La proposition $(6\\,;\\,-6)$ est le vecteur $\\overrightarrow{HH'}$, pas le milieu. La proposition $(3\\,;\\,-3)$ est la moitié du vecteur, pas le milieu.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;\\,-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(4\\,;\\,-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;\\,-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;\\,-3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $K(-7 ; 3)$. Quelle est l'abscisse du symétrique $K'$ de $K$ par rapport à l'axe des ordonnées $(Oy)$ ?",
+                  "question_type": "numeric",
+                  "tolerance": 0,
+                  "explanation": "Étape 1 — Identifier : l'axe est l'axe des ordonnées $(Oy)$ et le point est $K(-7 ; 3)$. Étape 2 — Traduire : l'axe est la médiatrice de $[KK']$. Étape 3 — Calculer : $x' = -(-7) = 7$. Étape 4 — Vérifier : le milieu de $[KK']$ est sur l'axe et $(KK')$ est perpendiculaire à l'axe ; l'abscisse de $K'$ est $7$.",
+                  "answers": [
+                    {
+                      "content": "7",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation envoie $L(4 ; -1)$ sur $L'(1 ; 6)$. Quelles sont les coordonnées de son vecteur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Étape 1 — Lire : $L(4 ; -1)$ et $L'(1 ; 6)$. Étape 2 — Traduire : le vecteur de la translation est $\\overrightarrow{LL'}$. Étape 3 — Calculer : $1 - 4 = -3$ et $6 - (-1) = 7$. Étape 4 — Vérifier : $L$ plus ce vecteur redonne bien $L'$ ; le vecteur est $\\overrightarrow{LL'}(-3\\,;\\,7)$. La proposition $(3\\,;\\,-7)$ est le vecteur de la translation inverse, $\\overrightarrow{L'L}$. La proposition $(5\\,;\\,5)$ additionne les coordonnées au lieu de soustraire. La proposition $(-3\\,;\\,-7)$ se trompe de signe pour l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(-3\\,;\\,7)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,-7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5\\,;\\,5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;\\,-7)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Remets dans l'ordre les étapes pour trouver le symétrique $M'$ de $M$ par rapport à $I$.",
+                  "question_type": "ordering",
+                  "explanation": "Étape 1 — Repérer : on lit le centre et le point. Étape 2 — Traduire : on écrit que $I$ est le milieu de $[MM']$. Étape 3 — Calculer : on en déduit les coordonnées de $M'$. Étape 4 — Vérifier : on contrôle avec le milieu avant de conclure. C'est l'ordre des quatre étapes de la fiche.",
+                  "answers": [
+                    {
+                      "content": "Repérer le centre $I$ et le point $M$."
+                    },
+                    {
+                      "content": "Traduire : $I$ est le milieu de $[MM']$."
+                    },
+                    {
+                      "content": "Calculer $x' = 2x_I - x$ et $y' = 2y_I - y$."
+                    },
+                    {
+                      "content": "Vérifier que le milieu de $[MM']$ est bien $I$."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
